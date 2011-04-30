@@ -227,8 +227,13 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             this.getSelectionModel().selectRow(ri);
         }
         this.menu.removeAll();
-        if (this.getMenu) { this.getMenu(g,ri,e); }
-        if (this.menu.record.menu) {
+        if (this.getMenu) {
+            var m = this.getMenu(g,ri,e);
+            if (m && m.length && m.length > 0) {
+                this.addContextMenuItem(m);
+            }
+        }
+        if ((!m || m.length <= 0) && this.menu.record.menu) {
             this.addContextMenuItem(this.menu.record.menu);
         }
         if (this.menu.items.length > 0) {
@@ -247,9 +252,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     ,fields: this.config.fields
                 })
                 ,sortInfo:{
-                    field: this.config.sortBy || 'name'
+                    field: this.config.sortBy || 'id'
                     ,direction: this.config.sortDir || 'ASC'
                 }
+                ,remoteSort: this.config.remoteSort != false ? true : false
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
@@ -288,6 +294,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
                     } else if (r === 'boolean') {
                         c[i].renderer = this.rendYesNo;
+                    } else if (r === 'password') {
+                        c[i].renderer = this.rendPassword;
                     } else if (r === 'local' && typeof(c[i].renderer) == 'string') {
                         c[i].renderer = eval(c[i].renderer);
                     }
@@ -343,6 +351,14 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     
     ,refresh: function() {
         this.getStore().reload();
+    }
+
+    ,rendPassword: function(v,md) {
+        var z = ''
+        for (i=0;i<v.length;i++) {
+            z = z+'*';
+        }
+        return z;
     }
     
     ,rendYesNo: function(v,md) {

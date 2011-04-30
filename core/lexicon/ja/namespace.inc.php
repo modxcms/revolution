@@ -20,4 +20,4 @@ $_lang['namespace_remove'] = 'このネームスペースを削除';
 $_lang['namespace_remove_confirm'] = 'Are you sure you want to remove this namespace and all related content?';
 $_lang['namespace_update'] = 'Update Namespace';
 $_lang['namespaces'] = 'ネームスペース';
-$_lang['namespaces_desc'] = 'ネームスペースは、それぞれのパッケージやコンポーネントをシステム全体で一意に識別するための識別子であり、パスを値として持ちます。MODxではコアもパッケージとして扱いますので、初期状態で「core」というネームスペースがセットされています。Namespaces are global identifiers for packages and components, registering their vehicles, lexicon entries and resources all together.';
+$_lang['namespaces_desc'] = 'ネームスペースは、それぞれのパッケージやコンポーネントをシステム全体で一意に識別するための識別子であり、パスを値として持ちます。MODXではコアもパッケージとして扱いますので、初期状態で「core」というネームスペースがセットされています。Namespaces are global identifiers for packages and components, registering their vehicles, lexicon entries and resources all together.';

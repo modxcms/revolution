@@ -21,7 +21,6 @@ MODx.page.UpdateUserGroup = function(config) {
             ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
-                ,alt: true
                 ,ctrl: true
             }]
         },'-',{

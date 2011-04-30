@@ -51,6 +51,19 @@ if (!empty($scriptProperties['category'])) {
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
+/* propagate values */
+$chunk->fromArray($scriptProperties);
+$chunk->set('locked',!empty($scriptProperties['locked']));
+
+if (!$chunk->validate()) {
+    $validator = $chunk->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
+
 /* if has any errors, send back */
 if ($modx->error->hasError()) {
     return $modx->error->failure();
@@ -76,22 +89,6 @@ if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
 
-/* propogate values */
-$chunk->fromArray($scriptProperties);
-$chunk->set('locked',!empty($scriptProperties['locked']));
-
-if (!$chunk->validate()) {
-    $validator = $chunk->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
-}
-
 /* save the chunk */
 if ($chunk->save() == false) {
     return $modx->error->failure($modx->lexicon('chunk_err_save'));
@@ -109,8 +106,7 @@ $modx->logManagerAction('chunk_update','modChunk',$chunk->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
 
 return $modx->error->success('',$chunk->get(array('id', 'name', 'description', 'locked', 'category')));

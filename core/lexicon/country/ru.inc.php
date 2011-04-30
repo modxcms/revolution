@@ -1,8 +1,8 @@
 <?php
 /**
- * MODx Country List Language File
+ * MODX Country List Language File
  *
- * MODx version:   0.9.5
+ * MODX version:   0.9.5
  * Filename:       includes/lang/country/russian_country-UTF8.inc.php
  * Language:       Russian
  * Encoding:       UTF8

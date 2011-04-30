@@ -12,6 +12,7 @@ $xpdo_meta_map['modUserGroupMember']= array (
     'user_group' => 0,
     'member' => 0,
     'role' => 1,
+    'rank' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -43,6 +44,16 @@ $xpdo_meta_map['modUserGroupMember']= array (
       'default' => 1,
       'index' => 'index',
     ),
+    'rank' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -55,6 +66,22 @@ $xpdo_meta_map['modUserGroupMember']= array (
       'columns' => 
       array (
         'role' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'rank' => 
+    array (
+      'alias' => 'rank',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'rank' => 
         array (
           'length' => '',
           'collation' => 'A',

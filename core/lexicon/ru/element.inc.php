@@ -1,10 +1,4 @@
 <?php
-/**
- * Russian language strings for Elements
- *
- * @package modx
- * @subpackage lexicon
- */
 $_lang['element'] = 'Элемент';
 $_lang['element_err_nf'] = 'Элемент не найден.';
 $_lang['element_err_ns'] = 'Элемент не указан.';

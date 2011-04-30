@@ -14,7 +14,7 @@ $this->parser->assign('test', $results);
 
 $failed= false;
 foreach ($results as $item) {
-    if ($item['class'] === 'testFailed') {
+    if (isset($item['class']) && $item['class'] === 'testFailed') {
         $failed= true;
         break;
     }

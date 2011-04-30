@@ -9,8 +9,8 @@
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
-$_lang['about'] = 'MODxについて';
-$_lang['about_desc'] = 'MODx Revolutionに関する情報';
+$_lang['about'] = 'MODXについて';
+$_lang['about_desc'] = 'MODX Revolutionに関する情報';
 $_lang['access_permissions'] = 'アクセス許可';
 $_lang['access_permissions_desc'] = 'リソースとコンテキストへのユーザーアクセス管理';
 $_lang['api_docs'] = 'APIドキュメント';
@@ -37,15 +37,15 @@ $_lang['flush_sessions_not_supported'] = '現在のアカウントは、ユー�
 $_lang['form_customization'] = '管理画面カスタマイズ機能';
 $_lang['form_customization_desc'] = '管理画面のフォームをカスタマイズ。ロール単位で設定可能';
 $_lang['forums'] = 'フォーラム';
-$_lang['forums_desc'] = '公式MODxフォーラムへアクセス';
+$_lang['forums_desc'] = '公式MODXフォーラムへアクセス';
 $_lang['import_resources'] = 'リソースのインポート';
 $_lang['import_resources_desc'] = '静的リソースの一括インポート';
 $_lang['import_site'] = 'サイトのインポート';
 $_lang['import_site_desc'] = 'HTMLファイルの一括インポート';
 $_lang['jira'] = 'JIRA';
-$_lang['jira_desc'] = 'MODx JIRA バグトラッカーにアクセスし不具合や改善要望を報告';
+$_lang['jira_desc'] = 'MODX JIRA バグトラッカーにアクセスし不具合や改善要望を報告';
 $_lang['lexicon_management'] = '語彙トピックの管理';
-$_lang['lexicon_management_desc'] = 'MODx管理画面で用いる語彙(Lexicon)を各国語単位で管理';
+$_lang['lexicon_management_desc'] = 'MODX管理画面で用いる語彙(Lexicon)を各国語単位で管理';
 $_lang['logout_desc'] = '管理画面からログアウト';
 $_lang['manage_workspaces'] = 'パッケージマネージャー';
 $_lang['manage_workspaces_desc'] = '拡張機能やテンプレートを入手・インストール・アンインストール。パッケージ単位で管理';
@@ -101,4 +101,4 @@ $_lang['view_logging_desc'] = '管理ログを閲覧';
 $_lang['view_sysinfo'] = 'システム情報';
 $_lang['view_sysinfo_desc'] = 'phpinfo・mysql他サーバー情報の閲覧';
 $_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'MODx Revolution関連文章を含むwikiの閲覧(英語)';
+$_lang['wiki_desc'] = 'MODX Revolution関連文章を含むwikiの閲覧(英語)';

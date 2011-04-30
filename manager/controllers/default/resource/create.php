@@ -119,22 +119,29 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
 $default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template', 0, $modx->_userConfig)));
 $userGroups = $modx->user->getUserGroups();
 $c = $modx->newQuery('modActionDom');
-$c->leftJoin('modAccessActionDom','Access');
-$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
+$c->innerJoin('modFormCustomizationSet','FCSet');
+$c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
+$c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
+$c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
 $c->where(array(
-    'action' => $this->action['id'],
-    'name' => 'template',
-    'container' => 'modx-panel-resource',
-    'rule' => 'fieldDefault',
-    'active' => true,
-    array(
-        array(
-            'Access.principal_class:=' => 'modUserGroup',
-            $principalCol.' IN ('.implode(',',$userGroups).')',
-        ),
-        'OR:Access.principal:IS' => null,
-    ),
+    'modActionDom.action' => $this->action['id'],
+    'modActionDom.name' => 'template',
+    'modActionDom.container' => 'modx-panel-resource',
+    'modActionDom.rule' => 'fieldDefault',
+    'modActionDom.active' => true,
+    'FCSet.active' => true,
+    'Profile.active' => true,
 ));
+$c->where(array(
+    array(
+        'ProfileUserGroup.usergroup:IN' => $userGroups,
+        array(
+            'OR:ProfileUserGroup.usergroup:IS' => null,
+            'AND:UGProfile.active:=' => true,
+        ),
+    ),
+    'OR:ProfileUserGroup.usergroup:=' => null,
+),xPDOQuery::SQL_AND,null,2);
 $fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
     $parentIds = array();
@@ -184,10 +191,33 @@ if ($parent == null) {
 }
 $parent->fromArray($defaults);
 $parent->set('template',$default_template);
+$resource->set('template',$default_template);
 $overridden = $this->checkFormCustomizationRules($parent,true);
 $defaults = array_merge($defaults,$overridden);
+$defaults['published'] = intval($defaults['published']) == 1 ? true : false;
+$defaults['hidemenu'] = intval($defaults['hidemenu']) == 1 ? true : false;
+$defaults['isfolder'] = intval($defaults['isfolder']) == 1 ? true : false;
+$defaults['richtext'] = intval($defaults['richtext']) == 1 ? true : false;
+$defaults['searchable'] = intval($defaults['searchable']) == 1 ? true : false;
+$defaults['cacheable'] = intval($defaults['cacheable']) == 1 ? true : false;
+$defaults['deleted'] = intval($defaults['deleted']) == 1 ? true : false;
+$defaults['uri_override'] = intval($defaults['uri_override']) == 1 ? true : false;
 
 $defaults['parent_pagetitle'] = $parent->get('pagetitle');
+
+/* get TVs */
+$tvCounts = array();
+$tvOutput = include dirname(__FILE__).'/tvs.php';
+if (!empty($tvCounts)) {
+    $modx->smarty->assign('tvOutput',$tvOutput);
+}
+
+/* single-use token for creating resource */
+if(!isset($_SESSION['newResourceTokens']) || !is_array($_SESSION['newResourceTokens'])) {
+    $_SESSION['newResourceTokens'] = array();
+}
+$defaults['create_resource_token'] = uniqid('', true);
+$_SESSION['newResourceTokens'][] = $defaults['create_resource_token'];
 
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -210,9 +240,11 @@ Ext.onReady(function() {
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
+        ,show_tvs: '.(!empty($tvCounts) ? 1 : 0).'
     });
 });
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('document_new'));
 return $modx->smarty->fetch('resource/create.tpl');

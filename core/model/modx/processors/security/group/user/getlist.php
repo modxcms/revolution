@@ -40,13 +40,15 @@ if (!empty($username)) {
 }
 $count = $modx->getCount('modUser',$c);
 
-$c->select('
-    `modUser`.*,
-    `UserGroup`.`id` AS `usergroup`,
-    `UserGroup`.`name` AS `usergroup_name`,
-    `UserGroupRole`.`name` AS `role`,
-    `UserGroupRole`.`name` AS `role_name`
-');
+$c->select($modx->getSelectColumns('modUser','modUser'));
+$c->select(array(
+    'usergroup' => 'UserGroup.id',
+    'usergroup_name' => 'UserGroup.name',
+    'role' => 'UserGroupRole.id',
+    'role_name' => 'UserGroupRole.name',
+    'authority' => 'UserGroupRole.authority',
+));
+$c->sortby('authority','ASC');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $users = $modx->getCollection('modUser',$c);
@@ -55,17 +57,6 @@ $users = $modx->getCollection('modUser',$c);
 $list = array();
 foreach ($users as $user) {
     $userArray = $user->toArray();
-    $userArray['menu'] = array(
-        array(
-            'text' => $modx->lexicon('user_role_update'),
-            'handler' => 'this.updateRole',
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('user_group_user_remove'),
-            'handler' => 'this.removeUser',
-        ),
-    );
 	$list[] = $userArray;
 }
 return $this->outputArray($list,$count);

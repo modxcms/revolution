@@ -72,7 +72,7 @@ MODx.panel.Template = function(config) {
                 ,width: 250
                 ,value: config.record.category || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('template_lock')
                 ,description: _('template_lock_msg')
                 ,name: 'locked'
@@ -80,7 +80,7 @@ MODx.panel.Template = function(config) {
                 ,inputValue: 1
                 ,checked: config.record.locked || false
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('clear_cache_on_save')
                 ,description: _('clear_cache_on_save_msg')
                 ,name: 'clearCache'
@@ -179,9 +179,11 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         this.getForm().setValues(r.result.object);
         
         var t = Ext.getCmp('modx-element-tree');
-        var c = Ext.getCmp('modx-template-category').getValue();
-        var u = c != '' && c != null ? 'n_template_category_'+c : 'n_type_template'; 
-        t.refreshNode(u,true);
+        if (t) {
+            var c = Ext.getCmp('modx-template-category').getValue();
+            var u = c != '' && c != null ? 'n_template_category_'+c : 'n_type_template';
+            t.refreshNode(u,true);
+        }
     }
     ,changeEditor: function() {
         this.cleanupEditor();

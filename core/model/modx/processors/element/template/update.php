@@ -124,8 +124,7 @@ $modx->logManagerAction('template_update','modTemplate',$template->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
 
 return $modx->error->success('',$template->get(array_diff(array_keys($template->_fields), array('content'))));

@@ -15,7 +15,7 @@ if (!$modx->hasPermission('change_password')) return $modx->error->failure($modx
 $modx->lexicon->load('user');
 
 /* if changing the password */
-if (md5($scriptProperties['password_old']) != $modx->user->get('password')) {
+if (!$modx->user->passwordMatches($scriptProperties['password_old'])) {
     return $modx->error->failure($modx->lexicon('user_err_password_invalid_old'));
 }
 if (empty($scriptProperties['password_new']) || strlen($scriptProperties['password_new']) < $modx->getOption('password_min_length',null,8)) {
@@ -24,6 +24,10 @@ if (empty($scriptProperties['password_new']) || strlen($scriptProperties['passwo
 
 if (empty($scriptProperties['password_confirm']) || $scriptProperties['password_new'] != $scriptProperties['password_confirm']) {
     return $modx->error->failure($modx->lexicon('user_err_password_no_match'));
+}
+
+if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $scriptProperties['password_new'])) {
+    return $modx->error->failure($modx->lexicon('user_err_password_invalid'));
 }
 
 $modx->user->changePassword($scriptProperties['password_new'],$scriptProperties['password_old']);

@@ -8,6 +8,7 @@
  */
 MODx.panel.ImageTV = function(config) {
     config = config || {};
+    config.filemanager_url = MODx.config.filemanager_url;
     Ext.applyIf(config,{
         layout: 'form'
         ,autoHeight: true
@@ -18,19 +19,34 @@ MODx.panel.ImageTV = function(config) {
             ,border: false
         }
         ,items: [{
-            xtype: 'modx-combo-browser'
-            ,browserEl: 'tvbrowser'+config.tv
+            xtype: 'hidden'
             ,name: 'tv'+config.tv
             ,id: 'tv'+config.tv
             ,value: config.value
+        },{
+            xtype: 'modx-combo-browser'
+            ,browserEl: 'tvbrowser'+config.tv
+            ,name: 'tvbrowser'+config.tv
+            ,id: 'tvbrowser'+config.tv
+            ,value: config.relativeValue
             ,hideFiles: true
+            ,basePath: config.basePath || ''
+            ,basePathRelative: config.basePathRelative || ''
+            ,baseUrl: config.baseUrl || ''
+            ,baseUrlRelative: config.baseUrlRelative || ''
+            ,allowedFileTypes: config.allowedFileTypes || ''
+            ,openTo: config.openTo || ''
             ,listeners: {
                 'select': {fn:function(data) {
+                    Ext.getCmp('tv'+this.config.tv).setValue(data.relativeUrl);
+                    Ext.getCmp('tvbrowser'+this.config.tv).setValue(data.relativeUrl);
                     this.fireEvent('select',data);
                 },scope:this}
                 ,'change': {fn:function(cb,nv) {
+                    Ext.getCmp('tv'+this.config.tv).setValue(nv);
                     this.fireEvent('select',{
                         relativeUrl: nv
+                        ,url: nv
                     });
                 },scope:this}
             }
@@ -44,6 +60,7 @@ Ext.reg('modx-panel-tv-image',MODx.panel.ImageTV);
 
 MODx.panel.FileTV = function(config) {
     config = config || {};
+    config.filemanager_url = MODx.config.filemanager_url;
     Ext.applyIf(config,{
         layout: 'form'
         ,autoHeight: true
@@ -54,15 +71,36 @@ MODx.panel.FileTV = function(config) {
             ,border: false
         }
         ,items: [{
-            xtype: 'modx-combo-browser'
-            ,browserEl: 'tvbrowser'+config.tv
+            xtype: 'hidden'
             ,name: 'tv'+config.tv
             ,id: 'tv'+config.tv
             ,value: config.value
+        },{
+            xtype: 'modx-combo-browser'
+            ,browserEl: 'tvbrowser'+config.tv
+            ,name: 'tvbrowser'+config.tv
+            ,id: 'tvbrowser'+config.tv
+            ,value: config.relativeValue
             ,hideFiles: true
+            ,basePath: config.basePath || ''
+            ,basePathRelative: config.basePathRelative || ''
+            ,baseUrl: config.baseUrl || ''
+            ,baseUrlRelative: config.baseUrlRelative || ''
+            ,allowedFileTypes: config.allowedFileTypes || ''
+            ,wctx: config.wctx || 'web'
+            ,openTo: config.openTo || ''
             ,listeners: {
                 'select': {fn:function(data) {
-                    this.fireEvent('select',data);                    
+                    Ext.getCmp('tv'+this.config.tv).setValue(data.relativeUrl);
+                    Ext.getCmp('tvbrowser'+this.config.tv).setValue(data.relativeUrl);
+                    this.fireEvent('select',data);
+                },scope:this}
+                ,'change': {fn:function(cb,nv) {
+                    Ext.getCmp('tv'+this.config.tv).setValue(nv);
+                    this.fireEvent('select',{
+                        relativeUrl: nv
+                        ,url: nv
+                    });
                 },scope:this}
             }
         }] 

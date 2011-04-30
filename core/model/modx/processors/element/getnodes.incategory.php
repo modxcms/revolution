@@ -12,12 +12,12 @@ $elementClassKey = $ar_typemap[$elementIdentifier];
 /* first handle subcategories */
 $c = $modx->newQuery('modCategory');
 $c->select($modx->getSelectColumns('modCategory','modCategory'));
-$c->select('COUNT(`'.$elementClassKey.'`.`id`) AS `elementCount`');
-$c->leftJoin($elementClassKey,$elementClassKey,'`'.$elementClassKey.'`.`category` = `modCategory`.`id`');
+$c->select('COUNT('.$elementClassKey.'.id) AS elementCount');
+$c->leftJoin($elementClassKey,$elementClassKey,$elementClassKey.'.category = modCategory.id');
 $c->where(array(
     'parent' => $categoryId,
 ));
-$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
+$c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
 $categories = $modx->getCollection('modCategory',$c);
 
@@ -39,7 +39,7 @@ foreach ($categories as $category) {
     if ($category->get('elementCount') <= 0) continue;
 
     $nodes[] = array(
-        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')) . ' (' . $category->get('elementCount') . ')',
         'id' => 'n_'.$g[0].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
         'pk' => $category->get('id'),
         'category' => $category->get('id'),
@@ -70,9 +70,10 @@ foreach ($elements as $element) {
     $class .= $modx->hasPermission('edit_'.$elementIdentifier) && $element->checkPolicy(array('save','view')) ? ' pedit' : '';
     $class .= $modx->hasPermission('delete_'.$elementIdentifier) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
-    
+
+    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(
-        'text' => strip_tags($name) . ' (' . $element->get('id') . ')',
+        'text' => strip_tags($name) . $idNote,
         'id' => 'n_'.$elementIdentifier.'_element_'.$element->get('id').'_'.$element->get('category'),
         'pk' => $element->get('id'),
         'category' => $categoryId,

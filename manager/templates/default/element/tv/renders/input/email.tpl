@@ -8,17 +8,22 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-var fld = MODx.load({
-{/literal}
-    xtype: 'textfield'
-    ,applyTo: 'tv{$tv->id}'
-    ,width: '97%'
-    ,vtype: 'email'
-    ,enableKeyEvents: true
-{literal}
-    ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+Ext.onReady(function() {
+    var fld = MODx.load({
+    {/literal}
+        xtype: 'textfield'
+        ,applyTo: 'tv{$tv->id}'
+        ,width: '97%'
+        ,vtype: 'email'
+        ,enableKeyEvents: true
+        ,msgTarget: 'under'
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+    {literal}
+        ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+    });
+    MODx.makeDroppable(fld);
+    Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });
-MODx.makeDroppable(fld);
 {/literal}
 // ]]>
 </script>

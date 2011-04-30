@@ -9,8 +9,8 @@
  * @author modxcms.cz
  * @updated 2010-07-18
  */
-$_lang['about'] = 'O MODx Revolution';
-$_lang['about_desc'] = 'Více informací MODx Revolution.';
+$_lang['about'] = 'O MODX Revolution';
+$_lang['about_desc'] = 'Více informací MODX Revolution.';
 $_lang['access_permissions'] = 'Oprávnění pro přístup';
 $_lang['access_permissions_desc'] = 'Správa přístupů uživatelů a uživatelských skupin k dokumentům a kontextům.';
 $_lang['api_docs'] = 'API dokumentace';
@@ -23,7 +23,7 @@ $_lang['contexts_desc'] = 'Správa kontextů portálů a jejich nastavení.';
 $_lang['edit_menu'] = 'Akce';
 $_lang['edit_menu_desc'] = 'Správa akcí a struktury horního menu.';
 $_lang['eventlog_viewer'] = 'Chybové zprávy';
-$_lang['eventlog_viewer_desc'] = 'Zobrazení MODx chybových zpráv.';
+$_lang['eventlog_viewer_desc'] = 'Zobrazení MODX chybových zpráv.';
 $_lang['export_site'] = 'Exportovat statické HTML';
 $_lang['export_site_desc'] = 'Možnost exportovat portál jako statické HTML stránky.';
 $_lang['flush_access'] = 'Resetovat přístup';
@@ -37,16 +37,16 @@ $_lang['flush_sessions_not_supported'] = 'Reset session není ve vaší konfigur
 $_lang['form_customization'] = 'Přizpůsobení formulářů';
 $_lang['form_customization_desc'] = 'Přizpůsobení formulářů správce obsahu.';
 $_lang['forums'] = 'Diskuse';
-$_lang['forums_desc'] = 'Zobrazit oficiální MODx diskusi.';
+$_lang['forums_desc'] = 'Zobrazit oficiální MODX diskusi.';
 $_lang['import_resources'] = 'Importovat dokumenty';
 $_lang['import_resources_desc'] = 'Dávkové importování statických dokumentů do portálu.';
 $_lang['import_site'] = 'Importovat HTML';
 $_lang['import_site_desc'] = 'Dávkové importování HTML souborů do portálu.';
 $_lang['jira'] = 'JIRA';
-$_lang['jira_desc'] = 'Spustit MODx JIRA bugtracker pro sledování chyb.';
+$_lang['jira_desc'] = 'Spustit MODX JIRA bugtracker pro sledování chyb.';
 $_lang['lexicon_management'] = 'Správce slovníků';
-$_lang['lexicon_management_desc'] = 'Úprava všech jazykových záznamů pro MODx.';
-$_lang['logout_desc'] = 'Odhlášení z MODx správce obsahu.';
+$_lang['lexicon_management_desc'] = 'Úprava všech jazykových záznamů pro MODX.';
+$_lang['logout_desc'] = 'Odhlášení z MODX správce obsahu.';
 $_lang['manage_workspaces'] = 'Správa balíčků';
 $_lang['manage_workspaces_desc'] = 'Stáhování komponent třetích stran, přidávání poskytovatelů a instalace balíčků.';
 $_lang['messages'] = 'Zprávy';
@@ -101,4 +101,4 @@ $_lang['view_logging_desc'] = 'Zobrazit aktuální aktivitu uživatelů správce
 $_lang['view_sysinfo'] = 'Systemové informace';
 $_lang['view_sysinfo_desc'] = 'Zobrazení informací o serveru, jako např. phpinfo, mysql db info a dalších.';
 $_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'Spustit MODx wiki, kde je umístěna dokumentace pro MODx Revolution.';
+$_lang['wiki_desc'] = 'Spustit MODX wiki, kde je umístěna dokumentace pro MODX Revolution.';

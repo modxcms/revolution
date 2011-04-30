@@ -85,7 +85,11 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
 Ext.reg('modx-treedrop',MODx.TreeDrop);
 
 MODx.loadInsertElement = function(r) {
-    var w = MODx.load({
+    if (MODx.InsertElementWindow) {
+        MODx.InsertElementWindow.hide();
+        MODx.InsertElementWindow.destroy();
+    }
+    MODx.InsertElementWindow = MODx.load({
         xtype: 'modx-window-insert-element'
         ,record: r
         ,listeners: {
@@ -94,8 +98,8 @@ MODx.loadInsertElement = function(r) {
             ,'hide': {fn:function() { this.destroy(); }}
         }
     });
-    w.setValues(r);
-    w.show();
+    MODx.InsertElementWindow.setValues(r);
+    MODx.InsertElementWindow.show();
 };
 
 MODx.insertAtCursor = function(myField, myValue,h) {
@@ -152,7 +156,7 @@ MODx.window.InsertElement = function(config) {
             ,name: 'classKey'
             ,id: 'modx-dise-classkey'
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('cached')
             ,name: 'cached'
             ,id: 'modx-dise-cached'
@@ -192,9 +196,11 @@ MODx.window.InsertElement = function(config) {
             ,title: _('properties')
             ,autoHeight: true
             ,collapsible: true
+            ,autoScroll: true
             ,items: [{
                 html: '<div id="modx-iprops-form"></div>'
-                ,autoHeight: true
+                ,height: 400
+                ,autoScroll: true
             }]
         }]
     });
@@ -240,11 +246,12 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             ,id: 'modx-iprops-fp'
             ,layout: 'form'
             ,autoHeight: true
+            ,autoScroll: true
             ,labelWidth: 150
             ,border: false
             ,items: vs
             ,renderTo: 'modx-iprops-form'
-        })    
+        });
     }
     ,submit: function() {
         var v = '[[';

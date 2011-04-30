@@ -58,7 +58,7 @@ MODx.panel.FCProfile = function(config) {
                 ,grow: false
                 ,value: config.record.description
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('active')
                 ,name: 'active'
                 ,id: 'modx-fcp-active'

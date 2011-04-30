@@ -17,14 +17,20 @@ if (!empty($scriptProperties['propertySet'])) {
     if ($set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
     $setProperties = $set->get('properties');
-    $properties = array_merge($properties,$setProperties);
+    if (is_array($setProperties) && !empty($setProperties)) {
+        $properties = array_merge($properties,$setProperties);
+    }
 }
 
 $o = '';
 $props = array();
+if (!empty($properties) && is_array($properties)) {
 foreach ($properties as $k => $property) {
     $xtype = 'textfield';
     $desc = $property['desc_trans'];
+    if (!empty($property['lexicon'])) {
+        $modx->lexicon->load($property['lexicon']);
+    }
 
     if (is_array($property)) {
         $v = $property['value'];
@@ -40,7 +46,9 @@ foreach ($properties as $k => $property) {
         case 'combo':
             $data = array();
             foreach ($property['options'] as $option) {
-                $data[] = array($option['name'],$option['value']);
+                if (empty($property['text']) && !empty($property['name'])) $property['text'] = $property['name'];
+                $text = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
+                $data[] = array($option['value'],$text);
             }
             $props[] = array(
                 'xtype' => 'combo',
@@ -113,6 +121,7 @@ foreach ($properties as $k => $property) {
             );
             break;
     }
+}
 }
 
 return $this->toJSON($props);

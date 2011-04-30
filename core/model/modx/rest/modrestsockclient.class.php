@@ -29,6 +29,8 @@ class modRestSockClient extends modRestClient {
         if ($method == "GET") {
             $path .= "?" . $q;
         }
+        $ip = $this->modx->request->getClientIp();
+        $ip = $ip['ip'];
 
         $out = $method." ".$purl['path']."/$path HTTP/1.1\r\n"
                 ."Host: $host\r\n"
@@ -39,7 +41,7 @@ class modRestSockClient extends modRestClient {
                 ."Accept-Charset: utf-8;q=0.7,*;q=0.7\r\n"
                 ."Accept-Encoding: gzip, deflate, compress;q=0.9\r\n"
                 /*."Keep-Alive: 300\r\n" */
-                ."Referer: ".$_SERVER['REMOTE_ADDR']."\r\n"
+                ."Referer: ".$ip."\r\n"
                 ."Connection: Close\r\n\r\n";
 
         fwrite($sock,$out);

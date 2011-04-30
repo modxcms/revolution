@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -44,25 +44,37 @@ abstract class modInstallDriver {
     }
 
     /**
-     * Grab the default collation for the database
+     * Grab the default collation for the database.
+     *
      * @return string The collation query
      */
     abstract public function getCollation();
 
     /**
-     * Grab a list of collations available to the database
+     * Grab a list of collations available to the database.
+     *
+     * @param string $collation The current/default collation.
      * @return string The collation list query
      */
-    abstract public function getCollations();
+    abstract public function getCollations($collation = '');
 
     /**
-     * Get a list of charsets
+     * Get the charset from a provided collation, or the default for the driver.
+     *
+     * @param string $collation A collation to determine charset from.
+     * @return string The charset for the provided collation or the default for the driver.
+     */
+    abstract public function getCharset($collation = '');
+
+    /**
+     * Get a list of charsets.
+     *
      * @return string The charset list query
      */
     abstract public function getCharsets();
 
     /**
-     * Test the table prefix
+     * Test the table prefix.
      *
      * @param string $database
      * @param string $prefix

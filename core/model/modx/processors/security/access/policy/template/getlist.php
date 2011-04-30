@@ -30,9 +30,9 @@ $count = $modx->getCount('modAccessPolicyTemplate',$c);
 
 
 $subc = $modx->newQuery('modAccessPermission');
-$subc->select('COUNT(`modAccessPermission`.`id`)');
+$subc->select('COUNT(modAccessPermission.id)');
 $subc->where(array(
-    '`modAccessPermission`.`template` = `modAccessPolicyTemplate`.`id`',
+    'modAccessPermission.template = modAccessPolicyTemplate.id',
 ));
 $subc->prepare();
 $c->select(array(
@@ -41,7 +41,9 @@ $c->select(array(
 ));
 $c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
 
-
+if($sort == 'name') {
+    $sort = $modx->escape('TemplateGroup') . '.' . $modx->escape('name');
+}
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $templates = $modx->getCollection('modAccessPolicyTemplate', $c);

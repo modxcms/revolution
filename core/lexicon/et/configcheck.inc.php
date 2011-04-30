@@ -8,7 +8,7 @@
  */
 $_lang['configcheck_admin'] = 'Palun kontakteeruge süsteemi administraatoriga ja teavitage teda sellest teatest!';
 $_lang['configcheck_cache'] = 'cache kaust ei ole kirjutatav';
-$_lang['configcheck_cache_msg'] = 'MODx ei suuda kirjutada cache kausta. MODx töötab nii nagu peab aga puhverdamist ei toimu. Et viga parandada, palun lisa /_cache/ kaustale vastavad õigused.';
+$_lang['configcheck_cache_msg'] = 'MODX ei suuda kirjutada cache kausta. MODX töötab nii nagu peab aga puhverdamist ei toimu. Et viga parandada, palun lisa /_cache/ kaustale vastavad õigused.';
 $_lang['configcheck_configinc'] = 'Config fail on ikka kirjutatav!';
 $_lang['configcheck_configinc_msg'] = 'Teie leht on haavatav häkkerite poolt, kes võivad palju kahju teha sellele lehele. Palun muuda config fail ainult loetavaks (read-only)! Kui Te ei ole lehe administraator, siis palun teavitage süsteemi administraatorit ja edastage see sõnum! Fail asub core/config/config.inc.php';
 $_lang['configcheck_default_msg'] = 'Täpsustamata hoiatus leiti. Mis on imelk.';
@@ -19,7 +19,7 @@ $_lang['configcheck_errorpage_unpublished_msg'] = 'See tähendab, et vealehele e
 $_lang['configcheck_images'] = 'Piltide (Images) kaust ei ole kirjutatav';
 $_lang['configcheck_images_msg'] = 'Piltide kaust ei ole kirjutatav või ei ekisteeri. See tähendab, et Image Manager funktsioonid ei tööta!';
 $_lang['configcheck_installer'] = 'Installer ikka eksiteerib';
-$_lang['configcheck_installer_msg'] = 'Kataloog setup/ sisaldab MODx installerit. Kujuta ette, mis võib juhtuda, kui võõras leiab selle kausta ja jooksutab installerit! Ta arvatavasti ei jõuaks kaugele, kuna ta peab sisestama informatsiooni andmebaasi kasutaja kohta aga ikkagi parim oleks eemaldada see kaust serverist.';
+$_lang['configcheck_installer_msg'] = 'Kataloog setup/ sisaldab MODX installerit. Kujuta ette, mis võib juhtuda, kui võõras leiab selle kausta ja jooksutab installerit! Ta arvatavasti ei jõuaks kaugele, kuna ta peab sisestama informatsiooni andmebaasi kasutaja kohta aga ikkagi parim oleks eemaldada see kaust serverist.';
 $_lang['configcheck_lang_difference'] = 'Ebakorrketne arv sissekanded keele failis';
 $_lang['configcheck_lang_difference_msg'] = 'Hetkel valitud keelel on erinev arv sissekanded kui põhikeele failis. See ei pruugi olla probleem, kuid see võib tähendada, et keele fail vajab uuendust.';
 $_lang['configcheck_notok'] = 'Mõned konfiguratiooni detailid vajavad tähelepanu: ';

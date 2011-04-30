@@ -32,9 +32,9 @@
  * menu builders.
  * @param boolean $isfolder (optional) Whether or not the resource is a
  * container of resources.
- * @param boolean $richtext (optional) If true, MODx will render the available
+ * @param boolean $richtext (optional) If true, MODX will render the available
  * RTE for editing this resource.
- * @param boolean $donthit (optional) (deprecated) If true, MODx will not log
+ * @param boolean $donthit (optional) (deprecated) If true, MODX will not log
  * visits on this resource.
  * @param boolean $cacheable (optional) If false, the resource will not be
  * cached.
@@ -82,64 +82,115 @@ if ($locked !== true) {
     }
 }
 
-/* handle if parent is a context */
-if (!is_numeric($scriptProperties['parent'])) {
-    $ct = $modx->getCount('modContext',$scriptProperties['parent']);
-    if ($ct > 0) {
-        $scriptProperties['context_key'] = $scriptProperties['parent'];
-    }
-    $scriptProperties['parent'] = 0;
-}
-
-/* process derivative resource classes */
-$resourceClass = !empty($scriptProperties['class_key']) ? $scriptProperties['class_key'] : $resource->get('class_key');
-$resourceDir= strtolower(substr($resourceClass, 3));
-
-$delegateProcessor= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
-if (file_exists($delegateProcessor)) {
-    $overridden= include ($delegateProcessor);
-    return $overridden;
-}
-
-/* specific data escaping */
-$scriptProperties['pagetitle'] = trim($scriptProperties['pagetitle']);
-$scriptProperties['variablesmodified'] = isset($scriptProperties['variablesmodified'])
-    ? explode(',',$scriptProperties['variablesmodified'])
-    : array();
-
 /* if using RTE */
-if (isset($scriptProperties['ta'])) $scriptProperties['content'] = $scriptProperties['ta'];
+if (isset($scriptProperties['ta'])) {
+    $scriptProperties['content'] = $scriptProperties['ta'];
+}
 
-/* default pagetitle */
-if (empty($scriptProperties['pagetitle'])) $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
+/* format pagetitle */
+if (isset($scriptProperties['pagetitle'])) {
+    if (empty($scriptProperties['pagetitle'])) {
+        $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
+    }
+    $scriptProperties['pagetitle'] = trim($scriptProperties['pagetitle']);
+}
 
-/* setup default values */
-$scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
-$scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) ? 0 : 1;
-$scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
-$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? 0 : 1;
-$scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
-$scriptProperties['published'] = empty($scriptProperties['published']) ? 0 : 1;
-$scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) ? 0 : 1;
-$scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1;
-$scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
-$scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
+/* handle parent */
+if (isset($scriptProperties['parent'])) {
+    /* handle if parent is a context */
+    if (!is_numeric($scriptProperties['parent'])) {
+        $ct = $modx->getCount('modContext',$scriptProperties['parent']);
+        if ($ct > 0) {
+            $scriptProperties['context_key'] = $scriptProperties['parent'];
+        }
+        $scriptProperties['parent'] = 0;
+    }
+
+    /* ensure parent isn't a child of self */
+    if ($resource->get('parent') != $scriptProperties['parent']) {
+        $children = $modx->getChildIds($resource->get('id'),20,array(
+            'context' => $resource->get('context_key'),
+        ));
+        if (in_array($scriptProperties['parent'],$children)) {
+            $modx->error->addField('parent-cmb',$modx->lexicon('resource_err_move_to_child'));
+        }
+    }
+
+    /* convert parent to int */
+    $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
+}
+
+/* if parent changed, set context to new parent's context */
+$oldparent = null;
+$newparent = null;
+$oldContext = null;
+if ($resource->get('parent') != $scriptProperties['parent']) {
+    $oldparent = $resource->getOne('Parent');
+    $newparent = $modx->getObject('modResource', $scriptProperties['parent']);
+    if ($newparent && $newparent->get('context_key') !== $resource->get('context_key')) {
+        $oldContext = $modx->getContext($resource->get('context_key'));
+        if ($resource->get('id') == $oldContext->getOption('site_start')) {
+            return $modx->error->failure($modx->lexicon('resource_err_move_sitestart'));
+        }
+        $scriptProperties['context_key'] = $newparent->get('context_key');
+    }
+}
+
+/* handle checkboxes */
+if (isset($scriptProperties['hidemenu'])) {
+    $scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) || $scriptProperties['hidemenu'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['isfolder'])) {
+    $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) || $scriptProperties['isfolder'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['richtext'])) {
+    $scriptProperties['richtext'] = empty($scriptProperties['richtext']) || $scriptProperties['richtext'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['published'])) {
+    $scriptProperties['published'] = empty($scriptProperties['published']) || $scriptProperties['published'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['cacheable'])) {
+    $scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) || $scriptProperties['cacheable'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['searchable'])) {
+    $scriptProperties['searchable'] = empty($scriptProperties['searchable']) || $scriptProperties['searchable'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['syncsite'])) {
+    $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) || $scriptProperties['syncsite'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['deleted'])) {
+    $scriptProperties['deleted'] = empty($scriptProperties['deleted']) || $scriptProperties['deleted'] === 'false' ? 0 : 1;
+}
+if (isset($scriptProperties['uri_override'])) {
+    $scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) || $scriptProperties['uri_override'] === 'false' ? 0 : 1;
+}
+
+/* get the targeted working context */
+$workingContext = $modx->getContext($scriptProperties['context_key']);
 
 /* friendly url alias checks */
-if ($modx->getOption('friendly_alias_urls') && isset($scriptProperties['alias'])) {
+if ($workingContext->getOption('friendly_urls', false)) {
     /* auto assign alias */
-    $aliasPath = $resource->getAliasPath($scriptProperties['alias'],$scriptProperties);
-    $duplicateId = $resource->isDuplicateAlias($aliasPath);
-    if (!$modx->getOption('allow_duplicate_alias',null,false) && !empty($duplicateId)) {
-        $err = $modx->lexicon('duplicate_alias_found',array(
-            'id' => $duplicateId,
-            'alias' => $aliasPath,
-        ));
-        $modx->error->addField('alias', $err);
+    if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+    }
+    if (empty($scriptProperties['alias'])) {
+        $modx->error->addField('alias', $modx->lexicon('field_required'));
+    }
+    $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $scriptProperties['context_key'];
+    $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $duplicateContext);
+    if (!empty($duplicateId)) {
+        $err = $modx->lexicon('duplicate_uri_found', array(
+                                                          'id' => $duplicateId,
+                                                          'uri' => $aliasPath,
+                                                     ));
+        $modx->error->addField('uri', $err);
+        if (!isset($scriptProperties['uri_override']) || $scriptProperties['uri_override'] !== 1) {
+            $modx->error->addField('alias', $err);
+        }
     }
 }
-
-if ($modx->error->hasError()) return $modx->error->failure();
 
 /* publish and unpublish dates */
 $now = time();
@@ -147,9 +198,17 @@ if (isset($scriptProperties['pub_date'])) {
     if (empty($scriptProperties['pub_date'])) {
         $scriptProperties['pub_date'] = 0;
     } else {
+        $strPubDate = $scriptProperties['pub_date'];
         $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
-        if ($scriptProperties['pub_date'] < $now) $scriptProperties['published'] = 1;
-        if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
+        if ($scriptProperties['pub_date'] < $now) {
+            $scriptProperties['published'] = 1;
+            $scriptProperties['publishedon'] = $strPubDate;
+            $scriptProperties['pub_date'] = 0;
+        }
+        if ($scriptProperties['pub_date'] > $now) {
+            $scriptProperties['published'] = 0;
+            $scriptProperties['publishedon'] = 0;
+        }
     }
 }
 if (isset($scriptProperties['unpub_date'])) {
@@ -159,6 +218,9 @@ if (isset($scriptProperties['unpub_date'])) {
         $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
         if ($scriptProperties['unpub_date'] < $now) {
             $scriptProperties['published'] = 0;
+            $scriptProperties['unpub_date'] = 0;
+            $scriptProperties['pub_date'] = 0;
+            $scriptProperties['publishedon'] = 0;
         }
     }
 }
@@ -179,18 +241,7 @@ if (isset($scriptProperties['published']) && $scriptProperties['published'] != $
     unset($scriptProperties['publishedby']);
 }
 
-/* get parent */
-$oldparent_id = $resource->get('parent');
-if ($resource->get('id') == $modx->getOption('site_start')
-&& (isset($scriptProperties['published']) && empty($scriptProperties['published']))) {
-    return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart'));
-}
-if ($resource->get('id') == $modx->getOption('site_start')
-&& (!empty($scriptProperties['pub_date']) || !empty($scriptProperties['unpub_date']))) {
-    return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart_dates'));
-}
-
-/* Keep original publish state, if change is not permitted */
+/* Deny publishing if not permitted */
 if (!$modx->hasPermission('publish_document')) {
     $scriptProperties['published'] = $resource->get('published');
     $scriptProperties['publishedon'] = $resource->get('publishedon');
@@ -199,8 +250,18 @@ if (!$modx->hasPermission('publish_document')) {
     $scriptProperties['unpub_date'] = $resource->get('unpub_date');
 }
 
+/* check to prevent unpublishing of site_start */
+$oldparent_id = $resource->get('parent');
+$siteStart = ($resource->get('id') == $workingContext->getOption('site_start') || $resource->get('id') == $modx->getOption('site_start'));
+if ($siteStart && (isset($scriptProperties['published']) && empty($scriptProperties['published']))) {
+    return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart'));
+}
+if ($siteStart && (!empty($scriptProperties['pub_date']) || !empty($scriptProperties['unpub_date']))) {
+    return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart_dates'));
+}
+
 /* set deleted status and fire events */
-if ($scriptProperties['deleted'] != $resource->get('deleted')) {
+if (isset($scriptProperties['deleted']) && $scriptProperties['deleted'] != $resource->get('deleted')) {
     if ($resource->get('deleted')) { /* undelete */
         if (!$modx->hasPermission('undelete_document')) {
             $scriptProperties['deleted'] = $resource->get('deleted');
@@ -217,6 +278,19 @@ if ($scriptProperties['deleted'] != $resource->get('deleted')) {
         }
     }
 }
+
+/* process derivative resource classes */
+$resourceClass = !empty($scriptProperties['class_key']) ? $scriptProperties['class_key'] : $resource->get('class_key');
+$resourceDir= strtolower(substr($resourceClass, 3));
+
+$delegateProcessor= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
+if (file_exists($delegateProcessor)) {
+    $overridden= include ($delegateProcessor);
+    return $overridden;
+}
+
+/* if errors, feed back to form */
+if ($modx->error->hasError()) return $modx->error->failure($modx->lexicon('correct_errors'));
 
 /* Now set and save data */
 unset($scriptProperties['variablesmodified']);
@@ -245,55 +319,27 @@ if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
 
+if ($oldparent !== null && $newparent !== null) {
+    $opc = $modx->getCount('modResource', array('parent' => $oldparent->get('id')));
+    if ($opc <= 0 || $opc == null) {
+        $oldparent->set('isfolder', false);
+        $oldparent->save();
+    }
+
+    $newparent->set('isfolder', true);
+    $resource->addOne($newparent, 'Parent');
+}
+
 /* save resource */
 if ($resource->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
 
-/* if parent changed, change folder status of old and new parents
- * also verify context, if changed  */
-if ($resource->get('parent') != $oldparent_id) {
-    $oldparent = $modx->getObject('modResource',$oldparent_id);
-    if ($oldparent != null) {
-        $opc = $modx->getCount('modResource',array('parent' => $oldparent->get('id')));
-        if ($opc <= 0 || $opc == null) {
-            $oldparent->set('isfolder',false);
-            $oldparent->save();
-        }
-    }
-
-    $newParent = $modx->getObject('modResource',$resource->get('parent'));
-    if ($newParent && $newParent instanceof modResource) {
-        $newParent->set('isfolder',true);
-        $newParent->save();
-
-        /* set context to new parent context */
-        $resource->set('context_key',$newParent->get('context_key'));
-        $resource->save();
-    }
-}
-
-
 /* save TVs */
 if (!empty($scriptProperties['tvs'])) {
     $tmplvars = array ();
-    $c = $modx->newQuery('modTemplateVar');
-    $c->setClassAlias('tv');
-    $c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
-        'tvtpl.tmplvarid = tv.id',
-        'tvtpl.templateid' => $resource->get('template'),
-    ));
-    $c->leftJoin('modTemplateVarResource', 'tvc', array(
-        'tvc.tmplvarid = tv.id',
-        'tvc.contentid' => $resource->get('id'),
-    ));
-    $c->select(array(
-        'DISTINCT tv.*',
-        "IF(tvc.value != '',tvc.value,tv.default_text) AS value"
-    ));
-    $c->sortby('tv.rank');
 
-    $tvs = $modx->getCollection('modTemplateVar',$c);
+    $tvs = $resource->getTemplateVars();
     foreach ($tvs as $tv) {
         /* set value of TV */
         if ($tv->get('type') != 'checkbox') {
@@ -425,21 +471,17 @@ $modx->invokeEvent('OnDocFormSave',array(
 /* log manager action */
 $modx->logManagerAction('save_resource','modResource',$resource->get('id'));
 
+$resource->removeLock();
+
 if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
     /* empty cache */
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache(array (
-            "{$resource->context_key}/resources/",
-            "{$resource->context_key}/context.cache.php",
-        ),
-        array(
-            'objects' => array('modResource', 'modContext', 'modTemplateVarResource'),
-            'publishing' => true
-        )
-    );
+    $modx->cacheManager->refresh(array(
+        'db' => array(),
+        'auto_publish' => array('contexts' => array($resource->get('context_key'))),
+        'context_settings' => array('contexts' => array($resource->get('context_key'))),
+        'resource' => array('contexts' => array($resource->get('context_key'))),
+    ));
 }
-
-$resource->removeLock();
 
 $returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta','introtext','description','link_attributes','pagetitle','longtitle','menutitle')));
 foreach ($returnArray as $k => $v) {
@@ -448,5 +490,6 @@ foreach ($returnArray as $k => $v) {
     }
 }
 $returnArray['class_key'] = $resource->get('class_key');
-$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'));
+$workingContext->prepare(true);
+$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'), '', '', 'full');
 return $modx->error->success('',$returnArray);

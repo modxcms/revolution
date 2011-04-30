@@ -38,9 +38,9 @@ if (!empty($group)) {
 $count = $modx->getCount('modAccessPolicy',$c);
 
 $subc = $modx->newQuery('modAccessPermission');
-$subc->select('COUNT(`modAccessPermission`.`id`)');
+$subc->select('COUNT(modAccessPermission.id)');
 $subc->where(array(
-    '`modAccessPermission`.`template` = `Template`.`id`',
+    'modAccessPermission.template = Template.id',
 ));
 $subc->prepare();
 $c->select(array(

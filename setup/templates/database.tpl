@@ -9,15 +9,13 @@
 
 <p>{$_lang.connection_connection_note}</p>
 
-<p>{$_lang.connection_database_info}</p>
-<br />
-
 <p class="error">{$error_message}</p>
 
 <div class="labelHolder">
     <label for="database-type">{$_lang.connection_database_type}</label>
     <select id="database-type" value="{$config.database_type}" name="database_type">
         <option value="mysql"{if $config.database_type EQ "mysql"} selected="selected"{/if}>mysql</option>
+        <option value="sqlsrv"{if $config.database_type EQ "sqlsrv"} selected="selected"{/if}>sqlsrv</option>
     </select>
     &nbsp;<span class="version-msg" id="database-type-error"></span>
 </div>
@@ -49,7 +47,7 @@
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testconn">{$_lang.db_test_conn_msg}</a></p>
 
 <div id="modx-db-step1-msg" class="modx-hidden2">
-    <span>{$_lang.db_connecting}</span> <span class="connect-msg"></span>
+    <span>{$_lang.db_connecting}</span>&nbsp;<span class="connect-msg"></span>
 </div>
 <p id="modx-db-info">
     <br />- {$_lang.mysql_version_server_start}<span id="modx-db-server-version"></span>
@@ -57,7 +55,7 @@
     <hr />
 </p>
 <div id="modx-db-step2" class="modx-hidden2">
-
+{if $config.database_type EQ "mysql"}
 <div class="labelHolder">
     <label for="database-connection-charset">{$_lang.connection_character_set}</label>
     <select id="database-connection-charset" value="{$config.database_connection_charset}" name="database_connection_charset"></select>
@@ -70,10 +68,11 @@
     &nbsp;<span class="field_error" id="database_collation_error"></span>
 </div>
 {/if}
+{/if}
 <br />
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testcoll">{$_lang.db_test_coll_msg}</a></p>
 
-<p id="modx-db-step2-msg" class="modx-hidden2">{$_lang.db_check_db}<span></span></p>
+<p id="modx-db-step2-msg" class="modx-hidden2"><span>{$_lang.db_check_db}</span>&nbsp;<span class="result"></span></p>
 </div>
 {if $installmode EQ 0}
 <div id="modx-db-step3" class="modx-hidden">

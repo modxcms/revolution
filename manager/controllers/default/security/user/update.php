@@ -19,17 +19,17 @@ if (!empty($remoteData)) {
     $remoteFields = parseCustomData($remoteData);
 }
 
-function parseCustomData(array $remoteData = array()) {
+function parseCustomData(array $remoteData = array(),$path = '') {
     $fields = array();
     foreach ($remoteData as $key => $value) {
         $field = array(
             'name' => $key,
-            'id' => $key,
+            'id' => (!empty($path) ? $path.'.' : '').$key,
         );
         if (is_array($value)) {
             $field['text'] = $key;
             $field['leaf'] = false;
-            $field['children'] = parseCustomData($value);
+            $field['children'] = parseCustomData($value,$key);
         } else {
             $v = $value;
             if (strlen($v) > 30) { $v = substr($v,0,30).'...'; }
@@ -99,5 +99,6 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('user').': '.$user->get('username'));
 $this->checkFormCustomizationRules($user);
 return $modx->smarty->fetch('security/user/update.tpl');

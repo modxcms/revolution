@@ -28,7 +28,7 @@ $c->sortby($sort,$dir);
 if ($isLimit) {
     $c->limit($limit,$start);
 }
-$actions = $modx->getCollection('modAction',$c);
+$actions = $modx->getIterator('modAction',$c);
 $count = $modx->getCount('modAction');
 
 $list = array();

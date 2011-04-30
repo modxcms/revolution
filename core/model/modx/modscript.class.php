@@ -39,7 +39,8 @@ class modScript extends modElement {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $scriptName= $this->getScriptName();
-            if (!$this->_result= function_exists($scriptName)) {
+            $this->_result= function_exists($scriptName);
+            if (!$this->_result) {
                 $this->_result= $this->loadScript();
             }
             if ($this->_result) {
@@ -91,15 +92,20 @@ class modScript extends modElement {
     }
 
     /**
-     * Loads and evaluates the script, returing the result.
+     * Loads and evaluates the script, returning the result.
      *
-     * @return mixed The result of the script.
+     * @return boolean True if the result of the script is not false.
      */
     public function loadScript() {
-        $includeFilename = $this->xpdo->getCachePath() . $this->getScriptCacheKey() . '.include.cache.php';
+        $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
         if (!$result) {
-            if (!$script= $this->xpdo->cacheManager->get($this->getScriptCacheKey())) {
+            $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
+                xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
+                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
+                xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_scripts_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            ));
+            if (!$script) {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
             if (!empty($script)) {
@@ -108,6 +114,9 @@ class modScript extends modElement {
         }
         if ($result) {
             $result = include($includeFilename);
+            if ($result) {
+                $result = function_exists($this->getScriptName());
+            }
         }
         return ($result !== false);
     }

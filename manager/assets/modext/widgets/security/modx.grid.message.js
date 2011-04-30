@@ -65,7 +65,7 @@ MODx.grid.Message = function(config) {
         ,url: MODx.config.connectors_url+'security/message.php'
         ,fields: ['id','type','subject','message','sender','recipient','private'
             ,'date_sent'
-            ,'read','sender_name','menu']
+            ,'read','sender_name']
         ,autosave: true
         ,paging: true
         ,plugins: this.exp
@@ -96,6 +96,31 @@ MODx.grid.Message = function(config) {
             text: _('message_new')
             ,scope: this
             ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-messages-search'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
     });
     MODx.grid.Message.superclass.constructor.call(this,config);
@@ -135,6 +160,38 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             	},scope:this}
             }
         });
+    }
+    ,getMenu: function() {
+        var m = [];
+        var r = this.getSelectionModel().getSelected();
+        if (r.data.read) {
+            m.push({
+                text: _('mark_unread')
+                ,handler: this.markUnread
+            });
+            m.push('-');
+        }
+        m.push({
+            text: _('delete')
+            ,handler: this.remove.createDelegate(this,["message_remove_confirm"])
+        });
+        return m;
+    }
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-messages-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
     }
 });
 Ext.reg('modx-grid-message',MODx.grid.Message);

@@ -16,6 +16,8 @@ $xpdo_meta_map['modUser']= array (
     'active' => 1,
     'remote_key' => NULL,
     'remote_data' => NULL,
+    'hash_class' => 'hashing.modPBKDF2',
+    'salt' => '',
   ),
   'fieldMeta' => 
   array (
@@ -75,6 +77,22 @@ $xpdo_meta_map['modUser']= array (
       'dbtype' => 'text',
       'phptype' => 'json',
       'null' => true,
+    ),
+    'hash_class' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'hashing.modPBKDF2',
+    ),
+    'salt' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'indexes' => 

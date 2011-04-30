@@ -20,11 +20,26 @@ if ($user->get('id') == $modx->user->get('id')) {
 	return $modx->error->failure($modx->lexicon('user_err_cannot_delete_self'));
 }
 
+/* ensure we cant delete last user in Administrator group */
+$group = $modx->getObject('modUserGroup',array('name' => 'Administrator'));
+if ($group && $user->isMember('Administrator')) {
+    $numberInAdminGroup = $modx->getCount('modUserGroupMember',array(
+        'user_group' => $group->get('id'),
+    ));
+    if ($numberInAdminGroup <= 1) {
+        return $modx->error->failure($modx->lexicon('user_err_cannot_delete_last_admin'));
+    }
+}
+
 /* invoke OnBeforeUserFormDelete event */
-$modx->invokeEvent('OnBeforeUserFormDelete',array(
+$OnBeforeUserFormDelete = $modx->invokeEvent('OnBeforeUserFormDelete',array(
     'user' => &$user,
     'id' => $user->get('id'),
 ));
+$canRemove = $this->processEventResponse($OnBeforeUserFormDelete);
+if (!empty($canRemove)) {
+    return $modx->error->failure($canSave);
+}
 
 /* remove user */
 if ($user->remove() == false) {

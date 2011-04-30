@@ -55,7 +55,8 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
     $action = $modx->actionMap[$scriptProperties['action']];
     $c['namespace'] = $action['namespace'];
     $c['namespace_path'] = $action['namespace_path'];
-    $c['help_url'] = $action['help_url'];
+    $baseHelpUrl = $modx->getOption('base_help_url',$scriptProperties,'http://rtfm.modx.com/display/revolution20/');
+    $c['help_url'] = $baseHelpUrl.ltrim($action['help_url'],'/');
 }
 
 $actions = $modx->request->getAllActionIDs();

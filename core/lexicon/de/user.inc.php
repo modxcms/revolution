@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic user
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['active'] = 'Aktiv';
 $_lang['address'] = 'Adresse';
@@ -21,7 +23,7 @@ $_lang['login_options'] = 'Login-Optionen';
 $_lang['minimum_role'] = 'Mindestens benötigte Rolle';
 $_lang['password'] = 'Passwort';
 $_lang['password_confirm'] = 'Passwort bestätigen';
-$_lang['password_gen_gen'] = 'MODx soll ein Passwort generieren.';
+$_lang['password_gen_gen'] = 'MODX soll ein Passwort generieren.';
 $_lang['password_gen_method'] = 'Art der Passwort-Erstellung';
 $_lang['password_gen_specify'] = 'Ich gebe das Passwort ein:';
 $_lang['password_method'] = 'Art der Passwort-Mitteilung';
@@ -55,12 +57,17 @@ $_lang['ugrg_grid_title'] = 'Benutzergruppen-Zugriff auf Ressourcen-Gruppen';
 $_lang['ugrg_mutate'] = 'Benutzergruppen-Zugriff auf die Ressourcen-Gruppe';
 $_lang['ugrg_remove'] = 'Benutzergruppen-Zugriff auf diese Ressourcen-Gruppe entfernen';
 $_lang['user'] = 'Benutzer';
+$_lang['user_active_desc'] = 'Gibt an, ob der Benutzer aktiviert ist oder nicht. Wenn ein Benutzer nicht aktiviert ist, kann er sich weder in einen Kontext noch in den Manager einloggen.';
 $_lang['user_add_group'] = 'Benutzergruppe dem Benutzer hinzufügen';
 $_lang['user_already_in_use'] = 'Dieser Benutzername ist bereits vergeben!';
 $_lang['user_block'] = 'Geblockt';
+$_lang['user_block_desc'] = 'Wenn diese Einstellung aktiviert ist, werden Login-Versuche dieses Benutzers dauerhaft geblockt.';
 $_lang['user_blockedafter'] = 'Geblockt ab';
+$_lang['user_blockedafter_desc'] = 'Wenn hier etwas eingegeben wird, wird der Benutzer ab diesem Zeitpunkt geblockt.';
 $_lang['user_blockeduntil'] = 'Geblockt bis';
+$_lang['user_blockeduntil_desc'] = 'Wenn hier etwas eingegeben wird, wird der Benutzer bis zu diesem Zeitpunkt geblockt.';
 $_lang['user_changeddata'] = 'Ihre Daten haben sich geändert. Bitte loggen Sie sich erneut ein.';
+$_lang['user_class_key_desc'] = 'Der MODX-Klassen-Schlüssel für diesen Benutzer. Bitte ändern Sie diese Einstellung nur, wenn Sie genau wissen, was Sie tun.';
 $_lang['user_created_password_message'] = 'Der Benutzer wurde angelegt. Das Passwort lautet: [[+password]]';
 $_lang['user_confirm_remove'] = 'Sind Sie sicher, dass Sie diesen Benutzer dauerhaft löschen möchten?';
 $_lang['user_country'] = 'Land';
@@ -72,6 +79,7 @@ $_lang['user_err_access_permissions_save'] = 'Ein Fehler trat auf beim Speichern
 $_lang['user_err_ae_group'] = 'Der Benutzer befindet sich bereits in dieser Gruppe!';
 $_lang['user_err_already_exists'] = 'Dieser Benutzername ist bereits vergeben!';
 $_lang['user_err_already_exists_email'] = 'Diese E-Mail-Adresse wird bereits verwendet!';
+$_lang['user_err_cannot_delete_last_admin'] = 'Sie können den letzten verbliebenen Benutzer in der Administrator-Gruppe nicht löschen, da dies die Administration Ihrer Site unmöglich machen würde.';
 $_lang['user_err_cannot_delete_self'] = 'Sie können sich nicht selbst löschen!';
 $_lang['user_err_nf'] = 'Benutzer nicht gefunden.';
 $_lang['user_err_not_specified'] = 'Kein Benutzer angegeben!';
@@ -80,8 +88,8 @@ $_lang['user_err_not_specified_blockeduntil'] = 'Bitte geben Sie das Datum, bis 
 $_lang['user_err_not_specified_dob'] = 'Bitte geben Sie das Geburtsdatum im Format TT/MM/JJJJ an. ';  // mm/dd/yyyy
 $_lang['user_err_not_specified_email'] = 'Bitte geben Sie eine gültige E-Mail-Adresse an.';
 $_lang['user_err_not_specified_fileman_path'] = 'Das Verzeichnis, das Sie angegeben haben, existiert nicht, hat keine Leserechte oder ist kein Verzeichnis.';
-$_lang['user_err_not_specified_manageraccess'] = 'Bitte geben Sie an, ob der Benutzer Zugriff auf den MODx-Manager haben soll.';
-$_lang['user_err_not_specified_managerstartup'] = 'Bitte geben Sie eine existierende, gültige Dokument-ID als MODx-Startseite an.';
+$_lang['user_err_not_specified_manageraccess'] = 'Bitte geben Sie an, ob der Benutzer Zugriff auf den MODX-Manager haben soll.';
+$_lang['user_err_not_specified_managerstartup'] = 'Bitte geben Sie eine existierende, gültige Dokument-ID als MODX-Startseite an.';
 $_lang['user_err_not_specified_managertheme'] = 'Das Manager-Theme, das Sie angegeben haben, wurde nicht hochgeladen.';
 $_lang['user_err_not_specified_mobnumber'] = 'Bitte geben Sie eine gültige Handynummer an (in den USA bitte Area-Code angeben).';
 $_lang['user_err_not_specified_notification_method'] = 'Bitte geben Sie eine Benachrichtigungsmethode für das neue Passwort an.';
@@ -100,6 +108,7 @@ $_lang['user_err_remove'] = 'Ein Fehler trat auf bei dem Versuch, den Benutzer z
 $_lang['user_err_resource_subdirectory'] = 'Das Verzeichnis, das Sie angegeben haben, enthält nicht die Verzeichnisse %s.';
 $_lang['user_err_save'] = 'Ein Fehler trat beim Speichern des Benutzers auf.';
 $_lang['user_failedlogincount'] = 'Fehlgeschlagene Logins';
+$_lang['user_failedlogincount_desc'] = 'Gibt an, wie oft dieser Benutzer vergeblich versucht hat, sich einzuloggen, weil er ein falsches Passwort eingegeben hat.';
 $_lang['user_fax'] = 'Fax';
 $_lang['user_female'] = 'Weiblich';
 $_lang['user_full_name'] = 'Vollständiger Name';
@@ -141,6 +150,7 @@ $_lang['user_grid_empty'] = 'Keine Benutzer vorhanden';
 $_lang['user_grid_paginate'] = 'Benutzer {0} - {1} von {2}';
 $_lang['user_is_blocked'] = 'Dieser Benutzer ist geblockt!';
 $_lang['user_logincount'] = 'Anzahl der Logins';
+$_lang['user_logincount_desc'] = 'Gibt an, wie oft sich dieser Benutzer insgesamt eingeloggt hat.';
 $_lang['user_male'] = 'Männlich';
 $_lang['user_management_msg'] = 'Hier können Sie auswählen, welchen Benutzer Sie bearbeiten möchten.';
 $_lang['user_mobile'] = 'Handynummer';
@@ -150,6 +160,7 @@ $_lang['user_phone'] = 'Telefonnummer';
 $_lang['user_photo'] = 'Benutzerfoto';
 $_lang['user_photo_message'] = 'Geben Sie die URL des Bildes für diesen Benutzer ein oder verwenden Sie den Einfügen-Button, um eine Bilddatei auszuwählen oder auf den Server hochzuladen.';
 $_lang['user_prevlogin'] = 'Letzter Login';
+$_lang['user_prevlogin_desc'] = 'Der Zeitpunkt, zu dem sich der Benutzer zuletzt erfolgreich eingeloggt hat.';
 $_lang['user_profile_err_nf'] = 'FATALER FEHLER: Benutzerprofil nicht gefunden.';
 $_lang['user_profile_err_save'] = 'Ein Fehler trat auf beim Versuch, die Benutzer-Attribute zu speichern.';
 $_lang['user_remove'] = 'Benutzer entfernen';
@@ -168,6 +179,7 @@ $_lang['user_update'] = 'Benutzer bearbeiten';
 $_lang['user_updated_password_message'] = 'Der Benutzer wurde aktualisiert. Das Passwort lautet: [[+password]]';
 $_lang['user_upload_message'] = 'Wenn Sie diesen Benutzer davon abhalten möchten, irgendwelche Dateitypen in dieser Kategorie hochzuladen, stellen Sie sicher, dass die Checkbox "Globale Konfigurations-Einstellung verwenden" nicht mit einem Häkchen versehen ist, und lassen Sie das Feld leer.';
 $_lang['user_use_config'] = 'System-Konfigurationseinstellungen verwenden';
+$_lang['user_username_desc'] = 'Die eindeutige Bezeichnung dieses Benutzers und der Name, mit dem er sich in die Site einloggt.';
 $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'PLZ';
 $_lang['username'] = 'Benutzername';

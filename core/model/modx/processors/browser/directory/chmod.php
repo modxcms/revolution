@@ -30,6 +30,9 @@ $modx->getService('fileHandler','modFileHandler', '', array('context' => $workin
 
 /* get base paths and sanitize incoming paths */
 $root = $modx->fileHandler->getBasePath(false);
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
 $directoryPath = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
 $directoryPath = $modx->fileHandler->postfixSlash($directoryPath);
 $directoryPath = $root.$directoryPath;

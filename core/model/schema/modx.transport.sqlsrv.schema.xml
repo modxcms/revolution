@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+ * MODX CMS and PHP Application Framework ("MODX")
+ * Copyright 2006, 2007, 2008 by MODX, LLC.
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+ -->
+<!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
+<model package="modx.transport" baseClass="xPDOObject" platform="sqlsrv" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
+    <object class="modTransportProvider" table="transport_providers" extends="xPDOSimpleObject">
+        <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
+        <field key="service_url" dbtype="nvarchar" precision="512" phptype="string" />
+        <field key="username" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="api_key" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="created" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="updated" dbtype="datetime" phptype="timestamp" />
+
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="api_key" name="api_key" primary="false" unique="false" type="BTREE">
+            <column key="api_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="username" name="username" primary="false" unique="false" type="BTREE">
+            <column key="username" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />
+    </object>
+    <object class="modTransportPackage" table="transport_packages" extends="xPDOObject">
+        <field key="signature" dbtype="nvarchar" precision="255" phptype="string" null="false" index="pk" />
+        <field key="created" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="updated" dbtype="datetime" phptype="timestamp" />
+        <field key="installed" dbtype="datetime" phptype="datetime" />
+        <field key="state" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
+        <field key="workspace" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
+        <field key="provider" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
+        <field key="disabled" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
+        <field key="source" dbtype="nvarchar" precision="512" phptype="string" />
+        <field key="manifest" dbtype="nvarchar" precision="max" phptype="array" />
+        <field key="attributes" dbtype="nvarchar" precision="max" phptype="array" />
+        <field key="package_name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="metadata" dbtype="nvarchar" precision="max" phptype="array" />
+        <field key="version_major" dbtype="tinyint" phptype="integer" null="false" default="0" index="index" />
+        <field key="version_minor" dbtype="tinyint" phptype="integer" null="false" default="0" index="index" />
+        <field key="version_patch" dbtype="tinyint" phptype="integer" null="false" default="0" index="index" />
+        <field key="release" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="index" />
+        <field key="release_index" dbtype="tinyint" phptype="integer" null="false" default="0" index="index" />
+        
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="signature" length="" collation="A" null="false" />
+        </index>
+        <index alias="workspace" name="workspace" primary="false" unique="false" type="BTREE">
+            <column key="workspace" length="" collation="A" null="false" />
+        </index>
+        <index alias="provider" name="provider" primary="false" unique="false" type="BTREE">
+            <column key="provider" length="" collation="A" null="false" />
+        </index>
+        <index alias="disabled" name="disabled" primary="false" unique="false" type="BTREE">
+            <column key="disabled" length="" collation="A" null="false" />
+        </index>
+        <index alias="package_name" name="package_name" primary="false" unique="false" type="BTREE">
+            <column key="package_name" length="" collation="A" null="false" />
+        </index>
+        <index alias="version_major" name="version_major" primary="false" unique="false" type="BTREE">
+            <column key="version_major" length="" collation="A" null="false" />
+        </index>
+        <index alias="version_minor" name="version_minor" primary="false" unique="false" type="BTREE">
+            <column key="version_minor" length="" collation="A" null="false" />
+        </index>
+        <index alias="version_patch" name="version_patch" primary="false" unique="false" type="BTREE">
+            <column key="version_patch" length="" collation="A" null="false" />
+        </index>
+        <index alias="release" name="release" primary="false" unique="false" type="BTREE">
+            <column key="release" length="" collation="A" null="false" />
+        </index>
+        <index alias="release_index" name="release_index" primary="false" unique="false" type="BTREE">
+            <column key="release_index" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Workspace" class="modWorkspace" local="workspace" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Provider" class="transport.modTransportProvider" local="provider" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+</model>

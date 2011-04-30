@@ -1,6 +1,6 @@
 <?php
 /**
- * Create a new MODx Revolution repository.
+ * Create a new MODX Revolution repository.
  *
  * @package setup
  */
@@ -34,15 +34,12 @@ $classes= array (
     'modContextSetting',
     'modElementPropertySet',
     'modEvent',
-    'modEventLog',
     'modFormCustomizationProfile',
     'modFormCustomizationProfileUserGroup',
     'modFormCustomizationSet',
-    'modKeyword',
     'modLexiconEntry',
     'modManagerLog',
     'modMenu',
-    'modMetatag',
     'modNamespace',
     'modPlugin',
     'modPluginEvent',
@@ -50,8 +47,6 @@ $classes= array (
     'modResource',
     'modResourceGroup',
     'modResourceGroupResource',
-    'modResourceKeyword',
-    'modResourceMetatag',
     'modSession',
     'modSnippet',
     'modSystemSetting',
@@ -66,7 +61,6 @@ $classes= array (
     'modUserGroupMember',
     'modUserGroupRole',
     'modUserMessage',
-    'modUserRole',
     'modUserSetting',
     'modWorkspace',
     'registry.db.modDbRegisterMessage',
@@ -83,7 +77,7 @@ if (!$connected) {
     $dsnArray= xPDO :: parseDSN($this->xpdo->getOption('dsn'));
     $containerOptions['charset']= $install->settings->get('database_charset', 'utf8');
     $containerOptions['collation']= $install->settings->get('database_collation', 'utf8_general_ci');
-    $created= $this->xpdo->manager->createSourceContainer($dsnArray, $this->xpdo->config['username'], $this->xpdo->config['password'], $containerOptions);
+    $created= $this->xpdo->manager->createSourceContainer($dsnArray, $this->xpdo->config['username'], $this->xpdo->config['password']);
     if (!$created) {
         $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$this->lexicon('db_err_create').'</p>');
     }

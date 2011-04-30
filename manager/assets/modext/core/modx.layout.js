@@ -25,26 +25,59 @@ MODx.Layout = function(config){
     var showTree = false;
     if (MODx.perm.resource_tree) {
        tabs.push({
-            xtype: 'modx-tree-resource'
-            ,title: _('resources')
-            ,id: 'modx-resource-tree'
+            title: _('resources')
+            ,id: 'modx-resource-tree-ct'
+            ,listeners: {
+              activate : function(panel){
+                if (Ext.get('modx-resource-tree') == null){
+                  Ext.get(Ext.query('#'+panel.id+' div.x-panel-bwrap')).item(0).remove();
+                  MODx.load({
+                      xtype: 'modx-tree-resource'
+                      ,id: 'modx-resource-tree'
+                      ,renderTo: panel.id
+                  });
+                }
+              }
+            }
         });
         showTree = true;
     }
     if (MODx.perm.element_tree) {
         tabs.push({
-            xtype: 'modx-tree-element'
-            ,title: _('elements')
-            ,id: 'modx-element-tree'
+            title: _('elements')
+            ,id: 'modx-element-tree-ct'
+            ,listeners: {
+              activate : function(panel){
+                if (Ext.get('modx-element-tree') == null){
+                  Ext.get(Ext.query('#'+panel.id+' div.x-panel-bwrap')).item(0).remove();
+                  MODx.load({
+                      xtype: 'modx-tree-element'
+                      ,id: 'modx-element-tree'
+                      ,renderTo: panel.id
+                  });
+                }
+              }
+            }
         });
         showTree = true;
     }
     if (MODx.perm.file_tree) {
         tabs.push({
-            xtype: 'modx-tree-directory'
-            ,title: _('files')
-            ,id: 'modx-file-tree'
+            title: _('files')
+            ,id: 'modx-file-tree-ct'
             ,hideFiles: false
+            ,listeners: {
+              activate : function(panel){
+                if (Ext.get('modx-file-tree') == null){
+                  Ext.get(Ext.query('#'+panel.id+' div.x-panel-bwrap')).item(0).remove();
+                  MODx.load({
+                      xtype: 'modx-tree-directory'
+                      ,id: 'modx-file-tree'
+                      ,renderTo: panel.id
+                  });
+                }
+              }
+            }
         });
         showTree = true;
     }
@@ -53,6 +86,11 @@ MODx.Layout = function(config){
          layout: 'border'
         ,id: 'modx-layout'
         ,items: [{
+            xtype: 'box'
+            ,region: 'north'
+            ,applyTo: 'modx-header'
+            ,height: 90
+        },{
              region: 'west'
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
@@ -60,7 +98,7 @@ MODx.Layout = function(config){
             ,width: 310
             ,minSize: 150
             ,maxSize: 800
-            ,autoHeight: true
+            ,autoScroll: true
             ,unstyled: true
             ,collapseMode: 'mini'
             ,useSplitTips: true
@@ -76,6 +114,7 @@ MODx.Layout = function(config){
                      autoScroll: true
                     ,fitToFrame: true
                 }
+                ,id: 'modx-leftbar-tabpanel'
                 ,border: false
                 ,activeTab: 0
                 ,stateful: true
@@ -93,8 +132,9 @@ MODx.Layout = function(config){
             ,applyTo: 'modx-content'
             ,id: 'modx-content'
             ,border: false
-            ,autoHeight: true
-            ,margins: '0 30 0 15'
+            ,autoScroll: true
+            ,margins: '0 0 0 15'
+            ,padding: '0 1px 0 0'
             ,bodyStyle: 'background-color:transparent;'
         }]
     });

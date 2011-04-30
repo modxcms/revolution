@@ -39,6 +39,7 @@ $principalId = isset($scriptProperties['principal']) ? intval($scriptProperties[
 
 /* build query */
 $c = $modx->newQuery($accessClass);
+$c->select($modx->getSelectColumns($accessClass,$accessClass,''));
 if ($targetId) {
     $c->where(array('target' => $targetId));
 }
@@ -46,6 +47,8 @@ $c->where(array('principal_class' => $principalClass));
 if ($principalId) {
     $c->where(array('principal' => $principalId));
 }
+$count = $modx->getCount($accessClass, $c);
+
 if (!empty($sort)) {
     $c->sortby($sort,$dir);
 }
@@ -54,6 +57,9 @@ if ($sort != 'principal_class') $c->sortby('principal_class', 'DESC');
 if ($sort != 'principal') $c->sortby('principal', 'ASC');
 if ($sort != 'authority') $c->sortby('authority', 'ASC');
 if ($sort != 'policy') $c->sortby('policy', 'ASC');
+if($isLimit) {
+    $c->limit($limit, $start);
+}
 $objectGraph = '{"Target":{},"Policy":{}}';
 $collection = $modx->getCollectionGraph($accessClass, $objectGraph, $c);
 
@@ -63,10 +69,16 @@ foreach ($collection as $key => $object) {
     if (!$principal) $principal = $modx->newObject($object->get('principal_class'), array('name' => '(anonymous)'));
     $policyName = !empty($object->Policy) ? $object->Policy->get('name') : $modx->lexicon('no_policy_option');
 
+    if ($object->Target) {
+        $targetName = $accessClass == 'modAccessContext' ? $object->Target->get('key') : $object->Target->get('name');
+    } else {
+        $targetName = '(anonymous)';
+    }
+
     $objdata= array(
         'id' => $object->get('id'),
         'target' => $object->get('target'),
-        'target_name' => $accessClass == 'modAccessContext' ? $object->Target->get('key') : $object->Target->get('name'),
+        'target_name' => $targetName,
         'principal_class' => $object->get('principal_class'),
         'principal' => $object->get('principal'),
         'principal_name' => $principal->get('name'),
@@ -85,4 +97,4 @@ foreach ($collection as $key => $object) {
     $objdata['cls'] = $cls;
     $data[] = $objdata;
 }
-return $this->outputArray($data);
+return $this->outputArray($data, $count);

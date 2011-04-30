@@ -1,14 +1,9 @@
 <?php
-/**
-* Russian language files for Revolution 2.0.0 setup 
-*
-* @package setup
-*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Дополнения';
 $_lang['advanced_options'] = 'Дополнительные параметры';
 $_lang['all'] = 'Все';
-$_lang['app_description']= 'CMS и CMF';
+$_lang['app_description'] = 'CMS и CMF';
 $_lang['app_motto'] = 'MODx — создавай и делай больше с меньшими усилиями';
 $_lang['back'] = 'Назад';
 $_lang['base_template'] = 'BaseTemplate';
@@ -27,9 +22,8 @@ $_lang['config_not_writable_err'] = 'Вы попытались сохранит�
 $_lang['connection_character_set'] = 'Кодировка подключения:';
 $_lang['connection_collation'] = 'Сопоставление:';
 $_lang['connection_connection_and_login_information'] = 'Подключение к базе данных и информация для входа в систему';
-$_lang['connection_connection_note'] = 'Введите имя базы данных, созданной для MODx. Если у вас еще нет базы данных, то программа установки попытается ее создать. При неверной конфигурации MySQL или недостаточных правах пользователя базы данных процесс может завершиться неудачей.';
+$_lang['connection_connection_note'] = 'Введите имя базы данных, созданной для MODx. Если у вас еще нет базы данных, то программа установки попытается ее создать. (Процесс может завершиться неудачей в зависимости от настроек базы данных или при недостаточных правах пользователя базы данных .)';
 $_lang['connection_database_host'] = 'Сервер базы данных:';
-$_lang['connection_database_info'] = 'Пожалуйста, введите данные для подключения к базе данных.';
 $_lang['connection_database_login'] = 'Имя пользователя базы данных:';
 $_lang['connection_database_name'] = 'Имя базы данных:';
 $_lang['connection_database_pass'] = 'Пароль пользователя базы данных:';
@@ -58,7 +52,7 @@ $_lang['continue'] = 'Продолжить';
 $_lang['dau_err_save'] = 'Ошибка при сохранении учетной записи администратора.';
 $_lang['dau_saved'] = 'Создана учетная запись администратора.';
 $_lang['db_check_db'] = 'Проверка базы данных:';
-$_lang['db_connecting'] = 'Соединение с сервером базы данных:';
+$_lang['db_connecting'] = 'Подключение к серверу базы данных:';
 $_lang['db_connected'] = 'Соединение с базой данных успешно установлено!';
 $_lang['db_created'] = 'База данных успешно создана.';
 $_lang['db_err_connect'] = 'Не удалось подключиться к базе данных.';
@@ -67,13 +61,13 @@ $_lang['db_err_connect_server'] = 'Не удалось подключиться 
 $_lang['db_err_create'] = 'Ошибка при попытке создания базы данных.';
 $_lang['db_err_create_database'] = 'MODx не может создать базу данных. Пожалуйста создайте базу данных вручную и затем попробуйте продолжить.';
 $_lang['db_err_show_charsets'] = 'MODx не смог получить доступные наборы символов от вашего MySQL-сервера.';
-$_lang['db_err_show_collations'] = 'MODx не смог извлечь список доступных сопоставлений вашего MySQL сервера.';
+$_lang['db_err_show_collations'] = 'MODx не смог извлечь список доступных сопоставлений вашего MySQL сервера. ';
 $_lang['db_success'] = 'Успех!';
 $_lang['db_test_coll_msg'] = 'Создание и испытание выборки из базы данных.';
 $_lang['db_test_conn_msg'] = 'Проверить соединение с сервером баз данных и отобразить список доступных сопоставлений.';
 $_lang['default_admin_user'] = 'Учётная запись администратора по умолчанию';
 $_lang['delete_setup_dir'] = 'Отметьте этот пункт для того, чтобы удалить каталог и файлы программы установки с вашего сервера.';
-$_lang['dir']= 'ltr';
+$_lang['dir'] = 'ltr';
 $_lang['email_err_ns'] = 'Некорректный адрес электронной почты';
 $_lang['err_occ'] = 'Произошла ошибка!';
 $_lang['err_update_table'] = 'Ошибка обновления таблицы для класса [[+class]]';
@@ -81,79 +75,35 @@ $_lang['errors_occurred'] = 'Были обнаружены ошибки в хо�
 $_lang['failed'] = 'Ошибка!';
 $_lang['fatal_error'] = 'КРИТИЧЕСКАЯ ОШИБКА: Установка MODx не может быть продолжена.';
 $_lang['home'] = 'Home';
-$_lang['img_banner']= 'assets/images/img_banner.gif';
-$_lang['img_box']= 'assets/images/img_box.png';
-$_lang['img_splash']= 'assets/images/img_splash.gif';
-$_lang['install']= 'Установить';
+$_lang['img_banner'] = 'assets/images/img_banner.gif';
+$_lang['img_box'] = 'assets/images/img_box.png';
+$_lang['img_splash'] = 'assets/images/img_splash.gif';
+$_lang['install'] = 'Установить';
 $_lang['install_packages'] = 'Установить дополнительные пакеты';
 $_lang['install_packages_desc'] = 'Вы можете выбрать отдельные дополнительные пакеты. После подключения всех необходимых вам пакетов нажмите «Готово» для завершения установки.';
 $_lang['install_packages_options'] = 'Параметры установки пакетов';
 $_lang['install_success'] = 'Установка ядра прошла успешно. Нажмите «Продолжить» для завершения.';
 $_lang['install_summary'] = 'Отчёт об установке';
 $_lang['install_update'] = 'Установка/Обновление';
-$_lang['license']= '<p class="title">You must agree to the License before continuing installation.</p>
-	<p>Usage of this software is subject to the GPL license. To help you understand
-	what the GPL licence is and how it affects your ability to use the software, we
-	have provided the following summary:</p>
-	<h4>The GNU General Public License is a Free Software license.</h4>
-	<p>Like any Free Software license, it grants to you the four following freedoms:</p>
-	<ul>
-        <li>The freedom to run the program for any purpose. </li>
-        <li>The freedom to study how the program works and adapt it to your needs. </li>
-        <li>The freedom to redistribute copies so you can help your neighbor. </li>
-        <li>The freedom to improve the program and release your improvements to the
-        public, so that the whole community benefits. </li>
-	</ul>
-	<p>You may exercise the freedoms specified here provided that you comply with
-	the express conditions of this license. The principal conditions are:</p>
-	<ul>
-        <li>You must conspicuously and appropriately publish on each copy distributed an
-        appropriate copyright notice and disclaimer of warranty and keep intact all the
-        notices that refer to this License and to the absence of any warranty; and give
-        any other recipients of the Program a copy of the GNU General Public License
-        along with the Program. Any translation of the GNU General Public License must
-        be accompanied by the GNU General Public License.</li>
-
-        <li>If you modify your copy or copies of the program or any portion of it, or
-        develop a program based upon it, you may distribute the resulting work provided
-        you do so under the GNU General Public License. Any translation of the GNU
-        General Public License must be accompanied by the GNU General Public License. </li>
-
-        <li>If you copy or distribute the program, you must accompany it with the
-        complete corresponding machine-readable source code or with a written offer,
-        valid for at least three years, to furnish the complete corresponding
-        machine-readable source code.</li>
-
-        <li>Any of these conditions can be waived if you get permission from the
-        copyright holder.</li>
-
-        <li>Your fair use and other rights are in no way affected by the above.</li>
-    </ul>
-	<p>The above is a summary of the GNU General Public License. By proceeding, you
-	are agreeing to the GNU General Public Licence, not the above. The above is
-	simply a summary of the GNU General Public Licence, and its accuracy is not
-	guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-	License</a> in full before proceeding, which can also be found in the license
-	file distributed with this package.</p>
-';
+$_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>\t<p>Usage of this software is subject to the GPL license. To help you understand\twhat the GPL licence is and how it affects your ability to use the software, we\thave provided the following summary:</p>\t<h4>The GNU General Public License is a Free Software license.</h4>\t<p>Like any Free Software license, it grants to you the four following freedoms:</p>\t<ul>        <li>The freedom to run the program for any purpose. </li>        <li>The freedom to study how the program works and adapt it to your needs. </li>        <li>The freedom to redistribute copies so you can help your neighbor. </li>        <li>The freedom to improve the program and release your improvements to the        public, so that the whole community benefits. </li>\t</ul>\t<p>You may exercise the freedoms specified here provided that you comply with\tthe express conditions of this license. The principal conditions are:</p>\t<ul>        <li>You must conspicuously and appropriately publish on each copy distributed an        appropriate copyright notice and disclaimer of warranty and keep intact all the        notices that refer to this License and to the absence of any warranty; and give        any other recipients of the Program a copy of the GNU General Public License        along with the Program. Any translation of the GNU General Public License must        be accompanied by the GNU General Public License.</li>        <li>If you modify your copy or copies of the program or any portion of it, or        develop a program based upon it, you may distribute the resulting work provided        you do so under the GNU General Public License. Any translation of the GNU        General Public License must be accompanied by the GNU General Public License. </li>        <li>If you copy or distribute the program, you must accompany it with the        complete corresponding machine-readable source code or with a written offer,        valid for at least three years, to furnish the complete corresponding        machine-readable source code.</li>        <li>Any of these conditions can be waived if you get permission from the        copyright holder.</li>        <li>Your fair use and other rights are in no way affected by the above.</li>    </ul>\t<p>The above is a summary of the GNU General Public License. By proceeding, you\tare agreeing to the GNU General Public Licence, not the above. The above is\tsimply a summary of the GNU General Public Licence, and its accuracy is not\tguaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public\tLicense</a> in full before proceeding, which can also be found in the license\tfile distributed with this package.</p>';
 $_lang['license_agree'] = 'Я согласен с условиями лицензионного соглашения.';
-$_lang['license_agreement']= 'Лицензионное соглашение';
-$_lang['license_agreement_error']= 'Для продолжения установки вам необходимо согласится с условиями лицензионного соглашения. Установите галочку напротив «Я согласен с условиями лицензионного соглашения» для принятия условий лицензионного соглашения и нажмите кнопку «Далее».';
+$_lang['license_agreement'] = 'Лицензионное соглашение';
+$_lang['license_agreement_error'] = 'Для продолжения установки вам необходимо согласится с условиями лицензионного соглашения. Установите галочку напротив «Я согласен с условиями лицензионного соглашения» для принятия условий лицензионного соглашения и нажмите кнопку «Далее».';
 $_lang['login'] = 'Войти';
 $_lang['modx_class_err_nf'] = 'Не удалось подключить файл класса MODx.';
 $_lang['modx_configuration_file'] = 'Конфигурационный файл MODx';
 $_lang['modx_err_instantiate'] = 'Не удалось создать объект класса MODx.';
 $_lang['modx_err_instantiate_mgr'] = 'Не удалось инициализировать контекст администратора сайта.';
-$_lang['modx_install']= 'Установка MODx';
+$_lang['modx_footer1'] = '&copy; 2005-2010 <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;" style="color: green; text-decoration:underline">MODx</a> Content Mangement Framework (CMF) . Все права защищены. MODx лицензирован GNU GPL.';
+$_lang['modx_footer2'] = 'MODx — свободное ПО.  Мы приветствуем творчество и предлагаем использовать MODx так, как вы считаете целесообразным. Но если вы внесете изменения и решите распространять ваш измененный MODx, вы должны  распространять исходный код бесплатно!';
+$_lang['modx_install'] = 'Установка MODx';
 $_lang['modx_install_complete'] = 'Установка MODx завершена';
-$_lang['modx_footer1']= '&copy; 2005-2010 <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;" style="color: green; text-decoration:underline">MODx</a> Content Mangement Framework (CMF) . Все права защищены. MODx лицензирован GNU GPL.';
-$_lang['modx_footer2']= 'MODx — свободное ПО.  Мы приветствуем творчество и предлагаем использовать MODx так, как вы считаете целесообразным. Но если вы внесете изменения и решите распространять ваш измененный MODx, вы должны  распространять исходный код бесплатно!';
 $_lang['modx_object_err'] = 'Невозможно загрузить объект MODx.';
 $_lang['next'] = 'Далее';
 $_lang['none'] = 'Нет';
 $_lang['ok'] = 'OK!';
 $_lang['options_core_inplace'] = 'Файлы уже размещены<br /><small>(Рекомендуется для установки на виртуальных хостингах.)</small>';
-$_lang['options_core_inplace_note'] = 'Отметьте этот пункт, если вы экспортировали MODx из SVN или извлекли из полного дистрибутива.';
+$_lang['options_core_inplace_note'] = 'Отметьте этот пункт, если вы экспортировали MODx из Git или извлекли из полного дистрибутива.';
 $_lang['options_core_unpacked'] = 'Базовый пакет ядра системы был вручную разархивирован<br /><small>(Рекомендуется для установки на виртуальных хостингах.)</small>';
 $_lang['options_core_unpacked_note'] = 'Отметьте этот пункт, если вы вручную разархивировали базовый пакет ядра системы из файла core/packages/core.transport.zip. Это сократит время  установки на системах, где запрещено изменять время исполнения скриптов.';
 $_lang['options_install_new_copy'] = 'Установить новую копию';
@@ -163,7 +113,7 @@ $_lang['options_important_upgrade_note'] = 'Для избежания пробл
 $_lang['options_new_file_permissions'] = 'Права назначаемые новому файлу';
 $_lang['options_new_file_permissions_note'] = 'Вы можете переназначить права для новых файлов созданных MODx, например 0664 или 0666.';
 $_lang['options_new_folder_permissions'] = 'Права назначаемые новому каталогу';
-$_lang['options_new_folder_permissions_note'] = 'Вы можете переназначить права для новых каталогов созданных MODx, например 0775 или 0777.';
+$_lang['options_new_folder_permissions_note'] = 'Вы можете переназначить права для новых каталогов созданных MODx, например 0775 или 0777. ';
 $_lang['options_new_installation'] = 'Новая установка';
 $_lang['options_title'] = 'Параметры установки';
 $_lang['options_upgrade_advanced'] = 'Расширенное обновление<br /><small>(с настройкой параметров базы данных)</small>';
@@ -174,7 +124,7 @@ $_lang['package_execute_err_retrieve'] = 'Не удалось установит
 $_lang['package_err_install'] = 'Не удалось установить пакет [[+package]].';
 $_lang['package_err_nf'] = 'Не удалось получить пакет [[+package]] .';
 $_lang['package_installed'] = 'Успешно установлен пакет [[+package]].';
-$_lang['password_err_invchars'] = 'Ваш пароль не может содержать недопустимые символы, такие как /, \\, &apos;, &quot;, или {}.';
+$_lang['password_err_invchars'] = 'Ваш пароль не может содержать недопустимые символы, такие как /, \, &apos;, &quot;, или {}.';
 $_lang['password_err_nomatch'] = 'Не соответствует паролю';
 $_lang['password_err_ns'] = 'Пароль пуст';
 $_lang['password_err_short'] = 'Ваш пароль должен содержать не менее 6 символов.';
@@ -185,7 +135,7 @@ $_lang['refresh'] = 'Обновить';
 $_lang['request_handler_err_nf'] = 'Невозможно загрузить обработчик запросов для [[+path]] Убедитесь что загружены все необходимые файлы.';
 $_lang['restarted_msg'] = 'MODx пришлось начать заново процесс установки в качестве меры предосторожности, так как установка была неактивна более 15 минут. Начните установку с начала.';
 $_lang['retry'] = 'Повторить';
-$_lang['security_notice'] ='Уведомление по безопасности';
+$_lang['security_notice'] = 'Уведомление по безопасности';
 $_lang['select'] = 'Выбрать';
 $_lang['settings_handler_err_nf'] = 'MODx не может найти класс modInstallSettings в: [[+path]]. Пожалуйста проверьте, что все необходимые файлы были загружены.';
 $_lang['setup_err_remove'] = 'Произошла ошибка при попытке удалить каталог с файлами установки.';
@@ -196,34 +146,33 @@ $_lang['skip_to_bottom'] = 'прокрутить вниз';
 $_lang['success'] = 'Успешно';
 $_lang['table_created'] = 'Успешно создана таблица для класса [[+class]]';
 $_lang['table_err_create'] = 'Ошибка при создании таблицы для класса [[+class]]';
-$_lang['test_class_nf'] = 'Не удалось найти класс Install Test в: [[+path]] <br />Пожалуйста проверьте, что все необходимые файлы были загружены.';
 $_lang['table_updated'] = 'Таблица для класса [[+class]] успешно обновлена';
+$_lang['test_class_nf'] = 'Не удалось найти класс Install Test в: [[+path]] <br />Пожалуйста проверьте, что все необходимые файлы были загружены.';
 $_lang['test_version_class_nf'] = 'Не удалось найти класс Install Test Versioner в: [[+path]] <br />Пожалуйста проверьте, что все необходимые файлы были загружены.';
 $_lang['thank_installing'] = 'Благодарим вас за установку ';
 $_lang['transport_class_err_load'] = 'Ошибка загрузки транспортного класса.';
 $_lang['toggle'] = 'Переключить';
 $_lang['toggle_success'] = 'Показать сообщения об успешном выполнении';
 $_lang['toggle_warnings'] = 'Показать предупреждения';
-$_lang['username_err_invchars'] = 'Ваше имя пользователя не может содержать недопустимые символы, такие как /, \\, &apos;, &quot;, или {}.';
+$_lang['username_err_invchars'] = 'Ваше имя пользователя не может содержать недопустимые символы, такие как /, \, &apos;, &quot;, или {}.';
 $_lang['username_err_ns'] = 'Имя пользователя неверно';
-$_lang['version']= 'версия';
+$_lang['version'] = 'версия';
 $_lang['warning'] = 'Предупреждение';
-$_lang['welcome']= 'Добро пожаловать в программу установки MODx.';
-$_lang['welcome_message']= '<p>Эта программа проведет вас через весь процесс установки.</p>
-<p>Пожалуйста, нажмите кнопку «Далее» для продолжения:</p>';
+$_lang['welcome'] = 'Добро пожаловать в программу установки MODx.';
+$_lang['welcome_message'] = '<p>Эта программа проведет вас через весь процесс установки.</p><p>Пожалуйста, нажмите кнопку «Далее» для продолжения:</p>';
 $_lang['workspace_err_nf'] = 'Не удалось найти активного рабочего пространства.';
 $_lang['workspace_err_path'] = 'Ошибка при настройке  пути активного рабочего пространства.';
 $_lang['workspace_path_updated'] = 'Обновление  пути активного рабочего пространства.';
 $_lang['versioner_err_nf'] = 'Не удалось найти  Install Versioner в: [[+path]] <br />Пожалуйста проверьте, что все необходимые файлы были загружены.';
-$_lang['xpdo_err_ins'] = 'Не удалось создать объект xPDO.';
+$_lang['xpdo_err_ins'] = 'Не удалось создать экземпляр xPDO.';
 $_lang['xpdo_err_nf'] = 'MODx не удалось найти класс xPDO в [[+path]]. Пожалуйста проверьте, что все необходимые файлы были загруженны.';
 $_lang['preload_err_cache'] = 'Удостоверьтесь, что каталог [[+path]] существует и доступен для записи процессами PHP.';
 $_lang['preload_err_core_path'] = 'Удостоверьтесь, что в файле setup/includes/config.core.php правильно определена переменная MODX_CORE_PATH. Она должна указывать на ядро MODx.';
 $_lang['preload_err_mysql'] = 'MODx требует PHP расширение mysql при использовании PHP без родного PDO и оно не загружено.';
 $_lang['preload_err_pdo'] = 'MODx требует PHP расширение PDO при использовании PHP без родного PDO и оно не загружено.';
-$_lang['preload_err_pdo_mysql'] = 'MODx требует pdo_mysql драйвер, когда используется родное PDO и он не загружен.';
+$_lang['preload_err_pdo_mysql'] = 'MODx требует pdo_mysql драйвер, когда используется родное PDO и он не загружен. ';
 $_lang['test_config_file'] = 'Проверка существования и возможности записи в файл <span class="mono">[[+file]]</span>: ';
-$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с именем <span class="mono">[[+file]].inc.php</span> в каталоге<span class="mono">config/</span>.Выставьте ему права на запись (обычно 0666).';
+$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с именем &lt;span class="mono">[[+file]].inc.php</span> в каталоге <span class="mono">config</span>.Выставьте ему права на запись (обычно 0666). ';
 $_lang['test_db_check'] = 'Создание подключения к базе данных:';
 $_lang['test_db_check_conn'] = 'Проверьте параметры соединения и повторите попытку.';
 $_lang['test_db_failed'] = 'Связь с базой данных не установлена!';

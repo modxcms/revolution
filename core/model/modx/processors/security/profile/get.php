@@ -19,9 +19,9 @@ if (!$user) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 if (!empty($scriptProperties['getGroups'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
-        `modUserGroupMember`.*,
-        `UserGroupRole`.`name` AS `role_name`,
-        `UserGroup`.`name` AS `user_group_name`
+        modUserGroupMember.*,
+        UserGroupRole.name AS role_name,
+        UserGroup.name AS user_group_name
     ');
     $c->leftJoin('modUserGroupRole','UserGroupRole');
     $c->innerJoin('modUserGroup','UserGroup');

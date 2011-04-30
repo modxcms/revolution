@@ -1,20 +1,11 @@
 <?php
-/**
- * Export Russian lexicon topic
- *
- * @language ru
- * @package modx
- * @subpackage lexicon
- */
 $_lang['export_site_cacheable'] = 'Включать некэшируемые файлы:';
 $_lang['export_site_exporting_document'] = 'Экспортируется файл <strong>%s</strong> из <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $_lang['export_site_failed'] = '<span style="color:#990000">Неудача!</span>';
 $_lang['export_site_html'] = 'Экспортировать сайт в HTML';
 $_lang['export_site_maxtime'] = 'Максимальное время экспорта:';
-$_lang['export_site_maxtime_message'] = 'Здесь вы можете указать количество секунд которое MODx получить для экспорта (перепишет настройки PHP). Введите 0 для неограниченного времени эксорта. Пожалуйста помните, что установка 0 или большого периода времени может привести к перегрузке сервера и это не рекомендуется.';
-$_lang['export_site_message'] = '<p>Используя эту функцию Вы можете экспортировать весь сайт в файлы HTML. Пожалуйста заметьте, что вы потеряете многофункциональные возможности MODx должен Вы делать так:</p><ul><li>Чтения страниц на экспортируемых файлах не будут зарегистрированы.</li><li>Интерактивные сниппеты НЕ будут работать в экспортируемых файлах.</li><li>Только регулярные документы будут экспортироваться, Веб-ссылки не будут экспортироваться.</li><li>Экспортный процесс может потерпеть неудачу, если ваши документы содержат сниппеты, которые посылают в заголовках перенаправления.</li><li>В зависимости от того, как вы написали свои документы, таблицы стилей и изображения, проект вашего сайта может быть сломан. 
-Чтобы исправить это, вы можете сохранить/переместить свои экспортируемые файлы в тот-же самый каталог, где расположен MODx index.php файл.</li></ul><p>Пожалуйста заполните форму и нажмите \'Экспорт\', чтобы запустить процесс экспорта. Созданные файлы будут сохранены в местоположении, которое вы определили,  где это будет возможно, для имен файлов будут использованы псевдонимы документа.
- Экспортируя ваш сайт, лучше использовать элемент конфигурации MODx \'Дружественные URL\' и выбрать \'да\'. В зависимости от размера вашего сайта, экспорт может требовать времени. </p><p><em>Любые существующие файлы будут записаны поверх новыми файлами, если их имена будут идентичны!</em></p>';
+$_lang['export_site_maxtime_message'] = 'Здесь вы можете указать количество секунд MODX может экспортировать сайте (будут переопределены настройки PHP). Введите 0 для неограниченного времени. Пожалуйста, обратите внимание, что устанавка 0 или очень большого числа может нарушить работу вашего сервера и не рекомендуется.';
+$_lang['export_site_message'] = '<p>Using this function you can export the entire site to HTML files. Please note, however, that you will lose a lot of the MODX functionality should you do so:</p><ul><li>Page reads on the exported files will not be recorded.</li><li>Interactive snippets will NOT work in exported files</li><li>Only regular documents will be exported, Weblinks will not be exported.</li><li>The export process may fail if your documents contain snippets which send redirection headers.</li><li>Depending on how you\'ve written your documents, style sheets and images, the design of your site may be broken. To fix this, you can save/move your exported files to the same directory where the main MODX index.php file is located.</li></ul><p>Please fill out the form and press \'Export\' to start the export process. The files created will be saved in the location you specify, using, where possible, the document\'s aliases as filenames. While exporting your site, it\'s best to have the MODX configuration item \'Friendly aliases\' set to \'yes\'. Depending on the size of your site, the export may take a while.</p><p><em>Any existing files will be overwritten by the new files if their names are identical!</em></p>';
 $_lang['export_site_numberdocs'] = '<p><strong>Найдено %s документов для экспорта...</strong></p>';
 $_lang['export_site_prefix'] = 'Префикс файла:';
 $_lang['export_site_start'] = 'Начать экспорт';

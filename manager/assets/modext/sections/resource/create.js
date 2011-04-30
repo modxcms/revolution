@@ -13,6 +13,7 @@ MODx.page.CreateResource = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
+        ,action: 'create'
     	,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
@@ -27,6 +28,7 @@ MODx.page.CreateResource = function(config) {
             ,record: config.record
             ,access_permissions: config.access_permissions
             ,publish_document: config.publish_document
+            ,show_tvs: config.show_tvs
         }]
     });
     MODx.page.CreateResource.superclass.constructor.call(this,config);
@@ -37,12 +39,12 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'create'
+                ,id: 'modx-button-save-resource'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: cfg.record.richtext ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
-                    ,alt: true
                     ,ctrl: true
                 }]
             });

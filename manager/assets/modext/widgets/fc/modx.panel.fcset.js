@@ -98,7 +98,7 @@ MODx.panel.FCSet = function(config) {
                 ,anchor: '90%'
                 ,allowBlank: true
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('active')
                 ,name: 'active'
                 ,inputValue: true
@@ -231,10 +231,16 @@ MODx.grid.FCSetFields = function(config) {
             header: _('label')
             ,dataIndex: 'label'
             ,editor: { xtype: 'textfield' }
+            ,renderer: function(v,md) {
+                return Ext.util.Format.htmlEncode(v);
+            }
         },{
             header: _('default_value')
             ,dataIndex: 'default_value'
             ,editor: { xtype: 'textfield' }
+            ,renderer: function(v,md) {
+                return Ext.util.Format.htmlEncode(v);
+            }
         }]
         ,viewConfig: {
             forceFit:true

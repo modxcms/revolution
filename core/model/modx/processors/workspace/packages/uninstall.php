@@ -27,6 +27,7 @@ $modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_prep'));
 $options = array(
     xPDOTransport::PREEXISTING_MODE => $scriptProperties['preexisting_mode'],
 );
+
 if ($package->uninstall($options) == false) {
     return $modx->error->failure(sprintf($modx->lexicon('package_err_uninstall'),$package->getPrimaryKey()));
 }
@@ -36,8 +37,7 @@ sleep(2);
 $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh();
 
 /* log manager action */
 $modx->logManagerAction('package_uninstall','transport.modTransportPackage',$package->get('id'));

@@ -21,7 +21,7 @@ $modx->lexicon->load('setting');
 
 /* get context */
 $scriptProperties['context_key'] = isset($scriptProperties['fk']) ? $scriptProperties['fk'] : 0;
-if (!$context = $modx->getObject('modContext', $scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+if (!$context = $modx->getContext($scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* prevent duplicates */
@@ -45,16 +45,15 @@ if ($modx->error->hasError()) {
 $setting= $modx->newObject('modContextSetting');
 $setting->fromArray($scriptProperties,'',true);
 
-/* set lexicon name/description */
-$topic = $modx->getObject('modLexiconTopic',array(
-    'name' => 'default',
-    'namespace' => $setting->get('namespace'),
-));
-if ($topic == null) {
-    $topic = $modx->newObject('modLexiconTopic');
-    $topic->set('name','default');
-    $topic->set('namespace',$setting->get('namespace'));
-    $topic->save();
+$refreshURIs = false;
+if ($setting->get('key') === 'friendly_urls' && $setting->get('value') == '1') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'use_alias_path') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'container_suffix') {
+    $refreshURIs = true;
 }
 
 /* only set name/description lexicon entries if they dont exist
@@ -62,13 +61,14 @@ if ($topic == null) {
  */
 $entry = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
+    'topic' => 'default',
     'name' => 'setting_'.$scriptProperties['key'],
 ));
 if ($entry == null) {
     $entry = $modx->newObject('modLexiconEntry');
     $entry->set('namespace',$setting->get('namespace'));
     $entry->set('name','setting_'.$scriptProperties['key']);
-    $entry->set('topic',$topic->get('id'));
+    $entry->set('topic','default');
     $entry->set('value',$scriptProperties['name']);
     $entry->save();
     $entry->clearCache();
@@ -76,16 +76,17 @@ if ($entry == null) {
 
 $description = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
+    'topic' => 'default',
     'name' => 'setting_'.$scriptProperties['key'].'_desc',
 ));
 if ($description == null) {
     $description = $modx->newObject('modLexiconEntry');
     $description->set('namespace',$setting->get('namespace'));
     $description->set('name','setting_'.$scriptProperties['key'].'_desc');
-    $description->set('topic',$topic->get('id'));
+    $description->set('topic','default');
     $description->set('value',$scriptProperties['description']);
-    $description->clearCache();
     $description->save();
+    $description->clearCache();
 }
 
 /* save setting */
@@ -94,6 +95,16 @@ if ($setting->save() === false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));
 }
 
-$modx->reloadConfig();
+/* if friendly_urls is set on or use_alias_path changes, refreshURIs */
+if ($refreshURIs) {
+    $context->config[$setting->get('key')] = $setting->get('value');
+    $modx->call('modResource', 'refreshURIs', array(&$modx, 0, array('contexts' => $context->get('key'))));
+}
+
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'context_settings' => array('contexts' => array($context->get('key'))),
+    'resource' => array('contexts' => array($context->get('key'))),
+));
 
 return $modx->error->success();

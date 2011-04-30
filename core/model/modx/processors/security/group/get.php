@@ -22,9 +22,9 @@ if (empty($scriptProperties['id'])) {
 if (!empty($scriptProperties['getUsers']) && !empty($scriptProperties['id'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
-        `modUserGroupMember`.*,
-        `User`.`username` AS `username`,
-        `UserGroupRole`.`name` AS `role_name`
+        modUserGroupMember.*,
+        User.username AS username,
+        UserGroupRole.name AS role_name
     ');
     $c->innerJoin('modUser','User');
     $c->leftJoin('modUserGroupRole','UserGroupRole');
@@ -50,9 +50,9 @@ if (!empty($scriptProperties['getUsers']) && !empty($scriptProperties['id'])) {
 if (!empty($scriptProperties['getResourceGroups'])) {
     $c = $modx->newQuery('modAccessResourceGroup');
     $c->select('
-        `modAccessResourceGroup`.*,
-        `Policy`.`name` AS `policy_name`,
-        `Target`.`name` AS `resource_group_name`
+        modAccessResourceGroup.*,
+        Policy.name AS policy_name,
+        Target.name AS resource_group_name
     ');
     $c->innerJoin('modAccessPolicy','Policy');
     $c->innerJoin('modResourceGroup','Target');

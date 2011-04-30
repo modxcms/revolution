@@ -451,6 +451,16 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'resource_quick_create',
+    'description' => 'perm.resource_quick_create_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'resource_quick_update',
+    'description' => 'perm.resource_quick_update_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'resource_tree',
     'description' => 'perm.resource_tree_desc',
     'value' => true,
@@ -528,6 +538,16 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'steal_locks',
     'description' => 'perm.steal_locks_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'tree_show_element_ids',
+    'description' => 'perm.tree_show_element_ids_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'tree_show_resource_ids',
+    'description' => 'perm.tree_show_resource_ids_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(

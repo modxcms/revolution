@@ -27,7 +27,6 @@ var viewPHPInfo = function() {
 
 MODx.panel.SystemInfo = function(config) {
     config = config || {};
-
     var info = [{
         html: '<p>'+_('sysinfo_desc')+'</p>'
         ,id: 'modx-sysinfo-msg'
@@ -62,7 +61,7 @@ MODx.panel.SystemInfo = function(config) {
         xtype: 'statictextfield'
         ,fieldLabel: _('extjs_version')
         ,name: 'extjs_version'
-        ,value: '3.3.0'
+        ,value: '3.3.1'
     },{
         xtype: 'statictextfield'
         ,fieldLabel: _('smarty_version')
@@ -77,7 +76,7 @@ MODx.panel.SystemInfo = function(config) {
         xtype: 'statictextfield'
         ,fieldLabel: _('magpie_version')
         ,name: 'magpie_version'
-        ,value: '0.7a'
+        ,value: '0.72'
     },{
         html: '<hr />'
     },{
@@ -141,7 +140,7 @@ MODx.panel.SystemInfo = function(config) {
             ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-sysinfo-dbtables'
             ,items: [{
-                html: '<p>'+_('db_info')+'</p>'
+                html: '<p>'+_('db_info_' + MODx.config.dbtype)+'</p>'
                 ,id: 'modx-sysinfo-dbtables-msg'
                 ,border: false
             },{

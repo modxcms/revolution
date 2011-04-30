@@ -1,11 +1,4 @@
 <?php
-/**
- * Chunk Russian lexicon topic
- *
- * @language ru
- * @package modx
- * @subpackage lexicon
- */
 $_lang['chunk'] = 'Чанк';
 $_lang['chunk_code'] = 'Код чанка (html)';
 $_lang['chunk_desc'] = 'Описание';
@@ -15,12 +8,12 @@ $_lang['chunk_err_duplicate'] = 'Ошибка при дублировании ч
 $_lang['chunk_err_exists_name'] = 'Уже существует чанк с таким именем.';
 $_lang['chunk_err_invalid_name'] = 'Такое имя чанка недопустимо.';
 $_lang['chunk_err_locked'] = 'Чанк заблокирован.';
-$_lang['chunk_err_ns_name'] = 'Пожалуйста, укажите имя.';
 $_lang['chunk_err_remove'] = 'Произошла ошибка при попытке удалить чанк.';
 $_lang['chunk_err_save'] = 'Произошла ошибка при сохранении чанка.';
 $_lang['chunk_err_nf'] = 'Чанк не найден!';
 $_lang['chunk_err_nfs'] = 'Не найден чанк с id: [[+id]]';
 $_lang['chunk_err_ns'] = 'Чанк не указан.';
+$_lang['chunk_err_ns_name'] = 'Пожалуйста, укажите имя.';
 $_lang['chunk_lock'] = 'Заблокировать чанк для редактирования';
 $_lang['chunk_lock_msg'] = 'Пользователи должны иметь разрешение edit_locked для редактирования этого чанка.';
 $_lang['chunk_msg'] = 'Здесь вы можете создать/отредактировать чанк. Помните, чанки – чистый HTML-код, и любые php-скрипты выполняться в них не будут.';

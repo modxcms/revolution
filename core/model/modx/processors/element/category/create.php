@@ -13,6 +13,11 @@ $modx->lexicon->load('category');
 /* prevent empty names */
 if (empty($scriptProperties['category'])) $modx->error->addField('category',$modx->lexicon('category_err_ns'));
 
+$alreadyExists = $modx->getObject('modCategory',array('category' => $scriptProperties['category']));
+if ($alreadyExists) {
+    $modx->error->addField('category',$modx->lexicon('category_err_ae'));
+}
+
 if ($modx->error->hasError()) {
     return $modx->error->failure();
 }

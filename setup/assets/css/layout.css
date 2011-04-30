@@ -11,7 +11,7 @@ div.labelHolder {
     clear: both;
 }
 
-input {font-family: Verdana,Arial, Helvetica, sans-serif !important;}
+input {font:inherit;}
 div.labelHolder input {
     width: 200px;
 }

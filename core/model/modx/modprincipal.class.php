@@ -20,7 +20,7 @@ class modPrincipal extends xPDOSimpleObject {
      * Load attributes of the principal that define access to secured objects.
      *
      * {@internal Implement this function in derivatives to control how your
-     * user class uses the MODx ABAC (Attribute-Based Access Control) security
+     * user class uses the MODX ABAC (Attribute-Based Access Control) security
      * model}
      *
      * @abstract
@@ -38,8 +38,10 @@ class modPrincipal extends xPDOSimpleObject {
 
     public function getAttributes($targets = array(), $context = '', $reload = false) {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (is_null($targets) || empty($targets))
-            $targets = array('modAccessContext', 'modAccessResourceGroup', 'modAccessCategory');
+        if (!is_array($targets) || empty($targets)) {
+            $targets = explode(',', $this->xpdo->getOption('principal_targets', null, 'modAccessContext,modAccessResourceGroup,modAccessCategory'));
+            array_walk($targets, 'trim');
+        }
         if (is_array($targets)) {
             foreach ($targets as $target) {
                 $this->loadAttributes($target, $context, $reload);

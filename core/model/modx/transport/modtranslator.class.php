@@ -24,7 +24,7 @@ class modTranslator extends modTranslate095 {
     /**
     * @var array Can either be an array of array of classname => fields to translate,
     *  empty to skip classes or null to process all standard content
-    *  fields for MODx (use processAllFields())
+    *  fields for MODX (use processAllFields())
     */
     public $classes;
     /**
@@ -93,7 +93,7 @@ class modTranslator extends modTranslate095 {
     }
 
     /**
-    * Sets the translator to process all standard MODx fields.
+    * Sets the translator to process all standard MODX fields.
     *
     * @param boolean $b If false, will revert to an empty array of classes.
     */

@@ -6,7 +6,7 @@
  * @subpackage xmlrss
  */
 /**
- * RSS Parser for MODx, implementing MagpieRSS
+ * RSS Parser for MODX, implementing MagpieRSS
  *
  * @package modx
  * @subpackage xmlrss

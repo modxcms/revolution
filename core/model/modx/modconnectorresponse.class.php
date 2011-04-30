@@ -6,7 +6,7 @@
  */
 require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
 /**
- * Encapsulates an HTTP response from the MODx manager.
+ * Encapsulates an HTTP response from the MODX manager.
  *
  * {@inheritdoc}
  *
@@ -38,7 +38,7 @@ class modConnectorResponse extends modResponse {
      *
      * {@inheritdoc}
      */
-    public function outputContent(array $options = array()) {
+    public function outputContent(array $options = array()) {        
         /* variable pointer for easier access */
         $modx =& $this->modx;
 
@@ -65,10 +65,7 @@ class modConnectorResponse extends modResponse {
         /* execute a processor and format the response */
         } else {
             /* prevent browsing of subdirectories for security */
-            $options['action'] = str_replace('../','',$options['action']);
-
-            /* find the appropriate processor */
-            $file = $this->_directory.str_replace('\\', '/', $options['location'] . '/' . $options['action']).'.php';
+            $target = str_replace('../','',$options['action']);
 
             /* create scriptProperties array from HTTP GPC vars */
             if (!isset($_POST)) $_POST = array();
@@ -78,12 +75,14 @@ class modConnectorResponse extends modResponse {
                 $scriptProperties = array_merge($scriptProperties,$_FILES);
             }
 
-            /* verify processor exists */
-            if (!file_exists($file)) {
-                $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf').$file);
+            /* run processor */
+            $this->response = $this->modx->runProcessor($target,$scriptProperties,$options);
+            if (!$this->response) {
+                $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf',array(
+                    'target' => $target,
+                )));
             } else {
-                /* go load the correct processor */
-                $this->body = include $file;
+                $this->body = $this->response->getResponse();
             }
         }
         /* if files sent, this means that the browser needs it in text/plain,

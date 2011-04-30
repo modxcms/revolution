@@ -7,9 +7,9 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-12-02
+ * @updated 2011-03-26
  */
-$_lang['perm.about_desc'] = 'O MODx Revolution.';
+$_lang['perm.about_desc'] = 'O MODX Revolution.';
 $_lang['perm.access_permissions_desc'] = 'Přístup k stránkám s oprávněním.';
 $_lang['perm.actions_desc'] = 'Správa akcí.';
 $_lang['perm.add_children_desc'] = 'Možnost přidat dokument jako potomek určitého dokumentu.';
@@ -69,7 +69,7 @@ $_lang['perm.file_update_desc'] = 'Možnost aktualizování obsahu souboru.';
 $_lang['perm.file_upload_desc'] = 'Možnost nahrání souboru do adresáře.';
 $_lang['perm.file_view_desc'] = 'Možnost zobrazení obsahu souboru.';
 $_lang['perm.flush_sessions_desc'] = 'Možnost resetovat všechny přístupy.';
-$_lang['perm.frames_desc'] = 'Možnost použití MODx správce obsahu.';
+$_lang['perm.frames_desc'] = 'Možnost použití MODX správce obsahu.';
 $_lang['perm.help_desc'] = 'Možnost zobrazení nápovědy.';
 $_lang['perm.home_desc'] = 'Možnost zobrazení úvodní stránky.';
 $_lang['perm.import_static_desc'] = 'Možnost použití nebo zobrazení importovacích stránek.';
@@ -120,6 +120,8 @@ $_lang['perm.search_desc'] = 'Možnost použití vyhledávání.';
 $_lang['perm.settings_desc'] = 'Možnost zobrazení a upravení konfigurace systému.';
 $_lang['perm.steal_lock_desc'] = 'Možnost odstranění zámku u dokumentu.';
 $_lang['perm.steal_locks_desc'] = 'Možnost odstranění zámků u dokumentů.';
+$_lang['perm.tree_show_resource_ids_desc'] = 'Zobrazovat ID ve stromu dokumentů.';
+$_lang['perm.tree_show_element_ids_desc'] = 'Zobrazovat ID ve stromu elementů.';
 $_lang['perm.undelete_desc'] = 'Možnost obnovit objekt.';
 $_lang['perm.undelete_document_desc'] = 'Možnost obnovit každý dokument.';
 $_lang['perm.unlock_element_properties_desc'] = 'Možnost upravit základní vlastnosti každého elementu.';

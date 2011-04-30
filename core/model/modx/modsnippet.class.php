@@ -1,6 +1,6 @@
 <?php
 /**
- * A modScript derivative representing a MODx PHP code snippet.
+ * A modScript derivative representing a MODX PHP code snippet.
  *
  * @package modx
  * @extends modScript

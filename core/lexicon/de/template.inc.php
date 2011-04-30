@@ -2,12 +2,15 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic template
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['access'] = 'Zugriff';
+$_lang['filter_by_category'] = 'Nach Kategorie filtern...';
 $_lang['rank'] = 'Rang';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Zugeordnete Template-Variablen';
@@ -17,7 +20,7 @@ $_lang['template_delete_confirm'] = 'Sind Sie sicher, dass Sie dieses Template l
 $_lang['template_duplicate_confirm'] = 'Sind Sie sicher, dass Sie dieses Template duplizieren möchten?';
 $_lang['template_edit_tab'] = 'Template bearbeiten';
 $_lang['template_empty'] = '(leer)';
-$_lang['template_err_default_template'] = 'Dieses Template wurde als Standardtemplate festgelegt. Bitte wählen Sie ein anderes Standardtemplate in der MODx-Konfiguration, bevor Sie dieses Template löschen.<br />';
+$_lang['template_err_default_template'] = 'Dieses Template wurde als Standardtemplate festgelegt. Bitte wählen Sie ein anderes Standardtemplate in der MODX-Konfiguration, bevor Sie dieses Template löschen.<br />';
 $_lang['template_err_delete'] = 'Ein Fehler trat beim Löschen des Templates auf.';
 $_lang['template_err_duplicate'] = 'Ein Fehler trat beim Duplizieren des Templates auf.';
 $_lang['template_err_exists_name'] = 'Ein Template mit dem Namen "[[+name]]" existiert bereits.';

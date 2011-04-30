@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -21,7 +21,7 @@
  */
 
 /**
- * Common classes for the MODx installation and provisioning services.
+ * Common classes for the MODX installation and provisioning services.
  *
  * @package setup
  */
@@ -119,7 +119,8 @@ class modInstall {
      * @return array A copy of the config attributes array.
      */
     public function getConfig($mode = 0, $config = array ()) {
-        global $database_type, $database_server, $dbase, $database_user, $database_password, $database_connection_charset, $table_prefix;
+        global $database_dsn, $database_type, $database_server, $dbase, $database_user,
+                $database_password, $database_connection_charset, $table_prefix, $config_options;
         if (!is_array($config)) {
             $config = array ();
         }
@@ -161,11 +162,14 @@ class modInstall {
                     $config['processors_path'] = MODX_CORE_PATH.'model/modx/processors/';
                     $config['assets_path'] = MODX_ASSETS_PATH;
                     $config['assets_url'] = MODX_ASSETS_URL;
+
+                    $config_options = !empty($config_options) ? $config_options : array();
                     break;
                 }
 
             default :
                 $included = false;
+                $database_type = isset ($_POST['databasetype']) ? $_POST['databasetype'] : 'mysql';
                 $database_server = isset ($_POST['databasehost']) ? $_POST['databasehost'] : 'localhost';
                 $database_user = isset ($_POST['databaseloginname']) ? $_POST['databaseloginname'] : '';
                 $database_password = isset ($_POST['databaseloginpassword']) ? $_POST['databaseloginpassword'] : '';
@@ -174,12 +178,13 @@ class modInstall {
                 $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
                 $cache_disabled = isset ($_POST['cache_disabled']) ? $_POST['cache_disabled'] : 'false';
                 $site_sessionname = 'SN' . uniqid('');
+                $config_options = array();
                 break;
         }
         $config = array_merge($config,array(
-            'database_type' => !empty($database_type) ? $database_type : 'mysql',
+            'database_type' => $database_type,
             'database_server' => $database_server,
-            'dbase' => trim($dbase,'`'),
+            'dbase' => trim($dbase, '`[]'),
             'database_user' => $database_user,
             'database_password' => $database_password,
             'database_connection_charset' => $database_connection_charset,
@@ -191,8 +196,19 @@ class modInstall {
             'cache_disabled' => isset ($cache_disabled) && $cache_disabled ? 'true' : 'false',
             'inplace' => isset ($_POST['inplace']) ? 1 : 0,
             'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
+            'config_options' => $config_options,
         ));
         $this->config = array_merge($this->config, $config);
+        switch ($this->config['database_type']) {
+            case 'sqlsrv':
+                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:server={$this->config['database_server']};database={$this->config['dbase']}";
+                break;
+            case 'mysql':
+                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:host={$this->config['database_server']};dbname={$this->config['dbase']};charset={$this->config['database_connection_charset']}";
+                break;
+            default:
+                break;
+        }
         return $this->config;
     }
 
@@ -209,17 +225,12 @@ class modInstall {
             $options = array();
             if ($this->settings->get('new_folder_permissions')) $options['new_folder_permissions'] = $this->settings->get('new_folder_permissions');
             if ($this->settings->get('new_file_permissions')) $options['new_file_permissions'] = $this->settings->get('new_file_permissions');
-            $collation = $this->settings->get('database_collation');
-            $this->xpdo = $this->_connect($this->settings->get('database_type')
-                 . ':host=' . $this->settings->get('database_server')
-                 . ';dbname=' . trim($this->settings->get('dbase'), '`')
-                 . ';charset=' . $this->settings->get('database_connection_charset', 'utf8')
-                 //. ';collation=' . $this->settings->get('database_collation', 'utf8_general_ci')
-                 . (!empty($collation) ? ';collation=' : '')
-                 ,$this->settings->get('database_user')
-                 ,$this->settings->get('database_password')
-                 ,$this->settings->get('table_prefix')
-                 ,$options
+            $this->xpdo = $this->_connect(
+                $this->settings->get('database_dsn')
+                ,$this->settings->get('database_user')
+                ,$this->settings->get('database_password')
+                ,$this->settings->get('table_prefix')
+                ,$options
              );
 
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
@@ -315,12 +326,15 @@ class modInstall {
         @ ini_set('max_execution_time', 240);
         @ ini_set('memory_limit','128M');
 
+        /* write config file */
+        $this->writeConfig($results);
+
         /* get connection */
         $this->getConnection($mode);
 
         /* run appropriate database routines */
         switch ($mode) {
-            /* TODO: MODx Evolution to Revolution migration */
+            /* TODO: MODX Evolution to Revolution migration */
             case modInstall::MODE_UPGRADE_EVO :
                 $results = include MODX_SETUP_PATH . 'includes/tables_migrate.php';
                 break;
@@ -335,9 +349,6 @@ class modInstall {
                 $results = include MODX_SETUP_PATH . 'includes/tables_create.php';
                 break;
         }
-
-        /* write config file */
-        $this->writeConfig($results);
 
         if ($this->xpdo) {
             /* add required core data */
@@ -443,10 +454,7 @@ class modInstall {
         $modx = $this->_modx($errors);
         if (is_object($modx) && $modx instanceof modX) {
             if ($modx->getCacheManager()) {
-                $modx->cacheManager->clearCache(array(), array(
-                    'objects' => '*',
-                    'publishing' => 1
-                ));
+                $modx->cacheManager->refresh();
             }
         }
         return $errors;
@@ -557,7 +565,11 @@ class modInstall {
                 if ($content) {
                     $replace = array ();
                     while (list ($key, $value) = each($settings)) {
-                        $replace['{' . $key . '}'] = "{$value}";
+                        if (is_scalar($value)) {
+                            $replace['{' . $key . '}'] = "{$value}";
+                        } elseif (is_array($value)) {
+                            $replace['{' . $key . '}'] = var_export($value, true);
+                        }
                     }
                     $content = str_replace(array_keys($replace), array_values($replace), $content);
                     if ($configHandle = @ fopen($configFile, 'wb')) {
@@ -629,7 +641,7 @@ class modInstall {
             } else {
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
-                if (!$modx->_initialized) {
+                if (!$modx->isInitialized()) {
                     $errors[] = '<p>'.$this->lexicon('modx_err_instantiate_mgr').'</p>';
                 } else {
                     $loaded = $modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
@@ -683,8 +695,8 @@ class modInstall {
      * @access public
      * @return integer One of three possible mode indicators:<ul>
      * <li>0 = new install only</li>
-     * <li>1 = new OR upgrade from older versions of MODx Revolution</li>
-     * <li>2 = new OR upgrade from MODx Evolution</li>
+     * <li>1 = new OR upgrade from older versions of MODX Revolution</li>
+     * <li>2 = new OR upgrade from MODX Evolution</li>
      * </ul>
      */
     public function getInstallMode() {
@@ -692,6 +704,7 @@ class modInstall {
         if (isset ($_POST['installmode'])) {
             $mode = intval($_POST['installmode']);
         } else {
+            global $dbase;
             if (file_exists(MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php')) {
                 /* Include the file so we can test its validity */
                 $included = @ include (MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php');
@@ -713,28 +726,24 @@ class modInstall {
      */
     public function _connect($dsn, $user = '', $password = '', $prefix = '', array $options = array()) {
         if (include_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php')) {
-            $xpdo = new xPDO($dsn, $user, $password, array_merge(array(
+            $this->xpdo = new xPDO($dsn, $user, $password, array_merge(array(
                     xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
                     xPDO::OPT_TABLE_PREFIX => $prefix,
                     xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_SETUP => true,
                 ), $options),
-                array (
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
-                    PDO::ATTR_PERSISTENT => false,
-                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
-                )
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT)
             );
-            $xpdo->setLogTarget(array(
+            $this->xpdo->setLogTarget(array(
                 'target' => 'FILE',
                 'options' => array(
                     'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y%m%dT%H%M%S') . '.log'
                 )
             ));
-            $xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
-            return $xpdo;
+            $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
+            return $this->xpdo;
         } else {
-            return $this->lexicon('xpdo_err_nf',array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
+            return $this->lexicon('xpdo_err_nf', array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
         }
     }
 
@@ -749,7 +758,7 @@ class modInstall {
 
         /* to validate installation, instantiate the modX class and run a few tests */
         if (include_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
-            $modx = new modX(MODX_CORE_PATH . 'config/',array(
+            $modx = new modX(MODX_CORE_PATH . 'config/', array(
                 xPDO::OPT_SETUP => true,
             ));
             if (!is_object($modx) || !($modx instanceof modX)) {

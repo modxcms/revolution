@@ -13,17 +13,9 @@ class modContext extends modAccessibleObject {
     public $config= null;
     public $aliasMap= null;
     public $resourceMap= null;
-    public $resourceListing= null;
-    public $documentListing= null;
-    public $documentMap= null;
     public $eventMap= null;
     public $pluginCache= null;
     protected $_cacheKey= '[contextKey]/context';
-
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-        $this->documentListing= & $this->resourceListing;
-    }
 
     /**
      * Prepare a context for use.
@@ -42,7 +34,11 @@ class modContext extends modAccessibleObject {
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
                 $context = array();
-                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey()))) {
+                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), array(
+                    xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_context_settings_key', null, 'context_settings'),
+                    xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'cache.xPDOFileCache')),
+                    xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_context_settings_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                )))) {
                     $context = $this->xpdo->cacheManager->generateContext($this->get('key'));
                 }
                 if (!empty($context)) {
@@ -98,31 +94,42 @@ class modContext extends modAccessibleObject {
      */
     public function findPolicy($context = '') {
         $policy = array();
+        $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessContext');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-            $sql = "SELECT acl.target, acl.principal, acl.authority, acl.policy, p.data FROM {$accessTable} acl " .
-                    "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
-                    "WHERE acl.principal_class = 'modUserGroup' " .
-                    "AND acl.target = :context " .
-                    "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
-            $bindings = array(
-                ':context' => $this->get('key')
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessContext'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+        if ($context === $this->xpdo->context->get('key')) {
+            $enabled = (boolean) $this->xpdo->getOption('access_context_enabled', null, true);
+        } elseif ($this->xpdo->getContext($context)) {
+            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_context_enabled', true);
+        }
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                $c = $this->xpdo->newQuery('modAccessContext');
+                $c->leftJoin('modAccessPolicy','Policy');
+                $c->select(array(
+                    'modAccessContext.id',
+                    'modAccessContext.target',
+                    'modAccessContext.principal',
+                    'modAccessContext.authority',
+                    'modAccessContext.policy',
+                    'Policy.data',
+                ));
+                $c->where(array(
+                    'modAccessContext.principal_class' => 'modUserGroup',
+                    'modAccessContext.target' => $this->get('key'),
+                ));
+                $c->sortby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');
+                $acls = $this->xpdo->getCollection('modAccessContext',$c);
+                foreach ($acls as $acl) {
+                    $policy['modAccessContext'][$acl->get('target')][] = array(
+                        'principal' => $acl->get('principal'),
+                        'authority' => $acl->get('authority'),
+                        'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
                     );
                 }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
             }
-            $this->_policies[$context] = $policy;
-        } else {
-            $policy = $this->_policies[$context];
         }
         return $policy;
     }
@@ -175,7 +182,7 @@ class modContext extends modAccessibleObject {
                         $found= true;
                     }
                 }
-            } elseif (isset($this->resourceListing["{$id}"])) {
+            } elseif (array_keys(array((string) $id), $this->resourceMap, true) !== false) {
                 $found= true;
             }
 

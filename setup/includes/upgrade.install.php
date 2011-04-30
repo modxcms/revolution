@@ -158,22 +158,6 @@ if ($language != 'en') {
     $setting->save();
 }
 
-/* set welcome screen URL */
-$setting = $this->xpdo->getObject('modSystemSetting',array(
-    'key' => 'welcome_screen_url',
-));
-if (!$setting) {
-    $setting = $this->xpdo->newObject('modSystemSetting');
-    $setting->fromArray(array(
-        'key' => 'welcome_screen_url',
-        'namespace' => 'core',
-        'xtype' => 'textfield',
-        'area' => 'manager',
-    ));
-}
-$setting->set('value','http://misc.modx.com/revolution/welcome.20.html');
-$setting->save();
-
 /* Access Policy changes (have to happen post package install) */
 
 /* setup a setting to run this only once */
@@ -325,11 +309,11 @@ if (!$setting) {
     /* drop policy index from modAccessPermission */
     $class = 'modAccessPermission';
     $table = $modx->getTableName($class);
-    $sql = "ALTER TABLE {$table} DROP INDEX `policy`";
+    $sql = "ALTER TABLE {$table} DROP INDEX policy";
     $modx->exec($sql);
 
     /* drop policy field from modAccessPermission */
-    $sql = "ALTER TABLE {$table} DROP COLUMN `policy`";
+    $sql = "ALTER TABLE {$table} DROP COLUMN policy";
     $modx->exec($sql);
 
     /* add setting so that this runs only once to prevent errors or goof-ups */
@@ -351,9 +335,9 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
         'modActionDom.active' => true,
     ));
     $c->select(array(
-        'modActionDom.*',
-        'Action.controller',
-        'Access.principal',
+        $modx->getSelectColumns('modActionDom', 'modActionDom'),
+        $modx->getSelectColumns('modAction', 'Action', '', array('controller')),
+        $modx->getSelectColumns('modAccessActionDom', 'Access', '', array('principal')),
     ));
     $c->sortby('Access.principal','ASC');
     $c->sortby('modActionDom.action','ASC');
@@ -508,6 +492,30 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     foreach ($invalidRules as $invalidRule) {
         $invalidRule->remove();
     }
+}
+
+/* remove modxcms.com provider if it occurs */
+$provider = $modx->getObject('transport.modTransportProvider',array(
+    'service_url' => 'http://rest.modxcms.com/extras/',
+));
+$newProvider = $modx->getObject('transport.modTransportProvider',array(
+    'service_url' => 'http://rest.modx.com/extras/',
+));
+if ($provider && $newProvider && $provider->get('id') != $newProvider->get('id')) {
+    /* if 2 providers found, remove old one */
+    if ($provider->remove()) {
+        /* and then migrate old packages to new provider */
+        $packages = $modx->getCollection('transport.modTransportPackage',array(
+            'provider' => $provider->get('id'),
+        ));
+        foreach ($packages as $package) {
+            $package->set('provider',$newProvider->get('id'));
+            $package->save();
+        }
+    }
+} else if ($provider && empty($newProvider)) {
+    $provider->set('service_url','http://rest.modx.com/extras/');
+    $provider->save();
 }
 
 return true;

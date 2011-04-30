@@ -88,9 +88,16 @@ foreach ($us as $settingPK => $setting) {
 if ($up->get('failed_logins') >= $modx->getOption('failed_login_attempts') && $up->get('blockeduntil') > time()) {
     return $modx->error->failure($modx->lexicon('login_blocked_too_many_attempts'));
 }
-if ($up->get('failedlogincount') >= $modx->getOption('failed_login_attempts') && $up->get('blockeduntil') < time()) {
+if ($up->get('failedlogincount') >= $modx->getOption('failed_login_attempts')) {
     $up->set('failedlogincount', 0);
-    $up->set('blockeduntil', time() - 1);
+    $up->set('blocked', 1);
+    $up->set('blockeduntil', time() + (60 * $modx->getOption('blocked_minutes')));
+    $up->save();
+}
+if ($up->get('blockeduntil') != 0 && $up->get('blockeduntil') < time()) {
+    $up->set('failedlogincount', 0);
+    $up->set('blocked', 0);
+    $up->set('blockeduntil', 0);
     $up->save();
 }
 if ($up->get('blocked')) {
@@ -102,13 +109,11 @@ if ($up->get('blockeduntil') > time()) {
 if ($up->get('blockedafter') > 0 && $up->get('blockedafter') < time()) {
     return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
+
 if (isset ($allowed_ip) && $allowed_ip) {
-    if (($hostname = gethostbyaddr($_SERVER['REMOTE_ADDR'])) && ($hostname != $_SERVER['REMOTE_ADDR'])) {
-        if (gethostbyname($hostname) != $_SERVER['REMOTE_ADDR']) {
-            return $modx->error->failure($modx->lexicon('login_hostname_error'));
-        }
-    }
-    if (!in_array($_SERVER['REMOTE_ADDR'], explode(',', str_replace(' ', '', $allowed_ip)))) {
+    $ip = $modx->request->getClientIp();
+    $ip = $ip['ip'];
+    if (!in_array($ip, explode(',', str_replace(' ', '', $allowed_ip)))) {
         return $modx->error->failure($modx->lexicon('login_blocked_ip'));
     }
 }
@@ -136,11 +141,18 @@ if ($mgrEvents) {
 /* check if plugin authenticated the user */
 if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
     /* check user password - local authentication */
-    if ($user->get('password') != md5($givenPassword)) {
-        $flc = ((int)$up->get('failedlogincount'))+1;
-        $up->set('failedlogincount',$flc);
-        $up->save();
-        
+    if (!$user->passwordMatches($givenPassword)) {
+        if (!array_key_exists('login_failed', $_SESSION)) {
+            $_SESSION['login_failed'] = 0;
+        }
+        if ($_SESSION['login_failed'] == 0) {
+            $flc = ((integer) $up->get('failedlogincount')) + 1;
+            $up->set('failedlogincount', $flc);
+            $up->save();
+            $_SESSION['login_failed']++;
+        } else {
+            $_SESSION['login_failed'] = 0;
+        }
         return $modx->error->failure($modx->lexicon('login_username_password_incorrect'));
     }
 }

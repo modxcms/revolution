@@ -7,14 +7,13 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-04-07
  */
 $_lang['database_charset'] = 'Znaková sada databáze';
 $_lang['database_name'] = 'Název databáze';
 $_lang['database_server'] = 'Databázový server';
 $_lang['database_tables'] = 'Databázové tabulky';
 $_lang['database_optimize'] = 'Optimalizovat databázi';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>Poznámka:</strong> "Navíc" je nepoužité místo rezervované pro MySQL. Pokud chcete uvolnit toto místo, klikněte na hodnotu ve sloupci "Navíc" u dané tabulky.';
 $_lang['database_table_clickhere'] = 'Zde klikněte';
 $_lang['database_table_clickbackup'] = 'pro vytvoření zálohy a stažení vybraných tabulek.';
 $_lang['database_table_datasize'] = 'Velikost dat';
@@ -22,16 +21,18 @@ $_lang['database_table_droptablestatements'] = 'Generovat příkazy DROP TABLE.'
 $_lang['database_table_effectivesize'] = 'Efektivní velikost';
 $_lang['database_table_indexsize'] = 'Velikost indexů';
 $_lang['database_table_overhead'] = 'Navíc';
+$_lang['database_table_reserved'] = 'Rezervováno';//sqlsrv
 $_lang['database_table_records'] = 'Záznamů';
 $_lang['database_table_tablename'] = 'Název tabulky';
 $_lang['database_table_totalsize'] = 'Celková velikost';
 $_lang['database_table_totals'] = 'Celkem:';
+$_lang['database_table_unused'] = 'Nevyužito';//sqlsrv
 $_lang['database_type'] = 'Typ databáze';
 $_lang['database_version'] = 'Verze databáze';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> verze';
 $_lang['localtime'] = 'Místní čas';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> verze';
-$_lang['modx_version'] = 'MODx verze';
+$_lang['modx_version'] = 'MODX verze';
 $_lang['onlineusers_action'] = 'Akce';
 $_lang['onlineusers_actionid'] = 'ID Akce';
 $_lang['onlineusers_ipaddress'] = 'IP adresa uživatele';
@@ -47,7 +48,7 @@ $_lang['server'] = 'Server';
 $_lang['servertime'] = 'Čas serveru';
 $_lang['serveroffset'] = 'Rozdíl serveru';
 $_lang['smarty_version'] = '<a href="http://smarty.net/" target="_blank">Smarty</a> verze';
-$_lang['sysinfo_desc'] = 'Přehled obecných informací o prostředí MODx.';
+$_lang['sysinfo_desc'] = 'Přehled obecných informací o prostředí MODX.';
 $_lang['view_sysinfo'] = 'Systémové informace';
 $_lang['table_prefix'] = 'Prefix tabulek';
 $_lang['truncate_table'] = 'Klikněte pro vyprázdnění tabulky';

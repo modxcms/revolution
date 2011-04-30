@@ -29,6 +29,9 @@ if (!empty($wctx)) {
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 $root = $modx->fileHandler->getBasePath(false);
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
 
 /* create modDirectory instance for containing directory and validate */
 $parentDirectory = $modx->fileHandler->make($root.$scriptProperties['parent']);

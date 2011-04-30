@@ -32,9 +32,9 @@
  * menu builders.
  * @param boolean $isfolder (optional) Whether or not the resource is a
  * container of resources.
- * @param boolean $richtext (optional) If true, MODx will render the available
+ * @param boolean $richtext (optional) If true, MODX will render the available
  * RTE for editing this resource.
- * @param boolean $donthit (optional) (deprecated) If true, MODx will not log
+ * @param boolean $donthit (optional) (deprecated) If true, MODX will not log
  * visits on this resource.
  * @param boolean $cacheable (optional) If false, the resource will not be
  * cached.
@@ -50,6 +50,24 @@
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 $modx->lexicon->load('resource');
 
+/* check new resource token if posted from manager */
+if(isset($scriptProperties['create-resource-token'])) {
+    $tokenFound = false;
+    $tokenPassed = $scriptProperties['create-resource-token'];
+    if(!is_null($tokenPassed)) {
+        if(isset($_SESSION['newResourceTokens']) && !is_null($_SESSION['newResourceTokens'])) {
+            $search = array_search($tokenPassed, $_SESSION['newResourceTokens']);
+            if($search !== false) {
+                unset($_SESSION['newResourceTokens'][$search]);
+                $tokenFound = true;
+            }
+        }
+    }
+    if($tokenFound === false) {
+        return $modx->error->failure($modx->lexicon('resource_err_duplicate'));
+    }
+}
+
 /* handle if parent is a context */
 if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent'])) {
     $ctxCnt = $modx->getCount('modContext',array('key' => $scriptProperties['parent']));
@@ -60,33 +78,7 @@ if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent
 }
 
 /* default settings */
-$scriptProperties['context_key']= empty($scriptProperties['context_key']) ? 'web' : $scriptProperties['context_key'];
-
-/* get working context */
-$wctx = $scriptProperties['context_key'];
-if (!empty($wctx)) {
-    $workingContext = $modx->getContext($wctx);
-    if (!$workingContext) {
-        return $modx->error->failure($modx->error->failure($modx->lexicon('access_denied')));
-    }
-} else {
-    $workingContext =& $modx->context;
-}
-
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
-$scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer) $workingContext->getOption('default_template', 0) : (integer) $scriptProperties['template'];
-$scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (integer) $workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
-$scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
-$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
-$scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
-$scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer) $workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
-$scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer) $workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
-$scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (integer) $workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
-$scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
-$scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
-$scriptProperties['createdby'] = $modx->user->get('username');
-$scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
-$scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
 
 /* make sure parent exists and user can add_children to the parent */
 $parent = null;
@@ -102,6 +94,31 @@ if ($scriptProperties['parent'] > 0) {
 } elseif (!$modx->hasPermission('new_document_in_root')) {
     return $modx->error->failure($modx->lexicon('resource_add_children_access_denied'));
 }
+
+if (empty($scriptProperties['context_key'])) {
+    $scriptProperties['context_key']= $parent ? $parent->get('context_key') : 'web';
+}
+
+/* get working context */
+$workingContext = $modx->getContext($scriptProperties['context_key']);
+if (!$workingContext) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
+$scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer) $workingContext->getOption('default_template', 0) : (integer) $scriptProperties['template'];
+$scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (integer) $workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
+$scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
+$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
+$scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
+$scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer) $workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
+$scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer) $workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
+$scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (integer) $workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
+$scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
+$scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
+$scriptProperties['createdby'] = $modx->user->get('username');
+$scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
+$scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
+$scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) ? 0 : 1;
 
 /* default pagetitle */
 if (empty($scriptProperties['pagetitle'])) $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
@@ -122,19 +139,25 @@ if (!$resource) return $modx->error->failure($modx->lexicon('resource_err_create
 if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->lexicon('resource_err_class',array('class' => $resourceClass)));
 
 /* friendly url alias checks */
-if ($workingContext->getOption('friendly_alias_urls', false)) {
+if ($workingContext->getOption('friendly_urls', false)) {
     /* auto assign alias */
+    if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+    }
+    if (empty($scriptProperties['alias'])) {
+        $modx->error->addField('alias', $modx->lexicon('field_required'));
+    }
+    $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $scriptProperties['context_key'];
     $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
-    $duplicateId = $resource->isDuplicateAlias($aliasPath, $scriptProperties['context_key']);
-    if (!$workingContext->getOption('allow_duplicate_alias', false) && $duplicateId) {
-        $err = $modx->lexicon('duplicate_alias_found',array(
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $duplicateContext);
+    if ($duplicateId) {
+        $err = $modx->lexicon('duplicate_uri_found', array(
             'id' => $duplicateId,
-            'alias' => $aliasPath,
+            'uri' => $aliasPath,
         ));
-        $modx->error->addField('alias', $err);
-    } else {
-        if(empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias',null,false)) {
-            $scriptProperties['alias'] = $scriptProperties['pagetitle'];
+        $modx->error->addField('uri', $err);
+        if ($scriptProperties['uri_override'] !== 1) {
+            $modx->error->addField('alias', $err);
         }
     }
 }
@@ -161,16 +184,10 @@ if (isset($scriptProperties['unpub_date'])) {
     }
 }
 
+$resource->set('template',$scriptProperties['template']);
 if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modTemplate', $scriptProperties['template']))) {
     $tmplvars = array();
-    $c = $modx->newQuery('modTemplateVar');
-    $c->select('DISTINCT `modTemplateVar`.*, `modTemplateVar`.`default_text` AS `value`');
-    $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
-    $c->where(array(
-        'TemplateVarTemplates.templateid' => $scriptProperties['template'],
-    ));
-    $c->sortby('modTemplateVar.rank');
-    $templateVars = $modx->getCollection('modTemplateVar',$c);
+    $templateVars = $resource->getTemplateVars();
 
     foreach ($templateVars as $tv) {
         $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
@@ -190,7 +207,7 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
                 $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
                 break;
             case 'url':
-                if ($scriptProperties['tv' . $row['name'] . '_prefix'] != '--') {
+                if ($scriptProperties['tv' . $tv->get('id') . '_prefix'] != '--') {
                     $value = str_replace(array('ftp://','http://'),'', $value);
                     $value = $scriptProperties['tv'.$tv->get('id').'_prefix'].$value;
                 }
@@ -209,6 +226,7 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
 
         /* save value if it was modified */
         $default = $tv->processBindings($tv->get('default_text'),0);
+
         if (strcmp($value,$default) != 0) {
             $templateVarResource = $modx->newObject('modTemplateVarResource');
             $templateVarResource->set('tmplvarid',$tv->get('id'));
@@ -350,20 +368,17 @@ $modx->invokeEvent('OnDocFormSave', array(
 /* log manager action */
 $modx->logManagerAction('save_resource', $resourceClass, $resource->get('id'));
 
-if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
-    /* empty cache */
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache(array (
-            "{$resource->context_key}/",
-        ),
-        array(
-            'objects' => array('modResource', 'modContext', 'modTemplateVarResource'),
-            'publishing' => true
-        )
-    );
-}
-
 /* remove lock */
 $resource->removeLock();
+
+if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
+    /* empty cache */
+    $modx->cacheManager->refresh(array(
+        'db' => array(),
+        'auto_publish' => array('contexts' => array($workingContext->get('key'))),
+        'context_settings' => array('contexts' => array($workingContext->get('key'))),
+        'resource' => array('contexts' => array($workingContext->get('key'))),
+    ));
+}
 
 return $modx->error->success('', array('id' => $resource->get('id')));

@@ -16,5 +16,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.groups.roles.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/permissions/list.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('user_group_management'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('security/permissions/index.tpl');

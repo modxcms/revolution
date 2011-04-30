@@ -98,5 +98,6 @@ if (is_array($onChunkFormPrerender)) {
 $modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
 
 /* display template */
+$modx->smarty->assign('_pagetitle',$modx->lexicon('chunk').': '.$chunk->get('name'));
 $this->checkFormCustomizationRules($chunk);
 return $modx->smarty->fetch('element/chunk/update.tpl');

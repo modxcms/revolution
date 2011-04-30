@@ -376,7 +376,8 @@ MODx.grid.PackageBrowserGrid = function(config) {
     Ext.applyIf(config,{
         id: 'modx-package-browser-grid'
         ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
-                 ,'downloads','releasedon','screenshot','license','supports','location','version-compiled'
+                 ,'downloads','releasedon','screenshot','license','location','version-compiled'
+                 ,'supports_db','minimum_supports','breaks_at','featured','audited','changelog'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
         ,baseParams: {
@@ -446,7 +447,9 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
                 ,'<span>'+_('released_on')+': {releasedon}</span><br />'
                 ,'<span>'+_('license')+': {license}</span><br />'
                 ,'<span>'+_('downloads')+': {downloads}</span><br />'
-                ,'<span>'+_('supports')+': {supports}</span><br />'
+                ,'<span>'+_('minimum_supports')+': {minimum_supports}+</span><br />'
+                ,'<tpl if="breaks_at"><span>'+_('breaks_at')+': {breaks_at}</span><br /></tpl>'
+                ,'<span>'+_('supports_db')+': {supports_db}</span><br />'
                 ,'<br /><h4>'+_('description')+'</h4>'
                 ,'<p>{description}</p>'
                 ,'<tpl if="instructions">'
@@ -455,6 +458,10 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
                 ,'</tpl>'
                 ,'<tpl if="downloaded">'
                     ,'<br /><p class="green bold">'+_('already_downloaded')+'</p>'
+                ,'</tpl>'
+                ,'<tpl if="changelog">'
+                    ,'<br /><h4>'+_('changelog')+'</h4>'
+                    ,'<p>{changelog}</p>'
                 ,'</tpl>'
                 ,'</div>'
             ,'</tpl></div>'
@@ -493,7 +500,13 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
             case 'package-download':
                 if (!rec.downloading || rec.downloading == undefined) {
                     var btns = Ext.query('.package-download');
-                    Ext.each(btns,function(btn) { btn.style.opacity = '0.5'; });
+                    Ext.each(btns,function(btn) {
+                        var b = Ext.get(btn);
+                        if (b) {
+                            b.setStyle('opacity','0.5');
+                            b.update('<span>'+_('downloading')+'</span>');
+                        }
+                    });
                     rec.downloading = true;
                     this.download(g,rec,a,ri);
                 }
@@ -524,12 +537,24 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
                     this.refresh();
                     rec.downloading = false;
                     var btns = Ext.query('.package-download');
-                    Ext.each(btns,function(btn) { btn.style.opacity = '1.0'; });
+                    Ext.each(btns,function(btn) {
+                        var b = Ext.get(btn);
+                        if (b) {
+                            b.setStyle('opacity','1.0');
+                            b.update('<span>'+_('download')+'</span>');
+                        }
+                    });
                 },scope:this}
                 ,'failure': {fn:function(r) {
                     rec.downloading = false;
                     var btns = Ext.query('.package-download');
-                    Ext.each(btns,function(btn) { btn.style.opacity = '1.0'; });
+                    Ext.each(btns,function(btn) {
+                        var b = Ext.get(btn);
+                        if (b) {
+                            b.setStyle('opacity','1.0');
+                            b.update('<span>'+_('download')+'</span>');
+                        }
+                    });
                 },scope:this}
             }
         });

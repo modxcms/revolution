@@ -515,7 +515,7 @@ MODx.window.DuplicatePropertySet = function(config) {
             ,anchor: '95%'
             ,value: _('duplicate_of',{name:config.record.name})
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,boxLabel: _('propertyset_duplicate_copyels')
             ,labelSeparator: ''
             ,name: 'copyels'

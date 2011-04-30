@@ -22,7 +22,7 @@ class modAccessibleObject extends xPDOObject {
             if ($xpdo instanceof modX) {
                 $userid = $xpdo->getLoginUserID();
                 if (!$userid) $userid = '0';
-                $xpdo->log(xPDO::LOG_LEVEL_INFO, "Principal {$userid} does not have permission to load object of class {$instance->_class} with primary key: " . print_r($instance->getPrimaryKey(), true));
+                $xpdo->log(xPDO::LOG_LEVEL_INFO, "Principal {$userid} does not have permission to load object of class {$instance->_class} with primary key: " . (is_object($instance) && method_exists($instance,'getPrimaryKey') ? print_r($instance->getPrimaryKey(), true) : ''));
             }
             $instance = null;
         }

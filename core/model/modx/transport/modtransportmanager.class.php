@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -27,7 +27,7 @@
 
 class modTransportManager {
 	/**
-	 * @var MODx A reference to the MODx object.
+	 * @var MODX A reference to the MODX object.
 	 */
     public $modx = null;
     /**
@@ -39,7 +39,7 @@ class modTransportManager {
      */
     public $providers = array ();
     /**
-     * @var modWorkspace The active MODx workspace.
+     * @var modWorkspace The active MODX workspace.
      */
     public $workspace = null;
 
@@ -76,7 +76,7 @@ class modTransportManager {
     }
 
 	/**
-	 * Get the active workspace for the MODx installation.
+	 * Get the active workspace for the MODX installation.
 	 *
      * @access public
 	 * @return modWorkspace
@@ -91,7 +91,7 @@ class modTransportManager {
     }
 
 	/**
-	 * Change the active workspace in MODx.
+	 * Change the active workspace in MODX.
 	 *
      * @access public
 	 * @param integer $workspaceId The PK of the modWorkspace.

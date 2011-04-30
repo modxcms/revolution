@@ -33,7 +33,7 @@ $data = strip_tags($data,'<br><span><hr><li>');
 $data = str_replace(array('<li>','<hr>','<br>','<span>','<?php','<?','?>'),"\r\n",$data);
 $data = strip_tags($data);
 $o = "/*
- * MODx Console Output
+ * MODX Console Output
  *
  * @date ".date('Y-m-d H:i:s')."
  */

@@ -16,5 +16,6 @@ $_lang['mgrlog_clear_confirm'] = 'Är du säker på att du vill tömma hanterare
 $_lang['mgrlog_query_msg'] = 'Välj ut vad du vill läsa i loggen. Du kan välja loggposter efter datum, men var medveten om att datumen du anger inte är inkluderande - för att välja alla loggposter för 01-01-2010 så anger du "Startdatum" till 01-01-2010 och "Slutdatum" till 02-01-2010.';
 $_lang['mgrlog_query'] = 'Sök i loggen';
 $_lang['mgrlog_view'] = 'Visa loggen för hanteraren';
+$_lang['object'] = 'Objekt';
 $_lang['occurred'] = 'Inträffade';
 $_lang['user'] = 'Användare';

@@ -45,6 +45,104 @@ class modResource extends modAccessibleSimpleObject {
     public $_sjscripts = array();
     public $_loadedjscripts = array();
 
+    /**
+     * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
+     * 
+     * @static
+     * @param modResource &$resource A reference to the modResource to get the groups from.
+     * @param array $sort An array of sort columns in column => direction format.
+     * @param int $limit A limit of records to retrieve in the collection.
+     * @param int $offset A record offset for a limited collection.
+     * @return array An array containing the collection and total.
+     */
+    public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+        $result = array('collection' => array(), 'total' => 0);
+        $c = $resource->xpdo->newQuery('modResourceGroup');
+        $c->leftJoin('modResourceGroupResource', 'ResourceGroupResource', array(
+            "ResourceGroupResource.document_group = modResourceGroup.id",
+            'ResourceGroupResource.document' => $resource->get('id')
+        ));
+        $result['total'] = $resource->xpdo->getCount('modResourceGroup',$c);
+        $c->select($resource->xpdo->getSelectColumns('modResourceGroup', 'modResourceGroup'));
+        $c->select(array("IF(ISNULL(ResourceGroupResource.document),0,1) AS access"));
+        foreach ($sort as $sortKey => $sortDir) {
+            $c->sortby($resource->xpdo->escape('modResourceGroup') . '.' . $resource->xpdo->escape($sortKey), $sortDir);
+        }
+        if ($limit > 0) $c->limit($limit, $offset);
+        $result['collection'] = $resource->xpdo->getCollection('modResourceGroup', $c);
+        return $result;
+    }
+
+    /**
+     * Retrieve a collection of Template Variables for a Resource.
+     *
+     * @static
+     * @param modResource &$resource A reference to the modResource to retrieve TemplateVars for.
+     * @return A collection of modTemplateVar instances for the modResource.
+     */
+    public static function getTemplateVarCollection(modResource &$resource) {
+        $c = $resource->xpdo->newQuery('modTemplateVar');
+        $c->query['distinct'] = 'DISTINCT';
+        $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+        if ($resource->isNew()) {
+            $c->select(array(
+                'modTemplateVar.default_text AS value',
+                '0 AS resourceId'
+            ));
+        } else {
+            $c->select(array(
+                'IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value',
+                $resource->get('id').' AS resourceId'
+            ));
+        }
+        $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
+            'tvtpl.tmplvarid = modTemplateVar.id',
+            'tvtpl.templateid' => $resource->get('template'),
+        ));
+        if (!$resource->isNew()) {
+            $c->leftJoin('modTemplateVarResource','tvc',array(
+                'tvc.tmplvarid = modTemplateVar.id',
+                'tvc.contentid' => $resource->get('id'),
+            ));
+        }
+        $c->sortby('tvtpl.rank,modTemplateVar.rank');
+        return $resource->xpdo->getCollection('modTemplateVar', $c);
+    }
+
+    /**
+     * Refresh Resource URI fields for children of the specified parent.
+     *
+     * @static
+     * @param modX &$modx A reference to a valid modX instance.
+     * @param int $parent The id of a Resource parent to start from (default is 0, the root)
+     * @param array $options An array of various options for the method:
+     *      - resetOverrides: if true, Resources with uri_override set to true will be included
+     *      - contexts: an optional array of context keys to limit the refresh scope
+     * @return void
+     */
+    public static function refreshURIs(modX &$modx, $parent = 0, array $options = array()) {
+        $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean) $options['resetOverrides'] : false;
+        $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
+        $criteria = $modx->newQuery('modResource', array('parent' => $parent));
+        if (!$resetOverrides) {
+            $criteria->where(array('uri_override' => false));
+        }
+        if (!empty($contexts)) {
+            $criteria->where(array('context_key:IN' => $contexts));
+        }
+        $criteria->sortby('menuindex', 'ASC');
+        foreach ($modx->getIterator('modResource', $criteria) as $resource) {
+            $resource->set('refreshURIs', true);
+            if ($resetOverrides) {
+                $resource->set('uri_override', false);
+            }
+            if (!$resource->get('uri_override')) {
+                $resource->set('uri', '');
+            }
+            $resource->save();
+        }
+    }
+
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_contextKey= isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
@@ -73,8 +171,6 @@ class modResource extends modAccessibleSimpleObject {
                 $this->_processed= true;
             }
         }
-        $this->mergeKeywords();
-        $this->mergeMetatags();
         return $this->_content;
     }
 
@@ -111,40 +207,6 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
-     * Merge in Keywords into content.
-     *
-     * @access public
-     * @deprecated 2.0
-     */
-    public function mergeKeywords() {
-        if ($this->get('haskeywords')) {
-            $keywords = implode(", ",$this->xpdo->getKeywords());
-            $metas = "<meta name=\"keywords\" content=\"{$keywords}\" />\n";
-            $this->_content = preg_replace("/(<head>)/i", "\\1\n".$metas, $this->_content);
-        }
-    }
-
-    /**
-     * Merge in META tags to content.
-     *
-     * @access public
-     * @deprecated 2.0
-     */
-    public function mergeMetaTags() {
-        if ($this->get('hasmetatags')) {
-            if ($tags = $this->xpdo->getMETATags()) {
-                foreach ($tags as $n=>$col) {
-                    $tag = strtolower($col['tag']);
-                    $tagvalue = $col['tagvalue'];
-                    $tagstyle = $col['http_equiv'] ? 'http-equiv':'name';
-                    $metas.= "\t<meta $tagstyle=\"$tag\" content=\"$tagvalue\" />\n";
-                }
-                $this->_content = preg_replace("/(<head>)/i", "\\1\n".$metas, $this->_content);
-            }
-        }
-    }
-
-    /**
      * Returns the cache key for this instance in the current context.
      *
      * @return string The cache key.
@@ -173,27 +235,20 @@ class modResource extends modAccessibleSimpleObject {
     public function & getMany($alias, $criteria= null, $cacheFlag= false) {
         $collection= array ();
         if ($alias === 'TemplateVars' || $alias === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
-            $c = $this->xpdo->newQuery('modTemplateVar');
-            $c->select('
-                DISTINCT modTemplateVar.*,
-                IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value,
-                IF(ISNULL(tvc.value),0,'.$this->id.') AS resourceId
-            ');
-            $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
-                '`tvtpl`.`tmplvarid` = `modTemplateVar`.`id`',
-                '`tvtpl`.templateid' => $this->template,
-            ));
-            $c->leftJoin('modTemplateVarResource','tvc',array(
-                '`tvc`.`tmplvarid` = `modTemplateVar`.`id`',
-                '`tvc`.contentid' => $this->id,
-            ));
-            $c->sortby('`tvtpl`.`rank`,`modTemplateVar`.`rank`');
-
-            $collection = $this->xpdo->getCollection('modTemplateVar', $c);
+            $collection= $this->getTemplateVars();
         } else {
             $collection= parent :: getMany($alias, $criteria, $cacheFlag);
         }
         return $collection;
+    }
+
+    /**
+     * Get a collection of the Template Variable values for the Resource.
+     *
+     * @return array A collection of TemplateVar values for this Resource.
+     */
+    public function getTemplateVars() {
+        return $this->xpdo->call('modResource', 'getTemplateVarCollection', array(&$this));
     }
 
     /**
@@ -275,7 +330,7 @@ class modResource extends modAccessibleSimpleObject {
         $translit = $this->xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
         $translitClass = $this->xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
 
-        /* strip html and optionally MODx element tags (stripped by default) */
+        /* strip html and optionally MODX element tags (stripped by default) */
         if ($this->xpdo instanceof modX) {
             $alias = $this->xpdo->stripTags($alias, '', $stripElementTags ? array() : null);
         }
@@ -378,13 +433,30 @@ class modResource extends modAccessibleSimpleObject {
      *
      * If the modResource is new, the createdon and createdby fields will be set
      * using the current time and user authenticated in the context.
+     *
+     * If uri is empty or uri_overridden is not set and something has been changed which
+     * might affect the Resource's uri, it is (re-)calculated using getAliasPath(). This
+     * can be forced recursively by setting refreshURIs to true before calling save().
      */
     public function save($cacheFlag= null) {
-        if ($this->_new) {
+        if ($this->isNew()) {
             if (!$this->get('createdon')) $this->set('createdon', time());
             if (!$this->get('createdby') && $this->xpdo instanceof modX) $this->set('createdby', $this->xpdo->getLoginUserID());
         }
+        $refreshChildURIs = false;
+        if ($this->xpdo instanceof modX && $this->xpdo->getOption('friendly_urls')) {
+            $refreshChildURIs = ($this->get('refreshURIs') || $this->isDirty('alias') || $this->isDirty('parent') || $this->isDirty('context_key'));
+            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('content_type') || $this->isDirty('isfolder') || $refreshChildURIs))) {
+                $this->set('uri', $this->getAliasPath($this->get('alias')));
+            }
+        }
         $rt= parent :: save($cacheFlag);
+        if ($rt && $refreshChildURIs) {
+            $this->xpdo->call('modResource', 'refreshURIs', array(
+                &$this->xpdo,
+                $this->get('id'),
+            ));
+        }
         return $rt;
     }
 
@@ -475,35 +547,43 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function findPolicy($context = '') {
         $policy = array();
+        $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-            $resourceGroupTable = $this->xpdo->getTableName('modResourceGroupResource');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$resourceGroupTable} `ResourceGroup` ON `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "AND `ResourceGroup`.`document` = :resource " .
-                    "AND `ResourceGroup`.`document_group` = `Acl`.`target` " .
-                    "GROUP BY `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`";
-            $bindings = array(
-                ':resource' => $this->get('id'),
-                ':context' => $context
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessResourceGroup'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
-                    );
+        if ($context === $this->xpdo->context->get('key')) {
+            $enabled = (boolean) $this->xpdo->getOption('access_resource_group_enabled', null, true);
+        } elseif ($this->xpdo->getContext($context)) {
+            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
+        }
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
+                $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+                $resourceGroupTable = $this->xpdo->getTableName('modResourceGroupResource');
+                $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                        "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                        "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                        "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                        "AND ResourceGroup.document = :resource " .
+                        "AND ResourceGroup.document_group = Acl.target " .
+                        "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                $bindings = array(
+                    ':resource' => $this->get('id'),
+                    ':context' => $context
+                );
+                $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+                if ($query->stmt && $query->stmt->execute()) {
+                    while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $policy['modAccessResourceGroup'][$row['target']][] = array(
+                            'principal' => $row['principal'],
+                            'authority' => $row['authority'],
+                            'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                        );
+                    }
                 }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
             }
-            $this->_policies[$context] = $policy;
-        } else {
-            $policy = $this->_policies[$context];
         }
         return $policy;
     }
@@ -540,6 +620,26 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Sets a value for a TV for this Resource
+     * 
+     * @param mixed $pk The TV name or ID to set
+     * @param string $value The value to set for the TV
+     * @return bool Whether or not the TV saved successfully
+     */
+    public function setTVValue($pk,$value) {
+        $success = false;
+        if (is_string($pk)) {
+            $pk = array('name' => $pk);
+        }
+        $tv = $this->xpdo->getObject('modTemplateVar',$pk);
+        if ($tv) {
+            $tv->setValue($this->get('id'),$value);
+            $success = $tv->save();
+        }
+        return $success;
+    }
+
+    /**
      * Get the Resource's full alias path.
      *
      * @param string $alias Optional. The alias to check. If not set, will
@@ -550,46 +650,58 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function getAliasPath($alias = '',array $fields = array()) {
         if (empty($fields)) $fields = $this->toArray();
-
-        /* auto assign alias if using automatic_alias */
-        if (empty($alias) && $this->xpdo->getOption('automatic_alias',null,false)) {
-            $alias = $this->cleanAlias($fields['pagetitle']);
-        } else {
-            $alias = $this->cleanAlias($alias);
-        }
-
-        $fullAlias= $alias;
-        $isHtml= true;
-        $extension= '';
-        $containerSuffix= $this->xpdo->getOption('container_suffix',null,'');
-        /* process content type */
-        if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
-            $extension= $contentType->getExtension();
-            $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
-        }
-        /* set extension to container suffix if Resource is a folder, HTML content type, and the container suffix is set */
-        if (!empty($fields['isfolder']) && $isHtml && !empty ($containerSuffix)) {
-            $extension= $containerSuffix;
-        }
-        $aliasPath= '';
-        /* if using full alias paths, calculate here */
-        if ($this->xpdo->getOption('use_alias_path',null,false)) {
-            $pathParentId= $fields['parent'];
-            $parentResources= array ();
-            $currResource= $this->xpdo->getObject('modResource', $pathParentId);
-            while ($currResource) {
-                $parentAlias= $currResource->get('alias');
-                if (empty ($parentAlias)) {
-                    $parentAlias= "{$pathParentId}";
-                }
-                $parentResources[]= "{$parentAlias}";
-                $pathParentId= $currResource->get('parent');
-                $currResource= $currResource->getOne('Parent');
+        $workingContext = $this->xpdo->getContext($fields['context_key']);
+        if (empty($fields['uri_override']) || empty($fields['uri'])) {
+            /* auto assign alias if using automatic_alias */
+            if (empty($alias) && $workingContext->getOption('automatic_alias', false)) {
+                $alias = $this->cleanAlias($fields['pagetitle']);
+            } elseif (empty($alias) && isset($fields['id']) && !empty($fields['id'])) {
+                $alias = $this->cleanAlias($fields['id']);
+            } else {
+                $alias = $this->cleanAlias($alias);
             }
-            $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
-            if (!empty($aliasPath) && strpos($aliasPath,'/') === false) $aliasPath .= '/';
+
+            $fullAlias= $alias;
+            $isHtml= true;
+            $extension= '';
+            $containerSuffix= $workingContext->getOption('container_suffix', '');
+            /* process content type */
+            if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
+                $extension= $contentType->getExtension();
+                $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
+            }
+            /* set extension to container suffix if Resource is a folder, HTML content type, and the container suffix is set */
+            if (!empty($fields['isfolder']) && $isHtml && !empty ($containerSuffix)) {
+                $extension= $containerSuffix;
+            }
+            $aliasPath= '';
+            /* if using full alias paths, calculate here */
+            if ($workingContext->getOption('use_alias_path', false)) {
+                $pathParentId= $fields['parent'];
+                $parentResources= array ();
+                $query = $this->xpdo->newQuery('modResource');
+                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias')));
+                $query->where("{$this->xpdo->escape('id')} = ?");
+                $query->prepare();
+                $query->stmt->execute(array($pathParentId));
+                $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
+                while ($currResource) {
+                    $parentAlias= $currResource['alias'];
+                    if (empty ($parentAlias)) {
+                        $parentAlias= "{$pathParentId}";
+                    }
+                    $parentResources[]= "{$parentAlias}";
+                    $pathParentId= $currResource['parent'];
+                    $query->stmt->execute(array($pathParentId));
+                    $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
+                }
+                $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
+                if (strlen($aliasPath) > 0 && $aliasPath[strlen($aliasPath) - 1] !== '/') $aliasPath .= '/';
+            }
+            $fullAlias= $aliasPath . $fullAlias . $extension;
+        } else {
+            $fullAlias= $fields['uri'];
         }
-        $fullAlias= $aliasPath . $fullAlias . $extension;
         return $fullAlias;
     }
 
@@ -603,27 +715,27 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function isDuplicateAlias($aliasPath = '', $contextKey = '') {
         if (empty($aliasPath)) $aliasPath = $this->getAliasPath($this->get('alias'));
-        if (empty($contextKey)) $contextKey = $this->get('context_key');
-        $isDuplicate = false;
-
-        $resourceContext= $this->xpdo->getObject('modContext', array('key' => $contextKey));
-        if (!$resourceContext) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not find context for Resource '.print_r($this->toArray(),true));
-            return $isDuplicate;
+        $criteria = $this->xpdo->newQuery('modResource');
+        $where = array(
+            'id:!=' => $this->get('id'),
+            'uri' => $aliasPath,
+            'deleted' => false,
+            'published' => true
+        );
+        if (!empty($contextKey)) {
+            $where['context_key'] = $contextKey;
         }
-        $resourceContext->prepare();
-
-        if (isset($resourceContext->aliasMap[$aliasPath])) {
-            $duplicateId= $resourceContext->aliasMap[$aliasPath];
-            if ($duplicateId != $this->get('id')) {
-                $isDuplicate = true;
-            }
-        }
-        return $isDuplicate ? $duplicateId : false;
+        $criteria->select('id');
+        $criteria->where($where);
+        $criteria->prepare();
+        $duplicate = $this->xpdo->getValue($criteria->stmt);
+        return $duplicate > 0 ? (integer) $duplicate : false;
     }
 
     /**
+     * Duplicate the Resource.
      *
+     * @param array $options An array of options.
      * @return mixed Returns either an error message, or the newly created modResource object.
      */
     public function duplicate(array $options = array()) {
@@ -636,8 +748,21 @@ class modResource extends modAccessibleSimpleObject {
         )) : $this->get('pagetitle'));
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
-        $newResource->set('id',0);
         $newResource->set('pagetitle', $newName);
+
+        /* make sure duplicate is not published or deleted */
+        $newResource->set('published',false);
+        $newResource->set('publishedon',0);
+        $newResource->set('publishedby',0);
+        $newResource->set('deleted',false);
+        $newResource->set('deletedon',0);
+        $newResource->set('deletedby',0);
+
+        /* allow overrides for every item */
+        if (!empty($options['overrides']) && is_array($options['overrides'])) {
+            $newResource->fromArray($options['overrides']);
+        }
+        $newResource->set('id',0);
 
         /* make sure children get assigned to new parent */
         $newResource->set('parent',isset($options['parent']) ? $options['parent'] : $this->get('parent'));
@@ -645,21 +770,14 @@ class modResource extends modAccessibleSimpleObject {
         $newResource->set('createdon',time());
         $newResource->set('editedby',0);
         $newResource->set('editedon',0);
-        $newResource->set('deleted',false);
-        $newResource->set('deletedon',0);
-        $newResource->set('deletedby',0);
-        /* make sure duplicate is not published */
-        $newResource->set('published',false);
-        $newResource->set('publishedon',0);
-        $newResource->set('publishedby',0);
 
         /* get new alias */
         $alias = $newResource->cleanAlias($newName);
-        if ($this->xpdo->getOption('friendly_alias_urls',null,false)) {
+        if ($this->xpdo->getOption('friendly_urls', $options, false)) {
             /* auto assign alias */
             $aliasPath = $newResource->getAliasPath($newName);
-            $duplicateId = $newResource->isDuplicateAlias($aliasPath);
-            if (!$this->xpdo->getOption('allow_duplicate_alias',null,false) && !empty($duplicateId)) {
+            $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
+            if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
                 $alias = '';
             }
         }
@@ -699,6 +817,7 @@ class modResource extends modAccessibleSimpleObject {
                         'duplicateChildren' => true,
                         'parent' => $newResource->get('id'),
                         'prefixDuplicate' => $prefixDuplicate,
+                        'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
                     ));
                 }
             }
@@ -738,5 +857,48 @@ class modResource extends modAccessibleSimpleObject {
         $resourceGroupResource->set('document',$this->get('id'));
         $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
         return $resourceGroupResource->save();
+    }
+
+    /**
+     * Removes a Resource from a Resource Group
+     *
+     * @access public
+     * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @return boolean True if successful.
+     */
+    public function leaveGroup($resourceGroupPk) {
+        if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
+            $c = array(
+                is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
+            );
+            $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
+            if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - No resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+                return false;
+            }
+        } else {
+            $resourceGroup =& $resourceGroupPk;
+        }
+        $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
+            'document' => $this->get('id'),
+            'document_group' => $resourceGroup->get('id'),
+        ));
+        if (!$resourceGroupResource) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - Resource '.$this->get('id').' is not in resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+            return false;
+        }
+        return $resourceGroupResource->remove();
+    }
+
+    /**
+     * Gets a sortable, limitable collection (and total count) of Resource Groups for the Resource.
+     *
+     * @param array $sort An array of sort columns in column => direction format.
+     * @param int $limit A limit of records to retrieve in the collection.
+     * @param int $offset A record offset for a limited collection.
+     * @return array An array containing the collection and total.
+     */
+    public function getGroupsList(array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+        return $this->xpdo->call('modResource', 'listGroups', array(&$this, $sort, $limit, $offset));
     }
 }

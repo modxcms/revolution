@@ -55,7 +55,7 @@ foreach ($setData['tabs'] as $tab) {
         (int)$tab['rank'],
         (boolean)$tab['visible'],
         $tab['label'],
-        '',
+        $tab['type'],
         'core',
     );
 }
@@ -94,5 +94,6 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('form_customization'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('security/forms/set.tpl');

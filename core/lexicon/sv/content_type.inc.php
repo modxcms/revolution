@@ -22,3 +22,4 @@ $_lang['content_type_remove'] = 'Ta bort innehållstyp';
 $_lang['content_type_remove_confirm'] = 'Är du säker på att du vill ta bort den här innehållstypen?';
 $_lang['content_types'] = 'Innehållstyper';
 $_lang['file_extensions'] = 'Filändelser';
+$_lang['file_extensions_desc'] = 'Detta är de angivna filändelserna för denna innehållstyp.';

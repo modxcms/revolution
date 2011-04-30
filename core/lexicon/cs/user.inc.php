@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-04-04
  */
 $_lang['active'] = 'Aktivní';
 $_lang['address'] = 'Adresa';
@@ -23,7 +23,7 @@ $_lang['login_options'] = 'Možnosti přihlašení';
 $_lang['minimum_role'] = 'Minimální role';
 $_lang['password'] = 'Heslo';
 $_lang['password_confirm'] = 'Potvrdit heslo';
-$_lang['password_gen_gen'] = 'Nechat MODx vygenerovat heslo.';
+$_lang['password_gen_gen'] = 'Nechat MODX vygenerovat heslo.';
 $_lang['password_gen_method'] = 'Metoda nového hesla';
 $_lang['password_gen_specify'] = 'Zadat své heslo:';
 $_lang['password_method'] = 'Metody zadání nového hesla';
@@ -57,12 +57,17 @@ $_lang['ugrg_grid_title'] = 'Uživatelská skupina přístupu do zdrojové skupi
 $_lang['ugrg_mutate'] = 'Uživatelská skupina přístupu do zdrojové skupiny';
 $_lang['ugrg_remove'] = 'Odstranit uživatelskou skupinu přístupu do zdrojové skupiny';
 $_lang['user'] = 'Uživatel';
+$_lang['user_active_desc'] = 'Příznak zda je či není tento uživatel aktivní. Není-li aktivní není mu povoleno příhlášení do žádného kontextu ani správce obsahu.';
 $_lang['user_add_group'] = 'Přiřadit uživatele do uživatelské skupiny';
 $_lang['user_already_in_use'] = 'Uživatelské jméno je již používáno!';
 $_lang['user_block'] = 'Blokován';
-$_lang['user_blockedafter'] = 'Zablokován po';
+$_lang['user_block_desc'] = 'Je-li zaškrtnuto, uživateli je trvale zakázán přístup do správce obsahu.';
+$_lang['user_blockedafter'] = 'Zablokován od';
+$_lang['user_blockedafter_desc'] = 'Je-li toto datum nastaveno, uživateli bude od tohoto data znemožněn přístup do správce obsahu.';
 $_lang['user_blockeduntil'] = 'Zablokován do';
+$_lang['user_blockeduntil_desc'] = 'Je-li toto datum nastaveno, uživateli bude od tohoto data opět povolen přístup do správce obsahu.';
 $_lang['user_changeddata'] = 'Vaše data byla změněna. Přihlašte se prosím znovu.';
+$_lang['user_class_key_desc'] = 'Třída obsahu MODX pro tohoto uživatele. Toto nastavení ponechte nezměněné pokud si opravdu nejste jisti co děláte.';
 $_lang['user_created_password_message'] = 'Uživatel byl vytvořen. Heslo je: [[+password]]';
 $_lang['user_confirm_remove'] = 'Opravdu chcete trvale odstranit tohoto uživatele?';
 $_lang['user_country'] = 'Země';
@@ -74,6 +79,7 @@ $_lang['user_err_access_permissions_save'] = 'Nastala chyba při ukládání už
 $_lang['user_err_ae_group'] = 'Uživatel je již členem této skupiny!';
 $_lang['user_err_already_exists'] = 'Uživatelské jméno je již použito!';
 $_lang['user_err_already_exists_email'] = 'E-mailová adresa je již použita!';
+$_lang['user_err_cannot_delete_last_admin'] = 'Nelze odstranit posledního uživatele ve skupině Administrator neboť by nadále nebylo možné se přihlásit do správce obsahu.';
 $_lang['user_err_cannot_delete_self'] = 'Nemůžete odstranit sám sebe!';
 $_lang['user_err_nf'] = 'Uživatel nenalezen.';
 $_lang['user_err_not_specified'] = 'Nespecifikovaný uživatel!';
@@ -102,6 +108,7 @@ $_lang['user_err_remove'] = 'Nastala chyba při pokusu odstranit uživatele.';
 $_lang['user_err_resource_subdirectory'] = 'Složka, která byla specifikována, neobsahuje %s adresáře.';
 $_lang['user_err_save'] = 'Nastala chyba při ukládání uživatele.';
 $_lang['user_failedlogincount'] = 'Nezdařená přihlášení';
+$_lang['user_failedlogincount_desc'] = 'Počet, kolikrát se tomuto uživateli nepodařilo přihlásit vložením nesprávného hesla.';
 $_lang['user_fax'] = 'Fax';
 $_lang['user_female'] = 'Žena';
 $_lang['user_full_name'] = 'Celé jméno';
@@ -143,6 +150,7 @@ $_lang['user_grid_empty'] = 'Žádný uživatel';
 $_lang['user_grid_paginate'] = 'Zobrazení uživatelé {0} - {1} z {2}';
 $_lang['user_is_blocked'] = 'Tento uživatel byl zablokován!';
 $_lang['user_logincount'] = 'Počet přihlášení';
+$_lang['user_logincount_desc'] = 'Celkový počet přihlášení tohoto uživatele.';
 $_lang['user_male'] = 'Můž';
 $_lang['user_management_msg'] = 'V této části můžete zvolit uživatele, kterého chcete upravit.';
 $_lang['user_mobile'] = 'Mobilní telefon';
@@ -152,6 +160,7 @@ $_lang['user_phone'] = 'Telefonní číslo';
 $_lang['user_photo'] = 'Fotografie';
 $_lang['user_photo_message'] = 'Zadejte adresu obrázku pro tohoto uživatele nebo použijte tlačítko pro vložení obrázku nebo pro nahrání na server.';
 $_lang['user_prevlogin'] = 'Poslední přihlášení';
+$_lang['user_prevlogin_desc'] = 'Datum a čas, kdy byl tento uživatel naposled přihlášen do správce obsahu.';
 $_lang['user_profile_err_nf'] = 'VÁŽNÁ CHYBA: Uživatelský profil nebyl nalezen.';
 $_lang['user_profile_err_save'] = 'Nastala chyba při ukládání uživatelských atributů.';
 $_lang['user_remove'] = 'Odstranit uživatele';
@@ -170,6 +179,7 @@ $_lang['user_update'] = 'Upravit uživatele';
 $_lang['user_updated_password_message'] = 'Uživatel byl aktualizován. Heslo je: [[+password]]';
 $_lang['user_upload_message'] = ' Pokud chcete tomuto uživateli zamezit nahrávání jakéhokoliv typu souborů do této kategorie, ujistěte se, že nemáte zaškrtnuté políčko "Použít nastavení systémové konfigurace".';
 $_lang['user_use_config'] = 'Použít nastavení systémové konfigurace';
+$_lang['user_username_desc'] = 'Unikátní identifikátor tohoto uživatele a přihlašovací jméno tohoto uživatele.';
 $_lang['user_website'] = 'Webová stránka';
 $_lang['user_zip'] = 'PSČ';
 $_lang['username'] = 'Uživatelské jméno';

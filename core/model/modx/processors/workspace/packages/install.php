@@ -26,8 +26,7 @@ $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_install_info_found'));
 $installed = $package->install($scriptProperties);
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh();
 
 if (!$installed) {
     $msg = $modx->lexicon('package_err_install',array('signature' => $package->get('signature')));

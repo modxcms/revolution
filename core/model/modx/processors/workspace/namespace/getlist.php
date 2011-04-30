@@ -21,32 +21,31 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$search = $modx->getOption('search',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modNamespace');
-if (!empty($scriptProperties['name'])) {
+if (!empty($search)) {
     $c->where(array(
-        'name:LIKE' => '%'.$scriptProperties['name'].'%',
+        'name:LIKE' => '%'.$search.'%',
+        'OR:path:LIKE' => '%'.$search.'%',
     ));
 }
+$count = $modx->getCount('modNamespace',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 
 /* get namespaces */
 $namespaces = $modx->getCollection('modNamespace',$c);
-$count = $modx->getCount('modNamespace');
 
 /* loop through */
 $list = array();
 foreach ($namespaces as $namespace) {
-    $namespaceArray = $namespace->toArray('',true,true);
-    $namespaceArray['menu'] = array(
-        array(
-            'text' => $modx->lexicon('namespace_remove'),
-            'handler' => 'this.remove.createDelegate(this,["namespace_remove_confirm"])',
-        )
-    );
+    $namespaceArray = $namespace->toArray();
+    $namespaceArray['perm'] = array();
+    $namespaceArray['perm'][] = 'pedit';
+    $namespaceArray['perm'][] = 'premove';
     $list[] = $namespaceArray;
 }
 

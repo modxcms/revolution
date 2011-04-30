@@ -34,34 +34,36 @@ if (!empty($scriptProperties['category'])) {
     if (!$category->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
-$name_exists = $modx->getObject('modTemplateVar',array('name' => $scriptProperties['name']));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name',array('name' => $scriptProperties['name'])));
+$nameExists = $modx->getObject('modTemplateVar',array('name' => $scriptProperties['name']));
+if (!empty($nameExists)) {
+    $modx->error->addField('name',$modx->lexicon('tv_err_exists_name',array('name' => $scriptProperties['name'])));
+}
 
-if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('untitled_tv');
-
-/* get rid of invalid chars */
-//$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-//    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-//$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
-
+/* prevent empty fields */
+if (empty($scriptProperties['name'])) { $scriptProperties['name'] = $modx->lexicon('untitled_tv'); }
 if (empty($scriptProperties['caption'])) { $scriptProperties['caption'] = $scriptProperties['name']; }
 
-if ($modx->error->hasError()) return $modx->error->failure();
-
-/* extract widget properties */
-$display_params = '';
+$output_properties = array();
 foreach ($scriptProperties as $key => $value) {
     $res = strstr($key,'prop_');
     if ($res !== false) {
-        $key = str_replace('prop_','',$key);
-        $display_params .= '&'.$key.'='.$value;
+        $output_properties[str_replace('prop_','',$key)] = $value;
+    }
+}
+
+$input_properties = array();
+foreach ($scriptProperties as $key => $value) {
+    $res = strstr($key,'inopt_');
+    if ($res !== false) {
+        $input_properties[str_replace('inopt_','',$key)] = $value;
     }
 }
 
 $tv = $modx->newObject('modTemplateVar');
 $tv->fromArray($scriptProperties);
 $tv->set('elements',$scriptProperties['els']);
-$tv->set('display_params',$display_params);
+$tv->set('input_properties',$input_properties);
+$tv->set('output_properties',$output_properties);
 $tv->set('rank',!empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
 $tv->set('locked',!empty($scriptProperties['locked']));
 $properties = null;
@@ -70,6 +72,21 @@ if (isset($scriptProperties['propdata'])) {
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $tv->setProperties($properties);
+
+/* validate TV */
+if (!$tv->validate()) {
+    $validator = $tv->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
+
+/* if error, return */
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
 
 /* invoke OnBeforeTVFormSave event */
 $OnBeforeTVFormSave = $modx->invokeEvent('OnBeforeTVFormSave',array(
@@ -91,19 +108,7 @@ if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
 
-/* validate TV */
-if (!$tv->validate()) {
-    $validator = $tv->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
-}
-
+/* save TV */
 if ($tv->save() == false) {
     return $modx->error->failure($modx->lexicon('tv_err_save'));
 }
@@ -181,9 +186,7 @@ $modx->logManagerAction('tv_create','modTemplateVar',$tv->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
-
 
 return $modx->error->success('',$tv->get(array('id')));

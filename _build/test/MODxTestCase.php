@@ -1,8 +1,8 @@
 <?php
 /**
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -21,9 +21,8 @@
  *
  * @package modx-test
  */
-require_once 'PHPUnit/Framework.php';
 /**
- * Extends the basic PHPUnit TestCase class to provide MODx specific methods
+ * Extends the basic PHPUnit TestCase class to provide MODX specific methods
  *
  * @package modx-test
  */
@@ -32,7 +31,7 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
     protected $modx = null;
 
     /**
-     * Ensure all tests have a reference to the MODx object
+     * Ensure all tests have a reference to the MODX object
      */
     public function setUp() {
         $this->modx =& MODxTestHarness::_getConnection();
@@ -46,14 +45,24 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * Check a MODx return result for a success flag
+     * Check a MODX return result for a success flag
      *
      * @param array $result The result response
      */
     public function checkForSuccess(&$result) {
-        if ($result === true) return true;
-        if (!is_array($result)) $result = $this->modx->fromJSON($result);
-        $success = !empty($result['success']) && $result['success'] = true;
-        return $success;
+        if (empty($result) || !($result instanceof modProcessorResponse)) return false;
+        return !$result->isError();
+    }
+
+    /**
+     * Check a MODX processor response and return results
+     *  
+     * @param string $result The response
+     * @return array
+     */
+    public function getResults(&$result) {
+        $response = ltrim(rtrim($result->response,')'),'(');
+        $response = $this->modx->fromJSON($response);
+        return !empty($response['results']) ? $response['results'] : array();
     }
 }

@@ -2,13 +2,15 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic topmenu
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
-$_lang['about'] = 'Über MODx';
-$_lang['about_desc'] = 'Mehr Informationen über MODx Revolution.';
+$_lang['about'] = 'Über MODX';
+$_lang['about_desc'] = 'Mehr Informationen über MODX Revolution.';
 $_lang['access_permissions'] = 'Zugriffsrechte';
 $_lang['access_permissions_desc'] = 'Verwalten Sie die Benutzergruppen-Zugriffsmöglichkeiten auf Ressourcen und Kontexte.';
 $_lang['api_docs'] = 'API-Dokumentation';
@@ -21,7 +23,7 @@ $_lang['contexts_desc'] = 'Verwalten Sie Site-Kontexte und ihre Einstellungen.';
 $_lang['edit_menu'] = 'Aktionen';
 $_lang['edit_menu_desc'] = 'Aktionen und die Struktur des Hauptmenüs verwalten.';
 $_lang['eventlog_viewer'] = 'Fehlerprotokoll';
-$_lang['eventlog_viewer_desc'] = 'MODx-Fehlerprotokoll anzeigen.';
+$_lang['eventlog_viewer_desc'] = 'MODX-Fehlerprotokoll anzeigen.';
 $_lang['export_site'] = 'Statisches HTML exportieren';
 $_lang['export_site_desc'] = 'Exportieren Sie die aktuelle Site als statische HTML-Seiten.';
 $_lang['flush_access'] = 'Berechtigungen neu laden';
@@ -35,16 +37,16 @@ $_lang['flush_sessions_not_supported'] = 'Das Zurücksetzen von Benutzer-Session
 $_lang['form_customization'] = 'Formular-Anpassung';
 $_lang['form_customization_desc'] = 'Passen Sie die Formulare des Managers durch auf Berechtigungen basierende Regeln an.';
 $_lang['forums'] = 'Foren';
-$_lang['forums_desc'] = 'Besuchen Sie die offiziellen MODx-Foren.';
+$_lang['forums_desc'] = 'Besuchen Sie die offiziellen MODX-Foren.';
 $_lang['import_resources'] = 'Resourcen importieren';
 $_lang['import_resources_desc'] = 'Importieren Sie statische Ressourcen in die Site.';
 $_lang['import_site'] = 'HTML importieren';
 $_lang['import_site_desc'] = 'Importieren Sie HTML-Dateien in die Site.';
 $_lang['jira'] = 'Bugtracker';
-$_lang['jira_desc'] = 'Starten Sie den MODx-Bugtracker, um Bugs zu melden und deren Bearbeitung zu verfolgen.';
+$_lang['jira_desc'] = 'Starten Sie den MODX-Bugtracker, um Bugs zu melden und deren Bearbeitung zu verfolgen.';
 $_lang['lexicon_management'] = 'Lexikon-Verwaltung';
-$_lang['lexicon_management_desc'] = 'Bearbeiten Sie jede beliebige Zeichenkette des MODx-Managers.';
-$_lang['logout_desc'] = 'Loggen Sie sich aus dem MODx-Manager aus.';
+$_lang['lexicon_management_desc'] = 'Bearbeiten Sie jede beliebige Zeichenkette des MODX-Managers.';
+$_lang['logout_desc'] = 'Loggen Sie sich aus dem MODX-Manager aus.';
 $_lang['manage_workspaces'] = 'Package-Verwaltung';
 $_lang['manage_workspaces_desc'] = 'Laden Sie Komponenten von Drittanbietern herunter, fügen Sie Anbieter hinzu und installieren Sie Packages.';
 $_lang['messages'] = 'Mitteilungen';
@@ -97,6 +99,6 @@ $_lang['user_group_management_desc'] = 'Benutzergruppen, Rollen und Zugriffsbere
 $_lang['view_logging'] = 'Manager-Aktivitäten';
 $_lang['view_logging_desc'] = 'Die letzten Manager-Aktivitäten anzeigen.';
 $_lang['view_sysinfo'] = 'Systeminformationen';
-$_lang['view_sysinfo_desc'] = 'Server-Informationen wie phpinfo, mysql db info etc. anzeigen.';
+$_lang['view_sysinfo_desc'] = 'Server-Informationen wie phpinfo, Datenbank-Informationen etc. anzeigen.';
 $_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'Starten Sie das MODx-Confluence-Wiki, in dem die Dokumentation zu MODx Revolution gespeichert ist.';
+$_lang['wiki_desc'] = 'Starten Sie das MODX-Confluence-Wiki, in dem die Dokumentation zu MODX Revolution gespeichert ist.';

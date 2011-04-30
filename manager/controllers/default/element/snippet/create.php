@@ -54,5 +54,6 @@ $onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
 if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
 $modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('snippet_new'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/snippet/create.tpl');

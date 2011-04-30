@@ -29,6 +29,19 @@ if ($locked !== true) {
     }
 }
 
+/* get the targeted working context */
+$workingContext = $modx->getContext($resource->get('context_key'));
+
+/* friendly url duplicate alias checks */
+if ($workingContext->getOption('friendly_urls', false)) {
+    $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $resource->get('context_key');
+    $aliasPath = $resource->getAliasPath($resource->get('alias'));
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $duplicateContext);
+    if (!empty($duplicateId)) {
+        return $modx->error->failure($modx->lexicon('duplicate_uri_found', array('id' => $duplicateId, 'uri' => $aliasPath)));
+    }
+}
+
 /* publish resource */
 $resource->set('published',true);
 $resource->set('pub_date',false);
@@ -50,11 +63,15 @@ $modx->invokeEvent('OnDocPublished',array(
     'resource' => &$resource,
 ));
 
-/* empty the cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
-
 /* log manager action */
 $modx->logManagerAction('publish_resource','modResource',$resource->get('id'));
+
+/* empty cache */
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'auto_publish' => array('contexts' => array($resource->get('context_key'))),
+    'context_settings' => array('contexts' => array($resource->get('context_key'))),
+    'resource' => array('contexts' => array($resource->get('context_key'))),
+));
 
 return $modx->error->success('',$resource->get(array('id', 'pub_date', 'unpub_date', 'editedby', 'editedon', 'publishedby', 'publishedon')));

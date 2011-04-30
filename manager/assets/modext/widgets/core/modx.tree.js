@@ -79,24 +79,22 @@ MODx.tree.Tree = function(config) {
     });
     if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
         Ext.Ajax.request({
-            url: config.url
+            url: config.remoteToolbarUrl || config.url
             ,params: {
-                action: 'getToolbar'
+                action: config.remoteToolbarAction || 'getToolbar'
             }
-            ,scope: this
             ,success: function(r) {
                 r = Ext.decode(r.responseText);
-                if (r.success) {
-                    var itms = this._formatToolbar(r.object);
-                    var tb = this.getTopToolbar();
-                    if (tb) {
-                        for (var i=0;i<itms.length;i++) {
-                            tb.add(itms[i]);
-                        }
-                        tb.doLayout();
+                var itms = this._formatToolbar(r.object);
+                var tb = this.getTopToolbar();
+                if (tb) {
+                    for (var i=0;i<itms.length;i++) {
+                        tb.add(itms[i]);
                     }
+                    tb.doLayout();
                 }
             }
+            ,scope:this
         });
         config.tbar = {bodyStyle: 'padding: 0'};
     } else {
@@ -138,6 +136,19 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * Sets up the tree and initializes it with the specified options.
      */
     ,setup: function(config) {
+        config.listeners = config.listeners || {};
+        config.listeners.render = {fn:function() {
+            this.root.expand();
+            var tl = this.getLoader();
+            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')})});
+            tl.fullMask.removeMask=false;
+            tl.on({
+                'load' : function(){this.fullMask.hide();}
+                ,'loadexception' : function(){this.fullMask.hide();}
+                ,'beforeload' : function(){this.fullMask.show();}
+                ,scope : tl
+            });
+        },scope:this};
         MODx.tree.Tree.superclass.constructor.call(this,config);
         this.addEvents('afterSort','beforeSort');
         this.cm = new Ext.menu.Menu(config.menuConfig);
@@ -153,19 +164,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('load',this._initExpand,this,{single: true});
         this.on('expandnode',this._saveState,this);
         this.on('collapsenode',this._saveState,this);
-        
-        this.on('render',function() {
-            this.root.expand();
-            var tl = this.getLoader();
-            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')})});
-            tl.fullMask.removeMask=false;
-            tl.on({
-                'load' : function(){this.fullMask.hide();}
-                ,'loadexception' : function(){this.fullMask.hide();}
-                ,'beforeload' : function(){this.fullMask.show();}
-                ,scope : tl
-            });
-        },this);
     }
 	
     /**
@@ -279,11 +277,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,remove: function(text,substr,split) {
         var node = this.cm.activeNode;
         var id = this._extractId(node.id,substr,split);
-        var p = {action: 'remove'};
+        var p = {action: this.config.removeAction || 'remove'};
         var pk = this.config.primaryKey || 'id';
         p[pk] = id;
         MODx.msg.confirm({
-            title: _('warning')
+            title: this.config.removeTitle || _('warning')
             ,text: _(text)
             ,url: this.config.url
             ,params: p
@@ -385,6 +383,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
             location.href = n.attributes.page;
+        } else {
+            n.toggle();
         }
         return true;
     }
@@ -567,7 +567,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             }
             Ext.applyIf(a[i],{
                 scope: this
-                ,cls: 'x-btn-icon'
+                ,cls: this.config.toolbarItemCls || 'x-btn-icon'
             });
         }
         return a;

@@ -25,32 +25,9 @@ $workspace = $modx->getOption('workspace',$scriptProperties,1);
 $dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %p');
 
 /* get packages */
-$c = $modx->newQuery('transport.modTransportPackage');
-$c->leftJoin('transport.modTransportProvider','Provider');
-$c->where(array(
-    'workspace' => $workspace,
-));
-$c->where(array(
-    '(SELECT
-        `signature`
-      FROM '.$modx->getTableName('modTransportPackage').' AS `latestPackage`
-      WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
-      ORDER BY
-         `latestPackage`.`version_major` DESC,
-         `latestPackage`.`version_minor` DESC,
-         `latestPackage`.`version_patch` DESC,
-         IF(`release` = "" OR `release` = "ga" OR `release` = "pl","z",`release`) DESC,
-         `latestPackage`.`release_index` DESC
-      LIMIT 1) = `modTransportPackage`.`signature`',
-));
-$count = $modx->getCount('modTransportPackage',$c);
-$c->select(array(
-    'modTransportPackage.*',
-));
-$c->select('`Provider`.`name` AS `provider_name`');
-$c->sortby('modTransportPackage.signature', 'ASC');
-if ($isLimit) $c->limit($limit,$start);
-$packages = $modx->getCollection('transport.modTransportPackage',$c);
+$pkgList = $modx->call('transport.modTransportPackage', 'listPackages', array(&$modx, $workspace, $isLimit ? $limit : 0, $start));
+$packages = $pkgList['collection'];
+$count = $pkgList['total'];
 
 $updatesCacheExpire = $modx->getOption('auto_check_pkg_updates_cache_expire',$scriptProperties,5) * 60;
 
@@ -60,12 +37,12 @@ $providerCache = array();
 
 /* now create output array */
 $list = array();
-foreach ($packages as $key => $package) {
+foreach ($packages as $package) {
     if ($package->get('installed') == '0000-00-00 00:00:00') $package->set('installed',null);
 
     $packageArray = $package->toArray();
 
-    $signatureArray = explode('-',$key);
+    $signatureArray = explode('-',$package->get('signature'));
     $packageArray['name'] = $signatureArray[0];
     $packageArray['version'] = $signatureArray[1];
     if (isset($signatureArray[2])) {
@@ -116,8 +93,11 @@ foreach ($packages as $key => $package) {
     $updates = array('count' => 0);
     if ($package->get('provider') > 0 && $modx->getOption('auto_check_pkg_updates',null,false)) {
         $updateCacheKey = 'mgr/providers/updates/'.$package->get('provider').'/'.$package->get('signature');
-
-        $updates = $modx->cacheManager->get($updateCacheKey);
+        $updateCacheOptions = array(
+            xPDO::OPT_CACHE_KEY => $modx->cacheManager->getOption('cache_packages_key', null, 'packages'),
+            xPDO::OPT_CACHE_HANDLER => $modx->cacheManager->getOption('cache_packages_handler', null, $modx->cacheManager->getOption(xPDO::OPT_CACHE_HANDLER)),
+        );
+        $updates = $modx->cacheManager->get($updateCacheKey, $updateCacheOptions);
         if (empty($updates)) {
             /* cache providers to speed up load time */
             if (!empty($providerCache[$package->get('provider')])) {
@@ -140,7 +120,7 @@ foreach ($packages as $key => $package) {
                     }
                 }
                 $updates = array('count' => count($updates));
-                $modx->cacheManager->set($updateCacheKey,$updates,$updatesCacheExpire);
+                $modx->cacheManager->set($updateCacheKey, $updates, $updatesCacheExpire, $updateCacheOptions);
             }
         }
     }

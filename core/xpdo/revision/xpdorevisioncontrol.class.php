@@ -227,7 +227,7 @@ class xPDORevisionControl {
         if (substr($patch, -1) == "\n")
             $patch= substr($patch, 0, strlen($patch) - 1);
 
-        $patch_array= split("\n", $patch);
+        $patch_array= explode("\n", $patch);
 
         for ($i= 0; $i < count($patch_array); $i++) {
             $patch_array[$i]= $patch_array[$i] . "\n";
@@ -254,8 +254,8 @@ class xPDORevisionControl {
             list ($full, $left, $action, $right)= $matches;
 
             /* Compute start and end of each side */
-            list ($left_start, $left_end)= split(",", $left);
-            list ($right_start, $right_end)= split(",", $right);
+            list ($left_start, $left_end)= explode(",", $left);
+            list ($right_start, $right_end)= explode(",", $right);
             if ($left_end == "") {
                 $left_end= $left_start;
             }
@@ -348,7 +348,7 @@ class xPDORevisionControl {
     }
 
     function _split($text) {
-        $array= split("\n", $text);
+        $array= explode("\n", $text);
         for ($i= 0; $i < count($array); $i++) {
             $array[$i]= $array[$i] . "\n";
         }

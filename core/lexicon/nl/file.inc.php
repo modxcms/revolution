@@ -6,10 +6,9 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author MJ Hofland, veiliggesteld.nl
+ * @author Bert Oost <bertoost85@gmail.com>
  */
 $_lang['file_confirm_remove'] = 'Weet je zeker dat je dit bestand wilt verwijderen? Dit kan uw website potentieel breken!';
-$_lang['file_confirm_remove'] = 'Bent u zeker dat u dit bestand wilt verwijderen? Dit kan uw website potentieel breken.';
 $_lang['file_deleted'] = 'Succes!';
 $_lang['file_delete_file'] = 'Verwijder Bestand';
 $_lang['file_delete_folder'] = 'Verwijder Map';
@@ -18,6 +17,7 @@ $_lang['file_download_unzip'] = 'Bestand Uitpakken';
 $_lang['file_edit'] = 'Bestand Bewerken';
 $_lang['file_err_chmod'] = 'Er is een onbekende fout opgetreden bij een poging tot chmod van het doel.';
 $_lang['file_err_chmod_ns'] = 'Specificeer chmod modus a.u.b.';
+$_lang['file_err_ext_not_allowed'] = 'Bestandsextentie `[[+ext]]` is niet toegestaan.';
 $_lang['file_err_filter'] = 'Geen bestanden die voldoen aan deze Filter.';
 $_lang['file_err_invalid'] = 'Het bestand is geen regulier bestand en kan niet worden verwijderd.';
 $_lang['file_err_nf'] = 'Bestand bestaat niet!';
@@ -25,17 +25,16 @@ $_lang['file_err_ns'] = 'Geef a.u.b een geldig bestand op.';
 $_lang['file_err_open'] = 'Kan dit bestand niet openen: ';
 $_lang['file_err_perms_rename'] = 'De webserver heeft niet de nodige rechten om het bestand te hernoemen.';
 $_lang['file_err_perms_remove'] = 'De webserver heeft niet de nodige rechten om het bestand te verwijderen.';
-$_lang['file_err_rename'] = 'MODx kan het bestand niet hernoemen. Controleer de rechten.';
-$_lang['file_err_remove'] = 'MODx kan het bestand niet verwijderen. Controleer de rechten.';
+$_lang['file_err_rename'] = 'MODX kan het bestand niet hernoemen. Controleer de rechten.';
+$_lang['file_err_remove'] = 'MODX kan het bestand niet verwijderen. Controleer de rechten.';
 $_lang['file_err_save'] = 'Kon het bestand niet opslaan, zorg ervoor dat de doel map beschrijfbaar is!';
-$_lang['file_err_save'] = 'Kon het bestand niet opslaan, zorg ervoor dat de doel map beschrijfbaar is!';
+$_lang['file_err_too_large'] = 'Geupload bestand van [[+size]] bytes is te groot. Controleer dat jouw bestanden kleiner zijn dan [[+allowed]] bytes.';
 $_lang['file_err_unzip'] = 'Uitpakken Mislukt!';
 $_lang['file_err_unzip_invalid_path'] = 'Ongeldige Uitpak Locatie.';
 $_lang['file_err_unzip_missing_lib'] = ' Zip library niet gevonden (php_zip.dll / zip.so)';
 $_lang['file_err_upload'] = 'Er is een fout opgetreden bij het uploaden.';
 $_lang['file_exists_hk'] = 'Bestand <b>{0}</b> bestaat al';
 $_lang['file_extensions'] = 'Bestands Extensie';
-$_lang['file_extensions_desc'] = 'Dit zijn de toegestane bestand extensies voor content type.';
 $_lang['file_folder_enter_new'] = 'Typ de naam voor de nieuwe map';
 $_lang['file_folder_chmod'] = 'Chmod Map';
 $_lang['file_folder_create'] = 'Maak Map';
@@ -43,7 +42,7 @@ $_lang['file_folder_create_here'] = 'Maak Map Hier';
 $_lang['file_folder_created'] = 'Map met succes aangemaakt!';
 $_lang['file_folder_deleted'] = 'Map is met succes verwijderd!';
 $_lang['file_folder_err_ae'] = 'Er bestaat al een map met die naam op de aangegeven locatie.';
-$_lang['file_folder_err_chmod'] = 'Niet in staat om de rechten te wijzigen. Je zal dit buiten MODx om moeten regelen.';
+$_lang['file_folder_err_chmod'] = 'Niet in staat om de rechten te wijzigen. Je zal dit buiten MODX om moeten regelen.';
 $_lang['file_folder_err_create'] = 'Er is een onbekende fout opgetreden bij een poging tot map aanmaken.';
 $_lang['file_folder_err_invalid'] = 'De opgegeven map is geen map.';
 $_lang['file_folder_err_invalid_path'] = 'Ongeldig pad om een nieuwe map in te maken.';
@@ -93,7 +92,7 @@ $_lang['upf_close'] = 'Sluiten';
 $_lang['upf_close_desc'] = 'Sluit Venster.';
 $_lang['upf_err_failed'] = 'Server is niet beschikbaar of er is een interne server fout opgetreden.';
 $_lang['upf_err_filetype'] = 'Geselecteerde bestandsextensie is niet toegestaan.<br/>Selecteer bestanden met de volgende extensies: {1}';
-$_lang['upf_error'] = 'Error';
+$_lang['upf_error'] = 'Fout';
 $_lang['upf_filename'] = 'Bestandsnaam';
 $_lang['upf_note'] = 'Notitie';
 $_lang['upf_progress_wait'] = 'Een moment geduld a.u.b...';
@@ -105,7 +104,7 @@ $_lang['upf_reset_desc'] = 'Reset wachtrij.';
 $_lang['upf_state'] = 'Staat';
 $_lang['upf_success'] = 'OK.';
 $_lang['upf_upload'] = 'Upload';
-$_lang['upf_upload_desc'] = 'Upload queued files to the server.';
+$_lang['upf_upload_desc'] = 'Upload wachtende bestanden naar de server.';
 $_lang['upf_upload_err'] = 'Upload fout.';
 $_lang['upf_uploading'] = 'Uploading...';
 $_lang['upf_uploading_desc'] = 'Uploading: {0} van {1} bestanden voltooid.';

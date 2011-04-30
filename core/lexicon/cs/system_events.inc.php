@@ -7,10 +7,10 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-06-01
+ * @updated 2011-03-30
  */
 $_lang['clear'] = 'Vymazat';
 $_lang['error_log'] = 'Chybové zprávy';
-$_lang['error_log_desc'] = 'Zde jsou chybové zprávy z MODx Revolution:';
+$_lang['error_log_desc'] = 'Chybové zprávy z MODX Revolution:';
 $_lang['system_events'] = 'Systémové události';
 $_lang['priority'] = 'Priorita';

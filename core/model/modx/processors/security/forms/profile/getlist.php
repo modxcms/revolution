@@ -15,38 +15,23 @@ if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx
 $modx->lexicon->load('formcustomization');
 
 /* setup default properties */
-$isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
-$limit = $modx->getOption('limit',$scriptProperties,10);
+$limit = $modx->getOption('limit',$scriptProperties,0);
 $sort = $modx->getOption('sort',$scriptProperties,'rank');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $search = $modx->getOption('search',$scriptProperties,'');
 
-/* query for rules */
-$c = $modx->newQuery('modFormCustomizationProfile');
-
-if (!empty($search)) {
-    $c->where(array(
+$criteria = array();
+if(!empty($search)) {
+    $criteria[] = array(
         'modFormCustomizationProfile.description:LIKE' => '%'.$search.'%',
         'OR:modFormCustomizationProfile.name:LIKE' => '%'.$search.'%',
-    ),null,2);
+    );
 }
-$count = $modx->getCount('modFormCustomizationProfile',$c);
-$c->select(array(
-    'modFormCustomizationProfile.*',
-));
-$c->select('
-    (SELECT GROUP_CONCAT(`UserGroup`.`name`) FROM '.$modx->getTableName('modUserGroup').' AS `UserGroup`
-        INNER JOIN '.$modx->getTableName('modFormCustomizationProfileUserGroup').' AS `fcpug`
-        ON `fcpug`.`usergroup` = `UserGroup`.`id`
-     WHERE `fcpug`.`profile` = `modFormCustomizationProfile`.`id`
-    ) AS `usergroups`
-');
 
-$c->sortby($sort,$dir);
-if ($limit) $c->limit($limit,$start);
-
-$rules = $modx->getCollection('modFormCustomizationProfile', $c);
+$profileResult = $modx->call('modFormCustomizationProfile', 'listProfiles', array(&$modx, $criteria, array($sort=> $dir), $limit, $start));
+$count = $profileResult['count'];
+$rules = $profileResult['collection'];
 
 /* iterate through rules */
 $data = array();

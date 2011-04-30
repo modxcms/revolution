@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -321,7 +321,7 @@ class modOutputFilter {
                         /* Returns input incremented by option (default: +1) */
                     	if (empty($m_val))
                             $m_val = 1;
-                    	$output = intval($output) + intval($m_val);
+                    	$output = (float)$output + (float)$m_val;
                     	break;
 
                     case 'subtract':
@@ -330,7 +330,7 @@ class modOutputFilter {
                         /* Returns input decremented by option (default: -1) */
                         if (empty($m_val))
                             $m_val = 1;
-                        $output = intval($output) - intval($m_val);
+                        $output = (float)$output - (float)$m_val;
                         break;
 
                     case 'multiply':
@@ -338,7 +338,7 @@ class modOutputFilter {
                         /* Returns input multiplied by option (default: *2) */
                         if (empty($m_val))
                             $m_val = 1;
-                        $output = intval($output) * intval($m_val);
+                        $output = (float)$output * (float)$m_val;
                         break;
 
                     case 'divide':
@@ -346,7 +346,7 @@ class modOutputFilter {
                         /* Returns input divided by option (default: /2) */
                         if (empty($m_val))
                             $m_val = 2;
-                        $output = intval($output) / intval($m_val);
+                        $output = (float)$output / (float)$m_val;
                         break;
 
                     case 'modulus':
@@ -354,7 +354,7 @@ class modOutputFilter {
                         /* Returns the option modulus on input (default: %2, returns 0 or 1) */
                         if (empty($m_val))
                             $m_val = 2;
-                        $output = intval($output) % intval($m_val);
+                        $output = (float)$output % (float)$m_val;
                         break;
 
                     case 'default':
@@ -492,15 +492,30 @@ class modOutputFilter {
                         $output= md5($output);
                         break;
                     case 'cdata':
-                        $output= "<![CDATA[ {$output} ]]>";
+                        if ($usemb) {
+                            $len = mb_strlen($output,$encoding);
+                            if (mb_strpos($output,'[',0,$encoding) === 0) { $output = ' '.$output; }
+                            if (mb_strpos($output,']',0,$encoding) === $len) { $output = $output.' '; }
+                        } else {
+                            $len = strlen($output);
+                            if (strpos($output,'[') === 0) { $output = ' '.$output; }
+                            if (strpos($output,']') === $len) { $output = $output.' '; }
+                        }
+                        $output= "<![CDATA[{$output}]]>";
                         break;
 
                     case 'userinfo':
                         /* Returns the requested user data (input: userid) */
                         if (!empty($output)) {
                             $key = (!empty($m_val)) ? $m_val : 'username';
-                            $user = $this->modx->getUserInfo($output);
-                            $output = $user ? $user[$key] : null;
+                            $userInfo= false;
+                            if ($user= $this->modx->getObjectGraph('modUser', '{"Profile":{}}', $output)) {
+                                $userInfo= $user->get(array ('username', 'password'));
+                                if ($user->getOne('Profile')) {
+                                    $userInfo= array_merge($userInfo, $user->Profile->toArray());
+                                }
+                            }
+                            $output = $userInfo && isset($userInfo[$key]) ? $userInfo[$key] : null;
                         }
                         break;
 

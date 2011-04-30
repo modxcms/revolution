@@ -239,7 +239,7 @@ class xPDOObject {
                 $xpdo->executedQueries= $xpdo->executedQueries + 1;
                 $errorInfo= $criteria->stmt->errorInfo();
                 $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error ' . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($errorInfo, true));
-                if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+                if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $xpdo->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
                     if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
                         $tstart= $xpdo->getMicroTime();
                         if (!$criteria->stmt->execute()) {
@@ -258,7 +258,7 @@ class xPDOObject {
         } else {
             $errorInfo = $xpdo->errorInfo();
             $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
-            if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+            if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $xpdo->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
                 if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
                     if (!$criteria->prepare()) {
                         $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
@@ -594,6 +594,7 @@ class xPDOObject {
      * @return xPDOObject
      */
     public function __construct(xPDO & $xpdo) {
+        $this->xpdo= & $xpdo;
         $this->container= $xpdo->config['dbname'];
         $this->_class= get_class($this);
         $pos= strrpos($this->_class, '_');
@@ -608,17 +609,9 @@ class xPDOObject {
         $this->_fieldMeta= $xpdo->getFieldMeta($this->_class);
         $this->_aggregates= $xpdo->getAggregates($this->_class);
         $this->_composites= $xpdo->getComposites($this->_class);
-        $this->_options[xPDO::OPT_CALLBACK_ON_REMOVE]= isset ($xpdo->config[xPDO::OPT_CALLBACK_ON_REMOVE]) && !empty($xpdo->config[xPDO::OPT_CALLBACK_ON_REMOVE]) ? $xpdo->config[xPDO::OPT_CALLBACK_ON_REMOVE] : null;
-        $this->_options[xPDO::OPT_CALLBACK_ON_SAVE]= isset ($xpdo->config[xPDO::OPT_CALLBACK_ON_SAVE]) && !empty($xpdo->config[xPDO::OPT_CALLBACK_ON_SAVE]) ? $xpdo->config[xPDO::OPT_CALLBACK_ON_SAVE] : null;
-        $this->_options[xPDO::OPT_HYDRATE_RELATED_OBJECTS]= isset ($xpdo->config[xPDO::OPT_HYDRATE_RELATED_OBJECTS]) && $xpdo->config[xPDO::OPT_HYDRATE_RELATED_OBJECTS];
-        $this->_options[xPDO::OPT_HYDRATE_ADHOC_FIELDS]= isset ($xpdo->config[xPDO::OPT_HYDRATE_ADHOC_FIELDS]) && $xpdo->config[xPDO::OPT_HYDRATE_ADHOC_FIELDS];
-        $this->_options[xPDO::OPT_HYDRATE_FIELDS]= isset ($xpdo->config[xPDO::OPT_HYDRATE_FIELDS]) && $xpdo->config[xPDO::OPT_HYDRATE_FIELDS];
-        $this->_options[xPDO::OPT_ON_SET_STRIPSLASHES]= isset ($xpdo->config[xPDO::OPT_ON_SET_STRIPSLASHES]) && $xpdo->config[xPDO::OPT_ON_SET_STRIPSLASHES];
-        $this->_options[xPDO::OPT_VALIDATE_ON_SAVE]= isset ($xpdo->config[xPDO::OPT_VALIDATE_ON_SAVE]) && $xpdo->config[xPDO::OPT_VALIDATE_ON_SAVE];
-        $this->_options[xPDO::OPT_VALIDATOR_CLASS]= isset ($xpdo->config[xPDO::OPT_VALIDATOR_CLASS]) ? $xpdo->config[xPDO::OPT_VALIDATOR_CLASS] : '';
         $classVars= array ();
         if ($relatedObjs= array_merge($this->_aggregates, $this->_composites)) {
-            if ($this->_options[xPDO::OPT_HYDRATE_RELATED_OBJECTS]) $classVars= get_object_vars($this);
+            if ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) $classVars= get_object_vars($this);
             foreach ($relatedObjs as $aAlias => $aMeta) {
                 if (!array_key_exists($aAlias, $this->_relatedObjects)) {
                     if ($aMeta['cardinality'] == 'many') {
@@ -628,14 +621,14 @@ class xPDOObject {
                         $this->_relatedObjects[$aAlias]= null;
                     }
                 }
-                if ($this->_options[xPDO::OPT_HYDRATE_RELATED_OBJECTS] && !array_key_exists($aAlias, $classVars)) {
+                if ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS) && !array_key_exists($aAlias, $classVars)) {
                     $this->$aAlias= & $this->_relatedObjects[$aAlias];
                     $classVars[$aAlias]= 1;
                 }
             }
         }
-        if ($this->_options[xPDO::OPT_HYDRATE_FIELDS]) {
-            if (!$this->_options[xPDO::OPT_HYDRATE_RELATED_OBJECTS]) $classVars= get_object_vars($this);
+        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
+            if (!$this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) $classVars= get_object_vars($this);
             foreach ($this->_fields as $fldKey => $fldVal) {
                 if (!array_key_exists($fldKey, $classVars)) {
                     $this->$fldKey= & $this->_fields[$fldKey];
@@ -643,21 +636,25 @@ class xPDOObject {
             }
         }
         $this->setDirty();
-        $this->xpdo= & $xpdo;
     }
 
     /**
      * Get an option value for this instance.
      *
-     * @param string $key The option key to retrieve a value from.
-     * @return mixed The value of the option or null if it is not set.
+     * @param string $key The option key to retrieve a value for.
+     * @param array|null $options An optional array to search for a value in first.
+     * @param mixed $default A default value to return if no value is found; null is the default.
+     * @return mixed The value of the option or the provided default if it is not set.
      */
-    public function getOption($key) {
-        $option= null;
-        if (isset($this->_options[$key])) {
-            $option= $this->_options[$key];
+    public function getOption($key, $options = null, $default = null) {
+        if (is_array($options) && array_key_exists($key, $options)) {
+            $value= $options[$key];
+        } elseif (array_key_exists($key, $this->_options)) {
+            $value= $this->_options[$key];
+        } else {
+            $value= $this->xpdo->getOption($key, null, $default);
         }
-        return $option;
+        return $value;
     }
 
     /**
@@ -699,8 +696,9 @@ class xPDOObject {
                 if ($callable && $callback) {
                     $set = $callback($k, $v, $this);
                 } else {
-                    if (is_string($v) && isset($this->_options[xPDO::OPT_ON_SET_STRIPSLASHES]) && (boolean) $this->_options[xPDO::OPT_ON_SET_STRIPSLASHES])
+                    if (is_string($v) && $this->getOption(xPDO::OPT_ON_SET_STRIPSLASHES)) {
                         $v= stripslashes($v);
+                    }
                     if ($oldValue !== $v) {
                         //type validation
                         $phptype= $this->_fieldMeta[$k]['phptype'];
@@ -719,7 +717,7 @@ class xPDOObject {
                                 case 'timestamp' :
                                 case 'datetime' :
                                     $ts= false;
-                                    if (strtolower($dbtype) == 'int' || strtolower($dbtype) == 'integer') {
+                                    if (preg_match('/int/i', $dbtype)) {
                                         if (strtolower($vType) == 'integer' || is_int($v) || $v == '0') {
                                             $ts= (integer) $v;
                                         } else {
@@ -748,7 +746,7 @@ class xPDOObject {
                                     }
                                     break;
                                 case 'date' :
-                                    if (strtolower($dbtype) == 'int' || strtolower($dbtype) == 'integer') {
+                                    if (preg_match('/int/i', $dbtype)) {
                                         if (strtolower($vType) == 'integer' || is_int($v) || $v == '0') {
                                             $ts= (integer) $v;
                                         } else {
@@ -813,7 +811,7 @@ class xPDOObject {
                         }
                     }
                 }
-            } elseif ($this->_options[xPDO::OPT_HYDRATE_ADHOC_FIELDS]) {
+            } elseif ($this->getOption(xPDO::OPT_HYDRATE_ADHOC_FIELDS)) {
                 $oldValue= isset($this->_fields[$k]) ? $this->_fields[$k] : null;
                 if ($callable) {
                     $set = $callback($k, $v, $this);
@@ -827,7 +825,7 @@ class xPDOObject {
             } else {
                 $set= false;
             }
-            if ($set && $this->_options[xPDO::OPT_HYDRATE_FIELDS] && !isset ($this->$k)) {
+            if ($set && $this->getOption(xPDO::OPT_HYDRATE_FIELDS) && !isset ($this->$k)) {
                 $this->$k= & $this->_fields[$k];
             }
         } else {
@@ -912,7 +910,7 @@ class xPDOObject {
                             break;
                         case 'timestamp' :
                         case 'datetime' :
-                            if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
+                            if (preg_match('/int/i', $dbType)) {
                                 $ts= intval($value);
                             } elseif (in_array($value, $this->xpdo->driver->_currentTimestamps)) {
                                 $ts= time();
@@ -937,7 +935,7 @@ class xPDOObject {
                             }
                             break;
                         case 'date' :
-                            if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
+                            if (preg_match('/int/i', $dbType)) {
                                 $ts= intval($value);
                             } elseif (in_array($value, $this->xpdo->driver->_currentDates)) {
                                 $ts= time();
@@ -1191,7 +1189,7 @@ class xPDOObject {
         if ($this->isNew()) {
             $this->setDirty();
         }
-        if ($this->getOption(xPDO::OPT_VALIDATE_ON_SAVE) == true) {
+        if ($this->getOption(xPDO::OPT_VALIDATE_ON_SAVE)) {
             if (!$this->validate()) {
                 return false;
             }
@@ -1233,7 +1231,7 @@ class xPDOObject {
                     $this->_fields[$_k]= strftime('%Y-%m-%d');
                     continue;
                 }
-                elseif ($this->_fieldMeta[$_k]['phptype'] == 'timestamp' && substr(strtolower($this->_fieldMeta[$_k]['dbtype']), 0, 3) == 'int') {
+                elseif ($this->_fieldMeta[$_k]['phptype'] == 'timestamp' && preg_match('/int/i', $this->_fieldMeta[$_k]['dbtype'])) {
                     $fieldType= PDO::PARAM_INT;
                 }
                 elseif (!in_array($this->_fieldMeta[$_k]['phptype'], array ('string','password','datetime','timestamp','date','time','array','json'))) {
@@ -1280,7 +1278,7 @@ class xPDOObject {
                         $where= $this->xpdo->escape($pkn) . ' = :' . $pkn;
                     }
                     if (!empty ($updateSql)) {
-                        $sql= "UPDATE {$this->_table} SET " . implode(',', $updateSql) . " WHERE {$where} LIMIT 1";
+                        $sql= "UPDATE {$this->_table} SET " . implode(',', $updateSql) . " WHERE {$where}";
                     }
                 }
             }
@@ -1293,7 +1291,7 @@ class xPDOObject {
                     if (!$result= $criteria->stmt->execute()) {
                         $errorInfo= $criteria->stmt->errorInfo();
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement:\n" . $criteria->toSQL() . "\n" . print_r($errorInfo, true));
-                        if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+                        if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $this->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
                             if ($this->xpdo->getManager() && $this->xpdo->manager->createObjectContainer($this->_class) === true) {
                                 if (!$result= $criteria->stmt->execute()) {
                                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement:\n{$sql}\n");
@@ -1583,7 +1581,7 @@ class xPDOObject {
                     }
                 }
             }
-            if ($fkclass && !empty ($this->_composites)) {
+            if (!$fkclass && !empty ($this->_composites)) {
                 foreach ($this->_composites as $compositeAlias => $composite) {
                     if ($composite['local'] === $k) {
                         $fkclass= $composite['class'];
@@ -1712,11 +1710,11 @@ class xPDOObject {
                         $this->set($key, $val);
                     }
                 }
-                elseif ($adhocValues || $this->_options[xPDO::OPT_HYDRATE_ADHOC_FIELDS]) {
+                elseif ($adhocValues || $this->getOption(xPDO::OPT_HYDRATE_ADHOC_FIELDS)) {
                     if ($rawValues) {
                         $this->_setRaw($key, $val);
                         if (!isset ($this->$key)) {
-                            if ($this->_options[xPDO::OPT_HYDRATE_RELATED_OBJECTS] && is_object($val) || $this->_options[xPDO::OPT_HYDRATE_FIELDS] && !is_object($val)) {
+                            if ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS) && is_object($val) || $this->getOption(xPDO::OPT_HYDRATE_FIELDS) && !is_object($val)) {
                                 $this->$key= & $this->_fields[$key];
                             }
                         }
@@ -1783,7 +1781,7 @@ class xPDOObject {
     public function getValidator() {
         if (!is_object($this->_validator)) {
             $validatorClass = $this->xpdo->loadClass('validation.xPDOValidator', XPDO_CORE_PATH, true, true);
-            if ($derivedClass = $this->getOption(xPDO::OPT_VALIDATOR_CLASS)) {
+            if ($derivedClass = $this->getOption(xPDO::OPT_VALIDATOR_CLASS, null, '')) {
                 if ($derivedClass = $this->xpdo->loadClass($derivedClass, '', false, true)) {
                     $validatorClass = $derivedClass;
                 }
@@ -1890,12 +1888,11 @@ class xPDOObject {
         } else {
             $fkMeta= $this->getFKDefinition($alias);
             if ($fkMeta) {
-                $relationCriteria = array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                 if ($criteria === null) {
-                    $criteria= $relationCriteria;
+                    $criteria= array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                 } else {
                     $criteria= $this->xpdo->newQuery($fkMeta['class'], $criteria);
-                    $criteria->andCondition($relationCriteria);
+                    $criteria->andCondition(array("{$criteria->getAlias()}.{$fkMeta['foreign']}" => $this->get($fkMeta['local'])));
                 }
                 if ($collection= $this->xpdo->getCollection($fkMeta['class'], $criteria, $cacheFlag)) {
                     $this->_relatedObjects[$alias]= array_merge($this->_relatedObjects[$alias], $collection);
@@ -2146,7 +2143,7 @@ class xPDOObject {
                 case 'date':
                 case 'datetime':
                 case 'timestamp':
-                    if (strtolower($dbtype) == 'int' || strtolower($dbtype) == 'integer') {
+                    if (preg_match('/int/i', $dbtype)) {
                         $this->_fields[$key] = (integer) $val;
                         $set = true;
                         break;

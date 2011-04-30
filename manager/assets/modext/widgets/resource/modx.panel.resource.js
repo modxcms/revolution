@@ -25,7 +25,6 @@ MODx.panel.Resource = function(config) {
             ,border: false
         }]
     };
-    delete rte;
     var it = [];
     it.push({
         title: _('createedit_document')
@@ -80,13 +79,13 @@ MODx.panel.Resource = function(config) {
                 ,labelWidth: 0
                 ,border: false
                 ,items: [{
-                    xtype: 'checkbox'
+                    xtype: 'xcheckbox'
                     ,boxLabel: _('resource_published')
                     ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
-                    ,checked: config.record.published
+                    ,checked: parseInt(config.record.published)
                 }]
             }]
         },{
@@ -169,6 +168,11 @@ MODx.panel.Resource = function(config) {
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
         },{
+            xtype: 'hidden'
+            ,name: 'parent-original'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-old-hidden'
+        },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
             ,description: '<b>[[*menutitle]]</b><br />'+_('resource_menutitle_help')
@@ -185,17 +189,16 @@ MODx.panel.Resource = function(config) {
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
             ,width: 60
-            ,value: config.record.menuindex || 0
+            ,value: parseInt(config.record.menuindex) || 0
             
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('resource_hide_from_menus')
             ,description: '<b>[[*hidemenu]]</b><br />'+_('resource_hide_from_menus_help')
             ,name: 'hidemenu'
             ,id: 'modx-resource-hidemenu'
             ,inputValue: 1
-            ,checked: false
-            ,value: config.record.hidemenu || 0
+            ,checked: parseInt(config.record.hidemenu) || false
             
         },{
             xtype: 'hidden'
@@ -212,6 +215,11 @@ MODx.panel.Resource = function(config) {
             ,id: 'hiddenContent'
             ,value: (config.record.content || config.record.ta) || ''
         },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
+        },{
             html: MODx.onDocFormRender, border: false
         }]
     });
@@ -221,22 +229,22 @@ MODx.panel.Resource = function(config) {
     
     var va = [];
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_folder')
         ,description: '<b>[[*isfolder]]</b><br />'+_('resource_folder_help')
         ,name: 'isfolder'
         ,id: 'modx-resource-isfolder'
         ,inputValue: 1
-        ,checked: config.record.isfolder || 0
+        ,checked: parseInt(config.record.isfolder) || 0
         
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_richtext')
         ,description: '<b>[[*richtext]]</b><br />'+_('resource_richtext_help')
         ,name: 'richtext'
         ,id: 'modx-resource-richtext'
         ,inputValue: 1
-        ,checked: config.record.richtext
+        ,checked: parseInt(config.record.richtext)
         
     },{
         xtype: 'xdatetime'
@@ -283,42 +291,40 @@ MODx.panel.Resource = function(config) {
         });
     }
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_searchable')
         ,description: '<b>[[*searchable]]</b><br />'+_('resource_searchable_help')
         ,name: 'searchable'
         ,id: 'modx-resource-searchable'
         ,inputValue: 1
-        ,checked: config.record.searchable
+        ,checked: parseInt(config.record.searchable)
         
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: '<b>[[*cacheable]]</b><br />'+_('resource_cacheable_help')
         ,name: 'cacheable'
         ,id: 'modx-resource-cacheable'
         ,inputValue: 1
-        ,checked: config.record.cacheable
+        ,checked: parseInt(config.record.cacheable)
         
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_syncsite')
         ,description: _('resource_syncsite_help')
         ,name: 'syncsite'
         ,id: 'modx-resource-syncsite'
         ,inputValue: 1
-        ,checked: true
-        ,value: config.record.syncsite || 1
+        ,checked: parseInt(config.record.syncsite) || true
         
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('deleted')
         ,description: '<b>[[*deleted]]</b>'
         ,name: 'deleted'
         ,id: 'modx-resource-deleted'
         ,inputValue: 1
-        ,checked: false
-        ,value: config.record.deleted || 0
+        ,checked: parseInt(config.record.deleted) || false
 
     },{
         xtype: 'modx-combo-content-type'
@@ -351,6 +357,26 @@ MODx.panel.Resource = function(config) {
         ,allowBlank: false
         ,value: config.record.class_key || 'modDocument'
         ,anchor: '70%'
+
+    },{
+        xtype: 'xcheckbox'
+        ,fieldLabel: _('resource_uri_override')
+        ,description: _('resource_uri_override_help')
+        ,name: 'uri_override'
+        ,value: 1
+        ,checked: parseInt(config.record.uri_override) ? true : false
+        ,id: 'modx-resource-uri-override'
+
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('resource_uri')
+        ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
+        ,name: 'uri'
+        ,id: 'modx-resource-uri'
+        ,maxLength: 255
+        ,anchor: '70%'
+        ,value: config.record.uri || ''
+        ,hidden: parseInt(config.record.uri_override) ? false : true
     });
     it.push({
         id: 'modx-page-settings'
@@ -368,15 +394,18 @@ MODx.panel.Resource = function(config) {
         }
         ,items: va
     });
-    
-    it.push({
-        xtype: 'modx-panel-resource-tv'
-        ,collapsed: false
-        ,resource: config.resource
-        ,class_key: config.record.class_key || 'modDocument'
-        ,template: config.record.template
-        ,anchor: '100%'
-    });
+
+    if (config.show_tvs) {
+        it.push({
+            xtype: 'modx-panel-resource-tv'
+            ,collapsed: false
+            ,resource: config.resource
+            ,class_key: config.record.class_key || 'modDocument'
+            ,template: config.record.template
+            ,anchor: '100%'
+            ,border: true
+        });
+    }
     if (config.access_permissions) {
         it.push({
             id: 'modx-resource-access-permissions'
@@ -433,6 +462,7 @@ MODx.panel.Resource = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
         }
     });
@@ -440,29 +470,34 @@ MODx.panel.Resource = function(config) {
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
+    var urio = Ext.getCmp('modx-resource-uri-override');
+    if (urio) { urio.on('check',this.freezeUri); }
+    this.addEvents('tv-reset');
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
-    rteLoaded: false
-    ,initialized: false
-    ,defaultClassKey: 'modResource'
+    initialized: false
+    ,defaultClassKey: 'modDocument'
+    ,classLexiconKey: 'document'
+    ,rteElements: 'ta'
+    ,rteLoaded: false
     ,setup: function() {
         if (!this.initialized) { 
             this.getForm().setValues(this.config.record);
-            if (Ext.isEmpty(this.config.record.parent_pagetitle)) {
-                this.getForm().findField('parent-cmb').setValue('');
-            } else {
-                this.getForm().findField('parent-cmb').setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
+            pcmb = this.getForm().findField('parent-cmb');
+            if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
+                pcmb.setValue('');
+            } else if (pcmb) {
+                pcmb.setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
             }
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
+                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_(this.classLexiconKey)+': '+this.config.record.pagetitle+'</h2>');
             }
-            this.defaultClassKey = this.config.record.class_key || 'modDocument';
+            this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
         }
-
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
             if (f && f.getValue() == 1 && !this.rteLoaded) {
-                MODx.on('ready',function() { MODx.loadRTE('ta'); });
+                MODx.loadRTE(this.rteElements);
                 this.rteLoaded = true;
             } else if (f && f.getValue() == 0 && this.rteLoaded) {
                 if (MODx.unloadRTE) {
@@ -473,24 +508,32 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         this.fireEvent('ready');
         this.initialized = true;
+
+        MODx.fireEvent('ready');
+        MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
+        if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
+        this.fireEvent('load');
     }
     
-    ,beforeSubmit: function(o) {        
+    ,beforeSubmit: function(o) {
         var ta = Ext.get('ta');
-        if (!ta) return false;
-        
-        var v = ta.dom.value;
-        
-        var hc = Ext.getCmp('hiddenContent');
-        if (hc) { hc.setValue(v); }
-
+        if (ta) {
+            var v = ta.dom.value;
+            var hc = Ext.getCmp('hiddenContent');
+            if (hc) { hc.setValue(v); }
+        }
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) {
             Ext.apply(o.form.baseParams,{
                 resource_groups: g.encodeModified()
             });
         }
-        this.cleanupEditor();
+        if (ta) {
+            this.cleanupEditor();
+        }
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').disable();
+        }
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
@@ -504,16 +547,37 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (t) {
             var ctx = Ext.getCmp('modx-resource-context-key').getValue();
             var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
+            var pao = Ext.getCmp('modx-resource-parent-old-hidden').getValue();
             var v = ctx+'_'+pa;
             var n = t.getNodeById(v);
-            n.leaf = false;
-            t.refreshNode(v,true);
+            if(pa !== pao) {
+                t.refresh();
+                Ext.getCmp('modx-resource-parent-old-hidden').setValue(pa);
+            } else {
+                n.leaf = false;
+                t.refreshNode(v,true);
+            }
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
         } else {
             this.getForm().setValues(o.result.object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
+        }
+    }
+    ,failure: function(o) {
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').enable();
+        }
+    }
+
+    ,freezeUri: function(cb) {
+        var uri = Ext.getCmp('modx-resource-uri');
+        if (!uri) { return false; }
+        if (cb.checked) {
+            uri.show();
+        } else {
+            uri.hide();
         }
     }
     
@@ -523,47 +587,19 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if(t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e == 'yes') {
-                    if (MODx.unloadTVRTE) {
-                        MODx.unloadTVRTE();
-                    }
-                    var tvpanel = Ext.getCmp('modx-panel-resource-tv');
-                    if(tvpanel && tvpanel.body) {
-                        this.tvum = tvpanel.body.getUpdater();
-                        this.tvum.update({
-                            url: 'index.php?a='+MODx.action['resource/tvs']
-                            ,params: {
-                                class_key: this.config.record.class_key
-                                ,resource: (this.config.resource ? this.config.resource : 0)
-                                ,template: t.getValue()
-                            }
-                            ,discardUrl: true
-                            ,scripts: true
-                            ,nocache: true
-                            ,callback: function(el) {
-                                tvpanel.fireEvent('load');
-                            }
-                            ,scope: this
-                        });
-                    }
-                    t.originalValue = t.getValue();
+                    var nt = t.getValue();
+                    t.setValue(this.config.record.template);
+                    MODx.activePage.submitForm({
+                        success: {fn:function(r) {
+                            location.href = '?a='+MODx.action['resource/update']+'&id='+r.result.object.id+'&template='+nt+'&activeSave=1';
+                        },scope:this}
+                    });
                 } else {
                     t.setValue(this.config.record.template);
                 }
             },this);
         }
     }
-    
-    ,changeEditor: function() {
-        this.cleanupEditor();
-        this.on('success',function(o) {
-            var id = o.result.object.id;
-            var w = Ext.getCmp('modx-resource-which-editor').getValue();
-            MODx.request.a = MODx.action['resource/update'];
-            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
-            location.href = u;
-        });
-        this.submit();
-    }    
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('ta');

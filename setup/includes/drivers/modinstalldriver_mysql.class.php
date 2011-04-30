@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -44,27 +44,78 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * MySQL syntax for default collation query
+     * MySQL process for getting the default collation
      * {@inheritDoc}
      */
     public function getCollation() {
-        return "SHOW SESSION VARIABLES LIKE 'collation_database'";
+        $collation = 'utf8_bin';
+        $stmt = $this->xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_database'");
+        if ($stmt && $stmt instanceof PDOStatement) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $collation = $row['Value'];
+            $stmt->closeCursor();
+        }
+        return $collation;
     }
 
     /**
-     * MySQL syntax for collation listing
+     * MySQL collation listing
      * {@inheritDoc}
      */
-    public function getCollations() {
-        return 'SHOW COLLATION';
+    public function getCollations($collation = '') {
+        $collations = null;
+        $stmt = $this->xpdo->query("SHOW COLLATION");
+        if ($stmt && $stmt instanceof PDOStatement) {
+            $collations = array();
+            if (empty($collation)) $collation = $this->getCollation();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $col = array();
+                $col['selected'] = ($row['Collation']==$collation ? ' selected="selected"' : '');
+                $col['value'] = $row['Collation'];
+                $col['name'] = $row['Collation'];
+                $collations[$row['Collation']] = $col;
+            }
+            ksort($collations);
+        }
+        return $collations;
     }
 
     /**
-     * MySQL syntax for charset listing
+     * Get the MySQL charset based on collation, or default.
      * {@inheritDoc}
      */
-    public function getCharsets() {
-        return 'SHOW CHARSET';
+    public function getCharset($collation = '') {
+        $charset = 'utf8';
+        if (empty($collation)) {
+            $collation = $this->getCollation();
+        }
+        $pos = strpos($collation, '_');
+        if ($pos > 0) {
+            $charset = substr($collation, 0, $pos);
+        }
+        return $charset;
+    }
+
+    /**
+     * Get charset listing for MySQL.
+     * {@inheritDoc}
+     */
+    public function getCharsets($charset = '') {
+        $charsets = null;
+        $stmt = $this->xpdo->query('SHOW CHARSET');
+        if ($stmt && $stmt instanceof PDOStatement) {
+            $charsets = array();
+            if (empty($charset)) $charset = $this->getCharset();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $col = array();
+                $col['selected'] = $row['Charset']==$charset ? ' selected="selected"' : '';
+                $col['value'] = $row['Charset'];
+                $col['name'] = $row['Charset'];
+                $charsets[$row['Charset']] = $col;
+            }
+            ksort($charsets);
+        }
+        return $charsets;
     }
 
     /**

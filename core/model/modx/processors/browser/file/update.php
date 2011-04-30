@@ -30,7 +30,11 @@ $modx->getService('fileHandler','modFileHandler', '', array('context' => $workin
 
 /* create modFile object */
 $root = $modx->fileHandler->getBasePath(false);
-$file = $modx->fileHandler->make($root.$filename);
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
+$fullPath = $root.ltrim($filename,'/');
+$file = $modx->fileHandler->make($fullPath);
 
 /* verify file exists */
 if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf').': '.$scriptProperties['file']);
@@ -38,15 +42,6 @@ if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf')
 /* write file */
 $file->setContent($scriptProperties['content']);
 $file->save();
-
-/* rename if necessary */
-$newPath= $scriptProperties['name'];
-
-if ($file->getPath() != $newPath) {
-    if (!$file->rename($newPath)) {
-        return $modx->error->failure($modx->lexicon('file_err_rename'));
-    }
-}
 
 $modx->logManagerAction('file_update','',$file->getPath());
 

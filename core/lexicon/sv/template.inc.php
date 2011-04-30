@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Tillgång';
+$_lang['filter_by_category'] = 'Filtrera efter kategori...';
 $_lang['rank'] = 'Rang';
 $_lang['template'] = 'Mall';
 $_lang['template_assignedtv_tab'] = 'Tilldelade mallvariabler';
@@ -16,7 +17,7 @@ $_lang['template_delete_confirm'] = 'Är du säker på att du vill ta bort denna
 $_lang['template_duplicate_confirm'] = 'Är du säker på att du vill duplicera denna mall?';
 $_lang['template_edit_tab'] = 'Redigera mall';
 $_lang['template_empty'] = '(tom)';
-$_lang['template_err_default_template'] = 'Denna mall är angiven som standardmall. Ange en ny standardmall i MODx inställningar innan du tar bort denna mall.<br />';
+$_lang['template_err_default_template'] = 'Denna mall är angiven som standardmall. Ange en ny standardmall i MODX inställningar innan du tar bort denna mall.<br />';
 $_lang['template_err_delete'] = 'Ett fel inträffade när mallen skulle tas bort.';
 $_lang['template_err_duplicate'] = 'Ett fel inträffade när mallen skulle dupliceras.';
 $_lang['template_err_exists_name'] = 'Det finns redan en mall med namnet "[[+name]]".';

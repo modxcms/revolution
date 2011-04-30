@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -31,7 +31,7 @@
  * Abstract class for error handling and validation for requests.
  *
  * @abstract Implement a derivative of this class for error handling and
- * validation of any kind of MODx request.
+ * validation of any kind of MODX request.
  * @package modx
  * @subpackage error
  */

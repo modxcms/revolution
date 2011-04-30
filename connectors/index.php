@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -27,15 +27,11 @@
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
-/* instantiate the modX class with the appropriate configuration */
-if (empty($options) || !is_array($options)) $options = array();
-$modx= new modX('', $options);
-
+$modx= new modX();
 /* set debugging/logging options */
-//$modx->setDebug(E_ALL & ~E_NOTICE);
+$modx->setDebug(E_ALL | E_STRICT);
 $modx->setLogLevel(modX::LOG_LEVEL_ERROR);
-//$modx->setLogTarget('FILE');
-
+$modx->setLogTarget('FILE');
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);

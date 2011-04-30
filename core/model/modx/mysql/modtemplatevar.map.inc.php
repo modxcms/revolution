@@ -19,9 +19,10 @@ $xpdo_meta_map['modTemplateVar']= array (
     'elements' => NULL,
     'rank' => 0,
     'display' => '',
-    'display_params' => NULL,
     'default_text' => NULL,
     'properties' => NULL,
+    'input_properties' => NULL,
+    'output_properties' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -107,17 +108,24 @@ $xpdo_meta_map['modTemplateVar']= array (
       'null' => false,
       'default' => '',
     ),
-    'display_params' => 
-    array (
-      'dbtype' => 'text',
-      'phptype' => 'string',
-    ),
     'default_text' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
     ),
     'properties' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'array',
+      'null' => true,
+    ),
+    'input_properties' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'array',
+      'null' => true,
+    ),
+    'output_properties' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'array',
@@ -244,7 +252,7 @@ $xpdo_meta_map['modTemplateVar']= array (
         'reserved' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/(?!^(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|haskeywords|hasmetatags|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type)$)/',
+          'rule' => '/(?!^(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type)$)/',
           'message' => 'tv_err_reserved_name',
         ),
       ),

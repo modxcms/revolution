@@ -10,8 +10,8 @@ $elementClassKey = $ar_typemap[$g[1]];
 $c = $modx->newQuery('modCategory');
 $c->select($modx->getSelectColumns('modCategory','modCategory'));
 $c->select('
-    COUNT('.$modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('id')).') AS `elementCount`,
-    COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS `childrenCount`
+    COUNT('.$modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('id')).') AS elementCount,
+    COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount
 ');
 $c->leftJoin($elementClassKey,$elementClassKey,$modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('category')).' = '.$modx->getSelectColumns('modCategory','modCategory','',array('id')));
 $c->leftJoin('modCategory','Children');
@@ -19,7 +19,7 @@ $c->where(array(
     'modCategory.parent' => 0,
 ));
 $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
-$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
+$c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 $categories = $modx->getCollection('modCategory',$c);
 
 /* set permissions as css classes */
@@ -37,12 +37,15 @@ $class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 /* loop through categories with elements in this type */
 foreach ($categories as $category) {
     if (!$category->checkPolicy('list')) continue;
-    if ($category->get('elementCount') == 0 && $category->get('childrenCount') <= 0 && $category->get('id') != 0) {
+    $elCount = (int)$category->get('elementCount');
+    $catCount = (int)$category->get('childrenCount');
+    if ($elCount < 1 && $catCount < 1 && $category->get('id') != 0) {
         continue;
     }
+    $cc = $elCount > 0 ? ' ('.$elCount.')' : '';
 
     $nodes[] = array(
-        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')).$cc,
         'id' => 'n_'.$g[1].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
         'pk' => $category->get('id'),
         'category' => $category->get('id'),
@@ -77,8 +80,9 @@ foreach ($elements as $element) {
     $class .= $modx->hasPermission('delete_'.$g[1]) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
 
+    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(
-        'text' => strip_tags($name) . ' (' . $element->get('id') . ')',
+        'text' => strip_tags($name) . $idNote,
         'id' => 'n_'.$g[1].'_element_'.$element->get('id').'_0',
         'pk' => $element->get('id'),
         'category' => 0,

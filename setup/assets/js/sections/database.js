@@ -41,7 +41,7 @@ MODx.DB = function() {
                             }
                             sv.update('&nbsp;'+r.object.server_version_msg);
                         }
-                        Ext.select('#modx-db-step1-msg span.connect-msg').update('&nbsp;'+r.message);
+                        Ext.select('#modx-db-step1-msg span.connect-msg').update(r.message);
                         Ext.select('#modx-db-step2').fadeIn();                   
                         
                         var ch = Ext.get('database-connection-charset');
@@ -88,6 +88,7 @@ MODx.DB = function() {
                ,scope: this
                ,params: { 
                     action: 'database/connection'
+                    ,database_type: Ext.get('database-type').getValue()
                     ,database_server: Ext.get('database-server').getValue()
                     ,database_user: Ext.get('database-user').getValue()
                     ,database_password: Ext.get('database-password').getValue()
@@ -113,7 +114,7 @@ MODx.DB = function() {
                     r = Ext.decode(r.responseText);
                     var msg = Ext.select('#modx-db-step2-msg');
                     msg.show();
-                    Ext.select('#modx-db-step2-msg span').update(r.message);
+                    Ext.select('#modx-db-step2-msg span.result').update(r.message);
                     if (r.success) {
                         Ext.select('#modx-db-step3').fadeIn();
                         Ext.select('#modx-next').fadeIn();

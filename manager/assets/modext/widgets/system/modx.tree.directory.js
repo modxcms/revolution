@@ -20,8 +20,12 @@ MODx.tree.Directory = function(config) {
         ,url: MODx.config.connectors_url+'browser/directory.php'
         ,baseParams: {
             prependPath: config.prependPath || null
+            ,basePath: config.basePath || ''
+            ,basePathRelative: config.basePathRelative || null
+            ,baseUrl: config.baseUrl || ''
+            ,baseUrlRelative: config.baseUrlRelative || null
             ,hideFiles: config.hideFiles || false
-            ,ctx: MODx.ctx || 'web'
+            ,wctx: MODx.ctx || 'web'
         }
         ,action: 'getList'
         ,primaryKey: 'dir'
@@ -63,8 +67,13 @@ MODx.tree.Directory = function(config) {
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
     ,_initExpand: function() {
-        var treeState = Ext.state.Manager.get(this.treestate_id);
-        this.expandPath(treeState,'text');
+        if (!Ext.isEmpty(this.config.openTo)) {
+            var treeState = Ext.state.Manager.get(this.treestate_id);
+            this.selectPath('/'+_('files')+'/'+this.config.openTo,'text');
+        } else {
+            var treeState = Ext.state.Manager.get(this.treestate_id);
+            this.selectPath(treeState,'text');
+        }
     }
     ,_saveState: function(n) {
         var p = n.getPath('text');
@@ -202,7 +211,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 xtype: 'modx-browser'
                 ,hideFiles: false
                 ,rootVisible: false
-                ,ctx: MODx.ctx
+                ,wctx: MODx.ctx
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.fireEvent('fileBrowserSelect',data);
@@ -224,7 +233,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,old_name: ov
                 ,prependPath: this.config.prependPath || null
                 ,file: this.treeEditor.editNode.id
-                ,ctx: MODx.ctx || ''
+                ,wctx: MODx.ctx || ''
             }
             ,listeners: {
                'success': {fn:this.refreshActiveNode,scope:this}
@@ -243,9 +252,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.windows.rename = MODx.load({
                 xtype: 'modx-window-file-rename'
                 ,record: r
-                ,prependPath: this.config.prependPath || null
                 ,listeners: {
-                    'success':{fn:this.refreshActiveNode,scope:this}
+                    'success':{fn:this.refreshParentNode,scope:this}
                 }
             });
         }
@@ -296,7 +304,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 action: 'remove'
                 ,dir: node.id
                 ,prependPath: this.config.prependPath || null
-                ,ctx: MODx.ctx || ''
+                ,wctx: MODx.ctx || ''
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -313,7 +321,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 action: 'remove'
                 ,file: node.id
                 ,prependPath: this.config.prependPath || null
-                ,ctx: MODx.ctx || ''
+                ,wctx: MODx.ctx || ''
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -329,7 +337,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     action: 'upload'
                     ,prependPath: this.config.prependPath || null
                     ,prependUrl: this.config.prependUrl || null
-                    ,ctx: MODx.ctx || ''
+                    ,basePath: this.config.basePath || ''
+                    ,basePathRelative: this.config.basePathRelative || null
+                    ,baseUrl: this.config.baseUrl || ''
+                    ,baseUrlRelative: this.config.baseUrlRelative || null
+                    ,wctx: MODx.ctx || ''
                 }
                 ,reset_on_hide: true
                 ,width: 550
@@ -376,8 +388,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             action: 'upload'
             ,prependPath: this.config.prependPath || null
             ,prependUrl: this.config.prependUrl || null
+            ,basePath: this.config.basePath || ''
+            ,basePathRelative: this.config.basePathRelative || null
+            ,baseUrl: this.config.baseUrl || ''
+            ,baseUrlRelative: this.config.baseUrlRelative || null
             ,path: path
-            ,ctx: MODx.ctx || ''
+            ,wctx: MODx.ctx || ''
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
@@ -405,7 +421,7 @@ MODx.window.CreateDirectory = function(config) {
         ,action: 'create'
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'ctx'
+            ,name: 'wctx'
             ,value: MODx.ctx || ''
         },{
             xtype: 'hidden'
@@ -447,7 +463,7 @@ MODx.window.ChmodDirectory = function(config) {
         ,action: 'chmod'
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'ctx'
+            ,name: 'wctx'
             ,value: MODx.ctx || ''
         },{
             xtype: 'hidden'
@@ -480,7 +496,7 @@ MODx.window.RenameFile = function(config) {
         ,action: 'rename'
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'ctx'
+            ,name: 'wctx'
             ,value: MODx.ctx || ''
         },{
             xtype: 'hidden'

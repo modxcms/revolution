@@ -10,24 +10,8 @@ if (!$modx->hasPermission('empty_cache')) return $modx->error->failure($modx->le
 /* invoke OnBeforeCacheUpdate event */
 $modx->invokeEvent('OnBeforeCacheUpdate');
 
-$paths = array(
-    'config.cache.php',
-    'sitePublishing.idx.php',
-    'registry/mgr/workspace/',
-    'lexicon/',
-);
-$contexts = $modx->getCollection('modContext');
-foreach ($contexts as $context) {
-    $paths[] = $context->get('key') . '/';
-}
-
-$options = array(
-    'publishing' => 1,
-    'extensions' => array('.cache.php', '.msg.php')
-);
-if ($modx->getOption('cache_db')) $options['objects'] = '*';
-
-$results= $modx->cacheManager->clearCache($paths, $options);
+$results= array();
+$modx->cacheManager->refresh(array(), $results);
 
 /* invoke OnSiteRefresh event */
 $modx->invokeEvent('OnSiteRefresh');

@@ -17,7 +17,9 @@ $modx->lexicon->load('file');
 /* setup default properties */
 $hideFiles = !empty($scriptProperties['hideFiles']) && $scriptProperties['hideFiles'] != 'false' ? true : false;
 $stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
-$dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root' ? '' : str_replace('n_','',$scriptProperties['id']);
+$dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root'
+        ? ''
+        : strpos($scriptProperties['id'], 'n_') === 0 ? substr($scriptProperties['id'], 2) : $scriptProperties['id'];
 
 /* get working context */
 $wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
@@ -52,17 +54,36 @@ $canUpload = $modx->hasPermission('file_upload');
 /* get base paths and sanitize incoming paths */
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
-$root = $modx->fileHandler->getBasePath(false);
-$fullPath = str_replace('//','/',$root.$dir);
-if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullPath);
+if (empty($scriptProperties['basePath'])) {
+    $root = $modx->fileHandler->getBasePath();
+    if ($workingContext->getOption('filemanager_path_relative',true)) {
+        $root = $workingContext->getOption('base_path','').$root;
+    }
+} else {
+    $root = $scriptProperties['basePath'];
+    if (!empty($scriptProperties['basePathRelative'])) {
+        $root = $workingContext->getOption('base_path').$root;
+    }
+}
+$fullPath = $root.ltrim($dir,'/');
+if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').': '.$fullPath);
 
 $editAction = false;
 $act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
 if ($act) { $editAction = $act->get('id'); }
 
 /* get relative url */
-$baseUrl = $modx->fileHandler->getBaseUrl(true);
-$isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
+$isRelativeBaseUrl = false;
+if (empty($scriptProperties['baseUrl'])) {
+    $baseUrl = $modx->fileHandler->getBaseUrl(true);
+    $isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
+} else {
+    $baseUrl = $scriptProperties['baseUrl'];
+    if (!empty($scriptProperties['baseUrlRelative'])) {
+        $baseUrl = $modx->getOption('base_url').$baseUrl;
+        $isRelativeBaseUrl = true;
+    }
+}
 
 /* get mb support settings */
 $useMultibyte = $modx->getOption('use_multibyte',null,false);
@@ -80,18 +101,19 @@ foreach (new DirectoryIterator($fullPath) as $file) {
     $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
     /* handle dirs */
+    $cls = array();
     if ($file->isDir() && $canListDirs) {
-        $cls = 'folder';
-        if ($canChmodDirs) $cls .= ' pchmod';
-        if ($canCreateDirs) $cls .= ' pcreate';
-        if ($canRemoveDirs) $cls .= ' premove';
-        if ($canUpdateDirs) $cls .= ' pupdate';
-        if ($canUpload) $cls .= ' pupload';
+        $cls[] = 'folder';
+        if ($canChmodDirs) $cls[] = 'pchmod';
+        if ($canCreateDirs) $cls[] = 'pcreate';
+        if ($canRemoveDirs) $cls[] = 'premove';
+        if ($canUpdateDirs) $cls[] = 'pupdate';
+        if ($canUpload) $cls[] = 'pupload';
 
         $directories[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
-            'cls' => $cls,
+            'cls' => implode(' ',$cls),
             'type' => 'dir',
             'leaf' => false,
             'perms' => $octalPerms,
@@ -103,9 +125,16 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
         $ext = $useMultibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
 
-        $cls = 'icon-file icon-'.$ext;
-        if ($canRemoveFile) $cls .= ' premove';
-        if ($canUpdateFile) $cls .= ' pupdate';
+        $cls = array();
+        $cls[] = 'icon-file';
+        $cls[] = 'icon-'.$ext;
+        if ($canRemoveFile) $cls[] = 'premove';
+        if ($canUpdateFile) $cl[] = 'pupdate';
+
+
+        if (!$file->isWritable()) {
+            $cls[] = 'icon-lock';
+        }
         $encFile = rawurlencode($dir.$fileName);
         $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$workingContext->get('key') : null;
 
@@ -125,7 +154,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
-            'cls' => $cls,
+            'cls' => implode(' ',$cls),
             'type' => 'file',
             'leaf' => true,
             'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',

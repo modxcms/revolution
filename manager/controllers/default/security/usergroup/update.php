@@ -17,5 +17,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.user.group.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/usergroup/update.js');
 
-$this->checkFormCustomizationRules($usergroup);
+$ugName = $usergroup ? $usergroup->get('name') : $modx->lexicon('anonymous');
+$modx->smarty->assign('_pagetitle',$modx->lexicon('user_group').': '.$ugName);
 return $modx->smarty->fetch('security/usergroup/update.tpl');

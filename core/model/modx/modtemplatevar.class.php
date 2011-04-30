@@ -8,7 +8,7 @@
  */
 class modTemplateVar extends modElement {
     /**
-     * @var array Supported bindings for MODx
+     * @var array Supported bindings for MODX
      * @access public
      */
     public $bindings= array (
@@ -21,12 +21,6 @@ class modTemplateVar extends modElement {
         'INHERIT',
         'DIRECTORY'
     );
-    /**
-     * @var integer Indicates a value is loaded for a specified resource.
-     * @access public
-     */
-    public $resourceId= 0;
-
     /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
      *
@@ -77,7 +71,7 @@ class modTemplateVar extends modElement {
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateVarBeforeRemove',array(
                 'templateVar' => &$this,
-                'cacheFlag' => $cacheFlag,
+                'cacheFlag' => true,
             ));
         }
 
@@ -86,7 +80,7 @@ class modTemplateVar extends modElement {
         if ($removed && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateVarRemove',array(
                 'templateVar' => &$this,
-                'cacheFlag' => $cacheFlag,
+                'cacheFlag' => true,
             ));
         } else if (!$removed && !empty($this->xpdo->lexicon)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('tv_err_remove').$this->toArray());
@@ -170,9 +164,10 @@ class modTemplateVar extends modElement {
         $value= null;
         $resourceId = intval($resourceId);
         if ($resourceId) {
-            if ($resourceId === $this->xpdo->resourceIdentifier && isset ($this->xpdo->documentObject[$this->get('name')]) && is_array($this->xpdo->documentObject[$this->get('name')])) {
-                $value= $this->xpdo->documentObject[$this->get('name')][1];
-            } elseif ($resourceId === $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
+            if (is_object($this->xpdo->resource) && $resourceId === (integer) $this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
+                $valueArray= $this->xpdo->resource->get($this->get('name'));
+                $value= $valueArray[1];
+            } elseif ($resourceId === (integer) $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
                 $value= $this->get('value');
             } else {
                 $resource = $this->xpdo->getObject('modTemplateVarResource',array(
@@ -181,7 +176,6 @@ class modTemplateVar extends modElement {
                 ),true);
                 if ($resource && $resource instanceof modTemplateVarResource) {
                     $value= $resource->get('value');
-                    $this->set('resourceId', $resourceId);
                 }
             }
         }
@@ -242,12 +236,35 @@ class modTemplateVar extends modElement {
         $value= $this->processBindings($value, $resourceId);
 
         $params= array ();
+        /**
+         * Backwards support for display_params
+         * @deprecated To be removed in 2.2
+         */
         if ($paramstring= $this->get('display_params')) {
             $cp= explode("&", $paramstring);
             foreach ($cp as $p => $v) {
                 $ar= explode("=", $v);
                 if (is_array($ar) && count($ar) == 2) {
                     $params[$ar[0]]= $this->decodeParamValue($ar[1]);
+                }
+            }
+        }
+        /* get output_properties for rendering properties */
+        $outputProperties = $this->get('output_properties');
+        if (!empty($outputProperties) && is_array($outputProperties)) {
+            $params = array_merge($params,$outputProperties);
+        }
+
+        /* for base_url in image/file tvs */
+        if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
+            $ips = $this->get('input_properties');
+            $fmu = $this->xpdo->getOption('filemanager_url',null,'');
+            $absValCheck = substr($value,0,1) == '/' || substr($value,0,7) == 'http://' || substr($value,0,8) == 'https://';
+            if (empty($ips['baseUrlPrependCheckSlash']) || !($absValCheck)) {
+                if (!empty($ips['baseUrl'])) {
+                    $value = $ips['baseUrl'].$value;
+                } else if (!empty($fmu)) {
+                    $value = $fmu.$value;
                 }
             }
         }
@@ -283,25 +300,57 @@ class modTemplateVar extends modElement {
 
         /* if any FC tvDefault rules, set here */
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
+            if (!empty($resourceId)) {
+                $resource = $this->xpdo->getObject('modResource',$resourceId);
+            }
             $userGroups = $this->xpdo->user->getUserGroups();
             $c = $this->xpdo->newQuery('modActionDom');
-            $c->leftJoin('modAccessActionDom','Access');
+            $c->innerJoin('modFormCustomizationSet','FCSet');
+            $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
+            $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
+            $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
             $c->where(array(
                 array(
-                    '(`modActionDom`.`rule` = "tvDefault"
-                   OR `modActionDom`.`rule` = "tvVisible"
-                   OR `modActionDom`.`rule` = "tvTitle")'
+                    '(modActionDom.rule = "tvDefault"
+                   OR modActionDom.rule = "tvVisible"
+                   OR modActionDom.rule = "tvTitle")'
                 ),
-                '"tv'.$this->get('id').'" IN (`name`)',
-                'modActionDom.active' => true,
+                '"tv'.$this->get('id').'" IN ('.$this->xpdo->escape('modActionDom').'.'.$this->xpdo->escape('name').')',
+                'FCSet.active' => true,
+                'Profile.active' => true,
             ));
-            $c->andCondition(array(
-                '((`Access`.`principal_class` = "modUserGroup"
-              AND `Access`.`principal` IN ('.implode(',',$userGroups).'))
-               OR `Access`.`principal` IS NULL)',
-            ),null,2);
+            $c->where(array(
+                array(
+                    'ProfileUserGroup.usergroup:IN' => $userGroups,
+                    array(
+                        'OR:ProfileUserGroup.usergroup:IS' => null,
+                        'AND:UGProfile.active:=' => true,
+                    ),
+                ),
+                'OR:ProfileUserGroup.usergroup:=' => null,
+            ),xPDOQuery::SQL_AND,null,2);
+            if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
+                $c->where(array(
+                    'modActionDom.action' => $this->xpdo->request->action,
+                ));
+            }
+            $c->select(array(
+                'modActionDom.*',
+                'FCSet.constraint_class',
+                'FCSet.constraint_field',
+                'FCSet.constraint',
+                'FCSet.template',
+            ));
+            $c->sortby('FCSet.template','ASC');
+            $c->sortby('modActionDom.rank','ASC');
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             foreach ($domRules as $rule) {
+                if (!empty($resourceId)) {
+                    $template = $rule->get('template');
+                    if (!empty($template)) {
+                        if ($resource && $template != $resource->get('template')) continue;
+                    }
+                }
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
                         if ($rule->get('value') == 0) {
@@ -346,6 +395,12 @@ class modTemplateVar extends modElement {
                 }
             }
         }
+
+        $params = $this->get('input_properties');
+        /* default required status to no */
+        if (!isset($params['allowBlank'])) $params['allowBlank'] = 1;
+        $this->xpdo->smarty->assign('params',$params);
+        $this->xpdo->lexicon->load('tv_widget');
 
         /* find the correct renderer for the TV, if not one, render a textbox */
         $inputRenderPaths = $this->getRenderDirectories('OnTVInputRenderList','input');
@@ -591,17 +646,27 @@ class modTemplateVar extends modElement {
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
                 if ($preProcess) {
-                    $rs = $this->xpdo->getDocument($param);
-                    if (is_array($rs)) $output = $rs['content'];
-                    else $output = 'Unable to locate resource '.$param;
+                    $query = $this->xpdo->newQuery('modResource', array(
+                        'id' => (integer) $param,
+                        'deleted' => false
+                    ));
+                    $query->select('content');
+                    if ($query->prepare() && $query->stmt->execute()) {
+                        $output = $query->stmt->fetch(PDO::FETCH_COLUMN);
+                    } else {
+                        $output = 'Unable to locate resource '.$param;
+                    }
                 }
                 break;
 
             case 'SELECT': /* selects a record from the cms database */
                 if ($preProcess) {
                     $dbtags = array();
-                    $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
-                    $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
+                    if ($modx->resource && $modx->resource instanceof modResource) {
+                        $dbtags = $modx->resource->toArray();
+                    }
+                    $dbtags['DBASE'] = $this->xpdo->getOption('dbname');
+                    $dbtags['PREFIX'] = $this->xpdo->getOption('table_prefix');
                     foreach($dbtags as $key => $pValue) {
                         $param = str_replace('[[+'.$key.']]', $pValue, $param);
                     }
@@ -695,24 +760,34 @@ class modTemplateVar extends modElement {
     public function processInheritBinding($default = '',$resourceId = null) {
         $output = $default; /* Default to param value if no content from parents */
         $resource = null;
+        $resourceColumns = $this->xpdo->getSelectColumns('modResource', '', '', array('id', 'parent'));
+        $resourceQuery = new xPDOCriteria($this->xpdo, "SELECT {$resourceColumns} FROM {$this->xpdo->getTableName('modResource')} WHERE id = ?");
         if (!empty($resourceId) && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
-            $resource = $this->xpdo->getObject('modResource',$resourceId);
+            if ($resourceQuery->stmt && $resourceQuery->stmt->execute(array($resourceId))) {
+                $result = $resourceQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
+                $resource = reset($result);
+            }
         } else if ($this->xpdo->resource instanceof modResource) {
-            $resource =& $this->xpdo->resource;
+            $resource = $this->xpdo->resource->get(array('id', 'parent'));
         }
-        if (!$resource) return $output;
-
-        $currentResource = $resource;
-        while ($currentResource->get('parent') != 0) {
-            $currentResource = $this->xpdo->getObject('modResource',array('id' => $currentResource->get('parent')));
-            if (!empty($currentResource)) {
-                $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $currentResource->get('id'));
-                if (isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
-                    $output = $tv['value'];
-                    return $output;
+        if (!empty($resource)) {
+            $currentResource = $resource;
+            while ($currentResource['parent'] != 0) {
+                if ($resourceQuery->stmt && $resourceQuery->stmt->execute(array($currentResource['parent']))) {
+                    $result = $resourceQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $currentResource = reset($result);
+                } else {
+                    break;
                 }
-            } else {
-                return $output;
+                if (!empty($currentResource)) {
+                    $tv = $this->getValue($currentResource['id']);
+                    if (($tv === '0' || !empty($tv)) && substr($tv,0,1) != '@') {
+                        $output = $tv;
+                        break;
+                    }
+                } else {
+                    break;
+                }
             }
         }
         return $output;
@@ -750,59 +825,96 @@ class modTemplateVar extends modElement {
     public function findPolicy($context = '') {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-            $resourceGroupTable = $this->xpdo->getTableName('modTemplateVarResourceGroup');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$resourceGroupTable} `ResourceGroup` ON `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "AND `ResourceGroup`.`tmplvarid` = :element " .
-                    "AND `ResourceGroup`.`documentgroup` = acl.target " .
-                    "GROUP BY `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`";
-            $bindings = array(
-                ':element' => $this->get('id'),
-                ':context' => $context
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessResourceGroup'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+        if ($context === $this->xpdo->context->get('key')) {
+            $catEnabled = (boolean) $this->xpdo->getOption('access_category_enabled', null, true);
+            $rgEnabled = (boolean) $this->xpdo->getOption('access_resource_group_enabled', null, true);
+        } elseif ($this->xpdo->getContext($context)) {
+            $catEnabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
+            $rgEnabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
+        }
+        $enabled = ($catEnabled || $rgEnabled);
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                if ($rgEnabled) {
+                    $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
+                    $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+                    $resourceGroupTable = $this->xpdo->getTableName('modTemplateVarResourceGroup');
+                    $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                            "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                            "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                            "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                            "AND ResourceGroup.tmplvarid = :element " .
+                            "AND ResourceGroup.documentgroup = acl.target " .
+                            "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                    $bindings = array(
+                        ':element' => $this->get('id'),
+                        ':context' => $context
                     );
+                    $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+                    if ($query->stmt && $query->stmt->execute()) {
+                        while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $policy['modAccessResourceGroup'][$row['target']][] = array(
+                                'principal' => $row['principal'],
+                                'authority' => $row['authority'],
+                                'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                            );
+                        }
+                    }
                 }
-            }
-            $accessTable = $this->xpdo->getTableName('modAccessCategory');
-            $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$categoryClosureTable} `CategoryClosure` ON `CategoryClosure`.`descendant` = :category " .
-                    "AND `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND `CategoryClosure`.`ancestor` = `Acl`.`target` " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "GROUP BY `target`, `principal`, `authority`, `policy` " .
-                    "ORDER BY `CategoryClosure`.`depth` DESC, `authority` ASC";
-            $bindings = array(
-                ':category' => $this->get('category'),
-                ':context' => $context,
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessCategory'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                if ($catEnabled) {
+                    $accessTable = $this->xpdo->getTableName('modAccessCategory');
+                    $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
+                    $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                            "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                            "JOIN {$categoryClosureTable} CategoryClosure ON CategoryClosure.descendant = :category " .
+                            "AND Acl.principal_class = 'modUserGroup' " .
+                            "AND CategoryClosure.ancestor = Acl.target " .
+                            "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                            "GROUP BY target, principal, authority, policy " .
+                            "ORDER BY CategoryClosure.depth DESC, authority ASC";
+                    $bindings = array(
+                        ':category' => $this->get('category'),
+                        ':context' => $context,
                     );
+                    $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+                    if ($query->stmt && $query->stmt->execute()) {
+                        while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $policy['modAccessCategory'][$row['target']][] = array(
+                                'principal' => $row['principal'],
+                                'authority' => $row['authority'],
+                                'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                            );
+                        }
+                    }
                 }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
             }
-            $this->_policies[$context] = $policy;
-        } else {
-            $policy = $this->_policies[$context];
         }
         return $policy;
+    }
+
+    /**
+     * Check to see if the TV has access to a Template
+     *
+     * @param mixed $templatePk Either the ID, name or object of the Template
+     * @return boolean Whether or not the TV has access to the specified Template
+     */
+    public function hasTemplate($templatePk) {
+        if (!is_int($templatePk) && !is_object($templatePk)) {
+            $template = $this->xpdo->getObject('modTemplate',array('templatename' => $templatePk));
+            if (empty($template) || !is_object($template) || !($template instanceof modTemplate)) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modTemplateVar::hasTemplate - No template: '.$templatePk);
+                return false;
+            }
+        } else {
+            $template =& $templatePk;
+        }
+        $templateVarTemplate = $this->xpdo->getObject('modTemplateVarTemplate',array(
+            'tmplvarid' => $this->get('id'),
+            'templateid' => is_object($template) ? $template->get('id') : $template,
+        ));
+        return !empty($templateVarTemplate) && is_object($templateVarTemplate);
     }
 }

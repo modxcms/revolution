@@ -13,9 +13,11 @@ MODx.panel.ResourceTV = function(config) {
         ,title: _('template_variables')
         ,class_key: ''
         ,resource: ''
-        ,bodyStyle: 'padding: 15px;'
+        ,bodyStyle: 'padding: 15px; border: 0'
         ,autoHeight: true
-        ,autoLoad: this.autoload(config)
+        ,applyTo: 'modx-resource-tvs-div'
+        ,header: false
+        ,style: 'padding: 15px;'
         ,width: '97%'
         ,templateField: 'modx-resource-template'
     });
@@ -23,40 +25,11 @@ MODx.panel.ResourceTV = function(config) {
     this.addEvents({ load: true });
 };
 Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
-    /**
-     * Autoloads the TV panel
-     * @param {Object} config
-     */
-    autoload: function(config) {
-        var t = Ext.getCmp(config.templateField);
-        if (!t && !config.template) {
-            setTimeout("MODx.fireEvent('ready');",300);
-            return false;
-        }
-        var template = config.template ? config.template : t.getValue();
-        var a = {
-            url: MODx.config.manager_url+'index.php?a='+MODx.action['resource/tvs']
-            ,method: 'GET'
-            ,params: {
-               'a': MODx.action['resource/tvs']
-               ,'class_key': config.class_key
-               ,'template': template
-               ,'resource': config.resource
-               ,ctx: MODx.ctx
-            }
-            ,scripts: true
-            ,callback: function() {
-                MODx.fireEvent('ready');
-                MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
-                if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
-                this.fireEvent('load');
-            }
-            ,scope: this
-        };
-        return a;        	
+    autoload: function() {
+        return false;
     }
-    
     ,refreshTVs: function() {
+        return false;
         var t = Ext.getCmp(this.config.templateField);
         if (!t && !this.config.template) { return false; }
         var template = this.config.template ? this.config.template : t.getValue();

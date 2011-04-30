@@ -5,20 +5,32 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-MODx.load({
-{/literal}
-    xtype: 'xdatetime'
-    ,applyTo: 'tv{$tv->id}'
-    ,width: '97%'
-    ,name: 'tv{$tv->id}'
-    ,dateFormat: MODx.config.manager_date_format
-    ,timeFormat: MODx.config.manager_time_format
-    ,dateWidth: 120
-    ,timeWidth: 120
-    ,allowBlank: true
-    ,value: '{$tv->value}'
-{literal}
-    ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
+Ext.onReady(function() {
+    var fld = MODx.load({
+    {/literal}
+        xtype: 'xdatetime'
+        ,applyTo: 'tv{$tv->id}'
+        ,name: 'tv{$tv->id}'
+        ,dateFormat: MODx.config.manager_date_format
+        ,timeFormat: MODx.config.manager_time_format
+        {if $params.disabledDates},disabledDates: {$params.disabledDates}{/if}
+        {if $params.disabledDays},disabledDays: {$params.disabledDays}{/if}
+        {if $params.minDateValue},minDateValue: '{$params.minDateValue}'{/if}
+        {if $params.maxDateValue},maxDateValue: '{$params.maxDateValue}'{/if}
+        {if $params.startDay},startDay: {$params.startDay}{/if}
+
+        {if $params.minTimeValue},minTimeValue: '{$params.minTimeValue}'{/if}
+        {if $params.maxTimeValue},maxTimeValue: '{$params.maxTimeValue}'{/if}
+        {if $params.timeIncrement},timeIncrement: {$params.timeIncrement}{/if}
+        ,dateWidth: 120
+        ,timeWidth: 120
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+        ,value: '{$tv->value}'
+        ,msgTarget: 'under'
+    {literal}
+        ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
+    });
+    Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });
 {/literal}
 // ]]>

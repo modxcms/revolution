@@ -25,7 +25,7 @@ $showNone = $modx->getOption('showNone',$scriptProperties,false);
 $c = $modx->newQuery('modCategory');
 $c->sortby($sort,$dir);
 $c->where(array(
-    'parent' => 0,
+    'modCategory.parent' => 0,
 ));
 if ($isLimit) $c->limit($limit,$start);
 $categories = $modx->getCollection('modCategory',$c);
@@ -47,7 +47,7 @@ foreach ($categories as $category) {
     $childrenCount = $modx->getCount('modCategory',array('parent' => $category->get('id')));
 
     $categoryArray['name'] = $category->get('category');
-	$list[] = $categoryArray;
+    $list[] = $categoryArray;
 
     /* if has subcategories, display here */
     if ($childrenCount > 0) {

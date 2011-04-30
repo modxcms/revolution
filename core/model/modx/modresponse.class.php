@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,7 +20,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Encapsulates a MODx response to a web request.
+ * Encapsulates a MODX response to a web request.
  *
  * Includes functions to manipluate header data, such as status codes, as well
  * as manipulating the response body.
@@ -85,13 +85,9 @@ class modResponse {
             }
 
             $totalTime= ($this->modx->getMicroTime() - $this->modx->startTime);
-            $queries= 0;
-            $queryTime= 0;
-            if ($this->modx->db !== null && $this->modx->db instanceof DBAPI) {
-                $queryTime= $this->modx->queryTime;
-                $queryTime= sprintf("%2.4f s", $queryTime);
-                $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
-            }
+            $queryTime= $this->modx->queryTime;
+            $queryTime= sprintf("%2.4f s", $queryTime);
+            $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
             $totalTime= sprintf("%2.4f s", $totalTime);
             $phpTime= $totalTime - $queryTime;
             $phpTime= sprintf("%2.4f s", $phpTime);
@@ -119,7 +115,7 @@ class modResponse {
                 $header .= '; charset=' . $charset;
             }
             header($header);
-            if (!$this->modx->checkPreview()) {
+            if (!$this->checkPreview()) {
                 $dispositionSet= false;
                 if ($customHeaders= $contentType->get('headers')) {
                     foreach ($customHeaders as $headerKey => $headerString) {

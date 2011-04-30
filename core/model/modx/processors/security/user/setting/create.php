@@ -52,20 +52,10 @@ $setting->fromArray($scriptProperties,'',true);
  */
 $settingNameKey = 'setting_'.$scriptProperties['key'];
 /* set lexicon name/description */
-$topic = $modx->getObject('modLexiconTopic',array(
-    'name' => 'default',
-    'namespace' => $setting->get('namespace'),
-));
-if ($topic == null) {
-    $topic = $modx->newObject('modLexiconTopic');
-    $topic->set('name','default');
-    $topic->set('namespace',$setting->get('namespace'));
-    $topic->save();
-}
-
 if (!$modx->lexicon->exists($settingNameKey)) {
     $entry = $modx->getObject('modLexiconEntry',array(
         'namespace' => $namespace->get('name'),
+        'topic' => 'default',
         'name' => $settingNameKey,
     ));
     if ($entry == null) {
@@ -73,14 +63,16 @@ if (!$modx->lexicon->exists($settingNameKey)) {
         $entry->set('namespace',$namespace->get('name'));
         $entry->set('name',$settingNameKey);
         $entry->set('value',$scriptProperties['name']);
-        $entry->set('topic',$topic->get('id'));
+        $entry->set('topic','default');
         $entry->save();
+        $entry->clearCache();
     }
 }
 $settingDescriptionKey = 'setting_'.$scriptProperties['key'].'_desc';
 if (!$modx->lexicon->exists($settingDescriptionKey)) {
     $description = $modx->getObject('modLexiconEntry',array(
         'namespace' => $namespace->get('name'),
+        'topic' => 'default',
         'name' => $settingDescriptionKey,
     ));
     if ($description == null) {
@@ -88,8 +80,9 @@ if (!$modx->lexicon->exists($settingDescriptionKey)) {
         $description->set('namespace',$namespace->get('name'));
         $description->set('name',$settingDescriptionKey);
         $description->set('value',$scriptProperties['description']);
-        $description->set('topic',$topic->get('id'));
+        $description->set('topic','default');
         $description->save();
+        $description->clearCache();
     }
 }
 

@@ -85,6 +85,19 @@ Ext.extend(MODx.combo.Boolean,MODx.combo.ComboBox);
 Ext.reg('combo-boolean',MODx.combo.Boolean);
 Ext.reg('modx-combo-boolean',MODx.combo.Boolean);
 
+MODx.util.PasswordField = function(config) {
+    config = config || {};
+    delete config.xtype;
+    Ext.applyIf(config,{
+        xtype: 'textfield'
+        ,inputType: 'password'
+    });
+    MODx.util.PasswordField.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.util.PasswordField,Ext.form.TextField);
+Ext.reg('text-password',MODx.util.PasswordField);
+Ext.reg('modx-text-password',MODx.util.PasswordField);
+
 MODx.combo.User = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -108,10 +121,12 @@ MODx.combo.UserGroup = function(config) {
         ,hiddenName: 'group'
         ,displayField: 'name'
         ,valueField: 'id'
-        ,fields: ['name','id']
+        ,fields: ['name','id','description']
         ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/group.php'
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
+            ,'<br />{description}</div></tpl>')
     });
     MODx.combo.UserGroup.superclass.constructor.call(this,config);
 };
@@ -192,9 +207,9 @@ MODx.combo.Template = function(config) {
         ,displayField: 'templatename'
         ,valueField: 'id'
         ,pageSize: 20
-        ,fields: ['id','templatename','description','category']
+        ,fields: ['id','templatename','description','category_name']
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename}</span>'
-            ,' - <span style="font-style:italic">{category}</span>'
+            ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name}</span></tpl>'
             ,'<br />{description}</div></tpl>')
         ,url: MODx.config.connectors_url+'element/template.php'
         ,listWidth: 350
@@ -437,8 +452,15 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,multiple: true
                 ,prependPath: this.config.prependPath || null
                 ,prependUrl: this.config.prependUrl || null
+                ,basePath: this.config.basePath || ''
+                ,basePathRelative: this.config.basePathRelative || null
+                ,baseUrl: this.config.baseUrl || ''
+                ,baseUrlRelative: this.config.baseUrlRelative || null
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
+                ,allowedFileTypes: this.config.allowedFileTypes || ''
+                ,wctx: this.config.wctx || 'web'
+                ,openTo: this.config.openTo || ''
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.setValue(data.relativeUrl);
@@ -534,21 +556,46 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
             });
             return false;
         }
-        
+        MODx.debug('onTriggerClick');
+
         var t = Ext.getCmp('modx-resource-tree');
-        if (!t) { return false; }
-        
+        if (!t) {
+            MODx.debug('no tree found, trying to activate');
+            var tp = Ext.getCmp('modx-leftbar-tabpanel');
+            if (tp) {
+                tp.on('tabchange',function(tbp,tab) {
+                    if (tab.id == 'modx-resource-tree-ct') {
+                        this.disableTreeClick();
+                    }
+                },this);
+                tp.activate('modx-resource-tree-ct');
+            } else {
+                MODx.debug('no tabpanel');
+            }
+            return false;
+        }
+
+        this.disableTreeClick();
+    }
+
+    ,disableTreeClick: function() {
+        MODx.debug('Disabling tree click');
+        t = Ext.getCmp('modx-resource-tree');
+        if (!t) {
+            MODx.debug('No tree found in disableTreeClick!');
+            return false;
+        }
         this.oldDisplayValue = this.getValue();
         this.oldValue = Ext.getCmp('modx-resource-parent-hidden').getValue();
-        
+
         this.setValue(_('resource_parent_select_node'));
-        
+
         t.expand();
         t.removeListener('click',t._handleClick);
         t.on('click',this.handleChangeParent,this);
         t.disableHref = true;
-        return true;
-    }
+
+        return true;}
         
     ,handleChangeParent: function(node,e) {
         var t = Ext.getCmp('modx-resource-tree');

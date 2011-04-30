@@ -8,7 +8,7 @@
  *
  * @author Bert Oost, <bertoost85@gmail.com>
  */
-$_lang['access_category_management_msg'] = 'Beheer gebruikersgroep leden toegang voor element via categorieën en optioneel toegansbeleid toevoegen.';
+$_lang['access_category_management_msg'] = 'Beheer gebruikersgroep leden toegang voor element via categorieï¿½n en optioneel toegansbeleid toevoegen.';
 $_lang['access_category_err_ae'] = 'Een ACL voor deze categorie bestaat reeds!';
 $_lang['access_category_err_nf'] = 'Categorie ACL niet gevonden.';
 $_lang['access_category_err_ns'] = 'Categorie ACL niet gespecificeerd.';
@@ -91,9 +91,9 @@ $_lang['resource_group_resource_err_create'] = 'Er is een fout opgetreden tijden
 $_lang['resource_group_resource_err_nf'] = 'Dit document is geen onderdeel of die documentgroep.';
 $_lang['resource_group_resource_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van het document uit de documentgroep.';
 $_lang['resource_group_untitled'] = 'Naamloze documentgroep';
-$_lang['roles_msg'] = 'Een rol is, per definitie, een positie of status houdt men binnen een bepaalde situatie. Ze kunnen worden gebruikt om gebruikers te groeperen in een positie of status binnen een gebruikersgroep. Rollen in MODx hebben ook wat we noemen "Autoriteit". Dit is een nummerieke waarde van elk geldig getal. Autoriteitlevels zijn erfelijk, in die zin dat een rol met Autoriteit 1 zal erven alle groepsbeleid toegewezen aan zichzelf, en alle rollen met een hogere autoriteit niveau dan 1.';
+$_lang['roles_msg'] = 'Een rol is, per definitie, een positie of status houdt men binnen een bepaalde situatie. Ze kunnen worden gebruikt om gebruikers te groeperen in een positie of status binnen een gebruikersgroep. Rollen in MODX hebben ook wat we noemen "Autoriteit". Dit is een nummerieke waarde van elk geldig getal. Autoriteitlevels zijn erfelijk, in die zin dat een rol met Autoriteit 1 zal erven alle groepsbeleid toegewezen aan zichzelf, en alle rollen met een hogere autoriteit niveau dan 1.';
 $_lang['user_group_category_access'] = 'Element categorietoegang';
-$_lang['user_group_category_access_msg'] = 'Hier kun je instellen welke elementen van deze gebruikersgroep toegang hebben tot de categorieën waar de elementen in zitten.';
+$_lang['user_group_category_access_msg'] = 'Hier kun je instellen welke elementen van deze gebruikersgroep toegang hebben tot de categorieï¿½n waar de elementen in zitten.';
 $_lang['user_group_category_err_ae'] = 'Gebruikersgroep heeft reeds toegang tot die categorie.';
 $_lang['user_group_category_remove_confirm'] = 'Weet je heel zeker dat je deze categorie uit deze gebruikersgroep wilt verwijderen?';
 $_lang['user_group_context_access'] = 'Context toegang';

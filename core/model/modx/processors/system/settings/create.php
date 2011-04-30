@@ -51,20 +51,9 @@ $setting= $modx->newObject('modSystemSetting');
 $setting->fromArray($scriptProperties,'',true);
 
 /* set lexicon name/description */
-$topic = $modx->getObject('modLexiconTopic',array(
-    'name' => 'default',
-    'namespace' => $setting->get('namespace'),
-));
-if ($topic == null) {
-    $topic = $modx->newObject('modLexiconTopic');
-    $topic->set('name','default');
-    $topic->set('namespace',$setting->get('namespace'));
-    $topic->save();
-}
-
-
 $entry = $modx->getObject('modLexiconEntry',array(
     'namespace' => $namespace->get('name'),
+    'topic' => 'default',
     'name' => 'setting_'.$scriptProperties['key'],
 ));
 if ($entry == null) {
@@ -72,7 +61,7 @@ if ($entry == null) {
     $entry->set('namespace',$namespace->get('name'));
     $entry->set('name','setting_'.$scriptProperties['key']);
     $entry->set('value',$scriptProperties['name']);
-    $entry->set('topic',$topic->get('id'));
+    $entry->set('topic','default');
     $entry->set('language',$modx->cultureKey);
     $entry->save();
 
@@ -80,6 +69,7 @@ if ($entry == null) {
 }
 $description = $modx->getObject('modLexiconEntry',array(
     'namespace' => $namespace->get('name'),
+    'topic' => 'default',
     'name' => 'setting_'.$scriptProperties['key'].'_desc',
 ));
 if ($description == null) {
@@ -87,7 +77,7 @@ if ($description == null) {
     $description->set('namespace',$namespace->get('name'));
     $description->set('name','setting_'.$scriptProperties['key'].'_desc');
     $description->set('value',$scriptProperties['description']);
-    $description->set('topic',$topic->get('id'));
+    $description->set('topic','default');
     $description->set('language',$modx->cultureKey);
     $description->save();
 

@@ -14,6 +14,7 @@ MODx.page.UpdateWebLink = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
+        ,action: 'update'
         ,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
@@ -27,6 +28,7 @@ MODx.page.UpdateWebLink = function(config) {
             ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
+            ,show_tvs: config.show_tvs
         }]
     	,loadStay: true
         ,buttons: this.getButtons(config)
@@ -39,12 +41,28 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         return false;
     }
     
-    ,duplicate: function(btn,e) {
+    ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
             ,url: MODx.config.connectors_url+'resource/index.php'
             ,params: {
                 action: 'duplicate'
+                ,id: this.config.resource
+            }
+            ,listeners: {
+                success: {fn:function(r) {
+                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                },scope:this}
+            }
+        });
+    }
+
+    ,deleteResource: function(btn,e) {
+        MODx.msg.confirm({
+            text: _('resource_delete_confirm')
+            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,params: {
+                action: 'delete'
                 ,id: this.config.resource
             }
             ,listeners: {
@@ -78,12 +96,18 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 process: 'update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: true
+                ,checkDirty: cfg.richtext || MODx.request.activeSave == 1 ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
-                    ,alt: true
                     ,ctrl: true
                 }]
+            });
+            btns.push('-');
+        } else {
+            btns.push({
+                text: cfg.lockedText || _('locked')
+                ,handler: Ext.emptyFn
+                ,disabled: true
             });
             btns.push('-');
         }
@@ -91,14 +115,23 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             btns.push({
                 process: 'duplicate'
                 ,text: _('duplicate')
-                ,handler: this.duplicate
+                ,handler: this.duplicateResource
+                ,scope:this
+            });
+            btns.push('-');
+        }
+        if (cfg.canDelete == 1 && !cfg.locked) {
+            btns.push({
+                process: 'delete'
+                ,text: _('delete')
+                ,handler: this.deleteResource
                 ,scope:this
             });
             btns.push('-');
         }
         btns.push({
             process: 'preview'
-            ,text: _('preview')
+            ,text: _('view')
             ,handler: this.preview
             ,scope: this
         });

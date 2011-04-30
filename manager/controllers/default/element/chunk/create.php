@@ -76,5 +76,6 @@ if (is_array($onChunkFormPrerender)) {
 $modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
 
 /* display */
+$modx->smarty->assign('_pagetitle',$modx->lexicon('chunk_new'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/chunk/create.tpl');

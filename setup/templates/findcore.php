@@ -22,7 +22,7 @@ if ($posted) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>MODx Revolution Core Finder</title>
+    <title>MODX Revolution Core Finder</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" media="all" href="assets/css/reset.css" />
@@ -57,13 +57,13 @@ if ($posted) {
         <div id="metaheader">
             <div id="metanav" class="grid_9">
                <ul>
-                    <li><a href="#"><strong>MODx Revolution</strong>&nbsp;<em>Core Finder</em></a></li>
+                    <li><a href="#"><strong>MODX Revolution</strong>&nbsp;<em>Core Finder</em></a></li>
                </ul>
             </div>
         </div>
         <div class="clear">&nbsp;</div>
         <div id="mainheader">
-            <h1 id="logo" class="pngfix"><span>MODx</span></h1>
+            <h1 id="logo" class="pngfix"><span>MODX</span></h1>
         </div>
         <div class="clear">&nbsp;</div>
     </div>
@@ -75,7 +75,7 @@ if ($posted) {
        <!-- start content -->
         <div id="content" class="grid_12">
             <h2>Your MODX_CORE_PATH is invalid</h2>
-            <p>In order to install MODx Revolution, you must first locate your core directory that contains the files required to run MODx,
+            <p>In order to install MODX Revolution, you must first locate your core directory that contains the files required to run MODX,
             including this setup application. The current value specified is not valid and setup cannot continue until this is resolved.</p>
             <div>
                 <form id="corefinder" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
@@ -115,8 +115,8 @@ if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 <div id="footer">
     <div id="footer-inner">
     <div class="container_12">
-        <p>&copy; 2005-2010 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODx</a> Content Management Framework (CMF) project. All rights reserved. MODx is licensed under the GNU GPL.</p>
-        <p>MODx is free software.  We encourage you to be creative and make use of MODx in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODx, that you keep the source code free!</p>
+        <p>&copy; 2005-2011 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+        <p>MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!</p>
     </div>
     </div>
 </div>

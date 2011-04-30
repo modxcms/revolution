@@ -9,6 +9,6 @@
  */
 $_lang['clear'] = 'クリア';
 $_lang['error_log'] = 'エラーログ';
-$_lang['error_log_desc'] = 'MODx Revolutionのエラーログ:';
+$_lang['error_log_desc'] = 'MODX Revolutionのエラーログ:';
 $_lang['system_events'] = 'システムイベント';
 $_lang['priority'] = 'プライオリティ';

@@ -2,7 +2,7 @@
 /**
  * User Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
@@ -17,12 +17,12 @@ $_lang['change_password_confirm'] = 'Bevestig wachtwoord';
 $_lang['change_password_new'] = 'Nieuw wachtwoord';
 $_lang['city'] = 'Plaats';
 $_lang['extended_fields'] = 'Extra velden';
-$_lang['extended_fields_msg'] = 'Wijzig elk extra veld die geïmplementeerd zijn hier.';
+$_lang['extended_fields_msg'] = 'Wijzig elk extra veld die geï¿½mplementeerd zijn hier.';
 $_lang['login_options'] = 'Inlog opties';
 $_lang['minimum_role'] = 'Minimale rol';
 $_lang['password'] = 'Wachtwoord';
 $_lang['password_confirm'] = 'Bevestig wachtwoord';
-$_lang['password_gen_gen'] = 'Laat MODx een wachtwoord genereren.';
+$_lang['password_gen_gen'] = 'Laat MODX een wachtwoord genereren.';
 $_lang['password_gen_method'] = 'Nieuwe wachtwoord methode';
 $_lang['password_gen_specify'] = 'Laat mij het wachtwoord ingeven:';
 $_lang['password_method'] = 'Wachtwoord notificatie methode';
@@ -56,12 +56,17 @@ $_lang['ugrg_grid_title'] = 'Toegang gebruikersgroep aan documentgroep';
 $_lang['ugrg_mutate'] = 'Toegang gebruikersgroep aan documentgroep';
 $_lang['ugrg_remove'] = 'Verwijder toegang gebruikersgroep van deze documentgroep';
 $_lang['user'] = 'Gebruiker';
+$_lang['user_active_desc'] = 'Al dan niet deze gebruiker actief is. Indien een gebruiker inactief is, dan is het niet mogelijk om in te loggen in een context of de manager.';
 $_lang['user_add_group'] = 'Voeg gebruikersgroep toe aan gebruiker';
 $_lang['user_already_in_use'] = 'Gebruikersnaam is reeds in gebruik!';
 $_lang['user_block'] = 'Geblokkeerd';
+$_lang['user_block_desc'] = 'Indien aangevinkt, wordt deze gebruiker permanent geblokkeerd om in te loggen.';
 $_lang['user_blockedafter'] = 'Geblokkeerd na';
+$_lang['user_blockedafter_desc'] = 'Indien gezet, de gebruiker wordt na deze tijd geblokkeerd.';
 $_lang['user_blockeduntil'] = 'Geblokkeerd tot';
+$_lang['user_blockeduntil_desc'] = 'Indien gezet, de gebruiker wordt tot deze tijd geblokkeerd.';
 $_lang['user_changeddata'] = 'Jouw gegevens zijn gewijzigd. Je moet opnieuw inloggen.';
+$_lang['user_class_key_desc'] = 'De MODX Class Key voor deze gebruiker. Wijzig dit alleen als je weet wat je wat doet.';
 $_lang['user_created_password_message'] = 'De gebruiker is aangemaakt. Het wachtwoord is: [[+password]]';
 $_lang['user_confirm_remove'] = 'Weet je zeker dat je deze gebruiker definitief wilt verwijderen?';
 $_lang['user_country'] = 'Land';
@@ -73,6 +78,7 @@ $_lang['user_err_access_permissions_save'] = 'Er is een fout opgetreden tijdens 
 $_lang['user_err_ae_group'] = 'Gebruiker bevindt zich reeds in deze groep!';
 $_lang['user_err_already_exists'] = 'Gebruikersnaam bestaat reeds!';
 $_lang['user_err_already_exists_email'] = 'E-mailadres bestaat reeds!';
+$_lang['user_err_cannot_delete_last_admin'] = 'Je kunt de laatste gebruiker uit de Adminstrator groep niet verwijderen, omdat jouw site anders geen beheerders heeft.';
 $_lang['user_err_cannot_delete_self'] = 'Je kunt jezelf niet verwijderen!';
 $_lang['user_err_nf'] = 'Gebruiker niet gevonden.';
 $_lang['user_err_not_specified'] = 'Geen gebruiker gedefinieerd!';
@@ -83,7 +89,7 @@ $_lang['user_err_not_specified_email'] = 'Vul een geldig e-mailadres in.';
 $_lang['user_err_not_specified_fileman_path'] = 'De map die je hebt opgegeven:<br />1) Bestaat niet.<br />2) Heeft geen leesrechten.<br />3) Is geen map.';
 $_lang['user_err_not_specified_manageraccess'] = 'Geef aan of de gebruiker wel dan geen toegang heeft tot Manager pagina\'s.';
 $_lang['user_err_not_specified_managerstartup'] = 'Vul een bestaand en geldig document-ID in voor de manager inlog startpagina.';
-$_lang['user_err_not_specified_managertheme'] = 'Het theme van de manager is niet geüpload.';
+$_lang['user_err_not_specified_managertheme'] = 'Het theme van de manager is niet geï¿½pload.';
 $_lang['user_err_not_specified_mobnumber'] = 'Vul een geldig mobiel nummer in. (Indien in U.S., vul een gebiedscode in)';
 $_lang['user_err_not_specified_notification_method'] = 'Geef de nieuwe notificatie methode aan voor deze gebruiker.';
 $_lang['user_err_not_specified_password'] = 'Vul een wachtwoord in.';
@@ -101,6 +107,7 @@ $_lang['user_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen v
 $_lang['user_err_resource_subdirectory'] = 'De map die je hebt opgegeven bevat niet de %s mappen.';
 $_lang['user_err_save'] = 'Er is een fout opgetreden tijdens het opslaan van de gebruiker.';
 $_lang['user_failedlogincount'] = 'Inloggen mislukt';
+$_lang['user_failedlogincount_desc'] = 'Het aantal pogingen de gebruiker heeft geprobeerd in te loggen met een verkeerd wachtwoord.';
 $_lang['user_fax'] = 'Fax';
 $_lang['user_female'] = 'Vrouw';
 $_lang['user_full_name'] = 'Volledige naam';
@@ -142,15 +149,17 @@ $_lang['user_grid_empty'] = 'Geen te tonen gebruikers';
 $_lang['user_grid_paginate'] = 'Toon gebruikers {0} - {1} van {2}';
 $_lang['user_is_blocked'] = 'Deze gebruiker is geblokkeerd!';
 $_lang['user_logincount'] = 'Aantal keren ingelogd';
+$_lang['user_logincount_desc'] = 'Het totaal aantal keren de gebruiker is ingelogd.';
 $_lang['user_male'] = 'Man';
 $_lang['user_management_msg'] = 'Hier kun je kiezen welke gebruiker je wilt aanpassen.';
 $_lang['user_mobile'] = 'Mobiel telefoonnummer';
-$_lang['user_new'] = 'Nieuwe gberuiker';
+$_lang['user_new'] = 'Nieuwe gebruiker';
 $_lang['user_password_changed'] = 'Wachtwoord met succes aangepast naar: [[+password]]';
 $_lang['user_phone'] = 'Telefoonnummer';
 $_lang['user_photo'] = 'Gebruikersfoto';
 $_lang['user_photo_message'] = 'Vul een URL van de afbeelding van deze gebruiker in of gebruik de invoegen knop om een afbeelding te selecteren/uploaden op de server.';
 $_lang['user_prevlogin'] = 'Laatste inlog';
+$_lang['user_prevlogin_desc'] = 'De tijd waarop de gebruiker voor het laatst is ingelogd.';
 $_lang['user_profile_err_nf'] = 'FATALE FOUT: Gebruikersprofiel niet gevonden.';
 $_lang['user_profile_err_save'] = 'Er is een fout opgetreden tijdens het proberen op te slaan van de gebruikersattributen.';
 $_lang['user_remove'] = 'Gebruiker verwijder';
@@ -169,6 +178,7 @@ $_lang['user_update'] = 'Gebruiker aanpassen';
 $_lang['user_updated_password_message'] = 'De gebruiker is aangepast. Dit is het nieuwe wachtwoord: [[+password]]';
 $_lang['user_upload_message'] = ' Indien je wenst dat deze gebruiker geen bestandstypen kan uploaden in deze categorie, controleer dan dat de \'Use Main Configuration Setting\' checkbox niet is aangevinkt en laat het veld leeg.';
 $_lang['user_use_config'] = 'Gebruik systeem configuratie instelling';
+$_lang['user_username_desc'] = 'De unieke identificatie voor deze gebruiker en de naam waarmee ze kunnen inloggen op de site.';
 $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'Postcode';
 $_lang['username'] = 'Gebruikersnaam';

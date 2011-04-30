@@ -30,7 +30,7 @@ if ($stmt) {
 }
 $data['database_version'] = $result;
 $data['database_charset'] = $modx->getOption('charset');
-$data['database_name'] = str_replace('`','',$modx->getOption('dbname'));
+$data['database_name'] = trim($modx->getOption('dbname'), $modx->_escapeCharOpen . $modx->_escapeCharClose);
 $data['database_server'] = $modx->getOption('host');
 $data['now'] = strftime('%b %d, %Y %I:%M %p',time());
 $data['table_prefix'] = $modx->getOption('table_prefix');

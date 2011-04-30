@@ -15,21 +15,25 @@ MODx.grid.ManagerLog = function(config) {
         ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
         ,autosave: false
         ,paging: true
+        ,remoteSort: true
         ,columns: [{
             header: _('occurred')
             ,dataIndex: 'occurred'
             ,width: 125
+            ,sortable: true
         },{
             header: _('user')
             ,dataIndex: 'username'
             ,width: 125
             ,editable: false
+            ,sortable: true
         },{
             header: _('action')
             ,dataIndex: 'action'
             ,width: 125
+            ,sortable: true
         },{
-            header: 'Object'
+            header: _('object')
             ,dataIndex: 'name'
             ,width: 300
         }]

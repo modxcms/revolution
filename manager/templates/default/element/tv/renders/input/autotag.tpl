@@ -9,24 +9,30 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-var fld{/literal}{$tv->id}{literal} = MODx.load({
-{/literal}
-    xtype: 'textfield'
-    ,applyTo: 'tv{$tv->id}'
-    ,width: '97%'
-    ,enableKeyEvents: true
-{literal}
-    ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
-});
-MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
-    var tf = fld{/literal}{$tv->id}{literal};
-    if (tf) {
-        var ov = tf.getValue();
-        if (ov != '') {
-            v = ','+v;
+Ext.onReady(function() {
+    var fld{/literal}{$tv->id}{literal} = MODx.load({
+    {/literal}
+        xtype: 'textfield'
+        ,applyTo: 'tv{$tv->id}'
+        ,width: '97%'
+        ,id: 'tv{$tv->id}'
+        ,enableKeyEvents: true
+        ,msgTarget: 'under'
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+    {literal}
+        ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+    });
+    MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
+        var tf = fld;
+        if (tf) {
+            var ov = tf.getValue();
+            if (ov != '') {
+                v = ','+v;
+            }
         }
-    }
-    return v;
+        return v;
+    });
+    Ext.getCmp('modx-panel-resource').getForm().add(fld{/literal}{$tv->id}{literal});
 });
 {/literal}
 // ]]>
@@ -41,35 +47,38 @@ MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).on('click',function(e,i) {
-    var li = Ext.get(i);
-    if (!li) { return; }
-    var tf = Ext.get('tv{/literal}{$tv->id}{literal}');
-    if (li.hasClass('modx-tag-checked')) {
-        tf.dom.value = Ext.util.Format.trimCommas(tf.dom.value.replace(li.dom.title,''));
-        li.removeClass('modx-tag-checked');
-    } else {
-        var v = tf.dom.value+(tf.dom.value != '' ? ',' : '');
-        tf.dom.value = Ext.util.Format.trimCommas(v+li.dom.title);
-        li.addClass('modx-tag-checked');
-    }
-    MODx.fireResourceFormChange();
-});
-
-var rs = Ext.get('modx-reset-tv-{/literal}{$tv->id}{literal}');
-if (rs) {
-    rs.on('click',function(e,o) {
-        var df = Ext.get('tvdef{/literal}{$tv->id}{literal}').dom.value;
-        df = df.split(',');
-        Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).each(function(li,c,idx) {
-            if (df.indexOf(li.dom.title) != -1) {
-                li.addClass('modx-tag-checked');
-            } else {
-                li.removeClass('modx-tag-checked');
-            }
-        });
+Ext.onReady(function() {
+    Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).on('click',function(e,i) {
+        var li = Ext.get(i);
+        if (!li) { return; }
+        var tf = Ext.getCmp('tv{/literal}{$tv->id}{literal}');
+        var v = tf.getValue();
+        if (li.hasClass('modx-tag-checked')) {
+            tf.setValue(Ext.util.Format.trimCommas(v.replace(li.dom.title,'')));
+            li.removeClass('modx-tag-checked');
+        } else {
+            v = v+(v != '' ? ',' : '');
+            tf.setValue(Ext.util.Format.trimCommas(v+li.dom.title));
+            li.addClass('modx-tag-checked');
+        }
+        MODx.fireResourceFormChange();
     });
-}
+    var p = Ext.getCmp('modx-panel-resource');
+    if (p) {
+        p.on('tv-reset',function(o) {
+            if (o.id != '{/literal}{$tv->id}{literal}') return;
+            var df = Ext.get('tvdef'+o.id).dom.value;
+            df = df.split(',');
+            Ext.select('#tv-'+o.id+'-tag-list li',true).each(function(li,c,idx) {
+                if (df.indexOf(li.dom.title) != -1) {
+                    li.addClass('modx-tag-checked');
+                } else {
+                    li.removeClass('modx-tag-checked');
+                }
+            });
+        });
+    }
+});
 {/literal}
 // ]]>
 </script>

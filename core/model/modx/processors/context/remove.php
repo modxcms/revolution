@@ -31,10 +31,9 @@ $modx->removeCollection('modResource',array(
 ));
 
 /* log manager action */
-$modx->logManagerAction('context_delete','modContext',$context->get('id'));
+$modx->logManagerAction('context_delete','modContext',$context->get('key'));
 
 /* clear cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh();
 
 return $modx->error->success();

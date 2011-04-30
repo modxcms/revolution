@@ -1,6 +1,6 @@
 <?php
 /**
- * Gets a chunk.
+ * Gets a Transport Package.
  *
  * @param integer $id The ID of the chunk.
  *
@@ -16,10 +16,10 @@ $dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %
 /* get package */
 if (empty($scriptProperties['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
 $c = $modx->newQuery('transport.modTransportPackage');
-$c->select('
-    `modTransportPackage`.*,
-    `Provider`.`name` AS `provider_name`
-');
+$c->select($modx->getSelectColumns('transport.modTransportPackage','modTransportPackage'));
+$c->select(array(
+    'Provider.name AS provider_name',
+));
 $c->leftJoin('transport.modTransportProvider','Provider');
 $c->where(array(
     'signature' => $scriptProperties['signature'],

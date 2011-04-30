@@ -21,6 +21,7 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'date_sent');
 $dir = $modx->getOption('dir',$scriptProperties,'DESC');
+$search = $modx->getOption('search',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modUserMessage');
@@ -28,11 +29,17 @@ $c->innerJoin('modUser','Sender');
 $c->where(array(
     'recipient' => $modx->user->get('id')
 ));
+if (!empty($search)) {
+    $c->andCondition(array(
+        'subject:LIKE' => '%'.$search.'%',
+        'OR:message:LIKE' => '%'.$search.'%',
+    ),null,2);
+}
 $count = $modx->getCount('modUserMessage',$c);
-$c->select('
-    `modUserMessage`.*,
-    `Sender`.`username` AS `sender_username`
-');
+$c->select(array(
+    'modUserMessage.*',
+    'sender_username' => 'Sender.username',
+));
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $messages = $modx->getCollection('modUserMessage',$c);
@@ -43,17 +50,6 @@ foreach ($messages as $message) {
 	$ma = $message->toArray();
     $ma['sender_name'] = $message->get('sender_username');
     $ma['read'] = $message->get('read') ? true : false;
-    $ma['menu'] = array(
-        array(
-            'text' => $modx->lexicon('mark_unread'),
-            'handler' => 'this.markUnread',
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('delete'),
-            'handler' => 'this.remove.createDelegate(this,["message_remove_confirm"])'
-        ),
-    );
     $list[] = $ma;
 }
 return $this->outputArray($list,$count);

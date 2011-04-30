@@ -27,6 +27,17 @@ if (empty($profile)) {
 }
 $profile->fromArray($_DATA);
 
+/* invoke OnBeforeUserFormSave event */
+$OnBeforeUserFormSave = $modx->invokeEvent('OnBeforeUserFormSave',array(
+    'mode' => modSystemEvent::MODE_UPD,
+    'user' => &$user,
+    'id' => $user->get('id'),
+));
+$canSave = $this->processEventResponse($OnBeforeUserFormSave);
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
 /* save user and profile */
 if ($user->save() == false || $profile->save() == false) {
     return $modx->error->failure($modx->lexicon('user_err_save'));

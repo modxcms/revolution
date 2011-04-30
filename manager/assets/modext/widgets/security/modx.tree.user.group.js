@@ -16,7 +16,7 @@ MODx.tree.UserGroup = function(config) {
         ,root_name: _('user_groups')
         ,enableDrag: true
         ,enableDrop: true
-        ,rootVisible: false
+        ,rootVisible: true
         ,ddAppendOnly: true
         ,useDefaultToolbar: true
         ,tbar: [{
@@ -165,35 +165,23 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
             }
         });
     }
+
+    ,_handleDrop: function(e) {
+        s = false;
+        switch (e.dropNode.attributes.type) {
+            case 'user':
+                s = !(e.point == 'above' || e.point == 'below');
+                s = s && e.target.attributes.type == 'usergroup' && e.point == 'append';
+            break;
+            case 'usergroup':
+                s = true;
+            break;
+        }
+        return s;
+
+    }
 });
 Ext.reg('modx-tree-usergroup',MODx.tree.UserGroup);
-
-MODx.window.CreateUserGroup = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: _('user_group_create')
-        ,height: 150
-        ,width: 400
-        ,url: MODx.config.connectors_url+'security/usergroup/index.php'
-        ,action: 'create'
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'parent'
-            ,value: 0
-        },{
-            fieldLabel: _('name')
-            ,name: 'name'
-            ,hiddenName: 'name'
-            ,id: 'modx-cug-name'
-            ,xtype: 'textfield'
-            ,allowBlank: false
-            ,anchor: '90%'
-        }]
-    });
-    MODx.window.CreateUserGroup.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.window.CreateUserGroup,MODx.Window);
-Ext.reg('modx-window-usergroup-create',MODx.window.CreateUserGroup);
 
 MODx.window.CreateUserGroup = function(config) {
     config = config || {};
@@ -206,10 +194,16 @@ MODx.window.CreateUserGroup = function(config) {
         ,url: MODx.config.connectors_url+'security/group.php'
         ,action: 'create'
         ,fields: [{
-            fieldLabel: _('name')
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,xtype: 'textfield'
+            ,anchor: '90%'
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('description')
+            ,name: 'description'
+            ,id: 'modx-'+this.ident+'-description'
             ,anchor: '90%'
         },{
             name: 'parent'
@@ -239,6 +233,7 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,xtype: 'modx-combo-user'
             ,editable: true
             ,typeAhead: true
+            ,allowBlank: false
             ,id: 'modx-'+this.ident+'-user'
             ,anchor: '90%'
         },{

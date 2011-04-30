@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-03-26
  */
 $_lang['event'] = 'Událost';
 $_lang['events'] = 'Události';
@@ -21,7 +21,7 @@ $_lang['plugin_delete_confirm'] = 'Opravdu chcete odstranit tento plugin?';
 $_lang['plugin_disabled'] = 'Plugin zakázán';
 $_lang['plugin_duplicate_confirm'] = 'Opravdu chcete zkopírovat tento plugin?';
 $_lang['plugin_err_create'] = 'Nastala chyba při vytváření pluginu.';
-$_lang['plugin_err_exists_name'] = 'Plugin s tímto názvem již existuje.';
+$_lang['plugin_err_exists_name'] = 'Plugin s názvem "[[+name]]" již existuje.';
 $_lang['plugin_err_invalid_name'] = 'Název pluginu není platný.';
 $_lang['plugin_err_nf'] = 'Plugin nenalezen!';
 $_lang['plugin_err_ns'] = 'Nespecifikovaný plugin.';

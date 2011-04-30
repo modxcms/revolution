@@ -75,7 +75,7 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,grow: true
             ,listeners: lsr
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'published'
             ,fieldLabel: _('published')
             ,inputValue: 1
@@ -83,7 +83,7 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,handler: this.filter
             ,scope: this
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'unpublished'
             ,fieldLabel: _('unpublished')
             ,inputValue: 1
@@ -91,7 +91,7 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,handler: this.filter
             ,scope: this
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'deleted'
             ,fieldLabel: _('deleted')
             ,inputValue: 1
@@ -99,7 +99,7 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,handler: this.filter
             ,scope: this
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'undeleted'
             ,fieldLabel: _('undeleted')
             ,inputValue: 1

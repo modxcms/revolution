@@ -37,6 +37,7 @@ if (!empty($scriptProperties['addNone'])) {
     $list[] = array(
         'id' => 0,
         'name' => $modx->lexicon('none'),
+        'description' => '',
         'parent' => 0,
     );
 }
@@ -44,6 +45,7 @@ if (!empty($scriptProperties['combo'])) {
     $list[] = array(
         'id' => '',
         'name' => ' ('.$modx->lexicon('anonymous').') ',
+        'description' => '',
         'parent' => 0,
     );
 }

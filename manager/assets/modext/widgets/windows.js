@@ -29,7 +29,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
 
         if (this.config.is_folder) {
             items.push({
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('duplicate_children')
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
@@ -215,7 +215,7 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -235,6 +235,19 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdateChunk.superclass.constructor.call(this,config);
@@ -323,7 +336,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -343,6 +356,19 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdateTemplate.superclass.constructor.call(this,config);
@@ -432,7 +458,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -452,6 +478,19 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdateSnippet.superclass.constructor.call(this,config);
@@ -490,7 +529,7 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'disabled'
             ,id: 'modx-'+this.ident+'-disabled'
             ,fieldLabel: _('disabled')
@@ -549,14 +588,14 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'disabled'
             ,id: 'modx-'+this.ident+'-disabled'
             ,fieldLabel: _('disabled')
             ,inputValue: 1
             ,checked: false
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -576,6 +615,19 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdatePlugin.superclass.constructor.call(this,config);
@@ -598,6 +650,12 @@ MODx.window.QuickCreateTV = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
+            ,anchor: '90%'
+        },{
+            xtype: 'textfield'
+            ,name: 'caption'
+            ,id: 'modx-'+this.ident+'-caption'
+            ,fieldLabel: _('caption')
             ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
@@ -664,6 +722,12 @@ MODx.window.QuickUpdateTV = function(config) {
             ,fieldLabel: _('name')
             ,anchor: '90%'
         },{
+            xtype: 'textfield'
+            ,name: 'caption'
+            ,id: 'modx-'+this.ident+'-caption'
+            ,fieldLabel: _('caption')
+            ,anchor: '90%'
+        },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
@@ -677,7 +741,7 @@ MODx.window.QuickUpdateTV = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -710,6 +774,19 @@ MODx.window.QuickUpdateTV = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdateTV.superclass.constructor.call(this,config);

@@ -122,7 +122,7 @@ MODx.window.DuplicateLanguage = function(config) {
             ,anchor: '95%'
             ,allowBlank: false
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,boxLabel: _('language_recursive')
             ,description: _('language_recursive_desc')
             ,name: 'recursive'

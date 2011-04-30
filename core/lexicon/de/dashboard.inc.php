@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic dashboard
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['active_users_none'] = 'Momentan keine Benutzer aktiv.';  // Keine momentan aktiven Benutzer.
 $_lang['add_user'] = 'Benutzer hinzufügen';
@@ -15,7 +17,7 @@ $_lang['documentation'] = 'Dokumentation';
 $_lang['file_bug'] = 'Bug melden';
 $_lang['forums'] = 'Foren';
 $_lang['help'] = 'Hilfe';
-$_lang['modx_news'] = 'MODx-News';
+$_lang['modx_news'] = 'MODX-News';
 $_lang['onlineusers_action'] = 'Aktion';
 $_lang['onlineusers_actionid'] = 'Aktions-ID';
 $_lang['onlineusers_ipaddress'] = 'IP-Adresse des Benutzers';
@@ -29,7 +31,7 @@ $_lang['security_notices'] = 'Sicherheitshinweise';
 $_lang['view_tree'] = 'Baum anzeigen';
 $_lang['welcome_back'] = 'Willkommen zurück, [[+name]].';
 $_lang['welcome_messages'] = 'Ihr Posteingang enthält <strong>%d</strong> Nachricht(en), von denen <strong>%s</strong> noch nicht gelesen wurden.';
-$_lang['welcome_title'] = 'Willkommen in Ihrem MODx-Content-Manager';
+$_lang['welcome_title'] = 'Willkommen in Ihrem MODX-Content-Manager';
 $_lang['yourinfo_message'] = 'Dieser Bereich enthält einige Informationen über Sie:';
 $_lang['yourinfo_previous_login'] = 'Ihr letzter Login:';
 $_lang['yourinfo_title'] = 'Informationen über Sie';

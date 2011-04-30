@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-03-26
  */
 $_lang['access'] = 'Přístup';
 $_lang['cache_output'] = 'Obsah cache';
@@ -23,7 +23,7 @@ $_lang['document_create'] = 'Dokument'; // strom > vytvorit v okne
 $_lang['document_create_here'] = 'Dokument'; // strom > vytvorit
 $_lang['document_new'] = 'Nový dokument';
 $_lang['documents'] = 'Dokumenty';
-$_lang['duplicate_alias_found'] = 'Dokument ID [[+id]] již používá alias [[+alias]]. Zadejte jiný, ještě nepoužitý alias.';
+$_lang['duplicate_uri_found'] = 'Dokument ID [[+id]] již používá URI [[+uri]]. Zadejte unikátní alias nebo použijte Freeze URI pro manuální nastavení.';
 $_lang['empty_template'] = '(žádný)';
 $_lang['general'] = 'Obecné informace';
 $_lang['markup'] = 'Markup/Struktura';
@@ -38,7 +38,7 @@ $_lang['resource_change_template_confirm'] = 'Opravdu chcete změnit šablonu? T
 $_lang['resource_cacheable'] = 'Ukládat cache';
 $_lang['resource_cacheable_help'] = 'Pokud je aktivní, dokument bude ukládán do cache.';
 $_lang['resource_cancel_dirty_confirm'] = 'V dokumentu jsou neuložené změny. Opravdu chcete pokračovat?';
-$_lang['resource_class_key_help'] = 'Toto je třída obsahu v rámci MODx.';
+$_lang['resource_class_key_help'] = 'Toto je třída obsahu v rámci MODX.';
 $_lang['resource_content'] = 'Obsah dokumentu';
 $_lang['resource_contentdispo'] = 'Zpracování obsahu';
 $_lang['resource_contentdispo_help'] = 'Toto políčko určuje jak bude tento dokument předán prohlížeči. Pokud má být obsah nabídnut ke stažení zvolte možnost Příloha.';
@@ -68,6 +68,7 @@ $_lang['resource_err_delete_sitestart'] = 'Tento dokument je nastaven jako "Úvo
 $_lang['resource_err_delete_siteunavailable'] = 'Tento dokument je nastaven jako "Stránka nedostupnosti" a nemůže být odstraněn!';
 $_lang['resource_err_duplicate'] = 'Nastala chyba při kopírování dokumentu.';
 $_lang['resource_err_move_to_child'] = 'Nemůžete přesunout dokument do jeho potomka.';
+$_lang['resource_err_move_sitestart'] = 'Dokument je nastaven v proměnné konfigurace site_start a nelze jej přesunout do jiného kontextu!';
 $_lang['resource_err_nf'] = 'Dokument nenalezen.';
 $_lang['resource_err_nfs'] = 'Dokument s ID: [[+id]] nenalezen';
 $_lang['resource_err_ns'] = 'Nespecifikovaný dokument.';
@@ -90,7 +91,7 @@ $_lang['resource_hide_from_menus'] = 'Skrýt z menu';
 $_lang['resource_hide_from_menus_help'] = 'Pokud je aktivní, stránka se <b>nebude</b> zobrazovat v menu. Může se stát, že některé konstruktory menu mohou tuto volbu ignorovat.';
 $_lang['resource_link_attributes'] = 'Atributy odkazu';
 $_lang['resource_link_attributes_help'] = 'Atributy odkazu na tento dokument, např. target= nebo rel=.';
-$_lang['resource_locked_by'] = 'Dokument s ID [[+id]] je uzamčen uživatelem [[+user]]';
+$_lang['resource_locked_by'] = 'Uzamčeno uživatelem [[+user]]';
 $_lang['resource_longtitle'] = 'Dlouhý název';
 $_lang['resource_longtitle_help'] = 'Toto je delší název pro tento dokument. Je dobrý pro vyhledávače a měl by více popisovat tento dokument.';
 $_lang['resource_menuindex'] = 'Index řazení';
@@ -115,7 +116,7 @@ $_lang['resource_publishedon'] = 'Publikováno';
 $_lang['resource_publishedon_help'] = 'Datum, kdy byl dokument publikován.';
 $_lang['resource_refresh'] = 'Obnovit dokument';
 $_lang['resource_richtext'] = 'WYSIWYG editor';
-$_lang['resource_richtext_help'] = 'Pokud je aktivní, MODx použije WYSIWYG editor (to co vidíte je to jak to bude vypadat), pokud dokument obsahuje javaskript nebo formuláře ponechte toto nastavení neaktivní, použijte pouze na HTML dokumentech.';
+$_lang['resource_richtext_help'] = 'Pokud je aktivní, MODX použije WYSIWYG editor (to co vidíte je to jak to bude vypadat), pokud dokument obsahuje javaskript nebo formuláře ponechte toto nastavení neaktivní, použijte pouze na HTML dokumentech.';
 $_lang['resource_searchable'] = 'Vyhledatelný dokument';
 $_lang['resource_searchable_help'] = 'Pokud je aktivní, dokument bude možno vyhledat přes vyhledávání. Toto nastavení může být využito pro jiné účely ve snippetech.';
 $_lang['resource_settings'] = 'Nastavení dokumentu';
@@ -124,7 +125,7 @@ $_lang['resource_status_help'] = 'Pokud je publikován je dokument dostupný ná
 $_lang['resource_summary'] = 'Perex';
 $_lang['resource_summary_help'] = 'Krátký souhr obsahu dokumentu.';
 $_lang['resource_syncsite'] = 'Vyprázdnit cache';
-$_lang['resource_syncsite_help'] = 'Pokud je aktivní, MODx vyprázdní cache dokumentu po jeho uložení. Tímto zaručíte, že návštěvík webu uvidí vždy aktuální verzi dokumentu.';
+$_lang['resource_syncsite_help'] = 'Pokud je aktivní, MODX vyprázdní cache dokumentu po jeho uložení. Tímto zaručíte, že návštěvík webu uvidí vždy aktuální verzi dokumentu.';
 $_lang['resource_template'] = 'Použítá šablona';
 $_lang['resource_template_help'] = 'Šablona používaná dokumentem.';
 $_lang['resource_undelete'] = 'Obnovit dokument';
@@ -134,6 +135,10 @@ $_lang['resource_unpublishdate'] = 'Ukončení publikování';
 $_lang['resource_unpublishdate_help'] = 'Pokud nastavíte datum ukončení publikování, bude dokumentu automaticky ukončeno publikování jakmile nastane toto datum. Klikněte na ikonu kalendáře pro výběr data nebo nechte políčko prázdné a tím neomezíte ukončení publikování dokumentu.';
 $_lang['resource_unpublished'] = 'Nepublikovaný';
 $_lang['resource_untitled'] = '_Bezejmenný dokument';
+$_lang['resource_uri'] = 'URI';
+$_lang['resource_uri_help'] = 'Relativní URL pro tento dokument.';
+$_lang['resource_uri_override'] = 'Statická URI';
+$_lang['resource_uri_override_help'] = 'Změnou tohoto nastavení dovolíte určit statickou URI pro tento dokument hodnotou zapsanou níže.';
 $_lang['resource_with_id_not_found'] = 'Dokument s ID %s nenalezen!';
 $_lang['resource_view'] = 'Zobrazit dokument';
 $_lang['show_sort_options'] = 'Zobrazit možnosti řazení';
@@ -147,6 +152,7 @@ $_lang['status'] = 'Stav';
 $_lang['symlink'] = 'Symbolický odkaz';
 $_lang['symlink_create'] = 'Vytvořit symbolický odkaz';
 $_lang['symlink_create_here'] = 'Symbolický odkaz'; // strom > vytvorit
+$_lang['symlink_help'] = 'Adresa objektu, na který chcete odkazovat pomocít tohoto symbolického linku. Chcete-li odkazovat na existující MODx dokument zadejte zde jeho ID.';
 $_lang['symlink_message'] = 'Symbolický odkaz je odkaz na jiný dokument v rámci portálu, kterého obsah je zobrazen beze změny URL.';
 $_lang['symlink_new'] = 'Nový symbolický odkaz';
 $_lang['template_variables'] = 'Template variable';
@@ -155,5 +161,5 @@ $_lang['weblink'] = 'Webový odkaz';
 $_lang['weblink_create'] = 'Vytvořit webový odkaz';
 $_lang['weblink_create_here'] = 'Webový odkaz'; // strom > vytvorit
 $_lang['weblink_help'] = 'Adresa, která bude cílem tohoto webového odkazu.';
-$_lang['weblink_message'] = 'Webový odkaz je odkazem na místo na internetu. Může to být dokument v rámci MODx, stránka jiného portálu, obrázek nebo jiný soubor na internetu.<p>';
+$_lang['weblink_message'] = 'Webový odkaz je odkazem na místo na internetu. Může to být dokument v rámci MODX, stránka jiného portálu, obrázek nebo jiný soubor na internetu.<p>';
 $_lang['weblink_new'] = 'Nový webový odkaz';
