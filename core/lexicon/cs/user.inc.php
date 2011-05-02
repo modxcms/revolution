@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-04-04
+ * @updated 2011-04-30
  */
 $_lang['active'] = 'Aktivní';
 $_lang['address'] = 'Adresa';
@@ -101,12 +101,14 @@ $_lang['user_err_not_specified_uploadsize'] = 'Uveďte platnou maximalní veliko
 $_lang['user_err_not_specified_username'] = 'Uveďte uživatelské jméno.';
 $_lang['user_err_ns'] = 'Nespecifikován uživatel.';
 $_lang['user_err_password'] = 'Špatné heslo.';
+$_lang['user_err_password_invalid'] = 'Zadané heslo je chybné.';
 $_lang['user_err_password_invalid_old'] = 'Špatné původní heslo.';
 $_lang['user_err_password_too_short'] = 'Heslo je příliš krátké!';
 $_lang['user_err_password_no_match'] = 'Hesla se neshodují.';
 $_lang['user_err_remove'] = 'Nastala chyba při pokusu odstranit uživatele.';
 $_lang['user_err_resource_subdirectory'] = 'Složka, která byla specifikována, neobsahuje %s adresáře.';
 $_lang['user_err_save'] = 'Nastala chyba při ukládání uživatele.';
+$_lang['user_err_username_invalid'] = 'Zadané uživatelské jméno je chybné.';
 $_lang['user_failedlogincount'] = 'Nezdařená přihlášení';
 $_lang['user_failedlogincount_desc'] = 'Počet, kolikrát se tomuto uživateli nepodařilo přihlásit vložením nesprávného hesla.';
 $_lang['user_fax'] = 'Fax';
