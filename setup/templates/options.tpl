@@ -52,11 +52,10 @@
 </tbody>
 </table>
 
+{if $installmode EQ 0}
 <hr />
-
 <h3>{$_lang.advanced_options}</h3>
 
-{if $installmode EQ 0}
 <table class="options">
 <tbody>
 <tr>
@@ -83,6 +82,10 @@
 {if $smarty.const.MODX_SETUP_KEY EQ '@traditional@' AND $unpacked EQ 1 AND $files_exist EQ 1}
 <input type="hidden" name="unpacked" id="unpacked" value="1" />
 {else}
+{if $installmode NE 0}
+<hr />
+<h3>{$_lang.advanced_options}</h3>
+{/if}
 <table class="options">
 <tbody>
 <tr>
@@ -103,10 +106,10 @@
     </th>
     <td>{$_lang.options_core_inplace_note}</td>
 </tr>
-{/if}
 </tbody>
 </table>
 <br />
+{/if}
 
 
 <div class="setup_navbar">
