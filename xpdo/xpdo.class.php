@@ -108,6 +108,8 @@ class xPDO {
     const OPT_CACHE_HANDLER = 'cache_handler';
     const OPT_CACHE_KEY = 'cache_key';
     const OPT_CACHE_PATH = 'cache_path';
+    const OPT_CACHE_ATTEMPTS = 'cache_attempts';
+    const OPT_CACHE_ATTEMPT_DELAY = 'cache_attempt_delay';
     const OPT_CALLBACK_ON_REMOVE = 'callback_on_remove';
     const OPT_CALLBACK_ON_SAVE = 'callback_on_save';
     const OPT_HYDRATE_FIELDS = 'hydrate_fields';

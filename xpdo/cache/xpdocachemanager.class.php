@@ -222,13 +222,26 @@ class xPDOCacheManager {
         $fmode = (strlen($mode) > 1 && in_array($mode[1], array('b', 't'))) ? "a{$mode[1]}" : 'a';
         $file= @fopen($filename, $fmode);
         if ($file) {
-            if ($append === true || flock($file, LOCK_EX | LOCK_NB)) {
-                if ($append === false) {
+            if ($append === true) {
+                $written= fwrite($file, $content);
+            } else {
+                $locked = false;
+                $attempt = 1;
+                $attempts = (integer) $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1);
+                $attemptDelay = (integer) $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000);
+                while (!$locked && ($attempts === 0 || $attempt <= $attempts)) {
+                    $locked = flock($file, LOCK_EX | LOCK_NB);
+                    if (!$locked && $attemptDelay > 0 && ($attempts === 0 || $attempt < $attempts)) {
+                        usleep($attemptDelay);
+                    }
+                    $attempt++;
+                }
+                if ($locked) {
                     fseek($file, 0);
                     ftruncate($file, 0);
+                    $written= fwrite($file, $content);
+                    flock($file, LOCK_UN);
                 }
-                $written= fwrite($file, $content);
-                if ($append === false) flock($file, LOCK_UN);
             }
             @fclose($file);
         }
