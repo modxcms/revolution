@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#4577] Remove calls to xPDO->log() in xPDOCacheManager->writeFile()
 - Add options to xPDOCacheManager::writeFile() to allow multiple attempts when exclusive locks fail
 
 xPDO 2.1.2-pl (March 25, 2011)
