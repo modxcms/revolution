@@ -244,11 +244,6 @@ class xPDOCacheManager {
                 }
             }
             @fclose($file);
-            if ($written === false) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error writing file: {$filename}");
-            }
-        } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not open file for writing: {$filename}");
         }
         return ($written !== false);
     }
