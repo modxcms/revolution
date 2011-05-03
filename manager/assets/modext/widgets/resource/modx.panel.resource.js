@@ -376,7 +376,7 @@ MODx.panel.Resource = function(config) {
         ,maxLength: 255
         ,anchor: '70%'
         ,value: config.record.uri || ''
-        ,hidden: parseInt(config.record.uri_override) ? false : true
+        ,hidden: !config.record.uri_override
     });
     it.push({
         id: 'modx-page-settings'
