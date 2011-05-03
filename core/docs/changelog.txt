@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Update xPDO to v2.1.3-pl
+- [#4567] Remove calls to xPDO->log() in xPDOCacheManager->writeFile()
 - [#4557] Minor fixes on Installer Options screen for Traditional package
 - [#4556] Fix js error on Welcome screen of Traditional package's installer
 - [#4076] Fix Edit/Quick Update context menu items in protected categories
