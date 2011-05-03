@@ -250,7 +250,7 @@ class modInstall {
             $this->xpdo->setLogTarget(array(
                 'target' => 'FILE',
                 'options' => array(
-                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y-%m-%dT%H:%M:%S')
+                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y-%m-%dT%H.%M.%S')
                 )
             ));
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
