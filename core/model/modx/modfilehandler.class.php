@@ -412,7 +412,7 @@ class modFile extends modFileSystemResource {
      * @param string $timeFormat The format, in strftime format, of the time
      * @return string The formatted time
      */
-    public function getLastAccessed($timeFormat = '%b %d, %Y %H:%I:%S %p') {
+    public function getLastAccessed($timeFormat = '%b %d, %Y %I:%M:%S %p') {
         return strftime($timeFormat, fileatime($this->path));
     }
 
@@ -422,7 +422,7 @@ class modFile extends modFileSystemResource {
      * @param string $timeFormat The format, in strftime format, of the time
      * @return string The formatted time
      */
-    public function getLastModified($timeFormat = '%b %d, %Y %H:%I:%S %p') {
+    public function getLastModified($timeFormat = '%b %d, %Y %I:%M:%S %p') {
         return strftime($timeFormat, filemtime($this->path));
     }
 
