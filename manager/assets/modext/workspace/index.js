@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-workspace' });
+    MODx.add('modx-page-workspace');
 });
 
 /**
