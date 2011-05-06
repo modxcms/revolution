@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-system-settings' });
+    MODx.add('modx-page-system-settings');
 });
 /**
  * Loads the configuration page
