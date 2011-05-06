@@ -14,7 +14,6 @@ MODx.page.SystemSettings = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-system-settings'
-            ,renderTo: 'modx-panel-system-settings-div'
         }]
         ,buttons: [{
             text: _('help_ex')
