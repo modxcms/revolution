@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-lexicon-management' });
+    MODx.add('modx-page-lexicon-management');
 });
 
 /**
