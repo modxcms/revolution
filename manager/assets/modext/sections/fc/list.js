@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-	MODx.load({ xtype: 'modx-page-form-customization' });
+	MODx.add('modx-page-form-customization');
 });
 
 MODx.page.FormCustomization = function(config) {
@@ -7,7 +7,6 @@ MODx.page.FormCustomization = function(config) {
 	Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-fc-profiles'
-            ,renderTo: 'modx-panel-fc-profiles-div'
         }]
         ,buttons: [{
             text: _('help_ex')

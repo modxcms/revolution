@@ -12,6 +12,7 @@ MODx.panel.FCProfiles = function(config) {
             title: _('profiles')
             ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
+			,layout: "form"
             ,items: [{
                 html: '<p>'+_('form_customization_msg')+'</p>'
                 ,border: false
