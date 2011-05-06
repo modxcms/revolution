@@ -26,10 +26,10 @@ $_lang['actions'] = 'Actions';
 $_lang['active_users_none'] = 'No active users found.';
 
 #$_lang['activity_message'] = 'This list shows the last resources you created or edited:';
-$_lang['activity_message'] = 'This list shows the last resources you created or edited:';
+$_lang['activity_message'] = 'To jest lista zasobów, które zostały przez Ciebie poprzednio utworzone lub zmienione:'; #
 
 #$_lang['activity_title'] = 'Recently edited/created documents';
-$_lang['activity_title'] = 'Recently edited/created documents';
+$_lang['activity_title'] = 'Poprzednie dokumenty'; # ? Seems 'recent_docs' is used instead?
 
 #$_lang['add'] = 'Add';
 $_lang['add'] = 'Add';
@@ -587,7 +587,7 @@ $_lang['icon'] = 'Icon';
 $_lang['id'] = 'ID';
 
 #$_lang['info'] = 'Info';
-$_lang['info'] = 'Info';
+$_lang['info'] = 'Twoje konto użytkownika'; # Is used for what 'yourinfo_title' should be.
 
 #$_lang['information'] = 'Information';
 $_lang['information'] = 'Information';
@@ -794,7 +794,7 @@ $_lang['old_name'] = 'Old Name';
 $_lang['on'] = 'On';
 
 #$_lang['online'] = 'Online';
-$_lang['online'] = 'Online';
+$_lang['online'] = 'Aktywni użytkownicy'; #
 
 #$_lang['open'] = 'Open';
 $_lang['open'] = 'Open';
@@ -950,7 +950,7 @@ $_lang['quick_update_template'] = 'Quick Update Template';
 $_lang['quick_update_tv'] = 'Quick Update TV';
 
 #$_lang['recent_docs'] = 'Recent documents';
-$_lang['recent_docs'] = 'Recent documents';
+$_lang['recent_docs'] = 'Poprzednie dokumenty'; # Seems to be used what 'activity_title' is meant for?
 
 #$_lang['redirecting'] = 'Redirecting...';
 $_lang['redirecting'] = 'Redirecting...';

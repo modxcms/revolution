@@ -8,7 +8,7 @@
 */
 
 #$_lang['active_users_none'] = 'No currently active users.';
-$_lang['active_users_none'] = 'No currently active users.';
+$_lang['active_users_none'] = 'W tej chwili nie ma aktywnych użytkowników.'; #
 
 #$_lang['add_user'] = 'Add User';
 $_lang['add_user'] = 'Add User';
@@ -17,7 +17,7 @@ $_lang['add_user'] = 'Add User';
 $_lang['create_resource'] = 'Create Resource';
 
 #$_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard'] = 'Pulpit'; #
 
 #$_lang['documentation'] = 'Documentation';
 $_lang['documentation'] = 'Documentation';
@@ -35,28 +35,28 @@ $_lang['help'] = 'Help';
 $_lang['modx_news'] = 'MODX News';
 
 #$_lang['onlineusers_action'] = 'Action';
-$_lang['onlineusers_action'] = 'Action';
+$_lang['onlineusers_action'] = 'Aktywność'; #
 
 #$_lang['onlineusers_actionid'] = 'Action-ID';
 $_lang['onlineusers_actionid'] = 'Action-ID';
 
 #$_lang['onlineusers_ipaddress'] = 'User\'s IP address';
-$_lang['onlineusers_ipaddress'] = 'User\'s IP address';
+$_lang['onlineusers_ipaddress'] = 'IP'; #
 
 #$_lang['onlineusers_lasthit'] = 'Last hit';
-$_lang['onlineusers_lasthit'] = 'Last hit';
+$_lang['onlineusers_lasthit'] = '<abbr title="Czas ostatniej aktywności użytkownika">Czas</abbr>'; #
 
 #$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is [[+curtime]])';
-$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is [[+curtime]])';
+$_lang['onlineusers_message'] = 'Lista użytkowników aktywnych w czasie ostatnich 20 minut (bieżący czas: [[+curtime]])'; #
 
 #$_lang['onlineusers_title'] = 'Online users';
 $_lang['onlineusers_title'] = 'Online users';
 
 #$_lang['onlineusers_user'] = 'User';
-$_lang['onlineusers_user'] = 'User';
+$_lang['onlineusers_user'] = 'Użytkownik'; #
 
 #$_lang['onlineusers_userid'] = 'User\'s ID';
-$_lang['onlineusers_userid'] = 'User\'s ID';
+$_lang['onlineusers_userid'] = 'ID'; #
 
 #$_lang['quicklinks'] = 'Quicklinks';
 $_lang['quicklinks'] = 'Quicklinks';
