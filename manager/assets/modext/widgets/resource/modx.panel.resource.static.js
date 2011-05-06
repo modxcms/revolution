@@ -7,7 +7,6 @@
 MODx.panel.Static = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
-    console.log(config.record.openTo);
     
     var it = [];
     it.push({
