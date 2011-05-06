@@ -19,6 +19,7 @@ MODx.panel.GroupsRoles = function(config) {
             title: _('user_groups')
             ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('user_group_management_msg')+'</p>'
                 ,border: false
@@ -30,6 +31,7 @@ MODx.panel.GroupsRoles = function(config) {
             title: _('roles')
             ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('roles_msg')+'</p>'
                 ,border: false
@@ -42,6 +44,7 @@ MODx.panel.GroupsRoles = function(config) {
             title: _('policies')
             ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('policy_management_msg')+'</p>'
                 ,border: false
@@ -52,6 +55,7 @@ MODx.panel.GroupsRoles = function(config) {
             title: _('policy_templates')
             ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('policy_templates.intro_msg')+'</p>'
                 ,border: false
