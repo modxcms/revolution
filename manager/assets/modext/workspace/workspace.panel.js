@@ -12,6 +12,7 @@ MODx.panel.Workspace = function(config) {
             title: _('packages')
             ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('packages_desc')+'</p>'
                 ,border: false
@@ -24,6 +25,7 @@ MODx.panel.Workspace = function(config) {
             title: _('providers')
             ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('providers_desc')+'</p>'
                 ,border: false
