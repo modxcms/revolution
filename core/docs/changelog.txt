@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4669] Fix button target size to make it more responsive to most clicks
 - [#4625] Fix sizes of buttons and submit inputs in installer - IE 8 and 9
 - [#4617] Fix custom values not being shown on Context Installation page during Advanced Upgrade
 - [#4605] modX->switchContext() now checks load permission via Context ACLs
