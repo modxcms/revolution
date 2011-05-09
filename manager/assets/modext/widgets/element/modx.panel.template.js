@@ -53,7 +53,7 @@ MODx.panel.Template = function(config) {
                 ,value: config.record.templatename
                 ,listeners: {
                     'keyup': {scope:this,fn:function(f,e) {
-                        Ext.getCmp('template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
+                        Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
                     }}
                 }
             },{
