@@ -26,7 +26,7 @@ $_lang['api_docs'] = 'API Documentation';
 $_lang['api_docs_desc'] = 'phpDocumentor-driven documentation of the Revolution API.';
 
 #$_lang['components'] = 'Components';
-$_lang['components'] = 'Components';
+$_lang['components'] = 'Rozszerzenia'; #
 
 #$_lang['content_types'] = 'Content Types';
 $_lang['content_types'] = 'Content Types';
@@ -209,7 +209,7 @@ $_lang['remove_locks_desc'] = 'This will remove any locks that are on any manage
 $_lang['remove_locks_error'] = 'An error occurred while trying to remove the locks.';
 
 #$_lang['reports'] = 'Reports';
-$_lang['reports'] = 'Reports';
+$_lang['reports'] = 'Raporty'; #
 
 #$_lang['resource_groups'] = 'Resource Groups';
 $_lang['resource_groups'] = 'Resource Groups';
@@ -224,13 +224,13 @@ $_lang['search'] = 'Search';
 $_lang['search_desc'] = 'Search for resources.';
 
 #$_lang['security'] = 'Security';
-$_lang['security'] = 'Security';
+$_lang['security'] = 'Bezpieczeństwo'; #
 
 #$_lang['site'] = 'Site';
-$_lang['site'] = 'Site';
+$_lang['site'] = 'Serwis'; #
 
 #$_lang['support'] = 'Support';
-$_lang['support'] = 'Support';
+$_lang['support'] = 'Wsparcie'; #
 
 #$_lang['support_desc'] = '';
 $_lang['support_desc'] = '';
@@ -251,10 +251,10 @@ $_lang['system_settings'] = 'System Settings';
 $_lang['system_settings_desc'] = 'Change or create site-wide system settings.';
 
 #$_lang['tools'] = 'Tools';
-$_lang['tools'] = 'Tools';
+$_lang['tools'] = 'Narzędzia'; #
 
 #$_lang['user'] = 'User';
-$_lang['user'] = 'User';
+$_lang['user'] = 'Użytkownik'; #
 
 #$_lang['user_management'] = 'Manage Users';
 $_lang['user_management'] = 'Manage Users';

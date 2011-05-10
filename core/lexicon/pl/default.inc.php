@@ -578,7 +578,7 @@ $_lang['help_not_yet'] = 'Help for this component has not yet been implemented.'
 $_lang['hide_tree'] = 'Hide tree';
 
 #$_lang['home'] = 'Home';
-$_lang['home'] = 'Home';
+$_lang['home'] = 'Pulpit'; # topmenu
 
 #$_lang['icon'] = 'Icon';
 $_lang['icon'] = 'Icon';
