@@ -119,7 +119,7 @@ $_lang['lexicon_management'] = 'Lexicon Management';
 $_lang['lexicon_management_desc'] = 'Edit any of the language strings across the MODX manager.';
 
 #$_lang['logout_desc'] = 'Log out of the MODX manager.';
-$_lang['logout_desc'] = 'Log out of the MODX manager.';
+$_lang['logout_desc'] = 'Wyloguj się z panelu administracyjnego MODX.'; #
 
 #$_lang['manage_workspaces'] = 'Package Management';
 $_lang['manage_workspaces'] = 'Package Management';
@@ -140,10 +140,10 @@ $_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces_desc'] = 'Handle namespaces, which distinguish between different custom-added components.';
 
 #$_lang['new_document'] = 'New Document';
-$_lang['new_document'] = 'New Document';
+$_lang['new_document'] = 'Nowy Dokument'; #
 
 #$_lang['new_document_desc'] = 'Create a new document.';
-$_lang['new_document_desc'] = 'Create a new document.';
+$_lang['new_document_desc'] = 'Utwórz nowy dokument'; #
 
 #$_lang['new_resource'] = 'New Resource';
 $_lang['new_resource'] = 'New Resource';
@@ -152,22 +152,22 @@ $_lang['new_resource'] = 'New Resource';
 $_lang['new_resource_desc'] = 'Create a new resource.';
 
 #$_lang['new_static_resource'] = 'New Static Resource';
-$_lang['new_static_resource'] = 'New Static Resource';
+$_lang['new_static_resource'] = 'Nowy Załącznik'; #
 
 #$_lang['new_static_resource_desc'] = 'Create a new file-based Static Resource.';
-$_lang['new_static_resource_desc'] = 'Create a new file-based Static Resource.';
+$_lang['new_static_resource_desc'] = 'Utwórz nowy załącznik, który zawiera plik znajdujący się na dysku serwera.'; #
 
 #$_lang['new_symlink'] = 'New Symlink';
-$_lang['new_symlink'] = 'New Symlink';
+$_lang['new_symlink'] = 'Nowe Dowiązanie'; #
 
 #$_lang['new_symlink_desc'] = 'Create a new symlink that points to an existing URL without redirecting.';
-$_lang['new_symlink_desc'] = 'Create a new symlink that points to an existing URL without redirecting.';
+$_lang['new_symlink_desc'] = 'Utwórz nowe dowiązanie, które wyświetla zdalną zawartość bez przekierowywania.'; #
 
 #$_lang['new_weblink'] = 'New Weblink';
-$_lang['new_weblink'] = 'New Weblink';
+$_lang['new_weblink'] = 'Nowy Odnośnik'; #
 
 #$_lang['new_weblink_desc'] = 'Create a new weblink that points to an existing URL and redirects.';
-$_lang['new_weblink_desc'] = 'Create a new weblink that points to an existing URL and redirects.';
+$_lang['new_weblink_desc'] = 'Utwórz nowy odnośnik, który przekierowuje do zdalnej zawartości.';
 
 #$_lang['policy_management'] = 'Access Policies';
 $_lang['policy_management'] = 'Access Policies';
@@ -176,10 +176,10 @@ $_lang['policy_management'] = 'Access Policies';
 $_lang['policy_management_desc'] = 'Create and edit site-wide policies to secure processes.';
 
 #$_lang['preview'] = 'View';
-$_lang['preview'] = 'View';
+$_lang['preview'] = 'Podgląd'; #
 
 #$_lang['preview_desc'] = 'Loads your home page in a new window.';
-$_lang['preview_desc'] = 'Loads your home page in a new window.';
+$_lang['preview_desc'] = 'Wyświetl stronę główną w nowym oknie lub zakładce.'; #
 
 #$_lang['profile'] = 'Profile';
 $_lang['profile'] = 'Profile';
@@ -194,19 +194,19 @@ $_lang['propertysets'] = 'Property Sets';
 $_lang['propertysets_desc'] = 'Manage all of your site\'s property sets and the elements they are assigned to.';
 
 #$_lang['refresh_site'] = 'Clear Cache';
-$_lang['refresh_site'] = 'Clear Cache';
+$_lang['refresh_site'] = 'Pamięć podręczna'; #
 
 #$_lang['refresh_site_desc'] = 'Clear your site\'s cache.';
-$_lang['refresh_site_desc'] = 'Clear your site\'s cache.';
+$_lang['refresh_site_desc'] = 'Usuń pamięć podręczną serwisu.'; #
 
 #$_lang['remove_locks'] = 'Remove Locks';
-$_lang['remove_locks'] = 'Remove Locks';
+$_lang['remove_locks'] = 'Blokady'; #
 
 #$_lang['remove_locks_desc'] = 'This will remove any locks that are on any manager pages as a result of other users editing them.';
-$_lang['remove_locks_desc'] = 'This will remove any locks that are on any manager pages as a result of other users editing them.';
+$_lang['remove_locks_desc'] = 'Usuń wszystkie blokady stron w panelu zarządzania, które powstały podczas pracy innych użytkowników.'; #
 
 #$_lang['remove_locks_error'] = 'An error occurred while trying to remove the locks.';
-$_lang['remove_locks_error'] = 'An error occurred while trying to remove the locks.';
+$_lang['remove_locks_error'] = 'Podczas usuwania blokad wystąpiły błedy.'; # ?
 
 #$_lang['reports'] = 'Reports';
 $_lang['reports'] = 'Raporty'; #
@@ -218,10 +218,10 @@ $_lang['resource_groups'] = 'Resource Groups';
 $_lang['resource_groups_desc'] = 'Manage the groups resources belong to.';
 
 #$_lang['search'] = 'Search';
-$_lang['search'] = 'Search';
+$_lang['search'] = 'Wyszukiwanie'; #
 
 #$_lang['search_desc'] = 'Search for resources.';
-$_lang['search_desc'] = 'Search for resources.';
+$_lang['search_desc'] = 'Wyszukaj zasoby.'; #
 
 #$_lang['security'] = 'Security';
 $_lang['security'] = 'Bezpieczeństwo'; #

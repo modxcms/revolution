@@ -194,7 +194,7 @@ $_lang['confirm_delete_message'] = 'Are you sure you want to delete this message
 $_lang['confirm_remove'] = 'Are you sure you want to remove this item?';
 
 #$_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can remove ALL locks currently in place.<br /><br />Proceed?';
-$_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can remove ALL locks currently in place.<br /><br />Proceed?';
+$_lang['confirm_remove_locks'] = 'Zdarza się, że użytkownicy zamykają okno przeglądarki w trackie edytowania zasobów lub innych elmentów, co może pozostawić je w stanie zablokowanym do edycji. Możesz usunąć <strong>wszystkie</strong> istniejące blokady.<br /><br />Czy chcesz kontynuować?'; #
 
 #$_lang['confirm_undelete'] = 'Any children documents deleted at the same time as this document will also be undeleted, but children documents deleted at an earlier time will still be deleted.';
 $_lang['confirm_undelete'] = 'Any children documents deleted at the same time as this document will also be undeleted, but children documents deleted at an earlier time will still be deleted.';
@@ -656,10 +656,10 @@ $_lang['logged_in_as'] = 'logged in as [[+username]]';
 $_lang['login'] = 'Login';
 
 #$_lang['logout'] = 'Logout';
-$_lang['logout'] = 'Logout';
+$_lang['logout'] = 'Wyloguj'; # topmenu
 
 #$_lang['logout_confirm'] = 'Are you sure you want to logout?';
-$_lang['logout_confirm'] = 'Are you sure you want to logout?';
+$_lang['logout_confirm'] = 'Czy na pewno chcesz się wylogować?'; # topmenu
 
 #$_lang['long_title'] = 'Long title';
 $_lang['long_title'] = 'Long title';
@@ -1449,3 +1449,4 @@ $_lang['friday'] = 'Friday';
 
 #$_lang['saturday'] = 'Saturday';
 $_lang['saturday'] = 'Saturday';
+
