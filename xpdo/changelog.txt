@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- [#4682] Fix support for driver-specific attributes on object element in schema
+
 xPDO 2.1.3-pl (May 3, 2011)
 ====================================
 - [#4577] Remove calls to xPDO->log() in xPDOCacheManager->writeFile()
