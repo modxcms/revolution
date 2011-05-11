@@ -8,10 +8,10 @@
 */
 
 #$_lang['about'] = 'About';
-$_lang['about'] = 'About';
+$_lang['about'] = 'O MODX'; #
 
 #$_lang['about_desc'] = 'More information about MODX Revolution.';
-$_lang['about_desc'] = 'More information about MODX Revolution.';
+$_lang['about_desc'] = 'Wyświetl informacje o MODX Revolution.'; #
 
 #$_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions'] = 'Access Permissions';
@@ -47,10 +47,10 @@ $_lang['edit_menu'] = 'Actions';
 $_lang['edit_menu_desc'] = 'Manage Actions and the Top Menu structure.';
 
 #$_lang['eventlog_viewer'] = 'Error Log';
-$_lang['eventlog_viewer'] = 'Error Log';
+$_lang['eventlog_viewer'] = 'Dziennik Błędów'; #
 
 #$_lang['eventlog_viewer_desc'] = 'View the MODX error.log.';
-$_lang['eventlog_viewer_desc'] = 'View the MODX error.log.';
+$_lang['eventlog_viewer_desc'] = 'Wyświetl dziennik błędów MODX.'; #
 
 #$_lang['export_site'] = 'Export Static HTML';
 $_lang['export_site'] = 'Export Static HTML';
@@ -236,10 +236,10 @@ $_lang['support'] = 'Wsparcie'; #
 $_lang['support_desc'] = '';
 
 #$_lang['site_schedule'] = 'Site Schedule';
-$_lang['site_schedule'] = 'Site Schedule';
+$_lang['site_schedule'] = 'Kalendarz Publikacji'; #
 
 #$_lang['site_schedule_desc'] = 'View Resources with upcoming publish or unpublish dates.';
-$_lang['site_schedule_desc'] = 'View Resources with upcoming publish or unpublish dates.';
+$_lang['site_schedule_desc'] = 'Wyświetl zasoby z przyszłymi datami rozpoczęcia lub zakończenia publikacji.'; #
 
 #$_lang['system'] = 'System';
 $_lang['system'] = 'System';
@@ -269,16 +269,16 @@ $_lang['user_group_management'] = 'Uprawnienia'; #
 $_lang['user_group_management_desc'] = 'Zarządzaj grupami, rolami i uprawnieniami użytkowników.'; #
 
 #$_lang['view_logging'] = 'Manager Actions';
-$_lang['view_logging'] = 'Manager Actions';
+$_lang['view_logging'] = 'Aktywność Użytkowników'; #
 
 #$_lang['view_logging_desc'] = 'View the recent manager activity.';
-$_lang['view_logging_desc'] = 'View the recent manager activity.';
+$_lang['view_logging_desc'] = 'Wyświetl zestawienie aktywności użytkowników w panelu administracyjnym Twojego serwisu.'; #
 
 #$_lang['view_sysinfo'] = 'System Info';
-$_lang['view_sysinfo'] = 'System Info';
+$_lang['view_sysinfo'] = 'Informacje Systemowe'; #
 
 #$_lang['view_sysinfo_desc'] = 'View server information, such as phpinfo, database info, and more.';
-$_lang['view_sysinfo_desc'] = 'View server information, such as phpinfo, database info, and more.';
+$_lang['view_sysinfo_desc'] = 'Wyświetl informacje o systemie takie jak <code>phpinfo</code>, baza danych i inne.'; #
 
 #$_lang['wiki'] = 'Wiki';
 $_lang['wiki'] = 'Wiki';
