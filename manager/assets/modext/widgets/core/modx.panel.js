@@ -64,7 +64,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 
     ,submit: function(o) {
         var fm = this.getForm();
-        if (fm.isValid()) {
+        if (fm.isValid() || o.bypassValidCheck) {
             o = o || {};
             o.headers = {
                 'Powered-By': 'MODx'
@@ -79,6 +79,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                     waitMsg: this.config.saveMsg || _('saving')
                     ,scope: this
                     ,headers: o.headers
+                    ,clientValidation: (o.bypassValidCheck ? false : true)
                     ,failure: function(f,a) {
                     	if (this.fireEvent('failure',{
                     	   form: f

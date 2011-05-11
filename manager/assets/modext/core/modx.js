@@ -436,10 +436,10 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
 
     ,errorExt: function(r,frm) {
         this.unhighlightFields();
-        if (r.errors !== null && frm) {
+        if (r && r.errors !== null && frm) {
             frm.markInvalid(r.errors);
         }
-        if (r.message !== undefined && r.message !== '') {
+        if (r && r.message !== undefined && r.message !== '') {
             this.showError(r.message);
         } else {
             MODx.msg.hide();
