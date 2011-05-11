@@ -128,10 +128,10 @@ $_lang['manage_workspaces'] = 'Rozszerzenia'; #
 $_lang['manage_workspaces_desc'] = 'Zarządzaj <var title="3rd Party Components">rozszerzeniami</var>, <var title="Providers">dostawcami</var> i pakietami.'; #
 
 #$_lang['messages'] = 'Messages';
-$_lang['messages'] = 'Messages';
+$_lang['messages'] = 'Wiadomości'; #
 
 #$_lang['messages_desc'] = 'View your messages and send new ones to users.';
-$_lang['messages_desc'] = 'View your messages and send new ones to users.';
+$_lang['messages_desc'] = 'Przeglądaj i wysyłaj wiadomości do innych użytkowników.'; #
 
 #$_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces'] = 'Przestrzenie Nazw'; #
@@ -182,10 +182,10 @@ $_lang['preview'] = 'Podgląd'; #
 $_lang['preview_desc'] = 'Wyświetl stronę główną w nowym oknie lub zakładce.'; #
 
 #$_lang['profile'] = 'Profile';
-$_lang['profile'] = 'Profile';
+$_lang['profile'] = 'Profil użytkownika'; #
 
 #$_lang['profile_desc'] = 'Update your personal profile.';
-$_lang['profile_desc'] = 'Update your personal profile.';
+$_lang['profile_desc'] = 'Zarządzaj Twoim kontem użytkownika.'; #
 
 #$_lang['propertysets'] = 'Property Sets';
 $_lang['propertysets'] = 'Zestawy Właściwości'; #
