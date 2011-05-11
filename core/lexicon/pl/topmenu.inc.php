@@ -95,16 +95,16 @@ $_lang['forums'] = 'Forums';
 $_lang['forums_desc'] = 'View the official MODX forums.';
 
 #$_lang['import_resources'] = 'Import Resources';
-$_lang['import_resources'] = 'Import Resources';
+$_lang['import_resources'] = 'Importowanie Zasobów'; #
 
 #$_lang['import_resources_desc'] = 'Import a batch of static resources into the site.';
-$_lang['import_resources_desc'] = 'Import a batch of static resources into the site.';
+$_lang['import_resources_desc'] = 'Zaimportuj pliki z serwera i utwórz z nich dokumenty lub załączniki.'; #
 
 #$_lang['import_site'] = 'Import HTML';
-$_lang['import_site'] = 'Import HTML';
+$_lang['import_site'] = 'Importowanie Dokumentów'; #
 
 #$_lang['import_site_desc'] = 'Import a batch of HTML files into the site.';
-$_lang['import_site_desc'] = 'Import a batch of HTML files into the site.';
+$_lang['import_site_desc'] = 'Zaimportuj pliki HTML i utwórz z nich dokumenty w serwisie.'; #
 
 #$_lang['jira'] = 'Bugs';
 $_lang['jira'] = 'Bugs';
@@ -188,10 +188,10 @@ $_lang['profile'] = 'Profile';
 $_lang['profile_desc'] = 'Update your personal profile.';
 
 #$_lang['propertysets'] = 'Property Sets';
-$_lang['propertysets'] = 'Property Sets';
+$_lang['propertysets'] = 'Zestawy Właściwości'; #
 
 #$_lang['propertysets_desc'] = 'Manage all of your site\'s property sets and the elements they are assigned to.';
-$_lang['propertysets_desc'] = 'Manage all of your site\'s property sets and the elements they are assigned to.';
+$_lang['propertysets_desc'] = 'Zarządzaj <var title="Property Sets">zestawami właściwości</var> i <var>element</var>ami, do których są przypisane.';
 
 #$_lang['refresh_site'] = 'Clear Cache';
 $_lang['refresh_site'] = 'Pamięć podręczna'; #
