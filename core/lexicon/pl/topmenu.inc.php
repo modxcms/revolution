@@ -20,10 +20,10 @@ $_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions_desc'] = 'Manage user group access to resources and contexts.';
 
 #$_lang['api_docs'] = 'API Documentation';
-$_lang['api_docs'] = 'API Documentation';
+$_lang['api_docs'] = 'Dokumentacja API'; #
 
 #$_lang['api_docs_desc'] = 'phpDocumentor-driven documentation of the Revolution API.';
-$_lang['api_docs_desc'] = 'phpDocumentor-driven documentation of the Revolution API.';
+$_lang['api_docs_desc'] = 'Wyświetl dokumentację API MODX.';
 
 #$_lang['components'] = 'Components';
 $_lang['components'] = 'Rozszerzenia'; #
@@ -89,10 +89,10 @@ $_lang['form_customization'] = 'Formatki Zasobów'; #
 $_lang['form_customization_desc'] = 'Dostosuj formatki zasobów, nadając uprawnienia grupom użytkowników.'; #
 
 #$_lang['forums'] = 'Forums';
-$_lang['forums'] = 'Forums';
+$_lang['forums'] = 'Forum MODX'; #
 
 #$_lang['forums_desc'] = 'View the official MODX forums.';
-$_lang['forums_desc'] = 'View the official MODX forums.';
+$_lang['forums_desc'] = 'Przejdź do oficjalnego forum użytkowników MODX.'; #
 
 #$_lang['import_resources'] = 'Import Resources';
 $_lang['import_resources'] = 'Importowanie Zasobów'; #
@@ -107,10 +107,10 @@ $_lang['import_site'] = 'Importowanie Dokumentów'; #
 $_lang['import_site_desc'] = 'Zaimportuj pliki HTML i utwórz z nich dokumenty w serwisie.'; #
 
 #$_lang['jira'] = 'Bugs';
-$_lang['jira'] = 'Bugs';
+$_lang['jira'] = 'Błędy MODX'; #
 
 #$_lang['jira_desc'] = 'Launch the MODX bugtracker to track and file bugs.';
-$_lang['jira_desc'] = 'Launch the MODX bugtracker to track and file bugs.';
+$_lang['jira_desc'] = 'Wyświetl stronę systemu zgłaszania i śledzenia błędów MODX.'; #
 
 #$_lang['lexicon_management'] = 'Lexicon Management';
 $_lang['lexicon_management'] = 'Leksykon'; #
@@ -281,7 +281,7 @@ $_lang['view_sysinfo'] = 'Informacje Systemowe'; #
 $_lang['view_sysinfo_desc'] = 'Wyświetl informacje o systemie takie jak <code>phpinfo</code>, baza danych i inne.'; #
 
 #$_lang['wiki'] = 'Wiki';
-$_lang['wiki'] = 'Wiki';
+$_lang['wiki'] = 'Dokumentacja MODX'; #
 
 #$_lang['wiki_desc'] = 'Launch the MODX Confluence wiki, where documentation on MODX Revolution is stored.';
-$_lang['wiki_desc'] = 'Launch the MODX Confluence wiki, where documentation on MODX Revolution is stored.';
+$_lang['wiki_desc'] = 'Wyświetl dokumentację MODX.'; #
