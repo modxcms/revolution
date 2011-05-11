@@ -59,34 +59,34 @@ $_lang['export_site'] = 'Export Static HTML';
 $_lang['export_site_desc'] = 'Export the current site into static HTML pages.';
 
 #$_lang['flush_access'] = 'Flush Permissions';
-$_lang['flush_access'] = 'Flush Permissions';
+$_lang['flush_access'] = 'Twoja sesja'; #
 
 #$_lang['flush_access_confirm'] = 'Are you sure you want to flush your access permissions? NOTE: this does not affect other user sessions.';
-$_lang['flush_access_confirm'] = 'Are you sure you want to flush your access permissions? NOTE: this does not affect other user sessions.';
+$_lang['flush_access_confirm'] = 'Twoja sesja w panelu administracyjnym MODX zostanie zresetowana, aby odświeżyć uprawnienia. Nie dotyczy to sesji pozostałych użytkowników. Czy na pewno chcesz to zrobić?'; #
 
 #$_lang['flush_access_desc'] = 'Flush all permissions and reload the cache.';
-$_lang['flush_access_desc'] = 'Flush all permissions and reload the cache.';
+$_lang['flush_access_desc'] = 'Zresetuj sesję i odśwież Twoje uprawnienia w panelu administracyjnym.'; #
 
 #$_lang['flush_sessions'] = 'Flush All Sessions';
-$_lang['flush_sessions'] = 'Flush All Sessions';
+$_lang['flush_sessions'] = 'Wszystkie sesje'; #
 
 #$_lang['flush_sessions_confirm'] = 'Are you sure you want to flush all user sessions? This will destroy all current and recent user sessions, including your own, forcing everyone to login following this action.';
-$_lang['flush_sessions_confirm'] = 'Are you sure you want to flush all user sessions? This will destroy all current and recent user sessions, including your own, forcing everyone to login following this action.';
+$_lang['flush_sessions_confirm'] = 'Wszystkie bieżące i poprzednie sesje wszystkich użytkowników, także Twoja, zostaną zresetowane. Każdy użytkownik będzie musiał zalogować się ponownie. Czy na pewno chcesz to zrobić?'; #
 
 #$_lang['flush_sessions_desc'] = 'Flush all sessions and logout all users.';
-$_lang['flush_sessions_desc'] = 'Flush all sessions and logout all users.';
+$_lang['flush_sessions_desc'] = 'Zresetuj wszystkie sesje i wyloguj wszystkich użytkowników.'; #
 
 #$_lang['flush_sessions_err'] = 'An error occured while attempting to flush the current user sessions.';
-$_lang['flush_sessions_err'] = 'An error occured while attempting to flush the current user sessions.';
+$_lang['flush_sessions_err'] = 'Podczas resetowania sesji wystąpił błąd.'; # ?
 
 #$_lang['flush_sessions_not_supported'] = 'Flushing user sessions is not supported on your configuration.';
-$_lang['flush_sessions_not_supported'] = 'Flushing user sessions is not supported on your configuration.';
+$_lang['flush_sessions_not_supported'] = 'Resetowanie sesji nie jest dostępne w Twojej konfiguracji.'; # ?
 
 #$_lang['form_customization'] = 'Form Customization';
-$_lang['form_customization'] = 'Form Customization';
+$_lang['form_customization'] = 'Formatki Zasobów'; #
 
 #$_lang['form_customization_desc'] = 'Customize manager forms by security permissions.';
-$_lang['form_customization_desc'] = 'Customize manager forms by security permissions.';
+$_lang['form_customization_desc'] = 'Dostosuj formatki zasobów, nadając uprawnienia grupom użytkowników.'; #
 
 #$_lang['forums'] = 'Forums';
 $_lang['forums'] = 'Forums';
@@ -212,10 +212,10 @@ $_lang['remove_locks_error'] = 'Podczas usuwania blokad wystąpiły błedy.'; # 
 $_lang['reports'] = 'Raporty'; #
 
 #$_lang['resource_groups'] = 'Resource Groups';
-$_lang['resource_groups'] = 'Resource Groups';
+$_lang['resource_groups'] = 'Grupy Zasobów'; #
 
 #$_lang['resource_groups_desc'] = 'Manage the groups resources belong to.';
-$_lang['resource_groups_desc'] = 'Manage the groups resources belong to.';
+$_lang['resource_groups_desc'] = 'Zarządzaj przynależnością zasobów do grup.'; #
 
 #$_lang['search'] = 'Search';
 $_lang['search'] = 'Wyszukiwanie'; #
@@ -257,16 +257,16 @@ $_lang['tools'] = 'Narzędzia'; #
 $_lang['user'] = 'Użytkownik'; #
 
 #$_lang['user_management'] = 'Manage Users';
-$_lang['user_management'] = 'Manage Users';
+$_lang['user_management'] = 'Użytkownicy'; #
 
 #$_lang['user_management_desc'] = 'Add, update, and assign permissions to users.';
-$_lang['user_management_desc'] = 'Add, update, and assign permissions to users.';
+$_lang['user_management_desc'] = 'Zarządzaj użytkownikami serwisu.'; #
 
 #$_lang['user_group_management'] = 'Access Controls';
-$_lang['user_group_management'] = 'Access Controls';
+$_lang['user_group_management'] = 'Uprawnienia'; #
 
 #$_lang['user_group_management_desc'] = 'Manage user groups, roles, and access policies.';
-$_lang['user_group_management_desc'] = 'Manage user groups, roles, and access policies.';
+$_lang['user_group_management_desc'] = 'Zarządzaj grupami, rolami i uprawnieniami użytkowników.'; #
 
 #$_lang['view_logging'] = 'Manager Actions';
 $_lang['view_logging'] = 'Manager Actions';
