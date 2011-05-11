@@ -29,22 +29,22 @@ $_lang['api_docs_desc'] = 'phpDocumentor-driven documentation of the Revolution 
 $_lang['components'] = 'Rozszerzenia'; #
 
 #$_lang['content_types'] = 'Content Types';
-$_lang['content_types'] = 'Content Types';
+$_lang['content_types'] = 'Formaty zawartości'; #
 
 #$_lang['content_types_desc'] = 'Add content types for resources, such as .html, .js, etc.';
-$_lang['content_types_desc'] = 'Add content types for resources, such as .html, .js, etc.';
+$_lang['content_types_desc'] = 'Zarządzaj <var title="Content Types">formatami zawartości</var> dla zasobów.'; #
 
 #$_lang['contexts'] = 'Contexts';
-$_lang['contexts'] = 'Contexts';
+$_lang['contexts'] = 'Konteksty'; #
 
 #$_lang['contexts_desc'] = 'Manage site contexts and their settings.';
-$_lang['contexts_desc'] = 'Manage site contexts and their settings.';
+$_lang['contexts_desc'] = 'Zarządzaj kontekstami i ich ustawieniami.'; #
 
 #$_lang['edit_menu'] = 'Actions';
-$_lang['edit_menu'] = 'Actions';
+$_lang['edit_menu'] = 'Akcje i Menu'; #
 
 #$_lang['edit_menu_desc'] = 'Manage Actions and the Top Menu structure.';
-$_lang['edit_menu_desc'] = 'Manage Actions and the Top Menu structure.';
+$_lang['edit_menu_desc'] = 'Zarządzaj <var title="Actions">akcjami</var> i strukturą głównego menu.'; #
 
 #$_lang['eventlog_viewer'] = 'Error Log';
 $_lang['eventlog_viewer'] = 'Dziennik Błędów'; #
@@ -113,19 +113,19 @@ $_lang['jira'] = 'Bugs';
 $_lang['jira_desc'] = 'Launch the MODX bugtracker to track and file bugs.';
 
 #$_lang['lexicon_management'] = 'Lexicon Management';
-$_lang['lexicon_management'] = 'Lexicon Management';
+$_lang['lexicon_management'] = 'Leksykon'; #
 
 #$_lang['lexicon_management_desc'] = 'Edit any of the language strings across the MODX manager.';
-$_lang['lexicon_management_desc'] = 'Edit any of the language strings across the MODX manager.';
+$_lang['lexicon_management_desc'] = 'Zmodyfikuj dowolny fragment opisu panelu administracyjnego MODX.'; #
 
 #$_lang['logout_desc'] = 'Log out of the MODX manager.';
 $_lang['logout_desc'] = 'Wyloguj się z panelu administracyjnego MODX.'; #
 
 #$_lang['manage_workspaces'] = 'Package Management';
-$_lang['manage_workspaces'] = 'Package Management';
+$_lang['manage_workspaces'] = 'Rozszerzenia'; #
 
 #$_lang['manage_workspaces_desc'] = 'Download 3rd Party Components, add Providers, and install packages.';
-$_lang['manage_workspaces_desc'] = 'Download 3rd Party Components, add Providers, and install packages.';
+$_lang['manage_workspaces_desc'] = 'Zarządzaj <var title="3rd Party Components">rozszerzeniami</var>, <var title="Providers">dostawcami</var> i pakietami.'; #
 
 #$_lang['messages'] = 'Messages';
 $_lang['messages'] = 'Messages';
@@ -134,10 +134,10 @@ $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = 'View your messages and send new ones to users.';
 
 #$_lang['namespaces'] = 'Namespaces';
-$_lang['namespaces'] = 'Namespaces';
+$_lang['namespaces'] = 'Przestrzenie Nazw'; #
 
 #$_lang['namespaces_desc'] = 'Handle namespaces, which distinguish between different custom-added components.';
-$_lang['namespaces_desc'] = 'Handle namespaces, which distinguish between different custom-added components.';
+$_lang['namespaces_desc'] = 'Zarządzaj <var title="Namespaces">przestrzeniami nazw</var>, które zapewniają rozróżnienie pomiędzy rozszerzeniami.'; #
 
 #$_lang['new_document'] = 'New Document';
 $_lang['new_document'] = 'Nowy Dokument'; #
@@ -245,10 +245,10 @@ $_lang['site_schedule_desc'] = 'Wyświetl zasoby z przyszłymi datami rozpoczęc
 $_lang['system'] = 'System';
 
 #$_lang['system_settings'] = 'System Settings';
-$_lang['system_settings'] = 'System Settings';
+$_lang['system_settings'] = 'Ustawienia Systemowe'; #
 
 #$_lang['system_settings_desc'] = 'Change or create site-wide system settings.';
-$_lang['system_settings_desc'] = 'Change or create site-wide system settings.';
+$_lang['system_settings_desc'] = 'Zarządzaj ustawieniami systemowymi dla całego serwisu.'; #
 
 #$_lang['tools'] = 'Tools';
 $_lang['tools'] = 'Narzędzia'; #
