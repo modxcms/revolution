@@ -8,10 +8,10 @@
 */
 
 #$_lang['active'] = 'Active';
-$_lang['active'] = 'Active';
+$_lang['active'] = 'Konto aktywne'; #
 
 #$_lang['address'] = 'Address';
-$_lang['address'] = 'Address';
+$_lang['address'] = 'Adres'; #
 
 #$_lang['administrator'] = 'Administrator';
 $_lang['administrator'] = 'Administrator';
@@ -23,13 +23,13 @@ $_lang['authority'] = 'Authority';
 $_lang['change_password'] = 'Change Password';
 
 #$_lang['change_password_confirm'] = 'Confirm password';
-$_lang['change_password_confirm'] = 'Confirm password';
+$_lang['change_password_confirm'] = 'Potwierdzenie hasła'; #
 
 #$_lang['change_password_new'] = 'New password';
-$_lang['change_password_new'] = 'New password';
+$_lang['change_password_new'] = 'Nowe hasło'; #
 
 #$_lang['city'] = 'City';
-$_lang['city'] = 'City';
+$_lang['city'] = 'Miasto'; #
 
 #$_lang['extended_fields'] = 'Extended Fields';
 $_lang['extended_fields'] = 'Extended Fields';
@@ -38,49 +38,49 @@ $_lang['extended_fields'] = 'Extended Fields';
 $_lang['extended_fields_msg'] = 'Edit any extended fields that are implemented here.';
 
 #$_lang['login_options'] = 'Login Options';
-$_lang['login_options'] = 'Login Options';
+$_lang['login_options'] = 'Opcje Logowania'; #
 
 #$_lang['minimum_role'] = 'Minimum Role';
 $_lang['minimum_role'] = 'Minimum Role';
 
 #$_lang['password'] = 'Password';
-$_lang['password'] = 'Password';
+$_lang['password'] = 'Nowe hasło'; #
 
 #$_lang['password_confirm'] = 'Confirm Password';
-$_lang['password_confirm'] = 'Confirm Password';
+$_lang['password_confirm'] = 'Potwierdzenie hasła'; #
 
 #$_lang['password_gen_gen'] = 'Let MODX generate a password.';
-$_lang['password_gen_gen'] = 'Let MODX generate a password.';
+$_lang['password_gen_gen'] = 'Wygeneruj nowe hasło.'; #
 
 #$_lang['password_gen_method'] = 'New password method';
-$_lang['password_gen_method'] = 'New password method';
+$_lang['password_gen_method'] = 'Jak utworzyć nowe hasło'; #
 
 #$_lang['password_gen_specify'] = 'Let me specify the password:';
-$_lang['password_gen_specify'] = 'Let me specify the password:';
+$_lang['password_gen_specify'] = 'Wpisz nowe hasło:'; #
 
 #$_lang['password_method'] = 'Password notification method';
-$_lang['password_method'] = 'Password notification method';
+$_lang['password_method'] = 'Jak powiadomić użytkownika o zmianie hasła'; #
 
 #$_lang['password_method_email'] = 'Send the new password by e-mail.';
-$_lang['password_method_email'] = 'Send the new password by e-mail.';
+$_lang['password_method_email'] = 'Wyślij nowe hasło na adres e-mail.'; #
 
 #$_lang['password_method_screen'] = 'Show the new password on screen.';
-$_lang['password_method_screen'] = 'Show the new password on screen.';
+$_lang['password_method_screen'] = 'Wyświetl nowe hasło na ekranie.'; #
 
 #$_lang['password_new'] = 'New Password';
-$_lang['password_new'] = 'New Password';
+$_lang['password_new'] = 'Hasło'; #
 
 #$_lang['password_notification'] = 'Password Notification';
 $_lang['password_notification'] = 'Password Notification';
 
 #$_lang['password_old'] = 'Old Password';
-$_lang['password_old'] = 'Old Password';
+$_lang['password_old'] = 'Bieżące hasło'; #
 
 #$_lang['profile_recent_resources'] = 'Recent Resources';
-$_lang['profile_recent_resources'] = 'Recent Resources';
+$_lang['profile_recent_resources'] = 'Poprzednie dokumenty'; #
 
 #$_lang['profile_recent_resources_desc'] = 'This is a list of your most recently edited Resources.';
-$_lang['profile_recent_resources_desc'] = 'This is a list of your most recently edited Resources.';
+$_lang['profile_recent_resources_desc'] = 'To jest lista zasobów, które zostały przez Ciebie poprzednio utworzone lub zmienione:'; #
 
 #$_lang['remote_data'] = 'Remote Data';
 $_lang['remote_data'] = 'Remote Data';
@@ -152,7 +152,7 @@ $_lang['ugrg_remove'] = 'Remove User Group Access to this Resource Group';
 $_lang['user'] = 'User';
 
 #$_lang['user_active_desc'] = 'Whether or not this User is active. If a User is not active, they will not be able to login to any Context or the manager.';
-$_lang['user_active_desc'] = 'Whether or not this User is active. If a User is not active, they will not be able to login to any Context or the manager.';
+$_lang['user_active_desc'] = 'Jeżeli niezaznaczone, użytkownik jest nieaktywny i nie ma możliwości zalogowania do żadnego z kontekstów ani panelu administracyjnego.'; #
 
 #$_lang['user_add_group'] = 'Add User Group to User';
 $_lang['user_add_group'] = 'Add User Group to User';
@@ -161,22 +161,22 @@ $_lang['user_add_group'] = 'Add User Group to User';
 $_lang['user_already_in_use'] = 'User name is already in use!';
 
 #$_lang['user_block'] = 'Blocked';
-$_lang['user_block'] = 'Blocked';
+$_lang['user_block'] = 'Blokada'; #
 
 #$_lang['user_block_desc'] = 'If checked, this user will be permanently blocked from logging in.';
-$_lang['user_block_desc'] = 'If checked, this user will be permanently blocked from logging in.';
+$_lang['user_block_desc'] = 'Jeżeli zaznaczone, uniemożliwia użytkownikowi zalogowanie.'; #
 
 #$_lang['user_blockedafter'] = 'Blocked After';
-$_lang['user_blockedafter'] = 'Blocked After';
+$_lang['user_blockedafter'] = 'Blokada po'; #
 
 #$_lang['user_blockedafter_desc'] = 'If set, the user will be blocked after this time occurs.';
-$_lang['user_blockedafter_desc'] = 'If set, the user will be blocked after this time occurs.';
+$_lang['user_blockedafter_desc'] = 'Data, po upływie której logowanie będzie zablokowane.'; #
 
 #$_lang['user_blockeduntil'] = 'Blocked Until';
-$_lang['user_blockeduntil'] = 'Blocked Until';
+$_lang['user_blockeduntil'] = 'Blokada przed'; #
 
 #$_lang['user_blockeduntil_desc'] = 'If set, the user will be blocked until this time.';
-$_lang['user_blockeduntil_desc'] = 'If set, the user will be blocked until this time.';
+$_lang['user_blockeduntil_desc'] = 'Data, do upływu której logowanie będzie zablokowane.'; #
 
 #$_lang['user_changeddata'] = 'Your data has been changed. Please log in again.';
 $_lang['user_changeddata'] = 'Your data has been changed. Please log in again.';
@@ -191,10 +191,10 @@ $_lang['user_created_password_message'] = 'The User has been created. The passwo
 $_lang['user_confirm_remove'] = 'Are you sure you want to permanently remove this user?';
 
 #$_lang['user_country'] = 'Country';
-$_lang['user_country'] = 'Country';
+$_lang['user_country'] = 'Państwo'; #
 
 #$_lang['user_dob'] = 'Date of birth';
-$_lang['user_dob'] = 'Date of birth';
+$_lang['user_dob'] = 'Data urodzenia'; #
 
 #$_lang['user_doesnt_exist'] = 'User does not exist';
 $_lang['user_doesnt_exist'] = 'User does not exist';
@@ -203,7 +203,7 @@ $_lang['user_doesnt_exist'] = 'User does not exist';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 
 #$_lang['user_email'] = 'E-mail address';
-$_lang['user_email'] = 'E-mail address';
+$_lang['user_email'] = 'Adres e-mail'; #
 
 #$_lang['user_err_access_permissions_save'] = 'An error occurred while saving user access permissions.';
 $_lang['user_err_access_permissions_save'] = 'An error occurred while saving user access permissions.';
@@ -308,19 +308,19 @@ $_lang['user_err_save'] = 'An error occurred while saving the user.';
 $_lang['user_err_username_invalid'] = 'Invalid username specified.';
 
 #$_lang['user_failedlogincount'] = 'Failed Logins';
-$_lang['user_failedlogincount'] = 'Failed Logins';
+$_lang['user_failedlogincount'] = 'Nieudane'; #
 
 #$_lang['user_failedlogincount_desc'] = 'The number of times this user has failed to login by entering an incorrect password.';
-$_lang['user_failedlogincount_desc'] = 'The number of times this user has failed to login by entering an incorrect password.';
+$_lang['user_failedlogincount_desc'] = 'Liczba nieudanych prób logowania tego użytkownika, w których podane zostało niepoprawne hasło.'; #
 
 #$_lang['user_fax'] = 'Fax';
-$_lang['user_fax'] = 'Fax';
+$_lang['user_fax'] = '<abbr title="Nr faksu">Faks</abbr>'; #
 
 #$_lang['user_female'] = 'Female';
-$_lang['user_female'] = 'Female';
+$_lang['user_female'] = 'Kobieta'; #
 
 #$_lang['user_full_name'] = 'Full name';
-$_lang['user_full_name'] = 'Full name';
+$_lang['user_full_name'] = 'Pełna nazwa'; #
 
 #$_lang['user_group'] = 'User Group';
 $_lang['user_group'] = 'User Group';
@@ -422,7 +422,7 @@ $_lang['user_group_user_update_role'] = 'Update Role for User in Usergroup';
 $_lang['user_groups'] = 'User Groups';
 
 #$_lang['user_gender'] = 'Gender';
-$_lang['user_gender'] = 'Gender';
+$_lang['user_gender'] = 'Płeć'; #
 
 #$_lang['user_grid_empty'] = 'No users to display';
 $_lang['user_grid_empty'] = 'No users to display';
@@ -434,28 +434,28 @@ $_lang['user_grid_paginate'] = 'Displaying users {0} - {1} of {2}';
 $_lang['user_is_blocked'] = 'This user is blocked!';
 
 #$_lang['user_logincount'] = 'Number of Logins';
-$_lang['user_logincount'] = 'Number of Logins';
+$_lang['user_logincount'] = 'Łącznie'; #
 
 #$_lang['user_logincount_desc'] = 'The total number of times this User has logged in.';
-$_lang['user_logincount_desc'] = 'The total number of times this User has logged in.';
+$_lang['user_logincount_desc'] = 'Liczba udanych logowań tego użytkownika.'; #
 
 #$_lang['user_male'] = 'Male';
-$_lang['user_male'] = 'Male';
+$_lang['user_male'] = 'Mężczyzna'; #
 
 #$_lang['user_management_msg'] = 'Here you can choose which user you wish to edit.';
 $_lang['user_management_msg'] = 'Here you can choose which user you wish to edit.';
 
 #$_lang['user_mobile'] = 'Mobile phone number';
-$_lang['user_mobile'] = 'Mobile phone number';
+$_lang['user_mobile'] = '<abbr title="Nr telefonu komórkowego">Komórka</abbr>'; #
 
 #$_lang['user_new'] = 'New User';
 $_lang['user_new'] = 'New User';
 
 #$_lang['user_password_changed'] = 'Password successfully changed to: [[+password]]';
-$_lang['user_password_changed'] = 'Password successfully changed to: [[+password]]';
+$_lang['user_password_changed'] = 'Hasło zostało zmienione na: [[+password]]'; #
 
 #$_lang['user_phone'] = 'Phone number';
-$_lang['user_phone'] = 'Phone number';
+$_lang['user_phone'] = '<abbr title="Nr telefonu stacjonarnego">Telefon</abbr>'; #
 
 #$_lang['user_photo'] = 'User Photo';
 $_lang['user_photo'] = 'User Photo';
@@ -464,10 +464,10 @@ $_lang['user_photo'] = 'User Photo';
 $_lang['user_photo_message'] = 'Enter the image url for the this user or use the insert button to selected or upload an image file on the server.';
 
 #$_lang['user_prevlogin'] = 'Last Login';
-$_lang['user_prevlogin'] = 'Last Login';
+$_lang['user_prevlogin'] = 'Poprzednie'; #
 
 #$_lang['user_prevlogin_desc'] = 'The time that the user last successfully logged in.';
-$_lang['user_prevlogin_desc'] = 'The time that the user last successfully logged in.';
+$_lang['user_prevlogin_desc'] = 'Data poprzedniego udanego logowania tego użytkownika.'; #
 
 #$_lang['user_profile_err_nf'] = 'FATAL ERROR: User profile not found.';
 $_lang['user_profile_err_nf'] = 'FATAL ERROR: User profile not found.';
@@ -506,7 +506,7 @@ $_lang['user_settings'] = 'User Settings';
 $_lang['user_settings_desc'] = 'Here you can change specific settings for the user.';
 
 #$_lang['user_state'] = 'State';
-$_lang['user_state'] = 'State';
+$_lang['user_state'] = 'Województwo'; #
 
 #$_lang['user_title'] = 'Create/Edit user';
 $_lang['user_title'] = 'Create/Edit user';
@@ -524,16 +524,16 @@ $_lang['user_upload_message'] = ' If you wish to stop this user uploading any fi
 $_lang['user_use_config'] = 'Use System Configuration Setting';
 
 #$_lang['user_username_desc'] = 'The unique identifier of this User, and the name by which they will login to the site.';
-$_lang['user_username_desc'] = 'The unique identifier of this User, and the name by which they will login to the site.';
+$_lang['user_username_desc'] = 'Unikalny identyfikator tego użytkownika i nazwa, przy użyciu której będzie się logować.'; #
 
 #$_lang['user_website'] = 'Website';
-$_lang['user_website'] = 'Website';
+$_lang['user_website'] = '<abbr title="Adres serwisu internetowego">Strona internetowa</abbr>'; #
 
 #$_lang['user_zip'] = 'Zip';
-$_lang['user_zip'] = 'Zip';
+$_lang['user_zip'] = 'Kod pocztowy'; #
 
 #$_lang['username'] = 'Username';
-$_lang['username'] = 'Username';
+$_lang['username'] = 'Login'; #
 
 #$_lang['users'] = 'Users';
 $_lang['users'] = 'Users';

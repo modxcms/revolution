@@ -179,7 +179,7 @@ $_lang['collapse_tree'] = 'Collapse tree';
 $_lang['combo'] = 'ComboBox';
 
 #$_lang['comment'] = 'Comment';
-$_lang['comment'] = 'Comment';
+$_lang['comment'] = 'Komentarz'; #
 
 #$_lang['configuration'] = 'Configuration';
 $_lang['configuration'] = 'Configuration';
@@ -347,7 +347,7 @@ $_lang['element_name_new'] = 'Name of New Element';
 $_lang['elements'] = 'Elements';
 
 #$_lang['email'] = 'Email';
-$_lang['email'] = 'Email';
+$_lang['email'] = 'Adres e-mail'; #
 
 #$_lang['empty_recycle_bin'] = 'Remove Deleted Resources';
 $_lang['empty_recycle_bin'] = 'Remove Deleted Resources';
@@ -548,7 +548,7 @@ $_lang['folder'] = 'Folder';
 $_lang['general'] = 'General';
 
 #$_lang['general_information'] = 'General Information';
-$_lang['general_information'] = 'General Information';
+$_lang['general_information'] = 'Informacje'; #
 
 #$_lang['general_settings'] = 'General Settings';
 $_lang['general_settings'] = 'General Settings';
@@ -1043,7 +1043,7 @@ $_lang['reset'] = 'Reset';
 $_lang['reset_failedlogins'] = 'reset';
 
 #$_lang['reset_password'] = 'Reset Password';
-$_lang['reset_password'] = 'Reset Password';
+$_lang['reset_password'] = 'Hasło'; #
 
 #$_lang['resource'] = 'Resource';
 $_lang['resource'] = 'Resource';
