@@ -35,13 +35,13 @@ $_lang['createedit_symlink'] = 'Create/Edit Symlink';
 $_lang['createedit_weblink'] = 'Create/Edit Weblink';
 
 #$_lang['document'] = 'Document';
-$_lang['document'] = 'Document';
+$_lang['document'] = 'Dokument'; #
 
 #$_lang['document_create'] = 'Create Document';
 $_lang['document_create'] = 'Create Document';
 
 #$_lang['document_create_here'] = 'Create a Document Here';
-$_lang['document_create_here'] = 'Create a Document Here';
+$_lang['document_create_here'] = 'Dokument'; #
 
 #$_lang['document_new'] = 'New Document';
 $_lang['document_new'] = 'Utwórz nowy Dokument'; #
@@ -116,7 +116,7 @@ $_lang['resource_content_type_help'] = 'The content type for this resource. If y
 $_lang['resource_create_access_denied'] = 'You do not have permission to create a Resource.';
 
 #$_lang['resource_create_here'] = 'Create a Resource Here';
-$_lang['resource_create_here'] = 'Create a Resource Here';
+$_lang['resource_create_here'] = 'Nowy Dokument'; #
 
 #$_lang['resource_createdby'] = 'Created By';
 $_lang['resource_createdby'] = 'Created By';
@@ -125,7 +125,7 @@ $_lang['resource_createdby'] = 'Created By';
 $_lang['resource_createdon'] = 'Created On';
 
 #$_lang['resource_delete'] = 'Delete Resource';
-$_lang['resource_delete'] = 'Delete Resource';
+$_lang['resource_delete'] = 'Skasuj&hellip;'; #
 
 #$_lang['resource_delete_confirm'] = 'Are you sure you want to delete this resource?<br />NOTE: Any child resources will also be deleted!';
 $_lang['resource_delete_confirm'] = 'Are you sure you want to delete this resource?<br />NOTE: Any child resources will also be deleted!';
@@ -137,13 +137,13 @@ $_lang['resource_description'] = 'Description';
 $_lang['resource_description_help'] = 'This is an optional description of the resource.';
 
 #$_lang['resource_duplicate'] = 'Duplicate Resource';
-$_lang['resource_duplicate'] = 'Duplicate Resource';
+$_lang['resource_duplicate'] = 'Utwórz duplikat&hellip;'; #
 
 #$_lang['resource_duplicate_confirm'] = 'Are you sure you want to duplicate this resource? Any item(s) it contains will also be duplicated.';
 $_lang['resource_duplicate_confirm'] = 'Are you sure you want to duplicate this resource? Any item(s) it contains will also be duplicated.';
 
 #$_lang['resource_edit'] = 'Edit Resource';
-$_lang['resource_edit'] = 'Edit Resource';
+$_lang['resource_edit'] = 'Edytuj'; #
 
 #$_lang['resource_editedby'] = 'Edited By';
 $_lang['resource_editedby'] = 'Edited By';
@@ -296,7 +296,7 @@ $_lang['resource_parent_help'] = 'The parent resource\'s ID number.';
 $_lang['resource_parent_select_node'] = 'Please select a node in the tree to the left.';
 
 #$_lang['resource_publish'] = 'Publish Resource';
-$_lang['resource_publish'] = 'Publish Resource';
+$_lang['resource_publish'] = 'Rozpocznij publikację&hellip;'; # ? Nie ma dobrego antonimu dla 'Opublikuj'
 
 #$_lang['resource_publish_confirm'] = 'Publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead.<br /><br />Proceed?';
 $_lang['resource_publish_confirm'] = 'Publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead.<br /><br />Proceed?';
@@ -323,7 +323,7 @@ $_lang['resource_publishedon'] = 'Published On';
 $_lang['resource_publishedon_help'] = 'The date the resource was published.';
 
 #$_lang['resource_refresh'] = 'Refresh Resource';
-$_lang['resource_refresh'] = 'Refresh Resource';
+$_lang['resource_refresh'] = 'Odśwież'; #
 
 #$_lang['resource_richtext'] = 'Rich Text';
 $_lang['resource_richtext'] = 'Rich Text';
@@ -365,10 +365,10 @@ $_lang['resource_template'] = 'Uses Template';
 $_lang['resource_template_help'] = 'The template in use by the resource.';
 
 #$_lang['resource_undelete'] = 'Undelete Resource';
-$_lang['resource_undelete'] = 'Undelete Resource';
+$_lang['resource_undelete'] = 'Przywróć'; #
 
 #$_lang['resource_unpublish'] = 'Unpublish Resource';
-$_lang['resource_unpublish'] = 'Unpublish Resource';
+$_lang['resource_unpublish'] = 'Przerwij publikację&hellip;'; # ? Nie ma dobrego antonimu dla 'Opublikuj'
 
 #$_lang['resource_unpublish_confirm'] = 'Un-publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';
 $_lang['resource_unpublish_confirm'] = 'Un-publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';
@@ -401,7 +401,7 @@ $_lang['resource_uri_override_help'] = 'Checking this will allow you to freeze t
 $_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';
 
 #$_lang['resource_view'] = 'View Resource';
-$_lang['resource_view'] = 'View Resource';
+$_lang['resource_view'] = 'Otwórz'; # ? 'Otwórz' zwykle kojarzy się z edycją, ale menu ma oddzielną pozycję 'Edytuj' i trzeba odróżnić to polecenie od wyświetlenia w nowym oknie/zakładce.
 
 #$_lang['show_sort_options'] = 'Show Sorting Options';
 $_lang['show_sort_options'] = 'Pokaż opcje sortowania'; #
@@ -416,10 +416,10 @@ $_lang['site_schedule_desc'] = 'This shows the current resources that are schedu
 $_lang['source'] = 'Source';
 
 #$_lang['static_resource'] = 'Static Resource';
-$_lang['static_resource'] = 'Static Resource';
+$_lang['static_resource'] = 'Załącznik'; #
 
 #$_lang['static_resource_create_here'] = 'Create a Static Resource Here';
-$_lang['static_resource_create_here'] = 'Create a Static Resource Here';
+$_lang['static_resource_create_here'] = 'Załącznik'; #
 
 #$_lang['static_resource_new'] = 'New Static Resource';
 $_lang['static_resource_new'] = 'Utwórz nowy Załącznik'; #
@@ -428,13 +428,13 @@ $_lang['static_resource_new'] = 'Utwórz nowy Załącznik'; #
 $_lang['status'] = 'Status';
 
 #$_lang['symlink'] = 'Symlink';
-$_lang['symlink'] = 'Symlink';
+$_lang['symlink'] = 'Dowiązanie'; #
 
 #$_lang['symlink_create'] = 'Create Symlink';
 $_lang['symlink_create'] = 'Create Symlink';
 
 #$_lang['symlink_create_here'] = 'Create a Symlink Here';
-$_lang['symlink_create_here'] = 'Create a Symlink Here';
+$_lang['symlink_create_here'] = 'Dowiązanie'; #
 
 #$_lang['symlink_help'] = 'The address of the object you wish to reference with this Symlink. If you want to point to an existing MODX Resource, enter the ID here.';
 $_lang['symlink_help'] = 'The address of the object you wish to reference with this Symlink. If you want to point to an existing MODX Resource, enter the ID here.';
@@ -452,13 +452,13 @@ $_lang['template_variables'] = 'Template Variables';
 $_lang['untitled_resource'] = 'Untitled Resource';
 
 #$_lang['weblink'] = 'Weblink';
-$_lang['weblink'] = 'Weblink';
+$_lang['weblink'] = 'Odnośnik'; #
 
 #$_lang['weblink_create'] = 'Create Weblink';
 $_lang['weblink_create'] = 'Create Weblink';
 
 #$_lang['weblink_create_here'] = 'Create a Weblink Here';
-$_lang['weblink_create_here'] = 'Create a Weblink Here';
+$_lang['weblink_create_here'] = 'Odnośnik'; #
 
 #$_lang['weblink_help'] = 'The address of the object you wish to reference with this weblink. If you want to point to an existing MODX Resource, enter the ID here.';
 $_lang['weblink_help'] = 'The address of the object you wish to reference with this weblink. If you want to point to an existing MODX Resource, enter the ID here.';
@@ -468,3 +468,4 @@ $_lang['weblink_message'] = 'A weblink is a reference to an object on the intern
 
 #$_lang['weblink_new'] = 'New Weblink';
 $_lang['weblink_new'] = 'New Weblink';
+

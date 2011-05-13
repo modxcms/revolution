@@ -239,7 +239,7 @@ $_lang['core_rte'] = 'MODX Editor';
 $_lang['correct_errors'] = 'Please correct the errors in your form before submitting.';
 
 #$_lang['create'] = 'Create';
-$_lang['create'] = 'Create';
+$_lang['create'] = 'Utwórz tutaj'; #
 
 #$_lang['create_document_here'] = 'Create document here';
 $_lang['create_document_here'] = 'Create document here';
@@ -314,7 +314,7 @@ $_lang['duplicate'] = 'Duplicate';
 $_lang['duplicate_children'] = 'Duplicate Children';
 
 #$_lang['duplicate_of'] = 'Duplicate of [[+name]]';
-$_lang['duplicate_of'] = 'Duplicate of [[+name]]';
+$_lang['duplicate_of'] = 'Duplikat [[+name]]'; # ?
 
 #$_lang['duplication_options'] = 'Duplication Options';
 $_lang['duplication_options'] = 'Duplication Options';
@@ -644,10 +644,10 @@ $_lang['loading'] = 'Loading...';
 $_lang['locked'] = 'Locked';
 
 #$_lang['locked_by'] = 'locked by [[+username]]';
-$_lang['locked_by'] = 'locked by [[+username]]';
+$_lang['locked_by'] = 'Edytuje [[+username]]'; #
 
 #$_lang['lock_msg'] = '[[+name]] is currently editing this [[+object]]. Please wait until the other user has finished and try again.';
-$_lang['lock_msg'] = '[[+name]] is currently editing this [[+object]]. Please wait until the other user has finished and try again.';
+$_lang['lock_msg'] = '[[+name]] zablokował ten [[+object]] i nad nim pracuje. Poczekaj, aż zakończy swoją pracę i wtedy spróbuj ponownie.'; # ?
 
 #$_lang['logged_in_as'] = 'logged in as [[+username]]';
 $_lang['logged_in_as'] = 'logged in as [[+username]]';
@@ -911,7 +911,7 @@ $_lang['published'] = 'Published';
 $_lang['publishedon'] = 'Published On';
 
 #$_lang['quick_create'] = 'Quick Create';
-$_lang['quick_create'] = 'Quick Create';
+$_lang['quick_create'] = '<abbr title="Otwiera okno edycji podstawowych pól zasobu">Szybko utwórz tutaj</abbr>'; #
 
 #$_lang['quick_create_chunk'] = 'Quick Create Chunk';
 $_lang['quick_create_chunk'] = 'Quick Create Chunk';
@@ -938,7 +938,7 @@ $_lang['quick_update_chunk'] = 'Quick Update Chunk';
 $_lang['quick_update_plugin'] = 'Quick Update Plugin';
 
 #$_lang['quick_update_resource'] = 'Quick Update Resource';
-$_lang['quick_update_resource'] = 'Quick Update Resource';
+$_lang['quick_update_resource'] = '<abbr title="Otwiera okno edycji podstawowych pól zasobu">Szybko Zmień</abbr>'; #
 
 #$_lang['quick_update_snippet'] = 'Quick Update Snippet';
 $_lang['quick_update_snippet'] = 'Quick Update Snippet';
@@ -1073,7 +1073,7 @@ $_lang['resource_name'] = 'Resource name';
 $_lang['resource_name_new'] = 'New Resource Name';
 
 #$_lang['resource_preview'] = 'Preview Resource';
-$_lang['resource_preview'] = 'Preview Resource';
+$_lang['resource_preview'] = '<abbr title="Wyświetla w nowym oknie/zakładce">Wyświetl</abbr>'; #
 
 #$_lang['resource_settings'] = 'Resource Settings';
 $_lang['resource_settings'] = 'Resource Settings';
