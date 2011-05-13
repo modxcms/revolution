@@ -44,7 +44,7 @@ $_lang['document_create'] = 'Create Document';
 $_lang['document_create_here'] = 'Create a Document Here';
 
 #$_lang['document_new'] = 'New Document';
-$_lang['document_new'] = 'New Document';
+$_lang['document_new'] = 'Utwórz nowy Dokument'; #
 
 #$_lang['documents'] = 'Documents';
 $_lang['documents'] = 'Documents';
@@ -404,7 +404,7 @@ $_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';
 $_lang['resource_view'] = 'View Resource';
 
 #$_lang['show_sort_options'] = 'Show Sorting Options';
-$_lang['show_sort_options'] = 'Show Sorting Options';
+$_lang['show_sort_options'] = 'Pokaż opcje sortowania'; #
 
 #$_lang['site_schedule'] = 'Schedule';
 $_lang['site_schedule'] = 'Schedule';
@@ -422,7 +422,7 @@ $_lang['static_resource'] = 'Static Resource';
 $_lang['static_resource_create_here'] = 'Create a Static Resource Here';
 
 #$_lang['static_resource_new'] = 'New Static Resource';
-$_lang['static_resource_new'] = 'New Static Resource';
+$_lang['static_resource_new'] = 'Utwórz nowy Załącznik'; #
 
 #$_lang['status'] = 'Status';
 $_lang['status'] = 'Status';

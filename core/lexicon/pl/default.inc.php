@@ -59,10 +59,10 @@ $_lang['add_to_category_this'] = 'Create a New [[+type]] Here';
 $_lang['add_tv'] = 'Add TV';
 
 #$_lang['add_weblink'] = 'New Weblink';
-$_lang['add_weblink'] = 'New Weblink';
+$_lang['add_weblink'] = 'Utwórz nowy Odnośnik'; #
 
 #$_lang['add_symlink'] = 'New Symlink';
-$_lang['add_symlink'] = 'New Symlink';
+$_lang['add_symlink'] = 'Utwórz nowe Dowiązanie'; #
 
 #$_lang['alias'] = 'Alias';
 $_lang['alias'] = 'Alias';
@@ -173,7 +173,7 @@ $_lang['code'] = 'Code';
 $_lang['collapse_all'] = 'Collapse All';
 
 #$_lang['collapse_tree'] = 'Collapse tree';
-$_lang['collapse_tree'] = 'Collapse tree';
+$_lang['collapse_tree'] = 'Zwiń wszystkie'; #
 
 #$_lang['combo'] = 'ComboBox';
 $_lang['combo'] = 'ComboBox';
@@ -350,16 +350,16 @@ $_lang['elements'] = 'Elements';
 $_lang['email'] = 'Adres e-mail'; #
 
 #$_lang['empty_recycle_bin'] = 'Remove Deleted Resources';
-$_lang['empty_recycle_bin'] = 'Remove Deleted Resources';
+$_lang['empty_recycle_bin'] = 'Usuń skasowane zasoby'; #
 
 #$_lang['empty_recycle_bin_confirm'] = 'Are you sure you want to completely and permanently remove all deleted Resources? This is irreversible.';
-$_lang['empty_recycle_bin_confirm'] = 'Are you sure you want to completely and permanently remove all deleted Resources? This is irreversible.';
+$_lang['empty_recycle_bin_confirm'] = 'Czy na pewno chcesz całkowicie i trwale usunąć wszystkie skasowane zasoby? Tej operacji nie można cofnąć.'; #
 
 #$_lang['empty_recycle_bin_empty'] = 'There are no deleted Resources to remove.';
-$_lang['empty_recycle_bin_empty'] = 'There are no deleted Resources to remove.';
+$_lang['empty_recycle_bin_empty'] = 'Nie ma żadnych skasowanych zasobów do usunięcia.'; #
 
 #$_lang['empty_recycle_bin_emptied'] = 'All deleted Resources have been permanently removed.';
-$_lang['empty_recycle_bin_emptied'] = 'All deleted Resources have been permanently removed.';
+$_lang['empty_recycle_bin_emptied'] = 'Wszystkie skasowane zasoby zostały trwale usuniięte.'; #
 
 #$_lang['enabled'] = 'Enabled';
 $_lang['enabled'] = 'Enabled';
@@ -386,7 +386,7 @@ $_lang['existing_category'] = 'Existing Category';
 $_lang['expand_all'] = 'Expand All';
 
 #$_lang['expand_tree'] = 'Expand tree';
-$_lang['expand_tree'] = 'Expand tree';
+$_lang['expand_tree'] = 'Rozwiń wszystkie'; #
 
 #$_lang['ext_afterpage'] = 'of {0}';
 $_lang['ext_afterpage'] = 'of {0}';
@@ -677,7 +677,7 @@ $_lang['manager'] = 'Manager';
 $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
 
 #$_lang['menu_order'] = 'Menu Order';
-$_lang['menu_order'] = 'Menu Order';
+$_lang['menu_order'] = 'Kolejność w menu'; #
 
 #$_lang['mime_type'] = 'MIME Type';
 $_lang['mime_type'] = 'MIME Type';
@@ -998,7 +998,7 @@ $_lang['refresh_system_settings'] = 'Regenerating system settings cache';
 $_lang['refresh_title'] = 'Refresh site';
 
 #$_lang['refresh_tree'] = 'Refresh tree';
-$_lang['refresh_tree'] = 'Refresh tree';
+$_lang['refresh_tree'] = 'Odśwież'; #
 
 #$_lang['refresh_unpublished'] = '<strong>[[+num]]</strong> documents were unpublished.';
 $_lang['refresh_unpublished'] = '<strong>[[+num]]</strong> documents were unpublished.';
@@ -1049,7 +1049,7 @@ $_lang['reset_password'] = 'Hasło'; #
 $_lang['resource'] = 'Resource';
 
 #$_lang['resources'] = 'Resources';
-$_lang['resources'] = 'Resources';
+$_lang['resources'] = 'Zasoby'; #
 
 #$_lang['resource_categories'] = 'Combined View';
 $_lang['resource_categories'] = 'Combined View';
@@ -1187,7 +1187,7 @@ $_lang['snippets'] = 'Snippets';
 $_lang['sort_asc'] = 'Ascending';
 
 #$_lang['sort_by'] = 'Sort By';
-$_lang['sort_by'] = 'Sort By';
+$_lang['sort_by'] = 'Sortuj wg pola'; #
 
 #$_lang['sort_desc'] = 'Descending';
 $_lang['sort_desc'] = 'Descending';
