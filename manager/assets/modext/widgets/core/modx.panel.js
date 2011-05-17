@@ -113,8 +113,10 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,focusFirstField: function() {
-        var fld = this.findFirstTextField();
-        if (fld) { fld.focus(false,30); }
+        if(this.getForm().items.getCount() > 0) {
+            var fld = this.findFirstTextField();
+            if (fld) { fld.focus(false,30); }
+        }
     }
     ,findFirstTextField: function(i) {
         i = i || 0;
