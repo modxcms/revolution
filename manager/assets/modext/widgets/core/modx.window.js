@@ -51,6 +51,7 @@ MODx.Window = function(config) {
         if (this.config.blankValues) { this.fp.getForm().reset(); }
         if (this.config.allowDrop) { this.loadDropZones(); }
         this.syncSize();
+        this.focusFirstField();
     },this);
 };
 Ext.extend(MODx.Window,Ext.Window,{
@@ -78,6 +79,14 @@ Ext.extend(MODx.Window,Ext.Window,{
             ,items: this.config.fields || []
         });
         this.renderForm();
+    }
+
+    ,focusFirstField: function() {
+        var fld = this.fp.getForm().items.itemAt(0);
+        if (fld.isXType('combo')) {
+            fld = this.fp.getForm().items.itemAt(1);
+        }
+        if (fld) { fld.focus(true,true); }
     }
 	
     ,submit: function(close) {
