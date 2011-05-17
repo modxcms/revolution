@@ -83,7 +83,7 @@ Ext.extend(MODx.Window,Ext.Window,{
 
     ,focusFirstField: function() {
         var fld = this.findFirstTextField();
-        if (fld) { fld.focus(false,20); }
+        if (fld) { fld.focus(false,200); }
     }
     ,findFirstTextField: function(i) {
         i = i || 0;
