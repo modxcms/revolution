@@ -98,7 +98,7 @@ if ($fcDt) {
     }
 
     $constraintField = $fcDt->get('constraint_field');
-    if ($constraintField == 'id' && in_array($fcDt->get('constraint'),$parentIds)) {
+    if (($constraintField == 'id' || $constraintField == 'parent') && in_array($fcDt->get('constraint'),$parentIds)) {
         $default_template = $fcDt->get('value');
     } else if (empty($constraintField)) {
         $default_template = $fcDt->get('value');
