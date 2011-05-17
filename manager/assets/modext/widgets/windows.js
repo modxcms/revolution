@@ -88,7 +88,7 @@ MODx.window.CreateCategory = function(config) {
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
-            fieldLabel: 'Parent'
+            fieldLabel: _('parent')
             ,name: 'parent'
             ,hiddenName: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
@@ -168,7 +168,7 @@ MODx.window.QuickCreateChunk = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '97%'
-            ,grow: true
+            ,grow: true, growMax: 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -471,7 +471,8 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '97%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
