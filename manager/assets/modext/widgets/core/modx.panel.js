@@ -58,6 +58,7 @@ MODx.FormPanel = function(config) {
         this.mask.show();
     }
     this.fireEvent('setup',config);
+    this.focusFirstField();
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     isReady: false
@@ -109,6 +110,20 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             return false;
         }
         return true;
+    }
+
+    ,focusFirstField: function() {
+        var fld = this.findFirstTextField();
+        if (fld) { fld.focus(false,true); }
+    }
+    ,findFirstTextField: function(i) {
+        i = i || 0;
+        var fld = this.getForm().items.itemAt(i);
+        if (fld.isXType('combo') || fld.isXType('checkbox') || fld.isXType('radio') || fld.isXType('displayfield') || fld.isXType('statictextfield')) {
+            i = i+1;
+            fld = this.findFirstTextField(i);
+        }
+        return fld;
     }
 
     ,addChangeEvent: function(items) {

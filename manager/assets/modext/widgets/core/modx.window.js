@@ -82,11 +82,17 @@ Ext.extend(MODx.Window,Ext.Window,{
     }
 
     ,focusFirstField: function() {
-        var fld = this.fp.getForm().items.itemAt(0);
-        if (fld.isXType('combo')) {
-            fld = this.fp.getForm().items.itemAt(1);
+        var fld = this.findFirstTextField();
+        if (fld) { fld.focus(false,true); }
+    }
+    ,findFirstTextField: function(i) {
+        i = i || 0;
+        var fld = this.fp.getForm().items.itemAt(i);
+        if (fld.isXType('combo') || fld.isXType('checkbox') || fld.isXType('radio') || fld.isXType('displayfield') || fld.isXType('statictextfield')) {
+            i = i+1;
+            fld = this.findFirstTextField(i);
         }
-        if (fld) { fld.focus(true,true); }
+        return fld;
     }
 	
     ,submit: function(close) {
