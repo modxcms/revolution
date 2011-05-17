@@ -147,17 +147,11 @@ if ($fcDt) {
     $parentIds = array();
     if ($parent) { /* ensure get all parents */
         $p = $parent ? $parent->get('id') : 0;
-        $rCtx = $parent->get('context_key');
-        $oCtx = $modx->context->get('key');
-        if (!empty($rCtx) && $rCtx != 'mgr') {
-            $modx->switchContext($rCtx);
-        }
-        $parentIds = $modx->getParentIds($p);
+        $parentIds = $modx->getParentIds($p,10,array(
+            'context' => $parent->get('context_key'),
+        ));
         $parentIds[] = $p;
         $parentIds = array_unique($parentIds);
-        if (!empty($rCtx)) {
-            $modx->switchContext($oCtx);
-        }
     } else {
         $parentIds = array(0);
     }

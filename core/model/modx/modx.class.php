@@ -1687,7 +1687,7 @@ class modX extends xPDO {
      *
      * @access public
      * @param string $contextKey The context to retrieve.
-     * @return &$modContext A modContext object retrieved from cache or
+     * @return modContext A modContext object retrieved from cache or
      * database.
      */
     public function getContext($contextKey) {
