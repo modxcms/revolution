@@ -113,9 +113,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,focusFirstField: function() {
-        if(this.getForm().items.getCount() > 0) {
+        if (this.getForm().items.getCount() > 0) {
             var fld = this.findFirstTextField();
-            if (fld) { fld.focus(false,30); }
+            if (fld) { fld.focus(false,200); }
         }
     }
     ,findFirstTextField: function(i) {

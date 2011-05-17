@@ -82,8 +82,10 @@ Ext.extend(MODx.Window,Ext.Window,{
     }
 
     ,focusFirstField: function() {
-        var fld = this.findFirstTextField();
-        if (fld) { fld.focus(false,20); }
+        if (this.fp && this.fp.getForm() && this.fp.getForm().items.getCount() > 0) {
+            var fld = this.findFirstTextField();
+            if (fld) { fld.focus(false,200); }
+        }
     }
     ,findFirstTextField: function(i) {
         i = i || 0;
