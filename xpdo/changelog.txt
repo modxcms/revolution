@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#4772] Do not flush related objects from cache on read operations
 - [#4682] Fix support for driver-specific attributes on object element in schema
 
 xPDO 2.1.3-pl (May 3, 2011)

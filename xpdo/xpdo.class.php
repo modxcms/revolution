@@ -1858,26 +1858,28 @@ class xPDO {
                     $sigHash= md5($this->toJSON($sigKey));
                     $sig= implode('/', array ($sigClass, $sigHash));
                     if (is_string($sig)) {
-                        if (empty($sigGraph) && $object instanceof xPDOObject) {
-                            $classes= array();
-                            $sigGraph= array_merge($object->_aggregates, $object->_composites);
-                        }
-                        if (!empty($sigGraph)) {
-                            foreach ($sigGraph as $alias => $fkMeta) {
-                                if (isset($classes[$fkMeta['class']])) {
-                                    continue;
+                        if ($this->getOption('modified', $options, false)) {
+                            if (empty($sigGraph) && $object instanceof xPDOObject) {
+                                $classes= array();
+                                $sigGraph= array_merge($object->_aggregates, $object->_composites);
+                            }
+                            if (!empty($sigGraph)) {
+                                foreach ($sigGraph as $alias => $fkMeta) {
+                                    if (isset($classes[$fkMeta['class']])) {
+                                        continue;
+                                    }
+                                    $removed= $this->cacheManager->delete($fkMeta['class'], array_merge($options, array(
+                                        xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
+                                        xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
+                                        xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
+                                        'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
+                                        'multiple_object_delete' => true
+                                    )));
+                                    if ($this->getDebug() === true) {
+                                        $this->log(xPDO::LOG_LEVEL_DEBUG, "Removing all cache objects of class {$fkMeta['class']}: " . ($removed ? 'successful' : 'failed'));
+                                    }
+                                    $classes[$fkMeta['class']]= $fkMeta['class'];
                                 }
-                                $removed= $this->cacheManager->delete($fkMeta['class'], array_merge($options, array(
-                                    xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
-                                    xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
-                                    xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
-                                    'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
-                                    'multiple_object_delete' => true
-                                )));
-                                if ($this->getDebug() === true) {
-                                    $this->log(xPDO::LOG_LEVEL_DEBUG, "Removing all cache objects of class {$fkMeta['class']}: " . ($removed ? 'successful' : 'failed'));
-                                }
-                                $classes[$fkMeta['class']]= $fkMeta['class'];
                             }
                         }
                         $cacheOptions = array_merge($options, array(
