@@ -100,7 +100,8 @@ MODx.panel.Resource = function(config) {
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+f.getValue()+'</h2>');
+                    titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
+                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+titlePrefix+': '+f.getValue()+'</h2>');
                 }}
             }
             
