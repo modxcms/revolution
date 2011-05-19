@@ -35,6 +35,12 @@ if (!empty($scriptProperties['query'])) {
     $c->orCondition(array('Profile.fullname:LIKE' => '%'.$scriptProperties['query'].'%'));
     $c->orCondition(array('Profile.email:LIKE' => '%'.$scriptProperties['query'].'%'));
 }
+if (!empty($scriptProperties['usergroup'])) {
+    $c->innerJoin('modUserGroupMember','UserGroupMembers');
+    $c->where(array(
+        'UserGroupMembers.user_group' => $scriptProperties['usergroup'],
+    ));
+}
 $count = $modx->getCount('modUser',$c);
 $c->select(array(
     'modUser.*',
