@@ -113,7 +113,7 @@ $_lang['cache_unpublish_event_error'] = '<p>ERROR: Could not determine next unpu
 $_lang['cached'] = 'Cached';
 
 #$_lang['cancel'] = 'Cancel';
-$_lang['cancel'] = 'Cancel';
+$_lang['cancel'] = 'Anuluj'; #
 
 #$_lang['caption'] = 'Caption';
 $_lang['caption'] = 'Caption';
@@ -164,7 +164,7 @@ $_lang['clear_filter'] = 'Clear Filter';
 $_lang['click_to_change'] = 'Click to Change';
 
 #$_lang['close'] = 'Close';
-$_lang['close'] = 'Close';
+$_lang['close'] = 'Zamknij'; # ? Powinno być "Po zapisaniu zamknij", ale nie mam pewności, czy nie jest używane gdzieś jeszcze.
 
 #$_lang['code'] = 'Code';
 $_lang['code'] = 'Code';
@@ -281,7 +281,7 @@ $_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by cl
 $_lang['db_info_sqlsrv'] = 'You may rebuild a table\'s index by clicking on the link in the Unused column.';
 
 #$_lang['delete'] = 'Delete';
-$_lang['delete'] = 'Delete';
+$_lang['delete'] = 'Skasuj'; #
 
 #$_lang['deleted'] = 'Deleted';
 $_lang['deleted'] = 'Skasowany'; #
@@ -308,7 +308,7 @@ $_lang['done'] = 'Done';
 $_lang['downloading'] = 'Downloading...';
 
 #$_lang['duplicate'] = 'Duplicate';
-$_lang['duplicate'] = 'Duplicate';
+$_lang['duplicate'] = 'Utwórz duplikat'; #
 
 #$_lang['duplicate_children'] = 'Duplicate Children';
 $_lang['duplicate_children'] = 'Powielenie podrzędnych'; #
@@ -320,7 +320,7 @@ $_lang['duplicate_of'] = 'Duplikat [[+name]]'; # ?
 $_lang['duplication_options'] = 'Opcje Duplikatu'; #
 
 #$_lang['edit'] = 'Edit';
-$_lang['edit'] = 'Edit';
+$_lang['edit'] = 'Edytuj'; #
 
 #$_lang['edit_context'] = 'Edit context';
 $_lang['edit_context'] = 'Edit context';
@@ -569,7 +569,7 @@ $_lang['handler'] = 'Handler';
 $_lang['help'] = 'Help';
 
 #$_lang['help_ex'] = 'Help!';
-$_lang['help_ex'] = 'Help!';
+$_lang['help_ex'] = 'Pomoc'; #
 
 #$_lang['help_not_yet'] = 'Help for this component has not yet been implemented.';
 $_lang['help_not_yet'] = 'Help for this component has not yet been implemented.';
@@ -1085,7 +1085,7 @@ $_lang['role'] = 'Role';
 $_lang['roles'] = 'Roles';
 
 #$_lang['save'] = 'Save';
-$_lang['save'] = 'Save';
+$_lang['save'] = 'Zapisz'; #
 
 #$_lang['save_and_close'] = 'Save and Close';
 $_lang['save_and_close'] = 'Save and Close';
@@ -1205,10 +1205,10 @@ $_lang['specify_name_error'] = 'Please specify a name.';
 $_lang['statistics'] = 'Statistics';
 
 #$_lang['stay'] = 'Continue editing';
-$_lang['stay'] = 'Continue editing';
+$_lang['stay'] = 'Po zapisaniu kontynuuj edycję'; #
 
 #$_lang['stay_new'] = 'Add another';
-$_lang['stay_new'] = 'Add another';
+$_lang['stay_new'] = 'Po zapisaniu dodaj następny'; #
 
 #$_lang['submit'] = 'Submit';
 $_lang['submit'] = 'Submit';
@@ -1355,7 +1355,7 @@ $_lang['value'] = 'Value';
 $_lang['version'] = 'Version';
 
 #$_lang['view'] = 'View';
-$_lang['view'] = 'View';
+$_lang['view'] = 'Wyświetl'; #
 
 #$_lang['view_context'] = 'View context';
 $_lang['view_context'] = 'View context';

@@ -140,7 +140,7 @@ $_lang['resource_description_help'] = 'Krótki opis zawartości, zwykle używany
 $_lang['resource_duplicate'] = 'Utwórz duplikat&hellip;'; #
 
 #$_lang['resource_duplicate_confirm'] = 'Are you sure you want to duplicate this resource? Any item(s) it contains will also be duplicated.';
-$_lang['resource_duplicate_confirm'] = 'Are you sure you want to duplicate this resource? Any item(s) it contains will also be duplicated.';
+$_lang['resource_duplicate_confirm'] = 'Czy na pewno chcesz utworzyć duplikat tego zasobu? Wszystkie podrzędne zasoby także zostaną powielone.'; #
 
 #$_lang['resource_edit'] = 'Edit Resource';
 $_lang['resource_edit'] = 'Edytuj'; #
@@ -254,7 +254,7 @@ $_lang['resource_link_attributes'] = 'Atrybuty odnośnika'; #
 $_lang['resource_link_attributes_help'] = 'Atrybuty odnośnika do tego zasobu, takie jak <code>target=</code> lub <code>rel=</code>.'; #
 
 #$_lang['resource_locked_by'] = 'Locked by [[+user]]';
-$_lang['resource_locked_by'] = 'Locked by [[+user]]';
+$_lang['resource_locked_by'] = 'Edytuje [[+user]]'; #
 
 #$_lang['resource_longtitle'] = 'Long Title';
 $_lang['resource_longtitle'] = 'Pełny tytuł'; #
