@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Kevin van Haare, Webton.nl
+ * @author Bert Oost <bertoost85@gmail.com>
  */
 $_lang['has_access'] = 'Heeft toegang?';
 $_lang['rank'] = 'Rang';
@@ -32,6 +32,8 @@ $_lang['tv_err_reserved_name'] = 'Een template variabele mag niet dezelfde naam 
 $_lang['tv_err_save_access_permissions'] = 'Er is een fout opgetreden tijdens het opslaan van de template variabele toegangsrechten.';
 $_lang['tv_err_save'] = 'Er is een fout opgetreden bij het opslaan van de template variabele.';
 $_lang['tv_inuse'] = 'De volgende documenten gebruiken momenteel deze template variabele, om deze template variabele te verwijderen klkik op de verwijder knop of op Annuleren om alles te annuleren.';
+$_lang['tv_input_options'] = 'Invoer opties';
+$_lang['tv_input_options_msg'] = '<p>Hier kun je invoer opties voor de Template Variabele aanpassen, speficiek voor het type invoer dat je selecteert.</p>';
 $_lang['tv_lock'] = 'Lock variabele voor bewerking';
 $_lang['tv_lock_msg'] = 'Gebruikers moeten het edit_locked attribute in order to edit this Template Variable.';
 $_lang['tv_management_msg'] = 'Beheer aanvullende aangepaste content velden (variabelen in het sjabloon) voor je documenten.';
@@ -39,6 +41,8 @@ $_lang['tv_msg'] = 'Voeg hier nieuwe of bewerk huidige template variabelen. Temp
 $_lang['tv_name'] = 'Variabele naam';
 $_lang['tv_new'] = 'Nieuwe template variabelen';
 $_lang['tv_novars'] = 'Geen template variabele gevonden';
+$_lang['tv_output_options'] = 'Uitvoer opties';
+$_lang['tv_output_options_msg'] = '<p>Hier kun je uitvoer opties voor de Template Variabele aanpassen, speficiek voor het type uitvoer dat je selecteert.</p>';
 $_lang['tv_properties'] = 'Standaard eigenschappen';
 $_lang['tv_rank'] = 'Sorteer volgorde';
 $_lang['tv_reset_params'] = 'Reset parameters';

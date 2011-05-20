@@ -27,7 +27,7 @@ if (!empty($_POST['proceed'])) {
     if ($mode == modInstall::MODE_NEW) {
         /* validate admin user data */
 
-        $invchars = array('/','\'','"','{','}');
+        $invchars = array('/','\'','"','{','}','(',')');
 
         if (empty ($_POST['cmsadmin'])) {
             $errors['cmsadmin'] = $install->lexicon('username_err_ns');

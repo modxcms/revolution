@@ -10,4 +10,4 @@ $_lang['clear'] = 'Pulisci';
 $_lang['error_log'] = 'Log Errori';
 $_lang['error_log_desc'] = 'Qui trovi i log degli errori di MODx Revolution:';
 $_lang['system_events'] = 'Eventi di Sistema';
-$_lang['priority'] = 'Priorita\'';
+$_lang['priority'] = 'Priorità';

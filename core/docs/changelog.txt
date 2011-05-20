@@ -2,6 +2,78 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4796] fix New Resource page heading during typing of page title
+- Add Usergroup filter to users grid
+- [#4785] Fix preview of files in left tree in non-standard contexts with absolute filemanager_ settings
+- [#4473] Add other common file types to upload_files system setting
+- [#4539] Fix issue with stretching of quick update chunk and small screen resolutions
+- Automatically focus cursor to first textfield on windows in mgr
+- [#4738] Fix issue with inconsistent results in resourcelist TV
+- [#4441] Fix FC issue when parent is constraint and trying to change default template
+- [#4764] Fix issue with timestamp display on manager log page
+- [#4680] Fix javascript error when typing Template name
+- [#4681] Fix path issue which was causing 404 errors in the manager, IE 7-9
+- [#4439] Add parentheses to list of disallowed password characters in installer
+- [#4669] Fix button target size to make it more responsive to most clicks
+- [#4625] Fix sizes of buttons and submit inputs in installer - IE 8 and 9
+- [#4617] Fix custom values not being shown on Context Installation page during Advanced Upgrade
+- [#4605] modX->switchContext() now checks load permission via Context ACLs
+- [#4595] Fix display of modified/accessed times on Edit File page
+- [#4594] Fix last login time displayed in Info block of Manager welcome page
+- [#4470] Fix frozen URI not displayed when editing resource
+- [#4572] Fix installer error log filenames (characters not allowed in Windows filenames)
+- [#4585] Fix database connection processors in advanced upgrade
+- Update xPDO to v2.1.3-pl
+- [#4567] Remove calls to xPDO->log() in xPDOCacheManager->writeFile()
+- [#4557] Minor fixes on Installer Options screen for Traditional package
+- [#4556] Fix js error on Welcome screen of Traditional package's installer
+- [#4076] Fix Edit/Quick Update context menu items in protected categories
+- Fix Context Access query broken in RC4 changes for #4502
+
+MODX Revolution 2.1.0-rc-4 (April 29, 2011)
+====================================
+- [#4543] Fix preview URLs when FURLs are turned Off
+- [#4537] Trigger refreshURIs when related settings are modified
+- Have modAccess*::loadAttributes() check access_*_enabled settings
+- [#4502] Enable custom targets in modUser->loadAttributes()
+- [#3692] Add policy checks for new_document_in_root and add_children to resource/sort processor
+- [#4526] Additional fixes for output filters on placeholders
+- [#4504] Ensure UserGroup ACLs are deleted along with UserGroups
+- [#4507] Fix usergroup description not being set when created
+- Change modResource->isDuplicateAlias() to return id of duplicate Resource
+- [#4495] Add duplicate URI check to resource/publish action
+- [#3857] Fix placeholder processing when output filters applied
+- [#4362] Fix path issues with Static Resources and base_urls of /
+- [#4074] Require list permission on Context for Resource searches
+- [#4439] Do not allow invalid characters in username / password
+- [#4485] Fix issue with scrolling on drag/drop Element Properties window in small resolutions
+- [#4352] Fix failedlogincount / user blocking logic in login processor
+- [#4373] Fix issue with htmltag TV output render and empty values
+- [#4374] Fix issue with updating files in the edit file page
+- [#4024] Fix issue with LocalProperty grids not rendering list type properties display values correctly
+- [#4400] Trim whitespace from Namespace paths when adding/updating them
+- [#4434] Fix issue with edit panel on contexts
+- [#4372] Fix View button not getting URI change after Save Resource (all Resource types)
+- [#4369] Ensure Save button is active after Template change on Weblink, Symlink, Static Resource
+- [#4471] Set Resource alias properly on update
+- [#4469] Guard against inadvertent creation of duplicate New Resources
+- Add options to configure cache file writing attempts when exclusive locks fail
+- [#4464] Prevent unnecessary TV queries on uncached Resources
+- [#4422] Fix problems updating Boolean settings (System, Context, User)
+- [#4453] Fix File Browser when paths contain "n_"
+- [#4447] Fix ACL grid in Edit Context view
+- [#4438] Fix error logging to custom log targets defined by array
+- [#4399] Fix IE8 javascript error on Resource and Element update pages
+
+MODX Revolution 2.1.0-rc-3 (April 11, 2011)
+====================================
+- Fix invalid merge retained in master branch from 2.1.0-rc-1
+- Fix modResource::save() to refresh uri if isfolder field is dirty.
+
+MODX Revolution 2.1.0-rc-2 (April 11, 2011)
+====================================
+- Refresh resource tree if resource's parent has changed
+- [#4327] Fix bug with auto-publishing
 - Fix positioning of right panel in mgr UI to make tree/nav static and isolated from scrolling of right panel
 - Make alias required field in resource/create processor when friendly_urls is on but automatic_alias is off
 - [#4280] Fix issue where transport package could not be removed if transport files were removed

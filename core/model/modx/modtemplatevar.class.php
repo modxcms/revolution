@@ -22,12 +22,6 @@ class modTemplateVar extends modElement {
         'DIRECTORY'
     );
     /**
-     * @var integer Indicates a value is loaded for a specified resource.
-     * @access public
-     */
-    public $resourceId= 0;
-
-    /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
      *
      * {@inheritdoc}
@@ -170,10 +164,10 @@ class modTemplateVar extends modElement {
         $value= null;
         $resourceId = intval($resourceId);
         if ($resourceId) {
-            if ($resourceId === $this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
+            if (is_object($this->xpdo->resource) && $resourceId === (integer) $this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
                 $valueArray= $this->xpdo->resource->get($this->get('name'));
                 $value= $valueArray[1];
-            } elseif ($resourceId === $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
+            } elseif ($resourceId === (integer) $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
                 $value= $this->get('value');
             } else {
                 $resource = $this->xpdo->getObject('modTemplateVarResource',array(
@@ -265,10 +259,11 @@ class modTemplateVar extends modElement {
         if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
             $ips = $this->get('input_properties');
             $fmu = $this->xpdo->getOption('filemanager_url',null,'');
-            if (!empty($ips['baseUrl'])) {
-                $value = $ips['baseUrl'].$value;
-            } else if (!empty($ips['baseUrlRelative']) && $ips['baseUrlRelative'] !== 'false' && !empty($fmu)) {
-                if (empty($ips['baseUrlPrependCheckSlash']) || substr($value,0,1) != '/') {
+            $absValCheck = substr($value,0,1) == '/' || substr($value,0,7) == 'http://' || substr($value,0,8) == 'https://';
+            if (empty($ips['baseUrlPrependCheckSlash']) || !($absValCheck)) {
+                if (!empty($ips['baseUrl'])) {
+                    $value = $ips['baseUrl'].$value;
+                } else if (!empty($fmu)) {
                     $value = $fmu.$value;
                 }
             }

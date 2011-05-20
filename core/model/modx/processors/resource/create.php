@@ -50,6 +50,24 @@
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 $modx->lexicon->load('resource');
 
+/* check new resource token if posted from manager */
+if(isset($scriptProperties['create-resource-token'])) {
+    $tokenFound = false;
+    $tokenPassed = $scriptProperties['create-resource-token'];
+    if(!is_null($tokenPassed)) {
+        if(isset($_SESSION['newResourceTokens']) && !is_null($_SESSION['newResourceTokens'])) {
+            $search = array_search($tokenPassed, $_SESSION['newResourceTokens']);
+            if($search !== false) {
+                unset($_SESSION['newResourceTokens'][$search]);
+                $tokenFound = true;
+            }
+        }
+    }
+    if($tokenFound === false) {
+        return $modx->error->failure($modx->lexicon('resource_err_duplicate'));
+    }
+}
+
 /* handle if parent is a context */
 if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent'])) {
     $ctxCnt = $modx->getCount('modContext',array('key' => $scriptProperties['parent']));
@@ -124,8 +142,9 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 if ($workingContext->getOption('friendly_urls', false)) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
-        $scriptProperties['alias'] = $scriptProperties['pagetitle'];
-    } elseif (empty($scriptProperties['alias'])) {
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+    }
+    if (empty($scriptProperties['alias'])) {
         $modx->error->addField('alias', $modx->lexicon('field_required'));
     }
     $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $scriptProperties['context_key'];

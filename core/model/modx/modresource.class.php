@@ -92,7 +92,7 @@ class modResource extends modAccessibleSimpleObject {
         } else {
             $c->select(array(
                 'IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value',
-                'IF(ISNULL(tvc.value),0,'.$resource->get('id').') AS resourceId'
+                $resource->get('id').' AS resourceId'
             ));
         }
         $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
@@ -446,7 +446,7 @@ class modResource extends modAccessibleSimpleObject {
         $refreshChildURIs = false;
         if ($this->xpdo instanceof modX && $this->xpdo->getOption('friendly_urls')) {
             $refreshChildURIs = ($this->get('refreshURIs') || $this->isDirty('alias') || $this->isDirty('parent') || $this->isDirty('context_key'));
-            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('content_type') || $refreshChildURIs))) {
+            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('content_type') || $this->isDirty('isfolder') || $refreshChildURIs))) {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
             }
         }
@@ -715,17 +715,21 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function isDuplicateAlias($aliasPath = '', $contextKey = '') {
         if (empty($aliasPath)) $aliasPath = $this->getAliasPath($this->get('alias'));
-        $criteria = array(
+        $criteria = $this->xpdo->newQuery('modResource');
+        $where = array(
             'id:!=' => $this->get('id'),
             'uri' => $aliasPath,
             'deleted' => false,
             'published' => true
         );
         if (!empty($contextKey)) {
-            $criteria['context_key'] = $contextKey;
+            $where['context_key'] = $contextKey;
         }
-        $duplicates = $this->xpdo->getCount('modResource', $criteria);
-        return $duplicates > 0;
+        $criteria->select('id');
+        $criteria->where($where);
+        $criteria->prepare();
+        $duplicate = $this->xpdo->getValue($criteria->stmt);
+        return $duplicate > 0 ? (integer) $duplicate : false;
     }
 
     /**

@@ -100,7 +100,8 @@ MODx.panel.Resource = function(config) {
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+f.getValue()+'</h2>');
+                    titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
+                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+titlePrefix+': '+f.getValue()+'</h2>');
                 }}
             }
             
@@ -168,6 +169,11 @@ MODx.panel.Resource = function(config) {
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
         },{
+            xtype: 'hidden'
+            ,name: 'parent-original'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-old-hidden'
+        },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
             ,description: '<b>[[*menutitle]]</b><br />'+_('resource_menutitle_help')
@@ -209,6 +215,11 @@ MODx.panel.Resource = function(config) {
             ,name: 'content'
             ,id: 'hiddenContent'
             ,value: (config.record.content || config.record.ta) || ''
+        },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
         },{
             html: MODx.onDocFormRender, border: false
         }]
@@ -366,7 +377,7 @@ MODx.panel.Resource = function(config) {
         ,maxLength: 255
         ,anchor: '70%'
         ,value: config.record.uri || ''
-        ,hidden: parseInt(config.record.uri_override) ? false : true
+        ,hidden: !config.record.uri_override
     });
     it.push({
         id: 'modx-page-settings'
@@ -452,6 +463,7 @@ MODx.panel.Resource = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
         }
     });
@@ -520,6 +532,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').disable();
+        }
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
@@ -533,16 +548,27 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (t) {
             var ctx = Ext.getCmp('modx-resource-context-key').getValue();
             var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
+            var pao = Ext.getCmp('modx-resource-parent-old-hidden').getValue();
             var v = ctx+'_'+pa;
             var n = t.getNodeById(v);
-            n.leaf = false;
-            t.refreshNode(v,true);
+            if(pa !== pao) {
+                t.refresh();
+                Ext.getCmp('modx-resource-parent-old-hidden').setValue(pa);
+            } else {
+                n.leaf = false;
+                t.refreshNode(v,true);
+            }
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
         } else {
             this.getForm().setValues(o.result.object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
+        }
+    }
+    ,failure: function(o) {
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').enable();
         }
     }
 
@@ -568,6 +594,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         success: {fn:function(r) {
                             location.href = '?a='+MODx.action['resource/update']+'&id='+r.result.object.id+'&template='+nt+'&activeSave=1';
                         },scope:this}
+                    },{
+                        bypassValidCheck: true
                     });
                 } else {
                     t.setValue(this.config.record.template);

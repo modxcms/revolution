@@ -67,7 +67,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
                 idx = cb.getStore().find(cb.valueField,v);
                 rec = cb.getStore().getAt(idx);
                 if (rec) {
-                    rec.get(cb.displayField);
+                    oz = rec.get(cb.displayField);
                 } else {
                     oz = v;
                 }

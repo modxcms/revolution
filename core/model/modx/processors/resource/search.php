@@ -21,9 +21,20 @@ $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'pagetitle');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
+$contextKeys = array();
+$contexts = $modx->getCollection('modContext', array('key:!=' => 'mgr'));
+foreach ($contexts as $context) {
+    if ($context->checkPolicy('list')) {
+        $contextKeys[] = $context->get('key');
+    }
+}
+if (empty($contextKeys)) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
+
 /* setup query */
 $c = $modx->newQuery('modResource');
-$where = array();
+$where = array('context_key:IN' => $contextKeys);
 if (!empty($scriptProperties['id'])) $where['id'] = $scriptProperties['id'];
 if (!empty($scriptProperties['pagetitle'])) $where['pagetitle:LIKE'] = '%'.$scriptProperties['pagetitle'].'%';
 if (!empty($scriptProperties['longtitle'])) $where['longtitle:LIKE'] = '%'.$scriptProperties['longtitle'].'%';
@@ -38,12 +49,12 @@ $c->where($where);
 $count = $modx->getCount('modResource',$c);
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
-$resources = $modx->getCollection('modResource',$c);
+$iterator = $modx->getIterator('modResource',$c);
 $actions = $modx->request->getAllActionIDs();
 
 /* iterate */
 $list = array();
-foreach ($resources as $resource) {
+foreach ($iterator as $resource) {
     if ($resource->checkPolicy('list')) {
         $resourceArray = $resource->toArray();
         $resourceArray['menu'] = array();

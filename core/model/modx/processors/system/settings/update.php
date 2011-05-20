@@ -30,12 +30,23 @@ if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_n
 
 /* value parsing */
 if ($scriptProperties['xtype'] == 'combo-boolean' && !is_numeric($scriptProperties['value'])) {
-    if ($scriptProperties['value'] == 'yes' || $scriptProperties['value'] == 'Yes' || $scriptProperties['value'] == $modx->lexicon('yes')) {
+    if (in_array($scriptProperties['value'], array('yes', 'Yes', $modx->lexicon('yes'), 'true', 'True'))) {
         $scriptProperties['value'] = 1;
     } else $scriptProperties['value'] = 0;
 }
 
 $setting->fromArray($scriptProperties,'',true);
+
+$refreshURIs = false;
+if ($setting->get('key') === 'friendly_urls' && $setting->isDirty('value') && $setting->get('value') == '1') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'use_alias_path' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'container_suffix' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
 
 /* save setting */
 if ($setting->save() === false) {
@@ -50,6 +61,12 @@ $setting->updateTranslation('setting_'.$scriptProperties['key'],$scriptPropertie
 $setting->updateTranslation('setting_'.$scriptProperties['key'].'_desc',$scriptProperties['description'],array(
     'namespace' => $namespace->get('name'),
 ));
+
+/* if friendly_urls is set on or use_alias_path changes, refreshURIs */
+if ($refreshURIs) {
+    $modx->setOption($setting->get('key'), $setting->get('value'));
+    $modx->call('modResource', 'refreshURIs', array(&$modx));
+}
 
 $modx->reloadConfig();
 $modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(

@@ -7,6 +7,10 @@ $settings['database_charset'] = $settings['database_connection_charset'];
 unset($settings['action']);
 $install->settings->store($settings);
 $mode = $install->settings->get('installmode');
+/* if advanced upgrade, get old settings */
+if($mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
+    $settings = array_merge($settings, $install->getConfig($mode));
+}
 
 $data = array();
 $errors = array();

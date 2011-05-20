@@ -76,7 +76,7 @@ Ext.extend(MODx.Component,Ext.Component,{
         return true;
     }
 
-    ,submitForm: function(listeners) {
+    ,submitForm: function(listeners,options) {
         listeners = listeners || {}
         if (!this.config.formpanel || !this.config.action) { return false; }
         f = Ext.getCmp(this.config.formpanel);
@@ -89,16 +89,16 @@ Ext.extend(MODx.Component,Ext.Component,{
                 f.on(i,listeners[i].fn,listeners[i].scope || this);
             }
         }
-        
+
         Ext.apply(f.baseParams,{
             'action':this.config.action
         });
-        f.submit({
-            headers: {
-                'Powered-By': 'MODx'
-                ,'modAuth': MODx.siteId
-            }
-        });
+        options = options || {};
+        options.headers = {
+            'Powered-By': 'MODx'
+            ,'modAuth': MODx.siteId
+        };
+        f.submit(options);
         return true;
     }
 });

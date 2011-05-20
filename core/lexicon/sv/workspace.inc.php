@@ -24,6 +24,7 @@ $_lang['dir_err_assets_comp'] = 'Din assets/components/-katalog kunde inte skapa
 $_lang['dir_err_core_comp'] = 'Din core/components/-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
 $_lang['download'] = 'Ladda ner';
 $_lang['downloaded'] = 'Nedladdat';
+$_lang['downloading'] = 'Laddar ner...';
 $_lang['download_extras'] = 'Ladda ner Extras';
 $_lang['downloads'] = 'Nedladdningar';
 $_lang['installation_instructions'] = 'Installationsinstruktioner';

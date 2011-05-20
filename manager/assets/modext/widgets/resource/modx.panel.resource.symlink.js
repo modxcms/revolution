@@ -135,17 +135,19 @@ MODx.panel.SymLink = function(config) {
             ,fieldLabel: _('resource_parent')
             ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
             ,name: 'parent-cmb'
-            ,editable: false
-            ,anchor: '95%'
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
-            ,formpanel: 'modx-panel-resource'
+            ,anchor: '70%'
         },{
             xtype: 'hidden'
             ,name: 'parent'
-            ,anchor: '90%'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
+        },{
+            xtype: 'hidden'
+            ,name: 'parent-original'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-old-hidden'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
@@ -182,6 +184,11 @@ MODx.panel.SymLink = function(config) {
             ,name: 'context_key'
             ,id: 'modx-resource-context-key'
             ,value: config.record.context_key || 'web'
+        },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
         },{
             html: MODx.onDocFormRender, border: false
         }]

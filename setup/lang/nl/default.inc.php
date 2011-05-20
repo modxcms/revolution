@@ -1,6 +1,6 @@
 <?php
 /**
- * Dutch language files for Revolution 2.0.5 setup
+ * Dutch language files for Revolution setup
  *
  * @package setup
  * @subpackage lexicon
@@ -31,7 +31,7 @@ $_lang['connection_collation'] = 'Vergelijking:';
 $_lang['connection_connection_and_login_information'] = 'Database verbinding en inlog informatie';
 $_lang['connection_connection_note'] = 'Vul de naam van de database voor MODX in. Indien deze nog niet bestaat dan zal de installatie deze proberen te maken. Dit zal falen afhankelijk van de MySQL configuratie of de database rechten voor jouw domein/installatie.';
 $_lang['connection_database_host'] = 'Database host:';
-$_lang['connection_database_info'] = 'Vul nu de inlog data in voor jouw database.';
+//$_lang['connection_database_info'] = 'Vul nu de inlog data in voor jouw database.';
 $_lang['connection_database_login'] = 'Database inlognaam:';
 $_lang['connection_database_name'] = 'Databasen naam:';
 $_lang['connection_database_pass'] = 'Database wachtwoord:';
@@ -177,7 +177,7 @@ $_lang['package_execute_err_retrieve'] = 'De installatie faalt omdat MODX [[+pat
 $_lang['package_err_install'] = 'Kan pakket [[+package]] niet installeren.';
 $_lang['package_err_nf'] = 'Kan de installatie voor pakket [[+package]] niet vinden.';
 $_lang['package_installed'] = 'Pakket [[+package]] succesvol ge�nstalleerd.';
-$_lang['password_err_invchars'] = 'Jouw wachtwoord mag geen ongeldige karakters bevatten, zoals /, \\, &apos;, &quot;, or {}.';
+$_lang['password_err_invchars'] = 'Jouw wachtwoord mag geen ongeldige karakters bevatten, zoals /, \\, &apos;, &quot;, (, ) or {}.';
 $_lang['password_err_nomatch'] = 'Komt niet overeen met wachtwoord';
 $_lang['password_err_ns'] = 'Wachtwoord is leeg';
 $_lang['password_err_short'] = 'Jouw wachtwoord moet minimaal 6 tekens lang zijn.';

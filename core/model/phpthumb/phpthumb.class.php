@@ -3168,7 +3168,7 @@ exit;
 						if (function_exists($ImageCreateFromFunctionName)) {
 							$this->DebugMessage('Calling '.$ImageCreateFromFunctionName.'('.$filename.')', __FILE__, __LINE__);
 							$ImageCreateWasAttempted = true;
-                            $gd_image = call_user_func($ImageCreateFromFunctionName,array($filename));
+                            $gd_image = call_user_func($ImageCreateFromFunctionName,$filename);
 						} else {
 							$this->DebugMessage('NOT calling '.$ImageCreateFromFunctionName.'('.$filename.') because !function_exists('.$ImageCreateFromFunctionName.')', __FILE__, __LINE__);
 						}
@@ -3207,16 +3207,8 @@ exit;
 				$this->DebugMessage(@$ImageCreateFromFunctionName.'() was attempted but FAILED', __FILE__, __LINE__);
 			}
 			$this->DebugMessage('Populating $rawimagedata', __FILE__, __LINE__);
-			$rawimagedata = '';
-			if ($fp = @fopen($filename, 'rb')) {
-				$filesize = filesize($filename);
-				$blocksize = 8192;
-				$blockreads = ceil($filesize / $blocksize);
-				for ($i = 0; $i < $blockreads; $i++) {
-					$rawimagedata .= fread($fp, $blocksize);
-				}
-				fclose($fp);
-			} else {
+            $rawimagedata = file_get_contents($filename);
+			if (empty($rawimagedata)) {
 				$this->DebugMessage('cannot fopen('.$filename.')', __FILE__, __LINE__);
 			}
 			if ($rawimagedata) {

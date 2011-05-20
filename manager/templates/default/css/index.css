@@ -42,13 +42,6 @@ hr {
 .red { color: red !important; }
 .green { color: green !important; }
 .error { color: red !important; }
-.unpublished { font-style: italic; }
-.deleted { color: red !important; }
-.deleted a span {
-    color: #CC3333 !important;
-    text-decoration: line-through !important;
-}
-.hidemenu a span { color: gray !important; }
 
 /* leftbar */
 #modx-leftbar, #modx-content {
@@ -973,6 +966,15 @@ html #modx-topnav ul.modx-subnav li a:hover{
 .active-node, .active-node span {
     font-weight: bold;
 }
+.unpublished { font-style: italic; }
+.hidemenu a span { color: gray !important; }
+.deleted { color: red !important; }
+.deleted a span {
+    color: #CC3333 !important;
+    text-decoration: line-through !important;
+}
+
+
 /* ext extensions */
 input.x-static-text-field {
     background: transparent;
@@ -1191,4 +1193,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 
 .modx-policy-permissions-grid td {
     cursor: pointer;
+}
+
+/* button text fix */
+.x-btn-noicon .x-btn-small .x-btn-text {
+  width:100%; /* Sets button link to 100% of space of parent so whole button is clickable*/
 }

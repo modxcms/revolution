@@ -17,3 +17,5 @@ $_lang['mysql_version_server_nf'] = 'MODX kan jouw MySQL versie niet detecteren 
 $_lang['mysql_version_server_start'] = 'Controleert MySQL server versie:';
 $_lang['mysql_version_success'] = 'OKE! Draait: [[+version]]';
 
+$_lang['sqlsrv_version_success'] = 'OKE!';
+$_lang['sqlsrv_version_client_success'] = 'OKE!';

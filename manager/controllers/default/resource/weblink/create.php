@@ -82,23 +82,17 @@ if ($fcDt) {
     $parentIds = array();
     if ($parent) { /* ensure get all parents */
         $p = $parent ? $parent->get('id') : 0;
-        $rCtx = $parent->get('context_key');
-        $oCtx = $modx->context->get('key');
-        if (!empty($rCtx) && $rCtx != 'mgr') {
-            $modx->switchContext($rCtx);
-        }
-        $parentIds = $modx->getParentIds($p);
+        $parentIds = $modx->getParentIds($p,10,array(
+            'context' => $parent->get('context_key'),
+        ));
         $parentIds[] = $p;
         $parentIds = array_unique($parentIds);
-        if (!empty($rCtx)) {
-            $modx->switchContext($oCtx);
-        }
     } else {
         $parentIds = array(0);
     }
 
     $constraintField = $fcDt->get('constraint_field');
-    if ($constraintField == 'id' && in_array($fcDt->get('constraint'),$parentIds)) {
+    if (($constraintField == 'id' || $constraintField == 'parent') && in_array($fcDt->get('constraint'),$parentIds)) {
         $default_template = $fcDt->get('value');
     } else if (empty($constraintField)) {
         $default_template = $fcDt->get('value');
@@ -174,6 +168,13 @@ $tvOutput = include dirname(dirname(__FILE__)).'/tvs.php';
 if (!empty($tvCounts)) {
     $modx->smarty->assign('tvOutput',$tvOutput);
 }
+
+/* single-use token for creating resource */
+if(!isset($_SESSION['newResourceTokens']) || !is_array($_SESSION['newResourceTokens'])) {
+    $_SESSION['newResourceTokens'] = array();
+}
+$defaults['create_resource_token'] = uniqid('', true);
+$_SESSION['newResourceTokens'][] = $defaults['create_resource_token'];
 
 /* register JS scripts */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);

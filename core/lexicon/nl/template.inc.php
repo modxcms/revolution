@@ -2,13 +2,14 @@
 /**
  * Template Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
  * @author Bert Oost, <bertoost85@gmail.com>
  */
 $_lang['access'] = 'Toegang';
+$_lang['filter_by_category'] = 'Filter op categorie...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Toegekende Template Variables';

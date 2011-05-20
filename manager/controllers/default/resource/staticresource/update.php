@@ -70,7 +70,7 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
 }
 
 /* get url for resource for preview window */
-$url = $modx->makeUrl($resource->get('id'));
+$url = $modx->makeUrl($resource->get('id'), '', '', 'full');
 
 /* assign static resource to smarty */
 $modx->smarty->assign('resource',$resource);
@@ -102,6 +102,25 @@ $tvCounts = array();
 $tvOutput = include dirname(dirname(__FILE__)).'/tvs.php';
 if (!empty($tvCounts)) {
     $modx->smarty->assign('tvOutput',$tvOutput);
+}
+
+/* get openTo directory */
+$baseUrlRelative = false;
+$wctx = $resource->get('context_key');
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+$baseUrl = $modx->fileHandler->getBaseUrl();
+if (!empty($record['content'])) {
+    $record['openTo'] = str_replace($baseUrl,'',dirname($record['content']).'/');
+} else {
+    $record['openTo'] = '/';
 }
 
 /* register JS scripts */

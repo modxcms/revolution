@@ -76,7 +76,7 @@ foreach ($elements as $element) {
 
     $class = 'icon-'.$g[1];
     $class .= $modx->hasPermission('new_'.$g[1]) ? ' pnew' : '';
-    $class .= $modx->hasPermission('edit_'.$g[1]) && $element->checkPolicy(array('save','view')) ? ' pedit' : '';
+    $class .= $modx->hasPermission('edit_'.$g[1]) && $element->checkPolicy(array('save' => true,'view' => true)) ? ' pedit' : '';
     $class .= $modx->hasPermission('delete_'.$g[1]) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
 

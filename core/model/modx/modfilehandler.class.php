@@ -55,14 +55,12 @@ class modFileHandler {
     /**
      * Get the modX base path for the user.
      *
-     * @param string $prependBasePath If true, will prepend the modX base path
-     * to the return value. Defaults to true.
      * @return string The base path
      */
     public function getBasePath() {
-        $root = $this->context->getOption('filemanager_path', '', $this->config);
+        $basePath = $this->context->getOption('filemanager_path', '', $this->config);
         /* expand placeholders */
-        $root = str_replace(array(
+        $basePath = str_replace(array(
             '{base_path}',
             '{core_path}',
             '{assets_path}',
@@ -70,12 +68,14 @@ class modFileHandler {
             $this->context->getOption('base_path', MODX_BASE_PATH, $this->config),
             $this->context->getOption('core_path', MODX_CORE_PATH, $this->config),
             $this->context->getOption('assets_path', MODX_ASSETS_PATH, $this->config),
-        ), $root);
-        return !empty($root) ? $this->postfixSlash($root) : $root;
+        ), $basePath);
+        return !empty($basePath) ? $this->postfixSlash($basePath) : $basePath;
     }
 
     /**
      * Get base URL of file manager
+     *
+     * @return string The base URL
      */
     public function getBaseUrl() {
         $baseUrl = $this->context->getOption('filemanager_url', $this->context->getOption('rb_base_url', MODX_BASE_URL, $this->config), $this->config);
@@ -412,7 +412,7 @@ class modFile extends modFileSystemResource {
      * @param string $timeFormat The format, in strftime format, of the time
      * @return string The formatted time
      */
-    public function getLastAccessed($timeFormat = '%b %d, %Y %H:%I:%S %p') {
+    public function getLastAccessed($timeFormat = '%b %d, %Y %I:%M:%S %p') {
         return strftime($timeFormat, fileatime($this->path));
     }
 
@@ -422,7 +422,7 @@ class modFile extends modFileSystemResource {
      * @param string $timeFormat The format, in strftime format, of the time
      * @return string The formatted time
      */
-    public function getLastModified($timeFormat = '%b %d, %Y %H:%I:%S %p') {
+    public function getLastModified($timeFormat = '%b %d, %Y %I:%M:%S %p') {
         return strftime($timeFormat, filemtime($this->path));
     }
 

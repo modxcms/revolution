@@ -26,11 +26,11 @@ if (!$success) {
 
 $serverOffset = $modx->getOption('server_offset_time',null,0);
 
-/* user info : TODO: convert to revo */
+/* user info */
 $profile = $modx->user->getOne('Profile');
 if ($profile && $profile->get('lastlogin') != '') {
     $offset = $serverOffset * 60 * 60;
-    $previous_login = strftime('%b %d, %Y %I:%S %p',$profile->get('lastlogin')+$offset);
+    $previous_login = strftime('%b %d, %Y %I:%M %p',$profile->get('lastlogin')+$offset);
 } else {
     $previous_login = $modx->lexicon('not_set');
 }

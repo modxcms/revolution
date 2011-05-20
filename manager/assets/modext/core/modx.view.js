@@ -92,7 +92,6 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                 action: 'getList'
                 ,prependPath: config.prependPath || null
                 ,prependUrl: config.prependUrl || null
-                ,ctx: config.ctx || MODx.ctx
                 ,wctx: config.wctx || MODx.ctx
                 ,dir: config.openTo || ''
                 ,basePath: config.basePath || ''
@@ -265,7 +264,6 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
             dir: dir
-            ,ctx: MODx.ctx
             ,basePath: this.config.basePath || ''
             ,basePathRelative: this.config.basePathRelative || null
             ,baseUrl: this.config.baseUrl || ''
@@ -422,7 +420,6 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         Ext.applyIf(p,{
             action: 'getFiles'
             ,dir: this.dir
-            ,ctx: MODx.ctx
             ,basePath: this.config.basePath || ''
             ,basePathRelative: this.config.basePathRelative || null
             ,baseUrl: this.config.baseUrl || ''

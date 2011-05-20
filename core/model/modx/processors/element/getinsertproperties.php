@@ -17,11 +17,14 @@ if (!empty($scriptProperties['propertySet'])) {
     if ($set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
     $setProperties = $set->get('properties');
-    $properties = array_merge($properties,$setProperties);
+    if (is_array($setProperties) && !empty($setProperties)) {
+        $properties = array_merge($properties,$setProperties);
+    }
 }
 
 $o = '';
 $props = array();
+if (!empty($properties) && is_array($properties)) {
 foreach ($properties as $k => $property) {
     $xtype = 'textfield';
     $desc = $property['desc_trans'];
@@ -118,6 +121,7 @@ foreach ($properties as $k => $property) {
             );
             break;
     }
+}
 }
 
 return $this->toJSON($props);

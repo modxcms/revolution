@@ -18,6 +18,7 @@ if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_e
 
 /* set and save namespace */
 $namespace->fromArray($_DATA);
+$namespace->set('path',trim($_DATA['path']));
 if ($namespace->save() === false) {
     return $modx->error->failure($modx->lexicon('namespace_err_save'));
 }
