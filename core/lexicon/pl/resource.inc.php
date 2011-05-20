@@ -23,16 +23,16 @@ $_lang['class_key'] = 'Class Key';
 $_lang['context'] = 'Context';
 
 #$_lang['createedit_document'] = 'Create/Edit Document';
-$_lang['createedit_document'] = 'Create/Edit Document';
+$_lang['createedit_document'] = 'Edycja'; #
 
 #$_lang['createedit_static'] = 'Create/Edit Static Resource';
-$_lang['createedit_static'] = 'Create/Edit Static Resource';
+$_lang['createedit_static'] = 'Edycja'; #
 
 #$_lang['createedit_symlink'] = 'Create/Edit Symlink';
-$_lang['createedit_symlink'] = 'Create/Edit Symlink';
+$_lang['createedit_symlink'] = 'Edycja'; #
 
 #$_lang['createedit_weblink'] = 'Create/Edit Weblink';
-$_lang['createedit_weblink'] = 'Create/Edit Weblink';
+$_lang['createedit_weblink'] = 'Edycja'; #
 
 #$_lang['document'] = 'Document';
 $_lang['document'] = 'Dokument'; #
@@ -53,7 +53,7 @@ $_lang['documents'] = 'Documents';
 $_lang['duplicate_uri_found'] = 'Resource [[+id]] is already using the URI [[+uri]]. Please enter a unique alias or use Freeze URI to manually override it.';
 
 #$_lang['empty_template'] = '(empty)';
-$_lang['empty_template'] = '(empty)';
+$_lang['empty_template'] = '(brak)'; #
 
 #$_lang['general'] = 'General';
 $_lang['general'] = 'General';
@@ -77,10 +77,10 @@ $_lang['resource_access_message'] = 'Here you can select which Resource Groups t
 $_lang['resource_add_children_access_denied'] = 'You do not have permission to create a Resource in this location.';
 
 #$_lang['resource_alias'] = 'Resource Alias';
-$_lang['resource_alias'] = 'Resource Alias';
+$_lang['resource_alias'] = 'Alias'; #
 
 #$_lang['resource_alias_help'] = 'An alias for this resource. This will make the resource accessible using:<br /><br />http://yourserver/alias<br /><br /><strong>Note</strong>This only works if you\'re using friendly URLs.';
-$_lang['resource_alias_help'] = 'An alias for this resource. This will make the resource accessible using:<br /><br />http://yourserver/alias<br /><br /><strong>Note</strong>This only works if you\'re using friendly URLs.';
+$_lang['resource_alias_help'] = 'Opisowy adres do tego zasobu, który umożliwi wyświetlenie go przy użyciu URL:<br /><br /><code>http://twojserwis/alias</code><br /><br /><strong>Uwaga!</strong> Wymaga włączonej opcji przyjaznych URL.'; #
 
 #$_lang['resource_change_template_confirm'] = 'Are you sure you want to change the Template? WARNING: This will save your prior changes to the change and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save again when you are ready to save the Template change.';
 $_lang['resource_change_template_confirm'] = 'Are you sure you want to change the Template? WARNING: This will save your prior changes to the change and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save again when you are ready to save the Template change.';
@@ -98,7 +98,7 @@ $_lang['resource_cancel_dirty_confirm'] = 'You have changes pending; are you sur
 $_lang['resource_class_key_help'] = 'This is the class key of the resource, showing its MODX type.';
 
 #$_lang['resource_content'] = 'Resource Content';
-$_lang['resource_content'] = 'Resource Content';
+$_lang['resource_content'] = 'Zawartość'; #
 
 #$_lang['resource_contentdispo'] = 'Content Disposition';
 $_lang['resource_contentdispo'] = 'Content Disposition';
@@ -131,10 +131,10 @@ $_lang['resource_delete'] = 'Skasuj&hellip;'; #
 $_lang['resource_delete_confirm'] = 'Are you sure you want to delete this resource?<br />NOTE: Any child resources will also be deleted!';
 
 #$_lang['resource_description'] = 'Description';
-$_lang['resource_description'] = 'Description';
+$_lang['resource_description'] = 'Opis'; #
 
 #$_lang['resource_description_help'] = 'This is an optional description of the resource.';
-$_lang['resource_description_help'] = 'This is an optional description of the resource.';
+$_lang['resource_description_help'] = 'Krótki opis zawartości, zwykle używany w menu oraz przez wyszukiwarki.'; #
 
 #$_lang['resource_duplicate'] = 'Duplicate Resource';
 $_lang['resource_duplicate'] = 'Utwórz duplikat&hellip;'; #
@@ -212,7 +212,7 @@ $_lang['resource_err_remove'] = 'An error occurred while trying to remove the re
 $_lang['resource_err_save'] = 'An error occurred while trying to save the resource.';
 
 #$_lang['resource_err_select_parent'] = 'Please select a parent resource.';
-$_lang['resource_err_select_parent'] = 'Please select a parent resource.';
+$_lang['resource_err_select_parent'] = 'Wybierz zasób nadrzędny.'; #
 
 #$_lang['resource_err_undelete'] = 'An error occurred while trying to undelete the resource.';
 $_lang['resource_err_undelete'] = 'An error occurred while trying to undelete the resource.';
@@ -242,37 +242,37 @@ $_lang['resource_group_resource_err_ae'] = 'The resource is already a part of th
 $_lang['resource_group_resource_err_nf'] = 'The resource is not a part of that resource group.';
 
 #$_lang['resource_hide_from_menus'] = 'Hide From Menus';
-$_lang['resource_hide_from_menus'] = 'Hide From Menus';
+$_lang['resource_hide_from_menus'] = 'Ukrycie w menu'; #
 
 #$_lang['resource_hide_from_menus_help'] = 'When enabled the resource will <b>not</b> be available for use inside a web menu. Please note that some Menu Builders might choose to ignore this option.';
-$_lang['resource_hide_from_menus_help'] = 'When enabled the resource will <b>not</b> be available for use inside a web menu. Please note that some Menu Builders might choose to ignore this option.';
+$_lang['resource_hide_from_menus_help'] = 'Jeżeli zaznaczone, zasób <strong>nie jest wyświetlany</strong> w menu serwisu.'; #
 
 #$_lang['resource_link_attributes'] = 'Link Attributes';
-$_lang['resource_link_attributes'] = 'Link Attributes';
+$_lang['resource_link_attributes'] = 'Atrybuty odnośnika'; #
 
 #$_lang['resource_link_attributes_help'] = 'Attributes for the link for this resource, such as target= or rel=.';
-$_lang['resource_link_attributes_help'] = 'Attributes for the link for this resource, such as target= or rel=.';
+$_lang['resource_link_attributes_help'] = 'Atrybuty odnośnika do tego zasobu, takie jak <code>target=</code> lub <code>rel=</code>.'; #
 
 #$_lang['resource_locked_by'] = 'Locked by [[+user]]';
 $_lang['resource_locked_by'] = 'Locked by [[+user]]';
 
 #$_lang['resource_longtitle'] = 'Long Title';
-$_lang['resource_longtitle'] = 'Long Title';
+$_lang['resource_longtitle'] = 'Pełny tytuł'; #
 
 #$_lang['resource_longtitle_help'] = 'This is a longer title for your resource. It is handy for search engines, and might be more descriptive for the resource.';
-$_lang['resource_longtitle_help'] = 'This is a longer title for your resource. It is handy for search engines, and might be more descriptive for the resource.';
+$_lang['resource_longtitle_help'] = 'Tytuł w pełnym brzmieniu, zazwyczaj używany w treści, aby lepiej opisać zawartość i wspierać indeksowanie przez wyszukiwarki.'; #
 
 #$_lang['resource_menuindex'] = 'Menu Index';
-$_lang['resource_menuindex'] = 'Menu Index';
+$_lang['resource_menuindex'] = 'Pozycja w menu'; #
 
 #$_lang['resource_menuindex_help'] = 'This is the order of the resource in the tree. It is usually used for ordering purposes in displaying resources dynamically. Some components might choose to ignore this setting.';
-$_lang['resource_menuindex_help'] = 'This is the order of the resource in the tree. It is usually used for ordering purposes in displaying resources dynamically. Some components might choose to ignore this setting.';
+$_lang['resource_menuindex_help'] = 'Pozycja zasobu w menu, zazwyczaj używana do określenia kolejności zasobów wyświetlanych w menu serwisu.'; #
 
 #$_lang['resource_menutitle'] = 'Menu Title';
-$_lang['resource_menutitle'] = 'Menu Title';
+$_lang['resource_menutitle'] = 'Tytuł w menu'; #
 
 #$_lang['resource_menutitle_help'] = 'Menu title is a field you can use to display a short title for the resource inside your menu snippet(s).';
-$_lang['resource_menutitle_help'] = 'Menu title is a field you can use to display a short title for the resource inside your menu snippet(s).';
+$_lang['resource_menutitle_help'] = 'Tytuł skrócony, zazwyczaj używany w menu serwisu.'; #
 
 #$_lang['resource_new'] = 'New Resource';
 $_lang['resource_new'] = 'New Resource';
@@ -281,19 +281,19 @@ $_lang['resource_new'] = 'New Resource';
 $_lang['resource_notcached'] = 'This resource has not (yet) been cached.';
 
 #$_lang['resource_pagetitle'] = 'Title';
-$_lang['resource_pagetitle'] = 'Title';
+$_lang['resource_pagetitle'] = 'Tytuł'; #
 
 #$_lang['resource_pagetitle_help'] = 'The name/title of the resource. Try to avoid using backslashes in the name!';
-$_lang['resource_pagetitle_help'] = 'The name/title of the resource. Try to avoid using backslashes in the name!';
+$_lang['resource_pagetitle_help'] = 'Tytuł lub nazwa zasobu, zwykle wyświetlany w tytule okna.'; #
 
 #$_lang['resource_parent'] = 'Parent Resource';
-$_lang['resource_parent'] = 'Parent Resource';
+$_lang['resource_parent'] = 'Podrzędny do'; # ?
 
 #$_lang['resource_parent_help'] = 'The parent resource\'s ID number.';
-$_lang['resource_parent_help'] = 'The parent resource\'s ID number.';
+$_lang['resource_parent_help'] = 'Nr ID zasobu nadrzędnego.'; #
 
 #$_lang['resource_parent_select_node'] = 'Please select a node in the tree to the left.';
-$_lang['resource_parent_select_node'] = 'Please select a node in the tree to the left.';
+$_lang['resource_parent_select_node'] = 'Wybierz zasób nadrzędny w menu.'; #
 
 #$_lang['resource_publish'] = 'Publish Resource';
 $_lang['resource_publish'] = 'Rozpocznij publikację&hellip;'; # ? Nie ma dobrego antonimu dla 'Opublikuj'
@@ -308,10 +308,10 @@ $_lang['resource_publishdate'] = 'Publish Date';
 $_lang['resource_publishdate_help'] = 'If you set a publish date, the resource will be published as soon as the publish date is reached. Click on the calendar icon to select a date, or leave it blank to set it so the resource is never automatically published.';
 
 #$_lang['resource_published'] = 'Published';
-$_lang['resource_published'] = 'Published';
+$_lang['resource_published'] = 'Opublikowany'; #
 
 #$_lang['resource_published_help'] = 'When published the resource is available to the public immediately after saving it.';
-$_lang['resource_published_help'] = 'When published the resource is available to the public immediately after saving it.';
+$_lang['resource_published_help'] = 'Jeżeli zaznaczone, zasób zostanie opublikowany natychmiast po zapisaniu zmian.'; # ? To nie do końca opisuje poprawnie opisuje funkcję tego checkboxa.
 
 #$_lang['resource_publishedby'] = 'Published By';
 $_lang['resource_publishedby'] = 'Published By';
@@ -347,10 +347,10 @@ $_lang['resource_status'] = 'Status';
 $_lang['resource_status_help'] = 'If published, the resource is available to the public immediately after saving it. Otherwise, it is hidden from the public site.';
 
 #$_lang['resource_summary'] = 'Summary (introtext)';
-$_lang['resource_summary'] = 'Summary (introtext)';
+$_lang['resource_summary'] = 'Podsumowanie'; #
 
 #$_lang['resource_summary_help'] = 'A brief summary of the resource.';
-$_lang['resource_summary_help'] = 'A brief summary of the resource.';
+$_lang['resource_summary_help'] = 'Krótkie podsumowanie treści.'; #
 
 #$_lang['resource_syncsite'] = 'Empty Cache';
 $_lang['resource_syncsite'] = 'Empty Cache';
@@ -359,10 +359,10 @@ $_lang['resource_syncsite'] = 'Empty Cache';
 $_lang['resource_syncsite_help'] = 'When enabled this will make MODX empty the cache after you save the resource. This way your visitors will not see an older version of the resource.';
 
 #$_lang['resource_template'] = 'Uses Template';
-$_lang['resource_template'] = 'Uses Template';
+$_lang['resource_template'] = 'Szablon'; #
 
 #$_lang['resource_template_help'] = 'The template in use by the resource.';
-$_lang['resource_template_help'] = 'The template in use by the resource.';
+$_lang['resource_template_help'] = 'Szablon użyty dla zasobu, który definiuje sposób wyświetlania i dostępne dodatkowe pola dla zawartości.'; #
 
 #$_lang['resource_undelete'] = 'Undelete Resource';
 $_lang['resource_undelete'] = 'Przywróć'; #
@@ -437,7 +437,7 @@ $_lang['symlink_create'] = 'Create Symlink';
 $_lang['symlink_create_here'] = 'Dowiązanie'; #
 
 #$_lang['symlink_help'] = 'The address of the object you wish to reference with this Symlink. If you want to point to an existing MODX Resource, enter the ID here.';
-$_lang['symlink_help'] = 'The address of the object you wish to reference with this Symlink. If you want to point to an existing MODX Resource, enter the ID here.';
+$_lang['symlink_help'] = 'Adres obiektu, do którego wskazuje to dowiązanie. Jeżeli ma to być istniejący zasób serwisu, wprowadź tutaj jego nr ID.'; #
 
 #$_lang['symlink_message'] = 'A symlink is a symbolic link to another resource in your site which is forwarded to without changing the URL.';
 $_lang['symlink_message'] = 'A symlink is a symbolic link to another resource in your site which is forwarded to without changing the URL.';
@@ -461,7 +461,7 @@ $_lang['weblink_create'] = 'Create Weblink';
 $_lang['weblink_create_here'] = 'Odnośnik'; #
 
 #$_lang['weblink_help'] = 'The address of the object you wish to reference with this weblink. If you want to point to an existing MODX Resource, enter the ID here.';
-$_lang['weblink_help'] = 'The address of the object you wish to reference with this weblink. If you want to point to an existing MODX Resource, enter the ID here.';
+$_lang['weblink_help'] = 'Adres URL obiektu, do którego wskazuje ten odnośnik. Jeżeli ma to być istniejący zasób serwisu, wprowadź tutaj jego nr ID.'; #
 
 #$_lang['weblink_message'] = 'A weblink is a reference to an object on the internet. This could be a document within MODX, a page on another site or an image or other file on the internet.<p>';
 $_lang['weblink_message'] = 'A weblink is a reference to an object on the internet. This could be a document within MODX, a page on another site or an image or other file on the internet.<p>';
