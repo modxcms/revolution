@@ -407,10 +407,10 @@ $_lang['resource_view'] = 'Otwórz'; # ? 'Otwórz' zwykle kojarzy się z edycją
 $_lang['show_sort_options'] = 'Pokaż opcje sortowania'; #
 
 #$_lang['site_schedule'] = 'Schedule';
-$_lang['site_schedule'] = 'Schedule';
+$_lang['site_schedule'] = 'Kalendarz publikacji'; #
 
 #$_lang['site_schedule_desc'] = 'This shows the current resources that are scheduled to publish or unpublished on specified dates. You may toggle the current view by clicking on the toolbar button.';
-$_lang['site_schedule_desc'] = 'This shows the current resources that are scheduled to publish or unpublished on specified dates. You may toggle the current view by clicking on the toolbar button.';
+$_lang['site_schedule_desc'] = 'Ta lista zawiera zasoby z zaplanowanymi datami rozpoczęcia i zakończenia publikacji. Możesz przełączyć wyświetlanie listy, używając przycisku.'; #
 
 #$_lang['source'] = 'Source';
 $_lang['source'] = 'Source';

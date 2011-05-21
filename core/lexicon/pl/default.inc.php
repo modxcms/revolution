@@ -425,7 +425,7 @@ $_lang['ext_displaying'] = 'Displaying {0} - {1} of {2}';
 $_lang['ext_emptygroup'] = '(None)';
 
 #$_lang['ext_emptymsg'] = 'No data to display';
-$_lang['ext_emptymsg'] = 'No data to display';
+$_lang['ext_emptymsg'] = 'Brak danych'; #
 
 #$_lang['ext_first'] = 'First Page';
 $_lang['ext_first'] = 'First Page';
@@ -584,7 +584,7 @@ $_lang['home'] = 'Pulpit'; # topmenu
 $_lang['icon'] = 'Icon';
 
 #$_lang['id'] = 'ID';
-$_lang['id'] = 'ID';
+$_lang['id'] = 'ID'; #
 
 #$_lang['info'] = 'Info';
 $_lang['info'] = 'Twoje konto użytkownika'; # Is used for what 'yourinfo_title' should be.
@@ -833,7 +833,7 @@ $_lang['orm_container_remove'] = 'Remove Container';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to remove this container, and all attributes below it? This is irreversible.';
 
 #$_lang['pagetitle'] = 'Resource\'s title';
-$_lang['pagetitle'] = 'Resource\'s title';
+$_lang['pagetitle'] = 'Tytuł'; #
 
 #$_lang['page_title'] = 'Resource Title';
 $_lang['page_title'] = 'Resource Title';
@@ -896,7 +896,7 @@ $_lang['public'] = 'Public';
 $_lang['publish'] = 'Publish';
 
 #$_lang['publish_date'] = 'Publish Date';
-$_lang['publish_date'] = 'Publish Date';
+$_lang['publish_date'] = 'Data rozpoczęcia publikacji'; #
 
 #$_lang['publish_document'] = 'Publish document';
 $_lang['publish_document'] = 'Publish document';
@@ -905,7 +905,7 @@ $_lang['publish_document'] = 'Publish document';
 $_lang['publish_events'] = 'Publish Events';
 
 #$_lang['published'] = 'Published';
-$_lang['published'] = 'Published';
+$_lang['published'] = 'Opublikowany'; #
 
 #$_lang['publishedon'] = 'Published On';
 $_lang['publishedon'] = 'Published On';
@@ -1172,10 +1172,10 @@ $_lang['show_preview'] = 'Show Preview Window';
 $_lang['show_tree'] = 'Show tree';
 
 #$_lang['showing_pub'] = 'Showing Publish Dates';
-$_lang['showing_pub'] = 'Showing Publish Dates';
+$_lang['showing_pub'] = 'Zasoby z datą rozpoczęcia publikacji'; #
 
 #$_lang['showing_unpub'] = 'Showing Unpublish Dates';
-$_lang['showing_unpub'] = 'Showing Unpublish Dates';
+$_lang['showing_unpub'] = 'Zasoby z datą zakończenia publikacji'; #
 
 #$_lang['snippet'] = 'Snippet';
 $_lang['snippet'] = 'Snippet';
@@ -1316,7 +1316,7 @@ $_lang['undeleted'] = 'Not Deleted';
 $_lang['unpublish'] = 'Unpublish';
 
 #$_lang['unpublish_date'] = 'Unpublish Date';
-$_lang['unpublish_date'] = 'Unpublish Date';
+$_lang['unpublish_date'] = 'Data zakończenia publikacji'; #
 
 #$_lang['unpublish_events'] = 'Un-publish Events';
 $_lang['unpublish_events'] = 'Un-publish Events';
