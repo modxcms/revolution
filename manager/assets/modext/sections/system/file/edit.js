@@ -43,6 +43,7 @@ MODx.panel.EditFile = function(config) {
         ,baseParams: {
             action: 'update'
             ,file: config.file
+            ,wctx: MODx.request.wctx
         }
         ,border: false
         ,bodyStyle: ''
