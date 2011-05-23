@@ -668,7 +668,7 @@ class xPDO {
      * @return object|null An instance of the class, or null if it could not be
      * instantiated.
     */
-    public function getObject($className, $criteria= null, $cacheFlag= false) {
+    public function getObject($className, $criteria= null, $cacheFlag= true) {
         $instance= null;
         if ($criteria !== null) {
             $instance = $this->call($className, 'load', array(& $this, $className, $criteria, $cacheFlag));
@@ -689,7 +689,7 @@ class xPDO {
      * live in cache until flushed by another process.
      * @return array|null An array of class instances retrieved.
     */
-    public function getCollection($className, $criteria= null, $cacheFlag= false) {
+    public function getCollection($className, $criteria= null, $cacheFlag= true) {
         return $this->call($className, 'loadCollection', array(& $this, $className, $criteria, $cacheFlag));
     }
 
@@ -704,7 +704,7 @@ class xPDO {
      * live in cache until flushed by another process.
      * @return xPDOIterator An iterable representation of a collection.
      */
-    public function getIterator($className, $criteria= null, $cacheFlag= false) {
+    public function getIterator($className, $criteria= null, $cacheFlag= true) {
         return new xPDOIterator($this, array('class' => $className, 'criteria' => $criteria, 'cacheFlag' => $cacheFlag));
     }
 
