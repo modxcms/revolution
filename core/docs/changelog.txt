@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4832] Fix issue with moving resource parent to root
 - Fix erroneous call to OnDocUnpublished event that should be OnDocUnPublished
 - [#4796] fix New Resource page heading during typing of page title
 - Add Usergroup filter to users grid

@@ -125,7 +125,7 @@ $oldparent = null;
 $newparent = null;
 $oldContext = null;
 if ($resource->get('parent') != $scriptProperties['parent']) {
-    $oldparent = $resource->getOne('Parent');
+    $oldparent = $modx->getObject('modResource',array('id' => $resource->get('parent')));
     $newparent = $modx->getObject('modResource', $scriptProperties['parent']);
     if ($newparent && $newparent->get('context_key') !== $resource->get('context_key')) {
         $oldContext = $modx->getContext($resource->get('context_key'));
@@ -327,7 +327,6 @@ if ($oldparent !== null && $newparent !== null) {
     }
 
     $newparent->set('isfolder', true);
-    $resource->addOne($newparent, 'Parent');
 }
 
 /* save resource */
