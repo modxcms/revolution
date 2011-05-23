@@ -9,7 +9,7 @@
  *
  * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
-$_lang['about_msg'] = 'MODX ist ein <a href="http://modxcms.com/" target="_blank">PHP-Application-Framework und Content-Management-System</a>, lizenziert unter der <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> und (wahlweise) jeder späteren Version.';
+$_lang['about_msg'] = 'MODX ist ein <a href="http://www.modx.com/" target="_blank">PHP-Application-Framework und Content-Management-System</a>, lizenziert unter der <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2.0</a> und (wahlweise) jeder späteren Version.';
 $_lang['about_title'] = 'Über MODX';
 $_lang['credits'] = 'Danksagungen';
 $_lang['credits_database'] = 'MODX is powered by <a href="http://www.mysql.com" target="_blank">MySQL</a> or <a href="http://www.microsoft.com/sqlserver/" target="_blank">Microsoft SQL Server</a>.';
