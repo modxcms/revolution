@@ -80,6 +80,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
     protected $_class= null;
     protected $_alias= null;
+    protected $_tableClass = null;
     public $graph= array ();
     public $query= array (
         'command' => 'SELECT',
@@ -102,6 +103,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         if ($class= $this->xpdo->loadClass($class)) {
             $this->_class= $class;
             $this->_alias= $class;
+            $this->_tableClass = $this->xpdo->getTableClass($this->_class);
             $this->query['from']['tables'][0]= array (
                 'table' => $this->xpdo->getTableName($this->_class),
                 'alias' => & $this->_alias
@@ -123,6 +125,10 @@ abstract class xPDOQuery extends xPDOCriteria {
 
     public function getAlias() {
         return $this->_alias;
+    }
+
+    public function getTableClass() {
+        return $this->_tableClass;
     }
 
     /**
