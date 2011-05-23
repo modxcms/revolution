@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.1.4-pl (May 23, 2011)
+====================================
 - Default cacheFlag to true in getObject/getCollection/getIterator methods
 - [#4787] Add ability to determine the table class of derivatives
 - [#4772] Do not flush related objects from cache on read operations
