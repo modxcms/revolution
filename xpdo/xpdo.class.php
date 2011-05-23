@@ -1045,6 +1045,37 @@ class xPDO {
     }
 
     /**
+     * Get the class which defines the table for a specified className.
+     *
+     * @param string $className The name of a class to determine the table class from.
+     * @return null|string The name of a class defining the table for the specified className; null if not found.
+     */
+    public function getTableClass($className) {
+        $tableClass= null;
+        if ($className= $this->loadClass($className)) {
+            if (isset ($this->map[$className]['table'])) {
+                $tableClass= $className;
+            }
+            if (!$tableClass && $ancestry= $this->getAncestry($className, false)) {
+                foreach ($ancestry as $ancestor) {
+                    if (isset ($this->map[$ancestor]['table'])) {
+                        $tableClass= $ancestor;
+                        break;
+                    }
+                }
+            }
+        }
+        if ($tableClass) {
+            if ($this->getDebug() === true) {
+                $this->log(xPDO::LOG_LEVEL_DEBUG, 'Returning table class: ' . $tableClass . ' for class: ' . $className);
+            }
+        } else {
+            $this->log(xPDO::LOG_LEVEL_ERROR, 'Could not get table class for class: ' . $className);
+        }
+        return $tableClass;
+    }
+
+    /**
      * Gets the actual run-time table metadata from a specified class name.
      *
      * @param string $className The name of the class to lookup a table name
@@ -1792,11 +1823,12 @@ class xPDO {
                         xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                         'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
                     ));
-                    if ($result && $this->getOption('cache_db_format', $options, 'php') == 'json') {
-                        $result= $this->toJSON($result);
-                    }
-                    if (!$result) {
-                        $this->log(xPDO::LOG_LEVEL_DEBUG, 'No cache item found for class ' . $sigClass . ' with signature ' . xPDOCacheManager::CACHE_DIR . $sig);
+                    if ($this->getDebug() === true) {
+                        if (!$result) {
+                            $this->log(xPDO::LOG_LEVEL_DEBUG, 'No cache item found for class ' . $sigClass . ' with signature ' . xPDOCacheManager::CACHE_DIR . $sig);
+                        } else {
+                            $this->log(xPDO::LOG_LEVEL_DEBUG, 'Loaded cache item for class ' . $sigClass . ' with signature ' . xPDOCacheManager::CACHE_DIR . $sig);
+                        }
                     }
                 }
             }
@@ -1833,7 +1865,7 @@ class xPDO {
                     if ($signature instanceof xPDOCriteria) {
                         if ($signature instanceof xPDOQuery) {
                             $signature->construct();
-                            if (empty($sigClass)) $sigClass = $signature->getAlias();
+                            if (empty($sigClass)) $sigClass = $signature->getTableClass();
                         }
                         $sigKey= array($signature->sql, $signature->bindings);
                     }
@@ -1894,12 +1926,14 @@ class xPDO {
                                 $this->log(xPDO::LOG_LEVEL_DEBUG, "xPDO->toCache() successfully cached object with signature " . xPDOCacheManager::CACHE_DIR . $sig);
                             }
                             $object->_cacheFlag= true;
-                            $pkClass= $object->_class;
+                            $pkClass= $this->getTableClass($object->_class);
                             $pk= $object->getPrimaryKey(false);
                             $pk= is_array($pk) ? $pk : array($pk);
                             $pkHash= md5($this->toJSON($pk));
                             $pkSig= implode('/', array($pkClass, $pkHash));
-                            $this->cacheManager->set($pkSig, $object, $lifetime, $cacheOptions);
+                            if ($pkSig !== $sig) {
+                                $this->cacheManager->set($pkSig, $object, $lifetime, $cacheOptions);
+                            }
                         }
                         if (!$result) {
                             $this->log(xPDO::LOG_LEVEL_WARN, "xPDO->toCache() could not cache object with signature " . xPDOCacheManager::CACHE_DIR . $sig);

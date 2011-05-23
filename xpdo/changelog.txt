@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#4787] Add ability to determine the table class of derivatives
 - [#4772] Do not flush related objects from cache on read operations
 - [#4682] Fix support for driver-specific attributes on object element in schema
 

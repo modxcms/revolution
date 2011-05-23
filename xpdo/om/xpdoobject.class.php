@@ -1327,7 +1327,7 @@ class xPDOObject {
                         } else {
                             $expires= intval($cacheFlag);
                         }
-                        $this->xpdo->toCache($this->_class . '_' . $cacheKey, $this, $expires, array('modified' => true));
+                        $this->xpdo->toCache($this->xpdo->getTableClass($this->_class) . '_' . $cacheKey, $this, $expires, array('modified' => true));
                     }
                 }
             }
@@ -1482,7 +1482,7 @@ class xPDOObject {
                     }
                     if ($this->xpdo->_cacheEnabled) {
                         $cacheKey= is_array($pk) ? implode('_', $pk) : $pk;
-                        $this->xpdo->toCache($this->_class . '_' . $cacheKey, null, 0, array('modified' => true));
+                        $this->xpdo->toCache($this->xpdo->getTableClass($this->_class) . '_' . $cacheKey, null, 0, array('modified' => true));
                     }
                     $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Removed {$this->_class} instance with primary key " . print_r($pk, true));
                 }
