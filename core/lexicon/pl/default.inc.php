@@ -389,10 +389,10 @@ $_lang['expand_all'] = 'Expand All';
 $_lang['expand_tree'] = 'Rozwiń wszystkie'; #
 
 #$_lang['ext_afterpage'] = 'of {0}';
-$_lang['ext_afterpage'] = 'of {0}';
+$_lang['ext_afterpage'] = 'spośród {0}'; #
 
 #$_lang['ext_beforepage'] = 'Page';
-$_lang['ext_beforepage'] = 'Page';
+$_lang['ext_beforepage'] = 'Strona'; #
 
 #$_lang['ext_checkboxinv'] = 'You must select at least one item in this group';
 $_lang['ext_checkboxinv'] = 'You must select at least one item in this group';
@@ -407,7 +407,7 @@ $_lang['ext_column_lock'] = 'Lock Column';
 $_lang['ext_column_unlock'] = 'Unlock Column';
 
 #$_lang['ext_columns'] = 'Columns';
-$_lang['ext_columns'] = 'Columns';
+$_lang['ext_columns'] = 'Kolumny'; #
 
 #$_lang['ext_dateinv'] = '{0} is not a valid date - it must be in the format {1}';
 $_lang['ext_dateinv'] = '{0} is not a valid date - it must be in the format {1}';
@@ -419,7 +419,7 @@ $_lang['ext_datemax'] = 'The date in this field must be before {0}';
 $_lang['ext_datemin'] = 'The date in this field must be after {0}';
 
 #$_lang['ext_displaying'] = 'Displaying {0} - {1} of {2}';
-$_lang['ext_displaying'] = 'Displaying {0} - {1} of {2}';
+$_lang['ext_displaying'] = 'Wyświetlanie {0}&ndash;{1} spośród {2}';
 
 #$_lang['ext_emptygroup'] = '(None)';
 $_lang['ext_emptygroup'] = '(None)';
@@ -428,7 +428,7 @@ $_lang['ext_emptygroup'] = '(None)';
 $_lang['ext_emptymsg'] = 'Brak danych'; #
 
 #$_lang['ext_first'] = 'First Page';
-$_lang['ext_first'] = 'First Page';
+$_lang['ext_first'] = 'Pierwsza strona'; #
 
 #$_lang['ext_groupby'] = 'Group By This Field';
 $_lang['ext_groupby'] = 'Group By This Field';
@@ -449,7 +449,7 @@ $_lang['ext_inv_url'] = 'This field should be a URL in the format "http://www.do
 $_lang['ext_invalidfield'] = 'The value in this field is invalid.';
 
 #$_lang['ext_last'] = 'Last Page';
-$_lang['ext_last'] = 'Last Page';
+$_lang['ext_last'] = 'Ostatnia strona'; #
 
 #$_lang['ext_mindate'] = 'This date is before the minimum date.';
 $_lang['ext_mindate'] = 'This date is before the minimum date.';
@@ -473,28 +473,28 @@ $_lang['ext_maxvalfield'] = 'The maximum value for this field is {0}';
 $_lang['ext_nanfield'] = '{0} is not a valid number.';
 
 #$_lang['ext_next'] = 'Next Page';
-$_lang['ext_next'] = 'Next Page';
+$_lang['ext_next'] = 'Następna strona'; #
 
 #$_lang['ext_nextmonth'] = 'Next Month (Control+Right)';
 $_lang['ext_nextmonth'] = 'Next Month (Control+Right)';
 
 #$_lang['ext_prev'] = 'Previous Page';
-$_lang['ext_prev'] = 'Previous Page';
+$_lang['ext_prev'] = 'Poprzednia strona'; #
 
 #$_lang['ext_prevmonth'] = 'Previous Month (Control+Left)';
 $_lang['ext_prevmonth'] = 'Previous Month (Control+Left)';
 
 #$_lang['ext_refresh'] = 'Refresh';
-$_lang['ext_refresh'] = 'Refresh';
+$_lang['ext_refresh'] = 'Odśwież'; #
 
 #$_lang['ext_showgroups'] = 'Show in Groups';
 $_lang['ext_showgroups'] = 'Show in Groups';
 
 #$_lang['ext_sortasc'] = 'Sort Ascending';
-$_lang['ext_sortasc'] = 'Sort Ascending';
+$_lang['ext_sortasc'] = 'Sortuj rosnąco'; #
 
 #$_lang['ext_sortdesc'] = 'Sort Descending';
-$_lang['ext_sortdesc'] = 'Sort Descending';
+$_lang['ext_sortdesc'] = 'Sortuj malejąco'; #
 
 #$_lang['ext_tabclose'] = 'Close this tab';
 $_lang['ext_tabclose'] = 'Close this tab';
@@ -851,7 +851,7 @@ $_lang['password'] = 'Password';
 $_lang['path'] = 'Path';
 
 #$_lang['per_page'] = 'Per Page';
-$_lang['per_page'] = 'Per Page';
+$_lang['per_page'] = 'Na stronie'; #
 
 #$_lang['permissions'] = 'Permissions';
 $_lang['permissions'] = 'Permissions';
