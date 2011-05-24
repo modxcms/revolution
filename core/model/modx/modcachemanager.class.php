@@ -230,6 +230,9 @@ class modCacheManager extends xPDOCacheManager {
                 if (!empty($this->modx->elementCache)) {
                     $results['elementCache']= $this->modx->elementCache;
                 }
+                if (!empty($this->modx->sourceCache)) {
+                    $results['sourceCache']= $this->modx->sourceCache;
+                }
                 if (!empty($obj->_sjscripts)) {
                     $results['resource']['_sjscripts']= $obj->_sjscripts;
                 }
