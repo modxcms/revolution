@@ -11,7 +11,7 @@
 $_lang['access'] = 'Access';
 
 #$_lang['access_denied'] = 'Access denied.';
-$_lang['access_denied'] = 'Access denied.';
+$_lang['access_denied'] = 'Dostęp zabroniony.'; #
 
 #$_lang['action'] = 'Action';
 $_lang['action'] = 'Action';
@@ -236,7 +236,7 @@ $_lang['copy_to_clipboard'] = 'Copy to Clipboard';
 $_lang['core_rte'] = 'MODX Editor';
 
 #$_lang['correct_errors'] = 'Please correct the errors in your form before submitting.';
-$_lang['correct_errors'] = 'Please correct the errors in your form before submitting.';
+$_lang['correct_errors'] = 'Sprawdź i usuń błędy, aby móc kontynuować.'; #
 
 #$_lang['create'] = 'Create';
 $_lang['create'] = 'Utwórz tutaj'; #
@@ -368,7 +368,7 @@ $_lang['enabled'] = 'Enabled';
 $_lang['err_self_parent'] = 'Cannot make something its own parent!';
 
 #$_lang['error'] = 'Error';
-$_lang['error'] = 'Error';
+$_lang['error'] = 'Błąd'; #
 
 #$_lang['error_sending_email'] = 'Error sending email';
 $_lang['error_sending_email'] = 'Error sending email';
@@ -446,7 +446,7 @@ $_lang['ext_inv_email'] = 'This field should be an e-mail address in the format 
 $_lang['ext_inv_url'] = 'This field should be a URL in the format "http://www.domain.com"';
 
 #$_lang['ext_invalidfield'] = 'The value in this field is invalid.';
-$_lang['ext_invalidfield'] = 'The value in this field is invalid.';
+$_lang['ext_invalidfield'] = 'Wartość tego pola jest niepoprawna.'; #
 
 #$_lang['ext_last'] = 'Last Page';
 $_lang['ext_last'] = 'Ostatnia strona'; #
@@ -518,7 +518,7 @@ $_lang['failure'] = 'Failure';
 $_lang['female'] = 'Female';
 
 #$_lang['field_required'] = 'This field is required.';
-$_lang['field_required'] = 'This field is required.';
+$_lang['field_required'] = 'Wypełnienie tego pola jest wymagane'; #
 
 #$_lang['files'] = 'Files';
 $_lang['files'] = 'Pliki'; #
@@ -566,13 +566,13 @@ $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Handler';
 
 #$_lang['help'] = 'Help';
-$_lang['help'] = 'Help';
+$_lang['help'] = 'Pomoc'; #
 
 #$_lang['help_ex'] = 'Help!';
 $_lang['help_ex'] = 'Pomoc'; #
 
 #$_lang['help_not_yet'] = 'Help for this component has not yet been implemented.';
-$_lang['help_not_yet'] = 'Help for this component has not yet been implemented.';
+$_lang['help_not_yet'] = 'Pomoc dla tego komponentu (jeszcze) nie jest dostępna.'; # ?
 
 #$_lang['hide_tree'] = 'Hide tree';
 $_lang['hide_tree'] = 'Hide tree';
@@ -746,7 +746,7 @@ $_lang['new_user'] = 'New user';
 $_lang['next'] = 'Next -&gt;';
 
 #$_lang['no'] = 'No';
-$_lang['no'] = 'No';
+$_lang['no'] = 'Nie'; #
 
 #$_lang['none'] = 'None';
 $_lang['none'] = 'None';
@@ -782,7 +782,7 @@ $_lang['no_results'] = 'No results found';
 $_lang['offline'] = 'Offline';
 
 #$_lang['ok'] = 'OK';
-$_lang['ok'] = 'OK';
+$_lang['ok'] = 'OK'; #
 
 #$_lang['old_key'] = 'Old Key';
 $_lang['old_key'] = 'Old Key';
@@ -863,7 +863,7 @@ $_lang['permission_denied'] = 'Permission denied!';
 $_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
 
 #$_lang['please_wait'] = 'Please wait...';
-$_lang['please_wait'] = 'Please wait...';
+$_lang['please_wait'] = 'Proszę czekać&hellip;'; #
 
 #$_lang['plugin'] = 'Plugin';
 $_lang['plugin'] = 'Plugin';
@@ -1088,19 +1088,19 @@ $_lang['roles'] = 'Roles';
 $_lang['save'] = 'Zapisz'; #
 
 #$_lang['save_and_close'] = 'Save and Close';
-$_lang['save_and_close'] = 'Save and Close';
+$_lang['save_and_close'] = 'Zapisz i zamknij'; #
 
 #$_lang['save_changes'] = 'Save Changes';
 $_lang['save_changes'] = 'Save Changes';
 
 #$_lang['save_successful'] = 'Save successful.';
-$_lang['save_successful'] = 'Save successful.';
+$_lang['save_successful'] = 'Zapisano poprawnie'; #
 
 #$_lang['save_tag'] = 'Save tag';
 $_lang['save_tag'] = 'Save tag';
 
 #$_lang['saving'] = 'Saving...';
-$_lang['saving'] = 'Saving...';
+$_lang['saving'] = 'Zapisywanie&hellip;'; #
 
 #$_lang['scroll_dn'] = 'Scroll down';
 $_lang['scroll_dn'] = 'Scroll down';
@@ -1214,7 +1214,7 @@ $_lang['stay_new'] = 'Po zapisaniu dodaj następny'; #
 $_lang['submit'] = 'Submit';
 
 #$_lang['success'] = 'Success!';
-$_lang['success'] = 'Success!';
+$_lang['success'] = 'Sukces!'; # ? Zakończono powodzeniem? Potwierdzenie? Udało się?
 
 #$_lang['sysinfo_activity_message'] = 'This list show which resources have been recently edited by your users.';
 $_lang['sysinfo_activity_message'] = 'This list show which resources have been recently edited by your users.';
@@ -1223,7 +1223,7 @@ $_lang['sysinfo_activity_message'] = 'This list show which resources have been r
 $_lang['sysinfo_userid'] = 'User';
 
 #$_lang['sys_alert'] = 'System Alert';
-$_lang['sys_alert'] = 'System Alert';
+$_lang['sys_alert'] = 'Powiadomienie systemowe'; # ?
 
 #$_lang['system'] = 'System';
 $_lang['system'] = 'System';
@@ -1367,7 +1367,7 @@ $_lang['view_document'] = 'View document';
 $_lang['view_log'] = 'View log';
 
 #$_lang['warning'] = 'Warning!';
-$_lang['warning'] = 'Warning!';
+$_lang['warning'] = 'Ostrzeżenie!'; #
 
 #$_lang['web_resources'] = 'Web Resources';
 $_lang['web_resources'] = 'Web Resources';
@@ -1388,10 +1388,10 @@ $_lang['xtype'] = 'Field Type';
 $_lang['xtype_desc'] = 'The field type of the setting. This can be: textfield, textarea, or boolean.';
 
 #$_lang['yes'] = 'Yes';
-$_lang['yes'] = 'Yes';
+$_lang['yes'] = 'Tak'; #
 
 #$_lang['yesno'] = 'Yes/No';
-$_lang['yesno'] = 'Yes/No';
+$_lang['yesno'] = 'Tak/Nie'; # ?
 
 #$_lang['january'] = 'January';
 $_lang['january'] = 'Styczeń'; #
