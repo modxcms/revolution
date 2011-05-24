@@ -136,7 +136,6 @@ if (isset($scriptProperties['templates'])) {
                 }
                 $templateVarTemplate->set('tmplvarid',$tv->get('id'));
                 $templateVarTemplate->set('templateid',$template['id']);
-                $templateVarTemplate->set('rank',$template['rank']);
                 $templateVarTemplate->save();
             } else {
                 $templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(

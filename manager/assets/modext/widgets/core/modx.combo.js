@@ -539,6 +539,8 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.removeListener('click',this.handleChangeParent,this);
         t.on('click',t._handleClick,t);
         t.disableHref = false;
+
+        MODx.debug('Setting parent to: '+p.v);
         
         Ext.getCmp('modx-resource-parent-hidden').setValue(p.v);
         

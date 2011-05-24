@@ -470,6 +470,15 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Set the field indicating the resource has been processed.
+     *
+     * @param boolean $processed Pass true to indicate the Resource has been processed.
+     */
+    public function setProcessed($processed) {
+        $this->_processed= (boolean) $processed;
+    }
+
+    /**
      * Adds a lock on the Resource
      *
      * @access public
