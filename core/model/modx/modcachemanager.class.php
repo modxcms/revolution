@@ -224,7 +224,7 @@ class modCacheManager extends xPDOCacheManager {
                 }
                 $context = $obj->_contextKey ? $obj->_contextKey : 'web';
                 $policies = $obj->findPolicy($context);
-                if (!empty($policies)) {
+                if (is_array($policies)) {
                     $results['policyCache']= $policies;
                 }
                 if (!empty($this->modx->elementCache)) {
