@@ -46,6 +46,7 @@ class modCacheManager extends xPDOCacheManager {
         $results = array();
         $obj= $this->modx->getObject('modContext', $key, true);
         if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
+            $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
             $contextConfig= $this->modx->_systemConfig;
 
             /* generate the ContextSettings */
@@ -130,6 +131,10 @@ class modCacheManager extends xPDOCacheManager {
                     }
                 }
             }
+
+            /* cache the Context ACL policies */
+            $results['policies'] = $obj->findPolicy($contextKey);
+
             if ($this->getOption('cache_context_settings', $options, true)) {
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
@@ -219,11 +224,14 @@ class modCacheManager extends xPDOCacheManager {
                 }
                 $context = $obj->_contextKey ? $obj->_contextKey : 'web';
                 $policies = $obj->findPolicy($context);
-                if (!empty($policies)) {
+                if (is_array($policies)) {
                     $results['policyCache']= $policies;
                 }
                 if (!empty($this->modx->elementCache)) {
                     $results['elementCache']= $this->modx->elementCache;
+                }
+                if (!empty($this->modx->sourceCache)) {
+                    $results['sourceCache']= $this->modx->sourceCache;
                 }
                 if (!empty($obj->_sjscripts)) {
                     $results['resource']['_sjscripts']= $obj->_sjscripts;

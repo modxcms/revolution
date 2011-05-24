@@ -309,13 +309,14 @@ class modTemplateVar extends modElement {
             $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
             $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
             $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
+            $ruleFieldName = $this->xpdo->escape('rule');
             $c->where(array(
                 array(
-                    '(modActionDom.rule = "tvDefault"
-                   OR modActionDom.rule = "tvVisible"
-                   OR modActionDom.rule = "tvTitle")'
+                    "(modActionDom.{$ruleFieldName} = 'tvDefault'
+                   OR modActionDom.{$ruleFieldName} = 'tvVisible'
+                   OR modActionDom.{$ruleFieldName} = 'tvTitle')"
                 ),
-                '"tv'.$this->get('id').'" IN ('.$this->xpdo->escape('modActionDom').'.'.$this->xpdo->escape('name').')',
+                "'tv{$this->get('id')}' IN ({$this->xpdo->escape('modActionDom')}.{$this->xpdo->escape('name')})",
                 'FCSet.active' => true,
                 'Profile.active' => true,
             ));
@@ -338,7 +339,7 @@ class modTemplateVar extends modElement {
                 'modActionDom.*',
                 'FCSet.constraint_class',
                 'FCSet.constraint_field',
-                'FCSet.constraint',
+                'FCSet.' . $this->xpdo->escape('constraint'),
                 'FCSet.template',
             ));
             $c->sortby('FCSet.template','ASC');

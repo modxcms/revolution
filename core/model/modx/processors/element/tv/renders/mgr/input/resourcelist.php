@@ -20,18 +20,14 @@ foreach ($parents as $parent) {
 
 /* get all children */
 $ids = array();
-$oldContext = $modx->context->get('key');
-$currentContext = '';
 foreach ($parentList as $parent) {
-    if ($parent->get('context_key') != $currentContext) {
-        $modx->switchContext($parent->get('context_key'));
-        $currentContext = $parent->get('context_key');
-    }
     if (!empty($params['includeParent'])) $ids[] = $parent->get('id');
-    $ids = array_merge($ids,$modx->getChildIds($parent->get('id'),$params['depth']));
+    $children = $modx->getChildIds($parent->get('id'),$params['depth'],array(
+        'context' => $parent->get('context_key'),
+    ));
+    $ids = array_merge($ids,$children);
 }
 $ids = array_unique($ids);
-$modx->switchContext($oldContext);
 
 /* get resources */
 $c = $this->xpdo->newQuery('modResource');

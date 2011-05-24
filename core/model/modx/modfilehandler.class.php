@@ -55,8 +55,6 @@ class modFileHandler {
     /**
      * Get the modX base path for the user.
      *
-     * @param string $prependBasePath If true, will prepend the modX base path
-     * to the return value. Defaults to true.
      * @return string The base path
      */
     public function getBasePath() {
@@ -76,6 +74,8 @@ class modFileHandler {
 
     /**
      * Get base URL of file manager
+     *
+     * @return string The base URL
      */
     public function getBaseUrl() {
         $baseUrl = $this->context->getOption('filemanager_url', $this->context->getOption('rb_base_url', MODX_BASE_URL, $this->config), $this->config);
@@ -412,7 +412,7 @@ class modFile extends modFileSystemResource {
      * @param string $timeFormat The format, in strftime format, of the time
      * @return string The formatted time
      */
-    public function getLastAccessed($timeFormat = '%b %d, %Y %H:%I:%S %p') {
+    public function getLastAccessed($timeFormat = '%b %d, %Y %I:%M:%S %p') {
         return strftime($timeFormat, fileatime($this->path));
     }
 
@@ -422,7 +422,7 @@ class modFile extends modFileSystemResource {
      * @param string $timeFormat The format, in strftime format, of the time
      * @return string The formatted time
      */
-    public function getLastModified($timeFormat = '%b %d, %Y %H:%I:%S %p') {
+    public function getLastModified($timeFormat = '%b %d, %Y %I:%M:%S %p') {
         return strftime($timeFormat, filemtime($this->path));
     }
 

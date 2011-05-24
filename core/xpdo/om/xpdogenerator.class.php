@@ -282,6 +282,9 @@ abstract class xPDOGenerator {
                         case 'extends' :
                             $this->classes[$this->className]['extends']= $attrValue;
                             break;
+                        default:
+                            $this->classes[$this->className][$attrName]= $attrValue;
+                            break;
                     }
                 }
                 break;

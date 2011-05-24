@@ -10,6 +10,9 @@
 $resourceClass = $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));
 $resourceId = !empty($resource) ? $resource->get('id') : 0;
+if ($resource && $resource instanceof modResource) {
+    $_GET['wctx'] = $resource->get('context_key');
+}
 
 $onResourceTVFormPrerender = $modx->invokeEvent('OnResourceTVFormPrerender',array(
     'resource' => $resourceId,

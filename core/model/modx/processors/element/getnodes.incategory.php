@@ -67,7 +67,7 @@ foreach ($elements as $element) {
 
     $class = 'icon-'.$elementIdentifier;
     $class .= $modx->hasPermission('new_'.$elementIdentifier) ? ' pnew' : '';
-    $class .= $modx->hasPermission('edit_'.$elementIdentifier) && $element->checkPolicy(array('save','view')) ? ' pedit' : '';
+    $class .= $modx->hasPermission('edit_'.$elementIdentifier) && $element->checkPolicy(array('save' => true, 'view' => true)) ? ' pedit' : '';
     $class .= $modx->hasPermission('delete_'.$elementIdentifier) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
 

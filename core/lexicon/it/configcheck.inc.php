@@ -18,8 +18,8 @@ $_lang['configcheck_errorpage_unpublished'] = '<b>La pagina di errore non è pub
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Questo significa che la pagina di errore non è accessibile al pubblico. Pubblica la pagina o assicurati che sia assegnata ad un documento esistente nel sito dal menu Sistema &gt; Configurazione Sistema.';
 $_lang['configcheck_images'] = '<b>La directory delle immagini non è scrivibile.</b>';
 $_lang['configcheck_images_msg'] = 'La directory delle immagini non è scrivibile o non esiste. Ciò significa che le funzioni del Gestore Immagini non saranno disponibili!';
-$_lang['configcheck_installer'] = '<b>Files di installazzione ancora presenti.</b>';
-$_lang['configcheck_installer_msg'] = 'La cartella setup/ contiene i files di installazione di ModX. Prova ad immaginare cosa accadrebbe se un malintenzionato la trovasse ed eseguisse l\'installazione nuovamente! Probabilmente non andrebbe molto lontano perché dovrebbe inserire gli accessi del database, ma è comunque auspicabile rimuovere tale directory dal server.';
+$_lang['configcheck_installer'] = '<b>Files di installazione ancora presenti.</b>';
+$_lang['configcheck_installer_msg'] = 'La cartella setup/ contiene i files di installazione di MODX. Prova ad immaginare cosa accadrebbe se un malintenzionato la trovasse ed eseguisse l\'installazione nuovamente! Probabilmente non andrebbe molto lontano perché dovrebbe inserire gli accessi del database...ma è comunque auspicabile rimuovere tale directory dal server.';
 $_lang['configcheck_lang_difference'] = '<b>Il numero di termini nel file della lingua non è corretto.</b>';
 $_lang['configcheck_lang_difference_msg'] = 'La lingua attualmente selezionata ha un numero di termini diverso da quello della lingua di default. Non è necessariamente un problema, ma la cosa può significare che si debba aggiornare il file.';
 $_lang['configcheck_notok'] = '<span style="color:#990000">ERRATI uno o più dettagli di configurazione: </span>';

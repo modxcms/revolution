@@ -1687,7 +1687,7 @@ class modX extends xPDO {
      *
      * @access public
      * @param string $contextKey The context to retrieve.
-     * @return &$modContext A modContext object retrieved from cache or
+     * @return modContext A modContext object retrieved from cache or
      * database.
      */
     public function getContext($contextKey) {
@@ -1850,6 +1850,7 @@ class modX extends xPDO {
      */
     protected function _initContext($contextKey) {
         $initialized= false;
+        $oldContext = is_object($this->context) ? $this->context->get('key') : '';
         if (isset($this->contexts[$contextKey])) {
             $this->context= & $this->contexts[$contextKey];
         } else {
@@ -1858,17 +1859,23 @@ class modX extends xPDO {
         }
         if ($this->context) {
             if (!$this->context->prepare()) {
-                $this->log(modX::LOG_LEVEL_ERROR, 'Could not load context: ' . $contextKey);
+                $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
-                $this->aliasMap= & $this->context->aliasMap;
-                $this->resourceMap= & $this->context->resourceMap;
-                $this->eventMap= & $this->context->eventMap;
-                $this->pluginCache= & $this->context->pluginCache;
-                $this->config= array_merge($this->_systemConfig, $this->context->config);
-                if ($this->_initialized) {
-                    $this->getUser();
+                if ($this->context->checkPolicy('load')) {
+                    $this->aliasMap= & $this->context->aliasMap;
+                    $this->resourceMap= & $this->context->resourceMap;
+                    $this->eventMap= & $this->context->eventMap;
+                    $this->pluginCache= & $this->context->pluginCache;
+                    $this->config= array_merge($this->_systemConfig, $this->context->config);
+                    if ($this->_initialized) {
+                        $this->getUser();
+                    }
+                    $initialized = true;
+                } elseif (isset($this->contexts[$oldContext])) {
+                    $this->context =& $this->contexts[$oldContext];
+                } else {
+                    $this->log(modX::LOG_LEVEL_ERROR, 'Could not load context: ' . $contextKey);
                 }
-                $initialized= true;
             }
         }
         return $initialized;

@@ -25,6 +25,9 @@
 {/foreach}
 
 <!--[if IE]>
+<style type="text/css">body {
+        behavior: url("{$_config.manager_url}templates/{$_config.manager_theme}/css/csshover3.htc");
+}</style>
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/ie.css" />
 <![endif]-->
 </head>

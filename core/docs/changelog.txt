@@ -2,6 +2,45 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.0-pl (May 24, 2011)
+====================================
+- [#4818] Fix SqlSrv query errors related to TVs
+- Add modX->$sourceCache data to cached Resources
+- Fix loading of cached Resource content and processed flag
+- Fix caching of empty policies for Resources
+- Fix modSessionHandler->write() cache flag if cache_db_session is not enabled
+- Update xPDO to v2.1.4-pl for cache_db bug fixes and improvements
+- [#4832] Fix issue with moving resource parent to root
+- [#4827] Make sure editing a file sends the working context along
+- Fix erroneous call to OnDocUnpublished event that should be OnDocUnPublished
+- [#4796] fix New Resource page heading during typing of page title
+- Add Usergroup filter to users grid
+- [#4785] Fix preview of files in left tree in non-standard contexts with absolute filemanager_ settings
+- [#4473] Add other common file types to upload_files system setting
+- [#4539] Fix issue with stretching of quick update chunk and small screen resolutions
+- Automatically focus cursor to first textfield on windows in mgr
+- [#4738] Fix issue with inconsistent results in resourcelist TV
+- [#4441] Fix FC issue when parent is constraint and trying to change default template
+- [#4764] Fix issue with timestamp display on manager log page
+- [#4680] Fix javascript error when typing Template name
+- [#4681] Fix path issue which was causing 404 errors in the manager, IE 7-9
+- [#4439] Add parentheses to list of disallowed password characters in installer
+- [#4669] Fix button target size to make it more responsive to most clicks
+- [#4625] Fix sizes of buttons and submit inputs in installer - IE 8 and 9
+- [#4617] Fix custom values not being shown on Context Installation page during Advanced Upgrade
+- [#4605] modX->switchContext() now checks load permission via Context ACLs
+- [#4595] Fix display of modified/accessed times on Edit File page
+- [#4594] Fix last login time displayed in Info block of Manager welcome page
+- [#4470] Fix frozen URI not displayed when editing resource
+- [#4572] Fix installer error log filenames (characters not allowed in Windows filenames)
+- [#4585] Fix database connection processors in advanced upgrade
+- Update xPDO to v2.1.3-pl
+- [#4567] Remove calls to xPDO->log() in xPDOCacheManager->writeFile()
+- [#4557] Minor fixes on Installer Options screen for Traditional package
+- [#4556] Fix js error on Welcome screen of Traditional package's installer
+- [#4076] Fix Edit/Quick Update context menu items in protected categories
+- Fix Context Access query broken in RC4 changes for #4502
+
 MODX Revolution 2.1.0-rc-4 (April 29, 2011)
 ====================================
 - [#4543] Fix preview URLs when FURLs are turned Off

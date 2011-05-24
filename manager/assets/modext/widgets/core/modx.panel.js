@@ -58,13 +58,14 @@ MODx.FormPanel = function(config) {
         this.mask.show();
     }
     this.fireEvent('setup',config);
+    this.focusFirstField();
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     isReady: false
 
     ,submit: function(o) {
         var fm = this.getForm();
-        if (fm.isValid()) {
+        if (fm.isValid() || o.bypassValidCheck) {
             o = o || {};
             o.headers = {
                 'Powered-By': 'MODx'
@@ -79,6 +80,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                     waitMsg: this.config.saveMsg || _('saving')
                     ,scope: this
                     ,headers: o.headers
+                    ,clientValidation: (o.bypassValidCheck ? false : true)
                     ,failure: function(f,a) {
                     	if (this.fireEvent('failure',{
                     	   form: f
@@ -108,6 +110,22 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             return false;
         }
         return true;
+    }
+
+    ,focusFirstField: function() {
+        if (this.getForm().items.getCount() > 0) {
+            var fld = this.findFirstTextField();
+            if (fld) { fld.focus(false,200); }
+        }
+    }
+    ,findFirstTextField: function(i) {
+        i = i || 0;
+        var fld = this.getForm().items.itemAt(i);
+        if (fld.isXType('combo') || fld.isXType('checkbox') || fld.isXType('radio') || fld.isXType('displayfield') || fld.isXType('statictextfield') || fld.isXType('hidden')) {
+            i = i+1;
+            fld = this.findFirstTextField(i);
+        }
+        return fld;
     }
 
     ,addChangeEvent: function(items) {

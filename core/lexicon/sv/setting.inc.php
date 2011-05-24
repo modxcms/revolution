@@ -52,6 +52,14 @@ $_lang['system_settings'] = 'Systeminställningar';
 $_lang['usergroup'] = 'Användargrupp';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Kontrollera åtkomst till kategorier';
+$_lang['setting_access_category_enabled_desc'] = 'Använd den här inställningen för att aktivera eller inaktivera ACL-kontroller för kategorier (per kontext). <strong>Notera: Om inställningen sätts till Nej kommer ALLA åtkomsträttigheter för kategorier att ignoreras!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Kontrollera åtkomst till kontexter';
+$_lang['setting_access_context_enabled_desc'] = 'Använd den här inställningen för att aktivera eller inaktivera ACL-kontroller för kontexter. <strong>Notera: Om inställningen sätts till Nej kommer ALLA åtkomsträttigheter för kontexter att ignoreras. Inaktivera INTE den här för hela systemet eller för hanterarens kontext eftersom det betyder att du inaktiverar tillgången till hanteraren.</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Kontrollera åtkomst till resursgrupper';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Använd den här inställningen för att aktivera eller inaktivera ACL-kontroller för resursgrupper (per kontext). <strong>Notera: Om den här inställningen sätts till Nej kommer ALLA åtkomsträttigheter för resursgrupper att ignoreras.</strong>';
 $_lang['setting_allow_mgr_access'] = 'Tillgång till hanterarens gränssnitt';
 $_lang['setting_allow_mgr_access_desc'] = 'Använd den här inställningen för att aktivera eller inaktivera tillgång till hanterarens gränssnitt. <strong>Notera: Om inställningen sätts till Nej kommer användaren att omdirigeras till hanterarens inloggningssida eller till webbplatsens startsida.</strong>';
 

@@ -42,7 +42,7 @@ if ($resource->save() == false) {
 }
 
 /* invoke OnDocUnpublished event */
-$modx->invokeEvent('OnDocUnpublished',array(
+$modx->invokeEvent('OnDocUnPublished',array(
     'docid' => $resource->get('id'),
     'id' => $resource->get('id'),
     'resource' => &$resource,

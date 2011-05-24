@@ -15,8 +15,10 @@ if (!empty($wctx)) {
         return $modx->error->failure($modx->lexicon('permission_denied'));
     }
     $params['wctx'] = $workingContext->get('key');
+    $modx->fileHandler->context =& $workingContext;
 } else {
     $params['wctx'] = $modx->context->get('key');
+    $workingContext =& $modx->context;
 }
 
 $value = $this->get('value');
@@ -37,7 +39,7 @@ $replaceValues = array_values($replacePaths);
 if (empty($params['basePath'])) {
     $params['basePath'] = $modx->fileHandler->getBasePath();
     $params['basePath'] = str_replace($replaceKeys,$replaceValues,$params['basePath']);
-    $params['basePathRelative'] = $this->xpdo->getOption('filemanager_path_relative',null,true) ? 1 : 0;
+    $params['basePathRelative'] = $workingContext->getOption('filemanager_path_relative',true) ? 1 : 0;
 } else {
     $params['basePath'] = str_replace($replaceKeys,$replaceValues,$params['basePath']);
     $params['basePathRelative'] = !isset($params['basePathRelative']) || in_array($params['basePathRelative'],array('true',1,'1'));
@@ -45,7 +47,7 @@ if (empty($params['basePath'])) {
 if (empty($params['baseUrl'])) {
     $params['baseUrl'] = $modx->fileHandler->getBaseUrl();
     $params['baseUrl'] = str_replace($replaceKeys,$replaceValues,$params['baseUrl']);
-    $params['baseUrlRelative'] = $this->xpdo->getOption('filemanager_url_relative',null,true) ? 1 : 0;
+    $params['baseUrlRelative'] = $workingContext->getOption('filemanager_url_relative',true) ? 1 : 0;
 } else {
     $params['baseUrl'] = str_replace($replaceKeys,$replaceValues,$params['baseUrl']);
     $params['baseUrlRelative'] = !isset($params['baseUrlRelative']) || in_array($params['baseUrlRelative'],array('true',1,'1'));
@@ -64,7 +66,6 @@ if (!empty($params['baseUrl']) && !empty($value)) {
 } else {
     $relativeValue = $value;
 }
-
 if (!empty($value) && strpos($value,'/') !== false) {
     $dir = pathinfo($value,PATHINFO_DIRNAME);
     $dir = rtrim($dir,'/').'/';

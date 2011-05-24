@@ -100,7 +100,8 @@ MODx.panel.Resource = function(config) {
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+f.getValue()+'</h2>');
+                    titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
+                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+titlePrefix+': '+f.getValue()+'</h2>');
                 }}
             }
             
@@ -376,7 +377,7 @@ MODx.panel.Resource = function(config) {
         ,maxLength: 255
         ,anchor: '70%'
         ,value: config.record.uri || ''
-        ,hidden: parseInt(config.record.uri_override) ? false : true
+        ,hidden: !config.record.uri_override
     });
     it.push({
         id: 'modx-page-settings'
@@ -593,6 +594,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         success: {fn:function(r) {
                             location.href = '?a='+MODx.action['resource/update']+'&id='+r.result.object.id+'&template='+nt+'&activeSave=1';
                         },scope:this}
+                    },{
+                        bypassValidCheck: true
                     });
                 } else {
                     t.setValue(this.config.record.template);

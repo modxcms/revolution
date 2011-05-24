@@ -24,6 +24,9 @@
 
 {$rteincludes}
 <!--[if IE]>
+<style type="text/css">body {
+        behavior: url("{$_config.manager_url}templates/{$_config.manager_theme}/css/csshover3.htc");
+}</style>
 <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/ie.css" />
 <![endif]-->
 </head>
