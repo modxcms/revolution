@@ -157,6 +157,7 @@ class modRequest {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
+                $resource->_content = $cachedResource['resource']['_content'];
                 if (isset($cachedResource['contentType'])) {
                     $contentType = $this->modx->newObject('modContentType');
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
@@ -174,6 +175,7 @@ class modRequest {
                 if ($resource->get('_jscripts')) $this->modx->jscripts = $this->modx->jscripts + $resource->get('_jscripts');
                 if ($resource->get('_sjscripts')) $this->modx->sjscripts = $this->modx->sjscripts + $resource->get('_sjscripts');
                 if ($resource->get('_loadedjscripts')) $this->modx->loadedjscripts = array_merge($this->modx->loadedjscripts, $resource->get('_loadedjscripts'));
+                $resource->setProcessed(true);
                 $fromCache = true;
             }
         }
