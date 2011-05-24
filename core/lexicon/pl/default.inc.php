@@ -1262,7 +1262,7 @@ $_lang['tmplvars'] = 'Template Variables';
 $_lang['to'] = 'to';
 
 #$_lang['today'] = 'Today';
-$_lang['today'] = 'Today';
+$_lang['today'] = 'Dzisiaj'; #
 
 #$_lang['toggle_richtext'] = 'Toggle Richtext';
 $_lang['toggle_richtext'] = 'Toggle Richtext';
@@ -1394,59 +1394,59 @@ $_lang['yes'] = 'Yes';
 $_lang['yesno'] = 'Yes/No';
 
 #$_lang['january'] = 'January';
-$_lang['january'] = 'January';
+$_lang['january'] = 'Styczeń'; #
 
 #$_lang['february'] = 'February';
-$_lang['february'] = 'February';
+$_lang['february'] = 'Luty'; #
 
 #$_lang['march'] = 'March';
-$_lang['march'] = 'March';
+$_lang['march'] = 'Marzec'; #
 
 #$_lang['april'] = 'April';
-$_lang['april'] = 'April';
+$_lang['april'] = 'Kwiecień'; #
 
 #$_lang['may'] = 'May';
-$_lang['may'] = 'May';
+$_lang['may'] = 'Maj'; #
 
 #$_lang['june'] = 'June';
-$_lang['june'] = 'June';
+$_lang['june'] = 'Czerwiec'; #
 
 #$_lang['july'] = 'July';
-$_lang['july'] = 'July';
+$_lang['july'] = 'Lipiec'; #
 
 #$_lang['august'] = 'August';
-$_lang['august'] = 'August';
+$_lang['august'] = 'Sierpień'; #
 
 #$_lang['september'] = 'September';
-$_lang['september'] = 'September';
+$_lang['september'] = 'Wrzesień'; #
 
 #$_lang['october'] = 'October';
-$_lang['october'] = 'October';
+$_lang['october'] = 'Październik'; #
 
 #$_lang['november'] = 'November';
-$_lang['november'] = 'November';
+$_lang['november'] = 'Listopad'; #
 
 #$_lang['december'] = 'December';
-$_lang['december'] = 'December';
+$_lang['december'] = 'Grudzień'; #
 
 #$_lang['sunday'] = 'Sunday';
-$_lang['sunday'] = 'Sunday';
+$_lang['sunday'] = 'Niedziela'; #
 
 #$_lang['monday'] = 'Monday';
-$_lang['monday'] = 'Monday';
+$_lang['monday'] = 'Poniedziałek'; #
 
 #$_lang['tuesday'] = 'Tuesday';
-$_lang['tuesday'] = 'Tuesday';
+$_lang['tuesday'] = 'Wtorek'; #
 
 #$_lang['wednesday'] = 'Wednesday';
-$_lang['wednesday'] = 'Wednesday';
+$_lang['wednesday'] = 'Środa'; #
 
 #$_lang['thursday'] = 'Thursday';
-$_lang['thursday'] = 'Thursday';
+$_lang['thursday'] = 'Czwartek'; #
 
 #$_lang['friday'] = 'Friday';
-$_lang['friday'] = 'Friday';
+$_lang['friday'] = 'Piątek'; #
 
 #$_lang['saturday'] = 'Saturday';
-$_lang['saturday'] = 'Saturday';
+$_lang['saturday'] = 'Sobota'; #
 
