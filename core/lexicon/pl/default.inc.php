@@ -719,7 +719,7 @@ $_lang['new_key'] = 'New Key';
 $_lang['new_message'] = 'New Message';
 
 #$_lang['new_name'] = 'New Name';
-$_lang['new_name'] = 'New Name';
+$_lang['new_name'] = 'Nowa nazwa'; #
 
 #$_lang['new_parent'] = 'New parent';
 $_lang['new_parent'] = 'New parent';
@@ -788,7 +788,7 @@ $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Old Key';
 
 #$_lang['old_name'] = 'Old Name';
-$_lang['old_name'] = 'Old Name';
+$_lang['old_name'] = 'Obecna nazwa'; #
 
 #$_lang['on'] = 'On';
 $_lang['on'] = 'On';
@@ -848,7 +848,7 @@ $_lang['parameters'] = 'Parameters';
 $_lang['password'] = 'Password';
 
 #$_lang['path'] = 'Path';
-$_lang['path'] = 'Path';
+$_lang['path'] = 'Ścieżka'; #
 
 #$_lang['per_page'] = 'Per Page';
 $_lang['per_page'] = 'Na stronie'; #

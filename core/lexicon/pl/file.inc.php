@@ -53,13 +53,13 @@ $_lang['file_err_ns'] = 'Please specify a valid file.';
 $_lang['file_err_open'] = 'Cannot open file: ';
 
 #$_lang['file_err_perms_rename'] = 'The webserver does not have the necessary permissions to rename the file.';
-$_lang['file_err_perms_rename'] = 'The webserver does not have the necessary permissions to rename the file.';
+$_lang['file_err_perms_rename'] = 'Uprawnienia systemu plików nie pozwalają na zmianę nazwy pliku.'; # ?
 
 #$_lang['file_err_perms_remove'] = 'The webserver does not have the necessary permissions to remove the file.';
 $_lang['file_err_perms_remove'] = 'Uprawnienia systemu plików nie pozwalają na usunięcie tego pliku.'; # ?
 
 #$_lang['file_err_rename'] = 'MODX failed to rename the file. Please make sure your permissions are set correctly.';
-$_lang['file_err_rename'] = 'MODX failed to rename the file. Please make sure your permissions are set correctly.';
+$_lang['file_err_rename'] = 'Nie udało się zmienić nazwy pliku. Upewnij się, że posiadasz właściwe uprawnienia.'; # ?
 
 #$_lang['file_err_remove'] = 'MODX failed to delete the file. Please make sure your permissions are set correctly.';
 $_lang['file_err_remove'] = 'Nie udało się usunąć tego pliku. Upewnij się, że posiadasz właściwe uprawnienia.'; # ?
@@ -146,7 +146,7 @@ $_lang['file_folder_err_perms_remove'] = 'Uprawnienia systemu plików nie pozwal
 $_lang['file_folder_err_perms_upload'] = 'The webserver does not have the necessary permissions to upload to the directory.';
 
 #$_lang['file_folder_err_rename'] = 'An unknown error occurred while trying to rename the directory.';
-$_lang['file_folder_err_rename'] = 'An unknown error occurred while trying to rename the directory.';
+$_lang['file_folder_err_rename'] = 'W trakcie zmieniania nazwy folderu wystąpił nieznany błąd.'; # ?
 
 #$_lang['file_folder_err_remove'] = 'An error occurred while trying to remove the directory.';
 $_lang['file_folder_err_remove'] = 'W trakcie usuwania folderu wystąpił błąd.'; # ?
