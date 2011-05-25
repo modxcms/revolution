@@ -95,7 +95,7 @@ $_lang['file_folder_enter_new'] = 'Enter New Folder Name';
 $_lang['file_folder_chmod'] = 'Chmod Directory';
 
 #$_lang['file_folder_create'] = 'Create Directory';
-$_lang['file_folder_create'] = 'Create Directory';
+$_lang['file_folder_create'] = 'Utwórz folder'; #
 
 #$_lang['file_folder_create_here'] = 'Create Directory Here';
 $_lang['file_folder_create_here'] = 'Create Directory Here';
@@ -308,4 +308,4 @@ $_lang['upf_uploading'] = 'Uploading...';
 $_lang['upf_uploading_desc'] = 'Uploading: {0} of {1} files complete.';
 
 #$_lang['upload_files'] = 'Upload Files';
-$_lang['upload_files'] = 'Upload Files';
+$_lang['upload_files'] = 'Wyślij pliki'; #

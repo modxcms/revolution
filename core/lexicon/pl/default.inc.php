@@ -521,7 +521,7 @@ $_lang['female'] = 'Female';
 $_lang['field_required'] = 'This field is required.';
 
 #$_lang['files'] = 'Files';
-$_lang['files'] = 'Files';
+$_lang['files'] = 'Pliki'; #
 
 #$_lang['filter'] = 'Filter';
 $_lang['filter'] = 'Filter';
@@ -689,7 +689,7 @@ $_lang['mime_type_desc'] = 'The mime type for all files with the content type.';
 $_lang['mode'] = 'Mode';
 
 #$_lang['modx_browser'] = 'MODX Browser';
-$_lang['modx_browser'] = 'MODX Browser';
+$_lang['modx_browser'] = 'Przeglądaj pliki'; #
 
 #$_lang['modx_resource_browser'] = 'MODX Resources Browser';
 $_lang['modx_resource_browser'] = 'MODX Resources Browser';
@@ -1274,13 +1274,13 @@ $_lang['total'] = 'total';
 $_lang['track_visitors_title'] = 'Track Visitors';
 
 #$_lang['tree_collapse'] = 'Collapse tree';
-$_lang['tree_collapse'] = 'Collapse tree';
+$_lang['tree_collapse'] = 'Zwiń wszystkie'; #
 
 #$_lang['tree_expand'] = 'Expand tree';
-$_lang['tree_expand'] = 'Expand tree';
+$_lang['tree_expand'] = 'Rozwiń wszystkie'; #
 
 #$_lang['tree_refresh'] = 'Refresh tree';
-$_lang['tree_refresh'] = 'Refresh tree';
+$_lang['tree_refresh'] = 'Odśwież'; #
 
 #$_lang['tree_sort'] = 'Sort tree';
 $_lang['tree_sort'] = 'Sort tree';
