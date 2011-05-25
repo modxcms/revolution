@@ -8,7 +8,7 @@
 */
 
 #$_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? This could potentially break your website.';
-$_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? This could potentially break your website.';
+$_lang['file_confirm_remove'] = 'Czy na pewno chcesz usunąć ten plik? To może potencjalnie spowodować błędy w działaniu serwisu.'; #
 
 #$_lang['file_deleted'] = 'Success!';
 $_lang['file_deleted'] = 'Success!';
@@ -41,7 +41,7 @@ $_lang['file_err_ext_not_allowed'] = 'File extension `[[+ext]]` is not permitted
 $_lang['file_err_filter'] = 'No files match the specified filter.';
 
 #$_lang['file_err_invalid'] = 'The file is not a regular file and cannot be removed.';
-$_lang['file_err_invalid'] = 'The file is not a regular file and cannot be removed.';
+$_lang['file_err_invalid'] = 'Ten plik nie jest zwykłym plikiem i nie może zostać usunięty.'; # ?
 
 #$_lang['file_err_nf'] = 'File does not exist!';
 $_lang['file_err_nf'] = 'File does not exist!';
@@ -56,13 +56,13 @@ $_lang['file_err_open'] = 'Cannot open file: ';
 $_lang['file_err_perms_rename'] = 'The webserver does not have the necessary permissions to rename the file.';
 
 #$_lang['file_err_perms_remove'] = 'The webserver does not have the necessary permissions to remove the file.';
-$_lang['file_err_perms_remove'] = 'The webserver does not have the necessary permissions to remove the file.';
+$_lang['file_err_perms_remove'] = 'Uprawnienia systemu plików nie pozwalają na usunięcie tego pliku.'; # ?
 
 #$_lang['file_err_rename'] = 'MODX failed to rename the file. Please make sure your permissions are set correctly.';
 $_lang['file_err_rename'] = 'MODX failed to rename the file. Please make sure your permissions are set correctly.';
 
 #$_lang['file_err_remove'] = 'MODX failed to delete the file. Please make sure your permissions are set correctly.';
-$_lang['file_err_remove'] = 'MODX failed to delete the file. Please make sure your permissions are set correctly.';
+$_lang['file_err_remove'] = 'Nie udało się usunąć tego pliku. Upewnij się, że posiadasz właściwe uprawnienia.'; # ?
 
 #$_lang['file_err_save'] = 'Cannot save file, please ensure target directory is writable!';
 $_lang['file_err_save'] = 'Cannot save file, please ensure target directory is writable!';
@@ -140,7 +140,7 @@ $_lang['file_folder_err_perms'] = 'The webserver does not have the necessary per
 $_lang['file_folder_err_perms_parent'] = 'Uprawnienia systemu plików nie pozwalają na utworzenie folderu w tej ścieżce.'; # ?
 
 #$_lang['file_folder_err_perms_remove'] = 'The webserver does not have the necessary permissions to remove the directory.';
-$_lang['file_folder_err_perms_remove'] = 'The webserver does not have the necessary permissions to remove the directory.';
+$_lang['file_folder_err_perms_remove'] = 'Uprawnienia systemu plików nie pozwalają na ususnięcie tego folderu.'; # ?
 
 #$_lang['file_folder_err_perms_upload'] = 'The webserver does not have the necessary permissions to upload to the directory.';
 $_lang['file_folder_err_perms_upload'] = 'The webserver does not have the necessary permissions to upload to the directory.';
@@ -149,7 +149,7 @@ $_lang['file_folder_err_perms_upload'] = 'The webserver does not have the necess
 $_lang['file_folder_err_rename'] = 'An unknown error occurred while trying to rename the directory.';
 
 #$_lang['file_folder_err_remove'] = 'An error occurred while trying to remove the directory.';
-$_lang['file_folder_err_remove'] = 'An error occurred while trying to remove the directory.';
+$_lang['file_folder_err_remove'] = 'W trakcie usuwania folderu wystąpił błąd.'; # ?
 
 #$_lang['file_folder_parent'] = 'Parent Directory';
 $_lang['file_folder_parent'] = '<abbr title="Ścieżka do folderu nadrzędnego">Wewnątrz</abbr>'; #
@@ -158,7 +158,7 @@ $_lang['file_folder_parent'] = '<abbr title="Ścieżka do folderu nadrzędnego">
 $_lang['file_folder_remove'] = 'Usuń folder'; #
 
 #$_lang['file_folder_remove_confirm'] = 'Are you sure you want to remove this directory? This could potentially break your website.';
-$_lang['file_folder_remove_confirm'] = 'Are you sure you want to remove this directory? This could potentially break your website.';
+$_lang['file_folder_remove_confirm'] = 'Czy na pewno chcesz usunąć ten folder? To może potencjalnie spowodować błędy w działaniu serwisu.'; #
 
 #$_lang['file_last_accessed'] = 'Last Accessed';
 $_lang['file_last_accessed'] = 'Last Accessed';
@@ -173,7 +173,7 @@ $_lang['file_name'] = 'File Name';
 $_lang['file_remove'] = 'Usuń plik'; #
 
 #$_lang['file_remove_confirm'] = 'Are you sure you want to remove this file entirely?';
-$_lang['file_remove_confirm'] = 'Are you sure you want to remove this file entirely?';
+$_lang['file_remove_confirm'] = 'Czy na pewno chcesz całkowicie usunąć ten plik?'; # ?
 
 #$_lang['file_saved'] = 'File updated successfully!';
 $_lang['file_saved'] = 'File updated successfully!';
