@@ -101,13 +101,13 @@ $_lang['file_folder_create'] = 'Utwórz folder'; #
 $_lang['file_folder_create_here'] = 'Utwórz folder'; #
 
 #$_lang['file_folder_created'] = 'Folder created successfully!';
-$_lang['file_folder_created'] = 'Folder created successfully!';
+$_lang['file_folder_created'] = 'Poprawnie utworzono folder!'; # ?
 
 #$_lang['file_folder_deleted'] = 'Folder was successfully deleted!';
 $_lang['file_folder_deleted'] = 'Folder was successfully deleted!';
 
 #$_lang['file_folder_err_ae'] = 'A directory already exists with that name in that location.';
-$_lang['file_folder_err_ae'] = 'A directory already exists with that name in that location.';
+$_lang['file_folder_err_ae'] = 'Folder o takiej nazwie już istnieje.'; #
 
 #$_lang['file_folder_err_chmod'] = 'Unable to change permissions, you will need to change permissions outside of MODX.';
 $_lang['file_folder_err_chmod'] = 'Unable to change permissions, you will need to change permissions outside of MODX.';
@@ -125,19 +125,19 @@ $_lang['file_folder_err_invalid_path'] = 'Invalid path to create the new folder 
 $_lang['file_folder_err_nf'] = 'Folder does not exist!';
 
 #$_lang['file_folder_err_ns'] = 'Please specify a valid directory.';
-$_lang['file_folder_err_ns'] = 'Please specify a valid directory.';
+$_lang['file_folder_err_ns'] = 'Proszę podać poprawny folder.'; #
 
 #$_lang['file_folder_err_ns_name'] = 'Please specify a valid name for the folder.';
 $_lang['file_folder_err_ns_name'] = 'Please specify a valid name for the folder.';
 
 #$_lang['file_folder_err_parent_invalid'] = 'Specified parent directory is not a directory.';
-$_lang['file_folder_err_parent_invalid'] = 'Specified parent directory is not a directory.';
+$_lang['file_folder_err_parent_invalid'] = 'Podany folder nadrzędny nie jest folderem.'; #
 
 #$_lang['file_folder_err_perms'] = 'The webserver does not have the necessary permissions to update the directory.';
 $_lang['file_folder_err_perms'] = 'The webserver does not have the necessary permissions to update the directory.';
 
 #$_lang['file_folder_err_perms_parent'] = 'The webserver does not have the necessary permissions to add a directory there.';
-$_lang['file_folder_err_perms_parent'] = 'The webserver does not have the necessary permissions to add a directory there.';
+$_lang['file_folder_err_perms_parent'] = 'Uprawnienia systemu plików nie pozwalają na utworzenie folderu w tej ścieżce.'; # ?
 
 #$_lang['file_folder_err_perms_remove'] = 'The webserver does not have the necessary permissions to remove the directory.';
 $_lang['file_folder_err_perms_remove'] = 'The webserver does not have the necessary permissions to remove the directory.';
@@ -152,7 +152,7 @@ $_lang['file_folder_err_rename'] = 'An unknown error occurred while trying to re
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to remove the directory.';
 
 #$_lang['file_folder_parent'] = 'Parent Directory';
-$_lang['file_folder_parent'] = 'Parent Directory';
+$_lang['file_folder_parent'] = '<abbr title="Ścieżka do folderu nadrzędnego">Wewnątrz</abbr>'; #
 
 #$_lang['file_folder_remove'] = 'Remove Directory';
 $_lang['file_folder_remove'] = 'Usuń folder'; #
@@ -309,3 +309,4 @@ $_lang['upf_uploading_desc'] = 'Uploading: {0} of {1} files complete.';
 
 #$_lang['upload_files'] = 'Upload Files';
 $_lang['upload_files'] = 'Wyślij pliki'; #
+
