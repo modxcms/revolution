@@ -686,7 +686,7 @@ $_lang['mime_type'] = 'MIME Type';
 $_lang['mime_type_desc'] = 'The mime type for all files with the content type.';
 
 #$_lang['mode'] = 'Mode';
-$_lang['mode'] = 'Mode';
+$_lang['mode'] = 'Uprawnienia'; #
 
 #$_lang['modx_browser'] = 'MODX Browser';
 $_lang['modx_browser'] = 'Przeglądaj pliki'; #

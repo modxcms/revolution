@@ -29,10 +29,10 @@ $_lang['file_download_unzip'] = 'Unzip File';
 $_lang['file_edit'] = 'Edytuj plik'; #
 
 #$_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
-$_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
+$_lang['file_err_chmod'] = 'W trakcie zmieniania uprawnień wystąpił nieznany błąd.'; # ?
 
 #$_lang['file_err_chmod_ns'] = 'Please specify a mode to chmod to.';
-$_lang['file_err_chmod_ns'] = 'Please specify a mode to chmod to.';
+$_lang['file_err_chmod_ns'] = 'Podaj poprawnie nowe uprawnienia.'; #
 
 #$_lang['file_err_ext_not_allowed'] = 'File extension `[[+ext]]` is not permitted.';
 $_lang['file_err_ext_not_allowed'] = 'File extension `[[+ext]]` is not permitted.';
@@ -110,7 +110,7 @@ $_lang['file_folder_deleted'] = 'Folder was successfully deleted!';
 $_lang['file_folder_err_ae'] = 'Folder o takiej nazwie już istnieje.'; #
 
 #$_lang['file_folder_err_chmod'] = 'Unable to change permissions, you will need to change permissions outside of MODX.';
-$_lang['file_folder_err_chmod'] = 'Unable to change permissions, you will need to change permissions outside of MODX.';
+$_lang['file_folder_err_chmod'] = 'Nie można było zmienić uprawnień. Musisz to zrobić poza panelem administracyjnym.'; # ?
 
 #$_lang['file_folder_err_create'] = 'An unknown error occurred while trying to create the directory.';
 $_lang['file_folder_err_create'] = 'An unknown error occurred while trying to create the directory.';
