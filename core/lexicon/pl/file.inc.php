@@ -26,7 +26,7 @@ $_lang['file_download_file'] = 'Download File';
 $_lang['file_download_unzip'] = 'Unzip File';
 
 #$_lang['file_edit'] = 'Edit File';
-$_lang['file_edit'] = 'Edit File';
+$_lang['file_edit'] = 'Edytuj plik'; #
 
 #$_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
 $_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
@@ -92,13 +92,13 @@ $_lang['file_extensions'] = 'File Extensions';
 $_lang['file_folder_enter_new'] = 'Enter New Folder Name';
 
 #$_lang['file_folder_chmod'] = 'Chmod Directory';
-$_lang['file_folder_chmod'] = 'Chmod Directory';
+$_lang['file_folder_chmod'] = 'Zmień uprawnienia'; #
 
 #$_lang['file_folder_create'] = 'Create Directory';
 $_lang['file_folder_create'] = 'Utwórz folder'; #
 
 #$_lang['file_folder_create_here'] = 'Create Directory Here';
-$_lang['file_folder_create_here'] = 'Create Directory Here';
+$_lang['file_folder_create_here'] = 'Utwórz folder'; #
 
 #$_lang['file_folder_created'] = 'Folder created successfully!';
 $_lang['file_folder_created'] = 'Folder created successfully!';
@@ -155,7 +155,7 @@ $_lang['file_folder_err_remove'] = 'An error occurred while trying to remove the
 $_lang['file_folder_parent'] = 'Parent Directory';
 
 #$_lang['file_folder_remove'] = 'Remove Directory';
-$_lang['file_folder_remove'] = 'Remove Directory';
+$_lang['file_folder_remove'] = 'Usuń folder'; #
 
 #$_lang['file_folder_remove_confirm'] = 'Are you sure you want to remove this directory? This could potentially break your website.';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to remove this directory? This could potentially break your website.';
@@ -170,7 +170,7 @@ $_lang['file_last_modified'] = 'Last Modified';
 $_lang['file_name'] = 'File Name';
 
 #$_lang['file_remove'] = 'Remove File';
-$_lang['file_remove'] = 'Remove File';
+$_lang['file_remove'] = 'Usuń plik'; #
 
 #$_lang['file_remove_confirm'] = 'Are you sure you want to remove this file entirely?';
 $_lang['file_remove_confirm'] = 'Are you sure you want to remove this file entirely?';

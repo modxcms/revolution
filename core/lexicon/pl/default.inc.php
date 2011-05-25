@@ -290,7 +290,7 @@ $_lang['deleted'] = 'Skasowany'; #
 $_lang['description'] = 'Description';
 
 #$_lang['directory_refresh'] = 'Refresh Directory';
-$_lang['directory_refresh'] = 'Refresh Directory';
+$_lang['directory_refresh'] = 'Odśwież folder'; #
 
 #$_lang['disabled'] = 'Disabled';
 $_lang['disabled'] = 'Disabled';
@@ -1034,7 +1034,7 @@ $_lang['remove_this_confirm'] = 'Are you sure you want to remove the [[+type]]: 
 $_lang['remove_user_from_group'] = 'Remove User From Group';
 
 #$_lang['rename'] = 'Rename';
-$_lang['rename'] = 'Rename';
+$_lang['rename'] = 'Zmień nazwę'; #
 
 #$_lang['reset'] = 'Reset';
 $_lang['reset'] = 'Reset';
