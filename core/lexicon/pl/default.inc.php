@@ -344,7 +344,7 @@ $_lang['element_duplicate_values'] = 'Duplicate Values?';
 $_lang['element_name_new'] = 'Name of New Element';
 
 #$_lang['elements'] = 'Elements';
-$_lang['elements'] = 'Elements';
+$_lang['elements'] = 'Elementy'; #
 
 #$_lang['email'] = 'Email';
 $_lang['email'] = 'Adres e-mail'; #
@@ -638,7 +638,7 @@ $_lang['list'] = 'List';
 $_lang['load_headers'] = 'Load Headers';
 
 #$_lang['loading'] = 'Loading...';
-$_lang['loading'] = 'Loading...';
+$_lang['loading'] = 'Ładowanie&hellip;'; #
 
 #$_lang['locked'] = 'Locked';
 $_lang['locked'] = 'Locked';
