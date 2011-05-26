@@ -121,6 +121,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,findFirstTextField: function(i) {
         i = i || 0;
         var fld = this.getForm().items.itemAt(i);
+        if (!fld) return false;
         if (fld.isXType('combo') || fld.isXType('checkbox') || fld.isXType('radio') || fld.isXType('displayfield') || fld.isXType('statictextfield') || fld.isXType('hidden')) {
             i = i+1;
             fld = this.findFirstTextField(i);
