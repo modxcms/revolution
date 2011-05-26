@@ -161,10 +161,10 @@ $_lang['file_folder_remove'] = 'Usuń folder'; #
 $_lang['file_folder_remove_confirm'] = 'Czy na pewno chcesz usunąć ten folder? To może potencjalnie spowodować błędy w działaniu serwisu.'; #
 
 #$_lang['file_last_accessed'] = 'Last Accessed';
-$_lang['file_last_accessed'] = 'Last Accessed';
+$_lang['file_last_accessed'] = 'Ostatnio otwarto'; #
 
 #$_lang['file_last_modified'] = 'Last Modified';
-$_lang['file_last_modified'] = 'Last Modified';
+$_lang['file_last_modified'] = 'Ostatnio zmieniono'; #
 
 #$_lang['file_name'] = 'File Name';
 $_lang['file_name'] = 'File Name';
@@ -179,7 +179,7 @@ $_lang['file_remove_confirm'] = 'Czy na pewno chcesz całkowicie usunąć ten pl
 $_lang['file_saved'] = 'File updated successfully!';
 
 #$_lang['file_size'] = 'File Size';
-$_lang['file_size'] = 'File Size';
+$_lang['file_size'] = 'Rozmiar pliku'; #
 
 #$_lang['file_unzip'] = 'Unzip was successful!';
 $_lang['file_unzip'] = 'Unzip was successful!';
