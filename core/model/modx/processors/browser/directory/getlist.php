@@ -132,7 +132,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $cls[] = 'icon-file';
         $cls[] = 'icon-'.$ext;
         if ($canRemoveFile) $cls[] = 'premove';
-        if ($canUpdateFile) $cl[] = 'pupdate';
+        if ($canUpdateFile) $cls[] = 'pupdate';
 
 
         if (!$file->isWritable()) {
