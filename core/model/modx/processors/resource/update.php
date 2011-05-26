@@ -88,7 +88,7 @@ if (isset($scriptProperties['ta'])) {
 }
 
 /* format pagetitle */
-if (isset($scriptProperties['pagetitle'])) {
+if (isset($scriptProperties['pagetitle']) && empty($scriptProperties['reloadOnly'])) {
     if (empty($scriptProperties['pagetitle'])) {
         $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
     }
@@ -169,7 +169,7 @@ if (isset($scriptProperties['uri_override'])) {
 $workingContext = $modx->getContext($scriptProperties['context_key']);
 
 /* friendly url alias checks */
-if ($workingContext->getOption('friendly_urls', false)) {
+if ($workingContext->getOption('friendly_urls', false) && empty($scriptProperties['reloadOnly'])) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
         $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
