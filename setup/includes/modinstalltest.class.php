@@ -43,7 +43,8 @@ abstract class modInstallTest {
      */
     protected function _checkSafeMode() {
         $this->title('safe_mode',$this->install->lexicon('test_safe_mode_start').' ');
-        $safeMode = @ini_get('safe_mode') ? true : false;
+        $safeMode = @ini_get('safe_mode');
+        $safeMode = (intval($safeMode) == 1 || strtolower($safeMode) == 'on') && strtolower($safeMode) != 'off' ? true : false;
         if ($safeMode) {
             $this->fail('safe_mode','',$this->install->lexicon('test_safe_mode_fail'));
         } else {
@@ -80,7 +81,7 @@ abstract class modInstallTest {
      */
     protected function _checkMemoryLimit() {
         $success = false;
-        $ml = ini_get('memory_limit');
+        $ml = @ini_get('memory_limit');
         $bytes = $this->_returnBytes($ml);
 
         if ($bytes < 25165824) { /* 24M = 25165824, 32M = 33554432, 64M = 67108864 */
