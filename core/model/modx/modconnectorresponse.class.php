@@ -45,14 +45,16 @@ class modConnectorResponse extends modResponse {
         /* backwards compat */
         $error =& $this->modx->error;
 
+        $siteId = $this->modx->site_id.$this->modx->user->get('id').session_id();
+
         /* ensure headers are sent for proper authentication */
         if (!isset($_SERVER['HTTP_MODAUTH']) && !isset($_REQUEST['HTTP_MODAUTH'])) {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'));
 
-        } else if (isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] != $modx->site_id) {
+        } else if (isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] != $siteId) {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'));
 
-        } else if (isset($_REQUEST['HTTP_MODAUTH']) && $_REQUEST['HTTP_MODAUTH'] != $modx->site_id) {
+        } else if (isset($_REQUEST['HTTP_MODAUTH']) && $_REQUEST['HTTP_MODAUTH'] != $siteId) {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'));
 
         /* verify the location and action */

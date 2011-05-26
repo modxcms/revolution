@@ -246,9 +246,10 @@ class modManagerResponse extends modResponse {
         }
 
         if ($loadLayout) {
+            $siteId = $this->modx->site_id.$this->modx->user->get('id').session_id();
             $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
-    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$this->modx->site_id.'"});
+    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});
 });</script>');
         }
     }
