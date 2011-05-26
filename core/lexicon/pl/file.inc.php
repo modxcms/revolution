@@ -233,79 +233,79 @@ $_lang['files_modified'] = 'Modified';
 $_lang['files_viewfile'] = 'View file';
 
 #$_lang['upf_abort'] = 'Abort';
-$_lang['upf_abort'] = 'Abort';
+$_lang['upf_abort'] = 'Przerwij'; #
 
 #$_lang['upf_abort_desc'] = 'Stop the upload.';
-$_lang['upf_abort_desc'] = 'Stop the upload.';
+$_lang['upf_abort_desc'] = 'Przerwij wysyłanie.'; #
 
 #$_lang['upf_aborted'] = 'Aborted by user.';
-$_lang['upf_aborted'] = 'Aborted by user.';
+$_lang['upf_aborted'] = 'Wysyłanie przerwane.'; #
 
 #$_lang['upf_add'] = 'Add';
-$_lang['upf_add'] = 'Add';
+$_lang['upf_add'] = 'Dodaj'; #
 
 #$_lang['upf_add_desc'] = 'Add file into upload queue.';
-$_lang['upf_add_desc'] = 'Add file into upload queue.';
+$_lang['upf_add_desc'] = 'Dodaj plik do kolejki wysyłania.'; #
 
 #$_lang['upf_close'] = 'Close';
-$_lang['upf_close'] = 'Close';
+$_lang['upf_close'] = 'Zamknij'; #
 
 #$_lang['upf_close_desc'] = 'Close the window.';
-$_lang['upf_close_desc'] = 'Close the window.';
+$_lang['upf_close_desc'] = 'Zamknij okno wysyłania.'; #
 
 #$_lang['upf_err_failed'] = 'Server is unavailable or internal server error occured.';
-$_lang['upf_err_failed'] = 'Server is unavailable or internal server error occured.';
+$_lang['upf_err_failed'] = 'Serwer jest niedostępny lub wystąpił błąd serwera.'; # ?
 
 #$_lang['upf_err_filetype'] = 'Selected file extension isn\'t permitted.<br/>Please select files with following extensions: {1}';
-$_lang['upf_err_filetype'] = 'Selected file extension isn\'t permitted.<br/>Please select files with following extensions: {1}';
+$_lang['upf_err_filetype'] = 'Wysyłanie plików o tym rozszerzeniu nie jest dozwolone.<br />Dozwolone są następujące rozszerzenia: {1}'; # ?
 
 #$_lang['upf_error'] = 'Error';
-$_lang['upf_error'] = 'Error';
+$_lang['upf_error'] = 'Błąd'; #
 
 #$_lang['upf_filename'] = 'Filename';
-$_lang['upf_filename'] = 'Filename';
+$_lang['upf_filename'] = 'Nazwa pliku'; #
 
 #$_lang['upf_note'] = 'Note';
-$_lang['upf_note'] = 'Note';
+$_lang['upf_note'] = 'Status'; #
 
 #$_lang['upf_progress_wait'] = 'Waiting...';
-$_lang['upf_progress_wait'] = 'Waiting...';
+$_lang['upf_progress_wait'] = 'Oczkiwanie&hellip;'; #
 
 #$_lang['upf_queued'] = 'Queued for upload.';
-$_lang['upf_queued'] = 'Queued for upload.';
+$_lang['upf_queued'] = 'Oczekuje na wysłanie.'; #
 
 #$_lang['upf_remove'] = 'Remove';
-$_lang['upf_remove'] = 'Remove';
+$_lang['upf_remove'] = 'Usuń'; #
 
 #$_lang['upf_remove_desc'] = 'Remove file from upload queue.';
-$_lang['upf_remove_desc'] = 'Remove file from upload queue.';
+$_lang['upf_remove_desc'] = 'Usuń plik z kolejki wysyłania.'; #
 
 #$_lang['upf_reset'] = 'Reset';
-$_lang['upf_reset'] = 'Reset';
+$_lang['upf_reset'] = 'Wyczyść'; #
 
 #$_lang['upf_reset_desc'] = 'Reset queue.';
-$_lang['upf_reset_desc'] = 'Reset queue.';
+$_lang['upf_reset_desc'] = 'Usuń wszystkie pliki z kolejki wysyłania.'; #
 
 #$_lang['upf_state'] = 'State';
-$_lang['upf_state'] = 'State';
+$_lang['upf_state'] = 'Stan'; # ? Unused?
 
 #$_lang['upf_success'] = 'OK.';
-$_lang['upf_success'] = 'OK.';
+$_lang['upf_success'] = 'Wysłany.'; #
 
 #$_lang['upf_upload'] = 'Upload';
-$_lang['upf_upload'] = 'Upload';
+$_lang['upf_upload'] = 'Wyślij'; #
 
 #$_lang['upf_upload_desc'] = 'Upload queued files to the server.';
-$_lang['upf_upload_desc'] = 'Upload queued files to the server.';
+$_lang['upf_upload_desc'] = 'Wyślij oczekujące pliki.'; # ?
 
 #$_lang['upf_upload_err'] = 'Upload error.';
-$_lang['upf_upload_err'] = 'Upload error.';
+$_lang['upf_upload_err'] = 'Błąd wysyłania.'; # ?
 
 #$_lang['upf_uploading'] = 'Uploading...';
-$_lang['upf_uploading'] = 'Uploading...';
+$_lang['upf_uploading'] = 'Wysyłanie&hellip;'; #
 
 #$_lang['upf_uploading_desc'] = 'Uploading: {0} of {1} files complete.';
-$_lang['upf_uploading_desc'] = 'Uploading: {0} of {1} files complete.';
+$_lang['upf_uploading_desc'] = 'Ukończono wysyłanie {0} z {1} plików.'; #
 
 #$_lang['upload_files'] = 'Upload Files';
 $_lang['upload_files'] = 'Wyślij pliki'; #
