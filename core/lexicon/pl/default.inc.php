@@ -524,7 +524,7 @@ $_lang['field_required'] = 'This field is required.';
 $_lang['files'] = 'Pliki'; #
 
 #$_lang['filter'] = 'Filter';
-$_lang['filter'] = 'Filter';
+$_lang['filter'] = 'Filtruj'; #
 
 #$_lang['filter_clear'] = 'Clear Filter';
 $_lang['filter_clear'] = 'Clear Filter';
@@ -620,7 +620,7 @@ $_lang['keyword'] = 'Keyword';
 $_lang['keywords'] = 'Keywords';
 
 #$_lang['last_modified'] = 'Last Modified';
-$_lang['last_modified'] = 'Last Modified';
+$_lang['last_modified'] = 'Ostania zmiana'; #
 
 #$_lang['launch_site'] = 'View Site';
 $_lang['launch_site'] = 'View Site';

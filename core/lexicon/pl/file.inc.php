@@ -38,7 +38,7 @@ $_lang['file_err_chmod_ns'] = 'Podaj poprawnie nowe uprawnienia.'; #
 $_lang['file_err_ext_not_allowed'] = 'File extension `[[+ext]]` is not permitted.';
 
 #$_lang['file_err_filter'] = 'No files match the specified filter.';
-$_lang['file_err_filter'] = 'No files match the specified filter.';
+$_lang['file_err_filter'] = 'Nie znaleziono plików.'; #
 
 #$_lang['file_err_invalid'] = 'The file is not a regular file and cannot be removed.';
 $_lang['file_err_invalid'] = 'Ten plik nie jest zwykłym plikiem i nie może zostać usunięty.'; # ?
@@ -167,7 +167,7 @@ $_lang['file_last_accessed'] = 'Ostatnio otwarto'; #
 $_lang['file_last_modified'] = 'Ostatnio zmieniono'; #
 
 #$_lang['file_name'] = 'File Name';
-$_lang['file_name'] = 'File Name';
+$_lang['file_name'] = 'Nazwa pliku'; #
 
 #$_lang['file_remove'] = 'Remove File';
 $_lang['file_remove'] = 'Usuń plik'; #
