@@ -143,7 +143,7 @@ if (!$resource) return $modx->error->failure($modx->lexicon('resource_err_create
 if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->lexicon('resource_err_class',array('class' => $resourceClass)));
 
 /* friendly url alias checks */
-if ($workingContext->getOption('friendly_urls', false) && empty($scriptProperties['reloadOnly'])) {
+if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperties['reloadOnly']) || !empty($scriptProperties['pagetitle']))) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
         $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
