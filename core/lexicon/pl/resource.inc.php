@@ -20,7 +20,7 @@ $_lang['changes'] = 'Changes';
 $_lang['class_key'] = 'Class Key'; # Celowo nie tłumaczone.
 
 #$_lang['context'] = 'Context';
-$_lang['context'] = 'Context';
+$_lang['context'] = 'Kontekst'; #
 
 #$_lang['createedit_document'] = 'Create/Edit Document';
 $_lang['createedit_document'] = 'Edycja'; #
@@ -56,7 +56,7 @@ $_lang['duplicate_uri_found'] = 'Resource [[+id]] is already using the URI [[+ur
 $_lang['empty_template'] = '(brak)'; #
 
 #$_lang['general'] = 'General';
-$_lang['general'] = 'General';
+$_lang['general'] = 'Ogólne'; #
 
 #$_lang['markup'] = 'Markup/Structure';
 $_lang['markup'] = 'Markup/Structure';
