@@ -26,52 +26,52 @@ $_lang['login_blocked_time'] = 'You are not allowed to login at this time. Pleas
 $_lang['login_blocked_too_many_attempts'] = 'You have been blocked due to too many failed login attempts.';
 
 #$_lang['login_button'] = 'Login';
-$_lang['login_button'] = 'Login';
+$_lang['login_button'] = 'Zaloguj'; #
 
 #$_lang['login_cannot_locate_account'] = 'That account could not be located.  Check the username and re-type the password to try again.';
 $_lang['login_cannot_locate_account'] = 'That account could not be located.  Check the username and re-type the password to try again.';
 
 #$_lang['login_copyright'] = '&copy; 2005-2011 by the <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; is licensed under the GPLv2 or later.';
-$_lang['login_copyright'] = '&copy; 2005-2011 by the <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-2011 <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; jest udostępniany na licencji GPLv2 lub nowszej.'; #
 
 #$_lang['login_email_label'] = 'Account Email:';
-$_lang['login_email_label'] = 'Account Email:';
+$_lang['login_email_label'] = '<abbr title="Podaj adres email, który jest przypisany do Twojego konta użytkownika. Na ten adres zostanie wysłana wiadomość z nowym hasłem.">Adres email</abbr>:'; #
 
 #$_lang['login_err_unknown'] = 'An unknown error occurred while trying to log in.';
 $_lang['login_err_unknown'] = 'An unknown error occurred while trying to log in.';
 
 #$_lang['login_forget_your_login'] = 'Forgot your Login?';
-$_lang['login_forget_your_login'] = 'Forgot your Login?';
+$_lang['login_forget_your_login'] = 'Nie pamiętasz loginu lub hasła?'; #
 
 #$_lang['login_hostname_error'] = 'Your hostname does not point back to your IP address.';
 $_lang['login_hostname_error'] = 'Your hostname does not point back to your IP address.';
 
 #$_lang['login_message'] = 'Please enter your login credentials to start your Manager session. Your username and password are case-sensitive, so please enter them carefully!';
-$_lang['login_message'] = 'Please enter your login credentials to start your Manager session. Your username and password are case-sensitive, so please enter them carefully!';
+$_lang['login_message'] = 'Podaj dane uwierzytelniające, aby zalogować się i rozpocząć sesję w panelu administracyjnym. Wprowadzając nazwę użytkownika i hasło zachowaj uwagę, bo wielkie i małe litery są rozróżniane!'; #
 
 #$_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
 $_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
 
 #$_lang['login_password'] = 'Password: ';
-$_lang['login_password'] = 'Password: ';
+$_lang['login_password'] = 'Hasło:'; #
 
 #$_lang['login_password_reset_act_sent'] = 'Password Reset Activation email sent. Please check your inbox.';
 $_lang['login_password_reset_act_sent'] = 'Password Reset Activation email sent. Please check your inbox.';
 
 #$_lang['login_remember'] = 'Remember me';
-$_lang['login_remember'] = 'Remember me';
+$_lang['login_remember'] = 'Zapamiętaj mnie'; #
 
 #$_lang['login_send_activation_email'] = 'Send Activation Email';
-$_lang['login_send_activation_email'] = 'Send Activation Email';
+$_lang['login_send_activation_email'] = 'Wyślij'; #
 
 #$_lang['login_title'] = 'MODX CMF Manager Login';
-$_lang['login_title'] = 'MODX CMF Manager Login';
+$_lang['login_title'] = 'Logowanie do panelu administracyjnego MODX'; #
 
 #$_lang['login_user_err_nf_email'] = 'User not found with that email. Please try again.';
 $_lang['login_user_err_nf_email'] = 'User not found with that email. Please try again.';
 
 #$_lang['login_username'] = 'Username: ';
-$_lang['login_username'] = 'Username: ';
+$_lang['login_username'] = 'Login:'; #
 
 #$_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
 $_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
