@@ -443,7 +443,7 @@ $_lang['symlink_help'] = 'Adres obiektu, do którego wskazuje to dowiązanie. Je
 $_lang['symlink_message'] = 'A symlink is a symbolic link to another resource in your site which is forwarded to without changing the URL.';
 
 #$_lang['symlink_new'] = 'New Symlink';
-$_lang['symlink_new'] = 'New Symlink';
+$_lang['symlink_new'] = 'Utwórz nowe Dowiązanie'; #
 
 #$_lang['template_variables'] = 'Template Variables';
 $_lang['template_variables'] = 'Pola danych'; # ? Zmienne szablonu?
@@ -467,5 +467,5 @@ $_lang['weblink_help'] = 'Adres URL obiektu, do którego wskazuje ten odnośnik.
 $_lang['weblink_message'] = 'A weblink is a reference to an object on the internet. This could be a document within MODX, a page on another site or an image or other file on the internet.<p>';
 
 #$_lang['weblink_new'] = 'New Weblink';
-$_lang['weblink_new'] = 'New Weblink';
+$_lang['weblink_new'] = 'Utwórz nowy Odnośnik'; #
 
