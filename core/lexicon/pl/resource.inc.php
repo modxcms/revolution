@@ -8,7 +8,7 @@
 */
 
 #$_lang['access'] = 'Access';
-$_lang['access'] = 'Access';
+$_lang['access'] = 'Przypisanie'; #
 
 #$_lang['cache_output'] = 'Cache Output';
 $_lang['cache_output'] = 'Cache Output';
@@ -71,7 +71,7 @@ $_lang['page_settings'] = 'Ustawienia'; #
 $_lang['preview'] = 'Preview';
 
 #$_lang['resource_access_message'] = 'Here you can select which Resource Groups this Resource belongs to.';
-$_lang['resource_access_message'] = 'Here you can select which Resource Groups this Resource belongs to.';
+$_lang['resource_access_message'] = 'Tutaj możesz zmienić przypisanie tego zasobu do Grup Zasobów.'; #
 
 #$_lang['resource_add_children_access_denied'] = 'You do not have permission to create a Resource in this location.';
 $_lang['resource_add_children_access_denied'] = 'You do not have permission to create a Resource in this location.';

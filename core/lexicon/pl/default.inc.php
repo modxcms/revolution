@@ -698,7 +698,7 @@ $_lang['modx_resource_browser'] = 'MODX Resources Browser';
 $_lang['move'] = 'Move';
 
 #$_lang['name'] = 'Name';
-$_lang['name'] = 'Name';
+$_lang['name'] = 'Nazwa'; #
 
 #$_lang['new'] = 'New';
 $_lang['new'] = 'New';

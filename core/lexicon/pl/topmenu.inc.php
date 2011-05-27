@@ -14,7 +14,7 @@ $_lang['about'] = 'O MODX'; #
 $_lang['about_desc'] = 'Wyświetl informacje o MODX Revolution.'; #
 
 #$_lang['access_permissions'] = 'Access Permissions';
-$_lang['access_permissions'] = 'Access Permissions';
+$_lang['access_permissions'] = 'Uprawnienia'; #
 
 #$_lang['access_permissions_desc'] = 'Manage user group access to resources and contexts.';
 $_lang['access_permissions_desc'] = 'Manage user group access to resources and contexts.';
@@ -285,3 +285,4 @@ $_lang['wiki'] = 'Dokumentacja MODX'; #
 
 #$_lang['wiki_desc'] = 'Launch the MODX Confluence wiki, where documentation on MODX Revolution is stored.';
 $_lang['wiki_desc'] = 'Wyświetl dokumentację MODX.'; #
+
