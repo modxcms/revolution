@@ -311,13 +311,13 @@ $_lang['downloading'] = 'Downloading...';
 $_lang['duplicate'] = 'Duplicate';
 
 #$_lang['duplicate_children'] = 'Duplicate Children';
-$_lang['duplicate_children'] = 'Duplicate Children';
+$_lang['duplicate_children'] = 'Powielenie podrzędnych'; #
 
 #$_lang['duplicate_of'] = 'Duplicate of [[+name]]';
 $_lang['duplicate_of'] = 'Duplikat [[+name]]'; # ?
 
 #$_lang['duplication_options'] = 'Duplication Options';
-$_lang['duplication_options'] = 'Duplication Options';
+$_lang['duplication_options'] = 'Opcje Duplikatu'; #
 
 #$_lang['edit'] = 'Edit';
 $_lang['edit'] = 'Edit';
@@ -1070,7 +1070,7 @@ $_lang['resource_management'] = 'Manage resources';
 $_lang['resource_name'] = 'Resource name';
 
 #$_lang['resource_name_new'] = 'New Resource Name';
-$_lang['resource_name_new'] = 'New Resource Name';
+$_lang['resource_name_new'] = 'Tytuł duplikatu'; #
 
 #$_lang['resource_preview'] = 'Preview Resource';
 $_lang['resource_preview'] = '<abbr title="Wyświetla w nowym oknie/zakładce">Wyświetl</abbr>'; #

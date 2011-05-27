@@ -50,7 +50,7 @@ $_lang['document_new'] = 'Utwórz nowy Dokument'; #
 $_lang['documents'] = 'Documents';
 
 #$_lang['duplicate_uri_found'] = 'Resource [[+id]] is already using the URI [[+uri]]. Please enter a unique alias or use Freeze URI to manually override it.';
-$_lang['duplicate_uri_found'] = 'Resource [[+id]] is already using the URI [[+uri]]. Please enter a unique alias or use Freeze URI to manually override it.';
+$_lang['duplicate_uri_found'] = 'Wybrany alias [[+uri]] jest już używany przez zasób [[+id]]. Wprowadź unikalny alias lub użyj opcji niezależnego aliasu, aby go ręcznie wymusić.'; # ?
 
 #$_lang['empty_template'] = '(empty)';
 $_lang['empty_template'] = '(brak)'; #
@@ -74,7 +74,7 @@ $_lang['preview'] = 'Preview';
 $_lang['resource_access_message'] = 'Tutaj możesz zmienić przypisanie tego zasobu do Grup Zasobów.'; #
 
 #$_lang['resource_add_children_access_denied'] = 'You do not have permission to create a Resource in this location.';
-$_lang['resource_add_children_access_denied'] = 'You do not have permission to create a Resource in this location.';
+$_lang['resource_add_children_access_denied'] = 'Nie masz uprawnień do utworzenia nowego zasobu w tym miejscu.'; #
 
 #$_lang['resource_alias'] = 'Resource Alias';
 $_lang['resource_alias'] = 'Alias'; #
@@ -83,7 +83,7 @@ $_lang['resource_alias'] = 'Alias'; #
 $_lang['resource_alias_help'] = 'Opisowy adres do tego zasobu, który umożliwi wyświetlenie go przy użyciu URL:<br /><br /><code>http://twojserwis/alias</code><br /><br /><strong>Uwaga!</strong> Wymaga włączonej opcji przyjaznych URL.'; #
 
 #$_lang['resource_change_template_confirm'] = 'Are you sure you want to change the Template? WARNING: This will save your prior changes to the change and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save again when you are ready to save the Template change.';
-$_lang['resource_change_template_confirm'] = 'Are you sure you want to change the Template? WARNING: This will save your prior changes to the change and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save again when you are ready to save the Template change.';
+$_lang['resource_change_template_confirm'] = 'Czy na pewno chcesz zmienić szablon? <strong>Uwaga:</strong> Spowoduje to zapisanie dotychczasowych zmian i ponowne wczytanie strony. Upewnij się, że jesteś do tego przygotowany.<br /><br />Po ponownym wczytaniu strony, musisz zapisać zmiany, aby zachować nowe ustawienie szablonu.'; #
 
 #$_lang['resource_cacheable'] = 'Cacheable';
 $_lang['resource_cacheable'] = 'Pamięć podręczna'; #
@@ -113,7 +113,7 @@ $_lang['resource_content_type'] = 'Format zawartości'; #
 $_lang['resource_content_type_help'] = 'Określa format zawartości zasobu.'; #
 
 #$_lang['resource_create_access_denied'] = 'You do not have permission to create a Resource.';
-$_lang['resource_create_access_denied'] = 'You do not have permission to create a Resource.';
+$_lang['resource_create_access_denied'] = 'Nie masz uprawnień, aby utworzyć nowy zasób.'; # ?
 
 #$_lang['resource_create_here'] = 'Create a Resource Here';
 $_lang['resource_create_here'] = 'Nowy Dokument'; #
@@ -128,7 +128,7 @@ $_lang['resource_createdon'] = 'Utworzono'; #
 $_lang['resource_delete'] = 'Skasuj&hellip;'; #
 
 #$_lang['resource_delete_confirm'] = 'Are you sure you want to delete this resource?<br />NOTE: Any child resources will also be deleted!';
-$_lang['resource_delete_confirm'] = 'Are you sure you want to delete this resource?<br />NOTE: Any child resources will also be deleted!';
+$_lang['resource_delete_confirm'] = 'Czy na pewno chcesz skasować ten zasób?<br />Uwaga: Wszystkie zasoby podrzędne także zostaną skasowane!'; #
 
 #$_lang['resource_description'] = 'Description';
 $_lang['resource_description'] = 'Opis'; #
@@ -158,76 +158,76 @@ $_lang['resource_err_change_parent_to_folder'] = 'An error occurred while attemp
 $_lang['resource_err_class'] = 'The resource is not a valid [[+class]].';
 
 #$_lang['resource_err_create'] = 'An error occurred while trying to create the resource.';
-$_lang['resource_err_create'] = 'An error occurred while trying to create the resource.';
+$_lang['resource_err_create'] = 'Podczas tworzenia zasobu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_delete'] = 'An error occurred while trying to delete the resource.';
-$_lang['resource_err_delete'] = 'An error occurred while trying to delete the resource.';
+$_lang['resource_err_delete'] = 'Podczas usuwania zasobu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_delete_children'] = 'An error occurred while deleting the children of the resource.';
-$_lang['resource_err_delete_children'] = 'An error occurred while deleting the children of the resource.';
+$_lang['resource_err_delete_children'] = 'Podczas usuwania zasobów podrzędnych wystąpił błąd.'; # ?
 
 #$_lang['resource_err_delete_container_sitestart'] = 'The resource you are trying to delete is a container containing resource [[+id]]. This resource is registered as the \'Site start\' resource, and cannot be deleted. Please assign another resource as your \'Site start\' resource and try again.';
-$_lang['resource_err_delete_container_sitestart'] = 'The resource you are trying to delete is a container containing resource [[+id]]. This resource is registered as the \'Site start\' resource, and cannot be deleted. Please assign another resource as your \'Site start\' resource and try again.';
+$_lang['resource_err_delete_container_sitestart'] = 'Próbujesz usunąć zasób, który zawiera zasób [[+id]]. Ten zasób jest używany jako domyślny i nie może zostać skasowany! Przypisz inny zasób jako startowy i spróbuj ponownie.'; # ?
 
 #$_lang['resource_err_delete_container_siteunavailable'] = 'The resource you are trying to delete is a folder containing resource [[+id]]. This resource is registered as the \'Site unavailable page\' resource, and cannot be deleted. Please assign another resource as your \'Site unavailable page\' resource and try again.';
-$_lang['resource_err_delete_container_siteunavailable'] = 'The resource you are trying to delete is a folder containing resource [[+id]]. This resource is registered as the \'Site unavailable page\' resource, and cannot be deleted. Please assign another resource as your \'Site unavailable page\' resource and try again.';
+$_lang['resource_err_delete_container_siteunavailable'] = 'Próbujesz usunąć zasób, który zawiera zasób [[+id]]. Ten zasób jest używany jako strona błędu <abbr title="Nie znaleziono takiego dokumentu!">404</abbr> i nie może zostać skasowany!'; # ?
 
 #$_lang['resource_err_delete_sitestart'] = 'The resource is \'Site start\' and cannot be deleted!';
-$_lang['resource_err_delete_sitestart'] = 'The resource is \'Site start\' and cannot be deleted!';
+$_lang['resource_err_delete_sitestart'] = 'Ten zasób jest używany jako domyślny i nie może zostać skasowany!'; #
 
 #$_lang['resource_err_delete_siteunavailable'] = 'The resource is used as the \'Site unavailable page\' and cannot be deleted!';
-$_lang['resource_err_delete_siteunavailable'] = 'The resource is used as the \'Site unavailable page\' and cannot be deleted!';
+$_lang['resource_err_delete_siteunavailable'] = 'Ten zasób jest używany jako strona błędu <abbr title="Nie znaleziono takiego dokumentu!">404</abbr> i nie może zostać skasowany!'; #
 
 #$_lang['resource_err_duplicate'] = 'An error occurred while duplicating the resource.';
-$_lang['resource_err_duplicate'] = 'An error occurred while duplicating the resource.';
+$_lang['resource_err_duplicate'] = 'Podczas tworzenia duplikatu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_move_to_child'] = 'You cannot move a Resource to below one of its own children.';
-$_lang['resource_err_move_to_child'] = 'You cannot move a Resource to below one of its own children.';
+$_lang['resource_err_move_to_child'] = 'Nie można przenieść zasobu poniżej któregokolwiek z jego zasobów podrzędnych.'; # ?
 
 #$_lang['resource_err_move_sitestart'] = 'The resource is linked to the site_start variable and cannot be moved to another context!';
-$_lang['resource_err_move_sitestart'] = 'The resource is linked to the site_start variable and cannot be moved to another context!';
+$_lang['resource_err_move_sitestart'] = 'Ten zasób jest używany jako domyślny i nie może zostać przesunięty do innego kontekstu!'; # ?
 
 #$_lang['resource_err_nf'] = 'Resource not found.';
-$_lang['resource_err_nf'] = 'Resource not found.';
+$_lang['resource_err_nf'] = 'Nie znaleziono zasobu.'; # ?
 
 #$_lang['resource_err_nfs'] = 'Resource not found with ID: [[+id]]';
-$_lang['resource_err_nfs'] = 'Resource not found with ID: [[+id]]';
+$_lang['resource_err_nfs'] = 'Nie znaleziono zasobu z ID: [[+id]]'; # ?
 
 #$_lang['resource_err_ns'] = 'Resource not specified.';
-$_lang['resource_err_ns'] = 'Resource not specified.';
+$_lang['resource_err_ns'] = 'Nie określono zasobu.'; # ?
 
 #$_lang['resource_err_own_parent'] = 'The resource cannot be its own parent.';
-$_lang['resource_err_own_parent'] = 'The resource cannot be its own parent.';
+$_lang['resource_err_own_parent'] = 'Zasób nie może być nadrzędny dla samego siebie.'; # ?
 
 #$_lang['resource_err_publish']  = 'An error occurred while trying to publish the resource.';
-$_lang['resource_err_publish']  = 'An error occurred while trying to publish the resource.';
+$_lang['resource_err_publish']  = 'Podczas publikowania zasobu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_new_parent_nf'] = 'New parent resource with id [[+id]] not found.';
-$_lang['resource_err_new_parent_nf'] = 'New parent resource with id [[+id]] not found.';
+$_lang['resource_err_new_parent_nf'] = 'Nowy zasób nadrzędny o ID [[+id]] nie został znaleziony.'; # ?
 
 #$_lang['resource_err_remove'] = 'An error occurred while trying to remove the resource.';
-$_lang['resource_err_remove'] = 'An error occurred while trying to remove the resource.';
+$_lang['resource_err_remove'] = 'Podczas usuwania zasobu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_save'] = 'An error occurred while trying to save the resource.';
-$_lang['resource_err_save'] = 'An error occurred while trying to save the resource.';
+$_lang['resource_err_save'] = 'Podczas zapisywania zasobu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_select_parent'] = 'Please select a parent resource.';
 $_lang['resource_err_select_parent'] = 'Wybierz zasób nadrzędny.'; #
 
 #$_lang['resource_err_undelete'] = 'An error occurred while trying to undelete the resource.';
-$_lang['resource_err_undelete'] = 'An error occurred while trying to undelete the resource.';
+$_lang['resource_err_undelete'] = 'Podczas odzyskiwania zasobu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_undelete_children'] = 'An error occurred while trying to undelete the children of the resource.';
-$_lang['resource_err_undelete_children'] = 'An error occurred while trying to undelete the children of the resource.';
+$_lang['resource_err_undelete_children'] = 'Podczas odzyskiwania zasobów podrzędnych wystąpił błąd.'; # ?
 
 #$_lang['resource_err_unpublish'] = 'An error occurred while trying to unpublish the resource.';
-$_lang['resource_err_unpublish'] = 'An error occurred while trying to unpublish the resource.';
+$_lang['resource_err_unpublish'] = 'Podczas przerywania publikacji zasobu wystąpił błąd.'; # ?
 
 #$_lang['resource_err_unpublish_sitestart'] = 'The resource is linked to the site_start variable and cannot be unpublished!';
-$_lang['resource_err_unpublish_sitestart'] = 'The resource is linked to the site_start variable and cannot be unpublished!';
+$_lang['resource_err_unpublish_sitestart'] = 'Ten zasób jest używany jako domyślny i nie można przerwać jego publikacji!'; # ?
 
 #$_lang['resource_err_unpublish_sitestart_dates'] = 'The resource is linked to the site_start variable and cannot have publish or unpublish dates set!';
-$_lang['resource_err_unpublish_sitestart_dates'] = 'The resource is linked to the site_start variable and cannot have publish or unpublish dates set!';
+$_lang['resource_err_unpublish_sitestart_dates'] = 'Ten zasób jest używany jako domyślny i nie może posiadać dat rozpoczęcia i zakończenia publikacji!'; # ?
 
 #$_lang['resource_folder'] = 'Container';
 $_lang['resource_folder'] = 'Zasobnik'; # ?
@@ -236,10 +236,10 @@ $_lang['resource_folder'] = 'Zasobnik'; # ?
 $_lang['resource_folder_help'] = 'Jeżeli zaznaczone, ten zasób służy również jako zasobnik, tj. może zawierać inne zasoby i jego adres wyświetlany jest z ukośnikiem (<code>/</code>) na końcu. Zasobnik przypomina folder, ale może mieć także własną zawartość.'; #
 
 #$_lang['resource_group_resource_err_ae'] = 'The resource is already a part of that resource group.';
-$_lang['resource_group_resource_err_ae'] = 'The resource is already a part of that resource group.';
+$_lang['resource_group_resource_err_ae'] = 'Ten zasób jest już przypisany do tej Grupy Zasobów.'; # ?
 
 #$_lang['resource_group_resource_err_nf'] = 'The resource is not a part of that resource group.';
-$_lang['resource_group_resource_err_nf'] = 'The resource is not a part of that resource group.';
+$_lang['resource_group_resource_err_nf'] = 'Ten zasób nie jest przypisany do tej Grupy Zasobów.'; # ?
 
 #$_lang['resource_hide_from_menus'] = 'Hide From Menus';
 $_lang['resource_hide_from_menus'] = 'Ukrycie w menu'; #
@@ -299,7 +299,7 @@ $_lang['resource_parent_select_node'] = 'Wybierz zasób nadrzędny w menu.'; #
 $_lang['resource_publish'] = 'Rozpocznij publikację&hellip;'; # ? Nie ma dobrego antonimu dla 'Opublikuj'
 
 #$_lang['resource_publish_confirm'] = 'Publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead.<br /><br />Proceed?';
-$_lang['resource_publish_confirm'] = 'Publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead.<br /><br />Proceed?';
+$_lang['resource_publish_confirm'] = 'Użycie tego polecenie do rozpoczęcia publikacji spowoduje usunięcie zaplanowanych dat rozpoczęcia i zakończenia publikacji, o ile zostały zdefiniowane. Jeżeli chcesz je teraz zdefiniować, bądź teraz rozpocząc publikację, ale zachować te daty, dokonaj edycji i ustaw właściwą opcję.<br /><br />Czy chcesz kontynuować?'; #
 
 #$_lang['resource_publishdate'] = 'Publish Date';
 $_lang['resource_publishdate'] = 'Rozpoczęcie publikacji'; #
@@ -371,7 +371,7 @@ $_lang['resource_undelete'] = 'Przywróć'; #
 $_lang['resource_unpublish'] = 'Przerwij publikację&hellip;'; # ? Nie ma dobrego antonimu dla 'Opublikuj'
 
 #$_lang['resource_unpublish_confirm'] = 'Un-publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';
-$_lang['resource_unpublish_confirm'] = 'Un-publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';
+$_lang['resource_unpublish_confirm'] = 'Użycie tego polecenie do przerwania publikacji spowoduje usunięcie zaplanowanych dat rozpoczęcia i zakończenia publikacji, o ile zostały zdefiniowane. Jeżeli chcesz je teraz zdefiniować, bądź teraz przerwać publikację, ale zachować te daty, dokonaj edycji i ustaw właściwą opcję.<br /><br />Czy chcesz kontynuować?'; #
 
 #$_lang['resource_unpublishdate'] = 'Unpublish date';
 $_lang['resource_unpublishdate'] = 'Zakończenie publikacji'; #
