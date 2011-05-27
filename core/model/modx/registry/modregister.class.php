@@ -62,22 +62,18 @@ class modRegister {
      */
     var $_key = null;
 
-    /**#@+
+    /**
      * Construct a new register.
      *
      * @param modX &$modx A reference to a modX instance.
+     * @param string $key A valid PHP variable which will be set on the modRegistry instance.
      * @param array $options Optional array of registry options.
      */
-    function modRegister(& $modx, $key, $options = array()) {
-        $this->__construct($modx, $key, $options);
-    }
-    /**@ignore*/
     function __construct(& $modx, $key, $options = array()) {
         $this->modx =& $modx;
         $this->_key = $key;
         $this->options = $options;
     }
-    /**#@-*/
 
     /**
      * Reads any undigested messages from subscribed topics.
