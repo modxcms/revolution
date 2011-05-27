@@ -14,7 +14,7 @@ $_lang['access'] = 'Przypisanie'; #
 $_lang['cache_output'] = 'Cache Output';
 
 #$_lang['changes'] = 'Changes';
-$_lang['changes'] = 'Changes';
+$_lang['changes'] = 'Daty i autorzy'; #
 
 #$_lang['class_key'] = 'Class Key';
 $_lang['class_key'] = 'Class Key'; # Celowo nie tłumaczone.
@@ -119,10 +119,10 @@ $_lang['resource_create_access_denied'] = 'You do not have permission to create 
 $_lang['resource_create_here'] = 'Nowy Dokument'; #
 
 #$_lang['resource_createdby'] = 'Created By';
-$_lang['resource_createdby'] = 'Created By';
+$_lang['resource_createdby'] = 'Utworzył(a)'; #
 
 #$_lang['resource_createdon'] = 'Created On';
-$_lang['resource_createdon'] = 'Created On';
+$_lang['resource_createdon'] = 'Utworzono'; #
 
 #$_lang['resource_delete'] = 'Delete Resource';
 $_lang['resource_delete'] = 'Skasuj&hellip;'; #
@@ -146,10 +146,10 @@ $_lang['resource_duplicate_confirm'] = 'Are you sure you want to duplicate this 
 $_lang['resource_edit'] = 'Edytuj'; #
 
 #$_lang['resource_editedby'] = 'Edited By';
-$_lang['resource_editedby'] = 'Edited By';
+$_lang['resource_editedby'] = 'Zaktualizował(a)'; #
 
 #$_lang['resource_editedon'] = 'Edited On';
-$_lang['resource_editedon'] = 'Edited On';
+$_lang['resource_editedon'] = 'Zaktualizowano'; #
 
 #$_lang['resource_err_change_parent_to_folder'] = 'An error occurred while attempting to change the resource\'s parent to a folder.';
 $_lang['resource_err_change_parent_to_folder'] = 'An error occurred while attempting to change the resource\'s parent to a folder.';
@@ -314,7 +314,7 @@ $_lang['resource_published'] = 'Opublikowany'; #
 $_lang['resource_published_help'] = 'Jeżeli zaznaczone, zasób zostanie opublikowany natychmiast po zapisaniu zmian.'; # ? To nie do końca opisuje poprawnie opisuje funkcję tego checkboxa.
 
 #$_lang['resource_publishedby'] = 'Published By';
-$_lang['resource_publishedby'] = 'Published By';
+$_lang['resource_publishedby'] = 'Opublikował(a)'; #
 
 #$_lang['resource_publishedon'] = 'Published On';
 $_lang['resource_publishedon'] = 'Opublikowano'; #
