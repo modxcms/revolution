@@ -11,7 +11,7 @@
 $_lang['access'] = 'Przypisanie'; #
 
 #$_lang['cache_output'] = 'Cache Output';
-$_lang['cache_output'] = 'Cache Output';
+$_lang['cache_output'] = 'Zawartość pamięci podręcznej'; #
 
 #$_lang['changes'] = 'Changes';
 $_lang['changes'] = 'Daty i autorzy'; #
@@ -278,7 +278,7 @@ $_lang['resource_menutitle_help'] = 'Tytuł skrócony, zazwyczaj używany w menu
 $_lang['resource_new'] = 'New Resource';
 
 #$_lang['resource_notcached'] = 'This resource has not (yet) been cached.';
-$_lang['resource_notcached'] = 'This resource has not (yet) been cached.';
+$_lang['resource_notcached'] = 'Ten zasób nie został (jeszcze) zapisany do pamięci podręcznej.'; #
 
 #$_lang['resource_pagetitle'] = 'Title';
 $_lang['resource_pagetitle'] = 'Tytuł'; #
