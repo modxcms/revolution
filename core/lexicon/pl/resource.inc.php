@@ -17,7 +17,7 @@ $_lang['cache_output'] = 'Cache Output';
 $_lang['changes'] = 'Changes';
 
 #$_lang['class_key'] = 'Class Key';
-$_lang['class_key'] = 'Class Key';
+$_lang['class_key'] = 'Class Key'; # Celowo nie tłumaczone.
 
 #$_lang['context'] = 'Context';
 $_lang['context'] = 'Context';
@@ -65,7 +65,7 @@ $_lang['markup'] = 'Markup/Structure';
 $_lang['none'] = 'None';
 
 #$_lang['page_settings'] = 'Page Settings';
-$_lang['page_settings'] = 'Page Settings';
+$_lang['page_settings'] = 'Ustawienia'; #
 
 #$_lang['preview'] = 'Preview';
 $_lang['preview'] = 'Preview';
@@ -86,10 +86,10 @@ $_lang['resource_alias_help'] = 'Opisowy adres do tego zasobu, który umożliwi 
 $_lang['resource_change_template_confirm'] = 'Are you sure you want to change the Template? WARNING: This will save your prior changes to the change and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save again when you are ready to save the Template change.';
 
 #$_lang['resource_cacheable'] = 'Cacheable';
-$_lang['resource_cacheable'] = 'Cacheable';
+$_lang['resource_cacheable'] = 'Pamięć podręczna'; #
 
 #$_lang['resource_cacheable_help'] = 'When enabled, the resource will be saved to the cache.';
-$_lang['resource_cacheable_help'] = 'When enabled, the resource will be saved to the cache.';
+$_lang['resource_cacheable_help'] = 'Jeżeli zaznaczone, zawartość zasobu będzie przechowywana w pamięci podręcznej dla szybszego wyświetlania.'; #
 
 #$_lang['resource_cancel_dirty_confirm'] = 'You have changes pending; are you sure you want to cancel?';
 $_lang['resource_cancel_dirty_confirm'] = 'You have changes pending; are you sure you want to cancel?';
@@ -101,16 +101,16 @@ $_lang['resource_class_key_help'] = 'This is the class key of the resource, show
 $_lang['resource_content'] = 'Zawartość'; #
 
 #$_lang['resource_contentdispo'] = 'Content Disposition';
-$_lang['resource_contentdispo'] = 'Content Disposition';
+$_lang['resource_contentdispo'] = 'Traktowanie zawartości'; #
 
 #$_lang['resource_contentdispo_help'] = 'Use the content disposition field to specify how this resource will be handled by the web browser. For file downloads select the Attachment option.';
-$_lang['resource_contentdispo_help'] = 'Use the content disposition field to specify how this resource will be handled by the web browser. For file downloads select the Attachment option.';
+$_lang['resource_contentdispo_help'] = 'Określa zachowanie przeglądarki przy otwieraniu zasobu: wyświetlenie w przeglądarce lub pobranie w postaci pliku.'; #
 
 #$_lang['resource_content_type'] = 'Content Type';
-$_lang['resource_content_type'] = 'Content Type';
+$_lang['resource_content_type'] = 'Format zawartości'; #
 
 #$_lang['resource_content_type_help'] = 'The content type for this resource. If you\'re not sure which content type the resource should have, just leave it as text/html.';
-$_lang['resource_content_type_help'] = 'The content type for this resource. If you\'re not sure which content type the resource should have, just leave it as text/html.';
+$_lang['resource_content_type_help'] = 'Określa format zawartości zasobu.'; #
 
 #$_lang['resource_create_access_denied'] = 'You do not have permission to create a Resource.';
 $_lang['resource_create_access_denied'] = 'You do not have permission to create a Resource.';
@@ -230,10 +230,10 @@ $_lang['resource_err_unpublish_sitestart'] = 'The resource is linked to the site
 $_lang['resource_err_unpublish_sitestart_dates'] = 'The resource is linked to the site_start variable and cannot have publish or unpublish dates set!';
 
 #$_lang['resource_folder'] = 'Container';
-$_lang['resource_folder'] = 'Container';
+$_lang['resource_folder'] = 'Zasobnik'; # ?
 
 #$_lang['resource_folder_help'] = 'Check this to make the Resource also act as a Container for other Resources. A \'Container\' is like a folder, only it can also have content.';
-$_lang['resource_folder_help'] = 'Check this to make the Resource also act as a Container for other Resources. A \'Container\' is like a folder, only it can also have content.';
+$_lang['resource_folder_help'] = 'Jeżeli zaznaczone, ten zasób służy również jako zasobnik, tj. może zawierać inne zasoby i jego adres wyświetlany jest z ukośnikiem (<code>/</code>) na końcu. Zasobnik przypomina folder, ale może mieć także własną zawartość.'; #
 
 #$_lang['resource_group_resource_err_ae'] = 'The resource is already a part of that resource group.';
 $_lang['resource_group_resource_err_ae'] = 'The resource is already a part of that resource group.';
@@ -302,10 +302,10 @@ $_lang['resource_publish'] = 'Rozpocznij publikację&hellip;'; # ? Nie ma dobreg
 $_lang['resource_publish_confirm'] = 'Publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead.<br /><br />Proceed?';
 
 #$_lang['resource_publishdate'] = 'Publish Date';
-$_lang['resource_publishdate'] = 'Publish Date';
+$_lang['resource_publishdate'] = 'Rozpoczęcie publikacji'; #
 
 #$_lang['resource_publishdate_help'] = 'If you set a publish date, the resource will be published as soon as the publish date is reached. Click on the calendar icon to select a date, or leave it blank to set it so the resource is never automatically published.';
-$_lang['resource_publishdate_help'] = 'If you set a publish date, the resource will be published as soon as the publish date is reached. Click on the calendar icon to select a date, or leave it blank to set it so the resource is never automatically published.';
+$_lang['resource_publishdate_help'] = 'Data, po upływie której publikacja zasobu <strong>zostanie rozpoczęta</strong>. Pozostaw puste, aby nie włączać tej opcji.'; #
 
 #$_lang['resource_published'] = 'Published';
 $_lang['resource_published'] = 'Opublikowany'; #
@@ -317,25 +317,25 @@ $_lang['resource_published_help'] = 'Jeżeli zaznaczone, zasób zostanie opublik
 $_lang['resource_publishedby'] = 'Published By';
 
 #$_lang['resource_publishedon'] = 'Published On';
-$_lang['resource_publishedon'] = 'Published On';
+$_lang['resource_publishedon'] = 'Opublikowano'; #
 
 #$_lang['resource_publishedon_help'] = 'The date the resource was published.';
-$_lang['resource_publishedon_help'] = 'The date the resource was published.';
+$_lang['resource_publishedon_help'] = 'Data, od której publikacja <strong>została rozpoczęta</strong>.'; #
 
 #$_lang['resource_refresh'] = 'Refresh Resource';
 $_lang['resource_refresh'] = 'Odśwież'; #
 
 #$_lang['resource_richtext'] = 'Rich Text';
-$_lang['resource_richtext'] = 'Rich Text';
+$_lang['resource_richtext'] = 'Edytor wizualny'; #
 
 #$_lang['resource_richtext_help'] = 'When enabled MODX will use the rich text editor for editing resources. If your resources contain JavaScript and forms, uncheck this to edit in HTML-only mode so the editor won\'t mess your resources up.';
-$_lang['resource_richtext_help'] = 'When enabled MODX will use the rich text editor for editing resources. If your resources contain JavaScript and forms, uncheck this to edit in HTML-only mode so the editor won\'t mess your resources up.';
+$_lang['resource_richtext_help'] = 'Jeżeli zaznaczone, do edycji zostanie użyty edytor wizualny. Jeżeli treść zawiera JavaScript lub formularze, odznacz tę opcję, aby edytor jej nie zniekształcił.'; #
 
 #$_lang['resource_searchable'] = 'Searchable';
-$_lang['resource_searchable'] = 'Searchable';
+$_lang['resource_searchable'] = 'Wyszukiwany'; # ?
 
 #$_lang['resource_searchable_help'] = 'When enabled, the resource is able to be searched. This setting can also be used for other purposes in your snippets.';
-$_lang['resource_searchable_help'] = 'When enabled, the resource is able to be searched. This setting can also be used for other purposes in your snippets.';
+$_lang['resource_searchable_help'] = 'Jeżeli zaznaczone, zasób jest uwzględniany w wynikach wyszukiwania.'; #
 
 #$_lang['resource_settings'] = 'Resource Settings';
 $_lang['resource_settings'] = 'Resource Settings';
@@ -353,10 +353,10 @@ $_lang['resource_summary'] = 'Podsumowanie'; #
 $_lang['resource_summary_help'] = 'Krótkie podsumowanie treści.'; #
 
 #$_lang['resource_syncsite'] = 'Empty Cache';
-$_lang['resource_syncsite'] = 'Empty Cache';
+$_lang['resource_syncsite'] = 'Odświeżanie przy zapisie'; #
 
 #$_lang['resource_syncsite_help'] = 'When enabled this will make MODX empty the cache after you save the resource. This way your visitors will not see an older version of the resource.';
-$_lang['resource_syncsite_help'] = 'When enabled this will make MODX empty the cache after you save the resource. This way your visitors will not see an older version of the resource.';
+$_lang['resource_syncsite_help'] = 'Jeżeli zaznaczone, zawartość pamięci podręcznej będzie usuwana przy zapisywaniu, przez co zmiany będą natychmiast widoczne. Jeżeli niezaznaczone, zmiany staną się widoczne dopiero po ręcznym odświeżeniu zasobu.'; #
 
 #$_lang['resource_template'] = 'Uses Template';
 $_lang['resource_template'] = 'Szablon'; #
@@ -374,10 +374,10 @@ $_lang['resource_unpublish'] = 'Przerwij publikację&hellip;'; # ? Nie ma dobreg
 $_lang['resource_unpublish_confirm'] = 'Un-publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';
 
 #$_lang['resource_unpublishdate'] = 'Unpublish date';
-$_lang['resource_unpublishdate'] = 'Unpublish date';
+$_lang['resource_unpublishdate'] = 'Zakończenie publikacji'; #
 
 #$_lang['resource_unpublishdate_help'] = 'If you set an unpublish date, the resource will be unpublished as soon as the unpublish date is reached. Click on the calendar icon to select a date, or leave it blank to set it so the resource is never automatically unpublished.';
-$_lang['resource_unpublishdate_help'] = 'If you set an unpublish date, the resource will be unpublished as soon as the unpublish date is reached. Click on the calendar icon to select a date, or leave it blank to set it so the resource is never automatically unpublished.';
+$_lang['resource_unpublishdate_help'] = 'Data, po upływie której publikacja zasobu <strong>zostanie zakończona</strong>. Pozostaw puste, aby nie włączać tej opcji.'; #
 
 #$_lang['resource_unpublished'] = 'Unpublished';
 $_lang['resource_unpublished'] = 'Unpublished';
@@ -386,16 +386,16 @@ $_lang['resource_unpublished'] = 'Unpublished';
 $_lang['resource_untitled'] = 'Untitled Resource';
 
 #$_lang['resource_uri'] = 'URI';
-$_lang['resource_uri'] = 'URI';
+$_lang['resource_uri'] = 'Alias'; #
 
 #$_lang['resource_uri_help'] = 'The full relative URL for this Resource.';
-$_lang['resource_uri_help'] = 'The full relative URL for this Resource.';
+$_lang['resource_uri_help'] = 'Pełny relatywny adres URL dla tego zasobu z uwzględnieniem suffiksu.'; #
 
 #$_lang['resource_uri_override'] = 'Freeze URI';
-$_lang['resource_uri_override'] = 'Freeze URI';
+$_lang['resource_uri_override'] = 'Niezależny alias'; #
 
 #$_lang['resource_uri_override_help'] = 'Checking this will allow you to freeze the URI for this Resource at the value in the textbox below.';
-$_lang['resource_uri_override_help'] = 'Checking this will allow you to freeze the URI for this Resource at the value in the textbox below.';
+$_lang['resource_uri_override_help'] = 'Jeżeli zaznaczone, alias do tego zasobu zostanie na sztywno zapisany z poniższą wartością.'; #
 
 #$_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';
 $_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';

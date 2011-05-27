@@ -80,7 +80,7 @@ $_lang['assets'] = 'Assets';
 $_lang['at'] = 'At';
 
 #$_lang['attachment'] = 'Attachment';
-$_lang['attachment'] = 'Attachment';
+$_lang['attachment'] = 'Pobieranie'; #
 
 #$_lang['attributes'] = 'Attributes';
 $_lang['attributes'] = 'Attributes';
@@ -284,7 +284,7 @@ $_lang['db_info_sqlsrv'] = 'You may rebuild a table\'s index by clicking on the 
 $_lang['delete'] = 'Delete';
 
 #$_lang['deleted'] = 'Deleted';
-$_lang['deleted'] = 'Deleted';
+$_lang['deleted'] = 'Skasowany'; #
 
 #$_lang['description'] = 'Description';
 $_lang['description'] = 'Description';
@@ -593,7 +593,7 @@ $_lang['info'] = 'Twoje konto użytkownika'; # Is used for what 'yourinfo_title'
 $_lang['information'] = 'Information';
 
 #$_lang['inline'] = 'Inline';
-$_lang['inline'] = 'Inline';
+$_lang['inline'] = 'Wyświetlanie'; #
 
 #$_lang['insert'] = 'Insert';
 $_lang['insert'] = 'Insert';
