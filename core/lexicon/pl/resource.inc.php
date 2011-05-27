@@ -446,7 +446,7 @@ $_lang['symlink_message'] = 'A symlink is a symbolic link to another resource in
 $_lang['symlink_new'] = 'New Symlink';
 
 #$_lang['template_variables'] = 'Template Variables';
-$_lang['template_variables'] = 'Template Variables';
+$_lang['template_variables'] = 'Pola danych'; # ? Zmienne szablonu?
 
 #$_lang['untitled_resource'] = 'Untitled Resource';
 $_lang['untitled_resource'] = 'Untitled Resource';

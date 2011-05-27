@@ -1148,7 +1148,7 @@ $_lang['service_url'] = 'Service URL';
 $_lang['set'] = 'Set';
 
 #$_lang['set_to_default'] = 'Set to Default';
-$_lang['set_to_default'] = 'Set to Default';
+$_lang['set_to_default'] = 'Ustaw wartość domyślną'; #
 
 #$_lang['setting'] = 'Setting';
 $_lang['setting'] = 'Setting';
@@ -1298,7 +1298,7 @@ $_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_type'] = 'Input Type';
 
 #$_lang['tv_value_inherited'] = 'Value Inherited';
-$_lang['tv_value_inherited'] = 'Value Inherited';
+$_lang['tv_value_inherited'] = 'Wartość odziedziczona'; #
 
 #$_lang['type'] = 'Type';
 $_lang['type'] = 'Type';
