@@ -8,7 +8,7 @@
 */
 
 #$_lang['login_activation_key_err'] = 'Activation key does not match! Please check your activation email and make sure you loaded the right URL.';
-$_lang['login_activation_key_err'] = 'Activation key does not match! Please check your activation email and make sure you loaded the right URL.';
+$_lang['login_activation_key_err'] = 'Token aktywacji jest niepoprawny! Sprawdź wiadomość z aktywacją konta i upewnij się, że podałeś prawidłowy adres URL.'; # ?
 
 #$_lang['login_blocked_admin'] = 'You have been blocked from the manager by an administrator.';
 $_lang['login_blocked_admin'] = 'Twoje konto użytkownika zostało zablokowane przez administratora.'; # ?
@@ -56,7 +56,7 @@ $_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxc
 $_lang['login_password'] = 'Hasło:'; #
 
 #$_lang['login_password_reset_act_sent'] = 'Password Reset Activation email sent. Please check your inbox.';
-$_lang['login_password_reset_act_sent'] = 'Password Reset Activation email sent. Please check your inbox.';
+$_lang['login_password_reset_act_sent'] = 'Wiadomość z instrukcją aktywacji aktywacji konta została wysłana na podany adres email.'; # ?
 
 #$_lang['login_remember'] = 'Remember me';
 $_lang['login_remember'] = 'Zapamiętaj mnie'; #
@@ -68,7 +68,7 @@ $_lang['login_send_activation_email'] = 'Wyślij'; #
 $_lang['login_title'] = 'Logowanie do panelu administracyjnego MODX'; #
 
 #$_lang['login_user_err_nf_email'] = 'User not found with that email. Please try again.';
-$_lang['login_user_err_nf_email'] = 'User not found with that email. Please try again.';
+$_lang['login_user_err_nf_email'] = 'Nie znaleziono konta użytkownika odpowiadającego temu adresowi email. Spróbuj ponownie.'; # ?
 
 #$_lang['login_username'] = 'Username: ';
 $_lang['login_username'] = 'Login:'; #
