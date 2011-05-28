@@ -143,6 +143,7 @@ class modOutputFilter {
 +                            $condition[] = intval($user->isMember($grps));
 
                          }
+                        break;
                     case 'or':
                         $condition[]= "||";
                         break;
