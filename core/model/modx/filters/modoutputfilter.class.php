@@ -122,7 +122,7 @@ class modOutputFilter {
                         break;
                     case 'ismember':
                     case 'memberof':
- case 'mo':
+                    case 'mo':
 
 +                        $grps = (strlen($m_val) > 0) ? explode(',', $m_val) : '';
 
