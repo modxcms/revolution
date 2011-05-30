@@ -122,13 +122,27 @@ class modOutputFilter {
                         break;
                     case 'ismember':
                     case 'memberof':
-                    case 'mo': /* Is Member Of  (same as inrole but this one can be stringed as a conditional) */
-                        if (empty($output) || $output == "&_PHX_INTERNAL_&") {
-                            $output= $this->modx->user->get('id');
-                        }
-                        $grps= (strlen($m_val) > 0) ? explode(',', $m_val) : array ();
-                        $user = $this->modx->getObject('modUser',$output);
-                        $condition[]= $user->isMember($grps);
+                    case 'mo':
+
++                        $grps = (strlen($m_val) > 0) ? explode(',', $m_val) : '';
+
++                        if (empty ($grps)) {
+
++                            $condition[] = '1';
+
++                        } else {
+
++                            /* holder over from PHx in evolution? */
+
++                            $output = ($output == "&_PHX_INTERNAL_&") ? '' : $output;
+
++                            /* get a user object based on input, or get current user */
+
++                            $user = !empty($input) ? $this->modx->getObject('modUser', $output) : $this->modx->user;
+
++                            $condition[] = intval($user->isMember($grps));
+
+                         }
                         break;
                     case 'or':
                         $condition[]= "||";
