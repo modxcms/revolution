@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-lexicon-management' });
+    MODx.add('modx-page-lexicon-management');
 });
 
 /**
@@ -13,7 +13,6 @@ MODx.page.LexiconManagement = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-lexicon'
-            ,renderTo: 'modx-panel-lexicon-div'
         }]
         ,buttons: [{
             text: _('help_ex')

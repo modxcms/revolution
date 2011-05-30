@@ -25,19 +25,14 @@ MODx.panel.SystemSettings = function(config) {
             ,items: [{
                 html: '<p>'+_('settings_desc')+'</p>'
             },{
-                id: 'modx-system-settings-grid-ct'
+                xtype: 'modx-grid-system-settings'
+				,preventSaveRefresh: true
             },{
                 html: MODx.onSiteSettingsRender
             }]
         }]
     });
     MODx.panel.SystemSettings.superclass.constructor.call(this,config);
-    /* load after b/c of safari/ie focus bug */
-    MODx.load({
-        xtype: 'modx-grid-system-settings'
-        ,renderTo: 'modx-system-settings-grid-ct'
-        ,preventSaveRefresh: true
-    });
 };
 Ext.extend(MODx.panel.SystemSettings,MODx.FormPanel);
 Ext.reg('modx-panel-system-settings',MODx.panel.SystemSettings);
