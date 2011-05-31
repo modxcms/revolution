@@ -122,6 +122,12 @@ $_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets fro
 $_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
 $_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
 
+$_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
+$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+
+$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+
 $_lang['setting_cache_default'] = 'Cacheable default';
 $_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
@@ -519,6 +525,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Use this setting to customize the 
 
 $_lang['setting_session_cookie_secure'] = 'Session Cookie Secure';
 $_lang['setting_session_cookie_secure_desc'] = 'Enable this setting to use secure session cookies.';
+
+$_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Session Handler Class Name';
 $_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'modSessionHandler\'.  Leave this blank to use standard PHP session management.';
