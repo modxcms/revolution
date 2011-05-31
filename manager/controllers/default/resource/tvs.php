@@ -35,7 +35,7 @@ $c = $modx->newQuery('modCategory');
 $c->sortby('category','ASC');
 $categories = $modx->getCollection('modCategory',$c);
 $emptycat = $modx->newObject('modCategory');
-$emptycat->set('category','');
+$emptycat->set('category',ucfirst($modx->lexicon('uncategorized')));
 $emptycat->id = 0;
 $categories[0] = $emptycat;
 $tvMap = array();
