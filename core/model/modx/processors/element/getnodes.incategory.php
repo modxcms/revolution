@@ -79,6 +79,10 @@ foreach ($elements as $element) {
     if ($canEditElement && $element->checkPolicy(array('save' => true, 'view' => true))) $class[] = 'pedit';
     if ($canDeleteElement && $element->checkPolicy('remove')) $class[] = 'pdelete';
     if ($canNewCategory) $class[] = 'pnewcat';
+    if ($element->get('locked')) $class[] = 'element-node-locked';
+    if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
+        $class[] = 'element-node-disabled';
+    }
 
     $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(
