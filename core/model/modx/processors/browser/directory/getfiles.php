@@ -24,6 +24,7 @@ if (!empty($wctx)) {
 } else {
     $workingContext =& $modx->context;
 }
+$modAuth = $modx->site_id.$modx->user->get('id').session_id();
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 
@@ -127,7 +128,9 @@ foreach (new DirectoryIterator($fullPath) as $file) {
                 'src' => $url,
                 'w' => $thumbWidth,
                 'h' => $thumbHeight,
-                'HTTP_MODAUTH' => $modx->site_id,
+                'f' => 'jpg',
+                'q' => 90,
+                'HTTP_MODAUTH' => $modAuth,
                 'wctx' => $workingContext->get('key'),
                 'basePath' => $basePath,
                 'basePathRelative' => $basePathRelative,
@@ -138,7 +141,9 @@ foreach (new DirectoryIterator($fullPath) as $file) {
                 'src' => $url,
                 'w' => $imageWidth,
                 'h' => $imageHeight,
-                'HTTP_MODAUTH' => $modx->site_id,
+                'HTTP_MODAUTH' => $modAuth,
+                'f' => 'jpg',
+                'q' => 90,
                 'wctx' => $workingContext->get('key'),
                 'basePath' => $basePath,
                 'basePathRelative' => $basePathRelative,
