@@ -21,6 +21,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         if (this.checkIfLoaded(this.config.record)) {
             this.fp.getForm().baseParams = {
                 action: 'duplicate'
+                ,prefixDuplicate: true
                 ,id: this.config.resource
             };
             return false;
@@ -59,6 +60,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             ,baseParams: this.config.baseParams || {
                 action: 'duplicate'
                 ,id: this.config.resource
+                ,prefixDuplicate: true
             }
             ,labelWidth: 125
             ,defaultType: 'textfield'

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4750] Fix various issues with duplicating Resources, such as new name not prefixed and incorrect menuindex
 - [#4910] Fix bug where ResourceList TV type could not be marked as required
 - [#4915] Fix UI glitch when creating both an Access Policy and its Template on same page load
 - [#4916] Fix issue where cache clear checkbox was always being cleared on template save

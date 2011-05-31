@@ -98,7 +98,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var w = MODx.load({
             xtype: 'modx-window-resource-duplicate'
             ,resource: id
-            ,is_folder: !node.attributes.hasChildren
+            ,is_folder: r.is_folder
             ,listeners: {
                 'success': {fn:function() {this.refreshNode(node.id);},scope:this}
             }
