@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#5197] Provide map of derivative classes for introspection
 - [#5147] Fix xPDOIterator ignoring criteria that is not already an object
 
 xPDO 2.1.5-pl (July 5, 2011)
