@@ -16,11 +16,11 @@ unset($classes);
 /* change certain settings xtypes to password */
 $setting = $modx->getObject('modSystemSetting',array('key' => 'mail_smtp_pass'));
 if ($setting) {
-    $setting->set('xtype','password');
+    $setting->set('xtype','text-password');
     $setting->save();
 }
 $setting = $modx->getObject('modSystemSetting',array('key' => 'proxy_password'));
 if ($setting) {
-    $setting->set('xtype','password');
+    $setting->set('xtype','text-password');
     $setting->save();
 }
