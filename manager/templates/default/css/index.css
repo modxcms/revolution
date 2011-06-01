@@ -108,6 +108,7 @@ hr {
 
 #modx-content {
     padding: 0;
+	overflow: scroll;
 }
 
 #modx-container {
