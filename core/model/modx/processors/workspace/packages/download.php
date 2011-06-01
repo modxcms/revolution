@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.workspace.packages
  */
+$modx->lexicon->load('workspace');
 if (empty($scriptProperties['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
 
 /* grab location and signature */
