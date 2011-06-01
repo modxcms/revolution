@@ -285,6 +285,7 @@ $_lang['pagetitle'] = 'Resource\'s title';
 $_lang['page_title'] = 'Resource Title';
 $_lang['parameter'] = 'Parameter';
 $_lang['parameters'] = 'Parameters';
+$_lang['parent'] = 'Parent';
 $_lang['password'] = 'Password';
 $_lang['path'] = 'Path';
 $_lang['per_page'] = 'Per Page';

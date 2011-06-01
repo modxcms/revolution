@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4896] Fix issue where New Category window is not cleared on each load
 - [#4934] Fix missing lexicon load call in package download processor
 - [#4927] Gray out disabled plugins in elements tree, italicize locked elements
 - [#4921] Ensure Category names are not ever capitalized when displayed as tabs
