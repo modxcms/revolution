@@ -399,6 +399,7 @@ MODx.combo.xType = function(config) {
                 ,[_('template'),'modx-combo-template']
                 ,[_('user'),'modx-combo-user']
                 ,[_('usergroup'),'modx-combo-usergroup']
+                ,[_('language'),'modx-combo-language']
             ]
         })
         ,displayField: 'd'
