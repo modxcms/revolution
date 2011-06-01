@@ -741,7 +741,7 @@ $settings['mail_smtp_pass']= $xpdo->newObject('modSystemSetting');
 $settings['mail_smtp_pass']->fromArray(array (
   'key' => 'mail_smtp_pass',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'password',
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
@@ -903,7 +903,7 @@ $settings['proxy_password']= $xpdo->newObject('modSystemSetting');
 $settings['proxy_password']->fromArray(array (
   'key' => 'proxy_password',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'password',
   'namespace' => 'core',
   'area' => 'proxy',
   'editedon' => null,
