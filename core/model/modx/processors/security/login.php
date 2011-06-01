@@ -16,7 +16,7 @@ $givenPassword = $scriptProperties['password'];
 $rememberme= isset ($scriptProperties['rememberme']) ? ($scriptProperties['rememberme'] == 'on' || $scriptProperties['rememberme'] == true) : false;
 $lifetime= (integer) $modx->getOption('lifetime', $scriptProperties, $modx->getOption('session_cookie_lifetime', null,0));
 $loginContext= isset ($scriptProperties['login_context']) ? $scriptProperties['login_context'] : $modx->context->get('key');
-$addContexts= isset ($scriptProperties['add_contexts']) ? explode(',', $scriptProperties['add_contexts']) : array();
+$addContexts= isset ($scriptProperties['add_contexts']) && !empty($scriptProperties['add_contexts']) ? explode(',', $scriptProperties['add_contexts']) : array();
 
 /* Events are fired based on the primary loginContext */
 $mgrEvents = ($loginContext == 'mgr');

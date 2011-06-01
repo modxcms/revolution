@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Ensure login/logout processors do not add Contexts with empty keys
 - [#3145] Ensure mail_smtp_pass and proxy_password System Settings use password xtype
 - [#4360] Show current context name on MODx.Browser window for reference
 - [#4881] Fix issue where modx-combo-language was missing from system setting editing screen
