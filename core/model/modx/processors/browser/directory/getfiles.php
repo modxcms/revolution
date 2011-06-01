@@ -24,7 +24,7 @@ if (!empty($wctx)) {
 } else {
     $workingContext =& $modx->context;
 }
-$modAuth = $modx->site_id.$modx->user->get('id').session_id();
+$modAuth = $_SESSION["modx.{$modx->context->get('key')}.user.token"];
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 

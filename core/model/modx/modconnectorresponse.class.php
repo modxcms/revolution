@@ -45,7 +45,7 @@ class modConnectorResponse extends modResponse {
         /* backwards compat */
         $error =& $this->modx->error;
 
-        $siteId = $this->modx->site_id.$this->modx->user->get('id').session_id();
+        $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
 
         /* ensure headers are sent for proper authentication */
         if (!isset($_SERVER['HTTP_MODAUTH']) && !isset($_REQUEST['HTTP_MODAUTH'])) {

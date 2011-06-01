@@ -246,7 +246,7 @@ class modManagerResponse extends modResponse {
         }
 
         if ($loadLayout) {
-            $siteId = $this->modx->site_id.$this->modx->user->get('id').session_id();
+            $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
             $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
     MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});

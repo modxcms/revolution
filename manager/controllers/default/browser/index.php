@@ -15,7 +15,7 @@ $rtecallback = $modx->invokeEvent('OnRichTextBrowserInit');
 if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
 
 $ctx = !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web';
-$_SERVER['HTTP_MODAUTH'] = $modx->site_id.$modx->user->get('id').session_id();
+$_SERVER['HTTP_MODAUTH'] = $_SESSION["modx.{$modx->context->get('key')}.user.token"];
 $modx->smarty->assign('site_id',$_SERVER['HTTP_MODAUTH']);
 $modx->smarty->assign('rtecallback',$rtecallback);
 $modx->smarty->assign('_ctx',$ctx);

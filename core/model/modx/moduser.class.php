@@ -319,9 +319,16 @@ class modUser extends modPrincipal {
             }
             $this->sessionContexts[$context]= $this->get('id');
             $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+            if (!isset($_SESSION["modx.{$context}.user.token"])) {
+                $_SESSION["modx.{$context}.user.token"]= $this->generateToken($context);
+            }
         } else {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key");
         }
+    }
+
+    public function generateToken($salt) {
+        return uniqid($this->xpdo->site_id . '_' . $this->get('id'), true);
     }
 
     /**
