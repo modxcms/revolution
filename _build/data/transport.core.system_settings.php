@@ -159,6 +159,24 @@ $settings['cache_db_expires']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['cache_db_session']= $xpdo->newObject('modSystemSetting');
+$settings['cache_db_session']->fromArray(array (
+  'key' => 'cache_db_session',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
+$settings['cache_db_session_lifetime']= $xpdo->newObject('modSystemSetting');
+$settings['cache_db_session_lifetime']->fromArray(array (
+  'key' => 'cache_db_session_lifetime',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
 $settings['cache_default']= $xpdo->newObject('modSystemSetting');
 $settings['cache_default']->fromArray(array (
   'key' => 'cache_default',
@@ -723,7 +741,7 @@ $settings['mail_smtp_pass']= $xpdo->newObject('modSystemSetting');
 $settings['mail_smtp_pass']->fromArray(array (
   'key' => 'mail_smtp_pass',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'text-password',
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
@@ -885,7 +903,7 @@ $settings['proxy_password']= $xpdo->newObject('modSystemSetting');
 $settings['proxy_password']->fromArray(array (
   'key' => 'proxy_password',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'text-password',
   'namespace' => 'core',
   'area' => 'proxy',
   'editedon' => null,
@@ -1275,6 +1293,15 @@ $settings['session_cookie_secure']->fromArray(array (
   'key' => 'session_cookie_secure',
   'value' => false,
   'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
+$settings['session_gc_maxlifetime']= $xpdo->newObject('modSystemSetting');
+$settings['session_gc_maxlifetime']->fromArray(array (
+  'key' => 'session_gc_maxlifetime',
+  'value' => '',
+  'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'session',
   'editedon' => null,

@@ -277,47 +277,58 @@ class modUser extends modPrincipal {
      * @param string $context The context to add to the user session.
      */
     public function addSessionContext($context) {
-        $this->getSessionContexts();
-        session_regenerate_id(true);
+        if (!empty($context)) {
+            $this->getSessionContexts();
+            session_regenerate_id(true);
 
-        $this->getOne('Profile');
-        if ($this->Profile && $this->Profile instanceof modUserProfile) {
-            $ua= & $this->Profile;
-            if ($context == 'web') {
-                $_SESSION['webShortname']= $this->get('username');
-                $_SESSION['webFullname']= $ua->get('fullname');
-                $_SESSION['webEmail']= $ua->get('email');
-                $_SESSION['webValidated']= 1;
-                $_SESSION['webInternalKey']= $this->get('id');
-                $_SESSION['webValid']= base64_encode($this->get('password'));
-                $_SESSION['webUser']= base64_encode($this->get('username'));
-                $_SESSION['webFailedlogins']= $ua->get('failedlogincount');
-                $_SESSION['webLastlogin']= $ua->get('lastlogin');
-                $_SESSION['webnrlogins']= $ua->get('logincount');
-                $_SESSION['webUserGroupNames']= '';
+            $this->getOne('Profile');
+            if ($this->Profile && $this->Profile instanceof modUserProfile) {
+                $ua= & $this->Profile;
+                if ($context == 'web') {
+                    $_SESSION['webShortname']= $this->get('username');
+                    $_SESSION['webFullname']= $ua->get('fullname');
+                    $_SESSION['webEmail']= $ua->get('email');
+                    $_SESSION['webValidated']= 1;
+                    $_SESSION['webInternalKey']= $this->get('id');
+                    $_SESSION['webValid']= base64_encode($this->get('password'));
+                    $_SESSION['webUser']= base64_encode($this->get('username'));
+                    $_SESSION['webFailedlogins']= $ua->get('failedlogincount');
+                    $_SESSION['webLastlogin']= $ua->get('lastlogin');
+                    $_SESSION['webnrlogins']= $ua->get('logincount');
+                    $_SESSION['webUserGroupNames']= '';
+                }
+                elseif ($context == 'mgr') {
+                    $_SESSION['usertype']= 'manager';
+                    $_SESSION['mgrShortname']= $this->get('username');
+                    $_SESSION['mgrFullname']= $ua->get('fullname');
+                    $_SESSION['mgrEmail']= $ua->get('email');
+                    $_SESSION['mgrValidated']= 1;
+                    $_SESSION['mgrInternalKey']= $this->get('id');
+                    $_SESSION['mgrFailedlogins']= $ua->get('failedlogincount');
+                    $_SESSION['mgrLastlogin']= $ua->get('lastlogin');
+                    $_SESSION['mgrLogincount']= $ua->get('logincount');
+                }
+                if ($ua && !isset ($this->sessionContexts[$context]) || $this->sessionContexts[$context] != $this->get('id')) {
+                    $ua->set('failedlogincount', 0);
+                    $ua->set('logincount', $ua->logincount + 1);
+                    $ua->set('lastlogin', $ua->thislogin);
+                    $ua->set('thislogin', time());
+                    $ua->set('sessionid', session_id());
+                    $ua->save();
+                }
             }
-            elseif ($context == 'mgr') {
-                $_SESSION['usertype']= 'manager';
-                $_SESSION['mgrShortname']= $this->get('username');
-                $_SESSION['mgrFullname']= $ua->get('fullname');
-                $_SESSION['mgrEmail']= $ua->get('email');
-                $_SESSION['mgrValidated']= 1;
-                $_SESSION['mgrInternalKey']= $this->get('id');
-                $_SESSION['mgrFailedlogins']= $ua->get('failedlogincount');
-                $_SESSION['mgrLastlogin']= $ua->get('lastlogin');
-                $_SESSION['mgrLogincount']= $ua->get('logincount');
+            $this->sessionContexts[$context]= $this->get('id');
+            $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+            if (!isset($_SESSION["modx.{$context}.user.token"])) {
+                $_SESSION["modx.{$context}.user.token"]= $this->generateToken($context);
             }
-            if ($ua && !isset ($this->sessionContexts[$context]) || $this->sessionContexts[$context] != $this->get('id')) {
-                $ua->set('failedlogincount', 0);
-                $ua->set('logincount', $ua->logincount + 1);
-                $ua->set('lastlogin', $ua->thislogin);
-                $ua->set('thislogin', time());
-                $ua->set('sessionid', session_id());
-                $ua->save();
-            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key");
         }
-        $this->sessionContexts[$context]= $this->get('id');
-        $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+    }
+
+    public function generateToken($salt) {
+        return uniqid($this->xpdo->site_id . '_' . $this->get('id'), true);
     }
 
     /**

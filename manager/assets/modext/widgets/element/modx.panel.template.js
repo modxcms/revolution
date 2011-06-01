@@ -80,7 +80,7 @@ MODx.panel.Template = function(config) {
                 ,inputValue: 1
                 ,checked: config.record.locked || false
             },{
-                xtype: 'xcheckbox'
+                xtype: 'checkbox'
                 ,fieldLabel: _('clear_cache_on_save')
                 ,description: _('clear_cache_on_save_msg')
                 ,name: 'clearCache'

@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-workspace' });
+    MODx.add('modx-page-workspace');
 });
 
 /**
@@ -15,7 +15,6 @@ MODx.page.Workspace = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-workspace'
-            ,renderTo: 'modx-panel-workspace-div'
         }]
         ,buttons: [{
             text: _('help_ex')

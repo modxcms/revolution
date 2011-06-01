@@ -59,4 +59,4 @@ foreach ($resources as $resource) {
     );
 }
 $this->xpdo->smarty->assign('opts',$opts);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/listbox-single.tpl');
+return $this->xpdo->smarty->fetch('element/tv/renders/input/resourcelist.tpl');

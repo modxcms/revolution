@@ -189,7 +189,7 @@ MODx.browser.Window = function(config) {
     },this);
     
     Ext.applyIf(config,{
-        title: _('modx_browser')
+        title: _('modx_browser')+' ('+(MODx.ctx ? MODx.ctx : 'web')+')'
         ,cls: 'modx-pb-win'
         ,layout: 'border'
         ,minWidth: 500

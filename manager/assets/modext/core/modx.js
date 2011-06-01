@@ -53,6 +53,15 @@ Ext.extend(MODx,Ext.Component,{
             expires: new Date(new Date().getTime()+(1000*60*60*24))
         }));
     }
+	
+    ,add: function(cmp) {
+        var ctr = Ext.getCmp('modx-content');
+        if (ctr) {
+            ctr.removeAll();
+            ctr.add({ xtype: cmp });
+            ctr.doLayout();
+        }
+    }
 
     ,load: function() {
         var a = arguments, l = a.length;

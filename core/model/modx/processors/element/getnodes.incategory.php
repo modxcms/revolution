@@ -22,16 +22,17 @@ $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('categor
 $categories = $modx->getCollection('modCategory',$c);
 
 /* set permissions as css classes */
-$class = 'icon-category folder';
+$class = array('icon-category','folder');
 $types = array('template','tv','chunk','snippet','plugin');
 foreach ($types as $type) {
     if ($modx->hasPermission('new_'.$type)) {
-        $class .= ' pnew_'.$type;
+        $class[] = 'pnew_'.$type;
     }
 }
-$class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
-$class .= $modx->hasPermission('edit_category') ? ' peditcat' : '';
-$class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
+if ($modx->hasPermission('new_category')) $class[] = 'pnewcat';
+if ($modx->hasPermission('edit_category')) $class[] = 'peditcat';
+if ($modx->hasPermission('delete_category')) $class[] = 'pdelcat';
+$class = implode(' ',$class);
 
 /* loop through categories */
 foreach ($categories as $category) {
@@ -59,19 +60,31 @@ $c->where(array(
     'category' => $categoryId
 ));
 $c->sortby($elementIdentifier == 'template' ? 'templatename' : 'name','ASC');
-
 $elements = $modx->getCollection($elementClassKey,$c);
+
+/* do permission checks */
+$canNewElement = $modx->hasPermission('new_'.$elementIdentifier);
+$canEditElement = $modx->hasPermission('edit_'.$elementIdentifier);
+$canDeleteElement = $modx->hasPermission('delete_'.$elementIdentifier);
+$canNewCategory = $modx->hasPermission('new_category');
+$showElementIds = $modx->hasPermission('tree_show_element_ids');
+
+/* loop through elements */
 foreach ($elements as $element) {
     if (!$element->checkPolicy('list')) continue;
     $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
 
-    $class = 'icon-'.$elementIdentifier;
-    $class .= $modx->hasPermission('new_'.$elementIdentifier) ? ' pnew' : '';
-    $class .= $modx->hasPermission('edit_'.$elementIdentifier) && $element->checkPolicy(array('save' => true, 'view' => true)) ? ' pedit' : '';
-    $class .= $modx->hasPermission('delete_'.$elementIdentifier) && $element->checkPolicy('remove') ? ' pdelete' : '';
-    $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
+    $class = array('icon-'.$elementIdentifier);
+    if ($canNewElement) $class[] = 'pnew';
+    if ($canEditElement && $element->checkPolicy(array('save' => true, 'view' => true))) $class[] = 'pedit';
+    if ($canDeleteElement && $element->checkPolicy('remove')) $class[] = 'pdelete';
+    if ($canNewCategory) $class[] = 'pnewcat';
+    if ($element->get('locked')) $class[] = 'element-node-locked';
+    if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
+        $class[] = 'element-node-disabled';
+    }
 
-    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $element->get('id') . ')' : '';
+    $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(
         'text' => strip_tags($name) . $idNote,
         'id' => 'n_'.$elementIdentifier.'_element_'.$element->get('id').'_'.$element->get('category'),
@@ -79,7 +92,7 @@ foreach ($elements as $element) {
         'category' => $categoryId,
         'leaf' => 1,
         'name' => $name,
-        'cls' => $class,
+        'cls' => implode(' ',$class),
         'page' => 'index.php?a='.$ar_actionmap[$elementIdentifier].'&id='.$element->get('id'),
         'type' => $elementIdentifier,
         'elementType' => $elementType,

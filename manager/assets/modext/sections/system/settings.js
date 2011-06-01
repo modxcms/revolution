@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-system-settings' });
+    MODx.add('modx-page-system-settings');
 });
 /**
  * Loads the configuration page
@@ -14,7 +14,6 @@ MODx.page.SystemSettings = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-system-settings'
-            ,renderTo: 'modx-panel-system-settings-div'
         }]
         ,buttons: [{
             text: _('help_ex')

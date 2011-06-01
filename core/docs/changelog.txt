@@ -2,6 +2,32 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.1-pl (June 1, 2011)
+====================================
+- Make modauth calculation independent of session_id
+- Ensure login/logout processors do not add Contexts with empty keys
+- [#3145] Ensure mail_smtp_pass and proxy_password System Settings use password xtype
+- [#4360] Show current context name on MODx.Browser window for reference
+- [#4881] Fix issue where modx-combo-language was missing from system setting editing screen
+- [#4896] Fix issue where New Category window is not cleared on each load
+- [#4934] Fix missing lexicon load call in package download processor
+- [#4927] Gray out disabled plugins in elements tree, italicize locked elements
+- [#4921] Ensure Category names are not ever capitalized when displayed as tabs
+- [#4865] Fix PDO error caused by missing charset for new MySQL installs on PHP 5.3.6+
+- Improve modSessionHandler and add Settings for advanced configuration
+- [#4750] Fix various issues with duplicating Resources, such as new name not prefixed and incorrect menuindex
+- [#4910] Fix bug where ResourceList TV type could not be marked as required
+- [#4915] Fix UI glitch when creating both an Access Policy and its Template on same page load
+- [#4916] Fix issue where cache clear checkbox was always being cleared on template save
+- [#4884] Remove PHP4 constructor on modRegister
+- Harden connector CSRF security by tying user session modauth to prevent hijacking of session if modauth is known
+- [#4863] Fix issue where template changing causes unintended alias
+- [#4854] Fix bug that caused update/rename file to be missing in Files tree context menu
+- [#4851] Improve safe_mode check in setup to check for non-boolean values
+- [#4856] Fix issue with MODx.Panel instances that have no textfields, causing scrollbar issues
+- Fix issue where MODX version was not being sent to provider during package update
+- [#4850] Fix issue with MODx.Window instances that have no textfields
+
 MODX Revolution 2.1.0-pl (May 24, 2011)
 ====================================
 - [#4818] Fix SqlSrv query errors related to TVs

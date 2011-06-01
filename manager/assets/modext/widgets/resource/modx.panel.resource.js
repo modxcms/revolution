@@ -596,6 +596,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         },scope:this}
                     },{
                         bypassValidCheck: true
+                    },{
+                        reloadOnly: true
                     });
                 } else {
                     t.setValue(this.config.record.template);

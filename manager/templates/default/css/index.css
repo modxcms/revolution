@@ -973,7 +973,8 @@ html #modx-topnav ul.modx-subnav li a:hover{
     color: #CC3333 !important;
     text-decoration: line-through !important;
 }
-
+.element-node-disabled a span { color: gray !important; }
+.element-node-locked a span { font-style: italic; }
 
 /* ext extensions */
 input.x-static-text-field {
