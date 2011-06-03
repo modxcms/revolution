@@ -64,6 +64,7 @@ if (empty($context) || $context == 'root') {
     ));
     $c->where(array(
         'context_key' => $context,
+        'show_in_tree' => true,
     ));
     if (empty($node) && !empty($defaultRootId)) {
         $c->where(array(
@@ -129,7 +130,7 @@ while ($item) {
                 'page' => empty($scriptProperties['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
             );
         } else {
-            $hasChildren = (int)$item->get('childrenCount') > 0 ? true : false;
+            $hasChildren = (int)$item->get('childrenCount') > 0 && $item->get('hide_children_in_tree') == 0 ? true : false;
 
             $class = array();
             $class[] = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));

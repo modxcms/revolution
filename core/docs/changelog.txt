@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add show_in_tree and hide_children_in_tree fields to modResource for better support with custom Resource types
+
 MODX Revolution 2.1.1-pl (June 1, 2011)
 ====================================
 - Make modauth calculation independent of session_id

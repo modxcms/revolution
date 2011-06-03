@@ -48,6 +48,8 @@ $xpdo_meta_map['modResource']= array (
     'content_type' => 1,
     'uri' => '',
     'uri_override' => 0,
+    'hide_children_in_tree' => 0,
+    'show_in_tree' => 1,
   ),
   'fieldMeta' => 
   array (
@@ -359,6 +361,22 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'hide_children_in_tree' => 
+    array (
+      'dbtype' => 'bit',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'show_in_tree' => 
+    array (
+      'dbtype' => 'bit',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -595,6 +613,38 @@ $xpdo_meta_map['modResource']= array (
       'columns' => 
       array (
         'uri_override' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'hide_children_in_tree' => 
+    array (
+      'alias' => 'hide_children_in_tree',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'hide_children_in_tree' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'show_in_tree' => 
+    array (
+      'alias' => 'show_in_tree',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'show_in_tree' => 
         array (
           'length' => '',
           'collation' => 'A',
