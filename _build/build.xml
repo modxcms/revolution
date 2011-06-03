@@ -21,8 +21,8 @@
     <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.1.1" />
-    <property name="modx.core.release" value="pl" />
+    <property name="modx.core.version" value="2.2.0" />
+    <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}" />
