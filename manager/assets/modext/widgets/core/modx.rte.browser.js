@@ -106,7 +106,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         dir = dir || '';
         this.view.run({
             dir: dir
-            ,ctx: MODx.ctx
+            ,wctx: MODx.ctx
         });
     }
     
