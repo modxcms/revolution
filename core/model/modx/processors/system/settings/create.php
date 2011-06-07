@@ -51,37 +51,41 @@ $setting= $modx->newObject('modSystemSetting');
 $setting->fromArray($scriptProperties,'',true);
 
 /* set lexicon name/description */
-$entry = $modx->getObject('modLexiconEntry',array(
-    'namespace' => $namespace->get('name'),
-    'topic' => 'default',
-    'name' => 'setting_'.$scriptProperties['key'],
-));
-if ($entry == null) {
-    $entry = $modx->newObject('modLexiconEntry');
-    $entry->set('namespace',$namespace->get('name'));
-    $entry->set('name','setting_'.$scriptProperties['key']);
-    $entry->set('value',$scriptProperties['name']);
-    $entry->set('topic','default');
-    $entry->set('language',$modx->cultureKey);
-    $entry->save();
+if (!empty($scriptProperties['name'])) {
+    $entry = $modx->getObject('modLexiconEntry',array(
+        'namespace' => $namespace->get('name'),
+        'topic' => 'default',
+        'name' => 'setting_'.$scriptProperties['key'],
+    ));
+    if ($entry == null) {
+        $entry = $modx->newObject('modLexiconEntry');
+        $entry->set('namespace',$namespace->get('name'));
+        $entry->set('name','setting_'.$scriptProperties['key']);
+        $entry->set('value',$scriptProperties['name']);
+        $entry->set('topic','default');
+        $entry->set('language',$modx->cultureKey);
+        $entry->save();
 
-    $entry->clearCache();
+        $entry->clearCache();
+    }
 }
-$description = $modx->getObject('modLexiconEntry',array(
-    'namespace' => $namespace->get('name'),
-    'topic' => 'default',
-    'name' => 'setting_'.$scriptProperties['key'].'_desc',
-));
-if ($description == null) {
-    $description = $modx->newObject('modLexiconEntry');
-    $description->set('namespace',$namespace->get('name'));
-    $description->set('name','setting_'.$scriptProperties['key'].'_desc');
-    $description->set('value',$scriptProperties['description']);
-    $description->set('topic','default');
-    $description->set('language',$modx->cultureKey);
-    $description->save();
+if (!empty($scriptProperties['description'])) {
+    $description = $modx->getObject('modLexiconEntry',array(
+        'namespace' => $namespace->get('name'),
+        'topic' => 'default',
+        'name' => 'setting_'.$scriptProperties['key'].'_desc',
+    ));
+    if ($description == null) {
+        $description = $modx->newObject('modLexiconEntry');
+        $description->set('namespace',$namespace->get('name'));
+        $description->set('name','setting_'.$scriptProperties['key'].'_desc');
+        $description->set('value',$scriptProperties['description']);
+        $description->set('topic','default');
+        $description->set('language',$modx->cultureKey);
+        $description->save();
 
-    $description->clearCache();
+        $description->clearCache();
+    }
 }
 
 if ($setting->save() === false) {

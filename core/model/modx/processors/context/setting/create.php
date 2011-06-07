@@ -59,34 +59,38 @@ if ($setting->get('key') === 'container_suffix') {
 /* only set name/description lexicon entries if they dont exist
  * for context settings
  */
-$entry = $modx->getObject('modLexiconEntry',array(
-    'namespace' => $setting->get('namespace'),
-    'topic' => 'default',
-    'name' => 'setting_'.$scriptProperties['key'],
-));
-if ($entry == null) {
-    $entry = $modx->newObject('modLexiconEntry');
-    $entry->set('namespace',$setting->get('namespace'));
-    $entry->set('name','setting_'.$scriptProperties['key']);
-    $entry->set('topic','default');
-    $entry->set('value',$scriptProperties['name']);
-    $entry->save();
-    $entry->clearCache();
+if (!empty($scriptProperties['name'])) {
+    $entry = $modx->getObject('modLexiconEntry',array(
+        'namespace' => $setting->get('namespace'),
+        'topic' => 'default',
+        'name' => 'setting_'.$scriptProperties['key'],
+    ));
+    if ($entry == null) {
+        $entry = $modx->newObject('modLexiconEntry');
+        $entry->set('namespace',$setting->get('namespace'));
+        $entry->set('name','setting_'.$scriptProperties['key']);
+        $entry->set('topic','default');
+        $entry->set('value',$scriptProperties['name']);
+        $entry->save();
+        $entry->clearCache();
+    }
 }
 
-$description = $modx->getObject('modLexiconEntry',array(
-    'namespace' => $setting->get('namespace'),
-    'topic' => 'default',
-    'name' => 'setting_'.$scriptProperties['key'].'_desc',
-));
-if ($description == null) {
-    $description = $modx->newObject('modLexiconEntry');
-    $description->set('namespace',$setting->get('namespace'));
-    $description->set('name','setting_'.$scriptProperties['key'].'_desc');
-    $description->set('topic','default');
-    $description->set('value',$scriptProperties['description']);
-    $description->save();
-    $description->clearCache();
+if (!empty($scriptProperties['description'])) {
+    $description = $modx->getObject('modLexiconEntry',array(
+        'namespace' => $setting->get('namespace'),
+        'topic' => 'default',
+        'name' => 'setting_'.$scriptProperties['key'].'_desc',
+    ));
+    if ($description == null) {
+        $description = $modx->newObject('modLexiconEntry');
+        $description->set('namespace',$setting->get('namespace'));
+        $description->set('name','setting_'.$scriptProperties['key'].'_desc');
+        $description->set('topic','default');
+        $description->set('value',$scriptProperties['description']);
+        $description->save();
+        $description->clearCache();
+    }
 }
 
 /* save setting */

@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 - Add show_in_tree and hide_children_in_tree fields to modResource for better support with custom Resource types
 - Fix issue with modauth, wctx and RTE browser
+- [#5007] Only create Lexicon Entries for Settings if they are specified
+- [#5006] Fix issue with updating a policy template with no permissions
+- [#5001] Fix issue with modauth, wctx and RTE browser
 
 MODX Revolution 2.1.1-pl (June 1, 2011)
 ====================================
