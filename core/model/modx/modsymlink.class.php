@@ -44,4 +44,9 @@ class modSymLink extends modResource {
         $forwardOptions = array('merge' => $this->xpdo->getOption('symlink_merge_fields', null, true));
         $this->xpdo->sendForward($this->_output, $forwardOptions);
     }
+
+    public static function getControllerPath(xPDO &$modx) {
+        $path = modResource::getControllerPath($modx);
+        return $path.'symlink/';
+    }
 }

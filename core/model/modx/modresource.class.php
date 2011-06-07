@@ -914,4 +914,10 @@ class modResource extends modAccessibleSimpleObject {
     public function getGroupsList(array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         return $this->xpdo->call('modResource', 'listGroups', array(&$this, $sort, $limit, $offset));
     }
+    
+    public static function getControllerPath(xPDO &$modx) {
+        $theme = $modx->getOption('manager_theme',null,'default');
+        $controllersPath = $modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$theme.'/';
+        return $controllersPath.'resource/';
+    }
 }

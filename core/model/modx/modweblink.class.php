@@ -35,4 +35,9 @@ class modWebLink extends modResource {
         }
         $this->xpdo->sendRedirect($this->_output);
     }
+
+    public static function getControllerPath(xPDO &$modx) {
+        $path = modResource::getControllerPath($modx);
+        return $path.'weblink/';
+    }
 }

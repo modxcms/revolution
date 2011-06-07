@@ -198,4 +198,9 @@ class modStaticResource extends modResource {
         }
         return $value;
     }
+
+    public static function getControllerPath(xPDO &$modx) {
+        $path = modResource::getControllerPath($modx);
+        return $path.'staticresource/';
+    }
 }
