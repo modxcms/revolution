@@ -101,7 +101,7 @@ Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
         this.getForm().setValues(r);
 
         var g = Ext.getCmp('modx-grid-template-permissions');
-        if (g) { g.getStore().loadData(r.permissions); }
+        if (g && r.permissions) { g.getStore().loadData(r.permissions); }
 
         this.fireEvent('ready');
         MODx.fireEvent('ready');
