@@ -1,21 +1,21 @@
 <?php
 /**
- * Load create snippet page
+ * Load create tv page
  *
  * @package modx
- * @subpackage manager.element.snippet
+ * @subpackage manager.element.tv
  */
-class ElementSnippetCreateManagerController extends modManagerController {
+class ElementTVCreateManagerController extends modManagerController {
     public $category;
-    public $onSnipFormRender = '';
-    public $onSnipFormPrerender = '';
+    public $onTVFormRender = '';
+    public $onTVFormPrerender = '';
 
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('new_snippet');
+        return $this->modx->hasPermission('new_tv');
     }
 
     /**
@@ -26,23 +26,25 @@ class ElementSnippetCreateManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.panel.snippet.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/element/snippet/create.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.tv.template.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.tv.security.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/element/tv/create.js');
         $this->modx->regClientStartupHTMLBlock('
-        <script type="text/javascript">
-        // <![CDATA[
-        MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
-        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
-        Ext.onReady(function() {
-            MODx.load({
-                xtype: "modx-page-snippet-create"
-                ,record: {
-                    category: "'.($this->category ? $this->category->get('id') : 0).'"
-                }
-            });
-        });
-        // ]]>
-        </script>');
+<script type="text/javascript">
+// <![CDATA[
+MODx.onTVFormRender = "'.$this->onTVFormRender.'";
+MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
+Ext.onReady(function() {
+    MODx.load({
+        xtype: "modx-page-tv-create"
+        ,record: {
+            category: "'.($this->category ? $this->category->get('id') : 0).'"
+        }
+    });
+});
+// ]]>
+</script>');
     }
 
     /**
@@ -61,38 +63,38 @@ class ElementSnippetCreateManagerController extends modManagerController {
             }
         }
 
-        /* invoke OnSnipFormRender event */
-        $placeholders['onSnipFormRender'] = $this->fireRenderEvent();
+        /* invoke OnTVFormRender event */
+        $placeholders['onTVFormRender'] = $this->fireRenderEvent();
 
         return $placeholders;
     }
 
     /**
-     * Invoke OnSnipFormPrerender event
+     * Invoke OnTVFormPrerender event
      * @return void
      */
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender',array(
+        $this->onTVFormPrerender = $this->modx->invokeEvent('OnTVFormPrerender',array(
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
         ));
-        if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
+        if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
     }
 
     /**
-     * Invoke OnSnipFormRender event
+     * Invoke OnTVFormRender event
      * @return string
      */
     public function fireRenderEvent() {
-        $this->onSnipFormRender = $this->modx->invokeEvent('OnSnipFormRender',array(
+        $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender',array(
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
         ));
-        if (is_array($this->onSnipFormRender)) $this->onSnipFormRender = implode('',$this->onSnipFormRender);
-        $this->onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onSnipFormRender);
-        return $this->onSnipFormRender;
+        if (is_array($this->onTVFormRender)) $this->onTVFormRender = implode('',$this->onTVFormRender);
+        $this->onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTVFormRender);
+        return $this->onTVFormRender;
     }
 
     /**
@@ -101,7 +103,7 @@ class ElementSnippetCreateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('snippet_new');
+        return $this->modx->lexicon('tv_new');
     }
 
     /**
@@ -109,7 +111,7 @@ class ElementSnippetCreateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'element/snippet/create.tpl';
+        return 'element/tv/create.tpl';
     }
 
     /**
@@ -117,6 +119,6 @@ class ElementSnippetCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('snippet','category','system_events','propertyset','element');
+        return array('tv','category','tv_widget','propertyset','element');
     }
 }

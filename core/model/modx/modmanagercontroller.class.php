@@ -26,7 +26,7 @@ abstract class modManagerController {
     public $content = '';
 
     /** @var string Any Form Customization rule output that was created. */
-    protected $ruleOutput = '';
+    protected $ruleOutput = array();
     /** @var string The current manager theme. */
     protected $theme = 'default';
     /** @var string The pagetitle for this controller. */
@@ -92,7 +92,7 @@ abstract class modManagerController {
         $this->loadCssJs();
 
         if (!empty($this->ruleOutput)) {
-            $this->modx->regClientStartupHTMLBlock($this->ruleOutput);
+            $this->modx->regClientStartupHTMLBlock(implode("\n",$this->ruleOutput));
         }
 
         $this->modx->smarty->assign('_pagetitle',$this->getPageTitle());
@@ -433,9 +433,8 @@ abstract class modManagerController {
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }
-        $this->ruleOutput = '';
         if (!empty($rules)) {
-            $this->ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
+            $this->ruleOutput[] = '<script type="text/javascript">Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
         }
         return $overridden;
     }

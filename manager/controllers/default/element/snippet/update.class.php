@@ -33,6 +33,8 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->modx->regClientStartupHTMLBlock('
         <script type="text/javascript">
         // <![CDATA[
+        MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
+        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-snippet-update"
@@ -40,8 +42,6 @@ class ElementSnippetUpdateManagerController extends modManagerController {
                 ,record: '.$this->modx->toJSON($this->snippetArray).'
             });
         });
-        MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
-        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         // ]]>
         </script>');
     }
@@ -59,11 +59,11 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->snippet = $this->modx->getObject('modSnippet',$scriptProperties['id']);
         if ($this->snippet == null) return $this->failure($this->modx->lexicon('snippet_err_nf'));
         if (!$this->snippet->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
-        
+
         /* get properties */
         $properties = $this->snippet->get('properties');
         if (!is_array($properties)) $properties = array();
-        
+
         $data = array();
         foreach ($properties as $property) {
             $data[] = array(
@@ -82,7 +82,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         if (strpos($this->snippetArray['snippet'],'<?php') === false) {
             $this->snippetArray['snippet'] = "<?php\n".$this->snippetArray['snippet'];
         }
-        
+
         /* load snippet into parser */
         $placeholders['snippet'] = $this->snippet;
 
