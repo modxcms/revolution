@@ -67,7 +67,6 @@ abstract class modManagerController {
 
         $this->loadControllersPath();
         $this->loadTemplatesPath();
-        $tpl = $this->getTemplateFile();
         $content = '';
 
         $this->registerBaseScripts();
@@ -96,6 +95,7 @@ abstract class modManagerController {
         $this->modx->smarty->assign('_pagetitle',$this->getPageTitle());
         $body = $this->getHeader();
 
+        $tpl = $this->getTemplateFile();
         if ($this->isFailure) {
             $this->modx->smarty->assign('_e', $this->modx->error->failure($this->failureMessage));
             $content = $this->modx->smarty->fetch('error.tpl');

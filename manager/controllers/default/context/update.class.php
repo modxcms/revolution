@@ -25,17 +25,17 @@ class ContextUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.context.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.grid.context.settings.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.panel.context.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/context/update.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
         // <![CDATA[
         MODx.onContextFormRender = "'.$this->onContextFormRender.'";
         MODx.ctx = "'.$this->contextKey.'";
         // ]]>
         </script>');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.context.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.grid.context.settings.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.panel.context.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/context/update.js');
     }
 
     /**
