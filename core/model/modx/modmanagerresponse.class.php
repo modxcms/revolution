@@ -32,12 +32,9 @@ class modManagerResponse extends modResponse {
      * @param array $options
      */
     public function outputContent(array $options = array()) {
-        $modx= & $this->modx;
-        $error= & $this->modx->error;
-
         $action = '';
         if (!isset($this->modx->request) || !isset($this->modx->request->action)) {
-            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
+            $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
         } else {
             $action =& intval($this->modx->request->action);
         }
@@ -45,7 +42,7 @@ class modManagerResponse extends modResponse {
         $theme = $this->modx->getOption('manager_theme',null,'default');
 
         $this->modx->lexicon->load('dashboard','topmenu','file');
-        if ($action == 0) {
+        if ($action == 0 || !isset($this->modx->actionMap[$action])) {
             $action = $this->modx->getObject('modAction',array(
                 'namespace' => 'core',
                 'controller' => 'welcome',
@@ -54,35 +51,28 @@ class modManagerResponse extends modResponse {
         }
 
         if ($this->modx->hasPermission('frames')) {
-            if (isset($this->modx->actionMap[$action])) {
-                $this->action = $this->modx->actionMap[$action];
-                require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
+            $this->action = $this->modx->actionMap[$action];
+            require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 
-                /* first attempt to get new class format file introduced in 2.2+ */
-                $path = $this->getNamespacePath();
-                $f = $path.$this->action['controller'];
-                $className = $this->getControllerClassName();
-                $classPath = strtolower($f).'.class.php';
-                if (!file_exists($classPath)) {
-                    if (file_exists(strtolower($f).'/index.class.php')) {
-                        $classPath = strtolower($f).'/index.class.php';
-                    } else { /* handle Revo <2.2 controllers */
-                        $className = 'modManagerControllerDeprecated';
-                        $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
-                    }
+            /* first attempt to get new class format file introduced in 2.2+ */
+            $path = $this->getNamespacePath();
+            $f = $path.$this->action['controller'];
+            $className = $this->getControllerClassName();
+            $classPath = strtolower($f).'.class.php';
+            if (!file_exists($classPath)) {
+                if (file_exists(strtolower($f).'/index.class.php')) {
+                    $classPath = strtolower($f).'/index.class.php';
+                } else { /* handle Revo <2.2 controllers */
+                    $className = 'modManagerControllerDeprecated';
+                    $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
                 }
-
-                ob_start();
-                require_once $classPath;
-                ob_end_clean();
-                $this->controller = new $className($this->modx,$this->action);
-                $this->body = $this->controller->render();
-
-            } else {
-                $this->body = $this->modx->error->failure($modx->lexicon('action_err_nfs',array(
-                    'id' => $action,
-                )));
             }
+
+            ob_start();
+            require_once $classPath;
+            ob_end_clean();
+            $this->controller = new $className($this->modx,$this->action);
+            $this->body = $this->controller->render();
         } else {
             /* doesnt have permissions to view manager */
             $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
