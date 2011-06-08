@@ -1,21 +1,21 @@
 <?php
 /**
- * Load create plugin page
+ * Load create snippet page
  *
  * @package modx
- * @subpackage manager.element.plugin
+ * @subpackage manager.element.snippet
  */
-class ElementPluginCreateManagerController extends modManagerController {
+class ElementSnippetCreateManagerController extends modManagerController {
     public $category;
-    public $onPluginFormRender = '';
-    public $onPluginFormPrerender = '';
-    
+    public $onSnipFormRender = '';
+    public $onSnipFormPrerender = '';
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('new_plugin');
+        return $this->modx->hasPermission('new_snippet');
     }
 
     /**
@@ -26,21 +26,20 @@ class ElementPluginCreateManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.plugin.event.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.panel.plugin.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/element/plugin/create.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.panel.snippet.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/element/snippet/create.js');
         $this->modx->regClientStartupHTMLBlock('
         <script type="text/javascript">
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({
-                xtype: "modx-page-plugin-create"
+                xtype: "modx-page-snippet-create"
                 ,record: {
                     category: "'.($this->category ? $this->category->get('id') : 0).'"
                 }
             });
         });
-        MODx.onPluginFormRender = "'.$this->onPluginFormRender.'";
+        MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
         MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         // ]]>
         </script>');
@@ -62,8 +61,8 @@ class ElementPluginCreateManagerController extends modManagerController {
             }
         }
 
-        /* invoke OnPluginFormRender event */
-        $placeholders['onPluginFormRender'] = $this->fireRenderEvent();
+        /* invoke OnSnipFormRender event */
+        $placeholders['onSnipFormRender'] = $this->fireRenderEvent();
 
         return $placeholders;
     }
@@ -75,30 +74,30 @@ class ElementPluginCreateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnPluginFormPrerender event
+     * Invoke OnSnipFormPrerender event
      * @return string
      */
     public function firePrerenderEvent() {
-        $this->onPluginFormPrerender = $this->modx->invokeEvent('OnPluginFormPrerender',array(
+        $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender',array(
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
         ));
-        if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
-        return $this->onPluginFormPrerender;
+        if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
+        return $this->onSnipFormPrerender;
     }
 
     /**
-     * Invoke OnPluginFormRender event
+     * Invoke OnSnipFormRender event
      * @return string
      */
     public function fireRenderEvent() {
-        $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender',array(
+        $this->onSnipFormRender = $this->modx->invokeEvent('OnSnipFormRender',array(
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
         ));
-        if (is_array($this->onPluginFormRender)) $this->onPluginFormRender = implode('',$this->onPluginFormRender);
-        $this->onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onPluginFormRender);
-        return $this->onPluginFormRender;
+        if (is_array($this->onSnipFormRender)) $this->onSnipFormRender = implode('',$this->onSnipFormRender);
+        $this->onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onSnipFormRender);
+        return $this->onSnipFormRender;
     }
 
     /**
@@ -107,7 +106,7 @@ class ElementPluginCreateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('plugin_new');
+        return $this->modx->lexicon('snippet_new');
     }
 
     /**
@@ -115,7 +114,7 @@ class ElementPluginCreateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'element/plugin/create.tpl';
+        return 'element/snippet/create.tpl';
     }
 
     /**
@@ -123,6 +122,6 @@ class ElementPluginCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('plugin','category','system_events','propertyset','element');
+        return array('snippet','category','system_events','propertyset','element');
     }
 }

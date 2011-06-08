@@ -58,9 +58,6 @@ class ElementChunkCreateManagerController extends modManagerController {
         $placeholders['onChunkFormRender'] = $this->fireRenderEvent();
         $placeholders['onRTEInit'] = $this->loadRte();
 
-        /* invoke OnChunkFormPrerender event */
-        $placeholders['onChunkFormPrerender'] = $this->firePreRenderEvent();
-
         return $placeholders;
     }
 
@@ -124,6 +121,12 @@ class ElementChunkCreateManagerController extends modManagerController {
         if (is_array($this->onChunkFormRender)) $this->onChunkFormRender = implode('', $this->onChunkFormRender);
         $this->onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onChunkFormRender);
         return $this->onChunkFormRender;
+    }
+
+    public function firePostRenderEvents() {
+        /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
+        into the panel */
+        $this->firePrerenderEvent();
     }
 
     /**

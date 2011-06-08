@@ -89,9 +89,14 @@ class ElementPluginUpdateManagerController extends modManagerController {
 
         /* invoke OnPluginFormRender event */
         $placeholders['onPluginFormRender'] = $this->fireRenderEvent();
-        $placeholders['onPluginFormPrerender'] = $this->firePrerenderEvent();
 
         return $placeholders;
+    }
+
+    public function firePostRenderEvents() {
+        /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
+        into the panel */
+        $this->firePrerenderEvent();
     }
 
     /**

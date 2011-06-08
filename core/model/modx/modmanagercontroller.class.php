@@ -86,6 +86,7 @@ abstract class modManagerController {
             $content = $placeholders;
         }
         $this->loadCustomCssJs();
+        $this->firePostRenderEvents();
         $this->loadCssJs();
 
         if (!empty($this->ruleOutput)) {
@@ -216,6 +217,12 @@ abstract class modManagerController {
      * @return void
      */
     abstract public function loadCustomCssJs();
+
+    /**
+     * Can be used to fire events after all the CSS/JS is loaded for a page
+     * @return void
+     */
+    public function firePostRenderEvents() {}
 
     /**
      * Get the page header for the controller.

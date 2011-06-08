@@ -93,11 +93,14 @@ class ElementChunkUpdateManagerController extends modManagerController {
 
         /* check unlock default element properties permission */
         $placeholders['unlock_element_properties'] = $this->modx->hasPermission('unlock_element_properties') ? 1 : 0;
-
-        /* invoke OnChunkFormPrerender event */
-        $placeholders['onChunkFormPrerender'] = $this->firePreRenderEvent();
-
+ 
         return $placeholders;
+    }
+
+    public function firePostRenderEvents() {
+        /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
+        into the panel */
+        $this->firePrerenderEvent();
     }
 
     /**
