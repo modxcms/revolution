@@ -7,6 +7,7 @@
  */
 class ElementChunkUpdateManagerController extends modManagerController {
     public $onChunkFormRender = '';
+    public $onChunkFormPrerender = '';
     public $chunk;
     public $chunkArray = array();
     
@@ -97,10 +98,19 @@ class ElementChunkUpdateManagerController extends modManagerController {
         return $placeholders;
     }
 
-    public function firePostRenderEvents() {
+    /**
+     * Fire the OnChunkFormPrerender event
+     * @return mixed
+     */
+    public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->firePrerenderEvent();
+        $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender',array(
+            'id' => $this->chunk->get('id'),
+            'mode' => modSystemEvent::MODE_UPD,
+            'chunk' => $this->chunk,
+        ));
+        if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }
     }
 
     /**
@@ -120,20 +130,6 @@ class ElementChunkUpdateManagerController extends modManagerController {
             }
             $o = $onRTEInit;
         }
-        return $o;
-    }
-
-    /**
-     * Fire the OnChunkFormPrerender event
-     * @return mixed
-     */
-    public function firePreRenderEvent() {
-        $o = $this->modx->invokeEvent('OnChunkFormPrerender',array(
-            'id' => $this->chunk->get('id'),
-            'mode' => modSystemEvent::MODE_UPD,
-            'chunk' => $this->chunk,
-        ));
-        if (is_array($o)) { $o = implode('',$o); }
         return $o;
     }
 

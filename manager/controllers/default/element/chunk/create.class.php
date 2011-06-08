@@ -8,6 +8,7 @@
 class ElementChunkCreateManagerController extends modManagerController {
     public $category;
     public $onChunkFormRender;
+    public $onChunkFormPrerender;
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -95,20 +96,6 @@ class ElementChunkCreateManagerController extends modManagerController {
     }
 
     /**
-     * Fire the OnChunkFormPrerender event
-     * @return mixed
-     */
-    public function firePreRenderEvent() {
-        $o = $this->modx->invokeEvent('OnChunkFormPrerender',array(
-            'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
-            'chunk' => null,
-        ));
-        if (is_array($o)) { $o = implode('',$o); }
-        return $o;
-    }
-
-    /**
      * Fire the OnChunkFormRender event
      * @return mixed
      */
@@ -123,10 +110,19 @@ class ElementChunkCreateManagerController extends modManagerController {
         return $this->onChunkFormRender;
     }
 
-    public function firePostRenderEvents() {
+    /**
+     * Fire the OnChunkFormPrerender event
+     * @return mixed
+     */
+    public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->firePrerenderEvent();
+        $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender',array(
+            'id' => 0,
+            'mode' => modSystemEvent::MODE_NEW,
+            'chunk' => null,
+        ));
+        if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }
     }
 
     /**

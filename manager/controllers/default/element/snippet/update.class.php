@@ -92,24 +92,19 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         return $placeholders;
     }
 
-    public function firePostRenderEvents() {
-        /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
-        into the panel */
-        $this->firePrerenderEvent();
-    }
-
     /**
      * Invoke OnSnipFormPrerender event
-     * @return string
+     * @return void
      */
-    public function firePrerenderEvent() {
+    public function firePreRenderEvents() {
+        /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
+        into the panel */
         $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender',array(
             'id' => $this->snippetArray['id'],
             'snippet' => &$this->snippet,
             'mode' => modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
-        return $this->onSnipFormPrerender;
     }
 
     /**

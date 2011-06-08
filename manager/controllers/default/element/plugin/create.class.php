@@ -68,23 +68,18 @@ class ElementPluginCreateManagerController extends modManagerController {
         return $placeholders;
     }
 
-    public function firePostRenderEvents() {
-        /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
-        into the panel */
-        $this->firePrerenderEvent();
-    }
-
     /**
      * Invoke OnPluginFormPrerender event
-     * @return string
+     * @return void
      */
-    public function firePrerenderEvent() {
+    public function firePreRenderEvents() {
+        /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
+        into the panel */
         $this->onPluginFormPrerender = $this->modx->invokeEvent('OnPluginFormPrerender',array(
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
-        return $this->onPluginFormPrerender;
     }
 
     /**

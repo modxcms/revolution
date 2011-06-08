@@ -22,6 +22,8 @@ abstract class modManagerController {
     public $controllersPath;
     /** @var The current working context. */
     public $workingContext;
+    /** @var string The current output content */
+    public $content = '';
 
     /** @var string Any Form Customization rule output that was created. */
     protected $ruleOutput = '';
@@ -86,7 +88,7 @@ abstract class modManagerController {
             $content = $placeholders;
         }
         $this->loadCustomCssJs();
-        $this->firePostRenderEvents();
+        $this->firePreRenderEvents();
         $this->loadCssJs();
 
         if (!empty($this->ruleOutput)) {
@@ -94,7 +96,7 @@ abstract class modManagerController {
         }
 
         $this->modx->smarty->assign('_pagetitle',$this->getPageTitle());
-        $body = $this->getHeader();
+        $this->content = $this->getHeader();
 
         $tpl = $this->getTemplateFile();
         if ($this->isFailure) {
@@ -104,11 +106,13 @@ abstract class modManagerController {
             $content = $this->modx->smarty->fetch($tpl);
         }
         
-        $body .= $content;
+        $this->content .= $content;
 
-        $body .= $this->getFooter();
+        $this->content .= $this->getFooter();
 
-        return $body;
+        $this->firePostRenderEvents();
+
+        return $this->content;
     }
 
     /**
@@ -223,6 +227,7 @@ abstract class modManagerController {
      * @return void
      */
     public function firePostRenderEvents() {}
+    public function firePreRenderEvents() {}
 
     /**
      * Get the page header for the controller.
