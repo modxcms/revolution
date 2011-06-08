@@ -1,31 +1,62 @@
 <?php
+/**
+ * Abstract class for manager controllers. Not to be initialized directly; must be extended by the implementing
+ * controller.
+ * 
+ * @package modx
+ */
 abstract class modManagerController {
+    /** @var modX A reference to the modX object */
     public $modx;
+    /** @var array A configuration array of options related to this controller's action object. */
     public $config = array();
+    /** @var bool Set to false to prevent loading of the header HTML. */
     public $loadHeader = true;
+    /** @var bool Set to false to prevent loading of the footer HTML. */
     public $loadFooter = true;
+    /** @var bool Set to false to prevent loading of the base MODExt JS classes. */
     public $loadBaseJavascript = true;
+    /** @var string The path of this controller's templates directory. */
     public $templatesPath;
+    /** @var string The path of this controller's directory. */
     public $controllersPath;
+    /** @var The current working context. */
+    public $workingContext;
 
+    /** @var string Any Form Customization rule output that was created. */
     protected $ruleOutput = '';
+    /** @var string The current manager theme. */
     protected $theme = 'default';
+    /** @var string The pagetitle for this controller. */
     protected $title = '';
+    /** @var bool Whether or not a failure message was sent by this controller. */
+    protected $isFailure = false;
+    /** @var string The failure message, if existent, for this controller. */
+    protected $failureMessage = '';
 
+    /**
+     * The constructor for the modManaagerController class.
+     *
+     * @param modX $modx A reference to the modX object.
+     * @param array $config A configuration array of options related to this controller's action object.
+     */
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->config = array_merge(array(),$config);
     }
 
+    /**
+     * Render the controller.
+     * 
+     * @return string
+     */
     public function render() {
         if (!$this->checkPermissions()) {
             return $this->modx->error->failure($this->modx->lexicon('access_denied'));
         }
 
         $this->theme = $this->modx->getOption('manager_theme',null,'default');
-
-        $this->modx->smarty->assign('_pagetitle',$this->getPageTitle());
-
+        
         $this->modx->lexicon->load('action');
         $languageTopics = $this->getLanguageTopics();
         foreach ($languageTopics as $topic) { $this->modx->lexicon->load($topic); }
@@ -38,9 +69,6 @@ abstract class modManagerController {
         $this->loadTemplatesPath();
         $tpl = $this->getTemplateFile();
         $content = '';
-        if (!empty($tpl)) {
-            $content = $this->modx->smarty->fetch($tpl);
-        }
 
         $this->registerBaseScripts();
 
@@ -49,8 +77,9 @@ abstract class modManagerController {
         $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
             'action' => $this->config,
         ));
-        $placeholders = $this->process();
-        if (!empty($placeholders) && is_array($placeholders)) {
+        $scriptProperties = array_merge($_GET,$_POST);
+        $placeholders = $this->process($scriptProperties);
+        if (!empty($placeholders) && !$this->isFailure && is_array($placeholders)) {
             foreach ($placeholders as $k => $v) {
                 $this->modx->smarty->assign($k,$v);
             }
@@ -64,12 +93,14 @@ abstract class modManagerController {
             $this->modx->regClientStartupHTMLBlock($this->ruleOutput);
         }
 
+        $this->modx->smarty->assign('_pagetitle',$this->getPageTitle());
         $body = $this->getHeader();
 
-        /* assign later to allow for css/js registering */
-        if (is_array($content)) {
-            $this->modx->smarty->assign('_e', $content);
+        if ($this->isFailure) {
+            $this->modx->smarty->assign('_e', $this->modx->error->failure($this->failureMessage));
             $content = $this->modx->smarty->fetch('error.tpl');
+        } else if (!empty($tpl)) {
+            $content = $this->modx->smarty->fetch($tpl);
         }
         
         $body .= $content;
@@ -79,6 +110,23 @@ abstract class modManagerController {
         return $body;
     }
 
+    /**
+     * Set a failure on this controller. This will return the error message.
+     * 
+     * @param string $message
+     * @return void
+     */
+    public function failure($message) {
+        $this->isFailure = true;
+        $this->failureMessage .= $message;
+    }
+
+    /**
+     * Load the path to this controller's template's directory. Only override this if you want to override default
+     * behavior; otherwise, overriding getTemplatesPath is preferred.
+     * 
+     * @return string
+     */
     public function loadTemplatesPath() {
         if (empty($this->templatesPath)) {
             $this->templatesPath = $this->getTemplatesPath();
@@ -91,6 +139,13 @@ abstract class modManagerController {
         }
         return $this->templatesPath;
     }
+
+    /**
+     * Load the path to this controller's directory. Only override this if you want to override default behavior;
+     * otherwise, overriding getControllersPath is preferred.
+     * 
+     * @return string
+     */
     public function loadControllersPath() {
         if (empty($this->controllersPath)) {
             $this->controllersPath = $this->getControllersPath();
@@ -102,13 +157,12 @@ abstract class modManagerController {
     }
 
 
-    public function getTemplatesPath($coreOnly = false) {
-        $namespacePath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
-        if (!empty($this->config['namespace_path']) && !$coreOnly) {
-            $namespacePath = $this->config['namespace_path'];
-        }
-        return $namespacePath . 'templates/'.($this->config['namespace'] == 'core' || $coreOnly ? $this->theme.'/' : '');
-    }
+    /**
+     * Get the path to this controller's directory. Override this to point to a custom directory.
+     *
+     * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
+     * @return string
+     */
     public function getControllersPath($coreOnly = false) {
         $namespacePath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
         if (!empty($this->config['namespace_path']) && !$coreOnly) {
@@ -116,19 +170,69 @@ abstract class modManagerController {
         }
         return $namespacePath.'controllers/'.($this->config['namespace'] == 'core' || $coreOnly ? $this->theme.'/' : '');
     }
+    
+    /**
+     * Get the path to this controller's template's directory. Override this to point to a custom directory.
+     * 
+     * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
+     * @return string
+     */
+    public function getTemplatesPath($coreOnly = false) {
+        $namespacePath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+        if (!empty($this->config['namespace_path']) && !$coreOnly) {
+            $namespacePath = $this->config['namespace_path'];
+        }
+        return $namespacePath . 'templates/'.($this->config['namespace'] == 'core' || $coreOnly ? $this->theme.'/' : '');
+    }
 
+    /**
+     * Do permission checking in this method. Returning false will present a "permission denied" message.
+     * 
+     * @abstract
+     * @return boolean
+     */
     abstract public function checkPermissions();
-    abstract public function process();
+
+    /**
+     * Process the controller, returning an array of placeholders to set.
+     *
+     * @abstract
+     * @param array $scriptProperties A array of REQUEST parameters.
+     * @return mixed Either an error or output string, or an array of placeholders to set.
+     */
+    abstract public function process(array $scriptProperties = array());
+
+    /**
+     * Return a string to set as the controller's page title.
+     * 
+     * @abstract
+     * @return string
+     */
     abstract public function getPageTitle();
+
+    /**
+     * Register any custom CSS or JS in this method.
+     * @abstract
+     * @return void
+     */
     abstract public function loadCustomCssJs();
 
-
+    /**
+     * Get the page header for the controller.
+     * 
+     * @return string
+     */
     public function getHeader() {
         $modx =& $this->modx;
         $this->modx->smarty->setTemplatePath($this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/');
         $o = include_once $this->getControllersPath(true).'header.php';
         return $o;
     }
+    
+    /**
+     * Get the page footer for the controller.
+     * @return string
+     */
     public function getFooter() {
         $modx =& $this->modx;
         $this->modx->smarty->setTemplatePath($this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/');
@@ -180,6 +284,7 @@ abstract class modManagerController {
 });</script>');
         }
     }
+    
     /**
      * Grabs a stripped version of modx to prevent caching of JS after upgrades
      *
@@ -321,5 +426,23 @@ abstract class modManagerController {
             $this->ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
         }
         return $overridden;
+    }
+
+    /**
+     * Load the working context for this controller.
+     * 
+     * @return modContext|string
+     */
+    public function loadWorkingContext() {
+        $wctx = !empty($_GET['wctx']) ? $_GET['wctx'] : $this->modx->context->get('key');
+        if (!empty($wctx)) {
+            $this->workingContext = $this->modx->getContext($wctx);
+            if (!$this->workingContext) {
+                $this->failure($this->modx->lexicon('permission_denied'));
+            }
+        } else {
+            $this->workingContext =& $this->modx->context;
+        }
+        return $this->workingContext;
     }
 }

@@ -29,7 +29,7 @@ class modManagerResponse extends modResponse {
      * Overrides modResponse::outputContent to provide mgr-context specific
      * response.
      *
-     * {@inheritdoc}
+     * @param array $options
      */
     public function outputContent(array $options = array()) {
         $modx= & $this->modx;
@@ -63,9 +63,13 @@ class modManagerResponse extends modResponse {
                 $f = $path.$this->action['controller'];
                 $className = $this->getControllerClassName();
                 $classPath = strtolower($f).'.class.php';
-                if (!file_exists($classPath)) { /* handle Revo <2.2 controllers */
-                    $className = 'modManagerControllerDeprecated';
-                    $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+                if (!file_exists($classPath)) {
+                    if (file_exists(strtolower($f).'/index.class.php')) {
+                        $classPath = strtolower($f).'/index.class.php';
+                    } else { /* handle Revo <2.2 controllers */
+                        $className = 'modManagerControllerDeprecated';
+                        $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+                    }
                 }
 
                 ob_start();
@@ -99,9 +103,14 @@ class modManagerResponse extends modResponse {
         @session_write_close();
         exit();
     }
-    
+
+    /**
+     * Get the appropriate path to the controllers directory for the active Namespace.
+     * 
+     * @param string $theme
+     * @return string The path to the Namespace's controllers directory.
+     */
     public function getNamespacePath($theme = 'default') {
-            
         /* find context path */
         if (isset($this->action['namespace']) && $this->action['namespace'] != 'core') {
             /* if a custom 3rd party path */
@@ -116,5 +125,43 @@ class modManagerResponse extends modResponse {
         }
         return $path;
 
+    }
+    
+    /**
+     * Adds a lexicon topic to this page's language topics to load. Will load
+     * the topic as well.
+     *
+     * @param string $topic The topic to load, in standard namespace:topic format
+     * @return boolean True if successful
+     */
+    public function addLangTopic($topic) {
+        $this->modx->lexicon->load($topic);
+        $topics = $this->getLangTopics();
+        $topics[] = $topic;
+        return $this->setLangTopics($topics);
+    }
+
+    /**
+     * Adds a lexicon topic to this page's language topics to load
+     *
+     * @return boolean True if successful
+     */
+    public function getLangTopics() {
+        $topics = $this->modx->smarty->get_template_vars('_lang_topics');
+        return explode(',',$topics);
+    }
+
+    /**
+     * Sets the language topics for this page
+     *
+     * @param array $topics The array of topics to set
+     * @return boolean True if successful
+     */
+    public function setLangTopics(array $topics = array()) {
+        if (!is_array($topics) || empty($topics)) return false;
+
+        $topics = array_unique($topics);
+        $topics = implode(',',$topics);
+        return $this->modx->smarty->assign('_lang_topics',$topics);
     }
 }

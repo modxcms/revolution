@@ -1,21 +1,15 @@
 <?php
 /**
  * @package modx
+ * @subpackage manager.controllers.system
  */
-/**
- * Loads Namespace management
- *
- * @package modx
- * @subpackage manager.workspaces
- */
-class WorkspacesNamespaceManagerController extends modManagerController {
-
+class SystemContentTypeManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('namespaces');
+        return $this->modx->hasPermission('content_types');
     }
 
     /**
@@ -23,8 +17,8 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/modx.namespace.panel.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/index.js');
+        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.content.type.js');
+        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/sections/system/content.type.js');
     }
 
     /**
@@ -36,11 +30,11 @@ class WorkspacesNamespaceManagerController extends modManagerController {
 
     /**
      * Return the pagetitle
-     * 
+     *
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('namespaces');
+        return $this->modx->lexicon('content_types');
     }
 
     /**
@@ -48,7 +42,7 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/namespace/index.tpl';
+        return 'system/contenttype/index.tpl';
     }
 
     /**
@@ -56,6 +50,6 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('workspace','namespace');
+        return array('content_type');
     }
 }

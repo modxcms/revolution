@@ -27,9 +27,10 @@ class HelpManagerController extends modManagerController {
 
     /**
      * Custom logic code here for setting placeholders, etc
-     * @return void
+     * @param array $scriptProperties
+     * @return mixed
      */
-    public function process() {}
+    public function process(array $scriptProperties = array()) {}
 
     /**
      * Return the pagetitle

@@ -1,21 +1,15 @@
 <?php
 /**
  * @package modx
+ * @subpackage manager.controllers.system
  */
-/**
- * Loads Namespace management
- *
- * @package modx
- * @subpackage manager.workspaces
- */
-class WorkspacesNamespaceManagerController extends modManagerController {
-
+class SystemEventManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('namespaces');
+        return $this->modx->hasPermission('error_log_view');
     }
 
     /**
@@ -23,8 +17,12 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/modx.namespace.panel.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/index.js');
+        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.panel.error.log.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/system/event.js');
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        MODx.hasEraseErrorLog = "'.($this->modx->hasPermission('error_log_erase') ? 1 : 0).'"
+        </script>');
     }
 
     /**
@@ -36,11 +34,11 @@ class WorkspacesNamespaceManagerController extends modManagerController {
 
     /**
      * Return the pagetitle
-     * 
+     *
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('namespaces');
+        return $this->modx->lexicon('error_log');
     }
 
     /**
@@ -48,7 +46,7 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/namespace/index.tpl';
+        return 'system/event/list.tpl';
     }
 
     /**
@@ -56,6 +54,6 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('workspace','namespace');
+        return array('system_events');
     }
 }

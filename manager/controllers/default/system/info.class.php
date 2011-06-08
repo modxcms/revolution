@@ -17,9 +17,11 @@ class SystemInfoManagerController extends modManagerController {
 
     /**
      * Custom logic code here for setting placeholders, etc
+     *
+     * @param array $scriptProperties
      * @return array
      */
-    public function process() {
+    public function process(array $scriptProperties = array()) {
         $pi = $this->getPhpInfo(INFO_GENERAL);
         $m = $this->parsePHPModules();
         $dbtype_mysql = $this->modx->config['dbtype'] == 'mysql';

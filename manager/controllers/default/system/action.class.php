@@ -3,19 +3,18 @@
  * @package modx
  */
 /**
- * Loads Namespace management
+ * Loads the System Actions page
  *
  * @package modx
- * @subpackage manager.workspaces
+ * @subpackage manager
  */
-class WorkspacesNamespaceManagerController extends modManagerController {
-
+class SystemActionManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('namespaces');
+        return $this->modx->hasPermission('actions');
     }
 
     /**
@@ -23,8 +22,11 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/modx.namespace.panel.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/index.js');
+        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.tree.action.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.tree.menu.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.panel.actions.js');
+        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/system/action.js');
     }
 
     /**
@@ -36,11 +38,11 @@ class WorkspacesNamespaceManagerController extends modManagerController {
 
     /**
      * Return the pagetitle
-     * 
+     *
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('namespaces');
+        return $this->modx->lexicon('actions');
     }
 
     /**
@@ -48,7 +50,7 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/namespace/index.tpl';
+        return 'system/action/index.tpl';
     }
 
     /**
@@ -56,6 +58,6 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('workspace','namespace');
+        return array('action','menu','namespace');
     }
 }

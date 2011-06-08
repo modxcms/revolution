@@ -1,21 +1,17 @@
 <?php
 /**
- * @package modx
- */
-/**
- * Loads Namespace management
+ * Loads the manager logs page
  *
  * @package modx
- * @subpackage manager.workspaces
+ * @subpackage manager.system.logs
  */
-class WorkspacesNamespaceManagerController extends modManagerController {
-
+class SystemLogsIndexManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('namespaces');
+        return $this->modx->hasPermission('logs');
     }
 
     /**
@@ -23,8 +19,8 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/modx.namespace.panel.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/index.js');
+        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.manager.log.js');
+        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/sections/system/logs.js');
     }
 
     /**
@@ -36,11 +32,11 @@ class WorkspacesNamespaceManagerController extends modManagerController {
 
     /**
      * Return the pagetitle
-     * 
+     *
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('namespaces');
+        return $this->modx->lexicon('manager_log');
     }
 
     /**
@@ -48,7 +44,7 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/namespace/index.tpl';
+        return 'system/logs/index.tpl';
     }
 
     /**
@@ -56,6 +52,6 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('workspace','namespace');
+        return array('manager_log');
     }
 }

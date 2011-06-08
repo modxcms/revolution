@@ -3,7 +3,7 @@
  * @package modx
  */
 class modManagerControllerDeprecated extends modManagerController {
-    public function process() {
+    public function process(array $scriptProperties = array()) {
         $modx =& $this->modx;
         $theme = $this->modx->getOption('manager_theme',null,'default');
 
