@@ -596,17 +596,25 @@ class modUser extends modPrincipal {
             }
         }
 
-        $member = $this->xpdo->newObject('modUserGroupMember');
-        $member->set('member',$this->get('id'));
-        $member->set('user_group',$usergroup->get('id'));
-        if (!empty($role)) {
-            $member->set('role',$role->get('id'));
+        $member = $this->xpdo->getObject('modUserGroupMember',array(
+            'member' => $this->get('id'),
+            'user_group' => $usergroup->get('id'),
+        ));
+        if (empty($member)) {
+            $member = $this->xpdo->newObject('modUserGroupMember');
+            $member->set('member',$this->get('id'));
+            $member->set('user_group',$usergroup->get('id'));
+            if (!empty($role)) {
+                $member->set('role',$role->get('id'));
+            }
+            $joined = $member->save();
+            if (!$joined) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
+            }
+        } else {
+            $joined = true;
         }
-        $saved = $member->save();
-        if (!$saved) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
-        }
-        return $saved;
+        return $joined;
     }
 
     /**

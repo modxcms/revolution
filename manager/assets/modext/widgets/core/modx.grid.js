@@ -41,12 +41,23 @@ MODx.grid.Grid = function(config) {
             ,width: 40
             ,listeners: {
                 'change': {fn:function(tf,nv,ov) {
+                    if (Ext.isEmpty(nv)) return false;
                     nv = parseInt(nv);
                     this.getBottomToolbar().pageSize = nv;
                     this.store.load({params:{
                         start:0
                         ,limit: nv
                     }});
+                },scope:this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
                 },scope:this}
             }
         }] : [];
