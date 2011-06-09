@@ -28,7 +28,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         }
         var items = [];
 
-        if (this.config.is_folder) {
+        if (this.config.hasChildren) {
             items.push({
                 xtype: 'xcheckbox'
                 ,fieldLabel: _('duplicate_children')
