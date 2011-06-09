@@ -4,7 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 - Add modResource::getControllerPath method for better abstraction of derivative resource types
 - Add show_in_tree and hide_children_in_tree fields to modResource for better support with custom Resource types
-- Fix issue with modauth, wctx and RTE browser
+- [#5025] Fix issue where duplicate resource window did not show duplicate children option
 - [#5007] Only create Lexicon Entries for Settings if they are specified
 - [#5006] Fix issue with updating a policy template with no permissions
 - [#5001] Fix issue with modauth, wctx and RTE browser
