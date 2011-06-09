@@ -39,7 +39,7 @@ class ElementPropertySetIndexManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('property_sets');
+        return $this->modx->lexicon('propertysets');
     }
 
     /**
