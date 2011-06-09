@@ -41,7 +41,7 @@ class modManagerResponse extends modResponse {
 
         $theme = $this->modx->getOption('manager_theme',null,'default');
 
-        $this->modx->lexicon->load('dashboard','topmenu','file');
+        $this->modx->lexicon->load('dashboard','topmenu','file','action');
         if ($action == 0 || !isset($this->modx->actionMap[$action])) {
             $action = $this->modx->getObject('modAction',array(
                 'namespace' => 'core',
@@ -82,7 +82,7 @@ class modManagerResponse extends modResponse {
 
         }
         if (empty($this->body)) {
-            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
+            $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
         }
         if (is_array($this->body)) {
             $this->modx->smarty->assign('_e', $this->body);
