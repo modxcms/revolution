@@ -60,7 +60,7 @@ if (empty($context) || $context == 'root') {
     $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent'));
     $c->select($modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns));
     $c->select(array(
-        'COUNT(Child.id) AS childrenCount'
+        'childrenCount' => 'COUNT(Child.id)',
     ));
     $c->where(array(
         'context_key' => $context,
@@ -192,6 +192,8 @@ while ($item) {
                 $itemArray['hasChildren'] = false;
                 $itemArray['children'] = array();
                 $itemArray['expanded'] = true;
+            } else {
+                $itemArray['hasChildren'] = true;
             }
             $items[] = $itemArray;
             unset($qtip,$class,$menu,$itemArray,$hasChildren);
