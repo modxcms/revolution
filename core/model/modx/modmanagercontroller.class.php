@@ -106,14 +106,21 @@ abstract class modManagerController {
         }
         $this->loadCustomCssJs();
         $this->firePreRenderEvents();
-        $this->registerCssJs();
 
+        /* handle FC rules */
         if (!empty($this->ruleOutput)) {
-            $this->modx->regClientStartupHTMLBlock(implode("\n",$this->ruleOutput));
+            $this->addHtml(implode("\n",$this->ruleOutput));
         }
 
+        /* register CSS/JS */
+        $this->registerCssJs();
+
         $this->setPlaceholder('_pagetitle',$this->getPageTitle());
-        $this->content = $this->getHeader();
+
+        $this->content = '';
+        if ($this->loadHeader) {
+            $this->content .= $this->getHeader();
+        }
 
         $tpl = $this->getTemplateFile();
         if ($this->isFailure) {
@@ -125,7 +132,9 @@ abstract class modManagerController {
         
         $this->content .= $content;
 
-        $this->content .= $this->getFooter();
+        if ($this->loadFooter) {
+            $this->content .= $this->getFooter();
+        }
 
         $this->firePostRenderEvents();
 
@@ -247,13 +256,32 @@ abstract class modManagerController {
      */
     abstract public function loadCustomCssJs();
 
+    /**
+     * Return the relative path to the template file to load
+     * @abstract
+     * @return string
+     */
     abstract public function getTemplateFile();
+
+    /**
+     * Specify an array of language topics to load for this controller
+     * 
+     * @return array
+     */
+    public function getLanguageTopics() {
+        return array();
+    }
 
     /**
      * Can be used to fire events after all the CSS/JS is loaded for a page
      * @return void
      */
     public function firePostRenderEvents() {}
+    
+    /**
+     * Fire any pre-render events for the controller
+     * @return void
+     */
     public function firePreRenderEvents() {}
 
     /**
@@ -287,40 +315,52 @@ abstract class modManagerController {
      */
     public function registerBaseScripts() {
         $managerUrl = $this->modx->getOption('manager_url');
-        if ($this->modx->getOption('concat_js',null,false)) {
-            if ($this->modx->getOption('compress_js',null,false)) {
-                $this->modx->regClientStartupScript($managerUrl.'assets/modext/modext-min.js');
-            } else {
-                $this->modx->regClientStartupScript($managerUrl.'assets/modext/modext.js');
-            }
-        } else {
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.localization.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/utilities.js');
+        $externals = array();
 
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.component.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.panel.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tabs.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.window.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tree.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.combo.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.grid.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.console.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.portal.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/modx.treedrop.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/windows.js');
-
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.tree.element.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/system/modx.tree.directory.js');
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.view.js');
-        }
 
         if ($this->loadBaseJavascript) {
+            if ($this->modx->getOption('concat_js',null,false)) {
+                if ($this->modx->getOption('compress_js',null,false)) {
+                    $externals[] = $managerUrl.'assets/modext/modext-min.js';
+                } else {
+                    $externals[] = $managerUrl.'assets/modext/modext.js';
+                }
+            } else {
+                $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
+                $externals[] = $managerUrl.'assets/modext/util/utilities.js';
+
+                $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
+
+                $externals[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
+                $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
+            }
+            
             $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
-            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
-            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
+
+            $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
+
+            $o = '';
+            if (!empty($externals)) {
+                $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
+                $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals).'"></script>';
+            }
+
+            $o .= '<script type="text/javascript">Ext.onReady(function() {
     MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});
-});</script>');
+});</script>';
+            $this->modx->smarty->assign('maincssjs',$o);
         }
     }
     
@@ -361,38 +401,29 @@ abstract class modManagerController {
     public function registerCssJs() {
         $this->_prepareHead();
         $versionPostFix = $this->_prepareVersionPostfix();
-        /* if true, use compressed JS */
-        if ($this->modx->getOption('compress_js',null,false)) {
-            foreach ($this->modx->sjscripts as &$scr) {
-                $pos = strpos($scr,'.js');
-                if ($pos) {
-                    $newUrl = substr($scr,0,$pos).'-min'.substr($scr,$pos,strlen($scr));
-                } else { continue; }
-                $pos = strpos($newUrl,'modext/');
-                if ($pos) {
-                    $pos = $pos+7;
-                    $newUrl = substr($newUrl,0,$pos).'build/'.substr($newUrl,$pos,strlen($newUrl));
-                }
 
-                $path = str_replace(array(
-                    $this->modx->getOption('manager_url').'assets/modext/',
-                    '<script type="text/javascript" src="',
-                    '"></script>',
-                ),'',$newUrl);
-
-                if (file_exists($this->modx->getOption('manager_path').'assets/modext/'.$path)) {
-                    $scr = $newUrl;
-                }
-                /* append version string */
-                $scr = $this->_postfixVersionToScript($scr,$versionPostFix);
-            }
-        } else {
-            foreach ($this->modx->sjscripts as &$scr) {
-                $scr = $this->_postfixVersionToScript($scr,$versionPostFix);
-            }
+        $o = array();
+        foreach ($this->head['js'] as $js) {
+            $o[] = $js;
         }
-        /* assign css/js to header */
-        $this->modx->smarty->assign('cssjs',$this->modx->sjscripts);
+        foreach ($this->head['css'] as $css) {
+            $o[] = $css;
+        }
+        $cssjs = array();
+        if (!empty($o)) {
+            $cssjs[] = '<script type="text/javascript" src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$o).'"></script>';
+        }
+
+        foreach ($this->head['html'] as $html) {
+            $cssjs[] = $html;
+        }
+
+        foreach ($this->modx->sjscripts as $scr) {
+            $scr = $this->_postfixVersionToScript($scr,$versionPostFix);
+            $cssjs[] = $scr;
+        }
+        
+        $this->modx->smarty->assign('cssjs',$cssjs);
     }
 
     /**
@@ -401,17 +432,8 @@ abstract class modManagerController {
      */
     private function _prepareHead() {
         $this->head['js'] = array_unique($this->head['js']);
-        foreach ($this->head['js'] as $script) {
-            $this->modx->regClientStartupScript($script);
-        }
         $this->head['html'] = array_unique($this->head['html']);
-        foreach ($this->head['html'] as $html) {
-            $this->modx->regClientStartupHTMLBlock($html);
-        }
         $this->head['css'] = array_unique($this->head['css']);
-        foreach ($this->head['css'] as $css) {
-            $this->modx->regClientCSS($css);
-        }
     }
 
     /**
