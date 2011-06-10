@@ -28,8 +28,20 @@ abstract class ResourceManagerController extends modManagerController {
      */
     public static function getInstance(modX &$modx,$className,array $config = array()) {
         $resourceClass = 'modDocument';
+        $isDerivative = false;
         if (!empty($_REQUEST['class_key']) && !in_array($_REQUEST['class_key'],array('modDocument','modResource'))) {
-            $resourceClass = str_replace(array('../','..','/','\\'),'',$_REQUEST['class_key']);
+            $isDerivative = true;
+            $resourceClass = $_REQUEST['class_key'];
+        } else if (!empty($_REQUEST['id'])) {
+            $resource = $modx->getObject('modResource',$_REQUEST['id']);
+            if ($resource && !in_array($resource->get('class_key'),array('modDocument','modResource'))) {
+                $isDerivative = true;
+                $resourceClass = $resource->get('class_key');
+            }
+        }
+
+        if ($isDerivative) {
+            $resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
 
             $delegateView = $modx->call($resourceClass,'getControllerPath',array(&$modx));
             $action = strtolower(str_replace(array('Resource','ManagerController'),'',$className));
@@ -41,6 +53,13 @@ abstract class ResourceManagerController extends modManagerController {
         $controller->resourceClass = $resourceClass;
         return $controller;
     }
+
+    /**
+     * Used to set values on the resource record sent to the template for derivative classes
+     * 
+     * @return void
+     */
+    public function prepareResource() {}
 
     /**
      * Specify the language topics to load
@@ -58,14 +77,123 @@ abstract class ResourceManagerController extends modManagerController {
         $this->canPublish = $this->modx->hasPermission('publish_document');
         $this->showAccessPermissions = $this->modx->hasPermission('access_permissions');
     }
+    
+    /**
+     * Get and set the parent for this resource
+     * @return string The pagetitle of the parent
+     */
+    public function setParent() {
+        /* handle default parent */
+        $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
+        $parentId = !empty($scriptProperties['parent']) ? $scriptProperties['parent'] : $this->resource->get('parent');
+        if ($parentId == 0) {
+            $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
+        } else {
+            $this->parent = $this->modx->getObject('modResource',$parentId);
+            if ($this->parent != null) {
+                $parentName = $this->parent->get('pagetitle');
+                $this->resource->set('parent',$parentId);
+            }
+        }
+
+        if ($this->parent == null) {
+            $this->parent = $this->modx->newObject($this->resourceClass);
+            $this->parent->set('id',0);
+            $this->parent->set('parent',0);
+        }
+        return $parentName;
+    }
+
+    /**
+     * Fire any pre-render events
+     * @return array|bool|string
+     */
+    public function firePreRenderEvents() {
+        $resourceId = $this->resource->get('id');
+        $properties = array(
+            'id' => $resourceId,
+            'mode' => !empty($resourceId) ? modSystemEvent::MODE_UPD : modSystemEvent::MODE_NEW,
+        );
+        if (!empty($resourceId)) {
+            $properties['resource'] =& $this->resource;
+        }
+        $onDocFormPrerender = $this->modx->invokeEvent('OnDocFormPrerender',$properties);
+        if (is_array($onDocFormPrerender)) {
+            $onDocFormPrerender = implode('',$onDocFormPrerender);
+        }
+        $this->setPlaceholder('onDocFormPrerender',$onDocFormPrerender);
+        return $onDocFormPrerender;
+    }
+
+    /**
+     * Fire any render events
+     * @return string
+     */
+    public function fireOnRenderEvent() {
+        $resourceId = $this->resource->get('id');
+        $this->onDocFormRender = $this->modx->invokeEvent('OnDocFormRender',array(
+            'id' => $resourceId,
+            'resource' => &$this->resource,
+            'mode' => !empty($resourceId) ? modSystemEvent::MODE_UPD : modSystemEvent::MODE_NEW,
+        ));
+        if (is_array($this->onDocFormRender)) $this->onDocFormRender = implode('',$this->onDocFormRender);
+        $this->onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onDocFormRender);
+        $this->setPlaceholder('onDocFormRender',$this->onDocFormRender);
+        return $this->onDocFormRender;
+    }
+
+    /**
+     * Initialize a RichText Editor, if set
+     *
+     * @return void
+     */
+    public function loadRichTextEditor() {
+        /* register JS scripts */
+        $rte = isset($this->scriptProperties['which_editor']) ? $this->scriptProperties['which_editor'] : $this->context->getOption('which_editor', '', $this->modx->_userConfig);
+        $this->setPlaceholder('which_editor',$rte);
+        /* Set which RTE if not core */
+        if ($this->context->getOption('use_editor', false, $this->modx->_userConfig) && !empty($rte)) {
+            /* invoke OnRichTextEditorRegister event */
+            $textEditors = $this->modx->invokeEvent('OnRichTextEditorRegister');
+            $this->setPlaceholder('text_editors',$textEditors);
+
+            $this->rteFields = array('ta');
+            $this->setPlaceholder('replace_richtexteditor',$this->rteFields);
+
+            /* invoke OnRichTextEditorInit event */
+            $resourceId = $this->resource->get('id');
+            $onRichTextEditorInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
+                'editor' => $rte,
+                'elements' => $this->rteFields,
+                'id' => $resourceId,
+                'resource' => &$this->resource,
+                'mode' => !empty($resourceId) ? modSystemEvent::MODE_UPD : modSystemEvent::MODE_NEW,
+            ));
+            if (is_array($onRichTextEditorInit)) {
+                $onRichTextEditorInit = implode('',$onRichTextEditorInit);
+                $this->setPlaceholder('onRichTextEditorInit',$onRichTextEditorInit);
+            }
+        }
+    }
+
+    /**
+     * Get and set the context for this resource
+     *
+     * @return modContext
+     */
+    public function setContext() {
+        $this->ctx = !empty($this->scriptProperties['context_key']) ? $this->scriptProperties['context_key'] : 'web';
+        $this->setPlaceholder('_ctx',$this->ctx);
+        $this->context = $this->modx->getContext($this->ctx);
+        return $this->context;
+    }
 
     /**
      * Load the TVs for the Resource
-     * 
-     * @param array $scriptProperties
+     *
      * @return string The TV editing form
      */
-    public function loadTVs(array $scriptProperties = array()) {
+    public function loadTVs() {
         $this->setPlaceholder('wctx',$this->resource->get('context_key'));
         $_GET['wctx'] = $this->resource->get('context_key');
 
@@ -169,7 +297,7 @@ abstract class ResourceManagerController extends modManagerController {
         $this->setPlaceholder('tvCounts',$this->modx->toJSON($this->tvCounts));
         $this->setPlaceholder('tvMap',$this->modx->toJSON($tvMap));
 
-        if (!empty($scriptProperties['showCheckbox'])) {
+        if (!empty($this->scriptProperties['showCheckbox'])) {
             $this->setPlaceholder('showCheckbox',1);
         }
 

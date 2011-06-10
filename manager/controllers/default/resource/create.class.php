@@ -57,8 +57,8 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $placeholders = array();
         
         /* handle template inheritance */
-        if (!empty($scriptProperties['parent'])) {
-            $this->parent = $this->modx->getObject('modResource',$scriptProperties['parent']);
+        if (!empty($this->scriptProperties['parent'])) {
+            $this->parent = $this->modx->getObject('modResource',$this->scriptProperties['parent']);
             if (!$this->parent->checkPolicy('add_children')) return $this->failure($this->modx->lexicon('resource_add_children_access_denied'));
         }
         $placeholders['parent'] = $this->parent;
@@ -68,19 +68,21 @@ class ResourceCreateManagerController extends ResourceManagerController {
 
         /* handle custom resource types */
         $this->resource = $this->modx->newObject($this->resourceClass);
+        $this->resource->set('id',0);
+        $this->resource->set('context_key',$this->context->get('key'));
         $placeholders['resource'] = $this->resource;
         $this->resourceArray = array();
         
         $placeholders['parentname'] = $this->setParent();
-        $placeholders['onDocFormRender'] = $this->fireOnRenderEvent();
+        $this->fireOnRenderEvent();
 
         /* check permissions */
         $this->setPermissions();
 
-        $this->loadRichTextEditor($scriptProperties);
+        $this->loadRichTextEditor();
 
         /* set default template */
-        $defaultTemplate = $this->getDefaultTemplate($scriptProperties);
+        $defaultTemplate = $this->getDefaultTemplate();
         $this->resourceArray = array_merge($this->resourceArray,array(
             'template' => $defaultTemplate,
             'content_type' => 1,
@@ -113,7 +115,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
 
         /* get TVs */
-        $this->loadTVs($scriptProperties);
+        $this->loadTVs();
 
         /* single-use token for creating resource */
         $this->setResourceToken();
@@ -123,12 +125,11 @@ class ResourceCreateManagerController extends ResourceManagerController {
 
     /**
      * Return the default template for this resource
-     * 
-     * @param array $scriptProperties
+     *
      * @return int
      */
-    public function getDefaultTemplate(array $scriptProperties = array()) {
-        $defaultTemplate = (isset($scriptProperties['template']) ? $scriptProperties['template'] : (!empty($this->parent->id) ? $this->parent->get('template') : $this->context->getOption('default_template', 0, $this->modx->_userConfig)));
+    public function getDefaultTemplate() {
+        $defaultTemplate = (isset($this->scriptProperties['template']) ? $this->scriptProperties['template'] : (!empty($this->parent->id) ? $this->parent->get('template') : $this->context->getOption('default_template', 0, $this->modx->_userConfig)));
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->innerJoin('modFormCustomizationSet','FCSet');
@@ -178,79 +179,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
     }
 
     /**
-     * Get and set the parent for this resource
-     * @return string The pagetitle of the parent
-     */
-    public function setParent() {
-        /* handle default parent */
-        $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
-        $this->resource->set('parent',0);
-        if (isset ($scriptProperties['parent'])) {
-            if ($scriptProperties['parent'] == 0) {
-                $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
-            } else {
-                $this->parent = $this->modx->getObject('modResource',$scriptProperties['parent']);
-                if ($this->parent != null) {
-                    $parentName = $this->parent->get('pagetitle');
-                    $this->resource->set('parent',$this->parent->get('id'));
-                }
-            }
-        }
-
-        if ($this->parent == null) {
-            $this->parent = $this->modx->newObject($this->resourceClass);
-            $this->parent->set('id',0);
-            $this->parent->set('parent',0);
-        }
-        return $parentName;
-    }
-
-    /**
-     * Initialize a RichText Editor, if set
-     * 
-     * @param array $scriptProperties
-     * @return void
-     */
-    public function loadRichTextEditor(array $scriptProperties = array()) {
-        /* register JS scripts */
-        $rte = isset($scriptProperties['which_editor']) ? $scriptProperties['which_editor'] : $this->context->getOption('which_editor', '', $this->modx->_userConfig);
-        $this->setPlaceholder('which_editor',$rte);
-        /* Set which RTE if not core */
-        if ($this->context->getOption('use_editor', false, $this->modx->_userConfig) && !empty($rte)) {
-            /* invoke OnRichTextEditorRegister event */
-            $textEditors = $this->modx->invokeEvent('OnRichTextEditorRegister');
-            $this->setPlaceholder('text_editors',$textEditors);
-
-            $this->rteFields = array('ta');
-            $this->setPlaceholder('replace_richtexteditor',$this->rteFields);
-
-            /* invoke OnRichTextEditorInit event */
-            $onRichTextEditorInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
-                'editor' => $rte,
-                'elements' => $this->rteFields,
-                'id' => 0,
-                'mode' => modSystemEvent::MODE_NEW,
-            ));
-            if (is_array($onRichTextEditorInit)) {
-                $onRichTextEditorInit = implode('',$onRichTextEditorInit);
-                $this->setPlaceholder('onRichTextEditorInit',$onRichTextEditorInit);
-            }
-        }
-    }
-
-    /**
-     * Get and set the context for this resource
-     *
-     * @return modContext
-     */
-    public function setContext() {
-        $this->ctx = !empty($scriptProperties['context_key']) ? $scriptProperties['context_key'] : 'web';
-        $this->setPlaceholder('_ctx',$this->ctx);
-        $this->context = $this->modx->getContext($this->ctx);
-        return $this->context;
-    }
-
-    /**
      * Set the Resource token for creating a resource
      * 
      * @return void
@@ -261,36 +189,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
         }
         $this->resourceArray['create_resource_token'] = uniqid('', true);
         $_SESSION['newResourceTokens'][] = $this->resourceArray['create_resource_token'];
-    }
-
-    /**
-     * Fire any pre-render events
-     * @return array|bool|string
-     */
-    public function firePreRenderEvents() {
-        $onDocFormPrerender = $this->modx->invokeEvent('OnDocFormPrerender',array(
-            'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
-        ));
-        if (is_array($onDocFormPrerender)) {
-            $onDocFormPrerender = implode('',$onDocFormPrerender);
-        }
-        $this->setPlaceholder('onDocFormPrerender',$onDocFormPrerender);
-        return $onDocFormPrerender;
-    }
-
-    /**
-     * Fire any render events
-     * @return string
-     */
-    public function fireOnRenderEvent() {
-        $this->onDocFormRender = $this->modx->invokeEvent('OnDocFormRender',array(
-            'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
-        ));
-        if (is_array($this->onDocFormRender)) $this->onDocFormRender = implode('',$this->onDocFormRender);
-        $this->onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onDocFormRender);
-        return $this->onDocFormRender;
     }
 
     /**

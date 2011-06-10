@@ -24,6 +24,7 @@ abstract class modManagerController {
     public $workingContext;
     /** @var string The current output content */
     public $content = '';
+    public $scriptProperties = array();
 
     /** @var string Any Form Customization rule output that was created. */
     protected $ruleOutput = array();
@@ -93,8 +94,8 @@ abstract class modManagerController {
         $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
             'action' => $this->config,
         ));
-        $scriptProperties = array_merge($_GET,$_POST);
-        $placeholders = $this->process($scriptProperties);
+        $this->scriptProperties = array_merge($_GET,$_POST);
+        $placeholders = $this->process($this->scriptProperties);
         if (!empty($placeholders) && !$this->isFailure && is_array($placeholders)) {
             foreach ($placeholders as $k => $v) {
                 $this->setPlaceholder($k,$v);
