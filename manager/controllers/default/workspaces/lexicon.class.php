@@ -20,11 +20,11 @@ class WorkspacesLexiconManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/lexicon/combos.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/lexicon/lexicon.grid.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/lexicon/lexicon.panel.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/lexicon/index.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/lexicon/combos.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/lexicon/lexicon.grid.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/lexicon/lexicon.panel.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/lexicon/index.js');
     }
 
     /**

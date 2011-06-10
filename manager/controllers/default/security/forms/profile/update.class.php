@@ -22,11 +22,11 @@ class SecurityFormsProfileUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/fc/modx.fc.common.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/fc/modx.panel.fcprofile.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/fc/modx.grid.fcset.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/fc/profile/update.js');
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.fc.common.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.panel.fcprofile.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.grid.fcset.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/fc/profile/update.js');
+        $this->addHtml('<script type="text/javascript">
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

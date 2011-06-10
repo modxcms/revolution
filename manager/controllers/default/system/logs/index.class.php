@@ -19,8 +19,8 @@ class SystemLogsIndexManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.manager.log.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/sections/system/logs.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.manager.log.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/logs.js');
     }
 
     /**

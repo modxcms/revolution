@@ -22,9 +22,9 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.panel.access.policy.template.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/security/access/policy/template/update.js');
-        $this->modx->regClientStartupHTMLBlock('
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.access.policy.template.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/security/access/policy/template/update.js');
+        $this->addHtml('
         <script type="text/javascript">
         // <![CDATA[
         Ext.onReady(function() {

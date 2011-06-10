@@ -23,10 +23,10 @@ class SystemActionManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.tree.action.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.tree.menu.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.panel.actions.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/system/action.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.tree.action.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.tree.menu.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.panel.actions.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/system/action.js');
     }
 
     /**

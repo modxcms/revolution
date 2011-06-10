@@ -20,8 +20,8 @@ class SecurityFormsManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/fc/modx.grid.fcprofile.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/fc/list.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.grid.fcprofile.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/fc/list.js');
     }
 
     /**

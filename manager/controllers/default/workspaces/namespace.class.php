@@ -23,8 +23,8 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/modx.namespace.panel.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/index.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/modx.namespace.panel.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/index.js');
     }
 
     /**

@@ -23,21 +23,21 @@ class WorkspacesManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/core/modx.view.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.tree.checkbox.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.panel.wizard.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package.browser.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package.download.panel.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package.add.panel.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package.install.window.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package.uninstall.window.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package.update.window.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/combos.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package.grid.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/provider.grid.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/workspace.panel.js');
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";</script>');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/index.js');
+        $this->addJavascript($mgrUrl.'assets/modext/core/modx.view.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.tree.checkbox.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.panel.wizard.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.browser.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.download.panel.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.add.panel.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.install.window.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.uninstall.window.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.update.window.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/combos.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.grid.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/provider.grid.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/workspace.panel.js');
+        $this->addHtml('<script type="text/javascript">MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";</script>');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/index.js');
     }
 
     /**

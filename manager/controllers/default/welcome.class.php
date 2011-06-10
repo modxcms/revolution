@@ -26,10 +26,10 @@
 
         $hasViewDocument = $this->modx->hasPermission('view_document');
         $hasViewUser = $this->modx->hasPermission('view_user');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/widgets/modx.panel.welcome.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/sections/welcome.js');
-        $this->modx->regClientStartupHTMLBlock('
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/modx.panel.welcome.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/welcome.js');
+        $this->addHtml('
         <script type="text/javascript">
         // <![CDATA[
         Ext.onReady(function() {
@@ -48,7 +48,7 @@
         </script>');
         if ($this->showWelcomeScreen) {
             $url = $this->modx->getOption('welcome_screen_url',null,'http://misc.modx.com/revolution/welcome.20.html');
-            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+            $this->addHtml('<script type="text/javascript">
         // <![CDATA[
         Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });
         // ]]>

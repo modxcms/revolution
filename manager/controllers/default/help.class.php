@@ -22,7 +22,7 @@ class HelpManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/sections/system/help.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/help.js');
     }
 
     /**

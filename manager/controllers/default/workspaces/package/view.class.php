@@ -20,10 +20,10 @@ class WorkspacesPackageViewManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/combos.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package/package.versions.grid.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package/package.panel.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/workspace/package/index.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/combos.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package/package.versions.grid.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package/package.panel.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package/index.js');
     }
 
     /**

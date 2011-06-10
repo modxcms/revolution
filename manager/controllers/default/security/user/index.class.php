@@ -20,8 +20,8 @@ class SecurityUserManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/security/user/list.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/security/user/list.js');
     }
 
     /**

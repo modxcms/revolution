@@ -20,12 +20,12 @@ class SecurityPermissionManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.template.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.tree.user.group.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.role.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.panel.groups.roles.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/security/permissions/list.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.template.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.tree.user.group.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.role.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.groups.roles.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/security/permissions/list.js');
     }
 
     /**

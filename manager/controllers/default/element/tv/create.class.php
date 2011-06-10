@@ -24,13 +24,13 @@ class ElementTVCreateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.tv.template.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.tv.security.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/element/tv/create.js');
-        $this->modx->regClientStartupHTMLBlock('
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.tv.template.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.tv.security.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/element/tv/create.js');
+        $this->addHtml('
 <script type="text/javascript">
 // <![CDATA[
 MODx.onTVFormRender = "'.$this->onTVFormRender.'";

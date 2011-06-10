@@ -21,10 +21,10 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/fc/modx.fc.common.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/fc/modx.panel.fcset.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/fc/set/update.js');
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.fc.common.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.panel.fcset.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/fc/set/update.js');
+        $this->addHtml('<script type="text/javascript">
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

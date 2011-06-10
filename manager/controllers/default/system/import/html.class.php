@@ -20,9 +20,9 @@ class SystemImportHtmlManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/resource/modx.tree.resource.simple.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.panel.import.html.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/system/import/html.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.tree.resource.simple.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.panel.import.html.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/system/import/html.js');
     }
 
     /**

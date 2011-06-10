@@ -20,9 +20,9 @@ class SecurityProfileManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/security/profile/update.js');
-        $this->modx->regClientStartupHTMLBlock('
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/security/profile/update.js');
+        $this->addHtml('
         <script type="text/javascript">
         // <![CDATA[
         Ext.onReady(function() {

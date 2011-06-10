@@ -20,14 +20,14 @@ class SystemSettingsManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $this->addHtml('<script type="text/javascript">
         // <[!CDATA[
         MODx.onSiteSettingsRender = "'.$this->onSiteSettingsRender.'";
         // ]]>
         </script>');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.panel.system.settings.js');
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/sections/system/settings.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.panel.system.settings.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/settings.js');
     }
 
     /**

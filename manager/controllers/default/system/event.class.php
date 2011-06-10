@@ -18,9 +18,9 @@ class SystemEventManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/system/modx.panel.error.log.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/system/event.js');
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.panel.error.log.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/system/event.js');
+        $this->addHtml('<script type="text/javascript">
         MODx.hasEraseErrorLog = "'.($this->modx->hasPermission('error_log_erase') ? 1 : 0).'"
         </script>');
     }

@@ -26,8 +26,8 @@ class SystemFileEditManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->modx->regClientStartupScript($this->modx->getOption('manager_url').'assets/modext/sections/system/file/edit.js');
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/file/edit.js');
+        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-file-edit"
                 ,file: "'.$this->filename.'"

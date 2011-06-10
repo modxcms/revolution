@@ -25,6 +25,7 @@ abstract class modManagerController {
     /** @var string The current output content */
     public $content = '';
     public $scriptProperties = array();
+    public $head = array('css' => array(),'js' => array(),'html' => array());
 
     /** @var string Any Form Customization rule output that was created. */
     protected $ruleOutput = array();
@@ -105,7 +106,7 @@ abstract class modManagerController {
         }
         $this->loadCustomCssJs();
         $this->firePreRenderEvents();
-        $this->loadCssJs();
+        $this->registerCssJs();
 
         if (!empty($this->ruleOutput)) {
             $this->modx->regClientStartupHTMLBlock(implode("\n",$this->ruleOutput));
@@ -357,7 +358,8 @@ abstract class modManagerController {
     /**
      * Registers CSS/JS to manager interface
      */
-    public function loadCssJs() {
+    public function registerCssJs() {
+        $this->_prepareHead();
         $versionPostFix = $this->_prepareVersionPostfix();
         /* if true, use compressed JS */
         if ($this->modx->getOption('compress_js',null,false)) {
@@ -393,6 +395,53 @@ abstract class modManagerController {
         $this->modx->smarty->assign('cssjs',$this->modx->sjscripts);
     }
 
+    /**
+     * Prepare the set html/css/js to be added
+     * @return void
+     */
+    private function _prepareHead() {
+        $this->head['js'] = array_unique($this->head['js']);
+        foreach ($this->head['js'] as $script) {
+            $this->modx->regClientStartupScript($script);
+        }
+        $this->head['html'] = array_unique($this->head['html']);
+        foreach ($this->head['html'] as $html) {
+            $this->modx->regClientStartupHTMLBlock($html);
+        }
+        $this->head['css'] = array_unique($this->head['css']);
+        foreach ($this->head['css'] as $css) {
+            $this->modx->regClientCSS($css);
+        }
+    }
+
+    /**
+     * Add an external Javascript file to the head of the page
+     *
+     * @param string $script
+     * @return void
+     */
+    public function addJavascript($script) {
+        $this->head['js'][] = $script;
+    }
+
+    /**
+     * Add a block of HTML to the head of the page
+     *
+     * @param string $script
+     * @return void
+     */
+    public function addHtml($script) {
+        $this->head['html'][] = $script;
+    }
+
+    /**
+     * Add a external CSS file to the head of the page
+     * @param string $script
+     * @return void
+     */
+    public function addCss($script) {
+        $this->head['css'][] = $script;
+    }
 
 
     /**

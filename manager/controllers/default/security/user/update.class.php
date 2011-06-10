@@ -25,21 +25,21 @@ class SecurityUserUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);        
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $this->addHtml('<script type="text/javascript">
 // <![CDATA[
 MODx.onUserFormRender = "'.$this->onUserFormRender.'";
 // ]]>
 </script>');
         
         /* register JS scripts */
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/util/datetime.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.orm.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.settings.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/security/user/update.js');
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.orm.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.settings.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/security/user/update.js');
+        $this->addHtml('<script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() {
     MODx.load({

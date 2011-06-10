@@ -20,11 +20,11 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.context.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.resource.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.context.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.resource.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
     }
 
     /**

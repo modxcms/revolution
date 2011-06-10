@@ -10,14 +10,14 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
      */
     public function loadCustomCssJs() {
         $managerUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/static/update.js');
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $this->addJavascript($managerUrl.'assets/modext/util/datetime.js');
+        $this->addJavascript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
+        $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+        $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+        $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
+        $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
+        $this->addJavascript($managerUrl.'assets/modext/sections/resource/static/update.js');
+        $this->addHtml('<script type="text/javascript">
 // <![CDATA[
 MODx.config.publish_document = "'.$this->canPublish.'";
 MODx.onDocFormRender = "'.$this->onDocFormRender.'";

@@ -20,10 +20,10 @@ class ElementPropertySetIndexManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/element/modx.panel.property.set.js');
-        $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/element/propertyset/index.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.property.set.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/element/propertyset/index.js');
     }
 
     /**
