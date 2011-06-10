@@ -71,7 +71,13 @@ class modManagerResponse extends modResponse {
             ob_start();
             require_once $classPath;
             ob_end_clean();
-            $this->controller = new $className($this->modx,$this->action);
+            try {
+                $c = new $className($this->modx,$this->action);
+                /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
+                $this->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
             $this->body = $this->controller->render();
         } else {
             /* doesnt have permissions to view manager */

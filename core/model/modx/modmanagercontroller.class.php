@@ -48,6 +48,21 @@ abstract class modManagerController {
     }
 
     /**
+     * Return the proper instance of the derived class. This can be used to override how the manager loads a controller
+     * class; for example, when handling derivative classes with class_key settings.
+     * 
+     * @static
+     * @param modX $modx A reference to the modX object.
+     * @param string $className The name of the class that is being requested.
+     * @param array $config A configuration array of options related to this controller's action object.
+     * @return The class specified by $className
+     */
+    public static function getInstance(modX &$modx,$className,array $config = array()) {
+        $controller = new $className($modx,$config);
+        return $controller;
+    }
+
+    /**
      * Render the controller.
      * 
      * @return string
@@ -62,9 +77,9 @@ abstract class modManagerController {
         $this->modx->lexicon->load('action');
         $languageTopics = $this->getLanguageTopics();
         foreach ($languageTopics as $topic) { $this->modx->lexicon->load($topic); }
-        $this->modx->smarty->assign('_lang_topics',implode(',',$languageTopics));
-        $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
-        $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
+        $this->setPlaceholder('_lang_topics',implode(',',$languageTopics));
+        $this->setPlaceholder('_lang',$this->modx->lexicon->fetch());
+        $this->setPlaceholder('_ctx',$this->modx->context->get('key'));
 
 
         $this->loadControllersPath();
@@ -82,7 +97,7 @@ abstract class modManagerController {
         $placeholders = $this->process($scriptProperties);
         if (!empty($placeholders) && !$this->isFailure && is_array($placeholders)) {
             foreach ($placeholders as $k => $v) {
-                $this->modx->smarty->assign($k,$v);
+                $this->setPlaceholder($k,$v);
             }
         } elseif (!empty($placeholders)) {
             $content = $placeholders;
@@ -95,15 +110,15 @@ abstract class modManagerController {
             $this->modx->regClientStartupHTMLBlock(implode("\n",$this->ruleOutput));
         }
 
-        $this->modx->smarty->assign('_pagetitle',$this->getPageTitle());
+        $this->setPlaceholder('_pagetitle',$this->getPageTitle());
         $this->content = $this->getHeader();
 
         $tpl = $this->getTemplateFile();
         if ($this->isFailure) {
-            $this->modx->smarty->assign('_e', $this->modx->error->failure($this->failureMessage));
-            $content = $this->modx->smarty->fetch('error.tpl');
+            $this->setPlaceholder('_e', $this->modx->error->failure($this->failureMessage));
+            $content = $this->fetchTemplate('error.tpl');
         } else if (!empty($tpl)) {
-            $content = $this->modx->smarty->fetch($tpl);
+            $content = $this->fetchTemplate($tpl);
         }
         
         $this->content .= $content;
@@ -113,6 +128,14 @@ abstract class modManagerController {
         $this->firePostRenderEvents();
 
         return $this->content;
+    }
+
+    public function setPlaceholder($k,$v) {
+        $this->modx->smarty->assign($k,$v);
+    }
+
+    public function fetchTemplate($tpl) {
+        return $this->modx->smarty->fetch($tpl);
     }
 
     /**
@@ -221,6 +244,8 @@ abstract class modManagerController {
      * @return void
      */
     abstract public function loadCustomCssJs();
+
+    abstract public function getTemplateFile();
 
     /**
      * Can be used to fire events after all the CSS/JS is loaded for a page
