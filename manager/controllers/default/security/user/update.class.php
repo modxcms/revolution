@@ -26,10 +26,10 @@ class SecurityUserUpdateManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);        
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
-        // <![CDATA[
-        MODx.onUserFormRender = "'.$this->onUserFormRender.'";
-        // ]]>
-        </script>');
+// <![CDATA[
+MODx.onUserFormRender = "'.$this->onUserFormRender.'";
+// ]]>
+</script>');
         
         /* register JS scripts */
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/util/datetime.js');
@@ -39,19 +39,18 @@ class SecurityUserUpdateManagerController extends modManagerController {
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.js');
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.js');
         $this->modx->regClientStartupScript($mgrUrl.'assets/modext/sections/security/user/update.js');
-        $this->modx->regClientStartupHTMLBlock('
-        <script type="text/javascript">
-        // <![CDATA[
-        Ext.onReady(function() {
-            MODx.load({
-                xtype: "modx-page-user-update"
-                ,user: "'.$this->user->get('id').'"
-                '.(!empty($remoteFields) ? ',remoteFields: '.$this->modx->toJSON($this->remoteFields) : '').'
-                '.(!empty($extendedFields) ? ',extendedFields: '.$this->modx->toJSON($this->extendedFields) : '').'
-            });
-        });
-        // ]]>
-        </script>');
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+// <![CDATA[
+Ext.onReady(function() {
+    MODx.load({
+        xtype: "modx-page-user-update"
+        ,user: "'.$this->user->get('id').'"
+        '.(!empty($this->remoteFields) ? ',remoteFields: '.$this->modx->toJSON($this->remoteFields) : '').'
+        '.(!empty($this->extendedFields) ? ',extendedFields: '.$this->modx->toJSON($this->extendedFields) : '').'
+    });
+});
+// ]]>
+</script>');
     }
 
     /**
@@ -80,7 +79,7 @@ class SecurityUserUpdateManagerController extends modManagerController {
             $this->extendedFields = array();
             $extendedData = $this->user->Profile->get('extended');
             if (!empty($extendedData)) {
-                $this->extendedFields = parseCustomData($extendedData);
+                $this->extendedFields = $this->_parseCustomData($extendedData);
             }
         }
 
@@ -118,7 +117,7 @@ class SecurityUserUpdateManagerController extends modManagerController {
             if (is_array($value)) {
                 $field['text'] = $key;
                 $field['leaf'] = false;
-                $field['children'] = parseCustomData($value,$key);
+                $field['children'] = $this->_parseCustomData($value,$key);
             } else {
                 $v = $value;
                 if (strlen($v) > 30) { $v = substr($v,0,30).'...'; }

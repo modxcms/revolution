@@ -20,7 +20,7 @@ class modManagerResponse extends modResponse {
         $className = explode('/',$className);
         $o = array();
         foreach ($className as $k) {
-            $o[] = ucfirst($k);
+            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
         }
         return implode('',$o);
     }
