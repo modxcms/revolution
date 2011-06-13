@@ -502,6 +502,11 @@ $attributes['resolve'][] = array (
 );
 $attributes['resolve'][] = array (
     'type' => 'file',
+    'source' => MODX_BASE_PATH . 'manager/min',
+    'target' => "return MODX_MANAGER_PATH;",
+);
+$attributes['resolve'][] = array (
+    'type' => 'file',
     'source' => MODX_BASE_PATH . 'manager/ht.access',
     'target' => "return MODX_MANAGER_PATH;",
 );
