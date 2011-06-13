@@ -27,7 +27,7 @@ abstract class modManagerController {
     /** @var array An array of request parameters sent to the controller */
     public $scriptProperties = array();
     /** @var array An array of css/js/html to load into the HEAD of the page */
-    public $head = array('css' => array(),'js' => array(),'html' => array());
+    public $head = array('css' => array(),'js' => array(),'html' => array(),'lastjs' => array());
 
     /** @var string Any Form Customization rule output that was created. */
     protected $ruleOutput = array();
