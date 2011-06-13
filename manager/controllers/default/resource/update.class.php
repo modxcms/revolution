@@ -53,15 +53,23 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $this->loadRichTextEditor();
     }
 
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
-        
+    public function getResource() {
         if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('resource_err_nf'));
         $this->resource = $this->modx->getObject('modResource',$scriptProperties['id']);
         if (empty($this->resource)) return $this->failure($this->modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['id'])));
 
         if (!$this->resource->checkPolicy('save')) {
             return $this->failure($this->modx->lexicon('access_denied'));
+        }
+        return true;
+    }
+
+    public function process(array $scriptProperties = array()) {
+        $placeholders = array();
+
+        $loaded = $this->getResource();
+        if ($loaded !== true) {
+            return $this->failure($loaded);
         }
 
         /* get context */
@@ -102,12 +110,20 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         $this->prepareResource();
         $this->loadTVs();
-        
-        /* get url for resource for preview window */
-        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),'','','full');
+
+        $this->getPreviewUrl();
 
         $this->setPlaceholder('resource',$this->resource);
         return $placeholders;
+    }
+
+    /**
+     * Get url for resource for preview window
+     * @return string
+     */
+    public function getPreviewUrl() {
+        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),'','','full');
+        return $this->previewUrl;
     }
 
     /**
