@@ -8,7 +8,7 @@
 */
 
 #$_lang['active'] = 'Active';
-$_lang['active'] = 'Konto aktywne'; #
+$_lang['active'] = 'Włączone'; #
 
 #$_lang['address'] = 'Address';
 $_lang['address'] = 'Adres'; #
