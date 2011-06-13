@@ -44,7 +44,7 @@ if (!is_dir($cachePath) || !is_writable($cachePath)) {
 define('MINIFY_MIN_DIR', dirname(__FILE__));
 
 /* setup minify config */
-$min_allowDebugFlag = false;
+$min_allowDebugFlag = true;
 $min_errorLogger = false;
 $min_enableBuilder = false;
 $min_cachePath = $cachePath;

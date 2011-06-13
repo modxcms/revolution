@@ -70,13 +70,13 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
             // try user files
             // The following restrictions are to limit the URLs that minify will
             // respond to. Ideally there should be only one way to reference a file.
-            if (// verify at least one file, files are single comma separated, 
+            if (// verify at least one file, files are single comma separated,
                 // and are all same extension
                 ! preg_match('/^[^,]+\\.(css|js)(?:,[^,]+\\.\\1)*$/', $_GET['f'])
                 // no "//"
                 || strpos($_GET['f'], '//') !== false
                 // no "\"
-                || strpos($_GET['f'], '\\') !== false
+                //|| strpos($_GET['f'], '\\') !== false
                 // no "./"
                 || preg_match('/(?:^|[^\\.])\\.\\//', $_GET['f'])
             ) {

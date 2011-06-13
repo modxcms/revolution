@@ -46,6 +46,8 @@ class ResourceCreateManagerController extends ResourceManagerController {
         });
         // ]]>
         </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
 
     /**
@@ -78,8 +80,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
 
         /* check permissions */
         $this->setPermissions();
-
-        $this->loadRichTextEditor();
 
         /* set default template */
         $defaultTemplate = $this->getDefaultTemplate();

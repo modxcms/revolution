@@ -50,6 +50,12 @@ abstract class modManagerController {
     }
 
     /**
+     * Can be used to provide custom methods prior to processing
+     * @return void
+     */
+    public function initialize() {}
+
+    /**
      * Return the proper instance of the derived class. This can be used to override how the manager loads a controller
      * class; for example, when handling derivative classes with class_key settings.
      * 
@@ -61,6 +67,7 @@ abstract class modManagerController {
      */
     public static function getInstance(modX &$modx,$className,array $config = array()) {
         $controller = new $className($modx,$config);
+        $controller->initialize();
         return $controller;
     }
 
@@ -402,16 +409,33 @@ abstract class modManagerController {
         $this->_prepareHead();
         $versionPostFix = $this->_prepareVersionPostfix();
 
-        $o = array();
+        $jsToCompress = array();
         foreach ($this->head['js'] as $js) {
-            $o[] = $js;
-        }
-        foreach ($this->head['css'] as $css) {
-            $o[] = $css;
+            $jsToCompress[] = $js;
         }
         $cssjs = array();
-        if (!empty($o)) {
-            $cssjs[] = '<script type="text/javascript" src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$o).'"></script>';
+        if (!empty($jsToCompress)) {
+            if ($this->modx->getOption('compress_js',null,true)) {
+                $cssjs[] = '<script src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$jsToCompress).'" type="text/javascript"></script>';
+            } else {
+                foreach ($jsToCompress as $scr) {
+                    $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
+                }
+            }
+        }
+
+        $cssToCompress = array();
+        foreach ($this->head['css'] as $css) {
+            $cssToCompress[] = $css;
+        }
+        if (!empty($cssToCompress)) {
+            if ($this->modx->getOption('compress_css',null,true)) {
+                $cssjs[] = '<link href="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$cssToCompress).'" rel="stylesheet" type="text/css" />';
+            } else {
+                foreach ($cssToCompress as $scr) {
+                    $cssjs[] = '<link href="'.$scr.'" rel="stylesheet" type="text/css" />';
+                }
+            }
         }
 
         foreach ($this->head['html'] as $html) {
@@ -422,6 +446,22 @@ abstract class modManagerController {
             $scr = $this->_postfixVersionToScript($scr,$versionPostFix);
             $cssjs[] = $scr;
         }
+
+
+        $lastjs = array();
+        foreach ($this->head['lastjs'] as $js) {
+            $lastjs[] = $js;
+        }
+        if (!empty($lastjs)) {
+            if ($this->modx->getOption('compress_js',null,true)) {
+                $cssjs[] = '<script type="text/javascript" src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$lastjs).'"></script>';
+            } else {
+                foreach ($lastjs as $scr) {
+                    $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
+                }
+            }
+        }
+
         
         $this->modx->smarty->assign('cssjs',$cssjs);
     }
@@ -434,6 +474,7 @@ abstract class modManagerController {
         $this->head['js'] = array_unique($this->head['js']);
         $this->head['html'] = array_unique($this->head['html']);
         $this->head['css'] = array_unique($this->head['css']);
+        $this->head['lastjs'] = array_unique($this->head['lastjs']);
     }
 
     /**
@@ -463,6 +504,15 @@ abstract class modManagerController {
      */
     public function addCss($script) {
         $this->head['css'][] = $script;
+    }
+    /**
+     * Add an external Javascript file to the head of the page
+     *
+     * @param string $script
+     * @return void
+     */
+    public function addLastJavascript($script) {
+        $this->head['lastjs'][] = $script;
     }
 
 
@@ -553,4 +603,24 @@ abstract class modManagerController {
         }
         return $this->workingContext;
     }
+}
+
+abstract class modExtraManagerController extends modManagerController {
+    public static function getDefaultController() { return 'index'; }
+    public static function getInstance(modX &$modx,$className,array $config = array()) {
+        $action = $className::getDefaultController();
+        if (isset($_REQUEST['action'])) {
+            $action = str_replace(array('../','./','/','.','-','@'),'',$_REQUEST['action']);
+        }
+        require_once $config['namespace_path'].'controllers/'.$action.'.class.php';
+        $className = ucfirst($config['namespace']).ucfirst($action).'ManagerController';
+        $controller = new $className($modx,$config);
+        $controller->initialize();
+        return $controller;
+    }
+    public function process(array $scriptProperties = array()) {}
+    public function getPageTitle() { return ''; }
+    public function loadCustomCssJs() {}
+    public function getTemplateFile() { return ''; }
+    public function checkPermissions() { return true;}
 }

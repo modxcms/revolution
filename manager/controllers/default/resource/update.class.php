@@ -49,6 +49,8 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         });
         // ]]>
         </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
 
     public function process(array $scriptProperties = array()) {
@@ -78,9 +80,6 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         /* check permissions */
         $this->setPermissions();
-
-        /* load RTE */
-        $this->loadRichTextEditor();
 
         /* register FC rules */
         $this->resourceArray = $this->resource->toArray();
