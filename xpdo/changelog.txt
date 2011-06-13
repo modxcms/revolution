@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- [#5042] Prevent additional columns defined in derivative classes being marked lazy
+
 xPDO 2.1.4-pl (May 23, 2011)
 ====================================
 - Default cacheFlag to true in getObject/getCollection/getIterator methods
