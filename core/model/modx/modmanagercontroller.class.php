@@ -610,13 +610,23 @@ abstract class modExtraManagerController extends modManagerController {
     public static function getInstance(modX &$modx,$className,array $config = array()) {
         $action = $className::getDefaultController();
         if (isset($_REQUEST['action'])) {
-            $action = str_replace(array('../','./','/','.','-','@'),'',$_REQUEST['action']);
+            $action = str_replace(array('../','./','.','-','@'),'',$_REQUEST['action']);
         }
-        require_once $config['namespace_path'].'controllers/'.$action.'.class.php';
-        $className = ucfirst($config['namespace']).ucfirst($action).'ManagerController';
+        $className = self::getControllerClassName($action,$config['namespace']);
+        $classPath = $config['namespace_path'].'controllers/'.$action.'.class.php';
+        require_once $classPath;
         $controller = new $className($modx,$config);
         $controller->initialize();
         return $controller;
+    }
+
+    public static function getControllerClassName($action,$namespace = '',$postFix = 'ManagerController') {
+        $className = explode('/',$action);
+        $o = array();
+        foreach ($className as $k) {
+            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
+        }
+        return ucfirst($namespace).implode('',$o).$postFix;
     }
     public function process(array $scriptProperties = array()) {}
     public function getPageTitle() { return ''; }
