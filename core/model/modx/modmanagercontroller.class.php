@@ -337,15 +337,12 @@ abstract class modManagerController {
     public function registerBaseScripts() {
         $managerUrl = $this->modx->getOption('manager_url');
         $externals = array();
+        $externals2 = array();
 
 
         if ($this->loadBaseJavascript) {
             if ($this->modx->getOption('concat_js',null,false)) {
-                if ($this->modx->getOption('compress_js',null,false)) {
-                    $externals[] = $managerUrl.'assets/modext/modext-min.js';
-                } else {
-                    $externals[] = $managerUrl.'assets/modext/modext.js';
-                }
+                $externals[] = $managerUrl.'assets/modext/modext.js';
             } else {
                 $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
                 $externals[] = $managerUrl.'assets/modext/util/utilities.js';
@@ -356,26 +353,27 @@ abstract class modManagerController {
                 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
                 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.js';
                 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/windows.js';
 
-                $externals[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
-                $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
+                $externals2[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
+                $externals2[] = $managerUrl.'assets/modext/core/modx.view.js';
             }
             
             $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
 
-            $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
+            $externals2[] = $managerUrl.'assets/modext/core/modx.layout.js';
 
             $o = '';
             if (!empty($externals)) {
                 $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
                 $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals).'"></script>';
+                $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals2).'"></script>';
             }
 
             $o .= '<script type="text/javascript">Ext.onReady(function() {
