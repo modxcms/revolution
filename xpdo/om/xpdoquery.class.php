@@ -490,7 +490,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     /**
      * Prepares the xPDOQuery for execution.
      *
-     * @return xPDOStatement The xPDOStatement representing the prepared query.
+     * @return PDOStatement The PDOStatement representing the prepared query.
      */
     public function prepare($bindings= array (), $byValue= true, $cacheFlag= null) {
         $this->stmt= null;
