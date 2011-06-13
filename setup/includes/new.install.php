@@ -77,32 +77,6 @@ if ($this->settings->get('new_file_permissions')) {
     $settings_file_perms->save();
 }
 
-/* compress and concat JS on new installs */
-if (defined('MODX_SETUP_KEY') && MODX_SETUP_KEY != '@git@') {
-    $concatJavascript = $this->xpdo->getObject('modSystemSetting', array(
-        'key' => 'concat_js',
-    ));
-    if ($concatJavascript) {
-        $concatJavascript->set('value',1);
-        $concatJavascript->save();
-    }
-    $compressJavascript = $this->xpdo->getObject('modSystemSetting', array(
-        'key' => 'compress_js',
-    ));
-    if ($compressJavascript) {
-        $compressJavascript->set('value',1);
-        $compressJavascript->save();
-    }
-    $compressCss = $this->xpdo->getObject('modSystemSetting', array(
-        'key' => 'compress_css',
-    ));
-    if ($compressCss) {
-        $compressCss->set('value',1);
-        $compressCss->save();
-    }
-    unset($concatJavascript,$compressJavascript,$compressCss);
-}
-
 /* setup load only anonymous ACL */
 $loadOnly = $this->xpdo->getObject('modAccessPolicy',array(
     'name' => 'Load Only',

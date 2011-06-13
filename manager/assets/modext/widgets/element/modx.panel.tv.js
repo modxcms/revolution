@@ -107,7 +107,7 @@ MODx.panel.TV = function(config) {
                 ,inputValue: 1
                 ,checked: Ext.isDefined(config.record.clearCache) || true
             },{
-                html: onTVFormRender
+                html: MODx.onTVFormRender
                 ,border: false
             }]
         },{

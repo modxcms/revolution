@@ -6,32 +6,20 @@
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
     
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-	{if $_config.compress_css}
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/modx-min.css" />
-	{else}
 	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css" />
 	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
-	{/if}
-    <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/login{if $_config.compress_css}-min{/if}.css" />
+    <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/login.css" />
     
     <script src="assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
     <script src="assets/ext3/ext-all.js" type="text/javascript"></script>
-    <script src="assets/modext/{if $_config.compress_js}build/core/modx-min{else}core/modx{/if}.js" type="text/javascript"></script>
+    <script src="assets/modext/core/modx.js" type="text/javascript"></script>
 	<script src="{$_config.connectors_url}lang.js.php?topic=login" type="text/javascript"></script>
 
-	{if $_config.compress_js}
-    <script src="assets/modext/build/core/modx.component-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/util/utilities-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/widgets/core/modx.panel-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/widgets/core/modx.window-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/sections/login-min.js" type="text/javascript"></script>
-	{else}
     <script src="assets/modext/core/modx.component.js" type="text/javascript"></script>
     <script src="assets/modext/util/utilities.js" type="text/javascript"></script>
 	<script src="assets/modext/widgets/core/modx.panel.js" type="text/javascript"></script>
     <script src="assets/modext/widgets/core/modx.window.js" type="text/javascript"></script>
     <script src="assets/modext/sections/login.js" type="text/javascript"></script>
-    {/if}
     
     <meta name="robots" content="noindex, nofollow" />
 </head>
