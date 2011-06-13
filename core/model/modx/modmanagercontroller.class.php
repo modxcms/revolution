@@ -24,7 +24,9 @@ abstract class modManagerController {
     public $workingContext;
     /** @var string The current output content */
     public $content = '';
+    /** @var array An array of request parameters sent to the controller */
     public $scriptProperties = array();
+    /** @var array An array of css/js/html to load into the HEAD of the page */
     public $head = array('css' => array(),'js' => array(),'html' => array());
 
     /** @var string Any Form Customization rule output that was created. */
@@ -148,10 +150,22 @@ abstract class modManagerController {
         return $this->content;
     }
 
+    /**
+     * Set a placeholder for this controller's template
+     *
+     * @param string $k The key of the placeholder
+     * @param mixed $v The value of the placeholder
+     * @return void
+     */
     public function setPlaceholder($k,$v) {
         $this->modx->smarty->assign($k,$v);
     }
 
+    /**
+     * Fetch the template content
+     * @param string $tpl The path to the template
+     * @return string The output of the template
+     */
     public function fetchTemplate($tpl) {
         return $this->modx->smarty->fetch($tpl);
     }
@@ -605,8 +619,27 @@ abstract class modManagerController {
     }
 }
 
+/**
+ * Utility abstract class for usage by Extras that has a subrequest handler that does auto-routing by the &action
+ * REQUEST parameter. You must extend this class in your Extra to use it.
+ * @abstract
+ */
 abstract class modExtraManagerController extends modManagerController {
+    /**
+     * Define the default controller action for this namespace
+     * @static
+     * @return string A default controller action
+     */
     public static function getDefaultController() { return 'index'; }
+
+    /**
+     * Get an instance of this extra controller
+     * @static
+     * @param modX $modx A reference to the modX object
+     * @param string $className The string className that is being requested to load
+     * @param array $config An array of configuration options built from the modAction object
+     * @return modManagerController A newly created modManagerController instance
+     */
     public static function getInstance(modX &$modx,$className,array $config = array()) {
         $action = $className::getDefaultController();
         if (isset($_REQUEST['action'])) {
@@ -620,6 +653,14 @@ abstract class modExtraManagerController extends modManagerController {
         return $controller;
     }
 
+    /**
+     * Return the class name of a controller given the action
+     * @static
+     * @param string $action The action name, eg: "home" or "create"
+     * @param string $namespace The namespace of the Exra
+     * @param string $postFix The string to postfix to the class name
+     * @return string A full class name of the controller class
+     */
     public static function getControllerClassName($action,$namespace = '',$postFix = 'ManagerController') {
         $className = explode('/',$action);
         $o = array();
@@ -628,9 +669,35 @@ abstract class modExtraManagerController extends modManagerController {
         }
         return ucfirst($namespace).implode('',$o).$postFix;
     }
+
+    /**
+     * Do any page-specific logic and/or processing here
+     * @param array $scriptProperties
+     * @return void
+     */
     public function process(array $scriptProperties = array()) {}
+
+    /**
+     * The page title for this controller
+     * @return string The string title of the page
+     */
     public function getPageTitle() { return ''; }
+    
+    /**
+     * Loads any page-specific CSS/JS for the controller
+     * @return void
+     */
     public function loadCustomCssJs() {}
+
+    /**
+     * Specify the location of the template file
+     * @return string The absolute path to the template file
+     */
     public function getTemplateFile() { return ''; }
+
+    /**
+     * Check whether the active user has access to view this page
+     * @return bool True if the user passes permission checks
+     */
     public function checkPermissions() { return true;}
 }

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Handles backwards compatibility with pre-Revo 2.2 controllers
+ * 
  * @package modx
  */
 class modManagerControllerDeprecated extends modManagerController {

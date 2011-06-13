@@ -13,17 +13,8 @@ require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
  * @package modx
  */
 class modManagerResponse extends modResponse {
+    /** @var array A cached array of the current modAction object */
     public $action = array();
-
-    public function getControllerClassName() {
-        $className = $this->action['controller'].(!empty($this->action['class_postfix']) ? $this->action['class_postfix'] : 'ManagerController');
-        $className = explode('/',$className);
-        $o = array();
-        foreach ($className as $k) {
-            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
-        }
-        return implode('',$o);
-    }
 
     /**
      * Overrides modResponse::outputContent to provide mgr-context specific
@@ -98,6 +89,21 @@ class modManagerResponse extends modResponse {
         }
         @session_write_close();
         exit();
+    }
+
+    /**
+     * Gets the controller class name from the active modAction object
+     * 
+     * @return string
+     */
+    public function getControllerClassName() {
+        $className = $this->action['controller'].(!empty($this->action['class_postfix']) ? $this->action['class_postfix'] : 'ManagerController');
+        $className = explode('/',$className);
+        $o = array();
+        foreach ($className as $k) {
+            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
+        }
+        return implode('',$o);
     }
 
     /**

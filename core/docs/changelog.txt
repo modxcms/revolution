@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Abstract all manager controllers to classes to improve usability, testing and creation of controllers
 - [#260] Implement on-the-fly compression for css/js in manager
 - [#2566] Improve tv output render url to take resource pagetitle when using resourcelist TV type
 - [#5020] Improve per page field on grids to handle ENTER key
