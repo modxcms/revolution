@@ -661,10 +661,10 @@ abstract class xPDOQuery extends xPDOCriteria {
     /**
      * Builds conditional clauses from xPDO condition expressions.
      *
-     * @param array $conditions
-     * @param string $conjunction
-     * @param boolean $isFirst Indicates if this is the first condition in collection.
-     * @return string The conditional clause.
+     * @param array|xPDOQueryCondition $conditions An array of conditions or an xPDOQueryCondition instance.
+     * @param string $conjunction Either xPDOQuery:SQL_AND or xPDOQuery::SQL_OR
+     * @param boolean $isFirst Indicates if this is the first condition in an array.
+     * @return string The generated SQL clause.
      */
     public function buildConditionalClause($conditions, & $conjunction = xPDOQuery::SQL_AND, $isFirst = true) {
         $clause= '';
@@ -672,15 +672,19 @@ abstract class xPDOQuery extends xPDOCriteria {
             $groups= count($conditions);
             $currentGroup= 1;
             $first = true;
+            $origConjunction = $conjunction;
             $groupConjunction = $conjunction;
             foreach ($conditions as $groupKey => $group) {
                 $groupClause = '';
                 $groupClause.= $this->buildConditionalClause($group, $groupConjunction, $first);
-                if ($first) $conjunction = $groupConjunction;
+                if ($first) {
+                    $conjunction = $groupConjunction;
+                }
                 if (!empty($groupClause)) $clause.= $groupClause;
                 $currentGroup++;
                 $first = false;
             }
+            $conjunction = $origConjunction;
             if ($groups > 1 && !empty($clause)) {
                 $clause = " ( {$clause} ) ";
             }
