@@ -344,6 +344,7 @@ class modUser extends modPrincipal {
         if (is_string($context) && !empty ($context)) {
             unset($_SESSION["modx.{$context}.user.token"]);
             unset($_SESSION["modx.{$context}.user.config"]);
+            unset($_SESSION["modx.{$context}.session.cookie.lifetime"]);
         }
     }
 
