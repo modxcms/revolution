@@ -400,6 +400,8 @@ class modUser extends modPrincipal {
                 default :
                     break;
             }
+            unset($_SESSION["modx.{$context}.user.token"]);
+            unset($_SESSION["modx.{$context}.user.config"]);
         }
     }
 
