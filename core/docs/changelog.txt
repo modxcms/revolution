@@ -4,6 +4,11 @@ development release, and is only shown to give an idea of what's currently in th
 
 - Abstract all manager controllers to classes to improve usability, testing and creation of controllers
 - [#260] Implement on-the-fly compression for css/js in manager
+
+- [#5005] Fix incorrect label on introtext field in weblink panel
+- Remove session_cookie_lifetime variable when logging out of context
+- Remove legacy SESSION variables and dependencies
+- [#4703] Remove user settings when logging out of a Context
 - [#2566] Improve tv output render url to take resource pagetitle when using resourcelist TV type
 - [#5020] Improve per page field on grids to handle ENTER key
 - [#5021] Improve modUser::joinGroup to check to see if user is already in group

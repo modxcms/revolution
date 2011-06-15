@@ -284,30 +284,6 @@ class modUser extends modPrincipal {
             $this->getOne('Profile');
             if ($this->Profile && $this->Profile instanceof modUserProfile) {
                 $ua= & $this->Profile;
-                if ($context == 'web') {
-                    $_SESSION['webShortname']= $this->get('username');
-                    $_SESSION['webFullname']= $ua->get('fullname');
-                    $_SESSION['webEmail']= $ua->get('email');
-                    $_SESSION['webValidated']= 1;
-                    $_SESSION['webInternalKey']= $this->get('id');
-                    $_SESSION['webValid']= base64_encode($this->get('password'));
-                    $_SESSION['webUser']= base64_encode($this->get('username'));
-                    $_SESSION['webFailedlogins']= $ua->get('failedlogincount');
-                    $_SESSION['webLastlogin']= $ua->get('lastlogin');
-                    $_SESSION['webnrlogins']= $ua->get('logincount');
-                    $_SESSION['webUserGroupNames']= '';
-                }
-                elseif ($context == 'mgr') {
-                    $_SESSION['usertype']= 'manager';
-                    $_SESSION['mgrShortname']= $this->get('username');
-                    $_SESSION['mgrFullname']= $ua->get('fullname');
-                    $_SESSION['mgrEmail']= $ua->get('email');
-                    $_SESSION['mgrValidated']= 1;
-                    $_SESSION['mgrInternalKey']= $this->get('id');
-                    $_SESSION['mgrFailedlogins']= $ua->get('failedlogincount');
-                    $_SESSION['mgrLastlogin']= $ua->get('lastlogin');
-                    $_SESSION['mgrLogincount']= $ua->get('logincount');
-                }
                 if ($ua && !isset ($this->sessionContexts[$context]) || $this->sessionContexts[$context] != $this->get('id')) {
                     $ua->set('failedlogincount', 0);
                     $ua->set('logincount', $ua->logincount + 1);
@@ -366,40 +342,9 @@ class modUser extends modPrincipal {
      */
     public function removeSessionContextVars($context) {
         if (is_string($context) && !empty ($context)) {
-            switch ($context) {
-                case 'web' :
-                    unset ($_SESSION['webShortname']);
-                    unset ($_SESSION['webFullname']);
-                    unset ($_SESSION['webEmail']);
-                    unset ($_SESSION['webValidated']);
-                    unset ($_SESSION['webInternalKey']);
-                    unset ($_SESSION['webValid']);
-                    unset ($_SESSION['webUser']);
-                    unset ($_SESSION['webFailedlogins']);
-                    unset ($_SESSION['webLastlogin']);
-                    unset ($_SESSION['webnrlogins']);
-                    unset ($_SESSION['webUsrConfigSet']);
-                    unset ($_SESSION['webUserGroupNames']);
-                    unset ($_SESSION['webDocgroups']);
-                    break;
-
-                case 'mgr' :
-                    unset ($_SESSION['usertype']);
-                    unset ($_SESSION['mgrShortname']);
-                    unset ($_SESSION['mgrFullname']);
-                    unset ($_SESSION['mgrEmail']);
-                    unset ($_SESSION['mgrValidated']);
-                    unset ($_SESSION['mgrInternalKey']);
-                    unset ($_SESSION['mgrFailedlogins']);
-                    unset ($_SESSION['mgrLastlogin']);
-                    unset ($_SESSION['mgrLogincount']);
-                    unset ($_SESSION['mgrRole']);
-                    unset ($_SESSION['mgrDocgroups']);
-                    break;
-
-                default :
-                    break;
-            }
+            unset($_SESSION["modx.{$context}.user.token"]);
+            unset($_SESSION["modx.{$context}.user.config"]);
+            unset($_SESSION["modx.{$context}.session.cookie.lifetime"]);
         }
     }
 
