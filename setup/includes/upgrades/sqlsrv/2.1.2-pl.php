@@ -24,3 +24,9 @@ $this->processResults($class, $description, array($modx->manager, 'alterField'),
 
 $description = $this->install->lexicon('add_index',array('index' => 'PRIMARY','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'PRIMARY'));
+
+/* [#2870] Change internalKey default value to NULL */
+$class = 'modUserProfile';
+$table = $this->install->xpdo->getTableName($class);
+$description = $this->install->lexicon('change_default_value',array('column' => 'internalKey', 'value'=>'NULL', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'alterField'), array($class, 'internalKey'));

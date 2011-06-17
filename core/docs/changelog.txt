@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2870] Change internalKey default value to NULL
 - [#5072] Add missing primary key index to modEvent
 - [#5005] Fix incorrect label on introtext field in weblink panel
 - Remove session_cookie_lifetime variable when logging out of context
