@@ -411,11 +411,11 @@
     </object>
     
     <object class="modEvent" table="system_eventnames" extends="xPDOObject">
-        <field key="name" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="unique" />
+        <field key="name" dbtype="nvarchar" precision="50" phptype="string" null="false" index="pk" />
         <field key="service" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
         <field key="groupname" dbtype="nvarchar" precision="20" phptype="string" null="false" default="" />
         
-        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
 
