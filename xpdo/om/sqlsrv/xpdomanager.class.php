@@ -193,7 +193,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
                 $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                 if (!empty($colDef)) {
                     $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD {$colDef}";
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -222,7 +222,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
                             $sql = "CREATE {$indexType} {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)} ({$idxDef})";
                             break;
                     }
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -242,7 +242,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
                 $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                 if (!empty($colDef)) {
                     $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ALTER COLUMN {$colDef}";
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);

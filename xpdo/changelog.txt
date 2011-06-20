@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#5084] Fix various xPDO::exec() calls to check for false value properly
 - [#4877] Fix nested conjunctions infecting parent conjunctions
 - [#5042] Prevent additional columns defined in derivative classes being marked lazy
 
