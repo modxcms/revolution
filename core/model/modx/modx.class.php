@@ -105,7 +105,7 @@ class modX extends xPDO {
      */
     public $aliasMap= null;
     /**
-     * @var modEvent The current event being handled by modX.
+     * @var modSystemEvent The current event being handled by modX.
      */
     public $event= null;
     /**
