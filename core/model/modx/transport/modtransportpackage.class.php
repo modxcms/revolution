@@ -164,7 +164,7 @@ class modTransportPackage extends xPDOObject {
     }
 
     /**
-     * Installs the package.
+     * Installs or upgrades the package.
      *
      * @access public
      * @return boolean True if successful.
@@ -178,8 +178,9 @@ class modTransportPackage extends xPDOObject {
             $at = is_array($this->get('attributes')) ? $this->get('attributes') : array();
             $attributes = array_merge($wc, $at);
             $attributes = array_merge($attributes, $options);
+            $attributes[xPDOTransport::PACKAGE_ACTION] = $this->get('installed') ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
             @ini_set('max_execution_time', 0);
-            $this->xpdo->log(xPDO::LOG_LEVEL_INFO,$this->xpdo->lexicon('package_installing'));
+            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
             if ($this->package->install($attributes)) {
                 $installed = true;
                 $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
