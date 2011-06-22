@@ -32,16 +32,13 @@ $modx->cacheManager->refresh();
 if (!$installed) {
     $msg = $modx->lexicon('package_err_install',array('signature' => $package->get('signature')));
     $modx->log(modX::LOG_LEVEL_ERROR,$msg);
-    sleep(2);
     $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
     return $modx->error->failure($msg);
 } else {
     $msg = $modx->lexicon('package_install_info_success',array('signature' => $package->get('signature')));
     $modx->log(modX::LOG_LEVEL_WARN,$msg);
-    sleep(2);
     $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
     return $modx->error->success($msg);
 }
-sleep(1);
 $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 return $modx->error->failure($modx->lexicon('package_err_install_gen'));

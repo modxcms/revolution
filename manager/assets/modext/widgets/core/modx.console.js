@@ -72,15 +72,14 @@ Ext.extend(MODx.Console,Ext.Window,{
         });
         Ext.Direct.addProvider(this.provider);
         Ext.Direct.on('message', function(e,p) {
-            if (e.data.search('COMPLETED') != -1) {
+            var out = this.getComponent('body');
+            if (out) {
+                out.el.insertHtml('beforeEnd',e.data);
+                e.data = '';
+                out.el.scroll('b', out.el.getHeight(), true);
+            }
+            if (e.complete) {
                 this.fireEvent('complete');
-            } else {
-                var out = this.getComponent('body');
-                if (out) {
-                    out.el.insertHtml('beforeEnd',e.data);
-                    e.data = '';
-                    out.el.scroll('b', out.el.getHeight(), true);
-                }
             }
             delete e;
         },this);

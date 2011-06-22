@@ -58,10 +58,11 @@ if (!empty($msgs)) {
         'type' => 'event',
         'name' => 'message',
         'data' => '',
+        'complete' => false
     );
     foreach ($msgs as $msgKey => $msg) {
         if ($msg['msg'] == 'COMPLETED') {
-            $message['data'] = 'COMPLETED';
+            $message['complete'] = true;
             continue;
         }
         if (!empty ($msg['def'])) $msg['def']= $msg['def'].' ';

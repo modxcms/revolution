@@ -42,6 +42,5 @@ foreach ($entries as $entry) {
 }
 
 $modx->log(modX::LOG_LEVEL_WARN,'Successfully reloaded '.$i.' strings.');
-sleep(1);
 $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 return $modx->error->success(intval($i));
