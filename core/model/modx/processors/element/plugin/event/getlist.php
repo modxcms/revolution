@@ -11,42 +11,22 @@ $modx->lexicon->load('plugin','system_events');
 /* setup default properties */
 $isLimit = empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
-$limit = $modx->getOption('limit',$scriptProperties,10);
+$limit = 0;
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $name = $modx->getOption('name',$scriptProperties,false);
 $plugin = $modx->getOption('plugin',$scriptProperties,false);
 
-switch ($modx->getOption('dbtype')) {
-    case 'sqlite':
-    case 'mysql':
-        $if = 'IF';
-        break;
-    case 'sqlsrv':
-        $if = 'IIF';
-        break;
+$criteria = array();
+if (!empty($name)) {
+    $criteria[] = array('name:LIKE' => '%'.$name.'%');
 }
 
-/* query for events */
 $c = $modx->newQuery('modEvent');
-if ($name) $c->where(array('name:LIKE' => '%'.$name.'%'));
-if ($plugin) {
-    $c->leftJoin('modPluginEvent','modPluginEvent','
-        modPluginEvent.event = modEvent.name
-    AND modPluginEvent.pluginid = '.$plugin.'
-    ');
-    $c->select(array(
-        'modEvent.*',
-        $if.'(ISNULL(modPluginEvent.pluginid),0,1) AS enabled',
-        'modPluginEvent.priority AS priority',
-        'modPluginEvent.propertyset AS propertyset',
-    ));
-}
-$count = $modx->getCount('modEvent',$c);
 
-$c->sortby($sort,$dir);
-if ($isLimit) $c->limit($limit,$start);
-$events = $modx->getCollection('modEvent',$c);
+$eventsResult = $modx->call('modEvent', 'listEvents', array(&$modx, $plugin, $criteria, array($sort=> $dir), $limit, $start));
+$count = $eventsResult['count'];
+$events = $eventsResult['collection'];
 
 /* iterate through events */
 $list = array();

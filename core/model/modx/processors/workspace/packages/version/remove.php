@@ -26,6 +26,7 @@ if ($package->remove(true,array(),false) == false) {
 }
 
 /* empty cache */
+$modx->cacheManager->refresh(array($modx->getOption('cache_packages_key', null, 'packages') => array()));
 $modx->cacheManager->refresh();
 
 /* remove transport zip */

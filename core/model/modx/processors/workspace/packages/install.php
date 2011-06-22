@@ -26,6 +26,7 @@ $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_install_info_found'));
 $installed = $package->install($scriptProperties);
 
 /* empty cache */
+$modx->cacheManager->refresh(array($modx->getOption('cache_packages_key', null, 'packages') => array()));
 $modx->cacheManager->refresh();
 
 if (!$installed) {

@@ -288,9 +288,8 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modClassMap objects.'); fl
 $events = include MODX_BUILD_DIR . 'data/transport.core.events.php';
 if (is_array($events) && !empty($events)) {
     $attributes = array (
-        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::PRESERVE_KEYS => true,
         xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => array ('name'),
     );
     foreach ($events as $evt) {
         $package->put($evt, $attributes);
