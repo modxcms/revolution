@@ -18,6 +18,7 @@ MODx.browser.RTE = function(config) {
         ,prependUrl: config.prependUrl || null
         ,ident: this.ident
     });
+    MODx.browserOpen = true;
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
         ,onUpload: function() { this.view.run(); }
