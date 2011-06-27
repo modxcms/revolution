@@ -197,8 +197,16 @@ $defaults['cacheable'] = intval($defaults['cacheable']) == 1 ? true : false;
 $defaults['deleted'] = intval($defaults['deleted']) == 1 ? true : false;
 $defaults['uri_override'] = intval($defaults['uri_override']) == 1 ? true : false;
 
-$defaults['parent_pagetitle'] = $parent->get('pagetitle');
-
+if (!empty($defaults['parent'])) {
+    if ($parent->get('id') == $defaults['parent']) {
+        $defaults['parent_pagetitle'] = $parent->get('pagetitle');
+    } else {
+        $overriddenParent = $modx->getObject('modResource',$defaults['parent']);
+        if ($overriddenParent) {
+            $defaults['parent_pagetitle'] = $overriddenParent->get('pagetitle');
+        }
+    }
+}
 /* get TVs */
 $tvCounts = array();
 $tvOutput = include dirname(__FILE__).'/tvs.php';
