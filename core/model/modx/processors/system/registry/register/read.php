@@ -51,23 +51,29 @@ $modx->registry->$register->subscribe($topic);
 
 $msgs = $modx->registry->$register->read($options);
 if (!empty($msgs)) {
-    if ($format == 'html_log') {
-        $message = '';
-        foreach ($msgs as $msgKey => $msg) {
-            if (!empty ($msg['def'])) $msg['def']= $msg['def'].' ';
-            if (!empty ($msg['file'])) $msg['file']= '@ '.$msg['file'].' ';
-            if (!empty ($msg['line'])) $msg['line']= 'line '.$msg['line'].' ';
-            $message .= '<span class="' . strtolower($msg['level']) . '">';
-            if ($options['show_filename']) {
-                $message .= '<small>(' . trim($msg['def'] . $msg['file'] . $msg['line']) . ')</small>';
+    switch ($format) {
+        case 'html_log':
+            $message = '';
+            foreach ($msgs as $msgKey => $msg) {
+                if (!empty ($msg['def'])) $msg['def']= $msg['def'].' ';
+                if (!empty ($msg['file'])) $msg['file']= '@ '.$msg['file'].' ';
+                if (!empty ($msg['line'])) $msg['line']= 'line '.$msg['line'].' ';
+                $message .= '<span class="' . strtolower($msg['level']) . '">';
+                if ($options['show_filename']) {
+                    $message .= '<small>(' . trim($msg['def'] . $msg['file'] . $msg['line']) . ')</small>';
+                }
+                $message .= $msg['msg']."</span><br />\n";
             }
-            $message .= $msg['msg']."</span><br />\n";
-        }
-        if (!empty($message)) {
-            return $modx->error->success($message);
-        }
-    } elseif (!empty($msgs)) {
-        return $modx->error->success($modx->toJSON($msgs));
+            if (!empty($message)) {
+                return $modx->error->success($message);
+            }
+            break;
+        case 'json':
+            return $modx->error->success($modx->toJSON($msgs));
+            break;
+        default:
+            return $modx->error->success($msgs);
+            break;
     }
 }
 return $modx->error->success('');
