@@ -38,6 +38,7 @@ if (empty($context) || $context == 'root') {
             "(SELECT COUNT(*) FROM {$modx->getTableName('modResource')} WHERE context_key = modContext.{$modx->escape('key')} AND id IN ({$defaultRootId})) > 0",
         ));
     }
+    $c->sortby($modx->getSelectColumns('modContext','modContext','',array('key')),'ASC');
 } else {
     $resourceColumns = array(
         'id'
