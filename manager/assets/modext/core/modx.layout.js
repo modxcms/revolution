@@ -21,6 +21,9 @@ MODx.Layout = function(config){
     };
     MODx.siteId = config.auth;
 
+    var sp = new MODx.HttpProvider();
+    Ext.state.Manager.setProvider(sp);
+
     var tabs = [];
     var showTree = false;
     if (MODx.perm.resource_tree) {
