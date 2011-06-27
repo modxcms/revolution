@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5102] Fix error removing older transport package versions
 - [#4940] Fix issue where CMPs that did not use ExtJS could not scroll
 - [#5097] Ensure browser toolbar button does not show when MODx.Browser is already open
 - [#4953] Improve modx.console.js to avoid message loss

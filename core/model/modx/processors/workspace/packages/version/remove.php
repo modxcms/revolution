@@ -20,7 +20,7 @@ if ($package == null) return $modx->error->failure($modx->lexicon('package_err_n
 $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tzip_start'));
 
 /* remove transport package */
-if ($package->remove(true,array(),false) == false) {
+if ($package->remove() == false) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_err_remove'));
     return $modx->error->failure($modx->lexicon('package_err_remove',array('signature' => $package->getPrimaryKey())));
 }
@@ -44,7 +44,7 @@ $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tdir_start')
 $f = $modx->getOption('core_path').'packages/'.$package->signature.'/';
 if (!file_exists($f)) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tdir_nf'));
-} else if (!$cacheManager->deleteTree($f,true,false,array())) {
+} else if (!$modx->cacheManager->deleteTree($f,true,false,array())) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tdir'));
 } else {
     $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tdir'));
