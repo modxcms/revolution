@@ -83,6 +83,8 @@ class modDbRegister extends modRegister {
      * interval.</li>
      * <li>remove_read: Remove the message immediately upon digesting it.
      * Default is true.</li>
+     * <li>include_keys: Include the message keys in the array of messages returned.
+     * Default is false.</li>
      * </ul>
      *
      * @param array $options An array of general or protocol specific options.
@@ -91,11 +93,13 @@ class modDbRegister extends modRegister {
     public function read(array $options = array()) {
         $this->__kill = false;
         $messages = array();
+        $topicMessages = array();
         $msgLimit = isset($options['msg_limit']) ? intval($options['msg_limit']) : 5;
         $timeLimit = isset($options['time_limit']) ? intval($options['time_limit']) : ini_get('time_limit');
         $pollLimit = isset($options['poll_limit']) ? intval($options['poll_limit']) : 0;
         $pollInterval = isset($options['poll_interval']) ? intval($options['poll_interval']) : 0;
         $removeRead = isset($options['remove_read']) ? (boolean) $options['remove_read'] : true;
+        $includeKeys = isset($options['include_keys']) ? (boolean) $options['include_keys'] : false;
         $startTime = $this->modx->getMicroTime();
         $time = $timeLimit <= 0 ? -1 : $startTime;
         $expires = $startTime + $timeLimit;
@@ -123,7 +127,11 @@ class modDbRegister extends modRegister {
                 foreach ($this->modx->call('registry.db.modDbRegisterMessage', 'getValidMessages', $args) as $msg) {
                     $newMsg = $this->_readMessage($msg, $removeRead);
                     if ($newMsg !== null) {
-                        $topicMessages[] = $newMsg;
+                        if (!$includeKeys) {
+                            $topicMessages[] = $newMsg;
+                        } else {
+                            $topicMessages[$msg] = $newMsg;
+                        }
                         $msgCount++;
                     } else {
                         $this->modx->log(modX::LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
@@ -132,7 +140,11 @@ class modDbRegister extends modRegister {
                 }
             }
             if (!empty($topicMessages)) {
-                $messages = $messages + $topicMessages;
+                if (!$includeKeys) {
+                    $messages = $messages + $topicMessages;
+                } else {
+                    $messages = array_merge($messages, $topicMessages);
+                }
             }
             $time = $this->modx->getMicroTime();
         }

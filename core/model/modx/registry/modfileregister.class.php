@@ -68,16 +68,20 @@ class modFileRegister extends modRegister {
      * interval.</li>
      * <li>remove_read: Remove the message immediately upon digesting it.
      * Default is true.</li>
+     * <li>include_keys: Include the message keys in the array of messages returned.
+     * Default is false.</li>
      * </ul>
      */
     public function read(array $options = array()) {
         $this->__kill = false;
         $messages = array();
+        $topicMessages = array();
         $msgLimit = isset($options['msg_limit']) ? intval($options['msg_limit']) : 5;
         $timeLimit = isset($options['time_limit']) ? intval($options['time_limit']) : ini_get('time_limit');
         $pollLimit = isset($options['poll_limit']) ? intval($options['poll_limit']) : 0;
         $pollInterval = isset($options['poll_interval']) ? intval($options['poll_interval']) : 0;
         $removeRead = isset($options['remove_read']) ? (boolean) $options['remove_read'] : true;
+        $includeKeys = isset($options['include_keys']) ? (boolean) $options['include_keys'] : false;
         $startTime = $this->modx->getMicroTime();
         $time = $timeLimit <= 0 ? -1 : $startTime;
         $expires = $startTime + $timeLimit;
@@ -98,22 +102,35 @@ class modFileRegister extends modRegister {
                 if (is_dir($topicDirectory)) {
                     $dirListing = $this->getSortedDirectoryListing($topicDirectory);
                     if (!empty($dirListing)) {
-                        foreach ($dirListing as $time => $entry) {
+                        foreach ($dirListing as $idx => $entry) {
                             if ($msgCount >= $msgLimit || $this->__kill) break;
                             if ($newMsg = $this->_readMessage($topicDirectory . $entry, $removeRead)) {
-                                $topicMessages[] = $newMsg;
+                                if (!$includeKeys) {
+                                    $topicMessages[] = $newMsg;
+                                } else {
+                                    $msgKey = substr($entry, 0, strpos($entry, '.msg.php'));
+                                    $topicMessages[$msgKey] = $newMsg;
+                                }
                                 $msgCount++;
                             }
                         }
                     }
                 }
                 elseif ($newMsg = $this->_readMessage($topicDirectory . '.msg.php', $removeRead)) {
-                    $topicMessages[] = $newMsg;
+                    if (!$includeKeys) {
+                        $topicMessages[] = $newMsg;
+                    } else {
+                        $topicMessages[$topicDirectory] = $newMsg;
+                    }
                     $msgCount++;
                 }
             }
             if (!empty($topicMessages)) {
-                $messages = $messages + $topicMessages;
+                if (!$includeKeys) {
+                    $messages = $messages + $topicMessages;
+                } else {
+                    $messages = array_merge($messages, $topicMessages);
+                }
             }
             $time = $this->modx->getMicroTime();
         }
@@ -210,7 +227,7 @@ class modFileRegister extends modRegister {
                         case 'php' :
                         default :
                             $timestamp = isset($options['delay']) ? time() + intval($options['delay']) : time();
-                            $expires = isset($options['ttl']) ? time() + intval($options['ttl']) : 0;
+                            $expires = isset($options['ttl']) && !empty($options['ttl']) ? time() + intval($options['ttl']) : 0;
                             $kill = isset($options['kill']) ? (boolean) $options['kill'] : false;
                             if (!is_int($msgIdx)) {
                                 $msgKey = $msgIdx;
