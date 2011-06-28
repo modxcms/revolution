@@ -2,6 +2,15 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5112] Add Settings for adjusting behavior of Context sorting in Resources tree
+- [#4341] Properly clarify text and function on Resource Tree context menu options for view/preview
+- [#5046] Fix issue where parent could not be changed for new resources via Form Customization
+- [#5112] Sort contexts by name ascending in the Resources tree
+- [#5102] Fix error removing older transport package versions
+- [#4940] Fix issue where CMPs that did not use ExtJS could not scroll
+- [#5097] Ensure browser toolbar button does not show when MODx.Browser is already open
+- [#4953] Improve modx.console.js to avoid message loss
+- [#4836] Make sure modFileRegister sorts messages before reading
 - [#5087] Fix issue where class_key was not respected when using Add Another in UI
 - Abstract all manager controllers to classes to improve usability, testing and creation of controllers
 - [#260] Implement on-the-fly compression for css/js in manager

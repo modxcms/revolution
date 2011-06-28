@@ -468,7 +468,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         m.push('-');
         if (ui.hasClass('pview')) {
             m.push({
-                text: _('resource_view')
+                text: _('resource_overview')
                 ,handler: function() {this.loadAction('a='+MODx.action['resource/data'])}
             });
         }
@@ -534,7 +534,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (ui.hasClass('pview')) {
             m.push('-');
             m.push({
-                text: _('resource_preview')
+                text: _('resource_view')
                 ,handler: this.preview
             });
         }

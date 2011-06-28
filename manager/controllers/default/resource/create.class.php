@@ -100,7 +100,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resource->set('template',$defaultTemplate);
 
         /* handle FC rules */
-        $overridden = $this->checkFormCustomizationRules($parent,true);
+        $overridden = $this->checkFormCustomizationRules($this->parent,true);
         $this->resourceArray = array_merge($this->resourceArray,$overridden);
 
         /* handle checkboxes and defaults */
@@ -112,7 +112,17 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
-        $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
+
+        if (!empty($this->resourceArray['parent'])) {
+            if ($this->parent->get('id') == $this->resourceArray['parent']) {
+                $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
+            } else {
+                $overriddenParent = $this->modx->getObject('modResource',$this->resourceArray['parent']);
+                if ($overriddenParent) {
+                    $this->resourceArray['parent_pagetitle'] = $overriddenParent->get('pagetitle');
+                }
+            }
+        }
 
         /* get TVs */
         $this->loadTVs();

@@ -16,12 +16,6 @@ require_once dirname(__FILE__) . '/modregister.class.php';
  */
 class modDbRegister extends modRegister {
     /**
-     * A polling flag that will terminate additional polling when true.
-     * @access protected
-     * @var boolean $__kill
-     */
-    public $__kill = false;
-    /**
      * The queue object representing this modRegister instance.
      * @access protected
      * @var modDbRegisterQueue $_queue
@@ -31,9 +25,7 @@ class modDbRegister extends modRegister {
     /**
      * Construct a new modDbRegister instance.
      *
-     * @param modX &$modx A reference to a modX instance.
-     * @param string $key A unique identifier for this register.
-     * @param array $options Optional array of register-specific options.
+     * {@inheritdoc}
      */
     function __construct(modX &$modx, $key, array $options = array()) {
         parent :: __construct($modx, $key, $options);
@@ -246,9 +238,7 @@ class modDbRegister extends modRegister {
         return $sent;
     }
 
-    public function close() {}
-    public function acknowledge($messageKey, $transactionKey) {}
-    public function begin($transactionKey) {}
-    public function commit($transactionKey) {}
-    public function abort($transactionKey) {}
+    public function close() {
+        return true;
+    }
 }

@@ -133,7 +133,7 @@ MODx.Layout = function(config){
             ,id: 'modx-content'
             ,border: false
             ,autoScroll: true
-            ,margins: '0 0 0 15'
+            ,margins: '0 0 20 15'
             ,padding: '0 1px 0 0'
             ,bodyStyle: 'background-color:transparent;'
         }]

@@ -38,6 +38,11 @@ if (empty($context) || $context == 'root') {
             "(SELECT COUNT(*) FROM {$modx->getTableName('modResource')} WHERE context_key = modContext.{$modx->escape('key')} AND id IN ({$defaultRootId})) > 0",
         ));
     }
+    if ($modx->getOption('context_tree_sort',null,false)) {
+        $ctxSortBy = $modx->getOption('context_tree_sortby',null,'key');
+        $ctxSortDir = $modx->getOption('context_tree_sortdir',null,'ASC');
+        $c->sortby($modx->getSelectColumns('modContext','modContext','',array($ctxSortBy)),$ctxSortDir);
+    }
 } else {
     $resourceColumns = array(
         'id'

@@ -181,6 +181,13 @@ $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concat
 $_lang['setting_container_suffix'] = 'Container Suffix';
 $_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
 
+$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
+$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
+$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
+
 $_lang['setting_cultureKey'] = 'Language';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
