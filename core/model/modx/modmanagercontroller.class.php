@@ -572,7 +572,7 @@ abstract class modManagerController {
         $rules = array();
         foreach ($domRules as $rule) {
             $template = $rule->get('template');
-            if (!empty($template)) {
+            if (!empty($template) && $obj) {
                 if ($template != $obj->get('template')) continue;
             }
             $constraintClass = $rule->get('constraint_class');
