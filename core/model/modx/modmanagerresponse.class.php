@@ -72,10 +72,16 @@ class modManagerResponse extends modResponse {
             $this->body = $this->modx->controller->render();
         } else {
             /* doesnt have permissions to view manager */
+            $this->action = $this->modx->actionMap[$action];
+            require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
             $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
             $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
 
-            $this->body = include_once $this->modx->getOption('manager_path').'controllers/'.$theme.'/security/logout.php';
+            $className = 'SecurityLogoutManagerController';
+            require_once $this->modx->getOption('manager_path').'controllers/'.$theme.'/security/logout.class.php';
+            $c = new $className($this->modx,$this->action);
+            $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
+            $this->body = $this->modx->controller->render();
 
         }
         if (empty($this->body)) {

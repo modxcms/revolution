@@ -24,11 +24,9 @@ class SecurityLogoutManagerController extends modManagerController {
      * @return mixed
      */
     public function process(array $scriptProperties = array()) {
-        if (!empty($scriptProperties['logout'])) {
-            $this->modx->runProcessor('security/logout');
-            $url = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-            $this->modx->sendRedirect($url);
-        }
+        $this->modx->runProcessor('security/logout');
+        $url = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->modx->sendRedirect($url);
     }
 
     /**
