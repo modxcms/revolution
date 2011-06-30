@@ -119,7 +119,7 @@ MODx.Layout = function(config){
                 }
                 ,id: 'modx-leftbar-tabpanel'
                 ,border: false
-                ,activeTab: 0
+                ,activeTab: undefined
                 ,stateful: true
                 ,stateId: 'modx-leftbar-state'
                 ,stateEvents: ['tabchange']
