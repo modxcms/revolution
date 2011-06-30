@@ -31,7 +31,6 @@ class modManagerResponse extends modResponse {
         }
 
         $theme = $this->modx->getOption('manager_theme',null,'default');
-
         $this->modx->lexicon->load('dashboard','topmenu','file','action');
         if ($action == 0 || !isset($this->modx->actionMap[$action])) {
             $action = $this->modx->getObject('modAction',array(
@@ -41,15 +40,34 @@ class modManagerResponse extends modResponse {
             $action = $action->get('id');
         }
 
+        $theme = 'test';
         if ($this->modx->hasPermission('frames')) {
             $this->action = $this->modx->actionMap[$action];
             require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 
             /* first attempt to get new class format file introduced in 2.2+ */
-            $path = $this->getNamespacePath();
-            $f = $path.$this->action['controller'];
+            $paths = $this->getNamespacePath($theme);
+            $f = $this->action['controller'];
             $className = $this->getControllerClassName();
-            $classPath = strtolower($f).'.class.php';
+            $classFile = strtolower($f).'.class.php';
+
+            foreach ($paths as $controllersPath) {
+                if (!file_exists($controllersPath.$classFile)) {
+                    if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
+                        $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                    }
+                } else {
+                    $classPath = $controllersPath.$classFile;
+                    break;
+                }
+            }
+
+            /* handle Revo <2.2 controllers */
+            if (empty($classPath)) {
+                $className = 'modManagerControllerDeprecated';
+                $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+            }
+
             if (!file_exists($classPath)) {
                 if (file_exists(strtolower($f).'/index.class.php')) {
                     $classPath = strtolower($f).'/index.class.php';
@@ -114,24 +132,28 @@ class modManagerResponse extends modResponse {
 
     /**
      * Get the appropriate path to the controllers directory for the active Namespace.
-     * 
+     *
      * @param string $theme
-     * @return string The path to the Namespace's controllers directory.
+     * @return array An array of paths to the Namespace's controllers directory.
      */
     public function getNamespacePath($theme = 'default') {
         /* find context path */
         if (isset($this->action['namespace']) && $this->action['namespace'] != 'core') {
             /* if a custom 3rd party path */
-            $path = $this->action['namespace_path'];
+            $paths[] = $this->action['namespace_path'].trim($theme,'/');
+            if ($theme != 'default') {
+                $paths[] = $this->action['namespace_path'].'default/';
+            }
+            $paths[] = $this->action['namespace_path'];
 
         } else {
-            $path = $this->action['namespace_path'].'controllers/'.trim($theme,'/').'/';
-            /* if custom theme doesnt have controller, go to default theme */
-            if (!is_dir($path)) {
-                $path = $this->action['namespace_path'].'controllers/default/';
+            $paths[] = $this->action['namespace_path'].'controllers/'.trim($theme,'/').'/';
+            if ($theme != 'default') {
+                $paths[] = $this->action['namespace_path'].'controllers/default/';
             }
+            $paths[] = $this->action['namespace_path'].'controllers/';
         }
-        return $path;
+        return $paths;
 
     }
     

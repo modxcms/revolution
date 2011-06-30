@@ -18,8 +18,8 @@ abstract class modManagerController {
     public $loadBaseJavascript = true;
     /** @var string The path of this controller's templates directory. */
     public $templatesPath;
-    /** @var string The path of this controller's directory. */
-    public $controllersPath;
+    /** @var array An array of possible paths to this controller's directory. */
+    public $controllersPaths;
     /** @var The current working context. */
     public $workingContext;
     /** @var string The current output content */
@@ -138,7 +138,7 @@ abstract class modManagerController {
         } else if (!empty($tpl)) {
             $content = $this->fetchTemplate($tpl);
         }
-        
+
         $this->content .= $content;
 
         if ($this->loadFooter) {
@@ -171,6 +171,26 @@ abstract class modManagerController {
     }
 
     /**
+     * Load another manual controller file (such as header/footer)
+     *
+     * @param $controller
+     * @param bool $coreOnly
+     * @return mixed|string
+     */
+    public function loadController($controller,$coreOnly = false) {
+        $modx =& $this->modx;
+        $paths = $this->getControllersPaths($coreOnly);
+        $o = '';
+        foreach ($paths as $path) {
+            if (file_exists($path.$controller)) {
+                $o = include_once $path.$controller;
+                break;
+            }
+        }
+        return $o;
+    }
+
+    /**
      * Set a failure on this controller. This will return the error message.
      * 
      * @param string $message
@@ -189,31 +209,39 @@ abstract class modManagerController {
      */
     public function loadTemplatesPath() {
         if (empty($this->templatesPath)) {
-            $this->templatesPath = $this->getTemplatesPath();
-            if (!file_exists($this->templatesPath)) {
-                $this->templatesPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/';
+            $templatesPath = $this->getTemplatesPath();
+            if (!file_exists($templatesPath)) {
+                $templatesPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/';
                 $this->modx->setOption('manager_theme','default');
                 $this->modx->smarty->assign('_config',$this->modx->config);
             }
-            $this->modx->smarty->setTemplatePath($this->templatesPath);
+            $this->setTemplatePath($templatesPath);
         }
         return $this->templatesPath;
     }
 
     /**
-     * Load the path to this controller's directory. Only override this if you want to override default behavior;
-     * otherwise, overriding getControllersPath is preferred.
+     * Set the template path for this controller
      * 
-     * @return string
+     * @param string $path
+     * @return void
+     */
+    protected function setTemplatePath($path) {
+        $this->templatesPath = $path;
+        $this->modx->smarty->setTemplatePath($this->templatesPath);
+    }
+
+    /**
+     * Load an array of possible paths to this controller's directory. Only override this if you want to override
+     * default behavior; otherwise, overriding getControllersPath is preferred.
+     * 
+     * @return array
      */
     public function loadControllersPath() {
-        if (empty($this->controllersPath)) {
-            $this->controllersPath = $this->getControllersPath();
-            if (!file_exists($this->controllersPath)) {
-                $this->controllersPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$this->theme.'/';
-            }
+        if (empty($this->controllersPaths)) {
+            $this->controllersPaths = $this->getControllersPaths();
         }
-        return $this->controllersPath;
+        return $this->controllersPaths;
     }
 
 
@@ -221,14 +249,26 @@ abstract class modManagerController {
      * Get the path to this controller's directory. Override this to point to a custom directory.
      *
      * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
-     * @return string
+     * @return array
      */
-    public function getControllersPath($coreOnly = false) {
-        $namespacePath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
-        if (!empty($this->config['namespace_path']) && !$coreOnly) {
-            $namespacePath = $this->config['namespace_path'];
+    public function getControllersPaths($coreOnly = false) {
+        if ($this->config['namespace'] != 'core' && !$coreOnly) { /* for non-core controllers */
+            $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $paths[] = $this->config['namespace_path'].'controllers/'.$this->theme.'/';
+            $paths[] = $this->config['namespace_path'].'controllers/default/';
+            $paths[] = $this->config['namespace_path'].'controllers/';
+            $paths[] = $this->config['namespace_path'].$this->theme.'/';
+            $paths[] = $this->config['namespace_path'].'default/';
+            $paths[] = $this->config['namespace_path'];
+            $paths[] = $managerPath.'controllers/'.$this->theme.'/';
+            $paths[] = $managerPath.'controllers/default/';
+
+        } else { /* for core controllers only */
+            $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $paths[] = $managerPath.'controllers/'.$this->theme.'/';
+            $paths[] = $managerPath.'controllers/default/';
         }
-        return $namespacePath.'controllers/'.($this->config['namespace'] == 'core' || $coreOnly ? $this->theme.'/' : '');
+        return $paths;
     }
     
     /**
@@ -311,21 +351,20 @@ abstract class modManagerController {
      * @return string
      */
     public function getHeader() {
-        $modx =& $this->modx;
-        $this->modx->smarty->setTemplatePath($this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/');
-        $o = include_once $this->getControllersPath(true).'header.php';
-        return $o;
+        $this->setTemplatePath($this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/');
+        $this->loadController('header.php',true);
+        return $this->fetchTemplate('header.tpl');
     }
-    
+
     /**
      * Get the page footer for the controller.
      * @return string
      */
     public function getFooter() {
         $modx =& $this->modx;
-        $this->modx->smarty->setTemplatePath($this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/');
-        $o = include_once $this->getControllersPath(true).'footer.php';
-        return $o;
+        $this->setTemplatePath($this->modx->getOption('manager_path',null,MODX_MANAGER_PATH) . 'templates/'.$this->theme.'/');
+        $this->loadController('footer.php',true);
+        return $this->fetchTemplate('footer.tpl');
     }
 
     /**

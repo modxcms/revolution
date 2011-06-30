@@ -80,18 +80,15 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
         $childrenCt++;
     }
 }
-$modx->smarty->assign('navb',$output);
+$this->setPlaceholder('navb',$output);
 
 
 /* assign logged in text and link */
 $profile = $modx->getObject('modMenu','profile');
-$modx->smarty->assign('username',$modx->getLoginUserName());
-$modx->smarty->assign('profileAction',$profile->get('action'));
+$this->setPlaceholder('username',$modx->getLoginUserName());
+$this->setPlaceholder('profileAction',$profile->get('action'));
 
 /* assign welcome back text */
 $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUserName()));
-$modx->smarty->assign('welcome_back',$welcome_back);
+$this->setPlaceholder('welcome_back',$welcome_back);
 unset($welcome_back);
-
-
-return $modx->smarty->fetch('header.tpl');
