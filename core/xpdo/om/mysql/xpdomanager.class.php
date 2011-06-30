@@ -270,7 +270,7 @@ class xPDOManager_mysql extends xPDOManager {
                     } elseif (isset($options['after']) && array_key_exists($options['after'], $meta)) {
                         $sql .= " AFTER {$this->xpdo->escape($options['after'])}";
                     }
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -290,7 +290,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $idxDef = $this->getIndexDef($className, $name, $meta[$name]);
                 if (!empty($idxDef)) {
                     $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD {$idxDef}";
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -315,7 +315,7 @@ class xPDOManager_mysql extends xPDOManager {
                     } elseif (isset($options['after']) && array_key_exists($options['after'], $meta)) {
                         $sql .= " AFTER {$this->xpdo->escape($options['after'])}";
                     }
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -335,7 +335,7 @@ class xPDOManager_mysql extends xPDOManager {
         $className = $this->xpdo->loadClass($class);
         if ($className) {
             $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP COLUMN {$this->xpdo->escape($name)}";
-            if ($this->xpdo->exec($sql)) {
+            if ($this->xpdo->exec($sql) !== false) {
                 $result = true;
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -349,7 +349,7 @@ class xPDOManager_mysql extends xPDOManager {
         $className = $this->xpdo->loadClass($class);
         if ($className) {
             $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP INDEX {$this->xpdo->escape($name)}";
-            if ($this->xpdo->exec($sql)) {
+            if ($this->xpdo->exec($sql) !== false) {
                 $result = true;
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
