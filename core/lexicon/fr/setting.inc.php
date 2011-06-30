@@ -122,6 +122,12 @@ $_lang['setting_cache_db_desc'] = 'Activé, les objets et résultats bruts des r
 $_lang['setting_cache_db_expires'] = 'Délais d\'expiration du cache de la base de données';
 $_lang['setting_cache_db_expires_desc'] = 'Cette valeur (en secondes) défini le délais de mise en cache des fichiers de résultat de la base de données.';
 
+$_lang['setting_cache_db_session'] = 'Activer le cache des sessions dans la base de données';
+$_lang['setting_cache_db_session_desc'] = 'Lorsqu\'actif ainsi que cache_db, la table des sessions sera mise en cache (in the DB result-set cache).';
+
+$_lang['setting_cache_db_session_lifetime'] = 'Délais d\'expiration du cache des sessions';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'Cette valeur (en secondes) défini le délais de mise en cache des sessions (in the DB result-set cache).';
+
 $_lang['setting_cache_default'] = 'En cache par défaut';
 $_lang['setting_cache_default_desc'] = 'Sélectionnez \'Oui\' pour mettre en cache les nouvelles ressources par défaut.';
 $_lang['setting_cache_default_err'] = 'Veuillez indiquer si vous souhaitez ou non que les documents soient mis en cache par défaut..';
@@ -174,6 +180,13 @@ $_lang['setting_concat_js_desc'] = 'Quand ceci est activé, MODX utilisera une v
 
 $_lang['setting_container_suffix'] = 'Suffixe de conteneur';
 $_lang['setting_container_suffix_desc'] = 'Le suffixe à ajouter aux ressources conteneurs avec l\'utilisation des URLs simples.';
+
+$_lang['setting_context_tree_sort'] = 'Activer le classement des contextes dans l\'arborescence';
+$_lang['setting_context_tree_sort_desc'] = 'Activé, les contextes seront affichés dans l\'arborescence par ordre alphabétique.';
+$_lang['setting_context_tree_sortby'] = 'Champ de classement des contextes';
+$_lang['setting_context_tree_sortby_desc'] = 'Le champ à utiliser pour classer les contextes dans l\'arborescence (si activé).';
+$_lang['setting_context_tree_sortdir'] = 'Direction de classement des contextes';
+$_lang['setting_context_tree_sortdir_desc'] = 'L\'ordre de classement des contextes (si activé).';
 
 $_lang['setting_cultureKey'] = 'Langue';
 $_lang['setting_cultureKey_desc'] = 'Sélectionnez la langue pour tous les contextes "non-manager", web inclus.';
@@ -519,6 +532,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Utilisez cette option pour personn
 
 $_lang['setting_session_cookie_secure'] = 'Sessions sécurisées de Cookie';
 $_lang['setting_session_cookie_secure_desc'] = 'Activez cette option pour utiliser les sessions sécurisées de coockies.';
+
+$_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Autorise la personnalisation du paramètre session.gc_maxlifetime (PHP ini) lors de l\'utilisation de \'modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Nom de classe de prise en charge des Sessions';
 $_lang['setting_session_handler_class_desc'] = 'Pour les sessions de base de données gérées, utilisez \'modSessionHandler\'.  Laissez vide pour utiliser la gestion des sessions standard avec PHP.';
