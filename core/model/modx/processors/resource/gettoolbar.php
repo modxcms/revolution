@@ -8,7 +8,7 @@
 if (!$modx->hasPermission('resource_tree')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-$p = $modx->getOption('manager_url').'templates/'.$modx->getOption('manager_theme').'/images/restyle/icons/';
+$p = $modx->getOption('manager_url').'templates/default/images/restyle/icons/';
 
 $actions = $modx->request->getAllActionIDs();
 

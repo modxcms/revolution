@@ -73,11 +73,11 @@ if (!empty($value) && strpos($value,'/') !== false) {
     $params['openTo'] = $dir;
 }
 
-$this->xpdo->smarty->assign('params',$params);
+$this->xpdo->controller->setPlaceholder('params',$params);
 
 $this->set('relativeValue',$relativeValue);
-$this->xpdo->smarty->assign('tv',$this);
+$this->xpdo->controller->setPlaceholder('tv',$this);
 
 // handles image fields using htmlarea image manager
-$this->xpdo->smarty->assign('base_url',$this->xpdo->getOption('base_url'));
-return $this->xpdo->smarty->fetch('element/tv/renders/input/file.tpl');
+$this->xpdo->controller->setPlaceholder('base_url',$this->xpdo->getOption('base_url'));
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/file.tpl');

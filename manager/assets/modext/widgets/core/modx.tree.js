@@ -534,7 +534,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * Gets a default toolbar setup
      */
     ,getToolbar: function() {
-        var iu = MODx.config.template_url+'images/restyle/icons/';
+        var iu = MODx.config.manager_url+'templates/default/images/restyle/icons/';
         return [{
             icon: iu+'arrow_down.png'
             ,cls: 'x-btn-icon'

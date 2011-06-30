@@ -58,5 +58,5 @@ foreach ($resources as $resource) {
         'selected' => $selected,
     );
 }
-$this->xpdo->smarty->assign('opts',$opts);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/resourcelist.tpl');
+$this->xpdo->controller->setPlaceholder('opts',$opts);
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/resourcelist.tpl');

@@ -31,21 +31,21 @@ MODx.tree.Directory = function(config) {
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
         ,tbar: [{
-            icon: MODx.config.template_url+'images/restyle/icons/folder.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('file_folder_create')}
             ,handler: this.createDirectory
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
         },{
-            icon: MODx.config.template_url+'images/restyle/icons/file_upload.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_upload.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('upload_files')}
             ,handler: this.uploadFiles
             ,scope: this
             ,hidden: MODx.perm.file_upload ? false : true
         },'->',{
-            icon: MODx.config.template_url+'images/restyle/icons/file_manager.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_manager.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('modx_browser')}
             ,handler: this.loadFileManager

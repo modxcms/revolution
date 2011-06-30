@@ -16,7 +16,7 @@ MODx.tree.Element = function(config) {
         ,url: MODx.config.connectors_url+'element/index.php'
         ,useDefaultToolbar: true
         ,tbar: [{
-            icon: MODx.config.template_url+'images/restyle/icons/template.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/template.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
@@ -25,7 +25,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
         },{
-            icon: MODx.config.template_url+'images/restyle/icons/tv.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/tv.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
@@ -34,7 +34,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
         },{
-            icon: MODx.config.template_url+'images/restyle/icons/chunk.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/chunk.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
@@ -43,7 +43,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
         },{
-            icon: MODx.config.template_url+'images/restyle/icons/snippet.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/snippet.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
@@ -52,7 +52,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
         },{
-            icon: MODx.config.template_url+'images/restyle/icons/plugin.png'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/plugin.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {

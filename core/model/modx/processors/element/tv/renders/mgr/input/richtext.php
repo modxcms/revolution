@@ -6,5 +6,5 @@
 $this->xpdo->lexicon->load('tv_widget');
 
 $which_editor = $this->xpdo->getOption('which_editor',null,'');
-$this->xpdo->smarty->assign('which_editor',$which_editor);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/richtext.tpl');
+$this->xpdo->controller->setPlaceholder('which_editor',$which_editor);
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/richtext.tpl');

@@ -6,7 +6,7 @@
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
 
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/?f={$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css,{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css,{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/?f={$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css,{$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
 
 <script src="{$_config.manager_url}min/?f={$_config.manager_url}assets/ext3/adapter/ext/ext-base.js,{$_config.manager_url}assets/ext3/ext-all.js,{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
@@ -18,8 +18,8 @@
 {/foreach}
 
 <!--[if IE]>
-<style type="text/css">body { behavior: url("{$_config.manager_url}templates/{$_config.manager_theme}/css/csshover3.htc"); }</style>
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/ie.css" />
+<style type="text/css">body { behavior: url("{$_config.manager_url}templates/default/css/csshover3.htc"); }</style>
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/ie.css" />
 <![endif]-->
 </head>
 <body id="modx-body-tag">
@@ -29,7 +29,7 @@
     <div id="modx-mainpanel">
         <div id="modx-header">
             <div id="modx-topbar">
-                <div id="modx-logo"><a href="http://modx.com" onclick="window.open(this.href); return false;"><img src="templates/{$_config.manager_theme}/images/style/modx-logo-header.png" alt="" /></a></div>
+                <div id="modx-logo"><a href="http://modx.com" onclick="window.open(this.href); return false;"><img src="templates/default/images/style/modx-logo-header.png" alt="" /></a></div>
                 <div id="modx-site-name">
                     {$_config.site_name}
                     <span class="modx-version">MODX Revolution {$_config.settings_version} ({$_config.settings_distro})</span>

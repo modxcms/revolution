@@ -13,6 +13,29 @@ $modx->lexicon->load('tv_widget','tv_input_types');
 
 $context = (isset($scriptProperties['context']) && !empty($scriptProperties['context'])) ? $scriptProperties['context'] : $modx->context->get('key');
 
+/* simulate controller to allow controller methods in TV Input Properties controllers */
+$modx->getService('smarty', 'smarty.modSmarty','');
+require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
+class TvInputManagerController extends modManagerController {
+    public $loadFooter = false;
+    public $loadHeader = false;
+    public function checkPermissions() {
+        return $this->modx->hasPermission('view_tv');
+    }
+    public function loadCustomCssJs() {}
+    public function process(array $scriptProperties = array()) {}
+    public function getPageTitle() {return '';}
+    public function getTemplateFile() {
+        return 'empty.tpl';
+    }
+    public function getLanguageTopics() {return array();}
+}
+
+/* simulate controller with the faux class above */
+$c = new TvInputManagerController($this->modx,$this->action);
+$modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvInputManagerController',$this->action));
+$modx->controller->render();
+
 $renderDirectories = array(
     dirname(__FILE__).'/'.$context.'/input/',
 );
