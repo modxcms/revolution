@@ -94,8 +94,6 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $overridden = $this->checkFormCustomizationRules($this->resource);
         $this->resourceArray = array_merge($this->resourceArray,$overridden);
 
-        $this->resourceArray['parent_pagetitle'] = $this->parent ? $this->parent->get('pagetitle') : '';
-
         $this->resourceArray['published'] = intval($this->resourceArray['published']) == 1 ? true : false;
         $this->resourceArray['hidemenu'] = intval($this->resourceArray['hidemenu']) == 1 ? true : false;
         $this->resourceArray['isfolder'] = intval($this->resourceArray['isfolder']) == 1 ? true : false;
@@ -105,6 +103,17 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
 
+        if (!empty($this->resourceArray['parent'])) {
+            if ($this->parent->get('id') == $this->resourceArray['parent']) {
+                $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
+            } else {
+                $overriddenParent = $this->modx->getObject('modResource',$this->resourceArray['parent']);
+                if ($overriddenParent) {
+                    $this->resourceArray['parent_pagetitle'] = $overriddenParent->get('pagetitle');
+                }
+            }
+        }
+        
         /* get TVs */
         $this->resource->set('template',$this->resourceArray['template']);
 
