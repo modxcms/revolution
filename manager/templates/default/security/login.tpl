@@ -6,9 +6,9 @@
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
     
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css" />
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/login.css" />
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="templates/default/css/login.css" />
     
     <script src="assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
     <script src="assets/ext3/ext-all.js" type="text/javascript"></script>

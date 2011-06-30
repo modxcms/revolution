@@ -40,68 +40,60 @@ class modManagerResponse extends modResponse {
             $action = $action->get('id');
         }
 
-        $theme = 'test';
-        if ($this->modx->hasPermission('frames')) {
-            $this->action = $this->modx->actionMap[$action];
-            require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
+        $this->action = $this->modx->actionMap[$action];
+        $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
+        if (!$isLoggedIn) {
+            $this->action['controller'] = 'security/login';
+        } else if (!$this->modx->hasPermission('frames')) {
+            $this->action['controller'] = 'security/logout';
+        }
+         
+        require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 
-            /* first attempt to get new class format file introduced in 2.2+ */
-            $paths = $this->getNamespacePath($theme);
-            $f = $this->action['controller'];
-            $className = $this->getControllerClassName();
-            $classFile = strtolower($f).'.class.php';
+        /* first attempt to get new class format file introduced in 2.2+ */
+        $paths = $this->getNamespacePath($theme);
+        $f = $this->action['controller'];
+        $className = $this->getControllerClassName();
+        $classFile = strtolower($f).'.class.php';
 
-            foreach ($paths as $controllersPath) {
-                if (!file_exists($controllersPath.$classFile)) {
-                    if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
-                        $classPath = $controllersPath.strtolower($f).'/index.class.php';
-                    }
-                } else {
-                    $classPath = $controllersPath.$classFile;
-                    break;
+        foreach ($paths as $controllersPath) {
+            if (!file_exists($controllersPath.$classFile)) {
+                if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
+                    $classPath = $controllersPath.strtolower($f).'/index.class.php';
                 }
+            } else {
+                $classPath = $controllersPath.$classFile;
+                break;
             }
+        }
 
-            /* handle Revo <2.2 controllers */
-            if (empty($classPath)) {
+        /* handle Revo <2.2 controllers */
+        if (empty($classPath)) {
+            $className = 'modManagerControllerDeprecated';
+            $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+        }
+
+        if (!file_exists($classPath)) {
+            if (file_exists(strtolower($f).'/index.class.php')) {
+                $classPath = strtolower($f).'/index.class.php';
+            } else { /* handle Revo <2.2 controllers */
                 $className = 'modManagerControllerDeprecated';
                 $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
             }
-
-            if (!file_exists($classPath)) {
-                if (file_exists(strtolower($f).'/index.class.php')) {
-                    $classPath = strtolower($f).'/index.class.php';
-                } else { /* handle Revo <2.2 controllers */
-                    $className = 'modManagerControllerDeprecated';
-                    $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
-                }
-            }
-
-            ob_start();
-            require_once $classPath;
-            ob_end_clean();
-            try {
-                $c = new $className($this->modx,$this->action);
-                /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
-                $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
-            } catch (Exception $e) {
-                die($e->getMessage());
-            }
-            $this->body = $this->modx->controller->render();
-        } else {
-            /* doesnt have permissions to view manager */
-            $this->action = $this->modx->actionMap[$action];
-            require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
-            $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
-            $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
-
-            $className = 'SecurityLogoutManagerController';
-            require_once $this->modx->getOption('manager_path').'controllers/'.$theme.'/security/logout.class.php';
-            $c = new $className($this->modx,$this->action);
-            $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
-            $this->body = $this->modx->controller->render();
-
         }
+
+        ob_start();
+        require_once $classPath;
+        ob_end_clean();
+        try {
+            $c = new $className($this->modx,$this->action);
+            /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
+            $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+        $this->body = $this->modx->controller->render();
+
         if (empty($this->body)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
         }
