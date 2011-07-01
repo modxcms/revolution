@@ -41,6 +41,11 @@ class modResource extends modAccessibleSimpleObject {
      * @var boolean
      */
     protected $_refreshCache= true;
+    /**
+     * Indicates if this Resource was generated from a forward.
+     * @var boolean
+     */
+    public $_isForward= false;
     public $_jscripts = array();
     public $_sjscripts = array();
     public $_loadedjscripts = array();

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5065] Fix 404 error with cross-context symlinks when cacheable
 - [#5152] Fix nested non-cacheable tags from being cached in modResource->_content
 - [#5145] Update config check on dashboard to show correct core path if core is moved
 - [#5112] Add Settings for adjusting behavior of Context sorting in Resources tree

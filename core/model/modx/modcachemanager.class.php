@@ -211,6 +211,7 @@ class modCacheManager extends xPDOCacheManager {
                 $results['resource']['_processed']= $obj->getProcessed();
                 $results['resource']= $obj->toArray('', true);
                 $results['resource']['_content']= $obj->_content;
+                $results['resource']['_isForward']= $obj->_isForward;
                 if ($contentType = $obj->getOne('ContentType')) {
                     $results['contentType']= $contentType->toArray('', true);
                 }
