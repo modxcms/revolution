@@ -14,8 +14,8 @@
           <file>Tests/Core/SystemRequirementsTest.php</file>
       </testsuite>
       <testsuite name="Processors">
-        <file>Tests/Processors/Browser/DirectoryTest.php</file>
-        <file>Tests/Processors/Browser/FileTest.php</file>
+        <!--<file>Tests/Processors/Browser/DirectoryTest.php</file>
+        <file>Tests/Processors/Browser/FileTest.php</file>-->
         <file>Tests/Processors/Context/ContextTest.php</file>
         <file>Tests/Processors/Context/ContextSettingTest.php</file>
         <file>Tests/Processors/Element/CategoryTest.php</file>
@@ -25,7 +25,7 @@
         <file>Tests/Processors/Element/TemplateTest.php</file>
         <file>Tests/Processors/Element/TemplateVarTest.php</file>
         <file>Tests/Processors/Element/PropertySetTest.php</file>
-        <file>Tests/Processors/System/ActionTest.php</file>
+        <!--<file>Tests/Processors/System/ActionTest.php</file>-->
       </testsuite>
     </testsuites>
 </phpunit>
