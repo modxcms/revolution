@@ -1327,7 +1327,7 @@ $settings['session_cookie_secure']->fromArray(array (
 $settings['session_gc_maxlifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_gc_maxlifetime']->fromArray(array (
   'key' => 'session_gc_maxlifetime',
-  'value' => '',
+  'value' => '604800',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'session',

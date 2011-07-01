@@ -442,6 +442,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 },scope:this}
                 ,'failure': {fn:function(r) {
                     MODx.form.Handler.errorJSON(r);
+                    this.refresh();
                     return false;
                 },scope:this}
             }

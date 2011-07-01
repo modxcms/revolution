@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 - [#5141] Add ability to override specific controllers/templates in a custom manager theme w/ fallback to default
 
+- Set a default session_gc_maxlifetime to avoid frequent logout issues
+- Refresh modExt trees when drag operations fail
+- [#4918] Limit save permission check to modified nodes in resource/sort processor
+- [#5065] Fix 404 error with cross-context symlinks when cacheable
 - [#5152] Fix nested non-cacheable tags from being cached in modResource->_content
 - [#5145] Update config check on dashboard to show correct core path if core is moved
 - [#5112] Add Settings for adjusting behavior of Context sorting in Resources tree
