@@ -120,12 +120,14 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
 $tvCounts = array();
 $finalCategories = array();
 foreach ($categories as $n => $category) {
-    $category->hidden = empty($category->tvCount) ? true : false;
-    $ct = count($category->tvs);
-    if ($ct > 0) {
-        $finalCategories[$category->get('id')] = $category;
-        $tvCounts[$n] = $ct;
-    }
+    if ($category instanceof modCategory) {
+        $category->hidden = empty($category->tvCount) ? true : false;
+        $ct = count($category->tvs);
+        if ($ct > 0) {
+            $finalCategories[$category->get('id')] = $category;
+            $tvCounts[$n] = $ct;
+        }
+    }    
 }
 $onResourceTVFormRender = $modx->invokeEvent('OnResourceTVFormRender',array(
     'categories' => &$finalCategories,
