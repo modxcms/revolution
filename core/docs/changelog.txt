@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5168] Fix element and tv permission queries for SQL Server
 - [#5146] Fix issue with Firefox and button widths
 - [#5164] Fix possible issue if a TV is stranded to a non-existent category
 - Update ExtJS to 3.4.0

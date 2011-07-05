@@ -374,8 +374,7 @@ class modElement extends modAccessibleSimpleObject {
                         "AND Acl.principal_class = 'modUserGroup' " .
                         "AND CategoryClosure.ancestor = Acl.target " .
                         "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
-                        "GROUP BY target, principal, authority, policy " .
-                        "ORDER BY CategoryClosure.depth DESC, authority ASC";
+                        "ORDER BY CategoryClosure.depth DESC, target, principal, authority ASC";
                 $bindings = array(
                     ':category' => $this->get('category'),
                     ':context' => $context,
