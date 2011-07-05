@@ -29,9 +29,9 @@ abstract class ResourceManagerController extends modManagerController {
     public static function getInstance(modX &$modx,$className,array $config = array()) {
         $resourceClass = 'modDocument';
         $isDerivative = false;
-        if (!empty($_REQUEST['class_key']) && !in_array($_REQUEST['class_key'],array('modDocument','modResource'))) {
+        if (!empty($_REQUEST['class_key'])) {
             $isDerivative = true;
-            $resourceClass = $_REQUEST['class_key'];
+            $resourceClass = in_array($_REQUEST['class_key'],array('modDocument','modResource')) ? 'modResource' : $_REQUEST['class_key'];
         } else if (!empty($_REQUEST['id'])) {
             $resource = $modx->getObject('modResource',$_REQUEST['id']);
             if ($resource && !in_array($resource->get('class_key'),array('modDocument','modResource'))) {
