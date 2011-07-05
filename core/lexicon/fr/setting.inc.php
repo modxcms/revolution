@@ -354,6 +354,13 @@ $_lang['setting_manager_date_format_desc'] = 'Le format de chaine de caratères,
 $_lang['setting_manager_favicon_url'] = 'URL de favicon du manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour le manager de MODX. Doit être relatif au répertoire manager/ ou une URL absolue.';
 
+$_lang['setting_manager_js_cache_file_locking'] = 'Activer le verrouillage des fichiers JS/CSS du manager';
+$_lang['setting_manager_js_cache_file_locking_desc'] = 'Mettre en cache le verrouillage des fichiers. Sélectionnez non si votre système de fichier est NFS.';
+$_lang['setting_manager_js_cache_max_age'] = 'Durée du cache des JS/CSS compressés';
+$_lang['setting_manager_js_cache_max_age_desc'] = 'Durée maximale du cache navigateur pour les fichiers CSS/JS du manager, en secondes. Au delà de ctte période, le navigateur enverra un GET "conditionnel". Utilisez une valeur élevée pour moins de traffic.';
+$_lang['setting_manager_js_zlib_output_compression'] = 'Activer la compression zlib pour les JS/CSS du manager';
+$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Autorise ou non la compression zlib sur les fichiers CSS/JS du manager. N\'activez pas cette fonction à moins d\'être sûr que votre configuration PHP autorise le changement de la variable zlib.output_compression à 1. MODX recommande de laisser cette fonction désactivée..';
+
 $_lang['setting_manager_lang_attribute'] = 'Attributs HTML et XML du manager';
 $_lang['setting_manager_lang_attribute_desc'] = 'Entrez le code de langue qui correspond au mieux à la langue choisie pour votre manager, ceci assurera que le navigateur puisse afficher le contenu de la meilleur façon possible pour vous.';
 
