@@ -159,6 +159,12 @@ class modRestCurlClient extends modRestClient {
 }
 
 if (!class_exists('ArrayToXML')) {
+/**
+ * Utility class for array-to-XML transformations.
+ * 
+ * @package modx
+ * @subpackage rest
+ */
 class ArrayToXML {
     /**
      * The main function for converting to an XML document.

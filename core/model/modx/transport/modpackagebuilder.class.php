@@ -21,13 +21,11 @@
  */
 
 /**
+ * Abstracts the package building process
+ *
  * @package modx
  * @subpackage transport
  */
-/**
-* Abstracts the package building process
-*
-*/
 class modPackageBuilder {
     /**
     * @var string The directory in which the package file is located.

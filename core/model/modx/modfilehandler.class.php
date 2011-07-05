@@ -140,8 +140,11 @@ class modFileHandler {
 }
 
 /**
- * Abstract class for handling file system resources (files or folders). Not to
- * be instantiated directly - you should implement your own derivative class.
+ * Abstract class for handling file system resources (files or folders).
+ *
+ * Not to be instantiated directly - you should implement your own derivative class.
+ *
+ * @package modx
  */
 abstract class modFileSystemResource {
     /**
@@ -317,6 +320,8 @@ abstract class modFileSystemResource {
 
 /**
  * File implementation of modFileSystemResource
+ *
+ * @package modx
  */
 class modFile extends modFileSystemResource {
     /**
@@ -457,6 +462,8 @@ class modFile extends modFileSystemResource {
 
 /**
  * Representation of a directory
+ *
+ * @package modx
  */
 class modDirectory extends modFileSystemResource {
     /**

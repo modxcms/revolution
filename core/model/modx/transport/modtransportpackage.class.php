@@ -1,10 +1,5 @@
 <?php
 /**
- * @package modx
- * @subpackage transport
- */
-
-/**
  * Represents an xPDOTransport package as required for MODX Web Transport Facilities.
  *
  * @package modx
