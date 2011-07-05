@@ -9,9 +9,6 @@
 /**
  * Utility class for creating, merging, and managing diffs for versioning.
  * 
- * @package xpdo
- * @subpackage revision
- * 
  * BASED ON:
  * Implementation of a GNU diff alike function from scratch.
  * Copyright (C) 2003  Nils Knappmeier <nk@knappi.org>
@@ -35,7 +32,11 @@
  * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- **/
+ *
+ * @package xpdo
+ * @subpackage revision
+ * 
+ */
 class xPDORevisionControl {
     /**
      * Computes the difference between two string linewise. 
