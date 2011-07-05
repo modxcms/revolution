@@ -10,6 +10,7 @@
     <transformation query="copy" writer="FileIo" source="themes/cache/modx/css" artifact="css"/>
     <transformation query="copy" writer="FileIo" source="themes/default/images" artifact="images"/>
     <transformation query="copy" writer="FileIo" source="themes/cache/modx/images" artifact="images"/>
+    <transformation query="copy" writer="FileIo" source="themes/cache/modx/js" artifact="js"/>
     <transformation query="" writer="xsl" source="themes/cache/modx/index.xsl" artifact="index.html"/>
     <transformation query="" writer="xsl" source="themes/default/content.xsl" artifact="content.html"/>
     <transformation query="" writer="xsl" source="themes/default/sidebar.xsl" artifact="nav.html"/>
