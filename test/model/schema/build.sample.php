@@ -1,7 +1,7 @@
 <?php
 /*
  * OpenExpedio (xPDO)
- * Copyright (C) 2006, 2007, 2008, 2009, 2010 by Jason Coward <xpdo@opengeek.com>
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software

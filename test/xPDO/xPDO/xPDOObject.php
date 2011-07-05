@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010 by MODx, LLC.
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -105,6 +105,21 @@ class xPDOObjectTest extends xPDOTestCase {
                 'person' => 2,
                 'phone' => 2,
                 'is_primary' => true,
+            ),'',true,true);
+            $personPhone->save();
+
+            $phone = $this->xpdo->newObject('Phone');
+            $phone->fromArray(array(
+                'type' => 'home',
+                'number' => '555-555-5555',
+            ));
+            $phone->save();
+
+            $personPhone = $this->xpdo->newObject('PersonPhone');
+            $personPhone->fromArray(array(
+                'person' => 2,
+                'phone' => 3,
+                'is_primary' => false,
             ),'',true,true);
             $personPhone->save();
         } catch (Exception $e) {
@@ -320,8 +335,8 @@ class xPDOObjectTest extends xPDOTestCase {
         return;
         $this->assertTrue($people[1] instanceof Person, "Error retrieving all objects.");
         $this->assertTrue(isset($people[2]) && $people[2] instanceof Person, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1'] instanceof PersonPhone, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'] instanceof Phone, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1'] instanceof PersonPhone && $people[2]->_relatedObjects['PersonPhone']['2-2'] instanceof PersonPhone, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'] instanceof Phone && $people[2]->_relatedObjects['PersonPhone']['2-2']->_relatedObjects['Phone'] instanceof Phone, "Error retrieving all objects.");
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
     }
 
@@ -363,7 +378,7 @@ class xPDOObjectTest extends xPDOTestCase {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
             }
         }
-        $this->assertTrue(!empty($personPhones) && count($personPhones) === 1,'xPDOQuery: getMany failed from Person to PersonPhone.');
+        $this->assertTrue(!empty($personPhones) && count($personPhones) === 2,'xPDOQuery: getMany failed from Person to PersonPhone.');
     }
     /**
      * Data provider for testGetMany
