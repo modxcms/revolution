@@ -5,7 +5,7 @@
  * native PDO if available or provides a subset implementation for use with PHP
  * 4 on platforms that do not include the native PDO extensions.
  *
- * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -27,7 +27,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2010, Jason Coward
+ * @copyright Copyright (C) 2006-2011, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
@@ -2461,6 +2461,8 @@ class xPDOCriteria {
  * Use an xPDOIterator to loop over large result sets and work with one instance
  * at a time. This greatly reduces memory usage over loading the entire collection
  * of objects into memory at one time. It is also slightly faster.
+ *
+ * @package xpdo
  */
 class xPDOIterator implements Iterator {
     private $xpdo = null;
@@ -2543,7 +2545,8 @@ class xPDOIterator implements Iterator {
     /**
      * Fetch the next row from the result set and set it as current.
      *
-     * Uses the loader defined for the specified class, so it does respect security.
+     * Calls the _loadInstance() method for the specified class, so it properly
+     * inherits behavior from xPDOObject derivatives.
      */
     protected function fetch() {
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);

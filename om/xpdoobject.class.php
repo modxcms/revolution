@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -223,7 +223,7 @@ class xPDOObject {
      * @static
      * @param xPDO &$xpdo A valid xPDO instance.
      * @param string $className Name of the class.
-     * @param mixed $criteria A valid primary key, criteria array, or xPDOCriteria instance.
+     * @param xPDOCriteria $criteria A valid xPDOCriteria instance.
      * @return PDOStatement A reference to a PDOStatement representing the
      * result set.
      */
@@ -286,7 +286,7 @@ class xPDOObject {
      * @static
      * @param xPDO &$xpdo A valid xPDO instance.
      * @param string $className Name of the class.
-     * @param mixed $criteria A valid xPDOQuery instance or relation alias.
+     * @param xPDOQuery|string $criteria A valid xPDOQuery instance or relation alias.
      * @param array $row The associative array containing the instance data.
      * @return xPDOObject A new xPDOObject derivative representing a data row.
      */
@@ -337,7 +337,7 @@ class xPDOObject {
             if (!$instance instanceof $className) {
                 $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
             }
-            $instance->_lazy= array_keys($instance->_fields);
+            $instance->_lazy= $actualClass !== $className ? array_keys($xpdo->getFields($className)) : array_keys($instance->_fields);
             $instance->fromArray($row, $rowPrefix, true, true);
             $instance->_dirty= array ();
             $instance->_new= false;
