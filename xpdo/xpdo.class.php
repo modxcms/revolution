@@ -2461,6 +2461,8 @@ class xPDOCriteria {
  * Use an xPDOIterator to loop over large result sets and work with one instance
  * at a time. This greatly reduces memory usage over loading the entire collection
  * of objects into memory at one time. It is also slightly faster.
+ *
+ * @package xpdo
  */
 class xPDOIterator implements Iterator {
     private $xpdo = null;
@@ -2543,7 +2545,8 @@ class xPDOIterator implements Iterator {
     /**
      * Fetch the next row from the result set and set it as current.
      *
-     * Uses the loader defined for the specified class, so it does respect security.
+     * Calls the _loadInstance() method for the specified class, so it properly
+     * inherits behavior from xPDOObject derivatives.
      */
     protected function fetch() {
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
