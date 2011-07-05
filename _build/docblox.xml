@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<docblox>
+  <title>MODX API Documentation</title>
+  <force />
+  <parser>
+    <target>./docs/build/</target>
+    <markers>
+      <item>TODO</item>
+      <item>FIXME</item>
+    </markers>
+    <extensions>
+      <extension>php</extension>
+    </extensions>
+  </parser>
+  <transformer>
+    <target>./docs/build/</target>
+  </transformer>
+  <files>
+    <directory>../core/model/modx/</directory>
+    <directory>../core/xpdo/</directory>
+  </files>
+  <!--
+  <logging>
+    <level>warn</level>
+    <paths>
+      <default>./doc/log/{DATE}.log</default>
+      <errors>./doc/log/{DATE}.errors.log</errors>
+    </paths>
+  </logging>
+  -->
+  <transformations>
+    <template name="./docs/themes/modx/" />
+  </transformations>
+  <ignore>
+    <item>*.inc</item>
+    <item>*.cache.php</item>
+    <item>model/modx/jsonrpc/jsonrpc.inc</item>
+    <item>model/modx/jsonrpc/jsonrpcs.inc</item>
+    <item>model/modx/xmlrpc/xmlrpc.inc</item>
+    <item>model/modx/xmlrpc/xmlrpcs.inc</item>
+    <item>model/modx/xmlrpc/xmlrpc_wrappers.inc</item>
+    <item>model/modx/xmlrss/magpierss.class.php</item>
+    <item>model/modx/xmlrss/rss_utils.inc</item>
+    <item>model/modx/xmlrss/rsscache.class.php</item>
+    <item>model/modx/xmlrss/rssfetch.class.php</item>
+    <item>model/modx/xmlrss/extlib/snoopy.class.php</item>
+    <item>model/modx/mail/phpmailer/*</item>
+    <item>xpdo/json/*</item>
+    <item>xpdo/compression/pclzip.lib.php</item>
+  </ignore>
+</docblox>
