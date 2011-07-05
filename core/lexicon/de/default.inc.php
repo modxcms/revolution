@@ -288,6 +288,7 @@ $_lang['pagetitle'] = 'Titel der Ressource';
 $_lang['page_title'] = 'Ressourcen-Titel';
 $_lang['parameter'] = 'Parameter';
 $_lang['parameters'] = 'Parameter';
+$_lang['parent'] = 'Eltern-Element';
 $_lang['password'] = 'Passwort';
 $_lang['path'] = 'Pfad';
 $_lang['per_page'] = 'Pro Seite';
