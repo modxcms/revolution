@@ -71,3 +71,10 @@ table#overview td
 {
   border: none;
 }
+
+.property-meta {
+    color: #444;
+    font-style: italic;
+    font-weight: normal;
+    margin-left: 4px;
+}
