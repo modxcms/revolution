@@ -18,6 +18,7 @@
   <files>
     <directory>../core/model/modx/</directory>
     <directory>../core/xpdo/</directory>
+    <directory>../manager/controllers/default/</directory>
   </files>
   <!--
   <logging>
