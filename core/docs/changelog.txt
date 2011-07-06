@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 - [#5141] Add ability to override specific controllers/templates in a custom manager theme w/ fallback to default
 
+MODX Revolution 2.1.2-pl (July 6, 2011)
+====================================
 - Fix issue with modUser::getSettings pulling a deprecated alias
 - Update to xPDO v2.1.5-pl
 - Implement DocBlox for documentation generation
