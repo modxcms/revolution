@@ -46,7 +46,7 @@ class modTransportManager {
     /**
      * Creates an instance of the modTransportManager class.
      *
-     * @param modX &$modx A reference to a modX instance.
+     * @param xPDO &$modx A reference to a modX instance.
      * @return modTransportManager
      */
     function __construct(xPDO &$modx) {

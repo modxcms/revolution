@@ -148,11 +148,41 @@ abstract class modRegister {
         return $success;
     }
 
+    /**
+     * Acknowledge the registry was read
+     *
+     * @param string $messageKey The key of the message being read
+     * @param string $transactionKey The secure key of the transaction that is reading
+     * @return void
+     */
     public function acknowledge($messageKey, $transactionKey) {}
+
+    /**
+     * Begin the reading of the message
+     * @param $transactionKey The key of the message
+     * @return void
+     */
     public function begin($transactionKey) {}
+
+    /**
+     * Commit the transaction and finish
+     *
+     * @param string $transactionKey The key of the transaction
+     * @return void
+     */
     public function commit($transactionKey) {}
+
+    /**
+     * @param $transactionKey
+     * @return void
+     */
     public function abort($transactionKey) {}
 
+    /**
+     * Set the current topic to be read
+     * @param string $topic The key of the topic
+     * @return void
+     */
     public function setCurrentTopic($topic) {
         if ($topic[0] != '/') $topic = $this->_currentTopic . $topic;
         if ($topic[strlen($topic) - 1] != '/') $topic .= '/';
@@ -161,7 +191,11 @@ abstract class modRegister {
             $this->_currentTopic = $topic;
         }
     }
-    
+
+    /**
+     * Get the key of this registry
+     * @return string The key of the current registry
+     */
     public function getKey() {
         return $this->_key;
     }

@@ -56,8 +56,15 @@ class modError {
      * @var boolean Indicates failure or success.
      */
     public  $status = false;
+    /**
+     * @var array An array of objects to validate against
+     */
     protected $_objects = array();
 
+    /**
+     * @param modX $modx A reference to the modX instance
+     * @param string $message The default message to send as an error response
+     */
     function __construct(modX &$modx, $message = '') {
         $this->modx =& $modx;
         $this->message = $message;
@@ -81,11 +88,11 @@ class modError {
      * handlers that derive from this can determine their own behaviour should
      * errors be found.
      * @access public
-     * @param xPDOObject/array $objs An xPDOObject or array of xPDOObjects to
+     * @param xPDOObject|array $objs An xPDOObject or array of xPDOObjects to
      * add to the validation queue.
      * @return string The validation message returned.
      */
-    public function checkValidation(array $objs= array()) {
+    public function checkValidation($objs= array()) {
         if (is_object($objs)) {
             $this->addObjectToValidate($objs);
         }
@@ -206,6 +213,9 @@ class modError {
 
     /**
      * Return all of the errors in the error queue.
+     *
+     * @param boolean $includeFields Whether or not to include the fields in the error response
+     * @return array An array of errors
      */
     public function getErrors($includeFields = false) {
         $errors = $this->errors;
@@ -249,6 +259,7 @@ class modError {
      *
      * @param string $message The error message to send.
      * @param object|array|string $object An object to send back to the output.
+     * @return string|array The failure response
      */
     public function failure($message = '', $object = null) {
         return $this->process($message, false, $object);
@@ -259,6 +270,7 @@ class modError {
      *
      * @param string $message The error message to send.
      * @param object|array|string $object An object to send back to the output.
+     * @return string|array The success response
      */
     public function success($message = '', $object = null) {
         return $this->process($message, true, $object);

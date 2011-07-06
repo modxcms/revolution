@@ -27,6 +27,15 @@ class modTransportPackage extends xPDOObject {
      */
     public $package = null;
 
+    /**
+     * List the packages from this transport package
+     * @static
+     * @param modX $modx A reference to the modX instance
+     * @param $workspace The current active workspace ID
+     * @param int $limit The limit of packages to return
+     * @param int $offset The offset on which to list by
+     * @return array
+     */
     public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0) {
         return array('collection' => array(), 'total' => 0);
     }
@@ -34,7 +43,8 @@ class modTransportPackage extends xPDOObject {
     /**
      * Overrides xPDOObject::save to set a default created time if new.
      *
-     * {@inheritdoc}
+     * @param boolean $cacheFlag
+     * @return boolean True if the save was successful
      */
     public function save($cacheFlag= null) {
         if ($this->_new && !$this->get('created')) {
@@ -48,7 +58,10 @@ class modTransportPackage extends xPDOObject {
      * Overrides xPDOObject::set. Checks if signature is set, and if so,
      * parses it and sets the source if is a new package.
      *
-     * {@inheritdoc}
+     * @param string $k The key to set
+     * @param mixed $v The value to set
+     * @param string $vType The validation type to set against
+     * @return boolean True if successfully set
      */
     public function set($k, $v= null, $vType= '') {
         $set = parent :: set($k, $v, $vType);
@@ -162,6 +175,7 @@ class modTransportPackage extends xPDOObject {
      * Installs or upgrades the package.
      *
      * @access public
+     * @param array $options An array of installation options
      * @return boolean True if successful.
      */
     public function install(array $options = array()) {
@@ -190,6 +204,7 @@ class modTransportPackage extends xPDOObject {
      * Uninstalls the package.
      *
      * @access public
+     * @param array $options An array of uninstallation options
      * @return boolean True if successful.
      */
     public function uninstall(array $options = array()) {

@@ -27,18 +27,34 @@
  * @subpackage import
  */
 class modImport {
-    var $modx = null;
-    var $results = array();
-    var $properties = array ();
+    /**
+     * @var modX A reference to the modX instance
+     */
+    public $modx = null;
+    /**
+     * @var array A collection of results in an array
+     */
+    public $results = array();
+    /**
+     * @var array A collection of properties that are being used in this import
+     */
+    public $properties = array ();
 
-    function modImport(& $modx) {
-        $this->__construct($modx);
-    }
+    /**
+     * @param modX $modx A reference to the modX instance
+     */
     function __construct(& $modx) {
         $this->modx = & $modx;
     }
 
-    function getFiles(& $filesfound, $directory, $listing= array (), $count= 0) {
+    /**
+     * @param array $filesfound A reference to an array of file locations
+     * @param string $directory The directory to import from
+     * @param array $listing A listing of imported files
+     * @param int $count The current count iteration
+     * @return array
+     */
+    public function getFiles(& $filesfound, $directory, $listing= array (), $count= 0) {
         if ($directory[-1] !== '/') {
             $directory.= '/';
         }
@@ -65,10 +81,15 @@ class modImport {
         return ($listing);
     }
 
-    function getFileContent($file) {
+    /**
+     * Gets the buffered content of a file
+     * @param string $file An absolute path to the file
+     * @return string
+     */
+    public function getFileContent($file) {
         // get the file
+        $buffer= '';
         if (@ $handle= fopen($file, "r")) {
-            $buffer= "";
             while (!feof($handle)) {
                 $buffer .= fgets($handle, 4096);
             }
@@ -79,7 +100,12 @@ class modImport {
         return $buffer;
     }
 
-    function getFileContentType($extension) {
+    /**
+     * Gets the content type of a file
+     * @param $extension The extension of the file
+     * @return string The content-type of the file
+     */
+    public function getFileContentType($extension) {
         if (!$contentType= $this->modx->getObject('modContentType', "file_extensions LIKE '%{$extension}%'")) {
             $this->log("Could not find content type for extension '$extension'; using <tt>text/plain</tt>.");
             $contentType= $this->modx->getObject('modContentType', array('mime_type' => 'text/plain'));
@@ -87,9 +113,13 @@ class modImport {
         return $contentType;
     }
 
-    function log($message) {
+    /**
+     * Log a message to the results array
+     * @param string $message A string message to log
+     * @return void
+     */
+    public function log($message) {
         $this->results[] = $message;
 //        $this->modx->log(MODX_LOG_LEVEL_ERROR, $message);
     }
 }
-?>

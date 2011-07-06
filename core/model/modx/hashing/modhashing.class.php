@@ -133,6 +133,10 @@ abstract class modHash {
 
     /**
      * Constructs a new instance of the modHash class.
+     *
+     * @param modHashing $host A reference to the modHashing instance
+     * @param array $options An array of configuration options
+     * @return modHash A new instance of a derivative of the modHash class
      */
     function __construct(modHashing &$host, array $options= array()) {
         $this->host =& $host;

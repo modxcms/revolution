@@ -28,7 +28,11 @@ require_once MODX_CORE_PATH . 'model/modx/transport/modpackagebuilder.class.php'
  * @subpackage transport
  */
 class modXMLPackageBuilder extends modPackageBuilder {
-
+    /**
+     * Build the package from a specific XML file
+     * @param string $fileName The XML file to parse
+     * @return bool True if successful
+     */
     public function build($fileName) {
         if (!$this->parseXML($fileName)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR,'XML parsing failed for '.$fileName);
@@ -70,6 +74,11 @@ class modXMLPackageBuilder extends modPackageBuilder {
         return true;
     }
 
+    /**
+     * Parse the XML file
+     * @param string $fileName
+     * @return bool
+     */
     public function parseXML($fileName) {
         $this->build = array(
             'autoincludes' => array(),
@@ -108,6 +117,12 @@ class modXMLPackageBuilder extends modPackageBuilder {
         return $this->build;
     }
 
+    /**
+     * @param xmlParser $parser A reference to the xml parser instance
+     * @param string|array $element The opening XML element
+     * @param array $attributes An array of attributes on the element
+     * @return void
+     */
     protected function _handleOpenElement(& $parser, & $element, & $attributes) {
         $element= strtolower($element);
         switch ($element) {
@@ -159,6 +174,12 @@ class modXMLPackageBuilder extends modPackageBuilder {
         }
     }
 
+    /**
+     * Handles a closed XML tag
+     * @param xmlParser $parser A reference to the xml parser instance
+     * @param string|array $element The closing element
+     * @return void
+     */
     protected function _handleCloseElement(& $parser, & $element) {
         switch ($element) {
             case 'vehicle':
@@ -167,5 +188,10 @@ class modXMLPackageBuilder extends modPackageBuilder {
         }
     }
 
+    /**
+     * @param xmlParser $parser A reference to the xml parser instance
+     * @param $data The data being wrapped in CDATA tags
+     * @return void
+     */
     protected function _handleCData(& $parser, & $data) {}
 }

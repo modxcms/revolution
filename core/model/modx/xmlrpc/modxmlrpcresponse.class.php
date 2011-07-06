@@ -31,8 +31,7 @@ class modXMLRPCResponse extends modResponse {
     /**
      * Output the content of the resource
      *
-     * @access public
-     * @param boolean $noEvent Unused.
+     * @param array $options An array of options for the output
      */
     public function outputContent(array $options= array()) {
         if (empty($options['rpc_type'])) $options['rpc_type']= 'XML';
