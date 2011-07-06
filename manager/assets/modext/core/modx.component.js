@@ -315,6 +315,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 } else if (o.actions) {
                     if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                     if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
+                    if (MODx.request.class_key) { itm.params.class_key = MODx.request.class_key; }
                     var a = Ext.urlEncode(itm.params);
                     location.href = '?a='+o.actions['new']+'&'+a;
                 }

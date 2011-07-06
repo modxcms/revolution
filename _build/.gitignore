@@ -6,3 +6,4 @@ build.properties.php
 image/
 distrib/
 test/properties.inc.php
+docs/build/

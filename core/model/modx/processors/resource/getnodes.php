@@ -38,6 +38,11 @@ if (empty($context) || $context == 'root') {
             "(SELECT COUNT(*) FROM {$modx->getTableName('modResource')} WHERE context_key = modContext.{$modx->escape('key')} AND id IN ({$defaultRootId})) > 0",
         ));
     }
+    if ($modx->getOption('context_tree_sort',null,false)) {
+        $ctxSortBy = $modx->getOption('context_tree_sortby',null,'key');
+        $ctxSortDir = $modx->getOption('context_tree_sortdir',null,'ASC');
+        $c->sortby($modx->getSelectColumns('modContext','modContext','',array($ctxSortBy)),$ctxSortDir);
+    }
 } else {
     $resourceColumns = array(
         'id'
@@ -60,7 +65,7 @@ if (empty($context) || $context == 'root') {
     $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent'));
     $c->select($modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns));
     $c->select(array(
-        'COUNT(Child.id) AS childrenCount'
+        'childrenCount' => 'COUNT(Child.id)',
     ));
     $c->where(array(
         'context_key' => $context,
@@ -192,6 +197,8 @@ while ($item) {
                 $itemArray['hasChildren'] = false;
                 $itemArray['children'] = array();
                 $itemArray['expanded'] = true;
+            } else {
+                $itemArray['hasChildren'] = true;
             }
             $items[] = $itemArray;
             unset($qtip,$class,$menu,$itemArray,$hasChildren);

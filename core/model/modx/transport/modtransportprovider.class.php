@@ -31,9 +31,10 @@ class modTransportProvider extends xPDOSimpleObject {
     /**
      * Sends a REST request to the provider
      *
-     * @param string $path
-     * @param string $method
-     * @param array $params
+     * @param string $path The path of the request
+     * @param string $method The method of the request (GET/POST)
+     * @param array $params An array of parameters to send to the REST request
+     * @return mixed The response from the REST request
      */
     public function request($path,$method = 'GET',$params = array()) {
         if ($this->xpdo->rest == null) $this->getClient();
@@ -88,7 +89,8 @@ class modTransportProvider extends xPDOSimpleObject {
     /**
      * Overrides xPDOObject::save to set the createdon date.
      *
-     * {@inheritdoc}
+     * @param boolean $cacheFlag
+     * @return boolean True if successful
      */
     public function save($cacheFlag= null) {
         if ($this->isNew() && !$this->get('created')) {

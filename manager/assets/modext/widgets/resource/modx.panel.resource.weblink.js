@@ -123,7 +123,7 @@ MODx.panel.WebLink = function(config) {
         },{
             xtype: 'textarea'
             ,fieldLabel: _('resource_summary')
-            ,description: '<b>[[*summary]]</b><br />'+_('resource_summary_help')
+            ,description: '<b>[[*introtext]]</b><br />'+_('resource_summary_help')
             ,name: 'introtext'
             ,id: 'modx-resource-introtext'
             ,grow: true

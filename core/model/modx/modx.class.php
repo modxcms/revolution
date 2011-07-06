@@ -105,7 +105,7 @@ class modX extends xPDO {
      */
     public $aliasMap= null;
     /**
-     * @var modEvent The current event being handled by modX.
+     * @var modSystemEvent The current event being handled by modX.
      */
     public $event= null;
     /**
@@ -1032,9 +1032,9 @@ class modX extends xPDO {
     /**
      * Gets the user authenticated in the specified context.
      *
-     * @param string $contextKey Optional context key; uses current context
-     * by default.
-     * @return unknown
+     * @param string $contextKey Optional context key; uses current context by default.
+     * @return modUser|null The user object that is authenticated in the specified context,
+     * or null if no user is authenticated.
      */
     public function getAuthenticatedUser($contextKey= '') {
         $user= null;
@@ -1419,19 +1419,22 @@ class modX extends xPDO {
      *
      * @param string $context The key of a valid modContext so you can retrieve
      * the current user ID from a different context than the current.
-     * @return string The ID of the current user.
+     * @return integer The ID of the current user.
      */
     public function getLoginUserID($context= '') {
-        if ($context && isset ($_SESSION[$context . 'Validated'])) {
-            return $_SESSION[$context . 'InternalKey'];
+        $userId = 0;
+        if (empty($context) && $this->context instanceof modContext && $this->user instanceof modUser) {
+            if ($this->user->hasSessionContext($this->context->get('key'))) {
+                $userId = $this->user->get('id');
+            }
+
+        } else {
+            $user = $this->getAuthenticatedUser($context);
+            if ($user instanceof modUser) {
+                $userId = $user->get('id');
+            }
         }
-        elseif (!$context && $this->context->get('key') !== 'mgr' && isset ($_SESSION['webValidated'])) {
-            return $_SESSION['webInternalKey'];
-        }
-        elseif (!$context && $this->context->get('key') === 'mgr' && isset ($_SESSION['mgrValidated'])) {
-            return $_SESSION['mgrInternalKey'];
-        }
-        return false;
+        return $userId;
     }
 
     /**
@@ -1442,16 +1445,19 @@ class modX extends xPDO {
      * @return string The username of the current user.
      */
     public function getLoginUserName($context= '') {
-        if ($context && isset ($_SESSION[$context . 'Validated'])) {
-            return $_SESSION[$context . 'Shortname'];
+        $userName = '';
+        if (empty($context) && $this->context instanceof modContext && $this->user instanceof modUser) {
+            if ($this->user->hasSessionContext($this->context->get('key'))) {
+                $userName = $this->user->get('username');
+            }
+
+        } else {
+            $user = $this->getAuthenticatedUser($context);
+            if ($user instanceof modUser) {
+                $userName = $user->get('username');
+            }
         }
-        if ($this->context->get('key') !== 'mgr' && isset ($_SESSION['webValidated'])) {
-            return $_SESSION['webShortname'];
-        }
-        elseif ($this->context->get('key') === 'mgr' && isset ($_SESSION['mgrValidated'])) {
-            return $_SESSION['mgrShortname'];
-        }
-        return false;
+        return $userName;
     }
 
     /**

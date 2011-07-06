@@ -16,12 +16,6 @@ require_once dirname(__FILE__) . '/modregister.class.php';
  */
 class modDbRegister extends modRegister {
     /**
-     * A polling flag that will terminate additional polling when true.
-     * @access protected
-     * @var boolean $__kill
-     */
-    public $__kill = false;
-    /**
      * The queue object representing this modRegister instance.
      * @access protected
      * @var modDbRegisterQueue $_queue
@@ -31,15 +25,21 @@ class modDbRegister extends modRegister {
     /**
      * Construct a new modDbRegister instance.
      *
-     * @param modX &$modx A reference to a modX instance.
-     * @param string $key A unique identifier for this register.
-     * @param array $options Optional array of register-specific options.
+     * @param modX &$modx A reference to the modX instance
+     * @param string $key The key of the registry to load
+     * @param array $options An array of options to set
      */
     function __construct(modX &$modx, $key, array $options = array()) {
         parent :: __construct($modx, $key, $options);
         $this->_queue = $this->_initQueue($key, $options);
     }
 
+    /**
+     * Initialize a new queue
+     * @param string $key The new name of the queue
+     * @param array $options An array of options
+     * @return modDbRegisterQueue A reference to the new Queue object
+     */
     protected function _initQueue($key, $options) {
         $queue = $this->modx->getObject('registry.db.modDbRegisterQueue', array(
             'name' => $key
@@ -56,17 +56,17 @@ class modDbRegister extends modRegister {
     }
 
     /**
-     * If we made it here, we connected fine.
+     * Connect to the register service implementation. If we made it here, we connected fine.
      *
-     * {@inheritdoc}
+     * @param array $attributes A collection of attributes required for
+     * connection to the register.
+     * @return boolean Indicates if the connection was successful.
      */
     public function connect(array $attributes = array()) {
         return true;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * This implementation supports the following options and default behavior:
      * <ul>
      * <li>msg_limit: Only poll until the specified limit of messages has
@@ -81,6 +81,9 @@ class modDbRegister extends modRegister {
      * <li>remove_read: Remove the message immediately upon digesting it.
      * Default is true.</li>
      * </ul>
+     *
+     * @param array $options An array of general or protocol specific options.
+     * @return mixed The resulting message from the register.
      */
     public function read(array $options = array()) {
         $this->__kill = false;
@@ -138,9 +141,10 @@ class modDbRegister extends modRegister {
      *
      * @todo Implement support for reading various message types, other than
      * executable PHP format.
-     * @access protected
+     *
      * @param object $obj The message data to read.
      * @param boolean $remove Indicates if the message should be deleted once it is read.
+     * @return mixed The message returned
      */
     protected function _readMessage($obj, $remove = true) {
         $message = null;
@@ -155,8 +159,6 @@ class modDbRegister extends modRegister {
     }
 
     /**
-     * {@inheritdoc}
-     *
      * This implementation provides support for sending messages using either
      * time-based indexes so they are consumed in the order they are produced,
      * or named indexes typically used when consumers want to subscribe to a
@@ -179,6 +181,13 @@ class modDbRegister extends modRegister {
      * <li>kill: Tells a message consumer to stop consuming any more
      * messages after reading any message sent with this option.</li>
      * </ul>
+     *
+     * @param string $topic A topic container in which to broadcast the message.
+     * @param mixed $message A message, or collection of messages to be sent to
+     * the register.
+     * @param array $options An optional array of general or protocol
+     * specific message properties.
+     * @return boolean Indicates if the message was recorded.
      *
      * @todo Implement support for sending various message types, other than
      * executable PHP format.
@@ -246,9 +255,11 @@ class modDbRegister extends modRegister {
         return $sent;
     }
 
-    public function close() {}
-    public function acknowledge($messageKey, $transactionKey) {}
-    public function begin($transactionKey) {}
-    public function commit($transactionKey) {}
-    public function abort($transactionKey) {}
+    /**
+     * Close the connection to the register service implementation.
+     * @return boolean Indicates if the connection was closed successfully.
+     */
+    public function close() {
+        return true;
+    }
 }

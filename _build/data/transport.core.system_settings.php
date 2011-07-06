@@ -330,6 +330,33 @@ $settings['container_suffix']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['context_tree_sort']= $xpdo->newObject('modSystemSetting');
+$settings['context_tree_sort']->fromArray(array (
+  'key' => 'context_tree_sort',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['context_tree_sortby']= $xpdo->newObject('modSystemSetting');
+$settings['context_tree_sortby']->fromArray(array (
+  'key' => 'context_tree_sortby',
+  'value' => 'key',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['context_tree_sortdir']= $xpdo->newObject('modSystemSetting');
+$settings['context_tree_sortdir']->fromArray(array (
+  'key' => 'context_tree_sortdir',
+  'value' => 'ASC',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['cultureKey']= $xpdo->newObject('modSystemSetting');
 $settings['cultureKey']->fromArray(array (
   'key' => 'cultureKey',
@@ -1300,7 +1327,7 @@ $settings['session_cookie_secure']->fromArray(array (
 $settings['session_gc_maxlifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_gc_maxlifetime']->fromArray(array (
   'key' => 'session_gc_maxlifetime',
-  'value' => '',
+  'value' => '604800',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'session',

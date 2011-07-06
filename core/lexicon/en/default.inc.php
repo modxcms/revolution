@@ -363,6 +363,7 @@ $_lang['resource_management'] = 'Manage resources';
 $_lang['resource_name'] = 'Resource name';
 $_lang['resource_name_new'] = 'New Resource Name';
 $_lang['resource_preview'] = 'Preview Resource';
+$_lang['resource_overview'] = 'Resource Overview';
 $_lang['resource_settings'] = 'Resource Settings';
 $_lang['role'] = 'Role';
 $_lang['roles'] = 'Roles';

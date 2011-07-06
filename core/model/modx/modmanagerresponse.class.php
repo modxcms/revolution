@@ -199,6 +199,10 @@ class modManagerResponse extends modResponse {
                 $field = $rule->get('name');
                 if ($field == 'modx-resource-content') $field = 'content';
                 $overridden[$field] = $rule->get('value');
+                if ($field == 'parent-cmb') {
+                    $overridden['parent'] = (int)$rule->get('value');
+                    $overridden['parent-cmb'] = (int)$rule->get('value');
+                }
             }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;

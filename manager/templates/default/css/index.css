@@ -108,6 +108,10 @@ hr {
 
 #modx-content {
     padding: 0;
+    height: 100%;
+    overflow: auto;
+}
+#modx-content-page {
 }
 
 #modx-container {
@@ -482,6 +486,7 @@ textarea.x-form-field {
 #modx-mainpanel{
     margin:0;
     position:relative;
+    height: 100%;
 }
 
 /* news articles */
@@ -1194,9 +1199,4 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 
 .modx-policy-permissions-grid td {
     cursor: pointer;
-}
-
-/* button text fix */
-.x-btn-noicon .x-btn-small .x-btn-text {
-  width:100%; /* Sets button link to 100% of space of parent so whole button is clickable*/
 }

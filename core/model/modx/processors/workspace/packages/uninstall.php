@@ -37,6 +37,7 @@ sleep(2);
 $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
 /* empty cache */
+$modx->cacheManager->refresh(array($modx->getOption('cache_packages_key', null, 'packages') => array()));
 $modx->cacheManager->refresh();
 
 /* log manager action */

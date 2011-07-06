@@ -43,7 +43,7 @@
     <tr>
         <td>{$modx->getLoginUserName()}</td>
         <td>{$previous_login}</td>
-        <td>{$smarty.session.mgrLogincount+1}</td>
+        <td>{$modx->user->getOne('Profile')->get('logincount')+1}</td>
     </tr>
     </tbody>
     </table>

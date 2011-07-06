@@ -135,6 +135,8 @@ class modProcessor {
 
 /**
  * Response class for Processor executions
+ *
+ * @package modx
  */
 class modProcessorResponse {
     /**
@@ -292,6 +294,8 @@ class modProcessorResponse {
 }
 /**
  * An abstraction class of field-specific errors for a processor response
+ *
+ * @package modx
  */
 class modProcessorResponseError {
     /**

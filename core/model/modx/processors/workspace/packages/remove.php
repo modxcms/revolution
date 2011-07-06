@@ -37,6 +37,7 @@ if (file_exists($transportZip) && file_exists($transportDir)) {
 }
 /* empty cache */
 $modx->getCacheManager();
+$modx->cacheManager->refresh(array($modx->getOption('cache_packages_key', null, 'packages') => array()));
 $modx->cacheManager->refresh();
 sleep(2);
 

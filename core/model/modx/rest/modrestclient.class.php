@@ -12,12 +12,33 @@
  * @subpackage rest
  */
 class modRestClient {
+    /**
+     * @const The path of the request
+     */
     const OPT_PATH = 'path';
+    /**
+     * @const The port of the request
+     */
     const OPT_PORT = 'port';
+    /**
+     * @const The response class to use when generating the response object
+     */
     const OPT_RESPONSE_CLASS = 'restResponse.class';
+    /**
+     * @const The number of seconds before the request times out
+     */
     const OPT_TIMEOUT = 'timeout';
+    /**
+     * @const The user-agent sent in the request
+     */
     const OPT_USERAGENT = 'userAgent';
+    /**
+     * @const The user password to send with the request
+     */
     const OPT_USERPWD = 'userpwd';
+    /**
+     * @const The authentication type for the request
+     */
     const OPT_AUTHTYPE = 'authtype';
 
     /**
@@ -42,9 +63,8 @@ class modRestClient {
      */
     public $response = null;
     /**
-     * The expected response type
      * @access public
-     * @var string
+     * @var string The expected response type
      */
     public $responseType = 'xml';
 
@@ -95,6 +115,7 @@ class modRestClient {
      * @param string $method The HTTP method to use for the request. May be GET,
      * PUT or POST.
      * @param array $params An array of parameters to send with the request.
+     * @param array $options An array of options to pass to the request.
      * @return modRestResponse The response object.
      */
     public function request($host,$path,$method = 'GET',array $params = array(),array $options = array()) {
@@ -162,6 +183,9 @@ class modRestClient {
  * @subpackage rest
  */
 class modRestResponse {
+    /**
+     * @var string The type of response format
+     */
     public $responseType = 'xml';
     /**
      * The constructor for the modRestResponse class.

@@ -30,40 +30,45 @@
  * @package modx
  * @subpackage registry
  */
-class modRegister {
+abstract class modRegister {
     /**
      * A reference to the modX instance the register is loaded by.
      * @var modX
      * @access public
      */
-    var $modx = null;
+    public $modx = null;
     /**
      * An array of global options applied to the registry.
      * @var array
      * @access public
      */
-    var $options = null;
+    public $options = null;
     /**
      * An array of topics and/or messages the register is subscribed to.
      * @var array
      * @access public
      */
-    var $subscriptions = array();
+    public $subscriptions = array();
     /**
      * An optional current topic to allow writes to relative paths.
      * @var string
      * @access protected
      */
-    var $_currentTopic = '/';
+    protected $_currentTopic = '/';
     /**
      * The key identifying this register in a registry.
      * @var string
      * @access protected
      */
-    var $_key = null;
+    protected $_key = null;
+    /**
+     * A polling flag that will terminate additional polling when true.
+     * @var boolean
+     */
+    public $__kill = false;
 
     /**
-     * Construct a new register.
+     * Construct a new modRegister.
      *
      * @param modX &$modx A reference to a modX instance.
      * @param string $key A valid PHP variable which will be set on the modRegistry instance.
@@ -81,9 +86,7 @@ class modRegister {
      * @param array $options An array of general or protocol specific options.
      * @return mixed The resulting message from the register.
      */
-    function read($options = array()) {
-        return true;
-    }
+    abstract public function read(array $options = array());
 
     /**
      * Send a message to the register.
@@ -98,9 +101,7 @@ class modRegister {
      * specific message properties.
      * @return boolean Indicates if the message was recorded.
      */
-    function send($topic, $message, $options = array()) {
-        return true;
-    }
+    abstract public function send($topic, $message, array $options = array());
 
     /**
      * Connect to the register service implementation.
@@ -110,9 +111,7 @@ class modRegister {
      * connection to the register.
      * @return boolean Indicates if the connection was successful.
      */
-    function connect($attributes = array()) {
-        return true;
-    }
+    abstract public function connect(array $attributes = array());
 
     /**
      * Close the connection to the register service implementation.
@@ -120,9 +119,7 @@ class modRegister {
      * @abstract Implement this only if necessary for the implementation.
      * @return boolean Indicates if the connection was closed successfully.
      */
-    function close() {
-        return true;
-    }
+    abstract public function close();
 
     /**
      * Subscribe to a topic (or specific message) in the register.
@@ -130,7 +127,7 @@ class modRegister {
      * @param string $topic The path representing the topic or message.
      * @return boolean Indicates if the subscription was successful.
      */
-    function subscribe($topic) {
+    public function subscribe($topic) {
         $this->subscriptions[] = $topic;
         return true;
     }
@@ -141,7 +138,7 @@ class modRegister {
      * @param string $topic The path representing the topic or message.
      * @return boolean Indicates if the subscription was removed successfully.
      */
-    function unsubscribe($topic) {
+    public function unsubscribe($topic) {
         $success = false;
         $topicIdx = array_search($topic, $this->subscriptions);
         if ($topicIdx !== false && $topicIdx !== null) {
@@ -151,12 +148,42 @@ class modRegister {
         return $success;
     }
 
-    function acknowledge($messageKey, $transactionKey) {}
-    function begin($transactionKey) {}
-    function commit($transactionKey) {}
-    function abort($transactionKey) {}
-    
-    function setCurrentTopic($topic) {
+    /**
+     * Acknowledge the registry was read
+     *
+     * @param string $messageKey The key of the message being read
+     * @param string $transactionKey The secure key of the transaction that is reading
+     * @return void
+     */
+    public function acknowledge($messageKey, $transactionKey) {}
+
+    /**
+     * Begin the reading of the message
+     * @param $transactionKey The key of the message
+     * @return void
+     */
+    public function begin($transactionKey) {}
+
+    /**
+     * Commit the transaction and finish
+     *
+     * @param string $transactionKey The key of the transaction
+     * @return void
+     */
+    public function commit($transactionKey) {}
+
+    /**
+     * @param $transactionKey
+     * @return void
+     */
+    public function abort($transactionKey) {}
+
+    /**
+     * Set the current topic to be read
+     * @param string $topic The key of the topic
+     * @return void
+     */
+    public function setCurrentTopic($topic) {
         if ($topic[0] != '/') $topic = $this->_currentTopic . $topic;
         if ($topic[strlen($topic) - 1] != '/') $topic .= '/';
         $topicIdx = array_search($topic, $this->subscriptions);
@@ -164,9 +191,12 @@ class modRegister {
             $this->_currentTopic = $topic;
         }
     }
-    
-    function getKey() {
+
+    /**
+     * Get the key of this registry
+     * @return string The key of the current registry
+     */
+    public function getKey() {
         return $this->_key;
     }
 }
-?>

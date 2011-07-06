@@ -69,7 +69,6 @@ class modAccessResourceGroup extends modAccess {
                     }
                 }
             }
-            $_SESSION[$context . 'Docgroups']= array_values($legacyDocGroups);
             $_SESSION['modx.user.'.($userId > 0 ? (string) $userId : '0').'.resourceGroups'] = array(
                 $context => array_values($legacyDocGroups),
             );

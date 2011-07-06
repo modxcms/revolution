@@ -98,11 +98,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var w = MODx.load({
             xtype: 'modx-window-resource-duplicate'
             ,resource: id
-            ,is_folder: r.is_folder
+            ,hasChildren: node.attributes.hasChildren
             ,listeners: {
                 'success': {fn:function() {this.refreshNode(node.id);},scope:this}
             }
         });
+        console.log(node.attributes);
+        w.config.hasChildren = node.attributes.hasChildren;
         w.setValues(r);
         w.show(e.target);
     }
@@ -466,7 +468,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         m.push('-');
         if (ui.hasClass('pview')) {
             m.push({
-                text: _('resource_view')
+                text: _('resource_overview')
                 ,handler: function() {this.loadAction('a='+MODx.action['resource/data'])}
             });
         }
@@ -532,7 +534,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (ui.hasClass('pview')) {
             m.push('-');
             m.push({
-                text: _('resource_preview')
+                text: _('resource_view')
                 ,handler: this.preview
             });
         }

@@ -33,32 +33,113 @@
  * @subpackage mail
  */
 abstract class modMail {
+    /**
+     * @const An option for setting the mail body
+     */
     const MAIL_BODY = 'mail_body';
+    /**
+     * @const An option for setting the mail body text
+     */
     const MAIL_BODY_TEXT = 'mail_body_text';
+    /**
+     * @const An option for setting the mail charset
+     */
     const MAIL_CHARSET = 'mail_charset';
+    /**
+     * @const An option for setting the mail content type
+     */
     const MAIL_CONTENT_TYPE = 'mail_content_type';
+    /**
+     * @const An option for setting the mail encoding
+     */
     const MAIL_ENCODING = 'mail_encoding';
+    /**
+     * @const An option for setting the mail engine
+     */
     const MAIL_ENGINE = 'mail_engine';
+    /**
+     * @const An option for setting the mail engine path
+     */
     const MAIL_ENGINE_PATH = 'mail_engine_path';
+    /**
+     * @const An option for setting the mail error information
+     */
     const MAIL_ERROR_INFO = 'mail_error_info';
+    /**
+     * @const An option for setting the mail From address
+     */
     const MAIL_FROM = 'mail_from';
+    /**
+     * @const An option for setting the mail From name
+     */
     const MAIL_FROM_NAME = 'mail_from_name';
+    /**
+     * @const An option for setting the mail hostname
+     */
     const MAIL_HOSTNAME = 'mail_hostname';
+    /**
+     * @const An option for setting the mail language
+     */
     const MAIL_LANGUAGE = 'mail_language';
+    /**
+     * @const An option for setting the mail priority header
+     */
     const MAIL_PRIORITY = 'mail_priority';
+    /**
+     * @const An option for setting the mail read to header
+     */
     const MAIL_READ_TO = 'mail_read_to';
+    /**
+     * @const An option for setting the mail sender
+     */
     const MAIL_SENDER = 'mail_sender';
+    /**
+     * @const An option for setting the mail service
+     */
     const MAIL_SERVICE = 'mail_service';
+    /**
+     * @const An option for setting the mail SMTP auth type
+     */
     const MAIL_SMTP_AUTH = 'mail_smtp_auth';
+    /**
+     * @const An option for setting the mail SMTP HELO boolean
+     */
     const MAIL_SMTP_HELO = 'mail_smtp_helo';
+    /**
+     * @const An option for setting the mail SMTP hosts
+     */
     const MAIL_SMTP_HOSTS = 'mail_smtp_hosts';
+    /**
+     * @const An option for setting the mail SMTP Keep-Alive boolean
+     */
     const MAIL_SMTP_KEEPALIVE = 'mail_smtp_keepalive';
+    /**
+     * @const An option for setting the mail SMTP password
+     */
     const MAIL_SMTP_PASS = 'mail_smtp_pass';
+    /**
+     * @const An option for setting the mail SMTP port
+     */
     const MAIL_SMTP_PORT = 'mail_smtp_port';
+    /**
+     * @const An option for setting the mail SMTP prefix
+     */
     const MAIL_SMTP_PREFIX = 'mail_smtp_prefix';
+    /**
+     * @const An option for setting the mail SMTP Single-To option
+     */
     const MAIL_SMTP_SINGLE_TO = 'mail_smtp_single_to';
+    /**
+     * @const An option for setting the mail SMTP timeout
+     */
     const MAIL_SMTP_TIMEOUT = 'mail_smtp_timeout';
+    /**
+     * @const An option for setting the mail SMTP username
+     */
     const MAIL_SMTP_USER = 'mail_smtp_user';
+    /**
+     * @const An option for setting the mail subject
+     */
     const MAIL_SUBJECT = 'mail_subject';
 
     /**
@@ -100,7 +181,8 @@ abstract class modMail {
     /**
      * Constructs a new instance of the modMail class.
      *
-     * {@inheritdoc}
+     * @param modX &$modx A reference to the modX instance
+     * @param array $attributes An array of attributes to assign to the new mail instance
      */
     function __construct(modX &$modx, array $attributes= array()) {
         $this->modx= & $modx;
@@ -115,7 +197,7 @@ abstract class modMail {
     /**
      * Gets the default attributes for modMail based on system settings
      *
-     * @param array An optional array of default attributes to override with
+     * @param array $attributes An optional array of default attributes to override with
      * @return array An array of default attributes
      */
     public function getDefaultAttributes(array $attributes = array()) {
