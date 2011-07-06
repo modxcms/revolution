@@ -3,7 +3,7 @@
  * Load create snippet page
  *
  * @package modx
- * @subpackage manager.element.snippet
+ * @subpackage manager.controllers
  */
 class ElementSnippetCreateManagerController extends modManagerController {
     public $category;

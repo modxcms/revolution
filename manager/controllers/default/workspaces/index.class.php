@@ -3,7 +3,7 @@
  * Loads the workspace manager
  *
  * @package modx
- * @subpackage manager.workspaces
+ * @subpackage manager.controllers
  */
 class WorkspacesManagerController extends modManagerController {
     public $templateFile = 'workspaces/index.tpl';

@@ -3,5 +3,5 @@
  * Loads the footer
  *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */

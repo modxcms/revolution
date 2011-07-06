@@ -3,7 +3,7 @@
  * Loads the update resource page
  *
  * @package modx
- * @subpackage manager.resource
+ * @subpackage manager.controllers
  */
 require_once dirname(__FILE__).'/resource.class.php';
 class ResourceUpdateManagerController extends ResourceManagerController {

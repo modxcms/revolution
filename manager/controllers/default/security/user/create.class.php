@@ -3,7 +3,7 @@
  * Loads the create user page
  *
  * @package modx
- * @subpackage manager.security.user
+ * @subpackage manager.controllers
  */
 class SecurityUserCreateManagerController extends modManagerController {
     public $onUserFormRender;

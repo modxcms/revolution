@@ -6,7 +6,7 @@
  * Loads the System Actions page
  *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */
 class SystemActionManagerController extends modManagerController {
     /**

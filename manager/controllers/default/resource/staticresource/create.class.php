@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage controllers.resource.staticresource
+ * @subpackage manager.controllers
  */
 class StaticResourceCreateManagerController extends ResourceCreateManagerController {
     /**

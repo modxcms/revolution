@@ -3,7 +3,7 @@
  * Loads the manager logs page
  *
  * @package modx
- * @subpackage manager.system.logs
+ * @subpackage manager.controllers
  */
 class SystemLogsIndexManagerController extends modManagerController {
     /**

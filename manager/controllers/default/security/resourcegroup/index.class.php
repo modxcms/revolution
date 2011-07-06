@@ -3,7 +3,7 @@
  * Loads the resource group page
  *
  * @package modx
- * @subpackage manager.security.permission
+ * @subpackage manager.controllers
  */
 class SecurityResourceGroupIndexManagerController extends modManagerController {
     /**

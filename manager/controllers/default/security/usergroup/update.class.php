@@ -3,7 +3,7 @@
  * Loads the usergroup update page
  *
  * @package modx
- * @subpackage manager.security.usergroup
+ * @subpackage manager.controllers
  */
 class SecurityUserGroupUpdateManagerController extends modManagerController {
     /**

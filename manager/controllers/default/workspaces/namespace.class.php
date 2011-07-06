@@ -6,7 +6,7 @@
  * Loads Namespace management
  *
  * @package modx
- * @subpackage manager.workspaces
+ * @subpackage manager.controllers
  */
 class WorkspacesNamespaceManagerController extends modManagerController {
 

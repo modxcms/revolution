@@ -3,7 +3,7 @@
  * Loads the workspace package builder
  *
  * @package modx
- * @subpackage manager.workspaces
+ * @subpackage manager.controllers
  */
 class WorkspacesPackageViewManagerController extends modManagerController {
     /**

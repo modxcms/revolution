@@ -3,7 +3,7 @@
  * Loads the main structure
  *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */
 /* get top navbar */
 $menus = $modx->cacheManager->get('mgr/menus/'.$modx->getOption('manager_language',null,$modx->getOption('cultureKey',null,'en')), array(

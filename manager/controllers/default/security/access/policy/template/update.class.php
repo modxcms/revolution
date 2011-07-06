@@ -3,7 +3,7 @@
  * Loads the policy template page
  *
  * @package modx
- * @subpackage manager.security.access.policy.template
+ * @subpackage manager.controllers
  */
 class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerController {
     public $templateArray = array();

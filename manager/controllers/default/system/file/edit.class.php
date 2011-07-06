@@ -3,7 +3,7 @@
  * Loads the edit file page
  *
  * @package modx
- * @subpackage manager.system.file
+ * @subpackage manager.controllers
  */
 class SystemFileEditManagerController extends modManagerController {
     /** @var string The basename of the file */

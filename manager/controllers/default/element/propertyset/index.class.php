@@ -3,7 +3,7 @@
  * Load property set management page
  *
  * @package modx
- * @subpackage manager.element.propertyset
+ * @subpackage manager.controllers
  */
 class ElementPropertySetIndexManagerController extends modManagerController {
     /**

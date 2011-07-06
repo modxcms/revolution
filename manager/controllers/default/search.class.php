@@ -1,9 +1,12 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Loads the search page
  *
  * @package modx
- * @subpackage manager.search
+ * @subpackage manager.controllers
  */
 class SearchManagerController extends modManagerController {
     /**

@@ -6,7 +6,7 @@
  * Loads the help page
  *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */
 class HelpManagerController extends modManagerController {
     /**

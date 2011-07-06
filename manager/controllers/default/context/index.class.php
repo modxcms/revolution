@@ -6,7 +6,7 @@
  * Loads the Context list page
  *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */
 class ContextManagerController extends modManagerController {
     /**

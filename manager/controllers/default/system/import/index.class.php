@@ -3,7 +3,7 @@
  * Loads the Import Resources page
  *
  * @package modx
- * @subpackage manager.system.import
+ * @subpackage manager.controllers
  */
 class SystemImportManagerController extends modManagerController {
     /**

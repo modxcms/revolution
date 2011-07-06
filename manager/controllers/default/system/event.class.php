@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage manager.controllers.system
+ * @subpackage manager.controllers
  */
 class SystemEventManagerController extends modManagerController {
     /**

@@ -3,7 +3,7 @@
  * Load update template page
  *
  * @package modx
- * @subpackage manager.element.template
+ * @subpackage manager.controllers
  */
 class ElementTemplateUpdateManagerController extends modManagerController {
     public $category;

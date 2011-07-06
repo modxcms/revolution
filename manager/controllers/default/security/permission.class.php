@@ -3,7 +3,7 @@
  * Loads the access permissions page
  *
  * @package modx
- * @subpackage manager.security.permission
+ * @subpackage manager.controllers
  */
 class SecurityPermissionManagerController extends modManagerController {
     /**

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage manager.security
+ * @subpackage manager.controllers
  */
 class SecurityLogoutManagerController extends modManagerController {
     /**

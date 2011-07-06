@@ -3,7 +3,7 @@
  * Load update plugin page
  *
  * @package modx
- * @subpackage manager.element.plugin
+ * @subpackage manager.controllers
  */
 class ElementPluginUpdateManagerController extends modManagerController {
     public $category;

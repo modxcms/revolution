@@ -3,7 +3,7 @@
  * Load create template page
  *
  * @package modx
- * @subpackage manager.element.template
+ * @subpackage manager.controllers
  */
 class ElementTemplateCreateManagerController extends modManagerController {
     public $category;

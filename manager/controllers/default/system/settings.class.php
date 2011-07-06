@@ -3,7 +3,7 @@
  * Loads the system settings page
  *
  * @package modx
- * @subpackage manager.system.settings
+ * @subpackage manager.controllers
  */
 class SystemSettingsManagerController extends modManagerController {
     public $onSiteSettingsRender = '';

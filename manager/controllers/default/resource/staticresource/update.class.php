@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage controllers.resource.weblink
+ * @subpackage manager.controllers
  */
 class StaticResourceUpdateManagerController extends ResourceUpdateManagerController {
     /**

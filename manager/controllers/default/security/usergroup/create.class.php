@@ -3,7 +3,7 @@
  * Loads the usergroup create page
  *
  * @package modx
- * @subpackage manager.security.usergroup
+ * @subpackage manager.controllers
  */
 class SecurityUserGroupCreateManagerController extends modManagerController {
     /**

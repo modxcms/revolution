@@ -3,7 +3,7 @@
  * Load create plugin page
  *
  * @package modx
- * @subpackage manager.element.plugin
+ * @subpackage manager.controllers
  */
 class ElementPluginCreateManagerController extends modManagerController {
     public $category;

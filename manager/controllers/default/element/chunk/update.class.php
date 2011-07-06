@@ -3,7 +3,7 @@
  * Load update chunk page
  *
  * @package modx
- * @subpackage manager.element.chunk
+ * @subpackage manager.controllers
  */
 class ElementChunkUpdateManagerController extends modManagerController {
     public $onChunkFormRender = '';

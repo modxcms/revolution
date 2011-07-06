@@ -3,7 +3,7 @@
  * Loads the profile page
  *
  * @package modx
- * @subpackage manager.security.profile
+ * @subpackage manager.controllers
  */
 class SecurityProfileManagerController extends modManagerController {
     /**

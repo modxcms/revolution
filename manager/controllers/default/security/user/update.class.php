@@ -3,7 +3,7 @@
  * Loads update user page
  *
  * @package modx
- * @subpackage manager.security.user
+ * @subpackage manager.controllers
  */
 class SecurityUserUpdateManagerController extends modManagerController {
     public $onUserFormRender = '';

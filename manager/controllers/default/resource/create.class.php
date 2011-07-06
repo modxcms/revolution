@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/resource.class.php';
  * Loads the create resource page
  *
  * @package modx
- * @subpackage manager.resource
+ * @subpackage manager.controllers
  */
 class ResourceCreateManagerController extends ResourceManagerController {
     

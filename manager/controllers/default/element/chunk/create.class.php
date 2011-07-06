@@ -3,7 +3,7 @@
  * Load create chunk page
  *
  * @package modx
- * @subpackage manager.element.chunk
+ * @subpackage manager.controllers
  */
 class ElementChunkCreateManagerController extends modManagerController {
     public $category;

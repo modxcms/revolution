@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage controllers.resource.symlink
+ * @subpackage manager.controllers
  */
 class SymLinkCreateManagerController extends ResourceCreateManagerController {
     /**

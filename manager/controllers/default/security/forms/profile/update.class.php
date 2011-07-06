@@ -3,7 +3,7 @@
  * Loads form customization profile editing panel
  *
  * @package modx
- * @subpackage manager.security.forms
+ * @subpackage manager.controllers
  */
 class SecurityFormsProfileUpdateManagerController extends modManagerController {
     public $profileArray = array();

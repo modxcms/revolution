@@ -3,7 +3,7 @@
  * Loads the Import by HTML page
  *
  * @package modx
- * @subpackage manager.system.import
+ * @subpackage manager.controllers
  */
 class SystemImportHtmlManagerController extends modManagerController {
     /**

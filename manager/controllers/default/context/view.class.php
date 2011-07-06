@@ -3,7 +3,7 @@
  * Loads the view context preview page.
  *
  * @package modx
- * @subpackage manager.context
+ * @subpackage manager.controllers
  */
 class ContextViewManagerController extends modManagerController {
     public $contextKey = '';

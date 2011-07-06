@@ -3,7 +3,7 @@
  * Load create template page
  *
  * @package modx
- * @subpackage manager.element.tv
+ * @subpackage manager.controllers
  */
 class ElementTVUpdateManagerController extends modManagerController {
     public $category;

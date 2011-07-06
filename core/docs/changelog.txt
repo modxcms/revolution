@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 - [#5141] Add ability to override specific controllers/templates in a custom manager theme w/ fallback to default
 - Add modResource::getControllerPath method for better abstraction of derivative resource types
 - Add show_in_tree and hide_children_in_tree fields to modResource for better support with custom Resource types
+- Abstract all manager controllers to classes to improve usability, testing and creation of controllers
 
 MODX Revolution 2.1.2-pl (July 6, 2011)
 ====================================
@@ -31,7 +32,6 @@ MODX Revolution 2.1.2-pl (July 6, 2011)
 - [#4953] Improve modx.console.js to avoid message loss
 - [#4836] Make sure modFileRegister sorts messages before reading
 - [#5087] Fix issue where class_key was not respected when using Add Another in UI
-- Abstract all manager controllers to classes to improve usability, testing and creation of controllers
 - [#260] Implement on-the-fly compression for css/js in manager
 - [#3464] Set xPDOTransport::ACTION_UPGRADE for already installed packages
 - [#4955] Package management actions refresh packages cache partition

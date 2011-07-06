@@ -3,7 +3,7 @@
  * Loads form customization set editing panel
  *
  * @package modx
- * @subpackage manager.security.forms
+ * @subpackage manager.controllers
  */
 class SecurityFormsSetUpdateManagerController extends modManagerController {
     public $setArray = array();

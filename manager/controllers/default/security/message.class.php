@@ -3,7 +3,7 @@
  * Loads message management
  *
  * @package modx
- * @subpackage manager.security.message
+ * @subpackage manager.controllers
  */
 class SecurityMessageManagerController extends modManagerController {
     /**

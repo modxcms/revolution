@@ -3,7 +3,7 @@
  * Loads the system info page
  *
  * @package modx
- * @subpackage controllers.system
+ * @subpackage manager.controllers
  */
 class SystemInfoManagerController extends modManagerController {
     public $pi;

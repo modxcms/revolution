@@ -3,7 +3,7 @@
  * Loads form customization
  *
  * @package modx
- * @subpackage manager.security.forms
+ * @subpackage manager.controllers
  */
 class SecurityFormsManagerController extends modManagerController {
     /**

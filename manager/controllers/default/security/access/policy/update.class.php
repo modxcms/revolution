@@ -3,7 +3,7 @@
  * Loads the policy management page
  *
  * @package modx
- * @subpackage manager.security.access.policy
+ * @subpackage manager.controllers
  */
 class SecurityAccessPolicyUpdateManagerController extends modManagerController {
     public $policyArray = array();

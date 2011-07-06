@@ -3,7 +3,7 @@
  * Load update snippet page
  *
  * @package modx
- * @subpackage manager.element.snippet
+ * @subpackage manager.controllers
  */
 class ElementSnippetUpdateManagerController extends modManagerController {
     public $category;

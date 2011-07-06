@@ -3,7 +3,7 @@
  * Loads the site schedule
  *
  * @package modx
- * @subpackage manager.resource
+ * @subpackage manager.controllers
  */
 class ResourceSiteScheduleManagerController extends modManagerController {
     /**

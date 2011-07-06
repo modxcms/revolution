@@ -3,7 +3,7 @@
  * Loads the MODx.Browser page
  *
  * @package modx
- * @subpackage manager.browser
+ * @subpackage manager.controllers
  */
 class BrowserManagerController extends modManagerController {
     public $ctx;

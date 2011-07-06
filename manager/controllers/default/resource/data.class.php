@@ -3,7 +3,7 @@
  * Loads the resource data page
  *
  * @package modx
- * @subpackage manager.resource
+ * @subpackage manager.controllers
  */
 class ResourceDataManagerController extends modManagerController {
     public $resource;

@@ -3,7 +3,7 @@
  * Loads the login screen
  *
  * @package modx
- * @subpackage manager.security
+ * @subpackage manager.controllers
  */
 class SecurityLoginManagerController extends modManagerController {
     public $loadHeader = false;

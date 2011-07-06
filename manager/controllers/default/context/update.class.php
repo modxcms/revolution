@@ -3,7 +3,7 @@
  * Loads the view context preview page.
  *
  * @package modx
- * @subpackage manager.context
+ * @subpackage manager.controllers
  */
 class ContextUpdateManagerController extends modManagerController {
     /** @var string The key of the current context */

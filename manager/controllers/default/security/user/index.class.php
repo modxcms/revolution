@@ -3,7 +3,7 @@
  * Loads the user list
  *
  * @package modx
- * @subpackage manager.security.user
+ * @subpackage manager.controllers
  */
 class SecurityUserManagerController extends modManagerController {
     /**

@@ -3,7 +3,7 @@
  * Loads the welcome page
  *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */
  class WelcomeManagerController extends modManagerController {
     public $displayConfigScreen = false;

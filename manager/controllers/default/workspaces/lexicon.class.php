@@ -3,7 +3,7 @@
  * Loads lexicon management
  *
  * @package modx
- * @subpackage manager.workspaces
+ * @subpackage manager.controllers
  */
 class WorkspacesLexiconManagerController extends modManagerController {
     /**
