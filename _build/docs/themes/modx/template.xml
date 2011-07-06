@@ -13,7 +13,7 @@
     <transformation query="copy" writer="FileIo" source="themes/cache/modx/js" artifact="js"/>
     <transformation query="" writer="xsl" source="themes/cache/modx/index.xsl" artifact="index.html"/>
     <transformation query="" writer="xsl" source="themes/default/content.xsl" artifact="content.html"/>
-    <transformation query="" writer="xsl" source="themes/default/sidebar.xsl" artifact="nav.html"/>
+    <transformation query="" writer="xsl" source="themes/cache/modx/sidebar.xsl" artifact="nav.html"/>
     <transformation query="" writer="xsl" source="themes/default/graph_class.xsl" artifact="graph.html"/>
     <transformation query="/project/file/@path" writer="xsl" source="themes/cache/modx/api-doc.xsl" artifact="{$path}"/>
     <transformation query="" writer="xsl" source="themes/default/markers.xsl" artifact="markers.html"/>
