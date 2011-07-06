@@ -5,25 +5,29 @@
  */
 
 /** Make sure the modImport class is included. */
-require_once(MODX_CORE_PATH . 'model/modx/import/modimport.class.php');
+require_once MODX_CORE_PATH . 'model/modx/import/modimport.class.php';
 
 /**
  * Provides common functions for importing content from static files.
- *
- * {@inheritdoc}
  *
  * @package modx
  * @subpackage import
  */
 class modStaticImport extends modImport {
-    function modStaticImport(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
-        parent :: __construct($modx);
-    }
 
-    function importFiles($allowedfiles, $parent, $filepath, $files, $context= 'web', $class= 'modStaticResource', $basefilepath= '') {
+    /**
+     * Import files into MODX
+     * 
+     * @param array $allowedfiles An array of allowed file types
+     * @param integer $parent The parent Resource to pull into
+     * @param string $filepath The path to the files to import
+     * @param array $files An array of imported files
+     * @param string $context The context to import into
+     * @param string $class The class of Resource to import as
+     * @param string $basefilepath The base file path for the import
+     * @return
+     */
+    public function importFiles($allowedfiles, $parent, $filepath, $files, $context= 'web', $class= 'modStaticResource', $basefilepath= '') {
         if (!is_array($files))
             return;
         if ($parent > 0) {
@@ -143,7 +147,16 @@ class modStaticImport extends modImport {
         }
     }
 
-    function getResourceAlias(& $resource, $alias, $parent, $context= 'web') {
+    /**
+     * Calculate a resource alias from the imported file
+     *
+     * @param modResource $resource A reference to the new modResource object
+     * @param string $alias A suggested alias
+     * @param integer $parent The parent ID of the Resource
+     * @param string $context The context of the Resource
+     * @return string The formatted alias
+     */
+    public function getResourceAlias(& $resource, $alias, $parent, $context= 'web') {
         // auto assign alias
         if ($alias == '' && $this->modx->getOption('automatic_alias')) {
             $alias= strtolower(trim($resource->cleanAlias($resource->get('pagetitle'))));
@@ -195,4 +208,3 @@ class modStaticImport extends modImport {
         return $alias;
     }
 }
-?>

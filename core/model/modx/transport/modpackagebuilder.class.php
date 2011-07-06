@@ -21,13 +21,11 @@
  */
 
 /**
+ * Abstracts the package building process
+ *
  * @package modx
  * @subpackage transport
  */
-/**
-* Abstracts the package building process
-*
-*/
 class modPackageBuilder {
     /**
     * @var string The directory in which the package file is located.
@@ -103,7 +101,10 @@ class modPackageBuilder {
     }
 
     /**
-     * @deprecated
+     * @deprecated To be removed in 2.2
+     * @param string $name
+     * @param string $version
+     * @param string $release
      * @see modPackageBuilder::createPackage
      */
     public function create($name, $version, $release = '') {
@@ -159,8 +160,8 @@ class modPackageBuilder {
      * package.
      *
      * @access public
-     * @param array An array of class names to build in
-     * @return null
+     * @param array $classes An array of class names to build in
+     * @return void
      */
     public function setAutoSelects(array $classes = array ()) {
         $this->autoselects = $classes;
@@ -188,9 +189,9 @@ class modPackageBuilder {
      * will create a namespace.
      *
      * @access public
-     * @param string/modNamespace $namespace The modNamespace object or the
+     * @param string|modNamespace $ns The modNamespace object or the
      * string name of the namespace
-     * @param boolean/array $autoincludes If true, will automatically select
+     * @param boolean|array $autoincludes If true, will automatically select
      * relative resources to the namespace.
      * @param boolean $packageNamespace If false, will not package the namespace
      * as a vehicle.

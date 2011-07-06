@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 - [#5141] Add ability to override specific controllers/templates in a custom manager theme w/ fallback to default
 
+- Fix issue with modUser::getSettings pulling a deprecated alias
+- Update to xPDO v2.1.5-pl
+- Implement DocBlox for documentation generation
+- [#5168] Fix element and tv permission queries for SQL Server
 - [#5146] Fix issue with Firefox and button widths
 - [#5164] Fix possible issue if a TV is stranded to a non-existent category
 - Update ExtJS to 3.4.0

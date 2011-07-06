@@ -846,7 +846,7 @@ class modTemplateVar extends modElement {
                             "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                             "AND ResourceGroup.tmplvarid = :element " .
                             "AND ResourceGroup.documentgroup = acl.target " .
-                            "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                            "ORDER BY Acl.target, Acl.principal, Acl.authority";
                     $bindings = array(
                         ':element' => $this->get('id'),
                         ':context' => $context
@@ -871,8 +871,7 @@ class modTemplateVar extends modElement {
                             "AND Acl.principal_class = 'modUserGroup' " .
                             "AND CategoryClosure.ancestor = Acl.target " .
                             "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
-                            "GROUP BY target, principal, authority, policy " .
-                            "ORDER BY CategoryClosure.depth DESC, authority ASC";
+                            "ORDER BY CategoryClosure.depth DESC, target, principal, authority ASC";
                     $bindings = array(
                         ':category' => $this->get('category'),
                         ':context' => $context,

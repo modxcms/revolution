@@ -29,14 +29,19 @@
 /**
  * Base output filter implementation for modElement processing, based on phX.
  *
- * @todo implement error handling (try/catch) to prevent modifiers from breaking the output
- *
  * @package modx
  * @subpackage filters
  */
 class modOutputFilter {
+    /**
+     * @var modX A reference to the modX instance
+     */
     public $modx= null;
 
+    /**
+     * @param modX $modx A reference to the modX instance
+     * @return modOutputFilter A new instance of the modOutputFilter class
+     */
     function __construct(modX &$modx) {
         $this->modx= &$modx;
     }
@@ -562,6 +567,11 @@ class modOutputFilter {
         }
     }
 
+    /**
+     * Send a log message to the message logger
+     * @param string $msg
+     * @return void
+     */
     public function log($msg) {
          if ($this->modx->getDebug() === true) {
              $this->modx->log(modX::LOG_LEVEL_DEBUG, $msg);

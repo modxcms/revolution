@@ -407,7 +407,7 @@ class modUser extends modPrincipal {
      */
     public function getSettings() {
         $settings = array();
-        $uss = $this->getMany('modUserSetting');
+        $uss = $this->getMany('UserSettings');
         foreach ($uss as $us) {
             $settings[$us->get('key')] = $us->get('value');
         }

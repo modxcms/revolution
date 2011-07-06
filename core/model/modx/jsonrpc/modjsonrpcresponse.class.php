@@ -13,11 +13,21 @@ require_once MODX_CORE_PATH . 'model/modx/jsonrpc/jsonrpcs.inc';
  * @subpackage jsonrpc
  */
 class modJSONRPCResponse extends modXMLRPCResponse {
+    /**
+     * Output the content of this response
+     * @param array $options An array of options for the output
+     * @return void
+     */
     public function outputContent(array $options= array()) {
         if (empty($options['rpc_type'])) $options['rpc_type']= 'JSON';
         parent :: outputContent($options);
     }
 
+    /**
+     * Load the JSON-RPC server
+     * @param bool $execute Execute the server process
+     * @return bool True if the server was successfully loaded
+     */
     public function getServer($execute= false) {
         if ($this->server === null || !($this->server instanceof jsonrpc_server)) {
             $this->server= new jsonrpc_server($this->services, $execute);
