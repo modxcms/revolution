@@ -390,8 +390,8 @@ class xPDO {
             $prefix= !is_string($prefix) && array_key_exists('prefix', $this->packages[$pkg]) ? $this->packages[$pkg]['prefix'] : $prefix;
         }
         $set= $this->addPackage($pkg, $path, $prefix);
-        $this->package= $set == true ? $pkg : '';
-        if (is_string($prefix)) $this->config[xPDO::OPT_TABLE_PREFIX]= $prefix;
+        $this->package= $set == true ? $pkg : $this->package;
+        if ($set && is_string($prefix)) $this->config[xPDO::OPT_TABLE_PREFIX]= $prefix;
         return $set;
     }
 
