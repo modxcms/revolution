@@ -46,9 +46,9 @@ abstract class modManagerController {
      * @param modX $modx A reference to the modX object.
      * @param array $config A configuration array of options related to this controller's action object.
      */
-    function __construct(modX &$modx,array $config = array()) {
+    function __construct(modX &$modx,$config = array()) {
         $this->modx =& $modx;
-        $this->config = array_merge(array(),$config);
+        $this->config = !empty($config) && is_array($config) ? $config : array();
     }
 
     /**
@@ -67,7 +67,7 @@ abstract class modManagerController {
      * @param array $config A configuration array of options related to this controller's action object.
      * @return The class specified by $className
      */
-    public static function getInstance(modX &$modx,$className,array $config = array()) {
+    public static function getInstance(modX &$modx,$className,$config = array()) {
         $controller = new $className($modx,$config);
         $controller->initialize();
         return $controller;

@@ -36,7 +36,7 @@ class TvInputPropertiesManagerController extends modManagerController {
 }
 
 /* simulate controller with the faux class above */
-$c = new TvInputPropertiesManagerController($this->modx,$this->action);
+$c = new TvInputPropertiesManagerController($this->modx);
 $modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvInputPropertiesManagerController',$this->action));
 $modx->controller->render();
 
