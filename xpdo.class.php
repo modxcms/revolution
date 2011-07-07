@@ -390,9 +390,8 @@ class xPDO {
             $prefix= !is_string($prefix) && array_key_exists('prefix', $this->packages[$pkg]) ? $this->packages[$pkg]['prefix'] : $prefix;
         }
         $set= $this->addPackage($pkg, $path, $prefix);
-        $this->package= $set == true ? $pkg : '';
-        if (is_string($prefix)) $this->config[xPDO::OPT_TABLE_PREFIX]= $prefix;
-        $this->setPackageMeta($pkg,$path);
+        $this->package= $set == true ? $pkg : $this->package;
+        if ($set && is_string($prefix)) $this->config[xPDO::OPT_TABLE_PREFIX]= $prefix;
         return $set;
     }
 
@@ -415,8 +414,10 @@ class xPDO {
                 $this->log(xPDO::LOG_LEVEL_ERROR, "Path specified for package {$pkg} is not a valid or accessible directory: {$path}");
             } else {
                 $prefix= !is_string($prefix) ? $this->config[xPDO::OPT_TABLE_PREFIX] : $prefix;
-                $this->packages[$pkg]= array('path' => $path, 'prefix' => $prefix);
-                $this->setPackageMeta($pkg,$path);
+                if (!array_key_exists($pkg, $this->packages) || $this->packages[$pkg]['path'] !== $path || $this->packages[$pkg]['prefix'] !== $prefix) {
+                    $this->packages[$pkg]= array('path' => $path, 'prefix' => $prefix);
+                    $this->setPackageMeta($pkg, $path);
+                }
                 $added= true;
             }
         } else {
@@ -444,7 +445,7 @@ class xPDO {
                         if (!isset($this->classMap[$className])) {
                             $this->classMap[$className] = array();
                         }
-                        $this->classMap[$className] = array_merge($this->classMap[$className],$extends);
+                        $this->classMap[$className] = array_unique(array_merge($this->classMap[$className],$extends));
                     }
                     $set = true;
                 }
