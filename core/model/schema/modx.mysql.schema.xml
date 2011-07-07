@@ -934,7 +934,7 @@
         <field key="elements" dbtype="text" phptype="string" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="display" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
-        <field key="default_text" dbtype="text" phptype="string" />
+        <field key="default_text" dbtype="mediumtext" phptype="string" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="input_properties" dbtype="text" phptype="array" null="true" />
         <field key="output_properties" dbtype="text" phptype="array" null="true" />
@@ -965,7 +965,7 @@
     <object class="modTemplateVarResource" table="site_tmplvar_contentvalues" extends="xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="contentid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
-        <field key="value" dbtype="text" phptype="string" null="false" />
+        <field key="value" dbtype="mediumtext" phptype="string" null="false" />
 
         <index alias="tmplvarid" name="tmplvarid" primary="false" unique="false" type="BTREE">
             <column key="tmplvarid" length="" collation="A" null="false" />

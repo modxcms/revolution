@@ -110,7 +110,7 @@ $xpdo_meta_map['modTemplateVar']= array (
     ),
     'default_text' => 
     array (
-      'dbtype' => 'text',
+      'dbtype' => 'mediumtext',
       'phptype' => 'string',
     ),
     'properties' => 

@@ -32,6 +32,7 @@ $_lang['lexiconfocus_add_id'] = 'Added modLexiconFocus `id` column.';
 $_lang['lexiconfocus_add_pk'] = 'Added modLexiconFocus PRIMARY KEY to `id` column.';
 $_lang['lexiconfocus_alter_pk'] = 'Changed modLexiconFocus `name` from PRIMARY KEY to UNIQUE KEY';
 $_lang['lexiconfocus_drop_pk'] = 'Dropped modLexiconFocus PRIMARY KEY.';
+$_lang['modify_column'] = 'Modified column `[[+column]]` from `[[+old]]` to `[[+new]]` on table `[[+table]]`';
 $_lang['rename_column'] = 'Renamed column `[[+old]]` to `[[+new]]` on table `[[+table]]`.';
 $_lang['rename_table'] = 'Renamed table `[[+old]]` to `[[+new]]`.';
 $_lang['remove_fulltext_index'] = 'Removed full-text index `[[+index]]`.';
