@@ -2496,10 +2496,11 @@ class xPDOIterator implements Iterator {
         if (isset($options['cacheFlag'])) {
             $this->cacheFlag = $options['cacheFlag'];
         }
-        if (isset($options['criteria']) && is_object($options['criteria'])) {
+        if (array_key_exists('criteria', $options) && is_object($options['criteria'])) {
             $this->criteria = $options['criteria'];
         } elseif (!empty($this->class)) {
-            $this->criteria = $this->xpdo->getCriteria($this->class, null, $this->cacheFlag);
+            $criteria = array_key_exists('criteria', $options) ? $options['criteria'] : null;
+            $this->criteria = $this->xpdo->getCriteria($this->class, $criteria, $this->cacheFlag);
         }
         if (!empty($this->criteria)) {
             $this->criteriaType = $this->xpdo->getCriteriaType($this->criteria);
