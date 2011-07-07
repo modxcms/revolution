@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Ensure xPDO::$classMap derivative entries are unique
 - [#5197] Provide map of derivative classes for introspection
 - [#5147] Fix xPDOIterator ignoring criteria that is not already an object
 

@@ -444,7 +444,7 @@ class xPDO {
                         if (!isset($this->classMap[$className])) {
                             $this->classMap[$className] = array();
                         }
-                        $this->classMap[$className] = array_merge($this->classMap[$className],$extends);
+                        $this->classMap[$className] = array_unique(array_merge($this->classMap[$className],$extends));
                     }
                     $set = true;
                 }
