@@ -204,6 +204,8 @@ class xPDO {
      */
     public $queryTime= 0;
 
+    public $classMap = array();
+
     /**
      * @var integer The logging level for the XPDO instance.
      */
@@ -379,6 +381,7 @@ class xPDO {
      * @param string $pkg A package name to use when looking up classes in xPDO.
      * @param string $path The root path for looking up classes in this package.
      * @param string|null $prefix Provide a string to define a package-specific table_prefix.
+     * @return bool
      */
     public function setPackage($pkg= '', $path= '', $prefix= null) {
         $set= false;
@@ -389,6 +392,7 @@ class xPDO {
         $set= $this->addPackage($pkg, $path, $prefix);
         $this->package= $set == true ? $pkg : '';
         if (is_string($prefix)) $this->config[xPDO::OPT_TABLE_PREFIX]= $prefix;
+        $this->setPackageMeta($pkg,$path);
         return $set;
     }
 
@@ -398,6 +402,7 @@ class xPDO {
      * @param string $pkg A package name to use when looking up classes/maps in xPDO.
      * @param string $path The root path for looking up classes in this package.
      * @param string|null $prefix Provide a string to define a package-specific table_prefix.
+     * @return bool
      */
     public function addPackage($pkg= '', $path= '', $prefix= null) {
         $added= false;
@@ -411,12 +416,61 @@ class xPDO {
             } else {
                 $prefix= !is_string($prefix) ? $this->config[xPDO::OPT_TABLE_PREFIX] : $prefix;
                 $this->packages[$pkg]= array('path' => $path, 'prefix' => $prefix);
+                $this->setPackageMeta($pkg,$path);
                 $added= true;
             }
         } else {
             $this->log(xPDO::LOG_LEVEL_ERROR, 'addPackage called with an invalid package name.');
         }
         return $added;
+    }
+
+    /**
+     * Adds metadata information about a package and loads the xPDO::$classMap.
+     *
+     * @param string $pkg A package name to use when looking up classes/maps in xPDO.
+     * @param string $path The root path for looking up classes in this package.
+     * @return bool
+     */
+    public function setPackageMeta($pkg, $path = '') {
+        $set = false;
+        if (is_string($pkg) && !empty($pkg)) {
+            $mapFile = $path.$pkg.'/metadata.'.$this->config['dbtype'].'.php';
+            if (file_exists($mapFile)) {
+                $xpdo_meta_map = '';
+                include $mapFile;
+                if (!empty($xpdo_meta_map)) {
+                    foreach ($xpdo_meta_map as $className => $extends) {
+                        if (!isset($this->classMap[$className])) {
+                            $this->classMap[$className] = array();
+                        }
+                        $this->classMap[$className] = array_merge($this->classMap[$className],$extends);
+                    }
+                    $set = true;
+                }
+            } else {
+                $this->log(xPDO::LOG_LEVEL_WARN, "Could not load package metadata for package {$pkg}.");
+            }
+        } else {
+            $this->log(xPDO::LOG_LEVEL_ERROR, 'setPackageMeta called with an invalid package name.');
+        }
+        return $set;
+    }
+
+    /**
+     * Gets a list of derivative classes for the specified xPDOObject instance.
+     *
+     * NOTE: Will not work with xPDOObject/xPDOSimpleObject.
+     *
+     * @param string $className The name of the class to retrieve derivatives for.
+     * @return array An array of derivative classes or an empty array.
+     */
+    public function getDescendants($className) {
+        $descendants = array();
+        if (isset($this->classMap[$className])) {
+            $descendants = $this->classMap[$className];
+        }
+        return $descendants;
     }
 
     /**
@@ -2496,10 +2550,11 @@ class xPDOIterator implements Iterator {
         if (isset($options['cacheFlag'])) {
             $this->cacheFlag = $options['cacheFlag'];
         }
-        if (isset($options['criteria']) && is_object($options['criteria'])) {
+        if (array_key_exists('criteria', $options) && is_object($options['criteria'])) {
             $this->criteria = $options['criteria'];
         } elseif (!empty($this->class)) {
-            $this->criteria = $this->xpdo->getCriteria($this->class, null, $this->cacheFlag);
+            $criteria = array_key_exists('criteria', $options) ? $options['criteria'] : null;
+            $this->criteria = $this->xpdo->getCriteria($this->class, $criteria, $this->cacheFlag);
         }
         if (!empty($this->criteria)) {
             $this->criteriaType = $this->xpdo->getCriteriaType($this->criteria);
