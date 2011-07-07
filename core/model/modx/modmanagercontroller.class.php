@@ -232,7 +232,7 @@ abstract class modManagerController {
      * @param array $paths
      * @return void
      */
-    protected function setTemplatePaths(array $paths) {
+    public function setTemplatePaths(array $paths) {
         $this->templatesPaths = $paths;
     }
 
