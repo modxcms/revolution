@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Avoid updates to existing package definitions unless path/prefix changes
 - Remove redundant call to $this->setPackageMeta() in xPDO->setPackage()
 - Ensure xPDO::$classMap derivative entries are unique
 - [#5197] Provide map of derivative classes for introspection

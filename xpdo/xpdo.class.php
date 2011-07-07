@@ -414,8 +414,10 @@ class xPDO {
                 $this->log(xPDO::LOG_LEVEL_ERROR, "Path specified for package {$pkg} is not a valid or accessible directory: {$path}");
             } else {
                 $prefix= !is_string($prefix) ? $this->config[xPDO::OPT_TABLE_PREFIX] : $prefix;
-                $this->packages[$pkg]= array('path' => $path, 'prefix' => $prefix);
-                $this->setPackageMeta($pkg,$path);
+                if (!array_key_exists($pkg, $this->packages) || $this->packages[$pkg]['path'] !== $path || $this->packages[$pkg]['prefix'] !== $prefix) {
+                    $this->packages[$pkg]= array('path' => $path, 'prefix' => $prefix);
+                    $this->setPackageMeta($pkg, $path);
+                }
                 $added= true;
             }
         } else {
