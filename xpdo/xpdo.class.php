@@ -392,7 +392,6 @@ class xPDO {
         $set= $this->addPackage($pkg, $path, $prefix);
         $this->package= $set == true ? $pkg : '';
         if (is_string($prefix)) $this->config[xPDO::OPT_TABLE_PREFIX]= $prefix;
-        $this->setPackageMeta($pkg,$path);
         return $set;
     }
 
