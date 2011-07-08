@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage processors.element.tv.renders.mgr.input
  */
-$this->xpdo->lexicon->load('tv_widget');
+$modx->lexicon->load('tv_widget');
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $this->xpdo->context->get('key')));
 
@@ -25,13 +25,13 @@ $value = $this->get('value');
 
 /* get base path based on either TV param or filemanager_path */
 $replacePaths = array(
-    '[[++base_path]]' => $modx->getOption('base_path',null,MODX_BASE_PATH),
-    '[[++core_path]]' => $modx->getOption('core_path',null,MODX_CORE_PATH),
-    '[[++manager_path]]' => $modx->getOption('manager_path',null,MODX_MANAGER_PATH),
-    '[[++assets_path]]' => $modx->getOption('assets_path',null,MODX_ASSETS_PATH),
-    '[[++base_url]]' => $modx->getOption('base_url',null,MODX_BASE_URL),
-    '[[++manager_url]]' => $modx->getOption('manager_url',null,MODX_MANAGER_URL),
-    '[[++assets_url]]' => $modx->getOption('assets_url',null,MODX_ASSETS_URL),
+    '[[++base_path]]' => $workingContext->getOption('base_path',MODX_BASE_PATH),
+    '[[++core_path]]' => $workingContext->getOption('core_path',MODX_CORE_PATH),
+    '[[++manager_path]]' => $workingContext->getOption('manager_path',MODX_MANAGER_PATH),
+    '[[++assets_path]]' => $workingContext->getOption('assets_path',MODX_ASSETS_PATH),
+    '[[++base_url]]' => $workingContext->getOption('base_url',MODX_BASE_URL),
+    '[[++manager_url]]' => $workingContext->getOption('manager_url',MODX_MANAGER_URL),
+    '[[++assets_url]]' => $workingContext->getOption('assets_url',MODX_ASSETS_URL),
 );
 $replaceKeys = array_keys($replacePaths);
 $replaceValues = array_values($replacePaths);
@@ -52,11 +52,11 @@ if (empty($params['baseUrl'])) {
     $params['baseUrl'] = str_replace($replaceKeys,$replaceValues,$params['baseUrl']);
     $params['baseUrlRelative'] = !isset($params['baseUrlRelative']) || in_array($params['baseUrlRelative'],array('true',1,'1'));
 }
-$modxBasePath = $modx->getOption('base_path',null,MODX_BASE_PATH);
+$modxBasePath = $workingContext->getOption('base_path',MODX_BASE_PATH);
 if ($params['basePathRelative'] && $modxBasePath != '/') {
     $params['basePath'] = ltrim(str_replace($modxBasePath,'',$params['basePath']),'/');
 }
-$modxBaseUrl = $modx->getOption('base_url',null,MODX_BASE_URL);
+$modxBaseUrl = $workingContext->getOption('base_url',MODX_BASE_URL);
 if ($params['baseUrlRelative'] && $modxBaseUrl != '/') {
     $params['baseUrl'] = ltrim(str_replace($modxBaseUrl,'',$params['baseUrl']),'/');
 }
@@ -72,11 +72,11 @@ if (!empty($value) && strpos($value,'/') !== false) {
     $params['openTo'] = $dir;
 }
 
-$this->xpdo->controller->setPlaceholder('params',$params);
+$modx->controller->setPlaceholder('params',$params);
 
 $this->set('relativeValue',$relativeValue);
-$this->xpdo->controller->setPlaceholder('tv',$this);
+$modx->controller->setPlaceholder('tv',$this);
 
 // handles image fields using htmlarea image manager
-$this->xpdo->controller->setPlaceholder('base_url',$this->xpdo->getOption('base_url'));
-return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/image.tpl');
+$modx->controller->setPlaceholder('base_url',$this->xpdo->getOption('base_url'));
+return $modx->controller->fetchTemplate('element/tv/renders/input/image.tpl');
