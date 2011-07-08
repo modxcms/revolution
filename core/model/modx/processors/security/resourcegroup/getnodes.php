@@ -30,7 +30,7 @@ $list = array();
 if ($resourceGroup == null) {
     foreach ($groups as $group) {
         $list[] = array(
-            'text' => $group->get('name'),
+            'text' => $group->get('name').' ('.$group->get('id').')',
             'id' => 'n_dg_'.$group->get('id'),
             'leaf' => 0,
             'type' => 'modResourceGroup',
