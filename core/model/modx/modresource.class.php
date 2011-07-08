@@ -793,6 +793,9 @@ class modResource extends modAccessibleSimpleObject {
             $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
             if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
                 $alias = '';
+                if ($newResource->get('uri_override')) {
+                    $newResource->set('uri_override', false);
+                }
             }
         }
         $newResource->set('alias',$alias);
