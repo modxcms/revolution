@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 - [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
 - Fix delegateView recursion in Resource controllers on Windows
+- [#4586] Improve number detection for Radio and Checkbox TV values
 
 MODX Revolution 2.1.2-pl (July 6, 2011)
 ====================================
