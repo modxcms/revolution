@@ -3,7 +3,7 @@
  * Update documents in a resource group
  *
  * @package modx
- * @subpackage processors.security.documentgroup
+ * @subpackage processors.security.resourcegroup
  */
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource','access');

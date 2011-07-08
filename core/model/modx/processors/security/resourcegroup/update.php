@@ -1,8 +1,6 @@
 <?php
 /**
- * Remove a resource group
- *
- * @param integer $id The ID of the resource group
+ * Update a resource group
  *
  * @package modx
  * @subpackage processors.security.resourcegroup
@@ -15,12 +13,14 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $resourceGroup = $modx->getObject('modResourceGroup',$scriptProperties['id']);
 if ($resourceGroup == null) return $modx->error->failure($modx->lexicon('resource_group_err_nf'));
 
+$resourceGroup->fromArray($scriptProperties);
+
 /* remove resource group */
-if ($resourceGroup->remove() == false) {
-    return $modx->error->failure($modx->lexicon('resource_group_err_remove'));
+if ($resourceGroup->save() == false) {
+    return $modx->error->failure($modx->lexicon('resource_group_err_save'));
 }
 
 /* log manager action */
-$modx->logManagerAction('delete_resource_group','modResourceGroup',$resourceGroup->get('id'));
+$modx->logManagerAction('update_resource_group','modResourceGroup',$resourceGroup->get('id'));
 
 return $modx->error->success('',$resourceGroup);

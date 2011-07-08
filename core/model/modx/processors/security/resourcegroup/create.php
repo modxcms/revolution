@@ -5,7 +5,7 @@
  * @param string $name The name of the new resource group
  *
  * @package modx
- * @subpackage processors.security.documentgroup
+ * @subpackage processors.security.resourcegroup
  */
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('access');
