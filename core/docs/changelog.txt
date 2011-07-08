@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4586] Improve number detection for Radio and Checkbox TV values
 - [#5196] Unset uri_override when duplicating creates a duplicate uri
 - [#4958] Add IDs to Resource Groups in RG tree
 - Add ability to rename Resource Groups
