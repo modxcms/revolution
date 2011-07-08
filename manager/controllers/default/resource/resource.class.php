@@ -8,7 +8,6 @@
 abstract class ResourceManagerController extends modManagerController {
     public $resourceArray = array();
     public $showAccessPermissions = true;
-    public $canPublish = true;
     public $onDocFormRender = '';
     public $ctx = 'web';
     public $resource;
@@ -17,6 +16,13 @@ abstract class ResourceManagerController extends modManagerController {
     public $resourceClass = 'modDocument';
     public $tvCounts = array();
     public $rteFields = array();
+    
+    public $canPublish = true;
+    public $canSave = true;
+    public $canDuplicate = true;
+    public $canDelete = true;
+    public $canEdit = true;
+    public $canCreate = true;
 
     /**
      * Return the appropriate Resource controller class based on the class_key request parameter
@@ -75,7 +81,14 @@ abstract class ResourceManagerController extends modManagerController {
      * @return void
      */
     public function setPermissions() {
+        if ($this->canSave) {
+            $this->canSave = $this->resource->checkPolicy('save');
+        }
+        $this->canEdit = $this->modx->hasPermission('edit_document');
+        $this->canCreate = $this->modx->hasPermission('new_document');
         $this->canPublish = $this->modx->hasPermission('publish_document');
+        $this->canDelete = $this->modx->hasPermission('delete_document');
+        $this->canDuplicate = $this->resource->checkPolicy('save');
         $this->showAccessPermissions = $this->modx->hasPermission('access_permissions');
     }
     
@@ -110,7 +123,7 @@ abstract class ResourceManagerController extends modManagerController {
      * @return array|bool|string
      */
     public function firePreRenderEvents() {
-        $resourceId = $this->resource->get('id');
+        $resourceId = !empty($this->resource) ? $this->resource->get('id') : (!empty($this->scriptProperties['id']) ? $this->scriptProperties['id'] : 0);
         $properties = array(
             'id' => $resourceId,
             'mode' => !empty($resourceId) ? modSystemEvent::MODE_UPD : modSystemEvent::MODE_NEW,

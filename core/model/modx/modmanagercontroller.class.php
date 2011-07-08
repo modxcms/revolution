@@ -113,7 +113,9 @@ abstract class modManagerController {
         } elseif (!empty($placeholders)) {
             $content = $placeholders;
         }
-        $this->loadCustomCssJs();
+        if (!$this->isFailure) {
+            $this->loadCustomCssJs();
+        }
         $this->firePreRenderEvents();
 
         /* handle FC rules */

@@ -121,7 +121,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 }]
             });
             btns.push('-');
-        } else {
+        } else if (cfg.locked) {
             btns.push({
                 text: cfg.lockedText || _('locked')
                 ,handler: Ext.emptyFn
@@ -129,7 +129,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             });
             btns.push('-');
         }
-        if (cfg.canCreate == 1) {
+        if (cfg.canDuplicate == 1) {
             btns.push({
                 process: 'duplicate'
                 ,text: _('duplicate')

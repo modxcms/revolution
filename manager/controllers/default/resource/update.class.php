@@ -7,7 +7,6 @@
  */
 require_once dirname(__FILE__).'/resource.class.php';
 class ResourceUpdateManagerController extends ResourceManagerController {
-    public $canSave = true;
     public $locked = false;
     public $lockedText = '';
     public $previewUrl = '';
@@ -41,9 +40,10 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 ,locked: '.($this->locked ? 1 : 0).'
                 ,lockedText: "'.$this->lockedText.'"
                 ,canSave: '.($this->canSave ? 1 : 0).'
-                ,canEdit: "'.($this->modx->hasPermission('edit_document') ? 1 : 0).'"
-                ,canCreate: "'.($this->modx->hasPermission('new_document') ? 1 : 0).'"
-                ,canDelete: "'.($this->modx->hasPermission('delete_document') ? 1 : 0).'"
+                ,canEdit: "'.($this->canEdit ? 1 : 0).'"
+                ,canCreate: "'.($this->canCreate ? 1 : 0).'"
+                ,canDuplicate: "'.($this->canDuplicate ? 1 : 0).'"
+                ,canDelete: "'.($this->canDelete ? 1 : 0).'"
                 ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
             });
         });
@@ -59,7 +59,8 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         if (empty($this->resource)) return $this->failure($this->modx->lexicon('resource_err_nfs',array('id' => $this->scriptProperties['id'])));
 
         if (!$this->resource->checkPolicy('save')) {
-            return $this->failure($this->modx->lexicon('access_denied'));
+            $this->canSave = false;
+            //return $this->failure($this->modx->lexicon('access_denied'));
         }
         return true;
     }
