@@ -15,6 +15,10 @@ MODx.tree.Element = function(config) {
         ,title: ''
         ,url: MODx.config.connectors_url+'element/index.php'
         ,useDefaultToolbar: true
+        ,baseParams: {
+            currentElement: MODx.request.id || 0
+            ,currentAction: MODx.request.a || 0
+        }
         ,tbar: [{
             icon: MODx.config.manager_url+'templates/default/images/restyle/icons/template.png'
             ,cls: 'x-btn-icon'

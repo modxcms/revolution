@@ -131,9 +131,13 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $cls = array();
         $cls[] = 'icon-file';
         $cls[] = 'icon-'.$ext;
+        
+        if (!empty($scriptProperties['currentFile']) && rawurldecode($scriptProperties['currentFile']) == $dir.$fileName && $scriptProperties['currentAction'] == $actions['system/file/edit']) {
+            $cls[] = 'active-node';
+        }
+        
         if ($canRemoveFile) $cls[] = 'premove';
         if ($canUpdateFile) $cls[] = 'pupdate';
-
 
         if (!$file->isWritable()) {
             $cls[] = 'icon-lock';

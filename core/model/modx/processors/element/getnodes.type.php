@@ -90,6 +90,9 @@ foreach ($elements as $element) {
     if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
         $class[] = 'element-node-disabled';
     }
+    if (!empty($scriptProperties['currentElement']) && $scriptProperties['currentElement'] == $element->get('id') && $scriptProperties['currentAction'] == $ar_actionmap[$g[1]]) {
+        $class[] = 'active-node';
+    }
 
     $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(

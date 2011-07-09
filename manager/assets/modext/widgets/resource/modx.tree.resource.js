@@ -24,6 +24,7 @@ MODx.tree.Resource = function(config) {
             action: 'getNodes'
             ,sortBy: MODx.config.tree_default_sort || 'menuindex'
             ,currentResource: MODx.request.id || 0
+            ,currentAction: MODx.request.a || 0
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this,config);

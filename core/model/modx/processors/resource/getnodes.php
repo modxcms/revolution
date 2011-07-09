@@ -155,7 +155,7 @@ while ($item) {
             $class[] = !empty($permissionList['resource_quick_create']) ? $permissionList['resource_quick_create'] : '';
             $class[] = !empty($permissionList['resource_quick_update']) ? $permissionList['resource_quick_update'] : '';
             if ($hasChildren) $class[] = 'haschildren';
-            if (!empty($scriptProperties['currentResource']) && $scriptProperties['currentResource'] == $item->id) {
+            if (!empty($scriptProperties['currentResource']) && $scriptProperties['currentResource'] == $item->id && $scriptProperties['currentAction'] == $actions['resource/update']) {
                 $class[] = 'active-node';
             }
 
