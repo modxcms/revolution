@@ -155,7 +155,6 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         this.getForm().setValues(r.result.object);
         
         var c = Ext.getCmp('modx-chunk-category').getValue();
-        console.log(c);
         var n = c !== '' && c !== null && c != 0 ? 'n_chunk_category_'+c : 'n_type_chunk';
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
