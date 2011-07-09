@@ -158,8 +158,9 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         var n = c !== '' && c !== null && c != 0 ? 'n_chunk_category_'+c : 'n_type_chunk';
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
-        	t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category).destroy();
-            t.refreshNode(n,true);
+        	var node = t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category);
+        	if (node) node.destroy();
+        	t.refreshNode(n,true);
         }
     }
         

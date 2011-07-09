@@ -228,7 +228,8 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         if (t) {
             var c = Ext.getCmp('modx-tv-category').getValue();
             var u = c != '' && c != null && c != 0 ? 'n_tv_category_'+c : 'n_type_tv';
-            t.getNodeById('n_tv_element_' + Ext.getCmp('modx-tv-id').getValue() + '_' + r.result.object.previous_category).destroy();
+            var node = t.getNodeById('n_tv_element_' + Ext.getCmp('modx-tv-id').getValue() + '_' + r.result.object.previous_category);
+            if (node) node.destroy();
             t.refreshNode(u,true);
         }
     }
