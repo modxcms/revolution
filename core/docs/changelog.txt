@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 - [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
 - Fix delegateView recursion in Resource controllers on Windows
+- [#4960] Prevent method declaration error for modPHPMailer::reset()
 - [#3716] Ensure consistent handling of combo-boolean property values in the database
 - [#4586] Improve number detection for Radio and Checkbox TV values
 - [#5196] Unset uri_override when duplicating creates a duplicate uri
