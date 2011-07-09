@@ -51,6 +51,7 @@ if (!empty($scriptProperties['category'])) {
 }
 
 /* set fields */
+$previousCategory = $snippet->get('category');
 $snippet->fromArray($scriptProperties);
 $snippet->set('locked',!empty($scriptProperties['locked']));
 
@@ -109,4 +110,4 @@ if (!empty($scriptProperties['clearCache'])) {
     $modx->cacheManager->refresh();
 }
 
-return $modx->error->success('',$snippet->get(array('id','name','description','category','locked')));
+return $modx->error->success('',array_merge($snippet->get(array('id','name','description','category','locked')), array('previous_category' => $previousCategory)));

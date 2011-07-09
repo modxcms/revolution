@@ -70,6 +70,7 @@ foreach ($scriptProperties as $key => $value) {
     }
 }
 
+$previousCategory = $tv->get('category');
 $tv->fromArray($scriptProperties);
 if (isset($scriptProperties['els'])) {
     $tv->set('elements',$scriptProperties['els']);
@@ -194,4 +195,4 @@ if (!empty($scriptProperties['clearCache'])) {
     $modx->cacheManager->refresh();
 }
 
-return $modx->error->success();
+return $modx->error->success('', array('previous_category' => $previousCategory));

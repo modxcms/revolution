@@ -155,7 +155,8 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-snippet-category').getValue();
-            var u = c != '' && c != null ? 'n_snippet_category_'+c : 'n_type_snippet';
+            var u = c != '' && c != null && c != 0 ? 'n_snippet_category_'+c : 'n_type_snippet';
+            t.getNodeById('n_snippet_element_' + Ext.getCmp('modx-snippet-id').getValue() + '_' + r.result.object.previous_category).destroy();
             t.refreshNode(u,true);
         }
     }    

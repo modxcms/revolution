@@ -181,7 +181,8 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-template-category').getValue();
-            var u = c != '' && c != null ? 'n_template_category_'+c : 'n_type_template';
+            var u = c != '' && c != null && c != 0 ? 'n_template_category_'+c : 'n_type_template';
+            t.getNodeById('n_template_element_' + Ext.getCmp('modx-template-id').getValue() + '_' + r.result.object.previous_category).destroy();
             t.refreshNode(u,true);
         }
     }
