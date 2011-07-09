@@ -309,6 +309,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     var rec = new this.propRecord({
                         name: r.name
                         ,desc: r.desc
+                        ,desc_trans: r.desc
                         ,xtype: r.xtype
                         ,options: r.options
                         ,value: r.value
@@ -334,6 +335,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     var rec = s.getAt(this.menu.recordIndex);
                     rec.set('name',r.name);
                     rec.set('desc',r.desc);
+                    rec.set('desc_trans', r.desc);
                     rec.set('xtype',r.xtype);
                     rec.set('options',r.options);
                     rec.set('value',r.value);
