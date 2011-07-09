@@ -183,7 +183,7 @@ class modPHPMailer extends modMail {
      *
      * @param array $attributes An array of attributes to pass when resetting
      */
-    public function reset($attributes= array()) {
+    public function reset(array $attributes= array()) {
         parent :: reset($attributes);
         $this->mailer->ClearAllRecipients();
         $this->mailer->ClearReplyTos();

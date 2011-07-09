@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4960] Prevent method declaration error for modPHPMailer::reset()
 - [#4984] Ensure tree highlighting of currently edited resource/element/file works consistently
 - [#2638] When updating an element's category, ensure old treenode is removed
 - [#3716] Ensure consistent handling of combo-boolean property values in the database
