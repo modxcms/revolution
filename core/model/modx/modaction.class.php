@@ -35,7 +35,10 @@ class modAction extends modAccessibleSimpleObject {
     /**
      * Rebuilds the action map cache.
      *
+     * @see modCacheManager::generateActionMap
+     * 
      * @access public
+     * @param array $options An array of options to pass to the cacheManager->generateActionMap method
      * @return boolean True if successful.
      */
     public function rebuildCache(array $options = array()) {

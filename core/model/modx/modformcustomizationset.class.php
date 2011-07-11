@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modFormCustomizationSet extends xPDOSimpleObject {
 
@@ -11,9 +10,9 @@ class modFormCustomizationSet extends xPDOSimpleObject {
         /* get fields */
         $c = $this->xpdo->newQuery('modActionField');
         $c->innerJoin('modActionField','Tab','Tab.name = modActionField.tab');
+        $c->select($this->xpdo->getSelectColumns('modActionField','modActionField'));
         $c->select(array(
-            'modActionField.*',
-            'Tab.rank AS tab_rank',
+            'tab_rank' => 'Tab.rank',
         ));
         $c->where(array(
             'action' => $this->get('action'),

@@ -3,6 +3,15 @@
  * @package modx
  */
 class modAccessContext extends modAccess {
+    /**
+     * Load the attributes for the ACLs for the context
+     *
+     * @static
+     * @param modX $modx A reference to the modX instance
+     * @param string $context The context to load from. If empty, will use the current context.
+     * @param int $userId The ID of the user to grab ACL records for.
+     * @return array An array of loaded attributes
+     */
     public static function loadAttributes(&$modx, $context = '', $userId = 0) {
         $attributes = array();
         if (empty($context)) {

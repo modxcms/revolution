@@ -10,6 +10,7 @@ class modActionDom extends modAccessibleSimpleObject {
      * Apply the rule to the current page.
      *
      * @access public
+     * @param int|string $objId The PK of the object that the rule is being applied to.
      * @return string The generated code that applies the rule.
      */
     public function apply($objId = '') {

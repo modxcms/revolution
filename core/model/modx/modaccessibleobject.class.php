@@ -14,7 +14,11 @@ class modAccessibleObject extends xPDOObject {
     /**
      * Custom instance from row loader that respects policy checking
      *
-     * {@inheritdoc}
+     * @param xPDO $xpdo A reference to the xPDO/modX object.
+     * @param string $className The name of the class by which to grab the instance from
+     * @param mixed $criteria A criteria to use when grabbing this instance
+     * @param int $row The row to select
+     * @return modAccessibleObject|null An instance of the object
      */
     public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
         $instance = xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row);
@@ -254,10 +258,21 @@ class modAccessibleObject extends xPDOObject {
         return array();
     }
 
+    /**
+     * Return the currently loaded array of policies.
+     *
+     * @return array
+     */
     public function getPolicies() {
         return $this->_policies;
     }
 
+    /**
+     * Set the current object's policies.
+     *
+     * @param array $policies
+     * @return void
+     */
     public function setPolicies(array $policies = array()) {
         $this->_policies = $policies;
     }

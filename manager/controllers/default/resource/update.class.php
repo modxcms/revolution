@@ -7,8 +7,11 @@
  */
 require_once dirname(__FILE__).'/resource.class.php';
 class ResourceUpdateManagerController extends ResourceManagerController {
+    /** @var boolean Whether or not this Resource is locked for editing */
     public $locked = false;
+    /** @var string If the Resource is locked, the text on the locked button to show */
     public $lockedText = '';
+    /** @var string The URL of the resource on the front-end */
     public $previewUrl = '';
 
     /**

@@ -5,6 +5,11 @@
  * @package modx
  */
 class modAccessPolicy extends xPDOSimpleObject {
+    /**
+     * Get the permissions for this access policy, in array format.
+     * 
+     * @return array An array of access permissions for this Policy.
+     */
     public function getPermissions() {
         $template = $this->getOne('Template');
         if (empty($template)) return array();

@@ -3,7 +3,7 @@
  * Base controller class for Resources
  * 
  * @package modx
- * @subpackage controllers
+ * @subpackage manager.controllers
  */
 abstract class ResourceManagerController extends modManagerController {
     public $resourceArray = array();

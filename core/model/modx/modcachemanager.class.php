@@ -22,8 +22,16 @@
  * @package modx
  */
 class modCacheManager extends xPDOCacheManager {
+    /**
+     * @var modX A reference to the modX instance
+     */
     public $modx= null;
 
+    /**
+     * Constructor for modCacheManager that overrides xPDOCacheManager constructor to assign modX reference
+     * @param $xpdo A reference to the xPDO/modX instance
+     * @param array $options An array of configuration options
+     */
     function __construct(& $xpdo, array $options = array()) {
         parent :: __construct($xpdo, $options);
         $this->modx =& $this->xpdo;
@@ -38,7 +46,7 @@ class modCacheManager extends xPDOCacheManager {
      *
      * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
      *
-     * @param modContext $obj  The modContext instance to be cached.
+     * @param string $key The modContext key to be cached.
      * @param array $options Options for system settings generation.
      * @return array An array containing all the context variable values.
      */
@@ -285,11 +293,12 @@ class modCacheManager extends xPDOCacheManager {
         return $entries;
     }
 
-     /**
+    /**
      * Generates a cache file for the manager actions.
      *
      * @access public
      * @param string $cacheKey The key to use when caching the action map.
+     * @param array $options An array of options
      * @return array An array representing the action map.
      */
     public function generateActionMap($cacheKey, array $options = array()) {
@@ -387,6 +396,10 @@ class modCacheManager extends xPDOCacheManager {
 
     /**
      * Implements MODX cache refresh process, converting cache partitions to cache providers.
+     *
+     * @param array $providers
+     * @param array $results
+     * @return boolean
      */
     public function refresh(array $providers = array(), array &$results = array()) {
         if (empty($providers)) {
@@ -536,6 +549,7 @@ class modCacheManager extends xPDOCacheManager {
      * <li><strong>objects</strong>: an array of objects or paths to flush from the db object cache</li>
      * <li><strong>extensions</strong>: an array of file extensions to match when deleting the cache directories</li>
      * </ul>
+     * @return array
      */
     public function clearCache(array $paths= array(), array $options= array()) {
         $results= array();
