@@ -17,6 +17,7 @@ class modSymLink extends modResource {
         parent :: __construct($xpdo);
         $this->set('type', 'reference');
         $this->set('class_key', 'modSymLink');
+        $this->showInContextMenu = true;
     }
 
     /**
@@ -48,5 +49,16 @@ class modSymLink extends modResource {
     public static function getControllerPath(xPDO &$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'symlink/';
+    }
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true.
+     * @return array
+     */
+    public function getContextMenuText() {
+        return array(
+            'text_create' => $this->xpdo->lexicon('symlink'),
+            'text_create_here' => $this->xpdo->lexicon('symlink_create_here'),
+        );
     }
 }

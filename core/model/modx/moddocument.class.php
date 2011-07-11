@@ -15,5 +15,17 @@ class modDocument extends modResource {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('class_key','modDocument');
+        $this->showInContextMenu = true;
+    }
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true.
+     * @return array
+     */
+    public function getContextMenuText() {
+        return array(
+            'text_create' => $this->xpdo->lexicon('document'),
+            'text_create_here' => $this->xpdo->lexicon('document_create_here'),
+        );
     }
 }

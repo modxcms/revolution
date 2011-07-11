@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Added much better handling for custom resource classes; deprecated custom_resource_classes setting
 - [#4565] Fix issue with Resource tree sorting
 - [#5026] Make directory tree in MODx.Browser instance launched from Files tab consistent with other instances of MODx.Browser
 - [#4601] Ensure children of protected Resources inherit by default their parent's Resource Groups in create UI

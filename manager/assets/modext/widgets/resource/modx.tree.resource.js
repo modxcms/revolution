@@ -543,20 +543,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     ,_getCreateMenus: function(m,pk,ui) {
-        var types = MODx.resourceTypes || {
-            'document': 'modDocument'
-            ,'weblink': 'modWebLink'
-            ,'symlink': 'modSymLink'
-            ,'static_resource': 'modStaticResource'
-        };
-        if (MODx.config.custom_resource_classes) {
-            var crcs = MODx.config.custom_resource_classes;
-            if (!Ext.isEmpty(crcs)) {
-                for (var k in crcs) {
-                    types[k] = crcs[k];
-                }
-            }
-        }
+        var types = MODx.config.resource_classes;
         var o = this.fireEvent('loadCreateMenus',types);
         if (Ext.isObject(o)) {
             Ext.apply(types,o);
@@ -565,8 +552,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var qct = [];
         for (var k in types) {
             ct.push({
-                text: _(k+'_create_here')
-                ,classKey: types[k]
+                text: types[k]['text_create_here']
+                ,classKey: k
                 ,usePk: pk ? pk : false
                 ,handler: function(itm) {
                     var at = this.cm.activeNode.attributes;
@@ -582,8 +569,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
             if (ui && ui.hasClass('pqcreate')) {
                 qct.push({
-                    text: _(k)
-                    ,classKey: types[k]
+                    text: types[k]['text_create']
+                    ,classKey: k
                     ,handler: function(itm,e) {
                         var at = this.cm.activeNode.attributes;
                         var p = itm.usePk ? itm.usePk : at.pk;

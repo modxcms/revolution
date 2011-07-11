@@ -25,6 +25,7 @@ class modStaticResource extends modResource {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('class_key','modStaticResource');
+        $this->showInContextMenu = true;
     }
 
     /**
@@ -202,5 +203,17 @@ class modStaticResource extends modResource {
     public static function getControllerPath(xPDO &$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'staticresource/';
+    }
+
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true.
+     * @return array
+     */
+    public function getContextMenuText() {
+        return array(
+            'text_create' => $this->xpdo->lexicon('static_resource'),
+            'text_create_here' => $this->xpdo->lexicon('static_resource_create_here'),
+        );
     }
 }

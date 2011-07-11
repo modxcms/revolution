@@ -9,6 +9,7 @@ class modJSONRPCResource extends modResource {
         parent :: __construct($xpdo);
         $this->_fields['class_key']= 'modJSONRPCResource';
         $this->xpdo->setOption('modResponse.class','jsonrpc.modJSONRPCResponse');
+        $this->showInContextMenu = false;
     }
 
     public function process() {

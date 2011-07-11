@@ -19,6 +19,7 @@ class modXMLRPCResource extends modResource {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('class_key','modXMLRPCResource');
+        $this->showInContextMenu = false;
     }
 
     /**

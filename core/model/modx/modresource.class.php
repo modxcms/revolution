@@ -49,6 +49,11 @@ class modResource extends modAccessibleSimpleObject {
     public $_jscripts = array();
     public $_sjscripts = array();
     public $_loadedjscripts = array();
+    /**
+     * Use if extending modResource to state whether or not to show the extended class in the tree context menu
+     * @var boolean
+     */
+    public $showInContextMenu = false;
 
     /**
      * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
@@ -434,14 +439,15 @@ class modResource extends modAccessibleSimpleObject {
     /**
      * Persist new or changed modResource instances to the database container.
      *
-     * {@inheritdoc}
-     *
      * If the modResource is new, the createdon and createdby fields will be set
      * using the current time and user authenticated in the context.
      *
      * If uri is empty or uri_overridden is not set and something has been changed which
      * might affect the Resource's uri, it is (re-)calculated using getAliasPath(). This
      * can be forced recursively by setting refreshURIs to true before calling save().
+     *
+     * @param boolean $cacheFlag
+     * @return boolean
      */
     public function save($cacheFlag= null) {
         if ($this->isNew()) {
@@ -469,6 +475,7 @@ class modResource extends modAccessibleSimpleObject {
      * Return whether or not the resource has been processed.
      *
      * @access public
+     * @return boolean
      */
     public function getProcessed() {
         return $this->_processed;
@@ -535,6 +542,7 @@ class modResource extends modAccessibleSimpleObject {
      * Removes all locks on a Resource.
      *
      * @access public
+     * @param int $user
      * @return boolean True if locks were removed.
      */
     public function removeLock($user = 0) {
@@ -922,10 +930,28 @@ class modResource extends modAccessibleSimpleObject {
     public function getGroupsList(array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         return $this->xpdo->call('modResource', 'listGroups', array(&$this, $sort, $limit, $offset));
     }
-    
+
+    /**
+     * Determine the controller path for this Resource class
+     * @static
+     * @param xPDO $modx A reference to the modX object
+     * @return string The absolute path to the controller for this Resource class
+     */
     public static function getControllerPath(xPDO &$modx) {
         $theme = $modx->getOption('manager_theme',null,'default');
         $controllersPath = $modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$theme.'/';
         return $controllersPath.'resource/';
+    }
+
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true.
+     * @return array
+     */
+    public function getContextMenuText() {
+        return array(
+            'text_create' => $this->xpdo->lexicon('resource'),
+            'text_create_here' => $this->xpdo->lexicon('resource_create_here'),
+        );
     }
 }

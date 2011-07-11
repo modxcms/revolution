@@ -11,6 +11,7 @@ class modWebLink extends modResource {
         parent :: __construct($xpdo);
         $this->set('type', 'reference');
         $this->set('class_key', 'modWebLink');
+        $this->showInContextMenu = true;
     }
 
     /**
@@ -39,5 +40,16 @@ class modWebLink extends modResource {
     public static function getControllerPath(xPDO &$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'weblink/';
+    }
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true.
+     * @return array
+     */
+    public function getContextMenuText() {
+        return array(
+            'text_create' => $this->xpdo->lexicon('weblink'),
+            'text_create_here' => $this->xpdo->lexicon('weblink_create_here'),
+        );
     }
 }
