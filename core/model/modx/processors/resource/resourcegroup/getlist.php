@@ -22,6 +22,8 @@ $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $resourceId = $modx->getOption('resource',$scriptProperties,0);
+$parent = $modx->getOption('parent',$scriptProperties,0);
+$mode = $modx->getOption('mode',$scriptProperties,'update');
 
 /* get resource */
 if (empty($resourceId)) {
@@ -40,10 +42,25 @@ if (empty($resourceId)) {
 $resourceGroupList = $resource->getGroupsList(array($sort => $dir), $isLimit ? $limit : 0, $start);
 $resourceGroups = $resourceGroupList['collection'];
 
+$parentGroups = array();
+if (!empty($parent) && $mode == 'create') {
+    $parent = $modx->getObject('modResource',$parent);
+    if ($parent) {
+        $parentResourceGroups = $parent->getMany('ResourceGroupResources');
+        foreach ($parentResourceGroups as $parentResourceGroup) {
+            $parentGroups[] = $parentResourceGroup->get('document_group');
+        }
+        $parentGroups = array_unique($parentGroups);
+    }
+}
+
 $list = array();
 foreach ($resourceGroups as $resourceGroup) {
     $resourceGroupArray = $resourceGroup->toArray();
     $resourceGroupArray['access'] = (boolean) $resourceGroupArray['access'];
+    if (!empty($parent) && $mode == 'create') {
+        $resourceGroupArray['access'] = in_array($resourceGroupArray['id'],$parentGroups) ? true : false;
+    }
     $list[] = $resourceGroupArray;
 }
 

@@ -422,6 +422,8 @@ MODx.panel.Resource = function(config) {
                 xtype: 'modx-grid-resource-security'
                 ,preventRender: true
                 ,resource: config.resource
+                ,mode: config.mode || 'update'
+                ,"parent": config.record["parent"] || 0
                 ,listeners: {
                     'afteredit': {fn:this.fieldChangeEvent,scope:this}
                 }
@@ -526,7 +528,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) {
             Ext.apply(o.form.baseParams,{
-                resource_groups: g.encodeModified()
+                resource_groups: g.encode()
             });
         }
         if (ta) {

@@ -13,6 +13,8 @@ MODx.grid.ResourceSecurity = function(config) {
         ,baseParams: {
             action: 'getList'
             ,resource: config.resource
+            ,"parent": config["parent"]
+            ,mode: config.mode || 'update'
         }
         ,saveParams: {
             resource: config.resource

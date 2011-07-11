@@ -42,6 +42,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 ,publish_document: "'.$this->canPublish.'"
                 ,canSave: "'.($this->modx->hasPermission('save_document') ? 1 : 0).'"
                 ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
+                ,mode: "create"
             });
         });
         // ]]>
