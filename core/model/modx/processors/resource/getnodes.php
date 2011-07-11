@@ -82,7 +82,7 @@ if (empty($context) || $context == 'root') {
         ));
     }
     $c->groupby($modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns), '');
-    $c->sortby($sortBy,'ASC');
+    $c->sortby('modResource.'.$sortBy,'ASC');
 }
 
 /* grab actions */
