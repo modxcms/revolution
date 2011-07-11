@@ -211,7 +211,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
-                ,hideFiles: false
+                ,hideFiles: true
                 ,rootVisible: false
                 ,wctx: MODx.ctx
                 ,listeners: {
