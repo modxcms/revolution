@@ -38,7 +38,7 @@ class TemplateProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->error->reset();
         $template = $modx->getObject('modTemplate',array('templatename' => 'UnitTestTemplate'));
         if ($template) $template->remove();
@@ -50,7 +50,7 @@ class TemplateProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $template = $modx->getObject('modTemplate',array('templatename' => 'UnitTestTemplate'));
         if ($template) $template->remove();
         $template = $modx->getObject('modTemplate',array('templatename' => 'UnitTestTemplate2'));

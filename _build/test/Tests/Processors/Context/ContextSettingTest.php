@@ -38,7 +38,7 @@ class ContextSettingProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $ctx = $modx->newObject('modContext');
         $ctx->set('key','unittest');
         $ctx->set('description','The unit test context for context settings.');
@@ -49,7 +49,7 @@ class ContextSettingProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $ctx = $modx->getObject('modContext','unittest');
         if ($ctx) $ctx->remove();
     }

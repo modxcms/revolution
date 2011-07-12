@@ -27,22 +27,20 @@
  * @package modx-test
  */
 class MODxTestCase extends PHPUnit_Framework_TestCase {
-
-    protected $modx = null;
+    public $modx = null;
+    public $debug = false;
 
     /**
      * Ensure all tests have a reference to the MODX object
      */
     public function setUp() {
-        $this->modx =& MODxTestHarness::_getConnection();
+        $this->modx =& MODxTestHarness::getFixture('modX', 'modx');
     }
 
     /**
      * Remove reference at end of test case
      */
-    public function tearDown() {
-        $this->modx = null;
-    }
+    public function tearDown() {}
 
     /**
      * Check a MODX return result for a success flag

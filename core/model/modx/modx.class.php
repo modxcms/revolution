@@ -1899,8 +1899,8 @@ class modX extends xPDO {
      * @return integer Returns an integer representing the session state.
      */
     public function getSessionState() {
-        if ($this->_sessionState == modX::SESSION_STATE_UNINITIALIZED) {
-            if (XPDO_CLI_MODE) {
+        if ($this->_sessionState !== modX::SESSION_STATE_INITIALIZED) {
+            if (XPDO_CLI_MODE || headers_sent()) {
                 $this->_sessionState = modX::SESSION_STATE_UNAVAILABLE;
             }
             elseif (isset($_SESSION)) {
@@ -2033,7 +2033,7 @@ class modX extends xPDO {
      */
     protected function _initSession() {
         $contextKey= $this->context->get('key');
-        if ($this->getSessionState() == modX::SESSION_STATE_UNINITIALIZED) {
+        if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
             $sh= false;
             if ($sessionHandlerClass = $this->getOption('session_handler_class')) {
                 if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {

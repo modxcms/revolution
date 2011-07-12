@@ -37,7 +37,7 @@ class ContextProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $ctx = $modx->getObject('modContext','unittest');
         if ($ctx) $ctx->remove();
         $ctx = $modx->getObject('modContext','unittestdupe');
@@ -55,7 +55,7 @@ class ContextProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $ctx = $modx->getObject('modContext','unittest');
         if ($ctx) $ctx->remove();
         $ctx = $modx->getObject('modContext','unittestdupe');

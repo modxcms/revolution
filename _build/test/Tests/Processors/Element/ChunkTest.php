@@ -38,7 +38,7 @@ class ChunkProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->error->reset();
         $modx->lexicon->load('chunk');
         $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk'));
@@ -63,7 +63,7 @@ class ChunkProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx =& MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk'));
         if ($chunk) $chunk->remove();
         $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk2'));

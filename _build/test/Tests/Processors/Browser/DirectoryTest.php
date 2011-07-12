@@ -33,11 +33,6 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/directory/';
 
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
-        $modx->setOption('filemanager_path','');
-        $modx->setOption('filemanager_url','');
-        $modx->setOption('rb_base_dir','');
-        $modx->setOption('rb_base_url','');
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
@@ -49,6 +44,17 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
+    }
+    public function setUp() {
+        parent::setUp();
+        try {
+            $this->modx->setOption('filemanager_path', '');
+            $this->modx->setOption('filemanager_url', '');
+            $this->modx->setOption('rb_base_dir', '');
+            $this->modx->setOption('rb_base_url', '');
+        } catch (Exception $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
     }
     /**
      * Tests the browser/directory/create processor, which creates a directory
@@ -193,12 +199,11 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * Test data provider for getList processor
      */
     public function providerGetDirectoryList() {
-        $modx = MODxTestHarness::_getConnection();
         return array(
             array('manager/',true),
             array('manager/assets',true),
             array('fakedirectory/',false),
-            array('assets',true,$modx->getOption('manager_path'),$modx->getOption('manager_url')),
+            array('assets',true,$this->modx->getOption('manager_path'),$this->modx->getOption('manager_url')),
         );
     }
 }

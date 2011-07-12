@@ -38,7 +38,7 @@ class PluginProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->error->reset();
         $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin'));
         if ($plugin) $plugin->remove();
@@ -52,7 +52,7 @@ class PluginProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin'));
         if ($plugin) $plugin->remove();
         $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin2'));

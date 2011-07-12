@@ -38,7 +38,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->error->reset();
         $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet'));
         if ($propertyset) $propertyset->remove();
@@ -52,7 +52,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet'));
         if ($propertyset) $propertyset->remove();
         $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet2'));

@@ -38,7 +38,7 @@ class SnippetProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->error->reset();
         $snippet = $modx->getObject('modSnippet',array('name' => 'UnitTestSnippet'));
         if ($snippet) $snippet->remove();
@@ -50,7 +50,7 @@ class SnippetProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $snippet = $modx->getObject('modSnippet',array('name' => 'UnitTestSnippet'));
         if ($snippet) $snippet->remove();
         $snippet = $modx->getObject('modSnippet',array('name' => 'UnitTestSnippet2'));

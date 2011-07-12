@@ -38,7 +38,7 @@ class ActionProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->error->reset();
 
         $namespace = $modx->newObject('modNamespace');
@@ -58,7 +58,7 @@ class ActionProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
 
         $namespace = $modx->getObject('modNamespace',array('name' => 'unittest'));
         $namespace->remove();

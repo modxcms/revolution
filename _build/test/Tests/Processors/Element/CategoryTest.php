@@ -38,7 +38,7 @@ class CategoryProcessorsTest extends MODxTestCase {
      * Setup some basic data for this test.
      */
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->error->reset();
         $category = $modx->getObject('modCategory',array('category' => 'UnitTestCategory'));
         if ($category) $category->remove();
@@ -50,7 +50,7 @@ class CategoryProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $category = $modx->getObject('modCategory',array('category' => 'UnitTestCategory'));
         if ($category) $category->remove();
         $category = $modx->getObject('modCategory',array('category' => 'UnitTestCategory2'));
