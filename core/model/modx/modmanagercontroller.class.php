@@ -694,7 +694,7 @@ abstract class modExtraManagerController extends modManagerController {
      * @return modManagerController A newly created modManagerController instance
      */
     public static function getInstance(modX &$modx,$className,array $config = array()) {
-        $action = $className::getDefaultController();
+        $action = call_user_func(array($className,'getDefaultController'));
         if (isset($_REQUEST['action'])) {
             $action = str_replace(array('../','./','.','-','@'),'',$_REQUEST['action']);
         }
