@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+/**
+ * @package modx
+ */
 class modFormCustomizationSet extends xPDOSimpleObject {
 
     public function getData() {

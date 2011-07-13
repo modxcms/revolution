@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a system configuration setting.
  *
  * @package modx

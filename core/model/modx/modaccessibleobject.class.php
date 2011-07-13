@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Defines an interface to provide configurable access policies for principals.
  *
  * @package modx

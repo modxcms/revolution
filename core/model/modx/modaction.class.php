@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents an action to a controller or connector.
  *
  * @package modx

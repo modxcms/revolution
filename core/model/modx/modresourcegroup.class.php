@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+/**
+ * @package modx
+ */
 class modResourceGroup extends modAccessibleSimpleObject {
     /**
      * Overrides xPDOObject::save to fire modX-specific events.

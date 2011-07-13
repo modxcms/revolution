@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a content element that serves as a resource template.
  *
  * @package modx

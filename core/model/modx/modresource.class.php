@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a web resource managed by the modX framework.
  *
  * @package modx

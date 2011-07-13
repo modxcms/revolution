@@ -9,6 +9,9 @@
  * An MD5 implementation of modHash.
  *
  * {@inheritdoc}
+ *
+ * @package modx
+ * @subpackage hashing
  */
 class modMD5 extends modHash {
     /**

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents activity by a user in the system.
  *
  * @package modx

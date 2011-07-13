@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a relationship between a modContext and a modResource.
  *
  * @package modx

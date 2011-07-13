@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * A modScript derivative representing a MODX PHP code snippet.
  *
  * @package modx

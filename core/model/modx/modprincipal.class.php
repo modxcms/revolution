@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a person or system that will access modX.
  *
  * {@internal Implement a derivative to define the behavior and attributes of

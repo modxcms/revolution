@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+/**
+ * @package modx
+ */
 class modLexiconEntry extends xPDOSimpleObject {
     /**
      * Clears the cache for the entry

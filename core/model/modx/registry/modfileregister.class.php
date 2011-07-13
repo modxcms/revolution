@@ -13,6 +13,9 @@ require_once(dirname(__FILE__) . '/modregister.class.php');
  *
  * This implementation does not address transactional conflicts and should be
  * used in non-critical processes that are easily recoverable.
+ *
+ * @package modx
+ * @subpackage registry
  */
 class modFileRegister extends modRegister {
     /**

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Provides a non-cacheable modScript implementation representing plugins.
  *
  * {@inheritdoc}

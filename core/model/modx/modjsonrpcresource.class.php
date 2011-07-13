@@ -1,8 +1,13 @@
 <?php
 /**
+ * @package modx
+ * @subpackage jsonrpc
+ */
+/**
  * Represents a MODX Resource that services JSON-RPC client requests.
  *
  * @package modx
+ * @subpackage jsonrpc
  */
 class modJSONRPCResource extends modResource {
     function __construct(& $xpdo) {

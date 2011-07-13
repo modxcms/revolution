@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Assists with directory/file manipulation
  *
  * @package modx

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a template variable element.
  *
  * @todo Refactor this to allow user-defined and configured input and output

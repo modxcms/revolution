@@ -19,6 +19,10 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
+/**
+ * @package modx
+ * @subpackage transport
+ */
 require_once MODX_CORE_PATH . 'model/modx/transport/modpackagebuilder.class.php';
 
 /**

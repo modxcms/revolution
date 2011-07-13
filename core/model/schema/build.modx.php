@@ -29,6 +29,10 @@ foreach (array('mysql', 'sqlsrv') as $driver) {
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
  */
+/**
+ * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
+ */
 class [+class+] extends [+extends+] {
 }
 EOD;
@@ -39,6 +43,10 @@ EOD;
  * [+phpdoc-subpackage+]
  */
 require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
+/**
+ * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
+ */
 class [+class+]_[+platform+] extends [+class+] {
 }
 EOD;

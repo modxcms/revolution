@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Handles backwards compatibility with pre-Revo 2.2 controllers
  * 
  * @package modx

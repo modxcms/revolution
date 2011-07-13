@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a context-specific configuration setting.
  *
  * These settings are loaded and will be merged with the already loaded system

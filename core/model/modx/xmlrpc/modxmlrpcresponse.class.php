@@ -7,7 +7,6 @@ require_once MODX_CORE_PATH . 'model/modx/xmlrpc/xmlrpc.inc';
 require_once MODX_CORE_PATH . 'model/modx/xmlrpc/xmlrpcs.inc';
 require_once MODX_CORE_PATH . 'model/modx/xmlrpc/xmlrpc_wrappers.inc';
 require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
-
 /**
  * Handles any XML-RPC resources and their response
  *

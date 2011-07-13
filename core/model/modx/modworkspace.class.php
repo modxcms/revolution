@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+/**
+ * @package modx
+ */
 class modWorkspace extends xPDOSimpleObject {
 
     /**

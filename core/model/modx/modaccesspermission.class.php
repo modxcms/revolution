@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Restricts or grants access to certain functionality. Grouped by Access
  * Policy.
  *

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a category for organizing modElement instances.
  *
  * @package modx

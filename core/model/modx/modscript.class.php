@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * An element representing executable PHP script content.
  *
  * {@inheritdoc}

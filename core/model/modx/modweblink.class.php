@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * A modResource derivative the represents a redirect link.
  *
  * {@inheritdoc}

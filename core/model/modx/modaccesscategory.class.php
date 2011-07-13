@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+/**
+ * @package modx
+ */
 class modAccessCategory extends modAccess {
     /**
      * Load the attributes for the ACLs for the category

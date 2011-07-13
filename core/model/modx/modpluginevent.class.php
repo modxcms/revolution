@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a plugin registered for a specific event.
  *
  * @package modx

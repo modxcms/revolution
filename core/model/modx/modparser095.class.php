@@ -2,10 +2,8 @@
 /**
  * @package modx
  */
-
-/** Include the base modParser class */
+/* Include the base modParser class */
 include_once (strtr(realpath(dirname(__FILE__)) . '/modparser.class.php', '\\', '/'));
-
 /**
  * An extension of the MODX parser to support legacy MODX tags.
  *

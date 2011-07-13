@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Defines an access control policy between a principal and a modAction.
  *
  * {@inheritdoc}

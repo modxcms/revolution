@@ -9,6 +9,9 @@
  * @uses modRestClient This REST implementation is used to communicate with a
  * remote server that can provide information about and downloads of one or more
  * MODX transport packages.
+ *
+ * @package modx
+ * @subpackage transport
  */
 class modTransportProvider extends xPDOSimpleObject {
     /**

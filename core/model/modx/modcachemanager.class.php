@@ -3,7 +3,6 @@
  * Contains the xPDOCacheManager implementation for MODX.
  * @package modx
  */
-
 /**
  * The default xPDOCacheManager instance for MODX.
  *

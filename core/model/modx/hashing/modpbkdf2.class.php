@@ -9,6 +9,9 @@
  * A PBKDF2 implementation of modHash.
  *
  * {@inheritdoc}
+ *
+ * @package modx
+ * @subpackage hashing
  */
 class modPBKDF2 extends modHash {
     /**

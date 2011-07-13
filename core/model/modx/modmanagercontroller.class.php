@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Abstract class for manager controllers. Not to be initialized directly; must be extended by the implementing
  * controller.
  * 

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a modPropertySet relation to a specific modElement.
  *
  * @package modx

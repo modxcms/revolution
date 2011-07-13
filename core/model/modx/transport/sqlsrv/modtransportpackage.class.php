@@ -4,6 +4,10 @@
  * @subpackage transport.sqlsrv
  */
 require_once (dirname(dirname(__FILE__)) . '/modtransportpackage.class.php');
+/**
+ * @package modx
+ * @subpackage sqlsrv
+ */
 class modTransportPackage_sqlsrv extends modTransportPackage {
     public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0) {
         $result = array('collection' => array(), 'total' => 0);

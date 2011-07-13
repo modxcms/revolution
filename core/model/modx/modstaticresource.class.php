@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * A derivative of modResource that stores content on the filesystem.
  *
  * {@inheritdoc}

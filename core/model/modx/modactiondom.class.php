@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Adds custom manager adjustments based upon modAction objects
  *
  * @package modx

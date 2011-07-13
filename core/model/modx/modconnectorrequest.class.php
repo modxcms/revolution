@@ -4,10 +4,7 @@
  *
  * @package modx
  */
-
-/** Make sure the parent class is included. */
 require_once MODX_CORE_PATH . 'model/modx/modmanagerrequest.class.php';
-
 /**
  * This is the Connector Request handler for MODX.
  *

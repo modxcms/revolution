@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * {@inheritdoc}
  *
  * This modResource derivative represents a traditional web document that stores

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a menu item at the top of the MODX manager.
  *
  * @package modx

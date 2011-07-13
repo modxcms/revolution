@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a chunk of static HTML content.
  *
  * @package modx
