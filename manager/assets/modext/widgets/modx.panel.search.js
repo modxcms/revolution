@@ -57,6 +57,12 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,listeners: lsr
         },{
             xtype: 'textfield'
+            ,name: 'parent'
+            ,fieldLabel: _('parent')
+            ,width: 100
+            ,listeners: lsr
+        },{
+            xtype: 'textfield'
             ,name: 'pagetitle'
             ,fieldLabel: _('pagetitle')
             ,width: 300

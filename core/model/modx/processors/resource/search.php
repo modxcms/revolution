@@ -36,6 +36,7 @@ if (empty($contextKeys)) {
 $c = $modx->newQuery('modResource');
 $where = array('context_key:IN' => $contextKeys);
 if (!empty($scriptProperties['id'])) $where['id'] = $scriptProperties['id'];
+if (!empty($scriptProperties['parent'])) $where['parent'] = $scriptProperties['parent'];
 if (!empty($scriptProperties['pagetitle'])) $where['pagetitle:LIKE'] = '%'.$scriptProperties['pagetitle'].'%';
 if (!empty($scriptProperties['longtitle'])) $where['longtitle:LIKE'] = '%'.$scriptProperties['longtitle'].'%';
 if (!empty($scriptProperties['content'])) $where['content:LIKE'] = '%'.$scriptProperties['content'].'%';
