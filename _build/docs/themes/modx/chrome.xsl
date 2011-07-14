@@ -23,10 +23,10 @@
         <title>
             <xsl:choose>
                 <xsl:when test="$title != ''"><xsl:value-of select="$title" /></xsl:when>
-                <xsl:otherwise>MODX API Documentation</xsl:otherwise>
+                <xsl:otherwise>DocBlox Documentation</xsl:otherwise>
             </xsl:choose>
         </title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
         <link rel="stylesheet" href="{$root}css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css" />
         <link rel="stylesheet" href="{$root}css/jquery.treeview.css" type="text/css" />
         <link rel="stylesheet" href="{$root}css/theme.css" type="text/css" />
