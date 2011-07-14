@@ -5,6 +5,8 @@
 /**
  * Represents a category for organizing modElement instances.
  *
+ * @property int $parent The parent category ID, if set. Otherwise defaults to 0.
+ * @property string $category The name of the Category.
  * @package modx
  */
 class modCategory extends modAccessibleSimpleObject {

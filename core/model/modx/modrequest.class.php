@@ -33,11 +33,30 @@
  * @package modx
  */
 class modRequest {
+    /**
+     * A reference to the modX object
+     * @var modX $modx
+     */
     public $modx = null;
+    /**
+     * The current request method
+     * @var string $method
+     */
     public $method = null;
+    /**
+     * The parameters sent in the request
+     * @var array $parameters
+     */
     public $parameters = null;
+    /**
+     * The HTTP headers sent in the request
+     * @var array $headers
+     */
     public $headers = null;
 
+    /**
+     * @param modX $modx A reference to the modX object
+     */
     function __construct(modX &$modx) {
         $this->modx = & $modx;
         $this->parameters['GET'] =& $_GET;
@@ -133,6 +152,7 @@ class modRequest {
      * @param string $method The method, 'id', or 'alias', by which to perform
      * the resource lookup.
      * @param string|integer $identifier The identifier with which to search.
+     * @param array $options An array of options for the resource fetching
      * @return modResource The requested modResource instance or request
      * is forwarded to the error page, or unauthorized page.
      */
@@ -372,9 +392,10 @@ class modRequest {
     }
 
     /**
-     * Retrieve's a preserved $_REQUEST from $_SESSION.
+     * Retrieve a preserved $_REQUEST from $_SESSION.
      *
      * @param string $key A key to identify a specific $_REQUEST; default is 'referrer'.
+     * @return string
      */
     public function retrieveRequest($key = 'referrer') {
         $request = null;
@@ -384,6 +405,11 @@ class modRequest {
         return $request;
     }
 
+    /**
+     * Return the HTTP headers sent through the request
+     * @param boolean $ucKeys if true, upper-case all keys for the headers
+     * @return array
+     */
     public function getHeaders($ucKeys = false) {
         if (!isset($this->headers)) {
             $headers = array ();
@@ -416,6 +442,11 @@ class modRequest {
         }
     }
 
+    /**
+     * Get a list of all modAction IDs
+     * @param string $namespace
+     * @return array
+     */
     public function getAllActionIDs($namespace = '') {
         $c = array();
         if (!empty($namespace)) $c['namespace'] = $namespace;
@@ -428,6 +459,12 @@ class modRequest {
         return $actionList;
     }
 
+    /**
+     * Get the IDs for a collection of string action keys
+     * @param array $actions
+     * @param string $namespace
+     * @return array
+     */
     public function getActionIDs(array $actions = array(), $namespace = 'core') {
         $as = array();
         foreach ($actions as $action) {
@@ -450,6 +487,7 @@ class modRequest {
      * @param string|array $keys A key or array of keys to retrieve from the GPC variable. An empty
      * array means get all keys of the variable.
      * @param string $type The type of GPC variable, GET by default (GET, POST, COOKIE or REQUEST).
+     * @return mixed
      */
     public function getParameters($keys = array(), $type = 'GET') {
         $value = null;

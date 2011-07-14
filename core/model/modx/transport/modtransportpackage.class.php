@@ -4,7 +4,25 @@
  * @subpackage transport
  */
 /**
- * Represents an xPDOTransport package as required for MODX Web Transport Facilities.
+ * Represents an xPDOTransport package as required for MODX Providers and package installation
+ *
+ * @property string $signature The full signature of the package
+ * @property datetime $created The time this package was created or added
+ * @property timestamp $updated The time this package was last update
+ * @property datetime $installed The time this package was installed
+ * @property int $state The state of the package; packed/unpacked/etc
+ * @property int $workspace The workspace this package is installed into.
+ * @property int $provider The provider ID of the package, if any.
+ * @property boolean $disabled Whether or not this package is disabled (not currently used)
+ * @property string $source The source data of the package
+ * @property string $manifest The manifest of the package, containing transport information and methods
+ * @property string $attributes Any package-level attributes
+ * @property string $package_name The name of the package
+ * @property string $metadata Any metadata transmitted with the package
+ * @property int $version_major The major version number of the package
+ * @property int $version_minor The minor version number of the package
+ * @property int $version_patch The patch version number of the package
+ * @property int $release_index The release index of the release. Optional.
  *
  * @package modx
  * @subpackage transport
@@ -21,7 +39,7 @@ class modTransportPackage extends xPDOObject {
      */
     public $version = null;
     /**
-     * @var string The release number of a package.
+     * @var string The release number of a package; eg, pl, beta, alpha, dev
      * @access public
      */
     public $release = null;

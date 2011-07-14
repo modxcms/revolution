@@ -678,7 +678,9 @@ abstract class modManagerController {
 /**
  * Utility abstract class for usage by Extras that has a subrequest handler that does auto-routing by the &action
  * REQUEST parameter. You must extend this class in your Extra to use it.
+ *
  * @abstract
+ * @package modx
  */
 abstract class modExtraManagerController extends modManagerController {
     /**

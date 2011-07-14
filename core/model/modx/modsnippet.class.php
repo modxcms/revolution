@@ -5,6 +5,11 @@
 /**
  * A modScript derivative representing a MODX PHP code snippet.
  *
+ * @property boolean $cache_type Deprecated
+ * @property string $snippet The PHP code of the Snippet
+ * @property boolean $locked Whether or not this Snippet can only be edited by Administrators
+ * @property array $properties An array of default properties for the Snippet
+ * @property string $moduleguid Deprecated
  * @package modx
  * @extends modScript
  */

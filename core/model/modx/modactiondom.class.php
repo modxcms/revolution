@@ -5,6 +5,17 @@
 /**
  * Adds custom manager adjustments based upon modAction objects
  *
+ * @property int $set The modFormCustomizationSet this rule belongs to
+ * @property int $action The modAction this rule occurs on
+ * @property string $name The field this rule applies to
+ * @property string $description A description of this rule, or alternate text
+ * @property string $container The containing object the rule applies to
+ * @property string $rule The type of rule
+ * @property string $value The value stored for this rule
+ * @property boolean $for_parent Whether or not to apply this rule to the parent object in question
+ * @property int $rank The rank in which this rule should be applied
+ *
+ * @see modFormCustomizationSet
  * @package modx
  */
 class modActionDom extends modAccessibleSimpleObject {

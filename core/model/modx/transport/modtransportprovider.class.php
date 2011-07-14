@@ -10,6 +10,14 @@
  * remote server that can provide information about and downloads of one or more
  * MODX transport packages.
  *
+ * @property string $name The name of the provider
+ * @property string $description A description of the provider
+ * @property string $service_url The service URL, or entry point, to the provider
+ * @property string $username The username needed to connect to the provider
+ * @property string $api_key The API key needed to connect to the specified provider
+ * @property datetime $created When this provider was created
+ * @property timestamp $updated When this provider was last updated
+ *
  * @package modx
  * @subpackage transport
  */

@@ -7,6 +7,7 @@
  *
  * {@inheritdoc}
  *
+ * @property string $context_key The key of the Context this ACL refers to
  * @package modx
  */
 class modAccessResourceGroup extends modAccess {

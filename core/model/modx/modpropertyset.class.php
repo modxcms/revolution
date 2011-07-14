@@ -8,6 +8,10 @@
  * Each named property set can be associated with one or more element instances
  * and can be called via a tag syntax or programatically.
  *
+ * @property string $name A name for the set
+ * @property int $category Optional. The category this Set belongs to
+ * @property string $description A description of the set
+ * @property array $properties An array of properties contained in this Property Set
  * @package modx
  * @extends xPDOSimpleObject
  */

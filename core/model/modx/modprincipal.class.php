@@ -28,17 +28,22 @@ class modPrincipal extends xPDOSimpleObject {
      *
      * @abstract
      * @access protected
-     * @param string|array $targets The target modAccess classes to load
-     * attributes from.
-     * @param string $context Context to check within, defaults to current
-     * context.
-     * @param boolean $reload If true, the attributes will be reloaded and
-     * the session updated.
+     * @param string $target The target modAccess classes to load attributes from.
+     * @param string $context Context to check within, defaults to current  context.
+     * @param boolean $reload If true, the attributes will be reloaded and the session updated.
      */
     public function loadAttributes($target, $context = '', $reload = false) {
         $this->_attributes = array();
     }
 
+    /**
+     * Get the attributes for this principal.
+     *
+     * @param array $targets An array of target modAccess classes to load.
+     * @param string $context The context to check within. Defaults to active context.
+     * @param boolean $reload If true, the attributes will be reloaded and the session updated.
+     * @return array An array of attributes on the principal
+     */
     public function getAttributes($targets = array(), $context = '', $reload = false) {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (!is_array($targets) || empty($targets)) {

@@ -3,6 +3,9 @@
  * @package modx
  */
 /**
+ * An ACL for restricting or allowing Element Category access
+ *
+ * @property string $context_key The key of the Context this ACL refers to
  * @package modx
  */
 class modAccessCategory extends modAccess {

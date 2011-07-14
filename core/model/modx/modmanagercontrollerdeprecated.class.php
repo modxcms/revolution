@@ -8,6 +8,14 @@
  * @package modx
  */
 class modManagerControllerDeprecated extends modManagerController {
+    /**
+     * Overrides modManagerController::process to provide custom backwards-compatible support for controllers that
+     * were made prior to Revolution 2.2.x.
+     *
+     * @param array $scriptProperties
+     * @see modManagerController::process()
+     * @return string
+     */
     public function process(array $scriptProperties = array()) {
         $modx =& $this->modx;
         $theme = $this->modx->getOption('manager_theme',null,'default');
@@ -65,13 +73,32 @@ class modManagerControllerDeprecated extends modManagerController {
         return $this->body;
     }
 
-
+    /**
+     * Check whether the active user has access to view this page
+     * @return bool True if the user passes permission checks
+     */
     public function checkPermissions() { return true; }
+    /**
+     * The page title for this controller
+     * @return string The string title of the page
+     */
     public function getPageTitle() { return ''; }
+    /**
+     * Loads any page-specific CSS/JS for the controller
+     * @return void
+     */
     public function loadCustomCssJs() { return; }
+    /**
+     * Load the appropriate language topics for this page
+     * 
+     * @return array
+     */
     public function getLanguageTopics() { return array(); }
+    /**
+     * Specify the location of the template file
+     * @return string The absolute path to the template file
+     */
     public function getTemplateFile() { return ''; }
-
 
     /**
      * Prepares the Namespace Path for usage

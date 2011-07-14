@@ -5,6 +5,17 @@
 /**
  * Represents an action to a controller or connector.
  *
+ * @property string $namespace The key of the Namespace this action belongs to.
+ * @property int $parent The ID of the parent action of this action.
+ * @property string $controller The name of the controller to use
+ * @property boolean $haslayout Whether or not to load the header/footer of the action. Deprecated (use
+ * modManagerController class properties instead).
+ * @property string $lang_topics Any lexicon topics to load in conjunction with the specified controller. Deprecated
+ * (use modManagerController class method instead)
+ * @property string $assets Any action-specific assets. Not used.
+ * @property string $help_url An absolute URL that this Action can use for displaying a Help box
+ *
+ * @see modManagerController
  * @package modx
  */
 class modAction extends modAccessibleSimpleObject {

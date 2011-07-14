@@ -9,10 +9,25 @@
  * level settings, then merged again with user level settings for authenticated
  * users.
  *
+ * @property string $context_key The key of the Context this Setting applies to
+ * @property string $key The key of the Setting
+ * @property string $value The value of the Setting
+ * @property string $xtype The xtype that is used to render the Setting input in the manager
+ * @property string $namespace The Namespace of the setting
+ * @property string $area The area of the Setting
+ * @property timestamp $editedon The last edited on time of this Setting
+ *
  * @package modx
  */
 class modContextSetting extends xPDOObject {
-    
+    /**
+     * Updates the Lexicon Entry translation for this Context Setting
+     *
+     * @param string $key The key of the setting
+     * @param string $value The new value of the setting
+     * @param array $options An array of options related to the setting
+     * @return bool
+     */
     public function updateTranslation($key,$value = '',array $options = array()) {
         if (!is_array($options) || empty($options)) return false;
         

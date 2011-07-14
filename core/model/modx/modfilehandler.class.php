@@ -8,7 +8,15 @@
  * @package modx
  */
 class modFileHandler {
+    /**
+     * An array of configuration properties for the class
+     * @var array $config
+     */
     public $config = array();
+    /**
+     * The current context in which this File Manager instance should operate
+     * @var modContext|null $context
+     */
     public $context = null;
 
     /**
@@ -110,6 +118,12 @@ class modFileHandler {
         return $path;
     }
 
+    /**
+     * Ensures that the passed path has a / at the end
+     * 
+     * @param string $path
+     * @return string The postfixed path
+     */
     public function postfixSlash($path) {
         $len = strlen($path);
         if (substr($path, $len - 1, $len) != '/') {
@@ -118,6 +132,12 @@ class modFileHandler {
         return $path;
     }
 
+    /**
+     * Gets the directory path for a given file
+     *
+     * @param string $fileName The path for a file
+     * @return string The directory path of the given file
+     */
     public function getDirectoryFromFile($fileName) {
         $dir = dirname($fileName);
         return $this->postfixSlash($dir);
@@ -273,6 +293,8 @@ abstract class modFileSystemResource {
      * Alias for chgrp
      *
      * @see chgrp
+     * @param string $grp
+     * @return boolean
      */
     public function setGroup($grp) {
         return $this->chgrp($grp);
@@ -306,8 +328,8 @@ abstract class modFileSystemResource {
     /**
      * Gets the parent containing directory of this fs resource
      *
-     * @param <type> $raw Whether or not to return a modDirectory or string path
-     * @return modDirectory/string Returns either a modDirectory object of the
+     * @param boolean $raw Whether or not to return a modDirectory or string path
+     * @return modDirectory|string Returns either a modDirectory object of the
      * parent directory, or the absolute path of the parent, depending on
      * whether or not $raw is set to true.
      */
@@ -334,6 +356,8 @@ class modFile extends modFileSystemResource {
 
     /**
      * @see modFileSystemResource.parseMode
+     * @param string $mode
+     * @return boolean
      */
     protected function parseMode($mode = '') {
         if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_file_permissions', '0644', $this->fileHandler->config);
@@ -380,6 +404,9 @@ class modFile extends modFileSystemResource {
      * Alias for save()
      *
      * @see modDirectory::write
+     * @param string $content
+     * @param string $mode
+     * @return boolean
      */
     public function write($content = null, $mode = 'w+') {
         return $this->save($content, $mode);
@@ -390,7 +417,8 @@ class modFile extends modFileSystemResource {
      *
      * @param string $content Optional. If not using setContent, this will set
      * the content to write.
-     * @return mixed The result of the fwrite
+     * @param string $mode The mode in which to write
+     * @return boolean The result of the fwrite
      */
     public function save($content = null, $mode = 'w+') {
         if ($content !== null) $this->content = $content;
@@ -484,6 +512,9 @@ class modDirectory extends modFileSystemResource {
 
     /**
      * @see modFileSystemResource::parseMode
+     *
+     * @param string $mode
+     * @return boolean
      */
     protected function parseMode($mode = '') {
         if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_folder_permissions', '0755', $this->fileHandler->config);

@@ -22,8 +22,8 @@
  * @package modx
  */
 /**
- * The lexicon handling class.
- * Eventually needs to be reworked to allow for context/area-specific lexicons.
+ * The lexicon handling class. Handles all lexicon topics by loading and storing their entries into a cached array.
+ * Also considers database-based overrides for specific lexicon entries that preserve the originals and allow reversion.
  *
  * @package modx
  */
@@ -65,8 +65,8 @@ class modLexicon {
      * Creates the modLexicon instance.
      *
      * @constructor
-     * @param modX &$modx A reference to the modX instance.
-     * @return modLexicon
+     * @param xPDO $modx A reference to the modX instance.
+     * @param array $config An array of configuration properties
      */
     function __construct(xPDO &$modx,array $config = array()) {
         $this->modx =& $modx;
@@ -105,7 +105,7 @@ class modLexicon {
      *
      * @access public
      * @param string $prefix If set, will only return the lexicon entries with this prefix.
-     * @param boolean If true, will strip the prefix from the returned indexes
+     * @param boolean $removePrefix If true, will strip the prefix from the returned indexes
      * @return array The internal lexicon.
      */
     public function fetch($prefix = '',$removePrefix = false) {
@@ -381,7 +381,7 @@ class modLexicon {
      * database.
      *
      * @access public
-     * @param string/array $keys Either an array of array pairs of key/values or
+     * @param string|array $keys Either an array of array pairs of key/values or
      * a key string.
      * @param string $text The text to set, if the first parameter is a string.
      */

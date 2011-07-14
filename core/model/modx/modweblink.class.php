@@ -10,6 +10,10 @@
  * @package modx
  */
 class modWebLink extends modResource {
+    /**
+     * Overrides modResource::__construct to set the class key for this Resource type
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('type', 'reference');
@@ -40,6 +44,12 @@ class modWebLink extends modResource {
         $this->xpdo->sendRedirect($this->_output);
     }
 
+    /**
+     * Get the full controller path for managing WebLinks in MODX
+     * @static
+     * @param xPDO $modx A reference to the modX instance
+     * @return string The absolute path to the controller for managing WebLinks
+     */
     public static function getControllerPath(xPDO &$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'weblink/';

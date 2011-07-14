@@ -5,6 +5,14 @@
 /**
  * Represents a group of users with common attributes.
  *
+ * @property string $name The name of the User Group
+ * @property string $description A user-specified description of the User Group
+ * @property int $parent The parent group for this User Group. If none, will be 0
+ * @property int $rank The rank of this group, used when sorting the groups
+ *
+ * @see modUser
+ * @see modUserGroupRole
+ * @see modUserGroupMember
  * @package modx
  */
 class modUserGroup extends xPDOSimpleObject {
@@ -111,9 +119,9 @@ class modUserGroup extends xPDOSimpleObject {
      * Get all resource groups related to the user group.
      *
      * @access public
-     * @param $limit The number of Resource Groups to grab. Defaults to 0, which
+     * @param boolean $limit The number of Resource Groups to grab. Defaults to 0, which
      * grabs all Groups.
-     * @param $start The starting index for the limit query.
+     * @param int $start The starting index for the limit query.
      * @return array An array of resource groups.
      */
     public function getResourceGroups($limit = false,$start = 0) {

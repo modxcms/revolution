@@ -3,10 +3,28 @@
  * @package modx
  */
 /**
+ * A collection of rules for the related Form Customization Profile. Can be applied to different "actions", or pages,
+ * within the manager. Also can set a constraint on the set so that it only applies under certain circumstances, or
+ * with a certain template.
+ *
+ * @property int $profile The ID of the Profile this set belongs to
+ * @property int $action The ID of the modAction this set is tied to
+ * @property string $description A description of the set provided by the user
+ * @property boolean $active Whether or not this set is active, and will have its rules applied.
+ * @property int $template If set to a non-zero value, will only apply rules if the Resource has the specified Template ID
+ * @property string $constraint Optional. The value of the constraint_field on constraint_class to check against to see if rules should be applied.
+ * @property string $constraint_field Optional. The field name of the constraint_class to check against with the constraint value to see if rules should be applied.
+ * @property string $constraint_class Optional. The class of the constraint_field to check against with the constraint value to see if rules should be applied.
+ * @see modCustomizationProfile
+ * @see modActionDom
  * @package modx
  */
 class modFormCustomizationSet extends xPDOSimpleObject {
-
+    /**
+     * Get the formatted data for the FC Set
+     * 
+     * @return array
+     */
     public function getData() {
         $setArray = array();
 

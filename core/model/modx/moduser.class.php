@@ -5,6 +5,20 @@
 /**
  * The core MODX user class.
  *
+ * @property string $username The username for this User
+ * @property string $password The encrypted password for this User
+ * @property string $cachepwd A cached, encrypted password used when resetting the User's password or for confirmation
+ * @property string $class_key The class key of the user. Used for extending the modUser class.
+ * @property boolean $active Whether or not this user is active, and thereby able to log in
+ * @property string $remote_key Used for storing a remote reference key for authentication for a User
+ * @property json $remote_data Used for storing remote data for authentication for a User
+ * @property string $hash_class The hashing class used to create this User's password
+ * @property string $salt A salt that might have been used to create this User's password
+ *
+ * @see modUserGroupMember
+ * @see modUserGroupRole
+ * @see modUserMessage
+ * @see modUserProfile
  * @package modx
  */
 class modUser extends modPrincipal {
@@ -306,6 +320,11 @@ class modUser extends modPrincipal {
         }
     }
 
+    /**
+     * Generate a specific authentication token for this user for accessing the MODX manager
+     * @param string $salt Ignored
+     * @return string
+     */
     public function generateToken($salt) {
         return uniqid($this->xpdo->site_id . '_' . $this->get('id'), true);
     }
@@ -425,6 +444,7 @@ class modUser extends modPrincipal {
      * @deprecated
      * @todo refactor this to actually work.
      * @access public
+     * @param string $ctx The context in which to peruse for Resource Groups
      * @return array An array of Resource Group names.
      */
     public function getResourceGroups($ctx = '') {
@@ -489,7 +509,7 @@ class modUser extends modPrincipal {
      * either a string name of the group, or an array of names.
      *
      * @access public
-     * @param string/array $groups Either a string of a group name or an array
+     * @param string|array $groups Either a string of a group name or an array
      * of names.
      * @param boolean $matchAll If true, requires the user to be a member of all
      * the groups specified. If false, the user can be a member of only one to

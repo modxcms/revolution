@@ -30,27 +30,58 @@
  * @package modx
  */
 class modParser {
+    /**
+     * A reference to the modX instance
+     * @var modX $modx
+     */
     public $modx= null;
+    /**
+     * If the parser is currently processing a tag
+     * @var bool $_processingTag
+     */
     protected $_processingTag = false;
+    /**
+     * If the parser is currently processing an uncacheable tag
+     * @var bool $_processingUncacheable
+     */
     protected $_processingUncacheable = false;
+    /**
+     * If the parser is currently removing all unprocessed tags
+     * @var bool $_removingUnprocessed
+     */
     protected $_removingUnprocessed = false;
 
+    /**
+     * @param xPDO $modx A reference to the modX|xPDO instance
+     */
     function __construct(xPDO &$modx) {
         $this->modx =& $modx;
     }
 
+    /**
+     * Returns true if the parser is currently processing an uncacheable tag
+     * @return bool
+     */
     public function isProcessingUncacheable() {
         $result = false;
         if ($this->isProcessingTag()) $result = (boolean) $this->_processingUncacheable;
         return $result;
     }
 
+    /**
+     * Returns true if the parser is currently removing any unprocessed tags
+     * @return bool
+     */
     public function isRemovingUnprocessed() {
         $result = false;
         if ($this->isProcessingTag()) $result = (boolean) $this->_removingUnprocessed;
         return $result;
     }
 
+    /**
+     * Returns true if the parser is currently processing a tag
+     * @return bool
+     */
     public function isProcessingTag() {
         return (boolean) $this->_processingTag;
     }
@@ -142,7 +173,7 @@ class modParser {
      *
      * @param string $parentTag The tag representing the element processing this
      * tag.  Pass an empty string to allow parsing without this recursion check.
-     * @param string &$content The content to process and act on (by reference).
+     * @param string $content The content to process and act on (by reference).
      * @param boolean $processUncacheable Determines if noncacheable tags are to
      * be processed (default= false).
      * @param boolean $removeUnprocessed Determines if unprocessed tags should
@@ -155,6 +186,7 @@ class modParser {
      * with the tokens included in this array.
      * @param integer $depth The maximum iterations to recursively process tags
      * returned by prior passes, 0 by default.
+     * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
         $this->_processingUncacheable = (boolean) $processUncacheable;
@@ -250,6 +282,7 @@ class modParser {
      * @param string $string The property string to parse.
      * @param boolean $valuesOnly Indicates only the property value should be
      * returned.
+     * @return array The processed properties in array format
      */
     public function parsePropertyString($string, $valuesOnly = false) {
         $properties = array();
@@ -342,6 +375,7 @@ class modParser {
      * Processes a modElement tag and returns the result.
      *
      * @param string $tag A full tag string parsed from content.
+     * @param boolean $processUncacheable
      * @return mixed The output of the processed element represented by the
      * specified tag.
      */
@@ -503,7 +537,7 @@ class modParser {
      *
      * @uses modX::$_elementCache Stores all cacheable content from processed
      * elements.
-     * @param string tag The tag signature representing the element instance.
+     * @param string $tag The tag signature representing the element instance.
      * @return string The cached output from the element instance.
      */
     public function loadFromCache($tag) {
@@ -524,24 +558,84 @@ class modParser {
  * @package modx
  */
 abstract class modTag {
+    /**
+     * A reference to the modX instance
+     * @var modX $modx
+     */
     public $modx= null;
+    /**
+     * The name of the tag
+     * @var string $name
+     */
     public $name;
+    /**
+     * The properties on the tag
+     * @var array $properties
+     */
     public $properties;
+    /**
+     * The content of the tag
+     * @var string $_content
+     */
     public $_content= null;
+    /**
+     * The processed output of the tag
+     * @var string $_output
+     */
     public $_output= '';
+    /**
+     * The result of processing the tag
+     * @var bool $_result
+     */
     public $_result= true;
+    /**
+     * Just the isolated properties part of the tag string
+     * @var string $_propertyString
+     */
     public $_propertyString= '';
+    /**
+     * The arranged properties array for this tag
+     * @var array $_properties
+     */
     public $_properties= array();
+    /**
+     * Whether or not the tag has been processed
+     * @var boolean $_processed
+     */
     public $_processed= false;
+    /**
+     * The tag string
+     * @var string $_tag
+     */
     public $_tag= '';
+    /**
+     * The tag initial token ($,%,*,etc)
+     * @var string $_token
+     */
     public $_token= '';
+    /**
+     * Fields on the tag
+     * @var array $_fields
+     */
     public $_fields= array(
         'name' => '',
         'properties' => ''
     );
+    /**
+     * Whether or not this tag is marked as cacheable
+     * @var boolean $_cacheable
+     */
     public $_cacheable= true;
+    /**
+     * Any output/input filters on this tag
+     * @var array $_filters
+     */
     public $_filters= array('input' => null, 'output' => null);
 
+    /**
+     * Set a reference to the modX object, load the name and properties, and instantiate the tag class instance.
+     * @param modX $modx A reference to the modX object
+     */
     function __construct(modX &$modx) {
         $this->modx =& $modx;
         $this->name =& $this->_fields['name'];
@@ -620,6 +714,8 @@ abstract class modTag {
 
     /**
      * Gets a tag representation of the modTag instance.
+     *
+     * @return string
      */
     public function getTag() {
         if (empty($this->_tag) && ($name = $this->get('name'))) {
@@ -642,7 +738,7 @@ abstract class modTag {
             $this->_tag = $tag;
         }
         if (empty($this->_tag)) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Instance of ' . get_class($this) . ' produced an empty tag!');
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Instance of ' . get_class($this) . ' produced an empty tag!');
         }
         return $this->_tag;
     }
@@ -762,6 +858,10 @@ abstract class modTag {
 
     /**
      * Set the raw source content for the tag element.
+     *
+     * @param string $content The content to set
+     * @param array $options Ignored.
+     * @return boolean
      */
     public function setContent($content, array $options = array()) {
         return $this->set('name', $content);
@@ -864,6 +964,10 @@ abstract class modTag {
  * @package modx
  */
 class modFieldTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Field Tag token
+     * {@inheritdoc}
+     */
     function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->setToken('*');
@@ -871,6 +975,8 @@ class modFieldTag extends modTag {
 
     /**
      * Process the modFieldTag and return the output.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         if ($this->get('name') === 'content') $this->setCacheable(false);
@@ -892,6 +998,8 @@ class modFieldTag extends modTag {
 
     /**
      * Get the raw source content of the field.
+     *
+     * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
         if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {
@@ -918,6 +1026,10 @@ class modFieldTag extends modTag {
  * @package modx
  */
 class modPlaceholderTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Placeholder Tag token
+     * {@inheritdoc}
+     */
     function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->setCacheable(false);
@@ -930,6 +1042,8 @@ class modPlaceholderTag extends modTag {
      * Tags in the properties of the tag itself, or the content returned by the
      * tag element are processed.  Non-cacheable nested tags are only processed
      * if this tag element is also non-cacheable.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
@@ -953,6 +1067,8 @@ class modPlaceholderTag extends modTag {
 
     /**
      * Get the raw source content of the field.
+     *
+     * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
         if (!is_string($this->_content)) {
@@ -976,6 +1092,8 @@ class modPlaceholderTag extends modTag {
 
     /**
      * modPlaceholderTag instances cannot be cacheable.
+     *
+     * {@inheritdoc}
      */
     public function setCacheable($cacheable = true) {}
 }
@@ -988,6 +1106,10 @@ class modPlaceholderTag extends modTag {
  * @package modx
  */
 class modLinkTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Link Tag token
+     * {@inheritdoc}
+     */
     function __constructor(modX & $modx) {
         parent :: __construct($modx);
         $this->setToken('~');
@@ -995,6 +1117,8 @@ class modLinkTag extends modTag {
 
     /**
      * Processes the modLinkTag, recursively processing nested tags.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
@@ -1054,6 +1178,10 @@ class modLinkTag extends modTag {
  * @package modx
  */
 class modLexiconTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Lexicon Tag token
+     * {@inheritdoc}
+     */
     function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->setToken('%');
@@ -1061,6 +1189,8 @@ class modLexiconTag extends modTag {
 
     /**
      * Processes a modLexiconTag, recursively processing nested tags.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
@@ -1081,6 +1211,8 @@ class modLexiconTag extends modTag {
 
     /**
      * Get the raw source content of the link.
+     *
+     * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {

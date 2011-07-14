@@ -5,6 +5,17 @@
 /**
  * Defines criteria a principal must satisfy in order to access an object.
  *
+ * @property string $name The name of this Policy
+ * @property string $description The description of this Policy.
+ * @property int $parent The parent Policy of this Policy. Not currently used.
+ * @property int $template The Access Policy Template this Policy belongs to
+ * @property string $class Deprecated
+ * @property json $data A JSON object that contains all Permissions loaded in this Policy
+ * @property string $lexicon Optional. The lexicon to load to provide the translated names/descriptions for the
+ * Permissions included
+ *
+ * @see modAccessPolicyTemplate
+ * @see modAccessPermission
  * @package modx
  */
 class modAccessPolicy extends xPDOSimpleObject {

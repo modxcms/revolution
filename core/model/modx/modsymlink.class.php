@@ -12,11 +12,10 @@
  */
 class modSymLink extends modResource {
     /**
-     * Creates a modSymLink instance.
-     *
-     * {@inheritDoc}
+     * Overrides modResource::__construct to set the class key for this Resource type
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
      */
-    function __construct(& $xpdo) {
+    function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
         $this->set('type', 'reference');
         $this->set('class_key', 'modSymLink');
@@ -49,10 +48,17 @@ class modSymLink extends modResource {
         $this->xpdo->sendForward($this->_output, $forwardOptions);
     }
 
+    /**
+     * Gets the manager controller path for the Symlink
+     * @static
+     * @param xPDO $modx A reference to the modX instance
+     * @return string
+     */
     public static function getControllerPath(xPDO &$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'symlink/';
     }
+
     /**
      * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
      * set to true.

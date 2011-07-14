@@ -5,9 +5,22 @@
 /**
  * Represents a chunk of static HTML content.
  *
+ * @property string $name The name of the Chunk.
+ * @property string $description A user-provided description of the Chunk
+ * @property int $editor_type Deprecated
+ * @property int $category The ID of the Category this chunk resides in. Defaults to 0.
+ * @property boolean $cache_type Deprecated
+ * @property string $snippet The contents of the Chunk
+ * @property boolean $locked Whether or not this chunk can only be edited by Administrators
+ * @property array $properties An array of default properties for this Chunk
+ *
  * @package modx
  */
 class modChunk extends modElement {
+    /**
+     * Overrides modElement::__construct to set the tag token for this Element
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->setToken('$');

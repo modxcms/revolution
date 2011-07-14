@@ -3,6 +3,8 @@
  * @package modx
  */
 /**
+ * An ACL for restricting or allowing access to Contexts
+ * 
  * @package modx
  */
 class modAccessContext extends modAccess {

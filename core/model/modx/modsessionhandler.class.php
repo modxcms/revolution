@@ -32,10 +32,17 @@ class modSessionHandler {
      * @access public
      */
     public $modx= null;
-
+    /**
+     * @var int The maximum lifetime of the session
+     */
     public $gcMaxLifetime= 0;
+    /**
+     * @var int The maximum lifetime of the cache of the session
+     */
     public $cacheLifetime= false;
-
+    /**
+     * @var modSession The Session object
+     */
     private $session = null;
 
     /**

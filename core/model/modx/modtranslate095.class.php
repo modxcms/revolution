@@ -27,9 +27,21 @@
  * @package modx
  */
 class modTranslate095 {
+    /**
+     * A reference to the modX instance
+     * @var modX $modx
+     */
     public $modx= null;
+    /**
+     * The parsing engine for interpreting Evolution-style tags
+     * @var modParser095
+     */
     public $parser= null;
 
+    /**
+     * Initializes the class and sets up a translation map
+     * @param modX $modx A reference to the modX instance
+     */
     function __construct(modX &$modx) {
         $this->modx = &$modx;
         $this->preTranslationSearch= array('[*','[~','[+','[!');
@@ -44,6 +56,11 @@ class modTranslate095 {
         );
     }
 
+    /**
+     * Gets the parsing engine
+     *
+     * @return modParser095
+     */
     public function getParser() {
         if (!is_object($this->parser) || !($this->parser instanceof modParser095)) {
             $this->parser= & $this->modx->getService('parser095', 'modParser095');
@@ -51,6 +68,15 @@ class modTranslate095 {
         return $this->parser;
     }
 
+    /**
+     * Translate the site into Revolution-style tags
+     *
+     * @param boolean $save Whether or not to actually save the content changed
+     * @param null $classes An array of classes and fields to translate
+     * @param array $files An array of files to attempt to translate
+     * @param boolean|string $toFile If true, will write the file to the specified log
+     * @return void
+     */
     public function translateSite($save= false, $classes= null, $files= array (), $toFile= false) {
         $parser = $this->getParser();
         $parser->tagTranslation = $this->tagTranslation;
@@ -106,6 +132,13 @@ class modTranslate095 {
         }
     }
 
+    /**
+     * Translate specific files
+     *
+     * @param boolean $save If true, will save the translation
+     * @param array $files An array of files to translate
+     * @return string
+     */
     public function translateFiles($save= false, $files= array()) {
         $output= '';
         if (is_array($files) && !empty ($files)) {

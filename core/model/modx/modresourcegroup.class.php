@@ -3,6 +3,13 @@
  * @package modx
  */
 /**
+ * A group of Resources which can be used for restricting access via ACLs and Permissions.
+ *
+ * @property string $name The name of the Resource Group
+ * @property boolean $private_memgroup Deprecated
+ * @property boolean $private_webgroup Deprecated
+ * @see modResourceGroupResource
+ * @see modAccessResourceGroup
  * @package modx
  */
 class modResourceGroup extends modAccessibleSimpleObject {
@@ -61,6 +68,10 @@ class modResourceGroup extends modAccessibleSimpleObject {
      }
 
 
+    /**
+     * Get all Resources within this Resource Group
+     * @return array|null
+     */
     public function getResources() {
         $c= $this->xpdo->newQuery('modResource');
         $c->innerJoin('modResourceGroupResource', 'ResourceGroupResources');
@@ -68,6 +79,10 @@ class modResourceGroup extends modAccessibleSimpleObject {
         return $this->xpdo->getCollection('modResource', $c);
     }
 
+    /**
+     * Get all User Groups attached to this Resource Group
+     * @return array
+     */
     public function getUserGroups() {
         $access= $this->xpdo->getCollection('modAccessResourceGroup', array (
             'target' => $this->get('id'),

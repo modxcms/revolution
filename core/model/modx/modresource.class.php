@@ -3,8 +3,52 @@
  * @package modx
  */
 /**
- * Represents a web resource managed by the modX framework.
+ * Represents a web resource managed by the MODX framework.
  *
+ * @property int $id The ID of the Resource
+ * @property string $type The type of the resource; document/reference
+ * @property string $contentType The content type string of the Resource, such as text/html
+ * @property string $pagetitle The page title of the Resource
+ * @property string $longtitle The long title of the Resource
+ * @property string $description The description of the Resource
+ * @property string $alias The FURL alias of the resource
+ * @property string $link_attributes Any link attributes for the URL generated for the Resource
+ * @property boolean $published Whether or not this Resource is published, or viewable by users without the 'view_unpublished' permission
+ * @property int $pub_date The UNIX time that this Resource will be automatically marked as published
+ * @property int $unpub_date The UNIX time that this Resource will be automatically marked as unpublished
+ * @property int $parent The parent ID of the Resource
+ * @property boolean $isfolder Whether or not this Resource is a container
+ * @property string $introtext The intro text of this Resource, often used as an excerpt
+ * @property string $content The actual content of this Resource
+ * @property boolean $richtext Whether or not this Resource is edited with a Rich Text Editor, if installed
+ * @property int $template The Template this Resource is tied to, or 0 to use an empty Template
+ * @property int $menuindex The menuindex, or rank, that this Resource shows in.
+ * @property boolean $searchable Whether or not this Resource should be searchable
+ * @property boolean $cacheable Whether or not this Resource should be cacheable
+ * @property int $createdby The ID of the User that created this Resource
+ * @property int $createdon The UNIX time of when this Resource was created
+ * @property int $editedby The ID of the User, if any, that last edited this Resource
+ * @property int $editedon The UNIX time, if set, of when this Resource was last edited
+ * @property boolean $deleted Whether or not this Resource is marked as deleted
+ * @property int $deletedon The UNIX time of when this Resource was deleted
+ * @property int $deletedby The User that deleted this Resource
+ * @property int $publishedon The UNIX time that this Resource was marked as published
+ * @property int $publishedby The User that published this Resource
+ * @property string $menutitle The title to show when this Resource is displayed in a menu
+ * @property boolean $donthit Deprecated.
+ * @property boolean $privateweb Deprecated.
+ * @property boolean $privatemgr Deprecated.
+ * @property int $content_dispo The type of Content Disposition that is used when displaying this Resource
+ * @property boolean $hidemenu Whether or not this Resource should show in menus
+ * @property string $class_key The Class Key of this Resource. Useful for derivative Resource types
+ * @property string $context_key The Context that this Resource resides in
+ * @property int $content_type The Content Type ID of this Resource
+ * @property string $uri The generated URI of this Resource
+ * @property boolean $uri_override Whether or not this URI is "frozen": where the URI will stay as specified and will not be regenerated
+ * @property boolean $hide_children_in_tree Whether or not this Resource should show in the mgr tree any of its children
+ * @property boolean $show_in_tree Whether or not this Resource should show in the mgr tree
+ * @see modTemplate
+ * @see modContentType
  * @package modx
  */
 class modResource extends modAccessibleSimpleObject {
@@ -49,8 +93,20 @@ class modResource extends modAccessibleSimpleObject {
      * @var boolean
      */
     public $_isForward= false;
+    /**
+     * An array of Javascript/CSS to be appended to the footer of this Resource
+     * @var array $_jscripts
+     */
     public $_jscripts = array();
+    /**
+     * An array of Javascript/CSS to be appended to the HEAD of this Resource
+     * @var array $_sjscripts
+     */
     public $_sjscripts = array();
+    /**
+     * All loaded Javascript/CSS that has been calculated to be loaded
+     * @var array
+     */
     public $_loadedjscripts = array();
     /**
      * Use if extending modResource to state whether or not to show the extended class in the tree context menu
@@ -156,7 +212,10 @@ class modResource extends modAccessibleSimpleObject {
         }
     }
 
-    function __construct(& $xpdo) {
+    /**
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
+    function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
         $this->_contextKey= isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
         $this->_cacheKey= "[contextKey]/resources/[id]";

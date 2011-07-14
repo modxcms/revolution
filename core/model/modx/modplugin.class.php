@@ -7,11 +7,22 @@
  *
  * {@inheritdoc}
  *
+ * @field boolean $cache_type Deprecated.
+ * @field string $plugincode The code of the Plugin
+ * @field boolean $locked Whether or not this Plugin is locked from editing except by Administrators
+ * @field array $properties An array of default properties for the Plugin
+ * @field boolean $disabled Whether or not this Plugin is active.
+ * @field string $moduleguid Deprecated.
+ *
  * @package modx
  * @extends modScript
  */
 class modPlugin extends modScript {
-    function __construct(& $xpdo) {
+    /**
+     * Overrides xPDOObject::__construct to always set plugins as non-cacheable
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
+    function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
         $this->setCacheable(false);
     }
@@ -116,6 +127,17 @@ class modPlugin extends modScript {
         return parent :: getPropertySet($setName);
     }
 
+    /**
+     * Grabs a list of groups for the plugin.
+     * @todo Implement this.
+     *
+     * @static
+     * @param modResource $resource
+     * @param array $sort
+     * @param int $limit
+     * @param int $offset
+     * @return void
+     */
     public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         
     }

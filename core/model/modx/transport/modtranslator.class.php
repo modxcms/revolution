@@ -34,6 +34,10 @@ class modTranslator extends modTranslate095 {
     */
     public $recursive;
 
+    /**
+     * @param xPDO $modx A reference to the xPDO|modX instance
+     * @param bool $recursive Whether or not this translator will recurse
+     */
     function __construct(xPDO &$modx, $recursive = true) {
         parent :: __construct($modx);
         $this->recursive = $recursive;

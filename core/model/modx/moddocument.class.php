@@ -15,6 +15,10 @@
  * @package modx
  */
 class modDocument extends modResource {
+    /**
+     * Overrides modResource::__construct to set the class key for this Resource type
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('class_key','modDocument');

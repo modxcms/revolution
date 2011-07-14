@@ -25,6 +25,10 @@ class modStaticResource extends modResource {
      */
     protected $_sourcePath= '';
 
+    /**
+     * Overrides modResource::__construct to set the class key for this Resource type
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('class_key','modStaticResource');
@@ -104,8 +108,8 @@ class modStaticResource extends modResource {
     /**
      * Retrieve the resource content stored in a physical file.
      *
-     * @access public
      * @param string $file A path to the file representing the resource content.
+     * @param array $options
      * @return string The content of the file, of false if it could not be
      * retrieved.
      */
@@ -203,6 +207,12 @@ class modStaticResource extends modResource {
         return $value;
     }
 
+    /**
+     * Sets the path to the Static Resource manager controller
+     * @static
+     * @param xPDO $modx A reference to the modX instance
+     * @return string
+     */
     public static function getControllerPath(xPDO &$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'staticresource/';

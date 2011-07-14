@@ -7,14 +7,41 @@
 /**
  * Represents a virtual site context within a modX repository.
  *
+ * @property string $key The key of the context
+ * @property string $description The description of the context
+ * 
  * @package modx
  */
 class modContext extends modAccessibleObject {
+    /**
+     * An array of configuration options for this context
+     * @var array $config
+     */
     public $config= null;
+    /**
+     * The alias map for this context
+     * @var array $aliasMap
+     */
     public $aliasMap= null;
+    /**
+     * The resource map for all resources in this context
+     * @var array $resourceMap
+     */
     public $resourceMap= null;
+    /**
+     * The event map for all events being executed in this context
+     * @var array $eventMap
+     */
     public $eventMap= null;
+    /**
+     * The plugin cache array for all plugins being fired in this context
+     * @var array $pluginCache
+     */
     public $pluginCache= null;
+    /**
+     * The key for the cache for this context
+     * @var string $_cacheKey
+     */
     protected $_cacheKey= '[contextKey]/context';
 
     /**

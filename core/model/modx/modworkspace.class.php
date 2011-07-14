@@ -3,6 +3,14 @@
  * @package modx
  */
 /**
+ * Workspaces are isolated packaging environments. They are currently not used in MODX.
+ *
+ * @property string $name The name of the Workspace
+ * @property string $path The absolute path of the Workspace
+ * @property timestamp $created The time this Workspace was created on
+ * @property boolean $active Whether or not this Workspace is active
+ * @property array $attributes An array of attributes for this Workspace
+ *
  * @package modx
  */
 class modWorkspace extends xPDOSimpleObject {

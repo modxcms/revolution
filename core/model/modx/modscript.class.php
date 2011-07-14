@@ -7,11 +7,24 @@
  *
  * {@inheritdoc}
  *
+ * @property int $id
+ * @property string $name The name of the script
+ * @property string $description The description of the script
+ * @property int $editor_type Deprecated
+ * @property int $category The Category this Script resides in
  * @abstract Implement a derivative class that defines a table for storage.
  * @package modx
  */
 class modScript extends modElement {
+    /**
+     * The name of the script
+     * @var string $_scriptName
+     */
     public $_scriptName= null;
+    /**
+     * The cache key of the script
+     * @var string $_scriptCacheKey
+     */
     public $_scriptCacheKey= null;
 
     /**
