@@ -8,9 +8,9 @@ $parents = $this->get('elements');
 
 $bindingsResult = $this->processBindings($this->get('elements'),$modx->resource->get('id'));
 $parents = $this->parseInputOptions($bindingsResult);
-$parents = !empty($params['parents']) ? explode(',',$params['parents']) : $parents;
+$parents = !empty($params['parents']) || $params['parents'] === '0' ? explode(',',$params['parents']) : $parents;
 $params['depth'] = !empty($params['depth']) ? $params['depth'] : 10;
-if (empty($parents) || empty($parents[0])) { $parents = array($modx->getOption('site_start',null,1)); }
+if (empty($parents) || (empty($parents[0]) && $parents[0] !== '0')) { $parents = array($modx->getOption('site_start',null,1)); }
 
 $parentList = array();
 foreach ($parents as $parent) {
