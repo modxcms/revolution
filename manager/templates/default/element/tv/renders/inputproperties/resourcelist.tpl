@@ -22,7 +22,7 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
-        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
+        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? 0 : 1
         ,width: 300
         ,listeners: oc
     },{
@@ -32,7 +32,7 @@ MODx.load({
         ,name: 'inopt_showNone'
         ,hiddenName: 'inopt_showNone'
         ,id: 'inopt_showNone{/literal}{$tv}{literal}'
-        ,value: params['showNone'] == 0 || params['showNone'] == 'false' ? false : true
+        ,value: params['showNone'] == 0 || params['showNone'] == 'false' ? 0 : 1
         ,width: 300
         ,listeners: oc
     },{
@@ -60,7 +60,7 @@ MODx.load({
         ,name: 'inopt_includeParent'
         ,hiddenName: 'inopt_includeParent'
         ,id: 'inopt_includeParent{/literal}{$tv}{literal}'
-        ,value: params['includeParent'] == 'false' || Ext.isEmpty(params['includeParent']) ? false : true
+        ,value: params['includeParent'] == 0 || params['includeParent'] == 'false' ? 0 : 1
         ,width: 300
         ,listeners: oc
     },{
