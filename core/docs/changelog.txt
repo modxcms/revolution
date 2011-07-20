@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.3-pl (July 21, 2011)
+====================================
 - [#5295] Fix parents input option for Resource List TV when 0 is specified
 - [#5190] Fix includeParent input option in Resource List TV
 - [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
