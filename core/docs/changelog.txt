@@ -2,6 +2,20 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.3-pl (July 21, 2011)
+====================================
+- [#5295] Fix parents input option for Resource List TV when 0 is specified
+- [#5190] Fix includeParent input option in Resource List TV
+- [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
+- Fix delegateView recursion in Resource controllers on Windows
+- [#3966] Fix double slash issue in file paths when dragging into resource content from the Files tree
+- [#4565] Fix issue with Resource tree sorting
+- [#5026] Make directory tree in MODx.Browser instance launched from Files tab consistent with other instances of MODx.Browser
+- [#4960] Prevent method declaration error for modPHPMailer::reset()
+- [#3716] Ensure consistent handling of combo-boolean property values in the database
+- [#4586] Improve number detection for Radio and Checkbox TV values
+- [#5196] Unset uri_override when duplicating creates a duplicate uri
+
 MODX Revolution 2.1.2-pl (July 6, 2011)
 ====================================
 - Fix issue with modUser::getSettings pulling a deprecated alias

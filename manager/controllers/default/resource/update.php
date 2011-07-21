@@ -47,7 +47,7 @@ $delegateView = str_replace(array('{core_path}','{assets_path}','{base_path}'),a
     $modx->getOption('assets_path',null,MODX_ASSETS_PATH),
     $modx->getOption('base_path',null,MODX_BASE_PATH),
 ),$delegateView);
-if (file_exists($delegateView)) {
+if (file_exists($delegateView) && realpath($delegateView) !== realpath(__FILE__)) {
     $overridden= include($delegateView);
     if ($overridden !== false) {
         return $overridden;

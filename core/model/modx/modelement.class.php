@@ -556,6 +556,10 @@ class modElement extends modAccessibleSimpleObject {
                     }
                 }
                 
+                if ($propertyArray['type'] == 'combo-boolean' && is_numeric($propertyArray['value'])) {
+                    $propertyArray['value'] = (boolean)$propertyArray['value'];
+                }
+                
                 $propertiesArray[$key] = $propertyArray;
             }
 

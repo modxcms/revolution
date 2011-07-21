@@ -28,7 +28,7 @@ foreach ($options as $option) {
     /* do escaping of strings, encapsulate in " so extjs/other systems can
      * utilize values correctly in their cast
      */
-    if (intval($opt[1]) === 0 && $opt[1] !== 0 && $opt[1] !== '0') {
+    if (preg_match('/^([-]?(0|0{1}[1-9]+[0-9]*|[1-9]+[0-9]*[\.]?[0-9]*))$/',$opt[1]) == 0) {
         $opt[1] = '"'.str_replace('"','\"',$opt[1]).'"';
     }
 
