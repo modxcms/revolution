@@ -308,12 +308,12 @@
 
     <!-- Make sure the distrib directory exists and is clean -->
     <target name="prepare-build-distrib" description="empty the build distrib directory" if="build.distrib">
-        <mkdir dir="${build.distrib.dir}" />
         <delete includeemptydirs="true">
             <fileset dir="${build.distrib.dir}">
                 <include name="**" />
             </fileset>
         </delete>
+        <mkdir dir="${build.distrib.dir}" />
     </target>
 
     <!-- Build a MODX SDK distrib with all files in place and extracted -->
