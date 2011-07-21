@@ -1,14 +1,35 @@
 <?php
 /**
+ * @package modx
+ * @subpackage manager.controllers
+ */
+/**
  * Loads the workspace manager
  *
  * @package modx
  * @subpackage manager.controllers
  */
 class WorkspacesManagerController extends modManagerController {
+    /**
+     * The template file for this controller
+     * @var string $templateFile
+     */
     public $templateFile = 'workspaces/index.tpl';
+    /**
+     * The ID of the default Provider
+     * @var int $providerId
+     */
     public $providerId = 1;
+    /**
+     * The name of the default Provider
+     * @var string $providerName
+     */
     public $providerName = 'modx.com';
+    /**
+     * Whether or not cURL is enabled on this server
+     * @var boolean $curlEnabled
+     */
+    public $curlEnabled = true;
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -36,7 +57,7 @@ class WorkspacesManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package.grid.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/provider.grid.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/workspace.panel.js');
-        $this->addHtml('<script type="text/javascript">MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";</script>');
+        $this->addHtml('<script type="text/javascript">MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";MODx.curlEnabled = '.($this->curlEnabled ? 1 : 0).'</script>');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/index.js');
     }
 
@@ -49,6 +70,7 @@ class WorkspacesManagerController extends modManagerController {
         $placeholders = array();
 
         /* ensure directories for Package Management are created */
+        /** @var modCacheManager $cacheManager */
         $cacheManager = $this->modx->getCacheManager();
         $directoryOptions = array(
             'new_folder_permissions' => $this->modx->getOption('new_folder_permissions',null,0775),
@@ -82,6 +104,11 @@ class WorkspacesManagerController extends modManagerController {
         }
         if (!is_dir($coreCompPath) || !is_writable($coreCompPath)) {
             $errors['core_comp_not_created'] = $this->modx->lexicon('dir_err_core_comp',array('path' => $coreCompPath));
+        }
+
+        if (!function_exists('curl_init') || !in_array('curl',get_loaded_extensions())) {
+            $errors['curl_not_installed'] = $this->modx->lexicon('curl_not_installed');
+            $this->curlEnabled = false;
         }
 
         if (!empty($errors)) {
