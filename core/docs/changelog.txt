@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4080] Add Content Type and Content Disposition to Quick Create/Update Resource
 - [#5250] Add check for cURL in Package Management
 - [#5295] Fix parents input option for Resource List TV when 0 is specified
 - [#5190] Fix includeParent input option in Resource List TV
