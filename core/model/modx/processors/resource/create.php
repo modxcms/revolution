@@ -108,7 +108,7 @@ if (!$workingContext) {
 $scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer) $workingContext->getOption('default_template', 0) : (integer) $scriptProperties['template'];
 $scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (integer) $workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
 $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
-$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
+$scriptProperties['richtext'] = !isset($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
 $scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
 $scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer) $workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
 $scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer) $workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
