@@ -104,7 +104,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 'success': {fn:function() {this.refreshNode(node.id);},scope:this}
             }
         });
-        console.log(node.attributes);
         w.config.hasChildren = node.attributes.hasChildren;
         w.setValues(r);
         w.show(e.target);
