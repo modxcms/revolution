@@ -9,6 +9,8 @@
  * @subpackage manager.controllers
  */
 class SearchManagerController extends modManagerController {
+    public $searchQuery = '';
+    
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -25,6 +27,14 @@ class SearchManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/modx.panel.search.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/search.js');
+        $this->addHtml("<script type=\"text/javascript\">Ext.onReady(function() {
+    MODx.load({
+        xtype: 'modx-page-search'
+        ,record: {
+            q: '".$this->searchQuery."'
+        }
+    });
+});</script>");
     }
 
     /**
@@ -32,7 +42,11 @@ class SearchManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = array()) {
+        if (!empty($this->scriptProperties['q'])) {
+            $this->searchQuery = str_replace("'","\'",urldecode($this->scriptProperties['q']));
+        }
+    }
 
     /**
      * Return the pagetitle

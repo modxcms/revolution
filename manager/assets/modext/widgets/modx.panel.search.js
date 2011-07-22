@@ -29,7 +29,7 @@ MODx.panel.Search = function(config) {
                         ,autoHeight: true
                         ,bodyStyle: 'padding: 15px;'
                     }
-                    ,items: this.getFields()
+                    ,items: this.getFields(config)
                 },{
                     xtype: 'modx-grid-search'
                     ,preventRender: true
@@ -44,7 +44,7 @@ MODx.panel.Search = function(config) {
 Ext.extend(MODx.panel.Search,MODx.FormPanel,{
     filters: {}
     
-    ,getFields: function() {
+    ,getFields: function(config) {
         var lsr = {
             'change': {fn:this.filter,scope: this}
             ,'render': {fn:this._addEnterKeyHandler}
@@ -67,12 +67,14 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,fieldLabel: _('pagetitle')
             ,width: 300
             ,listeners: lsr
+            ,value: config.record.q || ''
         },{
             xtype: 'textfield'
             ,name: 'longtitle'
             ,fieldLabel: _('long_title')
             ,width: 300
             ,listeners: lsr
+            ,value: config.record.q || ''
         },{
             xtype: 'textarea'
             ,name: 'content'
@@ -80,6 +82,7 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,width: 300
             ,grow: true
             ,listeners: lsr
+            ,value: config.record.q || ''
         },{
             xtype: 'xcheckbox'
             ,name: 'published'

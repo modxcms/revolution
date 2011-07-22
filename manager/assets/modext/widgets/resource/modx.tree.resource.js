@@ -33,9 +33,10 @@ MODx.tree.Resource = function(config) {
         var el = Ext.get('modx-resource-tree');
         el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
         el.createChild({tag: 'div', id: 'modx-resource-tree_filter'});
-    });
+    },this);
     this.addEvents('loadCreateMenus');
     this.on('afterSort',this._handleAfterDrop,this);
+    this.addSearchToolbar();
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     forms: {}
@@ -58,6 +59,48 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
     }
 
+    ,addSearchToolbar: function() {
+        var t = Ext.get(this.config.id+'-tbar');
+        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: 'modx-resource-searchbar'});
+        var tb = new Ext.Toolbar({
+            applyTo: fbd
+            ,autoHeight: true
+            ,width: '100%'
+        });
+        var tf = new Ext.form.TextField({
+            name: 'search'
+            ,value: ''
+            ,width: Ext.getCmp('modx-resource-tree').getWidth() - 15
+            ,style: 'margin: 5px;'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search,scope:this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        });
+        tb.add(tf);
+        tb.doLayout();
+        this.searchBar = tb;
+    }
+
+    ,search: function(nv) {
+        Ext.state.Manager.set(this.treestate_id+'-search',nv);
+        this.config.search = nv;
+        this.getLoader().baseParams = {
+            action: this.config.action
+            ,search: this.config.search
+        };
+        this.refresh();
+    }
 
     /**
      * Shows the current context menu.

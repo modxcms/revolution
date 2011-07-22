@@ -5,6 +5,7 @@
  */
 $elementType = ucfirst($g[0]);
 $nodes = array();
+
 /* templates */
 if ($modx->hasPermission('view_template')) {
     $class = 'icon-template';

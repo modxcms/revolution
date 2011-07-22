@@ -110,7 +110,133 @@ $permissionList = array(
 $nodeField = $modx->getOption('resource_tree_node_name',$scriptProperties,'pagetitle');
 $qtipField = $modx->getOption('resource_tree_node_tooltip',$scriptProperties,'');
 $items = array();
+
+/* first check to see if search results */
+if (!empty($scriptProperties['search']) && empty($node) && $context == 'root') {
+    $searchNode = array(
+        'text' => $modx->lexicon('search_results'),
+        'id' => 'search_results',
+        'leaf' => false,
+        'cls' => 'search-results-node',
+        'type' => 'none',
+        'expanded' => true,
+        'children' => array(),
+    );
+
+    $s = $scriptProperties['search'];
+
+    $c = $modx->newQuery('modResource');
+    $c->select($modx->getSelectColumns('modResource','modResource','',array(
+        'id'
+        ,'pagetitle'
+        ,'longtitle'
+        ,'alias'
+        ,'description'
+        ,'parent'
+        ,'published'
+        ,'deleted'
+        ,'isfolder'
+        ,'menuindex'
+        ,'menutitle'
+        ,'hidemenu'
+        ,'class_key'
+        ,'context_key'
+    )));
+    $c->where(array(
+        'pagetitle:LIKE' => '%'.$s.'%',
+        'OR:longtitle:LIKE' => '%'.$s.'%',
+        'OR:alias:LIKE' => '%'.$s.'%',
+        'OR:menutitle:LIKE' => '%'.$s.'%',
+        'OR:description:LIKE' => '%'.$s.'%',
+        'OR:content:LIKE' => '%'.$s.'%',
+    ));
+    $c->where(array(
+        'show_in_tree' => true,
+    ));
+    $c->limit(15);
+    $searchResults = $modx->getCollection('modResource',$c);
+
+    /** @var modResource $item */
+    foreach ($searchResults as $item) {
+        $idNote = $modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$item->id.')</span>' : '';
+
+        $class = array();
+        $class[] = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
+        $class[] = $item->isfolder ? ' icon-folder' : 'x-tree-node-leaf icon-resource';
+        if (!$item->get('published')) $class[] = 'unpublished';
+        if ($item->get('deleted')) $class[] = 'deleted';
+        if ($item->get('hidemenu')) $class[] = 'hidemenu';
+
+        $class[] = !empty($permissionList['save_document']) ? $permissionList['save_document'] : '';
+        $class[] = !empty($permissionList['view_document']) ? $permissionList['view_document'] : '';
+        $class[] = !empty($permissionList['edit_document']) ? $permissionList['edit_document'] : '';
+        $class[] = !empty($permissionList['new_document']) ? $permissionList['new_document'] : '';
+        $class[] = !empty($permissionList['delete_document']) ? $permissionList['delete_document'] : '';
+        $class[] = !empty($permissionList['undelete_document']) ? $permissionList['undelete_document'] : '';
+        $class[] = !empty($permissionList['publish_document']) ? $permissionList['publish_document'] : '';
+        $class[] = !empty($permissionList['unpublish_document']) ? $permissionList['unpublish_document'] : '';
+        $class[] = !empty($permissionList['resource_quick_create']) ? $permissionList['resource_quick_create'] : '';
+        $class[] = !empty($permissionList['resource_quick_update']) ? $permissionList['resource_quick_update'] : '';
+        if (!empty($scriptProperties['currentResource']) && $scriptProperties['currentResource'] == $item->id && $scriptProperties['currentAction'] == $actions['resource/update']) {
+            $class[] = 'active-node';
+        }
+
+        $qtip = '';
+        if (!empty($qtipField)) {
+            $qtip = '<b>'.strip_tags($item->$qtipField).'</b>';
+        } else {
+            if ($item->longtitle != '') {
+                $qtip = '<b>'.strip_tags($item->longtitle).'</b><br />';
+            }
+            if ($item->description != '') {
+                $qtip = '<i>'.strip_tags($item->description).'</i>';
+            }
+        }
+
+        $locked = $item->getLock();
+        if ($locked && $locked != $modx->user->get('id')) {
+            $class[] = 'icon-locked';
+            $lockedBy = $modx->getObject('modUser',$locked);
+            /** @var modUser $lockedBy */
+            if ($lockedBy) {
+                $qtip .= ' - '.$modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
+            }
+        }
+        $itemArray = array(
+            'text' => strip_tags($item->$nodeField).$idNote,
+            'id' => 'search-'.$item->context_key . '_'.$item->id,
+            'pk' => $item->id,
+            'cls' => implode(' ',$class),
+            'type' => 'modResource',
+            'classKey' => $item->class_key,
+            'ctx' => $item->context_key,
+            'qtip' => $qtip,
+            'preview_url' => $modx->makeUrl($item->get('id'), '', '', 'full'),
+            'page' => empty($scriptProperties['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
+            'allowDrop' => true,
+            'leaf' => true,
+        );
+        $searchNode['children'][] = $itemArray;
+    }
+
+    $searchNode['children'][] = array(
+        'text' => $modx->lexicon('more_search_results'),
+        'id' => 'more-search-results-node',
+        'leaf' => true,
+        'expanded' => false,
+        'children' => array(),
+        'allowDrop' => false,
+        'cls' => 'search-results-node search-more-node',
+        'page' => '?a='.$actions['search'].'&q='.urlencode($s),
+    );
+
+    $items[] = $searchNode;
+}
+
+
+/* now process actual tree nodes */
 $item = reset($collection);
+/** @var modContext|modResource $item */
 while ($item) {
     $canList = $item->checkPolicy('list');
     if ($canList) {
