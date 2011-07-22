@@ -50,7 +50,7 @@ $manifest= 0;
 if (file_exists(MODX_CORE_PATH . 'packages/core/manifest.php')) {
     $zipTime = filemtime(MODX_CORE_PATH . 'packages/core.transport.zip');
     $manifestTime = filemtime(MODX_CORE_PATH . 'packages/core/manifest.php');
-    $manifest= $zipTime > $manifestTime ? 0 : 1;
+    $manifest= $zipTime + 10 > $manifestTime ? 0 : 1;
 }
 
 $unpacked= 0;
