@@ -1031,6 +1031,7 @@
         <aggregate alias="PublishedResources" class="modResource" local="id" foreign="publishedby" cardinality="many" owner="local" />
         <aggregate alias="SentMessages" class="modUserMessage" local="id" foreign="sender" cardinality="many" owner="local" />
         <aggregate alias="ReceivedMessages" class="modUserMessage" local="id" foreign="recipient" cardinality="many" owner="local" />
+        <aggregate alias="PrimaryGroup" class="modUserGroup" local="primary_group" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Profile" class="modUserProfile" local="id" foreign="internalKey" cardinality="one" owner="local" />
         <composite alias="UserSettings" class="modUserSetting" local="id" foreign="user" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="member" cardinality="many" owner="local" />

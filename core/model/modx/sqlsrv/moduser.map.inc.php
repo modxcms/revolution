@@ -220,6 +220,14 @@ $xpdo_meta_map['modUser']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'PrimaryGroup' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'primary_group',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
   ),
   'composites' => 
   array (
