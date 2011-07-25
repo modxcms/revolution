@@ -3,17 +3,18 @@
  * @package modx
  * @subpackage mysql
  */
-$xpdo_meta_map['modUserGroup']= array (
+$xpdo_meta_map['modDashboardWidget']= array (
   'package' => 'modx',
   'version' => '1.1',
-  'table' => 'membergroup_names',
+  'table' => 'dashboard_widget',
   'fields' => 
   array (
     'name' => '',
     'description' => NULL,
-    'parent' => 0,
-    'rank' => 0,
-    'dashboard' => 1,
+    'type' => NULL,
+    'content' => NULL,
+    'namespace' => '',
+    'lexicon' => 'core:dashboards',
   ),
   'fieldMeta' => 
   array (
@@ -24,41 +25,42 @@ $xpdo_meta_map['modUserGroup']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
-      'index' => 'unique',
+      'index' => 'index',
     ),
     'description' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
     ),
-    'parent' => 
+    'type' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 0,
       'index' => 'index',
     ),
-    'rank' => 
+    'content' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
+      'dbtype' => 'mediumtext',
+      'phptype' => 'string',
+    ),
+    'namespace' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 0,
+      'default' => '',
       'index' => 'index',
     ),
-    'dashboard' => 
+    'lexicon' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 1,
+      'default' => 'core:dashboards',
       'index' => 'index',
     ),
   ),
@@ -68,7 +70,7 @@ $xpdo_meta_map['modUserGroup']= array (
     array (
       'alias' => 'name',
       'primary' => false,
-      'unique' => true,
+      'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
@@ -80,15 +82,15 @@ $xpdo_meta_map['modUserGroup']= array (
         ),
       ),
     ),
-    'parent' => 
+    'type' => 
     array (
-      'alias' => 'parent',
+      'alias' => 'type',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'parent' => 
+        'type' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -96,15 +98,15 @@ $xpdo_meta_map['modUserGroup']= array (
         ),
       ),
     ),
-    'rank' => 
+    'namespace' => 
     array (
-      'alias' => 'rank',
+      'alias' => 'namespace',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'rank' => 
+        'namespace' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -112,15 +114,15 @@ $xpdo_meta_map['modUserGroup']= array (
         ),
       ),
     ),
-    'dashboard' => 
+    'lexicon' => 
     array (
-      'alias' => 'dashboard',
+      'alias' => 'lexicon',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'dashboard' => 
+        'lexicon' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -131,46 +133,22 @@ $xpdo_meta_map['modUserGroup']= array (
   ),
   'aggregates' => 
   array (
-    'Parent' => 
+    'Namespace' => 
     array (
-      'class' => 'modUserGroup',
-      'local' => 'parent',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'Children' => 
-    array (
-      'class' => 'modUserGroup',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Dashboard' => 
-    array (
-      'class' => 'modDashboard',
-      'local' => 'dashboard',
-      'foreign' => 'id',
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'modNamespace',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
   ),
   'composites' => 
   array (
-    'UserGroupMembers' => 
+    'Placements' => 
     array (
-      'class' => 'modUserGroupMember',
+      'class' => 'modDashboardWidgetPlacement',
       'local' => 'id',
-      'foreign' => 'user_group',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'FormCustomizationProfiles' => 
-    array (
-      'class' => 'modFormCustomizationProfileUserGroup',
-      'local' => 'id',
-      'foreign' => 'usergroup',
+      'foreign' => 'widget',
       'cardinality' => 'many',
       'owner' => 'local',
     ),

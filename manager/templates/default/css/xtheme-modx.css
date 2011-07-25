@@ -2325,3 +2325,13 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-grid3-body .x-grid3-td-checker {
     background-image: none !important;
 }
+
+/* combo tpl stuff */
+.modx-combo-desc {
+    color: gray;
+    font-style: italic;
+    font-size: .9em;
+}
+.modx-combo-title {
+    font-weight: bold;
+}

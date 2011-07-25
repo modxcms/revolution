@@ -7,6 +7,9 @@
  */
 /* handle new class creation */
 $classes = array(
+    'modDashboard',
+    'modDashboardWidget',
+    'modDashboardWidgetPlacement',
 );
 if (!empty($classes)) {
     $this->createTable($classes);
@@ -76,3 +79,11 @@ foreach ($users as $user) {
         }
     }
 }
+
+/* add dashboard field/index to modUserGroup */
+$class = 'modUserGroup';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'dashboard','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'dashboard'));
+$description = $this->install->lexicon('add_index',array('index' => 'dashboard','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'dashboard'));

@@ -71,6 +71,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'dashboards',
+    'description' => 'perm.dashboards_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'database',
     'description' => 'perm.database_desc',
     'value' => true,

@@ -484,5 +484,27 @@ $collection['85']->fromArray(array (
   'assets' => '',
   'help_url' => 'Form+Customization+Sets',
 ), '', true, true);
+$collection['101']= $xpdo->newObject('modAction');
+$collection['101']->fromArray(array (
+  'id' => 101,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/update',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboards',
+), '', true, true);
+$collection['102']= $xpdo->newObject('modAction');
+$collection['102']->fromArray(array (
+  'id' => 102,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/create',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboards',
+), '', true, true);
 
 return $collection;
