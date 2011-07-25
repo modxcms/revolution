@@ -6,24 +6,14 @@ development release, and is only shown to give an idea of what's currently in th
 - [#5268] Add search toolbar for Resource tree
 - [#4080] Add Content Type and Content Disposition to Quick Create/Update Resource
 - [#5250] Add check for cURL in Package Management
-- [#5295] Fix parents input option for Resource List TV when 0 is specified
-- [#5190] Fix includeParent input option in Resource List TV
-- [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
 - [#5204] Add search by parent to mgr search page
-- [#3966] Fix double slash issue in file paths when dragging into resource content from the Files tree
 - Added much better handling for custom resource classes; deprecated custom_resource_classes setting
-- [#4565] Fix issue with Resource tree sorting
-- [#5026] Make directory tree in MODx.Browser instance launched from Files tab consistent with other instances of MODx.Browser
 - [#4601] Ensure children of protected Resources inherit by default their parent's Resource Groups in create UI
 - [#4016] Update description text in grid when adding/updating element properties without need for page reload
 - [#2860] Fix 'Sent On' date when viewing an expanded message
-- [#4960] Prevent method declaration error for modPHPMailer::reset()
 - [#4984] Ensure tree highlighting of currently edited resource/element/file works consistently
 - [#2638] When updating an element's category, ensure old treenode is removed
-- [#3716] Ensure consistent handling of combo-boolean property values in the database
 - [#5139] Fix issues with MODx.Browser and file/image TVs in other contexts
-- [#4586] Improve number detection for Radio and Checkbox TV values
-- [#5196] Unset uri_override when duplicating creates a duplicate uri
 - [#4958] Add IDs to Resource Groups in RG tree
 - Add ability to rename Resource Groups
 - [#5185] Improve core package already extracted validation for upgrades
@@ -33,6 +23,20 @@ development release, and is only shown to give an idea of what's currently in th
 - Add modResource::getControllerPath method for better abstraction of derivative resource types
 - Add show_in_tree and hide_children_in_tree fields to modResource for better support with custom Resource types
 - Abstract all manager controllers to classes to improve usability, testing and creation of controllers
+
+MODX Revolution 2.1.3-pl (July 21, 2011)
+====================================
+- [#5295] Fix parents input option for Resource List TV when 0 is specified
+- [#5190] Fix includeParent input option in Resource List TV
+- [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
+- Fix delegateView recursion in Resource controllers on Windows
+- [#3966] Fix double slash issue in file paths when dragging into resource content from the Files tree
+- [#4565] Fix issue with Resource tree sorting
+- [#5026] Make directory tree in MODx.Browser instance launched from Files tab consistent with other instances of MODx.Browser
+- [#4960] Prevent method declaration error for modPHPMailer::reset()
+- [#3716] Ensure consistent handling of combo-boolean property values in the database
+- [#4586] Improve number detection for Radio and Checkbox TV values
+- [#5196] Unset uri_override when duplicating creates a duplicate uri
 
 MODX Revolution 2.1.2-pl (July 6, 2011)
 ====================================
