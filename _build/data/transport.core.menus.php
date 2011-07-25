@@ -520,15 +520,39 @@ $children[2]->fromArray(array (
         ), '', true, true);
         $children[2]->addOne($action);
 
-/* system info */
+/* dashboards */
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
+  'text' => 'dashboards',
+  'parent' => 'reports',
+  'action' => 100,
+  'description' => 'dashboards_desc',
+  'icon' => 'images/icons/information.png',
+  'menuindex' => 3,
+  'permissions' => 'dashboards',
+), '', true, true);
+        $action= $xpdo->newObject('modAction');
+        $action->fromArray(array (
+          'id' => 100,
+          'namespace' => 'core',
+          'parent' => '',
+          'controller' => 'system/dashboards',
+          'haslayout' => 1,
+          'lang_topics' => 'about',
+          'assets' => '',
+          'help_url' => 'Dashboards',
+        ), '', true, true);
+        $children[3]->addOne($action);
+
+/* system info */
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
   'text' => 'view_sysinfo',
   'parent' => 'reports',
   'action' => 4,
   'description' => 'view_sysinfo_desc',
   'icon' => 'images/icons/logging.gif',
-  'menuindex' => 3,
+  'menuindex' => 4,
   'permissions' => 'view_sysinfo',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -541,17 +565,17 @@ $children[3]->fromArray(array (
           'lang_topics' => 'system_info',
           'assets' => '',
         ), '', true, true);
-        $children[3]->addOne($action);
+        $children[4]->addOne($action);
 
 /* about */
-$children[4]= $xpdo->newObject('modMenu');
-$children[4]->fromArray(array (
+$children[5]= $xpdo->newObject('modMenu');
+$children[5]->fromArray(array (
   'text' => 'about',
   'parent' => 'reports',
   'action' => 63,
   'description' => 'about_desc',
   'icon' => 'images/icons/information.png',
-  'menuindex' => 4,
+  'menuindex' => 5,
   'permissions' => 'about',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -564,7 +588,7 @@ $children[4]->fromArray(array (
           'lang_topics' => 'about',
           'assets' => '',
         ), '', true, true);
-        $children[4]->addOne($action);
+        $children[5]->addOne($action);
 
 $menus[4]->addMany($children,'Children');
 unset($children);

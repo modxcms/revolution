@@ -350,6 +350,21 @@ foreach ($collection as $c) {
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default user groups.'); flush();
 unset ($collection, $c, $attributes);
 
+/* modDashboard */
+$collection = array ();
+include MODX_BUILD_DIR . 'data/transport.core.dashboards.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
+    xPDOTransport::UNIQUE_KEY => array ('name'),
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default dashboards.'); flush();
+unset ($collection, $c, $attributes);
+
 /* modUserGroupRole */
 $collection = array ();
 include MODX_BUILD_DIR . 'data/transport.core.usergrouproles.php';
