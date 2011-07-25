@@ -15,6 +15,17 @@
  * @property string $hash_class The hashing class used to create this User's password
  * @property string $salt A salt that might have been used to create this User's password
  *
+ * @property modUserProfile $Profile
+ * @property modUserGroup $PrimaryGroup
+ * @property array $CreatedResources
+ * @property array $EditedResources
+ * @property array $DeletedResources
+ * @property array $PublishedResources
+ * @property array $SentMessages
+ * @property array $ReceivedMessages
+ * @property array $UserSettings
+ * @property array $UserGroupMembers
+ *
  * @see modUserGroupMember
  * @see modUserGroupRole
  * @see modUserMessage

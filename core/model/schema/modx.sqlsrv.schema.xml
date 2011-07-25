@@ -1010,6 +1010,7 @@
         <field key="remote_data" dbtype="nvarchar" precision="max" phptype="json" null="true" />
         <field key="hash_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="hashing.modPBKDF2" />
         <field key="salt" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
+        <field key="primary_group" dbtype="int" phptype="integer" null="false" default="0" index="index" />
 
         <index alias="username" name="username" primary="false" unique="true" type="BTREE">
             <column key="username" length="" collation="A" null="false" />
@@ -1019,6 +1020,9 @@
         </index>
         <index alias="remote_key" name="remote_key" primary="false" unique="false" type="BTREE">
             <column key="remote_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="primary_group" name="primary_group" primary="false" unique="false" type="BTREE">
+            <column key="primary_group" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="CreatedResources" class="modResource" local="id" foreign="createdby" cardinality="many" owner="local" />

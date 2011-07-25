@@ -132,6 +132,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,xtype: 'hidden'
                 ,value: false
             },{
+                id: 'modx-user-primary-group'
+                ,name: 'primary_group'
+                ,xtype: 'hidden'
+            },{
                 id: 'modx-user-fs-newpassword'
                 ,title: _('password_new')
                 ,xtype: 'fieldset'

@@ -1,7 +1,5 @@
 <?php
-/**
- * @package modx
- */
+
 $xpdo_meta_map = array (
   'modAccess' => 
   array (

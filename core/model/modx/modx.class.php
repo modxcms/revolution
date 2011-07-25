@@ -229,6 +229,10 @@ class modX extends xPDO {
      */
     public $errorHandler= null;
     /**
+     * @var modError An error response class for the request
+     */
+    public $error = null;
+    /**
      * @var array An array of regex patterns regulary cleansed from content.
      */
     public $sanitizePatterns = array(

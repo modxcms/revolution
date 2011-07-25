@@ -1,8 +1,15 @@
 <?php
 /**
+ * @package modx
+ * @subpackage processors.security.user
+ */
+/**
  * Get a user
  *
  * @param integer $id The ID of the user
+ *
+ * @var modX $modx
+ * @var array $scriptProperties
  *
  * @package modx
  * @subpackage processors.security.user
@@ -12,25 +19,28 @@ $modx->lexicon->load('user');
 
 /* get user */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+/** @var modUser $user */
 $user = $modx->getObject('modUser',$scriptProperties['id']);
 if (!$user) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
 /* if set, get groups for user */
 if (!empty($scriptProperties['getGroups'])) {
     $c = $modx->newQuery('modUserGroupMember');
-    $c->select('
-        modUserGroupMember.*,
-        UserGroupRole.name AS role_name,
-        UserGroup.name AS user_group_name
-    ');
+    $c->select($modx->getSelectColumns('modUserGroupMember','modUserGroupMember'));
+    $c->select(array(
+        'role_name' => 'UserGroupRole.name',
+        'user_group_name' => 'UserGroup.name',
+    ));
     $c->leftJoin('modUserGroupRole','UserGroupRole');
     $c->innerJoin('modUserGroup','UserGroup');
     $c->where(array(
         'member' => $user->get('id'),
     ));
+    $c->sortby('UserGroup.name','ASC');
     $members = $modx->getCollection('modUserGroupMember',$c);
 
     $data = array();
+    /** @var modUserGroupMember $member */
     foreach ($members as $member) {
         $roleName = $member->get('role_name');
         if ($member->get('role') == 0) { $roleName = $modx->lexicon('none'); }
@@ -40,6 +50,7 @@ if (!empty($scriptProperties['getGroups'])) {
             $member->get('member'),
             $member->get('role'),
             empty($roleName) ? '' : $roleName,
+            $user->get('primary_group') == $member->get('user_group') ? true : false,
         );
     }
     $user->set('groups','(' . $modx->toJSON($data) . ')');

@@ -12,27 +12,49 @@ MODx.grid.UserGroups = function(config) {
         title: ''
         ,id: 'modx-grid-user-groups'
         ,url: MODx.config.connectors_url+'security/group.php'
-        ,fields: ['usergroup','name','member','role','rolename']
-        ,columns: [
-            { header: _('user_group') ,dataIndex: 'name' ,width: 175 }
-            ,{
-                header: _('role')
-                ,dataIndex: 'rolename'
-                ,width: 175
+        ,fields: ['usergroup','name','member','role','rolename','primary_group']
+        ,columns: [{
+            header: _('user_group')
+            ,dataIndex: 'name'
+            ,width: 175
+        },{
+            header: _('role')
+            ,dataIndex: 'rolename'
+            ,width: 175
+        },{
+            header: _('primary_group')
+            ,width: 70
+            ,dataIndex: 'primary_group'
+            ,renderer: function change(v,md,r,ri,ci) {
+                var c = r.data.primary_group ? ' checked="checked"' : '';
+                return '<input type="radio" name="primary_group" value="'+r.data.usergroup+'" onclick="Ext.getCmp(\'modx-grid-user-groups\').setPrimaryGroupRd(this,\''+r.data.usergroup+'\','+ri+');" '+c+' />';
             }
-        ]
+        }]
         ,tbar: [{
             text: _('user_group_user_add')
             ,handler: this.addGroup
         }]
     });
     MODx.grid.UserGroups.superclass.constructor.call(this,config);
-    this.userRecord = new Ext.data.Record.create([{name: 'usergroup'}
-    ,{name:'name'},{name:'member'},{name:'role'},{name:'rolename'}]);
+    this.userRecord = new Ext.data.Record.create(['usergroup','name','member','role','rolename','primary_group']);
     this.addEvents('beforeUpdateRole','afterUpdateRole','beforeAddGroup','afterAddGroup');
+    this.on('render',this.setupPg,this);
 };
 Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
-    updateRole: function(btn,e) {
+
+    setupPg: function() {
+        var hd = Ext.getCmp('modx-user-primary-group');
+        
+    }
+    ,setPrimaryGroupRd: function(rd,id,ri) {
+        var hd = Ext.getCmp('modx-user-primary-group');
+        if (hd) {
+            hd.setValue(id);
+            var p = Ext.getCmp('modx-panel-user');
+            if (p) { p.markDirty(); }
+        }
+    }
+    ,updateRole: function(btn,e) {
         var r = this.menu.record;
         r.user = this.config.user;
         this.fireEvent('beforeUpdateRole',r);

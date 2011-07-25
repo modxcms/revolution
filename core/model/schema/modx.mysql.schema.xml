@@ -1010,6 +1010,7 @@
         <field key="remote_data" dbtype="text" phptype="json" null="true" />
         <field key="hash_class" dbtype="varchar" precision="100" phptype="string" null="false" default="hashing.modPBKDF2" />
         <field key="salt" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="primary_group" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
 
         <index alias="username" name="username" primary="false" unique="true" type="BTREE">
             <column key="username" length="" collation="A" null="false" />
@@ -1020,6 +1021,9 @@
         <index alias="remote_key" name="remote_key" primary="false" unique="false" type="BTREE">
             <column key="remote_key" length="" collation="A" null="false" />
         </index>
+        <index alias="primary_group" name="primary_group" primary="false" unique="false" type="BTREE">
+            <column key="primary_group" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="CreatedResources" class="modResource" local="id" foreign="createdby" cardinality="many" owner="local" />
         <aggregate alias="EditedResources" class="modResource" local="id" foreign="editedby" cardinality="many" owner="local" />
@@ -1027,6 +1031,7 @@
         <aggregate alias="PublishedResources" class="modResource" local="id" foreign="publishedby" cardinality="many" owner="local" />
         <aggregate alias="SentMessages" class="modUserMessage" local="id" foreign="sender" cardinality="many" owner="local" />
         <aggregate alias="ReceivedMessages" class="modUserMessage" local="id" foreign="recipient" cardinality="many" owner="local" />
+        <aggregate alias="PrimaryGroup" class="modUserGroup" local="primary_group" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Profile" class="modUserProfile" local="id" foreign="internalKey" cardinality="one" owner="local" />
         <composite alias="UserSettings" class="modUserSetting" local="id" foreign="user" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="member" cardinality="many" owner="local" />

@@ -29,6 +29,7 @@ $_lang['password_method_screen'] = 'Show the new password on screen.';
 $_lang['password_new'] = 'New Password';
 $_lang['password_notification'] = 'Password Notification';
 $_lang['password_old'] = 'Old Password';
+$_lang['primary_group'] = 'Primary Group';
 $_lang['profile_recent_resources'] = 'Recent Resources';
 $_lang['profile_recent_resources_desc'] = 'This is a list of your most recently edited Resources.';
 $_lang['remote_data'] = 'Remote Data';
