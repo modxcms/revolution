@@ -14,7 +14,7 @@ MODx.panel.Welcome = function(config) {
             ,id: 'modx-welcome-header'
             ,cls: 'modx-page-header'
             ,border: false
-        },{
+        }/*,{
             title: _('configcheck_title')
             ,contentEl: 'modx-config'
             ,style: 'padding: 0 0 10px;'
@@ -82,7 +82,7 @@ MODx.panel.Welcome = function(config) {
                     ,collapsed: true
                 }]
             }]
-        }]
+        }*/]
     });
     MODx.panel.Welcome.superclass.constructor.call(this,config);
     MODx.fireEvent('ready');

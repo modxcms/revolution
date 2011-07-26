@@ -25,4 +25,29 @@ class modDashboard extends xPDOSimpleObject {
         }
         return $defaultDashboard;
     }
+
+    /**
+     * Render the Dashboard
+     *
+     * @param modManagerController $controller
+     * @return string
+     */
+    public function render(modManagerController $controller) {
+        $c = $this->xpdo->newQuery('modDashboardWidgetPlacement');
+        $c->where(array(
+            'dashboard' => $this->get('id'),
+        ));
+        $c->sortby('rank','ASC');
+        $placements = $this->getMany('Placements',$c);
+        $output = array();
+        /** @var modDashboardWidgetPlacement $placement */
+        foreach ($placements as $placement) {
+            /** @var modDashboardWidget $widget */
+            $widget = $placement->getOne('Widget');
+            if ($widget) {
+                $output[] = $widget->getContent($controller);
+            }
+        }
+        return implode("\n",$output);
+    }
 }
