@@ -109,13 +109,13 @@
 
     <div class="modx-forgot-login">
     <form id="modx-fl-form" action="" method="post">
-       <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.email}display:none;{/if}">{$_lang.login_forget_your_login}</a>
-       <div id="modx-forgot-login-form" style="{if NOT $_post.email}display: none;{/if}">
+       <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.username_reset}display:none;{/if}">{$_lang.login_forget_your_login}</a>
+       <div id="modx-forgot-login-form" style="{if NOT $_post.username_reset}display: none;{/if}">
                       
            <div class="x-form-item">
-              <label for="modx-login-email" class="x-form-item-label">{$_lang.login_email_label}</label>
+              <label for="modx-login-username-reset" class="x-form-item-label">{$_lang.login_username}</label>
               <div class="x-form-element">
-                <input type="text" id="modx-login-email" name="email" class="x-form-text x-form-field" value="{$_post.email}" />
+                <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset}" />
               </div>
               <div class="x-form-clear-left"></div>
            </div>

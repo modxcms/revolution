@@ -159,7 +159,7 @@ class SecurityLoginManagerController extends modManagerController {
         $c->select(array('modUser.*','Profile.email','Profile.fullname'));
         $c->innerJoin('modUserProfile','Profile');
         $c->where(array(
-            'Profile.email' => $this->scriptProperties['email'],
+            'modUser.username' => $this->scriptProperties['username_reset'],
         ));
         $user = $this->modx->getObject('modUser',$c);
         if ($user) {
