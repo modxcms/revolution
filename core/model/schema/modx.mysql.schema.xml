@@ -408,6 +408,7 @@
         <field key="content" dbtype="mediumtext" phptype="string" />
         <field key="namespace" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="core:dashboards" index="index" />
+        <field key="size" dbtype="varchar" precision="255" phptype="string" null="false" default="half" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />

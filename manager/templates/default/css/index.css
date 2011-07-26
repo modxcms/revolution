@@ -1200,3 +1200,37 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 .modx-policy-permissions-grid td {
     cursor: pointer;
 }
+
+/* dashboard stuff */
+.dashboard-block {
+    float: left;
+    margin: 6px;
+    background-color: white;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.dashboard-block .body {
+    height: 300px;
+    overflow: auto;
+    padding: 10px;
+}
+.dashboard-block .title {
+    background-color: #eee;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+.dashboard-block-half {
+    width: 48%;
+}
+.dashboard-block-full {
+    width: 97%;
+    clear: both;
+    height: auto;
+}
+.dashboard-block-variable .body {
+    height: auto;
+}

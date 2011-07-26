@@ -71,6 +71,7 @@ abstract class modManagerController {
      * @return The class specified by $className
      */
     public static function getInstance(modX &$modx,$className,$config = array()) {
+        /** @var modManagerController $controller */
         $controller = new $className($modx,$config);
         $controller->initialize();
         return $controller;
@@ -164,6 +165,18 @@ abstract class modManagerController {
      */
     public function setPlaceholder($k,$v) {
         $this->modx->smarty->assign($k,$v);
+    }
+
+    /**
+     * Set an array of placeholders
+     *
+     * @param array $keys
+     * @return void
+     */
+    public function setPlaceholders($keys) {
+        foreach ($keys as $k => $v) {
+            $this->setPlaceholder($k,$v);
+        }
     }
 
     /**

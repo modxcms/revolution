@@ -2,7 +2,7 @@ MODx.panel.Dashboard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-dashboard'
-        ,url: MODx.config.connectors_url+'system/dashboard/group.php'
+        ,url: MODx.config.connectors_url+'system/dashboard.php'
         ,baseParams: {
             action: 'update'
         }
@@ -41,7 +41,7 @@ MODx.panel.Dashboard = function(config) {
                     xtype: 'hidden'
                     ,name: 'id'
                     ,id: 'modx-dashboard-id'
-                    ,value: config.dashboard
+                    ,value: config.record.id
                 },{
                     name: 'name'
                     ,id: 'modx-dashboard-name'
@@ -72,7 +72,7 @@ MODx.panel.Dashboard = function(config) {
                 },{
                     xtype: 'modx-grid-dashboard-widget-placements'
                     ,preventRender: true
-                    ,dashboard: config.dashboard
+                    ,dashboard: config.record.id
                     ,autoHeight: true
                     ,width: '97%'
                     ,listeners: {
@@ -137,8 +137,8 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
     }
     ,beforeSubmit: function(o) {
         Ext.apply(o.form.baseParams,{
-            //usergroups: Ext.getCmp('modx-grid-dashboard-usergroups').encode()
-            //,widgets: Ext.getCmp('modx-grid-dashboard-widgets').encode()
+            widgets: Ext.getCmp('modx-grid-dashboard-widget-placements').encode()
+            //,usergroups: Ext.getCmp('modx-grid-dashboard-usergroups').encode()
         });
     }
     ,success: function(o) {
@@ -146,8 +146,9 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             location.href = '?a='+MODx.actions['system/dashboards/update']+'&id='+o.result.object.id;
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
+            Ext.getCmp('modx-grid-dashboard-widget-placements').getStore().commitChanges();
             //Ext.getCmp('modx-grid-dashboard-usergroups').getStore().commitChanges();
-            //Ext.getCmp('modx-grid-dashboard-widgets').getStore().commitChanges();
+
         }
     }
 });
@@ -225,7 +226,19 @@ Ext.extend(MODx.grid.DashboardWidgetPlacements,MODx.grid.LocalGrid,{
     }
 
     ,unplaceWidget: function(btn,e) {
-        
+        var rec = this.getSelectionModel().getSelected();
+        var s = this.getStore();
+        var idx = s.indexOf(rec);
+        var total = s.getTotalCount();
+        var r,x;
+        for (x=idx;x<total;x++) {
+            r = s.getAt(x);
+            if (r) {
+                r.set('rank',r.get('rank')-1);
+                r.commit();
+            }
+        }
+        s.remove(rec);
     }
 
     ,placeWidget: function(btn,e) {
@@ -244,7 +257,7 @@ Ext.extend(MODx.grid.DashboardWidgetPlacements,MODx.grid.LocalGrid,{
         this.windows.placeWidget.setValues({
             dashboard: this.config.dashboard
         });
-        this.windows.placeWidget.show();
+        this.windows.placeWidget.show(btn);
     }
 });
 Ext.reg('modx-grid-dashboard-widget-placements',MODx.grid.DashboardWidgetPlacements);
@@ -265,6 +278,7 @@ MODx.window.DashboardWidgetPlace = function(config) {
             ,hiddenName: 'widget'
             ,id: 'modx-'+this.ident+'-widget'
             ,allowBlank: false
+            ,msgTarget: 'under'
         }]
     });
     MODx.window.DashboardWidgetPlace.superclass.constructor.call(this,config);
@@ -273,14 +287,19 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
     submit: function() {
         var f = this.fp.getForm();
         var fld = f.findField('widget');
+        var g = Ext.getCmp('modx-grid-dashboard-widget-placements');
+        var s = g.getStore();
+        if (s.find('widget',fld.getValue()) != -1) {
+            fld.markInvalid(_('dashboard_widget_err_placed'));
+            return false;
+        }
 
         if (id != '' && this.fp.getForm().isValid()) {
-            var g = Ext.getCmp('modx-grid-dashboard-widget-placements');
-            var s = g.getStore();
             var r = s.getTotalCount();
 
             if (this.fireEvent('success',{
-                id: fld.getValue()
+                widget: fld.getValue()
+                ,dashboard: g.config.dashboard
                 ,name: fld.getRawValue()
                 ,rank: r
             })) {

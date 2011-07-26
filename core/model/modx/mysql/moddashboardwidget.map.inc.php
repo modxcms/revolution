@@ -15,6 +15,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
     'content' => NULL,
     'namespace' => '',
     'lexicon' => 'core:dashboards',
+    'size' => 'half',
   ),
   'fieldMeta' => 
   array (
@@ -62,6 +63,14 @@ $xpdo_meta_map['modDashboardWidget']= array (
       'null' => false,
       'default' => 'core:dashboards',
       'index' => 'index',
+    ),
+    'size' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'half',
     ),
   ),
   'indexes' => 

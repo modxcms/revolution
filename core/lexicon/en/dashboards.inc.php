@@ -20,6 +20,7 @@ $_lang['dashboard_usergroup_add'] = 'Assign Dashboard to User Group';
 $_lang['dashboard_usergroup_remove'] = 'Remove Dashboard from User Group';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Are you sure you want to revert this User Group to using the default Dashboard?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Here is a list of all the User Groups using this Dashboard.';
+$_lang['dashboard_widget_err_placed'] = 'This widget is already placed in this Dashboard!';
 $_lang['dashboard_widgets.intro_msg'] = 'Here you can add, manage, and remove Widgets from this Dashboard. You can also drag and drop the rows in the grid to rearrange them.';
 $_lang['dashboard.intro_msg'] = 'Here you can update this Dashboard, assign and manage Widgets, and view the User Groups using it.';
 $_lang['dashboards'] = 'Dashboards';
@@ -31,7 +32,8 @@ $_lang['widget_unplace'] = 'Remove Widget';
 $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Below is a list of all the installed Dashboard Widgets you have.';
 
+$_lang['w_configcheck_desc'] = 'Configuration Check';
 $_lang['w_newsfeed_desc'] = 'Displays the MODX News Feed';
+$_lang['w_recentlyeditedresources_desc'] = 'Shows a list of the most recently edited resources by the user.';
 $_lang['w_securityfeed_desc'] = 'Displays the MODX Security Feed';
 $_lang['w_whosonline_desc'] = 'Shows a list of online users.';
-$_lang['w_recentlyeditedresources_desc'] = 'Shows a list of the most recently edited resources by the user.';

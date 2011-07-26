@@ -11,7 +11,6 @@
  * @package modx
  * @subpackage processors.system.dashboard
  */
-
 if (!$modx->hasPermission('dashboards')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('dashboards');
 
@@ -30,6 +29,31 @@ if ($dashboard->save() == false) {
     return $modx->error->failure($modx->lexicon('dashboard_err_save'));
 }
 
+/* assign widgets to this dashboard */
+if (isset($scriptProperties['widgets'])) {
+    /** @var array $widgets */
+    $widgets = is_array($scriptProperties['widgets']) ? $scriptProperties['widgets'] : $modx->fromJSON($scriptProperties['widgets']);
+    
+    $oldPlacements = $modx->getCollection('modDashboardWidgetPlacement',array(
+        'dashboard' => $dashboard->get('id'),
+    ));
+    /** @var $oldPlacement modDashboardWidgetPlacement */
+    foreach ($oldPlacements as $oldPlacement) {
+        $oldPlacement->remove();
+    }
+
+    /** @var array $widget */
+    foreach ($widgets as $widget) {
+        /** @var modDashboardWidgetPlacement $placement */
+        $placement = $modx->newObject('modDashboardWidgetPlacement');
+        $placement->set('dashboard',$dashboard->get('id'));
+        $placement->set('widget',$widget['widget']);
+        $placement->set('rank',$widget['rank']);
+        $placement->save();
+    }
+}
+
+/* manage usergroups attached to this dashboard */
 if (isset($scriptProperties['usergroups'])) {
     $userGroupIds = array();
     $userGroups = $modx->fromJSON($scriptProperties['usergroups']);
