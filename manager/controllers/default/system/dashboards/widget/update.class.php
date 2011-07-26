@@ -1,5 +1,9 @@
 <?php
 /**
+ * @package modx
+ * @subpackage manager.controllers
+ */
+/**
  * Loads the dashboard update page
  *
  * @package modx
@@ -22,21 +26,56 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
     }
 
     /**
+     * Get the active widget
+     * @return void
+     */
+    public function initialize() {
+        if (!empty($this->scriptProperties['id'])) {
+            $this->widget = $this->modx->getObject('modDashboardWidget',$this->scriptProperties['id']);
+        }
+    }
+
+    /**
      * Custom logic code here for setting placeholders, etc
      *
      * @param array $scriptProperties
      * @return array
      */
     public function process(array $scriptProperties = array()) {
-        if (empty($this->scriptProperties['id'])) return $this->failure($this->modx->lexicon('widget_err_ns'));
-        $this->widget = $this->modx->getObject('modDashboardWidget',$this->scriptProperties['id']);
         if (empty($this->widget)) return $this->failure($this->modx->lexicon('widget_err_nf'));
-        
-        $this->dashboard = $this->widget->getOne('Dashboard');
         $this->widgetArray = $this->widget->toArray();
+        $this->widgetArray['dashboards'] = $this->getDashboards();
 
         return $this->widgetArray;
+    }
 
+    /**
+     * Get the Dashboards this Widget has been placed on
+     * @return array
+     */
+    public function getDashboards() {
+        $list = array();
+        $c = $this->modx->newQuery('modDashboardWidgetPlacement');
+        $c->innerJoin('modDashboard','Dashboard');
+        $c->where(array(
+            'widget' => $this->widget->get('id'),
+        ));
+        $c->sortby('Dashboard.name','ASC');
+        $c->select($this->modx->getSelectColumns('modDashboardWidgetPlacement','modDashboardWidgetPlacement'));
+        $c->select(array(
+            'Dashboard.name',
+            'Dashboard.description',
+        ));
+        $placements = $this->widget->getMany('Placements',$c);
+        /** @var modDashboardWidgetPlacement $placement */
+        foreach ($placements as $placement) {
+            $list[] = array(
+                $placement->get('dashboard'),
+                $placement->get('name'),
+                $placement->get('description'),
+            );
+        }
+        return $list;
     }
 
     /**
@@ -44,8 +83,9 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboard.widget.js");
-        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/widget/update.js');
+        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl."assets/modext/widgets/system/modx.panel.dashboard.widget.js");
+        $this->addJavascript($mgrUrl.'assets/modext/sections/system/dashboards/widget/update.js');
         $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-dashboard-widget-update"
@@ -76,6 +116,13 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return array
      */
     public function getLanguageTopics() {
-        return array('dashboards','user');
+        $topics = array('dashboards','user');
+        if ($this->widget) {
+            $lexicon = $this->widget->get('lexicon');
+            if (!empty($lexicon) && $lexicon != 'core:dashboards') {
+                $topics[] = $lexicon;
+            }
+        }
+        return $topics;
     }
 }

@@ -233,6 +233,10 @@ class modX extends xPDO {
      */
     public $error = null;
     /**
+     * @var modManagerController A controller object that represents a page in the manager
+     */
+    public $controller = null;
+    /**
      * @var array An array of regex patterns regulary cleansed from content.
      */
     public $sanitizePatterns = array(

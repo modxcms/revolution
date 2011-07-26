@@ -4,12 +4,13 @@
  * @subpackage manager.controllers
  */
 /**
- * Loads the dashboard management page
+ * Loads the dashboard create page
  *
  * @package modx
  * @subpackage manager.controllers
  */
-class SystemDashboardsManagerController extends modManagerController {
+class SystemDashboardsCreateManagerController extends modManagerController {
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -25,8 +26,7 @@ class SystemDashboardsManagerController extends modManagerController {
      * @return array
      */
     public function process(array $scriptProperties = array()) {
-        $placeholders = array();
-        return $placeholders;
+        return array();
 
     }
 
@@ -35,16 +35,13 @@ class SystemDashboardsManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.grid.dashboard.widgets.js");
-        $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboards.js");
-        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/list.js');
-        $this->addHtml('<script type="text/javascript">
-        Ext.onReady(function() {
-            MODx.load({
-                xtype: "modx-page-dashboards"
-            });
-        });
-        </script>');
+        $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboard.js");
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/create.js');
+        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
+    MODx.load({
+        xtype: "modx-page-dashboard-create"
+    });
+});</script>');
     }
 
     /**
@@ -61,7 +58,7 @@ class SystemDashboardsManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/dashboards/index.tpl';
+        return 'system/dashboards/create.tpl';
     }
 
     /**
@@ -69,6 +66,6 @@ class SystemDashboardsManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('dashboards');
+        return array('dashboards','user');
     }
 }

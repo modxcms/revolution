@@ -73,8 +73,20 @@ abstract class modManagerController {
     public static function getInstance(modX &$modx,$className,$config = array()) {
         /** @var modManagerController $controller */
         $controller = new $className($modx,$config);
+        if (!empty($_REQUEST)) {
+            $controller->setProperties(array_merge($_GET,$_POST));
+        }
         $controller->initialize();
         return $controller;
+    }
+
+    /**
+     * Sets the properties array for this controller
+     * @param array $properties
+     * @return void
+     */
+    public function setProperties(array $properties) {
+        $this->scriptProperties = $properties;
     }
 
     /**
@@ -108,7 +120,6 @@ abstract class modManagerController {
         $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
             'action' => $this->config,
         ));
-        $this->scriptProperties = array_merge($_GET,$_POST);
         $placeholders = $this->process($this->scriptProperties);
         if (!empty($placeholders) && !$this->isFailure && is_array($placeholders)) {
             foreach ($placeholders as $k => $v) {

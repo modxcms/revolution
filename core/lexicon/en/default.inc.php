@@ -91,6 +91,7 @@ $_lang['create_user_group'] = 'Create User Group';
 $_lang['created'] = 'Created';
 $_lang['createdon'] = 'Creation date';
 $_lang['current'] = 'Current';
+$_lang['dashboard'] = 'Dashboard';
 $_lang['data_err_load'] = 'Error loading data.';
 $_lang['date'] = 'Date';
 $_lang['datechanged'] = 'Date changed';

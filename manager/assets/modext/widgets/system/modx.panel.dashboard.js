@@ -36,8 +36,6 @@ MODx.panel.Dashboard = function(config) {
                 ,id: 'modx-dashboard-form'
                 ,labelWidth: 150
                 ,items: [{
-                    html: '<p>'+_('dashboard.intro_msg')+'</p>'
-                },{
                     xtype: 'hidden'
                     ,name: 'id'
                     ,id: 'modx-dashboard-id'
@@ -110,8 +108,10 @@ MODx.panel.Dashboard = function(config) {
     MODx.panel.Dashboard.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
-    setup: function() {
-        if (this.config.id === '' || this.config.id == undefined) {
+    initialized: false
+    ,setup: function() {
+        if (this.initialized) { return false; }
+        if (Ext.isEmpty(this.config.record.id)) {
             this.fireEvent('ready');
             return false;
         }
@@ -131,22 +131,30 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             g.getStore().loadData(d);
         }
 
-
         this.fireEvent('ready',this.config.record);
         MODx.fireEvent('ready');
+        this.initialized = true;
     }
     ,beforeSubmit: function(o) {
-        Ext.apply(o.form.baseParams,{
-            widgets: Ext.getCmp('modx-grid-dashboard-widget-placements').encode()
-            //,usergroups: Ext.getCmp('modx-grid-dashboard-usergroups').encode()
-        });
+        var bp = {};
+        var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
+        if (wg) {
+            bp['widgets'] = wg.encode();
+        }
+        /*
+        var ug = Ext.getCmp('modx-grid-dashboard-usergroups');
+        if (ug) {
+            bp['usergroups'] = ug.encode();
+        }*/
+        Ext.apply(o.form.baseParams,bp);
     }
     ,success: function(o) {
-        if (Ext.isEmpty(this.config['dashboard'])) {
-            location.href = '?a='+MODx.actions['system/dashboards/update']+'&id='+o.result.object.id;
+        if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
+            location.href = '?a='+MODx.action['system/dashboards/update']+'&id='+o.result.object.id;
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
-            Ext.getCmp('modx-grid-dashboard-widget-placements').getStore().commitChanges();
+            var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
+            if (wg) { wg.getStore().commitChanges(); }
             //Ext.getCmp('modx-grid-dashboard-usergroups').getStore().commitChanges();
 
         }
@@ -165,7 +173,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
         id: 'modx-grid-dashboard-widget-placements'
         ,url: MODx.config.connectors_url+'system/dashboard/widget/placement.php'
         ,action: 'getList'
-        ,fields: ['dashboard','widget','rank','name','description','description_trans']
+        ,fields: ['dashboard','widget','rank','name','name_trans','description','description_trans']
         ,autoHeight: true
         ,primaryKey: 'widget'
         ,plugins: [this.exp,new Ext.ux.dd.GridDragDropRowOrder({
@@ -178,7 +186,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
         })]
         ,columns: [this.exp,{
             header: _('widget')
-            ,dataIndex: 'name'
+            ,dataIndex: 'name_trans'
             ,width: 600
         },{
             header: _('rank')
@@ -193,7 +201,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
         }]
     });
     MODx.grid.DashboardWidgetPlacements.superclass.constructor.call(this,config);
-    this.propRecord = Ext.data.Record.create(['dashboard','widget','rank','name','description','description_trans']);
+    this.propRecord = Ext.data.Record.create(['dashboard','widget','rank','name','name_trans','description','description_trans']);
 };
 Ext.extend(MODx.grid.DashboardWidgetPlacements,MODx.grid.LocalGrid,{
     getMenu: function() {
@@ -293,15 +301,22 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
             fld.markInvalid(_('dashboard_widget_err_placed'));
             return false;
         }
+        var rank = s.getTotalCount();
 
+        var fldStore = fld.getStore();
+        var fldRi = fldStore.find('id',fld.getValue());
+        var rec = fldStore.getAt(fldRi);
+        
         if (id != '' && this.fp.getForm().isValid()) {
-            var r = s.getTotalCount();
 
             if (this.fireEvent('success',{
                 widget: fld.getValue()
                 ,dashboard: g.config.dashboard
-                ,name: fld.getRawValue()
-                ,rank: r
+                ,name: rec.data.name
+                ,name_trans: rec.data.name_trans
+                ,description: rec.data.description
+                ,description_trans: rec.data.description_trans
+                ,rank: rank
             })) {
                 this.fp.getForm().reset();
                 this.hide();
@@ -422,13 +437,13 @@ MODx.combo.DashboardWidgets = function(config) {
         ,hiddenName: 'widget'
         ,displayField: 'name'
         ,valueField: 'id'
-        ,fields: ['id','name','description','description_trans']
+        ,fields: ['id','name','name_trans','description','description_trans']
         ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connectors_url+'system/dashboard/widget.php'
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
-            ,'<h4 class="modx-combo-title">{name}</h4>'
+            ,'<h4 class="modx-combo-title">{name_trans}</h4>'
             ,'<p class="modx-combo-desc">{description_trans}</p>'
             ,'</div></tpl>')
     });
