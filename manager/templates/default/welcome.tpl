@@ -3,4 +3,3 @@
 <div class="dashboard">
 {$dashboard}
 </div>
-<p class="clear"></p>

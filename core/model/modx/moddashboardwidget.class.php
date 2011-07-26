@@ -18,6 +18,19 @@
  * @package modx
  */
 class modDashboardWidget extends xPDOSimpleObject {
+    public function toArray($keyPrefix = '',$rawValues = false,$excludeLazy = false) {
+        $array = parent::toArray($keyPrefix,$rawValues,$excludeLazy);
+
+        if (!empty($this->xpdo->lexicon) && $this->xpdo->lexicon instanceof modLexicon) {
+            if ($this->get('lexicon') != 'core:dashboards') {
+                $this->xpdo->lexicon->load($this->get('lexicon'));
+            }
+            $array['name_trans'] = $this->xpdo->lexicon->exists($this->get('name')) ? $this->xpdo->lexicon($this->get('name')) : $this->get('name');
+            $array['description_trans'] = $this->xpdo->lexicon->exists($this->get('description')) ? $this->xpdo->lexicon($this->get('description')) : $this->get('description');
+        }
+        return $array;
+
+    }
     /**
      * Return the output for the widget, processed by type
      *

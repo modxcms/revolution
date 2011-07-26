@@ -506,5 +506,27 @@ $collection['102']->fromArray(array (
   'assets' => '',
   'help_url' => 'Dashboards',
 ), '', true, true);
+$collection['103']= $xpdo->newObject('modAction');
+$collection['103']->fromArray(array (
+  'id' => 103,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/widget/update',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboard+Widgets',
+), '', true, true);
+$collection['104']= $xpdo->newObject('modAction');
+$collection['104']->fromArray(array (
+  'id' => 104,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/widget/create',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboard+Widgets',
+), '', true, true);
 
 return $collection;
