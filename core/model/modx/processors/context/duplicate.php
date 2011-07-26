@@ -46,6 +46,22 @@ foreach ($settings as $setting) {
     $newSetting->save();
 }
 
+/* duplicate access permissions */
+$permissions = $modx->getCollection('modAccessContext', array(
+    'target' => $oldContext->get('key')
+));
+foreach ($permissions as $permission) {
+    $newPermission = $modx->newObject('modAccessContext');
+    $newPermission->fromArray($permission->toArray(),'',false,true);
+    $newPermission->set('target', $newContext->get('key'));
+    $newPermission->save();
+}
+
+/* flush permissions */
+if ($modx->getUser()) {
+    $modx->user->getAttributes(array(), '', true);
+}
+
 /* now duplicate resources by level */
 $resources = $modx->getCollection('modResource',array(
     'context_key' => $oldContext->get('key'),
@@ -62,4 +78,5 @@ if (count($resources) > 0) {
         ));
     }
 }
+
 return $modx->error->success('',$newContext);
