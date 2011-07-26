@@ -77,6 +77,12 @@ MODx.panel.UserGroup = function(config) {
                         ,addNone: true
                         ,exclude: config.usergroup
                     }
+                },{
+                    name: 'dashboard'
+                    ,id: 'modx-usergroup-dashboard'
+                    ,xtype: 'modx-combo-dashboard'
+                    ,fieldLabel: _('dashboard')
+                    ,anchor: '97%'
                 }]
             },{
                 title: _('users')

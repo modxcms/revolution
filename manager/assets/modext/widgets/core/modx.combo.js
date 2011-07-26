@@ -683,3 +683,25 @@ MODx.combo.Action = function(config) {
 };
 Ext.extend(MODx.combo.Action,MODx.combo.ComboBox);
 Ext.reg('modx-combo-action',MODx.combo.Action);
+
+MODx.combo.Dashboard = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'dashboard'
+        ,hiddenName: 'dashboard'
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id','name','description']
+        ,listWidth: 400
+        ,pageSize: 20
+        ,url: MODx.config.connectors_url+'system/dashboard.php'
+        ,tpl: new Ext.XTemplate('<tpl for=".">'
+            ,'<div class="x-combo-list-item">'
+            ,'<h4 class="modx-combo-title">{name}</h4>'
+            ,'<p class="modx-combo-desc">{description}</p>'
+            ,'</div></tpl>')
+    });
+    MODx.combo.Dashboard.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Dashboard,MODx.combo.ComboBox);
+Ext.reg('modx-combo-dashboard',MODx.combo.Dashboard);

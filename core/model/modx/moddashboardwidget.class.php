@@ -47,6 +47,8 @@ class modDashboardWidget extends xPDOSimpleObject {
         $namespace = $this->getOne('Namespace');
         /** @var string $content */
         $content = $this->get('content');
+        /** @var modDashboardWidgetClass $widget */
+        $widget = null;
         switch (strtolower($this->get('type'))) {
             /* file/class-based widget */
             case 'file':
@@ -68,30 +70,102 @@ class modDashboardWidget extends xPDOSimpleObject {
                     if (class_exists($className)) { /* is a class-based widget */
                         /** @var modDashboardWidgetClass $widget */
                         $widget = new $className($this->xpdo,$this,$controller);
-                        if (!empty($namespace)) {
-                            $widget->setNamespace($namespace);
-                        }
-                        $content = $widget->getContent();
                     } else { /* just a standard file with a return */
-                        $content = $className;
+                        $widget = new modDashboardFileWidget($this->xpdo,$this,$controller);
+                        $widget->setContent($className);
                     }
                 }
                 break;
             /* Snippet widget */
             case 'snippet':
-                /** @var modSnippet $snippet */
-                $snippet = $this->xpdo->newObject('modSnippet');
-                $snippet->setContent($this->get('content'));
-                $snippet->setCacheable(false);
-                $content = $snippet->process(array(
-                    'controller' => $controller,
-                ));
+                $widget = new modDashboardSnippetWidget($this->xpdo,$this,$controller);
+                break;
+            /* PHP (Snippet) widget */
+            case 'php':
+                $widget = new modDashboardPhpWidget($this->xpdo,$this,$controller);
                 break;
             /* HTML/static content widget */
             case 'html':
             default:
+                $widget = new modDashboardHtmlWidget($this->xpdo,$this,$controller);
                 break;
 
+        }
+        
+        if (!empty($namespace)) {
+            $widget->setNamespace($namespace);
+        }
+
+        return $widget->process();
+    }
+}
+
+/**
+ * A file-based widget that returns only the content of its include.
+ * 
+ * @package modx
+ * @subpackage dashboard
+ */
+class modDashboardFileWidget extends modDashboardWidgetClass {
+    public function render() {
+        return $this->content;
+    }
+}
+
+/**
+ * A widget that contains only HTML.
+ * 
+ * @package modx
+ * @subpackage dashboard
+ */
+class modDashboardHtmlWidget extends modDashboardWidgetClass {
+    public function render() {
+        return $this->widget->get('content');
+    }
+}
+
+/**
+ * A widget that runs its content as PHP in Snippet-like format to get its content.
+ * @package modx
+ * @subpackage dashboard
+ */
+class modDashboardPhpWidget extends modDashboardWidgetClass {
+    public function render() {
+        $code = $this->widget->get('content');
+        if (strpos($code,'<?php') === false) {
+            $code = "<?php\n".$code;
+        }
+
+        /** @var modSnippet $snippet */
+        $snippet = $this->modx->newObject('modSnippet');
+        $snippet->set('id','dashboard-widget-'.$this->widget->get('id'));
+        $snippet->setContent($code);
+        $snippet->setCacheable(false);
+        $content = $snippet->process(array(
+            'controller' => $this->controller,
+        ));
+        return $content;
+    }
+}
+
+/**
+ * A Snippet-based widget that loads a MODX Snippet to return its content.
+ * @package modx
+ * @subpackage dashboard
+ */
+class modDashboardSnippetWidget extends modDashboardWidgetClass {
+    public function render() {
+        /** @var modSnippet $snippet */
+        $snippet = $this->modx->getObject('modSnippet',array(
+            'name' => $this->widget->get('content'),
+        ));
+        if ($snippet) {
+            $snippet->setCacheable(false);
+            $content = $snippet->process(array(
+                'controller' => $this->controller,
+            ));
+        } else {
+            $content = '';
         }
         return $content;
     }
@@ -133,6 +207,10 @@ abstract class modDashboardWidgetClass {
      * @var string
      */
     public $cssBlockClass = '';
+    /**
+     * @var string
+     */
+    public $content = '';
 
     /**
      * @param xPDO|modX $modx A reference to the modX instance
@@ -145,13 +223,17 @@ abstract class modDashboardWidgetClass {
         $this->controller =& $controller;
     }
 
+    public function setContent($content) {
+        $this->content = $content;
+    }
+
     /**
      * Renders the content of the block in the appropriate size
      * @return string
      */
-    public function getContent() {
+    public function process() {
         $output = $this->render();
-        $widgetArray = $this->toArray();
+        $widgetArray = $this->widget->toArray();
         $widgetArray['content'] = $output;
         $widgetArray['class'] = $this->cssBlockClass;
         $output = $this->getFileChunk('dashboard/block.tpl',$widgetArray);
