@@ -27,6 +27,15 @@
      */
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/modx.panel.welcome.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/welcome.js');
+        $this->addHtml('<script type="text/javascript">
+Ext.onReady(function() {
+    MODx.load({
+        xtype: "modx-page-welcome"
+    });
+});
+</script>');
         if ($this->showWelcomeScreen) {
             $url = $this->modx->getOption('welcome_screen_url',null,'http://misc.modx.com/revolution/welcome.20.html');
             $this->addHtml('<script type="text/javascript">

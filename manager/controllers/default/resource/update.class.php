@@ -18,6 +18,9 @@ class ResourceUpdateManagerController extends ResourceManagerController {
     /** @var string The URL of the resource on the front-end */
     public $previewUrl = '';
 
+    /** @var modResource $resource */
+    public $resource;
+
     /**
      * Register custom CSS/JS for the page
      * @return void
@@ -68,7 +71,6 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         if (!$this->resource->checkPolicy('save')) {
             $this->canSave = false;
-            //return $this->failure($this->modx->lexicon('access_denied'));
         }
         return true;
     }

@@ -89,6 +89,8 @@ class modManagerResponse extends modResponse {
             $c = new $className($this->modx,$this->action);
             /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
             $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
+            $this->modx->controller->setProperties(array_merge($_GET,$_POST));
+            $this->modx->controller->initialize();
         } catch (Exception $e) {
             die($e->getMessage());
         }

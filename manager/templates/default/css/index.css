@@ -111,8 +111,6 @@ hr {
     height: 100%;
     overflow: auto;
 }
-#modx-content-page {
-}
 
 #modx-container {
     height: 100%;
@@ -1202,6 +1200,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 }
 
 /* dashboard stuff */
+.dashboard {
+    overflow: auto;
+}
 .dashboard-block {
     float: left;
     margin: 6px;
@@ -1212,9 +1213,10 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
     border-radius: 5px;
 }
 .dashboard-block .body {
-    height: 300px;
+    max-height: 300px;
     overflow: auto;
     padding: 10px;
+    height: auto;
 }
 .dashboard-block .title {
     background-color: #eee;

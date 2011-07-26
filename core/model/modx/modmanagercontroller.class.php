@@ -73,10 +73,6 @@ abstract class modManagerController {
     public static function getInstance(modX &$modx,$className,$config = array()) {
         /** @var modManagerController $controller */
         $controller = new $className($modx,$config);
-        if (!empty($_REQUEST)) {
-            $controller->setProperties(array_merge($_GET,$_POST));
-        }
-        $controller->initialize();
         return $controller;
     }
 
@@ -730,8 +726,8 @@ abstract class modExtraManagerController extends modManagerController {
         $className = self::getControllerClassName($action,$config['namespace']);
         $classPath = $config['namespace_path'].'controllers/'.$action.'.class.php';
         require_once $classPath;
+        /** @var modManagerController $controller */
         $controller = new $className($modx,$config);
-        $controller->initialize();
         return $controller;
     }
 
