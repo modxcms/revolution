@@ -46,10 +46,6 @@ $list = array();
 /** @var modDashboardWidget $widget */
 foreach ($widgets as $widget) {
     $widgetArray = $widget->toArray();
-    if ($widget->get('lexicon') != 'core:dashboards') {
-        $modx->lexicon->load($widget->get('lexicon'));
-    }
-    $widgetArray['description_trans'] = $modx->lexicon($widget->get('description'));
     $widgetArray['cls'] = 'pupdate premove';
     $list[] = $widgetArray;
 }
