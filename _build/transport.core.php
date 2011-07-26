@@ -355,8 +355,8 @@ $collection = array ();
 include MODX_BUILD_DIR . 'data/transport.core.dashboards.php';
 $attributes = array (
     xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-    xPDOTransport::UNIQUE_KEY => array ('name'),
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => array ('id'),
 );
 foreach ($collection as $c) {
     $package->put($c, $attributes);
@@ -364,6 +364,32 @@ foreach ($collection as $c) {
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default dashboards.'); flush();
 unset ($collection, $c, $attributes);
+
+/* modDashboardWidget */
+$widgets = include MODX_BUILD_DIR . 'data/transport.core.dashboard_widgets.php';
+if (is_array($widgets)) {
+    $attributes = array (
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => array ('name'),
+    );
+    $ct = count($widgets);
+    $idx = 0;
+    foreach ($widgets as $widget) {
+        $idx++;
+        if ($idx == $ct) {
+            $attributes['resolve'][] = array (
+                'type' => 'php',
+                'source' => MODX_BUILD_DIR . 'resolvers/resolve.dashboardwidgets.php',
+            );
+        }
+        $package->put($widget, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($widgets).' default dashboard widgets.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load dashboard widgets!'); flush();
+}
+unset ($widgets,$widget,$attributes,$ct,$idx);
 
 /* modUserGroupRole */
 $collection = array ();

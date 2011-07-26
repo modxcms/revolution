@@ -137,7 +137,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     ,removeWidget: function() {
         MODx.msg.confirm({
             title: _('widget_remove')
-            ,text: _('widget_confirm_remove')
+            ,text: _('widget_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'remove'

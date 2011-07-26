@@ -46,6 +46,7 @@ $_lang['widget_lexicon_desc'] = 'The Lexicon Topic to load with this Widget. Use
 $_lang['widget_name_desc'] = 'The name, or Lexicon Entry key, of the Widget.';
 $_lang['widget_new'] = 'New Widget';
 $_lang['widget_remove'] = 'Remove Widget';
+$_lang['widget_remove_confirm'] = 'Are you sure you want to remove this Dashboard Widget? This is permanent, and will remove the Widget from all Dashboards.';
 $_lang['widget_namespace'] = 'Namespace';
 $_lang['widget_namespace_desc'] = 'The Namespace that this widget will be loaded into. Useful for custom paths.';
 $_lang['widget_php'] = 'Inline PHP Widget';
