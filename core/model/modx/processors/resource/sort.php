@@ -13,12 +13,23 @@ $modx->lexicon->load('resource', 'context');
 $data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
 $nodes = array();
-getNodesFormatted($nodes,$data);
+$contexts = array();
+getNodesFormatted($nodes,$data,0,$contexts);
 
 $modx->invokeEvent('OnResourceBeforeSort',array(
     'nodes' => &$nodes,
 ));
 
+/* sort contexts */
+foreach($contexts as $key => $value) {
+    $context = $modx->getObject('modContext',array(
+        'key' => $value
+    ));
+    if ($context !== null) {
+        $context->set('rank', $key);
+        $context->save();
+    }
+}
 /* readjust cache */
 $nodeErrors = array();
 $modifiedNodes = array();
@@ -103,8 +114,9 @@ $modx->cacheManager->refresh(array(
 
 return $modx->error->success();
 
-function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
+function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0,&$ar_contexts = array()) {
     $order = 0;
+    $previous_context = !isset($previous_context) ? null : $previous_context;
     foreach ($cur_level as $id => $children) {
         $ar = explode('_',$id);
         if ($ar[1] != '0') {
@@ -116,6 +128,11 @@ function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
                 'order' => $order,
             );
             $order++;
+        } else {
+            if ($previous_context !== $ar[0]) {
+                $ar_contexts[] = $ar[0];
+            }
+            $previous_context = $ar[0];
         }
         getNodesFormatted($ar_nodes,$children,$id);
     }

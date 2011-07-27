@@ -380,15 +380,19 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,_handleDrop:  function(e){
         var dropNode = e.dropNode;
         var targetParent = e.target;
-
-        if (targetParent.findChild('id',dropNode.attributes.id) !== null) {return false;}        
-        var ap = true;
-        if (targetParent.attributes.type == 'context' && e.point != 'append') {
-            ap = false;
-        }        
+        
+        if (targetParent.findChild('id',dropNode.attributes.id) !== null) {return false;}
+        
+        if (dropNode.attributes.type == 'modContext' && (targetParent.getDepth() > 1 || (targetParent.attributes.id == targetParent.attributes.pk + '_0' && e.point == 'append'))) {
+        	return false;
+        }
+        
+        if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
+        	return false;
+        }
+        
         return dropNode.attributes.text != 'root' && dropNode.attributes.text !== '' 
-            && targetParent.attributes.text != 'root' && targetParent.attributes.text !== ''
-            && ap;
+            && targetParent.attributes.text != 'root' && targetParent.attributes.text !== '';
     }
     
     ,quickCreate: function(itm,e,cls,ctx,p) {

@@ -19,7 +19,7 @@ if (!$oldContext) {
 }
 
 /* make sure the new key is a valid PHP identifier with no underscore characters */
-if (empty($scriptProperties['newkey']) || !preg_match('/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x7f-\xff]*$/', $scriptProperties['newkey'])) $modx->error->addField('newkey', $modx->lexicon('context_err_ns_key'));
+if (empty($scriptProperties['newkey']) || !preg_match('/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x2d-\x2f\x7f-\xff]*$/', $scriptProperties['newkey'])) $modx->error->addField('newkey', $modx->lexicon('context_err_ns_key'));
 
 $alreadyExists = $modx->getCount('modContext',array('key' => $scriptProperties['newkey']));
 if ($alreadyExists > 0) $modx->error->addField('newkey',$modx->lexicon('context_err_ae'));
