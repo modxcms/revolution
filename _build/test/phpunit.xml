@@ -14,7 +14,16 @@
         </testsuite>
         <testsuite name="Model">
             <file>Tests/Model/modXTest.php</file>
-            <!--<directory>Tests/Model/Error</directory>-->
+            <directory>Tests/Model/Element</directory>
+            <directory>Tests/Model/Error</directory>
+            <directory>Tests/Model/Filters</directory>
+            <directory>Tests/Model/Hashing</directory>
+            <directory>Tests/Model/Mail</directory>
+            <directory>Tests/Model/Registry</directory>
+            <directory>Tests/Model/Resource</directory>
+            <directory>Tests/Model/REST</directory>
+            <directory>Tests/Model/Transport</directory>
+            <directory>Tests/Model/Validation</directory>
         </testsuite>
         <testsuite name="Processors">
             <!--<directory>Tests/Processors/Browser</directory>-->

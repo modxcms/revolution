@@ -30,6 +30,9 @@
  * @group Element
  * @group Snippet
  * @group SnippetProcessors
+ * @group modElement
+ * @group modScript
+ * @group modSnippet
  */
 class SnippetProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/snippet/';

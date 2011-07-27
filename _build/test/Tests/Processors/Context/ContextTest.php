@@ -29,6 +29,7 @@
  * @group Processors
  * @group Context
  * @group ContextProcessors
+ * @group modContext
  */
 class ContextProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'context/';

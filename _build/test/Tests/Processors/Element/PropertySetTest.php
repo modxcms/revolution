@@ -30,6 +30,8 @@
  * @group Element
  * @group PropertySet
  * @group PropertySetProcessors
+ * @group modElement
+ * @group modPropertySet
  */
 class PropertySetProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/propertyset/';

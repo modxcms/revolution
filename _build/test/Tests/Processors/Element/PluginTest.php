@@ -30,6 +30,9 @@
  * @group Element
  * @group Plugin
  * @group PluginProcessors
+ * @group modElement
+ * @group modScript
+ * @group modPlugin
  */
 class PluginProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/plugin/';

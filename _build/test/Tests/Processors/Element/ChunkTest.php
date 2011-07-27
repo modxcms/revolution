@@ -30,6 +30,8 @@
  * @group Element
  * @group Chunk
  * @group ChunkProcessors
+ * @group modElement
+ * @group modChunk
  */
 class ChunkProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/chunk/';

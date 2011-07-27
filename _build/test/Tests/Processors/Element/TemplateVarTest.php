@@ -30,6 +30,8 @@
  * @group Element
  * @group TemplateVar
  * @group TemplateVarProcessors
+ * @group modTemplateVar
+ * @group modTemplate
  */
 class TemplateVarProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/tv/';

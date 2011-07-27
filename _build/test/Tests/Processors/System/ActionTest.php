@@ -30,6 +30,7 @@
  * @group System
  * @group Action
  * @group ActionProcessors
+ * @group modAction
  */
 class ActionProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'system/action/';
