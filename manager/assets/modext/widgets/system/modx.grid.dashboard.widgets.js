@@ -122,7 +122,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'removeMultiple'
-                ,users: cs
+                ,widgets: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {

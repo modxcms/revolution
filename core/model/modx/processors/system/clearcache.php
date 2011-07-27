@@ -32,6 +32,7 @@ if ($publishing) {
     $partitions['auto_publish'] = array('contexts' => array_diff($contextKeys, array('mgr')));
 }
 
+$partitions['mgr'] = array();
 $partitions['system_settings'] = array();
 $partitions['context_settings'] = array('contexts' => $contextKeys);
 if (!isset($scriptProperties['elements']) || $scriptProperties['elements']) {
@@ -54,7 +55,7 @@ if (isset($scriptProperties['paths'])) {
         foreach ($paths as $path) {
             $fullPath = $modx->cacheManager->getCachePath() . $path;
             if (is_dir($fullPath)) {
-                $pathResults[$path] = $modx->cacheManager->deleteTree($fullPath);
+                $pathResults[$path] = $modx->cacheManager->deleteTree($fullPath,array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php','.tpl.php')));
             } elseif (is_file($fullPath)) {
                 $pathResults[$path] = @unlink($fullPath);
             } else {

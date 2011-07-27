@@ -211,6 +211,7 @@ abstract class modManagerController {
      * @return mixed|string
      */
     public function loadController($controller,$coreOnly = false) {
+        /** @var modX $modx */
         $modx =& $this->modx;
         $paths = $this->getControllersPaths($coreOnly);
         $o = '';
