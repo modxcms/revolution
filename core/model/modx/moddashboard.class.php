@@ -27,6 +27,35 @@ class modDashboard extends xPDOSimpleObject {
     }
 
     /**
+     * Override xPDOObject::remove() to revert to the default dashboard any user groups using this Dashboard
+     *
+     * @see xPDOObject::remove()
+     * @param array $ancestors
+     * @return boolean
+     */
+    public function remove(array $ancestors= array ()) {
+        $dashboardId = $this->get('id');
+        $removed = parent::remove($ancestors);
+        if ($removed) {
+            $defaultDashboard = modDashboard::getDefaultDashboard($this->xpdo);
+            if (empty($defaultDashboard)) {
+                /** @var modDashboard $defaultDashboard */
+                $defaultDashboard = $this->xpdo->newObject('modDashboard');
+                $defaultDashboard->set('id',0);
+            }
+            $userGroups = $this->xpdo->getCollection('modUserGroup',array(
+                'dashboard' => $dashboardId,
+            ));
+            /** @var modUserGroup $userGroup */
+            foreach ($userGroups as $userGroup) {
+                $userGroup->set('dashboard',$defaultDashboard->get('id'));
+                $userGroup->save();
+            }
+        }
+        return $removed;
+    }
+
+    /**
      * Render the Dashboard
      *
      * @param modManagerController $controller

@@ -133,7 +133,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
                     ,handler: this.updateDashboard
                 });
             }
-            if (p.indexOf('premove') != -1) {
+            if (p.indexOf('premove') != -1 && r.data.id != 1 && r.data.name != 'Default') {
                 if (m.length > 0) m.push('-');
                 m.push({
                     text: _('dashboard_remove')
