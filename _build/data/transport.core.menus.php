@@ -2,20 +2,66 @@
 /**
  * Adds all top Menu items to build
  *
+ * @var xPDO $xpdo
+ * 
  * @package modx
  * @subpackage build
  */
 $menus = array();
 
-/* ***************** SITE MENU ***************** */
+/* ***************** DASHBOARD MENU ***************** */
+
 $menus[0]= $xpdo->newObject('modMenu');
 $menus[0]->fromArray(array (
-  'text' => 'site',
+  'text' => 'dashboard',
   'parent' => '',
   'action' => 0,
   'description' => '',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 0,
+  'handler' => 'MODx.loadPage(""); return false;',
+), '', true, true);
+
+$children = array();
+
+/* dashboards */
+$children[0]= $xpdo->newObject('modMenu');
+$children[0]->fromArray(array (
+  'text' => 'dashboards',
+  'parent' => 'reports',
+  'action' => 100,
+  'description' => 'dashboards_desc',
+  'icon' => 'images/icons/information.png',
+  'menuindex' => 0,
+  'permissions' => 'dashboards',
+), '', true, true);
+        $action= $xpdo->newObject('modAction');
+        $action->fromArray(array (
+          'id' => 100,
+          'namespace' => 'core',
+          'parent' => '',
+          'controller' => 'system/dashboards',
+          'haslayout' => 1,
+          'lang_topics' => 'about',
+          'assets' => '',
+          'help_url' => 'Dashboards',
+        ), '', true, true);
+        $children[0]->addOne($action);
+
+$menus[0]->addMany($children,'Children');
+unset($children);
+
+
+
+/* ***************** SITE MENU ***************** */
+$menus[1]= $xpdo->newObject('modMenu');
+$menus[1]->fromArray(array (
+  'text' => 'site',
+  'parent' => '',
+  'action' => 0,
+  'description' => '',
+  'icon' => 'images/misc/logo_tbar.gif',
+  'menuindex' => 1,
 ), '', true, true);
 
 $children = array();
@@ -176,7 +222,7 @@ $children[8]->fromArray(array (
 ), '', true, true);
 
 
-$menus[0]->addMany($children,'Children');
+$menus[1]->addMany($children,'Children');
 unset($children);
 
 
@@ -184,27 +230,27 @@ unset($children);
 
 
 /* ***************** COMPONENTS MENU ***************** */
-$menus[1]= $xpdo->newObject('modMenu');
-$menus[1]->fromArray(array (
+$menus[2]= $xpdo->newObject('modMenu');
+$menus[2]->fromArray(array (
   'text' => 'components',
   'parent' => '',
   'action' => 0,
   'description' => '',
   'icon' => 'images/icons/plugin.gif',
-  'menuindex' => 1,
+  'menuindex' => 2,
   'permissions' => 'components',
 ), '', true, true);
 
 
 /* ****************** SECURITY MENU ****************** */
-$menus[2]= $xpdo->newObject('modMenu');
-$menus[2]->fromArray(array (
+$menus[3]= $xpdo->newObject('modMenu');
+$menus[3]->fromArray(array (
   'text' => 'security',
   'parent' => '',
   'action' => 0,
   'description' => '',
   'icon' => 'images/icons/lock.gif',
-  'menuindex' => 2,
+  'menuindex' => 3,
   'permissions' => 'access_permissions',
 ), '', true, true);
 $children = array();
@@ -351,19 +397,19 @@ $children[5]->fromArray(array (
     'permissions' => 'flush_sessions',
 ), '', true, true);
 
-$menus[2]->addMany($children,'Children');
+$menus[3]->addMany($children,'Children');
 unset($children);
 
 
 /* ***************** TOOLS MENU ***************** */
-$menus[3]= $xpdo->newObject('modMenu');
-$menus[3]->fromArray(array (
+$menus[4]= $xpdo->newObject('modMenu');
+$menus[4]->fromArray(array (
   'text' => 'tools',
   'parent' => '',
   'action' => 0,
   'description' => '',
   'icon' => 'images/icons/menu_settings.gif',
-  'menuindex' => 3,
+  'menuindex' => 4,
 ), '', true, true);
 $children = array();
 
@@ -437,18 +483,18 @@ $children[2]->fromArray(array(
         ), '', true, true);
         $children[2]->addOne($action);
 
-$menus[3]->addMany($children,'Children');
+$menus[4]->addMany($children,'Children');
 unset($children);
 
 /* ***************** REPORTS MENU ***************** */
-$menus[4]= $xpdo->newObject('modMenu');
-$menus[4]->fromArray(array(
+$menus[5]= $xpdo->newObject('modMenu');
+$menus[5]->fromArray(array(
   'text' => 'reports',
   'parent' => '',
   'action' => 0,
   'description' => '',
   'icon' => 'images/icons/menu_settings16.gif',
-  'menuindex' => 4,
+  'menuindex' => 5,
 ), '', true, true);
 $children = array();
 
@@ -519,40 +565,16 @@ $children[2]->fromArray(array (
           'assets' => '',
         ), '', true, true);
         $children[2]->addOne($action);
-
-/* dashboards */
+        
+/* system info */
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
-  'text' => 'dashboards',
-  'parent' => 'reports',
-  'action' => 100,
-  'description' => 'dashboards_desc',
-  'icon' => 'images/icons/information.png',
-  'menuindex' => 3,
-  'permissions' => 'dashboards',
-), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 100,
-          'namespace' => 'core',
-          'parent' => '',
-          'controller' => 'system/dashboards',
-          'haslayout' => 1,
-          'lang_topics' => 'about',
-          'assets' => '',
-          'help_url' => 'Dashboards',
-        ), '', true, true);
-        $children[3]->addOne($action);
-
-/* system info */
-$children[4]= $xpdo->newObject('modMenu');
-$children[4]->fromArray(array (
   'text' => 'view_sysinfo',
   'parent' => 'reports',
   'action' => 4,
   'description' => 'view_sysinfo_desc',
   'icon' => 'images/icons/logging.gif',
-  'menuindex' => 4,
+  'menuindex' => 3,
   'permissions' => 'view_sysinfo',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -565,17 +587,17 @@ $children[4]->fromArray(array (
           'lang_topics' => 'system_info',
           'assets' => '',
         ), '', true, true);
-        $children[4]->addOne($action);
+        $children[3]->addOne($action);
 
 /* about */
-$children[5]= $xpdo->newObject('modMenu');
-$children[5]->fromArray(array (
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
   'text' => 'about',
   'parent' => 'reports',
   'action' => 63,
   'description' => 'about_desc',
   'icon' => 'images/icons/information.png',
-  'menuindex' => 5,
+  'menuindex' => 4,
   'permissions' => 'about',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -588,20 +610,20 @@ $children[5]->fromArray(array (
           'lang_topics' => 'about',
           'assets' => '',
         ), '', true, true);
-        $children[5]->addOne($action);
+        $children[1]->addOne($action);
 
-$menus[4]->addMany($children,'Children');
+$menus[5]->addMany($children,'Children');
 unset($children);
 
 /* ***************** SYSTEM MENU ***************** */
-$menus[5]= $xpdo->newObject('modMenu');
-$menus[5]->fromArray(array (
+$menus[6]= $xpdo->newObject('modMenu');
+$menus[6]->fromArray(array (
   'text' => 'system',
   'parent' => '',
   'action' => 0,
   'description' => '',
   'icon' => 'images/misc/logo_tbar.gif',
-  'menuindex' => 5,
+  'menuindex' => 6,
 ), '', true, true);
 $children = array();
 
@@ -773,18 +795,18 @@ $children[6]->fromArray(array (
         ), '', true, true);
         $children[6]->addOne($action);
 
-$menus[5]->addMany($children,'Children');
+$menus[6]->addMany($children,'Children');
 unset($children);
 
 /* ***************** USER MENU ***************** */
-$menus[6]= $xpdo->newObject('modMenu');
-$menus[6]->fromArray(array (
+$menus[7]= $xpdo->newObject('modMenu');
+$menus[7]->fromArray(array (
   'text' => 'user',
   'parent' => '',
   'action' => 0,
   'description' => '',
   'icon' => 'images/icons/user_go.png',
-  'menuindex' => 6,
+  'menuindex' => 7,
 ), '', true, true);
 $children = array();
 
@@ -833,18 +855,18 @@ $children[1]->fromArray(array (
         ), '', true, true);
         $children[1]->addOne($action);
 
-$menus[6]->addMany($children,'Children');
+$menus[7]->addMany($children,'Children');
 unset($children);
 
 /* ***************** SUPPORT MENU ***************** */
-$menus[7]= $xpdo->newObject('modMenu');
-$menus[7]->fromArray(array (
+$menus[8]= $xpdo->newObject('modMenu');
+$menus[8]->fromArray(array (
   'text' => 'support',
   'parent' => '',
   'action' => 0,
   'description' => 'support_desc',
   'icon' => 'images/icons/sysinfo.gif',
-  'menuindex' => 7,
+  'menuindex' => 8,
 ), '', true, true);
 $children = array();
 
@@ -896,7 +918,7 @@ $children[3]->fromArray(array (
   'handler' => 'window.open("http://api.modx.com/");',
 ), '', true, true);
 
-$menus[7]->addMany($children,'Children');
+$menus[8]->addMany($children,'Children');
 unset($children);
 
 

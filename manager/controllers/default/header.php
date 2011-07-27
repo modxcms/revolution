@@ -2,16 +2,20 @@
 /**
  * Loads the main structure
  *
+ * @var modX $modx
+ * @var modManagerController $this
+ *
  * @package modx
  * @subpackage manager.controllers
  */
 /* get top navbar */
 $menus = $modx->cacheManager->get('mgr/menus/'.$modx->getOption('manager_language',null,$modx->getOption('cultureKey',null,'en')), array(
-    xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_menu_key', null, 'menu'),
-    xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_menu_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-    xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_menu_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+    xPDO::OPT_CACHE_KEY => $modx->getOption('cache_menu_key', null, 'menu'),
+    xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_menu_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+    xPDO::OPT_CACHE_FORMAT => (integer) $modx->getOption('cache_menu_format', null, $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
 ));
 if ($menus == null) {
+    /** @var modMenu $menu */
     $menu = $modx->newObject('modMenu');
     $menus = $menu->rebuildCache();
     unset($menu);
@@ -84,6 +88,7 @@ $this->setPlaceholder('navb',$output);
 
 
 /* assign logged in text and link */
+/** @var modMenu $profile */
 $profile = $modx->getObject('modMenu','profile');
 $this->setPlaceholder('username',$modx->getLoginUserName());
 $this->setPlaceholder('profileAction',$profile->get('action'));
