@@ -30,4 +30,26 @@
  * @group REST
  * @group modRestClient
  */
-class modRestClientTest extends MODxTestCase {}
+class modRestClientTest extends MODxTestCase {
+    /**
+     * Assert that modRestClient.getConnection loads the client
+     */
+    public function testGetConnection() {
+        /** @var modRestClient $rest */
+        $rest = $this->modx->getService('rest','rest.modRestClient');
+        $success = $rest->getConnection();
+
+        $this->assertTrue($success);
+    }
+
+    /**
+     * Assert that modRestClient.setResponseType actually sets the response type
+     */
+    public function testSetResponseType() {
+        /** @var modRestClient $rest */
+        $rest = $this->modx->getService('rest','rest.modRestClient');
+        $rest->setResponseType('json');
+
+        $this->assertEquals($rest->responseType,'json');
+    }
+}
