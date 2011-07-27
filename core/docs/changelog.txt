@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add Custom Dashboards and Dashboard Widgets
 - [#4871] Fix Access Permissions not being copied when duplicating a context
 - [#4382] Forgot Manager Password now lookups using username to prevent issues when the 'allow_multiple_emails' system setting is enabled
 - Fix rendering of combo boxes in element properties
