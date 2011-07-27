@@ -36,7 +36,7 @@ if (!empty($scriptProperties['getGroups'])) {
     $c->where(array(
         'member' => $user->get('id'),
     ));
-    $c->sortby('UserGroup.name','ASC');
+    $c->sortby('modUserGroupMember.rank','ASC');
     $members = $modx->getCollection('modUserGroupMember',$c);
 
     $data = array();
@@ -51,6 +51,7 @@ if (!empty($scriptProperties['getGroups'])) {
             $member->get('role'),
             empty($roleName) ? '' : $roleName,
             $user->get('primary_group') == $member->get('user_group') ? true : false,
+            $member->get('rank'),
         );
     }
     $user->set('groups','(' . $modx->toJSON($data) . ')');

@@ -1,14 +1,22 @@
 <?php
 /**
+ * @package modx
+ * @subpackage manager.controllers
+ */
+/**
  * Loads update user page
  *
  * @package modx
  * @subpackage manager.controllers
  */
 class SecurityUserUpdateManagerController extends modManagerController {
+    /** @var string $onUserFormRender */
     public $onUserFormRender = '';
+    /** @var array $extendedFields */
     public $extendedFields = array();
+    /** @var array $remoteFields */
     public $remoteFields = array();
+    /** @var modUser $user */
     public $user;
 
     /**

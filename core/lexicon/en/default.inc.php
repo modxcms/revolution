@@ -323,6 +323,7 @@ $_lang['quick_update_resource'] = 'Quick Update Resource';
 $_lang['quick_update_snippet'] = 'Quick Update Snippet';
 $_lang['quick_update_template'] = 'Quick Update Template';
 $_lang['quick_update_tv'] = 'Quick Update TV';
+$_lang['rank'] = 'Rank';
 $_lang['recent_docs'] = 'Recent documents';
 $_lang['redirecting'] = 'Redirecting...';
 $_lang['refresh_action_map'] = 'Clearing the Action map cache';

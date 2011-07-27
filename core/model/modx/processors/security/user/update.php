@@ -44,6 +44,7 @@ if (!empty($canSave)) {
 
 /* save user groups */
 if (isset($scriptProperties['groups'])) {
+    $primaryGroupId = 0;
     /* remove prior user group links */
     $ugms = $user->getMany('UserGroupMembers');
     /** @var modUserGroupMember $ugm */
@@ -57,9 +58,14 @@ if (isset($scriptProperties['groups'])) {
         $ugm->set('user_group',$group['usergroup']);
         $ugm->set('role',$group['role']);
         $ugm->set('member',$user->get('id'));
+        $ugm->set('rank',$group['rank']);
+        if (empty($group['rank'])) {
+            $primaryGroupId = $group['usergroup'];
+        }
         $ugms[] = $ugm;
     }
     $user->addMany($ugms,'UserGroupMembers');
+    $user->set('primary_group',$primaryGroupId);
 }
 
 /* update user */

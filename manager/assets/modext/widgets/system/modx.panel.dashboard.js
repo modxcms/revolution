@@ -176,6 +176,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
         ,fields: ['dashboard','widget','rank','name','name_trans','description','description_trans']
         ,autoHeight: true
         ,primaryKey: 'widget'
+        ,cls: 'modx-grid modx-grid-draggable'
         ,plugins: [this.exp,new Ext.ux.dd.GridDragDropRowOrder({
             copy: false // false by default
             ,scrollable: true // enable scrolling support (default is false)

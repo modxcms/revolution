@@ -12,7 +12,8 @@ MODx.grid.UserGroups = function(config) {
         title: ''
         ,id: 'modx-grid-user-groups'
         ,url: MODx.config.connectors_url+'security/group.php'
-        ,fields: ['usergroup','name','member','role','rolename','primary_group']
+        ,fields: ['usergroup','name','member','role','rolename','primary_group','rank']
+        ,cls: 'modx-grid modx-grid-draggable'
         ,columns: [{
             header: _('user_group')
             ,dataIndex: 'name'
@@ -22,14 +23,19 @@ MODx.grid.UserGroups = function(config) {
             ,dataIndex: 'rolename'
             ,width: 175
         },{
-            header: _('primary_group')
-            ,width: 70
-            ,dataIndex: 'primary_group'
-            ,renderer: function change(v,md,r,ri,ci) {
-                var c = r.data.primary_group ? ' checked="checked"' : '';
-                return '<input type="radio" name="primary_group" value="'+r.data.usergroup+'" onclick="Ext.getCmp(\'modx-grid-user-groups\').setPrimaryGroupRd(this,\''+r.data.usergroup+'\','+ri+');" '+c+' />';
-            }
+            header: _('rank')
+            ,dataIndex: 'rank'
+            ,width: 80
+            ,editor: { xtype: 'numberfield', allowBlank: false, allowNegative: false }
         }]
+        ,plugins: [new Ext.ux.dd.GridDragDropRowOrder({
+            copy: false
+            ,scrollable: true
+            ,targetCfg: {}
+            ,listeners: {
+                'afterrowmove': {fn:this.onAfterRowMove,scope:this}
+            }
+        })]
         ,tbar: [{
             text: _('user_group_user_add')
             ,handler: this.addGroup
@@ -38,21 +44,28 @@ MODx.grid.UserGroups = function(config) {
     MODx.grid.UserGroups.superclass.constructor.call(this,config);
     this.userRecord = new Ext.data.Record.create(['usergroup','name','member','role','rolename','primary_group']);
     this.addEvents('beforeUpdateRole','afterUpdateRole','beforeAddGroup','afterAddGroup');
-    this.on('render',this.setupPg,this);
 };
 Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
 
-    setupPg: function() {
-        var hd = Ext.getCmp('modx-user-primary-group');
-        
-    }
-    ,setPrimaryGroupRd: function(rd,id,ri) {
-        var hd = Ext.getCmp('modx-user-primary-group');
-        if (hd) {
-            hd.setValue(id);
-            var p = Ext.getCmp('modx-panel-user');
-            if (p) { p.markDirty(); }
+    onAfterRowMove: function(dt,sri,ri,sels) {
+        var s = this.getStore();
+        var sourceRec = s.getAt(sri);
+        var belowRec = s.getAt(ri);
+        var total = s.getTotalCount();
+
+        sourceRec.set('rank',sri);
+        sourceRec.commit();
+
+        /* get all rows below ri, and up their rank by 1 */
+        var brec;
+        for (var x=(ri-1);x<total;x++) {
+            brec = s.getAt(x);
+            if (brec) {
+                brec.set('rank',x);
+                brec.commit();
+            }
         }
+        return true;
     }
     ,updateRole: function(btn,e) {
         var r = this.menu.record;

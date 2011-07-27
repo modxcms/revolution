@@ -2335,3 +2335,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .modx-combo-title {
     font-weight: bold;
 }
+
+/* draggable grids */
+.modx-grid-draggable .x-grid3-row {
+    cursor: move;
+}
