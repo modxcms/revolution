@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardWidgetWhoIsOnline extends modDashboardWidgetClass {
+class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
     public function render() {
         $timetocheck = (time()-(60*20))+$this->modx->getOption('server_offset_time',null,0);
         $c = $this->modx->newQuery('modActiveUser');

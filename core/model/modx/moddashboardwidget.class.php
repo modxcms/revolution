@@ -47,7 +47,7 @@ class modDashboardWidget extends xPDOSimpleObject {
         $namespace = $this->getOne('Namespace');
         /** @var string $content */
         $content = $this->get('content');
-        /** @var modDashboardWidgetClass $widget */
+        /** @var modDashboardWidgetInterface $widget */
         $widget = null;
         switch (strtolower($this->get('type'))) {
             /* file/class-based widget */
@@ -68,7 +68,7 @@ class modDashboardWidget extends xPDOSimpleObject {
                 if (file_exists($content)) {
                     $className = include $content;
                     if (class_exists($className)) { /* is a class-based widget */
-                        /** @var modDashboardWidgetClass $widget */
+                        /** @var modDashboardWidgetInterface $widget */
                         $widget = new $className($this->xpdo,$this,$controller);
                     } else { /* just a standard file with a return */
                         $widget = new modDashboardFileWidget($this->xpdo,$this,$controller);
@@ -106,7 +106,7 @@ class modDashboardWidget extends xPDOSimpleObject {
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardFileWidget extends modDashboardWidgetClass {
+class modDashboardFileWidget extends modDashboardWidgetInterface {
     public function render() {
         return $this->content;
     }
@@ -118,7 +118,7 @@ class modDashboardFileWidget extends modDashboardWidgetClass {
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardHtmlWidget extends modDashboardWidgetClass {
+class modDashboardHtmlWidget extends modDashboardWidgetInterface {
     public function render() {
         return $this->widget->get('content');
     }
@@ -129,7 +129,7 @@ class modDashboardHtmlWidget extends modDashboardWidgetClass {
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardPhpWidget extends modDashboardWidgetClass {
+class modDashboardPhpWidget extends modDashboardWidgetInterface {
     public function render() {
         $code = $this->widget->get('content');
         if (strpos($code,'<?php') === false) {
@@ -153,7 +153,7 @@ class modDashboardPhpWidget extends modDashboardWidgetClass {
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardSnippetWidget extends modDashboardWidgetClass {
+class modDashboardSnippetWidget extends modDashboardWidgetInterface {
     public function render() {
         /** @var modSnippet $snippet */
         $snippet = $this->modx->getObject('modSnippet',array(
@@ -180,7 +180,7 @@ class modDashboardSnippetWidget extends modDashboardWidgetClass {
  * @package modx
  * @subpackage dashboard
  */
-abstract class modDashboardWidgetClass {
+abstract class modDashboardWidgetInterface {
     /**
      * A reference to the modX|xPDO instance
      * @var xPDO|modX $modx
@@ -223,6 +223,11 @@ abstract class modDashboardWidgetClass {
         $this->controller =& $controller;
     }
 
+    /**
+     * Set the widget content
+     * @param string $content
+     * @return void
+     */
     public function setContent($content) {
         $this->content = $content;
     }

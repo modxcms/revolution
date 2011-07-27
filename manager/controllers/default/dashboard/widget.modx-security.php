@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardWidgetSecurityFeed extends modDashboardWidgetClass {
+class modDashboardWidgetSecurityFeed extends modDashboardWidgetInterface {
     /**
      * @var modRSSParser $rss
      */

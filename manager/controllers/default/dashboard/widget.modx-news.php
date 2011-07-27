@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardWidgetNewsFeed extends modDashboardWidgetClass {
+class modDashboardWidgetNewsFeed extends modDashboardWidgetInterface {
     /**
      * @var modRSSParser $rss
      */

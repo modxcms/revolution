@@ -9,7 +9,7 @@
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetClass {
+class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterface {
     public function render() {
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
     MODx.load({

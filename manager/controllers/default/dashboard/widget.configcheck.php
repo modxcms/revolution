@@ -8,7 +8,7 @@
  * @package modx
  * @subpackage dashboard
  */
-class modDashboardWidgetConfigCheck extends modDashboardWidgetClass {
+class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface {
     public $cssBlockClass = 'dashboard-block-variable';
     
     public function render() {
