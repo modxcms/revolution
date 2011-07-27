@@ -42,6 +42,7 @@ class modPBKDF2HashTest extends MODxTestCase {
      */
     public function testHash($string, $options, $expected) {
         $this->modx->getService('hashing', 'hashing.modHashing');
+        /** @var modPBKDF2 $pbkdf2 */
         $pbkdf2 =& $this->modx->hashing->getHash('pbkdf2', 'hashing.modPBKDF2');
         $actual = $pbkdf2->hash($string, $options);
         $this->assertEquals($expected, $actual, "Expected hash value not generated.");

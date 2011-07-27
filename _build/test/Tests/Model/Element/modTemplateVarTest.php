@@ -32,4 +32,4 @@
  * @group modTemplate
  * @group modTemplateVar
  */
-class modTemplateVar extends MODxTestCase {}
+class modTemplateVarTest extends MODxTestCase {}

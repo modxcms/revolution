@@ -42,6 +42,7 @@ class modMD5HashTest extends MODxTestCase {
      */
     public function testHash($string, $options, $expected) {
         $this->modx->getService('hashing', 'hashing.modHashing');
+        /** @var modMD5 $md5 */
         $md5 =& $this->modx->hashing->getHash('md5', 'hashing.modMD5', $options);
         $actual = $md5->hash($string);
         $this->assertEquals($expected, $actual, "Expected hash value not generated.");

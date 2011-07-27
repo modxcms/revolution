@@ -27,7 +27,13 @@
  * @package modx-test
  */
 class MODxTestCase extends PHPUnit_Framework_TestCase {
+    /**
+     * @var modX $modx
+     */
     public $modx = null;
+    /**
+     * @var bool
+     */
     public $debug = false;
 
     /**
@@ -45,7 +51,8 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
     /**
      * Check a MODX return result for a success flag
      *
-     * @param array $result The result response
+     * @param modProcessorResponse $result The result response
+     * @return boolean
      */
     public function checkForSuccess(&$result) {
         if (empty($result) || !($result instanceof modProcessorResponse)) return false;

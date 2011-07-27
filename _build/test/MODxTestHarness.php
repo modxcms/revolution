@@ -34,8 +34,11 @@ require_once dirname(__FILE__).'/MODxTestCase.php';
  * @package modx-test
  */
 class MODxTestHarness {
+    /** @var array $fixtures */
     protected static $fixtures = array();
+    /** @var array $properties */
     protected static $properties = array();
+    /** @var boolean $debug */
     protected static $debug = false;
 
     /**
@@ -45,6 +48,7 @@ class MODxTestHarness {
      *
      * @param string $class A fixture class to get an instance of.
      * @param string $name A unique identifier for the fixture.
+     * @param boolean $new
      * @param array $options An array of configuration options for the fixture.
      * @return object|null An instance of the specified fixture class or null on failure.
      */
