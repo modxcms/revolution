@@ -315,7 +315,7 @@ $settings['context_tree_sort']->fromArray(array (
 $settings['context_tree_sortby']= $xpdo->newObject('modSystemSetting');
 $settings['context_tree_sortby']->fromArray(array (
   'key' => 'context_tree_sortby',
-  'value' => 'key',
+  'value' => 'rank',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
