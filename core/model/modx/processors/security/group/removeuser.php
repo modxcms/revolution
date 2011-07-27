@@ -5,6 +5,10 @@
  * @param integer $group_id The ID of the group
  * @param integer $user_id The ID of the user
  *
+ * @var modX $modx
+ * @var modProcessor $this
+ * @var array $scriptProperties
+ * 
  * @package modx
  * @subpackage processors.security.group
  */
@@ -13,25 +17,28 @@ $modx->lexicon->load('user');
 
 /* get user */
 if (empty($scriptProperties['user_id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+/** @var modUser $user */
 $user = $modx->getObject('modUser',$scriptProperties['user_id']);
-if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
+if (empty($user)) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* get usergroup */
 if (empty($scriptProperties['group_id'])) return $modx->error->failure($modx->lexicon('user_group_err_ns'));
+/** @var modUserGroup $usergroup */
 $usergroup = $modx->getObject('modUserGroup',$scriptProperties['group_id']);
-if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_nf'));
+if (empty($usergroup)) return $modx->error->failure($modx->lexicon('user_group_err_nf'));
 
-/* get member */
-$member = $modx->getObject('modUserGroupMember',array(
-	'user_group' => $scriptProperties['group_id'],
-	'member' => $scriptProperties['user_id'],
+/** @var modUserGroupMember $membership */
+$membership = $modx->getObject('modUserGroupMember',array(
+	'user_group' => $usergroup->get('id'),
+	'member' => $user->get('id'),
 ));
-if ($member == null) return $modx->error->failure($modx->lexicon('user_group_member_err_not_found'));
+if (empty($membership)) return $modx->error->failure($modx->lexicon('user_group_member_err_not_found'));
 
 /* invoke OnUserBeforeRemoveFromGroup event */
 $OnUserBeforeRemoveFromGroup = $modx->invokeEvent('OnUserBeforeRemoveFromGroup',array(
     'user' => &$user,
     'usergroup' => &$usergroup,
+    'membership' => &$membership,
 ));
 $canRemove = $this->processEventResponse($OnUserBeforeRemoveFromGroup);
 if (!empty($canRemove)) {
@@ -39,14 +46,21 @@ if (!empty($canRemove)) {
 }
 
 /* remove member */
-if ($member->remove() == false) {
+if ($membership->remove() == false) {
     return $modx->error->failure($modx->lexicon('user_group_member_err_remove'));
+}
+
+/* unset primary group if that was this group */
+if ($user->get('primary_group') == $usergroup->get('id')) {
+    $user->set('primary_group',0);
+    $user->save();
 }
 
 /* invoke OnUserRemoveFromGroup event */
 $modx->invokeEvent('OnUserRemoveFromGroup',array(
     'user' => &$user,
     'usergroup' => &$usergroup,
+    'membership' => &$membership,
 ));
 
 return $modx->error->success();

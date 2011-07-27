@@ -57,4 +57,10 @@ if ($membership->save() == false) {
     return $modx->error->failure($modx->lexicon('user_group_member_err_save'));
 }
 
+/* set as primary group if the only group for user */
+if ($rank == 0) {
+    $user->set('primary_group',$usergroup->get('id'));
+    $user->save();
+}
+
 return $modx->error->success('',$membership);
