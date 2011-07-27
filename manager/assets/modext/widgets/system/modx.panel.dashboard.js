@@ -276,9 +276,9 @@ MODx.window.DashboardWidgetPlace = function(config) {
     config = config || {};
     this.ident = config.ident || 'dbugadd'+Ext.id();
     Ext.applyIf(config,{
-        title: _('dashboard_usergroup_add')
+        title: _('widget_place')
         ,frame: true
-        ,id: 'modx-window-dashboard-usergroup-add'
+        ,id: 'modx-window-dashboard-widget-place'
         ,fields: [{
             xtype: 'modx-combo-dashboard-widgets'
             ,fieldLabel: _('widget')
