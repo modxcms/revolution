@@ -41,6 +41,7 @@ class ContextSettingProcessorsTest extends MODxTestCase {
      */
     public static function setUpBeforeClass() {
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        /** @var modContext $ctx */
         $ctx = $modx->newObject('modContext');
         $ctx->set('key','unittest');
         $ctx->set('description','The unit test context for context settings.');
@@ -58,12 +59,17 @@ class ContextSettingProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the context/setting/create processor, which creates a context setting
+     * @param string $ctx
+     * @param string $key
+     * @param string $description
+     * @return boolean
      * @dataProvider providerContextSettingCreate
      */
     public function testContextSettingCreate($ctx,$key,$description = '') {
         if (empty($ctx)) return false;
         $this->assertTrue(true);
         return true;
+        /*
         try {
             $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
                 'ctx' => $ctx,
@@ -75,10 +81,11 @@ class ContextSettingProcessorsTest extends MODxTestCase {
         }
         $s = $this->checkForSuccess($result);
         $ct = $this->modx->getCount('modContext',$ctx);
-        $this->assertTrue($s && $ct > 0,'Could not create context: `'.$ctx.'`: '.$result['message']);
+        $this->assertTrue($s && $ct > 0,'Could not create context: `'.$ctx.'`: '.$result['message']);*/
     }
     /**
      * Data provider for context/setting/create processor test.
+     * @return array
      */
     public function providerContextSettingCreate() {
         return array(
