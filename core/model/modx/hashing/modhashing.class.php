@@ -92,15 +92,15 @@ class modHashing {
      *
      * @param string $key A key string identifying the instance; must be a valid PHP variable name.
      * @param string $class A valid fully-qualified modHash derivative class name
-     * @param array $options
-     * @return array|null
+     * @param array|null $options An optional array of hash options.
+     * @return modHash|null A reference to a modHash instance or null if could not be instantiated.
      */
-    public function getHash($key, $class, array $options = array()) {
+    public function getHash($key, $class, $options = array()) {
         $className = $this->modx->loadClass($class, '', false, true);
         if ($className) {
             if (empty($key)) $key = strtolower(str_replace('mod', '', $className));
             if (!array_key_exists($key, $this->_hashes)) {
-                $hash = new $className($this);
+                $hash = new $className($this, $options);
                 if ($hash instanceof $className) {
                     $this->_hashes[$key] = $hash;
                     $this->$key =& $this->_hashes[$key];
@@ -137,13 +137,14 @@ abstract class modHash {
      * Constructs a new instance of the modHash class.
      *
      * @param modHashing $host A reference to the modHashing instance
-     * @param array $options An array of configuration options
-     * @return modHash A new instance of a derivative of the modHash class
+     * @param array|null $options An optional array of configuration options
+     * @return modHash A new derivative instance of the modHash class
      */
-    function __construct(modHashing &$host, array $options= array()) {
+    function __construct(modHashing &$host, $options= array()) {
         $this->host =& $host;
-        $this->options = $options;
-
+        if (is_array($options)) {
+            $this->options = $options;
+        }
     }
 
     /**
