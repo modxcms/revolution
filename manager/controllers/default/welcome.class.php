@@ -6,9 +6,14 @@
  * @subpackage manager.controllers
  */
  class WelcomeManagerController extends modManagerController {
+    /**
+     * Whether or not to show the welcome screen
+     * @var boolean $showWelcomeScreen
+     */
     public $showWelcomeScreen = false;
 
     /**
+     * The current, active dashboard for the user
      * @var null|modDashboard $dashboard
      */
     public $dashboard = null;
@@ -67,13 +72,17 @@ Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });
     public function getDashboard() {
         $this->modx->loadClass('modDashboard');
 
+        /** @var modUserGroup $userGroup */
         $userGroup = $this->modx->user->getOne('PrimaryGroup');
         if ($userGroup) {
+            /** @var modDashboard $dashboard */
             $dashboard = $userGroup->getOne('Dashboard');
+            if (empty($dashboard)) {
+                $dashboard = modDashboard::getDefaultDashboard($this->modx);
+            }
         } else {
             $dashboard = modDashboard::getDefaultDashboard($this->modx);
         }
-
         return $dashboard;
     }
 

@@ -15,10 +15,11 @@ class modDashboard extends xPDOSimpleObject {
      * @return An|null|object
      */
     public static function getDefaultDashboard(xPDO &$xpdo) {
+        /** @var modDashboard $defaultDashboard */
         $defaultDashboard = $xpdo->getObject('modDashboard',array(
             'id' => 1,
         ));
-        if (!$defaultDashboard) {
+        if (empty($defaultDashboard)) {
             $defaultDashboard = $xpdo->getObject('modDashboard',array(
                 'name' => 'Default',
             ));
