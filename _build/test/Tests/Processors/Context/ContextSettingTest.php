@@ -39,10 +39,10 @@ class ContextSettingProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+    public function setUp() {
+        parent::setUp();
         /** @var modContext $ctx */
-        $ctx = $modx->newObject('modContext');
+        $ctx = $this->modx->newObject('modContext');
         $ctx->set('key','unittest');
         $ctx->set('description','The unit test context for context settings.');
         $ctx->save();
@@ -51,10 +51,19 @@ class ContextSettingProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public static function tearDownAfterClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-        $ctx = $modx->getObject('modContext','unittest');
+    public function tearDown() {
+        parent::tearDown();
+        /** @var modContext $ctx */
+        $ctx = $this->modx->getObject('modContext','unittest');
         if ($ctx) $ctx->remove();
+
+        $settings = $this->modx->getCollection('modContextSetting',array(
+            'context_key' => 'unittest',
+        ));
+        /** @var modContextSetting $setting */
+        foreach ($settings as $setting) {
+            $setting->remove();
+        }
     }
 
     /**
@@ -62,13 +71,12 @@ class ContextSettingProcessorsTest extends MODxTestCase {
      * @param string $ctx
      * @param string $key
      * @param string $description
-     * @return boolean
      * @dataProvider providerContextSettingCreate
      */
     public function testContextSettingCreate($ctx,$key,$description = '') {
-        if (empty($ctx)) return false;
+        if (empty($ctx)) return;
         $this->assertTrue(true);
-        return true;
+        return;
         /*
         try {
             $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(

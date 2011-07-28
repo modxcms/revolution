@@ -38,18 +38,16 @@ class ContextProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+    public function setUp() {
+        parent::setUp();
         /** @var modContext $ctx */
-        $ctx = $modx->getObject('modContext','unittest');
-        if ($ctx) $ctx->remove();
-        $ctx = $modx->getObject('modContext','unittestdupe');
-        if ($ctx) $ctx->remove();
-        $ctx = $modx->getObject('modContext','unittest13');
-        if ($ctx) $ctx->remove();
+        $ctx = $this->modx->newObject('modContext');
+        $ctx->fromArray(array(
+            'key' => 'unittest',
+        ),'',true,true);
+        $ctx->save();
 
-        $ctx = $modx->newObject('modContext');
+        $ctx = $this->modx->newObject('modContext');
         $ctx->set('key','unittest13');
         $ctx->set('description','The unit test numbered 13. What else would it be?');
         $ctx->save();
@@ -58,16 +56,16 @@ class ContextProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public static function tearDownAfterClass() {
-        /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+    public function tearDown() {
+        parent::tearDown();
+        $contexts = $this->modx->getCollection('modContext',array(
+            'key:LIKE' => '%unittest%'
+        ));
         /** @var modContext $ctx */
-        $ctx = $modx->getObject('modContext','unittest');
-        if ($ctx) $ctx->remove();
-        $ctx = $modx->getObject('modContext','unittestdupe');
-        if ($ctx) $ctx->remove();
-        $ctx = $modx->getObject('modContext','unittest13');
-        if ($ctx) $ctx->remove();
+        foreach ($contexts as $ctx) {
+            $ctx->remove();
+        }
+        $this->modx->error->reset();
     }
 
     /**
@@ -97,7 +95,7 @@ class ContextProcessorsTest extends MODxTestCase {
      */
     public function providerContextCreate() {
         return array(
-            array('unittest','Our unit testing context.'),
+            array('unittest4','Our unit testing context.'),
         );
     }
 
@@ -113,7 +111,7 @@ class ContextProcessorsTest extends MODxTestCase {
      */
     public function testContextCreateInvalid($ctx = '') {
         $this->assertTrue(true); return true;
-        if (empty($ctx)) return false;
+        if (empty($ctx)) return;
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
             'key' => $ctx,
@@ -162,7 +160,7 @@ class ContextProcessorsTest extends MODxTestCase {
      */
     public function providerContextDuplicate() {
         return array(
-            array('unittest','unittestdupe'),
+            array('unittest','unittestCopy'),
         );
     }
 
@@ -174,11 +172,11 @@ class ContextProcessorsTest extends MODxTestCase {
      * @TODO pass in some settings in JSON format to test that.
      * @param string $ctx
      * @param string $description
-     * @return boolean
      */
     public function testContextUpdate($ctx,$description = '') {
-        if (empty($ctx)) return false;
+        if (empty($ctx)) return;
 
+        /** @var modProcessorResponse $result */
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'update',array(
             'key' => $ctx,
             'description' => $description,
@@ -188,7 +186,6 @@ class ContextProcessorsTest extends MODxTestCase {
         $match = !empty($r) && $r['description'] == 'Changing the description of our test context.';
         $success = $s && $match;
         $this->assertTrue($success,'Could not update context: `'.$ctx.'`: '.$result->getMessage());
-        return $success;
     }
     /**
      * Data provider for context/update processor test.
@@ -218,7 +215,7 @@ class ContextProcessorsTest extends MODxTestCase {
         ));
         $s = $this->checkForSuccess($result);
         $r = $result->getObject('object');
-        $match = $r['key'] == $ctx;
+        $match = !empty($r['key']) && $r['key'] == $ctx;
         $success = $s && $match;
         $this->assertTrue($success,'Could not get context: `'.$ctx.'`: '.$result->getMessage());
         return $success;

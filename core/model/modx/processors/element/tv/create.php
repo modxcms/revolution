@@ -59,13 +59,20 @@ foreach ($scriptProperties as $key => $value) {
     }
 }
 
+/** @var modTemplateVar $tv */
 $tv = $modx->newObject('modTemplateVar');
 $tv->fromArray($scriptProperties);
-$tv->set('elements',$scriptProperties['els']);
+if (!empty($scriptProperties['els'])) {
+    $tv->set('elements',$scriptProperties['els']);
+}
 $tv->set('input_properties',$input_properties);
 $tv->set('output_properties',$output_properties);
-$tv->set('rank',!empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
-$tv->set('locked',!empty($scriptProperties['locked']));
+if (isset($scriptProperties['rank'])) {
+    $tv->set('rank',!empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
+}
+if (isset($scriptProperties['locked'])) {
+    $tv->set('locked',!empty($scriptProperties['locked']));
+}
 $properties = null;
 if (isset($scriptProperties['propdata'])) {
     $properties = $scriptProperties['propdata'];

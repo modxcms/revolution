@@ -39,32 +39,35 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-        $modx->error->reset();
-        $tv = $modx->getObject('modTemplateVar',array('name' => 'UnitTestTv'));
-        if ($tv) $tv->remove();
-        $tv = $modx->getObject('modTemplateVar',array('name' => 'UnitTestTv2'));
-        if ($tv) $tv->remove();
+    public function setUp() {
+        parent::setUp();
+        /** @var modTemplateVar $tv */
+        $tv = $this->modx->newObject('modTemplateVar');
+        $tv->fromArray(array('name' => 'UnitTestTv'));
+        $tv->save();
     }
 
     /**
      * Cleanup data after this test.
      */
-    public static function tearDownAfterClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-        $tv = $modx->getObject('modTemplateVar',array('name' => 'UnitTestTv'));
-        if ($tv) $tv->remove();
-        $tv = $modx->getObject('modTemplateVar',array('name' => 'UnitTestTv2'));
-        if ($tv) $tv->remove();
+    public function tearDown() {
+        $tvs = $this->modx->getCollection('modTemplateVar',array('name:LIKE' => '%UnitTest%'));
+        /** @var modTemplateVar $tv */
+        foreach ($tvs as $tv) {
+            $tv->remove();
+        }
+        $this->modx->error->reset();
     }
 
     /**
-     * Tests the element/tv/create processor, which creates a Tv
+     * Tests the element/tv/create processor, which creates a TV
+     *
+     * @param boolean $shouldPass
+     * @param string $tvPk
      * @dataProvider providerTvCreate
      */
     public function testTvCreate($shouldPass,$tvPk) {
-        if (empty($tvPk)) return false;
+        if (empty($tvPk)) return;
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
             'name' => $tvPk,
         ));
@@ -79,26 +82,31 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/tv/create processor test.
+     *
+     * @return array
      */
     public function providerTvCreate() {
         return array(
-            array(true,'UnitTestTv'),
             array(true,'UnitTestTv2'),
-            array(false,'UnitTestTv2'),
+            array(true,'UnitTestTv3'),
+            array(false,'UnitTestTv'),
         );
     }
 
     /**
      * Tests the element/tv/get processor, which gets a Tv
+     *
+     * @param boolean $shouldPass
+     * @param string $tvPk
      * @dataProvider providerTvGet
      */
     public function testTvGet($shouldPass,$tvPk) {
-        if (empty($tvPk)) return false;
+        if (empty($tvPk)) return;
 
         $tv = $this->modx->getObject('modTemplateVar',array('name' => $tvPk));
         if (empty($tv) && $shouldPass) {
             $this->fail('No Tv found "'.$tvPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
@@ -113,6 +121,7 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/tv/create processor test.
+     * @return array
      */
     public function providerTvGet() {
         return array(
@@ -124,6 +133,10 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     /**
      * Attempts to get a list of Template Variables
      *
+     * @param string $sort
+     * @param string $dir
+     * @param int $limit
+     * @param int $start
      * @dataProvider providerTvGetList
      */
     public function testTvGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
@@ -138,6 +151,7 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/tv/getlist processor test.
+     * @return array
      */
     public function providerTvGetList() {
         return array(
@@ -147,15 +161,18 @@ class TemplateVarProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the element/tv/remove processor, which removes a Tv
+     *
+     * @param boolean $shouldPass
+     * @param string $tvPk
      * @dataProvider providerTvRemove
      */
     public function testTvRemove($shouldPass,$tvPk) {
-        if (empty($tvPk)) return false;
+        if (empty($tvPk)) return;
 
         $tv = $this->modx->getObject('modTemplateVar',array('name' => $tvPk));
         if (empty($tv) && $shouldPass) {
             $this->fail('No Tv found "'.$tvPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
@@ -170,6 +187,7 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/tv/remove processor test.
+     * @return array
      */
     public function providerTvRemove() {
         return array(

@@ -5,6 +5,10 @@
  * @param string $key The key of the context
  * @param json $settings A json array of context settings
  *
+ * @var modX $modx
+ * @var modProcessor $this
+ * @var array $scriptProperties
+ *
  * @package modx
  * @subpackage processors.context
  */
@@ -13,6 +17,7 @@ $modx->lexicon->load('context');
 
 /* get context */
 if (empty($scriptProperties['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
+/** @var modContext $context */
 $context= $modx->getObject('modContext', $scriptProperties['key']);
 if (!$context) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $scriptProperties['key'])));
 
@@ -29,6 +34,7 @@ if ($context->save() === false) {
 if (isset($scriptProperties['settings']) && !empty($scriptProperties['settings'])) {
     $_SETTINGS = $modx->fromJSON($scriptProperties['settings']);
     foreach ($_SETTINGS as $id => $st) {
+        /** @var modContextSetting $setting */
         $setting = $modx->getObject('modContextSetting',array(
             'context_key' => $context->get('key'),
             'key' => $st['key'],
@@ -38,6 +44,7 @@ if (isset($scriptProperties['settings']) && !empty($scriptProperties['settings']
         $setting->set('value',$st['value']);
 
         /* if name changed, change lexicon string */
+        /** @var modLexiconEntry $entry */
         $entry = $modx->getObject('modLexiconEntry',array(
             'namespace' => 'core',
             'name' => 'setting_'.$st['key'],
