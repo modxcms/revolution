@@ -29,4 +29,35 @@
  * @group Model
  * @group modParser
  */
-class modParserTest extends MODxTestCase {}
+class modParserTest extends MODxTestCase {
+    /**
+     * Test modParser->collectElementTags()
+     *
+     * @dataProvider providerCollectElementTags
+     * @param $input
+     * @param $expected
+     */
+    public function testCollectElementTags($input, $prefix, $suffix, $expectedMatches, $expectedCount) {
+        $matches = array();
+        /** @var modParser $parser */
+        $parser =& $this->modx->getParser();
+        $tagCount = $parser->collectElementTags($input, $matches, $prefix, $suffix);
+        $this->assertEquals($expectedMatches, $matches, "Did not collect expected tags.");
+        $this->assertEquals($expectedCount, $tagCount, "Did not collect expected number of tags.");
+    }
+    /**
+     * dataProvider for testCollectElementTags
+     */
+    public function providerCollectElementTags() {
+        return array(
+            array("", '[[', ']]', array(), 0),
+            array("[[tag]]", '[[', ']]', array(array("[[tag]]", "tag")), 1),
+            array("[[tag]][[tag2]]", '[[', ']]', array(array("[[tag]]", "tag"), array("[[tag2]]", "tag2")), 2),
+            array("[[tag[[tag2]]]]", '[[', ']]', array(array("[[tag[[tag2]]]]", "tag[[tag2]]")), 1),
+            array("[[tag[[tag2[[tag3]]]]]]", '[[', ']]', array(array("[[tag[[tag2[[tag3]]]]]]", "tag[[tag2[[tag3]]]]")), 1),
+            array("[[tag\n?food=`beer`\n[[tag2]]]]", '[[', ']]', array(array("[[tag\n?food=`beer`\n[[tag2]]]]", "tag\n?food=`beer`\n[[tag2]]")), 1),
+            array("\n[[ tag? &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', array(array("[[ tag? &food=`beer` [[tag2]][[tag3]]]]", " tag? &food=`beer` [[tag2]][[tag3]]")), 1),
+            /*array("\n[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', array(array("[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", " tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]")), 1),*/
+        );
+    }
+}
