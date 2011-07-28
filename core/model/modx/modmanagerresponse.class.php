@@ -33,6 +33,7 @@ class modManagerResponse extends modResponse {
         $theme = $this->modx->getOption('manager_theme',null,'default');
         $this->modx->lexicon->load('dashboard','topmenu','file','action');
         if ($action == 0 || !isset($this->modx->actionMap[$action])) {
+            /** @var modAction $action */
             $action = $this->modx->getObject('modAction',array(
                 'namespace' => 'core',
                 'controller' => 'welcome',
@@ -43,8 +44,16 @@ class modManagerResponse extends modResponse {
         $this->action = $this->modx->actionMap[$action];
         $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
         if (!$isLoggedIn) {
+            $this->action['namespace'] = 'core';
+            $this->action['namespace_name'] = 'core';
+            $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/login';
         } else if (!$this->modx->hasPermission('frames')) {
+            $this->action['namespace'] = 'core';
+            $this->action['namespace_name'] = 'core';
+            $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/logout';
         }
          
