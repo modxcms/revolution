@@ -21,7 +21,6 @@
  *
  * @package modx-test
  */
-ob_start();
 require_once dirname(__FILE__).'/MODxTestCase.php';
 
 /**
