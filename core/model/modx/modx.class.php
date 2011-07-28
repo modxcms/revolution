@@ -1688,24 +1688,26 @@ class modX extends xPDO {
 
     /**
      * Logs a manager action.
-     * @access public
+     * 
      * @param string $action The action to pull from the lexicon module.
-     * @param string $class_key The class key that the action is being performed
-     * on.
-     * @param mixed $item The primary key id or array of keys to grab the object
-     * with
-     * @return modManagerLog The newly created modManagerLog object
+     * @param string $class_key The class key that the action is being performed on.
+     * @param mixed $item The primary key id or array of keys to grab the object with.
+     * @return modManagerLog The newly created modManagerLog object.
      */
-    public function logManagerAction($action,$class_key,$item) {
+    public function logManagerAction($action, $class_key, $item) {
+        $userId = 0;
+        if ($this->user instanceof modUser) {
+            $userId = $this->user->get('id');
+        }
         $ml = $this->newObject('modManagerLog');
-        $ml->set('user',$this->user->get('id'));
-        $ml->set('occurred',strftime('%Y-%m-%d %H:%M:%S'));
-        $ml->set('action',$action);
-        $ml->set('classKey',$class_key);
-        $ml->set('item',$item);
+        $ml->set('user', (integer) $userId);
+        $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
+        $ml->set('action', empty($action) ? 'unknown' : $action);
+        $ml->set('classKey', empty($class_key) ? 'unknown' : $class_key);
+        $ml->set('item', empty($item) ? 'unknown' : $item);
 
         if (!$ml->save()) {
-            $this->log(modX::LOG_LEVEL_ERROR,$this->lexicon('manager_log_err_save'));
+            $this->log(modX::LOG_LEVEL_ERROR, $this->lexicon('manager_log_err_save'));
             return null;
         }
         return $ml;
