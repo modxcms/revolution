@@ -39,28 +39,31 @@ class CategoryProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-        $modx->error->reset();
+    public function setUp() {
+        parent::setUp();
         /** @var modCategory $category */
-        $category = $modx->getObject('modCategory',array('category' => 'UnitTestCategory'));
-        if ($category) $category->remove();
-        $category = $modx->getObject('modCategory',array('category' => 'UnitTestCategory2'));
-        if ($category) $category->remove();
+        $category = $this->modx->newObject('modCategory');
+        $category->fromArray(array('category' => 'UnitTestCategory'));
+        $category->save();
+
+        $category = $this->modx->newObject('modCategory');
+        $category->fromArray(array('category' => 'UnitTestCategory2'));
+        $category->save();
     }
 
     /**
      * Cleanup data after this test.
      */
-    public static function tearDownAfterClass() {
-        /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+    public function tearDown() {
+        parent::tearDown();
         /** @var modCategory $category */
-        $category = $modx->getObject('modCategory',array('category' => 'UnitTestCategory'));
-        if ($category) $category->remove();
-        $category = $modx->getObject('modCategory',array('category' => 'UnitTestCategory2'));
-        if ($category) $category->remove();
+        $categories = $this->modx->getCollection('modCategory',array(
+            'category:LIKE' => 'UnitTest%',
+        ));
+        foreach ($categories as $category) {
+            $category->remove();
+        }
+        $this->modx->error->reset();
     }
 
     /**
@@ -79,9 +82,11 @@ class CategoryProcessorsTest extends MODxTestCase {
             $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modCategory',array('category' => $categoryPk));
-        $passed = $s && $ct > 0;
-        $passed = $shouldPass ? $passed : !$passed;
+        $newCategory = $this->modx->getObject('modCategory',array('category' => $categoryPk));
+        $passed = $s && $newCategory;
+        if (!$shouldPass) {
+            $passed = !$passed;
+        }
         $this->assertTrue($passed,'Could not create Category: `'.$categoryPk.'`: '.$result->getMessage());
     }
     /**
@@ -90,9 +95,9 @@ class CategoryProcessorsTest extends MODxTestCase {
      */
     public function providerCategoryCreate() {
         return array(
-            array(true,'UnitTestCategory'),
-            array(true,'UnitTestCategory2'),
-            array(false,'UnitTestCategory2'),
+            array(true,'UnitTestCat'),
+            array(true,'UnitTestCat2'),
+            array(false,'UnitTestCategory'), /* already exists */
             array(false,''),
         );
     }
@@ -171,7 +176,7 @@ class CategoryProcessorsTest extends MODxTestCase {
             array(true,'id','ASC',5,0),
             array(true,'category','DESC',null,0),
             array(false,'category','ASC',5,7),
-            array(false,'name','ASC',5,0),
+            array(false,'name','ASC',5,0), /* use invalid pk field */
         );
     }
     

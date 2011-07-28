@@ -39,51 +39,38 @@ class ChunkProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-        $modx->error->reset();
-        $modx->lexicon->load('chunk');
+    public function setUp() {
+        parent::setUp();
+        $this->modx->lexicon->load('chunk');
         /** @var modChunk $chunk */
-        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk'));
-        if ($chunk) $chunk->remove();
-        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk2'));
-        if ($chunk) $chunk->remove();
-        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk3'));
-        if ($chunk) $chunk->remove();
-        $chunk = $modx->getObject('modChunk',array('name' => 'Untitled Chunk'));
-        if ($chunk) $chunk->remove();
+        $chunk = $this->modx->newObject('modChunk');
+        $chunk->fromArray(array('name' => 'UnitTestChunk'));
+        $chunk->save();
 
         /** @var modCategory $category */
-        $category = $modx->getObject('modCategory',array('category' => 'UnitTestChunks'));
-        if (!$category) {
-            $category = $modx->newObject('modCategory');
-            $category->set('id',1);
-            $category->set('category','UnitTestChunks');
-            $category->save();
-        }
+        $category = $this->modx->newObject('modCategory');
+        $category->set('id',1);
+        $category->set('category','UnitTestChunks');
+        $category->save();
     }
 
     /**
-     * Cleanup data after this test.
+     * Cleanup data after each test.
      */
-    public static function tearDownAfterClass() {
-        /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-
+    public function tearDown() {
+        parent::tearDown();
+        $chunks = $this->modx->getCollection('modChunk',array('name:LIKE' => '%UnitTest%'));
         /** @var modChunk $chunk */
-        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk'));
-        if ($chunk) $chunk->remove();
-        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk2'));
-        if ($chunk) $chunk->remove();
-        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk3'));
-        if ($chunk) $chunk->remove();
-        $chunk = $modx->getObject('modChunk',array('name' => 'Untitled Chunk'));
-        if ($chunk) $chunk->remove();
-
+        foreach ($chunks as $chunk) {
+            $chunk->remove();
+        }
+        
         /** @var modCategory $category */
-        $category = $modx->getObject('modCategory',array('category' => 'UnitTestChunks'));
-        if ($category) $category->remove();
+        $category = $this->modx->getObject('modCategory',array('category' => 'UnitTestChunks'));
+        if ($category) {
+            $category->remove();
+        }
+        $this->modx->error->reset();
     }
 
     /**
@@ -113,9 +100,9 @@ class ChunkProcessorsTest extends MODxTestCase {
     public function providerChunkCreate() {
         return array(
             /* pass: straight up chunk */
-            array(true,'UnitTestChunk'), 
+            array(true,'UnitTestChunk2'),
             /* pass: another chunk with valid other fields */
-            array(true,'UnitTestChunk2',array(
+            array(true,'UnitTestChunk3',array(
                 'description' => '2nd Unit Testing chunk',
                 'snippet' => '<p>Test</p>',
                 'locked' => false,
@@ -128,7 +115,7 @@ class ChunkProcessorsTest extends MODxTestCase {
                 'category' => 123,
             )),*/
             /* fail: already exists */
-            array(false,'UnitTestChunk2'),
+            array(false,'UnitTestChunk'),
             /* fail: no data */
             array(false,''),
         );

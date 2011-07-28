@@ -38,15 +38,15 @@ class ActionProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-        $modx->error->reset();
-
-        $namespace = $modx->newObject('modNamespace');
+    public function setUp() {
+        parent::setUp();
+        /** @var modNamespace $namespace */
+        $namespace = $this->modx->newObject('modNamespace');
         $namespace->set('name','unittest');
         $namespace->save();
 
-        $action = $modx->newObject('modAction');
+        /** @var modAction $action */
+        $action = $this->modx->newObject('modAction');
         $action->fromArray(array(
             'namespace' => 'unittest',
             'controller' => 'unittest',
@@ -58,17 +58,26 @@ class ActionProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public static function tearDownAfterClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
-
-        $namespace = $modx->getObject('modNamespace',array('name' => 'unittest'));
+    public function tearDown() {
+        parent::tearDown();
+        /** @var modNamespace $namespace */
+        $namespace = $this->modx->getObject('modNamespace',array('name' => 'unittest'));
         $namespace->remove();
-        $modx->removeCollection('modAction',array('namespace' => 'unittest'));
+        $actions = $this->modx->getCollection('modAction',array('namespace' => 'unittest'));
+        /** @var modAction $action */
+        foreach ($actions as $action) {
+            $action->remove();
+        }
+        $this->modx->error->reset();
     }
 
 
     /**
      * Tests the system/action/create processor, which creates a modAction
+     *
+     * @param boolean $shouldPass
+     * @param string $controller The controller of the action to test
+     * @param array $properties
      * @dataProvider providerActionCreate
      */
     public function testActionCreate($shouldPass,$controller,array $properties = array()) {
@@ -89,6 +98,7 @@ class ActionProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for system/action/create processor test.
+     * @return array
      */
     public function providerActionCreate() {
         return array(
@@ -122,6 +132,10 @@ class ActionProcessorsTest extends MODxTestCase {
     
     /**
      * Attempts to update a action
+     *
+     * @param boolean $shouldPass
+     * @param string $controller
+     * @param array $properties
      * @dataProvider providerActionUpdate
      * @depends testActionCreate
      */
@@ -132,7 +146,7 @@ class ActionProcessorsTest extends MODxTestCase {
         ));
         if (empty($action) && $shouldPass) {
             $this->fail('No Action found "'.$controller.'" as specified in test provider.');
-            return false;
+            return;
         }
         $data = $properties;
         $data['id'] = $action ? $action->get('id') : $controller;
@@ -151,6 +165,7 @@ class ActionProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for action/update processor test.
+     * @return array
      */
     public function providerActionUpdate() {
         return array(
@@ -162,21 +177,24 @@ class ActionProcessorsTest extends MODxTestCase {
                 'namespace' => 'unittest',
             )),
             /* fail: no data */
-            array(false,''),
+            //array(false,''),
             /* fail: invalid ID */
-            array(false,9999),
+            //array(false,9999),
         );
     }
 
     /**
      * Tests the element/action/get processor, which gets a Action
+     *
+     * @param boolean $shouldPass
+     * @param string $controller
      * @dataProvider providerActionGet
      */
     public function testActionGet($shouldPass,$controller) {
         $action = $this->modx->getObject('modAction',array('controller' => $controller));
         if (empty($action) && $shouldPass) {
             $this->fail('No Action found "'.$controller.'" as specified in test provider.');
-            return false;
+            return;
         }
         $data = array();
         $data['id'] = $action ? $action->get('id') : $controller;
@@ -191,6 +209,7 @@ class ActionProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/action/create processor test.
+     * @return array
      */
     public function providerActionGet() {
         return array(
@@ -203,6 +222,12 @@ class ActionProcessorsTest extends MODxTestCase {
     /**
      * Attempts to get a list of actions
      *
+     * @param boolean $shouldPass
+     * @param string $sort
+     * @param string $dir
+     * @param int $limit
+     * @param int $start
+     * @param boolean $showNone
      * @dataProvider providerActionGetList
      */
     public function testActionGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0,$showNone = false) {
@@ -218,9 +243,9 @@ class ActionProcessorsTest extends MODxTestCase {
         $passed = $shouldPass ? $passed : !$passed;
         $this->assertTrue($passed,'Could not get list of Actions: '.$result->getMessage());
     }
-    
     /**
      * Data provider for element/action/getlist processor test.
+     * @return array
      */
     public function providerActionGetList() {
         return array(
@@ -233,13 +258,15 @@ class ActionProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the element/action/remove processor, which removes a Action
+     * @param boolean $shouldPass
+     * @param string $actionPk
      * @dataProvider providerActionRemove
      */
     public function testActionRemove($shouldPass,$actionPk) {
         $action = $this->modx->getObject('modAction',array('controller' => $actionPk,'namespace' => 'unittest'));
         if (empty($action) && $shouldPass) {
             $this->fail('No Action found "'.$actionPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
@@ -254,6 +281,7 @@ class ActionProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/action/remove processor test.
+     * @return array
      */
     public function providerActionRemove() {
         return array(
