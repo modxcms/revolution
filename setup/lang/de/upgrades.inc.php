@@ -35,6 +35,7 @@ $_lang['lexiconfocus_add_id'] = 'modLexiconFocus: Spalte `id` hinzugefügt.';
 $_lang['lexiconfocus_add_pk'] = 'modLexiconFocus: PRIMARY KEY zur Spalte `id` hinzugefügt.';
 $_lang['lexiconfocus_alter_pk'] = 'modLexiconFocus: `name` von PRIMARY KEY in UNIQUE KEY geändert.';
 $_lang['lexiconfocus_drop_pk'] = 'modLexiconFocus: PRIMARY KEY entfernt.';
+$_lang['modify_column'] = 'Spalte `[[+column]]` von `[[+old]]` in `[[+new]]` geändert in der Tabelle `[[+table]]`';
 $_lang['rename_column'] = 'Spalte `[[+old]]` in `[[+new]]` umbenannt in der Tabelle `[[+table]]`.';
 $_lang['rename_table'] = 'Tabelle `[[+old]]` umbenannt in `[[+new]]`.';
 $_lang['remove_fulltext_index'] = 'Volltext-Index `[[+index]]` entfernt.';
