@@ -237,6 +237,10 @@ class modX extends xPDO {
      */
     public $controller = null;
     /**
+     * @var modRegistry $registry
+     */
+    public $registry;
+    /**
      * @var array An array of regex patterns regulary cleansed from content.
      */
     public $sanitizePatterns = array(
