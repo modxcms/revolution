@@ -24,7 +24,9 @@ if ($modx->error->hasError()) {
 /* create property set */
 $set = $modx->newObject('modPropertySet');
 $set->set('name',$scriptProperties['name']);
-$set->set('description',$scriptProperties['description']);
+if (!empty($scriptProperties['description'])) {
+    $set->set('description',$scriptProperties['description']);
+}
 
 /* set category if specified */
 if (isset($scriptProperties['category']) && $scriptProperties['category'] != 0 && $scriptProperties['category'] != '') {
