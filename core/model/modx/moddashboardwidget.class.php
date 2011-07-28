@@ -66,7 +66,7 @@ class modDashboardWidget extends xPDOSimpleObject {
                     $this->xpdo->getOption('manager_theme',null,'default'),
                 ),$content);
                 if (file_exists($content)) {
-                    $className = include $content;
+                    $className = include_once $content;
                     if (class_exists($className)) { /* is a class-based widget */
                         /** @var modDashboardWidgetInterface $widget */
                         $widget = new $className($this->xpdo,$this,$controller);
