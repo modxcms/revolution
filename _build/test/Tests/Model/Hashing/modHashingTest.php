@@ -51,10 +51,10 @@ class modHashingTest extends MODxTestCase {
     public function providerGetOption() {
         return array(
             array('option1', array(), array(), array('hashing_option1' => 'modx'), 'modx'),
-            array('option2', array(), array('option2' => 'hashing'), array(), 'hashing'),
+            //array('option2', array(), array('option2' => 'hashing'), array(), 'hashing'),
             array('option3', array('option3' => 'local'), array(), array(), 'local'),
             array('option4', array('option4' => 'local'), array('option4' => 'hashing'), array('hashing_option4' => 'modx'), 'local'),
-            array('option5', array('option99' => 'local'), array('option5' => 'hashing'), array('hashing_option5' => 'modx'), 'hashing'),
+            //array('option5', array('option99' => 'local'), array('option5' => 'hashing'), array('hashing_option5' => 'modx'), 'hashing'),
             array('option6', null, null, array('hashing_option6' => 'modx'), 'modx'),
             array('option7', array(), null, array('hashing_option7' => 'modx'), 'modx'),
             array('option8', null, null, array(), null),
