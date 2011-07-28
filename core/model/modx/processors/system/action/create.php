@@ -32,9 +32,12 @@ if (empty($scriptProperties['namespace'])) return $modx->error->failure($modx->l
 $namespace = $modx->getObject('modNamespace',$scriptProperties['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
-/* create action */
+/* @var modAction $action */
 $action = $modx->newObject('modAction');
 $action->fromArray($scriptProperties);
+if (empty($scriptProperties['lang_topics'])) {
+    $action->set('lang_topics','');
+}
 
 /* save action */
 if ($action->save() == false) {

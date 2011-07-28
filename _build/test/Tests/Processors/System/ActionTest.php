@@ -51,6 +51,10 @@ class ActionProcessorsTest extends MODxTestCase {
             'namespace' => 'unittest',
             'controller' => 'unittest',
             'parent' => 0,
+            'haslayout' => true,
+            'assets' => '',
+            'lang_topics' => '',
+            'help_url' => 'Actions',
         ));
         $action->save();
     }
