@@ -37,9 +37,6 @@ if (strstr(str_replace('.','',serialize(array_merge($_GET, $_POST, $_COOKIE))), 
 if (!defined('MODX_CORE_PATH')) {
     define('MODX_CORE_PATH', dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR);
 }
-if (!defined('MODX_CONFIG_KEY')) {
-    define('MODX_CONFIG_KEY', 'config');
-}
 require_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php');
 
 /**
@@ -392,6 +389,9 @@ class modX extends xPDO {
     public function __construct($configPath= '', array $options = array()) {
         global $database_dsn, $database_user, $database_password, $config_options, $table_prefix, $site_id, $uuid;
         modX :: protect();
+        if (!defined('MODX_CONFIG_KEY')) {
+            define('MODX_CONFIG_KEY', 'config');
+        }
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
         }

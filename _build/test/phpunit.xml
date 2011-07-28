@@ -14,6 +14,7 @@
         </testsuite>
         <testsuite name="Model">
             <file>Tests/Model/modXTest.php</file>
+            <directory>Tests/Model/Dashboard</directory>
             <directory>Tests/Model/Element</directory>
             <directory>Tests/Model/Error</directory>
             <directory>Tests/Model/Filters</directory>
