@@ -27,3 +27,6 @@ modext.js
 
 # ignore PHP files beginning with test
 test*.php
+
+# ignore mac files
+.DS_Store

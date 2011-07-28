@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
+ * @subpackage sqlsrv
  */
 $xpdo_meta_map['modDashboardWidget']= array (
   'package' => 'modx',
@@ -9,7 +9,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
   'table' => 'dashboard_widget',
   'fields' => 
   array (
-    'name' => '',
+    'name' => NULL,
     'description' => NULL,
     'type' => NULL,
     'content' => NULL,
@@ -21,21 +21,21 @@ $xpdo_meta_map['modDashboardWidget']= array (
   array (
     'name' => 
     array (
-      'dbtype' => 'varchar',
+      'dbtype' => 'nvarchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
-      'default' => '',
       'index' => 'index',
     ),
     'description' => 
     array (
-      'dbtype' => 'text',
+      'dbtype' => 'nvarchar',
+      'precision' => 'max',
       'phptype' => 'string',
     ),
     'type' => 
     array (
-      'dbtype' => 'varchar',
+      'dbtype' => 'nvarchar',
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
@@ -43,12 +43,13 @@ $xpdo_meta_map['modDashboardWidget']= array (
     ),
     'content' => 
     array (
-      'dbtype' => 'mediumtext',
+      'dbtype' => 'nvarchar',
+      'precision' => 'max',
       'phptype' => 'string',
     ),
     'namespace' => 
     array (
-      'dbtype' => 'varchar',
+      'dbtype' => 'nvarchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
@@ -57,7 +58,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
     ),
     'lexicon' => 
     array (
-      'dbtype' => 'varchar',
+      'dbtype' => 'nvarchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
@@ -66,7 +67,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
     ),
     'size' => 
     array (
-      'dbtype' => 'varchar',
+      'dbtype' => 'nvarchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,

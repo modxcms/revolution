@@ -387,6 +387,64 @@
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" local="resource" foreign="id" cardinality="one" owner="foreign" />
     </object>
+
+    <!-- A dashboard that shows on the loading screen for a user -->
+    <object class="modDashboard" table="dashboard" extends="xPDOSimpleObject">
+        <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="UserGroups" class="modUserGroup" local="id" foreign="dashboard" cardinality="many" owner="local" />
+        <composite alias="Placements" class="modDashboardWidgetPlacement" local="id" foreign="dashboard" cardinality="many" owner="local" />
+    </object>
+
+    <!-- Widgets that can be placed on dashboards. Can be files, html, or a snippet -->
+    <object class="modDashboardWidget" table="dashboard_widget" extends="xPDOSimpleObject">
+        <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
+        <field key="type" dbtype="nvarchar" precision="100" phptype="string" null="false" index="index" /><!-- file/chunk/snippet -->
+        <field key="content" dbtype="nvarchar" precision="max" phptype="string" />
+        <field key="namespace" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="lexicon" dbtype="nvarchar" precision="255" phptype="string" null="false" default="core:dashboards" index="index" />
+        <field key="size" dbtype="nvarchar" precision="255" phptype="string" null="false" default="half" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="type" name="type" primary="false" unique="false" type="BTREE">
+            <column key="type" length="" collation="A" null="false" />
+        </index>
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
+        <index alias="lexicon" name="lexicon" primary="false" unique="false" type="BTREE">
+            <column key="lexicon" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
+        <composite alias="Placements" class="modDashboardWidgetPlacement" local="id" foreign="widget" cardinality="many" owner="local" />
+    </object>
+
+    <!-- Placements of widgets on a dashboard -->
+    <object class="modDashboardWidgetPlacement" table="dashboard_widget_placement" extends="xPDOObject">
+        <field key="dashboard" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
+        <field key="widget" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
+        <field key="rank" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+            <column key="dashboard" collation="A" null="false" />
+            <column key="widget" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Dashboard" class="modDashboard" local="dashboard" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Widget" class="modDashboardWidget" local="widget" foreign="id" cardinality="one" owner="foreign" />
+    </object>
     
     <object class="modDocument" extends="modResource" />
     

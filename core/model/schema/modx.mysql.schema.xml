@@ -424,7 +424,7 @@
             <column key="lexicon" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="modNamespace" cardinality="one" owner="foreign" />
+        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
         <composite alias="Placements" class="modDashboardWidgetPlacement" local="id" foreign="widget" cardinality="many" owner="local" />
     </object>
 
