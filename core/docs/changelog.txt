@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Accept null options in modHashing->__construct()
 - [#4607], [#3463] Add rank field for contexts to allow custom sorting in tree, fix issues with context/resource dragging and dropping and ensure context name validation rules are consistent
 - Improve UI of User's groups to allow for assigning ranks to User Groups for a User
 - Add Custom Dashboards and Dashboard Widgets

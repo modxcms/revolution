@@ -47,16 +47,12 @@ class modMD5HashTest extends MODxTestCase {
         $actual = $md5->hash($string);
         $this->assertEquals($expected, $actual, "Expected hash value not generated.");
     }
-    /**
-     * @todo Refactor conditions #2/4 (or the test) to properly pass in the right values so it doesn't throw a PHP error
-     * @return array
-     */
     public function providerHash() {
         return array(
             array('password', array(), md5('password')),
-            //array('password', null, md5('password')),
+            array('password', null, md5('password')),
             array('what do you think of this?', array(), md5('what do you think of this?')),
-            //array('what do you think of this?', null, md5('what do you think of this?')),
+            array('what do you think of this?', null, md5('what do you think of this?')),
         );
     }
 }

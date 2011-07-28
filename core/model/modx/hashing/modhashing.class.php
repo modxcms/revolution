@@ -54,11 +54,13 @@ class modHashing {
      * Constructs a new instance of the modHashing service class.
      *
      * @param xPDO &$modx A reference to an modX (or xPDO) instance.
-     * @param array $options An array of options for the hashing service.
+     * @param array|null $options An array of options for the hashing service.
      */
-    function __construct(xPDO &$modx, array $options= array()) {
+    function __construct(xPDO &$modx, $options= array()) {
         $this->modx= & $modx;
-        $this->options = $options;
+        if (is_array($options)) {
+            $this->options = $options;
+        }
     }
 
     /**
