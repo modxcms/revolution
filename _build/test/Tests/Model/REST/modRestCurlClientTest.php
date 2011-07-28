@@ -31,4 +31,8 @@
  * @group modRestClient
  * @group modRestCurlClient
  */
-class modRestCurlClientTest extends MODxTestCase {}
+class modRestCurlClientTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

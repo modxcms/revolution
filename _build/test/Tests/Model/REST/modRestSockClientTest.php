@@ -31,4 +31,8 @@
  * @group modRestClient
  * @group modRestSockClient
  */
-class modRestSockClientTest extends MODxTestCase {}
+class modRestSockClientTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

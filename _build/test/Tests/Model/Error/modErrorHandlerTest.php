@@ -30,4 +30,8 @@
  * @group Error
  * @group modErrorHandler
  */
-class modErrorHandlerTest extends MODxTestCase {}
+class modErrorHandlerTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

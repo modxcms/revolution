@@ -30,4 +30,8 @@
  * @group Registry
  * @group modRegister
  */
-class modRegisterTest extends MODxTestCase {}
+class modRegisterTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

@@ -28,4 +28,8 @@
  * @package modx-test
  * @subpackage modx
  */
-class MODxTeardownTest extends PHPUnit_Framework_TestCase {}
+class MODxTeardownTest extends PHPUnit_Framework_TestCase {
+    public function testTearDown() {
+        $this->assertTrue(true);
+    }
+}

@@ -30,4 +30,8 @@
  * @group Filters
  * @group modOutputFilter
  */
-class modOutputFilterTest extends MODxTestCase {}
+class modOutputFilterTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

@@ -31,4 +31,8 @@
  * @group modRegister
  * @group modFileRegister
  */
-class modFileRegisterTest extends MODxTestCase {}
+class modFileRegisterTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

@@ -30,4 +30,8 @@
  * @group Validation
  * @group modValidator
  */
-class modValidatorTest extends MODxTestCase {}
+class modValidatorTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

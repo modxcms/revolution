@@ -30,4 +30,8 @@
  * @group Transport
  * @group modTransportPackage
  */
-class modTransportPackageTest extends MODxTestCase {}
+class modTransportPackageTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

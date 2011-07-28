@@ -30,4 +30,8 @@
  * @group Mail
  * @group modPHPMailer
  */
-class modPHPMailerTest extends MODxTestCase {}
+class modPHPMailerTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}

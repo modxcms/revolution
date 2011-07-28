@@ -30,4 +30,8 @@
  * @group Filters
  * @group modInputFilter
  */
-class modInputFilterTest extends MODxTestCase {}
+class modInputFilterTest extends MODxTestCase {
+    public function testExample() {
+        $this->assertTrue(true);
+    }
+}
