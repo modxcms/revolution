@@ -53,6 +53,11 @@ class modRequestTest extends MODxTestCase {
         ));
         $action->save();
 
+
+        $_POST['testPost'] = 1;
+        $_GET['testGet'] = 2;
+        $_COOKIE['testCookie'] = 3;
+        $_REQUEST['testRequest'] = 4;
         $this->modx->loadClass('modRequest',null,true,true);
         $this->request = new modRequest($this->modx);
     }
@@ -72,6 +77,102 @@ class modRequestTest extends MODxTestCase {
             $action->remove();
         }
     }
+
+    /**
+     * Test to ensure modRequest is properly setting request parameters
+     */
+    public function testConstructorRequestParameters() {
+        $this->assertArrayHasKey('testPost',$this->request->parameters['POST'],'The modRequest constructor did not set the POST parameters properly.');
+        $this->assertArrayHasKey('testGet',$this->request->parameters['GET'],'The modRequest constructor did not set the GET parameters properly.');
+        $this->assertArrayHasKey('testCookie',$this->request->parameters['COOKIE'],'The modRequest constructor did not set the COOKIE parameters properly.');
+        $this->assertArrayHasKey('testRequest',$this->request->parameters['REQUEST'],'The modRequest constructor did not set the REQUEST parameters properly.');
+    }
+
+    /**
+     * Test the getResourceMethod method for getting the proper request method
+     * 
+     * @param string|int $expected
+     * @param string $requestKey
+     * @param string|int $requestValue
+     * @param string $paramAlias
+     * @param string $paramId
+     * @dataProvider providerGetResourceMethod
+     */
+    public function testGetResourceMethod($expected,$requestKey,$requestValue,$paramAlias = 'q',$paramId = 'id') {
+        $_REQUEST[$requestKey] = $requestValue;
+        $this->modx->setOption('request_param_alias',$paramAlias);
+        $this->modx->setOption('request_param_id',$paramId);
+
+        $method = $this->request->getResourceMethod();
+        $this->assertEquals($expected,$method,'The Resource Method did not match the expected value.');
+        unset($_REQUEST[$requestKey]);
+    }
+    /**
+     * @return array
+     */
+    public function providerGetResourceMethod() {
+        return array(
+            array('id','id',123),
+            array('id','idx',123,null,'idx'),
+            array('alias','p',2112,'p'),
+            array('alias','q','test.html'),
+            array('alias','page','test.html','page'),
+        );
+    }
+
+    /**
+     * @param $expected
+     * @param $requestKey
+     * @param $requestValue
+     * @param string $method
+     * @param string $paramAlias
+     * @param string $paramId
+     * @dataProvider providerGetResourceIdentifier
+     */
+    public function testGetResourceIdentifier($expected,$requestKey,$requestValue,$method = 'alias',$paramAlias = 'q',$paramId = 'id') {
+        $_REQUEST[$requestKey] = $requestValue;
+        $this->modx->setOption('request_param_alias',$paramAlias);
+        $this->modx->setOption('request_param_id',$paramId);
+        $this->modx->setOption('site_start',1);
+        $identifier = $this->request->getResourceIdentifier($method);
+
+        $this->assertEquals($expected,$identifier,'The Resource Identifier did not match the expected value.');
+        unset($_REQUEST[$requestKey]);
+    }
+    /**
+     * @return array
+     */
+    public function providerGetResourceIdentifier() {
+        return array(
+            array('test.html','q','test.html','alias'),
+            array('test.html','qz','test.html','alias','qz'),
+            array('','no','test.html','alias'),
+            array(123,'id',123,'id'),
+            array(123,'idx',123,'id',null,'idx'),
+            array('1',null,null,''),
+            array('1','qq','test.html',''),
+            array('1','idx',123,''),
+        );
+    }
+
+
+    public function getResourceIdentifier($method) {
+        $identifier = '';
+        switch ($method) {
+            case 'alias' :
+                $rAlias = $this->modx->getOption('request_param_alias', null, 'q');
+                $identifier = isset ($_REQUEST[$rAlias]) ? $_REQUEST[$rAlias] : $identifier;
+                break;
+            case 'id' :
+                $rId = $this->modx->getOption('request_param_id', null, 'id');
+                $identifier = isset ($_REQUEST[$rId]) ? $_REQUEST[$rId] : $identifier;
+                break;
+            default :
+                $identifier = $this->modx->getOption('site_start', null, 1);
+        }
+        return $identifier;
+    }
+
 
     /**
      * Test the getAllActionIDs method

@@ -176,6 +176,7 @@ class modRequest {
             xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
         if (is_array($cachedResource) && array_key_exists('resource', $cachedResource) && is_array($cachedResource['resource'])) {
+            /** @var modResource $resource */
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
@@ -221,6 +222,7 @@ class modRequest {
                         $this->modx->sendUnauthorizedPage();
                     }
                     if ($tvs = $resource->getMany('TemplateVars', 'all')) {
+                        /** @var modTemplateVar $tv */
                         foreach ($tvs as $tv) {
                             $resource->set($tv->get('name'), array(
                                 $tv->get('name'),
