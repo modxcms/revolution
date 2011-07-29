@@ -155,6 +155,7 @@ class modParser {
      * returned by prior passes, 0 by default.
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        $this->_processingTag = true;
         $this->_processingUncacheable = (boolean) $processUncacheable;
         $this->_removingUnprocessed = (boolean) $removeUnprocessed;
         $depth = $depth > 0 ? $depth - 1 : 0;
@@ -167,7 +168,6 @@ class modParser {
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
             $tagMap= array ();
             foreach ($tags as $tag) {
-                $this->_processingTag = true;
                 $token= substr($tag[1], 0, 1);
                 if (!$processUncacheable && $token === '!') {
                     if ($removeUnprocessed) {
@@ -193,12 +193,12 @@ class modParser {
                     $processed++;
                 }
             }
-            $this->_processingTag = false;
             $this->mergeTagOutput($tagMap, $content);
             if ($depth > 0) {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
         }
+        $this->_processingTag = false;
         return $processed;
     }
 
@@ -344,6 +344,7 @@ class modParser {
      * specified tag.
      */
     public function processTag($tag, $processUncacheable = true) {
+        $this->_processingTag = true;
         $element= null;
         $elementOutput= null;
 
@@ -352,6 +353,7 @@ class modParser {
 
         /* collect any nested element tags in the innerTag and process them */
         $this->processElementTags($outerTag, $innerTag, $processUncacheable);
+        $this->_processingTag = true;
         $outerTag= '[[' . $innerTag . ']]';
 
         $tagParts= xPDO :: escSplit('?', $innerTag, '`', 2);
@@ -365,6 +367,7 @@ class modParser {
         $cacheable= true;
         if ($token === '!') {
             if (!$processUncacheable) {
+                $this->_processingTag = false;
                 return $outerTag;
             }
             $cacheable= false;
@@ -442,6 +445,7 @@ class modParser {
             $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "Processing {$outerTag} as {$innerTag} using tagname {$tagName}:\n" . print_r($elementOutput, 1) . "\n\n");
             /* $this->modx->cacheManager->writeFile(MODX_BASE_PATH . 'parser.log', "Processing {$outerTag} as {$innerTag}:\n" . print_r($elementOutput, 1) . "\n\n", 'a'); */
         }
+        $this->_processingTag = false;
         return $elementOutput;
     }
 
