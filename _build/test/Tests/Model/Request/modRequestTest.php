@@ -34,6 +34,9 @@ class modRequestTest extends MODxTestCase {
     /** @var modRequest $request */
     public $request;
 
+    /**
+     * @return void
+     */
     public function setUp() {
         parent::setUp();
         /** @var modNamespace $namespace */
@@ -62,6 +65,9 @@ class modRequestTest extends MODxTestCase {
         $this->request = new modRequest($this->modx);
     }
 
+    /**
+     * @return void
+     */
     public function tearDown() {
         parent::tearDown();
 
@@ -165,6 +171,10 @@ class modRequestTest extends MODxTestCase {
         $this->assertInstanceOf('modError',$this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
     }
 
+    /**
+     * Ensure that the retrieveRequest method properly gets the stored REQUEST object
+     * @return void
+     */
     public function testRetrieveRequest() {
         if (empty($_SESSION)) $_SESSION = array();
         $_SESSION['modx.request.unit-test'] = $_REQUEST;
@@ -199,5 +209,121 @@ class modRequestTest extends MODxTestCase {
         $actions = $this->request->getAllActionIDs('unit-test');
         $total = $this->modx->getCount('modAction',array('namespace' => 'unit-test'));
         $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not filter down by namespace when grabbing actions.');
+    }
+
+    /**
+     * Test the getParameters method, getting various types of request data, and asking for specific keys
+     */
+    public function testGetParameters() {
+        $parameters = $this->request->getParameters();
+        $this->assertEquals(2,$parameters['testGet']);
+        $parameters = $this->request->getParameters(array(),'POST');
+        $this->assertEquals(1,$parameters['testPost']);
+        $parameters = $this->request->getParameters(array(),'COOKIE');
+        $this->assertEquals(3,$parameters['testCookie']);
+        $parameters = $this->request->getParameters(array(),'REQUEST');
+        $this->assertEquals(4,$parameters['testRequest']);
+
+        $parameters = $this->request->getParameters(array('testRequest'),'REQUEST');
+        $this->assertEquals(4,$parameters['testRequest']);
+
+        $parameters = $this->request->getParameters(array('testShouldNotExist'),'REQUEST');
+        $this->assertEmpty($parameters);
+    }
+
+    /**
+     * Test that getClientIp properly returns possible values for the user's IP address, obtained in different ways
+     * due to proxy considerations.
+     * 
+     * @param string $ip
+     * @param string $key
+     * @dataProvider providerGetClientIp
+     */
+    public function testGetClientIp($ip,$key = 'REMOTE_ADDR') {
+        $_SERVER[$key] = $ip;
+        $ipArray = $this->request->getClientIp();
+
+        $this->assertEquals($ip,$ipArray['ip']);
+        unset($_SERVER[$key]);
+    }
+    /**
+     * @return array
+     */
+    public function providerGetClientIp() {
+        return array(
+            array('123.45.67.100','REMOTE_ADDR'),
+            array('123.45.67.100','HTTP_X_FORWARDED_FOR'),
+            array('123.45.67.100','HTTP_X_FORWARDED'),
+            array('123.45.67.100','HTTP_X_CLUSTER_CLIENT_IP'),
+            array('123.45.67.100','HTTP_X_COMING_FROM'),
+            array('123.45.67.100','HTTP_FORWARDED_FOR'),
+            array('123.45.67.100','HTTP_FORWARDED'),
+            array('123.45.67.100','HTTP_COMING_FROM'),
+            array('123.45.67.100','HTTP_CLIENT_IP'),
+            array('123.45.67.100','HTTP_FROM'),
+            array('123.45.67.100','HTTP_VIA'),
+        );
+    }
+
+    /**
+     * Tests the _cleanResourceIdentifier method
+     * @param string $identifier
+     * @param string $expected
+     * @param boolean $furls
+     * @dataProvider providerCleanResourceIdentifier
+     */
+    public function testCleanResourceIdentifier($identifier,$expected,$furls = true) {
+        $this->modx->aliasMap[$identifier] = 998;
+        $this->modx->resourceMethod = 'id';
+        $this->modx->setOption('friendly_urls',$furls);
+        $this->modx->setOption('container_suffix','');
+        
+        $identifier = $this->request->_cleanResourceIdentifier($identifier);
+        $this->assertEquals($expected,$this->modx->resourceMethod);
+        unset($this->modx->aliasMap[$identifier]);
+    }
+    /**
+     * @return array
+     */
+    public function providerCleanResourceIdentifier() {
+        return array(
+            array('test.html','alias',true),
+            array('the-cake-is-a-lie.png','alias',true),
+            array('fail.html','id',false),
+            array('','id'),
+        );
+    }
+
+    /**
+     * @param $value
+     * @param $expected
+     * @dataProvider providerSanitizeRequest
+     */
+    public function testSanitizeRequest($value,$expected) {
+        $this->modx->setOption('allow_tags_in_post',false);
+        $_GET['test'] = $value;
+        $_POST['test'] = $value;
+        $_REQUEST['test'] = $value;
+        $_COOKIE['test'] = $value;
+        $this->request->sanitizeRequest();
+        $this->assertEquals($expected,$_GET['test'],'Failed on GET');
+        $this->assertEquals($expected,$_POST['test'],'Failed on POST');
+        $this->assertEquals($expected,$_REQUEST['test'],'Failed on REQUEST');
+        $this->assertEquals($expected,$_COOKIE['test'],'Failed on COOKIE');
+    }
+    /**
+     * @return array
+     */
+    public function providerSanitizeRequest() {
+        return array(
+            array('A test string','A test string'),
+            array('MODX [[fakeSnippet]] Tags','MODX  Tags'),
+            array("MODX [[\$chunk? &property=`test`\n &across=`lines
+
+` &test=1]] Tags",'MODX  Tags'),
+            array('Javascript! <script>alert(\'test\');</script> Yay.','Javascript!  Yay.'),
+            array("Javascript line break! <script>alert('test');\n</script>Yay.","Javascript line break! Yay."),
+            array('Testing entities &#123;kthx','Testing entities kthx'),
+        );
     }
 }
