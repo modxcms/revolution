@@ -121,9 +121,11 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * @param $expected
-     * @param $requestKey
-     * @param $requestValue
+     * Test the getResourceIdentifier method
+     * 
+     * @param string|int $expected
+     * @param string $requestKey
+     * @param string|int $requestValue
      * @param string $method
      * @param string $paramAlias
      * @param string $paramId
@@ -155,24 +157,36 @@ class modRequestTest extends MODxTestCase {
         );
     }
 
-
-    public function getResourceIdentifier($method) {
-        $identifier = '';
-        switch ($method) {
-            case 'alias' :
-                $rAlias = $this->modx->getOption('request_param_alias', null, 'q');
-                $identifier = isset ($_REQUEST[$rAlias]) ? $_REQUEST[$rAlias] : $identifier;
-                break;
-            case 'id' :
-                $rId = $this->modx->getOption('request_param_id', null, 'id');
-                $identifier = isset ($_REQUEST[$rId]) ? $_REQUEST[$rId] : $identifier;
-                break;
-            default :
-                $identifier = $this->modx->getOption('site_start', null, 1);
-        }
-        return $identifier;
+    /**
+     * Test the loadErrorHandler method
+     */
+    public function testLoadErrorHandler() {
+        $this->request->loadErrorHandler();
+        $this->assertInstanceOf('modError',$this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
     }
 
+    public function testRetrieveRequest() {
+        if (empty($_SESSION)) $_SESSION = array();
+        $_SESSION['modx.request.unit-test'] = $_REQUEST;
+        $request = $this->request->retrieveRequest('unit-test');
+        $this->assertNotEmpty($request,'modRequest.retrieveRequest did not correctly retrieve the REQUEST data.');
+        $this->assertArrayHasKey('testRequest',$request,'modRequest.retrieveRequest did not retrieve the correct REQUEST data, as it does not contain a valid REQUEST field.');
+        unset($_SESSION['modx.request.unit-test']);
+    }
+
+    /**
+     * Ensure that the preserveRequest method properly preserves the REQUEST object
+     * @return void
+     * @depends testRetrieveRequest
+     */
+    public function testPreserveRequest() {
+        if (empty($_SESSION)) $_SESSION = array();
+        $this->request->preserveRequest('unit-test');
+        $request = $this->request->retrieveRequest('unit-test');
+        $this->assertNotEmpty($request,'modRequest.preserveRequest did not correctly preserve the REQUEST data.');
+        $this->assertArrayHasKey('testRequest',$request,'modRequest.preserveRequest did not preserve the correct REQUEST data, as it does not contain a valid REQUEST field.');
+        unset($_SESSION['modx.request.unit-test']);
+    }
 
     /**
      * Test the getAllActionIDs method

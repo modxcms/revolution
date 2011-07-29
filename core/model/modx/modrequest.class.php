@@ -472,14 +472,15 @@ class modRequest {
     public function getActionIDs(array $actions = array(), $namespace = 'core') {
         $as = array();
         foreach ($actions as $action) {
-            $act = $this->modx->getObject('modAction',array(
+            /** @var modAction $actionObject */
+            $actionObject = $this->modx->getObject('modAction',array(
                 'namespace' => $namespace,
                 'controller' => $action,
             ));
-            if ($act == null) {
+            if (empty($actionObject)) {
                 $as[$action] = 0;
             } else {
-                $as[$action] = $act->get('id');
+                $as[$action] = $actionObject->get('id');
             }
         }
         return $as;
