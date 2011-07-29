@@ -55,32 +55,25 @@ $description = $this->install->lexicon('add_index',array('index' => 'primary_gro
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'primary_group'));
 
 /* assign primary_group for users with one group, or with admin group */
-$users = $modx->getIterator('modUser',array(
+$c = $modx->newQuery('modUser');
+$c->where(array(
     'primary_group' => 0,
 ));
+$users = $modx->getCollectionGraph('modUser','{"UserGroupMembers":{"UserGroup":{}}}',$c);
 /** @var modUser $user */
 foreach ($users as $user) {
-    $c = $modx->newQuery('modUserGroupMember');
-    $c->innerJoin('modUserGroup','UserGroup');
-    $c->select($modx->getSelectColumns('modUserGroupMember','modUserGroupMember'));
-    $c->select(array('UserGroup.name'));
-    $c->where(array(
-        'modUserGroupMember.member' => $user->get('id'),
-    ));
-    $c->sortby($modx->getSelectColumns('modUserGroupMember','modUserGroupMember','',array('user_group')),'ASC');
-    $memberships = $modx->getCollection('modUserGroupMember',$c);
-    if (count($memberships) == 1) {
+    if (count($user->UserGroupMembers) == 1) {
         /** @var modUserGroupMember $membership */
-        foreach ($memberships as $membership) {
+        foreach ($user->UserGroupMembers as $membership) {
             $user->set('primary_group',$membership->get('user_group'));
             $user->save();
             break;
         }
-    } elseif (count($memberships) > 0) {
+    } elseif (count($user->UserGroupMembers) > 0) {
         $idx = 0;
         /** @var modUserGroupMember $membership */
-        foreach ($memberships as $membership) {
-            if ($membership->get('name') == 'Administrator' || $idx == 0) {
+        foreach ($user->UserGroupMembers as $membership) {
+            if ($membership->UserGroup->get('name') == 'Administrator' || $idx == 0) {
                 $user->set('primary_group',$membership->get('user_group'));
                 $user->save();
                 if ($membership->get('name') == 'Administrator') {

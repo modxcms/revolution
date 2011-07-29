@@ -10,6 +10,10 @@
  * @property int $role The ID of the Role the User has for this User Group
  * @property int $rank Used when sorting memberships within a User Group
  *
+ * @property modUser $User
+ * @property modUserGroup $UserGroup
+ * @property modUserGroupRole $UserGroupRole
+ *
  * @see modUser
  * @see modUserGroup
  * @see modUserGroupRole
