@@ -18,6 +18,7 @@
             <directory>Tests/Model/Dashboard</directory>
             <directory>Tests/Model/Element</directory>
             <directory>Tests/Model/Error</directory>
+            <directory>Tests/Model/FormCustomization</directory>
             <directory>Tests/Model/Filters</directory>
             <directory>Tests/Model/Hashing</directory>
             <directory>Tests/Model/Mail</directory>
