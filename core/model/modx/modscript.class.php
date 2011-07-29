@@ -52,7 +52,16 @@ class modScript extends modElement {
                 if ($this->_output && is_string($this->_output)) {
                     /* collect element tags in the evaluated content and process them */
                     $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
-                    $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                    $this->xpdo->parser->processElementTags(
+                        $this->_tag,
+                        $this->_output,
+                        $this->xpdo->parser->isProcessingUncacheable(),
+                        $this->xpdo->parser->isRemovingUnprocessed(),
+                        '[[',
+                        ']]',
+                        array(),
+                        $maxIterations
+                    );
                 }
                 $this->filterOutput();
                 unset ($this->xpdo->event->params);
