@@ -984,7 +984,16 @@ class modFieldTag extends modTag {
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->modx->parser->processElementTags(
+                    $this->_tag,
+                    $this->_output,
+                    $this->modx->parser->isProcessingUncacheable(),
+                    $this->modx->parser->isRemovingUnprocessed(),
+                    '[[',
+                    ']]',
+                    array(),
+                    $maxIterations
+                );
             }
             $this->filterOutput();
             $this->cache();
@@ -1051,7 +1060,16 @@ class modPlaceholderTag extends modTag {
                 if (is_string($this->_output) && !empty($this->_output)) {
                     /* collect element tags in the content and process them */
                     $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                    $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                    $this->modx->parser->processElementTags(
+                        $this->_tag,
+                        $this->_output,
+                        $this->modx->parser->isProcessingUncacheable(),
+                        $this->modx->parser->isRemovingUnprocessed(),
+                        '[[',
+                        ']]',
+                        array(),
+                        $maxIterations
+                    );
                 }
             }
             if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
@@ -1125,7 +1143,16 @@ class modLinkTag extends modTag {
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->modx->parser->processElementTags(
+                    $this->_tag,
+                    $this->_output,
+                    $this->modx->parser->isProcessingUncacheable(),
+                    $this->modx->parser->isRemovingUnprocessed(),
+                    '[[',
+                    ']]',
+                    array(),
+                    $maxIterations
+                );
                 if (isset ($this->modx->aliasMap[$this->_output])) {
                     $this->_output= $this->modx->aliasMap[$this->_output];
                 }
@@ -1197,7 +1224,16 @@ class modLexiconTag extends modTag {
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->modx->parser->processElementTags(
+                    $this->_tag,
+                    $this->_output,
+                    $this->modx->parser->isProcessingUncacheable(),
+                    $this->modx->parser->isRemovingUnprocessed(),
+                    '[[',
+                    ']]',
+                    array(),
+                    $maxIterations
+                );
             }
             $this->filterOutput();
             $this->cache();

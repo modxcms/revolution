@@ -130,7 +130,16 @@ class modTemplateVar extends modElement {
 
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
-                $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->xpdo->parser->processElementTags(
+                    $this->_tag,
+                    $this->_output,
+                    $this->xpdo->parser->isProcessingUncacheable(),
+                    $this->xpdo->parser->isRemovingUnprocessed(),
+                    '[[',
+                    ']]',
+                    array(),
+                    $maxIterations
+                );
 
                 /* remove the placeholders set from the properties of this element and restore global values */
                 if (isset($scope['keys'])) $this->xpdo->unsetPlaceholders($scope['keys']);
