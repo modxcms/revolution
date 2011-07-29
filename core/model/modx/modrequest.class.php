@@ -453,8 +453,10 @@ class modRequest {
         $actions = $this->modx->getCollection('modAction',$c);
 
         $actionList = array();
+        /** @var modAction $action */
         foreach ($actions as $action) {
-            $actionList[$action->get('controller')] = $action->get('id');
+            $key = ($action->get('namespace') == 'core' ? '' : $action->get('namespace').':').$action->get('controller');
+            $actionList[$key] = $action->get('id');
         }
         return $actionList;
     }
