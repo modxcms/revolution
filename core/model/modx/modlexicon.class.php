@@ -299,6 +299,7 @@ class modLexicon {
     public function getNamespacePath($namespace = 'core') {
         $corePath = $this->modx->getOption('core_path',null,MODX_CORE_PATH);
         if ($namespace != 'core') {
+            /** @var modNamespace $namespaceObj */
             $namespaceObj = $this->modx->getObject('modNamespace',$namespace);
             if ($namespaceObj) {
                 $corePath = $namespaceObj->get('path');
@@ -320,6 +321,7 @@ class modLexicon {
 
         $topics = array();
         if (!is_dir($lexPath)) return $topics;
+        /** @var DirectoryIterator $topic */
         foreach (new DirectoryIterator($lexPath) as $topic) {
             if (in_array($topic,array('.','..','.svn','.git','_notes'))) continue;
             if (!$topic->isReadable()) continue;
@@ -344,6 +346,7 @@ class modLexicon {
         $corePath = $this->getNamespacePath($namespace);
         $lexPath = str_replace('//','/',$corePath.'/lexicon/');
         $languages = array();
+        /** @var DirectoryIterator $language */
         foreach (new DirectoryIterator($lexPath) as $language) {
             if (in_array($language,array('.','..','.svn','.git','_notes','country'))) continue;
             if (!$language->isReadable()) continue;
@@ -413,5 +416,21 @@ class modLexicon {
             $str = str_replace('[[+'.$k.']]',$v,$str);
         }
         return $str;
+    }
+
+    /**
+     * Returns the total # of entries in the active lexicon
+     * @return int
+     */
+    public function total() {
+        return count($this->_lexicon);
+    }
+
+    /**
+     * Completely clears the lexicon
+     * @return void
+     */
+    public function clear() {
+        $this->_lexicon = array();
     }
 }

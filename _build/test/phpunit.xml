@@ -20,6 +20,7 @@
             <directory>Tests/Model/Error</directory>
             <directory>Tests/Model/FormCustomization</directory>
             <directory>Tests/Model/Filters</directory>
+            <directory>Tests/Model/Lexicon</directory>
             <directory>Tests/Model/Hashing</directory>
             <directory>Tests/Model/Mail</directory>
             <directory>Tests/Model/Registry</directory>
