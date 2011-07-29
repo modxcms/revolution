@@ -195,9 +195,10 @@ class modParser {
         $processed= 0;
         $tags= array ();
         /* invoke OnParseDocument event */
-        $this->modx->documentOutput = $content;      /* store source code so plugins can */
-        $this->modx->invokeEvent('OnParseDocument');    /* work on it via $modx->documentOutput */
+        $this->modx->documentOutput = $content;
+        $this->modx->invokeEvent('OnParseDocument', array('content' => &$content));
         $content = $this->modx->documentOutput;
+        unset($this->modx->documentOutput);
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
             $tagMap= array ();
             foreach ($tags as $tag) {
