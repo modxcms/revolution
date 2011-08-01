@@ -21,7 +21,6 @@
  *
  * @package modx-test
  */
-define('MODX_TEST_PROCESSOR','_build/test/data/processors/test.processor.php');
 /**
  * Tests related to the modProcessor class.
  *
@@ -35,11 +34,13 @@ class modProcessorTest extends MODxTestCase {
      * @var modProcessor $processor
      */
     public $processor;
+    const MODX_TEST_PROCESSOR = '_build/test/data/processors/test.processor.php';
 
     public function setUp() {
         parent::setUp();
         $this->modx->loadClass('modProcessor',MODX_CORE_PATH.'model/modx/',true,true);
         $this->processor = new modProcessor($this->modx);
+        $this->processor->setPath(MODX_BASE_PATH.self::MODX_TEST_PROCESSOR);
     }
 
     public function tearDown() {
@@ -53,7 +54,7 @@ class modProcessorTest extends MODxTestCase {
      */
     public function testSetPath($path) {
         $this->processor->setPath(MODX_BASE_PATH.$path);
-        $this->assertEquals(MODX_BASE_PATH.$path,$this->processor->path);
+        $this->assertEquals(MODX_BASE_PATH.$path,$this->processor->path,'modProcessor did not correctly set the proper path for the processor.');
 
     }
     /**
@@ -61,7 +62,7 @@ class modProcessorTest extends MODxTestCase {
      */
     public function providerSetPath() {
         return array(
-            array(MODX_TEST_PROCESSOR),
+            array(self::MODX_TEST_PROCESSOR),
         );
     }
 
@@ -74,7 +75,7 @@ class modProcessorTest extends MODxTestCase {
     public function testSetProperties(array $properties,$key,$value) {
         $this->processor->setProperties($properties);
         $this->assertArrayHasKey($key,$this->processor->properties);
-        $this->assertEquals($value,$this->processor->properties[$key]);
+        $this->assertEquals($value,$this->processor->properties[$key],'modProcessor did not correctly set the properties.');
     }
     /**
      * @return array
@@ -93,7 +94,7 @@ class modProcessorTest extends MODxTestCase {
      */
     public function testOutputArray(array $array,$count,$expected) {
         $result = $this->processor->outputArray($array,$count);
-        $this->assertEquals($expected,$result);
+        $this->assertEquals($expected,$result,'modProcessor->outputArray did not convert the array properly to JSON.');
     }
     /**
      * @return array
@@ -114,7 +115,7 @@ class modProcessorTest extends MODxTestCase {
      */
     public function testProcessEventResponse($response,$separator,$expected) {
         $result = $this->processor->processEventResponse($response,$separator);
-        $this->assertEquals($expected,$result);
+        $this->assertEquals($expected,$result,'The processEventResponse did not parse the event response correctly.');
     }
     /**
      * @return array
@@ -136,19 +137,20 @@ class modProcessorTest extends MODxTestCase {
      * @param array $object
      * @dataProvider providerRun
      * @depends testSetProperties
+     * @depends testSetPath
      */
     public function testRun(array $properties,$success = true,$message = '',$object = array()) {
-        $this->processor->setPath(MODX_BASE_PATH.MODX_TEST_PROCESSOR);
+        $this->processor->setPath(MODX_BASE_PATH.self::MODX_TEST_PROCESSOR);
         $this->processor->setProperties($properties);
         /** @var modProcessorResponse $response */
         $response = $this->processor->run();
         $this->assertInstanceOf('modProcessorResponse',$response);
-        $this->assertEquals($success,$response->response['success']);
+        $this->assertEquals($success,$response->response['success'],'modProcessor->run did not return the proper response type: '.($success ? 'success' : 'failure'));
         if (!empty($message)) {
-            $this->assertEquals($message,$response->response['message']);
+            $this->assertEquals($message,$response->response['message'],'modProcessor->run did not return the proper response message.');
         }
         if (!empty($object)) {
-            $this->assertEquals($object,$response->response['object']);
+            $this->assertEquals($object,$response->response['object'],'modProcessor->run did not return the proper response object.');
         }
     }
     /**
