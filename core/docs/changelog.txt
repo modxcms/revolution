@@ -3,6 +3,7 @@ This file shows the changes in recent releases of MODX. The most current release
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 - [#5392] Fix bug where policy template descriptions were not translated
+- [#5377] Fix modParser->isProcessingTag() bug preventing filtering on placeholder tags
 - Pass content by reference to OnParseDocument event
 - Add message_key and json message_format option to system/registry/register/send processor
 - Allow raw messages to be returned from system/registry/register/read processor
