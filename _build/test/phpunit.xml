@@ -30,6 +30,9 @@
             <directory>Tests/Model/Transport</directory>
             <directory>Tests/Model/Validation</directory>
         </testsuite>
+        <testsuite name="Controllers">
+            <directory>Tests/Controllers/Context/</directory>
+        </testsuite>
         <testsuite name="Processors">
             <directory>Tests/Processors/</directory>
             <!--<directory>Tests/Processors/Browser</directory>-->

@@ -22,6 +22,7 @@
  * @package modx-test
  */
 require_once dirname(__FILE__).'/MODxTestCase.php';
+require_once dirname(__FILE__).'/MODxControllerTestCase.php';
 
 /**
  * Main MODX test harness.

@@ -86,6 +86,16 @@ abstract class modManagerController {
     }
 
     /**
+     * Set a property for this controller
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public function setProperty($key,$value) {
+        $this->scriptProperties[$key] = $value;
+    }
+
+    /**
      * Render the controller.
      * 
      * @return string
