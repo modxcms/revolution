@@ -30,8 +30,6 @@
  * @group Element
  * @group Category
  * @group CategoryProcessors
- * @group modElement
- * @group modCategory
  */
 class CategoryProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/category/';
