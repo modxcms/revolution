@@ -6,6 +6,9 @@
  * @subpackage manager.controllers
  */
 class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerController {
+    /** @var modAccessPolicyTemplate $template */
+    public $template;
+    /** @var array $templateArray */
     public $templateArray = array();
 
     /**
@@ -14,6 +17,16 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      */
     public function checkPermissions() {
         return $this->modx->hasPermission('access_permissions');
+    }
+
+    /**
+     * Get the current policy template
+     * @return void
+     */
+    public function initialize() {
+        if (!empty($this->scriptProperties['id'])) {
+            $this->template = $this->modx->getObject('modAccessPolicyTemplate',$this->scriptProperties['id']);
+        }
     }
 
     /**
@@ -44,24 +57,23 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      * @return mixed
      */
     public function process(array $scriptProperties = array()) {
+        if (empty($this->template)) return $this->failure($this->modx->lexicon('policy_template_err_nf'));
+        
         $placeholders = array();
 
-        if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('policy_template_err_ns'));
-        $template = $this->modx->getObject('modAccessPolicyTemplate',$scriptProperties['id']);
-        if (empty($template)) return $this->failure($this->modx->lexicon('policy_template_err_nf'));
-
         /* get permissions */
-        $this->templateArray = $template->toArray();
+        $this->templateArray = $this->template->toArray();
         $c = $this->modx->newQuery('modAccessPermission');
         $c->sortby('name','ASC');
-        $permissions = $template->getMany('Permissions',$c);
+        $permissions = $this->template->getMany('Permissions',$c);
+        /** @var modAccessPermission $permission */
         foreach ($permissions as $permission) {
             $desc = $permission->get('description');
-            if (!empty($templateArray['lexicon'])) {
-                if (strpos($templateArray['lexicon'],':') !== false) {
-                    $this->modx->lexicon->load($templateArray['lexicon']);
+            if (!empty($this->templateArray['lexicon'])) {
+                if (strpos($this->templateArray['lexicon'],':') !== false) {
+                    $this->modx->lexicon->load($this->templateArray['lexicon']);
                 } else {
-                    $this->modx->lexicon->load('core:'.$templateArray['lexicon']);
+                    $this->modx->lexicon->load('core:'.$this->templateArray['lexicon']);
                 }
                 $desc = $this->modx->lexicon($desc);
             }
@@ -72,7 +84,6 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
                 $permission->get('value'),
             );
         }
-
 
         $placeholders['template'] = $this->templateArray;
 
