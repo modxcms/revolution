@@ -33,25 +33,26 @@
  * @group modSnippet
  */
 class modSnippetTest extends MODxTestCase {
-    /** @var modSnippet $plugin */
+    /** @var modSnippet $snippet */
     public $snippet;
 
     public function setUp() {
         parent::setUp();
         $this->snippet = $this->modx->newObject('modSnippet');
         $this->snippet->fromArray(array(
-            'id' => 12345,
             'name' => 'Unit Test Snippet',
             'description' => 'A snippet for unit testing.',
-            'snippet' => 'return "Hello, ".$name;',
+            'snippet' => str_replace('<?php','',file_get_contents(MODX_BASE_PATH.'_build/test/data/snippets/modSnippetTest/modSnippetTest.snippet.php')),
             'category' => 0,
             'locked' => false,
         ),'',true,true);
         $this->snippet->setProperties(array('name' => 'John'));
         $this->snippet->setCacheable(false);
+        $this->snippet->save();
     }
     public function tearDown() {
         parent::tearDown();
+        $this->snippet->remove();
         $this->snippet = null;
     }
 
@@ -86,16 +87,18 @@ class modSnippetTest extends MODxTestCase {
      * @param null|array $properties
      * @dataProvider providerProcess
      */
-     /*
     public function testProcess($expected,$properties = null) {
+        $this->snippet->setCacheable(false);
         $result = $this->snippet->process($properties);
         $this->assertEquals($expected,$result,'After processing the snippet, the expected result was different than the actual result.');
     }
+    /**
+     * @return array
+     */
     public function providerProcess() {
         return array(
             array('Hello, John'),
             array('Hello, Mark',array('name' => 'Mark')),
         );
-    }*/
-
+    }
 }
