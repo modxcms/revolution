@@ -149,8 +149,6 @@ abstract class modManagerController {
 
         $this->setPlaceholder('_pagetitle',$this->getPageTitle());
 
-        $this->assignPlaceholders();
-        
         $this->content = '';
         if ($this->loadHeader) {
             $this->content .= $this->getHeader();
@@ -193,6 +191,7 @@ abstract class modManagerController {
      */
     public function setPlaceholder($k,$v) {
         $this->placeholders[$k] = $v;
+        $this->modx->smarty->assign($k,$v);
     }
 
     /**
@@ -204,6 +203,7 @@ abstract class modManagerController {
     public function setPlaceholders($keys) {
         foreach ($keys as $k => $v) {
             $this->placeholders[$k] = $v;
+            $this->modx->smarty->assign($k,$v);
         }
     }
 
