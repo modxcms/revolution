@@ -30,6 +30,26 @@
  * @group modParser
  */
 class modParserTest extends MODxTestCase {
+    public static $scope = array();
+
+    public static function setUpBeforeClass() {
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $placeholders = array('tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2');
+        self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
+    }
+
+    public static function tearDownAfterClass() {
+        if (!empty(self::$scope)) {
+            $modx =& MODxTestHarness::getFixture('modX', 'modx');
+            if (array_key_exists('keys', self::$scope)) {
+                $modx->unsetPlaceholder(self::$scope['keys']);
+            }
+            if (array_key_exists('restore', self::$scope)) {
+                $modx->toPlaceholders(self::$scope['restore']);
+            }
+        }
+    }
+
     /**
      * Test modParser->collectElementTags()
      *
@@ -118,6 +138,182 @@ class modParserTest extends MODxTestCase {
                 array(
                     'parentTag' => '',
                     'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 0,
+                    'content' => "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]"
+                ),
+                "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 0,
+                    'content' => "[[!doNotCacheMe]]"
+                ),
+                "[[!doNotCacheMe]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 1,
+                    'content' => ""
+                ),
+                "[[!doNotCacheMe]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 0,
+                    'content' => "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]"
+                ),
+                "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 1,
+                    'content' => ""
+                ),
+                "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 1,
+                    'content' => "[[!doNotCacheMe? &but=`Tag`]]"
+                ),
+                "[[!doNotCacheMe? &but=`[[+tag]]`]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 2,
+                    'content' => "[[!doNotCacheMe? &but=`Tag`]]Tag2"
+                ),
+                "[[!doNotCacheMe? &but=`[[+tag]]`]][[+tag2]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 2,
+                    'content' => "[[!+tag1? &but=`Tag`]]Tag2[[!+tag1]]"
+                ),
+                "[[!+tag1? &but=`[[+tag]]`]][[+tag2]][[!+tag1]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 3,
+                    'content' => "Tag1Tag2Tag1"
+                ),
+                "[[!+tag1? &but=`[[+tag]]`]][[+tag2]][[!+tag1]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 3,
+                    'content' => "[[+notATag? &but=`Tag`]]Tag2Tag1"
+                ),
+                "[[+notATag? &but=`[[+tag]]`]][[+tag2]][[!+tag1]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 3,
+                    'content' => "[[+notATag? &but=`Tag2`]]Tag2Tag1"
+                ),
+                "[[+notATag? &but=`[[+tag2]]`]][[+tag2]][[!+tag1]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => true,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
