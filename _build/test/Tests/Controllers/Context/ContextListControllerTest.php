@@ -30,27 +30,15 @@
  * @group Controllers
  * @group Context
  * @group ContextControllers
- * @group ContextUpdateController
+ * @group ContextListController
  */
-class ContextUpdateControllerTest extends MODxControllerTestCase {
+class ContextListControllerTest extends MODxControllerTestCase {
     /** @var ContextUpdateManagerController $controller */
     public $controller;
 
-    public $controllerName = 'ContextUpdateManagerController';
-    public $controllerPath = 'context/update';
+    public $controllerName = 'ContextManagerController';
+    public $controllerPath = 'context/index';
 
-    public function setUp() {
-        parent::setUp();
-        $this->controller->setProperty('key','web');
-    }
-
-    /**
-     * @return void
-     */
-    public function testInitialize() {
-        $this->controller->initialize();
-        $this->assertNotEmpty($this->controller->context);
-    }
     /**
      * @return void
      */
@@ -66,19 +54,10 @@ class ContextUpdateControllerTest extends MODxControllerTestCase {
         $this->assertNotEmpty($templateFile);
     }
     /**
-     * @depends testInitialize
+     * @return void
      */
     public function testGetPageTitle() {
-        $this->controller->initialize();
         $pageTitle = $this->controller->getPageTitle();
         $this->assertNotEmpty($pageTitle);
-    }
-    /**
-     * @depends testInitialize
-     */
-    public function testProcess() {
-        $this->controller->initialize();
-        $this->controller->process();
-        $this->assertNotEmpty($this->controller->getPlaceholder('_ctx'));
     }
 }
