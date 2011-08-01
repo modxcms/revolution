@@ -60,4 +60,71 @@ class modParserTest extends MODxTestCase {
             /*array("\n[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', array(array("[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", " tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]")), 1),*/
         );
     }
+
+    /**
+     * Test modParser->processElementTags().
+     *
+     * @dataProvider providerProcessElementTags
+     * @param array $expected An array with expected processed tag count and content.
+     * @param string $content The content to process tags in.
+     * @param array $params An array of parameters for the processElementTags() method.
+     */
+    public function testProcessElementTags($expected, $content, $params) {
+        /** @var modParser $parser */
+        $parser =& $this->modx->getParser();
+        $processed = $parser->processElementTags(
+            $params['parentTag'],
+            $content,
+            $params['processUncacheable'],
+            $params['removeUnprocessed'],
+            $params['prefix'],
+            $params['suffix'],
+            $params['tokens'],
+            $params['depth']
+        );
+        $actual = array(
+            'processed' => $processed,
+            'content' => $content
+        );
+        $this->assertEquals($expected, $actual, "Did not get expected results from tag parsing.");
+    }
+    /**
+     * dataProvider for testProcessElementTags.
+     */
+    public function providerProcessElementTags() {
+        return array(
+            array(
+                array(
+                    'processed' => 0,
+                    'content' => ""
+                ),
+                "",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+            array(
+                array(
+                    'processed' => 0,
+                    'content' => "[[!doNotCacheMe]]"
+                ),
+                "[[!doNotCacheMe]]",
+                array(
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => array(),
+                    'depth' => 0
+                )
+            ),
+        );
+    }
 }
