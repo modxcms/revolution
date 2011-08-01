@@ -65,7 +65,6 @@ class ContextProcessorsTest extends MODxTestCase {
         foreach ($contexts as $ctx) {
             $ctx->remove();
         }
-        $this->modx->error->reset();
     }
 
     /**
@@ -73,17 +72,17 @@ class ContextProcessorsTest extends MODxTestCase {
      *
      * @param string $ctx
      * @param string $description
-     * @return void
      * @dataProvider providerContextCreate
      */
     public function testContextCreate($ctx,$description = '') {
         if (empty($ctx)) return;
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+        /** @var modProcessorResponse $result */
+        $result = $this->modx->runProcessor('context/create',array(
             'key' => $ctx,
             'description' => $description,
         ));
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
+            $this->fail('Could not load context/create processor');
         }
         $s = $this->checkForSuccess($result);
         $ct = $this->modx->getCount('modContext',$ctx);

@@ -4,6 +4,9 @@
  *
  * @param string $key The key of the context
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ *
  * @package modx
  * @subpackage processors.context
  */
@@ -19,7 +22,7 @@ if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
 
-/* create context */
+/* @var modContext $context */
 $context= $modx->newObject('modContext');
 $context->fromArray($scriptProperties, '', true);
 if ($context->save() == false) {
@@ -33,6 +36,7 @@ $adminAdminPolicy = $modx->getObject('modAccessPolicy',array('name' => 'Administ
 $adminResourcePolicy = $modx->getObject('modAccessPolicy',array('name' => 'Resource'));
 if ($adminGroup) {
     if ($adminAdminPolicy) {
+        /** @var modAccessContext $adminAdminAccess */
         $adminAdminAccess = $modx->newObject('modAccessContext');
         $adminAdminAccess->set('principal',$adminGroup->get('id'));
         $adminAdminAccess->set('principal_class','modUserGroup');
@@ -41,6 +45,7 @@ if ($adminGroup) {
         $adminAdminAccess->save();
     }
     if ($adminResourcePolicy) {
+        /** @var modAccessContext $adminResourceAccess */
         $adminResourceAccess = $modx->newObject('modAccessContext');
         $adminResourceAccess->set('principal',$adminGroup->get('id'));
         $adminResourceAccess->set('principal_class','modUserGroup');

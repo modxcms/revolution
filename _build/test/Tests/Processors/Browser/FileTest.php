@@ -28,6 +28,7 @@
  * @subpackage modx
  * @group Processors
  * @group BrowserProcessors
+ * @group BrowserFileProcessors
  */
 class BrowserFileProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/file/';
@@ -48,12 +49,13 @@ class BrowserFileProcessorsTest extends MODxTestCase {
         $this->modx->setOption('rb_base_url','');
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
-           'file' => MODX_BASE_PATH.$file,
+           'file' => $file,
         ));
         $this->assertTrue($this->checkForSuccess($result));
     }
     /**
      * Data provider for get processor test.
+     * @return array
      */
     public function providerGet() {
         return array(

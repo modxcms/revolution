@@ -41,6 +41,10 @@ abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
      */
     public function setUp() {
         $this->modx =& MODxTestHarness::getFixture('modX', 'modx');
+        if ($this->modx->request) {
+            $this->modx->request->loadErrorHandler();
+            $this->modx->error->reset();
+        }
     }
 
     /**

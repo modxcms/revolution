@@ -4,12 +4,14 @@
  *
  * @param string $file The absolute path of the file
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ *
  * @package modx
  * @subpackage processors.browser.file
  */
 if (!$modx->hasPermission('file_view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
-
 /* format filename */
 $filename = rawurldecode($scriptProperties['file']);
 
@@ -23,13 +25,16 @@ if (!empty($wctx)) {
 } else {
     $workingContext =& $modx->context;
 }
-$root = $modx->getBasePath(false);
+
+/** @var modFileHandler $fileHandler */
+$fileHandler = $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+$root = $fileHandler->getBasePath(false);
 if ($workingContext->getOption('filemanager_path_relative',true)) {
     $root = $workingContext->getOption('base_path','').$root;
 }
 
-$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
-$file = $modx->fileHandler->make($root.$filename);
+/** @var modFile $file */
+$file = $fileHandler->make($root.$filename);
 
 if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
 if (!$file->isReadable()) {
