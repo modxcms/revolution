@@ -30,5 +30,72 @@
  * @group Element
  * @group modElement
  * @group modScript
+ * @group modSnippet
  */
-class modSnippetTest extends MODxTestCase {}
+class modSnippetTest extends MODxTestCase {
+    /** @var modSnippet $plugin */
+    public $snippet;
+
+    public function setUp() {
+        parent::setUp();
+        $this->snippet = $this->modx->newObject('modSnippet');
+        $this->snippet->fromArray(array(
+            'id' => 12345,
+            'name' => 'Unit Test Snippet',
+            'description' => 'A snippet for unit testing.',
+            'snippet' => 'return "Hello, ".$name;',
+            'category' => 0,
+            'locked' => false,
+        ),'',true,true);
+        $this->snippet->setProperties(array('name' => 'John'));
+        $this->snippet->setCacheable(false);
+    }
+    public function tearDown() {
+        parent::tearDown();
+        $this->snippet = null;
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetContent() {
+        $this->assertEquals($this->snippet->get('snippet'),$this->snippet->getContent());
+    }
+
+    /**
+     * @param string $content
+     * @dataProvider providerSetContent
+     * @depends testGetContent
+     */
+    public function testSetContent($content) {
+        $this->snippet->setContent($content);
+        $this->assertEquals($content,$this->snippet->get('snippet'));
+    }
+    /**
+     * @return array
+     */
+    public function providerSetContent() {
+        return array(
+            array('return "Goodbye.";'),
+        );
+    }
+
+
+    /**
+     * @param string $expected
+     * @param null|array $properties
+     * @dataProvider providerProcess
+     */
+     /*
+    public function testProcess($expected,$properties = null) {
+        $result = $this->snippet->process($properties);
+        $this->assertEquals($expected,$result,'After processing the snippet, the expected result was different than the actual result.');
+    }
+    public function providerProcess() {
+        return array(
+            array('Hello, John'),
+            array('Hello, Mark',array('name' => 'Mark')),
+        );
+    }*/
+
+}

@@ -38,7 +38,7 @@ class modPluginTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->plugin = $this->modx->newObject('modChunk');
+        $this->plugin = $this->modx->newObject('modPlugin');
         $this->plugin->fromArray(array(
             'id' => 12345,
             'name' => 'Unit Test Plugin',
@@ -50,7 +50,6 @@ class modPluginTest extends MODxTestCase {
         ),'',true,true);
         $this->plugin->setProperties(array('name' => 'John'));
         $this->plugin->setCacheable(false);
-        $this->plugin->_content = 'return "Hello.";';
     }
     public function tearDown() {
         parent::tearDown();
@@ -70,7 +69,6 @@ class modPluginTest extends MODxTestCase {
      * @depends testGetContent
      */
     public function testSetContent($content) {
-        $this->markTestSkipped('Plugin setContent is not setting _content for some reason. Skipping for now.');
         $this->plugin->setContent($content);
         $this->assertEquals($content,$this->plugin->get('plugincode'));
     }

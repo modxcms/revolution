@@ -34,7 +34,7 @@ class modProcessorTest extends MODxTestCase {
      * @var modProcessor $processor
      */
     public $processor;
-    const MODX_TEST_PROCESSOR = '_build/test/data/processors/test.processor.php';
+    const MODX_TEST_PROCESSOR = '_build/test/data/processors/demo.processor.php';
 
     public function setUp() {
         parent::setUp();
