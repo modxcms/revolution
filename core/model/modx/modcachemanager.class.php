@@ -51,6 +51,7 @@ class modCacheManager extends xPDOCacheManager {
      */
     public function generateContext($key, array $options = array()) {
         $results = array();
+        /** @var modContext $obj */
         $obj= $this->modx->getObject('modContext', $key, true);
         if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
             $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
@@ -59,6 +60,7 @@ class modCacheManager extends xPDOCacheManager {
             /* generate the ContextSettings */
             $results['config']= array();
             if ($settings= $obj->getMany('ContextSettings')) {
+                /** @var modContextSetting $setting */
                 foreach ($settings as $setting) {
                     $k= $setting->get('key');
                     $v= $setting->get('value');
@@ -96,6 +98,7 @@ class modCacheManager extends xPDOCacheManager {
             $results['resourceMap']= array ();
             $results['aliasMap']= array ();
             if ($collResources) {
+                /** @var Object $r */
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
                     if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {

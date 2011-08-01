@@ -82,6 +82,12 @@ class modRequestTest extends MODxTestCase {
         foreach ($actions as $action) {
             $action->remove();
         }
+        $this->modx->setOption('request_param_alias','q');
+        $this->modx->setOption('request_param_id','id');
+        $this->modx->setOption('site_start',1);
+        $this->modx->setOption('friendly_urls',true);
+        $this->modx->setOption('container_suffix','/');
+
     }
 
     /**

@@ -37,6 +37,9 @@
             <directory>Tests/Processors/Element</directory>
             <directory>Tests/Processors/System</directory>
         </testsuite>
+        <testsuite name="Cases">
+            <directory>Tests/Cases/Request/</directory>
+        </testsuite>
         <testsuite name="Teardown">
             <file>Tests/modXTeardownTest.php</file>
         </testsuite>

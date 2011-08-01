@@ -45,6 +45,10 @@ abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
             $this->modx->request->loadErrorHandler();
             $this->modx->error->reset();
         }
+        /* setup some basic test-environment options to allow us to simulate a site */
+        $this->modx->setOption('http_host','unit.modx.com');
+        $this->modx->setOption('base_url','/');
+        $this->modx->setOption('site_url','http://unit.modx.com/');
     }
 
     /**
