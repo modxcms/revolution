@@ -31,6 +31,8 @@ abstract class modManagerController {
     public $scriptProperties = array();
     /** @var array An array of css/js/html to load into the HEAD of the page */
     public $head = array('css' => array(),'js' => array(),'html' => array(),'lastjs' => array());
+    /** @var array An array of placeholders that are being set to the page */
+    public $placeholders = array();
 
     /** @var string Any Form Customization rule output that was created. */
     protected $ruleOutput = array();
@@ -127,10 +129,8 @@ abstract class modManagerController {
             'action' => $this->config,
         ));
         $placeholders = $this->process($this->scriptProperties);
-        if (!empty($placeholders) && !$this->isFailure && is_array($placeholders)) {
-            foreach ($placeholders as $k => $v) {
-                $this->setPlaceholder($k,$v);
-            }
+        if (!$this->isFailure && !empty($placeholders) && is_array($placeholders)) {
+            $this->setPlaceholders($placeholders);
         } elseif (!empty($placeholders)) {
             $content = $placeholders;
         }
@@ -149,6 +149,8 @@ abstract class modManagerController {
 
         $this->setPlaceholder('_pagetitle',$this->getPageTitle());
 
+        $this->assignPlaceholders();
+        
         $this->content = '';
         if ($this->loadHeader) {
             $this->content .= $this->getHeader();
@@ -174,6 +176,15 @@ abstract class modManagerController {
     }
 
     /**
+     * @return void
+     */
+    protected function assignPlaceholders() {
+        foreach ($this->placeholders as $k => $v) {
+            $this->modx->smarty->assign($k,$v);
+        }
+    }
+
+    /**
      * Set a placeholder for this controller's template
      *
      * @param string $k The key of the placeholder
@@ -181,7 +192,7 @@ abstract class modManagerController {
      * @return void
      */
     public function setPlaceholder($k,$v) {
-        $this->modx->smarty->assign($k,$v);
+        $this->placeholders[$k] = $v;
     }
 
     /**
@@ -192,8 +203,26 @@ abstract class modManagerController {
      */
     public function setPlaceholders($keys) {
         foreach ($keys as $k => $v) {
-            $this->setPlaceholder($k,$v);
+            $this->placeholders[$k] = $v;
         }
+    }
+
+    /**
+     * Get all the set placeholders
+     * @return array
+     */
+    public function getPlaceholders() {
+        return $this->placeholders;
+    }
+
+    /**
+     * Get a specific placeholder set
+     * @param string $k
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getPlaceholder($k,$default = null) {
+        return isset($this->placeholders[$k]) ? $this->placeholders[$k] : $default;
     }
 
     /**

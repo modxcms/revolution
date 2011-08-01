@@ -52,8 +52,9 @@ abstract class MODxControllerTestCase extends MODxTestCase {
                 'namespace' => 'core',
                 'namespace_name' => 'core',
                 'namespace_path' => MODX_MANAGER_PATH,
-                'controller' => $controllerPath,
+                'controller' => $this->controllerPath,
             ));
+            $this->controller->setProperties($_REQUEST);
         }
     }
 
@@ -61,4 +62,13 @@ abstract class MODxControllerTestCase extends MODxTestCase {
         parent::tearDown();
         $this->controller = null;
     }
+
+    /*
+     * All controller test cases must test the following methods
+     */
+    abstract public function testProcess();
+    abstract public function testLoadCustomCssJs();
+    abstract public function testGetTemplateFile();
+    abstract public function testGetPageTitle();
+    abstract public function testCheckPermissions();
 }

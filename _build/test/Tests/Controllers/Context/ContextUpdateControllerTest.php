@@ -39,9 +39,53 @@ class ContextUpdateControllerTest extends MODxControllerTestCase {
     public $controllerName = 'ContextUpdateManagerController';
     public $controllerPath = 'context/update';
 
+    public function setUp() {
+        parent::setUp();
+        $this->controller->setProperty('key','web');
+    }
+
+    /**
+     * @return void
+     */
     public function testInitialize() {
-        $this->controller->setProperty('ctx','web');
         $this->controller->initialize();
         $this->assertNotEmpty($this->controller->context);
+    }
+    /**
+     * @return void
+     */
+    public function testLoadCustomCssJs() {
+        $this->controller->loadCustomCssJs();
+        $this->assertNotEmpty($this->controller->head['js']);
+    }
+    /**
+     * @return void
+     */
+    public function testGetTemplateFile() {
+        $templateFile = $this->controller->getTemplateFile();
+        $this->assertNotEmpty($templateFile);
+    }
+    /**
+     * @return void
+     */
+    public function testGetPageTitle() {
+        $pageTitle = $this->controller->getPageTitle();
+        $this->assertNotEmpty($pageTitle);
+    }
+    /**
+     * @return void
+     */
+    public function testCheckPermissions() {
+        $permCheck = $this->controller->checkPermissions();
+        $this->assertTrue($permCheck);
+    }
+
+    /**
+     * @depends testInitialize
+     */
+    public function testProcess() {
+        $this->controller->initialize();
+        $this->controller->process();
+        $this->assertNotEmpty($this->controller->getPlaceholder('_ctx'));
     }
 }

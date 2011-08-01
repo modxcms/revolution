@@ -67,7 +67,7 @@ class ContextUpdateManagerController extends modManagerController {
      */
     public function process(array $scriptProperties = array()) {
         if (empty($this->context)) {
-            return $this->failure(sprintf($this->modx->lexicon('context_with_key_not_found'), $scriptProperties['key']));
+            return $this->failure(sprintf($this->modx->lexicon('context_with_key_not_found'), $this->scriptProperties['key']));
         }
         if (!$this->context->checkPolicy(array('view' => true, 'save' => true))) {
             return $this->failure($this->modx->lexicon('permission_denied'));
