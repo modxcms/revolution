@@ -225,7 +225,7 @@ class modParser {
                 }
                 elseif ($tagOutput !== null && $tagOutput !== false) {
                     $tagMap[$tag[0]]= $tagOutput;
-                    $processed++;
+                    if ($tag[0] !== $tagOutput) $processed++;
                 }
             }
             $this->mergeTagOutput($tagMap, $content);
@@ -477,6 +477,9 @@ class modParser {
                         $elementOutput= $element->process($tagPropString);
                     }
             }
+        }
+        if (($elementOutput === null || $elementOutput === false) && $outerTag !== $tag[0]) {
+            $elementOutput = $outerTag;
         }
         if ($this->modx->getDebug() === true) {
             $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "Processing {$outerTag} as {$innerTag} using tagname {$tagName}:\n" . print_r($elementOutput, 1) . "\n\n");
