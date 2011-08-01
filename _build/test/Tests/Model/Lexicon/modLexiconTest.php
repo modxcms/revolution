@@ -251,4 +251,31 @@ class modLexiconTest extends MODxTestCase {
             array('respect','for_programmers',false),
         );
     }
+
+    /**
+     * Test modLexicon.fetch and ensure prefixing features work
+     * 
+     * @param string $topic The topic to load
+     * @param string $key The key to check for in the fetched lexicon
+     * @param string $filterPrefix If not empty, will filter results to only entries with this prefix
+     * @param boolean $removePrefix If true, will remove the filterPrefix from the returned keys
+     * @dataProvider providerFetch
+     * @depends testLoad
+     */
+    public function testFetch($topic,$key,$filterPrefix = '',$removePrefix = false) {
+        $this->lexicon->load($topic);
+        $lang = $this->lexicon->fetch($filterPrefix,$removePrefix);
+        $this->assertArrayHasKey($key,$lang);
+    }
+    /**
+     * @return array
+     */
+    public function providerFetch() {
+        return array(
+            array('about','about_msg'),
+            array('chunk','chunks'),
+            array('element','tv_elements','tv_'),
+            array('element','elements','tv_',true),
+        );
+    }
 }

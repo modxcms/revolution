@@ -31,6 +31,7 @@
             <directory>Tests/Model/Validation</directory>
         </testsuite>
         <testsuite name="Processors">
+            <directory>Tests/Processors/</directory>
             <!--<directory>Tests/Processors/Browser</directory>-->
             <directory>Tests/Processors/Context</directory>
             <directory>Tests/Processors/Element</directory>

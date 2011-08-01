@@ -86,7 +86,6 @@ class modProcessor {
      * @return string The JSON output.
      */
     public function outputArray(array $array,$count = false) {
-        if (!is_array($array)) return false;
         if ($count === false) { $count = count($array); }
         return '({"total":"'.$count.'","results":'.$this->modx->toJSON($array).'})';
     }

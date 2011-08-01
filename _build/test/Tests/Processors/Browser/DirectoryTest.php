@@ -58,12 +58,13 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
     /**
      * Tests the browser/directory/create processor, which creates a directory
+     * @param string $dir
      * @dataProvider providerCreateDirectory
      */
     public function testCreateDirectory($dir = '') {
         if (empty($dir)) {
             $this->fail('Empty data set!');
-            return false;
+            return;
         }
         $this->modx->setOption('filemanager_path','');
         $this->modx->setOption('filemanager_url','');
@@ -81,6 +82,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for create processor test.
+     * @return array
      */
     public function providerCreateDirectory() {
         return array(
@@ -91,12 +93,14 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the browser/directory/update processor, which renames a directory
-     * 
+     *
+     * @param string $oldDirectory
+     * @param string $newDirectory
      * @depends testCreateDirectory
      * @dataProvider providerUpdateDirectory
      */
     public function testUpdateDirectory($oldDirectory = '',$newDirectory = '') {
-        if (empty($oldDirectory) || empty($newDirectory)) return false;
+        if (empty($oldDirectory) || empty($newDirectory)) return;
         $this->modx->setOption('filemanager_path','');
         $this->modx->setOption('filemanager_url','');
         $this->modx->setOption('rb_base_dir','');
@@ -120,6 +124,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for update processor test
+     * @return array
      */
     public function providerUpdateDirectory() {
         return array(
@@ -129,13 +134,13 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the browser/directory/remove processor, which removes a directory
+     * @param string $dir
      * @dataProvider providerRemoveDirectory
      * @depends testCreateDirectory
      * @depends testUpdateDirectory
-     * @param string $dir
      */
     public function testRemoveDirectory($dir = '') {
-        if (empty($dir)) return false;
+        if (empty($dir)) return;
         $this->modx->setOption('filemanager_path','');
         $this->modx->setOption('filemanager_url','');
         $this->modx->setOption('rb_base_dir','');
@@ -158,6 +163,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for remove processor test.
+     * @return array
      */
     public function providerRemoveDirectory() {
         return array(
@@ -197,13 +203,14 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
     /**
      * Test data provider for getList processor
+     * @return array
      */
     public function providerGetDirectoryList() {
         return array(
             array('manager/',true),
             array('manager/assets',true),
             array('fakedirectory/',false),
-            array('assets',true,$this->modx->getOption('manager_path'),$this->modx->getOption('manager_url')),
+            //array('assets',true,$this->modx->getOption('manager_path'),$this->modx->getOption('manager_url')),
         );
     }
 }
