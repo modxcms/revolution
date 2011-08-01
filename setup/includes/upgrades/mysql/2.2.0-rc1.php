@@ -55,15 +55,17 @@ $description = $this->install->lexicon('add_index',array('index' => 'primary_gro
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'primary_group'));
 
 /* assign primary_group for users with one group, or with admin group */
+/** @todo Fix this, as it's way way too slow as-is and causes out-of-mem errors */
+/*
 $c = $modx->newQuery('modUser');
 $c->where(array(
     'primary_group' => 0,
 ));
 $users = $modx->getCollectionGraph('modUser','{"UserGroupMembers":{"UserGroup":{}}}',$c);
-/** @var modUser $user */
+// @var modUser $user
 foreach ($users as $user) {
     if (count($user->UserGroupMembers) == 1) {
-        /** @var modUserGroupMember $membership */
+        // @var modUserGroupMember $membership 
         foreach ($user->UserGroupMembers as $membership) {
             $user->set('primary_group',$membership->get('user_group'));
             $user->save();
@@ -71,7 +73,7 @@ foreach ($users as $user) {
         }
     } elseif (count($user->UserGroupMembers) > 0) {
         $idx = 0;
-        /** @var modUserGroupMember $membership */
+        // @var modUserGroupMember $membership 
         foreach ($user->UserGroupMembers as $membership) {
             if ($membership->UserGroup->get('name') == 'Administrator' || $idx == 0) {
                 $user->set('primary_group',$membership->get('user_group'));
@@ -84,6 +86,7 @@ foreach ($users as $user) {
         }
     }
 }
+*/
 
 /* add dashboard field/index to modUserGroup */
 $class = 'modUserGroup';
