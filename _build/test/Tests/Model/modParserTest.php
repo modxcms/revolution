@@ -332,6 +332,7 @@ class modParserTest extends MODxTestCase {
      * @param $string
      */
     public function testParsePropertyString($expected, $string, $valuesOnly) {
+        $this->modx->getParser();
         $actual = $this->modx->parser->parsePropertyString($string, $valuesOnly);
         $this->assertEquals($expected, $actual, "Property string not parsed properly");
     }
@@ -432,6 +433,32 @@ class modParserTest extends MODxTestCase {
                 " &property=`value with nested backticks```",
                 true
             ),
+        );
+    }
+
+    /**
+     * Test modParser->realname().
+     *
+     * @dataProvider providerTestRealname
+     * @param string $expected The expected filtered tag name.
+     * @param string $string The tag name to filter.
+     */
+    public function testRealname($expected, $string) {
+        $this->modx->getParser();
+        $actual = $this->modx->parser->realname($string);
+        $this->assertEquals($expected, $actual, "Could not generate proper realname from unfiltered element tag name");
+    }
+    /**
+     * dataProvider for testRealname.
+     */
+    public function providerTestRealname() {
+        return array(
+            array("", ""),
+            array("name", "name"),
+            array("name", "name:"),
+            array("name", "name:filter"),
+            array("name", "name@propset:filter"),
+            array("name", "name@propset:filter=`name@propset:filter`"),
         );
     }
 }
