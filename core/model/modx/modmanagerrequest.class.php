@@ -70,7 +70,7 @@ class modManagerRequest extends modRequest {
         $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty/'.$theme.'/');
 
         $this->modx->smarty->assign('_config',$this->modx->config);
-        $this->modx->smarty->assign_by_ref('modx',$this->modx);
+        $this->modx->smarty->assignByRef('modx',$this->modx);
 
         /* send anti caching headers */
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

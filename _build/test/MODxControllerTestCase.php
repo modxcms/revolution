@@ -43,6 +43,16 @@ abstract class MODxControllerTestCase extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
+
+        /* load smarty template engine */
+        $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+        $this->modx->getService('smarty', 'smarty.modSmarty', '', array(
+            'template_dir' => $templatePath,
+        ));
+        $this->modx->smarty->setCachePath('mgr/smarty/default/');
+        $this->modx->smarty->assign('_config',$this->modx->config);
+        $this->modx->smarty->assignByRef('modx',$this->modx);
+
         $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/'.$this->controllerPath.'.class.php';
         $className = $this->controllerName;
