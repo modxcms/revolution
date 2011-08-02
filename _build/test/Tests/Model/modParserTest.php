@@ -323,4 +323,115 @@ class modParserTest extends MODxTestCase {
             ),
         );
     }
+
+    /**
+     * Test modParser->parsePropertyString()
+     *
+     * @dataProvider providerParsePropertyString
+     * @param $expected
+     * @param $string
+     */
+    public function testParsePropertyString($expected, $string, $valuesOnly) {
+        $actual = $this->modx->parser->parsePropertyString($string, $valuesOnly);
+        $this->assertEquals($expected, $actual, "Property string not parsed properly");
+    }
+    public function providerParsePropertyString() {
+        return array(
+            array(
+                array(),
+                "",
+                false
+            ),
+            array(
+                array(
+                    'property' => array(
+                        'name' => 'property',
+                        'desc' => '',
+                        'type' => 'textfield',
+                        'options' => array(),
+                        'value' => 'value'
+                    )
+                ),
+                "&property=value",
+                false
+            ),
+            array(
+                array(
+                    'property' => 'value'
+                ),
+                "&property=value",
+                true
+            ),
+            array(
+                array(
+                    'property' => 'value'
+                ),
+                " &property=value ",
+                true
+            ),
+            array(
+                array(
+                    'property' => 'value',
+                    'property2' => 'value2',
+                ),
+                " &property=value &property2=value2 ",
+                true
+            ),
+            array(
+                array(
+                    'property' => array(
+                        'name' => 'property',
+                        'desc' => '',
+                        'type' => 'textfield',
+                        'options' => array(),
+                        'value' => 'value'
+                    ),
+                    'property2' => array(
+                        'name' => 'property2',
+                        'desc' => '',
+                        'type' => 'textfield',
+                        'options' => array(),
+                        'value' => 'value2'
+                    ),
+                ),
+                " &property=value &property2=value2 ",
+                false
+            ),
+            array(
+                array(
+                    'property' => 'value&value=value',
+                ),
+                "property=`value&value=value`",
+                true
+            ),
+            array(
+                array(
+                    'property' => 'value? &value=`value` ',
+                ),
+                "property=`value? &value=`value` `",
+                true
+            ),
+            array(
+                array(
+                    'property' => 'value? &value=`value`',
+                ),
+                "property=`value? &value=``value```",
+                true
+            ),
+            array(
+                array(
+                    'property' => 'value with ` nested backticks',
+                ),
+                " &property=`value with `` nested backticks`",
+                true
+            ),
+            array(
+                array(
+                    'property' => 'value with nested backticks`',
+                ),
+                " &property=`value with nested backticks```",
+                true
+            ),
+        );
+    }
 }

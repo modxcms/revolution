@@ -321,7 +321,9 @@ class modParser {
                         $propValue = $pvTmp[0];
                     }
                 }
-                $propValue= trim($propValue, "`");
+                if ($propValue[0] == '`' && $propValue[strlen($propValue) - 1] == '`') {
+                    $propValue= substr($propValue, 1, strlen($propValue) - 2);
+                }
                 $propValue= str_replace("``", "`", $propValue);
                 if ($valuesOnly) {
                     $properties[$propName]= $propValue;
