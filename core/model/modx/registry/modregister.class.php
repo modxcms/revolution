@@ -159,6 +159,7 @@ abstract class modRegister {
 
     /**
      * Begin the reading of the message
+     * 
      * @param $transactionKey The key of the message
      * @return void
      */
@@ -180,6 +181,7 @@ abstract class modRegister {
 
     /**
      * Set the current topic to be read
+     *
      * @param string $topic The key of the topic
      * @return void
      */
@@ -190,6 +192,15 @@ abstract class modRegister {
         if ($topicIdx !== false && $topicIdx !== null) {
             $this->_currentTopic = $topic;
         }
+    }
+
+    /**
+     * Get the current topic of the register.
+     *
+     * @return string The current topic set for the register.
+     */
+    public function getCurrentTopic() {
+        return $this->_currentTopic;
     }
 
     /**

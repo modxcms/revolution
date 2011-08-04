@@ -31,7 +31,60 @@
  * @group modRegister
  */
 class modRegisterTest extends MODxTestCase {
-    public function testExample() {
-        $this->assertTrue(true);
+    public static function setUpBeforeClass() {
+        parent::setUpBeforeClass();
+        /** @var modX $modx */
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx->getService('registry', 'registry.modRegistry');
+        include_once dirname(__FILE__) . '/modmemoryregister.mock.php';
+        $modx->registry->addRegister('mock', 'modMemoryRegister', array('directory' => 'memory'));
+    }
+
+    public function testGetKey() {
+        $this->assertTrue($this->modx->registry->mock->getKey() === 'mock', 'Could not get valid key from register.');
+    }
+
+    public function testConnect() {
+        $this->assertTrue($this->modx->registry->mock->connect(), 'Could not connect to register');
+    }
+
+    /**
+     * Test modRegister->subscribe() method.
+     *
+     * @dataProvider providerSubscribe
+     * @param $topic
+     */
+    public function testSubscribe($topic) {
+        $this->modx->registry->mock->subscribe($topic);
+        $this->assertTrue(in_array($topic, $this->modx->registry->mock->subscriptions), "Could not subscribe to register topic {$topic}");
+    }
+    public function providerSubscribe() {
+        return array(
+            array('/food'),
+            array('/food/'),
+            array('/beer/'),
+            array('/beer'),
+            array('/food/beer/'),
+        );
+    }
+
+    /**
+     * Test modRegister->setCurrentTopic() method.
+     *
+     * @dataProvider providerSetCurrentTopic
+     * @param string $expected The expected currentTopic result.
+     * @param string $topic The topic string to pass.
+     */
+    public function testSetCurrentTopic($expected, $topic) {
+        $this->modx->registry->mock->setCurrentTopic($topic);
+        $this->assertEquals($expected, $this->modx->registry->mock->getCurrentTopic(), "Could not set current topic.");
+    }
+    public function providerSetCurrentTopic() {
+        return array(
+            array('/', ''),
+            array('/food/', 'food'),
+            array('/beer/', '/beer'),
+            array('/food/beer/', '/food/beer/'),
+        );
     }
 }
