@@ -36,6 +36,7 @@ class modRegisterTest extends MODxTestCase {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
+        $modx->loadClass('registry.modRegister', '', false, true);
         include_once dirname(__FILE__) . '/modmemoryregister.mock.php';
         $modx->registry->addRegister('mock', 'modMemoryRegister', array('directory' => 'memory'));
     }
