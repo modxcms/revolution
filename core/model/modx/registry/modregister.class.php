@@ -186,11 +186,13 @@ abstract class modRegister {
      * @return void
      */
     public function setCurrentTopic($topic) {
-        if ($topic[0] != '/') $topic = $this->_currentTopic . $topic;
-        if ($topic[strlen($topic) - 1] != '/') $topic .= '/';
-        $topicIdx = array_search($topic, $this->subscriptions);
-        if ($topicIdx !== false && $topicIdx !== null) {
-            $this->_currentTopic = $topic;
+        if (is_string($topic) && strlen($topic) > 0) {
+            if ($topic[0] != '/') $topic = $this->_currentTopic . $topic;
+            if ($topic[strlen($topic) - 1] != '/') $topic .= '/';
+            $topicIdx = array_search($topic, $this->subscriptions);
+            if ($topicIdx !== false && $topicIdx !== null) {
+                $this->_currentTopic = $topic;
+            }
         }
     }
 
