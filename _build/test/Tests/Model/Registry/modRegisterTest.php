@@ -32,21 +32,27 @@
  */
 class modRegisterTest extends MODxTestCase {
     public static function setUpBeforeClass() {
-        parent::setUpBeforeClass();
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->loadClass('registry.modRegister', '', false, true);
         include_once dirname(__FILE__) . '/modmemoryregister.mock.php';
-        $modx->registry->addRegister('mock', 'modMemoryRegister', array('directory' => 'memory'));
+        $modx->registry->addRegister('register', 'modMemoryRegister', array('directory' => 'register'));
+    }
+
+    public static function tearDownAfterClass() {
+        /** @var modX $modx */
+        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx->getService('registry', 'registry.modRegistry');
+        $modx->registry->removeRegister('register');
     }
 
     public function testGetKey() {
-        $this->assertTrue($this->modx->registry->mock->getKey() === 'mock', 'Could not get valid key from register.');
+        $this->assertTrue($this->modx->registry->register->getKey() === 'register', 'Could not get valid key from register.');
     }
 
     public function testConnect() {
-        $this->assertTrue($this->modx->registry->mock->connect(), 'Could not connect to register');
+        $this->assertTrue($this->modx->registry->register->connect(), 'Could not connect to register');
     }
 
     /**
@@ -56,8 +62,8 @@ class modRegisterTest extends MODxTestCase {
      * @param $topic
      */
     public function testSubscribe($topic) {
-        $this->modx->registry->mock->subscribe($topic);
-        $this->assertTrue(in_array($topic, $this->modx->registry->mock->subscriptions), "Could not subscribe to register topic {$topic}");
+        $this->modx->registry->register->subscribe($topic);
+        $this->assertTrue(in_array($topic, $this->modx->registry->register->subscriptions), "Could not subscribe to register topic {$topic}");
     }
     public function providerSubscribe() {
         return array(
@@ -77,8 +83,8 @@ class modRegisterTest extends MODxTestCase {
      * @param string $topic The topic string to pass.
      */
     public function testSetCurrentTopic($expected, $topic) {
-        $this->modx->registry->mock->setCurrentTopic($topic);
-        $this->assertEquals($expected, $this->modx->registry->mock->getCurrentTopic(), "Could not set current topic.");
+        $this->modx->registry->register->setCurrentTopic($topic);
+        $this->assertEquals($expected, $this->modx->registry->register->getCurrentTopic(), "Could not set current topic.");
     }
     public function providerSetCurrentTopic() {
         return array(
