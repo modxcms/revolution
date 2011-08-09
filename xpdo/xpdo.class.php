@@ -1027,9 +1027,10 @@ class xPDO {
      * @param string $path An optional root path to search for the class.
      * @param array $params An array of optional params to pass to the service
      * class constructor.
-     * @return object The service class instance or null if it could not be loaded.
+     * @return object|null A reference to the service class instance or null if
+     * it could not be loaded.
      */
-    public function getService($name, $class= '', $path= '', $params= array ()) {
+    public function &getService($name, $class= '', $path= '', $params= array ()) {
         $service= null;
         if (!isset ($this->services[$name]) || !is_object($this->services[$name])) {
             if (empty ($class) && isset ($this->config[$name . '.class'])) {

@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Change xPDO::getService() method to indicate it returns a reference
 - Avoid unsetting the current package if xPDO->addPackage() fails
 - Avoid updates to existing package definitions unless path/prefix changes
 - Remove redundant call to $this->setPackageMeta() in xPDO->setPackage()
