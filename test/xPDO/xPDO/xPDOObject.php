@@ -420,7 +420,36 @@ class xPDOObjectTest extends xPDOTestCase {
         );
     }
 
-
+    /**
+     * Test updating a collection.
+     *
+     * @dataProvider providerUpdateCollection
+     * @param string $class The class to update a collection of.
+     * @param array $set An array of field/value pairs to update for the collection.
+     * @param mixed $criteria A valid xPDOCriteria object or expression.
+     * @param array $expected An array of expected values for the test.
+     */
+    public function testUpdateCollection($class, $set, $criteria, $expected) {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $actualKeys = array_keys($set);
+        $actualValues = array();
+        $affected = $this->xpdo->updateCollection($class, $set, $criteria);
+        $affectedCollection = $this->xpdo->getCollection($class, $criteria);
+        foreach ($affectedCollection as $affectedObject) {
+            $actualValues[] = $affectedObject->get($actualKeys);
+        }
+        $actual = array($affected, $actualValues);
+        $this->assertEquals($expected, $actual, "Could not update collection as expected.");
+    }
+    /**
+     * Data provider for testUpdateCollection
+     */
+    public function providerUpdateCollection() {
+        return array(
+            array('Person', array('dob' => '2011-08-09'), null, array(2, array(array('dob' => '2011-08-09'), array('dob' => '2011-08-09')))),
+            array('Person', array('security_level' => 5), null, array(2, array(array('security_level' => 5), array('security_level' => 5)))),
+        );
+    }
 
 
     /**

@@ -749,7 +749,7 @@ class xPDO {
     }
 
     /**
-     * Retreives an iterable representation of a collection of xPDOObjects.
+     * Retrieves an iterable representation of a collection of xPDOObjects.
      *
      * @param string $className Name of the class to search for instances of.
      * @param mixed $criteria An xPDOCriteria object or representation.
@@ -761,6 +761,39 @@ class xPDO {
      */
     public function getIterator($className, $criteria= null, $cacheFlag= true) {
         return new xPDOIterator($this, array('class' => $className, 'criteria' => $criteria, 'cacheFlag' => $cacheFlag));
+    }
+
+    /**
+     * Update field values across a collection of xPDOObjects.
+     *
+     * @param string $className Name of the class to update fields of.
+     * @param array $set An associative array of field/value pairs representing the updates to make.
+     * @param mixed $criteria An xPDOCriteria object or representation.
+     * @return bool|int The number of instances affected by the update or false on failure.
+     */
+    public function updateCollection($className, array $set, $criteria= null) {
+        $affected = false;
+        $query = $this->newQuery($className);
+        if ($query && !empty($set)) {
+            $query->command('UPDATE');
+            $query->set($set);
+            if (!empty($criteria)) $query->where($criteria);
+            if ($query->prepare()) {
+                $affected = $this->exec($query->toSQL());
+                if ($affected === false) {
+                    $this->log(xPDO::LOG_LEVEL_ERROR, "Error updating {$className} instances using query " . $query->toSQL(), '', __METHOD__, __FILE__, __LINE__);
+                } else {
+                    if ($this->getOption(xPDO::OPT_CACHE_DB)) {
+                        $this->cacheManager->delete(xPDOCacheManager::CACHE_DIR . $query->getAlias(), array('multiple_object_delete' => true));
+                    }
+                    $callback = $this->getOption(xPDO::OPT_CALLBACK_ON_SAVE);
+                    if ($callback && is_callable($callback)) {
+                        call_user_func($callback, array('className' => $className, 'criteria' => $query, 'object' => null));
+                    }
+                }
+            }
+        }
+        return $affected;
     }
 
     /**
