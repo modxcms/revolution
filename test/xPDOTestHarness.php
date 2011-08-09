@@ -72,7 +72,7 @@ class xPDOTestHarness extends PHPUnit_Framework_TestSuite {
      * @param boolean $new Indicate if a new singleton should be created
      * @return xPDO An xPDO object instance.
      */
-    public static function getInstance($new = false) {
+    public static function &getInstance($new = false) {
         if ($new || !is_object(xPDOTestHarness::$xpdo)) {
 	        $driver= xPDOTestHarness::$properties['xpdo_driver'];
 	        $xpdo= new xPDO(

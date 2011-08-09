@@ -26,6 +26,7 @@
  * @package xpdo-test
  */
 class xPDOTestCase extends PHPUnit_Framework_TestCase {
+    /** @var xPDO $xpdo */
     public $xpdo = null;
 
     protected function setUp() {
