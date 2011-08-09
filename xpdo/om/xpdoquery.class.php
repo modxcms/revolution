@@ -151,6 +151,27 @@ abstract class xPDOQuery extends xPDOCriteria {
     }
 
     /**
+     * Set the DISTINCT attribute of the query.
+     *
+     * @param null|boolean $on Defines how to set the distinct attribute:
+     *  - null (default) indicates the distinct attribute should be toggled
+     *  - any other value is treated as a boolean, i.e. true to set DISTINCT, false to unset
+     * @return xPDOQuery Returns the current object for convenience.
+     */
+    public function distinct($on = null) {
+        if ($on === null) {
+            if (empty($this->query['distinct']) || $this->query['distinct'] !== 'DISTINCT') {
+                $this->query['distinct']= 'DISTINCT';
+            } else {
+                $this->query['distinct']= '';
+            }
+        } else {
+            $this->query['distinct']= $on == true ? 'DISTINCT' : '';
+        }
+        return $this;
+    }
+
+    /**
      * Sets a SQL alias for the table represented by the main class.
      *
      * @param string $alias An alias for the main table for the SQL statement.
