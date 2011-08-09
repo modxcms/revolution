@@ -227,7 +227,7 @@ $_lang['preload_err_cache'] = 'Stellen Sie sicher, dass das Verzeichnis [[+path]
 $_lang['preload_err_core_path'] = 'Stellen Sie sicher, dass Sie einen gültigen MODX_CORE_PATH in der Datei setup/includes/config.core.php angegeben haben; diese Konstante muss auf einen funktionierenden MODX-Core zeigen.';
 $_lang['preload_err_mysql'] = 'MODX benötigt die mysql-Extension, wenn PHP ohne natives PDO verwendet wird, aber diese scheint nicht geladen zu sein.';
 $_lang['preload_err_pdo'] = 'MODX benötigt die PDO-Extension, wenn natives PDO vewendet wird, aber diese scheint nicht geladen zu sein.';
-$_lang['preload_err_pdo_mysql'] = 'MODX benötigt den pdo_mysql-Treiber, wenn natives PDO vewendet wird, aber diesr scheint nicht geladen zu sein.';
+$_lang['preload_err_pdo_mysql'] = 'MODX benötigt den pdo_mysql-Treiber, wenn natives PDO vewendet wird, aber dieser scheint nicht geladen zu sein.';
 
 $_lang['test_config_file'] = 'Überprüfe, ob <span class="mono">[[+file]]</span> existiert und beschreibbar ist: ';
 $_lang['test_config_file_nw'] = 'Für neue Linux-/Unix-Installationen erstellen Sie bitte eine leere Datei mit dem Dateinamen <span class="mono">[[+file]].inc.php</span> im Verzeichnis <span class="mono">core/config/</span> und setzen sie die Dateirechte so, dass die Datei für PHP beschreibbar ist.';
