@@ -24,6 +24,7 @@ modext.js
 .buildpath
 .project
 .settings/
+/nbproject
 
 # ignore PHP files beginning with test
 test*.php
