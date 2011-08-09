@@ -218,6 +218,12 @@ class xPDOObject {
     public $_options= array();
 
     /**
+     * The graph generated or passed to {@link xPDOObject::getGraph()}, used for {@link xPDOObject::toArray}
+     * @var array
+     */
+    public $_graph = array();
+
+    /**
      * Responsible for loading a result set from the database.
      *
      * @static
@@ -1634,6 +1640,110 @@ class xPDOObject {
         return $name;
     }
 
+
+
+    /**
+     * Load related objects to the current object
+     *
+     * To avoid overflowing, this method won't traverse an object from a class that has been traversed before.
+     * (as an example, if you link product and category AND category and product, you probably don't want to get
+     * product -> category -> all other products in this category -> all category for all these products
+     * -> more category -> more product... or you'll end up traversing your whole database.
+     *
+     * This method modifies the current object by attaching related objects and setting the _graph property.
+     *
+     * @param boolean|json|array|integer $graph An option to tell how to deal with related objects. If integer, will
+     * traverse related objects up to a $graph level of depth and load them to the object.
+     * If an array, will traverse required related object and load them to the object.
+     * If true, will traverse the graph (avoiding cycle) and append all related object to the object (default behavior).
+     * @return xPDOObject A copy of the object with related elements loaded as properties.
+     */
+    public function getGraph($graph = true){
+        // Graph defined as JSON.
+        if (is_string($graph)) {
+            $graph= $this->xpdo->fromJSON($graph);
+        }
+        // Graph as an array.
+        if(is_array($graph)){
+            $this->_graph = $graph;
+            $related = array_merge($this->_aggregates,$this->_composites);
+
+            foreach($graph as $node => $branch){
+                if(array_key_exists($node, $related)){
+                    if($related[$node]['cardinality'] == 'many'){
+                        $subrelated = array();
+                        $relobj = $this->getMany($node);
+                        foreach($relobj as $obj){
+                            $subrelated[] = $obj->getGraph($branch);
+                        }
+                        $this->$node = $subrelated;
+                    } else { // Cardinality == one
+                        $obj = $this->getOne($node);
+                        if($obj){
+                            $this->$node = $obj->getGraph($branch);
+                        }
+                    }
+                } // If the requested node is not in some of the related field, we just ignore it.
+            }
+            return $this;
+        }
+        // Graph is an integer. Traverse the graph with a depth of $graph.
+        else if(is_int($graph)){
+            $graph = $this->_traverseRelated($graph);
+            return $this->getGraph($graph);
+        }
+        // $graph == true but not specified, build it first by traversing the relations of the object first.
+        else if($graph){
+            $graph = $this->_traverseRelated();
+            return $this->getGraph($graph);
+        }
+    }
+
+    // From an xPODObject, traverse the graph of it's related element.
+    private function _traverseRelated($maxDepth = 0 , $parent = array(), $visited = array('classes' => array(), 'nodes' => array()), $depth = 0, $cycleSafe=true){
+
+        $res = array();
+        // Mark this node as visited. A node is a class and its primary key(s)
+        $visited['nodes'][] = array($this->_class, $this->get($this->_pk));
+
+        // If we already visited a node from this class, let's not go further to avoid combinatorics explosion
+        // We'll output what we have and go.
+        if(($cycleSafe && in_array($this->_class, $visited['classes'])) || $maxDepth > 0 && $depth >= $maxDepth){
+            return $res;
+        }
+
+        $visited['classes'][] = $this->_class;
+
+        $related = array_merge($this->_aggregates
+                              ,$this->_composites);
+
+        foreach($related as $alias => $rel){
+            if(empty($parent) ||
+               $parent['parentclass'] != $rel['class'] ||
+               $parent['local'] != $rel['foreign'] ||
+               $parent['foreign'] != $rel['local']
+            ){
+                $rel['parentclass'] = $this->_class;
+                $res[$alias] = array();
+                if($rel['cardinality'] == 'many'){
+                    $relobj = $this->getMany($alias);
+                    foreach($relobj as $obj){
+                        if(!in_array(array($obj->_class,$obj->get($obj->_pk)),$visited['nodes'])){
+                            $res[$alias] = $obj->_traverseRelated($maxDepth, $rel, $visited, $depth+1, $maxDepth, $cycleSafe);
+                        }
+                    }
+                }
+                else {
+                    $obj = $this->getOne($alias);
+                    if($obj && !in_array(array($obj->_class,$obj->get($obj->_pk)),$visited['nodes'])){
+                        $res[$alias] = $obj->_traverseRelated($maxDepth, $rel, $visited, $depth+1, $maxDepth, $cycleSafe);
+                    }
+                }
+            }
+        }
+        return $res;
+    }
+
     /**
      * Copies the object fields and corresponding values to an associative array.
      *
@@ -1643,22 +1753,50 @@ class xPDOObject {
      * @param boolean $excludeLazy An option flag indicating if you want to exclude lazy fields from
      * the resulting array; the default behavior is to include them which means the object will
      * query the database for the lazy fields before providing the value.
+     * @param boolean|integer|array $graph An option to tell how to deal with related objects. If it's an integer,
+     * will append related object up to $graph level of depth. If it's an array, will built the graph of related object
+     * matching the array (if not already loaded) and append it. If it is set to true, will get the current loaded
+     * graph of this object (built with {@link xPDOObject::getGraph()} and append the value of its related object, or
+     * built it then display it. If false, will just dump the static field of the object (default behavior).
      * @return array An array representation of the object fields/values.
      */
-    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
-        $objarray= null;
-        if (is_array($this->_fields)) {
-            $keys= array_keys($this->_fields);
-            if (!$excludeLazy && $this->isLazy()) {
-                $this->_loadFieldData($this->_lazy);
-            }
-            foreach ($keys as $key) {
-                if (!$excludeLazy || !$this->isLazy($key)) {
-                    $objarray[$keyPrefix . $key]= $rawValues ? $this->_fields[$key] : $this->get($key);
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $graph= false) {
+        // Asked for a graph display, but object not properly loaded
+        if($graph && (
+                (is_array($graph) && (count(array_diff_assoc($graph, $this->_graph)) > 0)) ||
+                (is_int($graph)) ||
+                 count($this->_graph) == 0)
+        ){
+            return $this->getGraph($graph)->toArray($keyPrefix, $rawValues, $excludeLazy, $graph);
+        } else {
+            $objarray= null;
+            if (is_array($this->_fields)) {
+                $keys= array_keys($this->_fields);
+                if (!$excludeLazy && $this->isLazy()) {
+                    $this->_loadFieldData($this->_lazy);
+                }
+                foreach ($keys as $key) {
+                    if (!$excludeLazy || !$this->isLazy($key)) {
+                        $objarray[$keyPrefix . $key]= $rawValues ? $this->_fields[$key] : $this->get($key);
+                    }
                 }
             }
+            // Related fields, loaded and tracked in $this->_graph
+            if($graph && count($this->_graph) > 0){
+                foreach($this->_graph as $node => $branch){
+                    if(is_array($this->$node)){
+                        $subobj = array();
+                        foreach($this->$node as $obj){
+                            $subobj[] = $obj->toArray($keyPrefix, $rawValues, $excludeLazy, $branch);
+                        }
+                        $objarray[$node] = $subobj;
+                    } else if($this->$node){
+                        $objarray[$node] = $this->$node->toArray($keyPrefix, $rawValues, $excludeLazy, $branch);
+                    }
+                }
+            }
+            return $objarray;
         }
-        return $objarray;
     }
 
     /**
