@@ -25,29 +25,36 @@ $settings_distro->set('area','system');
 $settings_distro->save();
 
 /* add default admin user */
+/** @var modUser $user */
 $user = $this->xpdo->newObject('modUser');
 $user->set('username', $this->settings->get('cmsadmin'));
 $user->set('password', $this->settings->get('cmspassword'));
 $saved = $user->save();
 
 if ($saved) {
+    /** @var modUserProfile $userProfile */
     $userProfile = $this->xpdo->newObject('modUserProfile');
     $userProfile->set('internalKey', $user->get('id'));
     $userProfile->set('fullname', $this->lexicon('default_admin_user'));
     $userProfile->set('email', $this->settings->get('cmsadminemail'));
     $saved = $userProfile->save();
     if ($saved) {
+        /** @var modUserGroupMember $userGroupMembership */
         $userGroupMembership = $this->xpdo->newObject('modUserGroupMember');
         $userGroupMembership->set('user_group', 1);
         $userGroupMembership->set('member', $user->get('id'));
         $userGroupMembership->set('role', 2);
         $saved = $userGroupMembership->save();
+
+        $user->set('primary_group',1);
+        $user->save();
     }
     if ($saved) {
-        $emailsender = $this->xpdo->getObject('modSystemSetting', array('key' => 'emailsender'));
-        if ($emailsender) {
-            $emailsender->set('value', $this->settings->get('cmsadminemail'));
-            $saved = $emailsender->save();
+        /** @var modSystemSetting $emailSender */
+        $emailSender = $this->xpdo->getObject('modSystemSetting', array('key' => 'emailsender'));
+        if ($emailSender) {
+            $emailSender->set('value', $this->settings->get('cmsadminemail'));
+            $saved = $emailSender->save();
         }
     }
 }
@@ -65,23 +72,27 @@ if (!$saved) {
 
 /* set new_folder_permissions/new_file_permissions if specified */
 if ($this->settings->get('new_folder_permissions')) {
-    $settings_folder_perms = $this->xpdo->newObject('modSystemSetting');
-    $settings_folder_perms->set('key', 'new_folder_permissions');
-    $settings_folder_perms->set('value', $this->settings->get('new_folder_permissions'));
-    $settings_folder_perms->save();
+    /** @var modSystemSetting $settingsFolderPerms */
+    $settingsFolderPerms = $this->xpdo->newObject('modSystemSetting');
+    $settingsFolderPerms->set('key', 'new_folder_permissions');
+    $settingsFolderPerms->set('value', $this->settings->get('new_folder_permissions'));
+    $settingsFolderPerms->save();
 }
 if ($this->settings->get('new_file_permissions')) {
-    $settings_file_perms = $this->xpdo->newObject('modSystemSetting');
-    $settings_file_perms->set('key', 'new_file_permissions');
-    $settings_file_perms->set('value', $this->settings->get('new_file_permissions'));
-    $settings_file_perms->save();
+    /** @var modSystemSetting $settingsFilePerms */
+    $settingsFilePerms = $this->xpdo->newObject('modSystemSetting');
+    $settingsFilePerms->set('key', 'new_file_permissions');
+    $settingsFilePerms->set('value', $this->settings->get('new_file_permissions'));
+    $settingsFilePerms->save();
 }
 
 /* setup load only anonymous ACL */
+/** @var modAccessPolicy $loadOnly */
 $loadOnly = $this->xpdo->getObject('modAccessPolicy',array(
     'name' => 'Load Only',
 ));
 if ($loadOnly) {
+    /** @var modAccessContext $access */
     $access= $this->xpdo->newObject('modAccessContext');
     $access->fromArray(array(
       'target' => 'web',
@@ -97,13 +108,16 @@ unset($loadOnly);
 
 
 /* setup default admin ACLs */
+/** @var modAccessPolicy $adminPolicy */
 $adminPolicy = $this->xpdo->getObject('modAccessPolicy',array(
     'name' => 'Administrator',
 ));
+/** @var modUserGroup $adminGroup */
 $adminGroup = $this->xpdo->getObject('modUserGroup',array(
     'name' => 'Administrator',
 ));
 if ($adminPolicy && $adminGroup) {
+    /** @var modAccessContext $access */
     $access= $this->xpdo->newObject('modAccessContext');
     $access->fromArray(array(
       'target' => 'mgr',
@@ -129,6 +143,7 @@ if ($adminPolicy && $adminGroup) {
 unset($adminPolicy,$adminGroup);
 
 /* add base template and home resource */
+/** @var modTemplate $template */
 $template = $this->xpdo->newObject('modTemplate');
 $template->fromArray(array(
     'templatename' => $this->lexicon('base_template'),
@@ -143,6 +158,7 @@ $template->fromArray(array(
 </html>',
 ));
 if ($template->save()) {
+    /** @var modResource $resource */
     $resource = $this->xpdo->newObject('modResource');
     $resource->fromArray(array(
         'pagetitle' => $this->lexicon('home'),
@@ -166,6 +182,7 @@ if ($template->save()) {
 /* check for mb extension, set setting accordingly */
 $usemb = function_exists('mb_strlen');
 if ($usemb) {
+    /** @var modSystemSetting $setting */
     $setting = $this->xpdo->getObject('modSystemSetting',array(
         'key' => 'use_multibyte',
     ));
