@@ -90,6 +90,7 @@ abstract class xPDOQuery extends xPDOCriteria {
             'tables' => array (),
             'joins' => array (),
         ),
+        'set' => array (),
         'where' => array (),
         'groupby' => array (),
         'having' => array (),
@@ -134,18 +135,16 @@ abstract class xPDOQuery extends xPDOCriteria {
     /**
      * Set the type of SQL command you want to build.
      *
-     * The default is SELECT, though it also supports DELETE.
+     * The default is SELECT, though it also supports DELETE and UPDATE.
      *
-     * @todo Implement support for other standard SQL statements such as UPDATE.
-     * @param string $command The type of SQL statement represented by this
-     * object.  Default is 'SELECT'.
+     * @param string $command The type of SQL statement represented by this object.  Default is 'SELECT'.
      * @return xPDOQuery Returns the current object for convenience.
      */
     public function command($command= 'SELECT') {
         $command= strtoupper(trim($command));
-        if (preg_match('/(SELECT|DELETE)/', $command)) {
+        if (preg_match('/(SELECT|UPDATE|DELETE)/', $command)) {
             $this->query['command']= $command;
-            if ($command == 'DELETE') $this->_alias= $this->xpdo->getTableName($this->_class);
+            if (in_array($command, array('DELETE','UPDATE'))) $this->_alias= $this->xpdo->getTableName($this->_class);
         }
         return $this;
     }
@@ -202,6 +201,34 @@ abstract class xPDOQuery extends xPDOCriteria {
                 $this->query['columns']= $columns;
             } else {
                 $this->query['columns']= array_merge($this->query['columns'], $columns);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Specify the SET clause(s) for a SQL UPDATE query.
+     *
+     * @param array $values An associative array of fields and the values to set them to.
+     * @return xPDOQuery Returns a reference to the current instance for convenience.
+     */
+    public function set(array $values) {
+        $fieldMeta= $this->xpdo->getFieldMeta($this->_class);
+        $alias= $this->xpdo->getTableName($this->_class, false);
+        reset($values);
+        while (list($key, $value) = each($values)) {
+            $type= null;
+            if (array_key_exists($key, $fieldMeta)) {
+                if ($value === null) {
+                    $type= PDO::PARAM_NULL;
+                }
+                elseif (!in_array($fieldMeta[$key]['phptype'], $this->_quotable)) {
+                    $type= PDO::PARAM_INT;
+                }
+                elseif (strpos($value, '(') === false && !$this->isConditionalClause($value)) {
+                    $type= PDO::PARAM_STR;
+                }
+                $this->query['set'][$key]= array('value' => $value, 'type' => $type);
             }
         }
         return $this;
