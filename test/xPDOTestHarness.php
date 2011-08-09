@@ -19,7 +19,6 @@
  * 
  * @package xpdo-test
  */
-require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__).'/xPDOTestCase.php';
 require_once dirname(__FILE__).'/xPDO/xPDOSuite_AllTests.php';
 /**
