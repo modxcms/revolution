@@ -327,13 +327,12 @@ MODx.panel.Static = function(config) {
         ,value: config.record.content_dispo || 1
     });
     va.push({
-        xtype: 'modx-combo-class-map'
+        xtype: 'modx-combo-class-derivatives'
         ,fieldLabel: _('class_key')
         ,description: '<b>[[*class_key]]</b>'
         ,name: 'class_key'
         ,hiddenName: 'class_key'
         ,id: 'modx-resource-class-key'
-        ,baseParams: { action: 'getList', parentClass: 'modResource' }
         ,allowBlank: false
         ,value: config.record.class_key || 'modStaticResource'
         ,anchor: '70%'

@@ -348,13 +348,12 @@ MODx.panel.Resource = function(config) {
         ,value: config.record.content_dispo || 0
         
     },{
-        xtype: 'modx-combo-class-map'
+        xtype: 'modx-combo-class-derivatives'
         ,fieldLabel: _('class_key')
         ,description: '<b>[[*class_key]]</b><br />'
         ,name: 'class_key'
         ,hiddenName: 'class_key'
         ,id: 'modx-resource-class-key'
-        ,baseParams: { action: 'getList', parentClass: 'modResource' }
         ,allowBlank: false
         ,value: config.record.class_key || 'modDocument'
         ,anchor: '70%'

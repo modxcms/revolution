@@ -386,6 +386,27 @@ MODx.combo.ClassMap = function(config) {
 Ext.extend(MODx.combo.ClassMap,MODx.combo.ComboBox);
 Ext.reg('modx-combo-class-map',MODx.combo.ClassMap);
 
+MODx.combo.ClassDerivatives = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'class'
+        ,hiddenName: 'class'
+        ,url: MODx.config.connectors_url+'system/derivatives.php'
+        ,baseParams: {
+            action: 'getList'
+            ,skip: 'modXMLRPCResource'
+            ,'class': 'modResource'
+        }
+        ,displayField: 'class'
+        ,valueField: 'class'
+        ,fields: ['class']
+        ,editable: false
+    });
+    MODx.combo.ClassDerivatives.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.ClassDerivatives,MODx.combo.ComboBox);
+Ext.reg('modx-combo-class-derivatives',MODx.combo.ClassDerivatives);
+
 MODx.combo.Object = function(config) {
     config = config || {};
     Ext.applyIf(config,{
