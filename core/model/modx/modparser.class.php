@@ -876,13 +876,16 @@ abstract class modTag {
     /**
      * Get the properties for this element instance for processing.
      *
-     * @param array|string $properties An array or string of properties to
-     * apply.
+     * @param array|string $properties An array or string of properties to apply.
      * @return array A simple array of properties ready to use for processing.
      */
     public function getProperties($properties = null) {
         $this->_properties= $this->modx->parser->parseProperties($this->get('properties'));
-        if ($properties !== null && !empty($properties)) {
+        $set= $this->getPropertySet();
+        if (!empty($set)) {
+            $this->_properties= array_merge($this->_properties, $set);
+        }
+        if (!empty($properties)) {
             $this->_properties= array_merge($this->_properties, $this->modx->parser->parseProperties($properties));
         }
         return $this->_properties;
@@ -959,6 +962,52 @@ abstract class modTag {
      */
     public function setCacheable($cacheable = true) {
         $this->_cacheable = (boolean) $cacheable;
+    }
+
+    /**
+     * Gets a named property set to use with this modTag instance.
+     *
+     * This function will attempt to extract a setName from the tag name using the
+     * @ symbol to delimit the name of the property set. If a setName parameter is provided,
+     * the function will override any property set specified in the name by merging both
+     * property sets.
+     *
+     * Here is an example of an tag using the @ modifier to specify a property set name:
+     *  [[~TagName@PropertySetName:FilterCommand=`FilterModifier`?
+     *      &PropertyKey1=`PropertyValue1`
+     *      &PropertyKey2=`PropertyValue2`
+     *  ]]
+     *
+     * @param string|null $setName An explicit property set name to search for.
+     * @return array|null An array of properties or null if no set is found.
+     */
+    public function getPropertySet($setName = null) {
+        $propertySet= null;
+        $name = $this->get('name');
+        if (strpos($name, '@') !== false) {
+            $split= xPDO :: escSplit('@', $name);
+            if ($split && isset($split[1])) {
+                $name= $split[0];
+                $setName= $split[1];
+                $filters= xPDO :: escSplit(':', $setName);
+                if ($filters && isset($filters[1]) && !empty($filters[1])) {
+                    $setName= $filters[0];
+                    $name.= ':' . $filters[1];
+                }
+                $this->set('name', $name);
+            }
+        }
+        if (!empty($setName)) {
+            $propertySetObj= $this->modx->getObject('modPropertySet', array('name' => $setName));
+            if ($propertySetObj) {
+                if (is_array($propertySet)) {
+                    $propertySet= array_merge($propertySet, $this->modx->parser->parseProperties($propertySetObj->get('properties')));
+                } else {
+                    $propertySet= $this->modx->parser->parseProperties($propertySetObj->get('properties'));
+                }
+            }
+        }
+        return $propertySet;
     }
 }
 /**
