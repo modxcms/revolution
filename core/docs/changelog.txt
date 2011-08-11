@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Enable modElement->getPropertySet() to merge @propertyset in name with property set specified in setName parameter
 - Allow modParser->getElement() method to accept @propertySet in name parameter
 - Prevent modParser->parsePropertyString() from trimming all backticks at beginning and end of string
 - Improve parser efficiency by returning results of nested tags if elementOutput is null|false

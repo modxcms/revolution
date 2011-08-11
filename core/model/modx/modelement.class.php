@@ -473,8 +473,8 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function getPropertySet($setName = null) {
         $propertySet= null;
-        if ($setName === null) {
-            $name = $this->get('name');
+        $name = $this->get('name');
+        if (strpos($name, '@') !== false) {
             $split= xPDO :: escSplit('@', $name);
             if ($split && isset($split[1])) {
                 $name= $split[0];
@@ -494,7 +494,11 @@ class modElement extends modAccessibleSimpleObject {
                 'modPropertySet.name' => $setName
             ));
             if ($propertySetObj) {
-                $propertySet= $this->xpdo->parser->parseProperties($propertySetObj->get('properties'));
+                if (is_array($propertySet)) {
+                    $propertySet= array_merge($propertySet, $this->xpdo->parser->parseProperties($propertySetObj->get('properties')));
+                } else {
+                    $propertySet= $this->xpdo->parser->parseProperties($propertySetObj->get('properties'));
+                }
             }
         }
         return $propertySet;
