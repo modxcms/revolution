@@ -513,6 +513,9 @@ class modParser {
                 );
             }
         }
+        if ($element instanceof modElement) {
+            $element->set('name', $name);
+        }
         return $element;
     }
 

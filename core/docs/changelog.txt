@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Allow modParser->getElement() method to accept @propertySet in name parameter
 - Prevent modParser->parsePropertyString() from trimming all backticks at beginning and end of string
 - Improve parser efficiency by returning results of nested tags if elementOutput is null|false
 - [#5392] Fix bug where policy template descriptions were not translated
