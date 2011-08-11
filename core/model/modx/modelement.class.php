@@ -475,16 +475,27 @@ class modElement extends modAccessibleSimpleObject {
         $propertySet= null;
         $name = $this->get('name');
         if (strpos($name, '@') !== false) {
+            $psName= '';
             $split= xPDO :: escSplit('@', $name);
             if ($split && isset($split[1])) {
                 $name= $split[0];
-                $setName= $split[1];
+                $psName= $split[1];
                 $filters= xPDO :: escSplit(':', $setName);
                 if ($filters && isset($filters[1]) && !empty($filters[1])) {
-                    $setName= $filters[0];
+                    $psName= $filters[0];
                     $name.= ':' . $filters[1];
                 }
                 $this->set('name', $name);
+            }
+            if (!empty($psName)) {
+                $psObj= $this->xpdo->getObjectGraph('modPropertySet', '{"Elements":{}}', array(
+                    'Elements.element' => $this->id,
+                    'Elements.element_class' => $this->_class,
+                    'modPropertySet.name' => $psName
+                ));
+                if ($psObj) {
+                    $propertySet= $this->xpdo->parser->parseProperties($psObj->get('properties'));
+                }
             }
         }
         if (!empty($setName)) {
