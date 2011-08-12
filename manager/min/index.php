@@ -35,7 +35,7 @@ $modx->initialize('mgr');
 if (!$modx->user->hasSessionContext('mgr')) die();
 
 $modx->getCacheManager();
-$cachePath = $modx->getOption('core_path').'cache/mgr/min/';
+$cachePath = $modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/min/';
 if (!is_dir($cachePath) || !is_writable($cachePath)) {
     $modx->cacheManager->writeTree($cachePath);
 }
@@ -57,10 +57,11 @@ $min_serveOptions['minApp']['maxFiles'] = 50;
 $min_symlinks = array();
 $min_uploaderHoursBehind = 0;
 $min_libPath = dirname(__FILE__) . '/lib';
-ini_set('zlib.output_compression', (int)$modx->getOption('manager_js_zlib_output_compression',null,0));
+@ini_set('zlib.output_compression', (int)$modx->getOption('manager_js_zlib_output_compression',null,0));
 
 // setup include path
-set_include_path($min_libPath . PATH_SEPARATOR . get_include_path());
+@set_include_path($min_libPath . PATH_SEPARATOR . get_include_path());
+@set_time_limit(0);
 
 require 'Minify.php';
 
