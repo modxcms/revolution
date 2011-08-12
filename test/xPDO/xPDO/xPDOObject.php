@@ -421,6 +421,30 @@ class xPDOObjectTest extends xPDOTestCase {
     }
 
     /**
+     * Test loading a graph of relations to an xPDOObject instance.
+     */
+    public function testGetGraph() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        /** @var xPDOObject $object */
+        $object = $this->xpdo->getObject('Person', 2);
+        if ($object) {
+            try {
+                $object->getGraph(array('PersonPhone' => array('Phone' => array())));
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        $this->assertTrue(
+            $object instanceof Person
+            && $object->_relatedObjects['PersonPhone']['2-2'] instanceof PersonPhone
+            && $object->_relatedObjects['PersonPhone']['2-2']->_relatedObjects['Phone'] instanceof Phone
+            && $object->_relatedObjects['PersonPhone']['2-3'] instanceof PersonPhone
+            && $object->_relatedObjects['PersonPhone']['2-3']->_relatedObjects['Phone'] instanceof Phone
+            ,"Could not retrieve requested graph"
+        );
+    }
+
+    /**
      * Test updating a collection.
      *
      * @dataProvider providerUpdateCollection

@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#2883] Add xPDOObject->getGraph() and add feature in toArray() to return related object fields
 - Add xPDO->getGraph() method to infer relation graphs
 - [#4275] Add xPDO->updateCollection() method
 - [#4275] Enable UPDATE support and add set() method to xPDOQuery
