@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5499] Ensure modFile create returns boolean
 - [#5501] Add sanity checks on FC rules renameTab and hideField
 - [#5505] Fix issue with dropdowns in Fx5
 - Enable modTag elements to accept property sets

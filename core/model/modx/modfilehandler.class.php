@@ -377,8 +377,10 @@ class modFile extends modFileSystemResource {
 
         $fp = @fopen($this->path, 'w+');
         if ($fp) {
-            $result = @fwrite($fp, $content);
+            @fwrite($fp, $content);
             @fclose($fp);
+
+            $result = file_exists($this->path);
         }
         return $result;
     }
@@ -505,9 +507,14 @@ class modDirectory extends modFileSystemResource {
      */
     public function create($mode = '') {
         $mode = $this->parseMode($mode);
+        if (empty($mode)) {
+            $mode = $this->fileHandler->modx->getOption('new_folder_permissions',null,0775);
+        }
         if ($this->exists()) return false;
 
-        return $this->fileHandler->modx->cacheManager->writeTree($this->path);
+        return $this->fileHandler->modx->cacheManager->writeTree($this->path,array(
+            'new_folder_permissions' => $mode,
+        ));
     }
 
     /**
