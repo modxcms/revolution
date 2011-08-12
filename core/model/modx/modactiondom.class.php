@@ -37,7 +37,7 @@ class modActionDom extends modAccessibleSimpleObject {
             case 'fieldVisible':
                 if (!$this->get('value')) {
                     $fields = explode(',',$this->get('name'));
-                    $rule = 'Ext.getCmp("'.$this->get('container').'").hideField('.$this->xpdo->toJSON($fields).');';
+                    $rule = 'MODx.hideField("'.$this->get('container').'",'.$this->xpdo->toJSON($fields).');';
                 }
                 break;
             case 'fieldLabel':
@@ -52,7 +52,7 @@ class modActionDom extends modAccessibleSimpleObject {
             case 'panelTitle':
             case 'tabTitle':
             case 'tabLabel':
-                $rule = 'Ext.getCmp("'.$this->get('name').'").setTitle("'.htmlspecialchars($this->get('value'),ENT_COMPAT,$encoding).'");';
+                $rule = 'MODx.renameTab("'.$this->get('name').'","'.htmlspecialchars($this->get('value'),ENT_COMPAT,$encoding).'");';
                 break;
             case 'tabVisible':
                 if (!$this->get('value')) {

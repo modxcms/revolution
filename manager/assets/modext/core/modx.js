@@ -299,6 +299,18 @@ Ext.extend(MODx,Ext.Component,{
             }
         }
     }
+    ,renameTab: function(tb,title) {
+        var tab = Ext.getCmp(tb);
+        if (tab) {
+            tab.setTitle(title);
+        }
+    }
+    ,hideField: function(ct,flds) {
+        ct = Ext.getCmp(ct);
+        if (ct) {
+            ct.hideField(flds);
+        }
+    }
     ,preview: function() {
         window.open(MODx.config.site_url);
     }
