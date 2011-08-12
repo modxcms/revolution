@@ -1634,6 +1634,66 @@ class xPDOObject {
         return $name;
     }
 
+
+
+    /**
+     * Load a graph of related objects to the current object.
+     *
+     * @param boolean|string|array|integer $graph An option to tell how to deal with related objects. If integer, will
+     * traverse related objects up to a $graph level of depth and load them to the object.
+     * If an array, will traverse required related object and load them to the object.
+     * If true, will traverse the entire graph and append all related objects to the object (default behavior).
+     * @param xPDOCriteria|array|string|integer $criteria A valid xPDO criteria representation.
+     * @param boolean|integer $cacheFlag Indicates if the objects should be cached and optionally, by specifying an
+     * integer value, for how many seconds.
+     * @return array|boolean The graph that was loaded or false if nothing was loaded.
+     */
+    public function getGraph($graph = true, $criteria = null, $cacheFlag = true) {
+        /* graph is true, get all relations to max depth */
+        if ($graph === true) {
+            $graph = $this->xpdo->getGraph($this->_class);
+        }
+        /* graph is an int, get relations to depth of graph */
+        if (is_int($graph)) {
+            $graph = $this->xpdo->getGraph($this->_class, $graph);
+        }
+        /* graph defined as JSON, convert to array */
+        if (is_string($graph)) {
+            $graph= $this->xpdo->fromJSON($graph);
+        }
+        /* graph as an array */
+        if (is_array($graph)) {
+            foreach ($graph as $alias => $branch) {
+                $fkMeta = $this->getFKDefinition($alias);
+                if ($fkMeta) {
+                    if ($criteria === null) {
+                        $query= array($fkMeta['foreign'] => $this->get($fkMeta['local']));
+                    } else {
+                        $query= $this->xpdo->newQuery($fkMeta['class'], $criteria);
+                        $query->andCondition(array("{$query->getAlias()}.{$fkMeta['foreign']}" => $this->get($fkMeta['local'])));
+                    }
+                    $collection = $this->xpdo->call($fkMeta['class'], 'loadCollectionGraph', array(
+                        &$this->xpdo,
+                        $fkMeta['class'],
+                        $branch,
+                        $query,
+                        $cacheFlag
+                    ));
+                    if (!empty($collection)) {
+                        if ($fkMeta['cardinality'] == 'many') {
+                            $this->_relatedObjects[$alias] = $collection;
+                        } else {
+                            $this->_relatedObjects[$alias] = reset($collection);
+                        }
+                    }
+                }
+            }
+        } else {
+            $graph = false;
+        }
+        return $graph;
+    }
+
     /**
      * Copies the object fields and corresponding values to an associative array.
      *
@@ -1643,10 +1703,15 @@ class xPDOObject {
      * @param boolean $excludeLazy An option flag indicating if you want to exclude lazy fields from
      * the resulting array; the default behavior is to include them which means the object will
      * query the database for the lazy fields before providing the value.
+     * @param boolean|integer|string|array $includeRelated Describes if and how to include loaded related object fields.
+     * As an integer all loaded related objects in the graph up to that level of depth will be included.
+     * As a string, only loaded related objects matching the JSON graph representation will be included.
+     * As an array, only loaded related objects matching the graph array will be included.
+     * As boolean true, all currently loaded related objects will be included.
      * @return array An array representation of the object fields/values.
      */
-    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
-        $objarray= null;
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated= false) {
+        $objArray= null;
         if (is_array($this->_fields)) {
             $keys= array_keys($this->_fields);
             if (!$excludeLazy && $this->isLazy()) {
@@ -1654,11 +1719,32 @@ class xPDOObject {
             }
             foreach ($keys as $key) {
                 if (!$excludeLazy || !$this->isLazy($key)) {
-                    $objarray[$keyPrefix . $key]= $rawValues ? $this->_fields[$key] : $this->get($key);
+                    $objArray[$keyPrefix . $key]= $rawValues ? $this->_fields[$key] : $this->get($key);
                 }
             }
         }
-        return $objarray;
+        if (!empty($includeRelated)) {
+            $graph = null;
+            if (is_int($includeRelated) && $includeRelated > 0) {
+                $graph = $this->xpdo->getGraph($this->_class, $includeRelated);
+            } elseif (is_string($includeRelated)) {
+                $graph = $this->xpdo->fromJSON($includeRelated);
+            }
+            if ($includeRelated === true || is_array($graph)) {
+                foreach ($this->_relatedObjects as $alias => $branch) {
+                    if ($includeRelated === true || array_key_exists($alias, $graph)) {
+                        if (is_array($branch)){
+                            foreach($branch as $pk => $obj){
+                                $objArray[$alias][$pk] = $obj->toArray($keyPrefix, $rawValues, $excludeLazy, $includeRelated === true ? true : $graph[$alias]);
+                            }
+                        } elseif ($branch instanceof xPDOObject) {
+                            $objArray[$alias] = $branch->toArray($keyPrefix, $rawValues, $excludeLazy, $includeRelated === true ? true : $graph[$alias]);
+                        }
+                    }
+                }
+            }
+        }
+        return $objArray;
     }
 
     /**

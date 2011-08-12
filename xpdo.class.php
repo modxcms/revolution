@@ -749,7 +749,7 @@ class xPDO {
     }
 
     /**
-     * Retreives an iterable representation of a collection of xPDOObjects.
+     * Retrieves an iterable representation of a collection of xPDOObjects.
      *
      * @param string $className Name of the class to search for instances of.
      * @param mixed $criteria An xPDOCriteria object or representation.
@@ -761,6 +761,39 @@ class xPDO {
      */
     public function getIterator($className, $criteria= null, $cacheFlag= true) {
         return new xPDOIterator($this, array('class' => $className, 'criteria' => $criteria, 'cacheFlag' => $cacheFlag));
+    }
+
+    /**
+     * Update field values across a collection of xPDOObjects.
+     *
+     * @param string $className Name of the class to update fields of.
+     * @param array $set An associative array of field/value pairs representing the updates to make.
+     * @param mixed $criteria An xPDOCriteria object or representation.
+     * @return bool|int The number of instances affected by the update or false on failure.
+     */
+    public function updateCollection($className, array $set, $criteria= null) {
+        $affected = false;
+        $query = $this->newQuery($className);
+        if ($query && !empty($set)) {
+            $query->command('UPDATE');
+            $query->set($set);
+            if (!empty($criteria)) $query->where($criteria);
+            if ($query->prepare()) {
+                $affected = $this->exec($query->toSQL());
+                if ($affected === false) {
+                    $this->log(xPDO::LOG_LEVEL_ERROR, "Error updating {$className} instances using query " . $query->toSQL(), '', __METHOD__, __FILE__, __LINE__);
+                } else {
+                    if ($this->getOption(xPDO::OPT_CACHE_DB)) {
+                        $this->cacheManager->delete(xPDOCacheManager::CACHE_DIR . $query->getAlias(), array('multiple_object_delete' => true));
+                    }
+                    $callback = $this->getOption(xPDO::OPT_CALLBACK_ON_SAVE);
+                    if ($callback && is_callable($callback)) {
+                        call_user_func($callback, array('className' => $className, 'criteria' => $query, 'object' => null));
+                    }
+                }
+            }
+        }
+        return $affected;
     }
 
     /**
@@ -1027,9 +1060,10 @@ class xPDO {
      * @param string $path An optional root path to search for the class.
      * @param array $params An array of optional params to pass to the service
      * class constructor.
-     * @return object The service class instance or null if it could not be loaded.
+     * @return object|null A reference to the service class instance or null if
+     * it could not be loaded.
      */
-    public function getService($name, $class= '', $path= '', $params= array ()) {
+    public function &getService($name, $class= '', $path= '', $params= array ()) {
         $service= null;
         if (!isset ($this->services[$name]) || !is_object($this->services[$name])) {
             if (empty ($class) && isset ($this->config[$name . '.class'])) {
@@ -1375,6 +1409,39 @@ class xPDO {
             }
         }
         return $composites;
+    }
+
+    /**
+     * Get a complete relation graph for an xPDOObject class.
+     *
+     * @param string $className A fully-qualified xPDOObject class name.
+     * @param int $depth The depth to retrieve relations for the graph, defaults to 3.
+     * @param array &$parents An array of parent classes to avoid traversing circular dependencies.
+     * @param array &$visited An array of already visited classes to avoid traversing circular dependencies.
+     * @return array An xPDOObject relation graph, or an empty array if no graph can be constructed.
+     */
+    public function getGraph($className, $depth= 3, &$parents = array(), &$visited = array()) {
+        $graph = array();
+        $className = $this->loadClass($className);
+        if ($className && $depth > 0) {
+            $depth--;
+            $parents = array_merge($parents, $this->getAncestry($className));
+            $parentsNested = array_unique($parents);
+            $visitNested = array_merge($visited, array($className));
+            $relations = array_merge($this->getAggregates($className), $this->getComposites($className));
+            foreach ($relations as $alias => $relation) {
+                if (in_array($relation['class'], $visited)) {
+                    continue;
+                }
+                $childGraph = array();
+                if ($depth > 0 && !in_array($relation['class'], $parents)) {
+                    $childGraph = $this->getGraph($relation['class'], $depth, $parentsNested, $visitNested);
+                }
+                $graph[$alias] = $childGraph;
+            }
+            $visited[] = $className;
+        }
+        return $graph;
     }
 
     /**
