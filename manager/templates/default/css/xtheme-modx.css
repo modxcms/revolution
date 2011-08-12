@@ -2340,3 +2340,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .modx-grid-draggable .x-grid3-row {
     cursor: move;
 }
+
+/* issue #5505 */
+.x-form-text {
+    min-height: 20px;
+}
