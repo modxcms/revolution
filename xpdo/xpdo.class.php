@@ -1412,6 +1412,39 @@ class xPDO {
     }
 
     /**
+     * Get a complete relation graph for an xPDOObject class.
+     *
+     * @param string $className A fully-qualified xPDOObject class name.
+     * @param int $depth The depth to retrieve relations for the graph, defaults to 3.
+     * @param array &$parents An array of parent classes to avoid traversing circular dependencies.
+     * @param array &$visited An array of already visited classes to avoid traversing circular dependencies.
+     * @return array An xPDOObject relation graph, or an empty array if no graph can be constructed.
+     */
+    public function getGraph($className, $depth= 3, &$parents = array(), &$visited = array()) {
+        $graph = array();
+        $className = $this->loadClass($className);
+        if ($className && $depth > 0) {
+            $depth--;
+            $parents = array_merge($parents, $this->getAncestry($className));
+            $parentsNested = array_unique($parents);
+            $visitNested = array_merge($visited, array($className));
+            $relations = array_merge($this->getAggregates($className), $this->getComposites($className));
+            foreach ($relations as $alias => $relation) {
+                if (in_array($relation['class'], $visited)) {
+                    continue;
+                }
+                $childGraph = array();
+                if ($depth > 0 && !in_array($relation['class'], $parents)) {
+                    $childGraph = $this->getGraph($relation['class'], $depth, $parentsNested, $visitNested);
+                }
+                $graph[$alias] = $childGraph;
+            }
+            $visited[] = $className;
+        }
+        return $graph;
+    }
+
+    /**
      * Retrieves the complete ancestry for a class.
      *
      * @param string className The name of the class.

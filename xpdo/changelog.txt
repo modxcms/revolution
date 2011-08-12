@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add xPDO->getGraph() method to infer relation graphs
 - [#4275] Add xPDO->updateCollection() method
 - [#4275] Enable UPDATE support and add set() method to xPDOQuery
 - [#5306] Add xPDOQuery->distinct() method
