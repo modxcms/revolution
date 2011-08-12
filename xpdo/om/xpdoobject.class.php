@@ -1729,6 +1729,8 @@ class xPDOObject {
                 $graph = $this->xpdo->getGraph($this->_class, $includeRelated);
             } elseif (is_string($includeRelated)) {
                 $graph = $this->xpdo->fromJSON($includeRelated);
+            } elseif (is_array($includeRelated)) {
+                $graph = $includeRelated;
             }
             if ($includeRelated === true || is_array($graph)) {
                 foreach ($this->_relatedObjects as $alias => $branch) {
