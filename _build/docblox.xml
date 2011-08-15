@@ -27,7 +27,7 @@
     </paths>
   </logging>
   <transformations>
-    <template name="./docs/themes/modx/" />
+    <template name="default" />
   </transformations>
   <ignore>
     <item>*.inc</item>
