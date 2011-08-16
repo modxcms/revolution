@@ -228,10 +228,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var r = {
             old_name: node.text
             ,name: node.text
-            ,path: node.attributes.path
+            ,path: node.attributes.pathRelative
         };
-        if (!this.windows.rename) {
-            this.windows.rename = MODx.load({
+        if (!this.windows.renameDirectory) {
+            this.windows.renameDirectory = MODx.load({
                 xtype: 'modx-window-directory-rename'
                 ,record: r
                 ,listeners: {
@@ -239,8 +239,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 }
             });
         }
-        this.windows.rename.setValues(r);
-        this.windows.rename.show(e.target);
+        this.windows.renameDirectory.setValues(r);
+        this.windows.renameDirectory.show(e.target);
     }
 
     ,renameFile: function(item,e) {
@@ -248,10 +248,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var r = {
             old_name: node.text
             ,name: node.text
-            ,path: node.attributes.path
+            ,path: node.attributes.pathRelative
         };
-        if (!this.windows.rename) {
-            this.windows.rename = MODx.load({
+        if (!this.windows.renameFile) {
+            this.windows.renameFile = MODx.load({
                 xtype: 'modx-window-file-rename'
                 ,record: r
                 ,listeners: {
@@ -259,14 +259,14 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 }
             });
         }
-        this.windows.rename.setValues(r);
-        this.windows.rename.show(e.target);
+        this.windows.renameFile.setValues(r);
+        this.windows.renameFile.show(e.target);
     }
     
     ,createDirectory: function(item,e) {
         var node = this.cm && this.cm.activeNode ? this.cm.activeNode : false;
         var r = {
-            'parent': node && node.attributes.type == 'dir' ? node.attributes.path : '/'
+            'parent': node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
         };
         if (!this.windows.create) {
             this.windows.create = MODx.load({

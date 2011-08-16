@@ -28,8 +28,10 @@ class modFileMediaSource extends modMediaSource {
         $bases['path'] = $this->get('basePath');
         $bases['pathIsRelative'] = false;
         if ($this->get('basePathRelative')) {
-            $bases['path'] = $this->ctx->getOption('base_path',MODX_BASE_PATH).$bases['path'];
+            $bases['pathAbsolute'] = $this->ctx->getOption('base_path',MODX_BASE_PATH).$bases['path'];
             $bases['pathIsRelative'] = true;
+        } else {
+            $bases['pathAbsolute'] = $bases['path'];
         }
         
         if ($bases['path'] != '/' && strpos($dir,$bases['path']) === false) {
@@ -38,8 +40,8 @@ class modFileMediaSource extends modMediaSource {
             $bases['pathFull'] = $dir;
         }
 
-        if (is_dir($bases['pathFull'])) {
-            $bases['pathFull'] = $this->fileHandler->postfixSlash($bases['pathFull']);
+        if (is_dir($bases['pathAbsoluteFull'])) {
+            $bases['pathAbsoluteFull'] = $this->fileHandler->postfixSlash($bases['pathFull']);
         }
         $bases['pathRelative'] = ltrim($dir,'/');
 
@@ -47,8 +49,10 @@ class modFileMediaSource extends modMediaSource {
         $bases['urlIsRelative'] = false;
         $bases['url'] = $this->get('baseUrl');
         if ($this->get('baseUrlRelative')) {
-            $bases['url'] = $this->ctx->getOption('base_url',MODX_BASE_URL).$bases['url'];
+            $bases['urlAbsolute'] = $this->ctx->getOption('base_url',MODX_BASE_URL).$bases['url'];
             $bases['urlIsRelative'] = true;
+        } else {
+            $bases['urlAbsolute'] = $bases['url'];
         }
 
         $bases['urlFull'] = $bases['pathFull'].$dir;
@@ -56,8 +60,6 @@ class modFileMediaSource extends modMediaSource {
             $bases['urlFull'] = str_replace('//','/',$bases['url'].$dir);
         }
         $bases['urlRelative'] = ltrim($dir,'/');
-
-        var_dump($bases);
         return $bases;
     }
 
@@ -73,7 +75,7 @@ class modFileMediaSource extends modMediaSource {
         $dir = $this->fileHandler->postfixSlash($dir);
         $bases = $this->getBases($dir);
         if (empty($bases['path'])) return false;
-        $fullPath = $bases['pathFull'];
+        $fullPath = $bases['pathAbsolute'].$dir;
         
         $useMultibyte = $this->getOption('use_multibyte',$this->properties,false);
         $encoding = $this->getOption('modx_charset',$this->properties,'UTF-8');
@@ -113,6 +115,7 @@ class modFileMediaSource extends modMediaSource {
                     'type' => 'dir',
                     'leaf' => false,
                     'path' => $bases['pathFull'].$fileName,
+                    'pathRelative' => $bases['pathRelative'].$fileName,
                     'perms' => $octalPerms,
                     'menu' => array(),
                 );
@@ -155,6 +158,7 @@ class modFileMediaSource extends modMediaSource {
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
                     'path' => $bases['pathFull'].$fileName,
+                    'pathRelative' => $bases['pathRelative'].$fileName,
                     'directory' => $bases['path'],
                     'url' => $bases['urlFull'],
                     'file' => $encFile,
@@ -251,7 +255,11 @@ class modFileMediaSource extends modMediaSource {
      */
     public function createFolder($name,$parentFolder) {
         $bases = $this->getBases($parentFolder.'/'.$name);
-        if ($parentFolder == '/') $parentFolder = $bases['path'];
+        if ($parentFolder == '/') {
+            $parentFolder = $bases['pathAbsolute'];
+        } else {
+            $parentFolder = $bases['pathAbsolute'].$parentFolder;
+        }
 
         /* create modDirectory instance for containing directory and validate */
         /** @var modDirectory $parentDirectory */
@@ -321,6 +329,7 @@ class modFileMediaSource extends modMediaSource {
      */
     public function renameFolder($oldPath,$newName) {
         $bases = $this->getBases($oldPath);
+        $oldPath = $bases['pathAbsolute'].$oldPath;
 
         /** @var modDirectory $oldDirectory */
         $oldDirectory = $this->fileHandler->make($oldPath);
@@ -570,7 +579,7 @@ class modFileMediaSource extends modMediaSource {
         $dir = $this->fileHandler->postfixSlash($dir);
         $bases = $this->getBases($dir);
         if (empty($bases['path'])) return false;
-        $fullPath = $bases['pathFull'];
+        $fullPath = $bases['pathAbsolute'];
 
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
 
