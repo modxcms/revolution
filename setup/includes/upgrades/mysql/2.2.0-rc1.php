@@ -11,6 +11,8 @@ $classes = array(
     'modDashboardWidget',
     'modDashboardWidgetPlacement',
     'modMediaSource',
+    'modMediaSourceTemplateVar',
+    'modMediaSourceContext',
 );
 if (!empty($classes)) {
     $this->createTable($classes);

@@ -12,6 +12,10 @@ $xpdo_meta_map['modMediaSource']= array (
     'name' => '',
     'description' => NULL,
     'class_key' => 'modFileMediaSource',
+    'basePath' => '',
+    'basePathRelative' => 1,
+    'baseUrl' => '',
+    'baseUrlRelative' => 1,
     'properties' => NULL,
   ),
   'fieldMeta' => 
@@ -40,6 +44,36 @@ $xpdo_meta_map['modMediaSource']= array (
       'null' => false,
       'default' => 'modFileMediaSource',
       'index' => 'index',
+    ),
+    'basePath' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'basePathRelative' => 
+    array (
+      'dbtype' => 'bit',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
+    ),
+    'baseUrl' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'baseUrlRelative' => 
+    array (
+      'dbtype' => 'bit',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
     ),
     'properties' => 
     array (

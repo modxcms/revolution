@@ -25,19 +25,11 @@ class modFileMediaSource extends modMediaSource {
     public function getBases($dir) {
         $bases = array();
         $dir = $this->fileHandler->sanitizePath($dir);
+        $bases['path'] = $this->get('basePath');
         $bases['pathIsRelative'] = false;
-        if (empty($this->properties['basePath'])) {
-            $bases['path'] = $this->fileHandler->getBasePath();
-            if ($this->ctx->getOption('filemanager_path_relative',true)) {
-                $bases['path'] = $this->ctx->getOption('base_path','').$bases['path'];
-                $bases['pathIsRelative'] = true;
-            }
-        } else {
-            $bases['path'] = $this->properties['basePath'];
-            if (!empty($this->properties['basePathRelative'])) {
-                $bases['path'] = $this->ctx->getOption('base_path').$bases['path'];
-                $bases['pathIsRelative'] = true;
-            }
+        if ($this->get('basePathRelative')) {
+            $bases['path'] = $this->ctx->getOption('base_path',MODX_BASE_PATH).$bases['path'];
+            $bases['pathIsRelative'] = true;
         }
         
         if ($bases['path'] != '/' && strpos($dir,$bases['path']) === false) {
@@ -49,28 +41,23 @@ class modFileMediaSource extends modMediaSource {
         if (is_dir($bases['pathFull'])) {
             $bases['pathFull'] = $this->fileHandler->postfixSlash($bases['pathFull']);
         }
+        $bases['pathRelative'] = ltrim($dir,'/');
+
+        /* get relative url */
+        $bases['urlIsRelative'] = false;
+        $bases['url'] = $this->get('baseUrl');
+        if ($this->get('baseUrlRelative')) {
+            $bases['url'] = $this->ctx->getOption('base_url',MODX_BASE_URL).$bases['url'];
+            $bases['urlIsRelative'] = true;
+        }
 
         $bases['urlFull'] = $bases['pathFull'].$dir;
         if ($bases['url'] != '/') {
             $bases['urlFull'] = str_replace('//','/',$bases['url'].$dir);
         }
-        if ($bases['urlIsRelative']) {
-            $bases['urlFull'] = ltrim($bases['urlFull'],'/');
-        }
+        $bases['urlRelative'] = ltrim($dir,'/');
 
-        /* get relative url */
-        $bases['urlIsRelative'] = false;
-        if (empty($this->properties['baseUrl'])) {
-            $bases['url'] = $this->fileHandler->getBaseUrl(true);
-            $bases['urlIsRelative'] = $this->ctx->getOption('filemanager_path_relative',true);
-        } else {
-            $bases['url'] = $this->properties['baseUrl'];
-            if (!empty($this->properties['baseUrlRelative'])) {
-                $bases['url'] = $this->xpdo->getOption('base_url',$this->xpdo->getOption('base_url',null,MODX_BASE_URL)).$bases['url'];
-                $bases['urlIsRelative'] = true;
-            }
-        }
-
+        var_dump($bases);
         return $bases;
     }
 
@@ -83,6 +70,7 @@ class modFileMediaSource extends modMediaSource {
     }
     
     public function getFolderList($dir) {
+        $dir = $this->fileHandler->postfixSlash($dir);
         $bases = $this->getBases($dir);
         if (empty($bases['path'])) return false;
         $fullPath = $bases['pathFull'];
@@ -119,7 +107,7 @@ class modFileMediaSource extends modMediaSource {
                 if ($this->hasPermission('file_upload')) $cls[] = 'pupload';
 
                 $directories[$fileName] = array(
-                    'id' => $bases['urlFull'].$fileName,
+                    'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
                     'type' => 'dir',
@@ -158,7 +146,7 @@ class modFileMediaSource extends modMediaSource {
                 $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
                 
                 $files[$fileName] = array(
-                    'id' => $bases['urlFull'].$fileName,
+                    'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
                     'type' => 'file',
@@ -167,7 +155,7 @@ class modFileMediaSource extends modMediaSource {
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
                     'path' => $bases['pathFull'].$fileName,
-                    'directory' => $bases['pathFull'],
+                    'directory' => $bases['path'],
                     'url' => $bases['urlFull'],
                     'file' => $encFile,
                     'menu' => array(),
@@ -186,7 +174,6 @@ class modFileMediaSource extends modMediaSource {
         foreach ($files as $file) {
             $ls[] = $file;
         }
-
 
         return $ls;
     }
@@ -577,5 +564,121 @@ class modFileMediaSource extends modMediaSource {
 
         $this->xpdo->logManagerAction('directory_chmod','',$directoryPath);
         return true;
+    }
+
+    public function getFilesInDirectory($dir) {
+        $dir = $this->fileHandler->postfixSlash($dir);
+        $bases = $this->getBases($dir);
+        if (empty($bases['path'])) return false;
+        $fullPath = $bases['pathFull'];
+
+        $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
+
+        /* get default settings */
+        $imagesExts = array('jpg','jpeg','png','gif');
+        $use_multibyte = $this->ctx->getOption('use_multibyte', false);
+        $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
+        $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
+        $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
+
+        /* iterate */
+        $files = array();
+        if (!is_dir($fullPath)) {
+            $this->addError('dir',$this->xpdo->lexicon('file_folder_err_ns').$fullPath);
+            return false;
+        }
+        /** @var DirectoryIterator $file */
+        foreach (new DirectoryIterator($fullPath) as $file) {
+            if (in_array($file,array('.','..','.svn','.git','_notes','.DS_Store'))) continue;
+            if (!$file->isReadable()) continue;
+
+            $fileName = $file->getFilename();
+            $filePathName = $file->getPathname();
+
+            if (!$file->isDir()) {
+
+                $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
+                $fileExtension = $use_multibyte ? mb_strtolower($fileExtension,$encoding) : strtolower($fileExtension);
+
+                if (!empty($allowedFileTypes) && !in_array($fileExtension,$allowedFileTypes)) continue;
+
+                $filesize = @filesize($filePathName);
+                $url = ltrim($dir.$fileName,'/');
+
+                /* get thumbnail */
+                if (in_array($fileExtension,$imagesExts)) {
+                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
+                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
+                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 60);
+                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
+
+                    $size = @getimagesize($filePathName);
+                    if (is_array($size)) {
+                        $imageWidth = $size[0] > 800 ? 800 : $size[0];
+                        $imageHeight = $size[1] > 600 ? 600 : $size[1];
+                    }
+
+                    /* ensure max h/w */
+                    if ($thumbWidth > $imageWidth) $thumbWidth = $imageWidth;
+                    if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
+
+                    /* generate thumb/image URLs */
+                    $thumbQuery = http_build_query(array(
+                        'src' => $url,
+                        'w' => $thumbWidth,
+                        'h' => $thumbHeight,
+                        'f' => 'png',
+                        'q' => 90,
+                        'HTTP_MODAUTH' => $modAuth,
+                        'wctx' => $this->ctx->get('key'),
+                        'source' => $this->get('id'),
+                    ));
+                    $imageQuery = http_build_query(array(
+                        'src' => $url,
+                        'w' => $imageWidth,
+                        'h' => $imageHeight,
+                        'HTTP_MODAUTH' => $modAuth,
+                        'f' => 'png',
+                        'q' => 90,
+                        'wctx' => $this->ctx->get('key'),
+                        'source' => $this->get('id'),
+                    ));
+                    $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                    $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+
+                } else {
+                    $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
+                    $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
+                    $thumbHeight = $imageHeight = $this->ctx->getOption('filemanager_thumb_height', 60);
+                }
+                $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
+
+                $files[] = array(
+                    'id' => $bases['urlFull'].$fileName,
+                    'name' => $fileName,
+                    'cls' => 'icon-'.$fileExtension,
+                    'image' => $image,
+                    'image_width' => $imageWidth,
+                    'image_height' => $imageHeight,
+                    'thumb' => $thumb,
+                    'thumb_width' => $thumbWidth,
+                    'thumb_height' => $thumbHeight,
+                    'url' => ltrim($dir.$fileName,'/'),
+                    'relativeUrl' => ltrim($dir.$fileName,'/'),
+                    'fullRelativeUrl' => rtrim($bases['url']).ltrim($dir.$fileName,'/'),
+                    'ext' => $fileExtension,
+                    'pathname' => str_replace('//','/',$filePathName),
+                    'lastmod' => $file->getMTime(),
+                    'disabled' => false,
+                    'perms' => $octalPerms,
+                    'leaf' => true,
+                    'size' => $filesize,
+                    'menu' => array(
+                        array('text' => $this->xpdo->lexicon('file_remove'),'handler' => 'this.removeFile'),
+                    ),
+                );
+            }
+        }
+        return $files;
     }
 }

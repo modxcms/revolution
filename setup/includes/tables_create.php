@@ -43,6 +43,8 @@ $classes= array (
     'modLexiconEntry',
     'modManagerLog',
     'modMediaSource',
+    'modMediaSourceTemplateVar',
+    'modMediaSourceContext',
     'modMenu',
     'modNamespace',
     'modPlugin',

@@ -940,6 +940,12 @@
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index"/>
         <field key="description" dbtype="text" phptype="string" null="true" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="modFileMediaSource" index="index" />
+
+        <field key="basePath" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="basePathRelative" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" />
+        <field key="baseUrl" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="baseUrlRelative" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" />
+
         <field key="properties" dbtype="mediumtext" phptype="array" null="true" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
@@ -950,6 +956,35 @@
         </index>
     </object>
     <object class="modFileMediaSource" extends="modMediaSource" />
+
+    <object class="modMediaSourceContext" table="media_sources_contexts" extends="xPDOObject">
+        <field key="source" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="web" index="pk" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="source" length="" collation="A" null="false" />
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Source" class="modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="modMediaSourceTemplateVar" table="media_sources_tvs" extends="xPDOObject">
+        <field key="source" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+        <field key="tv" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="web" index="pk" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="source" length="" collation="A" null="false" />
+            <column key="tv" length="" collation="A" null="false" />
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Source" class="modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="TemplateVar" class="modTemplateVar" local="tv" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
     
     <object class="modStaticResource" extends="modResource" />
     
