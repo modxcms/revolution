@@ -18,7 +18,7 @@
  * @package modx
  */
 class modDashboardWidget extends xPDOSimpleObject {
-    public function toArray($keyPrefix = '',$rawValues = false,$excludeLazy = false) {
+    public function toArray($keyPrefix = '',$rawValues = false,$excludeLazy = false,$includeRelated = false) {
         $array = parent::toArray($keyPrefix,$rawValues,$excludeLazy);
 
         if (!empty($this->xpdo->lexicon) && $this->xpdo->lexicon instanceof modLexicon) {
