@@ -42,6 +42,7 @@ $classes= array (
     'modFormCustomizationSet',
     'modLexiconEntry',
     'modManagerLog',
+    'modMediaSource',
     'modMenu',
     'modNamespace',
     'modPlugin',

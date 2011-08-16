@@ -44,35 +44,32 @@ class SystemFileEditManagerController extends modManagerController {
      */
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
+        $this->modx->lexicon->load('file');
         
         if (empty($_GET['file'])) return $this->failure($this->modx->lexicon('file_err_nf'));
         $this->loadWorkingContext();
 
         /* format filename */
         $this->filename = preg_replace('#([\\\\]+|/{2,})#', '/',$scriptProperties['file']);
-        $this->modx->getService('fileHandler', 'modFileHandler', '',array('context' => $this->workingContext->key));
-        $root = $this->modx->fileHandler->getBasePath(false);
-        if ($this->workingContext->getOption('filemanager_path_relative',true)) {
-            $root = $this->workingContext->getOption('base_path','').$root;
-        }
-        $file = $this->modx->fileHandler->make($root.$this->filename);
 
-        if (!$file->exists()) return $this->failure($this->modx->lexicon('file_err_nf'));
-        if (!$file->isReadable()) {
-            return $this->failure($this->modx->lexicon('file_err_perms'));
+        /** @var modMediaSource $source */
+        $source = $this->modx->getObject('modMediaSource',1);
+        if (!$source->getWorkingContext()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $imagesExts = array('jpg','jpeg','png','gif','ico');
-        $fileExtension = pathinfo($this->filename,PATHINFO_EXTENSION);
+        $source->setRequestProperties($scriptProperties);
+        $source->initialize();
+        $this->fileRecord = $source->getFile($this->filename);
 
-        $this->fileRecord = array(
-            'name' => $this->filename,
-            'size' => $file->getSize(),
-            'last_accessed' => $file->getLastAccessed(),
-            'last_modified' => $file->getLastModified(),
-            'content' => $file->getContents(),
-            'image' => in_array($fileExtension,$imagesExts) ? true : false,
-        );
-        $this->canSave = $file->isWritable() ? true : false;
+        if (empty($this->fileRecord)) {
+            $errors = $source->getErrors();
+            $error = '';
+            foreach ($errors as $k => $msg) {
+                $error .= $msg;
+            }
+            return $this->failure($error);
+        }
+        $this->canSave = $this->fileRecord['is_writable'] ? true : false;
 
         $placeholders['fa'] = $this->fileRecord;
         $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();

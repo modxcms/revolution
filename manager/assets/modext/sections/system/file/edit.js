@@ -62,36 +62,45 @@ MODx.panel.EditFile = function(config) {
             ,items: [{
                 xtype: 'statictextfield'
                 ,fieldLabel: _('name')
+                ,name: 'basename'
+                ,id: 'modx-file-basename'
+                ,anchor: '98%'
+                ,value: config.record.basename || ''
+            },{
+                xtype: 'statictextfield'
+                ,fieldLabel: _('path')
                 ,name: 'name'
                 ,id: 'modx-file-name'
-                ,width: 300
                 ,value: config.record.name || ''
+                ,anchor: '98%'
+                ,submitValue: true
             },{
                 xtype: 'statictextfield'
                 ,fieldLabel: _('file_size')
                 ,name: 'size'
                 ,id: 'modx-file-size'
+                ,anchor: '98%'
                 ,value: config.record.size || 0
             },{
                 xtype: 'statictextfield'
                 ,fieldLabel: _('file_last_accessed')
                 ,name: 'last_accessed'
                 ,id: 'modx-file-last-accessed'
-                ,width: 200
+                ,anchor: '98%'
                 ,value: config.record.last_accessed || ''
             },{
                 xtype: 'statictextfield'
                 ,fieldLabel: _('file_last_modified')
                 ,name: 'last_modified'
                 ,id: 'modx-file-last-modified'
-                ,width: 200
+                ,anchor: '98%'
                 ,value: config.record.last_modified || ''
             },{
                 xtype: 'textarea'
                 ,hideLabel: true
                 ,name: 'content'
                 ,id: 'modx-file-content'
-                ,anchor: '95%'
+                ,anchor: '98%'
                 ,grow: false
                 ,height: 400
                 ,style: 'font-size: 11px;'

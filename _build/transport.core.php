@@ -365,6 +365,21 @@ foreach ($collection as $c) {
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default dashboards.'); flush();
 unset ($collection, $c, $attributes);
 
+/* modMediaSource */
+$collection = array ();
+include MODX_BUILD_DIR . 'data/transport.core.media_sources.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => array ('id'),
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default media sources.'); flush();
+unset ($collection, $c, $attributes);
+
 /* modDashboardWidget */
 $widgets = include MODX_BUILD_DIR . 'data/transport.core.dashboard_widgets.php';
 if (is_array($widgets)) {

@@ -50,6 +50,10 @@ $xpdo_meta_map = array (
   array (
     0 => 'modJSONRPCResource',
   ),
+  'modMediaSource' => 
+  array (
+    0 => 'modFileMediaSource',
+  ),
   'modScript' => 
   array (
     0 => 'modPlugin',
