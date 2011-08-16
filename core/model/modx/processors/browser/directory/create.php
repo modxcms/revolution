@@ -25,7 +25,7 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$success = $source->createFolder($scriptProperties['name']);
+$success = $source->createFolder($scriptProperties['name'],$scriptProperties['parent']);
 if (!$success) {
     $errors = $source->getErrors();
     foreach ($errors as $k => $msg) {

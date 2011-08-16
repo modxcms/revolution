@@ -12,17 +12,18 @@ if (!$modx->hasPermission('directory_update')) return $modx->error->failure($mod
 $modx->lexicon->load('file');
 
 if (empty($scriptProperties['path'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
-if (empty($scriptProperties['newname'])) return $modx->error->failure($modx->lexicon('name_err_ns'));
-$oldDirectory = $scriptProperties['path'];
+if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('name_err_ns'));
+$oldFile = $scriptProperties['path'];
 
 /** @var modMediaSource $source */
-$source = $modx->getObject('modMediaSource',1);
+$modx->loadClass('modMediaSource');
+$source = modMediaSource::getDefaultSource($modx);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$success = $source->renameFolder($oldDirectory,$scriptProperties['newname']);
+$success = $source->renameFile($oldFile,$scriptProperties['name']);
 
 if (empty($success)) {
     $msg = '';

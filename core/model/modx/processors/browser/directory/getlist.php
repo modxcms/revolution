@@ -19,7 +19,6 @@
 $modx->lexicon->load('file');
 
 /* setup default properties */
-$stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
 $dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root'
         ? ''
         : strpos($scriptProperties['id'], 'n_') === 0 ? substr($scriptProperties['id'], 2) : $scriptProperties['id'];
@@ -34,8 +33,4 @@ $source->setRequestProperties($scriptProperties);
 $source->initialize();
 $list = $source->getFolderList($dir);
 
-if ($stringLiterals) {
-    return $modx->toJSON($list);
-} else {
-    return $this->toJSON($list);
-}
+return $modx->toJSON($list);

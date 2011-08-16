@@ -82,31 +82,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         Ext.state.Manager.set(this.treestate_id,p);
     }
     ,_handleDrop: function(e) { return false; }
-    ,_showContextMenu: function(n,e) {
-        n.select();
-        this.cm.activeNode = n;
-        this.cm.removeAll();
-        if (n.attributes.menu && n.attributes.menu.items) {
-            this.addContextMenuItem(n.attributes.menu.items);
-            this.cm.show(n.getUI().getEl(),'t?');
-        } else {
-            var m = [];
-            switch (n.attributes.type) {
-                case 'dir':
-                    m = this._getDirectoryMenu(n);
-                    break;
-                default:
-                    m = this._getFileMenu(n);
-                    break;
-            }
-            if (m.length > 0) {
-                this.addContextMenuItem(m);
-                this.cm.showAt(e.xy);
-            }
-        }
-        e.stopEvent();
-    }
-
+    
     ,_getFileMenu: function(n) {
         var a = n.attributes;
         var ui = n.getUI();
@@ -155,7 +131,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (ui.hasClass('pupdate')) {
             m.push({
                 text: _('rename')
-                ,handler: this.renameFile
+                ,handler: this.renameDirectory
             });
         }
         m.push({
@@ -206,6 +182,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         return path+'/';
     }
 
+    ,editFile: function(itm,e) {
+        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
+    }
+
     ,browser: null
     ,loadFileManager: function(btn,e) {
         if (this.browser === null) {
@@ -243,12 +223,32 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
     }
 	
+    ,renameDirectory: function(item,e) {
+        var node = this.cm.activeNode;
+        var r = {
+            old_name: node.text
+            ,name: node.text
+            ,path: node.attributes.path
+        };
+        if (!this.windows.rename) {
+            this.windows.rename = MODx.load({
+                xtype: 'modx-window-directory-rename'
+                ,record: r
+                ,listeners: {
+                    'success':{fn:this.refreshParentNode,scope:this}
+                }
+            });
+        }
+        this.windows.rename.setValues(r);
+        this.windows.rename.show(e.target);
+    }
+
     ,renameFile: function(item,e) {
         var node = this.cm.activeNode;
         var r = {
-            oldname: node.text
-            ,newname: node.text
-            ,path: node.id
+            old_name: node.text
+            ,name: node.text
+            ,path: node.attributes.path
         };
         if (!this.windows.rename) {
             this.windows.rename = MODx.load({
@@ -265,7 +265,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     
     ,createDirectory: function(item,e) {
         var node = this.cm && this.cm.activeNode ? this.cm.activeNode : false;
-        var r = {parent: node && node.attributes.type == 'dir' ? node.id : '/'};
+        var r = {
+            'parent': node && node.attributes.type == 'dir' ? node.attributes.path : '/'
+        };
         if (!this.windows.create) {
             this.windows.create = MODx.load({
                 xtype: 'modx-window-directory-create'
@@ -276,13 +278,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 }
             });
         }
+        this.windows.create.reset();
         this.windows.create.setValues(r);
         this.windows.create.show(e ? e.target : Ext.getBody());
     }
 	
     ,chmodDirectory: function(item,e) {
         var node = this.cm.activeNode;
-        var r = {dir: node.id,mode: node.attributes.perms};
+        var r = {
+            dir: node.attributes.path,
+            mode: node.attributes.perms
+        };
         if (!this.windows.chmod) {
             this.windows.chmod = MODx.load({
                 xtype: 'modx-window-directory-chmod'
@@ -293,6 +299,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 }
             });
         }
+        this.windows.chmod.reset();
         this.windows.chmod.setValues(r);
         this.windows.chmod.show(e.target);
     }
@@ -304,7 +311,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,url: MODx.config.connectors_url+'browser/directory.php'
             ,params: {
                 action: 'remove'
-                ,dir: node.id
+                ,dir: node.attributes.path
                 ,prependPath: this.config.prependPath || null
                 ,wctx: MODx.ctx || ''
             }
@@ -321,8 +328,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,url: MODx.config.connectors_url+'browser/file.php'
             ,params: {
                 action: 'remove'
-                ,file: node.id
+                ,file: node.attributes.path
                 ,prependPath: this.config.prependPath || null
+                ,prependUrl: this.config.prependUrl || null
+                ,basePath: this.config.basePath || ''
+                ,basePathRelative: this.config.basePathRelative || null
+                ,baseUrl: this.config.baseUrl || ''
+                ,baseUrlRelative: this.config.baseUrlRelative || null
                 ,wctx: MODx.ctx || ''
             }
             ,listeners: {
@@ -472,14 +484,17 @@ MODx.window.ChmodDirectory = function(config) {
             ,name: 'prependPath'
             ,value: config.prependPath || null
         },{
+            name: 'dir'
+            ,fieldLabel: _('name')
+            ,xtype: 'statictextfield'
+            ,anchor: '90%'
+            ,submitValue: true
+        },{
             fieldLabel: _('mode')
             ,name: 'mode'
             ,xtype: 'textfield'
             ,anchor: '90%'
             ,allowBlank: false
-        },{
-            name: 'dir'
-            ,xtype: 'hidden'
         }]
     });
     MODx.window.ChmodDirectory.superclass.constructor.call(this,config);
@@ -488,13 +503,13 @@ Ext.extend(MODx.window.ChmodDirectory,MODx.Window);
 Ext.reg('modx-window-directory-chmod',MODx.window.ChmodDirectory);
 
 
-MODx.window.RenameFile = function(config) {
+MODx.window.RenameDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('rename')
         ,width: 430
         ,height: 200
-        ,url: MODx.config.connectors_url+'browser/index.php'
+        ,url: MODx.config.connectors_url+'browser/directory.php'
         ,action: 'rename'
         ,fields: [{
             xtype: 'hidden'
@@ -512,12 +527,52 @@ MODx.window.RenameFile = function(config) {
             ,anchor: '95%'
         },{
             fieldLabel: _('old_name')
-            ,name: 'oldname'
+            ,name: 'old_name'
             ,xtype: 'statictextfield'
             ,anchor: '90%'
         },{
             fieldLabel: _('new_name')
-            ,name: 'newname'
+            ,name: 'name'
+            ,xtype: 'textfield'
+            ,anchor: '90%'
+            ,allowBlank: false
+        }]
+    });
+    MODx.window.RenameDirectory.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.RenameDirectory,MODx.Window);
+Ext.reg('modx-window-directory-rename',MODx.window.RenameDirectory);
+
+MODx.window.RenameFile = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('rename')
+        ,width: 430
+        ,height: 200
+        ,url: MODx.config.connectors_url+'browser/file.php'
+        ,action: 'rename'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'wctx'
+            ,value: MODx.ctx || ''
+        },{
+            xtype: 'hidden'
+            ,name: 'prependPath'
+            ,value: config.prependPath || null
+        },{
+            fieldLabel: _('path')
+            ,name: 'path'
+            ,xtype: 'statictextfield'
+            ,submitValue: true
+            ,anchor: '95%'
+        },{
+            fieldLabel: _('old_name')
+            ,name: 'old_name'
+            ,xtype: 'statictextfield'
+            ,anchor: '90%'
+        },{
+            fieldLabel: _('new_name')
+            ,name: 'name'
             ,xtype: 'textfield'
             ,anchor: '90%'
             ,allowBlank: false

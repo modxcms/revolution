@@ -31,6 +31,6 @@ if (empty($success)) {
     foreach ($errors as $k => $msg) {
         $modx->error->addField($k,$msg);
     }
-    return $modx->error->failure($msg);
+    return $modx->error->failure();
 }
 return $modx->error->success();
