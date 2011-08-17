@@ -224,6 +224,7 @@ class modAccessibleObject extends xPDOObject {
                                                 if (!$applicablePolicy['policy']) {
                                                     return true;
                                                 }
+                                                if (empty($principalPolicyData)) $principalPolicyData = array();
                                                 $matches = array_intersect_assoc($principalPolicyData, $applicablePolicy['policy']);
                                                 if ($matches) {
                                                     if ($this->xpdo->getDebug() === true)
