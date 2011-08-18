@@ -44,270 +44,318 @@ require_once (dirname(dirname(__FILE__)) . '/xpdomanager.class.php');
 class xPDOManager_sqlsrv extends xPDOManager {
     public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ()) {
         $created = false;
-        if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
-        if ($username === null) $username = $this->xpdo->getOption('username', null, '');
-        if ($password === null) $password = $this->xpdo->getOption('password', null, '');
-        if (is_array($dsnArray) && is_string($username) && is_string($password)) {
-            $sql= 'CREATE DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
-            if (isset ($containerOptions['collation'])) {
-                $sql.= ' COLLATE ' . $containerOptions['collation'];
-            }
-            try {
-                $pdo = new PDO("sqlsrv:server={$dsnArray['server']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                $result = $pdo->exec($sql);
-                if ($result !== false) {
-                    $created = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container:\n{$sql}\nresult = " . var_export($result, true));
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
+            if ($username === null) $username = $this->xpdo->getOption('username', null, '');
+            if ($password === null) $password = $this->xpdo->getOption('password', null, '');
+            if (is_array($dsnArray) && is_string($username) && is_string($password)) {
+                $sql= 'CREATE DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
+                if (isset ($containerOptions['collation'])) {
+                    $sql.= ' COLLATE ' . $containerOptions['collation'];
                 }
-            } catch (PDOException $pe) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
-            } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container: " . $e->getMessage());
+                try {
+                    $pdo = new PDO("sqlsrv:server={$dsnArray['server']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                    $result = $pdo->exec($sql);
+                    if ($result !== false) {
+                        $created = true;
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container:\n{$sql}\nresult = " . var_export($result, true));
+                    }
+                } catch (PDOException $pe) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
+                } catch (Exception $e) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container: " . $e->getMessage());
+                }
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $created;
     }
 
     public function removeSourceContainer($dsnArray = null, $username= null, $password= null) {
         $removed= false;
-        if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
-        if ($username === null) $username = $this->xpdo->getOption('username', null, '');
-        if ($password === null) $password = $this->xpdo->getOption('password', null, '');
-        if (is_array($dsnArray) && is_string($username) && is_string($password)) {
-            $sql= 'DROP DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
-            try {
-                $pdo = new PDO("sqlsrv:server={$dsnArray['server']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                $pdo->exec("ALTER DATABASE {$this->xpdo->escape($dsnArray['dbname'])} SET single_user WITH ROLLBACK IMMEDIATE");
-                $result = $pdo->exec($sql);
-                if ($result !== false) {
-                    $removed = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container:\n{$sql}\nresult = " . var_export($result, true));
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
+            if ($username === null) $username = $this->xpdo->getOption('username', null, '');
+            if ($password === null) $password = $this->xpdo->getOption('password', null, '');
+            if (is_array($dsnArray) && is_string($username) && is_string($password)) {
+                $sql= 'DROP DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
+                try {
+                    $pdo = new PDO("sqlsrv:server={$dsnArray['server']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                    $pdo->exec("ALTER DATABASE {$this->xpdo->escape($dsnArray['dbname'])} SET single_user WITH ROLLBACK IMMEDIATE");
+                    $result = $pdo->exec($sql);
+                    if ($result !== false) {
+                        $removed = true;
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container:\n{$sql}\nresult = " . var_export($result, true));
+                    }
+                } catch (PDOException $pe) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
+                } catch (Exception $e) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $e->getMessage());
                 }
-            } catch (PDOException $pe) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
-            } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $e->getMessage());
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $removed;
     }
 
     public function removeObjectContainer($className) {
         $removed= false;
-        $instance= $this->xpdo->newObject($className);
-        if ($instance) {
-            $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
-            $removed= $this->xpdo->exec($sql);
-            if ($removed === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
-            } else {
-                $removed= true;
-                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Dropped table' . $className . "\nSQL: {$sql}\n");
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $instance= $this->xpdo->newObject($className);
+            if ($instance) {
+                $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
+                $removed= $this->xpdo->exec($sql);
+                if ($removed === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
+                } else {
+                    $removed= true;
+                    $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Dropped table' . $className . "\nSQL: {$sql}\n");
+                }
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $removed;
     }
 
     public function createObjectContainer($className) {
         $created= false;
-        $instance= $this->xpdo->newObject($className);
-        if ($instance) {
-            $tableName= $this->xpdo->getTableName($className);
-            $existsStmt = $this->xpdo->query("SELECT COUNT(*) FROM {$tableName}");
-            if ($existsStmt && $existsStmt->fetchAll()) {
-                return true;
-            }
-            $tableMeta= $this->xpdo->getTableMeta($className);
-            $sql= 'CREATE TABLE ' . $tableName . ' (';
-            $fieldMeta = $this->xpdo->getFieldMeta($className);
-            $nativeGen = false;
-            $columns = array();
-            while (list($key, $meta)= each($fieldMeta)) {
-                $columns[] = $this->getColumnDef($className, $key, $meta);
-                if (array_key_exists('generated', $meta) && $meta['generated'] == 'native') $nativeGen = true;
-            }
-            $sql .= implode(', ', $columns);
-            $indexes = $this->xpdo->getIndexMeta($className);
-            $createIndices = array();
-            $tableConstraints = array();
-            if (!empty ($indexes)) {
-                foreach ($indexes as $indexkey => $indexdef) {
-                    $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE' : 'INDEX'));
-                    $indexset = $this->getIndexDef($className, $indexkey, $indexdef);
-                    switch ($indexType) {
-                        case 'INDEX':
-                            $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
-                            break;
-                        case 'PRIMARY KEY':
-                            if ($nativeGen) break;
-                            $tableConstraints[]= "{$indexType} ({$indexset})";
-                            break;
-                        case 'UNIQUE':
-                        default:
-                            $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($className . '_' . $indexkey)} {$indexType} ({$indexset})";
-                            break;
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $instance= $this->xpdo->newObject($className);
+            if ($instance) {
+                $tableName= $this->xpdo->getTableName($className);
+                $existsStmt = $this->xpdo->query("SELECT COUNT(*) FROM {$tableName}");
+                if ($existsStmt && $existsStmt->fetchAll()) {
+                    return true;
+                }
+                $tableMeta= $this->xpdo->getTableMeta($className);
+                $sql= 'CREATE TABLE ' . $tableName . ' (';
+                $fieldMeta = $this->xpdo->getFieldMeta($className);
+                $nativeGen = false;
+                $columns = array();
+                while (list($key, $meta)= each($fieldMeta)) {
+                    $columns[] = $this->getColumnDef($className, $key, $meta);
+                    if (array_key_exists('generated', $meta) && $meta['generated'] == 'native') $nativeGen = true;
+                }
+                $sql .= implode(', ', $columns);
+                $indexes = $this->xpdo->getIndexMeta($className);
+                $createIndices = array();
+                $tableConstraints = array();
+                if (!empty ($indexes)) {
+                    foreach ($indexes as $indexkey => $indexdef) {
+                        $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE' : 'INDEX'));
+                        $indexset = $this->getIndexDef($className, $indexkey, $indexdef);
+                        switch ($indexType) {
+                            case 'INDEX':
+                                $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
+                                break;
+                            case 'PRIMARY KEY':
+                                if ($nativeGen) break;
+                                $tableConstraints[]= "{$indexType} ({$indexset})";
+                                break;
+                            case 'UNIQUE':
+                            default:
+                                $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($className . '_' . $indexkey)} {$indexType} ({$indexset})";
+                                break;
+                        }
+                    }
+                }
+                if (!empty($tableConstraints)) {
+                    $sql .= ', ' . implode(', ', $tableConstraints);
+                }
+                $sql .= ")";
+                $created= $this->xpdo->exec($sql);
+                if ($created === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
+                } else {
+                    $created= true;
+                    $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table ' . $tableName . "\nSQL: {$sql}\n");
+                }
+                if ($created === true && !empty($createIndices)) {
+                    foreach ($createIndices as $createIndexKey => $createIndex) {
+                        $indexCreated = $this->xpdo->exec($createIndex);
+                        if ($indexCreated === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create index {$createIndexKey}: {$createIndex} " . print_r($this->xpdo->errorInfo(), true));
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Created index {$createIndexKey} on {$tableName}: {$createIndex}");
+                        }
                     }
                 }
             }
-            if (!empty($tableConstraints)) {
-                $sql .= ', ' . implode(', ', $tableConstraints);
-            }
-            $sql .= ")";
-            $created= $this->xpdo->exec($sql);
-            if ($created === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
-            } else {
-                $created= true;
-                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table ' . $tableName . "\nSQL: {$sql}\n");
-            }
-            if ($created === true && !empty($createIndices)) {
-                foreach ($createIndices as $createIndexKey => $createIndex) {
-                    $indexCreated = $this->xpdo->exec($createIndex);
-                    if ($indexCreated === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create index {$createIndexKey}: {$createIndex} " . print_r($this->xpdo->errorInfo(), true));
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Created index {$createIndexKey} on {$tableName}: {$createIndex}");
-                    }
-                }
-            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $created;
     }
 
     public function alterObjectContainer($className, array $options = array()) {
-        // TODO: Implement alterObjectContainer() method.
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement alterObjectContainer() method.
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
+        }
     }
 
     public function addConstraint($class, $name, array $options = array()) {
-        // TODO: Implement addConstraint() method.
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement addConstraint() method.
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
+        }
     }
 
     public function addField($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $meta = $this->xpdo->getFieldMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $colDef = $this->getColumnDef($className, $name, $meta[$name]);
-                if (!empty($colDef)) {
-                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD {$colDef}";
-                    if ($this->xpdo->exec($sql) !== false) {
-                        $result = true;
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $meta = $this->xpdo->getFieldMeta($className);
+                if (is_array($meta) && array_key_exists($name, $meta)) {
+                    $colDef = $this->getColumnDef($className, $name, $meta[$name]);
+                    if (!empty($colDef)) {
+                        $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD {$colDef}";
+                        if ($this->xpdo->exec($sql) !== false) {
+                            $result = true;
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                        }
                     }
                 }
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $result;
     }
 
     public function addIndex($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $meta = $this->xpdo->getIndexMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $idxDef = $this->getIndexDef($className, $name, $meta[$name]);
-                if (!empty($idxDef)) {
-                    $indexType = ($meta[$name]['primary'] ? 'PRIMARY KEY' : ($meta[$name]['unique'] ? 'UNIQUE' : 'INDEX'));
-                    switch ($indexType) {
-                        case 'PRIMARY KEY':
-                        case 'UNIQUE':
-                            $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD CONSTRAINT {$this->xpdo->escape($name)} {$indexType} ({$idxDef})";
-                            break;
-                        default:
-                            $sql = "CREATE {$indexType} {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)} ({$idxDef})";
-                            break;
-                    }
-                    if ($this->xpdo->exec($sql) !== false) {
-                        $result = true;
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $meta = $this->xpdo->getIndexMeta($className);
+                if (is_array($meta) && array_key_exists($name, $meta)) {
+                    $idxDef = $this->getIndexDef($className, $name, $meta[$name]);
+                    if (!empty($idxDef)) {
+                        $indexType = ($meta[$name]['primary'] ? 'PRIMARY KEY' : ($meta[$name]['unique'] ? 'UNIQUE' : 'INDEX'));
+                        switch ($indexType) {
+                            case 'PRIMARY KEY':
+                            case 'UNIQUE':
+                                $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD CONSTRAINT {$this->xpdo->escape($name)} {$indexType} ({$idxDef})";
+                                break;
+                            default:
+                                $sql = "CREATE {$indexType} {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)} ({$idxDef})";
+                                break;
+                        }
+                        if ($this->xpdo->exec($sql) !== false) {
+                            $result = true;
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                        }
                     }
                 }
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $result;
     }
 
     public function alterField($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $meta = $this->xpdo->getFieldMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $colDef = $this->getColumnDef($className, $name, $meta[$name]);
-                if (!empty($colDef)) {
-                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ALTER COLUMN {$colDef}";
-                    if ($this->xpdo->exec($sql) !== false) {
-                        $result = true;
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $meta = $this->xpdo->getFieldMeta($className);
+                if (is_array($meta) && array_key_exists($name, $meta)) {
+                    $colDef = $this->getColumnDef($className, $name, $meta[$name]);
+                    if (!empty($colDef)) {
+                        $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ALTER COLUMN {$colDef}";
+                        if ($this->xpdo->exec($sql) !== false) {
+                            $result = true;
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                        }
                     }
                 }
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $result;
     }
 
     public function removeConstraint($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
-            $result = $this->xpdo->exec($sql);
-            if ($result !== false || (!$result && $this->xpdo->errorCode() === '00000')) {
-                $result = true;
-            } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
+                $result = $this->xpdo->exec($sql);
+                if ($result !== false || (!$result && $this->xpdo->errorCode() === '00000')) {
+                    $result = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                }
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $result;
     }
 
     public function removeField($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            if ($defaultConstraints = $this->getDefaultConstraints($class, $name)) {
-                foreach ($defaultConstraints as $defaultConstraint) {
-                    $this->removeConstraint($class, $defaultConstraint);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                if ($defaultConstraints = $this->getDefaultConstraints($class, $name)) {
+                    foreach ($defaultConstraints as $defaultConstraint) {
+                        $this->removeConstraint($class, $defaultConstraint);
+                    }
+                }
+                $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP COLUMN {$this->xpdo->escape($name)}";
+                $result = $this->xpdo->exec($sql);
+                if ($result !== false || (!$result && $this->xpdo->errorCode() === '00000')) {
+                    $result = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
                 }
             }
-            $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP COLUMN {$this->xpdo->escape($name)}";
-            $result = $this->xpdo->exec($sql);
-            if ($result !== false || (!$result && $this->xpdo->errorCode() === '00000')) {
-                $result = true;
-            } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
-            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $result;
     }
 
     public function removeIndex($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $indexType = (isset($options['type']) && in_array($options['type'], array('PRIMARY KEY', 'UNIQUE', 'INDEX', 'FULLTEXT')) ? $options['type'] : 'INDEX');
-            switch ($indexType) {
-                case 'PRIMARY KEY':
-                case 'UNIQUE':
-                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
-                    break;
-                default:
-                    $sql = "DROP INDEX {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)}";
-                    break;
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $indexType = (isset($options['type']) && in_array($options['type'], array('PRIMARY KEY', 'UNIQUE', 'INDEX', 'FULLTEXT')) ? $options['type'] : 'INDEX');
+                switch ($indexType) {
+                    case 'PRIMARY KEY':
+                    case 'UNIQUE':
+                        $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
+                        break;
+                    default:
+                        $sql = "DROP INDEX {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)}";
+                        break;
+                }
+                $result = $this->xpdo->exec($sql);
+                if ($result !== false || (!$result && $this->xpdo->errorCode() === '00000')) {
+                    $result = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                }
             }
-            $result = $this->xpdo->exec($sql);
-            if ($result !== false || (!$result && $this->xpdo->errorCode() === '00000')) {
-                $result = true;
-            } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
-            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
         }
         return $result;
     }
