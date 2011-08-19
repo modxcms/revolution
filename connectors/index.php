@@ -27,7 +27,7 @@
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
-$modx= new modX();
+$modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 /* set debugging/logging options */
 $modx->setDebug(E_ALL | E_STRICT);
 $modx->setLogLevel(modX::LOG_LEVEL_ERROR);
