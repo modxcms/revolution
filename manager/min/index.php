@@ -19,7 +19,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 }
 
 /* create the modX object */
-$modx= new modX();
+$modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 if (!is_object($modx) || !($modx instanceof modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
