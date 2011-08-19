@@ -85,3 +85,11 @@ $description = $this->install->lexicon('add_column',array('column' => 'dashboard
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'dashboard'));
 $description = $this->install->lexicon('add_index',array('index' => 'dashboard','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'dashboard'));
+
+/* add rank to modContext */
+$class = 'modContext';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'rank'));
+$description = $this->install->lexicon('add_index',array('index' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));

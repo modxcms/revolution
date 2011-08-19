@@ -1194,6 +1194,10 @@ class xPDOObject {
                 return false;
             }
         }
+        if (!$this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get connection for writing data", '', __METHOD__, __FILE__, __LINE__);
+            return false;
+        }
         $this->_saveRelatedObjects();
         if (!empty ($this->_dirty)) {
             $cols= array ();
@@ -1438,7 +1442,8 @@ class xPDOObject {
      */
     public function remove(array $ancestors= array ()) {
         $result= false;
-        if ($pk= $this->getPrimaryKey()) {
+        $pk= $this->getPrimaryKey();
+        if ($pk && $this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
             if (!empty ($this->_composites)) {
                 $current= array ($this->_class, $this->_alias);
                 foreach ($this->_composites as $compositeAlias => $composite) {

@@ -44,14 +44,16 @@ require_once (dirname(dirname(__FILE__)) . '/xpdomanager.class.php');
 class xPDOManager_sqlite extends xPDOManager {
     public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ()) {
         $created = false;
-        $this->xpdo->log(xPDO::LOG_LEVEL_WARN, 'SQLite does not support source container creation');
-        if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
-        if (is_array($dsnArray)) {
-            try {
-                $dbfile = $dsnArray['dbname'];
-                $created = !file_exists($dbfile);
-            } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error creating source container: " . $e->getMessage());
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_WARN, 'SQLite does not support source container creation');
+            if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
+            if (is_array($dsnArray)) {
+                try {
+                    $dbfile = $dsnArray['dbname'];
+                    $created = !file_exists($dbfile);
+                } catch (Exception $e) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error creating source container: " . $e->getMessage());
+                }
             }
         }
         return $created;
@@ -59,20 +61,22 @@ class xPDOManager_sqlite extends xPDOManager {
 
     public function removeSourceContainer($dsnArray = null, $username= null, $password= null) {
         $removed= false;
-        if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
-        if (is_array($dsnArray)) {
-            try {
-                $dbfile = $dsnArray['dbname'];
-                if (file_exists($dbfile)) {
-                    $removed = unlink($dbfile);
-                    if (!$removed) {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container");
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
+            if (is_array($dsnArray)) {
+                try {
+                    $dbfile = $dsnArray['dbname'];
+                    if (file_exists($dbfile)) {
+                        $removed = unlink($dbfile);
+                        if (!$removed) {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container");
+                        }
+                    } else {
+                        $removed= true;
                     }
-                } else {
-                    $removed= true;
+                } catch (Exception $e) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $e->getMessage());
                 }
-            } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $e->getMessage());
             }
         }
         return $removed;
@@ -80,15 +84,17 @@ class xPDOManager_sqlite extends xPDOManager {
 
     public function removeObjectContainer($className) {
         $removed= false;
-        $instance= $this->xpdo->newObject($className);
-        if ($instance) {
-            $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
-            $removed= $this->xpdo->exec($sql);
-            if ($removed === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
-            } else {
-                $removed= true;
-                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Dropped table' . $className . "\nSQL: {$sql}\n");
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $instance= $this->xpdo->newObject($className);
+            if ($instance) {
+                $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
+                $removed= $this->xpdo->exec($sql);
+                if ($removed === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
+                } else {
+                    $removed= true;
+                    $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Dropped table' . $className . "\nSQL: {$sql}\n");
+                }
             }
         }
         return $removed;
@@ -96,75 +102,77 @@ class xPDOManager_sqlite extends xPDOManager {
 
     public function createObjectContainer($className) {
         $created= false;
-        $instance= $this->xpdo->newObject($className);
-        if ($instance) {
-            $tableName= $this->xpdo->getTableName($className);
-            $existsStmt = $this->xpdo->query("SELECT COUNT(*) FROM {$tableName}");
-            if ($existsStmt && $existsStmt->fetchAll()) {
-                return true;
-            }
-            $tableMeta= $this->xpdo->getTableMeta($className);
-            $sql= 'CREATE TABLE ' . $tableName . ' (';
-            $fieldMeta = $this->xpdo->getFieldMeta($className);
-            $nativeGen = false;
-            $columns = array();
-            while (list($key, $meta)= each($fieldMeta)) {
-                $columns[] = $this->getColumnDef($className, $key, $meta);
-                if (array_key_exists('generated', $meta) && $meta['generated'] == 'native') $nativeGen = true;
-            }
-            $sql .= implode(', ', $columns);
-            $indexes = $this->xpdo->getIndexMeta($className);
-            $createIndices = array();
-            $tableConstraints = array();
-            if (!empty ($indexes)) {
-                foreach ($indexes as $indexkey => $indexdef) {
-                    $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE' : 'INDEX'));
-                    $index = $indexdef['columns'];
-                    if (is_array($index)) {
-                        $indexset= array ();
-                        foreach ($index as $indexmember => $indexmemberdetails) {
-                            $indexMemberDetails = $this->xpdo->escape($indexmember);
-                            $indexset[]= $indexMemberDetails;
-                        }
-                        $indexset= implode(',', $indexset);
-                        if (!empty($indexset)) {
-                            switch ($indexType) {
-                                case 'UNIQUE':
-                                    $createIndices[$indexkey] = "CREATE UNIQUE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
-                                    break;
-                                case 'INDEX':
-                                    $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
-                                    break;
-                                case 'PRIMARY KEY':
-                                    if ($nativeGen) break;
-                                    $tableConstraints[]= "{$indexType} ({$indexset})";
-                                    break;
-                                default:
-                                    $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($indexkey)} {$indexType} ({$indexset})";
-                                    break;
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $instance= $this->xpdo->newObject($className);
+            if ($instance) {
+                $tableName= $this->xpdo->getTableName($className);
+                $existsStmt = $this->xpdo->query("SELECT COUNT(*) FROM {$tableName}");
+                if ($existsStmt && $existsStmt->fetchAll()) {
+                    return true;
+                }
+                $tableMeta= $this->xpdo->getTableMeta($className);
+                $sql= 'CREATE TABLE ' . $tableName . ' (';
+                $fieldMeta = $this->xpdo->getFieldMeta($className);
+                $nativeGen = false;
+                $columns = array();
+                while (list($key, $meta)= each($fieldMeta)) {
+                    $columns[] = $this->getColumnDef($className, $key, $meta);
+                    if (array_key_exists('generated', $meta) && $meta['generated'] == 'native') $nativeGen = true;
+                }
+                $sql .= implode(', ', $columns);
+                $indexes = $this->xpdo->getIndexMeta($className);
+                $createIndices = array();
+                $tableConstraints = array();
+                if (!empty ($indexes)) {
+                    foreach ($indexes as $indexkey => $indexdef) {
+                        $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE' : 'INDEX'));
+                        $index = $indexdef['columns'];
+                        if (is_array($index)) {
+                            $indexset= array ();
+                            foreach ($index as $indexmember => $indexmemberdetails) {
+                                $indexMemberDetails = $this->xpdo->escape($indexmember);
+                                $indexset[]= $indexMemberDetails;
+                            }
+                            $indexset= implode(',', $indexset);
+                            if (!empty($indexset)) {
+                                switch ($indexType) {
+                                    case 'UNIQUE':
+                                        $createIndices[$indexkey] = "CREATE UNIQUE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
+                                        break;
+                                    case 'INDEX':
+                                        $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
+                                        break;
+                                    case 'PRIMARY KEY':
+                                        if ($nativeGen) break;
+                                        $tableConstraints[]= "{$indexType} ({$indexset})";
+                                        break;
+                                    default:
+                                        $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($indexkey)} {$indexType} ({$indexset})";
+                                        break;
+                                }
                             }
                         }
-                    } 
+                    }
                 }
-            }
-            if (!empty($tableConstraints)) {
-                $sql .= ', ' . implode(', ', $tableConstraints);
-            }
-            $sql .= ")";
-            $created= $this->xpdo->exec($sql);
-            if ($created === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
-            } else {
-                $created= true;
-                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table ' . $tableName . "\nSQL: {$sql}\n");
-            }
-            if ($created === true && !empty($createIndices)) {
-                foreach ($createIndices as $createIndexKey => $createIndex) {
-                    $indexCreated = $this->xpdo->exec($createIndex);
-                    if ($indexCreated === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create index {$createIndexKey}: {$createIndex} " . print_r($this->xpdo->errorInfo(), true));
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Created index {$createIndexKey} on {$tableName}: {$createIndex}");
+                if (!empty($tableConstraints)) {
+                    $sql .= ', ' . implode(', ', $tableConstraints);
+                }
+                $sql .= ")";
+                $created= $this->xpdo->exec($sql);
+                if ($created === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
+                } else {
+                    $created= true;
+                    $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table ' . $tableName . "\nSQL: {$sql}\n");
+                }
+                if ($created === true && !empty($createIndices)) {
+                    foreach ($createIndices as $createIndexKey => $createIndex) {
+                        $indexCreated = $this->xpdo->exec($createIndex);
+                        if ($indexCreated === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create index {$createIndexKey}: {$createIndex} " . print_r($this->xpdo->errorInfo(), true));
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Created index {$createIndexKey} on {$tableName}: {$createIndex}");
+                        }
                     }
                 }
             }
@@ -173,26 +181,32 @@ class xPDOManager_sqlite extends xPDOManager {
     }
 
     public function alterObjectContainer($className, array $options = array()) {
-        // TODO: Implement alterObjectContainer() method.
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement alterObjectContainer() method.
+        }
     }
 
     public function addConstraint($class, $name, array $options = array()) {
-        // TODO: Implement addConstraint() method.
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement addConstraint() method.
+        }
     }
 
     public function addField($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $meta = $this->xpdo->getFieldMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $colDef = $this->getColumnDef($className, $name, $meta[$name]);
-                if (!empty($colDef)) {
-                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$colDef}";
-                    if ($this->xpdo->exec($sql) !== false) {
-                        $result = true;
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $meta = $this->xpdo->getFieldMeta($className);
+                if (is_array($meta) && array_key_exists($name, $meta)) {
+                    $colDef = $this->getColumnDef($className, $name, $meta[$name]);
+                    if (!empty($colDef)) {
+                        $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$colDef}";
+                        if ($this->xpdo->exec($sql) !== false) {
+                            $result = true;
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                        }
                     }
                 }
             }
@@ -202,18 +216,20 @@ class xPDOManager_sqlite extends xPDOManager {
 
     public function addIndex($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $meta = $this->xpdo->getIndexMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $indexType = ($meta[$name]['unique'] ? 'UNIQUE INDEX' : 'INDEX');
-                $idxDef = $this->getIndexDef($className, $name, $meta[$name]);
-                if (!empty($idxDef)) {
-                    $sql = "CREATE {$indexType} ON {$this->xpdo->getTableName($className)} ({$idxDef})";
-                    if ($this->xpdo->exec($sql) !== false) {
-                        $result = true;
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $meta = $this->xpdo->getIndexMeta($className);
+                if (is_array($meta) && array_key_exists($name, $meta)) {
+                    $indexType = ($meta[$name]['unique'] ? 'UNIQUE INDEX' : 'INDEX');
+                    $idxDef = $this->getIndexDef($className, $name, $meta[$name]);
+                    if (!empty($idxDef)) {
+                        $sql = "CREATE {$indexType} ON {$this->xpdo->getTableName($className)} ({$idxDef})";
+                        if ($this->xpdo->exec($sql) !== false) {
+                            $result = true;
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                        }
                     }
                 }
             }
@@ -223,31 +239,39 @@ class xPDOManager_sqlite extends xPDOManager {
 
     public function alterField($class, $name, array $options = array()) {
         $result = false;
-        // TODO: Implement alterField() method somehow, no support in sqlite for altering existing columns
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement alterField() method somehow, no support in sqlite for altering existing columns
+        }
         return $result;
     }
 
     public function removeConstraint($class, $name, array $options = array()) {
         $result = false;
-        // TODO: Implement removeConstraint() method.
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement removeConstraint() method.
+        }
         return $result;
     }
 
     public function removeField($class, $name, array $options = array()) {
         $result = false;
-        // TODO: Implement removeField() method somehow, no support in sqlite for dropping existing columns
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement removeField() method somehow, no support in sqlite for dropping existing columns
+        }
         return $result;
     }
 
     public function removeIndex($class, $name, array $options = array()) {
         $result = false;
-        $className = $this->xpdo->loadClass($class);
-        if ($className) {
-            $sql = "DROP INDEX {$this->xpdo->escape($name)}";
-            if ($this->xpdo->exec($sql) !== false) {
-                $result = true;
-            } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $sql = "DROP INDEX {$this->xpdo->escape($name)}";
+                if ($this->xpdo->exec($sql) !== false) {
+                    $result = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                }
             }
         }
         return $result;
