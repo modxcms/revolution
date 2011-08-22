@@ -125,6 +125,8 @@ abstract class modManagerController {
 
         $this->checkFormCustomizationRules();
 
+        $this->setPlaceholder('_config',$this->modx->config);
+
         $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
             'action' => $this->config,
         ));
@@ -484,10 +486,21 @@ abstract class modManagerController {
             $externals2[] = $managerUrl.'assets/modext/core/modx.layout.js';
 
             $o = '';
-            if (!empty($externals)) {
-                $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
-                $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals).'"></script>';
-                $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals2).'"></script>';
+            if ($this->modx->getOption('compress_js',null,true)) {
+                if (!empty($externals)) {
+                    $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
+                    $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals).'"></script>';
+                    $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals2).'"></script>';
+                }
+                $this->modx->setOption('compress_js',true);
+            } else {
+                $files = array_merge($externals,$externals2);
+                foreach ($files as $js) {
+                    $o .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+                }
+            }
+            if ($this->modx->getOption('compress_css',null,true)) {
+                $this->modx->setOption('compress_css',true);
             }
 
             $o .= '<script type="text/javascript">Ext.onReady(function() {
