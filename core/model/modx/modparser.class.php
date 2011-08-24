@@ -390,6 +390,11 @@ class modParser {
         $outerTag= $tag[0];
         $innerTag= $tag[1];
 
+        /* Avoid all processing for comment tags, e.g. [[- comments here]] */
+        if (substr($innerTag, 0, 1) === '-') {
+            return "";
+        }
+
         /* collect any nested element tags in the innerTag and process them */
         $this->processElementTags($outerTag, $innerTag, $processUncacheable);
         $this->_processingTag = true;

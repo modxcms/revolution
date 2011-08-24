@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4790] Add support for comment tag token, e.g. [[- comments here]]
 - [#5539] Add back in compress_css/js for allowing toggling of js/css compression in manager
 - [#5556] Enable connection pooling with master/slave support
 - [#5499] Ensure modFile create returns boolean
