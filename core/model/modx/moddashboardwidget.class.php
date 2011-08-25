@@ -238,12 +238,14 @@ abstract class modDashboardWidgetInterface {
      */
     public function process() {
         $output = $this->render();
-        $widgetArray = $this->widget->toArray();
-        $widgetArray['content'] = $output;
-        $widgetArray['class'] = $this->cssBlockClass;
-        $output = $this->getFileChunk('dashboard/block.tpl',$widgetArray);
-        $output = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$output);
-        $output = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$output);
+        if (!empty($output)) {
+            $widgetArray = $this->widget->toArray();
+            $widgetArray['content'] = $output;
+            $widgetArray['class'] = $this->cssBlockClass;
+            $output = $this->getFileChunk('dashboard/block.tpl',$widgetArray);
+            $output = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$output);
+            $output = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$output);
+        }
         return $output;
     }
 
