@@ -21,7 +21,7 @@ $dir = str_replace(array(
 
 
 /** @var modMediaSource $source */
-$modx->loadClass('modMediaSource');
+$modx->loadClass('sources.modMediaSource');
 $source = modMediaSource::getDefaultSource($modx);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));

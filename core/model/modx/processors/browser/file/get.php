@@ -16,7 +16,7 @@ $modx->lexicon->load('file');
 $file = rawurldecode($scriptProperties['file']);
 
 /** @var modMediaSource $source */
-$modx->loadClass('modMediaSource');
+$modx->loadClass('sources.modMediaSource');
 $source = modMediaSource::getDefaultSource($modx);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));

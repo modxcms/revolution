@@ -16,7 +16,7 @@ if (empty($scriptProperties['mode'])) return $modx->error->failure($modx->lexico
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
 /** @var modMediaSource|modFileMediaSource $source */
-$modx->loadClass('modMediaSource');
+$modx->loadClass('sources.modMediaSource');
 $source = modMediaSource::getDefaultSource($modx);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));

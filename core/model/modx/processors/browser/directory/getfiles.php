@@ -21,7 +21,7 @@ $modx->lexicon->load('file');
 $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? '' : $scriptProperties['dir'];
 
 /** @var modMediaSource|modFileMediaSource $source */
-$modx->loadClass('modMediaSource');
+$modx->loadClass('sources.modMediaSource');
 $source = modMediaSource::getDefaultSource($modx);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));

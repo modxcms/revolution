@@ -55,10 +55,6 @@ $xpdo_meta_map = array (
     0 => 'modPlugin',
     1 => 'modSnippet',
   ),
-  'modMediaSource' => 
-  array (
-    0 => 'modFileMediaSource',
-  ),
   'modPrincipal' => 
   array (
     0 => 'modUser',

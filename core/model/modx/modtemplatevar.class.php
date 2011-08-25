@@ -288,21 +288,37 @@ class modTemplateVar extends modElement {
 
         /* for base_url in image/file tvs */
         if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
-            $ips = $this->get('input_properties');
-            $fmu = $this->xpdo->getOption('filemanager_url',null,'');
-            $absValCheck = substr($value,0,1) == '/' || substr($value,0,7) == 'http://' || substr($value,0,8) == 'https://';
-            if (empty($ips['baseUrlPrependCheckSlash']) || !($absValCheck)) {
-                if (!empty($ips['baseUrl'])) {
-                    $value = $ips['baseUrl'].$value;
-                } else if (!empty($fmu)) {
-                    $value = $fmu.$value;
-                }
+            $source = $this->getSource();
+            if ($source && $source->get('baseUrl')) {
+                $value = $source->get('baseUrl').$value;
             }
         }
 
         /* find the render */
         $outputRenderPaths = $this->getRenderDirectories('OnTVOutputRenderList','output');
         return $this->getRender($params,$value,$outputRenderPaths,'output',$resourceId,$this->get('display'));
+    }
+
+    /**
+     * Get the Source for this Element
+     *
+     * @todo Optimize this with context caching
+     * 
+     * @return modMediaSource|null
+     */
+    public function getSource() {
+        $c = $this->xpdo->newQuery('sources.modMediaSource');
+        $c->innerJoin('sources.modMediaSourceElement','SourceElement');
+        $c->where(array(
+            'SourceElement.object' => $this->get('id'),
+            'SourceElement.object_class' => 'modTemplateVar',
+            'SourceElement.context_key' => $this->xpdo->context->get('key'),
+        ));
+        $source = $this->xpdo->getObject('sources.modMediaSource',$c);
+        if (!$source) {
+            $source = modMediaSource::getDefaultSource($this->xpdo);
+        }
+        return $source;
     }
 
     /**

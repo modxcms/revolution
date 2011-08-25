@@ -1,7 +1,7 @@
 <div id="tvbrowser{$tv->id}"></div>
 <div id="tv-image-{$tv->id}" style="width: 97%"></div>
 <div id="tv-image-preview-{$tv->id}">
-    {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src={$tv->value}&basePath={$params.basePath}&basePathRelative={$params.basePathRelative}&baseUrl={$params.baseUrl}&baseUrlRelative={$params.baseUrlRelative}&baseUrlPrependCheckSlash={if $params.baseUrlPrependCheckSlash}1{else}0{/if}" alt="" />{/if}
+    {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src={$tv->value}&source={$source}" alt="" />{/if}
 </div>
 
 <script type="text/javascript">
@@ -34,7 +34,7 @@ Ext.onReady(function() {
                     d.update('');
                 } else {
                     {/literal}
-                    d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&basePath={$params.basePath}&basePathRelative={if $params.basePathRelative}1{else}0{/if}&baseUrl={$params.baseUrl}&baseUrlRelative={if $params.baseUrlRelative}1{else}0{/if}&baseUrlPrependCheckSlash={if $params.baseUrlPrependCheckSlash}1{else}0{/if}" alt="" />');
+                    d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
                     {literal}
                 }
             }}

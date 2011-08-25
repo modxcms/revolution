@@ -53,7 +53,8 @@ class SystemFileEditManagerController extends modManagerController {
         $this->filename = preg_replace('#([\\\\]+|/{2,})#', '/',$scriptProperties['file']);
 
         /** @var modMediaSource $source */
-        $source = $this->modx->getObject('modMediaSource',1);
+        $this->modx->loadClass('sources.modMediaSource');
+        $source = modMediaSource::getDefaultSource($this->modx);
         if (!$source->getWorkingContext()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }

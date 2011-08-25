@@ -42,9 +42,6 @@ $classes= array (
     'modFormCustomizationSet',
     'modLexiconEntry',
     'modManagerLog',
-    'modMediaSource',
-    'modMediaSourceTemplateVar',
-    'modMediaSourceContext',
     'modMenu',
     'modNamespace',
     'modPlugin',
@@ -74,6 +71,9 @@ $classes= array (
     'registry.db.modDbRegisterQueue',
     'transport.modTransportPackage',
     'transport.modTransportProvider',
+    'sources.modMediaSource',
+    'sources.modMediaSourceElement',
+    'sources.modMediaSourceContext',
 );
 
 $this->xpdo->getManager();

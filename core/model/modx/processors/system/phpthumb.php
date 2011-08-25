@@ -2,6 +2,9 @@
 /**
  * Generate a thumbnail
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * 
  * @package modx
  * @subpackage processors.system
  */
@@ -26,27 +29,24 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$bases = $source->getBases($src);
-
 
 /* dont strip stuff for absolute URLs */
 if (substr($src,0,4) != 'http') {
-    $valid = true;
-    if (!empty($scriptProperties['baseUrlPrependCheckSlash'])) {
-        $valid = !(substr($src,0,1) == '/' || substr($src,0,7) == 'http://' || substr($src,0,8) == 'https://');
+    if (strpos($src,'/') !== 0) {
+        $src = $source->get('basePath').$src;
+        if ($source->get('basePathRelative')) {
+            $src = $source->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
+        }
     }
-    if ($valid) {
-        $src = $bases['pathFull'];
-        /* strip out double slashes */
-        $src = str_replace(array('///','//'),'/',$src);
+    /* strip out double slashes */
+    $src = str_replace(array('///','//'),'/',$src);
 
-        /* check for file existence if local url */
-        if (empty($src) || !file_exists($src)) {
-            if (file_exists('/'.$src)) {
-                $src = '/'.$src;
-            } else {
-                return '';
-            }
+    /* check for file existence if local url */
+    if (empty($src) || !file_exists($src)) {
+        if (file_exists('/'.$src)) {
+            $src = '/'.$src;
+        } else {
+            return '';
         }
     }
 }
