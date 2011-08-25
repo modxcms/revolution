@@ -8,11 +8,15 @@
  * @subpackage sources
  */
 class modS3MediaSource extends modMediaSource {
-    /** @var AmazonS3 $s3 */
-    public $s3;
+    /** @var AmazonS3 $driver */
+    public $driver;
     /** @var string $bucket */
     public $bucket;
 
+    /**
+     * Initializes S3 media class, getting the S3 driver and loading the bucket
+     * @return void
+     */
     public function initialize() {
         if (!defined('AWS_KEY')) {
             define('AWS_KEY',$this->xpdo->getOption('aws.key',null,''));
@@ -28,18 +32,23 @@ class modS3MediaSource extends modMediaSource {
         }
         include $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
 
-        $this->getS3();
+        $this->getDriver();
         $this->setBucket($this->xpdo->getOption('aws.default_bucket',$config,''));
     }
-    public function getS3() {
-        if (empty($this->s3)) {
+
+    /**
+     * Gets the AmazonS3 class instance
+     * @return AmazonS3
+     */
+    public function getDriver() {
+        if (empty($this->driver)) {
             try {
-                $this->s3 = new AmazonS3();
+                $this->driver = new AmazonS3();
             } catch (Exception $e) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[modAws] Could not load AmazonS3 class: '.$e->getMessage());
             }
         }
-        return $this->s3;
+        return $this->driver;
     }
 
     /**
@@ -50,7 +59,11 @@ class modS3MediaSource extends modMediaSource {
     public function setBucket($bucket) {
         $this->bucket = $bucket;
     }
-    
+
+    /**
+     * @param string $dir
+     * @return array
+     */
     public function getFolderList($dir) {
         $c = array();
         if ($dir == '' || $dir == '/') {
@@ -58,7 +71,7 @@ class modS3MediaSource extends modMediaSource {
         } else {
             $c['prefix'] = $dir;
         }
-        $list = $this->s3->get_object_list('modx',$c);
+        $list = $this->driver->get_object_list($this->bucket,$c);
 
         $directories = array();
         $files = array();
@@ -116,5 +129,14 @@ class modS3MediaSource extends modMediaSource {
         }
 
         return $ls;
+    }
+
+    /**
+     * Get the description of this source type
+     * @return string
+     */
+    public function getTypeDescription() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.s3_desc');
     }
 }

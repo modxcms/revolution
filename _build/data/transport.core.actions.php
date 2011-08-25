@@ -528,5 +528,27 @@ $collection['104']->fromArray(array (
   'assets' => '',
   'help_url' => 'Dashboard+Widgets',
 ), '', true, true);
+$collection['105']= $xpdo->newObject('modAction');
+$collection['105']->fromArray(array (
+  'id' => 105,
+  'namespace' => 'core',
+  'parent' => 101,
+  'controller' => 'source/create',
+  'haslayout' => 1,
+  'lang_topics' => 'sources,namespace',
+  'assets' => '',
+  'help_url' => 'Media+Sources',
+), '', true, true);
+$collection['106']= $xpdo->newObject('modAction');
+$collection['106']->fromArray(array (
+  'id' => 106,
+  'namespace' => 'core',
+  'parent' => 101,
+  'controller' => 'source/update',
+  'haslayout' => 1,
+  'lang_topics' => 'sources,namespace',
+  'assets' => '',
+  'help_url' => 'Media+Sources',
+), '', true, true);
 
 return $collection;

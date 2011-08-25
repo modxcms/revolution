@@ -24,7 +24,7 @@ $dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root'
         : strpos($scriptProperties['id'], 'n_') === 0 ? substr($scriptProperties['id'], 2) : $scriptProperties['id'];
 
 $source = $modx->getOption('source',$scriptProperties,1);
-$source = 2;
+
 /** @var modMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
 $source = modMediaSource::getDefaultSource($modx,$source);

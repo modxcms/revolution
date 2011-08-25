@@ -148,4 +148,13 @@ class modMediaSource extends xPDOSimpleObject {
     public function updateFile($filePath,$content) {}
     public function removeFile($filePath) {}
     public function renameFile() {}
+
+    /**
+     * Get the description of this source type
+     * @return string
+     */
+    public function getTypeDescription() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.file_desc');
+    }
 }

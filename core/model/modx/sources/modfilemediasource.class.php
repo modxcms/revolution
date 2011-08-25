@@ -23,6 +23,7 @@ class modFileMediaSource extends modMediaSource {
      * @return array
      */
     public function getBases($dir) {
+        if (empty($dir)) $dir = '';
         $bases = array();
         $dir = $this->fileHandler->sanitizePath($dir);
         $bases['path'] = $this->get('basePath');
@@ -34,7 +35,7 @@ class modFileMediaSource extends modMediaSource {
             $bases['pathAbsolute'] = $bases['path'];
         }
         
-        if ($bases['path'] != '/' && strpos($dir,$bases['path']) === false) {
+        if ($bases['path'] != '/' && !empty($bases['path']) && strpos($dir,$bases['path']) === false) {
             $bases['pathFull'] = $bases['path'].ltrim($dir,'/');
         } else {
             $bases['pathFull'] = $dir;
@@ -689,5 +690,14 @@ class modFileMediaSource extends modMediaSource {
             }
         }
         return $files;
+    }
+
+    /**
+     * Get the description of this source type
+     * @return string
+     */
+    public function getTypeDescription() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.file_desc');
     }
 }
