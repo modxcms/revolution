@@ -51,6 +51,10 @@ class modTemplateVar extends modElement {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->setToken('*');
+        $this->_fields['content'] =& $this->_fields['default_text'];
+        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
+            $this->content =& $this->_fields['content'];
+        }
     }
 
     /**
@@ -167,6 +171,8 @@ class modTemplateVar extends modElement {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
+            } elseif ($this->isStatic()) {
+                $this->_content = $this->getFileContent($options);
             } else {
                 $this->_content = $this->get('default_text');
             }
@@ -180,7 +186,16 @@ class modTemplateVar extends modElement {
      * {@inheritdoc}
      */
     public function setContent($content, array $options = array()) {
-        return $this->set('default_text', $content);
+        $set = false;
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile) {
+                $set = file_put_contents($sourceFile, $content);
+            }
+        } else {
+            $set = $this->set('default_text', $content);
+        }
+        return $set;
     }
 
     /**

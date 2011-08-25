@@ -15,6 +15,7 @@ $xpdo_meta_map['modPlugin']= array (
     'properties' => NULL,
     'disabled' => 0,
     'moduleguid' => '',
+    'static' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -68,6 +69,16 @@ $xpdo_meta_map['modPlugin']= array (
       'default' => '',
       'index' => 'fk',
     ),
+    'static' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -96,6 +107,22 @@ $xpdo_meta_map['modPlugin']= array (
       'columns' => 
       array (
         'disabled' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'static' => 
+    array (
+      'alias' => 'static',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'static' => 
         array (
           'length' => '',
           'collation' => 'A',

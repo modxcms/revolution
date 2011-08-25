@@ -18,6 +18,7 @@ $xpdo_meta_map['modTemplate']= array (
     'content' => '',
     'locked' => 0,
     'properties' => NULL,
+    'static' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -94,6 +95,16 @@ $xpdo_meta_map['modTemplate']= array (
       'phptype' => 'array',
       'null' => true,
     ),
+    'static' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -138,6 +149,22 @@ $xpdo_meta_map['modTemplate']= array (
       'columns' => 
       array (
         'locked' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'static' => 
+    array (
+      'alias' => 'static',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'static' => 
         array (
           'length' => '',
           'collation' => 'A',

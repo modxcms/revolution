@@ -15,6 +15,19 @@
  */
 class modSnippet extends modScript {
     /**
+     * Override xPDOObject::__construct() to alias the content field.
+     * 
+     * @param xPDO &$xpdo
+     */
+    public function __construct(xPDO &$xpdo) {
+        parent::__construct($xpdo);
+        $this->_fields['content'] =& $this->_fields['snippet'];
+        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
+            $this->content =& $this->_fields['content'];
+        }
+    }
+
+    /**
      * Overrides modElement::save to add custom error logging and fire
      * modX-specific events.
      *
@@ -81,6 +94,8 @@ class modSnippet extends modScript {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
+            } elseif ($this->isStatic()) {
+                $this->_content = $this->getFileContent($options);
             } else {
                 $this->_content = $this->get('snippet');
             }
@@ -94,6 +109,15 @@ class modSnippet extends modScript {
      * {@inheritDoc}
      */
     public function setContent($content, array $options = array()) {
-        return $this->set('snippet', $content);
+        $set = false;
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile) {
+                $set = file_put_contents($sourceFile, $content);
+            }
+        } else {
+            $set = $this->set('snippet', $content);
+        }
+        return $set;
     }
 }

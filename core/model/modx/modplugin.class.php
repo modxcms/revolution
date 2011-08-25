@@ -24,6 +24,10 @@ class modPlugin extends modScript {
      */
     function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
+        $this->_fields['content'] =& $this->_fields['plugincode'];
+        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
+            $this->content =& $this->_fields['content'];
+        }
         $this->setCacheable(false);
     }
 
@@ -97,6 +101,8 @@ class modPlugin extends modScript {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
+            } elseif ($this->isStatic()) {
+                $this->_content = $this->getFileContent($options);
             } else {
                 $this->_content = $this->get('plugincode');
             }
@@ -111,7 +117,16 @@ class modPlugin extends modScript {
      * {@inheritdoc}
      */
     public function setContent($content, array $options = array()) {
-        return $this->set('plugincode', $content);
+        $set = false;
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile) {
+                $set = file_put_contents($sourceFile, $content);
+            }
+        } else {
+            $set = $this->set('plugincode', $content);
+        }
+        return $set;
     }
 
     /**
