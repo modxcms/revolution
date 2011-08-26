@@ -117,7 +117,6 @@ MODx.panel.WebLink = function(config) {
             ,description: '<b>[[*content]]</b><br />'+_('weblink_help')
             ,name: 'content'
             ,id: 'modx-weblink-content'
-            ,maxLength: 255
             ,anchor: '90%'
             ,value: (config.record.content || config.record.ta) || 'http://'
         },{
