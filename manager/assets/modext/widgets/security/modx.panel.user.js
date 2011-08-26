@@ -498,6 +498,12 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,data: config.extendedFields
                         ,formPanel: 'modx-panel-user'
                         ,prefix: 'extended'
+                        ,enableDD: true
+                        ,listeners: {
+                        	'dragdrop': {fn:function() {
+                        		this.markDirty();
+                        	},scope:this}
+                        }
                     }
                 },{
                     xtype: 'modx-orm-form'
