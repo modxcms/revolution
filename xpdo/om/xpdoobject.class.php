@@ -1052,6 +1052,30 @@ class xPDOObject {
     }
 
     /**
+     * Get an xPDOIterator for a collection of objects related by aggregate or composite relations.
+     *
+     * @param string $alias The alias of the relation.
+     * @param null|array|xPDOCriteria $criteria A valid xPDO criteria expression.
+     * @param bool|int $cacheFlag Indicates if the objects should be cached and optionally, by
+     * specifying  an integer values, for how many seconds.
+     * @return bool|xPDOIterator An iterator for the collection or false if no relation is found.
+     */
+    public function getIterator($alias, $criteria= null, $cacheFlag= true) {
+        $iterator = false;
+        $fkMeta= $this->getFKDefinition($alias);
+        if ($fkMeta) {
+            if ($criteria === null) {
+                $criteria= array($fkMeta['foreign'] => $this->get($fkMeta['local']));
+            } else {
+                $criteria= $this->xpdo->newQuery($fkMeta['class'], $criteria);
+                $criteria->andCondition(array("{$criteria->getAlias()}.{$fkMeta['foreign']}" => $this->get($fkMeta['local'])));
+            }
+            $iterator = $this->xpdo->getIterator($fkMeta['class'], $criteria, $cacheFlag);
+        }
+        return $iterator;
+    }
+
+    /**
      * Adds an object related to this instance by a foreign key relationship.
      *
      * @see xPDOObject::getOne()

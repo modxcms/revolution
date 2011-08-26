@@ -445,6 +445,32 @@ class xPDOObjectTest extends xPDOTestCase {
     }
 
     /**
+     * Test loading an iterator for
+     */
+    public function testGetIterator() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $children = array();
+        /** @var xPDOObject $object */
+        $object = $this->xpdo->getObject('Person', 2);
+        if ($object) {
+            try {
+                $iterator = $object->getIterator('PersonPhone');
+                foreach ($iterator as $child) {
+                    $children[] = $child;
+                }
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        $this->assertTrue(
+            $object instanceof Person
+            && $children[0] instanceof PersonPhone
+            && $children[1] instanceof PersonPhone,
+            "Could not retrieve requested iterator."
+        );
+    }
+
+    /**
      * Test updating a collection.
      *
      * @dataProvider providerUpdateCollection
