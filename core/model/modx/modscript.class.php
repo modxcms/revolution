@@ -145,4 +145,16 @@ class modScript extends modElement {
         }
         return ($result !== false);
     }
+
+    public function getFileContent(array $options = array()) {
+        $content = parent::getFileContent($options);
+        $content= trim($content);
+        if (strncmp($content, '<?', 2) == 0) {
+            $content= substr($content, 2);
+            if (strncmp($content, 'php', 3) == 0) $content= substr($content, 3);
+        }
+        if (substr($content, -2, 2) == '?>') $content= substr($content, 0, -2);
+        $content= trim($content, " \n\r\0\x0B");
+        return $content;
+    }
 }
