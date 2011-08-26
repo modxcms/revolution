@@ -148,7 +148,32 @@ class modResource extends modAccessibleSimpleObject {
         }
     }
 
-    function __construct(& $xpdo) {
+    /**
+     * Updates the Context of all Children recursively to that of the parent.
+     *
+     * @static
+     * @param modX &$modx A reference to an initialized modX instance.
+     * @param modResource $parent The parent modResource instance.
+     * @param array $options An array of options.
+     * @return int The number of children updated.
+     */
+    public static function updateContextOfChildren(modX &$modx, $parent, array $options = array()) {
+        $count = 0;
+        foreach ($parent->getIterator('Children') as $child) {
+            $child->set('context_key', $parent->get('context_key'));
+            if ($child->save()) {
+                $count++;
+            } else {
+                $modx->log(modX::LOG_LEVEL_ERROR, "Could not change Context of child resource {$child->get('id')}", '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        return $count;
+    }
+
+    /**
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
+    function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
         $this->_contextKey= isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
         $this->_cacheKey= "[contextKey]/resources/[id]";
@@ -455,12 +480,19 @@ class modResource extends modAccessibleSimpleObject {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
             }
         }
+        $changeContext = false;
+        if ($this->xpdo instanceof modX) {
+            $changeContext = $this->isDirty('context_key');
+        }
         $rt= parent :: save($cacheFlag);
         if ($rt && $refreshChildURIs) {
             $this->xpdo->call('modResource', 'refreshURIs', array(
                 &$this->xpdo,
                 $this->get('id'),
             ));
+        }
+        if ($rt && $changeContext) {
+            $this->xpdo->call($this->_class, 'updateContextOfChildren', array(&$this->xpdo, $this));
         }
         return $rt;
     }
