@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add xPDOObject->getIterator for iterating aggregate and composite relations
 - [#4590] Allow multiple connections to be defined for master/slave configurations
 - [#2883] Add xPDOObject->getGraph() and add feature in toArray() to return related object fields
 - Add xPDO->getGraph() method to infer relation graphs
