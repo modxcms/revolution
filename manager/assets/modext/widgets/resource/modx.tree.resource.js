@@ -683,23 +683,6 @@ MODx.window.QuickCreateResource = function(config) {
                     ,id: 'modx-'+this.ident+'-menutitle'
                     ,fieldLabel: _('resource_menutitle')
                     ,anchor: '100%'
-                },{
-                    xtype: 'modx-combo-content-type'
-                    ,fieldLabel: _('resource_content_type')
-                    ,name: 'content_type'
-                    ,hiddenName: 'content_type'
-                    ,id: 'modx-'+this.ident+'-type'
-                    ,anchor: '70%'
-                    ,value: config.record.content_type || 1
-                    
-                },{
-                    xtype: 'modx-combo-content-disposition'
-                    ,fieldLabel: _('resource_contentdispo')
-                    ,name: 'content_dispo'
-                    ,hiddenName: 'content_dispo'
-                    ,id: 'modx-'+this.ident+'-dispo'
-                    ,anchor: '70%'
-                    ,value: config.record.content_dispo || 0                   
                 },
                 MODx.getQRContentField(this.ident,config.record.class_key)]
             },{
@@ -805,23 +788,6 @@ MODx.window.QuickUpdateResource = function(config) {
                     ,fieldLabel: _('introtext')
                     ,anchor: '100%'
                     ,height: 50
-                },{
-                    xtype: 'modx-combo-content-type'
-                    ,fieldLabel: _('resource_content_type')
-                    ,name: 'content_type'
-                    ,hiddenName: 'content_type'
-                    ,id: 'modx-'+this.ident+'-type'
-                    ,anchor: '70%'
-                    ,value: config.record.content_type || 1
-                    
-                },{
-                    xtype: 'modx-combo-content-disposition'
-                    ,fieldLabel: _('resource_contentdispo')
-                    ,name: 'content_dispo'
-                    ,hiddenName: 'content_dispo'
-                    ,id: 'modx-'+this.ident+'-dispo'
-                    ,anchor: '70%'
-                    ,value: config.record.content_dispo || 0                   
                 },
                 MODx.getQRContentField(this.ident,config.record.class_key)]
             },{
@@ -1008,7 +974,24 @@ MODx.getQRSettings = function(id,va) {
         ,description: _('clear_cache_on_save_msg')
         ,inputValue: 1
         ,checked: true
-    }];
+    },{
+        xtype: 'modx-combo-content-type'
+            ,fieldLabel: _('resource_content_type')
+            ,name: 'content_type'
+            ,hiddenName: 'content_type'
+            ,id: 'modx-'+this.ident+'-type'
+            ,anchor: '70%'
+            ,value: va['content_type'] != undefined ? va['content_type'] : 1
+            
+        },{
+            xtype: 'modx-combo-content-disposition'
+            ,fieldLabel: _('resource_contentdispo')
+            ,name: 'content_dispo'
+            ,hiddenName: 'content_dispo'
+            ,id: 'modx-'+this.ident+'-dispo'
+            ,anchor: '70%'
+            ,value: va['content_dispo'] != undefined ? va['content_dispo'] : 0                   
+        }];
 };
 MODx.handleQUCB = function(cb) {
     var h = Ext.getCmp(cb.id+'-hd');
