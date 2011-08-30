@@ -65,6 +65,7 @@ class modS3MediaSource extends modMediaSource {
      * @return array
      */
     public function getFolderList($dir) {
+        $properties = $this->getProperties();
         $c = array();
         $list = array();
         $c['delimiter'] = '/';
@@ -133,7 +134,7 @@ class modS3MediaSource extends modMediaSource {
                     'path' => $path,
                     'pathRelative' => $path,
                     'directory' => $path,
-                    'url' => $path,
+                    'url' => $properties['url']['value'].$properties['bucket']['value'].'/'.$path,
                     'file' => $path,
                     'menu' => array(),
                 );
