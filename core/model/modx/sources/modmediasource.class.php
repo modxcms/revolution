@@ -133,11 +133,13 @@ class modMediaSource extends xPDOSimpleObject {
         return !empty($this->errors);
     }
 
-
     /**
+     * Return an array of files and folders at this current level in the directory structure
+     *
+     * @param string $dir
      * @return array
      */
-    public function getFolderList() { return array(); }
+    public function getFolderList($dir) { return array(); }
     public function createFolder($folderName) { return true; }
     public function removeFolder($folderPath) { return true; }
     public function renameFolder($oldPath,$newPath) {}

@@ -13,7 +13,9 @@ $_lang['base_url_relative'] = 'Base URL Relative?';
 $_lang['path_options'] = 'Path Options';
 $_lang['source'] = 'Media Source';
 $_lang['source_create'] = 'Create New Media Source';
+$_lang['source_properties.intro_msg'] = 'Manage the properties for this Source below.';
 $_lang['source_remove'] = 'Remove Media Source';
+$_lang['source_remove_confirm'] = 'Are you sure you want to remove this Media Source? This might break any TVs you have assigned to this source.';
 $_lang['source_update'] = 'Update Media Source';
 $_lang['source_type'] = 'Source Type';
 $_lang['source_type.file'] = 'File System';
@@ -27,3 +29,4 @@ $_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
 
 $_lang['bucket'] = 'Bucket';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
+$_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';

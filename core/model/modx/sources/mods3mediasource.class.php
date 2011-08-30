@@ -151,6 +151,14 @@ class modS3MediaSource extends modMediaSource {
 
     public function getDefaultProperties() {
         return array(
+            'url' => array(
+                'name' => 'url',
+                'desc' => 'prop_s3.url_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => 'http://mysite.s3.amazonaws.com/',
+                'lexicon' => 'core:source',
+            ),
             'bucket' => array(
                 'name' => 'bucket',
                 'desc' => 'prop_s3.bucket_desc',

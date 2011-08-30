@@ -76,8 +76,7 @@ MODx.grid.Sources = function(config) {
         }]
         ,tbar: [{
             text: _('source_create')
-            ,handler: this.createSource
-            ,scope: this
+            ,handler: { xtype: 'modx-window-source-create' ,blankValues: true }
         },'-',{
             text: _('bulk_actions')
             ,menu: [{
@@ -174,7 +173,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     ,removeSource: function() {
         MODx.msg.confirm({
             title: _('source_remove')
-            ,text: _('source_confirm_remove')
+            ,text: _('source_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'remove'
@@ -207,6 +206,46 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-sources',MODx.grid.Sources);
 
+/**
+ * Generates the create Source window.
+ *
+ * @class MODx.window.CreateSource
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-source-create
+ */
+MODx.window.CreateSource = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('source_create')
+        ,url: MODx.config.connectors_url+'source/index.php'
+        ,action: 'create'
+        ,fields: [{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,anchor: '90%'
+            ,allowBlank: false
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('description')
+            ,name: 'description'
+            ,anchor: '90%'
+            ,grow: true
+        },{
+            name: 'class_key'
+            ,hiddenName: 'class_key'
+            ,xtype: 'modx-combo-source-type'
+            ,fieldLabel: _('source_type')
+            ,anchor: '90%'
+            ,allowBlank: false
+        }]
+    });
+    MODx.window.CreateSource.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateSource,MODx.Window);
+Ext.reg('modx-window-source-create',MODx.window.CreateSource);
+
 
 MODx.grid.SourceTypes = function(config) {
     config = config || {};
@@ -214,14 +253,13 @@ MODx.grid.SourceTypes = function(config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'source/type.php'
-        ,fields: ['class','description']
+        ,fields: ['class','name','description']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
-        ,sm: this.sm
-        ,columns: [this.sm,{
+        ,columns: [{
             header: _('name')
-            ,dataIndex: 'class'
+            ,dataIndex: 'name'
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
@@ -243,32 +281,7 @@ MODx.grid.SourceTypes = function(config) {
                 ,handler: this.removeSelected
                 ,scope: this
             }]
-        },*/'->',{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-source-types-search'
-            ,emptyText: _('search_ellipsis')
-            ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
-            }
-        }]
+        },*/]
     });
     MODx.grid.SourceTypes.superclass.constructor.call(this,config);
 };

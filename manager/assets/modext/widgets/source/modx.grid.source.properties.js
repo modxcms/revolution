@@ -190,6 +190,11 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
         },this);
     }
 
+    ,isDefaultPropSet: function() {
+        var ps = Ext.getCmp('modx-combo-property-set').getValue();
+        return (ps == 0 || ps == _('default'));
+    }
+
     ,_showMenu: function(g,ri,e) {
         var sm = this.getSelectionModel();
         if (sm.getSelections().length > 1) {
@@ -203,17 +208,13 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             }]);
             this.menu.show(e.target);
         } else {
-            MODx.grid.ElementProperties.superclass._showMenu.call(this,g,ri,e);
+            MODx.grid.SourceProperties.superclass._showMenu.call(this,g,ri,e);
         }
     }
 
-    ,isDefaultPropSet: function() {
-        var ps = Ext.getCmp('modx-combo-property-set').getValue();
-        return (ps == 0 || ps == _('default'));
-    }
 
     ,getMenu: function() {
-        var def = 0;
+        var def = false;
 
         var r = this.menu.record;
         var m = []
@@ -230,18 +231,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
                 ,handler: this.revert
             });
         }
-        if (r.overridden == 2 && !def) {
-            m.push({
-                text: _('property_remove')
-                ,scope: this
-                ,handler: this.remove.createDelegate(this,[{
-                    title: _('warning')
-                    ,text: _('property_remove_confirm')
-                }])
-            });
-        }
-
-        if (r.overridden != 1 && def) {
+        if (r.overridden != 1) {
             m.push({
                 text: _('property_remove')
                 ,scope: this

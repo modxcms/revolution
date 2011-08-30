@@ -35,7 +35,7 @@ class modFileMediaSource extends modMediaSource {
             $bases['pathAbsolute'] = $bases['path'];
         }
         
-        if ($bases['path'] != '/' && !empty($bases['path']) && strpos($dir,$bases['path']) === false) {
+        if (!empty($bases['path']) && $bases['path'] != '/' && strpos($dir,$bases['path']) === false) {
             $bases['pathFull'] = $bases['path'].ltrim($dir,'/');
         } else {
             $bases['pathFull'] = $dir;
@@ -71,13 +71,19 @@ class modFileMediaSource extends modMediaSource {
         if ($act) { $editAction = $act->get('id'); }
         return $editAction;
     }
-    
+
+    /**
+     * Return an array of files and folders at this current level in the directory structure
+     * 
+     * @param string $dir
+     * @return array
+     */
     public function getFolderList($dir) {
         $dir = $this->fileHandler->postfixSlash($dir);
         $bases = $this->getBases($dir);
-        if (empty($bases['path'])) return false;
-        $fullPath = $bases['pathAbsolute'].$dir;
-        
+        if (empty($bases['pathAbsolute'])) return array();
+        $fullPath = $bases['pathAbsolute'].ltrim($dir,'/');
+                
         $useMultibyte = $this->getOption('use_multibyte',$this->properties,false);
         $encoding = $this->getOption('modx_charset',$this->properties,'UTF-8');
         $hideFiles = !empty($this->properties['hideFiles']) && $this->properties['hideFiles'] != 'false' ? true : false;
