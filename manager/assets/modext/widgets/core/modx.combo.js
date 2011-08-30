@@ -727,6 +727,28 @@ MODx.combo.Dashboard = function(config) {
 Ext.extend(MODx.combo.Dashboard,MODx.combo.ComboBox);
 Ext.reg('modx-combo-dashboard',MODx.combo.Dashboard);
 
+MODx.combo.MediaSource = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'source'
+        ,hiddenName: 'source'
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id','name','description']
+        ,listWidth: 400
+        ,pageSize: 20
+        ,url: MODx.config.connectors_url+'source/index.php'
+        ,tpl: new Ext.XTemplate('<tpl for=".">'
+            ,'<div class="x-combo-list-item">'
+            ,'<h4 class="modx-combo-title">{name}</h4>'
+            ,'<p class="modx-combo-desc">{description}</p>'
+            ,'</div></tpl>')
+    });
+    MODx.combo.MediaSource.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.MediaSource,MODx.combo.ComboBox);
+Ext.reg('modx-combo-source',MODx.combo.MediaSource);
+
 MODx.combo.MediaSourceType = function(config) {
     config = config || {};
     Ext.applyIf(config,{

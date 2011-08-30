@@ -66,12 +66,36 @@ class modS3MediaSource extends modMediaSource {
      */
     public function getFolderList($dir) {
         $c = array();
-        if ($dir == '' || $dir == '/') {
-            $c['pcre'] = '/^[^\/]*\/?$/';
+        $list = array();
+        $c['delimiter'] = '/';
+        if (empty($dir) || $dir == '/') {
+            $cps = $this->driver->list_objects($this->bucket,$c);
+            foreach ($cps->body->CommonPrefixes as $prefix) {
+                if (!empty($prefix->Prefix) && $prefix->Prefix != $dir && $prefix->Prefix != '/') {
+                    $list[] = (string)$prefix->Prefix;
+                }
+            }
+            $response = $this->driver->get_object_list($this->bucket,$c);
+            foreach ($response as $file) {
+                $list[] = $file;
+            }
         } else {
             $c['prefix'] = $dir;
+            $cps = $this->driver->list_objects($this->bucket,$c);
+            foreach ($cps->body->CommonPrefixes as $prefix) {
+                $pfx = (string)$prefix->Prefix;
+                if (!empty($pfx) && $pfx != $dir) {
+                    $list[] = $pfx;
+                }
+            }
+            $c['prefix'] = $dir;
+            $response = $this->driver->get_object_list($this->bucket,$c);
+            foreach ($response as $file) {
+                if ($file != $dir) {
+                    $list[] = $file;
+                }
+            }
         }
-        $list = $this->driver->get_object_list($this->bucket,$c);
 
         $directories = array();
         $files = array();
@@ -85,7 +109,6 @@ class modS3MediaSource extends modMediaSource {
             if (($slashCount > 1 && $isDir) || ($slashCount > 0 && !$isDir)) {
                 continue;
             }
-            //var_dump($relativePath.' = '.substr_count($relativePath,'/'));
             if ($isDir) {
                 $directories[$path] = array(
                     'id' => $path,

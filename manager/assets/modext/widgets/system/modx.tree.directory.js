@@ -54,6 +54,9 @@ MODx.tree.Directory = function(config) {
             ,scope: this
             ,hidden: MODx.perm.file_manager && !MODx.browserOpen ? false : true
         }]
+        ,tbarCfg: {
+            id: config.id ? config.id+'-tbar' : 'modx-tree-file-tbar'
+        }
     });
     MODx.tree.Directory.superclass.constructor.call(this,config);
     this.addEvents({
@@ -65,9 +68,42 @@ MODx.tree.Directory = function(config) {
         n.select();
         this.cm.activeNode = n;
     },this);
+    this.on('render',function() {
+        var el = Ext.get(this.config.id);
+        el.createChild({tag: 'div', id: this.config.id+'_tb'});
+        el.createChild({tag: 'div', id: this.config.id+'_filter'});
+    },this);
+    this.addSourceToolbar();
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
+    ,addSourceToolbar: function() {
+        var t = Ext.get(this.config.id+'-tbar');
+        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: 'modx-file-sourcebar'});
+        var tb = new Ext.Toolbar({
+            applyTo: fbd
+            ,autoHeight: true
+            ,width: '100%'
+        });
+        var cb = MODx.load({
+            xtype: 'modx-combo-source'
+            ,style: 'margin: 5px'
+            ,cls: 'modx-file-tree-source-cb'
+            ,value: 1
+            ,width: Ext.getCmp(this.config.id).getWidth() - 15
+            ,listeners: {
+                'select':{fn:this.changeSource,scope:this}
+            }
+        });
+        tb.add(cb);
+        tb.doLayout();
+        this.searchBar = tb;
+    }
+    ,changeSource: function(sel) {
+        var s = sel.getValue();
+        this.config.baseParams.source = s;
+        this.refresh();
+    }
     ,_initExpand: function() {
         if (!Ext.isEmpty(this.config.openTo)) {
             var treeState = Ext.state.Manager.get(this.treestate_id);
