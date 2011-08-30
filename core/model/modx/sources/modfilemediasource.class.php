@@ -691,6 +691,14 @@ class modFileMediaSource extends modMediaSource {
         }
         return $files;
     }
+    /**
+     * Get the name of this source type
+     * @return string
+     */
+    public function getTypeName() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.file');
+    }
 
     /**
      * Get the description of this source type

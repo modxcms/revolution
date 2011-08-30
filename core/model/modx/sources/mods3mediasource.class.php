@@ -132,6 +132,14 @@ class modS3MediaSource extends modMediaSource {
     }
 
     /**
+     * Get the name of this source type
+     * @return string
+     */
+    public function getTypeName() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.s3');
+    }
+    /**
      * Get the description of this source type
      * @return string
      */
@@ -139,4 +147,19 @@ class modS3MediaSource extends modMediaSource {
         $this->xpdo->lexicon->load('source');
         return $this->xpdo->lexicon('source_type.s3_desc');
     }
+
+
+    public function getDefaultProperties() {
+        return array(
+            'bucket' => array(
+                'name' => 'bucket',
+                'desc' => 'prop_s3.bucket_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ),
+        );
+    }
+
 }

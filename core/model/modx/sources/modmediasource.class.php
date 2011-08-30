@@ -150,11 +150,130 @@ class modMediaSource extends xPDOSimpleObject {
     public function renameFile() {}
 
     /**
+     * Get the name of this source type
+     * @return string
+     */
+    public function getTypeName() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.file');
+    }
+    /**
      * Get the description of this source type
      * @return string
      */
     public function getTypeDescription() {
         $this->xpdo->lexicon->load('source');
         return $this->xpdo->lexicon('source_type.file_desc');
+    }
+
+    public function getDefaultProperties() {
+        return array();
+    }
+
+    public function getProperties() {
+        $properties = $this->get('properties');
+        $defaultProperties = $this->getDefaultProperties();
+        foreach ($properties as &$property) {
+            $property['overridden'] = 0;
+            if (array_key_exists($property['name'],$defaultProperties)) {
+                if ($defaultProperties[$property['name']]['value'] != $property['value']) {
+                    $property['overridden'] = 1;
+                }
+            } else {
+                $property['overridden'] = 2;
+            }
+        }
+        $properties = array_merge($defaultProperties,$properties);
+        return $this->prepareProperties($properties);
+    }
+
+    protected function prepareProperties(array $properties = array()) {
+        foreach ($properties as &$property) {
+            if (!empty($property['lexicon'])) {
+                $this->xpdo->lexicon->load($property['lexicon']);
+            }
+            if (!empty($property['name'])) {
+                $property['name_trans'] = $this->xpdo->lexicon($property['name']);
+            }
+            if (!empty($property['desc'])) {
+                $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+            }
+        }
+        return $properties;
+    }
+
+    public function setProperties($properties, $merge = false) {
+        $default = $this->getDefaultProperties();
+
+        foreach ($properties as $k => $prop) {
+            if (array_key_exists($prop['name'],$default)) {
+                if ($prop['value'] == $default[$prop['name']]['value']) {
+                    unset($properties[$k]);
+                }
+            }
+        }
+        
+        $set = false;
+        $propertiesArray = array();
+        if (is_string($properties)) {
+            $properties = $this->xpdo->parser->parsePropertyString($properties);
+        }
+        if (is_array($properties)) {
+            foreach ($properties as $propKey => $property) {
+                if (is_array($property) && isset($property[5])) {
+                    $key = $property[0];
+                    $propertyArray = array(
+                        'name' => $property[0],
+                        'desc' => $property[1],
+                        'type' => $property[2],
+                        'options' => $property[3],
+                        'value' => $property[4],
+                        'lexicon' => !empty($property[5]) ? $property[5] : null,
+                    );
+                } elseif (is_array($property) && isset($property['value'])) {
+                    $key = $property['name'];
+                    $propertyArray = array(
+                        'name' => $property['name'],
+                        'desc' => isset($property['description']) ? $property['description'] : (isset($property['desc']) ? $property['desc'] : ''),
+                        'type' => isset($property['xtype']) ? $property['xtype'] : (isset($property['type']) ? $property['type'] : 'textfield'),
+                        'options' => isset($property['options']) ? $property['options'] : array(),
+                        'value' => $property['value'],
+                        'lexicon' => !empty($property['lexicon']) ? $property['lexicon'] : null,
+                    );
+                } else {
+                    $key = $propKey;
+                    $propertyArray = array(
+                        'name' => $propKey,
+                        'desc' => '',
+                        'type' => 'textfield',
+                        'options' => array(),
+                        'value' => $property,
+                        'lexicon' => null,
+                    );
+                }
+
+                if (!empty($propertyArray['options'])) {
+                    foreach ($propertyArray['options'] as $optionKey => &$option) {
+                        if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
+                        unset($option['menu'],$option['name']);
+                    }
+                }
+
+                if ($propertyArray['type'] == 'combo-boolean' && is_numeric($propertyArray['value'])) {
+                    $propertyArray['value'] = (boolean)$propertyArray['value'];
+                }
+
+                $propertiesArray[$key] = $propertyArray;
+            }
+
+            if ($merge && !empty($propertiesArray)) {
+                $existing = $this->get('properties');
+                if (is_array($existing) && !empty($existing)) {
+                    $propertiesArray = array_merge($existing, $propertiesArray);
+                }
+            }
+            $set = $this->set('properties', $propertiesArray);
+        }
+        return $set;
     }
 }

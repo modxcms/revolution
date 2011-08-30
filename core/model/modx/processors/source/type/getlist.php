@@ -23,7 +23,8 @@ foreach ($descendants as $descendant) {
     if (!$obj) continue;
 
     $list[] = array(
-        'class' => $descendant,
+        'class' => 'sources.'.$descendant,
+        'name' => $obj->getTypeName(),
         'description' => $obj->getTypeDescription(),
     );
 }
