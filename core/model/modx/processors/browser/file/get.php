@@ -14,10 +14,11 @@ if (!$modx->hasPermission('file_view')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('file');
 /* format filename */
 $file = rawurldecode($scriptProperties['file']);
+$source = $modx->getOption('source',$scriptProperties,1);
 
 /** @var modMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
-$source = modMediaSource::getDefaultSource($modx);
+$source = modMediaSource::getDefaultSource($modx,$source);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }

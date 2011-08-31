@@ -585,7 +585,7 @@ class modFileMediaSource extends modMediaSource {
     public function getFilesInDirectory($dir) {
         $dir = $this->fileHandler->postfixSlash($dir);
         $bases = $this->getBases($dir);
-        if (empty($bases['path'])) return false;
+        if (empty($bases['pathAbsolute'])) return false;
         $fullPath = $bases['pathAbsolute'].$dir;
 
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];

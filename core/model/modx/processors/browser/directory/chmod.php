@@ -14,10 +14,11 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['mode'])) return $modx->error->failure($modx->lexicon('file_err_chmod_ns'));
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+$source = $modx->getOption('source',$scriptProperties,1);
 
 /** @var modMediaSource|modFileMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
-$source = modMediaSource::getDefaultSource($modx);
+$source = modMediaSource::getDefaultSource($modx,$source);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }

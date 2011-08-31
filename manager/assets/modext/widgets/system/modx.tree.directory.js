@@ -8,6 +8,7 @@
  */
 MODx.tree.Directory = function(config) {
     config = config || {};
+    config.id = config.id || Ext.id();
     Ext.applyIf(config,{
         rootVisible: true
         ,rootName: _('files')
@@ -28,6 +29,7 @@ MODx.tree.Directory = function(config) {
             ,wctx: MODx.ctx || 'web'
             ,currentAction: MODx.request.a || 0
             ,currentFile: MODx.request.file || ''
+            ,source: config.source || 0
         }
         ,action: 'getList'
         ,primaryKey: 'dir'
@@ -55,7 +57,7 @@ MODx.tree.Directory = function(config) {
             ,hidden: MODx.perm.file_manager && !MODx.browserOpen ? false : true
         }]
         ,tbarCfg: {
-            id: config.id ? config.id+'-tbar' : 'modx-tree-file-tbar'
+            id: config.id+'-tbar'
         }
     });
     MODx.tree.Directory.superclass.constructor.call(this,config);
@@ -79,7 +81,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
     ,addSourceToolbar: function() {
         var t = Ext.get(this.config.id+'-tbar');
-        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: 'modx-file-sourcebar'});
+        if (!t) { return; }
+        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: this.config.id+'-sourcebar'});
         var tb = new Ext.Toolbar({
             applyTo: fbd
             ,autoHeight: true
@@ -224,20 +227,28 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,browser: null
     ,loadFileManager: function(btn,e) {
+        var refresh = false;
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
                 ,hideFiles: true
                 ,rootVisible: false
                 ,wctx: MODx.ctx
+                ,source: this.config.baseParams.source
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.fireEvent('fileBrowserSelect',data);
                     },scope:this}
                 }
             });
+        } else {
+            refresh = true;
         }
         if (this.browser) {
+            this.browser.setSource(this.config.baseParams.source);
+            if (refresh) {
+                this.browser.win.tree.refresh();
+            }
             this.browser.show();
         }
     }

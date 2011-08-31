@@ -18,11 +18,12 @@ $dir = str_replace(array(
     'root/',
     'undefined/',
 ),'',$scriptProperties['dir']);
+$source = $modx->getOption('source',$scriptProperties,1);
 
 
 /** @var modMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
-$source = modMediaSource::getDefaultSource($modx);
+$source = modMediaSource::getDefaultSource($modx,$source);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }

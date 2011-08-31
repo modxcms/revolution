@@ -13,11 +13,12 @@ if (!$modx->hasPermission('file_remove')) return $modx->error->failure($modx->le
 $modx->lexicon->load('file');
 
 if (empty($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
+$source = $modx->getOption('source',$scriptProperties,1);
 
 
 /** @var modMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
-$source = modMediaSource::getDefaultSource($modx);
+$source = modMediaSource::getDefaultSource($modx,$source);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }

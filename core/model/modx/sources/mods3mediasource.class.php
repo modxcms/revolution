@@ -61,42 +61,35 @@ class modS3MediaSource extends modMediaSource {
     }
 
     /**
+     * Get a list of objects from within a bucket
+     * @param string $dir
+     * @return array
+     */
+    public function getObjectList($dir) {
+        $c['delimiter'] = '/';
+        if (!empty($dir) && $dir != '/') { $c['prefix'] = $dir; }
+
+        $list = array();
+        $cps = $this->driver->list_objects($this->bucket,$c);
+        foreach ($cps->body->CommonPrefixes as $prefix) {
+            if (!empty($prefix->Prefix) && $prefix->Prefix != $dir && $prefix->Prefix != '/') {
+                $list[] = (string)$prefix->Prefix;
+            }
+        }
+        $response = $this->driver->get_object_list($this->bucket,$c);
+        foreach ($response as $file) {
+            $list[] = $file;
+        }
+        return $list;
+    }
+
+    /**
      * @param string $dir
      * @return array
      */
     public function getFolderList($dir) {
         $properties = $this->getProperties();
-        $c = array();
-        $list = array();
-        $c['delimiter'] = '/';
-        if (empty($dir) || $dir == '/') {
-            $cps = $this->driver->list_objects($this->bucket,$c);
-            foreach ($cps->body->CommonPrefixes as $prefix) {
-                if (!empty($prefix->Prefix) && $prefix->Prefix != $dir && $prefix->Prefix != '/') {
-                    $list[] = (string)$prefix->Prefix;
-                }
-            }
-            $response = $this->driver->get_object_list($this->bucket,$c);
-            foreach ($response as $file) {
-                $list[] = $file;
-            }
-        } else {
-            $c['prefix'] = $dir;
-            $cps = $this->driver->list_objects($this->bucket,$c);
-            foreach ($cps->body->CommonPrefixes as $prefix) {
-                $pfx = (string)$prefix->Prefix;
-                if (!empty($pfx) && $pfx != $dir) {
-                    $list[] = $pfx;
-                }
-            }
-            $c['prefix'] = $dir;
-            $response = $this->driver->get_object_list($this->bucket,$c);
-            foreach ($response as $file) {
-                if ($file != $dir) {
-                    $list[] = $file;
-                }
-            }
-        }
+        $list = $this->getObjectList($dir);
 
         $directories = array();
         $files = array();
@@ -155,6 +148,101 @@ class modS3MediaSource extends modMediaSource {
         return $ls;
     }
 
+    public function getFilesInDirectory($dir) {
+        $list = $this->getObjectList($dir);
+        $properties = $this->getProperties();
+
+        $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
+
+        /* get default settings */
+        $imagesExts = array('jpg','jpeg','png','gif');
+        $use_multibyte = $this->ctx->getOption('use_multibyte', false);
+        $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
+        $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
+        $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
+        $bucketUrl = $properties['url']['value'].'/';
+
+        /* iterate */
+        $files = array();
+        foreach ($list as $object) {
+            $objectUrl = $bucketUrl.$object;
+            $baseName = basename($object);
+            $isDir = substr(strrev($object),0,1) == '/' ? true : false;
+            if (in_array($object,array('.','..','.svn','.git','_notes','.DS_Store'))) continue;
+
+            if (!$isDir) {
+                $fileArray = array(
+                    'id' => $object,
+                    'name' => $baseName,
+                    'url' => $objectUrl,
+                    'relativeUrl' => $objectUrl,
+                    'fullRelativeUrl' => $objectUrl,
+                    'pathname' => $objectUrl,
+                    'size' => 0,
+                    'leaf' => true,
+                    'menu' => array(
+                        array('text' => $this->xpdo->lexicon('file_remove'),'handler' => 'this.removeFile'),
+                    ),
+                );
+
+                $fileArray['ext'] = pathinfo($baseName,PATHINFO_EXTENSION);
+                $fileArray['ext'] = $use_multibyte ? mb_strtolower($fileArray['ext'],$encoding) : strtolower($fileArray['ext']);
+                $fileArray['cls'] = 'icon-'.$fileArray['ext'];
+
+                if (!empty($allowedFileTypes) && !in_array($fileArray['ext'],$allowedFileTypes)) continue;
+
+                /* get thumbnail */
+                if (in_array($fileArray['ext'],$imagesExts)) {
+                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
+                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
+                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 60);
+                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
+
+                    $size = @getimagesize($objectUrl);
+                    if (is_array($size)) {
+                        $imageWidth = $size[0] > 800 ? 800 : $size[0];
+                        $imageHeight = $size[1] > 600 ? 600 : $size[1];
+                    }
+
+                    /* ensure max h/w */
+                    if ($thumbWidth > $imageWidth) $thumbWidth = $imageWidth;
+                    if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
+
+                    /* generate thumb/image URLs */
+                    $thumbQuery = http_build_query(array(
+                        'src' => $object,
+                        'w' => $thumbWidth,
+                        'h' => $thumbHeight,
+                        'f' => 'png',
+                        'q' => 90,
+                        'HTTP_MODAUTH' => $modAuth,
+                        'wctx' => $this->ctx->get('key'),
+                        'source' => $this->get('id'),
+                    ));
+                    $imageQuery = http_build_query(array(
+                        'src' => $object,
+                        'w' => $imageWidth,
+                        'h' => $imageHeight,
+                        'HTTP_MODAUTH' => $modAuth,
+                        'f' => 'png',
+                        'q' => 90,
+                        'wctx' => $this->ctx->get('key'),
+                        'source' => $this->get('id'),
+                    ));
+                    $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                    $fileArray['image'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+
+                } else {
+                    $fileArray['thumb'] = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
+                    $fileArray['thumbWidth'] = $this->ctx->getOption('filemanager_thumb_width', 80);
+                    $fileArray['thumbHeight'] = $this->ctx->getOption('filemanager_thumb_height', 60);
+                }
+                $files[] = $fileArray;
+            }
+        }
+        return $files;
+    }
+
     /**
      * Get the name of this source type
      * @return string
@@ -194,4 +282,10 @@ class modS3MediaSource extends modMediaSource {
         );
     }
 
+
+    public function prepareSrcForThumb($src) {
+        $properties = $this->getProperties();
+        $src = $properties['url']['value'].$src;
+        return $src;
+    }
 }

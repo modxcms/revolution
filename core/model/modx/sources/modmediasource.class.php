@@ -278,4 +278,28 @@ class modMediaSource extends xPDOSimpleObject {
         }
         return $set;
     }
+
+    public function prepareSrcForThumb($src) {
+        /* dont strip stuff for absolute URLs */
+        if (substr($src,0,4) != 'http') {
+            if (strpos($src,'/') !== 0) {
+                $src = $this->get('basePath').$src;
+                if ($this->get('basePathRelative')) {
+                    $src = $this->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
+                }
+            }
+            /* strip out double slashes */
+            $src = str_replace(array('///','//'),'/',$src);
+
+            /* check for file existence if local url */
+            if (empty($src) || !file_exists($src)) {
+                if (file_exists('/'.$src)) {
+                    $src = '/'.$src;
+                } else {
+                    return '';
+                }
+            }
+        }
+        return $src;
+    }
 }

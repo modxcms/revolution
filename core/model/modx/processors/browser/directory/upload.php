@@ -11,6 +11,7 @@ if (!$modx->hasPermission('file_upload')) return $modx->error->failure($modx->le
 $modx->lexicon->load('file');
 
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+$source = $modx->getOption('source',$scriptProperties,1);
 
 /* get working context */
 $wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';

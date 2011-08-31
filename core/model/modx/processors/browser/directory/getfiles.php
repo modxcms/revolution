@@ -19,10 +19,11 @@ if (!$modx->hasPermission('file_list')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('file');
 
 $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? '' : $scriptProperties['dir'];
+$source = $modx->getOption('source',$scriptProperties,1);
 
 /** @var modMediaSource|modFileMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
-$source = modMediaSource::getDefaultSource($modx);
+$source = modMediaSource::getDefaultSource($modx,$source);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }

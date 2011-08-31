@@ -15,11 +15,11 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 if (empty($scriptProperties['parent'])) $scriptProperties['parent'] = '';
-
+$source = $modx->getOption('source',$scriptProperties,1);
 
 /** @var modMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
-$source = modMediaSource::getDefaultSource($modx);
+$source = modMediaSource::getDefaultSource($modx,$source);
 if (!$source->getWorkingContext()) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }

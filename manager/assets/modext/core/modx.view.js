@@ -145,6 +145,13 @@ MODx.Browser = function(config) {
 Ext.extend(MODx.Browser,Ext.Component,{
     show: function(el) { if (this.win) { this.win.show(el); } }
     ,hide: function() { if (this.win) { this.win.hide(); } }
+
+    ,setSource: function(source) {
+        this.config.source = source;
+        this.win.tree.config.baseParams.source = source;
+        this.win.view.config.baseParams.source = source;
+    }
+    
 });
 Ext.reg('modx-browser',MODx.Browser);
 
@@ -454,8 +461,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             }
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
-        data.sizeString = formatSize(data.size);
-        data.dateString = new Date(data.lastmod).format("m/d/Y g:i a");
+        data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
+        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format("m/d/Y g:i a") : 0;
         this.lookup[data.name] = data;
         return data;
     }
@@ -476,13 +483,21 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,'<div class="modx-pb-details-info">'
                 ,'<b>'+_('file_name')+':</b>'
                 ,'<span>{name}</span>'
-                ,'<b>'+_('file_size')+':</b>'
-                ,'<span>{sizeString}</span>'
-                ,'<b>'+_('last_modified')+':</b>'
-                ,'<span>{dateString}</span></div>'
+                ,'<tpl if="this.isEmpty(sizeString) == false">'
+                    ,'<b>'+_('file_size')+':</b>'
+                    ,'<span>{sizeString}</span>'
+                ,'</tpl>'
+                ,'<tpl if="this.isEmpty(dateString) == false">'
+                    ,'<b>'+_('last_modified')+':</b>'
+                    ,'<span>{dateString}</span></div>'
+                ,'</tpl>'
             ,'</tpl>'
             ,'</div>'
-        );
+        ,{
+            isEmpty: function (v) {
+                return (v == '' || v == null || v == undefined || v === 0);
+            }
+        });
         this.templates.details.compile(); 
     }
     ,showFullView: function(name,ident) {

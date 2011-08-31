@@ -21,7 +21,8 @@ if (empty($src)) return '';
 $source = $modx->getOption('source',$scriptProperties,1);
 
 /** @var modMediaSource|modFileMediaSource $source */
-$source = $modx->getObject('modMediaSource',$source);
+$modx->loadClass('sources.modMediaSource');
+$source = modMediaSource::getDefaultSource($modx,$source);
 if (empty($source)) return '';
 
 if (!$source->getWorkingContext()) {
@@ -29,27 +30,9 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
+$src = $source->prepareSrcForThumb($src);
+if (empty($src)) return '';
 
-/* dont strip stuff for absolute URLs */
-if (substr($src,0,4) != 'http') {
-    if (strpos($src,'/') !== 0) {
-        $src = $source->get('basePath').$src;
-        if ($source->get('basePathRelative')) {
-            $src = $source->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
-        }
-    }
-    /* strip out double slashes */
-    $src = str_replace(array('///','//'),'/',$src);
-
-    /* check for file existence if local url */
-    if (empty($src) || !file_exists($src)) {
-        if (file_exists('/'.$src)) {
-            $src = '/'.$src;
-        } else {
-            return '';
-        }
-    }
-}
 
 /* load phpThumb */
 if (!$modx->loadClass('modPhpThumb',$modx->getOption('core_path').'model/phpthumb/',true,true)) {
