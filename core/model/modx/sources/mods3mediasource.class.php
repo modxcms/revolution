@@ -18,6 +18,7 @@ class modS3MediaSource extends modMediaSource {
      * @return void
      */
     public function initialize() {
+        parent::initialize();
         if (!defined('AWS_KEY')) {
             define('AWS_KEY',$this->xpdo->getOption('aws.key',null,''));
             define('AWS_SECRET_KEY',$this->xpdo->getOption('aws.secret_key',null,''));
@@ -91,12 +92,19 @@ class modS3MediaSource extends modMediaSource {
         $properties = $this->getProperties();
         $list = $this->getObjectList($dir);
 
+        $imagesExts = array('jpg','jpeg','png','gif');
+        $use_multibyte = $this->ctx->getOption('use_multibyte', false);
+        $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
+
         $directories = array();
         $files = array();
         foreach ($list as $idx => $path) {
             if ($path == $dir) continue;
             $fileName = basename($path);
             $isDir = substr(strrev($path),0,1) === '/';
+
+            $extension = pathinfo($fileName,PATHINFO_EXTENSION);
+            $extension = $use_multibyte ? mb_strtolower($extension,$encoding) : strtolower($extension);
 
             $relativePath = $path == '/' ? $path : str_replace($dir,'',$path);
             $slashCount = substr_count($relativePath,'/');
@@ -107,30 +115,29 @@ class modS3MediaSource extends modMediaSource {
                 $directories[$path] = array(
                     'id' => $path,
                     'text' => $fileName,
-                    'cls' => '',//implode(' ',$cls),
+                    'cls' => 'icon-'.$extension,
                     'type' => 'dir',
                     'leaf' => false,
                     'path' => $path,
                     'pathRelative' => $path,
                     'perms' => '',
-                    'menu' => array(),
                 );
+                $directories[$path]['menu'] = array('items' => $this->getListContextMenu($path,$isDir,$directories[$path]));
             } else {
                 $files[$path] = array(
                     'id' => $path,
                     'text' => $fileName,
-                    'cls' => '',//implode(' ',$cls),
+                    'cls' => 'icon-'.$extension,
                     'type' => 'file',
                     'leaf' => true,
                     //'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
-                    //'perms' => $octalPerms,
                     'path' => $path,
                     'pathRelative' => $path,
                     'directory' => $path,
                     'url' => $properties['url']['value'].$properties['bucket']['value'].'/'.$path,
                     'file' => $path,
-                    'menu' => array(),
                 );
+                $files[$path]['menu'] = array('items' => $this->getListContextMenu($path,$isDir,$files[$path]));
             }
         }
 
@@ -146,6 +153,51 @@ class modS3MediaSource extends modMediaSource {
         }
 
         return $ls;
+    }
+
+    public function getListContextMenu($file,$isDir,array $fileArray) {
+        $menu = array();
+        if (!$isDir) { /* files */
+            if ($this->hasPermission('file_update')) {
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('rename'),
+                    'handler' => 'this.renameFile',
+                );
+            }
+            if ($this->hasPermission('file_remove')) {
+                if (!empty($menu)) $menu[] = '-';
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_remove'),
+                    'handler' => 'this.removeFile',
+                );
+            }
+        } else { /* directories */
+            if ($this->hasPermission('directory_create')) {
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_folder_create_here'),
+                    'handler' => 'this.createDirectory',
+                );
+            }
+            $menu[] = array(
+                'text' => $this->xpdo->lexicon('directory_refresh'),
+                'handler' => 'this.refreshActiveNode',
+            );
+            if ($this->hasPermission('file_upload')) {
+                $menu[] = '-';
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('upload_files'),
+                    'handler' => 'this.uploadFiles',
+                );
+            }
+            if ($this->hasPermission('directory_remove')) {
+                $menu[] = '-';
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_folder_remove'),
+                    'handler' => 'this.removeDirectory',
+                );
+            }
+        }
+        return $menu;
     }
 
     public function getFilesInDirectory($dir) {
@@ -243,6 +295,112 @@ class modS3MediaSource extends modMediaSource {
         return $files;
     }
 
+    /**
+     * Create a folder
+     *
+     * @param string $name
+     * @param string $parentFolder
+     * @return boolean
+     */
+    public function createFolder($name,$parentFolder) {
+        $newPath = $parentFolder.rtrim($name,'/').'/';
+        /* check to see if folder already exists */
+        if ($this->driver->if_object_exists($this->bucket,$newPath)) {
+            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ae').': '.$newPath);
+            return false;
+        }
+
+        /* create empty file that acts as folder */
+        $created = $this->driver->create_object($this->bucket,$newPath,array(
+            'body' => '',
+            'acl' => AmazonS3::ACL_PUBLIC,
+            'length' => 0,
+        ));
+
+        if (!$created) {
+            $this->addError('name',$this->xpdo->lexicon('file_folder_err_create').$newPath);
+            return false;
+        }
+
+        $this->xpdo->logManagerAction('directory_create','',$newPath);
+        return true;
+    }
+
+    /**
+     * Remove an empty folder from s3
+     *
+     * @param $filePath
+     * @return boolean
+     */
+    public function removeFolder($filePath) {
+        if (!$this->driver->if_object_exists($this->bucket,$filePath)) {
+            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$filePath);
+            return false;
+        }
+
+        /* remove file from s3 */
+        $deleted = $this->driver->delete_object($this->bucket,$filePath);
+
+        /* log manager action */
+        $this->xpdo->logManagerAction('directory_remove','',$filePath);
+
+        return !empty($deleted);
+    }
+
+
+    /**
+     * Delete a file from S3
+     * 
+     * @param string $filePath
+     * @return boolean
+     */
+    public function removeFile($filePath) {
+        if (!$this->driver->if_object_exists($this->bucket,$filePath)) {
+            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$filePath);
+            return false;
+        }
+
+        /* remove file from s3 */
+        $deleted = $this->driver->delete_object($this->bucket,$filePath);
+
+        /* log manager action */
+        $this->xpdo->logManagerAction('file_remove','',$filePath);
+
+        return !empty($deleted);
+    }
+
+    /**
+     * @param string $oldPath
+     * @param string $newName
+     * @return bool
+     */
+    public function renameFile($oldPath,$newName) {
+        if (!$this->driver->if_object_exists($this->bucket,$oldPath)) {
+            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$oldPath);
+            return false;
+        }
+        $dir = dirname($oldPath);
+        $newPath = ($dir != '.' ? $dir.'/' : '').$newName;
+
+        $copied = $this->driver->copy_object(array(
+            'bucket' => $this->bucket,
+            'filename' => $oldPath,
+        ),array(
+            'bucket' => $this->bucket,
+            'filename' => $newPath,
+        ),array(
+            'acl' => AmazonS3::ACL_PUBLIC,
+        ));
+        if (!$copied) {
+            $this->addError('file',$this->xpdo->lexicon('file_folder_err_rename').': '.$oldPath);
+            return false;
+        }
+
+        $this->driver->delete_object($this->bucket,$oldPath);
+
+        $this->xpdo->logManagerAction('file_rename','',$oldPath);
+        return true;
+    }
     /**
      * Get the name of this source type
      * @return string
