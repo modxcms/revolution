@@ -38,6 +38,24 @@ class modS3MediaSource extends modMediaSource {
     }
 
     /**
+     * Get the name of this source type
+     * @return string
+     */
+    public function getTypeName() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.s3');
+    }
+    /**
+     * Get the description of this source type
+     * @return string
+     */
+    public function getTypeDescription() {
+        $this->xpdo->lexicon->load('source');
+        return $this->xpdo->lexicon('source_type.s3_desc');
+    }
+
+
+    /**
      * Gets the AmazonS3 class instance
      * @return AmazonS3
      */
@@ -401,23 +419,63 @@ class modS3MediaSource extends modMediaSource {
         $this->xpdo->logManagerAction('file_rename','',$oldPath);
         return true;
     }
-    /**
-     * Get the name of this source type
-     * @return string
-     */
-    public function getTypeName() {
-        $this->xpdo->lexicon->load('source');
-        return $this->xpdo->lexicon('source_type.s3');
-    }
-    /**
-     * Get the description of this source type
-     * @return string
-     */
-    public function getTypeDescription() {
-        $this->xpdo->lexicon->load('source');
-        return $this->xpdo->lexicon('source_type.s3_desc');
-    }
 
+
+    public function uploadToFolder($targetDirectory,$files) {
+        if ($targetDirectory == '/' || $targetDirectory == '.') $targetDirectory = '';
+
+        $allowedFileTypes = explode(',',$this->xpdo->getOption('upload_files',null,''));
+        $allowedFileTypes = array_merge(explode(',',$this->xpdo->getOption('upload_images')),explode(',',$this->xpdo->getOption('upload_media')),explode(',',$this->xpdo->getOption('upload_flash')),$allowedFileTypes);
+        $allowedFileTypes = array_unique($allowedFileTypes);
+        $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
+
+        /* loop through each file and upload */
+        foreach ($files as $file) {
+            if ($file['error'] != 0) continue;
+            if (empty($file['name'])) continue;
+            $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
+            $ext = strtolower($ext);
+
+            if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
+                $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
+                    'ext' => $ext,
+                )));
+                continue;
+            }
+            $size = @filesize($file['tmp_name']);
+
+            if ($size > $maxFileSize) {
+                $this->addError('path',$this->xpdo->lexicon('file_err_too_large',array(
+                    'size' => $size,
+                    'allowed' => $maxFileSize,
+                )));
+                continue;
+            }
+
+            $newPath = $targetDirectory.$file['name'];
+
+            $uploaded = $this->driver->create_object($this->bucket,$newPath,array(
+                'fileUpload' => $file['tmp_name'],
+                'acl' => AmazonS3::ACL_PUBLIC,
+                'length' => $size,
+            ));
+
+            if (!$uploaded) {
+                $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
+            }
+        }
+
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerUpload',array(
+            'files' => &$_FILES,
+            'directory' => &$targetDirectory,
+            'source' => &$this,
+        ));
+
+        $this->xpdo->logManagerAction('file_upload','',$targetDirectory);
+
+        return true;
+    }
 
     public function getDefaultProperties() {
         return array(

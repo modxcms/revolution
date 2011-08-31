@@ -552,6 +552,7 @@ class modFileMediaSource extends modMediaSource {
         $this->xpdo->invokeEvent('OnFileManagerUpload',array(
             'files' => &$_FILES,
             'directory' => &$directory,
+            'source' => &$this,
         ));
 
         $this->xpdo->logManagerAction('file_upload','',$directory->getPath());
