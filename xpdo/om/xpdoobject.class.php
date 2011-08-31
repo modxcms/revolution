@@ -37,12 +37,7 @@
  *
  * @abstract This is an abstract class, and is not represented by an actual
  * table; it simply defines the member variables and functions needed for object
- * persistence. All xPDOObject derivatives must define both a PHP 4 style
- * constructor which calls a PHP 5 style __construct() method with the same
- * parameters. This is necessary to allow instantiation of further derived
- * classes  without knowing the name of the class ahead of time in PHP 4. Note
- * that this does not meet E_STRICT compliance in PHP 5, but is the only sane
- * way to achieve consistency between the PHP 4 and 5 inheritence models.
+ * persistence.
  *
  * @package xpdo
  * @subpackage om
