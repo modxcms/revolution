@@ -634,6 +634,37 @@ class xPDOObject {
     }
 
     /**
+     * Add an alias as a reference to an actual field of the object.
+     *
+     * @param string $field The field name to create a reference to.
+     * @param string $alias The name of the reference.
+     * @return bool True if the reference is added successfully.
+     */
+    public function addFieldAlias($field, $alias) {
+        $added = false;
+        if (array_key_exists($field, $this->_fields)) {
+            if (!array_key_exists($alias, $this->_fields)) {
+                $this->_fields[$alias] =& $this->_fields[$field];
+                $added = true;
+                if (array_key_exists($field, $this->_fieldMeta)) {
+                    $this->_fieldMeta[$alias] =& $this->_fieldMeta[$field];
+                }
+                if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
+                    $classVars= get_object_vars($this);
+                    if (!array_key_exists($alias, $classVars)) {
+                        $this->$alias =& $this->_fields[$alias];
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "The alias {$alias} is already in use as a class var for class {$this->_class}", '', __METHOD__, __FILE__, __LINE__);
+                    }
+                }
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "The alias {$alias} is already in use as a field name in objects of class {$this->_class}", '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        return $added;
+    }
+
+    /**
      * Get an option value for this instance.
      *
      * @param string $key The option key to retrieve a value for.
