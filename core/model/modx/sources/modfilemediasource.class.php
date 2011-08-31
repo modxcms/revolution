@@ -24,11 +24,12 @@ class modFileMediaSource extends modMediaSource {
      */
     public function getBases($dir) {
         if (empty($dir)) $dir = '';
+        $properties = $this->getProperties();
         $bases = array();
         $dir = $this->fileHandler->sanitizePath($dir);
-        $bases['path'] = $this->get('basePath');
+        $bases['path'] = $properties['basePath']['value'];
         $bases['pathIsRelative'] = false;
-        if ($this->get('basePathRelative')) {
+        if (!empty($properties['basePathRelative']['value'])) {
             $bases['pathAbsolute'] = $this->ctx->getOption('base_path',MODX_BASE_PATH).$bases['path'];
             $bases['pathIsRelative'] = true;
         } else {
@@ -48,8 +49,8 @@ class modFileMediaSource extends modMediaSource {
 
         /* get relative url */
         $bases['urlIsRelative'] = false;
-        $bases['url'] = $this->get('baseUrl');
-        if ($this->get('baseUrlRelative')) {
+        $bases['url'] = $properties['baseUrl']['value'];;
+        if (!empty($properties['baseUrlRelative']['value'])) {
             $bases['urlAbsolute'] = $this->ctx->getOption('base_url',MODX_BASE_URL).$bases['url'];
             $bases['urlIsRelative'] = true;
         } else {
@@ -715,4 +716,45 @@ class modFileMediaSource extends modMediaSource {
         $this->xpdo->lexicon->load('source');
         return $this->xpdo->lexicon('source_type.file_desc');
     }
+
+    /**
+     * @return array
+     */
+    public function getDefaultProperties() {
+        return array(
+            'basePath' => array(
+                'name' => 'basePath',
+                'desc' => 'prop_file.basePath_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ),
+            'basePathRelative' => array(
+                'name' => 'basePathRelative',
+                'desc' => 'prop_file.basePathRelative_desc',
+                'type' => 'combo-boolean',
+                'options' => '',
+                'value' => true,
+                'lexicon' => 'core:source',
+            ),
+            'baseUrl' => array(
+                'name' => 'baseUrl',
+                'desc' => 'prop_file.baseUrl_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ),
+            'baseUrlRelative' => array(
+                'name' => 'baseUrlRelative',
+                'desc' => 'prop_file.baseUrlRelative_desc',
+                'type' => 'combo-boolean',
+                'options' => '',
+                'value' => true,
+                'lexicon' => 'core:source',
+            ),
+        );
+    }
+
 }

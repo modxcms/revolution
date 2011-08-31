@@ -477,6 +477,9 @@ class modS3MediaSource extends modMediaSource {
         return true;
     }
 
+    /**
+     * @return array
+     */
     public function getDefaultProperties() {
         return array(
             'url' => array(

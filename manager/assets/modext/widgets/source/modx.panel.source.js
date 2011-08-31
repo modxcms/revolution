@@ -67,41 +67,10 @@ MODx.panel.Source = function(config) {
                     ,fieldLabel: _('source_type')
                     ,width: 400
 
-                },{html:'<hr />',border:false},{
-                    xtype: 'fieldset'
-                    ,title: _('path_options')
-                    ,collapsible: true
-                    ,collapsed: true
-                    ,items: [{
-                        name: 'basePath'
-                        ,id: 'modx-source-basePath'
-                        ,xtype: 'textfield'
-                        ,fieldLabel: _('base_path')
-                        ,anchor: '97%'
-                    },{
-                        name: 'basePathRelative'
-                        ,id: 'modx-source-basePathRelative'
-                        ,xtype: 'combo-boolean'
-                        ,fieldLabel: _('base_path_relative')
-                        ,anchor: '97%'
-                    },{
-                        name: 'baseUrl'
-                        ,id: 'modx-source-baseUrl'
-                        ,xtype: 'textfield'
-                        ,fieldLabel: _('base_url')
-                        ,anchor: '97%'
-                    },{
-                        name: 'baseUrlRelative'
-                        ,id: 'modx-source-baseUrlRelative'
-                        ,xtype: 'combo-boolean'
-                        ,fieldLabel: _('base_url_relative')
-                        ,anchor: '97%'
-                    }]
-                }]
-            },{
-                title: _('properties')
-                ,hideMode: 'offsets'
-                ,items: [{
+                },{
+                    html: '<hr />'
+                    ,border: false
+                },{
                     html: '<p>'+_('source_properties.intro_msg')+'</p>'
                     ,border: false
                 },{

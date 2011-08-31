@@ -283,8 +283,9 @@ class modMediaSource extends xPDOSimpleObject {
         /* dont strip stuff for absolute URLs */
         if (substr($src,0,4) != 'http') {
             if (strpos($src,'/') !== 0) {
-                $src = $this->get('basePath').$src;
-                if ($this->get('basePathRelative')) {
+                $properties = $this->getProperties();
+                $src = $properties['basePath']['value'].$src;
+                if (!empty($properties['basePath']['value'])) {
                     $src = $this->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
                 }
             }

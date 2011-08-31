@@ -9,9 +9,5 @@ $collection[1]->fromArray(array (
   'name' => 'Filesystem',
   'description' => '',
   'class_key' => 'sources.modFileMediaSource',
-  'basePath' => '',
-  'basePathRelative' => true,
-  'baseUrl' => '',
-  'baseUrlRelative' => true,
   'properties' => array(),
 ), '', true, true);

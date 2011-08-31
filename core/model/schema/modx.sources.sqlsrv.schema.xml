@@ -27,12 +27,6 @@
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index"/>
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="true" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="sources.modFileMediaSource" index="index" />
-
-        <field key="basePath" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
-        <field key="basePathRelative" dbtype="bit" phptype="boolean" null="false" default="1" />
-        <field key="baseUrl" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
-        <field key="baseUrlRelative" dbtype="bit" phptype="boolean" null="false" default="1" />
-
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
