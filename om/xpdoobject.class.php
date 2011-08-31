@@ -37,12 +37,7 @@
  *
  * @abstract This is an abstract class, and is not represented by an actual
  * table; it simply defines the member variables and functions needed for object
- * persistence. All xPDOObject derivatives must define both a PHP 4 style
- * constructor which calls a PHP 5 style __construct() method with the same
- * parameters. This is necessary to allow instantiation of further derived
- * classes  without knowing the name of the class ahead of time in PHP 4. Note
- * that this does not meet E_STRICT compliance in PHP 5, but is the only sane
- * way to achieve consistency between the PHP 4 and 5 inheritence models.
+ * persistence.
  *
  * @package xpdo
  * @subpackage om
@@ -636,6 +631,37 @@ class xPDOObject {
             }
         }
         $this->setDirty();
+    }
+
+    /**
+     * Add an alias as a reference to an actual field of the object.
+     *
+     * @param string $field The field name to create a reference to.
+     * @param string $alias The name of the reference.
+     * @return bool True if the reference is added successfully.
+     */
+    public function addFieldAlias($field, $alias) {
+        $added = false;
+        if (array_key_exists($field, $this->_fields)) {
+            if (!array_key_exists($alias, $this->_fields)) {
+                $this->_fields[$alias] =& $this->_fields[$field];
+                $added = true;
+                if (array_key_exists($field, $this->_fieldMeta)) {
+                    $this->_fieldMeta[$alias] =& $this->_fieldMeta[$field];
+                }
+                if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
+                    $classVars= get_object_vars($this);
+                    if (!array_key_exists($alias, $classVars)) {
+                        $this->$alias =& $this->_fields[$alias];
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "The alias {$alias} is already in use as a class var for class {$this->_class}", '', __METHOD__, __FILE__, __LINE__);
+                    }
+                }
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "The alias {$alias} is already in use as a field name in objects of class {$this->_class}", '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        return $added;
     }
 
     /**
