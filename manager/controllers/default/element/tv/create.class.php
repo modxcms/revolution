@@ -23,6 +23,7 @@ class ElementTVCreateManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
+        $sources = $this->modx->toJSON($this->getElementSources());
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
@@ -40,6 +41,7 @@ Ext.onReady(function() {
         xtype: "modx-page-tv-create"
         ,record: {
             category: "'.($this->category ? $this->category->get('id') : 0).'"
+            ,sources: '.$sources.'
         }
     });
 });
@@ -62,8 +64,6 @@ Ext.onReady(function() {
                 $placeholders['category'] = $this->category;
             }
         }
-
-        $this->getElementSources();
         
         /* invoke OnTVFormRender event */
         $placeholders['onTVFormRender'] = $this->fireRenderEvent();
@@ -73,6 +73,9 @@ Ext.onReady(function() {
 
     public function getElementSources() {
         $c = $this->modx->newQuery('modContext');
+        $c->where(array(
+            'key:!=' => 'mgr',
+        ));
         $c->sortby($this->modx->escape('rank'),'ASC');
         $c->sortby($this->modx->escape('key'),'DESC');
         $contexts = $this->modx->getCollection('modContext',$c);
