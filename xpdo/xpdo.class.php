@@ -600,9 +600,14 @@ class xPDO {
         if ($class && !$transient && !isset ($this->map[$class])) {
             $mapfile= strtr($fqn, '.', '/') . '.map.inc.php';
             if (file_exists($path . $mapfile)) {
-            $xpdo_meta_map= & $this->map;
-            if (!$rt= include ($path . $mapfile)) {
+                $xpdo_meta_map= & $this->map;
+                $rt= include ($path . $mapfile);
+                if (!$rt || !isset($this->map[$class])) {
                     $this->log(xPDO::LOG_LEVEL_WARN, "Could not load metadata map {$mapfile} for class {$class} from {$fqn}");
+                } else {
+                    if (!array_key_exists('fieldAliases', $this->map[$class])) {
+                        $this->map[$class]['fieldAliases'] = array();
+                    }
                 }
             }
         }
@@ -1288,6 +1293,26 @@ class xPDO {
             }
         }
         return $fieldMeta;
+    }
+
+    /**
+     * Gets a collection of field aliases for an object by class name.
+     *
+     * @param string $className The name of the class to lookup field aliases for.
+     * @return array An array of field aliases with aliases as keys and actual field names as values.
+     */
+    public function getFieldAliases($className) {
+        $fieldAliases= array ();
+        if ($className= $this->loadClass($className)) {
+            if ($ancestry= $this->getAncestry($className)) {
+                for ($i= count($ancestry) - 1; $i >= 0; $i--) {
+                    if (isset ($this->map[$ancestry[$i]]['fieldAliases'])) {
+                        $fieldAliases= array_merge($fieldAliases, $this->map[$ancestry[$i]]['fieldAliases']);
+                    }
+                }
+            }
+        }
+        return $fieldAliases;
     }
 
     /**

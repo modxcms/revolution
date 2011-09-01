@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add support for field aliases to be defined in the schema
 - Add xPDOObject->addFieldAlias for creating references to actual fields
 - Add xPDOObject->getIterator for iterating aggregate and composite relations
 - [#4590] Allow multiple connections to be defined for master/slave configurations

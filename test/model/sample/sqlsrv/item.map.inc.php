@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['Item']= array (
   'package' => 'sample',
+  'version' => '1.1',
   'table' => 'items',
   'fields' => 
   array (
@@ -41,6 +42,31 @@ $xpdo_meta_map['Item']= array (
       'phptype' => 'datetime',
       'null' => false,
       'default' => 'CURRENT_TIMESTAMP',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'name' => 
+    array (
+      'primary' => false,
+      'unique' => false,
+      'columns' => 
+      array (
+        'name' => 
+        array (
+        ),
+      ),
+    ),
+    'color' => 
+    array (
+      'primary' => false,
+      'unique' => false,
+      'columns' => 
+      array (
+        'color' => 
+        array (
+        ),
+      ),
     ),
   ),
 );
