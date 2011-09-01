@@ -214,10 +214,17 @@ abstract class xPDOQuery extends xPDOCriteria {
      */
     public function set(array $values) {
         $fieldMeta= $this->xpdo->getFieldMeta($this->_class);
-        $alias= $this->xpdo->getTableName($this->_class, false);
+        $fieldAliases= $this->xpdo->getFieldAliases($this->_class);
         reset($values);
         while (list($key, $value) = each($values)) {
             $type= null;
+            if (!array_key_exists($key, $fieldMeta)) {
+                if (array_key_exists($key, $fieldAliases)) {
+                    $key = $fieldAliases[$key];
+                } else {
+                    continue;
+                }
+            }
             if (array_key_exists($key, $fieldMeta)) {
                 if ($value === null) {
                     $type= PDO::PARAM_NULL;
@@ -559,6 +566,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         $pk= $this->xpdo->getPK($this->_class);
         $pktype= $this->xpdo->getPKType($this->_class);
         $fieldMeta= $this->xpdo->getFieldMeta($this->_class);
+        $fieldAliases= $this->xpdo->getFieldAliases($this->_class);
         $command= strtoupper($this->query['command']);
         $alias= $command == 'SELECT' ? $this->_class : $this->xpdo->getTableName($this->_class, false);
         $alias= trim($alias, $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose);
@@ -615,6 +623,11 @@ abstract class xPDOQuery extends xPDOCriteria {
                             $key_parts= explode('.', $key);
                             $alias= trim($key_parts[0], " {$this->xpdo->_escapeCharOpen}{$this->xpdo->_escapeCharClose}");
                             $key= $key_parts[1];
+                        }
+                        if (!array_key_exists($key, $fieldMeta)) {
+                            if (array_key_exists($key, $fieldAliases)) {
+                                $key= $fieldAliases[$key];
+                            }
                         }
                         if ($val === null) {
                             $type= PDO::PARAM_NULL;
