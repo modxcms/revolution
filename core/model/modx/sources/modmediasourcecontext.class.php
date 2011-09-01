@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage registry.db.mysql
+ * @subpackage sources
  */
 /**
  * @package modx

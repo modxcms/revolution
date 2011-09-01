@@ -1,9 +1,12 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
+ * @subpackage sources
  */
 /**
+ * An abstract base class used for determining functionality of different media source drivers. Extend this class in
+ * your driver implementations to provide custom functionality for different types of media sources.
+ * 
  * @package modx
  * @subpackage sources
  */
@@ -12,9 +15,11 @@ class modMediaSource extends xPDOSimpleObject {
     public $xpdo;
     /** @var modContext $ctx */
     public $ctx;
-
+    /** @var array $properties */
     public $properties = array();
+    /** @var array $permissions */
     public $permissions = array();
+    /** @var array $errors */
     public $errors = array();
 
     /**
@@ -134,22 +139,104 @@ class modMediaSource extends xPDOSimpleObject {
     }
 
     /**
-     * Return an array of files and folders at this current level in the directory structure
+     * Return an array of files and folders at this current level in the directory structure.
      *
+     * @abstract
      * @param string $dir
      * @return array
      */
     public function getFolderList($dir) { return array(); }
-    public function createFolder($folderName) { return true; }
-    public function removeFolder($folderPath) { return true; }
-    public function renameFolder($oldPath,$newPath) {}
-    public function updateFolder() {}
-    public function uploadToFolder() {}
 
-    public function getFile($filePath) {}
-    public function updateFile($filePath,$content) {}
-    public function removeFile($filePath) {}
-    public function renameFile() {}
+    /**
+     * Return a detailed list of files in a specific directory. Used for thumbnails in the Browser.
+     * 
+     * @param string $dir
+     * @return array
+     */
+    public function getFilesInDirectory($dir) { return array(); }
+
+    /**
+     * Create a folder at the passed location
+     * 
+     * @abstract
+     * @param string $folderName
+     * @return boolean
+     */
+    public function createFolder($folderName) { return true; }
+
+    /**
+     * Remove the specified folder
+     *
+     * @abstract
+     * @param string $folderPath
+     * @return boolean
+     */
+    public function removeFolder($folderPath) { return true; }
+
+    /**
+     * Rename a folder
+     * 
+     * @abstract
+     * @param string $oldPath
+     * @param string $newName
+     * @return boolean
+     */
+    public function renameFolder($oldPath,$newName) { return true; }
+
+    /**
+     * Update a folder
+     *
+     * @return boolean
+     */
+    public function updateFolder() { return true; }
+
+    /**
+     * Upload files to a specific folder
+     *
+     * @abstract
+     * @param string $targetDirectory
+     * @param array $files
+     * @return boolean
+     */
+    public function uploadToFolder($targetDirectory,$files) { return true; }
+
+    /**
+     * Get the contents of a file
+     * 
+     * @abstract
+     * @param string $filePath
+     * @return bool
+     */
+    public function getFile($filePath) { return true; }
+
+    /**
+     * Update the contents of a specific file
+     *
+     * @abstract
+     * @param string $filePath
+     * @param string $content
+     * @return boolean
+     */
+    public function updateFile($filePath,$content) { return true; }
+
+    /**
+     * Remove a file
+     *
+     * @abstract
+     * @param string $filePath
+     * @return bool
+     */
+    public function removeFile($filePath) { return true; }
+
+    /**
+     * Rename a file
+     *
+     * @abstract
+     * @param string $oldPath
+     * @param string $newName
+     * @return bool
+     */
+    public function renameFile($oldPath,$newName) { return true; }
 
     /**
      * Get the name of this source type
@@ -168,27 +255,45 @@ class modMediaSource extends xPDOSimpleObject {
         return $this->xpdo->lexicon('source_type.file_desc');
     }
 
+    /**
+     * Get the default properties for this source. Override this in your custom source driver to provide custom
+     * properties for your source type.
+     * @return array
+     */
     public function getDefaultProperties() {
         return array();
     }
 
+    /**
+     * Get the properties on this source
+     * @return array
+     */
     public function getProperties() {
         $properties = $this->get('properties');
         $defaultProperties = $this->getDefaultProperties();
-        foreach ($properties as &$property) {
-            $property['overridden'] = 0;
-            if (array_key_exists($property['name'],$defaultProperties)) {
-                if ($defaultProperties[$property['name']]['value'] != $property['value']) {
-                    $property['overridden'] = 1;
+        if (!empty($properties) && is_array($properties)) {
+            foreach ($properties as &$property) {
+                $property['overridden'] = 0;
+                if (array_key_exists($property['name'],$defaultProperties)) {
+                    if ($defaultProperties[$property['name']]['value'] != $property['value']) {
+                        $property['overridden'] = 1;
+                    }
+                } else {
+                    $property['overridden'] = 2;
                 }
-            } else {
-                $property['overridden'] = 2;
             }
+            $properties = array_merge($defaultProperties,$properties);
+        } else {
+            $properties = $defaultProperties;
         }
-        $properties = array_merge($defaultProperties,$properties);
         return $this->prepareProperties($properties);
     }
 
+    /**
+     * Translate any needed properties
+     * @param array $properties
+     * @return array
+     */
     protected function prepareProperties(array $properties = array()) {
         foreach ($properties as &$property) {
             if (!empty($property['lexicon'])) {
@@ -204,6 +309,13 @@ class modMediaSource extends xPDOSimpleObject {
         return $properties;
     }
 
+    /**
+     * Set the properties for this Source
+     * 
+     * @param array $properties
+     * @param boolean $merge
+     * @return bool
+     */
     public function setProperties($properties, $merge = false) {
         $default = $this->getDefaultProperties();
 
@@ -279,6 +391,12 @@ class modMediaSource extends xPDOSimpleObject {
         return $set;
     }
 
+    /**
+     * Prepare the source path for phpThumb
+     * 
+     * @param string $src
+     * @return string
+     */
     public function prepareSrcForThumb($src) {
         /* dont strip stuff for absolute URLs */
         if (substr($src,0,4) != 'http') {

@@ -1,9 +1,12 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
+ * @subpackage sources
  */
 /**
+ * Implements a file-system-based media source, allowing manipulation and management of files on the server's
+ * location. Supports basePath and baseUrl parameters, similar to Revolution 2.1 and prior's filemanager_* settings.
+ *
  * @package modx
  * @subpackage sources
  */
@@ -11,6 +14,9 @@ class modFileMediaSource extends modMediaSource {
     /** @var modFileHandler */
     public $fileHandler;
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize() {
         parent::initialize();
         $this->fileHandler = $this->xpdo->getService('fileHandler','modFileHandler', '', array('context' => $this->ctx->get('key')));
@@ -65,6 +71,11 @@ class modFileMediaSource extends modMediaSource {
         return $bases;
     }
 
+    /**
+     * Get the ID of the edit file action
+     *
+     * @return boolean|int
+     */
     public function getEditActionId() {
         $editAction = false;
         /** @var modAction $act */
@@ -190,6 +201,13 @@ class modFileMediaSource extends modMediaSource {
         return $ls;
     }
 
+    /**
+     * Get the context menu items for a specific object in the list view
+     * 
+     * @param DirectoryIterator $file
+     * @param array $fileArray
+     * @return array
+     */
     public function getListContextMenu(DirectoryIterator $file,array $fileArray) {
         $menu = array();
         if (!$file->isDir()) { /* files */
@@ -470,6 +488,13 @@ class modFileMediaSource extends modMediaSource {
         return true;
     }
 
+    /**
+     * Update the contents of a file
+     *
+     * @param string $filePath
+     * @param string $content
+     * @return boolean|string
+     */
     public function updateFile($filePath,$content) {
         $bases = $this->getBases($filePath);
 
@@ -492,7 +517,14 @@ class modFileMediaSource extends modMediaSource {
 
         return rawurlencode($file->getPath());
     }
-    
+
+    /**
+     * Upload files to a specific folder on the file system
+     * 
+     * @param string $targetDirectory
+     * @param string $files
+     * @return boolean
+     */
     public function uploadToFolder($targetDirectory,$files) {
         $bases = $this->getBases($targetDirectory);
 
@@ -561,6 +593,13 @@ class modFileMediaSource extends modMediaSource {
         return true;
     }
 
+    /**
+     * Chmod a specific folder
+     * 
+     * @param string $directoryPath
+     * @param string $mode
+     * @return boolean
+     */
     public function chmodFolder($directoryPath,$mode) {
         /** @var modDirectory $directory */
         $directory = $this->fileHandler->make($directoryPath);
@@ -584,10 +623,16 @@ class modFileMediaSource extends modMediaSource {
         return true;
     }
 
+    /**
+     * Get a list of files in a specific directory.
+     *
+     * @param string $dir
+     * @return array
+     */
     public function getFilesInDirectory($dir) {
         $dir = $this->fileHandler->postfixSlash($dir);
         $bases = $this->getBases($dir);
-        if (empty($bases['pathAbsolute'])) return false;
+        if (empty($bases['pathAbsolute'])) return array();
         $fullPath = $bases['pathAbsolute'].$dir;
 
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
@@ -603,7 +648,7 @@ class modFileMediaSource extends modMediaSource {
         $files = array();
         if (!is_dir($fullPath)) {
             $this->addError('dir',$this->xpdo->lexicon('file_folder_err_ns').$fullPath);
-            return false;
+            return array();
         }
         /** @var DirectoryIterator $file */
         foreach (new DirectoryIterator($fullPath) as $file) {
@@ -718,6 +763,8 @@ class modFileMediaSource extends modMediaSource {
     }
 
     /**
+     * Get the default properties for the filesystem media source type.
+     * 
      * @return array
      */
     public function getDefaultProperties() {

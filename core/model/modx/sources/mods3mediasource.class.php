@@ -1,9 +1,12 @@
 <?php
 /**
  * @package modx
- * @subpackage registry.db.mysql
+ * @subpackage sources
  */
 /**
+ * Implements an Amazon S3-based media source, allowing basic manipulation, uploading and URL-retrieval of resources
+ * in a specified S3 bucket.
+ * 
  * @package modx
  * @subpackage sources
  */

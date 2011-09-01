@@ -158,7 +158,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'removeMultiple'
-                ,users: cs
+                ,sources: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
