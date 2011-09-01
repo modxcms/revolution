@@ -113,6 +113,10 @@ abstract class xPDOGenerator {
      * @var string $indexName A placeholder for the current index name.
      */
     public $indexName= '';
+    /**
+     * @var string $aliasKey A placeholder for the current alias key.
+     */
+    public $aliasKey= '';
 
     /**
      * Constructor
@@ -326,6 +330,20 @@ abstract class xPDOGenerator {
                         default :
                             if ($attrName == 'dbtype') $dbtype = $attrValue;
                             $this->map[$this->className]['fieldMeta'][$this->fieldKey][$attrName]= $attrValue;
+                            break;
+                    }
+                }
+                break;
+            case 'alias' :
+                while (list ($attrName, $attrValue)= each($attributes)) {
+                    switch ($attrName) {
+                        case 'key':
+                            $this->aliasKey= "{$attrValue}";
+                            break;
+                        case 'field':
+                            $this->map[$this->className]['fieldAliases'][$this->aliasKey]= $attrValue;
+                            break;
+                        default:
                             break;
                     }
                 }
