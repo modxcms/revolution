@@ -15,6 +15,7 @@ $xpdo_meta_map['modSnippet']= array (
     'properties' => NULL,
     'moduleguid' => '',
     'static' => 0,
+    'static_file' => '',
   ),
   'fieldMeta' => 
   array (
@@ -64,6 +65,18 @@ $xpdo_meta_map['modSnippet']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'static_file' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+  ),
+  'fieldAliases' => 
+  array (
+    'content' => 'snippet',
   ),
   'indexes' => 
   array (

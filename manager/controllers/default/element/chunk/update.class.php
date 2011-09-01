@@ -88,6 +88,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
         }
         $this->chunkArray = $this->chunk->toArray();
         $this->chunkArray['properties'] = $data;
+        $this->chunkArray['snippet'] = $this->chunk->getContent();
 
         /* invoke OnRichTextEditorInit event */
         $placeholders['onRTEInit'] = $this->loadRte();

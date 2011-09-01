@@ -33,7 +33,7 @@ class modScript extends modElement {
      * {@inheritdoc}
      */
     public function set($k, $v= null, $vType= '') {
-        if (in_array($k,array('snippet','plugincode'))) {
+        if (in_array($k, array('snippet', 'plugincode'))) {
             $v= trim($v);
             if (strncmp($v, '<?', 2) == 0) {
                 $v= substr($v, 2);
@@ -42,7 +42,7 @@ class modScript extends modElement {
             if (substr($v, -2, 2) == '?>') $v= substr($v, 0, -2);
             $v= trim($v, " \n\r\0\x0B");
         }
-        $set= parent :: set($k, $v, $vType);
+        $set= parent::set($k, $v, $vType);
         return $set;
     }
 

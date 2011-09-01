@@ -24,6 +24,7 @@ $xpdo_meta_map['modTemplateVar']= array (
     'input_properties' => NULL,
     'output_properties' => NULL,
     'static' => 0,
+    'static_file' => '',
   ),
   'fieldMeta' => 
   array (
@@ -142,6 +143,18 @@ $xpdo_meta_map['modTemplateVar']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'static_file' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+  ),
+  'fieldAliases' => 
+  array (
+    'content' => 'default_text',
   ),
   'indexes' => 
   array (

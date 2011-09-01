@@ -145,6 +145,33 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
+     * Overridden to handle changes to the static_file source.
+     *
+     * {@inheritdoc}
+     */
+    public function set($k, $v= null, $vType= '') {
+        $set = parent::set($k, $v, $vType);
+        if ($k === 'static_file' && $set && $this->isStatic()) {
+            $this->setContent($this->getFileContent());
+        }
+        return $set;
+    }
+
+    /**
+     * Overridden to handle changes to content managed in an external file.
+     *
+     * {@inheritdoc}
+     */
+    public function save($cacheFlag = null) {
+        $staticContentChange = $this->isStatic() && $this->isDirty('content');
+        $saved = parent::save($cacheFlag);
+        if ($saved && $staticContentChange) {
+            $saved = $this->setFileContent($this->get('content'));
+        }
+        return $saved;
+    }
+
+    /**
      * Remove all Property Set relations to the Element.
      *
      * {@inheritdoc}
@@ -158,7 +185,6 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Constructs a valid tag representation of the element.
      *
-     * @access public
      * @return string A tag representation of the element.
      */
     public function getTag() {
@@ -224,7 +250,6 @@ class modElement extends modAccessibleSimpleObject {
      * Process the element source content to produce a result.
      *
      * @abstract Implement this to define behavior for a MODX content element.
-     * @access public
      * @param array|string $properties A set of configuration properties for the
      * element.
      * @param string $content Optional content to use in place of any persistent
@@ -248,8 +273,6 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Cache the current output of this element instance by tag signature.
-     *
-     * @access public
      */
     public function cache() {
         if ($this->isCacheable()) {
@@ -300,8 +323,6 @@ class modElement extends modAccessibleSimpleObject {
      *
      * This is called by default in {@link modElement::process()} after the
      * element properties have been parsed.
-     *
-     * @access protected
      */
     public function filterInput() {
         $filter = $this->getInputFilter();
@@ -316,8 +337,6 @@ class modElement extends modAccessibleSimpleObject {
      * Call this method in your {modElement::process()} implementation when it
      * is appropriate, typically once all processing has been completed, but
      * before any caching takes place.
-     *
-     * @access protected
      */
     public function filterOutput() {
         $filter = $this->getOutputFilter();
@@ -377,7 +396,6 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Gets the raw, unprocessed source content for this element.
      *
-     * @access public
      * @param array $options An array of options implementations can use to
      * accept language, revision identifiers, or other information to alter the
      * behavior of the method.
@@ -399,7 +417,6 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Set the raw source content for this element.
      *
-     * @access public
      * @param mixed $content The source content; implementations can decide if
      * it can only be a string, or some other source from which to retrieve it.
      * @param array $options An array of options implementations can use to
@@ -408,16 +425,7 @@ class modElement extends modAccessibleSimpleObject {
      * @return boolean True indicates the content was set.
      */
     public function setContent($content, array $options = array()) {
-        $set = false;
-        if ($this->isStatic()) {
-            $sourceFile = $this->getSourceFile($options);
-            if ($sourceFile) {
-                $set = file_put_contents($sourceFile, $content);
-            }
-        } else {
-            $set = $this->set('content', $content);
-        }
-        return $set;
+        return $this->set('content', $content);
     }
 
     /**
@@ -428,7 +436,7 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function getSourceFile(array $options = array()) {
         if ($this->isStatic() && empty($this->_sourceFile)) {
-            $filename = $this->get('content');
+            $filename = $this->get('static_file');
             if (!empty($filename)) {
                 $array = array();
 
@@ -468,9 +476,26 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
+     * Set external file content from this instance.
+     *
+     * @param string $content The content to set.
+     * @param array $options An array of options.
+     * @return bool|int The number of bytes written to file or false on failure.
+     */
+    public function setFileContent($content, array $options = array()) {
+        $set = false;
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile) {
+                $set = file_put_contents($sourceFile, $content);
+            }
+        }
+        return $set;
+    }
+
+    /**
      * Get the properties for this element instance for processing.
      *
-     * @access public
      * @param array|string $properties An array or string of properties to
      * apply.
      * @return array A simple array of properties ready to use for processing.

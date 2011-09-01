@@ -19,6 +19,7 @@ $xpdo_meta_map['modTemplate']= array (
     'locked' => 0,
     'properties' => NULL,
     'static' => 0,
+    'static_file' => '',
   ),
   'fieldMeta' => 
   array (
@@ -99,6 +100,14 @@ $xpdo_meta_map['modTemplate']= array (
       'null' => false,
       'default' => 0,
       'index' => 'index',
+    ),
+    'static_file' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'indexes' => 

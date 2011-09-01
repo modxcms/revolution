@@ -289,6 +289,9 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="snippet" />
 
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -700,6 +703,9 @@
         <field key="disabled" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="plugincode" />
 
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
@@ -937,6 +943,9 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="snippet" />
 
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
@@ -984,6 +993,7 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         
         <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
             <column key="templatename" length="" collation="A" null="false" />
@@ -1019,7 +1029,10 @@
         <field key="input_properties" dbtype="text" phptype="array" null="true" />
         <field key="output_properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="default_text" />
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>

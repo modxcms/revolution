@@ -51,10 +51,6 @@ class modTemplateVar extends modElement {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->setToken('*');
-        $this->_fields['content'] =& $this->_fields['default_text'];
-        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
-            $this->content =& $this->_fields['content'];
-        }
     }
 
     /**
@@ -72,7 +68,8 @@ class modTemplateVar extends modElement {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        $saved = parent :: save($cacheFlag);
+
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateVarSave',array(
@@ -160,42 +157,6 @@ class modTemplateVar extends modElement {
         }
         /* finally, return the processed element content */
         return $this->_output;
-    }
-
-    /**
-     * Get the source content of this template variable.
-     *
-     * {@inheritdoc}
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } elseif ($this->isStatic()) {
-                $this->_content = $this->getFileContent($options);
-            } else {
-                $this->_content = $this->get('default_text');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Set the source content of this template variable.
-     *
-     * {@inheritdoc}
-     */
-    public function setContent($content, array $options = array()) {
-        $set = false;
-        if ($this->isStatic()) {
-            $sourceFile = $this->getSourceFile($options);
-            if ($sourceFile) {
-                $set = file_put_contents($sourceFile, $content);
-            }
-        } else {
-            $set = $this->set('default_text', $content);
-        }
-        return $set;
     }
 
     /**

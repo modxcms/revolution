@@ -24,10 +24,6 @@ class modChunk extends modElement {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->setToken('$');
-        $this->_fields['content'] =& $this->_fields['snippet'];
-        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
-            $this->content =& $this->_fields['content'];
-        }
     }
 
     /**
@@ -47,7 +43,7 @@ class modChunk extends modElement {
             ));
         }
 
-        $saved = parent :: save($cacheFlag);
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnChunkSave',array(
@@ -132,46 +128,5 @@ class modChunk extends modElement {
 
         /* finally, return the processed element content */
         return $this->_output;
-    }
-
-    /**
-     * Get the source content of this chunk.
-     *
-     * @access public
-     * @param array $options
-     * @return string The source content.
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } elseif ($this->isStatic()) {
-                $this->_content = $this->getFileContent($options);
-            } else {
-                $this->_content = $this->get('snippet');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Set the source content of this chunk.
-     *
-     * @access public
-     * @param string $content
-     * @param array $options
-     * @return boolean True if successfully set
-     */
-    public function setContent($content, array $options = array()) {
-        $set = false;
-        if ($this->isStatic()) {
-            $sourceFile = $this->getSourceFile($options);
-            if ($sourceFile) {
-                $set = file_put_contents($sourceFile, $content);
-            }
-        } else {
-            $set = $this->set('snippet', $content);
-        }
-        return $set;
     }
 }

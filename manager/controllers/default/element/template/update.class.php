@@ -80,6 +80,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         }
         $this->templateArray = $this->template->toArray();
         $this->templateArray['properties'] = $data;
+        $this->templateArray['content'] = $this->template->getContent();
 
         /* load template into parser */
         $placeholders['template'] = $this->template;

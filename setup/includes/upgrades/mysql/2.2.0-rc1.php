@@ -118,6 +118,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static','
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static'));
 $description = $this->install->lexicon('add_index',array('index' => 'static','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'static'));$class = 'modChunk';
+$description = $this->install->lexicon('add_column',array('column' => 'static_file','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 
 $class = 'modPlugin';
 $table = $modx->getTableName($class);
@@ -125,6 +127,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static','
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static'));
 $description = $this->install->lexicon('add_index',array('index' => 'static','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'static'));
+$description = $this->install->lexicon('add_column',array('column' => 'static_file','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 
 $class = 'modSnippet';
 $table = $modx->getTableName($class);
@@ -132,6 +136,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static','
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static'));
 $description = $this->install->lexicon('add_index',array('index' => 'static','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'static'));
+$description = $this->install->lexicon('add_column',array('column' => 'static_file','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 
 $class = 'modTemplate';
 $table = $modx->getTableName($class);
@@ -139,6 +145,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static','
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static'));
 $description = $this->install->lexicon('add_index',array('index' => 'static','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'static'));
+$description = $this->install->lexicon('add_column',array('column' => 'static_file','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 
 $class = 'modTemplateVar';
 $table = $modx->getTableName($class);
@@ -146,3 +154,5 @@ $description = $this->install->lexicon('add_column',array('column' => 'static','
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static'));
 $description = $this->install->lexicon('add_index',array('index' => 'static','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'static'));
+$description = $this->install->lexicon('add_column',array('column' => 'static_file','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));

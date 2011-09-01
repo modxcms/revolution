@@ -16,6 +16,7 @@ $xpdo_meta_map['modPlugin']= array (
     'disabled' => 0,
     'moduleguid' => '',
     'static' => 0,
+    'static_file' => '',
   ),
   'fieldMeta' => 
   array (
@@ -79,6 +80,18 @@ $xpdo_meta_map['modPlugin']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'static_file' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+  ),
+  'fieldAliases' => 
+  array (
+    'content' => 'plugincode',
   ),
   'indexes' => 
   array (
