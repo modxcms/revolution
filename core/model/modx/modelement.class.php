@@ -661,4 +661,44 @@ class modElement extends modAccessibleSimpleObject {
     public function setCacheable($cacheable = true) {
         $this->_cacheable = (boolean) $cacheable;
     }
+
+    /**
+     * Get the Source for this Element
+     *
+     * @param string $contextKey
+     * @return modMediaSource|null
+     */
+    public function getSource($contextKey = '') {
+        if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
+
+        $c = $this->xpdo->newQuery('sources.modMediaSource');
+        $c->innerJoin('sources.modMediaSourceElement','SourceElement');
+        $c->where(array(
+            'SourceElement.object' => $this->get('id'),
+            'SourceElement.object_class' => $this->_class,
+            'SourceElement.context_key' => $contextKey,
+        ));
+        $source = $this->xpdo->getObject('sources.modMediaSource',$c);
+        if (!$source) {
+            $source = modMediaSource::getDefaultSource($this->xpdo);
+        }
+        return $source;
+    }
+
+    /**
+     * Get the stored sourceCache for a context
+     *
+     * @param string $contextKey
+     * @param array $options
+     * @return array
+     */
+    public function getSourceCache($contextKey = '',array $options = array()) {
+        /** @var modCacheManager $cacheManager */
+        $cacheManager = $this->xpdo->getCacheManager();
+        if (!$cacheManager || !($cacheManager instanceof modCacheManager)) return array();
+
+        if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
+
+        return $cacheManager->getElementMediaSourceCache($this,$contextKey,$options);
+    }
 }
