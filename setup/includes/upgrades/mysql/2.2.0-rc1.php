@@ -10,6 +10,7 @@ $classes = array(
     'modDashboard',
     'modDashboardWidget',
     'modDashboardWidgetPlacement',
+    'sources.modAccessMediaSource',
     'sources.modMediaSource',
     'sources.modMediaSourceElement',
     'sources.modMediaSourceContext',

@@ -71,6 +71,7 @@ $classes= array (
     'registry.db.modDbRegisterQueue',
     'transport.modTransportPackage',
     'transport.modTransportProvider',
+    'sources.modAccessMediaSource',
     'sources.modMediaSource',
     'sources.modMediaSourceElement',
     'sources.modMediaSourceContext',

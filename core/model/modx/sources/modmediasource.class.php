@@ -10,7 +10,7 @@
  * @package modx
  * @subpackage sources
  */
-class modMediaSource extends xPDOSimpleObject {
+class modMediaSource extends modAccessibleSimpleObject {
     /** @var modX|xPDO $xpdo */
     public $xpdo;
     /** @var modContext $ctx */
@@ -446,5 +446,48 @@ class modMediaSource extends xPDOSimpleObject {
 
     public function prepareOutputUrl($value) {
         return $value;
+    }
+
+    public function findPolicy($context = '') {
+        $policy = array();
+        $enabled = true;
+        $context = !empty($context) ? $context : $this->xpdo->context->get('key');
+        if (!is_object($this->xpdo->context) || $context === $this->xpdo->context->get('key')) {
+            $enabled = (boolean) $this->xpdo->getOption('access_media_source_enabled', null, true);
+        } elseif ($this->xpdo->getContext($context)) {
+            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_media_source_enabled', true);
+        }
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                $c = $this->xpdo->newQuery('sources.modAccessMediaSource');
+                $c->leftJoin('modAccessPolicy','Policy');
+                $c->select(array(
+                    'modAccessMediaSource.id',
+                    'modAccessMediaSource.target',
+                    'modAccessMediaSource.principal',
+                    'modAccessMediaSource.authority',
+                    'modAccessMediaSource.policy',
+                    'Policy.data',
+                ));
+                $c->where(array(
+                    'modAccessMediaSource.principal_class' => 'modUserGroup',
+                    'modAccessMediaSource.target' => $this->get('key'),
+                ));
+                $c->sortby('modAccessMediaSource.target,modAccessMediaSource.principal,modAccessMediaSource.authority,modAccessMediaSource.policy');
+                $acls = $this->xpdo->getCollection('sources.modAccessMediaSource',$c);
+                /** @var modAccessMediaSource $acl */
+                foreach ($acls as $acl) {
+                    $policy['modAccessMediaSource'][$acl->get('target')][] = array(
+                        'principal' => $acl->get('principal'),
+                        'authority' => $acl->get('authority'),
+                        'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
+                    );
+                }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
+            }
+        }
+        return $policy;
     }
 }

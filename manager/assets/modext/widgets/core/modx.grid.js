@@ -569,7 +569,9 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                 if (typeof(c[i].editor) == 'object' && c[i].editor.xtype) {
                     var r = c[i].editor.renderer;
                     c[i].editor = Ext.ComponentMgr.create(c[i].editor);
-                    c[i].editor.store.load();
+                    if (c[i].editor && c[i].editor.store) {
+                        c[i].editor.store.load();
+                    }
                     if (r === true) {
                         c[i].renderer = MODx.combo.Renderer(c[i].editor);
                     } else if (c[i].editor.initialConfig.xtype === 'datefield') {

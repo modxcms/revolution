@@ -52,6 +52,7 @@ $sources = $modx->getCollection('sources.modMediaSource',$c);
 $list = array();
 /** @var modMediaSource $source */
 foreach ($sources as $source) {
+    if (!$source->checkPolicy('list')) continue;
     $sourceArray = $source->toArray();
     $sourceArray['cls'] = 'pupdate premove';
     $list[] = $sourceArray;

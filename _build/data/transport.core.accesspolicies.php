@@ -84,4 +84,15 @@ $policies['7']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
+$policies['8']= $xpdo->newObject('modAccessPolicy');
+$policies['8']->fromArray(array (
+  'id' => 8,
+  'name' => 'Media Source Admin',
+  'description' => 'Media Source administration policy.',
+  'parent' => 0,
+  'class' => '',
+  'data' => '{"create":true,"copy":true,"load":true,"list":true,"save":true,"remove":true,"view":true}',
+  'lexicon' => 'permissions',
+), '', true, true);
+
 return $policies;
