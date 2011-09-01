@@ -23,6 +23,8 @@ foreach ($sourceIds as $sourceId) {
     $source = $modx->getObject('sources.modMediaSource',$sourceId);
     if (empty($source)) { continue; }
 
+    if ($source->get('id') == 1) continue;
+
     if ($source->remove() == false) {
         $modx->log(modX::LOG_LEVEL_ERROR,$modx->lexicon('source_err_remove'));
         continue;

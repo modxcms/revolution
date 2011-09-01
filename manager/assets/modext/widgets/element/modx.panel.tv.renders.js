@@ -30,10 +30,7 @@ MODx.panel.ImageTV = function(config) {
             ,id: 'tvbrowser'+config.tv
             ,value: config.relativeValue
             ,hideFiles: true
-            ,basePath: config.basePath || ''
-            ,basePathRelative: config.basePathRelative || ''
-            ,baseUrl: config.baseUrl || ''
-            ,baseUrlRelative: config.baseUrlRelative || ''
+            ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,openTo: config.openTo || ''
             ,listeners: {
@@ -82,10 +79,7 @@ MODx.panel.FileTV = function(config) {
             ,id: 'tvbrowser'+config.tv
             ,value: config.relativeValue
             ,hideFiles: true
-            ,basePath: config.basePath || ''
-            ,basePathRelative: config.basePathRelative || ''
-            ,baseUrl: config.baseUrl || ''
-            ,baseUrlRelative: config.baseUrlRelative || ''
+            ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,openTo: config.openTo || ''

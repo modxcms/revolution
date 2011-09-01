@@ -134,6 +134,7 @@ MODx.Browser = function(config) {
     Ext.applyIf(config,{
         onSelect: function(data) {}
         ,scope: this
+        ,source: config.source || 1
         ,cls: 'modx-browser'
     });
     MODx.Browser.superclass.constructor.call(this,config);
@@ -163,10 +164,7 @@ MODx.browser.Window = function(config) {
         ,onSelect: {fn: this.onSelect, scope: this}
         ,prependPath: config.prependPath || null
         ,prependUrl: config.prependUrl || null
-        ,basePath: config.basePath || ''
-        ,basePathRelative: config.basePathRelative || null
-        ,baseUrl: config.baseUrl || ''
-        ,baseUrlRelative: config.baseUrlRelative || null
+        ,source: config.source || 1
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
         ,openTo: config.openTo || ''
@@ -177,10 +175,7 @@ MODx.browser.Window = function(config) {
         ,onUpload: function() { this.view.run(); }
         ,scope: this
         ,prependPath: config.prependPath || null
-        ,basePath: config.basePath || ''
-        ,basePathRelative: config.basePathRelative || null
-        ,baseUrl: config.baseUrl || ''
-        ,baseUrlRelative: config.baseUrlRelative || null
+        ,source: config.source || 1
         ,hideFiles: config.hideFiles || false
         ,openTo: config.openTo || ''
         ,ident: this.ident
@@ -271,10 +266,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
             dir: dir
-            ,basePath: this.config.basePath || ''
-            ,basePathRelative: this.config.basePathRelative || null
-            ,baseUrl: this.config.baseUrl || ''
-            ,baseUrlRelative: this.config.baseUrlRelative || null
+            ,source: this.config.source
             ,allowedFileTypes: this.config.allowedFileTypes || ''
             ,wctx: this.config.wctx || 'web'
         });
@@ -376,10 +368,7 @@ MODx.browser.View = function(config) {
             action: 'getFiles'
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
-            ,basePath: config.basePath || ''
-            ,basePathRelative: config.basePathRelative || null
-            ,baseUrl: config.baseUrl || ''
-            ,baseUrlRelative: config.baseUrlRelative || null
+            ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,dir: config.openTo || ''
@@ -413,6 +402,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,basePathRelative: this.config.basePathRelative || null
                 ,baseUrl: this.config.baseUrl || ''
                 ,baseUrlRelative: this.config.baseUrlRelative || null
+                ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
@@ -427,10 +417,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         Ext.applyIf(p,{
             action: 'getFiles'
             ,dir: this.dir
-            ,basePath: this.config.basePath || ''
-            ,basePathRelative: this.config.basePathRelative || null
-            ,baseUrl: this.config.baseUrl || ''
-            ,baseUrlRelative: this.config.baseUrlRelative || null
+            ,source: this.config.source || 1
         });
         this.store.load({
             params: p

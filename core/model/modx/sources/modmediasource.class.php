@@ -238,6 +238,11 @@ class modMediaSource extends xPDOSimpleObject {
      */
     public function renameFile($oldPath,$newName) { return true; }
 
+    public function getOpenTo($value,array $parameters = array()) {
+        $properties = $this->getPropertyList();
+        return $properties['baseUrl'].dirname($value).'/';
+    }
+
     /**
      * Get the name of this source type
      * @return string
@@ -287,6 +292,23 @@ class modMediaSource extends xPDOSimpleObject {
             $properties = $defaultProperties;
         }
         return $this->prepareProperties($properties);
+    }
+
+    /**
+     * Get all properties in key => value format
+     * @return array
+     */
+    public function getPropertyList() {
+        $properties = $this->getProperties();
+        $list = array();
+        foreach ($properties as $property) {
+            $value = $property['value'];
+            if ($property['xtype'] == 'combo-boolean') {
+                $value = empty($property['value']) && $property['value'] != 'true' ? false : true;
+            }
+            $list[$property['name']] = $value;
+        }
+        return $list;
     }
 
     /**
@@ -420,5 +442,9 @@ class modMediaSource extends xPDOSimpleObject {
             }
         }
         return $src;
+    }
+
+    public function prepareOutputUrl($value) {
+        return $value;
     }
 }

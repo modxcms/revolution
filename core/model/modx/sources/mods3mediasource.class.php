@@ -223,7 +223,7 @@ class modS3MediaSource extends modMediaSource {
 
     public function getFilesInDirectory($dir) {
         $list = $this->getObjectList($dir);
-        $properties = $this->getProperties();
+        $properties = $this->getPropertyList();
 
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
 
@@ -233,12 +233,12 @@ class modS3MediaSource extends modMediaSource {
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
-        $bucketUrl = $properties['url']['value'].'/';
+        $bucketUrl = rtrim($properties['url'],'/').'/';
 
         /* iterate */
         $files = array();
         foreach ($list as $object) {
-            $objectUrl = $bucketUrl.$object;
+            $objectUrl = $bucketUrl.trim($object,'/');
             $baseName = basename($object);
             $isDir = substr(strrev($object),0,1) == '/' ? true : false;
             if (in_array($object,array('.','..','.svn','.git','_notes','.DS_Store'))) continue;
@@ -506,8 +506,10 @@ class modS3MediaSource extends modMediaSource {
 
 
     public function prepareSrcForThumb($src) {
-        $properties = $this->getProperties();
-        $src = $properties['url']['value'].$src;
+        $properties = $this->getPropertyList();
+        if (strpos($src,$properties['url']) === false) {
+            $src = $properties['url'].ltrim($src,'/');
+        }
         return $src;
     }
 }

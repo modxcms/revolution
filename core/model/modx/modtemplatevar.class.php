@@ -286,11 +286,20 @@ class modTemplateVar extends modElement {
             $params = array_merge($params,$outputProperties);
         }
 
-        /* for base_url in image/file tvs */
-        if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
-            $source = $this->getSource();
-            if ($source && $source->get('baseUrl')) {
-                $value = $source->get('baseUrl').$value;
+        /* Allow custom source types to manipulate the output URL for image/file tvs */
+        $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types',null,'image,file');
+        $mTypes = explode(',',$mTypes);
+        if (!empty($value) && in_array($this->get('type'),$mTypes)) {
+            $sourceCache = $this->getSourceCache($this->xpdo->context->get('key'));
+            if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
+                if ($this->xpdo->loadClass('sources.'.$sourceCache['class_key'])) {
+                    /** @var modMediaSource $source */
+                    $source = $this->xpdo->newObject('sources.'.$sourceCache['class_key']);
+                    if ($source) {
+                        $source->fromArray($sourceCache,'',true,true);
+                        $value = $source->prepareOutputUrl($value);
+                    }
+                }
             }
         }
 
@@ -302,23 +311,41 @@ class modTemplateVar extends modElement {
     /**
      * Get the Source for this Element
      *
-     * @todo Optimize this with context caching
-     * 
+     * @param string $contextKey
      * @return modMediaSource|null
      */
-    public function getSource() {
+    public function getSource($contextKey = '') {
+        if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
+        
         $c = $this->xpdo->newQuery('sources.modMediaSource');
         $c->innerJoin('sources.modMediaSourceElement','SourceElement');
         $c->where(array(
             'SourceElement.object' => $this->get('id'),
-            'SourceElement.object_class' => 'modTemplateVar',
-            'SourceElement.context_key' => $this->xpdo->context->get('key'),
+            'SourceElement.object_class' => $this->_class,
+            'SourceElement.context_key' => $contextKey,
         ));
         $source = $this->xpdo->getObject('sources.modMediaSource',$c);
         if (!$source) {
             $source = modMediaSource::getDefaultSource($this->xpdo);
         }
         return $source;
+    }
+
+    /**
+     * Get the stored sourceCache for a context
+     * 
+     * @param string $contextKey
+     * @param array $options
+     * @return array
+     */
+    public function getSourceCache($contextKey = '',array $options = array()) {
+        /** @var modCacheManager $cacheManager */
+        $cacheManager = $this->xpdo->getCacheManager();
+        if (!$cacheManager || !($cacheManager instanceof modCacheManager)) return array();
+
+        if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
+
+        return $cacheManager->getElementMediaSourceCache($this,$contextKey,$options);
     }
 
     /**

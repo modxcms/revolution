@@ -160,6 +160,46 @@ class modCacheManager extends xPDOCacheManager {
         return $results;
     }
 
+    public function getElementMediaSourceCache(modElement $element,$contextKey, array $options = array()) {
+        $cacheKey = $contextKey.'/source';
+        $sourceCache = $this->get($cacheKey);
+        if (empty($sourceCache)) {
+            $c = $this->modx->newQuery('sources.modMediaSourceElement');
+            $c->innerJoin('sources.modMediaSource','Source');
+            $c->where(array(
+                'modMediaSourceElement.context_key' => $contextKey,
+            ));
+            $c->select($this->modx->getSelectColumns('sources.modMediaSource','Source'));
+            $c->select($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement','',array(
+                 'source',
+                 'object',
+                 'object_class',
+            )));
+            $sources = $this->modx->getCollection('sources.modMediaSourceElement',$c);
+
+            $sourceCache = array();
+            /** @var modMediaSource $source */
+            foreach ($sources as $source) {
+                $sourceArray = $source->toArray();
+                $sourceArray = array_merge($source->getPropertyList(),$sourceArray);
+                $sourceArray['class_key'] = $source->_class;
+                $sourceArray['object'] = $source->get('object');
+                $sourceCache[$sourceArray['object']] = $sourceArray;
+            }
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+            $lifetime = (integer) $this->getOption('cache_media_sources_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            if (!$this->set($cacheKey, $sourceCache, $lifetime, $options)) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache source data for ' . $element->get('id') . '.');
+            }
+        }
+        $data = !empty($sourceCache[$element->get('id')]) ? $sourceCache[$element->get('id')] : array();
+        return $data;
+    }
+
     /**
      * Generates the system settings cache for a MODX site.
      *

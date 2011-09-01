@@ -454,6 +454,7 @@ MODx.combo.Browser = function(config) {
     Ext.applyIf(config,{
        width: 300
        ,triggerAction: 'all'
+       ,source: config.source || 1
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
     this.config = config;
@@ -471,12 +472,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 xtype: 'modx-browser'
                 ,id: Ext.id()
                 ,multiple: true
-                ,prependPath: this.config.prependPath || null
-                ,prependUrl: this.config.prependUrl || null
-                ,basePath: this.config.basePath || ''
-                ,basePathRelative: this.config.basePathRelative || null
-                ,baseUrl: this.config.baseUrl || ''
-                ,baseUrlRelative: this.config.baseUrlRelative || null
+                ,source: this.config.source || 1
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
                 ,allowedFileTypes: this.config.allowedFileTypes || ''

@@ -708,7 +708,6 @@ class modFileMediaSource extends modMediaSource {
                     ));
                     $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                     $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
-
                 } else {
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
@@ -804,4 +803,14 @@ class modFileMediaSource extends modMediaSource {
         );
     }
 
+    public function prepareOutputUrl($value) {
+        $properties = $this->getPropertyList();
+        if (!empty($properties['baseUrl'])) {
+            $value = $properties['baseUrl'].$value;
+            if (isset($properties['baseUrlRelative']) && empty($properties['baseUrlRelative'])) {
+                $value = $this->xpdo->context->getOption('base_url',null,MODX_BASE_URL).$value;
+            }
+        }
+        return $value;
+    }
 }

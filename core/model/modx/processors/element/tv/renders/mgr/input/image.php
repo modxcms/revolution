@@ -12,30 +12,26 @@ $modx->lexicon->load('tv_widget');
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $this->xpdo->context->get('key')));
 
 /** @var modMediaSource $source */
-$source = $this->getSource();
+$source = $this->getSource($modx->resource->get('context_key'));
 if (!$source->getWorkingContext()) {
     return '';
 }
 $source->setRequestProperties($_REQUEST);
 $source->initialize();
 $modx->controller->setPlaceholder('source',$source->get('id'));
+$properties = $source->getPropertyList();
 
 $value = $this->get('value');
 
-if ($source->get('baseUrl') && !empty($value)) {
-    $relativeValue = $source->get('baseUrl').ltrim($value,'/');
-} else {
-    $relativeValue = $value;
-}
-if (!empty($value) && strpos($value,'/') !== false) {
-    $dir = pathinfo($value,PATHINFO_DIRNAME);
-    $dir = rtrim($dir,'/').'/';
-    $params['openTo'] = $dir;
+if (!empty($value)) {
+    $params['openTo'] = $source->getOpenTo($value,$params);
 }
 
 $modx->controller->setPlaceholder('params',$params);
 
-$this->set('relativeValue',$relativeValue);
+$this->set('relativeValue',$value);
 $modx->controller->setPlaceholder('tv',$this);
 
-return $modx->controller->fetchTemplate('element/tv/renders/input/image.tpl');
+$o = $modx->controller->fetchTemplate('element/tv/renders/input/image.tpl');
+//var_dump($o);die();
+return $o;

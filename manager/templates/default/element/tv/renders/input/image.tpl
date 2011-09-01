@@ -3,7 +3,6 @@
 <div id="tv-image-preview-{$tv->id}">
     {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src={$tv->value}&source={$source}" alt="" />{/if}
 </div>
-
 <script type="text/javascript">
 // <![CDATA[
 {literal}
@@ -17,13 +16,10 @@ Ext.onReady(function() {
         ,relativeValue: '{$tv->value|escape}'
         ,width: '97%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        {if $params.basePath},basePath: "{$params.basePath}"{/if}
-        ,basePathRelative: {if $params.basePathRelative}true{else}false{/if}
-        {if $params.baseUrl},baseUrl: "{$params.baseUrl}"{/if}
-        ,baseUrlRelative: {if $params.baseUrlRelative}true{else}false{/if}
         {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
         {if $params.openTo},openTo: '{$params.openTo}'{/if}
+        ,source: '{$source}'
     {literal}
         ,msgTarget: 'under'
         ,listeners: {
