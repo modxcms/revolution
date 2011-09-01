@@ -1863,7 +1863,10 @@ class xPDOObject {
                     }
                     if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Stripped prefix {$keyPrefix} to produce key {$key}");
                 }
-                $key = $this->getField($key);
+                $actualKey = $this->getField($key);
+                if ($actualKey !== false) {
+                    $key = $actualKey;
+                }
                 if (isset ($this->_fieldMeta[$key]['index']) && $this->_fieldMeta[$key]['index'] == 'pk') {
                     if ($setPrimaryKeys) {
                         if (isset ($this->_fieldMeta[$key]['generated'])) {
