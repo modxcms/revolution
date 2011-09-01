@@ -63,10 +63,32 @@ Ext.onReady(function() {
             }
         }
 
+        $this->getElementSources();
+        
         /* invoke OnTVFormRender event */
         $placeholders['onTVFormRender'] = $this->fireRenderEvent();
 
         return $placeholders;
+    }
+
+    public function getElementSources() {
+        $c = $this->modx->newQuery('modContext');
+        $c->sortby($this->modx->escape('rank'),'ASC');
+        $c->sortby($this->modx->escape('key'),'DESC');
+        $contexts = $this->modx->getCollection('modContext',$c);
+        $list = array();
+        $this->modx->loadClass('sources.modMediaSource');
+        /** @var $source modMediaSource */
+        $source = modMediaSource::getDefaultSource($this->modx);
+        /** @var modContext $context */
+        foreach ($contexts as $context) {
+            $list[] = array(
+                $context->get('key'),
+                $source->get('id'),
+                $source->get('name'),
+            );
+        }
+        return $list;
     }
 
     /**
