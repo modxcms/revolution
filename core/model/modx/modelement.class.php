@@ -487,7 +487,7 @@ class modElement extends modAccessibleSimpleObject {
         if ($this->isStatic()) {
             $sourceFile = $this->getSourceFile($options);
             if ($sourceFile) {
-                $set = file_put_contents($sourceFile, $content);
+                $set = $this->xpdo->cacheManager->writeFile($sourceFile, $content);
             }
         }
         return $set;
