@@ -124,12 +124,21 @@ class modScript extends modElement {
     public function loadScript() {
         $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
-        if (!$result) {
-            $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
-                xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
-                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
-                xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_scripts_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-            ));
+        $outdated = false;
+        if ($this->isStatic()) {
+            $includeMTime = filemtime($includeFilename);
+            $sourceMTime = filemtime($this->getSourceFile());
+            $outdated = $sourceMTime > $includeMTime;
+        }
+        if (!$result || $outdated) {
+            $script= false;
+            if (!$outdated) {
+                $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
+                    xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
+                    xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
+                    xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_scripts_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                ));
+            }
             if (!$script) {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
