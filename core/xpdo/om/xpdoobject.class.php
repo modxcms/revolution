@@ -1708,15 +1708,18 @@ class xPDOObject {
     /**
      * Get a field name, looking up any by alias if not an actual field.
      *
-     * @param string $k The field name or alias.
-     * @return string|bool The actual field name or false if not a field or alias.
+     * @param string $key The field name or alias to translate to the actual field name.
+     * @param bool $validate If true, the method will return false if the field or an alias
+     * of it is not found. Otherwise, the key is returned as passed.
+     * @return string|bool The actual field name, the key as passed, or false if not a field
+     * or alias and validate is true.
      */
-    public function getField($k) {
-        $field = $k;
-        if (!array_key_exists($k, $this->_fieldMeta)) {
-            if (array_key_exists($k, $this->_fieldAliases)) {
-                $field = $this->_fieldAliases[$k];
-            } else {
+    public function getField($key, $validate = false) {
+        $field = $key;
+        if (!array_key_exists($key, $this->_fieldMeta)) {
+            if (array_key_exists($key, $this->_fieldAliases)) {
+                $field = $this->_fieldAliases[$key];
+            } elseif ($validate === true) {
                 $field = false;
             }
         }
@@ -1863,10 +1866,7 @@ class xPDOObject {
                     }
                     if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Stripped prefix {$keyPrefix} to produce key {$key}");
                 }
-                $actualKey = $this->getField($key);
-                if ($actualKey !== false) {
-                    $key = $actualKey;
-                }
+                $key = $this->getField($key);
                 if (isset ($this->_fieldMeta[$key]['index']) && $this->_fieldMeta[$key]['index'] == 'pk') {
                     if ($setPrimaryKeys) {
                         if (isset ($this->_fieldMeta[$key]['generated'])) {
