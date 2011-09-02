@@ -125,7 +125,7 @@ class modScript extends modElement {
         $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
         $outdated = false;
-        if ($this->isStatic()) {
+        if ($result && $this->isStatic()) {
             $includeMTime = filemtime($includeFilename);
             $sourceMTime = filemtime($this->getSourceFile());
             $outdated = $sourceMTime > $includeMTime;
