@@ -98,7 +98,7 @@ MODx.panel.Plugin = function(config) {
                 ,fieldLabel: _('is_static')
                 ,description: _('is_static_msg')
                 ,name: 'static'
-                ,id: 'modx-template-static'
+                ,id: 'modx-plugin-static'
                 ,inputValue: 1
                 ,checked: config.record.static || false
             },{
@@ -106,10 +106,11 @@ MODx.panel.Plugin = function(config) {
                 ,fieldLabel: _('static_file')
                 ,description: _('static_file_msg')
                 ,name: 'static_file'
-                ,id: 'modx-template-static-file'
+                ,id: 'modx-plugin-static-file'
                 ,width: 300
                 ,maxLength: 255
                 ,value: config.record.static_file || ''
+                ,hidden: !config.record.static
             },{
                 html: MODx.onPluginFormRender
                 ,border: false
@@ -158,6 +159,8 @@ MODx.panel.Plugin = function(config) {
         }
     });
     MODx.panel.Plugin.superclass.constructor.call(this,config);
+    var isStatic = Ext.getCmp('modx-plugin-static');
+    if (isStatic) { isStatic.on('check',this.toggleStaticFile); }
 };
 Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
     initialized: false
@@ -221,6 +224,15 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-plugin-plugincode');
             MODx.onSaveEditor(fld);
+        }
+    }
+    ,toggleStaticFile: function(cb) {
+        var staticFile = Ext.getCmp('modx-plugin-static-file');
+        if (!staticFile) { return false; }
+        if (cb.checked) {
+            staticFile.show();
+        } else {
+            staticFile.hide();
         }
     }
 });

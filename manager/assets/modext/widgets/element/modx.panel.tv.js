@@ -123,6 +123,7 @@ MODx.panel.TV = function(config) {
                 ,width: 300
                 ,maxLength: 255
                 ,value: config.record.static_file || ''
+                ,hidden: !config.record.static
             },{
                 html: MODx.onTVFormRender
                 ,border: false
@@ -221,6 +222,8 @@ MODx.panel.TV = function(config) {
         }
     });
     MODx.panel.TV.superclass.constructor.call(this,config);
+    var isStatic = Ext.getCmp('modx-tv-static');
+    if (isStatic) { isStatic.on('check',this.toggleStaticFile); }
 };
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
@@ -295,6 +298,15 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-tv-default-text');
             MODx.onSaveEditor(fld);
+        }
+    }
+    ,toggleStaticFile: function(cb) {
+        var staticFile = Ext.getCmp('modx-tv-static-file');
+        if (!staticFile) { return false; }
+        if (cb.checked) {
+            staticFile.show();
+        } else {
+            staticFile.hide();
         }
     }
 });
