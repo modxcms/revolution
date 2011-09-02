@@ -1641,7 +1641,7 @@ class xPDOObject {
      */
     public function getFKClass($k) {
         $fkclass= null;
-        $k = $this->getField($k);
+        $k = $this->getField($k, true);
         if (is_string($k)) {
             if (!empty ($this->_aggregates)) {
                 foreach ($this->_aggregates as $aggregateAlias => $aggregate) {
@@ -1695,7 +1695,7 @@ class xPDOObject {
             $this->_initFields();
         }
         $name= null;
-        $k = $this->getField($k);
+        $k = $this->getField($k, true);
         if (is_string($k) && isset ($this->fieldNames[$k])) {
             $name= $this->fieldNames[$k];
         }
@@ -1708,15 +1708,18 @@ class xPDOObject {
     /**
      * Get a field name, looking up any by alias if not an actual field.
      *
-     * @param string $k The field name or alias.
-     * @return string|bool The actual field name or false if not a field or alias.
+     * @param string $key The field name or alias to translate to the actual field name.
+     * @param bool $validate If true, the method will return false if the field or an alias
+     * of it is not found. Otherwise, the key is returned as passed.
+     * @return string|bool The actual field name, the key as passed, or false if not a field
+     * or alias and validate is true.
      */
-    public function getField($k) {
-        $field = $k;
-        if (!array_key_exists($k, $this->_fieldMeta)) {
-            if (array_key_exists($k, $this->_fieldAliases)) {
-                $field = $this->_fieldAliases[$k];
-            } else {
+    public function getField($key, $validate = false) {
+        $field = $key;
+        if (!array_key_exists($key, $this->_fieldMeta)) {
+            if (array_key_exists($key, $this->_fieldAliases)) {
+                $field = $this->_fieldAliases[$key];
+            } elseif ($validate === true) {
                 $field = false;
             }
         }
@@ -1863,10 +1866,7 @@ class xPDOObject {
                     }
                     if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Stripped prefix {$keyPrefix} to produce key {$key}");
                 }
-                $actualKey = $this->getField($key);
-                if ($actualKey !== false) {
-                    $key = $actualKey;
-                }
+                $key = $this->getField($key);
                 if (isset ($this->_fieldMeta[$key]['index']) && $this->_fieldMeta[$key]['index'] == 'pk') {
                     if ($setPrimaryKeys) {
                         if (isset ($this->_fieldMeta[$key]['generated'])) {
@@ -1919,7 +1919,7 @@ class xPDOObject {
      */
     public function addValidationRule($field, $name, $type, $rule, array $parameters= array()) {
         $field = $this->getField($field);
-        if ($field) {
+        if (is_string($field)) {
             if (!$this->_validationLoaded) $this->_loadValidation();
             if (!isset($this->_validationRules[$field])) $this->_validationRules[$field]= array();
             $this->_validationRules[$field][$name]= array(
@@ -2043,10 +2043,14 @@ class xPDOObject {
      * field is specified.
      */
     public function isLazy($key= '') {
+        $lazy = false;
         if (empty($key)) {
             $lazy = (count($this->_lazy) > 0);
         } else {
-            $lazy = in_array($this->getField($key), $this->_lazy);
+            $key = $this->getField($key, true);
+            if ($key !== false) {
+                $lazy = in_array($key, $this->_lazy);
+            }
         }
         return $lazy;
     }
@@ -2175,9 +2179,9 @@ class xPDOObject {
      */
     public function isDirty($key) {
         $dirty= false;
-        $key = $this->getField($key);
-        if (is_string($key) && array_key_exists($key, $this->_fieldMeta)) {
-            if (array_key_exists($key, $this->_dirty) || $this->_new) {
+        $actualKey = $this->getField($key, true);
+        if ($actualKey !== false) {
+            if (array_key_exists($actualKey, $this->_dirty) || $this->isNew()) {
                 $dirty= true;
             }
         } else {
@@ -2200,7 +2204,7 @@ class xPDOObject {
             }
         }
         else {
-            $key = $this->getField($key);
+            $key = $this->getField($key, true);
             if ($key !== false) {
                 $this->_dirty[$key] = $key;
                 if (isset($this->_validated[$key])) unset($this->_validated[$key]);
@@ -2227,9 +2231,9 @@ class xPDOObject {
      */
     protected function _getDataType($key) {
         $type= 'text';
-        $key = $this->getField($key);
-        if ($key !== false && isset($this->_fieldMeta[$key]['dbtype'])) {
-            $type= strtolower($this->_fieldMeta[$key]['dbtype']);
+        $actualKey = $this->getField($key, true);
+        if ($actualKey !== false && isset($this->_fieldMeta[$actualKey]['dbtype'])) {
+            $type= strtolower($this->_fieldMeta[$actualKey]['dbtype']);
         } elseif ($this->xpdo->getDebug() === true) {
             $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "xPDOObject::_getDataType() -- No data type specified for field ({$key}), using `text`.");
         }
@@ -2245,9 +2249,9 @@ class xPDOObject {
      */
     protected function _getPHPType($key) {
         $type= 'string';
-        $key = $this->getField($key);
-        if ($key !== false && isset($this->_fieldMeta[$key]['phptype'])) {
-            $type= strtolower($this->_fieldMeta[$key]['phptype']);
+        $actualKey = $this->getField($key, true);
+        if ($actualKey !== false && isset($this->_fieldMeta[$actualKey]['phptype'])) {
+            $type= strtolower($this->_fieldMeta[$actualKey]['phptype']);
         } elseif ($this->xpdo->getDebug() === true) {
             $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "xPDOObject::_getPHPType() -- No PHP type specified for field ({$key}), using `string`.");
         }
