@@ -474,7 +474,7 @@ class modElement extends modAccessibleSimpleObject {
         $content = "";
         if ($this->isStatic()) {
             $sourceFile = $this->getSourceFile($options);
-            if ($sourceFile) {
+            if ($sourceFile && file_exists($sourceFile)) {
                 $content = file_get_contents($sourceFile);
             }
         }
