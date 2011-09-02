@@ -407,6 +407,12 @@ class modElement extends modAccessibleSimpleObject {
                 $this->_content = $options['content'];
             } elseif ($this->isStatic()) {
                 $this->_content = $this->getFileContent($options);
+                if ($this->_content !== $this->_fields['content']) {
+                    $this->setContent($this->_content);
+                    if (!$this->isNew()) {
+                        $this->save();
+                    }
+                }
             } else {
                 $this->_content = $this->get('content');
             }
