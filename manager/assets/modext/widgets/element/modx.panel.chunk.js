@@ -86,6 +86,23 @@ MODx.panel.Chunk = function(config) {
                 ,inputValue: 1
                 ,checked: Ext.isDefined(config.record.clearCache) || true
             },{
+                xtype: 'xcheckbox'
+                ,fieldLabel: _('is_static')
+                ,description: _('is_static_msg')
+                ,name: 'static'
+                ,id: 'modx-template-static'
+                ,inputValue: 1
+                ,checked: config.record.static || false
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('static_file')
+                ,description: _('static_file_msg')
+                ,name: 'static_file'
+                ,id: 'modx-template-static-file'
+                ,width: 300
+                ,maxLength: 255
+                ,value: config.record.static_file || ''
+            },{
                 html: MODx.onChunkFormRender
                 ,border: false
             },{
