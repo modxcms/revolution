@@ -33,7 +33,7 @@ class modScript extends modElement {
      * {@inheritdoc}
      */
     public function set($k, $v= null, $vType= '') {
-        if (in_array($k, array('snippet', 'plugincode'))) {
+        if (in_array($k, array('snippet', 'plugincode', 'content'))) {
             $v= trim($v);
             if (strncmp($v, '<?', 2) == 0) {
                 $v= substr($v, 2);
@@ -165,5 +165,10 @@ class modScript extends modElement {
         if (substr($content, -2, 2) == '?>') $content= substr($content, 0, -2);
         $content= trim($content, " \n\r\0\x0B");
         return $content;
+    }
+
+    public function setFileContent($content, array $options = array()) {
+        $content = "<?php\n{$content}";
+        return parent::setFileContent($content, $options);
     }
 }
