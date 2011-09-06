@@ -107,6 +107,9 @@ class modFileMediaSource extends modMediaSource {
         $skipFiles = $this->getOption('skipFiles',$this->properties,'.,..,.svn,.git,_notes,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
 
+        $directories = array();
+        $files = array();
+
         /* iterate through directories */
         /** @var DirectoryIterator $file */
         foreach (new DirectoryIterator($fullPath) as $file) {

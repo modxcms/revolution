@@ -438,7 +438,7 @@ class modMediaSource extends modAccessibleSimpleObject {
             $src = str_replace(array('///','//'),'/',$src);
 
             /* check for file existence if local url */
-            if (empty($src) || !file_exists($src)) {
+            if (strpos($src,'/') !== 0 && (empty($src) || !file_exists($src))) {
                 if (file_exists('/'.$src)) {
                     $src = '/'.$src;
                 } else {
