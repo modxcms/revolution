@@ -222,7 +222,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             }
         }
 
-        if (!Ext.isEmpty(this.config.record.sources)) {
+        if (!Ext.isEmpty(this.config.record.sources) && !this.initialized) {
             Ext.getCmp('modx-grid-element-sources').getStore().loadData(this.config.record.sources);
         }
 

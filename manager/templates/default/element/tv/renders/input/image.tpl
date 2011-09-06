@@ -3,6 +3,26 @@
 <div id="tv-image-preview-{$tv->id}">
     {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src={$tv->value}&source={$source}" alt="" />{/if}
 </div>
+{if $disabled}
+<script type="text/javascript">
+// <![CDATA[
+{literal}
+Ext.onReady(function() {
+    var fld{/literal}{$tv->id}{literal} = MODx.load({
+    {/literal}
+        xtype: 'displayfield'
+        ,tv: '{$tv->id}'
+        ,renderTo: 'tv-image-{$tv->id}'
+        ,value: '{$tv->value|escape}'
+        ,width: '97%'
+        ,msgTarget: 'under'
+    {literal}
+    });
+});
+{/literal}
+// ]]>
+</script>
+{else}
 <script type="text/javascript">
 // <![CDATA[
 {literal}
@@ -48,3 +68,4 @@ Ext.onReady(function() {
 {/literal}
 // ]]>
 </script>
+{/if}

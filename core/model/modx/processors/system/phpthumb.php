@@ -22,7 +22,7 @@ $source = $modx->getOption('source',$scriptProperties,1);
 
 /** @var modMediaSource|modFileMediaSource $source */
 $modx->loadClass('sources.modMediaSource');
-$source = modMediaSource::getDefaultSource($modx,$source);
+$source = modMediaSource::getDefaultSource($modx,$source,false);
 if (empty($source)) return '';
 
 if (!$source->getWorkingContext()) {

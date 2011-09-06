@@ -1,6 +1,26 @@
 <div id="tvbrowser{$tv->id}"></div>
 <div id="tvpanel{$tv->id}"></div>
 
+{if $disabled}
+<script type="text/javascript">
+// <![CDATA[
+{literal}
+Ext.onReady(function() {
+    var fld{/literal}{$tv->id}{literal} = MODx.load({
+    {/literal}
+        xtype: 'displayfield'
+        ,tv: '{$tv->id}'
+        ,renderTo: 'tvpanel{$tv->id}'
+        ,value: '{$tv->value|escape}'
+        ,width: '97%'
+        ,msgTarget: 'under'
+    {literal}
+    });
+});
+{/literal}
+// ]]>
+</script>
+{else}
 <script type="text/javascript">
 // <![CDATA[
 {literal}
@@ -15,10 +35,8 @@ Ext.onReady(function() {
         ,width: '97%'
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        {if $params.basePath},basePath: "{$params.basePath}"{/if}
-        ,basePathRelative: {if $params.basePathRelative}true{else}false{/if}
-        {if $params.baseUrl},baseUrl: "{$params.baseUrl}"{/if}
-        ,baseUrlRelative: {if $params.baseUrlRelative}true{else}false{/if}
+        ,source: '{$source}'
+        
         {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
         {if $params.openTo},openTo: '{$params.openTo}'{/if}
@@ -38,3 +56,4 @@ Ext.onReady(function() {
 {/literal}
 // ]]>
 </script>
+{/if}

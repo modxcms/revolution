@@ -16,11 +16,6 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'delete',
-    'description' => 'perm.delete_desc',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'list',
     'description' => 'perm.list_desc',
     'value' => true,

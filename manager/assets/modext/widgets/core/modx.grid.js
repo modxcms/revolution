@@ -300,6 +300,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     var r = c[i].editor.renderer;
                     c[i].editor = Ext.ComponentMgr.create(c[i].editor);
                     if (r === true) {
+                        if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded) {
+                            c[i].editor.store.load();
+                            c[i].editor.store.isLoaded = true;
+                        }
                         c[i].renderer = MODx.combo.Renderer(c[i].editor);
                     } else if (c[i].editor.initialConfig.xtype === 'datefield') {
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
@@ -569,10 +573,11 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                 if (typeof(c[i].editor) == 'object' && c[i].editor.xtype) {
                     var r = c[i].editor.renderer;
                     c[i].editor = Ext.ComponentMgr.create(c[i].editor);
-                    if (c[i].editor && c[i].editor.store) {
-                        c[i].editor.store.load();
-                    }
                     if (r === true) {
+                        if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded) {
+                            c[i].editor.store.load();
+                            c[i].editor.store.isLoaded = true;
+                        }
                         c[i].renderer = MODx.combo.Renderer(c[i].editor);
                     } else if (c[i].editor.initialConfig.xtype === 'datefield') {
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');

@@ -6,11 +6,16 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['access'] = 'Access Permissions';
+$_lang['access_add'] = 'Add User Group';
+$_lang['access_remove'] = 'Remove Access';
 $_lang['base_path'] = 'Base Path';
 $_lang['base_path_relative'] = 'Base Path Relative?';
 $_lang['base_url'] = 'Base URL';
 $_lang['base_url_relative'] = 'Base URL Relative?';
+$_lang['minimum_role'] = 'Minimum Role';
 $_lang['path_options'] = 'Path Options';
+$_lang['policy'] = 'Policy';
 $_lang['source'] = 'Media Source';
 $_lang['source_create'] = 'Create New Media Source';
 $_lang['source_properties.intro_msg'] = 'Manage the properties for this Source below.';
@@ -26,8 +31,10 @@ $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket.';
 $_lang['source_types'] = 'Source Types';
 $_lang['source_types.intro_msg'] = 'This is a list of all the installed Media Source Types you have on this MODX instance.';
+$_lang['source.access.intro_msg'] = 'Here you can restrict a Media Source to specific User Groups and apply policies for those User Groups. A Media Source with no User Groups attached to it is available to all manager users.';
 $_lang['sources'] = 'Media Sources';
 $_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
+$_lang['user_group'] = 'User Group';
 
 $_lang['bucket'] = 'Bucket';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';

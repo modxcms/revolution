@@ -35,13 +35,6 @@ if (!empty($scriptProperties['query'])) {
     $c->where(array('modMediaSource.name:LIKE' => '%'.$scriptProperties['query'].'%'));
     $c->orCondition(array('modMediaSource.description:LIKE' => '%'.$scriptProperties['query'].'%'));
 }
-/*
-if (!empty($scriptProperties['usergroup'])) {
-    $c->innerJoin('modUserGroup','UserGroups');
-    $c->where(array(
-        'UserGroups.id' => $scriptProperties['usergroup'],
-    ));
-}*/
 $count = $modx->getCount('sources.modMediaSource',$c);
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
@@ -54,7 +47,12 @@ $list = array();
 foreach ($sources as $source) {
     if (!$source->checkPolicy('list')) continue;
     $sourceArray = $source->toArray();
-    $sourceArray['cls'] = 'pupdate premove';
+
+    $cls = array();
+    if ($source->checkPolicy('save')) $cls[] = 'pupdate';
+    if ($source->checkPolicy('remove')) $cls[] = 'premove';
+    $sourceArray['cls'] = implode(' ',$cls);
+
     $list[] = $sourceArray;
 }
 return $this->outputArray($list,$count);

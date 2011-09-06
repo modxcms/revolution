@@ -24,6 +24,10 @@ if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('source_err
 $source = $modx->getObject('sources.modMediaSource',$_DATA['id']);
 if (empty($source)) return $modx->error->failure($modx->lexicon('source_err_nf'));
 
+if (!$source->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
+
 /* save source */
 $source->fromArray($_DATA);
 if ($source->save() == false) {

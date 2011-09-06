@@ -666,9 +666,10 @@ class modElement extends modAccessibleSimpleObject {
      * Get the Source for this Element
      *
      * @param string $contextKey
+     * @param boolean $fallbackToDefault
      * @return modMediaSource|null
      */
-    public function getSource($contextKey = '') {
+    public function getSource($contextKey = '',$fallbackToDefault = true) {
         if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
 
         $c = $this->xpdo->newQuery('sources.modMediaSource');
@@ -679,7 +680,7 @@ class modElement extends modAccessibleSimpleObject {
             'SourceElement.context_key' => $contextKey,
         ));
         $source = $this->xpdo->getObject('sources.modMediaSource',$c);
-        if (!$source) {
+        if (!$source && $fallbackToDefault) {
             $source = modMediaSource::getDefaultSource($this->xpdo);
         }
         return $source;

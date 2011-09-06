@@ -83,6 +83,24 @@ MODx.panel.Source = function(config) {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                     }
                 }]
+            },{
+                title: _('access')
+                ,hideMode: 'offsets'
+                ,items: [{
+                    html: '<p>'+_('source.access.intro_msg')+'</p>'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-source-access'
+                    ,preventRender: true
+                    ,source: config.record.id
+                    ,autoHeight: true
+                    ,width: '97%'
+                    ,listeners: {
+                        'afterRemoveRow': {fn:this.markDirty,scope:this}
+                        ,'updateRole': {fn:this.markDirty,scope:this}
+                        ,'addMember': {fn:this.markDirty,scope:this}
+                    }
+                }]
             }]
         }]
         ,listeners: {
@@ -112,6 +130,17 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
                 g.getStore().loadData(d);
             }
         }
+        if (!Ext.isEmpty(this.config.record.access)) {
+            var d = this.config.record.access;
+            var g = Ext.getCmp('modx-grid-source-access');
+            if (g) {
+                d = Ext.decode(d);
+                if (!Ext.isEmpty(d)) {
+                    g.defaultProperties = d;
+                    g.getStore().loadData(d);
+                }
+            }
+        }
 
         this.fireEvent('ready',this.config.record);
         MODx.fireEvent('ready');
@@ -123,6 +152,10 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
         if (sp) {
             bp.properties = sp.encode();
         }
+        var ap = Ext.getCmp('modx-grid-source-access');
+        if (ap) {
+            bp.access = ap.encode();
+        }
         Ext.apply(o.form.baseParams,bp);
     }
     ,success: function(o) {
@@ -130,10 +163,12 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
             location.href = '?a='+MODx.action['source/update']+'&id='+o.result.object.id;
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
-            //var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
-            //if (wg) { wg.getStore().commitChanges(); }
-
+            var wg = Ext.getCmp('modx-grid-source-properties');
+            if (wg) { wg.getStore().commitChanges(); }
+            var ag = Ext.getCmp('modx-grid-source-access');
+            if (ag) { ag.getStore().commitChanges(); }
         }
     }
 });
 Ext.reg('modx-panel-source',MODx.panel.Source);
+

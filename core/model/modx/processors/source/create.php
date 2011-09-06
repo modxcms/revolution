@@ -34,6 +34,10 @@ if ($modx->error->hasError()) {
 $source = $modx->newObject('sources.modMediaSource');
 $source->fromArray($scriptProperties);
 
+if (!$source->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
+
 /* save source */
 if ($source->save() == false) {
     return $modx->error->failure($modx->lexicon('source_err_save'));

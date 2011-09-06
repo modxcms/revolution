@@ -182,7 +182,17 @@ if ($modx->hasPermission('access_permissions')) {
 
 /** update sources */
 if (isset($scriptProperties['sources'])) {
+    $sourceElements = $modx->getCollection('sources.modMediaSourceElement',array(
+        'object' => $tv->get('id'),
+        'object_class' => 'modTemplateVar',
+    ));
+    /** @var modMediaSourceElement $sourceElement */
+    foreach ($sourceElements as $sourceElement) {
+        $sourceElement->remove();
+    }
+
     $sources = $modx->fromJSON($scriptProperties['sources']);
+    //return $modx->error->failure(print_r($sources,true));
     if (is_array($sources)) {
         foreach ($sources as $id => $source) {
             if (!is_array($source)) continue;

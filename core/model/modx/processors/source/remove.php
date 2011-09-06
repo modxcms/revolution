@@ -14,14 +14,17 @@
 if (!$modx->hasPermission('sources')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('source');
 
-/* get dashboard */
+/* get source */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('source_err_ns'));
-/** @var modDashboard $source */
+/** @var modMediaSource $source */
 $source = $modx->getObject('sources.modMediaSource',$scriptProperties['id']);
 if (empty($source)) {
     return $modx->error->failure($modx->lexicon('source_err_nf',array('id' => $scriptProperties['id'])));
 }
 
+if (!$source->checkPolicy('remove')) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
 if ($source->get('id') == 1) return $modx->error->failure($modx->lexicon('source_err_remove_default'));
 
 /* remove source */

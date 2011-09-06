@@ -27,14 +27,15 @@ class modMediaSource extends modAccessibleSimpleObject {
      * @static
      * @param xPDO|modX $xpdo A reference to an xPDO instance
      * @param int $defaultSourceId
+     * @param boolean $fallbackToDefault
      * @return An|null|object
      */
-    public static function getDefaultSource(xPDO &$xpdo,$defaultSourceId = 1) {
+    public static function getDefaultSource(xPDO &$xpdo,$defaultSourceId = 1,$fallbackToDefault = true) {
         /** @var modMediaSource $defaultSource */
         $defaultSource = $xpdo->getObject('sources.modMediaSource',array(
             'id' => $defaultSourceId,
         ));
-        if (empty($defaultSource)) {
+        if (empty($defaultSource) && $fallbackToDefault) {
             $defaultSource = $xpdo->getObject('sources.modMediaSource',array(
                 'name' => 'Filesystem',
             ));
@@ -451,37 +452,41 @@ class modMediaSource extends modAccessibleSimpleObject {
     public function findPolicy($context = '') {
         $policy = array();
         $enabled = true;
-        $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (!is_object($this->xpdo->context) || $context === $this->xpdo->context->get('key')) {
+        $context = 'mgr';//!empty($context) ? $context : 'mgr';
+        if ($context === $this->xpdo->context->get('key')) {
             $enabled = (boolean) $this->xpdo->getOption('access_media_source_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
             $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_media_source_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
-                $c = $this->xpdo->newQuery('sources.modAccessMediaSource');
-                $c->leftJoin('modAccessPolicy','Policy');
-                $c->select(array(
-                    'modAccessMediaSource.id',
-                    'modAccessMediaSource.target',
-                    'modAccessMediaSource.principal',
-                    'modAccessMediaSource.authority',
-                    'modAccessMediaSource.policy',
-                    'Policy.data',
-                ));
-                $c->where(array(
-                    'modAccessMediaSource.principal_class' => 'modUserGroup',
-                    'modAccessMediaSource.target' => $this->get('key'),
-                ));
-                $c->sortby('modAccessMediaSource.target,modAccessMediaSource.principal,modAccessMediaSource.authority,modAccessMediaSource.policy');
-                $acls = $this->xpdo->getCollection('sources.modAccessMediaSource',$c);
-                /** @var modAccessMediaSource $acl */
-                foreach ($acls as $acl) {
-                    $policy['modAccessMediaSource'][$acl->get('target')][] = array(
-                        'principal' => $acl->get('principal'),
-                        'authority' => $acl->get('authority'),
-                        'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
-                    );
+                $accessTable = $this->xpdo->getTableName('sources.modAccessMediaSource');
+                $sourceTable = $this->xpdo->getTableName('sources.modMediaSource');
+                $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+                $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                        "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                        "JOIN {$sourceTable} Source ON Acl.principal_class = 'modUserGroup' " .
+                        "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                        "AND Source.id = Acl.target " .
+                        "WHERE Acl.target = :source " .
+                        "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                $bindings = array(
+                    ':source' => $this->get('id'),
+                    ':context' => $context,
+                );
+                $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+                if ($this->get('id') == 8) {
+                    $query->prepare($bindings);
+                    //echo $query->toSQL(); die();
+                }
+                if ($query->stmt && $query->stmt->execute()) {
+                    while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $policy['sources.modAccessMediaSource'][$row['target']][] = array(
+                            'principal' => $row['principal'],
+                            'authority' => $row['authority'],
+                            'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                        );
+                    }
                 }
                 $this->_policies[$context] = $policy;
             } else {
@@ -489,5 +494,21 @@ class modMediaSource extends modAccessibleSimpleObject {
             }
         }
         return $policy;
+    }
+
+    /**
+     * Allow overriding of checkPolicy to always allow media sources to be loaded
+     * 
+     * @param string|array $criteria
+     * @param array $targets
+     * @return bool
+     */
+    public function checkPolicy($criteria, $targets = null) {
+        if ($criteria == 'load') {
+            $success = true;
+        } else {
+            $success = parent::checkPolicy($criteria,$targets);
+        }
+        return $success;
     }
 }

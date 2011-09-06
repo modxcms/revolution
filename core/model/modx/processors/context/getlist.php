@@ -21,6 +21,7 @@ $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'key');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $search = $modx->getOption('search',$scriptProperties,'');
+$exclude = $modx->getOption('exclude',$scriptProperties,'');
 
 /* query contexts */
 $c = $modx->newQuery('modContext');
@@ -28,6 +29,11 @@ if (!empty($search)) {
     $c->where(array(
         'key:LIKE' => '%'.$search.'%',
         'OR:description:LIKE' => '%'.$search.'%',
+    ));
+}
+if (!empty($exclude)) {
+    $c->where(array(
+        'key:NOT IN' => explode(',',$exclude),
     ));
 }
 $count = $modx->getCount('modContext',$c);

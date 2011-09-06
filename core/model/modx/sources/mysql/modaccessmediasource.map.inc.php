@@ -46,9 +46,9 @@ $xpdo_meta_map['modAccessMediaSource']= array (
   array (
     'Target' => 
     array (
-      'class' => 'modMediaSource',
+      'class' => 'sources.modMediaSource',
       'local' => 'target',
-      'foreign' => 'key',
+      'foreign' => 'id',
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),

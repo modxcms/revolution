@@ -30,7 +30,7 @@
             <column key="context_key" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Target" class="modMediaSource" local="target" foreign="key" owner="foreign" cardinality="one" />
+        <aggregate alias="Target" class="sources.modMediaSource" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 

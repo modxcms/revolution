@@ -24,6 +24,9 @@ foreach ($sourceIds as $sourceId) {
     if (empty($source)) { continue; }
 
     if ($source->get('id') == 1) continue;
+    if (!$source->checkPolicy('remove')) {
+        continue;
+    }
 
     if ($source->remove() == false) {
         $modx->log(modX::LOG_LEVEL_ERROR,$modx->lexicon('source_err_remove'));
