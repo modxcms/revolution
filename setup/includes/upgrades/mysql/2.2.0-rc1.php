@@ -108,16 +108,5 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 $description = $this->install->lexicon('add_index',array('index' => 'rank','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));
 
-/* add sources.modAccessMediaSource to principal_targets */
-/** @var modSystemSetting $setting */
-$setting = $modx->getObject('modSystemSetting',array(
-    'key' => 'principal_targets',
-));
-if ($setting) {
-    $value = $setting->get('value');
-    $value = explode(',',$value);
-    $value[] = 'sources.modAccessMediaSource';
-    $value = array_unique($value);
-    $setting->set('value',implode(',',$value));
-    $setting->save();
-}
+/* media sources upgrades */
+include dirname(dirname(__FILE__)).'/common/2.2-media-sources.php';

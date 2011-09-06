@@ -343,8 +343,12 @@ class modMediaSource extends modAccessibleSimpleObject {
         $default = $this->getDefaultProperties();
 
         foreach ($properties as $k => $prop) {
-            if (array_key_exists($prop['name'],$default)) {
+            if (is_array($prop) && array_key_exists($prop['name'],$default)) {
                 if ($prop['value'] == $default[$prop['name']]['value']) {
+                    unset($properties[$k]);
+                }
+            } else if (is_scalar($prop)) { /* properties is k=>v pair */
+                if ($prop == $default[$k]['value']) {
                     unset($properties[$k]);
                 }
             }

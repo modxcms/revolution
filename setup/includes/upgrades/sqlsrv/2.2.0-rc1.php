@@ -108,3 +108,6 @@ if ($setting) {
     $setting->set('value',implode(',',$value));
     $setting->save();
 }
+
+/* media sources upgrades */
+include dirname(dirname(__FILE__)).'/common/2.2-media-sources.php';
