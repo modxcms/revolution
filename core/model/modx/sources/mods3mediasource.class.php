@@ -34,7 +34,7 @@ class modS3MediaSource extends modMediaSource {
             define('AWS_CLOUDFRONT_PRIVATE_KEY_PEM',$modx->getOption('aws.cloudfront_private_key_pem',$config,''));
             define('AWS_ENABLE_EXTENSIONS', 'false');*/
         }
-        include $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
+        include_once $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
 
         $this->getDriver();
         $this->setBucket($this->xpdo->getOption('aws.default_bucket',$config,''));
@@ -113,7 +113,8 @@ class modS3MediaSource extends modMediaSource {
         $properties = $this->getProperties();
         $list = $this->getObjectList($dir);
 
-        $imagesExts = array('jpg','jpeg','png','gif');
+        $imagesExts = $this->getOption('image_extensions',$properties,'jpg,jpeg,png,gif');
+        $imagesExts = explode(',',$imagesExts);
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
@@ -151,7 +152,6 @@ class modS3MediaSource extends modMediaSource {
                     'cls' => 'icon-'.$extension,
                     'type' => 'file',
                     'leaf' => true,
-                    //'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
                     'path' => $path,
                     'pathRelative' => $path,
                     'directory' => $path,
@@ -176,6 +176,14 @@ class modS3MediaSource extends modMediaSource {
         return $ls;
     }
 
+    /**
+     * Get the context menu for when viewing the source as a tree
+     * 
+     * @param string $file
+     * @param boolean $isDir
+     * @param array $fileArray
+     * @return array
+     */
     public function getListContextMenu($file,$isDir,array $fileArray) {
         $menu = array();
         if (!$isDir) { /* files */
@@ -221,6 +229,12 @@ class modS3MediaSource extends modMediaSource {
         return $menu;
     }
 
+    /**
+     * Get all files in the directory and prepare thumbnail views
+     * 
+     * @param string $dir
+     * @return array
+     */
     public function getFilesInDirectory($dir) {
         $list = $this->getObjectList($dir);
         $properties = $this->getPropertyList();
@@ -391,6 +405,8 @@ class modS3MediaSource extends modMediaSource {
     }
 
     /**
+     * Rename/move a file
+     * 
      * @param string $oldPath
      * @param string $newName
      * @return bool
@@ -423,7 +439,13 @@ class modS3MediaSource extends modMediaSource {
         return true;
     }
 
-
+    /**
+     * Upload files to S3
+     * 
+     * @param string $targetDirectory
+     * @param array $files
+     * @return bool
+     */
     public function uploadToFolder($targetDirectory,$files) {
         if ($targetDirectory == '/' || $targetDirectory == '.') $targetDirectory = '';
 
@@ -504,7 +526,12 @@ class modS3MediaSource extends modMediaSource {
         );
     }
 
-
+    /**
+     * Prepare a src parameter to be rendered with phpThumb
+     * 
+     * @param string $src
+     * @return string
+     */
     public function prepareSrcForThumb($src) {
         $properties = $this->getPropertyList();
         if (strpos($src,$properties['url']) === false) {

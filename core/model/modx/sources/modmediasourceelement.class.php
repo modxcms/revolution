@@ -7,5 +7,4 @@
  * @package modx
  * @subpackage sources
  */
-class modMediaSourceElement extends xPDOObject {
-}
+class modMediaSourceElement extends xPDOObject {}

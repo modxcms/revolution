@@ -7,5 +7,4 @@
  * @package modx
  * @subpackage sources
  */
-class modMediaSourceContext extends xPDOObject {
-}
+class modMediaSourceContext extends xPDOObject {}

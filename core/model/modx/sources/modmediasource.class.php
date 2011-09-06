@@ -239,6 +239,13 @@ class modMediaSource extends modAccessibleSimpleObject {
      */
     public function renameFile($oldPath,$newName) { return true; }
 
+    /**
+     * Get the openTo directory for this source, used with TV input types
+     * 
+     * @param string $value
+     * @param array $parameters
+     * @return string
+     */
     public function getOpenTo($value,array $parameters = array()) {
         $properties = $this->getPropertyList();
         return $properties['baseUrl'].dirname($value).'/';
@@ -449,14 +456,27 @@ class modMediaSource extends modAccessibleSimpleObject {
         return $src;
     }
 
+    /**
+     * Prepares the output URL when the Source is being used in an Element. Can be overridden to provide prefixing/post-
+     * fixing functionality.
+     * 
+     * @param string $value
+     * @return string
+     */
     public function prepareOutputUrl($value) {
         return $value;
     }
 
+    /**
+     * Find all policies for this object
+     * 
+     * @param string $context
+     * @return array
+     */
     public function findPolicy($context = '') {
         $policy = array();
         $enabled = true;
-        $context = 'mgr';//!empty($context) ? $context : 'mgr';
+        $context = 'mgr';
         if ($context === $this->xpdo->context->get('key')) {
             $enabled = (boolean) $this->xpdo->getOption('access_media_source_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
@@ -481,7 +501,6 @@ class modMediaSource extends modAccessibleSimpleObject {
                 $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                 if ($this->get('id') == 8) {
                     $query->prepare($bindings);
-                    //echo $query->toSQL(); die();
                 }
                 if ($query->stmt && $query->stmt->execute()) {
                     while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
