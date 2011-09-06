@@ -20,6 +20,7 @@ if (!$source->getWorkingContext()) {
 $source->setRequestProperties($_REQUEST);
 $source->initialize();
 $modx->controller->setPlaceholder('source',$source->get('id'));
+$params = array_merge($source->getPropertyList(),$params);
 
 if (!$source->checkPolicy('view')) {
     $modx->controller->setPlaceholder('disabled',true);

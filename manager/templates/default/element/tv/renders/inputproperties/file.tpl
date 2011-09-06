@@ -15,16 +15,7 @@ MODx.load({
     ,autoHeight: true
     ,labelWidth: 150
     ,border: false
-    ,items: [{
-        xtype: 'textfield'
-        ,fieldLabel: _('image_allowedfiletypes')
-        ,description: _('image_allowedfiletypes_desc')
-        ,name: 'inopt_allowedFileTypes'
-        ,id: 'inopt_allowedFileTypes{/literal}{$tv}{literal}'
-        ,value: params['allowedFileTypes'] || ''
-        ,width: 300
-        ,listeners: oc
-    }]
+    ,items: []
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });
 // ]]>

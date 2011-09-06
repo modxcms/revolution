@@ -800,6 +800,14 @@ class modFileMediaSource extends modMediaSource {
                 'value' => true,
                 'lexicon' => 'core:source',
             ),
+            'allowedFileTypes' => array(
+                'name' => 'allowedFileTypes',
+                'desc' => 'prop_file.allowedFileTypes_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ),
         );
     }
 

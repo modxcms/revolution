@@ -36,7 +36,6 @@ Ext.onReady(function() {
         ,relativeValue: '{$tv->value|escape}'
         ,width: '97%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
         {if $params.openTo},openTo: '{$params.openTo}'{/if}
         ,source: '{$source}'
