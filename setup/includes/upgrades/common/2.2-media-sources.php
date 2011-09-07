@@ -19,7 +19,9 @@ if ($setting) {
 }
 
 /* upgrade filemanager_* and TV-specific baseUrl/basePath settings into custom sources */
-$ct = $modx->getCount('sources.modMediaSource');
+$ct = $modx->getCount('sources.modMediaSource',array(
+    'name:!=' => 'Filesystem',
+));
 if ($ct > 0) {
     $modx->loadClass('sources.modMediaSource');
     /** @var modMediaSource $source */
@@ -50,12 +52,12 @@ if ($ct > 0) {
         if (!empty($fileManagerUrlRelative)) $properties['baseUrlRelative']['value'] = $fileManagerUrlRelative->value;
         $source->setProperties($properties);
         $source->save();
-
-        if (!empty($fileManagerPath)) $fileManagerPath->remove();
+        
         if (!empty($fileManagerPathRelative)) $fileManagerPathRelative->remove();
-        if (!empty($fileManagerUrl)) $fileManagerUrl->remove();
         if (!empty($fileManagerUrlRelative)) $fileManagerUrlRelative->remove();
     }
+    if (!empty($fileManagerPath)) $fileManagerPath->remove();
+    if (!empty($fileManagerUrl)) $fileManagerUrl->remove();
 }
 
 /* now loop through TVs, creating new sources for each TV that has a custom base path */
