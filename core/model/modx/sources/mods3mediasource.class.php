@@ -110,12 +110,10 @@ class modS3MediaSource extends modMediaSource {
      * @return array
      */
     public function getFolderList($dir) {
-        $properties = $this->getProperties();
+        $properties = $this->getPropertyList();
         $list = $this->getObjectList($dir);
 
-        $imagesExts = $this->getOption('image_extensions',$properties,'jpg,jpeg,png,gif');
-        $imagesExts = explode(',',$imagesExts);
-        $use_multibyte = $this->ctx->getOption('use_multibyte', false);
+        $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
         $directories = array();
@@ -126,7 +124,7 @@ class modS3MediaSource extends modMediaSource {
             $isDir = substr(strrev($path),0,1) === '/';
 
             $extension = pathinfo($fileName,PATHINFO_EXTENSION);
-            $extension = $use_multibyte ? mb_strtolower($extension,$encoding) : strtolower($extension);
+            $extension = $useMultiByte ? mb_strtolower($extension,$encoding) : strtolower($extension);
 
             $relativePath = $path == '/' ? $path : str_replace($dir,'',$path);
             $slashCount = substr_count($relativePath,'/');
@@ -155,7 +153,7 @@ class modS3MediaSource extends modMediaSource {
                     'path' => $path,
                     'pathRelative' => $path,
                     'directory' => $path,
-                    'url' => $properties['url']['value'].$properties['bucket']['value'].'/'.$path,
+                    'url' => $properties['url'].$properties['bucket'].'/'.$path,
                     'file' => $path,
                 );
                 $files[$path]['menu'] = array('items' => $this->getListContextMenu($path,$isDir,$files[$path]));
@@ -242,12 +240,18 @@ class modS3MediaSource extends modMediaSource {
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
 
         /* get default settings */
-        $imagesExts = array('jpg','jpeg','png','gif');
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
+        $bucketUrl = rtrim($properties['url'],'/').'/';
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
-        $bucketUrl = rtrim($properties['url'],'/').'/';
+        $imagesExts = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
+        $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
+        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store');
+        $skipFiles = explode(',',$skipFiles);
+        $skipFiles[] = '.';
+        $skipFiles[] = '..';
 
         /* iterate */
         $files = array();
@@ -255,7 +259,7 @@ class modS3MediaSource extends modMediaSource {
             $objectUrl = $bucketUrl.trim($object,'/');
             $baseName = basename($object);
             $isDir = substr(strrev($object),0,1) == '/' ? true : false;
-            if (in_array($object,array('.','..','.svn','.git','_notes','.DS_Store'))) continue;
+            if (in_array($object,$skipFiles)) continue;
 
             if (!$isDir) {
                 $fileArray = array(
@@ -300,8 +304,8 @@ class modS3MediaSource extends modMediaSource {
                         'src' => $object,
                         'w' => $thumbWidth,
                         'h' => $thumbHeight,
-                        'f' => 'png',
-                        'q' => 90,
+                        'f' => $thumbnailType,
+                        'q' => $thumbnailQuality,
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
@@ -311,8 +315,8 @@ class modS3MediaSource extends modMediaSource {
                         'w' => $imageWidth,
                         'h' => $imageHeight,
                         'HTTP_MODAUTH' => $modAuth,
-                        'f' => 'png',
-                        'q' => 90,
+                        'f' => $thumbnailType,
+                        'q' => $thumbnailQuality,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
                     ));
@@ -446,7 +450,7 @@ class modS3MediaSource extends modMediaSource {
      * @param array $files
      * @return bool
      */
-    public function uploadToFolder($targetDirectory,$files) {
+    public function uploadToFolder($targetDirectory,array $files = array()) {
         if ($targetDirectory == '/' || $targetDirectory == '.') $targetDirectory = '';
 
         $allowedFileTypes = explode(',',$this->xpdo->getOption('upload_files',null,''));
@@ -521,6 +525,41 @@ class modS3MediaSource extends modMediaSource {
                 'type' => 'textfield',
                 'options' => '',
                 'value' => '',
+                'lexicon' => 'core:source',
+            ),
+            'imageExtensions' => array(
+                'name' => 'imageExtensions',
+                'desc' => 'prop_s3.imageExtensions_desc',
+                'type' => 'textfield',
+                'value' => 'jpg,jpeg,png,gif',
+                'lexicon' => 'core:source',
+            ),
+            'thumbnailType' => array(
+                'name' => 'thumbnailType',
+                'desc' => 'prop_s3.thumbnailType_desc',
+                'type' => 'list',
+                'options' => array(
+                    array('name' => 'PNG','value' => 'png'),
+                    array('name' => 'JPG','value' => 'jpg'),
+                    array('name' => 'GIF','value' => 'gif'),
+                ),
+                'value' => 'png',
+                'lexicon' => 'core:source',
+            ),
+            'thumbnailQuality' => array(
+                'name' => 'thumbnailQuality',
+                'desc' => 'prop_s3.thumbnailQuality_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => 90,
+                'lexicon' => 'core:source',
+            ),
+            'skipFiles' => array(
+                'name' => 'skipFiles',
+                'desc' => 'prop_s3.skipFiles_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '.svn,.git,_notes,nbproject,.idea,.DS_Store',
                 'lexicon' => 'core:source',
             ),
         );

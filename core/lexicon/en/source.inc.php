@@ -43,8 +43,16 @@ $_lang['prop_file.basePathRelative_desc'] = 'If the Base Path setting above is n
 $_lang['prop_file.baseUrl_desc'] = 'The file URL to point the Image TV to. If not set, will use the filemanager_url setting, or the base MODX URL. May use [[++base_url]], [[++core_url]] and [[++assets_url]] placeholders inside this value.';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'If true, MODX only will prepend the baseUrl if no forward slash (/) is found at the beginning of the URL when rendering the TV. Useful for setting a TV value outside the baseUrl.';
 $_lang['prop_file.baseUrlRelative_desc'] = 'If the Base URL setting above is not relative to the MODX install URL, set this to Yes.';
+$_lang['prop_file.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
+$_lang['prop_file.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
+$_lang['prop_file.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
+$_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
+$_lang['prop_s3.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
+$_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
+$_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
+$_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';

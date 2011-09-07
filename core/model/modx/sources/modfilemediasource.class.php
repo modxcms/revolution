@@ -101,11 +101,12 @@ class modFileMediaSource extends modMediaSource {
         $hideFiles = !empty($this->properties['hideFiles']) && $this->properties['hideFiles'] != 'false' ? true : false;
         $editAction = $this->getEditActionId();
 
-        $imagesExts = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif,ico');
+        $imagesExts = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
         $imagesExts = explode(',',$imagesExts);
-
-        $skipFiles = $this->getOption('skipFiles',$this->properties,'.,..,.svn,.git,_notes,.DS_Store');
+        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
         $skipFiles = explode(',',$skipFiles);
+        $skipFiles[] = '.';
+        $skipFiles[] = '..';
 
         $directories = array();
         $files = array();
@@ -395,8 +396,6 @@ class modFileMediaSource extends modMediaSource {
      * @return bool
      */
     public function renameFile($oldPath,$newName) {
-        $bases = $this->getBases($oldPath);
-
         /** @var modFile $oldFile */
         $oldFile = $this->fileHandler->make($oldPath);
 
@@ -439,7 +438,8 @@ class modFileMediaSource extends modMediaSource {
         if (!$file->isReadable()) {
             $this->addError('file',$this->xpdo->lexicon('file_err_perms'));
         }
-        $imagesExts = array('jpg','jpeg','png','gif','ico');
+        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = explode(',',$imageExtensions);
         $fileExtension = pathinfo($filePath,PATHINFO_EXTENSION);
 
         $fa = array(
@@ -449,13 +449,19 @@ class modFileMediaSource extends modMediaSource {
             'last_accessed' => $file->getLastAccessed(),
             'last_modified' => $file->getLastModified(),
             'content' => $file->getContents(),
-            'image' => in_array($fileExtension,$imagesExts) ? true : false,
+            'image' => in_array($fileExtension,$imageExtensions) ? true : false,
             'is_writable' => $file->isWritable(),
             'is_readable' => $file->isReadable(),
         );
         return $fa;
     }
 
+    /**
+     * Remove a file
+     * 
+     * @param string $filePath
+     * @return boolean
+     */
     public function removeFile($filePath) {
         $bases = $this->getBases($filePath);
 
@@ -525,10 +531,10 @@ class modFileMediaSource extends modMediaSource {
      * Upload files to a specific folder on the file system
      * 
      * @param string $targetDirectory
-     * @param string $files
+     * @param array $files
      * @return boolean
      */
-    public function uploadToFolder($targetDirectory,$files) {
+    public function uploadToFolder($targetDirectory,array $files = array()) {
         $bases = $this->getBases($targetDirectory);
 
         $fullPath = $bases['path'].ltrim($targetDirectory,'/');
@@ -641,11 +647,17 @@ class modFileMediaSource extends modMediaSource {
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
 
         /* get default settings */
-        $imagesExts = array('jpg','jpeg','png','gif');
+        $imagesExts = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
+        $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
+        $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
+        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store');
+        $skipFiles = explode(',',$skipFiles);
+        $skipFiles[] = '.';
+        $skipFiles[] = '..';
 
         /* iterate */
         $files = array();
@@ -655,7 +667,7 @@ class modFileMediaSource extends modMediaSource {
         }
         /** @var DirectoryIterator $file */
         foreach (new DirectoryIterator($fullPath) as $file) {
-            if (in_array($file,array('.','..','.svn','.git','_notes','.DS_Store'))) continue;
+            if (in_array($file,$skipFiles)) continue;
             if (!$file->isReadable()) continue;
 
             $fileName = $file->getFilename();
@@ -693,8 +705,8 @@ class modFileMediaSource extends modMediaSource {
                         'src' => $url,
                         'w' => $thumbWidth,
                         'h' => $thumbHeight,
-                        'f' => 'png',
-                        'q' => 90,
+                        'f' => $thumbnailType,
+                        'q' => $thumbnailQuality,
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
@@ -704,8 +716,8 @@ class modFileMediaSource extends modMediaSource {
                         'w' => $imageWidth,
                         'h' => $imageHeight,
                         'HTTP_MODAUTH' => $modAuth,
-                        'f' => 'png',
-                        'q' => 90,
+                        'f' => $thumbnailType,
+                        'q' => $thumbnailQuality,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
                     ));
@@ -811,9 +823,50 @@ class modFileMediaSource extends modMediaSource {
                 'value' => '',
                 'lexicon' => 'core:source',
             ),
+            'imageExtensions' => array(
+                'name' => 'imageExtensions',
+                'desc' => 'prop_file.imageExtensions_desc',
+                'type' => 'textfield',
+                'value' => 'jpg,jpeg,png,gif',
+                'lexicon' => 'core:source',
+            ),
+            'thumbnailType' => array(
+                'name' => 'thumbnailType',
+                'desc' => 'prop_file.thumbnailType_desc',
+                'type' => 'list',
+                'options' => array(
+                    array('name' => 'PNG','value' => 'png'),
+                    array('name' => 'JPG','value' => 'jpg'),
+                    array('name' => 'GIF','value' => 'gif'),
+                ),
+                'value' => 'png',
+                'lexicon' => 'core:source',
+            ),
+            'thumbnailQuality' => array(
+                'name' => 'thumbnailQuality',
+                'desc' => 'prop_s3.thumbnailQuality_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => 90,
+                'lexicon' => 'core:source',
+            ),
+            'skipFiles' => array(
+                'name' => 'skipFiles',
+                'desc' => 'prop_file.skipFiles_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '.svn,.git,_notes,nbproject,.idea,.DS_Store',
+                'lexicon' => 'core:source',
+            ),
         );
     }
 
+    /**
+     * Prepare the output values for image/file TVs by prefixing the baseUrl property to them
+     *
+     * @param string $value
+     * @return string
+     */
     public function prepareOutputUrl($value) {
         $properties = $this->getPropertyList();
         if (!empty($properties['baseUrl'])) {

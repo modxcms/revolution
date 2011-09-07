@@ -199,7 +199,7 @@ class modMediaSource extends modAccessibleSimpleObject {
      * @param array $files
      * @return boolean
      */
-    public function uploadToFolder($targetDirectory,$files) { return true; }
+    public function uploadToFolder($targetDirectory,array $files = array()) { return true; }
 
     /**
      * Get the contents of a file
