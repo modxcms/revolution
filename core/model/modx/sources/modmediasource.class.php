@@ -51,9 +51,9 @@ class modMediaSource extends modAccessibleSimpleObject {
             'id' => $defaultSourceId,
         ));
         if (empty($defaultSource) && $fallbackToDefault) {
-            $defaultSource = $xpdo->getObject('sources.modMediaSource',array(
-                'name' => 'Filesystem',
-            ));
+            $c = $xpdo->newQuery('sources.modMediaSource');
+            $c->sortby('id','ASC');
+            $defaultSource = $xpdo->getObject('sources.modMediaSource',$c);
         }
         return $defaultSource;
     }
