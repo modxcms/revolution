@@ -458,6 +458,27 @@ class xPDOTest extends xPDOTestCase {
     }
 
     /**
+     * Test xPDO->getGraph()
+     *
+     * @dataProvider providerGetGraph
+     * @param string $class The class to get a graph for.
+     * @param int $depth The depth to get the graph to.
+     * @param array $expected The expected graph array.
+     */
+    public function testGetGraph($class, $depth, $expected) {
+        $actual = $this->xpdo->getGraph($class, $depth);
+        $this->assertEquals($expected, $actual);
+    }
+    public function providerGetGraph() {
+        return array(
+            array('Person', 10, array('BloodType' => array(), 'PersonPhone' => array('Phone' => array()))),
+            array('Person', 1, array('BloodType' => array(), 'PersonPhone' => array())),
+            array('Person', 0, array()),
+            array('Person', 1000, array('BloodType' => array(), 'PersonPhone' => array('Phone' => array()))),
+        );
+    }
+
+    /**
      * Test xPDO->call()
      */
     public function testCall() {

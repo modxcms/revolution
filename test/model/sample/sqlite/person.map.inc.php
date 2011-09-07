@@ -95,6 +95,10 @@ $xpdo_meta_map['Person']= array (
       'default' => 1,
     ),
   ),
+  'fieldAliases' => 
+  array (
+    'date_of_birth' => 'dob',
+  ),
   'indexes' => 
   array (
     'PRIMARY' => 

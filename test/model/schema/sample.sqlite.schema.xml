@@ -12,6 +12,8 @@
         <field key="password" dbtype="varchar" precision="255" phptype="password" null="false" default="" />
         <field key="security_level" dbtype="tinyint" precision="4" phptype="integer" null="false" default="1" />
 
+        <alias key="date_of_birth" field="dob" />
+        
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="id" collation="A" null="false" />
         </index>

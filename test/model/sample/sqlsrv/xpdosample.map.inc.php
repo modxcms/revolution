@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['xPDOSample']= array (
   'package' => 'sample',
+  'version' => '1.1',
   'table' => 'xpdosample',
   'fields' => 
   array (
@@ -108,17 +109,6 @@ $xpdo_meta_map['xPDOSample']= array (
   ),
   'indexes' => 
   array (
-    'PRIMARY' => 
-    array (
-      'primary' => true,
-      'unique' => true,
-      'columns' => 
-      array (
-        'id' => 
-        array (
-        ),
-      ),
-    ),
     'unique_varchar' => 
     array (
       'primary' => false,

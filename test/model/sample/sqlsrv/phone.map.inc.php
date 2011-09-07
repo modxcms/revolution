@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['Phone']= array (
   'package' => 'sample',
+  'version' => '1.1',
   'table' => 'phone',
   'fields' => 
   array (
@@ -31,23 +32,6 @@ $xpdo_meta_map['Phone']= array (
       'phptype' => 'datetime',
       'null' => false,
       'default' => 'CURRENT_TIMESTAMP',
-    ),
-  ),
-  'indexes' => 
-  array (
-    'PRIMARY' => 
-    array (
-      'alias' => 'PRIMARY',
-      'primary' => true,
-      'unique' => true,
-      'columns' => 
-      array (
-        'id' => 
-        array (
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
     ),
   ),
   'composites' => 

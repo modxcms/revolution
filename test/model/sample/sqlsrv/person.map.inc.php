@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['Person']= array (
   'package' => 'sample',
+  'version' => '1.1',
   'table' => 'person',
   'fields' => 
   array (
@@ -90,22 +91,12 @@ $xpdo_meta_map['Person']= array (
       'default' => 1,
     ),
   ),
+  'fieldAliases' => 
+  array (
+    'date_of_birth' => 'dob',
+  ),
   'indexes' => 
   array (
-    'PRIMARY' => 
-    array (
-      'alias' => 'PRIMARY',
-      'primary' => true,
-      'unique' => true,
-      'columns' => 
-      array (
-        'id' => 
-        array (
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
     'username' => 
     array (
       'alias' => 'username',

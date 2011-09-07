@@ -420,7 +420,87 @@ class xPDOObjectTest extends xPDOTestCase {
         );
     }
 
+    /**
+     * Test loading a graph of relations to an xPDOObject instance.
+     */
+    public function testGetGraph() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        /** @var xPDOObject $object */
+        $object = $this->xpdo->getObject('Person', 2);
+        if ($object) {
+            try {
+                $object->getGraph(array('PersonPhone' => array('Phone' => array())));
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        $this->assertTrue(
+            $object instanceof Person
+            && $object->_relatedObjects['PersonPhone']['2-2'] instanceof PersonPhone
+            && $object->_relatedObjects['PersonPhone']['2-2']->_relatedObjects['Phone'] instanceof Phone
+            && $object->_relatedObjects['PersonPhone']['2-3'] instanceof PersonPhone
+            && $object->_relatedObjects['PersonPhone']['2-3']->_relatedObjects['Phone'] instanceof Phone
+            ,"Could not retrieve requested graph"
+        );
+    }
 
+    /**
+     * Test loading an iterator for
+     */
+    public function testGetIterator() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $children = array();
+        /** @var xPDOObject $object */
+        $object = $this->xpdo->getObject('Person', 2);
+        if ($object) {
+            try {
+                $iterator = $object->getIterator('PersonPhone');
+                foreach ($iterator as $child) {
+                    $children[] = $child;
+                }
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        $this->assertTrue(
+            $object instanceof Person
+            && $children[0] instanceof PersonPhone
+            && $children[1] instanceof PersonPhone,
+            "Could not retrieve requested iterator."
+        );
+    }
+
+    /**
+     * Test updating a collection.
+     *
+     * @dataProvider providerUpdateCollection
+     * @param string $class The class to update a collection of.
+     * @param array $set An array of field/value pairs to update for the collection.
+     * @param mixed $criteria A valid xPDOCriteria object or expression.
+     * @param array $expected An array of expected values for the test.
+     */
+    public function testUpdateCollection($class, $set, $criteria, $expected) {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $actualKeys = array_keys($set);
+        $actualValues = array();
+        $affected = $this->xpdo->updateCollection($class, $set, $criteria);
+        $affectedCollection = $this->xpdo->getCollection($class, $criteria);
+        foreach ($affectedCollection as $affectedObject) {
+            $actualValues[] = $affectedObject->get($actualKeys);
+        }
+        $actual = array($affected, $actualValues);
+        $this->assertEquals($expected, $actual, "Could not update collection as expected.");
+    }
+    /**
+     * Data provider for testUpdateCollection
+     */
+    public function providerUpdateCollection() {
+        return array(
+            array('Person', array('dob' => '2011-08-09'), null, array(2, array(array('dob' => '2011-08-09'), array('dob' => '2011-08-09')))),
+            array('Person', array('security_level' => 5), null, array(2, array(array('security_level' => 5), array('security_level' => 5)))),
+            array('Person', array('date_of_birth' => '2011-09-01'), null, array(2, array(array('date_of_birth' => '2011-09-01'), array('date_of_birth' => '2011-09-01')))),
+        );
+    }
 
 
     /**

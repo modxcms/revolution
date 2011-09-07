@@ -19,7 +19,6 @@
  * 
  * @package xpdo-test
  */
-require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__).'/xPDOTestCase.php';
 require_once dirname(__FILE__).'/xPDO/xPDOSuite_AllTests.php';
 /**
@@ -73,7 +72,7 @@ class xPDOTestHarness extends PHPUnit_Framework_TestSuite {
      * @param boolean $new Indicate if a new singleton should be created
      * @return xPDO An xPDO object instance.
      */
-    public static function getInstance($new = false) {
+    public static function &getInstance($new = false) {
         if ($new || !is_object(xPDOTestHarness::$xpdo)) {
 	        $driver= xPDOTestHarness::$properties['xpdo_driver'];
 	        $xpdo= new xPDO(

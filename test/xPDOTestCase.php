@@ -19,7 +19,6 @@
  *
  * @package xpdo-test
  */
-require_once 'PHPUnit/Framework.php';
 
 /**
  * Extends the basic PHPUnit TestCase class to provide xPDO specific methods
@@ -27,6 +26,7 @@ require_once 'PHPUnit/Framework.php';
  * @package xpdo-test
  */
 class xPDOTestCase extends PHPUnit_Framework_TestCase {
+    /** @var xPDO $xpdo */
     public $xpdo = null;
 
     protected function setUp() {
