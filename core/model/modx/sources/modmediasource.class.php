@@ -534,4 +534,50 @@ class modMediaSource extends modAccessibleSimpleObject {
         }
         return $success;
     }
+
+    /**
+     * Override xPDOObject::save to clear the sources cache on save
+     *
+     * @param boolean $cacheFlag
+     * @return boolean
+     */
+    public function save($cacheFlag = null) {
+        $saved = parent::save($cacheFlag);
+        if ($saved) {
+            $this->clearCache();
+        }
+        return $saved;
+    }
+
+    /**
+     * Clear the caches of all sources
+     * @param array $options
+     * @return void
+     */
+    public function clearCache(array $options = array()) {
+        /** @var modCacheManager $cacheManager */
+        $cacheManager = $this->xpdo->getCacheManager();
+        if (empty($cacheManager)) return;
+
+        $c = $this->xpdo->newQuery('modContext');
+        $c->select($this->xpdo->getSelectColumns('modContext','modContext','',array('key')));
+        $c->prepare();
+        $sql = $c->toSQL();
+
+        $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
+        $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+        $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+        $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
+        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+
+        $stmt = $this->xpdo->query($sql);
+        if ($stmt) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                if ($row && !empty($row['key'])) {
+                    $cacheManager->delete($row['key'].'/source',$options);
+                }
+            }
+            $stmt->closeCursor();
+        }
+    }
 }
