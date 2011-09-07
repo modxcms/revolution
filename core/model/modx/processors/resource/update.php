@@ -446,6 +446,11 @@ if (isset($scriptProperties['resource_groups'])) {
 }
 /* end save resource groups */
 
+/* reassign context for children if changed */
+if ($oldContext instanceof modContext && $oldContext->get('key') !== $workingContext->get('key')) {
+    $modx->call($resource->get('class_key'), 'updateContextOfChildren', array(&$modx, $resource));
+}
+
 /* fire delete/undelete events */
 if (isset($resourceUndeleted) && !empty($resourceUndeleted)) {
     $modx->invokeEvent('OnResourceUndelete',array(

@@ -50,24 +50,6 @@
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 $modx->lexicon->load('resource');
 
-/* check new resource token if posted from manager */
-if(isset($scriptProperties['create-resource-token'])) {
-    $tokenFound = false;
-    $tokenPassed = $scriptProperties['create-resource-token'];
-    if(!is_null($tokenPassed)) {
-        if(isset($_SESSION['newResourceTokens']) && !is_null($_SESSION['newResourceTokens'])) {
-            $search = array_search($tokenPassed, $_SESSION['newResourceTokens']);
-            if($search !== false) {
-                unset($_SESSION['newResourceTokens'][$search]);
-                $tokenFound = true;
-            }
-        }
-    }
-    if($tokenFound === false) {
-        return $modx->error->failure($modx->lexicon('resource_err_duplicate'));
-    }
-}
-
 /* handle if parent is a context */
 if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent'])) {
     $ctxCnt = $modx->getCount('modContext',array('key' => $scriptProperties['parent']));
@@ -166,6 +148,24 @@ if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperti
     }
 }
 if ($modx->error->hasError()) return $modx->error->failure();
+
+/* check new resource token if posted from manager */
+if(isset($scriptProperties['create-resource-token'])) {
+    $tokenFound = false;
+    $tokenPassed = $scriptProperties['create-resource-token'];
+    if(!is_null($tokenPassed)) {
+        if(isset($_SESSION['newResourceTokens']) && !is_null($_SESSION['newResourceTokens'])) {
+            $search = array_search($tokenPassed, $_SESSION['newResourceTokens']);
+            if($search !== false) {
+                unset($_SESSION['newResourceTokens'][$search]);
+                $tokenFound = true;
+            }
+        }
+    }
+    if($tokenFound === false) {
+        return $modx->error->failure($modx->lexicon('resource_err_duplicate'));
+    }
+}
 
 /* publish and unpublish dates */
 $now = time();
