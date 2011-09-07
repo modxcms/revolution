@@ -390,7 +390,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 }
                 ,scripts: true
             });
-        } catch(e) {console.log(e);}
+        } catch(e) {MODx.debug(e);}
     }
 });
 Ext.reg('modx-panel-tv-input-properties',MODx.panel.TVInputProperties);
