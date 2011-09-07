@@ -445,23 +445,34 @@ class modElement extends modAccessibleSimpleObject {
             $filename = $this->get('static_file');
             if (!empty($filename)) {
                 $array = array();
-
                 if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
                     $this->xpdo->parser->processElementTags('', $filename);
                 }
             }
 
             if (!file_exists($filename)) {
-                $this->_sourcePath= $this->xpdo->getOption('element_static_path', $options, $this->xpdo->getOption('components_path', $options, MODX_CORE_PATH . 'components/'));
-                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourcePath, $array)) {
-                    $this->xpdo->parser->processElementTags('', $this->_sourcePath);
-                }
+                $this->getSourcePath($options);
                 $this->_sourceFile= $this->_sourcePath . $filename;
             } else {
                 $this->_sourceFile= $filename;
             }
         }
         return $this->_sourceFile;
+    }
+
+    /**
+     * Get the absolute path location the source file is located relative to.
+     *
+     * @param array $options An array of options.
+     * @return string The absolute path the sourceFile is relative to.
+     */
+    public function getSourcePath(array $options = array()) {
+        $array = array();
+        $this->_sourcePath= $this->xpdo->getOption('element_static_path', $options, $this->xpdo->getOption('components_path', $options, MODX_CORE_PATH . 'components/'));
+        if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourcePath, $array)) {
+            $this->xpdo->parser->processElementTags('', $this->_sourcePath);
+        }
+        return $this->_sourcePath;
     }
 
     /**
