@@ -291,8 +291,6 @@ class modTemplateVar extends modElement {
         $mTypes = explode(',',$mTypes);
         if (!empty($value) && in_array($this->get('type'),$mTypes)) {
             $sourceCache = $this->getSourceCache($this->xpdo->context->get('key'));
-            var_dump($this->get('id').': '.$this->get('name'));
-            var_dump($sourceCache);
             if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
                 $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
                 $coreSourceClasses = explode(',',$coreSourceClasses);
