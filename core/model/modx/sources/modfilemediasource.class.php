@@ -647,7 +647,8 @@ class modFileMediaSource extends modMediaSource {
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
 
         /* get default settings */
-        $imagesExts = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = explode(',',$imageExtensions);
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
@@ -684,7 +685,7 @@ class modFileMediaSource extends modMediaSource {
                 $url = ltrim($dir.$fileName,'/');
 
                 /* get thumbnail */
-                if (in_array($fileExtension,$imagesExts)) {
+                if (in_array($fileExtension,$imageExtensions)) {
                     $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                     $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
                     $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 60);

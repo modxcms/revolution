@@ -245,7 +245,8 @@ class modS3MediaSource extends modMediaSource {
         $bucketUrl = rtrim($properties['url'],'/').'/';
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
-        $imagesExts = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = explode(',',$imageExtensions);
         $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
         $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store');
@@ -283,7 +284,7 @@ class modS3MediaSource extends modMediaSource {
                 if (!empty($allowedFileTypes) && !in_array($fileArray['ext'],$allowedFileTypes)) continue;
 
                 /* get thumbnail */
-                if (in_array($fileArray['ext'],$imagesExts)) {
+                if (in_array($fileArray['ext'],$imageExtensions)) {
                     $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                     $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
                     $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 60);

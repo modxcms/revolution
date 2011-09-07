@@ -433,11 +433,12 @@ class modMediaSource extends modAccessibleSimpleObject {
      */
     public function prepareSrcForThumb($src) {
         /* dont strip stuff for absolute URLs */
+
         if (substr($src,0,4) != 'http') {
             if (strpos($src,'/') !== 0) {
-                $properties = $this->getProperties();
-                $src = $properties['basePath']['value'].$src;
-                if (!empty($properties['basePath']['value'])) {
+                $properties = $this->getPropertyList();
+                $src = $properties['basePath'].$src;
+                if (!empty($properties['basePathRelative'])) {
                     $src = $this->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
                 }
             }
@@ -445,7 +446,7 @@ class modMediaSource extends modAccessibleSimpleObject {
             $src = str_replace(array('///','//'),'/',$src);
 
             /* check for file existence if local url */
-            if (strpos($src,'/') !== 0 && (empty($src) || !file_exists($src))) {
+            if (strpos($src,'/') !== 0 && empty($src)) {
                 if (file_exists('/'.$src)) {
                     $src = '/'.$src;
                 } else {
