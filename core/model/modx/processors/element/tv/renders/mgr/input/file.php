@@ -27,6 +27,8 @@ if (!$source->checkPolicy('view')) {
     $this->set('disabled',true);
     $this->set('relativeValue',$this->get('value'));
 } else {
+    $modx->controller->setPlaceholder('disabled',false);
+    $this->set('disabled',false);
     $value = $this->get('value');
     if (!empty($value)) {
         $params['openTo'] = $source->getOpenTo($value,$params);
