@@ -483,6 +483,31 @@ $children[2]->fromArray(array(
         ), '', true, true);
         $children[2]->addOne($action);
 
+/* media sources */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array(
+  'text' => 'sources',
+  'parent' => 'tools',
+  'action' => 83,
+  'description' => 'sources_desc',
+  'icon' => 'images/misc/logo_tbar.gif',
+  'menuindex' => 2,
+  'permissions' => 'sources',
+), '', true, true);
+        $action= $xpdo->newObject('modAction');
+        $action->fromArray(array (
+          'id' => 83,
+          'namespace' => 'core',
+          'parent' => 10,
+          'controller' => 'source/index',
+          'haslayout' => 1,
+          'lang_topics' => 'sources,namespace',
+          'assets' => '',
+          'help_url' => 'Media+Sources',
+        ), '', true, true);
+        $children[3]->addOne($action);
+
+
 $menus[4]->addMany($children,'Children');
 unset($children);
 

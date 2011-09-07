@@ -57,4 +57,17 @@ if (is_array($permissions)) {
     $templates['4']->addMany($permissions);
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Element Template Permissions.'); }
 
+/* media source template/policy */
+$templates['5']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['5']->fromArray(array(
+    'id' => 5,
+    'name' => 'MediaSourceTemplate',
+    'description' => 'Media Source Policy Template with all attributes.',
+    'lexicon' => 'permissions',
+));
+$permissions = include dirname(__FILE__).'/permissions/transport.policy.tpl.media_source.php';
+if (is_array($permissions)) {
+    $templates['5']->addMany($permissions);
+} else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Media Source Template Permissions.'); }
+
 return $templates;

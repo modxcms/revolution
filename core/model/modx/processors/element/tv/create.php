@@ -181,6 +181,34 @@ if ($modx->hasPermission('tv_access_permissions')) {
     }
 }
 
+/** add source-element maps */
+if (isset($scriptProperties['sources'])) {
+    $sources = $modx->fromJSON($scriptProperties['sources']);
+    if (is_array($sources)) {
+        foreach ($sources as $id => $source) {
+            if (!is_array($source)) continue;
+
+            /** @var modMediaSourceElement $sourceElement */
+            $sourceElement = $modx->getObject('sources.modMediaSourceElement',array(
+                'object' => $tv->get('id'),
+                'object_class' => $tv->_class,
+                'context_key' => $source['context_key'],
+            ));
+            if (!$sourceElement) {
+                $sourceElement = $modx->newObject('sources.modMediaSourceElement');
+                $sourceElement->fromArray(array(
+                    'object' => $tv->get('id'),
+                    'object_class' => $tv->_class,
+                    'context_key' => $source['context_key'],
+                ),'',true,true);
+            }
+            $sourceElement->set('source',$source['source']);
+            $sourceElement->save();
+        }
+    }
+}
+
+
 /* invoke OnTVFormSave event */
 $modx->invokeEvent('OnTVFormSave',array(
     'mode' => modSystemEvent::MODE_NEW,

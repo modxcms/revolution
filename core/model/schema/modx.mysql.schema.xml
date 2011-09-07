@@ -47,6 +47,7 @@
 
         <aggregate alias="Policy" class="modAccessPolicy" local="policy" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Principal" class="modPrincipal" local="principal" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="MinimumRole" class="modUserGroupRole" local="authority" foreign="authority" owner="local" cardinality="one" />
     </object>
     
     <object class="modAccessAction" table="access_actions" extends="modAccess">
@@ -354,6 +355,7 @@
 
         <composite alias="ContextResources" class="modContextResource" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="ContextSettings" class="modContextSetting" local="key" foreign="context_key" cardinality="many" owner="local" />
+        <composite alias="SourceElements" class="sources.modMediaSourceElement" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessContext" local="key" foreign="target" owner="local" cardinality="many" />
         <validation>
             <rule field="key" name="key" type="preg_match" rule="/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x2d-\x2f\x7f-\xff]*$/" message="context_err_ns_key" />
@@ -938,7 +940,7 @@
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-\s]+(?!\s)$/" message="snippet_err_invalid_name" />
         </validation>
     </object>
-    
+
     <object class="modStaticResource" extends="modResource" />
     
     <object class="modSymLink" extends="modResource" />

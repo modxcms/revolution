@@ -25,7 +25,7 @@
 if (!$modx->hasPermission('save_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv','category');
 
-/* get tv */
+/* @var modTemplateVar $tv */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
 $tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
@@ -179,6 +179,44 @@ if ($modx->hasPermission('access_permissions')) {
         }
     }
 }
+
+/** update sources */
+if (isset($scriptProperties['sources'])) {
+    $sourceElements = $modx->getCollection('sources.modMediaSourceElement',array(
+        'object' => $tv->get('id'),
+        'object_class' => 'modTemplateVar',
+    ));
+    /** @var modMediaSourceElement $sourceElement */
+    foreach ($sourceElements as $sourceElement) {
+        $sourceElement->remove();
+    }
+
+    $sources = $modx->fromJSON($scriptProperties['sources']);
+    //return $modx->error->failure(print_r($sources,true));
+    if (is_array($sources)) {
+        foreach ($sources as $id => $source) {
+            if (!is_array($source)) continue;
+
+            /** @var modMediaSourceElement $sourceElement */
+            $sourceElement = $modx->getObject('sources.modMediaSourceElement',array(
+                'object' => $tv->get('id'),
+                'object_class' => $tv->_class,
+                'context_key' => $source['context_key'],
+            ));
+            if (!$sourceElement) {
+                $sourceElement = $modx->newObject('sources.modMediaSourceElement');
+                $sourceElement->fromArray(array(
+                    'object' => $tv->get('id'),
+                    'object_class' => $tv->_class,
+                    'context_key' => $source['context_key'],
+                ),'',true,true);
+            }
+            $sourceElement->set('source',$source['source']);
+            $sourceElement->save();
+        }
+    }
+}
+
 
 /* invoke OnTVFormSave event */
 $modx->invokeEvent('OnTVFormSave',array(

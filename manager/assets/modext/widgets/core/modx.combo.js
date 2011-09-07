@@ -454,6 +454,7 @@ MODx.combo.Browser = function(config) {
     Ext.applyIf(config,{
        width: 300
        ,triggerAction: 'all'
+       ,source: config.source || 1
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
     this.config = config;
@@ -471,12 +472,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 xtype: 'modx-browser'
                 ,id: Ext.id()
                 ,multiple: true
-                ,prependPath: this.config.prependPath || null
-                ,prependUrl: this.config.prependUrl || null
-                ,basePath: this.config.basePath || ''
-                ,basePathRelative: this.config.basePathRelative || null
-                ,baseUrl: this.config.baseUrl || ''
-                ,baseUrlRelative: this.config.baseUrlRelative || null
+                ,source: this.config.source || 1
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
                 ,allowedFileTypes: this.config.allowedFileTypes || ''
@@ -726,3 +722,66 @@ MODx.combo.Dashboard = function(config) {
 };
 Ext.extend(MODx.combo.Dashboard,MODx.combo.ComboBox);
 Ext.reg('modx-combo-dashboard',MODx.combo.Dashboard);
+
+MODx.combo.MediaSource = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'source'
+        ,hiddenName: 'source'
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id','name','description']
+        ,listWidth: 400
+        ,pageSize: 20
+        ,url: MODx.config.connectors_url+'source/index.php'
+        ,tpl: new Ext.XTemplate('<tpl for=".">'
+            ,'<div class="x-combo-list-item">'
+            ,'<h4 class="modx-combo-title">{name}</h4>'
+            ,'<p class="modx-combo-desc">{description}</p>'
+            ,'</div></tpl>')
+    });
+    MODx.combo.MediaSource.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.MediaSource,MODx.combo.ComboBox);
+Ext.reg('modx-combo-source',MODx.combo.MediaSource);
+
+MODx.combo.MediaSourceType = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'class_key'
+        ,hiddenName: 'class_key'
+        ,displayField: 'name'
+        ,valueField: 'class'
+        ,fields: ['id','class','name','description']
+        ,listWidth: 400
+        ,pageSize: 20
+        ,url: MODx.config.connectors_url+'source/type.php'
+        ,tpl: new Ext.XTemplate('<tpl for=".">'
+            ,'<div class="x-combo-list-item">'
+            ,'<h4 class="modx-combo-title">{name}</h4>'
+            ,'<p class="modx-combo-desc">{description}</p>'
+            ,'</div></tpl>')
+    });
+    MODx.combo.MediaSourceType.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.MediaSourceType,MODx.combo.ComboBox);
+Ext.reg('modx-combo-source-type',MODx.combo.MediaSourceType);
+
+
+MODx.combo.Authority = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'authority'
+        ,hiddenName: 'authority'
+        ,forceSelection: true
+        ,typeAhead: false
+        ,editable: false
+        ,allowBlank: false
+        ,listWidth: 300
+        ,url: MODx.config.connectors_url+'security/role.php'
+        ,baseParams: { action: 'getAuthorityList', addNone: true }
+    });
+    MODx.combo.Authority.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Authority,MODx.combo.ComboBox);
+Ext.reg('modx-combo-authority',MODx.combo.Authority);

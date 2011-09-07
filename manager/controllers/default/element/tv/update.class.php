@@ -6,10 +6,15 @@
  * @subpackage manager.controllers
  */
 class ElementTVUpdateManagerController extends modManagerController {
+    /** @var modCategory $category */
     public $category;
+    /** @var modTemplateVar $tv */
     public $tv;
-    public $tvArray;
+    /** @var array $tvArray */
+    public $tvArray = array();
+    /** @var string $onTVFormRender */
     public $onTVFormRender = '';
+    /** @var string $onTVFormPrerender */
     public $onTVFormPrerender = '';
 
     /**
@@ -82,6 +87,8 @@ class ElementTVUpdateManagerController extends modManagerController {
         $this->tvArray = $this->tv->toArray();
         $this->tvArray['properties'] = $data;
 
+        $this->tvArray['sources'] = $this->getElementSources();
+
         /* load tv into parser */
         $placeholders['tv'] = $this->tv;
 
@@ -89,6 +96,36 @@ class ElementTVUpdateManagerController extends modManagerController {
         $placeholders['onTVFormRender'] = $this->fireRenderEvent();
 
         return $placeholders;
+    }
+
+    public function getElementSources() {
+        $c = $this->modx->newQuery('modContext');
+        $c->leftJoin('sources.modMediaSourceElement','SourceElements',array(
+            'SourceElements.object' => $this->tv->get('id'),
+            'SourceElements.object_class' => $this->tv->_class,
+            'SourceElements.context_key = modContext.key',
+        ));
+        $c->leftJoin('sources.modMediaSource','Source','SourceElements.source = Source.id');
+        $c->select($this->modx->getSelectColumns('modContext','modContext'));
+        $c->select($this->modx->getSelectColumns('sources.modMediaSourceElement','SourceElements'));
+        $c->select($this->modx->getSelectColumns('sources.modMediaSource','Source','',array('name')));
+        $c->where(array(
+            'key:!=' => 'mgr',
+        ));
+        $c->sortby($this->modx->escape('rank'),'ASC');
+        $c->sortby($this->modx->escape('key'),'DESC');
+        $contexts = $this->modx->getCollection('modContext',$c);
+        $list = array();
+        /** @var modContext $context */
+        foreach ($contexts as $context) {
+            $source = $context->get('source');
+            $list[] = array(
+                $context->get('key'),
+                !empty($source) ? $source : 1,
+                $context->get('name'),
+            );
+        }
+        return $list;
     }
 
     /**

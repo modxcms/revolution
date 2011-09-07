@@ -163,10 +163,38 @@ MODx.panel.TV = function(config) {
                     ,'afterRemoveRow': {fn:this.markDirty,scope:this}
                 }
             }]
+        },{
+            title: _('sources')
+            ,id: 'modx-tv-sources-form'
+            ,itemId: 'form-sources'
+            ,bodyStyle: 'padding: 15px;'
+            ,defaults: {autoHeight: true}
+            ,items: [{
+                html: '<p>'+_('tv_sources.intro_msg')+'</p>'
+                ,id: 'modx-tv-sources-msg'
+                ,border: false
+            },{
+                xtype: 'modx-grid-element-sources'
+                ,itemId: 'grid-sources'
+                ,id: 'modx-grid-element-sources'
+                ,tv: config.tv
+                ,preventRender: true
+                ,listeners: {
+                    'rowclick': {fn:this.markDirty,scope:this}
+                    ,'afteredit': {fn:this.markDirty,scope:this}
+                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
+                }
+            }]
         }],{
             id: 'modx-tv-tabs'
             ,forceLayout: true
             ,deferredRender: false
+            ,stateful: true
+            ,stateId: 'modx-tv-tabpanel-'+config.tv
+            ,stateEvents: ['tabchange']
+            ,getState:function() {
+                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            }
         })]
         ,useLoadingMask: true
         ,listeners: {
@@ -184,13 +212,18 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         if (!Ext.isEmpty(this.config.record.name)) {
             Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+this.config.record.name+'</h2>');
         }
+        var d;
         if (!Ext.isEmpty(this.config.record.properties)) {
-            var d = this.config.record.properties;
+            d = this.config.record.properties;
             var g = Ext.getCmp('modx-grid-element-properties');
             if (g) {
                 g.defaultProperties = d;
                 g.getStore().loadData(d);
             }
+        }
+
+        if (!Ext.isEmpty(this.config.record.sources) && !this.initialized) {
+            Ext.getCmp('modx-grid-element-sources').getStore().loadData(this.config.record.sources);
         }
 
         Ext.getCmp('modx-panel-tv-output-properties').showOutputProperties(Ext.getCmp('modx-tv-display'));
@@ -207,9 +240,11 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-tv-template');
         var rg = Ext.getCmp('modx-grid-tv-security');
+        var sg = Ext.getCmp('modx-grid-element-sources');
         Ext.apply(o.form.baseParams,{
             templates: g.encodeModified()
             ,resource_groups: rg.encodeModified()
+            ,sources: sg.encode()
             ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
         });
         this.cleanupEditor();
@@ -221,6 +256,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     ,success: function(r) {
         Ext.getCmp('modx-grid-tv-template').getStore().commitChanges();
         Ext.getCmp('modx-grid-tv-security').getStore().commitChanges();
+        Ext.getCmp('modx-grid-element-sources').getStore().commitChanges();
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
         
@@ -381,7 +417,34 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 }
                 ,scripts: true
             });
-        } catch(e) {console.log(e);}
+        } catch(e) {MODx.debug(e);}
     }
 });
 Ext.reg('modx-panel-tv-output-properties',MODx.panel.TVOutputProperties);
+
+
+MODx.grid.ElementSources = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        id: 'modx-grid-element-sources'
+        ,fields: ['context_key','source','name']
+        ,autoHeight: true
+        ,primaryKey: 'id'
+        ,columns: [{
+            header: _('context')
+            ,dataIndex: 'context_key'
+        },{
+            header: _('source')
+            ,dataIndex: 'source'
+            ,editor: { xtype: 'modx-combo-source' ,renderer: true }
+        }]
+    });
+    MODx.grid.ElementSources.superclass.constructor.call(this,config);
+    this.propRecord = Ext.data.Record.create(['context_key','source']);
+};
+Ext.extend(MODx.grid.ElementSources,MODx.grid.LocalGrid,{
+    getMenu: function() {
+        return [];
+    }
+});
+Ext.reg('modx-grid-element-sources',MODx.grid.ElementSources);

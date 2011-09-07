@@ -286,16 +286,22 @@ class modTemplateVar extends modElement {
             $params = array_merge($params,$outputProperties);
         }
 
-        /* for base_url in image/file tvs */
-        if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
-            $ips = $this->get('input_properties');
-            $fmu = $this->xpdo->getOption('filemanager_url',null,'');
-            $absValCheck = substr($value,0,1) == '/' || substr($value,0,7) == 'http://' || substr($value,0,8) == 'https://';
-            if (empty($ips['baseUrlPrependCheckSlash']) || !($absValCheck)) {
-                if (!empty($ips['baseUrl'])) {
-                    $value = $ips['baseUrl'].$value;
-                } else if (!empty($fmu)) {
-                    $value = $fmu.$value;
+        /* Allow custom source types to manipulate the output URL for image/file tvs */
+        $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types',null,'image,file');
+        $mTypes = explode(',',$mTypes);
+        if (!empty($value) && in_array($this->get('type'),$mTypes)) {
+            $sourceCache = $this->getSourceCache($this->xpdo->context->get('key'));
+            if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
+                $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+                $coreSourceClasses = explode(',',$coreSourceClasses);
+                $classKey = in_array($sourceCache['class_key'],$coreSourceClasses) ? 'sources.'.$sourceCache['class_key'] : $sourceCache['class_key'];
+                if ($this->xpdo->loadClass($classKey)) {
+                    /** @var modMediaSource $source */
+                    $source = $this->xpdo->newObject($classKey);
+                    if ($source) {
+                        $source->fromArray($sourceCache,'',true,true);
+                        $value = $source->prepareOutputUrl($value);
+                    }
                 }
             }
         }

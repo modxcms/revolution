@@ -160,6 +160,55 @@ class modCacheManager extends xPDOCacheManager {
         return $results;
     }
 
+    public function getElementMediaSourceCache(modElement $element,$contextKey, array $options = array()) {
+        $cacheKey = $contextKey.'/source';
+        $sourceCache = $this->get($cacheKey);
+        if (empty($sourceCache)) {
+            $c = $this->modx->newQuery('sources.modMediaSourceElement');
+            $c->innerJoin('sources.modMediaSource','Source');
+            $c->where(array(
+                'modMediaSourceElement.context_key' => $contextKey,
+            ));
+            $c->select($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement'));
+            $c->select(array(
+                'Source.name',
+                'Source.description',
+                'Source.properties',
+                'source_class_key' => 'Source.class_key',
+            ));
+            $c->sortby($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement','',array('object')),'ASC');
+            $sourceElements = $this->modx->getCollection('sources.modMediaSourceElement',$c);
+
+            $coreSourceClasses = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+            $coreSourceClasses = explode(',',$coreSourceClasses);
+            $sourceCache = array();
+            /** @var modMediaSourceElement $sourceElement */
+            foreach ($sourceElements as $sourceElement) {
+                $classKey = $sourceElement->get('source_class_key');
+                $classKey = in_array($classKey,$coreSourceClasses) ? 'sources.'.$classKey : $classKey;
+                /** @var modMediaSource $source */
+                $source = $this->modx->newObject($classKey);
+                $source->fromArray($sourceElement->toArray(),'',true,true);
+                $sourceArray = $source->toArray();
+                $sourceArray = array_merge($source->getPropertyList(),$sourceArray);
+                $sourceArray['class_key'] = $source->_class;
+                $sourceArray['object'] = $source->get('object');
+                $sourceCache[$sourceArray['object']] = $sourceArray;
+            }
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+            $lifetime = (integer) $this->getOption('cache_media_sources_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            if (!$this->set($cacheKey, $sourceCache, $lifetime, $options)) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache source data for ' . $element->get('id') . '.');
+            }
+        }
+        $data = !empty($sourceCache[$element->get('id')]) ? $sourceCache[$element->get('id')] : array();
+        return $data;
+    }
+
     /**
      * Generates the system settings cache for a MODX site.
      *

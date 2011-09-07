@@ -10,6 +10,10 @@ $classes = array(
     'modDashboard',
     'modDashboardWidget',
     'modDashboardWidgetPlacement',
+    'sources.modAccessMediaSource',
+    'sources.modMediaSource',
+    'sources.modMediaSourceElement',
+    'sources.modMediaSourceContext',
 );
 if (!empty($classes)) {
     $this->createTable($classes);
@@ -103,3 +107,6 @@ $description = $this->install->lexicon('add_column',array('column' => 'rank','ta
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'rank'));
 $description = $this->install->lexicon('add_index',array('index' => 'rank','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));
+
+/* media sources upgrades */
+include dirname(dirname(__FILE__)).'/common/2.2-media-sources.php';

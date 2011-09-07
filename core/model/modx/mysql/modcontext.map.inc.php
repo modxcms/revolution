@@ -91,6 +91,14 @@ $xpdo_meta_map['modContext']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'SourceElements' => 
+    array (
+      'class' => 'sources.modMediaSourceElement',
+      'local' => 'key',
+      'foreign' => 'context_key',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
     'Acls' => 
     array (
       'class' => 'modAccessContext',

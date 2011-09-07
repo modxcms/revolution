@@ -643,7 +643,7 @@
 
         <aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modMenu" table="menus" extends="modAccessibleObject">
         <field key="text" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="pk" />
         <field key="parent" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />

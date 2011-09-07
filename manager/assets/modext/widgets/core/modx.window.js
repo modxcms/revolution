@@ -131,6 +131,9 @@ Ext.extend(MODx.Window,Ext.Window,{
             ,bodyBorder: false
             ,autoHeight: true
             ,errorReader: MODx.util.JSONReader
+            ,defaults: this.config.formDefaults || {
+                msgTarget: this.config.msgTarget || 'under'
+            }
             ,url: this.config.url
             ,baseParams: this.config.baseParams || {}
             ,fileUpload: this.config.fileUpload || false

@@ -541,6 +541,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'sources',
+    'description' => 'perm.sources_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'steal_locks',
     'description' => 'perm.steal_locks_desc',
     'value' => true,
