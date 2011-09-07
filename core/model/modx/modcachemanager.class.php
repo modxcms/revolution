@@ -169,17 +169,26 @@ class modCacheManager extends xPDOCacheManager {
             $c->where(array(
                 'modMediaSourceElement.context_key' => $contextKey,
             ));
-            $c->select($this->modx->getSelectColumns('sources.modMediaSource','Source'));
-            $c->select($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement','',array(
-                 'source',
-                 'object',
-                 'object_class',
-            )));
-            $sources = $this->modx->getCollection('sources.modMediaSourceElement',$c);
+            $c->select($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement'));
+            $c->select(array(
+                'Source.name',
+                'Source.description',
+                'Source.properties',
+                'source_class_key' => 'Source.class_key',
+            ));
+            $c->sortby($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement','',array('object')),'ASC');
+            $sourceElements = $this->modx->getCollection('sources.modMediaSourceElement',$c);
 
+            $coreSourceClasses = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+            $coreSourceClasses = explode(',',$coreSourceClasses);
             $sourceCache = array();
-            /** @var modMediaSource $source */
-            foreach ($sources as $source) {
+            /** @var modMediaSourceElement $sourceElement */
+            foreach ($sourceElements as $sourceElement) {
+                $classKey = $sourceElement->get('source_class_key');
+                $classKey = in_array($classKey,$coreSourceClasses) ? 'sources.'.$classKey : $classKey;
+                /** @var modMediaSource $source */
+                $source = $this->modx->newObject($classKey);
+                $source->fromArray($sourceElement->toArray(),'',true,true);
                 $sourceArray = $source->toArray();
                 $sourceArray = array_merge($source->getPropertyList(),$sourceArray);
                 $sourceArray['class_key'] = $source->_class;
