@@ -8,7 +8,11 @@
  * @param integer $limit (optional) The number of records to limit to. Defaults
  * to 10.
  * @param string $sort (optional) The column to sort by.
- * @param string $dir (optional) The direction of the sort. Default
+ * @param string $dir (optional) The direction of the sort. Defaults to ASC.
+ *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var modProcessor $this
  *
  * @package modx
  * @subpackage processors.security.access.policy
@@ -66,6 +70,7 @@ if (isset($scriptProperties['combo'])) {
 
 $core = array('Resource','Object','Administrator','Load Only','Load, List and View');
 
+/** @var modAccessPolicy $policy */
 foreach ($policies as $key => $policy) {
     $policyArray = $policy->toArray();
     $cls = 'pedit';
@@ -76,8 +81,10 @@ foreach ($policies as $key => $policy) {
     if (!empty($policyArray['total_permissions'])) {
         $data = $policy->get('data');
         $ct = 0;
-        foreach ($data as $k => $v) {
-            if (!empty($v)) $ct++;
+        if (!empty($data)) {
+            foreach ($data as $k => $v) {
+                if (!empty($v)) $ct++;
+            }
         }
         $policyArray['active_permissions'] = $ct;
         $policyArray['active_of'] = $modx->lexicon('active_of',array(
