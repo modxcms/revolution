@@ -76,6 +76,11 @@ abstract class xPDOGenerator {
      */
     public $platformTemplate= '';
     /**
+     * @var string $metaTemplate The class platform template string to build
+     * the meta class map files from.
+     */
+    public $metaTemplate= '';
+    /**
      * @var string $mapHeader The map header string to build the map files from.
      */
     public $mapHeader= '';
@@ -108,6 +113,10 @@ abstract class xPDOGenerator {
      * @var string $indexName A placeholder for the current index name.
      */
     public $indexName= '';
+    /**
+     * @var string $aliasKey A placeholder for the current alias key.
+     */
+    public $aliasKey= '';
 
     /**
      * Constructor
@@ -236,6 +245,7 @@ abstract class xPDOGenerator {
             $path .= strtr($this->model['package'], '.', '/');
             $path .= '/';
         }
+        $this->outputMeta($path);
         $this->outputClasses($path);
         $this->outputMaps($path);
         if ($compile) $this->compile($path, $this->model, $this->classes, $this->maps);
@@ -320,6 +330,20 @@ abstract class xPDOGenerator {
                         default :
                             if ($attrName == 'dbtype') $dbtype = $attrValue;
                             $this->map[$this->className]['fieldMeta'][$this->fieldKey][$attrName]= $attrValue;
+                            break;
+                    }
+                }
+                break;
+            case 'alias' :
+                while (list ($attrName, $attrValue)= each($attributes)) {
+                    switch ($attrName) {
+                        case 'key':
+                            $this->aliasKey= "{$attrValue}";
+                            break;
+                        case 'field':
+                            $this->map[$this->className]['fieldAliases'][$this->aliasKey]= $attrValue;
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -608,6 +632,66 @@ abstract class xPDOGenerator {
     }
 
     /**
+     * Write the generated meta map to the specified path.
+     * 
+     * @param string $path An absolute path to write the generated maps to.
+     * @return bool
+     */
+    public function outputMeta($path) {
+        if (!is_dir($path)) {
+            if ($this->manager->xpdo->getCacheManager()) {
+                if (!$this->manager->xpdo->cacheManager->writeTree($path)) {
+                    $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create model directory at {$path}");
+                    return false;
+                }
+            }
+        }
+        $placeholders = array();
+        
+        $model= $this->model;
+        if (isset($this->model['phpdoc-package'])) {
+            $model['phpdoc-package']= '@package ' . $this->model['phpdoc-package'];
+            if (isset($this->model['phpdoc-subpackage']) && !empty($this->model['phpdoc-subpackage'])) {
+                $model['phpdoc-subpackage']= '@subpackage ' . $this->model['phpdoc-subpackage'] . '.' . $this->model['platform'];
+            } else {
+                $model['phpdoc-subpackage']= '@subpackage ' . $this->model['platform'];
+            }
+        } else {
+            $basePos= strpos($this->model['package'], '.');
+            $package= $basePos
+                ? substr($this->model['package'], 0, $basePos)
+                : $this->model['package'];
+            $subpackage= $basePos
+                ? substr($this->model['package'], $basePos + 1) . '.' . $this->model['platform']
+                : $this->model['platform'];
+            $model['phpdoc-package']= '@package ' . $package;
+            $model['phpdoc-subpackage']= '@subpackage ' . $subpackage;
+        }
+        $placeholders = array_merge($placeholders,$model);
+        
+        $classMap = array();
+        $skipClasses = array('xPDOObject','xPDOSimpleObject');
+        foreach ($this->classes as $className => $meta) {
+            if (isset($meta['extends']) && !in_array($meta['extends'],$skipClasses)) {
+                if (!isset($classMap[$meta['extends']])) {
+                    $classMap[$meta['extends']] = array();
+                }
+                $classMap[$meta['extends']][] = $className;
+            }
+        }
+        if ($this->manager->xpdo->getCacheManager()) {
+            $placeholders['map'] = var_export($classMap,true);
+            $replaceVars = array();
+            foreach ($placeholders as $varKey => $varValue) {
+                if (is_scalar($varValue)) $replaceVars["[+{$varKey}+]"]= $varValue;
+            }
+            $fileContent= str_replace(array_keys($replaceVars), array_values($replaceVars), $this->getMetaTemplate());
+            $this->manager->xpdo->cacheManager->writeFile("{$path}/metadata.{$model['platform']}.php",$fileContent);
+        }
+        return true;
+    }
+
+    /**
      * Compile the packages into a single file for quicker loading.
      *
      * @abstract
@@ -671,5 +755,21 @@ EOD;
     public function getMapFooter() {
         if ($this->mapFooter) return $this->mapFooter;
         return '';
+    }
+
+
+    /**
+     * Gets the meta template.
+     *
+     * @access public
+     * @return string The meta template.
+     */
+    public function getMetaTemplate() {
+        if ($this->metaTemplate) return $this->metaTemplate;
+        $tpl= <<<EOD
+<?php
+\n\$xpdo_meta_map = [+map+];
+EOD;
+        return $tpl;
     }
 }
