@@ -4,6 +4,8 @@
  * @subpackage sources.mysql
  */
 /**
+ * Handles ACL integration into Media Sources
+ * 
  * @package modx
  * @subpackage sources.mysql
  */

@@ -5,7 +5,22 @@
  */
 /**
  * An abstract base class used for determining functionality of different media source drivers. Extend this class in
- * your driver implementations to provide custom functionality for different types of media sources.
+ * your driver implementations to provide custom functionality for different types of media sources. The methods that
+ * you can override for basic functionality are the following:
+ *
+ * * getDefaultProperties - For a list of default properties for your driver
+ * * getFilesInDirectory - For the thumbnail view of MODx.Browser
+ * * getFolderList - This is the main tree view for the Files tab and MODx.Browser
+ * * removeFile - For removing a file
+ * * removeFolder - For removing a folder
+ * * renameFile - For renaming a file
+ * * renameFolder - For renaming a folder
+ * * updateFile - For updating, or saving the contents of, a file
+ * * uploadToFolder - Handle an array of files to be uploaded to a folder
+ *
+ * Of course, in your getFolderList method, you can define the context menu items for the tree, so not all of these
+ * methods might need to be implemented, depending on your situation. You can also provide custom actions for your
+ * source type, depending on the behavior you might need.
  * 
  * @package modx
  * @subpackage sources

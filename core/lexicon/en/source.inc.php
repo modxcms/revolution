@@ -53,7 +53,9 @@ $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
+$_lang['prop_s3.key_desc'] = 'The Amazon key for authentication to the bucket.';
 $_lang['prop_s3.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
+$_lang['prop_s3.secret_key_desc'] = 'The Amazon secret key for authentication to the bucket.';
 $_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
 $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';

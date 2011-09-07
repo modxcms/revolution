@@ -22,9 +22,10 @@ class modS3MediaSource extends modMediaSource {
      */
     public function initialize() {
         parent::initialize();
+        $properties = $this->getPropertyList();
         if (!defined('AWS_KEY')) {
-            define('AWS_KEY',$this->xpdo->getOption('aws.key',null,''));
-            define('AWS_SECRET_KEY',$this->xpdo->getOption('aws.secret_key',null,''));
+            define('AWS_KEY',$this->xpdo->getOption('key',$properties,''));
+            define('AWS_SECRET_KEY',$this->xpdo->getOption('secret_key',$properties,''));
             /* (Not needed at this time)
             define('AWS_ACCOUNT_ID',$modx->getOption('aws.account_id',$config,''));
             define('AWS_CANONICAL_ID',$modx->getOption('aws.canonical_id',$config,''));
@@ -37,7 +38,7 @@ class modS3MediaSource extends modMediaSource {
         include_once $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
 
         $this->getDriver();
-        $this->setBucket($this->xpdo->getOption('aws.default_bucket',$config,''));
+        $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
     }
 
     /**
@@ -524,6 +525,22 @@ class modS3MediaSource extends modMediaSource {
                 'name' => 'bucket',
                 'desc' => 'prop_s3.bucket_desc',
                 'type' => 'textfield',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ),
+            'key' => array(
+                'name' => 'key',
+                'desc' => 'prop_s3.key_desc',
+                'type' => 'password',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ),
+            'secret_key' => array(
+                'name' => 'secret_key',
+                'desc' => 'prop_s3.secret_key_desc',
+                'type' => 'password',
                 'options' => '',
                 'value' => '',
                 'lexicon' => 'core:source',

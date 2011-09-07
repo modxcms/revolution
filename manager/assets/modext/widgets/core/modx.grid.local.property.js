@@ -25,12 +25,18 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
     ,initEditor: function(cm,ci,ri,r) {
         cm.setEditable(ci,true);
         var xtype = this.config.dynProperty;
+        var o;
         if (r[xtype] == 'list') {
-            var o = this.createCombo(r);
+            o = this.createCombo(r);
         } else {
             var z = {};
             z[xtype] = r[xtype] || 'textfield';
-            var o = Ext.ComponentMgr.create(z);
+            try {
+                o = Ext.ComponentMgr.create(z);
+            } catch (e) {
+                z[xtype] = 'textfield';
+                o = MODx.load(z);
+            }
         }
         var ed = new Ext.grid.GridEditor(o);
         cm.setEditor(ci,ed);
@@ -48,6 +54,9 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
         } else if (r[xtype] === 'datefield') {
             f = Ext.util.Format.dateRenderer('Y-m-d');
             oz = f(v);
+        } else if (r[xtype] === 'password') {
+            f = this.rendPassword;
+            oz = f(v,md);
         } else if (r[xtype].substr(0,5) == 'combo' || r[xtype] == 'list' || r[xtype].substr(0,9) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);

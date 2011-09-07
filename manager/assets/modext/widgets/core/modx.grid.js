@@ -583,6 +583,8 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
                     } else if (r === 'boolean') {
                         c[i].renderer = this.rendYesNo;
+                    } else if (r === 'password') {
+                        c[i].renderer = this.rendPassword;
                     } else if (r === 'local' && typeof(c[i].renderer) == 'string') {
                         c[i].renderer = eval(c[i].renderer);
                     }
@@ -721,6 +723,14 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                 c.css = 'green';
                 return _('yes');
         }
+    }
+
+    ,rendPassword: function(v,md) {
+        var z = '';
+        for (i=0;i<v.length;i++) {
+            z = z+'*';
+        }
+        return z;
     }
 });
 Ext.reg('grid-local',MODx.grid.LocalGrid);
