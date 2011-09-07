@@ -7,8 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Access Permissions';
-$_lang['access_add'] = 'Add User Group';
-$_lang['access_remove'] = 'Remove Access';
 $_lang['base_path'] = 'Base Path';
 $_lang['base_path_relative'] = 'Base Path Relative?';
 $_lang['base_url'] = 'Base URL';
@@ -17,6 +15,10 @@ $_lang['minimum_role'] = 'Minimum Role';
 $_lang['path_options'] = 'Path Options';
 $_lang['policy'] = 'Policy';
 $_lang['source'] = 'Media Source';
+$_lang['source_access_add'] = 'Add User Group';
+$_lang['source_access_remove'] = 'Remove Access';
+$_lang['source_access_remove_confirm'] = 'Are you sure you want to remove Access to this Source for this User Group?';
+$_lang['source_access_update'] = 'Update Access';
 $_lang['source_create'] = 'Create New Media Source';
 $_lang['source_properties.intro_msg'] = 'Manage the properties for this Source below.';
 $_lang['source_remove'] = 'Remove Media Source';

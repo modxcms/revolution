@@ -19,7 +19,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             ,{ header: _('policy') ,dataIndex: 'policy_name' ,width: 175 }
         ]
         ,tbar: [{
-            text: _('access_add')
+            text: _('source_access_add')
             ,scope: this
             ,handler: this.createAcl
         }]
@@ -66,7 +66,19 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
                 ,acl: r.id
                 ,record: r
                 ,listeners: {
-                    'success': {fn:this.refresh,scope:this}
+                    'success': {fn:function(vs) {
+                        var s = this.getStore();
+                        var rec;
+                        try {
+                            rec = s.getAt(s.find('id',vs.id));
+                        } catch(e) {}
+                        if (rec) {
+                            for (var k in vs) {
+                                rec.set(k,vs[k]);
+                            }
+                            rec.commit();
+                        }
+                    },scope:this}
                 }
             });
         }
@@ -76,8 +88,8 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
 
     ,removeAcl: function(itm,e) {
         MODx.msg.confirm({
-            title: _('access_remove')
-            ,text: _('access_confirm_remove')
+            title: _('source_access_remove')
+            ,text: _('source_access_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'removeAcl'
@@ -90,11 +102,16 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
         });
     }
     ,getMenu: function() {
-        var m = [{
-            text: _('access_remove')
-            ,handler: this.remove
+        return [{
+            text: _('source_access_update')
+            ,handler: this.editAcl
+        },{
+            text: _('source_access_remove')
+            ,handler: this.remove.createDelegate(this,[{
+                title: _('source_access_remove')
+                ,text: _('source_access_remove_confirm')
+            }])
         }];
-        return m;
     }
 
 });
@@ -105,12 +122,17 @@ MODx.window.UpdateSourceAccess = function(config) {
     var r = config.record;
     this.ident = config.ident || 'uactx'+Ext.id();
     Ext.applyIf(config,{
-        title: _('access_update')
+        title: _('source_access_update')
         ,height: 250
         ,width: 350
         ,type: 'modAccessMediaSource'
         ,acl: 0
         ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-'+this.ident+'-id'
+            ,value: r.id
+        },{
             xtype: 'hidden'
             ,name: 'target'
             ,id: 'modx-'+this.ident+'-target'
@@ -139,7 +161,7 @@ MODx.window.UpdateSourceAccess = function(config) {
             ,name: 'authority'
             ,hiddenName: 'authority'
             ,id: 'modx-'+this.ident+'-authority'
-            ,width: 40
+            ,anchor: '90%'
             ,value: r.authority
         },{
             xtype: 'modx-combo-policy'
@@ -167,7 +189,30 @@ MODx.window.UpdateSourceAccess = function(config) {
     });
     MODx.window.UpdateSourceAccess.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.UpdateSourceAccess,MODx.Window);
+Ext.extend(MODx.window.UpdateSourceAccess,MODx.Window,{
+    submit: function() {
+        var f = this.fp.getForm();
+        var prf = f.findField('principal');
+        var pof = f.findField('policy');
+        var auf = f.findField('authority');
+        var r = f.getValues();
+
+        if (prf) { r.principal_name = prf.getRawValue(); }
+        if (pof) { r.policy_name = pof.getRawValue(); }
+        if (auf) { r.authority_name = auf.getRawValue(); }
+
+        if (this.fp.getForm().isValid()) {
+            if (this.fireEvent('success',r)) {
+                this.fp.getForm().reset();
+                this.hide();
+                return true;
+            }
+        } else {
+            MODx.msg.alert(_('error'),_('user_err_ns'));
+        }
+        return true;
+    }
+});
 Ext.reg('modx-window-source-access-update',MODx.window.UpdateSourceAccess);
 
 
@@ -176,7 +221,7 @@ MODx.window.CreateSourceAccess = function(config) {
     var r = config.record;
     this.ident = config.ident || 'cactx'+Ext.id();
     Ext.applyIf(config,{
-        title: _('access_add')
+        title: _('source_access_add')
         ,height: 250
         ,width: 350
         ,type: 'modAccessMediaSource'
