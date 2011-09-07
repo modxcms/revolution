@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5665] Remove console.log debug references in JS
 - Add Media Sources, which allow abstraction of file management in MODX
 - [#2737] Centralize logic for changing Context of modResource Children
 - [#5068] Move token check for new resources below error validation in processor to prevent bogus duplicate resource issue

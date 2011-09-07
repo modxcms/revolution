@@ -398,7 +398,7 @@ MODx.window.ExportLexicon = function(config) {
                         cle.store.baseParams['namespace'] = cb.getValue();
                         cle.setValue('');
                         cle.store.reload();
-                    } else {console.log('cle not found');}
+                    } else {MODx.debug('cle not found');}
                 },scope:this}
             }
         },{
@@ -454,7 +454,7 @@ MODx.window.LexiconEntryCreate = function(config) {
                         cle.store.baseParams['namespace'] = cb.getValue();
                         cle.setValue('');
                         cle.store.reload();
-                    } else {console.log('cle not found');}
+                    } else {MODx.debug('cle not found');}
                 },scope:this}
             }
         },{
