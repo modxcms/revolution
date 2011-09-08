@@ -120,8 +120,35 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var p = n.getPath('text');
         Ext.state.Manager.set(this.treestate_id,p);
     }
-    ,_handleDrop: function(e) { return false; }
+    ,_2handleDrop: function(e) {
 
+    }
+
+    ,_handleDrag: function(dropEvent) {
+        var from = dropEvent.dropNode.attributes.id;
+        var to = dropEvent.target.attributes.id;
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                source: this.config.baseParams.source
+                ,from: from
+                ,to: to
+                ,action: this.config.sortAction || 'sort'
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    var el = dropEvent.dropNode.getUI().getTextEl();
+                    if (el) {Ext.get(el).frame();}
+                    this.fireEvent('afterSort',{event:dropEvent,result:r});
+                },scope:this}
+                ,'failure': {fn:function(r) {
+                    MODx.form.Handler.errorJSON(r);
+                    this.refresh();
+                    return false;
+                },scope:this}
+            }
+        });
+    }
     
     ,getPath:function(node) {
         var path, p, a;

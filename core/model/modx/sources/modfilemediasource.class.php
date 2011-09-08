@@ -633,6 +633,56 @@ class modFileMediaSource extends modMediaSource {
     }
 
     /**
+     * Move a file or folder to a specific location
+     *
+     * @param string $from The location to move from
+     * @param string $to The location to move to
+     * @return boolean
+     */
+    public function moveObject($from,$to) {
+        $success = false;
+        $fromBases = $this->getBases($from);
+        $toBases = $this->getBases($to);
+
+        $fromPath = $fromBases['pathAbsolute'].$from;
+        $toPath = $toBases['pathAbsolute'].$to;
+
+        /* verify source path */
+        if (!file_exists($fromPath)) {
+            $this->addError('from',$this->xpdo->lexicon('file_err_nf').': '.$fromPath);
+        }
+        /** @var modFileSystemResource $fromObject */
+        $fromObject = $this->fileHandler->make($fromPath);
+        if (!$fromObject->isReadable() || !$fromObject->isWritable()) {
+            $this->addError('from',$this->xpdo->lexicon('file_err_nf').': '.$fromPath);
+            return $success;
+        }
+
+        /* verify target path */
+        if (!file_exists($toPath)) {
+            $this->addError('to',$this->xpdo->lexicon('file_folder_err_invalid').': '.$toPath);
+        }
+        /** @var modDirectory $toObject */
+        $toObject = $this->fileHandler->make($toPath);
+        if (!($toObject instanceof modDirectory)) {
+            $this->addError('mode',$this->xpdo->lexicon('file_folder_err_invalid').': '.$toPath);
+            return $success;
+        }
+        if (!$toObject->isReadable() || !$toObject->isWritable()) {
+            $this->addError('to',$this->xpdo->lexicon('file_folder_err_invalid').': '.$toPath);
+            return $success;
+        }
+
+        /* now move object */
+        $newPath = rtrim($toPath,'/').'/'.basename($fromPath);
+        $success = $fromObject->rename($newPath);
+        if (!$success) {
+            $this->addError('from',$this->xpdo->lexicon('file_err_chmod'));
+        }
+        return $success;
+    }
+
+    /**
      * Get a list of files in a specific directory.
      *
      * @param string $dir

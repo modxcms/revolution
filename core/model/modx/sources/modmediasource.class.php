@@ -263,7 +263,22 @@ class modMediaSource extends modAccessibleSimpleObject {
      */
     public function getOpenTo($value,array $parameters = array()) {
         $properties = $this->getPropertyList();
-        return $properties['baseUrl'].dirname($value).'/';
+        $openTo = dirname($value).'/';
+        if (!empty($properties['baseUrl'])) {
+            $openTo = $properties['baseUrl'].$openTo;
+        }
+        return $openTo;
+    }
+
+    /**
+     * Move a file or folder to a specific location
+     * 
+     * @param string $from The location to move from
+     * @param string $to The location to move to
+     * @return boolean
+     */
+    public function moveObject($from,$to) {
+        return true;
     }
 
     /**

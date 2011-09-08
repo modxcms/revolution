@@ -509,6 +509,60 @@ class modS3MediaSource extends modMediaSource {
     }
 
     /**
+     * Move a file or folder to a specific location
+     *
+     * @param string $from The location to move from
+     * @param string $to The location to move to
+     * @return boolean
+     */
+    public function moveObject($from,$to) {
+        $this->xpdo->lexicon->load('source');
+        $success = false;
+
+        if (substr(strrev($from),0,1) == '/') {
+            $this->xpdo->error->message = $this->xpdo->lexicon('s3_no_move_folder',array(
+                'from' => $from
+            ));
+            return $success;
+        }
+
+        if (!$this->driver->if_object_exists($this->bucket,$from)) {
+            $this->xpdo->error->message = $this->xpdo->lexicon('file_err_ns').': '.$from;
+            return $success;
+        }
+
+        if ($to != '/') {
+            if (!$this->driver->if_object_exists($this->bucket,$to)) {
+                $this->xpdo->error->message = $this->xpdo->lexicon('file_err_ns').': '.$to;
+                return $success;
+            }
+            $toPath = rtrim($to,'/').'/'.basename($from);
+        } else {
+            $toPath = basename($from);
+        }
+        
+        $response = $this->driver->copy_object(array(
+            'bucket' => $this->bucket,
+            'filename' => $from,
+        ),array(
+            'bucket' => $this->bucket,
+            'filename' => $toPath,
+        ),array(
+            'acl' => AmazonS3::ACL_PUBLIC,
+        ));
+        $success = $response->isOK();
+
+        if ($success) {
+            $deleteResponse = $this->driver->delete_object($this->bucket,$from);
+            $success = $deleteResponse->isOK();
+        } else {
+            $this->xpdo->error->message = $this->xpdo->lexicon('file_folder_err_rename').': '.$to.' -> '.$from;
+        }
+
+        return $success;
+    }
+
+    /**
      * @return array
      */
     public function getDefaultProperties() {

@@ -60,3 +60,4 @@ $_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
+$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
