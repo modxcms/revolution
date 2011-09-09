@@ -89,15 +89,16 @@ class modUserGroup extends xPDOSimpleObject {
      * Get all users in a user group.
      *
      * @access public
+     * @param array $criteria
      * @return array An array of {@link modUser} objects.
      */
     public function getUsersIn(array $criteria = array()) {
         $c = $this->xpdo->newQuery('modUser');
-        $c->select('
-            modUser.*,
-            UserGroupRole.name AS role,
-            UserGroupRole.name AS role_name
-        ');
+        $c->select($this->xpdo->getSelectColumns('modUser','modUser'));
+        $c->select(array(
+            'role' => 'UserGroupRole.name',
+            'role_name' => 'UserGroupRole.name',
+        ));
         $c->innerJoin('modUserGroupMember','UserGroupMembers');
         $c->leftJoin('modUserGroupRole','UserGroupRole','UserGroupMembers.role = UserGroupRole.id');
         $c->where(array(

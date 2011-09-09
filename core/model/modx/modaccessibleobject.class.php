@@ -17,13 +17,14 @@ class modAccessibleObject extends xPDOObject {
     /**
      * Custom instance from row loader that respects policy checking
      *
-     * @param xPDO $xpdo A reference to the xPDO/modX object.
+     * @param xPDO|modX $xpdo A reference to the xPDO/modX object.
      * @param string $className The name of the class by which to grab the instance from
      * @param mixed $criteria A criteria to use when grabbing this instance
      * @param int $row The row to select
      * @return modAccessibleObject|null An instance of the object
      */
     public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
+        /** @var modAccessibleObject $instance */
         $instance = xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row);
         if ($instance instanceof modAccessibleObject && !$instance->checkPolicy('load')) {
             if ($xpdo instanceof modX) {
