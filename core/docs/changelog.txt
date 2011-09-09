@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5671] Add :toPlaceholder, :cssToHead, :htmlToHead, :htmlToBottom, :jsToHead, :jsToBottom output filters
 - Add delete user button to user editing page toolbar
 - [#5542] Add ability to drag/drop files and folders in the Files tab
 - [#5665] Remove console.log debug references in JS
