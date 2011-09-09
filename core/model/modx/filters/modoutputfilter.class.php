@@ -544,15 +544,6 @@ class modOutputFilter {
                             $output = urldecode($output);
                             break;
 
-                        case '':
-                            /*
-                            :csstohead $modx->regClientCSS($m_val);
-:htmltobottom $modx->regClientHTMLBlock($m_val);
-:htmltohead $modx->regClientStartupHTMLBlock($m_val);
-:jslinktobottom $modx->regClientScript($m_val)
-*/
-
-                            break;
                         case 'toPlaceholder':
                             $this->modx->toPlaceholder($m_val,$output);
                             break;
