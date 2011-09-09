@@ -352,7 +352,11 @@ class modOutputFilter {
                             /* Returns input divided by option (default: /2) */
                             if (empty($m_val))
                                 $m_val = 2;
-                            $output = (float)$output / (float)$m_val;
+                            if (!empty($output)) {
+                                $output = (float)$output / (float)$m_val;
+                            } else {
+                                $output = 0;
+                            }
                             break;
 
                         case 'modulus':

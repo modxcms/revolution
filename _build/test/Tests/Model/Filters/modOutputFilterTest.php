@@ -43,6 +43,131 @@ class modOutputFilterTest extends MODxTestCase {
     }
 
     /**
+     * Tests the :cat filter
+     *
+     * @param string $value
+     * @param string $string
+     * @param string $expected
+     * @dataProvider providerCat
+     */
+    public function testCat($value,$string,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:cat=`'.$string.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerCat() {
+        return array(
+            array('','',''),
+            array('This dog',' went home','This dog went home'),
+            array('','hello?','hello?'),
+        );
+    }
+
+    /**
+     * Tests the :uppercase filter
+     *
+     * @param string $value
+     * @param string $expected
+     * @dataProvider providerUppercase
+     */
+    public function testUppercase($value,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:uppercase');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerUppercase() {
+        return array(
+            array('',''),
+            array('ALREADY THERE','ALREADY THERE'),
+            array('booyah','BOOYAH'),
+            array('i\'m not yelling','I\'M NOT YELLING'),
+        );
+    }
+
+    /**
+     * Tests the :lowercase filter
+     *
+     * @param string $value
+     * @param string $expected
+     * @dataProvider providerLowercase
+     */
+    public function testLowercase($value,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:lowercase');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerLowercase() {
+        return array(
+            array('',''),
+            array('BOOYAH','booyah'),
+            array('BoOyAh','booyah'),
+            array('THiS CaT WENt To THe  cITy','this cat went to the  city'),
+        );
+    }
+
+    /**
+     * Tests the :ucwords filter
+     *
+     * @param string $value
+     * @param string $expected
+     * @dataProvider providerUCWords
+     */
+    public function testUCWords($value,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:ucwords');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerUCWords() {
+        return array(
+            array('',''),
+            array('test','Test'),
+            array('A big fat elephant','A Big Fat Elephant'),
+            array('Have you read a Dr. Seuss Book?','Have You Read A Dr. Seuss Book?'),
+        );
+    }
+
+    /**
+     * Tests the :ucfirst filter
+     *
+     * @param string $value
+     * @param string $expected
+     * @dataProvider providerUCFirst
+     */
+    public function testUCFirst($value,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:ucfirst');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerUCFirst() {
+        return array(
+            array('',''),
+            array('test','Test'),
+            array('green eggers and hammond','Green eggers and hammond'),
+            array('bocce ball, anyone?','Bocce ball, anyone?'),
+        );
+    }
+
+    /**
      * Tests the :stripString filter
      *
      * @param string $value
@@ -240,6 +365,186 @@ class modOutputFilterTest extends MODxTestCase {
 goes here','A test paragraph<br />
 goes here'),
             array('',''),
+        );
+    }
+
+    /**
+     * Tests the :add filter
+     *
+     * @param string $value
+     * @param int $add
+     * @param string $expected
+     * @dataProvider providerAdd
+     */
+    public function testAdd($value,$add,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:add=`'.$add.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerAdd() {
+        return array(
+            array('',0,1),
+            array('123',1,124),
+            array(-1,1,0),
+            array(5,-1,4),
+        );
+    }
+
+    /**
+     * Tests the :subtract filter
+     *
+     * @param string $value
+     * @param int $add
+     * @param string $expected
+     * @dataProvider providerSubtract
+     */
+    public function testSubtract($value,$add,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:subtract=`'.$add.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerSubtract() {
+        return array(
+            array('',0,-1),
+            array('123',1,122),
+            array(-1,1,-2),
+            array(1,1,0),
+            array(5,-1,6),
+        );
+    }
+
+    /**
+     * Tests the :multiply filter
+     *
+     * @param string $value
+     * @param int $multiplier
+     * @param string $expected
+     * @dataProvider providerMultiply
+     */
+    public function testMultiply($value,$multiplier,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:multiply=`'.$multiplier.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerMultiply() {
+        return array(
+            array('',0,0),
+            array(1,5,5),
+            array(4,7,28),
+            array('100',2,200),
+        );
+    }
+
+    /**
+     * Tests the :divide filter
+     *
+     * @param string $value
+     * @param int $divider
+     * @param string $expected
+     * @dataProvider providerDivide
+     */
+    public function testDivide($value,$divider,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:divide=`'.$divider.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerDivide() {
+        return array(
+            array(1,0,.5),
+            array(0,0,0),
+            array(10,5,2),
+        );
+    }
+
+    /**
+     * Tests the :divide filter
+     *
+     * @param string $value
+     * @param int $modulus
+     * @param string $expected
+     * @dataProvider providerModulus
+     */
+    public function testModulus($value,$modulus,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:modulus=`'.$modulus.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerModulus() {
+        return array(
+            array(4,2,0),
+            array(9,3,0),
+            array(0,0,0),
+            array(4,3,1),
+            array(10,4,2),
+        );
+    }
+
+    /**
+     * Tests the :default filter
+     *
+     * @param string $value
+     * @param int $default
+     * @param string $expected
+     * @dataProvider providerDefault
+     */
+    public function testDefault($value,$default,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:default=`'.$default.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerDefault() {
+        return array(
+            array('','foo','foo'),
+            array('z','a','z'),
+        );
+    }
+
+    /**
+     * Tests the :notempty filter
+     *
+     * @param string $value
+     * @param int $default
+     * @param string $expected
+     * @dataProvider providerNotEmpty
+     */
+    public function testNotEmpty($value,$default,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:notempty=`'.$default.'`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerNotEmpty() {
+        return array(
+            array('','foo',''),
+            array('z','a','a'),
+            array('name','John','John'),
         );
     }
 
