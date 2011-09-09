@@ -441,6 +441,7 @@ class modUser extends modPrincipal {
     public function getSettings() {
         $settings = array();
         $uss = $this->getMany('UserSettings');
+        /** @var modUserSetting $us */
         foreach ($uss as $us) {
             $settings[$us->get('key')] = $us->get('value');
         }
@@ -560,29 +561,32 @@ class modUser extends modPrincipal {
         $joined = false;
 
         $groupPk = is_string($groupId) ? array('name' => $groupId) : $groupId;
-        $usergroup = $this->xpdo->getObject('modUserGroup',$groupPk);
-        if ($usergroup == null) {
+        /** @var modUserGroup $userGroup */
+        $userGroup = $this->xpdo->getObject('modUserGroup',$groupPk);
+        if (empty($userGroup)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User Group not found with key: '.$groupId);
             return $joined;
         }
 
+        /** @var modUserGroupRole $role */
         if (!empty($roleId)) {
             $rolePk = is_string($roleId) ? array('name' => $roleId) : $roleId;
             $role = $this->xpdo->getObject('modUserGroupRole',$rolePk);
-            if ($role == null) {
+            if (empty($role)) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Role not found with key: '.$role);
                 return $joined;
             }
         }
 
+        /** @var modUserGroupMember $member */
         $member = $this->xpdo->getObject('modUserGroupMember',array(
             'member' => $this->get('id'),
-            'user_group' => $usergroup->get('id'),
+            'user_group' => $userGroup->get('id'),
         ));
         if (empty($member)) {
             $member = $this->xpdo->newObject('modUserGroupMember');
             $member->set('member',$this->get('id'));
-            $member->set('user_group',$usergroup->get('id'));
+            $member->set('user_group',$userGroup->get('id'));
             if (!empty($role)) {
                 $member->set('role',$role->get('id'));
             }
@@ -616,13 +620,13 @@ class modUser extends modPrincipal {
             'UserGroup.'.$fk => $groupId,
         ));
 
+        /** @var modUserGroupMember $member */
         $member = $this->xpdo->getObject('modUserGroupMember',$c);
-        if ($member == false) {
+        if (empty($member)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User could not leave group with key "'.$groupId.'" because the User was not a part of that group.');
-            return $left;
+        } else {
+            $left = $member->remove();
         }
-
-        $left = $member->remove();
         return $left;
     }
 
@@ -659,15 +663,20 @@ class modUser extends modPrincipal {
      * Returns a randomly generated password
      *
      * @param integer $length The length of the password
+     * @param array $options
      * @return string The newly generated password
      */
-    public function generatePassword($length = 10) {
-        $allowable_characters = 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        $ps_len = strlen($allowable_characters);
-        srand((double) microtime() * 1000000);
+    public function generatePassword($length = 10,array $options = array()) {
+        $options = array_merge(array(
+            'allowable_characters' => 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',
+            'srand_seed_multiplier' => 1000000,
+        ),$options);
+
+        $ps_len = strlen($options['allowable_characters']);
+        srand((double) microtime() * $options['srand_seed_multiplier']);
         $pass = '';
         for ($i = 0; $i < $length; $i++) {
-            $pass .= $allowable_characters[mt_rand(0, $ps_len -1)];
+            $pass .= $options['allowable_characters'][mt_rand(0, $ps_len -1)];
         }
         return $pass;
     }
