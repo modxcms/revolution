@@ -43,6 +43,52 @@ class modOutputFilterTest extends MODxTestCase {
     }
 
     /**
+     * Test :urlencode filter
+     * 
+     * @param string $value
+     * @param string $expected
+     * @dataProvider providerUrlEncode
+     */
+    public function testUrlEncode($value,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:urlencode');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerUrlEncode() {
+        return array(
+            array('test','test'),
+            array('test with space','test+with+space'),
+        );
+    }
+
+    /**
+     * Test :urldecode filter
+     *
+     * @param string $value
+     * @param string $expected
+     * @dataProvider providerUrlDecode
+     */
+    public function testUrlDecode($value,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:urldecode');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerUrlDecode() {
+        return array(
+            array('test','test'),
+            array('test+with+space','test with space'),
+        );
+    }
+
+    /**
      * Test :cssToHead filter that adds CSS to HEAD of a page
      * 
      * @param string $value
