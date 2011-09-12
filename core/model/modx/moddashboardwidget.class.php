@@ -133,20 +133,7 @@ class modDashboardHtmlWidget extends modDashboardWidgetInterface {
  */
 class modDashboardPhpWidget extends modDashboardWidgetInterface {
     public function render() {
-        $code = $this->widget->get('content');
-        if (strpos($code,'<?php') === false) {
-            $code = "<?php\n".$code;
-        }
-
-        /** @var modSnippet $snippet */
-        $snippet = $this->modx->newObject('modSnippet');
-        $snippet->setContent($code);
-        $snippet->setCacheable(false);
-        $snippet->setArbitrary(true);
-        $content = $snippet->process(array(
-            'controller' => $this->controller,
-        ));
-        return $content;
+        return $this->renderAsSnippet();
     }
 }
 
@@ -294,5 +281,20 @@ abstract class modDashboardWidgetInterface {
             $output = $chunk->process($placeholders);
         }
         return $output;
+    }
+
+    /**
+     * Render the widget content as if it were a Snippet
+     * 
+     * @param string $content
+     * @return string
+     */
+    public function renderAsSnippet($content = '') {
+        if (empty($content)) $content = $this->widget->get('content');
+        $content = str_replace('<?php','',$content);
+        $closure = create_function('$scriptProperties','global $modx;if (is_array($scriptProperties)) {extract($scriptProperties, EXTR_SKIP);}'.$content);
+        return $closure(array(
+            'controller' => $this->controller,
+        ));
     }
 }
