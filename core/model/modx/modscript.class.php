@@ -124,13 +124,13 @@ class modScript extends modElement {
     public function loadScript() {
         $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
-        if (!$result) {
+        if (!$this->isCacheable() || !$result) {
             $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
                 xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
                 xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
                 xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_scripts_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
             ));
-            if (!$script) {
+            if (!$this->isCacheable() || !$script) {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
             if (!empty($script)) {

@@ -140,7 +140,7 @@ class modDashboardPhpWidget extends modDashboardWidgetInterface {
 
         /** @var modSnippet $snippet */
         $snippet = $this->modx->newObject('modSnippet');
-        $snippet->set('id','dashboard-widget-'.$this->widget->get('id'));
+        $snippet->set('id',999999999999999);
         $snippet->setContent($code);
         $snippet->setCacheable(false);
         $content = $snippet->process(array(
