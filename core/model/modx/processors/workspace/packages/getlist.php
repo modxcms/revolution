@@ -10,6 +10,10 @@
  * @param string $sort (optional) The column to sort by. Defaults to name.
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var modProcessor $this
+ *
  * @package modx
  * @subpackage processors.workspace.packages
  */
@@ -23,9 +27,10 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $workspace = $modx->getOption('workspace',$scriptProperties,1);
 $dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %p');
+$search = $modx->getOption('search',$scriptProperties,'');
 
 /* get packages */
-$pkgList = $modx->call('transport.modTransportPackage', 'listPackages', array(&$modx, $workspace, $isLimit ? $limit : 0, $start));
+$pkgList = $modx->call('transport.modTransportPackage', 'listPackages', array(&$modx, $workspace, $isLimit ? $limit : 0, $start,$search));
 $packages = $pkgList['collection'];
 $count = $pkgList['total'];
 
@@ -37,6 +42,7 @@ $providerCache = array();
 
 /* now create output array */
 $list = array();
+/** @var modTransportPackage $package */
 foreach ($packages as $package) {
     if ($package->get('installed') == '0000-00-00 00:00:00') $package->set('installed',null);
 

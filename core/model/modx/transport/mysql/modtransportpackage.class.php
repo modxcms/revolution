@@ -9,7 +9,7 @@ require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/modtran
  * @subpackage mysql
  */
 class modTransportPackage_mysql extends modTransportPackage {
-    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0) {
+    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0,$search = '') {
         $result = array('collection' => array(), 'total' => 0);
         $c = $modx->newQuery('transport.modTransportPackage');
         $c->leftJoin('transport.modTransportProvider','Provider', array("modTransportPackage.provider = Provider.id"));
@@ -29,6 +29,12 @@ class modTransportPackage_mysql extends modTransportPackage {
                  `latestPackage`.`release_index` DESC
               LIMIT 1) = `modTransportPackage`.`signature`",
         ));
+        if (!empty($search)) {
+            $c->where(array(
+                'modTransportPackage.signature:LIKE' => '%'.$search.'%',
+                'OR:modTransportPackage.package_name:LIKE' => '%'.$search.'%',
+            ));
+        }
         $result['total'] = $modx->getCount('modTransportPackage',$c);
         $c->select(array(
             'modTransportPackage.*',

@@ -2,7 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- [#5587] Fix issue with respecting isCacheable in modScript instances that caused dashboard widgets to be cached
+- [#5561] Add search toolbar to packages grid
+- [#5587] Fix issue with dashboard widgets and caching
 - [#5453] Add ability to disable forgot password on manager login screen
 - Add batch remove to Namespaces grid
 - [#5671] Add :toPlaceholder, :cssToHead, :htmlToHead, :htmlToBottom, :jsToHead, :jsToBottom output filters
