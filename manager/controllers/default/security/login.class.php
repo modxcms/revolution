@@ -41,12 +41,20 @@ class SecurityLoginManagerController extends modManagerController {
         $this->setPlaceholder('onManagerLoginFormPrerender', $eventInfo);
 
         $this->checkForActiveInstallation();
+        $this->checkForAllowManagerForgotPassword();
 
         /* invoke OnManagerLoginFormRender event */
         $eventInfo= $this->modx->invokeEvent('OnManagerLoginFormRender');
         $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
         $eventInfo= str_replace('\'','\\\'',$eventInfo);
         $this->setPlaceholder('onManagerLoginFormRender', $eventInfo);
+    }
+
+    public function checkForAllowManagerForgotPassword() {
+        $allow = $this->modx->getOption('allow_manager_login_forgot_password',null,true);
+        if ($allow) {
+            $this->setPlaceholder('allow_forgot_password',true);
+        }
     }
 
     /**
@@ -108,7 +116,7 @@ class SecurityLoginManagerController extends modManagerController {
         /* handle login */
         if (!empty($this->scriptProperties['login'])) {
             $this->handleLogin();
-        } else if (!empty($this->scriptProperties['forgotlogin'])) {
+        } else if (!empty($this->scriptProperties['forgotlogin']) && $this->modx->getOption('allow_manager_login_forgot_password',null,true)) {
             $this->handleForgotLogin();
         }
         $this->setPlaceholder('_post',$this->scriptProperties);
@@ -120,7 +128,8 @@ class SecurityLoginManagerController extends modManagerController {
      */
     public function handleLogin() {
         $validated = true;
-
+        
+        /** @var modUser $user */
         $user = $this->modx->getObject('modUser',array(
             'username' => $this->scriptProperties['username'],
         ));
@@ -161,6 +170,7 @@ class SecurityLoginManagerController extends modManagerController {
         $c->where(array(
             'modUser.username' => $this->scriptProperties['username_reset'],
         ));
+        /** @var modUser $user */
         $user = $this->modx->getObject('modUser',$c);
         if ($user) {
             $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));

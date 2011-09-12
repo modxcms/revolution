@@ -56,9 +56,10 @@ class modTransportPackage extends xPDOObject {
      * @param $workspace The current active workspace ID
      * @param int $limit The limit of packages to return
      * @param int $offset The offset on which to list by
+     * @param string $search An optional search value
      * @return array
      */
-    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0) {
+    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0,$search = '') {
         return array('collection' => array(), 'total' => 0);
     }
 

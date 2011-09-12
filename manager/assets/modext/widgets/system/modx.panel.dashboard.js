@@ -60,11 +60,10 @@ MODx.panel.Dashboard = function(config) {
                     ,fieldLabel: _('description')
                     ,anchor: '97%'
                     ,grow: true
-                }]
-            },{
-                title: _('widgets')
-                ,hideMode: 'offsets'
-                ,items: [{
+                },{
+                    html: '<hr />'
+                    ,border: false
+                },{
                     html: '<p>'+_('dashboard_widgets.intro_msg')+'</p>'
                     ,border: false
                 },{
@@ -79,25 +78,7 @@ MODx.panel.Dashboard = function(config) {
                         ,'addMember': {fn:this.markDirty,scope:this}
                     }
                 }]
-            }/*,{
-                title: _('user_groups')
-                ,hideMode: 'offsets'
-                ,items: [{
-                    html: '<p>'+_('dashboard_usergroups.intro_msg')+'</p>'
-                    ,border: false
-                },{
-                    xtype: 'modx-grid-dashboard-usergroups'
-                    ,preventRender: true
-                    ,dashboard: config.dashboard
-                    ,autoHeight: true
-                    ,width: '97%'
-                    ,listeners: {
-                        'afterRemoveRow': {fn:this.markDirty,scope:this}
-                        ,'updateRole': {fn:this.markDirty,scope:this}
-                        ,'addMember': {fn:this.markDirty,scope:this}
-                    }
-                }]
-            }*/]
+            }]
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}

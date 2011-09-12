@@ -36,6 +36,7 @@ class modAccessPolicy extends xPDOSimpleObject {
         $data = $this->get('data');
         $lexicon = $template->get('lexicon');
         $list = array();
+        /** @var modAccessPermission $permission */
         foreach ($permissions as $permission) {
             $desc = $permission->get('description');
             if (!empty($lexicon) && $this->xpdo->lexicon) {

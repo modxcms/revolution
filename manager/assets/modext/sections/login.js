@@ -5,8 +5,11 @@ Ext.onReady(function() {
     Ext.override(Ext.form.Field,{
         defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
     });    
-    Ext.get('modx-fl-link').on('click',MODx.loadFLForm);
-    Ext.get('modx-login-username').focus();
+    var fl = Ext.get('modx-fl-link');
+    if (fl) { fl.on('click',MODx.loadFLForm); }
+
+    var lu = Ext.get('modx-login-username');
+    if (lu) { lu.focus(); }
 });
 
 MODx.loadFLForm = function(a) {

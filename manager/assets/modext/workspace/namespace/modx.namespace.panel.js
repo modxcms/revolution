@@ -44,6 +44,7 @@ Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
  */
 MODx.grid.Namespace = function(config) {
     config = config || {};
+    this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'workspace/namespace.php'
         ,fields: ['id','name','path','perm']
@@ -52,7 +53,8 @@ MODx.grid.Namespace = function(config) {
         ,autosave: true
         ,primaryKey: 'name'
         ,remoteSort: true
-        ,columns: [{
+        ,sm: this.sm
+        ,columns: [this.sm,{
             header: _('name')
             ,dataIndex: 'name'
             ,width: 200
@@ -102,11 +104,19 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm;
         var m = [];
-        if (p.indexOf('premove') != -1) {
+        if (this.getSelectionModel().getCount() > 1) {
             m.push({
-                text: _('namespace_remove')
-                ,handler: this.remove.createDelegate(this,["namespace_remove_confirm"])
+                text: _('selected_remove')
+                ,handler: this.removeSelected
+                ,scope: this
             });
+        } else {
+            if (p.indexOf('premove') != -1) {
+                m.push({
+                    text: _('namespace_remove')
+                    ,handler: this.remove.createDelegate(this,["namespace_remove_confirm"])
+                });
+            }
         }
         return m;
     }
@@ -125,6 +135,27 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         Ext.getCmp('modx-namespace-search').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();
+    }
+    ,removeSelected: function() {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.msg.confirm({
+            title: _('namespace_remove_multiple')
+            ,text: _('namespace_remove_multiple_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'removeMultiple'
+                ,namespaces: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
     }
 });
 Ext.reg('modx-grid-namespace',MODx.grid.Namespace);

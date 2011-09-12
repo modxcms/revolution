@@ -42,13 +42,13 @@ $settings['allow_forward_across_contexts']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
-$settings['allow_tags_in_post']= $xpdo->newObject('modSystemSetting');
-$settings['allow_tags_in_post']->fromArray(array (
-  'key' => 'allow_tags_in_post',
-  'value' => '1',
+$settings['allow_manager_login_forgot_password']= $xpdo->newObject('modSystemSetting');
+$settings['allow_manager_login_forgot_password']->fromArray(array (
+  'key' => 'allow_manager_login_forgot_password',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'system',
+  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
 $settings['allow_multiple_emails']= $xpdo->newObject('modSystemSetting');
@@ -58,6 +58,15 @@ $settings['allow_multiple_emails']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['allow_tags_in_post']= $xpdo->newObject('modSystemSetting');
+$settings['allow_tags_in_post']->fromArray(array (
+  'key' => 'allow_tags_in_post',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
   'editedon' => null,
 ), '', true, true);
 $settings['archive_with']= $xpdo->newObject('modSystemSetting');

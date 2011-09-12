@@ -635,7 +635,7 @@ $children[4]->fromArray(array (
           'lang_topics' => 'about',
           'assets' => '',
         ), '', true, true);
-        $children[1]->addOne($action);
+        $children[4]->addOne($action);
 
 $menus[5]->addMany($children,'Children');
 unset($children);

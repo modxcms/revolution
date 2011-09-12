@@ -60,6 +60,31 @@ MODx.grid.Package = function(config) {
             text: _('download_extras')
             ,handler: this.loadMainProvider
             ,disabled: MODx.curlEnabled ? false : true
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-package-search'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-package-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
         ,tools: [{
             id: 'plus'
@@ -81,6 +106,22 @@ MODx.grid.Package = function(config) {
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     console: null
+    
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-package-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
 
     ,loadPackageDownloader: function(btn,e) {
         var x = 'modx-window-package-downloader';

@@ -400,7 +400,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 
         var cs = '';
         for (var i=0;i<sels.length;i++) {
-            cs += ','+sels[i].data.id;
+            cs += ','+sels[i].data[this.config.primaryKey || 'id'];
         }
 
         if (cs[0] == ',') {

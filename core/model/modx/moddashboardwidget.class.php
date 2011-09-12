@@ -66,6 +66,8 @@ class modDashboardWidget extends xPDOSimpleObject {
                     $this->xpdo->getOption('manager_theme',null,'default'),
                 ),$content);
                 if (file_exists($content)) {
+                    $modx =& $this->xpdo;
+                    $scriptProperties = $this->toArray();
                     $className = include_once $content;
                     if (class_exists($className)) { /* is a class-based widget */
                         /** @var modDashboardWidgetInterface $widget */
@@ -131,20 +133,7 @@ class modDashboardHtmlWidget extends modDashboardWidgetInterface {
  */
 class modDashboardPhpWidget extends modDashboardWidgetInterface {
     public function render() {
-        $code = $this->widget->get('content');
-        if (strpos($code,'<?php') === false) {
-            $code = "<?php\n".$code;
-        }
-
-        /** @var modSnippet $snippet */
-        $snippet = $this->modx->newObject('modSnippet');
-        $snippet->set('id','dashboard-widget-'.$this->widget->get('id'));
-        $snippet->setContent($code);
-        $snippet->setCacheable(false);
-        $content = $snippet->process(array(
-            'controller' => $this->controller,
-        ));
-        return $content;
+        return $this->renderAsSnippet();
     }
 }
 
@@ -292,5 +281,20 @@ abstract class modDashboardWidgetInterface {
             $output = $chunk->process($placeholders);
         }
         return $output;
+    }
+
+    /**
+     * Render the widget content as if it were a Snippet
+     * 
+     * @param string $content
+     * @return string
+     */
+    public function renderAsSnippet($content = '') {
+        if (empty($content)) $content = $this->widget->get('content');
+        $content = str_replace('<?php','',$content);
+        $closure = create_function('$scriptProperties','global $modx;if (is_array($scriptProperties)) {extract($scriptProperties, EXTR_SKIP);}'.$content);
+        return $closure(array(
+            'controller' => $this->controller,
+        ));
     }
 }
