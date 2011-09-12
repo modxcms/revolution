@@ -26,6 +26,11 @@ class modScript extends modElement {
      * @var string $_scriptCacheKey
      */
     public $_scriptCacheKey= null;
+    /**
+     * If a script is arbitrary, it will not be cached and runs dynamically
+     * @var boolean $_arbitrary
+     */
+    public $_arbitrary = false;
 
     /**
      * Override set to properly strip invalid tags from script code
@@ -54,7 +59,12 @@ class modScript extends modElement {
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
-            $scriptName= $this->getScriptName();
+            if ($this->isArbitrary()) {
+                $content = $this->getContent();
+                $scriptName = create_function('$scriptProperties','global $modx;if (is_array($scriptProperties)) {extract($scriptProperties, EXTR_SKIP);}'.$content);
+            } else {
+                $scriptName= $this->getScriptName();
+            }
             $this->_result= function_exists($scriptName);
             if (!$this->_result) {
                 $this->_result= $this->loadScript();
@@ -81,7 +91,9 @@ class modScript extends modElement {
                 }
                 $this->filterOutput();
                 unset ($this->xpdo->event->params);
-                $this->cache();
+                if (!$this->isArbitrary()) {
+                    $this->cache();
+                }
             }
         }
         $this->_processed= true;
@@ -124,13 +136,13 @@ class modScript extends modElement {
     public function loadScript() {
         $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
-        if (!$this->isCacheable() || !$result) {
+        if (!$result) {
             $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
                 xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
                 xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
                 xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_scripts_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
             ));
-            if (!$this->isCacheable() || !$script) {
+            if (!$script) {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
             if (!empty($script)) {
@@ -144,5 +156,24 @@ class modScript extends modElement {
             }
         }
         return ($result !== false);
+    }
+
+    /**
+     * Return whether or not a script is arbitrary
+     *
+     * @return boolean
+     */
+    public function isArbitrary() {
+        return (boolean)$this->_arbitrary;
+    }
+
+    /**
+     * Set the arbitrary status of a snippet
+     * 
+     * @param boolean $arbitrary
+     * @return void
+     */
+    public function setArbitrary($arbitrary) {
+        $this->_arbitrary = (boolean)$arbitrary;
     }
 }
