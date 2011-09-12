@@ -107,6 +107,7 @@
    </table>
 </form>
 
+    {if $allow_forgot_password}
     <div class="modx-forgot-login">
     <form id="modx-fl-form" action="" method="post">
        <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.username_reset}display:none;{/if}">{$_lang.login_forget_your_login}</a>
@@ -149,6 +150,7 @@
        </div>
     </form>
     </div>
+    {/if}
     
     <br class="clear" />
 
