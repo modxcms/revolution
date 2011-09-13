@@ -51,6 +51,7 @@ foreach ($sources as $source) {
     $cls = array();
     if ($source->checkPolicy('save')) $cls[] = 'pupdate';
     if ($source->checkPolicy('remove')) $cls[] = 'premove';
+    if ($source->checkPolicy('copy')) $cls[] = 'pduplicate';
     $sourceArray['cls'] = implode(' ',$cls);
 
     $list[] = $sourceArray;
