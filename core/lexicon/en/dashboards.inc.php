@@ -9,10 +9,12 @@
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Add Dashboard';
 $_lang['dashboard_create'] = 'Create Dashboard';
+$_lang['dashboard_duplicate'] = 'Duplicate Dashboard';
 $_lang['dashboard_remove'] = 'Remove Dashboard';
 $_lang['dashboard_remove_confirm'] = 'Are you sure you want to remove this Dashboard?';
 $_lang['dashboard_update'] = 'Update Dashboard';
 $_lang['dashboard_err_ae_name'] = 'A dashboard with the name "[[+name]]" already exists! Please try another name.';
+$_lang['dashboard_err_duplicate'] = 'An error occurred while trying to duplicate the dashboard.';
 $_lang['dashboard_err_nf'] = 'Dashboard not found.';
 $_lang['dashboard_err_ns'] = 'Dashboard not specified.';
 $_lang['dashboard_err_ns_name'] = 'Please specify a name for the widget.';

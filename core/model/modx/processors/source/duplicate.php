@@ -1,9 +1,9 @@
 <?php
 /**
- * Duplicates a chunk.
+ * Duplicates a source.
  *
- * @param integer $id The chunk to duplicate
- * @param string $name The name of the new chunk.
+ * @param integer $id The source to duplicate
+ * @param string $name The name of the new source.
  *
  * @var modX $modx
  * @var array $scriptProperties
@@ -13,7 +13,7 @@
  * @subpackage processors.source
  */
 if (!$modx->hasPermission('sources')) return $modx->error->failure($modx->lexicon('permission_denied'));
-$modx->lexicon->load('chunk');
+$modx->lexicon->load('source');
 
 /* @var modMediaSource $oldSource */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('source_err_ns'));
