@@ -95,6 +95,7 @@ $scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
 $scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer) $workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
 $scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer) $workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
 $scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (integer) $workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
+$scriptProperties['content_type'] = !isset($scriptProperties['content_type']) ? (integer) $workingContext->getOption('default_content_type',1) : (integer)$scriptProperties['content_type'];
 $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
 $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
 $scriptProperties['createdby'] = $modx->user->get('username');

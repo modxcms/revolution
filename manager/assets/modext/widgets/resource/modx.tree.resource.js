@@ -1011,22 +1011,22 @@ MODx.getQRSettings = function(id,va) {
         ,checked: true
     },{
         xtype: 'modx-combo-content-type'
-            ,fieldLabel: _('resource_content_type')
-            ,name: 'content_type'
-            ,hiddenName: 'content_type'
-            ,id: 'modx-'+this.ident+'-type'
-            ,anchor: '70%'
-            ,value: va['content_type'] != undefined ? va['content_type'] : 1
-            
-        },{
-            xtype: 'modx-combo-content-disposition'
-            ,fieldLabel: _('resource_contentdispo')
-            ,name: 'content_dispo'
-            ,hiddenName: 'content_dispo'
-            ,id: 'modx-'+this.ident+'-dispo'
-            ,anchor: '70%'
-            ,value: va['content_dispo'] != undefined ? va['content_dispo'] : 0                   
-        }];
+        ,fieldLabel: _('resource_content_type')
+        ,name: 'content_type'
+        ,hiddenName: 'content_type'
+        ,id: 'modx-'+this.ident+'-type'
+        ,anchor: '70%'
+        ,value: va['content_type'] != undefined ? va['content_type'] : (MODx.config.default_content_type || 1)
+
+    },{
+        xtype: 'modx-combo-content-disposition'
+        ,fieldLabel: _('resource_contentdispo')
+        ,name: 'content_dispo'
+        ,hiddenName: 'content_dispo'
+        ,id: 'modx-'+this.ident+'-dispo'
+        ,anchor: '70%'
+        ,value: va['content_dispo'] != undefined ? va['content_dispo'] : 0
+    }];
 };
 MODx.handleQUCB = function(cb) {
     var h = Ext.getCmp(cb.id+'-hd');

@@ -366,6 +366,15 @@ $settings['default_template']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['default_content_type']= $xpdo->newObject('modSystemSetting');
+$settings['default_content_type']->fromArray(array (
+  'key' => 'default_content_type',
+  'value' => '1',
+  'xtype' => 'modx-combo-content-type',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['editor_css_path']= $xpdo->newObject('modSystemSetting');
 $settings['editor_css_path']->fromArray(array (
   'key' => 'editor_css_path',

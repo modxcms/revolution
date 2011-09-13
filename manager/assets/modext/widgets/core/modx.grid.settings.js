@@ -287,6 +287,10 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ed = new Ext.grid.GridEditor(o);
                 cm.setEditor(ci,ed);
             }
+            if (ed.store && !ed.store.isLoaded) {
+                ed.store.load();
+                ed.store.isLoaded = true;
+            }
             f = MODx.combo.Renderer(ed.field,v);
             return f(v,md,rec,ri,ci,s,g);
         }

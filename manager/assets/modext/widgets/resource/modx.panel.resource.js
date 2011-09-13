@@ -100,7 +100,7 @@ MODx.panel.Resource = function(config) {
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
+                    var titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+titlePrefix+': '+f.getValue()+'</h2>');
                 }}
             }
@@ -335,7 +335,7 @@ MODx.panel.Resource = function(config) {
         ,hiddenName: 'content_type'
         ,id: 'modx-resource-content-type'
         ,anchor: '70%'
-        ,value: config.record.content_type || 1
+        ,value: config.record.content_type || (MODx.config.default_content_type || 1)
         
     },{
         xtype: 'modx-combo-content-disposition'

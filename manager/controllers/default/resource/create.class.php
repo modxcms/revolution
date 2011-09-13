@@ -86,7 +86,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $defaultTemplate = $this->getDefaultTemplate();
         $this->resourceArray = array_merge($this->resourceArray,array(
             'template' => $defaultTemplate,
-            'content_type' => 1,
+            'content_type' => $this->context->getOption('default_content_type',1,$this->modx->_userConfig),
             'class_key' => $this->resourceClass,
             'context_key' => $this->ctx,
             'parent' => $this->parent->get('id'),

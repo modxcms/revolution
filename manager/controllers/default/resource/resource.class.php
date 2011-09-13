@@ -10,11 +10,17 @@ abstract class ResourceManagerController extends modManagerController {
     public $showAccessPermissions = true;
     public $onDocFormRender = '';
     public $ctx = 'web';
-    public $resource;
-    public $parent;
+    /** @var modContext $context */
     public $context;
+    /** @var modResource $resource */
+    public $resource;
+    /** @var modResource $resource */
+    public $parent;
+    /** @var string $resourceClass */
     public $resourceClass = 'modDocument';
+    /** @var array $tvCounts */
     public $tvCounts = array();
+    /** @var array $rteFields */
     public $rteFields = array();
     
     public $canPublish = true;
