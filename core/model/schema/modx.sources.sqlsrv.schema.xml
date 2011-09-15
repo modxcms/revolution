@@ -48,6 +48,11 @@
         </index>
         
         <composite alias="SourceElement" class="sources.modMediaSourceElement" local="id" foreign="source" cardinality="one" owner="local" />
+        <aggregate alias="Chunks" class="modChunk" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Plugins" class="modPlugin" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Snippets" class="modSnippet" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Templates" class="modTemplate" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="TemplateVars" class="modTemplateVar" local="id" foreign="source" cardinality="many" owner="local" />
     </object>
     <object class="modFileMediaSource" extends="modMediaSource" />
     <object class="modS3MediaSource" extends="modMediaSource" />

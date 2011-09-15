@@ -7,6 +7,22 @@ $xpdo_meta_map['modElement']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_element',
+  'fields' => 
+  array (
+    'source' => 0,
+  ),
+  'fieldMeta' => 
+  array (
+    'source' => 
+    array (
+      'dbtype' => 'int',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'fk',
+    ),
+  ),
   'aggregates' => 
   array (
     'PropertySets' => 
@@ -24,6 +40,14 @@ $xpdo_meta_map['modElement']= array (
       'foreign' => 'target',
       'owner' => 'local',
       'cardinality' => 'many',
+    ),
+    'Source' => 
+    array (
+      'class' => 'sources.modMediaSource',
+      'local' => 'source',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
     ),
   ),
   'composites' => 

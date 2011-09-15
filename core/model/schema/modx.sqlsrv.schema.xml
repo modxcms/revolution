@@ -459,9 +459,12 @@
     <object class="modDocument" extends="modResource" />
     
     <object class="modElement" table="site_element" extends="modAccessibleSimpleObject">
+        <field key="source" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
+
         <aggregate alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessElement" local="id" foreign="target" owner="local" cardinality="many" />
         <aggregate alias="CategoryAcls" class="modAccessCategory" local="category" foreign="target" owner="local" cardinality="many" />
+        <aggregate alias="Source" class="sources.modMediaSource" local="source" foreign="id" owner="foreign" cardinality="one" />
     </object>
     
     <object class="modElementPropertySet" table="element_property_sets" extends="xPDOObject">

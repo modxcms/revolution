@@ -95,4 +95,47 @@ $xpdo_meta_map['modMediaSource']= array (
       'owner' => 'local',
     ),
   ),
+  'aggregates' => 
+  array (
+    'Chunks' => 
+    array (
+      'class' => 'modChunk',
+      'local' => 'id',
+      'foreign' => 'source',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Plugins' => 
+    array (
+      'class' => 'modPlugin',
+      'local' => 'id',
+      'foreign' => 'source',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Snippets' => 
+    array (
+      'class' => 'modSnippet',
+      'local' => 'id',
+      'foreign' => 'source',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Templates' => 
+    array (
+      'class' => 'modTemplate',
+      'local' => 'id',
+      'foreign' => 'source',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'TemplateVars' => 
+    array (
+      'class' => 'modTemplateVar',
+      'local' => 'id',
+      'foreign' => 'source',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
 );
