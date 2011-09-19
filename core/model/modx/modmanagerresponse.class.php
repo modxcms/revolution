@@ -41,26 +41,26 @@ class modManagerResponse extends modResponse {
             $action = $action->get('id');
         }
 
-        if (!$this->checkForMenuPermissions($action)) {
+        $this->action = $this->modx->actionMap[$action];
+        $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
+        if (!$isLoggedIn) {
+            $this->action['namespace'] = 'core';
+            $this->action['namespace_name'] = 'core';
+            $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['lang_topics'] = 'login';
+            $this->action['controller'] = 'security/login';
+        } else if (!$this->modx->hasPermission('frames')) {
+            $this->action['namespace'] = 'core';
+            $this->action['namespace_name'] = 'core';
+            $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['lang_topics'] = 'login';
+            $this->action['controller'] = 'security/logout';
+        }
+
+        if ($isLoggedIn && !$this->checkForMenuPermissions($action)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('access_denied'));
+            
         } else {
-
-            $this->action = $this->modx->actionMap[$action];
-            $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
-            if (!$isLoggedIn) {
-                $this->action['namespace'] = 'core';
-                $this->action['namespace_name'] = 'core';
-                $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
-                $this->action['lang_topics'] = 'login';
-                $this->action['controller'] = 'security/login';
-            } else if (!$this->modx->hasPermission('frames')) {
-                $this->action['namespace'] = 'core';
-                $this->action['namespace_name'] = 'core';
-                $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
-                $this->action['lang_topics'] = 'login';
-                $this->action['controller'] = 'security/logout';
-            }
-
             require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 
             /* first attempt to get new class format file introduced in 2.2+ */
