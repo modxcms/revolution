@@ -17,7 +17,7 @@ class SourceUpdateManagerController extends modManagerController {
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('sources');
+        return $this->modx->hasPermission('source_edit');
     }
 
     /**

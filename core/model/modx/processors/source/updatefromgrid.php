@@ -13,7 +13,7 @@
  * @package modx
  * @subpackage processors.source
  */
-if (!$modx->hasPermission('sources')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('source_save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('source');
 
 if (empty($scriptProperties['data'])) return $modx->error->failure($modx->lexicon('source_err_ns'));
