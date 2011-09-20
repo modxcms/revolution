@@ -303,6 +303,24 @@ $settings['clear_cache_refresh_trees']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['compress_css']= $xpdo->newObject('modSystemSetting');
+$settings['compress_css']->fromArray(array (
+  'key' => 'compress_css',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['compress_js']= $xpdo->newObject('modSystemSetting');
+$settings['compress_js']->fromArray(array (
+  'key' => 'compress_js',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['container_suffix']= $xpdo->newObject('modSystemSetting');
 $settings['container_suffix']->fromArray(array (
   'key' => 'container_suffix',
