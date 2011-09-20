@@ -104,24 +104,24 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
     ,changeSource: function(sel) {
         var s = sel.getValue();
+        var rn = this.getRootNode();
+        if (rn) { rn.setText(sel.getRawValue()); }
         this.config.baseParams.source = s;
         this.refresh();
     }
     ,_initExpand: function() {
+        var treeState;
         if (!Ext.isEmpty(this.config.openTo)) {
-            var treeState = Ext.state.Manager.get(this.treestate_id);
+            treeState = Ext.state.Manager.get(this.treestate_id);
             this.selectPath('/'+_('files')+'/'+this.config.openTo,'text');
         } else {
-            var treeState = Ext.state.Manager.get(this.treestate_id);
+            treeState = Ext.state.Manager.get(this.treestate_id);
             this.selectPath(treeState,'text');
         }
     }
     ,_saveState: function(n) {
         var p = n.getPath('text');
         Ext.state.Manager.set(this.treestate_id,p);
-    }
-    ,_2handleDrop: function(e) {
-
     }
 
     ,_handleDrag: function(dropEvent) {
