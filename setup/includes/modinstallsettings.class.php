@@ -53,6 +53,11 @@ class modInstallSettings {
         }
         return isset($this->settings[$k]) ? $this->settings[$k] : $default;
     }
+    public function fromArray($array) {
+        foreach ($array as $k => $v) {
+            $this->settings[$k] = $v;
+        }
+    }
     public function load() {
         if (file_exists($this->fileName)) {
             $this->settings = include $this->fileName;
@@ -69,8 +74,10 @@ class modInstallSettings {
     }
     public function restart() {
         $this->erase();
-        header('Location: ' . MODX_SETUP_URL.'?restarted=1');
-        exit();
+        if (empty($this->install->request) && !($this->install->request instanceof modInstallCLIRequest)) {
+            header('Location: ' . MODX_SETUP_URL.'?restarted=1');
+            exit();
+        }
     }
     public function delete($k) {
         unset($this->settings[$k]);

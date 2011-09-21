@@ -26,7 +26,7 @@ require_once MODX_SETUP_PATH . 'includes/modinstall.class.php';
 $install = new modInstall();
 $install->getService('lexicon','modInstallLexicon');
 $install->lexicon->load('default');
-$install->getService('request','request.modInstallConnector');
+$install->getService('request','request.modInstallConnectorRequest');
 $install->request->handle();
 @session_write_close();
 exit();

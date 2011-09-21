@@ -30,6 +30,15 @@
 
 /* start session */
 session_start();
+$isCommandLine = php_sapi_name() == 'cli';
+if ($isCommandLine) {
+    foreach ($argv as $idx => $argv) {
+        $p = explode('=',ltrim($argv,'--'));
+        if (isset($p[1])) {
+            $_REQUEST[$p[0]] = $p[1];
+        }
+    }
+}
 
 /* check for compatible PHP version */
 define('MODX_SETUP_PHP_VERSION', phpversion());
@@ -50,20 +59,24 @@ if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
         die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
     }
 }
-$https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
-$installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
-$installBaseUrl .= $_SERVER['HTTP_HOST'];
-if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
-$installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
-$installBaseUrl .= $_SERVER['PHP_SELF'];
-define('MODX_SETUP_URL', $installBaseUrl);
+if (!$isCommandLine) {
+    $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
+    $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
+    $installBaseUrl .= $_SERVER['HTTP_HOST'];
+    if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+    $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
+    $installBaseUrl .= $_SERVER['PHP_SELF'];
+    define('MODX_SETUP_URL', $installBaseUrl);
+} else {
+    define('MODX_SETUP_URL','/');
+}
 
 /* session loop-back tester */
-if ((!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_SESSION['session_test'])) {
+if (!$isCommandLine && (!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_SESSION['session_test'])) {
     $_SESSION['session_test']= 1;
     echo "<html><head><title>Loading...</title><script>window.location.href='" . MODX_SETUP_URL . "?s=set';</script></head><body></body></html>";
     exit ();
-} elseif (isset($_GET['s']) && $_GET['s'] == 'set' && !isset($_SESSION['session_test'])) {
+} elseif (!$isCommandLine && isset($_GET['s']) && $_GET['s'] == 'set' && !isset($_SESSION['session_test'])) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure your PHP session configuration is valid and working.</p></body></html>');
 }
 
@@ -84,6 +97,7 @@ if ($modInstall->getService('lexicon','modInstallLexicon')) {
 }
 $modInstall->findCore();
 $modInstall->doPreloadChecks();
-$modInstall->getService('request','request.modInstallRequest');
+$requestClass = $isCommandLine ? 'request.modInstallCLIRequest' : 'request.modInstallRequest';
+$modInstall->getService('request',$requestClass);
 echo $modInstall->request->handle();
 exit();

@@ -101,15 +101,17 @@ class modInstall {
      * @return Object|null
      */
     public function getService($name,$class,$path = '',array $config = array()) {
-        $className = $this->loadClass($class,$path);
-        if (!empty($className)) {
-            $this->$name = new $className($this,$config);
-        } else {
-            $this->_fatalError($this->lexicon('service_err_nf',array(
-                'name' => $name,
-                'class' => $class,
-                'path' => $path,
-            )));
+        if (empty($this->$name)) {
+            $className = $this->loadClass($class,$path);
+            if (!empty($className)) {
+                $this->$name = new $className($this,$config);
+            } else {
+                $this->_fatalError($this->lexicon('service_err_nf',array(
+                    'name' => $name,
+                    'class' => $class,
+                    'path' => $path,
+                )));
+            }
         }
         return $this->$name;
     }
@@ -123,11 +125,13 @@ class modInstall {
      * @return modInstallSettings
      */
     public function loadSettings($class = 'modInstallSettings',$path = '') {
-        $className = $this->loadClass($class,$path);
-        if (!empty($className)) {
-            $this->settings = new $className($this);
-        } else {
-            $this->_fatalError($this->lexicon('settings_handler_err_nf',array('path' => $className)));
+        if (empty($this->settings)) {
+            $className = $this->loadClass($class,$path);
+            if (!empty($className)) {
+                $this->settings = new $className($this);
+            } else {
+                $this->_fatalError($this->lexicon('settings_handler_err_nf',array('path' => $className)));
+            }
         }
         return $this->settings;
     }
@@ -159,23 +163,32 @@ class modInstall {
         }
 
         /* get http host */
-        $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
-        $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
-        $http_host= $_SERVER['HTTP_HOST'];
-        if ($_SERVER['SERVER_PORT'] != 80) {
-            $http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); /* remove port from HTTP_HOST */
+        if (php_sapi_name() != 'cli') {
+            $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
+            $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
+            $http_host= $_SERVER['HTTP_HOST'];
+            if ($_SERVER['SERVER_PORT'] != 80) {
+                $http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); /* remove port from HTTP_HOST */
+            }
+            $http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
+        } else {
+            $http_host = 'localhost';
+            $https_port = 443;
         }
-        $http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
 
         switch ($mode) {
             case modInstall::MODE_UPGRADE_EVO :
+                @ob_start();
                 $included = @ include MODX_INSTALL_PATH . 'manager/includes/config.inc.php';
+                @ob_end_clean();
                 if ($included && isset ($dbase))
                     break;
 
             case modInstall::MODE_UPGRADE_REVO :
             case modInstall::MODE_UPGRADE_REVO_ADVANCED :
+                @ob_start();
                 $included = @ include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
+                @ob_end_clean();
                 if ($included && isset ($dbase)) {
                     $config['mgr_path'] = MODX_MANAGER_PATH;
                     $config['connectors_path'] = MODX_CONNECTORS_PATH;
@@ -232,17 +245,23 @@ class modInstall {
             'config_options' => $config_options,
         ));
         $this->config = array_merge($this->config, $config);
-        switch ($this->config['database_type']) {
+        $this->config['database_dsn'] = $this->getDatabaseDSN($this->config['database_type'],$this->config['database_server'],$this->config['dbase'],$this->config['database_connection_charset']);
+        return $this->config;
+    }
+
+    public function getDatabaseDSN($databaseType,$databaseServer,$database,$databaseConnectionCharset = '') {
+        $dsn = '';
+        switch ($databaseType) {
             case 'sqlsrv':
-                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:server={$this->config['database_server']};database={$this->config['dbase']}";
+                $dsn = "{$databaseType}:server={$databaseServer};database={$database}";
                 break;
             case 'mysql':
-                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:host={$this->config['database_server']};dbname={$this->config['dbase']};charset={$this->config['database_connection_charset']}";
+                $dsn = "{$databaseType}:host={$databaseServer};dbname={$database};charset={$databaseConnectionCharset}";
                 break;
             default:
                 break;
         }
-        return $this->config;
+        return $dsn;
     }
 
     /**
@@ -251,7 +270,9 @@ class modInstall {
      * @param int $mode
      * @return xPDO A copy of the xpdo object.
      */
-    public function getConnection($mode = modInstall::MODE_NEW) {
+    public function getConnection($mode = 0) {
+        if ($this->settings && empty($mode)) $mode = (int)$this->settings->get('installmode');
+        if (empty($mode)) $mode = modInstall::MODE_NEW;
         if ($mode === modInstall::MODE_UPGRADE_REVO) {
             $errors = array ();
             $this->xpdo = $this->_modx($errors);
@@ -524,6 +545,7 @@ class modInstall {
         if (isset ($_POST['installmode'])) {
             $mode = intval($_POST['installmode']);
         } else {
+            error_reporting(E_ALL); ini_set('display_errors',true);
             global $dbase;
             if (file_exists(MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php')) {
                 /* Include the file so we can test its validity */

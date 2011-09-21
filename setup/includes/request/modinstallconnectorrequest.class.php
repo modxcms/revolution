@@ -19,7 +19,7 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
+require_once strtr(realpath(MODX_SETUP_PATH.'includes/request/modinstallrequest.class.php'),'\\','/');
 /**
  * modInstallConnector
  *
@@ -30,7 +30,7 @@
  *
  * @package setup
  */
-class modInstallConnector {
+class modInstallConnectorRequest extends modInstallRequest {
     /** @var modInstall $install */
     public $install;
     /** @var modInstallJSONError $error */
