@@ -36,11 +36,18 @@ class modInstall {
     const MODE_UPGRADE_EVO = 2;
     const MODE_UPGRADE_REVO_ADVANCED = 3;
 
+    /** @var xPDO $xpdo */
     public $xpdo = null;
     public $options = array ();
+    /** @var modInstallRequest $request */
+    public $request = null;
+    /** @var modInstallSettings $settings */
+    public $settings = null;
+    /** @var modInstallLexicon $lexicon */
+    public $lexicon = null;
+    /** @var array $config */
     public $config = array ();
     public $action = '';
-    public $lexicon = null;
     public $finished = false;
 
     /**
@@ -59,18 +66,46 @@ class modInstall {
     }
 
     /**
-     * Loads the request handler for the setup.
-     * @return boolean True if successful.
+     * Load a class file for setup
+     * @param string $class The name of the class to load
+     * @param string $path The path to load the class from
+     * @return array|bool
      */
-    public function loadRequestHandler($class = 'modInstallRequest') {
-        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
-        $included = @include $path;
-        if ($included) {
-            $this->request = new $class($this);
-        } else {
-            $this->_fatalError($this->lexicon('request_handler_err_nf',array('path' => $path)));
+    public function loadClass($class,$path = '') {
+        $classFile = str_replace('.', '/', strtolower($class));
+        $className = explode('.',$class);
+        $className = array_reverse($className);
+        $className = $className[0];
+
+        if (empty($path)) {
+            $path = strtr(realpath(MODX_SETUP_PATH.'includes'),'\\','/').'/';
         }
-        return $included;
+
+        $classPath = $path.$classFile.'.class.php';
+        $included = require_once $classPath;
+        return $included ? $className : false;
+    }
+
+    /**
+     * Return a service class instance
+     * @param string $name
+     * @param string $class
+     * @param string $path
+     * @param array $config
+     * @return Object|null
+     */
+    public function getService($name,$class,$path = '',array $config = array()) {
+        $className = $this->loadClass($class,$path);
+        if (!empty($className)) {
+            $this->$name = new $className($this,$config);
+        } else {
+            $this->_fatalError($this->lexicon('service_err_nf',array(
+                'name' => $name,
+                'class' => $class,
+                'path' => $path,
+            )));
+        }
+        return $this->$name;
     }
 
     /**
@@ -78,34 +113,25 @@ class modInstall {
      *
      * @access public
      * @param string $class The settings class to load.
-     * @return boolean True if successful.
+     * @param string $path
+     * @return modInstallSettings
      */
-    public function loadSettings($class = 'modInstallSettings') {
-        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
-        $included = @include_once $path;
-        if ($included) {
-            $this->settings = new $class($this);
+    public function loadSettings($class = 'modInstallSettings',$path = '') {
+        $className = $this->loadClass($class,$path);
+        if (!empty($className)) {
+            $this->settings = new $className($this);
         } else {
-            $this->_fatalError($this->lexicon('settings_handler_err_nf',array('path' => $path)));
+            $this->_fatalError($this->lexicon('settings_handler_err_nf',array('path' => $className)));
         }
-        return $included;
-    }
-
-    /**
-     * Loads the lexicon class for the install process.
-     *
-     * @param string $class The class name of the lexicon class to use.
-     * @return boolean True if successful.
-     */
-    public function loadLexicon($class = 'modInstallLexicon') {
-        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
-        $included = @include $path;
-        $this->lexicon = new modInstallLexicon($this);
-        return $included;
+        return $this->settings;
     }
 
     /**
      * Shortcut method for modInstallLexicon::get. {@see modInstallLexicon::get}
+     *
+     * @param string $key
+     * @param array $placeholders
+     * @return string
      */
     public function lexicon($key,array $placeholders = array()) {
         return $this->lexicon->get($key,$placeholders);

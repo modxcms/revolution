@@ -24,6 +24,7 @@
  * @package setup
  */
 include_once strtr(realpath(MODX_CORE_PATH . 'model/smarty/Smarty.class.php'),'\\','/');
+require_once strtr(realpath(dirname(__FILE__).'/modinstallparser.class.php'),'\\','/');
 /**
  * An extension of the Smarty class for use with modX.
  *
@@ -31,7 +32,7 @@ include_once strtr(realpath(MODX_CORE_PATH . 'model/smarty/Smarty.class.php'),'\
  * the MODX context.
  * @package setup
  */
-class modInstallSmarty extends Smarty {
+class modInstallSmarty extends Smarty implements modInstallParser {
     public $smarty = null;
     public $_blocks;
     public $_derived;
@@ -55,23 +56,27 @@ class modInstallSmarty extends Smarty {
 
         if (!is_dir($this->compile_dir) || !is_writable($this->compile_dir)) $this->writeTree($this->compile_dir, '0777');
 
-        $this->assign('app_name','MODX');
+        $this->set('app_name','MODX');
 
         $this->_blocks = array();
-        $this->_derived = NULL;
+        $this->_derived = null;
     }
 
-    public function display($resource_name) {
-        echo $this->fetch($resource_name);
+    public function display($tpl) {
+        echo $this->fetch($tpl);
     }
 
-    public function fetch($resource_name) {
-        $ret = parent::fetch($resource_name);
+    public function fetch($tpl) {
+        $ret = parent::fetch($tpl);
         while ($resource = $this->_derived) {
             $this->_derived = null;
             $ret = parent::fetch($resource);
         }
         return $ret;
+    }
+
+    public function set($key,$value) {
+        return $this->assign($key,$value);
     }
 
     /**

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
  * @package setup
  */
 $install->settings->check();
@@ -12,7 +15,7 @@ if (!empty($_POST['proceed'])) {
 
 $mode = $install->settings->get('installmode');
 $results= $install->execute($mode);
-$this->parser->assign('results', $results);
+$parser->set('results', $results);
 
 $failed= false;
 foreach ($results as $item) {
@@ -21,7 +24,7 @@ foreach ($results as $item) {
         break;
     }
 }
-$this->parser->assign('failed', $failed);
-$this->parser->assign('itemClass', $failed ? 'error' : '');
-$this->parser->assign('results',$results);
-return $this->parser->fetch('install.tpl');
+$parser->set('failed', $failed);
+$parser->set('itemClass', $failed ? 'error' : '');
+$parser->set('results',$results);
+return $parser->fetch('install.tpl');

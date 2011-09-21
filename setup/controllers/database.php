@@ -1,5 +1,9 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
+ * 
  * @package setup
  */
 $install->settings->check();
@@ -75,11 +79,11 @@ if (!empty($_POST['proceed'])) {
 
     /* if errors, output */
     if (!empty($errors)) {
-        $this->parser->assign('config',$install->settings->fetch());
-        $this->parser->assign('showHidden',true);
-        $this->parser->assign('errors_message',$install->lexicon('err_occ'));
+        $parser->set('config',$install->settings->fetch());
+        $parser->set('showHidden',true);
+        $parser->set('errors_message',$install->lexicon('err_occ'));
         foreach ($errors as $k => $v) {
-            $this->parser->assign('error_'.$k,$v);
+            $parser->set('error_'.$k,$v);
         }
     } else { /* proceed to contexts page, or summary if @traditional */
         switch (MODX_SETUP_KEY) {
@@ -121,7 +125,7 @@ if (!empty($_POST['proceed'])) {
     }
 }
 $mode = $install->settings->get('installmode');
-$this->parser->assign('installmode', $mode);
-$this->parser->assign('config',$install->settings->fetch());
+$parser->set('installmode', $mode);
+$parser->set('config',$install->settings->fetch());
 
-return $this->parser->fetch('database.tpl');
+return $parser->fetch('database.tpl');

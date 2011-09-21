@@ -79,12 +79,11 @@ if (!include(MODX_SETUP_PATH . 'includes/modinstall.class.php')) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure you have uploaded all of the setup/ files; your setup/includes/modinstall.class.php file is missing.</p></body></html>');
 }
 $modInstall = new modInstall();
-if ($modInstall->loadLexicon()) {
+if ($modInstall->getService('lexicon','modInstallLexicon')) {
     $modInstall->lexicon->load('default');
 }
 $modInstall->findCore();
 $modInstall->doPreloadChecks();
-$modInstall->loadRequestHandler();
-$modInstall->request->loadParser();
+$modInstall->getService('request','request.modInstallRequest');
 echo $modInstall->request->handle();
 exit();

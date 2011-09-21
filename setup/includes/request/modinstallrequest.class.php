@@ -36,6 +36,9 @@ class modInstallRequest {
      * @access public
      */
     public $install = null;
+    /** @var modInstallParser $parser */
+    public $parser = null;
+    public $action = '';
 
     /**
      * Initializes the modInstallRequest object.
@@ -45,33 +48,38 @@ class modInstallRequest {
      */
     function __construct(modInstall &$installer) {
         $this->install =& $installer;
+        $this->loadParser();
     }
 
     /**
      * Handles the request and loads the appropriate controller.
+     *
+     * @return string
      */
     public function handle() {
         $install =& $this->install;
         $install->loadSettings();
         $install->loadDriver();
-        $this->parser->assign('config',$install->settings->fetch());
+        $this->parser->set('config',$install->settings->fetch());
 
         $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 
-        $this->parser->assign('app_name', 'MODX '.$currentVersion['code_name']);
-        $this->parser->assign('app_version', $currentVersion['full_version']);
+        $this->parser->set('app_name', 'MODX '.$currentVersion['code_name']);
+        $this->parser->set('app_version', $currentVersion['full_version']);
 
         $agreed= isset ($_REQUEST['agreed']) ? true : false;
         $agreedChecked= $agreed ? ' checked="checked"' : '';
 
         $this->install->lexicon->load('default');
         $this->install->lexicon->load('drivers');
-        $this->parser->assign('_lang',$this->install->lexicon->fetch());
+        $this->parser->set('_lang',$this->install->lexicon->fetch());
 
         $this->action= isset ($_REQUEST['action']) ? $_REQUEST['action'] : 'language';
-        $this->parser->assign('action',$this->action);
+        $this->parser->set('action',$this->action);
+
 
         $output = $this->parser->fetch('header.tpl');
+        $parser =& $this->parser;
         $output .= include MODX_SETUP_PATH . 'controllers/' . $this->action . '.php';
         $output .= $this->parser->fetch('footer.tpl');
 
@@ -80,17 +88,21 @@ class modInstallRequest {
 
     /**
      * Loads the Smarty parser
+     *
+     * @param string $class
+     * @param string $path The path to the parser
      * @return boolean True if successful.
      */
-    public function loadParser() {
+    public function loadParser($class = 'parser.modInstallSmarty',$path = '') {
         $loaded = false;
-        if (!@require_once (MODX_SETUP_PATH . 'includes/modinstallsmarty.class.php')) {
+        $className = $this->install->loadClass($class,$path);
+        if (empty($className)) {
             if (!@include (MODX_SETUP_PATH . 'provisioner/bootstrap.php')) {
                 die ('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure all the files in the MODX setup package have been uploaded to your server.</p></body></html>');
             }
+            $loaded = false;
         }
-        $this->parser = new modInstallSmarty();
-        $this->parser->caching= false;
+        $this->parser = new $className();
         return $loaded;
     }
 

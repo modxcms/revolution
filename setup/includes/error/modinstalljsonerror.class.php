@@ -19,8 +19,11 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
-require_once MODX_SETUP_PATH . 'includes/modinstallerror.class.php';
-
+require_once strtr(realpath(MODX_SETUP_PATH.'includes/error/modinstallerror.class.php'),'\\','/');
+/**
+ * @package modx
+ * @subpackage setup
+ */
 class modInstallJSONError extends modInstallError {
     public $fields;
     public $type;

@@ -1,5 +1,9 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
+ * 
  * @package setup
  */
 $install->settings->check();
@@ -35,19 +39,19 @@ $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'))
 if ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
     include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 
-    $this->parser->assign('context_web_path', defined('MODX_BASE_PATH') ? MODX_BASE_PATH : MODX_INSTALL_PATH);
-    $this->parser->assign('context_web_url', defined('MODX_BASE_URL') ? MODX_BASE_URL : $webUrl);
-    $this->parser->assign('context_connectors_path', defined('MODX_CONNECTORS_PATH') ? MODX_CONNECTORS_PATH : MODX_INSTALL_PATH . 'connectors/');
-    $this->parser->assign('context_connectors_url', defined('MODX_CONNECTORS_URL') ? MODX_CONNECTORS_URL : $webUrl . 'connectors/');
-    $this->parser->assign('context_mgr_path', defined('MODX_MANAGER_PATH') ? MODX_MANAGER_PATH : MODX_INSTALL_PATH . 'manager/');
-    $this->parser->assign('context_mgr_url', defined('MODX_MANAGER_URL') ? MODX_MANAGER_URL : $webUrl . 'manager/');
+    $parser->set('context_web_path', defined('MODX_BASE_PATH') ? MODX_BASE_PATH : MODX_INSTALL_PATH);
+    $parser->set('context_web_url', defined('MODX_BASE_URL') ? MODX_BASE_URL : $webUrl);
+    $parser->set('context_connectors_path', defined('MODX_CONNECTORS_PATH') ? MODX_CONNECTORS_PATH : MODX_INSTALL_PATH . 'connectors/');
+    $parser->set('context_connectors_url', defined('MODX_CONNECTORS_URL') ? MODX_CONNECTORS_URL : $webUrl . 'connectors/');
+    $parser->set('context_mgr_path', defined('MODX_MANAGER_PATH') ? MODX_MANAGER_PATH : MODX_INSTALL_PATH . 'manager/');
+    $parser->set('context_mgr_url', defined('MODX_MANAGER_URL') ? MODX_MANAGER_URL : $webUrl . 'manager/');
 } else {
-    $this->parser->assign('context_web_path', MODX_INSTALL_PATH);
-    $this->parser->assign('context_web_url', $webUrl);
-    $this->parser->assign('context_connectors_path', MODX_INSTALL_PATH . 'connectors/');
-    $this->parser->assign('context_connectors_url', $webUrl . 'connectors/');
-    $this->parser->assign('context_mgr_path', MODX_INSTALL_PATH . 'manager/');
-    $this->parser->assign('context_mgr_url', $webUrl . 'manager/');
+    $parser->set('context_web_path', MODX_INSTALL_PATH);
+    $parser->set('context_web_url', $webUrl);
+    $parser->set('context_connectors_path', MODX_INSTALL_PATH . 'connectors/');
+    $parser->set('context_connectors_url', $webUrl . 'connectors/');
+    $parser->set('context_mgr_path', MODX_INSTALL_PATH . 'manager/');
+    $parser->set('context_mgr_url', $webUrl . 'manager/');
 }
 
-return $this->parser->fetch('contexts.tpl');
+return $parser->fetch('contexts.tpl');
