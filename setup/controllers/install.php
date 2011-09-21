@@ -12,17 +12,22 @@ if (!empty($_POST['proceed'])) {
     $this->proceed('complete');
 }
 
-
 $mode = $install->settings->get('installmode');
-$results= $install->execute($mode);
-$parser->set('results', $results);
+$install->getService('runner','runner.modInstallRunnerWeb');
+$results = array();
+if ($install->runner) {
+    $success = $install->runner->run($mode);
+    $results = $install->runner->getResults();
 
-$failed= false;
-foreach ($results as $item) {
-    if ($item['class'] === 'failed') {
-        $failed= true;
-        break;
+    $failed= false;
+    foreach ($results as $item) {
+        if ($item['class'] === 'failed') {
+            $failed= true;
+            break;
+        }
     }
+} else {
+    $failed = true;
 }
 $parser->set('failed', $failed);
 $parser->set('itemClass', $failed ? 'error' : '');

@@ -24,7 +24,7 @@
  * @package setup
  */
 include_once strtr(realpath(MODX_CORE_PATH . 'model/smarty/Smarty.class.php'),'\\','/');
-require_once strtr(realpath(dirname(__FILE__).'/modinstallparser.class.php'),'\\','/');
+require_once strtr(realpath(MODX_SETUP_PATH . 'includes/parser/modinstallparser.class.php'),'\\','/');
 /**
  * An extension of the Smarty class for use with modX.
  *
