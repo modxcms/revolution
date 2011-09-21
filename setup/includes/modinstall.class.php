@@ -45,6 +45,12 @@ class modInstall {
     public $settings = null;
     /** @var modInstallLexicon $lexicon */
     public $lexicon = null;
+    /** @var modInstallTest $test */
+    public $test;
+    /** @var modInstallVersion $versioner */
+    public $versioner;
+    /** @var modInstallDriver $driver */
+    public $driver;
     /** @var array $config */
     public $config = array ();
     public $action = '';
@@ -242,6 +248,7 @@ class modInstall {
     /**
      * Get an xPDO connection to the database.
      *
+     * @param int $mode
      * @return xPDO A copy of the xpdo object.
      */
     public function getConnection($mode = modInstall::MODE_NEW) {
@@ -288,37 +295,40 @@ class modInstall {
 
     /**
      * Load distribution-specific test handlers
+     *
+     * @param string $class
+     * @param string $path
+     * @param array $config
+     * @return modInstallTest|void
      */
-    public function loadTestHandler($class = 'modInstallTest') {
-        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
-        $included = @include $path;
-        if ($included) {
+    public function loadTestHandler($class = 'test.modInstallTest',$path = '',array $config = array()) {
+        $className = $this->loadClass($class,$path);
+        if (!empty($className)) {
             $this->lexicon->load('test');
 
-            $class = $class.ucfirst(trim(MODX_SETUP_KEY, '@'));
-            $versionPath = dirname(__FILE__).'/checks/'.strtolower($class).'.class.php';
-            $included = @include $versionPath;
-            if (!$included) {
-                $this->_fatalError($this->lexicon('test_version_class_nf',array('path' => $versionPath)));
+            $distributionClass = 'test.'.$className.ucfirst(trim(MODX_SETUP_KEY, '@'));
+            $distributionClassName = $this->loadClass($distributionClass,$path);
+            if (empty($distributionClassName)) {
+                $this->_fatalError($this->lexicon('test_version_class_nf',array('path' => $distributionClass)));
             }
-            $this->test = new $class($this);
-            return $this->test;
+            $this->test = new $distributionClassName($this);
         } else {
             $this->_fatalError($this->lexicon('test_class_nf',array('path' => $path)));
         }
+        return $this->test;
     }
 
     /**
      * Perform a series of pre-installation tests.
      *
      * @param integer $mode The install mode.
-     * @param string $test_class The class to run tests with
+     * @param string $testClass The class to run tests with
+     * @param string $testClassPath
      * @return array An array of result messages collected during the process.
      */
-    public function test($mode = modInstall::MODE_NEW,$test_class = 'modInstallTest') {
-        $test = $this->loadTestHandler($test_class);
-        $results = $this->test->run($mode);
-        return $results;
+    public function test($mode = modInstall::MODE_NEW,$testClass = 'test.modInstallTest',$testClassPath = '') {
+        $this->loadTestHandler($testClass,$testClassPath);
+        return $this->test->run($mode);
     }
 
     /**
@@ -326,16 +336,18 @@ class modInstall {
      *
      * @access public
      * @param string $class The class to load.
+     * @param string $path
+     * @return modInstallVersion
      */
-    public function loadVersionInstaller($class = 'modInstallVersion') {
-        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
-        $included = @include $path;
-        if ($included) {
-            $this->versioner = new $class($this);
+    public function loadVersionInstaller($class = 'modInstallVersion',$path = '') {
+        $className = $this->loadClass($class,$path);
+        if (!empty($className)) {
+            $this->versioner = new $className($this);
             return $this->versioner;
         } else {
             $this->_fatalError($this->lexicon('versioner_err_nf',array('path' => $path)));
         }
+        return $this->versioner;
     }
 
     /**
@@ -473,7 +485,6 @@ class modInstall {
     /**
      * Verify that the modX class can be initialized.
      *
-     * @param integer $mode Indicates the installation mode.
      * @return array An array of error messages collected during the process.
      */
     public function verify() {
@@ -492,6 +503,7 @@ class modInstall {
      *
      * TODO: implement this function to cleanup any temporary files
      * @param array $options
+     * @return array
      */
     public function cleanup(array $options = array ()) {
         $errors = array();
@@ -502,6 +514,7 @@ class modInstall {
         }
 
         /* create the directories for Package Management */
+        /** @var modCacheManager $cacheManager */
         $cacheManager = $modx->getCacheManager();
         $directoryOptions = array(
             'new_folder_permissions' => $modx->getOption('new_folder_permissions',null,0775),
@@ -543,13 +556,16 @@ class modInstall {
     /**
      * Removes the setup directory
      *
-     * @access publics
+     * @access public
+     * @param array $options
+     * @return array
      */
     public function removeSetupDirectory(array $options = array()) {
         $errors = array();
 
         $modx = $this->_modx($errors);
         if ($modx) {
+            /** @var modCacheManager $cacheManager */
             $cacheManager = $modx->getCacheManager();
             if ($cacheManager) {
                 $setupPath = $modx->getOption('base_path').'setup/';
@@ -653,7 +669,7 @@ class modInstall {
     /**
      * Installs a transport package.
      *
-     * @param string The package signature.
+     * @param string $pkg The package signature.
      * @param array $attributes An array of installation attributes.
      * @return array An array of error messages collected during the process.
      */
@@ -859,7 +875,8 @@ class modInstall {
      * Outputs a fatal error message and then dies.
      *
      * @access private
-     * @param string/array A string or array of errors
+     * @param string|array $errors A string or array of errors
+     * @return void
      */
     private function _fatalError($errors) {
         $output = '<html><head><title></title></head><body><h1>'.$this->lexicon('fatal_error').'</h1><ul>';
@@ -916,21 +933,20 @@ class modInstall {
     /**
      * Loads the correct database driver for this environment.
      *
+     * @param string $path
      * @return boolean True if successful.
      */
-    public function loadDriver() {
+    public function loadDriver($path = '') {
         $this->loadSettings();
-        $path = dirname(__FILE__).'/drivers/';
 
         /* db specific driver */
-        $class = 'modInstallDriver_'.strtolower($this->settings->get('database_type','mysql'));
-        $driverPath = $path.strtolower($class.'.class.php');
-        $included = @include_once $driverPath;
-        if ($included) {
-            $this->driver = new $class($this);
+        $class = 'drivers.modInstallDriver_'.strtolower($this->settings->get('database_type','mysql'));
+        $className = $this->loadClass($class,$path);
+        if (!empty($className)) {
+            $this->driver = new $className($this);
         } else {
-            $this->_fatalError($this->lexicon('driver_class_err_nf',array('path' => $driverPath)));
+            $this->_fatalError($this->lexicon('driver_class_err_nf',array('path' => $class)));
         }
-        return $included;
+        return !empty($className);
     }
 }

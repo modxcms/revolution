@@ -7,6 +7,8 @@
  */
 abstract class modInstallTest {
     public $results = array();
+    /** @var modInstall $install */
+    public $install;
     public $mode;
 
     function __construct(&$install) {
