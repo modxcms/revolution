@@ -33,6 +33,10 @@ require_once strtr(realpath(MODX_SETUP_PATH.'includes/request/modinstallrequest.
 class modInstallCLIRequest extends modInstallRequest {
     /** @var modInstall $install */
     public $install;
+    /** @var int $timeStart */
+    public $timeStart = 0;
+    /** @var string $timeTotal */
+    public $timeTotal = '';
     
     /**
      * Constructor for modInstallConnector object.
@@ -80,6 +84,7 @@ class modInstallCLIRequest extends modInstallRequest {
      * @param string $action
      */
     public function handle($action = '') {
+        $this->beginTimer();
         /* prepare the settings */
         $settings = $_REQUEST;
         if (empty($settings['installmode'])) $settings['installmode'] = modInstall::MODE_NEW;
@@ -92,7 +97,7 @@ class modInstallCLIRequest extends modInstallRequest {
 
         /* load the config file */
         if (!$this->loadConfigFile()) {
-            $this->end('No config file!');
+            $this->end($this->install->lexicon('cli_no_config_file'));
         }
 
         /* load the driver */
@@ -102,10 +107,13 @@ class modInstallCLIRequest extends modInstallRequest {
         $mode = (int)$this->install->settings->get('installmode');
         $results= $this->install->test($mode);
         if (!$this->install->test->success) {
-            $msg = 'Failed tests: '."\n";
+            $msg = "\n";
             foreach ($results['fail'] as $field => $result) {
                 $msg .= $field.': '.$result['title'].' - '.$result['message'];
             }
+            $msg = $this->install->lexicon('cli_tests_failed',array(
+                'errors' => $msg,
+            ));
             $this->end($msg);
         }
 
@@ -129,10 +137,13 @@ class modInstallCLIRequest extends modInstallRequest {
         }
 
         if ($failed) {
-            $msg = 'Failed install! '."\n";
+            $msg = "\n";
             foreach ($errors as $field => $result) {
                 $msg .= $result['msg'];
             }
+            $msg = $this->install->lexicon('cli_install_failed',array(
+                'errors' => $msg,
+            ));
             $this->end($msg);
         }
 
@@ -145,7 +156,10 @@ class modInstallCLIRequest extends modInstallRequest {
         foreach ($cleanupErrors as $key => $error) {
             $this->install->xpdo->log(xPDO::LOG_LEVEL_ERROR,$error);
         }
-        $this->end('Installation finished.');
+        $this->endTimer();
+        $this->end(''.$this->install->lexicon('installation_finished',array(
+            'time' => $this->timeTotal,
+        )));
     }
 
     /**
@@ -211,5 +225,30 @@ class modInstallCLIRequest extends modInstallRequest {
     public function end($message = '') {
         @session_write_close();
         die($message."\n");
+    }
+
+    /**
+     * Start the debugging timer
+     * @return int
+     */
+    protected function beginTimer() {
+        $mtime = microtime();
+        $mtime = explode(" ", $mtime);
+        $mtime = $mtime[1] + $mtime[0];
+        $this->timeStart = $mtime;
+        return $this->timeStart;
+    }
+    /**
+     * End the debugging timer
+     * @return string
+     */
+    protected function endTimer() {
+        $mtime = microtime();
+        $mtime = explode(" ", $mtime);
+        $mtime = $mtime[1] + $mtime[0];
+        $tend = $mtime;
+        $this->timeTotal = ($tend - $this->timeStart);
+        $this->timeTotal = sprintf("%2.4f s", $this->timeTotal);
+        return $this->timeTotal;
     }
 }

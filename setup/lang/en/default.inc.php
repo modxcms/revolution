@@ -15,6 +15,9 @@ $_lang['base_template'] = 'BaseTemplate';
 $_lang['cache_manager_err'] = 'MODX\'s Cache Manager could not be loaded.';
 $_lang['choose_language'] = 'Choose Language';
 $_lang['cleanup_errors_title'] = 'Important Note:';
+$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
+$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
 $_lang['close'] = 'close';
 $_lang['config_file_err_w'] = 'Error writing config file.';
 $_lang['config_file_perms_notset'] = 'Config file permissions were not updated. You may want to change the permissions on your config file to secure the file from tampering.';
@@ -29,7 +32,7 @@ $_lang['connection_collation'] = 'Collation:';
 $_lang['connection_connection_and_login_information'] = 'Database connection and login information';
 $_lang['connection_connection_note'] = 'Please enter the following information to connect to your MODX database. If there is no database yet, the installer will attempt to create it for you. (This may fail if your database configuration or the database user permissions do not allow it.)';
 $_lang['connection_database_host'] = 'Database host:';
-//$_lang['connection_database_info'] = 'Now please enter the login data for your database.';
+$_lang['connection_database_info'] = 'Now please enter the login data for your database.';
 $_lang['connection_database_login'] = 'Database login name:';
 $_lang['connection_database_name'] = 'Database name:';
 $_lang['connection_database_pass'] = 'Database password:';
@@ -91,6 +94,7 @@ $_lang['install_packages_options'] = 'Package Installation Options';
 $_lang['install_success'] = 'Core installation was successful. Click next to complete the installation process.';
 $_lang['install_summary'] = 'Installation Summary';
 $_lang['install_update'] = 'Install/Update';
+$_lang['installation_finished'] = 'Installation finished in [[+time]]';
 $_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
     <p>Usage of this software is subject to the GPL license. To help you understand
     what the GPL licence is and how it affects your ability to use the software, we
