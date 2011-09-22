@@ -156,6 +156,10 @@ class modInstallCLIRequest extends modInstallRequest {
         foreach ($cleanupErrors as $key => $error) {
             $this->install->xpdo->log(xPDO::LOG_LEVEL_ERROR,$error);
         }
+
+        if ($this->settings->get('remove_setup_directory')) {
+            $this->install->removeSetupDirectory();
+        }
         $this->endTimer();
         $this->end(''.$this->install->lexicon('installation_finished',array(
             'time' => $this->timeTotal,
