@@ -36,6 +36,8 @@ class modInstallRunnerWeb extends modInstallRunner {
                 break;
                 /* new install, create tables */
             default :
+                $modx =& $this->install->xpdo;
+                $install =& $this->install;
                 include MODX_SETUP_PATH . 'includes/tables_create.php';
                 break;
         }
