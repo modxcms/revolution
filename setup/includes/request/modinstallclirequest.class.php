@@ -121,6 +121,7 @@ class modInstallCLIRequest extends modInstallRequest {
             foreach ($results as $item) {
                 if ($item['class'] === 'failed') {
                     $failed= true;
+                    $this->install->xpdo->log(xPDO::LOG_LEVEL_ERROR,$item['msg']);
                     $errors[] = $item;
                     break;
                 }
@@ -137,9 +138,14 @@ class modInstallCLIRequest extends modInstallRequest {
 
         /* cleanup */
         $errors= $this->install->verify();
+        foreach ($errors as $error) {
+            $this->install->xpdo->log(xPDO::LOG_LEVEL_ERROR,$error);
+        }
         $cleanupErrors = $this->install->cleanup();
+        foreach ($cleanupErrors as $key => $error) {
+            $this->install->xpdo->log(xPDO::LOG_LEVEL_ERROR,$error);
+        }
         $this->end('Installation finished.');
-        
     }
 
     /**
