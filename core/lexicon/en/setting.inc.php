@@ -306,6 +306,9 @@ $_lang['setting_global_duplicate_uri_check_desc'] = 'Select \'Yes\' to make dupl
 $_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
 $_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resources hidden from menus by default.';
 
+$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Use HTML5 local caching for the manager. Recommended to use only if using the manager with modern browsers.';
+
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
 $_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
 

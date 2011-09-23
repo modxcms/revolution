@@ -692,6 +692,15 @@ $settings['hidemenu_default']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
+$settings['manager_html5_cache']->fromArray(array (
+  'key' => 'manager_html5_cache',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['link_tag_scheme']= $xpdo->newObject('modSystemSetting');
 $settings['link_tag_scheme']->fromArray(array (
   'key' => 'link_tag_scheme',
