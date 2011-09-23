@@ -496,7 +496,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     border-collapse:separate;
     line-height:1;
     margin:0 1px;
-    padding:0 0 5px;
+    padding:0 0 3px;
     text-decoration:none;
     border-color:#CACACA #C0C0C0 #AAA;
     border-style:solid;
@@ -509,7 +509,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     font:bold 11px tahoma, verdana, helvetica, sans-serif;
     height:20px !important;
     cursor:pointer;
-    padding:3px 6px 0 !important;
+    padding:3px 4px 0 !important;
     text-shadow:0 1px 0 #fcfcfc;
 }
 .x-btn em {
