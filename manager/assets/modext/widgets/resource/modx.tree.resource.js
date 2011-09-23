@@ -70,8 +70,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var tf = new Ext.form.TextField({
             name: 'search'
             ,value: ''
-            ,width: Ext.getCmp('modx-resource-tree').getWidth() - 15
-            ,style: 'margin: 5px;'
+			,ctCls: 'modx-leftbar-second-tb'
+            ,width: Ext.getCmp('modx-resource-tree').getWidth() - 12
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search,scope:this}

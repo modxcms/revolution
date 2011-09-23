@@ -90,10 +90,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         var cb = MODx.load({
             xtype: 'modx-combo-source'
-            ,style: 'margin: 5px'
-            ,cls: 'modx-file-tree-source-cb'
+            ,ctCls: 'modx-leftbar-second-tb'
             ,value: 1
-            ,width: Ext.getCmp(this.config.id).getWidth() - 15
+            ,width: Ext.getCmp(this.config.id).getWidth() - 12
             ,listeners: {
                 'select':{fn:this.changeSource,scope:this}
             }
