@@ -65,8 +65,9 @@ hr {
 
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
+    -moz-border-radius:0 0 4px 4px;
+    -webkit-border-radius:0 0 4px 4px;
+    border-radius:0 0 4px 4px;
     padding-bottom: 5px;
     background-color: #EFEFEF;
 }
@@ -105,6 +106,15 @@ hr {
     top:108px;
 }
 
+/* fix leftbar toolbar */
+#modx-leftbar .x-btn{
+	padding: 0;
+}
+#modx-leftbar .x-btn button {
+	height: 20px !important;
+	padding: 3px 9px 0 !important;
+}
+
 #modx-content {
     padding: 0 0 20px 15px;
     height: 100%;
@@ -137,7 +147,7 @@ hr {
     background-color:#EAEAEA;
     border-bottom-color:#E4E4E4;
     border-top:1px solid #E4E4E4;
-    padding:4px 0;
+    padding:5px;
 }
 #modx-leftbar .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text {
 	color:#5E5E5E;
