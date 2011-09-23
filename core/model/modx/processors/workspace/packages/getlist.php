@@ -49,7 +49,7 @@ foreach ($packages as $package) {
     $packageArray = $package->toArray();
 
     $signatureArray = explode('-',$package->get('signature'));
-    $packageArray['name'] = $signatureArray[0];
+    $packageArray['name'] = $package->get('package_name');
     $packageArray['version'] = $signatureArray[1];
     if (isset($signatureArray[2])) {
         $packageArray['release'] = $signatureArray[2];
