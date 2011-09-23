@@ -309,8 +309,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 	height: 20px !important;
     padding: 6px !important;
     text-shadow: 1px -1px 0 #FFFFFF;
-	color: #888888;
-    font-size: 13px;
+	color: #606060;
     font-weight: bold;
 }
 .x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger{
@@ -440,7 +439,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     height: 20px !important;
 }
 .ext-gecko .x-form-text, .ext-ie8 .x-form-text {
-    padding-top: 4px;
+    padding: 5px;
 }
 
 .ext-safari .x-form-invalid{
@@ -2405,4 +2404,5 @@ body.x-body-masked .x-window-plain .x-window-mc {
 /* issue #5505 */
 .x-form-text {
     min-height: 20px;
+	padding: 5px;
 }
