@@ -269,13 +269,16 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-form-text, textarea.x-form-field{
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    -o-border-radius:2px;
+    -ms-border-radius:2px;
+    -khtml-border-radius:2px;
+    border-radius:2px;
     position: relative;
     background-color: #fbfbfb;
     background-image: none;
-    border-color: #bfbfbf #dfdfdf #dfdfdf #bfbfbf;
+    border-color: #CCCCCC;
 }
 
 .x-form-select-one {
@@ -303,8 +306,12 @@ ul.x-tab-strip li.x-tab-strip-active  {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: 0 none;
-    padding-right: 3px;
+	height: 20px !important;
+    padding: 6px !important;
     text-shadow: 1px -1px 0 #FFFFFF;
+	color: #888888;
+    font-size: 13px;
+    font-weight: bold;
 }
 .x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger{
     -moz-border-radius-topright: 3px;
@@ -319,17 +326,6 @@ ul.x-tab-strip li.x-tab-strip-active  {
     border-right: 1px solid #C5C5C5 !important;
     border-top: 1px solid #C5C5C5 !important;
 }
-/* fix date trigger */
-.x-form-date-trigger {
-    width: 17px !important;
-    height: 22px;
-    border: 0 none !important;
-    border-bottom: 0 none !important;
-    border-top: 0 none !important;
-    border-right: 0 none !important;
-    border-left: 1px solid #C5C5C5 !important;
-    background-position: -34px 0 !important;
-}
 
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
@@ -342,40 +338,77 @@ ul.x-tab-strip li.x-tab-strip-active  {
     background: white url(../images/modx-theme/form/trigger.png);
 }
 
-.x-form-field-wrap .x-form-trigger{
-    background-position: -30px -12px;
-    height: 20px;
-    width: 36px;
+.x-form-field-trigger-wrap {
+    border-color: #D0D0D0 #CCCCCC #BEBEBE;
+    border-style: solid;
+    border-width: 1px;
+    height: 30px;
+    margin-right: 1px;
+}
+.x-form-field-trigger-wrap .x-form-text {
+    background-color:transparent;
+    border:0 none;
 }
 .x-form-field-wrap {
-    background: transparent url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0 bottom;
+    background:#ececec;
+    background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+    background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    -o-border-radius:2px;
+    -ms-border-radius:2px;
+    -khtml-border-radius:2px;
+    border-radius:2px;
 }
-.x-small-editor .x-form-field-wrap .x-form-trigger{
-    width: 26px;
-    height: 22px;
+.x-form-field-wrap .x-form-trigger {
+    border:0 none !important;
+    height:30px;
+    width:32px;
+	background-repeat: no-repeat;
+	background-position: left center;
 }
-
-.x-form-field-wrap .x-form-trigger{
-    background-position: -26px 0;
-    height: 24px;
-    width: 29px;
+.x-form-field-wrap .x-form-trigger-over {
+    background-position:right;
 }
-
-
-/* fix safari triggerfield */
-.ext-safari input,.ext-safari textarea{ outline:none; }
-.ext-strict .ext-safari .x-small-editor .x-form-text { height: 18px !important; }
-.ext-safari .x-form-field-wrap .x-form-trigger {
-    position: static;
-    top: auto;
-    vertical-align: top;
+.x-form-field-wrap .x-form-arrow-trigger { background:url("../images/modx-theme/form/trigger.png") no-repeat scroll left center transparent; }
+.x-form-field-wrap .x-form-trigger.x-form-trigger-over { background-position:center center; }
+.x-form-field-wrap .x-form-trigger.x-form-trigger-click { background-position:right center; }
+.x-small-editor .x-form-field-wrap {
+    background:#ececec;
+    background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+    background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    -o-border-radius:2px;
+    -ms-border-radius:2px;
+    -khtml-border-radius:2px;
+    border-radius:2px;
 }
-
-
-
+.x-small-editor .x-form-field-wrap .x-form-trigger {
+    border:0 none !important;
+    height:32px;
+    width:32px;
+}
+.x-small-editor .x-form-field-wrap .x-form-trigger-over {
+    background-color:#f3f3f3;
+    background-position:right;
+}
+.x-small-editor .x-form-field-wrap .x-form-arrow-trigger { background:url("../images/modx-theme/form/trigger.png") no-repeat scroll left center transparent; }
+.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-over { background-position:center center; }
+.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-click { background-position:right center; }
 
 .x-form-field-wrap .x-form-date-trigger{
-    background-image: url(../images/modx-theme/form/date-trigger.gif);
+    background-image: url(../images/modx-theme/form/calendar.png);
 }
 
 .x-form-field-wrap .x-form-clear-trigger{
@@ -386,25 +419,8 @@ ul.x-tab-strip li.x-tab-strip-active  {
     background-image: url(../images/modx-theme/form/search-trigger.gif);
 }
 
-.x-form-field-trigger-wrap .x-form-text{
-    background-color: transparent;
-    border-color: #C5C5C5;
-}
-
-.x-trigger-wrap-focus .x-form-trigger{
-    border-bottom-color: #a7a7a7;
-}
-
-.x-item-disabled .x-form-trigger-over{
-    border-bottom-color: #C5C5C5;
-}
-
-.x-item-disabled .x-form-trigger-click{
-    border-bottom-color: #C5C5C5;
-}
-
 .x-form-focus, textarea.x-form-focus{
-    border-color: #c5c5c5;
+    border-color: #b2b9c1;
     background-color: #FFFFFF;
 }
 
@@ -415,10 +431,13 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .ext-strict .x-small-editor .x-form-text {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    height: 24px !important;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    -o-border-radius:2px;
+    -ms-border-radius:2px;
+    -khtml-border-radius:2px;
+    border-radius:2px;
+    height: 20px !important;
 }
 .ext-gecko .x-form-text, .ext-ie8 .x-form-text {
     padding-top: 4px;
@@ -448,9 +467,15 @@ ul.x-tab-strip li.x-tab-strip-active  {
     color: gray;
 }
 
-.x-grid3 .x-small-editor .x-form-field, .x-grid3 .x-small-editor .x-form-trigger {
+.x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
     font: normal 11px arial, tahoma, helvetica, sans-serif;
-    margin-top: 7px;
+    margin-top: 5px;
+}
+.x-grid3 .x-small-editor .x-form-field-wrap {
+	overflow: hidden;
+}
+.x-grid3 .x-small-editor .x-form-field-wrap .x-form-text{
+	margin-top: 0;
 }
 
 .ext-safari .x-small-editor .x-form-field {
@@ -496,7 +521,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     border-collapse:separate;
     line-height:1;
     margin:0 1px;
-    padding:0 0 3px;
+    padding:0 0 5px;
     text-decoration:none;
     border-color:#CACACA #C0C0C0 #AAA;
     border-style:solid;
@@ -509,27 +534,12 @@ ul.x-tab-strip li.x-tab-strip-active  {
     font:bold 11px tahoma, verdana, helvetica, sans-serif;
     height:20px !important;
     cursor:pointer;
-    padding:3px 4px 0 !important;
+    padding:3px 6px 0 !important;
     text-shadow:0 1px 0 #fcfcfc;
 }
 .x-btn em {
     font-style:normal;
     font-weight:normal;
-}
-.x-btn.dark {
-    background:#5f5f5f;
-    background:-moz-linear-gradient(center bottom,#5f5f5f 0%,#afafaf 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#afafaf),color-stop(100%,#5f5f5f));
-    background:-webkit-linear-gradient(center bottom,#5f5f5f 0%,#afafaf 100%);
-    background:-o-linear-gradient(center bottom,#5f5f5f 0%,#afafaf 100%);
-    background:-ms-linear-gradient(center bottom,#5f5f5f 0%,#afafaf 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#afafaf,endColorstr=#5f5f5f,GradientType=0);
-    background:linear-gradient(center bottom,#5f5f5f 0%,#afafaf 100%);
-    border-color:#808080 #5e5e5e #404040;
-}
-.x-btn.dark button {
-    color:#fcfcfc;
-    text-shadow:0 1px 0 #111111;
 }
 .x-btn-icon {
     background:#dedede;
@@ -901,11 +911,12 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-panel-body-noheader .x-grid3-row {
-    border:0 none;
+    border-color: transparent;
 }
 
 .x-panel-body-noheader .x-grid3-row-alt{
-	border:1px solid #EFEFEF;
+	border-top:1px solid #EFEFEF;
+	border-bottom:1px solid #EFEFEF;
 }
 
 .x-panel-body-noheader .x-grid3-row-alt .x-grid3-row-table{
