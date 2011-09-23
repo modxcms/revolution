@@ -242,7 +242,6 @@ hr {
     background-position: 0 -96px;
 }
 
-
 .padding {
     padding: 11px;
     background-color: #fff;
@@ -1297,8 +1296,8 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 }
 
 /* media sources */
-.modx-file-tree-source-cb {
-    margin-right: 0 !important;
-    margin-top: 0 !important;
-    height: 22px !important;
+.modx-leftbar-second-tb {
+	padding: 6px;
+	border-bottom: 1px solid #E4E4E4;
+    border-top: 1px solid #FAFAFA;
 }
