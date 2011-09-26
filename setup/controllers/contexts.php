@@ -54,4 +54,4 @@ if ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_
     $parser->set('context_mgr_url', $webUrl . 'manager/');
 }
 
-return $parser->fetch('contexts.tpl');
+return $parser->render('contexts.tpl');

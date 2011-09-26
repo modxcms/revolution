@@ -34,4 +34,4 @@ if (!empty($_POST['proceed'])) {
 $parser->set('config_key', $config_key);
 $parser->set('writableError', $writableError);
 
-return $parser->fetch('welcome.tpl');
+return $parser->render('welcome.tpl');

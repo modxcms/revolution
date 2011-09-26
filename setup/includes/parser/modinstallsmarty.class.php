@@ -62,22 +62,16 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         $this->_derived = null;
     }
 
-    public function display($tpl) {
-        echo $this->fetch($tpl);
+
+    public function render($tpl) {
+        return $this->fetch($tpl);
     }
 
-    public function fetch($tpl) {
-        $ret = parent::fetch($tpl);
-        while ($resource = $this->_derived) {
-            $this->_derived = null;
-            $ret = parent::fetch($resource);
-        }
-        return $ret;
-    }
-
+    
     public function set($key,$value) {
         return $this->assign($key,$value);
     }
+
 
     /**
      * Recursively writes a directory tree of files to the filesystem

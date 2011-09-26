@@ -25,4 +25,4 @@ if (!defined(MODX_SETUP_KEY)) { define('MODX_SETUP_KEY','@git@'); }
 $distro = trim(MODX_SETUP_KEY,'@');
 $parser->set('cleanup',$distro != 'git' ? true : false);
 
-return $parser->fetch('complete.tpl');
+return $parser->render('complete.tpl');

@@ -128,4 +128,4 @@ $mode = $install->settings->get('installmode');
 $parser->set('installmode', $mode);
 $parser->set('config',$install->settings->fetch());
 
-return $parser->fetch('database.tpl');
+return $parser->render('database.tpl');

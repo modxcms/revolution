@@ -32,4 +32,4 @@ if ($install->runner) {
 $parser->set('failed', $failed);
 $parser->set('itemClass', $failed ? 'error' : '');
 $parser->set('results',$results);
-return $parser->fetch('install.tpl');
+return $parser->render('install.tpl');

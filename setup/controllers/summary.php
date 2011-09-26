@@ -33,4 +33,4 @@ if ($mode == modInstall::MODE_UPGRADE_REVO) {
 $parser->set('failed', $failed);
 $parser->set('testClass', $failed ? 'error' : 'success');
 $parser->set('back',$back);
-return $parser->fetch('summary.tpl');
+return $parser->render('summary.tpl');

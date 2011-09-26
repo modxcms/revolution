@@ -24,7 +24,6 @@
  * @subpackage setup
  */
 interface modInstallParser {
-    public function display($tpl);
-    public function fetch($tpl);
+    public function render($tpl);
     public function set($key,$value);
 }

@@ -53,4 +53,4 @@ if (!empty($_REQUEST['restarted'])) {
     $parser->set('restarted',true);
 }
 
-return $parser->fetch('language.tpl');
+return $parser->render('language.tpl');

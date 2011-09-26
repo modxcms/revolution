@@ -77,4 +77,4 @@ $parser->set('new_file_permissions', $nfip);
 $parser->set('default_folder_permissions', $default_folder_permissions);
 $parser->set('default_file_permissions', $default_file_permissions);
 
-return $parser->fetch('options.tpl');
+return $parser->render('options.tpl');
