@@ -53,6 +53,7 @@ img.loginCaptcha {
 .x-btn button {
     height: 28px !important;
 	padding: 3px 10px 0 !important;
+	font-size: 12px;
 }
 .x-btn:hover {
     background:#dfdfdf;
