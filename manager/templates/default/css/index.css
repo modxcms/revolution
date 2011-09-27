@@ -1301,3 +1301,11 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	border-bottom: 1px solid #E4E4E4;
     border-top: 1px solid #FAFAFA;
 }
+
+/* MODExt common classes */
+
+.container {  margin: 0 15px 15px 0; } /* Wrap the main content */
+.panel-desc { padding: 15px 15px 0; } /* Only for description text */
+.main-wrapper { padding: 15px; } /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
+.left-col{ padding-right: 15px; }
+.right-col{ padding-left: 15px; }
