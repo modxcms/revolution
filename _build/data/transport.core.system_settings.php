@@ -692,6 +692,15 @@ $settings['hidemenu_default']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['locale']= $xpdo->newObject('modSystemSetting');
+$settings['locale']->fromArray(array (
+  'key' => 'locale',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'language',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
 $settings['manager_html5_cache']->fromArray(array (
   'key' => 'manager_html5_cache',
