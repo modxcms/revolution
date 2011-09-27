@@ -8,7 +8,7 @@
  * @package modx
  * @subpackage processors.element.category
  */
-class modElementCategoryUpdate extends modProcessor {
+class modElementCategoryUpdateProcessor extends modProcessor {
     /** @var modCategory $category */
     public $category;
 
@@ -46,4 +46,4 @@ class modElementCategoryUpdate extends modProcessor {
         return $this->success('',$this->category);
     }
 }
-return 'modElementCategoryUpdate';
+return 'modElementCategoryUpdateProcessor';

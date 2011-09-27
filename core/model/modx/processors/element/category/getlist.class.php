@@ -11,7 +11,7 @@
  * @package modx
  * @subpackage processors.element.category
  */
-class modElementCategoryGetList extends modProcessor {
+class modElementCategoryGetListProcessor extends modProcessor {
 
     public function getLanguageTopics() {
         return array('category');
@@ -86,4 +86,4 @@ class modElementCategoryGetList extends modProcessor {
         return $this->modx->getIterator('modCategory',$c);
     }
 }
-return 'modElementCategoryGetList';
+return 'modElementCategoryGetListProcessor';

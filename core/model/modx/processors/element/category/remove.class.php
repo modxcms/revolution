@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.element.category
  */
-class modElementCategoryRemove extends modProcessor {
+class modElementCategoryRemoveProcessor extends modProcessor {
     /** @var modCategory $category */
     public $category;
 
@@ -42,4 +42,4 @@ class modElementCategoryRemove extends modProcessor {
         return $this->success('',$this->category);
     }
 }
-return 'modElementCategoryRemove';
+return 'modElementCategoryRemoveProcessor';

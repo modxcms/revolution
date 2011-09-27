@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.element.category
  */
-class modElementCategoryCreate extends modProcessor {
+class modElementCategoryCreateProcessor extends modProcessor {
     /** @var modCategory $category */
     public $category;
 
@@ -65,4 +65,4 @@ class modElementCategoryCreate extends modProcessor {
         return $this->modx->getCount('modCategory',array('category' => $name)) > 0;
     }
 }
-return 'modElementCategoryCreate';
+return 'modElementCategoryCreateProcessor';
