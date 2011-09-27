@@ -1477,16 +1477,30 @@ class modX extends xPDO {
         }
 
         /* calculate processor file path from options and action */
-        $processorFile = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
-        if (isset($options['location']) && !empty($options['location'])) $processorFile .= ltrim($options['location'],'/') . '/';
-        $processorFile .= ltrim(str_replace('../', '', $action . '.php'),'/');
+        $isClass = true;
+        $processorsPath = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
+        if (isset($options['location']) && !empty($options['location'])) $processorsPath .= ltrim($options['location'],'/') . '/';
+        $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.class.php'),'/');
+        if (!file_exists($processorFile)) {
+            $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.php'),'/');
+            $isClass = false;
+        }
 
         $response = '';
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
             if (!isset($this->error)) $this->request->loadErrorHandler();
 
-            $processor = new modProcessor($this);
+            if ($isClass) {
+                $className = include $processorFile;
+                if (!empty($className)) {
+                    $c = new $className($this,$scriptProperties);
+                    $processor = call_user_func_array(array($c,'getInstance'),array($this,$className,$scriptProperties));
+                }
+            }
+            if (empty($processor)) {
+                $processor = new modProcessor($this);
+            }
             $processor->setPath($processorFile);
             $processor->setProperties($scriptProperties);
             $response = $processor->run();

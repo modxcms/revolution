@@ -9,6 +9,7 @@
 $_lang['categories'] = 'Categories';
 $_lang['category_confirm_delete'] = 'Are you sure you want to remove this category? All elements in this category will be filed to uncategorized.';
 $_lang['category_create'] = 'Create Category';
+$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
 $_lang['category_err_create'] = 'An error occurred while trying to create the category.';
 $_lang['category_err_not_found'] = 'Category not found!';
 $_lang['category_err_nf'] = 'Category not found.';
