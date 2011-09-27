@@ -2,6 +2,7 @@ MODx.panel.Workspace = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-workspace'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,items: [{
             html: '<h2>'+_('package_management')+'</h2>'
@@ -10,28 +11,30 @@ MODx.panel.Workspace = function(config) {
             ,id: 'modx-workspace-header'
         },MODx.getPageStructure([{
             title: _('packages')
-            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
 			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('packages_desc')+'</p>'
+                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-package'
                 ,id: 'modx-grid-package'
+                ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         },{
             title: _('providers')
-            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
 			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('providers_desc')+'</p>'
+                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-provider'
                 ,id: 'modx-grid-provider'
+                ,cls: 'main-wrapper'
                 ,title: ''
                 ,preventRender: true
             }]
