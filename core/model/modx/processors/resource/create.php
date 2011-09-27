@@ -63,6 +63,7 @@ if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
 
 /* make sure parent exists and user can add_children to the parent */
+/** @var modResource $parent */
 $parent = null;
 if ($scriptProperties['parent'] > 0) {
     $parent = $modx->getObject('modResource', $scriptProperties['parent']);
@@ -121,6 +122,7 @@ $resourceClass = !empty($scriptProperties['class_key']) ? $scriptProperties['cla
 $resourceDir= strtolower(substr($resourceClass, 3));
 
 /* create the new resource instance using the indicated class */
+/** @var modResource $resource */
 $resource = $modx->newObject($resourceClass);
 if (!$resource) return $modx->error->failure($modx->lexicon('resource_err_create'));
 if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->lexicon('resource_err_class',array('class' => $resourceClass)));
@@ -194,6 +196,7 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
     $tmplvars = array();
     $templateVars = $resource->getTemplateVars();
 
+    /** @var modTemplateVar $tv */
     foreach ($templateVars as $tv) {
         $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
 
@@ -332,6 +335,7 @@ if (isset($scriptProperties['resource_groups'])) {
 
             /* if assigning to group */
             if (!empty($resourceGroupAccess['access'])) {
+                /** @var modResourceGroupResource $resourceGroupResource */
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
                     'document' => $resource->get('id'),
@@ -341,7 +345,13 @@ if (isset($scriptProperties['resource_groups'])) {
                 }
                 $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
                 $resourceGroupResource->set('document',$resource->get('id'));
-                $resourceGroupResource->save();
+                if ($resourceGroupResource->save()) {
+                    $modx->invokeEvent('OnResourceAddToResourceGroup',array(
+                        'mode' => 'resource-create',
+                        'resource' => &$resource,
+                        'resourceGroup' => &$resourceGroup,
+                    ));
+                }
 
             /* if removing access to group */
             } else {
@@ -350,7 +360,13 @@ if (isset($scriptProperties['resource_groups'])) {
                     'document' => $resource->get('id'),
                 ));
                 if ($resourceGroupResource instanceof modResourceGroupResource) {
-                    $resourceGroupResource->remove();
+                    if ($resourceGroupResource->remove()) {
+                        $modx->invokeEvent('OnResourceRemoveFromResourceGroup',array(
+                            'mode' => 'resource-create',
+                            'resource' => &$resource,
+                            'resourceGroup' => &$resourceGroup,
+                        ));
+                    }
                 }
             }
         } /* end foreach */

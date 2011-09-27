@@ -432,6 +432,18 @@ $events['OnResourceToolbarLoad']->fromArray(array (
   'service' => 1,
   'groupname' => 'Resources',
 ), '', true, true);
+$events['OnResourceRemoveFromResourceGroup']= $xpdo->newObject('modEvent');
+$events['OnResourceRemoveFromResourceGroup']->fromArray(array (
+  'name' => 'OnResourceRemoveFromResourceGroup',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnResourceAddToResourceGroup']= $xpdo->newObject('modEvent');
+$events['OnResourceAddToResourceGroup']->fromArray(array (
+  'name' => 'OnResourceAddToResourceGroup',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
 
 
 /* Richtext Editor */
