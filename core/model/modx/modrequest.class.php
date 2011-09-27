@@ -78,8 +78,10 @@ class modRequest {
         if ($this->modx->resourceMethod == "alias") {
             if (isset ($this->modx->aliasMap[$this->modx->resourceIdentifier])) {
                 $this->modx->resourceIdentifier = $this->modx->aliasMap[$this->modx->resourceIdentifier];
+                $this->modx->resourceMethod = 'id';
+            } else {
+                $this->modx->sendErrorPage();
             }
-            $this->modx->resourceMethod = 'id';
         }
         $this->modx->beforeRequest();
         $this->modx->invokeEvent("OnWebPageInit");
@@ -117,10 +119,14 @@ class modRequest {
      */
     public function getResourceMethod() {
         $method = '';
-        if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')]))
-            $method = "alias";
-        elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
-            $method = "id";
+        if ($this->modx->getOption('request_method_strict', null, false)) {
+            $method = $this->modx->getOption('friendly_urls', null, false) ? 'alias' : 'id';
+        } else {
+            if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')]))
+                $method = "alias";
+            elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
+                $method = "id";
+            }
         }
         return $method;
     }
@@ -281,13 +287,13 @@ class modRequest {
                     }
                     if (isset ($this->modx->aliasMap[$identifier])) {
                         $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', '', 'full');
-                        $this->modx->sendRedirect($url);
+                        $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
                     }
                     $this->modx->resourceMethod = 'alias';
                 }
             }
             elseif ($this->modx->getOption('site_start', null, 1) == $this->modx->aliasMap[$identifier]) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL));
+                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             } else {
                 $this->modx->resourceMethod = 'alias';
             }
