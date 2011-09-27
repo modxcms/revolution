@@ -1252,6 +1252,15 @@ $settings['request_controller']->fromArray(array (
   'area' => 'gateway',
   'editedon' => null,
 ), '', true, true);
+$settings['request_method_strict']= $xpdo->newObject('modSystemSetting');
+$settings['request_method_strict']->fromArray(array (
+  'key' => 'request_method_strict',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'gateway',
+  'editedon' => null,
+), '', true, true);
 $settings['request_param_alias']= $xpdo->newObject('modSystemSetting');
 $settings['request_param_alias']->fromArray(array (
   'key' => 'request_param_alias',

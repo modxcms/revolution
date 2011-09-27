@@ -506,6 +506,9 @@ $_lang['setting_rb_base_url_err'] = 'Please state the resource browser base URL.
 $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODX is loaded. Most users can leave this as index.php.';
 
+$_lang['setting_request_method_strict'] = 'Strict Request Method';
+$_lang['setting_request_method_strict_desc'] = 'If enabled, requests via the Request ID Parameter will be ignored with FURLs enabled, and those via Request Alias Parameter will be ignored without FURLs enabled.';
+
 $_lang['setting_request_param_alias'] = 'Request Alias Parameter';
 $_lang['setting_request_param_alias_desc'] = 'The name of the GET parameter to identify Resource aliases when redirecting with FURLs.';
 
