@@ -89,6 +89,17 @@ class modRequest {
             $this->checkPublishStatus();
             $this->modx->resourceMethod = $this->getResourceMethod();
             $this->modx->resourceIdentifier = $this->getResourceIdentifier($this->modx->resourceMethod);
+            if ($this->modx->resourceMethod == 'id' && $this->modx->getOption('friendly_urls', null, false) && !$this->modx->getOption('request_method_strict', null, false)) {
+                $uri = array_search($this->modx->resourceIdentifier, $this->modx->aliasMap);
+                if (!empty($uri)) {
+                    if ($this->modx->resourceIdentifier == $this->modx->getOption('site_start', null, 1)) {
+                        $url = $this->modx->getOption('site_url', null, MODX_SITE_URL);
+                    } else {
+                        $url = $this->modx->getOption('site_url', null, MODX_SITE_URL) . $uri;
+                    }
+                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                }
+            }
         }
         if (empty ($this->modx->resourceMethod)) {
             $this->modx->resourceMethod = "id";
@@ -143,9 +154,9 @@ class modRequest {
         if ($this->modx->getOption('request_method_strict', null, false)) {
             $method = $this->modx->getOption('friendly_urls', null, false) ? 'alias' : 'id';
         } else {
-            if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')]))
+            if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')])) {
                 $method = "alias";
-            elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
+            } elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
                 $method = "id";
             }
         }
@@ -296,7 +307,7 @@ class modRequest {
             $identifier = $this->modx->getOption('site_start', null, 1);
             $this->modx->resourceMethod = 'id';
         }
-        elseif ($this->modx->getOption('friendly_urls', null, false)) {
+        elseif ($this->modx->getOption('friendly_urls', null, false) && $this->modx->resourceMethod = 'alias') {
             $containerSuffix = trim($this->modx->getOption('container_suffix', null, ''));
             if (!isset ($this->modx->aliasMap[$identifier])) {
                 if (!empty ($containerSuffix)) {

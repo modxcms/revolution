@@ -2054,7 +2054,7 @@ a.x-menu-item {
 }
 .x-column {
     float:left;
-    margin:0px 8px 0px 0px;
+    margin:0;
     /*overflow:hidden;*/
     padding:0px;
 }

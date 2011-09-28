@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#90] 301 Redirect id method requests when request_method_strict is not enabled
 - [#90], [#5676] Improvements to strict routing with friendly_urls
 - [#5323] Add system events for moving Resources in and out of Resource Groups
 - [#4610] Add locale system setting for setting locale in MODX

@@ -10,6 +10,7 @@ MODx.panel.SystemSettings = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-system-settings'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -19,13 +20,14 @@ MODx.panel.SystemSettings = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
             ,defaults: { border: false }
             ,items: [{
                 html: '<p>'+_('settings_desc')+'</p>'
+               ,bodyCssClass: 'panel-desc'
             },{
                 xtype: 'modx-grid-system-settings'
+				,cls: 'main-wrapper'
 				,preventSaveRefresh: true
             },{
                 html: MODx.onSiteSettingsRender
