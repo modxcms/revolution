@@ -132,6 +132,12 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
                     ,handler: this.updateSource
                 });
             }
+            if (p.indexOf('pduplicate') != -1) {
+                m.push({
+                    text: _('source_duplicate')
+                    ,handler: this.duplicateSource
+                });
+            }
             if (p.indexOf('premove') != -1 && r.data.id != 1 && r.data.name != 'Filesystem') {
                 if (m.length > 0) m.push('-');
                 m.push({
@@ -145,6 +151,18 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         }
     }
 
+    ,duplicateSource: function(btn,e) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'duplicate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
     ,createSource: function() {
         location.href = 'index.php?a='+MODx.action['system/source/create'];
     }

@@ -56,55 +56,60 @@ class modManagerResponse extends modResponse {
             $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/logout';
         }
-         
-        require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 
-        /* first attempt to get new class format file introduced in 2.2+ */
-        $paths = $this->getNamespacePath($theme);
-        $f = $this->action['controller'];
-        $className = $this->getControllerClassName();
-        $classFile = strtolower($f).'.class.php';
+        if ($isLoggedIn && !$this->checkForMenuPermissions($action)) {
+            $this->body = $this->modx->error->failure($this->modx->lexicon('access_denied'));
+            
+        } else {
+            require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 
-        foreach ($paths as $controllersPath) {
-            if (!file_exists($controllersPath.$classFile)) {
-                if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
-                    $classPath = $controllersPath.strtolower($f).'/index.class.php';
+            /* first attempt to get new class format file introduced in 2.2+ */
+            $paths = $this->getNamespacePath($theme);
+            $f = $this->action['controller'];
+            $className = $this->getControllerClassName();
+            $classFile = strtolower($f).'.class.php';
+
+            foreach ($paths as $controllersPath) {
+                if (!file_exists($controllersPath.$classFile)) {
+                    if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
+                        $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                    }
+                } else {
+                    $classPath = $controllersPath.$classFile;
+                    break;
                 }
-            } else {
-                $classPath = $controllersPath.$classFile;
-                break;
             }
-        }
 
-        /* handle Revo <2.2 controllers */
-        if (empty($classPath)) {
-            $className = 'modManagerControllerDeprecated';
-            $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
-        }
-
-        if (!file_exists($classPath)) {
-            if (file_exists(strtolower($f).'/index.class.php')) {
-                $classPath = strtolower($f).'/index.class.php';
-            } else { /* handle Revo <2.2 controllers */
+            /* handle Revo <2.2 controllers */
+            if (empty($classPath)) {
                 $className = 'modManagerControllerDeprecated';
                 $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
             }
-        }
 
-        ob_start();
-        require_once $classPath;
-        ob_end_clean();
-        try {
-            $c = new $className($this->modx,$this->action);
-            /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
-            $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
-            $this->modx->controller->setProperties(array_merge($_GET,$_POST));
-            $this->modx->controller->initialize();
-        } catch (Exception $e) {
-            die($e->getMessage());
-        }
-        $this->body = $this->modx->controller->render();
+            if (!file_exists($classPath)) {
+                if (file_exists(strtolower($f).'/index.class.php')) {
+                    $classPath = strtolower($f).'/index.class.php';
+                } else { /* handle Revo <2.2 controllers */
+                    $className = 'modManagerControllerDeprecated';
+                    $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+                }
+            }
 
+            ob_start();
+            require_once $classPath;
+            ob_end_clean();
+            try {
+                $c = new $className($this->modx,$this->action);
+                /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
+                $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
+                $this->modx->controller->setProperties(array_merge($_GET,$_POST));
+                $this->modx->controller->initialize();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+            $this->body = $this->modx->controller->render();
+        }
+        
         if (empty($this->body)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
         }
@@ -116,6 +121,31 @@ class modManagerResponse extends modResponse {
         }
         @session_write_close();
         exit();
+    }
+
+    /**
+     * If this action has a menu item, ensure user has access to menu
+     * @param string $action
+     * @return bool
+     */
+    public function checkForMenuPermissions($action) {
+        $canAccess = true;
+        /** @var modMenu $menu */
+        $menu = $this->modx->getObject('modMenu',array(
+            'action' => $action,
+        ));
+        if ($menu) {
+            $permissions = $menu->get('permissions');
+            if (!empty($permissions)) {
+                $permissions = explode(',',$permissions);
+                foreach ($permissions as $permission) {
+                    if (!$this->modx->hasPermission($permission)) {
+                        $canAccess = false;
+                    }
+                }
+            }
+        }
+        return $canAccess;
     }
 
     /**

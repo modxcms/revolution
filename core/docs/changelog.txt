@@ -3,6 +3,18 @@ This file shows the changes in recent releases of MODX. The most current release
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 - [#5619] Enable modElements to store content in external files
+- [#90] 301 Redirect id method requests when request_method_strict is not enabled
+- [#90], [#5676] Improvements to strict routing with friendly_urls
+- [#5323] Add system events for moving Resources in and out of Resource Groups
+- [#4610] Add locale system setting for setting locale in MODX
+- Add HTML5 local caching as a toggleable option for manager ui
+- [#5788] Fix content not output to browser until after shutdown function
+- [#5777] Fix validation of TV names against Resource field names
+- Add ability to install and upgrade MODX from command line
+- [#5745] Ensure all core passwords are not transmitted through MODx.config JS array
+- [#4304] Add default_content_type Setting for setting the default Content Type for Resources
+- [#2735] Ensure menu permissions are checked for mgr action if action has menu associated
+- [#4606] Clarify connectors language in setup
 - [#5561] Add search toolbar to packages grid
 - [#5587] Fix issue with dashboard widgets and caching
 - [#5453] Add ability to disable forgot password on manager login screen

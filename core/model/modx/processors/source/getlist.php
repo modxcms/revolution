@@ -17,7 +17,7 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission('sources')) {
+if (!$modx->hasPermission('source_view')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 $modx->lexicon->load('sources');
@@ -41,6 +41,10 @@ if ($isLimit) $c->limit($limit,$start);
 
 $sources = $modx->getCollection('sources.modMediaSource',$c);
 
+$canEdit = $modx->hasPermission('source_edit');
+$canSave = $modx->hasPermission('source_save');
+$canRemove = $modx->hasPermission('source_delete');
+
 /* iterate through users */
 $list = array();
 /** @var modMediaSource $source */
@@ -49,8 +53,9 @@ foreach ($sources as $source) {
     $sourceArray = $source->toArray();
 
     $cls = array();
-    if ($source->checkPolicy('save')) $cls[] = 'pupdate';
-    if ($source->checkPolicy('remove')) $cls[] = 'premove';
+    if ($source->checkPolicy('save') && $canSave && $canEdit) $cls[] = 'pupdate';
+    if ($source->checkPolicy('remove') && $canRemove) $cls[] = 'premove';
+    if ($source->checkPolicy('copy') && $canSave) $cls[] = 'pduplicate';
     $sourceArray['cls'] = implode(' ',$cls);
 
     $list[] = $sourceArray;

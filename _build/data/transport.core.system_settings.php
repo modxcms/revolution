@@ -303,6 +303,24 @@ $settings['clear_cache_refresh_trees']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['compress_css']= $xpdo->newObject('modSystemSetting');
+$settings['compress_css']->fromArray(array (
+  'key' => 'compress_css',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['compress_js']= $xpdo->newObject('modSystemSetting');
+$settings['compress_js']->fromArray(array (
+  'key' => 'compress_js',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['container_suffix']= $xpdo->newObject('modSystemSetting');
 $settings['container_suffix']->fromArray(array (
   'key' => 'container_suffix',
@@ -362,6 +380,15 @@ $settings['default_template']->fromArray(array (
   'key' => 'default_template',
   'value' => '1',
   'xtype' => 'modx-combo-template',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
+$settings['default_content_type']= $xpdo->newObject('modSystemSetting');
+$settings['default_content_type']->fromArray(array (
+  'key' => 'default_content_type',
+  'value' => '1',
+  'xtype' => 'modx-combo-content-type',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -663,6 +690,24 @@ $settings['hidemenu_default']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
+  'editedon' => null,
+), '', true, true);
+$settings['locale']= $xpdo->newObject('modSystemSetting');
+$settings['locale']->fromArray(array (
+  'key' => 'locale',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'language',
+  'editedon' => null,
+), '', true, true);
+$settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
+$settings['manager_html5_cache']->fromArray(array (
+  'key' => 'manager_html5_cache',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
 $settings['link_tag_scheme']= $xpdo->newObject('modSystemSetting');
@@ -1203,6 +1248,15 @@ $settings['request_controller']->fromArray(array (
   'key' => 'request_controller',
   'value' => 'index.php',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'gateway',
+  'editedon' => null,
+), '', true, true);
+$settings['request_method_strict']= $xpdo->newObject('modSystemSetting');
+$settings['request_method_strict']->fromArray(array (
+  'key' => 'request_method_strict',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'gateway',
   'editedon' => null,

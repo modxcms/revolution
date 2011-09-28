@@ -133,6 +133,12 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
                     ,handler: this.updateDashboard
                 });
             }
+            if (p.indexOf('pduplicate') != -1) {
+                m.push({
+                    text: _('dashboard_duplicate')
+                    ,handler: this.duplicateDashboard
+                });
+            }
             if (p.indexOf('premove') != -1 && r.data.id != 1 && r.data.name != 'Default') {
                 if (m.length > 0) m.push('-');
                 m.push({
@@ -174,7 +180,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     ,removeDashboard: function() {
         MODx.msg.confirm({
             title: _('dashboard_remove')
-            ,text: _('dashboard_confirm_remove')
+            ,text: _('dashboard_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'remove'
@@ -182,6 +188,19 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             }
             ,listeners: {
             	'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
+    ,duplicateDashboard: function(btn,e) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'duplicate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }

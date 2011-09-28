@@ -20,6 +20,7 @@ $_lang['source_access_remove'] = 'Remove Access';
 $_lang['source_access_remove_confirm'] = 'Are you sure you want to remove Access to this Source for this User Group?';
 $_lang['source_access_update'] = 'Update Access';
 $_lang['source_create'] = 'Create New Media Source';
+$_lang['source_duplicate'] = 'Duplicate Media Source';
 $_lang['source_properties.intro_msg'] = 'Manage the properties for this Source below.';
 $_lang['source_remove'] = 'Remove Media Source';
 $_lang['source_remove_confirm'] = 'Are you sure you want to remove this Media Source? This might break any TVs you have assigned to this source.';

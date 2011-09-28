@@ -44,8 +44,8 @@ if (!is_dir($cachePath) || !is_writable($cachePath)) {
 define('MINIFY_MIN_DIR', dirname(__FILE__));
 
 /* setup minify config */
-$min_allowDebugFlag = true;
-$min_errorLogger = false;
+$min_allowDebugFlag = (boolean)$modx->getOption('manager_js_cache_allow_debug_flag',null,true);
+$min_errorLogger = (boolean)$modx->getOption('manager_js_cache_debug',null,false);
 $min_enableBuilder = false;
 $min_cachePath = $cachePath;
 $min_documentRoot = '';
@@ -53,7 +53,7 @@ $min_cacheFileLocking = (boolean)$modx->getOption('manager_js_cache_file_locking
 $min_serveOptions['bubbleCssImports'] = false;
 $min_serveOptions['maxAge'] = (int)$modx->getOption('manager_js_cache_max_age',null,3600);
 $min_serveOptions['minApp']['groupsOnly'] = false;
-$min_serveOptions['minApp']['maxFiles'] = 50;
+$min_serveOptions['minApp']['maxFiles'] = (int)$modx->getOption('manager_js_cache_max_files',null,50);
 $min_symlinks = array();
 $min_uploaderHoursBehind = 0;
 $min_libPath = dirname(__FILE__) . '/lib';
@@ -73,34 +73,46 @@ Minify::setCache(
 
 if ($min_documentRoot) {
     $_SERVER['DOCUMENT_ROOT'] = $min_documentRoot;
-} elseif (0 === stripos(PHP_OS, 'win')) {
-    Minify::setDocRoot(); // IIS may need help
+    Minify::$isDocRootSet = true;
 }
 
 $min_serveOptions['minifierOptions']['text/css']['symlinks'] = $min_symlinks;
+// auto-add targets to allowDirs
+foreach ($min_symlinks as $uri => $target) {
+    $min_serveOptions['minApp']['allowDirs'][] = $target;
+}
 
-if ($min_allowDebugFlag && isset($_GET['debug'])) {
-    $min_serveOptions['debug'] = true;
+if ($min_allowDebugFlag) {
+    require_once 'Minify/DebugDetector.php';
+    $min_serveOptions['debug'] = Minify_DebugDetector::shouldDebugRequest($_COOKIE, $_GET, $_SERVER['REQUEST_URI']);
 }
 
 if ($min_errorLogger) {
     require_once 'Minify/Logger.php';
     if (true === $min_errorLogger) {
         require_once 'FirePHP.php';
-        Minify_Logger::setLogger(FirePHP::getInstance(true));
-    } else {
-        Minify_Logger::setLogger($min_errorLogger);
+        $min_errorLogger = FirePHP::getInstance(true);
     }
+    Minify_Logger::setLogger($min_errorLogger);
 }
 
 // check for URI versioning
 if (preg_match('/&\\d/', $_SERVER['QUERY_STRING'])) {
     $min_serveOptions['maxAge'] = 31536000;
 }
+//if (isset($_GET['g'])) {
+    // well need groups config
+    //$min_serveOptions['minApp']['groups'] = (require MINIFY_MIN_DIR . '/groupsConfig.php');
+//}
 if (isset($_GET['f']) || isset($_GET['g'])) {
     // serve!   
-    Minify::serve('MinApp', $min_serveOptions);
+    if (! isset($min_serveController)) {
+        require 'Minify/Controller/MinApp.php';
+        $min_serveController = new Minify_Controller_MinApp();
+    }
+    Minify::serve($min_serveController, $min_serveOptions);
+
 } else {
-    @session_write_close();
+    header("Location: /");
     exit();
 }

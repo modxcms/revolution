@@ -57,12 +57,11 @@ $metadataXml = $response->toXml();
 $metadata = array();
 $modx->rest->xml2array($metadataXml,$metadata);
 $package->set('metadata',$metadata);
-$package->set('package_name',$sig[0]);
+$package->set('package_name',$metadataXml->name);
 
 /* set package version data */
 $sig = explode('-',$signature);
 if (is_array($sig)) {
-    $package->set('package_name',$sig[0]);
     if (!empty($sig[1])) {
         $v = explode('.',$sig[1]);
         if (isset($v[0])) $package->set('version_major',$v[0]);

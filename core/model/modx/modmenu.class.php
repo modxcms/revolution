@@ -88,6 +88,7 @@ class modMenu extends modAccessibleObject {
         if (count($menus) < 1) return array();
 
         $list = array();
+        /** @var modMenu $menu */
         foreach ($menus as $menu) {
             $ma = $menu->toArray();
 

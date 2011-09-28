@@ -194,6 +194,9 @@ $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in
 $_lang['setting_cultureKey'] = 'Language';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
+$_lang['setting_default_content_type'] = 'Default Content Type';
+$_lang['setting_default_content_type_desc'] = 'Select the default Content Type you wish to use for new Resources. You can still select a different Content Type in the Resource editor; this setting just pre-selects one of your Content Types for you.';
+
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
@@ -303,8 +306,14 @@ $_lang['setting_global_duplicate_uri_check_desc'] = 'Select \'Yes\' to make dupl
 $_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
 $_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resources hidden from menus by default.';
 
+$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Use HTML5 local caching for the manager. Recommended to use only if using the manager with modern browsers.';
+
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
 $_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+
+$_lang['setting_locale'] = 'Locale';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_mail_charset'] = 'Mail Charset';
 $_lang['setting_mail_charset_desc'] = 'The default charset for e-mails, e.g. \'iso-8859-1\' or \'utf-8\'';
@@ -496,6 +505,9 @@ $_lang['setting_rb_base_url_err'] = 'Please state the resource browser base URL.
 
 $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODX is loaded. Most users can leave this as index.php.';
+
+$_lang['setting_request_method_strict'] = 'Strict Request Method';
+$_lang['setting_request_method_strict_desc'] = 'If enabled, requests via the Request ID Parameter will be ignored with FURLs enabled, and those via Request Alias Parameter will be ignored without FURLs enabled.';
 
 $_lang['setting_request_param_alias'] = 'Request Alias Parameter';
 $_lang['setting_request_param_alias_desc'] = 'The name of the GET parameter to identify Resource aliases when redirecting with FURLs.';

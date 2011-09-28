@@ -567,6 +567,11 @@ $attributes['resolve'][] = array (
 );
 $attributes['resolve'][] = array (
     'type' => 'file',
+    'source' => MODX_BASE_PATH . 'manager/cache.manifest.php',
+    'target' => "return MODX_MANAGER_PATH;",
+);
+$attributes['resolve'][] = array (
+    'type' => 'file',
     'source' => MODX_BASE_PATH . 'manager/index.php',
     'target' => "return MODX_MANAGER_PATH;",
 );

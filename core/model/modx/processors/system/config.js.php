@@ -65,8 +65,7 @@ $actions = $modx->request->getAllActionIDs();
 
 $c = array_merge($modx->config,$c);
 
-unset($c['password']);
-unset($c['username']);
+unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username']);
 
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);

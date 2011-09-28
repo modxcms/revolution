@@ -6,8 +6,15 @@
  * @subpackage tests
  */
 abstract class modInstallTest {
-    public $results = array();
+    public $results = array(
+        'pass' => array(),
+        'fail' => array(),
+        'warn' => array(),
+    );
+    /** @var modInstall $install */
+    public $install;
     public $mode;
+    public $success = true;
 
     function __construct(&$install) {
         $this->install =& $install;
@@ -150,13 +157,16 @@ abstract class modInstallTest {
      * Check sessions
      */
     protected function _checkSessions() {
-        $this->title('sessions',$this->install->lexicon('test_sessions_start').' ');
-        if ($_SESSION['session_test'] != 1) {
-            $this->fail('sessions');
-        } else {
+        if ($this->install->request instanceof modInstallCLIRequest) {
             $this->pass('sessions');
+        } else {
+            $this->title('sessions',$this->install->lexicon('test_sessions_start').' ');
+            if (!empty($_SESSION) && $_SESSION['session_test'] != 1) {
+                $this->fail('sessions');
+            } else {
+                $this->pass('sessions');
+            }
         }
-
     }
 
     /**
@@ -328,10 +338,17 @@ abstract class modInstallTest {
      */
     protected function pass($key,$message = '') {
         if (empty($message)) $message = $this->install->lexicon('ok');
+
         if (!isset($this->results[$key])) $this->results[$key] = array();
         if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
         $this->results[$key]['msg'] .= '<span class="ok">'.$message.'</span></p>';
         $this->results[$key]['class'] = 'testPassed';
+
+        if (!isset($this->results['pass'][$key])) $this->results['pass'][$key] = array();
+        if (!isset($this->results['pass'][$key]['msg'])) $this->results['pass'][$key]['msg'] = '';
+        $this->results['pass'][$key]['msg'] .= '<span class="ok">'.$message.'</span></p>';
+        $this->results['pass'][$key]['class'] = 'testPassed';
+        $this->results['pass'][$key]['message'] = $message;
     }
 
     /**
@@ -341,6 +358,7 @@ abstract class modInstallTest {
      * @param string $title The warning message title.
      * @param string $message A detailed warning message.
      * @param string $messageTitle An optional title for the detail panel.
+     * @return boolean
      */
     protected function warn($key,$title,$message = '',$messageTitle = '') {
         if (empty($title)) $title = $this->install->lexicon('warning');
@@ -352,8 +370,18 @@ abstract class modInstallTest {
         }
         if (!isset($this->results[$key])) $this->results[$key] = array();
         if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
+
         $this->results[$key]['msg'] .= $msg;
         $this->results[$key]['class'] = 'testWarn';
+
+        if (!isset($this->results['warn'][$key])) $this->results['warn'][$key] = array();
+        if (!isset($this->results['warn'][$key]['msg'])) $this->results['warn'][$key]['msg'] = '';
+        $this->results['warn'][$key]['msg'] .= $msg;
+        $this->results['warn'][$key]['class'] = 'testPassed';
+        $this->results['warn'][$key]['title'] = $title;
+        $this->results['warn'][$key]['message'] = $message;
+        $this->results['warn'][$key]['messageTitle'] = $messageTitle;
+        return true;
     }
 
     /**
@@ -362,6 +390,7 @@ abstract class modInstallTest {
      * @param string $key The check being performed
      * @param string $title The failure message title.
      * @param string $message A detailed failure message.
+     * @return boolean
      */
     protected function fail($key,$title = '',$message = '') {
         if (empty($title)) $title = $this->install->lexicon('failed');
@@ -373,6 +402,15 @@ abstract class modInstallTest {
         if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
         $this->results[$key]['msg'] .= $msg;
         $this->results[$key]['class'] = 'testFailed';
+
+
+        if (!isset($this->results['fail'][$key])) $this->results['fail'][$key] = array();
+        if (!isset($this->results['fail'][$key]['msg'])) $this->results['fail'][$key]['msg'] = '';
+        $this->results['fail'][$key]['msg'] .= $msg;
+        $this->results['fail'][$key]['class'] = 'testFailed';
+        $this->results['fail'][$key]['title'] = $title;
+        $this->results['fail'][$key]['message'] = $message;
+        $this->success = false;
         return true;
     }
 }

@@ -1,5 +1,8 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
  * @package setup
  */
 $install->settings->check();
@@ -9,19 +12,24 @@ if (!empty($_POST['proceed'])) {
     $this->proceed('complete');
 }
 
-
 $mode = $install->settings->get('installmode');
-$results= $install->execute($mode);
-$this->parser->assign('results', $results);
+$install->getService('runner','runner.modInstallRunnerWeb');
+$results = array();
+if ($install->runner) {
+    $success = $install->runner->run($mode);
+    $results = $install->runner->getResults();
 
-$failed= false;
-foreach ($results as $item) {
-    if ($item['class'] === 'failed') {
-        $failed= true;
-        break;
+    $failed= false;
+    foreach ($results as $item) {
+        if ($item['class'] === 'failed') {
+            $failed= true;
+            break;
+        }
     }
+} else {
+    $failed = true;
 }
-$this->parser->assign('failed', $failed);
-$this->parser->assign('itemClass', $failed ? 'error' : '');
-$this->parser->assign('results',$results);
-return $this->parser->fetch('install.tpl');
+$parser->set('failed', $failed);
+$parser->set('itemClass', $failed ? 'error' : '');
+$parser->set('results',$results);
+return $parser->render('install.tpl');

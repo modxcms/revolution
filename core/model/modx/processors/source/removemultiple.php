@@ -9,7 +9,7 @@
  * @package modx
  * @subpackage processors.source
  */
-if (!$modx->hasPermission('sources')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('source_delete')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('source');
 
 if (empty($scriptProperties['sources'])) {

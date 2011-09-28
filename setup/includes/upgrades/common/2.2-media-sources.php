@@ -67,7 +67,7 @@ foreach ($tvs as $tv) {
     if (empty($tvProperties['basePath']) && empty($tvProperties['baseUrl'])) continue;
 
     /** @var modFileMediaSource $newSource */
-    $newSource = $modx->newObject('source.modFileMediaSource');
+    $newSource = $modx->newObject('sources.modFileMediaSource');
     $newSource->fromArray(array(
         'name' => $tv->get('name'),
         'description' => '',

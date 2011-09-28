@@ -52,7 +52,7 @@ $list = array();
 /** @var modDashboard $dashboard */
 foreach ($dashboards as $dashboard) {
     $dashboardArray = $dashboard->toArray();
-    $dashboardArray['cls'] = 'pupdate premove';
+    $dashboardArray['cls'] = 'pupdate premove pduplicate';
     $list[] = $dashboardArray;
 }
 return $this->outputArray($list,$count);
