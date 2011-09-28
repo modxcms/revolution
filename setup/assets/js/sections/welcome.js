@@ -6,12 +6,13 @@ MODx.Welcome = function() {
     return {
         init: function() {
             var div = Ext.get('cck-div');
-            div.setVisibilityMode(Ext.Element.DISPLAY);
-            div.setVisible(false);
-            
-            Ext.get('cck-href').on('click',function() {
-                div.toggle(); 
-            });
+            if(div !== null) {
+                div.setVisibilityMode(Ext.Element.DISPLAY);
+                div.setVisible(false);
+                Ext.get('cck-href').on('click',function() {
+                    div.toggle();
+                });
+            }
         }
     }
 }();
