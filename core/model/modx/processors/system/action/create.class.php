@@ -56,11 +56,11 @@ class modActionCreateProcessor extends modProcessor {
         if (empty($fields['lang_topics'])) {
             $action->set('lang_topics','');
         }
-
-        $this->action->fromArray($fields);
         if ($this->action->save() == false) {
             return $this->failure($this->modx->lexicon('action_err_create'));
         }
+        
+        $this->logManagerAction();
 
         return $this->success('',$this->action);
     }

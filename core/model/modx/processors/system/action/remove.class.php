@@ -36,6 +36,8 @@ class modActionRemoveProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('action_err_remove'));
         }
 
+        $this->logManagerAction();
+
         return $this->success('',$this->action);
     }
 

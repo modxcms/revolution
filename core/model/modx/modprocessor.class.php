@@ -11,7 +11,7 @@
  *
  * @package modx
  */
-class modProcessor {
+abstract class modProcessor {
     /**
      * A reference to the modX object.
      * @var modX $modx
@@ -142,12 +142,7 @@ class modProcessor {
      * 
      * @return mixed
      */
-    public function process() {
-        $modx =& $this->modx;
-        $scriptProperties = $this->getProperties();
-        $o = include $this->path;
-        return $o;
-    }
+    abstract public function process();
 
     /**
      * Run the processor, returning a modProcessorResponse object.
@@ -302,6 +297,40 @@ class modProcessor {
             $result = $response;
         }
         return $result;
+    }
+}
+
+/**
+ * A utility class for pre-2.2-style, or flat file, processors.
+ *
+ * @package modx
+ */
+class modDeprecatedProcessor extends modProcessor {
+    /**
+     * Rather than load a class for processing, include the processor file directly.
+     * 
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function process() {
+        $modx =& $this->modx;
+        $scriptProperties = $this->getProperties();
+        $o = include $this->path;
+        return $o;
+    }
+}
+
+/**
+ * A utility class used for defining driver-specific processors
+ * 
+ * @package modx
+ */
+abstract class modDriverSpecificProcessor extends modProcessor {
+    public static function getInstance(modX &$modx,$className,$properties = array()) {
+        $className .= '_'.$modx->getOption('dbtype');
+        /** @var modProcessor $processor */
+        $processor = new $className($modx,$properties);
+        return $processor;
     }
 }
 
