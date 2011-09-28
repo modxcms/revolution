@@ -13,32 +13,28 @@ MODx.grid.Package = function(config) {
             '<p class="package-readme"><i>{readme}</i></p>'
         )
     });
-    this.action = new Ext.ux.grid.RowActions({
-         actions: [{
-             iconIndex: 'iconaction'
-            ,textIndex: 'textaction'
-        }]
-        ,widthSlope:125
-    });
-    this.action.on('action',function(g,r, a,ri) {
-        this.menu.record = r.data;        
-        switch (a) {
-            case 'icon-install': this.install(this.action,{}); break;
-            case 'icon-uninstall': this.uninstall(this.action,{}); break;
-        }
-    },this);
+	
+	/* Package name + action button renderer */
+	this.mainColumnTpl = new Ext.XTemplate('<tpl for=".">'
+		+'<h3 class="main-column{state:defaultValue("")}">{name}</h3>'
+		+'<tpl if="actions !== null">'
+			+'<ul class="actions">'
+				+'<tpl for="actions">'
+					+'<li><a href="#" class="controlBtn {className}">{text}</a></li>'
+				+'</tpl>'
+			+'</ul>'
+		+'</tpl>'
+	+'</tpl>', {
+		compiled: true
+	});
     
     var cols = [];
     cols.push(this.exp);
-    cols.push({ header: _('name') ,dataIndex: 'name' });
-    cols.push({ header: _('version') ,dataIndex: 'version' });
-    cols.push({ header: _('release') ,dataIndex: 'release' });
-    cols.push({ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins });
-    if (MODx.config.auto_check_pkg_updates == 1) {
-        cols.push({ header: _('updateable') ,dataIndex: 'updateable' ,renderer: this.rendUpdateAvail });
-    }
-    cols.push({ header: _('provider') ,dataIndex: 'provider_name'});
-    cols.push(this.action);
+    cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
+    cols.push({ header: _('version') ,dataIndex: 'version', fixed:true, width:90 });
+    cols.push({ header: _('release') ,dataIndex: 'release', fixed:true, width:90 });
+    cols.push({ header: _('installed') ,dataIndex: 'installed', fixed:true, width: 160 ,renderer: this._rins });
+    cols.push({ header: _('provider') ,dataIndex: 'provider_name', fixed:true, width:120 });
     
     Ext.applyIf(config,{
         title: _('packages')
@@ -47,7 +43,7 @@ MODx.grid.Package = function(config) {
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
-        ,plugins: [this.action,this.exp]
+        ,plugins: [this.exp]
         ,pageSize: 10
         ,columns: cols
         ,primaryKey: 'signature'
@@ -103,9 +99,40 @@ MODx.grid.Package = function(config) {
     this.on('render',function() {
         this.getView().mainBody.update('<div class="x-grid-empty">' + _('loading') + '</div>');
     },this);
+	/* handle action buttons */
+	this.on('click', this.onClick, this);
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     console: null
+	
+	/* Actions handlers */
+	,onClick: function(e){
+		t = e.getTarget();		
+		elm = t.className.split(' ')[0];			
+		if(elm == 'controlBtn'){
+			action = t.className.split(' ')[1];
+			record = this.getSelectionModel().getSelected();
+			this.menu.record = record.data; 
+			switch (action) {
+                case 'remove':
+                    this.remove(record, e);
+                    break;
+                case 'install':                                       
+                case 'reinstall':                                       
+					this.install(record, e);
+                    break;
+                case 'uninstall':                                       
+					this.uninstall(record, e);
+                    break;
+				case 'update':
+				case 'checkupdate':
+                    this.update(record, e);
+                    break; 
+				default:
+					break;
+            }
+		}
+	}
     
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
@@ -378,26 +405,33 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             this.addContextMenuItem(m);
         }
     }
-
-    ,rendUpdateAvail: function(d,c,r) {
-        switch(d) {
-            case '':
-                return '-';
-            case false:
-                c.css = 'red';
-                return _('no');
-            case true:
-                c.css = 'green';
-                return '<a href="javascript:void(0);" onclick="Ext.getCmp(\'modx-grid-package\').updateFromBtn(this,\''+r.data.signature+'\',\''+r.data.provider+'\');">'+_('yes')+'</a>';
-        }
-    }
-
-    ,updateFromBtn: function(a,sig) {
-        this.menu.record = {
-            signature: sig
-        };
-        this.update(a,{});
-    }
+	
+	/* Main column renderer */
+	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
+		rec = record.data;
+		state = (rec.installed !== null) ? ' installed' : ' not-installed';
+		values = { name: value, state: state, actions: null };		
+		
+		//Action buttons
+		h = new Array;
+		h.push({ className:'remove', text: 'Remove' }) 
+		if(rec.installed !== null){
+			h.push({ className:'reinstall', text: 'Reinstall' })
+			if( MODx.config.auto_check_pkg_updates == 1 && rec.updateable ){ 
+				h.push({ className:'update orange', text: 'Update' })			
+			} else {
+				if( rec.provider != 0 ){
+					h.push({ className:'checkupdate', text: 'Check for update' }) 
+				}
+			}
+			h.push({ className:'uninstall', text: 'Uninstall' })					
+			
+		} else {
+			h.push({ className:'install green', text: 'Install' })			
+		}		
+		values.actions = h;		
+		return this.mainColumnTpl.apply(values);
+	}
 });
 Ext.reg('modx-grid-package',MODx.grid.Package);
 
