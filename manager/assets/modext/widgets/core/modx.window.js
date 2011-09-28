@@ -51,6 +51,7 @@ MODx.Window = function(config) {
         if (this.config.blankValues) { this.fp.getForm().reset(); }
         if (this.config.allowDrop) { this.loadDropZones(); }
         this.syncSize();
+        this.focusFirstField();
     },this);
 };
 Ext.extend(MODx.Window,Ext.Window,{
@@ -78,6 +79,23 @@ Ext.extend(MODx.Window,Ext.Window,{
             ,items: this.config.fields || []
         });
         this.renderForm();
+    }
+
+    ,focusFirstField: function() {
+        if (this.fp && this.fp.getForm() && this.fp.getForm().items.getCount() > 0) {
+            var fld = this.findFirstTextField();
+            if (fld) { fld.focus(false,200); }
+        }
+    }
+    ,findFirstTextField: function(i) {
+        i = i || 0;
+        var fld = this.fp.getForm().items.itemAt(i);
+        if (!fld) return false;
+        if (fld.isXType('combo') || fld.isXType('checkbox') || fld.isXType('radio') || fld.isXType('displayfield') || fld.isXType('statictextfield') || fld.isXType('hidden')) {
+            i = i+1;
+            fld = this.findFirstTextField(i);
+        }
+        return fld;
     }
 	
     ,submit: function(close) {

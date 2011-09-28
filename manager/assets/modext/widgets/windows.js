@@ -21,13 +21,14 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         if (this.checkIfLoaded(this.config.record)) {
             this.fp.getForm().baseParams = {
                 action: 'duplicate'
+                ,prefixDuplicate: true
                 ,id: this.config.resource
             };
             return false;
         }
         var items = [];
 
-        if (this.config.is_folder) {
+        if (this.config.hasChildren) {
             items.push({
                 xtype: 'xcheckbox'
                 ,fieldLabel: _('duplicate_children')
@@ -59,6 +60,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             ,baseParams: this.config.baseParams || {
                 action: 'duplicate'
                 ,id: this.config.resource
+                ,prefixDuplicate: true
             }
             ,labelWidth: 125
             ,defaultType: 'textfield'
@@ -88,7 +90,7 @@ MODx.window.CreateCategory = function(config) {
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
-            fieldLabel: 'Parent'
+            fieldLabel: _('parent')
             ,name: 'parent'
             ,hiddenName: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
@@ -168,7 +170,7 @@ MODx.window.QuickCreateChunk = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '97%'
-            ,grow: true
+            ,grow: true, growMax: 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -471,7 +473,8 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '97%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER

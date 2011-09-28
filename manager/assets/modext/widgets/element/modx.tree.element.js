@@ -87,6 +87,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 }
             });
         }
+        this.windows.createCategory.reset();
         this.windows.createCategory.setValues(r);
         this.windows.createCategory.show(e.target);
     }

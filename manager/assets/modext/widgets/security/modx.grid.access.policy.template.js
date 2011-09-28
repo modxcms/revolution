@@ -184,6 +184,7 @@ Ext.reg('modx-grid-access-policy-templates',MODx.grid.AccessPolicyTemplate);
  */
 MODx.window.CreateAccessPolicyTemplate = function(config) {
     config = config || {};
+    this.ident = config.ident || 'cacpt'+Ext.id();
     Ext.applyIf(config,{
         width: 400
         ,title: _('policy_template_create')
@@ -192,20 +193,20 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'modx-cap-name'
+            ,id: this.ident+'-name'
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
             fieldLabel: _('template_group')
             ,name: 'template_group'
-            ,id: 'modx-capt-template-group'
+            ,id: this.ident+'-template-group'
             ,xtype: 'modx-combo-access-policy-template-group'
             ,anchor: '90%'
             ,value: 1
         },{
             fieldLabel: _('description')
             ,name: 'description'
-            ,id: 'modx-cap-description'
+            ,id: this.ident+'-description'
             ,xtype: 'textarea'
             ,anchor: '90%'
             ,height: 50

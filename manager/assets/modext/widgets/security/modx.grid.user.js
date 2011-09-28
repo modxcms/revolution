@@ -100,6 +100,21 @@ MODx.grid.User = function(config) {
                 ,scope: this
             }]
         },'->',{
+            xtype: 'modx-combo-usergroup'
+            ,name: 'usergroup'
+            ,id: 'modx-user-filter-usergroup'
+            ,itemId: 'usergroup'
+            ,emptyText: _('user_group')+'...'
+            ,baseParams: {
+                action: 'getList'
+                ,addAll: true
+            }
+            ,value: ''
+            ,width: 200
+            ,listeners: {
+                'select': {fn:this.filterUsergroup,scope:this}
+            }
+        },'-',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-user-search'
@@ -264,7 +279,13 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
                 return _('female');
         }
     }
-    
+
+    ,filterUsergroup: function(cb,nv,ov) {
+        this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -277,6 +298,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             action: 'getList'
     	};
         Ext.getCmp('modx-user-search').reset();
+        Ext.getCmp('modx-user-filter-usergroup').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }

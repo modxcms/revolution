@@ -76,8 +76,9 @@ Ext.extend(MODx.Component,Ext.Component,{
         return true;
     }
 
-    ,submitForm: function(listeners) {
-        listeners = listeners || {}
+    ,submitForm: function(listeners,options,otherParams) {
+        listeners = listeners || {};
+        otherParams = otherParams || {};
         if (!this.config.formpanel || !this.config.action) { return false; }
         f = Ext.getCmp(this.config.formpanel);
         if (!f) { return false; }
@@ -89,16 +90,17 @@ Ext.extend(MODx.Component,Ext.Component,{
                 f.on(i,listeners[i].fn,listeners[i].scope || this);
             }
         }
-        
+
         Ext.apply(f.baseParams,{
             'action':this.config.action
         });
-        f.submit({
-            headers: {
-                'Powered-By': 'MODx'
-                ,'modAuth': MODx.siteId
-            }
-        });
+        Ext.apply(f.baseParams,otherParams);
+        options = options || {};
+        options.headers = {
+            'Powered-By': 'MODx'
+            ,'modAuth': MODx.siteId
+        };
+        f.submit(options);
         return true;
     }
 });
@@ -313,6 +315,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 } else if (o.actions) {
                     if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                     if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
+                    if (MODx.request.class_key) { itm.params.class_key = MODx.request.class_key; }
                     var a = Ext.urlEncode(itm.params);
                     location.href = '?a='+o.actions['new']+'&'+a;
                 }

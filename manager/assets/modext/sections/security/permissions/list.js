@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-	MODx.load({ xtype: 'modx-page-groups-roles' });
+	MODx.add('modx-page-groups-roles');
 });
 
 /**
@@ -15,7 +15,6 @@ MODx.page.GroupsRoles = function(config) {
 	Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-groups-roles'
-            ,renderTo: 'modx-panel-groups-roles-div'
         }]
         ,buttons: [{
             text: _('help_ex')

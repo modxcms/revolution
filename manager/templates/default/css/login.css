@@ -25,11 +25,11 @@ img.loginCaptcha {
     height: 60px;
 }
 .loginLicense {
-    width: 460px;
+    width: 470px;
     color: #555;
-    margin: 0 auto;
-    font-size: 90%;
-    padding-left: 20px;
+    margin: 10px auto;
+    padding-left: 10px;
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
 }
 
 #modx-login-form-panel {
@@ -68,10 +68,11 @@ a:hover {
 #modx-login-email { width: 200px; }
 
 #modx-panel-login-div {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
     background-color: white;
+	box-shadow: 0 0 10px #aaa;
+	-moz-box-shadow: 0 0 10px #aaa;
+	-webkit-box-shadow: 0 0 15px #ccc;
+	border: 1px solid #fff;
 }
 #modx-login-btn:hover {
 	color: #777;
@@ -82,3 +83,9 @@ label { cursor: pointer; }
 #modx-panel-login-div div.x-panel-ml{
 margin-right:0;
 }
+
+input.x-form-text {width:280px;}
+
+input.x-form-field {}
+
+.x-panel-body h2 {margin-top:0;}

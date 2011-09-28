@@ -18,6 +18,7 @@ MODx.browser.RTE = function(config) {
         ,prependUrl: config.prependUrl || null
         ,ident: this.ident
     });
+    MODx.browserOpen = true;
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
         ,onUpload: function() { this.view.run(); }
@@ -106,7 +107,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         dir = dir || '';
         this.view.run({
             dir: dir
-            ,ctx: MODx.ctx
+            ,wctx: MODx.ctx
         });
     }
     

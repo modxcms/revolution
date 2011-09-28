@@ -10,6 +10,9 @@
 $resourceClass = $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));
 $resourceId = !empty($resource) ? $resource->get('id') : 0;
+if ($resource && $resource instanceof modResource) {
+    $_GET['wctx'] = $resource->get('context_key');
+}
 
 $onResourceTVFormPrerender = $modx->invokeEvent('OnResourceTVFormPrerender',array(
     'resource' => $resourceId,
@@ -20,7 +23,7 @@ if (is_array($onResourceTVFormPrerender)) {
 $modx->smarty->assign('OnResourceTVFormPrerender',$onResourceTVFormPrerender);
 
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
-if (file_exists($delegateView)) {
+if (file_exists($delegateView) && realpath($delegateView) !== realpath(__FILE__)) {
     $overridden= include_once ($delegateView);
     if ($overridden !== false) {
         return;
@@ -32,7 +35,7 @@ $c = $modx->newQuery('modCategory');
 $c->sortby('category','ASC');
 $categories = $modx->getCollection('modCategory',$c);
 $emptycat = $modx->newObject('modCategory');
-$emptycat->set('category','');
+$emptycat->set('category',ucfirst($modx->lexicon('uncategorized')));
 $emptycat->id = 0;
 $categories[0] = $emptycat;
 $tvMap = array();
@@ -117,11 +120,13 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
 $tvCounts = array();
 $finalCategories = array();
 foreach ($categories as $n => $category) {
-    $category->hidden = empty($category->tvCount) ? true : false;
-    $ct = count($category->tvs);
-    if ($ct > 0) {
-        $finalCategories[$category->get('id')] = $category;
-        $tvCounts[$n] = $ct;
+    if (is_object($category) && $category instanceof modCategory) {
+        $category->hidden = empty($category->tvCount) ? true : false;
+        $ct = count($category->tvs);
+        if ($ct > 0) {
+            $finalCategories[$category->get('id')] = $category;
+            $tvCounts[$n] = $ct;
+        }
     }
 }
 $onResourceTVFormRender = $modx->invokeEvent('OnResourceTVFormRender',array(

@@ -108,6 +108,10 @@ hr {
 
 #modx-content {
     padding: 0;
+    height: 100%;
+    overflow: auto;
+}
+#modx-content-page {
 }
 
 #modx-container {
@@ -250,7 +254,7 @@ h2 {
     font: bold 18px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     padding: 8px 15px;
     border-bottom: 1px solid #D6DFC3;
-    text-shadow: 0 1px 1px #FFFFFF;
+    text-shadow: 1px 1px 0 #FFFFFF;
 }
 
 h3 {
@@ -482,6 +486,7 @@ textarea.x-form-field {
 #modx-mainpanel{
     margin:0;
     position:relative;
+    height: 100%;
 }
 
 /* news articles */
@@ -973,6 +978,7 @@ html #modx-topnav ul.modx-subnav li a:hover{
     color: #CC3333 !important;
     text-decoration: line-through !important;
 }
+.element-node-disabled a span { color: gray !important; }
 
 /* ext extensions */
 input.x-static-text-field {

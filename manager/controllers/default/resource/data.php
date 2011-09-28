@@ -17,7 +17,7 @@ $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resou
 $resourceDir= strtolower(substr($resourceClass, 3));
 
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
-if (file_exists($delegateView)) {
+if (file_exists($delegateView) && realpath($delegateView) !== realpath(__FILE__)) {
     $overridden= include_once ($delegateView);
     if ($overridden !== false) {
         return;

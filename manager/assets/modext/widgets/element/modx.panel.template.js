@@ -53,7 +53,7 @@ MODx.panel.Template = function(config) {
                 ,value: config.record.templatename
                 ,listeners: {
                     'keyup': {scope:this,fn:function(f,e) {
-                        Ext.getCmp('template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
+                        Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
                     }}
                 }
             },{
@@ -80,7 +80,7 @@ MODx.panel.Template = function(config) {
                 ,inputValue: 1
                 ,checked: config.record.locked || false
             },{
-                xtype: 'xcheckbox'
+                xtype: 'checkbox'
                 ,fieldLabel: _('clear_cache_on_save')
                 ,description: _('clear_cache_on_save_msg')
                 ,name: 'clearCache'

@@ -1445,7 +1445,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-mmenu .x-menu-item {
-	font-size:11px;
+	font-size:12px;
 	color:#000;
 }
 
@@ -1692,7 +1692,7 @@ a.x-menu-item {
 }
 #x-debug-browser .x-tree .x-tree-node a span {
     color:#333333;
-    font-size:11px;
+    font-size:12px;
     font-family:"monotype","courier new",sans-serif;
 }
 
@@ -2236,7 +2236,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-progress-text {
-    font-size:11px;
+    font-size:12px;
     font-weight:bold;
     color:#fff;
 }

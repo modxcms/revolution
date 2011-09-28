@@ -53,6 +53,15 @@ Ext.extend(MODx,Ext.Component,{
             expires: new Date(new Date().getTime()+(1000*60*60*24))
         }));
     }
+	
+    ,add: function(cmp) {
+        var ctr = Ext.getCmp('modx-content');
+        if (ctr) {
+            ctr.removeAll();
+            ctr.add({ xtype: cmp });
+            ctr.doLayout();
+        }
+    }
 
     ,load: function() {
         var a = arguments, l = a.length;
@@ -436,10 +445,10 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
 
     ,errorExt: function(r,frm) {
         this.unhighlightFields();
-        if (r.errors !== null && frm) {
+        if (r && r.errors !== null && frm) {
             frm.markInvalid(r.errors);
         }
-        if (r.message !== undefined && r.message !== '') {
+        if (r && r.message !== undefined && r.message !== '') {
             this.showError(r.message);
         } else {
             MODx.msg.hide();

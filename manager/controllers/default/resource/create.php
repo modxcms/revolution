@@ -33,7 +33,7 @@ $delegateView = str_replace(array('{core_path}','{assets_path}','{base_path}'),a
     $modx->getOption('assets_path',null,MODX_ASSETS_PATH),
     $modx->getOption('base_path',null,MODX_BASE_PATH),
 ),$delegateView);
-if (file_exists($delegateView)) {
+if (file_exists($delegateView) && realpath($delegateView) !== realpath(__FILE__)) {
     $overridden= include ($delegateView);
     if ($overridden !== false) {
         return $overridden;
@@ -147,23 +147,17 @@ if ($fcDt) {
     $parentIds = array();
     if ($parent) { /* ensure get all parents */
         $p = $parent ? $parent->get('id') : 0;
-        $rCtx = $parent->get('context_key');
-        $oCtx = $modx->context->get('key');
-        if (!empty($rCtx) && $rCtx != 'mgr') {
-            $modx->switchContext($rCtx);
-        }
-        $parentIds = $modx->getParentIds($p);
+        $parentIds = $modx->getParentIds($p,10,array(
+            'context' => $parent->get('context_key'),
+        ));
         $parentIds[] = $p;
         $parentIds = array_unique($parentIds);
-        if (!empty($rCtx)) {
-            $modx->switchContext($oCtx);
-        }
     } else {
         $parentIds = array(0);
     }
 
     $constraintField = $fcDt->get('constraint_field');
-    if ($constraintField == 'id' && in_array($fcDt->get('constraint'),$parentIds)) {
+    if (($constraintField == 'id' || $constraintField == 'parent') && in_array($fcDt->get('constraint'),$parentIds)) {
         $default_template = $fcDt->get('value');
     } else if (empty($constraintField)) {
         $default_template = $fcDt->get('value');
@@ -203,8 +197,16 @@ $defaults['cacheable'] = intval($defaults['cacheable']) == 1 ? true : false;
 $defaults['deleted'] = intval($defaults['deleted']) == 1 ? true : false;
 $defaults['uri_override'] = intval($defaults['uri_override']) == 1 ? true : false;
 
-$defaults['parent_pagetitle'] = $parent->get('pagetitle');
-
+if (!empty($defaults['parent'])) {
+    if ($parent->get('id') == $defaults['parent']) {
+        $defaults['parent_pagetitle'] = $parent->get('pagetitle');
+    } else {
+        $overriddenParent = $modx->getObject('modResource',$defaults['parent']);
+        if ($overriddenParent) {
+            $defaults['parent_pagetitle'] = $overriddenParent->get('pagetitle');
+        }
+    }
+}
 /* get TVs */
 $tvCounts = array();
 $tvOutput = include dirname(__FILE__).'/tvs.php';
