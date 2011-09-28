@@ -32,7 +32,7 @@ if (!empty($_POST['proceed'])) {
 $mode = $install->settings->get('installmode');
 
 $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
-if ($mode == modInstall::MODE_UPGRADE_REVO) {
+if ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
     include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 
     $this->parser->assign('context_web_path', defined('MODX_BASE_PATH') ? MODX_BASE_PATH : MODX_INSTALL_PATH);

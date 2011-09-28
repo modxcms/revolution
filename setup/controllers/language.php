@@ -34,8 +34,8 @@ sort($langs);
 $this->parser->assign('langs', $langs);
 unset($path,$file,$handle);
 
-$actualLanguage = 'en';
-if (!empty($_COOKIE['modx_setup_language']) && ($_COOKIE['modx_setup_language'] != 'en')) {
+$actualLanguage = 'ja';
+if (!empty($_COOKIE['modx_setup_language']) && ($_COOKIE['modx_setup_language'] != 'ja')) {
     $actualLanguage = $_COOKIE['modx_setup_language'];
 }
 $languages = '';

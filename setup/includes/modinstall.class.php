@@ -121,6 +121,7 @@ class modInstall {
     public function getConfig($mode = 0, $config = array ()) {
         global $database_dsn, $database_type, $database_server, $dbase, $database_user,
                 $database_password, $database_connection_charset, $table_prefix, $config_options;
+        $database_connection_charset = 'utf8';
         if (!is_array($config)) {
             $config = array ();
         }
@@ -250,7 +251,7 @@ class modInstall {
             $this->xpdo->setLogTarget(array(
                 'target' => 'FILE',
                 'options' => array(
-                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y-%m-%dT%H:%M:%S')
+                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y-%m-%dT%H.%M.%S')
                 )
             ));
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
