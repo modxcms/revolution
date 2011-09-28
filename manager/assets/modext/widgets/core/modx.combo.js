@@ -693,8 +693,9 @@ MODx.combo.Action = function(config) {
         ,hiddenName: 'action'
         ,displayField: 'controller'
         ,valueField: 'id'
-        ,fields: ['id','controller']
+        ,fields: ['id','controller','namespace']
         ,url: MODx.config.connectors_url+'system/action.php'
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><tpl if="namespace">{namespace} - </tpl>{controller}</div></tpl>')
     });
     MODx.combo.Action.superclass.constructor.call(this,config);
 };
