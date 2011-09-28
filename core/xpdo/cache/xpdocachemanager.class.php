@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -244,11 +244,6 @@ class xPDOCacheManager {
                 }
             }
             @fclose($file);
-            if ($written === false) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error writing file: {$filename}");
-            }
-        } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not open file for writing: {$filename}");
         }
         return ($written !== false);
     }

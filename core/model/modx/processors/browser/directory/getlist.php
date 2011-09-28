@@ -54,18 +54,21 @@ $canUpload = $modx->hasPermission('file_upload');
 /* get base paths and sanitize incoming paths */
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
+$basePathRelative = false;
 if (empty($scriptProperties['basePath'])) {
-    $root = $modx->fileHandler->getBasePath();
+    $basePath = $modx->fileHandler->getBasePath();
     if ($workingContext->getOption('filemanager_path_relative',true)) {
-        $root = $workingContext->getOption('base_path','').$root;
+        $basePath = $workingContext->getOption('base_path','').$basePath;
+        $basePathRelative = true;
     }
 } else {
-    $root = $scriptProperties['basePath'];
+    $basePath = $scriptProperties['basePath'];
     if (!empty($scriptProperties['basePathRelative'])) {
-        $root = $workingContext->getOption('base_path').$root;
+        $basePath = $workingContext->getOption('base_path').$basePath;
+        $basePathRelative = true;
     }
 }
-$fullPath = $root.ltrim($dir,'/');
+$fullPath = $basePath.ltrim($dir,'/');
 if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').': '.$fullPath);
 
 $editAction = false;
@@ -76,11 +79,11 @@ if ($act) { $editAction = $act->get('id'); }
 $isRelativeBaseUrl = false;
 if (empty($scriptProperties['baseUrl'])) {
     $baseUrl = $modx->fileHandler->getBaseUrl(true);
-    $isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
+    $isRelativeBaseUrl = $workingContext->getOption('filemanager_path_relative',null,true);
 } else {
     $baseUrl = $scriptProperties['baseUrl'];
     if (!empty($scriptProperties['baseUrlRelative'])) {
-        $baseUrl = $modx->getOption('base_url').$baseUrl;
+        $baseUrl = $workingContext->getOption('base_url',$modx->getOption('base_url',null,MODX_BASE_URL)).$baseUrl;
         $isRelativeBaseUrl = true;
     }
 }
@@ -129,7 +132,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $cls[] = 'icon-file';
         $cls[] = 'icon-'.$ext;
         if ($canRemoveFile) $cls[] = 'premove';
-        if ($canUpdateFile) $cl[] = 'pupdate';
+        if ($canUpdateFile) $cls[] = 'pupdate';
 
 
         if (!$file->isWritable()) {
@@ -140,12 +143,12 @@ foreach (new DirectoryIterator($fullPath) as $file) {
 
         /* get relative url from manager/ */
         $fromManagerUrl = $baseUrl.trim(str_replace('//','/',$dir.$fileName),'/');
-        $fromManagerUrl = ($modx->getOption('filemanager_url_relative',null,true) ? '../' : '').$fromManagerUrl;
+        $fromManagerUrl = ($isRelativeBaseUrl ? '../' : '').$fromManagerUrl;
 
         /* get relative url for drag/drop */
         $url = $dir.$fileName;
         if ($baseUrl != '/') {
-            $url = $baseUrl.str_replace('//','/',$dir.$fileName);
+            $url = str_replace('//','/',$baseUrl.$dir.$fileName);
         }
         if ($isRelativeBaseUrl) {
             $url = ltrim($url,'/');

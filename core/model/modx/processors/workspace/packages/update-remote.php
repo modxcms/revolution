@@ -39,7 +39,7 @@ if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_clien
 
 /* get current version for supportability */
 $modx->getVersionData();
-$productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+$productVersion = $modx->version['code_name'].'-'.$modx->version['full_version'];
 
 /* send REST request */
 $response = $provider->request('package/update','GET',array(

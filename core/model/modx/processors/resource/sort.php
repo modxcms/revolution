@@ -29,10 +29,6 @@ foreach ($nodes as $ar_node) {
     $node = $modx->getObject('modResource',$ar_node['id']);
     if (empty($node)) continue;
 
-    if (!$node->checkPolicy('save')) {
-        $nodeErrors[] = $modx->lexicon('access_denied');
-        continue;
-    }
     if (empty($ar_node['context'])) continue;
     if (in_array($ar_node['parent'],$dontChangeParents)) continue;
 
@@ -75,6 +71,13 @@ foreach ($nodes as $ar_node) {
     }
     $node->set('menuindex',$ar_node['order']);
     $modifiedNodes[] = $node;
+}
+if (!empty($modifiedNodes)) {
+    foreach ($modifiedNodes as $modifiedNode) {
+        if (!$modifiedNode->checkPolicy('save')) {
+            $nodeErrors[] = $modx->lexicon('resource_err_save');
+        }
+    }
 }
 if (!empty($nodeErrors)) {
     return $modx->error->failure(implode("\n", array_unique($nodeErrors)));

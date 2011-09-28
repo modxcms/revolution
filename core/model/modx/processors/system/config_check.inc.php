@@ -82,10 +82,14 @@ if (!empty($warnings)) {
     for ($i = 0; $i < count($warnings); $i++) {
         switch ($warnings[$i][0]) {
             case $modx->lexicon('configcheck_configinc');
-                $warnings[$i][1] = $modx->lexicon('configcheck_configinc_msg');
+                $warnings[$i][1] = $modx->lexicon('configcheck_configinc_msg',array(
+                    'path' => $modx->getOption('core_path',null,MODX_CORE_PATH).'config/'.MODX_CONFIG_KEY.'.inc.php',
+                ));
                 break;
             case $modx->lexicon('configcheck_installer') :
-                $warnings[$i][1] = $modx->lexicon('configcheck_installer_msg');
+                $warnings[$i][1] = $modx->lexicon('configcheck_installer_msg',array(
+                    'path' => $modx->getOption('base_path',null,MODX_BASE_PATH).'setup/',
+                ));
                 break;
             case $modx->lexicon('configcheck_cache') :
                 $warnings[$i][1] = $modx->lexicon('configcheck_cache_msg');

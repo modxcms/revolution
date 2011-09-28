@@ -6,9 +6,16 @@
 if (empty($value)) return $value;
 
 $value= $this->parseInput($value, "||", "array");
+
 for ($i = 0; $i < count($value); $i++) {
     list($name,$url) = is_array($value[$i]) ? $value[$i]: explode("==",$value[$i]);
     if (!$url) $url = $name;
+    if ((empty($name) || $name == $url) && $this->get('type') == 'resourcelist') {
+        $resource = $modx->getObject('modResource',$url);
+        if ($resource) {
+            $name = $resource->get('pagetitle');
+        }
+    }
 
     /* handle types that return IDs of resources */
     $rid =intval($url);

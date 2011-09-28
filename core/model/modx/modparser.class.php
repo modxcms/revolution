@@ -351,7 +351,7 @@ class modParser {
         $innerTag= $tag[1];
 
         /* collect any nested element tags in the innerTag and process them */
-        $this->processElementTags($outerTag, $innerTag, true);
+        $this->processElementTags($outerTag, $innerTag, $processUncacheable);
         $outerTag= '[[' . $innerTag . ']]';
 
         $tagParts= xPDO :: escSplit('?', $innerTag, '`', 2);

@@ -43,6 +43,10 @@ class modContext extends modAccessibleObject {
                 }
                 if (!empty($context)) {
                     foreach ($context as $var => $val) {
+                        if ($var === 'policies') {
+                            $this->setPolicies($val);
+                            continue;
+                        }
                         $this->$var = $val;
                     }
                     $prepared= true;
@@ -96,7 +100,7 @@ class modContext extends modAccessibleObject {
         $policy = array();
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if ($context === $this->xpdo->context->get('key')) {
+        if (!is_object($this->xpdo->context) || $context === $this->xpdo->context->get('key')) {
             $enabled = (boolean) $this->xpdo->getOption('access_context_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
             $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_context_enabled', true);

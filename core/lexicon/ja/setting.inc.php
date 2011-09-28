@@ -125,6 +125,12 @@ $_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets fro
 $_lang['setting_cache_db_expires'] = 'データベースキャッシュの有効秒数';
 $_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
 
+$_lang['setting_cache_db_session'] = 'DBセッションキャッシュを有効にする';
+$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+
+$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+
 $_lang['setting_cache_default'] = 'デフォルトでキャッシュ有効';
 $_lang['setting_cache_default_desc'] = '「はい」を選択すると、すべての新規リソースでキャッシュ有効をデフォルトにします。';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
@@ -177,6 +183,12 @@ $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concat
 
 $_lang['setting_container_suffix'] = 'コンテナの添え字';
 $_lang['setting_container_suffix_desc'] = 'フレンドリーURLを使用する場合に、コンテナ属性のリソースに追加する添え字';
+$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
+$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
+$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
 $_lang['setting_cultureKey'] = '言語';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
@@ -523,6 +535,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Use this setting to customize the 
 $_lang['setting_session_cookie_secure'] = 'Session Cookie Secure';
 $_lang['setting_session_cookie_secure_desc'] = 'Enable this setting to use secure session cookies.';
 
+$_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'modSessionHandler\'.';
+
 $_lang['setting_session_handler_class'] = 'Session Handler Classname';
 $_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
@@ -542,10 +557,9 @@ $_lang['setting_signupemail_message'] = 'サインアップメール';
 $_lang['setting_signupemail_message_desc'] = 'ユーザ管理画面でユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。<br /><strong>参考:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br /><br />[[+sname]] - サイトの名前, <br />[[+saddr]] - サイト管理者のメールアドレス, <br />[[+surl]] - サイトのURL, <br />[[+uid]] - ユーザーのログイン名, <br />[[+pwd]] - ユーザーのパスワード, <br />[[+ufn]] - ユーザーのフルネーム. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'こんにちは[[+uid]]さん。 \n\n[[+sname]]の管理画面のログイン情報をお送りします。\n\nユーザ名: [[+uid]]\nパスワード: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
-
 $_lang['setting_site_name'] = 'サイト名';
 $_lang['setting_site_name_desc'] = 'サイト名を入力してください。';
-$_lang['setting_site_name_err'] = 'サイト名が入力されていません。';
+$_lang['setting_site_name_err']  = 'サイト名が入力されていません。';
 
 $_lang['setting_site_start'] = 'トップページとして使用するドキュメントのIDを入力してください。';
 $_lang['setting_site_start_desc'] = 'トップページとして使用するドキュメントのIDを入力してください。 <strong>注意: 既に存在するドキュメントのIDを入力してください。ドキュメントは公開されている必要があります</strong>';
@@ -624,7 +638,7 @@ $_lang['setting_websignupemail_message_default'] = 'こんにちは  [[+uid]]さ
 $_lang['setting_welcome_screen'] = 'ようこそ画面の表示';
 $_lang['setting_welcome_screen_desc'] = '「はい」を選択すると、ようこそページの読み込みが完了したときに、ようこそ画面を表示します。そしてそれ以降は表示しません。';
 
-$_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
+$_lang['setting_welcome_screen_url'] = 'WelcomeスクリーンのURL';
 $_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODX Revolution.';
 
 $_lang['setting_which_editor'] = '使用するエディタ';

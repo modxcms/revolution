@@ -309,13 +309,14 @@ class modTemplateVar extends modElement {
             $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
             $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
             $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
+            $ruleFieldName = $this->xpdo->escape('rule');
             $c->where(array(
                 array(
-                    '(modActionDom.rule = "tvDefault"
-                   OR modActionDom.rule = "tvVisible"
-                   OR modActionDom.rule = "tvTitle")'
+                    "(modActionDom.{$ruleFieldName} = 'tvDefault'
+                   OR modActionDom.{$ruleFieldName} = 'tvVisible'
+                   OR modActionDom.{$ruleFieldName} = 'tvTitle')"
                 ),
-                '"tv'.$this->get('id').'" IN ('.$this->xpdo->escape('modActionDom').'.'.$this->xpdo->escape('name').')',
+                "'tv{$this->get('id')}' IN ({$this->xpdo->escape('modActionDom')}.{$this->xpdo->escape('name')})",
                 'FCSet.active' => true,
                 'Profile.active' => true,
             ));
@@ -338,7 +339,7 @@ class modTemplateVar extends modElement {
                 'modActionDom.*',
                 'FCSet.constraint_class',
                 'FCSet.constraint_field',
-                'FCSet.constraint',
+                'FCSet.' . $this->xpdo->escape('constraint'),
                 'FCSet.template',
             ));
             $c->sortby('FCSet.template','ASC');
@@ -845,7 +846,7 @@ class modTemplateVar extends modElement {
                             "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                             "AND ResourceGroup.tmplvarid = :element " .
                             "AND ResourceGroup.documentgroup = acl.target " .
-                            "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                            "ORDER BY Acl.target, Acl.principal, Acl.authority";
                     $bindings = array(
                         ':element' => $this->get('id'),
                         ':context' => $context
@@ -870,8 +871,7 @@ class modTemplateVar extends modElement {
                             "AND Acl.principal_class = 'modUserGroup' " .
                             "AND CategoryClosure.ancestor = Acl.target " .
                             "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
-                            "GROUP BY target, principal, authority, policy " .
-                            "ORDER BY CategoryClosure.depth DESC, authority ASC";
+                            "ORDER BY CategoryClosure.depth DESC, target, principal, authority ASC";
                     $bindings = array(
                         ':category' => $this->get('category'),
                         ':context' => $context,

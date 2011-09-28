@@ -199,6 +199,10 @@ class modManagerResponse extends modResponse {
                 $field = $rule->get('name');
                 if ($field == 'modx-resource-content') $field = 'content';
                 $overridden[$field] = $rule->get('value');
+                if ($field == 'parent-cmb') {
+                    $overridden['parent'] = (int)$rule->get('value');
+                    $overridden['parent-cmb'] = (int)$rule->get('value');
+                }
             }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
@@ -246,9 +250,10 @@ class modManagerResponse extends modResponse {
         }
 
         if ($loadLayout) {
+            $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
             $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
-    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$this->modx->site_id.'"});
+    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});
 });</script>');
         }
     }

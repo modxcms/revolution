@@ -1,5 +1,21 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.1.5-pl (July 5, 2011)
+====================================
+- [#5084] Fix various xPDO::exec() calls to check for false value properly
+- [#4877] Fix nested conjunctions infecting parent conjunctions
+- [#5042] Prevent additional columns defined in derivative classes being marked lazy
+
+xPDO 2.1.4-pl (May 23, 2011)
+====================================
+- Default cacheFlag to true in getObject/getCollection/getIterator methods
+- [#4787] Add ability to determine the table class of derivatives
+- [#4772] Do not flush related objects from cache on read operations
+- [#4682] Fix support for driver-specific attributes on object element in schema
+
+xPDO 2.1.3-pl (May 3, 2011)
+====================================
+- [#4577] Remove calls to xPDO->log() in xPDOCacheManager->writeFile()
 - Add options to xPDOCacheManager::writeFile() to allow multiple attempts when exclusive locks fail
 
 xPDO 2.1.2-pl (March 25, 2011)

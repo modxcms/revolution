@@ -120,11 +120,15 @@ $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $sc
 $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
 $scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) ? 0 : 1;
 
-/* default pagetitle */
-if (empty($scriptProperties['pagetitle'])) $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
+/* default pagetitle if not reloading template */
+if (empty($scriptProperties['reloadOnly'])) {
+    if (empty($scriptProperties['pagetitle'])) $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
+}
 
 /* specific data escaping */
-$scriptProperties['pagetitle'] = trim($scriptProperties['pagetitle']);
+if (!empty($scriptProperties['pagetitle'])) {
+    $scriptProperties['pagetitle'] = trim($scriptProperties['pagetitle']);
+}
 $scriptProperties['variablesmodified'] = isset($scriptProperties['variablesmodified'])
     ? explode(',',$scriptProperties['variablesmodified'])
     : array();
@@ -139,7 +143,7 @@ if (!$resource) return $modx->error->failure($modx->lexicon('resource_err_create
 if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->lexicon('resource_err_class',array('class' => $resourceClass)));
 
 /* friendly url alias checks */
-if ($workingContext->getOption('friendly_urls', false)) {
+if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperties['reloadOnly']) || !empty($scriptProperties['pagetitle']))) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
         $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
@@ -286,6 +290,7 @@ $OnBeforeDocFormSave = $modx->invokeEvent('OnBeforeDocFormSave',array(
     'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'resource' => &$resource,
+    'reloadOnly' => !empty($scriptProperties['reloadOnly']),
 ));
 if (is_array($OnBeforeDocFormSave)) {
     $canSave = false;
@@ -363,6 +368,7 @@ $modx->invokeEvent('OnDocFormSave', array(
     'mode' => modSystemEvent::MODE_NEW,
     'id' => $resource->get('id'),
     'resource' => &$resource,
+    'reloadOnly' => !empty($scriptProperties['reloadOnly']),
 ));
 
 /* log manager action */

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -80,6 +80,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
     protected $_class= null;
     protected $_alias= null;
+    protected $_tableClass = null;
     public $graph= array ();
     public $query= array (
         'command' => 'SELECT',
@@ -102,6 +103,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         if ($class= $this->xpdo->loadClass($class)) {
             $this->_class= $class;
             $this->_alias= $class;
+            $this->_tableClass = $this->xpdo->getTableClass($this->_class);
             $this->query['from']['tables'][0]= array (
                 'table' => $this->xpdo->getTableName($this->_class),
                 'alias' => & $this->_alias
@@ -123,6 +125,10 @@ abstract class xPDOQuery extends xPDOCriteria {
 
     public function getAlias() {
         return $this->_alias;
+    }
+
+    public function getTableClass() {
+        return $this->_tableClass;
     }
 
     /**
@@ -484,7 +490,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     /**
      * Prepares the xPDOQuery for execution.
      *
-     * @return xPDOStatement The xPDOStatement representing the prepared query.
+     * @return PDOStatement The PDOStatement representing the prepared query.
      */
     public function prepare($bindings= array (), $byValue= true, $cacheFlag= null) {
         $this->stmt= null;
@@ -655,10 +661,10 @@ abstract class xPDOQuery extends xPDOCriteria {
     /**
      * Builds conditional clauses from xPDO condition expressions.
      *
-     * @param array $conditions
-     * @param string $conjunction
-     * @param boolean $isFirst Indicates if this is the first condition in collection.
-     * @return string The conditional clause.
+     * @param array|xPDOQueryCondition $conditions An array of conditions or an xPDOQueryCondition instance.
+     * @param string $conjunction Either xPDOQuery:SQL_AND or xPDOQuery::SQL_OR
+     * @param boolean $isFirst Indicates if this is the first condition in an array.
+     * @return string The generated SQL clause.
      */
     public function buildConditionalClause($conditions, & $conjunction = xPDOQuery::SQL_AND, $isFirst = true) {
         $clause= '';
@@ -666,15 +672,19 @@ abstract class xPDOQuery extends xPDOCriteria {
             $groups= count($conditions);
             $currentGroup= 1;
             $first = true;
+            $origConjunction = $conjunction;
             $groupConjunction = $conjunction;
             foreach ($conditions as $groupKey => $group) {
                 $groupClause = '';
                 $groupClause.= $this->buildConditionalClause($group, $groupConjunction, $first);
-                if ($first) $conjunction = $groupConjunction;
+                if ($first) {
+                    $conjunction = $groupConjunction;
+                }
                 if (!empty($groupClause)) $clause.= $groupClause;
                 $currentGroup++;
                 $first = false;
             }
+            $conjunction = $origConjunction;
             if ($groups > 1 && !empty($clause)) {
                 $clause = " ( {$clause} ) ";
             }
@@ -717,11 +727,31 @@ abstract class xPDOQuery extends xPDOCriteria {
     }
 }
 
+/**
+ * Abstracts individual query conditions used in xPDOQuery instances.
+ *
+ * @package xpdo
+ * @subpackage om
+ */
 class xPDOQueryCondition {
+    /**
+     * @var string The SQL string for the condition.
+     */
     public $sql = '';
+    /**
+     * @var array An array of value/parameter bindings for the condition.
+     */
     public $binding = array();
+    /**
+     * @var string The conjunction identifying how the condition is related to the previous condition(s).
+     */
     public $conjunction = xPDOQuery::SQL_AND;
 
+    /**
+     * The constructor for creating an xPDOQueryCondition instance.
+     *
+     * @param array $properties An array of properties representing the condition.
+     */
     public function __construct(array $properties) {
         if (isset($properties['sql'])) $this->sql = $properties['sql'];
         if (isset($properties['binding'])) $this->binding = $properties['binding'];

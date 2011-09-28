@@ -157,6 +157,8 @@ class modRequest {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
+                $resource->_content = $cachedResource['resource']['_content'];
+                $resource->_isForward = isset($cachedResource['resource']['_isForward']) && !empty($cachedResource['resource']['_isForward']);
                 if (isset($cachedResource['contentType'])) {
                     $contentType = $this->modx->newObject('modContentType');
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
@@ -171,9 +173,12 @@ class modRequest {
                 }
                 if (isset($cachedResource['policyCache'])) $resource->setPolicies(array($this->modx->context->get('key') => $cachedResource['policyCache']));
                 if (isset($cachedResource['elementCache'])) $this->modx->elementCache = $cachedResource['elementCache'];
+                if (isset($cachedResource['sourceCache'])) $this->modx->sourceCache = $cachedResource['sourceCache'];
                 if ($resource->get('_jscripts')) $this->modx->jscripts = $this->modx->jscripts + $resource->get('_jscripts');
                 if ($resource->get('_sjscripts')) $this->modx->sjscripts = $this->modx->sjscripts + $resource->get('_sjscripts');
                 if ($resource->get('_loadedjscripts')) $this->modx->loadedjscripts = array_merge($this->modx->loadedjscripts, $resource->get('_loadedjscripts'));
+                $isForward= $resource->_isForward;
+                $resource->setProcessed(true);
                 $fromCache = true;
             }
         }
@@ -189,6 +194,7 @@ class modRequest {
                             }
                         }
                     }
+                    $resource->_isForward= $isForward;
                     if (!$resource->checkPolicy('view')) {
                         $this->modx->sendUnauthorizedPage();
                     }

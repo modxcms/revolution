@@ -33,10 +33,18 @@
  * @subpackage filters
  */
 class modInputFilter {
-    public $modx= null;
-    private $_commands= null;
-    private $_modifiers= null;
+    /** @var modX A reference to the modX instance. */
+    public $modx = null;
+    /** @var array An array of filter commands. */
+    private $_commands = null;
+    /** @var array An array of filter modifiers. */
+    private $_modifiers = null;
 
+    /**
+     * Constructor for modInputFilter
+     * 
+     * @param modX $modx A reference to the modX instance.
+     */
     function __construct(modX &$modx) {
         $this->modx = &$modx;
     }
@@ -75,7 +83,7 @@ class modInputFilter {
     /**
      * Returns a list of filter input commands to be applied through output filtering.
      *
-     * @return array||null An array of filter commands or null if no commands exist.
+     * @return array|null An array of filter commands or null if no commands exist.
      */
     public function & getCommands() {
         return $this->_commands;
@@ -84,7 +92,7 @@ class modInputFilter {
     /**
      * Returns a list of filter input modifiers corresponding to the input commands.
      *
-     * @return array||null An array of filter modifiers for corresponding commands.
+     * @return array|null An array of filter modifiers for corresponding commands.
      */
     public function & getModifiers() {
         return $this->_modifiers;

@@ -16,6 +16,7 @@ class modRSSParser {
      * Constructor for modRSSParser
      *
      * @param modX &$modx A reference to the modx object.
+     * @param array $config A configuration array of properties
      */
     function __construct(&$modx,array $config = array()) {
         $this->modx =& $modx;

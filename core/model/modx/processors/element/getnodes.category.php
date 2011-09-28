@@ -27,16 +27,17 @@ $c->leftJoin('modCategory','Children');
 $c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 
 /* set permissions as css classes */
-$class = 'icon-category folder';
+$class = array('icon-category','folder');
 $types = array('template','tv','chunk','snippet','plugin');
 foreach ($types as $type) {
     if ($modx->hasPermission('new_'.$type)) {
-        $class .= ' pnew_'.$type;
+        $class[] = 'pnew_'.$type;
     }
 }
-$class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
-$class .= $modx->hasPermission('edit_category') ? ' peditcat' : '';
-$class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
+if ($modx->hasPermission('new_category')) $class[] = 'pnewcat';
+if ($modx->hasPermission('edit_category')) $class[] = 'peditcat';
+if ($modx->hasPermission('delete_category')) $class[] = 'pdelcat';
+$class = implode(' ',$class);
 
 /* get and loop through categories */
 $categories = $modx->getCollection('modCategory',$c);

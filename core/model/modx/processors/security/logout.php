@@ -11,7 +11,7 @@ if (!isset($modx->lexicon) || !is_object($modx->lexicon)) {
 $modx->lexicon->load('login');
 
 $loginContext= isset ($scriptProperties['login_context']) ? $scriptProperties['login_context'] : $modx->context->get('key');
-$addContexts= isset ($scriptProperties['add_contexts']) ? explode(',', $scriptProperties['add_contexts']) : array();
+$addContexts= isset ($scriptProperties['add_contexts']) && !empty($scriptProperties['add_contexts']) ? explode(',', $scriptProperties['add_contexts']) : array();
 
 if ($modx->user->isAuthenticated($loginContext)) {
     if ($loginContext == 'mgr') {

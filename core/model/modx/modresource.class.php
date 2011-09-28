@@ -41,6 +41,11 @@ class modResource extends modAccessibleSimpleObject {
      * @var boolean
      */
     protected $_refreshCache= true;
+    /**
+     * Indicates if this Resource was generated from a forward.
+     * @var boolean
+     */
+    public $_isForward= false;
     public $_jscripts = array();
     public $_sjscripts = array();
     public $_loadedjscripts = array();
@@ -470,6 +475,15 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Set the field indicating the resource has been processed.
+     *
+     * @param boolean $processed Pass true to indicate the Resource has been processed.
+     */
+    public function setProcessed($processed) {
+        $this->_processed= (boolean) $processed;
+    }
+
+    /**
      * Adds a lock on the Resource
      *
      * @access public
@@ -743,7 +757,7 @@ class modResource extends modAccessibleSimpleObject {
 
         /* duplicate resource */
         $prefixDuplicate = !empty($options['prefixDuplicate']) ? true : false;
-        $newName = isset($options['newName']) ? $options['newName'] : ($prefixDuplicate ? $this->xpdo->lexicon('duplicate_of', array(
+        $newName = !empty($options['newName']) ? $options['newName'] : ($prefixDuplicate ? $this->xpdo->lexicon('duplicate_of', array(
             'name' => $this->get('pagetitle'),
         )) : $this->get('pagetitle'));
         $newResource = $this->xpdo->newObject($this->get('class_key'));
@@ -779,11 +793,18 @@ class modResource extends modAccessibleSimpleObject {
             $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
             if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
                 $alias = '';
+                if ($newResource->get('uri_override')) {
+                    $newResource->set('uri_override', false);
+                }
             }
         }
         $newResource->set('alias',$alias);
 
-        
+        /* set new menuindex */
+        $childrenCount = $this->xpdo->getCount('modResource',array('parent' => $this->get('parent')));
+        $newResource->set('menuindex',$childrenCount);
+
+        /* save resource */
         if (!$newResource->save()) {
             return $this->xpdo->lexicon('resource_err_duplicate');
         }

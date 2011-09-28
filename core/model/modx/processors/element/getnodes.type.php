@@ -68,19 +68,30 @@ $c->where(array(
 $c->sortby($elementClassKey == 'modTemplate' ? 'templatename' : 'name','ASC');
 $elements = $modx->getCollection($elementClassKey,$c);
 
+/* do permission checks */
+$canNewCategory = $modx->hasPermission('new_category');
+$canEditElement = $modx->hasPermission('edit_'.$g[1]);
+$canDeleteElement = $modx->hasPermission('delete_'.$g[1]);
+$canNewElement = $modx->hasPermission('new_'.$g[1]);
+$showElementIds = $modx->hasPermission('tree_show_element_ids');
+
 /* loop through elements */
 foreach ($elements as $element) {
     if (!$element->checkPolicy('list')) continue;
     /* handle templatename case */
     $name = $elementClassKey == 'modTemplate' ? $element->get('templatename') : $element->get('name');
 
-    $class = 'icon-'.$g[1];
-    $class .= $modx->hasPermission('new_'.$g[1]) ? ' pnew' : '';
-    $class .= $modx->hasPermission('edit_'.$g[1]) && $element->checkPolicy(array('save','view')) ? ' pedit' : '';
-    $class .= $modx->hasPermission('delete_'.$g[1]) && $element->checkPolicy('remove') ? ' pdelete' : '';
-    $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
+    $class = array('icon-'.$g[1]);
+    if ($canNewElement) $class[] = 'pnew';
+    if ($canEditElement && $element->checkPolicy(array('save' => true,'view' => true))) $class[] = 'pedit';
+    if ($canDeleteElement && $element->checkPolicy('remove')) $class[] = 'pdelete';
+    if ($canNewCategory) $class[] = 'pnewcat';
+    if ($element->get('locked')) $class[] = 'element-node-locked';
+    if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
+        $class[] = 'element-node-disabled';
+    }
 
-    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $element->get('id') . ')' : '';
+    $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(
         'text' => strip_tags($name) . $idNote,
         'id' => 'n_'.$g[1].'_element_'.$element->get('id').'_0',
@@ -88,7 +99,7 @@ foreach ($elements as $element) {
         'category' => 0,
         'leaf' => true,
         'name' => $name,
-        'cls' => $class,
+        'cls' => implode(' ',$class),
         'page' => '?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
         'type' => $g[1],
         'elementType' => $elementType,

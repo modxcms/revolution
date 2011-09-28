@@ -60,6 +60,10 @@ class modSmarty extends Smarty {
      */
     public $_derived;
 
+    /**
+     * @param modX $modx A reference to the modX object
+     * @param array $params An array of configuration parameters
+     */
     function __construct(modX &$modx, $params= array ()) {
         parent :: __construct();
         $this->modx= & $modx;
@@ -109,11 +113,13 @@ class modSmarty extends Smarty {
      *
      * @access public
      * @param string $path The path to set.
+     * @return boolean True if successful
      */
     public function setTemplatePath($path = '') {
         if ($path == '') return false;
 
         $this->template_dir = $path;
+        return true;
     }
 
     /**

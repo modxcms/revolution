@@ -50,9 +50,7 @@ class modResponse {
         }
 
         if (!$contentType->get('binary')) {
-            $this->modx->resource->process();
-
-            $this->modx->resource->_output= $this->modx->resource->_content;
+            $this->modx->resource->_output= $this->modx->resource->process();
             $this->modx->resource->_jscripts= $this->modx->jscripts;
             $this->modx->resource->_sjscripts= $this->modx->sjscripts;
             $this->modx->resource->_loadedjscripts= $this->modx->loadedjscripts;

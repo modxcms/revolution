@@ -2,6 +2,127 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.3-pl (July 21, 2011)
+====================================
+- [#5295] Fix parents input option for Resource List TV when 0 is specified
+- [#5190] Fix includeParent input option in Resource List TV
+- [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
+- Fix delegateView recursion in Resource controllers on Windows
+- [#3966] Fix double slash issue in file paths when dragging into resource content from the Files tree
+- [#4565] Fix issue with Resource tree sorting
+- [#5026] Make directory tree in MODx.Browser instance launched from Files tab consistent with other instances of MODx.Browser
+- [#4960] Prevent method declaration error for modPHPMailer::reset()
+- [#3716] Ensure consistent handling of combo-boolean property values in the database
+- [#4586] Improve number detection for Radio and Checkbox TV values
+- [#5196] Unset uri_override when duplicating creates a duplicate uri
+
+MODX Revolution 2.1.2-pl (July 6, 2011)
+====================================
+- Fix issue with modUser::getSettings pulling a deprecated alias
+- Update to xPDO v2.1.5-pl
+- Implement DocBlox for documentation generation
+- [#5168] Fix element and tv permission queries for SQL Server
+- [#5146] Fix issue with Firefox and button widths
+- [#5164] Fix possible issue if a TV is stranded to a non-existent category
+- Update ExtJS to 3.4.0
+- Set a default session_gc_maxlifetime to avoid frequent logout issues
+- Refresh modExt trees when drag operations fail
+- [#4918] Limit save permission check to modified nodes in resource/sort processor
+- [#5065] Fix 404 error with cross-context symlinks when cacheable
+- [#5152] Fix nested non-cacheable tags from being cached in modResource->_content
+- [#5145] Update config check on dashboard to show correct core path if core is moved
+- [#5112] Add Settings for adjusting behavior of Context sorting in Resources tree
+- [#4341] Properly clarify text and function on Resource Tree context menu options for view/preview
+- [#5046] Fix issue where parent could not be changed for new resources via Form Customization
+- [#5112] Sort contexts by name ascending in the Resources tree
+- [#5102] Fix error removing older transport package versions
+- [#4940] Fix issue where CMPs that did not use ExtJS could not scroll
+- [#5097] Ensure browser toolbar button does not show when MODx.Browser is already open
+- [#4953] Improve modx.console.js to avoid message loss
+- [#4836] Make sure modFileRegister sorts messages before reading
+- [#5087] Fix issue where class_key was not respected when using Add Another in UI
+- [#3464] Set xPDOTransport::ACTION_UPGRADE for already installed packages
+- [#4955] Package management actions refresh packages cache partition
+- [#5071] (SqlSrv) fix/refactor Plugin Events getList processor
+- [#2870] Change internalKey default value to NULL
+- [#5072] Add missing primary key index to modEvent
+- [#5005] Fix incorrect label on introtext field in weblink panel
+- Remove session_cookie_lifetime variable when logging out of context
+- Remove legacy SESSION variables and dependencies
+- [#4703] Remove user settings when logging out of a Context
+- [#2566] Improve tv output render url to take resource pagetitle when using resourcelist TV type
+- [#5020] Improve per page field on grids to handle ENTER key
+- [#5021] Improve modUser::joinGroup to check to see if user is already in group
+- [#5025] Fix issue where duplicate resource window did not show duplicate children option
+- [#5007] Only create Lexicon Entries for Settings if they are specified
+- [#5006] Fix issue with updating a policy template with no permissions
+- [#5001] Fix issue with modauth, wctx and RTE browser
+
+MODX Revolution 2.1.1-pl (June 1, 2011)
+====================================
+- Make modauth calculation independent of session_id
+- Ensure login/logout processors do not add Contexts with empty keys
+- [#3145] Ensure mail_smtp_pass and proxy_password System Settings use password xtype
+- [#4360] Show current context name on MODx.Browser window for reference
+- [#4881] Fix issue where modx-combo-language was missing from system setting editing screen
+- [#4896] Fix issue where New Category window is not cleared on each load
+- [#4934] Fix missing lexicon load call in package download processor
+- [#4927] Gray out disabled plugins in elements tree, italicize locked elements
+- [#4921] Ensure Category names are not ever capitalized when displayed as tabs
+- [#4865] Fix PDO error caused by missing charset for new MySQL installs on PHP 5.3.6+
+- Improve modSessionHandler and add Settings for advanced configuration
+- [#4750] Fix various issues with duplicating Resources, such as new name not prefixed and incorrect menuindex
+- [#4910] Fix bug where ResourceList TV type could not be marked as required
+- [#4915] Fix UI glitch when creating both an Access Policy and its Template on same page load
+- [#4916] Fix issue where cache clear checkbox was always being cleared on template save
+- [#4884] Remove PHP4 constructor on modRegister
+- Harden connector CSRF security by tying user session modauth to prevent hijacking of session if modauth is known
+- [#4863] Fix issue where template changing causes unintended alias
+- [#4854] Fix bug that caused update/rename file to be missing in Files tree context menu
+- [#4851] Improve safe_mode check in setup to check for non-boolean values
+- [#4856] Fix issue with MODx.Panel instances that have no textfields, causing scrollbar issues
+- Fix issue where MODX version was not being sent to provider during package update
+- [#4850] Fix issue with MODx.Window instances that have no textfields
+
+MODX Revolution 2.1.0-pl (May 24, 2011)
+====================================
+- [#4818] Fix SqlSrv query errors related to TVs
+- Add modX->$sourceCache data to cached Resources
+- Fix loading of cached Resource content and processed flag
+- Fix caching of empty policies for Resources
+- Fix modSessionHandler->write() cache flag if cache_db_session is not enabled
+- Update xPDO to v2.1.4-pl for cache_db bug fixes and improvements
+- [#4832] Fix issue with moving resource parent to root
+- [#4827] Make sure editing a file sends the working context along
+- Fix erroneous call to OnDocUnpublished event that should be OnDocUnPublished
+- [#4796] fix New Resource page heading during typing of page title
+- Add Usergroup filter to users grid
+- [#4785] Fix preview of files in left tree in non-standard contexts with absolute filemanager_ settings
+- [#4473] Add other common file types to upload_files system setting
+- [#4539] Fix issue with stretching of quick update chunk and small screen resolutions
+- Automatically focus cursor to first textfield on windows in mgr
+- [#4738] Fix issue with inconsistent results in resourcelist TV
+- [#4441] Fix FC issue when parent is constraint and trying to change default template
+- [#4764] Fix issue with timestamp display on manager log page
+- [#4680] Fix javascript error when typing Template name
+- [#4681] Fix path issue which was causing 404 errors in the manager, IE 7-9
+- [#4439] Add parentheses to list of disallowed password characters in installer
+- [#4669] Fix button target size to make it more responsive to most clicks
+- [#4625] Fix sizes of buttons and submit inputs in installer - IE 8 and 9
+- [#4617] Fix custom values not being shown on Context Installation page during Advanced Upgrade
+- [#4605] modX->switchContext() now checks load permission via Context ACLs
+- [#4595] Fix display of modified/accessed times on Edit File page
+- [#4594] Fix last login time displayed in Info block of Manager welcome page
+- [#4470] Fix frozen URI not displayed when editing resource
+- [#4572] Fix installer error log filenames (characters not allowed in Windows filenames)
+- [#4585] Fix database connection processors in advanced upgrade
+- Update xPDO to v2.1.3-pl
+- [#4567] Remove calls to xPDO->log() in xPDOCacheManager->writeFile()
+- [#4557] Minor fixes on Installer Options screen for Traditional package
+- [#4556] Fix js error on Welcome screen of Traditional package's installer
+- [#4076] Fix Edit/Quick Update context menu items in protected categories
+- Fix Context Access query broken in RC4 changes for #4502
+
 MODX Revolution 2.1.0-rc-4 (April 29, 2011)
 ====================================
 - [#4543] Fix preview URLs when FURLs are turned Off

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -189,7 +189,7 @@ class xPDOManager_sqlite extends xPDOManager {
                 $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                 if (!empty($colDef)) {
                     $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$colDef}";
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -210,7 +210,7 @@ class xPDOManager_sqlite extends xPDOManager {
                 $idxDef = $this->getIndexDef($className, $name, $meta[$name]);
                 if (!empty($idxDef)) {
                     $sql = "CREATE {$indexType} ON {$this->xpdo->getTableName($className)} ({$idxDef})";
-                    if ($this->xpdo->exec($sql)) {
+                    if ($this->xpdo->exec($sql) !== false) {
                         $result = true;
                     } else {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
@@ -244,7 +244,7 @@ class xPDOManager_sqlite extends xPDOManager {
         $className = $this->xpdo->loadClass($class);
         if ($className) {
             $sql = "DROP INDEX {$this->xpdo->escape($name)}";
-            if ($this->xpdo->exec($sql)) {
+            if ($this->xpdo->exec($sql) !== false) {
                 $result = true;
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);

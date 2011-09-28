@@ -31,6 +31,11 @@ class modSessionHandler {
      */
     public $modx= null;
 
+    public $gcMaxLifetime= 0;
+    public $cacheLifetime= false;
+
+    private $session = null;
+
     /**
      * Creates an instance of a modSessionHandler class.
      *
@@ -39,6 +44,20 @@ class modSessionHandler {
      */
     function __construct(modX &$modx) {
         $this->modx= & $modx;
+        $gcMaxlifetime = (integer) $this->modx->getOption('session_gc_maxlifetime');
+        if ($gcMaxlifetime > 0) {
+            $this->gcMaxLifetime= $gcMaxlifetime;
+        } else {
+            $this->gcMaxLifetime= (integer) @ini_get('session.gc_maxlifetime');
+        }
+        if ($this->modx->getOption('cache_db_session', null, false)) {
+            $cacheLifetime = $this->modx->getOption('cache_db_session_lifetime', null, false);
+            if ((integer) $cacheLifetime > 0) {
+                $this->cacheLifetime = (integer) $cacheLifetime;
+            } elseif ($cacheLifetime !== false && $this->gcMaxLifetime > 0) {
+                $this->cacheLifetime = $this->gcMaxLifetime / 4;
+            }
+        }
     }
 
     /**
@@ -71,9 +90,8 @@ class modSessionHandler {
      * @return string The data read from the {@link modSession} object.
      */
     public function read($id) {
-        $data= '';
-        if ($session= $this->_getSession($id)) {
-            $data= $session->get('data');
+        if ($this->_getSession($id)) {
+            $data= $this->session->get('data');
         } else {
             $data= '';
         }
@@ -90,18 +108,13 @@ class modSessionHandler {
      */
     public function write($id, $data) {
         $written= false;
-        $gcMaxlifetime = $this->modx->getOption('session_gc_maxlifetime',null,@ini_get('session.gc_max_lifetime'));
-        $cacheLifetime = $this->modx->getOption('cache_db_session_lifetime',null,intval($gcMaxlifetime / 4));
-        if (!$session= $this->modx->getObject('modSession', array ('id' => $id), $cacheLifetime)) {
-            $session= $this->modx->newObject('modSession');
-            $session->set('id', $id);
-            $session->set('access', time());
+        if ($this->_getSession($id, true)) {
+            $this->session->set('data', $data);
+            if ($this->session->isNew() || $this->session->isDirty('data') || ($this->cacheLifetime > 0 && (time() - strtotime($this->session->get('access'))) > $this->cacheLifetime)) {
+                $this->session->set('access', time());
+            }
+            $written= $this->session->save($this->cacheLifetime);
         }
-        $session->set('data', $data);
-        if ($session->isDirty('data') || (time() - strtotime($session->get('access'))) > $cacheLifetime) {
-            $session->set('access', time());
-        }
-        $written= $session->save();
         return $written;
     }
 
@@ -113,9 +126,8 @@ class modSessionHandler {
      * @return boolean True if the session record was destroyed.
      */
     public function destroy($id) {
-        $destroyed= false;
-        if ($session= $this->_getSession($id)) {
-            $destroyed= $session->remove();
+        if ($this->_getSession($id)) {
+            $destroyed= $this->session->remove();
         } else {
             $destroyed= true;
         }
@@ -131,32 +143,30 @@ class modSessionHandler {
      * @return boolean True if session records were removed.
      */
     public function gc($max) {
-        $max = (integer) $this->modx->getOption('session_gc_maxlifetime',null,$max);
-        $maxtime= time() - $max;
+        $maxtime= time() - $this->gcMaxLifetime;
         $result = $this->modx->removeCollection('modSession', array("{$this->modx->escape('access')} < {$maxtime}"));
         return $result;
     }
 
     /**
-     * Gets the {@link modSession} object, respecting cache values by the
-     * cache_db_session value.
+     * Gets the {@link modSession} object, respecting the cache flag represented by cacheLifetime.
      *
      * @access protected
      * @param integer $id The PK of the {@link modSession} record.
      * @param boolean $autoCreate If true, will automatically create the session
      * record if none is found.
-     * @return modSession The {@link modSession} instance related to the passed
-     * ID.
+     * @return modSession|null The modSession instance loaded from db or auto-created; null if it
+     * could not be retrieved and/or created.
      */
     protected function _getSession($id, $autoCreate= false) {
-        $session= $this->modx->getObject('modSession', array('id' => $id), $this->modx->getOption('cache_db_session', null,false));
-        if ($autoCreate && !is_object($session)) {
-            $session= $this->modx->newObject('modSession');
-            $session->set('id', $id);
+        $this->session= $this->modx->getObject('modSession', $id, $this->cacheLifetime);
+        if ($autoCreate && !is_object($this->session)) {
+            $this->session= $this->modx->newObject('modSession');
+            $this->session->set('id', $id);
         }
-        if (!is_object($session) || $id != $session->get('id')) {
+        if (!($this->session instanceof modSession) || $id != $this->session->get('id')) {
             $this->modx->log(modX::LOG_LEVEL_INFO, 'There was an error retrieving or creating session id: ' . $id);
         }
-        return $session;
+        return $this->session;
     }
 }

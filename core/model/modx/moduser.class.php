@@ -277,47 +277,34 @@ class modUser extends modPrincipal {
      * @param string $context The context to add to the user session.
      */
     public function addSessionContext($context) {
-        $this->getSessionContexts();
-        session_regenerate_id(true);
+        if (!empty($context)) {
+            $this->getSessionContexts();
+            session_regenerate_id(true);
 
-        $this->getOne('Profile');
-        if ($this->Profile && $this->Profile instanceof modUserProfile) {
-            $ua= & $this->Profile;
-            if ($context == 'web') {
-                $_SESSION['webShortname']= $this->get('username');
-                $_SESSION['webFullname']= $ua->get('fullname');
-                $_SESSION['webEmail']= $ua->get('email');
-                $_SESSION['webValidated']= 1;
-                $_SESSION['webInternalKey']= $this->get('id');
-                $_SESSION['webValid']= base64_encode($this->get('password'));
-                $_SESSION['webUser']= base64_encode($this->get('username'));
-                $_SESSION['webFailedlogins']= $ua->get('failedlogincount');
-                $_SESSION['webLastlogin']= $ua->get('lastlogin');
-                $_SESSION['webnrlogins']= $ua->get('logincount');
-                $_SESSION['webUserGroupNames']= '';
+            $this->getOne('Profile');
+            if ($this->Profile && $this->Profile instanceof modUserProfile) {
+                $ua= & $this->Profile;
+                if ($ua && !isset ($this->sessionContexts[$context]) || $this->sessionContexts[$context] != $this->get('id')) {
+                    $ua->set('failedlogincount', 0);
+                    $ua->set('logincount', $ua->logincount + 1);
+                    $ua->set('lastlogin', $ua->thislogin);
+                    $ua->set('thislogin', time());
+                    $ua->set('sessionid', session_id());
+                    $ua->save();
+                }
             }
-            elseif ($context == 'mgr') {
-                $_SESSION['usertype']= 'manager';
-                $_SESSION['mgrShortname']= $this->get('username');
-                $_SESSION['mgrFullname']= $ua->get('fullname');
-                $_SESSION['mgrEmail']= $ua->get('email');
-                $_SESSION['mgrValidated']= 1;
-                $_SESSION['mgrInternalKey']= $this->get('id');
-                $_SESSION['mgrFailedlogins']= $ua->get('failedlogincount');
-                $_SESSION['mgrLastlogin']= $ua->get('lastlogin');
-                $_SESSION['mgrLogincount']= $ua->get('logincount');
+            $this->sessionContexts[$context]= $this->get('id');
+            $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+            if (!isset($_SESSION["modx.{$context}.user.token"])) {
+                $_SESSION["modx.{$context}.user.token"]= $this->generateToken($context);
             }
-            if ($ua && !isset ($this->sessionContexts[$context]) || $this->sessionContexts[$context] != $this->get('id')) {
-                $ua->set('failedlogincount', 0);
-                $ua->set('logincount', $ua->logincount + 1);
-                $ua->set('lastlogin', $ua->thislogin);
-                $ua->set('thislogin', time());
-                $ua->set('sessionid', session_id());
-                $ua->save();
-            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key");
         }
-        $this->sessionContexts[$context]= $this->get('id');
-        $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+    }
+
+    public function generateToken($salt) {
+        return uniqid($this->xpdo->site_id . '_' . $this->get('id'), true);
     }
 
     /**
@@ -355,40 +342,9 @@ class modUser extends modPrincipal {
      */
     public function removeSessionContextVars($context) {
         if (is_string($context) && !empty ($context)) {
-            switch ($context) {
-                case 'web' :
-                    unset ($_SESSION['webShortname']);
-                    unset ($_SESSION['webFullname']);
-                    unset ($_SESSION['webEmail']);
-                    unset ($_SESSION['webValidated']);
-                    unset ($_SESSION['webInternalKey']);
-                    unset ($_SESSION['webValid']);
-                    unset ($_SESSION['webUser']);
-                    unset ($_SESSION['webFailedlogins']);
-                    unset ($_SESSION['webLastlogin']);
-                    unset ($_SESSION['webnrlogins']);
-                    unset ($_SESSION['webUsrConfigSet']);
-                    unset ($_SESSION['webUserGroupNames']);
-                    unset ($_SESSION['webDocgroups']);
-                    break;
-
-                case 'mgr' :
-                    unset ($_SESSION['usertype']);
-                    unset ($_SESSION['mgrShortname']);
-                    unset ($_SESSION['mgrFullname']);
-                    unset ($_SESSION['mgrEmail']);
-                    unset ($_SESSION['mgrValidated']);
-                    unset ($_SESSION['mgrInternalKey']);
-                    unset ($_SESSION['mgrFailedlogins']);
-                    unset ($_SESSION['mgrLastlogin']);
-                    unset ($_SESSION['mgrLogincount']);
-                    unset ($_SESSION['mgrRole']);
-                    unset ($_SESSION['mgrDocgroups']);
-                    break;
-
-                default :
-                    break;
-            }
+            unset($_SESSION["modx.{$context}.user.token"]);
+            unset($_SESSION["modx.{$context}.user.config"]);
+            unset($_SESSION["modx.{$context}.session.cookie.lifetime"]);
         }
     }
 
@@ -451,7 +407,7 @@ class modUser extends modPrincipal {
      */
     public function getSettings() {
         $settings = array();
-        $uss = $this->getMany('modUserSetting');
+        $uss = $this->getMany('UserSettings');
         foreach ($uss as $us) {
             $settings[$us->get('key')] = $us->get('value');
         }
@@ -585,17 +541,25 @@ class modUser extends modPrincipal {
             }
         }
 
-        $member = $this->xpdo->newObject('modUserGroupMember');
-        $member->set('member',$this->get('id'));
-        $member->set('user_group',$usergroup->get('id'));
-        if (!empty($role)) {
-            $member->set('role',$role->get('id'));
+        $member = $this->xpdo->getObject('modUserGroupMember',array(
+            'member' => $this->get('id'),
+            'user_group' => $usergroup->get('id'),
+        ));
+        if (empty($member)) {
+            $member = $this->xpdo->newObject('modUserGroupMember');
+            $member->set('member',$this->get('id'));
+            $member->set('user_group',$usergroup->get('id'));
+            if (!empty($role)) {
+                $member->set('role',$role->get('id'));
+            }
+            $joined = $member->save();
+            if (!$joined) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
+            }
+        } else {
+            $joined = true;
         }
-        $saved = $member->save();
-        if (!$saved) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
-        }
-        return $saved;
+        return $joined;
     }
 
     /**

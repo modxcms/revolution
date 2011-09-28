@@ -5,7 +5,7 @@
  * native PDO if available or provides a subset implementation for use with PHP
  * 4 on platforms that do not include the native PDO extensions.
  *
- * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2010-2011 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -27,7 +27,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2010, Jason Coward
+ * @copyright Copyright (C) 2006-2011, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
@@ -668,7 +668,7 @@ class xPDO {
      * @return object|null An instance of the class, or null if it could not be
      * instantiated.
     */
-    public function getObject($className, $criteria= null, $cacheFlag= false) {
+    public function getObject($className, $criteria= null, $cacheFlag= true) {
         $instance= null;
         if ($criteria !== null) {
             $instance = $this->call($className, 'load', array(& $this, $className, $criteria, $cacheFlag));
@@ -689,7 +689,7 @@ class xPDO {
      * live in cache until flushed by another process.
      * @return array|null An array of class instances retrieved.
     */
-    public function getCollection($className, $criteria= null, $cacheFlag= false) {
+    public function getCollection($className, $criteria= null, $cacheFlag= true) {
         return $this->call($className, 'loadCollection', array(& $this, $className, $criteria, $cacheFlag));
     }
 
@@ -704,7 +704,7 @@ class xPDO {
      * live in cache until flushed by another process.
      * @return xPDOIterator An iterable representation of a collection.
      */
-    public function getIterator($className, $criteria= null, $cacheFlag= false) {
+    public function getIterator($className, $criteria= null, $cacheFlag= true) {
         return new xPDOIterator($this, array('class' => $className, 'criteria' => $criteria, 'cacheFlag' => $cacheFlag));
     }
 
@@ -1042,6 +1042,37 @@ class xPDO {
             $this->log(xPDO::LOG_LEVEL_ERROR, 'Could not get table name for class: ' . $className);
         }
         return $table;
+    }
+
+    /**
+     * Get the class which defines the table for a specified className.
+     *
+     * @param string $className The name of a class to determine the table class from.
+     * @return null|string The name of a class defining the table for the specified className; null if not found.
+     */
+    public function getTableClass($className) {
+        $tableClass= null;
+        if ($className= $this->loadClass($className)) {
+            if (isset ($this->map[$className]['table'])) {
+                $tableClass= $className;
+            }
+            if (!$tableClass && $ancestry= $this->getAncestry($className, false)) {
+                foreach ($ancestry as $ancestor) {
+                    if (isset ($this->map[$ancestor]['table'])) {
+                        $tableClass= $ancestor;
+                        break;
+                    }
+                }
+            }
+        }
+        if ($tableClass) {
+            if ($this->getDebug() === true) {
+                $this->log(xPDO::LOG_LEVEL_DEBUG, 'Returning table class: ' . $tableClass . ' for class: ' . $className);
+            }
+        } else {
+            $this->log(xPDO::LOG_LEVEL_ERROR, 'Could not get table class for class: ' . $className);
+        }
+        return $tableClass;
     }
 
     /**
@@ -1792,11 +1823,12 @@ class xPDO {
                         xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                         'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
                     ));
-                    if ($result && $this->getOption('cache_db_format', $options, 'php') == 'json') {
-                        $result= $this->toJSON($result);
-                    }
-                    if (!$result) {
-                        $this->log(xPDO::LOG_LEVEL_DEBUG, 'No cache item found for class ' . $sigClass . ' with signature ' . xPDOCacheManager::CACHE_DIR . $sig);
+                    if ($this->getDebug() === true) {
+                        if (!$result) {
+                            $this->log(xPDO::LOG_LEVEL_DEBUG, 'No cache item found for class ' . $sigClass . ' with signature ' . xPDOCacheManager::CACHE_DIR . $sig);
+                        } else {
+                            $this->log(xPDO::LOG_LEVEL_DEBUG, 'Loaded cache item for class ' . $sigClass . ' with signature ' . xPDOCacheManager::CACHE_DIR . $sig);
+                        }
                     }
                 }
             }
@@ -1833,7 +1865,7 @@ class xPDO {
                     if ($signature instanceof xPDOCriteria) {
                         if ($signature instanceof xPDOQuery) {
                             $signature->construct();
-                            if (empty($sigClass)) $sigClass = $signature->getAlias();
+                            if (empty($sigClass)) $sigClass = $signature->getTableClass();
                         }
                         $sigKey= array($signature->sql, $signature->bindings);
                     }
@@ -1858,26 +1890,28 @@ class xPDO {
                     $sigHash= md5($this->toJSON($sigKey));
                     $sig= implode('/', array ($sigClass, $sigHash));
                     if (is_string($sig)) {
-                        if (empty($sigGraph) && $object instanceof xPDOObject) {
-                            $classes= array();
-                            $sigGraph= array_merge($object->_aggregates, $object->_composites);
-                        }
-                        if (!empty($sigGraph)) {
-                            foreach ($sigGraph as $alias => $fkMeta) {
-                                if (isset($classes[$fkMeta['class']])) {
-                                    continue;
+                        if ($this->getOption('modified', $options, false)) {
+                            if (empty($sigGraph) && $object instanceof xPDOObject) {
+                                $classes= array();
+                                $sigGraph= array_merge($object->_aggregates, $object->_composites);
+                            }
+                            if (!empty($sigGraph)) {
+                                foreach ($sigGraph as $alias => $fkMeta) {
+                                    if (isset($classes[$fkMeta['class']])) {
+                                        continue;
+                                    }
+                                    $removed= $this->cacheManager->delete($fkMeta['class'], array_merge($options, array(
+                                        xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
+                                        xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
+                                        xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
+                                        'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
+                                        'multiple_object_delete' => true
+                                    )));
+                                    if ($this->getDebug() === true) {
+                                        $this->log(xPDO::LOG_LEVEL_DEBUG, "Removing all cache objects of class {$fkMeta['class']}: " . ($removed ? 'successful' : 'failed'));
+                                    }
+                                    $classes[$fkMeta['class']]= $fkMeta['class'];
                                 }
-                                $removed= $this->cacheManager->delete($fkMeta['class'], array_merge($options, array(
-                                    xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
-                                    xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
-                                    xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
-                                    'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
-                                    'multiple_object_delete' => true
-                                )));
-                                if ($this->getDebug() === true) {
-                                    $this->log(xPDO::LOG_LEVEL_DEBUG, "Removing all cache objects of class {$fkMeta['class']}: " . ($removed ? 'successful' : 'failed'));
-                                }
-                                $classes[$fkMeta['class']]= $fkMeta['class'];
                             }
                         }
                         $cacheOptions = array_merge($options, array(
@@ -1892,12 +1926,14 @@ class xPDO {
                                 $this->log(xPDO::LOG_LEVEL_DEBUG, "xPDO->toCache() successfully cached object with signature " . xPDOCacheManager::CACHE_DIR . $sig);
                             }
                             $object->_cacheFlag= true;
-                            $pkClass= $object->_class;
+                            $pkClass= $this->getTableClass($object->_class);
                             $pk= $object->getPrimaryKey(false);
                             $pk= is_array($pk) ? $pk : array($pk);
                             $pkHash= md5($this->toJSON($pk));
                             $pkSig= implode('/', array($pkClass, $pkHash));
-                            $this->cacheManager->set($pkSig, $object, $lifetime, $cacheOptions);
+                            if ($pkSig !== $sig) {
+                                $this->cacheManager->set($pkSig, $object, $lifetime, $cacheOptions);
+                            }
                         }
                         if (!$result) {
                             $this->log(xPDO::LOG_LEVEL_WARN, "xPDO->toCache() could not cache object with signature " . xPDOCacheManager::CACHE_DIR . $sig);
@@ -2425,6 +2461,8 @@ class xPDOCriteria {
  * Use an xPDOIterator to loop over large result sets and work with one instance
  * at a time. This greatly reduces memory usage over loading the entire collection
  * of objects into memory at one time. It is also slightly faster.
+ *
+ * @package xpdo
  */
 class xPDOIterator implements Iterator {
     private $xpdo = null;
@@ -2507,7 +2545,8 @@ class xPDOIterator implements Iterator {
     /**
      * Fetch the next row from the result set and set it as current.
      *
-     * Uses the loader defined for the specified class, so it does respect security.
+     * Calls the _loadInstance() method for the specified class, so it properly
+     * inherits behavior from xPDOObject derivatives.
      */
     protected function fetch() {
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);

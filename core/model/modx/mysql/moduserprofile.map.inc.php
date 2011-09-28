@@ -9,7 +9,7 @@ $xpdo_meta_map['modUserProfile']= array (
   'table' => 'user_attributes',
   'fields' => 
   array (
-    'internalKey' => 0,
+    'internalKey' => NULL,
     'fullname' => '',
     'email' => '',
     'phone' => '',
@@ -43,7 +43,6 @@ $xpdo_meta_map['modUserProfile']= array (
       'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
-      'default' => 0,
       'index' => 'unique',
     ),
     'fullname' => 

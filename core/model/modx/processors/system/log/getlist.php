@@ -71,7 +71,7 @@ foreach ($logs as $log) {
     } else {
         $logArray['name'] = $log->get('item');
     }
-    $logArray['occurred'] = strftime('%a %b %d, %Y %H:%I %p',strtotime($logArray['occurred']));
+    $logArray['occurred'] = strftime('%a %b %d, %Y %I:%M %p',strtotime($logArray['occurred']));
     $list[] = $logArray;
 }
 

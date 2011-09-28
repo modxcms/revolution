@@ -66,9 +66,17 @@ class modRegistry {
      * @access private
      */
     protected $_registers = array();
-
+    /**
+     * @var modRegister The current logging registry
+     */
     protected $_loggingRegister = null;
+    /**
+     * @var string The previous logTarget for xPDO, to be reset when finished
+     */
     protected $_prevLogTarget = null;
+    /**
+     * @var integer The previous log level for xPDO, to be reset when finished
+     */
     protected $_prevLogLevel = null;
 
     /**
@@ -143,6 +151,7 @@ class modRegistry {
      * Initialize a register within the registry.
      *
      * @access protected
+     * @param string $key The key of the registry
      * @param string $class The class of the modRegister implementation to
      * initialize.
      * @param array $options An optional array of register options.

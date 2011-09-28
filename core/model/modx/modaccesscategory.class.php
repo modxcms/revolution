@@ -14,7 +14,7 @@ class modAccessCategory extends modAccess {
             $enabled = (boolean) $modx->contexts[$context]->getOption('access_category_enabled', $enabled);
         }
         if ($enabled) {
-            $accessTable = $modx->getTableName('modAccessContext');
+            $accessTable = $modx->getTableName('modAccessCategory');
             $policyTable = $modx->getTableName('modAccessPolicy');
             $memberTable = $modx->getTableName('modUserGroupMember');
             $memberRoleTable = $modx->getTableName('modUserGroupRole');

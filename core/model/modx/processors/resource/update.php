@@ -88,7 +88,7 @@ if (isset($scriptProperties['ta'])) {
 }
 
 /* format pagetitle */
-if (isset($scriptProperties['pagetitle'])) {
+if (isset($scriptProperties['pagetitle']) && empty($scriptProperties['reloadOnly'])) {
     if (empty($scriptProperties['pagetitle'])) {
         $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
     }
@@ -125,7 +125,7 @@ $oldparent = null;
 $newparent = null;
 $oldContext = null;
 if ($resource->get('parent') != $scriptProperties['parent']) {
-    $oldparent = $resource->getOne('Parent');
+    $oldparent = $modx->getObject('modResource',array('id' => $resource->get('parent')));
     $newparent = $modx->getObject('modResource', $scriptProperties['parent']);
     if ($newparent && $newparent->get('context_key') !== $resource->get('context_key')) {
         $oldContext = $modx->getContext($resource->get('context_key'));
@@ -169,7 +169,7 @@ if (isset($scriptProperties['uri_override'])) {
 $workingContext = $modx->getContext($scriptProperties['context_key']);
 
 /* friendly url alias checks */
-if ($workingContext->getOption('friendly_urls', false)) {
+if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperties['reloadOnly']) || !empty($scriptProperties['pagetitle']))) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
         $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
@@ -327,7 +327,6 @@ if ($oldparent !== null && $newparent !== null) {
     }
 
     $newparent->set('isfolder', true);
-    $resource->addOne($newparent, 'Parent');
 }
 
 /* save resource */
