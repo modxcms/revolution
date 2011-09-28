@@ -3,6 +3,7 @@
 body {
     font-family: Verdana, Arial, Helvetica,sans-serif;
 }
+input,select,textarea {font:inherit;}
 
 strong,em,b,i {
     font-family: Verdana,Arial, Helvetica, sans-serif;
