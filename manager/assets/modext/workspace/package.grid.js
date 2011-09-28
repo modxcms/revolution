@@ -410,7 +410,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
 		rec = record.data;
 		state = (rec.installed !== null) ? ' installed' : ' not-installed';
-		values = { name: value, state: state, actions: null };		
+		values = { name: value, state: state, actions: null };	
 		
 		//Action buttons
 		h = new Array;
@@ -418,16 +418,16 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		if(rec.installed !== null){
 			h.push({ className:'reinstall', text: 'Reinstall' })
 			if( MODx.config.auto_check_pkg_updates == 1 && rec.updateable ){ 
-				h.push({ className:'update orange', text: 'Update' })			
+				h.push({ className:'update orange', text: _('package_update') })			
 			} else {
 				if( rec.provider != 0 ){
-					h.push({ className:'checkupdate', text: 'Check for update' }) 
+					h.push({ className:'checkupdate', text: _('package_check_for_updates') }) 
 				}
 			}
-			h.push({ className:'uninstall', text: 'Uninstall' })					
+			h.push({ className:'uninstall', text: rec.textaction })					
 			
 		} else {
-			h.push({ className:'install green', text: 'Install' })			
+			h.push({ className:'install green', text: rec.textaction })			
 		}		
 		values.actions = h;		
 		return this.mainColumnTpl.apply(values);
