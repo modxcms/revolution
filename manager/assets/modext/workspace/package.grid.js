@@ -414,11 +414,11 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		
 		//Action buttons
 		h = new Array;
-		h.push({ className:'remove', text: 'Remove' }) 
+		h.push({ className:'remove', text: _('package_remove_action_button') }) 
 		if(rec.installed !== null){
-			h.push({ className:'reinstall', text: 'Reinstall' })
+			h.push({ className:'reinstall', text: _('package_reinstall_action_button') })
 			if( MODx.config.auto_check_pkg_updates == 1 && rec.updateable ){ 
-				h.push({ className:'update orange', text: _('package_update') })			
+				h.push({ className:'update orange', text: _('package_update_action_button') })			
 			} else {
 				if( rec.provider != 0 ){
 					h.push({ className:'checkupdate', text: _('package_check_for_updates') }) 
