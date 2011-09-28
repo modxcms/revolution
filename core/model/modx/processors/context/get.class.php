@@ -34,7 +34,7 @@ class modContextGetProcessor extends modProcessor {
     }
 
     public function process() {
-        return $this->modx->error->success('',$this->context);
+        return $this->success('',$this->context);
     }
 }
 return 'modContextGetProcessor';

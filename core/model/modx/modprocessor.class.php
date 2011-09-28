@@ -66,7 +66,9 @@ class modProcessor {
     public function checkPermissions() { return true; }
 
     /**
-     * Can be used to provide custom methods prior to processing
+     * Can be used to provide custom methods prior to processing. Return true to tell MODX that the Processor
+     * initialized successfully. If you return anything else, MODX will output that return value as an error message.
+     * 
      * @return boolean
      */
     public function initialize() { return true; }
@@ -98,6 +100,24 @@ class modProcessor {
      */
     public function failure($msg = '',$object = null) {
         return $this->modx->error->failure($msg,$object);
+    }
+
+    /**
+     * Return whether or not the processor has errors
+     * @return boolean
+     */
+    public function hasErrors() {
+        return $this->modx->error->hasError();
+    }
+
+    /**
+     * Add an error to the field
+     * @param string $key
+     * @param string $message
+     * @return mixed
+     */
+    public function addFieldError($key,$message = '') {
+        return $this->modx->error->addField($key,$message);
     }
 
     /**

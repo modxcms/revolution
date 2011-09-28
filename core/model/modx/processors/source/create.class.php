@@ -49,14 +49,14 @@ class modSourceCreateProcessor extends modProcessor {
         /* validate name field */
         $name = $this->getProperty('name');
         if (empty($name)) {
-            $this->modx->error->addField('name',$this->modx->lexicon('source_err_ns_name'));
+            $this->addFieldError('name',$this->modx->lexicon('source_err_ns_name'));
         } else if ($this->alreadyExists($name)) {
-            $this->modx->error->addField('name',$this->modx->lexicon('source_err_ae_name',array(
+            $this->addFieldError('name',$this->modx->lexicon('source_err_ae_name',array(
                 'name' => $name,
             )));
         }
 
-        return !$this->modx->error->hasError();
+        return !$this->hasErrors();
     }
 
     /**

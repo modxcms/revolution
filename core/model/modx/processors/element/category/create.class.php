@@ -47,12 +47,12 @@ class modElementCategoryCreateProcessor extends modProcessor {
     public function validate() {
         $name = $this->getProperty('category');
         if (empty($name)) {
-            $this->modx->error->addField('category',$this->modx->lexicon('category_err_ns'));
+            $this->addFieldError('category',$this->modx->lexicon('category_err_ns'));
         } else if ($this->alreadyExists($name)) {
-            $this->modx->error->addField('category',$this->modx->lexicon('category_err_ae'));
+            $this->addFieldError('category',$this->modx->lexicon('category_err_ae'));
         }
 
-        return !$this->modx->error->hasError();
+        return !$this->hasErrors();
     }
 
     /**
