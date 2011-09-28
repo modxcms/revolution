@@ -27,4 +27,4 @@ $_lang['category_no_snippets'] = 'No snippets for this category.';
 $_lang['category_no_templates'] = 'No templates for this category.';
 $_lang['category_no_template_variables'] = 'No template variables for this category.';
 $_lang['category_rename'] = 'Rename Category';
-$_lang['category_remove'] = 'Remove Category';
+$_lang['category_remove'] = 'Delete Category';
