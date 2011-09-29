@@ -16,6 +16,7 @@ MODx.panel.AccessPolicyTemplate = function(config) {
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy-template'
+		,cls: 'container'
         ,class_key: 'modAccessPolicyTemplate'
         ,plugin: ''
         ,bodyStyle: ''
@@ -28,9 +29,9 @@ MODx.panel.AccessPolicyTemplate = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: {
-                bodyStyle: 'padding: 15px'
-                ,autoHeight: true
+                autoHeight: true
                 ,border: true
+				,bodyCssClass: 'tab-panel-wrapper'
             }
             ,forceLayout: true
             ,deferredRender: false
@@ -39,41 +40,49 @@ MODx.panel.AccessPolicyTemplate = function(config) {
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_template.desc')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
-                    xtype: 'hidden'
-                    ,name: 'id'
+					xtype: 'panel'
+					,border: false
+					,cls:'main-wrapper'
+					,layout: 'form'
+					,defaults:{ width:300 }
+					// ,labelAlign: 'top'
+					,items: [{
+						xtype: 'hidden'
+						,name: 'id'
+					},{
+						xtype: 'textfield'
+						,fieldLabel: _('name')
+						,name: 'name'
+						,maxLength: 255
+						,enableKeyEvents: true
+						,allowBlank: false
+						,listeners: {
+							'keyup': {scope:this,fn:function(f,e) {
+								Ext.getCmp('modx-policy-template-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
+							}}
+						}
+					},{
+						xtype: 'textarea'
+						,fieldLabel: _('description')
+						,name: 'description'
+						,grow: true
+					},{
+						xtype: 'textfield'
+						,fieldLabel: _('lexicon')
+						,name: 'lexicon'
+						,allowBlank: true
+						,value: 'permissions'
+					}]
                 },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('name')
-                    ,name: 'name'
-                    ,width: 300
-                    ,maxLength: 255
-                    ,enableKeyEvents: true
-                    ,allowBlank: false
-                    ,listeners: {
-                        'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-policy-template-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
-                        }}
-                    }
-                },{
-                    xtype: 'textarea'
-                    ,fieldLabel: _('description')
-                    ,name: 'description'
-                    ,width: 300
-                    ,grow: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('lexicon')
-                    ,name: 'lexicon'
-                    ,width: 300
-                    ,allowBlank: true
-                    ,value: 'permissions'
-                },{
-                    html: '<hr /><p>'+_('permissions_desc')+'</p>'
+                    html: '<p>'+_('permissions_desc')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-template-permissions'
+					,cls:'main-wrapper'
                     ,policy: MODx.request.id
                     ,autoHeight: true
                     ,preventRender: true

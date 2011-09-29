@@ -148,6 +148,7 @@ MODx.panel.Contexts = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-contexts'
+		,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -157,12 +158,13 @@ MODx.panel.Contexts = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px'
             ,items: [{
                 html: '<p>'+_('context_management_message')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-contexts'
+				,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]

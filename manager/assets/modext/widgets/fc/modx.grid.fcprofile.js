@@ -2,6 +2,7 @@ MODx.panel.FCProfiles = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-fc-profiles'
+		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
              html: '<h2>'+_('form_customization')+'</h2>'
@@ -10,16 +11,17 @@ MODx.panel.FCProfiles = function(config) {
             ,id: 'modx-fcp-header'
         },MODx.getPageStructure([{
             title: _('profiles')
-            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
 			,layout: "form"
             ,items: [{
                 html: '<p>'+_('form_customization_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 title: ''
                 ,preventRender: true
                 ,xtype: 'modx-grid-fc-profile'
+				,cls:'main-wrapper'
             }]
         }],{
             id: 'modx-form-customization-tabs'

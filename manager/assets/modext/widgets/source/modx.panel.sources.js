@@ -2,6 +2,7 @@ MODx.panel.Sources = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-sources'
+		,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -11,24 +12,26 @@ MODx.panel.Sources = function(config) {
             ,cls: 'modx-page-header'
         },MODx.getPageStructure([{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,title: _('sources')
             ,items: [{
                 html: '<p>'+_('sources.intro_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-sources'
+				,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,title: _('source_types')
             ,items: [{
                 html: '<p>'+_('source_types.intro_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-source-types'
+				,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         }],{

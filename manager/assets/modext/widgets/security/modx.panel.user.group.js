@@ -2,6 +2,7 @@ MODx.panel.UserGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-user-group'
+		,cls: 'container'
         ,url: MODx.config.connectors_url+'security/group.php'
         ,baseParams: {
             action: 'update'
@@ -15,9 +16,9 @@ MODx.panel.UserGroup = function(config) {
         },{            
             xtype: 'modx-tabs'
             ,defaults: { 
-                bodyStyle: 'padding: 15px;'
-                ,autoHeight: true
+                autoHeight: true
                 ,border: true
+                ,bodyCssClass: 'tab-panel-wrapper'
             }
             ,id: 'modx-usergroup-tabs'
             ,forceLayout: true
@@ -30,69 +31,78 @@ MODx.panel.UserGroup = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-                ,bodyStyle: 'padding: 15px;'
                 ,defaults: { border: false ,msgTarget: 'side' }
                 ,layout: 'form'
                 ,id: 'modx-chunk-form'
-                ,labelWidth: 150
-                ,items: [{
-                    html: '<p>'+''+'</p>'
-                },{
-                    xtype: 'hidden'
-                    ,name: 'id'
-                    ,id: 'modx-usergroup-id'
-                    ,value: config.usergroup
-                },{
-                    name: 'name'
-                    ,id: 'modx-usergroup-name'
-                    ,xtype: 'textfield'
-                    ,fieldLabel: _('name')
-                    ,allowBlank: false
-                    ,enableKeyEvents: true
-                    ,disabled: config.usergroup === 0 ? true : false
-                    ,anchor: '97%'
-                    ,listeners: {
-                        'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
-                        }}
-                    }
-                },{
-                    name: 'description'
-                    ,id: 'modx-usergroup-description'
-                    ,xtype: 'textarea'
-                    ,fieldLabel: _('description')
-                    ,anchor: '97%'
-                    ,grow: true
-                },{
-                    name: 'parent'
-                    ,hiddenName: 'parent'
-                    ,id: 'modx-usergroup-parent'
-                    ,xtype: 'modx-combo-usergroup'
-                    ,fieldLabel: _('user_group_parent')
-                    ,editable: false
-                    ,anchor: '97%'
-                    ,disabled: config.usergroup === 0 ? true : false
-                    ,baseParams: {
-                        action: 'getList'
-                        ,addNone: true
-                        ,exclude: config.usergroup
-                    }
-                },{
-                    name: 'dashboard'
-                    ,id: 'modx-usergroup-dashboard'
-                    ,xtype: 'modx-combo-dashboard'
-                    ,fieldLabel: _('dashboard')
-                    ,anchor: '97%'
-                }]
+                ,labelWidth: 150				
+                ,items: [{				
+					html: '<p>'+''+'</p>'
+				},{
+					xtype: 'panel'
+					,border: false
+					,cls:'main-wrapper'
+					,layout: 'form'
+					// ,labelAlign: 'top'
+					,items: [{
+						xtype: 'hidden'
+						,name: 'id'
+						,id: 'modx-usergroup-id'
+						,value: config.usergroup
+					},{
+						name: 'name'
+						,id: 'modx-usergroup-name'
+						,xtype: 'textfield'
+						,fieldLabel: _('name')
+						,allowBlank: false
+						,enableKeyEvents: true
+						,disabled: config.usergroup === 0 ? true : false
+						,anchor: '100%'
+						,listeners: {
+							'keyup': {scope:this,fn:function(f,e) {
+								Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
+							}}
+						}
+					},{
+						name: 'description'
+						,id: 'modx-usergroup-description'
+						,xtype: 'textarea'
+						,fieldLabel: _('description')
+						,anchor: '100%'
+						,grow: true
+					},{
+						name: 'parent'
+						,hiddenName: 'parent'
+						,id: 'modx-usergroup-parent'
+						,xtype: 'modx-combo-usergroup'
+						,fieldLabel: _('user_group_parent')
+						,editable: false
+						,anchor: '100%'
+						,disabled: config.usergroup === 0 ? true : false
+						,baseParams: {
+							action: 'getList'
+							,addNone: true
+							,exclude: config.usergroup
+						}
+					},{
+						name: 'dashboard'
+						,id: 'modx-usergroup-dashboard'
+						,xtype: 'modx-combo-dashboard'
+						,fieldLabel: _('dashboard')
+						,anchor: '100%'
+					}]
+				}]
             },{
                 title: _('users')
                 ,hidden: config.usergroup == 0 ? true : false
                 ,hideMode: 'offsets'
+				,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_user_access_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-user-group-users'
+					,cls:'main-wrapper'
                     ,preventRender: true
                     ,usergroup: config.usergroup
                     ,autoHeight: true
@@ -108,15 +118,17 @@ MODx.panel.UserGroup = function(config) {
                 ,hidden: config.usergroup === 0 ? true : false
                 ,forceLayout: true
                 ,hideMode: 'offsets'
+				,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_context_access_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-user-group-context'
                     ,preventRender: true
                     ,usergroup: config.usergroup
                     ,autoHeight: true
-                    ,width: '97%'
+                    ,cls:'main-wrapper'
                     ,listeners: {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                         ,'afteredit': {fn:this.markDirty,scope:this}
@@ -128,11 +140,14 @@ MODx.panel.UserGroup = function(config) {
                 title: _('user_group_resourcegroup_access')
                 ,hidden: config.usergroup === 0 ? true : false
                 ,hideMode: 'offsets'
+				,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-user-group-resource-group'
+					,cls:'main-wrapper'
                     ,preventRender: true
                     ,usergroup: config.usergroup
                     ,autoHeight: true
@@ -148,11 +163,14 @@ MODx.panel.UserGroup = function(config) {
                 title: _('user_group_category_access')
                 ,hidden: config.usergroup === 0 ? true : false
                 ,hideMode: 'offsets'
+				,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_category_access_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-user-group-category'
+					,cls:'main-wrapper'
                     ,preventRender: true
                     ,usergroup: config.usergroup
                     ,autoHeight: true
