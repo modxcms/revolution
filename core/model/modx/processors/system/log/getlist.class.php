@@ -143,6 +143,10 @@ class modSystemLogGetListProcessor extends modProcessor {
             case 'modTemplate': $field = 'templatename'; break;
             case 'modUser': $field = 'username'; break;
             case 'modMenu': $field = 'text'; break;
+            case 'modSystemSetting':
+            case 'modContextSetting':
+            case 'modUserSetting':
+                $field = 'key';
             default: break;
         }
         return $field;
