@@ -15,7 +15,6 @@ MODx.page.Users = function(config) {
 	Ext.applyIf(config,{
 		components: [{
             xtype: 'modx-panel-users'
-            ,renderTo: 'modx-panel-users-div'
         }]
         ,buttons: [{
             text: _('help_ex')

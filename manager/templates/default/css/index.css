@@ -338,7 +338,7 @@ textarea.x-form-field {
 
 /* grids */
 .x-small-editor .x-form-field {
-    font-size: 1em !important;    
+    font-size: 12px !important;    
 }
 
 .grid-row-inactive {
@@ -625,12 +625,6 @@ table.classy tr.odd td {
 }
 #modx-resource-settings .modx-tv-label, #modx-page-settings .modx-tv-label {
     width: 216px;
-}
-#modx-resource-settings .x-form-item-label, #modx-page-settings .x-form-item-label {
-    padding-left: 16px;
-}
-#modx-resource-settings .x-form-field-trigger-wrap, #modx-page-settings .x-form-field-trigger-wrap {
-    margin-left: 14px;
 }
 
 /* browser */
@@ -1324,17 +1318,20 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 
 /* Panel description text */
 .panel-desc { 
-	background-color: #FAFAFA;
-    border-bottom: 1px solid #EEEEEE !important;
-    border-top: 1px solid #EEEEEE !important;
-    color: #909090;
+	background-color: #F7F7F7;
+    border-bottom: 1px solid #E7E7E7 !important;
+    border-top: 1px solid #E7E7E7 !important;
+    color: #707070;
     font-family: tahoma;
+    line-height: 1.5;
     margin-top: 25px;
-	line-height: 1.5;
-	padding: 15px !important; 
+    padding: 15px !important; 
 } 
 .with-title .panel-desc{
 	margin: 0;
+}
+.panel-desc p{
+	padding: 0;
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */

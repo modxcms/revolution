@@ -8,6 +8,7 @@ MODx.panel.ContentType = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-content-type'
+		,cls: 'container'
         ,url: MODx.config.connectors_url+'system/contenttype.php'
         ,baseParams: {
             action: 'updateFromGrid'
@@ -21,14 +22,15 @@ MODx.panel.ContentType = function(config) {
         },{
             layout: 'form'
             ,itemId: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('content_type_desc')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,itemId: 'description'
                 ,border: false
             },{
                 xtype: 'modx-grid-content-type'
                 ,itemId: 'grid'
+				,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]

@@ -8,25 +8,27 @@ MODx.panel.PropertySet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-property-sets'
+		,cls: 'container'
         ,items: [{
             html: '<h2>'+_('propertysets')+'</h2>'
             ,cls: 'modx-page-header'
             ,border: false
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-property-set-form'
             ,border: true
             ,items: [{
                 html: '<p>'+_('propertysets_desc')+'</p>'
                 ,id: 'modx-property-set-msg'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 layout: 'column'
                 ,border: false
+				,cls: 'main-wrapper'
                 ,items: [{
                     columnWidth: .3
-                    ,style:'padding:10px;'
+					,cls:'left-col'
                     ,border: false
                     ,items: [{
                         xtype: 'modx-tree-property-sets'
@@ -34,7 +36,6 @@ MODx.panel.PropertySet = function(config) {
                     }]
                 },{
                     columnWidth: .7
-                    ,style:'padding:10px;'
                     ,layout: 'form'
                     ,border: false
                     ,autoHeight: true
