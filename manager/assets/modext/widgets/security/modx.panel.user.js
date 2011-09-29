@@ -10,6 +10,7 @@ MODx.panel.User = function(config) {
         url: MODx.config.connectors_url+'security/user.php'
         ,baseParams: {}
         ,id: 'modx-panel-user'
+		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,bodyStyle: ''
         ,items: [{
@@ -26,7 +27,8 @@ MODx.panel.User = function(config) {
                 autoHeight: true
                 ,layout: 'form'
                 ,labelWidth: 150
-                ,bodyStyle: 'padding: 15px;'
+				,bodyCssClass: 'tab-panel-wrapper'
+				,layoutOnTabChange: true
             }
             ,items: this.getFields(config)
         }]
@@ -121,6 +123,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         var f = [{
             title: _('general_information')
             ,defaults: { msgTarget: 'side' ,autoHeight: true }
+			,cls: 'main-wrapper'
             ,items: [{
                 id: 'modx-user-id'
                 ,name: 'id'
@@ -404,13 +407,12 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,defaults: { autoHeight: true }
                 ,hideMode: 'offsets'
                 ,items: [{
-                    html: '<h3>'+_('user_settings')+'</h3>'
-                    ,border: false
-                },{
-                    html: '<p>'+_('user_settings_desc')+'</p>'
+                    html: '<h3>'+_('user_settings')+'</h3><p>'+_('user_settings_desc')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-user-settings'
+					,cls: 'main-wrapper'
                     ,preventRender: true
                     ,user: config.user
                     ,width: '97%'
@@ -423,13 +425,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         f.push({
             title: _('access_permissions')
             ,layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,autoHeight: true }
             ,hideMode: 'offsets'
             ,items: [{
                 html: _('access_permissions_user_message')
-            },MODx.PanelSpacer,{
+				,bodyCssClass: 'panel-desc'
+            },{
                 xtype: 'modx-grid-user-groups'
+				,cls: 'main-wrapper'
                 ,title: ''
                 ,preventRender: true
                 ,user: config.user
@@ -445,13 +448,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             f.push({
                 title: _('remote_data')
                 ,layout: 'form'
-                ,bodyStyle: 'padding: 15px;'
                 ,defaults: { border: false ,autoHeight: true }
                 ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('user_remote_data_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
                 },{
                     layout: 'column'
+					,cls: 'main-wrapper'
                     ,items: [{
                         columnWidth: 0.4
                         ,title: _('attributes')
@@ -480,13 +484,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         f.push({
             title: _('extended_fields')
             ,layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,autoHeight: true }
             ,hideMode: 'offsets'
             ,items: [{
                 html: '<p>'+_('extended_fields_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
             },{
                 layout: 'column'
+				,cls: 'main-wrapper'
                 ,items: [{
                     columnWidth: 0.4
                     ,title: _('attributes')

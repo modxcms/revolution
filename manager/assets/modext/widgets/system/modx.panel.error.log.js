@@ -3,6 +3,7 @@ MODx.panel.ErrorLog = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'system/errorlog.php'
         ,id: 'modx-panel-error-log'
+		,cls: 'container'
         ,baseParams: {
             action: 'clear'
         }
@@ -16,20 +17,27 @@ MODx.panel.ErrorLog = function(config) {
             ,anchor: '100%'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,hideLabels: true
             ,autoHeight: true
             ,border: true
             ,buttonAlign: 'center'
             ,items: [{
                 html: '<p>'+_('error_log_desc')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
-                xtype: 'textarea'
-                ,name: 'log'
-                ,grow: true
-                ,growMax: 400
-                ,anchor: '98%'
+				xtype: 'panel'
+				,border: false
+				,cls:'main-wrapper'
+				,layout: 'form'
+				,labelAlign: 'top'
+				,items: [{
+					xtype: 'textarea'
+					,name: 'log'
+					,grow: true
+					,growMax: 400
+					,anchor: '100%'
+				}]
             }]
         }]
         ,buttons: [{

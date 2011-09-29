@@ -2,6 +2,7 @@ MODx.panel.Users = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-users'
+		,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -11,12 +12,13 @@ MODx.panel.Users = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('user_management_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-user'
+				,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]

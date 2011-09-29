@@ -2,6 +2,7 @@ MODx.panel.ResourceSchedule = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-resource-schedule'
+		,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -11,12 +12,13 @@ MODx.panel.ResourceSchedule = function(config) {
             ,id: 'modx-resource-schedule-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('site_schedule_desc')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-resource-schedule'
+				,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]

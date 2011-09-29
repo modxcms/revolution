@@ -5,7 +5,7 @@ MODx.panel.Resource = function(config) {
         title: _('resource_content')
         ,id: 'modx-resource-content'
         ,layout: 'form'
-        ,bodyStyle: 'padding: 15px;'
+		,bodyCssClass: 'main-wrapper'
         ,autoHeight: true
         ,collapsible: false
         ,items: [{
@@ -16,7 +16,7 @@ MODx.panel.Resource = function(config) {
             ,name: 'ta'
             ,id: 'ta'
             ,hideLabel: true
-            ,anchor: '97%'
+            ,anchor: '100%'
             ,height: 400
             ,grow: false
             ,value: (config.record.content || config.record.ta) || ''
@@ -32,7 +32,7 @@ MODx.panel.Resource = function(config) {
         ,cls: 'modx-resource-tab'
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 15px 15px 15px 0;'
+        ,bodyCssClass: 'tab-panel-wrapper main-wrapper'
         ,autoHeight: true
         ,defaults: {
             border: false
@@ -386,7 +386,7 @@ MODx.panel.Resource = function(config) {
         ,forceLayout: true
         ,deferredRender: false
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 15px 15px 15px 0;'
+        ,bodyCssClass: 'main-wrapper'
         ,autoHeight: true
         ,defaults: {
             border: false
@@ -408,17 +408,18 @@ MODx.panel.Resource = function(config) {
     }
     if (config.access_permissions) {
         it.push({
-            id: 'modx-resource-access-permissions'
-            ,bodyStyle: 'padding: 15px;'
+            id: 'modx-resource-access-permissions'			
             ,autoHeight: true
             ,title: _('access_permissions')
             ,layout: 'form'
             ,anchor: '100%'
             ,items: [{
                 html: '<p>'+_('resource_access_message')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-resource-security'
+				,cls: 'main-wrapper'
                 ,preventRender: true
                 ,resource: config.resource
                 ,mode: config.mode || 'update'
@@ -456,6 +457,7 @@ MODx.panel.Resource = function(config) {
         ,class_key: 'modResource'
         ,resource: ''
         ,bodyStyle: ''
+		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: its

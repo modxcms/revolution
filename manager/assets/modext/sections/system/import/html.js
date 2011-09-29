@@ -13,7 +13,6 @@ MODx.page.ImportHTML = function(config) {
         }]
         ,components: [{
             xtype: 'modx-panel-import-html'
-            ,renderTo: 'modx-import-html-div'
         }]
     });
     MODx.page.ImportHTML.superclass.constructor.call(this,config);

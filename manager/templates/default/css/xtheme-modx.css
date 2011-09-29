@@ -265,7 +265,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     border-color: #d0d0d0;
 }
 .x-form-field{
-    font: normal 11px arial, tahoma, helvetica, sans-serif;
+    font: normal 12px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-form-text, textarea.x-form-field{
@@ -478,7 +478,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .ext-safari .x-small-editor .x-form-field {
-    font: normal 11px arial, tahoma, helvetica, sans-serif;
+    font: normal 12px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-form-invalid-icon {
@@ -1811,18 +1811,6 @@ a.x-menu-item {
     border:0 none;
 }
 
-.x-panel-header {
-    background-color:#F1F1F1;
-    background-image:url("../images/modx-theme/panel/title-bg.png");
-    border:1px solid #AFAFAF;
-    color:#777777;
-    font-family:arial,tahoma,verdana,sans-serif;
-    font-size:12px;
-    font-weight:bold;
-    padding:10px 3px 10px 5px;
-    text-shadow:0 1px 0 #FAFAFA;
-}
-
 .x-panel-body {
     border:1px solid #AFAFAF;
     background-color:#fff;
@@ -2052,7 +2040,7 @@ a.x-menu-item {
 	background:-ms-linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#dddddd,GradientType=0);
 	background:linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%);
-	border:1px solid #d0d0d0;
+	border:1px solid #c0c0c0;
 	border-bottom:1px solid #dddddd;
 	font-size:12px;
 	font-weight:bold;

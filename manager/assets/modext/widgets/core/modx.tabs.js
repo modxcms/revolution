@@ -12,6 +12,7 @@ MODx.Tabs = function(config) {
             ,hideMode: 'offsets'
             ,border: true
             ,autoWidth: true
+			,bodyCssClass: 'tab-panel-wrapper'
 		}
 	    ,activeTab: 0
         ,border: false
