@@ -85,10 +85,8 @@ class modSystemLogGetListProcessor extends modProcessor {
         if (!empty($wa)) $c->where($wa);
         $data['total'] = $this->modx->getCount('modManagerLog',$c);
 
-        $c->select(array(
-            $this->modx->getSelectColumns('modManagerLog','modManagerLog'),
-            $this->modx->getSelectColumns('modUser','User','',array('username')),
-        ));
+        $c->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
+        $c->select($this->modx->getSelectColumns('modUser','User','',array('username')));
         $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
         $c->sortby('occurred','DESC');
         if ($isLimit) $c->limit($limit,$this->getProperty('start'));

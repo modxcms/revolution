@@ -6,7 +6,6 @@
 <tr>
     <th>[[%onlineusers_user]]</th>
     <th>[[%onlineusers_userid]]</th>
-    <th>[[%onlineusers_ipaddress]]</th>
     <th>[[%onlineusers_lasthit]]</th>
     <th>[[%onlineusers_action]]</th>
 </tr>

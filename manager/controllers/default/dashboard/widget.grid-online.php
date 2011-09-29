@@ -10,27 +10,37 @@
 class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
     public function render() {
         $timetocheck = (time()-(60*20))+$this->modx->getOption('server_offset_time',null,0);
-        $c = $this->modx->newQuery('modActiveUser');
-        $c->where(array('lasthit:>' => $timetocheck));
-        $c->sortby($this->modx->getSelectColumns('modActiveUser','modActiveUser','',array('username')),'ASC');
-        $ausers = $this->modx->getCollection('modActiveUser',$c);
-        $modx =& $this->modx;
-        include_once $this->modx->getOption('processors_path'). 'system/actionlist.inc.php';
+        $c = $this->modx->newQuery('modManagerLog');
+        $c->innerJoin('modUser','User');
+
+        $c = $this->modx->newQuery('modManagerLog');
+        $c->innerJoin('modUser','User');
+        $c->where(array(
+            'occurred:>' => $timetocheck,
+        ));
+        $data['total'] = $this->modx->getCount('modManagerLog',$c);
+
+        $c->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
+        $c->select($this->modx->getSelectColumns('modUser','User','',array('username')));
+        $c->sortby('occurred','ASC');
+        $c->groupby('user');
+        $ausers = $this->modx->getIterator('modManagerLog',$c);
 
         $users = array();
 
         /** @var modActiveUser $user */
+        $alt = false;
         foreach ($ausers as $user) {
-            $currentaction = getAction($user->get('action'), $user->get('id'));
             $userArray = $user->toArray();
-            $userArray['currentAction'] = $currentaction;
-            $userArray['lastSeen'] = strftime('%X',$user->get('lasthit')+$serverOffset);
+            $userArray['currentAction'] = $user->get('action');
+            $userArray['occurred'] = strftime('%b %d, %Y - %I:%M %p',strtotime($user->get('occurred')));
+            $userArray['class'] = $alt ? 'alt' : '';
             $users[] = $this->getFileChunk('dashboard/onlineusers.row.tpl',$userArray);
         }
         
         $output = $this->getFileChunk('dashboard/onlineusers.tpl',array(
             'users' => implode("\n",$users),
-            'curtime' => strftime('%H:%M %p',time()+$this->modx->getOption('server_offset_time',null,0)),
+            'curtime' => strftime('%I:%M %p',time()+$this->modx->getOption('server_offset_time',null,0)),
         ));
         return $output;
     }
