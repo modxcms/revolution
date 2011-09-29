@@ -164,6 +164,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('load',this._initExpand,this,{single: true});
         this.on('expandnode',this._saveState,this);
         this.on('collapsenode',this._saveState,this);
+		
+		/* Absolute positionning fix  */
+		this.on('expandnode',function(){ Ext.getCmp('modx-content').doLayout(); },this);
     }
 	
     /**

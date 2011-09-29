@@ -1260,9 +1260,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
     margin: 6px;
     background-color: white;
     border: 1px solid #ddd;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 .dashboard-block .body {
     max-height: 300px;
@@ -1271,11 +1271,27 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
     height: auto;
 }
 .dashboard-block .title {
-    background-color: #eee;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    border-bottom: 1px solid #ddd;
+    background:#dddddd;
+	background:-moz-linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%) repeat scroll 0 0 transparent;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#eeeeee),color-stop(100%,#dddddd));
+	background:-webkit-linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%);
+	background:-o-linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%);
+	background:-ms-linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#dddddd,GradientType=0);
+	background:linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%);
+	border-bottom:1px solid #ccc;
+	font-size:12px;
+	font-weight:bold;
+	color: #5E5E5E;
+	padding:10px 10px 8px;
+	text-shadow:0 1px 1px #ffffff;
+	-moz-border-radius-topleft:2px;
+	-moz-border-radius-topright:2px;
+	-webkit-border-top-left-radius:2px;
+	-webkit-border-top-right-radius:2px;
+	border-top-left-radius:2px;
+	border-top-right-radius:2px;
+	margin:0;
 }
 .dashboard-block-half {
     width: 48%;
@@ -1305,8 +1321,27 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 /* MODExt common classes */
 
 .container {  margin: 0 15px 15px 0; } /* Wrap the main content */
-.panel-desc { padding: 15px 15px 0; } /* Only for description text */
-.main-wrapper { padding: 15px; } /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
+
+/* Panel description text */
+.panel-desc { 
+	background-color: #FAFAFA;
+    border-bottom: 1px solid #EEEEEE !important;
+    border-top: 1px solid #EEEEEE !important;
+    color: #909090;
+    font-family: tahoma;
+    margin-top: 25px;
+	line-height: 1.5;
+	padding: 15px !important; 
+} 
+.with-title .panel-desc{
+	margin: 0;
+}
+
+/* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
+.main-wrapper { padding: 15px; } 
+.with-title .main-wrapper{
+	padding: 0 15px 10px 15px;
+}
 .left-col{ padding-right: 15px; }
 .right-col{ padding-left: 15px; }
 
