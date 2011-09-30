@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5723] Add Media Source tab to User Group Access screen
 - Change "Cancel" references to "Close" for clarity
 - [#4566] Fix online users manager dashboard widget grid
 - [#5809] Change "Remove" to "Delete" where appropriate to clarify language

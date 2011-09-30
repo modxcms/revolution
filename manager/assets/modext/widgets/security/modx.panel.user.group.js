@@ -55,7 +55,7 @@ MODx.panel.UserGroup = function(config) {
 						,fieldLabel: _('name')
 						,allowBlank: false
 						,enableKeyEvents: true
-						,disabled: config.usergroup === 0 ? true : false
+						,disabled: config.usergroup === 0
 						,anchor: '100%'
 						,listeners: {
 							'keyup': {scope:this,fn:function(f,e) {
@@ -77,7 +77,7 @@ MODx.panel.UserGroup = function(config) {
 						,fieldLabel: _('user_group_parent')
 						,editable: false
 						,anchor: '100%'
-						,disabled: config.usergroup === 0 ? true : false
+						,disabled: config.usergroup === 0
 						,baseParams: {
 							action: 'getList'
 							,addNone: true
@@ -93,7 +93,7 @@ MODx.panel.UserGroup = function(config) {
 				}]
             },{
                 title: _('users')
-                ,hidden: config.usergroup == 0 ? true : false
+                ,hidden: config.usergroup == 0
                 ,hideMode: 'offsets'
 				,layout: 'form'
                 ,items: [{
@@ -115,7 +115,7 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('user_group_context_access')
-                ,hidden: config.usergroup === 0 ? true : false
+                ,hidden: config.usergroup === 0
                 ,forceLayout: true
                 ,hideMode: 'offsets'
 				,layout: 'form'
@@ -138,7 +138,7 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('user_group_resourcegroup_access')
-                ,hidden: config.usergroup === 0 ? true : false
+                ,hidden: config.usergroup === 0
                 ,hideMode: 'offsets'
 				,layout: 'form'
                 ,items: [{
@@ -161,7 +161,7 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('user_group_category_access')
-                ,hidden: config.usergroup === 0 ? true : false
+                ,hidden: config.usergroup === 0
                 ,hideMode: 'offsets'
 				,layout: 'form'
                 ,items: [{
@@ -170,6 +170,29 @@ MODx.panel.UserGroup = function(config) {
                     ,border: false
                 },{
                     xtype: 'modx-grid-user-group-category'
+					,cls:'main-wrapper'
+                    ,preventRender: true
+                    ,usergroup: config.usergroup
+                    ,autoHeight: true
+                    ,width: '97%'
+                    ,listeners: {
+                        'afterRemoveRow': {fn:this.markDirty,scope:this}
+                        ,'afteredit': {fn:this.markDirty,scope:this}
+                        ,'updateAcl': {fn:this.markDirty,scope:this}
+                        ,'createAcl': {fn:this.markDirty,scope:this}
+                    }
+                }]
+            },{
+                title: _('user_group_source_access')
+                ,hidden: config.usergroup === 0
+                ,hideMode: 'offsets'
+				,layout: 'form'
+                ,items: [{
+                    html: '<p>'+_('user_group_source_access_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-user-group-source'
 					,cls:'main-wrapper'
                     ,preventRender: true
                     ,usergroup: config.usergroup
