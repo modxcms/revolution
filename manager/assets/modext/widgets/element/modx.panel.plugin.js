@@ -11,6 +11,7 @@ MODx.panel.Plugin = function(config) {
         url: MODx.config.connectors_url+'element/plugin.php'
         ,baseParams: {}
         ,id: 'modx-panel-plugin'
+		,cls: 'container'
         ,class_key: 'modPlugin'
         ,plugin: ''
         ,bodyStyle: ''
@@ -22,102 +23,113 @@ MODx.panel.Plugin = function(config) {
             ,border: false
         },MODx.getPageStructure([{
             title: _('plugin_title')
-            ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-plugin-form'
             ,labelWidth: 150
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 html: '<p>'+_('plugin_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,id: 'modx-plugin-msg'
             },{
-                xtype: 'hidden'
-                ,name: 'id'
-                ,id: 'modx-plugin-id'
-                ,value: config.record.id || 0
+				xtype: 'panel'
+				,border: false
+				,cls:'main-wrapper'
+				,layout: 'form'
+				,items: [{
+					xtype: 'hidden'
+					,name: 'id'
+					,id: 'modx-plugin-id'
+					,value: config.record.id || 0
+				},{
+					xtype: 'hidden'
+					,name: 'props'
+					,id: 'modx-plugin-props'
+					,value: config.record.props || null
+				},{
+					xtype: 'textfield'
+					,fieldLabel: _('plugin_name')
+					,name: 'name'
+					,id: 'modx-plugin-name'
+					,width: 300
+					,maxLength: 255
+					,enableKeyEvents: true
+					,allowBlank: false
+					,value: config.record.name
+					,listeners: {
+						'keyup': {scope:this,fn:function(f,e) {
+							Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+f.getValue()+'</h2>');
+						}}
+					}
+				},{
+					xtype: 'textfield'
+					,fieldLabel: _('plugin_desc')
+					,name: 'description'
+					,id: 'modx-plugin-description'
+					,width: 300
+					,maxLength: 255
+					,value: config.record.description
+				},{
+					xtype: 'modx-combo-category'
+					,fieldLabel: _('category')
+					,name: 'category'
+					,id: 'modx-plugin-category'
+					,width: 250
+					,value: config.record.category || 0
+				},{
+					xtype: 'xcheckbox'
+					,fieldLabel: _('plugin_disabled')
+					,name: 'disabled'
+					,id: 'modx-plugin-disabled'
+					,inputValue: 1
+					,checked: config.record.disabled || 0
+				},{
+					xtype: 'xcheckbox'
+					,fieldLabel: _('plugin_lock')
+					,description: _('plugin_lock_msg')
+					,name: 'locked'
+					,id: 'modx-plugin-locked'
+					,inputValue: 1
+					,checked: config.record.locked || 0
+				},{
+					xtype: 'xcheckbox'
+					,fieldLabel: _('clear_cache_on_save')
+					,description: _('clear_cache_on_save_msg')
+					,name: 'clearCache'
+					,id: 'modx-plugin-clear-cache'
+					,inputValue: 1
+					,checked: Ext.isDefined(config.record.clearCache) || true
+				},{
+					html: MODx.onPluginFormRender
+					,border: false
+				}]
             },{
-                xtype: 'hidden'
-                ,name: 'props'
-                ,id: 'modx-plugin-props'
-                ,value: config.record.props || null
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('plugin_name')
-                ,name: 'name'
-                ,id: 'modx-plugin-name'
-                ,width: 300
-                ,maxLength: 255
-                ,enableKeyEvents: true
-                ,allowBlank: false
-                ,value: config.record.name
-                ,listeners: {
-                    'keyup': {scope:this,fn:function(f,e) {
-                        Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+f.getValue()+'</h2>');
-                    }}
-                }
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('plugin_desc')
-                ,name: 'description'
-                ,id: 'modx-plugin-description'
-                ,width: 300
-                ,maxLength: 255
-                ,value: config.record.description
-            },{
-                xtype: 'modx-combo-category'
-                ,fieldLabel: _('category')
-                ,name: 'category'
-                ,id: 'modx-plugin-category'
-                ,width: 250
-                ,value: config.record.category || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('plugin_disabled')
-                ,name: 'disabled'
-                ,id: 'modx-plugin-disabled'
-                ,inputValue: 1
-                ,checked: config.record.disabled || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('plugin_lock')
-                ,description: _('plugin_lock_msg')
-                ,name: 'locked'
-                ,id: 'modx-plugin-locked'
-                ,inputValue: 1
-                ,checked: config.record.locked || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('clear_cache_on_save')
-                ,description: _('clear_cache_on_save_msg')
-                ,name: 'clearCache'
-                ,id: 'modx-plugin-clear-cache'
-                ,inputValue: 1
-                ,checked: Ext.isDefined(config.record.clearCache) || true
-            },{
-                html: MODx.onPluginFormRender
-                ,border: false
-            },{
-                html: '<br />'+_('plugin_code')
-            },{
-                xtype: 'textarea'
-                ,hideLabel: true
-                ,name: 'plugincode'
-                ,id: 'modx-plugin-plugincode'
-                ,width: '95%'
-                ,height: 400
-                ,value: config.record.plugincode || "<?php\n"
-                
+				xtype: 'panel'
+				,border: false
+				,layout: 'form'
+				,cls:'main-wrapper'
+				,labelAlign: 'top'
+				,items: [{
+					xtype: 'textarea'
+					,fieldLabel: _('plugin_code')
+					,name: 'plugincode'
+					,id: 'modx-plugin-plugincode'
+					,anchor: '100%'
+					,height: 400
+					,value: config.record.plugincode || "<?php\n"
+                }]
             }]
         },{
             title: _('system_events')
-            ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-plugin-sysevents'
             ,items: [{
                 html: '<p>'+_('plugin_event_msg')+'</p>'
                 ,id: 'modx-plugin-sysevents-msg'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-plugin-event'
+				,cls:'main-wrapper'
                 ,preventRender: true
                 ,plugin: config.plugin
                 ,listeners: {
