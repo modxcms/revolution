@@ -2193,6 +2193,11 @@ a.x-menu-item {
     overflow: hidden;
 }
 
+.x-form-item-label {
+    font-weight: bold;
+    color: #777;
+}
+
 .x-window-plain .x-window-body {
     border-color: #efefef #b9b9b9 #b9b9b9 #efefef;
     border-bottom: 1px solid #DFDFDF !important;
@@ -2412,3 +2417,27 @@ body.x-body-masked .x-window-plain .x-window-mc {
     min-height: 20px;
 	padding: 5px;
 }
+
+/* pretty form stuff */
+
+.form-with-labels .x-form-label-top .x-form-element { padding:0; }
+.form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
+  font-weight:bold;
+  font-size:12px;
+  color:#707070;
+}
+.form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
+  font-weight:bold;
+  font-size:12px;
+  color:#707070;
+  margin-bottom: 0;
+}
+.form-with-labels .desc-under {
+  color:#aaaaaa;
+  display:block;
+  font-size:11px;
+  font-style:italic;
+  margin:-8px 0 16px;
+}
+.form-with-labels .desc-under.desc-checkbox { margin:-2px 0 4px; }
+.form-with-labels .desc-under .warning { color:#df8d00; }
