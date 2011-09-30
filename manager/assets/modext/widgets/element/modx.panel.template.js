@@ -13,6 +13,7 @@ MODx.panel.Template = function(config) {
         url: MODx.config.connectors_url+'element/template.php'
         ,baseParams: {}
         ,id: 'modx-panel-template'
+		,cls: 'container'
         ,class_key: 'modTemplate'
         ,template: ''
         ,bodyStyle: ''
@@ -23,7 +24,6 @@ MODx.panel.Template = function(config) {
             ,border: false
         },MODx.getPageStructure([{
             title: _('template_title')
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-template-form'
@@ -31,76 +31,88 @@ MODx.panel.Template = function(config) {
             ,items: [{
                 html: '<p>'+_('template_msg')+'</p>'
                 ,id: 'modx-template-msg'
+				,bodyCssClass: 'panel-desc'
             },{
-                xtype: 'hidden'
-                ,name: 'id'
-                ,id: 'modx-template-id'
-                ,value: config.template
-            },{
-                xtype: 'hidden'
-                ,name: 'props'
-                ,id: 'modx-template-props'
-                ,value: config.record.props || null
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('template_name')
-                ,name: 'templatename'
-                ,id: 'modx-template-templatename'
-                ,width: 300
-                ,maxLength: 100
-                ,enableKeyEvents: true
-                ,allowBlank: false
-                ,value: config.record.templatename
-                ,listeners: {
-                    'keyup': {scope:this,fn:function(f,e) {
-                        Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
-                    }}
-                }
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('template_desc')
-                ,name: 'description'
-                ,id: 'modx-template-description'
-                ,width: 300
-                ,maxLength: 255
-                ,value: config.record.description || ''
-            },{
-                xtype: 'modx-combo-category'
-                ,fieldLabel: _('category')
-                ,name: 'category'
-                ,id: 'modx-template-category'
-                ,width: 250
-                ,value: config.record.category || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('template_lock')
-                ,description: _('template_lock_msg')
-                ,name: 'locked'
-                ,id: 'modx-template-locked'
-                ,inputValue: 1
-                ,checked: config.record.locked || false
-            },{
-                xtype: 'checkbox'
-                ,fieldLabel: _('clear_cache_on_save')
-                ,description: _('clear_cache_on_save_msg')
-                ,name: 'clearCache'
-                ,id: 'modx-template-clear-cache'
-                ,inputValue: 1
-                ,checked: Ext.isDefined(config.record.clearCache) || true
-            },{
-                html: MODx.onTempFormRender
-                ,border: false
-            },{
-                html: '<br />'+_('template_code')
-            },{
-                xtype: 'textarea'
-                ,hideLabel: true
-                ,name: 'content'
-                ,id: 'modx-template-content'
-                ,width: '95%'
-                ,height: 400
-                ,value: config.record.content || ''
-            }]
+				xtype: 'panel'
+				,border: false
+				,cls:'main-wrapper'
+				,layout: 'form'
+				,items: [{
+					xtype: 'hidden'
+					,name: 'id'
+					,id: 'modx-template-id'
+					,value: config.template
+				},{
+					xtype: 'hidden'
+					,name: 'props'
+					,id: 'modx-template-props'
+					,value: config.record.props || null
+				},{
+					xtype: 'textfield'
+					,fieldLabel: _('template_name')
+					,name: 'templatename'
+					,id: 'modx-template-templatename'
+					,width: 300
+					,maxLength: 100
+					,enableKeyEvents: true
+					,allowBlank: false
+					,value: config.record.templatename
+					,listeners: {
+						'keyup': {scope:this,fn:function(f,e) {
+							Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
+						}}
+					}
+				},{
+					xtype: 'textfield'
+					,fieldLabel: _('template_desc')
+					,name: 'description'
+					,id: 'modx-template-description'
+					,width: 300
+					,maxLength: 255
+					,value: config.record.description || ''
+				},{
+					xtype: 'modx-combo-category'
+					,fieldLabel: _('category')
+					,name: 'category'
+					,id: 'modx-template-category'
+					,width: 250
+					,value: config.record.category || 0
+				},{
+					xtype: 'xcheckbox'
+					,fieldLabel: _('template_lock')
+					,description: _('template_lock_msg')
+					,name: 'locked'
+					,id: 'modx-template-locked'
+					,inputValue: 1
+					,checked: config.record.locked || false
+				},{
+					xtype: 'checkbox'
+					,fieldLabel: _('clear_cache_on_save')
+					,description: _('clear_cache_on_save_msg')
+					,name: 'clearCache'
+					,id: 'modx-template-clear-cache'
+					,inputValue: 1
+					,checked: Ext.isDefined(config.record.clearCache) || true
+				},{
+					html: MODx.onTempFormRender
+					,border: false
+				}]
+			},{
+				xtype: 'panel'
+				,border: false
+				,layout: 'form'
+				,cls:'main-wrapper'
+				,labelAlign: 'top'
+				,items: [{
+					xtype: 'textarea'
+					,fieldLabel: _('template_code')						
+					,name: 'content'
+					,id: 'modx-template-content'
+					,anchor: '100%'
+					,height: 400
+					,value: config.record.content || ''
+				}]
+			}]
         },{
             xtype: 'modx-panel-element-properties'
             ,preventRender: true
@@ -111,15 +123,17 @@ MODx.panel.Template = function(config) {
         },{
             title: _('template_variables')
             ,itemId: 'form-template'
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: { autoHeight: true }
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('template_tv_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                xtype: 'modx-grid-template-tv'
+			   ,cls:'main-wrapper'
                ,preventRender: true
-               ,width: '100%'
+               ,anchor: '100%'
                ,template: config.template
                ,listeners: {
                     'rowclick': {fn:this.markDirty,scope:this}

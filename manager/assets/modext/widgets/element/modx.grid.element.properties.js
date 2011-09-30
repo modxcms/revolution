@@ -4,13 +4,15 @@ MODx.panel.ElementProperties = function(config) {
         id: 'modx-panel-element-properties'
         ,title: _('properties')
         ,header: false
-        ,bodyStyle: 'padding: 15px;'
         ,defaults: { collapsible: false ,autoHeight: true ,border: false }
+		,layout: 'form'
         ,items: [{
             html: '<p>'+_('element_properties_desc')+'</p>'
+			,bodyCssClass: 'panel-desc'
             ,itemId: 'desc-properties'
         },{
             xtype: 'modx-grid-element-properties'
+			,cls:'main-wrapper'
             ,id: 'modx-grid-element-properties'
             ,itemId: 'grid-properties'
             ,autoHeight: true
@@ -40,7 +42,7 @@ MODx.grid.ElementProperties = function(config) {
         ,fields: ['name','desc','xtype','options','value','lexicon','overridden','desc_trans']
         ,autoExpandColumn: 'value'
         ,sortBy: 'name'
-        ,width: '100%'
+        ,anchor: '100%'
         ,sm: new Ext.grid.RowSelectionModel({singleSelect:false})
         ,loadMask: true
         ,lockProperties: true
