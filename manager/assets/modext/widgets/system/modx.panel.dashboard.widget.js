@@ -4,7 +4,8 @@ MODx.panel.DashboardWidget = function(config) {
     var itms = [];
     itms.push({
         title: _('general_information')
-        ,bodyStyle: 'padding: 15px;'
+        ,cls: 'main-wrapper'
+        ,border: false
         ,defaults: { border: false ,msgTarget: 'side' }
         ,layout: 'form'
         ,id: 'modx-dashboard-widget-form'
@@ -108,9 +109,11 @@ MODx.panel.DashboardWidget = function(config) {
             ,id: 'modx-panel-widget-dashboards'
             ,items: [{
                 html: '<p>'+_('widget_dashboards.intro_msg')+'</p>'
+                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-dashboard-widget-dashboards'
+                ,cls: 'main-wrapper'
                 ,preventRender: true
                 ,widget: config.record.id
                 ,autoHeight: true
@@ -130,6 +133,7 @@ MODx.panel.DashboardWidget = function(config) {
         ,baseParams: {
             action: 'update'
         }
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
              html: '<h2>'+_('widget_new')+'</h2>'
@@ -139,10 +143,10 @@ MODx.panel.DashboardWidget = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: {
-                bodyStyle: 'padding: 15px;'
-                ,autoHeight: true
-                ,border: true
+                autoHeight: true
+                ,border: false
             }
+            ,border: true
             ,id: 'modx-dashboard-widget-tabs'
             ,forceLayout: true
             ,deferredRender: false

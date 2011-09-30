@@ -6,6 +6,7 @@ MODx.panel.Dashboard = function(config) {
         ,baseParams: {
             action: 'update'
         }
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
              html: '<h2>'+_('dashboard')+'</h2>'
@@ -15,10 +16,10 @@ MODx.panel.Dashboard = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: {
-                bodyStyle: 'padding: 15px;'
-                ,autoHeight: true
-                ,border: true
+                autoHeight: true
+                ,border: false
             }
+            ,border: true
             ,id: 'modx-dashboard-tabs'
             ,forceLayout: true
             ,deferredRender: false
@@ -30,7 +31,7 @@ MODx.panel.Dashboard = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-                ,bodyStyle: 'padding: 15px;'
+                ,cls: 'main-wrapper'
                 ,defaults: { border: false ,msgTarget: 'side' }
                 ,layout: 'form'
                 ,id: 'modx-dashboard-form'
@@ -47,7 +48,7 @@ MODx.panel.Dashboard = function(config) {
                     ,fieldLabel: _('name')
                     ,allowBlank: false
                     ,enableKeyEvents: true
-                    ,anchor: '97%'
+                    ,anchor: '100%'
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
                             Ext.getCmp('modx-dashboard-header').getEl().update('<h2>'+_('dashboard')+': '+f.getValue()+'</h2>');
@@ -58,7 +59,7 @@ MODx.panel.Dashboard = function(config) {
                     ,id: 'modx-dashboard-description'
                     ,xtype: 'textarea'
                     ,fieldLabel: _('description')
-                    ,anchor: '97%'
+                    ,anchor: '100%'
                     ,grow: true
                 },{
                     html: '<hr />'
@@ -71,7 +72,7 @@ MODx.panel.Dashboard = function(config) {
                     ,preventRender: true
                     ,dashboard: config.record.id
                     ,autoHeight: true
-                    ,width: '97%'
+                    ,anchor: '100%'
                     ,listeners: {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                         ,'updateRole': {fn:this.markDirty,scope:this}
