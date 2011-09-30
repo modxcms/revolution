@@ -1104,6 +1104,7 @@
         <field key="description" dbtype="text" phptype="string" />
         <field key="parent" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="rank" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="dashboard" dbtype="int" phptype="integer" null="false" default="1" index="index" />
         
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -1114,9 +1115,13 @@
         <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
             <column key="rank" length="" collation="A" null="false" />
         </index>
+        <index alias="dashboard" name="dashboard" primary="false" unique="false" type="BTREE">
+            <column key="dashboard" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="Parent" class="modUserGroup" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Children" class="modUserGroup" local="id" foreign="parent" cardinality="many" owner="local" />
+        <aggregate alias="Dashboard" class="modDashboard" local="dashboard" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="user_group" cardinality="many" owner="local" />
         <composite alias="FormCustomizationProfiles" class="modFormCustomizationProfileUserGroup" local="id" foreign="usergroup" cardinality="many" owner="local" />
     </object>
