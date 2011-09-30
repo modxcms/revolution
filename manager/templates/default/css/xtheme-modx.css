@@ -1990,7 +1990,7 @@ a.x-menu-item {
 
 .x-tool {
     background-image: url(../images/modx-theme/panel/tool-sprites.gif);
-    margin-top: 2px;
+    margin: 1px 4px 0 0;
 }
 
 
@@ -2432,15 +2432,18 @@ body.x-body-masked .x-window-plain .x-window-mc {
   color:#707070;
   margin-bottom: 0;
 }
-.form-with-labels .desc-under {
+.form-with-labels .desc-under,
+.modx-window .desc-under {
   color:#aaaaaa;
   display:block;
   font-size:11px;
   font-style:italic;
   margin:-8px 0 16px;
 }
-.form-with-labels .desc-under.desc-checkbox { margin:-2px 0 4px; }
-.form-with-labels .desc-under .warning { color:#df8d00; }
+.form-with-labels .desc-under.desc-checkbox,
+.modx-window .desc-under.desc-checkbox { margin:-2px 0 4px; }
+.form-with-labels .desc-under .warning,
+.modx-window .desc-under .warning { color:#df8d00; }
 
 .modx-window h2 {
     color: #5e5e5e;

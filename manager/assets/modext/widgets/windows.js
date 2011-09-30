@@ -27,11 +27,20 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             return false;
         }
         var items = [];
+        items.push({
+            xtype: 'textfield'
+            ,id: 'modx-'+this.ident+'-name'
+            ,fieldLabel: _('resource_name_new')
+            ,name: 'name'
+            ,anchor: '100%'
+            ,value: ''
+        });
 
         if (this.config.hasChildren) {
             items.push({
                 xtype: 'xcheckbox'
-                ,fieldLabel: _('duplicate_children')
+                ,boxLabel: _('duplicate_children')
+                ,hideLabel: true
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
                 ,checked: true
@@ -46,14 +55,6 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 }
             });
         }
-        items.push({
-            xtype: 'textfield'
-            ,id: 'modx-'+this.ident+'-name'
-            ,fieldLabel: _('resource_name_new')
-            ,name: 'name'
-            ,anchor: '100%'
-            ,value: ''
-        });
 
         this.fp = this.createForm({
             url: this.config.url || MODx.config.connectors_url+'resource/index.php'
@@ -649,53 +650,81 @@ MODx.window.QuickCreateTV = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_tv')
         ,id: this.ident
-        ,width: 600
+        ,width: 700
         ,url: MODx.config.connectors_url+'element/tv.php'
         ,action: 'create'
         ,fields: [{
-            xtype: 'textfield'
-            ,name: 'name'
-            ,id: 'modx-'+this.ident+'-name'
-            ,fieldLabel: _('name')
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,name: 'caption'
-            ,id: 'modx-'+this.ident+'-caption'
-            ,fieldLabel: _('caption')
-            ,anchor: '100%'
-        },{
-            xtype: 'modx-combo-category'
-            ,name: 'category'
-            ,fieldLabel: _('category')
-            ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '100%'
-        },{
-            xtype: 'textarea'
-            ,name: 'description'
-            ,id: 'modx-'+this.ident+'-description'
-            ,fieldLabel: _('description')
-            ,anchor: '100%'
-            ,rows: 2
-        },{
-            xtype: 'modx-combo-tv-input-type'
-            ,fieldLabel: _('tv_type')
-            ,name: 'type'
-            ,id: 'modx-'+this.ident+'-type'
-            ,anchor: '70%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('tv_elements')
-            ,name: 'els'
-            ,id: 'modx-'+this.ident+'-elements'
-            ,anchor: '80%'
-        },{
-            xtype: 'textarea'
-            ,fieldLabel: _('tv_default')
-            ,name: 'default_text'
-            ,id: 'modx-'+this.ident+'-default-text'
-            ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            layout: 'column'
+            ,border: false
+            ,items: [{
+                columnWidth: .6
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'textfield'
+                    ,name: 'name'
+                    ,id: 'modx-'+this.ident+'-name'
+                    ,fieldLabel: _('name')
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'caption'
+                    ,id: 'modx-'+this.ident+'-caption'
+                    ,fieldLabel: _('caption')
+                    ,anchor: '100%'
+                },{
+                    xtype: 'label'
+                    ,forId: 'modx-'+this.ident+'-caption'
+                    ,html: _('caption_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'modx-combo-category'
+                    ,name: 'category'
+                    ,fieldLabel: _('category')
+                    ,id: 'modx-'+this.ident+'-category'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textarea'
+                    ,name: 'description'
+                    ,id: 'modx-'+this.ident+'-description'
+                    ,fieldLabel: _('description')
+                    ,anchor: '100%'
+                    ,rows: 2
+                }]
+            },{
+                columnWidth: .4
+                ,border: false
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'modx-combo-tv-input-type'
+                    ,fieldLabel: _('tv_type')
+                    ,name: 'type'
+                    ,id: 'modx-'+this.ident+'-type'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('tv_elements')
+                    ,name: 'els'
+                    ,id: 'modx-'+this.ident+'-elements'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'label'
+                    ,forId: 'modx-'+this.ident+'-elements'
+                    ,html: _('tv_elements_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('tv_default')
+                    ,name: 'default_text'
+                    ,id: 'modx-'+this.ident+'-default-text'
+                    ,anchor: '100%'
+                    ,grow: true ,growMax: 380
+                },{
+                    xtype: 'label'
+                    ,forId: 'modx-'+this.ident+'-default-text'
+                    ,html: _('tv_default_desc')
+                    ,cls: 'desc-under'
+                }]
+            }]
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -715,7 +744,7 @@ MODx.window.QuickUpdateTV = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_tv')
         ,id: this.ident
-        ,width: 600
+        ,width: 700
         ,url: MODx.config.connectors_url+'element/tv.php'
         ,action: 'update'
         ,fields: [{
@@ -723,50 +752,77 @@ MODx.window.QuickUpdateTV = function(config) {
             ,name: 'id'
             ,id: 'modx-'+this.ident+'-id'
         },{
-            xtype: 'textfield'
-            ,name: 'name'
-            ,id: 'modx-'+this.ident+'-name'
-            ,fieldLabel: _('name')
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,name: 'caption'
-            ,id: 'modx-'+this.ident+'-caption'
-            ,fieldLabel: _('caption')
-            ,anchor: '100%'
-        },{
-            xtype: 'modx-combo-category'
-            ,name: 'category'
-            ,fieldLabel: _('category')
-            ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '100%'
-        },{
-            xtype: 'textarea'
-            ,name: 'description'
-            ,id: 'modx-'+this.ident+'-description'
-            ,fieldLabel: _('description')
-            ,anchor: '100%'
-            ,rows: 2
-        },{
-            xtype: 'modx-combo-tv-input-type'
-            ,fieldLabel: _('tv_type')
-            ,name: 'type'
-            ,id: 'modx-'+this.ident+'-type'
-            ,anchor: '70%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('tv_elements')
-            ,name: 'els'
-            ,id: 'modx-'+this.ident+'-elements'
-            ,anchor: '80%'
-        },{
-            xtype: 'textarea'
-            ,fieldLabel: _('tv_default')
-            ,name: 'default_text'
-            ,id: 'modx-'+this.ident+'-default-text'
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: 380
+            layout: 'column'
+            ,border: false
+            ,items: [{
+                columnWidth: .6
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'textfield'
+                    ,name: 'name'
+                    ,id: 'modx-'+this.ident+'-name'
+                    ,fieldLabel: _('name')
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'caption'
+                    ,id: 'modx-'+this.ident+'-caption'
+                    ,fieldLabel: _('caption')
+                    ,anchor: '100%'
+                },{
+                    xtype: 'label'
+                    ,forId: 'modx-'+this.ident+'-caption'
+                    ,html: _('caption_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'modx-combo-category'
+                    ,name: 'category'
+                    ,fieldLabel: _('category')
+                    ,id: 'modx-'+this.ident+'-category'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textarea'
+                    ,name: 'description'
+                    ,id: 'modx-'+this.ident+'-description'
+                    ,fieldLabel: _('description')
+                    ,anchor: '100%'
+                    ,rows: 2
+                }]
+            },{
+                columnWidth: .4
+                ,border: false
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'modx-combo-tv-input-type'
+                    ,fieldLabel: _('tv_type')
+                    ,name: 'type'
+                    ,id: 'modx-'+this.ident+'-type'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('tv_elements')
+                    ,name: 'els'
+                    ,id: 'modx-'+this.ident+'-elements'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'label'
+                    ,forId: 'modx-'+this.ident+'-elements'
+                    ,html: _('tv_elements_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('tv_default')
+                    ,name: 'default_text'
+                    ,id: 'modx-'+this.ident+'-default-text'
+                    ,anchor: '100%'
+                    ,grow: true ,growMax: 380
+                },{
+                    xtype: 'label'
+                    ,forId: 'modx-'+this.ident+'-default-text'
+                    ,html: _('tv_default_desc')
+                    ,cls: 'desc-under'
+                }]
+            }]
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
