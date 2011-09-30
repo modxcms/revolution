@@ -337,46 +337,46 @@ MODx.window.CreateSetting = function(config) {
             ,name: 'key'
             ,id: 'modx-cs-key'
             ,maxLength: 100
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-cs-name'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-xtype-spec'
             ,fieldLabel: _('xtype')
             ,description: _('xtype_desc')
             ,id: 'modx-cs-xtype'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
             ,id: 'modx-cs-namespace'
             ,value: 'core'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('area_lexicon_string')
             ,description: _('area_lexicon_string_msg')
             ,name: 'area'
             ,id: 'modx-cs-area'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('value')
             ,name: 'value'
             ,id: 'modx-cs-value'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-cs-description'
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
@@ -441,13 +441,13 @@ MODx.window.UpdateSetting = function(config) {
             ,name: 'key'
             ,id: 'modx-'+ident+'-key'
             ,submitValue: true
-            ,anchor: '97%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+ident+'-name'
-            ,anchor: '97%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-xtype-spec'
             ,name: 'xtype'
@@ -455,35 +455,35 @@ MODx.window.UpdateSetting = function(config) {
             ,id: 'modx-'+ident+'-xtype'
             ,fieldLabel: _('xtype')
             ,description: _('xtype_desc')
-            ,anchor: '97%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
             ,id: 'modx-'+ident+'-namespace'
             ,value: 'core'
-            ,anchor: '97%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('area_lexicon_string')
             ,description: _('area_lexicon_string_msg')
             ,name: 'area'
             ,id: 'modx-'+ident+'-area'
-            ,anchor: '97%'
+            ,anchor: '100%'
         },{
             xtype: config.record ? config.record.xtype : 'textfield'
             ,fieldLabel: _('value')
             ,name: 'value'
             ,hiddenName: 'value'
             ,id: 'modx-'+ident+'-value'
-            ,anchor: '97%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-'+ident+'-description'
             ,allowBlank: true
-            ,anchor: '97%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateSetting.superclass.constructor.call(this,config);

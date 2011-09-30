@@ -999,7 +999,7 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'content_type'
         ,hiddenName: 'content_type'
         ,id: 'modx-'+this.ident+'-type'
-        ,anchor: '70%'
+        ,anchor: '100%'
         ,value: va['content_type'] != undefined ? va['content_type'] : (MODx.config.default_content_type || 1)
 
     },{
@@ -1008,7 +1008,7 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'content_dispo'
         ,hiddenName: 'content_dispo'
         ,id: 'modx-'+this.ident+'-dispo'
-        ,anchor: '70%'
+        ,anchor: '100%'
         ,value: va['content_dispo'] != undefined ? va['content_dispo'] : 0
     },{
         xtype: 'xcheckbox'

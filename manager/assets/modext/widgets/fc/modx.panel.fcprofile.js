@@ -203,7 +203,7 @@ MODx.window.AddGroupToProfile = function(config) {
             ,xtype: 'modx-combo-usergroup'
             ,editable: false
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.AddGroupToProfile.superclass.constructor.call(this,config);

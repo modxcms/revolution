@@ -245,20 +245,20 @@ MODx.window.CreateSource = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,grow: true
         },{
             name: 'class_key'
             ,hiddenName: 'class_key'
             ,xtype: 'modx-combo-source-type'
             ,fieldLabel: _('source_type')
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,allowBlank: false
         }]
     });

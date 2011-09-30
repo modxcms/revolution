@@ -146,7 +146,7 @@ MODx.window.UpdatePluginEvent = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'statictextfield'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,submitValue: true
         },{
             xtype: 'modx-grid-plugin-event-assoc'
@@ -301,7 +301,7 @@ MODx.window.AddPluginToEvent = function(config) {
             ,fieldLabel: _('plugin')
             ,name: 'plugin'
             ,id: 'modx-'+this.ident+'-plugin'
-            ,anchor: '95%'
+            ,anchor: '100%'
         },{
             xtype: 'numberfield'
             ,name: 'priority'

@@ -121,13 +121,13 @@ MODx.window.CreateContext = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('context_key')
             ,name: 'key'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,maxLength: 100
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,grow: true
         }]
     });

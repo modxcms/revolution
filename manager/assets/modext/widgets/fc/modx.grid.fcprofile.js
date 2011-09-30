@@ -328,14 +328,14 @@ MODx.window.CreateFCProfile = function(config) {
             ,fieldLabel: _('name')
             ,id: 'modx-fccp-name'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
 
         },{
             xtype: 'textarea'
             ,name: 'description'
             ,fieldLabel: _('description')
             ,id: 'modx-fccp-description'
-            ,anchor: '90%'
+            ,anchor: '100%'
 
         },{
             xtype: 'xcheckbox'
@@ -345,7 +345,7 @@ MODx.window.CreateFCProfile = function(config) {
             ,inputValue: 1
             ,value: 1
             ,checked: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateFCProfile.superclass.constructor.call(this,config);

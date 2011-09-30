@@ -355,7 +355,6 @@ MODx.combo.ContentDisposition = function(config) {
         })
         ,name: 'content_dispo'
         ,hiddenName: 'content_dispo'
-        ,width: 200
         ,displayField: 'd'
         ,valueField: 'v'
         ,mode: 'local'

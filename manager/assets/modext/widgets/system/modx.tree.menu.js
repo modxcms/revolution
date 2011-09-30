@@ -138,42 +138,42 @@ MODx.window.CreateMenu = function(config) {
             ,name: 'text'
             ,xtype: 'textfield'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,xtype: 'textfield'
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('action')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
             ,id: 'modx-cmen-action'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('icon')
             ,name: 'icon'
             ,xtype: 'textfield'
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('parameters')
             ,name: 'params'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('handler')
             ,name: 'handler'
             ,xtype: 'textarea'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,grow: false
         },{
             fieldLabel: _('permissions')
             ,name: 'permissions'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateMenu.superclass.constructor.call(this,config);
@@ -209,13 +209,13 @@ MODx.window.UpdateMenu = function(config) {
             ,name: 'new_text'
             ,xtype: 'textfield'
             ,allowBlank: false
-            ,width: 200
+            ,anchor: '100%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,xtype: 'textfield'
             ,allowBlank: true
-            ,width: 200
+            ,anchor: '100%'
         },{
             fieldLabel: _('action')
             ,name: 'action_id'
@@ -227,23 +227,23 @@ MODx.window.UpdateMenu = function(config) {
             ,name: 'icon'
             ,xtype: 'textfield'
             ,allowBlank: true
-            ,width: 200
+            ,anchor: '100%'
         },{
             fieldLabel: _('parameters')
             ,name: 'params'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '100%'
         },{
             fieldLabel: _('handler')
             ,name: 'handler'
             ,xtype: 'textarea'
-            ,width: 320
+            ,anchor: '100%'
             ,grow: false
         },{
             fieldLabel: _('permissions')
             ,name: 'permissions'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateMenu.superclass.constructor.call(this,config);

@@ -384,14 +384,14 @@ MODx.window.AddTabToSet = function(config) {
             ,fieldLabel: _('tab_id')
             ,id: 'modx-fcatab-id'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('tab_title')
             ,name: 'value'
             ,id: 'modx-fcatab-name'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.AddTabToSet.superclass.constructor.call(this,config);
