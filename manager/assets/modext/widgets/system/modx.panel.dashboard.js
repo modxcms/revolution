@@ -270,6 +270,7 @@ MODx.window.DashboardWidgetPlace = function(config) {
             ,id: 'modx-'+this.ident+'-widget'
             ,allowBlank: false
             ,msgTarget: 'under'
+            ,anchor: '100%'
         }]
     });
     MODx.window.DashboardWidgetPlace.superclass.constructor.call(this,config);
@@ -418,7 +419,7 @@ MODx.combo.DashboardWidgets = function(config) {
     Ext.applyIf(config,{
         name: 'widget'
         ,hiddenName: 'widget'
-        ,displayField: 'name'
+        ,displayField: 'name_trans'
         ,valueField: 'id'
         ,fields: ['id','name','name_trans','description','description_trans']
         ,listWidth: 400
