@@ -21,9 +21,20 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
-<model package="modx.sources" baseClass="xPDOObject" platform="sqlsrv" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="sources" version="1.1">
+<model package="modx.sources" baseClass="xPDOObject" platform="sqlsrv" phpdoc-package="modx" phpdoc-subpackage="sources" version="1.1">
 
-    <object class="modMediaSource" table="media_sources" extends="xPDOSimpleObject">
+    <object class="modAccessMediaSource" table="access_media_source" extends="modAccess">
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
+
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Target" class="sources.modMediaSource" local="target" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="modMediaSource" table="media_sources" extends="modAccessibleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index"/>
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="true" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="sources.modFileMediaSource" index="index" />
