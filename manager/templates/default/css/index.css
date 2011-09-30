@@ -254,15 +254,6 @@ h2 {
     padding-bottom: 4px;
 }
 
-.modx-window h2 {
-    color: #5e5e5e;
-    margin: 0 0 11px;
-    font: bold 18px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
-    padding: 8px 15px;
-    border-bottom: 1px solid #D6DFC3;
-    text-shadow: 0 1px 1px #FFFFFF;
-}
-
 h3 {
     margin: 0 0 8px;
     font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
@@ -329,12 +320,6 @@ textarea.x-form-field {
 
 /* windows */
 .x-form-check-wrap { height: auto !important; }
-/* Should be in form fields def. */
-.modx-window .x-form-text, .modx-window .x-form.textarea { 
-	height: 20px !important; 
-	padding: 5px;
-	font-size: 13px; 
-}
 
 /* grids */
 .x-small-editor .x-form-field {
