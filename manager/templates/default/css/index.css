@@ -237,8 +237,9 @@ hr {
 }
 
 h2 {
-    color:#5e5e5e;
-    font: bold 22px helvetica,arial,freesans,clean,sans-serif;
+    color: #5E5E5E;
+    font: bold 25px helvetica,arial,freesans,clean,sans-serif;
+    letter-spacing: -1px;
     margin: 22px 0 16px;
 }
 

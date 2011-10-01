@@ -831,12 +831,17 @@ ul.x-tab-strip-bottom {
 }
 
 .x-grid3 {
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    background: url("../images/modx-theme/grid/grid3-hd-bg.png") repeat-x scroll left -25px #666;
-    border:1px solid #666666;
-    padding:0 2px 2px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	-o-border-radius:3px;
+	-ms-border-radius:3px;
+	-khtml-border-radius:3px;
+	border--radius:3px;
+	border:1px solid #666;
+	background-image:none;
+	background-color:transparent;
+	padding:0;
+	overflow: hidden;
 }
 
 .x-grid-panel .x-panel-mc .x-panel-body {
@@ -844,7 +849,7 @@ ul.x-tab-strip-bottom {
 }
 
 .x-grid3-hd-row td, .x-grid3-row td, .x-grid3-summary-row td{
-	font:normal 11px arial, tahoma, helvetica, sans-serif;
+	font:normal 12px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-grid3-row td, .x-grid3-summary-row td  {
@@ -927,7 +932,16 @@ ul.x-tab-strip-bottom {
 }
 
 .x-panel-body-noheader .x-grid3-header{
+	background:#606060;
+	background:-moz-linear-gradient(center bottom,#606060 0%,#808080 100%) repeat scroll 0 0 transparent;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#808080),color-stop(100%,#606060));
+	background:-webkit-linear-gradient(center bottom,#606060 0%,#808080 100%);
+	background:-o-linear-gradient(center bottom,#606060 0%,#808080 100%);
+	background:-ms-linear-gradient(center bottom,#606060 0%,#808080 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#808080,endColorstr=#606060,GradientType=0);
+	background:linear-gradient(center bottom,#606060 0%,#808080 100%);
 	border:0 none;
+	border-bottom:1px solid #333;
 }
 
 .x-grid3-header-offset  {
@@ -936,7 +950,7 @@ ul.x-tab-strip-bottom {
 
 .x-grid3-header .x-grid3-hd-row td {
 	color:#F0F0F0;
-	text-shadow:0 1px 0 #363636;
+	text-shadow:0 -1px 0 #363636;
 }
 
 .x-grid3-header-pop {
@@ -954,8 +968,14 @@ td.x-grid3-hd-over, td.sort-desc, td.sort-asc, td.x-grid3-hd-menu-open {
 }
 
 td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-asc .x-grid3-hd-inner, td.x-grid3-hd-menu-open .x-grid3-hd-inner {
-    background-color:#e1e1e1;
-    background: url("../images/modx-theme/grid/grid3-hd-bg.png") repeat-x scroll left -5px #DFDFDF;
+    background:#777;
+	background:-moz-linear-gradient(center bottom,#777 0%,#8E8E8E 100%) repeat scroll 0 0 transparent;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#8E8E8E),color-stop(100%,#777));
+	background:-webkit-linear-gradient(center bottom,#777 0%,#8E8E8E 100%);
+	background:-o-linear-gradient(center bottom,#777 0%,#8E8E8E 100%);
+	background:-ms-linear-gradient(center bottom,#777 0%,#8E8E8E 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#8E8E8E,endColorstr=#777,GradientType=0);
+	background:linear-gradient(center bottom,#777 0%,#8E8E8E 100%);
 }
 
 .sort-asc .x-grid3-sort-icon {
@@ -1056,7 +1076,6 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-hd-inner  {
 	font-weight:bold;
 	padding:7px 18px 7px 5px !important;
-	text-transform:uppercase;
 }
 
 .x-grid3-cell-inner, .x-grid3-hd-inner  {
