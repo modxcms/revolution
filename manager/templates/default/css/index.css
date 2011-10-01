@@ -52,39 +52,34 @@ hr {
     padding-bottom: 10px;
 }
 
-#modx-leftbar .x-tab-panel-noborder{
-    -moz-border-radius:5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    /*border:1px solid #E4E4E4;*/
-    margin:15px 0 10px 10px;
-    padding:8px 6px;
-    background-color: #666;
-    border:1px solid #666;
+#modx-leftbar .x-tab-panel-noborder {
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: none repeat scroll 0 0 #666;
+    border: 6px solid #666666;
+    margin: 5px 0 10px 10px;
+    padding: 0;
 }
 
-
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-    -moz-border-radius:0 0 4px 4px;
-    -webkit-border-radius:0 0 4px 4px;
-    border-radius:0 0 4px 4px;
+    -moz-border-radius:0 0 2px 2px;
+    -webkit-border-radius:0 0 2px 2px;
+    border-radius:0 0 2px 2px;
     padding-bottom: 5px;
     background-color: #EFEFEF;
 }
 
 #modx-leftbar .x-tab-strip-active{
-    background-color:#EFEFEF;
-    border-color:#EFEFEF;
+    background-color: #EFEFEF !important;
+    border-color: #EFEFEF !important;
 }
 
-#modx-leftbar .x-tab-strip-active .x-tab-right span.x-tab-strip-text{
-    color:#5E5E5E;
-    text-shadow:none;
-}
+#modx-leftbar ul.x-tab-strip-top span.x-tab-strip-text{}
 
-#modx-leftbar .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer  {
-     background-color:#EFEFEF;
-     border-color:#EFEFEF;
+#modx-leftbar .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer  { 
+	background-color: #EFEFEF;
+    border-style: solid none none;
 }
 
 #modx-leftbar .x-tree .x-panel-body{
@@ -96,9 +91,12 @@ hr {
     -moz-border-radius:0 0 3px 3px;
     -webkit-border-radius:0 0 3px 3px;
     border-radius:0 0 3px 3px;
-    background-color:#F0F0F0;
-    padding:3px;
+	background-color: #EFEFEF;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 6px;
 }
+
+#modx-leftbar ul.x-tab-strip-top li {}
 
 /* Collapse tree panel */
 #modx-leftbar .x-layout-split-west .x-layout-mini {
@@ -130,9 +128,7 @@ hr {
 }
 
 /* leftbar tabs */
-#modx-leftbar .x-tab-panel-header-plain .x-tab-strip-top  {
-    border:0 none;
-}
+#modx-leftbar .x-tab-panel-header-plain .x-tab-strip-top  {}
 #modx-leftbar .x-tree .x-panel-body {
     background-color:transparent;
     border-color:#FAFAFA;
@@ -144,13 +140,11 @@ hr {
     background-color: transparent;
 }
 #modx-leftbar .x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
-    background-color:#EAEAEA;
-    border-bottom-color:#E4E4E4;
-    border-top:1px solid #E4E4E4;
-    padding:5px;
+    border-bottom-color:#DFDFDF;
+    padding:4px 5px 5px;
 }
 #modx-leftbar .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text {
-	color:#5E5E5E;
+	color: #666666;
 	text-shadow:0 1px 0 #FAFAFA;
 }
 
@@ -160,11 +154,6 @@ hr {
 }
 .modx-leftbar-panel {
     margin-top: 7px;
-}
-
-.modx-leftbar ul.x-tab-strip li.x-tab-strip-active {
-    background-color: #EFEFEF;
-    border-color: #EFEFEF;
 }
 
 .modx-leftbar  .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer{
@@ -249,9 +238,8 @@ hr {
 
 h2 {
     color:#5e5e5e;
-    font: normal 22px/normal Helvetica, Tahoma, Arial, Helvetica, sans-serif;
-    margin:15px 0 5px;
-    padding-bottom: 4px;
+    font: bold 22px helvetica,arial,freesans,clean,sans-serif;
+    margin: 22px 0 16px;
 }
 
 h3 {
@@ -340,7 +328,7 @@ textarea.x-form-field {
     padding:5px;
     position:fixed;
     right:20px;
-    top:90px;
+    top:95px;
     z-index:12;
     zoom: 1;
 }
@@ -1293,7 +1281,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 /* media sources */
 .modx-leftbar-second-tb {
 	padding: 6px;
-	border-bottom: 1px solid #E4E4E4;
+	border-bottom: 1px solid #DFDFDF;
     border-top: 1px solid #FAFAFA;
 }
 
@@ -1306,7 +1294,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	background-color: #F7F7F7;
     border-bottom: 1px solid #E7E7E7 !important;
     border-top: 1px solid #E7E7E7 !important;
-    color: #6a6a6a;
+    color: #6A6A6A;
     line-height: 1.5;
     padding: 15px !important; 
 } 
