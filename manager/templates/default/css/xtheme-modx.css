@@ -157,7 +157,7 @@ ul.x-tab-strip-top li.x-tab-strip-active {
 ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text {
 	color:#FFF;
 	text-shadow:0 1px 0 #dee1e6;
-	font-weight:bold;
+
 	background-color:transparent;
 	padding-bottom:8px !important;
 }
@@ -179,7 +179,6 @@ ul.x-tab-strip-top .x-tab-right, ul.x-tab-strip-top .x-tab-left, ul.x-tab-strip-
 }
 ul.x-tab-strip-top span.x-tab-strip-text {
 	color: #FFFFFF;
-    font-weight: bold;
     padding: 4px 0 5px;
     text-shadow: 0 -1px 0 #3D5F00;
 }
