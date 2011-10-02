@@ -47,6 +47,7 @@ $_lang['tv_output_options_msg'] = '<p>Hier können Sie die Ausgabe-Optionen für
 $_lang['tv_properties'] = 'Standardeigenschaften';
 $_lang['tv_rank'] = 'Sortierreihenfolge';
 $_lang['tv_reset_params'] = 'Parameter zurücksetzen';
+$_lang['tv_sources.intro_msg'] = 'Hier können Sie die Medienquellen, die für diese TV genutzt werden sollen, für jeden (den jeweils?) angegebenen Kontext zuordnen. Klicken Sie in der Übersicht doppelt auf den Quellen-Namen, um die Zuordnung zu ändern.';
 $_lang['tv_tmpl_access'] = 'Template-Zugriff';
 $_lang['tv_tmpl_access_msg'] = 'Wählen Sie die Templates, die auf diese Template-Variable zugreifen dürfen.';
 $_lang['tv_widget'] = 'Widget';
