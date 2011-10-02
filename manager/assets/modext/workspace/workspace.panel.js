@@ -21,6 +21,7 @@ MODx.panel.Workspace = function(config) {
                 xtype: 'modx-grid-package'
                 ,id: 'modx-grid-package'
                 ,cls: 'main-wrapper'
+				,bodyCssClass: 'grid-with-buttons'
                 ,preventRender: true
             }]
         },{
