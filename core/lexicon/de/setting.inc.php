@@ -85,6 +85,9 @@ $_lang['setting_access_policies_version_desc'] = 'Die Version des Zugriffs-Richt
 $_lang['setting_allow_forward_across_contexts'] = 'Weiterleitungen in andere Kontexte erlauben';
 $_lang['setting_allow_forward_across_contexts_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, können Symlinks und modX::sendForward()-API-Aufrufe Requests zu Ressourcen in anderen Kontexten weiterleiten.';
 
+$_lang['setting_allow_manager_login_forgot_password'] = 'Passwort-vergessen-Funktion auf Manager-Login-Seite zulassen';
+$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird die Möglichkeit, sich ein neues Passwort zuschicken zu lassen, wenn man das bisherige vergessen hat, auf der Login-Seite des Managers deaktiviert.';
+
 $_lang['setting_allow_tags_in_post'] = 'HTML-Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, können POST-Requests HTML-Formular-Tags enthalten.';
 
@@ -193,6 +196,9 @@ $_lang['setting_context_tree_sortdir_desc'] = 'Gibt an, ob Kontexte im Ressource
 $_lang['setting_cultureKey'] = 'Sprache';
 $_lang['setting_cultureKey_desc'] = 'Wählen Sie die Sprache für alle Nicht-Manager-Kontexte, einschließlich des Kontexts "web".';
 
+$_lang['setting_default_content_type'] = 'Standard-Inhaltstyp';
+$_lang['setting_default_content_type_desc'] = 'Wählen Sie den Standard-Inhaltstyp, den Sie für neue Ressourcen verwenden möchten. Sie können weiterhin einen anderen Inhaltstyp im Ressourcen-Editor auswählen; mit dieser Einstellung treffen Sie nur eine Vorauswahl für einen der Inhaltstypen.';
+
 // $_lang['setting_custom_resource_classes'] = 'Eigene Ressourcen-Klassen';
 // $_lang['setting_custom_resource_classes_desc'] = 'Eine kommaseparierte Liste von eigenen Ressourcen-Klassen. Geben Sie diese in der Form kleingeschriebener_lexikon_schluessel:klassenName an (Beispiel: wiki_resource:WikiResource). Alle eigenen Ressourcen-Klassen müssen modResource erweitern. Um die Controller-Position für jede Klasse anzugeben, fügen Sie eine Einstellung mit [kleingeschriebenerKlassenName]_delegate_path mit dem Verzeichnispfad der PHP-Dateien create.php/update.php an. Beispiel: wikiresource_delegate_path für eine Klasse namens WikiResource, die modResource erweitert.';
 
@@ -244,17 +250,17 @@ $_lang['setting_feed_modx_security_desc'] = 'Geben Sie die URL des RSS-Feeds fü
 $_lang['setting_feed_modx_security_enabled'] = 'MODX-Sicherheitshinweise-Feed aktiviert';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, wird der Sicherheitshinweise-Feed auf der Startseite des Managers nicht angezeigt.';
 
-$_lang['setting_filemanager_path'] = 'Dateimanager-Pfad';
-$_lang['setting_filemanager_path_desc'] = 'IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODX-Installation zeigt.';
+$_lang['setting_filemanager_path'] = 'Dateimanager-Pfad (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_path_desc'] = 'Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODX-Installation zeigt.';
 
-$_lang['setting_filemanager_path_relative'] = 'Ist der Dateimanager-Pfad relativ?';
-$_lang['setting_filemanager_path_relative_desc'] = 'Wenn Ihre "filemanager_path"-Einstellung relativ zum MODX-"base_path" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihr "filemanager_path" außerhalb des Document-Roots liegt, setzen Sie sie auf "Nein".';
+$_lang['setting_filemanager_path_relative'] = 'Ist der Dateimanager-Pfad relativ? (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_path_relative_desc'] = 'Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_path"-Einstellung relativ zum MODX-"base_path" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihr "filemanager_path" außerhalb des Document-Roots liegt, setzen Sie sie auf "Nein".';
 
-$_lang['setting_filemanager_url'] = 'Dateimanager-URL';
-$_lang['setting_filemanager_url_desc'] = 'Optional. Verwenden Sie diese Option, wenn Sie eine bestimmte URL angeben möchten, von der aus Sie auf die Dateien im MODX-Dateimanager zuzugreifen (hilfreich, wenn Sie den Dateimanager-Pfad auf einen Pfad außerhalb des MODX-Webroots gesetzt haben). Stellen Sie sicher, dass dies die über das Web erreichbare URL der Dateimanager-Pfad-Einstellung ist. Falls diese Einstellung leer gelassen wird, versucht MODX, sie selbst zu erkennen.';
+$_lang['setting_filemanager_url'] = 'Dateimanager-URL (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_url_desc'] = 'Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Optional. Verwenden Sie diese Option, wenn Sie eine bestimmte URL angeben möchten, von der aus Sie auf die Dateien im MODX-Dateimanager zuzugreifen (hilfreich, wenn Sie den Dateimanager-Pfad auf einen Pfad außerhalb des MODX-Webroots gesetzt haben). Stellen Sie sicher, dass dies die über das Web erreichbare URL der Dateimanager-Pfad-Einstellung ist. Falls diese Einstellung leer gelassen wird, versucht MODX, sie selbst zu erkennen.';
 
-$_lang['setting_filemanager_url_relative'] = 'Ist die Dateimanager-URL relativ?';
-$_lang['setting_filemanager_url_relative_desc'] = 'Wenn Ihre "filemanager_url"-Einstellung relativ zur MODX-"base_url" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihre "filemanager_url" außerhalb des Webroots liegt, setzen Sie sie auf "Nein".';
+$_lang['setting_filemanager_url_relative'] = 'Ist die Dateimanager-URL relativ? (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_url_relative_desc'] = 'Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_url"-Einstellung relativ zur MODX-"base_url" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihre "filemanager_url" außerhalb des Webroots liegt, setzen Sie sie auf "Nein".';
 
 $_lang['setting_forgot_login_email'] = 'Login-vergessen-Mail';
 $_lang['setting_forgot_login_email_desc'] = 'Das Template für die Mail, die User erhalten, die ihren MODX-Benutzernamen und/oder ihr Passwort vergessen haben.';
@@ -311,6 +317,9 @@ $_lang['setting_hidemenu_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Res
 $_lang['setting_link_tag_scheme'] = 'URL-Generierungs-Schema';
 $_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [[~id]]. Mögliche Optionen: siehe <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
 
+$_lang['setting_locale'] = 'Locale';
+$_lang['setting_locale_desc'] = 'Setzen Sie die Locale-Einstellung für das System. Lassen Sie das Feld leer, wenn die Standardeinstellung verwendet werden soll. Konsultieren Sie <a href="http://de.php.net/setlocale" target="_blank">die PHP-Dokumentation</a>, wenn Sie weitere Informationen benötigen.';
+
 $_lang['setting_mail_charset'] = 'E-Mail-Zeichensatz';
 $_lang['setting_mail_charset_desc'] = 'Legt den Standard-Zeichensatz (charset) für E-Mails fest, z.B. "iso-8859-1" oder "utf-8"';
 
@@ -358,6 +367,9 @@ $_lang['setting_manager_date_format_desc'] = 'Das Format für Datumsangaben im M
 
 $_lang['setting_manager_favicon_url'] = 'Manager-Favicon-URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Wenn hier etwas eingegeben wird, wird diese URL als favicon für den MODX-Manager geladen. Es muss eine zum Verzeichnis manager/ relative URL oder eine absolute URL eingegeben werden.';
+
+$_lang['setting_manager_html5_cache'] = 'Verwende lokalen HTML5-Cache im Manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Aktiviere lokales HTML5-Caching für den Manager. Die Benutzung wird nur empfohlen, wenn der Manager mit Hilfe von modernen Browsern bedient wird.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Datei-Sperrung für den Manager-JS/CSS-Cache aktivieren';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache-Datei-Sperrung. Setzen Sie diese Einstellung auf "Nein", wenn das Dateisystem NFS ist.';
@@ -501,6 +513,9 @@ $_lang['setting_rb_base_url_err'] = 'Bitte geben Sie die Basis-URL für den Ress
 
 $_lang['setting_request_controller'] = 'Dateiname des Request-Controllers';
 $_lang['setting_request_controller_desc'] = 'Der Dateiname des Haupt-Request-Controllers, von dem aus MODX geladen wird. Die meisten Benutzer können hier "index.php" eingestellt lassen.';
+
+$_lang['setting_request_method_strict'] = 'Strikte Request-Methode';
+$_lang['setting_request_method_strict_desc'] = 'Wenn diese Option aktiviert ist, werden Requests über den Request-ID-Parameter ignoriert, wenn suchmaschinenfreundliche URLs verwendet werden, und Requests über den Request-Alias-Parameter werden ignoriert, wenn suchmaschinenfreundliche URLs nicht aktiviert sind.';
 
 $_lang['setting_request_param_alias'] = 'Request-Alias-Parameter';
 $_lang['setting_request_param_alias_desc'] = 'Der Name des GET-Parameters für Ressourcen-Aliasse, wenn eine Weiterleitung mittels suchmaschinenfreundlicher URLs stattfindet.';
