@@ -184,7 +184,7 @@ Ext.extend(MODx,Ext.Component,{
     ,getPageStructure: function(v,c) {
         c = c || {};
         if (MODx.config.manager_use_tabs) {
-            Ext.applyIf(c,{xtype: 'modx-tabs',itemId: 'tabs' ,style: 'margin-top: .5em;',items: v});
+            Ext.applyIf(c,{xtype: 'modx-tabs',itemId: 'tabs' ,items: v});
         } else {
             Ext.applyIf(c,{xtype:'portal',itemId: 'tabs' ,items:[{columnWidth:1,items: v,forceLayout: true}]});
         }
