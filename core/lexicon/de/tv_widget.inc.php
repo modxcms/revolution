@@ -64,6 +64,7 @@ $_lang['image'] = 'Bild';
 $_lang['image_align'] = 'Ausrichtung';
 $_lang['image_align_list'] = 'none,baseline,top,middle,bottom,texttop,absmiddle,absbottom,left,right';
 $_lang['image_alt'] = 'Alternativtext';
+/*
 $_lang['image_allowedfiletypes'] = 'Erlaubte Dateiendungen';
 $_lang['image_allowedfiletypes_desc'] = 'Wenn hier etwas eingegeben wird, wird die Anzeige der Dateien auf die angegebenen Dateiendungen beschränkt. Bitte verwenden Sie eine kommaseparierte Liste; die Dateiendungen müssen ohne den führenden Punkt eingegeben werden.';
 $_lang['image_basepath'] = 'Basispfad';
@@ -76,6 +77,7 @@ $_lang['image_baseurl_prepend_check_slash'] = 'URL voranstellen, wenn kein führ
 $_lang['image_baseurl_prepend_check_slash_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, stellt MODX Dateipfaden die baseUrl nur voran, wenn kein Slash (/) am Anfang der URL gefunden wird, wenn die Template-Variable verarbeitet wird. Dies ist nützlich, um in einer TV einen Pfad außerhalb der baseUrl verwenden zu können.';
 $_lang['image_baseurl_relative'] = 'Basis-URL ist relativ';
 $_lang['image_baseurl_relative_desc'] = 'Wenn die oben angegebene Basis-URL nicht relativ zur URL ist, unter der MODX-Installation aufgerufen werden kann, setzen Sie diese Einstellung auf "Ja".';
+*/
 $_lang['image_border_size'] = 'Rahmenbreite';
 $_lang['image_hspace'] = 'Horizontaler Abstand';
 $_lang['image_vspace'] = 'Vertikaler Abstand';
