@@ -1378,7 +1378,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	background:-ms-linear-gradient(center bottom,#e0e0e0 0%,#fcfcfc 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#e0e0e0,GradientType=0);
 	background:linear-gradient(center bottom,#e0e0e0 0%,#fcfcfc 100%);
-	color:#5b7a98;
+	color:#565550;
 }
 .actions a:active {
 	-moz-box-shadow:0 0 3px #aaaaaa inset;
