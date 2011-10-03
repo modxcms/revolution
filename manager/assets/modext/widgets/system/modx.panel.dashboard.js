@@ -31,11 +31,11 @@ MODx.panel.Dashboard = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-                ,cls: 'main-wrapper'
-                ,defaults: { border: false ,msgTarget: 'side' }
+                ,cls: 'main-wrapper form-with-labels'
+                ,defaults: { border: false }
                 ,layout: 'form'
                 ,id: 'modx-dashboard-form'
-                ,labelWidth: 150
+                ,labelAlign: 'top'
                 ,items: [{
                     xtype: 'hidden'
                     ,name: 'id'
@@ -46,6 +46,7 @@ MODx.panel.Dashboard = function(config) {
                     ,id: 'modx-dashboard-name'
                     ,xtype: 'textfield'
                     ,fieldLabel: _('name')
+                    ,description: MODx.expandHelp ? '' : _('dashboard_desc_name')
                     ,allowBlank: false
                     ,enableKeyEvents: true
                     ,anchor: '100%'
@@ -55,12 +56,23 @@ MODx.panel.Dashboard = function(config) {
                         }}
                     }
                 },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-name'
+                    ,html: _('dashboard_desc_name')
+                    ,cls: 'desc-under'
+                },{
                     name: 'description'
                     ,id: 'modx-dashboard-description'
                     ,xtype: 'textarea'
                     ,fieldLabel: _('description')
+                    ,description: MODx.expandHelp ? '' : _('dashboard_desc_description')
                     ,anchor: '100%'
                     ,grow: true
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-description'
+                    ,html: _('dashboard_desc_description')
+                    ,cls: 'desc-under'
                 },{
                     html: '<hr />'
                     ,border: false

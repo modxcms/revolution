@@ -9,6 +9,8 @@
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Add Dashboard';
 $_lang['dashboard_create'] = 'Create Dashboard';
+$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
+$_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
 $_lang['dashboard_duplicate'] = 'Duplicate Dashboard';
 $_lang['dashboard_remove'] = 'Delete Dashboard';
 $_lang['dashboard_remove_confirm'] = 'Are you sure you want to remove this Dashboard?';

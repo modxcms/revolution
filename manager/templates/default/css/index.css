@@ -1443,3 +1443,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 span.required {
     color: #777;
 }
+.desc-trans {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    color: #444 !important;
+}

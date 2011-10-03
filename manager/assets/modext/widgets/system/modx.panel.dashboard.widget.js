@@ -4,102 +4,164 @@ MODx.panel.DashboardWidget = function(config) {
     var itms = [];
     itms.push({
         title: _('general_information')
-        ,cls: 'main-wrapper'
+        ,cls: 'container form-with-labels'
         ,border: false
         ,defaults: { border: false ,msgTarget: 'side' }
         ,layout: 'form'
         ,id: 'modx-dashboard-widget-form'
-        ,labelWidth: 150
+        ,labelAlign: 'top'
         ,items: [{
-            xtype: 'hidden'
-            ,name: 'id'
-            ,fieldLabel: _('id')
-            ,id: 'modx-dashboard-widget-id'
-            ,value: config.record.id
-        },{
-            name: 'name'
-            ,id: 'modx-dashboard-widget-name'
-            ,xtype: 'textfield'
-            ,fieldLabel: _('name')
-            ,description: _('widget_name_desc')
-            ,allowBlank: false
-            ,enableKeyEvents: true
-            ,anchor: '97%'
-            ,listeners: {
-                'keyup': {scope:this,fn:function(f,e) {
-                    var s = _(f.getValue());
-                    if (s == undefined) { s = f.getValue(); }
-                    Ext.getCmp('modx-dashboard-widget-name-trans').setValue(s);
-                    if (!Ext.isEmpty(s)) {
-                        Ext.getCmp('modx-dashboard-widget-header').getEl().update('<h2>'+_('widget')+': '+s+'</h2>');
+            layout: 'column'
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
+                ,cls:'main-wrapper'
+                ,labelSeparator: ''
+            }
+            ,items: [{
+                columnWidth: .6
+                ,items: [{
+                    xtype: 'hidden'
+                    ,name: 'id'
+                    ,fieldLabel: _('id')
+                    ,id: 'modx-dashboard-widget-id'
+                    ,value: config.record.id
+                },{
+                    name: 'name'
+                    ,id: 'modx-dashboard-widget-name'
+                    ,xtype: 'textfield'
+                    ,fieldLabel: _('name')
+                    ,description: _('widget_name_desc')
+                    ,allowBlank: false
+                    ,enableKeyEvents: true
+                    ,anchor: '100%'
+                    ,listeners: {
+                        'keyup': {scope:this,fn:function(f,e) {
+                            var s = _(f.getValue());
+                            if (s == undefined) { s = f.getValue(); }
+                            Ext.getCmp('modx-dashboard-widget-name-trans').setValue(s);
+                            if (!Ext.isEmpty(s)) {
+                                Ext.getCmp('modx-dashboard-widget-header').getEl().update('<h2>'+_('widget')+': '+s+'</h2>');
+                            }
+                        }}
                     }
-                }}
-            }
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-widget-name'
+                    ,html: _('widget_name_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'displayfield'
+                    ,hideLabel: true
+                    ,name: 'name_trans'
+                    ,cls: 'desc-under desc-trans'
+                    ,id: 'modx-dashboard-widget-name-trans'
+                },{
+                    name: 'description'
+                    ,id: 'modx-dashboard-widget-description'
+                    ,xtype: 'textarea'
+                    ,fieldLabel: _('description')
+                    ,description: _('widget_description_desc')
+                    ,anchor: '100%'
+                    ,enableKeyEvents: true
+                    ,listeners: {
+                        'keyup': {scope:this,fn:function(f,e) {
+                            var s = _(f.getValue());
+                            if (s == undefined) { s = f.getValue(); }
+                            Ext.getCmp('modx-dashboard-widget-description-trans').setValue(s);
+                        }}
+                    }
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-widget-description'
+                    ,html: _('widget_description_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'displayfield'
+                    ,hideLabel: true
+                    ,name: 'description_trans'
+                    ,cls: 'desc-under desc-trans'
+                    ,id: 'modx-dashboard-widget-description-trans'
+                },{
+                    xtype: 'modx-combo-dashboard-widget-type'
+                    ,id: 'modx-dashboard-widget-type'
+                    ,name: 'type'
+                    ,hiddenName: 'type'
+                    ,fieldLabel: _('widget_type')
+                    ,description: _('widget_type_desc')
+                    ,anchor: '100%'
+                    ,value: 'html'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-widget-type'
+                    ,html: _('widget_type_desc')
+                    ,cls: 'desc-under'
+                }]
+            },{
+                columnWidth: .4
+                ,items: [{
+                    xtype: 'modx-combo-dashboard-widget-size'
+                    ,name: 'size'
+                    ,hiddenName: 'size'
+                    ,id: 'modx-dashboard-widget-size'
+                    ,fieldLabel: _('widget_size')
+                    ,description: _('widget_size_desc')
+                    ,anchor: '100%'
+                    ,value: 'half'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-widget-size'
+                    ,html: _('widget_size_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'modx-combo-namespace'
+                    ,name: 'namespace'
+                    ,hiddenName: 'namespace'
+                    ,id: 'modx-dashboard-widget-namespace'
+                    ,fieldLabel: _('widget_namespace')
+                    ,description: _('widget_namespace_desc')
+                    ,anchor: '100%'
+                    ,value: 'core'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-widget-namespace'
+                    ,html: _('widget_namespace_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'lexicon'
+                    ,hiddenName: 'lexicon'
+                    ,id: 'modx-dashboard-widget-lexicon'
+                    ,fieldLabel: _('lexicon')
+                    ,description: _('widget_lexicon_desc')
+                    ,anchor: '100%'
+                    ,value: 'core:dashboards'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-widget-lexicon'
+                    ,html: _('widget_lexicon_desc')
+                    ,cls: 'desc-under'
+                }]
+            }]
         },{
-            xtype: 'displayfield'
-            ,name: 'name_trans'
-            ,id: 'modx-dashboard-widget-name-trans'
-        },{
-            name: 'description'
-            ,id: 'modx-dashboard-widget-description'
-            ,xtype: 'textfield'
-            ,fieldLabel: _('description')
-            ,description: _('widget_description_desc')
-            ,anchor: '97%'
-            ,enableKeyEvents: true
-            ,listeners: {
-                'keyup': {scope:this,fn:function(f,e) {
-                    var s = _(f.getValue());
-                    if (s == undefined) { s = f.getValue(); }
-                    Ext.getCmp('modx-dashboard-widget-description-trans').setValue(s);
-                }}
-            }
-        },{
-            xtype: 'displayfield'
-            ,name: 'description_trans'
-            ,id: 'modx-dashboard-widget-description-trans'
-        },{
-            xtype: 'modx-combo-dashboard-widget-type'
-            ,name: 'type'
-            ,hiddenName: 'type'
-            ,fieldLabel: _('widget_type')
-            ,description: _('widget_type_desc')
-            ,anchor: '97%'
-            ,value: 'html'
-        },{
-            xtype: 'modx-combo-dashboard-widget-size'
-            ,name: 'size'
-            ,hiddenName: 'size'
-            ,fieldLabel: _('widget_size')
-            ,description: _('widget_size_desc')
-            ,anchor: '97%'
-            ,value: 'half'
-        },{
-            xtype: 'modx-combo-namespace'
-            ,name: 'namespace'
-            ,hiddenName: 'namespace'
-            ,fieldLabel: _('widget_namespace')
-            ,description: _('widget_namespace_desc')
-            ,anchor: '97%'
-            ,value: 'core'
-        },{
-            xtype: 'textfield'
-            ,name: 'lexicon'
-            ,hiddenName: 'lexicon'
-            ,fieldLabel: _('lexicon')
-            ,description: _('widget_lexicon_desc')
-            ,anchor: '97%'
-            ,value: 'core:dashboards'
-        },{
-            html: '<hr /><h4>'+_('widget_content')+'</h4>'
+            xtype: 'panel'
             ,border: false
-        },{
-            xtype: 'textarea'
-            ,name: 'content'
-            ,hideLabel: true
-            ,anchor: '97%'
-            ,width: '95%'
-            ,height: 400
+            ,layout: 'form'
+            ,cls:'main-wrapper'
+            ,labelAlign: 'top'
+            ,items: [{
+                html: '<h4>'+_('widget_content')+'</h4>'
+                ,border: false
+                ,anchor: '100%'
+            },{
+                xtype: 'textarea'
+                ,name: 'content'
+                ,hideLabel: true
+                ,anchor: '100%'
+                ,height: 400
+            }]
         }]
     });
     if (!Ext.isEmpty(config.record.id)) {
