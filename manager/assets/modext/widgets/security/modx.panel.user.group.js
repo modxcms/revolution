@@ -2,7 +2,7 @@ MODx.panel.UserGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-user-group'
-		,cls: 'container'
+		,cls: 'container form-with-labels'
         ,url: MODx.config.connectors_url+'security/group.php'
         ,baseParams: {
             action: 'update'
@@ -33,8 +33,9 @@ MODx.panel.UserGroup = function(config) {
                 title: _('general_information')
                 ,defaults: { border: false ,msgTarget: 'side' }
                 ,layout: 'form'
-                ,id: 'modx-chunk-form'
-                ,labelWidth: 150				
+                ,id: 'modx-usergroup-form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
                 ,items: [{				
 					html: '<p>'+''+'</p>'
 				},{
@@ -42,7 +43,6 @@ MODx.panel.UserGroup = function(config) {
 					,border: false
 					,cls:'main-wrapper'
 					,layout: 'form'
-					// ,labelAlign: 'top'
 					,items: [{
 						xtype: 'hidden'
 						,name: 'id'
@@ -52,7 +52,7 @@ MODx.panel.UserGroup = function(config) {
 						name: 'name'
 						,id: 'modx-usergroup-name'
 						,xtype: 'textfield'
-						,fieldLabel: _('name')
+						,fieldLabel: _('name')+'<span class="required">*</span>'
 						,allowBlank: false
 						,enableKeyEvents: true
 						,disabled: config.usergroup === 0
@@ -63,6 +63,11 @@ MODx.panel.UserGroup = function(config) {
 							}}
 						}
 					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-usergroup-name'
+                        ,html: _('user_group_desc_name')
+                        ,cls: 'desc-under'
+                    },{
 						name: 'description'
 						,id: 'modx-usergroup-description'
 						,xtype: 'textarea'
@@ -70,6 +75,11 @@ MODx.panel.UserGroup = function(config) {
 						,anchor: '100%'
 						,grow: true
 					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-usergroup-description'
+                        ,html: _('user_group_desc_description')
+                        ,cls: 'desc-under'
+                    },{
 						name: 'parent'
 						,hiddenName: 'parent'
 						,id: 'modx-usergroup-parent'
@@ -84,12 +94,22 @@ MODx.panel.UserGroup = function(config) {
 							,exclude: config.usergroup
 						}
 					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-usergroup-parent'
+                        ,html: _('user_group_desc_parent')
+                        ,cls: 'desc-under'
+                    },{
 						name: 'dashboard'
 						,id: 'modx-usergroup-dashboard'
 						,xtype: 'modx-combo-dashboard'
 						,fieldLabel: _('dashboard')
 						,anchor: '100%'
-					}]
+					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-usergroup-dashboard'
+                        ,html: _('user_group_desc_dashboard')
+                        ,cls: 'desc-under'
+                    }]
 				}]
             },{
                 title: _('users')

@@ -16,7 +16,7 @@ MODx.panel.AccessPolicyTemplate = function(config) {
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy-template'
-		,cls: 'container'
+		,cls: 'container form-with-labels'
         ,class_key: 'modAccessPolicyTemplate'
         ,plugin: ''
         ,bodyStyle: ''
@@ -47,15 +47,18 @@ MODx.panel.AccessPolicyTemplate = function(config) {
 					,border: false
 					,cls:'main-wrapper'
 					,layout: 'form'
-					,defaults:{ width:300 }
-					// ,labelAlign: 'top'
+					,defaults:{ anchor: '100%' }
+					,labelAlign: 'top'
+					,labelSeparator: ''
 					,items: [{
 						xtype: 'hidden'
 						,name: 'id'
 					},{
 						xtype: 'textfield'
 						,fieldLabel: _('name')
+						,description: MODx.expandHelp ? '' : _('policy_template_desc_name')
 						,name: 'name'
+						,id: 'modx-policy-template-name'
 						,maxLength: 255
 						,enableKeyEvents: true
 						,allowBlank: false
@@ -65,17 +68,38 @@ MODx.panel.AccessPolicyTemplate = function(config) {
 							}}
 						}
 					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-template-name'
+                        ,html: _('policy_template_desc_name')
+                        ,cls: 'desc-under'
+
+                    },{
 						xtype: 'textarea'
 						,fieldLabel: _('description')
+						,description: MODx.expandHelp ? '' : _('policy_template_desc_description')
 						,name: 'description'
+						,id: 'modx-policy-template-description'
 						,grow: true
 					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-template-description'
+                        ,html: _('policy_template_desc_description')
+                        ,cls: 'desc-under'
+
+                    },{
 						xtype: 'textfield'
 						,fieldLabel: _('lexicon')
+						,description: MODx.expandHelp ? '' : _('policy_template_desc_lexicon')
 						,name: 'lexicon'
+						,id: 'modx-policy-template-lexicon'
 						,allowBlank: true
 						,value: 'permissions'
-					}]
+					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-template-lexicon'
+                        ,html: _('policy_template_desc_lexicon')
+                        ,cls: 'desc-under'
+                    }]
                 },{
                     html: '<p>'+_('permissions_desc')+'</p>'
 					,bodyCssClass: 'panel-desc'

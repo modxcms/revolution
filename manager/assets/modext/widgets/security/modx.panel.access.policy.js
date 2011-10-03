@@ -14,7 +14,7 @@ MODx.panel.AccessPolicy = function(config) {
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy'
-		,cls: 'container'
+		,cls: 'container form-with-labels'
         ,class_key: 'modAccessPolicy'
         ,plugin: ''
         ,bodyStyle: ''
@@ -45,36 +45,57 @@ MODx.panel.AccessPolicy = function(config) {
 					,border: false
 					,cls:'main-wrapper'
 					,layout: 'form'
-					,defaults:{ width:300 }
-					// ,labelAlign: 'top'
+					,labelAlign: 'top'
+					,labelSeparator: ''
 					,items: [{
 						xtype: 'hidden'
 						,name: 'id'
 						,value: config.plugin
 					},{
 						xtype: 'textfield'
-						,fieldLabel: _('name')
+						,fieldLabel: _('name')+'<span class="required">*</span>'
+						,description: MODx.expandHelp ? '' : _('policy_desc_name')
 						,name: 'name'
 						,maxLength: 255
 						,enableKeyEvents: true
 						,allowBlank: false
+						,anchor: '100%'
 						,listeners: {
 							'keyup': {scope:this,fn:function(f,e) {
 								Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
 							}}
 						}
 					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-name'
+                        ,html: _('policy_desc_name')
+                        ,cls: 'desc-under'
+                    },{
 						xtype: 'textarea'
 						,fieldLabel: _('description')
+						,description: MODx.expandHelp ? '' : _('policy_desc_description')
 						,name: 'description'
+						,anchor: '100%'
 						,grow: true
 					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-description'
+                        ,html: _('policy_desc_description')
+                        ,cls: 'desc-under'
+                    },{
 						xtype: 'textfield'
 						,fieldLabel: _('lexicon')
+						,description: MODx.expandHelp ? '' : _('policy_desc_lexicon')
 						,name: 'lexicon'
 						,allowBlank: true
+						,anchor: '100%'
 						,value: 'permissions'
-					}]
+					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-lexicon'
+                        ,html: _('policy_desc_lexicon')
+                        ,cls: 'desc-under'
+                    }]
                 },{
                     html: '<p>'+_('permissions_desc')+'</p>'
 					,bodyCssClass: 'panel-desc'
