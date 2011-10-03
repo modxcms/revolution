@@ -2017,9 +2017,9 @@ class modX extends xPDO {
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
         $this->cultureKey = $cultureKey;
 
-        $locale = setlocale(E_ALL,null);
-        setlocale(LC_ALL,$this->getOption('locale',null,$locale));
-        
+        $locale = setlocale(LC_ALL, null);
+        setlocale(LC_ALL, $this->getOption('locale', null, $locale));
+
         $this->getService('lexicon','modLexicon');
         $this->invokeEvent('OnInitCulture');
     }
