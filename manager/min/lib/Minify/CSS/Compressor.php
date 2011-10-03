@@ -68,7 +68,15 @@ class Minify_CSS_Compressor {
      */
     protected function _process($css)
     {
+        $css = preg_replace( '#\s+#', ' ', $css );
+        $css = str_replace(array(
+           '; ', ': ', ' {','{ ', ', ', '} ', ';}'
+        ), array(
+           ';',  ':',  '{', '{',  ',',  '}',  '}'
+        ),$css);
+
         $css = str_replace("\r\n", "\n", $css);
+        return trim($css);
         
         // preserve empty comment after '>'
         // http://www.webdevout.net/css-hacks#in_css-selectors
