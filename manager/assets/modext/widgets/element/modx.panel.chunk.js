@@ -10,7 +10,7 @@ MODx.panel.Chunk = function(config) {
         url: MODx.config.connectors_url+'element/chunk.php'
         ,baseParams: {}
         ,id: 'modx-panel-chunk'
-		,cls: 'container'
+		,cls: 'container form-with-labels'
         ,class_key: 'modChunk'
         ,chunk: ''
         ,bodyStyle: ''
@@ -31,70 +31,99 @@ MODx.panel.Chunk = function(config) {
                 ,id: 'modx-chunk-msg'
                 ,border: false
             },{
-				xtype: 'panel'
-				,border: false
-				,cls:'main-wrapper'
-				,layout: 'form'
-				,items: [{
-					xtype: 'hidden'
-					,name: 'id'
-					,id: 'modx-chunk-id'
-					,value: config.record.id || MODx.request.id
-				},{
-					xtype: 'hidden'
-					,name: 'props'
-					,id: 'modx-chunk-props'
-					,value: config.record.props || null
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('name')
-					,name: 'name'
-					,id: 'modx-chunk-name'
-					,width: 300
-					,maxLength: 255
-					,enableKeyEvents: true
-					,allowBlank: false
-					,value: config.record.name
-					,listeners: {
-						'keyup': {scope:this,fn:function(f,e) {
-							Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+f.getValue()+'</h2>');
-						}}
-					}
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('description')
-					,name: 'description'
-					,id: 'modx-chunk-description'
-					,width: 300
-					,maxLength: 255
-					,value: config.record.description
-				},{
-					xtype: 'modx-combo-category'
-					,fieldLabel: _('category')
-					,name: 'category'
-					,id: 'modx-chunk-category'
-					,width: 250
-					,value: config.record.category || 0
-				},{
-					xtype: 'xcheckbox'
-					,fieldLabel: _('chunk_lock')
-					,description: _('chunk_lock_msg')
-					,name: 'locked'
-					,id: 'modx-chunk-locked'
-					,inputValue: true
-					,checked: config.record.locked || 0
-				},{
-					xtype: 'xcheckbox'
-					,fieldLabel: _('clear_cache_on_save')
-					,description: _('clear_cache_on_save_msg')
-					,name: 'clearCache'
-					,id: 'modx-chunk-clear-cache'
-					,inputValue: 1
-					,checked: Ext.isDefined(config.record.clearCache) || true
-				},{
-					html: MODx.onChunkFormRender
-					,border: false
-				}]
+                layout: 'column'
+                ,border: false
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,anchor: '100%'
+                    ,border: false
+                    ,cls:'main-wrapper'
+                }
+                ,items: [{
+                    columnWidth: .6
+                    ,items: [{
+                        xtype: 'hidden'
+                        ,name: 'id'
+                        ,id: 'modx-chunk-id'
+                        ,value: config.record.id || MODx.request.id
+                    },{
+                        xtype: 'hidden'
+                        ,name: 'props'
+                        ,id: 'modx-chunk-props'
+                        ,value: config.record.props || null
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('name')
+                        ,name: 'name'
+                        ,id: 'modx-chunk-name'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,enableKeyEvents: true
+                        ,allowBlank: false
+                        ,value: config.record.name
+                        ,listeners: {
+                            'keyup': {scope:this,fn:function(f,e) {
+                                Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+f.getValue()+'</h2>');
+                            }}
+                        }
+                    },{
+                        xtype: 'label'
+                        ,forId: 'modx-chunk-name'
+                        ,html: _('chunk_desc_name')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'textarea'
+                        ,fieldLabel: _('description')
+                        ,name: 'description'
+                        ,id: 'modx-chunk-description'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,value: config.record.description
+                    },{
+                        xtype: 'label'
+                        ,forId: 'modx-chunk-description'
+                        ,html: _('chunk_desc_description')
+                        ,cls: 'desc-under'
+                    },{
+                        html: MODx.onChunkFormRender
+                        ,border: false
+                    }]
+                },{
+                    columnWidth: .4
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,fieldLabel: _('category')
+                        ,name: 'category'
+                        ,id: 'modx-chunk-category'
+                        ,anchor: '100%'
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: 'label'
+                        ,forId: 'modx-chunk-category'
+                        ,html: _('chunk_desc_category')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('chunk_lock')
+                        ,description: _('chunk_lock_msg')
+                        ,hideLabel: true
+                        ,name: 'locked'
+                        ,id: 'modx-chunk-locked'
+                        ,inputValue: true
+                        ,checked: config.record.locked || 0
+                    },{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: _('clear_cache_on_save_msg')
+                        ,hideLabel: true
+                        ,name: 'clearCache'
+                        ,id: 'modx-chunk-clear-cache'
+                        ,inputValue: 1
+                        ,checked: Ext.isDefined(config.record.clearCache) || true
+
+                    }]
+                }]
 			},{
 				xtype: 'panel'
 				,border: false
