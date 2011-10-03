@@ -50,9 +50,9 @@ $this->processResults($class, $description, array($modx->manager, 'addIndex'), a
 $tableUserGroups = $modx->getTableName('modUserGroup');
 $tableMemberGroups = $modx->getTableName('modUserGroupMember');
 $sql = "UPDATE {$table}
-SET `primary_group` = (SELECT TOP 1 `user_group` FROM {$tableMemberGroups} `memb`, {$tableUserGroups} `groups` WHERE `memb`.`user_group` = `groups`.`id` AND `memb`.`member` = {$table}.`id` ORDER BY `memb`.`rank` ASC, `groups`.`rank` ASC, `groups`.`id` ASC)
-WHERE `primary_group` = 0
-AND EXISTS (SELECT 1 FROM {$tableMemberGroups} WHERE {$tableMemberGroups}.`member` = {$table}.id)";
+SET [primary_group] = (SELECT TOP 1 [user_group] FROM {$tableMemberGroups} [memb], {$tableUserGroups} [groups] WHERE [memb].[user_group] = [groups].[id] AND [memb].[member] = {$table}.[id] ORDER BY [memb].[rank] ASC, [groups].[rank] ASC, [groups].[id] ASC)
+WHERE [primary_group] = 0
+AND EXISTS (SELECT 1 FROM {$tableMemberGroups} WHERE {$tableMemberGroups}.[member] = {$table}.[id])";
 $description = $this->install->lexicon('update_table_column_data',array('table' => $table, 'column' => 'primary_group', 'class' => $class));
 $this->processResults($class, $description, $sql);
 
