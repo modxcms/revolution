@@ -31,6 +31,7 @@ MODx = function(config) {
 Ext.extend(MODx,Ext.Component,{
     config: {}
     ,util:{},window:{},panel:{},tree:{},form:{},grid:{},combo:{},toolbar:{},page:{},msg:{}
+    ,expandHelp: true
 
     ,startup: function() {
         this.initQuickTips();

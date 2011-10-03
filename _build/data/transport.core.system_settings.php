@@ -692,6 +692,15 @@ $settings['hidemenu_default']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['inline_help']= $xpdo->newObject('modSystemSetting');
+$settings['inline_help']->fromArray(array (
+  'key' => 'inline_help',
+  'value' => 1,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['locale']= $xpdo->newObject('modSystemSetting');
 $settings['locale']->fromArray(array (
   'key' => 'locale',

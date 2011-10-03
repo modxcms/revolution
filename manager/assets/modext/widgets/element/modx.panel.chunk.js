@@ -39,6 +39,7 @@ MODx.panel.Chunk = function(config) {
                     ,anchor: '100%'
                     ,border: false
                     ,cls:'main-wrapper'
+                    ,labelSeparator: ''
                 }
                 ,items: [{
                     columnWidth: .6
@@ -54,7 +55,8 @@ MODx.panel.Chunk = function(config) {
                         ,value: config.record.props || null
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')
+                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,description: MODx.expandHelp ? '' : _('chunk_desc_name')
                         ,name: 'name'
                         ,id: 'modx-chunk-name'
                         ,anchor: '100%'
@@ -68,20 +70,21 @@ MODx.panel.Chunk = function(config) {
                             }}
                         }
                     },{
-                        xtype: 'label'
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-chunk-name'
                         ,html: _('chunk_desc_name')
                         ,cls: 'desc-under'
                     },{
                         xtype: 'textarea'
                         ,fieldLabel: _('description')
+                        ,description: MODx.expandHelp ? '' : _('chunk_desc_description')
                         ,name: 'description'
                         ,id: 'modx-chunk-description'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.description
                     },{
-                        xtype: 'label'
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-chunk-description'
                         ,html: _('chunk_desc_description')
                         ,cls: 'desc-under'
@@ -94,20 +97,20 @@ MODx.panel.Chunk = function(config) {
                     ,items: [{
                         xtype: 'modx-combo-category'
                         ,fieldLabel: _('category')
+                        ,description: MODx.expandHelp ? '' : _('chunk_desc_category')
                         ,name: 'category'
                         ,id: 'modx-chunk-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                     },{
-                        xtype: 'label'
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-chunk-category'
                         ,html: _('chunk_desc_category')
                         ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('chunk_lock')
-                        ,description: _('chunk_lock_msg')
-                        ,hideLabel: true
+                        ,description: MODx.expandHelp ? '' : _('chunk_lock_msg')
                         ,name: 'locked'
                         ,id: 'modx-chunk-locked'
                         ,inputValue: true
@@ -115,7 +118,7 @@ MODx.panel.Chunk = function(config) {
                     },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('clear_cache_on_save')
-                        ,description: _('clear_cache_on_save_msg')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_msg')
                         ,hideLabel: true
                         ,name: 'clearCache'
                         ,id: 'modx-chunk-clear-cache'

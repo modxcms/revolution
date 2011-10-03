@@ -20,6 +20,7 @@ MODx.Layout = function(config){
         'HTTP_MODAUTH': config.auth
     };
     MODx.siteId = config.auth;
+    MODx.expandHelp = !Ext.isEmpty(MODx.config.inline_help);
 
     var tabs = [];
     var showTree = false;

@@ -63,6 +63,7 @@ MODx.panel.Source = function(config) {
                                 ,id: 'modx-source-name'
                                 ,xtype: 'textfield'
                                 ,fieldLabel: _('name')
+                                ,description: MODx.expandHelp ? '' : _('source_name_desc')
                                 ,allowBlank: false
                                 ,enableKeyEvents: true
                                 ,anchor: '100%'
@@ -72,7 +73,7 @@ MODx.panel.Source = function(config) {
                                     }}
                                 }
                             },{
-                                xtype:'label'
+                                xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-source-name'
                                 ,html: _('source_name_desc')
                                 ,cls: 'desc-under'
@@ -81,10 +82,11 @@ MODx.panel.Source = function(config) {
                                 ,id: 'modx-source-description'
                                 ,xtype: 'textarea'
                                 ,fieldLabel: _('description')
+                                ,description: MODx.expandHelp ? '' : _('source_description_desc')
                                 ,anchor: '100%'
                                 ,grow: true
                             },{
-                                xtype:'label'
+                                xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-source-description'
                                 ,html: _('source_description_desc')
                                 ,cls: 'desc-under'
@@ -98,9 +100,10 @@ MODx.panel.Source = function(config) {
                                 ,id: 'modx-source-type'
                                 ,xtype: 'modx-combo-source-type'
                                 ,fieldLabel: _('source_type')
+                                ,description: MODx.expandHelp ? '' : _('source_type_desc')
                                 ,anchor: '100%'
                             },{
-                                xtype:'label'
+                                xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-source-type'
                                 ,html: _('source_type_desc')
                                 ,cls: 'desc-under'
