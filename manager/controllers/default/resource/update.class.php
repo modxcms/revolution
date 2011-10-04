@@ -54,7 +54,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 ,canCreate: "'.($this->canCreate ? 1 : 0).'"
                 ,canDuplicate: "'.($this->canDuplicate ? 1 : 0).'"
                 ,canDelete: "'.($this->canDelete ? 1 : 0).'"
-                ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
+                ,show_tvs: "'.(!empty($this->tvCounts) ? 1 : 0).'"
                 ,mode: "update"
             });
         });

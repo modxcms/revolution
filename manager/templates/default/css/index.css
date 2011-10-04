@@ -1449,3 +1449,11 @@ span.required {
     font-weight: normal;
     color: #444 !important;
 }
+
+.resource-alias {
+    left: 0 !important;
+}
+.resource-url-prefix {
+    color: #777;
+    padding: 5px 0 !important;
+}

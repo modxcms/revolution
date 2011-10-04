@@ -935,15 +935,6 @@ $settings['manager_theme']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_use_tabs']= $xpdo->newObject('modSystemSetting');
-$settings['manager_use_tabs']->fromArray(array (
-  'key' => 'manager_use_tabs',
-  'value' => '1',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['modx_charset']= $xpdo->newObject('modSystemSetting');
 $settings['modx_charset']->fromArray(array (
   'key' => 'modx_charset',
