@@ -70,3 +70,4 @@ class modSourceCreateProcessor extends modProcessor {
         )) > 0;
     }
 }
+return 'modSourceCreateProcessor';
