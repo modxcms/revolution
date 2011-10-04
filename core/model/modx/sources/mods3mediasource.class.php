@@ -154,7 +154,7 @@ class modS3MediaSource extends modMediaSource {
                     'path' => $path,
                     'pathRelative' => $path,
                     'directory' => $path,
-                    'url' => $properties['url'].$properties['bucket'].'/'.$path,
+                    'url' => rtrim($properties['url'],'/').'/'.$path,
                     'file' => $path,
                 );
                 $files[$path]['menu'] = array('items' => $this->getListContextMenu($path,$isDir,$files[$path]));
