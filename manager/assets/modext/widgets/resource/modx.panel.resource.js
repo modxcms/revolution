@@ -200,7 +200,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: this.getSettingFields(config)
         });
-
         if (config.show_tvs) {
             it.push({
                 xtype: 'modx-panel-resource-tv'

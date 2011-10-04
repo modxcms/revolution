@@ -50,11 +50,11 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 ,locked: '.($this->locked ? 1 : 0).'
                 ,lockedText: "'.$this->lockedText.'"
                 ,canSave: '.($this->canSave ? 1 : 0).'
-                ,canEdit: "'.($this->canEdit ? 1 : 0).'"
-                ,canCreate: "'.($this->canCreate ? 1 : 0).'"
-                ,canDuplicate: "'.($this->canDuplicate ? 1 : 0).'"
-                ,canDelete: "'.($this->canDelete ? 1 : 0).'"
-                ,show_tvs: "'.(!empty($this->tvCounts) ? 1 : 0).'"
+                ,canEdit: '.($this->canEdit ? 1 : 0).'
+                ,canCreate: '.($this->canCreate ? 1 : 0).'
+                ,canDuplicate: '.($this->canDuplicate ? 1 : 0).'
+                ,canDelete: '.($this->canDelete ? 1 : 0).'
+                ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
                 ,mode: "update"
             });
         });
