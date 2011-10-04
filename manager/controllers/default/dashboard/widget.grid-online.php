@@ -16,13 +16,13 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
         $c = $this->modx->newQuery('modManagerLog');
         $c->innerJoin('modUser','User');
         $c->where(array(
-            'occurred:>' => $timetocheck,
+            'occurred:>' => strftime('%Y-%m-%d, %H:%M:%S',$timetocheck),
         ));
         $data['total'] = $this->modx->getCount('modManagerLog',$c);
 
         $c->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
         $c->select($this->modx->getSelectColumns('modUser','User','',array('username')));
-        $c->sortby('occurred','ASC');
+        $c->sortby('occurred','DESC');
         $c->groupby('user');
         $ausers = $this->modx->getIterator('modManagerLog',$c);
 
