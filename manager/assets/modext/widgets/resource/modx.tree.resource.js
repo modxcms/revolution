@@ -738,6 +738,14 @@ MODx.window.QuickCreateResource = function(config) {
                             ,description: _('resource_published_help')
                             ,inputValue: 1
                             ,checked: MODx.config.publish_default == '1' ? 1 : 0
+                        },{
+                            xtype: 'xcheckbox'
+                            ,boxLabel: _('resource_hide_from_menus')
+                            ,description: _('resource_hide_from_menus_help')
+                            ,name: 'hidemenu'
+                            ,id: 'modx-'+id+'-hidemenu'
+                            ,inputValue: 1
+                            ,checked: MODx.config.hidemenu_default == '1' ? 1 : 0
                         }]
                     }]
                 },MODx.getQRContentField(this.ident,config.record.class_key)]
@@ -863,6 +871,13 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,boxLabel: _('resource_published')
                             ,description: _('resource_published_help')
                             ,inputValue: 1
+                        },{
+                            xtype: 'xcheckbox'
+                            ,boxLabel: _('resource_hide_from_menus')
+                            ,description: _('resource_hide_from_menus_help')
+                            ,name: 'hidemenu'
+                            ,id: 'modx-'+id+'-hidemenu'
+                            ,inputValue: 1
                         }]
                     }]
                 },MODx.getQRContentField(this.ident,config.record.class_key)]
@@ -974,91 +989,109 @@ MODx.getQRContentField = function(id,cls) {
 MODx.getQRSettings = function(id,va) {
     id = id || 'qur';
     return [{
-        xtype: 'hidden'
-        ,name: 'parent'
-        ,id: 'modx-'+id+'-parent'
-        ,value: va['parent']
-    },{
-        xtype: 'hidden'
-        ,name: 'context_key'
-        ,id: 'modx-'+id+'-context_key'
-        ,value: va['context_key']
-    },{
-        xtype: 'hidden'
-        ,name: 'class_key'
-        ,id: 'modx-'+id+'-class_key'
-        ,value: va['class_key']
-    },{
-        xtype: 'hidden'
-        ,name: 'publishedon'
-        ,id: 'modx-'+id+'-publishedon'
-        ,value: va['publishedon']
-    },{
-        xtype: 'modx-combo-content-type'
-        ,fieldLabel: _('resource_content_type')
-        ,name: 'content_type'
-        ,hiddenName: 'content_type'
-        ,id: 'modx-'+this.ident+'-type'
+        layout: 'column'
+        ,border: false
         ,anchor: '100%'
-        ,value: va['content_type'] != undefined ? va['content_type'] : (MODx.config.default_content_type || 1)
+        ,defaults: {
+            labelSeparator: ''
+            ,labelAlign: 'top'
+            ,border: false
+            ,layout: 'form'
+        }
+        ,items: [{
+            columnWidth: .5
+            ,items: [{
+                xtype: 'hidden'
+                ,name: 'parent'
+                ,id: 'modx-'+id+'-parent'
+                ,value: va['parent']
+            },{
+                xtype: 'hidden'
+                ,name: 'context_key'
+                ,id: 'modx-'+id+'-context_key'
+                ,value: va['context_key']
+            },{
+                xtype: 'hidden'
+                ,name: 'class_key'
+                ,id: 'modx-'+id+'-class_key'
+                ,value: va['class_key']
+            },{
+                xtype: 'hidden'
+                ,name: 'publishedon'
+                ,id: 'modx-'+id+'-publishedon'
+                ,value: va['publishedon']
+            },{
+                xtype: 'modx-combo-content-type'
+                ,fieldLabel: _('resource_content_type')
+                ,name: 'content_type'
+                ,hiddenName: 'content_type'
+                ,id: 'modx-'+this.ident+'-type'
+                ,anchor: '100%'
+                ,value: va['content_type'] != undefined ? va['content_type'] : (MODx.config.default_content_type || 1)
 
-    },{
-        xtype: 'modx-combo-content-disposition'
-        ,fieldLabel: _('resource_contentdispo')
-        ,name: 'content_dispo'
-        ,hiddenName: 'content_dispo'
-        ,id: 'modx-'+this.ident+'-dispo'
-        ,anchor: '100%'
-        ,value: va['content_dispo'] != undefined ? va['content_dispo'] : 0
-    },{
-        xtype: 'xcheckbox'
-        ,boxLabel: _('resource_folder')
-        ,description: _('resource_folder_help')
-        ,name: 'isfolder'
-        ,id: 'modx-'+id+'-isfolder'
-        ,inputValue: 1
-        ,checked: va['isfolder'] != undefined ? va['isfolder'] : false
-    },{
-        xtype: 'xcheckbox'
-        ,boxLabel: _('resource_richtext')
-        ,description: _('resource_richtext_help')
-        ,name: 'richtext'
-        ,id: 'modx-'+id+'-richtext'
-        ,inputValue: 1
-        ,checked: va['richtext'] !== undefined ? (va['richtext'] ? 1 : 0) : (MODx.config.richtext_default == '1' ? 1 : 0)
-    },{
-        xtype: 'xcheckbox'
-        ,boxLabel: _('resource_searchable')
-        ,description: _('resource_searchable_help')
-        ,name: 'searchable'
-        ,id: 'modx-'+id+'-searchable'
-        ,inputValue: 1
-        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? 1 : 0)
-        ,listeners: {'check': {fn:MODx.handleQUCB}}
-    },{
-        xtype: 'xcheckbox'
-        ,boxLabel: _('resource_hide_from_menus')
-        ,description: _('resource_hide_from_menus_help')
-        ,name: 'hidemenu'
-        ,id: 'modx-'+id+'-hidemenu'
-        ,inputValue: 1
-        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? 1 : 0)
-    },{
-        xtype: 'xcheckbox'
-        ,boxLabel: _('resource_cacheable')
-        ,description: _('resource_cacheable_help')
-        ,name: 'cacheable'
-        ,id: 'modx-'+id+'-cacheable'
-        ,inputValue: 1
-        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? 1 : 0)
-    },{
-        xtype: 'xcheckbox'
-        ,name: 'clearCache'
-        ,id: 'modx-'+id+'-clearcache'
-        ,boxLabel: _('clear_cache_on_save')
-        ,description: _('clear_cache_on_save_msg')
-        ,inputValue: 1
-        ,checked: true
+            },{
+                xtype: 'modx-combo-content-disposition'
+                ,fieldLabel: _('resource_contentdispo')
+                ,name: 'content_dispo'
+                ,hiddenName: 'content_dispo'
+                ,id: 'modx-'+this.ident+'-dispo'
+                ,anchor: '100%'
+                ,value: va['content_dispo'] != undefined ? va['content_dispo'] : 0
+            },{
+                xtype: 'modx-combo-class-derivatives'
+                ,fieldLabel: _('class_key')
+                ,description: '<b>[[*class_key]]</b><br />'
+                ,name: 'class_key'
+                ,hiddenName: 'class_key'
+                ,id: 'modx-'+this.ident+'-class-key'
+                ,anchor: '100%'
+                ,value: va['class_key'] != undefined ? va['class_key'] : 'modDocument'
+            }]
+        },{
+            columnWidth: .5
+            ,items: [{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_folder')
+                ,description: _('resource_folder_help')
+                ,name: 'isfolder'
+                ,id: 'modx-'+id+'-isfolder'
+                ,inputValue: 1
+                ,checked: va['isfolder'] != undefined ? va['isfolder'] : false
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_richtext')
+                ,description: _('resource_richtext_help')
+                ,name: 'richtext'
+                ,id: 'modx-'+id+'-richtext'
+                ,inputValue: 1
+                ,checked: va['richtext'] !== undefined ? (va['richtext'] ? 1 : 0) : (MODx.config.richtext_default == '1' ? 1 : 0)
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_searchable')
+                ,description: _('resource_searchable_help')
+                ,name: 'searchable'
+                ,id: 'modx-'+id+'-searchable'
+                ,inputValue: 1
+                ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? 1 : 0)
+                ,listeners: {'check': {fn:MODx.handleQUCB}}
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_cacheable')
+                ,description: _('resource_cacheable_help')
+                ,name: 'cacheable'
+                ,id: 'modx-'+id+'-cacheable'
+                ,inputValue: 1
+                ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? 1 : 0)
+            },{
+                xtype: 'xcheckbox'
+                ,name: 'clearCache'
+                ,id: 'modx-'+id+'-clearcache'
+                ,boxLabel: _('clear_cache_on_save')
+                ,description: _('clear_cache_on_save_msg')
+                ,inputValue: 1
+                ,checked: true
+            }]
+        }]
     }];
 };
 MODx.handleQUCB = function(cb) {
