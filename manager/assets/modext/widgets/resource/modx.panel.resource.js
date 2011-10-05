@@ -279,6 +279,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             layout:'column'
             ,border: false
             ,anchor: '100%'
+            ,id: 'modx-resource-main-columns'
             ,defaults: {
                 labelSeparator: ''
                 ,labelAlign: 'top'
@@ -287,12 +288,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,items:[{
                 columnWidth: .67
                 ,layout: 'form'
+                ,id: 'modx-resource-main-left'
                 ,items: this.getMainLeftFields(config)
             },{
                 columnWidth: .33
                 ,layout: 'form'
                 ,labelWidth: 0
                 ,border: false
+                ,id: 'modx-resource-main-right'
                 ,style: 'margin-right: 0'
                 ,items: this.getMainRightFields(config)
             }]
@@ -465,6 +468,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items:[{
                 columnWidth: .5
+                ,id: 'modx-page-settings-left'
                 ,items: [{
                     xtype: 'modx-field-parent-change'
                     ,fieldLabel: _('resource_parent')
@@ -524,6 +528,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 }]
             },{
                 columnWidth: .5
+                ,id: 'modx-page-settings-right'
                 ,items: [{
                     xtype: 'xdatetime'
                     ,fieldLabel: _('resource_publishedon')
@@ -564,6 +569,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     xtype: 'fieldset'
                     ,items: [{
                         layout: 'column'
+                        ,id: 'modx-page-settings-box-columns'
                         ,border: false
                         ,anchor: '100%'
                         ,defaults: {
@@ -574,6 +580,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         }
                         ,items: [{
                             columnWidth: .5
+                            ,id: 'modx-page-settings-right-box-left'
                             ,items: [{
                                 xtype: 'xcheckbox'
                                 ,boxLabel: _('resource_folder')
@@ -605,6 +612,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                             }]
                         },{
                             columnWidth: .5
+                            ,id: 'modx-page-settings-right-box-right'
                             ,items: [{
                                 xtype: 'xcheckbox'
                                 ,boxLabel: _('resource_cacheable')

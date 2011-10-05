@@ -193,6 +193,7 @@ MODx.panel.TV = function(config) {
             title: _('access_permissions')
             ,id: 'modx-tv-access-form'
             ,itemId: 'form-access'
+            ,forceLayout: true
             ,defaults: {autoHeight: true}
             ,items: [{
                 html: '<p>'+_('tv_access_msg')+'</p>'

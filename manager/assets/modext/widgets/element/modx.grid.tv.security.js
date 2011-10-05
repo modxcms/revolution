@@ -22,6 +22,7 @@ MODx.grid.TVSecurity = function(config) {
             ,tv: config.tv
         }
         ,fields: ['id','name','access','menu']
+        ,width: 800
         ,paging: true
         ,remoteSort: true
         ,plugins: tt
