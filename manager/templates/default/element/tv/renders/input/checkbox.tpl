@@ -13,7 +13,7 @@ Ext.onReady(function() {
         ,columns: 1
         ,renderTo: 'tv{$tv->id}-cb'
         ,name: 'tv-{$tv->id}'
-        ,width: 500
+        ,width: '99%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,hideMode: 'offsets'
         ,msgTarget: 'under'

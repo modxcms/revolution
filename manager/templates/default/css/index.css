@@ -549,57 +549,6 @@ table.classy tr.odd td {
     color: #7c735c;
 }
 
-/* tv table */
-#modx-tv-tabs {width: 100%;}
-#modx-tv-tabs .modx-tv {
-    border-bottom: 1px solid #eee;
-    padding-top: 3px;
-}
-.modx-tv-label {
-    width: 200px;
-    float: left;
-    position: relative;
-    z-index: 2;
-    padding: 3px 3px 3px 0;
-    clear: left;
-    display: block;
-}
-.modx-tv-label:hover .modx-tv-reset {
-    opacity: 100;
-    filter: alpha(opacity=100);
-    -webkit-transition: opacity .15s ease-in; /*safari and chrome */
-    -o-transition: opacity .15s ease-in; /* opera */
-    -moz-transition: opacity .15s ease-in;
-    transition: opacity .15s ease-in;
-}
-.modx-tv-reset {
-    opacity: 0;
-    filter: alpha(opacity=0);
-    
-    float: left;
-    width: 16px;
-    height: 16px;
-    background: url(../images/restyle/icons/arrow_rotate_anticlockwise.png) top right no-repeat;
-    cursor: pointer;
-}
-.modx-tv-description {
-    color: #666;
-    font-size: 10px;
-    line-height: 1.2;
-    margin-left: 16px;
-    display: block;
-}
-.modx-tv-inherited {
-    font-style: italic;
-    color: #666;
-    font-size: 10px;
-    line-height: 1.2;
-    margin-left: 16px;
-    display: block;
-}
-#modx-resource-settings .modx-tv-label, #modx-page-settings .modx-tv-label {
-    width: 216px;
-}
 
 /* browser */
 .modx-pb-view-ct {
@@ -1137,7 +1086,7 @@ iframe[classname="x-hidden"] {visibility:hidden;}
 /* tag tv widget */
 ul.modx-tag-list {
     list-style: none;
-    margin: 0;
+    margin: 3px 0 0 0;
     overflow: auto;
     padding: 0;
 }
@@ -1456,4 +1405,74 @@ span.required {
 .resource-url-prefix {
     color: #777;
     padding: 5px 0 !important;
+}
+
+
+/* tv table */
+#modx-tv-tabs {width: 100%;}
+#modx-tv-tabs .modx-tv {
+    padding-top: 0;
+    margin: 0;
+}
+.modx-tv-label {
+    width: auto !important;
+    float: left;
+}
+.modx-tv-label:hover .modx-tv-reset {
+    opacity: 100;
+    filter: alpha(opacity=100);
+    -webkit-transition: opacity .15s ease-in; /*safari and chrome */
+    -o-transition: opacity .15s ease-in; /* opera */
+    -moz-transition: opacity .15s ease-in;
+    transition: opacity .15s ease-in;
+}
+.modx-tv-label-title {
+    float: left;
+}
+.modx-tv-label-description {
+    float: left;
+    padding-left: 5px;
+    font-weight: normal;
+    font-style: italic;
+    display: block;
+}
+.modx-tv-reset {
+    opacity: 0;
+    filter: alpha(opacity=0);
+
+    float: left;
+    width: 16px;
+    height: 16px;
+    background: url(../images/restyle/icons/arrow_rotate_anticlockwise.png) top right no-repeat;
+    cursor: pointer;
+}
+.modx-tv-description {
+    color: #666;
+    font-size: 10px;
+    line-height: 1.2;
+    margin-top: 2px !important;
+}
+.modx-tv-inherited {
+    font-style: italic;
+    color: #666;
+    font-size: 10px;
+    line-height: 1.2;
+    display: block;
+    padding-top: 4px;
+    float: right;
+}
+.modx-tv {
+    width: 100%;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 10px 0 !important;
+}
+#modx-resource-settings .modx-tv-label, #modx-page-settings .modx-tv-label {
+    width: 216px;
+}
+.modx-tv .x-form-cb-label {
+    font-weight: normal;
+    top: 0;
+}
+.modx-tv .x-form-check-wrap {
+    line-height: 14px !important;
 }
