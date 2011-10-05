@@ -65,4 +65,12 @@ class modWebLink extends modResource {
             'text_create_here' => $this->xpdo->lexicon('weblink_create_here'),
         );
     }
+
+    /**
+     * Use this in your extended Resource class to return a translatable name for the Resource Type.
+     * @return string
+     */
+    public function getResourceTypeName() {
+        return $this->xpdo->lexicon('weblink');
+    }
 }

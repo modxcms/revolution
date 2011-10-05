@@ -489,7 +489,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     ,id: 'modx-resource-parent-old-hidden'
                 },{
                     xtype: 'modx-combo-class-derivatives'
-                    ,fieldLabel: _('class_key')
+                    ,fieldLabel: _('resource_type')
                     ,description: '<b>[[*class_key]]</b><br />'
                     ,name: 'class_key'
                     ,hiddenName: 'class_key'

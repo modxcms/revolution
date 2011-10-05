@@ -1045,4 +1045,14 @@ class modResource extends modAccessibleSimpleObject {
             'text_create_here' => $this->xpdo->lexicon('resource_create_here'),
         );
     }
+
+    /**
+     * Use this in your extended Resource class to return a translatable name for the Resource Type.
+     * @return string
+     */
+    public function getResourceTypeName() {
+        $className = $this->_class;
+        if ($className == 'modDocument') $className = 'document';
+        return $this->xpdo->lexicon($className);
+    }
 }

@@ -396,10 +396,15 @@ MODx.combo.ClassDerivatives = function(config) {
             ,skip: 'modXMLRPCResource'
             ,'class': 'modResource'
         }
-        ,displayField: 'class'
-        ,valueField: 'class'
-        ,fields: ['class']
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id','name']
+        ,forceSelection: true
+        ,typeAhead: false
         ,editable: false
+        ,allowBlank: false
+        ,listWidth: 300
+        ,pageSize: 20
     });
     MODx.combo.ClassDerivatives.superclass.constructor.call(this,config);
 };
