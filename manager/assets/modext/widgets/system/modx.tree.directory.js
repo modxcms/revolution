@@ -379,6 +379,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.uploader.on('uploaderror',this.uploadError,this);
             this.uploader.on('uploadfailed',this.uploadFailed,this);
         }
+        this.uploader.base_params.source = this.getSource();
         this.uploader.show(btn);
     }
     ,uploadError: function(dlg,file,data,rec) {}
@@ -425,9 +426,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
-
-
-    
 });
 Ext.reg('modx-tree-directory',MODx.tree.Directory);
 

@@ -459,13 +459,13 @@ class modFileMediaSource extends modMediaSource {
     /**
      * Remove a file
      * 
-     * @param string $filePath
+     * @param string $file
      * @return boolean
      */
-    public function removeFile($filePath) {
-        $bases = $this->getBases($filePath);
+    public function removeFile($file) {
+        $bases = $this->getBases($file);
 
-        $fullPath = $filePath;
+        $fullPath = $bases['pathAbsolute'].$file;
         if (!file_exists($fullPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$fullPath);
             return false;
@@ -507,7 +507,7 @@ class modFileMediaSource extends modMediaSource {
     public function updateFile($filePath,$content) {
         $bases = $this->getBases($filePath);
 
-        $fullPath = $bases['path'].ltrim($filePath,'/');
+        $fullPath = $bases['pathAbsolute'].ltrim($filePath,'/');
 
         /** @var modFile $file */
         $file = $this->fileHandler->make($fullPath);
@@ -537,7 +537,7 @@ class modFileMediaSource extends modMediaSource {
     public function uploadToFolder($targetDirectory,array $files = array()) {
         $bases = $this->getBases($targetDirectory);
 
-        $fullPath = $bases['path'].ltrim($targetDirectory,'/');
+        $fullPath = $bases['pathAbsolute'].ltrim($targetDirectory,'/');
 
         /** @var modDirectory $directory */
         $directory = $this->fileHandler->make($fullPath);
