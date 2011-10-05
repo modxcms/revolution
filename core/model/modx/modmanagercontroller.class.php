@@ -515,11 +515,42 @@ abstract class modManagerController {
                 $this->modx->setOption('compress_css',true);
             }
 
+            $state = $this->getDefaultState();
+            if (!empty($state)) {
+                $state = 'MODx.defaultState = '.$this->modx->toJSON($state).';';
+            } else { $state = ''; }
             $o .= '<script type="text/javascript">Ext.onReady(function() {
+                '.$state.'
     MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});
 });</script>';
             $this->modx->smarty->assign('maincssjs',$o);
         }
+    }
+
+    /**
+     * Get the default state for the UI
+     * @return array|mixed|string
+     */
+    public function getDefaultState() {
+        $this->modx->setLogTarget('ECHO');
+        /** @var modProcessorResponse $response */
+        $response = $this->modx->runProcessor('system/registry/register/read',array(
+            'register' => 'state',
+            'topic' => '/ys/user-'.$this->modx->user->get('id').'/',
+            'include_keys' => true,
+            'poll_interval' => 1,
+            'poll_limit' => 1,
+            'remove_read' => false,
+            'show_filename' => false,
+            'time_limit' => 10,
+        ));
+        $obj = $response->getMessage();
+        if (!empty($obj)) {
+            $obj = $this->modx->fromJSON($obj);
+        } else {
+            $obj = array();
+        }
+        return $obj;
     }
     
     /**

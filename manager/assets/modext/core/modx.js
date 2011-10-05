@@ -32,6 +32,7 @@ Ext.extend(MODx,Ext.Component,{
     config: {}
     ,util:{},window:{},panel:{},tree:{},form:{},grid:{},combo:{},toolbar:{},page:{},msg:{}
     ,expandHelp: true
+    ,defaultState: []
 
     ,startup: function() {
         this.initQuickTips();
@@ -50,9 +51,6 @@ Ext.extend(MODx,Ext.Component,{
             ,afterReleaseLocks: true
             ,ready: true
         });
-        Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
-            expires: new Date(new Date().getTime()+(1000*60*60*24))
-        }));
     }
 	
     ,add: function(cmp) {
@@ -563,3 +561,217 @@ Ext.extend(MODx.Msg,Ext.Component,{
     }
 });
 Ext.reg('modx-msg',MODx.Msg);
+
+/**
+ * Server-side state provider for MODx
+ *
+ * @class MODx.state.HttpProvider
+ * @extends Ext.state.Provider
+ * @constructor
+ * @param {Object} config Configuration object.
+ */
+MODx.HttpProvider = function(config) {
+    config = config || {};
+    this.addEvents(
+        'readsuccess'
+        ,'readfailure'
+        ,'writesuccess'
+        ,'writefailure'
+    );
+    MODx.HttpProvider.superclass.constructor.call(this,config);
+    Ext.apply(this, config, {
+        delay: 1000
+        ,dirty: false
+        ,started: false
+        ,autoStart: true
+        ,autoRead: true
+        ,queue: {}
+        ,readUrl: MODx.config.connectors_url+'system/registry/register.php'
+        ,writeUrl: MODx.config.connectors_url+'system/registry/register.php'
+        ,method: 'post'
+        ,baseParams: {
+            register: 'state'
+            ,topic: ''
+        }
+        ,writeBaseParams: {
+            action: 'send'
+            ,message: ''
+            ,message_key: ''
+            ,message_format: 'json'
+            ,delay: 0
+            ,ttl: 0
+            ,kill: 0
+        }
+        ,readBaseParams: {
+            action: 'read'
+            ,format: 'json'
+            ,poll_limit: 1
+            ,poll_interval: 1
+            ,time_limit: 10
+            ,message_limit: 200
+            ,remove_read: 0
+            ,show_filename: 0
+            ,include_keys: 1
+        }
+        ,paramNames: {
+            topic: 'topic'
+            ,name: 'name'
+            ,value: 'value'
+            ,message: 'message'
+            ,message_key: 'message_key'
+        }
+    });
+    this.config = config;
+    if (this.autoRead) {
+        this.readState();
+    }
+    this.dt = new Ext.util.DelayedTask(this.submitState, this);
+    if (this.autoStart) {
+        this.start();
+    }
+};
+Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
+    initState: function(state) {
+        if (state instanceof Object) {
+            Ext.iterate(state, function(name, value, o) {
+                this.state[name] = value;//this.decodeValue(value);
+            }, this)
+        } else {
+            this.state = {};
+        }
+    }
+    ,set: function(name, value) {
+        if (!name) {
+            return;
+        }
+        this.queueChange(name, value);
+    }
+    ,get : function(name, defaultValue){
+        return typeof this.state[name] == "undefined" ?
+            defaultValue : this.state[name];
+    }
+    ,start: function() {
+        this.dt.delay(this.delay);
+        this.started = true;
+    }
+    ,stop: function() {
+        this.dt.cancel();
+        this.started = false;
+    }
+    ,queueChange:function(name, value) {
+        var lastValue = this.state[name];
+        var found = this.queue[name] !== undefined;
+        if (found) {
+            lastValue = this.queue[name];
+        }
+        var changed = undefined === lastValue || lastValue !== value;
+        if (changed) {
+            this.queue[name] = value;
+            this.dirty = true;
+        }
+        if (this.started) {
+            this.start();
+        }
+        return changed;
+    }
+    ,submitState: function() {
+        if (!this.dirty) {
+            this.dt.delay(this.delay);
+            return;
+        }
+        this.dt.cancel();
+
+        var o = {
+             url: this.writeUrl
+            ,method: this.method
+            ,scope: this
+            ,success: this.onWriteSuccess
+            ,failure: this.onWriteFailure
+            ,queue: Ext.apply({}, this.queue)
+            ,params: {}
+        };
+        var params = Ext.apply({}, this.baseParams, this.writeBaseParams);
+        params[this.paramNames.topic] = '/ys/user-' + MODx.user.id + '/';
+        params[this.paramNames.message] = Ext.encode(this.queue);
+
+        Ext.apply(o.params, params);
+        // be optimistic
+        this.dirty = false;
+
+        Ext.Ajax.request(o);
+    }
+    ,clear: function(name) {
+        this.set(name, undefined);
+    }
+    ,onWriteSuccess: function(r,o) {
+        r = Ext.decode(r.responseText);
+        if (true !== r.success) {
+            this.dirty = true;
+        } else {
+            Ext.iterate(o.queue, function(name, value) {
+                if(!name) {
+                    return;
+                }
+                if (undefined === value || null === value) {
+                    MODx.HttpProvider.superclass.clear.call(this, name);
+                } else {
+                    // parent sets value and fires event
+                    MODx.HttpProvider.superclass.set.call(this, name, value);
+                }
+            }, this);
+            if (false === this.dirty) {
+                this.queue = {};
+            } else {
+                Ext.iterate(o.queue, function(name, value) {
+                    var found = this.queue[name] !== undefined;
+                    if (true === found && value === this.queue[name]) {
+                        delete this.queue[name];
+                    }
+                }, this);
+            }
+            this.fireEvent('writesuccess', this);
+        }
+    }
+    ,onWriteFailure: function(r) {
+        r = Ext.decode(r.responseText);
+        this.dirty = true;
+        this.fireEvent('writefailure', this);
+    }
+    ,onReadFailure: function(r) {
+        r = Ext.decode(r.responseText);
+        this.fireEvent('readfailure', this);
+    }
+    ,onReadSuccess: function(r) {
+        r = Ext.decode(r.responseText);
+        var state;
+        if (true === r.success && r.message) {
+            state = Ext.decode(r.message);
+            if (!(state instanceof Object)) {
+                return;
+            }
+            Ext.iterate(state, function(name, value, o) {
+                this.state[name] = value;
+            }, this);
+            this.queue = {};
+            this.dirty = false;
+            this.fireEvent('readsuccess', this);
+        }
+    }
+    ,readState: function() {
+        var o = {
+             url: this.readUrl
+            ,method: this.method
+            ,scope: this
+            ,success: this.onReadSuccess
+            ,failure: this.onReadFailure
+            ,params: {}
+        };
+
+        var params = Ext.apply({}, this.baseParams, this.readBaseParams);
+        params[this.paramNames.topic] = '/ys/user-' + MODx.user.id + '/';
+
+        Ext.apply(o.params, params);
+        Ext.Ajax.request(o);
+    }
+});
+

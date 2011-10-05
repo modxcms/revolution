@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4726] Implement server-side state provider for modExt to fix size problems with cookies
 - [#5860] Fix FC SQL error when user is in no groups
 - [#5843] Add required asterisk to required Element fields
 - [#5723] Add Media Source tab to User Group Access screen
