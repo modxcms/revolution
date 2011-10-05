@@ -689,16 +689,18 @@ abstract class modManagerController {
             'FCSet.active' => true,
             'Profile.active' => true,
         ));
-        $c->where(array(
-            array(
-                'ProfileUserGroup.usergroup:IN' => $userGroups,
+        if (!empty($userGroups)) {
+            $c->where(array(
                 array(
-                    'OR:ProfileUserGroup.usergroup:IS' => null,
-                    'AND:UGProfile.active:=' => true,
+                    'ProfileUserGroup.usergroup:IN' => $userGroups,
+                    array(
+                        'OR:ProfileUserGroup.usergroup:IS' => null,
+                        'AND:UGProfile.active:=' => true,
+                    ),
                 ),
-            ),
-            'OR:ProfileUserGroup.usergroup:=' => null,
-        ),xPDOQuery::SQL_AND,null,2);
+                'OR:ProfileUserGroup.usergroup:=' => null,
+            ),xPDOQuery::SQL_AND,null,2);
+        }
         $c->select($this->modx->getSelectColumns('modActionDom', 'modActionDom'));
         $c->select($this->modx->getSelectColumns('modFormCustomizationSet', 'FCSet', '', array(
             'constraint_class',
@@ -709,6 +711,7 @@ abstract class modManagerController {
         $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
+        /** @var modActionDom $rule */
         foreach ($domRules as $rule) {
             $template = $rule->get('template');
             if (!empty($template) && $obj) {
