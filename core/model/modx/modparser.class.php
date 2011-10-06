@@ -506,15 +506,21 @@ class modParser {
     public function getElement($class, $name) {
         $realname = $this->realname($name);
         if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
+            $sourceClass = !empty($this->modx->sourceCache[$class][$realname]['source']) ? $this->modx->sourceCache[$class][$realname]['source']['class_key'] : 'sources.modFileMediaSource';
+            $source = $this->modx->newObject($sourceClass);
+            /** @var modElement $element */
             $element = $this->modx->newObject($class);
+            $element->addOne($source,'Source');
             $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
             $element->setPolicies($this->modx->sourceCache[$class][$realname]['policies']);
         } else {
-            $element = $this->modx->getObject($class, array('name' => $realname), true);
+            /** @var modElement $element */
+            $element = $this->modx->getObjectGraph($class,array('Source' => array()),array('name' => $realname), true);
             if ($element && array_key_exists($class, $this->modx->sourceCache)) {
                 $this->modx->sourceCache[$class][$realname] = array(
                     'fields' => $element->toArray(),
-                    'policies' => $element->getPolicies()
+                    'policies' => $element->getPolicies(),
+                    'source' => $element->Source ? $element->Source->toArray() : array(),
                 );
             }
         }

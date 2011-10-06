@@ -271,6 +271,16 @@ class modMediaSource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Get the base path for this source. Only applicable to sources that are streams.
+     *
+     * @param string $file An optional file to find the base path with
+     * @return string
+     */
+    public function getBasePath($file = '') {
+        return '';
+    }
+
+    /**
      * Move a file or folder to a specific location
      * 
      * @param string $from The location to move from

@@ -19,7 +19,12 @@ class modFileMediaSource extends modMediaSource {
      */
     public function initialize() {
         parent::initialize();
-        $this->fileHandler = $this->xpdo->getService('fileHandler','modFileHandler', '', array('context' => $this->ctx->get('key')));
+        $options = array();
+        if (!$this->ctx) {
+            $this->ctx =& $this->xpdo->context;
+        }
+        $options['context'] = $this->ctx->get('key');
+        $this->fileHandler = $this->xpdo->getService('fileHandler','modFileHandler', '',$options);
     }
 
     /**
@@ -927,5 +932,17 @@ class modFileMediaSource extends modMediaSource {
             }
         }
         return $value;
+    }
+
+
+    /**
+     * Get the base path for this source. Only applicable to sources that are streams.
+     * 
+     * @param string $file An optional file to find the base path of
+     * @return string
+     */
+    public function getBasePath($file = '') {
+        $bases = $this->getBases($file);
+        return $bases['pathAbsolute'];
     }
 }

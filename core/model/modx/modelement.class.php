@@ -29,6 +29,8 @@
  * This class creates an instance of a modElement object. This should not be
  * called directly, but rather extended for derivative modElement classes.
  *
+ * @property modMediaSource $Source The associated Media Source, if any.
+ *
  * @package modx
  * @abstract Implement a derivative of this class to represent an element which
  * can be processed within the MODX framework.
@@ -447,6 +449,15 @@ class modElement extends modAccessibleSimpleObject {
                 $array = array();
                 if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
                     $this->xpdo->parser->processElementTags('', $filename);
+                }
+            }
+
+            if ($this->get('source') > 0) {
+                /** @var modMediaSource $source */
+                $source = $this->getOne('Source');
+                if ($source && $source->get('is_stream')) {
+                    $source->initialize();
+                    $filename = $source->getBasePath().$filename;
                 }
             }
 
