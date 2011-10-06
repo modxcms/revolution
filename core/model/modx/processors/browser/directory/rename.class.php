@@ -46,7 +46,7 @@ class modBrowserFolderRenameProcessor extends modProcessor {
             return $this->failure();
         }
 
-        $response = $this->source->renameFolder($fields['path'],$fields['name']);
+        $response = $this->source->renameContainer($fields['path'],$fields['name']);
         return $this->handleResponse($response);
     }
 

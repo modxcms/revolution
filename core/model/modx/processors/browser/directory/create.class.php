@@ -37,7 +37,7 @@ class modBrowserFolderCreateProcessor extends modProcessor {
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
 
-        $success = $this->source->createFolder($this->getProperty('name'),$this->getProperty('parent'));
+        $success = $this->source->createContainer($this->getProperty('name'),$this->getProperty('parent'));
 
         if (empty($success)) {
             $msg = '';

@@ -33,7 +33,7 @@ class modBrowserFileUploadProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
-        $success = $this->source->uploadToFolder($this->getProperty('path'),$_FILES);
+        $success = $this->source->uploadObjectsToContainer($this->getProperty('path'),$_FILES);
 
         if (empty($success)) {
             $msg = '';

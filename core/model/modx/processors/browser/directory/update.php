@@ -24,7 +24,7 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$success = $source->renameFolder($scriptProperties['dir'],$scriptProperties['name']);
+$success = $source->renameContainer($scriptProperties['dir'],$scriptProperties['name']);
 
 if (!$success) {
     $msg = '';

@@ -38,7 +38,7 @@ class modBrowserFolderChmodProcessor extends modProcessor {
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
 
-        $success = $this->source->chmodFolder($this->getProperty('dir'),$this->getProperty('mode'));
+        $success = $this->source->chmodContainer($this->getProperty('dir'),$this->getProperty('mode'));
 
         if (empty($success)) {
             $msg = '';

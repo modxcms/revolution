@@ -10,7 +10,7 @@
  * @package modx
  * @subpackage sources
  */
-class modFileMediaSource extends modMediaSource {
+class modFileMediaSource extends modMediaSource implements modMediaSourceInterface {
     /** @var modFileHandler */
     public $fileHandler;
 
@@ -92,11 +92,11 @@ class modFileMediaSource extends modMediaSource {
     /**
      * Return an array of files and folders at this current level in the directory structure
      * 
-     * @param string $dir
+     * @param string $path
      * @return array
      */
-    public function getFolderList($dir) {
-        $dir = $this->fileHandler->postfixSlash($dir);
+    public function getContainerList($path) {
+        $dir = $this->fileHandler->postfixSlash($path);
         $bases = $this->getBases($dir);
         if (empty($bases['pathAbsolute'])) return array();
         $fullPath = $bases['pathAbsolute'].ltrim($dir,'/');
@@ -285,20 +285,20 @@ class modFileMediaSource extends modMediaSource {
      * Create a filesystem folder
      *
      * @param string $name
-     * @param string $parentFolder
+     * @param string $parentContainer
      * @return boolean
      */
-    public function createFolder($name,$parentFolder) {
-        $bases = $this->getBases($parentFolder.'/'.$name);
-        if ($parentFolder == '/') {
-            $parentFolder = $bases['pathAbsolute'];
+    public function createContainer($name,$parentContainer) {
+        $bases = $this->getBases($parentContainer.'/'.$name);
+        if ($parentContainer == '/') {
+            $parentContainer = $bases['pathAbsolute'];
         } else {
-            $parentFolder = $bases['pathAbsolute'].$parentFolder;
+            $parentContainer = $bases['pathAbsolute'].$parentContainer;
         }
 
         /* create modDirectory instance for containing directory and validate */
         /** @var modDirectory $parentDirectory */
-        $parentDirectory = $this->fileHandler->make($parentFolder);
+        $parentDirectory = $this->fileHandler->make($parentContainer);
         if (!($parentDirectory instanceof modDirectory)) {
             $this->addError('parent',$this->xpdo->lexicon('file_folder_err_parent_invalid'));
             return false;
@@ -329,13 +329,15 @@ class modFileMediaSource extends modMediaSource {
     }
 
     /**
-     * @param string $folderPath
+     * Remove a folder at the specified location
+     * 
+     * @param string $path
      * @return boolean
      */
-    public function removeFolder($folderPath) {
+    public function removeContainer($path) {
         /* instantiate modDirectory object */
         /** @var modDirectory $directory */
-        $directory = $this->fileHandler->make($folderPath);
+        $directory = $this->fileHandler->make($path);
         
         /* validate and check permissions on directory */
         if (!($directory instanceof modDirectory)) {
@@ -362,7 +364,7 @@ class modFileMediaSource extends modMediaSource {
      * @param string $newName
      * @return bool
      */
-    public function renameFolder($oldPath,$newName) {
+    public function renameContainer($oldPath,$newName) {
         $bases = $this->getBases($oldPath);
         $oldPath = $bases['pathAbsolute'].$oldPath;
 
@@ -400,7 +402,7 @@ class modFileMediaSource extends modMediaSource {
      * @param string $newName
      * @return bool
      */
-    public function renameFile($oldPath,$newName) {
+    public function renameObject($oldPath,$newName) {
         /** @var modFile $oldFile */
         $oldFile = $this->fileHandler->make($oldPath);
 
@@ -430,12 +432,14 @@ class modFileMediaSource extends modMediaSource {
 
 
     /**
-     * @param string $filePath
+     * Get the contents of a specified file
+     * 
+     * @param string $objectPath
      * @return array
      */
-    public function getFile($filePath) {
+    public function getObjectContents($objectPath) {
         /** @var modFile $file */
-        $file = $this->fileHandler->make($filePath);
+        $file = $this->fileHandler->make($objectPath);
 
         if (!$file->exists()) {
             $this->addError('file',$this->xpdo->lexicon('file_err_nf'));
@@ -445,7 +449,7 @@ class modFileMediaSource extends modMediaSource {
         }
         $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
         $imageExtensions = explode(',',$imageExtensions);
-        $fileExtension = pathinfo($filePath,PATHINFO_EXTENSION);
+        $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
 
         $fa = array(
             'name' => $file->getPath(),
@@ -464,13 +468,13 @@ class modFileMediaSource extends modMediaSource {
     /**
      * Remove a file
      * 
-     * @param string $file
+     * @param string $objectPath
      * @return boolean
      */
-    public function removeFile($file) {
-        $bases = $this->getBases($file);
+    public function removeObject($objectPath) {
+        $bases = $this->getBases($objectPath);
 
-        $fullPath = $bases['pathAbsolute'].$file;
+        $fullPath = $bases['pathAbsolute'].$objectPath;
         if (!file_exists($fullPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$fullPath);
             return false;
@@ -505,21 +509,21 @@ class modFileMediaSource extends modMediaSource {
     /**
      * Update the contents of a file
      *
-     * @param string $filePath
+     * @param string $objectPath
      * @param string $content
      * @return boolean|string
      */
-    public function updateFile($filePath,$content) {
-        $bases = $this->getBases($filePath);
+    public function updateObject($objectPath,$content) {
+        $bases = $this->getBases($objectPath);
 
-        $fullPath = $bases['pathAbsolute'].ltrim($filePath,'/');
+        $fullPath = $bases['pathAbsolute'].ltrim($objectPath,'/');
 
         /** @var modFile $file */
         $file = $this->fileHandler->make($fullPath);
 
         /* verify file exists */
         if (!$file->exists()) {
-            $this->addError('file',$this->xpdo->lexicon('file_err_nf').': '.$filePath);
+            $this->addError('file',$this->xpdo->lexicon('file_err_nf').': '.$objectPath);
             return false;
         }
 
@@ -535,14 +539,14 @@ class modFileMediaSource extends modMediaSource {
     /**
      * Upload files to a specific folder on the file system
      * 
-     * @param string $targetDirectory
-     * @param array $files
+     * @param string $container
+     * @param array $objects
      * @return boolean
      */
-    public function uploadToFolder($targetDirectory,array $files = array()) {
-        $bases = $this->getBases($targetDirectory);
+    public function uploadObjectsToContainer($container,array $objects = array()) {
+        $bases = $this->getBases($container);
 
-        $fullPath = $bases['pathAbsolute'].ltrim($targetDirectory,'/');
+        $fullPath = $bases['pathAbsolute'].ltrim($container,'/');
 
         /** @var modDirectory $directory */
         $directory = $this->fileHandler->make($fullPath);
@@ -564,7 +568,7 @@ class modFileMediaSource extends modMediaSource {
         $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
 
         /* loop through each file and upload */
-        foreach ($files as $file) {
+        foreach ($objects as $file) {
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
             $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
@@ -597,8 +601,8 @@ class modFileMediaSource extends modMediaSource {
 
         /* invoke event */
         $this->xpdo->invokeEvent('OnFileManagerUpload',array(
-            'files' => &$_FILES,
-            'directory' => &$directory,
+            'files' => &$objects,
+            'directory' => $container,
             'source' => &$this,
         ));
 
@@ -614,7 +618,7 @@ class modFileMediaSource extends modMediaSource {
      * @param string $mode
      * @return boolean
      */
-    public function chmodFolder($directoryPath,$mode) {
+    public function chmodContainer($directoryPath,$mode) {
         /** @var modDirectory $directory */
         $directory = $this->fileHandler->make($directoryPath);
 
@@ -690,11 +694,11 @@ class modFileMediaSource extends modMediaSource {
     /**
      * Get a list of files in a specific directory.
      *
-     * @param string $dir
+     * @param string $path
      * @return array
      */
-    public function getFilesInDirectory($dir) {
-        $dir = $this->fileHandler->postfixSlash($dir);
+    public function getObjectsInContainer($path) {
+        $dir = $this->fileHandler->postfixSlash($path);
         $bases = $this->getBases($dir);
         if (empty($bases['pathAbsolute'])) return array();
         $fullPath = $bases['pathAbsolute'].$dir;
@@ -938,11 +942,11 @@ class modFileMediaSource extends modMediaSource {
     /**
      * Get the base path for this source. Only applicable to sources that are streams.
      * 
-     * @param string $file An optional file to find the base path of
+     * @param string $object An optional file to find the base path of
      * @return string
      */
-    public function getBasePath($file = '') {
-        $bases = $this->getBases($file);
+    public function getBasePath($object = '') {
+        $bases = $this->getBases($object);
         return $bases['pathAbsolute'];
     }
 }

@@ -24,7 +24,7 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$success = $source->removeFile($scriptProperties['file']);
+$success = $source->removeObject($scriptProperties['file']);
 
 if (empty($success)) {
     $msg = '';

@@ -24,7 +24,7 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$fileArray = $source->getFile($file);
+$fileArray = $source->getObjectContents($file);
 
 if (empty($fileArray)) {
     $msg = '';

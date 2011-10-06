@@ -24,7 +24,7 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$success = $source->renameFile($oldFile,$scriptProperties['name']);
+$success = $source->renameObject($oldFile,$scriptProperties['name']);
 
 if (empty($success)) {
     $msg = '';

@@ -45,7 +45,7 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
 
-        $list = $this->source->getFolderList($this->getProperty('dir'));
+        $list = $this->source->getContainerList($this->getProperty('dir'));
         return $this->modx->toJSON($list);
     }
 

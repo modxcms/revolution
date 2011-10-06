@@ -27,7 +27,7 @@ if (!$source->getWorkingContext()) {
 }
 $source->setRequestProperties($scriptProperties);
 $source->initialize();
-$path = $source->updateFile($scriptProperties['file'],$scriptProperties['content']);
+$path = $source->updateObject($scriptProperties['file'],$scriptProperties['content']);
 
 if (empty($path)) {
     $msg = '';

@@ -10,7 +10,7 @@
  * @package modx
  * @subpackage sources
  */
-class modS3MediaSource extends modMediaSource {
+class modS3MediaSource extends modMediaSource implements modMediaSourceInterface {
     /** @var AmazonS3 $driver */
     public $driver;
     /** @var string $bucket */
@@ -100,7 +100,7 @@ class modS3MediaSource extends modMediaSource {
      * @param string $dir
      * @return array
      */
-    public function getObjectList($dir) {
+    public function getS3ObjectList($dir) {
         $c['delimiter'] = '/';
         if (!empty($dir) && $dir != '/') { $c['prefix'] = $dir; }
 
@@ -119,57 +119,57 @@ class modS3MediaSource extends modMediaSource {
     }
 
     /**
-     * @param string $dir
+     * @param string $path
      * @return array
      */
-    public function getFolderList($dir) {
+    public function getContainerList($path) {
         $properties = $this->getPropertyList();
-        $list = $this->getObjectList($dir);
+        $list = $this->getS3ObjectList($path);
 
         $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
         $directories = array();
         $files = array();
-        foreach ($list as $idx => $path) {
-            if ($path == $dir) continue;
-            $fileName = basename($path);
-            $isDir = substr(strrev($path),0,1) === '/';
+        foreach ($list as $idx => $currentPath) {
+            if ($currentPath == $path) continue;
+            $fileName = basename($currentPath);
+            $isDir = substr(strrev($currentPath),0,1) === '/';
 
             $extension = pathinfo($fileName,PATHINFO_EXTENSION);
             $extension = $useMultiByte ? mb_strtolower($extension,$encoding) : strtolower($extension);
 
-            $relativePath = $path == '/' ? $path : str_replace($dir,'',$path);
+            $relativePath = $currentPath == '/' ? $currentPath : str_replace($path,'',$currentPath);
             $slashCount = substr_count($relativePath,'/');
             if (($slashCount > 1 && $isDir) || ($slashCount > 0 && !$isDir)) {
                 continue;
             }
             if ($isDir) {
-                $directories[$path] = array(
-                    'id' => $path,
+                $directories[$currentPath] = array(
+                    'id' => $currentPath,
                     'text' => $fileName,
                     'cls' => 'icon-'.$extension,
                     'type' => 'dir',
                     'leaf' => false,
-                    'path' => $path,
-                    'pathRelative' => $path,
+                    'path' => $currentPath,
+                    'pathRelative' => $currentPath,
                     'perms' => '',
                 );
-                $directories[$path]['menu'] = array('items' => $this->getListContextMenu($path,$isDir,$directories[$path]));
+                $directories[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$directories[$currentPath]));
             } else {
-                $files[$path] = array(
-                    'id' => $path,
+                $files[$currentPath] = array(
+                    'id' => $currentPath,
                     'text' => $fileName,
                     'cls' => 'icon-'.$extension,
                     'type' => 'file',
                     'leaf' => true,
-                    'path' => $path,
-                    'pathRelative' => $path,
-                    'directory' => $path,
-                    'url' => rtrim($properties['url'],'/').'/'.$path,
-                    'file' => $path,
+                    'path' => $currentPath,
+                    'pathRelative' => $currentPath,
+                    'directory' => $currentPath,
+                    'url' => rtrim($properties['url'],'/').'/'.$currentPath,
+                    'file' => $currentPath,
                 );
-                $files[$path]['menu'] = array('items' => $this->getListContextMenu($path,$isDir,$files[$path]));
+                $files[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$files[$currentPath]));
             }
         }
 
@@ -243,11 +243,11 @@ class modS3MediaSource extends modMediaSource {
     /**
      * Get all files in the directory and prepare thumbnail views
      * 
-     * @param string $dir
+     * @param string $path
      * @return array
      */
-    public function getFilesInDirectory($dir) {
-        $list = $this->getObjectList($dir);
+    public function getObjectsInContainer($path) {
+        $list = $this->getS3ObjectList($path);
         $properties = $this->getPropertyList();
 
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
@@ -349,14 +349,14 @@ class modS3MediaSource extends modMediaSource {
     }
 
     /**
-     * Create a folder
+     * Create a Container
      *
      * @param string $name
-     * @param string $parentFolder
+     * @param string $parentContainer
      * @return boolean
      */
-    public function createFolder($name,$parentFolder) {
-        $newPath = $parentFolder.rtrim($name,'/').'/';
+    public function createContainer($name,$parentContainer) {
+        $newPath = $parentContainer.rtrim($name,'/').'/';
         /* check to see if folder already exists */
         if ($this->driver->if_object_exists($this->bucket,$newPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ae').': '.$newPath);
@@ -382,20 +382,20 @@ class modS3MediaSource extends modMediaSource {
     /**
      * Remove an empty folder from s3
      *
-     * @param $filePath
+     * @param $path
      * @return boolean
      */
-    public function removeFolder($filePath) {
-        if (!$this->driver->if_object_exists($this->bucket,$filePath)) {
-            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$filePath);
+    public function removeContainer($path) {
+        if (!$this->driver->if_object_exists($this->bucket,$path)) {
+            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$path);
             return false;
         }
 
         /* remove file from s3 */
-        $deleted = $this->driver->delete_object($this->bucket,$filePath);
+        $deleted = $this->driver->delete_object($this->bucket,$path);
 
         /* log manager action */
-        $this->xpdo->logManagerAction('directory_remove','',$filePath);
+        $this->xpdo->logManagerAction('directory_remove','',$path);
 
         return !empty($deleted);
     }
@@ -404,20 +404,20 @@ class modS3MediaSource extends modMediaSource {
     /**
      * Delete a file from S3
      * 
-     * @param string $filePath
+     * @param string $objectPath
      * @return boolean
      */
-    public function removeFile($filePath) {
-        if (!$this->driver->if_object_exists($this->bucket,$filePath)) {
-            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$filePath);
+    public function removeObject($objectPath) {
+        if (!$this->driver->if_object_exists($this->bucket,$objectPath)) {
+            $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$objectPath);
             return false;
         }
 
         /* remove file from s3 */
-        $deleted = $this->driver->delete_object($this->bucket,$filePath);
+        $deleted = $this->driver->delete_object($this->bucket,$objectPath);
 
         /* log manager action */
-        $this->xpdo->logManagerAction('file_remove','',$filePath);
+        $this->xpdo->logManagerAction('file_remove','',$objectPath);
 
         return !empty($deleted);
     }
@@ -429,7 +429,7 @@ class modS3MediaSource extends modMediaSource {
      * @param string $newName
      * @return bool
      */
-    public function renameFile($oldPath,$newName) {
+    public function renameObject($oldPath,$newName) {
         if (!$this->driver->if_object_exists($this->bucket,$oldPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$oldPath);
             return false;
@@ -460,12 +460,12 @@ class modS3MediaSource extends modMediaSource {
     /**
      * Upload files to S3
      * 
-     * @param string $targetDirectory
-     * @param array $files
+     * @param string $container
+     * @param array $objects
      * @return bool
      */
-    public function uploadToFolder($targetDirectory,array $files = array()) {
-        if ($targetDirectory == '/' || $targetDirectory == '.') $targetDirectory = '';
+    public function uploadObjectsToContainer($container,array $objects = array()) {
+        if ($container == '/' || $container == '.') $container = '';
 
         $allowedFileTypes = explode(',',$this->xpdo->getOption('upload_files',null,''));
         $allowedFileTypes = array_merge(explode(',',$this->xpdo->getOption('upload_images')),explode(',',$this->xpdo->getOption('upload_media')),explode(',',$this->xpdo->getOption('upload_flash')),$allowedFileTypes);
@@ -473,7 +473,7 @@ class modS3MediaSource extends modMediaSource {
         $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
 
         /* loop through each file and upload */
-        foreach ($files as $file) {
+        foreach ($objects as $file) {
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
             $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
@@ -495,7 +495,7 @@ class modS3MediaSource extends modMediaSource {
                 continue;
             }
 
-            $newPath = $targetDirectory.$file['name'];
+            $newPath = $container.$file['name'];
 
             $uploaded = $this->driver->create_object($this->bucket,$newPath,array(
                 'fileUpload' => $file['tmp_name'],
@@ -510,12 +510,12 @@ class modS3MediaSource extends modMediaSource {
 
         /* invoke event */
         $this->xpdo->invokeEvent('OnFileManagerUpload',array(
-            'files' => &$_FILES,
-            'directory' => &$targetDirectory,
+            'files' => &$objects,
+            'directory' => $container,
             'source' => &$this,
         ));
 
-        $this->xpdo->logManagerAction('file_upload','',$targetDirectory);
+        $this->xpdo->logManagerAction('file_upload','',$container);
 
         return true;
     }

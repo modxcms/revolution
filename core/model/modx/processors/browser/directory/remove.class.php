@@ -42,7 +42,7 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
 
-        $success = $this->source->removeFolder($this->getProperty('dir'));
+        $success = $this->source->removeContainer($this->getProperty('dir'));
 
         if (empty($success)) {
             $msg = '';

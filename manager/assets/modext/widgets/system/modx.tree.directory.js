@@ -335,13 +335,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,url: MODx.config.connectors_url+'browser/file.php'
             ,params: {
                 action: 'remove'
-                ,file: node.attributes.path
-                ,prependPath: this.config.prependPath || null
-                ,prependUrl: this.config.prependUrl || null
-                ,basePath: this.config.basePath || ''
-                ,basePathRelative: this.config.basePathRelative || null
-                ,baseUrl: this.config.baseUrl || ''
-                ,baseUrlRelative: this.config.baseUrlRelative || null
+                ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }

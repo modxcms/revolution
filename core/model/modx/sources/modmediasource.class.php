@@ -4,6 +4,160 @@
  * @subpackage sources
  */
 /**
+ * The interface used for defining common methods for Media Source drivers
+ * @package modx
+ */
+interface modMediaSourceInterface
+    /**
+     * Initialize the source, preparing it for usage.
+     * 
+     * @return boolean
+     */{
+    public function initialize();
+    
+    /**
+     * Return an array of containers at this current level in the container structure. Used for the tree
+     * navigation on the files tree.
+     *
+     * @abstract
+     * @param string $path
+     * @return array
+     */
+    public function getContainerList($path);
+    
+    /**
+     * Return a detailed list of objects in a specific path. Used for thumbnails in the Browser.
+     *
+     * @param string $path
+     * @return array
+     */
+    public function getObjectsInContainer($path);
+
+    /**
+     * Create a container at the passed location with the passed name
+     *
+     * @abstract
+     * @param string $name
+     * @param string $parentContainer
+     * @return boolean
+     */
+    public function createContainer($name,$parentContainer);
+
+    /**
+     * Remove the specified container
+     *
+     * @abstract
+     * @param string $path
+     * @return boolean
+     */
+    public function removeContainer($path);
+
+    /**
+     * Rename a container
+     *
+     * @abstract
+     * @param string $oldPath
+     * @param string $newName
+     * @return boolean
+     */
+    public function renameContainer($oldPath,$newName);
+
+    /**
+     * Upload objects to a specific container
+     *
+     * @abstract
+     * @param string $container
+     * @param array $objects
+     * @return boolean
+     */
+    public function uploadObjectsToContainer($container,array $objects = array());
+
+    /**
+     * Get the contents of an object
+     *
+     * @abstract
+     * @param string $objectPath
+     * @return boolean
+     */
+    public function getObjectContents($objectPath);
+
+    /**
+     * Update the contents of a specific object
+     *
+     * @abstract
+     * @param string $objectPath
+     * @param string $content
+     * @return boolean
+     */
+    public function updateObject($objectPath,$content);
+
+    /**
+     * Remove an object
+     *
+     * @abstract
+     * @param string $objectPath
+     * @return boolean
+     */
+    public function removeObject($objectPath);
+
+    /**
+     * Rename a file/object
+     *
+     * @abstract
+     * @param string $oldPath
+     * @param string $newName
+     * @return bool
+     */
+    public function renameObject($oldPath,$newName);
+
+    /**
+     * Get the openTo path for this source, used with TV input types and Static Elements/Resources
+     *
+     * @param string $value
+     * @param array $parameters
+     * @return string
+     */
+    public function getOpenTo($value,array $parameters = array());
+
+    /**
+     * Get the base path for this source. Only applicable to sources that are streams, used for determining
+     * the base path with Static objects.
+     *
+     * @param string $object An optional file to find the base path with
+     * @return string
+     */
+    public function getBasePath($object = '');
+
+    /**
+     * Move a file or folder to a specific location
+     *
+     * @param string $from The location to move from
+     * @param string $to The location to move to
+     * @return boolean
+     */
+    public function moveObject($from,$to);
+
+    /**
+     * Get the name of this source type, ie, "File System"
+     * @return string
+     */
+    public function getTypeName();
+
+    /**
+     * Get a short description of this source type
+     * @return string
+     */
+    public function getTypeDescription();
+
+    /**
+     * Get the default properties for this source. Override this in your custom source driver to provide custom
+     * properties for your source type.
+     * @return array
+     */
+    public function getDefaultProperties();
+    
+}
+/**
  * An abstract base class used for determining functionality of different media source drivers. Extend this class in
  * your driver implementations to provide custom functionality for different types of media sources. The methods that
  * you can override for basic functionality are the following:
@@ -25,7 +179,7 @@
  * @package modx
  * @subpackage sources
  */
-class modMediaSource extends modAccessibleSimpleObject {
+class modMediaSource extends modAccessibleSimpleObject implements modMediaSourceInterface {
     /** @var modX|xPDO $xpdo */
     public $xpdo;
     /** @var modContext $ctx */
@@ -78,7 +232,7 @@ class modMediaSource extends modAccessibleSimpleObject {
 
     /**
      * Initialize the source
-     * @return bool
+     * @return boolean
      */
     public function initialize() {
         $this->getPermissions();
@@ -154,105 +308,21 @@ class modMediaSource extends modAccessibleSimpleObject {
         return !empty($this->errors);
     }
 
-    /**
-     * Return an array of files and folders at this current level in the directory structure.
-     *
-     * @abstract
-     * @param string $dir
-     * @return array
-     */
-    public function getFolderList($dir) { return array(); }
+    public function getContainerList($path) { return array(); }
+    public function getObjectsInContainer($path) { return array(); }
+    public function createContainer($name,$parentContainer) { return true; }
+    public function removeContainer($path) { return true; }
+    public function renameContainer($oldPath,$newName) { return true; }
+    public function updateContainer() { return true; }
+    public function uploadObjectsToContainer($container,array $objects = array()) { return true; }
+    public function getObjectContents($objectPath) { return true; }
+    public function updateObject($objectPath,$content) { return true; }
+    public function removeObject($objectPath) { return true; }
+    public function renameObject($oldPath,$newName) { return true; }
+    public function getBasePath($object = '') { return ''; }
+    public function moveObject($from,$to) { return true; }
+    public function getDefaultProperties() { return array(); }
 
-    /**
-     * Return a detailed list of files in a specific directory. Used for thumbnails in the Browser.
-     * 
-     * @param string $dir
-     * @return array
-     */
-    public function getFilesInDirectory($dir) { return array(); }
-
-    /**
-     * Create a folder at the passed location
-     * 
-     * @abstract
-     * @param string $folderName
-     * @return boolean
-     */
-    public function createFolder($folderName) { return true; }
-
-    /**
-     * Remove the specified folder
-     *
-     * @abstract
-     * @param string $folderPath
-     * @return boolean
-     */
-    public function removeFolder($folderPath) { return true; }
-
-    /**
-     * Rename a folder
-     * 
-     * @abstract
-     * @param string $oldPath
-     * @param string $newName
-     * @return boolean
-     */
-    public function renameFolder($oldPath,$newName) { return true; }
-
-    /**
-     * Update a folder
-     *
-     * @return boolean
-     */
-    public function updateFolder() { return true; }
-
-    /**
-     * Upload files to a specific folder
-     *
-     * @abstract
-     * @param string $targetDirectory
-     * @param array $files
-     * @return boolean
-     */
-    public function uploadToFolder($targetDirectory,array $files = array()) { return true; }
-
-    /**
-     * Get the contents of a file
-     * 
-     * @abstract
-     * @param string $filePath
-     * @return bool
-     */
-    public function getFile($filePath) { return true; }
-
-    /**
-     * Update the contents of a specific file
-     *
-     * @abstract
-     * @param string $filePath
-     * @param string $content
-     * @return boolean
-     */
-    public function updateFile($filePath,$content) { return true; }
-
-    /**
-     * Remove a file
-     *
-     * @abstract
-     * @param string $filePath
-     * @return bool
-     */
-    public function removeFile($filePath) { return true; }
-
-    /**
-     * Rename a file
-     *
-     * @abstract
-     * @param string $oldPath
-     * @param string $newName
-     * @return bool
-     */
-    public function renameFile($oldPath,$newName) { return true; }
 
     /**
      * Get the openTo directory for this source, used with TV input types
@@ -271,27 +341,6 @@ class modMediaSource extends modAccessibleSimpleObject {
     }
 
     /**
-     * Get the base path for this source. Only applicable to sources that are streams.
-     *
-     * @param string $file An optional file to find the base path with
-     * @return string
-     */
-    public function getBasePath($file = '') {
-        return '';
-    }
-
-    /**
-     * Move a file or folder to a specific location
-     * 
-     * @param string $from The location to move from
-     * @param string $to The location to move to
-     * @return boolean
-     */
-    public function moveObject($from,$to) {
-        return true;
-    }
-
-    /**
      * Get the name of this source type
      * @return string
      */
@@ -306,15 +355,6 @@ class modMediaSource extends modAccessibleSimpleObject {
     public function getTypeDescription() {
         $this->xpdo->lexicon->load('source');
         return $this->xpdo->lexicon('source_type.file_desc');
-    }
-
-    /**
-     * Get the default properties for this source. Override this in your custom source driver to provide custom
-     * properties for your source type.
-     * @return array
-     */
-    public function getDefaultProperties() {
-        return array();
     }
 
     /**

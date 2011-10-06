@@ -43,7 +43,7 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
 
-        $list = $this->source->getFilesInDirectory($this->getProperty('dir'));
+        $list = $this->source->getObjectsInContainer($this->getProperty('dir'));
         return $this->outputArray($list);
     }
 
