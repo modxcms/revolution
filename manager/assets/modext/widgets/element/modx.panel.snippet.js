@@ -172,9 +172,13 @@ MODx.panel.Snippet = function(config) {
                         ,id: 'modx-snippet-static-source'
                         ,anchor: '100%'
                         ,maxLength: 255
-                        ,value: config.record.source || 1
+                        ,value: config.record.source || 0
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
+                        ,baseParams: {
+                            action: 'getList'
+                            ,showNone: true
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-static-source'

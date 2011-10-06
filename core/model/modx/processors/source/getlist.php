@@ -49,8 +49,8 @@ $list = array();
 if ($showNone) {
     $list[] = array(
         'id' => 0,
-        'name' => $modx->lexicon('none'),
-        'description' => $modx->lexicon('none'),
+        'name' => '('.$modx->lexicon('none').')',
+        'description' => '',
     );
 }
 /** @var modMediaSource $source */
