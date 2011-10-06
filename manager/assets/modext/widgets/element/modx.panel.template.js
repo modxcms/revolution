@@ -91,24 +91,29 @@ MODx.panel.Template = function(config) {
                         ,html: _('template_desc_description')
                         ,cls: 'desc-under'
                     },{
-                        xtype: 'xcheckbox'
-                        ,hideLabel: true
-                        ,boxLabel: _('is_static')
-                        ,description: _('is_static_msg')
-                        ,name: 'static'
-                        ,id: 'modx-template-static'
-                        ,inputValue: 1
-                        ,checked: config.record['static'] || false
-                    },{
-                        xtype: 'textfield'
+                        xtype: 'modx-combo-browser'
+                        ,browserEl: 'modx-browser'
                         ,fieldLabel: _('static_file')
-                        ,description: _('static_file_msg')
+                        ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
+                        ,prependPath: false
+                        ,prependUrl: false
+                        ,hideFiles: false
+                        ,openTo: config.record.openTo || ''
                         ,id: 'modx-template-static-file'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
                         ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-template-static-file'
+                        ,id: 'modx-template-static-file-help'
+                        ,html: _('static_file_msg')
+                        ,cls: 'desc-under'
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
                     },{
                         html: MODx.onTempFormRender
                         ,border: false
@@ -145,6 +150,40 @@ MODx.panel.Template = function(config) {
                         ,id: 'modx-template-clear-cache'
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
+                    },{
+                        xtype: 'xcheckbox'
+                        ,hideLabel: true
+                        ,boxLabel: _('is_static')
+                        ,description: MODx.expandHelp ? '' : _('is_static_msg')
+                        ,name: 'static'
+                        ,id: 'modx-template-static'
+                        ,inputValue: 1
+                        ,checked: config.record['static'] || false
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-template-static'
+                        ,id: 'modx-template-static-help'
+                        ,html: _('is_static_msg')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'modx-combo-source'
+                        ,fieldLabel: _('static_source')
+                        ,description: MODx.expandHelp ? '' : _('static_source_msg')
+                        ,name: 'source'
+                        ,id: 'modx-template-static-source'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,value: config.record.source || 1
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-template-static-source'
+                        ,id: 'modx-template-static-source-help'
+                        ,html: _('static_source_msg')
+                        ,cls: 'desc-under'
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
                     }]
                 }]
 			},{
@@ -271,12 +310,18 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        var staticFile = Ext.getCmp('modx-template-static-file');
-        if (!staticFile) { return false; }
+        var flds = ['modx-template-static-file','modx-template-static-file-help','modx-template-static-source','modx-template-static-source-help'];
+        var fld,i;
         if (cb.checked) {
-            staticFile.show();
+            for (i in flds) {
+                fld = Ext.getCmp(flds[i]);
+                if (fld) { fld.show(); }
+            }
         } else {
-            staticFile.hide();
+            for (i in flds) {
+                fld = Ext.getCmp(flds[i]);
+                if (fld) { fld.hide(); }
+            }
         }
     }
 });

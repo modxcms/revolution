@@ -6,10 +6,15 @@
  * @subpackage manager.controllers
  */
 class ElementSnippetUpdateManagerController extends modManagerController {
+    /** @var modCategory $category */
     public $category;
+    /** @var modSnippet $snippet */
     public $snippet;
+    /** @var array $snippetArray */
     public $snippetArray;
+    /** @var string $onSnipFormRender */
     public $onSnipFormRender = '';
+    /** @var string $onSnipFormPrerender */
     public $onSnipFormPrerender = '';
 
     /**
@@ -84,6 +89,8 @@ class ElementSnippetUpdateManagerController extends modManagerController {
             $this->snippetArray['snippet'] = "<?php\n".$this->snippetArray['snippet'];
         }
 
+        $this->prepareElement();
+
         /* load snippet into parser */
         $placeholders['snippet'] = $this->snippet;
 
@@ -91,6 +98,20 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $placeholders['onSnipFormRender'] = $this->fireRenderEvent();
 
         return $placeholders;
+    }
+
+    /**
+     * Prepare the element and get the static openTo path if needed
+     *
+     * @return void|string
+     */
+    public function prepareElement() {
+        $this->snippetArray['openTo'] = '/';
+        if (!empty($this->snippetArray['static'])) {
+            $file = $this->snippet->get('static_file');
+            $this->snippetArray['openTo'] = dirname($file).'/';
+        }
+        return $this->snippetArray['openTo'];
     }
 
     /**

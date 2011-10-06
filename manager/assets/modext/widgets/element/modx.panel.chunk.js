@@ -89,24 +89,29 @@ MODx.panel.Chunk = function(config) {
                         ,html: _('chunk_desc_description')
                         ,cls: 'desc-under'
                     },{
-                        xtype: 'xcheckbox'
-                        ,boxLabel: _('is_static')
-                        ,hideLabel: true
-                        ,description: _('is_static_msg')
-                        ,name: 'static'
-                        ,id: 'modx-chunk-static'
-                        ,inputValue: 1
-                        ,checked: config.record['static'] || false
-                    },{
-                        xtype: 'textfield'
+                        xtype: 'modx-combo-browser'
+                        ,browserEl: 'modx-browser'
                         ,fieldLabel: _('static_file')
-                        ,description: _('static_file_msg')
+                        ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
+                        ,prependPath: false
+                        ,prependUrl: false
+                        ,hideFiles: false
+                        ,openTo: config.record.openTo || ''
                         ,id: 'modx-chunk-static-file'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
                         ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-chunk-static-file'
+                        ,id: 'modx-chunk-static-file-help'
+                        ,html: _('static_file_msg')
+                        ,cls: 'desc-under'
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
                     },{
                         html: MODx.onChunkFormRender
                         ,border: false
@@ -144,6 +149,40 @@ MODx.panel.Chunk = function(config) {
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
 
+                    },{
+                        xtype: 'xcheckbox'
+                        ,hideLabel: true
+                        ,boxLabel: _('is_static')
+                        ,description: MODx.expandHelp ? '' : _('is_static_msg')
+                        ,name: 'static'
+                        ,id: 'modx-chunk-static'
+                        ,inputValue: 1
+                        ,checked: config.record['static'] || false
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-chunk-static'
+                        ,id: 'modx-chunk-static-help'
+                        ,html: _('is_static_msg')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'modx-combo-source'
+                        ,fieldLabel: _('static_source')
+                        ,description: MODx.expandHelp ? '' : _('static_source_msg')
+                        ,name: 'source'
+                        ,id: 'modx-chunk-static-source'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,value: config.record.source || 1
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-chunk-static-source'
+                        ,id: 'modx-chunk-static-source-help'
+                        ,html: _('static_source_msg')
+                        ,cls: 'desc-under'
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
                     }]
                 }]
 			},{
@@ -235,12 +274,18 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        var staticFile = Ext.getCmp('modx-chunk-static-file');
-        if (!staticFile) { return false; }
+        var flds = ['modx-chunk-static-file','modx-chunk-static-file-help','modx-chunk-static-source','modx-chunk-static-source-help'];
+        var fld,i;
         if (cb.checked) {
-            staticFile.show();
+            for (i in flds) {
+                fld = Ext.getCmp(flds[i]);
+                if (fld) { fld.show(); }
+            }
         } else {
-            staticFile.hide();
+            for (i in flds) {
+                fld = Ext.getCmp(flds[i]);
+                if (fld) { fld.hide(); }
+            }
         }
     }
 });

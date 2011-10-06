@@ -90,24 +90,29 @@ MODx.panel.Plugin = function(config) {
                         ,html: _('plugin_desc_description')
                         ,cls: 'desc-under'
                     },{
-                        xtype: 'xcheckbox'
-                        ,hideLabel: true
-                        ,boxLabel: _('is_static')
-                        ,description: _('is_static_msg')
-                        ,name: 'static'
-                        ,id: 'modx-plugin-static'
-                        ,inputValue: 1
-                        ,checked: config.record['static'] || false
-                    },{
-                        xtype: 'textfield'
+                        xtype: 'modx-combo-browser'
+                        ,browserEl: 'modx-browser'
                         ,fieldLabel: _('static_file')
-                        ,description: _('static_file_msg')
+                        ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
+                        ,prependPath: false
+                        ,prependUrl: false
+                        ,hideFiles: false
+                        ,openTo: config.record.openTo || ''
                         ,id: 'modx-plugin-static-file'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
                         ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-plugin-static-file'
+                        ,id: 'modx-plugin-static-file-help'
+                        ,html: _('static_file_msg')
+                        ,cls: 'desc-under'
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
                     },{
                         html: MODx.onPluginFormRender
                         ,border: false
@@ -130,6 +135,7 @@ MODx.panel.Plugin = function(config) {
                         ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
+                        ,hideLabel: true
                         ,boxLabel: _('plugin_disabled')
                         ,name: 'disabled'
                         ,id: 'modx-plugin-disabled'
@@ -153,6 +159,40 @@ MODx.panel.Plugin = function(config) {
                         ,id: 'modx-plugin-clear-cache'
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
+                    },{
+                        xtype: 'xcheckbox'
+                        ,hideLabel: true
+                        ,boxLabel: _('is_static')
+                        ,description: MODx.expandHelp ? '' : _('is_static_msg')
+                        ,name: 'static'
+                        ,id: 'modx-plugin-static'
+                        ,inputValue: 1
+                        ,checked: config.record['static'] || false
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-plugin-static'
+                        ,id: 'modx-plugin-static-help'
+                        ,html: _('is_static_msg')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'modx-combo-source'
+                        ,fieldLabel: _('static_source')
+                        ,description: MODx.expandHelp ? '' : _('static_source_msg')
+                        ,name: 'source'
+                        ,id: 'modx-plugin-static-source'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,value: config.record.source || 1
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-plugin-static-source'
+                        ,id: 'modx-plugin-static-source-help'
+                        ,html: _('static_source_msg')
+                        ,cls: 'desc-under'
+                        ,hidden: !config.record['static']
+                        ,hideMode: 'offsets'
                     }]
 
                 }]
@@ -274,12 +314,18 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        var staticFile = Ext.getCmp('modx-plugin-static-file');
-        if (!staticFile) { return false; }
+        var flds = ['modx-plugin-static-file','modx-plugin-static-file-help','modx-plugin-static-source','modx-plugin-static-source-help'];
+        var fld,i;
         if (cb.checked) {
-            staticFile.show();
+            for (i in flds) {
+                fld = Ext.getCmp(flds[i]);
+                if (fld) { fld.show(); }
+            }
         } else {
-            staticFile.hide();
+            for (i in flds) {
+                fld = Ext.getCmp(flds[i]);
+                if (fld) { fld.hide(); }
+            }
         }
     }
 });
