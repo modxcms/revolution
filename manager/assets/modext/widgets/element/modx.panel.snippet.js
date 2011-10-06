@@ -84,28 +84,29 @@ MODx.panel.Snippet = function(config) {
                         ,maxLength: 255
                         ,value: config.record.description || ''
                     },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-snippet-description'
+                        ,html: _('snippet_desc_description')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'xcheckbox'
-                        ,fieldLabel: _('is_static')
+                        ,hideLabel: true
+                        ,boxLabel: _('is_static')
                         ,description: _('is_static_msg')
                         ,name: 'static'
                         ,id: 'modx-snippet-static'
                         ,inputValue: 1
-                        ,checked: config.record.static || false
+                        ,checked: config.record['static'] || false
                     },{
                         xtype: 'textfield'
                         ,fieldLabel: _('static_file')
                         ,description: _('static_file_msg')
                         ,name: 'static_file'
                         ,id: 'modx-snippet-static-file'
-                        ,width: 300
+                        ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
-                        ,hidden: !config.record.static
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
-                        ,forId: 'modx-snippet-description'
-                        ,html: _('snippet_desc_description')
-                        ,cls: 'desc-under'
+                        ,hidden: !config.record['static']
                     },{
                         html: MODx.onSnipFormRender
                         ,border: false

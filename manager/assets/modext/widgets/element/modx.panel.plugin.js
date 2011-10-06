@@ -91,22 +91,23 @@ MODx.panel.Plugin = function(config) {
                         ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
-                        ,fieldLabel: _('is_static')
+                        ,hideLabel: true
+                        ,boxLabel: _('is_static')
                         ,description: _('is_static_msg')
                         ,name: 'static'
                         ,id: 'modx-plugin-static'
                         ,inputValue: 1
-                        ,checked: config.record.static || false
+                        ,checked: config.record['static'] || false
                     },{
                         xtype: 'textfield'
                         ,fieldLabel: _('static_file')
                         ,description: _('static_file_msg')
                         ,name: 'static_file'
                         ,id: 'modx-plugin-static-file'
-                        ,width: 300
+                        ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
-                        ,hidden: !config.record.static
+                        ,hidden: !config.record['static']
                     },{
                         html: MODx.onPluginFormRender
                         ,border: false
