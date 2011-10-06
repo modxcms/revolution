@@ -188,7 +188,7 @@ MODx.combo.Policy = function(config) {
         ,hiddenName: 'policy'
         ,displayField: 'name'
         ,valueField: 'id'
-        ,fields: ['name','id']
+        ,fields: ['name','id','permissions']
         ,allowBlank: false
         ,editable: false
         ,pageSize: 20

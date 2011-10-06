@@ -1476,3 +1476,12 @@ span.required {
 .modx-tv .x-form-check-wrap {
     line-height: 14px !important;
 }
+
+.modx-permissions-list {
+    color: #777;
+    font-size: 12px;
+}
+.modx-permissions-list-textarea {
+    border: 0 !important;
+    background-color: transparent !important;
+}

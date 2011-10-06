@@ -444,14 +444,16 @@ Ext.reg('modx-window-user-group-role-update',MODx.window.UpdateUserGroupRole);
 
 MODx.window.AddUserToUserGroup = function(config) {
     config = config || {};
+    this.ident = config.ident || 'auug'+Ext.id();
     Ext.applyIf(config,{
         title: _('user_group_user_add')
         ,height: 150
-        ,width: 375
+        ,width: 500
         ,url: MODx.config.connectors_url+'security/usergroup/user.php'
         ,action: 'create'
         ,fields: [{
             fieldLabel: _('user')
+            ,description: MODx.expandHelp ? '' : _('user_group_user_add_user_desc')
             ,name: 'user'
             ,hiddenName: 'user'
             ,id: 'modx-auug-user'
@@ -459,15 +461,26 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,editable: true
             ,typeAhead: true
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-user'
+            ,html: _('user_group_user_add_user_desc')
+            ,cls: 'desc-under'
         },{
             fieldLabel: _('role')
+            ,description: MODx.expandHelp ? '' : _('user_group_user_add_role_desc')
             ,name: 'role'
             ,hiddenName: 'role'
             ,id: 'modx-auug-role'
             ,xtype: 'modx-combo-role'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-role'
+            ,html: _('user_group_user_add_role_desc')
+            ,cls: 'desc-under'
         },{
             name: 'usergroup'
             ,xtype: 'hidden'
