@@ -196,15 +196,27 @@ MODx.window.CreateUserGroup = function(config) {
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
+            ,description: MODx.expandHelp ? '' : _('user_group_desc_name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,anchor: '90%'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-name'
+            ,html: _('user_group_desc_name')
+            ,cls: 'desc-under'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
+            ,description: MODx.expandHelp ? '' : _('user_group_desc_description')
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
-            ,anchor: '90%'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-description'
+            ,html: _('user_group_desc_description')
+            ,cls: 'desc-under'
         },{
             name: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
@@ -228,6 +240,7 @@ MODx.window.AddUserToUserGroup = function(config) {
         ,action: 'create'
         ,fields: [{
             fieldLabel: _('name')
+            ,description: MODx.expandHelp ? '' : _('user_group_user_add_user_desc')
             ,name: 'user'
             ,hiddenName: 'user'
             ,xtype: 'modx-combo-user'
@@ -235,15 +248,26 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,typeAhead: true
             ,allowBlank: false
             ,id: 'modx-'+this.ident+'-user'
-            ,anchor: '90%'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-role'
+            ,html: _('user_group_user_add_user_desc')
+            ,cls: 'desc-under'
         },{
             fieldLabel: _('role')
+            ,description: MODx.expandHelp ? '' : _('user_group_user_add_role_desc')
             ,name: 'role'
             ,hiddenName: 'role'
             ,xtype: 'modx-combo-role'
             ,id: 'modx-'+this.ident+'-role'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-role'
+            ,html: _('user_group_user_add_role_desc')
+            ,cls: 'desc-under'
         },{
             name: 'usergroup'
             ,xtype: 'hidden'

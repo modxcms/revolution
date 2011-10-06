@@ -495,35 +495,38 @@ MODx.window.UpdateSetting = function(config) {
                 },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('key')
+                    ,description: MODx.expandHelp ? '' : _('key_desc')
                     ,name: 'key'
                     ,id: 'modx-'+this.ident+'-key'
                     ,maxLength: 100
                     ,anchor: '100%'
                 },{
-                    xtype: 'label'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-'+this.ident+'-key'
                     ,html: _('key_desc')
                     ,cls: 'desc-under'
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: _('name')
+                    ,description: MODx.expandHelp ? '' : _('name_desc')
                     ,name: 'name'
                     ,id: 'modx-'+this.ident+'-name'
                     ,anchor: '100%'
                 },{
-                    xtype: 'label'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-'+this.ident+'-name'
                     ,html: _('name_desc')
                     ,cls: 'desc-under'
                 },{
                     xtype: 'textarea'
                     ,fieldLabel: _('description')
+                    ,description: MODx.expandHelp ? '' : _('description_desc')
                     ,name: 'description'
                     ,id: 'modx-'+this.ident+'-description'
                     ,allowBlank: true
                     ,anchor: '100%'
                 },{
-                    xtype: 'label'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-'+this.ident+'-description'
                     ,html: _('description_desc')
                     ,cls: 'desc-under'
@@ -537,31 +540,32 @@ MODx.window.UpdateSetting = function(config) {
                     ,id: 'modx-'+this.ident+'-xtype'
                     ,anchor: '100%'
                 },{
-                    xtype: 'label'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-'+this.ident+'-xtype'
                     ,html: _('xtype_desc')
                     ,cls: 'desc-under'
                 },{
                     xtype: 'modx-combo-namespace'
                     ,fieldLabel: _('namespace')
+                    ,description: MODx.expandHelp ? '' : _('namespace_desc')
                     ,name: 'namespace'
                     ,id: 'modx-'+this.ident+'-namespace'
                     ,value: 'core'
                     ,anchor: '100%'
                 },{
-                    xtype: 'label'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-'+this.ident+'-namespace'
                     ,html: _('namespace_desc')
                     ,cls: 'desc-under'
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: _('area_lexicon_string')
-                    ,description: _('area_lexicon_string_msg')
+                    ,description: MODx.expandHelp ? '' : _('area_lexicon_string_msg')
                     ,name: 'area'
                     ,id: 'modx-'+this.ident+'-area'
                     ,anchor: '100%'
                 },{
-                    xtype: 'label'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-'+this.ident+'-area'
                     ,html: _('area_lexicon_string_msg')
                     ,cls: 'desc-under'

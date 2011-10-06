@@ -73,6 +73,7 @@ $core = array('Resource','Object','Administrator','Load Only','Load, List and Vi
 /** @var modAccessPolicy $policy */
 foreach ($policies as $key => $policy) {
     $policyArray = $policy->toArray();
+    $permissions = array();
     $cls = 'pedit';
     if (!in_array($policy->get('name'),$core)) {
         $cls .= ' premove';
@@ -83,7 +84,10 @@ foreach ($policies as $key => $policy) {
         $ct = 0;
         if (!empty($data)) {
             foreach ($data as $k => $v) {
-                if (!empty($v)) $ct++;
+                if (!empty($v)) {
+                    $permissions[] = $k;
+                    $ct++;
+                }
             }
         }
         $policyArray['active_permissions'] = $ct;
@@ -91,6 +95,7 @@ foreach ($policies as $key => $policy) {
             'active' => $policyArray['active_permissions'],
             'total' => $policyArray['total_permissions'],
         ));
+        $policyArray['permissions'] = $permissions;
     }
 
     unset($policyArray['data']);
