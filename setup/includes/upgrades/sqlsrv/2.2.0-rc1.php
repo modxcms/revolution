@@ -144,3 +144,21 @@ $description = $this->install->lexicon('add_column',array('column' => 'static_fi
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 $description = $this->install->lexicon('add_column',array('column' => 'source','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'source'));
+
+/* add is_stream to sources.modMediaSource */
+$class = 'sources.modMediaSource';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'is_stream','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'is_stream'));
+
+$description = $this->install->lexicon('add_index',array('index' => 'is_stream','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'is_stream'));
+
+$s3sources = $this->getCollection('sources.modMediaSource',array(
+    'class_key' => 'sources.modS3MediaSource',
+));
+/** @var modS3MediaSource $s3source */
+foreach ($s3sources as $s3source) {
+    $s3source->set('is_stream',false);
+    $s3source->save();
+}

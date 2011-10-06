@@ -179,6 +179,7 @@ MODx.panel.Template = function(config) {
                         ,baseParams: {
                             action: 'getList'
                             ,showNone: true
+                            ,streamsOnly: true
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'

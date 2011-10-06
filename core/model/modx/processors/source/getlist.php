@@ -34,6 +34,11 @@ if (!empty($scriptProperties['query'])) {
     $c->where(array('modMediaSource.name:LIKE' => '%'.$scriptProperties['query'].'%'));
     $c->orCondition(array('modMediaSource.description:LIKE' => '%'.$scriptProperties['query'].'%'));
 }
+if (!empty($scriptProperties['streamsOnly'])) {
+    $c->where(array(
+        'modMediaSource.is_stream' => true,
+    ));
+}
 $count = $modx->getCount('sources.modMediaSource',$c);
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);

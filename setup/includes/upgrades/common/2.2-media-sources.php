@@ -66,18 +66,25 @@ foreach ($tvs as $tv) {
     $tvProperties = $tv->get('input_properties');
     if (empty($tvProperties['basePath']) && empty($tvProperties['baseUrl'])) continue;
 
-    /** @var modFileMediaSource $newSource */
-    $newSource = $modx->newObject('sources.modFileMediaSource');
-    $newSource->fromArray(array(
+    /** @var modFileMediaSource $sourceExists */
+    $sourceExists = $modx->getObject('sources.modFileMediaSource',array(
         'name' => $tv->get('name'),
-        'description' => '',
         'class_key' => 'sources.modFileMediaSource',
     ));
-    $properties = $newSource->getDefaultProperties();
-    $properties['basePath']['value'] = $tvProperties['basePath'];
-    $properties['basePathRelative']['value'] = $tvProperties['basePathRelative'];
-    $properties['baseUrl']['value'] = $tvProperties['baseUrl'];
-    $properties['baseUrlRelative']['value'] = $tvProperties['baseUrlRelative'];
-    $newSource->setProperties($properties);
-    $newSource->save();
+    if (empty($sourceExists)) {
+        /** @var modFileMediaSource $newSource */
+        $newSource = $modx->newObject('sources.modFileMediaSource');
+        $newSource->fromArray(array(
+            'name' => $tv->get('name'),
+            'description' => '',
+            'class_key' => 'sources.modFileMediaSource',
+        ));
+        $properties = $newSource->getDefaultProperties();
+        $properties['basePath']['value'] = $tvProperties['basePath'];
+        $properties['basePathRelative']['value'] = $tvProperties['basePathRelative'];
+        $properties['baseUrl']['value'] = $tvProperties['baseUrl'];
+        $properties['baseUrlRelative']['value'] = $tvProperties['baseUrlRelative'];
+        $newSource->setProperties($properties);
+        $newSource->save();
+    }
 }

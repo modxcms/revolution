@@ -18,11 +18,18 @@ class modSourceCreateProcessor extends modProcessor {
     }
 
     public function process() {
-        if (!$this->validate()) {
+        $fields = $this->getProperties();
+
+        if (empty($fields['class_key'])) {
+            $this->setProperty('class_key','sources.modFileMediaSource');
+            $fields['class_key'] = 'sources.modFileMediaSource';
+        }
+
+        if (!$this->validate($fields)) {
             return $this->failure();
         }
         
-        $this->source = $this->modx->newObject('sources.modMediaSource');
+        $this->source = $this->modx->newObject($fields['class_key']);
         $this->source->fromArray($this->getProperties());
         
         if (!$this->source->checkPolicy('save')) {
@@ -42,17 +49,17 @@ class modSourceCreateProcessor extends modProcessor {
 
     /**
      * Validate the properties sent
-     * 
+     *
+     * @param array $fields
      * @return boolean
      */
-    public function validate() {
+    public function validate(array $fields) {
         /* validate name field */
-        $name = $this->getProperty('name');
-        if (empty($name)) {
+        if (empty($fields['name'])) {
             $this->addFieldError('name',$this->modx->lexicon('source_err_ns_name'));
-        } else if ($this->alreadyExists($name)) {
+        } else if ($this->alreadyExists($fields['name'])) {
             $this->addFieldError('name',$this->modx->lexicon('source_err_ae_name',array(
-                'name' => $name,
+                'name' => $fields['name'],
             )));
         }
 

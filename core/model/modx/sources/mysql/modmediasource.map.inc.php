@@ -13,6 +13,7 @@ $xpdo_meta_map['modMediaSource']= array (
     'description' => NULL,
     'class_key' => 'sources.modFileMediaSource',
     'properties' => NULL,
+    'is_stream' => 1,
   ),
   'fieldMeta' => 
   array (
@@ -46,6 +47,16 @@ $xpdo_meta_map['modMediaSource']= array (
       'phptype' => 'array',
       'null' => true,
     ),
+    'is_stream' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -74,6 +85,22 @@ $xpdo_meta_map['modMediaSource']= array (
       'columns' => 
       array (
         'class_key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'is_stream' => 
+    array (
+      'alias' => 'is_stream',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'is_stream' => 
         array (
           'length' => '',
           'collation' => 'A',

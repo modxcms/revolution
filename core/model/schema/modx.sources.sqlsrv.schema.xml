@@ -39,12 +39,16 @@
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="true" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="sources.modFileMediaSource" index="index" />
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
+        <field key="is_stream" dbtype="bit" phptype="boolean" null="false" default="1" index="index" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
         <index alias="class_key" name="class_key" primary="false" unique="false" type="BTREE">
             <column key="class_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="is_stream" name="is_stream" primary="false" unique="false" type="BTREE">
+            <column key="is_stream" length="" collation="A" null="false" />
         </index>
         
         <composite alias="SourceElement" class="sources.modMediaSourceElement" local="id" foreign="source" cardinality="one" owner="local" />

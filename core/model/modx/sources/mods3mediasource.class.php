@@ -17,6 +17,18 @@ class modS3MediaSource extends modMediaSource {
     public $bucket;
 
     /**
+     * Override the constructor to always force S3 sources to not be streams.
+     *
+     * {@inheritDoc}
+     *
+     * @param xPDO $xpdo
+     */
+    public function __construct(xPDO & $xpdo) {
+        parent::__construct($xpdo);
+        $this->set('is_stream',false);
+    }
+
+    /**
      * Initializes S3 media class, getting the S3 driver and loading the bucket
      * @return void
      */
