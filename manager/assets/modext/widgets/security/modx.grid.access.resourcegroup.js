@@ -178,7 +178,7 @@ MODx.window.CreateAccessResourceGroup = function(config) {
             ,name: 'target'
             ,hiddenName: 'target'
             ,id: 'modx-'+this.ident+'-target'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-usergroup'
             ,fieldLabel: _('user_group')
@@ -189,7 +189,7 @@ MODx.window.CreateAccessResourceGroup = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('authority')
@@ -206,14 +206,14 @@ MODx.window.CreateAccessResourceGroup = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-context'
             ,fieldLabel: _('context')
             ,name: 'context_key'
             ,hiddenName: 'context_key'
             ,id: 'modx-'+this.ident+'-context-key'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'hidden'
             ,name: 'principal_class'

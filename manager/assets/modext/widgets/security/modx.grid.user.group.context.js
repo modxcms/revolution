@@ -272,6 +272,7 @@ Ext.reg('modx-window-user-group-context-create',MODx.window.CreateUGAccessContex
 
 MODx.window.UpdateUGAccessContext = function(config) {
     config = config || {};
+    this.ident = config.ident || 'uugactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
         ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
@@ -341,7 +342,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
             ,cls: 'modx-permissions-list'
             ,defaults: {border: false}
             ,autoHeight: true
-            ,hidden: true
+            ,hidden: false
             ,anchor: '100%'
             ,items: [{
                 html: '<h4>'+_('permissions_in_policy')+'</h4>'
@@ -350,6 +351,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
                 id: 'modx-'+this.ident+'-permissions-list'
                 ,cls: 'modx-permissions-list-textarea'
                 ,xtype: 'textarea'
+                ,name: 'permissions'
                 ,grow: false
                 ,anchor: '100%'
                 ,height: 150
@@ -359,17 +361,6 @@ MODx.window.UpdateUGAccessContext = function(config) {
         }]
     });
     MODx.window.UpdateUGAccessContext.superclass.constructor.call(this,config);
-    this.on('show',function() {
-        var cb = Ext.getCmp('modx-'+this.ident+'-policy');
-        var s = cb.getStore();
-        s.load({
-            callback: function() {
-                var idx = s.find('id',cb.getValue());
-                this.onPolicySelect(cb,s.getAt(idx),idx);
-            }
-            ,scope: this
-        });
-    },this);
 };
 Ext.extend(MODx.window.UpdateUGAccessContext,MODx.Window,{
     onPolicySelect: function(cb,rec,idx) {
