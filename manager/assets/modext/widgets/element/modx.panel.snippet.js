@@ -84,6 +84,24 @@ MODx.panel.Snippet = function(config) {
                         ,maxLength: 255
                         ,value: config.record.description || ''
                     },{
+                        xtype: 'xcheckbox'
+                        ,fieldLabel: _('is_static')
+                        ,description: _('is_static_msg')
+                        ,name: 'static'
+                        ,id: 'modx-snippet-static'
+                        ,inputValue: 1
+                        ,checked: config.record.static || false
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('static_file')
+                        ,description: _('static_file_msg')
+                        ,name: 'static_file'
+                        ,id: 'modx-snippet-static-file'
+                        ,width: 300
+                        ,maxLength: 255
+                        ,value: config.record.static_file || ''
+                        ,hidden: !config.record.static
+                    },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden' 
                         ,forId: 'modx-snippet-description'
                         ,html: _('snippet_desc_description')
@@ -158,6 +176,8 @@ MODx.panel.Snippet = function(config) {
         }
     });
     MODx.panel.Snippet.superclass.constructor.call(this,config);
+    var isStatic = Ext.getCmp('modx-snippet-static');
+    if (isStatic) { isStatic.on('check',this.toggleStaticFile); }
 };
 Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     initialized: false
@@ -218,6 +238,15 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-snippet-snippet');
             MODx.onSaveEditor(fld);
+        }
+    }
+    ,toggleStaticFile: function(cb) {
+        var staticFile = Ext.getCmp('modx-snippet-static-file');
+        if (!staticFile) { return false; }
+        if (cb.checked) {
+            staticFile.show();
+        } else {
+            staticFile.hide();
         }
     }
 });

@@ -38,25 +38,21 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * The property value array for the element.
      * @var array
-     * @access private
      */
     public $_properties= null;
     /**
      * The string representation of the element properties.
      * @var string
-     * @access private
      */
     public $_propertyString= '';
     /**
      * The source content of the element.
      * @var string
-     * @access private
      */
     public $_content= '';
     /**
      * The output of the element.
      * @var string
-     * @access private
      */
     public $_output= '';
     /**
@@ -64,66 +60,48 @@ class modElement extends modAccessibleSimpleObject {
      *
      * This is typically only applicable to elements that use PHP source content.
      * @var boolean
-     * @access private
      */
     public $_result= true;
     /**
      * The tag signature of the element instance.
      * @var string
-     * @access private
      */
     public $_tag= null;
     /**
      * The character token which helps identify the element class in tag string.
      * @var string
-     * @access private
      */
     public $_token= '';
     /**
      * @var boolean If the element is cacheable or not.
-     * @access private
      */
     public $_cacheable= true;
     /**
      * @var boolean Indicates if the element was processed already.
-     * @access private
      */
     public $_processed= false;
     /**
      * @var array Optional filters that can be used during processing.
-     * @access private
      */
     public $_filters= array('input' => null, 'output' => null);
 
     /**
+     * @var string Path to source file location when modElement->isStatic() === true.
+     */
+    protected $_sourcePath= "";
+    /**
+     * @var string Source file name when modElement->isStatic() === true.
+     */
+    protected $_sourceFile= "";
+    /**
      * @var array A list of invalid characters in the name of an Element.
-     * @access protected
      */
     protected $_invalidCharacters = array('!','@','#','$','%','^','&','*',
     '(',')','+','=','[',']','{','}','\'','"',';',':','\\','/','<','>','?'
     ,' ',',','`','~');
 
     /**
-     * Overrides xPDOObject::set to strip invalid characters from element names.
-     *
-     * {@inheritDoc}
-     */
-    public function set($k, $v= null, $vType= '') {
-        /* TODO: make into validation, so that this doesnt break tag processing
-        switch ($k) {
-            case 'name':
-            case 'templatename':
-                $v = str_replace($this->_invalidCharacters,'',$v);
-                break;
-            default: break;
-        }
-        */
-        return parent::set($k,$v,$vType);
-    }
-
-    /**
-     * Overrides xPDOObject::get to handle when retrieving the properties field
-     * for an Element.
+     * Provides custom handling for retrieving the properties field of an Element.
      *
      * {@inheritdoc}
      */
@@ -167,8 +145,34 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
-     * Overrides xPDOObject::remove to remove all Property Sets that are related
-     * to this object.
+     * Overridden to handle changes to the static_file source.
+     *
+     * {@inheritdoc}
+     */
+    public function set($k, $v= null, $vType= '') {
+        $set = parent::set($k, $v, $vType);
+        if ($k === 'static_file' && $set && $this->isStatic()) {
+            $this->setContent($this->getFileContent());
+        }
+        return $set;
+    }
+
+    /**
+     * Overridden to handle changes to content managed in an external file.
+     *
+     * {@inheritdoc}
+     */
+    public function save($cacheFlag = null) {
+        $staticContentChange = $this->isStatic() && $this->isDirty('content');
+        $saved = parent::save($cacheFlag);
+        if ($saved && $staticContentChange) {
+            $saved = $this->setFileContent($this->get('content'));
+        }
+        return $saved;
+    }
+
+    /**
+     * Remove all Property Set relations to the Element.
      *
      * {@inheritdoc}
      */
@@ -181,7 +185,6 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Constructs a valid tag representation of the element.
      *
-     * @access public
      * @return string A tag representation of the element.
      */
     public function getTag() {
@@ -247,7 +250,6 @@ class modElement extends modAccessibleSimpleObject {
      * Process the element source content to produce a result.
      *
      * @abstract Implement this to define behavior for a MODX content element.
-     * @access public
      * @param array|string $properties A set of configuration properties for the
      * element.
      * @param string $content Optional content to use in place of any persistent
@@ -271,8 +273,6 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Cache the current output of this element instance by tag signature.
-     *
-     * @access public
      */
     public function cache() {
         if ($this->isCacheable()) {
@@ -323,8 +323,6 @@ class modElement extends modAccessibleSimpleObject {
      *
      * This is called by default in {@link modElement::process()} after the
      * element properties have been parsed.
-     *
-     * @access protected
      */
     public function filterInput() {
         $filter = $this->getInputFilter();
@@ -339,8 +337,6 @@ class modElement extends modAccessibleSimpleObject {
      * Call this method in your {modElement::process()} implementation when it
      * is appropriate, typically once all processing has been completed, but
      * before any caching takes place.
-     *
-     * @access protected
      */
     public function filterOutput() {
         $filter = $this->getOutputFilter();
@@ -400,7 +396,6 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Gets the raw, unprocessed source content for this element.
      *
-     * @access public
      * @param array $options An array of options implementations can use to
      * accept language, revision identifiers, or other information to alter the
      * behavior of the method.
@@ -410,6 +405,14 @@ class modElement extends modAccessibleSimpleObject {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
+            } elseif ($this->isStatic()) {
+                $this->_content = $this->getFileContent($options);
+                if ($this->_content !== $this->_fields['content']) {
+                    $this->setContent($this->_content);
+                    if (!$this->isNew()) {
+                        $this->save();
+                    }
+                }
             } else {
                 $this->_content = $this->get('content');
             }
@@ -420,7 +423,6 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Set the raw source content for this element.
      *
-     * @access public
      * @param mixed $content The source content; implementations can decide if
      * it can only be a string, or some other source from which to retrieve it.
      * @param array $options An array of options implementations can use to
@@ -433,9 +435,84 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
+     * Get the absolute path to the static source file for this instance.
+     *
+     * @param array $options An array of options.
+     * @return string The absolute path to the static source file.
+     */
+    public function getSourceFile(array $options = array()) {
+        if ($this->isStatic() && empty($this->_sourceFile)) {
+            $filename = $this->get('static_file');
+            if (!empty($filename)) {
+                $array = array();
+                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
+                    $this->xpdo->parser->processElementTags('', $filename);
+                }
+            }
+
+            if (!file_exists($filename)) {
+                $this->getSourcePath($options);
+                $this->_sourceFile= $this->_sourcePath . $filename;
+            } else {
+                $this->_sourceFile= $filename;
+            }
+        }
+        return $this->_sourceFile;
+    }
+
+    /**
+     * Get the absolute path location the source file is located relative to.
+     *
+     * @param array $options An array of options.
+     * @return string The absolute path the sourceFile is relative to.
+     */
+    public function getSourcePath(array $options = array()) {
+        $array = array();
+        $this->_sourcePath= $this->xpdo->getOption('element_static_path', $options, $this->xpdo->getOption('components_path', $options, MODX_CORE_PATH . 'components/'));
+        if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourcePath, $array)) {
+            $this->xpdo->parser->processElementTags('', $this->_sourcePath);
+        }
+        return $this->_sourcePath;
+    }
+
+    /**
+     * Get the content stored in an external file for this instance.
+     *
+     * @param array $options An array of options.
+     * @return bool|string The content or false if the content could not be retrieved.
+     */
+    public function getFileContent(array $options = array()) {
+        $content = "";
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile && file_exists($sourceFile)) {
+                $content = file_get_contents($sourceFile);
+            }
+        }
+        return $content;
+    }
+
+    /**
+     * Set external file content from this instance.
+     *
+     * @param string $content The content to set.
+     * @param array $options An array of options.
+     * @return bool|int The number of bytes written to file or false on failure.
+     */
+    public function setFileContent($content, array $options = array()) {
+        $set = false;
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile) {
+                $set = $this->xpdo->cacheManager->writeFile($sourceFile, $content);
+            }
+        }
+        return $set;
+    }
+
+    /**
      * Get the properties for this element instance for processing.
      *
-     * @access public
      * @param array|string $properties An array or string of properties to
      * apply.
      * @return array A simple array of properties ready to use for processing.
@@ -701,5 +778,14 @@ class modElement extends modAccessibleSimpleObject {
         if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
 
         return $cacheManager->getElementMediaSourceCache($this,$contextKey,$options);
+    }
+
+    /**
+     * Indicates if the instance has content in an external file.
+     *
+     * @return boolean True if the instance has content stored in an external file.
+     */
+    public function isStatic() {
+        return $this->get('static');
     }
 }

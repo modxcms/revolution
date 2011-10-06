@@ -68,7 +68,8 @@ class modTemplateVar extends modElement {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        $saved = parent :: save($cacheFlag);
+
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateVarSave',array(
@@ -156,31 +157,6 @@ class modTemplateVar extends modElement {
         }
         /* finally, return the processed element content */
         return $this->_output;
-    }
-
-    /**
-     * Get the source content of this template variable.
-     *
-     * {@inheritdoc}
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } else {
-                $this->_content = $this->get('default_text');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Set the source content of this template variable.
-     *
-     * {@inheritdoc}
-     */
-    public function setContent($content, array $options = array()) {
-        return $this->set('default_text', $content);
     }
 
     /**

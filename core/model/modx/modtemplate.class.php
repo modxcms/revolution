@@ -58,7 +58,8 @@ class modTemplate extends modElement {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        $saved = parent :: save($cacheFlag);
+
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateSave',array(

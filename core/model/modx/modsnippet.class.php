@@ -30,7 +30,7 @@ class modSnippet extends modScript {
             ));
         }
 
-        $saved = parent :: save($cacheFlag);
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnSnippetSave',array(
@@ -70,30 +70,5 @@ class modSnippet extends modScript {
         }
 
         return $removed;
-    }
-
-    /**
-     * Get the source content of this snippet.
-     *
-     * {@inheritDoc}
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } else {
-                $this->_content = $this->get('snippet');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Set the source content of this snippet.
-     *
-     * {@inheritDoc}
-     */
-    public function setContent($content, array $options = array()) {
-        return $this->set('snippet', $content);
     }
 }

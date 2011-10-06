@@ -43,7 +43,7 @@ class modPlugin extends modScript {
             ));
         }
 
-        $saved = parent :: save($cacheFlag);
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnPluginSave',array(
@@ -85,33 +85,6 @@ class modPlugin extends modScript {
         }
 
         return $removed;
-    }
-
-    /**
-     * Overrides modElement::getContent to get the source content of this
-     * plugin.
-     *
-     * {@inheritdoc}
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } else {
-                $this->_content = $this->get('plugincode');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Overrides modElement::setContent to set the source content of this
-     * plugin.
-     *
-     * {@inheritdoc}
-     */
-    public function setContent($content, array $options = array()) {
-        return $this->set('plugincode', $content);
     }
 
     /**

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5619] Enable modElements to store content in external files
 - [#5856] Implement ability for derivative Resource types to have their own translatable name
 - [#4726] Implement server-side state provider for modExt to fix size problems with cookies
 - [#5860] Fix FC SQL error when user is in no groups

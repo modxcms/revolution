@@ -86,6 +86,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         }
         $this->tvArray = $this->tv->toArray();
         $this->tvArray['properties'] = $data;
+        $this->tvArray['default_text'] = $this->tv->getContent();
 
         $this->tvArray['sources'] = $this->getElementSources();
 

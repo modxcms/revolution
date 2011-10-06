@@ -287,6 +287,10 @@
         <field key="snippet" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="locked" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
+        <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="snippet" />
         
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -296,6 +300,9 @@
         </index>
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -693,6 +700,10 @@
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
         <field key="disabled" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="moduleguid" dbtype="nvarchar" precision="32" phptype="string" null="false" default="" index="fk" />
+        <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="plugincode" />
 
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
@@ -926,6 +937,10 @@
         <field key="locked" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
         <field key="moduleguid" dbtype="nvarchar" precision="32" phptype="string" null="false" default="" index="fk" />
+        <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="snippet" />
 
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
@@ -969,6 +984,8 @@
         <field key="content" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="locked" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
+        <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         
         <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
             <column key="templatename" length="" collation="A" null="false" />
@@ -978,6 +995,9 @@
         </index>
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -1000,7 +1020,11 @@
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
         <field key="input_properties" dbtype="nvarchar" precision="max" phptype="array" null="false" default="" />
         <field key="output_properties" dbtype="nvarchar" precision="max" phptype="array" null="false" default="" />
-        
+        <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="default_text" />
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -1012,6 +1036,9 @@
         </index>
         <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
             <column key="rank" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />

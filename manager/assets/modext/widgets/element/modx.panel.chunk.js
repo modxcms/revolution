@@ -89,6 +89,24 @@ MODx.panel.Chunk = function(config) {
                         ,html: _('chunk_desc_description')
                         ,cls: 'desc-under'
                     },{
+                        xtype: 'xcheckbox'
+                        ,fieldLabel: _('is_static')
+                        ,description: _('is_static_msg')
+                        ,name: 'static'
+                        ,id: 'modx-chunk-static'
+                        ,inputValue: 1
+                        ,checked: config.record.static || false
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('static_file')
+                        ,description: _('static_file_msg')
+                        ,name: 'static_file'
+                        ,id: 'modx-chunk-static-file'
+                        ,width: 300
+                        ,maxLength: 255
+                        ,value: config.record.static_file || ''
+                        ,hidden: !config.record.static
+                    },{
                         html: MODx.onChunkFormRender
                         ,border: false
                     }]
@@ -160,6 +178,8 @@ MODx.panel.Chunk = function(config) {
     });
     MODx.panel.Chunk.superclass.constructor.call(this,config);
     setTimeout("Ext.getCmp('modx-element-tree').expand();",1000);
+    var isStatic = Ext.getCmp('modx-chunk-static');
+    if (isStatic) { isStatic.on('check',this.toggleStaticFile); }
 };
 Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     initialized: false
@@ -211,6 +231,15 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-chunk-snippet');
             MODx.onSaveEditor(fld);
+        }
+    }
+    ,toggleStaticFile: function(cb) {
+        var staticFile = Ext.getCmp('modx-chunk-static-file');
+        if (!staticFile) { return false; }
+        if (cb.checked) {
+            staticFile.show();
+        } else {
+            staticFile.hide();
         }
     }
 });

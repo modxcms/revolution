@@ -43,7 +43,7 @@ class modChunk extends modElement {
             ));
         }
 
-        $saved = parent :: save($cacheFlag);
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnChunkSave',array(
@@ -128,35 +128,5 @@ class modChunk extends modElement {
 
         /* finally, return the processed element content */
         return $this->_output;
-    }
-
-    /**
-     * Get the source content of this chunk.
-     *
-     * @access public
-     * @param array $options
-     * @return string The source content.
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } else {
-                $this->_content = $this->get('snippet');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Set the source content of this chunk.
-     *
-     * @access public
-     * @param string $content
-     * @param array $options
-     * @return string True if successfully set
-     */
-    public function setContent($content, array $options = array()) {
-        return $this->set('snippet', $content);
     }
 }

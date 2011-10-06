@@ -288,7 +288,11 @@
         <field key="snippet" dbtype="mediumtext" phptype="string" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
-        
+        <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="snippet" />
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -297,6 +301,9 @@
         </index>
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -695,12 +702,19 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="disabled" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
+        <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="plugincode" />
 
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
         </index>
         <index alias="disabled" name="disabled" primary="false" unique="false" type="BTREE">
             <column key="disabled" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <composite alias="PluginEvents" class="modPluginEvent" local="id" foreign="pluginid" cardinality="many" owner="local" />
@@ -928,12 +942,19 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
+        <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="snippet" />
 
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
         </index>
         <index alias="moduleguid" name="moduleguid" primary="false" unique="false" type="BTREE">
             <column key="moduleguid" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <validation>
@@ -971,6 +992,8 @@
         <field key="content" dbtype="mediumtext" phptype="string" null="false" default="" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
+        <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         
         <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
             <column key="templatename" length="" collation="A" null="false" />
@@ -980,6 +1003,9 @@
         </index>
         <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
             <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -1002,7 +1028,11 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="input_properties" dbtype="text" phptype="array" null="true" />
         <field key="output_properties" dbtype="text" phptype="array" null="true" />
-        
+        <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+
+        <alias key="content" field="default_text" />
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -1014,6 +1044,9 @@
         </index>
         <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
             <column key="rank" length="" collation="A" null="false" />
+        </index>
+        <index alias="static" name="static" primary="false" unique="false" type="BTREE">
+            <column key="static" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
