@@ -138,36 +138,14 @@ Ext.reg('modx-grid-user-group-source',MODx.grid.UserGroupSource);
 
 MODx.window.CreateUGSource = function(config) {
     config = config || {};
+    this.ident = config.ident || 'cugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('source_add')
         ,url: MODx.config.connectors_url+'security/access/usergroup/source.php'
         ,action: 'create'
         ,height: 250
-        ,width: 350
+        ,width: 500
         ,fields: [{
-            xtype: 'modx-combo-source'
-            ,fieldLabel: _('source')
-            ,name: 'target'
-            ,hiddenName: 'target'
-            ,editable: false
-            ,anchor: '90%'
-        },{
-            xtype: 'modx-combo-authority'
-            ,fieldLabel: _('minimum_role')
-            ,name: 'authority'
-            ,value: 0
-            ,anchor: '90%'
-        },{
-            xtype: 'modx-combo-policy'
-            ,fieldLabel: _('policy')
-            ,name: 'policy'
-            ,hiddenName: 'policy'
-            ,baseParams: {
-                action: 'getList'
-                ,group: 'MediaSource'
-            }
-            ,anchor: '90%'
-        },{
             xtype: 'hidden'
             ,name: 'principal'
             ,hiddenName: 'principal'
@@ -180,48 +158,111 @@ MODx.window.CreateUGSource = function(config) {
             ,name: 'context_key'
             ,hiddenName: 'context_key'
             ,value: 'mgr'
+
+        },{
+            xtype: 'modx-combo-source'
+            ,fieldLabel: _('source')
+            ,description: MODx.expandHelp ? '' : _('user_group_source_source_desc')
+            ,id: 'modx-'+this.ident+'-source'
+            ,name: 'target'
+            ,hiddenName: 'target'
+            ,editable: false
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-source'
+            ,html: _('user_group_source_source_desc')
+            ,cls: 'desc-under'
+
+        },{
+            xtype: 'modx-combo-authority'
+            ,fieldLabel: _('minimum_role')
+            ,description: MODx.expandHelp ? '' : _('user_group_source_authority_desc')
+            ,id: 'modx-'+this.ident+'-authority'
+            ,name: 'authority'
+            ,value: 0
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-authority'
+            ,html: _('user_group_source_authority_desc')
+            ,cls: 'desc-under'
+
+        },{
+            xtype: 'modx-combo-policy'
+            ,fieldLabel: _('policy')
+            ,description: MODx.expandHelp ? '' : _('user_group_source_policy_desc')
+            ,id: 'modx-'+this.ident+'-policy'
+            ,name: 'policy'
+            ,hiddenName: 'policy'
+            ,baseParams: {
+                action: 'getList'
+                ,group: 'MediaSource'
+            }
+            ,anchor: '100%'
+            ,listeners: {
+                'select':{fn:this.onPolicySelect,scope:this}
+            }
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-policy'
+            ,html: _('user_group_source_policy_desc')
+            ,cls: 'desc-under'
+
+        },{
+            id: 'modx-'+this.ident+'-permissions-list-ct'
+            ,cls: 'modx-permissions-list'
+            ,defaults: {border: false}
+            ,autoHeight: true
+            ,hidden: true
+            ,anchor: '100%'
+            ,items: [{
+                html: '<h4>'+_('permissions_in_policy')+'</h4>'
+                ,id: 'modx-'+this.ident+'-permissions-list-header'
+            },{
+                id: 'modx-'+this.ident+'-permissions-list'
+                ,cls: 'modx-permissions-list-textarea'
+                ,xtype: 'textarea'
+                ,name: 'permissions'
+                ,grow: false
+                ,anchor: '100%'
+                ,height: 100
+                ,width: '97%'
+                ,readOnly: true
+            }]
         }]
     });
     MODx.window.CreateUGSource.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.CreateUGSource,MODx.Window);
+Ext.extend(MODx.window.CreateUGSource,MODx.Window,{
+    onPolicySelect: function(cb,rec,idx) {
+        var s = cb.getStore();
+        if (!s) return;
+
+        var r = s.getAt(idx);
+        if (r) {
+            Ext.getCmp('modx-'+this.ident+'-permissions-list-ct').show();
+            var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
+            var o = rec.data.permissions.join(', ');
+            pl.setValue(o);
+        }
+    }
+});
 Ext.reg('modx-window-user-group-source-create',MODx.window.CreateUGSource);
 
 
 MODx.window.UpdateUGSource = function(config) {
     config = config || {};
+    this.ident = config.ident || 'updugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_source_update')
         ,url: MODx.config.connectors_url+'security/access/usergroup/source.php'
         ,action: 'update'
         ,height: 250
-        ,width: 350
+        ,width: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-        },{
-            xtype: 'modx-combo-source'
-            ,fieldLabel: _('source')
-            ,name: 'target'
-            ,hiddenName: 'target'
-            ,editable: false
-            ,anchor: '90%'
-        },{
-            xtype: 'modx-combo-authority'
-            ,fieldLabel: _('minimum_role')
-            ,name: 'authority'
-            ,value: 0
-            ,anchor: '90%'
-        },{
-            xtype: 'modx-combo-policy'
-            ,fieldLabel: _('policy')
-            ,name: 'policy'
-            ,hiddenName: 'policy'
-            ,baseParams: {
-                action: 'getList'
-                ,group: 'MediaSource'
-            }
-            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal'
@@ -235,9 +276,94 @@ MODx.window.UpdateUGSource = function(config) {
             ,name: 'context_key'
             ,hiddenName: 'context_key'
             ,value: 'mgr'
+
+        },{
+            xtype: 'modx-combo-source'
+            ,fieldLabel: _('source')
+            ,description: MODx.expandHelp ? '' : _('user_group_source_source_desc')
+            ,id: 'modx-'+this.ident+'-source'
+            ,name: 'target'
+            ,hiddenName: 'target'
+            ,editable: false
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-source'
+            ,html: _('user_group_source_source_desc')
+            ,cls: 'desc-under'
+            
+        },{
+            xtype: 'modx-combo-authority'
+            ,fieldLabel: _('minimum_role')
+            ,description: MODx.expandHelp ? '' : _('user_group_source_authority_desc')
+            ,id: 'modx-'+this.ident+'-authority'
+            ,name: 'authority'
+            ,value: 0
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-authority'
+            ,html: _('user_group_source_authority_desc')
+            ,cls: 'desc-under'
+
+        },{
+            xtype: 'modx-combo-policy'
+            ,fieldLabel: _('policy')
+            ,description: MODx.expandHelp ? '' : _('user_group_source_policy_desc')
+            ,id: 'modx-'+this.ident+'-policy'
+            ,name: 'policy'
+            ,hiddenName: 'policy'
+            ,baseParams: {
+                action: 'getList'
+                ,group: 'MediaSource'
+            }
+            ,anchor: '100%'
+            ,listeners: {
+                'select':{fn:this.onPolicySelect,scope:this}
+            }
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-policy'
+            ,html: _('user_group_source_policy_desc')
+            ,cls: 'desc-under'
+
+        },{
+            id: 'modx-'+this.ident+'-permissions-list-ct'
+            ,cls: 'modx-permissions-list'
+            ,defaults: {border: false}
+            ,autoHeight: true
+            ,hidden: false
+            ,anchor: '100%'
+            ,items: [{
+                html: '<h4>'+_('permissions_in_policy')+'</h4>'
+                ,id: 'modx-'+this.ident+'-permissions-list-header'
+            },{
+                id: 'modx-'+this.ident+'-permissions-list'
+                ,cls: 'modx-permissions-list-textarea'
+                ,xtype: 'textarea'
+                ,name: 'permissions'
+                ,grow: false
+                ,anchor: '100%'
+                ,height: 100
+                ,width: '97%'
+                ,readOnly: true
+            }]
         }]
     });
     MODx.window.UpdateUGSource.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.UpdateUGSource,MODx.Window);
+Ext.extend(MODx.window.UpdateUGSource,MODx.Window,{
+    onPolicySelect: function(cb,rec,idx) {
+        var s = cb.getStore();
+        if (!s) return;
+
+        var r = s.getAt(idx);
+        if (r) {
+            Ext.getCmp('modx-'+this.ident+'-permissions-list-ct').show();
+            var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
+            var o = rec.data.permissions.join(', ');
+            pl.setValue(o);
+        }
+    }
+});
 Ext.reg('modx-window-user-group-source-update',MODx.window.UpdateUGSource);
