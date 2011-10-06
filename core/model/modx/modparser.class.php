@@ -512,7 +512,6 @@ class modParser {
                 $source->fromArray($this->modx->sourceCache[$class][$realname]['source'],'',true,true);
             } else {
                 $source->set('id',0);
-                $source->set('class_key','sources.modFileMediaSource');
             }
             /** @var modElement $element */
             $element = $this->modx->newObject($class);
