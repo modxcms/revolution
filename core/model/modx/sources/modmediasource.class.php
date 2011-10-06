@@ -530,9 +530,6 @@ class modMediaSource extends modAccessibleSimpleObject {
                     ':context' => $context,
                 );
                 $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-                if ($this->get('id') == 8) {
-                    $query->prepare($bindings);
-                }
                 if ($query->stmt && $query->stmt->execute()) {
                     while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                         $policy['sources.modAccessMediaSource'][$row['target']][] = array(
@@ -591,24 +588,20 @@ class modMediaSource extends modAccessibleSimpleObject {
         if (empty($cacheManager)) return;
 
         $c = $this->xpdo->newQuery('modContext');
-        $c->select($this->xpdo->getSelectColumns('modContext','modContext','',array('key')));
-        $c->prepare();
-        $sql = $c->toSQL();
+        $c->select($this->xpdo->escape('key'));
 
-        $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
+        $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
         $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
         $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
         $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
         $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
 
-        $stmt = $this->xpdo->query($sql);
-        if ($stmt) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($c->prepare() && $c->stmt->execute()) {
+            while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
                 if ($row && !empty($row['key'])) {
                     $cacheManager->delete($row['key'].'/source',$options);
                 }
             }
-            $stmt->closeCursor();
         }
     }
 }

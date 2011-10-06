@@ -12,6 +12,7 @@ MODx.panel.TV = function(config) {
         url: MODx.config.connectors_url+'element/tv.php'
         ,baseParams: {}
         ,id: 'modx-panel-tv'
+		,cls: 'container form-with-labels'
         ,class_key: 'modTemplateVar'
         ,tv: ''
         ,bodyStyle: ''
@@ -23,8 +24,7 @@ MODx.panel.TV = function(config) {
             ,border: false
         },MODx.getPageStructure([{
             title: _('general_information')
-            ,defaults: {border: false ,msgTarget: 'side'}
-            ,bodyStyle: 'padding: 15px;'
+            ,defaults: {border: false ,msgTarget: 'side', layout: 'form'}
             ,layout: 'form'
             ,id: 'modx-tv-form'
             ,itemId: 'form-tv'
@@ -32,102 +32,147 @@ MODx.panel.TV = function(config) {
             ,forceLayout: true
             ,items: [{
                 html: '<p>'+_('tv_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,id: 'modx-tv-msg'
             },{
-                xtype: 'hidden'
-                ,name: 'id'
-                ,id: 'modx-tv-id'
-                ,value: config.record.id || MODx.request.id
-            },{
-                xtype: 'hidden'
-                ,name: 'props'
-                ,id: 'modx-tv-props'
-                ,value: config.record.props || null
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('tv_name')
-                ,name: 'name'
-                ,id: 'modx-tv-name'
-                ,width: 300
-                ,maxLength: 100
-                ,enableKeyEvents: true
-                ,allowBlank: false
-                ,value: config.record.name
-                ,listeners: {
-                    'keyup': {scope:this,fn:function(f,e) {
-                        Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+f.getValue()+'</h2>');
-                    }}
-                }
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('tv_caption')
-                ,name: 'caption'
-                ,id: 'modx-tv-caption'
-                ,width: 300
-                ,value: config.record.caption
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('description')
-                ,name: 'description'
-                ,id: 'modx-tv-description'
-                ,width: 300
-                ,maxLength: 255
-                ,value: config.record.description || ''
-            },{
-                xtype: 'modx-combo-category'
-                ,fieldLabel: _('category')
-                ,name: 'category'
-                ,id: 'modx-tv-category'
-                ,width: 250
-                ,value: config.record.category || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('tv_lock')
-                ,description: _('tv_lock_msg')
-                ,name: 'locked'
-                ,id: 'modx-tv-locked'
-                ,inputValue: 1
-                ,checked: config.record.locked || false
-            },{
-                xtype: 'numberfield'
-                ,fieldLabel: _('tv_rank')
-                ,name: 'rank'
-                ,id: 'modx-tv-rank'
-                ,width: 50
-                ,maxLength: 4
-                ,allowNegative: false
-                ,allowBlank: false
-                ,value: config.record.rank || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('clear_cache_on_save')
-                ,description: _('clear_cache_on_save_msg')
-                ,name: 'clearCache'
-                ,id: 'modx-tv-clear-cache'
-                ,inputValue: 1
-                ,checked: Ext.isDefined(config.record.clearCache) || true
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('is_static')
-                ,description: _('is_static_msg')
-                ,name: 'static'
-                ,id: 'modx-template-static'
-                ,inputValue: 1
-                ,checked: config.record.static || false
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('static_file')
-                ,description: _('static_file_msg')
-                ,name: 'static_file'
-                ,id: 'modx-template-static-file'
-                ,width: 300
-                ,maxLength: 255
-                ,value: config.record.static_file || ''
-                ,hidden: !config.record.static
-            },{
-                html: MODx.onTVFormRender
+                layout: 'column'
                 ,border: false
-            }]
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,anchor: '100%'
+                    ,border: false
+                    ,cls:'main-wrapper'
+                    ,labelSeparator: ''
+                }
+                ,items: [{
+                    columnWidth: .6
+                    ,items: [{
+                        xtype: 'hidden'
+                        ,name: 'id'
+                        ,id: 'modx-tv-id'
+                        ,value: config.record.id || MODx.request.id
+                    },{
+                        xtype: 'hidden'
+                        ,name: 'props'
+                        ,id: 'modx-tv-props'
+                        ,value: config.record.props || null
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,description: MODx.expandHelp ? '' : _('tv_desc_name')
+                        ,name: 'name'
+                        ,id: 'modx-tv-name'
+                        ,anchor: '100%'
+                        ,maxLength: 100
+                        ,enableKeyEvents: true
+                        ,allowBlank: false
+                        ,value: config.record.name
+                        ,listeners: {
+                            'keyup': {scope:this,fn:function(f,e) {
+                                Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+f.getValue()+'</h2>');
+                            }}
+                        }
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-tv-name'
+                        ,html: _('tv_desc_name')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('tv_caption')
+                        ,description: MODx.expandHelp ? '' : _('tv_desc_caption')
+                        ,name: 'caption'
+                        ,id: 'modx-tv-caption'
+                        ,anchor: '100%'
+                        ,value: config.record.caption
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-tv-caption'
+                        ,html: _('tv_desc_caption')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'textarea'
+                        ,fieldLabel: _('description')
+                        ,description: MODx.expandHelp ? '' : _('tv_desc_description')
+                        ,name: 'description'
+                        ,id: 'modx-tv-description'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,value: config.record.description || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-tv-description'
+                        ,html: _('tv_desc_description')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'xcheckbox'
+                        ,fieldLabel: _('is_static')
+                        ,description: _('is_static_msg')
+                        ,name: 'static'
+                        ,id: 'modx-tv-static'
+                        ,inputValue: 1
+                        ,checked: config.record.static || false
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('static_file')
+                        ,description: _('static_file_msg')
+                        ,name: 'static_file'
+                        ,id: 'modx-tv-static-file'
+                        ,width: 300
+                        ,maxLength: 255
+                        ,value: config.record.static_file || ''
+                        ,hidden: !config.record.static
+                    },{
+                        html: MODx.onTVFormRender
+                        ,border: false
+                    }]
+                },{
+                    columnWidth: .4
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,fieldLabel: _('category')
+                        ,name: 'category'
+                        ,id: 'modx-tv-category'
+                        ,anchor: '100%'
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-tv-category'
+                        ,html: _('tv_desc_category')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'numberfield'
+                        ,fieldLabel: _('tv_rank')
+                        ,name: 'rank'
+                        ,id: 'modx-tv-rank'
+                        ,width: 50
+                        ,maxLength: 4
+                        ,allowNegative: false
+                        ,allowBlank: false
+                        ,value: config.record.rank || 0
+                    },{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('tv_lock')
+                        ,description: _('tv_lock_msg')
+                        ,name: 'locked'
+                        ,id: 'modx-tv-locked'
+                        ,inputValue: 1
+                        ,checked: config.record.locked || false
+                    },{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: _('clear_cache_on_save_msg')
+                        ,hideLabel: true
+                        ,name: 'clearCache'
+                        ,id: 'modx-tv-clear-cache'
+                        ,inputValue: 1
+                        ,checked: Ext.isDefined(config.record.clearCache) || true
+
+                    }]
+
+                }]
+			}]
         },{
             xtype: 'modx-panel-element-properties'
             ,itemId: 'panel-properties'
@@ -143,17 +188,19 @@ MODx.panel.TV = function(config) {
         },{
             title: _('tv_tmpl_access')
             ,itemId: 'form-template'
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: {autoHeight: true}
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('tv_tmpl_access_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-tv-template'
                 ,itemId: 'grid-template'
+				,cls:'main-wrapper'
                 ,tv: config.tv
                 ,preventRender: true
-                ,width: '100%'
+                ,anchor: '100%'
                 ,listeners: {
                     'rowclick': {fn:this.markDirty,scope:this}
                     ,'afteredit': {fn:this.markDirty,scope:this}
@@ -164,14 +211,16 @@ MODx.panel.TV = function(config) {
             title: _('access_permissions')
             ,id: 'modx-tv-access-form'
             ,itemId: 'form-access'
-            ,bodyStyle: 'padding: 15px;'
+            ,forceLayout: true
             ,defaults: {autoHeight: true}
             ,items: [{
                 html: '<p>'+_('tv_access_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,id: 'modx-tv-access-msg'
                 ,border: false
             },{
                 xtype: 'modx-grid-tv-security'
+				,cls:'main-wrapper'
                 ,itemId: 'grid-access'
                 ,tv: config.tv
                 ,preventRender: true
@@ -185,15 +234,17 @@ MODx.panel.TV = function(config) {
             title: _('sources')
             ,id: 'modx-tv-sources-form'
             ,itemId: 'form-sources'
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: {autoHeight: true}
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('tv_sources.intro_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,id: 'modx-tv-sources-msg'
                 ,border: false
             },{
                 xtype: 'modx-grid-element-sources'
                 ,itemId: 'grid-sources'
+				,cls:'main-wrapper'
                 ,id: 'modx-grid-element-sources'
                 ,tv: config.tv
                 ,preventRender: true
@@ -320,52 +371,83 @@ MODx.panel.TVInputProperties = function(config) {
         id: 'modx-panel-tv-input-properties'
         ,title: _('tv_input_options')
         ,header: false
-        ,bodyStyle: 'padding: 15px;'
-        ,defaults: {border: false ,msgTarget: 'side', anchor: '97%'}
-        ,layout: 'form'
-        ,labelWidth: 150
+		,border: false
+        ,defaults: { border: false }
+        ,cls: 'container form-with-labels'
         ,items: [{
             html: _('tv_input_options_msg')
+			,bodyCssClass: 'panel-desc'
             ,itemId: 'desc-tv-input-properties'
         },{
-            xtype: 'modx-combo-tv-input-type'
-            ,fieldLabel: _('tv_type')
-            ,name: 'type'
-            ,id: 'modx-tv-type'
-            ,itemid: 'fld-type'
-            ,value: config.record.type || 'text'
-            ,listeners: {
-                'select': {fn:this.showInputProperties,scope:this}
-            }
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('tv_elements')
-            ,name: 'els'
-            ,id: 'modx-tv-elements'
-            ,itemId: 'fld-els'
-            ,anchor: '90%'
-            ,value: config.record.elements || ''
-            ,listeners: {
-                'change': {fn:this.markPanelDirty,scope:this}
-            }
-        },{
-            xtype: 'textarea'
-            ,fieldLabel: _('tv_default')
-            ,name: 'default_text'
-            ,id: 'modx-tv-default-text'
-            ,itemId: 'fld-default_text'
-            ,anchor: '90%'
-            ,height: 200
-            ,value: config.record.default_text || ''
-            ,listeners: {
-                'change': {fn:this.markPanelDirty,scope:this}
-            }
-        },{
-            html: '<hr />'
-        },{
-            id: 'modx-input-props'
-            ,autoHeight: true
-        }]
+            layout: 'form'
+			,border: false
+			,cls:'main-wrapper'
+            ,labelAlign: 'top'
+            ,labelSeparator: ''
+			,items: [{
+				xtype: 'modx-combo-tv-input-type'
+				,fieldLabel: _('tv_type')
+				,description: MODx.expandHelp ? '' : _('tv_type_desc')
+				,name: 'type'
+				,id: 'modx-tv-type'
+				,itemid: 'fld-type'
+				,anchor: '100%'
+				,value: config.record.type || 'text'
+				,listeners: {
+					'select': {fn:this.showInputProperties,scope:this}
+				}
+			},{
+                xtype: 'label'
+                ,forId: 'modx-tv-type'
+                ,html: _('tv_type_desc')
+                ,cls: 'desc-under'
+            },{
+				xtype: 'textarea'
+				,fieldLabel: _('tv_elements')
+				,description: MODx.expandHelp ? '' : _('tv_elements_desc')
+				,name: 'els'
+				,id: 'modx-tv-elements'
+				,itemId: 'fld-els'
+				,anchor: '100%'
+				,grow: true
+				,maxHeight: 160
+				,value: config.record.elements || ''
+				,listeners: {
+					'change': {fn:this.markPanelDirty,scope:this}
+				}
+			},{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,forId: 'modx-tv-elements'
+                ,html: _('tv_elements_desc')
+                ,cls: 'desc-under'
+            },{
+				xtype: 'textarea'
+				,fieldLabel: _('tv_default')
+				,description: MODx.expandHelp ? '' : _('tv_default_desc')
+				,name: 'default_text'
+				,id: 'modx-tv-default-text'
+				,itemId: 'fld-default_text'
+				,anchor: '100%'
+				,grow: true
+				,maxHeight: 250
+				,value: config.record.default_text || ''
+				,listeners: {
+					'change': {fn:this.markPanelDirty,scope:this}
+				}
+			},{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,forId: 'modx-tv-default-text'
+                ,html: _('tv_default_desc')
+                ,cls: 'desc-under'
+            },{
+				html: '<hr />'
+				,anchor: '100%'
+				,border: false
+			},{
+				id: 'modx-input-props'
+				,autoHeight: true
+			}]
+		}]
     });
     MODx.panel.TVInputProperties.superclass.constructor.call(this,config);
 };
@@ -403,28 +485,41 @@ MODx.panel.TVOutputProperties = function(config) {
         id: 'modx-panel-tv-output-properties'
         ,title: _('tv_output_options')
         ,header: false
-        ,bodyStyle: 'padding: 15px;'
-        ,defaults: {border: false ,msgTarget: 'side', anchor: '97%'}
         ,layout: 'form'
-        ,labelWidth: 150
+        ,cls: 'container form-with-labels'
+        ,defaults: {border: false}
         ,items: [{
             html: _('tv_output_options_msg')
+			,bodyCssClass: 'panel-desc'
             ,itemId: 'desc-tv-output-properties'
         },{
-            xtype: 'modx-combo-tv-widget'
-            ,fieldLabel: _('tv_output_type')
-            ,name: 'display'
-            ,hiddenName: 'display'
-            ,id: 'modx-tv-display'
-            ,itemId: 'fld-display'
-            ,value: config.record.display || 'default'
-            ,listeners: {
-                'select': {fn:this.showOutputProperties,scope:this}
-            }
-        },{
-            id: 'modx-widget-props'
-            ,autoHeight: true
-        }]
+            layout: 'form'
+			,border: false
+			,cls:'main-wrapper'
+            ,labelAlign: 'top'
+            ,items: [{
+                xtype: 'modx-combo-tv-widget'
+                ,fieldLabel: _('tv_output_type')
+                ,name: 'display'
+                ,hiddenName: 'display'
+                ,id: 'modx-tv-display'
+                ,itemId: 'fld-display'
+                ,value: config.record.display || 'default'
+                ,anchor: '100%'
+                ,listeners: {
+                    'select': {fn:this.showOutputProperties,scope:this}
+                }
+            },{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,labelSeparator: ''
+                ,forId: 'modx-tv-display'
+                ,html: _('tv_output_type_desc')
+                ,cls: 'desc-under'
+            },{
+				id: 'modx-widget-props'
+				,autoHeight: true
+			}]
+		}]
     });
     MODx.panel.TVOutputProperties.superclass.constructor.call(this,config);
 };

@@ -355,7 +355,6 @@ MODx.combo.ContentDisposition = function(config) {
         })
         ,name: 'content_dispo'
         ,hiddenName: 'content_dispo'
-        ,width: 200
         ,displayField: 'd'
         ,valueField: 'v'
         ,mode: 'local'
@@ -397,10 +396,15 @@ MODx.combo.ClassDerivatives = function(config) {
             ,skip: 'modXMLRPCResource'
             ,'class': 'modResource'
         }
-        ,displayField: 'class'
-        ,valueField: 'class'
-        ,fields: ['class']
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id','name']
+        ,forceSelection: true
+        ,typeAhead: false
         ,editable: false
+        ,allowBlank: false
+        ,listWidth: 300
+        ,pageSize: 20
     });
     MODx.combo.ClassDerivatives.superclass.constructor.call(this,config);
 };
@@ -693,8 +697,9 @@ MODx.combo.Action = function(config) {
         ,hiddenName: 'action'
         ,displayField: 'controller'
         ,valueField: 'id'
-        ,fields: ['id','controller']
+        ,fields: ['id','controller','namespace']
         ,url: MODx.config.connectors_url+'system/action.php'
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><tpl if="namespace">{namespace} - </tpl>{controller}</div></tpl>')
     });
     MODx.combo.Action.superclass.constructor.call(this,config);
 };

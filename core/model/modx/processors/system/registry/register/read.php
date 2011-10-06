@@ -48,7 +48,6 @@ $modx->registry->addRegister($register, $register_class, array('directory' => $r
 if (!$modx->registry->$register->connect()) return $modx->error->failure($modx->lexicon('error'));
 
 $modx->registry->$register->subscribe($topic);
-
 $msgs = $modx->registry->$register->read($options);
 if (!empty($msgs)) {
     switch ($format) {

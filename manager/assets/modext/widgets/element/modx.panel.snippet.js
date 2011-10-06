@@ -10,6 +10,7 @@ MODx.panel.Snippet = function(config) {
         url: MODx.config.connectors_url+'element/snippet.php'
         ,baseParams: {}
         ,id: 'modx-panel-snippet'
+		,cls: 'container form-with-labels'
         ,class_key: 'modSnippet'
         ,plugin: ''
         ,bodyStyle: ''
@@ -22,101 +23,142 @@ MODx.panel.Snippet = function(config) {
         },MODx.getPageStructure([{
             title: _('snippet_title')
             ,defaults: { border: false ,msgTarget: 'side' }
-            ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-snippet-form'
             ,labelWidth: 150
             ,items: [{
                 html: '<p>'+_('snippet_msg')+'</p>'
                 ,id: 'modx-snippet-msg'
+				,bodyCssClass: 'panel-desc'
             },{
-                xtype: 'hidden'
-                ,name: 'id'
-                ,id: 'modx-snippet-id'
-                ,value: config.snippet
-            },{
-                xtype: 'hidden'
-                ,name: 'props'
-                ,id: 'modx-snippet-props'
-                ,value: config.record.props || null
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('snippet_name')
-                ,name: 'name'
-                ,id: 'modx-snippet-name'
-                ,width: 300
-                ,maxLength: 255
-                ,enableKeyEvents: true
-                ,allowBlank: false
-                ,value: config.record.name
-                ,listeners: {
-                    'keyup': {scope:this,fn:function(f,e) {
-                        Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+f.getValue()+'</h2>');
-                    }}
-                }
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('snippet_desc')
-                ,name: 'description'
-                ,id: 'modx-snippet-description'
-                ,width: 300
-                ,maxLength: 255
-                ,value: config.record.description || ''
-            },{
-                xtype: 'modx-combo-category'
-                ,fieldLabel: _('category')
-                ,name: 'category'
-                ,id: 'modx-snippet-category'
-                ,width: 250
-                ,value: config.record.category || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('snippet_lock')
-                ,description: _('snippet_lock_msg')
-                ,name: 'locked'
-                ,id: 'modx-snippet-locked'
-                ,inputValue: 1
-                ,checked: config.record.locked || 0
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('clear_cache_on_save')
-                ,description: _('clear_cache_on_save_msg')
-                ,name: 'clearCache'
-                ,id: 'modx-snippet-clear-cache'
-                ,inputValue: 1
-                ,checked: Ext.isDefined(config.record.clearCache) || true
-            },{
-                xtype: 'xcheckbox'
-                ,fieldLabel: _('is_static')
-                ,description: _('is_static_msg')
-                ,name: 'static'
-                ,id: 'modx-snippet-static'
-                ,inputValue: 1
-                ,checked: config.record.static || false
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('static_file')
-                ,description: _('static_file_msg')
-                ,name: 'static_file'
-                ,id: 'modx-snippet-static-file'
-                ,width: 300
-                ,maxLength: 255
-                ,value: config.record.static_file || ''
-                ,hidden: !config.record.static
-            },{
-                html: MODx.onSnipFormRender
+                layout: 'column'
                 ,border: false
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,anchor: '100%'
+                    ,border: false
+                    ,cls:'main-wrapper'
+                    ,labelSeparator: ''
+                }
+				,items: [{
+                    columnWidth: .6
+                    ,items: [{
+                        xtype: 'hidden'
+                        ,name: 'id'
+                        ,id: 'modx-snippet-id'
+                        ,value: config.snippet
+                    },{
+                        xtype: 'hidden'
+                        ,name: 'props'
+                        ,id: 'modx-snippet-props'
+                        ,value: config.record.props || null
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,description: MODx.expandHelp ? '' : _('snippet_desc_name')
+                        ,name: 'name'
+                        ,id: 'modx-snippet-name'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,enableKeyEvents: true
+                        ,allowBlank: false
+                        ,value: config.record.name
+                        ,listeners: {
+                            'keyup': {scope:this,fn:function(f,e) {
+                                Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+f.getValue()+'</h2>');
+                            }}
+                        }
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        ,forId: 'modx-snippet-name'
+                        ,html: _('snippet_desc_name')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'textarea'
+                        ,fieldLabel: _('snippet_desc')
+                        ,description: MODx.expandHelp ? '' : _('snippet_desc_description')
+                        ,name: 'description'
+                        ,id: 'modx-snippet-description'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                        ,value: config.record.description || ''
+                    },{
+                        xtype: 'xcheckbox'
+                        ,fieldLabel: _('is_static')
+                        ,description: _('is_static_msg')
+                        ,name: 'static'
+                        ,id: 'modx-snippet-static'
+                        ,inputValue: 1
+                        ,checked: config.record.static || false
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('static_file')
+                        ,description: _('static_file_msg')
+                        ,name: 'static_file'
+                        ,id: 'modx-snippet-static-file'
+                        ,width: 300
+                        ,maxLength: 255
+                        ,value: config.record.static_file || ''
+                        ,hidden: !config.record.static
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        ,forId: 'modx-snippet-description'
+                        ,html: _('snippet_desc_description')
+                        ,cls: 'desc-under'
+                    },{
+                        html: MODx.onSnipFormRender
+                        ,border: false
+                    }]
+                },{
+                    columnWidth: .4
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,fieldLabel: _('category')
+                        ,description: MODx.expandHelp ? '' : _('snippet_desc_category')
+                        ,name: 'category'
+                        ,id: 'modx-snippet-category'
+                        ,anchor: '100%'
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        ,forId: 'modx-snippet-category'
+                        ,html: _('snippet_desc_category')
+                        ,cls: 'desc-under'
+                    },{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('snippet_lock')
+                        ,description: _('snippet_lock_msg')
+                        ,name: 'locked'
+                        ,id: 'modx-snippet-locked'
+                        ,inputValue: 1
+                        ,checked: config.record.locked || 0
+                    },{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: _('clear_cache_on_save_msg')
+                        ,hideLabel: true
+                        ,name: 'clearCache'
+                        ,id: 'modx-snippet-clear-cache'
+                        ,inputValue: 1
+                        ,checked: Ext.isDefined(config.record.clearCache) || true
+                    }]
+                }]
             },{
-                html: '<br />'+_('snippet_code')
-            },{
-                xtype: 'textarea'
-                ,hideLabel: true
-                ,name: 'snippet'
-                ,id: 'modx-snippet-snippet'
-                ,width: '95%'
-                ,height: 400
-                ,value: config.record.snippet || "<?php\n"
-                
+				xtype: 'panel'
+				,border: false
+				,layout: 'form'
+				,cls:'main-wrapper'
+				,labelAlign: 'top'
+				,items: [{
+					xtype: 'textarea'
+					,fieldLabel: _('snippet_code')
+					,name: 'snippet'
+					,id: 'modx-snippet-snippet'
+					,anchor: '100%'
+					,height: 400
+					,value: config.record.snippet || "<?php\n"
+                }]
             }]
         },{
             xtype: 'modx-panel-element-properties'

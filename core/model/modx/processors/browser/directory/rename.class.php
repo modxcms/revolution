@@ -1,0 +1,100 @@
+<?php
+/**
+ * Renames a file
+ *
+ * @param string $file The file to rename
+ * @param string $newname The new name for the file
+ *
+ * @package modx
+ * @subpackage processors.browser
+ */
+class modBrowserFolderRenameProcessor extends modProcessor {
+    /** @var modMediaSource|modFileMediaSource $source */
+    public $source;
+    public function checkPermissions() {
+        return $this->modx->hasPermission('directory_update');
+    }
+
+    public function getLanguageTopics() {
+        return array('file');
+    }
+
+    public function initialize() {
+        $this->setDefaultProperties(array(
+            'name' => false,
+            'parent' => '',
+        ));
+        $dir = $this->getProperty('dir');
+        if (empty($dir)) return $this->modx->lexicon('file_folder_err_ns');
+        $dir = str_replace(array(
+            'root/',
+            'undefined/',
+        ),'',$this->getProperty('dir'));
+        $this->setProperty('dir',$dir);
+        return true;
+    }
+
+    public function process() {
+        if (!$this->getSource()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+        $this->source->setRequestProperties($this->getProperties());
+        $this->source->initialize();
+
+        $fields = $this->getProperties();
+        if (!$this->validate($fields)) {
+            return $this->failure();
+        }
+
+        $response = $this->source->renameFolder($fields['path'],$fields['name']);
+        return $this->handleResponse($response);
+    }
+
+    /**
+     * Validate the fields passed in
+     * 
+     * @param array $fields
+     * @return boolean
+     */
+    public function validate(array $fields) {
+        if (empty($fields['path'])) {
+            $this->addFieldError('path',$this->modx->lexicon('path_err_ns'));
+        }
+        if (empty($fields['name'])) {
+            $this->addFieldError('name',$this->modx->lexicon('name_err_ns'));
+        }
+
+        return $this->hasErrors();
+    }
+
+    /**
+     * Handle the response from the source
+     * @param string $response
+     * @return array|string
+     */
+    public function handleResponse($response) {
+        if (empty($response)) {
+            $msg = '';
+            $errors = $this->source->getErrors();
+            foreach ($errors as $k => $msg) {
+                $this->modx->error->addField($k,$msg);
+            }
+            return $this->failure($msg);
+        }
+        return $this->success();
+    }
+
+    /**
+     * Get the active Source
+     * @return modMediaSource|boolean
+     */
+    public function getSource() {
+        $this->modx->loadClass('sources.modMediaSource');
+        $this->source = modMediaSource::getDefaultSource($this->modx,$this->getProperty('source'));
+        if (empty($this->source) || !$this->source->getWorkingContext()) {
+            return false;
+        }
+        return $this->source;
+    }
+}
+return 'modBrowserFolderRenameProcessor';

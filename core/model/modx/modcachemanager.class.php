@@ -195,7 +195,7 @@ class modCacheManager extends xPDOCacheManager {
                 $sourceArray['object'] = $source->get('object');
                 $sourceCache[$sourceArray['object']] = $sourceArray;
             }
-            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
             $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
             $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
@@ -465,6 +465,7 @@ class modCacheManager extends xPDOCacheManager {
                 'system_settings' => array(),
                 'context_settings' => array('contexts' => $contexts),
                 'db' => array(),
+                'media_sources' => array(),
                 'scripts' => array(),
                 'default' => array(),
                 'resource' => array('contexts' => array_diff($contexts, array('mgr'))),

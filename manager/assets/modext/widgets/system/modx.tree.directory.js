@@ -379,6 +379,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.uploader.on('uploaderror',this.uploadError,this);
             this.uploader.on('uploadfailed',this.uploadFailed,this);
         }
+        this.uploader.base_params.source = this.getSource();
         this.uploader.show(btn);
     }
     ,uploadError: function(dlg,file,data,rec) {}
@@ -425,9 +426,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
-
-
-    
 });
 Ext.reg('modx-tree-directory',MODx.tree.Directory);
 
@@ -462,13 +460,13 @@ MODx.window.CreateDirectory = function(config) {
             fieldLabel: _('name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             fieldLabel: _('file_folder_parent')
             ,name: 'parent'
             ,xtype: 'textfield'
-            ,anchor: '95%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateDirectory.superclass.constructor.call(this,config);
@@ -507,13 +505,13 @@ MODx.window.ChmodDirectory = function(config) {
             name: 'dir'
             ,fieldLabel: _('name')
             ,xtype: 'statictextfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,submitValue: true
         },{
             fieldLabel: _('mode')
             ,name: 'mode'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,allowBlank: false
         }]
     });
@@ -547,17 +545,17 @@ MODx.window.RenameDirectory = function(config) {
             ,name: 'path'
             ,xtype: 'statictextfield'
             ,submitValue: true
-            ,anchor: '95%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('old_name')
             ,name: 'old_name'
             ,xtype: 'statictextfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('new_name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,allowBlank: false
         }]
     });
@@ -590,17 +588,17 @@ MODx.window.RenameFile = function(config) {
             ,name: 'path'
             ,xtype: 'statictextfield'
             ,submitValue: true
-            ,anchor: '95%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('old_name')
             ,name: 'old_name'
             ,xtype: 'statictextfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('new_name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             name: 'dir'

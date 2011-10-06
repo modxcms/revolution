@@ -14,7 +14,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,renderTo: 'tv-image-{$tv->id}'
         ,value: '{$tv->value|escape}'
-        ,width: '97%'
+        ,width: 400
         ,msgTarget: 'under'
     {literal}
     });

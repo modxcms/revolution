@@ -109,7 +109,7 @@ class modInstallVersion {
         } elseif (is_string($callable)) {
             $result = $this->install->xpdo->exec($callable);
         }
-        if (!$result) {
+        if ($result === false) {
             $this->runner->addResult(modInstallRunner::RESULT_WARNING,'<p class="notok">'.$this->install->lexicon('err_update_table',array('class' => $class)).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>');
             return false;
         } else {

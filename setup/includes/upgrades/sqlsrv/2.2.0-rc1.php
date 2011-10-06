@@ -46,38 +46,15 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 $description = $this->install->lexicon('add_index',array('index' => 'primary_group','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'primary_group'));
 
-/* assign primary_group for users with one group, or with admin group */
-/**
-$c = $modx->newQuery('modUser');
-$c->where(array(
-    'primary_group' => 0,
-));
-$users = $modx->getCollectionGraph('modUser','{"UserGroupMembers":{"UserGroup":{}}}',$c);
-// @var modUser $user
-foreach ($users as $user) {
-    if (count($user->UserGroupMembers) == 1) {
-        // @var modUserGroupMember $membership
-        foreach ($user->UserGroupMembers as $membership) {
-            $user->set('primary_group',$membership->get('user_group'));
-            $user->save();
-            break;
-        }
-    } elseif (count($user->UserGroupMembers) > 0) {
-        $idx = 0;
-        // @var modUserGroupMember $membership
-        foreach ($user->UserGroupMembers as $membership) {
-            if ($membership->UserGroup->get('name') == 'Administrator' || $idx == 0) {
-                $user->set('primary_group',$membership->get('user_group'));
-                $user->save();
-                if ($membership->get('name') == 'Administrator') {
-                    break;
-                }
-            }
-            $idx++;
-        }
-    }
-}
- */
+/* assign primary_group for users in at least one group based on group and member rank */
+$tableUserGroups = $modx->getTableName('modUserGroup');
+$tableMemberGroups = $modx->getTableName('modUserGroupMember');
+$sql = "UPDATE {$table}
+SET [primary_group] = (SELECT TOP 1 [user_group] FROM {$tableMemberGroups} [memb], {$tableUserGroups} [groups] WHERE [memb].[user_group] = [groups].[id] AND [memb].[member] = {$table}.[id] ORDER BY [memb].[rank] ASC, [groups].[rank] ASC, [groups].[id] ASC)
+WHERE [primary_group] = 0
+AND EXISTS (SELECT 1 FROM {$tableMemberGroups} WHERE {$tableMemberGroups}.[member] = {$table}.[id])";
+$description = $this->install->lexicon('update_table_column_data',array('table' => $table, 'column' => 'primary_group', 'class' => $class));
+$this->processResults($class, $description, $sql);
 
 /* add dashboard field/index to modUserGroup */
 $class = 'modUserGroup';

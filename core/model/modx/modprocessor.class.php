@@ -11,7 +11,7 @@
  *
  * @package modx
  */
-class modProcessor {
+abstract class modProcessor {
     /**
      * A reference to the modX object.
      * @var modX $modx
@@ -27,21 +27,16 @@ class modProcessor {
      * @var array $properties
      */
     public $properties = array();
-    /**
-     * An array of configuration properties
-     * @var array $config
-     */
-    public $config = array();
-
+    
     /**
      * Creates a modProcessor object.
      *
      * @param modX $modx A reference to the modX instance
-     * @param array $config An array of configuration properties
+     * @param array $properties An array of properties
      */
-    function __construct(modX & $modx,array $config = array()) {
+    function __construct(modX & $modx,array $properties = array()) {
         $this->modx =& $modx;
-        $this->config = $config;
+        $this->properties = $properties;
     }
 
     /**
@@ -59,19 +54,158 @@ class modProcessor {
      * @return void
      */
     public function setProperties($properties) {
+        unset($properties['HTTP_MODAUTH']);
         $this->properties = $properties;
     }
+
+    /**
+     * Return true here to allow access to this processor.
+     * 
+     * @return boolean
+     */
+    public function checkPermissions() { return true; }
+
+    /**
+     * Can be used to provide custom methods prior to processing. Return true to tell MODX that the Processor
+     * initialized successfully. If you return anything else, MODX will output that return value as an error message.
+     * 
+     * @return boolean
+     */
+    public function initialize() { return true; }
+
+    /**
+     * Load a collection of Language Topics for this processor.
+     * Override this in your derivative class to provide the array of topics to load.
+     * @return array
+     */
+    public function getLanguageTopics() {
+        return array();
+    }
+    
+    /**
+     * Return a success message from the processor.
+     * @param string $msg
+     * @param mixed $object
+     * @return array|string
+     */
+    public function success($msg = '',$object = null) {
+        return $this->modx->error->success($msg,$object);
+    }
+
+    /**
+     * Return a failure message from the processor.
+     * @param string $msg
+     * @param mixed $object
+     * @return array|string
+     */
+    public function failure($msg = '',$object = null) {
+        return $this->modx->error->failure($msg,$object);
+    }
+
+    /**
+     * Return whether or not the processor has errors
+     * @return boolean
+     */
+    public function hasErrors() {
+        return $this->modx->error->hasError();
+    }
+
+    /**
+     * Add an error to the field
+     * @param string $key
+     * @param string $message
+     * @return mixed
+     */
+    public function addFieldError($key,$message = '') {
+        return $this->modx->error->addField($key,$message);
+    }
+
+    /**
+     * Return the proper instance of the derived class. This can be used to override how MODX loads a processor
+     * class; for example, when handling derivative classes with class_key settings.
+     *
+     * @static
+     * @param modX $modx A reference to the modX object.
+     * @param string $className The name of the class that is being requested.
+     * @param array $properties An array of properties being run with the processor
+     * @return The class specified by $className
+     */
+    public static function getInstance(modX &$modx,$className,$properties = array()) {
+        /** @var modProcessor $processor */
+        $processor = new $className($modx,$properties);
+        return $processor;
+    }
+
+    /**
+     * Run the processor and return the result. Override this in your derivative class to provide custom functionality.
+     * Used here for pre-2.2-style processors.
+     * 
+     * @return mixed
+     */
+    abstract public function process();
 
     /**
      * Run the processor, returning a modProcessorResponse object.
      * @return modProcessorResponse
      */
     public function run() {
-        $modx =& $this->modx;
-        $scriptProperties = $this->properties;
-        $o = include $this->path;
+        if (!$this->checkPermissions()) {
+            $o = $this->failure($this->modx->lexicon('permission_denied'));
+        } else {
+            $topics = $this->getLanguageTopics();
+            foreach ($topics as $topic) {
+                $this->modx->lexicon->load($topic);
+            }
+
+            $initialized = $this->initialize();
+            if ($initialized !== true) {
+                $o = $this->failure($initialized);
+            } else {
+                $o = $this->process();
+            }
+        }
         $response = new modProcessorResponse($this->modx,$o);
         return $response;
+    }
+
+    /**
+     * Get a specific property.
+     * @param string $k
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getProperty($k,$default = null) {
+        return array_key_exists($k,$this->properties) ? $this->properties[$k] : $default;
+    }
+
+    /**
+     * Set a property value
+     * 
+     * @param string $k
+     * @param mixed $v
+     * @return void
+     */
+    public function setProperty($k,$v) {
+        $this->properties[$k] = $v;
+    }
+
+    /**
+     * Get an array of properties for this processor
+     * @return array
+     */
+    public function getProperties() {
+        return $this->properties;
+    }
+
+    /**
+     * Sets default properties that only are set if they don't already exist in the request
+     *
+     * @param array $properties
+     * @return array The newly merged properties array
+     */
+    public function setDefaultProperties(array $properties = array()) {
+        $this->properties = array_merge($properties,$this->properties);
+        return $this->properties;
     }
 
     /**
@@ -163,6 +297,40 @@ class modProcessor {
             $result = $response;
         }
         return $result;
+    }
+}
+
+/**
+ * A utility class for pre-2.2-style, or flat file, processors.
+ *
+ * @package modx
+ */
+class modDeprecatedProcessor extends modProcessor {
+    /**
+     * Rather than load a class for processing, include the processor file directly.
+     * 
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function process() {
+        $modx =& $this->modx;
+        $scriptProperties = $this->getProperties();
+        $o = include $this->path;
+        return $o;
+    }
+}
+
+/**
+ * A utility class used for defining driver-specific processors
+ * 
+ * @package modx
+ */
+abstract class modDriverSpecificProcessor extends modProcessor {
+    public static function getInstance(modX &$modx,$className,$properties = array()) {
+        $className .= '_'.$modx->getOption('dbtype');
+        /** @var modProcessor $processor */
+        $processor = new $className($modx,$properties);
+        return $processor;
     }
 }
 

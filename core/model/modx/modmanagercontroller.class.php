@@ -469,28 +469,40 @@ abstract class modManagerController {
                 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
                 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.js';
                 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
-                $externals2[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
-                $externals2[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
-                $externals2[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
-                $externals2[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
-                $externals2[] = $managerUrl.'assets/modext/widgets/windows.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
 
-                $externals2[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
-                $externals2[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
-                $externals2[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
-                $externals2[] = $managerUrl.'assets/modext/core/modx.view.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
+                $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
+                $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
             }
             
             $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
 
-            $externals2[] = $managerUrl.'assets/modext/core/modx.layout.js';
+            $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
 
             $o = '';
             if ($this->modx->getOption('compress_js',null,true)) {
                 if (!empty($externals)) {
                     $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
-                    $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals).'"></script>';
-                    $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$externals2).'"></script>';
+
+                    /* combine into max 5 script sources */
+                    $sources = array();
+                    $i = 0;
+                    $idx = 0;
+                    foreach ($externals as $script) {
+                        if (empty($sources[$idx])) $sources[$idx] = array();
+                        $sources[$idx][] = $script;
+                        if ($i >= 5) { $idx++; $i = 0; }
+                        $i++;
+                    }
+                    foreach ($sources as $scripts) {
+                        $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$scripts).'"></script>';
+                    }
                 }
                 $this->modx->setOption('compress_js',true);
             } else {
@@ -503,11 +515,42 @@ abstract class modManagerController {
                 $this->modx->setOption('compress_css',true);
             }
 
+            $state = $this->getDefaultState();
+            if (!empty($state)) {
+                $state = 'MODx.defaultState = '.$this->modx->toJSON($state).';';
+            } else { $state = ''; }
             $o .= '<script type="text/javascript">Ext.onReady(function() {
+                '.$state.'
     MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});
 });</script>';
             $this->modx->smarty->assign('maincssjs',$o);
         }
+    }
+
+    /**
+     * Get the default state for the UI
+     * @return array|mixed|string
+     */
+    public function getDefaultState() {
+        $this->modx->setLogTarget('ECHO');
+        /** @var modProcessorResponse $response */
+        $response = $this->modx->runProcessor('system/registry/register/read',array(
+            'register' => 'state',
+            'topic' => '/ys/user-'.$this->modx->user->get('id').'/',
+            'include_keys' => true,
+            'poll_interval' => 1,
+            'poll_limit' => 1,
+            'remove_read' => false,
+            'show_filename' => false,
+            'time_limit' => 10,
+        ));
+        $obj = $response->getMessage();
+        if (!empty($obj)) {
+            $obj = $this->modx->fromJSON($obj);
+        } else {
+            $obj = array();
+        }
+        return $obj;
     }
     
     /**
@@ -677,16 +720,18 @@ abstract class modManagerController {
             'FCSet.active' => true,
             'Profile.active' => true,
         ));
-        $c->where(array(
-            array(
-                'ProfileUserGroup.usergroup:IN' => $userGroups,
+        if (!empty($userGroups)) {
+            $c->where(array(
                 array(
-                    'OR:ProfileUserGroup.usergroup:IS' => null,
-                    'AND:UGProfile.active:=' => true,
+                    'ProfileUserGroup.usergroup:IN' => $userGroups,
+                    array(
+                        'OR:ProfileUserGroup.usergroup:IS' => null,
+                        'AND:UGProfile.active:=' => true,
+                    ),
                 ),
-            ),
-            'OR:ProfileUserGroup.usergroup:=' => null,
-        ),xPDOQuery::SQL_AND,null,2);
+                'OR:ProfileUserGroup.usergroup:=' => null,
+            ),xPDOQuery::SQL_AND,null,2);
+        }
         $c->select($this->modx->getSelectColumns('modActionDom', 'modActionDom'));
         $c->select($this->modx->getSelectColumns('modFormCustomizationSet', 'FCSet', '', array(
             'constraint_class',
@@ -697,6 +742,7 @@ abstract class modManagerController {
         $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
+        /** @var modActionDom $rule */
         foreach ($domRules as $rule) {
             $template = $rule->get('template');
             if (!empty($template) && $obj) {
