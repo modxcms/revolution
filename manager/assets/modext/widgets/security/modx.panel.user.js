@@ -123,282 +123,8 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         var f = [{
             title: _('general_information')
             ,defaults: { msgTarget: 'side' ,autoHeight: true }
-			,cls: 'main-wrapper'
-            ,items: [{
-                id: 'modx-user-id'
-                ,name: 'id'
-                ,xtype: 'hidden'
-                ,value: config.user
-            },{
-                id: 'modx-user-newpassword'
-                ,name: 'newpassword'
-                ,xtype: 'hidden'
-                ,value: false
-            },{
-                id: 'modx-user-primary-group'
-                ,name: 'primary_group'
-                ,xtype: 'hidden'
-            },{
-                id: 'modx-user-fs-newpassword'
-                ,title: _('password_new')
-                ,xtype: 'fieldset'
-                ,checkboxToggle: true
-                ,collapsed: (config.user ? true : false)
-                ,forceLayout: true
-                ,listeners: {
-                    'expand': {fn:function(p) {
-                        Ext.getCmp('modx-user-newpassword').setValue(true);
-                    },scope:this}
-                    ,'collapse': {fn:function(p) {
-                        Ext.getCmp('modx-user-newpassword').setValue(false);
-                    },scope:this}
-                }
-                ,items: [{
-                    xtype: 'radiogroup'
-                    ,fieldLabel: _('password_method')
-                    ,columns: 1
-                    ,items: [{
-                        id: 'modx-user-passwordnotifymethod-e'
-                        ,name: 'passwordnotifymethod'
-                        ,boxLabel: _('password_method_email')
-                        ,xtype: 'radio'
-                        ,value: 'e'
-                        ,inputValue: 'e'
-                    },{
-                        id: 'modx-user-passwordnotifymethod-s'
-                        ,name: 'passwordnotifymethod'
-                        ,boxLabel: _('password_method_screen')
-                        ,xtype: 'radio'
-                        ,value: 's'
-                        ,inputValue: 's'
-                        ,checked: true
-                    }]
-                },{
-                    xtype: 'radiogroup'
-                    ,fieldLabel: _('password_gen_method')
-                    ,columns: 1
-                    ,items: [{
-                        id: 'modx-user-password-genmethod-g'
-                        ,name: 'passwordgenmethod'
-                        ,boxLabel: _('password_gen_gen')
-                        ,xtype: 'radio'
-                        ,inputValue: 'g'
-                        ,value: 'g'
-                        ,checked: true
-                    },{
-                        id: 'modx-user-password-genmethod-s'
-                        ,name: 'passwordgenmethod'
-                        ,boxLabel: _('password_gen_specify')
-                        ,xtype: 'radio'
-                        ,inputValue: 'spec'
-                        ,value: 'spec'
-                    }]
-                },{
-                    id: 'modx-user-panel-newpassword'
-                    ,xtype: 'panel'
-                    ,layout: 'form'
-                    ,border: false
-                    ,autoHeight: true
-                    ,items: [{
-                        id: 'modx-user-specifiedpassword'
-                        ,name: 'specifiedpassword'
-                        ,fieldLabel: _('change_password_new')
-                        ,xtype: 'textfield'
-                        ,inputType: 'password'
-                        ,width: 175
-                    },{
-                        id: 'modx-user-confirmpassword'
-                        ,name: 'confirmpassword'
-                        ,fieldLabel: _('change_password_confirm')
-                        ,xtype: 'textfield'
-                        ,inputType: 'password'
-                        ,width: 175
-                    }]
-                }]
-            },{
-                id: 'modx-user-fs-general'
-                ,title: _('general_information')
-                ,xtype: 'fieldset'
-                ,items: [{
-                    id: 'modx-user-username'
-                    ,name: 'username'
-                    ,fieldLabel: _('username')
-                    ,description: _('user_username_desc')
-                    ,xtype: 'textfield'
-                    ,width: 300
-                },{
-                    id: 'modx-user-active'
-                    ,name: 'active'
-                    ,fieldLabel: _('active')
-                    ,description: _('user_active_desc')
-                    ,xtype: 'xcheckbox'
-                    ,inputValue: 1
-                },{
-                    id: 'modx-user-fullname'
-                    ,name: 'fullname'
-                    ,fieldLabel: _('user_full_name')
-                    ,xtype: 'textfield'
-                    ,width: 300
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-email'
-                    ,name: 'email'
-                    ,fieldLabel: _('user_email')
-                    ,xtype: 'textfield'
-                    ,width: 300
-                    ,maxLength: 255
-                    ,allowBlank: false
-                },{
-                    id: 'modx-user-phone'
-                    ,name: 'phone'
-                    ,fieldLabel: _('user_phone')
-                    ,xtype: 'textfield'
-                    ,width: 200
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-mobilephone'
-                    ,name: 'mobilephone'
-                    ,fieldLabel: _('user_mobile')
-                    ,xtype: 'textfield'
-                    ,width: 200
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-address'
-                    ,name: 'address'
-                    ,fieldLabel: _('address')
-                    ,xtype: 'textarea'
-                    ,width: 300
-                    ,grow: true
-                },{
-                    id: 'modx-user-city'
-                    ,name: 'city'
-                    ,fieldLabel: _('city')
-                    ,xtype: 'textfield'
-                    ,width: 300
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-fax'
-                    ,name: 'fax'
-                    ,fieldLabel: _('user_fax')
-                    ,xtype: 'textfield'
-                    ,width: 200
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-state'
-                    ,name: 'state'
-                    ,fieldLabel: _('user_state')
-                    ,xtype: 'textfield'
-                    ,width: 100
-                    ,maxLength: 100
-                },{
-                    id: 'modx-user-zip'
-                    ,name: 'zip'
-                    ,fieldLabel: _('user_zip')
-                    ,xtype: 'textfield'
-                    ,width: 100
-                    ,maxLength: 25
-                },{
-                    id: 'modx-user-country'
-                    ,fieldLabel: _('user_country')
-                    ,xtype: 'modx-combo-country'
-                    ,value: ''
-                },{
-                    id: 'modx-user-website'
-                    ,name: 'website'
-                    ,fieldLabel: _('user_website')
-                    ,xtype: 'textfield'
-                    ,width: 300
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-dob'
-                    ,name: 'dob'
-                    ,fieldLabel: _('user_dob')
-                    ,xtype: 'datefield'
-                    ,width: 150
-                    ,allowBlank: true
-                    ,format: MODx.config.manager_date_format
-                },{
-                    id: 'modx-user-gender'
-                    ,name: 'gender'
-                    ,hiddenName: 'gender'
-                    ,fieldLabel: _('user_gender')
-                    ,xtype: 'modx-combo-gender'
-                },{
-                    id: 'modx-user-class-key'
-                    ,name: 'class_key'
-                    ,fieldLabel: _('class_key')
-                    ,description: _('user_class_key_desc')
-                    ,xtype: 'textfield'
-                    ,width: 300
-                    ,value: 'modUser'
-                },{
-                    id: 'modx-user-comment'
-                    ,name: 'comment'
-                    ,fieldLabel: _('comment')
-                    ,xtype: 'textarea'
-                    ,width: 300
-                    ,grow: true
-                },{
-                    html: MODx.onUserFormRender
-                    ,border: false
-                }]
-            },{
-                id: 'modx-user-fs-blocked'
-                ,title: _('login_options')
-                ,xtype: 'fieldset'
-                ,items: [{
-                    id: 'modx-user-logincount'
-                    ,name: 'logincount'
-                    ,fieldLabel: _('user_logincount')
-                    ,description: _('user_logincount_desc')
-                    ,xtype: 'statictextfield'
-                },{
-                    id: 'modx-user-lastlogin'
-                    ,name: 'lastlogin'
-                    ,fieldLabel: _('user_prevlogin')
-                    ,description: _('user_prevlogin_desc')
-                    ,xtype: 'statictextfield'
-                },{
-                    id: 'modx-user-failedlogincount'
-                    ,name: 'failedlogincount'
-                    ,fieldLabel: _('user_failedlogincount')
-                    ,description: _('user_failedlogincount_desc')
-                    ,xtype: 'textfield'
-                },{
-                    id: 'modx-user-blocked'
-                    ,name: 'blocked'
-                    ,fieldLabel: _('user_block')
-                    ,description: _('user_block_desc')
-                    ,xtype: 'xcheckbox'
-                    ,inputValue: 1
-                },{
-                    id: 'modx-user-blockeduntil'
-                    ,name: 'blockeduntil'
-                    ,fieldLabel: _('user_blockeduntil')
-                    ,description: _('user_blockeduntil_desc')
-                    ,xtype: 'xdatetime'
-                    ,width: 300
-                    ,timeWidth: 150
-                    ,dateWidth: 150
-                    ,allowBlank: true
-                    ,dateFormat: MODx.config.manager_date_format
-                    ,timeFormat: MODx.config.manager_time_format
-                    ,hiddenFormat: 'Y-m-d H:i:s'
-                },{
-                    id: 'modx-user-blockedafter'
-                    ,name: 'blockedafter'
-                    ,fieldLabel: _('user_blockedafter')
-                    ,description: _('user_blockedafter_desc')
-                    ,xtype: 'xdatetime'
-                    ,width: 300
-                    ,timeWidth: 150
-                    ,dateWidth: 150
-                    ,allowBlank: true
-                    ,dateFormat: MODx.config.manager_date_format
-                    ,timeFormat: MODx.config.manager_time_format
-                    ,hiddenFormat: 'Y-m-d H:i:s'
-                }]
-            }]
+            ,cls: 'main-wrapper form-with-labels'
+            ,items: this.getGeneralFields(config)
         }];
         if (config.user != 0) {
             f.push({
@@ -522,6 +248,294 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             }]
         });
         return f;
+    }
+
+    ,getGeneralFields: function(config) {
+        return [{
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: [{
+                    id: 'modx-user-id'
+                    ,name: 'id'
+                    ,xtype: 'hidden'
+                    ,value: config.user
+                },{
+                    id: 'modx-user-username'
+                    ,name: 'username'
+                    ,fieldLabel: _('username')
+                    ,description: _('user_username_desc')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                },{
+                    id: 'modx-user-fullname'
+                    ,name: 'fullname'
+                    ,fieldLabel: _('user_full_name')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                },{
+                    id: 'modx-user-email'
+                    ,name: 'email'
+                    ,fieldLabel: _('user_email')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                    ,allowBlank: false
+                },{
+                    id: 'modx-user-phone'
+                    ,name: 'phone'
+                    ,fieldLabel: _('user_phone')
+                    ,xtype: 'textfield'
+                    ,width: 200
+                    ,maxLength: 255
+                },{
+                    id: 'modx-user-mobilephone'
+                    ,name: 'mobilephone'
+                    ,fieldLabel: _('user_mobile')
+                    ,xtype: 'textfield'
+                    ,width: 200
+                    ,maxLength: 255
+                },{
+                    id: 'modx-user-address'
+                    ,name: 'address'
+                    ,fieldLabel: _('address')
+                    ,xtype: 'textarea'
+                    ,anchor: '100%'
+                    ,grow: true
+                },{
+                    id: 'modx-user-city'
+                    ,name: 'city'
+                    ,fieldLabel: _('city')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                },{
+                    id: 'modx-user-fax'
+                    ,name: 'fax'
+                    ,fieldLabel: _('user_fax')
+                    ,xtype: 'textfield'
+                    ,width: 200
+                    ,maxLength: 255
+                },{
+                    id: 'modx-user-state'
+                    ,name: 'state'
+                    ,fieldLabel: _('user_state')
+                    ,xtype: 'textfield'
+                    ,width: 100
+                    ,maxLength: 100
+                },{
+                    id: 'modx-user-zip'
+                    ,name: 'zip'
+                    ,fieldLabel: _('user_zip')
+                    ,xtype: 'textfield'
+                    ,width: 100
+                    ,maxLength: 25
+                },{
+                    id: 'modx-user-country'
+                    ,fieldLabel: _('user_country')
+                    ,xtype: 'modx-combo-country'
+                    ,value: ''
+                },{
+                    id: 'modx-user-website'
+                    ,name: 'website'
+                    ,fieldLabel: _('user_website')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                },{
+                    id: 'modx-user-dob'
+                    ,name: 'dob'
+                    ,fieldLabel: _('user_dob')
+                    ,xtype: 'datefield'
+                    ,width: 200
+                    ,allowBlank: true
+                    ,format: MODx.config.manager_date_format
+                },{
+                    id: 'modx-user-gender'
+                    ,name: 'gender'
+                    ,hiddenName: 'gender'
+                    ,fieldLabel: _('user_gender')
+                    ,xtype: 'modx-combo-gender'
+                    ,width: 200
+                }]
+            },{
+                columnWidth: .5
+                ,items: [{
+                    id: 'modx-user-newpassword'
+                    ,name: 'newpassword'
+                    ,xtype: 'hidden'
+                    ,value: false
+                },{
+                    id: 'modx-user-primary-group'
+                    ,name: 'primary_group'
+                    ,xtype: 'hidden'
+                },{
+                    id: 'modx-user-active'
+                    ,name: 'active'
+                    ,hideLabel: true
+                    ,boxLabel: _('active')
+                    ,description: _('user_active_desc')
+                    ,xtype: 'xcheckbox'
+                    ,inputValue: 1
+                },{
+                    id: 'modx-user-blocked'
+                    ,name: 'blocked'
+                    ,hideLabel: true
+                    ,boxLabel: _('user_block')
+                    ,description: _('user_block_desc')
+                    ,xtype: 'xcheckbox'
+                    ,inputValue: 1
+                },{
+                    id: 'modx-user-blockeduntil'
+                    ,name: 'blockeduntil'
+                    ,fieldLabel: _('user_blockeduntil')
+                    ,description: _('user_blockeduntil_desc')
+                    ,xtype: 'xdatetime'
+                    ,width: 300
+                    ,timeWidth: 150
+                    ,dateWidth: 150
+                    ,allowBlank: true
+                    ,dateFormat: MODx.config.manager_date_format
+                    ,timeFormat: MODx.config.manager_time_format
+                    ,hiddenFormat: 'Y-m-d H:i:s'
+                },{
+                    id: 'modx-user-blockedafter'
+                    ,name: 'blockedafter'
+                    ,fieldLabel: _('user_blockedafter')
+                    ,description: _('user_blockedafter_desc')
+                    ,xtype: 'xdatetime'
+                    ,width: 300
+                    ,timeWidth: 150
+                    ,dateWidth: 150
+                    ,allowBlank: true
+                    ,dateFormat: MODx.config.manager_date_format
+                    ,timeFormat: MODx.config.manager_time_format
+                    ,hiddenFormat: 'Y-m-d H:i:s'
+                },{
+                    id: 'modx-user-logincount'
+                    ,name: 'logincount'
+                    ,fieldLabel: _('user_logincount')
+                    ,description: _('user_logincount_desc')
+                    ,xtype: 'statictextfield'
+                },{
+                    id: 'modx-user-lastlogin'
+                    ,name: 'lastlogin'
+                    ,fieldLabel: _('user_prevlogin')
+                    ,description: _('user_prevlogin_desc')
+                    ,xtype: 'statictextfield'
+                },{
+                    id: 'modx-user-failedlogincount'
+                    ,name: 'failedlogincount'
+                    ,fieldLabel: _('user_failedlogincount')
+                    ,description: _('user_failedlogincount_desc')
+                    ,xtype: 'textfield'
+                },{
+                    id: 'modx-user-class-key'
+                    ,name: 'class_key'
+                    ,fieldLabel: _('class_key')
+                    ,description: _('user_class_key_desc')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,value: 'modUser'
+                },{
+                    id: 'modx-user-comment'
+                    ,name: 'comment'
+                    ,fieldLabel: _('comment')
+                    ,xtype: 'textarea'
+                    ,anchor: '100%'
+                    ,grow: true
+                },{
+                    id: 'modx-user-fs-newpassword'
+                    ,title: _('password_new')
+                    ,xtype: 'fieldset'
+                    ,checkboxToggle: true
+                    ,collapsed: (config.user ? true : false)
+                    ,forceLayout: true
+                    ,listeners: {
+                        'expand': {fn:function(p) {
+                            Ext.getCmp('modx-user-newpassword').setValue(true);
+                        },scope:this}
+                        ,'collapse': {fn:function(p) {
+                            Ext.getCmp('modx-user-newpassword').setValue(false);
+                        },scope:this}
+                    }
+                    ,items: [{
+                        xtype: 'radiogroup'
+                        ,fieldLabel: _('password_method')
+                        ,columns: 1
+                        ,items: [{
+                            id: 'modx-user-passwordnotifymethod-e'
+                            ,name: 'passwordnotifymethod'
+                            ,boxLabel: _('password_method_email')
+                            ,xtype: 'radio'
+                            ,value: 'e'
+                            ,inputValue: 'e'
+                        },{
+                            id: 'modx-user-passwordnotifymethod-s'
+                            ,name: 'passwordnotifymethod'
+                            ,boxLabel: _('password_method_screen')
+                            ,xtype: 'radio'
+                            ,value: 's'
+                            ,inputValue: 's'
+                            ,checked: true
+                        }]
+                    },{
+                        xtype: 'radiogroup'
+                        ,fieldLabel: _('password_gen_method')
+                        ,columns: 1
+                        ,items: [{
+                            id: 'modx-user-password-genmethod-g'
+                            ,name: 'passwordgenmethod'
+                            ,boxLabel: _('password_gen_gen')
+                            ,xtype: 'radio'
+                            ,inputValue: 'g'
+                            ,value: 'g'
+                            ,checked: true
+                        },{
+                            id: 'modx-user-password-genmethod-s'
+                            ,name: 'passwordgenmethod'
+                            ,boxLabel: _('password_gen_specify')
+                            ,xtype: 'radio'
+                            ,inputValue: 'spec'
+                            ,value: 'spec'
+                        }]
+                    },{
+                        id: 'modx-user-panel-newpassword'
+                        ,xtype: 'panel'
+                        ,layout: 'form'
+                        ,border: false
+                        ,autoHeight: true
+                        ,items: [{
+                            id: 'modx-user-specifiedpassword'
+                            ,name: 'specifiedpassword'
+                            ,fieldLabel: _('change_password_new')
+                            ,xtype: 'textfield'
+                            ,inputType: 'password'
+                            ,anchor: '100%'
+                        },{
+                            id: 'modx-user-confirmpassword'
+                            ,name: 'confirmpassword'
+                            ,fieldLabel: _('change_password_confirm')
+                            ,xtype: 'textfield'
+                            ,inputType: 'password'
+                            ,anchor: '100%'
+                        }]
+                    }]
+                }]
+            }]
+        },{
+            html: MODx.onUserFormRender
+            ,border: false
+        }];
     }
 });
 Ext.reg('modx-panel-user',MODx.panel.User);
