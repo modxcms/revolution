@@ -45,7 +45,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 pcmb.setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
             }
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_(this.classLexiconKey)+': '+this.config.record.pagetitle+'</h2>');
+                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+this.config.record.pagetitle+'</h2>');
             }
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
         }
@@ -169,7 +169,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,getFields: function(config) {
         var it = [];
         it.push({
-            title: _('createedit_document')
+            title: _(this.classLexiconKey)
             ,id: 'modx-resource-settings'
             ,cls: 'modx-resource-tab'
             ,layout: 'form'
@@ -186,7 +186,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         });
         it.push({
             id: 'modx-page-settings'
-            ,title: _('page_settings')
+            ,title: _('settings')
             ,cls: 'modx-resource-tab'
             ,layout: 'form'
             ,forceLayout: true
@@ -215,7 +215,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             it.push({
                 id: 'modx-resource-access-permissions'
                 ,autoHeight: true
-                ,title: _('access_permissions')
+                ,title: _('resource_groups')
                 ,layout: 'form'
                 ,anchor: '100%'
                 ,items: [{
