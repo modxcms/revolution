@@ -1,18 +1,19 @@
+
 # ignore all .htaccess
-.htaccess
+# .htaccess
 
 # ignore all IIS files
-web.config
+# web.config
 
 # ignore all config.core.php
-config.core.php
+# config.core.php
 
 # ignore all compressed js and css
-*-min.css
-*-min.js
+# *-min.css
+# *-min.js
 
 # ignore concatenated js
-modext.js
+# modext.js
 
 # ignore common root paths for docs and assets
 /docs/
@@ -20,6 +21,9 @@ modext.js
 
 # ignore various IDE project files and folders
 .idea/
+.buildpath
+.project
+.settings/
 
 # ignore PHP files beginning with test
 test*.php

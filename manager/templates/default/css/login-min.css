@@ -1,0 +1,91 @@
+html {
+    font-size: 100.01%; /* avoids obscure font-size bug */
+    line-height: 1.5; /* http://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/ */
+    font-family: Verdana, Helvetica, Arial, sans-serif !important; /* IE ignores this and renders Arial better */
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
+    color: #111;
+    height: auto;
+    background-color: #f7f7f7;
+}
+body {
+    font-size: 75%; /* 12px 62.5% for 10px*/
+    background-color: #f7f7f7;
+    height: auto;
+}
+
+.warning { color: #821517; font-weight: bold; }
+.success { color: #090; font-weight: bold; }
+#modx-panel-login-div {
+    width: 460px;
+    margin: 70px auto 0;
+}
+img.loginCaptcha {
+    border: 1px solid #039;
+    width: 148px;
+    height: 60px;
+}
+.loginLicense {
+    width: 470px;
+    color: #555;
+    margin: 10px auto;
+    padding-left: 10px;
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
+}
+
+#modx-login-form-panel {
+    border: 1px solid #ddd;
+}
+.x-panel-tl, .x-panel-tl .x-panel-header { 
+    padding: 3px 5px;
+    border: 0;
+    font-size: 14px;
+} 
+
+.x-panel-ml, .x-panel-mr, .x-panel-mc {
+    border: 0;
+    background-color: #fcfcfc;
+}
+.x-panel-ml {
+    padding: 10px 20px 22px;
+    border-top: 1px solid #e4e4e4;
+}
+.x-btn {
+    padding: 0 5px;
+}
+
+.modx-forgot-login {
+    float: left;
+    padding-top: 4px;
+}
+a {
+    text-decoration: none;
+    color: #526924;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+#modx-login-email { width: 200px; }
+
+#modx-panel-login-div {
+    background-color: white;
+	box-shadow: 0 0 10px #aaa;
+	-moz-box-shadow: 0 0 10px #aaa;
+	-webkit-box-shadow: 0 0 15px #ccc;
+	border: 1px solid #fff;
+}
+#modx-login-btn:hover {
+	color: #777;
+}
+label { cursor: pointer; }
+
+#modx-panel-login-div div.x-panel-tl,
+#modx-panel-login-div div.x-panel-ml{
+margin-right:0;
+}
+
+input.x-form-text {width:280px;}
+
+input.x-form-field {}
+
+.x-panel-body h2 {margin-top:0;}

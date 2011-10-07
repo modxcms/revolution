@@ -1,0 +1,34 @@
+#modx-frame-ct {
+    height: 500px !important;
+}
+
+.modx-accordion .x-accordion-hd {
+    /* cannot make the dang right corner work in IE7 */
+    /* the star in front of properties targets IE7-only */
+    *margin-right: 0;
+    overflow: visible;
+}
+
+#rightlogin {
+    text-align: right;
+    *width: 200px;
+}
+
+#rightlogin a.modx-logout {
+    display: block;
+    float: right;
+    margin-left: 0;
+}
+
+.ext-ie7 #modAB {
+    width: 500px;
+}
+#modx-stay-menu {
+    zoom: 1;
+}
+#modx-stay-menu .x-rbtn { width: 200px; border: 1px solid red; float: none;}
+#modx-stay-menu .x-rbtn td { width: 50px; }
+
+/*.ext-ie #modx-navbar {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#777777');
+}*/
