@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => false,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'f02c56a710f30508068fe197f8cccc7b',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => '2abb834d0ee04de58bde1494f871a2b0',
+  'native_key' => 'manager_use_tabs',
+  'object' => '{"key":"manager_use_tabs","value":"1","xtype":"combo-boolean","namespace":"core","area":"manager","editedon":null}',
+);

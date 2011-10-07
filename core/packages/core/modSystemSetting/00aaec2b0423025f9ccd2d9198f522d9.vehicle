@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => false,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => '9c10eaa6b704d39460efcfce1da540b5',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => '00aaec2b0423025f9ccd2d9198f522d9',
+  'native_key' => 'symlink_merge_fields',
+  'object' => '{"key":"symlink_merge_fields","value":"1","xtype":"combo-boolean","namespace":"core","area":"site","editedon":null}',
+);

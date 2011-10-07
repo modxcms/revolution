@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => true,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'f28965fe06fc3d906f7244f960e9b1dc',
+  'package' => 'modx',
+  'class' => 'modEvent',
+  'signature' => '6a8d2780c6e3906b8da9c1bfeca6a41a',
+  'native_key' => 'OnBeforeUserFormDelete',
+  'object' => '{"name":"OnBeforeUserFormDelete","service":1,"groupname":"Users"}',
+);

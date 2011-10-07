@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => false,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'd22ce60d03c752a84390714a41d5a69b',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => 'c7ebca074120f94ddbf82984725b2b09',
+  'native_key' => 'custom_resource_classes',
+  'object' => '{"key":"custom_resource_classes","value":"","xtype":"textfield","namespace":"core","area":"system","editedon":null}',
+);

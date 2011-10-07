@@ -1,0 +1,24 @@
+<?php return array (
+  'preserve_keys' => false,
+  'unique_key' => 
+  array (
+    0 => 'name',
+  ),
+  'update_object' => true,
+  'resolve' => 
+  array (
+    0 => 
+    array (
+      'type' => 'php',
+      'body' => '{"type":"php","source":"core\\/modAccessPolicy\\/0fe41f56643dc49842e8c6309a1e3b1a.resolve.policies.resolver","name":"resolve.policies"}',
+    ),
+  ),
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => '64dab75f38936a0eabe7a9b45f5fcb17',
+  'package' => 'modx',
+  'class' => 'modAccessPolicy',
+  'signature' => '0fe41f56643dc49842e8c6309a1e3b1a',
+  'native_key' => 7,
+  'object' => '{"id":7,"name":"Content Editor","description":"Context administration policy with limited, content-editing related Permissions.","parent":0,"template":0,"class":"","data":"{\\"change_profile\\":true,\\"class_map\\":true,\\"countries\\":true,\\"edit_document\\":true,\\"frames\\":true,\\"help\\":true,\\"home\\":true,\\"load\\":true,\\"list\\":true,\\"logout\\":true,\\"resource_tree\\":true,\\"save_document\\":true,\\"tree_show_resource_ids\\":true,\\"view\\":true,\\"view_document\\":true,\\"new_document\\":true,\\"delete_document\\":true}","lexicon":"permissions"}',
+);

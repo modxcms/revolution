@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => false,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => '95e45f64f49bcc33be49c77e26bea07e',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => 'ae7d901871943476bd5a8e1273ce9b77',
+  'native_key' => 'concat_js',
+  'object' => '{"key":"concat_js","value":false,"xtype":"combo-boolean","namespace":"core","area":"manager","editedon":null}',
+);

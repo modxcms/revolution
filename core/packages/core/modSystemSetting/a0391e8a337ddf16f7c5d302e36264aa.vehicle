@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => false,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'dbbee80b1fd94c1ceabae8dbead9408f',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => 'a0391e8a337ddf16f7c5d302e36264aa',
+  'native_key' => 'forgot_login_email',
+  'object' => '{"key":"forgot_login_email","value":"<p>Hello [[+username]],<\\/p>\\n<p>A request for a password reset has been issued for your MODX user. If you sent this, you may follow this link and use this password to login. If you did not send this request, please ignore this email.<\\/p>\\n\\n<p>\\n    <strong>Activation Link:<\\/strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modahsh=[[+hash]]<br \\/>\\n    <strong>Username:<\\/strong> [[+username]]<br \\/>\\n    <strong>Password:<\\/strong> [[+password]]<br \\/>\\n<\\/p>\\n\\n<p>After you log into the MODX Manager, you can change your password again, if you wish.<\\/p>\\n\\n<p>Regards,<br \\/>Site Administrator<\\/p>","xtype":"textarea","namespace":"core","area":"authentication","editedon":null}',
+);

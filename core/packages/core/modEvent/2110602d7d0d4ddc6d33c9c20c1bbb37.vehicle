@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => true,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => '02bc43acb01960dc6eda2cc3db466afa',
+  'package' => 'modx',
+  'class' => 'modEvent',
+  'signature' => '2110602d7d0d4ddc6d33c9c20c1bbb37',
+  'native_key' => 'OnUserSave',
+  'object' => '{"name":"OnUserSave","service":1,"groupname":"Users"}',
+);

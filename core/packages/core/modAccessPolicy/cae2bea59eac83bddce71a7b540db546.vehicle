@@ -1,0 +1,16 @@
+<?php return array (
+  'preserve_keys' => false,
+  'unique_key' => 
+  array (
+    0 => 'name',
+  ),
+  'update_object' => true,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'b19a8fac2a53da64a7236bd2fdadca00',
+  'package' => 'modx',
+  'class' => 'modAccessPolicy',
+  'signature' => 'cae2bea59eac83bddce71a7b540db546',
+  'native_key' => 4,
+  'object' => '{"id":4,"name":"Load, List and View","description":"Provides load, list and view permissions only.","parent":0,"template":0,"class":"","data":"{\\"load\\":true,\\"list\\":true,\\"view\\":true}","lexicon":"permissions"}',
+);
