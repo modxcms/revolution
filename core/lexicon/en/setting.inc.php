@@ -9,6 +9,7 @@
 $_lang['area'] = 'Area';
 $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
+$_lang['area_core'] = 'Core Code';
 $_lang['area_editor'] = 'Rich-Text Editor';
 $_lang['area_file'] = 'File System';
 $_lang['area_filter'] = 'Filter by area...';
@@ -17,6 +18,7 @@ $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexicon and Language';
 $_lang['area_mail'] = 'Mail';
 $_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session and Cookie';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
@@ -179,8 +181,11 @@ $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh t
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
 $_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its css stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
-$_lang['setting_compress_js'] = 'Use Compressed Javascript Libraries';
+$_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
 $_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+
+$_lang['setting_compress_js_max_files'] = 'Maximum JavaScript Files Compression Threshold';
+$_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
 
 $_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
@@ -617,6 +622,9 @@ $_lang['setting_tree_root_id_desc'] = 'Set this to a valid ID of a Resource to s
 
 $_lang['setting_tvs_below_content'] = 'Move TVs Below Content';
 $_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move Template Variables below the Content when editing Resources.';
+
+$_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
+$_lang['setting_ui_debug_mode_desc'] = 'Set this to Yes to output debug messages when using the UI for the default manager theme. You must use a browser that supports console.log.';
 
 $_lang['setting_udperms_allowroot'] = 'Allow root';
 $_lang['setting_udperms_allowroot_desc'] = 'Do you want to allow your users to create new Resources in the root of the site? ';
