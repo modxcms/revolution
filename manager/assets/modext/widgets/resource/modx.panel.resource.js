@@ -246,7 +246,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,layout: 'form'
                 ,bodyCssClass: 'main-wrapper'
                 ,autoHeight: true
-                ,collapsible: false
+                ,collapsible: true
+                ,hideMode: 'offsets'
                 ,items: ct
                 ,style: 'margin-top: 10px'
             });
