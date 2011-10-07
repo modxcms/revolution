@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5855] Ensure if no parents are specified, resourcelist input option works as expected
 - [#5852] Fix issue where input options are wiped on quick update TV
 - Add showNone option to source/getlist processor
 - [#5619] Enable modElements to store content in external files
