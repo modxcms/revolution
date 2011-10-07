@@ -12,7 +12,7 @@ class SystemFileEditManagerController extends modManagerController {
     public $fileRecord = array();
     /** @var bool A boolean stating whether or not this file can be saved */
     public $canSave = false;
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -45,7 +45,7 @@ class SystemFileEditManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
         $this->modx->lexicon->load('file');
-        
+
         if (empty($_GET['file'])) return $this->failure($this->modx->lexicon('file_err_nf'));
         $this->loadWorkingContext();
 
@@ -60,7 +60,7 @@ class SystemFileEditManagerController extends modManagerController {
         }
         $source->setRequestProperties($scriptProperties);
         $source->initialize();
-        $this->fileRecord = $source->getFile($this->filename);
+        $this->fileRecord = $source->getObjectContents($this->filename);
 
         if (empty($this->fileRecord)) {
             $errors = $source->getErrors();
