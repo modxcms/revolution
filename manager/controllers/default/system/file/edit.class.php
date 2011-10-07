@@ -60,7 +60,7 @@ class SystemFileEditManagerController extends modManagerController {
         }
         $source->setRequestProperties($scriptProperties);
         $source->initialize();
-        $this->fileRecord = $source->getFile($this->filename);
+        $this->fileRecord = $source->getObjectContents($this->filename);
 
         if (empty($this->fileRecord)) {
             $errors = $source->getErrors();
