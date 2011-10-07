@@ -453,8 +453,6 @@ abstract class modManagerController {
     public function registerBaseScripts() {
         $managerUrl = $this->modx->getOption('manager_url');
         $externals = array();
-        $externals2 = array();
-
 
         if ($this->loadBaseJavascript) {
             if ($this->modx->getOption('concat_js',null,false)) {
@@ -490,14 +488,15 @@ abstract class modManagerController {
                 if (!empty($externals)) {
                     $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
 
-                    /* combine into max 5 script sources */
+                    /* combine into max script sources */
+                    $maxFilesPerMin = $this->modx->getOption('compress_js_max_files',null,10);
                     $sources = array();
                     $i = 0;
                     $idx = 0;
                     foreach ($externals as $script) {
                         if (empty($sources[$idx])) $sources[$idx] = array();
                         $sources[$idx][] = $script;
-                        if ($i >= 5) { $idx++; $i = 0; }
+                        if ($i >= $maxFilesPerMin) { $idx++; $i = 0; }
                         $i++;
                     }
                     foreach ($sources as $scripts) {
@@ -506,8 +505,7 @@ abstract class modManagerController {
                 }
                 $this->modx->setOption('compress_js',true);
             } else {
-                $files = array_merge($externals,$externals2);
-                foreach ($files as $js) {
+                foreach ($externals as $js) {
                     $o .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
                 }
             }
@@ -598,7 +596,22 @@ abstract class modManagerController {
         $cssjs = array();
         if (!empty($jsToCompress)) {
             if ($this->modx->getOption('compress_js',null,true)) {
-                $cssjs[] = '<script src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$jsToCompress).'" type="text/javascript"></script>';
+                $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
+                $maxFilesPerMin = $this->modx->getOption('compress_js_max_files',null,10);
+
+                /* combine into max 5 script sources */
+                $sources = array();
+                $i = 0;
+                $idx = 0;
+                foreach ($jsToCompress as $script) {
+                    if (empty($sources[$idx])) $sources[$idx] = array();
+                    $sources[$idx][] = $script;
+                    if ($i >= $maxFilesPerMin) { $idx++; $i = 0; }
+                    $i++;
+                }
+                foreach ($sources as $scripts) {
+                    $cssjs[] = '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$scripts).'"></script>';
+                }
             } else {
                 foreach ($jsToCompress as $scr) {
                     $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
