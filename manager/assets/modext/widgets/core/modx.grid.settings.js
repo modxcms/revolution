@@ -499,6 +499,7 @@ MODx.window.UpdateSetting = function(config) {
                     ,name: 'key'
                     ,id: 'modx-'+this.ident+'-key'
                     ,maxLength: 100
+                    ,submitValue: true
                     ,anchor: '100%'
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
