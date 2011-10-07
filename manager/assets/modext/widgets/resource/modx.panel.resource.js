@@ -200,16 +200,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: this.getSettingFields(config)
         });
-        if (config.show_tvs) {
-            it.push({
-                xtype: 'modx-panel-resource-tv'
-                ,collapsed: false
-                ,resource: config.resource
-                ,class_key: config.record.class_key || 'modDocument'
-                ,template: config.record.template
-                ,anchor: '100%'
-                ,border: true
-            });
+        if (config.show_tvs && !MODx.config.tvs_below_content) {
+            it.push(this.getTemplateVariablesPanel(config));
         }
         if (config.access_permissions) {
             it.push({
@@ -258,6 +250,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,style: 'margin-top: 10px'
             });
         }
+        if (MODx.config.tvs_below_content) {
+            var tvs = this.getTemplateVariablesPanel(config);
+            tvs.style = 'margin-top: 10px';
+            its.push(tvs);
+        }
         return its;
     }
 
@@ -270,6 +267,18 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,forceLayout: true
             ,anchor: '100%'
+        };
+    }
+
+    ,getTemplateVariablesPanel: function(config) {
+        return {
+            xtype: 'modx-panel-resource-tv'
+            ,collapsed: false
+            ,resource: config.resource
+            ,class_key: config.record.class_key || 'modDocument'
+            ,template: config.record.template
+            ,anchor: '100%'
+            ,border: true
         };
     }
 

@@ -1532,6 +1532,15 @@ $settings['tree_root_id']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['tvs_below_content']= $xpdo->newObject('modSystemSetting');
+$settings['tvs_below_content']->fromArray(array (
+  'key' => 'tvs_below_content',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['udperms_allowroot']= $xpdo->newObject('modSystemSetting');
 $settings['udperms_allowroot']->fromArray(array (
   'key' => 'udperms_allowroot',

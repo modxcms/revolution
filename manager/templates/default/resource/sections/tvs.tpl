@@ -88,11 +88,11 @@ Ext.onReady(function() {
         ,autoTabs: true
         ,border: false
         ,plain: true
-        ,width: Ext.getCmp('modx-panel-resource').getWidth() - 30
+        ,width: MODx.config.tvs_below_content ? '100%' : Ext.getCmp('modx-panel-resource').getWidth() - 30
         ,hideMode: 'offsets'
         ,autoScroll: true
         ,defaults: {
-            bodyStyle: 'padding: 5px;'
+            bodyStyle: MODx.config.tvs_below_content ? 'padding: 20px; border: 1px solid #afafaf' : 'padding: 5px;'
             ,autoScroll: true
             ,autoHeight: true
         }
