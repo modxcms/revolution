@@ -200,7 +200,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: this.getSettingFields(config)
         });
-        if (config.show_tvs && !MODx.config.tvs_below_content) {
+        console.log(MODx.config.tvs_below_content);
+        if (config.show_tvs && MODx.config.tvs_below_content != 1) {
             it.push(this.getTemplateVariablesPanel(config));
         }
         if (config.access_permissions) {
@@ -250,7 +251,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,style: 'margin-top: 10px'
             });
         }
-        if (MODx.config.tvs_below_content) {
+        if (MODx.config.tvs_below_content == 1) {
             var tvs = this.getTemplateVariablesPanel(config);
             tvs.style = 'margin-top: 10px';
             its.push(tvs);
