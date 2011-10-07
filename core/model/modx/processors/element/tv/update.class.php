@@ -286,28 +286,26 @@ class modElementTvUpdateProcessor extends modProcessor {
      * @return void
      */
     public function setResourceGroups() {
-        if ($this->modx->hasPermission('access_permissions')) {
-            $resourceGroups = $this->getProperty('resource_groups',false);
-            if (!empty($resourceGroups)) {
-                $docgroups = $this->modx->fromJSON($resourceGroups);
-                if (!is_array($docgroups)) {
-                    foreach ($docgroups as $id => $group) {
-                        if (!is_array($group)) continue;
-                        /** @var modTemplateVarResourceGroup $templateVarResourceGroup */
-                        $templateVarResourceGroup = $this->modx->getObject('modTemplateVarResourceGroup',array(
-                            'tmplvarid' => $this->tv->get('id'),
-                            'documentgroup' => $group['id'],
-                        ));
+        $resourceGroups = $this->getProperty('resource_groups',false);
+        if ($this->modx->hasPermission('access_permissions') && !empty($resourceGroups)) {
+            $resourceGroups = $this->modx->fromJSON($resourceGroups);
+            if (is_array($resourceGroups)) {
+                foreach ($resourceGroups as $id => $group) {
+                    if (!is_array($group)) continue;
+                    /** @var modTemplateVarResourceGroup $templateVarResourceGroup */
+                    $templateVarResourceGroup = $this->modx->getObject('modTemplateVarResourceGroup',array(
+                        'tmplvarid' => $this->tv->get('id'),
+                        'documentgroup' => $group['id'],
+                    ));
 
-                        if ($group['access'] == true) {
-                            if (!empty($templateVarResourceGroup)) continue;
-                            $templateVarResourceGroup = $this->modx->newObject('modTemplateVarResourceGroup');
-                            $templateVarResourceGroup->set('tmplvarid',$this->tv->get('id'));
-                            $templateVarResourceGroup->set('documentgroup',$group['id']);
-                            $templateVarResourceGroup->save();
-                        } else if ($templateVarResourceGroup && $templateVarResourceGroup instanceof modTemplateVarResourceGroup) {
-                            $templateVarResourceGroup->remove();
-                        }
+                    if ($group['access'] == true) {
+                        if (!empty($templateVarResourceGroup)) continue;
+                        $templateVarResourceGroup = $this->modx->newObject('modTemplateVarResourceGroup');
+                        $templateVarResourceGroup->set('tmplvarid',$this->tv->get('id'));
+                        $templateVarResourceGroup->set('documentgroup',$group['id']);
+                        $templateVarResourceGroup->save();
+                    } else if ($templateVarResourceGroup && $templateVarResourceGroup instanceof modTemplateVarResourceGroup) {
+                        $templateVarResourceGroup->remove();
                     }
                 }
             }

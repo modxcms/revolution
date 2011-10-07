@@ -233,6 +233,7 @@ MODx.panel.TV = function(config) {
         },{
             title: _('tv_tmpl_access')
             ,itemId: 'form-template'
+            ,hideMode: 'offsets'
             ,defaults: {autoHeight: true}
 			,layout: 'form'
             ,items: [{
@@ -257,6 +258,7 @@ MODx.panel.TV = function(config) {
             ,id: 'modx-tv-access-form'
             ,itemId: 'form-access'
             ,forceLayout: true
+            ,hideMode: 'offsets'
             ,defaults: {autoHeight: true}
             ,items: [{
                 html: '<p>'+_('tv_access_msg')+'</p>'
@@ -281,6 +283,7 @@ MODx.panel.TV = function(config) {
             ,itemId: 'form-sources'
             ,defaults: {autoHeight: true}
 			,layout: 'form'
+			,hideMode: 'offsets'
             ,items: [{
                 html: '<p>'+_('tv_sources.intro_msg')+'</p>'
 				,bodyCssClass: 'panel-desc'
@@ -306,6 +309,8 @@ MODx.panel.TV = function(config) {
             ,stateful: true
             ,stateId: 'modx-tv-tabpanel-'+config.tv
             ,stateEvents: ['tabchange']
+            ,hideMode: 'offsets'
+            ,anchor: '100%'
             ,getState:function() {
                 return {activeTab:this.items.indexOf(this.getActiveTab())};
             }
