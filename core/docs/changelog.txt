@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 - [#5757] Allow text in grids to be selectable
 - [#5879] Ensure html tags are stripped on titles in the Resource edit view
+- [#5855] Ensure if no parents are specified, resourcelist input option works as expected
 - [#90] 301 Redirect id method requests when request_method_strict is not enabled
 - [#90], [#5676] Improvements to strict routing with friendly_urls
 - [#5788] Fix content not output to browser until after shutdown function
