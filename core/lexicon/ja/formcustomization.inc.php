@@ -34,7 +34,7 @@ $_lang['filter_by_rule_type'] = 'Filter by Rule...';
 $_lang['filter_by_search'] = 'Search...';
 $_lang['for_parent'] = 'For Parent';
 $_lang['for_parent_desc'] = 'このルールを親リソースに適用させたい場合はチェックしてください。Only use with Resources or objects with a `parent` field. Useful for the "create" page of Resources.';
-$_lang['form_customization_msg'] = '現在適用されているカスタマイズルールの一覧です。フォームのカスタマイズルールに関する詳しい情報については<a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">こちら</a>を参照してください。 Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
+$_lang['form_customization_msg'] = '現在適用されているカスタマイズルールの一覧です。Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'フォームのルール';
 $_lang['import'] = 'import';
 $_lang['import_from_xml'] = 'XMLファイルからセットをインポート';

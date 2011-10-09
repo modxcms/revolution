@@ -10,7 +10,7 @@
  * @author yamamoto http://kyms.jp
  */
 $_lang['active'] = '有効';
-$_lang['address'] = '住所';
+$_lang['address'] = '都道府県';
 $_lang['administrator'] = '管理者';
 $_lang['authority'] = '特権レベル';
 $_lang['change_password'] = 'パスワードの変更';
@@ -185,7 +185,7 @@ $_lang['user_setting_err_remove'] = 'ユーザー設定を削除中にエラー�
 $_lang['user_setting_err_save'] = 'ユーザー設定を保存中にエラーが発生しました。';
 $_lang['user_settings'] = 'ユーザー設定';
 $_lang['user_settings_desc'] = 'ユーザー設定の詳細を変更できます。';
-$_lang['user_state'] = '住所';
+$_lang['user_state'] = '都道府県';
 $_lang['user_title'] = 'ユーザーの作成/編集';
 $_lang['user_update'] = 'ユーザーを編集';
 $_lang['user_updated_password_message'] = 'このユーザーはアップデートしています. パスワードは[[+password]]です。';
