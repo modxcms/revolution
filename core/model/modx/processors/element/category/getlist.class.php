@@ -20,7 +20,7 @@ class modElementCategoryGetListProcessor extends modProcessor {
     public function initialize() {
         $this->setDefaultProperties(array(
             'start' => 0,
-            'limit' => 20,
+            'limit' => 0,
             'sort' => 'parent,category',
             'dir' => 'ASC',
             'showNone' => false,
@@ -29,7 +29,7 @@ class modElementCategoryGetListProcessor extends modProcessor {
     }
 
     public function process() {
-        $categories = $this->getCategories();
+        $data = $this->getData();
 
         $list = array();
         if ($this->getProperty('showNone',false)) {
@@ -42,7 +42,7 @@ class modElementCategoryGetListProcessor extends modProcessor {
 
         /* iterate through categories */
         /** @var modCategory $category */
-        foreach ($categories as $category) {
+        foreach ($data['results'] as $category) {
             if (!$category->checkPolicy('list')) continue;
             $categoryArray = $category->toArray();
 
@@ -66,7 +66,7 @@ class modElementCategoryGetListProcessor extends modProcessor {
             }
         }
 
-        return $this->outputArray($list);
+        return $this->outputArray($list,$data['total']);
     }
 
     /**
@@ -74,16 +74,20 @@ class modElementCategoryGetListProcessor extends modProcessor {
      * 
      * @return array|xPDOIterator
      */
-    public function getCategories() {
+    public function getData() {
         $limit = $this->getProperty('limit');
         $isLimit = !empty($limit);
+        $data = array();
+        
         $c = $this->modx->newQuery('modCategory');
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
         $c->where(array(
             'modCategory.parent' => 0,
         ));
+        $data['total'] = $this->modx->getCount('modCategory',$c);
+        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
         if ($isLimit) $c->limit($limit,$this->getProperty('start'));
-        return $this->modx->getIterator('modCategory',$c);
+        $data['results'] = $this->modx->getIterator('modCategory',$c);
+        return $data;
     }
 }
 return 'modElementCategoryGetListProcessor';
