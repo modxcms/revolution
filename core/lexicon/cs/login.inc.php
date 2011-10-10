@@ -17,13 +17,12 @@ $_lang['login_blocked_time'] = 'Nemáte oprávnění se přihlásit v tento čas
 $_lang['login_blocked_too_many_attempts'] = 'Váš účet byl zablokován z důvodu příliš mnoha nesprávných pokusů o přihlášení.';
 $_lang['login_button'] = 'Přihlásit';
 $_lang['login_cannot_locate_account'] = 'Účet nenalezen. Zkontrolujte uživatelské jméno nebo heslo a zkuste to znovu.';
-$_lang['login_copyright'] = '&copy; 2005-2010  <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; je licencován pod licencí GPLv2 a novějšími.';
+$_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'E-mail účtu:';
 $_lang['login_err_unknown'] = 'Nastala neznámá chyba při přihlášování.';
 $_lang['login_forget_your_login'] = 'Zapomněli jste své přihlášovací údaje?';
 $_lang['login_hostname_error'] = 'Váš hostname neodpovídá IP adrese.';
 $_lang['login_message'] = 'Zadejte Vaše přihlašovací údaje pro přístup do správce obsahu. Uživatelské jméno a heslo rozlišují velká a malá písmena!';
-$_lang['login_modx_support'] = '<p>Podporováno:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>MODX komunitou</strong></a></p><p><a href="http://www.modxcms.cz/forums/" target="_blank"><strong>Českou MODX komunitou</strong></a></p>';
 $_lang['login_password'] = 'Heslo: ';
 $_lang['login_password_reset_act_sent'] = 'E-mail pro reset hesla byl odeslán. Zkontrolujte se Vaši e-mailovou schránku.';
 $_lang['login_remember'] = 'Neodhlašovat';

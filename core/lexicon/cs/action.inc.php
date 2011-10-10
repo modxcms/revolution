@@ -12,7 +12,7 @@
 $_lang['action'] = 'Akce';
 $_lang['action_confirm_remove'] = 'Opravdu chcete odstranit tuto akci? Mohlo by dojít k narušení správné funkčnosti správce obsahu.';
 $_lang['action_create'] = 'Vytvořit akci';
-$_lang['action_create_here'] = 'Vytvořit akci'; // right click on list
+$_lang['action_create_here'] = 'Vytvořit akci';
 $_lang['action_desc'] = 'Akce jsou abstrakce kontrolerů MODX. Mohou být použity k vytvoření vlastních stránek správce obsahu, ale také k přeskupení horního menu ve správci obsahu.';
 $_lang['action_err_create'] = 'Nastala chyba vytváření akce.';
 $_lang['action_err_nf'] = 'Akce nenalezena!';

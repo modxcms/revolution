@@ -30,11 +30,10 @@ $_lang['sent_on'] = 'Odesláno';
 $_lang['subject'] = 'Předmět';
 $_lang['user'] = 'Uživatel';
 $_lang['usergroup'] = 'Uživatelská skupina';
-
 $_lang['message_err_not_found'] = 'Zpráva nenalezena.';
 $_lang['message_err_not_specified_subject'] = 'Předmět e-mailu není vyplněn!';
 $_lang['message_err_remove'] = 'Nastala chyba při odstraňování zprávy.';
-$_lang['message_err_remove_notauth'] ='Nejste oprávněn k odstranění této zprávy.';
+$_lang['message_err_remove_notauth'] = 'Nejste oprávněn k odstranění této zprávy.';
 $_lang['message_err_save'] = 'Nastala chyba při ukládání zprávy.';
 $_lang['messages_all'] = 'Všem';
 $_lang['messages_compose'] = 'Vytvořit zprávu';

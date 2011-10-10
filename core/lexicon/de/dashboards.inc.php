@@ -14,6 +14,8 @@
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Dashboard hinzufügen';
 $_lang['dashboard_create'] = 'Dashboard erstellen';
+$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
+$_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
 $_lang['dashboard_duplicate'] = 'Dashboard duplizieren';
 $_lang['dashboard_remove'] = 'Dashboard löschen';
 $_lang['dashboard_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Dashboard löschen möchten?';
@@ -47,7 +49,7 @@ $_lang['widget_err_save'] = 'Ein Fehler trat auf beim Versuch, das Widget zu spe
 $_lang['widget_file'] = 'Datei';
 $_lang['widget_dashboards.intro_msg'] = 'Untenstehend finden Sie eine Liste aller Dashboards, auf denen dieses Widget platziert wurde.';
 $_lang['widget_dashboard_remove'] = 'Widget vom Dashboard entfernen';
-$_lang['widget_description_desc'] = 'Eine Beschreibung oder ein Lexikon-Eintrags-Schlüssel des Widgets.';  // and what it does
+$_lang['widget_description_desc'] = 'Eine Beschreibung oder ein Lexikon-Eintrags-Schlüssel des Widgets.';
 $_lang['widget_html'] = 'HTML';
 $_lang['widget_lexicon_desc'] = 'Das Lexikon-Thema, das mit diesem Widget geladen werden soll. Nützlich, um Übersetzungen für den Namen, die Beschreibung und die Texte des Widgets zur Verfügung zu stellen.';
 $_lang['widget_name_desc'] = 'Der Name oder Lexikon-Eintrags-Schlüssel des Widgets.';
@@ -72,7 +74,6 @@ $_lang['widget_unplace'] = 'Widget löschen';
 $_lang['widget_update'] = 'Widget bearbeiten';
 $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Untenstehend finden Sie eine Liste aller installierten Dashboard-Widgets, die Ihnen zur Verfügung stehen.';
-
 $_lang['w_configcheck'] = 'Konfigurations-Check';
 $_lang['w_configcheck_desc'] = 'Zeigt einen Konfigurations-Check an, der überprüft, ob Ihre MODX-Installation sicher ist.';
 $_lang['w_newsfeed'] = 'MODX-Newsfeed';

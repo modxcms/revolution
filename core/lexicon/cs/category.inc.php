@@ -12,6 +12,7 @@
 $_lang['categories'] = 'Kategorie';
 $_lang['category_confirm_delete'] = 'Opravdu chcete odstranit tuto kategorii? Všechny elementy v této kategorii budou označeny jako "bez kategorie".';
 $_lang['category_create'] = 'Vytvořit kategorii';
+$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
 $_lang['category_err_create'] = 'Nastala chyba při vytváření kategorie.';
 $_lang['category_err_not_found'] = 'Kategorie nenalezena!';
 $_lang['category_err_nf'] = 'Kategorie nenalezena.';
