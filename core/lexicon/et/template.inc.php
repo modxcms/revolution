@@ -7,11 +7,15 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Juurdepääs';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Määratud Template Muutujad';
 $_lang['template_code'] = 'Template kood (html)';
 $_lang['template_desc'] = 'Kirjeldus';
+$_lang['template_desc_category'] = 'The Category this Template belongs in.';
+$_lang['template_desc_description'] = 'A short description of this Template.';
+$_lang['template_desc_name'] = 'The name of this Template.';
 $_lang['template_delete_confirm'] = 'Olete kindel, et soovite kustutada selle template?';
 $_lang['template_duplicate_confirm'] = 'Olete kindel, et soovite dubleerida selle template?';
 $_lang['template_edit_tab'] = 'Muuda Templatet';
