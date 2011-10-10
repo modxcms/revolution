@@ -11,13 +11,16 @@ $_lang['snippets_available'] = 'Snippets disponibles para que los incluyas en tu
 $_lang['snippet_code'] = 'Código del Snippet (php)';
 $_lang['snippet_delete_confirm'] = '¿Estás seguro de que quieres borrar este snippet?';
 $_lang['snippet_desc'] = 'Descripción';
+$_lang['snippet_desc_category'] = 'The Category this Snippet belongs in.';
+$_lang['snippet_desc_description'] = 'A short description of this Snippet.';
+$_lang['snippet_desc_name'] = 'The name of this Snippet. It will be available using the [[NameOfSnippet]] tags.';
 $_lang['snippet_duplicate_confirm'] = '¿Estás seguro de que quieres duplicar este snippet?';
 $_lang['snippet_duplicate_error'] = 'Ocurrió un error mientras se duplicaba el snippet.';
 $_lang['snippet_err_create'] = 'Ocurrió un error mientras se creaba el snippet.';
 $_lang['snippet_err_delete'] = 'Ocurrió un error mientras se trataba de borrar el snippet.';
 $_lang['snippet_err_duplicate'] = 'Ocurrió un error mientras se trataba de duplicar el snippet.';
 $_lang['snippet_err_exists_name'] = 'Ya existe un snippet con este nombre "[[+name]]".';
-
+$_lang['snippet_err_invalid_name'] = 'Snippet name is invalid.';
 $_lang['snippet_err_locked'] = 'Este snippet está bloqueado para editarlo.';
 $_lang['snippet_err_nf'] = 'Snippet no encontrado!';
 $_lang['snippet_err_ns'] = 'Snippet no especificado!';

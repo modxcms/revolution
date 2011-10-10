@@ -33,7 +33,6 @@ $_lang['file_err_unzip_missing_lib'] = 'Puudub PHP zip toetus (php_zip.dll / zip
 $_lang['file_err_upload'] = 'Tekkis viga failide üleslaadmisel.';
 $_lang['file_exists_hk'] = 'Fail <b>{0}</b> juba eksiteerib';
 $_lang['file_extensions'] = 'Faili Laiendused';
-$_lang['file_extensions_desc'] = 'Need on lubatud laiendused selle content type-ile.';
 $_lang['file_folder_enter_new'] = 'Sisesta Uus Kausta Nimi';
 $_lang['file_folder_chmod'] = 'Chmod-i Kausta';
 $_lang['file_folder_create'] = 'Loo Kaust';
@@ -108,4 +107,3 @@ $_lang['upf_upload_err'] = 'Üleslaadmise viga.';
 $_lang['upf_uploading'] = 'Laen üles...';
 $_lang['upf_uploading_desc'] = 'Laen üles: {0} / {1} faili.';
 $_lang['upload_files'] = 'Lae üles failid';
-

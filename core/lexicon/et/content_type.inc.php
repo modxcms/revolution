@@ -22,3 +22,4 @@ $_lang['content_type_remove'] = 'Eemalda Content Type';
 $_lang['content_type_remove_confirm'] = 'Oled kindel, et soovid selle content type-i eemaldada?';
 $_lang['content_types'] = 'Content Type-id';
 $_lang['file_extensions'] = 'Faili laiendid';
+$_lang['file_extensions_desc'] = 'This is the specified file extension for this Content Type.';
