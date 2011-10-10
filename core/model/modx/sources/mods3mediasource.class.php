@@ -3,6 +3,7 @@
  * @package modx
  * @subpackage sources
  */
+require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
 /**
  * Implements an Amazon S3-based media source, allowing basic manipulation, uploading and URL-retrieval of resources
  * in a specified S3 bucket.
