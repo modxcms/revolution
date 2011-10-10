@@ -375,6 +375,15 @@ $settings['cultureKey']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['default_duplicate_publish_option']= $xpdo->newObject('modSystemSetting');
+$settings['default_duplicate_publish_option']->fromArray(array (
+  'key' => 'default_duplicate_publish_option',
+  'value' => 'preserve',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['default_per_page']= $xpdo->newObject('modSystemSetting');
 $settings['default_per_page']->fromArray(array (
   'key' => 'default_per_page',

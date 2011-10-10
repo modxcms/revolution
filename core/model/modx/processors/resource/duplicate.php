@@ -8,6 +8,9 @@
  * resource's children as well. Defaults to false.
  * @return array An array of values of the new resource.
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * 
  * @package modx
  * @subpackage processors.resource
  */
@@ -19,7 +22,7 @@ $duplicateChildren = !empty($scriptProperties['duplicate_children']);
 $newName = !empty($scriptProperties['name']) ? $scriptProperties['name'] : '';
 $prefixDuplicate = !empty($scriptProperties['prefixDuplicate']) ? true : false;
 
-/* get resource */
+/* @var modResource $oldResource */
 $oldResource = $modx->getObject('modResource',$scriptProperties['id']);
 if (empty($oldResource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['id'])));
 
@@ -27,7 +30,7 @@ if (!$oldResource->checkPolicy('copy')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 
-/* get parent */
+/* @var modResource $parent */
 $parent = $oldResource->getOne('Parent');
 if ($parent && !$parent->checkPolicy('add_children')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
@@ -37,9 +40,10 @@ $newResource = $oldResource->duplicate(array(
     'newName' => $newName,
     'duplicateChildren' => $duplicateChildren,
     'prefixDuplicate' => $prefixDuplicate,
+    'publishedMode' => $modx->getOption('published_mode',$scriptProperties,'preserve'),
 ));
 if (!($newResource instanceof modResource)) {
-    return $newResource;
+    return $modx->error->failure($newResource);
 }
 
 $modx->invokeEvent('OnResourceDuplicate',array(

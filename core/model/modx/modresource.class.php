@@ -113,6 +113,9 @@ class modResource extends modAccessibleSimpleObject {
      * @var boolean
      */
     public $showInContextMenu = false;
+    
+    /** @var modX $xpdo */
+    public $xpdo;
 
     /**
      * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
@@ -200,6 +203,7 @@ class modResource extends modAccessibleSimpleObject {
             $criteria->where(array('context_key:IN' => $contexts));
         }
         $criteria->sortby('menuindex', 'ASC');
+        /** @var modResource $resource */
         foreach ($modx->getIterator('modResource', $criteria) as $resource) {
             $resource->set('refreshURIs', true);
             if ($resetOverrides) {
@@ -223,6 +227,7 @@ class modResource extends modAccessibleSimpleObject {
      */
     public static function updateContextOfChildren(modX &$modx, $parent, array $options = array()) {
         $count = 0;
+        /** @var modResource $child */
         foreach ($parent->getIterator('Children') as $child) {
             $child->set('context_key', $parent->get('context_key'));
             if ($child->save()) {
@@ -253,6 +258,7 @@ class modResource extends modAccessibleSimpleObject {
             $this->_content= '';
             $this->_output= '';
             $this->xpdo->getParser();
+            /** @var modTemplate $baseElement */
             if ($baseElement= $this->getOne('Template')) {
                 if ($baseElement->process()) {
                     $this->_content= $baseElement->_output;
@@ -372,6 +378,7 @@ class modResource extends modAccessibleSimpleObject {
                 break;
             case 'content_type' :
                 if ($v !== $this->get('content_type')) {
+                    /** @var modContentType $contentType */
                     if ($contentType= $this->xpdo->getObject('modContentType', $v)) {
                         if ($contentType->get('mime_type') != $this->get('contentType')) {
                             $this->_fields['contentType']= $contentType->get('mime_type');
@@ -391,6 +398,10 @@ class modResource extends modAccessibleSimpleObject {
      *
      * Adds legacy support for keeping the existing contentType field in sync
      * when a modContentType is set using this function.
+     *
+     * @param xPDOObject $obj
+     * @param string $alias
+     * @return boolean
      */
     public function addOne(& $obj, $alias= '') {
         $added= parent :: addOne($obj, $alias);
@@ -728,6 +739,7 @@ class modResource extends modAccessibleSimpleObject {
         if (is_string($pk)) {
             $pk = array('name' => $pk);
         }
+        /** @var modTemplateVar $tv */
         $tv = $this->xpdo->getObject('modTemplateVar',$pk);
         return $tv == null ? null : $tv->renderOutput($this->get('id'));
     }
@@ -744,6 +756,7 @@ class modResource extends modAccessibleSimpleObject {
         if (is_string($pk)) {
             $pk = array('name' => $pk);
         }
+        /** @var modTemplateVar $tv */
         $tv = $this->xpdo->getObject('modTemplateVar',$pk);
         if ($tv) {
             $tv->setValue($this->get('id'),$value);
@@ -778,7 +791,7 @@ class modResource extends modAccessibleSimpleObject {
             $isHtml= true;
             $extension= '';
             $containerSuffix= $workingContext->getOption('container_suffix', '');
-            /* process content type */
+            /* @var modContentType $contentType process content type */
             if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
                 $extension= $contentType->getExtension();
                 $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -859,17 +872,31 @@ class modResource extends modAccessibleSimpleObject {
         $newName = !empty($options['newName']) ? $options['newName'] : ($prefixDuplicate ? $this->xpdo->lexicon('duplicate_of', array(
             'name' => $this->get('pagetitle'),
         )) : $this->get('pagetitle'));
+        /** @var modResource $newResource */
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
         $newResource->set('pagetitle', $newName);
 
-        /* make sure duplicate is not published or deleted */
-        $newResource->set('published',false);
-        $newResource->set('publishedon',0);
-        $newResource->set('publishedby',0);
-        $newResource->set('deleted',false);
-        $newResource->set('deletedon',0);
-        $newResource->set('deletedby',0);
+        /* do published status preserving */
+        $publishedMode = $this->getOption('publishedMode',$options,'preserve');
+        switch ($publishedMode) {
+            case 'unpublish':
+                $newResource->set('published',false);
+                $newResource->set('publishedon',0);
+                $newResource->set('publishedby',0);
+                break;
+            case 'publish':
+                $newResource->set('published',true);
+                $newResource->set('publishedon',time());
+                $newResource->set('publishedby',$this->xpdo->user->get('id'));
+                break;
+            case 'preserve':
+            default:
+                $newResource->set('published',$this->get('published'));
+                $newResource->set('publishedon',$this->get('publishedon'));
+                $newResource->set('publishedby',$this->get('publishedby'));
+                break;
+        }
 
         /* allow overrides for every item */
         if (!empty($options['overrides']) && is_array($options['overrides'])) {
@@ -909,7 +936,9 @@ class modResource extends modAccessibleSimpleObject {
         }
 
         $tvds = $this->getMany('TemplateVarResources');
+        /** @var modTemplateVarResource $oldTemplateVarResource */
         foreach ($tvds as $oldTemplateVarResource) {
+            /** @var modTemplateVarResource $newTemplateVarResource */
             $newTemplateVarResource = $this->xpdo->newObject('modTemplateVarResource');
             $newTemplateVarResource->set('contentid',$newResource->get('id'));
             $newTemplateVarResource->set('tmplvarid',$oldTemplateVarResource->get('tmplvarid'));
@@ -918,7 +947,9 @@ class modResource extends modAccessibleSimpleObject {
         }
 
         $groups = $this->getMany('ResourceGroupResources');
+        /** @var modResourceGroupResource $oldResourceGroupResource */
         foreach ($groups as $oldResourceGroupResource) {
+            /** @var modResourceGroupResource $newResourceGroupResource */
             $newResourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
             $newResourceGroupResource->set('document_group',$oldResourceGroupResource->get('document_group'));
             $newResourceGroupResource->set('document',$newResource->get('id'));
@@ -932,12 +963,14 @@ class modResource extends modAccessibleSimpleObject {
             
             $children = $this->getMany('Children');
             if (is_array($children) && count($children) > 0) {
+                /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
                         'duplicateChildren' => true,
                         'parent' => $newResource->get('id'),
                         'prefixDuplicate' => $prefixDuplicate,
                         'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
+                        'publishedMode' => $publishedMode,
                     ));
                 }
             }
@@ -957,6 +990,7 @@ class modResource extends modAccessibleSimpleObject {
             $c = array(
                 is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
             );
+            /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - No resource group: '.$resourceGroupPk);
@@ -973,6 +1007,7 @@ class modResource extends modAccessibleSimpleObject {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - Resource '.$this->get('id').' already in resource group: '.$resourceGroupPk);
             return false;
         }
+        /** @var modResourceGroupResource $resourceGroupResource */
         $resourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
         $resourceGroupResource->set('document',$this->get('id'));
         $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
@@ -983,7 +1018,7 @@ class modResource extends modAccessibleSimpleObject {
      * Removes a Resource from a Resource Group
      *
      * @access public
-     * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @param int|string|modResourceGroup $resourceGroupPk Either the ID, name or object of the Resource Group
      * @return boolean True if successful.
      */
     public function leaveGroup($resourceGroupPk) {
@@ -991,6 +1026,7 @@ class modResource extends modAccessibleSimpleObject {
             $c = array(
                 is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
             );
+            /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - No resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
@@ -999,6 +1035,7 @@ class modResource extends modAccessibleSimpleObject {
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
+        /** @var modResourceGroupResource $resourceGroupResource */
         $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
             'document' => $this->get('id'),
             'document_group' => $resourceGroup->get('id'),

@@ -12,7 +12,7 @@ MODx.window.DuplicateResource = function(config) {
     Ext.applyIf(config,{
         title: _('duplication_options')
         ,id: this.ident
-        ,width: 400
+        ,width: 500
     });
     MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };
@@ -55,6 +55,30 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 }
             });
         }
+
+        var pov = MODx.config.default_duplicate_publish_option || 'preserve';
+        items.push({
+            xtype: 'fieldset'
+            ,title: _('publishing_options')
+            ,items: [{
+                xtype: 'radiogroup'
+                ,columns: 1
+                ,value: pov
+                ,items: [{
+                    boxLabel: _('po_make_all_unpub')
+                    ,name: 'published_mode'
+                    ,inputValue: 'unpublish'
+                },{
+                    boxLabel: _('po_make_all_pub')
+                    ,name: 'published_mode'
+                    ,inputValue: 'publish'
+                },{
+                    boxLabel: _('po_preserve')
+                    ,name: 'published_mode'
+                    ,inputValue: 'preserve'
+                }]
+            }]
+        });
 
         this.fp = this.createForm({
             url: this.config.url || MODx.config.connectors_url+'resource/index.php'
