@@ -12,15 +12,15 @@
 $_lang['class_name'] = 'クラス名';
 $_lang['default'] = '初期値';
 $_lang['duplicate_of'] = '[[+name]]の複製';
-$_lang['element_properties_desc'] = 'エレメントに対するプロパティの初期値を設定もしくは特定のプロパティセットの編集ができます。 <b>注</b>:もし初期値を編集した場合 When you edit the default set, you will be saving the properties to the default properties. Editing a specific property set will save those property settings to the property set.<br /><br />When you\'ve selected a property set to edit, the default properties will show in the grid in the color <span style="color: gray;">gray</span>. Properties in gray are not in the property set, but show up there for easier editing. Properties in <span style="color: green">green</span> are properties that have been overridden from the default. Properties in <span style="color: purple">purple</span> are new properties in the custom set that are not in the default properties.';
+$_lang['element_properties_desc'] = 'プロパティの初期値やプロパティセットの設定ができます。詳細についてはヘルプをご覧ください。<b>注</b>:もし初期値を編集した場合 When you edit the default set, you will be saving the properties to the default properties. Editing a specific property set will save those property settings to the property set.<br /><br />When you\'ve selected a property set to edit, the default properties will show in the grid in the color <span style="color: gray;">gray</span>. Properties in gray are not in the property set, but show up there for easier editing. Properties in <span style="color: green">green</span> are properties that have been overridden from the default. Properties in <span style="color: purple">purple</span> are new properties in the custom set that are not in the default properties.';
 $_lang['file'] = 'ファイル';
 $_lang['import'] = 'インポート';
 $_lang['new_name'] = '新規名称';
 $_lang['object'] = 'オブジェクト';
 $_lang['properties'] = 'プロパティ';
-$_lang['properties_default_locked'] = 'Default Properties Locked';
+$_lang['properties_default_locked'] = 'ロック';
 $_lang['properties_default_locked_msg'] = 'Only a user with the "unlock_element_properties" permission may unlock default properties.';
-$_lang['properties_default_unlocked'] = 'Default Properties Unlocked';
+$_lang['properties_default_unlocked'] = 'ロック';
 $_lang['properties_import'] = 'インポート';
 $_lang['properties_import_err_invalid'] = 'The file you specified is not a valid properties file. Please try again.';
 $_lang['properties_import_err_upload'] = 'Please specify a valid properties file to upload.';
@@ -35,7 +35,7 @@ $_lang['property_option_remove_confirm'] = 'Are you sure you want to remove this
 $_lang['property_options'] = 'プロパティオプション';
 $_lang['property_revert'] = 'Revert Property to Default';
 $_lang['property_revert_confirm'] = 'Are you sure you want to revert this property to the default?';
-$_lang['property_revert_all'] = 'Revert All to Default';
+$_lang['property_revert_all'] = '全てデフォルトに戻す';
 $_lang['property_revert_all_confirm'] = 'Are you sure you want to revert all properties to their defaults?';
 $_lang['property_remove'] = '削除';
 $_lang['property_remove_confirm'] = 'Are you sure you want to remove this property?';
