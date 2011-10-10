@@ -88,6 +88,13 @@ Ext.onReady(function() {
         ,border: false
         ,plain: true
         ,deferredRender: false
+        ,id: 'modx-resource-vtabs'
+        ,headerCfg: {
+            tag: 'div'
+            ,cls: 'x-tab-panel-header vertical-tabs-header'
+            ,id: 'modx-resource-vtabs-header'
+            ,html: '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>'
+        }
     });
     {/literal}{/if}
 

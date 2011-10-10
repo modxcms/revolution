@@ -1545,3 +1545,10 @@ span.required {
 	padding: 20px 30px 20px 25px;
 }
 .vertical-tabs-bwrap{}
+
+#modx-resource-vtabs-header-title {
+    margin-left: 15px;
+    font-size: 14px;
+    color: #777;
+    padding: 0 0 10px;
+}
