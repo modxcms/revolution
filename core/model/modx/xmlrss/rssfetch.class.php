@@ -354,7 +354,7 @@ function init () {
     }
 
     if ( !defined('MAGPIE_OUTPUT_ENCODING') ) {
-        define('MAGPIE_OUTPUT_ENCODING', 'ISO-8859-1');
+        define('MAGPIE_OUTPUT_ENCODING', 'UTF-8');
     }
     
     if ( !defined('MAGPIE_INPUT_ENCODING') ) {
