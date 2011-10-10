@@ -21,12 +21,12 @@ $_lang['database_table_droptablestatements'] = 'Generovat příkazy DROP TABLE.'
 $_lang['database_table_effectivesize'] = 'Efektivní velikost';
 $_lang['database_table_indexsize'] = 'Velikost indexů';
 $_lang['database_table_overhead'] = 'Navíc';
-$_lang['database_table_reserved'] = 'Rezervováno';//sqlsrv
+$_lang['database_table_reserved'] = 'Rezervováno';
 $_lang['database_table_records'] = 'Záznamů';
 $_lang['database_table_tablename'] = 'Název tabulky';
 $_lang['database_table_totalsize'] = 'Celková velikost';
 $_lang['database_table_totals'] = 'Celkem:';
-$_lang['database_table_unused'] = 'Nevyužito';//sqlsrv
+$_lang['database_table_unused'] = 'Nevyužito';
 $_lang['database_type'] = 'Typ databáze';
 $_lang['database_version'] = 'Verze databáze';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> verze';
