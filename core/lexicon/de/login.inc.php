@@ -23,7 +23,6 @@ $_lang['login_err_unknown'] = 'Es trat ein unbekannter Fehler auf beim Versuch, 
 $_lang['login_forget_your_login'] = 'Zugangsdaten vergessen?';
 $_lang['login_hostname_error'] = 'Ihr Hostname zeigt nicht zurück auf Ihre IP-Adresse.';
 $_lang['login_message'] = 'Bitte geben Sie Ihre Zugangsdaten ein, um Ihre Manager-Sitzung zu starten. Achten Sie bei der Eingabe des Benutzernamens und des Passworts bitte auch auf Groß- und Kleinschreibung!';
-// $_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
 $_lang['login_password'] = 'Passwort: ';
 $_lang['login_password_reset_act_sent'] = 'Aktivierungs-E-Mail für das Zurücksetzen des Passworts versendet. Bitte überprüfen Sie Ihren Posteingang.';
 $_lang['login_remember'] = 'An mich erinnern';
