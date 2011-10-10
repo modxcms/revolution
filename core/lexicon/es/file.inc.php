@@ -107,4 +107,3 @@ $_lang['upf_upload_err'] = 'Error de subida.';
 $_lang['upf_uploading'] = 'Subiendo...';
 $_lang['upf_uploading_desc'] = 'Subiendo: {0} de {1} archivos completados.';
 $_lang['upload_files'] = 'Upload Files';
-

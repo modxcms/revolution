@@ -27,11 +27,10 @@ $_lang['sent_on'] = 'Enviado en';
 $_lang['subject'] = 'Tema';
 $_lang['user'] = 'Usuario';
 $_lang['usergroup'] = 'Grupo de Usuarios';
-
 $_lang['message_err_not_found'] = 'Mensaje no encontrado.';
 $_lang['message_err_not_specified_subject'] = 'Tema no especificado!';
 $_lang['message_err_remove'] = 'Ocurrió un error mientras se trataba de borrar el mensaje.';
-$_lang['message_err_remove_notauth'] ='No estás autorizado para borrar este mensaje.';
+$_lang['message_err_remove_notauth'] = 'No estás autorizado para borrar este mensaje.';
 $_lang['message_err_save'] = 'Ocurrió un error mientras se guardaba el mensaje.';
 $_lang['messages_all'] = 'Todos';
 $_lang['messages_compose'] = 'Escribir un mensaje';
