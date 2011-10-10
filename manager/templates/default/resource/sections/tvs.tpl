@@ -82,20 +82,11 @@ Ext.onReady(function() {
     };
     {/literal}{if $tvcount GT 0}{literal}
     MODx.load({
-        xtype: 'modx-tabs'
+        xtype: 'modx-vtabs'
         ,applyTo: 'modx-tv-tabs'
-        ,activeTab: 0
         ,autoTabs: true
         ,border: false
         ,plain: true
-        ,width: MODx.config.tvs_below_content ? '100%' : Ext.getCmp('modx-panel-resource').getWidth() - 30
-        ,hideMode: 'offsets'
-        ,autoScroll: true
-        ,defaults: {
-            bodyStyle: MODx.config.tvs_below_content ? 'padding: 20px; border: 1px solid #afafaf' : 'padding: 5px;'
-            ,autoScroll: true
-            ,autoHeight: true
-        }
         ,deferredRender: false
     });
     {/literal}{/if}
