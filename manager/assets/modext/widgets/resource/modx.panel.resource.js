@@ -200,7 +200,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: this.getSettingFields(config)
         });
-        console.log(MODx.config.tvs_below_content);
         if (config.show_tvs && MODx.config.tvs_below_content != 1) {
             it.push(this.getTemplateVariablesPanel(config));
         }
