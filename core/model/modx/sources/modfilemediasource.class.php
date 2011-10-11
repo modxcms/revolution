@@ -31,14 +31,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
     /**
      * Get base paths/urls and sanitize incoming paths
      * 
-     * @param string $dir A path to the active directory
+     * @param string $path A path to the active directory
      * @return array
      */
-    public function getBases($dir) {
-        if (empty($dir)) $dir = '';
+    public function getBases($path) {
+        if (empty($path)) $path = '';
         $properties = $this->getProperties();
         $bases = array();
-        $dir = $this->fileHandler->sanitizePath($dir);
+        $path = $this->fileHandler->sanitizePath($path);
         $bases['path'] = $properties['basePath']['value'];
         $bases['pathIsRelative'] = false;
         if (!empty($properties['basePathRelative']['value'])) {
@@ -48,16 +48,16 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $bases['pathAbsolute'] = $bases['path'];
         }
         
-        if (!empty($bases['path']) && $bases['path'] != '/' && strpos($dir,$bases['path']) === false) {
-            $bases['pathFull'] = $bases['path'].ltrim($dir,'/');
+        if (!empty($bases['path']) && $bases['path'] != '/' && strpos($path,$bases['path']) === false) {
+            $bases['pathFull'] = $bases['path'].ltrim($path,'/');
         } else {
-            $bases['pathFull'] = $dir;
+            $bases['pathFull'] = $path;
         }
 
         if (is_dir($bases['pathAbsoluteFull'])) {
             $bases['pathAbsoluteFull'] = $this->fileHandler->postfixSlash($bases['pathFull']);
         }
-        $bases['pathRelative'] = ltrim($dir,'/');
+        $bases['pathRelative'] = ltrim($path,'/');
 
         /* get relative url */
         $bases['urlIsRelative'] = false;
@@ -69,11 +69,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $bases['urlAbsolute'] = $bases['url'];
         }
 
-        $bases['urlFull'] = $bases['pathFull'].$dir;
-        if ($bases['url'] != '/') {
-            $bases['urlFull'] = str_replace('//','/',$bases['url'].$dir);
-        }
-        $bases['urlRelative'] = ltrim($dir,'/');
+        $bases['urlAbsoluteWithPath'] = $bases['urlAbsolute'].ltrim($path,'/');
+        $bases['urlRelative'] = ltrim($path,'/');
         return $bases;
     }
 
@@ -97,10 +94,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return array
      */
     public function getContainerList($path) {
-        $dir = $this->fileHandler->postfixSlash($path);
-        $bases = $this->getBases($dir);
+        $path = $this->fileHandler->postfixSlash($path);
+        $bases = $this->getBases($path);
         if (empty($bases['pathAbsolute'])) return array();
-        $fullPath = $bases['pathAbsolute'].ltrim($dir,'/');
+        $fullPath = $bases['pathAbsolute'].ltrim($path,'/');
                 
         $useMultibyte = $this->getOption('use_multibyte',$this->properties,false);
         $encoding = $this->getOption('modx_charset',$this->properties,'UTF-8');
@@ -138,7 +135,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if ($this->hasPermission('file_upload')) $cls[] = 'pupload';
 
                 $directories[$fileName] = array(
-                    'id' => $bases['urlRelative'].$fileName,
+                    'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
                     'type' => 'dir',
@@ -174,9 +171,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$this->ctx->get('key') : null;
 
                 /* get relative url from manager/ */
-                $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$dir.$fileName),'/');
+                $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
                 $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
-                
                 $files[$fileName] = array(
                     'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
@@ -189,7 +185,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'path' => $bases['pathFull'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'directory' => $bases['path'],
-                    'url' => $bases['urlFull'],
+                    'url' => ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName,
                     'file' => $encFile,
                     'menu' => array(),
                 );
@@ -792,7 +788,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
                 $files[] = array(
-                    'id' => $bases['urlFull'].$fileName,
+                    'id' => $bases['urlAbsoluteWithPath'].$fileName,
                     'name' => $fileName,
                     'cls' => 'icon-'.$fileExtension,
                     'image' => $image,
