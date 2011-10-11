@@ -330,6 +330,15 @@ $settings['compress_js_max_files']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['compress_js_groups']= $xpdo->newObject('modSystemSetting');
+$settings['compress_js_groups']->fromArray(array (
+  'key' => 'compress_js_groups',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['container_suffix']= $xpdo->newObject('modSystemSetting');
 $settings['container_suffix']->fromArray(array (
   'key' => 'container_suffix',

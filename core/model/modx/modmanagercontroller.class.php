@@ -455,36 +455,37 @@ abstract class modManagerController {
         $externals = array();
 
         if ($this->loadBaseJavascript) {
-            if ($this->modx->getOption('concat_js',null,false)) {
-                $externals[] = $managerUrl.'assets/modext/modext.js';
-            } else {
-                $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
-                $externals[] = $managerUrl.'assets/modext/util/utilities.js';
+            $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
+            $externals[] = $managerUrl.'assets/modext/util/utilities.js';
 
-                $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
+            $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
 
-                $externals[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
-                $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
-                $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
-            }
+            $externals[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
+            $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
             
             $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
 
             $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
 
             $o = '';
-            if ($this->modx->getOption('compress_js',null,true)) {
+            $compressJs = (boolean)$this->modx->getOption('compress_js',null,true);
+            $compressJsInGroups = (boolean)$this->modx->getOption('compress_js_groups',null,false);
+            $this->modx->setOption('compress_js',$compressJs);
+            $this->modx->setOption('compress_js_groups',$compressJsInGroups);
+            
+            if (!empty($compressJs) && empty($compressJsInGroups)) {
                 if (!empty($externals)) {
                     $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
 
@@ -503,8 +504,7 @@ abstract class modManagerController {
                         $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$scripts).'"></script>';
                     }
                 }
-                $this->modx->setOption('compress_js',true);
-            } else {
+            } else if (empty($compressJs)) {
                 foreach ($externals as $js) {
                     $o .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
                 }

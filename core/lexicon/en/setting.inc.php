@@ -184,6 +184,9 @@ $_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a com
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
 $_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
+$_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
+
 $_lang['setting_compress_js_max_files'] = 'Maximum JavaScript Files Compression Threshold';
 $_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
 

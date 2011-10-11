@@ -45,7 +45,7 @@ define('MINIFY_MIN_DIR', dirname(__FILE__));
 
 /* setup minify config */
 $min_allowDebugFlag = (boolean)$modx->getOption('manager_js_cache_allow_debug_flag',null,true);
-$min_errorLogger = (boolean)$modx->getOption('manager_js_cache_debug',null,false);
+$min_errorLogger = (boolean)$modx->getOption('manager_js_cache_debug',null,true);
 $min_enableBuilder = false;
 $min_cachePath = $cachePath;
 $min_documentRoot = '';
@@ -82,7 +82,7 @@ foreach ($min_symlinks as $uri => $target) {
     $min_serveOptions['minApp']['allowDirs'][] = $target;
 }
 
-if ($min_allowDebugFlag) {
+if ($min_allowDebugFlag && isset($_GET['debug'])) {
     require_once 'Minify/DebugDetector.php';
     $min_serveOptions['debug'] = Minify_DebugDetector::shouldDebugRequest($_COOKIE, $_GET, $_SERVER['REQUEST_URI']);
 }
@@ -93,17 +93,20 @@ if ($min_errorLogger) {
         require_once 'FirePHP.php';
         $min_errorLogger = FirePHP::getInstance(true);
     }
-    Minify_Logger::setLogger($min_errorLogger);
+    if (isset($_GET['debug'])) {
+        Minify_Logger::setLogger($min_errorLogger);
+        $min_serveOptions['debug'] = true;
+    }
 }
 
 // check for URI versioning
 if (preg_match('/&\\d/', $_SERVER['QUERY_STRING'])) {
     $min_serveOptions['maxAge'] = 31536000;
 }
-//if (isset($_GET['g'])) {
-    // well need groups config
-    //$min_serveOptions['minApp']['groups'] = (require MINIFY_MIN_DIR . '/groupsConfig.php');
-//}
+if (isset($_GET['g'])) {
+     // well need groups config
+    $min_serveOptions['minApp']['groups'] = (require MINIFY_MIN_DIR . '/groupsConfig.php');
+}
 if (isset($_GET['f']) || isset($_GET['g'])) {
     // serve!   
     if (! isset($min_serveController)) {
