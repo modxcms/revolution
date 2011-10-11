@@ -16,6 +16,5 @@ $_lang['mysql_version_fail'] = 'Je draait MySQL versie [[+version]], en MODX Rev
 $_lang['mysql_version_server_nf'] = 'MODX kan jouw MySQL versie niet detecteren via mysql_get_server_info(). Controleer zelf of jouw MySQL client versie minimaal 4.1.20 is voordat je doorgaat.';
 $_lang['mysql_version_server_start'] = 'Controleert MySQL server versie:';
 $_lang['mysql_version_success'] = 'OKE! Draait: [[+version]]';
-
 $_lang['sqlsrv_version_success'] = 'OKE!';
 $_lang['sqlsrv_version_client_success'] = 'OKE!';

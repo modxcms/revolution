@@ -17,6 +17,9 @@ $_lang['base_template'] = 'BasisTemplate';
 $_lang['cache_manager_err'] = 'MODX\'s Cache Manager kan niet geladen worden.';
 $_lang['choose_language'] = 'Kies taal';
 $_lang['cleanup_errors_title'] = 'Belangrijk:';
+$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
+$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
 $_lang['close'] = 'sluit';
 $_lang['config_file_err_w'] = 'Fout bij schrijven configuratiebestand.';
 $_lang['config_file_perms_notset'] = 'Configuratiebestand rechten zijn niet geupdate. Je kunt de rechten van het configuratiebestand aanpassen om veranderingen te beveiligen.';
@@ -31,7 +34,7 @@ $_lang['connection_collation'] = 'Vergelijking:';
 $_lang['connection_connection_and_login_information'] = 'Database verbinding en inlog informatie';
 $_lang['connection_connection_note'] = 'Vul de naam van de database voor MODX in. Indien deze nog niet bestaat dan zal de installatie deze proberen te maken. Dit zal falen afhankelijk van de MySQL configuratie of de database rechten voor jouw domein/installatie.';
 $_lang['connection_database_host'] = 'Database host:';
-//$_lang['connection_database_info'] = 'Vul nu de inlog data in voor jouw database.';
+$_lang['connection_database_info'] = 'Vul nu de inlog data in voor jouw database.';
 $_lang['connection_database_login'] = 'Database inlognaam:';
 $_lang['connection_database_name'] = 'Databasen naam:';
 $_lang['connection_database_pass'] = 'Database wachtwoord:';
@@ -94,6 +97,7 @@ $_lang['install_packages_options'] = 'Pakket Installatie Opties';
 $_lang['install_success'] = 'Core installatie is succesvol. Klik op volgende om het installatieproces af te ronden.';
 $_lang['install_summary'] = 'Installatie overzicht';
 $_lang['install_update'] = 'Installeer/Update';
+$_lang['installation_finished'] = 'Installation finished in [[+time]]';
 $_lang['license'] = '<p class="title">Je moet akkoord gaan met de licentie voordat u verder gaat met de installatie.</p>
 	<p>Usage of this software is subject to the GPL license. To help you understand
     what the GPL licence is and how it affects your ability to use the software, we
@@ -147,7 +151,7 @@ $_lang['modx_class_err_nf'] = 'Kan het MODX class bestand niet inladen.';
 $_lang['modx_configuration_file'] = 'MODX configuratiebestand';
 $_lang['modx_err_instantiate'] = 'Kan geen instantie van de MODX class maken.';
 $_lang['modx_err_instantiate_mgr'] = 'Kan de MODX manager context niet initialiseren.';
-$_lang['modx_footer1'] = '&copy; 2005-2010 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is gratis software. Wij moedigen je aan om creatief te zijn en gebruik te maken van MODX op de manier die past bij jou. Maar wees je er van bewust dat als je aanpassingen maakt en besluit deze te verspreiden, dat de broncode gratis blijft!';
 $_lang['modx_install'] = 'MODX Installatie';
 $_lang['modx_install_complete'] = 'MODX Installatie Afgerond';
@@ -220,13 +224,11 @@ $_lang['workspace_path_updated'] = 'Actieve workspace pad geupdate.';
 $_lang['versioner_err_nf'] = 'Kan de Installatie Versioner niet vinden in: [[+path]]<br />Controleer of je alle bestanden geupload hebt.';
 $_lang['xpdo_err_ins'] = 'Kan xPDO niet initialiseren.';
 $_lang['xpdo_err_nf'] = 'MODX kan de xPDO class niet vinden in: [[+path]]. Controleer of je deze geupload hebt.';
-
 $_lang['preload_err_cache'] = 'Controleer of [[+path]]cache map bestaat en schrijfbaar is voor het PHP proces.';
 $_lang['preload_err_core_path'] = 'Controleer of je een geldig MODX_CORE_PATH in jouw setup/includes/config.core.php hebt gespecificeerd; dit moet naar een werkende MODX core zijn.';
 $_lang['preload_err_mysql'] = 'MODX eist de mysql extentie wanneer je PHP gebruikt zonder native PDO en het lijkt niet geladen te zijn.';
 $_lang['preload_err_pdo'] = 'MODX eist de PDO extentie wanneer native PDO wordt gebruikt en het lijkt niet geladen te zijn.';
 $_lang['preload_err_pdo_mysql'] = 'MODX eist de pdo_mysql driver wanneer de native PDO wordt gebruikt en het lijkt niet geladen te zijn.';
-
 $_lang['test_config_file'] = 'Controleer of <span class="mono">[[+file]]</span> bestaat en schrijfbaar is: ';
 $_lang['test_config_file_nw'] = 'Voor nieuwe Linux/Unix installaties, maak een nieuw leeg bestand genaamd <span class="mono">[[+file]].inc.php</span> in de MODX core <span class="mono">config/</span> map met schrijfrechten voor het PHP proces.';
 $_lang['test_db_check'] = 'Maak verbinding met de database: ';
