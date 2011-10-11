@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- [#5904] Provide access to name and version in Transport packages
+
 xPDO 2.2.0-rc1 (September 7, 2011)
 ====================================
 - Add support for field aliases to be defined in the schema
