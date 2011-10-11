@@ -15,6 +15,5 @@ $_lang['mysql_version_fail'] = 'Du kör på MySQL [[+version]], och MODX Revolut
 $_lang['mysql_version_server_nf'] = 'MODX kunde inte avgöra versionen på din MySQL-server via mysql_get_server_info(). Kontrollera manuellt att versionen på MySQL-servern är minst 4.1.20 innan du fortsätter.';
 $_lang['mysql_version_server_start'] = 'Kontrollerar versionen på MySQL-servern:';
 $_lang['mysql_version_success'] = 'OK! Kör: [[+version]]';
-
 $_lang['sqlsrv_version_success'] = 'OK!';
 $_lang['sqlsrv_version_client_success'] = 'OK!';

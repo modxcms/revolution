@@ -15,6 +15,9 @@ $_lang['base_template'] = 'Basmall';
 $_lang['cache_manager_err'] = 'MODX cachehanterare kunde inte laddas.';
 $_lang['choose_language'] = 'Välj språk';
 $_lang['cleanup_errors_title'] = 'Viktigt meddelande:';
+$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
+$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
 $_lang['close'] = 'stäng';
 $_lang['config_file_err_w'] = 'Ett fel inträffade när konfigureringsfilen skulle skrivas.';
 $_lang['config_file_perms_notset'] = 'Konfigurationsfilens rättigheter blev inte uppdaterade. Du bör ändra konfigurationsfilens rättigheter för att säkra filen från mixtrande.';
@@ -91,6 +94,7 @@ $_lang['install_packages_options'] = 'Inställningar för paketinstallation';
 $_lang['install_success'] = 'Installationen av kärnan lyckades. Klicka på Nästa för att slutföra installationen.';
 $_lang['install_summary'] = 'Sammanfattning av installationen';
 $_lang['install_update'] = 'Installera/Uppdatera';
+$_lang['installation_finished'] = 'Installation finished in [[+time]]';
 $_lang['license'] = '<p class="title">MODX Licensavtal</p>
     <hr style="text-align:left;height:1px;width:100%;" />
     <h4>Du måste godkänna licensen innan installationen kan fortsätta.</h4>
@@ -144,7 +148,7 @@ $_lang['modx_class_err_nf'] = 'Kunde inte inkludera MODX-klassens fil.';
 $_lang['modx_configuration_file'] = 'MODX konfigurationsfil';
 $_lang['modx_err_instantiate'] = 'Kunde inte instansiera MODX-klassen.';
 $_lang['modx_err_instantiate_mgr'] = 'Kunde inte initiera MODX-hanterarens kontext.';
-$_lang['modx_footer1'] = '&copy; 2005-2010 the <a href="http://www.modxcms.com/" target="_blank" style="color: green; text-decoration:underline">MODX</a> Content Mangement Framework (CMF) project. Med ensamrätt. MODX är licensierad under GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://modx.com/" target="_blank" style="color: green; text-decoration:underline">MODX</a> Content Mangement Framework (CMF) project. Med ensamrätt. MODX är licensierad under GNU GPL.';
 $_lang['modx_footer2'] = 'MODX är fri programvara. Vi uppmuntrar dig att vara kreativ och använda MODX på vilket sätt du vill. Var bara noga med att bevara källkoden fri om du gör ändringar och sedan väljer att omdistribuera din modifierade version av MODX.';
 $_lang['modx_install'] = 'MODX Installation';
 $_lang['modx_install_complete'] = 'Installationen av MODX är klar';
@@ -185,7 +189,7 @@ $_lang['refresh'] = 'Uppdatera';
 $_lang['request_handler_err_nf'] = 'Kunde inte ladda anropshanteraren vid [[+path]]. Kontrollera att du har laddat upp alla de nödvändiga filerna.';
 $_lang['restarted_msg'] = 'MODX har startat om installationsprocessen som en säkerhetsåtgärd på grund av att den var inaktiv i över 15 minuter. Gör ett nytt försök att installera.';
 $_lang['retry'] = 'Försök igen';
-$_lang['security_notice'] ='Säkerhetsnotis';
+$_lang['security_notice'] = 'Säkerhetsnotis';
 $_lang['select'] = 'Välj';
 $_lang['settings_handler_err_nf'] = 'MODX kunde inte hitta klassen modInstallSettings vid: [[+path]]. Kontrollera att du har laddat upp alla filerna.';
 $_lang['setup_err_remove'] = 'Ett fel inträffade när installationskatalogen skulle tas bort.';
@@ -205,7 +209,7 @@ $_lang['toggle'] = 'Växla';
 $_lang['toggle_success'] = 'Visa/göm framgångsmeddelanden';
 $_lang['toggle_warnings'] = 'Visa/göm varningar';
 $_lang['username_err_invchars'] = 'Ditt användarnamn får inte innehålla otillåtna tecken som /, \\, &apos;, &quot;, eller {}.';
-$_lang['username_err_ns'] =  'Användarnamnet är ogiltigt';
+$_lang['username_err_ns'] = 'Användarnamnet är ogiltigt';
 $_lang['version'] = 'version';
 $_lang['warning'] = 'Varning';
 $_lang['welcome'] = 'Välkommen till installationsprogrammet för MODX.';
@@ -218,13 +222,11 @@ $_lang['workspace_path_updated'] = 'Uppdaterade sökvägen till den aktiva arbet
 $_lang['versioner_err_nf'] = 'Kunde inte hitta installationens Versioner-klass vid: [[+path]] <br />Kontrollera att du har laddat upp alla de nödvändiga filerna.';
 $_lang['xpdo_err_ins'] = 'Kunde inte skapa en instans av xPDO.';
 $_lang['xpdo_err_nf'] = 'MODX kunde inte hitta xPDO-klassen vid: [[+path]] <br />Kontrollera att du har laddat upp alla de nödvändiga filerna.';
-
 $_lang['preload_err_cache'] = 'Kontrollera att din [[+path]]cache-katalog existerar och att den är skrivbar av PHP-processen.';
 $_lang['preload_err_core_path'] = 'Kontrollera att du angivit en korrekt MODX_CORE_PATH i filen setup/includes/config.core.php. Den här måste peka mot en fungerande MODX-kärna.';
 $_lang['preload_err_mysql'] = 'MODX kräver tillägget mysql när PHP används utan PDO och det verkar inte vara laddat.';
 $_lang['preload_err_pdo'] = 'MODX kräver tillägget PDO när PDO används och det verkar inte vara laddat.';
 $_lang['preload_err_pdo_mysql'] = 'MODX kräver drivrutinen pdo_mysql när PDO används och den verkar inte vara laddad.';
-
 $_lang['test_config_file'] = 'Kontrollerar om <span class="mono">[[+file]]</span> existerar och är skrivbar: ';
 $_lang['test_config_file_nw'] = 'För nya installationer i Linux/Unix-miljö måste en tom fil med namnet <span class="mono">[[+file]].inc.php</span> skapas i din MODX-kärnas <span class="mono">config/</span>-katalog med åtkomsträttigheterna satta så att den blir skrivbar av PHP.';
 $_lang['test_db_check'] = 'Skapar anslutning till databasen: ';
