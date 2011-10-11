@@ -15,6 +15,9 @@ $_lang['base_template'] = 'Plantilla Base';
 $_lang['cache_manager_err'] = 'El Admin de Cache de MODX no pudo ser cargado.';
 $_lang['choose_language'] = 'Selecciona Idioma';
 $_lang['cleanup_errors_title'] = 'Nota Importante:';
+$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
+$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
 $_lang['close'] = 'cerrar';
 $_lang['config_file_err_w'] = 'Error escribiendo archivo config.';
 $_lang['config_file_perms_notset'] = 'Los permisos del archivo Config no fueron actualizados.  Tu podrías querer cambiar los permisos en tu archivo config para asegurar el archivo de ser modificado.';
@@ -91,6 +94,7 @@ $_lang['install_packages_options'] = 'Opciones de Instalación de Paquetes';
 $_lang['install_success'] = 'La instalación del programa principal fue existosa.  Haz clic en Siguiente para completar el proceso de instalación.';
 $_lang['install_summary'] = 'Resúmen de Instalación';
 $_lang['install_update'] = 'Instalar/Actualizar';
+$_lang['installation_finished'] = 'Installation finished in [[+time]]';
 $_lang['license'] = '<p class="title">Debes de estar de acuerdo con la Licencia antes de continuar con la instalación.</p>
     <p>El uso de este software es sujeto a la licencia GPL.  Para ayudarte a entender
     lo que es la licencia GPL y cómo afecta tu habilidad de usar el software,
@@ -144,7 +148,7 @@ $_lang['modx_class_err_nf'] = 'No se pudo incluir el archivo de la clase MODX.';
 $_lang['modx_configuration_file'] = 'Archivo de configuración de MODX';
 $_lang['modx_err_instantiate'] = 'No se pudo instanciar la clase MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'No se pudo instanciar el contexto de administración de MODX.';
-$_lang['modx_footer1'] = '&copy; 2005-2011 del proyecto de Framework de Admin de Contenido <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a>. Todos los derechos reservados.  MODX está licenciado bajo la LPG GNU.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 del proyecto de Framework de Admin de Contenido <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a>. Todos los derechos reservados.  MODX está licenciado bajo la LPG GNU.';
 $_lang['modx_footer2'] = 'MODX es software libre.  Te alentamos a ser creativo y hacer uso de MODX en cualquier manera que te sea útil.  Sólo asegúrate de que, si le haces cambios y decides re-distribuir tu MODX modificado, mantengas el código libre!';
 $_lang['modx_install'] = 'Instalación de MODX';
 $_lang['modx_install_complete'] = 'Instalación de MODX completada';
@@ -218,13 +222,11 @@ $_lang['workspace_path_updated'] = 'Se actualizó la ruta del espacio de trabajo
 $_lang['versioner_err_nf'] = 'No se pudo encontrar el Versionador de la Instalación en: [[+path]]<br />Por favor asegúrate de que has cargado todos los archivos necesarios.';
 $_lang['xpdo_err_ins'] = 'No se pudo instanciar xPDO.';
 $_lang['xpdo_err_nf'] = 'MODX no pudo encontrar la clase de xPDO en: [[+path]].  Por favor asegúrate de que fue cargada correctamente.';
-
 $_lang['preload_err_cache'] = 'Asegúrate de que tu directorio [[+path]]cache existe y es escribible por el proceso de PHP.';
 $_lang['preload_err_core_path'] = 'Asegúrate de que has especificado un MODX_CORE_PATH válido en tu archivo setup/includes/config.core.php; esto debe de apuntar a un programa principal de MODX que esté funcionando.';
 $_lang['preload_err_mysql'] = 'MODX requiere la extensión mysql cuando se usa PHP sin PDO nativo y no parece estar cargada.';
 $_lang['preload_err_pdo'] = 'MODX requiere la extensión PDO cuando se está usando PDO nativo y no parece estar cargada.';
 $_lang['preload_err_pdo_mysql'] = 'MODX requiere el driver de pdo_mysql cuando se está usando PDO nativo y no parece estar cargado';
-
 $_lang['test_config_file'] = 'Probando si <span class="mono">[[+file]]</span> existe y es escribible: ';
 $_lang['test_config_file_nw'] = 'Para instalaciones nuevas en Linux/Unix, por favor crea un archivo en blanco nombrado <span class="mono">[[+file]].inc.php</span> en el directorio de tu programa principal de MODX <span class="mono">config/</span> con permisos configurados a ser escribible por PHP.';
 $_lang['test_db_check'] = 'Creando la conexión a la base de datos: ';
