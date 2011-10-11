@@ -18,12 +18,12 @@ $_lang['database_table_droptablestatements'] = 'Générer les déclarations DROP
 $_lang['database_table_effectivesize'] = 'Taille réelle';
 $_lang['database_table_indexsize'] = 'Index';
 $_lang['database_table_overhead'] = 'Dépassement';
-$_lang['database_table_reserved'] = 'Réservé';//sqlsrv
+$_lang['database_table_reserved'] = 'Réservé';
 $_lang['database_table_records'] = 'Entrées';
 $_lang['database_table_tablename'] = 'Nom de la table';
 $_lang['database_table_totalsize'] = 'Taille totale';
 $_lang['database_table_totals'] = 'Totales:';
-$_lang['database_table_unused'] = 'Inutilisé';//sqlsrv
+$_lang['database_table_unused'] = 'Inutilisé';
 $_lang['database_type'] = 'Type de base de données';
 $_lang['database_version'] = 'Version de la base de données';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Version';

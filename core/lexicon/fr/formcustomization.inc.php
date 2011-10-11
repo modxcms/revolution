@@ -6,7 +6,6 @@
  * @package modx
  * @subpackage lexicon
  */
-
 $_lang['action'] = 'Action';
 $_lang['action_desc'] = 'Cette règle s\'appliquera à l\'action spécifiée.';
 $_lang['activate'] = 'Activer';

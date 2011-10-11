@@ -6,7 +6,6 @@
  * @package modx
  * @subpackage lexicon
  */
- 
 $_lang['login_activation_key_err'] = 'La clé d\'activation ne correspond pas! Veuillez vérifier votre email d\'activation et assurez-vous d\'avoir chargé la bonne URL.';
 $_lang['login_blocked_admin'] = 'Vous avez été bloqué par un administrateur.';
 $_lang['login_blocked_error'] = 'Vous êtes temporairement bloqué, vous ne pouvez plus vous connecter actuellement. Veuillez réessayer ultérieurement.';
@@ -15,13 +14,12 @@ $_lang['login_blocked_time'] = 'Vous n\'êtes pas autorisé à vous identifier a
 $_lang['login_blocked_too_many_attempts'] = 'Vous avez été bloqué en raison de trop nombreuses tentatives de connexion échouées.';
 $_lang['login_button'] = 'Connexion';
 $_lang['login_cannot_locate_account'] = 'Ce compte n\'a pas pu être identifié. Vérifiez l\'identifiant et le mot de passe puis réessayez.';
-$_lang['login_copyright'] = '&copy; 2005-2010 par <a href="http://modxcms.com/" target="_blank">l\'équipe MODX</a>. <strong>MODX</strong>&trade; est sous licence GPLv2 et ultérieur.';
+$_lang['login_copyright'] = '&copy; 2005-2011 par <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution est sous licence GPLv2 et ultérieur.';
 $_lang['login_email_label'] = 'Compte email:';
 $_lang['login_err_unknown'] = 'Une erreur inconnue s\'est produite pendant la tentative de connexion.';
 $_lang['login_forget_your_login'] = 'Vous avez oublié votre identifiant?';
 $_lang['login_hostname_error'] = 'Votre nom d\'hôte ne pointe pas vers votre adresse IP.';
 $_lang['login_message'] = 'Veuillez vous identifier afin de démarrer une session sur votre gestionnaire. Votre identifiant et votre mot de passe sont sensibles à la casse, entrez-les donc avec précaution!';
-$_lang['login_modx_support'] = '<p>Soutenu par:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>la communauté MODX</strong></a></p>';
 $_lang['login_password'] = 'Mot de passe: ';
 $_lang['login_password_reset_act_sent'] = 'L\'email de réinitialisation du mot de passe a été envoyé. Veuillez vérifier votre boîte de réception.';
 $_lang['login_remember'] = 'Se souvenir de moi';
