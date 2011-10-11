@@ -14,13 +14,12 @@ $_lang['login_blocked_time'] = 'Du får inte logga in just nu. Försök senare.'
 $_lang['login_blocked_too_many_attempts'] = 'Du har blivit blockerad på grund av för många felaktiga inloggningsförsök.';
 $_lang['login_button'] = 'Logga in';
 $_lang['login_cannot_locate_account'] = 'Det kontot kan inte lokaliseras. Kontrollera användarnamnet och skriv om lösenordet för att försöka igen.';
-$_lang['login_copyright'] = '&copy; 2005-2010 av <a href="http://modxcms.com/" target="_blank">MODX CMF Team</a>. <strong>MODX</strong>&trade; är licensierad under GPL.';
+$_lang['login_copyright'] = '&copy; 2005-2011 av <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution är licensierad under GPL.';
 $_lang['login_email_label'] = 'Kontots e-postadress:';
 $_lang['login_err_unknown'] = 'Ett okänt fel inträffade när du försökte logga in.';
 $_lang['login_forget_your_login'] = 'Glömt dina inloggningsuppgifter?';
 $_lang['login_hostname_error'] = 'Ditt värddatornamn pekar inte tillbaka till din IP-adress.';
 $_lang['login_message'] = 'Fyll i dina inloggningsuppgifter för att starta din session. Det är skillnad mellan stora och små bokstäver i ditt användarnamn och lösenord.';
-$_lang['login_modx_support'] = '<p>Med stöd av:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>MODX-communityn</strong></a></p>';
 $_lang['login_password'] = 'Lösenord: ';
 $_lang['login_password_reset_act_sent'] = 'En lösenordsåterställning har skickats via e-post. Titta i din inkorg.';
 $_lang['login_remember'] = 'Kom ihåg mig';

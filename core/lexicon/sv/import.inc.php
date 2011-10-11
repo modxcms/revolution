@@ -9,8 +9,8 @@
 $_lang['import_allowed_extensions'] = 'Ange en lista med fil-suffix, separerade med kommatecken, som får importeras.<br /><small><em>Lämna fältet tomt för att importera alla filer enligt de innehållstyper som finns på din webbplats. Okända typer kommer att hanteras som vanlig text.</em></small>';
 $_lang['import_base_path'] = 'Ange bassökvägen för de filer som ska importeras.<br /><small><em>Lämna fältet tomt för att använda målkontextens intällning för statisk sökväg.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Resursen [[+id]] använder redan aliaset [[+alias]]. Ange ett unikt alias.';
-$_lang['import_enter_root_element'] = 'Ange rot-elementet som ska importeras:';
 $_lang['import_element'] = 'Ange det rot-HTML-element som ska importeras:';
+$_lang['import_enter_root_element'] = 'Ange rot-elementet som ska importeras:';
 $_lang['import_files_found'] = '<strong>Hittade %s dokument för import...</strong><p/>';
 $_lang['import_parent_document'] = 'Föräldrardokument';
 $_lang['import_parent_document_message'] = 'Använd dokumentträdet nedan för att välja den förälder du vill importera filerna till.';
