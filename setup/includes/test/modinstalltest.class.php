@@ -41,6 +41,7 @@ abstract class modInstallTest {
         $this->_checkConfig();
         $this->_checkDatabase();
         $this->_checkSafeMode();
+        $this->_checkSuhosin();
 
         return $this->results;
     }
@@ -306,6 +307,23 @@ abstract class modInstallTest {
         } else {
             $this->pass('dbase_connection');
         }
+    }
+
+    /**
+     * Check for suhosin extension, and if found and suhosin.get.max_value_length is less than 1024, throw a warning
+     * and force compress_js off.
+     */
+    public function _checkSuhosin() {
+        $this->title('test_suhosin_max_length',$this->install->lexicon('test_suhosin'));
+        $maxLength = (int)@ini_get('suhosin.get.max_value_length');
+        if ($maxLength != 0 && $maxLength !== null && $maxLength > 0 && $maxLength < 1024) {
+            $this->warn($this->install->lexicon('test_suhosin_max_length'),$this->install->lexicon('warning'),$this->install->lexicon('test_suhosin_max_length_err'));
+            $this->install->settings->set('compress_js',0);
+        } else {
+            $this->pass('test_suhosin_max_length');
+            $this->install->settings->set('compress_js',1);
+        }
+        $this->install->settings->store();
     }
 
 

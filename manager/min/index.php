@@ -65,6 +65,9 @@ $min_libPath = dirname(__FILE__) . '/lib';
 
 require 'Minify.php';
 
+/* attempt to prevent suhosin issues */
+@ini_set('suhosin.get.max_value_length',4096);
+
 Minify::$uploaderHoursBehind = $min_uploaderHoursBehind;
 Minify::setCache(
     isset($min_cachePath) ? $min_cachePath : ''

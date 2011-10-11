@@ -62,6 +62,8 @@ class modInstallRunnerWeb extends modInstallRunner {
                 include MODX_SETUP_PATH.'includes/upgrade.install.php';
             }
 
+            $this->postRun();
+
             $this->success = true;
         }
 
@@ -89,5 +91,27 @@ class modInstallRunnerWeb extends modInstallRunner {
         $this->install->settings->store(array(
             'finished' => true,
         ));
+    }
+
+    public function postRun() {
+        $compressJs = $this->install->settings->get('compress_js');
+        if ($compressJs === 0) {
+            /** @var modSystemSetting $setting */
+            $setting = $this->install->xpdo->getObject('modSystemSetting',array(
+                'key' => 'compress_js',
+            ));
+            if (empty($setting)) {
+                $setting = $this->install->xpdo->newObject('modSystemSetting');
+                $setting->fromArray(array(
+                    'key' => 'compress_js',
+                    'xtype' => 'combo-boolean',
+                    'namespace' => 'core',
+                    'area' => 'manager',
+                ),'',true);
+            }
+            $setting->set('value',0);
+            $setting->save();
+        }
+        return true;
     }
 }
