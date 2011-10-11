@@ -153,7 +153,8 @@ class xPDOTransport {
         $version = '';
         $part = next($exploded);
         while ($part !== false) {
-            if (is_numeric(substr($part, 0, 1)) && strpos($part, '.', 1) !== false) {
+            $dotPos = strpos($part, '.');
+            if ($dotPos > 0 && is_numeric(substr($part, 0, $dotPos))) {
                 $version = $part;
                 while (($part = next($exploded)) !== false) {
                     $version .= '-' . $part;
