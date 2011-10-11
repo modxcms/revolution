@@ -2,7 +2,7 @@
 /**
  * Property Set Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
@@ -63,7 +63,7 @@ $_lang['propertyset_err_update'] = 'Er is een fout opgetreden tijdens het prober
 $_lang['propertyset_new'] = 'Nieuwe eigenschapset';
 $_lang['propertyset_panel_desc'] = 'Hier kun je een nieuwe eigenschapset maken, of een bestaande kiezen om te koppelen aan dit element.';
 $_lang['propertyset_remove'] = 'Eigenschapset verwijderen';
-$_lang['propertyset_remove_confirm'] =  'Weet je zeker dat je deze eigenschapset wilt verwijderen?';
+$_lang['propertyset_remove_confirm'] = 'Weet je zeker dat je deze eigenschapset wilt verwijderen?';
 $_lang['propertyset_save'] = 'Eigenschapset opslaan';
 $_lang['propertyset_update'] = 'Eigenschapset wijzigen';
 $_lang['propertysets'] = 'Eigenschapsets';

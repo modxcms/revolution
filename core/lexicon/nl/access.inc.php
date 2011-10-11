@@ -2,7 +2,7 @@
 /**
  * Access Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
@@ -61,6 +61,8 @@ $_lang['access_rgroup_err_ns'] = 'Documentgroep ACL niet gedefinieerd.';
 $_lang['access_rgroup_err_remove'] = 'Er is een fout opgetreden tijdens het proberen te verwijderen van een documentgroep ACL.';
 $_lang['access_rgroup_remove'] = 'Verwijder documentgroep toegang';
 $_lang['access_rgroup_update'] = 'Documentgroep toegang aanpassen';
+$_lang['access_source_remove'] = 'Remove Media Source Access';
+$_lang['access_source_update'] = 'Update Media Source Access';
 $_lang['access_to_contexts'] = 'Toegang tot Contexts';
 $_lang['access_to_resource_groups'] = 'Toegang tot documentgroepen';
 $_lang['access_type_err_ns'] = 'Doeltype of ID niet gedefinieerd!';
@@ -73,7 +75,9 @@ $_lang['filter_by_context'] = 'Filter op context...';
 $_lang['filter_by_policy'] = 'Filter op beleid...';
 $_lang['filter_by_resource_group'] = 'Filter op documentgroep...';
 $_lang['filter_by_category'] = 'Filter op Categorie...';
+$_lang['filter_by_source'] = 'Filter by Media Source...';
 $_lang['no_policy_option'] = ' (geen beleid) ';
+$_lang['permissions_in_policy'] = 'Permissions in Selected Policy';
 $_lang['resource_group'] = 'Documentgroep';
 $_lang['resource_group_add'] = 'Documentgroep toevoegen';
 $_lang['resource_group_access_remove'] = 'Verwijder document uit groep';
@@ -91,17 +95,37 @@ $_lang['resource_group_resource_err_create'] = 'Er is een fout opgetreden tijden
 $_lang['resource_group_resource_err_nf'] = 'Dit document is geen onderdeel of die documentgroep.';
 $_lang['resource_group_resource_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van het document uit de documentgroep.';
 $_lang['resource_group_untitled'] = 'Naamloze documentgroep';
+$_lang['resource_group_update'] = 'Update Resource Group';
 $_lang['roles_msg'] = 'Een rol is, per definitie, een positie of status houdt men binnen een bepaalde situatie. Ze kunnen worden gebruikt om gebruikers te groeperen in een positie of status binnen een gebruikersgroep. Rollen in MODX hebben ook wat we noemen "Autoriteit". Dit is een nummerieke waarde van elk geldig getal. Autoriteitlevels zijn erfelijk, in die zin dat een rol met Autoriteit 1 zal erven alle groepsbeleid toegewezen aan zichzelf, en alle rollen met een hogere autoriteit niveau dan 1.';
+$_lang['source_add'] = 'Add Media Source';
 $_lang['user_group_category_access'] = 'Element categorietoegang';
 $_lang['user_group_category_access_msg'] = 'Hier kun je instellen welke elementen van deze gebruikersgroep toegang hebben tot de categorie�n waar de elementen in zitten.';
+$_lang['user_group_category_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_category_category_desc'] = 'The Category to grant access to.';
+$_lang['user_group_category_context_desc'] = 'The Context to target for Elements with the above Category associated to them.';
 $_lang['user_group_category_err_ae'] = 'Gebruikersgroep heeft reeds toegang tot die categorie.';
+$_lang['user_group_category_policy_desc'] = 'The Policy to apply to this Context with Elements in the Category for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_category_remove_confirm'] = 'Weet je heel zeker dat je deze categorie uit deze gebruikersgroep wilt verwijderen?';
 $_lang['user_group_context_access'] = 'Context toegang';
 $_lang['user_group_context_access_msg'] = 'Hier kun je instellen welke contexts toegang hebben tot deze gebruikersgroep.';
+$_lang['user_group_context_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_context_context_desc'] = 'The Context to grant access to.';
+$_lang['user_group_context_policy_desc'] = 'The Policy to apply to this Context for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_context_err_ae'] = 'Gebruikersgroep heeft reeds toegang tot die context.';
 $_lang['user_group_context_remove_confirm'] = 'Weet je zeker dat je deze context van deze gebruikersgroep wilt verwijderen?';
 $_lang['user_group_resourcegroup_access'] = 'Toegang documentgroep';
 $_lang['user_group_resourcegroup_access_msg'] = 'Hier kun je instellen welke documentgroep toegang heeft tot deze gebruikersgroep.';
+$_lang['user_group_resourcegroup_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_resourcegroup_context_desc'] = 'The Context to target for items with the above Resource Group associated to them.';
 $_lang['user_group_resourcegroup_err_ae'] = 'Gebruikersgroep heeft reeds toegang tot die documentgroep.';
+$_lang['user_group_resourcegroup_policy_desc'] = 'The Policy to apply to this Context with Resources in the Resource Group for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Weet je zeker dat je deze documentgroep van deze gebruikersgroep wilt verwijderen?';
+$_lang['user_group_resourcegroup_resource_group_desc'] = 'The Resource Group to grant access to.';
+$_lang['user_group_source_access'] = 'Media Source Access';
+$_lang['user_group_source_access_msg'] = 'Here you can set which Media Sources this User Group can access.';
+$_lang['user_group_source_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_source_err_ae'] = 'User Group already has access to that Media Source.';
+$_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Source for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+$_lang['user_group_source_remove_confirm'] = 'Are you sure you want to remove this Media Source from this User Group?';
+$_lang['user_group_source_source_desc'] = 'The Media Source to grant access to.';
 $_lang['user_group_user_access_msg'] = 'Selecteer de gebruikers die jij in deze gebruikersgroep wilt.';

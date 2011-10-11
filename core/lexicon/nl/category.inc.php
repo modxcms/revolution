@@ -11,6 +11,7 @@
 $_lang['categories'] = 'Categorie&euml;n';
 $_lang['category_confirm_delete'] = 'Weet je zeker dat je deze category wilt verwijderen? Alle elementen in deze categorie worden losgekoppeld.';
 $_lang['category_create'] = 'Nieuwe categorie';
+$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
 $_lang['category_err_create'] = 'Er is een fout opgetreden tijdens het maken van de categorie.';
 $_lang['category_err_not_found'] = 'Categorie niet gevonden!';
 $_lang['category_err_nf'] = 'Categorie niet gevonden.';

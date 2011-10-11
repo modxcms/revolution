@@ -2,7 +2,7 @@
 /**
  * Resource Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
@@ -13,10 +13,6 @@ $_lang['cache_output'] = 'Cache uitvoer';
 $_lang['changes'] = 'Wijzigingen';
 $_lang['class_key'] = 'Class Key';
 $_lang['context'] = 'Context';
-$_lang['createedit_document'] = 'Maak/wijzig document';
-$_lang['createedit_static'] = 'Maak/wijzig statisch document';
-$_lang['createedit_symlink'] = 'Maak/wijzig koppeling';
-$_lang['createedit_weblink'] = 'Maak/wijzig webkoppeling';
 $_lang['document'] = 'Document';
 $_lang['document_create'] = 'Maak document';
 $_lang['document_create_here'] = 'Maak een document hier';
@@ -72,7 +68,7 @@ $_lang['resource_err_nf'] = 'Document niet gevonden.';
 $_lang['resource_err_nfs'] = 'Document met id [[+id]] niet gevoden.';
 $_lang['resource_err_ns'] = 'Document niet gespecificeerd.';
 $_lang['resource_err_own_parent'] = 'Het document kant zijn eigen bovenliggend document zijn.';
-$_lang['resource_err_publish']  = 'Er is een fout opgetreden tijdens het proberen het document te publiceren.';
+$_lang['resource_err_publish'] = 'Er is een fout opgetreden tijdens het proberen het document te publiceren.';
 $_lang['resource_err_new_parent_nf'] = 'Nieuw bovenliggend document met id [[+id]] niet gevonden.';
 $_lang['resource_err_remove'] = 'Er is een fout opgetreden tijdens het proberen te verwijderen van het document.';
 $_lang['resource_err_save'] = 'Er is een fout opgetreden tijdens proberen het document op te slaan.';

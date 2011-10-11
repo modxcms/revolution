@@ -29,7 +29,6 @@ $_lang['sent_on'] = 'Verstuurd op';
 $_lang['subject'] = 'Onderwerp';
 $_lang['user'] = 'Gebruiker';
 $_lang['usergroup'] = 'Gebruikersgroep';
-
 $_lang['message_err_not_found'] = 'Bericht niet gevonden.';
 $_lang['message_err_not_specified_subject'] = 'Onderwerp niet gedefiniëerd!';
 $_lang['message_err_remove'] = 'Er is een fout opgetreden bij het verwijderen van het bericht.';

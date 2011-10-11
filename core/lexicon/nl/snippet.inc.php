@@ -2,7 +2,7 @@
 /**
  * Snippet Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
@@ -13,6 +13,9 @@ $_lang['snippets_available'] = 'Snippets beschikbaar voor jou om te includen in 
 $_lang['snippet_code'] = 'Snippet code (php)';
 $_lang['snippet_delete_confirm'] = 'Weet je zeker dat je deze snippet wilt verwijderen?';
 $_lang['snippet_desc'] = 'Omschrijving';
+$_lang['snippet_desc_category'] = 'The Category this Snippet belongs in.';
+$_lang['snippet_desc_description'] = 'A short description of this Snippet.';
+$_lang['snippet_desc_name'] = 'The name of this Snippet. It will be available using the [[NameOfSnippet]] tags.';
 $_lang['snippet_duplicate_confirm'] = 'Weet je zeker dat je deze snippet wilt dupliceren?';
 $_lang['snippet_duplicate_error'] = 'Er is een fout opgetreden tijdens het dupliceren van de snippet.';
 $_lang['snippet_err_create'] = 'Er is een fout opgetreden tijdens het maken van de snippet.';

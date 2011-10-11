@@ -2,7 +2,7 @@
 /**
  * Top Menu Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
@@ -19,6 +19,9 @@ $_lang['content_types'] = 'Content Types';
 $_lang['content_types_desc'] = 'Voeg nieuwe content types toe voor documenten, als .html, .js etc.';
 $_lang['contexts'] = 'Contexts';
 $_lang['contexts_desc'] = 'Beheer site contexts en hun instellingen.';
+$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboards'] = 'Dashboards';
+$_lang['dashboards_desc'] = 'Manage all dashboard configurations.';
 $_lang['edit_menu'] = 'Acties';
 $_lang['edit_menu_desc'] = 'Beheer acties en de topmenu structuur.';
 $_lang['eventlog_viewer'] = 'Error Log';
@@ -41,8 +44,8 @@ $_lang['import_resources'] = 'Importeer documenten';
 $_lang['import_resources_desc'] = 'Importeer een partij statische bestanden in de website.';
 $_lang['import_site'] = 'Importeer HTML';
 $_lang['import_site_desc'] = 'Importeer een partij HTML bestanden in de website.';
-$_lang['jira'] = 'JIRA';
-$_lang['jira_desc'] = 'Open de MODX JIRA bugtracker om bugs te volgen en te rapporteren.';
+$_lang['jira'] = 'Bugs';
+$_lang['jira_desc'] = 'Open de MODX bugtracker om bugs te volgen en te rapporteren.';
 $_lang['lexicon_management'] = 'Lexicon Management';
 $_lang['lexicon_management_desc'] = 'Wijzig elke taal tekst zichtbaar in de MODX manager.';
 $_lang['logout_desc'] = 'Uitloggen van de MODX manager.';
@@ -82,6 +85,8 @@ $_lang['search'] = 'Zoeken';
 $_lang['search_desc'] = 'Zoek naar documenten.';
 $_lang['security'] = 'Beveiliging';
 $_lang['site'] = 'Site';
+$_lang['sources'] = 'Media Sources';
+$_lang['sources_desc'] = 'Manage your media sources here.';
 $_lang['support'] = 'Ondersteuning';
 $_lang['support_desc'] = '';
 $_lang['site_schedule'] = 'Site Rooster';

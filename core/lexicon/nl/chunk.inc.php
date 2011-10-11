@@ -9,6 +9,9 @@
  * @author Bert Oost, <bertoost85@gmail.com>
  */
 $_lang['chunk'] = 'Chunk';
+$_lang['chunk_desc_category'] = 'The Category this Chunk belongs in.';
+$_lang['chunk_desc_description'] = 'A short description of this chunk.';
+$_lang['chunk_desc_name'] = 'The name of this chunk. It will be available using the [[$nameOfChunk]] tags.';
 $_lang['chunk_code'] = 'Chunk code (html)';
 $_lang['chunk_desc'] = 'Omschrijving';
 $_lang['chunk_delete_confirm'] = 'Weet je zeker dat je deze chunk wilt verwijderen?';
