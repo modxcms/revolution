@@ -48,14 +48,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $bases['pathAbsolute'] = $bases['path'];
         }
         
-        if (!empty($bases['path']) && $bases['path'] != '/' && strpos($path,$bases['path']) === false) {
-            $bases['pathFull'] = $bases['path'].ltrim($path,'/');
-        } else {
-            $bases['pathFull'] = $path;
-        }
-
-        if (is_dir($bases['pathAbsoluteFull'])) {
-            $bases['pathAbsoluteFull'] = $this->fileHandler->postfixSlash($bases['pathFull']);
+        $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].$path;
+        if (is_dir($bases['pathAbsoluteWithPath'])) {
+            $bases['pathAbsoluteWithPath'] = $this->fileHandler->postfixSlash($bases['pathAbsoluteWithPath']);
         }
         $bases['pathRelative'] = ltrim($path,'/');
 
@@ -140,7 +135,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'cls' => implode(' ',$cls),
                     'type' => 'dir',
                     'leaf' => false,
-                    'path' => $bases['pathFull'].$fileName,
+                    'path' => $bases['pathAbsolute'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'perms' => $octalPerms,
                     'menu' => array(),
@@ -168,7 +163,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $cls[] = 'icon-lock';
                 }
                 $encFile = rawurlencode($fullPath.$fileName);
-                $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$this->ctx->get('key') : null;
+                $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
 
                 /* get relative url from manager/ */
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
@@ -182,7 +177,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
-                    'path' => $bases['pathFull'].$fileName,
+                    'path' => $bases['pathAbsolute'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'directory' => $bases['path'],
                     'url' => ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName,
@@ -221,7 +216,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if (!empty($fileArray['page'])) {
                     $menu[] = array(
                         'text' => $this->xpdo->lexicon('file_edit'),
-                        'file' => $fileArray['file'],
                         'handler' => 'this.editFile',
                     );
                 }
@@ -435,8 +429,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return array
      */
     public function getObjectContents($objectPath) {
+        $bases = $this->getBases($objectPath);
         /** @var modFile $file */
-        $file = $this->fileHandler->make($objectPath);
+        $file = $this->fileHandler->make($bases['pathAbsoluteWithPath']);
 
         if (!$file->exists()) {
             $this->addError('file',$this->xpdo->lexicon('file_err_nf'));
@@ -449,8 +444,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
 
         $fa = array(
-            'name' => $file->getPath(),
+            'name' => $objectPath,
             'basename' => basename($file->getPath()),
+            'path' => $file->getPath(),
             'size' => $file->getSize(),
             'last_accessed' => $file->getLastAccessed(),
             'last_modified' => $file->getLastModified(),

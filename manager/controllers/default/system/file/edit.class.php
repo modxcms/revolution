@@ -52,14 +52,7 @@ class SystemFileEditManagerController extends modManagerController {
         /* format filename */
         $this->filename = preg_replace('#([\\\\]+|/{2,})#', '/',$scriptProperties['file']);
 
-        /** @var modMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $source = modMediaSource::getDefaultSource($this->modx);
-        if (!$source->getWorkingContext()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        $source->setRequestProperties($scriptProperties);
-        $source->initialize();
+        $source = $this->getSource();
         $this->fileRecord = $source->getObjectContents($this->filename);
 
         if (empty($this->fileRecord)) {
@@ -76,6 +69,28 @@ class SystemFileEditManagerController extends modManagerController {
         $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();
 
         return $placeholders;
+    }
+
+    /**
+     * Get the active source
+     * @return modMediaSource
+     */
+    public function getSource() {
+        /** @var modMediaSource|modFileMediaSource $source */
+        $this->modx->loadClass('sources.modMediaSource');
+        $source = $this->modx->getOption('source',$this->scriptProperties,false);
+        if (!empty($source)) {
+            $source = $this->modx->getObject('source.modMediaSource',$source);
+        }
+        if (empty($source)) {
+            $source = modMediaSource::getDefaultSource($this->modx);
+        }
+        if (!$source->getWorkingContext()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+        $source->setRequestProperties($this->scriptProperties);
+        $source->initialize();
+        return $source;
     }
 
     /**

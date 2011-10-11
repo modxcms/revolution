@@ -20,12 +20,7 @@ MODx.tree.Directory = function(config) {
         ,ddGroup: 'modx-treedrop-dd'
         ,url: MODx.config.connectors_url+'browser/directory.php'
         ,baseParams: {
-            prependPath: config.prependPath || null
-            ,basePath: config.basePath || ''
-            ,basePathRelative: config.basePathRelative || null
-            ,baseUrl: config.baseUrl || ''
-            ,baseUrlRelative: config.baseUrlRelative || null
-            ,hideFiles: config.hideFiles || false
+            hideFiles: config.hideFiles || false
             ,wctx: MODx.ctx || 'web'
             ,currentAction: MODx.request.a || 0
             ,currentFile: MODx.request.file || ''
@@ -176,7 +171,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,editFile: function(itm,e) {
-        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
+        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
     }
 
     ,browser: null

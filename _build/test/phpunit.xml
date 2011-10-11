@@ -28,6 +28,7 @@
             <directory>Tests/Model/Resource</directory>
             <directory>Tests/Model/REST</directory>
             <directory>Tests/Model/Security</directory>
+            <directory>Tests/Model/Sources</directory>
             <directory>Tests/Model/Transport</directory>
             <directory>Tests/Model/Validation</directory>
         </testsuite>
