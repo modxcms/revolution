@@ -42,8 +42,6 @@ $_lang['source.access.intro_msg'] = 'Here you can restrict a Media Source to spe
 $_lang['sources'] = 'Media Sources';
 $_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
 $_lang['user_group'] = 'User Group';
-
-/* file source type */
 $_lang['prop_file.allowedFileTypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the .';
 $_lang['prop_file.basePath_desc'] = 'The file path to point the Source to.';
 $_lang['prop_file.basePathRelative_desc'] = 'If the Base Path setting above is not relative to the MODX install path, set this to Yes.';
@@ -54,8 +52,6 @@ $_lang['prop_file.imageExtensions_desc'] = 'A comma-separated list of file exten
 $_lang['prop_file.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
 $_lang['prop_file.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
-
-/* s3 source type */
 $_lang['bucket'] = 'Bucket';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
 $_lang['prop_s3.key_desc'] = 'The Amazon key for authentication to the bucket.';
