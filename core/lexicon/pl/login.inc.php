@@ -14,7 +14,7 @@ $_lang['login_blocked_time'] = 'W tej chwili Twoje konto jest czasowo zablokowan
 $_lang['login_blocked_too_many_attempts'] = 'Twoje konto zostało zablokowane z powodu zbyt wielu nieudanych prób logowania.';
 $_lang['login_button'] = 'Zaloguj';
 $_lang['login_cannot_locate_account'] = 'Nie znaleziono takiego konta użytkownika. Sprawdź login, wprowadź hasło i spróbuj ponownie.';
-$_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution jest udostępniany na licencji GPLv2 lub nowszej.';
+$_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = '<abbr title="Podaj adres email, który jest przypisany do Twojego konta użytkownika. Na ten adres zostanie wysłana wiadomość z nowym hasłem.">Adres email</abbr>:';
 $_lang['login_err_unknown'] = 'W trakcie logowania wystąpił nieznany błąd.';
 $_lang['login_forget_your_login'] = 'Nie pamiętasz loginu lub hasła?';

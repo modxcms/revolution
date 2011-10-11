@@ -16,7 +16,7 @@ $_lang['login_blocked_time'] = 'Het is niet toegestaan in te loggen op dit momen
 $_lang['login_blocked_too_many_attempts'] = 'Je bent geblokkeerd door te veel mislukte login pogingen.';
 $_lang['login_button'] = 'Inloggen';
 $_lang['login_cannot_locate_account'] = 'Het account kon niet gevonden worden. Controleer je gebruikersnaam en type het wachtwoord om het nog eens te proberen.';
-$_lang['login_copyright'] = '&copy; 2005-2011 bij het <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is gelicentieerd onder de GPLv2 of later.';
+$_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Account e-mail:';
 $_lang['login_err_unknown'] = 'Er is een onbekende fout opgetreden tijdens het inloggen.';
 $_lang['login_forget_your_login'] = 'Je inlogaccount vergeten?';
