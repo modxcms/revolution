@@ -99,7 +99,7 @@ $_lang['modx_class_err_nf'] = 'Не удалось подключить файл
 $_lang['modx_configuration_file'] = 'Конфигурационный файл MODX';
 $_lang['modx_err_instantiate'] = 'Не удалось создать объект класса MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Не удалось инициализировать контекст администратора сайта.';
-$_lang['modx_footer1'] = '&copy; 2005-2011 <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;" style="color: green; text-decoration:underline">MODX</a> Content Mangement Framework (CMF) . Все права защищены. MODX лицензирован GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;" style="color: green; text-decoration:underline">MODX</a> Content Mangement Framework (CMF) . Все права защищены. MODX лицензирован GNU GPL.';
 $_lang['modx_footer2'] = 'MODX — свободное ПО.  Мы приветствуем творчество и предлагаем использовать MODX так, как вы считаете целесообразным. Но если вы внесете изменения и решите распространять ваш измененный MODX, вы должны  распространять исходный код бесплатно!';
 $_lang['modx_install'] = 'Установка MODX';
 $_lang['modx_install_complete'] = 'Установка MODX завершена';
@@ -129,7 +129,7 @@ $_lang['package_execute_err_retrieve'] = 'Не удалось установит
 $_lang['package_err_install'] = 'Не удалось установить пакет [[+package]].';
 $_lang['package_err_nf'] = 'Не удалось получить пакет [[+package]] .';
 $_lang['package_installed'] = 'Успешно установлен пакет [[+package]].';
-$_lang['password_err_invchars'] = 'Ваш пароль не может содержать недопустимые символы, такие как /, \, &apos;, &quot;, (, ) или {}.';
+$_lang['password_err_invchars'] = 'Ваш пароль не может содержать недопустимые символы, такие как /, \\, &apos;, &quot;, (, ) или {}.';
 $_lang['password_err_nomatch'] = 'Не соответствует паролю';
 $_lang['password_err_ns'] = 'Пароль пуст';
 $_lang['password_err_short'] = 'Ваш пароль должен содержать не менее 6 символов.';
@@ -159,7 +159,7 @@ $_lang['transport_class_err_load'] = 'Ошибка загрузки трансп
 $_lang['toggle'] = 'Переключить';
 $_lang['toggle_success'] = 'Показать сообщения об успешном выполнении';
 $_lang['toggle_warnings'] = 'Показать предупреждения';
-$_lang['username_err_invchars'] = 'Ваше имя пользователя не может содержать недопустимые символы, такие как /, \, &apos;, &quot;, или {}.';
+$_lang['username_err_invchars'] = 'Ваше имя пользователя не может содержать недопустимые символы, такие как /, \\, &apos;, &quot;, или {}.';
 $_lang['username_err_ns'] = 'Имя пользователя неверно';
 $_lang['version'] = 'версия';
 $_lang['warning'] = 'Предупреждение';
