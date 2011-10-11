@@ -10,11 +10,15 @@
  * @updated 2010-07-21
  */
 $_lang['access'] = 'การเข้าถึง';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'อันดับ';
 $_lang['template'] = 'แม่แบบ';
 $_lang['template_assignedtv_tab'] = 'กำหนดตัวแปรแม่แบบ';
 $_lang['template_code'] = 'โค้ดแม่แบบ (html)';
 $_lang['template_desc'] = 'คำอธิบาย';
+$_lang['template_desc_category'] = 'The Category this Template belongs in.';
+$_lang['template_desc_description'] = 'A short description of this Template.';
+$_lang['template_desc_name'] = 'The name of this Template.';
 $_lang['template_delete_confirm'] = 'คุณแน่ใจว่าต้องการลบแม่แบบนี้?';
 $_lang['template_duplicate_confirm'] = 'คุณแน่ใจว่าต้องการทำสำเนาแม่แบบนี้?';
 $_lang['template_edit_tab'] = 'แก้ไขแม่แบบ';

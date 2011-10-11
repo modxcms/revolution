@@ -17,13 +17,12 @@ $_lang['login_blocked_time'] = 'คุณไม่ได้รับอนุญ
 $_lang['login_blocked_too_many_attempts'] = 'คุณถูกบล็อกเนื่องมาจากคุณล้มเหลวในการพยายามเข้าสู่ระบบหลายครั้งเกินไป';
 $_lang['login_button'] = 'เข้าสู่ระบบ';
 $_lang['login_cannot_locate_account'] = 'ไม่มีบัญชีผู้ใช้นี้ กรุณาตรวจสอบชื่อผู้ใช้และพิมพ์รหัสผ่านใหม่อีกครั้ง';
-$_lang['login_copyright'] = '&copy; 2005-2010 จาก <a href="http://modxcms.com/" target="_blank">ทีมสร้าง MODX</a>. <strong>MODX</strong>&trade; ได้อนุญาตให้ใช้งานซอร์ฟแวร์ภายใต้ GPLv2 หรือถัดมา';
+$_lang['login_copyright'] = '&copy; 2005-2011 จาก <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution ได้อนุญาตให้ใช้งานซอร์ฟแวร์ภายใต้ GPLv2 หรือถัดมา';
 $_lang['login_email_label'] = 'บัญชีอีมล์:';
 $_lang['login_err_unknown'] = 'เกิดข้อผิดพลาดขณะกำลังลงชื่อเข้าสู่ระบบ';
 $_lang['login_forget_your_login'] = 'คุณลืมข้อมูลการลงชื่อเข้าสู่ระบบใช่หรือไม่?';
 $_lang['login_hostname_error'] = 'โฮสต์เนมของคุณไม่สามารถชี้ไปที่ IP address ของคุณ';
 $_lang['login_message'] = 'กรุณากรอกข้อมูลการเข้าสู่ระบบของคุณเพื่อใช้งานในส่วนของเมเนเจอร์ โดยที่ชื่อผู้ใช้และรหัสผ่านต้องตามการบังคับใช้ตัวเล็ก/ตัวใหญ่ ดังนั้นจึงต้องกรอกอย่างระมัดระวัง!';
-$_lang['login_modx_support'] = '<p>รับความช่วยเหลือจาก:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>คอมมิวนิตีของ MODX</strong></a></p>';
 $_lang['login_password'] = 'รหัสผ่าน: ';
 $_lang['login_password_reset_act_sent'] = 'ส่งอีเมล์ตั้งรหัสผ่านใหม่แล้ว กรุณาตรวจสอบกล่องจดหมายอีเมล์ของคุณ';
 $_lang['login_remember'] = 'จำฉันไว้';

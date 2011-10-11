@@ -21,10 +21,12 @@ $_lang['database_table_droptablestatements'] = 'สร้างรายงา�
 $_lang['database_table_effectivesize'] = 'ขนาดประสิทธิภาพ';
 $_lang['database_table_indexsize'] = 'ขนาดดัชนี';
 $_lang['database_table_overhead'] = 'โอเวอร์เฮด';
+$_lang['database_table_reserved'] = 'Reserved';
 $_lang['database_table_records'] = 'ระเบียน';
 $_lang['database_table_tablename'] = 'ชื่อตาราง';
 $_lang['database_table_totalsize'] = 'ขนาดทั้งหมด';
 $_lang['database_table_totals'] = 'ทั้งหมด:';
+$_lang['database_table_unused'] = 'Unused';
 $_lang['database_type'] = 'ประเภทฐานข้อมูล';
 $_lang['database_version'] = 'เวอร์ชันฐานข้อมูล';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> เวอร์ชัน';

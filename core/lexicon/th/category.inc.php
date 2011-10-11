@@ -12,6 +12,7 @@
 $_lang['categories'] = 'หมวดหมู่';
 $_lang['category_confirm_delete'] = 'คุณแน่ใจที่จะลบหมวดหมู่นี้หรือไม่? เอเลเมนต์ทั้งหมดในหมวดหมู่นี้จะถูกจัดเข้าใน"ไม่ระบุหมวดหมู่"';
 $_lang['category_create'] = 'สร้างหมวดหมู่';
+$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
 $_lang['category_err_create'] = 'เกิดข้อผิดพลาดขณะที่พยายามสร้างหมวดหมู่.';
 $_lang['category_err_not_found'] = 'ไม่พบหมวดหมู่!';
 $_lang['category_err_nf'] = 'ไม่พบหมวดหมู่';

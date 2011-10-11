@@ -10,7 +10,6 @@
  * @co-author Miss.Nattayanee Darath COE#17,KKU
  * @updated 2010-07-21
  */
-
 $_lang['file_confirm_remove'] = 'คุณแน่ใจที่จะลบไฟล์นี้หรือไม่? การกระทำนี้อาจส่งผลต่อเว็บไซต์ของคุณ';
 $_lang['file_deleted'] = 'สำเร็จ!';
 $_lang['file_delete_file'] = 'ลบไฟล์';
@@ -38,13 +37,12 @@ $_lang['file_err_unzip_missing_lib'] = 'ไม่พบไลบรารี zip
 $_lang['file_err_upload'] = 'มีข้อผิดพลาดเกิดขึ้นในระหว่างการอัพโหลดไฟล์นี้';
 $_lang['file_exists_hk'] = 'ไฟล์ <b>{0}</b> มีอยู่แล้ว';
 $_lang['file_extensions'] = 'นามสกุลไฟล์';
-$_lang['file_extensions_desc'] = 'นี่คือนามสกุลของไฟล์สำหรับประเภทเนื้อหา';
 $_lang['file_folder_enter_new'] = 'ใส่ชื่อโฟลเดอร์ใหม่';
 $_lang['file_folder_chmod'] = 'Chmod ไดเรกทอรี';
 $_lang['file_folder_create'] = 'สร้างไดเรกทอรี';
 $_lang['file_folder_create_here'] = 'สร้างไดเรกทอรีที่นี่';
-$_lang['file_folder_created'] =  'สร้างโฟลเดอร์สำเร็จ!';
-$_lang['file_folder_deleted'] =  'ลบโฟลเดอร์สำเร็จ!';
+$_lang['file_folder_created'] = 'สร้างโฟลเดอร์สำเร็จ!';
+$_lang['file_folder_deleted'] = 'ลบโฟลเดอร์สำเร็จ!';
 $_lang['file_folder_err_ae'] = 'มีชื่อไดเรกทอรีนี้อยู่แล้ว';
 $_lang['file_folder_err_chmod'] = 'ไม่สามารถเปลี่ยนสิทธิ์ได้ คุณจำเป็นที่จะต้องเปลี่ยนแปลงสิทธิ์เองภายนอก  MODX';
 $_lang['file_folder_err_create'] = 'มีข้อผิดพลาดเกิดขึ้นในขณะที่กำลังพยายามสร้างไดเรกทอรี';

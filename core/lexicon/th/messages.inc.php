@@ -30,7 +30,6 @@ $_lang['sent_on'] = 'ส่งเมื่อ';
 $_lang['subject'] = 'หัวข้อ';
 $_lang['user'] = 'ผู้ใช้';
 $_lang['usergroup'] = 'กลุ่มผู้ใช้';
-
 $_lang['message_err_not_found'] = 'ไม่พบข้อความ';
 $_lang['message_err_not_specified_subject'] = 'ไม่ได้ระบหัวข้อ!';
 $_lang['message_err_remove'] = 'เกิดข้อผิดพลาดขณะที่พยายามลบข้อความ';

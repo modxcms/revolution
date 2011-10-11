@@ -25,3 +25,4 @@ $_lang['content_type_remove'] = 'ลบประเภทเนื้อหา';
 $_lang['content_type_remove_confirm'] = 'คุณแน่ใจว่าต้องการลบประเภทเนื้อหานี้?';
 $_lang['content_types'] = 'ประเภทเนื้อหา';
 $_lang['file_extensions'] = 'นามสกุลไฟล์';
+$_lang['file_extensions_desc'] = 'This is the specified file extension for this Content Type.';
