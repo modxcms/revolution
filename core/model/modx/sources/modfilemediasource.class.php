@@ -3,6 +3,7 @@
  * @package modx
  * @subpackage sources
  */
+require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
 /**
  * Implements a file-system-based media source, allowing manipulation and management of files on the server's
  * location. Supports basePath and baseUrl parameters, similar to Revolution 2.1 and prior's filemanager_* settings.

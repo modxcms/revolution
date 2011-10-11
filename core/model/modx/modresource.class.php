@@ -223,7 +223,7 @@ class modResource extends modAccessibleSimpleObject {
      */
     public static function updateContextOfChildren(modX &$modx, $parent, array $options = array()) {
         $count = 0;
-        foreach ($parent->getIterator('Children') as $child) {
+        foreach ($modx->getIterator('modResource', array('parent' => $parent->get('id'))) as $child) {
             $child->set('context_key', $parent->get('context_key'));
             if ($child->save()) {
                 $count++;
