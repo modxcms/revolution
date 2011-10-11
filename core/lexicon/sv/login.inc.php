@@ -14,7 +14,7 @@ $_lang['login_blocked_time'] = 'Du får inte logga in just nu. Försök senare.'
 $_lang['login_blocked_too_many_attempts'] = 'Du har blivit blockerad på grund av för många felaktiga inloggningsförsök.';
 $_lang['login_button'] = 'Logga in';
 $_lang['login_cannot_locate_account'] = 'Det kontot kan inte lokaliseras. Kontrollera användarnamnet och skriv om lösenordet för att försöka igen.';
-$_lang['login_copyright'] = '&copy; 2005-2011 av <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution är licensierad under GPL.';
+$_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Kontots e-postadress:';
 $_lang['login_err_unknown'] = 'Ett okänt fel inträffade när du försökte logga in.';
 $_lang['login_forget_your_login'] = 'Glömt dina inloggningsuppgifter?';

@@ -4,7 +4,7 @@
  *
  * @package modx
  * @subpackage lexicon
- * @language en
+ * @language ru
  */
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Add Dashboard';
