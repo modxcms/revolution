@@ -19,6 +19,5 @@ $_lang['mysql_version_fail'] = 'Váš MySQL server běží na verzi [[+version]]
 $_lang['mysql_version_server_nf'] = 'MODX se nepodařilo zjistit verzi vašeho MySQL serveru pomocí mysql_get_server_info(). Před tím než budete pokračovat se prosím ujistěte, že verze vašeho MySQL serveru je 4.1.20 nebo novější.';
 $_lang['mysql_version_server_start'] = 'Kontroluji verzi MySQL serveru:';
 $_lang['mysql_version_success'] = 'OK! Běží na: [[+version]]';
-
 $_lang['sqlsrv_version_success'] = 'OK!';
 $_lang['sqlsrv_version_client_success'] = 'OK!';

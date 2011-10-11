@@ -16,7 +16,7 @@ $_lang['test_db_check_conn'] = 'Zkontrolujte údaje pro připojení a zkuste to 
 $_lang['test_db_failed'] = 'Nepovedlo se spojit s databází!';
 $_lang['test_db_setup_create'] = 'Instalátor se pokusí vytvořit databázi.';
 $_lang['test_dependencies'] = 'Kontroluji PHP pro přítomnost extenze zlib: ';
-$_lang['test_dependencies_fail_zlib'] = 'Vaše PHP instalace neobsahuje instalovanou extenzi "zlib". Tato extenze je nutná pro běh MODxu. Před pokračováním musí být nainstalována.';
+$_lang['test_dependencies_fail_zlib'] = 'Vaše PHP instalace neobsahuje instalovanou extenzi "zlib". Tato extenze je nutná pro běh MODXu. Před pokračováním musí být nainstalována.';
 $_lang['test_directory_exists'] = 'Kontroluji zda existuje adresář <span class="mono">[[+dir]]</span>: ';
 $_lang['test_directory_writable'] = 'Kontroluji zda lze do adresáře <span class="mono">[[+dir]]</span> zapisovat: ';
 $_lang['test_memory_limit'] = 'Kontroluji zda je "memory_limit" nastaven alespoň na 24M (24 MB): ';

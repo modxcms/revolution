@@ -19,6 +19,9 @@ $_lang['base_template'] = 'BaseTemplate';
 $_lang['cache_manager_err'] = 'MODX Cache Manager se nepovedlo načíst.';
 $_lang['choose_language'] = 'Zvolte jazyk';
 $_lang['cleanup_errors_title'] = 'Důležitá poznámka:';
+$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
+$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
 $_lang['close'] = 'zavřít';
 $_lang['config_file_err_w'] = 'Chyba při zápisu konfiguračního souboru.';
 $_lang['config_file_perms_notset'] = 'Atributy konfiguračního souboru nebyly aktualizovány. Měli by jste změnit atributy konfiguračního souboru, zabráníte tím tak neopravněné manipulaci se souborem.';
@@ -33,6 +36,7 @@ $_lang['connection_collation'] = 'Porovnání:';
 $_lang['connection_connection_and_login_information'] = 'Údaje pro připojení a přihlášení k databázi';
 $_lang['connection_connection_note'] = 'Zadejte název databáze vytvořené pro MODX. Pokud tato databáze ještě neexistuje, instalátor se jí pokusí vytvořit. V závislosti na nastavení databáze nebo uživatelských právech se vytvoření nemusí povést.';
 $_lang['connection_database_host'] = 'Databázový server:';
+$_lang['connection_database_info'] = 'Now please enter the login data for your database.';
 $_lang['connection_database_login'] = 'Uživatelské jméno pro databázi:';
 $_lang['connection_database_name'] = 'Název databáze:';
 $_lang['connection_database_pass'] = 'Heslo pro databázi:';
@@ -94,6 +98,7 @@ $_lang['install_packages_options'] = 'Možnosti instalace balíčků';
 $_lang['install_success'] = 'Instalace jádra proběhla úspěšně. Pro dokončení klikněte na "Další".';
 $_lang['install_summary'] = 'Shrnutí instalace';
 $_lang['install_update'] = 'Instalace/aktualizace';
+$_lang['installation_finished'] = 'Installation finished in [[+time]]';
 $_lang['license'] = '<p class="title">Před pokračováním v instalaci musíte souhlasit se zněním licence.</p>
 	<p>Usage of this software is subject to the GPL license. To help you understand
 	what the GPL licence is and how it affects your ability to use the software, we
@@ -147,7 +152,7 @@ $_lang['modx_class_err_nf'] = 'Nepodařilo se načíst soubor třídy MODX.';
 $_lang['modx_configuration_file'] = 'MODX konfigurační soubor';
 $_lang['modx_err_instantiate'] = 'Nepodařilo se inicializovat třídu MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Nepodařilo se inicializovat kontext pro správce obsahu.';
-$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) projekt. Všechna práva vyhrazena. MODX je licencován pod GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) projekt. Všechna práva vyhrazena. MODX je licencován pod GNU GPL.';
 $_lang['modx_footer2'] = 'MODX je free software. Doporučujeme Vám být kreativní a používat MODX jak jen uznáte za vhodné. Pouze se ujistěte, že pokud uděláte nějaké změny a budete chtít upravený MODX distribuovat dál, musí být zdrojové kódy volně přístupné!';
 $_lang['modx_install'] = 'Instalace MODX';
 $_lang['modx_install_complete'] = 'Instalace MODX dokončena';
@@ -220,14 +225,12 @@ $_lang['workspace_err_path'] = 'Chyba nastavení cesty k aktivnímu workspace.';
 $_lang['workspace_path_updated'] = 'Cesta k aktivnímu workspace byla aktualizována.';
 $_lang['versioner_err_nf'] = 'Nepodařilo se najít Versioner v umístění: [[+path]] <br />Ujistěte se prosím, že jste nahráli všechny potřebné soubory.';
 $_lang['xpdo_err_ins'] = 'Nepodařilo se inicializovat xPDO.';
-$_lang['xpdo_err_nf'] = 'MODxu se nepodařilo nalézt třídu xPDO v umístění [[+path]]. Ujistěte se, že jste ji nahráli správně.';
-
+$_lang['xpdo_err_nf'] = 'MODXu se nepodařilo nalézt třídu xPDO v umístění [[+path]]. Ujistěte se, že jste ji nahráli správně.';
 $_lang['preload_err_cache'] = 'Ujistěte se, že složka "[[+path]]cache" existuje a PHP do ní může zapisovat.';
 $_lang['preload_err_core_path'] = 'Ujistěte se, že jste definovali platnou cestu do MODX_CORE_PATH v konfiguračním souboru "setup/includes/config.core.php" ; musí být definována cesta k funkčnímu MODX jádru.';
 $_lang['preload_err_mysql'] = 'MODX vyžaduje MySQL extenzi pokud je používáno PHP bez nativní podpory PDO a ta se zdá nebyla načtena.';
 $_lang['preload_err_pdo'] = 'MODX vyžaduje PDO extenzi pokud má být používáno nativní PDO a ta se zdá nebyla načtena.';
 $_lang['preload_err_pdo_mysql'] = 'MODX vyžaduje ovladač pdo_mysql pokud má být používáno nativní PDO a ten se zdá být nenačten.';
-
 $_lang['test_config_file'] = 'Kontroluji zda <span class="mono">[[+file]]</span> existuje a lze do něj zapisovat: ';
 $_lang['test_config_file_nw'] = 'V instalacích na Linux/Unix vytvořte prázdný soubor s názvem <span class="mono">[[+file]].inc.php</span> v umístění <span class="mono">./core/config/</span> s atributy nastavenými pro zápis PHP.';
 $_lang['test_db_check'] = 'Vytvoření připojení k databázi: ';
@@ -235,7 +238,7 @@ $_lang['test_db_check_conn'] = 'Zkontrolujte údaje pro připojení a zkuste to 
 $_lang['test_db_failed'] = 'Nepovedlo se spojit s databází!';
 $_lang['test_db_setup_create'] = 'Instalátor se pokusí vytvořit databázi.';
 $_lang['test_dependencies'] = 'Kontroluji PHP na přítomnost extenze zlib: ';
-$_lang['test_dependencies_fail_zlib'] = 'Vaše PHP instalace neobsahuje instalovanou extenzi "zlib". Tato extenze je nutná pro běh MODxu. Před pokračováním musí být nainstalována.';
+$_lang['test_dependencies_fail_zlib'] = 'Vaše PHP instalace neobsahuje instalovanou extenzi "zlib". Tato extenze je nutná pro běh MODXu. Před pokračováním musí být nainstalována.';
 $_lang['test_directory_exists'] = 'Kontroluji zda existuje adresář <span class="mono">[[+dir]]</span>: ';
 $_lang['test_directory_writable'] = 'Kontroluji zda lze do adresáře <span class="mono">[[+dir]]</span> zapisovat: ';
 $_lang['test_memory_limit'] = 'Kontroluji zda je "memory_limit" nastaven alespoň na 24M (24 MB): ';
