@@ -152,7 +152,7 @@ $_lang['modx_class_err_nf'] = 'Konnte die MODX-Klassendatei nicht inkludieren.';
 $_lang['modx_configuration_file'] = 'MODX-Konfigurationsdatei';
 $_lang['modx_err_instantiate'] = 'Konnte die MODX-Klasse nicht instanziieren.';
 $_lang['modx_err_instantiate_mgr'] = 'Konnte den MODX-Manager-Kontext nicht initialisieren.';
-$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Alle Rechte vorbehalten. MODX ist lizenziert unter der GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Alle Rechte vorbehalten. MODX ist lizenziert unter der GNU GPL.';
 $_lang['modx_footer2'] = 'MODX ist freie Software. Wir ermutigen Sie, kreativ zu sein und MODX auf jede Art zu nutzen, die Sie möchten. Stellen Sie nur sicher, dass Sie, wenn Sie Änderungen vornehmen und sich entscheiden, Ihr modifiziertes MODX weiterzugeben, den Quellcode den Empfängern frei zugänglich machen!';
 $_lang['modx_install'] = 'MODX-Installation';
 $_lang['modx_install_complete'] = 'MODX-Installation abgeschlossen';
@@ -226,13 +226,11 @@ $_lang['workspace_path_updated'] = 'Pfad des aktiven Workspace aktualisiert.';
 $_lang['versioner_err_nf'] = 'Konnte die Installations-Versionierung in [[+path]] nicht finden.<br />Bitte stellen Sie sicher, dass sie alle benötigten Dateien hochgeladen haben.';
 $_lang['xpdo_err_ins'] = 'Konnte xPDO nicht instanziieren.';
 $_lang['xpdo_err_nf'] = 'MODX konnte die xPDO-Klasse in [[+path]] nicht finden. Bitte stellen Sie sicher, dass sie korrekt hochgeladen wurde.';
-
 $_lang['preload_err_cache'] = 'Stellen Sie sicher, dass das Verzeichnis [[+path]]cache existiert und für PHP beschreibbar ist.';
 $_lang['preload_err_core_path'] = 'Stellen Sie sicher, dass Sie einen gültigen MODX_CORE_PATH in der Datei setup/includes/config.core.php angegeben haben; diese Konstante muss auf einen funktionierenden MODX-Core zeigen.';
 $_lang['preload_err_mysql'] = 'MODX benötigt die mysql-Extension, wenn PHP ohne natives PDO verwendet wird, aber diese scheint nicht geladen zu sein.';
 $_lang['preload_err_pdo'] = 'MODX benötigt die PDO-Extension, wenn natives PDO vewendet wird, aber diese scheint nicht geladen zu sein.';
 $_lang['preload_err_pdo_mysql'] = 'MODX benötigt den pdo_mysql-Treiber, wenn natives PDO vewendet wird, aber dieser scheint nicht geladen zu sein.';
-
 $_lang['test_config_file'] = 'Überprüfe, ob <span class="mono">[[+file]]</span> existiert und beschreibbar ist: ';
 $_lang['test_config_file_nw'] = 'Für neue Linux-/Unix-Installationen erstellen Sie bitte eine leere Datei mit dem Dateinamen <span class="mono">[[+file]].inc.php</span> im Verzeichnis <span class="mono">core/config/</span> und setzen sie die Dateirechte so, dass die Datei für PHP beschreibbar ist.';
 $_lang['test_db_check'] = 'Stelle Verbindung zur Datenbank her: ';

@@ -18,6 +18,5 @@ $_lang['mysql_version_fail'] = 'Sie verwenden MySQL [[+version]], MODX Revolutio
 $_lang['mysql_version_server_nf'] = 'MODX konnte Ihre MySQL-Server-Version nicht via mysql_get_server_info() ermitteln. Bitte vergewissern Sie sich, dass Ihre MySQL-Server-Version mindestens 4.1.20 ist, bevor Sie fortfahren.';
 $_lang['mysql_version_server_start'] = 'Überprüfe MySQL-Server-Version:';
 $_lang['mysql_version_success'] = 'OK! Gefundene Version: [[+version]]';
-
 $_lang['sqlsrv_version_success'] = 'OK!';
 $_lang['sqlsrv_version_client_success'] = 'OK!';

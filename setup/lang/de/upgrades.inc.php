@@ -42,3 +42,4 @@ $_lang['remove_fulltext_index'] = 'Volltext-Index `[[+index]]` entfernt.';
 $_lang['systemsetting_xtype_fix'] = 'xtypes für modSystemSettings erfolgreich angepasst.';
 $_lang['transportpackage_manifest_text'] = 'Spalte `manifest` von MEDIUMTEXT in TEXT geändert in `[[+class]]`.';
 $_lang['update_closure_table'] = 'Daten der Closure-Tabelle für Klasse `[[+class]]` aktualisiert.';
+$_lang['update_table_column_data'] = 'Updated data in column [[+column]] of table [[+table]] ( [[+class]] )';
