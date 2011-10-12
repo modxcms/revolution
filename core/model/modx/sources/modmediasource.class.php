@@ -326,12 +326,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      * @return string
      */
     public function getOpenTo($value,array $parameters = array()) {
-        $properties = $this->getPropertyList();
-        $openTo = dirname($value).'/';
-        if (!empty($properties['baseUrl'])) {
-            $openTo = $properties['baseUrl'].$openTo;
-        }
-        return $openTo;
+        return dirname($value).'/';
     }
 
     /**
