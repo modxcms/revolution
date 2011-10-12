@@ -16,19 +16,18 @@ MODx.tree.Resource = function(config) {
         ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,remoteToolbar: true
-        ,sortBy: MODx.config.tree_default_sort || 'menuindex'
+        ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
         ,baseParams: {
             action: 'getNodes'
-            ,sortBy: MODx.config.tree_default_sort || 'menuindex'
+            ,sortBy: this.getDefaultSortBy(config)
             ,currentResource: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this,config);
-    this.getLoader().baseParams.sortBy = Ext.state.Manager.get(this.treestate_id+'-sort') || (MODx.config.tree_default_sort || 'menuindex');
     this.on('render',function() {
         var el = Ext.get('modx-resource-tree');
         el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
@@ -322,22 +321,26 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     [_('menu_order'),'menuindex']
                     ,[_('page_title'),'pagetitle']
                     ,[_('publish_date'),'pub_date']
+                    ,[_('unpublish_date'),'unpub_date']
                     ,[_('createdon'),'createdon']
                     ,[_('editedon'),'editedon']
                     ,[_('publishedon'),'publishedon']
+                    ,[_('alias'),'alias']
                 ]
             })
             ,displayField: 'name'
             ,valueField: 'value'
-            ,editable: false
+            ,forceSelection: false
+            ,editable: true
             ,mode: 'local'
             ,id: 'modx-resource-tree-sortby'
             ,triggerAction: 'all'
             ,selectOnFocus: false
             ,width: 100
-            ,value: this.config.sortBy || (Ext.state.Manager.get(this.treestate_id+'-sort') || MODx.config.tree_default_sort)
+            ,value: this.getDefaultSortBy(this.config)
             ,listeners: {
                 'select': {fn:this.filterSort,scope:this}
+                ,'change': {fn:this.filterSort,scope:this}
             }
         });
         tb.add(_('sort_by')+':');
@@ -352,6 +355,23 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.filterBar = tb;
         this._filterVisible = true;
         return true;
+    }
+    ,getDefaultSortBy: function(config) {
+        var v = 'menuindex';
+        if (!Ext.isEmpty(config) && !Ext.isEmpty(config.sortBy)) {
+            v = config.sortBy;
+        } else {
+            var d = Ext.state.Manager.get(this.treestate_id+'-sort-default');
+            if (d != MODx.config.tree_default_sort) {
+                v = MODx.config.tree_default_sort;
+                Ext.state.Manager.set(this.treestate_id+'-sort-default',v);
+                Ext.state.Manager.set(this.treestate_id+'-sort',v);
+            } else {
+                v = Ext.state.Manager.get(this.treestate_id+'-sort') || MODx.config.tree_default_sort;
+            }
+        }
+        console.log(v);
+        return v;
     }
 	
     ,filterSort: function(cb,r,i) {

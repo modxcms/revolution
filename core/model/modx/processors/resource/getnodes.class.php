@@ -24,7 +24,8 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     public function initialize() {
         $this->setDefaultProperties(array(
-            'sortBy' => 'menuindex',
+            'sortBy' => $this->modx->getOption('tree_default_sort',null,'menuindex'),
+            'sortDir' => 'ASC',
             'stringLiterals' => false,
             'noMenu' => false,
             'debug' => false,
@@ -175,7 +176,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             ));
         }
         $c->groupby($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns), '');
-        $c->sortby('modResource.'.$this->getProperty('sortBy','menuindex'),'ASC');
+        $c->sortby('modResource.'.$this->getProperty('sortBy'),$this->getProperty('sortDir'));
         return $c;
     }
 

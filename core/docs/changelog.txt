@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3535] Fix issue with tree_default_sort not being respected on the resource tree
 - [#5892] Add for default_media_source setting for specifying the default media source for a site
 - [#5896] Make console window always closable
 - [#5757] Allow text in grids to be selectable
