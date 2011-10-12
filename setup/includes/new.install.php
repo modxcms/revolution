@@ -161,7 +161,7 @@ if ($template->save()) {
     $resource = $modx->newObject('modResource');
     $resource->fromArray(array(
         'pagetitle' => $install->lexicon('home'),
-        'alias' => '',
+        'alias' => 'index',
         'contentType' => 'text/html',
         'type' => 'document',
         'published' => true,
