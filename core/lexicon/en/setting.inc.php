@@ -212,6 +212,9 @@ $_lang['setting_default_content_type_desc'] = 'Select the default Content Type y
 $_lang['setting_default_duplicate_publish_option'] = 'Default Duplicate Resource Publishing Option';
 $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected option when duplicating a Resource. Can be either "unpublish" to unpublish all duplicates, "publish" to publish all duplicates, or "preserve" to preserve the publish state based on the duplicated Resource.';
 
+$_lang['setting_default_media_source'] = 'Default Media Source';
+$_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
+
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 

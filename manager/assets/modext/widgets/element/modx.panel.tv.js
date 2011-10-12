@@ -198,7 +198,7 @@ MODx.panel.TV = function(config) {
                         ,id: 'modx-tv-static-source'
                         ,anchor: '100%'
                         ,maxLength: 255
-                        ,value: config.record.source || 0
+                        ,value: config.record.source || MODx.config.default_media_source
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {

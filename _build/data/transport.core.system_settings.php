@@ -393,6 +393,15 @@ $settings['default_duplicate_publish_option']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['default_media_source']= $xpdo->newObject('modSystemSetting');
+$settings['default_media_source']->fromArray(array (
+  'key' => 'default_media_source',
+  'value' => 1,
+  'xtype' => 'modx-combo-source',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['default_per_page']= $xpdo->newObject('modSystemSetting');
 $settings['default_per_page']->fromArray(array (
   'key' => 'default_per_page',

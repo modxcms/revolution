@@ -86,7 +86,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var cb = MODx.load({
             xtype: 'modx-combo-source'
             ,ctCls: 'modx-leftbar-second-tb'
-            ,value: 1
+            ,value: MODx.config.default_media_source
             ,width: Ext.getCmp(this.config.id).getWidth() - 12
             ,listeners: {
                 'select':{fn:this.changeSource,scope:this}

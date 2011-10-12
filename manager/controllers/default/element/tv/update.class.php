@@ -139,7 +139,7 @@ class ElementTVUpdateManagerController extends modManagerController {
             $source = $context->get('source');
             $list[] = array(
                 $context->get('key'),
-                !empty($source) ? $source : 1,
+                !empty($source) ? $source : $this->modx->getOption('default_media_source',null,1),
                 $context->get('name'),
             );
         }
