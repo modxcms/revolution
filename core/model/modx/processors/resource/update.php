@@ -169,10 +169,15 @@ if (isset($scriptProperties['uri_override'])) {
 $workingContext = $modx->getContext($scriptProperties['context_key']);
 
 /* friendly url alias checks */
-if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperties['reloadOnly']) || !empty($scriptProperties['pagetitle']))) {
+$siteStart = ($resource->get('id') == $workingContext->getOption('site_start') || $resource->get('id') == $modx->getOption('site_start'));
+if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperties['reloadOnly']) || (!empty($scriptProperties['pagetitle']) || $siteStart))) {
     /* auto assign alias */
-    if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
-        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+    if (empty($scriptProperties['alias']) && ($siteStart || $workingContext->getOption('automatic_alias', false))) {
+        if (empty($scriptProperties['pagetitle'])) {
+            $scriptProperties['alias'] = 'index';
+        } else {
+            $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+        }
     }
     if (empty($scriptProperties['alias'])) {
         $modx->error->addField('alias', $modx->lexicon('field_required'));
@@ -252,7 +257,6 @@ if (!$modx->hasPermission('publish_document')) {
 
 /* check to prevent unpublishing of site_start */
 $oldparent_id = $resource->get('parent');
-$siteStart = ($resource->get('id') == $workingContext->getOption('site_start') || $resource->get('id') == $modx->getOption('site_start'));
 if ($siteStart && (isset($scriptProperties['published']) && empty($scriptProperties['published']))) {
     return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart'));
 }
