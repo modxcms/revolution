@@ -147,10 +147,16 @@ hr {
 	color: #666666;
 	text-shadow:0 1px 0 #FAFAFA;
 }
+#modx-leftbar .x-tab-panel-header-plain {
+    padding: 0 !important;
+}
 
 #modx-leftbar-content {
     float: left;
     margin: 7px 0 7px 7px;
+}
+#modx-leftbar ul.x-tab-strip-top li:first-child {
+    margin-left: 0 !important;
 }
 .modx-leftbar-panel {
     margin-top: 7px;
@@ -196,6 +202,17 @@ hr {
     -webkit-border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+}
+#modx-leftbar .x-tab-panel-header {
+    background-color: transparent !important;
+}
+#modx-leftbar .x-tab-strip-spacer {
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .modx-leftbar .x-tree-root-ct {
@@ -344,10 +361,10 @@ textarea.x-form-field {
 }
 /* collapse for resource panel */
 #modx-resource-tabs .x-tool-toggle {
-    margin-top: 14px;
+    margin-top: 16px;
     position: absolute;
     top: 47px;
-    right: 0;
+    right: 8px;
     z-index: 9999;
 }
 
@@ -1509,6 +1526,7 @@ span.required {
 	width: 150px !important;
 	padding: 13px 0 !important;
 	float: left;
+    background-color: transparent !important;
 }
 .vertical-tabs-header ul{
 	border-top: 1px solid #E0E0E0;
@@ -1560,6 +1578,14 @@ span.required {
     font-size: 14px;
     color: #777;
     padding: 0 0 10px;
+}
+
+#modx-resource-tvs-div {
+    border-top: 0;
+    border-bottom: 0;
+}
+#modx-tv-tabs .x-tab-panel-header {
+    border-top: 1px solid #999;
 }
 
 /* for selectability in ext grids */
