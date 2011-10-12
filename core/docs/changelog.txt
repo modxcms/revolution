@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3287] Fix issue with dob User field in editing panel in mgr
 - [#5060], [#5043] Fix issue with openTo and TVs for MODx.Browser
 - [#3396] Allow MODX_API_MODE in mgr context
 - [#4230] Add ODF and OOXML to default uploadable file types setting

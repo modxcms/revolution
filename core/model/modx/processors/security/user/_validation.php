@@ -1,5 +1,9 @@
 <?php
 /**
+ * @var modX $modx
+ * @var modUser $user
+ * @var array $scriptProperties
+ * 
  * @package modx
  * @subpackage processors.security.user
  */
@@ -48,6 +52,7 @@ if (empty($scriptProperties['email'])) $modx->error->addField('email',$modx->lex
 
 /* check if the email address already exists */
 if (!$modx->getOption('allow_multiple_users_per_email',null,true)) {
+    /** @var modUserProfile $emailExists */
     $emailExists = $modx->getObject('modUserProfile',array('email' => $scriptProperties['email']));
     if ($emailExists) {
     	if ($emailExists->get('internalKey') != $scriptProperties['id']) {
@@ -80,11 +85,11 @@ if (!empty($scriptProperties['mobilephone'])) {
 
 /* birthdate */
 if (!empty($scriptProperties['dob'])) {
-    $scriptProperties['dob'] = str_replace('-','/',$scriptProperties['dob']);
-    if (!$scriptProperties['dob'] = strtotime($scriptProperties['dob']))
-            $modx->error->addField('dob',$modx->lexicon('user_err_not_specified_dob'));
+    $scriptProperties['dob'] = strtotime($scriptProperties['dob']);
+    if (empty($scriptProperties['dob'])) {
+        $modx->error->addField('dob',$modx->lexicon('user_err_not_specified_dob'));
+    }
 }
-
 
 /* blocked until */
 if (!empty($scriptProperties['blockeduntil'])) {
