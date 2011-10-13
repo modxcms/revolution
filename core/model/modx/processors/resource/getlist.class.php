@@ -32,10 +32,13 @@ class modResourceGetListProcessor extends modProcessor {
         if (empty($data)) return $this->failure();
         
         $list = array();
+        $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
         /** @var modResource $resource */
         foreach ($data['results'] as $resource) {
             if ($resource->checkPolicy('list')) {
-                $list[] = $resource->toArray();
+                $resourceArray = $resource->toArray();
+                $resourceArray['pagetitle'] = htmlentities($resourceArray['pagetitle'],ENT_COMPAT,$charset);
+                $list[] = $resourceArray;
             }
         }
         return $this->outputArray($list,$data['total']);

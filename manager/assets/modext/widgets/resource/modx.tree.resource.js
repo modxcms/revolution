@@ -370,7 +370,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 v = Ext.state.Manager.get(this.treestate_id+'-sort') || MODx.config.tree_default_sort;
             }
         }
-        console.log(v);
         return v;
     }
 	
