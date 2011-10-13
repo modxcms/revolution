@@ -9,7 +9,7 @@
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
-$_lang['about_msg'] = 'MODX は <a href="http://modxcms.com/what-is-modx.html" target="_blank">コンテンツ管理システムであり、PHPアプリケーションフレームワークでもあります。</a><a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> の下に配布されています。and (at your option) any later version.';
+$_lang['about_msg'] = 'MODX は <a href="http://modx.com/what-is-modx.html" target="_blank">コンテンツ管理システムであり、PHPアプリケーションフレームワークでもあります。</a><a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> の下に配布されています。and (at your option) any later version.';
 $_lang['about_title'] = 'MODXについて';
 $_lang['credits'] = 'クレジット';
 $_lang['credits_database'] = 'MODX is powered by <a href="http://www.mysql.com" target="_blank">MySQL</a>.';

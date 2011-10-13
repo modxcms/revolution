@@ -30,7 +30,6 @@ $_lang['sent_on'] = '送信日';
 $_lang['subject'] = 'タイトル';
 $_lang['user'] = 'ユーザー';
 $_lang['usergroup'] = 'ユーザーグループ';
-
 $_lang['message_err_not_found'] = 'メッセージはありません。';
 $_lang['message_err_not_specified_subject'] = 'タイトルが空欄です';
 $_lang['message_err_remove'] = 'メッセージの削除中にエラーが発生しました。';
