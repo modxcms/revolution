@@ -133,7 +133,7 @@ ul.x-tab-strip-top li {
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#8BAF4C,endColorstr=#658F1A,GradientType=0);
     background:linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
 }
-ul.x-tab-strip-top li:first-child { margin-left:5px; }
+ul.x-tab-strip-top li:first-child { margin-left:0; }
 ul.x-tab-strip-top li.x-tab-strip-over {
 	background:#496F07;
     background:-moz-linear-gradient(center bottom,#496F07 0%,#779F31 100%) repeat scroll 0 0 transparent;
@@ -146,13 +146,11 @@ ul.x-tab-strip-top li.x-tab-strip-over {
 }
 ul.x-tab-strip-top li.x-tab-strip-over .x-tab-right span.x-tab-strip-text {}
 ul.x-tab-strip-top li.x-tab-strip-active {
-	background-color:white !important;
-	background-image:none !important;
-	border-color:white;
-	overflow:hidden;
-	border-style:solid solid none;
-	border-width:3px 3px 0;
-	padding:0 0 1px;
+    background: white none !important;
+    overflow:hidden;
+    border: 1px solid #999;
+    border-bottom: 0 none;
+    padding:0 0 1px;
 	text-shadow: none;
 }
 ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text {
@@ -161,6 +159,7 @@ ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-t
 
 	background-color:transparent;
 	padding-bottom:8px !important;
+	margin-top: 2px;
 }
 ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right {
 	border:1px solid transparent;
@@ -196,6 +195,7 @@ ul.x-tab-strip-bottom {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background-color: #777 !important;
+    background-color: transparent !important;
     padding: 4px 0 0;
 }
 .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer {
@@ -209,6 +209,11 @@ ul.x-tab-strip-bottom {
 	margin-top:-3px;
 	border-width: 0 1px 0 !important;
 	border-color: #999;
+	border-top: 1px solid #999 !important;
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+
 }
 
 .x-panel-collapsed {
@@ -2087,7 +2092,7 @@ a.x-menu-item {
 	background:linear-gradient(center bottom,#dddddd 0%,#eeeeee 100%);
 	border:1px solid #c0c0c0;
 	border-bottom:1px solid #dddddd;
-	font-size:12px;
+	font-size:14px;
 	font-weight:bold;
 	padding:10px 10px 8px;
 	text-shadow:0 1px 1px #ffffff;

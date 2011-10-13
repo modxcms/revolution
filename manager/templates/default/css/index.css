@@ -56,8 +56,8 @@ hr {
 	-moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    background: none repeat scroll 0 0 #666;
-    border: 6px solid #666666;
+    background: none repeat scroll 0 0 transparent;
+    border: 0;
     margin: 5px 0 10px 10px;
     padding: 0;
 }
@@ -67,19 +67,31 @@ hr {
     -webkit-border-radius:0 0 2px 2px;
     border-radius:0 0 2px 2px;
     padding-bottom: 5px;
-    background-color: #EFEFEF;
+    background-color: #f7f7f7;
+    border: 1px solid #999;
+    border-top: 0;
 }
 
 #modx-leftbar .x-tab-strip-active{
-    background-color: #EFEFEF !important;
-    border-color: #EFEFEF !important;
+    background-color: #f7f7f7 !important;
+    border-color: #999 !important;
 }
 
 #modx-leftbar ul.x-tab-strip-top span.x-tab-strip-text{}
+#modx-leftbar ul.x-tab-strip-top li {
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 #modx-leftbar .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer  { 
-	background-color: #EFEFEF;
-    border-style: solid none none;
+	background-color: #f7f7f7;
+    border: 1px solid #999;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 #modx-leftbar .x-tree .x-panel-body{
@@ -91,8 +103,7 @@ hr {
     -moz-border-radius:0 0 3px 3px;
     -webkit-border-radius:0 0 3px 3px;
     border-radius:0 0 3px 3px;
-	background-color: #EFEFEF;
-    border-bottom: 1px solid #E0E0E0;
+	background-color: #f7f7f7;
     padding: 6px;
 }
 
@@ -130,7 +141,7 @@ hr {
 /* leftbar tabs */
 #modx-leftbar .x-tab-panel-header-plain .x-tab-strip-top  {}
 #modx-leftbar .x-tree .x-panel-body {
-    background-color:transparent;
+    background-color:#f7f7f7;
     border-color:#FAFAFA;
     border-right:0 none;
     border-style:solid none none;
@@ -140,7 +151,7 @@ hr {
     background-color: transparent;
 }
 #modx-leftbar .x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
-    border-bottom-color:#DFDFDF;
+    border-bottom: 0;
     padding:4px 5px 5px;
 }
 #modx-leftbar .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text {
@@ -207,11 +218,11 @@ hr {
     background-color: transparent !important;
 }
 #modx-leftbar .x-tab-strip-spacer {
-    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topleft: 0;
     -moz-border-radius-topright: 3px;
-    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-left-radius: 0;
     -webkit-border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    border-top-left-radius: 0;
     border-top-right-radius: 3px;
 }
 
@@ -235,6 +246,11 @@ hr {
 .modx-leftbar .x-panel .x-panel-animated div.x-panel-header {
     overflow: visible !important;
 }
+
+#modx-resource-searchbar {
+    border-bottom: 1px solid #e4e4e4;
+}
+
 #modx-resource-tree-panel .x-accordion-hd {
     background-position: 0 0;
 }
@@ -927,7 +943,7 @@ html #modx-topnav ul.modx-subnav li a:hover{
     font-weight: bold;
 }
 .unpublished { font-style: italic; }
-.hidemenu a span { color: gray !important; }
+.hidemenu a span { color: #888 !important; }
 .deleted { color: red !important; }
 .deleted a span {
     color: #CC3333 !important;
@@ -1257,9 +1273,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 
 /* media sources */
 .modx-leftbar-second-tb {
-	padding: 6px;
-	border-bottom: 1px solid #DFDFDF;
-    border-top: 1px solid #FAFAFA;
+	padding: 1px 6px 6px;
+	border-bottom: 0;
+    border-top: 0;
 }
 
 /* MODExt common classes */
@@ -1270,14 +1286,16 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 .panel-desc { 
 	background-color: #F7F7F7;
     border-bottom: 1px solid #E7E7E7 !important;
+    border-top: 1px solid #E7E7E7 !important;
     color: #5A5A5A;
     line-height: 1.5;
-    padding: 15px !important; 
+    padding: 15px !important;
+    margin-top: 5px;
 } 
 .with-title .panel-desc{
 	margin: 0;
 }
-.panel-desc p{
+.panel-desc p {
 	padding: 0;
 }
 
