@@ -23,6 +23,7 @@ class SecurityUserGroupCreateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.context.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.source.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/create.js');
     }

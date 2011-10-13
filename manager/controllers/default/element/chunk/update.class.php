@@ -6,9 +6,13 @@
  * @subpackage manager.controllers
  */
 class ElementChunkUpdateManagerController extends modManagerController {
+    /** @var string $onChunkFormRender */
     public $onChunkFormRender = '';
+    /** @var string $onChunkForPrerender */
     public $onChunkFormPrerender = '';
+    /** @var modChunk $chunk */
     public $chunk;
+    /** @var array $chunkArray */
     public $chunkArray = array();
     
     /**
@@ -88,6 +92,9 @@ class ElementChunkUpdateManagerController extends modManagerController {
         }
         $this->chunkArray = $this->chunk->toArray();
         $this->chunkArray['properties'] = $data;
+        $this->chunkArray['snippet'] = $this->chunk->getContent();
+
+        $this->prepareElement();
 
         /* invoke OnRichTextEditorInit event */
         $placeholders['onRTEInit'] = $this->loadRte();
@@ -96,6 +103,20 @@ class ElementChunkUpdateManagerController extends modManagerController {
         $placeholders['unlock_element_properties'] = $this->modx->hasPermission('unlock_element_properties') ? 1 : 0;
  
         return $placeholders;
+    }
+
+    /**
+     * Prepare the element and get the static openTo path if needed
+     *
+     * @return void|string
+     */
+    public function prepareElement() {
+        $this->chunkArray['openTo'] = '/';
+        if (!empty($this->chunkArray['static'])) {
+            $file = $this->chunk->get('static_file');
+            $this->chunkArray['openTo'] = dirname($file).'/';
+        }
+        return $this->chunkArray['openTo'];
     }
 
     /**

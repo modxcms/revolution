@@ -15,7 +15,6 @@ MODx.page.PropertySets = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-property-sets'
-            ,renderTo: 'modx-panel-property-sets-div'
         }]
         ,buttons: [{
             text: _('help_ex')

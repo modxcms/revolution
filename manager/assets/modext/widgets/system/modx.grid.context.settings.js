@@ -52,7 +52,7 @@ MODx.window.UpdateContextSetting = function(config) {
     Ext.applyIf(config,{
         title: _('setting_update')
         ,height: 200
-        ,width: 550
+        ,width: 600
         ,url: MODx.config.connectors_url+'context/setting.php'
         ,action: 'update'
         ,bodyStyle: 'padding: 0'
@@ -69,7 +69,7 @@ MODx.window.UpdateContextSetting = function(config) {
             ,allowBlank: false
             ,value: r.key
             ,submitValue: r.key
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: r.xtype || 'textfield'
             ,fieldLabel: _('value')
@@ -77,7 +77,7 @@ MODx.window.UpdateContextSetting = function(config) {
             ,id: 'modx-ucs-value'
             ,allowBlank: false
             ,value: r.value
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'hidden'
             ,name: 'xtype'

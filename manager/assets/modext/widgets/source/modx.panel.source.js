@@ -7,6 +7,7 @@ MODx.panel.Source = function(config) {
             action: 'update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
+		,cls: 'container form-with-labels'
         ,items: [{
              html: '<h2>'+_('source')+'</h2>'
             ,border: false
@@ -15,9 +16,9 @@ MODx.panel.Source = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: {
-                bodyStyle: 'padding: 15px;'
-                ,autoHeight: true
+                autoHeight: true
                 ,border: true
+				,bodyCssClass: 'tab-panel-wrapper'
             }
             ,id: 'modx-source-tabs'
             ,forceLayout: true
@@ -30,55 +31,99 @@ MODx.panel.Source = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-                ,bodyStyle: 'padding: 15px;'
-                ,defaults: { border: false ,msgTarget: 'side' }
+				,defaults: { border: false, msgTarget: 'side' }
                 ,layout: 'form'
                 ,id: 'modx-dashboard-form'
                 ,labelWidth: 150
                 ,items: [{
-                    xtype: 'hidden'
-                    ,name: 'id'
-                    ,id: 'modx-source-id'
-                    ,value: config.record.id
-                },{
-                    name: 'name'
-                    ,id: 'modx-source-name'
-                    ,xtype: 'textfield'
-                    ,fieldLabel: _('name')
-                    ,allowBlank: false
-                    ,enableKeyEvents: true
-                    ,anchor: '97%'
-                    ,listeners: {
-                        'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-source-header').getEl().update('<h2>'+_('source')+': '+f.getValue()+'</h2>');
-                        }}
-                    }
-                },{
-                    name: 'description'
-                    ,id: 'modx-source-description'
-                    ,xtype: 'textarea'
-                    ,fieldLabel: _('description')
-                    ,anchor: '97%'
-                    ,grow: true
-                },{
-                    name: 'class_key'
-                    ,hiddenName: 'class_key'
-                    ,xtype: 'modx-combo-source-type'
-                    ,fieldLabel: _('source_type')
-                    ,width: 400
+					xtype: 'panel'
+					,border: false
+					,cls:'main-wrapper'
+					,layout: 'form'
+					,labelAlign: 'top'
+					,items: [{
+					    layout: 'column'
+					    ,border: false
+                        ,defaults: {
+                            layout: 'form'
+                            ,labelAlign: 'top'
+                            ,anchor: '100%'
+                            ,border: false
+                        }
+					    ,items: [{
+                            columnWidth: .65
+                            ,cls: 'main-content'
+                            ,items: [{
+                                xtype: 'hidden'
+                                ,name: 'id'
+                                ,id: 'modx-source-id'
+                                ,value: config.record.id
+                            },{
+                                name: 'name'
+                                ,id: 'modx-source-name'
+                                ,xtype: 'textfield'
+                                ,fieldLabel: _('name')
+                                ,description: MODx.expandHelp ? '' : _('source_name_desc')
+                                ,allowBlank: false
+                                ,enableKeyEvents: true
+                                ,anchor: '100%'
+                                ,listeners: {
+                                    'keyup': {scope:this,fn:function(f,e) {
+                                        Ext.getCmp('modx-source-header').getEl().update('<h2>'+_('source')+': '+f.getValue()+'</h2>');
+                                    }}
+                                }
+                            },{
+                                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                                ,forId: 'modx-source-name'
+                                ,html: _('source_name_desc')
+                                ,cls: 'desc-under'
+                            },{
+                                name: 'description'
+                                ,id: 'modx-source-description'
+                                ,xtype: 'textarea'
+                                ,fieldLabel: _('description')
+                                ,description: MODx.expandHelp ? '' : _('source_description_desc')
+                                ,anchor: '100%'
+                                ,grow: true
+                            },{
+                                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                                ,forId: 'modx-source-description'
+                                ,html: _('source_description_desc')
+                                ,cls: 'desc-under'
+                            }]
+                        },{
+                            columnWidth: .35
+                            ,cls: 'main-content'
+                            ,items: [{
+                                name: 'class_key'
+                                ,hiddenName: 'class_key'
+                                ,id: 'modx-source-type'
+                                ,xtype: 'modx-combo-source-type'
+                                ,fieldLabel: _('source_type')
+                                ,description: MODx.expandHelp ? '' : _('source_type_desc')
+                                ,anchor: '100%'
+                            },{
+                                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                                ,forId: 'modx-source-type'
+                                ,html: _('source_type_desc')
+                                ,cls: 'desc-under'
+                            }]
 
+                        }]
+                    }]
                 },{
-                    html: '<hr />'
+                    html: '<hr />'					
                     ,border: false
                 },{
                     html: '<p>'+_('source_properties.intro_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-source-properties'
                     ,preventRender: true
                     ,source: config.record.id
                     ,autoHeight: true
-                    ,width: '97%'
+                    ,cls: 'main-wrapper'
                     ,listeners: {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                     }
@@ -88,13 +133,14 @@ MODx.panel.Source = function(config) {
                 ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('source.access.intro_msg')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-source-access'
                     ,preventRender: true
                     ,source: config.record.id
                     ,autoHeight: true
-                    ,width: '97%'
+                    ,cls: 'main-wrapper'
                     ,listeners: {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                         ,'updateRole': {fn:this.markDirty,scope:this}
@@ -120,7 +166,8 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.get('modx-source-header').update('<h2>'+_('source')+': '+this.config.record.name+'</h2>');
+		/* The component rendering is deferred since we are not using renderTo */
+        Ext.getCmp('modx-source-header').html = '<h2>'+_('source')+': '+this.config.record.name+'</h2>';
 
         if (!Ext.isEmpty(this.config.record.properties)) {
             var d = this.config.record.properties;

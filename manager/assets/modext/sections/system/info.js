@@ -28,81 +28,78 @@ var viewPHPInfo = function() {
 MODx.panel.SystemInfo = function(config) {
     config = config || {};
     var info = [{
-        html: '<p>'+_('sysinfo_desc')+'</p>'
-        ,id: 'modx-sysinfo-msg'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('modx_version')
-        ,name: 'modx_version'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('version_codename')
-        ,name: 'code_name'
-    },{
-        html: '<a href="javascript:;" onclick="viewPHPInfo();return false;">'+_('view')+'</a>'
-        ,fieldLabel: 'phpinfo()'
-        ,name: 'phpinfo'
-        ,value: ''
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('servertime')
-        ,name: 'servertime'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('localtime')
-        ,name: 'localtime'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('serveroffset')
-        ,name: 'serveroffset'
-    },{
-        html: '<hr />'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('extjs_version')
-        ,name: 'extjs_version'
-        ,value: '3.4.0'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('smarty_version')
-        ,name: 'smarty_version'
-        ,value: '3.0.4'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('phpmailer_version')
-        ,name: 'phpmailer_version'
-        ,value: '2.0.4'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('magpie_version')
-        ,name: 'magpie_version'
-        ,value: '0.72'
-    },{
-        html: '<hr />'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('database_type')
-        ,name: 'database_type'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('database_version')
-        ,name: 'database_version'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('database_charset')
-        ,name: 'database_charset'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('database_name')
-        ,name: 'database_name'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('database_server')
-        ,name: 'database_server'
-    },{
-        xtype: 'statictextfield'
-        ,fieldLabel: _('table_prefix')
-        ,name: 'table_prefix'
+		xtype: 'statictextfield'
+		,fieldLabel: _('modx_version')
+		,name: 'modx_version'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('version_codename')
+		,name: 'code_name'
+	},{
+		html: '<a href="javascript:;" onclick="viewPHPInfo();return false;">'+_('view')+'</a>'
+		,fieldLabel: 'phpinfo()'
+		,name: 'phpinfo'
+		,value: ''
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('servertime')
+		,name: 'servertime'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('localtime')
+		,name: 'localtime'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('serveroffset')
+		,name: 'serveroffset'
+	},{
+		html: '<hr />'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('extjs_version')
+		,name: 'extjs_version'
+		,value: '3.4.0'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('smarty_version')
+		,name: 'smarty_version'
+		,value: '3.0.4'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('phpmailer_version')
+		,name: 'phpmailer_version'
+		,value: '2.0.4'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('magpie_version')
+		,name: 'magpie_version'
+		,value: '0.72'
+	},{
+		html: '<hr />'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('database_type')
+		,name: 'database_type'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('database_version')
+		,name: 'database_version'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('database_charset')
+		,name: 'database_charset'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('database_name')
+		,name: 'database_name'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('database_server')
+		,name: 'database_server'
+	},{
+		xtype: 'statictextfield'
+		,fieldLabel: _('table_prefix')
+		,name: 'table_prefix'
     }];
     if (config.data) {
         for (var c in config.data) {
@@ -117,10 +114,23 @@ MODx.panel.SystemInfo = function(config) {
             }
         }
     }
+	var pnl = [{
+        html: '<p>'+_('sysinfo_desc')+'</p>'
+        ,id: 'modx-sysinfo-msg'
+		,bodyCssClass: 'panel-desc'
+    },{
+		xtype: 'panel'
+		,border: false
+		,cls:'main-wrapper'
+		,layout: 'form'
+		,defaults: { border: false, msgTarget: 'side', anchor: '97%' }
+		,items: [info]
+	}];
     Ext.applyIf(config,{
         id: 'modx-panel-system-info'
         ,url: MODx.config.connectors_url+'system/index.php'
         ,layout: 'fit'
+		,cls: 'container'
         ,items: [{
             html: '<h2>'+_('view_sysinfo')+'</h2>'
             ,id: 'modx-error-log-header'
@@ -129,34 +139,35 @@ MODx.panel.SystemInfo = function(config) {
             ,anchor: '100%'
         },MODx.getPageStructure([{
             title: _('view_sysinfo')
-            ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-plugin-form'
             ,labelWidth: 230
-            ,defaults: { border: false ,msgTarget: 'side', anchor: '97%'}
-            ,items: info
+            ,defaults: { border: false }
+            ,items: pnl
         },{
             title: _('db_header')
-            ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-sysinfo-dbtables'
             ,items: [{
                 html: '<p>'+_('db_info_' + MODx.config.dbtype)+'</p>'
                 ,id: 'modx-sysinfo-dbtables-msg'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-databasetables'
+				,cls:'main-wrapper'
                 ,preventRender: true
             }]
         },{
             title: _('recent_docs')
-            ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-sysinfo-recent-docs'
             ,items: [{
                 html: '<p>'+_('sysinfo_activity_message')+'</p>'
                 ,id: 'modx-sysinfo-recent-docs-msg'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-resource-active'
+				,cls:'main-wrapper'
                 ,title: _('recent_docs')
                 ,preventRender: true
             }]

@@ -5,6 +5,7 @@ MODx.panel.Package = function(config) {
         url: MODx.config.connectors_url+'workspace/package/index.php'
         ,baseParams: {}
         ,id: 'modx-panel-package'
+		,cls: 'container'
         ,chunk: ''
         ,bodyStyle: ''
         ,items: [{
@@ -14,70 +15,75 @@ MODx.panel.Package = function(config) {
             ,id: 'modx-package-header'
         },MODx.getPageStructure([{
             title: _('package')
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-package-form'
             ,labelWidth: 150
             ,items: [{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('package')
-                ,name: 'package_name'
-                ,width: 300
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('signature')
-                ,name: 'signature'
-                ,width: 300
-                ,submitValue: true
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('uploaded_on')
-                ,name: 'created'
-                ,width: 300
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('installed')
-                ,name: 'installed'
-                ,width: 300
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('last_updated')
-                ,name: 'updated'
-                ,width: 300
-            },{
-                xtype: 'modx-combo-provider'
-                ,fieldLabel: _('provider')
-                ,name: 'provider'
-                ,width: 300
-            },{
-                xtype: 'textarea'
-                ,readOnly: true
-                ,fieldLabel: _('readme')
-                ,name: 'readme'
-                ,width: '80%'
-                ,height: 200
-            },{
-                xtype: 'textarea'
-                ,readOnly: true
-                ,fieldLabel: _('license')
-                ,name: 'license'
-                ,width: '80%'
-                ,height: 200
-            },{
-                xtype: 'textarea'
-                ,readOnly: true
-                ,fieldLabel: _('changelog')
-                ,name: 'changelog'
-                ,width: '80%'
-                ,height: 200
-            }]
+				xtype: 'panel'
+				,border: false
+				,cls:'main-wrapper'
+				,layout: 'form'
+				,items: [{
+					xtype: 'statictextfield'
+					,fieldLabel: _('package')
+					,name: 'package_name'
+					,width: 300
+				},{
+					xtype: 'statictextfield'
+					,fieldLabel: _('signature')
+					,name: 'signature'
+					,width: 300
+					,submitValue: true
+				},{
+					xtype: 'statictextfield'
+					,fieldLabel: _('uploaded_on')
+					,name: 'created'
+					,width: 300
+				},{
+					xtype: 'statictextfield'
+					,fieldLabel: _('installed')
+					,name: 'installed'
+					,width: 300
+				},{
+					xtype: 'statictextfield'
+					,fieldLabel: _('last_updated')
+					,name: 'updated'
+					,width: 300
+				},{
+					xtype: 'modx-combo-provider'
+					,fieldLabel: _('provider')
+					,name: 'provider'
+					,width: 300
+				},{
+					xtype: 'textarea'
+					,readOnly: true
+					,fieldLabel: _('readme')
+					,name: 'readme'
+					,width: '80%'
+					,height: 200
+				},{
+					xtype: 'textarea'
+					,readOnly: true
+					,fieldLabel: _('license')
+					,name: 'license'
+					,width: '80%'
+					,height: 200
+				},{
+					xtype: 'textarea'
+					,readOnly: true
+					,fieldLabel: _('changelog')
+					,name: 'changelog'
+					,width: '80%'
+					,height: 200
+				}]
+			}]
         },{
             title: _('uploaded_versions')
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 xtype: 'modx-grid-package-versions'
+				,cls: 'main-wrapper'
                 ,signature: config.signature
                 ,preventRender: true
             }]

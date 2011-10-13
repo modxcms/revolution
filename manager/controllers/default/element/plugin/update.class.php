@@ -6,10 +6,15 @@
  * @subpackage manager.controllers
  */
 class ElementPluginUpdateManagerController extends modManagerController {
+    /** @var modCategory $category */
     public $category;
+    /** @var modPlugin $plugin */
     public $plugin;
+    /** @var array $pluginArray */
     public $pluginArray;
+    /** @var string $onPluginFormRender */
     public $onPluginFormRender = '';
+    /** @var string $onPluginFormPrerender */
     public $onPluginFormPrerender = '';
 
     /**
@@ -80,9 +85,12 @@ class ElementPluginUpdateManagerController extends modManagerController {
         }
         $this->pluginArray = $this->plugin->toArray();
         $this->pluginArray['properties'] = $data;
+        $this->pluginArray['plugincode'] = $this->plugin->getContent();
         if (strpos($this->pluginArray['plugincode'],'<?php') === false) {
             $this->pluginArray['plugincode'] = "<?php\n".$this->pluginArray['plugincode'];
         }
+
+        $this->prepareElement();
         
         /* load plugin into parser */
         $placeholders['plugin'] = $this->plugin;
@@ -91,6 +99,20 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $placeholders['onPluginFormRender'] = $this->fireRenderEvent();
 
         return $placeholders;
+    }
+
+    /**
+     * Prepare the element and get the static openTo path if needed
+     *
+     * @return void|string
+     */
+    public function prepareElement() {
+        $this->pluginArray['openTo'] = '/';
+        if (!empty($this->pluginArray['static'])) {
+            $file = $this->plugin->get('static_file');
+            $this->pluginArray['openTo'] = dirname($file).'/';
+        }
+        return $this->pluginArray['openTo'];
     }
 
     /**

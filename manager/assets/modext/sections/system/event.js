@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-system-event' });
+    MODx.add('modx-page-system-event');
 });
 /**
  * Loads the system event page
@@ -14,7 +14,6 @@ MODx.page.SystemEvent = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-error-log'
-            ,renderTo: 'modx-panel-error-log-div'
         }]
     });
     MODx.page.SystemEvent.superclass.constructor.call(this,config);

@@ -6,10 +6,15 @@
  * @subpackage manager.controllers
  */
 class ElementTemplateUpdateManagerController extends modManagerController {
+    /** @var modCategory $category */
     public $category;
+    /** @var modTemplate $template */
     public $template;
+    /** @var array $templateArray */
     public $templateArray;
+    /** @var string $onTempFormRender */
     public $onTempFormRender = '';
+    /** @var string $onTempFormPrerender */
     public $onTempFormPrerender = '';
 
     /**
@@ -80,6 +85,9 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         }
         $this->templateArray = $this->template->toArray();
         $this->templateArray['properties'] = $data;
+        $this->templateArray['content'] = $this->template->getContent();
+
+        $this->prepareElement();
 
         /* load template into parser */
         $placeholders['template'] = $this->template;
@@ -88,6 +96,20 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $placeholders['onTempFormRender'] = $this->fireRenderEvent();
 
         return $placeholders;
+    }
+
+    /**
+     * Prepare the element and get the static openTo path if needed
+     *
+     * @return void|string
+     */
+    public function prepareElement() {
+        $this->templateArray['openTo'] = '/';
+        if (!empty($this->templateArray['static'])) {
+            $file = $this->template->get('static_file');
+            $this->templateArray['openTo'] = dirname($file).'/';
+        }
+        return $this->templateArray['openTo'];
     }
 
     /**

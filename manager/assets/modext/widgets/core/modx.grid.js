@@ -270,6 +270,11 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
+				,listeners:{
+                    load: function(){
+						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+					}
+                }
             });
         } else {
             this.store = new Ext.data.JsonStore({
@@ -281,6 +286,11 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,remoteSort: this.config.remoteSort || false
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
+				,listeners:{
+                    load: function(){
+						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+					}
+                }
             });
         }
     }
