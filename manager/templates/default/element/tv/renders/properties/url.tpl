@@ -13,8 +13,7 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,labelAlign: 'top'
-    ,cls: 'form-with-labels'
+    ,labelWidth: 150
     ,border: false
     ,items: [{
         xtype: 'textfield' 
@@ -22,42 +21,36 @@ MODx.load({
         ,name: 'prop_text'
         ,value: params['text'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield' 
         ,fieldLabel: _('title')
         ,name: 'prop_title'
         ,value: params['title'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield' 
         ,fieldLabel: _('class')
         ,name: 'prop_class'
         ,value: params['class'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield' 
         ,fieldLabel: _('style')
         ,name: 'prop_style'
         ,value: params['style'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield' 
         ,fieldLabel: _('target')
         ,name: 'prop_target'
         ,value: params['target'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield' 
         ,fieldLabel: _('attributes')
         ,name: 'prop_attrib'
         ,value: params['attrib'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

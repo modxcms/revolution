@@ -62,33 +62,33 @@ MODx.window.CreateProvider = function(config) {
             ,name: 'name'
             ,id: 'modx-cprov-name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,allowBlank: false
         },{
             fieldLabel: _('service_url')
             ,name: 'service_url'
             ,id: 'modx-cprov-service-url'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,allowBlank: false
         },{
             fieldLabel: _('username')
             ,name: 'username'
             ,id: 'modx-cprov-username'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
         },{
             fieldLabel: _('api_key')
             ,name: 'api_key'
             ,id: 'modx-cprov-api_key'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-cprov-description'
             ,xtype: 'textarea'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,grow: true
         }]
     });
@@ -122,33 +122,33 @@ MODx.window.UpdateProvider = function(config) {
             ,name: 'name'
             ,id: 'modx-uprov-name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,allowBlank: false
         },{
             fieldLabel: _('service_url')
             ,name: 'service_url'
             ,id: 'modx-uprov-service-url'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,allowBlank: false
         },{
             fieldLabel: _('username')
             ,name: 'username'
             ,id: 'modx-cprov-username'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
         },{
             fieldLabel: _('api_key')
             ,name: 'api_key'
             ,id: 'modx-uprov-api_key'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-uprov-description'
             ,xtype: 'textarea'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,grow: true
         }]
     });

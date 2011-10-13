@@ -10,7 +10,7 @@ Ext.onReady(function() {
         ,applyTo: 'tv{$tv->id}'
         ,value: '{$tv->get('value')|escape:'javascript'}'
         ,height: 140
-        ,width: '99%'
+        ,width: '97%'
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}

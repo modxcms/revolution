@@ -13,8 +13,7 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,cls: 'form-with-labels'
-    ,labelAlign: 'top'
+    ,labelWidth: 150
     ,border: false
     ,items: []
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'

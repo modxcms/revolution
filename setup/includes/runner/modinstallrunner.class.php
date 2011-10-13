@@ -117,12 +117,25 @@ abstract class modInstallRunner {
 
         if (!defined('MODX_BASE_PATH'))
             define('MODX_BASE_PATH', $this->install->settings->get('context_web_path'));
-        if (!defined('MODX_ASSETS_PATH'))
-            define('MODX_ASSETS_PATH', $this->install->settings->get('context_assets_path'));
+        if (!defined('MODX_ASSETS_PATH')) {
+            $assetsDefault = $this->install->settings->get('context_assets_path',$this->install->settings->get('context_web_path').'assets/');
+            define('MODX_ASSETS_PATH',$assetsDefault);
+        }
         if (!defined('MODX_MANAGER_PATH'))
             define('MODX_MANAGER_PATH', $this->install->settings->get('context_mgr_path'));
         if (!defined('MODX_CONNECTORS_PATH'))
             define('MODX_CONNECTORS_PATH', $this->install->settings->get('context_connectors_path'));
+
+        if (!defined('MODX_BASE_URL'))
+            define('MODX_BASE_URL', $this->install->settings->get('context_web_url'));
+        if (!defined('MODX_ASSETS_URL')) {
+            $assetsDefault = $this->install->settings->get('context_assets_url',$this->install->settings->get('context_web_url').'assets/');
+            define('MODX_ASSETS_URL',$assetsDefault);
+        }
+        if (!defined('MODX_MANAGER_URL'))
+            define('MODX_MANAGER_URL', $this->install->settings->get('context_mgr_url'));
+        if (!defined('MODX_CONNECTORS_URL'))
+            define('MODX_CONNECTORS_URL', $this->install->settings->get('context_connectors_url'));
 
         return $package->install(array (
             xPDOTransport::RESOLVE_FILES => ($this->install->settings->get('inplace') == 0 ? 1 : 0)

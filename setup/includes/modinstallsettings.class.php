@@ -16,10 +16,16 @@ class modInstallSettings {
         $this->load();
     }
 
+    /**
+     * @return string
+     */
     protected function getCachePath() {
         return MODX_CORE_PATH . 'cache/' . (MODX_CONFIG_KEY == 'config' ? '' : MODX_CONFIG_KEY . '/') . 'setup/';
     }
 
+    /**
+     * @return void
+     */
     protected function rebuildDSN() {
         if (array_key_exists('database_type', $this->settings)) {
             switch ($this->settings['database_type']) {
@@ -41,23 +47,43 @@ class modInstallSettings {
         }
     }
 
+    /**
+     * @param string $k
+     * @param mixed $v
+     * @return void
+     */
     public function set($k,$v) {
         $this->settings[$k] = $v;
         if (in_array($k, array('database_type', 'database_server', 'dbase', 'database_connection_charset'))) {
             $this->rebuildDSN();
         }
     }
+
+    /**
+     * @param string $k
+     * @param mixed $default
+     * @return mixed
+     */
     public function get($k,$default = null) {
         if (in_array($k, array('database_dsn', 'server_dsn'))) {
             $this->rebuildDSN();
         }
         return isset($this->settings[$k]) ? $this->settings[$k] : $default;
     }
+
+    /**
+     * @param array $array
+     * @return void
+     */
     public function fromArray($array) {
         foreach ($array as $k => $v) {
             $this->settings[$k] = $v;
         }
     }
+    
+    /**
+     * @return void
+     */
     public function load() {
         if (file_exists($this->fileName)) {
             $this->settings = include $this->fileName;
@@ -66,12 +92,20 @@ class modInstallSettings {
             }
         }
     }
+
+    /**
+     * @return void
+     */
     public function check() {
         $this->load();
         if (empty($this->settings)) {
             $this->restart();
         }
     }
+
+    /**
+     * @return void
+     */
     public function restart() {
         $this->erase();
         if (empty($this->install->request) && !($this->install->request instanceof modInstallCLIRequest)) {
@@ -79,9 +113,20 @@ class modInstallSettings {
             exit();
         }
     }
+
+    /**
+     * @param string $k
+     * @return void
+     */
     public function delete($k) {
         unset($this->settings[$k]);
     }
+
+    /**
+     * @param array $settings
+     * @param int $expire
+     * @return bool|int
+     */
     public function store(array $settings = array(),$expire = 900) {
         $this->settings = array_merge($this->settings,$settings);
         $this->rebuildDSN();
@@ -98,13 +143,20 @@ class modInstallSettings {
         return $written;
     }
 
+    /**
+     * @return void
+     */
     public function erase() {
         if (file_exists($this->fileName)) {
             @unlink($this->fileName);
         }
     }
 
+    /**
+     * @return array
+     */
     public function fetch() {
+        ksort($this->settings);
         return $this->settings;
     }
 }

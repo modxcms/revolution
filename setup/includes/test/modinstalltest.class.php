@@ -240,31 +240,31 @@ abstract class modInstallTest {
         $coreConfigsExist = false;
         if ($this->install->settings->get('inplace')) {
             /* web_path */
-            $this->title('context_web_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('web_path'))));
-            if (!file_exists($this->install->settings->get('web_path'))) {
+            $this->title('context_web_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('context_web_path'))));
+            if (!file_exists($this->install->settings->get('context_web_path'))) {
                 $this->fail('context_web_exists');
             } else {
                 $this->pass('context_web_exists');
             }
 
             /* mgr_path */
-            $this->title('context_mgr_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('mgr_path'))));
-            if (!file_exists($this->install->settings->get('mgr_path'))) {
+            $this->title('context_mgr_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('context_mgr_path'))));
+            if (!file_exists($this->install->settings->get('context_mgr_path'))) {
                 $this->fail('context_mgr_exists');
             } else {
                 $this->pass('context_mgr_exists');
             }
 
             /* connectors_path */
-            $this->title('context_connectors_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('connectors_path'))));
-            if (!file_exists($this->install->settings->get('connectors_path'))) {
+            $this->title('context_connectors_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('context_connectors_path'))));
+            if (!file_exists($this->install->settings->get('context_connectors_path'))) {
                 $this->fail('context_connectors_exists');
             } else {
                 $this->pass('context_connectors_exists');
             }
-            if (file_exists($this->install->settings->get('web_path') . 'config.core.php') &&
-                file_exists($this->install->settings->get('connectors_path') . 'config.core.php') &&
-                file_exists($this->install->settings->get('mgr_path') . 'config.core.php')) {
+            if (file_exists($this->install->settings->get('context_web_path') . 'config.core.php') &&
+                file_exists($this->install->settings->get('context_connectors_path') . 'config.core.php') &&
+                file_exists($this->install->settings->get('context_mgr_path') . 'config.core.php')) {
                 $coreConfigsExist = true;
             }
         }

@@ -11,7 +11,7 @@ MODx.grid.TemplateVarTemplate = function(config) {
     var tt = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
-        ,width: 50
+        ,width: 40
         ,sortable: true
     });
     Ext.applyIf(config,{
@@ -37,7 +37,7 @@ MODx.grid.TemplateVarTemplate = function(config) {
         },{
             header: _('description')
             ,dataIndex: 'description'
-            ,width: 300
+            ,width: 350
         },tt]
     });
     MODx.grid.TemplateVarTemplate.superclass.constructor.call(this,config);

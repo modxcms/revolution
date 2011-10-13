@@ -20,11 +20,6 @@ MODx.Layout = function(config){
         'HTTP_MODAUTH': config.auth
     };
     MODx.siteId = config.auth;
-    MODx.expandHelp = !Ext.isEmpty(MODx.config.inline_help);
-
-    var sp = new MODx.HttpProvider();
-    Ext.state.Manager.setProvider(sp);
-    sp.initState(MODx.defaultState);
 
     var tabs = [];
     var showTree = false;
@@ -86,7 +81,6 @@ MODx.Layout = function(config){
         });
         showTree = true;
     }
-    var activeTab = 0;
 
     Ext.applyIf(config,{
          layout: 'border'
@@ -110,6 +104,7 @@ MODx.Layout = function(config){
             ,useSplitTips: true
             ,monitorResize: true
             ,forceLayout: true
+            ,stateful: false
             ,items: [{
                  xtype: 'modx-tabs'
                 ,plain: true
@@ -121,9 +116,9 @@ MODx.Layout = function(config){
                 }
                 ,id: 'modx-leftbar-tabpanel'
                 ,border: false
-                ,activeTab: activeTab
+                ,activeTab: 0
                 ,stateful: true
-                ,stateId: 'modx-leftbar-tabs'
+                ,stateId: 'modx-leftbar-state'
                 ,stateEvents: ['tabchange']
                 ,getState:function() {
                     return {

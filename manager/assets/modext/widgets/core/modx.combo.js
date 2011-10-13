@@ -188,7 +188,7 @@ MODx.combo.Policy = function(config) {
         ,hiddenName: 'policy'
         ,displayField: 'name'
         ,valueField: 'id'
-        ,fields: ['id','name','permissions']
+        ,fields: ['name','id']
         ,allowBlank: false
         ,editable: false
         ,pageSize: 20
@@ -355,6 +355,7 @@ MODx.combo.ContentDisposition = function(config) {
         })
         ,name: 'content_dispo'
         ,hiddenName: 'content_dispo'
+        ,width: 200
         ,displayField: 'd'
         ,valueField: 'v'
         ,mode: 'local'
@@ -396,15 +397,10 @@ MODx.combo.ClassDerivatives = function(config) {
             ,skip: 'modXMLRPCResource'
             ,'class': 'modResource'
         }
-        ,displayField: 'name'
-        ,valueField: 'id'
-        ,fields: ['id','name']
-        ,forceSelection: true
-        ,typeAhead: false
+        ,displayField: 'class'
+        ,valueField: 'class'
+        ,fields: ['class']
         ,editable: false
-        ,allowBlank: false
-        ,listWidth: 300
-        ,pageSize: 20
     });
     MODx.combo.ClassDerivatives.superclass.constructor.call(this,config);
 };
@@ -697,9 +693,8 @@ MODx.combo.Action = function(config) {
         ,hiddenName: 'action'
         ,displayField: 'controller'
         ,valueField: 'id'
-        ,fields: ['id','controller','namespace']
+        ,fields: ['id','controller']
         ,url: MODx.config.connectors_url+'system/action.php'
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><tpl if="namespace">{namespace} - </tpl>{controller}</div></tpl>')
     });
     MODx.combo.Action.superclass.constructor.call(this,config);
 };

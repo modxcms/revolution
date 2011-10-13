@@ -13,8 +13,7 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,labelAlign: 'top'
-    ,cls: 'form-with-labels'
+    ,labelWidth: 150
     ,border: false
     ,items: [{
         xtype: 'textfield'
@@ -23,7 +22,6 @@ MODx.load({
         ,id: 'prop_w{/literal}{$tv}{literal}'
         ,value: params['w'] || '100%'
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('height')
@@ -31,7 +29,6 @@ MODx.load({
         ,id: 'prop_h{/literal}{$tv}{literal}'
         ,value: params['h'] || '300px'
         ,listeners: oc
-        ,anchor: '100%'
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

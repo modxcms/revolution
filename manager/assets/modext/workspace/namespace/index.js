@@ -13,6 +13,7 @@ MODx.page.Namespaces = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-namespaces'
+            ,renderTo: 'modx-panel-namespaces-div'
         }]
         ,buttons: [{
             text: _('help_ex')

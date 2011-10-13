@@ -164,9 +164,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('load',this._initExpand,this,{single: true});
         this.on('expandnode',this._saveState,this);
         this.on('collapsenode',this._saveState,this);
-		
-		/* Absolute positionning fix  */
-		this.on('expandnode',function(){ Ext.getCmp('modx-content').doLayout(); },this);
     }
 	
     /**
@@ -340,8 +337,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var i;
         if (!Ext.isObject(s) && !Ext.isArray(s)) {
             s = [s]; /* backwards compat */
-        } else {
-            s = s.slice();
         }
         if (Ext.isEmpty(p) || p == undefined) return; /* ignore invalid paths */
         if (n.expanded) { /* if expanding, add to state */

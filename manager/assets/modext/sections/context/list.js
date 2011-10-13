@@ -15,6 +15,7 @@ MODx.page.Contexts = function(config) {
 	Ext.applyIf(config,{
 		components: [{
             xtype: 'modx-panel-contexts'
+            ,renderTo: 'modx-panel-contexts-div'
         }]
         ,buttons: [{
             text: _('help_ex')

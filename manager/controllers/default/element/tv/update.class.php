@@ -86,11 +86,8 @@ class ElementTVUpdateManagerController extends modManagerController {
         }
         $this->tvArray = $this->tv->toArray();
         $this->tvArray['properties'] = $data;
-        $this->tvArray['default_text'] = $this->tv->getContent();
 
         $this->tvArray['sources'] = $this->getElementSources();
-
-        $this->prepareElement();
 
         /* load tv into parser */
         $placeholders['tv'] = $this->tv;
@@ -100,21 +97,6 @@ class ElementTVUpdateManagerController extends modManagerController {
 
         return $placeholders;
     }
-
-    /**
-     * Prepare the element and get the static openTo path if needed
-     *
-     * @return void|string
-     */
-    public function prepareElement() {
-        $this->tvArray['openTo'] = '/';
-        if (!empty($this->tvArray['static'])) {
-            $file = $this->tv->get('static_file');
-            $this->tvArray['openTo'] = dirname($file).'/';
-        }
-        return $this->tvArray['openTo'];
-    }
-
 
     public function getElementSources() {
         $c = $this->modx->newQuery('modContext');
@@ -139,7 +121,7 @@ class ElementTVUpdateManagerController extends modManagerController {
             $source = $context->get('source');
             $list[] = array(
                 $context->get('key'),
-                !empty($source) ? $source : $this->modx->getOption('default_media_source',null,1),
+                !empty($source) ? $source : 1,
                 $context->get('name'),
             );
         }

@@ -13,41 +13,29 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,cls: 'form-with-labels'
-    ,labelAlign: 'top'
+    ,labelWidth: 150
     ,border: false
     ,items: [{
         xtype: 'combo-boolean'
         ,fieldLabel: _('required')
-        ,description: MODx.expandHelp ? '' : _('required_desc')
+        ,description: _('required_desc')
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
         ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
-        ,width: 200
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
-        ,html: _('required_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'numberfield'
         ,allowNegative: false
         ,allowDecimals: false
         ,fieldLabel: _('radio_columns')
-        ,description: MODx.expandHelp ? '' : _('radio_columns_desc')
         ,name: 'inopt_columns'
         ,hiddenName: 'inopt_columns'
         ,id: 'inopt_columns{/literal}{$tv}{literal}'
         ,value: params['columns'] || 1
         ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_columns{/literal}{$tv}{literal}'
-        ,html: _('radio_columns_desc')
-        ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });

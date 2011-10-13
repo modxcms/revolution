@@ -32,5 +32,8 @@ test*.php
 # ignore mac files
 .DS_Store
 
-# ignore setup config file
+# ignore setup config files
 setup/config.xml
+setup/config.new.xml
+setup/config.upgrade.xml
+setup/config.upgrade-advanced.xml

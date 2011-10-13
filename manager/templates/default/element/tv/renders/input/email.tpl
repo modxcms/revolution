@@ -13,7 +13,7 @@ Ext.onReady(function() {
     {/literal}
         xtype: 'textfield'
         ,applyTo: 'tv{$tv->id}'
-        ,width: '99%'
+        ,width: '97%'
         ,vtype: 'email'
         ,enableKeyEvents: true
         ,msgTarget: 'under'

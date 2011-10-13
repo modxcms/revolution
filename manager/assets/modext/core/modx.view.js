@@ -169,21 +169,19 @@ MODx.browser.Window = function(config) {
         ,wctx: config.wctx || 'web'
         ,openTo: config.openTo || ''
         ,ident: this.ident
-        ,id: this.ident+'-view'
     });
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
         ,onUpload: function() { this.view.run(); }
         ,scope: this
         ,prependPath: config.prependPath || null
-        ,source: config.source || MODx.config.default_media_source
+        ,source: config.source || 1
         ,hideFiles: config.hideFiles || false
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: '/'
         ,rootName: _('files')
         ,rootVisible: true
-        ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }
@@ -211,15 +209,12 @@ MODx.browser.Window = function(config) {
             ,height: '100%'
             ,items: this.tree
             ,autoScroll: true
-            ,split: true
-            ,border: false
         },{
             id: this.ident+'-browser-view'
             ,cls: 'modx-pb-view-ct'
             ,region: 'center'
             ,autoScroll: true
             ,width: 450
-            ,border: false
             ,items: this.view
             ,tbar: this.getToolbar()
         },{
@@ -227,7 +222,6 @@ MODx.browser.Window = function(config) {
             ,cls: 'modx-pb-details-ct'
             ,region: 'east'
             ,split: true
-            ,border: false
             ,width: 150
             ,minWidth: 150
             ,maxWidth: 250
@@ -402,13 +396,17 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,params: {
                 action: 'remove'
                 ,file: d+'/'+node.id
+                ,prependPath: this.config.prependPath
+
+                ,basePath: this.config.basePath || ''
+                ,basePathRelative: this.config.basePathRelative || null
+                ,baseUrl: this.config.baseUrl || ''
+                ,baseUrlRelative: this.config.baseUrlRelative || null
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
-                'success': {fn:function(r) {
-                    this.run({ ctx: MODx.ctx });
-                },scope:this}
+                'success': {fn:function(r) { this.run({ ctx: MODx.ctx }); },scope:this}
             }
         });
     }
@@ -419,12 +417,10 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         Ext.applyIf(p,{
             action: 'getFiles'
             ,dir: this.dir
-            ,source: this.config.source || MODx.config.default_media_source
+            ,source: this.config.source || 1
         });
         this.store.load({
             params: p
-            ,callback: function() { this.refresh(); }
-            ,scope: this
         });
     }
     

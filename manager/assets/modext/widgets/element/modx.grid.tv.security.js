@@ -22,8 +22,6 @@ MODx.grid.TVSecurity = function(config) {
             ,tv: config.tv
         }
         ,fields: ['id','name','access','menu']
-        ,hideMode: 'offsets'
-        ,anchor: '100%'
         ,paging: true
         ,remoteSort: true
         ,plugins: tt

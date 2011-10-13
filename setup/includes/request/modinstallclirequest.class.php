@@ -117,6 +117,9 @@ class modInstallCLIRequest extends modInstallRequest {
             $this->end($msg);
         }
 
+        /** Attempt to create the database */
+        $this->checkDatabase();
+
         /* Run installer */
         $this->install->getService('runner','runner.modInstallRunnerWeb');
         $failed = true;
@@ -175,6 +178,7 @@ class modInstallCLIRequest extends modInstallRequest {
     public function loadConfigFile() {
         $loaded = false;
         $configFile = $this->settings->get('config');
+        if (empty($configFile)) $configFile = MODX_INSTALL_PATH.'setup/config.xml';
         if (!empty($configFile)) {
             if (!file_exists($configFile) && file_exists(MODX_SETUP_PATH.$configFile)) {
                 $configFile = MODX_SETUP_PATH.$configFile;
@@ -185,21 +189,56 @@ class modInstallCLIRequest extends modInstallRequest {
         if (!empty($configFile) && file_exists($configFile)) {
             $settings = $this->parseConfigFile($configFile);
             if (!empty($settings)) {
-                if (empty($settings['site_sessionname'])) {
-                    $settings['site_sessionname'] = 'SN' . uniqid('');
-                }
-                if (empty($settings['config_options'])) {
-                    $settings['config_options'] = array();
-                }
-
-                $this->settings->fromArray($settings);
-                $settings = array_merge($this->settings->fetch());
-                $dsn = $this->install->getDatabaseDSN($settings['database_type'],$settings['database_server'],$settings['dbase'],$settings['database_connection_charset']);
-                $this->settings->set('database_dsn',$dsn);
+                $this->prepareSettings($settings);
                 $loaded = true;
             }
         }
         return $loaded;
+    }
+
+    /**
+     * Prepares settings for installation, including setting of defaults
+     * 
+     * @param array $settings
+     * @return void
+     */
+    public function prepareSettings(array $settings) {
+        if (empty($settings['site_sessionname'])) {
+            $settings['site_sessionname'] = 'SN' . uniqid('');
+        }
+        if (empty($settings['config_options'])) {
+            $settings['config_options'] = array();
+        }
+        $this->settings->fromArray($settings);
+
+        $this->setDefaultSetting('processors_path',$this->settings->get('core_path').'model/modx/processors/');
+        $this->setDefaultSetting('connectors_path',$this->settings->get('context_connectors_path'));
+        $this->setDefaultSetting('connectors_url',$this->settings->get('context_connectors_url'));
+        $this->setDefaultSetting('mgr_path',$this->settings->get('context_mgr_path'));
+        $this->setDefaultSetting('mgr_url',$this->settings->get('context_mgr_url'));
+        $this->setDefaultSetting('web_path',$this->settings->get('context_web_path'));
+        $this->setDefaultSetting('web_url',$this->settings->get('context_web_url'));
+        $this->setDefaultSetting('assets_path',$this->settings->get('context_assets_path',$this->settings->get('context_web_path').'assets/'));
+        $this->setDefaultSetting('assets_url',$this->settings->get('context_assets_url',$this->settings->get('context_web_url').'assets/'));
+
+        $dsn = $this->install->getDatabaseDSN($this->settings->get('database_type'),$this->settings->get('database_server'),$this->settings->get('database'),$this->settings->get('database_connection_charset'));
+        $this->settings->set('database_dsn',$dsn);
+        if (!empty($settings['database'])) {
+            $this->settings->set('dbase',$settings['database']);
+        }
+    }
+
+    /**
+     * Sets a default for a setting if not set
+     * @param string $key
+     * @param mixed $default
+     * @return void
+     */
+    public function setDefaultSetting($key,$default) {
+        $value = $this->settings->get($key,null);
+        if ($value === null) {
+            $this->settings->set($key,$default);
+        }
     }
 
     /**
@@ -218,6 +257,73 @@ class modInstallCLIRequest extends modInstallRequest {
         }
 
         return $settings;
+    }
+
+    /**
+     * Check database settings
+     * @return void
+     */
+    public function checkDatabase() {
+        $mode = $this->settings->get('installmode');
+
+        /* get an instance of xPDO using the install settings */
+        $xpdo = $this->install->getConnection($mode);
+        if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+            $this->end($this->install->lexicon('xpdo_err_ins'));
+        }
+
+        /* try to get a connection to the actual database */
+        $dbExists = $xpdo->connect();
+        if (!$dbExists) {
+            if ($mode == modInstall::MODE_NEW && $xpdo->getManager()) {
+                /* otherwise try to create the database */
+                $dbExists = $xpdo->manager->createSourceContainer(
+                    array(
+                        'dbname' => $this->settings->get('dbase')
+                        ,'host' => $this->settings->get('database_server')
+                    )
+                    ,$this->settings->get('database_user')
+                    ,$this->settings->get('database_password')
+                    ,array(
+                        'charset' => $this->settings->get('database_connection_charset')
+                        ,'collation' => $this->settings->get('database_collation')
+                    )
+                );
+                if (!$dbExists) {
+                    $this->end($this->install->lexicon('db_err_create_database'));
+                } else {
+                    $xpdo = $this->install->getConnection($mode);
+                    if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+                        $this->end($this->install->lexicon('xpdo_err_ins'));
+                    }
+                }
+            } elseif ($mode == modInstall::MODE_NEW) {
+                $this->end($this->install->lexicon('db_err_connect_server'));
+            }
+        }
+        if (!$xpdo->connect()) {
+            $this->end($this->install->lexicon('db_err_connect'));
+        }
+
+        /* test table prefix */
+        if ($mode == modInstall::MODE_NEW || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
+            $count = null;
+            $database = $this->settings->get('dbase');
+            $prefix = $this->settings->get('table_prefix');
+            $stmt = $xpdo->query($this->install->driver->testTablePrefix($database,$prefix));
+            if ($stmt) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($row) {
+                    $count = (integer) $row['ct'];
+                }
+                $stmt->closeCursor();
+            }
+            if ($mode == modInstall::MODE_NEW && $count !== null) {
+                $this->end($this->install->lexicon('test_table_prefix_inuse'));
+            } elseif ($mode == modInstall::MODE_UPGRADE_REVO_ADVANCED && $count === null) {
+                $this->end($this->install->lexicon('test_table_prefix_nf'));
+            }
+        }
     }
 
     /**

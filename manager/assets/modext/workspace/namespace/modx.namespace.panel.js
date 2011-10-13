@@ -10,7 +10,6 @@ MODx.panel.Namespaces = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-namespaces'
-		,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -20,13 +19,12 @@ MODx.panel.Namespaces = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('namespaces_desc')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-namespace'
-				,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]

@@ -15,6 +15,7 @@ MODx.page.ResourceGroups = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-resource-groups'
+            ,renderTo: 'modx-panel-resource-groups-div'
         }]
         ,buttons: [{
             text: _('help_ex')

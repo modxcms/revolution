@@ -13,27 +13,18 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,labelAlign: 'top'
-    ,cls: 'form-with-labels'
+    ,labelWidth: 150
     ,border: false
     ,items: [{
         xtype: 'textfield'
         ,fieldLabel: _('date_format')
-        ,description: MODx.expandHelp ? '' : _('date_format_desc')
         ,name: 'prop_format'
         ,id: 'prop_format{/literal}{$tv}{literal}'
         ,value: params['format'] || '%A %d, %B %Y'
         ,listeners: oc
-        ,anchor: '100%'
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'prop_format{/literal}{$tv}{literal}'
-        ,html: _('date_format_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'combo'
         ,fieldLabel: _('date_use_current')
-        ,description: MODx.expandHelp ? '' : _('date_use_current_desc')
         ,name: 'prop_default'
         ,hiddenName: 'prop_default'
         ,id: 'prop_default{/literal}{$tv}{literal}'
@@ -50,12 +41,6 @@ MODx.load({
         ,triggerAction: 'all'
         ,value: params['default'] || 'no'
         ,listeners: oc
-        ,width: 200
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'prop_default{/literal}{$tv}{literal}'
-        ,html: _('default_desc')
-        ,cls: 'desc-under'
     }]
     ,renderTo: 'modx-tv-wprops-form{/literal}{$tv}{literal}'
 });

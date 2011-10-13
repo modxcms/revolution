@@ -2,7 +2,7 @@ MODx.panel.Dashboards = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-dashboards'
-        ,cls: 'container'
+        ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('dashboards')+'</h2>'
@@ -11,26 +11,24 @@ MODx.panel.Dashboards = function(config) {
             ,cls: 'modx-page-header'
         },MODx.getPageStructure([{
             layout: 'form'
+            ,bodyStyle: 'padding: 15px;'
             ,title: _('dashboards')
             ,items: [{
                 html: '<p>'+_('dashboards.intro_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-dashboards'
-                ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         },{
             layout: 'form'
+            ,bodyStyle: 'padding: 15px;'
             ,title: _('widgets')
             ,items: [{
                 html: '<p>'+_('widgets.intro_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-dashboard-widgets'
-                ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         }],{

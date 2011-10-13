@@ -13,8 +13,7 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,cls: 'form-with-labels'
-    ,labelAlign: 'top'
+    ,labelWidth: 150
     ,border: false
     ,items: [{
         xtype: 'textfield'
@@ -23,7 +22,6 @@ MODx.load({
         ,id: 'prop_tagname{/literal}{$tv}{literal}'
         ,value: params['tagname'] || 'div'
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('tag_id')
@@ -31,7 +29,6 @@ MODx.load({
         ,id: 'prop_tagid{/literal}{$tv}{literal}'
         ,value: params['tagid'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
@@ -39,7 +36,6 @@ MODx.load({
         ,id: 'prop_class{/literal}{$tv}{literal}'
         ,value: params['class'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('style')
@@ -47,7 +43,6 @@ MODx.load({
         ,id: 'prop_style{/literal}{$tv}{literal}'
         ,value: params['style'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
@@ -55,7 +50,6 @@ MODx.load({
         ,id: 'prop_attrib{/literal}{$tv}{literal}'
         ,value: params['attrib'] || ''
         ,listeners: oc
-        ,anchor: '100%'
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

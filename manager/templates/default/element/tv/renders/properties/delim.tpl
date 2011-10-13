@@ -13,23 +13,16 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,labelAlign: 'top'
-    ,cls: 'form-with-labels'
+    ,labelWidth: 150
     ,border: false
     ,items: [{
         xtype: 'textfield'
         ,fieldLabel: _('delimiter')
-        ,description: MODx.expandHelp ? '' : _('delimiter_desc')
         ,name: 'prop_delimiter'
         ,id: 'prop_delimiter{/literal}{$tv}{literal}'
         ,value: params['delimiter'] || ''
-        ,anchor: '100%'
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'prop_delimiter{/literal}{$tv}{literal}'
-        ,html: _('delimter_desc')
-        ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

@@ -12,7 +12,7 @@ class SystemFileEditManagerController extends modManagerController {
     public $fileRecord = array();
     /** @var bool A boolean stating whether or not this file can be saved */
     public $canSave = false;
-
+    
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -45,15 +45,22 @@ class SystemFileEditManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
         $this->modx->lexicon->load('file');
-
+        
         if (empty($_GET['file'])) return $this->failure($this->modx->lexicon('file_err_nf'));
         $this->loadWorkingContext();
 
         /* format filename */
         $this->filename = preg_replace('#([\\\\]+|/{2,})#', '/',$scriptProperties['file']);
 
-        $source = $this->getSource();
-        $this->fileRecord = $source->getObjectContents($this->filename);
+        /** @var modMediaSource $source */
+        $this->modx->loadClass('sources.modMediaSource');
+        $source = modMediaSource::getDefaultSource($this->modx);
+        if (!$source->getWorkingContext()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+        $source->setRequestProperties($scriptProperties);
+        $source->initialize();
+        $this->fileRecord = $source->getFile($this->filename);
 
         if (empty($this->fileRecord)) {
             $errors = $source->getErrors();
@@ -69,28 +76,6 @@ class SystemFileEditManagerController extends modManagerController {
         $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();
 
         return $placeholders;
-    }
-
-    /**
-     * Get the active source
-     * @return modMediaSource
-     */
-    public function getSource() {
-        /** @var modMediaSource|modFileMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $source = $this->modx->getOption('source',$this->scriptProperties,false);
-        if (!empty($source)) {
-            $source = $this->modx->getObject('source.modMediaSource',$source);
-        }
-        if (empty($source)) {
-            $source = modMediaSource::getDefaultSource($this->modx);
-        }
-        if (!$source->getWorkingContext()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        $source->setRequestProperties($this->scriptProperties);
-        $source->initialize();
-        return $source;
     }
 
     /**

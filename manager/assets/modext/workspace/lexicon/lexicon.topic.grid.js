@@ -152,7 +152,7 @@ MODx.window.CreateLexiconTopic = function(config) {
             ,name: 'name'
             ,id: 'modx-clt-name'
             ,itemId: 'name'
-            ,anchor: '100%'
+            ,width: 250
             ,maxLength: 100
         },{
             xtype: 'modx-combo-namespace'
@@ -161,7 +161,6 @@ MODx.window.CreateLexiconTopic = function(config) {
             ,id: 'modx-clt-namespace'
             ,itemId: 'namespace'
             ,value: r['namespace']
-            ,anchor: '100%'
         }]
     });
     MODx.window.CreateLexiconTopic.superclass.constructor.call(this,config);

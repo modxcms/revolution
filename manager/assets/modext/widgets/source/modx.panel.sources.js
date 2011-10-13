@@ -2,7 +2,6 @@ MODx.panel.Sources = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-sources'
-		,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -12,26 +11,24 @@ MODx.panel.Sources = function(config) {
             ,cls: 'modx-page-header'
         },MODx.getPageStructure([{
             layout: 'form'
+            ,bodyStyle: 'padding: 15px;'
             ,title: _('sources')
             ,items: [{
                 html: '<p>'+_('sources.intro_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-sources'
-				,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         },{
             layout: 'form'
+            ,bodyStyle: 'padding: 15px;'
             ,title: _('source_types')
             ,items: [{
                 html: '<p>'+_('source_types.intro_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-source-types'
-				,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         }],{
@@ -245,20 +242,20 @@ MODx.window.CreateSource = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,grow: true
         },{
             name: 'class_key'
             ,hiddenName: 'class_key'
             ,xtype: 'modx-combo-source-type'
             ,fieldLabel: _('source_type')
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
         }]
     });

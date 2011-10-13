@@ -154,14 +154,14 @@ MODx.window.UpdateSourceAccess = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-authority'
             ,fieldLabel: _('minimum_role')
             ,name: 'authority'
             ,hiddenName: 'authority'
             ,id: 'modx-'+this.ident+'-authority'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,value: r.authority
         },{
             xtype: 'modx-combo-policy'
@@ -174,7 +174,7 @@ MODx.window.UpdateSourceAccess = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
@@ -252,7 +252,7 @@ MODx.window.CreateSourceAccess = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-authority'
             ,fieldLabel: _('minimum_role')
@@ -260,7 +260,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,hiddenName: 'authority'
             ,value: 9999
             ,id: 'modx-'+this.ident+'-authority'
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-policy'
             ,fieldLabel: _('policy')
@@ -271,7 +271,7 @@ MODx.window.CreateSourceAccess = function(config) {
                 action: 'getList'
                 ,group: 'MediaSource'
             }
-            ,anchor: '100%'
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateSourceAccess.superclass.constructor.call(this,config);

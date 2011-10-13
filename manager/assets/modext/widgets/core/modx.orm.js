@@ -328,14 +328,14 @@ MODx.window.AddOrmAttribute = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,anchor: '100%'
+            ,anchor: '85%'
             ,allowBlank: false
         },{
             xtype: 'textfield'
             ,fieldLabel: _('value')
             ,name: 'value'
             ,id: 'modx-'+this.ident+'-value'
-            ,anchor: '100%'
+            ,anchor: '85%'
         }]
     });
     MODx.window.AddOrmAttribute.superclass.constructor.call(this,config);
@@ -381,7 +381,7 @@ MODx.window.AddOrmContainer = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,anchor: '100%'
+            ,anchor: '85%'
             ,allowBlank: false
         }]
     });
@@ -427,7 +427,7 @@ MODx.window.RenameOrmContainer = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,anchor: '100%'
+            ,anchor: '85%'
             ,allowBlank: false
         }]
     });

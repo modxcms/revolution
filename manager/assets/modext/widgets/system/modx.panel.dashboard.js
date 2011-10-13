@@ -6,7 +6,6 @@ MODx.panel.Dashboard = function(config) {
         ,baseParams: {
             action: 'update'
         }
-        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
              html: '<h2>'+_('dashboard')+'</h2>'
@@ -16,10 +15,10 @@ MODx.panel.Dashboard = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: {
-                autoHeight: true
-                ,border: false
+                bodyStyle: 'padding: 15px;'
+                ,autoHeight: true
+                ,border: true
             }
-            ,border: true
             ,id: 'modx-dashboard-tabs'
             ,forceLayout: true
             ,deferredRender: false
@@ -31,11 +30,11 @@ MODx.panel.Dashboard = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-                ,cls: 'main-wrapper form-with-labels'
-                ,defaults: { border: false }
+                ,bodyStyle: 'padding: 15px;'
+                ,defaults: { border: false ,msgTarget: 'side' }
                 ,layout: 'form'
                 ,id: 'modx-dashboard-form'
-                ,labelAlign: 'top'
+                ,labelWidth: 150
                 ,items: [{
                     xtype: 'hidden'
                     ,name: 'id'
@@ -46,33 +45,21 @@ MODx.panel.Dashboard = function(config) {
                     ,id: 'modx-dashboard-name'
                     ,xtype: 'textfield'
                     ,fieldLabel: _('name')
-                    ,description: MODx.expandHelp ? '' : _('dashboard_desc_name')
                     ,allowBlank: false
                     ,enableKeyEvents: true
-                    ,anchor: '100%'
+                    ,anchor: '97%'
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
                             Ext.getCmp('modx-dashboard-header').getEl().update('<h2>'+_('dashboard')+': '+f.getValue()+'</h2>');
                         }}
                     }
                 },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-dashboard-name'
-                    ,html: _('dashboard_desc_name')
-                    ,cls: 'desc-under'
-                },{
                     name: 'description'
                     ,id: 'modx-dashboard-description'
                     ,xtype: 'textarea'
                     ,fieldLabel: _('description')
-                    ,description: MODx.expandHelp ? '' : _('dashboard_desc_description')
-                    ,anchor: '100%'
+                    ,anchor: '97%'
                     ,grow: true
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-dashboard-description'
-                    ,html: _('dashboard_desc_description')
-                    ,cls: 'desc-under'
                 },{
                     html: '<hr />'
                     ,border: false
@@ -84,7 +71,7 @@ MODx.panel.Dashboard = function(config) {
                     ,preventRender: true
                     ,dashboard: config.record.id
                     ,autoHeight: true
-                    ,anchor: '100%'
+                    ,width: '97%'
                     ,listeners: {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                         ,'updateRole': {fn:this.markDirty,scope:this}
@@ -282,7 +269,6 @@ MODx.window.DashboardWidgetPlace = function(config) {
             ,id: 'modx-'+this.ident+'-widget'
             ,allowBlank: false
             ,msgTarget: 'under'
-            ,anchor: '100%'
         }]
     });
     MODx.window.DashboardWidgetPlace.superclass.constructor.call(this,config);
@@ -431,7 +417,7 @@ MODx.combo.DashboardWidgets = function(config) {
     Ext.applyIf(config,{
         name: 'widget'
         ,hiddenName: 'widget'
-        ,displayField: 'name_trans'
+        ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name','name_trans','description','description_trans']
         ,listWidth: 400

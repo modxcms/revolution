@@ -11,7 +11,7 @@ MODx.panel.FCSet = function(config) {
         ,baseParams: {}
         ,id: 'modx-panel-fc-set'
         ,class_key: 'modFormCustomizationSet'
-        ,cls: 'container'
+        ,bodyStyle: ''
         ,items: [{
             html: '<h2>'+_('set_new')+'</h2>'
             ,border: false
@@ -19,141 +19,124 @@ MODx.panel.FCSet = function(config) {
             ,id: 'modx-fcs-header'
         },MODx.getPageStructure([{
             title: _('set_and_fields')
-            ,xtype: 'panel'
-            ,border: false
-            ,defaults: { border: false }
+            ,bodyStyle: 'padding: 15px;'
+            ,defaults: {border: false ,msgTarget: 'side'}
+            ,layout: 'form'
+            ,id: 'modx-fcs-form'
+            ,labelWidth: 150
             ,items: [{
                 html: '<p>'+_('set_msg')+'</p>'
                 ,id: 'modx-fcs-msg'
-                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
-                layout: 'form'
-                ,id: 'modx-fcs-form'
-                ,msgTarget: 'side'
-                ,cls: 'main-wrapper'
-                ,labelWidth: 150
-                ,items: [{
-                    xtype: 'hidden'
-                    ,name: 'id'
-                    ,id: 'modx-fcs-id'
-                    ,value: config.record.id || MODx.request.id
-                },{
-                    xtype: 'modx-combo-fc-action'
-                    ,fieldLabel: _('action')
-                    ,name: 'action_id'
-                    ,hiddenName: 'action_id'
-                    ,id: 'modx-fcs-action'
-                    ,anchor: '100%'
-                    ,allowBlank: false
-                    ,value: config.record.action
-                    ,listeners: {
-                        'select': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-fcs-header').getEl().update('<h2>'+_('set')+': '+f.getRawValue()+'</h2>');
-                        }}
-                    }
-                },{
-                    xtype: 'modx-combo-template'
-                    ,fieldLabel: _('template')
-                    ,description: _('set_template_desc')
-                    ,name: 'template'
-                    ,hiddenName: 'template'
-                    ,value: config.record.template || 0
-                    ,anchor: '100%'
-                    ,allowBlank: true
-                    ,lazyInit: false
-                    ,lazyRender: false
-                    ,baseParams: {
-                        action: 'getList'
-                        ,combo: true
-                    }
-                    ,listeners: {
-                        'select': {fn:this.changeTemplate,scope:this}
-                    }
-                },{
-                    xtype: 'textarea'
-                    ,fieldLabel: _('description')
-                    ,name: 'description'
-                    ,id: 'modx-fcs-description'
-                    ,anchor: '100%'
-                    ,maxLength: 255
-                    ,grow: false
-                    ,value: config.record.description
-                },{
-                    xtype: 'hidden'
-                    ,fieldLabel: _('constraint_class')
-                    ,name: 'constraint_class'
-                    ,value: 'modResource'
-                    ,anchor: '100%'
-                    ,allowBlank: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('constraint_field')
-                    ,description: _('set_constraint_field_desc')
-                    ,name: 'constraint_field'
-                    ,value: config.record.constraint_field
-                    ,anchor: '100%'
-                    ,allowBlank: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('constraint')
-                    ,description: _('set_constraint_desc')
-                    ,name: 'constraint'
-                    ,value: config.record.constraint
-                    ,anchor: '100%'
-                    ,allowBlank: true
-                },{
-                    xtype: 'xcheckbox'
-                    ,fieldLabel: _('active')
-                    ,name: 'active'
-                    ,inputValue: true
-                    ,value: config.record.active ? true : false
-                    ,anchor: '100%'
-                    ,allowBlank: true
-                }]
+                xtype: 'hidden'
+                ,name: 'id'
+                ,id: 'modx-fcs-id'
+                ,value: config.record.id || MODx.request.id
             },{
-                html: '<p>'+_('set_fields_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
+                xtype: 'modx-combo-fc-action'
+                ,fieldLabel: _('action')
+                ,name: 'action_id'
+                ,hiddenName: 'action_id'
+                ,id: 'modx-fcs-action'
+                ,anchor: '90%'
+                ,allowBlank: false
+                ,value: config.record.action
+                ,listeners: {
+                    'select': {scope:this,fn:function(f,e) {
+                        Ext.getCmp('modx-fcs-header').getEl().update('<h2>'+_('set')+': '+f.getRawValue()+'</h2>');
+                    }}
+                }
+            },{
+                xtype: 'modx-combo-template'
+                ,fieldLabel: _('template')
+                ,description: _('set_template_desc')
+                ,name: 'template'
+                ,hiddenName: 'template'
+                ,value: config.record.template || 0
+                ,anchor: '90%'
+                ,allowBlank: true
+                ,lazyInit: false
+                ,lazyRender: false
+                ,baseParams: {
+                    action: 'getList'
+                    ,combo: true
+                }
+                ,listeners: {
+                    'select': {fn:this.changeTemplate,scope:this}
+                }
+            },{
+                xtype: 'textarea'
+                ,fieldLabel: _('description')
+                ,name: 'description'
+                ,id: 'modx-fcs-description'
+                ,anchor: '90%'
+                ,maxLength: 255
+                ,grow: false
+                ,value: config.record.description
+            },{
+                xtype: 'hidden'
+                ,fieldLabel: _('constraint_class')
+                ,name: 'constraint_class'
+                ,value: 'modResource'
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('constraint_field')
+                ,description: _('set_constraint_field_desc')
+                ,name: 'constraint_field'
+                ,value: config.record.constraint_field
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('constraint')
+                ,description: _('set_constraint_desc')
+                ,name: 'constraint'
+                ,value: config.record.constraint
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                xtype: 'xcheckbox'
+                ,fieldLabel: _('active')
+                ,name: 'active'
+                ,inputValue: true
+                ,value: config.record.active ? true : false
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                html: '<hr /><p>'+_('set_fields_msg')+'</p>'
                 ,border: false
             },{
-                id: 'modx-fcs-fields-form'
-                ,msgTarget: 'side'
-                ,cls: 'main-wrapper'
-                ,items: [{
-                    xtype: 'modx-grid-fc-set-fields'
-                    ,data: config.record.fields || []
-                    ,preventRender: true
-                }]
+                xtype: 'modx-grid-fc-set-fields'
+                ,data: config.record.fields || []
+                ,preventRender: true
             }]
         },{
             title: _('tabs')
-            ,border: false
+            ,bodyStyle: { padding: '15px' }
             ,items: [{
                 html: '<p>'+_('set_tabs_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-fc-set-tabs'
-                ,cls: 'main-wrapper'
                 ,data: config.record.tabs || []
                 ,preventRender: true
             }]
         },{
             title: _('tvs')
-            ,border: false
+            ,bodyStyle: { padding: '15px' }
             ,items: [{
                 html: '<p>'+_('set_tvs_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-fc-set-tvs'
-                ,cls: 'main-wrapper'
                 ,data: config.record.tvs || []
                 ,preventRender: true
             }]
         }],{
             id: 'modx-fc-set-tabs'
-            ,border: true
         })]
         ,useLoadingMask: true
         ,listeners: {
@@ -384,14 +367,14 @@ MODx.window.AddTabToSet = function(config) {
             ,fieldLabel: _('tab_id')
             ,id: 'modx-fcatab-id'
             ,allowBlank: false
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('tab_title')
             ,name: 'value'
             ,id: 'modx-fcatab-name'
             ,allowBlank: false
-            ,anchor: '100%'
+            ,anchor: '90%'
         }]
     });
     MODx.window.AddTabToSet.superclass.constructor.call(this,config);

@@ -12,9 +12,8 @@ var oc = {'change':{fn:function(){Ext.getCmp('modx-panel-tv').markDirty();},scop
 MODx.load({
     xtype: 'panel'
     ,layout: 'form'
-    ,cls: 'form-with-labels'
-    ,labelAlign: 'top'
     ,autoHeight: true
+    ,labelWidth: 150
     ,border: false
     ,items: [{
         xtype: 'combo-boolean'
@@ -24,99 +23,64 @@ MODx.load({
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
         ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
-        ,width: 200
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
-        ,html: _('required_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('combo_listwidth')
-        ,description: MODx.expandHelp ? '' : _('combo_listwidth_desc')
+        ,description: _('combo_listwidth_desc')
         ,name: 'inopt_listWidth'
         ,id: 'inopt_listWidth{/literal}{$tv}{literal}'
         ,value: params['listWidth'] || ''
-        ,width: 200
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_listWidth{/literal}{$tv}{literal}'
-        ,html: _('combo_listwidth_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('combo_title')
-        ,description: MODx.expandHelp ? '' : _('combo_title_desc')
+        ,description: _('combo_title_desc')
         ,name: 'inopt_title'
         ,id: 'inopt_title{/literal}{$tv}{literal}'
         ,value: params['title'] || ''
-        ,anchor: '100%'
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_title{/literal}{$tv}{literal}'
-        ,html: _('combo_title_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'combo-boolean'
         ,fieldLabel: _('combo_typeahead')
-        ,description: MODx.expandHelp ? '' : _('combo_typeahead_desc')
+        ,description: _('combo_typeahead_desc')
         ,name: 'inopt_typeAhead'
         ,hiddenName: 'inopt_typeAhead'
         ,id: 'inopt_typeAhead{/literal}{$tv}{literal}'
         ,value: params['typeAhead'] || false
-        ,width: 200
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_typeAhead{/literal}{$tv}{literal}'
-        ,html: _('combo_typeahead_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('combo_typeahead_delay')
-        ,description: MODx.expandHelp ? '' : _('combo_typeahead_delay_desc')
+        ,description: _('combo_typeahead_delay_desc')
         ,name: 'inopt_typeAheadDelay'
         ,id: 'inopt_typeAheadDelay{/literal}{$tv}{literal}'
         ,value: params['typeAheadDelay'] || 250
-        ,width: 200
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_typeAheadDelay{/literal}{$tv}{literal}'
-        ,html: _('typeahead_delay_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('combo_listempty_text')
-        ,description: MODx.expandHelp ? '' : _('combo_listempty_text_desc')
+        ,description: _('combo_listempty_text_desc')
         ,name: 'inopt_listEmptyText'
         ,id: 'inopt_listEmptyText{/literal}{$tv}{literal}'
         ,value: params['listEmptyText'] || ''
-        ,anchor: '100%'
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_listEmptyText{/literal}{$tv}{literal}'
-        ,html: _('combo_listempty_text_desc')
-        ,cls: 'desc-under'
     },{
         xtype: 'combo-boolean'
         ,fieldLabel: _('combo_stackitems')
-        ,description: MODx.expandHelp ? '' : _('combo_stackitems_desc')
+        ,description: _('combo_stackitems_desc')
         ,name: 'inopt_stackItems'
         ,hiddenName: 'inopt_stackItems'
         ,id: 'inopt_stackItems{/literal}{$tv}{literal}'
         ,value: params['stackItems'] || false
-        ,width: 200
+        ,width: 300
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_stackItems{/literal}{$tv}{literal}'
-        ,html: _('combo_stackitems_desc')
-        ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });

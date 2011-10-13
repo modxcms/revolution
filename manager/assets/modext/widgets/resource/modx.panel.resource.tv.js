@@ -13,10 +13,12 @@ MODx.panel.ResourceTV = function(config) {
         ,title: _('template_variables')
         ,class_key: ''
         ,resource: ''
-        ,cls: MODx.config.tvs_below_content == 1 ? 'x-panel-body tvs-wrapper' : 'tvs-wrapper x-panel-body'
+        ,bodyStyle: 'padding: 15px; border: 0'
         ,autoHeight: true
         ,applyTo: 'modx-resource-tvs-div'
         ,header: false
+        ,style: 'padding: 15px;'
+        ,width: '97%'
         ,templateField: 'modx-resource-template'
     });
     MODx.panel.ResourceTV.superclass.constructor.call(this,config);

@@ -360,14 +360,14 @@ MODx.window.CreateFCSet = function(config) {
             ,xtype: 'modx-combo-fc-action'
             ,editable: false
             ,allowBlank: false
-            ,anchor: '100%'
+            ,anchor: '90%'
 
         },{
             xtype: 'textarea'
             ,name: 'description'
             ,fieldLabel: _('description')
             ,id: 'modx-fcsc-description'
-            ,anchor: '100%'
+            ,anchor: '90%'
 
         },{
             xtype: 'modx-combo-template'
@@ -376,14 +376,14 @@ MODx.window.CreateFCSet = function(config) {
             ,fieldLabel: _('template')
             ,description: _('set_template_desc')
             ,id: 'modx-fcsc-template'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,baseParams: { action: 'getList', combo: true }
             
         },{ html: '<hr />' },{
             xtype: 'hidden'
             ,fieldLabel: _('constraint_class')
             ,name: 'constraint_class'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: true
             ,value: 'modResource'
 
@@ -392,7 +392,7 @@ MODx.window.CreateFCSet = function(config) {
             ,fieldLabel: _('constraint_field')
             ,description: _('set_constraint_field_desc')
             ,name: 'constraint_field'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: true
 
         },{
@@ -400,18 +400,17 @@ MODx.window.CreateFCSet = function(config) {
             ,fieldLabel: _('constraint')
             ,description: _('set_constraint_desc')
             ,name: 'constraint'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: true
             
         },{
             xtype: 'xcheckbox'
-            ,boxLabel: _('active')
-            ,hideLabel: true
+            ,fieldLabel: _('active')
             ,name: 'active'
             ,inputValue: 1
             ,value: 1
             ,checked: true
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: true
         }]
     });
@@ -444,7 +443,7 @@ MODx.window.ImportFCSet = function(config) {
             ,fieldLabel: _('file')
             ,name: 'file'
             ,id: 'modx-impset-file'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,inputType: 'file'
         }]
     });

@@ -12,7 +12,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,renderTo: 'tvpanel{$tv->id}'
         ,value: '{$tv->value|escape}'
-        ,width: '99%'
+        ,width: '97%'
         ,msgTarget: 'under'
     {literal}
     });

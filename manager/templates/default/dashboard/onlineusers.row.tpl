@@ -1,6 +1,7 @@
 <tr class="[[+class]]">
     <td>[[+username]]</td>
-    <td>[[+user]]</td>
-    <td>[[+occurred]]</td>
-    <td>[[+action]]</td>
+    <td>[[+internalKey]]</td>
+    <td>[[+ip]]</td>
+    <td>[[+lastSeen]]</td>
+    <td>[[+currentAction]]</td>
 </tr>

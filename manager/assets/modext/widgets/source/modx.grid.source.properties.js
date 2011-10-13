@@ -342,20 +342,20 @@ MODx.window.CreateSourceProperty = function(config) {
             ,name: 'name'
             ,id: 'modx-cep-name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,width: 200
             ,allowBlank: false
         },{
             fieldLabel: _('description')
             ,name: 'desc'
             ,id: 'modx-cep-desc'
             ,xtype: 'textarea'
-            ,anchor: '100%'
+            ,width: 200
         },{
             fieldLabel: _('type')
             ,name: 'xtype'
             ,id: 'modx-cep-xtype'
             ,xtype: 'modx-combo-xtype'
-            ,anchor: '100%'
+            ,width: 200
             ,listeners: {
                 'select': {fn:function(cb,r,i) {
                     var g = Ext.getCmp('modx-cep-grid-source-property-options');
@@ -373,13 +373,12 @@ MODx.window.CreateSourceProperty = function(config) {
             ,fieldLabel: _('lexicon')
             ,name: 'lexicon'
             ,id: 'modx-cep-lexicon'
-            ,anchor: '100%'
+            ,width: 200
             ,allowBlank: true
         },{
             xtype: 'modx-source-value-field'
             ,xtypeField: 'modx-cep-xtype'
             ,id: 'modx-cep-value'
-            ,anchor: '100%'
         },{
             xtype: 'modx-grid-source-property-options'
             ,id: 'modx-cep-grid-source-property-options'
@@ -439,19 +438,19 @@ MODx.window.UpdateSourceProperty = function(config) {
             ,name: 'name'
             ,id: 'modx-uep-name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,width: 200
         },{
             fieldLabel: _('description')
             ,name: 'desc'
             ,id: 'modx-uep-desc'
             ,xtype: 'textarea'
-            ,anchor: '100%'
+            ,width: 200
         },{
             fieldLabel: _('type')
             ,name: 'xtype'
             ,xtype: 'modx-combo-xtype'
             ,id: 'modx-uep-xtype'
-            ,anchor: '100%'
+            ,width: 200
             ,listeners: {
                 'select': {fn:function(cb,r,i) {
                     var g = Ext.getCmp('modx-uep-grid-source-property-options');
@@ -470,7 +469,7 @@ MODx.window.UpdateSourceProperty = function(config) {
             ,fieldLabel: _('lexicon')
             ,name: 'lexicon'
             ,id: 'modx-uep-lexicon'
-            ,anchor: '100%'
+            ,width: 200
             ,allowBlank: true
         },{
             xtype: 'hidden'
@@ -480,7 +479,6 @@ MODx.window.UpdateSourceProperty = function(config) {
             xtype: 'modx-source-value-field'
             ,xtypeField: 'modx-uep-xtype'
             ,name: 'value'
-            ,anchor: '100%'
             ,id: 'modx-uep-value'
         },{
             id: 'modx-uep-grid-source-property-options'
@@ -556,13 +554,13 @@ MODx.window.CreateSourcePropertyOption = function(config) {
             ,name: 'text'
             ,id: 'modx-cepo-text'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,width: 200
         },{
             fieldLabel: _('value')
             ,name: 'value'
             ,id: 'modx-cepo-value'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,width: 200
         }]
     });
     MODx.window.CreateSourcePropertyOption.superclass.constructor.call(this,config);
@@ -629,7 +627,7 @@ MODx.form.SourceValueField = function(config) {
         fieldLabel: _('value')
         ,name: 'value'
         ,xtype: 'textfield'
-        ,anchor: '100%'
+        ,width: 200
     });
     MODx.form.SourceValueField.superclass.constructor.call(this,config);
     this.config = config;

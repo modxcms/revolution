@@ -64,7 +64,6 @@ Ext.reg('modx-grid-role',MODx.grid.Role);
 
 MODx.window.CreateRole = function(config) {
     config = config || {};
-    this.ident = config.ident || 'crole'+Ext.id();
     Ext.applyIf(config,{
         title: _('role_create')
         ,height: 150
@@ -73,42 +72,23 @@ MODx.window.CreateRole = function(config) {
         ,action: 'create'
         ,fields: [{
             name: 'name'
-            ,fieldLabel: _('name')+'<span class="required">*</span>'
-            ,id: 'modx-'+this.ident+'-name'
+            ,fieldLabel: _('name')
             ,xtype: 'textfield'
             ,allowBlank: false
-            ,anchor: '100%'
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-name'
-            ,html: _('role_desc_name')
-            ,cls: 'desc-under'
+            ,anchor: '90%'
         },{
             name: 'authority'
             ,fieldLabel: _('authority')
             ,xtype: 'textfield'
-            ,id: 'modx-'+this.ident+'-authority'
             ,allowBlank: false
-            ,allowNegative: false
             ,value: 0
-            ,width: 75
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-authority'
-            ,html: _('role_desc_authority')
-            ,cls: 'desc-under'
+            ,width: 50
         },{
             name: 'description'
             ,fieldLabel: _('description')
-            ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,grow: true
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-description'
-            ,html: _('role_desc_description')
-            ,cls: 'desc-under'
         }]
     });
     MODx.window.CreateRole.superclass.constructor.call(this,config);

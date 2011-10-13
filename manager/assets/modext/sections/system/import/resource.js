@@ -13,6 +13,7 @@ MODx.page.ImportResource = function(config) {
         }]
         ,components: [{
             xtype: 'modx-panel-import-resources'
+            ,renderTo: 'modx-import-resources-div'
         }]
     });
     MODx.page.ImportResource.superclass.constructor.call(this,config);

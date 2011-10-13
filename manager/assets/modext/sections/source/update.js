@@ -23,6 +23,7 @@ MODx.page.UpdateSource = function(config) {
         }]
 		,components: [{
             xtype: 'modx-panel-source'
+            ,renderTo: 'modx-panel-source-div'
             ,record: config.record
         }]
 	});

@@ -8,7 +8,6 @@ MODx.panel.GroupsRoles = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-groups-roles'
-		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: [{ 
@@ -18,57 +17,53 @@ MODx.panel.GroupsRoles = function(config) {
             ,id: 'modx-access-permissions-header'
         },MODx.getPageStructure([{
             title: _('user_groups')
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
 			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('user_group_management_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 title: ''
                 ,xtype: 'modx-tree-usergroup'
-				,cls:'main-wrapper'
             }]
         },{
             title: _('roles')
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
 			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('roles_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-role'
-				,cls:'main-wrapper'
                 ,title: ''
                 ,preventRender: true
             }]
         },{
             title: _('policies')
+            ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
 			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('policy_management_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-access-policy'
-				,cls:'main-wrapper'
             }]
         },{
-            title: _('policy_templates') 
-			,autoHeight: true
-			,layout: 'form'			
+            title: _('policy_templates')
+            ,bodyStyle: 'padding: 15px'
+            ,autoHeight: true
+			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('policy_templates.intro_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-access-policy-templates'
-				,cls:'main-wrapper'
             }]
         }],{
-            stateful: true			
+            stateful: true
             ,stateId: 'access-tabpanel'
             ,stateEvents: ['tabchange']
             ,getState:function() {

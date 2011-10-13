@@ -109,7 +109,7 @@ MODx.window.DuplicateLanguage = function(config) {
             ,fieldLabel: _('duplicate')
             ,name: 'name'
             ,itemId: 'name'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,maxLength: 100
             ,allowBlank: false
             ,submitValue: true
@@ -119,7 +119,7 @@ MODx.window.DuplicateLanguage = function(config) {
             ,description: _('language_new_name_desc')
             ,name: 'new_name'
             ,itemId: 'new_name'
-            ,anchor: '100%'
+            ,anchor: '95%'
             ,allowBlank: false
         },{
             xtype: 'xcheckbox'

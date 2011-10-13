@@ -11,6 +11,7 @@ MODx.page.Sources = function(config) {
 	Ext.applyIf(config,{
 		components: [{
             xtype: 'modx-panel-sources'
+            ,renderTo: 'modx-panel-sources-div'
         }]
         ,buttons: [{
             text: _('help_ex')

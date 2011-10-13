@@ -147,12 +147,12 @@ MODx.window.CreateAction = function(config) {
             fieldLabel: _('controller')
             ,name: 'controller'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             fieldLabel: _('namespace')
             ,name: 'namespace'
             ,xtype: 'modx-combo-namespace'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
             ,value: 'core'
         },{
@@ -161,28 +161,26 @@ MODx.window.CreateAction = function(config) {
             ,hiddenName: 'parent'
             ,xtype: 'modx-combo-action'
             ,editable: false
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,id: 'modx-cact-parent'
+        },{
+            fieldLabel: _('load_headers')
+            ,name: 'haslayout'
+            ,xtype: 'xcheckbox'
+            ,checked: true
+            ,inputValue: 1
         },{
             fieldLabel: _('lang_topics')
             ,description: _('lang_topics_desc')
             ,name: 'lang_topics'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             fieldLabel: _('assets')
             ,name: 'assets'
             ,xtype: 'textarea'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,grow: false
-        },{
-            boxLabel: _('load_headers')
-            ,hideLabel: true
-            ,name: 'haslayout'
-            ,xtype: 'xcheckbox'
-            ,anchor: '100%'
-            ,checked: true
-            ,inputValue: 1
         }]
     });
     MODx.window.CreateAction.superclass.constructor.call(this,config);
@@ -216,37 +214,35 @@ MODx.window.UpdateAction = function(config) {
             fieldLabel: _('controller')
             ,name: 'controller'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             fieldLabel: _('namespace')
             ,name: 'namespace'
             ,hiddenName: 'namespace'
             ,xtype: 'modx-combo-namespace'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             name: 'parent'
             ,xtype: 'hidden'
             ,editable: false
         },{
+            fieldLabel: _('load_headers')
+            ,name: 'haslayout'
+            ,xtype: 'xcheckbox'
+            ,checked: true
+        },{
             fieldLabel: _('lang_topics')
             ,description: _('lang_topics_desc')
             ,name: 'lang_topics'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             fieldLabel: _('assets')
             ,name: 'assets'
             ,xtype: 'textarea'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,grow: false
-        },{
-            boxLabel: _('load_headers')
-            ,hideLabel: true
-            ,name: 'haslayout'
-            ,xtype: 'xcheckbox'
-            ,checked: true
-            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateAction.superclass.constructor.call(this,config);

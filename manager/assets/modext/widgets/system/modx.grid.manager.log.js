@@ -78,7 +78,6 @@ MODx.panel.ManagerLog = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-manager-log'
-		
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('mgrlog_view')+'</h2>'
@@ -88,53 +87,46 @@ MODx.panel.ManagerLog = function(config) {
         },MODx.getPageStructure([{
             title: _('mgrlog_query')
             ,layout: 'form'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 html: '<p>'+_('mgrlog_query_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
-				xtype: 'panel'
-				,border: false
-				,cls:'main-wrapper'
-				,layout: 'form'
-				,items: [{
-					xtype: 'modx-combo-user'
-					,fieldLabel: _('user')
-					,name: 'user'
-					,listeners: {
-						'select': {fn: this.filter, scope: this}
-					}
-				},{
-					xtype: 'textfield'
-					,fieldLabel: _('action')
-					,name: 'actionType'
-					,listeners: {
-						'change': {fn: this.filter, scope: this}
-						,'render': {fn:this._addEnterKeyHandler}
-					}
-				},{
-					xtype: 'datefield'
-					,fieldLabel: _('date_start')
-					,name: 'dateStart'
-					,allowBlank: true
-					,listeners: {
-						'select': {fn: this.filter, scope: this}
-						,'render': {fn:this._addEnterKeyHandler}
-					}
-				},{
-					xtype: 'datefield'
-					,fieldLabel: _('date_end')
-					,name: 'dateEnd'
-					,allowBlank: true
-					,listeners: {
-						'select': {fn: this.filter, scope: this}
-						,'render': {fn:this._addEnterKeyHandler}
-					}
-				}]
+                xtype: 'modx-combo-user'
+                ,fieldLabel: _('user')
+                ,name: 'user'
+                ,listeners: {
+                    'select': {fn: this.filter, scope: this}
+                }
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('action')
+                ,name: 'actionType'
+                ,listeners: {
+                    'change': {fn: this.filter, scope: this}
+                    ,'render': {fn:this._addEnterKeyHandler}
+                }
+            },{
+                xtype: 'datefield'
+                ,fieldLabel: _('date_start')
+                ,name: 'dateStart'
+                ,allowBlank: true
+                ,listeners: {
+                    'select': {fn: this.filter, scope: this}
+                    ,'render': {fn:this._addEnterKeyHandler}
+                }
+            },{
+                xtype: 'datefield'
+                ,fieldLabel: _('date_end')
+                ,name: 'dateEnd'
+                ,allowBlank: true
+                ,listeners: {
+                    'select': {fn: this.filter, scope: this}
+                    ,'render': {fn:this._addEnterKeyHandler}
+                }
             },MODx.PanelSpacer,{
                 xtype: 'modx-grid-manager-log'
-				,cls:'main-wrapper'
                 ,preventRender: true
                 ,formpanel: 'modx-panel-manager-log'
             }]

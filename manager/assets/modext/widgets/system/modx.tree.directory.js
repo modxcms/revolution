@@ -20,7 +20,12 @@ MODx.tree.Directory = function(config) {
         ,ddGroup: 'modx-treedrop-dd'
         ,url: MODx.config.connectors_url+'browser/directory.php'
         ,baseParams: {
-            hideFiles: config.hideFiles || false
+            prependPath: config.prependPath || null
+            ,basePath: config.basePath || ''
+            ,basePathRelative: config.basePathRelative || null
+            ,baseUrl: config.baseUrl || ''
+            ,baseUrlRelative: config.baseUrlRelative || null
+            ,hideFiles: config.hideFiles || false
             ,wctx: MODx.ctx || 'web'
             ,currentAction: MODx.request.a || 0
             ,currentFile: MODx.request.file || ''
@@ -85,9 +90,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         var cb = MODx.load({
             xtype: 'modx-combo-source'
-            ,ctCls: 'modx-leftbar-second-tb'
-            ,value: MODx.config.default_media_source
-            ,width: Ext.getCmp(this.config.id).getWidth() - 12
+            ,style: 'margin: 5px'
+            ,cls: 'modx-file-tree-source-cb'
+            ,value: 1
+            ,width: Ext.getCmp(this.config.id).getWidth() - 15
             ,listeners: {
                 'select':{fn:this.changeSource,scope:this}
             }
@@ -171,7 +177,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,editFile: function(itm,e) {
-        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
     }
 
     ,browser: null
@@ -330,7 +336,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,url: MODx.config.connectors_url+'browser/file.php'
             ,params: {
                 action: 'remove'
-                ,file: node.attributes.id
+                ,file: node.attributes.path
+                ,prependPath: this.config.prependPath || null
+                ,prependUrl: this.config.prependUrl || null
+                ,basePath: this.config.basePath || ''
+                ,basePathRelative: this.config.basePathRelative || null
+                ,baseUrl: this.config.baseUrl || ''
+                ,baseUrlRelative: this.config.baseUrlRelative || null
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
@@ -368,7 +380,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.uploader.on('uploaderror',this.uploadError,this);
             this.uploader.on('uploadfailed',this.uploadFailed,this);
         }
-        this.uploader.base_params.source = this.getSource();
         this.uploader.show(btn);
     }
     ,uploadError: function(dlg,file,data,rec) {}
@@ -415,6 +426,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
+
+
+    
 });
 Ext.reg('modx-tree-directory',MODx.tree.Directory);
 
@@ -449,13 +463,13 @@ MODx.window.CreateDirectory = function(config) {
             fieldLabel: _('name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             fieldLabel: _('file_folder_parent')
             ,name: 'parent'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '95%'
         }]
     });
     MODx.window.CreateDirectory.superclass.constructor.call(this,config);
@@ -494,13 +508,13 @@ MODx.window.ChmodDirectory = function(config) {
             name: 'dir'
             ,fieldLabel: _('name')
             ,xtype: 'statictextfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,submitValue: true
         },{
             fieldLabel: _('mode')
             ,name: 'mode'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
         }]
     });
@@ -534,17 +548,17 @@ MODx.window.RenameDirectory = function(config) {
             ,name: 'path'
             ,xtype: 'statictextfield'
             ,submitValue: true
-            ,anchor: '100%'
+            ,anchor: '95%'
         },{
             fieldLabel: _('old_name')
             ,name: 'old_name'
             ,xtype: 'statictextfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             fieldLabel: _('new_name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
         }]
     });
@@ -577,17 +591,17 @@ MODx.window.RenameFile = function(config) {
             ,name: 'path'
             ,xtype: 'statictextfield'
             ,submitValue: true
-            ,anchor: '100%'
+            ,anchor: '95%'
         },{
             fieldLabel: _('old_name')
             ,name: 'old_name'
             ,xtype: 'statictextfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
         },{
             fieldLabel: _('new_name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             name: 'dir'

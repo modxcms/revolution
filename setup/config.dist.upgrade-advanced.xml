@@ -18,7 +18,7 @@
  Place, Suite 330, Boston, MA 02111-1307 USA
 
 
- An example configuration xml file for CLI MODX installs.
+ An example configuration xml file for upgrading CLI MODX installs in advanced mode.
 -->
 <modx>
 	<database_type>mysql</database_type>
@@ -37,7 +37,7 @@
     <!-- Set this to 1 if you are using MODX from Git or extracted it from the full MODX package to the server prior
          to installation. -->
     <inplace>0</inplace>
-    
+
     <!-- Set this to 1 if you have manually extracted the core package from the file core/packages/core.transport.zip.
          This will reduce the time it takes for the installation process on systems that do not allow the PHP time_limit
          and Apache script execution time settings to be altered. -->
@@ -46,24 +46,10 @@
     <!-- The language to install MODX for. This will set the default manager language to this. Use IANA codes. -->
     <language>en</language>
 
-    <!-- Information for your administrator account -->
-    <cmsadmin>username</cmsadmin>
-    <cmspassword>password</cmspassword>
-    <cmsadminemail>email@address.com</cmsadminemail>
-
-    <!-- Paths for your MODX installation -->
-    <mgr_path>/www/modx/manager/</mgr_path>
-    <mgr_url>/modx/manager/</mgr_url>
-    <connectors_path>/www/modx/connectors/</connectors_path>
-    <connectors_url>/modx/connectors/</connectors_url>
-    <web_path>/www/modx/</web_path>
-    <web_url>/modx/</web_url>
-    <assets_path>/www/modx/assets/</assets_path>
-    <assets_url>/modx/assets/</assets_url>
+    <!-- Paths for your MODX core directory -->
     <core_path>/www/modx/core/</core_path>
-    <processors_path>/www/modx/core/model/modx/processors/</processors_path>
 
-    <!-- Paths for the default web context that is installed. -->
+    <!-- Paths for the default contexts that are installed. -->
     <context_mgr_path>/www/modx/manager/</context_mgr_path>
     <context_mgr_url>/modx/manager/</context_mgr_url>
     <context_connectors_path>/www/modx/connectors/</context_connectors_path>
