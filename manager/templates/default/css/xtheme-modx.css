@@ -1581,7 +1581,7 @@ td.x-date-mp-sep {
 
 .x-tip {
     -moz-border-radius:5px 5px 5px 5px;
-    background-color:#FAFAFA;
+    background-color:#eee;
     background-image:none;
     border:1px solid #D7D7D7;
     padding:5px;
@@ -1603,12 +1603,12 @@ td.x-date-mp-sep {
 }
 
 .x-tip .x-tip-header-text {
-    font: bold 11px arial, tahoma, helvetica,sans-serif;
+    font: bold 13px arial, tahoma, helvetica,sans-serif;
     color:#555;
 }
 
 .x-tip .x-tip-body {
-    font: normal 11px arial, tahoma, helvetica,sans-serif;
+    font: normal 12px arial, tahoma, helvetica,sans-serif;
     color:#717F37;
 }
 

@@ -1450,6 +1450,15 @@ $settings['set_header']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['show_tv_categories_header']= $xpdo->newObject('modSystemSetting');
+$settings['show_tv_categories_header']->fromArray(array (
+  'key' => 'show_tv_categories_header',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['signupemail_message']= $xpdo->newObject('modSystemSetting');
 $settings['signupemail_message']->fromArray(array (
   'key' => 'signupemail_message',

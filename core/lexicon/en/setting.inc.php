@@ -591,6 +591,9 @@ $_lang['setting_settings_distro_desc'] = 'The current installed distribution of 
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
+$_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
+$_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
+
 $_lang['setting_signupemail_message'] = 'Sign-up e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an e-mail containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
