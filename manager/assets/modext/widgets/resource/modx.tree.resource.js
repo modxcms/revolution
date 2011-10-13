@@ -413,6 +413,21 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return dropNode.attributes.text != 'root' && dropNode.attributes.text !== '' 
             && targetParent.attributes.text != 'root' && targetParent.attributes.text !== '';
     }
+
+    ,getContextSettingForNode: function(node,ctx,setting,dv) {
+        var val = dv || null;
+        if (node.attributes.type != 'modContext') {
+            var t = node.getOwnerTree();
+            var rn = t.getRootNode();
+            var cn = rn.findChild('ctx',ctx,false);
+            if (cn) {
+                val = cn.attributes.settings[setting];
+            }
+        } else {
+            val = node.attributes.settings[setting];
+        }
+        return val;
+    }
     
     ,quickCreate: function(itm,e,cls,ctx,p) {
         cls = cls || 'modResource';
@@ -420,8 +435,26 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             class_key: cls
             ,context_key: ctx || 'web'
             ,'parent': p || 0
+            ,'template': this.getContextSettingForNode(this.cm.activeNode,ctx,'default_template',MODx.config.default_template)
+            ,'richtext': this.getContextSettingForNode(this.cm.activeNode,ctx,'richtext_default',MODx.config.richtext_default)
+            ,'hidemenu': this.getContextSettingForNode(this.cm.activeNode,ctx,'hidemenu_default',MODx.config.hidemenu_default)
+            ,'searchable': this.getContextSettingForNode(this.cm.activeNode,ctx,'search_default',MODx.config.search_default)
+            ,'cacheable': this.getContextSettingForNode(this.cm.activeNode,ctx,'cache_default',MODx.config.cache_default)
+            ,'published': this.getContextSettingForNode(this.cm.activeNode,ctx,'publish_default',MODx.config.publish_default)
+            ,'content_type': this.getContextSettingForNode(this.cm.activeNode,ctx,'default_content_type',MODx.config.default_content_type)
         };
-        
+
+        if (this.cm.activeNode.attributes.type != 'modContext') {
+            var t = this.cm.activeNode.getOwnerTree();
+            var rn = t.getRootNode();
+            var cn = rn.findChild('ctx',ctx,false);
+            if (cn) {
+                r['template'] = cn.attributes.settings.default_template;
+            }
+        } else {
+            r['template'] = this.cm.activeNode.attributes.settings.default_template;
+        }
+
         var w = MODx.load({
             xtype: 'modx-window-quick-create-modResource'
             ,record: r

@@ -301,11 +301,21 @@ class modResourceGetNodesProcessor extends modProcessor {
         $class[] = !empty($this->permissions['new_context_document']) ? $this->permissions['new_context_document'] : '';
         $class[] = !empty($this->permissions['resource_quick_create']) ? $this->permissions['resource_quick_create'] : '';
 
+        $context->prepare();
         return array(
             'text' => $context->get('key'),
             'id' => $context->get('key') . '_0',
             'pk' => $context->get('key'),
             'ctx' => $context->get('key'),
+            'settings' => array(
+                'default_template' => $context->getOption('default_template'),
+                'richtext_default' => $context->getOption('richtext_default'),
+                'hidemenu_default' => $context->getOption('hidemenu_default'),
+                'search_default' => $context->getOption('search_default'),
+                'cache_default' => $context->getOption('cache_default'),
+                'publish_default' => $context->getOption('publish_default'),
+                'default_content_type' => $context->getOption('default_content_type'),
+            ),
             'leaf' => false,
             'cls' => implode(' ',$class),
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',

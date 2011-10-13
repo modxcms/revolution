@@ -100,6 +100,14 @@ class modContextUpdateProcessor extends modProcessor {
                 $updatedSettings[] = $setting;
             }
         }
+
+        if (!empty($updatedSettings)) {
+            $this->modx->cacheManager->refresh(array(
+                'db' => array(),
+                'resource' => array('contexts' => array($this->context->get('key'))),
+                'context_settings' => array('contexts' => array($this->context->get('key'))),
+            ));
+        }
         return $updatedSettings;
     }
     
