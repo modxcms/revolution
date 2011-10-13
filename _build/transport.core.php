@@ -146,6 +146,7 @@ $collection['1'] = $xpdo->newObject('modWorkspace');
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'Default MODX workspace',
+    'path' => '{core_path}',
     'active' => 1,
 ), '', true, true);
 $attributes = array (

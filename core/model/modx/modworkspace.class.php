@@ -27,4 +27,26 @@ class modWorkspace extends xPDOSimpleObject {
         $saved= parent :: save($cacheFlag);
         return $saved;
     }
+
+    /**
+     * Overrides xPDOObject::get() to replace path settings.
+     *
+     * {@inheritdoc}
+     */
+    public function get($k, $format = null, $formatTemplate= null) {
+        $result= parent :: get($k, $format, $formatTemplate);
+        if ($k === 'path' && strpos($result, '{') !== false) {
+            $replacements = array();
+            array_walk($this->xpdo->config, array($this, 'prepareReplacements', $replacements));
+            $result = str_replace(array_keys($replacements), array_values($replacements), $result);
+        }
+        return $result;
+    }
+
+    protected function prepareReplacements($value, $key, &$replacements) {
+        $_pos = strrpos($key, '_');
+        if ($_pos > 0 && (substr($key, $_pos + 1) === 'path')) {
+            $replacements['{' . $key . '}'] = $value;
+        }
+    }
 }

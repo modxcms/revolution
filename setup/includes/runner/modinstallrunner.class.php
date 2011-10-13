@@ -86,7 +86,7 @@ abstract class modInstallRunner {
                 $path = trim($path);
             }
             if (empty ($path) || !file_exists($path)) {
-                $workspace->set('path', MODX_CORE_PATH);
+                $workspace->set('path', '{core_path}');
                 if (!$workspace->save()) {
                     $this->addResult(modInstallRunner::RESULT_ERROR,'<p class="notok">'.$this->install->lexicon('workspace_err_path').'</p>');
                 } else {
