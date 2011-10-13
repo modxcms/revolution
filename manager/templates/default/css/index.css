@@ -67,13 +67,13 @@ hr {
     -webkit-border-radius:0 0 2px 2px;
     border-radius:0 0 2px 2px;
     padding-bottom: 5px;
-    background-color: #f7f7f7;
+    background-color: #fbfbfb;
     border: 1px solid #999;
     border-top: 0;
 }
 
 #modx-leftbar .x-tab-strip-active{
-    background-color: #f7f7f7 !important;
+    background-color: #fbfbfb !important;
     border-color: #999 !important;
 }
 
@@ -88,7 +88,7 @@ hr {
 }
 
 #modx-leftbar .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer  { 
-	background-color: #f7f7f7;
+	background-color: #fbfbfb;
     border: 1px solid #999;
     border-top: 0;
     border-bottom: 0;
@@ -103,7 +103,7 @@ hr {
     -moz-border-radius:0 0 3px 3px;
     -webkit-border-radius:0 0 3px 3px;
     border-radius:0 0 3px 3px;
-	background-color: #f7f7f7;
+	background-color: #fbfbfb;
     padding: 6px;
 }
 
@@ -141,7 +141,7 @@ hr {
 /* leftbar tabs */
 #modx-leftbar .x-tab-panel-header-plain .x-tab-strip-top  {}
 #modx-leftbar .x-tree .x-panel-body {
-    background-color:#f7f7f7;
+    background-color:#fbfbfb;
     border-color:#FAFAFA;
     border-right:0 none;
     border-style:solid none none;
@@ -184,7 +184,7 @@ hr {
 }
 
 .modx-leftbar .x-tab-strip-wrap li {
-    color: #f7f7f7;
+    color: #fbfbfb;
 }
 .modx-leftbar .x-tool-toggle {
     width: 24px;
