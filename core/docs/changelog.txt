@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5909] Allow blank extensions in Add Content Type window
 - [#5931] Fix code that prevents easy renaming of assets directory with package management
 - [#5841] Properly color active state for tabs in mgr ui
 - [#3287] Fix issue with dob User field in editing panel in mgr

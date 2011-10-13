@@ -165,7 +165,7 @@ MODx.window.CreateContentType = function(config) {
             ,xtype: 'textfield'
             ,description: _('file_extensions_desc')
             ,anchor: '100%'
-            ,allowBlank: false
+            ,allowBlank: true
         },{
             xtype: 'combo-boolean'
             ,fieldLabel: _('binary')
