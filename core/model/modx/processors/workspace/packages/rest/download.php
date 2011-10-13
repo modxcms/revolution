@@ -2,6 +2,8 @@
 /**
  * Download a package by passing in its location
  *
+ * @var modX $modx
+ *
  * @package modx
  * @subpackage processors.workspace.packages.rest
  */
@@ -29,6 +31,7 @@ $sig = explode('-',$signature);
 $_package_cache = $modx->getOption('core_path').'packages/';
 
 /* create transport package object */
+/** @var modTransportPackage $package */
 $package = $modx->newObject('transport.modTransportPackage');
 $package->set('signature',$signature);
 $package->set('state',1);
@@ -37,6 +40,7 @@ $package->set('created',date('Y-m-d h:i:s'));
 $package->set('provider',$scriptProperties['provider']);
 
 /* get provider and metadata */
+/** @var modTransportProvider $provider */
 $provider = $modx->getObject('transport.modTransportProvider',$scriptProperties['provider']);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
 
@@ -45,6 +49,7 @@ $loaded = $provider->getClient();
 if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_client'));
 
 /* send request to provider and handle response */
+/** @var modRestResponse $response */
 $response = $provider->request('package','GET',array(
     'signature' => $signature,
 ));
@@ -78,6 +83,18 @@ if (is_array($sig)) {
         }
     }
 }
+
+/* get file url */
+if (!is_array($modx->version)) { $modx->getVersionData(); }
+$productVersion = $modx->version['code_name'].'-'.$modx->version['full_version'];
+$response = $modx->rest->request($location,'','GET',array(
+    'revolution_version' => $productVersion,
+    'getUrl' => true,
+));
+if (empty($response) || empty($response->response)) {
+    return $modx->error->failure($modx->lexicon('provider_err_connect',array('error' => $response->getError())));
+}
+$location = $response->response;
 
 /* download package */
 if (!$package->transferPackage($location,$_package_cache)) {

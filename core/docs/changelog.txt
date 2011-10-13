@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5086] Fix issues with Package Management when open_basedir is in effect
 - [#4947] Adjust ensuring of admin access to context to only needed policies
 - [#5078] Have default resource field context settings, such as default_template, respected in Quick create
 - [#5909] Allow blank extensions in Add Content Type window

@@ -242,6 +242,10 @@ class modX extends xPDO {
      */
     public $mail;
     /**
+     * @var modRestClient $rest
+     */
+    public $rest;
+    /**
      * @var array An array of regex patterns regulary cleansed from content.
      */
     public $sanitizePatterns = array(
