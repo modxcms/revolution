@@ -75,7 +75,6 @@ MODx.tree.Directory = function(config) {
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
     ,addSourceToolbar: function() {
-        console.log(this.config.id);
         var t = Ext.get(this.config.id+'-tbar');
         if (!t) { return; }
         var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: this.config.id+'-sourcebar'});

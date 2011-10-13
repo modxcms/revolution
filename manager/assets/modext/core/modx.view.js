@@ -402,17 +402,13 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,params: {
                 action: 'remove'
                 ,file: d+'/'+node.id
-                ,prependPath: this.config.prependPath
-
-                ,basePath: this.config.basePath || ''
-                ,basePathRelative: this.config.basePathRelative || null
-                ,baseUrl: this.config.baseUrl || ''
-                ,baseUrlRelative: this.config.baseUrlRelative || null
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
-                'success': {fn:function(r) { this.run({ ctx: MODx.ctx }); },scope:this}
+                'success': {fn:function(r) {
+                    this.run({ ctx: MODx.ctx });
+                },scope:this}
             }
         });
     }
@@ -423,10 +419,12 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         Ext.applyIf(p,{
             action: 'getFiles'
             ,dir: this.dir
-            ,source: this.config.source || 1
+            ,source: this.config.source || MODx.config.default_media_source
         });
         this.store.load({
             params: p
+            ,callback: function() { this.refresh(); }
+            ,scope: this
         });
     }
     
