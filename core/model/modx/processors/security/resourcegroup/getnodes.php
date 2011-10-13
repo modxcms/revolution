@@ -19,6 +19,7 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* get parent */
 $scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_dg_','',$scriptProperties['id']);
+/** @var modResourceGroup $resourceGroup */
 $resourceGroup = $modx->getObject('modResourceGroup',$scriptProperties['id']);
 
 $c = $modx->newQuery('modResourceGroup');
@@ -28,6 +29,7 @@ $groups = $modx->getCollection('modResourceGroup',$c);
 
 $list = array();
 if ($resourceGroup == null) {
+    /** @var modResourceGroup $group */
     foreach ($groups as $group) {
         $list[] = array(
             'text' => $group->get('name').' ('.$group->get('id').')',
@@ -40,6 +42,7 @@ if ($resourceGroup == null) {
     }
 } else {
     $resources = $resourceGroup->getResources();
+    /** @var modResource $resource */
     foreach ($resources as $resource) {
         $list[] = array(
             'text' => $resource->get('pagetitle'),

@@ -47,6 +47,8 @@ MODx.panel.ResourceGroups = function(config) {
                         ,ddGroup: 'rg2resource'
                         ,title: _('resources')
                         ,enableDrop: false
+                        ,allowDrop: false
+                        ,allowDD: false
                         ,rootVisible: false
                     }]
                 }]

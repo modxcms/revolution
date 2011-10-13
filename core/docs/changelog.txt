@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5293] Prevent drag/drop from Resource Group tree to Resource tree in Resource Group page
 - [#4433] Validate paths in setup for trailing slash
 - [#564], [#4506] Make Workspace path portable by allowing path setting replacements
 - [#5086] Fix issues with Package Management when open_basedir is in effect
