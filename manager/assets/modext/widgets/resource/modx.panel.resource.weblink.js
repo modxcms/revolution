@@ -34,7 +34,7 @@ Ext.extend(MODx.panel.WebLink,MODx.panel.Resource,{
             ,description: '<b>[[*content]]</b><br />'+_('weblink_help')
             ,name: 'content'
             ,id: 'modx-weblink-content'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,value: (config.record.content || config.record.ta) || 'http://'
         });
         return its;

@@ -421,8 +421,8 @@ ul.x-tab-strip-bottom {
     background-image: url(../images/modx-theme/form/search-trigger.gif);
 }
 
-.x-form-focus, textarea.x-form-focus{
-    border-color: #b2b9c1;
+.x-form-focus, textarea.x-form-focus {
+    border-color: #658F1A;
     background-color: #FFFFFF;
 }
 

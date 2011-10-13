@@ -47,7 +47,7 @@ Ext.extend(MODx.panel.SymLink,MODx.panel.Resource,{
             ,name: 'content'
             ,id: 'modx-symlink-content'
             ,maxLength: 255
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,value: (config.record.content || config.record.ta) || ''
         });
         return its;

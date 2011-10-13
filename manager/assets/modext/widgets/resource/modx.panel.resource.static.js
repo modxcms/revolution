@@ -43,7 +43,7 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
             ,name: 'content'
             ,id: 'modx-resource-content'
             ,maxLength: 255
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,value: (config.record.content || config.record.ta) || ''
             ,openTo: config.record.openTo
             ,listeners: {
