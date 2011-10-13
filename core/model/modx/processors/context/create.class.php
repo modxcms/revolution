@@ -81,9 +81,7 @@ class modContextCreateProcessor extends modProcessor {
         /** @var modUserGroup $adminGroup */
         $adminGroup = $this->modx->getObject('modUserGroup',array('name' => 'Administrator'));
         /** @var modAccessPolicy $adminContextPolicy */
-        $adminContextPolicy = $this->modx->getObject('modAccessPolicy',array('name' => 'Administrator'));
-        /** @var modAccessPolicy $adminResourcePolicy */
-        $adminResourcePolicy = $this->modx->getObject('modAccessPolicy',array('name' => 'Resource'));
+        $adminContextPolicy = $this->modx->getObject('modAccessPolicy',array('name' => 'Object'));
         if ($adminGroup) {
             if ($adminContextPolicy) {
                 /** @var modAccessContext $adminAdminAccess */
@@ -93,15 +91,6 @@ class modContextCreateProcessor extends modProcessor {
                 $adminAdminAccess->set('target',$this->context->get('key'));
                 $adminAdminAccess->set('policy',$adminContextPolicy->get('id'));
                 $adminAdminAccess->save();
-            }
-            if ($adminResourcePolicy) {
-                /** @var modAccessContext $adminResourceAccess */
-                $adminResourceAccess = $this->modx->newObject('modAccessContext');
-                $adminResourceAccess->set('principal',$adminGroup->get('id'));
-                $adminResourceAccess->set('principal_class','modUserGroup');
-                $adminResourceAccess->set('target',$this->context->get('key'));
-                $adminResourceAccess->set('policy',$adminResourcePolicy->get('id'));
-                $adminResourceAccess->save();
             }
         }
     }
