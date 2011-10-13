@@ -6,7 +6,7 @@
  * @author KUROI Enogu http://twitter.com/enogu
  * @author yamamoto http://kyms.jp
  */
-$_lang['additional_css'] = 'CSS';
+$_lang['additional_css'] = '';
 $_lang['addons'] = 'アドオン';
 $_lang['advanced_options'] = 'その他のオプション';
 $_lang['all'] = '全て';
@@ -17,6 +17,9 @@ $_lang['base_template'] = 'BaseTemplate';
 $_lang['cache_manager_err'] = 'キャッシュマネージャーをロードできません。';
 $_lang['choose_language'] = '言語を選択してください';
 $_lang['cleanup_errors_title'] = 'Important Note:';
+$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
+$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
 $_lang['close'] = '閉じる';
 $_lang['config_file_err_w'] = '設定ファイルの書き込みに失敗しました。';
 $_lang['config_file_perms_notset'] = 'configファイルのパーミッションが書き込み可能になっています。configファイルを保護するために、適切なパーミッションに変更することを強くお勧めします。';
@@ -31,7 +34,7 @@ $_lang['connection_collation'] = '文字セットの照合順序<br />(通常は
 $_lang['connection_connection_and_login_information'] = 'データベース接続とデータベースユーザーの指定';
 $_lang['connection_connection_note'] = 'データベース接続をテストし、設定します。まだデータベースを作成していない場合は、インストーラーはデータベースの自動作成を試みます。データベースの自動作成機能はサーバ側の権限設定に依存しており、多くの共用レンタルサーバではサポートされていないためご注意ください。';
 $_lang['connection_database_host'] = 'データベースホスト:';
-//$_lang['connection_database_info'] = 'データベースにログインするための情報を入力してください。';
+$_lang['connection_database_info'] = 'Now please enter the login data for your database.';
 $_lang['connection_database_login'] = 'データベースユーザー名:';
 $_lang['connection_database_name'] = 'データベース名:';
 $_lang['connection_database_pass'] = 'データベースパスワード:';
@@ -93,6 +96,7 @@ $_lang['install_packages_options'] = 'パッケージのインストールオプ
 $_lang['install_success'] = 'MODXコアは正常にインストールされました。「次へ」ボタンを押して、インストール作業を完了させてください。';
 $_lang['install_summary'] = 'インストールの概要';
 $_lang['install_update'] = 'インストール/アップデート';
+$_lang['installation_finished'] = 'Installation finished in [[+time]]';
 $_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
 	<p>Usage of this software is subject to the GPL license. To help you understand
 	what the GPL licence is and how it affects your ability to use the software, we
@@ -146,7 +150,7 @@ $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
 $_lang['modx_err_instantiate'] = 'MODXオブジェクトを生成できません。';
 $_lang['modx_err_instantiate_mgr'] = '管理画面コンテキストの初期化に失敗しました。';
-$_lang['modx_footer1'] = '&copy; 2005-' . date('Y') . ' the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Revolutionのインストール';
 $_lang['modx_install_complete'] = 'MODXのインストールが完了しました';
@@ -220,13 +224,11 @@ $_lang['workspace_path_updated'] = '作業ディレクトリ情報は正しく�
 $_lang['versioner_err_nf'] = 'Could not find the Install Versioner at: [[+path]] <br />Please make sure you\'ve uploaded all the necessary files.';
 $_lang['xpdo_err_ins'] = 'xPDOの初期化中にエラーが発生しました。';
 $_lang['xpdo_err_nf'] = '[[+path]] にxPDOのファイルがありません。全てのファイルが正しくアップロードされているか確認してください。';
-
 $_lang['preload_err_cache'] = '[[+path]]cache ディレクトリーをPHPプロセスから書き込める状態にしてください。';
 $_lang['preload_err_core_path'] = 'setup/includes/config.core.php を開き、MODX_CORE_PATHの値を修正してください。このパラメータはcoreディレクトリーの場所を指している必要があります。';
 $_lang['preload_err_mysql'] = 'MySQL拡張モジュールを発見できませんでした。';
 $_lang['preload_err_pdo'] = 'PDO拡張モジュールを発見できませんでした。';
 $_lang['preload_err_pdo_mysql'] = 'PDO拡張モジュールのMySQLドライバーを発見できませんでした。';
-
 $_lang['test_config_file'] = '<span class="mono">[[+file]]</span>が書き込み可能になっているか確認します。:';
 $_lang['test_config_file_nw'] = 'Linux/Unix環境に新しくインストールする場合、<span class="mono">core/config/</span>ディレクトリーに<span class="mono">[[+file]].inc.php</span>という名前の空ファイルを作成し、PHPからの書き込みを許可してください。';
 $_lang['test_db_check'] = 'データベース設定の作成: ';
