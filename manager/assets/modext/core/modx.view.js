@@ -169,19 +169,21 @@ MODx.browser.Window = function(config) {
         ,wctx: config.wctx || 'web'
         ,openTo: config.openTo || ''
         ,ident: this.ident
+        ,id: this.ident+'-view'
     });
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
         ,onUpload: function() { this.view.run(); }
         ,scope: this
         ,prependPath: config.prependPath || null
-        ,source: config.source || 1
+        ,source: config.source || MODx.config.default_media_source
         ,hideFiles: config.hideFiles || false
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: '/'
         ,rootName: _('files')
         ,rootVisible: true
+        ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }
@@ -209,12 +211,15 @@ MODx.browser.Window = function(config) {
             ,height: '100%'
             ,items: this.tree
             ,autoScroll: true
+            ,split: true
+            ,border: false
         },{
             id: this.ident+'-browser-view'
             ,cls: 'modx-pb-view-ct'
             ,region: 'center'
             ,autoScroll: true
             ,width: 450
+            ,border: false
             ,items: this.view
             ,tbar: this.getToolbar()
         },{
@@ -222,6 +227,7 @@ MODx.browser.Window = function(config) {
             ,cls: 'modx-pb-details-ct'
             ,region: 'east'
             ,split: true
+            ,border: false
             ,width: 150
             ,minWidth: 150
             ,maxWidth: 250
