@@ -40,12 +40,20 @@ class modContentTypeRemoveProcessor extends modProcessor {
      * @return mixed
      */
     public function process() {
+        if ($this->isInUse()) {
+            return $this->failure($this->modx->lexicon('content_type_err_in_use'));
+        }
+
         if ($this->contentType->remove() == false) {
             return $this->failure($this->modx->lexicon('content_type_err_remove'));
         }
 
         $this->logManagerAction();
         return $this->success('',$this->contentType);
+    }
+
+    public function isInUse() {
+        return $this->modx->getCount('modResource',array('content_type' => $this->contentType->get('id'))) > 0;
     }
 
     /**
