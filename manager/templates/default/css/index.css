@@ -273,7 +273,7 @@ h2 {
     color: #5E5E5E;
     font: normal 25px helvetica,arial,freesans,clean,sans-serif;
     letter-spacing: -1px;
-    margin: 15px 0 10px;
+    margin: 0 0 2px;
 }
 
 h3 {
@@ -362,7 +362,7 @@ textarea.x-form-field {
     padding:5px;
     position:fixed;
     right:20px;
-    top:95px;
+    top:85px;
     z-index:12;
     zoom: 1;
 }
@@ -379,9 +379,12 @@ textarea.x-form-field {
 #modx-resource-tabs .x-tool-toggle {
     margin-top: 16px;
     position: absolute;
-    top: 47px;
-    right: 8px;
+    top: 31px;
+    right: 0;
     z-index: 9999;
+}
+#modx-resource-tabs.x-panel-collapsed .x-tool-toggle {
+    right: 16px !important;
 }
 
 /* top bar */

@@ -330,7 +330,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 'keyup': {scope:this,fn:function(f,e) {
                     var titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+titlePrefix+': '+title+'</h2>');
+                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
                 }}
             }
 
