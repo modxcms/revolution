@@ -57,14 +57,6 @@
                 </div>
             </div>
             <div id="modx-navbar">
-            <!--
-                <div id="rightlogin">
-                <span>
-                    <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
-                    <a id="modx-login-user" href="?a={$profileAction}">{$username}</a>
-                </span>
-                </div>
-                -->
                 {include file="navbar.tpl"}
             </div>
         </div>

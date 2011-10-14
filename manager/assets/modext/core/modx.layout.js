@@ -95,7 +95,7 @@ MODx.Layout = function(config){
             xtype: 'box'
             ,region: 'north'
             ,applyTo: 'modx-header'
-            ,height: 90
+            ,height: 83
         },{
              region: 'west'
             ,applyTo: 'modx-leftbar'

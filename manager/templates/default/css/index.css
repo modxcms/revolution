@@ -391,8 +391,6 @@ textarea.x-form-field {
 
     color: white;
     vertical-align: middle;
-    border-bottom:1px solid #94BF4C;
-    background-repeat: repeat-x;
 }
 
 #modx-site-name {
@@ -424,14 +422,14 @@ textarea.x-form-field {
     background-color: #666;
     border-top: 1px solid #1E1E1E;
     border-bottom: 1px solid #1E1E1E;
-    height: 45px;
+    height: 40px;
     position: relative;
     text-shadow:1px -1px 0 #1f1f1f;
     z-index: 19;
 }
 .ext-gecko #modx-navbar {
     background: -moz-linear-gradient(
-        #777 20%,
+        #777 10%,
         #666 50%,
         #555 100%
     );
@@ -441,7 +439,7 @@ textarea.x-form-field {
         linear,
         left bottom,
         left top,
-        color-stop(0.37,#555),
+        color-stop(0.32,#555),
         color-stop(0.69,#666),
         color-stop(0,#555)
     );
@@ -697,7 +695,7 @@ table.classy tr.odd td {
     float: left;
     font-size: 13px;
     font-weight: bold;
-    height: 45px;
+    height: 40px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -713,7 +711,7 @@ table.classy tr.odd td {
     z-index: 22;
 }
 #modx-topnav li a {
-    padding: 12px 5px 13px;
+    padding: 9px 5px 10px;
     color: #ccc;
     text-shadow: 0 1px -1px #111;
     display: block;
@@ -733,7 +731,7 @@ table.classy tr.odd td {
     position: absolute;
     z-index: 23 !important;
     left: 0;
-    top: 46px;
+    top: 41px;
     background: #444;
     margin: 0;
     padding: 0;
