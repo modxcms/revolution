@@ -38,6 +38,12 @@ if ($isCommandLine) {
             $_REQUEST[$p[0]] = $p[1];
         }
     }
+    if (!empty($_REQUEST['core_path']) && is_dir($_REQUEST['core_path'])) {
+        define('MODX_CORE_PATH',$_REQUEST['core_path']);
+    }
+    if (!empty($_REQUEST['config_key'])) {
+        define('MODX_CONFIG_KEY',$_REQUEST['config_key']);
+    }
 }
 
 /* check for compatible PHP version */
