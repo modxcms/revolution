@@ -23,8 +23,10 @@ abstract class modManagerController {
     public $templatesPaths;
     /** @var array An array of possible paths to this controller's directory. */
     public $controllersPaths;
-    /** @var The current working context. */
+    /** @var modContext The current working context. */
     public $workingContext;
+    /** @var modMediaSource The default media source for the user */
+    public $defaultSource;
     /** @var string The current output content */
     public $content = '';
     /** @var array An array of request parameters sent to the controller */

@@ -40,7 +40,10 @@ class modBrowserFolderGetListProcessor extends modProcessor {
 
     public function process() {
         if (!$this->getSource()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
+            return $this->modx->toJSON(array());
+        }
+        if (!$this->source->checkPolicy('save')) {
+            return $this->modx->toJSON(array());
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();

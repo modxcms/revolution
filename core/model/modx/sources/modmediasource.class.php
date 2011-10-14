@@ -187,7 +187,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      * @param xPDO|modX $xpdo A reference to an xPDO instance
      * @param int $defaultSourceId
      * @param boolean $fallbackToDefault
-     * @return An|null|object
+     * @return modMediaSource|null
      */
     public static function getDefaultSource(xPDO &$xpdo,$defaultSourceId = null,$fallbackToDefault = true) {
         if (empty($defaultSourceId)) {

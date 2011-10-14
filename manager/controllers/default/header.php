@@ -86,7 +86,6 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
 }
 $this->setPlaceholder('navb',$output);
 
-
 /* assign logged in text and link */
 /** @var modMenu $profile */
 $profile = $modx->getObject('modMenu','profile');
