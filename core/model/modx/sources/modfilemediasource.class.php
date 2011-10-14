@@ -164,6 +164,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 }
                 $encFile = rawurlencode($fullPath.$fileName);
                 $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
+                $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).($path != './' ? $path : '').$fileName;
 
                 /* get relative url from manager/ */
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
@@ -180,7 +181,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'path' => $bases['pathAbsolute'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'directory' => $bases['path'],
-                    'url' => ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName,
+                    'url' => $url,
                     'file' => $encFile,
                     'menu' => array(),
                 );
@@ -924,7 +925,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $properties = $this->getPropertyList();
         if (!empty($properties['baseUrl'])) {
             $value = $properties['baseUrl'].$value;
-            if (isset($properties['baseUrlRelative']) && empty($properties['baseUrlRelative'])) {
+            if (isset($properties['baseUrlRelative']) && !empty($properties['baseUrlRelative'])) {
                 $value = $this->xpdo->context->getOption('base_url',null,MODX_BASE_URL).$value;
             }
         }
