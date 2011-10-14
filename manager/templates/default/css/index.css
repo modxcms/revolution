@@ -397,6 +397,7 @@ textarea.x-form-field {
 
 #modx-site-name {
     padding: 3px 0 0 10px;
+    color: #bbb;
 }
 
 .modx-version {
@@ -451,54 +452,21 @@ textarea.x-form-field {
     text-decoration: none;
     color: #ccc;
 }
-#rightlogin {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border:1px solid #4E4E4E;
-    bottom:10px;
-    color:#AAAAAA;
-    height:26px;
-    line-height:26px;
-    max-width:350px;
-    position:absolute;
-    right:12px;
-    z-index:1;
-}
-#rightlogin span {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    background-color:#363636;
-    border:1px solid #1F1F1F;
-    float:left;
-    height:26px;
-    padding:0 0 0 12px;
-}
-#rightlogin a.modx-logout {
-    -moz-border-radius-topright: 2px;
-    -moz-border-radius-bottomright: 2px;
-    -webkit-border-top-right-radius: 2px;
-    -webkit-border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    background-color:#3E3E3E;
-    border:1px solid #4E4E4E;
-    color:#DDDDDD;
-    display:block;
-    float:right;
-    height:24px;
-    margin:0 0 1px 7px;
-    padding:0 12px;
-    text-decoration:none;
-    text-shadow:1px -1px 0 #5E5E5E;
-}
-#rightlogin a.modx-logout:hover {
-    background-color:#6e9b3b;
-    border:1px solid #88bf47;
-    text-shadow: none;
-}
 
+.rightlogin {
+    float: right;
+}
+.rightlogin a {
+    color: #888;
+    text-decoration: none;
+    display: block;
+    padding: 0 3px;
+    margin: 10px 10px 0 0;
+    float: left;
+}
+.rightlogin a:hover {
+    color: #ddd;
+}
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
     background-color: transparent !important;
@@ -721,7 +689,7 @@ table.classy tr.odd td {
     background: transparent;
     margin-left: 8px;
     position: relative;
-    width: 78%;
+    width: 100%;
     z-index: 20;
 }
 #modx-topnav {
@@ -746,12 +714,6 @@ table.classy tr.odd td {
 }
 #modx-topnav li a {
     padding: 12px 5px 13px;
-    color: #fff;
-    /*
-    color: #1f1f1f;
-    text-shadow: -1px 1px 0 #1F1F1F;
-    text-shadow: 0 1px 1px #aaa;
-    */
     color: #ccc;
     text-shadow: 0 1px -1px #111;
     display: block;
