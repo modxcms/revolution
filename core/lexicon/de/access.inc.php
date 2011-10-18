@@ -1,5 +1,7 @@
 <?php
 /**
+ * Access German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -69,7 +71,7 @@ $_lang['access_to_resource_groups'] = 'Zugriff auf Ressourcen-Gruppen';
 $_lang['access_type_err_ns'] = 'Zieltyp oder ID nicht angegeben!';
 $_lang['acl_add'] = 'Zugriffskontrolle hinzufügen';
 $_lang['authority'] = 'Autorität';
-$_lang['authority_err_ns'] = 'Bitte geben Sie einen Mindestwert für die Rolle an.';
+$_lang['authority_err_ns'] = 'Bitte geben Sie die mindestens benötigte Rolle an.';
 $_lang['category'] = 'Kategorie';
 $_lang['category_add'] = 'Kategorie hinzufügen';
 $_lang['filter_by_context'] = 'Nach Kontext filtern...';
@@ -78,7 +80,7 @@ $_lang['filter_by_resource_group'] = 'Nach Ressourcen-Gruppe filtern...';
 $_lang['filter_by_category'] = 'Nach Kategorie filtern...';
 $_lang['filter_by_source'] = 'Nach Medienquelle filtern...';
 $_lang['no_policy_option'] = ' (keine Richtlinie) ';
-$_lang['permissions_in_policy'] = 'Permissions in Selected Policy';
+$_lang['permissions_in_policy'] = 'Berechtigungen in der ausgewählten Richtlinie';
 $_lang['resource_group'] = 'Ressourcen-Gruppe';
 $_lang['resource_group_add'] = 'Ressourcen-Gruppe hinzufügen';
 $_lang['resource_group_access_remove'] = 'Ressource aus der Gruppe entfernen';
@@ -101,8 +103,8 @@ $_lang['roles_msg'] = 'Eine Rolle ist per Definition eine Position oder ein Stat
 $_lang['source_add'] = 'Medienquelle hinzufügen';
 $_lang['user_group_category_access'] = 'Zugriff auf Elemente über Kategorien';
 $_lang['user_group_category_access_msg'] = 'Hier können Sie festlegen, auf welche Elemente diese Benutzergruppe über die Kategorien, in denen sich die Elemente befinden, zugreifen kann.';
-$_lang['user_group_category_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
-$_lang['user_group_category_category_desc'] = 'The Category to grant access to.';
+$_lang['user_group_category_authority_desc'] = 'Die mindestens benötigte Rolle, die Zugriff auf die Berechtigungen in der gewählten Richtlinie für diesen Kontext hat. Rollen mit stärkerer Autorität (kleinere Zahlen) erben diesen Zugriff ebenfalls. In den meisten Fällen kann hier der Wert "Member" stehen bleiben.';
+$_lang['user_group_category_category_desc'] = 'Die Kategorie, auf die der Zugriff erlaubt werden soll.';
 $_lang['user_group_category_context_desc'] = 'The Context to target for Elements with the above Category associated to them.';
 $_lang['user_group_category_err_ae'] = 'Die Benutzergruppe hat bereits Zugriff auf diese Kategorie.';
 $_lang['user_group_category_policy_desc'] = 'The Policy to apply to this Context with Elements in the Category for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
@@ -110,7 +112,7 @@ $_lang['user_group_category_remove_confirm'] = 'Sind Sie sicher, dass Sie diese 
 $_lang['user_group_context_access'] = 'Kontext-Zugriff';
 $_lang['user_group_context_access_msg'] = 'Hier legen Sie fest, auf welche Kontexte diese Benutzergruppe zugreifen kann.';
 $_lang['user_group_context_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
-$_lang['user_group_context_context_desc'] = 'The Context to grant access to.';
+$_lang['user_group_context_context_desc'] = 'Der Kontext, auf den der Zugriff erlaubt werden soll.';
 $_lang['user_group_context_policy_desc'] = 'The Policy to apply to this Context for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_context_err_ae'] = 'Die Benutzergruppe hat bereits Zugriff auf diesen Kontext.';
 $_lang['user_group_context_remove_confirm'] = 'Sind Sie sicher, dass Sie dieser Benutzergruppe den Zugriff auf diesen Kontext entziehen möchten?';
@@ -121,12 +123,12 @@ $_lang['user_group_resourcegroup_context_desc'] = 'The Context to target for ite
 $_lang['user_group_resourcegroup_err_ae'] = 'Die Benutzergruppe hat bereits Zugriff auf diese Ressourcen-Gruppe.';
 $_lang['user_group_resourcegroup_policy_desc'] = 'The Policy to apply to this Context with Resources in the Resource Group for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Sind Sie sicher, dass Sie dieser Benutzergruppe den Zugriff auf diese Ressourcen-Gruppe entziehen möchten?';
-$_lang['user_group_resourcegroup_resource_group_desc'] = 'The Resource Group to grant access to.';
+$_lang['user_group_resourcegroup_resource_group_desc'] = 'Die Ressourcen-Gruppe, auf die der Zugriff erlaubt werden soll.';
 $_lang['user_group_source_access'] = 'Medienquellen-Zugriff';
 $_lang['user_group_source_access_msg'] = 'Hier können Sie festlegen, auf welche Medienquellen diese Benutzergruppe zugreifen kann.';
 $_lang['user_group_source_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
 $_lang['user_group_source_err_ae'] = 'Die Benutzergruppe hat bereits Zugriff auf diese Medienquelle.';
 $_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Source for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_source_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Medienquelle dieser Benutzergruppe entziehen möchten?';
-$_lang['user_group_source_source_desc'] = 'The Media Source to grant access to.';
+$_lang['user_group_source_source_desc'] = 'Die Medienquelle, auf die der Zugriff erlaubt werden soll.';
 $_lang['user_group_user_access_msg'] = 'Bitte wählen Sie, welche Benutzer sie in diese Benutzergruppe aufnehmen möchten.';

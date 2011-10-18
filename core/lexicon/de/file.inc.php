@@ -36,6 +36,7 @@ $_lang['file_err_unzip_missing_lib'] = 'ZIP-Bibliothek fehlt (php_zip.dll / zip.
 $_lang['file_err_upload'] = 'Ein Fehler trat auf bei dem Versuch, die Dateien hochzuladen.';
 $_lang['file_exists_hk'] = 'Datei <b>{0}</b> existiert bereits';
 $_lang['file_extensions'] = 'Dateiendungen';
+// $_lang['file_extensions_desc'] = 'Dies sind die erlaubten Dateiendungen für den Inhaltstyp.';
 $_lang['file_folder_enter_new'] = 'Geben Sie einen neuen Verzeichnisnamen ein';
 $_lang['file_folder_chmod'] = 'Verzeichnisrechte bearbeiten (CHMOD)';
 $_lang['file_folder_create'] = 'Verzeichnis anlegen';

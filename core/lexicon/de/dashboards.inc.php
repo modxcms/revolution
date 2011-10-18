@@ -14,8 +14,8 @@
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Dashboard hinzufügen';
 $_lang['dashboard_create'] = 'Dashboard erstellen';
-$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
-$_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
+$_lang['dashboard_desc_name'] = 'Der Name des Dashboards.';
+$_lang['dashboard_desc_description'] = 'Eine kurze Beschreibung des Dashboards.';
 $_lang['dashboard_duplicate'] = 'Dashboard duplizieren';
 $_lang['dashboard_remove'] = 'Dashboard löschen';
 $_lang['dashboard_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Dashboard löschen möchten?';
