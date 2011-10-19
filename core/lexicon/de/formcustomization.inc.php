@@ -1,5 +1,7 @@
 <?php
 /**
+ * Form Customization German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

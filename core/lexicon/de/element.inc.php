@@ -1,5 +1,7 @@
 <?php
 /**
+ * German language strings for Elements
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -29,8 +31,8 @@ $_lang['properties_export'] = 'Eigenschaften exportieren';
 $_lang['properties_import'] = 'Eigenschaften importieren';
 $_lang['static_file'] = 'Statische Datei';
 $_lang['static_file_msg'] = 'Eine externe Datei, in der der Quellcode des Elements gespeichert ist.';
-$_lang['static_source'] = 'Medienquelle für statische Datei';
-$_lang['static_source_msg'] = 'MODX wird diese Medienquelle als Basispfad verwenden, wenn es nach der Datei des statischen Elements sucht. Geben Sie hier "None" ein, wird davon ausgegangen, dass Sie einen absoluten Pfad angeben.';
+$_lang['static_source'] = 'Medienquelle fÃ¼r statische Datei';
+$_lang['static_source_msg'] = 'MODX wird diese Medienquelle als Basispfad verwenden, wenn es nach der Datei des statischen Elements sucht. Geben Sie hier "Nichts" ein, wird davon ausgegangen, dass Sie einen absoluten Pfad angeben.';
 $_lang['tv_elements'] = 'Eingabe-Optionswerte';
 $_lang['tv_default'] = 'Standardwert';
 $_lang['tv_type'] = 'Eingabetyp';

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Access Policy German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

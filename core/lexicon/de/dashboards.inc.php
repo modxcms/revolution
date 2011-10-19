@@ -74,6 +74,7 @@ $_lang['widget_unplace'] = 'Widget löschen';
 $_lang['widget_update'] = 'Widget bearbeiten';
 $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Untenstehend finden Sie eine Liste aller installierten Dashboard-Widgets, die Ihnen zur Verfügung stehen.';
+
 $_lang['w_configcheck'] = 'Konfigurations-Check';
 $_lang['w_configcheck_desc'] = 'Zeigt einen Konfigurations-Check an, der überprüft, ob Ihre MODX-Installation sicher ist.';
 $_lang['w_newsfeed'] = 'MODX-Newsfeed';

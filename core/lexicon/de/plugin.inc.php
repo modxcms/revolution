@@ -1,5 +1,7 @@
 <?php
 /**
+ * Plugin German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

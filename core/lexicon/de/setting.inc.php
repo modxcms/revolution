@@ -215,7 +215,7 @@ $_lang['setting_default_content_type'] = 'Standard-Inhaltstyp';
 $_lang['setting_default_content_type_desc'] = 'Wählen Sie den Standard-Inhaltstyp, den Sie für neue Ressourcen verwenden möchten. Sie können weiterhin einen anderen Inhaltstyp im Ressourcen-Editor auswählen; mit dieser Einstellung treffen Sie nur eine Vorauswahl für einen der Inhaltstypen.';
 
 $_lang['setting_default_duplicate_publish_option'] = 'Standardmäßige Veröffentlichungs-Option für Ressourcen-Duplikate';
-$_lang['setting_default_duplicate_publish_option_desc'] = 'Die standardmäßig gewählte Option, wenn eine Ressource dupliziert wird. Dies kann entweder "unveröffentlicht" sein, um alle Duplikate als unveröffentlicht zu markieren, "veröffentlich", um alle Duplikate zu veröffentlichen, oder "beibehalten", um den Veröffentlichungs-Status basierend auf der duplizierten Ressource beizubehalten.';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'Die standardmäßig gewählte Option, wenn eine Ressource dupliziert wird. Dies kann entweder "unpublish" sein, um alle Duplikate als unveröffentlicht zu markieren, "publish", um alle Duplikate zu veröffentlichen, oder "preserve", um den Veröffentlichungs-Status basierend auf der duplizierten Ressource beizubehalten.';
 
 $_lang['setting_default_media_source'] = 'Standard-Medienquelle';
 $_lang['setting_default_media_source_desc'] = 'Die Medienquelle, die standardmäßig verwendet werden soll.';  // geladen
@@ -268,17 +268,17 @@ $_lang['setting_feed_modx_security_desc'] = 'Geben Sie die URL des RSS-Feeds fü
 $_lang['setting_feed_modx_security_enabled'] = 'MODX-Sicherheitshinweise-Feed aktiviert';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, wird der Sicherheitshinweise-Feed auf der Startseite des Managers nicht angezeigt.';
 
-$_lang['setting_filemanager_path'] = 'Dateimanager-Pfad (Verwendung nicht empfohlen) (Deprecated)';
-$_lang['setting_filemanager_path_desc'] = 'Deprecated - Use Media Sources instead. Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODX-Installation zeigt.';
+$_lang['setting_filemanager_path'] = 'Dateimanager-Pfad (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_path_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODX-Installation zeigt.';
 
-$_lang['setting_filemanager_path_relative'] = 'Ist der Dateimanager-Pfad relativ? (Verwendung nicht empfohlen) (Deprecated)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Deprecated - Use Media Sources instead. Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_path"-Einstellung relativ zum MODX-"base_path" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihr "filemanager_path" außerhalb des Document-Roots liegt, setzen Sie sie auf "Nein".';
+$_lang['setting_filemanager_path_relative'] = 'Ist der Dateimanager-Pfad relativ? (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_path_relative_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_path"-Einstellung relativ zum MODX-"base_path" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihr "filemanager_path" außerhalb des Document-Roots liegt, setzen Sie sie auf "Nein".';
 
-$_lang['setting_filemanager_url'] = 'Dateimanager-URL (Verwendung nicht empfohlen) (Deprecated)';
-$_lang['setting_filemanager_url_desc'] = 'Deprecated - Use Media Sources instead. Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Optional. Verwenden Sie diese Option, wenn Sie eine bestimmte URL angeben möchten, von der aus Sie auf die Dateien im MODX-Dateimanager zuzugreifen (hilfreich, wenn Sie den Dateimanager-Pfad auf einen Pfad außerhalb des MODX-Webroots gesetzt haben). Stellen Sie sicher, dass dies die über das Web erreichbare URL der Dateimanager-Pfad-Einstellung ist. Falls diese Einstellung leer gelassen wird, versucht MODX, sie selbst zu erkennen.';
+$_lang['setting_filemanager_url'] = 'Dateimanager-URL (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_url_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Optional. Verwenden Sie diese Option, wenn Sie eine bestimmte URL angeben möchten, von der aus Sie auf die Dateien im MODX-Dateimanager zuzugreifen (hilfreich, wenn Sie den Dateimanager-Pfad auf einen Pfad außerhalb des MODX-Webroots gesetzt haben). Stellen Sie sicher, dass dies die über das Web erreichbare URL der Dateimanager-Pfad-Einstellung ist. Falls diese Einstellung leer gelassen wird, versucht MODX, sie selbst zu erkennen.';
 
-$_lang['setting_filemanager_url_relative'] = 'Ist die Dateimanager-URL relativ? (Verwendung nicht empfohlen) (Deprecated)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - Use Media Sources instead. Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_url"-Einstellung relativ zur MODX-"base_url" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihre "filemanager_url" außerhalb des Webroots liegt, setzen Sie sie auf "Nein".';
+$_lang['setting_filemanager_url_relative'] = 'Ist die Dateimanager-URL relativ? (Verwendung nicht empfohlen)';
+$_lang['setting_filemanager_url_relative_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_url"-Einstellung relativ zur MODX-"base_url" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihre "filemanager_url" außerhalb des Webroots liegt, setzen Sie sie auf "Nein".';
 
 $_lang['setting_forgot_login_email'] = 'Login-vergessen-Mail';
 $_lang['setting_forgot_login_email_desc'] = 'Das Template für die Mail, die User erhalten, die ihren MODX-Benutzernamen und/oder ihr Passwort vergessen haben.';
@@ -596,8 +596,8 @@ $_lang['setting_settings_distro_desc'] = 'Die momentan installierte MODX-Distrib
 $_lang['setting_set_header'] = 'HTTP-Header setzen';
 $_lang['setting_set_header_desc'] = 'Wenn diese Einstellung aktiviert ist, versucht MODX, die HTTP-Header für Ressourcen zu setzen.';
 
-$_lang['setting_show_tv_categories_header'] = 'Zeigt "Kategorien"-Tabs-Header with TVs';
-$_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wurde, zeigt MODX den "Kategorien"-Header über dem ersten Kategorien-Reiter an, wenn Template-Variablen in einer Ressource bearbeitet werden.';
+$_lang['setting_show_tv_categories_header'] = 'Zeigt Reiter-Überschrift "Kategorien" für TV an';
+$_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wurde, zeigt MODX die Überschrift "Kategorien" über dem ersten Kategorien-Reiter an, wenn Template-Variablen in einer Ressource bearbeitet werden.';
 
 $_lang['setting_signupemail_message'] = 'E-Mail nach Account-Erstellung';
 $_lang['setting_signupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn eine Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
@@ -638,7 +638,7 @@ $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';
 
 $_lang['setting_tvs_below_content'] = 'Template-Variablen unter den Inhalt verschieben';
-$_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Template-Variablen beim Bearbeiten von Ressourcen unter den Inhalt zu verschieben.';
+$_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Template-Variablen beim Bearbeiten von Ressourcen unter das Eingabefeld für den Inhalt zu verschieben.';
 
 $_lang['setting_ui_debug_mode'] = 'Benutzerschnittstellen-Debug-Modus';
 $_lang['setting_ui_debug_mode_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Debug-Meldungen auszugeben, wenn Sie die Benutzerschnittstelle für das Standard-Manager-Theme verwenden. Sie müssen einen Browser verwenden, der console.log unterstützt.';

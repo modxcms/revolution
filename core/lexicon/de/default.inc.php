@@ -1,5 +1,7 @@
 <?php
 /**
+ * Default German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -487,6 +489,7 @@ $_lang['xtype'] = 'Feldtyp';
 $_lang['xtype_desc'] = 'Der Feldtyp dieser Einstellung: textfield, textarea oder boolean.';
 $_lang['yes'] = 'Ja';
 $_lang['yesno'] = 'Ja/Nein';
+
 $_lang['january'] = 'Januar';
 $_lang['february'] = 'Februar';
 $_lang['march'] = 'März';
@@ -499,6 +502,7 @@ $_lang['september'] = 'September';
 $_lang['october'] = 'Oktober';
 $_lang['november'] = 'November';
 $_lang['december'] = 'Dezember';
+
 $_lang['sunday'] = 'Sonntag';
 $_lang['monday'] = 'Montag';
 $_lang['tuesday'] = 'Dienstag';
