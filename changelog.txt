@@ -1,6 +1,8 @@
 This file shows the changes in this release of xPDO.
 
-- Store relative path of files preserved by xPDOVehicle file resolvers
+- Fix various bugs with database result set caching
+- Refactor escapeChar and quoteChar to xPDODriver classes
+- [#2432] Store relative path of files preserved by xPDOVehicle file resolvers
 - [#5904] Provide access to name and version in Transport packages
 
 xPDO 2.2.0-rc1 (September 7, 2011)
