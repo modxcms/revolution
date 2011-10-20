@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.0-rc2 (October 20, 2011)
+====================================
 - Fix xPDOAPCCache and xPDOWinCache multiple_object_delete features
 - Fix various bugs with database result set caching
 - Refactor escapeChar and quoteChar to xPDODriver classes
