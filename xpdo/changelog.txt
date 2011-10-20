@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Refactor escapeChar and quoteChar to xPDODriver classes
 - [#2432] Store relative path of files preserved by xPDOVehicle file resolvers
 - [#5904] Provide access to name and version in Transport packages
 

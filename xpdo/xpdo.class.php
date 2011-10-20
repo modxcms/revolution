@@ -397,9 +397,6 @@ class xPDO {
             $connected = $this->connection->connect($driverOptions);
             if ($connected) {
                 $this->pdo =& $this->connection->pdo;
-                $this->_escapeCharOpen =& $this->connection->_escapeCharOpen;
-                $this->_escapeCharClose =& $this->connection->_escapeCharClose;
-                $this->_quoteChar =& $this->connection->_quoteChar;
             }
         }
         return $connected;
@@ -2768,10 +2765,6 @@ class xPDOConnection {
      */
     public $config = array();
 
-    public $_escapeCharOpen= '';
-    public $_escapeCharClosed= '';
-    public $_quoteChar= '';
-
     /**
      * @var PDO The PDO object represented by the xPDOConnection instance.
      */
@@ -2800,25 +2793,6 @@ class xPDOConnection {
         $this->config['username']= $username;
         $this->config['password']= $password;
         $this->config['driverOptions']= is_array($driverOptions) ? $driverOptions : array();
-        switch ($this->config['dbtype']) {
-            case 'mysql':
-                $this->_escapeCharOpen= "`";
-                $this->_escapeCharClose= "`";
-                $this->_quoteChar= "'";
-                break;
-            case 'sqlite':
-                $this->_escapeCharOpen= '"';
-                $this->_escapeCharClose= '"';
-                $this->_quoteChar= "'";
-                break;
-            case 'sqlsrv':
-                $this->_escapeCharOpen= '[';
-                $this->_escapeCharClose= ']';
-                $this->_quoteChar= "'";
-                break;
-            default:
-                break;
-        }
         if (array_key_exists(xPDO::OPT_CONN_MUTABLE, $this->config)) {
             $this->_mutable= (boolean) $this->config[xPDO::OPT_CONN_MUTABLE];
         }
