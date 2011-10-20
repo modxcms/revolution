@@ -1,5 +1,13 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.0-rc2 (October 20, 2011)
+====================================
+- Fix xPDOAPCCache and xPDOWinCache multiple_object_delete features
+- Fix various bugs with database result set caching
+- Refactor escapeChar and quoteChar to xPDODriver classes
+- [#2432] Store relative path of files preserved by xPDOVehicle file resolvers
+- [#5904] Provide access to name and version in Transport packages
+
 xPDO 2.2.0-rc1 (September 7, 2011)
 ====================================
 - Add support for field aliases to be defined in the schema

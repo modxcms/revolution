@@ -366,6 +366,7 @@ class xPDOObject {
                 } else {
                     $pkval= $cacheKey;
                 }
+                /* set OPT_CACHE_DB_COLLECTIONS to 2 to cache instances by primary key from collection result sets */
                 if ($xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1) == 2 && $xpdo->_cacheEnabled && $cacheFlag) {
                     if (!$fromCache) {
                         $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
@@ -1389,13 +1390,13 @@ class xPDOObject {
                         call_user_func($callback, array('className' => $this->_class, 'criteria' => $criteria, 'object' => $this));
                     }
                     if ($this->xpdo->_cacheEnabled && $pk && ($cacheFlag || ($cacheFlag === null && $this->_cacheFlag))) {
-                        $cacheKey= is_array($pk) ? implode('_', $pk) : $pk;
+                        $cacheKey= $this->xpdo->newQuery($this->_class, $pk, $cacheFlag);
                         if (is_bool($cacheFlag)) {
                             $expires= 0;
                         } else {
                             $expires= intval($cacheFlag);
                         }
-                        $this->xpdo->toCache($this->xpdo->getTableClass($this->_class) . '_' . $cacheKey, $this, $expires, array('modified' => true));
+                        $this->xpdo->toCache($cacheKey, $this, $expires, array('modified' => true));
                     }
                 }
             }
