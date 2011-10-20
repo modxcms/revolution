@@ -1616,8 +1616,7 @@ class xPDO {
      * classes, and other advanced operations that do not need to be loaded
      * frequently.
      *
-     * @uses xPDOManager
-     * @return object|null A manager instance for the xPDO connection, or null
+     * @return xPDOManager|null An xPDOManager instance for the xPDO connection, or null
      * if a manager class can not be instantiated.
      */
     public function getManager() {
@@ -1639,8 +1638,7 @@ class xPDO {
      *
      * The driver class provides baseline data and operations for a specific database driver.
      *
-     * @uses xPDODriver
-     * @return object|null A driver instance for the xPDO connection, or null
+     * @return xPDODriver|null An xPDODriver instance for the xPDO connection, or null
      * if a driver class can not be instantiated.
      */
     public function getDriver() {
@@ -1676,12 +1674,12 @@ class xPDO {
      *
      * This class is responsible for handling all types of caching operations for the xPDO core.
      *
-     * @uses xPDOCacheManager
      * @param string $class Optional name of a derivative xPDOCacheManager class.
-     * @param string $path Optional root path for looking up the $class.
-     * @param boolean $ignorePkg If false and you do not specify a path, you can look up custom
-     * xPDOCacheManager derivatives in declared packages.
-     * @return object The xPDOCacheManager for this xPDO instance.
+     * @param array $options An array of options for the cache manager instance; valid options include:
+     *  - path = Optional root path for looking up the $class.
+     *  - ignorePkg = If false and you do not specify a path, you can look up custom xPDOCacheManager
+     *      derivatives in declared packages.
+     * @return xPDOCacheManager The xPDOCacheManager for this xPDO instance.
      */
     public function getCacheManager($class= 'cache.xPDOCacheManager', $options = array('path' => XPDO_CORE_PATH, 'ignorePkg' => true)) {
         $actualClass = $this->loadClass($class, $options['path'], $options['ignorePkg'], true);
