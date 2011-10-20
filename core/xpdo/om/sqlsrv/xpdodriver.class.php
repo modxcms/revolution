@@ -41,6 +41,9 @@ require_once (dirname(dirname(__FILE__)) . '/xpdodriver.class.php');
  * @subpackage om.sqlsrv
  */
 class xPDODriver_sqlsrv extends xPDODriver {
+    public $quoteChar = "'";
+    public $escapeOpenChar = '[';
+    public $escapeCloseChar = ']';
     public $_currentTimestamps= array(
         "CURRENT_TIMESTAMP",
         "GETDATE()"
@@ -55,9 +58,9 @@ class xPDODriver_sqlsrv extends xPDODriver {
     /**
      * Get a sqlsrv xPDODriver instance.
      *
-     * @param object $xpdo A reference to a specific xPDO instance.
+     * @param xPDO &$xpdo A reference to a specific xPDO instance.
      */
-    function __construct(& $xpdo) {
+    function __construct(xPDO &$xpdo) {
         parent :: __construct($xpdo);
         $this->dbtypes['integer']= array('/INT$/i');
         $this->dbtypes['float']= array('/^DEC/i','/^NUMERIC$/i','/^FLOAT$/i','/^REAL$/i','/MONEY$/i');
