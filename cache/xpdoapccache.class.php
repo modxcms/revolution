@@ -72,7 +72,7 @@ class xPDOAPCCache extends xPDOCache {
         if (!isset($options['multiple_object_delete']) || empty($options['multiple_object_delete'])) {
             $deleted= apc_delete($this->getCacheKey($key));
         } elseif (class_exists('APCIterator', true)) {
-            $iterator = new APCIterator('user', '/^' . $key . '/', APC_ITER_KEY);
+            $iterator = new APCIterator('user', '/^' . str_replace('/', '\/', $this->getCacheKey($key)) . '/', APC_ITER_KEY);
             if ($iterator) {
                 $deleted = apc_delete($iterator);
             }
@@ -88,7 +88,7 @@ class xPDOAPCCache extends xPDOCache {
     public function flush($options= array()) {
         $flushed = false;
         if (class_exists('APCIterator', true) && $this->getOption('flush_by_key', $options, true) && !empty($this->key)) {
-            $iterator = new APCIterator('user', '/^' . $this->key . '\//', APC_ITER_KEY);
+            $iterator = new APCIterator('user', '/^' . str_replace('/', '\/', $this->key) . '\//', APC_ITER_KEY);
             if ($iterator) {
                 $flushed = apc_delete($iterator);
             }

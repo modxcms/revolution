@@ -172,7 +172,7 @@ abstract class xPDOVehicle {
                                     } else {
                                         if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && is_array($copied)) {
                                             foreach ($copied as $copiedFile => $stat) {
-                                                if (isset($stat['overwritten'])) $transport->_preserved[$options['guid']]['files'][$copiedFile]= $stat;
+                                                if (isset($stat['overwritten'])) $transport->_preserved[$options['guid']]['files'][substr($copiedFile, strlen($fileTarget))]= $stat;
                                             }
                                         }
                                         $resolved = true;
