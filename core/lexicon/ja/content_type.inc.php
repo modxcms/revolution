@@ -18,6 +18,7 @@ $_lang['content_type_err_nfs'] = 'ID [[+id]] のコンテンツタイプが見�
 $_lang['content_type_err_ns'] = 'コンテンツタイプが指定されていません。';
 $_lang['content_type_err_ns_name'] = 'コンテンツタイプの有効な名前を指定してください。';
 $_lang['content_type_err_create'] = 'コンテンツタイプの作成中にエラーが発生しました。';
+$_lang['content_type_err_in_use'] = 'You cannot remove this Content Type, as it is currently in use by Resources in MODX. Please re-assign the Content Types of those Resources before proceeding.';
 $_lang['content_type_err_remove'] = 'コンテンツタイプの削除中にエラーが発生しました。';
 $_lang['content_type_err_save'] = 'コンテンツタイプの保存中にエラーが発生しました。';
 $_lang['content_type_new'] = '新しいコンテンツタイプ';
