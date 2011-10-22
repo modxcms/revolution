@@ -5,17 +5,20 @@
  * @package modx
  */
 /**
- * Represents a Component in the MODX framework.
+ * Represents a Component in the MODX framework. Isolates controllers, lexicons and other logic into the virtual
+ * containment space defined by the path of the namespace.
+ *
+ * @property string $name The key of the namespace
+ * @property string $path The absolute path of the namespace. May use {core_path}, {base_path} or {assets_path} as
+ * placeholders for the path.
  *
  * @package modx
  */
 class modNamespace extends xPDOObject {
     /**
-     *
-     * @param <type> $k
-     * @param <type> $format
-     * @param <type> $formatTemplate
-     * @return <type>
+     * Overrides xPDOObject::get to provide placeholder substitution for the namespace path.
+     * 
+     * {@inheritdoc}
      */
     public function get($k,$format = null,$formatTemplate = null) {
         $v = parent :: get($k,$format,$formatTemplate);

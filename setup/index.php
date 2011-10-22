@@ -30,6 +30,21 @@
 
 /* start session */
 session_start();
+$isCommandLine = php_sapi_name() == 'cli';
+if ($isCommandLine) {
+    foreach ($argv as $idx => $argv) {
+        $p = explode('=',ltrim($argv,'--'));
+        if (isset($p[1])) {
+            $_REQUEST[$p[0]] = $p[1];
+        }
+    }
+    if (!empty($_REQUEST['core_path']) && is_dir($_REQUEST['core_path'])) {
+        define('MODX_CORE_PATH',$_REQUEST['core_path']);
+    }
+    if (!empty($_REQUEST['config_key'])) {
+        define('MODX_CONFIG_KEY',$_REQUEST['config_key']);
+    }
+}
 
 /* check for compatible PHP version */
 define('MODX_SETUP_PHP_VERSION', phpversion());
@@ -50,20 +65,24 @@ if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
         die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
     }
 }
-$https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
-$installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
-$installBaseUrl .= $_SERVER['HTTP_HOST'];
-if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
-$installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
-$installBaseUrl .= $_SERVER['PHP_SELF'];
-define('MODX_SETUP_URL', $installBaseUrl);
+if (!$isCommandLine) {
+    $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
+    $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
+    $installBaseUrl .= $_SERVER['HTTP_HOST'];
+    if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+    $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
+    $installBaseUrl .= $_SERVER['PHP_SELF'];
+    define('MODX_SETUP_URL', $installBaseUrl);
+} else {
+    define('MODX_SETUP_URL','/');
+}
 
 /* session loop-back tester */
-if ((!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_SESSION['session_test'])) {
+if (!$isCommandLine && (!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_SESSION['session_test'])) {
     $_SESSION['session_test']= 1;
     echo "<html><head><title>Loading...</title><script>window.location.href='" . MODX_SETUP_URL . "?s=set';</script></head><body></body></html>";
     exit ();
-} elseif (isset($_GET['s']) && $_GET['s'] == 'set' && !isset($_SESSION['session_test'])) {
+} elseif (!$isCommandLine && isset($_GET['s']) && $_GET['s'] == 'set' && !isset($_SESSION['session_test'])) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure your PHP session configuration is valid and working.</p></body></html>');
 }
 
@@ -79,12 +98,12 @@ if (!include(MODX_SETUP_PATH . 'includes/modinstall.class.php')) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure you have uploaded all of the setup/ files; your setup/includes/modinstall.class.php file is missing.</p></body></html>');
 }
 $modInstall = new modInstall();
-if ($modInstall->loadLexicon()) {
+if ($modInstall->getService('lexicon','modInstallLexicon')) {
     $modInstall->lexicon->load('default');
 }
 $modInstall->findCore();
 $modInstall->doPreloadChecks();
-$modInstall->loadRequestHandler();
-$modInstall->request->loadParser();
+$requestClass = $isCommandLine ? 'request.modInstallCLIRequest' : 'request.modInstallRequest';
+$modInstall->getService('request',$requestClass);
 echo $modInstall->request->handle();
 exit();

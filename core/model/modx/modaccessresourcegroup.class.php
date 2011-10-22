@@ -1,12 +1,25 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Defines an access control policy between a principal and a modResourceGroup.
  *
  * {@inheritdoc}
  *
+ * @property string $context_key The key of the Context this ACL refers to
  * @package modx
  */
 class modAccessResourceGroup extends modAccess {
+    /**
+     * Load the attributes for the ACLs for the Resource Group
+     *
+     * @static
+     * @param modX $modx A reference to the modX instance
+     * @param string $context The context to load from. If empty, will use the current context.
+     * @param int $userId The ID of the user to grab ACL records for.
+     * @return array An array of loaded attributes
+     */
     public static function loadAttributes(&$modx, $context = '', $userId = 0) {
         $attributes = array();
         if (empty($context)) {

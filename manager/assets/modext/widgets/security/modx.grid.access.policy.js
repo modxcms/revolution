@@ -182,37 +182,55 @@ MODx.window.CreateAccessPolicy = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacp'+Ext.id();
     Ext.applyIf(config,{
-        width: 400
+        width: 500
         ,title: _('policy_create')
         ,url: MODx.config.connectors_url+'security/access/policy.php'
         ,action: 'create'
         ,fields: [{
             fieldLabel: _('name')
+            ,description: MODx.expandHelp ? '' : _('policy_desc_name')
             ,name: 'name'
-            ,id: this.ident+'-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-name'
+            ,html: _('policy_desc_name')
+            ,cls: 'desc-under'
+        },{
             fieldLabel: _('policy_template')
+            ,description: MODx.expandHelp ? '' : _('policy_desc_template')
             ,name: 'template'
             ,hiddenName: 'template'
-            ,id: this.ident+'-template'
+            ,id: 'modx-'+this.ident+'-template'
             ,xtype: 'modx-combo-access-policy-template'
             ,anchor: '90%'
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-template'
+            ,html: _('policy_desc_template')
+            ,cls: 'desc-under'
+        },{
             fieldLabel: _('description')
+            ,description: MODx.expandHelp ? '' : _('policy_desc_description')
             ,name: 'description'
-            ,id: this.ident+'-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
             ,anchor: '90%'
             ,height: 50
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-description'
+            ,html: _('policy_desc_description')
+            ,cls: 'desc-under'
+        },{
             name: 'class'
-            ,id: this.ident+'-class'
+            ,id: 'modx-'+this.ident+'-class'
             ,xtype: 'hidden'
         },{
             name: 'id'
-            ,id: this.ident+'-id'
+            ,id: 'modx-'+this.ident+'-id'
             ,xtype: 'hidden'
         }]
     });

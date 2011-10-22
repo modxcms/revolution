@@ -40,6 +40,6 @@ foreach ($options as $option) {
 
     $i++;
 }
-$this->xpdo->smarty->assign('opts',$items);
-$this->xpdo->smarty->assign('cbdefaults',$defaultIndex);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/radio.tpl');
+$this->xpdo->controller->setPlaceholder('opts',$items);
+$this->xpdo->controller->setPlaceholder('cbdefaults',$defaultIndex);
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/radio.tpl');

@@ -352,7 +352,11 @@ class modOutputFilter {
                             /* Returns input divided by option (default: /2) */
                             if (empty($m_val))
                                 $m_val = 2;
-                            $output = (float)$output / (float)$m_val;
+                            if (!empty($output)) {
+                                $output = (float)$output / (float)$m_val;
+                            } else {
+                                $output = 0;
+                            }
                             break;
 
                         case 'modulus':
@@ -392,7 +396,7 @@ class modOutputFilter {
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
                             $value = 0 + $output;
                             if ($value != 0 && $value != -1) {
-                                $output= strftime($m_val, 0 + $output);
+                                $output= strftime($m_val,$value);
                             } else {
                                 $output= '';
                             }
@@ -543,6 +547,28 @@ class modOutputFilter {
                         case 'urldecode':
                             $output = urldecode($output);
                             break;
+
+                        case 'toPlaceholder':
+                            $this->modx->toPlaceholder($m_val,$output);
+                            break;
+                        case 'cssToHead':
+                            $this->modx->regClientCSS($output);
+                            break;
+                        case 'htmlToHead':
+                            $this->modx->regClientStartupHTMLBlock($output);
+                            break;
+                        case 'htmlToBottom':
+                            $this->modx->regClientHTMLBlock($output);
+                            break;
+                        case 'jsToHead':
+                            if (empty($m_val)) $m_val = false;
+                            $this->modx->regClientStartupScript($output,$m_val);
+                            break;
+                        case 'jsToBottom':
+                            if (empty($m_val)) $m_val = false;
+                            $this->modx->regClientScript($output,$m_val);
+                            break;
+
 
                         /* Default, custom modifier (run snippet with modifier name) */
                         default:

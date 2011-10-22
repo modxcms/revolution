@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<project name="MODX Revolution" description="MODX Revolution build script for Phing" default="complete" basedir=".">
+    <!-- Override properties in the build.properties file -->
+    <property file="build.properties" />
+
+    <!-- Set build timestamp properties, available as:
+         DSTAMP "%Y%m%d"
+         TSTAMP "%H%M"
+         TODAY  "%B %d %Y"
+    -->
+    <tstamp />
+
+    <!-- Set some common project properties -->
+    <property name="project.name.fs" value="modx" />
+    <property name="project.root.dir" value=".." />
+    <property name="project.core.dir" value="${project.root.dir}/core" />
+    <property name="project.assets.dir" value="${project.root.dir}/assets" />
+    <property name="project.connectors.dir" value="${project.root.dir}/connectors" />
+    <property name="project.manager.dir" value="${project.root.dir}/manager" />
+
+    <!-- Set the project version -->
+    <property name="modx.core.version" value="2.2.0" />
+    <property name="modx.core.release" value="dev" />
+
+    <!-- Set some common build properties -->
+    <property name="build.dir" value="${project.basedir}" />
+    <property name="build.src.tree" value="HEAD" />
+    <property name="build.distrib.name" value="${project.name.fs}-${modx.core.version}-${modx.core.release}" />
+    <property name="build.image.basedir" value="${build.dir}/image" />
+    <property name="build.image.dir" value="${build.image.basedir}/${build.distrib.name}" />
+    <property name="build.distrib.dir" value="${build.dir}/distrib" />
+    <property name="build.templates.dir" value="${build.dir}/templates" />
+    <property name="build.apidocs.dir" value="${build.image.basedir}/docs" />
+    <property name="build.timestamp" value="true" />
+
+    <!-- Set the paths to the main locations of source code in the build image -->
+    <property name="image.core.dir" value="${build.image.dir}/core" />
+    <property name="image.assets.dir" value="${build.image.dir}/assets" />
+    <property name="image.connectors.dir" value="${build.image.dir}/connectors" />
+    <property name="image.manager.dir" value="${build.image.dir}/manager" />
+
+    <!-- =================================
+          target: complete
+         ================================= -->
+    <target name="complete" description="--> Complete Build">
+        <phingcall target="prepare-build-image" />
+        <phingcall target="git-export-build-image" />
+        <phingcall target="generate-core-transport" />
+        <!--<phingcall target="copy-core-transport" />-->
+        <phingcall target="prepare-build-distrib" />
+        <phingcall target="generate-phpdocs" />
+        <phingcall target="build-sdk" />
+        <phingcall target="build-traditional" />
+        <phingcall target="build-advanced" />
+    </target>
+
+    <!-- Make sure the image directory exists and is clean -->
+    <target name="prepare-build-image" description="prepare the build image directory">
+        <mkdir dir="${build.image.basedir}" />
+        <delete includeemptydirs="true">
+            <fileset dir="${build.image.basedir}">
+                <include name="**" />
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- Export a build image from a local Git repository tree; requires a local Git clone of the repository -->
+    <target name="git-export-build-image" description="export a repository tree of MODX from the local Git repository" if="build.distrib">
+        <mkdir dir="${build.image.dir}" />
+        <resolvepath propertyName="absolute.root.dir" file="${project.root.dir}" />
+        <resolvepath propertyName="absolute.image.basedir" file="${build.image.basedir}" />
+        <exec dir="${absolute.root.dir}"
+              command="${git.command} archive -o ${absolute.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}"
+              escape="false" />
+        <unzip file="${build.image.dir}.zip" todir="${build.image.basedir}" />
+    </target>
+
+    <!-- Run the core data generation script -->
+    <target name="generate-core-data" description="generate core data for MODX from a reference database">
+        <exec dir="${project.basedir}" command="${php.command} transport.data.php" />
+    </target>
+
+    <!-- Run the core package generation script -->
+    <target name="generate-core-transport" description="generate the core transport package">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <property name="core.dir" value="${project.core.dir}" />
+                <property name="transport.image" value="wc" />
+            </then>
+            <else>
+                <property name="core.dir" value="${image.core.dir}" />
+                <property name="transport.image" value="${build.distrib.name}" />
+            </else>
+        </if>
+        <delete file="${core.dir}/packages/core.transport.zip" />
+        <delete dir="${core.dir}/packages/core" />
+        <exec dir="${project.basedir}" command="${php.command} transport.core.php ${transport.image}" />
+    </target>
+
+    <!-- Run the phpdoc generation script -->
+    <target name="generate-phpdocs" description="generate the phpdoc documentation" unless="build.nodocs">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <property name="core.dir" value="${project.core.dir}" />
+            </then>
+            <else>
+                <property name="core.dir" value="${image.core.dir}" />
+            </else>
+        </if>
+        <phpdoc title="${project.name} ${modx.core.version} API Documentation"
+                target="${build.apidocs.dir}"
+                sourcecode="false"
+                output="HTML:frames:DOM/earthli"
+                parseprivate="true"
+                defaultcategoryname="${project.name}"
+                defaultpackagename="${project.name.fs}"
+                packageoutput="modx,xpdo">
+            <fileset dir="${core.dir}/xpdo">
+                <include name="**/*.php" />
+                <exclude name="**/*.map.inc.php" />
+                <exclude name="compression/pclzip.lib.php" />
+                <exclude name="json/**" />
+            </fileset>
+            <fileset dir="${core.dir}/model/modx">
+                <include name="**.php" />
+                <exclude name="**/*.map.inc.php" />
+                <exclude name="**/*_mysql.class.php" />
+                <exclude name="jsonrpc/**" />
+                <exclude name="mail/phpmailer/**" />
+                <exclude name="processors/**" />
+                <exclude name="xmlrpc/**" />
+                <exclude name="xmlrss/**" />
+                <include name="xmlrss/modrssparser.class.php" />
+            </fileset>
+        </phpdoc>
+    </target>
+
+    <!-- Copy the core transport package from a working copy to an exported image and extract it -->
+    <target name="copy-core-transport" description="copy the core transport to the image" if="build.distrib">
+        <delete file="${build.image.dir}/core/packages/core.transport.zip" />
+        <delete dir="${build.image.dir}/core/packages/core" includeemptydirs="true" />
+        <copy file="${project.core.dir}/packages/core.transport.zip" todir="${build.image.dir}/core/packages" />
+        <unzip file="${build.image.dir}/core/packages/core.transport.zip" todir="${build.image.dir}/core/packages" />
+    </target>
+
+    <!-- Make sure the distrib directory exists and is clean -->
+    <target name="prepare-build-distrib" description="empty the build distrib directory" if="build.distrib">
+        <delete includeemptydirs="true">
+            <fileset dir="${build.distrib.dir}">
+                <include name="**" />
+            </fileset>
+        </delete>
+        <mkdir dir="${build.distrib.dir}" />
+    </target>
+
+    <!-- Build a MODX SDK distrib with all files in place and extracted -->
+    <target name="build-sdk" description="create the traditional distribution package" if="build.distrib" unless="build.nodocs">
+        <if>
+            <istrue value="${build.timestamp}" />
+            <then>
+                <property name="distrib.name" value="${build.distrib.name}-${DSTAMP}-sdk" />
+            </then>
+            <else>
+                <property name="distrib.name" value="${build.distrib.name}-sdk" />
+            </else>
+        </if>
+        <reflexive file="${build.image.dir}/setup/includes/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@sdk@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@sdk@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <copy todir="${build.image.dir}/docs">
+            <fileset dir="${build.apidocs.dir}" />
+        </copy>
+        <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="core-path" value="dirname(__FILE__) . '/core/'" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+        <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/manager/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+        <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/connectors/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+        <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
+            <fileset dir="${build.image.dir}" />
+        </zip>
+        <reflexive file="${build.image.dir}/setup/includes/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="sdk" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="sdk" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <delete file="${build.image.dir}/config.core.php" />
+        <delete file="${build.image.dir}/manager/config.core.php" />
+        <delete file="${build.image.dir}/connectors/config.core.php" />
+        <delete dir="${build.image.dir}/docs" includeemptydirs="true" />
+    </target>
+
+    <!-- Build a traditional MODX distrib with all files in place and extracted -->
+    <target name="build-traditional" description="create the traditional distribution package" if="build.distrib">
+        <if>
+            <istrue value="${build.timestamp}" />
+            <then>
+                <property name="distrib.name" value="${build.distrib.name}-${DSTAMP}" />
+            </then>
+            <else>
+                <property name="distrib.name" value="${build.distrib.name}" />
+            </else>
+        </if>
+        <reflexive file="${build.image.dir}/setup/includes/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@traditional@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@traditional@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="core-path" value="dirname(__FILE__) . '/core/'" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+        <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/manager/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+        <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/connectors/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+        <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
+            <fileset dir="${build.image.dir}">
+                <exclude name="_build/**" />
+                <include name="**/.gitignore" />
+                <include name=".gitignore" />
+                <include name="ht.access" />
+                <include name="*/ht.access" />
+                <include name="config.core.php" />
+                <include name="index.php" />
+                <include name="connectors/**" />
+                <include name="manager/**" />
+                <include name="setup/**" />
+                <include name="core/cache/**" />
+                <include name="core/config/**" />
+                <include name="core/docs/**" />
+                <include name="core/error/**" />
+                <include name="core/export/**" />
+                <include name="core/import/**" />
+                <include name="core/lexicon/**" />
+                <include name="core/model/**" />
+                <include name="core/xpdo/**" />
+                <include name="core/packages/core.transport.zip" />
+                <include name="core/packages/core/manifest.php" />
+                <include name="core/packages/core/*/*.vehicle" />
+                <include name="core/packages/core/*/*.validator" />
+                <include name="core/packages/core/*/*.resolver" />
+            </fileset>
+        </zip>
+        <reflexive file="${build.image.dir}/setup/includes/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="traditional" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="traditional" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <delete file="${build.image.dir}/config.core.php" />
+        <delete file="${build.image.dir}/manager/config.core.php" />
+        <delete file="${build.image.dir}/connectors/config.core.php" />
+    </target>
+
+    <!-- Build a new advanced MODX distrib with only the core/ and setup/ dirs
+        and the core transport package included -->
+    <target name="build-advanced" description="create the advanced distribution package" if="build.distrib">
+        <if>
+            <istrue value="${build.timestamp}" />
+            <then>
+                <property name="distrib.name" value="${build.distrib.name}-${DSTAMP}-advanced" />
+            </then>
+            <else>
+                <property name="distrib.name" value="${build.distrib.name}-advanced" />
+            </else>
+        </if>
+        <reflexive file="${build.image.dir}/setup/includes/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@advanced@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@advanced@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
+            <fileset dir="${build.image.dir}">
+                <include name="setup/**" />
+                <include name="core/.gitignore" />
+                <include name="core/**/.gitignore" />
+                <include name="core/ht.access" />
+                <include name="core/cache/**" />
+                <include name="core/config/**" />
+                <include name="core/docs/**" />
+                <include name="core/error/**" />
+                <include name="core/export/**" />
+                <include name="core/import/**" />
+                <include name="core/lexicon/**" />
+                <include name="core/model/**" />
+                <include name="core/xpdo/**" />
+                <include name="core/packages/core.transport.zip" />
+            </fileset>
+        </zip>
+        <reflexive file="${build.image.dir}/setup/includes/config.core.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="advanced" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="advanced" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!-- Publish a distrib to a server -->
+    <target name="publish-build" description="publish the build to a server for download" if="build.distrib">
+        <echo>Not yet implemented!</echo>
+    </target>
+</project>

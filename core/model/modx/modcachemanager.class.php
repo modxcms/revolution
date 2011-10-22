@@ -3,7 +3,6 @@
  * Contains the xPDOCacheManager implementation for MODX.
  * @package modx
  */
-
 /**
  * The default xPDOCacheManager instance for MODX.
  *
@@ -22,8 +21,16 @@
  * @package modx
  */
 class modCacheManager extends xPDOCacheManager {
+    /**
+     * @var modX A reference to the modX instance
+     */
     public $modx= null;
 
+    /**
+     * Constructor for modCacheManager that overrides xPDOCacheManager constructor to assign modX reference
+     * @param $xpdo A reference to the xPDO/modX instance
+     * @param array $options An array of configuration options
+     */
     function __construct(& $xpdo, array $options = array()) {
         parent :: __construct($xpdo, $options);
         $this->modx =& $this->xpdo;
@@ -38,12 +45,13 @@ class modCacheManager extends xPDOCacheManager {
      *
      * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
      *
-     * @param modContext $obj  The modContext instance to be cached.
+     * @param string $key The modContext key to be cached.
      * @param array $options Options for system settings generation.
      * @return array An array containing all the context variable values.
      */
     public function generateContext($key, array $options = array()) {
         $results = array();
+        /** @var modContext $obj */
         $obj= $this->modx->getObject('modContext', $key, true);
         if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
             $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
@@ -52,6 +60,7 @@ class modCacheManager extends xPDOCacheManager {
             /* generate the ContextSettings */
             $results['config']= array();
             if ($settings= $obj->getMany('ContextSettings')) {
+                /** @var modContextSetting $setting */
                 foreach ($settings as $setting) {
                     $k= $setting->get('key');
                     $v= $setting->get('value');
@@ -89,6 +98,7 @@ class modCacheManager extends xPDOCacheManager {
             $results['resourceMap']= array ();
             $results['aliasMap']= array ();
             if ($collResources) {
+                /** @var Object $r */
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
                     if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {
@@ -148,6 +158,55 @@ class modCacheManager extends xPDOCacheManager {
             }
         }
         return $results;
+    }
+
+    public function getElementMediaSourceCache(modElement $element,$contextKey, array $options = array()) {
+        $cacheKey = $contextKey.'/source';
+        $sourceCache = $this->get($cacheKey);
+        if (empty($sourceCache)) {
+            $c = $this->modx->newQuery('sources.modMediaSourceElement');
+            $c->innerJoin('sources.modMediaSource','Source');
+            $c->where(array(
+                'modMediaSourceElement.context_key' => $contextKey,
+            ));
+            $c->select($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement'));
+            $c->select(array(
+                'Source.name',
+                'Source.description',
+                'Source.properties',
+                'source_class_key' => 'Source.class_key',
+            ));
+            $c->sortby($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement','',array('object')),'ASC');
+            $sourceElements = $this->modx->getCollection('sources.modMediaSourceElement',$c);
+
+            $coreSourceClasses = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+            $coreSourceClasses = explode(',',$coreSourceClasses);
+            $sourceCache = array();
+            /** @var modMediaSourceElement $sourceElement */
+            foreach ($sourceElements as $sourceElement) {
+                $classKey = $sourceElement->get('source_class_key');
+                $classKey = in_array($classKey,$coreSourceClasses) ? 'sources.'.$classKey : $classKey;
+                /** @var modMediaSource $source */
+                $source = $this->modx->newObject($classKey);
+                $source->fromArray($sourceElement->toArray(),'',true,true);
+                $sourceArray = $source->toArray();
+                $sourceArray = array_merge($source->getPropertyList(),$sourceArray);
+                $sourceArray['class_key'] = $source->_class;
+                $sourceArray['object'] = $source->get('object');
+                $sourceCache[$sourceArray['object']] = $sourceArray;
+            }
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+            $lifetime = (integer) $this->getOption('cache_media_sources_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            if (!$this->set($cacheKey, $sourceCache, $lifetime, $options)) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache source data for ' . $element->get('id') . '.');
+            }
+        }
+        $data = !empty($sourceCache[$element->get('id')]) ? $sourceCache[$element->get('id')] : array();
+        return $data;
     }
 
     /**
@@ -285,11 +344,12 @@ class modCacheManager extends xPDOCacheManager {
         return $entries;
     }
 
-     /**
+    /**
      * Generates a cache file for the manager actions.
      *
      * @access public
      * @param string $cacheKey The key to use when caching the action map.
+     * @param array $options An array of options
      * @return array An array representing the action map.
      */
     public function generateActionMap($cacheKey, array $options = array()) {
@@ -387,6 +447,10 @@ class modCacheManager extends xPDOCacheManager {
 
     /**
      * Implements MODX cache refresh process, converting cache partitions to cache providers.
+     *
+     * @param array $providers
+     * @param array $results
+     * @return boolean
      */
     public function refresh(array $providers = array(), array &$results = array()) {
         if (empty($providers)) {
@@ -401,6 +465,7 @@ class modCacheManager extends xPDOCacheManager {
                 'system_settings' => array(),
                 'context_settings' => array('contexts' => $contexts),
                 'db' => array(),
+                'media_sources' => array(),
                 'scripts' => array(),
                 'default' => array(),
                 'resource' => array('contexts' => array_diff($contexts, array('mgr'))),
@@ -536,6 +601,7 @@ class modCacheManager extends xPDOCacheManager {
      * <li><strong>objects</strong>: an array of objects or paths to flush from the db object cache</li>
      * <li><strong>extensions</strong>: an array of file extensions to match when deleting the cache directories</li>
      * </ul>
+     * @return array
      */
     public function clearCache(array $paths= array(), array $options= array()) {
         $results= array();

@@ -59,13 +59,20 @@ foreach ($scriptProperties as $key => $value) {
     }
 }
 
+/** @var modTemplateVar $tv */
 $tv = $modx->newObject('modTemplateVar');
 $tv->fromArray($scriptProperties);
-$tv->set('elements',$scriptProperties['els']);
+if (!empty($scriptProperties['els'])) {
+    $tv->set('elements',$scriptProperties['els']);
+}
 $tv->set('input_properties',$input_properties);
 $tv->set('output_properties',$output_properties);
-$tv->set('rank',!empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
-$tv->set('locked',!empty($scriptProperties['locked']));
+if (isset($scriptProperties['rank'])) {
+    $tv->set('rank',!empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
+}
+if (isset($scriptProperties['locked'])) {
+    $tv->set('locked',!empty($scriptProperties['locked']));
+}
 $properties = null;
 if (isset($scriptProperties['propdata'])) {
     $properties = $scriptProperties['propdata'];
@@ -173,6 +180,34 @@ if ($modx->hasPermission('tv_access_permissions')) {
         }
     }
 }
+
+/** add source-element maps */
+if (isset($scriptProperties['sources'])) {
+    $sources = $modx->fromJSON($scriptProperties['sources']);
+    if (is_array($sources)) {
+        foreach ($sources as $id => $source) {
+            if (!is_array($source)) continue;
+
+            /** @var modMediaSourceElement $sourceElement */
+            $sourceElement = $modx->getObject('sources.modMediaSourceElement',array(
+                'object' => $tv->get('id'),
+                'object_class' => $tv->_class,
+                'context_key' => $source['context_key'],
+            ));
+            if (!$sourceElement) {
+                $sourceElement = $modx->newObject('sources.modMediaSourceElement');
+                $sourceElement->fromArray(array(
+                    'object' => $tv->get('id'),
+                    'object_class' => $tv->_class,
+                    'context_key' => $source['context_key'],
+                ),'',true,true);
+            }
+            $sourceElement->set('source',$source['source']);
+            $sourceElement->save();
+        }
+    }
+}
+
 
 /* invoke OnTVFormSave event */
 $modx->invokeEvent('OnTVFormSave',array(

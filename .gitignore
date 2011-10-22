@@ -1,19 +1,19 @@
 
 # ignore all .htaccess
-# .htaccess
+.htaccess
 
 # ignore all IIS files
-# web.config
+web.config
 
 # ignore all config.core.php
-# config.core.php
+config.core.php
 
 # ignore all compressed js and css
-# *-min.css
-# *-min.js
+*-min.css
+*-min.js
 
 # ignore concatenated js
-# modext.js
+modext.js
 
 # ignore common root paths for docs and assets
 /docs/
@@ -24,6 +24,16 @@
 .buildpath
 .project
 .settings/
+nbproject/
 
 # ignore PHP files beginning with test
 test*.php
+
+# ignore mac files
+.DS_Store
+
+# ignore setup config files
+setup/config.xml
+setup/config.new.xml
+setup/config.upgrade.xml
+setup/config.upgrade-advanced.xml

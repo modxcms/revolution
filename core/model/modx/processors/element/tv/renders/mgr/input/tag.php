@@ -33,7 +33,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
     $i++;
 }
 
-$this->xpdo->smarty->assign('cbdefaults',implode(',',$defaults));
-$this->xpdo->smarty->assign('opts',$opts);
+$this->xpdo->controller->setPlaceholder('cbdefaults',implode(',',$defaults));
+$this->xpdo->controller->setPlaceholder('opts',$opts);
 
-return $this->xpdo->smarty->fetch('element/tv/renders/input/tag.tpl');
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/tag.tpl');

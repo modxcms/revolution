@@ -36,8 +36,13 @@ if (empty($contextKeys)) {
 $c = $modx->newQuery('modResource');
 $where = array('context_key:IN' => $contextKeys);
 if (!empty($scriptProperties['id'])) $where['id'] = $scriptProperties['id'];
+if (!empty($scriptProperties['parent'])) $where['parent'] = $scriptProperties['parent'];
 if (!empty($scriptProperties['pagetitle'])) $where['pagetitle:LIKE'] = '%'.$scriptProperties['pagetitle'].'%';
 if (!empty($scriptProperties['longtitle'])) $where['longtitle:LIKE'] = '%'.$scriptProperties['longtitle'].'%';
+if (!empty($scriptProperties['introtext'])) $where['introtext:LIKE'] = '%'.$scriptProperties['introtext'].'%';
+if (!empty($scriptProperties['description'])) $where['description:LIKE'] = '%'.$scriptProperties['description'].'%';
+if (!empty($scriptProperties['alias'])) $where['alias:LIKE'] = '%'.$scriptProperties['alias'].'%';
+if (!empty($scriptProperties['menutitle'])) $where['menutitle:LIKE'] = '%'.$scriptProperties['menutitle'].'%';
 if (!empty($scriptProperties['content'])) $where['content:LIKE'] = '%'.$scriptProperties['content'].'%';
 
 if (!empty($scriptProperties['published'])) $where['published'] = true;
@@ -54,10 +59,14 @@ $actions = $modx->request->getAllActionIDs();
 
 /* iterate */
 $list = array();
+$charset = $modx->getOption('modx_charset',null,'UTF-8');
+/** @var modResource $resource */
 foreach ($iterator as $resource) {
     if ($resource->checkPolicy('list')) {
         $resourceArray = $resource->toArray();
         $resourceArray['menu'] = array();
+        $resourceArray['pagetitle'] = htmlentities($resourceArray['pagetitle'],ENT_COMPAT,$charset);
+        $resourceArray['description'] = htmlentities($resourceArray['description'],ENT_COMPAT,$charset);
         if ($modx->hasPermission('edit_document')) {
             $resourceArray['menu'][] = array(
                 'text' => $modx->lexicon('resource_edit'),

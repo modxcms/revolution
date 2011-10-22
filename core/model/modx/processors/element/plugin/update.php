@@ -53,6 +53,7 @@ if (!empty($scriptProperties['category'])) {
 }
 
 /* set fields */
+$previousCategory = $plugin->get('category');
 $plugin->fromArray($scriptProperties);
 $plugin->set('locked',!empty($scriptProperties['locked']));
 $plugin->set('disabled',!empty($scriptProperties['disabled']));
@@ -137,4 +138,4 @@ if (!empty($scriptProperties['clearCache'])) {
     $modx->cacheManager->refresh();
 }
 
-return $modx->error->success('', $plugin->get(array('id', 'name','description','category','locked','disabled')));
+return $modx->error->success('', array_merge($plugin->get(array('id', 'name','description','category','locked','disabled')), array('previous_category' => $previousCategory)));

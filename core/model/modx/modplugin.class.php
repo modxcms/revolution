@@ -1,14 +1,28 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Provides a non-cacheable modScript implementation representing plugins.
  *
  * {@inheritdoc}
+ *
+ * @field boolean $cache_type Deprecated.
+ * @field string $plugincode The code of the Plugin
+ * @field boolean $locked Whether or not this Plugin is locked from editing except by Administrators
+ * @field array $properties An array of default properties for the Plugin
+ * @field boolean $disabled Whether or not this Plugin is active.
+ * @field string $moduleguid Deprecated.
  *
  * @package modx
  * @extends modScript
  */
 class modPlugin extends modScript {
-    function __construct(& $xpdo) {
+    /**
+     * Overrides xPDOObject::__construct to always set plugins as non-cacheable
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
+    function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
         $this->setCacheable(false);
     }
@@ -29,7 +43,7 @@ class modPlugin extends modScript {
             ));
         }
 
-        $saved = parent :: save($cacheFlag);
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnPluginSave',array(
@@ -74,33 +88,6 @@ class modPlugin extends modScript {
     }
 
     /**
-     * Overrides modElement::getContent to get the source content of this
-     * plugin.
-     *
-     * {@inheritdoc}
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } else {
-                $this->_content = $this->get('plugincode');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Overrides modElement::setContent to set the source content of this
-     * plugin.
-     *
-     * {@inheritdoc}
-     */
-    public function setContent($content, array $options = array()) {
-        return $this->set('plugincode', $content);
-    }
-
-    /**
      * Overrides modElement::getPropertySet to handle separate plugin event
      * property set calls.
      *
@@ -113,6 +100,17 @@ class modPlugin extends modScript {
         return parent :: getPropertySet($setName);
     }
 
+    /**
+     * Grabs a list of groups for the plugin.
+     * @todo Implement this.
+     *
+     * @static
+     * @param modResource $resource
+     * @param array $sort
+     * @param int $limit
+     * @param int $offset
+     * @return void
+     */
     public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         
     }

@@ -52,6 +52,7 @@ if (!empty($scriptProperties['category'])) {
 }
 
 /* propagate values */
+$previousCategory = $chunk->get('category');
 $chunk->fromArray($scriptProperties);
 $chunk->set('locked',!empty($scriptProperties['locked']));
 
@@ -109,4 +110,4 @@ if (!empty($scriptProperties['clearCache'])) {
     $modx->cacheManager->refresh();
 }
 
-return $modx->error->success('',$chunk->get(array('id', 'name', 'description', 'locked', 'category')));
+return $modx->error->success('',array_merge($chunk->get(array('id', 'name', 'description', 'locked', 'category')), array('previous_category' => $previousCategory)));

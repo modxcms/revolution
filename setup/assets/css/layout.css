@@ -142,7 +142,10 @@ table.options td {
     float:right;
     width:140px;
     cursor: pointer;
-    margin-right: 1em;
+    margin: 0 1em 0 0;
+    padding:3px;
+    line-height: 1.2em;
+    vertical-align:middle;
 }
 
 .note {

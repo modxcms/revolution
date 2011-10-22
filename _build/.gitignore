@@ -1,0 +1,10 @@
+build.config.php
+build.distrib.config.php
+build.number
+build.properties
+build.properties.php
+image/
+distrib/
+test/properties.inc.php
+docs/build/
+docs/log/

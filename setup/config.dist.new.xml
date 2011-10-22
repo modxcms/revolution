@@ -1,0 +1,67 @@
+<!--
+ MODX Revolution
+
+ Copyright 2006-2011 by MODX, LLC. All rights reserved.
+
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ details.
+
+ You should have received a copy of the GNU General Public License along with
+ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ Place, Suite 330, Boston, MA 02111-1307 USA
+
+
+ An example configuration xml file for new CLI MODX installs.
+-->
+<modx>
+	<database_type>mysql</database_type>
+    <database_server>localhost</database_server>
+    <database>modx_modx</database>
+    <database_user>db_username</database_user>
+    <database_password>db_password</database_password>
+    <database_connection_charset>utf8</database_connection_charset>
+    <database_charset>utf8</database_charset>
+    <database_collation>utf8_general_ci</database_collation>
+    <table_prefix>modx_</table_prefix>
+    <https_port>443</https_port>
+    <http_host>localhost</http_host>
+    <cache_disabled>0</cache_disabled>
+
+    <!-- Set this to 1 if you are using MODX from Git or extracted it from the full MODX package to the server prior
+         to installation. -->
+    <inplace>0</inplace>
+    
+    <!-- Set this to 1 if you have manually extracted the core package from the file core/packages/core.transport.zip.
+         This will reduce the time it takes for the installation process on systems that do not allow the PHP time_limit
+         and Apache script execution time settings to be altered. -->
+    <unpacked>0</unpacked>
+
+    <!-- The language to install MODX for. This will set the default manager language to this. Use IANA codes. -->
+    <language>en</language>
+
+    <!-- Information for your administrator account -->
+    <cmsadmin>username</cmsadmin>
+    <cmspassword>password</cmspassword>
+    <cmsadminemail>email@address.com</cmsadminemail>
+
+    <!-- Paths for your MODX core directory -->
+    <core_path>/www/modx/core/</core_path>
+
+    <!-- Paths for the default contexts that are installed. -->
+    <context_mgr_path>/www/modx/manager/</context_mgr_path>
+    <context_mgr_url>/modx/manager/</context_mgr_url>
+    <context_connectors_path>/www/modx/connectors/</context_connectors_path>
+    <context_connectors_url>/modx/connectors/</context_connectors_url>
+    <context_web_path>/www/modx/</context_web_path>
+    <context_web_url>/modx/</context_web_url>
+
+    <!-- Whether or not to remove the setup/ directory after installation. -->
+    <remove_setup_directory>1</remove_setup_directory>
+</modx>

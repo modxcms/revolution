@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*
+ * MODX CMS and PHP Application Framework ("MODX")
+ * Copyright 2006-2012 by MODX, LLC.
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+ -->
+<!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
+<model package="modx.sources" baseClass="xPDOObject" platform="sqlsrv" phpdoc-package="modx" phpdoc-subpackage="sources" version="1.1">
+
+    <object class="modAccessMediaSource" table="access_media_source" extends="modAccess">
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
+
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Target" class="sources.modMediaSource" local="target" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="modMediaSource" table="media_sources" extends="modAccessibleObject">
+        <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index"/>
+        <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="true" />
+        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="sources.modFileMediaSource" index="index" />
+        <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
+        <field key="is_stream" dbtype="bit" phptype="boolean" null="false" default="1" index="index" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="class_key" name="class_key" primary="false" unique="false" type="BTREE">
+            <column key="class_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="is_stream" name="is_stream" primary="false" unique="false" type="BTREE">
+            <column key="is_stream" length="" collation="A" null="false" />
+        </index>
+        
+        <composite alias="SourceElement" class="sources.modMediaSourceElement" local="id" foreign="source" cardinality="one" owner="local" />
+        <aggregate alias="Chunks" class="modChunk" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Plugins" class="modPlugin" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Snippets" class="modSnippet" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Templates" class="modTemplate" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="TemplateVars" class="modTemplateVar" local="id" foreign="source" cardinality="many" owner="local" />
+    </object>
+    <object class="modFileMediaSource" extends="modMediaSource" />
+    <object class="modS3MediaSource" extends="modMediaSource" />
+
+    <object class="modMediaSourceContext" table="media_sources_contexts" extends="xPDOObject">
+        <field key="source" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
+        <field key="context_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="web" index="pk" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="source" length="" collation="A" null="false" />
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Source" class="sources.modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="modMediaSourceElement" table="media_sources_tvs" extends="xPDOObject">
+        <field key="source" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
+        <field key="object" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
+        <field key="object_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="modTemplateVar" index="pk" />
+        <field key="context_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="web" index="pk" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="source" length="" collation="A" null="false" />
+            <column key="object" length="" collation="A" null="false" />
+            <column key="object_class" length="" collation="A" null="false" />
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Source" class="sources.modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Element" class="modElement" local="object" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+</model>

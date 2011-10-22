@@ -35,7 +35,7 @@ $xpdo_meta_map['modTemplateVarResource']= array (
     ),
     'value' => 
     array (
-      'dbtype' => 'text',
+      'dbtype' => 'mediumtext',
       'phptype' => 'string',
       'null' => false,
     ),

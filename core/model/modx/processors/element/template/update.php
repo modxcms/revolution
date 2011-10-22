@@ -52,6 +52,7 @@ if (!empty($scriptProperties['category'])) {
 if ($modx->error->hasError()) return $modx->error->failure();
 
 /* set fields */
+$previousCategory = $template->get('category');
 $template->fromArray($scriptProperties);
 $template->set('locked',!empty($scriptProperties['locked']));
 
@@ -127,4 +128,4 @@ if (!empty($scriptProperties['clearCache'])) {
     $modx->cacheManager->refresh();
 }
 
-return $modx->error->success('',$template->get(array_diff(array_keys($template->_fields), array('content'))));
+return $modx->error->success('',array_merge($template->get(array_diff(array_keys($template->_fields), array('content'))), array('previous_category' => $previousCategory)));

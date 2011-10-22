@@ -23,14 +23,16 @@ if (!empty($wctx)) {
     $workingContext =& $modx->context;
 }
 
-$customResourceClasses = array();
-$crcs = $workingContext->getOption('custom_resource_classes', '', $modx->_userConfig);
-if (!empty($crcs)) {
-    $crcs = explode(',',$crcs);
-    foreach ($crcs as $crc) {
-        $crc = explode(':',$crc);
-        if (empty($crc) || empty($crc[1])) continue;
-        $customResourceClasses[$crc[0]] = $crc[1];
+/* calculate custom resource classes */
+$modx->lexicon->load('resource');
+$resourceClasses = array();
+$resourceClassNames = $modx->getDescendants('modResource');
+$resourceClassNames = array_diff($resourceClassNames,array('modResource'));
+foreach ($resourceClassNames as $resourceClassName) {
+    $obj = $modx->newObject($resourceClassName);
+    if ($obj->showInContextMenu) {
+        $lex = $obj->getContextMenuText();
+        $resourceClasses[$resourceClassName] = $lex;
     }
 }
 
@@ -46,7 +48,7 @@ $c = array(
     'http_host_remote' => MODX_URL_SCHEME . $workingContext->getOption('http_host', MODX_HTTP_HOST, $modx->_userConfig),
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],
-    'custom_resource_classes' => $customResourceClasses,
+    'resource_classes' => $resourceClasses,
 );
 
 /* if custom context, load into MODx.config */
@@ -63,8 +65,7 @@ $actions = $modx->request->getAllActionIDs();
 
 $c = array_merge($modx->config,$c);
 
-unset($c['password']);
-unset($c['username']);
+unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username']);
 
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);

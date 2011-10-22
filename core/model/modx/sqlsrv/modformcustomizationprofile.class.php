@@ -4,6 +4,10 @@
  * @subpackage sqlsrv
  */
 require_once (dirname(dirname(__FILE__)) . '/modformcustomizationprofile.class.php');
+/**
+ * @package modx
+ * @subpackage sqlsrv
+ */
 class modFormCustomizationProfile_sqlsrv extends modFormCustomizationProfile {
     public static function listProfiles(xPDO &$xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         $objCollection= array ();

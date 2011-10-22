@@ -20,6 +20,11 @@ MODx.Layout = function(config){
         'HTTP_MODAUTH': config.auth
     };
     MODx.siteId = config.auth;
+    MODx.expandHelp = !Ext.isEmpty(MODx.config.inline_help);
+
+    var sp = new MODx.HttpProvider();
+    Ext.state.Manager.setProvider(sp);
+    sp.initState(MODx.defaultState);
 
     var tabs = [];
     var showTree = false;
@@ -81,6 +86,7 @@ MODx.Layout = function(config){
         });
         showTree = true;
     }
+    var activeTab = 0;
 
     Ext.applyIf(config,{
          layout: 'border'
@@ -89,7 +95,7 @@ MODx.Layout = function(config){
             xtype: 'box'
             ,region: 'north'
             ,applyTo: 'modx-header'
-            ,height: 90
+            ,height: 92
         },{
              region: 'west'
             ,applyTo: 'modx-leftbar'
@@ -104,7 +110,6 @@ MODx.Layout = function(config){
             ,useSplitTips: true
             ,monitorResize: true
             ,forceLayout: true
-            ,stateful: false
             ,items: [{
                  xtype: 'modx-tabs'
                 ,plain: true
@@ -116,9 +121,9 @@ MODx.Layout = function(config){
                 }
                 ,id: 'modx-leftbar-tabpanel'
                 ,border: false
-                ,activeTab: 0
+                ,activeTab: activeTab
                 ,stateful: true
-                ,stateId: 'modx-leftbar-state'
+                ,stateId: 'modx-leftbar-tabs'
                 ,stateEvents: ['tabchange']
                 ,getState:function() {
                     return {
@@ -133,7 +138,6 @@ MODx.Layout = function(config){
             ,id: 'modx-content'
             ,border: false
             ,autoScroll: true
-            ,margins: '0 0 20 15'
             ,padding: '0 1px 0 0'
             ,bodyStyle: 'background-color:transparent;'
         }]

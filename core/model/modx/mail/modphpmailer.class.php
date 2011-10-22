@@ -9,6 +9,9 @@ require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
 
 /**
  * PHPMailer implementation of the modMail service.
+ *
+ * @package modx
+ * @subpackage mail
  */
 class modPHPMailer extends modMail {
     /**

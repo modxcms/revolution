@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * MODX Revolution
  *
  * Copyright 2006-2011 by MODX, LLC.
@@ -18,6 +18,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package modx
  */
 /**
  * Encapsulates the interaction of MODX with an HTTP request.
@@ -31,11 +33,30 @@
  * @package modx
  */
 class modRequest {
+    /**
+     * A reference to the modX object
+     * @var modX $modx
+     */
     public $modx = null;
+    /**
+     * The current request method
+     * @var string $method
+     */
     public $method = null;
+    /**
+     * The parameters sent in the request
+     * @var array $parameters
+     */
     public $parameters = null;
+    /**
+     * The HTTP headers sent in the request
+     * @var array $headers
+     */
     public $headers = null;
 
+    /**
+     * @param modX $modx A reference to the modX object
+     */
     function __construct(modX &$modx) {
         $this->modx = & $modx;
         $this->parameters['GET'] =& $_GET;
@@ -68,6 +89,17 @@ class modRequest {
             $this->checkPublishStatus();
             $this->modx->resourceMethod = $this->getResourceMethod();
             $this->modx->resourceIdentifier = $this->getResourceIdentifier($this->modx->resourceMethod);
+            if ($this->modx->resourceMethod == 'id' && $this->modx->getOption('friendly_urls', null, false) && !$this->modx->getOption('request_method_strict', null, false)) {
+                $uri = array_search($this->modx->resourceIdentifier, $this->modx->aliasMap);
+                if (!empty($uri)) {
+                    if ($this->modx->resourceIdentifier == $this->modx->getOption('site_start', null, 1)) {
+                        $url = $this->modx->getOption('site_url', null, MODX_SITE_URL);
+                    } else {
+                        $url = $this->modx->getOption('site_url', null, MODX_SITE_URL) . $uri;
+                    }
+                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                }
+            }
         }
         if (empty ($this->modx->resourceMethod)) {
             $this->modx->resourceMethod = "id";
@@ -78,8 +110,10 @@ class modRequest {
         if ($this->modx->resourceMethod == "alias") {
             if (isset ($this->modx->aliasMap[$this->modx->resourceIdentifier])) {
                 $this->modx->resourceIdentifier = $this->modx->aliasMap[$this->modx->resourceIdentifier];
+                $this->modx->resourceMethod = 'id';
+            } else {
+                $this->modx->sendErrorPage();
             }
-            $this->modx->resourceMethod = 'id';
         }
         $this->modx->beforeRequest();
         $this->modx->invokeEvent("OnWebPageInit");
@@ -117,10 +151,14 @@ class modRequest {
      */
     public function getResourceMethod() {
         $method = '';
-        if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')]))
-            $method = "alias";
-        elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
-            $method = "id";
+        if ($this->modx->getOption('request_method_strict', null, false)) {
+            $method = $this->modx->getOption('friendly_urls', null, false) ? 'alias' : 'id';
+        } else {
+            if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')])) {
+                $method = "alias";
+            } elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
+                $method = "id";
+            }
         }
         return $method;
     }
@@ -131,6 +169,7 @@ class modRequest {
      * @param string $method The method, 'id', or 'alias', by which to perform
      * the resource lookup.
      * @param string|integer $identifier The identifier with which to search.
+     * @param array $options An array of options for the resource fetching
      * @return modResource The requested modResource instance or request
      * is forwarded to the error page, or unauthorized page.
      */
@@ -154,6 +193,7 @@ class modRequest {
             xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
         if (is_array($cachedResource) && array_key_exists('resource', $cachedResource) && is_array($cachedResource['resource'])) {
+            /** @var modResource $resource */
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
@@ -199,6 +239,7 @@ class modRequest {
                         $this->modx->sendUnauthorizedPage();
                     }
                     if ($tvs = $resource->getMany('TemplateVars', 'all')) {
+                        /** @var modTemplateVar $tv */
                         foreach ($tvs as $tv) {
                             $resource->set($tv->get('name'), array(
                                 $tv->get('name'),
@@ -266,7 +307,7 @@ class modRequest {
             $identifier = $this->modx->getOption('site_start', null, 1);
             $this->modx->resourceMethod = 'id';
         }
-        elseif ($this->modx->getOption('friendly_urls', null, false)) {
+        elseif ($this->modx->getOption('friendly_urls', null, false) && $this->modx->resourceMethod = 'alias') {
             $containerSuffix = trim($this->modx->getOption('container_suffix', null, ''));
             if (!isset ($this->modx->aliasMap[$identifier])) {
                 if (!empty ($containerSuffix)) {
@@ -281,13 +322,13 @@ class modRequest {
                     }
                     if (isset ($this->modx->aliasMap[$identifier])) {
                         $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', '', 'full');
-                        $this->modx->sendRedirect($url);
+                        $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
                     }
                     $this->modx->resourceMethod = 'alias';
                 }
             }
             elseif ($this->modx->getOption('site_start', null, 1) == $this->modx->aliasMap[$identifier]) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL));
+                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             } else {
                 $this->modx->resourceMethod = 'alias';
             }
@@ -370,9 +411,10 @@ class modRequest {
     }
 
     /**
-     * Retrieve's a preserved $_REQUEST from $_SESSION.
+     * Retrieve a preserved $_REQUEST from $_SESSION.
      *
      * @param string $key A key to identify a specific $_REQUEST; default is 'referrer'.
+     * @return string
      */
     public function retrieveRequest($key = 'referrer') {
         $request = null;
@@ -382,6 +424,11 @@ class modRequest {
         return $request;
     }
 
+    /**
+     * Return the HTTP headers sent through the request
+     * @param boolean $ucKeys if true, upper-case all keys for the headers
+     * @return array
+     */
     public function getHeaders($ucKeys = false) {
         if (!isset($this->headers)) {
             $headers = array ();
@@ -414,29 +461,43 @@ class modRequest {
         }
     }
 
+    /**
+     * Get a list of all modAction IDs
+     * @param string $namespace
+     * @return array
+     */
     public function getAllActionIDs($namespace = '') {
         $c = array();
         if (!empty($namespace)) $c['namespace'] = $namespace;
         $actions = $this->modx->getCollection('modAction',$c);
 
         $actionList = array();
+        /** @var modAction $action */
         foreach ($actions as $action) {
-            $actionList[$action->get('controller')] = $action->get('id');
+            $key = ($action->get('namespace') == 'core' ? '' : $action->get('namespace').':').$action->get('controller');
+            $actionList[$key] = $action->get('id');
         }
         return $actionList;
     }
 
+    /**
+     * Get the IDs for a collection of string action keys
+     * @param array $actions
+     * @param string $namespace
+     * @return array
+     */
     public function getActionIDs(array $actions = array(), $namespace = 'core') {
         $as = array();
         foreach ($actions as $action) {
-            $act = $this->modx->getObject('modAction',array(
+            /** @var modAction $actionObject */
+            $actionObject = $this->modx->getObject('modAction',array(
                 'namespace' => $namespace,
                 'controller' => $action,
             ));
-            if ($act == null) {
+            if (empty($actionObject)) {
                 $as[$action] = 0;
             } else {
-                $as[$action] = $act->get('id');
+                $as[$action] = $actionObject->get('id');
             }
         }
         return $as;
@@ -448,6 +509,7 @@ class modRequest {
      * @param string|array $keys A key or array of keys to retrieve from the GPC variable. An empty
      * array means get all keys of the variable.
      * @param string $type The type of GPC variable, GET by default (GET, POST, COOKIE or REQUEST).
+     * @return mixed
      */
     public function getParameters($keys = array(), $type = 'GET') {
         $value = null;

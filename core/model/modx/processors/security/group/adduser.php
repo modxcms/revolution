@@ -3,8 +3,11 @@
  * Add a user to a user group
  *
  * @param integer $user_group The ID of the user group
- * @param intger $member The ID of the user
+ * @param integer $member The ID of the user
  *
+ * @var modX $modx
+ * @var modProcessor $this
+ * 
  * @package modx
  * @subpackage processors.security.group
  */
@@ -13,11 +16,13 @@ $modx->lexicon->load('user');
 
 /* get user */
 if (empty($scriptProperties['member'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+/** @var modUser $user */
 $user = $modx->getObject('modUser',$scriptProperties['member']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* get usergroup */
 if (empty($scriptProperties['user_group'])) return $modx->error->failure($modx->lexicon('user_group_err_ns'));
+/** @var modUserGroup $usergroup */
 $usergroup = $modx->getObject('modUserGroup',$scriptProperties['user_group']);
 if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_nf'));
 
@@ -29,14 +34,18 @@ $member = $modx->getObject('modUserGroupMember',array(
 if ($member) return $modx->error->failure($modx->lexicon('user_group_member_err_already_in'));
 
 /* create membership */
-$member = $modx->newObject('modUserGroupMember');
-$member->set('user_group',$usergroup->get('id'));
-$member->set('member',$user->get('id'));
+/** @var modUserGroupMember $membership */
+$membership = $modx->newObject('modUserGroupMember');
+$membership->set('user_group',$usergroup->get('id'));
+$membership->set('member',$user->get('id'));
+$rank = $modx->getCount('modUserGroupMember',array('member' => $user->get('id')));
+$membership->set('rank',$rank);
 
 /* invoke OnUserBeforeAddToGroup event */
 $OnUserBeforeAddToGroup = $modx->invokeEvent('OnUserBeforeAddToGroup',array(
     'user' => &$user,
     'usergroup' => &$usergroup,
+    'membership' => &$membership,
 ));
 $canSave = $this->processEventResponse($OnUserBeforeAddToGroup);
 if (!empty($canSave)) {
@@ -44,14 +53,22 @@ if (!empty($canSave)) {
 }
 
 /* save membership */
-if ($member->save() == false) {
+if ($membership->save() == false) {
     return $modx->error->failure($modx->lexicon('user_group_member_err_save'));
 }
+
+/* set as primary group if the only group for user */
+if ($rank == 0) {
+    $user->set('primary_group',$usergroup->get('id'));
+    $user->save();
+}
+
 
 /* invoke OnUserAddToGroup event */
 $modx->invokeEvent('OnUserAddToGroup',array(
     'user' => &$user,
     'usergroup' => &$usergroup,
+    'membership' => &$membership,
 ));
 
-return $modx->error->success('',$member);
+return $modx->error->success('',$membership);

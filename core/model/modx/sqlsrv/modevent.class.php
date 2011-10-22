@@ -4,6 +4,10 @@
  * @subpackage sqlsrv
  */
 require_once (dirname(dirname(__FILE__)) . '/modevent.class.php');
+/**
+ * @package modx
+ * @subpackage sqlsrv
+ */
 class modEvent_sqlsrv extends modEvent {
     public static function listEvents(xPDO &$xpdo, $plugin, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         $c = $xpdo->newQuery('modEvent');

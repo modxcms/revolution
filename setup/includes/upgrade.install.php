@@ -1,10 +1,18 @@
 <?php
 /**
  * Upgrade-specific scripts
+ *
+ * @var modInstallRunner $this
+ * @var modInstall $install
+ * @var xPDO $modx
+ * @var modInstallSettings $settings
+ *
+ * @package modx
+ * @subpackage setup
  */
 /* handle change of manager_theme to default (FIXME: temp hack) */
-if ($this->settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
-    $managerTheme = $this->xpdo->getObject('modSystemSetting', array(
+if ($settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
+    $managerTheme = $modx->getObject('modSystemSetting', array(
         'key' => 'manager_theme',
         'value:!=' => 'default'
     ));
@@ -16,11 +24,11 @@ if ($this->settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
 }
 
 /* handle change of default language to proper IANA code based on initial language selection in setup */
-$managerLanguage = $this->xpdo->getObject('modSystemSetting', array(
+$managerLanguage = $modx->getObject('modSystemSetting', array(
     'key' => 'manager_language',
 ));
 if ($managerLanguage) {
-    $language = $this->settings->get('language');
+    $language = $settings->get('language');
     $managerLanguage->set('value',!empty($language) ? $language : 'en');
     $managerLanguage->save();
 }
@@ -30,11 +38,11 @@ unset($managerLanguage);
 $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 
 /* update settings_version */
-$settings_version = $this->xpdo->getObject('modSystemSetting', array(
+$settings_version = $modx->getObject('modSystemSetting', array(
     'key' => 'settings_version',
 ));
 if ($settings_version == null) {
-    $settings_version = $this->xpdo->newObject('modSystemSetting');
+    $settings_version = $modx->newObject('modSystemSetting');
     $settings_version->set('key','settings_version');
     $settings_version->set('xtype','textfield');
     $settings_version->set('namespace','core');
@@ -44,11 +52,11 @@ $settings_version->set('value', $currentVersion['full_version']);
 $settings_version->save();
 
 /* update settings_distro */
-$settings_distro = $this->xpdo->getObject('modSystemSetting', array(
+$settings_distro = $modx->getObject('modSystemSetting', array(
     'key' => 'settings_distro',
 ));
 if ($settings_distro == null) {
-    $settings_distro = $this->xpdo->newObject('modSystemSetting');
+    $settings_distro = $modx->newObject('modSystemSetting');
     $settings_distro->set('key','settings_distro');
     $settings_distro->set('xtype','textfield');
     $settings_distro->set('namespace','core');
@@ -58,11 +66,11 @@ $settings_distro->set('value', trim($currentVersion['distro'], '@'));
 $settings_distro->save();
 
 /* make sure admin user (1) has proper group and role */
-$adminUser = $this->xpdo->getObject('modUser', 1);
+$adminUser = $modx->getObject('modUser', 1);
 if ($adminUser) {
-    $userGroupMembership = $this->xpdo->getObject('modUserGroupMember', array('user_group' => true, 'member' => true));
+    $userGroupMembership = $modx->getObject('modUserGroupMember', array('user_group' => true, 'member' => true));
     if (!$userGroupMembership) {
-        $userGroupMembership = $this->xpdo->newObject('modUserGroupMember');
+        $userGroupMembership = $modx->newObject('modUserGroupMember');
         $userGroupMembership->set('user_group', 1);
         $userGroupMembership->set('member', 1);
         $userGroupMembership->set('role', 2);
@@ -74,14 +82,14 @@ if ($adminUser) {
 }
 
 /* setup default admin ACLs */
-$adminPolicy = $this->xpdo->getObject('modAccessPolicy',array(
+$adminPolicy = $modx->getObject('modAccessPolicy',array(
     'name' => 'Administrator',
 ));
-$adminGroup = $this->xpdo->getObject('modUserGroup',array(
+$adminGroup = $modx->getObject('modUserGroup',array(
     'name' => 'Administrator',
 ));
 if ($adminPolicy && $adminGroup) {
-    $access= $this->xpdo->getObject('modAccessContext',array(
+    $access= $modx->getObject('modAccessContext',array(
         'target' => 'mgr',
         'principal_class' => 'modUserGroup',
         'principal' => $adminGroup->get('id'),
@@ -89,7 +97,7 @@ if ($adminPolicy && $adminGroup) {
         'policy' => $adminPolicy->get('id'),
     ));
     if (!$access) {
-        $access = $this->xpdo->newObject('modAccessContext');
+        $access = $modx->newObject('modAccessContext');
         $access->fromArray(array(
           'target' => 'mgr',
           'principal_class' => 'modUserGroup',
@@ -101,7 +109,7 @@ if ($adminPolicy && $adminGroup) {
     }
     unset($access);
 
-    $access = $this->xpdo->getObject('modAccessContext',array(
+    $access = $modx->getObject('modAccessContext',array(
       'target' => 'web',
       'principal_class' => 'modUserGroup',
       'principal' => $adminGroup->get('id'),
@@ -109,7 +117,7 @@ if ($adminPolicy && $adminGroup) {
       'policy' => $adminPolicy->get('id'),
     ));
     if (!$access) {
-        $access= $this->xpdo->newObject('modAccessContext');
+        $access= $modx->newObject('modAccessContext');
         $access->fromArray(array(
           'target' => 'web',
           'principal_class' => 'modUserGroup',
@@ -123,14 +131,14 @@ if ($adminPolicy && $adminGroup) {
 }
 unset($adminPolicy,$adminGroup);
 
-$language = $this->settings->get('language','en');
+$language = $settings->get('language','en');
 if ($language != 'en') {
     /* manager_language */
-    $setting = $this->xpdo->getObject('modSystemSetting',array(
+    $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'manager_language',
     ));
     if (!$setting) {
-        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting = $modx->newObject('modSystemSetting');
         $setting->fromArray(array(
             'key' => 'manager_language',
             'namespace' => 'core',
@@ -142,11 +150,11 @@ if ($language != 'en') {
     $setting->save();
 
     /* manager_lang_attribute */
-    $setting = $this->xpdo->getObject('modSystemSetting',array(
+    $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'manager_lang_attribute',
     ));
     if (!$setting) {
-        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting = $modx->newObject('modSystemSetting');
         $setting->fromArray(array(
             'key' => 'manager_lang_attribute',
             'namespace' => 'core',

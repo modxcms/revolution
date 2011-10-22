@@ -22,7 +22,7 @@ class modConnectorResponse extends modResponse {
      */
     protected $_directory;
 
-    /**#@+
+    /**
      * Creates a modConnectorResponse object.
      *
      * {@inheritdoc}

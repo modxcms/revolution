@@ -186,30 +186,45 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacpt'+Ext.id();
     Ext.applyIf(config,{
-        width: 400
+        width: 500
         ,title: _('policy_template_create')
         ,url: MODx.config.connectors_url+'security/access/policy/template.php'
         ,action: 'create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
-            ,id: this.ident+'-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-name'
+            ,html: _('policy_template_desc_name')
+            ,cls: 'desc-under'
+        },{
             fieldLabel: _('template_group')
             ,name: 'template_group'
-            ,id: this.ident+'-template-group'
+            ,id: 'modx-'+this.ident+'-template-group'
             ,xtype: 'modx-combo-access-policy-template-group'
             ,anchor: '90%'
             ,value: 1
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-template-group'
+            ,html: _('policy_template_desc_template_group')
+            ,cls: 'desc-under'
+        },{
             fieldLabel: _('description')
             ,name: 'description'
-            ,id: this.ident+'-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
             ,anchor: '90%'
             ,height: 50
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-description'
+            ,html: _('policy_template_desc_description')
+            ,cls: 'desc-under'
         }]
     });
     MODx.window.CreateAccessPolicyTemplate.superclass.constructor.call(this,config);

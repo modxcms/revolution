@@ -1,8 +1,13 @@
 <?php
 /**
+ * @package modx
+ * @subpackage xmlrpc
+ */
+/**
  * Extends modResource to service XML-RPC client requests.
  *
  * @package modx
+ * @subpackage xmlrpc
  */
 class modXMLRPCResource extends modResource {
     /**
@@ -19,6 +24,7 @@ class modXMLRPCResource extends modResource {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('class_key','modXMLRPCResource');
+        $this->showInContextMenu = false;
     }
 
     /**

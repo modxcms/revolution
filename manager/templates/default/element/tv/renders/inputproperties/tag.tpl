@@ -13,18 +13,24 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,labelWidth: 150
+    ,cls: 'form-with-labels'
+    ,labelAlign: 'top'
     ,border: false
     ,items: [{
         xtype: 'combo-boolean'
         ,fieldLabel: _('required')
-        ,description: _('required_desc')
+        ,description: MODx.expandHelp ? '' : _('required_desc')
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
         ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
-        ,width: 300
+        ,width: 200
         ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,html: _('required_desc')
+        ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });

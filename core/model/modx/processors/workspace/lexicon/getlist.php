@@ -46,6 +46,7 @@ foreach ($results as $r) {
 
 /* first get file-based lexicon */
 $entries = $modx->lexicon->getFileTopic($language,$namespace,$topic);
+$entries = is_array($entries)?$entries:array();
 
 /* if searching */
 if (!empty($scriptProperties['search'])) {

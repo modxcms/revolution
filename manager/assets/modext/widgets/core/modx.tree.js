@@ -164,6 +164,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('load',this._initExpand,this,{single: true});
         this.on('expandnode',this._saveState,this);
         this.on('collapsenode',this._saveState,this);
+		
+		/* Absolute positionning fix  */
+		this.on('expandnode',function(){ Ext.getCmp('modx-content').doLayout(); },this);
     }
 	
     /**
@@ -192,6 +195,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
             a[i].scope = this;
+            if (a[i].handler && typeof a[i].handler == 'string') {
+                a[i].handler = eval(a[i].handler);
+            }
             this.cm.add(a[i]);
         }
     }
@@ -334,6 +340,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var i;
         if (!Ext.isObject(s) && !Ext.isArray(s)) {
             s = [s]; /* backwards compat */
+        } else {
+            s = s.slice();
         }
         if (Ext.isEmpty(p) || p == undefined) return; /* ignore invalid paths */
         if (n.expanded) { /* if expanding, add to state */
@@ -535,7 +543,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * Gets a default toolbar setup
      */
     ,getToolbar: function() {
-        var iu = MODx.config.template_url+'images/restyle/icons/';
+        var iu = MODx.config.manager_url+'templates/default/images/restyle/icons/';
         return [{
             icon: iu+'arrow_down.png'
             ,cls: 'x-btn-icon'

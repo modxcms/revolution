@@ -25,6 +25,10 @@ MODx.page.UpdateUser = function(config) {
         },'-',{
             process: 'cancel', text: _('cancel'), params: {a:MODx.action['security/user']}
         },'-',{
+            text: _('delete')
+            ,handler: this.removeUser
+            ,scope: this
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
@@ -39,5 +43,22 @@ MODx.page.UpdateUser = function(config) {
 	});
 	MODx.page.UpdateUser.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.page.UpdateUser,MODx.Component);
+Ext.extend(MODx.page.UpdateUser,MODx.Component,{
+    removeUser: function(btn,e) {
+        MODx.msg.confirm({
+            title: _('user_remove')
+            ,text: _('user_confirm_remove')
+            ,url: MODx.config.connectors_url+'security/user.php'
+            ,params: {
+                action: 'delete'
+                ,id: this.config.user
+            }
+            ,listeners: {
+            	'success': {fn:function(r) {
+            	    location.href = '?a='+MODx.action['security/user'];
+            	},scope:this}
+            }
+        });
+    }
+});
 Ext.reg('modx-page-user-update',MODx.page.UpdateUser);

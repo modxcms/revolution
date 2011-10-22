@@ -164,6 +164,11 @@ if (!empty($scriptProperties['tvs'])) {
 }
 /* end save TVs */
 
+/* reassign context for children if changed */
+if ($oldContext instanceof modContext && $workingContext->get('key') !== $oldContext->get('key')) {
+    $modx->call($resource->get('class_key'), 'updateContextOfChildren', array(&$modx, $resource));
+}
+
 /* fire delete/undelete events */
 if (isset($resourceUndeleted) && !empty($resourceUndeleted)) {
     $modx->invokeEvent('OnResourceUndelete',array(

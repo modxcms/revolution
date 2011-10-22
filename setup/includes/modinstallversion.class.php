@@ -31,9 +31,11 @@
  */
 class modInstallVersion {
     public $results = array();
+    public $version = '';
 
-    function __construct(modInstall &$install) {
-        $this->install =& $install;
+    function __construct(modInstallRunner &$runner) {
+        $this->install =& $runner->install;
+        $this->runner =& $runner;
         $this->_getVersion();
     }
 
@@ -41,7 +43,7 @@ class modInstallVersion {
      * Creates tables for installation
      *
      * @access public
-     * @param string/array $class A class name or array of class names
+     * @param string|array $class A class name or array of class names
      * @return boolean True if successful
      */
     public function createTable($class) {
@@ -53,16 +55,10 @@ class modInstallVersion {
             return $dbcreated;
         } else {
             if (!$dbcreated = $this->install->xpdo->manager->createObjectContainer($class)) {
-                $this->results[] = array (
-                    'class' => 'failed',
-                    'msg' => '<p class="notok">' . $this->install->lexicon('table_err_create',array('class' => $class)) . '</p>'
-                );
+                $this->runner->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">' . $this->install->lexicon('table_err_create',array('class' => $class)) . '</p>');
                 return false;
             } else {
-                $this->results[] = array (
-                    'class' => 'success',
-                    'msg' => '<p class="ok">' . $this->install->lexicon('table_created',array('class' => $class)) . '</p>'
-                );
+                $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">' . $this->install->lexicon('table_created',array('class' => $class)) . '</p>');
                 return true;
             }
         }
@@ -113,17 +109,11 @@ class modInstallVersion {
         } elseif (is_string($callable)) {
             $result = $this->install->xpdo->exec($callable);
         }
-        if (!$result) {
-            $this->results[] = array (
-                'class' => 'warning',
-                'msg' => '<p class="notok">'.$this->install->lexicon('err_update_table',array('class' => $class)).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>'
-            );
+        if ($result === false) {
+            $this->runner->addResult(modInstallRunner::RESULT_WARNING,'<p class="notok">'.$this->install->lexicon('err_update_table',array('class' => $class)).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>');
             return false;
         } else {
-            $this->results[] = array (
-                'class' => 'success',
-                'msg' => '<p class="ok">'.$this->install->lexicon('table_updated',array('class' => $class)).'<br /><small>' . $description . '</small></p>'
-            );
+            $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('table_updated',array('class' => $class)).'<br /><small>' . $description . '</small></p>');
             return true;
         }
     }

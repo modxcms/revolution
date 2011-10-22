@@ -4,47 +4,34 @@
  *
  * @param string $file The absolute path of the file
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ *
  * @package modx
  * @subpackage processors.browser.file
  */
 if (!$modx->hasPermission('file_view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
-
 /* format filename */
-$filename = rawurldecode($scriptProperties['file']);
+$file = rawurldecode($scriptProperties['file']);
+$source = $modx->getOption('source',$scriptProperties,1);
 
-/* get working context */
-$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
-if (!empty($wctx)) {
-    $workingContext = $modx->getContext($wctx);
-    if (!$workingContext) {
-        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+/** @var modMediaSource $source */
+$modx->loadClass('sources.modMediaSource');
+$source = modMediaSource::getDefaultSource($modx,$source);
+if (!$source->getWorkingContext()) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
+$source->setRequestProperties($scriptProperties);
+$source->initialize();
+$fileArray = $source->getObjectContents($file);
+
+if (empty($fileArray)) {
+    $msg = '';
+    $errors = $source->getErrors();
+    foreach ($errors as $k => $msg) {
+        $modx->error->addField($k,$msg);
     }
-} else {
-    $workingContext =& $modx->context;
+    return $modx->error->failure($msg);
 }
-$root = $modx->getBasePath(false);
-if ($workingContext->getOption('filemanager_path_relative',true)) {
-    $root = $workingContext->getOption('base_path','').$root;
-}
-
-$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
-$file = $modx->fileHandler->make($root.$filename);
-
-if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
-if (!$file->isReadable()) {
-    return $modx->error->failure($modx->lexicon('file_err_perms'));
-}
-$imagesExts = array('jpg','jpeg','png','gif','ico');
-$fileExtension = pathinfo($filename,PATHINFO_EXTENSION);
-
-$fa = array(
-    'name' => $file->getPath(),
-    'size' => $file->getSize(),
-    'last_accessed' => $file->getLastAccessed(),
-    'last_modified' => $file->getLastModified(),
-    'content' => $file->getContents(),
-    'image' => in_array($fileExtension,$imagesExts) ? true : false,
-);
-
-return $modx->error->success('',$fa);
+return $modx->error->success('',$fileArray);

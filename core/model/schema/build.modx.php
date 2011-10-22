@@ -29,6 +29,10 @@ foreach (array('mysql', 'sqlsrv') as $driver) {
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
  */
+/**
+ * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
+ */
 class [+class+] extends [+extends+] {
 }
 EOD;
@@ -39,6 +43,10 @@ EOD;
  * [+phpdoc-subpackage+]
  */
 require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
+/**
+ * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
+ */
 class [+class+]_[+platform+] extends [+class+] {
 }
 EOD;
@@ -61,6 +69,8 @@ EOD;
     $generator->parseSchema(dirname(XPDO_CORE_PATH) . "/model/schema/modx.transport.{$driver}.schema.xml", dirname(XPDO_CORE_PATH) . '/model/');
     $package= 'modx.registry.db';
     $generator->parseSchema(dirname(XPDO_CORE_PATH) . "/model/schema/modx.registry.db.{$driver}.schema.xml", dirname(XPDO_CORE_PATH) . '/model/');
+    $package= 'modx.sources';
+    $generator->parseSchema(dirname(XPDO_CORE_PATH) . "/model/schema/modx.sources.{$driver}.schema.xml", dirname(XPDO_CORE_PATH) . '/model/');
 }
 
 $mtime= microtime();

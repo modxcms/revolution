@@ -1,5 +1,9 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
+ *
  * @package setup
  */
 $install->settings->check();
@@ -27,7 +31,7 @@ if (!empty($_POST['proceed'])) {
     }
 }
 
-$this->parser->assign('config_key', $config_key);
-$this->parser->assign('writableError', $writableError);
+$parser->set('config_key', $config_key);
+$parser->set('writableError', $writableError);
 
-return $this->parser->fetch('welcome.tpl');
+return $parser->render('welcome.tpl');

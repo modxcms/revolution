@@ -8,7 +8,11 @@
  * @param integer $limit (optional) The number of records to limit to. Defaults
  * to 10.
  * @param string $sort (optional) The column to sort by.
- * @param string $dir (optional) The direction of the sort. Default
+ * @param string $dir (optional) The direction of the sort. Defaults to ASC.
+ *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var modProcessor $this
  *
  * @package modx
  * @subpackage processors.security.access.policy
@@ -43,9 +47,9 @@ $subc->where(array(
     'modAccessPermission.template = Template.id',
 ));
 $subc->prepare();
+$c->select($modx->getSelectColumns('modAccessPolicy','modAccessPolicy'));
 $c->select(array(
-    'modAccessPolicy.*',
-    'Template.name AS template_name',
+    'template_name' => 'Template.name',
 ));
 $c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
 
@@ -66,8 +70,10 @@ if (isset($scriptProperties['combo'])) {
 
 $core = array('Resource','Object','Administrator','Load Only','Load, List and View');
 
+/** @var modAccessPolicy $policy */
 foreach ($policies as $key => $policy) {
     $policyArray = $policy->toArray();
+    $permissions = array();
     $cls = 'pedit';
     if (!in_array($policy->get('name'),$core)) {
         $cls .= ' premove';
@@ -76,14 +82,20 @@ foreach ($policies as $key => $policy) {
     if (!empty($policyArray['total_permissions'])) {
         $data = $policy->get('data');
         $ct = 0;
-        foreach ($data as $k => $v) {
-            if (!empty($v)) $ct++;
+        if (!empty($data)) {
+            foreach ($data as $k => $v) {
+                if (!empty($v)) {
+                    $permissions[] = $k;
+                    $ct++;
+                }
+            }
         }
         $policyArray['active_permissions'] = $ct;
         $policyArray['active_of'] = $modx->lexicon('active_of',array(
             'active' => $policyArray['active_permissions'],
             'total' => $policyArray['total_permissions'],
         ));
+        $policyArray['permissions'] = $permissions;
     }
 
     unset($policyArray['data']);

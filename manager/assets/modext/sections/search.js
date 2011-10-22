@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-search' });
-});
-
 /**
  * Loads the Search page
  * 
@@ -16,6 +12,7 @@ MODx.page.Search = function(config) {
         components: [{
             xtype: 'modx-panel-search'
             ,renderTo: 'modx-panel-search-div'
+            ,record: config.record || {}
         }]
     });
 	MODx.page.Search.superclass.constructor.call(this,config);

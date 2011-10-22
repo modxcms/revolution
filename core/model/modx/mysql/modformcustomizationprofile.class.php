@@ -4,6 +4,10 @@
  * @subpackage mysql
  */
 require_once (dirname(dirname(__FILE__)) . '/modformcustomizationprofile.class.php');
+/**
+ * @package modx
+ * @subpackage mysql
+ */
 class modFormCustomizationProfile_mysql extends modFormCustomizationProfile {
     public static function listProfiles(xPDO &$xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         /* query for profiles */

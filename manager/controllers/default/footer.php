@@ -3,6 +3,5 @@
  * Loads the footer
  *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */
-return $modx->smarty->fetch('footer.tpl');

@@ -12,6 +12,7 @@ $modx->lexicon->load('user');
 
 /* get user */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+/** @var modUser $user */
 $user = $modx->getObject('modUser',$scriptProperties['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
@@ -43,8 +44,10 @@ if (!empty($canSave)) {
 
 /* save user groups */
 if (isset($scriptProperties['groups'])) {
+    $primaryGroupId = 0;
     /* remove prior user group links */
     $ugms = $user->getMany('UserGroupMembers');
+    /** @var modUserGroupMember $ugm */
     foreach ($ugms as $ugm) { $ugm->remove(); }
 
     /* create user group links */
@@ -55,9 +58,14 @@ if (isset($scriptProperties['groups'])) {
         $ugm->set('user_group',$group['usergroup']);
         $ugm->set('role',$group['role']);
         $ugm->set('member',$user->get('id'));
+        $ugm->set('rank',$group['rank']);
+        if (empty($group['rank'])) {
+            $primaryGroupId = $group['usergroup'];
+        }
         $ugms[] = $ugm;
     }
     $user->addMany($ugms,'UserGroupMembers');
+    $user->set('primary_group',$primaryGroupId);
 }
 
 /* update user */
@@ -65,14 +73,14 @@ if ($user->save() == false) {
     return $modx->error->failure($modx->lexicon('user_err_save'));
 }
 
-$user->profile = $user->getOne('Profile');
-if (empty($user->profile)) {
-    $user->profile = $modx->newObject('modUserProfile');
-    $user->profile->set('internalKey',$user->get('id'));
+$user->getOne('Profile');
+if (empty($user->Profile)) {
+    $user->Profile = $modx->newObject('modUserProfile');
+    $user->Profile->set('internalKey',$user->get('id'));
 }
-$user->profile->fromArray($scriptProperties);
+$user->Profile->fromArray($scriptProperties);
 
-if ($user->profile->save() == false) {
+if ($user->Profile->save() == false) {
     return $modx->error->failure($modx->lexicon('user_profile_err_save'));
 }
 
@@ -80,9 +88,9 @@ if ($user->profile->save() == false) {
 if ($scriptProperties['passwordnotifymethod'] == 'e') {
     $message = $modx->getOption('signupemail_message');
     $placeholders = array(
-        'uid' => $user->profile->get('username'),
+        'uid' => $user->Profile->get('username'),
         'pwd' => $newPassword,
-        'ufn' => $user->profile->get('fullname'),
+        'ufn' => $user->Profile->get('fullname'),
         'sname' => $modx->getOption('site_name'),
         'saddr' => $modx->getOption('emailsender'),
         'semail' => $modx->getOption('emailsender'),

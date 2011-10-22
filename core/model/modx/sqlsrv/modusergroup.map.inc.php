@@ -13,6 +13,7 @@ $xpdo_meta_map['modUserGroup']= array (
     'description' => NULL,
     'parent' => 0,
     'rank' => 0,
+    'dashboard' => 1,
   ),
   'fieldMeta' => 
   array (
@@ -44,6 +45,14 @@ $xpdo_meta_map['modUserGroup']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
+    ),
+    'dashboard' => 
+    array (
+      'dbtype' => 'int',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 1,
       'index' => 'index',
     ),
   ),
@@ -97,6 +106,22 @@ $xpdo_meta_map['modUserGroup']= array (
         ),
       ),
     ),
+    'dashboard' => 
+    array (
+      'alias' => 'dashboard',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'dashboard' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'aggregates' => 
   array (
@@ -115,6 +140,14 @@ $xpdo_meta_map['modUserGroup']= array (
       'foreign' => 'parent',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+    'Dashboard' => 
+    array (
+      'class' => 'modDashboard',
+      'local' => 'dashboard',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
   'composites' => 

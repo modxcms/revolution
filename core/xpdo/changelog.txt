@@ -1,5 +1,32 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.0-rc2 (October 20, 2011)
+====================================
+- Fix xPDOAPCCache and xPDOWinCache multiple_object_delete features
+- Fix various bugs with database result set caching
+- Refactor escapeChar and quoteChar to xPDODriver classes
+- [#2432] Store relative path of files preserved by xPDOVehicle file resolvers
+- [#5904] Provide access to name and version in Transport packages
+
+xPDO 2.2.0-rc1 (September 7, 2011)
+====================================
+- Add support for field aliases to be defined in the schema
+- Add xPDOObject->addFieldAlias for creating references to actual fields
+- Add xPDOObject->getIterator for iterating aggregate and composite relations
+- [#4590] Allow multiple connections to be defined for master/slave configurations
+- [#2883] Add xPDOObject->getGraph() and add feature in toArray() to return related object fields
+- Add xPDO->getGraph() method to infer relation graphs
+- [#4275] Add xPDO->updateCollection() method
+- [#4275] Enable UPDATE support and add set() method to xPDOQuery
+- [#5306] Add xPDOQuery->distinct() method
+- Change xPDO::getService() method to indicate it returns a reference
+- Avoid unsetting the current package if xPDO->addPackage() fails
+- Avoid updates to existing package definitions unless path/prefix changes
+- Remove redundant call to $this->setPackageMeta() in xPDO->setPackage()
+- Ensure xPDO::$classMap derivative entries are unique
+- [#5197] Provide map of derivative classes for introspection
+- [#5147] Fix xPDOIterator ignoring criteria that is not already an object
+
 xPDO 2.1.5-pl (July 5, 2011)
 ====================================
 - [#5084] Fix various xPDO::exec() calls to check for false value properly

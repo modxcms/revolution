@@ -44,12 +44,16 @@
  * save.
  * @return array
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var modProcessor $this
+ *
  * @package modx
  * @subpackage processors.resource
  */
 $modx->lexicon->load('resource');
 
-/* get resource */
+/* @var modResource $resource */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject('modResource',$scriptProperties['id']);
 if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['id'])));
@@ -169,10 +173,15 @@ if (isset($scriptProperties['uri_override'])) {
 $workingContext = $modx->getContext($scriptProperties['context_key']);
 
 /* friendly url alias checks */
-if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperties['reloadOnly']) || !empty($scriptProperties['pagetitle']))) {
+$siteStart = ($resource->get('id') == $workingContext->getOption('site_start') || $resource->get('id') == $modx->getOption('site_start'));
+if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperties['reloadOnly']) || (!empty($scriptProperties['pagetitle']) || $siteStart))) {
     /* auto assign alias */
-    if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
-        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+    if (empty($scriptProperties['alias']) && ($siteStart || $workingContext->getOption('automatic_alias', false))) {
+        if (empty($scriptProperties['pagetitle'])) {
+            $scriptProperties['alias'] = 'index';
+        } else {
+            $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+        }
     }
     if (empty($scriptProperties['alias'])) {
         $modx->error->addField('alias', $modx->lexicon('field_required'));
@@ -252,7 +261,6 @@ if (!$modx->hasPermission('publish_document')) {
 
 /* check to prevent unpublishing of site_start */
 $oldparent_id = $resource->get('parent');
-$siteStart = ($resource->get('id') == $workingContext->getOption('site_start') || $resource->get('id') == $modx->getOption('site_start'));
 if ($siteStart && (isset($scriptProperties['published']) && empty($scriptProperties['published']))) {
     return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart'));
 }
@@ -339,6 +347,7 @@ if (!empty($scriptProperties['tvs'])) {
     $tmplvars = array ();
 
     $tvs = $resource->getTemplateVars();
+    /** @var modTemplateVar $tv */
     foreach ($tvs as $tv) {
         /* set value of TV */
         if ($tv->get('type') != 'checkbox') {
@@ -420,6 +429,7 @@ if (isset($scriptProperties['resource_groups'])) {
             
             /* if assigning to group */
             if ($resourceGroupAccess['access']) {
+                /** @var modResourceGroupResource $resourceGroupResource */
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
                     'document' => $resource->get('id'),
@@ -429,8 +439,13 @@ if (isset($scriptProperties['resource_groups'])) {
                 }
                 $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
                 $resourceGroupResource->set('document',$resource->get('id'));
-                $resourceGroupResource->save();
-                
+                if ($resourceGroupResource->save()) {
+                    $modx->invokeEvent('OnResourceAddToResourceGroup',array(
+                        'mode' => 'resource-update',
+                        'resource' => &$resource,
+                        'resourceGroup' => &$resourceGroup,
+                    ));
+                }
             /* if removing access to group */
             } else {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
@@ -438,13 +453,24 @@ if (isset($scriptProperties['resource_groups'])) {
                     'document' => $resource->get('id'),
                 ));
                 if ($resourceGroupResource && $resourceGroupResource instanceof modResourceGroupResource) {
-                    $resourceGroupResource->remove();
+                    if ($resourceGroupResource->remove()) {
+                        $modx->invokeEvent('OnResourceRemoveFromResourceGroup',array(
+                            'mode' => 'resource-update',
+                            'resource' => &$resource,
+                            'resourceGroup' => &$resourceGroup,
+                        ));
+                    }
                 }
             }
         } /* end foreach */
     } /* end if is_array */
 }
 /* end save resource groups */
+
+/* reassign context for children if changed */
+if ($oldContext instanceof modContext && $oldContext->get('key') !== $workingContext->get('key')) {
+    $modx->call($resource->get('class_key'), 'updateContextOfChildren', array(&$modx, $resource));
+}
 
 /* fire delete/undelete events */
 if (isset($resourceUndeleted) && !empty($resourceUndeleted)) {

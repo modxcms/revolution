@@ -14,6 +14,7 @@ MODx.panel.AccessPolicy = function(config) {
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy'
+		,cls: 'container form-with-labels'
         ,class_key: 'modAccessPolicy'
         ,plugin: ''
         ,bodyStyle: ''
@@ -26,9 +27,9 @@ MODx.panel.AccessPolicy = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: {
-                bodyStyle: 'padding: 15px'
-                ,autoHeight: true
+				autoHeight: true
                 ,border: true
+				,bodyCssClass: 'tab-panel-wrapper'
             }
             ,forceLayout: true
             ,deferredRender: false
@@ -37,42 +38,71 @@ MODx.panel.AccessPolicy = function(config) {
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_desc')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
-                    xtype: 'hidden'
-                    ,name: 'id'
-                    ,value: config.plugin
+					xtype: 'panel'
+					,border: false
+					,cls:'main-wrapper'
+					,layout: 'form'
+					,labelAlign: 'top'
+					,labelSeparator: ''
+					,items: [{
+						xtype: 'hidden'
+						,name: 'id'
+						,value: config.plugin
+					},{
+						xtype: 'textfield'
+						,fieldLabel: _('name')+'<span class="required">*</span>'
+						,description: MODx.expandHelp ? '' : _('policy_desc_name')
+						,name: 'name'
+						,maxLength: 255
+						,enableKeyEvents: true
+						,allowBlank: false
+						,anchor: '100%'
+						,listeners: {
+							'keyup': {scope:this,fn:function(f,e) {
+								Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
+							}}
+						}
+					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-name'
+                        ,html: _('policy_desc_name')
+                        ,cls: 'desc-under'
+                    },{
+						xtype: 'textarea'
+						,fieldLabel: _('description')
+						,description: MODx.expandHelp ? '' : _('policy_desc_description')
+						,name: 'description'
+						,anchor: '100%'
+						,grow: true
+					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-description'
+                        ,html: _('policy_desc_description')
+                        ,cls: 'desc-under'
+                    },{
+						xtype: 'textfield'
+						,fieldLabel: _('lexicon')
+						,description: MODx.expandHelp ? '' : _('policy_desc_lexicon')
+						,name: 'lexicon'
+						,allowBlank: true
+						,anchor: '100%'
+						,value: 'permissions'
+					},{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-policy-lexicon'
+                        ,html: _('policy_desc_lexicon')
+                        ,cls: 'desc-under'
+                    }]
                 },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('name')
-                    ,name: 'name'
-                    ,width: 300
-                    ,maxLength: 255
-                    ,enableKeyEvents: true
-                    ,allowBlank: false
-                    ,listeners: {
-                        'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
-                        }}
-                    }
-                },{
-                    xtype: 'textarea'
-                    ,fieldLabel: _('description')
-                    ,name: 'description'
-                    ,width: 300
-                    ,grow: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('lexicon')
-                    ,name: 'lexicon'
-                    ,width: 300
-                    ,allowBlank: true
-                    ,value: 'permissions'
-                },{
-                    html: '<hr /><p>'+_('permissions_desc')+'</p>'
+                    html: '<p>'+_('permissions_desc')+'</p>'
+					,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-policy-permissions'
+					,cls:'main-wrapper'
                     ,policy: MODx.request.id
                     ,autoHeight: true
                     ,preventRender: true

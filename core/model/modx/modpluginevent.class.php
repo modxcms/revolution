@@ -1,7 +1,15 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a plugin registered for a specific event.
  *
+ * @property int $pluginid The ID of the Plugin that this event is mapped to
+ * @property string $event The name of this Plugin Event
+ * @property int $priority The priority of this Event in the chain
+ * @property int $propertyset The ID of the Property Set that may be attached to this Plugin Event
+ * @see modPlugin
  * @package modx
  */
 class modPluginEvent extends xPDOObject {

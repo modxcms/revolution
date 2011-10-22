@@ -3,7 +3,7 @@
  * Refreshes the site cache
  *
  * @package modx
- * @subpackage manager.system
+ * @subpackage manager.controllers
  */
 if (!$modx->hasPermission('empty_cache')) return $modx->error->failure($modx->lexicon('permission_denied'));
 

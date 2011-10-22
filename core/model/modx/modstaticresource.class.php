@@ -1,5 +1,8 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * A derivative of modResource that stores content on the filesystem.
  *
  * {@inheritdoc}
@@ -22,9 +25,14 @@ class modStaticResource extends modResource {
      */
     protected $_sourcePath= '';
 
+    /**
+     * Overrides modResource::__construct to set the class key for this Resource type
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('class_key','modStaticResource');
+        $this->showInContextMenu = true;
     }
 
     /**
@@ -100,8 +108,8 @@ class modStaticResource extends modResource {
     /**
      * Retrieve the resource content stored in a physical file.
      *
-     * @access public
      * @param string $file A path to the file representing the resource content.
+     * @param array $options
      * @return string The content of the file, of false if it could not be
      * retrieved.
      */
@@ -197,5 +205,36 @@ class modStaticResource extends modResource {
                 $value *= 1024;
         }
         return $value;
+    }
+
+    /**
+     * Sets the path to the Static Resource manager controller
+     * @static
+     * @param xPDO $modx A reference to the modX instance
+     * @return string
+     */
+    public static function getControllerPath(xPDO &$modx) {
+        $path = modResource::getControllerPath($modx);
+        return $path.'staticresource/';
+    }
+
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true.
+     * @return array
+     */
+    public function getContextMenuText() {
+        return array(
+            'text_create' => $this->xpdo->lexicon('static_resource'),
+            'text_create_here' => $this->xpdo->lexicon('static_resource_create_here'),
+        );
+    }
+
+    /**
+     * Use this in your extended Resource class to return a translatable name for the Resource Type.
+     * @return string
+     */
+    public function getResourceTypeName() {
+        return $this->xpdo->lexicon('static_resource');
     }
 }

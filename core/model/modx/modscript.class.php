@@ -1,14 +1,30 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * An element representing executable PHP script content.
  *
  * {@inheritdoc}
  *
+ * @property int $id
+ * @property string $name The name of the script
+ * @property string $description The description of the script
+ * @property int $editor_type Deprecated
+ * @property int $category The Category this Script resides in
  * @abstract Implement a derivative class that defines a table for storage.
  * @package modx
  */
 class modScript extends modElement {
+    /**
+     * The name of the script
+     * @var string $_scriptName
+     */
     public $_scriptName= null;
+    /**
+     * The cache key of the script
+     * @var string $_scriptCacheKey
+     */
     public $_scriptCacheKey= null;
 
     /**
@@ -17,7 +33,7 @@ class modScript extends modElement {
      * {@inheritdoc}
      */
     public function set($k, $v= null, $vType= '') {
-        if (in_array($k,array('snippet','plugincode'))) {
+        if (in_array($k, array('snippet', 'plugincode', 'content'))) {
             $v= trim($v);
             if (strncmp($v, '<?', 2) == 0) {
                 $v= substr($v, 2);
@@ -26,7 +42,7 @@ class modScript extends modElement {
             if (substr($v, -2, 2) == '?>') $v= substr($v, 0, -2);
             $v= trim($v, " \n\r\0\x0B");
         }
-        $set= parent :: set($k, $v, $vType);
+        $set= parent::set($k, $v, $vType);
         return $set;
     }
 
@@ -52,7 +68,16 @@ class modScript extends modElement {
                 if ($this->_output && is_string($this->_output)) {
                     /* collect element tags in the evaluated content and process them */
                     $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
-                    $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                    $this->xpdo->parser->processElementTags(
+                        $this->_tag,
+                        $this->_output,
+                        $this->xpdo->parser->isProcessingUncacheable(),
+                        $this->xpdo->parser->isRemovingUnprocessed(),
+                        '[[',
+                        ']]',
+                        array(),
+                        $maxIterations
+                    );
                 }
                 $this->filterOutput();
                 unset ($this->xpdo->event->params);
@@ -99,12 +124,21 @@ class modScript extends modElement {
     public function loadScript() {
         $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
-        if (!$result) {
-            $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
-                xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
-                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
-                xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_scripts_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-            ));
+        $outdated = false;
+        if ($result && $this->isStatic()) {
+            $includeMTime = filemtime($includeFilename);
+            $sourceMTime = filemtime($this->getSourceFile());
+            $outdated = $sourceMTime > $includeMTime;
+        }
+        if (!$result || $outdated) {
+            $script= false;
+            if (!$outdated) {
+                $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
+                    xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
+                    xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
+                    xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_scripts_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                ));
+            }
             if (!$script) {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
@@ -119,5 +153,22 @@ class modScript extends modElement {
             }
         }
         return ($result !== false);
+    }
+
+    public function getFileContent(array $options = array()) {
+        $content = parent::getFileContent($options);
+        $content= trim($content);
+        if (strncmp($content, '<?', 2) == 0) {
+            $content= substr($content, 2);
+            if (strncmp($content, 'php', 3) == 0) $content= substr($content, 3);
+        }
+        if (substr($content, -2, 2) == '?>') $content= substr($content, 0, -2);
+        $content= trim($content, " \n\r\0\x0B");
+        return $content;
+    }
+
+    public function setFileContent($content, array $options = array()) {
+        $content = "<?php\n{$content}";
+        return parent::setFileContent($content, $options);
     }
 }

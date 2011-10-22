@@ -13,12 +13,23 @@ $modx->lexicon->load('resource', 'context');
 $data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
 $nodes = array();
-getNodesFormatted($nodes,$data);
+$contexts = array();
+getNodesFormatted($nodes,$data,0,$contexts);
 
 $modx->invokeEvent('OnResourceBeforeSort',array(
     'nodes' => &$nodes,
 ));
 
+/* sort contexts */
+foreach($contexts as $key => $value) {
+    $context = $modx->getObject('modContext',array(
+        'key' => $value
+    ));
+    if ($context !== null) {
+        $context->set('rank', $key);
+        $context->save();
+    }
+}
 /* readjust cache */
 $nodeErrors = array();
 $modifiedNodes = array();
@@ -64,7 +75,6 @@ foreach ($nodes as $ar_node) {
     $old_context_key = $node->get('context_key');
     $contextsAffected[$old_context_key] = true;
     if ($old_context_key != $ar_node['context'] && !empty($ar_node['context'])) {
-        changeChildContext($node, $ar_node['context']); /* recursively move children to new context */
         $node->set('context_key',$ar_node['context']);
         $contextsAffected[$ar_node['context']] = true;
         $dontChangeParents[] = $node->get('id'); /* prevent children from reverting back */
@@ -103,8 +113,9 @@ $modx->cacheManager->refresh(array(
 
 return $modx->error->success();
 
-function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
+function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0,&$ar_contexts = array()) {
     $order = 0;
+    $previous_context = null;
     foreach ($cur_level as $id => $children) {
         $ar = explode('_',$id);
         if ($ar[1] != '0') {
@@ -116,14 +127,12 @@ function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
                 'order' => $order,
             );
             $order++;
+        } else {
+            if ($previous_context !== $ar[0]) {
+                $ar_contexts[] = $ar[0];
+            }
+            $previous_context = $ar[0];
         }
         getNodesFormatted($ar_nodes,$children,$id);
-    }
-}
-
-function changeChildContext(&$node, $context) {
-    foreach ($node->getMany('Children') as $child) {
-        changeChildContext($child, $context);
-        $child->set('context_key', $context);
     }
 }

@@ -23,6 +23,8 @@ $xpdo_meta_map['modTemplateVar']= array (
     'properties' => NULL,
     'input_properties' => '',
     'output_properties' => '',
+    'static' => 0,
+    'static_file' => '',
   ),
   'fieldMeta' => 
   array (
@@ -133,6 +135,26 @@ $xpdo_meta_map['modTemplateVar']= array (
       'null' => false,
       'default' => '',
     ),
+    'static' => 
+    array (
+      'dbtype' => 'bit',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'static_file' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+  ),
+  'fieldAliases' => 
+  array (
+    'content' => 'default_text',
   ),
   'indexes' => 
   array (
@@ -200,6 +222,22 @@ $xpdo_meta_map['modTemplateVar']= array (
         ),
       ),
     ),
+    'static' => 
+    array (
+      'alias' => 'static',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'static' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'aggregates' => 
   array (
@@ -254,7 +292,7 @@ $xpdo_meta_map['modTemplateVar']= array (
         'reserved' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/(?!^(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type)$)/',
+          'rule' => '/^(?!(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree)$)/',
           'message' => 'tv_err_reserved_name',
         ),
       ),

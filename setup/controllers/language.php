@@ -1,5 +1,8 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
  * @package setup
  */
 /* parse language selection */
@@ -31,7 +34,7 @@ foreach (new DirectoryIterator($path) as $file) {
 	}
 }
 sort($langs);
-$this->parser->assign('langs', $langs);
+$parser->set('langs', $langs);
 unset($path,$file,$handle);
 
 $actualLanguage = 'ja';
@@ -44,10 +47,10 @@ foreach ($langs as $language) {
         .($language == $actualLanguage ? ' selected="selected"' : '')
         .'>' . $language . '</option>' . "\n";
 }
-$this->parser->assign('languages',$languages);
+$parser->set('languages',$languages);
 
 if (!empty($_REQUEST['restarted'])) {
-    $this->parser->assign('restarted',true);
+    $parser->set('restarted',true);
 }
 
-return $this->parser->fetch('language.tpl');
+return $parser->render('language.tpl');

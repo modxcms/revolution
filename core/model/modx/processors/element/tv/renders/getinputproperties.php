@@ -17,12 +17,29 @@ $modx->lexicon->load('tv_widget','tv_input_types');
 $context = (isset($scriptProperties['context']) && !empty($scriptProperties['context'])) ? $scriptProperties['context'] : $modx->context->get('key');
 if (!isset($scriptProperties['type'])) $scriptProperties['type'] = 'default';
 
-/* load smarty */
-if (!isset($modx->smarty)) {
-    $modx->getService('smarty', 'smarty.modSmarty', '', array(
-        'template_dir' => $modx->getOption('manager_path') . 'templates/' . $modx->getOption('manager_theme') . '/',
-    ));
+/* simulate controller to allow controller methods in TV Input Properties controllers */
+$modx->getService('smarty', 'smarty.modSmarty','');
+require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
+class TvInputPropertiesManagerController extends modManagerController {
+    public $loadFooter = false;
+    public $loadHeader = false;
+    public function checkPermissions() {
+        return $this->modx->hasPermission('view_tv');
+    }
+    public function loadCustomCssJs() {}
+    public function process(array $scriptProperties = array()) {}
+    public function getPageTitle() {return '';}
+    public function getTemplateFile() {
+        return 'empty.tpl';
+    }
+    public function getLanguageTopics() {return array();}
 }
+
+/* simulate controller with the faux class above */
+$c = new TvInputPropertiesManagerController($this->modx);
+$modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvInputPropertiesManagerController',$this->action));
+$modx->controller->render();
+
 /* get default display properties for specific tv */
 $settings = array();
 if (!empty($scriptProperties['tv'])) {
@@ -31,10 +48,10 @@ if (!empty($scriptProperties['tv'])) {
         $settings = $tv->get('input_properties');
 
     }
-    $modx->smarty->assign('tv',$scriptProperties['tv']);
+    $modx->controller->setPlaceholder('tv',$scriptProperties['tv']);
 }
 if (!isset($settings['allowBlank'])) $settings['allowBlank'] = true;
-$modx->smarty->assign('params',$settings);
+$modx->controller->setPlaceholder('params',$settings);
 
 /* handle dynamic paths */
 $renderDirectories = array(
