@@ -6,7 +6,7 @@
  * @author KUROI Enogu http://twitter.com/enogu
  * @author yamamoto http://kyms.jp
  */
-$_lang['additional_css'] = 'CSS';
+$_lang['additional_css'] = '';
 $_lang['addons'] = 'アドオン';
 $_lang['advanced_options'] = 'その他のオプション';
 $_lang['all'] = '全て';
@@ -150,7 +150,7 @@ $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
 $_lang['modx_err_instantiate'] = 'MODXオブジェクトを生成できません。';
 $_lang['modx_err_instantiate_mgr'] = '管理画面コンテキストの初期化に失敗しました。';
-$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Revolutionのインストール';
 $_lang['modx_install_complete'] = 'MODXのインストールが完了しました';
@@ -159,7 +159,7 @@ $_lang['next'] = '次へ';
 $_lang['none'] = 'なし';
 $_lang['ok'] = '問題なし';
 $_lang['options_core_inplace'] = '必要なファイルは配置済みです';
-$_lang['options_core_inplace_note'] = 'Check this if you are using MODX from Git or extracted it from the full MODX package to the server prior to installation.';
+$_lang['options_core_inplace_note'] = 'MODX公式サイト(本家または日本公式)で配布されている通常版(traditionalパッケージ)の場合は、必要なファイルが同梱・配置されています。そのため、このオプションはオンになっています。<br />このオプションをオフにした場合は、必要なファイルを公式サイトから動的に取得・配置します。この場合、coreディレクトリ・setupディレクトリのみが必要です。<br />※公式サイトからのファイル取得は時間がかかります。共用サーバではPHPの処理時間制限が短めに設定されていることが多く、処理が中断・失敗する可能性があります。特に理由がなければ<strong>このオプションはオンのままインストールを進めることをおすすめします。</strong>';
 $_lang['options_core_unpacked'] = 'コアファイルは配置済みです';
 $_lang['options_core_unpacked_note'] = 'MODX公式サイト(本家または日本公式)で配布されている通常版(traditionalパッケージ)の場合は、コアパッケージ (/core/packages/ディレクトリ内のcore.transport.zip) がすでに展開・配置されています。そのため、このオプションはオンになっています。このオプションをオフにした場合は、コアパッケージを展開しファイルを上書きします。<br />※パッケージ展開処理は時間がかかります。共用サーバではPHPの処理時間制限が短めに設定されていることが多く、処理が中断・失敗する可能性があります。特に理由がなければ<strong>このオプションはオンのままインストールを進めることをおすすめします。</strong>';
 $_lang['options_install_new_copy'] = 'MODX Revolutionを新規インストールします - ';
