@@ -754,6 +754,12 @@ $events['OnHandleRequest']->fromArray(array (
   'service' => 5,
   'groupname' => 'System',
 ), '', true, true);
+$events['OnMODXInit']= $xpdo->newObject('modEvent');
+$events['OnMODXInit']->fromArray(array (
+  'name' => 'OnMODXInit',
+  'service' => 5,
+  'groupname' => 'System',
+), '', true, true);
 
 
 /* Settings */

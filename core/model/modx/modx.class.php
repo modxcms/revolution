@@ -479,6 +479,8 @@ class modX extends xPDO {
 
             $this->getService('registry', 'registry.modRegistry');
 
+            $this->invokeEvent('OnMODXInit');
+
             if (is_array ($this->config)) {
                 $this->setPlaceholders($this->config, '+');
             }
