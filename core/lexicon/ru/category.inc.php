@@ -2,7 +2,7 @@
 $_lang['categories'] = 'Категории';
 $_lang['category_confirm_delete'] = 'Вы уверены что хотите удалить эту категорию? Все элементы в ней будут помечены как &laquo; Без категории&raquo;.';
 $_lang['category_create'] = 'Создать категорию';
-$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
+$_lang['category_err_ae'] = 'Категория с таким именем уже существует.Выберите другое имя.';
 $_lang['category_err_create'] = 'Произошла ошибка при создании категории.';
 $_lang['category_err_not_found'] = 'Категория не найдена!';
 $_lang['category_err_nf'] = 'Категория не найдена.';
