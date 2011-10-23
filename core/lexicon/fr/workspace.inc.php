@@ -17,6 +17,7 @@ $_lang['by'] = 'par';
 $_lang['changelog'] = 'Journal des modifications';
 $_lang['changelog_desc'] = 'Veuillez examiner le journal de modifications de cette version.';
 $_lang['core_err_invalid'] = 'Vous devez avoir une installation de base valide avec un espace de travail pour lancer la création.';
+$_lang['curl_not_installed'] = 'cURL doit être installé et configuré en tant qu\'extenssion PHP pour que vous puissiez utiliser le gestionnaire de paquets. Vous pourrez trouver plus d\'informations au sujet de cURL sur le site <a href="http://php.net/curl" target="_blank">PHP.net</a>.';
 $_lang['description'] = 'Description';
 $_lang['details'] = 'Détails';
 $_lang['dir_err_assets'] = 'Votre répertoire assets/ n\'a pu être créé dans: [[+path]] <br />Vous devrez créer ce répertoire et le rendre inscriptible si vous souhaitez utiliser le gestionnaire de paquet ou des composants tierces.';
