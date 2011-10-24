@@ -1,5 +1,7 @@
 <?php
 /**
+ * Workspace German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -20,6 +22,7 @@ $_lang['by'] = 'von';
 $_lang['changelog'] = 'Changelog';
 $_lang['changelog_desc'] = 'Bitte schauen Sie in Liste der Änderungen (Changelog) für diese Version.';
 $_lang['core_err_invalid'] = 'Sie benötigen eine gültige Core-Installation mit einem aktiven Workspace, um das Erstellen des Packages zu starten.';
+$_lang['curl_not_installed'] = 'cURL muss installiert und als Extension für PHP konfiguriert sein, damit Sie die Package-Verwaltung nutzen können. Sie finden weitere Informationen über cURL auf der <a href="http://php.net/curl" target="_blank">PHP-cURL-Website</a>.';
 $_lang['description'] = 'Beschreibung';
 $_lang['details'] = 'Details';
 $_lang['dir_err_assets'] = 'Das Verzeichnis assets/ konnte nicht in [[+path]] angelegt werden.<br />Sie müssen dieses Verzeichnis anlegen und dafür sorgen, dass es beschreibbar ist, wenn Sie die Package-Verwaltung oder Komponenten von Drittanbietern verwenden möchten.';
@@ -142,7 +145,7 @@ $_lang['provider_err_blank_response'] = 'MODX erhielt eine inhaltslose Antwort v
 $_lang['provider_err_connect'] = 'Ein Fehler trat auf beim Versuch, eine Verbindung zu dem Anbieter aufzubauen: [[+error]]';
 $_lang['provider_err_inv_api_key'] = 'Der API-Schlüssel, den Sie angegeben haben, ist nicht korrekt für diesen Anbieter. Bitte überprüfen Sie ihn und versuchen Sie es erneut.';
 $_lang['provider_err_no_api_key'] = 'Für die Verbindung zu diesem Anbieter wird ein API-Schlüssel benötigt. Bitte geben Sie einen an.';
-$_lang['provider_err_no_client'] = '<p><b>Sie haben keinen geeigneten REST-Client für Ihr System.</b></p><p>Bitte installieren Sie die cURL-PHP-Erweiterung oder aktivieren Sie fsockopen und versuchen Sie es erneut.</p>';
+$_lang['provider_err_no_client'] = '<p><b>Sie haben keinen geeigneten REST-Client für Ihr System.</b></p><p>Bitte installieren Sie die cURL-PHP-Extension oder aktivieren Sie fsockopen und versuchen Sie es erneut.</p>';
 $_lang['provider_err_nfs'] = 'Anbieter mit der ID [[+id]] nicht gefunden';
 $_lang['provider_err_no_response'] = 'Fehler beim Empfangen einer Antwort vom Server [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Dieser Anbieter konnte nicht überprüft werden und kann daher nicht als MODX-Anbieter verwendet werden. Bitte überprüfen Sie die URL des Dienstes und versuchen Sie es erneut.';

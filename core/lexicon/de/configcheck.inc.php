@@ -1,5 +1,7 @@
 <?php
 /**
+ * Config Check German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

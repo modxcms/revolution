@@ -1,5 +1,7 @@
 <?php
 /**
+ * Manager Log German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

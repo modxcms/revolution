@@ -1,5 +1,7 @@
 <?php
 /**
+ * Import German lexicon entries
+ *
  * @package modx
  * @subpackage lexicon
  *
