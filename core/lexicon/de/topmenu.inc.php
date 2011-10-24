@@ -1,5 +1,7 @@
 <?php
 /**
+ * Top Menu German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -68,7 +70,7 @@ $_lang['new_weblink'] = 'Neuer Weblink';
 $_lang['new_weblink_desc'] = 'Erstellen Sie einen neuen Weblink, der auf eine existierende URL verweist und dorthin weiterleitet.';
 $_lang['policy_management'] = 'Zugriffsrichtlinien';
 $_lang['policy_management_desc'] = 'Erstellen und bearbeiten Sie Zugriffsrichtlinien für die Site, um Prozesse abzusichern.';
-$_lang['preview'] = 'Website anzeigen';
+$_lang['preview'] = 'Website anzeigen';  // Vorschau
 $_lang['preview_desc'] = 'Lädt Ihre Homepage in einem neuen Browserfenster.';
 $_lang['profile'] = 'Profil';
 $_lang['profile_desc'] = 'Aktualisieren Sie Ihr persönliches Profil.';

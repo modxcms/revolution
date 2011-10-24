@@ -1,5 +1,7 @@
 <?php
 /**
+ * Resource German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -24,7 +26,7 @@ $_lang['empty_template'] = '(leer)';
 $_lang['general'] = 'Allgemein';
 $_lang['markup'] = 'Markup/Struktur';
 $_lang['none'] = 'Nichts';
-$_lang['page_settings'] = 'Seiteneinstellungen';
+$_lang['page_settings'] = 'Einstellungen';
 $_lang['preview'] = 'Vorschau';
 $_lang['resource_access_message'] = 'Hier können Sie auswählen, zu welchen Ressourcen-Gruppen diese Ressource gehört.';
 $_lang['resource_add_children_access_denied'] = 'Sie haben keine Berechtigung, an dieser Stelle eine Ressource zu erstellen.';
@@ -35,7 +37,7 @@ $_lang['resource_cacheable'] = 'Cache aktiv';
 $_lang['resource_cacheable_help'] = 'Wenn diese Einstellung aktiviert ist, wird die Ressource in den Cache übernommen.';
 $_lang['resource_cancel_dirty_confirm'] = 'Sie haben Änderungen vorgenommen, die noch nicht gespeichert wurden; sind Sie sicher, dass Sie abbrechen möchten?';
 $_lang['resource_class_key_help'] = 'Dies ist der Schlüssel der Klasse dieser Ressource, die den MODX-Typ angibt.';
-$_lang['resource_content'] = 'Inhalt der Ressource';
+$_lang['resource_content'] = 'Inhalt';
 $_lang['resource_contentdispo'] = 'Content-Disposition';
 $_lang['resource_contentdispo_help'] = 'Verwenden Sie das Content-Disposition-Feld, um festzulegen, wie die Ressource vom Browser verarbeitet wird. Für Datei-Downloads verwenden Sie die Option "Attachment".';
 $_lang['resource_content_type'] = 'Content-Type';

@@ -14,8 +14,8 @@
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Dashboard hinzufügen';
 $_lang['dashboard_create'] = 'Dashboard erstellen';
-$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
-$_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
+$_lang['dashboard_desc_name'] = 'Der Name des Dashboards.';
+$_lang['dashboard_desc_description'] = 'Eine kurze Beschreibung des Dashboards.';
 $_lang['dashboard_duplicate'] = 'Dashboard duplizieren';
 $_lang['dashboard_remove'] = 'Dashboard löschen';
 $_lang['dashboard_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Dashboard löschen möchten?';
@@ -74,6 +74,7 @@ $_lang['widget_unplace'] = 'Widget löschen';
 $_lang['widget_update'] = 'Widget bearbeiten';
 $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Untenstehend finden Sie eine Liste aller installierten Dashboard-Widgets, die Ihnen zur Verfügung stehen.';
+
 $_lang['w_configcheck'] = 'Konfigurations-Check';
 $_lang['w_configcheck_desc'] = 'Zeigt einen Konfigurations-Check an, der überprüft, ob Ihre MODX-Installation sicher ist.';
 $_lang['w_newsfeed'] = 'MODX-Newsfeed';

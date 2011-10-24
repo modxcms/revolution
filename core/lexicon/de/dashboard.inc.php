@@ -1,5 +1,7 @@
 <?php
 /**
+ * Welcome Page German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

@@ -1,5 +1,7 @@
 <?php
 /**
+ * TV Input Types German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -25,4 +27,4 @@ $_lang['url'] = 'URL';
 $_lang['email'] = 'E-Mail-Adresse';
 $_lang['number'] = 'Zahl';
 $_lang['date'] = 'Datum';
-$_lang['tag'] = 'Tag';
+$_lang['tag'] = 'Tag';  // Schlagwort, Stichwort

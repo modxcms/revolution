@@ -1,5 +1,7 @@
 <?php
 /**
+ * German language strings for Elements
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -12,8 +14,8 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element nicht gefunden.';
 $_lang['element_err_ns'] = 'Element nicht angegeben.';
-$_lang['is_static'] = 'Is Static';
-$_lang['is_static_msg'] = 'Indicates if the element source is stored in an external file.';
+$_lang['is_static'] = 'Ist statisch';
+$_lang['is_static_msg'] = 'Gibt an, ob der Quellcode des Elements in einer externen Datei gespeichert ist.';
 $_lang['quick_create'] = 'Schnell erstellen';
 $_lang['quick_create_chunk'] = 'Chunk schnell erstellen';
 $_lang['quick_create_plugin'] = 'Plugin schnell erstellen';
@@ -27,10 +29,10 @@ $_lang['quick_update_template'] = 'Template schnell bearbeiten';
 $_lang['quick_update_tv'] = 'TV schnell bearbeiten';
 $_lang['properties_export'] = 'Eigenschaften exportieren';
 $_lang['properties_import'] = 'Eigenschaften importieren';
-$_lang['static_file'] = 'Static File';
-$_lang['static_file_msg'] = 'An external file location where the element source is stored.';
-$_lang['static_source'] = 'Media Source for Static File';
-$_lang['static_source_msg'] = 'MODX will use this Media Source as a base path when looking for the Static Element file. Using "None" will assume you are specifying an absolute path.';
+$_lang['static_file'] = 'Statische Datei';
+$_lang['static_file_msg'] = 'Eine externe Datei, in der der Quellcode des Elements gespeichert ist.';
+$_lang['static_source'] = 'Medienquelle für statische Datei';
+$_lang['static_source_msg'] = 'MODX wird diese Medienquelle als Basispfad verwenden, wenn es nach der Datei des statischen Elements sucht. Geben Sie hier "Nichts" ein, wird davon ausgegangen, dass Sie einen absoluten Pfad angeben.';
 $_lang['tv_elements'] = 'Eingabe-Optionswerte';
 $_lang['tv_default'] = 'Standardwert';
 $_lang['tv_type'] = 'Eingabetyp';

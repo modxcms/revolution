@@ -1,5 +1,7 @@
 <?php
 /**
+ * Messages German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -30,6 +32,7 @@ $_lang['sent_on'] = 'Gesendet am';
 $_lang['subject'] = 'Betreff';
 $_lang['user'] = 'Benutzer';
 $_lang['usergroup'] = 'Benutzergruppe';
+
 $_lang['message_err_not_found'] = 'Mitteilung nicht gefunden.';
 $_lang['message_err_not_specified_subject'] = 'Betreff nicht angegeben!';
 $_lang['message_err_remove'] = 'Ein Fehler trat auf bei dem Versuch, die Mitteilung zu löschen.';
