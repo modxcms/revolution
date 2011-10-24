@@ -654,6 +654,12 @@ class modX extends xPDO {
         if (is_object($subject)) {
             if ($subject instanceof xPDOObject) {
                 $subject= $subject->toArray();
+            } elseif ($subject instanceof iterator) {
+                $subject_array = array();
+                foreach ($subject as $field=>$value) {
+                    $subject_array[$field] = $value;
+                }
+                $subject = $subject_array;
             } else {
                 $subject= get_object_vars($subject);
             }
