@@ -193,7 +193,7 @@ $_lang['setting_cultureKey_desc'] = 'Sélectionnez la langue pour tous les conte
 
 $_lang['setting_custom_resource_classes'] = 'Classes personnalisées de ressource';
 $_lang['setting_custom_resource_classes_desc'] = 'Liste de classes personnalisées, séparées par des virgules, de ressource. Indiquez avec lowercase_lexicon_key:className (Ex: wiki_resource:WikiResource). Toutes les classes personnalisées de ressource doivent étendre modResource. Pour indiquer la localisation du contrôleur de chaque classe, ajoutez une option avec [nameOfClassLowercase]_delegate_path avec le chemin d\'accès au répertoire des fichiers php créer/mettre à jour. Ex: wikiresource_delegate_path pour une classe WikiResource qui étend modResource.';
- 	 	
+
 $_lang['setting_default_template'] = 'Modèle par défaut';
 $_lang['setting_default_template_desc'] = 'Sélectionnez le modèle par défaut que vous souhaitez utiliser pour les nouvelles ressources. Vous pouvez toujours sélectionner un modèle différent dans l\'éditeur de ressource, cette option pré-sélectionne seuelement un de vos modèles pour vous.';
 
@@ -489,6 +489,9 @@ $_lang['setting_rb_base_url_err'] = 'Veuillez indiquer l\'URL de base du navigat
 
 $_lang['setting_request_controller'] = 'Nom de fichier du contrôleur de requête';
 $_lang['setting_request_controller_desc'] = 'Le nom de fichier du contrôleur principale de requête par lequel MODX est chargé. La plupart des utilisateurs peuvent laisser index.php.';
+
+$_lang['setting_request_method_strict'] = 'Requête stricte';
+$_lang['setting_request_method_strict_desc'] = 'Les requêtes utilisant le paramètre de requête d\'ID seront ignorés lorsque les URLs simples sont activées, les requêtes utilisant les paramètres de requête d\'alias seront ignorées lorsque que les URLs simples sont désactivées.';
 
 $_lang['setting_request_param_alias'] = 'Paramètre de requête d\'alias';
 $_lang['setting_request_param_alias_desc'] = 'Nom du paramètre GET pour identifier les alias des ressources quand les FURLs sont utilisées.';
