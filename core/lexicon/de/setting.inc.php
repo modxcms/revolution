@@ -1,5 +1,7 @@
 <?php
 /**
+ * Setting German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -63,6 +65,7 @@ $_lang['setting_access_context_enabled_desc'] = 'Verwenden Sie diese Einstellung
 
 $_lang['setting_access_resource_group_enabled'] = 'Ressourcen-Gruppen-Zugriff prüfen';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Verwenden Sie diese Einstellung, um Ressourcen-Gruppen-ACL-Checks zu aktivieren oder zu deaktivieren (pro Kontext). <strong>HINWEIS: Wenn diese Option auf "Nein" gesetzt wurde, werden ALLE Ressourcen-Gruppen-Zugriffsberechtigungen ignoriert!</strong>';
+
 $_lang['setting_allow_mgr_access'] = 'Zugriff auf den MODX-Manager';
 $_lang['setting_allow_mgr_access_desc'] = 'Verwenden Sie diese Option, um den Zugriff auf die MODX-Manager-Oberfläche zu erlauben oder zu verbieten. <strong>HINWEIS: Wenn diese Einstellung auf "nein" gesetzt ist, werden Benutzer auf die "Startseite für in den Manager eingeloggte Benutzer" oder die "Startseite der Website" weitergeleitet.';
 
@@ -89,7 +92,7 @@ $_lang['setting_allow_tags_in_post'] = 'HTML-Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, können POST-Requests HTML-Formular-Tags enthalten.';
 
 $_lang['setting_archive_with'] = 'Erzwinge PCLZip-Archive';
-$_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Erweiterung zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
+$_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Extension zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
 
 $_lang['setting_auto_menuindex'] = 'Automatische Menü-Indizierung';
 $_lang['setting_auto_menuindex_desc'] = 'Wählen Sie "Ja", um die automatische Menü-Indizierung einzuschalten. Ist diese aktiv, erhält das als erstes erstellte Dokument in einem Container/Ordner als Menü-Index den Wert 0, und dieser Wert wird dann für jedes nachfolgende Dokument, das Sie erstellen, erhöht.';
@@ -123,6 +126,12 @@ $_lang['setting_cache_db_desc'] = 'Wenn diese Option aktiviert ist, werden Objek
 
 $_lang['setting_cache_db_expires'] = 'Ablaufzeit für Datenbank-Cache';
 $_lang['setting_cache_db_expires_desc'] = 'Standardzeit für das Ablaufen des Datenbank-Caches. Wird diese Einstellung auf"0" gesetzt, läuft der Cache niemals ab, wenn nicht ein Datensatz aktualisiert (geändert) wird.';
+
+$_lang['setting_cache_db_session'] = 'Datenbank-Session-Cache aktivieren';
+$_lang['setting_cache_db_session_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird und cache_db aktiviert ist, werden Datenbank-Sessions im DB-Result-Set-Cache gecacht.';
+
+$_lang['setting_cache_db_session_lifetime'] = 'Ablaufzeit für DB-Session-Cache';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'Dieser Wert (in Sekunden) setzt den Zeitraum fest, innerhalb dessen Cache-Dateien für Session-Einträge im DB-Result-Set-Cache gültig sind.';
 
 $_lang['setting_cache_default'] = 'Voreinstellung für Cache';
 $_lang['setting_cache_default_desc'] = 'Wählen Sie "Ja", um für alle neuen Ressourcen standardmäßig den Cache zu aktivieren.';
@@ -176,6 +185,13 @@ $_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet M
 
 $_lang['setting_container_suffix'] = 'Container-Suffix';
 $_lang['setting_container_suffix_desc'] = 'Das Suffix, das Ressourcen, die als Container definiert wurden, hinzugefügt wird, wenn suchmaschinenfreundliche URLs verwendet werden.';
+
+$_lang['setting_context_tree_sort'] = 'Sortierung der Kontexte im Ressourcen-Baum aktivieren';
+$_lang['setting_context_tree_sort_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Kontexte im sich auf der linken Seite befindenden Ressourcen-Baum alphanumerisch sortiert.';
+$_lang['setting_context_tree_sortby'] = 'Sortierfeld von Kontexten im Ressourcen-Baum';
+$_lang['setting_context_tree_sortby_desc'] = 'Das Feld, nach dem Kontexte im Ressourcen-Baum sortiert werden, wenn die Sortierung aktiviert ist.';
+$_lang['setting_context_tree_sortdir'] = 'Sortierrichtung von Kontexten im Ressourcen-Baum';
+$_lang['setting_context_tree_sortdir_desc'] = 'Gibt an, ob Kontexte im Ressourcen-Baum auf- oder absteigend sortiert werden, wenn die Sortierung aktiviert ist.';
 
 $_lang['setting_cultureKey'] = 'Sprache';
 $_lang['setting_cultureKey_desc'] = 'Wählen Sie die Sprache für alle Nicht-Manager-Kontexte, einschließlich des Kontexts "web".';
@@ -275,9 +291,6 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'Der Pfad zum Model-
 
 $_lang['setting_friendly_alias_trim_chars'] = 'Suchmaschinenfreundliche Aliasse: abzuschneidende Zeichen';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Zeichen, die am Ende eines übergebenen Ressourcen-Alias abgeschnitten werden sollen.';
-
-// $_lang['setting_friendly_alias_urls'] = 'Suchmaschinenfreundliche Aliasse benutzen';
-// $_lang['setting_friendly_alias_urls_desc'] = 'Wenn Sie suchmaschinenfreundliche URLs verwenden und die Ressource einen Alias hat, hat der Alias immer Vorrang vor der suchmaschinenfreundlichen URL. Wird diese Option auf "Ja" gesetzt, wird auch das Inhaltstyp-Suffix der Ressource auf den Alias angewendet. Wenn z.B. Ihre Ressource mit der ID 1 den Alias "einfuehrung" hat, und Sie haben als Inhaltstyp-Suffix ".html" eingestellt, wird das Setzen dieser Option auf "Ja" dazu führen, dass der Link "einfuehrung.html" generiert wird. Wenn es keinen Alias gibt, generiert MODX den Link "1.html".';
 
 $_lang['setting_friendly_alias_word_delimiter'] = 'Suchmaschinenfreundliche Aliasse: bevorzugtes Wort-Trennzeichen';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'Das bevorzugte Wort-Trennzeichen für suchmaschinenfreundliche Aliasse.';
@@ -482,6 +495,9 @@ $_lang['setting_rb_base_url_err'] = 'Bitte geben Sie die Basis-URL für den Ress
 $_lang['setting_request_controller'] = 'Dateiname des Request-Controllers';
 $_lang['setting_request_controller_desc'] = 'Der Dateiname des Haupt-Request-Controllers, von dem aus MODX geladen wird. Die meisten Benutzer können hier "index.php" eingestellt lassen.';
 
+$_lang['setting_request_method_strict'] = 'Strikte Request-Methode';
+$_lang['setting_request_method_strict_desc'] = 'Wenn diese Option aktiviert ist, werden Requests über den Request-ID-Parameter ignoriert, wenn suchmaschinenfreundliche URLs verwendet werden, und Requests über den Request-Alias-Parameter werden ignoriert, wenn suchmaschinenfreundliche URLs nicht aktiviert sind.';
+
 $_lang['setting_request_param_alias'] = 'Request-Alias-Parameter';
 $_lang['setting_request_param_alias_desc'] = 'Der Name des GET-Parameters für Ressourcen-Aliasse, wenn eine Weiterleitung mittels suchmaschinenfreundlicher URLs stattfindet.';
 
@@ -524,6 +540,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, u
 
 $_lang['setting_session_cookie_secure'] = 'Sichere Session-Cookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen.';
+
+$_lang['setting_session_gc_maxlifetime'] = 'Maximale Lebensdauer des Session-Garbage-Collectors';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Erlaubt Anpassung der PHP-Konfigurationseinstellung session.gc_maxlifetime bei Benutzung von "modSessionHandler".';
 
 $_lang['setting_session_handler_class'] = 'Name der Session-Handler-Klasse';
 $_lang['setting_session_handler_class_desc'] = 'Für datenbankgestützte Sessions verwenden Sie bitte "modSessionHandler". Lassen Sie dieses Feld leer, um die Standard-PHP-Sessionverwaltung zu verwenden.';
@@ -611,8 +630,8 @@ $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
-$_lang['setting_use_multibyte'] = 'Multibyte-Erweiterung nutzen';
-$_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie die mbstring-Erweiterung für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODX-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "Ja", wenn die mbstring-PHP-Erweiterung installiert ist.';
+$_lang['setting_use_multibyte'] = 'Multibyte-Extension nutzen';
+$_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie die mbstring-Extension für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODX-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "Ja", wenn die mbstring-PHP-Extension installiert ist.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn er eine neues Passwort anfordert. Der MODX-Manager sendet eine E-Mail an den Benutzer, die dessen neues Passwort und Aktivierungs-Informationen enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn eine Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Default German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -114,8 +116,8 @@ $_lang['duplicate_children'] = 'Kind-Ressourcen duplizieren';
 $_lang['duplicate_of'] = 'Duplikat von [[+name]]';
 $_lang['duplication_options'] = 'Duplizierungs-Optionen';
 $_lang['edit'] = 'Bearbeite';  // actually 'Bearbeiten', but needed in this form for TVs etc.
-$_lang['editing'] = 'Bearbeite: [[+name]]';
 $_lang['edit_context'] = 'Kontext bearbeiten';
+$_lang['editing'] = 'Bearbeite: [[+name]]';
 $_lang['editedon'] = 'Bearbeitungsdatum';
 $_lang['editing_form'] = 'Editiere Formular';
 $_lang['element_duplicate'] = 'Element duplizieren';
@@ -288,6 +290,7 @@ $_lang['pagetitle'] = 'Titel der Ressource';
 $_lang['page_title'] = 'Ressourcen-Titel';
 $_lang['parameter'] = 'Parameter';
 $_lang['parameters'] = 'Parameter';
+$_lang['parent'] = 'Eltern-Element';
 $_lang['password'] = 'Passwort';
 $_lang['path'] = 'Pfad';
 $_lang['per_page'] = 'Pro Seite';
@@ -345,7 +348,7 @@ $_lang['refreshing_tree'] = 'Aktualisiere Baum...';
 $_lang['release'] = 'Release';
 $_lang['reload'] = 'Aktualisieren';
 $_lang['remember_username'] = 'An mich erinnern';
-$_lang['remove'] = 'Entferne';  // actually 'Entfernen', but needed in this form for TVs etc.
+$_lang['remove'] = 'Lösche';  // actually 'Löschen', but needed in this form for TVs etc.
 $_lang['remove_category'] = 'Kategorie löschen';
 $_lang['remove_date'] = 'Datum löschen';
 $_lang['remove_selected'] = 'Ausgewählte löschen';
@@ -365,6 +368,7 @@ $_lang['resource_management'] = 'Ressourcen verwalten';
 $_lang['resource_name'] = 'Ressourcen-Name';
 $_lang['resource_name_new'] = 'Neuer Ressourcen-Name';
 $_lang['resource_preview'] = 'Ressourcen-Vorschau';
+$_lang['resource_overview'] = 'Ressourcen-Überblick';
 $_lang['resource_settings'] = 'Ressourcen-Einstellungen';
 $_lang['role'] = 'Rolle';
 $_lang['roles'] = 'Rollen';
@@ -408,7 +412,7 @@ $_lang['sort_tree'] = 'Baum sortieren';
 $_lang['source'] = 'Quelle';
 $_lang['specify_name_error'] = 'Bitte geben Sie einen Namen an.';
 $_lang['statistics'] = 'Statistiken';
-$_lang['stay'] = 'Mit der Barbeitung fortfahren';
+$_lang['stay'] = 'Mit der Bearbeitung fortfahren';
 $_lang['stay_new'] = 'Weitere(n)/weiteres hinzufügen';
 $_lang['submit'] = 'Absenden';
 $_lang['success'] = 'Erfolgreich!';

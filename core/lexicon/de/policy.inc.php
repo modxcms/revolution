@@ -1,5 +1,7 @@
 <?php
 /**
+ * Access Policy German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -45,7 +47,7 @@ $_lang['policy_property_create'] = 'Zugriffs-Richtlinien-Eigenschaft erstellen';
 $_lang['policy_property_new'] = 'Neue Richtlinien-Eigenschaft';
 $_lang['policy_property_remove'] = 'Zugriffs-Richtlinien-Eigenschaft löschen';
 $_lang['policy_property_specify_name'] = 'Bitte geben Sie einen Namen für die Richtlinien-Eigenschaft an:';
-$_lang['policy_remove'] = 'Richtlinie entfernen';
+$_lang['policy_remove'] = 'Richtlinie löschen';
 $_lang['policy_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Zugriffs-Richtlinie löschen möchten?';
 $_lang['policy_remove_multiple'] = 'Richtlinien löschen';
 $_lang['policy_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Zugriffs-Richtlinien löschen möchten? Dies lässt sich nicht rückgängig machen.';

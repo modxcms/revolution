@@ -1,5 +1,7 @@
 <?php
 /**
+ * Form Customization German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -47,7 +49,7 @@ $_lang['profile_err_nfs'] = 'Formular-Anpassungs-Profil mit der ID [[+id]] nicht
 $_lang['profile_err_ns'] = 'Formular-Anpassungs-Profil nicht angegeben!';
 $_lang['profile_err_remove'] = 'Ein Fehler trat auf beim Versuch, das Profil zu löschen.';
 $_lang['profile_err_save'] = 'Ein Fehler trat auf beim Versuch, das Profil zu speichern.';
-$_lang['profile_msg'] = 'Hier können Sie Sets für dieses Profil angeben. Ein Set ist eine Sammlung von Regeln, die auf eine gegebene Seite angewendet werden (Ressource bearbeiten oder erstellen). Sie können auch auf bestimmte Templates oder auf Werte anderer Felder der Ressource beschränkt werden. Einschränkungen für die Sets, die bei der Erstellung von Ressourcen zur Anwendung kommen, werden basierend auf der Eltern-Ressouce der neu erstellten Ressource angewendet.';  // based on the parent of the newly created Resource&apos;s value
+$_lang['profile_msg'] = 'Hier können Sie Sets für dieses Profil angeben. Ein Set ist eine Sammlung von Regeln, die auf eine gegebene Seite angewendet werden (Ressource bearbeiten oder erstellen). Sie können auch auf bestimmte Templates oder auf Werte anderer Felder der Ressource beschränkt werden. Einschränkungen für die Sets, die bei der Erstellung von Ressourcen zur Anwendung kommen, werden basierend auf der Eltern-Ressouce der neu erstellten Ressource angewendet.';  // based on the parent of the newly created Resource's value
 $_lang['profile_new'] = 'Neues Formular-Anpassungs-Profil';
 $_lang['profile_remove'] = 'Profil löschen';
 $_lang['profile_remove_confirm'] = 'Sind Sie sicher, dass Sie das Profil löschen möchten? Dies lässt sich nicht rückgängig machen.';
@@ -100,7 +102,7 @@ $_lang['set_tabs_msg'] = 'Hier können Sie die Reiter für diese Seite anpassen,
 $_lang['set_template_desc'] = 'Das Auswählen eines Templates beschränkt die Anwendung der Regeln in diesem Set auf Ressourcen, die das angegebene Template verwenden.';
 $_lang['set_tvs_msg'] = 'Hier können Sie für Template-Variablen die Sichtbarkeit, Beschriftungen, Standardwerte und Reiter, auf denen sie sich befinden, anpassen, indem Sie doppelt auf eine Zeile der Tabelle klicken. Hinweis: Wenn Sie eine TV auf einen anderen Reiter verschieben, können Sie die Position der TV innerhalb des Reiters mittels des Feldes "Rang des Reiters" anpassen. Bei leergelassenen Feldern kommen die Standardeinstellungen zur Anwendung.';
 $_lang['sets'] = 'Formular-Anpassungs-Sets';
-$_lang['simplexml_err_nf'] = 'MODX benötigt die SimpleXML-PHP-Erweiterung, um dieses Feature nutzen zu können. Bitte stellen Sie sicher, dass die Erweiterung installiert ist, bevor Sie fortfahren.';
+$_lang['simplexml_err_nf'] = 'MODX benötigt die SimpleXML-PHP-Extension, um dieses Feature nutzen zu können. Bitte stellen Sie sicher, dass die Extension installiert ist, bevor Sie fortfahren.';
 $_lang['tab'] = 'Reiter';
 $_lang['tab_create'] = 'Neuen Reiter erstellen';
 $_lang['tab_id'] = 'ID';
@@ -108,8 +110,8 @@ $_lang['tab_name'] = 'Name des Reiters';
 $_lang['tab_title'] = 'Reiter-Überschrift';
 $_lang['tab_new'] = 'Neuer Reiter';
 $_lang['tab_rank'] = 'Rang des Reiters';
-$_lang['tab_remove'] = 'Reiter entfernen';
-$_lang['tab_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Reiter entfernen möchten?';
+$_lang['tab_remove'] = 'Reiter löschen';
+$_lang['tab_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Reiter löschen möchten?';
 $_lang['tab_visible'] = 'Reiter sichtbar';
 $_lang['tabs'] = 'Reiter';
 $_lang['tv'] = 'Template-Variable';
@@ -126,4 +128,4 @@ $_lang['usergroup_remove'] = 'Benutzergruppe aus dem Profil entfernen';
 $_lang['usergroup_remove_confirm'] = 'Sind Sie sicher, dass dieses Profil nicht mehr auf Benutzer aus dieser Benutzergruppe angewendet werden soll?';
 $_lang['usergroups'] = 'Benutzergruppen';
 $_lang['visible'] = 'Sichtbar';
-$_lang['xmlwriter_err_nf'] = 'MODX benötigt die XMLWriter-PHP-Erweiterung, um dieses Feature nutzen zu können. Bitte stellen Sie sicher, dass die Erweiterung installiert ist, bevor Sie fortfahren.';
+$_lang['xmlwriter_err_nf'] = 'MODX benötigt die XMLWriter-PHP-Extension, um dieses Feature nutzen zu können. Bitte stellen Sie sicher, dass die Extension installiert ist, bevor Sie fortfahren.';

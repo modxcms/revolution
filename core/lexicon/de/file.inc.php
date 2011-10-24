@@ -1,5 +1,7 @@
 <?php
 /**
+ * File German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -99,8 +101,8 @@ $_lang['upf_filename'] = 'Dateiname';
 $_lang['upf_note'] = 'Hinweis';
 $_lang['upf_progress_wait'] = 'Warte auf Eingaben...';
 $_lang['upf_queued'] = 'Für den Upload vorgemerkt.';
-$_lang['upf_remove'] = 'Entfernen';
-$_lang['upf_remove_desc'] = 'Datei aus der Upload-Liste entfernen.';
+$_lang['upf_remove'] = 'Löschen';
+$_lang['upf_remove_desc'] = 'Datei aus der Upload-Liste löschen.';
 $_lang['upf_reset'] = 'Zurücksetzen';
 $_lang['upf_reset_desc'] = 'Upload-Liste zurücksetzen.';
 $_lang['upf_state'] = 'Status';

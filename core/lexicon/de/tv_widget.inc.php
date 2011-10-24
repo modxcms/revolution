@@ -1,5 +1,7 @@
 <?php
 /**
+ * TV Widget German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
