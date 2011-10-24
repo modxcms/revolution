@@ -93,7 +93,7 @@ Ext.onReady(function() {
             tag: 'div'
             ,cls: 'x-tab-panel-header vertical-tabs-header'
             ,id: 'modx-resource-vtabs-header'
-            ,html: MODx.config.show_tv_categories_header ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
+            ,html: MODx.config.show_tv_categories_header == true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
         }
     });
     {/literal}{/if}
