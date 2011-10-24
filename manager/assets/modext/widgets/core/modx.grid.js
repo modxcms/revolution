@@ -310,7 +310,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     var r = c[i].editor.renderer;
                     c[i].editor = Ext.ComponentMgr.create(c[i].editor);
                     if (r === true) {
-                        if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded) {
+                        if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded && c[i].editor.config.mode != 'local') {
                             c[i].editor.store.load();
                             c[i].editor.store.isLoaded = true;
                         }
@@ -584,7 +584,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                     var r = c[i].editor.renderer;
                     c[i].editor = Ext.ComponentMgr.create(c[i].editor);
                     if (r === true) {
-                        if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded) {
+                        if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded && c[i].editor.config.mode != 'local') {
                             c[i].editor.store.load();
                             c[i].editor.store.isLoaded = true;
                         }

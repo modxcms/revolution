@@ -287,7 +287,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ed = new Ext.grid.GridEditor(o);
                 cm.setEditor(ci,ed);
             }
-            if (ed.store && !ed.store.isLoaded) {
+            if (ed.store && !ed.store.isLoaded && ed.config.mode != 'local') {
                 ed.store.load();
                 ed.store.isLoaded = true;
             }
