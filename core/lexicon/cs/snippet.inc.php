@@ -25,13 +25,13 @@ $_lang['snippet_delete_confirm'] = 'Opravdu chcete odstranit tento snippet?';
 $_lang['snippet_desc'] = 'Popis';
 
 // $_lang['snippet_desc_category'] = 'The Category this Snippet belongs in.';
-$_lang['snippet_desc_category'] = 'Kategorie, do které tento Snippet patří.';
+$_lang['snippet_desc_category'] = 'Kategorie, do které tento snippet patří.';
 
 // $_lang['snippet_desc_description'] = 'A short description of this Snippet.';
-$_lang['snippet_desc_description'] = 'Krátký popis tohoto Snippetu.';
+$_lang['snippet_desc_description'] = 'Popis snippetu.';
 
 // $_lang['snippet_desc_name'] = 'The name of this Snippet. It will be available using the [[NameOfSnippet]] tags.';
-$_lang['snippet_desc_name'] = 'Název tohoto Snippetu. Bude dostupný pod tagem [[NazevSnippetu]].';
+$_lang['snippet_desc_name'] = 'Název snippetu. Bude dostupný pod tagem [[NazevSnippetu]].';
 
 // $_lang['snippet_duplicate_confirm'] = 'Are you sure you want to duplicate this snippet?';
 $_lang['snippet_duplicate_confirm'] = 'Opravdu chcete tento snippet zkopírovat?';

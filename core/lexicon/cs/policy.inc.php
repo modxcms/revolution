@@ -79,7 +79,7 @@ $_lang['policy_desc'] = 'Přístupová práva jsou obecné zásady, které omezu
 $_lang['policy_desc_name'] = 'Název Přístupového práva';
 
 // $_lang['policy_desc_description'] = 'Optional. A short description of the Access Policy';
-$_lang['policy_desc_description'] = 'Volitelné. Krátký popis Přístupového práva';
+$_lang['policy_desc_description'] = 'Volitelné. Popis přístupového práva';
 
 // $_lang['policy_desc_template'] = 'The Policy Template used for this Policy. Policies get their Permission lists from their Template.';
 $_lang['policy_desc_template'] = 'Šablona Přístupového práva použitá pro toto Přístupové právo. Přístupová práva získávají seznam Oprávnění ze své šablony.';

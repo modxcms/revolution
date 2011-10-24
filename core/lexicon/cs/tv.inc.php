@@ -39,10 +39,10 @@ $_lang['tv_desc_caption'] = 'Text použitý vedle TV při editaci dokumentu.';
 $_lang['tv_desc_category'] = 'Kategorie, do které TV patří.';
 
 // $_lang['tv_desc_description'] = 'A short description of this TV.';
-$_lang['tv_desc_description'] = 'Krátký popis TV.';
+$_lang['tv_desc_description'] = 'Popis TV.';
 
 // $_lang['tv_desc_name'] = 'The name of this TV. It will be available using the [[*NameOfTV]] tags.';
-$_lang['tv_desc_name'] = 'Název této TV. Bude dostupná pomocí tagu [[*NazevTV]] tags.';
+$_lang['tv_desc_name'] = 'Název TV. Bude dostupná pomocí tagu [[*NazevTV]] tags.';
 
 // $_lang['tv_description'] = 'Description';
 $_lang['tv_description'] = 'Popis';

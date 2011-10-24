@@ -103,7 +103,7 @@ $_lang['role_desc_authority'] = 'Úroveň autority dané role. Nižší úrovně
 $_lang['role_desc_name'] = 'Název role, např. Správce obsahu, Editor, Webmaster, ...';
 
 // $_lang['role_desc_description'] = 'A short description of the Role.';
-$_lang['role_desc_description'] = 'Krátký popis role.';
+$_lang['role_desc_description'] = 'Popis role.';
 
 // $_lang['role_err_ae'] = 'A role already exists with that name.';
 $_lang['role_err_ae'] = 'Role s tímto názvem již existuje.';

@@ -34,13 +34,13 @@ $_lang['plugin_config'] = 'Nastavení pluginu';
 $_lang['plugin_desc'] = 'Popis';
 
 // $_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
-$_lang['plugin_desc_category'] = 'Kategorie, do které tento Plugin patří.';
+$_lang['plugin_desc_category'] = 'Kategorie, do které tento plugin patří.';
 
 // $_lang['plugin_desc_description'] = 'A short description of this Plugin.';
-$_lang['plugin_desc_description'] = 'Krátký popis tohoto Pluginu.';
+$_lang['plugin_desc_description'] = 'Popis pluginu.';
 
 // $_lang['plugin_desc_name'] = 'The name of this Plugin.';
-$_lang['plugin_desc_name'] = 'Název tohoto pluginu.';
+$_lang['plugin_desc_name'] = 'Název pluginu.';
 
 // $_lang['plugin_delete_confirm'] = 'Are you sure you want to delete this plugin?';
 $_lang['plugin_delete_confirm'] = 'Opravdu chcete odstranit tento plugin?';

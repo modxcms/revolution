@@ -13,13 +13,13 @@
 $_lang['chunk'] = 'Chunk';
 
 // $_lang['chunk_desc_category'] = 'The Category this Chunk belongs in.';
-$_lang['chunk_desc_category'] = 'Kategorie, do které Chunk patří.';
+$_lang['chunk_desc_category'] = 'Kategorie, do které chunk patří.';
 
 // $_lang['chunk_desc_description'] = 'A short description of this chunk.';
-$_lang['chunk_desc_description'] = 'Krátků popis tohoto Chunku.';
+$_lang['chunk_desc_description'] = 'Popis chunku.';
 
 // $_lang['chunk_desc_name'] = 'The name of this chunk. It will be available using the [[$nameOfChunk]] tags.';
-$_lang['chunk_desc_name'] = 'Název tohoto Chunku. Bude dostupný pomocí tagu [[$nazevChunku]].';
+$_lang['chunk_desc_name'] = 'Název chunku. Bude dostupný pomocí tagu [[$nazevChunku]].';
 
 // $_lang['chunk_code'] = 'Chunk code (html)';
 $_lang['chunk_code'] = 'Kód chunku (html)';

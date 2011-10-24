@@ -31,13 +31,13 @@ $_lang['template_code'] = 'Kód šablony (html)';
 $_lang['template_desc'] = 'Popis';
 
 // $_lang['template_desc_category'] = 'The Category this Template belongs in.';
-$_lang['template_desc_category'] = 'Kategorie, do které Šablona patří.';
+$_lang['template_desc_category'] = 'Kategorie, do které sablona patří.';
 
 // $_lang['template_desc_description'] = 'A short description of this Template.';
-$_lang['template_desc_description'] = 'Krátký popis této Šablony.';
+$_lang['template_desc_description'] = 'Popis šablony.';
 
 // $_lang['template_desc_name'] = 'The name of this Template.';
-$_lang['template_desc_name'] = 'Název této Šablony.';
+$_lang['template_desc_name'] = 'Název šablony.';
 
 // $_lang['template_delete_confirm'] = 'Are you sure you want to delete this template?';
 $_lang['template_delete_confirm'] = 'Opravdu chcete odstranit tuto šablonu?';
