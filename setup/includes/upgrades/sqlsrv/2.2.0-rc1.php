@@ -154,7 +154,7 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 $description = $this->install->lexicon('add_index',array('index' => 'is_stream','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'is_stream'));
 
-$s3sources = $this->getCollection('sources.modMediaSource',array(
+$s3sources = $modx->getCollection('sources.modMediaSource',array(
     'class_key' => 'sources.modS3MediaSource',
 ));
 /** @var modS3MediaSource $s3source */
