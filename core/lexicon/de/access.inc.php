@@ -1,5 +1,7 @@
 <?php
 /**
+ * Access German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -47,8 +49,8 @@ $_lang['access_permissions_users_in_group'] = '<strong>Benutzer in der Gruppe:</
 $_lang['access_permissions_users_tab'] = 'Hier können Sie sehen, welche Benutzergruppen angelegt wurden. Sie können auch neue Gruppen einrichten, Gruppen umbenennen oder löschen und sehen, welche Benutzer Mitglieder der verschiedenen Gruppen sind. Um einen Benutzer einer Gruppe hinzuzufügen oder einen Benutzer aus einer Gruppe zu entfernen, bearbeiten Sie bitte den Benutzer selbst.';
 $_lang['access_permissions_user_group'] = 'Benutzergruppe:';
 $_lang['access_permissions_user_groups'] = 'Benutzergruppen';
-$_lang['access_permissions_user_group_access'] = 'Dokumentgruppen, auf die diese Benutzergruppe Zugriff hat:';
-$_lang['access_permissions_user_message'] = 'Hier können Sie festlegen, welchen Benutzergruppen dieser Benutzer angehört:';
+$_lang['access_permissions_user_group_access'] = 'Ressourcen-Gruppen, auf die diese Benutzergruppe Zugriff hat:';
+$_lang['access_permissions_user_message'] = 'Hier können Sie festlegen, welchen Benutzergruppen dieser Benutzer angehört. Sie können den Rang jeder Benutzergruppe anpassen, indem Sie die Zeilen per Drag & Drop umsortieren. Die Benutzergruppe mit dem Rang 0 wird als primäre Gruppe des Benutzers festgelegt und ist die Benutzergruppe, die das Dashboard des Benutzers bestimmt.';
 $_lang['access_permission_denied'] = 'Sie haben nicht die richtigen Befugnisse für dieses Dokument.';
 $_lang['access_permission_parent_denied'] = 'Sie haben keine Berechtigung, hier ein Dokument anzulegen oder eines hierher zu verschieben! Bitte wählen Sie einen anderen Ort.';
 $_lang['access_policy_err_nf'] = 'Zugriffsrichtlinie nicht gefunden.';
@@ -67,7 +69,7 @@ $_lang['access_to_resource_groups'] = 'Zugriff auf Ressourcen-Gruppen';
 $_lang['access_type_err_ns'] = 'Zieltyp oder ID nicht angegeben!';
 $_lang['acl_add'] = 'Zugriffskontrolle hinzufügen';
 $_lang['authority'] = 'Autorität';
-$_lang['authority_err_ns'] = 'Bitte geben Sie einen Mindestwert für die Rolle an.';
+$_lang['authority_err_ns'] = 'Bitte geben Sie die mindestens benötigte Rolle an.';
 $_lang['category'] = 'Kategorie';
 $_lang['category_add'] = 'Kategorie hinzufügen';
 $_lang['filter_by_context'] = 'Nach Kontext filtern...';

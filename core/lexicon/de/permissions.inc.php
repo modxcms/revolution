@@ -1,5 +1,7 @@
 <?php
 /**
+ * Permissions German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -59,7 +61,7 @@ $_lang['perm.edit_user_desc'] = 'Benutzer bearbeiten.';
 $_lang['perm.element_tree_desc'] = 'Den Elemente-Baum im linken Navigations-Bereich anzeigen.';
 $_lang['perm.empty_cache_desc'] = 'Den Site-Cache leeren.';
 $_lang['perm.error_log_erase_desc'] = 'Das Fehlerprotokoll löschen.';  // leeren?
-$_lang['perm.error_log_view_desc'] = 'Das Fehlerprotokoll anzeigen.';  // ansehen? (auch bei den anderen so aufgebauten Begriffen)
+$_lang['perm.error_log_view_desc'] = 'Das Fehlerprotokoll anzeigen.';
 $_lang['perm.export_static_desc'] = 'Die Site in statische HTML-Dateien exportieren.';
 $_lang['perm.file_list_desc'] = 'Liste der in einem angegebenen Verzeichnis liegenden Dateien anzeigen.';
 $_lang['perm.file_manager_desc'] = 'Den Dateimanager benutzen.';

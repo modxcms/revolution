@@ -1,5 +1,7 @@
 <?php
 /**
+ * German language strings for Elements
+ *
  * @package modx
  * @subpackage lexicon
  *
