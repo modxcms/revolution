@@ -1,8 +1,8 @@
 <?php
 $_lang['chunk'] = 'Чанк';
-$_lang['chunk_desc_category'] = 'The Category this Chunk belongs in.';
-$_lang['chunk_desc_description'] = 'A short description of this chunk.';
-$_lang['chunk_desc_name'] = 'The name of this chunk. It will be available using the [[$nameOfChunk]] tags.';
+$_lang['chunk_desc_category'] = 'Категория к которой принадлежит чанк.';
+$_lang['chunk_desc_description'] = 'Краткое описание этого чанка.';
+$_lang['chunk_desc_name'] = 'Название чанка. Чанк будет доступен через подстановщик [[$названиеЧанка]].';
 $_lang['chunk_code'] = 'Код чанка (html)';
 $_lang['chunk_desc'] = 'Описание';
 $_lang['chunk_delete_confirm'] = 'Вы уверены, что хотите удалить этот чанк?';
@@ -24,5 +24,5 @@ $_lang['chunk_name'] = 'Имя чанка';
 $_lang['chunk_new'] = 'Новый чанк';
 $_lang['chunk_properties'] = 'Параметры по умолчанию';
 $_lang['chunk_title'] = 'Создать/редактировать чанк';
-$_lang['chunk_untitled'] = 'Безымянный Чанк';
+$_lang['chunk_untitled'] = 'Безымянный чанк';
 $_lang['chunks'] = 'Чанки';
