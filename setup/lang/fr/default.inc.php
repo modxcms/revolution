@@ -15,6 +15,9 @@ $_lang['base_template'] = 'Modèle de base';
 $_lang['cache_manager_err'] = 'Le gestionnaire de cache de MODX n\'a pas pu être chargé.';
 $_lang['choose_language'] = 'Sélectionnez une langue';
 $_lang['cleanup_errors_title'] = 'Note importante:';
+$_lang['cli_install_failed'] = 'Installation échouée! Erreurs: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX n\'a pu trouver le fichier de configuration (tel que config.xml) pour votre installation en CLI. Pour installer MODX depuis la ligne de commande, vous devez définir un fichier xml de configuration. Consultez la documentation officielle pour plus d\'information.';
+$_lang['cli_tests_failed'] = 'Tests de pré-installation échoués! Erreurs: [[+errors]]';
 $_lang['close'] = 'Fermer';
 $_lang['config_file_err_w'] = 'Erreur lors de l\'écriture du fichier de configuration.';
 $_lang['config_file_perms_notset'] = 'Les permissions du fichier de configuration n\'ont pas été mises à jour. Vous pouvez si vous le souhaitez changer les permissions de votre fichier afin de le protéger de toute altération.';
@@ -29,6 +32,7 @@ $_lang['connection_collation'] = 'Collation:';
 $_lang['connection_connection_and_login_information'] = 'Informations de connexion à la base de données';
 $_lang['connection_connection_note'] = 'Veuillez entrer le nom de la base de données créée pour MODX. S\'il n\'y a pas encore de base de donnése, MODX essaiera d\'en créer une pour vous. Cette opération peut échouer selon la configuration de MySQL ou les permissions utilisateur pour votre domaine/installation.';
 $_lang['connection_database_host'] = 'Hôte de la base de données:';
+$_lang['connection_database_info'] = 'Veuillez entrer les informations de connexion à votre base de données.';
 $_lang['connection_database_login'] = 'Identifiant de base de données:';
 $_lang['connection_database_name'] = 'Nom de la base de données:';
 $_lang['connection_database_pass'] = 'Mot de passe de la base de données:';
@@ -90,6 +94,7 @@ $_lang['install_packages_options'] = 'Options d\'installation du Paquet';
 $_lang['install_success'] = 'Installation du noyau effectuée avec succès. Cliquez sur suivant pour compléter le processus d\'installation.';
 $_lang['install_summary'] = 'Résumé de l\'installation';
 $_lang['install_update'] = 'Installer/Mettre à Jour';
+$_lang['installation_finished'] = 'Installation effectuée en [[+time]]';
 $_lang['license'] = '<p class="title">Vous devez accepter la Licence avant de poursuivre l\'installation.</p>
 	<p>L\'utilisation de ce logiciel est soumis à la licence GPL. Pour vous aider à comprendre ce qu\'est
 	la licence GPL et comment elle influe sur vos possibilités d\'utilisation du logiciel, nous vous
@@ -110,7 +115,7 @@ $_lang['license'] = '<p class="title">Vous devez accepter la Licence avant de po
         copie distribuée ainsi que les mentions légales et la garantie de garder intactes les
 		indications qui renvoient à cette licence ainsi qu\'à l\'absence de toute garantie; vous
 		devez également fournir une copie de la Licence Publique Générale GNU à chaque destinataire
-		du programme. Chaque traduction de la Licence Publique Générale GNU doit être accompagnée 
+		du programme. Chaque traduction de la Licence Publique Générale GNU doit être accompagnée
         par la Licence Publique Générale GNU.</li>
 
         <li>Si vous modifiez votre copie ou vos copies du programme, ou une portion
@@ -159,7 +164,7 @@ $_lang['ok'] = 'OK!';
 $_lang['options_core_inplace'] = 'Les fichiers sont déjà en place<br /><small>(Recommendé pour une installation sur serveur mutualisé.)</small>';
 $_lang['options_core_inplace_note'] = 'Cochez ceci si vous avez exporté MODX du dépôt SVN ou vous l\'avez extrait de l\'archive complète vers le serveur, avant installation.';
 $_lang['options_core_unpacked'] = 'Le paquet du noyau à été dépaqueté manuellement<br /><small>(Recommendé pour une installation sur serveur mutualisé.)</small>';
-$_lang['options_core_unpacked_note'] = 'Cochez ceci si vous avez dépaqueté manuellement le paquet du noyau depuis le fichier core/packages/core.transport.zip. Cela réduira le temps nécessaire au processus d\'installation sur les systèmes qui n\'autorisent la modification du time_limit de PHP et l\'exécution du script Apache "time settings".'; 
+$_lang['options_core_unpacked_note'] = 'Cochez ceci si vous avez dépaqueté manuellement le paquet du noyau depuis le fichier core/packages/core.transport.zip. Cela réduira le temps nécessaire au processus d\'installation sur les systèmes qui n\'autorisent la modification du time_limit de PHP et l\'exécution du script Apache "time settings".';
 $_lang['options_install_new_copy'] = 'Installer une nouvelle copie de ';
 $_lang['options_install_new_note'] = 'Veuillez noter que cette option peut écraser certaines données dans votre base de données.';
 $_lang['options_important_upgrade'] = 'Note importante de mise à jour';
