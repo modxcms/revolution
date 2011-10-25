@@ -9,6 +9,7 @@
 $_lang['area'] = 'Zone';
 $_lang['area_authentication'] = 'Identification et sécurité';
 $_lang['area_caching'] = 'Cache';
+$_lang['area_core'] = 'Code du core';
 $_lang['area_editor'] = 'Éditeur riche de texte';
 $_lang['area_file'] = 'Système de fichier';
 $_lang['area_filter'] = 'Filtrer par zone…';
@@ -17,6 +18,7 @@ $_lang['area_gateway'] = 'Gateway-porte d\'accès';
 $_lang['area_language'] = 'Lexique et langue';
 $_lang['area_mail'] = 'Email';
 $_lang['area_manager'] = 'Back-end (interface) du Manager';
+$_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session et Cookie';
 $_lang['area_lexicon_string'] = 'Entrées du lexique de zone';
@@ -26,7 +28,11 @@ $_lang['area_system'] = 'Système et Serveur';
 $_lang['areas'] = 'Zones';
 $_lang['charset'] = 'Jeu de caractères (charset)';
 $_lang['country'] = 'Pays';
+$_lang['description_desc'] = 'Courte description du paramètre. Peut être une clé d\'entrée de lexique.';
+$_lang['key_desc'] = 'La clé du paramètre. Si votre clé se nomme « key », son contenu sera disponible en utilisant le tag [[++key]].';
+$_lang['name_desc'] = 'Nom du paramètre. Peut être une clé d\'entrée de lexique.';
 $_lang['namespace'] = 'Espace de nom';
+$_lang['namespace_desc'] = 'L\'espace de nom auquel est associé ce paramètre. Le sujet « default » du lexique sera chargé lors du chargement des paramètres de cet espace de nom.';
 $_lang['namespace_filter'] = 'Filtrer par espace de nom…';
 $_lang['search_by_key'] = 'Chercher par clé…';
 $_lang['setting_create'] = 'Créer une nouvelle option';
@@ -82,6 +88,9 @@ $_lang['setting_access_policies_version_desc'] = 'La version du système de règ
 
 $_lang['setting_allow_forward_across_contexts'] = 'Autoriser la redirection dans d\'autres contextes';
 $_lang['setting_allow_forward_across_contexts_desc'] = 'Les Symlinks et les appels à l\'API modX::sendForward() peuvent rediriger les requètes vers des ressources dans d\'autres contextes.';
+
+$_lang['setting_allow_manager_login_forgot_password'] = 'Formulaire d\'oubli de mot de passe sur l\'écran de connexion';
+$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Non désactive la fonction de récupération de mot de passe sur la page de connexion du manager.';
 
 $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags HTML en POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les actions POST à l\'intérieur du manager seront débarrassées de tout tags. Modx recommande de laisser cette option activée.';
@@ -175,6 +184,12 @@ $_lang['setting_compress_css_desc'] = 'Lorsque cei est activé, MODX utilise une
 $_lang['setting_compress_js'] = 'Utilisation de librairies Javascript compressées';
 $_lang['setting_compress_js_desc'] = 'Quand ceci est activé, MODX utilisera une version compressée de ses librairies Javascript dans l\'interface du manager. Désactivez seulement si vous modifiez des élements du coeur/noyau/base.';
 
+$_lang['setting_compress_js_groups'] = 'Grouper les compressions JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Grouper la compression des fichiers JavaScript du manager de MODX. Activez cette option si vous utilisez Suhosin ou tout autre facteur imposant des limites.';
+
+$_lang['setting_compress_js_max_files'] = 'Seuil maximal de compression des fichiers JavaScript';
+$_lang['setting_compress_js_max_files_desc'] = 'Nombre maximal de fichiers JavaScript que MODX essaiera de compresser en une seule passe, lorsque compress_js est activé. Utilisez un petit nombre si vous rencontrez des problèmes avec Google Minify dans le manager.';
+
 $_lang['setting_concat_js'] = 'Utiliser les librairies Javascript concaténées';
 $_lang['setting_concat_js_desc'] = 'Quand ceci est activé, MODX utilisera une version concaténée de ses librairies Javascript dans l\'interface du manager. Ceci réduit grandement le chargement et le temps d\'éxécution au sein du manager. Désactivez seuelement si vous modifiez des éléments du coeur/noyau/base.';
 
@@ -191,9 +206,15 @@ $_lang['setting_context_tree_sortdir_desc'] = 'L\'ordre de classement des contex
 $_lang['setting_cultureKey'] = 'Langue';
 $_lang['setting_cultureKey_desc'] = 'Sélectionnez la langue pour tous les contextes "non-manager", web inclus.';
 
-$_lang['setting_custom_resource_classes'] = 'Classes personnalisées de ressource';
-$_lang['setting_custom_resource_classes_desc'] = 'Liste de classes personnalisées, séparées par des virgules, de ressource. Indiquez avec lowercase_lexicon_key:className (Ex: wiki_resource:WikiResource). Toutes les classes personnalisées de ressource doivent étendre modResource. Pour indiquer la localisation du contrôleur de chaque classe, ajoutez une option avec [nameOfClassLowercase]_delegate_path avec le chemin d\'accès au répertoire des fichiers php créer/mettre à jour. Ex: wikiresource_delegate_path pour une classe WikiResource qui étend modResource.';
- 	 	
+$_lang['setting_default_content_type'] = 'Type de contenu par défaut';
+$_lang['setting_default_content_type_desc'] = 'Indiquez le type de contenu par défaut à utiliser pour les nouvelles ressources. Vous pourrez toujours sélectionner un type de contenu différent lorsque vous éditerez une ressource; ce paramètre pré-selectionne seulement le type de contenu.';
+
+$_lang['setting_default_duplicate_publish_option'] = 'Option de publication lors de la duplication de ressource';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'L\'option sélectionnée par défaut lors de la duplication d\'une ressource. Peut être « dépublié » pour dépublier toutes les ressources dupliquées, ou « préserver » pour conserver le status de la ressource originale (sur la ressource dupliquée).';
+
+$_lang['setting_default_media_source'] = 'Media Source par défaut';
+$_lang['setting_default_media_source_desc'] = 'Media Source à charger par défaut.';
+
 $_lang['setting_default_template'] = 'Modèle par défaut';
 $_lang['setting_default_template_desc'] = 'Sélectionnez le modèle par défaut que vous souhaitez utiliser pour les nouvelles ressources. Vous pouvez toujours sélectionner un modèle différent dans l\'éditeur de ressource, cette option pré-sélectionne seuelement un de vos modèles pour vous.';
 
@@ -303,8 +324,14 @@ $_lang['setting_global_duplicate_uri_check_desc'] = 'Sélectionnez \'Oui\' pour 
 $_lang['setting_hidemenu_default'] = 'Ne pas afficher dans les menus par défaut';
 $_lang['setting_hidemenu_default_desc'] = 'Choisissez \'oui\' pour que toutes les nouvelles ressources soient cachées des menus par défaut.';
 
+$_lang['setting_inline_help'] = 'Afficher l\'aide sous les champs';
+$_lang['setting_inline_help_desc'] = '« Oui » affiche le texte d\'aide directement sous le champs. « Non » affiche le texte d\'aide dans un tooltip.';
+
 $_lang['setting_link_tag_scheme'] = 'Schéma de génération d\'URL';
 $_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le tag [[~id]]. Options disponibles: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+
+$_lang['setting_locale'] = 'Locale';
+$_lang['setting_locale_desc'] = 'Définie la locale du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="http://php.net/setlocale" target="_blank">la documentation PHP</a> pour plus d\'information.';
 
 $_lang['setting_mail_charset'] = 'Charset Mail';
 $_lang['setting_mail_charset_desc'] = 'Le charset (par défaut défaut) pour les emails, par ex. \'iso-8859-1\' ou \'UTF-8\'';
@@ -353,6 +380,9 @@ $_lang['setting_manager_date_format_desc'] = 'Le format de chaine de caratères,
 
 $_lang['setting_manager_favicon_url'] = 'URL de favicon du manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour le manager de MODX. Doit être relatif au répertoire manager/ ou une URL absolue.';
+
+$_lang['setting_manager_html5_cache'] = 'Utiliser le cache local HTML5 dans le manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Active le cache local HTML5 pour le manager. Recommendé uniquement avec l\'utilisation de navigateurs récents (supportant le cache HTML5).';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Activer le verrouillage des fichiers JS/CSS du manager';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Mettre en cache le verrouillage des fichiers. Sélectionnez non si votre système de fichier est NFS.';
@@ -497,6 +527,9 @@ $_lang['setting_rb_base_url_err'] = 'Veuillez indiquer l\'URL de base du navigat
 $_lang['setting_request_controller'] = 'Nom de fichier du contrôleur de requête';
 $_lang['setting_request_controller_desc'] = 'Le nom de fichier du contrôleur principale de requête par lequel MODX est chargé. La plupart des utilisateurs peuvent laisser index.php.';
 
+$_lang['setting_request_method_strict'] = 'Méthode de requête sctricte';
+$_lang['setting_request_method_strict_desc'] = 'Lorsque cette option est activée, les requêtes faites avec le paramètre d\'ID seront ignorées si les URLs simples sont activées, et inversement, les requêtes faites avec le paramètre d\'alias seront ignorées si les URLs simples sont désactivées.';
+
 $_lang['setting_request_param_alias'] = 'Paramètre de requête d\'alias';
 $_lang['setting_request_param_alias_desc'] = 'Nom du paramètre GET pour identifier les alias des ressources quand les FURLs sont utilisées.';
 
@@ -558,6 +591,9 @@ $_lang['setting_settings_distro_desc'] = 'Distribution de MODX actuellement inst
 $_lang['setting_set_header'] = 'Activer les entêtes HTTP';
 $_lang['setting_set_header_desc'] = 'Activé, MODX essai de définir les entêtes HTTP pour les ressources.';
 
+$_lang['setting_show_tv_categories_header'] = 'Afficher « Catégories » dans l\'entête de l\'onglet  des TVs';
+$_lang['setting_show_tv_categories_header_desc'] = 'Activé, MODX affiche l\'entête « Catégories » au dessus du premier onglet de TV, lors de l\'édition d\'une ressource.';
+
 $_lang['setting_signupemail_message'] = 'E-mail d\'inscription';
 $_lang['setting_signupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs lorsque vous leur créer un compte et laissez MODX leur envoyer un email contenant leur nom d\'utilisateur et leur mot de passe. <br /><strong>Note:</strong> Les placeholders suivants sont remplacés par le gestionnaire de contenu lors de l\'envoi du message: <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse email de votre site internet, <br />[[+surl]] - URL de votre site, <br />[[+uid]] - Identifiant ou id d\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'email ou le nom d\'utilisateur et le mot de passe ne seront pas envoyés par email et vos utilisateurs ne pourront se connecter!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\n\nNom d\'utilisateur: [[+uid]]\nMot de passe: [[+pwd]]\n\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\n\nCordialement,\nl\'administrateur du site';
@@ -595,6 +631,12 @@ $_lang['setting_tree_default_sort_desc'] = 'Le champ par défaut utilisé pour c
 
 $_lang['setting_tree_root_id'] = 'ID racine de l\'arborescence';
 $_lang['setting_tree_root_id_desc'] = 'Indiquez un ID valide de ressource pour démarrer l\'arborescence de ressource (à gauche) en dessous de cette ressource. Les utilisateurs veront uniquement les ressources qui sont enfants de la ressource spécifiée.';
+
+$_lang['setting_tvs_below_content'] = 'TVs en dessous du contenu';
+$_lang['setting_tvs_below_content_desc'] = 'Activez cette option pour afficher les variables de modèle en dessous du contenu, lors de l\'édition de ressource.';
+
+$_lang['setting_ui_debug_mode'] = 'Mode debug de l\'UI';
+$_lang['setting_ui_debug_mode_desc'] = 'Activez cette option pour afficher les messages de debug lors de l\'utilisation du thème de manager par défaut. Vous devez utiliser un navigateur qui supporte console.log.';
 
 $_lang['setting_udperms_allowroot'] = 'Accès racine';
 $_lang['setting_udperms_allowroot_desc'] = 'Voulez-vous autoriser vos utilisateurs à créer de nouvelles ressources à la racine du site?';
