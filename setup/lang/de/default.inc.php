@@ -1,6 +1,6 @@
 <?php
 /**
- * German Default Lexicon Topic for Revolution setup
+ * German language files for Revolution 2.0.0 setup
  *
  * @package setup
  * @subpackage lexicon

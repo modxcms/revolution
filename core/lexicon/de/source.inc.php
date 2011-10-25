@@ -16,7 +16,7 @@ $_lang['base_path'] = 'Basispfad';
 $_lang['base_path_relative'] = 'Basispfad relativ?';
 $_lang['base_url'] = 'Basis-URL';
 $_lang['base_url_relative'] = 'Basis-URL relativ?';
-$_lang['minimum_role'] = 'Mindest-Rolle';
+$_lang['minimum_role'] = 'Mindestens benötigte Rolle';
 $_lang['path_options'] = 'Pfad-Optionen';
 $_lang['policy'] = 'Zugriffs-Richtlinie';
 $_lang['source'] = 'Medienquelle';
@@ -46,6 +46,8 @@ $_lang['source.access.intro_msg'] = 'Hier können Sie den Zugriff auf eine Medie
 $_lang['sources'] = 'Medienquellen';
 $_lang['sources.intro_msg'] = 'Verwalten Sie hier alle Ihre Medienquellen.';
 $_lang['user_group'] = 'Benutzergruppe';
+
+/* file source type */
 $_lang['prop_file.allowedFileTypes_desc'] = 'Wenn hier etwas eingegeben wird, wird die Anzeige von Dateien auf diejenigen mit den angegebenen Dateiendungen beschränkt. Bitte geben Sie eine kommaseparierte Liste von Dateiendungen ein, ohne den Punkt vor der Endung.';
 $_lang['prop_file.basePath_desc'] = 'Der Dateipfad, auf den die Quelle zeigt.';
 $_lang['prop_file.basePathRelative_desc'] = 'Wenn die Basispfad-Einstellung oben nicht relativ zum MODX-Installationspfad angegeben wurde, setzen Sie diese Einstellung auf "Ja".';
@@ -56,6 +58,8 @@ $_lang['prop_file.imageExtensions_desc'] = 'Eine kommaseparierte Liste von Datei
 $_lang['prop_file.skipFiles_desc'] = 'Eine kommaseparierte Liste. MODX versteckt Dateien und Ordner, die auf einen Eintrag dieser Liste passen.';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Die Qualität der generierten Thumbnails, auf einer Skala von 0 bis 100.';
 $_lang['prop_file.thumbnailType_desc'] = 'Der Bildtyp der generierten Thumbnails.';
+
+/* s3 source type */
 $_lang['bucket'] = 'Bucket';
 $_lang['prop_s3.bucket_desc'] = 'Der S3-Bucket, aus dem Ihre Daten geladen werden.';
 $_lang['prop_s3.key_desc'] = 'Der Amazon-Benutzername (Access Key ID) für den Zugriff auf den Bucket.';

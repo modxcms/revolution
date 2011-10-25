@@ -1,5 +1,7 @@
 <?php
 /**
+ * TV German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -17,10 +19,10 @@ $_lang['tv_access_msg'] = 'Wählen Sie die Ressourcen-Gruppen, denen diese Templ
 $_lang['tv_binding_msg'] = 'Dieses Feld unterstützt Datenbindung mittels der @-Befehle.';
 $_lang['tv_caption'] = 'Bezeichnung';
 $_lang['tv_change_template_msg'] = 'Das Wechseln des Templates führt dazu, dass die Template-Variablen neu geladen werden, wobei alle nicht gespeicherten Änderungen verloren gehen.<br /><br />Sind Sie sicher, dass Sie das Template wechseln möchten?';
-$_lang['tv_desc_caption'] = 'The text that will be used beside the TV when editing it in a Resource.';
-$_lang['tv_desc_category'] = 'The Category this TV belongs in.';
-$_lang['tv_desc_description'] = 'A short description of this TV.';
-$_lang['tv_desc_name'] = 'The name of this TV. It will be available using the [[*NameOfTV]] tags.';
+$_lang['tv_desc_caption'] = 'Der Text, der neben der TV angezeigt wird, wenn diese in einer Ressource bearbeitet wird.';
+$_lang['tv_desc_category'] = 'Die Kategorie, zu der diese TV gehört.';
+$_lang['tv_desc_description'] = 'Eine kurze Beschreibung dieser TV.';
+$_lang['tv_desc_name'] = 'Der Name dieser TV. Die TV kann dann mittels der [[*NameOfTV]]-Tags genutzt werden.';
 $_lang['tv_description'] = 'Beschreibung';
 $_lang['tv_err_delete'] = 'Ein Fehler trat auf beim Löschen der Template-Variable.';
 $_lang['tv_err_duplicate'] = 'Ein Fehler trat auf beim Versuch, die Template-Variable zu duplizieren.';
@@ -51,7 +53,7 @@ $_lang['tv_output_options_msg'] = '<p>Hier können Sie die Ausgabe-Optionen für
 $_lang['tv_properties'] = 'Standardeigenschaften';
 $_lang['tv_rank'] = 'Sortierreihenfolge';
 $_lang['tv_reset_params'] = 'Parameter zurücksetzen';
-$_lang['tv_sources.intro_msg'] = 'Hier können Sie die Medienquellen, die für diese TV genutzt werden sollen, für jeden (den jeweils?) angegebenen Kontext zuordnen. Klicken Sie in der Übersicht doppelt auf den Quellen-Namen, um die Zuordnung zu ändern.';
+$_lang['tv_sources.intro_msg'] = 'Hier können Sie die Medienquellen, die für diese TV genutzt werden sollen, für den jeweils angegebenen Kontext zuordnen. Klicken Sie in der Übersicht doppelt auf den Quellen-Namen, um die Zuordnung zu ändern.';
 $_lang['tv_tmpl_access'] = 'Template-Zugriff';
 $_lang['tv_tmpl_access_msg'] = 'Wählen Sie die Templates, die auf diese Template-Variable zugreifen dürfen.';
 $_lang['tv_widget'] = 'Widget';

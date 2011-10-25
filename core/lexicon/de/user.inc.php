@@ -1,5 +1,7 @@
 <?php
 /**
+ * User German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -38,9 +40,9 @@ $_lang['profile_recent_resources_desc'] = 'Diese Liste zeigt die von Ihnen zulet
 $_lang['remote_data'] = 'Externe Daten';
 $_lang['role'] = 'Rolle';
 $_lang['role_create'] = 'Rolle erstellen';
-$_lang['role_desc_authority'] = 'The Authority level of the role. Lower Authority levels are stronger, and inherit the Permissions of Roles with higher authorities in the groups they are assigned to.';
-$_lang['role_desc_name'] = 'A name for the Role, such as Content Editor, Publisher, System Administrator, etc.';
-$_lang['role_desc_description'] = 'A short description of the Role.';
+$_lang['role_desc_authority'] = 'Die Autoritäts-Ebene der Rolle. Niedrigere Autoritäts-Ebenen (also solche mit einem niedrigeren Zahlenwert) haben mehr Befugnisse und erben die Berechtigungen von Rollen mit geringerer Autorität in den Gruppen, denen sie zugeordnet sind.';
+$_lang['role_desc_name'] = 'Ein Name für die Rolle, wie z.B. Redakteur, Herausgeber, Systemadministrator etc.';
+$_lang['role_desc_description'] = 'Eine kurze Beschreibung der Rolle.';
 $_lang['role_err_ae'] = 'Eine Rolle mit dem Namen existiert bereits.';
 $_lang['role_err_duplicate'] = 'Ein Fehler trat auf beim Duplizieren der Rolle.';
 $_lang['role_err_has_users'] = 'Es gibt Benutzer mit dieser Rolle. Sie kann nicht gelöscht werden.';
@@ -87,9 +89,9 @@ $_lang['user_err_cannot_delete_last_admin'] = 'Sie können den letzten verbliebe
 $_lang['user_err_cannot_delete_self'] = 'Sie können sich nicht selbst löschen!';
 $_lang['user_err_nf'] = 'Benutzer nicht gefunden.';
 $_lang['user_err_not_specified'] = 'Kein Benutzer angegeben!';
-$_lang['user_err_not_specified_blockedafter'] = 'Bitte geben Sie das Datum, ab dem der Benutzer geblockt werden soll, im Format TT/MM/JJJJ an.';
-$_lang['user_err_not_specified_blockeduntil'] = 'Bitte geben Sie das Datum, bis zu dem der Benutzer geblockt werden soll, im Format TT/MM/JJJJ an.';
-$_lang['user_err_not_specified_dob'] = 'Bitte geben Sie das Geburtsdatum im Format TT/MM/JJJJ an. ';
+$_lang['user_err_not_specified_blockedafter'] = 'Bitte geben Sie das Datum, ab dem der Benutzer geblockt werden soll, im Format TT/MM/JJJJ an.';  // mm/dd/yyyy
+$_lang['user_err_not_specified_blockeduntil'] = 'Bitte geben Sie das Datum, bis zu dem der Benutzer geblockt werden soll, im Format TT/MM/JJJJ an.';  // mm/dd/yyyy
+$_lang['user_err_not_specified_dob'] = 'Bitte geben Sie das Geburtsdatum im Format TT/MM/JJJJ an. ';  // mm/dd/yyyy
 $_lang['user_err_not_specified_email'] = 'Bitte geben Sie eine gültige E-Mail-Adresse an.';
 $_lang['user_err_not_specified_fileman_path'] = 'Das Verzeichnis, das Sie angegeben haben, existiert nicht, hat keine Leserechte oder ist kein Verzeichnis.';
 $_lang['user_err_not_specified_manageraccess'] = 'Bitte geben Sie an, ob der Benutzer Zugriff auf den MODX-Manager haben soll.';
@@ -121,10 +123,10 @@ $_lang['user_full_name'] = 'Vollständiger Name';
 $_lang['user_group'] = 'Benutzergruppe';
 $_lang['user_group_create'] = 'Benutzergruppe anlegen';
 $_lang['user_group_id'] = 'UG-ID';
-$_lang['user_group_desc_name'] = 'The name of the User Group';
-$_lang['user_group_desc_description'] = 'A short description of the User Group';
-$_lang['user_group_desc_parent'] = 'The parent group of this group. Used for organizational purposes.';
-$_lang['user_group_desc_dashboard'] = 'The Dashboard that members of this Group (who have this Group as their Primary Group) will use.';
+$_lang['user_group_desc_name'] = 'Der Name der Benutzergruppe';
+$_lang['user_group_desc_description'] = 'Eine kurze Beschreibung der Benutzergruppe';
+$_lang['user_group_desc_parent'] = 'Die Eltern-Gruppe dieser Gruppe. Wird für organisatorische Zwecke verwendet.';
+$_lang['user_group_desc_dashboard'] = 'Das Dashboard, das Mitglieder dieser Gruppe (die diese Gruppe als ihre primäre Gruppe haben) benutzen.';
 $_lang['user_group_document_group_err_already_exists'] = 'Die Benutzergruppe ist dieser Dokumentgruppe bereits zugeordnet.';
 $_lang['user_group_document_group_err_create'] = 'Ein Fehler trat auf beim Versuch, die Benutzergruppe der Dokumentgruppe zuzuordnen.';
 $_lang['user_group_document_group_err_not_found'] = 'Diese Benutzergruppe ist dieser Dokumentgruppe nicht zugeordnet!';
@@ -151,8 +153,8 @@ $_lang['user_group_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Benutzerg
 $_lang['user_group_untitled'] = 'Unbenannte Benutzregruppe';
 $_lang['user_group_update'] = 'Benutzergruppe bearbeiten';
 $_lang['user_group_user_add'] = 'Benutzer zur Gruppe hinzufügen';
-$_lang['user_group_user_add_user_desc'] = 'The username of the User to add to the User Group';
-$_lang['user_group_user_add_role_desc'] = 'The Role that the User should have in the Group. This may affect the Permissions that the User is granted.';
+$_lang['user_group_user_add_user_desc'] = 'Der Benutzername des Benutzers, der zu der Benutzergruppe hinzugefügt werden soll';
+$_lang['user_group_user_add_role_desc'] = 'Die Rolle, die der Benutzer in der Gruppe haben soll. Dies kann sich auf Berechtigungen auswirken, die der Benutzer hat.';
 $_lang['user_group_user_remove'] = 'Benutzer aus der Gruppe entfernen';
 $_lang['user_group_user_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Benutzer aus der Gruppe entfernen möchten?';
 $_lang['user_group_user_update_role'] = 'Rolle des Benutzers in der Benutzergruppe ändern';

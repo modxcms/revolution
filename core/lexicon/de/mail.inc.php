@@ -1,5 +1,7 @@
 <?php
 /**
+ * Mail German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

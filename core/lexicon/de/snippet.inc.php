@@ -1,5 +1,7 @@
 <?php
 /**
+ * Snippet German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -14,9 +16,9 @@ $_lang['snippets_available'] = 'Snippets, die Sie in Ihre Seite einbinden könne
 $_lang['snippet_code'] = 'Snippet-Code (PHP)';
 $_lang['snippet_delete_confirm'] = 'Sind Sie sicher, dass Sie dieses Snippet löschen möchten?';
 $_lang['snippet_desc'] = 'Beschreibung';
-$_lang['snippet_desc_category'] = 'The Category this Snippet belongs in.';
-$_lang['snippet_desc_description'] = 'A short description of this Snippet.';
-$_lang['snippet_desc_name'] = 'The name of this Snippet. It will be available using the [[NameOfSnippet]] tags.';
+$_lang['snippet_desc_category'] = 'Die Kategorie, zu der dieses Snippet gehört.';
+$_lang['snippet_desc_description'] = 'Eine kurze Beschreibung dieses Snippets.';
+$_lang['snippet_desc_name'] = 'Der Name dieses Snippets. Das Snippet kann dann mittels der [[NameOfSnippet]]-Tags genutzt werden.';
 $_lang['snippet_duplicate_confirm'] = 'Sind Sie sicher, dass Sie dieses Snippet duplizieren möchten?';
 $_lang['snippet_duplicate_error'] = 'Ein Fehler trat auf beim Duplizieren des Snippets.';
 $_lang['snippet_err_create'] = 'Ein Fehler trat auf beim Erstellen des Snippets.';
