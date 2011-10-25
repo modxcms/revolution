@@ -37,7 +37,7 @@ class modWorkspace extends xPDOSimpleObject {
         $result= parent :: get($k, $format, $formatTemplate);
         if ($k === 'path' && strpos($result, '{') !== false) {
             $replacements = array();
-            array_walk($this->xpdo->config, array($this, 'prepareReplacements', $replacements));
+            array_walk($this->xpdo->config, array($this, 'prepareReplacements'), $replacements);
             $result = str_replace(array_keys($replacements), array_values($replacements), $result);
         }
         return $result;
