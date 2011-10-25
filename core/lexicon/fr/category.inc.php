@@ -9,6 +9,7 @@
 $_lang['categories'] = 'Catégories';
 $_lang['category_confirm_delete'] = 'Voulez-vous vraiment supprimer cette catégorie? Tous les éléments de cette catégorie seront déplacés dans "sans catégorie".';
 $_lang['category_create'] = 'Créer une catégorie';
+$_lang['category_err_ae'] = 'Une catégorie portant ce nom existe déjà. Veuillez choisir un autre nom.';
 $_lang['category_err_create'] = 'Une erreur s\'est produite lors de la création de la catégorie.';
 $_lang['category_err_not_found'] = 'La catégorie est introuvable!';
 $_lang['category_err_nf'] = 'La catégorie est introuvable.';
