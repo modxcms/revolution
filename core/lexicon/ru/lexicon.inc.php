@@ -1,5 +1,5 @@
 <?php
-$_lang['duplicate'] = 'Сделать копию';
+$_lang['duplicate'] = 'Копировать';
 $_lang['entry'] = 'Запись';
 $_lang['entry_create'] = 'Создать запись';
 $_lang['entry_err_ae'] = 'Такая запись уже существует!';
