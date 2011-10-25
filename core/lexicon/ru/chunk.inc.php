@@ -24,5 +24,5 @@ $_lang['chunk_name'] = 'Имя чанка';
 $_lang['chunk_new'] = 'Новый чанк';
 $_lang['chunk_properties'] = 'Параметры по умолчанию';
 $_lang['chunk_title'] = 'Создать/редактировать чанк';
-$_lang['chunk_untitled'] = 'Безымянный Чанк';
+$_lang['chunk_untitled'] = 'Безымянный чанк';
 $_lang['chunks'] = 'Чанки';
