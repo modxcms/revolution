@@ -210,7 +210,7 @@ $_lang['setting_default_content_type'] = 'Type de contenu par défaut';
 $_lang['setting_default_content_type_desc'] = 'Indiquez le type de contenu par défaut à utiliser pour les nouvelles ressources. Vous pourrez toujours sélectionner un type de contenu différent lorsque vous éditerez une ressource; ce paramètre pré-selectionne seulement le type de contenu.';
 
 $_lang['setting_default_duplicate_publish_option'] = 'Option de publication lors de la duplication de ressource';
-$_lang['setting_default_duplicate_publish_option_desc'] = 'L\'option sélectionnée par défaut lors de la duplication d\'une ressource. Peut être « dépublié » pour dépublier toutes les ressources dupliquées, ou « préserver » pour conserver le status de la ressource originale (sur la ressource dupliquée).';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'L\'option sélectionnée par défaut lors de la duplication d\'une ressource. Peut être « unpublish » pour dépublier toutes les ressources dupliquées, « publish » pour publier toutes les ressources dupliquées ou « preserve » pour conserver le status de la ressource originale (sur la ressource dupliquée).';
 
 $_lang['setting_default_media_source'] = 'Media Source par défaut';
 $_lang['setting_default_media_source_desc'] = 'Media Source à charger par défaut.';
