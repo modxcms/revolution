@@ -389,7 +389,7 @@
     
     <object class="modContextResource" table="context_resource" extends="xPDOObject">
         <field key="context_key" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
-        <field key="resource" dbtype="int" precision="11" attributes="unsigned" phptype="string" null="false" index="pk" />
+        <field key="resource" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" index="pk" />
         
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="context_key" collation="A" null="false" />
