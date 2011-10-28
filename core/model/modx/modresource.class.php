@@ -736,11 +736,16 @@ class modResource extends modAccessibleSimpleObject {
      * TV is not found.
      */
     public function getTVValue($pk) {
+        $byName = false;
         if (is_string($pk)) {
-            $pk = array('name' => $pk);
+            $byName = true;
         }
         /** @var modTemplateVar $tv */
-        $tv = $this->xpdo->getObject('modTemplateVar',$pk);
+        if ($byName && $this->xpdo instanceof modX) {
+            $tv = $this->xpdo->getParser()->getElement('modTemplateVar', $pk);
+        } else {
+            $tv = $this->xpdo->getObject('modTemplateVar', $byName ? array('name' => $pk) : $pk);
+        }
         return $tv == null ? null : $tv->renderOutput($this->get('id'));
     }
 
