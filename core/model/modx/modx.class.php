@@ -576,7 +576,7 @@ class modX extends xPDO {
      * content, performing actions, returning content and/or sending other responses
      * in the process.
      *
-     * @return object The modParser for this modX instance.
+     * @return modParser The modParser for this modX instance.
      */
     public function getParser() {
         return $this->getService('parser', 'modParser');
