@@ -17,6 +17,7 @@ $_lang['back_txt'] = 'Terug';
 $_lang['breaks_at'] = 'Ondersteund tot';
 $_lang['by'] = 'door';
 $_lang['changelog'] = 'Changelog';
+$_lang['curl_not_installed'] = 'cURL moet geinstalleerd en geconfigureerd zijn als extentie voor PHP, voor jou, om Package Management te kunnen gebruiken. Je kunt meer informatie vinden over cURL op de <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['changelog_desc'] = 'Bekijk de changelog voor deze versie.';
 $_lang['core_err_invalid'] = 'Je dient een correcte core installatie met de active werkruimte te hebben om deze build uit te voeren.';
 $_lang['description'] = 'Omschrijving';
