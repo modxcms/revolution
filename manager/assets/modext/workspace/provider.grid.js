@@ -134,7 +134,7 @@ MODx.window.UpdateProvider = function(config) {
         },{
             fieldLabel: _('username')
             ,name: 'username'
-            ,id: 'modx-cprov-username'
+            ,id: 'modx-uprov-username'
             ,xtype: 'textfield'
             ,anchor: '100%'
         },{
