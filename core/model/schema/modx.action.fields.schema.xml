@@ -72,50 +72,36 @@
             <field name="modx-resource-content" />
         </tab>
     </action>
-
     <action controller="resource/create" form="modx-panel-resource">
         <tab name="modx-resource-settings">
-        </tab>
-        <tab name="modx-resource-main-left">
-            <field name="id" />
+            <field name="template" />
+            <field name="published" />
             <field name="pagetitle" />
             <field name="longtitle" />
             <field name="description" />
-            <field name="introtext" />
-        </tab>
-        <tab name="modx-resource-main-right">
-            <field name="template" />
             <field name="alias" />
-            <field name="menutitle" />
             <field name="link_attributes" />
+            <field name="introtext" />
+            <field name="parent-cmb" />
+            <field name="menutitle" />
+            <field name="menuindex" />
             <field name="hidemenu" />
-            <field name="published" />
         </tab>
         <tab name="modx-page-settings">
-        </tab>
-        <tab name="modx-page-settings-left">
-            <field name="parent-cmb" />
-            <field name="class_key" />
-            <field name="content_type" />
-            <field name="content_dispo" />
-            <field name="menuindex" />
-        </tab>
-        <tab name="modx-page-settings-right">
+            <field name="isfolder" />
+            <field name="richtext" />
             <field name="publishedon" />
             <field name="pub_date" />
             <field name="unpub_date" />
-        </tab>
-        <tab name="modx-page-settings-right-box-left">
-            <field name="isfolder" />
             <field name="searchable" />
-            <field name="richtext" />
-            <field name="uri_override" />
-            <field name="uri" />
-        </tab>
-        <tab name="modx-page-settings-right-box-right">
             <field name="cacheable" />
             <field name="syncsite" />
             <field name="deleted" />
+            <field name="content_type" />
+            <field name="content_dispo" />
+            <field name="class_key" />
+            <field name="uri_override" />
+            <field name="uri" />
         </tab>
         <tab name="modx-panel-resource-tv" other="tv" />
         <tab name="modx-resource-access-permissions" />
