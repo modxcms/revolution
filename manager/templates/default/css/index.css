@@ -1414,9 +1414,18 @@ span.required {
 
 /* tv table */
 #modx-tv-tabs {width: 100%;}
-#modx-tv-tabs .modx-tv {
-    padding-top: 0;
+.modx-tv {
     margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 15px 0 !important;
+}
+#modx-tv-tabs .tv-first {
+    padding-top: 0 !important;
+}
+#modx-tv-tabs .tv-last {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 .modx-tv-label {
     width: auto !important;
@@ -1464,11 +1473,6 @@ span.required {
     display: block;
     padding-top: 4px;
     float: right;
-}
-.modx-tv {
-    width: 100%;
-    border-bottom: 1px solid #f4f4f4;
-    padding: 10px 0 !important;
 }
 #modx-resource-settings .modx-tv-label, #modx-page-settings .modx-tv-label {
     width: 216px;
