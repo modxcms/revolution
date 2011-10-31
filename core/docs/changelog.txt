@@ -2,9 +2,9 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- [#5948] Ensure that menu item for Change Profile is added on build
+- [#5936] Fix issue where Quick Update Resource was too high on smaller screens
 - Fix issue with phpThumb and zoom crop
-- [#5983] Fix adding/updating a provider window duplicating "username" field.
+- [#5983] Fix adding/updating a provider window duplicating "username" field.[#5948] Ensure that menu item for Change Profile is added on build
 - [#5985] Fix updating a provider not showing username
 - [#5978] [ReUp] [#5978] Fix missing fields/tabs in actions XML causing issues with form customization on resource/create
 - [#5938] Optimize modResource->getTVValue() using parser source cache when available

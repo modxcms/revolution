@@ -833,7 +833,7 @@ MODx.window.QuickUpdateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_resource')
         ,id: this.ident
-        ,width: 620
+        ,width: 700
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'update'
         ,autoHeight: true
@@ -974,7 +974,8 @@ Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 MODx.getQRContentField = function(id,cls) {
     id = id || 'qur';
-    cls = cls || 'modResource';    
+    cls = cls || 'modResource';
+    var dm = Ext.getBody().getViewSize();
     var o = {};
     switch (cls) {
         case 'modSymLink':
@@ -1031,7 +1032,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,hideLabel: true
                 ,labelSeparator: ''
                 ,anchor: '100%'
-                ,height: 280
+                ,height: dm.height <= 768 ? 200 : 280
             };
             break;
     }
