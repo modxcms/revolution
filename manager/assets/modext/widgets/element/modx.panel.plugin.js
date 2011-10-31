@@ -182,7 +182,7 @@ MODx.panel.Plugin = function(config) {
                         ,id: 'modx-plugin-static-source'
                         ,anchor: '100%'
                         ,maxLength: 255
-                        ,value: config.record.source || MODx.config.default_media_source
+                        ,value: config.record.source != null ? config.record.source : MODx.config.default_media_source
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
