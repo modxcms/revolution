@@ -844,6 +844,7 @@ $children[0]->fromArray(array (
   'description' => 'profile_desc',
   'icon' => '',
   'menuindex' => 0,
+  'permissions' => 'change_profile',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
