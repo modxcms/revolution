@@ -246,6 +246,10 @@ class modX extends xPDO {
      */
     public $rest;
     /**
+     * @var array $processors An array of loaded processors and their class name
+     */
+    public $processors = array();
+    /**
      * @var array An array of regex patterns regulary cleansed from content.
      */
     public $sanitizePatterns = array(
@@ -1496,7 +1500,13 @@ class modX extends xPDO {
             if (!isset($this->error)) $this->request->loadErrorHandler();
 
             if ($isClass) {
-                $className = include $processorFile;
+                /* ensure processor file is only included once if run multiple times in a request */
+                if (!array_key_exists($processorFile,$this->processors)) {
+                    $className = include $processorFile;
+                    $this->processors[$processorFile] = $className;
+                } else {
+                    $className = $this->processors[$processorFile];
+                }
                 if (!empty($className)) {
                     $c = new $className($this,$scriptProperties);
                     $processor = call_user_func_array(array($c,'getInstance'),array($this,$className,$scriptProperties));

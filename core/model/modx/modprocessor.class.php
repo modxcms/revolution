@@ -55,7 +55,7 @@ abstract class modProcessor {
      */
     public function setProperties($properties) {
         unset($properties['HTTP_MODAUTH']);
-        $this->properties = $properties;
+        $this->properties = array_merge($this->properties,$properties);
     }
 
     /**

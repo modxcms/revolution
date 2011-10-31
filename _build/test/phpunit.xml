@@ -42,6 +42,7 @@
             <directory>Tests/Processors/Context</directory>
             <directory>Tests/Processors/Element</directory>
             <directory>Tests/Processors/System</directory>
+            <directory>Tests/Processors/Resource</directory>
         </testsuite>
         <testsuite name="Cases">
             <directory>Tests/Cases/Request/</directory>
