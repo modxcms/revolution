@@ -12,7 +12,7 @@ MODx.grid.Provider = function(config) {
     Ext.applyIf(config,{
         title: _('providers')
         ,url: MODx.config.connectors_url+'workspace/providers.php'
-        ,fields: ['id','name','description','service_url','api_key','menu']
+        ,fields: ['id','name','description','service_url','username','api_key','menu']
         ,paging: true
         ,autosave: true
         ,columns: [{
