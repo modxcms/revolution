@@ -3,6 +3,43 @@
  * @package modx
  */
 /**
+ * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
+ * class to properly implement a Custom Resource Type in MODX.
+ * 
+ * @see modResource
+ * @interface
+ * @package modx
+ */
+interface modResourceInterface {
+    /**
+     * Determine the controller path for this Resource class. Return an absolute path.
+     * 
+     * @static
+     * @param xPDO $modx A reference to the modX object
+     * @return string The absolute path to the controller for this Resource class
+     */
+    public static function getControllerPath(xPDO &$modx);
+
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true. Return in the following format:
+     *
+     * array(
+     *  'text_create' => 'ResourceTypeName',
+     *  'text_create_here' => 'Create ResourceTypeName Here',
+     * );
+     *
+     * @return array
+     */
+    public function getContextMenuText();
+
+    /**
+     * Use this in your extended Resource class to return a translatable name for the Resource Type.
+     * @return string
+     */
+    public function getResourceTypeName();
+}
+/**
  * Represents a web resource managed by the MODX framework.
  *
  * @property int $id The ID of the Resource
@@ -51,7 +88,7 @@
  * @see modContentType
  * @package modx
  */
-class modResource extends modAccessibleSimpleObject {
+class modResource extends modAccessibleSimpleObject implements modResourceInterface {
     /**
      * Represents the cacheable content for a resource.
      *

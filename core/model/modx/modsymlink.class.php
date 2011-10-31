@@ -10,7 +10,7 @@
  * @package modx
  * @extends modResource
  */
-class modSymLink extends modResource {
+class modSymLink extends modResource implements modResourceInterface {
     /**
      * Overrides modResource::__construct to set the class key for this Resource type
      * @param xPDO $xpdo A reference to the xPDO|modX instance

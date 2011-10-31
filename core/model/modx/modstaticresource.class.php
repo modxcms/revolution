@@ -9,7 +9,7 @@
  *
  * @package modx
  */
-class modStaticResource extends modResource {
+class modStaticResource extends modResource implements modResourceInterface {
     /**
      * @var string Path of the file containing the source content, relative to
      * the {@link modStaticResource::$_sourcePath}.
