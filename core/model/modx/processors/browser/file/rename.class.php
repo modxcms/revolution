@@ -23,9 +23,9 @@ class modBrowserFileRenameProcessor extends modProcessor {
         }
         $oldFile = $this->getProperty('path');
 
-        $source = $this->getSource();
-        if ($source !== true) {
-            return $source;
+        $loaded = $this->getSource();
+        if (!($this->source instanceof modMediaSource)) {
+            return $loaded;
         }
 
         $success = $this->source->renameObject($oldFile,$this->getProperty('name'));
@@ -48,12 +48,12 @@ class modBrowserFileRenameProcessor extends modProcessor {
         $source = $this->getProperty('source',1);
         /** @var modMediaSource $source */
         $this->modx->loadClass('sources.modMediaSource');
-        $source = modMediaSource::getDefaultSource($this->modx,$source);
-        if (!$source->getWorkingContext()) {
+        $this->source = modMediaSource::getDefaultSource($this->modx,$source);
+        if (!$this->source->getWorkingContext()) {
             return $this->modx->lexicon('permission_denied');
         }
-        $source->setRequestProperties($this->getProperties());
-        return $source->initialize();
+        $this->source->setRequestProperties($this->getProperties());
+        return $this->source->initialize();
     }
 
     /**

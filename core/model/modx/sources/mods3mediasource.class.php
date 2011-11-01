@@ -31,7 +31,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Initializes S3 media class, getting the S3 driver and loading the bucket
-     * @return void
+     * @return boolean
      */
     public function initialize() {
         parent::initialize();
@@ -52,6 +52,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         $this->getDriver();
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
+        return true;
     }
 
     /**

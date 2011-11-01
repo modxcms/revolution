@@ -23,6 +23,11 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (empty($scriptProperties['file'])) return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
         $source = $this->modx->getOption('source',$scriptProperties,1);
 
+        $loaded = $this->getSource();
+        if (!($this->source instanceof modMediaSource)) {
+            return $loaded;
+        }
+        
         /** @var modMediaSource $source */
         $this->modx->loadClass('sources.modMediaSource');
         $source = modMediaSource::getDefaultSource($this->modx,$source);
@@ -42,6 +47,21 @@ class modBrowserFileRemoveProcessor extends modProcessor {
             return $this->failure();
         }
         return $this->success();
+    }
+
+    /**
+     * @return boolean|string
+     */
+    public function getSource() {
+        $source = $this->getProperty('source',1);
+        /** @var modMediaSource $source */
+        $this->modx->loadClass('sources.modMediaSource');
+        $this->source = modMediaSource::getDefaultSource($this->modx,$source);
+        if (!$this->source->getWorkingContext()) {
+            return $this->modx->lexicon('permission_denied');
+        }
+        $this->source->setRequestProperties($this->getProperties());
+        return $this->source->initialize();
     }
 }
 return 'modBrowserFileRemoveProcessor';

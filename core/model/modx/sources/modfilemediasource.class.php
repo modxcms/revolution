@@ -17,6 +17,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
     /**
      * {@inheritDoc}
+     * @return boolean
      */
     public function initialize() {
         parent::initialize();
@@ -26,6 +27,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         }
         $options['context'] = $this->ctx->get('key');
         $this->fileHandler = $this->xpdo->getService('fileHandler','modFileHandler', '',$options);
+        return true;
     }
 
     /**
