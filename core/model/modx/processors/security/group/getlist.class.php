@@ -70,6 +70,7 @@ class modUserGroupGetListProcessor extends modProcessor {
      * @return array
      */
     public function getData() {
+        $data = array();
         $c = $this->modx->newQuery('modUserGroup');
 
         $exclude = $this->getProperty('exclude','');
