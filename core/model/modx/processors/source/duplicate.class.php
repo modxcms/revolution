@@ -4,11 +4,7 @@
  *
  * @param integer $id The source to duplicate
  * @param string $name The name of the new source.
- *
- * @var modX $this->modx
- * @var array $scriptProperties
- * @var modProcessor $this
- *
+ * 
  * @package modx
  * @subpackage processors.source
  */
