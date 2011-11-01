@@ -132,6 +132,7 @@ $_lang['user_group_err_nf'] = 'User group not found!';
 $_lang['user_group_err_not_found'] = 'User group not found!';
 $_lang['user_group_err_not_specified'] = 'No user group specified!';
 $_lang['user_group_err_ns'] = 'User group not specified!';
+$_lang['user_group_err_ns_name'] = 'Please specify a name for this user group.';
 $_lang['user_group_err_remove'] = 'An error occurred while trying to remove the user group.';
 $_lang['user_group_err_remove_admin'] = 'You cannot remove the Administrator group.';
 $_lang['user_group_err_save'] = 'An error occurred while trying to save the user group.';

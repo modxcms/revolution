@@ -56,3 +56,4 @@ class modResourceEventUpdateFromGrid extends modProcessor {
         return true;
     }
 }
+return 'modResourceEventUpdateFromGrid';
