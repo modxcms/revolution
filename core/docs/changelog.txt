@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.4-pl (November 1, 2011)
+====================================
 - [#5973] Prevent empty user groups being loaded for anonymous users
 - [#5909] Allow blank extensions in Add Content Type window
 - [#3287] Fix issue with dob User field in editing panel in mgr
