@@ -221,7 +221,7 @@ abstract class modProcessor {
      */
     public function outputArray(array $array,$count = false) {
         if ($count === false) { $count = count($array); }
-        return '({"total":"'.$count.'","results":'.$this->modx->toJSON($array).'})';
+        return '{"total":"'.$count.'","results":'.$this->modx->toJSON($array).'}';
     }
 
     /**
