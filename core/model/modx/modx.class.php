@@ -850,14 +850,15 @@ class modX extends xPDO {
      *    http : URL is absolute, forced to http scheme
      *   https : URL is absolute, forced to https scheme
      * </pre>
+     * @param array $options An array of options for generating the Resource URL.
      * @return string The URL for the resource.
      */
-    public function makeUrl($id, $context= '', $args= '', $scheme= -1) {
+    public function makeUrl($id, $context= '', $args= '', $scheme= -1, array $options= array()) {
         $url= '';
         if ($validid = intval($id)) {
             $id = $validid;
             if ($context == '' || $this->context->get('key') == $context) {
-                $url= $this->context->makeUrl($id, $args, $scheme);
+                $url= $this->context->makeUrl($id, $args, $scheme, $options);
             }
             if (empty($url) && ($context !== $this->context->get('key'))) {
                 $ctx= null;
@@ -872,11 +873,11 @@ class modX extends xPDO {
                     $ctx = $this->getContext($context);
                 }
                 if ($ctx) {
-                    $url= $ctx->makeUrl($id, $args, 'full');
+                    $url= $ctx->makeUrl($id, $args, 'full', $options);
                 }
             }
 
-            if (!empty($url) && $this->getOption('xhtml_urls',null,false)) {
+            if (!empty($url) && $this->getOption('xhtml_urls', $options, false)) {
                 $url= preg_replace("/&(?!amp;)/","&amp;", $url);
             }
         } else {

@@ -1676,6 +1676,15 @@ $settings['use_multibyte']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['use_weblink_target']= $xpdo->newObject('modSystemSetting');
+$settings['use_weblink_target']->fromArray(array (
+  'key' => 'use_weblink_target',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['webpwdreminder_message']= $xpdo->newObject('modSystemSetting');
 $settings['webpwdreminder_message']->fromArray(array (
   'key' => 'webpwdreminder_message',

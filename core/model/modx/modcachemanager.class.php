@@ -111,6 +111,26 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
 
+            /* generate the webLinkMap */
+            $resourceFields= array('id','content');
+            $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
+            $bindings= array (
+                ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
+                ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
+            );
+            $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND r.class_key = 'modWebLink' AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}";
+            $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
+            $collWebLinks = null;
+            if ($criteria->stmt && $criteria->stmt->execute()) {
+                $collWebLinks= & $criteria->stmt;
+            }
+            $results['webLinkMap']= array();
+            if ($collWebLinks) {
+                while ($wl = $collWebLinks->fetch(PDO::FETCH_OBJ)) {
+                    $results['webLinkMap'][$wl->id] = $wl->content;
+                }
+            }
+
             /* generate the eventMap and pluginCache */
             $results['eventMap'] = array();
             $results['pluginCache'] = array();

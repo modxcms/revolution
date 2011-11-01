@@ -1241,6 +1241,7 @@ class modLinkTag extends modTag {
                     $qs = '';
                     $context = '';
                     $scheme = $this->modx->getOption('link_tag_scheme',null,-1);
+                    $options = array();
                     if (is_array($this->_properties) && !empty($this->_properties)) {
                         $qs = array();
                         if (array_key_exists('context', $this->_properties)) {
@@ -1252,6 +1253,10 @@ class modLinkTag extends modTag {
                             unset($this->_properties['scheme']);
                             if (is_numeric($scheme)) $scheme = (integer) $scheme;
                         }
+                        if (array_key_exists('use_weblink_target', $this->_properties)) {
+                            $options['use_weblink_target'] = $this->_properties['use_weblink_target'];
+                            unset($this->_properties['use_weblink_target']);
+                        }
                         foreach ($this->_properties as $propertyKey => $propertyValue) {
                             if (in_array($propertyKey, array('context', 'scheme'))) continue;
                             $qs[]= "{$propertyKey}={$propertyValue}";
@@ -1261,7 +1266,7 @@ class modLinkTag extends modTag {
                             $qs= str_replace(array('%26','%3D'),array('&amp;','='),$qs);
                         }
                     }
-                    $this->_output= $this->modx->makeUrl($this->_output, $context, $qs, $scheme);
+                    $this->_output= $this->modx->makeUrl($this->_output, $context, $qs, $scheme, $options);
                 }
             }
             if (!empty($this->_output)) {
