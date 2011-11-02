@@ -59,7 +59,6 @@ MODx.grid.Package = function(config) {
         },{
             text: _('download_extras')
             ,handler: this.loadMainProvider
-            ,disabled: MODx.curlEnabled ? false : true
         }]
         ,tools: [{
             id: 'plus'

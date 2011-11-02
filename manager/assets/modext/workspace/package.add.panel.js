@@ -67,13 +67,11 @@ MODx.panel.PDFirst = function(config) {
             ,inputValue: 'selprov'
             ,name: 'method'
             ,id: 'modx-pdfirst-selprov'
-            ,hidden: MODx.curlEnabled ? false : true
             ,checked: true
         },{
             boxLabel: _('provider_add')
             ,xtype: 'radio'
             ,inputValue: 'newprov'
-            ,hidden: MODx.curlEnabled ? false : true
             ,name: 'method'
             ,id: 'modx-pdfirst-newprov'
         },{
