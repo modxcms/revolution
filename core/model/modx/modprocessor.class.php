@@ -59,6 +59,15 @@ abstract class modProcessor {
     }
 
     /**
+     * Completely unset a property from the properties array 
+     * @param string $key
+     * @return void
+     */
+    public function unsetProperty($key) {
+        unset($this->properties[$key]);
+    }
+
+    /**
      * Return true here to allow access to this processor.
      * 
      * @return boolean
@@ -491,7 +500,9 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
         $c = $this->prepareQueryAfterCount($c);
 
         $sortClassKey = $this->getSortClassKey();
-        $c->sortby($this->modx->getSelectColumns($sortClassKey,$sortClassKey,'',array($this->getProperty('sort'))),$this->getProperty('dir'));
+        $sortKey = $this->modx->getSelectColumns($sortClassKey,$sortClassKey,'',array($this->getProperty('sort')));
+        if (empty($sortKey)) $sortKey = $this->getProperty('sort');
+        $c->sortby($sortKey,$this->getProperty('dir'));
         if ($limit > 0) {
             $c->limit($limit,$start);
         }
@@ -722,13 +733,22 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
             return $this->failure($preventSave);
         }
 
-        if ($this->object->save() == false) {
+        if ($this->saveObject() == false) {
             return $this->failure($this->modx->lexicon($this->objectType.'_err_save'));
         }
         $this->afterSave();
         $this->fireAfterSaveEvent();
         $this->logManagerAction();
         return $this->cleanup();
+    }
+
+    /**
+     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+     * classes
+     * @return boolean
+     */
+    public function saveObject() {
+        return $this->object->save();
     }
 
     /**

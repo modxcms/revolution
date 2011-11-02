@@ -1,6 +1,5 @@
 <?php
 require_once (dirname(__FILE__) . '/update.class.php');
-
 /**
  * Update a setting from a grid
  *
@@ -20,12 +19,9 @@ class modSystemSettingsUpdateFromGridProcessor extends modSystemSettingsUpdatePr
         if (empty($data)) return $this->modx->lexicon('invalid_data');
         $properties = $this->modx->fromJSON($data);
         $this->setProperties($properties);
+        $this->unsetProperty('data');
 
-        $key = $this->getProperty('key');
-        if (empty($key)) return $this->modx->lexicon('setting_err_ns');
-        $this->setting = $this->modx->getObject('modSystemSetting',$key);
-        if (empty($this->setting)) return $this->modx->lexicon('setting_err_nf');
-        return true;
+        return parent::initialize();
     }
 }
 return 'modSystemSettingsUpdateFromGridProcessor';

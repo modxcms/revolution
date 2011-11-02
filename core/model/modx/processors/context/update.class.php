@@ -12,56 +12,17 @@
  * @package modx
  * @subpackage processors.context
  */
-class modContextUpdateProcessor extends modProcessor {
-    /** @var modContext $context */
-    public $context;
+class modContextUpdateProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'modContext';
+    public $languageTopics = array('context');
+    public $permission = 'edit_context';
+    public $objectType = 'context';
+    public $primaryKeyField = 'key';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('edit_context');
-    }
-
-    public function getLanguageTopics() {
-        return array('context');
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
-    public function initialize() {
-        $key = $this->getProperty('key');
-        if (empty($key)) {
-            return $this->modx->lexicon('context_err_ns');
-        }
-        $this->context = $this->modx->getObject('modContext',$key);
-        if (empty($this->context)) {
-            return $this->modx->lexicon('context_err_nf');
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return array|string
-     */
-    public function process() {
-        /* set values */
-        $this->context->fromArray($this->getProperties());
-
-        /* save context */
-        if ($this->context->save() === false) {
-            $this->modx->error->checkValidation($this->context);
-            return $this->failure($this->modx->lexicon('context_err_save'));
-        }
-        
+    public function afterSave() {
         $this->updateContextSettings();
         $this->runOnUpdateEvent();
-        $this->logManagerAction();
-
-        return $this->success('', $this->context);
-
+        return parent::afterSave();
     }
 
     /**
@@ -77,7 +38,7 @@ class modContextUpdateProcessor extends modProcessor {
         foreach ($settings as $id => $settingArray) {
             /** @var modContextSetting $setting */
             $setting = $this->modx->getObject('modContextSetting',array(
-                'context_key' => $this->context->get('key'),
+                'context_key' => $this->object->get('key'),
                 'key' => $settingArray['key'],
             ));
             if (!$setting) continue;
@@ -104,8 +65,8 @@ class modContextUpdateProcessor extends modProcessor {
         if (!empty($updatedSettings)) {
             $this->modx->cacheManager->refresh(array(
                 'db' => array(),
-                'resource' => array('contexts' => array($this->context->get('key'))),
-                'context_settings' => array('contexts' => array($this->context->get('key'))),
+                'resource' => array('contexts' => array($this->object->get('key'))),
+                'context_settings' => array('contexts' => array($this->object->get('key'))),
             ));
         }
         return $updatedSettings;
@@ -117,17 +78,9 @@ class modContextUpdateProcessor extends modProcessor {
      */
     public function runOnUpdateEvent() {
         $this->modx->invokeEvent('OnContextUpdate',array(
-            'context' => &$this->context,
+            'context' => &$this->object,
             'properties' => $this->getProperties(),
         ));
-    }
-
-    /**
-     * Log manager action for the updating of this Context
-     * @return void
-     */
-    public function logManagerAction() {
-        $this->modx->logManagerAction('context_update','modContext',$this->context->get('key'));
     }
 }
 return 'modContextUpdateProcessor';

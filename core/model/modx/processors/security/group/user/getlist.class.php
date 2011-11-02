@@ -19,12 +19,11 @@ class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('user');
 
     public function initialize() {
-        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
             'usergroup' => false,
             'username' => '',
         ));
-        return $initialized;
+        return parent::initialize();
     }
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
@@ -55,7 +54,9 @@ class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
             'role_name' => 'UserGroupRole.name',
             'authority' => 'UserGroupRole.authority',
         ));
-        $c->sortby('authority','ASC');
+        if ($this->getProperty('sort') !== 'authority') {
+            $c->sortby('authority','ASC');
+        }
         return $c;
     }
 }

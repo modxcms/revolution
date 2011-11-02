@@ -13,91 +13,63 @@
  * @package modx
  * @subpackage processors.system.settings
  */
-class modSystemSettingsUpdateProcessor extends modProcessor {
-    /** @var modSystemSetting $setting */
-    public $setting;
+class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'modSystemSetting';
+    public $languageTopics = array('setting','namespace');
+    public $permission = 'settings';
+    public $objectType = 'setting';
+    public $primaryKeyField = 'key';
+    
+    /** @var modSystemSetting $object */
+    public $object;
+    /** @var boolean $refreshURIs */
     public $refreshURIs = false;
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('settings');
-    }
-    public function getLanguageTopics() {
-        return array('setting','namespace');
-    }
-
-    public function initialize() {
-        $key = $this->getProperty('key');
-        if (empty($key)) return $this->modx->lexicon('setting_err_ns');
-        $this->setting = $this->modx->getObject('modSystemSetting',$key);
-        if (empty($this->setting)) return $this->modx->lexicon('setting_err_nf');
-        return true;
+    public function beforeSave() {
+        $this->verifyNamespace();
+        $this->checkForBooleanValue();
+        $this->refreshURIs = $this->checkForRefreshURIs();
+        return parent::beforeSave();
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @return mixed
-     */
-    public function process() {
-        $fields = $this->getProperties();
-        if (!$this->validate($fields)) {
-            return $this->failure();
-        }
-
-        $fields = $this->clean($fields);
-        $this->setting->fromArray($fields,'',true);
-        $this->refreshURIs = $this->checkForRefreshURIs($fields);
-
-        /* save setting */
-        if ($this->setting->save() === false) {
-            $this->modx->error->checkValidation($this->setting);
-            return $this->failure($this->modx->lexicon('setting_err_save'));
-        }
-        
-        $this->updateTranslations($fields);
-
+    public function afterSave() {
+        $this->updateTranslations($this->getProperties());
         $this->refreshURIs();
         $this->clearCache();
-        $this->logManagerAction();
-        
-        return $this->success('',$this->setting);
+        return parent::afterSave();
     }
 
     /**
-     * Validate the properties sent
-     * 
-     * @param array $fields
-     * @return bool
+     * Verify the Namespace passed is a valid Namespace
+     * @return string|null
      */
-    public function validate(array $fields) {
-        /* verify namespace */
-        if (empty($fields['namespace'])) {
+    public function verifyNamespace() {
+        $namespaceKey = $this->getProperty('namespace');
+        if (empty($namespaceKey)) {
             $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_ns'));
         } else {
-            $namespace = $this->modx->getObject('modNamespace',$fields['namespace']);
+            $namespace = $this->modx->getObject('modNamespace',$namespaceKey);
             if (empty($namespace)) {
                 $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_nf'));
             }
         }
-
-        return !$this->hasErrors();
+        return $namespaceKey;
     }
 
     /**
-     * Parse and clean the sent fields
-     *
-     * @param array $fields
-     * @return array
+     * If this is a Boolean setting, ensure the value of the setting is 1/0
+     * @return mixed
      */
-    public function clean(array $fields) {
-        if ($fields['xtype'] == 'combo-boolean' && !is_numeric($fields['value'])) {
-            if (in_array($fields['value'], array('yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True'))) {
-                $fields['value'] = 1;
-            } else $fields['value'] = 0;
+    public function checkForBooleanValue() {
+        $xtype = $this->getProperty('xtype');
+        $value = $this->getProperty('value');
+        if ($xtype == 'combo-boolean' && !is_numeric($value)) {
+            $value = in_array($value, array('yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True')) ? 1 : 0;
+            $this->object->set('value',$value);
         }
-        return $fields;
+        return $value;
     }
-
+    
     /**
      * Check to see if the URIs need to be refreshed
      * 
@@ -105,11 +77,11 @@ class modSystemSettingsUpdateProcessor extends modProcessor {
      */
     public function checkForRefreshURIs() {
         $refresh = false;
-        if ($this->setting->get('key') === 'friendly_urls' && $this->setting->isDirty('value') && $this->setting->get('value') == '1') {
+        if ($this->object->get('key') === 'friendly_urls' && $this->object->isDirty('value') && $this->object->get('value') == '1') {
             $refresh = true;
-        } else if ($this->setting->get('key') === 'use_alias_path' && $this->setting->isDirty('value')) {
+        } else if ($this->object->get('key') === 'use_alias_path' && $this->object->isDirty('value')) {
             $refresh = true;
-        } else if ($this->setting->get('key') === 'container_suffix' && $this->setting->isDirty('value')) {
+        } else if ($this->object->get('key') === 'container_suffix' && $this->object->isDirty('value')) {
             $refresh = true;
         }
         return $refresh;
@@ -122,11 +94,11 @@ class modSystemSettingsUpdateProcessor extends modProcessor {
      * @return void
      */
     public function updateTranslations(array $fields) {
-        $this->setting->updateTranslation('setting_'.$this->setting->get('key'),$fields['name'],array(
-            'namespace' => $this->setting->get('namespace'),
+        $this->object->updateTranslation('setting_'.$this->object->get('key'),$fields['name'],array(
+            'namespace' => $this->object->get('namespace'),
         ));
-        $this->setting->updateTranslation('setting_'.$this->setting->get('key').'_desc',$fields['description'],array(
-            'namespace' => $this->setting->get('namespace'),
+        $this->object->updateTranslation('setting_'.$this->object->get('key').'_desc',$fields['description'],array(
+            'namespace' => $this->object->get('namespace'),
         ));
     }
 
@@ -136,7 +108,7 @@ class modSystemSettingsUpdateProcessor extends modProcessor {
      */
     public function refreshURIs() {
         if ($this->refreshURIs) {
-            $this->modx->setOption($this->setting->get('key'), $this->setting->get('value'));
+            $this->modx->setOption($this->object->get('key'), $this->object->get('value'));
             $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
         }
         return $this->refreshURIs;
@@ -153,13 +125,6 @@ class modSystemSettingsUpdateProcessor extends modProcessor {
             'extensions' => array('.cache.php','.php'),
         ));
         $this->modx->reloadConfig();
-    }
-
-    /**
-     * @return void
-     */
-    public function logManagerAction() {
-        $this->modx->logManagerAction('setting_update','modSystemSetting',$this->setting->get('key'));
     }
 }
 return 'modSystemSettingsUpdateProcessor';

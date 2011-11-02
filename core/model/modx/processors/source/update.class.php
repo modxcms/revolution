@@ -7,45 +7,23 @@
  * @package modx
  * @subpackage processors.source
  */
-class modSourceUpdateProcessor extends modProcessor {
-    /** @var modMediaSource $source */
-    public $source;
+class modSourceUpdateProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'sources.modMediaSource';
+    public $languageTopics = array('source');
+    public $permission = 'source_save';
+    public $objectType = 'source';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('source_save');
-    }
+    /** @var modMediaSource $object */
+    public $object;
 
-    public function getLanguageTopics() {
-        return array('source');
-    }
-
-    public function initialize() {
-        $id = $this->getProperty('id');
-        if (empty($id)) return $this->modx->lexicon('source_err_ns');
-        /** @var modMediaSource $source */
-        $this->source = $this->modx->getObject('sources.modMediaSource',$id);
-        if (empty($this->source)) {
-            return $this->modx->lexicon('source_err_nf',array('id' => $id));
-        }
-        if (!$this->source->checkPolicy('save')) {
-            return $this->modx->lexicon('permission_denied');
-        }
-
-        return true;
-    }
-
-    public function process() {
-        $this->source->fromArray($this->getProperties());
-
+    public function beforeSave() {
         $this->setSourceProperties();
+        return parent::beforeSave();
+    }
 
-        if ($this->source->save() == false) {
-            return $this->failure($this->modx->lexicon('source_err_save'));
-        }
-
-        $this->setAccess();
-        $this->logManagerAction();
-        return $this->success('',$this->source);
+    public function afterSave() {
+       $this->setAccess();
+       return parent::afterSave();
     }
 
     /**
@@ -56,7 +34,7 @@ class modSourceUpdateProcessor extends modProcessor {
         $properties = $this->getProperty('properties');
         if (!empty($properties)) {
             $properties = is_array($properties) ? $properties : $this->modx->fromJSON($properties);
-            $this->source->setProperties($properties);
+            $this->object->setProperties($properties);
         }
     }
 
@@ -65,10 +43,10 @@ class modSourceUpdateProcessor extends modProcessor {
      * @return void
      */
     public function setAccess() {
-        $access = $this->getProperty('access');
-        if (!empty($access)) {
+        $access = $this->getProperty('access',null);
+        if ($access !== null) {
             $acls = $this->modx->getCollection('sources.modAccessMediaSource',array(
-                'target' => $this->source->get('id'),
+                'target' => $this->object->get('id'),
             ));
             /** @var modAccessMediaSource $acl */
             foreach ($acls as $acl) {
@@ -80,7 +58,7 @@ class modSourceUpdateProcessor extends modProcessor {
                 foreach ($access as $data) {
                     $acl = $this->modx->newObject('sources.modAccessMediaSource');
                     $acl->fromArray(array(
-                        'target' => $this->source->get('id'),
+                        'target' => $this->object->get('id'),
                         'principal_class' => $data['principal_class'],
                         'principal' => $data['principal'],
                         'authority' => $data['authority'],
@@ -91,14 +69,6 @@ class modSourceUpdateProcessor extends modProcessor {
                 }
             }
         }
-    }
-
-    /**
-     * Log the manager action
-     * @return void
-     */
-    public function logManagerAction() {
-        $this->modx->logManagerAction('source_update','sources.modMediaSource',$this->source->get('id'));
     }
 }
 return 'modSourceUpdateProcessor';
