@@ -15,6 +15,5 @@ require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 class modPluginGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modPlugin';
     public $languageTopics = array('plugin','category');
-    public $elementType = 'plugin';
 }
 return 'modPluginGetListProcessor';

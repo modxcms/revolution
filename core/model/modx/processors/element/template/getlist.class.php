@@ -15,7 +15,6 @@ require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 class modTemplateGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modTemplate';
     public $languageTopics = array('template','category');
-    public $elementType = 'template';
     public $defaultSortField = 'templatename';
 
     public function beforeIteration(array $list) {

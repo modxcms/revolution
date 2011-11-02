@@ -13,6 +13,7 @@ class modProviderUpdateFromGridProcessor extends modProviderUpdateProcessor {
         $data = $this->modx->fromJSON($data);
         if (empty($data)) return $this->modx->lexicon('invalid_data');
         $this->setProperties($data);
+        $this->unsetProperty('data');
 
         return parent::initialize();
     }

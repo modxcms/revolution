@@ -7,11 +7,6 @@
  * @subpackage processors.element
  */
 abstract class modElementGetListProcessor extends modObjectGetListProcessor {
-    /** @var modElement $element */
-    public $element;
-    /** @var string $elementType The element "type", this will be used in various lexicon error strings */
-    public $elementType = 'element';
-
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->leftJoin('modCategory','Category');
         return $c;
