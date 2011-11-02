@@ -7,40 +7,17 @@
  * @package modx
  * @subpackage processors.system.settings
  */
-class modSystemSettingsRemoveProcessor extends modProcessor {
-    /** @var modSystemSetting $setting */
-    public $setting;
+class modSystemSettingsRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'modSystemSetting';
+    public $languageTopics = array('setting','namespace');
+    public $permission = 'settings';
+    public $objectType = 'setting';
+    public $primaryKeyField = 'key';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('settings');
-    }
-    public function getLanguageTopics() {
-        return array('setting','namespace');
-    }
-
-    public function initialize() {
-        $key = $this->getProperty('key');
-        if (empty($key)) return $this->modx->lexicon('setting_err_ns');
-        $this->setting = $this->modx->getObject('modSystemSetting',$key);
-        if (empty($this->setting)) return $this->modx->lexicon('setting_err_nf');
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return mixed
-     */
-    public function process() {
-        /* remove setting */
-        if ($this->setting->remove() == false) {
-            return $this->failure($this->modx->lexicon('setting_err_remove'));
-        }
-
+    public function afterRemove() {
         $this->removeRelatedLexiconEntries();
-
         $this->modx->reloadConfig();
-        $this->logManagerAction();
-        return $this->success('',$this->setting);
+        return true;
     }
 
     /**
@@ -50,8 +27,8 @@ class modSystemSettingsRemoveProcessor extends modProcessor {
     public function removeRelatedLexiconEntries() {
         /** @var modLexiconEntry $entry */
         $entry = $this->modx->getObject('modLexiconEntry',array(
-            'namespace' => $this->setting->get('namespace'),
-            'name' => 'setting_'.$this->setting->get('key'),
+            'namespace' => $this->object->get('namespace'),
+            'name' => 'setting_'.$this->object->get('key'),
         ));
         if (!empty($entry)) {
             $entry->remove();
@@ -59,19 +36,12 @@ class modSystemSettingsRemoveProcessor extends modProcessor {
 
         /** @var modLexiconEntry $description */
         $description = $this->modx->getObject('modLexiconEntry',array(
-            'namespace' => $this->setting->get('namespace'),
-            'name' => 'setting_'.$this->setting->get('key').'_desc',
+            'namespace' => $this->object->get('namespace'),
+            'name' => 'setting_'.$this->object->get('key').'_desc',
         ));
         if (!empty($description)) {
             $description->remove();
         }
-    }
-
-    /**
-     * @return void
-     */
-    public function logManagerAction() {
-        $this->modx->logManagerAction('setting_delete','modSystemSetting',$this->setting->get('key'));
     }
 }
 return 'modSystemSettingsRemoveProcessor';

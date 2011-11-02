@@ -334,21 +334,23 @@ abstract class modDriverSpecificProcessor extends modProcessor {
     }
 }
 
-abstract class modObjectGetProcessor extends modProcessor {
+/**
+ * Base class for object-specific processors
+ * @abstract
+ */
+abstract class modObjectProcessor extends modProcessor {
     /** @var xPDOObject|modAccessibleObject $object The object being grabbed */
     public $object;
-    /** @var string $classKey The class key of the Element to create */
-    public $classKey;
-    /** @var array $languageTopics An array of language topics to load */
-    public $languageTopics = array();
-    /** @var string $permission The Permission to use when checking against */
-    public $permission = '';
-    /** @var boolean $checkViewPermission If set to true, will check the view permission on modAccessibleObjects */
-    public $checkViewPermission = true;
     /** @var string $objectType The object "type", this will be used in various lexicon error strings */
     public $objectType = 'object';
+    /** @var string $classKey The class key of the Object to iterate */
+    public $classKey;
     /** @var string $primaryKeyField The primary key field to grab the object by */
     public $primaryKeyField = 'id';
+    /** @var string $permission The Permission to use when checking against */
+    public $permission = '';
+    /** @var array $languageTopics An array of language topics to load */
+    public $languageTopics = array();
 
     public function checkPermissions() {
         return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
@@ -356,7 +358,16 @@ abstract class modObjectGetProcessor extends modProcessor {
     public function getLanguageTopics() {
         return $this->languageTopics;
     }
+}
 
+/**
+ * A utility abstract class for defining get-based processors
+ * @abstract
+ */
+abstract class modObjectGetProcessor extends modObjectProcessor {
+    /** @var boolean $checkViewPermission If set to true, will check the view permission on modAccessibleObjects */
+    public $checkViewPermission = true;
+    
     /**
      * {@inheritDoc}
      * @return boolean
@@ -392,33 +403,13 @@ abstract class modObjectGetProcessor extends modProcessor {
 
 /**
  * A utility abstract class for defining getlist-based processors
+ * @abstract
  */
-abstract class modObjectGetListProcessor extends modProcessor {
-    /** @var string $classKey The class key of the Object to iterate */
-    public $classKey;
-    /** @var string $permission The Permission to use when checking against */
-    public $permission = '';
-    /** @var array $languageTopics An array of language topics to load */
-    public $languageTopics = array();
+abstract class modObjectGetListProcessor extends modObjectProcessor {
     /** @var string $defaultSortField The default field to sort by */
     public $defaultSortField = 'name';
     /** @var boolean $checkListPermission If true and object is a modAccessibleObject, will check list permission */
     public $checkListPermission = true;
-
-    /**
-     * {@inheritDoc}
-     * @return boolean
-     */
-    public function checkPermissions() {
-        return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
-    }
-    /**
-     * {@inheritDoc}
-     * @return array
-     */
-    public function getLanguageTopics() {
-        return $this->languageTopics;
-    }
 
     /**
      * {@inheritDoc}
@@ -544,6 +535,101 @@ abstract class modObjectGetListProcessor extends modProcessor {
      */
     public function prepareRow(xPDOObject $object) {
         return $object->toArray();
+    }
+}
+
+abstract class modObjectRemoveProcessor extends modObjectProcessor {
+    /** @var boolean $checkRemovePermission If set to true, will check the remove permission on modAccessibleObjects */
+    public $checkRemovePermission = true;
+    /** @var string $beforeRemoveEvent The name of the event to fire before removal */
+    public $beforeRemoveEvent = '';
+    /** @var string $afterRemoveEvent The name of the event to fire after removal */
+    public $afterRemoveEvent = '';
+
+    public function initialize() {
+        $primaryKey = $this->getProperty($this->primaryKeyField,false);
+        if (empty($primaryKey)) return $this->modx->lexicon($this->objectType.'_err_ns');
+        $this->object = $this->modx->getObject($this->classKey,$primaryKey);
+        if (empty($this->object)) return $this->modx->lexicon($this->objectType.'_err_nfs',array($this->primaryKeyField => $primaryKey));
+
+        if ($this->checkRemovePermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('remove')) {
+            return $this->modx->lexicon('access_denied');
+        }
+        return true;
+    }
+
+    public function process() {
+        $canRemove = $this->beforeRemove();
+        if ($canRemove !== true) {
+            return $this->failure($canRemove);
+        }
+        $preventRemoval = $this->fireBeforeRemoveEvent();
+        if (!empty($preventRemoval)) {
+            return $this->failure($preventRemoval);
+        }
+        
+        if ($this->object->remove() == false) {
+            return $this->failure($this->modx->lexicon($this->objectType.'_err_remove'));
+        }
+        $this->afterRemove();
+        $this->fireAfterRemoveEvent();
+        $this->logManagerAction();
+        $this->cleanup();
+        return $this->success('',array($this->primaryKeyField => $this->object->get($this->primaryKeyField)));
+    }
+
+    /**
+     * Can contain pre-removal logic; return false to prevent remove.
+     * @return boolean
+     */
+    public function beforeRemove() { return true; }
+    /**
+     * Can contain post-removal logic.
+     * @return bool
+     */
+    public function afterRemove() { return true; }
+
+    /**
+     * Log the removal manager action
+     * @return void
+     */
+    public function logManagerAction() {
+        $this->modx->logManagerAction($this->objectType.'_delete',$this->classKey,$this->object->get($this->primaryKeyField));
+    }
+
+    /**
+     * After removal, manager action log, and event firing logic
+     * @return void
+     */
+    public function cleanup() {}
+
+    /**
+     * If specified, fire the before remove event
+     * @return boolean Return false to allow removal; non-empty to prevent it
+     */
+    public function fireBeforeRemoveEvent() {
+        $preventRemove = false;
+        if (!empty($this->beforeRemoveEvent)) {
+            $response = $this->modx->invokeEvent($this->beforeRemoveEvent,array(
+                $this->primaryKeyField => $this->object->get($this->primaryKeyField),
+                $this->objectType => &$object,
+            ));
+            $preventRemove = $this->processEventResponse($response);
+        }
+        return $preventRemove;
+    }
+
+    /**
+     * If specified, fire the after remove event
+     * @return void
+     */
+    public function fireAfterRemoveEvent() {
+        if (!empty($this->afterRemoveEvent)) {
+            $this->modx->invokeEvent($this->afterRemoveEvent,array(
+                $this->primaryKeyField => $this->object->get($this->primaryKeyField),
+                $this->objectType => &$object,
+            ));
+        }
     }
 }
 
