@@ -12,10 +12,11 @@ class modTemplateVarGetProcessor extends modElementGetProcessor {
     public $classKey = 'modTemplateVar';
     public $languageTopics = array('tv','category');
     public $permission = 'view_tv';
-    public $elementType = 'tv';
+    public $objectType = 'tv';
 
     public function beforeOutput() {
-        $this->element->set('els',$this->element->get('elements'));
+        parent::beforeOutput();
+        $this->object->set('els',$this->object->get('elements'));
     }
 }
 return 'modTemplateVarGetProcessor';

@@ -14,7 +14,7 @@
 class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modCategory';
     public $languageTopics = array('category');
-    public $defaultSortField = 'parent,category';
+    public $defaultSortField = 'category';
 
     public function initialize() {
         $initialized = parent::initialize();
@@ -70,6 +70,13 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         $c->where(array(
             'modCategory.parent' => 0,
         ));
+        return $c;
+    }
+
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        if ($this->getProperty('sort') == 'category') {
+            $c->sortby('parent',$this->getProperty('dir','ASC'));
+        }
         return $c;
     }
 }

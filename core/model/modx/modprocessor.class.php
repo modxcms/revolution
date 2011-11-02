@@ -334,6 +334,62 @@ abstract class modDriverSpecificProcessor extends modProcessor {
     }
 }
 
+abstract class modObjectGetProcessor extends modProcessor {
+    /** @var xPDOObject|modAccessibleObject $object The object being grabbed */
+    public $object;
+    /** @var string $classKey The class key of the Element to create */
+    public $classKey;
+    /** @var array $languageTopics An array of language topics to load */
+    public $languageTopics = array();
+    /** @var string $permission The Permission to use when checking against */
+    public $permission = '';
+    /** @var boolean $checkViewPermission If set to true, will check the view permission on modAccessibleObjects */
+    public $checkViewPermission = true;
+    /** @var string $objectType The object "type", this will be used in various lexicon error strings */
+    public $objectType = 'object';
+    /** @var string $primaryKeyField The primary key field to grab the object by */
+    public $primaryKeyField = 'id';
+
+    public function checkPermissions() {
+        return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
+    }
+    public function getLanguageTopics() {
+        return $this->languageTopics;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
+    public function initialize() {
+        $primaryKey = $this->getProperty($this->primaryKeyField,false);
+        if (empty($primaryKey)) return $this->modx->lexicon($this->objectType.'_err_ns');
+        $this->object = $this->modx->getObject($this->classKey,$primaryKey);
+        if (empty($this->object)) return $this->modx->lexicon($this->objectType.'_err_nfs',array($this->primaryKeyField => $primaryKey));
+
+        if ($this->checkViewPermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('view')) {
+            return $this->modx->lexicon('access_denied');
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function process() {
+        $this->beforeOutput();
+        return $this->success('',$this->object->toArray());
+    }
+
+    /**
+     * Used for adding custom data in derivative types
+     * @return void
+     */
+    public function beforeOutput() { }
+}
+
 /**
  * A utility abstract class for defining getlist-based processors
  */

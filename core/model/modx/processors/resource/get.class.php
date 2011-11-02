@@ -8,30 +8,13 @@
  * @package modx
  * @subpackage processors.resource
  */
-class modResourceGetProcessor extends modProcessor {
-    /** @var modResource $resource */
-    public $resource;
-
-    public function getLanguageTopics() {
-        return array('resource');
-    }
-    public function initialize() {
-        $id = $this->getProperty('id');
-        if (empty($id)) return $this->modx->lexicon('resource_err_ns');
-        
-        $this->resource = $this->modx->getObject('modResource',$id);
-        if (empty($this->resource)) {
-            return $this->modx->lexicon('resource_err_nfs',array('id' => $id));
-        }
-        
-        if (!$this->resource->checkPolicy('view')) {
-            return $this->modx->lexicon('permission_denied');
-        }
-        return true;
-    }
+class modResourceGetProcessor extends modObjectGetProcessor {
+    public $classKey = 'modResource';
+    public $languageTopics = array('resource');
+    public $objectType = 'resource';
 
     public function process() {
-        $resourceArray = $this->resource->toArray();
+        $resourceArray = $this->object->toArray();
         $this->formatDates($resourceArray);
         return $this->success('',$resourceArray);
     }

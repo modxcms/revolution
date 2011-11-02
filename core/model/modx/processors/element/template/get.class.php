@@ -12,6 +12,6 @@ class modTemplateGetProcessor extends modElementGetProcessor {
     public $classKey = 'modTemplate';
     public $languageTopics = array('template','category');
     public $permission = 'view_template';
-    public $elementType = 'template';
+    public $objectType = 'template';
 }
 return 'modTemplateGetProcessor';

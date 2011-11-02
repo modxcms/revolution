@@ -12,6 +12,6 @@ class modChunkGetProcessor extends modElementGetProcessor {
     public $classKey = 'modChunk';
     public $languageTopics = array('chunk','category');
     public $permission = 'view_chunk';
-    public $elementType = 'chunk';
+    public $objectType = 'chunk';
 }
 return 'modChunkGetProcessor';

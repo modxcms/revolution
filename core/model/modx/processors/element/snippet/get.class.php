@@ -12,6 +12,6 @@ class modSnippetGetProcessor extends modElementGetProcessor {
     public $classKey = 'modSnippet';
     public $languageTopics = array('snippet','category');
     public $permission = 'view_snippet';
-    public $elementType = 'snippet';
+    public $objectType = 'snippet';
 }
 return 'modSnippetGetProcessor';

@@ -12,6 +12,6 @@ class modPluginGetProcessor extends modElementGetProcessor {
     public $classKey = 'modPlugin';
     public $languageTopics = array('plugin','category');
     public $permission = 'view_plugin';
-    public $elementType = 'plugin';
+    public $objectType = 'plugin';
 }
 return 'modPluginGetProcessor';

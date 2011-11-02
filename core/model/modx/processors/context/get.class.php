@@ -7,34 +7,23 @@
  * @package modx
  * @subpackage processors.context
  */
-class modContextGetProcessor extends modProcessor {
-    /** @var modContext $context */
-    public $context;
-    
+class modContextGetProcessor extends modObjectGetProcessor {
+    public $classKey = 'modContext';
+    public $languageTopics = array('context');
+    public $permission = 'view_context';
+    public $objectType = 'context';
+    public $primaryKeyField = 'key';
+
     public function checkPermissions() {
         return $this->modx->hasPermission('view_context');
     }
     public function getLanguageTopics() {
         return array('context');
     }
-
     public function initialize() {
         $key = $this->getProperty('key');
-        if (empty($key)) { return $this->modx->lexicon('context_err_ns'); }
-        $contextKey = urldecode($key);
-        
-        $this->context = $this->modx->getObject('modContext',$contextKey);
-        if (empty($this->context)) {
-            return $this->modx->lexicon('context_err_nfs',array('key' => $key));
-        }
-        if (!$this->context->checkPolicy('view')) {
-            return $this->modx->lexicon('permission_denied');
-        }
-        return true;
-    }
-
-    public function process() {
-        return $this->success('',$this->context);
+        $this->setProperty('key',urldecode($key));
+        return parent::initialize();
     }
 }
 return 'modContextGetProcessor';
