@@ -1,4 +1,5 @@
 <?php
+require_once (dirname(dirname(__FILE__)).'/update.class.php');
 /**
  * Updates a TV
  *
@@ -22,224 +23,73 @@
  * @package modx
  * @subpackage processors.element.tv
  */
-class modElementTvUpdateProcessor extends modProcessor {
-    /** @var modTemplateVar $tv */
-    public $tv;
-    /** @var modCategory $category */
-    public $category;
+class modElementTvUpdateProcessor extends modElementUpdateProcessor {
+    public $classKey = 'modTemplateVar';
+    public $languageTopics = array('tv','category');
+    public $permission = 'save_tv';
+    public $objectType = 'tv';
+    public $beforeRemoveEvent = 'OnBeforeTVFormSave';
+    public $afterRemoveEvent = 'OnTVFormSave';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('save_tv');
-    }
-    public function getLanguageTopics() {
-        return array('tv','category');
-    }
+    public function beforeSave() {
+        $this->setInputProperties();
+        $this->setOutputProperties();
 
-    public function initialize() {
-        $id = $this->getProperty('id');
-        if (empty($id)) return $this->modx->lexicon('tv_err_ns');
-        $this->tv = $this->modx->getObject('modTemplateVar',$id);
-        if (empty($this->tv)) return $this->modx->lexicon('tv_err_nf');
-
-        if (!$this->tv->checkPolicy('save')) {
-            return $this->modx->lexicon('access_denied');
+        $els = $this->getProperty('els',null);
+        if ($els != null) {
+            $this->object->set('elements',$els);
         }
-        return true;
+
+        return parent::beforeSave();
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @return mixed
-     */
-    public function process() {
-        if ($this->isLocked()) {
-            $this->failure($this->modx->lexicon('tv_err_locked'));
-        }
-
-        /* category */
-        $this->getCategory();
-
-        $fields = $this->getProperties();
-        $fields = $this->preFormat($fields);
-
-        if (!$this->validate($fields)) {
-            return $this->failure();
-        }
-
-        $previousCategory = $this->tv->get('category');
-        $this->tv->fromArray($fields);
-
-        /* validate TV via model */
-        if (!$this->tv->validate()) {
-            /** @var modValidator $validator */
-            $validator = $this->tv->getValidator();
-            if ($validator->hasMessages()) {
-                foreach ($validator->getMessages() as $message) {
-                    $this->addFieldError($message['field'], $this->modx->lexicon($message['message']));
-                }
-            }
-        }
-
-        /* if error, return */
-        if ($this->hasErrors()) {
-            return $this->failure();
-        }
-
-        $canSave = $this->fireBeforeSave();
-        if (!empty($canSave)) {
-            return $this->failure($canSave);
-        }
-
-        /* save TV */
-        if ($this->tv->save() === false) {
-            return $this->failure($this->modx->lexicon('tv_err_save'));
-        }
-
+    public function afterSave() {
         $this->setTemplateAccess();
         $this->setResourceGroups();
         $this->setMediaSources();
-        $this->fireOnSave();
-        $this->logManagerAction();
-
-        /* empty cache */
-        if (!empty($fields['clearCache'])) {
-            $this->modx->cacheManager->refresh();
-        }
-
-        return $this->success('', array('previous_category' => $previousCategory));
+        return parent::afterSave();
     }
 
     /**
-     * Pre-format incoming data to properly be set
-     * @param array $fields
+     * Set the input properties based on the passed data
      * @return array
      */
-    public function preFormat(array $fields) {
-        if (empty($fields['name'])) $fields['name'] = $this->modx->lexicon('untitled_tv');
-
-        $fields['output_properties'] = array();
-        $outputPropertyFound = false;
-        foreach ($fields as $key => $value) {
-            $res = strstr($key,'prop_');
-            if ($res !== false) {
-                $fields['output_properties'][str_replace('prop_','',$key)] = $value;
-                $outputPropertyFound = true;
-            }
-        }
-        if (!$outputPropertyFound) {
-            unset($fields['output_properties']);
-        }
-
-        $fields['input_properties'] = array();
+    public function setInputProperties() {
+        $fields = $this->getProperties();
+        $inputProperties = array();
         $inputPropertyFound = false;
         foreach ($fields as $key => $value) {
             $res = strstr($key,'inopt_');
             if ($res !== false) {
-                $fields['input_properties'][str_replace('inopt_','',$key)] = $value;
+                $inputProperties[str_replace('inopt_','',$key)] = $value;
                 $inputPropertyFound = true;
             }
         }
-        if (!$inputPropertyFound) {
-            unset($fields['input_properties']);
+        if ($inputPropertyFound) {
+            $this->object->set('input_properties',$inputProperties);
         }
-
-
-        if (isset($fields['els'])) {
-            $fields['elements'] = $fields['els'];
-            unset($fields['els']);
-        }
-        if (isset($fields['locked'])) {
-            $fields['locked'] = !empty($fields['locked']);
-        }
-        return $fields;
+        return $inputProperties;
     }
 
     /**
-     * Validate form fields
-     *
-     * @param array $fields
-     * @return boolean
+     * Set the output properties based on the passed data
+     * @return array
      */
-    public function validate(array $fields) {
-        /* check to make sure name doesn't already exist */
-        if ($this->alreadyExists($fields['name'])) {
-            $this->addFieldError('name',$this->modx->lexicon('tv_err_exists_name',array('name' => $fields['name'])));
-        }
-        return !$this->hasErrors();
-    }
-
-    /**
-     * See if a TV already exists with the new name
-     * @param string $name
-     * @return bool
-     */
-    public function alreadyExists($name) {
-        return $this->modx->getCount('modTemplateVar',array(
-            'id:!=' => $this->tv->get('id'),
-            'name' => $name,
-        )) > 0;
-    }
-
-    /**
-     * Fire the OnBeforeTVFormSave event and see if it prevents saving
-     *
-     * @return mixed
-     */
-    public function fireBeforeSave() {
-        /** @var array|string $OnBeforeTVFormSave */
-        $OnBeforeTVFormSave = $this->modx->invokeEvent('OnBeforeTVFormSave',array(
-            'mode' => modSystemEvent::MODE_UPD,
-            'id' => $this->tv->get('id'),
-            'tv' => &$this->tv,
-        ));
-        if (is_array($OnBeforeTVFormSave)) {
-            $canSave = false;
-            foreach ($OnBeforeTVFormSave as $msg) {
-                if (!empty($msg)) {
-                    $canSave .= $msg."\n";
-                }
-            }
-        } else {
-            $canSave = $OnBeforeTVFormSave;
-        }
-        return $canSave;
-    }
-
-    /**
-     * Fire OnTVFormSave event
-     * @return void
-     */
-    public function fireOnSave() {
-        /* invoke OnTVFormSave event */
-        $this->modx->invokeEvent('OnTVFormSave',array(
-            'mode' => modSystemEvent::MODE_UPD,
-            'id' => $this->tv->get('id'),
-            'tv' => &$this->tv,
-        ));
-    }
-
-    /**
-     * Get the specified Category object
-     * @return modCategory
-     */
-    public function getCategory() {
-        $category = $this->getProperty('category');
-        if (!empty($category)) {
-            $this->category = $this->modx->getObject('modCategory',array('id' => $category));
-            if (empty($this->category)) {
-                $this->addFieldError('category',$this->modx->lexicon('category_err_nf'));
+    public function setOutputProperties() {
+        $fields = $this->getProperties();
+        $outputProperties = array();
+        $outputPropertyFound = false;
+        foreach ($fields as $key => $value) {
+            $res = strstr($key,'prop_');
+            if ($res !== false) {
+                $outputProperties[str_replace('prop_','',$key)] = $value;
+                $outputPropertyFound = true;
             }
         }
-        return $this->category;
-    }
-
-    /**
-     * See if this element is locked for editing
-     * @return boolean
-     */
-    public function isLocked() {
-        return $this->tv->get('locked') && $this->modx->hasPermission('edit_locked') == false;
+        if ($outputPropertyFound) {
+            $this->object->set('output_properties',$outputProperties);
+        }
+        return $outputProperties;
     }
 
     /**
@@ -247,10 +97,10 @@ class modElementTvUpdateProcessor extends modProcessor {
      * @return void
      */
     public function setTemplateAccess() {
-        $templates = $this->getProperty('templates',false);
+        $templates = $this->getProperty('templates',null);
         /* change template access to tvs */
-        if (!empty($templates)) {
-            $templateVariables = $this->modx->fromJSON($templates);
+        if ($templates !== null) {
+            $templateVariables = is_array($templates) ? $templates : $this->modx->fromJSON($templates);
             if (is_array($templateVariables)) {
                 foreach ($templateVariables as $id => $template) {
                     if (!is_array($template)) continue;
@@ -258,18 +108,18 @@ class modElementTvUpdateProcessor extends modProcessor {
                     if ($template['access']) {
                         /** @var modTemplateVarTemplate $templateVarTemplate */
                         $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(
-                            'tmplvarid' => $this->tv->get('id'),
+                            'tmplvarid' => $this->object->get('id'),
                             'templateid' => $template['id'],
                         ));
                         if (empty($templateVarTemplate)) {
                             $templateVarTemplate = $this->modx->newObject('modTemplateVarTemplate');
                         }
-                        $templateVarTemplate->set('tmplvarid',$this->tv->get('id'));
+                        $templateVarTemplate->set('tmplvarid',$this->object->get('id'));
                         $templateVarTemplate->set('templateid',$template['id']);
                         $templateVarTemplate->save();
                     } else {
                         $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(
-                            'tmplvarid' => $this->tv->get('id'),
+                            'tmplvarid' => $this->object->get('id'),
                             'templateid' => $template['id'],
                         ));
                         if ($templateVarTemplate && $templateVarTemplate instanceof modTemplateVarTemplate) {
@@ -286,22 +136,22 @@ class modElementTvUpdateProcessor extends modProcessor {
      * @return void
      */
     public function setResourceGroups() {
-        $resourceGroups = $this->getProperty('resource_groups',false);
-        if ($this->modx->hasPermission('access_permissions') && !empty($resourceGroups)) {
-            $resourceGroups = $this->modx->fromJSON($resourceGroups);
+        $resourceGroups = $this->getProperty('resource_groups',null);
+        if ($this->modx->hasPermission('access_permissions') && $resourceGroups !== null) {
+            $resourceGroups = is_array($resourceGroups) ? $resourceGroups : $this->modx->fromJSON($resourceGroups);
             if (is_array($resourceGroups)) {
                 foreach ($resourceGroups as $id => $group) {
                     if (!is_array($group)) continue;
                     /** @var modTemplateVarResourceGroup $templateVarResourceGroup */
                     $templateVarResourceGroup = $this->modx->getObject('modTemplateVarResourceGroup',array(
-                        'tmplvarid' => $this->tv->get('id'),
+                        'tmplvarid' => $this->object->get('id'),
                         'documentgroup' => $group['id'],
                     ));
 
                     if ($group['access'] == true) {
                         if (!empty($templateVarResourceGroup)) continue;
                         $templateVarResourceGroup = $this->modx->newObject('modTemplateVarResourceGroup');
-                        $templateVarResourceGroup->set('tmplvarid',$this->tv->get('id'));
+                        $templateVarResourceGroup->set('tmplvarid',$this->object->get('id'));
                         $templateVarResourceGroup->set('documentgroup',$group['id']);
                         $templateVarResourceGroup->save();
                     } else if ($templateVarResourceGroup && $templateVarResourceGroup instanceof modTemplateVarResourceGroup) {
@@ -317,12 +167,12 @@ class modElementTvUpdateProcessor extends modProcessor {
      * @return void
      */
     public function setMediaSources() {
-        $sources = $this->getProperty('sources',false);
-        if (!empty($sources)) {
-            $sources = $this->modx->fromJSON($sources);
+        $sources = $this->getProperty('sources',null);
+        if ($sources !== null) {
+            $sources = is_array($sources) ? $sources : $this->modx->fromJSON($sources);
             if (is_array($sources)) {
                 $sourceElements = $this->modx->getCollection('sources.modMediaSourceElement',array(
-                    'object' => $this->tv->get('id'),
+                    'object' => $this->object->get('id'),
                     'object_class' => 'modTemplateVar',
                 ));
                 /** @var modMediaSourceElement $sourceElement */
@@ -335,15 +185,15 @@ class modElementTvUpdateProcessor extends modProcessor {
 
                     /** @var modMediaSourceElement $sourceElement */
                     $sourceElement = $this->modx->getObject('sources.modMediaSourceElement',array(
-                        'object' => $this->tv->get('id'),
-                        'object_class' => $this->tv->_class,
+                        'object' => $this->object->get('id'),
+                        'object_class' => $this->object->_class,
                         'context_key' => $source['context_key'],
                     ));
                     if (!$sourceElement) {
                         $sourceElement = $this->modx->newObject('sources.modMediaSourceElement');
                         $sourceElement->fromArray(array(
-                            'object' => $this->tv->get('id'),
-                            'object_class' => $this->tv->_class,
+                            'object' => $this->object->get('id'),
+                            'object_class' => $this->object->_class,
                             'context_key' => $source['context_key'],
                         ),'',true,true);
                     }
@@ -352,15 +202,6 @@ class modElementTvUpdateProcessor extends modProcessor {
                 }
             }
         }
-    }
-
-    /**
-     * Log the manager action for the processor
-     * 
-     * @return void
-     */
-    public function logManagerAction() {
-        $this->modx->logManagerAction('tv_update','modTemplateVar',$this->tv->get('id'));
     }
 }
 return 'modElementTvUpdateProcessor';

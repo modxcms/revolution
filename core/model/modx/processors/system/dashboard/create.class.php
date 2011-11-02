@@ -33,9 +33,11 @@ class modDashboardCreateProcessor extends modObjectCreateProcessor {
     }
 
     public function afterSave() {
-        if (array_key_exists('widgets',$this->getProperties())) {
-            $this->assignWidgets($this->getProperty('widgets'));
+        $widgets = $this->getProperty('widgets',null);
+        if ($widgets != null) {
+            $this->assignWidgets($widgets);
         }
+        return parent::afterSave();
     }
 
     /**
@@ -51,10 +53,10 @@ class modDashboardCreateProcessor extends modObjectCreateProcessor {
     /**
      * Assign widgets to this dashboard
      * 
-     * @param array $widgets
+     * @param array|string $widgets
      * @return array An array of placement objects
      */
-    public function assignWidgets(array $widgets) {
+    public function assignWidgets($widgets) {
         $placements = array();
         
         /** @var array $widgets */
