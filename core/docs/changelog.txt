@@ -2,6 +2,33 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.4-pl (November 2, 2011)
+====================================
+- [#5973] Prevent empty user groups being loaded for anonymous users
+- [#5909] Allow blank extensions in Add Content Type window
+- [#3287] Fix issue with dob User field in editing panel in mgr
+- [#3396] Allow MODX_API_MODE in mgr context
+- [#4230] Add ODF and OOXML to default uploadable file types setting
+- [#5315] Use automatic_alias behavior when updating site_start regardless of setting
+- [#5757] Allow text in grids to be selectable
+- [#5879] Ensure html tags are stripped on titles in the Resource edit view
+- [#5855] Ensure if no parents are specified, resourcelist input option works as expected
+- [#90] 301 Redirect id method requests when request_method_strict is not enabled
+- [#90], [#5676] Improvements to strict routing with friendly_urls
+- [#5788] Fix content not output to browser until after shutdown function
+- [#5777] Fix validation of TV names against Resource field names
+- [#5671] Add :toPlaceholder, :cssToHead, :htmlToHead, :htmlToBottom, :jsToHead, :jsToBottom output filters
+- Add delete user button to user editing page toolbar
+- [#2737] Centralize logic for changing Context of modResource Children
+- [#5068] Move token check for new resources below error validation in processor to prevent bogus duplicate resource issue
+- [#4945] Remove weblink content maxlength restriction
+- [#4790] Add support for comment tag token, e.g. [[- comments here]]
+- [#5505] Fix issue with dropdowns in Fx5
+- [#4871] Fix Access Permissions not being copied when duplicating a context
+- Fix rendering of combo boxes in element properties
+- [#4637] Fix RTE checkbox not saving correctly when using Quick Create Resource
+- [#4080] Add Content Type and Content Disposition to Quick Create/Update Resource
+
 MODX Revolution 2.1.3-pl (July 21, 2011)
 ====================================
 - [#5295] Fix parents input option for Resource List TV when 0 is specified

@@ -48,7 +48,9 @@ if (file_exists(MODX_INSTALL_PATH . 'manager/index.php') &&
 
 $manifest= 0;
 if (file_exists(MODX_CORE_PATH . 'packages/core/manifest.php')) {
-    $manifest= 1;
+    $zipTime = filemtime(MODX_CORE_PATH . 'packages/core.transport.zip');
+    $manifestTime = filemtime(MODX_CORE_PATH . 'packages/core/manifest.php');
+    $manifest= $manifestTime <= $zipTime && $zipTime - 60 < $manifestTime ? 1 : 0;
 }
 
 $unpacked= 0;

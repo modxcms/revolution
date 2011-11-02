@@ -7,10 +7,10 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Azione';
-$_lang['action_confirm_remove'] = 'Sei sicuro di voler rimuovere questa azione? Questo potrebbe potenzialmente rendere malfunzionante l\'interfaccia del tuo MODx manager.';
+$_lang['action_confirm_remove'] = 'Sei sicuro di voler rimuovere questa azione? Questo potrebbe potenzialmente rendere malfunzionante l\'interfaccia del tuo MODX manager.';
 $_lang['action_create'] = 'Crea Azione';
 $_lang['action_create_here'] = 'Crea Azione qui';
-$_lang['action_desc'] = 'Le Azioni sono astrazioni dei controller di MODx. Possono essere usate per creare pagine personalizzate, così come riorganizzare il menu principale del manager MODx.';
+$_lang['action_desc'] = 'Le Azioni sono astrazioni dei controller di MODX. Possono essere usate per creare pagine personalizzate, così come riorganizzare il menu principale del manager MODX.';
 $_lang['action_err_create'] = 'Un errore è occorso mentre creavo l\'azione.';
 $_lang['action_err_nf'] = 'Azione non trovata!';
 $_lang['action_err_ns'] = 'Nessuna azione specificata!';

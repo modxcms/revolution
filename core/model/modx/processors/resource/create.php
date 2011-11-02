@@ -50,24 +50,6 @@
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 $modx->lexicon->load('resource');
 
-/* check new resource token if posted from manager */
-if(isset($scriptProperties['create-resource-token'])) {
-    $tokenFound = false;
-    $tokenPassed = $scriptProperties['create-resource-token'];
-    if(!is_null($tokenPassed)) {
-        if(isset($_SESSION['newResourceTokens']) && !is_null($_SESSION['newResourceTokens'])) {
-            $search = array_search($tokenPassed, $_SESSION['newResourceTokens']);
-            if($search !== false) {
-                unset($_SESSION['newResourceTokens'][$search]);
-                $tokenFound = true;
-            }
-        }
-    }
-    if($tokenFound === false) {
-        return $modx->error->failure($modx->lexicon('resource_err_duplicate'));
-    }
-}
-
 /* handle if parent is a context */
 if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent'])) {
     $ctxCnt = $modx->getCount('modContext',array('key' => $scriptProperties['parent']));
@@ -108,7 +90,7 @@ if (!$workingContext) {
 $scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer) $workingContext->getOption('default_template', 0) : (integer) $scriptProperties['template'];
 $scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (integer) $workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
 $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
-$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
+$scriptProperties['richtext'] = !isset($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
 $scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
 $scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer) $workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
 $scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer) $workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
@@ -166,6 +148,24 @@ if ($workingContext->getOption('friendly_urls', false) && (empty($scriptProperti
     }
 }
 if ($modx->error->hasError()) return $modx->error->failure();
+
+/* check new resource token if posted from manager */
+if(isset($scriptProperties['create-resource-token'])) {
+    $tokenFound = false;
+    $tokenPassed = $scriptProperties['create-resource-token'];
+    if(!is_null($tokenPassed)) {
+        if(isset($_SESSION['newResourceTokens']) && !is_null($_SESSION['newResourceTokens'])) {
+            $search = array_search($tokenPassed, $_SESSION['newResourceTokens']);
+            if($search !== false) {
+                unset($_SESSION['newResourceTokens'][$search]);
+                $tokenFound = true;
+            }
+        }
+    }
+    if($tokenFound === false) {
+        return $modx->error->failure($modx->lexicon('resource_err_duplicate'));
+    }
+}
 
 /* publish and unpublish dates */
 $now = time();

@@ -121,6 +121,12 @@ $_lang['setting_cache_db_desc'] = 'När denna är aktiverad, cachas objekt och o
 $_lang['setting_cache_db_expires'] = 'Utgångstid för databas-cache';
 $_lang['setting_cache_db_expires_desc'] = 'Detta värde (i sekunder) anger den tid som cachefiler varar för cachning av databasresultat.';
 
+$_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
+$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+
+$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+
 $_lang['setting_cache_default'] = 'Cachebara som standard';
 $_lang['setting_cache_default_desc'] = 'Välj "Ja" för att göra alla nya resurser cachebara som standard.';
 $_lang['setting_cache_default_err'] = 'Ange om du vill att dokument ska cachas som standard eller inte.';
@@ -173,6 +179,13 @@ $_lang['setting_concat_js_desc'] = 'När denna är aktiverad kommer MODX att anv
 
 $_lang['setting_container_suffix'] = 'Behållarsuffix';
 $_lang['setting_container_suffix_desc'] = 'Det suffix som ska läggas till resurser som är angivna som behållare när vänliga URL:er används.';
+
+$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
+$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
+$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
 $_lang['setting_cultureKey'] = 'Språk';
 $_lang['setting_cultureKey_desc'] = 'Välj språk för alla kontexter utanför hanteraren, inklusive webben.';
@@ -476,6 +489,9 @@ $_lang['setting_rb_base_url_err'] = 'Ange resursläsarens bas-URL.';
 $_lang['setting_request_controller'] = 'Anropskontrollantens filnamn';
 $_lang['setting_request_controller_desc'] = 'Filnamnet på den huvudsakliga anropskontrollanten från vilken MODX laddas. De flesta användare kan låta denna vara index.php.';
 
+$_lang['setting_request_method_strict'] = 'Strikt anropsmetod';
+$_lang['setting_request_method_strict_desc'] = 'När denna är aktiverad kommer anrop via ID-parametern att ignoreras när vänliga URL:er är aktiverade och anrop via aliasparametern kommer att ignoreras när vänliga URL:er inte är aktiverade.';
+
 $_lang['setting_request_param_alias'] = 'Alias-parameter för anrop';
 $_lang['setting_request_param_alias_desc'] = 'Namnet på GET-parametern som identifierar resursalias när omdirigering görs med vänliga URL:er.';
 
@@ -518,6 +534,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Använd den här inställningen f�
 
 $_lang['setting_session_cookie_secure'] = 'Säkra sessionscookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Aktivera denna inställning för att använda säkra sessionscookies.';
+
+$_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Sessionshanterarklassens namn';
 $_lang['setting_session_handler_class_desc'] = 'Använd \'modSessionHandler\' för databashanterade sessioner. Lämna fältet tomt för att använda PHPs vanliga sessionshantering.';

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Custom Filters German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

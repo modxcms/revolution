@@ -24,7 +24,7 @@ class modWebLink extends modResource {
         if (is_numeric($this->_content)) {
             $this->_output= intval($this->_content);
         } else {
-            $parser= $this->xpdo->getParser();
+            $this->xpdo->getParser();
             $maxIterations= isset ($this->xpdo->config['parser_max_iterations']) ? intval($this->xpdo->config['parser_max_iterations']) : 10;
             $this->xpdo->parser->processElementTags($this->_tag, $this->_content, true, true, '[[', ']]', array(), $maxIterations);
         }

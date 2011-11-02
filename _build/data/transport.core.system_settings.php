@@ -1207,6 +1207,15 @@ $settings['request_controller']->fromArray(array (
   'area' => 'gateway',
   'editedon' => null,
 ), '', true, true);
+$settings['request_method_strict']= $xpdo->newObject('modSystemSetting');
+$settings['request_method_strict']->fromArray(array (
+  'key' => 'request_method_strict',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'gateway',
+  'editedon' => null,
+), '', true, true);
 $settings['request_param_alias']= $xpdo->newObject('modSystemSetting');
 $settings['request_param_alias']->fromArray(array (
   'key' => 'request_param_alias',
@@ -1490,7 +1499,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,xls,txt,ppt,pptx,docx,xlsx,jpg,jpeg,png,gif,psd,ico,bmp',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,xls,txt,ppt,pptx,docx,xlsx,jpg,jpeg,png,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,docx,pptx,xlsx',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',

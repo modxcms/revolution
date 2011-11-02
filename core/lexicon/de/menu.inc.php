@@ -1,5 +1,7 @@
 <?php
 /**
+ * Menu German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -20,7 +22,7 @@ $_lang['menu_err_save'] = 'Ein Fehler trat auf bei dem Versuch, die Aktion dem M
 $_lang['menu_parent'] = 'Eltern-Menü';
 $_lang['menu_parent_err_ns'] = 'Eltern-Menü nicht angegeben!';
 $_lang['menu_parent_err_nf'] = 'Eltern-Menü nicht gefunden!';
-$_lang['menu_remove'] = 'Menüeintrag entfernen';
+$_lang['menu_remove'] = 'Menüeintrag löschen';
 $_lang['menu_top'] = 'Hauptmenü';
 $_lang['menu_update'] = 'Menü bearbeiten';
 $_lang['topmenu'] = 'Hauptmenü';

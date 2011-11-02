@@ -1,5 +1,7 @@
 <?php
 /**
+ * Package Builder German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -47,8 +49,8 @@ $_lang['resolve_php_desc'] = 'Ist diese Option aktiviert, werden die in den PHP-
 $_lang['resolver_add'] = 'Resolver hinzufügen';
 $_lang['resolver_create'] = 'Resolver erstellen';
 $_lang['resolver_name_desc'] = 'Der Name des Resolvers. Wird für organisatorische Zwecke verwendet.';
-$_lang['resolver_remove'] = 'Resolver entfernen';
-$_lang['resolver_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Resolver entfernen möchten?';
+$_lang['resolver_remove'] = 'Resolver löschen';
+$_lang['resolver_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Resolver löschen möchten?';
 $_lang['resolver_source_desc'] = 'Der absolute Pfad der Quelle des Resolvers. Wenn es sich um einen Datei-Resolver handelt, wählen Sie das Verzeichnis, in dem die Dateien liegen, die kopiert werden sollen. Bei einem PHP-Skript-Resolver geben Sie bitte das Skript an. Beispiel: <br /><br />/public_html/modx/_build/components/demo/';
 $_lang['resolver_target_desc'] = 'Der absolute Pfad des Ziels, in das der Resolver Dateien kopieren soll. Diese Einstellung muss normalerweise nicht geändert werden. Beispiel: <br /><br />return MODX_ASSETS_PATH . "snippets/";';
 $_lang['resolver_type_desc'] = 'Datei-Resolver stellen sicher, dass alle Dateien im Quellverzeichnis in das Zielverzeichnis kopiert werden. PHP-Skript-Resolver führen den PHP-Code der Quelldatei aus.';

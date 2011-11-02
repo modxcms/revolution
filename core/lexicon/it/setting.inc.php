@@ -78,7 +78,7 @@ $_lang['setting_login_homepage_desc'] = 'Inserisci l\'ID del documento a cui rei
 
 // system settings
 $_lang['setting_access_policies_version'] = 'Versione Schema Politica di Accesso';
-$_lang['setting_access_policies_version_desc'] = 'La versione del sistema della Politica di Accesso. <b>NON MODIFICARE<b>.';	
+$_lang['setting_access_policies_version_desc'] = 'La versione del sistema della Politica di Accesso. <b>NON MODIFICARE<b>.';
 
 $_lang['setting_allow_forward_across_contexts'] = 'Consenti Reindirizzamento (Forwarding) fra Contesti';
 $_lang['setting_allow_forward_across_contexts_desc'] = 'Se abilitato, Symlinks e le chiamate API modX::sendForward() possono inoltrare richieste alle Risorse in altri Contesti.';
@@ -121,6 +121,12 @@ $_lang['setting_cache_db_desc'] = 'Se impostata su "SI", gli oggetti e i set di 
 
 $_lang['setting_cache_db_expires'] = 'Scadenza per la Cache del DB';
 $_lang['setting_cache_db_expires_desc'] = 'Questo valore (in secondi) imposta la durata temporale dei files della cache per un set di risultati del DB.';
+
+$_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
+$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+
+$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
 
 $_lang['setting_cache_default'] = 'Inserisci in cache(cacheable) di default';
 $_lang['setting_cache_default_desc'] = 'Seleziona \'SI\' se vuoi che tutte le nuove Risorse siano inserite di default nella cache.';
@@ -166,7 +172,7 @@ $_lang['setting_clear_cache_refresh_trees_desc'] = 'Se impostato su "SI", si agg
 $_lang['setting_compress_css'] = 'Usa Css Compressi';
 $_lang['setting_compress_css_desc'] = 'Se impostato su "SI", verrà usata una versione compressa dei fogli di stile css nell\'interfaccia del manager. Questo riduce in modo significativo il tempo di caricamento ed esecuzione dentro il manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
 
-$_lang['setting_compress_js'] = 'Usa Librerie Javascript Compresse';
+$_lang['setting_compress_js'] = 'Usa Librerie JavaScript Compresse';
 $_lang['setting_compress_js_desc'] = 'Se impostato su "SI", verrà usata una versione compressa delle proprie librerie JavaScript. Questo riduce in modo significativo il tempo di caricamento ed esecuzione dentro al manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
 
 $_lang['setting_concat_js'] = 'Usa Librerie Javascript Concatenate';
@@ -174,6 +180,13 @@ $_lang['setting_concat_js_desc'] = 'Se impostato su "SI", verrà usata una versi
 
 $_lang['setting_container_suffix'] = 'Suffisso Contenitore';
 $_lang['setting_container_suffix_desc'] = 'Il suffisso da aggiungere alla fine nelle Risorse impostate come contenitori quando si sta usando i FURLs.';
+
+$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
+$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
+$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
 $_lang['setting_cultureKey'] = 'Lingua';
 $_lang['setting_cultureKey_desc'] = 'Seleziona la lingua per tutti i Contesti "non-manager", compreso web.';
@@ -209,7 +222,7 @@ $_lang['setting_error_page_desc'] = 'Inserisci l\'ID della risorsa a cui vuoi in
 $_lang['setting_error_page_err'] = 'Specifica ID Risorsa da utilizzare come pagina di errore.';
 
 $_lang['setting_extension_packages'] = 'Pacchetti di Estensione';
-$_lang['setting_extension_packages_desc'] = 'Un elenco JSON di pacchetti da caricare durante l\'istanziazione di MODx (on MODX instantiation). Nel formato [{"packagename":{path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
+$_lang['setting_extension_packages_desc'] = 'Un elenco JSON di pacchetti da caricare durante l\'istanziazione di MODX (on MODX instantiation). Nel formato [{"packagename":{path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
 
 $_lang['setting_failed_login_attempts'] = 'Tentativi di Login Falliti';
 $_lang['setting_failed_login_attempts_desc'] = 'Il numero di tentativi errati di login concessi a un Utente prima che sia \'bloccato\'.';
@@ -217,7 +230,7 @@ $_lang['setting_failed_login_attempts_desc'] = 'Il numero di tentativi errati di
 $_lang['setting_fe_editor_lang'] = 'Lingua Editor Front-end';
 $_lang['setting_fe_editor_lang_desc'] = 'Scegli una lingua da usare nell\'editor quando usato come editor front-end.';
 
-$_lang['setting_feed_modx_news'] = 'MODX News Feed URL';	
+$_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Imposta l\'URL dei feed RSS per il pannello MODX News nel manager.';
 
 $_lang['setting_feed_modx_news_enabled'] = 'MODX News Feed Abilitati';
@@ -477,6 +490,9 @@ $_lang['setting_rb_base_url_err'] = 'Per favore specifica l\'URL base del browse
 $_lang['setting_request_controller'] = 'Nome File Controllore Richieste';
 $_lang['setting_request_controller_desc'] = 'Il nome del file del controllore delle richieste con cui è caricato MODX. La maggior parte degli utenti possono lasciare index.php.';
 
+$_lang['setting_request_method_strict'] = 'Metodo Richieste Strict';
+$_lang['setting_request_method_strict_desc'] = 'Se abilitato, le richieste tramite parametro ID saranno ignorate quando sono abilitati i FURLs, e le richieste tramite parametro ALIAS sranno ignorate senza i FURLs abilitati.';
+
 $_lang['setting_request_param_alias'] = 'Parametro Alias Richieste';
 $_lang['setting_request_param_alias_desc'] = 'Il nome del parametro GET per identificare gli aliases delle Risorse durante il reindirizzamento con FURLs.';
 
@@ -520,6 +536,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Con questa impostazione puoi perso
 $_lang['setting_session_cookie_secure'] = 'Sicurezza Cookie Sessione';
 $_lang['setting_session_cookie_secure_desc'] = 'Abilita questa opzione per usare cookies per sessioni sicure.';
 
+$_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'modSessionHandler\'.';
+
 $_lang['setting_session_handler_class'] = 'Nome Classe Gestore Sessione';
 $_lang['setting_session_handler_class_desc'] = 'Per sessioni gestite dal database, usa \'modSessionHandler\'.  Lascia il campo vuoto per usare il gestore standard PHP delle sessioni.';
 
@@ -537,11 +556,11 @@ $_lang['setting_set_header_desc'] = 'Se abilitato "SI", MODX proverà a impostar
 
 $_lang['setting_signupemail_message'] = 'E-mail Registrazione';
 $_lang['setting_signupemail_message_desc'] = 'Qui puoi impostare il messaggio da spedire agli utenti quando crei loro un account e scegli di far mandare loro direttamente da MODX una mail con lo username e la password. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando viene inviato un messaggio: <br /><br />[[+sname]] - Nome del tuo sito, <br />[[+saddr]] - L\'indirizzo email del tuo sito, <br />[[+surl]] - L\'url del tuo sito, <br />[[+uid]] - Nome Login o id utente, <br />[[+pwd]] - Password Utente, <br />[[+ufn]] - Nome completo Utente. <br /><br /><strong>Lascia [[+uid]] e [[+pwd]] nella e-mail, o lo username e la password non saranno inviati nella mail e i tuoi utenti non conosceranno i propri username e password!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli del login per il Pannello di Controllo di: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato nel contente Manager ([[+surl]]), potra cambiare la tua password.\n\Cordiali saluti,\nl\'amministratore del sito';
+$_lang['setting_signupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli del login per il Pannello di Controllo di: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato nel contente Manager ([[+surl]]), potra cambiare la tua password.\n\\Cordiali saluti,\nl\'amministratore del sito';
 
 $_lang['setting_site_name'] = 'Nome Sito';
 $_lang['setting_site_name_desc'] = 'Inserisci qui il nome del tuo sito.';
-$_lang['setting_site_name_err']  = 'Inserisci un nome per il sito.';
+$_lang['setting_site_name_err'] = 'Inserisci un nome per il sito.';
 
 $_lang['setting_site_start'] = 'Pagina Iniziale Sito';
 $_lang['setting_site_start_desc'] = 'Inserisci l\'ID della Risorsa che vuoi usare come homepage. <strong>NOTA: assicurati che questo ID appartenga a una Risorsa esistente, pubblicata e accessibile dagli utenti!</strong>';
@@ -615,7 +634,7 @@ $_lang['setting_webpwdreminder_message_default'] = 'Salve [[+uid]]\n\nPer attiva
 
 $_lang['setting_websignupemail_message'] = 'E-mail Registrazione';
 $_lang['setting_websignupemail_message_desc'] = 'Qui puoi impostare il messaggio da spedire agli utenti quando crei loro un account web e scegli di far mandare loro direttamente da MODX una mail con lo username e la password. <br /><strong>Nota:</strong> I seguenti identificativi saranno sostituiti coi relativi valori dal Manager al momento dell\'invio del messaggio: <br /><br />[[+sname]] - Nome del tuo sito, <br />[[+saddr]] - L\'indirizzo email del tuo sito, <br />[[+surl]] - L\'url del tuo sito, <br />[[+uid]] - Nome Login o id utente, <br />[[+pwd]] - Password Utente, <br />[[+ufn]] - Nome completo Utente. <br /><br /><strong>Lascia [[+uid]] e [[+pwd]] nella e-mail, o lo username e la password non saranno inviati nella mail e i tuoi utenti non conosceranno i propri username e password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli per il tuo login su: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato in [[+sname]] ([[+surl]]), potrai cambiare la tua password.\n\Cordiali saluti,\nl\'amministratore del sito';
+$_lang['setting_websignupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli per il tuo login su: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato in [[+sname]] ([[+surl]]), potrai cambiare la tua password.\n\\Cordiali saluti,\nl\'amministratore del sito';
 
 $_lang['setting_welcome_screen'] = 'Mostra Schermata Benvenuto';
 $_lang['setting_welcome_screen_desc'] = 'Se impostato su \'SI\', la schermata di benvenuto verrà mostrata al prossimo caricamento della pagina di benvenuto, e non verrà mostrato successivamente.';
@@ -631,4 +650,3 @@ $_lang['setting_which_element_editor_desc'] = 'Qui puoi specificare quale Editor
 
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 $_lang['setting_xhtml_urls_desc'] = 'Se impostato su \'SI\', tutti gli URLs generati da MODX saranno XHTML-compliant, compresa la codifica della e commerciale (ampersand (&)).';
-

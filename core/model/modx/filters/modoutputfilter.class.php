@@ -544,6 +544,28 @@ class modOutputFilter {
                             $output = urldecode($output);
                             break;
 
+                        case 'toPlaceholder':
+                            $this->modx->toPlaceholder($m_val,$output);
+                            break;
+                        case 'cssToHead':
+                            $this->modx->regClientCSS($output);
+                            break;
+                        case 'htmlToHead':
+                            $this->modx->regClientStartupHTMLBlock($output);
+                            break;
+                        case 'htmlToBottom':
+                            $this->modx->regClientHTMLBlock($output);
+                            break;
+                        case 'jsToHead':
+                            if (empty($m_val)) $m_val = false;
+                            $this->modx->regClientStartupScript($output,$m_val);
+                            break;
+                        case 'jsToBottom':
+                            if (empty($m_val)) $m_val = false;
+                            $this->modx->regClientScript($output,$m_val);
+                            break;
+
+
                         /* Default, custom modifier (run snippet with modifier name) */
                         default:
                             /*@todo Possibility to only look for snippet names prefixed with 'filter:' */

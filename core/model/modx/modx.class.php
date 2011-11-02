@@ -1018,11 +1018,11 @@ class modX extends xPDO {
                 }
             }
         } else {
-            $this->user = $this->newObject('modUser', array(
-                    'id' => 0,
-                    'username' => '(anonymous)'
-                )
-            );
+            $this->user = $this->newObject('modUser');
+            $this->user->fromArray(array(
+                'id' => 0,
+                'username' => '(anonymous)'
+            ), '', true);
         }
         ksort($this->config);
         $this->toPlaceholders($this->user->get(array('id','username')),'modx.user');

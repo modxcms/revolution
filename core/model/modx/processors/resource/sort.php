@@ -64,7 +64,6 @@ foreach ($nodes as $ar_node) {
     $old_context_key = $node->get('context_key');
     $contextsAffected[$old_context_key] = true;
     if ($old_context_key != $ar_node['context'] && !empty($ar_node['context'])) {
-        changeChildContext($node, $ar_node['context']); /* recursively move children to new context */
         $node->set('context_key',$ar_node['context']);
         $contextsAffected[$ar_node['context']] = true;
         $dontChangeParents[] = $node->get('id'); /* prevent children from reverting back */
@@ -118,12 +117,5 @@ function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
             $order++;
         }
         getNodesFormatted($ar_nodes,$children,$id);
-    }
-}
-
-function changeChildContext(&$node, $context) {
-    foreach ($node->getMany('Children') as $child) {
-        changeChildContext($child, $context);
-        $child->set('context_key', $context);
     }
 }

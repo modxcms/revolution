@@ -285,6 +285,7 @@ $_lang['pagetitle'] = 'Titolo della Risorsa';
 $_lang['page_title'] = 'Titolo Risorsa';
 $_lang['parameter'] = 'Parametro';
 $_lang['parameters'] = 'Parametri';
+$_lang['parent'] = 'Parent';
 $_lang['password'] = 'Password';
 $_lang['path'] = 'Percorso';
 $_lang['per_page'] = 'Per pagina';
@@ -469,7 +470,7 @@ $_lang['xtype_desc'] = 'Tipo di campo del parametro. Può essere: textfield, tex
 $_lang['yes'] = 'SI';
 $_lang['yesno'] = 'SI/NO';
 
-$_lang['january'] = 'Gennaio'; 
+$_lang['january'] = 'Gennaio';
 $_lang['february'] = 'Febbraio';
 $_lang['march'] = 'Marzo';
 $_lang['april'] = 'Aprile';

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Chunk German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
