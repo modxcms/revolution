@@ -10,48 +10,13 @@
  * @package modx
  * @subpackage processors.context
  */
-class modContextCreateProcessor extends modProcessor {
-    /** @var modContext $context */
-    public $context;
+class modContextCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'modContext';
+    public $languageTopics = array('context');
+    public $permission = 'new_context';
+    public $elementType = 'context';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('new_context');
-    }
-
-    public function getLanguageTopics() {
-        return array('context');
-    }
-
-    /**
-     * {inheritDoc}
-     * 
-     * @return mixed
-     */
-    public function process() {
-        if (!$this->validate()) {
-            return $this->failure();
-        }
-
-        /* @var modContext $context */
-        $this->context= $this->modx->newObject('modContext');
-        $this->context->fromArray($this->getProperties(), '', true);
-        if ($this->context->save() == false) {
-            $this->modx->error->checkValidation($this->context);
-            return $this->failure($this->modx->lexicon('context_err_create'));
-        }
-
-        $this->ensureAdministratorAccess();
-        $this->refreshUserACLs();
-        $this->logManagerAction();
-        return $this->success('',$this->context);
-    }
-
-    /**
-     * Validate the passed properties
-     * 
-     * @return boolean
-     */
-    public function validate() {
+    public function beforeSave() {
         $key = $this->getProperty('key');
         if (empty($key)) {
             $this->addFieldError('key',$this->modx->lexicon('context_err_ns_key'));
@@ -59,7 +24,20 @@ class modContextCreateProcessor extends modProcessor {
         if ($this->alreadyExists($key)) {
             $this->addFieldError('key',$this->modx->lexicon('context_err_ae'));
         }
+        $this->object->set('key',$key);
+        
         return !$this->hasErrors();
+    }
+    
+    /**
+     * {inheritDoc}
+     * 
+     * @return mixed
+     */
+    public function afterSave() {
+        $this->ensureAdministratorAccess();
+        $this->refreshUserACLs();
+        return true;
     }
 
     /**
@@ -71,6 +49,7 @@ class modContextCreateProcessor extends modProcessor {
     public function alreadyExists($key) {
         return $this->modx->getCount('modContext',$key) > 0;
     }
+    
     /**
      * Ensure that Admin User Group always has access to this context, so that it never loses the ability
      * to remove or edit it.
@@ -88,7 +67,7 @@ class modContextCreateProcessor extends modProcessor {
                 $adminAdminAccess = $this->modx->newObject('modAccessContext');
                 $adminAdminAccess->set('principal',$adminGroup->get('id'));
                 $adminAdminAccess->set('principal_class','modUserGroup');
-                $adminAdminAccess->set('target',$this->context->get('key'));
+                $adminAdminAccess->set('target',$this->object->get('key'));
                 $adminAdminAccess->set('policy',$adminContextPolicy->get('id'));
                 $adminAdminAccess->save();
             }
@@ -103,14 +82,6 @@ class modContextCreateProcessor extends modProcessor {
         if ($this->modx->getUser()) {
             $this->modx->user->getAttributes(array(), '', true);
         }
-    }
-
-    /**
-     * Log the action of creating the context
-     * @return void
-     */
-    public function logManagerAction() {
-        $this->modx->logManagerAction('context_create','modContext',$this->context->get('id'));
     }
 }
 return 'modContextCreateProcessor';

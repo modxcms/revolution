@@ -24,6 +24,7 @@ $_lang['action_remove'] = 'Delete Action';
 $_lang['action_update'] = 'Update Action';
 $_lang['actions'] = 'Actions';
 $_lang['controller'] = 'Controller';
+$_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
 $_lang['controller_err_nf'] = 'Controller file not found!';
 $_lang['controller_err_ns'] = 'No controller specified!';
 $_lang['controller_parent'] = 'Parent Controller';

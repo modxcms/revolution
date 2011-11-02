@@ -5,61 +5,32 @@
  * @package modx
  * @subpackage processors.source
  */
-class modSourceCreateProcessor extends modProcessor {
-    /** @var modMediaSource $source */
-    public $source;
+class modSourceCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'sources.modMediaSource';
+    public $languageTopics = array('source');
+    public $permission = 'source_save';
+    public $elementType = 'source';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('source_save');
-    }
-
-    public function getLanguageTopics() {
-        return array('source');
-    }
-
-    public function process() {
-        $fields = $this->getProperties();
-
-        if (empty($fields['class_key'])) {
+    public function initialize() {
+        $classKey = $this->getProperty('class_key');
+        if (empty($classKey)) {
             $this->setProperty('class_key','sources.modFileMediaSource');
-            $fields['class_key'] = 'sources.modFileMediaSource';
         }
-
-        if (!$this->validate($fields)) {
-            return $this->failure();
-        }
-        
-        $this->source = $this->modx->newObject($fields['class_key']);
-        $this->source->fromArray($this->getProperties());
-        
-        if (!$this->source->checkPolicy('save')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        
-        /* save source */
-        if ($this->source->save() == false) {
-            return $this->failure($this->modx->lexicon('source_err_save'));
-        } else {
-            /* log manager action */
-            $this->modx->logManagerAction('source_create','sources.modMediaSource',$this->source->get('id'));
-        }
-        
-        return $this->success('',$this->source);
+        return parent::initialize();
     }
 
     /**
      * Validate the properties sent
-     *
-     * @param array $fields
      * @return boolean
      */
-    public function validate(array $fields) {
+    public function beforeSave() {
         /* validate name field */
-        if (empty($fields['name'])) {
+        $name = $this->object->get('name');
+        if (empty($name)) {
             $this->addFieldError('name',$this->modx->lexicon('source_err_ns_name'));
-        } else if ($this->alreadyExists($fields['name'])) {
+        } else if ($this->alreadyExists($name)) {
             $this->addFieldError('name',$this->modx->lexicon('source_err_ae_name',array(
-                'name' => $fields['name'],
+                'name' => $name,
             )));
         }
 

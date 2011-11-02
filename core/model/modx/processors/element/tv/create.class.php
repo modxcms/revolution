@@ -27,10 +27,9 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modTemplateVar';
     public $languageTopics = array('tv','category');
     public $permission = 'new_tv';
-    public $managerAction = 'tv_create';
     public $elementType = 'tv';
-    public $eventBeforeSave = 'OnBeforeTVFormSave';
-    public $eventAfterSave = 'OnTVFormSave';
+    public $beforeSaveEvent = 'OnBeforeTVFormSave';
+    public $afterSaveEvent = 'OnTVFormSave';
 
     /**
      * Fire pre-save logic

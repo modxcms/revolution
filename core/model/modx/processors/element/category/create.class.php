@@ -7,44 +7,17 @@
  * @package modx
  * @subpackage processors.element.category
  */
-class modElementCategoryCreateProcessor extends modProcessor {
-    /** @var modCategory $category */
-    public $category;
-
-    public function checkPermissions() {
-        return $this->modx->hasPermission('save_category');
-    }
-
-    public function getLanguageTopics() {
-        return array('category');
-    }
-
-    public function process() {
-        if (!$this->validate()) {
-            return $this->failure();
-        }
-
-        /* set fields */
-        $this->category = $this->modx->newObject('modCategory');
-        $this->category->fromArray($this->getProperties());
-
-        /* save category */
-        if ($this->category->save() === false) {
-            $this->modx->error->checkValidation($this->category);
-            return $this->failure($this->modx->lexicon('category_err_create'));
-        } else {
-            /* log manager action */
-            $this->modx->logManagerAction('category_create','modCategory',$this->category->get('id'));
-        }
-
-        return $this->success('',$this->category);
-    }
+class modElementCategoryCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'modCategory';
+    public $languageTopics = array('category');
+    public $permission = 'save_category';
+    public $elementType = 'category';
 
     /**
      * Validate the creation
-     * @return array|string
+     * @return boolean
      */
-    public function validate() {
+    public function beforeSave() {
         $name = $this->getProperty('category');
         if (empty($name)) {
             $this->addFieldError('category',$this->modx->lexicon('category_err_ns'));
@@ -59,7 +32,7 @@ class modElementCategoryCreateProcessor extends modProcessor {
      * Check to see if a Category with that name already exists
      * 
      * @param string $name The name to check against
-     * @return null|modCategory
+     * @return boolean
      */
     public function alreadyExists($name) {
         return $this->modx->getCount('modCategory',array('category' => $name)) > 0;

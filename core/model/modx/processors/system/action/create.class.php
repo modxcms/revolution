@@ -13,110 +13,57 @@
  * @package modx
  * @subpackage processors.system.action
  */
-class modActionCreateProcessor extends modProcessor {
-    /** @var modAction $action */
-    public $action;
+class modActionCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'modAction';
+    public $languageTopics = array('action','menu','namespace');
+    public $permission = 'actions';
+    public $elementType = 'action';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('actions');
-    }
-    public function getLanguageTopics() {
-        return array('action','menu','namespace');
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
     public function initialize() {
-        $id = $this->getProperty('id');
-        if (empty($id)) return $this->modx->lexicon('action_err_ns');
-        $this->action = $this->modx->getObject('modAction',$id);
-        if (empty($this->action)) return $this->modx->lexicon('action_err_nf');
-        return true;
+        $this->setDefaultProperties(array(
+            'haslayout' => true,
+            'lang_topics' => '',
+        ));
+        return parent::initialize();
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @return array|string
-     */
-    public function process() {
-        $fields = $this->getProperties();
-        $fields['haslayout'] = !empty($fields['haslayout']);
+    public function beforeSave() {
+        $hasLayout = $this->getProperty('haslayout',true);
+        $this->object->set('haslayout',$hasLayout);
 
-        if (!$this->validate($fields)) {
-            return $this->failure();
-        }
-
-        /* @var modAction $action */
-        $this->action = $this->modx->newObject('modAction');
-        $this->action->fromArray($fields);
-        if (empty($fields['lang_topics'])) {
-            $action->set('lang_topics','');
-        }
-        if ($this->action->save() == false) {
-            return $this->failure($this->modx->lexicon('action_err_create'));
-        }
-        
-        $this->logManagerAction();
-
-        return $this->success('',$this->action);
-    }
-
-    /**
-     * Validate the incoming data
-     * @param array $fields
-     * @return boolean
-     */
-    public function validate(array $fields) {
-        if (empty($fields['controller'])) {
+        $controller = $this->getProperty('controller');
+        if (empty($controller)) {
             $this->addFieldError('controller',$this->modx->lexicon('controller_err_ns'));
+        } else {
+            $controllerExists = $this->modx->getCount('modAction',array(
+                'namespace' => $this->getProperty('namespace'),
+                'controller' => $controller,
+            )) > 0;
+            if ($controllerExists) {
+                $this->addFieldError('controller',$this->modx->lexicon('controller_err_ae'));
+            }
         }
 
         /* verify parent */
-        if (!isset($fields['parent'])) {
+        $parent = $this->getProperty('parent',null);
+        if ($parent == null) {
             $this->addFieldError('parent',$this->modx->lexicon('action_parent_err_ns'));
-        } else if (!empty($fields['parent'])) {
-            $parent = $this->modx->getObject('modAction',$fields['parent']);
+        } else if (!empty($parent)) {
+            $parent = $this->modx->getObject('modAction',$parent);
             if (empty($parent)) {
                 $this->addFieldError('parent',$this->modx->lexicon('action_parent_err_nf'));
             }
         }
 
         /* verify namespace */
-        if (empty($fields['namespace'])) $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_nf'));
-        $namespace = $this->modx->getObject('modNamespace',$fields['namespace']);
+        $namespace = $this->getProperty('namespace','');
+        if (empty($namespace)) $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_nf'));
+        $namespace = $this->modx->getObject('modNamespace',$namespace);
         if (empty($namespace)) {
             $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_nf'));
         }
 
         return !$this->hasErrors();
-    }
-
-    /**
-     * Get the parent action and set fields if found
-     *
-     * @return null|modAction
-     */
-    public function getParent() {
-        /* get parent */
-        $parent = $this->action->getOne('Parent');
-        if ($parent != null) {
-            $this->action->set('parent',$parent->get('id'));
-            $this->action->set('parent_controller',$parent->get('controller'));
-        }
-        return $parent;
-    }
-
-    /**
-     * Log the manager action
-     *
-     * @return void
-     */
-    public function logManagerAction() {
-        $this->modx->logManagerAction('action_create','modAction',$this->action->get('id'));
     }
 }
 return 'modActionCreateProcessor';
