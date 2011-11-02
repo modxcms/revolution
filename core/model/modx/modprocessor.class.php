@@ -335,6 +335,151 @@ abstract class modDriverSpecificProcessor extends modProcessor {
 }
 
 /**
+ * A utility abstract class for defining getlist-based processors
+ */
+abstract class modObjectGetListProcessor extends modProcessor {
+    /** @var string $classKey The class key of the Object to iterate */
+    public $classKey;
+    /** @var string $permission The Permission to use when checking against */
+    public $permission = '';
+    /** @var array $languageTopics An array of language topics to load */
+    public $languageTopics = array();
+    /** @var string $defaultSortField The default field to sort by */
+    public $defaultSortField = 'name';
+
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
+    public function checkPermissions() {
+        return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
+    }
+    /**
+     * {@inheritDoc}
+     * @return array
+     */
+    public function getLanguageTopics() {
+        return $this->languageTopics;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
+    public function initialize() {
+        $this->setDefaultProperties(array(
+            'start' => 0,
+            'limit' => 20,
+            'sort' => $this->defaultSortField,
+            'dir' => 'ASC',
+            'combo' => false,
+        ));
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function process() {
+        $data = $this->getData();
+        $list = $this->iterate($data);
+        return $this->outputArray($list,$data['total']);
+    }
+
+    /**
+     * Iterate across the data
+     *
+     * @param array $data
+     * @return array
+     */
+    public function iterate(array $data) {
+        $list = array();
+        $list = $this->beforeIteration($list);
+        /** @var xPDOObject|modAccessibleObject $object */
+        foreach ($data['results'] as $object) {
+            if ($object instanceof modAccessibleObject && !$object->checkPolicy('list')) continue;
+            $objectArray = $this->prepareRow($object);
+            if (!empty($objectArray) && is_array($objectArray)) {
+                $list[] = $objectArray;
+            }
+        }
+        $list = $this->afterIteration($list);
+        return $list;
+    }
+
+    /**
+     * Can be used to insert a row before iteration
+     * @param array $list
+     * @return array
+     */
+    public function beforeIteration(array $list) {
+        return $list;
+    }
+
+    /**
+     * Can be used to insert a row after iteration
+     * @param array $list
+     * @return array
+     */
+    public function afterIteration(array $list) {
+        return $list;
+    }
+
+    /**
+     * Get the data of the query
+     * @return array
+     */
+    public function getData() {
+        $data = array();
+        $limit = intval($this->getProperty('limit'));
+        $start = intval($this->getProperty('start'));
+
+        /* query for chunks */
+        $c = $this->modx->newQuery($this->classKey);
+        $c = $this->prepareQueryBeforeCount($c);
+        $data['total'] = $this->modx->getCount($this->classKey);
+        $c = $this->prepareQueryAfterCount($c);
+        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
+        if ($limit > 0) {
+            $c->limit($limit,$start);
+        }
+
+        $data['results'] = $this->modx->getCollection($this->classKey,$c);
+        return $data;
+    }
+
+    /**
+     * Can be used to adjust the query prior to the COUNT statement
+     *
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
+        return $c;
+    }
+
+    /**
+     * Can be used to prepare the query after the COUNT statement
+     * 
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        return $c;
+    }
+
+    /**
+     * Prepare the row for iteration
+     * @param xPDOObject $object
+     * @return array
+     */
+    public function prepareRow(xPDOObject $object) {
+        return $object->toArray();
+    }
+}
+
+/**
  * Response class for Processor executions
  *
  * @package modx

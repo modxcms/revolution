@@ -1,4 +1,11 @@
 <?php
+/**
+ * Abstract class for Get Element processors. To be extended for each derivative element type.
+ *
+ * @abstract
+ * @package modx
+ * @subpackage processors.element
+ */
 abstract class modElementGetProcessor extends modProcessor {
     /** @var modElement $element */
     public $element;

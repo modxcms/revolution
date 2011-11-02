@@ -11,27 +11,20 @@
  * @package modx
  * @subpackage processors.element.category
  */
-class modElementCategoryGetListProcessor extends modProcessor {
-
-    public function getLanguageTopics() {
-        return array('category');
-    }
+class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modCategory';
+    public $languageTopics = array('category');
+    public $defaultSortField = 'parent,category';
 
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 0,
-            'sort' => 'parent,category',
-            'dir' => 'ASC',
             'showNone' => false,
         ));
-        return true;
+        return $initialized;
     }
 
-    public function process() {
-        $data = $this->getData();
-
-        $list = array();
+    public function beforeIteration(array $list) {
         if ($this->getProperty('showNone',false)) {
             $list = array('0' => array(
                 'id' => '',
@@ -39,8 +32,12 @@ class modElementCategoryGetListProcessor extends modProcessor {
                 'name' => $this->modx->lexicon('none'),
             ));
         }
+        return $list;
+    }
 
-        /* iterate through categories */
+    public function iterate(array $data) {
+        $list = array();
+        $list = $this->beforeIteration($list);
         /** @var modCategory $category */
         foreach ($data['results'] as $category) {
             if (!$category->checkPolicy('list')) continue;
@@ -65,29 +62,15 @@ class modElementCategoryGetListProcessor extends modProcessor {
                 }
             }
         }
-
-        return $this->outputArray($list,$data['total']);
+        $list = $this->afterIteration($list);
+        return $list;
     }
 
-    /**
-     * Get all categories
-     * 
-     * @return array|xPDOIterator
-     */
-    public function getData() {
-        $limit = $this->getProperty('limit');
-        $isLimit = !empty($limit);
-        $data = array();
-        
-        $c = $this->modx->newQuery('modCategory');
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->where(array(
             'modCategory.parent' => 0,
         ));
-        $data['total'] = $this->modx->getCount('modCategory',$c);
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($isLimit) $c->limit($limit,$this->getProperty('start'));
-        $data['results'] = $this->modx->getIterator('modCategory',$c);
-        return $data;
+        return $c;
     }
 }
 return 'modElementCategoryGetListProcessor';
