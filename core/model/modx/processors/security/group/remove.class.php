@@ -15,18 +15,11 @@ class modUserGroupRemoveProcessor extends modObjectRemoveProcessor {
     public $beforeRemoveEvent = 'OnUserGroupBeforeFormRemove';
     public $afterRemoveEvent = 'OnUserGroupFormRemove';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
-    }
-    public function getLanguageTopics() {
-        return array('user');
-    }
-
     public function beforeRemove() {
         if ($this->isAdminGroup()) {
             return $this->modx->lexicon('user_group_err_remove_admin');
         }
-        return true;
+        return parent::beforeRemove();
     }
 
     /**

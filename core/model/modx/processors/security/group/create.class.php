@@ -41,13 +41,13 @@ class modUserGroupCreateProcessor extends modObjectCreateProcessor {
             $this->addFieldError('name',$this->modx->lexicon('user_group_err_already_exists'));
         }
 
-        return !$this->hasErrors();
+        return parent::beforeSave();
     }
 
     public function afterSave() {
         $this->setContexts();
         $this->setResourceGroups();
-        return true;
+        return parent::afterSave();
     }
     
     /**

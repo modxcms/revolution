@@ -13,13 +13,7 @@ class modContextGetProcessor extends modObjectGetProcessor {
     public $permission = 'view_context';
     public $objectType = 'context';
     public $primaryKeyField = 'key';
-
-    public function checkPermissions() {
-        return $this->modx->hasPermission('view_context');
-    }
-    public function getLanguageTopics() {
-        return array('context');
-    }
+    
     public function initialize() {
         $key = $this->getProperty('key');
         $this->setProperty('key',urldecode($key));

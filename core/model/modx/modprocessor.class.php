@@ -400,6 +400,14 @@ abstract class modObjectGetProcessor extends modObjectProcessor {
      */
     public function process() {
         $this->beforeOutput();
+        return $this->cleanup();
+    }
+
+    /**
+     * Return the response
+     * @return array
+     */
+    public function cleanup() {
         return $this->success('',$this->object->toArray());
     }
 
@@ -990,7 +998,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
      * Can contain pre-removal logic; return false to prevent remove.
      * @return boolean
      */
-    public function beforeRemove() { return true; }
+    public function beforeRemove() { return !$this->hasErrors(); }
     /**
      * Can contain post-removal logic.
      * @return bool
