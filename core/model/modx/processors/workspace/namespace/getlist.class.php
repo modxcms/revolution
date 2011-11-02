@@ -12,79 +12,42 @@
  * @package modx
  * @subpackage processors.workspace.namespace
  */
-class modNamespaceGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('namespaces');
-    }
-    public function getLanguageTopics() {
-        return array('workspace','namespace');
-    }
+class modNamespaceGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modNamespace';
+    public $languageTopics = array('namespace','workspace');
+    public $permission = 'namespaces';
 
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'limit' => 10,
-            'start' => 0,
-            'sort' => 'name',
-            'dir' => 'ASC',
             'search' => false,
         ));
-        return true;
-    }
-    public function process() {
-        $data = $this->getData();
-        if (empty($data)) return $this->failure();
-
-        $list = array();
-        foreach ($data['results'] as $namespace) {
-            $namespaceArray = $this->prepareNamespace($namespace);
-            if (!empty($namespaceArray)) {
-                $list[] = $namespaceArray;
-            }
-        }
-        return $this->outputArray($list,$data['total']);
+        return $initialized;
     }
 
-    /**
-     * Get a collection of modNamespace objects
-     * 
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $limit = $this->getProperty('limit');
-        $isLimit = !empty($limit);
-
-        $c = $this->modx->newQuery('modNamespace');
-
-        $search = $this->getProperty('search');
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
+        $search = $this->getProperty('search','');
         if (!empty($search)) {
             $c->where(array(
                 'name:LIKE' => '%'.$search.'%',
                 'OR:path:LIKE' => '%'.$search.'%',
             ));
         }
-        $data['total'] = $this->modx->getCount('modNamespace',$c);
-
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($isLimit) $c->limit($limit,$this->getProperty('start'));
-
-        /* get namespaces */
-        $data['results'] = $this->modx->getCollection('modNamespace',$c);
-        return $data;
+        return $c;
     }
 
     /**
      * Prepare the Namespace for listing
      * 
-     * @param modNamespace $namespace
+     * @param xPDOObject $object
      * @return array
      */
-    public function prepareNamespace(modNamespace $namespace) {
-        $namespaceArray = $namespace->toArray();
-        $namespaceArray['perm'] = array();
-        $namespaceArray['perm'][] = 'pedit';
-        $namespaceArray['perm'][] = 'premove';
-        return $namespaceArray;
+    public function prepareRow(xPDOObject $object) {
+        $objectArray = $object->toArray();
+        $objectArray['perm'] = array();
+        $objectArray['perm'][] = 'pedit';
+        $objectArray['perm'][] = 'premove';
+        return $objectArray;
     }
 }
 return 'modNamespaceGetListProcessor';

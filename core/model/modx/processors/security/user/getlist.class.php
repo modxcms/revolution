@@ -13,52 +13,24 @@
  * @package modx
  * @subpackage processors.security.user
  */
-class modUserGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('view_user');
-    }
-    public function getLanguageTopics() {
-        return array('user');
-    }
+class modUserGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modUser';
+    public $languageTopics = array('user');
+    public $permission = 'view_user';
+    public $defaultSortField = 'username';
 
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 10,
-            'sort' => 'username',
-            'dir' => 'ASC',
             'usergroup' => false,
             'query' => '',
         ));
         if ($this->getProperty('sort') == 'username_link') $this->setProperty('sort','username');
         if ($this->getProperty('sort') == 'id') $this->setProperty('sort','modUser.id');
-        return true;
+        return $initialized;
     }
 
-    public function process() {
-        $data = $this->getData();
-        $list = array();
-        
-        foreach ($data['results'] as $user) {
-            $userArray = $this->prepareRow($user);
-            if (!empty($userArray)) {
-                $list[] = $userArray;
-            }
-        }
-
-        return $this->outputArray($list,$data['total']);
-    }
-
-    /**
-     * Get the collection of modUser objects
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $limit = intval($this->getProperty('limit'));
-
-        /* query for users */
-        $c = $this->modx->newQuery('modUser');
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->leftJoin('modUserProfile','Profile');
 
         $query = $this->getProperty('query','');
@@ -75,31 +47,26 @@ class modUserGetListProcessor extends modProcessor {
                 'UserGroupMembers.user_group' => $userGroup,
             ));
         }
-        
-        $data['total'] = $this->modx->getCount('modUser',$c);
-        
+        return $c;
+    }
+
+    public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->select($this->modx->getSelectColumns('modUser','modUser'));
         $c->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('fullname','email','blocked')));
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($limit > 0) {
-            $c->limit($limit,$this->getProperty('start'));
-        }
-
-        $data['results'] = $this->modx->getCollection('modUser',$c);
-        return $data;
+        return $c;
     }
 
     /**
      * Prepare the row for iteration
-     * @param modUser $user
+     * @param xPDOObject $object
      * @return array
      */
-    public function prepareRow(modUser $user) {
-        $userArray = $user->toArray();
-        $userArray['blocked'] = $user->get('blocked') ? true : false;
-        $userArray['cls'] = 'pupdate premove';
-        unset($userArray['password'],$userArray['cachepwd']);
-        return $userArray;
+    public function prepareRow(xPDOObject $object) {
+        $objectArray = $object->toArray();
+        $objectArray['blocked'] = $object->get('blocked') ? true : false;
+        $objectArray['cls'] = 'pupdate premove';
+        unset($objectArray['password'],$objectArray['cachepwd'],$objectArray['salt']);
+        return $objectArray;
     }
 }
 return 'modUserGetListProcessor';

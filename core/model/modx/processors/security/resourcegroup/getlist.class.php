@@ -12,53 +12,9 @@
  * @package modx
  * @subpackage processors.security.resourcegroup
  */
-class modResourceGroupGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
-    }
-    public function getLanguageTopics() {
-        return array('access');
-    }
-    
-    public function initialize() {
-        $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 10,
-            'sort' => 'name',
-            'dir' => 'ASC',
-        ));
-        return true;
-    }
-
-    public function process() {
-        $data = $this->getData();
-
-        $list = array();
-        /** @var modResourceGroup $resourceGroup */
-        foreach ($data['results'] as $resourceGroup) {
-            $list[] = $resourceGroup->toArray();
-        }
-        return $this->outputArray($list,$data['total']);
-    }
-
-    /**
-     * Get the Resource Group objects
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $limit = $this->getProperty('limit');
-
-        $c = $this->modx->newQuery('modResourceGroup');
-        $data['total'] = $this->modx->getCount('modResourceGroup',$c);
-
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if (intval($limit) > 0) {
-            $c->limit($limit,$this->getProperty('start'));
-        }
-        $data['results'] = $this->modx->getCollection('modResourceGroup',$c);
-        
-        return $data;
-    }
+class modResourceGroupGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modResourceGroup';
+    public $languageTopics = array('access');
+    public $permission = 'access_permissions';
 }
 return 'modResourceGroupGetListProcessor';

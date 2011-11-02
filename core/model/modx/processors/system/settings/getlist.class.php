@@ -12,41 +12,21 @@
  * @package modx
  * @subpackage processors.system.settings
  */
-class modSystemSettingsGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('settings');
-    }
-    public function getLanguageTopics() {
-        return array('setting','namespace');
-    }
+class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modSystemSetting';
+    public $languageTopics = array('setting','namespace');
+    public $permission = 'settings';
+    public $defaultSortField = 'key';
 
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'limit' => 20,
-            'start' => 0,
-            'sort' => 'key',
-            'dir' => 'ASC',
             'key' => false,
             'namespace' => false,
             'area' => false,
             'dateFormat' => '%b %d, %Y %I:%M %p',
         ));
-        return true;
-    }
-
-    public function process() {
-        $data = $this->getData();
-        if (empty($data)) return $this->failure();
-
-        $list = array();
-        foreach ($data['results'] as $setting) {
-            $settingArray = $this->prepareSetting($setting);
-            if (!empty($settingArray)) {
-                $list[] = $settingArray;
-            }
-        }
-
-        return $this->outputArray($list,$data['total']);
+        return $initialized;
     }
 
     /**
@@ -94,20 +74,20 @@ class modSystemSettingsGetListProcessor extends modProcessor {
     /**
      * Prepare a setting for output
      * 
-     * @param modSystemSetting $setting
+     * @param xPDOObject $object
      * @return array
      */
-    public function prepareSetting(modSystemSetting $setting) {
-        $settingArray = $setting->toArray();
+    public function prepareRow(xPDOObject $object) {
+        $settingArray = $object->toArray();
         $k = 'setting_'.$settingArray['key'];
 
         /* if 3rd party setting, load proper text, fallback to english */
-        $this->modx->lexicon->load('en:'.$setting->get('namespace').':default');
-        $this->modx->lexicon->load($setting->get('namespace').':default');
+        $this->modx->lexicon->load('en:'.$object->get('namespace').':default');
+        $this->modx->lexicon->load($object->get('namespace').':default');
 
         /* get translated area text */
-        if ($this->modx->lexicon->exists('area_'.$setting->get('area'))) {
-            $settingArray['area_text'] = $this->modx->lexicon('area_'.$setting->get('area'));
+        if ($this->modx->lexicon->exists('area_'.$object->get('area'))) {
+            $settingArray['area_text'] = $this->modx->lexicon('area_'.$object->get('area'));
         } else {
             $settingArray['area_text'] = $settingArray['area'];
         }
@@ -136,9 +116,9 @@ class modSystemSettingsGetListProcessor extends modProcessor {
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
+        $settingArray['editedon'] = $object->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
             ? ''
-            : strftime($this->getProperty('dateFormat','%b %d, %Y %I:%M %p'),strtotime($setting->get('editedon')));
+            : strftime($this->getProperty('dateFormat','%b %d, %Y %I:%M %p'),strtotime($object->get('editedon')));
 
         return $settingArray;
     }

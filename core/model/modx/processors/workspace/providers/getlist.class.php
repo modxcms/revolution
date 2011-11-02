@@ -11,72 +11,47 @@
  * @package modx
  * @subpackage processors.workspace.providers
  */
-class modProviderGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('providers');
-    }
-    public function getLanguageTopics() {
-        return array('workspace');
-    }
+class modProviderGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'transport.modTransportProvider';
+    public $languageTopics = array('workspace');
+    public $permission = 'providers';
+
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 10,
-            'sort' => 'name',
-            'dir' => 'ASC',
             'combo' => false,
         ));
-        return true;
+        return $initialized;
     }
-    public function process() {
-        $data = $this->getData();
 
-        $list = array();
+    public function getSortClassKey() {
+        return 'modTransportProvider';
+    }
+
+    public function beforeIteration(array $list) {
         $isCombo = $this->getProperty('combo',false);
         if ($isCombo) {
             $list[] = array('id' => 0,'name' => $this->modx->lexicon('none'));
         }
-        /** @var modTransportProvider $provider */
-        foreach ($data['results'] as $provider) {
-            $providerArray = $provider->toArray();
-            if (!$isCombo) {
-                $providerArray['menu'] = array(
-                    array(
-                        'text' => $this->modx->lexicon('provider_update'),
-                        'handler' => array( 'xtype' => 'modx-window-provider-update' ),
-                    ),
-                    '-',
-                    array(
-                        'text' => $this->modx->lexicon('provider_remove'),
-                        'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove"])',
-                    )
-                );
-            }
-            $list[] = $providerArray;
-        }
-
-        return $this->outputArray($list,$data['total']);
+        return $list;
     }
 
-    /**
-     * Get the modTransportProvider objects
-     * 
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $limit = intval($this->getProperty('limit'));
-
-        $c = $this->modx->newQuery('transport.modTransportProvider');
-        $data['total'] = $this->modx->getCount('transport.modTransportProvider',$c);
-
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($limit > 0) {
-            $c->limit($limit,$this->getProperty('start'));
+    public function prepareRow(xPDOObject $object) {
+        $objectArray = $object->toArray();
+        if (!$this->getProperty('combo',false)) {
+            $objectArray['menu'] = array(
+                array(
+                    'text' => $this->modx->lexicon('provider_update'),
+                    'handler' => array( 'xtype' => 'modx-window-provider-update' ),
+                ),
+                '-',
+                array(
+                    'text' => $this->modx->lexicon('provider_remove'),
+                    'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove"])',
+                )
+            );
         }
-
-        $data['results'] = $this->modx->getCollection('transport.modTransportProvider',$c);
-        return $data;
+        return $objectArray;
     }
 }
 return 'modProviderGetListProcessor';

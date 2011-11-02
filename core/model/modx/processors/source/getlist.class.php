@@ -11,29 +11,26 @@
  * @package modx
  * @subpackage processors.source
  */
-class modMediaSourceGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('source_view');
-    }
-    public function getLanguageTopics() {
-        return array('sources');
-    }
+class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'sources.modMediaSource';
+    public $languageTopics = array('sources');
+    public $permission = 'source_view';
+
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 10,
-            'sort' => 'name',
-            'dir' => 'ASC',
             'showNone' => false,
             'query' => '',
             'streamsOnly' => false,
         ));
-        return true;
+        return $initialized;
     }
-    public function process() {
-        $data = $this->getData();
 
-        $list = array();
+    public function getSortClassKey() {
+        return 'modMediaSource';
+    }
+
+    public function beforeIteration(array $list) {
         if ($this->getProperty('showNone')) {
             $list[] = array(
                 'id' => 0,
@@ -41,28 +38,10 @@ class modMediaSourceGetListProcessor extends modProcessor {
                 'description' => '',
             );
         }
-        /** @var modMediaSource $source */
-        foreach ($data['results'] as $source) {
-            if (!$source->checkPolicy('list')) continue;
-            $sourceArray = $this->prepareRow($source);
-            if (!empty($sourceArray)) {
-                $list[] = $sourceArray;
-            }
-        }
-        return $this->outputArray($list,$data['total']);
+        return $list;
     }
-
-    /**
-     * Get a collection of modMediaSource objects
-     * 
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $limit = intval($this->getProperty('limit'));
-        
-        $c = $this->modx->newQuery('sources.modMediaSource');
-
+    
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array('modMediaSource.name:LIKE' => '%'.$query.'%'));
@@ -73,34 +52,29 @@ class modMediaSourceGetListProcessor extends modProcessor {
                 'modMediaSource.is_stream' => true,
             ));
         }
-        $data['total'] = $this->modx->getCount('sources.modMediaSource',$c);
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($limit > 0) $c->limit($limit,$this->getProperty('start',0));
-        
-        $data['results'] = $this->modx->getCollection('sources.modMediaSource',$c);
-        return $data;
+        return $c;
     }
 
     /**
      * Prepare the source for iteration and output
      * 
-     * @param modMediaSource $source
+     * @param xPDOObject|modAccessibleObject $object
      * @return array
      */
-    public function prepareRow(modMediaSource $source) {
+    public function prepareRow(xPDOObject $object) {
         $canEdit = $this->modx->hasPermission('source_edit');
         $canSave = $this->modx->hasPermission('source_save');
         $canRemove = $this->modx->hasPermission('source_delete');
 
-        $sourceArray = $source->toArray();
+        $objectArray = $object->toArray();
 
         $cls = array();
-        if ($source->checkPolicy('save') && $canSave && $canEdit) $cls[] = 'pupdate';
-        if ($source->checkPolicy('remove') && $canRemove) $cls[] = 'premove';
-        if ($source->checkPolicy('copy') && $canSave) $cls[] = 'pduplicate';
+        if ($object->checkPolicy('save') && $canSave && $canEdit) $cls[] = 'pupdate';
+        if ($object->checkPolicy('remove') && $canRemove) $cls[] = 'premove';
+        if ($object->checkPolicy('copy') && $canSave) $cls[] = 'pduplicate';
         
-        $sourceArray['cls'] = implode(' ',$cls);
-        return $sourceArray;
+        $objectArray['cls'] = implode(' ',$cls);
+        return $objectArray;
     }
 }
 return 'modMediaSourceGetListProcessor';

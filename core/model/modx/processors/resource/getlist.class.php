@@ -12,56 +12,16 @@
  * @package modx
  * @subpackage processors.resource
  */
-class modResourceGetListProcessor extends modProcessor {
-    public function getLanguageTopics() {
-        return array('resource');
-    }
+class modResourceGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modResource';
+    public $languageTopics = array('resource');
+    public $defaultSortField = 'pagetitle';
 
-    public function initialize() {
-        $this->setDefaultProperties(array(
-            'limit' => 10,
-            'start' => 0,
-            'sort' => 'pagetitle',
-            'dir' => 'ASC',
-        ));
-        return true;
-    }
-
-    public function process() {
-        $data = $this->getResources();
-        if (empty($data)) return $this->failure();
-        
-        $list = array();
+    public function prepareRow(xPDOObject $object) {
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
-        /** @var modResource $resource */
-        foreach ($data['results'] as $resource) {
-            if ($resource->checkPolicy('list')) {
-                $resourceArray = $resource->toArray();
-                $resourceArray['pagetitle'] = htmlentities($resourceArray['pagetitle'],ENT_COMPAT,$charset);
-                $list[] = $resourceArray;
-            }
-        }
-        return $this->outputArray($list,$data['total']);
-    }
-
-    /**
-     * @return array
-     */
-    public function getResources() {
-        $data = array();
-
-        /* setup default properties */
-        $limit = $this->getProperty('limit',10);
-        $isLimit = !empty($limit);
-
-        /* query for resources */
-        $c = $this->modx->newQuery('modResource');
-        $data['total'] = $this->modx->getCount('modResource',$c);
-
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($isLimit) $c->limit($limit,$this->getProperty('start'));
-        $data['results'] = $this->modx->getIterator('modResource',$c);
-        return $data;
+        $objectArray = $object->toArray();
+        $resourceArray['pagetitle'] = htmlentities($objectArray['pagetitle'],ENT_COMPAT,$charset);
+        return $objectArray;
     }
 }
 return 'modResourceGetListProcessor';

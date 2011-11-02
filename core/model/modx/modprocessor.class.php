@@ -346,6 +346,8 @@ abstract class modObjectGetListProcessor extends modProcessor {
     public $languageTopics = array();
     /** @var string $defaultSortField The default field to sort by */
     public $defaultSortField = 'name';
+    /** @var boolean $checkListPermission If true and object is a modAccessibleObject, will check list permission */
+    public $checkListPermission = true;
 
     /**
      * {@inheritDoc}
@@ -398,7 +400,7 @@ abstract class modObjectGetListProcessor extends modProcessor {
         $list = $this->beforeIteration($list);
         /** @var xPDOObject|modAccessibleObject $object */
         foreach ($data['results'] as $object) {
-            if ($object instanceof modAccessibleObject && !$object->checkPolicy('list')) continue;
+            if ($this->checkListPermission && $object instanceof modAccessibleObject && !$object->checkPolicy('list')) continue;
             $objectArray = $this->prepareRow($object);
             if (!empty($objectArray) && is_array($objectArray)) {
                 $list[] = $objectArray;
@@ -440,13 +442,23 @@ abstract class modObjectGetListProcessor extends modProcessor {
         $c = $this->prepareQueryBeforeCount($c);
         $data['total'] = $this->modx->getCount($this->classKey);
         $c = $this->prepareQueryAfterCount($c);
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
+
+        $sortClassKey = $this->getSortClassKey();
+        $c->sortby($this->modx->getSelectColumns($sortClassKey,$sortClassKey,'',array($this->getProperty('sort'))),$this->getProperty('dir'));
         if ($limit > 0) {
             $c->limit($limit,$start);
         }
 
         $data['results'] = $this->modx->getCollection($this->classKey,$c);
         return $data;
+    }
+
+    /**
+     * Can be used to provide a custom sorting class key for the default sorting columns
+     * @return string
+     */
+    public function getSortClassKey() {
+        return $this->classKey;
     }
 
     /**

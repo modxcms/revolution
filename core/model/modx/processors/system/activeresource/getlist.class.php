@@ -13,7 +13,12 @@
  * @package modx
  * @subpackage processors.system.activeresource
  */
-class modActiveResourceListProcessor extends modProcessor {
+class modActiveResourceListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modResource';
+    public $languageTopics = array('resource');
+    public $permission = 'view_document';
+    public $defaultSortField = 'editedon';
+
     public function checkPermissions() {
         return $this->modx->hasPermission('view_document');
     } 
@@ -26,71 +31,33 @@ class modActiveResourceListProcessor extends modProcessor {
      * @return boolean
      */
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'limit' => 20,
-            'start' => 0,
-            'sort' => 'editedon',
-            'dir' => 'DESC',
             'dateFormat' => '%b %d, %Y %I:%M %p',
         ));
-        return true;
+        return $initialized;
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @return mixed
-     */
-    public function process() {
-        $data = $this->getData();
-        $list = $this->iterate($data['results']);
-        return $this->outputArray($list,$data['total']);
-    }
-
-    /**
-     * Get the collection of recently edited resources
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $limit = $this->getProperty('limit',20);
-        $isLimit = !empty($limit);
-        
-        $c = $this->modx->newQuery('modResource');
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->innerJoin('modUser','EditedBy');
         $c->where(array(
             'deleted' => 0,
             'editedon:!=' => null,
         ));
-        $data['total'] = $this->modx->getCount('modResource',$c);
+        return $c;
+    }
+    public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->select($this->modx->getSelectColumns('modResource','modResource'));
         $c->select($this->modx->getSelectColumns('modUser','EditedBy','',array('username')));
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($isLimit) $c->limit($limit,$this->getProperty('start',0));
-        $data['results'] = $this->modx->getCollection('modResource',$c);
-        
-        return $data;
+        return $c;
     }
 
-    /**
-     * Iterate across the resources and prepare them for outputting
-     * @param array $resources
-     * @return array
-     */
-    public function iterate(array $resources) {
-        $list = array();
-        $dateFormat = $this->getProperty('dateFormat');
-        /** @var modResource $resource */
-        foreach ($resources as $resource) {
-            if (!$resource->checkPolicy('list')) continue;
-
-            $resourceArray = $resource->get(array(
-                'id','pagetitle','editedon','username',
-            ));
-            $resourceArray['editedon'] = strftime($dateFormat,strtotime($resource->get('editedon')));
-            $list[] = $resourceArray;
-        }
-        return $list;
+    public function prepareRow(xPDOObject $object) {
+        $objectArray = $object->get(array(
+            'id','pagetitle','editedon','username',
+        ));
+        $objectArray['editedon'] = strftime($this->getProperty('dateFormat'),strtotime($object->get('editedon')));
+        return $objectArray;
     }
 }
 return 'modActiveResourceListProcessor';

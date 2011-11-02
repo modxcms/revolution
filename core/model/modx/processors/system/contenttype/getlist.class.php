@@ -11,60 +11,9 @@
  * @package modx
  * @subpackage processors.system.contenttype
  */
-class modContentTypeGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('content_types');
-    }
-    public function getLanguageTopics() {
-        return array('content_type');
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return mixed
-     */
-    public function initialize() {
-        $this->setDefaultProperties(array(
-            'limit' => 10,
-            'start' => 0,
-            'sort' => 'name',
-            'dir' => 'ASC',
-        ));
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return mixed
-     */
-    public function process() {
-        $data = $this->getData();
-
-        $list = array();
-        /** @var modContentType $contentType */
-        foreach ($data['results'] as $contentType) {
-            $list[] = $contentType->toArray();
-        }
-        return $this->outputArray($list,$data['total']);
-    }
-
-    /**
-     * Get a collection of Content Types
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $limit = $this->getProperty('limit');
-        $isLimit = !empty($limit);
-
-        $c = $this->modx->newQuery('modContentType');
-        $data['total'] = $this->modx->getCount('modContentType');
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($isLimit) {
-            $c->limit($limit,$this->getProperty('start'));
-        }
-        $data['results'] = $this->modx->getIterator('modContentType',$c);
-        return $data;
-    }
+class modContentTypeGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modContentType';
+    public $languageTopics = array('content_type');
+    public $permission = 'content_types';
 }
 return 'modContentTypeGetListProcessor';

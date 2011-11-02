@@ -12,44 +12,22 @@
  * @package modx
  * @subpackage processors.security.group
  */
-class modUserGroupUserGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
-    }
-    public function getLanguageTopics() {
-        return array('user');
-    }
+class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modUser';
+    public $defaultSortField = 'username';
+    public $permission = 'access_permissions';
+    public $languageTopics = array('user');
+
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 10,
-            'sort' => 'username',
-            'dir' => 'ASC',
             'usergroup' => false,
             'username' => '',
         ));
-        return true;
+        return $initialized;
     }
 
-    public function process() {
-        $data = $this->getData();
-        $list = array();
-        /** @var modUser $user */
-        foreach ($data['results'] as $user) {
-            $userArray = $user->toArray();
-            $list[] = $userArray;
-        }
-        return $this->outputArray($list,$data['total']);
-    }
-
-    /**
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        
-        /* build query */
-        $c = $this->modx->newQuery('modUser');
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->innerJoin('modUserGroupMember','UserGroupMembers');
         $c->innerJoin('modUserGroup','UserGroup','UserGroupMembers.user_group = UserGroup.id');
         $c->leftJoin('modUserGroupRole','UserGroupRole','UserGroupMembers.role = UserGroupRole.id');
@@ -65,9 +43,10 @@ class modUserGroupUserGetListProcessor extends modProcessor {
                 'modUser.username:LIKE' => '%'.$username.'%',
             ));
         }
+        return $c;
+    }
 
-        $data['total'] = $this->modx->getCount('modUser',$c);
-
+    public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->select($this->modx->getSelectColumns('modUser','modUser'));
         $c->select(array(
             'usergroup' => 'UserGroup.id',
@@ -77,12 +56,7 @@ class modUserGroupUserGetListProcessor extends modProcessor {
             'authority' => 'UserGroupRole.authority',
         ));
         $c->sortby('authority','ASC');
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($this->getProperty('limit') > 0) {
-            $c->limit($this->getProperty('limit'),$this->getProperty('start'));
-        }
-        $data['results'] = $this->modx->getCollection('modUser',$c);
-        return $data;
+        return $c;
     }
 }
 return 'modUserGroupUserGetListProcessor';

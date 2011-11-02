@@ -12,30 +12,23 @@
  * @package modx
  * @subpackage processors.security.group
  */
-class modUserGroupGetListProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
-    }
-    public function getLanguageTopics() {
-        return array('user','messages');
-    }
+class modUserGroupGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'modUserGroup';
+    public $languageTopics = array('user','access','messages');
+    public $permission = 'access_permissions';
 
     public function initialize() {
+        $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 10,
-            'sort' => 'name',
-            'dir' => 'ASC',
-            'exclude' => '',
+            'addAll' => false,
+            'addNone' => false,
+            'combo' => false,
         ));
-        return true;
+        return $initialized;
     }
 
-    public function process() {
-        $data = $this->getData();
-        $list = array();
-        
-        if (!empty($scriptProperties['addAll'])) {
+    public function beforeIteration(array $list) {
+        if ($this->getProperty('addAll',false)) {
             $list[] = array(
                 'id' => '',
                 'name' => '('.$this->modx->lexicon('all').')',
@@ -43,7 +36,7 @@ class modUserGroupGetListProcessor extends modProcessor {
                 'parent' => 0,
             );
         }
-        if (!empty($scriptProperties['addNone'])) {
+        if ($this->getProperty('addNone',false)) {
             $list[] = array(
                 'id' => 0,
                 'name' => $this->modx->lexicon('none'),
@@ -51,7 +44,7 @@ class modUserGroupGetListProcessor extends modProcessor {
                 'parent' => 0,
             );
         }
-        if (!empty($scriptProperties['combo'])) {
+        if ($this->getProperty('combo',false)) {
             $list[] = array(
                 'id' => '',
                 'name' => ' ('.$this->modx->lexicon('anonymous').') ',
@@ -59,36 +52,17 @@ class modUserGroupGetListProcessor extends modProcessor {
                 'parent' => 0,
             );
         }
-        /** @var modUserGroup $userGroup */
-        foreach ($data['results'] as $userGroup) {
-            $list[] = $userGroup->toArray();
-        }
-        return $this->outputArray($list,$data['total']);
+        return $list;
     }
 
-    /**
-     * @return array
-     */
-    public function getData() {
-        $data = array();
-        $c = $this->modx->newQuery('modUserGroup');
-
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
         $exclude = $this->getProperty('exclude','');
         if (!empty($exclude)) {
             $c->where(array(
                 'id:NOT IN' => is_array($exclude) ? $exclude : explode(',',$exclude),
             ));
         }
-
-        $data['total'] = $this->modx->getCount('modUserGroup',$c);
-
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($this->getProperty('limit') > 0) {
-            $c->limit($this->getProperty('limit'),$this->getProperty('start'));
-        }
-        $data['results'] = $this->modx->getCollection('modUserGroup',$c);
-
-        return $data;
+        return $c;
     }
 }
 return 'modUserGroupGetListProcessor';
