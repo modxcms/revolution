@@ -20,6 +20,8 @@ class modNamespaceCreateProcessor extends modObjectCreateProcessor {
         if (empty($name)) {
             $this->addFieldError('name',$this->modx->lexicon('namespace_err_ns_name'));
         }
+        $this->object->set('name',$name);
+
         $this->object->set('path',trim($this->object->get('path')));
         return parent::beforeSave();
     }
