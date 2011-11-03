@@ -448,9 +448,21 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
      * @return mixed
      */
     public function process() {
+        $beforeQuery = $this->beforeQuery();
+        if ($beforeQuery !== true) {
+            return $this->failure($beforeQuery);
+        }
         $data = $this->getData();
         $list = $this->iterate($data);
         return $this->outputArray($list,$data['total']);
+    }
+
+    /**
+     * Allow stoppage of process before the query
+     * @return boolean
+     */
+    public function beforeQuery() {
+        return true;
     }
 
     /**

@@ -6,7 +6,9 @@
  * @subpackage manager.controllers
  */
 class ResourceDataManagerController extends modManagerController {
+    /** @var modResource $resource */
     public $resource;
+    /** @var string $previewUrl */
     public $previewUrl;
 
     /**
