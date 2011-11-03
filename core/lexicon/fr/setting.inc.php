@@ -210,7 +210,7 @@ $_lang['setting_default_content_type'] = 'Type de contenu par défaut';
 $_lang['setting_default_content_type_desc'] = 'Indiquez le type de contenu par défaut à utiliser pour les nouvelles ressources. Vous pourrez toujours sélectionner un type de contenu différent lorsque vous éditerez une ressource; ce paramètre pré-selectionne seulement le type de contenu.';
 
 $_lang['setting_default_duplicate_publish_option'] = 'Option de publication lors de la duplication de ressource';
-$_lang['setting_default_duplicate_publish_option_desc'] = 'L\'option sélectionnée par défaut lors de la duplication d\'une ressource. Peut être « dépublié » pour dépublier toutes les ressources dupliquées, ou « préserver » pour conserver le status de la ressource originale (sur la ressource dupliquée).';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'L\'option sélectionnée par défaut lors de la duplication d\'une ressource. Peut être « unpublish » pour dépublier toutes les ressources dupliquées, « publish » pour publier toutes les ressources dupliquées ou « preserve » pour conserver le status de la ressource originale (sur la ressource dupliquée).';
 
 $_lang['setting_default_media_source'] = 'Media Source par défaut';
 $_lang['setting_default_media_source_desc'] = 'Media Source à charger par défaut.';
@@ -673,6 +673,9 @@ $_lang['setting_use_editor_err'] = 'Veuillez indiquer si vous désirez ou non ut
 
 $_lang['setting_use_multibyte'] = 'Utiliser l\'extenssion Multibyte';
 $_lang['setting_use_multibyte_desc'] = 'Mettre à oui si vous désirez utilisez l\'extenssion mbstring pour les caractères multibyte dans votre installation de MODX. À n\'activer que si l\'extenssion mbstring est installée.';
+
+$_lang['setting_use_weblink_target'] = 'Utiliser le lien de destination';
+$_lang['setting_use_weblink_target_desc'] = 'Activez cette option si vous désirez que les liens MODX et makeUrl() utilisent la destination du lien pour générer le lien. Par défaut, MODX utilisera le système interne d\'URL et la méthode makeUrl().';
 
 $_lang['setting_webpwdreminder_message'] = 'Email de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par email. Le gestionnaire de contenu envera un email contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note:</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'itendifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter!</strong>';
