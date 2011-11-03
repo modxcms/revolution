@@ -129,6 +129,26 @@ interface modMediaSourceInterface
     public function getBasePath($object = '');
 
     /**
+     * Get the base URL for this source. Only applicable to sources that are streams; used for determining the base
+     * URL with Static objects and downloading objects.
+     * 
+     * @abstract
+     * @param string $object
+     * @return void
+     */
+    public function getBaseUrl($object = '');
+
+    /**
+     * Get the URL for an object in this source. Only applicable to sources that are streams; used for determining
+     * the base URL with Static objects and downloading objects.
+     *
+     * @abstract
+     * @param string $object
+     * @return void
+     */
+    public function getObjectUrl($object = '');
+
+    /**
      * Move a file or folder to a specific location
      *
      * @param string $from The location to move from
@@ -260,6 +280,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
             'file_remove' => $this->xpdo->hasPermission('file_remove'),
             'file_update' => $this->xpdo->hasPermission('file_update'),
             'file_upload' => $this->xpdo->hasPermission('file_upload'),
+            'file_view' => $this->xpdo->hasPermission('file_view'),
         );
         return $this->permissions;
     }
@@ -314,6 +335,8 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
     public function removeObject($objectPath) { return true; }
     public function renameObject($oldPath,$newName) { return true; }
     public function getBasePath($object = '') { return ''; }
+    public function getBaseUrl($object = '') { return ''; }
+    public function getObjectUrl($object = '') { return ''; }
     public function moveObject($from,$to) { return true; }
     public function getDefaultProperties() { return array(); }
 

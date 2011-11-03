@@ -340,6 +340,26 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
     }
 
+    ,downloadFile: function(item,e) {
+        var node = this.cm.activeNode;
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'browser/file.php'
+            ,params: {
+                action: 'download'
+                ,file: node.attributes.id
+                ,wctx: MODx.ctx || ''
+                ,source: this.getSource()
+            }
+            ,listeners: {
+                'success':{fn:function(r) {
+                    if (!Ext.isEmpty(r.object.url)) {
+                        location.href = MODx.config.connectors_url+'browser/file.php?action=download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                    }
+                },scope:this}
+            }
+        });
+    }
+
     ,getSource: function() {
         return this.config.baseParams.source;
     }

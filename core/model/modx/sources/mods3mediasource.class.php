@@ -206,6 +206,12 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                     'handler' => 'this.renameFile',
                 );
             }
+            if ($this->hasPermission('file_view')) {
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_download'),
+                    'handler' => 'this.downloadFile',
+                );
+            }
             if ($this->hasPermission('file_remove')) {
                 if (!empty($menu)) $menu[] = '-';
                 $menu[] = array(
@@ -663,5 +669,57 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             $src = $properties['url'].ltrim($src,'/');
         }
         return $src;
+    }
+
+    /**
+     * Get the base URL for this source. Only applicable to sources that are streams.
+     *
+     * @param string $object An optional object to find the base url of
+     * @return string
+     */
+    public function getBaseUrl($object = '') {
+        $properties = $this->getPropertyList();
+        return $properties['url'];
+    }
+
+    /**
+     * Get the absolute URL for a specified object. Only applicable to sources that are streams.
+     *
+     * @param string $object
+     * @return string
+     */
+    public function getObjectUrl($object = '') {
+        $properties = $this->getPropertyList();
+        return $properties['url'].$object;
+    }
+
+
+    /**
+     * Get the contents of a specified file
+     *
+     * @param string $objectPath
+     * @return array
+     */
+    public function getObjectContents($objectPath) {
+        $properties = $this->getPropertyList();
+        $objectUrl = $properties['url'].$objectPath;
+        $contents = @file_get_contents($objectUrl);
+
+        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = explode(',',$imageExtensions);
+        $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
+        
+        return array(
+            'name' => $objectPath,
+            'basename' => basename($objectPath),
+            'path' => $objectPath,
+            'size' => '',
+            'last_accessed' => '',
+            'last_modified' => '',
+            'content' => $contents,
+            'image' => in_array($fileExtension,$imageExtensions) ? true : false,
+            'is_writable' => false,
+            'is_readable' => false,
+        );
     }
 }

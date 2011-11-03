@@ -227,6 +227,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'handler' => 'this.renameFile',
                 );
             }
+            if ($this->hasPermission('file_view')) {
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_download'),
+                    'handler' => 'this.downloadFile',
+                );
+            }
             if ($this->hasPermission('file_remove')) {
                 if (!empty($menu)) $menu[] = '-';
                 $menu[] = array(
@@ -944,5 +950,26 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
     public function getBasePath($object = '') {
         $bases = $this->getBases($object);
         return $bases['pathAbsolute'];
+    }
+
+    /**
+     * Get the base URL for this source. Only applicable to sources that are streams.
+     * 
+     * @param string $object An optional object to find the base url of
+     * @return string
+     */
+    public function getBaseUrl($object = '') {
+        $bases = $this->getBases($object);
+        return $bases['urlAbsolute'];
+    }
+
+    /**
+     * Get the absolute URL for a specified object. Only applicable to sources that are streams.
+     * 
+     * @param string $object
+     * @return string
+     */
+    public function getObjectUrl($object = '') {
+        return $this->getBaseUrl().$object;
     }
 }
