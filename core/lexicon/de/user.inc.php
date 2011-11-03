@@ -137,6 +137,7 @@ $_lang['user_group_err_nf'] = 'Benutzergruppe nicht gefunden!';
 $_lang['user_group_err_not_found'] = 'Benutzergruppe nicht gefunden!';
 $_lang['user_group_err_not_specified'] = 'Keine Benutzergruppe angegeben!';
 $_lang['user_group_err_ns'] = 'Keine Benutzergruppe angegeben!';
+$_lang['user_group_err_ns_name'] = 'Bitte geben Sie einen Namen für diese Benutzergruppe an.';
 $_lang['user_group_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Benutzergruppe zu löschen.';
 $_lang['user_group_err_remove_admin'] = 'Sie können die Administrator-Gruppe nicht löschen.';
 $_lang['user_group_err_save'] = 'Ein Fehler trat auf beim Versuch, die Benutzergruppe zu speichern.';
