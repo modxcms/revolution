@@ -59,6 +59,7 @@ $_lang['perm.empty_cache_desc'] = 'Vider le cache du site.';
 $_lang['perm.error_log_erase_desc'] = 'Effacer le log d\'erreurs.';
 $_lang['perm.error_log_view_desc'] = 'Voir le log d\'erreurs.';
 $_lang['perm.export_static_desc'] = 'Exporter le site en HTML static.';
+$_lang['perm.file_create_desc'] = 'Créer des fichiers.';
 $_lang['perm.file_list_desc'] = 'Lister les fichiers dans un répertoire donné.';
 $_lang['perm.file_manager_desc'] = 'Utiliser l\'utilitaire de gestion de fichiers.';
 $_lang['perm.file_remove_desc'] = 'Supprimer des fichiers physiques.';

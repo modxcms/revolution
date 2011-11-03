@@ -6,7 +6,9 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['directory'] = 'Répertoire';
 $_lang['file_confirm_remove'] = 'Voulez-vous vraiment supprimer ce fichier? Cela pourrait potentiellement endommager votre site.';
+$_lang['file_create'] = 'Créer un fichier';
 $_lang['file_deleted'] = 'Succès!';
 $_lang['file_delete_file'] = 'Supprimer le fichier';
 $_lang['file_delete_folder'] = 'Supprimer le répertoire';
