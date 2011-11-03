@@ -132,6 +132,7 @@ $_lang['user_group_err_nf'] = 'Groupe d\'utilisateurs introuvable!';
 $_lang['user_group_err_not_found'] = 'Groupe d\'utilisateurs introuvable!';
 $_lang['user_group_err_not_specified'] = 'Aucun groupe d\'utilisateurs spécifié!';
 $_lang['user_group_err_ns'] = 'Aucun groupe d\'utilisateurs spécifié!';
+$_lang['user_group_err_ns_name'] = 'Veuillez indiquer un nom pour ce groupe d\'utilisateurs.';
 $_lang['user_group_err_remove'] = 'Une erreur s\'est produite en tentant de supprimer le groupe d\'utilisateurs.';
 $_lang['user_group_err_remove_admin'] = 'Vous ne pouvez pas supprimer le groupe Administrateur.';
 $_lang['user_group_err_save'] = 'Une erreur s\'est produite en tentant d\'enregistrer le groupe d\'utilisateurs.';

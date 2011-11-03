@@ -10,6 +10,7 @@ $_lang['file_confirm_remove'] = 'Voulez-vous vraiment supprimer ce fichier? Cela
 $_lang['file_deleted'] = 'Succès!';
 $_lang['file_delete_file'] = 'Supprimer le fichier';
 $_lang['file_delete_folder'] = 'Supprimer le répertoire';
+$_lang['file_download'] = 'Télécharger le fichier';
 $_lang['file_download_file'] = 'Télécharger le fichier';
 $_lang['file_download_unzip'] = 'Décompresser le fichier';
 $_lang['file_edit'] = 'Modifier le fichier';

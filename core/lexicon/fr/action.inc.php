@@ -24,6 +24,7 @@ $_lang['action_remove'] = 'Supprimer l\'action';
 $_lang['action_update'] = 'Mise à jour de l\'action';
 $_lang['actions'] = 'Actions';
 $_lang['controller'] = 'Contrôleur';
+$_lang['controller_err_ae'] = 'Un contrôleur utilisant le même chemin existe déjà pour cet espace de nom.';
 $_lang['controller_err_nf'] = 'Le fichier du contrôleur est introuvable!';
 $_lang['controller_err_ns'] = 'Aucun contrôleur n\'a été spécifié!';
 $_lang['controller_parent'] = 'Contrôleur parent';
