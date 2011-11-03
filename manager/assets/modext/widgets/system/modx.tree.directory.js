@@ -37,6 +37,13 @@ MODx.tree.Directory = function(config) {
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
         },{
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/page_white.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('file_create')}
+            ,handler: this.createFile
+            ,scope: this
+            ,hidden: MODx.perm.file_create ? false : true
+        },{
             icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_upload.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('upload_files')}
@@ -51,6 +58,7 @@ MODx.tree.Directory = function(config) {
             ,scope: this
             ,hidden: MODx.perm.file_manager && !MODx.browserOpen ? false : true
         }]
+        ,source: 1
         ,tbarCfg: {
             id: config.id+'-tbar'
         }
@@ -172,6 +180,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,editFile: function(itm,e) {
         this.loadAction('a='+MODx.action['system/file/edit']+'&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+    }
+
+    ,createFile: function(itm,e) {
+        var d = this.cm.activeNode && this.cm.activeNode.attributes ? this.cm.activeNode.attributes.id : '';
+        this.loadAction('a='+MODx.action['system/file/create']+'&directory='+d+'&source='+this.getSource());
     }
 
     ,browser: null

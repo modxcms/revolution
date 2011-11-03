@@ -59,6 +59,7 @@ $_lang['perm.empty_cache_desc'] = 'To empty the site cache.';
 $_lang['perm.error_log_erase_desc'] = 'To erase the error log.';
 $_lang['perm.error_log_view_desc'] = 'To view the error log.';
 $_lang['perm.export_static_desc'] = 'To export the site to static HTML.';
+$_lang['perm.file_create_desc'] = 'To create a file.';
 $_lang['perm.file_list_desc'] = 'To list files within a given physical directory.';
 $_lang['perm.file_manager_desc'] = 'To use the file manager utility.';
 $_lang['perm.file_remove_desc'] = 'To remove physical files.';

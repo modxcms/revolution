@@ -130,6 +130,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if ($this->hasPermission('directory_remove')) $cls[] = 'premove';
                 if ($this->hasPermission('directory_update')) $cls[] = 'pupdate';
                 if ($this->hasPermission('file_upload')) $cls[] = 'pupload';
+                if ($this->hasPermission('file_create')) $cls[] = 'pcreate';
 
                 $directories[$fileName] = array(
                     'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
@@ -268,6 +269,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('upload_files'),
                     'handler' => 'this.uploadFiles',
+                );
+            }
+            if ($this->hasPermission('file_create')) {
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_create'),
+                    'handler' => 'this.createFile',
                 );
             }
             if ($this->hasPermission('directory_remove')) {
@@ -456,9 +463,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             'name' => $objectPath,
             'basename' => basename($file->getPath()),
             'path' => $file->getPath(),
-            'size' => $file->getSize(),
-            'last_accessed' => $file->getLastAccessed(),
-            'last_modified' => $file->getLastModified(),
+            'size' => @$file->getSize(),
+            'last_accessed' => @$file->getLastAccessed(),
+            'last_modified' => @$file->getLastModified(),
             'content' => $file->getContents(),
             'image' => in_array($fileExtension,$imageExtensions) ? true : false,
             'is_writable' => $file->isWritable(),
@@ -534,6 +541,38 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $file->save();
 
         $this->xpdo->logManagerAction('file_update','',$file->getPath());
+
+        return rawurlencode($file->getPath());
+    }
+
+
+    /**
+     * Create a file
+     *
+     * @param string $objectPath
+     * @param string $name
+     * @param string $content
+     * @return boolean|string
+     */
+    public function createObject($objectPath,$name,$content) {
+        $bases = $this->getBases($objectPath);
+
+        $fullPath = $bases['pathAbsolute'].ltrim($objectPath,'/').ltrim($name,'/');
+
+        /** @var modFile $file */
+        $file = $this->fileHandler->make($fullPath,array(),'modFile');
+
+        /* write file */
+        $file->setContent($content);
+        $file->create($content);
+        
+        /* verify file exists */
+        if (!$file->exists()) {
+            $this->addError('file',$this->xpdo->lexicon('file_err_nf').': '.$fullPath);
+            return false;
+        }
+
+        $this->xpdo->logManagerAction('file_create','',$file->getPath());
 
         return rawurlencode($file->getPath());
     }

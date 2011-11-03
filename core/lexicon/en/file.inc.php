@@ -6,7 +6,9 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['directory'] = 'Directory';
 $_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? This could potentially break your website.';
+$_lang['file_create'] = 'Create File';
 $_lang['file_deleted'] = 'Success!';
 $_lang['file_delete_file'] = 'Delete File';
 $_lang['file_delete_folder'] = 'Delete Folder';

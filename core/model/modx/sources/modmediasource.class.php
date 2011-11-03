@@ -92,6 +92,16 @@ interface modMediaSourceInterface
     public function updateObject($objectPath,$content);
 
     /**
+     * Create an object from a path
+     *
+     * @param string $objectPath
+     * @param string $name
+     * @param string $content
+     * @return boolean|string
+     */
+    public function createObject($objectPath,$name,$content);
+
+    /**
      * Remove an object
      *
      * @abstract
@@ -281,6 +291,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
             'file_update' => $this->xpdo->hasPermission('file_update'),
             'file_upload' => $this->xpdo->hasPermission('file_upload'),
             'file_view' => $this->xpdo->hasPermission('file_view'),
+            'file_create' => $this->xpdo->hasPermission('file_create'),
         );
         return $this->permissions;
     }
@@ -332,6 +343,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
     public function uploadObjectsToContainer($container,array $objects = array()) { return true; }
     public function getObjectContents($objectPath) { return true; }
     public function updateObject($objectPath,$content) { return true; }
+    public function createObject($objectPath,$name,$content) { return true; }
     public function removeObject($objectPath) { return true; }
     public function renameObject($oldPath,$newName) { return true; }
     public function getBasePath($object = '') { return ''; }

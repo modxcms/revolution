@@ -550,5 +550,15 @@ $collection['106']->fromArray(array (
   'assets' => '',
   'help_url' => 'Media+Sources',
 ), '', true, true);
+$collection['107']= $xpdo->newObject('modAction');
+$collection['107']->fromArray(array (
+  'id' => 107,
+  'namespace' => 'core',
+  'parent' => 70,
+  'controller' => 'system/file/create',
+  'haslayout' => 1,
+  'lang_topics' => 'file',
+  'assets' => '',
+), '', true, true);
 
 return $collection;

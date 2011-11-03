@@ -700,9 +700,9 @@ $events['OnFileManagerUpload']->fromArray(array (
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
-$events['OnFileEditFormPrerender']= $xpdo->newObject('modEvent');
-$events['OnFileEditFormPrerender']->fromArray(array (
-  'name' => 'OnFileEditFormPrerender',
+$events['OnFileCreateFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnFileCreateFormPrerender']->fromArray(array (
+  'name' => 'OnFileCreateFormPrerender',
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);

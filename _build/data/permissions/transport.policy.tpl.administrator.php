@@ -256,6 +256,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'file_create',
+    'description' => 'perm.file_create_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'file_list',
     'description' => 'perm.file_list_desc',
     'value' => true,

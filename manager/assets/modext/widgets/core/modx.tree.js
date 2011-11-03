@@ -480,9 +480,12 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 	
     ,loadAction: function(p) {
-        var id = this.cm.activeNode.id.split('_');id = id[1];
-        var u = 'index.php?id='+id+'&'+p;
-        location.href = u;
+        var id = '';
+        if (this.cm.activeNode && this.cm.activeNode.id) {
+            var pid = this.cm.activeNode.id.split('_');
+            id = 'id='+pid[1];
+        }
+        location.href = 'index.php?'+id+'&'+p;
     }
     /**
      * Loads the default toolbar for the tree.

@@ -1,43 +1,48 @@
 <?php
 /**
- * Removes a file.
+ * Updates a file.
  *
- * @param string $file The name of the file.
- * @param boolean $prependPath If true, will prepend the rb_base_dir to the file
- * name.
+ * @param string $file The absolute path of the file
+ * @param string $name Will rename the file if different
+ * @param string $content The new content of the file
  *
  * @package modx
  * @subpackage processors.browser.file
  */
-class modBrowserFileRemoveProcessor extends modProcessor {
+class modBrowserFileCreateProcessor extends modProcessor {
     /** @var modMediaSource|modFileMediaSource $source */
     public $source;
     public function checkPermissions() {
-        return $this->modx->hasPermission('file_remove');
+        return $this->modx->hasPermission('file_create');
     }
     public function getLanguageTopics() {
         return array('file');
     }
-
     public function process() {
-        $file = $this->getProperty('file');
-        if (empty($file)) return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
+        /* get base paths and sanitize incoming paths */
+        $directory = rawurldecode($this->getProperty('directory',''));
+        $directory = ltrim(strip_tags(str_replace(array('../','./'),'',$directory)),'/');
+        
+        $name = $this->getProperty('name');
+        $name = ltrim(strip_tags(str_replace(array('../','./'),'',$name)),'/');
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
-        $success = $this->source->removeObject($file);
 
-        if (empty($success)) {
+        $path = $this->source->createObject($directory,$name,$this->getProperty('content'));
+        if (empty($path)) {
             $msg = '';
             $errors = $this->source->getErrors();
             foreach ($errors as $k => $msg) {
                 $this->addFieldError($k,$msg);
             }
-            return $this->failure();
+            return $this->failure($msg);
         }
-        return $this->success();
+        return $this->success('',array(
+            'file' => $directory.ltrim($name,'/'),
+        ));
     }
 
     /**
@@ -55,4 +60,4 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         return $this->source->initialize();
     }
 }
-return 'modBrowserFileRemoveProcessor';
+return 'modBrowserFileCreateProcessor';
