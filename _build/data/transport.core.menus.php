@@ -219,6 +219,7 @@ $children[8]->fromArray(array (
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 8,
   'handler' => 'MODx.logout(); return false;',
+  'permissions' => 'logout',
 ), '', true, true);
 
 
@@ -532,6 +533,7 @@ $children[0]->fromArray(array (
   'description' => 'site_schedule_desc',
   'icon' => 'images/icons/cal.gif',
   'menuindex' => 0,
+  'permissions' => 'view_document',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
