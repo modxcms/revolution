@@ -20,6 +20,7 @@ $menus[0]->fromArray(array (
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 0,
   'handler' => 'MODx.loadPage(""); return false;',
+  'permissions' => 'home',
 ), '', true, true);
 
 $children = array();
@@ -62,6 +63,7 @@ $menus[1]->fromArray(array (
   'description' => '',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 1,
+  'permissions' => 'menu_site',
 ), '', true, true);
 
 $children = array();
@@ -252,7 +254,7 @@ $menus[3]->fromArray(array (
   'description' => '',
   'icon' => 'images/icons/lock.gif',
   'menuindex' => 3,
-  'permissions' => 'access_permissions',
+  'permissions' => 'menu_security',
 ), '', true, true);
 $children = array();
 
@@ -411,6 +413,7 @@ $menus[4]->fromArray(array (
   'description' => '',
   'icon' => 'images/icons/menu_settings.gif',
   'menuindex' => 4,
+  'permissions' => 'menu_tools',
 ), '', true, true);
 $children = array();
 
@@ -521,6 +524,7 @@ $menus[5]->fromArray(array(
   'description' => '',
   'icon' => 'images/icons/menu_settings16.gif',
   'menuindex' => 5,
+  'permissions' => 'menu_reports',
 ), '', true, true);
 $children = array();
 
@@ -651,6 +655,7 @@ $menus[6]->fromArray(array (
   'description' => '',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 6,
+  'permissions' => 'menu_system',
 ), '', true, true);
 $children = array();
 
@@ -834,6 +839,7 @@ $menus[7]->fromArray(array (
   'description' => '',
   'icon' => 'images/icons/user_go.png',
   'menuindex' => 7,
+  'permissions' => 'menu_user',
 ), '', true, true);
 $children = array();
 
@@ -895,6 +901,7 @@ $menus[8]->fromArray(array (
   'description' => 'support_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 8,
+  'permissions' => 'menu_support',
 ), '', true, true);
 $children = array();
 
