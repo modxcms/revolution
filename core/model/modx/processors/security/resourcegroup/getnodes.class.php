@@ -53,7 +53,7 @@ class modResourceGroupGetNodesProcessor extends modProcessor {
                 /** @var modResource $resource */
                 foreach ($resources as $resource) {
                     $list[] = array(
-                        'text' => $resource->get('pagetitle'),
+                        'text' => $resource->get('pagetitle').' ('.$resource->get('id').')',
                         'id' => 'n_'.$resource->get('id'),
                         'leaf' => true,
                         'type' => 'modResource',
