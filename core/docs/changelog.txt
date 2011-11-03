@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5434] Change manager page title to use site_name as prefix instead of MODX
 - [#4875] Add ability to download file from Files tree
 - [#5997] Fix issue where in advanced installs with moved web path, assets directory is improperly created
 - [#5990] Fix issue where content types were not listable in Resource dropdowns
