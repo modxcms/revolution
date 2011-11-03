@@ -650,10 +650,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var ct = [];
         var qct = [];
         for (var k in types) {
-            console.log(types[k]);
             if (coreTypes.indexOf(k) != -1) {
-                console.log('pnew_'+k);
-                console.log(ui.node.attributes.cls);
                 if (!ui.hasClass('pnew_'+k)) {
                     continue;
                 }
