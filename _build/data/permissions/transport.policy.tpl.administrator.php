@@ -416,6 +416,21 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'new_static_resource',
+    'description' => 'perm.new_static_resource_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'new_symlink',
+    'description' => 'perm.new_symlink_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'new_weblink',
+    'description' => 'perm.new_weblink_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_document_in_root',
     'description' => 'perm.new_document_in_root_desc',
     'value' => true,

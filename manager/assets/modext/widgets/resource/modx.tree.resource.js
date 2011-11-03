@@ -598,7 +598,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 this.refreshNode(this.cm.activeNode.id);
             }
             ,scope: this
-        })
+        });
 
         if (ui.hasClass('pnew')) {
             m.push('-');
@@ -646,9 +646,18 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (Ext.isObject(o)) {
             Ext.apply(types,o);
         }
+        var coreTypes = ['modDocument','modWebLink','modSymLink','modStaticResource'];
         var ct = [];
         var qct = [];
         for (var k in types) {
+            console.log(types[k]);
+            if (coreTypes.indexOf(k) != -1) {
+                console.log('pnew_'+k);
+                console.log(ui.node.attributes.cls);
+                if (!ui.hasClass('pnew_'+k)) {
+                    continue;
+                }
+            }
             ct.push({
                 text: types[k]['text_create_here']
                 ,classKey: k

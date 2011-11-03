@@ -36,23 +36,30 @@ class modResourceGetToolbarProcessor extends modProcessor {
                 'tooltip' => $this->modx->lexicon('document_new'),
                 'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'\");");',
             );
+        }
+        if ($this->modx->hasPermission('new_weblink')) {
             $items[] = array(
                 'icon' => $p.'page_white_link.png',
                 'tooltip' => $this->modx->lexicon('add_weblink'),
                 'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modWebLink\");");',
             );
+        }
+        if ($this->modx->hasPermission('new_symlink')) {
             $items[] = array(
                 'icon' => $p.'page_white_copy.png',
                 'tooltip' => $this->modx->lexicon('add_symlink'),
                 'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modSymLink\");");',
             );
+        }
+        if ($this->modx->hasPermission('new_static_resource')) {
             $items[] = array(
                 'icon' => $p.'page_white_gear.png',
                 'tooltip' => $this->modx->lexicon('static_resource_new'),
                 'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modStaticResource\");");',
             );
-            $items[] = '-';
         }
+        $items[] = '-';
+
         $items[] = array(
             'icon' => $p.'refresh.png',
             'tooltip' => $this->modx->lexicon('refresh_tree'),

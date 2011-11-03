@@ -77,7 +77,6 @@ class modResourceGetNodesProcessor extends modProcessor {
             'save_document' => $this->modx->hasPermission('save_document') ? 'psave' : '',
             'view_document' => $this->modx->hasPermission('view_document') ? 'pview' : '',
             'edit_document' => $this->modx->hasPermission('edit_document') ? 'pedit' : '',
-            'new_document' => $this->modx->hasPermission('new_document') ? 'pnew' : '',
             'delete_document' => $this->modx->hasPermission('delete_document') ? 'pdelete' : '',
             'undelete_document' => $this->modx->hasPermission('undelete_document') ? 'pundelete' : '',
             'publish_document' => $this->modx->hasPermission('publish_document') ? 'ppublish' : '',
@@ -87,7 +86,16 @@ class modResourceGetNodesProcessor extends modProcessor {
             'edit_context' => $this->modx->hasPermission('edit_context') ? 'pedit' : '',
             'new_context' => $this->modx->hasPermission('new_context') ? 'pnew' : '',
             'delete_context' => $this->modx->hasPermission('delete_context') ? 'pdelete' : '',
-            'new_context_document' => $this->modx->hasPermission('new_document') ? 'pnewdoc' : '',
+
+            'new_context_document' => $this->modx->hasPermission('new_document') ? 'pnewdoc pnew_modDocument' : '',
+            'new_context_symlink' => $this->modx->hasPermission('new_symlink') ? 'pnewdoc pnew_modSymLink' : '',
+            'new_context_weblink' => $this->modx->hasPermission('new_weblink') ? 'pnewdoc pnew_modWebLink' : '',
+            'new_context_static_resource' => $this->modx->hasPermission('new_static_resource') ? 'pnewdoc pnew_modStaticResource' : '',
+
+            'new_static_resource' => $this->modx->hasPermission('new_static_resource') ? 'pnew pnew_modStaticResource' : '',
+            'new_symlink' => $this->modx->hasPermission('new_symlink') ? 'pnew pnew_modSymLink' : '',
+            'new_weblink' => $this->modx->hasPermission('new_weblink') ? 'pnew pnew_modWebLink' : '',
+            'new_document' => $this->modx->hasPermission('new_document') ? 'pnew pnew_modDocument' : '',
         );
 
     }
@@ -299,6 +307,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         $class[] = !empty($this->permissions['new_context']) ? $this->permissions['new_context'] : '';
         $class[] = !empty($this->permissions['delete_context']) ? $this->permissions['delete_context'] : '';
         $class[] = !empty($this->permissions['new_context_document']) ? $this->permissions['new_context_document'] : '';
+        $class[] = !empty($this->permissions['new_context_symlink']) ? $this->permissions['new_context_symlink'] : '';
+        $class[] = !empty($this->permissions['new_context_weblink']) ? $this->permissions['new_context_weblink'] : '';
+        $class[] = !empty($this->permissions['new_context_static_resource']) ? $this->permissions['new_context_static_resource'] : '';
         $class[] = !empty($this->permissions['resource_quick_create']) ? $this->permissions['resource_quick_create'] : '';
 
         $context->prepare();
@@ -348,6 +359,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         $class[] = !empty($this->permissions['view_document']) ? $this->permissions['view_document'] : '';
         $class[] = !empty($this->permissions['edit_document']) ? $this->permissions['edit_document'] : '';
         $class[] = !empty($this->permissions['new_document']) ? $this->permissions['new_document'] : '';
+        $class[] = !empty($this->permissions['new_symlink']) ? $this->permissions['new_symlink'] : '';
+        $class[] = !empty($this->permissions['new_weblink']) ? $this->permissions['new_weblink'] : '';
+        $class[] = !empty($this->permissions['new_static_resource']) ? $this->permissions['new_static_resource'] : '';
         $class[] = !empty($this->permissions['delete_document']) ? $this->permissions['delete_document'] : '';
         $class[] = !empty($this->permissions['undelete_document']) ? $this->permissions['undelete_document'] : '';
         $class[] = !empty($this->permissions['publish_document']) ? $this->permissions['publish_document'] : '';

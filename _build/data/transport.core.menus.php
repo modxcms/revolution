@@ -178,7 +178,7 @@ $children[5]->fromArray(array (
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 5,
   'params' => '&class_key=modWebLink',
-  'permissions' => 'new_document',
+  'permissions' => 'new_weblink',
 ), '', true, true);
 $children[5]->addOne($action);
 
@@ -192,7 +192,7 @@ $children[6]->fromArray(array (
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 6,
   'params' => '&class_key=modSymLink',
-  'permissions' => 'new_document',
+  'permissions' => 'new_symlink',
 ), '', true, true);
 $children[6]->addOne($action);
 
@@ -206,7 +206,7 @@ $children[7]->fromArray(array (
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 7,
   'params' => '&class_key=modStaticResource',
-  'permissions' => 'new_document',
+  'permissions' => 'new_static_resource',
 ), '', true, true);
 $children[7]->addOne($action);
 unset($action);
