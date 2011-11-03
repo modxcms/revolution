@@ -14,6 +14,5 @@
 class modContentTypeGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modContentType';
     public $languageTopics = array('content_type');
-    public $permission = 'content_types';
 }
 return 'modContentTypeGetListProcessor';
