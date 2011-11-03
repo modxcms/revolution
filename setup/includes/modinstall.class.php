@@ -391,7 +391,7 @@ class modInstall {
         );
 
         /* create assets/ */
-        $assetsPath = $modx->getOption('base_path').'assets/';
+        $assetsPath = $this->settings->get('assets_path',$this->settings->get('web_path',$modx->getOption('base_path')).'assets/');
         if (!is_dir($assetsPath)) {
             $cacheManager->writeTree($assetsPath,$directoryOptions);
         }
@@ -401,7 +401,7 @@ class modInstall {
         unset($assetsPath);
 
         /* create assets/components/ */
-        $assetsCompPath = $modx->getOption('base_path').'assets/components/';
+        $assetsCompPath = $this->settings->get('assets_path',$this->settings->get('web_path',$modx->getOption('base_path')).'assets/').'components/';
         if (!is_dir($assetsCompPath)) {
             $cacheManager->writeTree($assetsCompPath,$directoryOptions);
         }
@@ -411,7 +411,7 @@ class modInstall {
         unset($assetsCompPath);
 
         /* create core/components/ */
-        $coreCompPath = $modx->getOption('core_path').'components/';
+        $coreCompPath = $this->settings->get('core_path',$modx->getOption('core_path',null,MODX_CORE_PATH)).'components/';
         if (!is_dir($coreCompPath)) {
             $cacheManager->writeTree($coreCompPath,$directoryOptions);
         }
