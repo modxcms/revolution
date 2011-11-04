@@ -730,6 +730,14 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
     }
 
     /**
+     * @param array $criteria
+     * @return int
+     */
+    public function doesAlreadyExist(array $criteria) {
+        return $this->modx->getCount($this->classKey,$criteria);
+    }
+
+    /**
      * Log the removal manager action
      * @return void
      */
