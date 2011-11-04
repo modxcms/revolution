@@ -85,12 +85,53 @@ MODx.grid.AccessPolicy = function(config) {
                 ,handler: this.removeSelected
                 ,scope: this
             }]
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-policy-search'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{		
-    editPolicy: function(itm,e) {
+Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
+    search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-policy-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+
+    ,editPolicy: function(itm,e) {
         location.href = '?a='+MODx.action['security/access/policy/update']+'&id='+this.menu.record.id;
     }
     

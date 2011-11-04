@@ -454,6 +454,7 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
             'start' => 0,
             'limit' => 20,
             'sort' => $this->defaultSortField,
+            'sortAlias' => $this->classKey,
             'dir' => 'ASC',
             'combo' => false,
         ));
@@ -537,7 +538,7 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
         $c = $this->prepareQueryAfterCount($c);
 
         $sortClassKey = $this->getSortClassKey();
-        $sortKey = $this->modx->getSelectColumns($sortClassKey,$sortClassKey,'',array($this->getProperty('sort')));
+        $sortKey = $this->modx->getSelectColumns($sortClassKey,$this->getProperty('sortAlias',$sortClassKey),'',array($this->getProperty('sort')));
         if (empty($sortKey)) $sortKey = $this->getProperty('sort');
         $c->sortby($sortKey,$this->getProperty('dir'));
         if ($limit > 0) {
