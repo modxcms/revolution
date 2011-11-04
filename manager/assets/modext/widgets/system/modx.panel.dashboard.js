@@ -135,11 +135,6 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         if (wg) {
             bp['widgets'] = wg.encode();
         }
-        /*
-        var ug = Ext.getCmp('modx-grid-dashboard-usergroups');
-        if (ug) {
-            bp['usergroups'] = ug.encode();
-        }*/
         Ext.apply(o.form.baseParams,bp);
     }
     ,success: function(o) {
@@ -149,7 +144,6 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
             if (wg) { wg.getStore().commitChanges(); }
-            //Ext.getCmp('modx-grid-dashboard-usergroups').getStore().commitChanges();
 
         }
     }

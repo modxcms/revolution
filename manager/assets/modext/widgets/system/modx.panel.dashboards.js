@@ -88,6 +88,21 @@ MODx.grid.Dashboards = function(config) {
                 ,scope: this
             }]
         },'->',{
+            xtype: 'modx-combo-usergroup'
+            ,name: 'usergroup'
+            ,id: 'modx-user-filter-usergroup'
+            ,itemId: 'usergroup'
+            ,emptyText: _('user_group_filter')+'...'
+            ,baseParams: {
+                action: 'getList'
+                ,addAll: true
+            }
+            ,value: ''
+            ,width: 200
+            ,listeners: {
+                'select': {fn:this.filterUsergroup,scope:this}
+            }
+        },{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-dashboard-search'
@@ -210,6 +225,13 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     ,updateDashboard: function() {
         location.href = 'index.php?a='+MODx.action['system/dashboards/update']+'&id='+this.menu.record.id;
     }
+    
+    ,filterUsergroup: function(cb,nv,ov) {
+        this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -222,6 +244,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             action: 'getList'
     	};
         Ext.getCmp('modx-dashboard-search').reset();
+        Ext.getCmp('modx-user-filter-usergroup').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }

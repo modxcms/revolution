@@ -442,6 +442,8 @@ abstract class modObjectGetProcessor extends modObjectProcessor {
 abstract class modObjectGetListProcessor extends modObjectProcessor {
     /** @var string $defaultSortField The default field to sort by */
     public $defaultSortField = 'name';
+    /** @var string $defaultSortDirection The default direction to sort */
+    public $defaultSortDirection = 'ASC';
     /** @var boolean $checkListPermission If true and object is a modAccessibleObject, will check list permission */
     public $checkListPermission = true;
 
@@ -455,8 +457,9 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
             'limit' => 20,
             'sort' => $this->defaultSortField,
             'sortAlias' => $this->classKey,
-            'dir' => 'ASC',
+            'dir' => $this->defaultSortDirection,
             'combo' => false,
+            'query' => '',
         ));
         return true;
     }
@@ -927,6 +930,8 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
             return $this->modx->lexicon('access_denied');
         }
 
+        $this->newObject = $this->modx->newObject($this->classKey);
+
         return true;
     }
 
@@ -935,7 +940,12 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
      * @return mixed
      */
     public function process() {
-        $this->newObject = $this->modx->newObject($this->classKey);
+        /* Run the beforeSet method before setting the fields, and allow stoppage */
+        $canSave = $this->beforeSet();
+        if ($canSave !== true) {
+            return $this->failure($canSave);
+        }
+        
         $this->newObject->fromArray($this->object->toArray());
         $name = $this->getNewName();
         $this->setNewName($name);
@@ -968,6 +978,12 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
     public function cleanup() {
         return $this->success('',$this->newObject);
     }
+
+    /**
+     * Override in your derivative class to do functionality before the fields are set on the object
+     * @return boolean
+     */
+    public function beforeSet() { return !$this->hasErrors(); }
 
     /**
      * Run any logic before the object has been duplicated. May return false to prevent duplication.

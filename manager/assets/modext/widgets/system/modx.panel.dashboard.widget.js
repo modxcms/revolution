@@ -229,7 +229,9 @@ MODx.panel.DashboardWidget = function(config) {
     MODx.panel.DashboardWidget.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
-    setup: function() {
+    initialized: false
+    ,setup: function() {
+        if (this.initialized) { return false; }
         if (Ext.isEmpty(this.config.record.id)) {
             this.fireEvent('ready');
             return false;
@@ -245,6 +247,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
 
         this.fireEvent('ready',this.config.record);
         MODx.fireEvent('ready');
+        this.initialized = true;
     }
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
@@ -255,13 +258,12 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
         }
     }
     ,success: function(o) {
-        if (Ext.isEmpty(this.config['dashboard'])) {
+        if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             location.href = '?a='+MODx.action['system/dashboards/widget/update']+'&id='+o.result.object.id;
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
             if (g) { g.getStore().commitChanges(); }
-
         }
     }
 });
