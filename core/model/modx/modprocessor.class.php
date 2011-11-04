@@ -199,6 +199,23 @@ abstract class modProcessor {
     }
 
     /**
+     * Special helper method for handling checkboxes. Only set value if passed or $force is true, and check for a
+     * not empty value or string 'false'.
+     * 
+     * @param string $k
+     * @param boolean $force
+     * @return int|null
+     */
+    public function setCheckbox($k,$force = false) {
+        $v = null;
+        if ($force || isset($this->properties[$k])) {
+            $v = empty($this->properties[$k]) || $this->properties[$k] === 'false' ? 0 : 1;
+            $this->setProperty($k,$v);
+        }
+        return $v;
+    }
+
+    /**
      * Get an array of properties for this processor
      * @return array
      */
@@ -728,9 +745,15 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
     }
 
     public function process() {
+        /* Run the beforeSet method before setting the fields, and allow stoppage */
+        $canSave = $this->beforeSet();
+        if ($canSave !== true) {
+            return $this->failure($canSave);
+        }
+
         $this->object->fromArray($this->getProperties());
 
-        /** Run the beforeSave method and allow stoppage */
+        /* Run the beforeSave method and allow stoppage */
         $canSave = $this->beforeSave();
         if ($canSave !== true) {
             return $this->failure($canSave);
@@ -772,13 +795,20 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
     }
 
     /**
-     * Override in your derivative class to do functionality after save() is run
+     * Override in your derivative class to do functionality before the fields are set on the object
+     * @return boolean
+     */
+    public function beforeSet() { return !$this->hasErrors(); }
+
+
+    /**
+     * Override in your derivative class to do functionality before save() is run
      * @return boolean
      */
     public function beforeSave() { return !$this->hasErrors(); }
 
     /**
-     * Override in your derivative class to do functionality before save() is run
+     * Override in your derivative class to do functionality after save() is run
      * @return boolean
      */
     public function afterSave() { return true; }
