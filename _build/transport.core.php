@@ -305,18 +305,10 @@ unset ($events, $evt, $attributes);
 $settings = include MODX_BUILD_DIR . 'data/transport.core.system_settings.php';
 if (!is_array($settings) || empty($settings)) { $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not package in settings!'); flush(); }
 $attributes= array (
-    xPDOTransport::PRESERVE_KEYS => true
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
 );
 foreach ($settings as $setting) {
-    switch ($setting->get('key')) {
-        case 'session_cookie_path' :
-            $attributes[xPDOTransport::UPDATE_OBJECT]= true;
-            $setting->set('value', '/');
-            break;
-        default :
-            $attributes[xPDOTransport::UPDATE_OBJECT]= false;
-            break;
-    }
     $package->put($setting, $attributes);
 }
 
