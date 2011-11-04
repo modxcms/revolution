@@ -32,6 +32,7 @@ $_lang['dashboard_widgets.intro_msg'] = 'Ici vous pouvez ajouter, gérer et supp
 $_lang['dashboards'] = 'Tableaux de bord';
 $_lang['dashboards.intro_msg'] = 'Vous pouvez gérer ici tous les tableaux de bord disponibles pour le manager de MODX.';
 $_lang['rank'] = 'Rang';
+$_lang['user_group_filter'] = 'Par groupe d\'utilisateurs';
 $_lang['widget'] = 'Widget';
 $_lang['widget_content'] = 'Contenu du Widget';
 $_lang['widget_create'] = 'Créer un nouveau Widget';
