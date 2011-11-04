@@ -606,11 +606,17 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
     }
 
     /**
-     * Process the Element processor
+     * Process the Object create processor
      * {@inheritDoc}
      * @return mixed
      */
     public function process() {
+        /* Run the beforeSet method before setting the fields, and allow stoppage */
+        $canSave = $this->beforeSet();
+        if ($canSave !== true) {
+            return $this->failure($canSave);
+        }
+
         $this->object->fromArray($this->getProperties());
 
         /* run the before save logic */
@@ -653,9 +659,19 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
         return $this->cleanup();
     }
 
+    /**
+     * Return the success message
+     * @return array
+     */
     public function cleanup() {
         return $this->success('',$this->object);
     }
+
+    /**
+     * Override in your derivative class to do functionality before the fields are set on the object
+     * @return boolean
+     */
+    public function beforeSet() { return !$this->hasErrors(); }
 
     /**
      * Override in your derivative class to do functionality after save() is run
@@ -744,6 +760,10 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
     public function process() {
         /* Run the beforeSet method before setting the fields, and allow stoppage */
         $canSave = $this->beforeSet();
