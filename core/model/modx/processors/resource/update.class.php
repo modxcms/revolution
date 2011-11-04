@@ -44,10 +44,6 @@
  * save.
  * @return array
  *
- * @var modX $this->modx
- * @var array $scriptProperties
- * @var modProcessor $this
- *
  * @package modx
  * @subpackage processors.resource
  */
