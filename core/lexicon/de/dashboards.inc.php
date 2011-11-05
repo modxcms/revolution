@@ -37,6 +37,7 @@ $_lang['dashboard_widgets.intro_msg'] = 'Hier können Sie Widgets zu diesem Dash
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards.intro_msg'] = 'Hier können Sie alle verfügbaren Dashboards für diesen MODX-Manager verwalten.';
 $_lang['rank'] = 'Rang';
+$_lang['user_group_filter'] = 'Nach Benutzergruppe';
 $_lang['widget'] = 'Widget';
 $_lang['widget_content'] = 'Widget-Inhalt';
 $_lang['widget_create'] = 'Neues Widget erstellen';
