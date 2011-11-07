@@ -351,8 +351,129 @@ MODx.panel.WizardPanel = function(config) {
 Ext.extend(MODx.panel.WizardPanel,MODx.FormPanel);
 Ext.reg('modx-wizard-panel',MODx.panel.WizardPanel);
 
-
 MODx.PanelSpacer = {
     html: '<br />'
     ,border: false
 };
+
+/**
+ * A template panel base class
+ * 
+ * @class MODx.TemplatePanel
+ * @extends Ext.Panel
+ * @param {Object} config An object of options.
+ * @xtype modx-template-panel
+ */
+MODx.TemplatePanel = function(config) {
+    config = config || {}; 
+	this.startingMarkup = new Ext.XTemplate('<tpl for=".">'
+		+'<div class="empty-text-wrapper"><p>{text}</p></div>'
+	+'</tpl>', {
+		compiled: true
+	});
+	Ext.applyIf(config,{
+		frame:false
+		,startingText: 'Loading...'
+		,markup: null
+		,plain:true
+		,border: false
+	});
+	MODx.TemplatePanel.superclass.constructor.call(this,config);
+	this.on('render', this.init, this);
+}
+Ext.extend(MODx.TemplatePanel,Ext.Panel,{
+	init: function(){
+		this.reset();
+		this.tpl = new Ext.XTemplate(this.markup, { compiled: true });
+	}
+
+	,reset: function(){	
+		this.body.hide();
+		//Using the starting markup
+		this.startingMarkup.overwrite(this.body, {text: this.startingText});
+		this.body.slideIn('r', {stopFx:true, duration:.2});
+		Ext.getCmp('modx-content').doLayout();
+	}
+	
+	,updateDetail: function(data) {		
+		this.body.hide();
+		this.tpl.overwrite(this.body, data);
+		this.body.slideIn('r', {stopFx:true, duration:.2});
+		Ext.getCmp('modx-content').doLayout();
+	}
+});	
+Ext.reg('modx-template-panel',MODx.TemplatePanel);
+
+/**
+ * A manual breacrumb class + the panel desc if necessary
+ * 
+ * @class MODx.BreadcrumbsPanel
+ * @extends Ext.Panel
+ * @param {Object} config An object of options.
+ * @xtype modx-breadcrumbs-panel
+ */
+MODx.BreadcrumbsPanel = function(config) {
+    config = config || {}; 
+	/* Breadcrumbs + panel desc */
+	this.tpl = new Ext.XTemplate('<tpl if="typeof(trail) != &quot;undefined&quot;">'
+		+'<div class="crumb_wrapper"><ul class="crumbs">'
+			+'<tpl for="trail">'
+				+'<li{className:this.formatClass}>'
+					+'<tpl if="typeof(cmp) != &quot;undefined&quot;"><a href="#" class="controlBtn {cmp}"/>{text}</a></tpl>'  
+					+'<tpl if="typeof(cmp) == &quot;undefined&quot;">{text}</tpl>'  
+				+'</li>'
+			+'</tpl>'
+		+'</ul></div>'
+	+'</tpl>'
+	+'<tpl if="typeof(text) != &quot;undefined&quot;">'
+		+'<div{className:this.formatPanelClass}><p>{text}</p></div>'
+	+'</tpl>', {
+		compiled: true
+	});
+	this.tpl.formatClass = function(value, record) {				
+		return (value != undefined) ? ' class="'+value+'"' : "";
+	};
+	this.tpl.formatPanelClass = function(value, record) {				
+		return (value != undefined) ? ' class="panel-desc '+value+'"' : ' class="panel-desc"';
+	};
+	
+	Ext.applyIf(config,{
+		frame:false
+		,plain:true
+		,border: false
+		,bodyCssClass: 'breadcrumbs'
+	});
+	MODx.BreadcrumbsPanel.superclass.constructor.call(this,config);
+	this.on('render', this.init, this);
+}
+
+Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
+	init: function(){
+		this.reset();
+		this.body.on('click', this.onClick, this);
+	}
+	
+	,updateDetail: function(data) {		
+		this.body.hide();
+		this.tpl.overwrite(this.body, data);
+		this.body.slideIn('r', {stopFx:true, duration:.2});
+		setTimeout(function(){
+			Ext.getCmp('modx-content').doLayout();
+		}, 500);
+	}
+	
+	,reset: function(){	
+		this.updateDetail(this.root)
+	}
+	
+	,onClick: function(e){
+		var target = e.getTarget();
+		elm = target.className.split(' ')[0];
+		if(elm != "" && elm == 'controlBtn'){
+			cmp = target.className.split(' ')[1];
+			//The classes implementing the breadcrumbs have to be accessible via an "activate" method"
+			Ext.getCmp(cmp).activate();	
+		}
+	}	
+});	
+Ext.reg('modx-breadcrumbs-panel',MODx.BreadcrumbsPanel);

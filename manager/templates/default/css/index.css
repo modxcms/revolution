@@ -1575,10 +1575,166 @@ span.required {
 
 /* for selectability in ext grids */
 .x-selectable, .x-selectable * {
-     -webkit-user-select: text !important;
-     -o-user-select: text !important;
-     -khtml-user-select: all !important;
-     -ms-user-select: text !important;
-     user-select: text !important;
-     -moz-user-select: text !important;
+	-webkit-user-select: text !important;
+	-o-user-select: text !important;
+	-khtml-user-select: all !important;
+	-ms-user-select: text !important;
+	user-select: text !important;
+	-moz-user-select: text !important;
+}
+
+/* Breadcrumbs */
+
+.crumb_wrapper{
+	border-bottom: 1px solid #CACACA;
+    border-top: 1px solid #CACACA;
+    margin-top: 5px;
+}
+.crumbs {
+	background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom #DCDCDC;
+	background:-moz-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%) repeat scroll 0 0 transparent;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#fcfcfc),color-stop(100%,#dcdcdc));
+	background:-webkit-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
+	background:-o-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
+	background:-ms-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
+	background:linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
+	border-bottom:1px solid #EFEFEF;
+	height:34px;
+}
+.crumbs li {
+	background:url("../images/style/crumbs-bg.png") no-repeat scroll right center transparent;
+	color:#53595F;
+	float:left;
+	font-weight:normal;
+	line-height:35px;
+	padding:0 20px 0 15px;
+	text-shadow:0 1px 0 #FFF;
+}
+.crumbs li a {
+	display:block;
+	padding:0;
+	color:#53595F;
+	font-weight: bold;
+	text-decoration:none;
+}
+.crumbs li a:hover {
+	color:#777777;
+	cursor:pointer;
+}
+.breadcrumbs .panel-desc{
+	border-top: 1px solid #E7E7E7 !important;
+	margin-top: 1px;
+}
+
+/* LIGHTBOX */
+
+#ux-lightbox {
+	left:0;
+	line-height:0;
+	position:absolute;
+	text-align:center;
+	width:100%;
+	z-index:15000;
+}
+#ux-lightbox img {
+	height:auto;
+	width:auto;
+}
+#ux-lightbox a img { border:medium none; }
+#ux-lightbox-outerImageContainer {
+	background-color:#ffffff;
+	height:250px;
+	margin:0 auto;
+	position:relative;
+	width:250px;
+}
+#ux-lightbox-imageContainer { padding:10px; }
+#ux-lightbox-loading {
+	background:url("images/lb-load.gif") no-repeat scroll center 15% transparent;
+	height:25%;
+	left:0;
+	line-height:0;
+	position:absolute;
+	text-align:center;
+	top:40%;
+	width:100%;
+}
+#ux-lightbox-hoverNav {
+	height:100%;
+	left:0;
+	position:absolute;
+	top:0;
+	width:100%;
+	z-index:10;
+}
+#ux-lightbox-hoverNav a { outline:medium none; }
+#ux-lightbox-imageContainer > #ux-lightbox-hoverNav { left:0; }
+#ux-lightbox-navPrev, 
+#ux-lightbox-navNext {
+	display:block;
+	height:100%;
+	width:49%;
+}
+#ux-lightbox-navPrev {
+	float:left;
+	left:0;
+}
+#ux-lightbox-navPrev:hover, 
+#ux-lightbox-navPrev:visited:hover { background:url("images/lb-prev.png") no-repeat scroll left 33% transparent; }
+#ux-lightbox-navNext {
+	float:right;
+	right:0;
+}
+#ux-lightbox-navNext:hover, 
+#ux-lightbox-navNext:visited:hover { background:url("images/lb-next.png") no-repeat scroll right 33% transparent; }
+#ux-lightbox-outerDataContainer {
+	margin:0 auto;
+	width:100%;
+}
+#ux-lightbox-dataContainer {
+	background-color:#ffffff;
+	font:10px/1.4em Verdana, Helvetica, sans-serif;
+	overflow:auto;
+}
+#ux-lightbox-data {
+	color:#666666;
+	padding:0 10px;
+}
+#ux-lightbox-data #ux-lightbox-details {
+	float:left;
+	text-align:left;
+	width:80%;
+}
+#ux-lightbox-data #ux-lightbox-caption { font-weight:bold; }
+#ux-lightbox-data #ux-lightbox-imageNumber {
+	clear:left;
+	display:block;
+	padding-bottom:1em;
+}
+#ux-lightbox-data #ux-lightbox-navClose {
+	background:url("images/lb-close.gif") no-repeat scroll 0 0 transparent;
+	float:right;
+	height:22px;
+	outline:medium none;
+	padding-bottom:0.7em;
+	width:66px;
+}
+#ux-lightbox-data #ux-lightbox-navClose:hover { background-image:url("images/lb-close-over.gif"); }
+#ux-lightbox-overlay, 
+#ux-lightbox-shim {
+	background-color:#000000;
+	border:0 none;
+	height:500px;
+	left:0;
+	margin:0;
+	padding:0;
+	position:absolute;
+	top:0;
+	width:100%;
+	z-index:14999;
+}
+#ux-lightbox-shim {
+	background-color:transparent;
+	z-index:89;
 }
