@@ -26,7 +26,7 @@ MODx.page.UpdateResource = function(config) {
         }
         ,loadStay: true
         ,components: [{
-            xtype: 'modx-panel-resource'
+            xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: 'modx-panel-resource-div'
             ,resource: config.resource
             ,record: config.record || {}

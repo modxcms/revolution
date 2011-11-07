@@ -204,28 +204,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             it.push(this.getTemplateVariablesPanel(config));
         }
         if (config.access_permissions) {
-            it.push({
-                id: 'modx-resource-access-permissions'
-                ,autoHeight: true
-                ,title: _('resource_groups')
-                ,layout: 'form'
-                ,anchor: '100%'
-                ,items: [{
-                    html: '<p>'+_('resource_access_message')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
-                },{
-                    xtype: 'modx-grid-resource-security'
-                    ,cls: 'main-wrapper'
-                    ,preventRender: true
-                    ,resource: config.resource
-                    ,mode: config.mode || 'update'
-                    ,"parent": config.record["parent"] || 0
-                    ,listeners: {
-                        'afteredit': {fn:this.fieldChangeEvent,scope:this}
-                    }
-                }]
-            });
+            it.push(this.getAccessPermissionsTab(config));
         }
         var its = [];
         its.push(this.getPageHeader(config),{
@@ -311,6 +290,35 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }]
         },{
             html: MODx.onDocFormRender, border: false
+        },{
+            xtype: 'hidden'
+            ,fieldLabel: _('id')
+            ,hideLabel: true
+            ,description: '<b>[[*id]]</b><br />'
+            ,name: 'id'
+            ,id: 'modx-resource-id'
+            ,anchor: '100%'
+            ,value: config.resource || config.record.id
+            ,submitValue: true
+        },{
+            xtype: 'hidden'
+            ,name: 'type'
+            ,value: 'document'
+        },{
+            xtype: 'hidden'
+            ,name: 'context_key'
+            ,id: 'modx-resource-context-key'
+            ,value: config.record.context_key || 'web'
+        },{
+            xtype: 'hidden'
+            ,name: 'content'
+            ,id: 'hiddenContent'
+            ,value: (config.record.content || config.record.ta) || ''
+        },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
         }];
     }
 
@@ -432,35 +440,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-published'
             ,inputValue: 1
             ,checked: parseInt(config.record.published)
-        },{
-            xtype: 'hidden'//(config.resource ? 'statictextfield' : 'hidden')
-            ,fieldLabel: _('id')
-            ,hideLabel: true
-            ,description: '<b>[[*id]]</b><br />'
-            ,name: 'id'
-            ,id: 'modx-resource-id'
-            ,anchor: '100%'
-            ,value: config.resource || config.record.id
-            ,submitValue: true
-        },{
-            xtype: 'hidden'
-            ,name: 'type'
-            ,value: 'document'
-        },{
-            xtype: 'hidden'
-            ,name: 'context_key'
-            ,id: 'modx-resource-context-key'
-            ,value: config.record.context_key || 'web'
-        },{
-            xtype: 'hidden'
-            ,name: 'content'
-            ,id: 'hiddenContent'
-            ,value: (config.record.content || config.record.ta) || ''
-        },{
-            xtype: 'hidden'
-            ,name: 'create-resource-token'
-            ,id: 'modx-create-resource-token'
-            ,value: config.record.create_resource_token || ''
         }]
     }
 
@@ -700,6 +679,31 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             id: 'modx-content-below'
             ,border: false
         }];
+    }
+
+    ,getAccessPermissionsTab: function(config) {
+        return {
+            id: 'modx-resource-access-permissions'
+            ,autoHeight: true
+            ,title: _('resource_groups')
+            ,layout: 'form'
+            ,anchor: '100%'
+            ,items: [{
+                html: '<p>'+_('resource_access_message')+'</p>'
+                ,bodyCssClass: 'panel-desc'
+                ,border: false
+            },{
+                xtype: 'modx-grid-resource-security'
+                ,cls: 'main-wrapper'
+                ,preventRender: true
+                ,resource: config.resource
+                ,mode: config.mode || 'update'
+                ,"parent": config.record["parent"] || 0
+                ,listeners: {
+                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                }
+            }]
+        };
     }
 });
 Ext.reg('modx-panel-resource',MODx.panel.Resource);
