@@ -319,6 +319,16 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'create-resource-token'
             ,id: 'modx-create-resource-token'
             ,value: config.record.create_resource_token || ''
+        },{
+            xtype: 'hidden'
+            ,name: 'parent'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-hidden'
+        },{
+            xtype: 'hidden'
+            ,name: 'parent-original'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-old-hidden'
         }];
     }
 
@@ -467,16 +477,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     ,id: 'modx-resource-parent'
                     ,value: config.record.parent || 0
                     ,anchor: '100%'
-                },{
-                    xtype: 'hidden'
-                    ,name: 'parent'
-                    ,value: config.record.parent || 0
-                    ,id: 'modx-resource-parent-hidden'
-                },{
-                    xtype: 'hidden'
-                    ,name: 'parent-original'
-                    ,value: config.record.parent || 0
-                    ,id: 'modx-resource-parent-old-hidden'
                 },{
                     xtype: 'modx-combo-class-derivatives'
                     ,fieldLabel: _('resource_type')

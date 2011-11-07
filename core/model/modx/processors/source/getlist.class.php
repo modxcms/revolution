@@ -27,7 +27,7 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
     }
 
     public function getSortClassKey() {
-        return 'modMediaSource';
+        return '';
     }
 
     public function beforeIteration(array $list) {
