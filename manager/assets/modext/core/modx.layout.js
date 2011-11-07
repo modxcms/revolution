@@ -206,11 +206,11 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
         this.leftbarVisible ? this.hideLeftbar(.3) : this.showLeftbar(.3);
         this.leftbarVisible = !this.leftbarVisible;
     }
-    ,hideLeftbar: function(d) {
-        Ext.getCmp('modx-leftbar-tabs').collapse();
+    ,hideLeftbar: function(anim) {
+        Ext.getCmp('modx-leftbar-tabs').collapse(anim);
     }
-    ,showLeftbar: function(d) {
-        Ext.getCmp('modx-leftbar-tabs').expand();
+    ,showLeftbar: function(anim) {
+        Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
 });
 Ext.reg('modx-layout',MODx.Layout);

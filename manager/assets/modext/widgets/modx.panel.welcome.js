@@ -20,7 +20,14 @@ MODx.panel.Welcome = function(config) {
         }]
     });
     MODx.panel.Welcome.superclass.constructor.call(this,config);
-    MODx.fireEvent('ready');
+    this.setup();
 };
-Ext.extend(MODx.panel.Welcome,MODx.FormPanel);
+Ext.extend(MODx.panel.Welcome,MODx.FormPanel,{
+    setup: function() {
+        if (this.config.dashboard && this.config.dashboard.hide_trees) {
+            Ext.getCmp('modx-layout').hideLeftbar(false);
+        }
+        MODx.fireEvent('ready');
+    }
+});
 Ext.reg('modx-panel-welcome',MODx.panel.Welcome);

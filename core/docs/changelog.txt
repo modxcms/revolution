@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6009] Add ability to hide left-hand trees when rendering a Dashboard
 - [#6007] Stop upgrade from overwriting session_cookie_path system setting
 - [#5998] Add "Create File" option for stream-based media sources
 - [#4794] Add custom Permissions for restricting creation of core derivative Resource Types

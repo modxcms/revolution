@@ -42,37 +42,68 @@ MODx.panel.Dashboard = function(config) {
                     ,id: 'modx-dashboard-id'
                     ,value: config.record.id
                 },{
-                    name: 'name'
-                    ,id: 'modx-dashboard-name'
-                    ,xtype: 'textfield'
-                    ,fieldLabel: _('name')
-                    ,description: MODx.expandHelp ? '' : _('dashboard_desc_name')
-                    ,allowBlank: false
-                    ,enableKeyEvents: true
-                    ,anchor: '100%'
-                    ,listeners: {
-                        'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-dashboard-header').getEl().update('<h2>'+_('dashboard')+': '+f.getValue()+'</h2>');
-                        }}
+                    layout: 'column'
+                    ,border: false
+                    ,defaults: {
+                        layout: 'form'
+                        ,labelAlign: 'top'
+                        ,anchor: '100%'
+                        ,border: false
                     }
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-dashboard-name'
-                    ,html: _('dashboard_desc_name')
-                    ,cls: 'desc-under'
-                },{
-                    name: 'description'
-                    ,id: 'modx-dashboard-description'
-                    ,xtype: 'textarea'
-                    ,fieldLabel: _('description')
-                    ,description: MODx.expandHelp ? '' : _('dashboard_desc_description')
-                    ,anchor: '100%'
-                    ,grow: true
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-dashboard-description'
-                    ,html: _('dashboard_desc_description')
-                    ,cls: 'desc-under'
+                    ,items: [{
+                        columnWidth: .7
+                        ,cls: 'main-content'
+                        ,items: [{
+                            name: 'name'
+                            ,id: 'modx-dashboard-name'
+                            ,xtype: 'textfield'
+                            ,fieldLabel: _('name')
+                            ,description: MODx.expandHelp ? '' : _('dashboard_desc_name')
+                            ,allowBlank: false
+                            ,enableKeyEvents: true
+                            ,anchor: '100%'
+                            ,listeners: {
+                                'keyup': {scope:this,fn:function(f,e) {
+                                    Ext.getCmp('modx-dashboard-header').getEl().update('<h2>'+_('dashboard')+': '+f.getValue()+'</h2>');
+                                }}
+                            }
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'modx-dashboard-name'
+                            ,html: _('dashboard_desc_name')
+                            ,cls: 'desc-under'
+                        },{
+                            name: 'description'
+                            ,id: 'modx-dashboard-description'
+                            ,xtype: 'textarea'
+                            ,fieldLabel: _('description')
+                            ,description: MODx.expandHelp ? '' : _('dashboard_desc_description')
+                            ,anchor: '100%'
+                            ,grow: true
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'modx-dashboard-description'
+                            ,html: _('dashboard_desc_description')
+                            ,cls: 'desc-under'
+                        }]
+                    },{
+                        columnWidth: .3
+                        ,cls: 'main-content'
+                        ,items: [{
+                            name: 'hide_trees'
+                            ,id: 'modx-dashboard-hide-trees'
+                            ,xtype: 'xcheckbox'
+                            ,boxLabel: _('dashboard_hide_trees')
+                            ,description: MODx.expandHelp ? '' : _('dashboard_desc_hide_trees')
+                            ,inputValue: 1
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'modx-dashboard-hide-trees'
+                            ,html: _('dashboard_desc_hide_trees')
+                            ,cls: 'desc-under'
+                        }]
+
+                    }]
                 },{
                     html: '<hr />'
                     ,border: false

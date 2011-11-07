@@ -11,6 +11,7 @@ $xpdo_meta_map['modDashboard']= array (
   array (
     'name' => '',
     'description' => NULL,
+    'hide_trees' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -28,6 +29,16 @@ $xpdo_meta_map['modDashboard']= array (
       'dbtype' => 'text',
       'phptype' => 'string',
     ),
+    'hide_trees' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -40,6 +51,22 @@ $xpdo_meta_map['modDashboard']= array (
       'columns' => 
       array (
         'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'hide_trees' => 
+    array (
+      'alias' => 'hide_trees',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'hide_trees' => 
         array (
           'length' => '',
           'collation' => 'A',

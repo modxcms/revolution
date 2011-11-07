@@ -12,6 +12,7 @@ MODx.page.Welcome = function(config) {
         components: [{
             xtype: 'modx-panel-welcome'
             ,renderTo: 'modx-panel-welcome-div'
+            ,dashboard: config.dashboard || {}
         }]
     });
     MODx.page.Welcome.superclass.constructor.call(this,config);

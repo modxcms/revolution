@@ -402,9 +402,13 @@
     <object class="modDashboard" table="dashboard" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
+        <field key="hide_trees" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="hide_trees" name="hide_trees" primary="false" unique="false" type="BTREE">
+            <column key="hide_trees" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="UserGroups" class="modUserGroup" local="id" foreign="dashboard" cardinality="many" owner="local" />

@@ -38,6 +38,7 @@
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-welcome"
+        ,dashboard: '.$this->modx->toJSON($this->dashboard->toArray()).'
     });
 });
 </script>');

@@ -160,3 +160,12 @@ foreach ($s3sources as $s3source) {
     $s3source->set('is_stream',false);
     $s3source->save();
 }
+
+/** Add hide_trees field+index to modDashboard */
+$class = 'modDashboard';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'hide_trees','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'hide_trees'));
+
+$description = $this->install->lexicon('add_index',array('index' => 'hide_trees','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'hide_trees'));
