@@ -1834,6 +1834,7 @@ span.required {
 /* Template sidebar */
 #modx-package-browser-home {
 	margin-top:5px;
+	min-height: 560px;
 }
 
 .empty-text-wrapper{
