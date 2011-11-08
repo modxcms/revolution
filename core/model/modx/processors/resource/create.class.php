@@ -46,9 +46,14 @@
  * @package modx
  * @subpackage processors.resource
  */
-class modResourceCreateProcessor extends modProcessor {
-    /** @var modResource $resource */
-    public $resource;
+class modResourceCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'modResource';
+    public $languageTopics = array('resource');
+    public $permission = 'new_document';
+    public $objectType = 'resource';
+    public $beforeSaveEvent = 'OnBeforeDocFormSave';
+    public $afterSaveEvent = 'OnDocFormSave';
+
     /** @var modResource $parentResource */
     public $parentResource;
     /** @var string $resourceClass */
@@ -57,13 +62,8 @@ class modResourceCreateProcessor extends modProcessor {
     public $workingContext;
     /** @var modTemplate $template */
     public $template;
-
-    public function checkPermissions() {
-        return $this->modx->hasPermission('new_document');
-    }
-    public function getLanguageTopics() {
-        return array('resource');
-    }
+    /** @var modResource $object */
+    public $object;
 
     /**
      * Allow for Resources to use derivative classes for their processors
@@ -88,49 +88,28 @@ class modResourceCreateProcessor extends modProcessor {
     }
 
     /**
+     * Create the modResource object for manipulation
+     * @return string|modResource
+     */
+    public function initialize() {
+        /* get the class_key to determine resourceClass and resourceDir */
+        $classKey = $this->getProperty('class_key','modDocument');
+        $this->classKey = !empty($classKey) ? $classKey : 'modDocument';
+        $initialized = parent::initialize();
+        if (!$initialized) return $this->modx->lexicon('resource_err_create');
+        if (!$this->object instanceof $this->classKey) return $this->modx->lexicon('resource_err_class',array('class' => $this->resourceClass));
+
+        return $initialized;
+    }
+
+    /**
      * Process the form and create the Resource
      *
      * {@inheritDoc}
      * 
      * @return array|string
      */
-    public function process() {
-        $prepared = $this->prepare();
-        if ($prepared !== true) {
-            return $this->failure($prepared);
-        }
-
-        $canSave = $this->fireOnBeforeDocFormSave();
-        if (!empty($canSave)) {
-            return $this->failure($canSave);
-        }
-
-        /* save data */
-        if ($this->resource->save() == false) {
-            return $this->failure($this->modx->lexicon('resource_err_save'));
-        }
-
-        /* add lock */
-        $this->resource->addLock();
-        $this->setParentToContainer();
-        $this->saveResourceGroups();
-        $this->checkIfSiteStart();
-        $this->fireOnDocFormSave();
-
-        $this->logManagerAction();
-
-        /* remove lock */
-        $this->resource->removeLock();
-
-        $this->clearCache();
-        return $this->success('', array('id' => $this->resource->get('id')));
-    }
-
-    /**
-     * Prepare the Resource for saving
-     * @return boolean|string
-     */
-    public function prepare() {
+    public function beforeSet() {
         /* default settings */
         $this->prepareParent();
         $set = $this->checkParentPermissions();
@@ -140,37 +119,54 @@ class modResourceCreateProcessor extends modProcessor {
         if (!$this->workingContext) {
             return $this->modx->lexicon('access_denied');
         }
-        
+
         $set = $this->setFieldDefaults();
         if ($set !== true) return $set;
 
         $this->preparePageTitle();
-
-        $this->resource = $this->createResourceObject();
-        if (!($this->resource instanceof modResource)) return $this->resource;
-
         $this->prepareAlias();
-
-        if ($this->hasErrors()) return false;
 
         if (!$this->checkForAllowableCreateToken()) {
             return $this->modx->lexicon('resource_err_duplicate');
         }
 
-        $this->resource->set('template',$this->getProperty('template',0));
+        $this->object->set('template',$this->getProperty('template',0));
         $templateVariables = $this->addTemplateVariables();
         if (!empty($templateVariables)) {
-            $this->resource->addMany($templateVariables);
+            $this->object->addMany($templateVariables);
         }
 
         /* set fields */
-        $this->resource->fromArray($this->getProperties());
-        if (!$this->resource->get('class_key')) {
-            $this->resource->set('class_key',$this->resourceClass);
+        $this->object->fromArray($this->getProperties());
+        if (!$this->object->get('class_key')) {
+            $this->object->set('class_key',$this->resourceClass);
         }
 
         $this->setMenuIndex();
-        return true;
+
+        return parent::beforeSet();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function afterSave() {
+        $this->object->addLock();
+        $this->setParentToContainer();
+        $this->saveResourceGroups();
+        $this->checkIfSiteStart();
+        return parent::afterSave();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function cleanup() {
+        $this->object->removeLock();
+        $this->clearCache();
+        return $this->success('', array('id' => $this->object->get('id')));
     }
 
     /**
@@ -311,24 +307,6 @@ class modResourceCreateProcessor extends modProcessor {
     }
 
     /**
-     * Create the modResource object for manipulation
-     * @return string|modResource
-     */
-    public function createResourceObject() {
-        /* get the class_key to determine resourceClass and resourceDir */
-        $classKey = $this->getProperty('class_key','modDocument');
-        $this->resourceClass = !empty($classKey) ? $classKey : 'modDocument';
-
-        /* create the new resource instance using the indicated class */
-        /** @var modResource $resource */
-        $resource = $this->modx->newObject($this->resourceClass);
-        if (!$resource) return $this->modx->lexicon('resource_err_create');
-        if (!$resource instanceof $this->resourceClass) return $this->modx->lexicon('resource_err_class',array('class' => $this->resourceClass));
-
-        return $resource;
-    }
-
-    /**
      * Get the working Context for the Resource
      * 
      * @return modContext
@@ -357,14 +335,14 @@ class modResourceCreateProcessor extends modProcessor {
             
             /* auto assign alias */
             if (empty($alias) && $this->workingContext->getOption('automatic_alias', false)) {
-                $alias = $this->resource->cleanAlias($pageTitle);
+                $alias = $this->object->cleanAlias($pageTitle);
             }
             if (empty($alias)) {
                 $this->addFieldError('alias', $this->modx->lexicon('field_required'));
             } else {
                 $duplicateContext = $this->workingContext->getOption('global_duplicate_uri_check', false) ? '' : $this->getProperty('context_key');
-                $aliasPath = $this->resource->getAliasPath($alias,$this->getProperties());
-                $duplicateId = $this->resource->isDuplicateAlias($aliasPath, $duplicateContext);
+                $aliasPath = $this->object->getAliasPath($alias,$this->getProperties());
+                $duplicateId = $this->object->isDuplicateAlias($aliasPath, $duplicateContext);
                 if ($duplicateId) {
                     $err = $this->modx->lexicon('duplicate_uri_found', array(
                         'id' => $duplicateId,
@@ -412,7 +390,7 @@ class modResourceCreateProcessor extends modProcessor {
         $templateKey = $this->getProperty('template',0);
         $this->template = $this->modx->getObject('modTemplate',$templateKey);
         if (!empty($templateKey) && $this->template) {
-            $templateVars = $this->resource->getTemplateVars();
+            $templateVars = $this->object->getTemplateVars();
 
             /** @var modTemplateVar $tv */
             foreach ($templateVars as $tv) {
@@ -475,11 +453,11 @@ class modResourceCreateProcessor extends modProcessor {
         $menuIndex = $this->getProperty('menuindex',0);
         if (!empty($autoMenuIndex) && empty($menuIndex)) {
             $menuIndex = $this->modx->getCount('modResource',array(
-                'parent' => $this->resource->get('parent'),
-                'context_key' => $this->resource->get('context_key'),
+                'parent' => $this->object->get('parent'),
+                'context_key' => $this->object->get('context_key'),
             ));
         }
-        $this->resource->set('menuindex',$menuIndex);
+        $this->object->set('menuindex',$menuIndex);
         return $menuIndex;
     }
 
@@ -487,12 +465,12 @@ class modResourceCreateProcessor extends modProcessor {
      * Invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save
      * @return boolean
      */
-    public function fireOnBeforeDocFormSave() {
+    public function fireBeforeSaveEvent() {
         /** @var array $OnBeforeDocFormSave */
         $OnBeforeDocFormSave = $this->modx->invokeEvent('OnBeforeDocFormSave',array(
             'mode' => modSystemEvent::MODE_NEW,
             'id' => 0,
-            'resource' => &$this->resource,
+            'resource' => &$this->object,
             'reloadOnly' => $this->getProperty('reloadOnly',false),
         ));
         if (is_array($OnBeforeDocFormSave)) {
@@ -528,17 +506,17 @@ class modResourceCreateProcessor extends modProcessor {
                         /** @var modResourceGroupResource $resourceGroupResource */
                         $resourceGroupResource = $this->modx->getObject('modResourceGroupResource',array(
                             'document_group' => $resourceGroupAccess['id'],
-                            'document' => $this->resource->get('id'),
+                            'document' => $this->object->get('id'),
                         ));
                         if (empty($resourceGroupResource)) {
                             $resourceGroupResource = $this->modx->newObject('modResourceGroupResource');
                         }
                         $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
-                        $resourceGroupResource->set('document',$this->resource->get('id'));
+                        $resourceGroupResource->set('document',$this->object->get('id'));
                         if ($resourceGroupResource->save()) {
                             $this->modx->invokeEvent('OnResourceAddToResourceGroup',array(
                                 'mode' => 'resource-create',
-                                'resource' => &$this->resource,
+                                'resource' => &$this->object,
                                 'resourceGroup' => &$resourceGroup,
                             ));
                         }
@@ -547,13 +525,13 @@ class modResourceCreateProcessor extends modProcessor {
                     } else {
                         $resourceGroupResource = $this->modx->getObject('modResourceGroupResource',array(
                             'document_group' => $resourceGroupAccess['id'],
-                            'document' => $this->resource->get('id'),
+                            'document' => $this->object->get('id'),
                         ));
                         if ($resourceGroupResource instanceof modResourceGroupResource) {
                             if ($resourceGroupResource->remove()) {
                                 $this->modx->invokeEvent('OnResourceRemoveFromResourceGroup',array(
                                     'mode' => 'resource-create',
-                                    'resource' => &$this->resource,
+                                    'resource' => &$this->object,
                                     'resourceGroup' => &$resourceGroup,
                                 ));
                             }
@@ -568,11 +546,11 @@ class modResourceCreateProcessor extends modProcessor {
      * Invoke OnDocFormSave event
      * @return void
      */
-    public function fireOnDocFormSave() {
+    public function fireAfterSaveEvent() {
         $this->modx->invokeEvent('OnDocFormSave', array(
             'mode' => modSystemEvent::MODE_NEW,
-            'id' => $this->resource->get('id'),
-            'resource' => &$this->resource,
+            'id' => $this->object->get('id'),
+            'resource' => &$this->object,
             'reloadOnly' => $this->getProperty('reloadOnly',false),
         ));
     }
@@ -598,9 +576,9 @@ class modResourceCreateProcessor extends modProcessor {
      */
     public function checkIfSiteStart() {
         $saved = false;
-        if ($this->resource->get('id') == $this->workingContext->getOption('site_start') && !$this->resource->get('published')) {
-            $this->resource->set('published',true);
-            $saved = $this->resource->save();
+        if ($this->object->get('id') == $this->workingContext->getOption('site_start') && !$this->object->get('published')) {
+            $this->object->set('published',true);
+            $saved = $this->object->save();
         }
         return $saved;
     }
@@ -621,10 +599,5 @@ class modResourceCreateProcessor extends modProcessor {
         }
         return $clear;
     }
-
-    public function logManagerAction() {
-        $this->modx->logManagerAction('save_resource', $this->resourceClass, $this->resource->get('id'));
-    }
-
 }
 return 'modResourceCreateProcessor';
