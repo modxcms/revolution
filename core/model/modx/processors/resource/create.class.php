@@ -56,8 +56,6 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
     /** @var modResource $parentResource */
     public $parentResource;
-    /** @var string $resourceClass */
-    public $resourceClass;
     /** @var modContext $this->workingContext */
     public $workingContext;
     /** @var modTemplate $template */
@@ -76,6 +74,8 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public static function getInstance(modX &$modx,$className,$properties = array()) {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : 'modDocument';
+        $object = $modx->newObject($classKey);
+
         if (!in_array($classKey,array('modDocument','modResource',''))) {
             $className = $classKey.'CreateProcessor';
             if (!class_exists($className)) {
@@ -92,12 +92,12 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      * @return string|modResource
      */
     public function initialize() {
-        /* get the class_key to determine resourceClass and resourceDir */
+        /* get the class_key to determine classKey and resourceDir */
         $classKey = $this->getProperty('class_key','modDocument');
         $this->classKey = !empty($classKey) ? $classKey : 'modDocument';
         $initialized = parent::initialize();
         if (!$initialized) return $this->modx->lexicon('resource_err_create');
-        if (!$this->object instanceof $this->classKey) return $this->modx->lexicon('resource_err_class',array('class' => $this->resourceClass));
+        if (!$this->object instanceof $this->classKey) return $this->modx->lexicon('resource_err_class',array('class' => $this->classKey));
 
         return $initialized;
     }
@@ -135,16 +135,19 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         if (!empty($templateVariables)) {
             $this->object->addMany($templateVariables);
         }
-
-        /* set fields */
-        $this->object->fromArray($this->getProperties());
-        if (!$this->object->get('class_key')) {
-            $this->object->set('class_key',$this->resourceClass);
-        }
-
-        $this->setMenuIndex();
-
         return parent::beforeSet();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function beforeSave() {
+        if (!$this->object->get('class_key')) {
+            $this->object->set('class_key',$this->classKey);
+        }
+        $this->setMenuIndex();
+        return parent::beforeSave();
     }
 
     /**

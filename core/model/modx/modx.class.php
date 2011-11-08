@@ -496,6 +496,7 @@ class modX extends xPDO {
      */
     protected function _loadExtensionPackages() {
         $extPackages = $this->getOption('extension_packages');
+        $this->log(modX::LOG_LEVEL_ERROR,$extPackages);
         if (empty($extPackages)) return;
         $extPackages = $this->fromJSON($extPackages);
         if (!empty($extPackages)) {
