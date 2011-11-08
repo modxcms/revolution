@@ -49,6 +49,7 @@ class modPackageGetAttributeProcessor extends modProcessor {
                     : xPDOTransport::ACTION_UPGRADE;
                 $attributeFile = $this->modx->getOption('core_path').'packages/'.$this->package->signature.'/'.$attribute.'.php';
                 if (file_exists($attributeFile) && $attribute != '') {
+                    $modx =& $this->modx;
                     $attributes['setup-options'] = include $attributeFile;
                 }
                 @ob_end_clean();
