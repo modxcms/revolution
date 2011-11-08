@@ -1885,7 +1885,6 @@ a.x-menu-item {
 .x-grid-panel .x-panel-body-noheader {
     padding:0 !important;
     border:0 none;
-    border-bottom:1px solid #e4e4e4;
     background-color:transparent;
 }
 
@@ -2263,24 +2262,24 @@ body.x-body-masked .x-window-plain .x-window-mc {
     background-image:url(../images/modx-theme/editor/tb-sprite.gif);
 }
 .x-panel-noborder .x-panel-header-noborder {
-    border-bottom-color:#DFDFDF;
+    border-bottom-color:transparent;
 }
 
 .x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
     background-color:transparent;
-	border-bottom-color:#DFDFDF;
+	border-bottom-color:transparent;
 }
 
 .x-panel-noborder .x-panel-bbar-noborder .x-toolbar {
-    border-top-color:#DFDFDF;
+    border-top-color:transparent;
 }
 
 .x-tab-panel-bbar-noborder .x-toolbar {
-    border-top-color:#DFDFDF;
+    border-top-color:transparent;
 }
 
 .x-tab-panel-tbar-noborder .x-toolbar {
-    border-bottom-color:#DFDFDF;
+    border-bottom-color:transparent;
 }
 .x-border-layout-ct {
     background-color:#FAFAFA;
