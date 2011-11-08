@@ -54,7 +54,7 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
             $this->getProperty('search','')
         ));
         $data['results'] = $pkgList['collection'];
-        $data['count'] = $pkgList['total'];
+        $data['total'] = $pkgList['total'];
         return $data;
     }
 
