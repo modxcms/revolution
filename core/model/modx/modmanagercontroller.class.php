@@ -807,6 +807,21 @@ abstract class modManagerController {
         }
         return $this->workingContext;
     }
+
+    /**
+     * Adds a topic to the JS language array
+     * @param string $topic
+     * @return string
+     */
+    public function addLexiconTopic($topic) {
+        $this->modx->lexicon->load($topic);
+        $langTopics = $this->getPlaceholder('_lang_topics');
+        $langTopics = explode(',',$langTopics);
+        $langTopics[] = 'analytics:default';
+        $langTopics = implode(',',$langTopics);
+        $this->setPlaceholder('_lang_topics',$langTopics);
+        return $langTopics;
+    }
 }
 
 /**
