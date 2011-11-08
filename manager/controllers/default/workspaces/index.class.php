@@ -46,18 +46,17 @@ class WorkspacesManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/core/modx.view.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.tree.checkbox.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.panel.wizard.js');
-        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.browser.js');
-        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.download.panel.js');
-        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.add.panel.js');
-        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.install.window.js');
-        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.uninstall.window.js');
-        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.update.window.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.browser.tree.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.browser.panels.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/combos.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package.grid.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.windows.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.panels.js');
+        $this->addJavascript($mgrUrl.'assets/modext/workspace/package.containers.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/provider.grid.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/workspace.panel.js');
-        $this->addHtml('<script type="text/javascript">MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";MODx.curlEnabled = '.($this->curlEnabled ? 1 : 0).'</script>');
+        $this->addJavascript($mgrUrl.'assets/modext/util/lightbox.js');
+        $this->addHtml('<script type="text/javascript">MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";MODx.curlEnabled = '.($this->curlEnabled ? 1 : 0).'; Ext.ux.Lightbox.register("a.lightbox");</script>');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/index.js');
     }
 
@@ -78,7 +77,7 @@ class WorkspacesManagerController extends modManagerController {
         $errors = array();
 
         /* create assets/ */
-        $assetsPath = defined('MODX_ASSETS_PATH') ? MODX_ASSETS_PATH : $this->modx->getOption('base_path').'assets/';
+        $assetsPath = $this->modx->getOption('base_path').'assets/';
         if (!is_dir($assetsPath)) {
             $cacheManager->writeTree($assetsPath,$directoryOptions);
         }
@@ -88,7 +87,7 @@ class WorkspacesManagerController extends modManagerController {
         unset($assetsPath);
 
         /* create assets/components/ */
-        $assetsCompPath = defined('MODX_ASSETS_PATH') ? MODX_ASSETS_PATH.'components/' : $this->modx->getOption('base_path').'assets/components/';
+        $assetsCompPath = $this->modx->getOption('base_path').'assets/components/';
         if (!is_dir($assetsCompPath)) {
             $cacheManager->writeTree($assetsCompPath,$directoryOptions);
         }
@@ -98,7 +97,7 @@ class WorkspacesManagerController extends modManagerController {
         unset($assetsCompPath);
 
         /* create core/components/ */
-        $coreCompPath = $this->modx->getOption('core_path',null,MODX_CORE_PATH).'components/';
+        $coreCompPath = $this->modx->getOption('core_path').'components/';
         if (!is_dir($coreCompPath)) {
             $cacheManager->writeTree($coreCompPath,$directoryOptions);
         }
