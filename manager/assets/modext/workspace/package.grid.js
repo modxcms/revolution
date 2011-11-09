@@ -56,6 +56,10 @@ MODx.grid.Package = function(config) {
             ,disabled: MODx.curlEnabled ? false : true
 			,menu: {
 				items:[{
+					text: _('provider_select')
+					,handler: this.changeProvider
+					,scope: this
+				},{
 					text: _('package_search_local_title')
 					,handler: this.searchLocal
 					,scope: this
@@ -241,6 +245,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	// Launch Package Browser
 	,onDownloadMoreExtra: function(btn,e){	
 		Ext.getCmp('modx-panel-packages-browser').activate();				
+	}
+	
+	,changeProvider: function(btn, e){
+		this.loadWindow(btn,e,{
+            xtype: 'modx-package-changeprovider'
+        });
 	}
 	
 	// Search Package locally (window)

@@ -173,4 +173,57 @@ Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 		Ext.getCmp('modx-panel-packages').install( options );		
 	}
 });
-Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);
+Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);	
+
+/**
+ * @class MODx.window.ChangeProvider
+ * @extends MODx.Window
+ * @param {Object} config An object of configuration parameters
+ * @xtype modx-window-changeprovider
+ */
+MODx.window.ChangeProvider = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('provider_select')			
+		,layout: 'form'
+		,items:[{
+			xtype: 'modx-template-panel'
+			,id: 'modx-cp-panel'
+			,bodyCssClass: 'win-desc'
+			,startingText: _('provider_select_desc')
+		},{
+			xtype: 'form'
+			,id: 'change-prodiver-form'
+			,unstyled: true
+			,items:[{
+				fieldLabel: _('provider')
+				,xtype: 'modx-combo-provider'
+				,id: 'modx-pdselprov-provider'
+				,allowBlank: false
+			}]			
+		}] 
+		,buttons :[{
+			text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+		},{
+			text: 'Save and go to Package Browser'
+			,id:'package-cp-btn'
+			,handler: this.submit
+			,scope: this
+		}]
+    });
+    MODx.window.ChangeProvider.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.ChangeProvider,MODx.Window,{
+	submit: function(o) {		
+		fm = Ext.getCmp('change-prodiver-form');
+        if (fm.getForm().isValid()) {
+            var vs = fm.getForm().getValues();
+            MODx.provider = vs.provider;
+            MODx.providerName = fm.getForm().findField('provider').getRawValue();
+			this.hide();
+        }		
+    }
+});
+Ext.reg('modx-package-changeprovider', MODx.window.ChangeProvider);

@@ -57,6 +57,9 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 		this.getProviderInfos();
 	}
 	
+	,changeGProvider: false
+	,changePProvider: false
+	
 	,getProviderInfos: function(){
 		MODx.Ajax.request({
             url: this.config.url
@@ -73,6 +76,13 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
         });
 	}
 	
+	
+	,setProvider: function(){		
+		this.getProviderInfos();
+		this.changeGProvider = true;
+		this.changePProvider = true;
+	}
+	
 	,onNodeClick: function(n,e) {		
 		switch (n.attributes.type) {
 			case 'repository':
@@ -85,12 +95,21 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 				if (tp && tp.attributes.data.templated == 1) {		
 					var p = Ext.getCmp('modx-package-browser-thumbs-view');
                     p.store.baseParams.tag = n.attributes.data.id;
+					if(this.changePProvider){
+						p.store.baseParams.provider = MODx.provider; 
+						this.changePProvider = false;
+					}
                     p.run();
 					Ext.getCmp('modx-package-browser-view').activate(n.attributes.data.name);
 				} else {
 					grid = Ext.getCmp('modx-package-browser-grid');
 					grid.getStore().setBaseParam('tag', n.attributes.data.id);
 					grid.getStore().setBaseParam('query', '');
+					if(this.changeGProvider){
+						grid.getStore().setBaseParam('provider', MODx.provider); 
+						grid.getStore().removeAll();
+						this.changeGProvider = false;
+					}
 					grid.getStore().load();		
 					grid.activate(n.attributes.data.name);
 				}				
