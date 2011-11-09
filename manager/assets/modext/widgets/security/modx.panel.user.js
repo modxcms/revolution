@@ -263,6 +263,9 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             }
             ,items: [{
                 columnWidth: .5
+                ,defaults: {
+                    msgTarget: 'under'
+                }
                 ,items: [{
                     id: 'modx-user-id'
                     ,name: 'id'
@@ -369,6 +372,9 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 }]
             },{
                 columnWidth: .5
+                ,defaults: {
+                    msgTarget: 'under'
+                }
                 ,items: [{
                     id: 'modx-user-newpassword'
                     ,name: 'newpassword'

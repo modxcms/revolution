@@ -23,7 +23,7 @@ class modAccessPolicyTemplateGetListProcessor extends modObjectGetListProcessor 
     public function initialize() {
         $initialized = parent::initialize();
         $this->setDefaultProperties(array(
-            'sortAlias' => 'modAccessPolicy',
+            'sortAlias' => 'modAccessPolicyTemplate',
             'query' => '',
         ));
         return $initialized;
