@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- * 
+ *
  * @package modx
  */
 /**
@@ -850,7 +850,7 @@ abstract class modTag {
      * Call this method in your {modTag::process()} implementation when it is
      * appropriate, typically once all processing has been completed, but before
      * any caching takes place.
-     * 
+     *
      * @see modElement::filterOutput()
      */
     public function filterOutput() {
