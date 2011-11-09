@@ -159,12 +159,15 @@ class modResource extends modAccessibleSimpleObject {
      */
     public static function updateContextOfChildren(modX &$modx, $parent, array $options = array()) {
         $count = 0;
-        foreach ($modx->getIterator('modResource', array('parent' => $parent->get('id'))) as $child) {
-            $child->set('context_key', $parent->get('context_key'));
-            if ($child->save()) {
-                $count++;
-            } else {
-                $modx->log(modX::LOG_LEVEL_ERROR, "Could not change Context of child resource {$child->get('id')}", '', __METHOD__, __FILE__, __LINE__);
+        $criteria = $modx->newQuery('modResource', array('parent' => $parent->get('id')));
+        if ($criteria) {
+            foreach ($modx->getIterator('modResource', $criteria) as $child) {
+                $child->set('context_key', $parent->get('context_key'));
+                if ($child->save()) {
+                    $count++;
+                } else {
+                    $modx->log(modX::LOG_LEVEL_ERROR, "Could not change Context of child resource {$child->get('id')}", '', __METHOD__, __FILE__, __LINE__);
+                }
             }
         }
         return $count;
