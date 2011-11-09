@@ -184,6 +184,7 @@ $_lang['readme'] = 'Readme';
 $_lang['readme_desc'] = 'Please review the README for this package.';
 $_lang['released'] = 'Released';
 $_lang['released_on'] = 'Released On';
+$_lang['save_and_go_to_browser'] = 'Save and go to Package Browser';
 $_lang['search_results_for'] = 'Search results for <b>[[+query]]</b>';
 $_lang['setup_options'] = 'Setup Options';
 $_lang['setup_options_desc'] = 'Please choose the appropriate options (if applicable) and click Finish to install the package.';

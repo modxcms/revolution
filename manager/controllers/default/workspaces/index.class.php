@@ -56,7 +56,7 @@ class WorkspacesManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/workspace/provider.grid.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/workspace.panel.js');
         $this->addJavascript($mgrUrl.'assets/modext/util/lightbox.js');
-        $this->addHtml('<script type="text/javascript">MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";MODx.curlEnabled = '.($this->curlEnabled ? 1 : 0).'; Ext.ux.Lightbox.register("a.lightbox");</script>');
+        $this->addHtml('<script type="text/javascript">MODx.defaultProvider = "'.$this->providerId.'";MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";MODx.curlEnabled = '.($this->curlEnabled ? 1 : 0).'; Ext.ux.Lightbox.register("a.lightbox");</script>');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/index.js');
     }
 
@@ -132,6 +132,7 @@ class WorkspacesManagerController extends modManagerController {
             'name:=' => 'modxcms.com',
             'OR:name:=' => 'modx.com',
         ));
+        /** @var modTransportProvider $provider */
         $provider = $this->modx->getObject('transport.modTransportProvider',$c);
         if ($provider) {
             $this->providerId = $provider->get('id');

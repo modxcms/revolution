@@ -24,6 +24,9 @@ class modPackageGetInfoProcessor extends modProcessor {
         }
 
         $info = $this->getData();
+        if (empty($info)) {
+            return $this->failure($this->modx->lexicon('provider_err_connect'));
+        }
 
         /* setup output properties */
         $properties = array(

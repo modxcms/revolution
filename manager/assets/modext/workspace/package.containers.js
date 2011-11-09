@@ -175,7 +175,6 @@ Ext.extend(MODx.panel.PackagesBrowser,MODx.Panel,{
 		Ext.getCmp('modx-layout').hideLeftbar();
 		Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
 		Ext.getCmp('modx-package-browser-home').activate();
-		/* @TODO : lexiconify */
 		this.updateBreadcrumbs(_('provider_home_msg'));
 	}
 	

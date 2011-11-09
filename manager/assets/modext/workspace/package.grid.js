@@ -56,6 +56,10 @@ MODx.grid.Package = function(config) {
             ,disabled: MODx.curlEnabled ? false : true
 			,menu: {
 				items:[{
+					text: _('provider_select')
+					,handler: this.changeProvider
+					,scope: this
+				},{
 					text: _('package_search_local_title')
 					,handler: this.searchLocal
 					,scope: this
@@ -235,15 +239,21 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		} else {
 			/* No license/changelog, no setup-options, install directly */
 			Ext.getCmp('modx-panel-packages').install();
-		}		
+		}
 	}
     
 	/* Launch Package Browser */
-	,onDownloadMoreExtra: function(btn,e){	
+	,onDownloadMoreExtra: function(btn,e){
+	    MODx.provider = MODx.defaultProvider;
 		Ext.getCmp('modx-panel-packages-browser').activate();				
 	}
+
+	,changeProvider: function(btn, e){
+		this.loadWindow(btn,e,{
+            xtype: 'modx-package-changeprovider'
+        });
+	}
 	
-	/* Search Package locally (window) */
 	,searchLocal: function() {
         MODx.msg.confirm({
            title: _('package_search_local_title')

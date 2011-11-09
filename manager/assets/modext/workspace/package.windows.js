@@ -169,8 +169,69 @@ Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 	
 	,install: function(btn, ev){	
 		this.hide();
-		options =  Ext.getCmp('modx-setupoptions-form').getForm().getValues();					
+		var options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
 		Ext.getCmp('modx-panel-packages').install( options );		
 	}
 });
-Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);
+Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);	
+
+/**
+ * @class MODx.window.ChangeProvider
+ * @extends MODx.Window
+ * @param {Object} config An object of configuration parameters
+ * @xtype modx-window-changeprovider
+ */
+MODx.window.ChangeProvider = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('provider_select')			
+		,layout: 'form'
+		,items:[{
+			xtype: 'modx-template-panel'
+			,id: 'modx-cp-panel'
+			,bodyCssClass: 'win-desc panel-desc'
+			,startingText: _('provider_select_desc')
+		},{
+			xtype: 'form'
+			,id: 'change-provider-form'
+			,border: false
+			,style: 'padding: 10px'
+			,items:[{
+				fieldLabel: _('provider')
+				,xtype: 'modx-combo-provider'
+				,id: 'modx-pdselprov-provider'
+				,allowBlank: false
+				,baseParams: {
+                    action: 'getList'
+                    ,showNone: false
+                }
+			}]			
+		}] 
+		,buttons :[{
+			text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+		},{
+			text: _('save_and_go_to_browser')
+			,id:'package-cp-btn'
+			,handler: this.submit
+			,scope: this
+		}]
+    });
+    MODx.window.ChangeProvider.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.ChangeProvider,MODx.Window,{
+	submit: function(o) {		
+		var fm = Ext.getCmp('change-provider-form');
+        if (fm.getForm().isValid()) {
+            var vs = fm.getForm().getValues();
+            MODx.provider = vs.provider;
+            MODx.providerName = fm.getForm().findField('provider').getRawValue();
+            Ext.getCmp('modx-package-browser-tree').setProvider(vs.provider);
+            MODx.debug('Switching to: '+MODx.provider);
+			this.hide();
+			Ext.getCmp('modx-panel-packages-browser').activate();
+        }		
+    }
+});
+Ext.reg('modx-package-changeprovider', MODx.window.ChangeProvider);
