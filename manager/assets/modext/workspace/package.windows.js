@@ -141,7 +141,7 @@ MODx.window.SetupOptions = function(config) {
 			xtype: 'modx-template-panel'
 			,id: 'modx-setupoptions-panel'
 			,bodyCssClass: 'win-desc'
-			,markup: '<tpl for="."><p>{text}</p></tpl>'
+			,markup: '<tpl for="."><p class="panel-desc">{text}</p></tpl>'
 		},{
 			html:''
 			,xtype: 'form'
@@ -153,7 +153,7 @@ MODx.window.SetupOptions = function(config) {
             ,scope: this
             ,handler: function() { this.hide(); }
 		},{
-			text: 'Install package'
+			text: _('package_install')
 			,id:'package-setupoptions-install-btn'
 			,handler: this.install
 			,scope: this

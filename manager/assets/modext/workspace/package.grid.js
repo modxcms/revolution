@@ -9,7 +9,7 @@
 MODx.grid.Package = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
-        tpl : new Ext.Template(
+        tpl : new Ext.XTemplate(
             '<p class="package-readme"><i>{readme}</i></p>'
         )
     });
@@ -104,10 +104,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	}
 	
 	,updateBreadcrumbs: function(msg, highlight){
-		var msg = Ext.getCmp('packages-breadcrumbs').desc 
+		msg = Ext.getCmp('packages-breadcrumbs').desc;
         if(highlight){ 
-			msg.text = msg; 
-			msg.className = 'highlight'; 
+			msg.text = msg;
+			msg.className = 'highlight';
 		}
 		Ext.getCmp('packages-breadcrumbs').reset(msg);
 	}
@@ -132,9 +132,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		
 	/* Main column renderer */
 	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
-		rec = record.data;
-		state = (rec.installed !== null) ? ' installed' : ' not-installed';
-		values = { name: value, state: state, actions: null };	
+		var rec = record.data;
+		var state = (rec.installed !== null) ? ' installed' : ' not-installed';
+		var values = { name: value, state: state, actions: null };
 
 		h = new Array;
 		if(rec.installed !== null){
@@ -147,7 +147,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 					h.push({ className:'checkupdate', text: _('package_check_for_updates') }) 
 				}
 			}	
-			h.push({ className:'details', text: 'View details' }) 
+			h.push({ className:'details', text: _('view_details') })
 		} else {
 			h.push({ className:'remove', text: _('package_remove_action_button') }) 
 			h.push({ className:'install green', text: rec.textaction })			
@@ -161,21 +161,21 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             case '':
             case null:
                 c.css = 'not-installed';				
-                return 'Package <br/>not installed';
+                return _('not_installed');
             default:
                 c.css = '';
-                return 'Installed on <br/>'+d;
+                return _('installed_on',{'time':d});
         }
     }
     
 	,onClick: function(e){
-		t = e.getTarget();		
-		elm = t.className.split(' ')[0];			
+		var t = e.getTarget();
+		var elm = t.className.split(' ')[0];
 		if(elm == 'controlBtn'){
-			action = t.className.split(' ')[1];
-			record = this.getSelectionModel().getSelected();
+			var act = t.className.split(' ')[1];
+			var record = this.getSelectionModel().getSelected();
 			this.menu.record = record.data; 
-			switch (action) {
+			switch (act) {
                 case 'remove':
                     this.remove(record, e);
                     break;
@@ -199,7 +199,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		}
 	}
 	
-	// Install a package
+	/* Install a package */
 	,install: function( record ){
 		Ext.Ajax.request({
 			url : MODx.config.connectors_url+'workspace/packages.php'
@@ -214,36 +214,36 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 				this.processResult( result.responseText, record );
 			}
 			,failure: function ( result, request) { 
-				Ext.MessageBox.alert('Failed', result.responseText); 
+				Ext.MessageBox.alert(_('failed'), result.responseText);
 			} 
 		});
 	}
 	
-	// Go through the install process
+	/* Go through the install process */
 	,processResult: function( response, record ){
-		data = Ext.util.JSON.decode( response );
+		var data = Ext.util.JSON.decode( response );
 		
 		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){	
-			// Show license/changelog panel
+			/* Show license/changelog panel */
 			p = Ext.getCmp('modx-package-beforeinstall');			
 			p.activate();
 			p.updatePanel( data.object, record );
 		} 
 		else if ( data.object['setup-options'] !== null ) {
-			// No license/changelog, show setup-options
+			/* No license/changelog, show setup-options */
 			Ext.getCmp('modx-panel-packages').onSetupOptions();			
 		} else {
-			// No license/changelog, no setup-options, install directly
+			/* No license/changelog, no setup-options, install directly */
 			Ext.getCmp('modx-panel-packages').install();
 		}		
 	}
     
-	// Launch Package Browser
+	/* Launch Package Browser */
 	,onDownloadMoreExtra: function(btn,e){	
 		Ext.getCmp('modx-panel-packages-browser').activate();				
 	}
 	
-	// Search Package locally (window)
+	/* Search Package locally (window) */
 	,searchLocal: function() {
         MODx.msg.confirm({
            title: _('package_search_local_title')
@@ -260,12 +260,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }	
 	
-	// Go to package details @TODO : Stay on the same page
+	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
         location.href = 'index.php?a='+MODx.action['workspaces/package/view']+'&signature='+this.menu.record.signature;
     }
     
-	// Search for a package update - only for installed package
+	/* Search for a package update - only for installed package */
     ,update: function(btn,e) {        
         MODx.Ajax.request({
             url: this.config.url
@@ -298,7 +298,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }
 	
-	// Uninstall a package
+	/* Uninstall a package */
 	,uninstall: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-package-uninstall'
@@ -309,7 +309,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
     
     ,_uninstall: function(r,va,btn) {
-        var r = this.menu.record;
+        r = this.menu.record;
         va = va || {};
         var topic = '/workspace/package/uninstall/'+r.signature+'/';
         this.loadConsole(btn,topic);
@@ -337,7 +337,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }
     
-	//Remove a package entirely
+	/* Remove a package entirely */
     ,remove: function(btn,e) {
     	var r = this.menu.record;
         var topic = '/workspace/package/remove/'+r.signature+'/';
@@ -352,7 +352,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }
     
-	// Load the console
+	/* Load the console */
     ,loadConsole: function(btn,topic) {
     	if (this.console === null) {
             this.console = MODx.load({

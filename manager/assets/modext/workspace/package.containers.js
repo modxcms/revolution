@@ -11,11 +11,11 @@ MODx.panel.Packages = function(config) {
 	
 	Ext.applyIf(config,{					
 		layout:'card'
-		,defaults:{ border: false }
 		,border:false
 		,layoutConfig:{ deferredRender:true }
 		,defaults:{
 			autoHeight: true
+			,border: false
 		}
 		,activeItem: 0
 		,items:[{
@@ -31,7 +31,7 @@ MODx.panel.Packages = function(config) {
 			,bodyCssClass: 'modx-template-detail'			
 		}]	
 		,buttons: [{
-			text: 'Cancel'
+			text: _('cancel')
 			,id:'package-list-reset'
 			,iconCls:'icon-back'
 			,hidden: true
@@ -40,14 +40,14 @@ MODx.panel.Packages = function(config) {
 			}
 			,scope: this
 		},{
-			text: 'Continue'
+			text: _('continue')
 			,id:'package-install-btn'
 			,iconCls:'icon-install'
 			,hidden: true
 			,handler: this.install
 			,scope: this
 		},{
-			text: 'Setup options'
+			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
 			,iconCls:'icon-install'
 			,hidden: true
@@ -79,8 +79,8 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
     }
 	
 	,install: function(va){
-		record = Ext.getCmp('modx-package-grid').getSelectionModel().getSelected();
-		r = record.data;		
+		var record = Ext.getCmp('modx-package-grid').getSelectionModel().getSelected();
+		var r = record.data;
 		var topic = '/workspace/package/install/'+r.signature+'/';
         this.loadConsole(Ext.getBody(),topic);
 		
@@ -115,7 +115,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 				id: 'modx-window-setupoptions'
 			});
 		}
-		this.win.show(btn.id);
+		this.win.show(btn);
 		var opts = Ext.getCmp('modx-package-beforeinstall').getOptions();
 		this.win.fetch(opts);
 	}
@@ -176,7 +176,7 @@ Ext.extend(MODx.panel.PackagesBrowser,MODx.Panel,{
 		Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
 		Ext.getCmp('modx-package-browser-home').activate();
 		/* @TODO : lexiconify */
-		this.updateBreadcrumbs('Select a category from the left to view the packages available in this provider for your version of MODx');
+		this.updateBreadcrumbs(_('provider_home_msg'));
 	}
 	
 	,updateBreadcrumbs: function(msg, highlight){

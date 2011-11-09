@@ -88,7 +88,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
                     p.run();
 					Ext.getCmp('modx-package-browser-view').activate(n.attributes.data.name);
 				} else {
-					grid = Ext.getCmp('modx-package-browser-grid');
+					var grid = Ext.getCmp('modx-package-browser-grid');
 					grid.getStore().setBaseParam('tag', n.attributes.data.id);
 					grid.getStore().setBaseParam('query', '');
 					grid.getStore().load();		
@@ -96,7 +96,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 				}				
 				break;
 			default:
-				home = Ext.getCmp('modx-package-browser-home');
+				var home = Ext.getCmp('modx-package-browser-home');
 				home.activate();
 				home.updateDetail(this.providerInfos);
 				break;
@@ -121,7 +121,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 	,search: function(tf, newValue) {
         var nv = newValue || tf;
 		
-		grid = Ext.getCmp('modx-package-browser-grid');
+		var grid = Ext.getCmp('modx-package-browser-grid');
 		grid.getStore().setBaseParam('tag', '');
 		grid.getStore().setBaseParam('query', nv);
 		grid.getStore().load();

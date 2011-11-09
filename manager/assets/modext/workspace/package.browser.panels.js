@@ -11,11 +11,11 @@ MODx.panel.PackageBrowserHome = function(config) {
 	
 	Ext.applyIf(config,{
 		markup: '<tpl for=".">'			
-			+'<div class="one_half"><div class="x-panel-header"><span class="x-panel-header-text">Most Popular</span></div>'
+			+'<div class="one_half"><div class="x-panel-header"><span class="x-panel-header-text">'+_('most_popular')+'</span></div>'
 				+'<ol class="x-panel-body">'	
 					+'<tpl for="topdownloaded">'
 						+'<li>'
-							+'<span class="highlighted">{downloads} downloads</span>'	
+							+'<span class="highlighted">'+_('downloads_view')+'</span>'
 							+'<button type="button" onclick="Ext.getCmp(\'modx-package-browser-tree\').searchFor(\'{name}\');">'
 								+'<span class="ct">{#}</span>'
 								+'{name}'									
@@ -24,7 +24,7 @@ MODx.panel.PackageBrowserHome = function(config) {
 					+'</tpl>'
 				+'</ol>'
 			+'</div>'			
-			+'<div class="one_half last"><div class="x-panel-header"><span class="x-panel-header-text">Newest Additions</span></div>'			
+			+'<div class="one_half last"><div class="x-panel-header"><span class="x-panel-header-text">'+_('newest_additions')+'</span></div>'
 				+'<ol class="x-panel-body">'			
 					+'<tpl for="newest">'
 						+'<li>'
@@ -49,7 +49,7 @@ MODx.panel.PackageBrowserHome = function(config) {
 Ext.extend(MODx.panel.PackageBrowserHome,MODx.TemplatePanel,{
 	activate: function(){
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
-		me = this;
+		var me = this;
 		setTimeout(function(){
 			me.doLayout();
 		}, 500);
@@ -214,12 +214,12 @@ MODx.grid.PackageBrowserGrid = function(config) {
 Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 	// Actions handlers
 	onClick: function(e){
-		t = e.getTarget();		
-		elm = t.className.split(' ')[0];			
+		var t = e.getTarget();
+		var elm = t.className.split(' ')[0];
 		if(elm == 'controlBtn'){
-			action = t.className.split(' ')[1];
-			record = this.getSelectionModel().getSelected();
-			switch (action) {
+			var act = t.className.split(' ')[1];
+			var record = this.getSelectionModel().getSelected();
+			switch (act) {
                 case 'details':
                     this.onDetails(record.data);
                     break;
@@ -241,11 +241,11 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
     }
 	
 	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){	
-		values = { name: value, actions: null };
-		h = new Array;
-		h.push({ className:'details', text: 'View details' });		
+		var values = { name: value, actions: null };
+		var h = [];
+		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
-			h.push({ className:'download green', text: 'Download package' });
+			h.push({ className:'download green', text: _('download') });
 		}				
 		values.actions = h;
 		return this.mainColumnTpl.apply(values);
@@ -273,15 +273,15 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 	}
 	
 	,processResult: function( response ){	
-		data = Ext.util.JSON.decode( response );
-		me = this;
+		var data = Ext.util.JSON.decode( response );
+		var me = this;
 		if( data.success ){		
 			me.getStore().reload();
 			Ext.getCmp('modx-package-grid').getStore().reload();
 			Ext.getCmp('modx-panel-packages-browser').hideWait();
-			me.updateBreadcrumbs('Package downloaded successfully', true);
+			me.updateBreadcrumbs(_('download_success'), true);
 			setTimeout(function(){
-				me.updateBreadcrumbs('List of the packages in this provider');
+				me.updateBreadcrumbs(_('list_of_packages_in_provider'));
 			}, 5000);			
 		}
 	}
@@ -295,8 +295,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		if(cat != undefined){
 			this.bdText = cat;
 		}
-		/* @TODO : lexiconify */
-		msg = (query != undefined) ? 'Search results for <b>'+query+'</b>' : 'List of the packages available in the selected category';
+		var msg = (query != undefined) ? _('search_results_for',{'query': query}) : _('packages_in_category');
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
 		this.updateBreadcrumbs(msg);
 	}
@@ -328,10 +327,10 @@ MODx.PackageBrowserWaitWindow = function(config) {
 	config = config || {};
 	
 	Ext.applyIf(config,{
-		html: '<p class="wait">Downloading package...</p>'
+		html: '<p class="wait">'+_('downloading')+'</p>'
 		,bodyCssClass: 'centered'
 		,modal: true
-		,title: 'Please wait'
+		,title: _('please_wait')
 		,border: false
 		,closable: false
 		,width: 400
@@ -363,19 +362,19 @@ MODx.panel.PackageBrowserDetails = function(config) {
 				+'<tpl for=".">'	
 					+'<tpl if="description">'
 						+'<div class="item">'	
-							+'<h4>Description</h4>'
+							+'<h4>'+_('description')+'</h4>'
 							+'{description}'
 						+'</div>'
 					+'</tpl>'
 					+'<tpl if="instructions">'
 						+'<div class="item">'	
-							+'<h4>Instructions</h4>'
+							+'<h4>'+_('instructions')+'</h4>'
 							+'{instructions}'
 						+'</div>'
 					+'</tpl>'
 					+'<tpl if="changelog">'
 						+'<div class="item">'	
-							+'<h4>Changelog</h4>'
+							+'<h4>'+_('changelog')+'</h4>'
 							+'{changelog}'
 						+'</div>'
 					+'</tpl>'
@@ -390,7 +389,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 				+'<tpl for=".">'				
 					+'<div class="selected">'	
 						+'<tpl if="screenshot">'
-							+'<a href="{screenshot}" title="Package preview: {name} " alt="Package {name} preview" class="lightbox" />'
+							+'<a href="{screenshot}" title="'+_('package_preview_view')+'" alt="'+_('package_preview_view')+'" class="lightbox" />'
 								+'<img src="{screenshot}" alt="{name}" />'
 							+'<a/>'
 						+'</tpl>'
@@ -400,7 +399,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 						+'</tpl>'
 						+'<tpl if="downloaded">'
 							+'<div class="downloaded">'
-								+'Package already downloaded'
+								+_('package_already_downloaded')
 							+'</div>'
 						+'</tpl>'
 					+'</div>'			
@@ -442,7 +441,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 		}]
 		,tbar: [{
 			xtype: 'button'
-			,text: 'Back to package browser'
+			,text: _('back_to_browser')
 			,handler: this.onBackToPackageBrowserGrid
 			,scope: this	
 		}]
@@ -461,13 +460,13 @@ Ext.extend(MODx.panel.PackageBrowserDetails,MODx.Panel,{
 			text : _('package_browser')
 			,pnl : 'modx-panel-packages-browser'
 		},{
-			text : 'Package Detail' 
+			text : _('package_details')
 		}];
 		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
 	
 	,updateDetail: function(rec, text){
-		this.updateBreadcrumbs('Details on package : '+ rec.name +' '+ rec['version-compiled']);
+		this.updateBreadcrumbs(_('package_details')+': '+ rec.name +' '+ rec['version-compiled']);
 		Ext.getCmp('modx-package-browser-details-main').updateDetail(rec);
 		Ext.getCmp('modx-package-browser-details-aside').updateDetail(rec);
 	}
@@ -478,7 +477,7 @@ Ext.extend(MODx.panel.PackageBrowserDetails,MODx.Panel,{
 	
 	,downloadPackage: function(btn, e){
 		grid = Ext.getCmp('modx-package-browser-grid');
-		record = grid.getSelectionModel().getSelected();
+		var record = grid.getSelectionModel().getSelected();
 		grid.activate();
 		grid.onDownload(record.data);		
 	}
@@ -506,7 +505,6 @@ MODx.PackageBrowserThumbsView = function(config) {
             action: 'getList'
             ,provider: MODx.provider
         }
-        ,loadingText: _('loading')
         ,tpl: this.templates.thumb
         ,listeners: {
             'dblclick': {fn: this.onDblClick ,scope:this }
@@ -515,8 +513,8 @@ MODx.PackageBrowserThumbsView = function(config) {
 		,overClass:'x-view-over'
 		,selectedClass:'selected'
 		,itemSelector: 'div.thumb-wrapper'
-		,loadingText : '<div class="empty-msg"><h4>Loading...</h4></div>'
-		,emptyText : '<div class="empty-msg">' + this.emptyText + '</div>'|| '<div class="empty-msg"><h4>No data to display</h4></div>'	
+		,loadingText : '<div class="empty-msg"><h4>'+_('loading')+'</h4></div>'
+		,emptyText : '<div class="empty-msg">' + this.emptyText + '</div>'|| '<div class="empty-msg"><h4>'+_('package_update_err_provider_empty')+'</h4></div>'
     });
     MODx.PackageBrowserThumbsView.superclass.constructor.call(this,config);
     this.on('selectionchange',this.showDetails,this,{buffer: 100});
@@ -540,15 +538,13 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
     }
         
     ,sortBy: function(sel) {
-        var v = sel.getValue();
-        this.store.baseParams.sorter = v;
+        this.store.baseParams.sorter = sel.getValue();
         this.run();
         return true;
     }
     
     ,sortDir: function(sel) {
-        var v = sel.getValue();
-        this.store.baseParams.dir = v;
+        this.store.baseParams.dir = sel.getValue();
         this.run();
     }
     
@@ -581,7 +577,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
 			+'<div class="thumb-wrapper <tpl if="downloaded">pbr-thumb-downloaded</tpl>" id="modx-package-thumb-{id}">'
 				+'<div class="thumb">'
 					+'<tpl if="screenshot.length == 0">'
-							+'<span class="no-preview">No preview</span>'
+							+'<span class="no-preview">'+_('no_preview')+'</span>'
 					+'</tpl>'
 					+'<tpl if="screenshot">'
 						+'<img src="{screenshot}" title="{name}" alt="{name}" />'
@@ -599,7 +595,6 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
     ,download: function(id) {
         var data = this.lookup['modx-package-thumb-'+id];
         if (!data) return false;
-        // do download 
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
@@ -671,15 +666,15 @@ MODx.panel.PackageBrowserView = function(config) {
 			,id: 'modx-package-browser-template-aside'
 			,cls: 'aside-details'
 			,width: 280
-			,startingText: 'Select a template to see its description...'
+			,startingText: _('template_select_desc')
 			,markup: '<div class="details">'
 				+'<tpl for=".">'				
 					+'<div class="selected">'	
 						+'<tpl if="screenshot.length == 0">'
-								+'<span class="no-preview">No preview</span>'
+								+'<span class="no-preview">'+_('no_preview')+'</span>'
 						+'</tpl>'
 						+'<tpl if="screenshot">'
-							+'<a href="{screenshot}" title="Template preview: {name} " alt="Template {name} preview" class="lightbox" />'
+							+'<a href="{screenshot}" title="'+_('template_preview_view')+'" alt="'+_('template_preview_view')+'" class="lightbox" />'
 								+'<img src="{screenshot}" alt="{name}" />'
 							+'<a/>'
 						+'</tpl>'
@@ -689,16 +684,16 @@ MODx.panel.PackageBrowserView = function(config) {
 						+'</tpl>'
 						+'<tpl if="downloaded">'
 							+'<div class="downloaded">'
-								+'Template already downloaded'
+								+_('template_already_downloaded')
 							+'</div>'
 						+'</tpl>'
 					+'</div>'
 					+'<div class="description">'				
-						+'<h4>Description</h4>'
+						+'<h4>'+_('description')+'</h4>'
 						+'{description}'
 					+'</div>'				
 					+'<div class="infos">'
-						+'<h4>Informations</h4>'
+						+'<h4>'+_('information')+'</h4>'
 						+'<ul>'
 							+'<li>'	
 								+'<span class="infoname">'+_('author')+':</span>'	
@@ -709,7 +704,7 @@ MODx.panel.PackageBrowserView = function(config) {
 								+'<span class="infovalue">{releasedon}</span>'	
 							+'</li>'
 							+'<li>'	
-								+'<span class="infoname">Supports:</span>'	
+								+'<span class="infoname">'+_('minimum_supports')+':</span>'
 								+'<span class="infovalue">{supports:defaultValue("--")}</span>'	
 							+'</li>'
 							+'<li>'	
@@ -734,8 +729,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 			this.bdText = cat;
 		}
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
-		/* @TODO: lexiconify */
-		this.updateBreadcrumbs('Viewing template available in the selected category');
+		this.updateBreadcrumbs(_('viewing_templates_available'));
 		Ext.getCmp('modx-package-browser-template-aside').reset();
 	}	
 	
@@ -761,7 +755,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 		if(!record) return false;	
 		
 		c.showWait();
-		me = this;
+		var me = this;
 		
 		MODx.Ajax.request({
             url: this.url
@@ -775,10 +769,9 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
                 'success': {fn:function(r) {
                     this.view.run();
 					c.hideWait();
-					/* @TODO: lexiconify */
-					this.updateBreadcrumbs('Template downloaded successfully', true);
+					this.updateBreadcrumbs(_('download_success'), true);
 					setTimeout(function(){
-						me.updateBreadcrumbs('Viewing template available in the selected category');
+						me.updateBreadcrumbs(_('templates_in_category'));
 					}, 5000);	
                 },scope:this}
             }
