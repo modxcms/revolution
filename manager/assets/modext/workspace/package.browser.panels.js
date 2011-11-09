@@ -199,6 +199,9 @@ MODx.grid.PackageBrowserGrid = function(config) {
 			,id: 'text-col'
         }]
 		,tbar: [{
+			xtype: 'button'
+			,text: 'Back to Package Manager'
+		},'->',{
 			xtype: 'modx-package-changesort-combobox'
 			,id: 'modx-package-grid-changesort-combobox'
 			,listeners: {
@@ -642,6 +645,9 @@ MODx.panel.PackageBrowserView = function(config) {
 		,xtype: 'panel'
 		,url: MODx.config.connectors_url+'workspace/packages-rest.php'
 		,tbar: [{
+			xtype: 'button'
+			,text: 'Back to Package Manager'
+		},'->',{
 			xtype:'modx-package-changesort-combobox'
 			,id: 'modx-package-browser-changesort-combobox'
 			,listeners: {
