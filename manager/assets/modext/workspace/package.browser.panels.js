@@ -1,6 +1,6 @@
 /**
  * The package browser home card
- * 
+ *
  * @class MODx.panel.PackageBrowserHome
  * @extends MODx.TemplatePanel
  * @param {Object} config An object of options.
@@ -8,38 +8,38 @@
  */
 MODx.panel.PackageBrowserHome = function(config) {
     config = config || {};
-	
+
 	Ext.applyIf(config,{
-		markup: '<tpl for=".">'			
+		markup: '<tpl for=".">'
 			+'<div class="one_half"><div class="x-panel-header"><span class="x-panel-header-text">'+_('most_popular')+'</span></div>'
-				+'<ol class="x-panel-body">'	
+				+'<ol class="x-panel-body">'
 					+'<tpl for="topdownloaded">'
 						+'<li>'
 							+'<span class="highlighted">'+_('downloads_view')+'</span>'
 							+'<button type="button" onclick="Ext.getCmp(\'modx-package-browser-tree\').searchFor(\'{name}\');">'
 								+'<span class="ct">{#}</span>'
-								+'{name}'									
-							+'</button>'														
+								+'{name}'
+							+'</button>'
 						+'</li>'
 					+'</tpl>'
 				+'</ol>'
-			+'</div>'			
+			+'</div>'
 			+'<div class="one_half last"><div class="x-panel-header"><span class="x-panel-header-text">'+_('newest_additions')+'</span></div>'
-				+'<ol class="x-panel-body">'			
+				+'<ol class="x-panel-body">'
 					+'<tpl for="newest">'
 						+'<li>'
-							+'<span class="highlighted">{releasedon}</span>'	
+							+'<span class="highlighted">{releasedon}</span>'
 							+'<button type="button" onclick="Ext.getCmp(\'modx-package-browser-tree\').searchFor(\'{package_name}\');">'
 								+'<span class="ct">{#}</span>'
-								+'{name}'								
-							+'</button>'											
+								+'{name}'
+							+'</button>'
 						+'</li>'
 					+'</tpl>'
 				+'</ol>'
-			+'</div>'			
+			+'</div>'
 			+'<div class="stats">'
 				+'<p>'+_('provider_total_packages')+': {packages}</p>'
-				+'<p>'+_('provider_total_downloads')+': {downloads}</p>'			
+				+'<p>'+_('provider_total_downloads')+': {downloads}</p>'
 			+'</div>'
 		+'</tpl>'
 		,bodyCssClass: 'home-panel'
@@ -59,14 +59,14 @@ Ext.reg('modx-package-browser-home',MODx.panel.PackageBrowserHome);
 
 /**
  * The Repositories template panel
- * 
+ *
  * @class MODx.panel.PackageBrowserRepositories
  * @extends MODx.TemplatePanel
  * @param {Object} config An object of options.
  * @xtype modx-package-browser-repositories
  */
 MODx.panel.PackageBrowserRepositories = function(config) {
-    config = config || {};	
+    config = config || {};
 	Ext.applyIf(config,{
 		markup: '<tpl for=".">'
 			+'<div class="pbr-repository-view">'
@@ -87,7 +87,7 @@ Ext.reg('modx-package-browser-repositories',MODx.panel.PackageBrowserRepositorie
 
 /**
  * A base combobox for sorting options
- * 
+ *
  * @class MODx.changeSortComboBox
  * @extends Ext.form.ComboBox
  * @param {Object} config An object of options.
@@ -95,7 +95,7 @@ Ext.reg('modx-package-browser-repositories',MODx.panel.PackageBrowserRepositorie
  */
 MODx.changeSortComboBox = function(config) {
 	config = config || {};
-	
+
 	Ext.applyIf(config,{
 		store: new Ext.data.ArrayStore({
 			fields: ['d','v']
@@ -123,7 +123,7 @@ Ext.reg('modx-package-changesort-combobox',MODx.changeSortComboBox);
 
 /**
  * The package browser package grid card
- * 
+ *
  * @class MODx.panel.PackageBrowserGrid
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -131,7 +131,7 @@ Ext.reg('modx-package-changesort-combobox',MODx.changeSortComboBox);
  */
 MODx.grid.PackageBrowserGrid = function(config) {
 	config = config || {};
-	
+
 	this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<p class="package-readme"><i>{description}</i></p>'
@@ -150,7 +150,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
 	+'</tpl>', {
 		compiled: true
 	});
-	
+
 	Ext.applyIf(config,{
 		id: 'modx-package-browser-grid'
         ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
@@ -158,9 +158,9 @@ MODx.grid.PackageBrowserGrid = function(config) {
                  ,'supports_db','minimum_supports','breaks_at','featured','audited','changelog'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
-        ,baseParams: { 
+        ,baseParams: {
 			provider: MODx.provider
-			,action:'getList' 
+			,action:'getList'
 		}
         ,paging: true
         ,pageSize: 10
@@ -229,15 +229,15 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
                 case 'details':
                     this.onDetails(record.data);
                     break;
-                case 'download':                    
+                case 'download':
 					this.onDownload(record.data);
-                    break; 
+                    break;
 				default:
 					break;
             }
 		}
 	}
-	
+
 	,changeSort: function(cb,rec,idx) {
         var v = cb.getValue();
         var s = this.getStore();
@@ -245,58 +245,58 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
         s.setBaseParam('sorter',v);
         s.load();
     }
-	
-	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){	
+
+	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
 		var values = { name: value, actions: null };
 		var h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
 			h.push({ className:'download green', text: _('download') });
-		}				
+		}
 		values.actions = h;
 		return this.mainColumnTpl.apply(values);
 	}
-	
+
 	,onDownload: function(rec){
 		var c = Ext.getCmp('modx-panel-packages-browser');
 		c.showWait();
 		Ext.Ajax.request({
 			url : this.config.url
-			,params : { 
+			,params : {
 				action : 'download'
 				,info : rec.location+'::'+rec.signature
 				,provider : MODx.provider
 			}
 			,scope: this
-			,success: function ( result, request ) { 
-				this.processResult( result.responseText );	
+			,success: function ( result, request ) {
+				this.processResult( result.responseText );
 			}
-			,failure: function ( result, request) { 
-				Ext.MessageBox.alert('Failed', result.responseText); 
+			,failure: function ( result, request) {
+				Ext.MessageBox.alert('Failed', result.responseText);
 				c.hideWait();
-			} 
+			}
 		});
 	}
-	
-	,processResult: function( response ){	
+
+	,processResult: function( response ){
 		var data = Ext.util.JSON.decode( response );
 		var me = this;
-		if( data.success ){		
+		if( data.success ){
 			me.getStore().reload();
 			Ext.getCmp('modx-package-grid').getStore().reload();
 			Ext.getCmp('modx-panel-packages-browser').hideWait();
 			me.updateBreadcrumbs(_('download_success'), true);
 			setTimeout(function(){
 				me.updateBreadcrumbs(_('list_of_packages_in_provider'));
-			}, 5000);			
+			}, 5000);
 		}
 	}
-	
+
 	,onDetails: function(rec){
 		Ext.getCmp('modx-package-browser-details').activate();
 		Ext.getCmp('modx-package-browser-details').updateDetail(rec);
 	}
-	
+
 	,activate: function(cat, query){
 		if(cat != undefined){
 			this.bdText = cat;
@@ -305,12 +305,12 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
 		this.updateBreadcrumbs(msg);
 	}
-	
-	,updateBreadcrumbs: function(msg, highlight){		
+
+	,updateBreadcrumbs: function(msg, highlight){
 		var bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
 		/* @TODO : lexiconify */
-		bd.trail = [{ 
+		bd.trail = [{
 			text : _('package_browser')
 			,pnl : 'modx-panel-packages-browser'
 		},{
@@ -318,12 +318,12 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		}];
 		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
-}); 
+});
 Ext.reg('modx-package-browser-grid',MODx.grid.PackageBrowserGrid);
 
 /**
  * The package browser detail card
- * 
+ *
  * @class MODx.PackageBrowserWaitWindow
  * @extends Ext.Window
  * @param {Object} config An object of options.
@@ -331,7 +331,7 @@ Ext.reg('modx-package-browser-grid',MODx.grid.PackageBrowserGrid);
  */
 MODx.PackageBrowserWaitWindow = function(config) {
 	config = config || {};
-	
+
 	Ext.applyIf(config,{
 		html: '<p class="wait">'+_('downloading')+'</p>'
 		,bodyCssClass: 'centered'
@@ -347,7 +347,7 @@ Ext.extend(MODx.PackageBrowserWaitWindow,Ext.Window);
 
 /**
  * The package browser detail card
- * 
+ *
  * @class MODx.panel.PackageBrowserDetails
  * @extends MODx.Panel
  * @param {Object} config An object of options.
@@ -355,7 +355,7 @@ Ext.extend(MODx.PackageBrowserWaitWindow,Ext.Window);
  */
 MODx.panel.PackageBrowserDetails = function(config) {
     config = config || {};
-	
+
 	Ext.applyIf(config,{
 		layout: 'column'
 		,border: false
@@ -365,21 +365,21 @@ MODx.panel.PackageBrowserDetails = function(config) {
 			,id: 'modx-package-browser-details-main'
 			,columnWidth: 1
 			,markup: '<div class="details">'
-				+'<tpl for=".">'	
+				+'<tpl for=".">'
 					+'<tpl if="description">'
-						+'<div class="item">'	
+						+'<div class="item">'
 							+'<h4>'+_('description')+'</h4>'
 							+'{description}'
 						+'</div>'
 					+'</tpl>'
 					+'<tpl if="instructions">'
-						+'<div class="item">'	
+						+'<div class="item">'
 							+'<h4>'+_('instructions')+'</h4>'
 							+'{instructions}'
 						+'</div>'
 					+'</tpl>'
 					+'<tpl if="changelog">'
-						+'<div class="item">'	
+						+'<div class="item">'
 							+'<h4>'+_('changelog')+'</h4>'
 							+'{changelog}'
 						+'</div>'
@@ -392,8 +392,8 @@ MODx.panel.PackageBrowserDetails = function(config) {
 			,cls: 'aside-details'
 			,width: 250
 			,markup: '<div class="details">'
-				+'<tpl for=".">'				
-					+'<div class="selected">'	
+				+'<tpl for=".">'
+					+'<div class="selected">'
 						+'<tpl if="screenshot">'
 							+'<a href="{screenshot}" title="'+_('package_preview_view')+'" alt="'+_('package_preview_view')+'" class="lightbox" />'
 								+'<img src="{screenshot}" alt="{name}" />'
@@ -408,40 +408,40 @@ MODx.panel.PackageBrowserDetails = function(config) {
 								+_('package_already_downloaded')
 							+'</div>'
 						+'</tpl>'
-					+'</div>'			
+					+'</div>'
 					+'<div class="infos description">'
-						+'<h4>Informations</h4>'
+						+'<h4>Information</h4>'
 						+'<ul>'
-							+'<li>'	
-								+'<span class="infoname">'+_('author')+':</span>'	
-								+'<span class="infovalue">{author}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('author')+':</span>'
+								+'<span class="infovalue">{author}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('released_on')+':</span>'	
-								+'<span class="infovalue">{releasedon}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('released_on')+':</span>'
+								+'<span class="infovalue">{releasedon}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('minimum_supports')+':</span>'	
-								+'<span class="infovalue">{minimum_supports:defaultValue("--")}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('minimum_supports')+':</span>'
+								+'<span class="infovalue">{minimum_supports:defaultValue("--")}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('breaks_at')+':</span>'	
-								+'<span class="infovalue">{breaks_at:defaultValue("--")}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('breaks_at')+':</span>'
+								+'<span class="infovalue">{breaks_at:defaultValue("--")}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('supports_db')+':</span>'	
-								+'<span class="infovalue">{supports_db:defaultValue("--")}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('supports_db')+':</span>'
+								+'<span class="infovalue">{supports_db:defaultValue("--")}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('downloads')+':</span>'	
-								+'<span class="infovalue">{downloads}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('downloads')+':</span>'
+								+'<span class="infovalue">{downloads}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('license')+':</span>'	
-								+'<span class="infovalue">{license:defaultValue("--")}</span>'	
-							+'</li>'			
-						+'</ul>'					
-					+'</div>'					
+							+'<li>'
+								+'<span class="infoname">'+_('license')+':</span>'
+								+'<span class="infovalue">{license:defaultValue("--")}</span>'
+							+'</li>'
+						+'</ul>'
+					+'</div>'
 				+'</tpl>'
 			+'</div>'
 		}]
@@ -449,7 +449,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 			xtype: 'button'
 			,text: _('back_to_browser')
 			,handler: this.onBackToPackageBrowserGrid
-			,scope: this	
+			,scope: this
 		}]
 	});
 	MODx.panel.PackageBrowserDetails.superclass.constructor.call(this,config);
@@ -457,12 +457,12 @@ MODx.panel.PackageBrowserDetails = function(config) {
 Ext.extend(MODx.panel.PackageBrowserDetails,MODx.Panel,{
 	activate: function(){
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
-	}	
-	
-	,updateBreadcrumbs: function(msg, highlight){	
+	}
+
+	,updateBreadcrumbs: function(msg, highlight){
 		var bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
-		bd.trail = [{ 
+		bd.trail = [{
 			text : _('package_browser')
 			,pnl : 'modx-panel-packages-browser'
 		},{
@@ -470,29 +470,29 @@ Ext.extend(MODx.panel.PackageBrowserDetails,MODx.Panel,{
 		}];
 		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
-	
+
 	,updateDetail: function(rec, text){
 		this.updateBreadcrumbs(_('package_details')+': '+ rec.name +' '+ rec['version-compiled']);
 		Ext.getCmp('modx-package-browser-details-main').updateDetail(rec);
 		Ext.getCmp('modx-package-browser-details-aside').updateDetail(rec);
 	}
-	
+
 	,onBackToPackageBrowserGrid: function(btn,e){
 		Ext.getCmp('modx-package-browser-grid').activate();
 	}
-	
+
 	,downloadPackage: function(btn, e){
 		grid = Ext.getCmp('modx-package-browser-grid');
 		var record = grid.getSelectionModel().getSelected();
 		grid.activate();
-		grid.onDownload(record.data);		
+		grid.onDownload(record.data);
 	}
 });
 Ext.reg('modx-package-browser-details',MODx.panel.PackageBrowserDetails);
 
 /**
  * The view panel for the template browser
- * 
+ *
  * @class MODx.PackageBrowserThumbsView
  * @extends MODx.DataView
  * @param {Object} config An object of options.
@@ -500,14 +500,14 @@ Ext.reg('modx-package-browser-details',MODx.panel.PackageBrowserDetails);
  */
 MODx.PackageBrowserThumbsView = function(config) {
     config = config || {};
-    
+
     this._initTemplates();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'workspace/packages-rest.php'
         ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
                  ,'downloads','releasedon','screenshot','license','supports','location','version-compiled'
                  ,'downloaded','dlaction-text','dlaction-icon']
-        ,baseParams: { 
+        ,baseParams: {
             action: 'getList'
             ,provider: MODx.provider
         }
@@ -527,7 +527,7 @@ MODx.PackageBrowserThumbsView = function(config) {
 };
 Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
     templates: {}
-    
+
     ,run: function(p) {
         var v = {};
         Ext.applyIf(v,this.store.baseParams);
@@ -542,18 +542,18 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
 			}
         });
     }
-        
+
     ,sortBy: function(sel) {
         this.store.baseParams.sorter = sel.getValue();
         this.run();
         return true;
     }
-    
+
     ,sortDir: function(sel) {
         this.store.baseParams.dir = sel.getValue();
         this.run();
     }
-    
+
     ,showDetails : function(){
         var selNode = this.getSelectedNodes();
         if(selNode && selNode.length > 0){
@@ -562,7 +562,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
             if (data) { Ext.getCmp('modx-package-browser-view').updateDetail(data); }
         }
     }
-    
+
     ,formatData: function(data) {
         var formatSize = function(data){
             if(data.size < 1024) {
@@ -577,7 +577,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
         this.lookup['modx-package-thumb-'+data.id] = data;
         return data;
     }
-	
+
     ,_initTemplates: function() {
 		this.templates.thumb = new Ext.XTemplate('<tpl for=".">'
 			+'<div class="thumb-wrapper <tpl if="downloaded">pbr-thumb-downloaded</tpl>" id="modx-package-thumb-{id}">'
@@ -589,15 +589,15 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
 						+'<img src="{screenshot}" title="{name}" alt="{name}" />'
 					+'</tpl>'
 				+'</div>'
-				+'<span class="name">{shortName}</span>'      
+				+'<span class="name">{shortName}</span>'
 				+'<span class="downloads">{downloads} '+_('downloads')+'</span>'
-				+'<tpl if="downloaded"><span class="downloaded">'+_('downloaded')+'</span></tpl>'           
+				+'<tpl if="downloaded"><span class="downloaded">'+_('downloaded')+'</span></tpl>'
 			+'</div>'
 		+'</tpl>', {
 			compiled: true
-		});     
+		});
     }
-	
+
     ,download: function(id) {
         var data = this.lookup['modx-package-thumb-'+id];
         if (!data) return false;
@@ -621,7 +621,7 @@ Ext.reg('modx-package-browser-thumbs-view',MODx.PackageBrowserThumbsView);
 
 /**
  * The package browser detail panel
- * 
+ *
  * @class MODx.panel.PackageBrowserView
  * @extends MODx.Panel
  * @param {Object} config An object of options.
@@ -637,7 +637,7 @@ MODx.panel.PackageBrowserView = function(config) {
 		,ident: this.ident
 		,border: false
     });
-	
+
 	Ext.applyIf(config,{
 		layout: 'column'
 		,xtype: 'panel'
@@ -663,7 +663,7 @@ MODx.panel.PackageBrowserView = function(config) {
 		}]
 		,border: false
 		,autoHeight: true
-		,items:[{			
+		,items:[{
 			items: this.view
 			,border: false
 			,bbar: new Ext.PagingToolbar({
@@ -671,7 +671,7 @@ MODx.panel.PackageBrowserView = function(config) {
 				,store: this.view.store
 				,displayInfo: true
 				,autoLoad: true
-			})		
+			})
 			,columnWidth: 1
 		},{
 			xtype: 'modx-template-panel'
@@ -680,8 +680,8 @@ MODx.panel.PackageBrowserView = function(config) {
 			,width: 280
 			,startingText: _('template_select_desc')
 			,markup: '<div class="details">'
-				+'<tpl for=".">'				
-					+'<div class="selected">'	
+				+'<tpl for=".">'
+					+'<div class="selected">'
 						+'<tpl if="screenshot.length == 0">'
 								+'<span class="no-preview">'+_('no_preview')+'</span>'
 						+'</tpl>'
@@ -700,35 +700,35 @@ MODx.panel.PackageBrowserView = function(config) {
 							+'</div>'
 						+'</tpl>'
 					+'</div>'
-					+'<div class="description">'				
+					+'<div class="description">'
 						+'<h4>'+_('description')+'</h4>'
 						+'{description}'
-					+'</div>'				
+					+'</div>'
 					+'<div class="infos">'
 						+'<h4>'+_('information')+'</h4>'
 						+'<ul>'
-							+'<li>'	
-								+'<span class="infoname">'+_('author')+':</span>'	
-								+'<span class="infovalue">{author}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('author')+':</span>'
+								+'<span class="infovalue">{author}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('released_on')+':</span>'	
-								+'<span class="infovalue">{releasedon}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('released_on')+':</span>'
+								+'<span class="infovalue">{releasedon}</span>'
 							+'</li>'
-							+'<li>'	
+							+'<li>'
 								+'<span class="infoname">'+_('minimum_supports')+':</span>'
-								+'<span class="infovalue">{supports:defaultValue("--")}</span>'	
+								+'<span class="infovalue">{supports:defaultValue("--")}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('downloads')+':</span>'	
-								+'<span class="infovalue">{downloads}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('downloads')+':</span>'
+								+'<span class="infovalue">{downloads}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('license')+':</span>'	
-								+'<span class="infovalue">{license}</span>'	
-							+'</li>'			
-						+'</ul>'					
-					+'</div>'					
+							+'<li>'
+								+'<span class="infoname">'+_('license')+':</span>'
+								+'<span class="infovalue">{license}</span>'
+							+'</li>'
+						+'</ul>'
+					+'</div>'
 				+'</tpl>'
 			+'</div>'
 		}]
@@ -743,12 +743,12 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
 		this.updateBreadcrumbs(_('viewing_templates_available'));
 		Ext.getCmp('modx-package-browser-template-aside').reset();
-	}	
-	
-	,updateBreadcrumbs: function(msg, highlight){		
+	}
+
+	,updateBreadcrumbs: function(msg, highlight){
 		var bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
-		bd.trail = [{ 
+		bd.trail = [{
 			text : _('package_browser')
 			,pnl : 'modx-panel-packages-browser'
 		},{
@@ -756,19 +756,19 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 		}];
 		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
-	
+
 	,updateDetail: function(rec){
 		Ext.getCmp('modx-package-browser-template-aside').updateDetail(rec);
 	}
-	
+
 	,download: function(id){
 		var record = this.view.lookup['modx-package-thumb-'+id];
 		var c = Ext.getCmp('modx-panel-packages-browser');
-		if(!record) return false;	
-		
+		if(!record) return false;
+
 		c.showWait();
 		var me = this;
-		
+
 		MODx.Ajax.request({
             url: this.url
             ,params: {
@@ -784,7 +784,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 					this.updateBreadcrumbs(_('download_success'), true);
 					setTimeout(function(){
 						me.updateBreadcrumbs(_('templates_in_category'));
-					}, 5000);	
+					}, 5000);
                 },scope:this}
             }
         });
