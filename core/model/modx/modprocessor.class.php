@@ -446,6 +446,8 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
     public $defaultSortDirection = 'ASC';
     /** @var boolean $checkListPermission If true and object is a modAccessibleObject, will check list permission */
     public $checkListPermission = true;
+    /** @var int $currentIndex The current index of successful iteration */
+    public $currentIndex = 0;
 
     /**
      * {@inheritDoc}
@@ -494,12 +496,14 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
     public function iterate(array $data) {
         $list = array();
         $list = $this->beforeIteration($list);
+        $this->currentIndex = 0;
         /** @var xPDOObject|modAccessibleObject $object */
         foreach ($data['results'] as $object) {
             if ($this->checkListPermission && $object instanceof modAccessibleObject && !$object->checkPolicy('list')) continue;
             $objectArray = $this->prepareRow($object);
             if (!empty($objectArray) && is_array($objectArray)) {
                 $list[] = $objectArray;
+                $this->currentIndex++;
             }
         }
         $list = $this->afterIteration($list);
