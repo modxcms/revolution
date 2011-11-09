@@ -456,7 +456,6 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
             'start' => 0,
             'limit' => 20,
             'sort' => $this->defaultSortField,
-            'sortAlias' => $this->classKey,
             'dir' => $this->defaultSortDirection,
             'combo' => false,
             'query' => '',
