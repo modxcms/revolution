@@ -200,7 +200,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         }]
 		,tbar: [{
 			xtype: 'button'
-			,text: 'Back to Package Manager'
+			,text: _('back_to_manager')
 			,handler: function(){
 				Ext.getCmp('modx-panel-packages').activate();
 			}

@@ -12,6 +12,7 @@ $_lang['api_key'] = 'API Key';
 $_lang['author'] = 'Author';
 $_lang['autoincludes_packaging'] = 'Packaging in autoincludes: [[+autoincludes]]';
 $_lang['back_to_browser'] = 'Back to Package Browser';
+$_lang['back_to_manager'] = 'Back to Package Management';
 $_lang['back_txt'] = 'Back';
 $_lang['breaks_at'] = 'Supports Up To';
 $_lang['by'] = 'by';
