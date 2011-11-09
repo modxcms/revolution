@@ -78,14 +78,18 @@ class modResourceEventGetListProcessor extends modProcessor {
         $objectArray = $object->toArray();
         unset($objectArray['content']);
 
-        if ($object->get('pub_date') != '') {
+        if (!in_array($object->get('pub_date'),array('','1969-12-31 00:00:00'))) {
             $pubDate = strtotime($object->get('pub_date'))+$offset;
             $objectArray['pub_date'] = strftime($timeFormat,$pubDate);
+        } else {
+            $objectArray['pub_date'] = '';
         }
 
-        if ($object->get('unpub_date') != '') {
+        if (!in_array($object->get('unpub_date'),array('','1969-12-31 00:00:00'))) {
             $unpubDate = strtotime($object->get('unpub_date'))+$offset;
             $objectArray['unpub_date'] = strftime($timeFormat,$unpubDate);
+        } else {
+            $objectArray['unpub_date'] = '';
         }
         return $objectArray;
     }
