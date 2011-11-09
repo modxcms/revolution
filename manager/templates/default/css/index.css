@@ -1641,8 +1641,8 @@ span.required {
 .x-panel-body-noheader .x-grid3-row {
     position: relative;
 }
-.x-grid3-cell-inner.x-grid3-col-main {
-    padding: 10px 5px 35px;
+.x-grid3-cell-inner .x-grid3-col-main {
+    padding: 10px 5px 5px;
 }
 .x-grid3-cell-inner.x-grid3-col-main h3{
 	font-size: 16px;
