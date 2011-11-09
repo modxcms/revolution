@@ -201,6 +201,9 @@ MODx.grid.PackageBrowserGrid = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: 'Back to Package Manager'
+			,handler: function(){
+				Ext.getCmp('modx-panel-packages').activate();
+			}
 		},'->',{
 			xtype: 'modx-package-changesort-combobox'
 			,id: 'modx-package-grid-changesort-combobox'
@@ -647,6 +650,9 @@ MODx.panel.PackageBrowserView = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: 'Back to Package Manager'
+			,handler: function(){
+				Ext.getCmp('modx-panel-packages').activate();
+			}
 		},'->',{
 			xtype:'modx-package-changesort-combobox'
 			,id: 'modx-package-browser-changesort-combobox'
