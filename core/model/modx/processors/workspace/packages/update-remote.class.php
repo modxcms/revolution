@@ -56,7 +56,7 @@ class modPackageCheckForUpdatesProcessor extends modProcessor {
         if (!$loaded) return $this->failure($this->modx->lexicon('provider_err_no_client'));
 
         $packages = $this->getPackages();
-        if (!is_array($packages)) {
+        if (is_string($packages)) {
             return $this->failure($packages);
         }
 
@@ -69,15 +69,15 @@ class modPackageCheckForUpdatesProcessor extends modProcessor {
 
         $list = array();
         /** @var SimpleXMLObject $p */
-        foreach ($packages as $p) {
+        foreach ($packages as $package) {
             $packageArray = array(
-                'id' => (string)$p->id,
-                'package' => (string)$p->package,
-                'version' => (string)$p->version,
-                'release' => (string)$p->release,
-                'signature' => (string)$p->signature,
-                'location' => (string)$p->location,
-                'info' => ((string)$p->location).'::'.((string)$p->signature),
+                'id' => (string)$package->id,
+                'package' => (string)$package->package,
+                'version' => (string)$package->version,
+                'release' => (string)$package->release,
+                'signature' => (string)$package->signature,
+                'location' => (string)$package->location,
+                'info' => ((string)$package->location).'::'.((string)$package->signature),
             );
             $list[] = $packageArray;
         }

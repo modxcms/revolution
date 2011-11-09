@@ -44,6 +44,7 @@ class modPackageDownloadProcessor extends modProcessor {
      * @return boolean
      */
     public function initialize() {
+        @set_time_limit(0);
         $info = $this->getProperty('info','');
         if (empty($info)) return $this->modx->lexicon('package_download_err_ns');
         if (!$this->parseInfo($info)) {
@@ -75,6 +76,9 @@ class modPackageDownloadProcessor extends modProcessor {
         $this->setPackageVersionData();
 
         $url = $this->getFileDownloadUrl();
+        if (!is_string($url)) {
+            return $url;
+        }
 
         if (!$this->downloadPackage($url)) {
             $msg = $this->modx->lexicon('package_download_err',array('location' => $url));
@@ -203,10 +207,12 @@ class modPackageDownloadProcessor extends modProcessor {
     public function getFileDownloadUrl() {
         if (!is_array($this->modx->version)) { $this->modx->getVersionData(); }
         $productVersion = $this->modx->version['code_name'].'-'.$this->modx->version['full_version'];
+        $this->modx->rest->setResponseType('text');
         $response = $this->modx->rest->request($this->location,'','GET',array(
             'revolution_version' => $productVersion,
             'getUrl' => true,
         ));
+        $this->modx->rest->setResponseType('xml');
         if (empty($response) || empty($response->response)) {
             return $this->failure($this->modx->lexicon('provider_err_connect',array('error' => $response->getError())));
         }

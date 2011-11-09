@@ -114,7 +114,6 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 			
 		if(meta['setup-options'] != null && meta['setup-options'] != ''){			
 			Ext.getCmp('package-show-setupoptions-btn').show();
-			console.log(meta['setup-options']);
 			this.setupOptions = meta['setup-options'];
 		} else {
 			Ext.getCmp('package-install-btn').show();			
@@ -219,7 +218,7 @@ Ext.extend(MODx.panel.PackageDetails,MODx.Panel,{
 	,updateBreadcrumbs: function(msg){
 		Ext.getCmp('packages-breadcrumbs').updateDetail({ 
 			 text : msg
-			,trail : [{	text : 'Package details' }]
+			,trail : [{	text : _('package_details') }]
 		});
 	}
 	

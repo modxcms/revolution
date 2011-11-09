@@ -140,22 +140,22 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		var state = (rec.installed !== null) ? ' installed' : ' not-installed';
 		var values = { name: value, state: state, actions: null };
 
-		h = new Array;
-		if(rec.installed !== null){
-			h.push({ className:'uninstall', text: rec.textaction })
-			h.push({ className:'reinstall', text: _('package_reinstall_action_button') })
-			if( MODx.config.auto_check_pkg_updates == 1 && rec.updateable ){ 
-				h.push({ className:'update orange', text: _('package_update_action_button') })			
-			} else {
-				if( rec.provider != 0 ){
-					h.push({ className:'checkupdate', text: _('package_check_for_updates') }) 
-				}
-			}	
-			h.push({ className:'details', text: _('view_details') })
+		var h = [];
+		if(rec.installed !== null) {
+			h.push({ className:'uninstall', text: rec.textaction });
+			h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
 		} else {
-			h.push({ className:'remove', text: _('package_remove_action_button') }) 
-			h.push({ className:'install green', text: rec.textaction })			
-		}		
+            h.push({ className:'install green', text: rec.textaction });
+        }
+        if (rec.updateable) {
+            h.push({ className:'update orange', text: _('package_update_action_button') });
+        } else {
+            if( rec.provider != 0 ){
+                h.push({ className:'checkupdate', text: _('package_check_for_updates') });
+            }
+        }
+        h.push({ className:'remove', text: _('package_remove_action_button') });
+        h.push({ className:'details', text: _('view_details') });
 		values.actions = h;		
 		return this.mainColumnTpl.apply(values);
 	}
@@ -284,7 +284,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 ,signature: this.menu.record.signature
             }
             ,listeners: {
-                'success': {fn:function(r) {           
+                'success': {fn:function(r) {
                     this.loadWindow(btn,e,{
                         xtype: 'modx-window-package-update'
                         ,packages: r.object
@@ -292,16 +292,15 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                         ,force: true
                         ,listeners: {
                             'success': {fn: function(o) {
-                                this.menu.record = o.a.result.object;
+                                this.refresh();
+                                this.menu.record = {data:o.a.result.object};
                                 this.install(this.menu.record);
                             },scope:this}
                         }
                     });
                 },scope:this}
                 ,'failure': {fn: function(r) {
-                    MODx.msg.alert(_('package_update'),_('package_err_uptodate',{
-                        signature: this.menu.record.signature
-                    }));
+                    MODx.msg.alert(_('package_update'),r.message);
                     return false;
                 },scope:this}
             }
@@ -381,3 +380,47 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 });
 Ext.reg('modx-package-grid',MODx.grid.Package);
+
+MODx.window.PackageUpdate = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('package_update')
+        ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
+        ,action: 'download'
+        ,height: 400
+        ,width: 400
+        ,id: 'modx-window-package-update'
+        ,saveBtnText: _('update')
+        ,fields: this.setupOptions(config.packages,config.record)
+    });
+    MODx.window.PackageUpdate.superclass.constructor.call(this,config);
+    this.on('hide',function() { this.destroy(); },this);
+};
+Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
+    setupOptions: function(ps,rec) {
+        var items = [{
+            html: _('package_update_to_version')
+            ,border: false
+        },MODx.PanelSpacer,{
+            xtype: 'hidden'
+            ,name: 'provider'
+            ,value: Ext.isDefined(rec.provider) ? rec.provider : MODx.provider
+        }];
+
+        for (var i=0;i<ps.length;i=i+1) {
+            var pkg = ps[i];
+            items.push({
+                xtype: 'radio'
+                ,name: 'info'
+                ,boxLabel: pkg.signature
+                ,description: pkg.description
+                ,inputValue: pkg.info
+                ,labelSeparator: ''
+                ,checked: i == 0
+            });
+
+        }
+        return items;
+    }
+});
+Ext.reg('modx-window-package-update',MODx.window.PackageUpdate);

@@ -34,8 +34,7 @@ class modPackageScanLocalProcessor extends modProcessor {
                 'signature' => $signature,
             ));
             if (!empty($package)) continue;
-
-            $this->createPackage($package,$signature);
+            $this->createPackage($signature);
         }
 
         return $this->success();
@@ -71,11 +70,10 @@ class modPackageScanLocalProcessor extends modProcessor {
 
     /**
      * Attempt to create and add the package to the DB
-     * @param modTransportPackage $package
      * @param string $signature
      * @return boolean
      */
-    public function createPackage(modTransportPackage $package,$signature) {
+    public function createPackage($signature) {
         /** @var modTransportPackage $package */
         $package = $this->modx->newObject('transport.modTransportPackage');
         $package->set('signature', $signature);

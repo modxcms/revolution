@@ -193,7 +193,7 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
                 }
             }
         }
-        $packageArray['updateable'] = $updates['count'] >= 1 ? true : false;
+        $packageArray['updateable'] = (int)$updates['count'] >= 1 ? true : false;
         return $packageArray;
     }
 }
