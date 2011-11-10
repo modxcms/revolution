@@ -468,14 +468,18 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 			newInstance[i] = this.getResetText(srcInstance[i]);
 		}
 		//The trail is not a link
-		delete newInstance['pnl'];
+		if(newInstance.hasOwnProperty('pnl')){
+			delete newInstance['pnl'];
+		}		
 		return newInstance;
 	}	
 	
 	,updateDetail: function(data){
 		// Automagically the trail root
-		var trail = data.trail;		
-		trail.unshift(this.root);		
+		if(data.hasOwnProperty('trail')){
+			var trail = data.trail;		
+			trail.unshift(this.root);	
+		}		
 		this._updatePanel(data);
 	}
 		
