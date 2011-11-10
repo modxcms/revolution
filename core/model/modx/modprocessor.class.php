@@ -540,7 +540,7 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
         /* query for chunks */
         $c = $this->modx->newQuery($this->classKey);
         $c = $this->prepareQueryBeforeCount($c);
-        $data['total'] = $this->modx->getCount($this->classKey);
+        $data['total'] = $this->modx->getCount($this->classKey,$c);
         $c = $this->prepareQueryAfterCount($c);
 
         $sortClassKey = $this->getSortClassKey();
