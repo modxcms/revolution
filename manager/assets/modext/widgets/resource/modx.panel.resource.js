@@ -203,7 +203,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (config.show_tvs && MODx.config.tvs_below_content != 1) {
             it.push(this.getTemplateVariablesPanel(config));
         }
-        if (config.access_permissions) {
+        if (MODx.perm.resourcegroup_resource_list == 1) {
             it.push(this.getAccessPermissionsTab(config));
         }
         var its = [];

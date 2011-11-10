@@ -15,7 +15,7 @@
 class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modUser';
     public $defaultSortField = 'username';
-    public $permission = 'access_permissions';
+    public $permission = 'usergroup_user_list';
     public $languageTopics = array('user');
 
     public function initialize() {

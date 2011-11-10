@@ -13,7 +13,7 @@ class modUserGroupUserUpdateProcessor extends modProcessor {
     public $membership;
 
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission('usergroup_user_edit');
     }
     public function getLanguageTopics() {
         return array('user');

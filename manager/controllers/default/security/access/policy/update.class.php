@@ -13,7 +13,7 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission('policy_edit');
     }
 
     /**

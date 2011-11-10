@@ -13,7 +13,7 @@
 class modUserGroupCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modUserGroup';
     public $languageTopics = array('user');
-    public $permission = 'access_permissions';
+    public $permission = 'usergroup_new';
     public $elementType = 'user_group';
     public $beforeSaveEvent = 'OnUserGroupBeforeFormSave';
     public $afterSaveEvent = 'OnUserGroupFormSave';
@@ -46,7 +46,9 @@ class modUserGroupCreateProcessor extends modObjectCreateProcessor {
 
     public function afterSave() {
         $this->setContexts();
-        $this->setResourceGroups();
+        if ($this->modx->hasPermission('usergroup_user_edit')) {
+            $this->setResourceGroups();
+        }
         return parent::afterSave();
     }
     

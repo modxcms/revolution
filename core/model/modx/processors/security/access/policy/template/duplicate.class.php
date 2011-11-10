@@ -10,7 +10,7 @@
 class modAccessPolicyTemplateDuplicateProcessor extends modObjectDuplicateProcessor {
     public $classKey = 'modAccessPolicyTemplate';
     public $languageTopics = array('policy');
-    public $permission = 'access_permissions';
+    public $permission = 'policy_template_new';
     public $objectType = 'policy_template';
 
     public function afterSave() {

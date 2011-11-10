@@ -38,7 +38,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
             MODx.load({
                 xtype: "modx-page-resource-create"
                 ,record: '.$this->modx->toJSON($this->resourceArray).'
-                ,access_permissions: "'.$this->showAccessPermissions.'"
                 ,publish_document: "'.$this->canPublish.'"
                 ,canSave: "'.($this->modx->hasPermission('save_document') ? 1 : 0).'"
                 ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'

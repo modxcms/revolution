@@ -25,6 +25,11 @@ class SecurityPermissionManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.tree.user.group.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.role.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.groups.roles.js');
+        $canListUserGroups = $this->modx->hasPermission('usergroup_view') ? 1 : 0;
+        $canListRoles = $this->modx->hasPermission('view_role') ? 1 : 0;
+        $canListPolicies = $this->modx->hasPermission('policy_view') ? 1 : 0;
+        $canListPolicyTemplates = $this->modx->hasPermission('policy_template_view') ? 1 : 0;
+        $this->addHtml('<script type="text/javascript">MODx.perm.usergroup_view = '.$canListUserGroups.';MODx.perm.view_role = '.$canListRoles.';MODx.perm.policy_view = '.$canListPolicies.';MODx.perm.policy_template_view = '.$canListPolicyTemplates.';</script>');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/permissions/list.js');
     }
 

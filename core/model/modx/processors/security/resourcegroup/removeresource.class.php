@@ -15,7 +15,7 @@ class modResourceGroupRemoveResourceProcessor extends modProcessor {
     public $resource;
 
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission('resourcegroup_resource_edit');
     }
     public function getLanguageTopics() {
         return array('resource','access');

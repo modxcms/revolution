@@ -12,7 +12,7 @@ class modResourceGroupCreateProcessor extends modProcessor {
     public $resourceGroup;
     
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission('resourcegroup_new');
     }
     public function getLanguageTopics() {
         return array('access');

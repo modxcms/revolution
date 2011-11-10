@@ -9,7 +9,7 @@
  * @package modx
  * @subpackage processors.security.resourcegroup
  */
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('resourcegroup_resource_edit')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource','access');
 
 /* format data */

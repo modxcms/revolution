@@ -10,7 +10,7 @@
 class modAccessPolicyDuplicateProcessor extends modObjectDuplicateProcessor {
     public $classKey = 'modAccessPolicy';
     public $languageTopics = array('policy');
-    public $permission = 'access_permissions';
+    public $permission = 'policy_new';
     public $objectType = 'policy';
 }
 return 'modAccessPolicyDuplicateProcessor';

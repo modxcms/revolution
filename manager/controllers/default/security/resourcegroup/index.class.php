@@ -11,7 +11,7 @@ class SecurityResourceGroupIndexManagerController extends modManagerController {
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission(array('resourcegroup_resource_list' => true,'resourcegroup_resource_edit' => true));
     }
 
     /**

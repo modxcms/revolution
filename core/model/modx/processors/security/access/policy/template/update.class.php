@@ -13,7 +13,7 @@
 class modAccessPolicyTemplateUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modAccessPolicyTemplate';
     public $languageTopics = array('policy');
-    public $permission = 'access_permissions';
+    public $permission = 'policy_template_save';
     public $objectType = 'policy';
 
     public function afterSave() {

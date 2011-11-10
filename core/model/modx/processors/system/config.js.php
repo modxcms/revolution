@@ -85,6 +85,8 @@ if ($modx->user) {
     if ($modx->hasPermission('new_snippet')) { $o .= 'MODx.perm.new_snippet = true;'; }
     if ($modx->hasPermission('new_template')) { $o .= 'MODx.perm.new_template = true;'; }
     if ($modx->hasPermission('new_tv')) { $o .= 'MODx.perm.new_tv = true;'; }
+    if ($modx->hasPermission('resourcegroup_resource_edit')) { $o .= 'MODx.perm.resourcegroup_resource_edit = true;'; }
+    if ($modx->hasPermission('resourcegroup_resource_list')) { $o .= 'MODx.perm.resourcegroup_resource_list = true;'; }
 
     $o .= 'MODx.user = {id:"'.$modx->user->get('id').'",username:"'.$modx->user->get('username').'"}';
 }

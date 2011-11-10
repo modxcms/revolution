@@ -6,12 +6,14 @@
  * @subpackage manager.controllers
  */
 class SecurityUserGroupUpdateManagerController extends modManagerController {
+    /** @var modUserGroup $userGroup */
+    public $userGroup;
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission('usergroup_view');
     }
 
     /**
@@ -25,6 +27,9 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.source.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
+        $canEditUsers = $this->modx->hasPermission('usergroup_user_edit') ? 1 : 0;
+        $canListUsers = $this->modx->hasPermission('usergroup_user_list') ? 1 : 0;
+        $this->addHtml('<script type="text/javascript">MODx.perm.usergroup_user_edit = '.$canEditUsers.';MODx.perm.usergroup_user_list = '.$canListUsers.';</script>');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
     }
 
@@ -36,12 +41,12 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
         if (empty($scriptProperties['id'])) {
-            $this->usergroup = $this->modx->newObject('modUserGroup');
-            $this->usergroup->set('id',0);
-            $this->usergroup->set('name',$this->modx->lexicon('anonymous'));
+            $this->userGroup = $this->modx->newObject('modUserGroup');
+            $this->userGroup->set('id',0);
+            $this->userGroup->set('name',$this->modx->lexicon('anonymous'));
         } else {
-            $this->usergroup = $this->modx->getObject('modUserGroup',$scriptProperties['id']);
-            if (empty($this->usergroup)) {
+            $this->userGroup = $this->modx->getObject('modUserGroup',$scriptProperties['id']);
+            if (empty($this->userGroup)) {
                 $this->failure($this->modx->lexicon('usergroup_err_nf'));
             }
         }
@@ -54,7 +59,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        $ugName = $this->usergroup ? $this->usergroup->get('name') : $this->modx->lexicon('anonymous');
+        $ugName = $this->userGroup ? $this->userGroup->get('name') : $this->modx->lexicon('anonymous');
         return $this->modx->lexicon('user_group').': '.$ugName;
     }
 

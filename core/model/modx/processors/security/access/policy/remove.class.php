@@ -10,7 +10,7 @@
 class modAccessPolicyRemoveProcessor extends modObjectRemoveProcessor {
     public $classKey = 'modAccessPolicy';
     public $languageTopics = array('policy');
-    public $permission = 'access_permissions';
+    public $permission = 'policy_delete';
     public $objectType = 'policy';
 }
 return 'modAccessPolicyRemoveProcessor';

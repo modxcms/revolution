@@ -7,7 +7,6 @@
  */
 abstract class ResourceManagerController extends modManagerController {
     public $resourceArray = array();
-    public $showAccessPermissions = true;
     public $onDocFormRender = '';
     public $ctx = 'web';
     /** @var modContext $context */
@@ -95,7 +94,6 @@ abstract class ResourceManagerController extends modManagerController {
         $this->canPublish = $this->modx->hasPermission('publish_document');
         $this->canDelete = $this->modx->hasPermission('delete_document');
         $this->canDuplicate = $this->resource->checkPolicy('save');
-        $this->showAccessPermissions = $this->modx->hasPermission('access_permissions');
     }
     
     /**

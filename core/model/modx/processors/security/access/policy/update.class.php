@@ -15,7 +15,7 @@
 class modAccessPolicyUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modAccessPolicy';
     public $languageTopics = array('policy');
-    public $permission = 'access_permissions';
+    public $permission = 'policy_save';
     public $objectType = 'policy';
 
     public function beforeSave() {

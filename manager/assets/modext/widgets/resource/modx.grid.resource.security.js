@@ -5,6 +5,7 @@ MODx.grid.ResourceSecurity = function(config) {
         ,dataIndex: 'access'
         ,width: 40
         ,sortable: false
+        ,hidden: MODx.perm.resourcegroup_resource_edit != 1
     });
 
     Ext.applyIf(config,{

@@ -12,13 +12,13 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
     public $id;
     /** @var modUserGroup $userGroup */
     public $userGroup;
-
+    
     /**
      * {@inheritDoc}
      * @return boolean
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission('usergroup_view');
     }
     /**
      * {@inheritDoc}
@@ -65,7 +65,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
             }
         }
 
-        if ($this->userGroup) {
+        if ($this->userGroup && $this->modx->hasPermission('usergroup_user_list')) {
             $users = $this->getUsers();
             /** @var modUser $user */
             foreach ($users['results'] as $user) {

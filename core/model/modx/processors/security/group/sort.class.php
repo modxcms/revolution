@@ -10,7 +10,7 @@
  */
 class modUserGroupSortProcessor extends modProcessor {
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission(array('usergroup_save' => true));
     }
     public function getLanguageTopics() {
         return array('user');
@@ -23,7 +23,9 @@ class modUserGroupSortProcessor extends modProcessor {
         if (empty($data)) return $this->failure($this->modx->lexicon('invalid_data'));
         
         $this->sortGroups($data);
-        $this->sortUsers($data);
+        if ($this->modx->hasPermission('usergroup_user_edit')) {
+            $this->sortUsers($data);
+        }
         return $this->success();
     }
 

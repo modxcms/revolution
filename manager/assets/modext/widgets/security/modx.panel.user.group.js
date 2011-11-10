@@ -128,9 +128,9 @@ MODx.panel.UserGroup = function(config) {
 				}]
             },{
                 title: _('users')
-                ,hidden: config.usergroup == 0
                 ,hideMode: 'offsets'
 				,layout: 'form'
+				,id: 'modx-usergroup-users-panel'
                 ,items: [{
                     html: '<p>'+_('user_group_user_access_msg')+'</p>'
 					,bodyCssClass: 'panel-desc'
@@ -250,6 +250,10 @@ MODx.panel.UserGroup = function(config) {
         }
     });
     MODx.panel.UserGroup.superclass.constructor.call(this,config);
+    if (config.usergroup == 0 || MODx.perm.usergroup_user_list == 0) {
+        var tbs = Ext.getCmp('modx-usergroup-tabs');
+        tbs.hideTabStripItem('modx-usergroup-users-panel');
+    }
 };
 Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
     setup: function() {
@@ -311,6 +315,7 @@ MODx.grid.UserGroupUsers = function(config) {
         ,tbar: [{
             text: _('user_group_user_add')
             ,handler: this.addMember
+            ,hidden: MODx.perm.usergroup_user_edit == 0
         },'->',{
             xtype: 'textfield'
             ,id: 'modx-ugu-filter-username'
@@ -343,15 +348,17 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
 
     getMenu: function() {
         var m = [];
-        m.push({
-            text: _('user_role_update')
-            ,handler: this.updateRole
-        });
-        m.push('-');
-        m.push({
-            text: _('user_group_user_remove')
-            ,handler: this.removeUser
-        });
+        if (MODx.perm.usergroup_user_edit) {
+            m.push({
+                text: _('user_role_update')
+                ,handler: this.updateRole
+            });
+            m.push('-');
+            m.push({
+                text: _('user_group_user_remove')
+                ,handler: this.removeUser
+            });
+        }
         return m;
     }
     ,searchUser: function(tf,nv,ov) {

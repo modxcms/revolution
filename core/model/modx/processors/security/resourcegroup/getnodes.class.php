@@ -9,7 +9,7 @@
  */
 class modResourceGroupGetNodesProcessor extends modProcessor {
     public function checkPermissions() {
-        return $this->modx->hasPermission('access_permissions');
+        return $this->modx->hasPermission('resourcegroup_view');
     }
     public function getLanguageTopics() {
         return array('access');
@@ -46,19 +46,21 @@ class modResourceGroupGetNodesProcessor extends modProcessor {
                 );
             }
         } else {
-            /** @var modResourceGroup $resourceGroup */
-            $resourceGroup = $this->modx->getObject('modResourceGroup',$id);
-            if ($resourceGroup) {
-                $resources = $resourceGroup->getResources();
-                /** @var modResource $resource */
-                foreach ($resources as $resource) {
-                    $list[] = array(
-                        'text' => $resource->get('pagetitle').' ('.$resource->get('id').')',
-                        'id' => 'n_'.$resource->get('id'),
-                        'leaf' => true,
-                        'type' => 'modResource',
-                        'cls' => 'icon-'.$resource->get('class_key'),
-                    );
+            if ($this->modx->hasPermission('resourcegroup_resource_list')) {
+                /** @var modResourceGroup $resourceGroup */
+                $resourceGroup = $this->modx->getObject('modResourceGroup',$id);
+                if ($resourceGroup) {
+                    $resources = $resourceGroup->getResources();
+                    /** @var modResource $resource */
+                    foreach ($resources as $resource) {
+                        $list[] = array(
+                            'text' => $resource->get('pagetitle').' ('.$resource->get('id').')',
+                            'id' => 'n_'.$resource->get('id'),
+                            'leaf' => true,
+                            'type' => 'modResource',
+                            'cls' => 'icon-'.$resource->get('class_key'),
+                        );
+                    }
                 }
             }
         }

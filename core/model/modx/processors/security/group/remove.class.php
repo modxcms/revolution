@@ -10,7 +10,7 @@
 class modUserGroupRemoveProcessor extends modObjectRemoveProcessor {
     public $classKey = 'modUserGroup';
     public $languageTopics = array('user');
-    public $permission = 'access_permissions';
+    public $permission = 'usergroup_delete';
     public $objectType = 'user_group';
     public $beforeRemoveEvent = 'OnUserGroupBeforeFormRemove';
     public $afterRemoveEvent = 'OnUserGroupFormRemove';

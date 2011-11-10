@@ -12,7 +12,7 @@ require_once (dirname(__FILE__).'/_validation.php');
 class modUserCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modUser';
     public $languageTopics = array('user');
-    public $permission = array('access_permissions' => true, 'new_user' => true);
+    public $permission = 'new_user';
     public $elementType = 'user';
     public $beforeSaveEvent = 'OnBeforeUserFormSave';
     public $afterSaveEvent = 'OnUserFormSave';

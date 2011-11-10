@@ -21,7 +21,7 @@ class modAccessPolicyGetListProcessor extends modObjectGetListProcessor {
     public $checkListPermission = false;
     public $objectType = 'policy';
     public $classKey = 'modAccessPolicy';
-    public $permission = 'access_permissions';
+    public $permission = 'policy_view';
     public $languageTopics = array('policy');
 
     public function initialize() {

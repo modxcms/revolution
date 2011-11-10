@@ -11,7 +11,7 @@
 class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modUserGroup';
     public $languageTopics = array('user');
-    public $permission = 'access_permissions';
+    public $permission = 'usergroup_save';
     public $objectType = 'user_group';
     public $beforeSaveEvent = 'OnUserGroupBeforeFormSave';
     public $afterSaveEvent = 'OnUserGroupFormSave';
@@ -49,7 +49,9 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
     }
     
     public function afterSave() {
-        $this->addUsers();
+        if ($this->modx->hasPermission('usergroup_user_edit')) {
+            $this->addUsers();
+        }
         return parent::afterSave();
     }
 

@@ -15,6 +15,6 @@
 class modResourceGroupGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modResourceGroup';
     public $languageTopics = array('access');
-    public $permission = 'access_permissions';
+    public $permission = 'resourcegroup_view';
 }
 return 'modResourceGroupGetListProcessor';

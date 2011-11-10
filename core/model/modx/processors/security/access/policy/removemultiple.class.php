@@ -9,7 +9,7 @@
  */
 class modAccessPolicyRemoveMultipleProcessor extends modObjectProcessor {
     public $languageTopics = array('policy');
-    public $permission = 'access_permissions';
+    public $permission = 'policy_delete';
     public $objectType = 'policy';
     
     public function process() {

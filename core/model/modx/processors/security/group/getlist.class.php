@@ -15,7 +15,7 @@
 class modUserGroupGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modUserGroup';
     public $languageTopics = array('user','access','messages');
-    public $permission = 'access_permissions';
+    public $permission = 'usergroup_view';
 
     public function initialize() {
         $initialized = parent::initialize();
