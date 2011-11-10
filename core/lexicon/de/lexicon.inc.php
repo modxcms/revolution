@@ -35,5 +35,6 @@ $_lang['lexicon_management'] = 'Lexikon-Verwaltung';
 $_lang['lexicon_management_desc'] = 'Hier können Sie die Lexikon-Einträge aller Namensräume und ihrer jeweiligen Themen festlegen. Die hier vorgenommenen Einstellungen haben Vorrang vor den Einträgen in den Lexikon-Dateien. Klicken Sie einfach doppelt auf den Wert eines Eintrags, um ihn zu bearbeiten. Um neue Lexikon-Einträge oder Themen hinzuzufügen, erstellen Sie eine entsprechende Themendatei im Verzeichnis des jeweiligen Namensraumes.';
 $_lang['lexicon_rlfb_msg'] = '[[+num]] Zeichenketten erfolgreich erstellt.';
 $_lang['reload_from_base'] = 'Alle Core-Einträge zurücksetzen';
+$_lang['reload_success'] = '[[+total]] Zeichenketten erfolgreich neu geladen.';
 $_lang['search_by_key'] = 'Nach Schlüssel suchen:';
 $_lang['topic'] = 'Thema';

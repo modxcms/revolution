@@ -1,6 +1,6 @@
 /**
  * The panel who shows before package installation
- * 
+ *
  * @class MODx.panel.PackageMetaPanel
  * @extends MODx.Tabs
  * @param {Object} config An object of options.
@@ -8,8 +8,8 @@
  */
 MODx.panel.PackageMetaPanel = function(config) {
 	config = config || {};
-	
-	Ext.applyIf(config,{		
+
+	Ext.applyIf(config,{
 		cls: 'vertical-tabs-panel wrapped'
 		,headerCfg: { tag: 'div', cls: 'x-tab-panel-header vertical-tabs-header' }
 		,bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' }
@@ -19,14 +19,14 @@ MODx.panel.PackageMetaPanel = function(config) {
         }
 		,layoutOnTabChange: true
 		,listeners:{
-			tabchange: function(tb, pnl){						
+			tabchange: function(tb, pnl){
 				w = this.bwrap.getWidth();
 				this.body.setWidth(w);
 				this.doLayout();
 			}
 			,scope: this
 		}
-		,items: []	
+		,items: []
 	});
 	MODx.panel.PackageMetaPanel.superclass.constructor.call(this,config);
 };
@@ -39,12 +39,12 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.Tabs,{
 			this.addTab('Readme', 'readme', meta);
 		}
 		if(meta.license != undefined){
-			this.addTab('License', 'license', meta);			
+			this.addTab('License', 'license', meta);
 		}
-		this.setActiveTab(0);		
+		this.setActiveTab(0);
 		Ext.getCmp('modx-content').doLayout();
 	}
-	
+
 	,addTab: function(title, id, data){
         this.add({
 			title: title
@@ -53,7 +53,7 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.Tabs,{
 			,markup: '{'+id+'}'
 			,bodyCssClass: 'meta-wrapper'
 			,listeners: {
-				afterrender: function() {					
+				afterrender: function() {
 					this.updateDetail( data );
 				}
 			}
@@ -61,21 +61,21 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.Tabs,{
     }
 });
 Ext.reg('modx-package-meta-panel',MODx.panel.PackageMetaPanel);
-	
-	
+
+
 /**
  * The panel who shows before package installation
- * 
+ *
  * @class MODx.panel.PackageBeforeInstall
  * @extends MODx.panel.PackageMetaPanel
  * @param {Object} config An object of options.
  * @xtype modx-package-beforeinstall
  */
 MODx.panel.PackageBeforeInstall = function(config) {
-    config = config || {};	
+    config = config || {};
 	this.currentCrumbText = 'Install'
 	this.setupOptions = null;
-	
+
 	Ext.applyIf(config,{});
 	MODx.panel.PackageBeforeInstall.superclass.constructor.call(this,config);
 };
@@ -83,10 +83,10 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 	activate: function(){
 		Ext.getCmp(this.ownerCt.id).getLayout().setActiveItem(this.id);
 		this.removeAll();
-	}	
-	
+	}
+
 	,updateBreadcrumbs: function(msg){
-		Ext.getCmp('packages-breadcrumbs').updateDetail({ 
+		Ext.getCmp('packages-breadcrumbs').updateDetail({
 			 text : msg
 			,trail : [{
 				text : 'Packages List'
@@ -96,7 +96,7 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 			}]
 		});
 	}
-	
+
 	,updatePanel: function(meta){
 		this.updateBreadcrumbs('Review the license agreement for this package.');
 		Ext.getCmp('package-list-reset').show();
@@ -109,19 +109,19 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 			this.addTab('Readme', 'readme', meta);
 		}
 		if(meta.license != undefined){
-			this.addTab('License', 'license', meta);			
+			this.addTab('License', 'license', meta);
 		}
-			
-		if(meta['setup-options'] != null && meta['setup-options'] != ''){			
+
+		if(meta['setup-options'] != null && meta['setup-options'] != ''){
 			Ext.getCmp('package-show-setupoptions-btn').show();
 			this.setupOptions = meta['setup-options'];
 		} else {
-			Ext.getCmp('package-install-btn').show();			
+			Ext.getCmp('package-install-btn').show();
 		}
-		this.setActiveTab(0);		
+		this.setActiveTab(0);
 		Ext.getCmp('modx-content').doLayout();
 	}
-	
+
 	,getOptions: function(){
 		return this.setupOptions;
 	}
@@ -130,7 +130,7 @@ Ext.reg('modx-package-beforeinstall',MODx.panel.PackageBeforeInstall);
 
 /**
  * The panel to view package detail
- * 
+ *
  * @class MODx.panel.PackageDetails
  * @extends MODx.Panel
  * @param {Object} config An object of options.
@@ -138,7 +138,7 @@ Ext.reg('modx-package-beforeinstall',MODx.panel.PackageBeforeInstall);
  */
 MODx.panel.PackageDetails = function(config) {
     config = config || {};
-	
+
 	Ext.applyIf(config,{
 		layout: 'column'
 		,border: false
@@ -148,21 +148,21 @@ MODx.panel.PackageDetails = function(config) {
 			,id: 'modx-package-details-metas'
 			,columnWidth: 1
 			,markup: '<div class="details">'
-				+'<tpl for=".">'	
+				+'<tpl for=".">'
 					+'<tpl if="readme">'
-						+'<div class="item">'	
+						+'<div class="item">'
 							+'<h4>'+_('readme')+'</h4>'
 							+'{readme}'
 						+'</div>'
 					+'</tpl>'
 					+'<tpl if="changelog">'
-						+'<div class="item">'	
+						+'<div class="item">'
 							+'<h4>'+_('changelog')+'</h4>'
 							+'{changelog}'
 						+'</div>'
 					+'</tpl>'
 					+'<tpl if="license">'
-						+'<div class="item">'	
+						+'<div class="item">'
 							+'<h4>'+_('license')+'</h4>'
 							+'{license}'
 						+'</div>'
@@ -175,35 +175,35 @@ MODx.panel.PackageDetails = function(config) {
 			,cls: 'aside-details'
 			,width: 250
 			,markup: '<div class="details">'
-				+'<tpl for=".">'				
-					+'<div class="selected">'	
+				+'<tpl for=".">'
+					+'<div class="selected">'
 						+'<h5>{package_name}</h5>'
-					+'</div>'			
+					+'</div>'
 					+'<div class="infos description">'
-						+'<h4>Informations</h4>'
+						+'<h4>Information</h4>'
 						+'<ul>'
-							+'<li>'	
-								+'<span class="infoname">'+_('signature')+':</span>'	
-								+'<span class="infovalue">{signature}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('signature')+':</span>'
+								+'<span class="infovalue">{signature}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('uploaded_on')+':</span>'	
-								+'<span class="infovalue">{created}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('uploaded_on')+':</span>'
+								+'<span class="infovalue">{created}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('installed')+':</span>'	
-								+'<span class="infovalue">{installed}</span>'	
-							+'</li>'	
-							+'<li>'	
-								+'<span class="infoname">'+_('last_updated')+':</span>'	
-								+'<span class="infovalue">{updated}</span>'	
+							+'<li>'
+								+'<span class="infoname">'+_('installed')+':</span>'
+								+'<span class="infovalue">{installed}</span>'
 							+'</li>'
-							+'<li>'	
-								+'<span class="infoname">'+_('provider')+':</span>'	
-								+'<span class="infovalue">{provider}</span>'	
-							+'</li>'								
-						+'</ul>'					
-					+'</div>'					
+							+'<li>'
+								+'<span class="infoname">'+_('last_updated')+':</span>'
+								+'<span class="infovalue">{updated}</span>'
+							+'</li>'
+							+'<li>'
+								+'<span class="infoname">'+_('provider')+':</span>'
+								+'<span class="infovalue">{provider}</span>'
+							+'</li>'
+						+'</ul>'
+					+'</div>'
 				+'</tpl>'
 			+'</div>'
 		}]
@@ -213,15 +213,15 @@ MODx.panel.PackageDetails = function(config) {
 Ext.extend(MODx.panel.PackageDetails,MODx.Panel,{
 	activate: function(){
 		Ext.getCmp(this.ownerCt.id).getLayout().setActiveItem(this.id);
-	}	
-	
+	}
+
 	,updateBreadcrumbs: function(msg){
-		Ext.getCmp('packages-breadcrumbs').updateDetail({ 
+		Ext.getCmp('packages-breadcrumbs').updateDetail({
 			 text : msg
 			,trail : [{	text : _('package_details') }]
 		});
 	}
-	
+
 	,updateDetail: function(rec){
 		this.updateBreadcrumbs('Details on package : '+ rec.package_name);
 		Ext.getCmp('modx-package-details-metas').updateDetail(rec);
