@@ -91,6 +91,7 @@ MODx.Layout = function(config){
     Ext.applyIf(config,{
          layout: 'border'
         ,id: 'modx-layout'
+		,saveState: true
         ,items: [{
             xtype: 'box'
             ,region: 'north'
@@ -132,6 +133,10 @@ MODx.Layout = function(config){
                 }
                 ,items: tabs
             }]
+			,listeners:{
+				statesave: this.onStatesave
+				,scope: this
+			}
         },{
             region: 'center'
             ,applyTo: 'modx-content'
@@ -159,8 +164,7 @@ MODx.Layout = function(config){
     this.fireEvent('afterLayout');
 };
 Ext.extend(MODx.Layout,Ext.Viewport,{
-
-    loadKeys: function() {
+	loadKeys: function() {
         Ext.KeyMap.prototype.stopEvent = true;
         var k = new Ext.KeyMap(Ext.get(document));
         k.addBinding({
@@ -206,9 +210,17 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
         this.leftbarVisible ? this.hideLeftbar(.3) : this.showLeftbar(.3);
         this.leftbarVisible = !this.leftbarVisible;
     }
-    ,hideLeftbar: function(anim) {
-        Ext.getCmp('modx-leftbar-tabs').collapse(anim);
+    ,hideLeftbar: function(anim, state) {	
+		Ext.getCmp('modx-leftbar-tabs').collapse(anim);
+		if(state != undefined){	this.saveState = state;	}
     }
+	,onStatesave: function(p, state){
+		var panelState = state.collapsed;
+		if(panelState && !this.saveState){
+			Ext.state.Manager.set('modx-leftbar-tabs', {collapsed: false});
+			this.saveState = true;
+		}
+	}
     ,showLeftbar: function(anim) {
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }

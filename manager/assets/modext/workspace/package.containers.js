@@ -172,7 +172,7 @@ MODx.panel.PackagesBrowser = function(config) {
 };
 Ext.extend(MODx.panel.PackagesBrowser,MODx.Panel,{
 	activate: function(){
-		Ext.getCmp('modx-layout').hideLeftbar();
+		Ext.getCmp('modx-layout').hideLeftbar(true, false);
 		Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
 		Ext.getCmp('modx-package-browser-home').activate();
 		this.updateBreadcrumbs(_('provider_home_msg'));
