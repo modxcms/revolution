@@ -1979,6 +1979,128 @@ class modX extends xPDO {
     }
 
     /**
+     * Add an extension package to MODX
+     * 
+     * @param string $name
+     * @param string $path
+     * @param array $options
+     * @return boolean
+     */
+    public function addExtensionPackage($name,$path,array $options = array()) {
+        $extPackages = $this->getOption('extension_packages');
+        $extPackages = !empty($extPackages) ? $extPackages : array();
+        $extPackages = is_array($extPackages) ? $extPackages : $this->fromJSON($extPackages);
+        $extPackages[$name] = $options;
+        $extPackages['path'] = $path;
+
+        /** @var modSystemSetting $setting */
+        $setting = $this->getObject('modSystemSetting',array(
+            'key' => 'extension_packages',
+        ));
+        if (empty($setting)) {
+            $setting = $this->newObject('modSystemSetting');
+            $setting->set('key','extension_packages');
+            $setting->set('namespace','core');
+            $setting->set('xtype','textfield');
+            $setting->set('area','system');
+        }
+        $value = $setting->get('value');
+        $value = is_array($value) ? $value : $this->fromJSON($value);
+        if (empty($value)) {
+            $value = array();
+            $value[$name] = $options;
+            $value[$name]['path'] = $path;
+            $value = '['.$this->toJSON($value).']';
+        } else {
+            $found = false;
+            foreach ($value as $k => $v) {
+                foreach ($v as $kk => $vv) {
+                    if ($kk == $name) {
+                        $found = true;
+                    }
+                }
+            }
+            if (!$found) {
+                $extPack[$name] = $options;
+                $extPack[$name]['path'] = $path;
+                $value[] = $extPack;
+            }
+            $value = $this->toJSON($value);
+        }
+        $value = str_replace('\\','',$value);
+        $setting->set('value',$value);
+        return $setting->save();
+    }
+
+    /**
+     * Remove an extension package from MODX
+     * 
+     * @param string $name
+     * @return boolean
+     */
+    public function removeExtensionPackage($name) {
+        /** @var modSystemSetting $setting */
+        $setting = $this->getObject('modSystemSetting',array(
+            'key' => 'extension_packages',
+        ));
+        $value = $setting->get('value');
+        $value = is_array($value) ? $value : $this->fromJSON($value);
+        $found = false;
+        foreach ($value as $idx => $extPack) {
+            foreach ($extPack as $key => $opt) {
+                if ($key == $name) {
+                    unset($value[$idx]);
+                    $found = true;
+                }
+            }
+        }
+        $removed = false;
+        if ($found) {
+            $value = $this->toJSON($value);
+            $value = str_replace('\\','',$value);
+            $setting->set('value',$value);
+            $removed = $setting->save();
+        }
+        return $removed;
+    }
+
+    /**
+     * Loads any specified extension packages
+     */
+    protected function _loadExtensionPackagesz() {
+        $extPackages = $this->getOption('extension_packages');
+        if (empty($extPackages)) return;
+        $extPackages = $this->fromJSON($extPackages);
+        if (!empty($extPackages)) {
+            foreach ($extPackages as $extPackage) {
+                if (!is_array($extPackage)) continue;
+
+                foreach ($extPackage as $packageName => $package) {
+                    if (!empty($package) && !empty($package['path'])) {
+                        $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                        $package['path'] = str_replace(array(
+                            '[[++core_path]]',
+                            '[[++base_path]]',
+                            '[[++assets_path]]',
+                            '[[++manager_path]]',
+                        ),array(
+                            $this->config['core_path'],
+                            $this->config['base_path'],
+                            $this->config['assets_path'],
+                            $this->config['manager_path'],
+                        ),$package['path']);
+                        $this->addPackage($packageName,$package['path'],$package['tablePrefix']);
+                        if (!empty($package['serviceName']) && !empty($package['serviceClass'])) {
+                            $packagePath = str_replace('//','/',$package['path'].$packageName.'/');
+                            $this->getService($package['serviceName'],$package['serviceClass'],$packagePath);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Loads a specified Context.
      *
      * Merges any context settings with the modX::$config, and performs any
