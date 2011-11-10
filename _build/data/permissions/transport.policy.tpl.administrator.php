@@ -567,7 +567,7 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'resourcegroup_edit',
-    'description' => 'perm.resourcegroup_edite_desc',
+    'description' => 'perm.resourcegroup_edit_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
