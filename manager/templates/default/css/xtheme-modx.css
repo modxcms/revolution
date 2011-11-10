@@ -190,13 +190,12 @@ ul.x-tab-strip-bottom {
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
     -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    
+    -webkit-border-top-right-radius: 3px;    
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background-color: #777 !important;
     background-color: transparent !important;
-    padding: 4px 0 0;
+    padding: 0;
 }
 .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer {
 	background-color:#666;
@@ -1831,7 +1830,7 @@ a.x-menu-item {
 }
 
 .x-panel-body {
-    border:1px solid #AFAFAF;
+    border:1px solid #999999;
     background-color:#fff;
 }
 
