@@ -8,6 +8,7 @@ MODx.panel.Welcome = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-welcome'
+		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+MODx.config.site_name+'</h2>'
