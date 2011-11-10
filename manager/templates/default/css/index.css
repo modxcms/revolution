@@ -65,7 +65,7 @@ hr {
     border-radius: 4px;
     background: none repeat scroll 0 0 transparent;
     border: 0;
-    margin: 5px 0 10px 10px;
+    margin: 20px 0 10px 10px;
     padding: 0;
 }
 
@@ -132,7 +132,7 @@ hr {
 }
 
 #modx-content {
-    padding: 0 0 20px 15px;
+    padding: 0 0 0 15px;
     height: 100%;
     overflow: auto;
 }
@@ -280,7 +280,7 @@ h2 {
     color: #5E5E5E;
     font: normal 25px helvetica,arial,freesans,clean,sans-serif;
     letter-spacing: -1px;
-    margin: 0 0 2px;
+    margin: 0 0 8px;
 }
 
 h3 {
@@ -395,10 +395,12 @@ textarea.x-form-field {
 }
 
 /* top bar */
+#modx-header{
+	height: 78px !important;
+}
 #modx-topbar {
     height: 35px;
     background: #373737 url("../images/restyle/headers.jpg") repeat-x;
-
     color: white;
     vertical-align: middle;
 }
@@ -1126,7 +1128,8 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 
 /* MODExt common classes */
 
-.container {  margin: 0 15px 15px 0; } /* Wrap the main content */
+.container {  margin: 16px 15px 20px 0; } /* Wrap the main content */
+.structure-tabs{ margin-top: -1px; } /* Realign modx-tabs for getPageStructure */
 
 /* Panel description text */
 .panel-desc { 
@@ -1641,8 +1644,8 @@ span.required {
 .x-panel-body-noheader .x-grid3-row {
     position: relative;
 }
-.x-grid3-cell-inner .x-grid3-col-main {
-    padding: 10px 5px 5px;
+.x-grid3-col-main {
+    padding: 10px 5px 35px;
 }
 .x-grid3-cell-inner.x-grid3-col-main h3{
 	font-size: 16px;
