@@ -2039,6 +2039,9 @@ span.required {
 .not-installed .x-grid3-col-info-col{ color: #C34550; }
 
 .inline-button{
+	-webkit-box-align: center;
+	text-align: center;
+	display: inline;
 	margin: 0 auto;
     padding: 8px;
 }
