@@ -186,6 +186,7 @@ Ext.extend(MODx,Ext.Component,{
             xtype: 'modx-tabs'
             ,itemId: 'tabs'
             ,items: v
+			,cls: 'structure-tabs'
         });
         return c;
     }
