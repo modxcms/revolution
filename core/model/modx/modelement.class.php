@@ -535,6 +535,13 @@ class modElement extends modAccessibleSimpleObject {
         if (!empty($set)) {
             $this->_properties= array_merge($this->_properties, $set);
         }
+        if ($this->get('property_preprocess')) {
+            foreach ($this->_properties as $pKey => $pValue) {
+                if ($this->xpdo->parser->processElementTags('', $pValue, $this->xpdo->parser->isProcessingUncacheable())) {
+                    $this->_properties[$pKey]= $pValue;
+                }
+            }
+        }
         if (!empty($properties)) {
             $this->_properties= array_merge($this->_properties, $this->xpdo->parser->parseProperties($properties));
         }

@@ -211,6 +211,7 @@ MODx.panel.Snippet = function(config) {
             ,elementPanel: 'modx-panel-snippet'
             ,elementId: config.snippet
             ,elementType: 'modSnippet'
+            ,record: config.record
         }],{
             id: 'modx-snippet-tabs'
         })]

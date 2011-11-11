@@ -211,6 +211,7 @@ MODx.panel.Chunk = function(config) {
             ,elementPanel: 'modx-panel-chunk'
             ,elementId: config.chunk
             ,elementType: 'modChunk'
+            ,record: config.record
         }],{
             id: 'modx-chunk-tabs'
         })]

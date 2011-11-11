@@ -10,6 +10,7 @@ $xpdo_meta_map['modElement']= array (
   'fields' => 
   array (
     'source' => 0,
+    'property_preprocess' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -20,6 +21,13 @@ $xpdo_meta_map['modElement']= array (
       'null' => false,
       'default' => 0,
       'index' => 'fk',
+    ),
+    'property_preprocess' => 
+    array (
+      'dbtype' => 'bit',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'aggregates' => 

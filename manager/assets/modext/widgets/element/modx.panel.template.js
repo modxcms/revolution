@@ -214,6 +214,7 @@ MODx.panel.Template = function(config) {
             ,elementPanel: 'modx-panel-template'
             ,elementId: config.template
             ,elementType: 'modTemplate'
+            ,record: config.record
         },{
             title: _('template_variables')
             ,itemId: 'form-template'

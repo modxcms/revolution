@@ -224,6 +224,7 @@ MODx.panel.TV = function(config) {
             ,elementPanel: 'modx-panel-tv'
             ,elementId: config.tv
             ,elementType: 'modTemplateVar'
+            ,record: config.record
         },{
             xtype: 'modx-panel-tv-input-properties'
             ,record: config.record

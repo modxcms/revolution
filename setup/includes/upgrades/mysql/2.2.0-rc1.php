@@ -98,6 +98,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static_fi
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 $description = $this->install->lexicon('add_column',array('column' => 'source','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'source'));
+$description = $this->install->lexicon('add_column',array('column' => 'property_preprocess','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'property_preprocess'));
 
 $class = 'modPlugin';
 $table = $modx->getTableName($class);
@@ -109,6 +111,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static_fi
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 $description = $this->install->lexicon('add_column',array('column' => 'source','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'source'));
+$description = $this->install->lexicon('add_column',array('column' => 'property_preprocess','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'property_preprocess'));
 
 $class = 'modSnippet';
 $table = $modx->getTableName($class);
@@ -120,6 +124,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static_fi
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 $description = $this->install->lexicon('add_column',array('column' => 'source','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'source'));
+$description = $this->install->lexicon('add_column',array('column' => 'property_preprocess','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'property_preprocess'));
 
 $class = 'modTemplate';
 $table = $modx->getTableName($class);
@@ -131,6 +137,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static_fi
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 $description = $this->install->lexicon('add_column',array('column' => 'source','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'source'));
+$description = $this->install->lexicon('add_column',array('column' => 'property_preprocess','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'property_preprocess'));
 
 $class = 'modTemplateVar';
 $table = $modx->getTableName($class);
@@ -142,6 +150,8 @@ $description = $this->install->lexicon('add_column',array('column' => 'static_fi
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'static_file'));
 $description = $this->install->lexicon('add_column',array('column' => 'source','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'source'));
+$description = $this->install->lexicon('add_column',array('column' => 'property_preprocess','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'property_preprocess'));
 
 /* add is_stream to sources.modMediaSource */
 $class = 'sources.modMediaSource';

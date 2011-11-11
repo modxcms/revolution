@@ -20,6 +20,14 @@ MODx.panel.ElementProperties = function(config) {
             ,panel: config.elementPanel
             ,elementId: config.elementId
             ,elementType: config.elementType
+        },{
+            xtype: 'xcheckbox'
+            ,boxLabel: _('property_preprocess')
+            ,description: MODx.expandHelp ? '' : _('property_preprocess_msg')
+            ,name: 'property_preprocess'
+            ,id: 'modx-element-property-preprocess'
+            ,inputValue: true
+            ,checked: config.record.property_preprocess || 0
         }]
     });
     MODx.panel.ElementProperties.superclass.constructor.call(this,config);

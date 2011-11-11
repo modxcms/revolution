@@ -240,6 +240,7 @@ MODx.panel.Plugin = function(config) {
             ,elementPanel: 'modx-panel-plugin'
             ,elementId: config.plugin
             ,elementType: 'modPlugin'
+            ,record: config.record
         }],{
             id: 'modx-plugin-tabs'
         })]
