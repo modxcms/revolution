@@ -94,7 +94,7 @@ MODx.grid.FCProfile = function(config) {
                 ,handler: this.removeSelected
                 ,scope: this
             }]
-        },{
+        },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-fcp-search'
@@ -339,7 +339,8 @@ MODx.window.CreateFCProfile = function(config) {
 
         },{
             xtype: 'xcheckbox'
-            ,fieldLabel: _('active')
+            ,boxLabel: _('active')
+            ,hideLabel: true
             ,name: 'active'
             ,id: 'modx-fccp-active'
             ,inputValue: 1
