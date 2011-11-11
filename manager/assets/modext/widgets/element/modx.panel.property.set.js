@@ -329,7 +329,7 @@ MODx.window.AddElementToPropertySet = function(config) {
             ,fieldLabel: _('element')
             ,name: 'element'
             ,id: 'modx-combo-elements'
-            ,anchor: '95%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.AddElementToPropertySet.superclass.constructor.call(this,config);
@@ -419,21 +419,21 @@ MODx.window.CreatePropertySet = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-cpropset-name'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             xtype: 'modx-combo-category'
             ,fieldLabel: _('category')
             ,name: 'category'
             ,id: 'modx-cpropset-category'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,allowBlank: true
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-cpropset-description'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,grow: true
         }]
     });
@@ -467,21 +467,21 @@ MODx.window.UpdatePropertySet = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-upropset-name'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             xtype: 'modx-combo-category'
             ,fieldLabel: _('category')
             ,name: 'category'
             ,id: 'modx-upropset-category'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,allowBlank: true
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-upropset-description'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,grow: true
         }]
     });
@@ -515,7 +515,7 @@ MODx.window.DuplicatePropertySet = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('new_name')
             ,name: 'new_name'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,value: _('duplicate_of',{name:config.record.name})
         },{
             xtype: 'xcheckbox'
