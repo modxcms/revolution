@@ -314,13 +314,13 @@ MODx.window.AddElementToPropertySet = function(config) {
             xtype: 'statictextfield'
             ,fieldLabel: _('propertyset')
             ,name: 'propertysetName'
-            ,anchor: '95%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-element-class'
             ,fieldLabel: _('class_name')
             ,name: 'element_class'
             ,id: 'modx-combo-element-class'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,listeners: {
                 'select': {fn:this.onClassSelect,scope:this}
             }
@@ -359,6 +359,7 @@ MODx.combo.ElementClass = function(config) {
         ,valueField: 'name'
         ,fields: ['name']
         ,listWidth: 300
+        ,pageSize: 20
         ,editable: false
         ,url: MODx.config.connectors_url+'element/index.php'
         ,baseParams: {
@@ -385,6 +386,7 @@ MODx.combo.Elements = function(config) {
         ,valueField: 'id'
         ,fields: ['id','name']
         ,listWidth: 300
+        ,pageSize: 20
         ,editable: false
         ,url: MODx.config.connectors_url+'element/index.php'
         ,baseParams: {
