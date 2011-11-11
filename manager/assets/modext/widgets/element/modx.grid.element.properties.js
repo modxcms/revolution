@@ -21,13 +21,27 @@ MODx.panel.ElementProperties = function(config) {
             ,elementId: config.elementId
             ,elementType: config.elementType
         },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('property_preprocess')
-            ,description: MODx.expandHelp ? '' : _('property_preprocess_msg')
-            ,name: 'property_preprocess'
-            ,id: 'modx-element-property-preprocess'
-            ,inputValue: true
-            ,checked: config.record.property_preprocess || 0
+            layout: 'form'
+            ,border: false
+            ,cls: 'main-wrapper'
+            ,items: [{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('property_preprocess')
+                ,description: MODx.expandHelp ? '' : _('property_preprocess_msg')
+                ,name: 'property_preprocess'
+                ,id: 'modx-element-property-preprocess'
+                ,inputValue: true
+                ,hideLabel: true
+                ,checked: config.record.property_preprocess || 0
+                ,listeners: {
+                    'check':{fn:function() {Ext.getCmp(this.config.elementPanel).markDirty();},scope:this}
+                }
+            },{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,forId: 'modx-element-property-preprocess'
+                ,html: _('property_preprocess_msg')
+                ,cls: 'desc-under'
+            }]
         }]
     });
     MODx.panel.ElementProperties.superclass.constructor.call(this,config);
