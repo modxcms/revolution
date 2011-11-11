@@ -54,7 +54,6 @@ MODx.panel.PropertySet = function(config) {
     MODx.load({
         xtype: 'modx-grid-property-set-properties'
         ,id: 'modx-grid-element-properties'
-        ,xtype: 'modx-grid-property-set-properties'
         ,autoHeight: true
         ,renderTo: 'modx-grid-property-set-properties-ct'
     });

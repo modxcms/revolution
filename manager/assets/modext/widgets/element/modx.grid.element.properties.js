@@ -583,53 +583,95 @@ MODx.window.CreateElementProperty = function(config) {
         title: _('property_create')
         ,id: 'modx-window-element-property-create'
         ,height: 250
-        ,width: 450
+        ,width: 650
         ,saveBtnText: _('done')
         ,fields: [{
-            fieldLabel: _('name')
-            ,name: 'name'
-            ,id: 'modx-cep-name'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-            ,allowBlank: false
-        },{
-            fieldLabel: _('description')
-            ,name: 'desc'
-            ,id: 'modx-cep-desc'
-            ,xtype: 'textarea'
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('type')
-            ,name: 'xtype'
-            ,id: 'modx-cep-xtype'
-            ,xtype: 'modx-combo-xtype'
-            ,anchor: '100%'
-            ,listeners: {
-                'select': {fn:function(cb,r,i) {
-                    var g = Ext.getCmp('modx-cep-grid-element-property-options');
-                    if (!g) return;
-                    if (cb.getValue() == 'list') {
-                       g.show();
-                    } else {
-                       g.hide();
-                    }
-                    this.syncSize();
-                },scope:this}
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
             }
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('lexicon')
-            ,name: 'lexicon'
-            ,id: 'modx-cep-lexicon'
-            ,anchor: '100%'
-            ,allowBlank: true
+            ,items: [{
+                columnWidth: .6
+                ,items: [{
+                    fieldLabel: _('name')
+                    ,description: MODx.expandHelp ? '' : _('property_name_desc')
+                    ,name: 'name'
+                    ,id: 'modx-cep-name'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,allowBlank: false
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-cep-name'
+                    ,html: _('property_name_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('description')
+                    ,description: MODx.expandHelp ? '' : _('property_description_desc')
+                    ,name: 'desc'
+                    ,id: 'modx-cep-desc'
+                    ,xtype: 'textarea'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-cep-description'
+                    ,html: _('property_description_desc')
+                    ,cls: 'desc-under'
+                }]
+            },{
+                columnWidth: .4
+                ,items: [{
+                    fieldLabel: _('type')
+                    ,description: MODx.expandHelp ? '' : _('property_xtype_desc')
+                    ,name: 'xtype'
+                    ,id: 'modx-cep-xtype'
+                    ,xtype: 'modx-combo-xtype'
+                    ,anchor: '100%'
+                    ,listeners: {
+                        'select': {fn:function(cb) {
+                            var g = Ext.getCmp('modx-cep-grid-element-property-options');
+                            if (!g) return;
+                            if (cb.getValue() == 'list') {
+                               g.show();
+                            } else {
+                               g.hide();
+                            }
+                            this.syncSize();
+                        },scope:this}
+                    }
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-cep-xtype'
+                    ,html: _('property_xtype_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('lexicon')
+                    ,description: MODx.expandHelp ? '' : _('property_lexicon_desc')
+                    ,name: 'lexicon'
+                    ,id: 'modx-cep-lexicon'
+                    ,anchor: '100%'
+                    ,allowBlank: true
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-cep-lexicon'
+                    ,html: _('property_lexicon_desc')
+                    ,cls: 'desc-under'
+                }]
+            }]
         },{
             xtype: 'modx-element-value-field'
             ,xtypeField: 'modx-cep-xtype'
             ,id: 'modx-cep-value'
+            ,anchor: '100%'
         },{
             xtype: 'modx-grid-element-property-options'
             ,id: 'modx-cep-grid-element-property-options'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateElementProperty.superclass.constructor.call(this,config);
@@ -678,47 +720,87 @@ MODx.window.UpdateElementProperty = function(config) {
         title: _('property_update')
         ,id: 'modx-window-element-property-update'
         ,height: 250
-        ,width: 450
+        ,width: 650
         ,saveBtnText: _('done')
         ,forceLayout: true
         ,fields: [{
-            fieldLabel: _('name')
-            ,name: 'name'
-            ,id: 'modx-uep-name'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('description')
-            ,name: 'desc'
-            ,id: 'modx-uep-desc'
-            ,xtype: 'textarea'
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('type')
-            ,name: 'xtype'
-            ,xtype: 'modx-combo-xtype'
-            ,id: 'modx-uep-xtype'
-            ,anchor: '100%'
-            ,listeners: {
-                'select': {fn:function(cb,r,i) {
-                    var g = Ext.getCmp('modx-uep-grid-element-property-options');
-                    if (!g) return;
-                    var v = cb.getValue();
-                    if (v == 'list') {
-                        g.show();
-                    } else {
-                        g.hide();
-                    }
-                    this.syncSize();         
-                },scope:this}
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
             }
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('lexicon')
-            ,name: 'lexicon'
-            ,id: 'modx-uep-lexicon'
-            ,anchor: '100%'
-            ,allowBlank: true
+            ,items: [{
+                columnWidth: .6
+                ,items: [{
+                    fieldLabel: _('name')
+                    ,description: MODx.expandHelp ? '' : _('property_name_desc')
+                    ,name: 'name'
+                    ,id: 'modx-uep-name'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-uep-name'
+                    ,html: _('property_name_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('description')
+                    ,description: MODx.expandHelp ? '' : _('property_description_desc')
+                    ,name: 'desc'
+                    ,id: 'modx-uep-desc'
+                    ,xtype: 'textarea'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-uep-description'
+                    ,html: _('property_description_desc')
+                    ,cls: 'desc-under'
+                }]
+            },{
+                columnWidth: .4
+                ,items: [{
+                    fieldLabel: _('type')
+                    ,description: MODx.expandHelp ? '' : _('property_xtype_desc')
+                    ,name: 'xtype'
+                    ,xtype: 'modx-combo-xtype'
+                    ,id: 'modx-uep-xtype'
+                    ,anchor: '100%'
+                    ,listeners: {
+                        'select': {fn:function(cb) {
+                            var g = Ext.getCmp('modx-uep-grid-element-property-options');
+                            if (!g) return;
+                            var v = cb.getValue();
+                            if (v == 'list') {
+                                g.show();
+                            } else {
+                                g.hide();
+                            }
+                            this.syncSize();
+                        },scope:this}
+                    }
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-uep-xtype'
+                    ,html: _('property_xtype_desc')
+                    ,cls: 'desc-under'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('lexicon')
+                    ,description: MODx.expandHelp ? '' : _('property_lexicon_desc')
+                    ,name: 'lexicon'
+                    ,id: 'modx-uep-lexicon'
+                    ,anchor: '100%'
+                    ,allowBlank: true
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-uep-lexicon'
+                    ,html: _('property_lexicon_desc')
+                    ,cls: 'desc-under'
+                }]
+            }]
         },{
             xtype: 'hidden'
             ,name: 'overridden'
@@ -728,6 +810,7 @@ MODx.window.UpdateElementProperty = function(config) {
             ,xtypeField: 'modx-uep-xtype'
             ,name: 'value'
             ,id: 'modx-uep-value'
+            ,anchor: '100%'
         },{
             id: 'modx-uep-grid-element-property-options'
             ,xtype: 'modx-grid-element-property-options'
@@ -875,7 +958,6 @@ MODx.form.ElementValueField = function(config) {
         fieldLabel: _('value')
         ,name: 'value'
         ,xtype: 'textfield'
-        ,width: 200
     });
     MODx.form.ElementValueField.superclass.constructor.call(this,config);
     this.config = config;
@@ -938,6 +1020,8 @@ MODx.window.AddPropertySet = function(config) {
             ,id: 'modx-aps-elementType'
         },{
             html: _('propertyset_panel_desc')
+            ,cls: 'panel-desc'
+            
         },MODx.PanelSpacer,{
             xtype: 'modx-combo-property-set'
             ,fieldLabel: _('propertyset')
@@ -1005,7 +1089,8 @@ MODx.window.ImportProperties = function(config) {
             html: _('properties_import_msg')
             ,id: 'modx-impp-desc'
             ,border: false
-            ,bodyStyle: 'margin: 10px;'
+            ,cls: 'panel-desc'
+            ,style: 'margin-bottom: 10px;'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('file')
