@@ -698,6 +698,7 @@ MODx.combo.Action = function(config) {
         ,displayField: 'controller'
         ,valueField: 'id'
         ,fields: ['id','controller','namespace']
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'system/action.php'
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><tpl if="namespace">{namespace} - </tpl>{controller}</div></tpl>')
     });

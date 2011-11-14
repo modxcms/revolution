@@ -225,9 +225,12 @@ MODx.window.UpdateAction = function(config) {
             ,anchor: '100%'
             ,allowBlank: false
         },{
-            name: 'parent'
-            ,xtype: 'hidden'
+            fieldLabel: _('controller_parent')
+            ,name: 'parent'
+            ,hiddenName: 'parent'
+            ,xtype: 'modx-combo-action'
             ,editable: false
+            ,anchor: '100%'
         },{
             fieldLabel: _('lang_topics')
             ,description: _('lang_topics_desc')
