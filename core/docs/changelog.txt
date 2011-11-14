@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6039] Fix issue where Resources could be improperly dropped into the right tree in the Resource Groups screen
 - [#5715] Fix issue with resetting of header in Element panels
 - [#6025] Fix issue with renaming checkbox fields via Form Customization
 - [#5697] Fix issue with allow_multiple_emails in user creation
