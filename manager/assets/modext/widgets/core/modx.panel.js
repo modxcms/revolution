@@ -254,7 +254,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         
             if (!f) return;
             v = String.format('{0}',vals[i]);
-            if ((f.xtype == 'checkbox' || f.xtype == 'radio') && flds[i] == 'published') {
+            if ((f.xtype == 'checkbox' || f.xtype == 'xcheckbox' || f.xtype == 'radio') && flds[i] == 'published') {
                 f.setBoxLabel(v);
             } else if (f.label) {
                 f.label.update(v);
