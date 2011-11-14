@@ -223,7 +223,9 @@ class modRequest {
             }
         }
         if (!$fromCache || !is_object($resource)) {
-            $criteria = array('id' => $resourceId, 'deleted' => '0');
+            $criteria = $this->modx->newQuery('modResource');
+            $criteria->select(array($this->modx->escape('modResource').'.*'));
+            $criteria->where(array('id' => $resourceId, 'deleted' => '0'));
             if (!$this->modx->hasPermission('view_unpublished')) $criteria['published']= 1;
             if ($resource = $this->modx->getObject('modResource', $criteria)) {
                 if ($resource instanceof modResource) {
