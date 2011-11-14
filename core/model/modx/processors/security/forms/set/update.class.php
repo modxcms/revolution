@@ -29,7 +29,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
 
     public function beforeSave() {
         $this->object->set('constraint_class','modResource');
-        $actionId = $this->getProperty('actionId',null);
+        $actionId = $this->getProperty('action_id',null);
         if ($actionId !== null) {
             $this->object->set('action',$actionId);
         }
