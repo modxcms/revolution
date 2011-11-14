@@ -108,8 +108,12 @@ class modResourceSortProcessor extends modProcessor {
                 $modifiedNode->save();
             }
         }
+
+        $this->fireAfterSort();
+
         /* empty cache */
         $this->clearCache();
+
         return $this->success();
     }
 
