@@ -6,6 +6,7 @@ MODx.panel.Messages = function(config) {
         ,url: MODx.config.connectors_url+'security/message.php'
         ,layout: 'fit'
         ,bodyStyle: 'background: none;'
+        ,cls: 'container'
         ,border: false
         ,items: [{
             html: '<h2>'+_('messages')+'</h2>'

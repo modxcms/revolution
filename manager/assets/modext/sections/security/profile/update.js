@@ -26,6 +26,7 @@ MODx.panel.Profile = function(config) {
         id: 'modx-panel-profile'
         ,url: MODx.config.connectors_url+'security/profile.php'
         ,layout: 'fit'
+        ,cls: 'container'
         ,bodyStyle: 'background: none;'
         ,border: false
         ,items: [{

@@ -78,7 +78,7 @@ MODx.panel.ManagerLog = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-manager-log'
-		
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('mgrlog_view')+'</h2>'
