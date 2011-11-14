@@ -84,17 +84,13 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 		Ext.getCmp(this.ownerCt.id).getLayout().setActiveItem(this.id);
 		this.removeAll();
 	}
-
+	
 	,updateBreadcrumbs: function(msg){
-		Ext.getCmp('packages-breadcrumbs').updateDetail({
-			 text : msg
-			,trail : [{
-				text : 'Packages List'
-				,pnl : 'modx-panel-packages'
-			},{
-				text : this.currentCrumbText
-			}]
-		});
+		var bd = { text: msg };
+		bd.trail = [{
+			text : this.currentCrumbText
+		}];
+		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
 
 	,updatePanel: function(meta){

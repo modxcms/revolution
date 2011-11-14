@@ -1149,6 +1149,28 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 .panel-desc p {
 	padding: 0;
 }
+.win-desc {
+	background:#DFDFDF;
+	background:-moz-linear-gradient(center bottom,#DFDFDF 0%,#F4F4F4 100%) repeat scroll 0 0 transparent;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#F4F4F4),color-stop(100%,#DFDFDF));
+	background:-webkit-linear-gradient(center bottom,#DFDFDF 0%,#F4F4F4 100%);
+	background:-o-linear-gradient(center bottom,#DFDFDF 0%,#F4F4F4 100%);
+	background:-ms-linear-gradient(center bottom,#DFDFDF 0%,#F4F4F4 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#F4F4F4,endColorstr=#DFDFDF,GradientType=0);
+	background:linear-gradient(center bottom,#DFDFDF 0%,#F4F4F4 100%);
+	border: 0 none;
+    border-bottom: 1px solid #CCC !important;
+	padding: 10px 0 0 !important;
+	margin-top: 0;
+}
+.win-desc p{
+	color: #555555;
+	font-size: 13px;
+	font-style: italic;
+	line-height: 1.4;
+	padding: 0 10px 10px;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper { padding: 15px; } 
@@ -1845,12 +1867,9 @@ span.required {
 }
 
 .empty-text-wrapper{
-	background-color: #F3F3F3;
     color: #888888;
     font-weight: bold;
     line-height: 1.4;
-    padding: 15px;
-    text-align: center;
 }
 
 .modx-template-detail {

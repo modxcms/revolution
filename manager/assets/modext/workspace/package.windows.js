@@ -137,11 +137,12 @@ MODx.window.SetupOptions = function(config) {
     Ext.applyIf(config,{
         title: _('setup_options')
 		,layout: 'form'
-		,items:[{
+		,items:[{			
 			xtype: 'modx-template-panel'
 			,id: 'modx-setupoptions-panel'
-			,bodyCssClass: 'win-desc'
-			,markup: '<tpl for="."><p class="panel-desc">{text}</p></tpl>'
+			,bodyCssClass: 'win-desc panel-desc'
+			,startingMarkup: '<tpl for="."><p>{text}</p></tpl>'
+			,startingText: _('setup_options_desc')
 		},{
 			html:''
 			,xtype: 'form'
@@ -163,7 +164,6 @@ MODx.window.SetupOptions = function(config) {
 };
 Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 	fetch: function(content){
-		Ext.getCmp('modx-setupoptions-panel').updateDetail({ text: _('setup_options_desc') });
 		Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content);
 	}
 	
@@ -177,7 +177,7 @@ Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);
 
 /**
  * @class MODx.window.ChangeProvider
- * @extends MODx.Window
+ * @extends Ext.Window
  * @param {Object} config An object of configuration parameters
  * @xtype modx-window-changeprovider
  */
@@ -190,12 +190,13 @@ MODx.window.ChangeProvider = function(config) {
 			xtype: 'modx-template-panel'
 			,id: 'modx-cp-panel'
 			,bodyCssClass: 'win-desc panel-desc'
+			,startingMarkup: '<tpl for="."><p>{text}</p></tpl>'
 			,startingText: _('provider_select_desc')
 		},{
 			xtype: 'form'
 			,id: 'change-provider-form'
 			,border: false
-			,style: 'padding: 10px'
+			,bodyCssClass: 'main-wrapper'
 			,items:[{
 				fieldLabel: _('provider')
 				,xtype: 'modx-combo-provider'
@@ -220,7 +221,7 @@ MODx.window.ChangeProvider = function(config) {
     });
     MODx.window.ChangeProvider.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.ChangeProvider,MODx.Window,{
+Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would create an empty unused form (It's not a bug)) 
 	submit: function(o) {		
 		var fm = Ext.getCmp('change-provider-form');
         if (fm.getForm().isValid()) {

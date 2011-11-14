@@ -367,13 +367,11 @@ MODx.PanelSpacer = {
  */
 MODx.TemplatePanel = function(config) {
     config = config || {}; 
-	this.startingMarkup = new Ext.XTemplate('<tpl for=".">'
-		+'<div class="empty-text-wrapper"><p>{text}</p></div>'
-	+'</tpl>', {
-		compiled: true
-	});
 	Ext.applyIf(config,{
 		frame:false
+		,startingMarkup: '<tpl for=".">'
+			+'<div class="empty-text-wrapper"><p>{text}</p></div>'
+		+'</tpl>'
 		,startingText: 'Loading...'
 		,markup: null
 		,plain:true
@@ -384,13 +382,14 @@ MODx.TemplatePanel = function(config) {
 }
 Ext.extend(MODx.TemplatePanel,Ext.Panel,{
 	init: function(){
-		this.reset();
+		this.defaultMarkup = new Ext.XTemplate(this.startingMarkup, { compiled: true });
+		this.reset();		
 		this.tpl = new Ext.XTemplate(this.markup, { compiled: true });
 	}
 
 	,reset: function(){	
 		this.body.hide();
-		this.startingMarkup.overwrite(this.body, {text: this.startingText});
+		this.defaultMarkup.overwrite(this.body, {text: this.startingText});
 		this.body.slideIn('r', {stopFx:true, duration:.2});
 		setTimeout(function(){
 			Ext.getCmp('modx-content').doLayout();
