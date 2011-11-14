@@ -1,5 +1,10 @@
 <?php
 /**
+ * @var modX $modx
+ * @var modTemplateVar $this
+ * @var array $params
+ * @var string $value
+ * 
  * @package modx
  * @subpackage processors.element.tv.renders.mgr.output
  */
@@ -12,7 +17,7 @@ foreach ($images as $image) {
     }
     $src= $image[0];
     if ($src) {
-        $attributes = '';
+        $attributes = array();
         $attr = array(
             'class' => $params['class'],
             'src' => $src,
@@ -20,11 +25,17 @@ foreach ($images as $image) {
             'alt' => htmlspecialchars($params['alttext']),
             'style' => $params['style']
         );
-        foreach ($attr as $k => $v) $attributes.= ($v ? ' '.$k.'="'.$v.'"' : '');
+        foreach ($attr as $k => $v) {
+            if (!empty($v)) {
+                $attributes[] = $k.'="'.$v.'"';
+            }
+        }
+        if (empty($attributes['alt'])) $attributes[] = 'alt=""';
+        $attributes = implode(' ',$attributes);
         $attributes .= ' '.$params['attributes'];
 
         /* Output the image with attributes */
-        $o .= '<img'.rtrim($attributes).' />';
+        $o .= '<img '.rtrim($attributes).' />';
     }
 }
 return $o;
