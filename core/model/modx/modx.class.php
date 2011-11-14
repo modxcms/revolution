@@ -2063,43 +2063,7 @@ class modX extends xPDO {
         }
         return $removed;
     }
-
-    /**
-     * Loads any specified extension packages
-     */
-    protected function _loadExtensionPackagesz() {
-        $extPackages = $this->getOption('extension_packages');
-        if (empty($extPackages)) return;
-        $extPackages = $this->fromJSON($extPackages);
-        if (!empty($extPackages)) {
-            foreach ($extPackages as $extPackage) {
-                if (!is_array($extPackage)) continue;
-
-                foreach ($extPackage as $packageName => $package) {
-                    if (!empty($package) && !empty($package['path'])) {
-                        $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
-                        $package['path'] = str_replace(array(
-                            '[[++core_path]]',
-                            '[[++base_path]]',
-                            '[[++assets_path]]',
-                            '[[++manager_path]]',
-                        ),array(
-                            $this->config['core_path'],
-                            $this->config['base_path'],
-                            $this->config['assets_path'],
-                            $this->config['manager_path'],
-                        ),$package['path']);
-                        $this->addPackage($packageName,$package['path'],$package['tablePrefix']);
-                        if (!empty($package['serviceName']) && !empty($package['serviceClass'])) {
-                            $packagePath = str_replace('//','/',$package['path'].$packageName.'/');
-                            $this->getService($package['serviceName'],$package['serviceClass'],$packagePath);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+    
     /**
      * Loads a specified Context.
      *
