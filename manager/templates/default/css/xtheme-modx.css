@@ -2503,6 +2503,19 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	background-image:none;
 	padding-left:0;
 }
+.x-window .x-panel-nofooter{
+	background:#dfdfdf;
+	background:-moz-linear-gradient(center bottom,#dfdfdf 0%,#f4f4f4 100%) repeat scroll 0 0 transparent;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#f4f4f4),color-stop(100%,#dfdfdf));
+	background:-webkit-linear-gradient(center bottom,#dfdfdf 0%,#f4f4f4 100%);
+	background:-o-linear-gradient(center bottom,#dfdfdf 0%,#f4f4f4 100%);
+	background:-ms-linear-gradient(center bottom,#dfdfdf 0%,#f4f4f4 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#f4f4f4,endColorstr=#dfdfdf,GradientType=0);
+	background:linear-gradient(center bottom,#dfdfdf 0%,#f4f4f4 100%);
+	background-color:#f7f8fa;
+	border-bottom:1px solid #dfdfdf;
+	border-top:1px solid #ffffff;
+}
 .x-window .x-window-header-text { color:#666666; }
 .x-window .x-window-dlg .ext-mb-text { font-size:12px; }
 .x-window .x-window-dlg .x-window-header-text { font-size:14px; }
