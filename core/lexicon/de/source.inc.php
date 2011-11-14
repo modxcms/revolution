@@ -54,11 +54,11 @@ $_lang['user_group'] = 'Benutzergruppe';
 
 /* file source type */
 $_lang['prop_file.allowedFileTypes_desc'] = 'Wenn hier etwas eingegeben wird, wird die Anzeige von Dateien auf diejenigen mit den angegebenen Dateiendungen beschränkt. Bitte geben Sie eine kommaseparierte Liste von Dateiendungen ein, ohne den Punkt vor der Endung.';
-$_lang['prop_file.basePath_desc'] = 'Der Dateipfad, auf den die Quelle zeigt.';
-$_lang['prop_file.basePathRelative_desc'] = 'Wenn die Basispfad-Einstellung oben nicht relativ zum MODX-Installationspfad angegeben wurde, setzen Sie diese Einstellung auf "Ja".';
-$_lang['prop_file.baseUrl_desc'] = 'Die URL, über die auf diese Quelle zugegriffen werden kann.';
+$_lang['prop_file.basePath_desc'] = 'Der Dateipfad, auf den die Quelle zeigt. Der Pfad muss mit einem Slash (/) enden!';
+$_lang['prop_file.basePathRelative_desc'] = 'Wenn die Basispfad-Einstellung oben nicht relativ zum MODX-Installationspfad angegeben wurde, setzen Sie diese Einstellung auf "Nein".';
+$_lang['prop_file.baseUrl_desc'] = 'Die URL, über die auf diese Quelle zugegriffen werden kann. Der Pfad muss mit einem Slash (/) enden!';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird MODX der URL nur dann die Basis-URL (baseUrl) voranstellen, wenn kein Slash (/) am Anfang der URL gefunden wird, wenn die TV verarbeitet wird. Dies ist nützlich, um einen TV-Wert außerhalb der Basis-URL einstellen zu können.';
-$_lang['prop_file.baseUrlRelative_desc'] = 'Wenn die Basis-URL-Einstellung oben nicht relativ zur MODX-Installations-URL angegeben wurde, setzen Sie diese Einstellung auf "Ja".';
+$_lang['prop_file.baseUrlRelative_desc'] = 'Wenn die Basis-URL-Einstellung oben nicht relativ zur MODX-Installations-URL angegeben wurde, setzen Sie diese Einstellung auf "Nein". Bitte beachten Sie: Geben Sie als baseUrl z.B. "bilder/" ein, ordnen die Medienquelle einer Template-Variablen mit dem Ausgabetyp "Bild" zu und wählen später in einer Ressource dafür das Bild "bild.jpg" aus, so wird die generierte URL dieses Bildes mit einem Slash beginnen (/bilder/bild.jpg), wenn Sie hier "Ja" wählen, und nicht mit einem Slash beginnen (bilder/bild.jpg), wenn Sie hier "Nein" wählen. Da diese URLs üblicherweise als "absolut" (mit Slash) bzw. "relativ" (ohne Slash) referenziert werden, kann es leicht dazu kommen, dass man intuitiv die falsche Einstellung wählt.';
 $_lang['prop_file.imageExtensions_desc'] = 'Eine kommaseparierte Liste von Dateiendungen, deren zugehörige Dateien als Bilder verwendet werden sollen. MODX wird versuchen, Thumbnails für Dateien mit diesen Endungen zu generieren.';
 $_lang['prop_file.skipFiles_desc'] = 'Eine kommaseparierte Liste. MODX versteckt Dateien und Ordner, die auf einen Eintrag dieser Liste passen.';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Die Qualität der generierten Thumbnails, auf einer Skala von 0 bis 100.';
