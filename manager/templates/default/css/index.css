@@ -1845,12 +1845,9 @@ span.required {
 }
 
 .empty-text-wrapper{
-	background-color: #F3F3F3;
     color: #888888;
     font-weight: bold;
     line-height: 1.4;
-    padding: 15px;
-    text-align: center;
 }
 
 .modx-template-detail {
