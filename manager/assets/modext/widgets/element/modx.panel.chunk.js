@@ -230,7 +230,8 @@ MODx.panel.Chunk = function(config) {
 Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (!this.initialized) { this.getForm().setValues(this.config.record); }
+        if (this.initialized) { this.clearDirty(); return true; }
+        this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
             Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+this.config.record.name+'</h2>');
         }

@@ -253,7 +253,8 @@ MODx.panel.Template = function(config) {
 Ext.extend(MODx.panel.Template,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (!this.initialized) { this.getForm().setValues(this.config.record); }
+        if (this.initialized) { this.clearDirty(); return true; }
+        this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.templatename)) {
             Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+this.config.record.templatename+'</h2>');
         }
