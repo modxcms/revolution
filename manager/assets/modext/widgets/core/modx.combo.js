@@ -234,6 +234,7 @@ MODx.combo.Category = function(config) {
         ,allowBlank: true
         ,editable: false
         ,enableKeyEvents: true
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'element/category.php'
         ,baseParams: { action: 'getList' ,showNone: true }
     });
