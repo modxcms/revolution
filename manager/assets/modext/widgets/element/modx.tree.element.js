@@ -502,7 +502,7 @@ MODx.window.DuplicateElement = function(config) {
     },{
         xtype: 'textfield'
         ,fieldLabel: _('element_name_new')
-        ,name: 'name'
+        ,name: config.record.type == 'template' ? 'templatename' : 'name'
         ,id: 'modx-'+this.ident+'-name'
         ,anchor: '90%'
     }];
