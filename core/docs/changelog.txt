@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5697] Fix issue with allow_multiple_emails in user creation
 - [#121] Add option for Elements to pre-process default property/property set values
 - [#6017],[#2774] Add more Permissions to Administrator policy for managing security functions
 - [#5064] Fix issue where access_permissions Permission was required for creating new users

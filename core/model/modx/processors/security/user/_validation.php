@@ -94,7 +94,7 @@ class modUserValidation {
             $this->processor->addFieldError('email',$this->modx->lexicon('user_err_not_specified_email'));
         }
 
-        if (!$this->modx->getOption('allow_multiple_users_per_email',null,true)) {
+        if (!$this->modx->getOption('allow_multiple_emails',null,true)) {
             /** @var modUserProfile $emailExists */
             $emailExists = $this->modx->getObject('modUserProfile',array('email' => $email));
             if ($emailExists) {
