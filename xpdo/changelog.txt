@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#6044] Allow STI derivatives to supplement base class metadata
 - [#6043] Allow xPDO->getSelectColumns() to be overridden in xPDOObject derivatives
 
 xPDO 2.2.0-rc2 (October 20, 2011)
