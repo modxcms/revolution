@@ -472,7 +472,8 @@ class xPDO {
     public function setPackageMeta($pkg, $path = '') {
         $set = false;
         if (is_string($pkg) && !empty($pkg)) {
-            $mapFile = $path.$pkg.'/metadata.'.$this->config['dbtype'].'.php';
+            $pkgPath = str_replace('.', '/', $pkg);
+            $mapFile = $path . $pkgPath . '/metadata.' . $this->config['dbtype'] . '.php';
             if (file_exists($mapFile)) {
                 $xpdo_meta_map = '';
                 include $mapFile;
@@ -506,6 +507,11 @@ class xPDO {
         $descendants = array();
         if (isset($this->classMap[$className])) {
             $descendants = $this->classMap[$className];
+            if ($descendants) {
+                foreach ($descendants as $descendant) {
+                    $descendants = array_merge($descendants, $this->getDescendants($descendant));
+                }
+            }
         }
         return $descendants;
     }
@@ -1259,6 +1265,37 @@ class xPDO {
     }
 
     /**
+     * Indicates the inheritance model for the xPDOObject class specified.
+     *
+     * @param $className The class to determine the table inherit type from.
+     * @return string single, multiple, or none
+     */
+    public function getInherit($className) {
+        $inherit= false;
+        if ($className= $this->loadClass($className)) {
+            if (isset ($this->map[$className]['inherit'])) {
+                $inherit= $this->map[$className]['inherit'];
+            }
+            if (!$inherit && $ancestry= $this->getAncestry($className, false)) {
+                foreach ($ancestry as $ancestor) {
+                    if (isset ($this->map[$ancestor]['inherit'])) {
+                        $inherit= $this->map[$ancestor]['inherit'];
+                        break;
+                    }
+                }
+            }
+        }
+        if (!empty($inherit)) {
+            if ($this->getDebug() === true) {
+                $this->log(xPDO::LOG_LEVEL_DEBUG, 'Returning inherit: ' . $inherit . ' for class: ' . $className);
+            }
+        } else {
+            $inherit= 'none';
+        }
+        return $inherit;
+    }
+
+    /**
      * Gets a list of fields (or columns) for an object by class name.
      *
      * This includes default values for each field and is used by the objects
@@ -1276,6 +1313,17 @@ class xPDO {
                 for ($i= count($ancestry) - 1; $i >= 0; $i--) {
                     if (isset ($this->map[$ancestry[$i]]['fields'])) {
                         $fields= array_merge($fields, $this->map[$ancestry[$i]]['fields']);
+                    }
+                }
+            }
+            if ($this->getInherit($className) === 'single') {
+                $descendants= $this->getDescendants($className);
+                if ($descendants) {
+                    foreach ($descendants as $descendant) {
+                        $descendantClass= $this->loadClass($descendant);
+                        if ($descendantClass && isset($this->map[$descendantClass]['fields'])) {
+                            $fields= array_merge($fields, array_diff_key($this->map[$descendantClass]['fields'], $fields));
+                        }
                     }
                 }
             }
@@ -1305,6 +1353,17 @@ class xPDO {
                     }
                 }
             }
+            if ($this->getInherit($className) === 'single') {
+                $descendants= $this->getDescendants($className);
+                if ($descendants) {
+                    foreach ($descendants as $descendant) {
+                        $descendantClass= $this->loadClass($descendant);
+                        if ($descendantClass && isset($this->map[$descendantClass]['fieldMeta'])) {
+                            $fieldMeta= array_merge($fieldMeta, array_diff_key($this->map[$descendantClass]['fieldMeta'], $fieldMeta));
+                        }
+                    }
+                }
+            }
         }
         return $fieldMeta;
     }
@@ -1322,6 +1381,17 @@ class xPDO {
                 for ($i= count($ancestry) - 1; $i >= 0; $i--) {
                     if (isset ($this->map[$ancestry[$i]]['fieldAliases'])) {
                         $fieldAliases= array_merge($fieldAliases, $this->map[$ancestry[$i]]['fieldAliases']);
+                    }
+                }
+            }
+            if ($this->getInherit($className) === 'single') {
+                $descendants= $this->getDescendants($className);
+                if ($descendants) {
+                    foreach ($descendants as $descendant) {
+                        $descendantClass= $this->loadClass($descendant);
+                        if ($descendantClass && isset($this->map[$descendantClass]['fieldAliases'])) {
+                            $fieldAliases= array_merge($fieldAliases, array_diff_key($this->map[$descendantClass]['fieldAliases'], $fieldAliases));
+                        }
                     }
                 }
             }
@@ -1347,9 +1417,20 @@ class xPDO {
                         $rules= array_merge($rules, $this->map[$ancestry[$i]]['validation']['rules']);
                     }
                 }
-                if ($this->getDebug() === true) {
-                    $this->log(xPDO::LOG_LEVEL_DEBUG, "Returning validation rules: " . print_r($rules, true));
+            }
+            if ($this->getInherit($className) === 'single') {
+                $descendants= $this->getDescendants($className);
+                if ($descendants) {
+                    foreach ($descendants as $descendant) {
+                        $descendantClass= $this->loadClass($descendant);
+                        if ($descendantClass && isset($this->map[$descendantClass]['validation']['rules'])) {
+                            $rules= array_merge($rules, array_diff_key($this->map[$descendantClass]['validation']['rules'], $rules));
+                        }
+                    }
                 }
+            }
+            if ($this->getDebug() === true) {
+                $this->log(xPDO::LOG_LEVEL_DEBUG, "Returning validation rules: " . print_r($rules, true));
             }
         }
         return $rules;
@@ -1368,6 +1449,17 @@ class xPDO {
                 for ($i= count($ancestry) -1; $i >= 0; $i--) {
                     if (isset($this->map[$ancestry[$i]]['indexes'])) {
                         $indices= array_merge($indices, $this->map[$ancestry[$i]]['indexes']);
+                    }
+                }
+                if ($this->getInherit($className) === 'single') {
+                    $descendants= $this->getDescendants($className);
+                    if ($descendants) {
+                        foreach ($descendants as $descendant) {
+                            $descendantClass= $this->loadClass($descendant);
+                            if ($descendantClass && isset($this->map[$descendantClass]['indexes'])) {
+                                $indices= array_merge($indices, array_diff_key($this->map[$descendantClass]['indexes'], $indices));
+                            }
+                        }
                     }
                 }
                 if ($this->getDebug() === true) {
@@ -1474,6 +1566,17 @@ class xPDO {
                     }
                 }
             }
+            if ($this->getInherit($className) === 'single') {
+                $descendants= $this->getDescendants($className);
+                if ($descendants) {
+                    foreach ($descendants as $descendant) {
+                        $descendantClass= $this->loadClass($descendant);
+                        if ($descendantClass && isset($this->map[$descendantClass]['aggregates'])) {
+                            $aggregates= array_merge($aggregates, array_diff_key($this->map[$descendantClass]['aggregates'], $aggregates));
+                        }
+                    }
+                }
+            }
         }
         return $aggregates;
     }
@@ -1491,6 +1594,17 @@ class xPDO {
                 for ($i= count($ancestry) - 1; $i >= 0; $i--) {
                     if (isset ($this->map[$ancestry[$i]]['composites'])) {
                         $composites= array_merge($composites, $this->map[$ancestry[$i]]['composites']);
+                    }
+                }
+            }
+            if ($this->getInherit($className) === 'single') {
+                $descendants= $this->getDescendants($className);
+                if ($descendants) {
+                    foreach ($descendants as $descendant) {
+                        $descendantClass= $this->loadClass($descendant);
+                        if ($descendantClass && isset($this->map[$descendantClass]['composites'])) {
+                            $composites= array_merge($composites, array_diff_key($this->map[$descendantClass]['composites'], $composites));
+                        }
                     }
                 }
             }
@@ -1573,7 +1687,7 @@ class xPDO {
      * @return string A valid SQL string of column names for a SELECT statement.
      */
     public function getSelectColumns($className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
-        return xPDOObject :: getSelectColumns($this, $className, $tableAlias, $columnPrefix, $columns, $exclude);
+        return $this->call($className, 'getSelectColumns', array(&$this, $className, $tableAlias, $columnPrefix, $columns, $exclude));
     }
 
     /**
