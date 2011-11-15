@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="sample.sti" baseClass="xPDOObject" platform="sqlsrv" defaultEngine="MyISAM" version="1.1">
-    <object class="baseClass" table="sti_objects" extends="xPDOSimpleObject">
+    <object class="baseClass" table="sti_objects" extends="xPDOSimpleObject" inherit="single">
         <field key="field1" dbtype="tinyint" precision="2" phptype="integer" null="false" default="" />
         <field key="field2" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="date_modified" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP" />
@@ -19,6 +19,7 @@
     </object>
     <object class="derivedClass2" extends="derivedClass">
         <field key="class_key" dbtype="varchar" precision="255" phptype="string" null="false" default="derivedClass2" />
+        <field key="field3" dbtype="varchar" precision="32" phptype="string" null="false" default="" />
     </object>
     <object class="relClassOne" table="sti_related_one" extends="xPDOSimpleObject">
         <field key="field1" dbtype="int" precision="11" phptype="integer" null="false" />

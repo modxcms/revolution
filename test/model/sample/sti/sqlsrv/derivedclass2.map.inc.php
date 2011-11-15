@@ -5,6 +5,7 @@ $xpdo_meta_map['derivedClass2']= array (
   'fields' => 
   array (
     'class_key' => 'derivedClass2',
+    'field3' => '',
   ),
   'fieldMeta' => 
   array (
@@ -15,6 +16,14 @@ $xpdo_meta_map['derivedClass2']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'derivedClass2',
+    ),
+    'field3' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '32',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
 );

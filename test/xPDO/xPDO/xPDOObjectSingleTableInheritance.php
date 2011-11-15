@@ -34,6 +34,7 @@ class xPDOObjectSingleTableInheritanceTest extends xPDOTestCase {
         try {
             /* ensure we have clear data and identity sequences */
             $this->xpdo->getManager();
+            $this->xpdo->addPackage('sample.sti', xPDOTestHarness::$properties['xpdo_test_path'] . 'model/');
 
             $this->xpdo->manager->createObjectContainer('sti.baseClass');
             $this->xpdo->manager->createObjectContainer('sti.relClassOne');

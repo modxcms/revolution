@@ -1,5 +1,12 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.0-pl (November 15, 2011)
+====================================
+- [#6046] Fix getDescendants() to recursively get derivative classes
+- [#6045] Fix setPackageMeta() to work with sub-packages
+- [#6044] Allow STI derivatives to supplement base class metadata
+- [#6043] Allow xPDO->getSelectColumns() to be overridden in xPDOObject derivatives
+
 xPDO 2.2.0-rc2 (October 20, 2011)
 ====================================
 - Fix xPDOAPCCache and xPDOWinCache multiple_object_delete features

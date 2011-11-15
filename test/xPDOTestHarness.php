@@ -90,7 +90,7 @@ class xPDOTestHarness extends PHPUnit_Framework_TestSuite {
 		        if (!empty(xPDOTestHarness::$debug)) {
 		            $xpdo->setDebug(xPDOTestHarness::$properties['debug']);
 		        }
-	            $xpdo->setPackage('sample', xPDOTestHarness::$properties['xpdo_test_path'] . '/model/');
+	            $xpdo->setPackage('sample', xPDOTestHarness::$properties['xpdo_test_path'] . 'model/');
 
 		        xPDOTestHarness::$xpdo = $xpdo;
 	        }
