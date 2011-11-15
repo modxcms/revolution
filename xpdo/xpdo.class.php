@@ -472,7 +472,8 @@ class xPDO {
     public function setPackageMeta($pkg, $path = '') {
         $set = false;
         if (is_string($pkg) && !empty($pkg)) {
-            $mapFile = $path.$pkg.'/metadata.'.$this->config['dbtype'].'.php';
+            $pkgPath = str_replace('.', '/', $pkg);
+            $mapFile = $path . $pkgPath . '/metadata.' . $this->config['dbtype'] . '.php';
             if (file_exists($mapFile)) {
                 $xpdo_meta_map = '';
                 include $mapFile;
