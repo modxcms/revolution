@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#6046] Fix getDescendants() to recursively get derivative classes
 - [#6045] Fix setPackageMeta() to work with sub-packages
 - [#6044] Allow STI derivatives to supplement base class metadata
 - [#6043] Allow xPDO->getSelectColumns() to be overridden in xPDOObject derivatives

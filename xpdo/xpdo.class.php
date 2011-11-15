@@ -507,6 +507,11 @@ class xPDO {
         $descendants = array();
         if (isset($this->classMap[$className])) {
             $descendants = $this->classMap[$className];
+            if ($descendants) {
+                foreach ($descendants as $descendant) {
+                    $descendants = array_merge($descendants, $this->getDescendants($descendant));
+                }
+            }
         }
         return $descendants;
     }
