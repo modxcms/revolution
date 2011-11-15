@@ -12,7 +12,7 @@
 
     <!-- Set the project version -->
     <property name="xpdo.core.version" value="2.2.0" />
-    <property name="xpdo.core.release" value="rc2" />
+    <property name="xpdo.core.release" value="pl" />
 
     <!-- Set some common build properties -->
     <property name="build.src.tree" value="HEAD" />
