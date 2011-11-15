@@ -1573,7 +1573,7 @@ class xPDO {
      * @return string A valid SQL string of column names for a SELECT statement.
      */
     public function getSelectColumns($className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
-        return xPDOObject :: getSelectColumns($this, $className, $tableAlias, $columnPrefix, $columns, $exclude);
+        return $this->call($className, 'getSelectColumns', array(&$this, $className, $tableAlias, $columnPrefix, $columns, $exclude));
     }
 
     /**
