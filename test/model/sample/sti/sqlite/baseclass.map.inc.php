@@ -3,6 +3,7 @@ $xpdo_meta_map['baseClass']= array (
   'package' => 'sample.sti',
   'version' => '1.1',
   'table' => 'sti_objects',
+  'inherit' => 'single',
   'fields' => 
   array (
     'field1' => 0,

@@ -276,7 +276,6 @@ abstract class xPDOGenerator {
                             $this->className= "{$attrValue}";
                             if (!isset ($this->classes[$this->className])) {
                                 $this->classes[$this->className]= array ();
-                                $this->map[$this->className]= array ();
                                 $this->classes[$this->className]['extends']= $this->model['baseClass'];
                             }
                             if (isset ($this->model['package'])) {
@@ -291,6 +290,9 @@ abstract class xPDOGenerator {
                             break;
                         case 'extends' :
                             $this->classes[$this->className]['extends']= $attrValue;
+                            break;
+                        case 'inherit' :
+                            $this->map[$this->className]['inherit']= $attrValue;
                             break;
                         default:
                             $this->classes[$this->className][$attrName]= $attrValue;
