@@ -226,7 +226,7 @@ class modRequest {
             $criteria = $this->modx->newQuery('modResource');
             $criteria->select(array($this->modx->escape('modResource').'.*'));
             $criteria->where(array('id' => $resourceId, 'deleted' => '0'));
-            if (!$this->modx->hasPermission('view_unpublished')) $criteria['published']= 1;
+            if (!$this->modx->hasPermission('view_unpublished')) $criteria->where(array('published' => 1));
             if ($resource = $this->modx->getObject('modResource', $criteria)) {
                 if ($resource instanceof modResource) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
