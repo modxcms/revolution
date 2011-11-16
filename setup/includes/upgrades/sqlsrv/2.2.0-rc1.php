@@ -181,3 +181,11 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 
 $description = $this->install->lexicon('add_index',array('index' => 'hide_trees','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'hide_trees'));
+
+/* change help/welcome screen URL references */
+/** @var modSystemSetting $setting */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'welcome_screen_url'));
+if ($setting && in_array($setting->get('value'),array('http://misc.modx.com/revolution/welcome.21.html','http://misc.modx.com/revolution/welcome.20.html'))) {
+    $setting->set('value','http://misc.modx.com/revolution/welcome.22.html');
+    $setting->save();
+}
