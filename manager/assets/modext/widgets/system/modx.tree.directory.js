@@ -77,6 +77,7 @@ MODx.tree.Directory = function(config) {
         var el = Ext.get(this.config.id);
         el.createChild({tag: 'div', id: this.config.id+'_tb'});
         el.createChild({tag: 'div', id: this.config.id+'_filter'});
+        this.addSourceToolbar();
     },this);
     this.addSourceToolbar();
 };
@@ -85,6 +86,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,addSourceToolbar: function() {
         var t = Ext.get(this.config.id+'-tbar');
         if (!t) { return; }
+        var ae = Ext.get(this.config.id+'-sourcebar');
+        if (ae) { return; }
         var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: this.config.id+'-sourcebar'});
         var tb = new Ext.Toolbar({
             applyTo: fbd

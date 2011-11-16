@@ -164,7 +164,7 @@ MODx.browser.Window = function(config) {
         ,onSelect: {fn: this.onSelect, scope: this}
         ,prependPath: config.prependPath || null
         ,prependUrl: config.prependUrl || null
-        ,source: config.source || 1
+        ,source: config.source || MODx.config.default_media_source
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
         ,openTo: config.openTo || ''
@@ -175,7 +175,6 @@ MODx.browser.Window = function(config) {
         xtype: 'modx-tree-directory'
         ,onUpload: function() { this.view.run(); }
         ,scope: this
-        ,prependPath: config.prependPath || null
         ,source: config.source || MODx.config.default_media_source
         ,hideFiles: config.hideFiles || false
         ,openTo: config.openTo || ''

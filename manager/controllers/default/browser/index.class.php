@@ -49,6 +49,8 @@ MODx.ctx = "'.$this->ctx.'";
         $_SERVER['HTTP_MODAUTH'] = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
         $placeholders['site_id'] = $_SERVER['HTTP_MODAUTH'];
 
+        $placeholders['source'] = $this->modx->getOption('source',$scriptProperties,$this->modx->getOption('default_media_source',null,1));
+
         return $placeholders;
     }
 
