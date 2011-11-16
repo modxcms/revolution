@@ -293,17 +293,27 @@ class modTemplateVar extends modElement {
      * @access public
      * @param integer $resourceId The id of the resource; 0 defaults to the
      * current resource.
-     * @param string $style Extra style parameters. (deprecated)
+     * @param mixed $options Array of options ('value', 'style') or deprecated $style string
      * @return mixed The rendered input for the template variable.
      */
-    public function renderInput($resourceId= 0, $style= '') {
+    public function renderInput($resourceId= 0, $options) {
+
+        if(is_string($options) && !empty($options)) {
+            // fall back to deprecated $style setting
+            $style = $options;
+        } else {
+            $style = is_array($options) && isset($options['style']) ? strval($options['style']) : '';
+            $value = is_array($options) && isset($options['value']) ? strval($options['value']) : '';
+        }
         if (!isset($this->smarty)) {
             $this->xpdo->getService('smarty', 'smarty.modSmarty', '', array(
                 'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',null,'default') . '/',
             ));
         }
         $this->xpdo->smarty->assign('style',$style);
-        $value = $this->getValue($resourceId);
+        if(!isset($value) || empty($value)) {
+            $value = $this->getValue($resourceId);
+        }
 
         /* process only @INHERIT bindings in value, since we're inputting */
         $bdata = $this->getBindingDataFromValue($value);
