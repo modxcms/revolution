@@ -545,7 +545,6 @@ class modInstall {
         if (isset ($_POST['installmode'])) {
             $mode = intval($_POST['installmode']);
         } else {
-            error_reporting(E_ALL); ini_set('display_errors',true);
             global $dbase;
             if (file_exists(MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php')) {
                 /* Include the file so we can test its validity */

@@ -61,9 +61,6 @@ if (!is_object($modx) || !($modx instanceof modX)) {
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }
-$modx->setDebug(E_ALL | E_STRICT);
-$modx->setLogLevel(modX::LOG_LEVEL_ERROR);
-$modx->setLogTarget('FILE');
 
 $modx->initialize('mgr');
 

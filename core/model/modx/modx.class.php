@@ -438,8 +438,30 @@ class modX extends xPDO {
                     PDO::ATTR_PERSISTENT => false,
                 )
             );
-            $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
+            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
             $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
+            $debug = $this->getOption('debug');
+            switch ($debug) {
+                case null:
+                case '':
+                    break;
+                case true:
+                case 1:
+                case '1':
+                    $this->setDebug(true);
+                    break;
+                case false:
+                case 0:
+                case '0':
+                    $this->setDebug(false);
+                    break;
+                default:
+                    if ((integer) $debug > 1) {
+                        $this->setDebug($debug);
+                    }
+                    break;
+            }
+            $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
             if (!empty($site_id)) $this->site_id = $site_id;
             if (!empty($uuid)) $this->uuid = $uuid;
         } else {
@@ -2102,6 +2124,31 @@ class modX extends xPDO {
                 } else {
                     $this->log(modX::LOG_LEVEL_ERROR, 'Could not load context: ' . $contextKey);
                 }
+            }
+        }
+        if ($initialized) {
+            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
+            $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
+            $debug = $this->getOption('debug');
+            switch ($debug) {
+                case null:
+                case '':
+                    break;
+                case true:
+                case 1:
+                case '1':
+                    $this->setDebug(true);
+                    break;
+                case false:
+                case 0:
+                case '0':
+                    $this->setDebug(false);
+                    break;
+                default:
+                    if ((integer) $debug > 1) {
+                        $this->setDebug($debug);
+                    }
+                    break;
             }
         }
         return $initialized;

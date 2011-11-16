@@ -384,6 +384,15 @@ $settings['cultureKey']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['debug']= $xpdo->newObject('modSystemSetting');
+$settings['debug']->fromArray(array (
+  'key' => 'debug',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['default_duplicate_publish_option']= $xpdo->newObject('modSystemSetting');
 $settings['default_duplicate_publish_option']->fromArray(array (
   'key' => 'default_duplicate_publish_option',
@@ -744,6 +753,24 @@ $settings['locale']->fromArray(array (
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'language',
+  'editedon' => null,
+), '', true, true);
+$settings['log_level']= $xpdo->newObject('modSystemSetting');
+$settings['log_level']->fromArray(array (
+  'key' => 'log_level',
+  'value' => '1',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
+$settings['log_target']= $xpdo->newObject('modSystemSetting');
+$settings['log_target']->fromArray(array (
+  'key' => 'log_target',
+  'value' => 'FILE',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
   'editedon' => null,
 ), '', true, true);
 $settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
