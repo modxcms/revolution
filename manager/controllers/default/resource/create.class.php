@@ -8,9 +8,6 @@ require_once dirname(__FILE__).'/resource.class.php';
  */
 class ResourceCreateManagerController extends ResourceManagerController {
 
-    /** @var modRegister registry */
-    private $reg;
-
     /**
      * Check for any permissions or requirements to load page
      * @return bool

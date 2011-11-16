@@ -21,7 +21,9 @@ abstract class ResourceManagerController extends modManagerController {
     public $tvCounts = array();
     /** @var array $rteFields */
     public $rteFields = array();
-    
+
+    protected $reg;
+
     public $canPublish = true;
     public $canSave = true;
     public $canDuplicate = true;

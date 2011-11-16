@@ -127,7 +127,7 @@ class modResourceGroupResourceGetListProcessor extends modProcessor {
             if($reg->connect()) {
                 $topic = '/' . $token . '/';
                 $reg->subscribe($topic);
-                $reloadData = $reg->read(array('poll_limit'=> 1, 'remove_read'=> false));
+                $reloadData = $reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
                 if(is_array($reloadData) && is_string(reset($reloadData))) {
                     $reloadData = @unserialize(reset($reloadData));
                 }
