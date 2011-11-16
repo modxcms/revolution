@@ -419,7 +419,6 @@ class modX extends xPDO {
                     xPDO::OPT_HYDRATE_FIELDS => true,
                     xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
                     xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
-                    xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
                     xPDO::OPT_VALIDATE_ON_SAVE => true,
                     'cache_system_settings' => true,

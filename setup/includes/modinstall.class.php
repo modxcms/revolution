@@ -570,7 +570,6 @@ class modInstall {
             $this->xpdo = new xPDO($dsn, $user, $password, array_merge(array(
                     xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
                     xPDO::OPT_TABLE_PREFIX => $prefix,
-                    xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_SETUP => true,
                 ), $options),
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT)
