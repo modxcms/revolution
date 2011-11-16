@@ -114,8 +114,6 @@ MODx.grid.Grid = function(config) {
             start: config.pageStart || 0
             ,limit: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
         }
-        ,scope: this
-        ,callback: function() { this.getStore().reload(); } /* fixes comboeditor bug */
     });
     this.getStore().on('exception',this.onStoreException,this);
     this.config = config;
