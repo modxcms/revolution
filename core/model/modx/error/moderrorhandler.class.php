@@ -101,14 +101,24 @@ class modErrorHandler {
                 break;
             case E_STRICT:
                 $handled= true;
-                /* $errmsg= 'E_STRICT information: ' . $errstr; */
-                /* $this->modx->log(modX::LOG_LEVEL_INFO, $errmsg, '','',$errfile,$errline); */
+                $errmsg= 'E_STRICT information: ' . $errstr;
+                $this->modx->log(modX::LOG_LEVEL_INFO, $errmsg, '','',$errfile,$errline);
                 return $handled;
                 break;
             case E_RECOVERABLE_ERROR:
                 $handled= true;
                 $errmsg= 'Recoverable error: ' . $errstr;
                 $this->modx->log(modX::LOG_LEVEL_ERROR, $errmsg, '', '', $errfile, $errline);
+                break;
+            case E_DEPRECATED:
+                $handled= true;
+                $errmsg= 'PHP deprecated: ' . $errstr;
+                $this->modx->log(modX::LOG_LEVEL_WARN, $errmsg, '', '', $errfile, $errline);
+                break;
+            case E_USER_DEPRECATED:
+                $handled= true;
+                $errmsg= 'User deprecated: ' . $errstr;
+                $this->modx->log(modX::LOG_LEVEL_WARN, $errmsg, '', '', $errfile, $errline);
                 break;
             default:
                 $handled= false;
