@@ -76,10 +76,14 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
+        $reloadData = $this->getReloadData();
 
         $loaded = $this->getResource();
         if ($loaded !== true) {
             return $this->failure($loaded);
+        }
+        if(is_array($reloadData) && !empty($reloadData)) {
+            $this->resource->fromArray($reloadData);
         }
 
         /* get context */
@@ -123,14 +127,17 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 }
             }
         }
-        
+
         /* get TVs */
         $this->resource->set('template',$this->resourceArray['template']);
 
         $this->prepareResource();
-        $this->loadTVs();
+        $this->loadTVs($reloadData);
 
         $this->getPreviewUrl();
+
+        /* single-use token for reloading resource */
+        $this->setResourceToken();
 
         $this->setPlaceholder('resource',$this->resource);
         return $placeholders;

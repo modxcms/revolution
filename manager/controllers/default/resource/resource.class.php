@@ -21,7 +21,9 @@ abstract class ResourceManagerController extends modManagerController {
     public $tvCounts = array();
     /** @var array $rteFields */
     public $rteFields = array();
-    
+
+    protected $reg;
+
     public $canPublish = true;
     public $canSave = true;
     public $canDuplicate = true;
@@ -210,9 +212,10 @@ abstract class ResourceManagerController extends modManagerController {
     /**
      * Load the TVs for the Resource
      *
+     * @param array $reloadData resource data passed if reloading
      * @return string The TV editing form
      */
-    public function loadTVs() {
+    public function loadTVs($reloadData = array()) {
         $this->setPlaceholder('wctx',$this->resource->get('context_key'));
         $_GET['wctx'] = $this->resource->get('context_key');
 
@@ -235,7 +238,9 @@ abstract class ResourceManagerController extends modManagerController {
                 $c->query['distinct'] = 'DISTINCT';
                 $c->select($this->modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
                 $c->select($this->modx->getSelectColumns('modCategory', 'Category', 'cat_', array('category')));
-                $c->select($this->modx->getSelectColumns('modTemplateVarResource', 'TemplateVarResource', '', array('value')));
+                if(empty($reloadData)) {
+                    $c->select($this->modx->getSelectColumns('modTemplateVarResource', 'TemplateVarResource', '', array('value')));
+                }
                 $c->select($this->modx->getSelectColumns('modTemplateVarTemplate', 'TemplateVarTemplate', '', array('rank')));
                 $c->leftJoin('modCategory','Category');
                 $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplate',array(
@@ -249,19 +254,26 @@ abstract class ResourceManagerController extends modManagerController {
                 $c->sortby('cat_category,TemplateVarTemplate.rank,modTemplateVar.rank','ASC');
                 $tvs = $this->modx->getCollection('modTemplateVar',$c);
 
+                $reloading = !empty($reloadData) && count($reloadData) > 0;
                 $this->modx->smarty->assign('tvcount',count($tvs));
                 foreach ($tvs as $tv) {
                     $cat = (int)$tv->get('category');
-                    $default = $tv->processBindings($tv->get('default_text'),$this->resource->get('id'));
-                    if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) == 0 || $tv->get('value') == null)) {
-                        $tv->set('inherited',true);
-                    }
-                    if ($tv->get('value') == null) {
-                        $v = $tv->get('default_text');
-                        if ($tv->get('type') == 'checkbox' && $tv->get('value') == '') {
-                            $v = '';
+                    $tvid = $tv->get('id');
+                    if($reloading && array_key_exists('tv'.$tvid, $reloadData)) {
+                        $v = $reloadData['tv'.$tvid];
+                        $tv->set('value', $v);
+                    } else {
+                        $default = $tv->processBindings($tv->get('default_text'),$this->resource->get('id'));
+                        if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) == 0 || $tv->get('value') == null)) {
+                            $tv->set('inherited',true);
                         }
-                        $tv->set('value',$v);
+                        if ($tv->get('value') == null) {
+                            $v = $tv->get('default_text');
+                            if ($tv->get('type') == 'checkbox' && $tv->get('value') == '') {
+                                $v = '';
+                            }
+                            $tv->set('value',$v);
+                        }
                     }
 
                     if ($tv->get('type') == 'richtext') {
@@ -269,7 +281,7 @@ abstract class ResourceManagerController extends modManagerController {
                             'tv' . $tv->id,
                         ));
                     }
-                    $inputForm = $tv->renderInput($this->resource->get('id'));
+                    $inputForm = $tv->renderInput($this->resource->get('id'), array('value'=> $v));
                     if (empty($inputForm)) continue;
 
                     $tv->set('formElement',$inputForm);
@@ -330,6 +342,19 @@ abstract class ResourceManagerController extends modManagerController {
     }
 
     /**
+     * Set token for validating a request
+     *
+     * @return void
+     */
+    public function setResourceToken() {
+        if(!isset($_SESSION['newResourceTokens']) || !is_array($_SESSION['newResourceTokens'])) {
+            $_SESSION['newResourceTokens'] = array();
+        }
+        $this->resourceArray['create_resource_token'] = uniqid('', true);
+        $_SESSION['newResourceTokens'][] = $this->resourceArray['create_resource_token'];
+    }
+
+    /**
      * Fire the TV Form Render event
      * @return mixed
      */
@@ -343,4 +368,35 @@ abstract class ResourceManagerController extends modManagerController {
         $this->setPlaceholder('OnResourceTVFormPrerender',$onResourceTVFormPrerender);
         return $onResourceTVFormPrerender;
     }
+
+    protected function getReloadData() {
+        $modx =& $this->modx;
+        $scriptProperties =& $this->scriptProperties;
+        $reloadData = array();
+
+        // get reload data if reload token found in registry
+        if (array_key_exists('reload', $scriptProperties) && !empty($scriptProperties['reload'])) {
+            if(!isset($modx->registry)) {
+                $modx->getService('registry', 'registry.modRegistry');
+            }
+            if(isset($modx->registry)) {
+                $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
+                $this->reg = $modx->registry->resource_reload;
+                if($this->reg->connect()) {
+                    $topic = '/' . $scriptProperties['reload'] . '/';
+                    $this->reg->subscribe($topic);
+                    $reloadData = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> false));
+                    if(is_array($reloadData) && is_string(reset($reloadData))) {
+                        $reloadData = @unserialize(reset($reloadData));
+                    }
+                    if(!is_array($reloadData)) {
+                        $reloadData = array();
+                    }
+                    $this->reg->unsubscribe($topic);
+                }
+            }
+        }
+        return $reloadData;
+    }
+
 }

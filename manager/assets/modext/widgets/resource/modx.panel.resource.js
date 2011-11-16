@@ -143,10 +143,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e == 'yes') {
                     var nt = t.getValue();
-                    t.setValue(this.config.record.template);
+                    var f = Ext.getCmp('modx-page-update-resource');
+                    f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action['resource/update']+'&id='+r.result.object.id+'&template='+nt+'&activeSave=1';
+                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload; // +'&template='+nt
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -699,6 +700,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,resource: config.resource
                 ,mode: config.mode || 'update'
                 ,"parent": config.record["parent"] || 0
+                ,"token": config.record.create_resource_token
                 ,listeners: {
                     'afteredit': {fn:this.fieldChangeEvent,scope:this}
                 }

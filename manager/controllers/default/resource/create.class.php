@@ -7,7 +7,7 @@ require_once dirname(__FILE__).'/resource.class.php';
  * @subpackage manager.controllers
  */
 class ResourceCreateManagerController extends ResourceManagerController {
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -57,7 +57,8 @@ class ResourceCreateManagerController extends ResourceManagerController {
      */
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
-        
+        $reloadData = $this->getReloadData();
+
         /* handle template inheritance */
         if (!empty($this->scriptProperties['parent'])) {
             $this->parent = $this->modx->getObject('modResource',$this->scriptProperties['parent']);
@@ -82,23 +83,27 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->setPermissions();
 
         /* set default template */
-        $defaultTemplate = $this->getDefaultTemplate();
-        $this->resourceArray = array_merge($this->resourceArray,array(
-            'template' => $defaultTemplate,
-            'content_type' => $this->context->getOption('default_content_type',1,$this->modx->_userConfig),
-            'class_key' => $this->resourceClass,
-            'context_key' => $this->ctx,
-            'parent' => $this->parent->get('id'),
-            'richtext' =>  $this->context->getOption('richtext_default', true, $this->modx->_userConfig),
-            'hidemenu' => $this->context->getOption('hidemenu_default', 0, $this->modx->_userConfig),
-            'published' => $this->context->getOption('publish_default', 0, $this->modx->_userConfig),
-            'searchable' => $this->context->getOption('search_default', 1, $this->modx->_userConfig),
-            'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
-        ));
-        $this->parent->fromArray($this->resourceArray);
-        $this->parent->set('template',$defaultTemplate);
-        $this->resource->set('template',$defaultTemplate);
-
+        if(empty($reloadData)) {
+            $defaultTemplate = $this->getDefaultTemplate();
+            $this->resourceArray = array_merge($this->resourceArray,array(
+                'template' => $defaultTemplate,
+                'content_type' => $this->context->getOption('default_content_type',1,$this->modx->_userConfig),
+                'class_key' => $this->resourceClass,
+                'context_key' => $this->ctx,
+                'parent' => $this->parent->get('id'),
+                'richtext' =>  $this->context->getOption('richtext_default', true, $this->modx->_userConfig),
+                'hidemenu' => $this->context->getOption('hidemenu_default', 0, $this->modx->_userConfig),
+                'published' => $this->context->getOption('publish_default', 0, $this->modx->_userConfig),
+                'searchable' => $this->context->getOption('search_default', 1, $this->modx->_userConfig),
+                'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
+            ));
+            $this->parent->fromArray($this->resourceArray);
+            $this->parent->set('template',$defaultTemplate);
+            $this->resource->set('template',$defaultTemplate);
+        } else {
+            $this->resourceArray = array_merge($this->resourceArray, $reloadData);
+            $this->resource->set('template', $reloadData['template']);
+        }
         /* handle FC rules */
         $overridden = $this->checkFormCustomizationRules($this->parent,true);
         $this->resourceArray = array_merge($this->resourceArray,$overridden);
@@ -112,7 +117,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
-
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
@@ -125,7 +129,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         }
 
         /* get TVs */
-        $this->loadTVs();
+        $this->loadTVs($reloadData);
 
         /* single-use token for creating resource */
         $this->setResourceToken();
@@ -186,19 +190,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
             }
         }
         return $defaultTemplate;
-    }
-
-    /**
-     * Set the Resource token for creating a resource
-     * 
-     * @return void
-     */
-    public function setResourceToken() {
-        if(!isset($_SESSION['newResourceTokens']) || !is_array($_SESSION['newResourceTokens'])) {
-            $_SESSION['newResourceTokens'] = array();
-        }
-        $this->resourceArray['create_resource_token'] = uniqid('', true);
-        $_SESSION['newResourceTokens'][] = $this->resourceArray['create_resource_token'];
     }
 
     /**
