@@ -206,6 +206,9 @@ $_lang['setting_context_tree_sortdir_desc'] = 'L\'ordre de classement des contex
 $_lang['setting_cultureKey'] = 'Langue';
 $_lang['setting_cultureKey_desc'] = 'Sélectionnez la langue pour tous les contextes "non-manager", web inclus.';
 
+$_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug_desc'] = 'Activez ou désactiver le debugging dans MODX et/ou définissez le niveau de error_reporting de PHP. \'\' = utiliser la valeur actuelle de error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), ou toute autre valeur de error_reporting valide (un entier).';
+
 $_lang['setting_default_content_type'] = 'Type de contenu par défaut';
 $_lang['setting_default_content_type_desc'] = 'Indiquez le type de contenu par défaut à utiliser pour les nouvelles ressources. Vous pourrez toujours sélectionner un type de contenu différent lorsque vous éditerez une ressource; ce paramètre pré-selectionne seulement le type de contenu.';
 
@@ -332,6 +335,12 @@ $_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Définie la locale du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="http://php.net/setlocale" target="_blank">la documentation PHP</a> pour plus d\'information.';
+
+$_lang['setting_log_level'] = 'Niveau de log';
+$_lang['setting_log_level_desc'] = 'Le niveau par défaut de log; plus le niveau est bas, moins les informations seront log. Options disponibles : 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
+
+$_lang['setting_log_target'] = 'Cible du log';
+$_lang['setting_log_target_desc'] = 'La cible par défaut où les messages de log seront écrit. Options disponibles : \'FILE\', \'HTML\', ou \'ECHO\'. Si aucune valeur n\'est spécifiée \'FILE\' est utilisé.';
 
 $_lang['setting_mail_charset'] = 'Charset Mail';
 $_lang['setting_mail_charset_desc'] = 'Le charset (par défaut défaut) pour les emails, par ex. \'iso-8859-1\' ou \'UTF-8\'';
