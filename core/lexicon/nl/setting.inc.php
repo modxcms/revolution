@@ -171,9 +171,6 @@ $_lang['setting_container_suffix_desc'] = 'Het achtervoegsel voor documenten ind
 $_lang['setting_cultureKey'] = 'Taal';
 $_lang['setting_cultureKey_desc'] = 'Selecteer de taal voor alle niet-manager Contexts, inclusief web.';
 
-$_lang['setting_custom_resource_classes'] = 'Aangepaste Document Classes';
-$_lang['setting_custom_resource_classes_desc'] = 'Een komma-gescheiden lijst van aangepaste document classes. Specificeer met kleine letters de lexicon_key:className (vb: wiki_resource:WikiResource). Alle classes moeten extenden van modResource. Om de locatie van de controller te specificeren voor elke class, voeg een instelling toe met kleine letters [deNaamVanDeClass]_delegate_path met een pad naar de map met de php maak/wijzig bestanden. Vb: wikiresource_delegate_path voor de class WikiResource welke modResource extend.';
-
 $_lang['setting_default_template'] = 'Standaard Template';
 $_lang['setting_default_template_desc'] = 'Selecteer de standaard template welke je wilt gebruiken voor nieuwe documenten. Uiteraard kun je altijd nog een andere template kiezen in de document-editor, deze instelling selecteert er alvast een voor jou.';
 
