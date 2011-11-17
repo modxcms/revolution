@@ -23,7 +23,7 @@ class modActionUpdateProcessor extends modObjectUpdateProcessor {
         $hasLayout = (boolean)$this->getProperty('haslayout');
         $this->object->set('haslayout',$hasLayout);
 
-        $controller = $this->getProperties('controller');
+        $controller = $this->getProperty('controller');
         if (empty($controller)) {
             $this->addFieldError('controller',$this->modx->lexicon('controller_err_ns'));
         }
