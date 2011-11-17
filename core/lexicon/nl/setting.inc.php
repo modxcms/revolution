@@ -10,6 +10,7 @@
  */
 $_lang['area'] = 'Gebied';
 $_lang['area_authentication'] = 'Authenticatie en beveiliging';
+$_lang['area_core'] = 'Core';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_editor'] = 'Rich-Tekst Editor';
 $_lang['area_file'] = 'Bestandssysteem';
@@ -17,8 +18,9 @@ $_lang['area_filter'] = 'Filter op gebied...';
 $_lang['area_furls'] = 'Vriendelijke URLs';
 $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexicon en taal';
-$_lang['area_mail'] = 'Mail';
+$_lang['area_mail'] = 'E-mail';
 $_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_phpthumb'] = 'PhpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session en Cookie';
 $_lang['area_lexicon_string'] = 'Gebied Lexicon Entry';
@@ -28,7 +30,11 @@ $_lang['area_system'] = 'Systeem en Server';
 $_lang['areas'] = 'Gebieden';
 $_lang['charset'] = 'Karakterset';
 $_lang['country'] = 'Land';
+$_lang['description_desc'] = 'Een korte beschrijving van de instelling. Kan een Lexicon key zijn.';
+$_lang['key_desc'] = 'De key voor de instelling. De instelling zal beschikbaar zijn via de [[++key]] tags.';
+$_lang['name_desc'] = 'Een Naam voor de instelling, kan een Lexicon key zijn.';
 $_lang['namespace'] = 'Namespace';
+$_lang['namespace_desc'] = 'De Namespace waar deze Instelling bij hoort. Het "default" Lexicon Topic voor de Namespace zal beschikbaar zijn wanneer Instellingen worden geladen.';
 $_lang['namespace_filter'] = 'Filter op namespace...';
 $_lang['search_by_key'] = 'Zoek op key...';
 $_lang['setting_create'] = 'Maak nieuwe instelling';
@@ -170,9 +176,6 @@ $_lang['setting_container_suffix_desc'] = 'Het achtervoegsel voor documenten ind
 
 $_lang['setting_cultureKey'] = 'Taal';
 $_lang['setting_cultureKey_desc'] = 'Selecteer de taal voor alle niet-manager Contexts, inclusief web.';
-
-$_lang['setting_custom_resource_classes'] = 'Aangepaste Document Classes';
-$_lang['setting_custom_resource_classes_desc'] = 'Een komma-gescheiden lijst van aangepaste document classes. Specificeer met kleine letters de lexicon_key:className (vb: wiki_resource:WikiResource). Alle classes moeten extenden van modResource. Om de locatie van de controller te specificeren voor elke class, voeg een instelling toe met kleine letters [deNaamVanDeClass]_delegate_path met een pad naar de map met de php maak/wijzig bestanden. Vb: wikiresource_delegate_path voor de class WikiResource welke modResource extend.';
 
 $_lang['setting_default_template'] = 'Standaard Template';
 $_lang['setting_default_template_desc'] = 'Selecteer de standaard template welke je wilt gebruiken voor nieuwe documenten. Uiteraard kun je altijd nog een andere template kiezen in de document-editor, deze instelling selecteert er alvast een voor jou.';
