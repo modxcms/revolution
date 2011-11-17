@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.0-rc-1 (November 17, 2011)
+====================================
 - [#6019] Configure log_level, log_target, and debug via Settings
 - [#4798] Resource create/edit: Template can be switched without saving
 - Update to xPDO 2.2.0-pl
