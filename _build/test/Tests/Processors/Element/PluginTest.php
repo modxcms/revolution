@@ -37,32 +37,33 @@ class PluginProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
-        $modx->error->reset();
-        $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin'));
-        if ($plugin) $plugin->remove();
-        $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin2'));
-        if ($plugin) $plugin->remove();
-        $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin3'));
-        if ($plugin) $plugin->remove();
+    public function setUp() {
+        parent::setUp();
+        /** @var modPlugin $plugin */
+        $plugin = $this->modx->newObject('modPlugin');
+        $plugin->fromArray(array(
+            'name' => 'UnitTestPlugin'
+        ));
+        $plugin->save();
     }
 
     /**
      * Cleanup data after this test.
      */
-    public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
-        $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin'));
-        if ($plugin) $plugin->remove();
-        $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin2'));
-        if ($plugin) $plugin->remove();
-        $plugin = $modx->getObject('modPlugin',array('name' => 'UnitTestPlugin3'));
-        if ($plugin) $plugin->remove();
+    public function tearDown() {
+        parent::tearDown();
+        $plugins = $this->modx->getCollection('modPlugin',array('name:LIKE' => '%UnitTest%'));
+        /** @var modPlugin $plugin */
+        foreach ($plugins as $plugin) {
+            $plugin->remove();
+        }
+        $this->modx->error->reset();
     }
 
     /**
      * Tests the element/plugin/create processor, which creates a Plugin
+     * @param boolean $shouldPass
+     * @param string $pluginPk
      * @dataProvider providerPluginCreate
      */
     public function testPluginCreate($shouldPass,$pluginPk) {
@@ -80,12 +81,13 @@ class PluginProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/plugin/create processor test.
+     * @return array
      */
     public function providerPluginCreate() {
         return array(
-            array(true,'UnitTestPlugin'), /* pass: 1st plugin */
-            array(true,'UnitTestPlugin2'), /* pass: 2nd plugin */
-            array(false,'UnitTestPlugin2'), /* fail: already exists */
+            array(true,'UnitTestPlugin2'), /* pass: 1st plugin */
+            array(true,'UnitTestPlugin3'), /* pass: 2nd plugin */
+            array(false,'UnitTestPlugin'), /* fail: already exists */
             array(false,''), /* fail: no data */
         );
     }
@@ -93,13 +95,16 @@ class PluginProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the element/plugin/duplicate processor, which duplicates a Plugin
+     * @param boolean $shouldPass
+     * @param string $pluginPk
+     * @param string $newName
      * @dataProvider providerPluginDuplicate
      */
     public function testPluginDuplicate($shouldPass,$pluginPk,$newName) {
         $plugin = $this->modx->getObject('modPlugin',array('name' => $pluginPk));
         if (empty($plugin) && $shouldPass) {
             $this->fail('No Plugin found "'.$pluginPk.'" as specified in test provider.');
-            return false;
+            return;
         }
         $this->modx->lexicon->load('default');
 
@@ -124,6 +129,7 @@ class PluginProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/plugin/duplicate processor test.
+     * @return array
      */
     public function providerPluginDuplicate() {
         return array(
@@ -135,13 +141,15 @@ class PluginProcessorsTest extends MODxTestCase {
     }
     /**
      * Tests the element/plugin/get processor, which gets a Plugin
+     * @param boolean $shouldPass
+     * @param string $pluginPk
      * @dataProvider providerPluginGet
      */
     public function testPluginGet($shouldPass,$pluginPk) {
         $plugin = $this->modx->getObject('modPlugin',array('name' => $pluginPk));
         if (empty($plugin) && $shouldPass) {
             $this->fail('No Plugin found "'.$pluginPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
@@ -156,6 +164,7 @@ class PluginProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/plugin/create processor test.
+     * @return array
      */
     public function providerPluginGet() {
         return array(
@@ -168,6 +177,11 @@ class PluginProcessorsTest extends MODxTestCase {
     /**
      * Attempts to get a list of plugins
      *
+     * @param boolean $shouldPass
+     * @param string $sort
+     * @param string $dir
+     * @param int $limit
+     * @param int $start
      * @dataProvider providerPluginGetList
      */
     public function testPluginGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
@@ -184,6 +198,7 @@ class PluginProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/plugin/getlist processor test.
+     * @return array
      */
     public function providerPluginGetList() {
         return array(
@@ -196,13 +211,16 @@ class PluginProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the element/plugin/remove processor, which removes a Plugin
+     *
+     * @param boolean $shouldPass
+     * @param string $pluginPk
      * @dataProvider providerPluginRemove
      */
     public function testPluginRemove($shouldPass,$pluginPk) {
         $plugin = $this->modx->getObject('modPlugin',array('name' => $pluginPk));
         if (empty($plugin) && $shouldPass) {
             $this->fail('No Plugin found "'.$pluginPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
@@ -216,6 +234,7 @@ class PluginProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not remove Plugin: `'.$pluginPk.'`: '.$result->getMessage());
     }
     /**
+     * @return array
      * Data provider for element/plugin/remove processor test.
      */
     public function providerPluginRemove() {

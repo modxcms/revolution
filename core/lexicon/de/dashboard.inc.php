@@ -1,5 +1,7 @@
 <?php
 /**
+ * Welcome Page German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -9,7 +11,7 @@
  *
  * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
-$_lang['active_users_none'] = 'Momentan keine Benutzer aktiv.';  // Keine momentan aktiven Benutzer.
+$_lang['active_users_none'] = 'Momentan keine Benutzer aktiv.';
 $_lang['add_user'] = 'Benutzer hinzufügen';
 $_lang['create_resource'] = 'Resource erstellen';
 $_lang['dashboard'] = 'Dashboard';

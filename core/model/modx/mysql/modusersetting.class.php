@@ -4,6 +4,10 @@
  * @subpackage mysql
  */
 include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../modusersetting.class.php');
+/**
+ * @package modx
+ * @subpackage mysql
+ */
 class modUserSetting_mysql extends modUserSetting {
     public static function listSettings(xPDO &$xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         $c = $xpdo->newQuery('modUserSetting');

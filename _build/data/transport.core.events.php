@@ -432,6 +432,18 @@ $events['OnResourceToolbarLoad']->fromArray(array (
   'service' => 1,
   'groupname' => 'Resources',
 ), '', true, true);
+$events['OnResourceRemoveFromResourceGroup']= $xpdo->newObject('modEvent');
+$events['OnResourceRemoveFromResourceGroup']->fromArray(array (
+  'name' => 'OnResourceRemoveFromResourceGroup',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnResourceAddToResourceGroup']= $xpdo->newObject('modEvent');
+$events['OnResourceAddToResourceGroup']->fromArray(array (
+  'name' => 'OnResourceAddToResourceGroup',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
 
 
 /* Richtext Editor */
@@ -688,9 +700,9 @@ $events['OnFileManagerUpload']->fromArray(array (
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
-$events['OnFileEditFormPrerender']= $xpdo->newObject('modEvent');
-$events['OnFileEditFormPrerender']->fromArray(array (
-  'name' => 'OnFileEditFormPrerender',
+$events['OnFileCreateFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnFileCreateFormPrerender']->fromArray(array (
+  'name' => 'OnFileCreateFormPrerender',
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);

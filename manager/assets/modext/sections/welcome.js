@@ -12,10 +12,7 @@ MODx.page.Welcome = function(config) {
         components: [{
             xtype: 'modx-panel-welcome'
             ,renderTo: 'modx-panel-welcome-div'
-            ,displayConfigCheck: config.displayConfigCheck
-            ,user: MODx.user.id
-            ,newsEnabled: config.newsEnabled
-            ,securityEnabled: config.securityEnabled
+            ,dashboard: config.dashboard || {}
         }]
     });
     MODx.page.Welcome.superclass.constructor.call(this,config);

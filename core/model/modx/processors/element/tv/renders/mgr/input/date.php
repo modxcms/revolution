@@ -13,19 +13,19 @@ $this->set('value',$v);
 
 if (!empty($params['disabledDates'])) {
     $params['disabledDates'] = $modx->toJSON(explode(',',$params['disabledDates']));
-    $this->xpdo->smarty->assign('params',$params);
+    $this->xpdo->controller->setPlaceholder('params',$params);
 }
 if (!empty($params['disabledDays'])) {
     $params['disabledDays'] = $modx->toJSON(explode(',',$params['disabledDays']));
-    $this->xpdo->smarty->assign('params',$params);
+    $this->xpdo->controller->setPlaceholder('params',$params);
 }
 if (!empty($params['maxTimeValue'])) {
     $params['maxTimeValue'] = date('g:i A',strtotime($params['maxTimeValue']));
-    $this->xpdo->smarty->assign('params',$params);
+    $this->xpdo->controller->setPlaceholder('params',$params);
 }
 if (!empty($params['minTimeValue'])) {
     $params['minTimeValue'] = date('g:i A',strtotime($params['minTimeValue']));
-    $this->xpdo->smarty->assign('params',$params);
+    $this->xpdo->controller->setPlaceholder('params',$params);
 }
 
-return $this->xpdo->smarty->fetch('element/tv/renders/input/date.tpl');
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/date.tpl');

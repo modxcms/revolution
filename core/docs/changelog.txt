@@ -2,6 +2,163 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.0-rc-1 (November 17, 2011)
+====================================
+- [#6019] Configure log_level, log_target, and debug via Settings
+- [#4798] Resource create/edit: Template can be switched without saving
+- Update to xPDO 2.2.0-pl
+- [#6039] Fix issue where Resources could be improperly dropped into the right tree in the Resource Groups screen
+- [#5715] Fix issue with resetting of header in Element panels
+- [#6025] Fix issue with renaming checkbox fields via Form Customization
+- [#5697] Fix issue with allow_multiple_emails in user creation
+- [#121] Add option for Elements to pre-process default property/property set values
+- [#6017],[#2774] Add more Permissions to Administrator policy for managing security functions
+- [#5064] Fix issue where access_permissions Permission was required for creating new users
+- Improve Package Management UI
+- Add modManagerController::addLexiconTopic for easier adding of lexicon topics dynamically within mgr controllers and dashboard widgets
+- [#6009] Add ability to hide left-hand trees when rendering a Dashboard
+- [#6007] Stop upgrade from overwriting session_cookie_path system setting
+- [#5998] Add "Create File" option for stream-based media sources
+- [#4794] Add custom Permissions for restricting creation of core derivative Resource Types
+- [#4958] Add Resource ID to node of Resource in Resource Groups tree
+- [#5434] Change manager page title to use site_name as prefix instead of MODX
+- [#4875] Add ability to download file from Files tree
+- [#5997] Fix issue where in advanced installs with moved web path, assets directory is improperly created
+- [#5990] Fix issue where content types were not listable in Resource dropdowns
+- [#232] Enable option to render target URL for WebLinks
+- [#5963] Fix issue with Static Elements and their Source being None
+- [#5936] Fix issue where Quick Update Resource was too high on smaller screens
+- Fix issue with phpThumb and zoom crop
+- [#5983] Fix adding/updating a provider window duplicating "username" field.[#5948] Ensure that menu item for Change Profile is added on build
+- [#5985] Fix updating a provider not showing username
+- [#5978] [ReUp] [#5978] Fix missing fields/tabs in actions XML causing issues with form customization on resource/create
+- [#5938] Optimize modResource->getTVValue() using parser source cache when available
+- [#5973] Prevent empty user groups being loaded for anonymous users
+- [#5962] Fix phptype in modContextResource.resource field definition
+- [#5050], [#5366], [#5781] Various xPDO Database Caching Fixes (xPDO 2.2.0-rc2)
+- [#4830] Prevent removal of Content Types that are in use
+- [#5293] Prevent drag/drop from Resource Group tree to Resource tree in Resource Group page
+- [#4433] Validate paths in setup for trailing slash
+- [#564], [#4506] Make Workspace path portable by allowing path setting replacements
+- [#5086] Fix issues with Package Management when open_basedir is in effect
+- [#4947] Adjust ensuring of admin access to context to only needed policies
+- [#5078] Have default resource field context settings, such as default_template, respected in Quick create
+- [#5909] Allow blank extensions in Add Content Type window
+- [#5931] Fix code that prevents easy renaming of assets directory with package management
+- [#5841] Properly color active state for tabs in mgr ui
+- [#3287] Fix issue with dob User field in editing panel in mgr
+- [#5060], [#5043] Fix issue with openTo and TVs for MODx.Browser
+- [#3396] Allow MODX_API_MODE in mgr context
+- [#4230] Add ODF and OOXML to default uploadable file types setting
+- [#5315] Use automatic_alias behavior when updating site_start regardless of setting
+- [#3535] Fix issue with tree_default_sort not being respected on the resource tree
+- [#5892] Add for default_media_source setting for specifying the default media source for a site
+- [#5896] Make console window always closable
+- [#5757] Allow text in grids to be selectable
+- [#5471] Add publishing options to Duplicate Resource window
+- [#5879] Ensure html tags are stripped on titles in the Resource edit view
+- [#5855] Ensure if no parents are specified, resourcelist input option works as expected
+- [#5852] Fix issue where input options are wiped on quick update TV
+- Add showNone option to source/getlist processor
+- [#5619] Enable modElements to store content in external files
+- [#5856] Implement ability for derivative Resource types to have their own translatable name
+- [#4726] Implement server-side state provider for modExt to fix size problems with cookies
+- [#5860] Fix FC SQL error when user is in no groups
+- [#5843] Add required asterisk to required Element fields
+- [#5723] Add Media Source tab to User Group Access screen
+- Change "Cancel" references to "Close" for clarity
+- [#4566] Fix online users manager dashboard widget grid
+- [#5809] Change "Remove" to "Delete" where appropriate to clarify language
+- Refactor processors to be class-based
+- [#90] 301 Redirect id method requests when request_method_strict is not enabled
+- [#90], [#5676] Improvements to strict routing with friendly_urls
+- [#5323] Add system events for moving Resources in and out of Resource Groups
+- [#4610] Add locale system setting for setting locale in MODX
+- Add HTML5 local caching as a toggleable option for manager ui
+- [#5788] Fix content not output to browser until after shutdown function
+- [#5777] Fix validation of TV names against Resource field names
+- Add ability to install and upgrade MODX from command line
+- [#5745] Ensure all core passwords are not transmitted through MODx.config JS array
+- [#4304] Add default_content_type Setting for setting the default Content Type for Resources
+- [#2735] Ensure menu permissions are checked for mgr action if action has menu associated
+- [#4606] Clarify connectors language in setup
+- [#5561] Add search toolbar to packages grid
+- [#5587] Fix issue with dashboard widgets and caching
+- [#5453] Add ability to disable forgot password on manager login screen
+- Add batch remove to Namespaces grid
+- [#5671] Add :toPlaceholder, :cssToHead, :htmlToHead, :htmlToBottom, :jsToHead, :jsToBottom output filters
+- Add delete user button to user editing page toolbar
+- [#5542] Add ability to drag/drop files and folders in the Files tab
+- [#5665] Remove console.log debug references in JS
+- Add Media Sources, which allow abstraction of file management in MODX
+- [#2737] Centralize logic for changing Context of modResource Children
+- [#5068] Move token check for new resources below error validation in processor to prevent bogus duplicate resource issue
+- [#4945] Remove weblink content maxlength restriction
+- [#5270] Enable container drag 'n drop in Extended Fields tree
+- [#4790] Add support for comment tag token, e.g. [[- comments here]]
+- [#5539] Add back in compress_css/js for allowing toggling of js/css compression in manager
+- [#5556] Enable connection pooling with master/slave support
+- [#5499] Ensure modFile create returns boolean
+- [#5501] Add sanity checks on FC rules renameTab and hideField
+- [#5505] Fix issue with dropdowns in Fx5
+- Enable modTag elements to accept property sets
+- Enable modElement->getPropertySet() to merge @propertyset in name with property set specified in setName parameter
+- Allow modParser->getElement() method to accept @propertySet in name parameter
+- Prevent modParser->parsePropertyString() from trimming all backticks at beginning and end of string
+- Improve parser efficiency by returning results of nested tags if elementOutput is null|false
+- [#5392] Fix bug where policy template descriptions were not translated
+- [#5377] Fix modParser->isProcessingTag() bug preventing filtering on placeholder tags
+- Pass content by reference to OnParseDocument event
+- Add message_key and json message_format option to system/registry/register/send processor
+- Allow raw messages to be returned from system/registry/register/read processor
+- Add include_keys option to modRegister implementations
+- [#5336] Prefix non-core actions in the MODx.action JS object with their namespace
+- Avoid setting description to null in element/propertyset/create processor
+- Improve modX->logManagerAction to avoid attempts to insert NULL values
+- Accept null options in modHashing->__construct()
+- [#4607], [#3463] Add rank field for contexts to allow custom sorting in tree, fix issues with context/resource dragging and dropping and ensure context name validation rules are consistent
+- Improve UI of User's groups to allow for assigning ranks to User Groups for a User
+- Add Custom Dashboards and Dashboard Widgets
+- [#4871] Fix Access Permissions not being copied when duplicating a context
+- [#4382] Forgot Manager Password now lookups using username to prevent issues when the 'allow_multiple_emails' system setting is enabled
+- Fix rendering of combo boxes in element properties
+- Add ability to select Primary User Group for User
+- [#4637] Fix RTE checkbox not saving correctly when using Quick Create Resource
+- [#5268] Add search toolbar for Resource tree
+- [#4080] Add Content Type and Content Disposition to Quick Create/Update Resource
+- [#5250] Add check for cURL in Package Management
+- [#5204] Add search by parent to mgr search page
+- Added much better handling for custom resource classes; deprecated custom_resource_classes setting
+- [#4601] Ensure children of protected Resources inherit by default their parent's Resource Groups in create UI
+- [#4016] Update description text in grid when adding/updating element properties without need for page reload
+- [#2860] Fix 'Sent On' date when viewing an expanded message
+- [#4984] Ensure tree highlighting of currently edited resource/element/file works consistently
+- [#2638] When updating an element's category, ensure old treenode is removed
+- [#5139] Fix issues with MODx.Browser and file/image TVs in other contexts
+- [#4958] Add IDs to Resource Groups in RG tree
+- Add ability to rename Resource Groups
+- [#5185] Improve core package already extracted validation for upgrades
+- Update xPDO and regenerate schema to get new maps of derivative classes
+- [#5195] Change TV value fields from TEXT to MEDIUMTEXT (mysql)
+- [#5141] Add ability to override specific controllers/templates in a custom manager theme w/ fallback to default
+- Add modResource::getControllerPath method for better abstraction of derivative resource types
+- Add show_in_tree and hide_children_in_tree fields to modResource for better support with custom Resource types
+- Abstract all manager controllers to classes to improve usability, testing and creation of controllers
+
+MODX Revolution 2.1.3-pl (July 21, 2011)
+====================================
+- [#5295] Fix parents input option for Resource List TV when 0 is specified
+- [#5190] Fix includeParent input option in Resource List TV
+- [#5222] Fix nested cacheable tags being skipped in non-cacheable tags
+- Fix delegateView recursion in Resource controllers on Windows
+- [#3966] Fix double slash issue in file paths when dragging into resource content from the Files tree
+- [#4565] Fix issue with Resource tree sorting
+- [#5026] Make directory tree in MODx.Browser instance launched from Files tab consistent with other instances of MODx.Browser
+- [#4960] Prevent method declaration error for modPHPMailer::reset()
+- [#3716] Ensure consistent handling of combo-boolean property values in the database
+- [#4586] Improve number detection for Radio and Checkbox TV values
+- [#5196] Unset uri_override when duplicating creates a duplicate uri
+
 MODX Revolution 2.1.2-pl (July 6, 2011)
 ====================================
 - Fix issue with modUser::getSettings pulling a deprecated alias
@@ -27,6 +184,7 @@ MODX Revolution 2.1.2-pl (July 6, 2011)
 - [#4953] Improve modx.console.js to avoid message loss
 - [#4836] Make sure modFileRegister sorts messages before reading
 - [#5087] Fix issue where class_key was not respected when using Add Another in UI
+- [#260] Implement on-the-fly compression for css/js in manager
 - [#3464] Set xPDOTransport::ACTION_UPGRADE for already installed packages
 - [#4955] Package management actions refresh packages cache partition
 - [#5071] (SqlSrv) fix/refactor Plugin Events getList processor

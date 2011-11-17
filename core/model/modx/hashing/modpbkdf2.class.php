@@ -9,6 +9,9 @@
  * A PBKDF2 implementation of modHash.
  *
  * {@inheritdoc}
+ *
+ * @package modx
+ * @subpackage hashing
  */
 class modPBKDF2 extends modHash {
     /**
@@ -21,7 +24,9 @@ class modPBKDF2 extends modHash {
      *  - algorithm: the hash algorithm to use, default is sha256
      *  - raw_output: if true, returns binary output, otherwise derived key is base64_encode()'d; default is false
      *
-     * {@inheritdoc}
+     * @param string $string A string to generate a secure hash from.
+     * @param array $options An array of options to be passed to the hash implementation.
+     * @return mixed The hash result or false on failure.
      */
     public function hash($string, array $options = array()) {
         $derivedKey = false;

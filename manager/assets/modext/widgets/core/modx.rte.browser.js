@@ -2,6 +2,7 @@
 
 MODx.browser.RTE = function(config) {
     config = config || {};
+    this.ident = Ext.id();
 
     Ext.Ajax.defaultHeaders = {
         'modAuth': config.auth
@@ -14,21 +15,23 @@ MODx.browser.RTE = function(config) {
     this.view = MODx.load({
         xtype: 'modx-browser-view'
         ,onSelect: {fn: this.onSelect, scope: this}
-        ,prependPath: config.prependPath || null
-        ,prependUrl: config.prependUrl || null
         ,ident: this.ident
+        ,source: config.source || MODx.config.default_media_source
+        ,id: this.ident+'-view'
     });
     MODx.browserOpen = true;
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
         ,onUpload: function() { this.view.run(); }
         ,scope: this
-        ,prependPath: config.prependPath || null
-        ,hideFiles: config.hideFiles || true
+        ,source: config.source || MODx.config.default_media_source
+        ,hideFiles: true
+        ,openTo: config.openTo || ''
         ,ident: this.ident
-        ,rootVisible: true
         ,rootId: '/'
         ,rootName: _('files')
+        ,rootVisible: true
+        ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }
@@ -105,9 +108,14 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     
     ,load: function(dir) {
         dir = dir || '';
+        var t = Ext.getCmp(this.ident+'-tree');
+        if (t) {
+            this.config.source = t.config.baseParams.source;
+        }
         this.view.run({
             dir: dir
             ,wctx: MODx.ctx
+            ,source: this.config.source || MODx.config.default_media_source
         });
     }
     
@@ -177,7 +185,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         var lookup = this.view.lookup;
         var scope = this.config.scope;
         if(selNode && callback) {
-            var data = lookup[selNode.id];
+            data = lookup[selNode.id];
             Ext.callback(callback,scope || this,[data]);
             this.fireEvent('select',data);
             if (window.top.opener) {

@@ -17,5 +17,5 @@ foreach ($options as $option) {
         'selected' => strcmp($opt[1],$value) == 0,
     );
 }
-$this->xpdo->smarty->assign('opts',$items);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/listbox-single.tpl');
+$this->xpdo->controller->setPlaceholder('opts',$items);
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/listbox-single.tpl');

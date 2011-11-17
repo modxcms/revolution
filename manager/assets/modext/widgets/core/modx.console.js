@@ -7,7 +7,7 @@ MODx.Console = function(config) {
         ,shadow: true
         ,resizable: false
         ,collapsible: false
-        ,closable: false
+        ,closable: true
         ,maximizable: true
         ,autoScroll: true
         ,height: 400

@@ -85,12 +85,53 @@ MODx.grid.AccessPolicy = function(config) {
                 ,handler: this.removeSelected
                 ,scope: this
             }]
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-policy-search'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{		
-    editPolicy: function(itm,e) {
+Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
+    search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-policy-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+
+    ,editPolicy: function(itm,e) {
         location.href = '?a='+MODx.action['security/access/policy/update']+'&id='+this.menu.record.id;
     }
     
@@ -182,37 +223,55 @@ MODx.window.CreateAccessPolicy = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacp'+Ext.id();
     Ext.applyIf(config,{
-        width: 400
+        width: 500
         ,title: _('policy_create')
         ,url: MODx.config.connectors_url+'security/access/policy.php'
         ,action: 'create'
         ,fields: [{
             fieldLabel: _('name')
+            ,description: MODx.expandHelp ? '' : _('policy_desc_name')
             ,name: 'name'
-            ,id: this.ident+'-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-name'
+            ,html: _('policy_desc_name')
+            ,cls: 'desc-under'
+        },{
             fieldLabel: _('policy_template')
+            ,description: MODx.expandHelp ? '' : _('policy_desc_template')
             ,name: 'template'
             ,hiddenName: 'template'
-            ,id: this.ident+'-template'
+            ,id: 'modx-'+this.ident+'-template'
             ,xtype: 'modx-combo-access-policy-template'
             ,anchor: '90%'
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-template'
+            ,html: _('policy_desc_template')
+            ,cls: 'desc-under'
+        },{
             fieldLabel: _('description')
+            ,description: MODx.expandHelp ? '' : _('policy_desc_description')
             ,name: 'description'
-            ,id: this.ident+'-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
             ,anchor: '90%'
             ,height: 50
         },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-description'
+            ,html: _('policy_desc_description')
+            ,cls: 'desc-under'
+        },{
             name: 'class'
-            ,id: this.ident+'-class'
+            ,id: 'modx-'+this.ident+'-class'
             ,xtype: 'hidden'
         },{
             name: 'id'
-            ,id: this.ident+'-id'
+            ,id: 'modx-'+this.ident+'-id'
             ,xtype: 'hidden'
         }]
     });

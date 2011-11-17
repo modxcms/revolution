@@ -8,24 +8,47 @@
          verbose="true"
          bootstrap="MODxTestHarness.php"
          strict="true">
-  <!-- ... -->
     <testsuites>
-      <testsuite name="Core">
-          <file>Tests/Core/SystemRequirementsTest.php</file>
-      </testsuite>
-      <testsuite name="Processors">
-        <file>Tests/Processors/Browser/DirectoryTest.php</file>
-        <file>Tests/Processors/Browser/FileTest.php</file>
-        <file>Tests/Processors/Context/ContextTest.php</file>
-        <file>Tests/Processors/Context/ContextSettingTest.php</file>
-        <file>Tests/Processors/Element/CategoryTest.php</file>
-        <file>Tests/Processors/Element/ChunkTest.php</file>
-        <file>Tests/Processors/Element/PluginTest.php</file>
-        <file>Tests/Processors/Element/SnippetTest.php</file>
-        <file>Tests/Processors/Element/TemplateTest.php</file>
-        <file>Tests/Processors/Element/TemplateVarTest.php</file>
-        <file>Tests/Processors/Element/PropertySetTest.php</file>
-        <file>Tests/Processors/System/ActionTest.php</file>
-      </testsuite>
+        <testsuite name="Setup">
+            <file>Tests/modXSetupTest.php</file>
+        </testsuite>
+        <testsuite name="Model">
+            <file>Tests/Model/modXTest.php</file>
+            <file>Tests/Model/modParserTest.php</file>
+            <directory>Tests/Model/Dashboard</directory>
+            <directory>Tests/Model/Element</directory>
+            <directory>Tests/Model/Error</directory>
+            <directory>Tests/Model/FormCustomization</directory>
+            <directory>Tests/Model/Filters</directory>
+            <directory>Tests/Model/Lexicon</directory>
+            <directory>Tests/Model/Hashing</directory>
+            <directory>Tests/Model/Mail</directory>
+            <directory>Tests/Model/Registry</directory>
+            <directory>Tests/Model/Request</directory>
+            <directory>Tests/Model/Resource</directory>
+            <directory>Tests/Model/REST</directory>
+            <directory>Tests/Model/Security</directory>
+            <directory>Tests/Model/Sources</directory>
+            <directory>Tests/Model/Transport</directory>
+            <directory>Tests/Model/Validation</directory>
+        </testsuite>
+        <testsuite name="Controllers">
+            <directory>Tests/Controllers/</directory>
+            <directory>Tests/Controllers/Context/</directory>
+        </testsuite>
+        <testsuite name="Processors">
+            <directory>Tests/Processors/</directory>
+            <!--<directory>Tests/Processors/Browser</directory>-->
+            <directory>Tests/Processors/Context</directory>
+            <directory>Tests/Processors/Element</directory>
+            <directory>Tests/Processors/System</directory>
+            <directory>Tests/Processors/Resource</directory>
+        </testsuite>
+        <testsuite name="Cases">
+            <directory>Tests/Cases/Request/</directory>
+        </testsuite>
+        <testsuite name="Teardown">
+            <file>Tests/modXTeardownTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>

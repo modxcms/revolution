@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * MODX Revolution
  * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
@@ -17,6 +17,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package modx
  */
 /**
  * Default database session handler class for MODX.
@@ -30,10 +32,17 @@ class modSessionHandler {
      * @access public
      */
     public $modx= null;
-
+    /**
+     * @var int The maximum lifetime of the session
+     */
     public $gcMaxLifetime= 0;
+    /**
+     * @var int The maximum lifetime of the cache of the session
+     */
     public $cacheLifetime= false;
-
+    /**
+     * @var modSession The Session object
+     */
     private $session = null;
 
     /**

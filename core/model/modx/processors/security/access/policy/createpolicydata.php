@@ -8,7 +8,7 @@
  * @package modx
  * @subpackage processors.security.access.policy
  */
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('policy_save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('policy');
 
 if (!isset($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));

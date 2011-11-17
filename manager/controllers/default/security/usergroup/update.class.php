@@ -1,0 +1,81 @@
+<?php
+/**
+ * Loads the usergroup update page
+ *
+ * @package modx
+ * @subpackage manager.controllers
+ */
+class SecurityUserGroupUpdateManagerController extends modManagerController {
+    /** @var modUserGroup $userGroup */
+    public $userGroup;
+    /**
+     * Check for any permissions or requirements to load page
+     * @return bool
+     */
+    public function checkPermissions() {
+        return $this->modx->hasPermission('usergroup_view');
+    }
+
+    /**
+     * Register custom CSS/JS for the page
+     * @return void
+     */
+    public function loadCustomCssJs() {
+        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.context.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.resource.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.source.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
+        $canEditUsers = $this->modx->hasPermission('usergroup_user_edit') ? 1 : 0;
+        $canListUsers = $this->modx->hasPermission('usergroup_user_list') ? 1 : 0;
+        $this->addHtml('<script type="text/javascript">MODx.perm.usergroup_user_edit = '.$canEditUsers.';MODx.perm.usergroup_user_list = '.$canListUsers.';</script>');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
+    }
+
+    /**
+     * Custom logic code here for setting placeholders, etc
+     * @param array $scriptProperties
+     * @return mixed
+     */
+    public function process(array $scriptProperties = array()) {
+        $placeholders = array();
+        if (empty($scriptProperties['id'])) {
+            $this->userGroup = $this->modx->newObject('modUserGroup');
+            $this->userGroup->set('id',0);
+            $this->userGroup->set('name',$this->modx->lexicon('anonymous'));
+        } else {
+            $this->userGroup = $this->modx->getObject('modUserGroup',$scriptProperties['id']);
+            if (empty($this->userGroup)) {
+                $this->failure($this->modx->lexicon('usergroup_err_nf'));
+            }
+        }
+        return $placeholders;
+    }
+
+    /**
+     * Return the pagetitle
+     *
+     * @return string
+     */
+    public function getPageTitle() {
+        $ugName = $this->userGroup ? $this->userGroup->get('name') : $this->modx->lexicon('anonymous');
+        return $this->modx->lexicon('user_group').': '.$ugName;
+    }
+
+    /**
+     * Return the location of the template file
+     * @return string
+     */
+    public function getTemplateFile() {
+        return 'security/usergroup/update.tpl';
+    }
+
+    /**
+     * Specify the language topics to load
+     * @return array
+     */
+    public function getLanguageTopics() {
+        return array('user','access','policy','context');
+    }
+}

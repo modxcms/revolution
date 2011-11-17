@@ -1,5 +1,9 @@
 <?php
 /**
+ * @package modx
+ * @subpackage validation
+ */
+/**
  * Custom validation class for modx
  *
  * @package modx

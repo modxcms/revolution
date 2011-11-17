@@ -17,12 +17,10 @@
     <property name="project.assets.dir" value="${project.root.dir}/assets" />
     <property name="project.connectors.dir" value="${project.root.dir}/connectors" />
     <property name="project.manager.dir" value="${project.root.dir}/manager" />
-    <property name="project.modext.dir" value="${project.manager.dir}/assets/modext" />
-    <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.1.2" />
-    <property name="modx.core.release" value="pl" />
+    <property name="modx.core.version" value="2.2.0" />
+    <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}" />
@@ -30,8 +28,6 @@
     <property name="build.distrib.name" value="${project.name.fs}-${modx.core.version}-${modx.core.release}" />
     <property name="build.image.basedir" value="${build.dir}/image" />
     <property name="build.image.dir" value="${build.image.basedir}/${build.distrib.name}" />
-    <property name="build.image.modext.dir" value="${build.image.basedir}/modext" />
-    <property name="build.image.css.dir" value="${build.image.basedir}/css" />
     <property name="build.distrib.dir" value="${build.dir}/distrib" />
     <property name="build.templates.dir" value="${build.dir}/templates" />
     <property name="build.apidocs.dir" value="${build.image.basedir}/docs" />
@@ -42,10 +38,6 @@
     <property name="image.assets.dir" value="${build.image.dir}/assets" />
     <property name="image.connectors.dir" value="${build.image.dir}/connectors" />
     <property name="image.manager.dir" value="${build.image.dir}/manager" />
-    <property name="image.modext.dir" value="${image.manager.dir}/assets/modext" />
-    <property name="image.css.dir" value="${image.manager.dir}/templates/default/css" />
-
-    <taskdef name="yuicompress" classname="tasks.yuiCompressTask" />
 
     <!-- =================================
           target: complete
@@ -53,13 +45,6 @@
     <target name="complete" description="--> Complete Build">
         <phingcall target="prepare-build-image" />
         <phingcall target="git-export-build-image" />
-        <phingcall target="modext-minify" />
-        <phingcall target="modext-concat-min" />
-        <phingcall target="modext-concat" />
-        <phingcall target="copy-prepared-js" />
-        <phingcall target="css-minify" />
-        <phingcall target="css-concat-min" />
-        <phingcall target="copy-prepared-css" />
         <phingcall target="generate-core-transport" />
         <!--<phingcall target="copy-core-transport" />-->
         <phingcall target="prepare-build-distrib" />
@@ -88,152 +73,6 @@
               command="${git.command} archive -o ${absolute.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}"
               escape="false" />
         <unzip file="${build.image.dir}.zip" todir="${build.image.basedir}" />
-    </target>
-
-    <!-- Minify the MODExt JavaScript libraries (using YUICompressor task) -->
-    <target name="modext-minify" description="Create minified MODExt scripts" unless="build.nominify">
-        <if>
-            <not><isset property="build.distrib" /></not>
-            <then>
-                <echo>Creating minimized js scripts from the working copy</echo>
-                <property name="modext.dir" value="${project.modext.dir}" />
-            </then>
-            <else>
-                <echo>Creating minimized js scripts from the build image</echo>
-                <property name="modext.dir" value="${image.modext.dir}" />
-            </else>
-        </if>
-        <yuicompress nomunge="false"
-                     preservesemicolons="true"
-                     outputsuffix="-min"
-                     dest="${build.image.modext.dir}/build"
-                     lib="${project.basedir}/lib/yuicompressor-2.3.5.jar">
-            <fileset dir="${modext.dir}"
-                includes="**/*.js"
-                excludes="build/**,util/filetree/**,modext-min.js,modext.js"
-            />
-        </yuicompress>
-    </target>
-
-    <target name="css-minify" description="Create minified CSS" unless="build.nominify">
-        <if>
-            <not><isset property="build.distrib" /></not>
-            <then>
-                <echo>Creating minified CSS from the working copy</echo>
-                <property name="css.dir" value="${project.css.dir}" />
-            </then>
-            <else>
-                <echo>Creating minified CSS from the build image</echo>
-                <property name="css.dir" value="${image.css.dir}" />
-            </else>
-        </if>
-        <yuicompress nomunge="true"
-                     preservesemicolons="true"
-                     outputsuffix="-min"
-                     dest="${build.image.css.dir}"
-                     lib="${project.basedir}/lib/yuicompressor-2.3.5.jar">
-            <fileset dir="${css.dir}"
-                includes="ie.css,index.css,login.css,xtheme-modx.css"
-            />
-        </yuicompress>
-    </target>
-
-    <!-- Concat the minified MODExt JavaScript libraries -->
-    <target name="modext-concat-min" description="Create modext-min.js" unless="build.nominify">
-        <echo>Creating modext-min.js in ${build.image.modext.dir}</echo>
-
-        <append destFile="${build.image.modext.dir}/modext-min.js">
-            <filelist dir="${project.basedir}/templates"
-                      files="header.modext.txt" />
-            <filelist dir="${build.image.modext.dir}/build/core"
-                      files="modx.localization-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/util"
-                      files="utilities-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/core"
-                      files="modx.component-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/core"
-                      files="modx.panel-min.js,modx.tabs-min.js,modx.window-min.js,modx.tree-min.js,modx.combo-min.js,modx.grid-min.js,modx.console-min.js,modx.portal-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets"
-                      files="modx.treedrop-min.js,windows-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/resource"
-                      files="modx.tree.resource-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/element"
-                      files="modx.tree.element-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/system"
-                      files="modx.tree.directory-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/core"
-                      files="modx.view-min.js" />
-        </append>
-    </target>
-
-    <!-- Concat the non-minified MODExt JavaScript libraries -->
-    <target name="modext-concat" description="Create modext.js" unless="build.nominify">
-        <echo>Creating modext.js in ${build.image.modext.dir}</echo>
-
-        <append destFile="${build.image.modext.dir}/modext.js">
-            <filelist dir="${project.basedir}/templates"
-                      files="header.modext.txt" />
-            <filelist dir="${project.modext.dir}/core"
-                      files="modx.localization.js" />
-            <filelist dir="${project.modext.dir}/util"
-                      files="utilities.js" />
-            <filelist dir="${project.modext.dir}/core"
-                      files="modx.component.js" />
-            <filelist dir="${project.modext.dir}/widgets/core"
-                      files="modx.panel.js,modx.tabs.js,modx.window.js,modx.tree.js,modx.combo.js,modx.grid.js,modx.console.js,modx.portal.js" />
-            <filelist dir="${project.modext.dir}/widgets"
-                      files="modx.treedrop.js,windows.js" />
-            <filelist dir="${project.modext.dir}/widgets/resource"
-                      files="modx.tree.resource.js" />
-            <filelist dir="${project.modext.dir}/widgets/element"
-                      files="modx.tree.element.js" />
-            <filelist dir="${project.modext.dir}/widgets/system"
-                      files="modx.tree.directory.js" />
-            <filelist dir="${project.modext.dir}/core"
-                      files="modx.view.js" />
-        </append>
-    </target>
-
-    <!-- Concat the minified CSS -->
-    <target name="css-concat-min" description="Create modx-min.css" unless="build.nominify">
-        <echo>Creating modx-min.css in ${build.image.css.dir}</echo>
-
-        <append destFile="${build.image.css.dir}/modx-min.css">
-            <filelist dir="${build.image.css.dir}"
-                      files="xtheme-modx-min.css,index-min.css" />
-        </append>
-    </target>
-
-    <!-- Copy the minified and concatenated MODExt files to the build image, or working copy if wc=true -->
-    <target name="copy-prepared-js" description="copy the minified and concatenated js files to the build image" unless="build.nominify">
-        <if>
-            <not><isset property="build.distrib" /></not>
-            <then>
-                <property name="modext.dir" value="${project.modext.dir}" />
-            </then>
-            <else>
-                <property name="modext.dir" value="${image.modext.dir}" />
-            </else>
-        </if>
-        <copy todir="${modext.dir}" overwrite="true">
-            <fileset dir="${build.image.modext.dir}" />
-        </copy>
-    </target>
-
-    <!-- Copy minified css to the build image or working copy if wc=true -->
-    <target name="copy-prepared-css" description="copy the minified css files to the build image" unless="build.nominify">
-        <if>
-            <not><isset property="build.distrib" /></not>
-            <then>
-                <property name="css.dir" value="${project.css.dir}" />
-            </then>
-            <else>
-                <property name="css.dir" value="${image.css.dir}" />
-            </else>
-        </if>
-        <copy todir="${css.dir}" overwrite="true">
-            <fileset dir="${build.image.css.dir}" />
-        </copy>
     </target>
 
     <!-- Run the core data generation script -->
@@ -308,12 +147,12 @@
 
     <!-- Make sure the distrib directory exists and is clean -->
     <target name="prepare-build-distrib" description="empty the build distrib directory" if="build.distrib">
-        <mkdir dir="${build.distrib.dir}" />
         <delete includeemptydirs="true">
             <fileset dir="${build.distrib.dir}">
                 <include name="**" />
             </fileset>
         </delete>
+        <mkdir dir="${build.distrib.dir}" />
     </target>
 
     <!-- Build a MODX SDK distrib with all files in place and extracted -->

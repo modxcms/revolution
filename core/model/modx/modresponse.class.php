@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * MODX Revolution
  *
  * Copyright 2006-2011 by MODX, LLC.
@@ -18,6 +18,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package modx
  */
 /**
  * Encapsulates a MODX response to a web request.
@@ -28,10 +30,25 @@
  * @package modx
  */
 class modResponse {
+    /**
+     * A reference to the modX instance
+     * @var modX $modx
+     */
     public $modx= null;
+    /**
+     * The HTTP header for this Response
+     * @var string $header
+     */
     public $header= null;
+    /**
+     * The body of this response
+     * @var string $body
+     */
     public $body= null;
 
+    /**
+     * @param modX $modx A reference to the modX instance
+     */
     function __construct(modX &$modx) {
         $this->modx= & $modx;
     }
@@ -164,7 +181,8 @@ class modResponse {
             }
             @session_write_close();
             echo $this->modx->resource->_output;
-            while (@ ob_end_flush()) {}
+            while (@ob_end_flush()) {}
+            flush();
             exit();
         }
     }
@@ -187,6 +205,7 @@ class modResponse {
      * options array).
      * @param string $responseCode The type of HTTP response code HEADER to send for the
      * redirect (deprecated, use responseCode in options array)
+     * @return void|boolean
      */
     public function sendRedirect($url, $options= false, $type= '', $responseCode= '') {
         if (!is_array($options)) {

@@ -2,16 +2,20 @@
 /**
  * Loads the main structure
  *
+ * @var modX $modx
+ * @var modManagerController $this
+ *
  * @package modx
- * @subpackage manager
+ * @subpackage manager.controllers
  */
 /* get top navbar */
 $menus = $modx->cacheManager->get('mgr/menus/'.$modx->getOption('manager_language',null,$modx->getOption('cultureKey',null,'en')), array(
-    xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_menu_key', null, 'menu'),
-    xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_menu_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-    xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_menu_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+    xPDO::OPT_CACHE_KEY => $modx->getOption('cache_menu_key', null, 'menu'),
+    xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_menu_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+    xPDO::OPT_CACHE_FORMAT => (integer) $modx->getOption('cache_menu_format', null, $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
 ));
 if ($menus == null) {
+    /** @var modMenu $menu */
     $menu = $modx->newObject('modMenu');
     $menus = $menu->rebuildCache();
     unset($menu);
@@ -80,18 +84,15 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
         $childrenCt++;
     }
 }
-$modx->smarty->assign('navb',$output);
-
+$this->setPlaceholder('navb',$output);
 
 /* assign logged in text and link */
+/** @var modMenu $profile */
 $profile = $modx->getObject('modMenu','profile');
-$modx->smarty->assign('username',$modx->getLoginUserName());
-$modx->smarty->assign('profileAction',$profile->get('action'));
+$this->setPlaceholder('username',$modx->getLoginUserName());
+$this->setPlaceholder('profileAction',$profile->get('action'));
 
 /* assign welcome back text */
 $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUserName()));
-$modx->smarty->assign('welcome_back',$welcome_back);
+$this->setPlaceholder('welcome_back',$welcome_back);
 unset($welcome_back);
-
-
-return $modx->smarty->fetch('header.tpl');

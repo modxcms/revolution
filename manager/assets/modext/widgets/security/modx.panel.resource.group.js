@@ -8,6 +8,7 @@ MODx.panel.ResourceGroups = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-resource-groups'
+		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{ 
              html: '<h2>'+_('resource_groups')+'</h2>'
@@ -16,16 +17,16 @@ MODx.panel.ResourceGroups = function(config) {
             ,id: 'modx-resource-groups-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,autoHeight: true }
             ,items: [{
                 html: '<p>'+_('rrg_drag')+'</p>'
+				,bodyCssClass: 'panel-desc'
             },{
                 layout: 'column'
+				,cls:'main-wrapper'
                 ,defaults: { border: false }
                 ,items: [{
-                    columnWidth: .4
-                    ,style: 'padding: 4px;'
+                    columnWidth: .5
                     ,items: [{
                         xtype: 'modx-tree-resource-group'
                         ,id: 'modx-gr-tree-resourcegroup'
@@ -33,8 +34,7 @@ MODx.panel.ResourceGroups = function(config) {
                         ,height: 400
                     }]
                 },{
-                    columnWidth: .4
-                    ,style: 'padding: 4px;'
+                    columnWidth: .5					
                     ,defaults: { autoHeight: true }
                     ,items: [{
                         xtype: 'modx-tree-resource-simple'
@@ -47,6 +47,8 @@ MODx.panel.ResourceGroups = function(config) {
                         ,ddGroup: 'rg2resource'
                         ,title: _('resources')
                         ,enableDrop: false
+                        ,allowDrop: false
+                        ,enableDD: false
                         ,rootVisible: false
                     }]
                 }]

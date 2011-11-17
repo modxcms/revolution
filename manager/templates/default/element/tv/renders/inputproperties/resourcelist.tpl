@@ -13,76 +13,112 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,labelWidth: 150
+    ,cls: 'form-with-labels'
+    ,labelAlign: 'top'
     ,border: false
     ,items: [{
         xtype: 'combo-boolean'
         ,fieldLabel: _('required')
-        ,description: _('required_desc')
+        ,description: MODx.expandHelp ? '' : _('required_desc')
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
-        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
-        ,width: 300
+        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? 0 : 1
+        ,width: 200
         ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,html: _('required_desc')
+        ,cls: 'desc-under'
     },{
         xtype: 'combo-boolean'
         ,fieldLabel: _('shownone')
-        ,description: _('shownone_desc')
+        ,description: MODx.expandHelp ? '' : _('shownone_desc')
         ,name: 'inopt_showNone'
         ,hiddenName: 'inopt_showNone'
         ,id: 'inopt_showNone{/literal}{$tv}{literal}'
-        ,value: params['showNone'] == 0 || params['showNone'] == 'false' ? false : true
-        ,width: 300
+        ,value: params['showNone'] == 0 || params['showNone'] == 'false' ? 0 : 1
+        ,width: 200
         ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_showNone{/literal}{$tv}{literal}'
+        ,html: _('shownone_desc')
+        ,cls: 'desc-under'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('resourcelist_parents')
-        ,description: _('resourcelist_parents_desc')
+        ,description: MODx.expandHelp ? '' : _('resourcelist_parents_desc')
         ,name: 'inopt_parents'
         ,id: 'inopt_parents{/literal}{$tv}{literal}'
         ,value: params['parents'] || ''
-        ,width: 300
+        ,anchor: '100%'
         ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_parents{/literal}{$tv}{literal}'
+        ,html: _('resourcelist_parents_desc')
+        ,cls: 'desc-under'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('resourcelist_depth')
-        ,description: _('resourcelist_depth_desc')
+        ,description: MODx.expandHelp ? '' : _('resourcelist_depth_desc')
         ,name: 'inopt_depth'
         ,id: 'inopt_depth{/literal}{$tv}{literal}'
         ,value: params['depth'] || 10
-        ,width: 300
+        ,width: 200
         ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_depth{/literal}{$tv}{literal}'
+        ,html: _('resourcelist_depth_desc')
+        ,cls: 'desc-under'
     },{
         xtype: 'combo-boolean'
         ,fieldLabel: _('resourcelist_includeparent')
-        ,description: _('resourcelist_includeparent_desc')
+        ,description: MODx.expandHelp ? '' : _('resourcelist_includeparent_desc')
         ,name: 'inopt_includeParent'
         ,hiddenName: 'inopt_includeParent'
         ,id: 'inopt_includeParent{/literal}{$tv}{literal}'
-        ,value: params['includeParent'] == 'false' || Ext.isEmpty(params['includeParent']) ? false : true
-        ,width: 300
+        ,value: params['includeParent'] == 0 || params['includeParent'] == 'false' ? 0 : 1
+        ,width: 200
         ,listeners: oc
     },{
-        xtype: 'textfield'
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_includeParent{/literal}{$tv}{literal}'
+        ,html: _('resourcelist_includeparent_desc')
+        ,cls: 'desc-under'
+    },{
+        xtype: 'textarea'
         ,fieldLabel: _('resourcelist_where')
-        ,description: _('resourcelist_where_desc')
+        ,description: MODx.expandHelp ? '' : _('resourcelist_where_desc')
         ,name: 'inopt_where'
         ,id: 'inopt_where{/literal}{$tv}{literal}'
         ,value: params['where'] || ''
-        ,width: 300
+        ,anchor: '100%'
         ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_where{/literal}{$tv}{literal}'
+        ,html: _('resourcelist_where_desc')
+        ,cls: 'desc-under'
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('resourcelist_limit')
-        ,description: _('resourcelist_limit_desc')
+        ,description: MODx.expandHelp ? '' : _('resourcelist_limit_desc')
         ,name: 'inopt_limit'
         ,id: 'inopt_limit{/literal}{$tv}{literal}'
         ,value: params['limit'] || 0
         ,allowNegative: false
         ,allowDecimals: false
-        ,width: 300
+        ,width: 200
         ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_limit{/literal}{$tv}{literal}'
+        ,html: _('resourcelist_limit_desc')
+        ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });

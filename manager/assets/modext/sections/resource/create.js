@@ -22,13 +22,14 @@ MODx.page.CreateResource = function(config) {
     	,buttons: this.getButtons(config)
     	,loadStay: true
         ,components: [{
-            xtype: 'modx-panel-resource'
-            ,renderTo: 'modx-panel-resource-div'
+            xtype: config.panelXType || 'modx-panel-resource'
+            ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
             ,resource: 0
             ,record: config.record
             ,access_permissions: config.access_permissions
             ,publish_document: config.publish_document
             ,show_tvs: config.show_tvs
+            ,mode: config.mode
         }]
     });
     MODx.page.CreateResource.superclass.constructor.call(this,config);

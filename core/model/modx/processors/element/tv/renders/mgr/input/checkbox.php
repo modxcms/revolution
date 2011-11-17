@@ -30,7 +30,7 @@ foreach ($options as $option) {
     /* do escaping of strings, encapsulate in " so extjs/other systems can
      * utilize values correctly in their cast
      */
-    if (intval($opt[1]) === 0 && $opt[1] !== 0 && $opt[1] !== '0') {
+    if (preg_match('/^([-]?(0|0{1}[1-9]+[0-9]*|[1-9]+[0-9]*[\.]?[0-9]*))$/',$opt[1]) == 0) {
         $opt[1] = '"'.str_replace('"','\"',$opt[1]).'"';
     }
 
@@ -41,6 +41,6 @@ foreach ($options as $option) {
     );
     $i++;
 }
-$this->xpdo->smarty->assign('cbdefaults',implode(',',$defaults));
-$this->xpdo->smarty->assign('opts',$items);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/checkbox.tpl');
+$this->xpdo->controller->setPlaceholder('cbdefaults',implode(',',$defaults));
+$this->xpdo->controller->setPlaceholder('opts',$items);
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/checkbox.tpl');

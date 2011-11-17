@@ -37,4 +37,12 @@ $templateGroups['4']->fromArray(array(
     'description' => 'All Element-based policy templates.',
 ));
 
+/* Media Source group templates */
+$templateGroups['5']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['5']->fromArray(array(
+    'id' => 5,
+    'name' => 'MediaSource',
+    'description' => 'All Media Source-based policy templates.',
+));
+
 return $templateGroups;

@@ -1,6 +1,6 @@
 <?php
-/*
- * MODX Revolution  *
+/**
+ * MODX Revolution
  * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
@@ -17,10 +17,15 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
+ * 
+ * @package modx
  */
 /**
  * Represents a client session managed by MODX.
  *
+ * @property string $id The PHP session ID
+ * @property int $access The last time this session was accessed
+ * @property string $data The serialized data of this session
  * @see modSessionHandler
  * @package modx
  * @extends xPDOObject

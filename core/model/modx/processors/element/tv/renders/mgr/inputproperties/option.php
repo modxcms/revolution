@@ -4,4 +4,4 @@
  * @subpackage processors.element.tv.renders.mgr.inputproperties
  */
 
-return $modx->smarty->fetch('element/tv/renders/inputproperties/radio.tpl');
+return $modx->controller->fetchTemplate('element/tv/renders/inputproperties/radio.tpl');

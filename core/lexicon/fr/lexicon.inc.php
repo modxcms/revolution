@@ -30,5 +30,6 @@ $_lang['lexicon_management'] = 'Gestionnaire de lexique';
 $_lang['lexicon_management_desc'] = 'Vous pouvez gérer ici toutes les entrées du lexique à partir des espaces de noms et leurs sujets respectifs. Double-cliquez sur n\'importe quelle valeur d\'entrée pour la changer. Pour ajouter de nouvelles entrées ou sujets dans le lexique, créez simplement leurs fichiers de sujets dans leurs répertoires de noms respectifs.';
 $_lang['lexicon_rlfb_msg'] = 'Chaîne(s) [[+num]] régénérée(s) avec succès.';
 $_lang['reload_from_base'] = 'Inverser toutes les entrées de base';
+$_lang['reload_success'] = '[[+total]] chaines rechargées avec succès.';
 $_lang['search_by_key'] = 'Rechercher par clé:';
 $_lang['topic'] = 'Sujet';

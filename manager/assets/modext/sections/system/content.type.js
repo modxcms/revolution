@@ -30,7 +30,6 @@ MODx.page.ContentType = function(config) {
 		,components: [{
             xtype: 'modx-panel-content-type'
             ,title: ''
-            ,renderTo: 'modx-panel-content-type-div'
         }]
 	});	
 	MODx.page.ContentType.superclass.constructor.call(this,config);

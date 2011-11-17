@@ -11,7 +11,7 @@ Ext.onReady(function() {
         ,vertical: true
         ,columns: {if $params.columns}{$params.columns}{else}1{/if}
         ,renderTo: 'tv{$tv->id}-cb'
-        ,width: 500
+        ,width: '99%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,hideMode: 'offsets'
         ,msgTarget: 'under'

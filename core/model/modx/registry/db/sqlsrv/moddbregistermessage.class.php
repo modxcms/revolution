@@ -4,6 +4,10 @@
  * @subpackage registry.db.sqlsrv
  */
 require_once (dirname(dirname(__FILE__)) . '/moddbregistermessage.class.php');
+/**
+ * @package modx
+ * @subpackage sqlsrv
+ */
 class modDbRegisterMessage_sqlsrv extends modDbRegisterMessage {
     public static function getValidMessages(modDbRegister &$register, $topic, $topicBase, $topicMsg, $limit, array $options = array()) {
         $messages = array();

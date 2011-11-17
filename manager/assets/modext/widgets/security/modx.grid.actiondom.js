@@ -43,7 +43,6 @@ MODx.grid.ActionDom = function(config) {
             ,sortable: true
             ,editor: { xtype: 'modx-combo-rule-type' ,renderer: true }
             ,renderer: function(v,md) {
-                console.log(v);
                 return Ext.util.Format.htmlEncode(v);
             }
         },{

@@ -1,6 +1,7 @@
 <?php
 /**
  * @package modx
+ * @subpackage jsonrpc
  */
 require_once MODX_CORE_PATH . 'model/modx/xmlrpc/modxmlrpcresponse.class.php';
 require_once MODX_CORE_PATH . 'model/modx/jsonrpc/jsonrpc.inc';

@@ -1,10 +1,94 @@
 <?php
 /**
- * Represents a web resource managed by the modX framework.
- *
  * @package modx
  */
-class modResource extends modAccessibleSimpleObject {
+/**
+ * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
+ * class to properly implement a Custom Resource Type in MODX.
+ * 
+ * @see modResource
+ * @interface
+ * @package modx
+ */
+interface modResourceInterface {
+    /**
+     * Determine the controller path for this Resource class. Return an absolute path.
+     * 
+     * @static
+     * @param xPDO $modx A reference to the modX object
+     * @return string The absolute path to the controller for this Resource class
+     */
+    public static function getControllerPath(xPDO &$modx);
+
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true. Return in the following format:
+     *
+     * array(
+     *  'text_create' => 'ResourceTypeName',
+     *  'text_create_here' => 'Create ResourceTypeName Here',
+     * );
+     *
+     * @return array
+     */
+    public function getContextMenuText();
+
+    /**
+     * Use this in your extended Resource class to return a translatable name for the Resource Type.
+     * @return string
+     */
+    public function getResourceTypeName();
+}
+/**
+ * Represents a web resource managed by the MODX framework.
+ *
+ * @property int $id The ID of the Resource
+ * @property string $type The type of the resource; document/reference
+ * @property string $contentType The content type string of the Resource, such as text/html
+ * @property string $pagetitle The page title of the Resource
+ * @property string $longtitle The long title of the Resource
+ * @property string $description The description of the Resource
+ * @property string $alias The FURL alias of the resource
+ * @property string $link_attributes Any link attributes for the URL generated for the Resource
+ * @property boolean $published Whether or not this Resource is published, or viewable by users without the 'view_unpublished' permission
+ * @property int $pub_date The UNIX time that this Resource will be automatically marked as published
+ * @property int $unpub_date The UNIX time that this Resource will be automatically marked as unpublished
+ * @property int $parent The parent ID of the Resource
+ * @property boolean $isfolder Whether or not this Resource is a container
+ * @property string $introtext The intro text of this Resource, often used as an excerpt
+ * @property string $content The actual content of this Resource
+ * @property boolean $richtext Whether or not this Resource is edited with a Rich Text Editor, if installed
+ * @property int $template The Template this Resource is tied to, or 0 to use an empty Template
+ * @property int $menuindex The menuindex, or rank, that this Resource shows in.
+ * @property boolean $searchable Whether or not this Resource should be searchable
+ * @property boolean $cacheable Whether or not this Resource should be cacheable
+ * @property int $createdby The ID of the User that created this Resource
+ * @property int $createdon The UNIX time of when this Resource was created
+ * @property int $editedby The ID of the User, if any, that last edited this Resource
+ * @property int $editedon The UNIX time, if set, of when this Resource was last edited
+ * @property boolean $deleted Whether or not this Resource is marked as deleted
+ * @property int $deletedon The UNIX time of when this Resource was deleted
+ * @property int $deletedby The User that deleted this Resource
+ * @property int $publishedon The UNIX time that this Resource was marked as published
+ * @property int $publishedby The User that published this Resource
+ * @property string $menutitle The title to show when this Resource is displayed in a menu
+ * @property boolean $donthit Deprecated.
+ * @property boolean $privateweb Deprecated.
+ * @property boolean $privatemgr Deprecated.
+ * @property int $content_dispo The type of Content Disposition that is used when displaying this Resource
+ * @property boolean $hidemenu Whether or not this Resource should show in menus
+ * @property string $class_key The Class Key of this Resource. Useful for derivative Resource types
+ * @property string $context_key The Context that this Resource resides in
+ * @property int $content_type The Content Type ID of this Resource
+ * @property string $uri The generated URI of this Resource
+ * @property boolean $uri_override Whether or not this URI is "frozen": where the URI will stay as specified and will not be regenerated
+ * @property boolean $hide_children_in_tree Whether or not this Resource should show in the mgr tree any of its children
+ * @property boolean $show_in_tree Whether or not this Resource should show in the mgr tree
+ * @see modTemplate
+ * @see modContentType
+ * @package modx
+ */
+class modResource extends modAccessibleSimpleObject implements modResourceInterface {
     /**
      * Represents the cacheable content for a resource.
      *
@@ -46,9 +130,29 @@ class modResource extends modAccessibleSimpleObject {
      * @var boolean
      */
     public $_isForward= false;
+    /**
+     * An array of Javascript/CSS to be appended to the footer of this Resource
+     * @var array $_jscripts
+     */
     public $_jscripts = array();
+    /**
+     * An array of Javascript/CSS to be appended to the HEAD of this Resource
+     * @var array $_sjscripts
+     */
     public $_sjscripts = array();
+    /**
+     * All loaded Javascript/CSS that has been calculated to be loaded
+     * @var array
+     */
     public $_loadedjscripts = array();
+    /**
+     * Use if extending modResource to state whether or not to show the extended class in the tree context menu
+     * @var boolean
+     */
+    public $showInContextMenu = false;
+    
+    /** @var modX $xpdo */
+    public $xpdo;
 
     /**
      * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
@@ -136,6 +240,7 @@ class modResource extends modAccessibleSimpleObject {
             $criteria->where(array('context_key:IN' => $contexts));
         }
         $criteria->sortby('menuindex', 'ASC');
+        /** @var modResource $resource */
         foreach ($modx->getIterator('modResource', $criteria) as $resource) {
             $resource->set('refreshURIs', true);
             if ($resetOverrides) {
@@ -148,7 +253,33 @@ class modResource extends modAccessibleSimpleObject {
         }
     }
 
-    function __construct(& $xpdo) {
+    /**
+     * Updates the Context of all Children recursively to that of the parent.
+     *
+     * @static
+     * @param modX &$modx A reference to an initialized modX instance.
+     * @param modResource $parent The parent modResource instance.
+     * @param array $options An array of options.
+     * @return int The number of children updated.
+     */
+    public static function updateContextOfChildren(modX &$modx, $parent, array $options = array()) {
+        $count = 0;
+        /** @var modResource $child */
+        foreach ($parent->getIterator('Children') as $child) {
+            $child->set('context_key', $parent->get('context_key'));
+            if ($child->save()) {
+                $count++;
+            } else {
+                $modx->log(modX::LOG_LEVEL_ERROR, "Could not change Context of child resource {$child->get('id')}", '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
+        return $count;
+    }
+
+    /**
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
+    function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
         $this->_contextKey= isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
         $this->_cacheKey= "[contextKey]/resources/[id]";
@@ -164,6 +295,7 @@ class modResource extends modAccessibleSimpleObject {
             $this->_content= '';
             $this->_output= '';
             $this->xpdo->getParser();
+            /** @var modTemplate $baseElement */
             if ($baseElement= $this->getOne('Template')) {
                 if ($baseElement->process()) {
                     $this->_content= $baseElement->_output;
@@ -283,6 +415,7 @@ class modResource extends modAccessibleSimpleObject {
                 break;
             case 'content_type' :
                 if ($v !== $this->get('content_type')) {
+                    /** @var modContentType $contentType */
                     if ($contentType= $this->xpdo->getObject('modContentType', $v)) {
                         if ($contentType->get('mime_type') != $this->get('contentType')) {
                             $this->_fields['contentType']= $contentType->get('mime_type');
@@ -302,6 +435,10 @@ class modResource extends modAccessibleSimpleObject {
      *
      * Adds legacy support for keeping the existing contentType field in sync
      * when a modContentType is set using this function.
+     *
+     * @param xPDOObject $obj
+     * @param string $alias
+     * @return boolean
      */
     public function addOne(& $obj, $alias= '') {
         $added= parent :: addOne($obj, $alias);
@@ -434,14 +571,15 @@ class modResource extends modAccessibleSimpleObject {
     /**
      * Persist new or changed modResource instances to the database container.
      *
-     * {@inheritdoc}
-     *
      * If the modResource is new, the createdon and createdby fields will be set
      * using the current time and user authenticated in the context.
      *
      * If uri is empty or uri_overridden is not set and something has been changed which
      * might affect the Resource's uri, it is (re-)calculated using getAliasPath(). This
      * can be forced recursively by setting refreshURIs to true before calling save().
+     *
+     * @param boolean $cacheFlag
+     * @return boolean
      */
     public function save($cacheFlag= null) {
         if ($this->isNew()) {
@@ -455,12 +593,19 @@ class modResource extends modAccessibleSimpleObject {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
             }
         }
+        $changeContext = false;
+        if ($this->xpdo instanceof modX) {
+            $changeContext = $this->isDirty('context_key');
+        }
         $rt= parent :: save($cacheFlag);
         if ($rt && $refreshChildURIs) {
             $this->xpdo->call('modResource', 'refreshURIs', array(
                 &$this->xpdo,
                 $this->get('id'),
             ));
+        }
+        if ($rt && $changeContext) {
+            $this->xpdo->call($this->_class, 'updateContextOfChildren', array(&$this->xpdo, $this));
         }
         return $rt;
     }
@@ -469,6 +614,7 @@ class modResource extends modAccessibleSimpleObject {
      * Return whether or not the resource has been processed.
      *
      * @access public
+     * @return boolean
      */
     public function getProcessed() {
         return $this->_processed;
@@ -535,6 +681,7 @@ class modResource extends modAccessibleSimpleObject {
      * Removes all locks on a Resource.
      *
      * @access public
+     * @param int $user
      * @return boolean True if locks were removed.
      */
     public function removeLock($user = 0) {
@@ -626,10 +773,16 @@ class modResource extends modAccessibleSimpleObject {
      * TV is not found.
      */
     public function getTVValue($pk) {
+        $byName = false;
         if (is_string($pk)) {
-            $pk = array('name' => $pk);
+            $byName = true;
         }
-        $tv = $this->xpdo->getObject('modTemplateVar',$pk);
+        /** @var modTemplateVar $tv */
+        if ($byName && $this->xpdo instanceof modX) {
+            $tv = $this->xpdo->getParser()->getElement('modTemplateVar', $pk);
+        } else {
+            $tv = $this->xpdo->getObject('modTemplateVar', $byName ? array('name' => $pk) : $pk);
+        }
         return $tv == null ? null : $tv->renderOutput($this->get('id'));
     }
 
@@ -645,6 +798,7 @@ class modResource extends modAccessibleSimpleObject {
         if (is_string($pk)) {
             $pk = array('name' => $pk);
         }
+        /** @var modTemplateVar $tv */
         $tv = $this->xpdo->getObject('modTemplateVar',$pk);
         if ($tv) {
             $tv->setValue($this->get('id'),$value);
@@ -679,7 +833,7 @@ class modResource extends modAccessibleSimpleObject {
             $isHtml= true;
             $extension= '';
             $containerSuffix= $workingContext->getOption('container_suffix', '');
-            /* process content type */
+            /* @var modContentType $contentType process content type */
             if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
                 $extension= $contentType->getExtension();
                 $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -760,17 +914,31 @@ class modResource extends modAccessibleSimpleObject {
         $newName = !empty($options['newName']) ? $options['newName'] : ($prefixDuplicate ? $this->xpdo->lexicon('duplicate_of', array(
             'name' => $this->get('pagetitle'),
         )) : $this->get('pagetitle'));
+        /** @var modResource $newResource */
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
         $newResource->set('pagetitle', $newName);
 
-        /* make sure duplicate is not published or deleted */
-        $newResource->set('published',false);
-        $newResource->set('publishedon',0);
-        $newResource->set('publishedby',0);
-        $newResource->set('deleted',false);
-        $newResource->set('deletedon',0);
-        $newResource->set('deletedby',0);
+        /* do published status preserving */
+        $publishedMode = $this->getOption('publishedMode',$options,'preserve');
+        switch ($publishedMode) {
+            case 'unpublish':
+                $newResource->set('published',false);
+                $newResource->set('publishedon',0);
+                $newResource->set('publishedby',0);
+                break;
+            case 'publish':
+                $newResource->set('published',true);
+                $newResource->set('publishedon',time());
+                $newResource->set('publishedby',$this->xpdo->user->get('id'));
+                break;
+            case 'preserve':
+            default:
+                $newResource->set('published',$this->get('published'));
+                $newResource->set('publishedon',$this->get('publishedon'));
+                $newResource->set('publishedby',$this->get('publishedby'));
+                break;
+        }
 
         /* allow overrides for every item */
         if (!empty($options['overrides']) && is_array($options['overrides'])) {
@@ -793,6 +961,9 @@ class modResource extends modAccessibleSimpleObject {
             $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
             if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
                 $alias = '';
+                if ($newResource->get('uri_override')) {
+                    $newResource->set('uri_override', false);
+                }
             }
         }
         $newResource->set('alias',$alias);
@@ -807,7 +978,9 @@ class modResource extends modAccessibleSimpleObject {
         }
 
         $tvds = $this->getMany('TemplateVarResources');
+        /** @var modTemplateVarResource $oldTemplateVarResource */
         foreach ($tvds as $oldTemplateVarResource) {
+            /** @var modTemplateVarResource $newTemplateVarResource */
             $newTemplateVarResource = $this->xpdo->newObject('modTemplateVarResource');
             $newTemplateVarResource->set('contentid',$newResource->get('id'));
             $newTemplateVarResource->set('tmplvarid',$oldTemplateVarResource->get('tmplvarid'));
@@ -816,7 +989,9 @@ class modResource extends modAccessibleSimpleObject {
         }
 
         $groups = $this->getMany('ResourceGroupResources');
+        /** @var modResourceGroupResource $oldResourceGroupResource */
         foreach ($groups as $oldResourceGroupResource) {
+            /** @var modResourceGroupResource $newResourceGroupResource */
             $newResourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
             $newResourceGroupResource->set('document_group',$oldResourceGroupResource->get('document_group'));
             $newResourceGroupResource->set('document',$newResource->get('id'));
@@ -830,12 +1005,14 @@ class modResource extends modAccessibleSimpleObject {
             
             $children = $this->getMany('Children');
             if (is_array($children) && count($children) > 0) {
+                /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
                         'duplicateChildren' => true,
                         'parent' => $newResource->get('id'),
                         'prefixDuplicate' => $prefixDuplicate,
                         'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
+                        'publishedMode' => $publishedMode,
                     ));
                 }
             }
@@ -855,6 +1032,7 @@ class modResource extends modAccessibleSimpleObject {
             $c = array(
                 is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
             );
+            /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - No resource group: '.$resourceGroupPk);
@@ -871,6 +1049,7 @@ class modResource extends modAccessibleSimpleObject {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - Resource '.$this->get('id').' already in resource group: '.$resourceGroupPk);
             return false;
         }
+        /** @var modResourceGroupResource $resourceGroupResource */
         $resourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
         $resourceGroupResource->set('document',$this->get('id'));
         $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
@@ -881,7 +1060,7 @@ class modResource extends modAccessibleSimpleObject {
      * Removes a Resource from a Resource Group
      *
      * @access public
-     * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @param int|string|modResourceGroup $resourceGroupPk Either the ID, name or object of the Resource Group
      * @return boolean True if successful.
      */
     public function leaveGroup($resourceGroupPk) {
@@ -889,6 +1068,7 @@ class modResource extends modAccessibleSimpleObject {
             $c = array(
                 is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
             );
+            /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - No resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
@@ -897,6 +1077,7 @@ class modResource extends modAccessibleSimpleObject {
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
+        /** @var modResourceGroupResource $resourceGroupResource */
         $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
             'document' => $this->get('id'),
             'document_group' => $resourceGroup->get('id'),
@@ -918,5 +1099,39 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function getGroupsList(array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         return $this->xpdo->call('modResource', 'listGroups', array(&$this, $sort, $limit, $offset));
+    }
+
+    /**
+     * Determine the controller path for this Resource class
+     * @static
+     * @param xPDO $modx A reference to the modX object
+     * @return string The absolute path to the controller for this Resource class
+     */
+    public static function getControllerPath(xPDO &$modx) {
+        $theme = $modx->getOption('manager_theme',null,'default');
+        $controllersPath = $modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$theme.'/';
+        return $controllersPath.'resource/';
+    }
+
+    /**
+     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+     * set to true.
+     * @return array
+     */
+    public function getContextMenuText() {
+        return array(
+            'text_create' => $this->xpdo->lexicon('resource'),
+            'text_create_here' => $this->xpdo->lexicon('resource_create_here'),
+        );
+    }
+
+    /**
+     * Use this in your extended Resource class to return a translatable name for the Resource Type.
+     * @return string
+     */
+    public function getResourceTypeName() {
+        $className = $this->_class;
+        if ($className == 'modDocument') $className = 'document';
+        return $this->xpdo->lexicon($className);
     }
 }

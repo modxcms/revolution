@@ -347,71 +347,102 @@ MODx.window.CreateFCSet = function(config) {
         ,url: MODx.config.connectors_url+'security/forms/set.php'
         ,action: 'create'
         ,height: 150
-        ,width: 375
+        ,width: 650
         ,fields: [{
             xtype: 'hidden'
             ,name: 'profile'
             ,value: MODx.request.id
         },{
-            fieldLabel: _('action')
-            ,name: 'action_id'
-            ,hiddenName: 'action_id'
-            ,id: 'modx-fcsc-action'
-            ,xtype: 'modx-combo-fc-action'
-            ,editable: false
-            ,allowBlank: false
-            ,anchor: '90%'
-
-        },{
-            xtype: 'textarea'
-            ,name: 'description'
-            ,fieldLabel: _('description')
-            ,id: 'modx-fcsc-description'
-            ,anchor: '90%'
-
-        },{
-            xtype: 'modx-combo-template'
-            ,name: 'template'
-            ,hiddenName: 'template'
-            ,fieldLabel: _('template')
-            ,description: _('set_template_desc')
-            ,id: 'modx-fcsc-template'
-            ,anchor: '90%'
-            ,baseParams: { action: 'getList', combo: true }
-            
-        },{ html: '<hr />' },{
             xtype: 'hidden'
             ,fieldLabel: _('constraint_class')
             ,name: 'constraint_class'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,allowBlank: true
             ,value: 'modResource'
+        },{
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: [{
+                    fieldLabel: _('action')
+                    ,name: 'action_id'
+                    ,hiddenName: 'action_id'
+                    ,id: 'modx-fcsc-action'
+                    ,xtype: 'modx-combo-fc-action'
+                    ,editable: false
+                    ,allowBlank: false
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textarea'
+                    ,name: 'description'
+                    ,fieldLabel: _('description')
+                    ,id: 'modx-fcsc-description'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'xcheckbox'
+                    ,boxLabel: _('active')
+                    ,hideLabel: true
+                    ,name: 'active'
+                    ,inputValue: 1
+                    ,value: 1
+                    ,checked: true
+                    ,anchor: '100%'
+                    ,allowBlank: true
+                }]
+            },{
+                columnWidth: .5
+                ,items: [{
+                    xtype: 'modx-combo-template'
+                    ,name: 'template'
+                    ,hiddenName: 'template'
+                    ,fieldLabel: _('template')
+                    ,description: MODx.expandHelp ? '' : _('set_template_desc')
+                    ,id: 'modx-fcsc-template'
+                    ,anchor: '100%'
+                    ,baseParams: { action: 'getList', combo: true }
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-fcsc-template'
+                    ,html: _('set_template_desc')
+                    ,cls: 'desc-under'
 
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('constraint_field')
-            ,description: _('set_constraint_field_desc')
-            ,name: 'constraint_field'
-            ,anchor: '90%'
-            ,allowBlank: true
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('constraint_field')
+                    ,description: MODx.expandHelp ? '' : _('set_constraint_field_desc')
+                    ,name: 'constraint_field'
+                    ,id: 'modx-fcsc-constraint-field'
+                    ,anchor: '100%'
+                    ,allowBlank: true
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-fcsc-constraint-field'
+                    ,html: _('set_constraint_field_desc')
+                    ,cls: 'desc-under'
 
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('constraint')
-            ,description: _('set_constraint_desc')
-            ,name: 'constraint'
-            ,anchor: '90%'
-            ,allowBlank: true
-            
-        },{
-            xtype: 'xcheckbox'
-            ,fieldLabel: _('active')
-            ,name: 'active'
-            ,inputValue: 1
-            ,value: 1
-            ,checked: true
-            ,anchor: '90%'
-            ,allowBlank: true
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('constraint')
+                    ,description: MODx.expandHelp ? '' : _('set_constraint_desc')
+                    ,name: 'constraint'
+                    ,id: 'modx-fcsc-constraint'
+                    ,anchor: '100%'
+                    ,allowBlank: true
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-fcsc-constraint'
+                    ,html: _('set_constraint_desc')
+                    ,cls: 'desc-under'
+
+                }]
+            }]
         }]
     });
     MODx.window.CreateFCSet.superclass.constructor.call(this,config);
@@ -437,13 +468,14 @@ MODx.window.ImportFCSet = function(config) {
             html: _('set_import_msg')
             ,id: 'modx-impset-desc'
             ,border: false
-            ,bodyStyle: 'margin: 10px;'
+            ,cls: 'panel-desc'
+            ,style: 'margin-bottom: 10px;'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('file')
             ,name: 'file'
             ,id: 'modx-impset-file'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,inputType: 'file'
         }]
     });

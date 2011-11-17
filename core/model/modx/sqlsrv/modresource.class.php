@@ -4,6 +4,10 @@
  * @subpackage sqlsrv
  */
 require_once (dirname(dirname(__FILE__)) . '/modresource.class.php');
+/**
+ * @package modx
+ * @subpackage sqlsrv
+ */
 class modResource_sqlsrv extends modResource {
     public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         $result = array('collection' => array(), 'total' => 0);

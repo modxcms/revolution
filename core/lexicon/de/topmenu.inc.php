@@ -1,5 +1,7 @@
 <?php
 /**
+ * Top Menu German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -14,12 +16,15 @@ $_lang['about_desc'] = 'Mehr Informationen über MODX Revolution.';
 $_lang['access_permissions'] = 'Zugriffsrechte';
 $_lang['access_permissions_desc'] = 'Verwalten Sie die Benutzergruppen-Zugriffsmöglichkeiten auf Ressourcen und Kontexte.';
 $_lang['api_docs'] = 'API-Dokumentation';
-$_lang['api_docs_desc'] = 'phpDocumentor-basierte Dokumentation der Revolution-API.';
+$_lang['api_docs_desc'] = 'Komplette API-Dokumentation für MODX Revolution.';
 $_lang['components'] = 'Komponenten';
 $_lang['content_types'] = 'Inhaltstypen';
 $_lang['content_types_desc'] = 'Fügen Sie Inhaltstypen für Ressourcen hinzu, wie z.B. .html, .js etc.';
 $_lang['contexts'] = 'Kontexte';
 $_lang['contexts_desc'] = 'Verwalten Sie Site-Kontexte und ihre Einstellungen.';
+$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboards'] = 'Dashboards';
+$_lang['dashboards_desc'] = 'Verwalten Sie alle Dashboard-Konfigurationen.';
 $_lang['edit_menu'] = 'Aktionen';
 $_lang['edit_menu_desc'] = 'Aktionen und die Struktur des Hauptmenüs verwalten.';
 $_lang['eventlog_viewer'] = 'Fehlerprotokoll';
@@ -83,6 +88,8 @@ $_lang['search'] = 'Suchen';
 $_lang['search_desc'] = 'Suchen Sie nach Ressourcen.';
 $_lang['security'] = 'Sicherheit';
 $_lang['site'] = 'Site';
+$_lang['sources'] = 'Medienquellen';
+$_lang['sources_desc'] = 'Verwalten Sie hier Ihre Medienquellen.';
 $_lang['support'] = 'Support';
 $_lang['support_desc'] = '';
 $_lang['site_schedule'] = 'Site-Terminplan';
@@ -101,4 +108,4 @@ $_lang['view_logging_desc'] = 'Die letzten Manager-Aktivitäten anzeigen.';
 $_lang['view_sysinfo'] = 'Systeminformationen';
 $_lang['view_sysinfo_desc'] = 'Server-Informationen wie phpinfo, Datenbank-Informationen etc. anzeigen.';
 $_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'Starten Sie das MODX-Confluence-Wiki, in dem die Dokumentation zu MODX Revolution gespeichert ist.';
+$_lang['wiki_desc'] = 'Starten Sie die offizielle MODX-Dokumentation.';

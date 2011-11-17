@@ -65,7 +65,7 @@ class modRestCurlClient extends modRestClient {
         $q = http_build_query($params);
         switch ($method) {
             case 'GET':
-                $path .= '?'.$q;
+                $path .= (strpos($host,'?') === false ? '?' : '&').$q;
                 break;
             case 'POST':
                 curl_setopt($ch,CURLOPT_POST,1);

@@ -1,7 +1,20 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a content element that serves as a resource template.
  *
+ * @property int $id The ID of the Template
+ * @property string $templatename The name of the Template
+ * @property string $description A user-provided description of the Template
+ * @property int $editor_type Deprecated
+ * @property int $category The Category this Template resides in
+ * @property string $icon Deprecated
+ * @property int $template_type Deprecated
+ * @property string $content The content of the Template
+ * @property boolean $locked Whether or not this Template can only be edited by Administrators
+ * @property array $properties An array of default properties for the Template
  * @package modx
  */
 class modTemplate extends modElement {
@@ -14,6 +27,7 @@ class modTemplate extends modElement {
      * @param modTemplate &$template A modTemplate instance.
      * @param array $sort An array of criteria for sorting the list.
      * @param int $limit An optional limit to apply to the list.
+     * @param array $conditions
      * @param int $offset An optional offset to apply to the list.
      * @return array An array with the list collection and total records in the collection.
      */
@@ -21,7 +35,10 @@ class modTemplate extends modElement {
         return array('collection' => array(), 'total' => 0);
     }
 
-    function __construct(& $xpdo) {
+    /**
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     */
+    function __construct(xPDO & $xpdo) {
         parent :: __construct($xpdo);
         $this->setCacheable(false);
     }
@@ -41,7 +58,8 @@ class modTemplate extends modElement {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        $saved = parent :: save($cacheFlag);
+
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateSave',array(
@@ -161,6 +179,7 @@ class modTemplate extends modElement {
      * @param array $sort An array of criteria for sorting the list.
      * @param integer $limit An optional limit to apply to the list.
      * @param integer $offset An optional offset to apply to the list.
+     * @param array $conditions
      * @return array An array containing the collection and total.
      */
     public function getTemplateVarList(array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0,array $conditions = array()) {

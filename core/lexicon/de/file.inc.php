@@ -1,5 +1,7 @@
 <?php
 /**
+ * File German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -9,10 +11,13 @@
  *
  * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
+$_lang['directory'] = 'Verzeichnis';
 $_lang['file_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Datei löschen möchten? Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
+$_lang['file_create'] = 'Datei erstellen';
 $_lang['file_deleted'] = 'Erfolgreich!';
 $_lang['file_delete_file'] = 'Datei löschen';
 $_lang['file_delete_folder'] = 'Ordner löschen';
+$_lang['file_download'] = 'Datei herunterladen';
 $_lang['file_download_file'] = 'Datei herunterladen';
 $_lang['file_download_unzip'] = 'Datei entpacken';
 $_lang['file_edit'] = 'Datei bearbeiten';
@@ -36,7 +41,7 @@ $_lang['file_err_unzip_missing_lib'] = 'ZIP-Bibliothek fehlt (php_zip.dll / zip.
 $_lang['file_err_upload'] = 'Ein Fehler trat auf bei dem Versuch, die Dateien hochzuladen.';
 $_lang['file_exists_hk'] = 'Datei <b>{0}</b> existiert bereits';
 $_lang['file_extensions'] = 'Dateiendungen';
-$_lang['file_extensions_desc'] = 'Dies sind die erlaubten Dateiendungen für den Inhaltstyp.';
+// $_lang['file_extensions_desc'] = 'Dies sind die erlaubten Dateiendungen für den Inhaltstyp.';
 $_lang['file_folder_enter_new'] = 'Geben Sie einen neuen Verzeichnisnamen ein';
 $_lang['file_folder_chmod'] = 'Verzeichnisrechte bearbeiten (CHMOD)';
 $_lang['file_folder_create'] = 'Verzeichnis anlegen';
@@ -99,8 +104,8 @@ $_lang['upf_filename'] = 'Dateiname';
 $_lang['upf_note'] = 'Hinweis';
 $_lang['upf_progress_wait'] = 'Warte auf Eingaben...';
 $_lang['upf_queued'] = 'Für den Upload vorgemerkt.';
-$_lang['upf_remove'] = 'Entfernen';
-$_lang['upf_remove_desc'] = 'Datei aus der Upload-Liste entfernen.';
+$_lang['upf_remove'] = 'Löschen';
+$_lang['upf_remove_desc'] = 'Datei aus der Upload-Liste löschen.';
 $_lang['upf_reset'] = 'Zurücksetzen';
 $_lang['upf_reset_desc'] = 'Upload-Liste zurücksetzen.';
 $_lang['upf_state'] = 'Status';

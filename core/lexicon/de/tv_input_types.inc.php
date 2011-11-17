@@ -1,5 +1,7 @@
 <?php
 /**
+ * TV Input Types German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *

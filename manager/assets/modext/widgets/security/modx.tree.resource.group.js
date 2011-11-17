@@ -40,6 +40,11 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             });
             m.push('-');
             m.push({
+                text: _('resource_group_update')
+                ,handler: this.updateResourceGroup
+            });
+            m.push('-');
+            m.push({
                 text: _('resource_group_remove')
                 ,handler: this.removeResourceGroup
             });
@@ -50,6 +55,24 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             });
         }
         return m;
+    }
+
+    ,updateResourceGroup: function(itm,e) {
+        var r = this.cm.activeNode.attributes.data;
+
+        if (!this.windows.updateResourceGroup) {
+            this.windows.updateResourceGroup = MODx.load({
+                xtype: 'modx-window-resourcegroup-update'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:this.refresh,scope:this}
+                }
+            });
+        }
+        this.windows.updateResourceGroup.reset();
+        this.windows.updateResourceGroup.setValues(r);
+        this.windows.updateResourceGroup.show(e.target);
+
     }
 
     ,removeResource: function(item,e) {
@@ -208,3 +231,30 @@ MODx.window.CreateResourceGroup = function(config) {
 };
 Ext.extend(MODx.window.CreateResourceGroup,MODx.Window);
 Ext.reg('modx-window-resourcegroup-create',MODx.window.CreateResourceGroup);
+
+MODx.window.UpdateResourceGroup = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'urgrp'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('resource_group_update')
+        ,id: this.ident
+        ,height: 150
+        ,width: 350
+        ,url: MODx.config.connectors_url+'security/resourcegroup.php'
+        ,action: 'update'
+        ,fields: [{
+            name: 'id'
+            ,xtype: 'hidden'
+            ,id: 'modx-'+this.ident+'-id'
+        },{
+            fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-'+this.ident+'-name'
+            ,xtype: 'textfield'
+            ,anchor: '90%'
+        }]
+    });
+    MODx.window.UpdateResourceGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.UpdateResourceGroup,MODx.Window);
+Ext.reg('modx-window-resourcegroup-update',MODx.window.UpdateResourceGroup);

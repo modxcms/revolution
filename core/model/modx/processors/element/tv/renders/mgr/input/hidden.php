@@ -5,4 +5,4 @@
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-return $this->xpdo->smarty->fetch('element/tv/renders/input/hidden.tpl');
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/hidden.tpl');

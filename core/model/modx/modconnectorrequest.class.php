@@ -4,10 +4,7 @@
  *
  * @package modx
  */
-
-/** Make sure the parent class is included. */
 require_once MODX_CORE_PATH . 'model/modx/modmanagerrequest.class.php';
-
 /**
  * This is the Connector Request handler for MODX.
  *
@@ -24,6 +21,10 @@ class modConnectorRequest extends modManagerRequest {
      */
     public $location;
 
+    /**
+     * Initializes the connector request, loading the proper context, culture and lexicon; also loads the action map
+     * @return bool
+     */
     public function initialize() {
         if ($this->modx && is_object($this->modx->context) && $this->modx->context instanceof modContext) {
             $ctx = $this->modx->context->get('key');
@@ -49,8 +50,8 @@ class modConnectorRequest extends modManagerRequest {
      * Handles all requests specified by the action param and prepares for loading.
      *
      * @access public
-     * @param string $location The base subdirectory in which to look for the processor.
-     * @param string $action The requested processor to load.
+     * @param array $options An array of request options
+     * @return boolean
      */
     public function handleRequest(array $options = array()) {
         if (isset($options['action']) && !is_string($options['action'])) return false;
@@ -63,6 +64,8 @@ class modConnectorRequest extends modManagerRequest {
 
         /* Cleanup action and store. */
         $this->prepareResponse($options);
+
+        return true;
     }
 
     /**

@@ -9,6 +9,9 @@ require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
 
 /**
  * PHPMailer implementation of the modMail service.
+ *
+ * @package modx
+ * @subpackage mail
  */
 class modPHPMailer extends modMail {
     /**
@@ -183,7 +186,7 @@ class modPHPMailer extends modMail {
      *
      * @param array $attributes An array of attributes to pass when resetting
      */
-    public function reset($attributes= array()) {
+    public function reset(array $attributes= array()) {
         parent :: reset($attributes);
         $this->mailer->ClearAllRecipients();
         $this->mailer->ClearReplyTos();

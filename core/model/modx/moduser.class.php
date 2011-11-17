@@ -1,7 +1,35 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * The core MODX user class.
  *
+ * @property string $username The username for this User
+ * @property string $password The encrypted password for this User
+ * @property string $cachepwd A cached, encrypted password used when resetting the User's password or for confirmation
+ * @property string $class_key The class key of the user. Used for extending the modUser class.
+ * @property boolean $active Whether or not this user is active, and thereby able to log in
+ * @property string $remote_key Used for storing a remote reference key for authentication for a User
+ * @property json $remote_data Used for storing remote data for authentication for a User
+ * @property string $hash_class The hashing class used to create this User's password
+ * @property string $salt A salt that might have been used to create this User's password
+ *
+ * @property modUserProfile $Profile
+ * @property modUserGroup $PrimaryGroup
+ * @property array $CreatedResources
+ * @property array $EditedResources
+ * @property array $DeletedResources
+ * @property array $PublishedResources
+ * @property array $SentMessages
+ * @property array $ReceivedMessages
+ * @property array $UserSettings
+ * @property array $UserGroupMembers
+ *
+ * @see modUserGroupMember
+ * @see modUserGroupRole
+ * @see modUserMessage
+ * @see modUserProfile
  * @package modx
  */
 class modUser extends modPrincipal {
@@ -303,6 +331,11 @@ class modUser extends modPrincipal {
         }
     }
 
+    /**
+     * Generate a specific authentication token for this user for accessing the MODX manager
+     * @param string $salt Ignored
+     * @return string
+     */
     public function generateToken($salt) {
         return uniqid($this->xpdo->site_id . '_' . $this->get('id'), true);
     }
@@ -408,6 +441,7 @@ class modUser extends modPrincipal {
     public function getSettings() {
         $settings = array();
         $uss = $this->getMany('UserSettings');
+        /** @var modUserSetting $us */
         foreach ($uss as $us) {
             $settings[$us->get('key')] = $us->get('value');
         }
@@ -422,6 +456,7 @@ class modUser extends modPrincipal {
      * @deprecated
      * @todo refactor this to actually work.
      * @access public
+     * @param string $ctx The context in which to peruse for Resource Groups
      * @return array An array of Resource Group names.
      */
     public function getResourceGroups($ctx = '') {
@@ -486,7 +521,7 @@ class modUser extends modPrincipal {
      * either a string name of the group, or an array of names.
      *
      * @access public
-     * @param string/array $groups Either a string of a group name or an array
+     * @param string|array $groups Either a string of a group name or an array
      * of names.
      * @param boolean $matchAll If true, requires the user to be a member of all
      * the groups specified. If false, the user can be a member of only one to
@@ -526,29 +561,32 @@ class modUser extends modPrincipal {
         $joined = false;
 
         $groupPk = is_string($groupId) ? array('name' => $groupId) : $groupId;
-        $usergroup = $this->xpdo->getObject('modUserGroup',$groupPk);
-        if ($usergroup == null) {
+        /** @var modUserGroup $userGroup */
+        $userGroup = $this->xpdo->getObject('modUserGroup',$groupPk);
+        if (empty($userGroup)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User Group not found with key: '.$groupId);
             return $joined;
         }
 
+        /** @var modUserGroupRole $role */
         if (!empty($roleId)) {
             $rolePk = is_string($roleId) ? array('name' => $roleId) : $roleId;
             $role = $this->xpdo->getObject('modUserGroupRole',$rolePk);
-            if ($role == null) {
+            if (empty($role)) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Role not found with key: '.$role);
                 return $joined;
             }
         }
 
+        /** @var modUserGroupMember $member */
         $member = $this->xpdo->getObject('modUserGroupMember',array(
             'member' => $this->get('id'),
-            'user_group' => $usergroup->get('id'),
+            'user_group' => $userGroup->get('id'),
         ));
         if (empty($member)) {
             $member = $this->xpdo->newObject('modUserGroupMember');
             $member->set('member',$this->get('id'));
-            $member->set('user_group',$usergroup->get('id'));
+            $member->set('user_group',$userGroup->get('id'));
             if (!empty($role)) {
                 $member->set('role',$role->get('id'));
             }
@@ -582,13 +620,13 @@ class modUser extends modPrincipal {
             'UserGroup.'.$fk => $groupId,
         ));
 
+        /** @var modUserGroupMember $member */
         $member = $this->xpdo->getObject('modUserGroupMember',$c);
-        if ($member == false) {
+        if (empty($member)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User could not leave group with key "'.$groupId.'" because the User was not a part of that group.');
-            return $left;
+        } else {
+            $left = $member->remove();
         }
-
-        $left = $member->remove();
         return $left;
     }
 
@@ -625,15 +663,20 @@ class modUser extends modPrincipal {
      * Returns a randomly generated password
      *
      * @param integer $length The length of the password
+     * @param array $options
      * @return string The newly generated password
      */
-    public function generatePassword($length = 10) {
-        $allowable_characters = 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        $ps_len = strlen($allowable_characters);
-        srand((double) microtime() * 1000000);
+    public function generatePassword($length = 10,array $options = array()) {
+        $options = array_merge(array(
+            'allowable_characters' => 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',
+            'srand_seed_multiplier' => 1000000,
+        ),$options);
+
+        $ps_len = strlen($options['allowable_characters']);
+        srand((double) microtime() * $options['srand_seed_multiplier']);
         $pass = '';
         for ($i = 0; $i < $length; $i++) {
-            $pass .= $allowable_characters[mt_rand(0, $ps_len -1)];
+            $pass .= $options['allowable_characters'][mt_rand(0, $ps_len -1)];
         }
         return $pass;
     }

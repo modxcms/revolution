@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * MODX Revolution
  *
  * Copyright 2006-2011 by MODX, LLC.
@@ -18,6 +18,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package modx
  */
 /**
  * Represents the MODX parser responsible for processing MODX tags.
@@ -28,27 +30,58 @@
  * @package modx
  */
 class modParser {
+    /**
+     * A reference to the modX instance
+     * @var modX $modx
+     */
     public $modx= null;
+    /**
+     * If the parser is currently processing a tag
+     * @var bool $_processingTag
+     */
     protected $_processingTag = false;
+    /**
+     * If the parser is currently processing an uncacheable tag
+     * @var bool $_processingUncacheable
+     */
     protected $_processingUncacheable = false;
+    /**
+     * If the parser is currently removing all unprocessed tags
+     * @var bool $_removingUnprocessed
+     */
     protected $_removingUnprocessed = false;
 
+    /**
+     * @param xPDO $modx A reference to the modX|xPDO instance
+     */
     function __construct(xPDO &$modx) {
         $this->modx =& $modx;
     }
 
+    /**
+     * Returns true if the parser is currently processing an uncacheable tag
+     * @return bool
+     */
     public function isProcessingUncacheable() {
         $result = false;
         if ($this->isProcessingTag()) $result = (boolean) $this->_processingUncacheable;
         return $result;
     }
 
+    /**
+     * Returns true if the parser is currently removing any unprocessed tags
+     * @return bool
+     */
     public function isRemovingUnprocessed() {
         $result = false;
         if ($this->isProcessingTag()) $result = (boolean) $this->_removingUnprocessed;
         return $result;
     }
 
+    /**
+     * Returns true if the parser is currently processing a tag
+     * @return bool
+     */
     public function isProcessingTag() {
         return (boolean) $this->_processingTag;
     }
@@ -140,7 +173,7 @@ class modParser {
      *
      * @param string $parentTag The tag representing the element processing this
      * tag.  Pass an empty string to allow parsing without this recursion check.
-     * @param string &$content The content to process and act on (by reference).
+     * @param string $content The content to process and act on (by reference).
      * @param boolean $processUncacheable Determines if noncacheable tags are to
      * be processed (default= false).
      * @param boolean $removeUnprocessed Determines if unprocessed tags should
@@ -153,21 +186,23 @@ class modParser {
      * with the tokens included in this array.
      * @param integer $depth The maximum iterations to recursively process tags
      * returned by prior passes, 0 by default.
+     * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        $this->_processingTag = true;
         $this->_processingUncacheable = (boolean) $processUncacheable;
         $this->_removingUnprocessed = (boolean) $removeUnprocessed;
         $depth = $depth > 0 ? $depth - 1 : 0;
         $processed= 0;
         $tags= array ();
         /* invoke OnParseDocument event */
-        $this->modx->documentOutput = $content;      /* store source code so plugins can */
-        $this->modx->invokeEvent('OnParseDocument');    /* work on it via $modx->documentOutput */
+        $this->modx->documentOutput = $content;
+        $this->modx->invokeEvent('OnParseDocument', array('content' => &$content));
         $content = $this->modx->documentOutput;
+        unset($this->modx->documentOutput);
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
             $tagMap= array ();
             foreach ($tags as $tag) {
-                $this->_processingTag = true;
                 $token= substr($tag[1], 0, 1);
                 if (!$processUncacheable && $token === '!') {
                     if ($removeUnprocessed) {
@@ -190,15 +225,15 @@ class modParser {
                 }
                 elseif ($tagOutput !== null && $tagOutput !== false) {
                     $tagMap[$tag[0]]= $tagOutput;
-                    $processed++;
+                    if ($tag[0] !== $tagOutput) $processed++;
                 }
             }
-            $this->_processingTag = false;
             $this->mergeTagOutput($tagMap, $content);
             if ($depth > 0) {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
         }
+        $this->_processingTag = false;
         return $processed;
     }
 
@@ -248,6 +283,7 @@ class modParser {
      * @param string $string The property string to parse.
      * @param boolean $valuesOnly Indicates only the property value should be
      * returned.
+     * @return array The processed properties in array format
      */
     public function parsePropertyString($string, $valuesOnly = false) {
         $properties = array();
@@ -285,7 +321,9 @@ class modParser {
                         $propValue = $pvTmp[0];
                     }
                 }
-                $propValue= trim($propValue, "`");
+                if ($propValue[0] == '`' && $propValue[strlen($propValue) - 1] == '`') {
+                    $propValue= substr($propValue, 1, strlen($propValue) - 2);
+                }
                 $propValue= str_replace("``", "`", $propValue);
                 if ($valuesOnly) {
                     $properties[$propName]= $propValue;
@@ -340,25 +378,26 @@ class modParser {
      * Processes a modElement tag and returns the result.
      *
      * @param string $tag A full tag string parsed from content.
+     * @param boolean $processUncacheable
      * @return mixed The output of the processed element represented by the
      * specified tag.
      */
     public function processTag($tag, $processUncacheable = true) {
+        $this->_processingTag = true;
         $element= null;
         $elementOutput= null;
 
         $outerTag= $tag[0];
         $innerTag= $tag[1];
 
-        $token= substr($innerTag, 0, 1);
-        if ($token === '!') {
-            if (!$processUncacheable) {
-                return $outerTag;
-            }
+        /* Avoid all processing for comment tags, e.g. [[- comments here]] */
+        if (substr($innerTag, 0, 1) === '-') {
+            return "";
         }
 
         /* collect any nested element tags in the innerTag and process them */
-        $this->processElementTags($outerTag, $innerTag, true);
+        $this->processElementTags($outerTag, $innerTag, $processUncacheable);
+        $this->_processingTag = true;
         $outerTag= '[[' . $innerTag . ']]';
 
         $tagParts= xPDO :: escSplit('?', $innerTag, '`', 2);
@@ -372,6 +411,7 @@ class modParser {
         $cacheable= true;
         if ($token === '!') {
             if (!$processUncacheable) {
+                $this->_processingTag = false;
                 return $outerTag;
             }
             $cacheable= false;
@@ -445,10 +485,14 @@ class modParser {
                     }
             }
         }
+        if (($elementOutput === null || $elementOutput === false) && $outerTag !== $tag[0]) {
+            $elementOutput = $outerTag;
+        }
         if ($this->modx->getDebug() === true) {
             $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "Processing {$outerTag} as {$innerTag} using tagname {$tagName}:\n" . print_r($elementOutput, 1) . "\n\n");
             /* $this->modx->cacheManager->writeFile(MODX_BASE_PATH . 'parser.log', "Processing {$outerTag} as {$innerTag}:\n" . print_r($elementOutput, 1) . "\n\n", 'a'); */
         }
+        $this->_processingTag = false;
         return $elementOutput;
     }
 
@@ -462,17 +506,32 @@ class modParser {
     public function getElement($class, $name) {
         $realname = $this->realname($name);
         if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
+            /* @var modMediaSource $source */
+            $source = $this->modx->newObject('sources.modMediaSource');
+            if (!empty($this->modx->sourceCache[$class][$realname]['source'])) {
+                $source->fromArray($this->modx->sourceCache[$class][$realname]['source'],'',true,true);
+            } else {
+                $source->set('id',0);
+            }
+            /** @var modElement $element */
             $element = $this->modx->newObject($class);
+            $element->set('source',0);
+            $element->addOne($source,'Source');
             $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
             $element->setPolicies($this->modx->sourceCache[$class][$realname]['policies']);
         } else {
-            $element = $this->modx->getObject($class, array('name' => $realname), true);
+            /** @var modElement $element */
+            $element = $this->modx->getObjectGraph($class,array('Source' => array()),array('name' => $realname), true);
             if ($element && array_key_exists($class, $this->modx->sourceCache)) {
                 $this->modx->sourceCache[$class][$realname] = array(
                     'fields' => $element->toArray(),
-                    'policies' => $element->getPolicies()
+                    'policies' => $element->getPolicies(),
+                    'source' => $element->Source ? $element->Source->toArray() : array(),
                 );
             }
+        }
+        if ($element instanceof modElement) {
+            $element->set('name', $name);
         }
         return $element;
     }
@@ -501,7 +560,7 @@ class modParser {
      *
      * @uses modX::$_elementCache Stores all cacheable content from processed
      * elements.
-     * @param string tag The tag signature representing the element instance.
+     * @param string $tag The tag signature representing the element instance.
      * @return string The cached output from the element instance.
      */
     public function loadFromCache($tag) {
@@ -522,24 +581,84 @@ class modParser {
  * @package modx
  */
 abstract class modTag {
+    /**
+     * A reference to the modX instance
+     * @var modX $modx
+     */
     public $modx= null;
+    /**
+     * The name of the tag
+     * @var string $name
+     */
     public $name;
+    /**
+     * The properties on the tag
+     * @var array $properties
+     */
     public $properties;
+    /**
+     * The content of the tag
+     * @var string $_content
+     */
     public $_content= null;
+    /**
+     * The processed output of the tag
+     * @var string $_output
+     */
     public $_output= '';
+    /**
+     * The result of processing the tag
+     * @var bool $_result
+     */
     public $_result= true;
+    /**
+     * Just the isolated properties part of the tag string
+     * @var string $_propertyString
+     */
     public $_propertyString= '';
+    /**
+     * The arranged properties array for this tag
+     * @var array $_properties
+     */
     public $_properties= array();
+    /**
+     * Whether or not the tag has been processed
+     * @var boolean $_processed
+     */
     public $_processed= false;
+    /**
+     * The tag string
+     * @var string $_tag
+     */
     public $_tag= '';
+    /**
+     * The tag initial token ($,%,*,etc)
+     * @var string $_token
+     */
     public $_token= '';
+    /**
+     * Fields on the tag
+     * @var array $_fields
+     */
     public $_fields= array(
         'name' => '',
         'properties' => ''
     );
+    /**
+     * Whether or not this tag is marked as cacheable
+     * @var boolean $_cacheable
+     */
     public $_cacheable= true;
+    /**
+     * Any output/input filters on this tag
+     * @var array $_filters
+     */
     public $_filters= array('input' => null, 'output' => null);
 
+    /**
+     * Set a reference to the modX object, load the name and properties, and instantiate the tag class instance.
+     * @param modX $modx A reference to the modX object
+     */
     function __construct(modX &$modx) {
         $this->modx =& $modx;
         $this->name =& $this->_fields['name'];
@@ -618,6 +737,8 @@ abstract class modTag {
 
     /**
      * Gets a tag representation of the modTag instance.
+     *
+     * @return string
      */
     public function getTag() {
         if (empty($this->_tag) && ($name = $this->get('name'))) {
@@ -640,7 +761,7 @@ abstract class modTag {
             $this->_tag = $tag;
         }
         if (empty($this->_tag)) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Instance of ' . get_class($this) . ' produced an empty tag!');
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Instance of ' . get_class($this) . ' produced an empty tag!');
         }
         return $this->_tag;
     }
@@ -729,7 +850,7 @@ abstract class modTag {
      * Call this method in your {modTag::process()} implementation when it is
      * appropriate, typically once all processing has been completed, but before
      * any caching takes place.
-     * 
+     *
      * @see modElement::filterOutput()
      */
     public function filterOutput() {
@@ -760,6 +881,10 @@ abstract class modTag {
 
     /**
      * Set the raw source content for the tag element.
+     *
+     * @param string $content The content to set
+     * @param array $options Ignored.
+     * @return boolean
      */
     public function setContent($content, array $options = array()) {
         return $this->set('name', $content);
@@ -768,13 +893,16 @@ abstract class modTag {
     /**
      * Get the properties for this element instance for processing.
      *
-     * @param array|string $properties An array or string of properties to
-     * apply.
+     * @param array|string $properties An array or string of properties to apply.
      * @return array A simple array of properties ready to use for processing.
      */
     public function getProperties($properties = null) {
         $this->_properties= $this->modx->parser->parseProperties($this->get('properties'));
-        if ($properties !== null && !empty($properties)) {
+        $set= $this->getPropertySet();
+        if (!empty($set)) {
+            $this->_properties= array_merge($this->_properties, $set);
+        }
+        if (!empty($properties)) {
             $this->_properties= array_merge($this->_properties, $this->modx->parser->parseProperties($properties));
         }
         return $this->_properties;
@@ -852,6 +980,59 @@ abstract class modTag {
     public function setCacheable($cacheable = true) {
         $this->_cacheable = (boolean) $cacheable;
     }
+
+    /**
+     * Gets a named property set to use with this modTag instance.
+     *
+     * This function will attempt to extract a setName from the tag name using the
+     * @ symbol to delimit the name of the property set. If a setName parameter is provided,
+     * the function will override any property set specified in the name by merging both
+     * property sets.
+     *
+     * Here is an example of an tag using the @ modifier to specify a property set name:
+     *  [[~TagName@PropertySetName:FilterCommand=`FilterModifier`?
+     *      &PropertyKey1=`PropertyValue1`
+     *      &PropertyKey2=`PropertyValue2`
+     *  ]]
+     *
+     * @param string|null $setName An explicit property set name to search for.
+     * @return array|null An array of properties or null if no set is found.
+     */
+    public function getPropertySet($setName = null) {
+        $propertySet= null;
+        $name = $this->get('name');
+        if (strpos($name, '@') !== false) {
+            $psName= '';
+            $split= xPDO :: escSplit('@', $name);
+            if ($split && isset($split[1])) {
+                $name= $split[0];
+                $psName= $split[1];
+                $filters= xPDO :: escSplit(':', $setName);
+                if ($filters && isset($filters[1]) && !empty($filters[1])) {
+                    $psName= $filters[0];
+                    $name.= ':' . $filters[1];
+                }
+                $this->set('name', $name);
+            }
+            if (!empty($psName)) {
+                $psObj= $this->modx->getObject('modPropertySet', array('name' => $psName));
+                if ($psObj) {
+                    $propertySet= $this->modx->parser->parseProperties($psObj->get('properties'));
+                }
+            }
+        }
+        if (!empty($setName)) {
+            $propertySetObj= $this->modx->getObject('modPropertySet', array('name' => $setName));
+            if ($propertySetObj) {
+                if (is_array($propertySet)) {
+                    $propertySet= array_merge($propertySet, $this->modx->parser->parseProperties($propertySetObj->get('properties')));
+                } else {
+                    $propertySet= $this->modx->parser->parseProperties($propertySetObj->get('properties'));
+                }
+            }
+        }
+        return $propertySet;
+    }
 }
 /**
  * Tag representing a modResource field from the current MODX resource.
@@ -862,6 +1043,10 @@ abstract class modTag {
  * @package modx
  */
 class modFieldTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Field Tag token
+     * {@inheritdoc}
+     */
     function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->setToken('*');
@@ -869,6 +1054,8 @@ class modFieldTag extends modTag {
 
     /**
      * Process the modFieldTag and return the output.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         if ($this->get('name') === 'content') $this->setCacheable(false);
@@ -878,7 +1065,16 @@ class modFieldTag extends modTag {
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->modx->parser->processElementTags(
+                    $this->_tag,
+                    $this->_output,
+                    $this->modx->parser->isProcessingUncacheable(),
+                    $this->modx->parser->isRemovingUnprocessed(),
+                    '[[',
+                    ']]',
+                    array(),
+                    $maxIterations
+                );
             }
             $this->filterOutput();
             $this->cache();
@@ -890,6 +1086,8 @@ class modFieldTag extends modTag {
 
     /**
      * Get the raw source content of the field.
+     *
+     * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
         if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {
@@ -916,6 +1114,10 @@ class modFieldTag extends modTag {
  * @package modx
  */
 class modPlaceholderTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Placeholder Tag token
+     * {@inheritdoc}
+     */
     function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->setCacheable(false);
@@ -928,6 +1130,8 @@ class modPlaceholderTag extends modTag {
      * Tags in the properties of the tag itself, or the content returned by the
      * tag element are processed.  Non-cacheable nested tags are only processed
      * if this tag element is also non-cacheable.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
@@ -937,7 +1141,16 @@ class modPlaceholderTag extends modTag {
                 if (is_string($this->_output) && !empty($this->_output)) {
                     /* collect element tags in the content and process them */
                     $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                    $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                    $this->modx->parser->processElementTags(
+                        $this->_tag,
+                        $this->_output,
+                        $this->modx->parser->isProcessingUncacheable(),
+                        $this->modx->parser->isRemovingUnprocessed(),
+                        '[[',
+                        ']]',
+                        array(),
+                        $maxIterations
+                    );
                 }
             }
             if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
@@ -951,6 +1164,8 @@ class modPlaceholderTag extends modTag {
 
     /**
      * Get the raw source content of the field.
+     *
+     * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
         if (!is_string($this->_content)) {
@@ -974,6 +1189,8 @@ class modPlaceholderTag extends modTag {
 
     /**
      * modPlaceholderTag instances cannot be cacheable.
+     *
+     * {@inheritdoc}
      */
     public function setCacheable($cacheable = true) {}
 }
@@ -986,6 +1203,10 @@ class modPlaceholderTag extends modTag {
  * @package modx
  */
 class modLinkTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Link Tag token
+     * {@inheritdoc}
+     */
     function __constructor(modX & $modx) {
         parent :: __construct($modx);
         $this->setToken('~');
@@ -993,6 +1214,8 @@ class modLinkTag extends modTag {
 
     /**
      * Processes the modLinkTag, recursively processing nested tags.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
@@ -1001,7 +1224,16 @@ class modLinkTag extends modTag {
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->modx->parser->processElementTags(
+                    $this->_tag,
+                    $this->_output,
+                    $this->modx->parser->isProcessingUncacheable(),
+                    $this->modx->parser->isRemovingUnprocessed(),
+                    '[[',
+                    ']]',
+                    array(),
+                    $maxIterations
+                );
                 if (isset ($this->modx->aliasMap[$this->_output])) {
                     $this->_output= $this->modx->aliasMap[$this->_output];
                 }
@@ -1009,6 +1241,7 @@ class modLinkTag extends modTag {
                     $qs = '';
                     $context = '';
                     $scheme = $this->modx->getOption('link_tag_scheme',null,-1);
+                    $options = array();
                     if (is_array($this->_properties) && !empty($this->_properties)) {
                         $qs = array();
                         if (array_key_exists('context', $this->_properties)) {
@@ -1020,6 +1253,10 @@ class modLinkTag extends modTag {
                             unset($this->_properties['scheme']);
                             if (is_numeric($scheme)) $scheme = (integer) $scheme;
                         }
+                        if (array_key_exists('use_weblink_target', $this->_properties)) {
+                            $options['use_weblink_target'] = $this->_properties['use_weblink_target'];
+                            unset($this->_properties['use_weblink_target']);
+                        }
                         foreach ($this->_properties as $propertyKey => $propertyValue) {
                             if (in_array($propertyKey, array('context', 'scheme'))) continue;
                             $qs[]= "{$propertyKey}={$propertyValue}";
@@ -1029,7 +1266,7 @@ class modLinkTag extends modTag {
                             $qs= str_replace(array('%26','%3D'),array('&amp;','='),$qs);
                         }
                     }
-                    $this->_output= $this->modx->makeUrl($this->_output, $context, $qs, $scheme);
+                    $this->_output= $this->modx->makeUrl($this->_output, $context, $qs, $scheme, $options);
                 }
             }
             if (!empty($this->_output)) {
@@ -1052,6 +1289,10 @@ class modLinkTag extends modTag {
  * @package modx
  */
 class modLexiconTag extends modTag {
+    /**
+     * Overrides modTag::__construct to set the Lexicon Tag token
+     * {@inheritdoc}
+     */
     function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->setToken('%');
@@ -1059,6 +1300,8 @@ class modLexiconTag extends modTag {
 
     /**
      * Processes a modLexiconTag, recursively processing nested tags.
+     *
+     * {@inheritdoc}
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
@@ -1067,7 +1310,16 @@ class modLexiconTag extends modTag {
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->modx->parser->processElementTags(
+                    $this->_tag,
+                    $this->_output,
+                    $this->modx->parser->isProcessingUncacheable(),
+                    $this->modx->parser->isRemovingUnprocessed(),
+                    '[[',
+                    ']]',
+                    array(),
+                    $maxIterations
+                );
             }
             $this->filterOutput();
             $this->cache();
@@ -1079,6 +1331,8 @@ class modLexiconTag extends modTag {
 
     /**
      * Get the raw source content of the link.
+     *
+     * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {

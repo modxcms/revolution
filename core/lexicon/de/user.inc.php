@@ -1,5 +1,7 @@
 <?php
 /**
+ * User German lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  *
@@ -32,11 +34,15 @@ $_lang['password_method_screen'] = 'Passwort auf dem Bildschirm anzeigen.';
 $_lang['password_new'] = 'Neues Passwort';
 $_lang['password_notification'] = 'Passwort-Benachrichtigung';
 $_lang['password_old'] = 'Altes Passwort';
+$_lang['primary_group'] = 'Primäre Gruppe';
 $_lang['profile_recent_resources'] = 'Letzte Ressourcen';
 $_lang['profile_recent_resources_desc'] = 'Diese Liste zeigt die von Ihnen zuletzt bearbeiteten Ressourcen.';
 $_lang['remote_data'] = 'Externe Daten';
 $_lang['role'] = 'Rolle';
 $_lang['role_create'] = 'Rolle erstellen';
+$_lang['role_desc_authority'] = 'Die Autoritäts-Ebene der Rolle. Niedrigere Autoritäts-Ebenen (also solche mit einem niedrigeren Zahlenwert) haben mehr Befugnisse und erben die Berechtigungen von Rollen mit geringerer Autorität in den Gruppen, denen sie zugeordnet sind.';
+$_lang['role_desc_name'] = 'Ein Name für die Rolle, wie z.B. Redakteur, Herausgeber, Systemadministrator etc.';
+$_lang['role_desc_description'] = 'Eine kurze Beschreibung der Rolle.';
 $_lang['role_err_ae'] = 'Eine Rolle mit dem Namen existiert bereits.';
 $_lang['role_err_duplicate'] = 'Ein Fehler trat auf beim Duplizieren der Rolle.';
 $_lang['role_err_has_users'] = 'Es gibt Benutzer mit dieser Rolle. Sie kann nicht gelöscht werden.';
@@ -117,6 +123,10 @@ $_lang['user_full_name'] = 'Vollständiger Name';
 $_lang['user_group'] = 'Benutzergruppe';
 $_lang['user_group_create'] = 'Benutzergruppe anlegen';
 $_lang['user_group_id'] = 'UG-ID';
+$_lang['user_group_desc_name'] = 'Der Name der Benutzergruppe';
+$_lang['user_group_desc_description'] = 'Eine kurze Beschreibung der Benutzergruppe';
+$_lang['user_group_desc_parent'] = 'Die Eltern-Gruppe dieser Gruppe. Wird für organisatorische Zwecke verwendet.';
+$_lang['user_group_desc_dashboard'] = 'Das Dashboard, das Mitglieder dieser Gruppe (die diese Gruppe als ihre primäre Gruppe haben) benutzen.';
 $_lang['user_group_document_group_err_already_exists'] = 'Die Benutzergruppe ist dieser Dokumentgruppe bereits zugeordnet.';
 $_lang['user_group_document_group_err_create'] = 'Ein Fehler trat auf beim Versuch, die Benutzergruppe der Dokumentgruppe zuzuordnen.';
 $_lang['user_group_document_group_err_not_found'] = 'Diese Benutzergruppe ist dieser Dokumentgruppe nicht zugeordnet!';
@@ -127,6 +137,7 @@ $_lang['user_group_err_nf'] = 'Benutzergruppe nicht gefunden!';
 $_lang['user_group_err_not_found'] = 'Benutzergruppe nicht gefunden!';
 $_lang['user_group_err_not_specified'] = 'Keine Benutzergruppe angegeben!';
 $_lang['user_group_err_ns'] = 'Keine Benutzergruppe angegeben!';
+$_lang['user_group_err_ns_name'] = 'Bitte geben Sie einen Namen für diese Benutzergruppe an.';
 $_lang['user_group_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Benutzergruppe zu löschen.';
 $_lang['user_group_err_remove_admin'] = 'Sie können die Administrator-Gruppe nicht löschen.';
 $_lang['user_group_err_save'] = 'Ein Fehler trat auf beim Versuch, die Benutzergruppe zu speichern.';
@@ -138,11 +149,13 @@ $_lang['user_group_member_err_remove'] = 'Ein Fehler trat auf beim Versuch, den 
 $_lang['user_group_member_err_save'] = 'Ein Fehler trat auf beim Versuch, den Benutzer der Gruppe hinzuzufügen.';
 $_lang['user_group_new'] = 'Neue Benutzergruppe';
 $_lang['user_group_parent'] = 'Eltern-Gruppe';
-$_lang['user_group_remove'] = 'Benutzergruppe entfernen';
+$_lang['user_group_remove'] = 'Benutzergruppe löschen';
 $_lang['user_group_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Benutzergruppe löschen möchten?';
 $_lang['user_group_untitled'] = 'Unbenannte Benutzregruppe';
 $_lang['user_group_update'] = 'Benutzergruppe bearbeiten';
 $_lang['user_group_user_add'] = 'Benutzer zur Gruppe hinzufügen';
+$_lang['user_group_user_add_user_desc'] = 'Der Benutzername des Benutzers, der zu der Benutzergruppe hinzugefügt werden soll';
+$_lang['user_group_user_add_role_desc'] = 'Die Rolle, die der Benutzer in der Gruppe haben soll. Dies kann sich auf Berechtigungen auswirken, die der Benutzer hat.';
 $_lang['user_group_user_remove'] = 'Benutzer aus der Gruppe entfernen';
 $_lang['user_group_user_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Benutzer aus der Gruppe entfernen möchten?';
 $_lang['user_group_user_update_role'] = 'Rolle des Benutzers in der Benutzergruppe ändern';
@@ -165,9 +178,9 @@ $_lang['user_prevlogin'] = 'Letzter Login';
 $_lang['user_prevlogin_desc'] = 'Der Zeitpunkt, zu dem sich der Benutzer zuletzt erfolgreich eingeloggt hat.';
 $_lang['user_profile_err_nf'] = 'FATALER FEHLER: Benutzerprofil nicht gefunden.';
 $_lang['user_profile_err_save'] = 'Ein Fehler trat auf beim Versuch, die Benutzer-Attribute zu speichern.';
-$_lang['user_remove'] = 'Benutzer entfernen';
+$_lang['user_remove'] = 'Benutzer löschen';
 $_lang['user_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Benutzer löschen möchten? Dies kann nicht rückgängig gemacht werden!';
-$_lang['user_remove_multiple'] = 'Mehrere Benutzer entfernen';
+$_lang['user_remove_multiple'] = 'Mehrere Benutzer löschen';
 $_lang['user_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Benutzer löschen möchten? Dies kann nicht rückgängig gemacht werden!';
 $_lang['user_remote_data_msg'] = 'Daten des externen Benutzers bearbeiten (Benutzer, der über LDAP, Crowd, OpenID etc. angebunden ist).';
 $_lang['user_role_update'] = 'Benutzer-Rolle ändern';

@@ -9,7 +9,7 @@
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
-$_lang['lexicon_key'] = '辞書キー';
+$_lang['lexicon_key'] = 'レキシコンキー';
 $_lang['menu_create'] = 'メニュー作成';
 $_lang['menu_confirm_remove'] = 'このアクションをメニューから削除しますか？';
 $_lang['menu_err_ae'] = 'この名前は既に使用されています。他の名前を指定してください。';

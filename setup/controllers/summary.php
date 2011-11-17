@@ -1,5 +1,9 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
+ * 
  * @package setup
  */
 if (!empty($_POST['proceed'])) {
@@ -10,7 +14,7 @@ if (!empty($_POST['proceed'])) {
 
 $mode = $install->settings->get('installmode');
 $results= $install->test($mode);
-$this->parser->assign('test', $results);
+$parser->set('test', $results);
 
 $failed= false;
 foreach ($results as $item) {
@@ -26,7 +30,7 @@ if ($mode == modInstall::MODE_UPGRADE_REVO) {
     $back = MODX_SETUP_KEY == '@traditional@' ? 'database' : 'contexts';
 }
 
-$this->parser->assign('failed', $failed);
-$this->parser->assign('testClass', $failed ? 'error' : 'success');
-$this->parser->assign('back',$back);
-return $this->parser->fetch('summary.tpl');
+$parser->set('failed', $failed);
+$parser->set('testClass', $failed ? 'error' : 'success');
+$parser->set('back',$back);
+return $parser->render('summary.tpl');

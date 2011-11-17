@@ -2,6 +2,10 @@
 /**
  * Create a new MODX Revolution repository.
  *
+ * @var xPDO $modx
+ * @var modInstall $install
+ * @var modInstallRunner $this
+ * 
  * @package setup
  */
 
@@ -32,6 +36,9 @@ $classes= array (
     'modContext',
     'modContextResource',
     'modContextSetting',
+    'modDashboard',
+    'modDashboardWidget',
+    'modDashboardWidgetPlacement',
     'modElementPropertySet',
     'modEvent',
     'modFormCustomizationProfile',
@@ -68,41 +75,45 @@ $classes= array (
     'registry.db.modDbRegisterQueue',
     'transport.modTransportPackage',
     'transport.modTransportProvider',
+    'sources.modAccessMediaSource',
+    'sources.modMediaSource',
+    'sources.modMediaSourceElement',
+    'sources.modMediaSourceContext',
 );
 
-$this->xpdo->getManager();
-$connected= $this->xpdo->connect();
+$modx->getManager();
+$connected= $modx->connect();
 $created= false;
 if (!$connected) {
-    $dsnArray= xPDO :: parseDSN($this->xpdo->getOption('dsn'));
+    $dsnArray= xPDO :: parseDSN($modx->getOption('dsn'));
     $containerOptions['charset']= $install->settings->get('database_charset', 'utf8');
     $containerOptions['collation']= $install->settings->get('database_collation', 'utf8_general_ci');
-    $created= $this->xpdo->manager->createSourceContainer($dsnArray, $this->xpdo->config['username'], $this->xpdo->config['password']);
+    $created= $modx->manager->createSourceContainer($dsnArray, $modx->config['username'], $modx->config['password']);
     if (!$created) {
-        $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$this->lexicon('db_err_create').'</p>');
+        $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$install->lexicon('db_err_create').'</p>');
     }
     else {
-        $connected= $this->xpdo->connect();
+        $connected= $modx->connect();
     }
     if ($connected) {
-        $results[]= array ('class' => 'success', 'msg' => '<p class="ok">'.$this->lexicon('db_created').'</p>');
+        $results[]= array ('class' => 'success', 'msg' => '<p class="ok">'.$install->lexicon('db_created').'</p>');
     }
 }
 if ($connected) {
     ob_start();
-    $this->xpdo->loadClass('modAccess');
-    $this->xpdo->loadClass('modAccessibleObject');
-    $this->xpdo->loadClass('modAccessibleSimpleObject');
-    $this->xpdo->loadClass('modResource');
-    $this->xpdo->loadClass('modElement');
-    $this->xpdo->loadClass('modScript');
-    $this->xpdo->loadClass('modPrincipal');
-    $this->xpdo->loadClass('modUser');
+    $modx->loadClass('modAccess');
+    $modx->loadClass('modAccessibleObject');
+    $modx->loadClass('modAccessibleSimpleObject');
+    $modx->loadClass('modResource');
+    $modx->loadClass('modElement');
+    $modx->loadClass('modScript');
+    $modx->loadClass('modPrincipal');
+    $modx->loadClass('modUser');
     foreach ($classes as $class) {
-        if (!$dbcreated= $this->xpdo->manager->createObjectContainer($class)) {
-            $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">' . $this->lexicon('table_err_create',array('class' => $class)) . '</p>');
+        if (!$dbcreated= $modx->manager->createObjectContainer($class)) {
+            $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">' . $install->lexicon('table_err_create',array('class' => $class)) . '</p>');
         } else {
-            $results[]= array ('class' => 'success', 'msg' => '<p class="ok">' . $this->lexicon('table_created',array('class' => $class)) . '</p>');
+            $results[]= array ('class' => 'success', 'msg' => '<p class="ok">' . $install->lexicon('table_created',array('class' => $class)) . '</p>');
         }
     }
     ob_end_clean();

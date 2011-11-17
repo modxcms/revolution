@@ -13,7 +13,8 @@ MODx.load({
     xtype: 'panel'
     ,layout: 'form'
     ,autoHeight: true
-    ,labelWidth: 150
+    ,labelAlign: 'top'
+    ,cls: 'form-with-labels'
     ,border: false
     ,items: [{
         xtype: 'combo' 
@@ -34,6 +35,7 @@ MODx.load({
         ,triggerAction: 'all'
         ,value: params['format'] || ''
         ,listeners: oc
+        ,anchor: '100%'
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

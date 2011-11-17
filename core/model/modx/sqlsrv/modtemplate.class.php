@@ -4,6 +4,10 @@
  * @subpackage sqlsrv
  */
 require_once (dirname(dirname(__FILE__)) . '/modtemplate.class.php');
+/**
+ * @package modx
+ * @subpackage sqlsrv
+ */
 class modTemplate_sqlsrv extends modTemplate {
     public static function listTemplateVars(modTemplate &$template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0,array $conditions = array()) {
         $result = array('collection' => array(), 'total' => 0);

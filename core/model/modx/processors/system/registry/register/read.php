@@ -40,6 +40,7 @@ $options['poll_interval'] = (isset($scriptProperties['poll_interval']) && intval
 $options['time_limit'] = (isset($scriptProperties['time_limit']) && intval($scriptProperties['time_limit'])) ? intval($scriptProperties['time_limit']) : 10;
 $options['msg_limit'] = (isset($scriptProperties['message_limit']) && intval($scriptProperties['message_limit'])) ? intval($scriptProperties['message_limit']) : 200;
 $options['remove_read'] = isset($scriptProperties['remove_read']) ? (boolean) $scriptProperties['remove_read'] : true;
+$options['include_keys'] = isset($scriptProperties['include_keys']) ? (boolean) $scriptProperties['include_keys'] : false;
 $options['show_filename'] = (isset($scriptProperties['show_filename']) && !empty($scriptProperties['show_filename'])) ? true : false;
 
 $modx->getService('registry', 'registry.modRegistry');
@@ -47,26 +48,31 @@ $modx->registry->addRegister($register, $register_class, array('directory' => $r
 if (!$modx->registry->$register->connect()) return $modx->error->failure($modx->lexicon('error'));
 
 $modx->registry->$register->subscribe($topic);
-
 $msgs = $modx->registry->$register->read($options);
 if (!empty($msgs)) {
-    if ($format == 'html_log') {
-        $message = '';
-        foreach ($msgs as $msgKey => $msg) {
-            if (!empty ($msg['def'])) $msg['def']= $msg['def'].' ';
-            if (!empty ($msg['file'])) $msg['file']= '@ '.$msg['file'].' ';
-            if (!empty ($msg['line'])) $msg['line']= 'line '.$msg['line'].' ';
-            $message .= '<span class="' . strtolower($msg['level']) . '">';
-            if ($options['show_filename']) {
-                $message .= '<small>(' . trim($msg['def'] . $msg['file'] . $msg['line']) . ')</small>';
+    switch ($format) {
+        case 'html_log':
+            $message = '';
+            foreach ($msgs as $msgKey => $msg) {
+                if (!empty ($msg['def'])) $msg['def']= $msg['def'].' ';
+                if (!empty ($msg['file'])) $msg['file']= '@ '.$msg['file'].' ';
+                if (!empty ($msg['line'])) $msg['line']= 'line '.$msg['line'].' ';
+                $message .= '<span class="' . strtolower($msg['level']) . '">';
+                if ($options['show_filename']) {
+                    $message .= '<small>(' . trim($msg['def'] . $msg['file'] . $msg['line']) . ')</small>';
+                }
+                $message .= $msg['msg']."</span><br />\n";
             }
-            $message .= $msg['msg']."</span><br />\n";
-        }
-        if (!empty($message)) {
-            return $modx->error->success($message);
-        }
-    } elseif (!empty($msgs)) {
-        return $modx->error->success($modx->toJSON($msgs));
+            if (!empty($message)) {
+                return $modx->error->success($message);
+            }
+            break;
+        case 'json':
+            return $modx->error->success($modx->toJSON($msgs));
+            break;
+        default:
+            return $modx->error->success($msgs);
+            break;
     }
 }
 return $modx->error->success('');
