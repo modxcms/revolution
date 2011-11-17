@@ -107,10 +107,13 @@ $_lang['setting_cache_db'] = 'データベースキャッシュを有効';
 $_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
 $_lang['setting_cache_db_expires'] = 'データベースキャッシュの有効秒数';
 $_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
+
 $_lang['setting_cache_db_session'] = 'DBセッションキャッシュを有効にする';
 $_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+
 $_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
 $_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+
 $_lang['setting_cache_default'] = 'デフォルトでキャッシュ有効';
 $_lang['setting_cache_default_desc'] = '「はい」を選択すると、すべての新規リソースでキャッシュ有効をデフォルトにします。';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';

@@ -492,6 +492,9 @@ $_lang['setting_search_default'] = 'Standaard doorzoekbaar';
 $_lang['setting_search_default_desc'] = 'Selecteer \'Ja\' om alle nieuwe documenten standaard doorzoekbaar in te stellen.';
 $_lang['setting_search_default_err'] = 'Geef aan of documenten standaard doorzoekbaar moeten zijn of niet.';
 
+$_lang['setting_request_method_strict'] = 'Stricte Aanvraag Methode';
+$_lang['setting_request_method_strict_desc'] = 'Indien ingeschakeld, aanvragen via de Aanvraag ID Parameter worden genegeeerd indien FURLs ingeschakeld zijn en de Aanvraag Alias Parameter wordt genegeeerd indien FURLs uitgeschakeld zijn.';
+
 $_lang['setting_server_offset_time'] = 'Server offset tijd';
 $_lang['setting_server_offset_time_desc'] = 'Selecteer het aantal uren in tijdsverschil in waar jij bent en waar de server is.';
 
