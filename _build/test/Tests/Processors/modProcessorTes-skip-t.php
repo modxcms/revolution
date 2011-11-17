@@ -24,6 +24,8 @@
 /**
  * Tests related to the modProcessor class.
  *
+ * @TODO Refactor this to use mock class
+ *
  * @package modx-test
  * @subpackage modx
  * @group Processors

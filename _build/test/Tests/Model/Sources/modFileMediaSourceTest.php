@@ -78,8 +78,8 @@ class modFileMediaSourceTest extends MODxTestCase {
 
         $this->assertEquals('',$bases['url'],'Index "url" does not match expected.');
         $this->assertEquals(true,$bases['urlIsRelative'],'Index "urlIsRelative" does not match expected.');
-        $this->assertEquals(MODX_BASE_URL,$bases['urlAbsolute'],'Index "urlAbsolute" does not match expected.');
-        $this->assertEquals(MODX_BASE_URL,$bases['urlAbsoluteWithPath'],'Index "urlAbsoluteWithPath" does not match expected.');
+        $this->assertEquals('/',$bases['urlAbsolute'],'Index "urlAbsolute" does not match expected.');
+        $this->assertEquals('/',$bases['urlAbsoluteWithPath'],'Index "urlAbsoluteWithPath" does not match expected.');
         $this->assertEquals('',$bases['urlRelative'],'Index "urlRelative" does not match expected.');
     }
 
@@ -98,8 +98,8 @@ class modFileMediaSourceTest extends MODxTestCase {
 
         $this->assertEquals('',$bases['url'],'Index "url" does not match expected.');
         $this->assertEquals(true,$bases['urlIsRelative'],'Index "urlIsRelative" does not match expected.');
-        $this->assertEquals(MODX_BASE_URL,$bases['urlAbsolute'],'Index "urlAbsolute" does not match expected.');
-        $this->assertEquals(MODX_BASE_URL.'assets/images/logo.png',$bases['urlAbsoluteWithPath'],'Index "urlAbsoluteWithPath" does not match expected.');
+        $this->assertEquals('/',$bases['urlAbsolute'],'Index "urlAbsolute" does not match expected.');
+        $this->assertEquals('/assets/images/logo.png',$bases['urlAbsoluteWithPath'],'Index "urlAbsoluteWithPath" does not match expected.');
         $this->assertEquals('assets/images/logo.png',$bases['urlRelative'],'Index "urlRelative" does not match expected.');
     }
 }

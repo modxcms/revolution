@@ -110,6 +110,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $directories = array();
         $files = array();
+        if (!is_dir($fullPath)) return array();
 
         /* iterate through directories */
         /** @var DirectoryIterator $file */

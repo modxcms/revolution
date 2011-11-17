@@ -42,12 +42,12 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         parent::setUp();
 
         /** @var modDashboard $dashboard */
-        $dashboard = $this->modx->newObject('modDashboard');
-        $dashboard->fromArray(array(
+        $this->controller->dashboard = $this->modx->newObject('modDashboard');
+        $this->controller->dashboard->fromArray(array(
             'id' => 10000,
             'name' => 'Unit Test Dashboard',
         ),'',true,true);
-        $dashboard->save();
+        $this->controller->dashboard->save();
 
         /** @var modDashboardWidget $dashboardWidget */
         $dashboardWidget = $this->modx->newObject('modDashboardWidget');
@@ -65,7 +65,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         /** @var modDashboardWidgetPlacement $dashboardWidgetPlacement */
         $dashboardWidgetPlacement = $this->modx->newObject('modDashboardWidgetPlacement');
         $dashboardWidgetPlacement->fromArray(array(
-            'dashboard' => $dashboard->get('id'),
+            'dashboard' => $this->controller->dashboard->get('id'),
             'widget' => $dashboardWidget->get('id'),
             'rank' => 0,
         ),'',true,true);

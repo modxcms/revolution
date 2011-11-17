@@ -66,13 +66,13 @@ class modActionDomTest extends MODxTestCase {
      */
     public function providerApply() {
         return array(
-            array('Ext.getCmp("modx-panel-resource").hideField(["description"]);',
+            array('MODx.hideField("modx-panel-resource",["description"]);',
                 'fieldVisible','description',0,'modx-panel-resource'),
                 
             array('MODx.renameLabel("modx-panel-resource",["published"],["Active"]);',
                 'fieldTitle','published','Active','modx-panel-resource'),
 
-            array('Ext.getCmp("modx-resource-settings").setTitle("Other Settings");',
+            array('MODx.renameTab("modx-resource-settings","Other Settings");',
                 'tabTitle','modx-resource-settings','Other Settings','modx-resource-tabs'),
 
             array('MODx.hideTab("modx-resource-tabs","modx-resource-settings");',
