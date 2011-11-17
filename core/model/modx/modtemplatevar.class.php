@@ -1,15 +1,37 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a template variable element.
  *
+ * @property string $type The input type of this TV
+ * @property string $name The name of this TV, and key by which it will be referenced in tags
+ * @property string $caption The caption that will be used to display the name of this TV when on the Resource page
+ * @property string $description A user-provided description of this TV
+ * @property int $editor_type Deprecated
+ * @property int $category The Category for this TV, or 0 if not in one
+ * @property boolean $locked Whether or not this TV can only be edited by an Administrator
+ * @property string $elements Default values for this TV
+ * @property int $rank The rank of the TV when sorted and displayed relative to other TVs in its Category
+ * @property string $display The output render type of this TV
+ * @property string $default_text The default value of this TV if no other value is set
+ * @property string $properties An array of default properties for this TV
+ * @property string $input_properties An array of input properties related to the rendering of the input of this TV
+ * @property string $output_properties An array of output properties related to the rendering of the output of this TV
+ * 
  * @todo Refactor this to allow user-defined and configured input and output
  * widgets.
+ * @see modTemplateVarResource
+ * @see modTemplateVarResourceGroup
+ * @see modTemplateVarResourceTemplate
+ * @see modTemplate
  * @package modx
  */
 class modTemplateVar extends modElement {
     /**
-     * @var array Supported bindings for MODX
-     * @access public
+     * Supported bindings for MODX
+     * @var array $bindings
      */
     public $bindings= array (
         'FILE',
@@ -46,7 +68,8 @@ class modTemplateVar extends modElement {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        $saved = parent :: save($cacheFlag);
+
+        $saved = parent::save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateVarSave',array(
@@ -134,31 +157,6 @@ class modTemplateVar extends modElement {
         }
         /* finally, return the processed element content */
         return $this->_output;
-    }
-
-    /**
-     * Get the source content of this template variable.
-     *
-     * {@inheritdoc}
-     */
-    public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } else {
-                $this->_content = $this->get('default_text');
-            }
-        }
-        return $this->_content;
-    }
-
-    /**
-     * Set the source content of this template variable.
-     *
-     * {@inheritdoc}
-     */
-    public function setContent($content, array $options = array()) {
-        return $this->set('default_text', $content);
     }
 
     /**
@@ -264,16 +262,22 @@ class modTemplateVar extends modElement {
             $params = array_merge($params,$outputProperties);
         }
 
-        /* for base_url in image/file tvs */
-        if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
-            $ips = $this->get('input_properties');
-            $fmu = $this->xpdo->getOption('filemanager_url',null,'');
-            $absValCheck = substr($value,0,1) == '/' || substr($value,0,7) == 'http://' || substr($value,0,8) == 'https://';
-            if (empty($ips['baseUrlPrependCheckSlash']) || !($absValCheck)) {
-                if (!empty($ips['baseUrl'])) {
-                    $value = $ips['baseUrl'].$value;
-                } else if (!empty($fmu)) {
-                    $value = $fmu.$value;
+        /* Allow custom source types to manipulate the output URL for image/file tvs */
+        $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types',null,'image,file');
+        $mTypes = explode(',',$mTypes);
+        if (!empty($value) && in_array($this->get('type'),$mTypes)) {
+            $sourceCache = $this->getSourceCache($this->xpdo->context->get('key'));
+            if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
+                $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+                $coreSourceClasses = explode(',',$coreSourceClasses);
+                $classKey = in_array($sourceCache['class_key'],$coreSourceClasses) ? 'sources.'.$sourceCache['class_key'] : $sourceCache['class_key'];
+                if ($this->xpdo->loadClass($classKey)) {
+                    /** @var modMediaSource $source */
+                    $source = $this->xpdo->newObject($classKey);
+                    if ($source) {
+                        $source->fromArray($sourceCache,'',true,true);
+                        $value = $source->prepareOutputUrl($value);
+                    }
                 }
             }
         }
@@ -289,17 +293,27 @@ class modTemplateVar extends modElement {
      * @access public
      * @param integer $resourceId The id of the resource; 0 defaults to the
      * current resource.
-     * @param string $style Extra style parameters. (deprecated)
+     * @param mixed $options Array of options ('value', 'style') or deprecated $style string
      * @return mixed The rendered input for the template variable.
      */
-    public function renderInput($resourceId= 0, $style= '') {
+    public function renderInput($resourceId= 0, $options) {
+
+        if(is_string($options) && !empty($options)) {
+            // fall back to deprecated $style setting
+            $style = $options;
+        } else {
+            $style = is_array($options) && isset($options['style']) ? strval($options['style']) : '';
+            $value = is_array($options) && isset($options['value']) ? strval($options['value']) : '';
+        }
         if (!isset($this->smarty)) {
             $this->xpdo->getService('smarty', 'smarty.modSmarty', '', array(
                 'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',null,'default') . '/',
             ));
         }
         $this->xpdo->smarty->assign('style',$style);
-        $value = $this->getValue($resourceId);
+        if(!isset($value) || empty($value)) {
+            $value = $this->getValue($resourceId);
+        }
 
         /* process only @INHERIT bindings in value, since we're inputting */
         $bdata = $this->getBindingDataFromValue($value);

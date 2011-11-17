@@ -2,10 +2,8 @@
 /**
  * @package modx
  */
-
-/** Include the base modParser class */
+/* Include the base modParser class */
 include_once (strtr(realpath(dirname(__FILE__)) . '/modparser.class.php', '\\', '/'));
-
 /**
  * An extension of the MODX parser to support legacy MODX tags.
  *
@@ -17,6 +15,10 @@ include_once (strtr(realpath(dirname(__FILE__)) . '/modparser.class.php', '\\', 
  * @package modx
  */
 class modParser095 extends modParser {
+    /**
+     * An array of translation strings from migrating from Evolution
+     * @var array $tagTranslation
+     */
     public $tagTranslation= array (
         '[[++' => array ('[(', ')]', '++'),
         '[[$' => array ('{{', '}}', '$'),
@@ -33,6 +35,7 @@ class modParser095 extends modParser {
      * replaced.
      * @param array $tokens An optional array of tag tokens on which to exclude
      * translation of the tags.
+     * @param boolean $echo
      * @return void The content is operated on by reference.
      */
     public function translate(& $content, $tokens= array (), $echo= false) {
@@ -68,6 +71,16 @@ class modParser095 extends modParser {
 
     /**
      * Adds the legacy tag translation and legacy OnParseDocument event support.
+     * @param string $parentTag
+     * @param $content
+     * @param bool $processUncacheable
+     * @param bool $removeUnprocessed
+     * @param string $prefix
+     * @param string $suffix
+     * @param array $tokens
+     * @param bool $echo
+     * @return string
+     *
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $echo= false) {
         // invoke OnParseDocument event

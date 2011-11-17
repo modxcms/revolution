@@ -18,34 +18,34 @@
   <files>
     <directory>../core/model/modx/</directory>
     <directory>../core/xpdo/</directory>
+    <directory>../manager/controllers/default/</directory>
   </files>
-  <!--
   <logging>
     <level>warn</level>
     <paths>
-      <default>./doc/log/{DATE}.log</default>
-      <errors>./doc/log/{DATE}.errors.log</errors>
+      <default>./docs/log/{DATE}.errors.log</default>
     </paths>
   </logging>
-  -->
   <transformations>
-    <template name="./docs/themes/modx/" />
+    <template name="default" />
   </transformations>
   <ignore>
     <item>*.inc</item>
     <item>*.cache.php</item>
-    <item>model/modx/jsonrpc/jsonrpc.inc</item>
-    <item>model/modx/jsonrpc/jsonrpcs.inc</item>
-    <item>model/modx/xmlrpc/xmlrpc.inc</item>
-    <item>model/modx/xmlrpc/xmlrpcs.inc</item>
-    <item>model/modx/xmlrpc/xmlrpc_wrappers.inc</item>
-    <item>model/modx/xmlrss/magpierss.class.php</item>
-    <item>model/modx/xmlrss/rss_utils.inc</item>
-    <item>model/modx/xmlrss/rsscache.class.php</item>
-    <item>model/modx/xmlrss/rssfetch.class.php</item>
-    <item>model/modx/xmlrss/extlib/snoopy.class.php</item>
-    <item>model/modx/mail/phpmailer/*</item>
-    <item>xpdo/json/*</item>
-    <item>xpdo/compression/pclzip.lib.php</item>
+    <item>core/model/modx/jsonrpc/jsonrpc.inc</item>
+    <item>core/model/modx/jsonrpc/jsonrpcs.inc</item>
+    <item>core/model/modx/xmlrpc/xmlrpc.inc</item>
+    <item>core/model/modx/xmlrpc/xmlrpcs.inc</item>
+    <item>core/model/modx/xmlrpc/xmlrpc_wrappers.inc</item>
+    <item>core/model/modx/xmlrss/magpierss.class.php</item>
+    <item>core/model/modx/xmlrss/rss_utils.inc</item>
+    <item>core/model/modx/xmlrss/rsscache.class.php</item>
+    <item>core/model/modx/xmlrss/rssfetch.class.php</item>
+    <item>core/model/modx/xmlrss/extlib/snoopy.class.php</item>
+    <item>core/model/modx/mail/phpmailer/*</item>
+    <item>core/xpdo/json/*</item>
+    <item>core/xpdo/compression/pclzip.lib.php</item>
+    <!-- for now ignore processors -->
+    <item>core/model/modx/processors/*</item>
   </ignore>
 </docblox>

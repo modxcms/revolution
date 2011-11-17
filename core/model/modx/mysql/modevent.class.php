@@ -4,6 +4,10 @@
  * @subpackage mysql
  */
 include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../modevent.class.php');
+/**
+ * @package modx
+ * @subpackage mysql
+ */
 class modEvent_mysql extends modEvent {
     public static function listEvents(xPDO &$xpdo, $plugin, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         $c = $xpdo->newQuery('modEvent');

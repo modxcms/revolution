@@ -1,0 +1,73 @@
+<?php
+/**
+ * @package modx
+ * @subpackage manager.controllers
+ */
+/**
+ * Loads the dashboard widget create page
+ *
+ * @package modx
+ * @subpackage manager.controllers
+ */
+class SystemDashboardsWidgetCreateManagerController extends modManagerController {
+    /** @var array $widgetArray */
+    public $widgetArray = array();
+
+    /**
+     * Check for any permissions or requirements to load page
+     * @return bool
+     */
+    public function checkPermissions() {
+        return $this->modx->hasPermission('dashboards');
+    }
+
+    /**
+     * Custom logic code here for setting placeholders, etc
+     *
+     * @param array $scriptProperties
+     * @return array
+     */
+    public function process(array $scriptProperties = array()) {
+        return array();
+    }
+
+    /**
+     * Register custom CSS/JS for the page
+     * @return void
+     */
+    public function loadCustomCssJs() {
+        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl."assets/modext/widgets/system/modx.panel.dashboard.widget.js");
+        $this->addJavascript($mgrUrl.'assets/modext/sections/system/dashboards/widget/create.js');
+        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
+    MODx.load({
+        xtype: "modx-page-dashboard-widget-create"
+    });
+});</script>');
+    }
+
+    /**
+     * Return the pagetitle
+     *
+     * @return string
+     */
+    public function getPageTitle() {
+        return $this->modx->lexicon('dashboards');
+    }
+
+    /**
+     * Return the location of the template file
+     * @return string
+     */
+    public function getTemplateFile() {
+        return 'system/dashboards/widget/create.tpl';
+    }
+
+    /**
+     * Specify the language topics to load
+     * @return array
+     */
+    public function getLanguageTopics() {
+        return array('dashboards','user');
+    }
+}

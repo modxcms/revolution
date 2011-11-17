@@ -18,6 +18,7 @@ $xpdo_meta_map['modUser']= array (
     'remote_data' => NULL,
     'hash_class' => 'hashing.modPBKDF2',
     'salt' => '',
+    'primary_group' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -93,6 +94,14 @@ $xpdo_meta_map['modUser']= array (
       'null' => false,
       'default' => '',
     ),
+    'primary_group' => 
+    array (
+      'dbtype' => 'int',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -137,6 +146,22 @@ $xpdo_meta_map['modUser']= array (
       'columns' => 
       array (
         'remote_key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'primary_group' => 
+    array (
+      'alias' => 'primary_group',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'primary_group' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -194,6 +219,14 @@ $xpdo_meta_map['modUser']= array (
       'foreign' => 'recipient',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+    'PrimaryGroup' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'primary_group',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
   'composites' => 

@@ -5,14 +5,19 @@ MODx.grid.ResourceSecurity = function(config) {
         ,dataIndex: 'access'
         ,width: 40
         ,sortable: false
+        ,hidden: MODx.perm.resourcegroup_resource_edit != 1
     });
 
+    var qs = Ext.urlDecode(window.location.search.substring(1));
     Ext.applyIf(config,{
         id: 'modx-grid-resource-security'
         ,url: MODx.config.connectors_url+'resource/resourcegroup.php'
         ,baseParams: {
             action: 'getList'
             ,resource: config.resource
+            ,"parent": config["parent"]
+            ,mode: config.mode || 'update'
+            ,"token": qs.reload || ''
         }
         ,saveParams: {
             resource: config.resource

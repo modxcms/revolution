@@ -146,6 +146,7 @@ $collection['1'] = $xpdo->newObject('modWorkspace');
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'Default MODX workspace',
+    'path' => '{core_path}',
     'active' => 1,
 ), '', true, true);
 $attributes = array (
@@ -304,18 +305,10 @@ unset ($events, $evt, $attributes);
 $settings = include MODX_BUILD_DIR . 'data/transport.core.system_settings.php';
 if (!is_array($settings) || empty($settings)) { $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not package in settings!'); flush(); }
 $attributes= array (
-    xPDOTransport::PRESERVE_KEYS => true
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
 );
 foreach ($settings as $setting) {
-    switch ($setting->get('key')) {
-        case 'session_cookie_path' :
-            $attributes[xPDOTransport::UPDATE_OBJECT]= true;
-            $setting->set('value', '/');
-            break;
-        default :
-            $attributes[xPDOTransport::UPDATE_OBJECT]= false;
-            break;
-    }
     $package->put($setting, $attributes);
 }
 
@@ -349,6 +342,62 @@ foreach ($collection as $c) {
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default user groups.'); flush();
 unset ($collection, $c, $attributes);
+
+/* modDashboard */
+$collection = array ();
+include MODX_BUILD_DIR . 'data/transport.core.dashboards.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => array ('id'),
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default dashboards.'); flush();
+unset ($collection, $c, $attributes);
+
+/* modMediaSource */
+$collection = array ();
+include MODX_BUILD_DIR . 'data/transport.core.media_sources.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => array ('id'),
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default media sources.'); flush();
+unset ($collection, $c, $attributes);
+
+/* modDashboardWidget */
+$widgets = include MODX_BUILD_DIR . 'data/transport.core.dashboard_widgets.php';
+if (is_array($widgets)) {
+    $attributes = array (
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => array ('name'),
+    );
+    $ct = count($widgets);
+    $idx = 0;
+    foreach ($widgets as $widget) {
+        $idx++;
+        if ($idx == $ct) {
+            $attributes['resolve'][] = array (
+                'type' => 'php',
+                'source' => MODX_BUILD_DIR . 'resolvers/resolve.dashboardwidgets.php',
+            );
+        }
+        $package->put($widget, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($widgets).' default dashboard widgets.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load dashboard widgets!'); flush();
+}
+unset ($widgets,$widget,$attributes,$ct,$idx);
 
 /* modUserGroupRole */
 $collection = array ();
@@ -501,7 +550,17 @@ $attributes['resolve'][] = array (
 );
 $attributes['resolve'][] = array (
     'type' => 'file',
+    'source' => MODX_BASE_PATH . 'manager/min',
+    'target' => "return MODX_MANAGER_PATH;",
+);
+$attributes['resolve'][] = array (
+    'type' => 'file',
     'source' => MODX_BASE_PATH . 'manager/ht.access',
+    'target' => "return MODX_MANAGER_PATH;",
+);
+$attributes['resolve'][] = array (
+    'type' => 'file',
+    'source' => MODX_BASE_PATH . 'manager/cache.manifest.php',
     'target' => "return MODX_MANAGER_PATH;",
 );
 $attributes['resolve'][] = array (
@@ -545,6 +604,10 @@ $files[] = array (
 );
 $files[] = array (
     'source' => MODX_BASE_PATH . 'connectors/security',
+    'target' => "return MODX_CONNECTORS_PATH;",
+);
+$files[] = array (
+    'source' => MODX_BASE_PATH . 'connectors/source',
     'target' => "return MODX_CONNECTORS_PATH;",
 );
 $files[] = array (

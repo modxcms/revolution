@@ -352,7 +352,11 @@ class modOutputFilter {
                             /* Returns input divided by option (default: /2) */
                             if (empty($m_val))
                                 $m_val = 2;
-                            $output = (float)$output / (float)$m_val;
+                            if (!empty($output)) {
+                                $output = (float)$output / (float)$m_val;
+                            } else {
+                                $output = 0;
+                            }
                             break;
 
                         case 'modulus':
@@ -392,7 +396,7 @@ class modOutputFilter {
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
                             $value = 0 + $output;
                             if ($value != 0 && $value != -1) {
-                                $output= strftime($m_val, 0 + $output);
+                                $output= strftime($m_val,$value);
                             } else {
                                 $output= '';
                             }

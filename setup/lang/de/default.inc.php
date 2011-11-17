@@ -1,6 +1,6 @@
 <?php
 /**
- * German Default Lexicon Topic for Revolution setup
+ * German language files for Revolution 2.0.0 setup
  *
  * @package setup
  * @subpackage lexicon
@@ -19,6 +19,9 @@ $_lang['base_template'] = 'BasisTemplate';
 $_lang['cache_manager_err'] = 'Der MODX-Cache-Manager konnte nicht geladen werden.';
 $_lang['choose_language'] = 'Wählen Sie Ihre Sprache';
 $_lang['cleanup_errors_title'] = 'Wichtiger Hinweis:';
+$_lang['cli_install_failed'] = 'Installation fehlgeschlagen! Fehler: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX konnte keine Konfigurationsdatei (wie z.B. config.xml) für Ihre CLI-Installation finden. Um das MODX-Setup von der Kommandozeile aufrufen zu können, müssen Sie eine Konfigurations-XML-Datei bereitstellen. Bitte konsultieren Sie die offizielle Dokumentation, wenn Sie weitere Informationen benötigen.';
+$_lang['cli_tests_failed'] = 'Vorabtests fehlgeschlagen! Fehler: [[+errors]]';
 $_lang['close'] = 'Schließen';
 $_lang['config_file_err_w'] = 'Fehler beim Speichern der Konfigurationsdatei.';
 $_lang['config_file_perms_notset'] = 'Die Dateirechte der Konfigurationsdatei wurden nicht angepasst. Sie sollten die Dateirechte der Konfigurationsdatei ändern, um die Datei gegen unerlaubte Änderungen abzusichern.';
@@ -33,7 +36,7 @@ $_lang['connection_collation'] = 'Collation:';
 $_lang['connection_connection_and_login_information'] = 'Datenbankverbindung und Zugangsdaten';
 $_lang['connection_connection_note'] = 'Bitte geben Sie die folgenden Informationen ein, um eine Verbindung zu Ihrer MODX-Datenbank herzustellen. Falls noch keine Datenbank existert, wird der Installer versuchen, eine Datenbank für Sie zu anzulegen. (Dies kann fehlschlagen, wenn Ihre Datenbank-Konfiguration oder die Datenbank-Benutzerrechte es nicht zulassen.)';
 $_lang['connection_database_host'] = 'Datenbankserver:';
-//$_lang['connection_database_info'] = 'Bitte geben Sie nun die Zugangsdaten für Ihre Datenbank ein.';
+$_lang['connection_database_info'] = 'Bitte geben Sie nun die Zugangsdaten für Ihre Datenbank ein.';
 $_lang['connection_database_login'] = 'Datenbank-Benutzername:';
 $_lang['connection_database_name'] = 'Datenbank-Name:';
 $_lang['connection_database_pass'] = 'Datenbank-Passwort:';
@@ -47,9 +50,9 @@ $_lang['connection_default_admin_user'] = 'Haupt-Administrator';
 $_lang['connection_table_prefix'] = 'Tabellen-Präfix:';
 $_lang['connection_test_connection'] = 'Verbindung testen';
 $_lang['connection_title'] = 'Verbindungsdaten';
-$_lang['context_connector_options'] = '<strong>Connectors-Kontext-Optionen</strong> (AJAX-Connector-Services)';
-$_lang['context_connector_path'] = 'Dateipfad für den Connectors-Kontext';
-$_lang['context_connector_url'] = 'URL für den Connectors-Kontext';
+$_lang['context_connector_options'] = '<strong>Connectors-Optionen</strong> (AJAX-Connector-Services)';
+$_lang['context_connector_path'] = 'Dateipfad für Connectors';
+$_lang['context_connector_url'] = 'URL für Connectors';
 $_lang['context_installation'] = 'Kontext-Installation';
 $_lang['context_manager_options'] = '<strong>Manager-Kontext-Optionen</strong> (Backend-Verwaltungsoberfläche)';
 $_lang['context_manager_path'] = 'Dateipfad für den Manager-Kontext';
@@ -95,6 +98,7 @@ $_lang['install_packages_options'] = 'Package-Installations-Optionen';
 $_lang['install_success'] = 'Core-Installation war erfolgreich. Klicken Sie auf "Weiter", um den Installationsprozess abzuschließen.';
 $_lang['install_summary'] = 'Zusammenfassung der Ergebnisse';
 $_lang['install_update'] = 'Installieren/Updaten';
+$_lang['installation_finished'] = 'Installation beendet in [[+time]]';
 $_lang['license'] = '<p class="title">Sie müssen der Lizenzvereinbarung zustimmen, bevor Sie mit der Installation fortfahren.</p>
     <p>Usage of this software is subject to the GPL license. To help you understand
     what the GPL licence is and how it affects your ability to use the software, we
@@ -178,7 +182,7 @@ $_lang['package_execute_err_retrieve'] = 'Die Installation ist fehlgeschlagen, w
 $_lang['package_err_install'] = 'Konnte Package [[+package]] nicht installieren.';
 $_lang['package_err_nf'] = 'Konnte die Installationsroutine für das Package [[+package]] nicht abrufen.';
 $_lang['package_installed'] = 'Package [[+package]] erfolgreich installiert.';
-$_lang['password_err_invchars'] = 'Ihr Passwort darf keine ungültigen Zeichen enthalten, wie z.B. /, \\, &apos;, &quot;, (, ), oder {}.';
+$_lang['password_err_invchars'] = 'Ihr Passwort darf keine ungültigen Zeichen enthalten, wie z.B. /, \\, &apos;, &quot;, (, ) oder {}.';
 $_lang['password_err_nomatch'] = 'Stimmt nicht mit dem Passwort überein';
 $_lang['password_err_ns'] = 'Das Passwort ist leer';
 $_lang['password_err_short'] = 'Ihr Passwort muss mindestens 6 Zeichen lang sein.';
@@ -227,7 +231,7 @@ $_lang['preload_err_cache'] = 'Stellen Sie sicher, dass das Verzeichnis [[+path]
 $_lang['preload_err_core_path'] = 'Stellen Sie sicher, dass Sie einen gültigen MODX_CORE_PATH in der Datei setup/includes/config.core.php angegeben haben; diese Konstante muss auf einen funktionierenden MODX-Core zeigen.';
 $_lang['preload_err_mysql'] = 'MODX benötigt die mysql-Extension, wenn PHP ohne natives PDO verwendet wird, aber diese scheint nicht geladen zu sein.';
 $_lang['preload_err_pdo'] = 'MODX benötigt die PDO-Extension, wenn natives PDO vewendet wird, aber diese scheint nicht geladen zu sein.';
-$_lang['preload_err_pdo_mysql'] = 'MODX benötigt den pdo_mysql-Treiber, wenn natives PDO vewendet wird, aber diesr scheint nicht geladen zu sein.';
+$_lang['preload_err_pdo_mysql'] = 'MODX benötigt den pdo_mysql-Treiber, wenn natives PDO vewendet wird, aber dieser scheint nicht geladen zu sein.';
 
 $_lang['test_config_file'] = 'Überprüfe, ob <span class="mono">[[+file]]</span> existiert und beschreibbar ist: ';
 $_lang['test_config_file_nw'] = 'Für neue Linux-/Unix-Installationen erstellen Sie bitte eine leere Datei mit dem Dateinamen <span class="mono">[[+file]].inc.php</span> im Verzeichnis <span class="mono">core/config/</span> und setzen sie die Dateirechte so, dass die Datei für PHP beschreibbar ist.';

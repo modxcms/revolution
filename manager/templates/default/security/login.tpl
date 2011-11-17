@@ -6,32 +6,20 @@
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
     
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-	{if $_config.compress_css}
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/modx-min.css" />
-	{else}
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css" />
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
-	{/if}
-    <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/login{if $_config.compress_css}-min{/if}.css" />
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="templates/default/css/login.css" />
     
     <script src="assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
     <script src="assets/ext3/ext-all.js" type="text/javascript"></script>
-    <script src="assets/modext/{if $_config.compress_js}build/core/modx-min{else}core/modx{/if}.js" type="text/javascript"></script>
+    <script src="assets/modext/core/modx.js" type="text/javascript"></script>
 	<script src="{$_config.connectors_url}lang.js.php?topic=login" type="text/javascript"></script>
 
-	{if $_config.compress_js}
-    <script src="assets/modext/build/core/modx.component-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/util/utilities-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/widgets/core/modx.panel-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/widgets/core/modx.window-min.js" type="text/javascript"></script>
-    <script src="assets/modext/build/sections/login-min.js" type="text/javascript"></script>
-	{else}
     <script src="assets/modext/core/modx.component.js" type="text/javascript"></script>
     <script src="assets/modext/util/utilities.js" type="text/javascript"></script>
 	<script src="assets/modext/widgets/core/modx.panel.js" type="text/javascript"></script>
     <script src="assets/modext/widgets/core/modx.window.js" type="text/javascript"></script>
     <script src="assets/modext/sections/login.js" type="text/javascript"></script>
-    {/if}
     
     <meta name="robots" content="noindex, nofollow" />
 </head>
@@ -119,15 +107,16 @@
    </table>
 </form>
 
+    {if $allow_forgot_password}
     <div class="modx-forgot-login">
     <form id="modx-fl-form" action="" method="post">
-       <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.email}display:none;{/if}">{$_lang.login_forget_your_login}</a>
-       <div id="modx-forgot-login-form" style="{if NOT $_post.email}display: none;{/if}">
+       <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.username_reset}display:none;{/if}">{$_lang.login_forget_your_login}</a>
+       <div id="modx-forgot-login-form" style="{if NOT $_post.username_reset}display: none;{/if}">
                       
            <div class="x-form-item">
-              <label for="modx-login-email" class="x-form-item-label">{$_lang.login_email_label}</label>
+              <label for="modx-login-username-reset" class="x-form-item-label">{$_lang.login_username}</label>
               <div class="x-form-element">
-                <input type="text" id="modx-login-email" name="email" class="x-form-text x-form-field" value="{$_post.email}" />
+                <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset}" />
               </div>
               <div class="x-form-clear-left"></div>
            </div>
@@ -161,6 +150,7 @@
        </div>
     </form>
     </div>
+    {/if}
     
     <br class="clear" />
 

@@ -1,5 +1,9 @@
 <?php
 /**
+ * @var modInstall $install
+ * @var modInstallParser $parser
+ * @var modInstallRequest $this
+ * 
  * @package setup
  */
 $install->settings->check();
@@ -36,7 +40,7 @@ if (!empty($_POST['proceed'])) {
 
 }
 $installmode = $install->settings->get('installmode',$install->getInstallMode());
-$this->parser->assign('installmode',$installmode);
+$parser->set('installmode',$installmode);
 
 $files_exist= 0;
 if (file_exists(MODX_INSTALL_PATH . 'manager/index.php') &&
@@ -59,18 +63,18 @@ if ($manifest && file_exists(MODX_CORE_PATH . 'packages/core/modWorkspace/')) {
 }
 
 $safe_mode= @ ini_get('safe_mode');
-$this->parser->assign('safe_mode', ($safe_mode ? 1 : 0));
+$parser->set('safe_mode', ($safe_mode ? 1 : 0));
 
 $settings = $install->settings->fetch();
 $nfop = !empty($settings['new_folder_permissions']) ? $settings['new_folder_permissions'] : $default_folder_permissions;
 $nfip = !empty($settings['new_file_permissions']) ? $settings['new_file_permissions'] : $default_file_permissions;
 
-$this->parser->assign('files_exist', $files_exist);
-$this->parser->assign('manifest', $manifest);
-$this->parser->assign('unpacked', $unpacked);
-$this->parser->assign('new_folder_permissions', $nfop);
-$this->parser->assign('new_file_permissions', $nfip);
-$this->parser->assign('default_folder_permissions', $default_folder_permissions);
-$this->parser->assign('default_file_permissions', $default_file_permissions);
+$parser->set('files_exist', $files_exist);
+$parser->set('manifest', $manifest);
+$parser->set('unpacked', $unpacked);
+$parser->set('new_folder_permissions', $nfop);
+$parser->set('new_file_permissions', $nfip);
+$parser->set('default_folder_permissions', $default_folder_permissions);
+$parser->set('default_file_permissions', $default_file_permissions);
 
-return $this->parser->fetch('options.tpl');
+return $parser->render('options.tpl');

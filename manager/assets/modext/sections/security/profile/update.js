@@ -26,6 +26,7 @@ MODx.panel.Profile = function(config) {
         id: 'modx-panel-profile'
         ,url: MODx.config.connectors_url+'security/profile.php'
         ,layout: 'fit'
+        ,cls: 'container'
         ,bodyStyle: 'background: none;'
         ,border: false
         ,items: [{
@@ -90,55 +91,56 @@ MODx.panel.UpdateProfile = function(config) {
         }
         ,layout: 'form'
         ,buttonAlign: 'center'
-        ,bodyStyle: 'padding: 15px;'
-        ,defaults: { border: false ,msgTarget: 'side' }
+        ,cls: 'container form-with-labels'
+        ,labelAlign: 'top'
+        ,defaults: { border: false ,msgTarget: 'under' }
         ,labelWidth: 150
         ,items: [{
             xtype: 'textfield'
             ,fieldLabel: _('user_full_name')
             ,name: 'fullname'
-            ,width: 250
             ,maxLength: 255
             ,allowBlank: false
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('email')
             ,name: 'email'
             ,vtype: 'email'
-            ,width: 250
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_phone')
             ,name: 'phone'
-            ,width: 150
+            ,width: 200
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_mobile')
             ,name: 'mobilephone'
-            ,width: 150
+            ,width: 200
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_fax')
             ,name: 'fax'
-            ,width: 150
+            ,width: 200
         },{
             xtype: 'datefield'
             ,fieldLabel: _('user_dob')
             ,name: 'dob'
-            ,width: 150
+            ,width: 200
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_state')
             ,name: 'state'
             ,maxLength: 50
-            ,width: 80
+            ,width: 150
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_zip')
             ,name: 'zip'
             ,maxLength: 20
-            ,width: 80
+            ,width: 150
         }]
         ,buttons: [{
             text: _('save')
@@ -189,8 +191,9 @@ MODx.panel.ChangeProfilePassword = function(config) {
         ,frame: true
         ,layout: 'form'
         ,buttonAlign: 'center'
-        ,bodyStyle: 'padding: 15px;'
-        ,defaults: { border: false ,msgTarget: 'side' }
+        ,labelAlign: 'top'
+        ,cls: 'container form-with-labels'
+        ,defaults: { border: false ,msgTarget: 'under' }
         ,labelWidth: 150
         ,items: [{
             xtype: 'textfield'
@@ -198,21 +201,22 @@ MODx.panel.ChangeProfilePassword = function(config) {
             ,name: 'password_old'
             ,inputType: 'password'
             ,maxLength: 255
-            ,width: 300
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('password')
             ,name: 'password_new'
             ,inputType: 'password'
             ,maxLength: 255
-            ,width: 300
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('password_confirm')
             ,name: 'password_confirm'
+            ,id: 'modx-password-confirm'
             ,inputType: 'password'
             ,maxLength: 255
-            ,width: 300
+            ,anchor: '100%'
         }]
         ,buttons: [{
             text: _('save')

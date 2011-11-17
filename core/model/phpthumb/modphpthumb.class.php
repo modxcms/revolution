@@ -161,11 +161,11 @@ class modPhpThumb extends phpThumb {
             }
 
         } else {
-
+/*
             if (headers_sent()) {
                 $this->ErrorImage('Headers already sent ('.basename(__FILE__).' line '.__LINE__.')');
                 exit;
-            }
+            }*/
             $this->SendSaveAsFileHeaderIfNeeded();
 
             header('Last-Modified: '.gmdate('D, d M Y H:i:s', $nModified).' GMT');

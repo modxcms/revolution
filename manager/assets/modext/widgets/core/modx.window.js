@@ -124,13 +124,17 @@ Ext.extend(MODx.Window,Ext.Window,{
     ,createForm: function(config) {
         config = config || {};
         Ext.applyIf(config,{
-            labelAlign: this.config.labelAlign || 'right'
+            labelAlign: this.config.labelAlign || 'top'
             ,labelWidth: this.config.labelWidth || 100
+            ,labelSeparator: this.config.labelSeparator || ''
             ,frame: this.config.formFrame || true
-            ,border: false
-            ,bodyBorder: false
-            ,autoHeight: true
+            ,border: this.config.border || false
+            ,bodyBorder: this.config.bodyBorder || false
+            ,autoHeight: this.config.autoHeight || true
             ,errorReader: MODx.util.JSONReader
+            ,defaults: this.config.formDefaults || {
+                msgTarget: this.config.msgTarget || 'under'
+            }
             ,url: this.config.url
             ,baseParams: this.config.baseParams || {}
             ,fileUpload: this.config.fileUpload || false

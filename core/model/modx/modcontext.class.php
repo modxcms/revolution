@@ -7,14 +7,46 @@
 /**
  * Represents a virtual site context within a modX repository.
  *
+ * @property string $key The key of the context
+ * @property string $description The description of the context
+ * 
  * @package modx
  */
 class modContext extends modAccessibleObject {
+    /**
+     * An array of configuration options for this context
+     * @var array $config
+     */
     public $config= null;
+    /**
+     * The alias map for this context
+     * @var array $aliasMap
+     */
     public $aliasMap= null;
+    /**
+     * The resource map for all resources in this context
+     * @var array $resourceMap
+     */
     public $resourceMap= null;
+    /**
+     * A map of WebLink Resources with their target URLs
+     * @var array $webLinkMap
+     */
+    public $webLinkMap= null;
+    /**
+     * The event map for all events being executed in this context
+     * @var array $eventMap
+     */
     public $eventMap= null;
+    /**
+     * The plugin cache array for all plugins being fired in this context
+     * @var array $pluginCache
+     */
     public $pluginCache= null;
+    /**
+     * The key for the cache for this context
+     * @var string $_cacheKey
+     */
     protected $_cacheKey= '[contextKey]/context';
 
     /**
@@ -158,19 +190,20 @@ class modContext extends modAccessibleObject {
      *    http : URL is absolute, forced to http scheme
      *   https : URL is absolute, forced to https scheme
      * </pre>
+     * @param array $options An array of options for generating the Resource URL.
      * @return string The URL for the resource.
      */
-    public function makeUrl($id, $args = '', $scheme = -1) {
+    public function makeUrl($id, $args = '', $scheme = -1, array $options = array()) {
         $url = '';
         $found = false;
         if ($id= intval($id)) {
             if (is_object($this->xpdo->context) && $this->get('key') !== $this->xpdo->context->get('key')) {
-                $config = array_merge($this->xpdo->_systemConfig, $this->config, $this->xpdo->_userConfig);
+                $config = array_merge($this->xpdo->_systemConfig, $this->config, $this->xpdo->_userConfig, $options);
                 if ($scheme === -1 || $scheme === '' || strpos($scheme, 'abs') !== false) {
                     $scheme= 'full';
                 }
             } else {
-                $config = $this->xpdo->config;
+                $config = array_merge($this->xpdo->config, $options);
             }
 
             if ($config['friendly_urls'] == 1) {
@@ -191,34 +224,44 @@ class modContext extends modAccessibleObject {
             }
 
             if ($found) {
+                $target = null;
+                if (isset($config['use_weblink_target']) && !empty($config['use_weblink_target'])) {
+                    if (array_key_exists($id, $this->webLinkMap)) {
+                        $target = $this->webLinkMap[$id];
+                        if (!empty($target)) {
+                            $alias = $target;
+                        }
+                    }
+                }
+                $targetHasQS = (empty($config['friendly_urls']) || strpos($alias, '?') !== false);
                 if (is_array($args)) {
                     $args = modX::toQueryString($args);
                 }
-                if ($args != '' && $config['friendly_urls'] == 1) {
-                    /* add ? to $args if missing */
-                    $c= substr($args, 0, 1);
-                    if ($c == '&') {
-                        $args= '?' . substr($args, 1);
-                    } elseif ($c != '?') {
-                        $args= '?' . $args;
+                if ($args != '') {
+                    if (!$targetHasQS) {
+                        /* add ? to $args if missing */
+                        $c= substr($args, 0, 1);
+                        if ($c == '&') {
+                            $args= '?' . substr($args, 1);
+                        } elseif ($c != '?') {
+                            $args= '?' . $args;
+                        }
+                    } elseif ($args != '') {
+                        /* add & to $args if missing */
+                        $c= substr($args, 0, 1);
+                        if ($c == '?')
+                            $args= '&' . substr($args, 1);
+                        elseif ($c != '&') $args= '&' . $args;
                     }
                 }
-                elseif ($args != '') {
-                    /* add & to $args if missing */
-                    $c= substr($args, 0, 1);
-                    if ($c == '?')
-                        $args= '&' . substr($args, 1);
-                    elseif ($c != '&') $args= '&' . $args;
-                }
-
-                if ($config['friendly_urls'] == 1) {
+                if ($config['friendly_urls'] == 1 || $target !== null) {
                     $url= $alias . $args;
                 } else {
                     $url= $config['request_controller'] . '?' . $config['request_param_id'] . '=' . $id . $args;
                 }
 
                 $host= '';
-                if ($scheme !== -1 && $scheme !== '') {
+                if ($target === null && $scheme !== -1 && $scheme !== '') {
                     if ($scheme === 1 || $scheme === 0) {
                         $https_port= $this->getOption('https_port',$config,443);
                         $isSecure= ($_SERVER['SERVER_PORT'] == $https_port || (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'])=='on')) ? 1 : 0;

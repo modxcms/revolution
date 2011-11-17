@@ -13,7 +13,7 @@
 $_lang['about_msg'] = 'MODX is een <a href="http://modxcms.com/" target="_blank">PHP Application Framework en Content Management Systeem</a> gelicenseerd onder de <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> en/of welke latere versie dan ook.';
 $_lang['about_title'] = 'Over MODX';
 $_lang['credits'] = 'Credits';
-$_lang['credits_mysql'] = 'MODX wordt aangedreven door <a href="http://www.mysql.com" target="_blank">MySQL</a>.';
+$_lang['credits_database'] = 'MODX wordt aangedreven door <a href="http://www.mysql.com" target="_blank">MySQL</a> of <a href="http://www.microsoft.com/sqlserver/" target="_blank">Microsoft SQL Server</a>.';
 $_lang['credits_php'] = 'MODX wordt aangedreven door <a href="http://www.php.net" target="_blank">PHP</a>.';
 $_lang['credits_sencha'] = 'MODX gebruikt <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> in zijn standaard manager UI.';
 $_lang['credits_smarty'] = 'MODX gebruikt <a href="http://www.smarty.net/" target="_blank">Smarty</a> in zijn standaard manager UI.</li><li><h2>Vertaling</h2><p>De Nederlandse vertaling van MODX is verzorgd door <a href="http://www.sterc.nl" target="_blank" title="Sterc - Internet & Marketing">Sterc - Internet & Marketing</a>.</p>';

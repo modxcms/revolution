@@ -22,13 +22,12 @@ $_lang['login_err_unknown'] = 'Er is een onbekende fout opgetreden tijdens het i
 $_lang['login_forget_your_login'] = 'Je inlogaccount vergeten?';
 $_lang['login_hostname_error'] = 'Je hostnaam wijst niet terug naar jouw IP adres.';
 $_lang['login_message'] = 'Vul je inloggegevens in om jouw Manager sessie te starten. Je gebruikersnaam en wachtwoord zijn hoofdlettergevoelig, dus vul het met zorg in!';
-$_lang['login_modx_support'] = '<p>Ondersteund door:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
 $_lang['login_password'] = 'Wachtwoord: ';
 $_lang['login_password_reset_act_sent'] = 'Wachtwoord herstel e-mail is verstuurd. Controleer je e-mail inbox.';
 $_lang['login_remember'] = 'Onthoud mij';
 $_lang['login_send_activation_email'] = 'Stuur activatie e-mail';
 $_lang['login_title'] = 'MODX CMF Manager Login';
 $_lang['login_user_err_nf_email'] = 'Gebruiker niet gevonden met deze e-mail. Probeer het nog eens.';
-$_lang['login_username'] = 'Gebruikersnaam: ';
+$_lang['login_username'] = 'Gebruiker: ';
 $_lang['login_username_password_incorrect'] = 'De gebruikersnaam of het wachtwoord zijn niet correct. Controleer de gebruikersnaam, type het wachtwoord en probeer het nog eens.';
 $_lang['login_user_inactive'] = 'Je gebruikersaccount is uitgeschakeld. Neem contact op met je systeembeheerder om je account in te schakelen.';

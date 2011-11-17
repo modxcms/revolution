@@ -8,6 +8,7 @@ MODx.panel.ContentType = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-content-type'
+		,cls: 'container'
         ,url: MODx.config.connectors_url+'system/contenttype.php'
         ,baseParams: {
             action: 'updateFromGrid'
@@ -21,14 +22,15 @@ MODx.panel.ContentType = function(config) {
         },{
             layout: 'form'
             ,itemId: 'form'
-            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('content_type_desc')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,itemId: 'description'
                 ,border: false
             },{
                 xtype: 'modx-grid-content-type'
                 ,itemId: 'grid'
+				,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]
@@ -146,7 +148,7 @@ MODx.window.CreateContentType = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             fieldLabel: _('mime_type')
@@ -154,7 +156,7 @@ MODx.window.CreateContentType = function(config) {
             ,id: 'modx-'+this.ident+'-mime-type'
             ,xtype: 'textfield'
             ,description: _('mime_type_desc')
-            ,width: 200
+            ,anchor: '100%'
             ,allowBlank: false
         },{
             fieldLabel: _('file_extensions')
@@ -162,7 +164,7 @@ MODx.window.CreateContentType = function(config) {
             ,id: 'modx-'+this.ident+'-file-extensions'
             ,xtype: 'textfield'
             ,description: _('file_extensions_desc')
-            ,width: 200
+            ,anchor: '100%'
             ,allowBlank: true
         },{
             xtype: 'combo-boolean'
@@ -171,14 +173,14 @@ MODx.window.CreateContentType = function(config) {
             ,hiddenName: 'binary'
             ,id: 'modx-'+this.ident+'-binary'
             ,description: _('binary_desc')
-            ,width: 60
+            ,width: 100
             ,value: 0
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '100%'
             ,grow: true
         }]
     });

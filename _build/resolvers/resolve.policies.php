@@ -13,6 +13,8 @@ $map = array(
     'Load, List and View' => 'ObjectTemplate',
     'Object' => 'ObjectTemplate',
     'Element' => 'ElementTemplate',
+    'Media Source Admin' => 'MediaSourceTemplate',
+    'Media Source User' => 'MediaSourceTemplate',
 );
 
 $policies = $transport->xpdo->getCollection('modAccessPolicy');

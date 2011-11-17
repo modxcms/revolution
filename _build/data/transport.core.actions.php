@@ -484,5 +484,81 @@ $collection['85']->fromArray(array (
   'assets' => '',
   'help_url' => 'Form+Customization+Sets',
 ), '', true, true);
+$collection['101']= $xpdo->newObject('modAction');
+$collection['101']->fromArray(array (
+  'id' => 101,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/update',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboards',
+), '', true, true);
+$collection['102']= $xpdo->newObject('modAction');
+$collection['102']->fromArray(array (
+  'id' => 102,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/create',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboards',
+), '', true, true);
+$collection['103']= $xpdo->newObject('modAction');
+$collection['103']->fromArray(array (
+  'id' => 103,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/widget/update',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboard+Widgets',
+), '', true, true);
+$collection['104']= $xpdo->newObject('modAction');
+$collection['104']->fromArray(array (
+  'id' => 104,
+  'namespace' => 'core',
+  'parent' => 100,
+  'controller' => 'system/dashboards/widget/create',
+  'haslayout' => 1,
+  'lang_topics' => 'dashboards,user',
+  'assets' => '',
+  'help_url' => 'Dashboard+Widgets',
+), '', true, true);
+$collection['105']= $xpdo->newObject('modAction');
+$collection['105']->fromArray(array (
+  'id' => 105,
+  'namespace' => 'core',
+  'parent' => 101,
+  'controller' => 'source/create',
+  'haslayout' => 1,
+  'lang_topics' => 'sources,namespace',
+  'assets' => '',
+  'help_url' => 'Media+Sources',
+), '', true, true);
+$collection['106']= $xpdo->newObject('modAction');
+$collection['106']->fromArray(array (
+  'id' => 106,
+  'namespace' => 'core',
+  'parent' => 101,
+  'controller' => 'source/update',
+  'haslayout' => 1,
+  'lang_topics' => 'sources,namespace',
+  'assets' => '',
+  'help_url' => 'Media+Sources',
+), '', true, true);
+$collection['107']= $xpdo->newObject('modAction');
+$collection['107']->fromArray(array (
+  'id' => 107,
+  'namespace' => 'core',
+  'parent' => 70,
+  'controller' => 'system/file/create',
+  'haslayout' => 1,
+  'lang_topics' => 'file',
+  'assets' => '',
+), '', true, true);
 
 return $collection;

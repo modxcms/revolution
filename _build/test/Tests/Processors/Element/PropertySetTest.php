@@ -37,35 +37,36 @@ class PropertySetProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::_getConnection();
-        $modx->error->reset();
-        $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet'));
-        if ($propertyset) $propertyset->remove();
-        $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet2'));
-        if ($propertyset) $propertyset->remove();
-        $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet3'));
-        if ($propertyset) $propertyset->remove();
+    public function setUp() {
+        parent::setUp();
+        /** @var modPropertySet $propertySet */
+        $propertySet = $this->modx->newObject('modPropertySet');
+        $propertySet->fromArray(array('name' => 'UnitTestPropertySet'));
+        $propertySet->save();
     }
 
     /**
      * Cleanup data after this test.
      */
-    public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
-        $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet'));
-        if ($propertyset) $propertyset->remove();
-        $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet2'));
-        if ($propertyset) $propertyset->remove();
-        $propertyset = $modx->getObject('modPropertySet',array('name' => 'UnitTestPropertySet3'));
-        if ($propertyset) $propertyset->remove();
+    public function tearDown() {
+        parent::tearDown();
+        $propertySets = $this->modx->getCollection('modPropertySet',array('name:LIKE' => '%UnitTest%'));
+        /** @var modPropertySet $propertySet */
+        foreach ($propertySets as $propertySet) {
+            $propertySet->remove();
+        }
+        $this->modx->error->reset();
     }
 
     /**
      * Tests the element/propertyset/create processor, which creates a PropertySet
+     *
+     * @param boolean $shouldPass
+     * @param string $propertySetPk
      * @dataProvider providerPropertySetCreate
      */
     public function testPropertySetCreate($shouldPass,$propertySetPk) {
+        /** @var modProcessorResponse $result */
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
             'name' => $propertySetPk,
         ));
@@ -80,12 +81,13 @@ class PropertySetProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/propertyset/create processor test.
+     * @return array
      */
     public function providerPropertySetCreate() {
         return array(
-            array(true,'UnitTestPropertySet'), /* pass: 1st propertyset */
-            array(true,'UnitTestPropertySet2'), /* pass: 2nd propertyset */
-            array(false,'UnitTestPropertySet2'), /* fail: already exists */
+            array(true,'UnitTestPropertySet2'), /* pass: 1st propertyset */
+            array(true,'UnitTestPropertySet3'), /* pass: 2nd propertyset */
+            array(false,'UnitTestPropertySet'), /* fail: already exists */
             array(false,''), /* fail: no data */
         );
     }
@@ -93,6 +95,9 @@ class PropertySetProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the element/propertyset/duplicate processor, which duplicates a PropertySet
+     * @param boolean $shouldPass
+     * @param string $propertySetPk
+     * @param string $newName
      * @depends testPropertySetCreate
      * @dataProvider providerPropertySetDuplicate
      */
@@ -100,7 +105,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
         $propertySet = $this->modx->getObject('modPropertySet',array('name' => $propertySetPk));
         if (empty($propertySet) && $shouldPass) {
             $this->fail('No PropertySet found "'.$propertySetPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'duplicate',array(
@@ -109,7 +114,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
         ));
         if (empty($result)) {
             $this->fail('Could not load '.self::PROCESSOR_LOCATION.'duplicate processor');
-            return false;
+            return;
         }
         $s = $this->checkForSuccess($result);
         $ct = $this->modx->getObject('modPropertySet',array('name' => $newName));
@@ -122,6 +127,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/propertyset/duplicate processor test.
+     * @return array
      */
     public function providerPropertySetDuplicate() {
         return array(
@@ -133,6 +139,9 @@ class PropertySetProcessorsTest extends MODxTestCase {
     }
     /**
      * Tests the element/propertyset/get processor, which gets a PropertySet
+     *
+     * @param boolean $shouldPass
+     * @param string $propertySetPk
      * @depends testPropertySetCreate
      * @dataProvider providerPropertySetGet
      */
@@ -140,7 +149,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
         $propertyset = $this->modx->getObject('modPropertySet',array('name' => $propertySetPk));
         if (empty($propertyset) && $shouldPass) {
             $this->fail('No PropertySet found "'.$propertySetPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
@@ -155,6 +164,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/propertyset/create processor test.
+     * @return array
      */
     public function providerPropertySetGet() {
         return array(
@@ -167,6 +177,11 @@ class PropertySetProcessorsTest extends MODxTestCase {
     /**
      * Attempts to get a list of propertysets
      *
+     * @param boolean $shouldPass
+     * @param string $sort
+     * @param string $dir
+     * @param int $limit
+     * @param int $start
      * @depends testPropertySetCreate
      * @dataProvider providerPropertySetGetList
      */
@@ -184,6 +199,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/propertyset/getlist processor test.
+     * @return array
      */
     public function providerPropertySetGetList() {
         return array(
@@ -196,6 +212,8 @@ class PropertySetProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the element/propertyset/remove processor, which removes a PropertySet
+     * @param boolean $shouldPass
+     * @param string $propertySetPk
      * @depends testPropertySetCreate
      * @dataProvider providerPropertySetRemove
      */
@@ -203,7 +221,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
         $propertyset = $this->modx->getObject('modPropertySet',array('name' => $propertySetPk));
         if (empty($propertyset) && $shouldPass) {
             $this->fail('No PropertySet found "'.$propertySetPk.'" as specified in test provider.');
-            return false;
+            return;
         }
 
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
@@ -218,6 +236,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
     }
     /**
      * Data provider for element/propertyset/remove processor test.
+     * @return array
      */
     public function providerPropertySetRemove() {
         return array(

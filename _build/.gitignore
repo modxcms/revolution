@@ -7,3 +7,4 @@ image/
 distrib/
 test/properties.inc.php
 docs/build/
+docs/log/

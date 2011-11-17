@@ -2,10 +2,14 @@
 /**
  * Update documents in a resource group
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var modProcessor $this
+ * 
  * @package modx
- * @subpackage processors.security.documentgroup
+ * @subpackage processors.security.resourcegroup
  */
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('resourcegroup_resource_edit')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource','access');
 
 /* format data */
@@ -14,11 +18,11 @@ $scriptProperties['resourceGroup'] = substr(strrchr($scriptProperties['resourceG
 
 if (empty($scriptProperties['resource']) || empty($scriptProperties['resourceGroup'])) return $modx->error->failure('Invalid data.');
 
-/* get resource */
+/* @var modResource $resource */
 $resource = $modx->getObject('modResource',$scriptProperties['resource']);
 if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['resource'])));
 
-/* get resource group */
+/* @var modResourceGroup $resourceGroup */
 $resourceGroup = $modx->getObject('modResourceGroup',$scriptProperties['resourceGroup']);
 if ($resourceGroup == null) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
 
@@ -30,12 +34,19 @@ $alreadyExists = $modx->getObject('modResourceGroupResource',array(
 if ($alreadyExists) return $modx->error->failure($modx->lexicon('resource_group_resource_err_ae'));
 
 /* create resource group -> resource pairing */
+/** @var $resourceGroupResource modResourceGroupResource */
 $resourceGroupResource = $modx->newObject('modResourceGroupResource');
 $resourceGroupResource->set('document',$resource->get('id'));
 $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
 
 if ($resourceGroupResource->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_group_resource_err_create'));
+} else {
+    $modx->invokeEvent('OnResourceAddToResourceGroup',array(
+        'mode' => 'resource-group-tree-drag',
+        'resource' => &$resource,
+        'resourceGroup' => &$resourceGroup,
+    ));
 }
 
 return $modx->error->success('',$resourceGroupResource);

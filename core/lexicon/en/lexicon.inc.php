@@ -30,5 +30,6 @@ $_lang['lexicon_management'] = 'Lexicon Management';
 $_lang['lexicon_management_desc'] = 'Here you can override any Lexicon Entries across Namespaces and their respective Topics. Just double-click on any Entry\'s value to override it. To add new Lexicon Entries or Topics, just create their Topic files in their Namespace\'s respective directory.';
 $_lang['lexicon_rlfb_msg'] = 'Successfully regenerated [[+num]] strings.';
 $_lang['reload_from_base'] = 'Revert All Core Entries';
+$_lang['reload_success'] = 'Successfully reloaded [[+total]] strings.';
 $_lang['search_by_key'] = 'Search by Key:';
 $_lang['topic'] = 'Topic';

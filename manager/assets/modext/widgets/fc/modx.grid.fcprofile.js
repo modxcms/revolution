@@ -2,6 +2,7 @@ MODx.panel.FCProfiles = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-fc-profiles'
+		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
              html: '<h2>'+_('form_customization')+'</h2>'
@@ -10,16 +11,17 @@ MODx.panel.FCProfiles = function(config) {
             ,id: 'modx-fcp-header'
         },MODx.getPageStructure([{
             title: _('profiles')
-            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
 			,layout: "form"
             ,items: [{
                 html: '<p>'+_('form_customization_msg')+'</p>'
+				,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 title: ''
                 ,preventRender: true
                 ,xtype: 'modx-grid-fc-profile'
+				,cls:'main-wrapper'
             }]
         }],{
             id: 'modx-form-customization-tabs'
@@ -92,7 +94,7 @@ MODx.grid.FCProfile = function(config) {
                 ,handler: this.removeSelected
                 ,scope: this
             }]
-        },{
+        },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-fcp-search'
@@ -326,24 +328,25 @@ MODx.window.CreateFCProfile = function(config) {
             ,fieldLabel: _('name')
             ,id: 'modx-fccp-name'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
 
         },{
             xtype: 'textarea'
             ,name: 'description'
             ,fieldLabel: _('description')
             ,id: 'modx-fccp-description'
-            ,anchor: '90%'
+            ,anchor: '100%'
 
         },{
             xtype: 'xcheckbox'
-            ,fieldLabel: _('active')
+            ,boxLabel: _('active')
+            ,hideLabel: true
             ,name: 'active'
             ,id: 'modx-fccp-active'
             ,inputValue: 1
             ,value: 1
             ,checked: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateFCProfile.superclass.constructor.call(this,config);

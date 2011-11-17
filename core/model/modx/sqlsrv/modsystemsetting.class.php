@@ -4,6 +4,10 @@
  * @subpackage sqlsrv
  */
 require_once (dirname(dirname(__FILE__)) . '/modsystemsetting.class.php');
+/**
+ * @package modx
+ * @subpackage sqlsrv
+ */
 class modSystemSetting_sqlsrv extends modSystemSetting {
     public static function listSettings(xPDO &$xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         /* build query */

@@ -4,6 +4,10 @@
  * @subpackage registry.db.mysql
  */
 require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/moddbregistermessage.class.php');
+/**
+ * @package modx
+ * @subpackage mysql
+ */
 class modDbRegisterMessage_mysql extends modDbRegisterMessage {
     public static function getValidMessages(modDbRegister &$register, $topic, $topicBase, $topicMsg, $limit, array $options = array()) {
         $messages = array();

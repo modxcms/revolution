@@ -19,5 +19,5 @@ foreach ($options as $option) {
     );
 }
 
-$this->xpdo->smarty->assign('opts',$items);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/listbox-multiple.tpl');
+$this->xpdo->controller->setPlaceholder('opts',$items);
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/listbox-multiple.tpl');

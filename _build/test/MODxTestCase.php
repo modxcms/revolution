@@ -26,28 +26,41 @@
  *
  * @package modx-test
  */
-class MODxTestCase extends PHPUnit_Framework_TestCase {
-
-    protected $modx = null;
+abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
+    /**
+     * @var modX $modx
+     */
+    public $modx = null;
+    /**
+     * @var bool
+     */
+    public $debug = false;
 
     /**
      * Ensure all tests have a reference to the MODX object
      */
     public function setUp() {
-        $this->modx =& MODxTestHarness::_getConnection();
+        $this->modx =& MODxTestHarness::getFixture('modX', 'modx');
+        if ($this->modx->request) {
+            $this->modx->request->loadErrorHandler();
+            $this->modx->error->reset();
+        }
+        /* setup some basic test-environment options to allow us to simulate a site */
+        $this->modx->setOption('http_host','unit.modx.com');
+        $this->modx->setOption('base_url','/');
+        $this->modx->setOption('site_url','http://unit.modx.com/');
     }
 
     /**
      * Remove reference at end of test case
      */
-    public function tearDown() {
-        $this->modx = null;
-    }
+    public function tearDown() {}
 
     /**
      * Check a MODX return result for a success flag
      *
-     * @param array $result The result response
+     * @param modProcessorResponse $result The result response
+     * @return boolean
      */
     public function checkForSuccess(&$result) {
         if (empty($result) || !($result instanceof modProcessorResponse)) return false;

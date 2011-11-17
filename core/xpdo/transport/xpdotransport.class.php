@@ -56,6 +56,8 @@ class xPDOTransport {
     const UNINSTALL_OBJECT = 'uninstall_object';
     const ARCHIVE_WITH = 'archive_with';
     const ABORT_INSTALL_ON_VEHICLE_FAIL = 'abort_install_on_vehicle_fail';
+    const PACKAGE_NAME = 'package_name';
+    const PACKAGE_VERSION = 'package_version';
     /**
      * Indicates how pre-existing objects are treated on install/uninstall.
      * @var integer
@@ -98,6 +100,16 @@ class xPDOTransport {
      */
     public $signature= null;
     /**
+     * A unique name used to identify the package without the version.
+     * @var string
+     */
+    public $name= null;
+    /**
+     * The package version, as a PHP-standardized version number string.
+     * @var string
+     */
+    public $version= null;
+    /**
      * Indicates the state of the xPDOTransport instance.
      * @var integer
      */
@@ -129,16 +141,78 @@ class xPDOTransport {
     public $_preserved = array();
 
     /**
+     * Parse the name and version from a package signature.
+     *
+     * @static
+     * @param string $signature The package signature to parse.
+     * @return array An array with two elements containing the name and version respectively.
+     */
+    public static function parseSignature($signature) {
+        $exploded = explode('-', $signature);
+        $name = current($exploded);
+        $version = '';
+        $part = next($exploded);
+        while ($part !== false) {
+            $dotPos = strpos($part, '.');
+            if ($dotPos > 0 && is_numeric(substr($part, 0, $dotPos))) {
+                $version = $part;
+                while (($part = next($exploded)) !== false) {
+                    $version .= '-' . $part;
+                }
+                break;
+            } else {
+                $name .= '-' . $part;
+                $part = next($exploded);
+            }
+        }
+        return array(
+            $name,
+            $version
+        );
+    }
+
+    /**
+     * Compares two package versions by signature.
+     *
+     * @static
+     * @param $signature1 A package signature.
+     * @param $signature2 Another package signature to compare.
+     * @return bool|int Returns -1 if the first version is lower than the second, 0 if they
+     * are equal, and 1 if the second is lower if the package names in the provided
+     * signatures are equal; otherwise returns false.
+     */
+    public static function compareSignature($signature1, $signature2) {
+        $value = false;
+        $parsed1 = self::parseSignature($signature1);
+        $parsed2 = self::parseSignature($signature2);
+        if ($parsed1[0] === $parsed2[0]) {
+            $value = version_compare($parsed1[1], $parsed2[1]);
+        }
+        return $value;
+    }
+
+    /**
      * Prepares and returns a new xPDOTransport instance.
      *
      * @param xPDO &$xpdo The xPDO instance accessing this package.
      * @param string $signature The unique signature of the package.
      * @param string $path Valid path to the physical transport package.
+     * @param array $options An optional array of attributes for constructing the instance.
      */
-    public function __construct(& $xpdo, $signature, $path) {
+    public function __construct(& $xpdo, $signature, $path, array $options = array()) {
         $this->xpdo= & $xpdo;
         $this->signature= $signature;
         $this->path= $path;
+        if (!empty($options) && array_key_exists(self::PACKAGE_NAME, $options) && array_key_exists(self::PACKAGE_VERSION, $options)) {
+            $this->name= $options[self::PACKAGE_NAME];
+            $this->version= $options[self::PACKAGE_VERSION];
+        } else {
+            $nameAndVersion= self::parseSignature($this->signature);
+            if (count($nameAndVersion) == 2) {
+                $this->name= $nameAndVersion[0];
+                $this->version= $nameAndVersion[1];
+            }
+        }
         $xpdo->loadClass('transport.xPDOVehicle', XPDO_CORE_PATH, true, true);
     }
 

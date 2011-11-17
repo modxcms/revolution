@@ -38,7 +38,8 @@ class modManagerRequest extends modRequest {
     /**
      * Instantiates a modManagerRequest object.
      *
-     * {@inheritdoc}
+     * @param modX $modx
+     * @return modManagerRequest
      */
     function __construct(modX & $modx) {
         parent :: __construct($modx);
@@ -69,7 +70,7 @@ class modManagerRequest extends modRequest {
         $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty/'.$theme.'/');
 
         $this->modx->smarty->assign('_config',$this->modx->config);
-        $this->modx->smarty->assign_by_ref('modx',$this->modx);
+        $this->modx->smarty->assignByRef('modx',$this->modx);
 
         /* send anti caching headers */
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -95,16 +96,6 @@ class modManagerRequest extends modRequest {
 
         /* load default core cache file of lexicon strings */
         $this->modx->lexicon->load('core:default');
-
-        /* if not validated, load login page */
-        if (!isset($this->modx->user) || !$this->modx->user->isAuthenticated('mgr')) {
-            $modx = & $this->modx;
-            $modx->request =& $this;
-            $theme = $this->modx->getOption('manager_theme',null,'default');
-            require $this->modx->getOption('manager_path') . 'controllers/'.$theme.'/security/login.php';
-            @session_write_close();
-            exit();
-        }
 
         if ($this->modx->actionMap === null || !is_array($this->modx->actionMap)) {
             $this->loadActionMap();
@@ -134,10 +125,10 @@ class modManagerRequest extends modRequest {
     }
 
     /**
-     * {@inheritdoc}
-     *
      * This implementation adds register logging capabilities via $_POST vars
      * when the error handler is loaded.
+     *
+     * @param string $class
      */
     public function loadErrorHandler($class = 'modError') {
         parent :: loadErrorHandler($class);

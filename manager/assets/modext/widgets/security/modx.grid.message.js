@@ -6,6 +6,7 @@ MODx.panel.Messages = function(config) {
         ,url: MODx.config.connectors_url+'security/message.php'
         ,layout: 'fit'
         ,bodyStyle: 'background: none;'
+        ,cls: 'container'
         ,border: false
         ,items: [{
             html: '<h2>'+_('messages')+'</h2>'
@@ -52,7 +53,7 @@ MODx.grid.Message = function(config) {
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<span style="float: right;">'
-            ,'<i>'+_('sent_by')+': {sender_name} <br />'+_('sent_on')+': {postdate}</i><br /><br />'
+            ,'<i>'+_('sent_by')+': {sender_name} <br />'+_('sent_on')+': {date_sent}</i><br /><br />'
             ,'</span>'
             ,'<h3>{subject}</h3>'
             ,'<p>{message}</p>'

@@ -69,7 +69,7 @@ foreach ($options as $tag) {
     $i++;
 }
 
-$this->xpdo->smarty->assign('cbdefaults',implode(',',$defaults));
-$this->xpdo->smarty->assign('opts',$opts);
+$this->xpdo->controller->setPlaceholder('cbdefaults',implode(',',$defaults));
+$this->xpdo->controller->setPlaceholder('opts',$opts);
 
-return $this->xpdo->smarty->fetch('element/tv/renders/input/autotag.tpl');
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/autotag.tpl');

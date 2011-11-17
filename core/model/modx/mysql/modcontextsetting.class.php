@@ -4,6 +4,10 @@
  * @subpackage mysql
  */
 include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../modcontextsetting.class.php');
+/**
+ * @package modx
+ * @subpackage mysql
+ */
 class modContextSetting_mysql extends modContextSetting {
     public static function listSettings(xPDO &$xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         /* build query */

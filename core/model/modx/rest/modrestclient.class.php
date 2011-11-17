@@ -67,6 +67,11 @@ class modRestClient {
      * @var string The expected response type
      */
     public $responseType = 'xml';
+    /**
+     * The current host to connect to
+     * @var string $host
+     */
+    public $host;
 
     /**
      * The constructor for the modRestClient class. Assigns a modX instance
@@ -94,13 +99,14 @@ class modRestClient {
      * @return boolean True if a connection can be made.
      */
     public function getConnection() {
+        $className = false;
         if (function_exists('curl_init')) {
             $className = $this->modx->loadClass('rest.modRestCurlClient','',false,true);
         } else if (function_exists('fsockopen')) {
             $className = $this->modx->loadClass('rest.modRestSockClient','',false,true);
         }
 
-        if ($className) {
+        if (!empty($className)) {
             $this->conn = new $className($this->modx,$this->config);
         }
         return is_object($this->conn);

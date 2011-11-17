@@ -11,6 +11,7 @@ $xpdo_meta_map['modContext']= array (
   array (
     'key' => NULL,
     'description' => NULL,
+    'rank' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -27,6 +28,15 @@ $xpdo_meta_map['modContext']= array (
       'dbtype' => 'tinytext',
       'phptype' => 'string',
     ),
+    'rank' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -39,6 +49,22 @@ $xpdo_meta_map['modContext']= array (
       'columns' => 
       array (
         'key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'rank' => 
+    array (
+      'alias' => 'rank',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'rank' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -60,6 +86,14 @@ $xpdo_meta_map['modContext']= array (
     'ContextSettings' => 
     array (
       'class' => 'modContextSetting',
+      'local' => 'key',
+      'foreign' => 'context_key',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'SourceElements' => 
+    array (
+      'class' => 'sources.modMediaSourceElement',
       'local' => 'key',
       'foreign' => 'context_key',
       'cardinality' => 'many',

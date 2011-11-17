@@ -41,6 +41,6 @@ foreach ($options as $option) {
     );
     $i++;
 }
-$this->xpdo->smarty->assign('cbdefaults',implode(',',$defaults));
-$this->xpdo->smarty->assign('opts',$items);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/checkbox.tpl');
+$this->xpdo->controller->setPlaceholder('cbdefaults',implode(',',$defaults));
+$this->xpdo->controller->setPlaceholder('opts',$items);
+return $this->xpdo->controller->fetchTemplate('element/tv/renders/input/checkbox.tpl');

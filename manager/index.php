@@ -53,7 +53,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 }
 
 /* create the modX object */
-$modx= new modX();
+$modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 if (!is_object($modx) || !($modx instanceof modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
@@ -61,9 +61,6 @@ if (!is_object($modx) || !($modx instanceof modX)) {
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }
-$modx->setDebug(E_ALL | E_STRICT);
-$modx->setLogLevel(modX::LOG_LEVEL_ERROR);
-$modx->setLogTarget('FILE');
 
 $modx->initialize('mgr');
 

@@ -1,0 +1,41 @@
+<!--
+ MODX Revolution
+
+ Copyright 2006-2011 by MODX, LLC. All rights reserved.
+
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ details.
+
+ You should have received a copy of the GNU General Public License along with
+ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ Place, Suite 330, Boston, MA 02111-1307 USA
+
+
+ An example configuration xml file for the standard upgrade for CLI MODX installs.
+-->
+<modx>
+    <!-- Set this to 1 if you are using MODX from Git or extracted it from the full MODX package to the server prior
+         to installation. -->
+    <inplace>0</inplace>
+
+    <!-- Set this to 1 if you have manually extracted the core package from the file core/packages/core.transport.zip.
+         This will reduce the time it takes for the installation process on systems that do not allow the PHP time_limit
+         and Apache script execution time settings to be altered. -->
+    <unpacked>0</unpacked>
+
+    <!-- The language to upgrade MODX for. This will set the default manager language to this. Use IANA codes. -->
+    <language>en</language>
+
+    <!-- Paths for your MODX core directory -->
+    <core_path>/www/modx/core/</core_path>
+
+    <!-- Whether or not to remove the setup/ directory after installation. -->
+    <remove_setup_directory>1</remove_setup_directory>
+</modx>

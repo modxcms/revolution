@@ -27,7 +27,7 @@ $xpdo_meta_map['modContextResource']= array (
       'dbtype' => 'int',
       'precision' => '11',
       'attributes' => 'unsigned',
-      'phptype' => 'string',
+      'phptype' => 'integer',
       'null' => false,
       'index' => 'pk',
     ),

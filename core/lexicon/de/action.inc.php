@@ -29,6 +29,7 @@ $_lang['action_remove'] = 'Aktion löschen';
 $_lang['action_update'] = 'Aktion bearbeiten';
 $_lang['actions'] = 'Aktionen';
 $_lang['controller'] = 'Controller';
+$_lang['controller_err_ae'] = 'Ein Controller mit diesem Pfad existiert bereits für diesen Namensraum.';
 $_lang['controller_err_nf'] = 'Controller-Datei nicht gefunden!';
 $_lang['controller_err_ns'] = 'Kein Controller angegeben!';
 $_lang['controller_parent'] = 'Eltern-Controller';

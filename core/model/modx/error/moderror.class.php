@@ -112,7 +112,9 @@ class modError {
      */
     protected function _validate() {
         $s = '';
+        /** @var xPDOObject $obj */
         foreach ($this->_objects as $obj) {
+            /** @var modValidator $validator */
             if ($validator= $obj->getValidator()) {
                 $messages= $validator->getMessages();
                 if (!empty($messages)) {
@@ -282,7 +284,7 @@ class modError {
      * This function also makes sure that any members of the array are not PHP
      * resource types (e.g. database connections, file handles, etc.).
      *
-     * @param array|object $object An array or object to process.
+     * @param array|xPDOObject|object $object An array or object to process.
      * @return array Returns an array representation of the object(s).
      */
     public function toArray($object) {

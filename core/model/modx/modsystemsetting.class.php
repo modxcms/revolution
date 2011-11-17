@@ -1,10 +1,59 @@
 <?php
 /**
+ * @package modx
+ */
+/**
  * Represents a system configuration setting.
  *
+ * @property string $key The key of the Setting
+ * @property string $value The value of the Setting
+ * @property string $xtype The xtype that is used to render the Setting input in the manager
+ * @property string $namespace The Namespace of the setting
+ * @property string $area The area of the Setting
+ * @property timestamp $editedon The last edited on time of this Setting
+ * @see modContextSetting
+ * @see modUserSetting
  * @package modx
  */
 class modSystemSetting extends xPDOObject {
+
+
+    public function save($cacheFlag= null) {
+        $saved = parent::save($cacheFlag);
+        if ($saved) {
+            $this->clearCache();
+        }
+        return $saved;
+    }
+
+    public function remove(array $ancestors = array()) {
+        $removed = parent::remove();
+        if ($removed) {
+            $this->clearCache();
+        }
+        return $removed;
+    }
+
+    public function clearCache() {
+        if ($this->xpdo->getCacheManager()) {
+            $this->xpdo->cacheManager->deleteTree($this->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
+               'deleteTop' => false,
+                'skipDirs' => false,
+                'extensions' => array('.cache.php','.php'),
+            ));
+            if ($this->xpdo instanceof modX) {
+                $this->xpdo->reloadConfig();
+            }
+        }
+    }
+    /**
+     * Update the translation for the setting
+     *
+     * @param string $key The key of the Setting to update
+     * @param string $value The value of the Setting to update
+     * @param array $options An array of options for the update
+     * @return bool
+     */
     public function updateTranslation($key,$value = '',array $options = array()) {
         if (!is_array($options) || empty($options)) return false;
         
