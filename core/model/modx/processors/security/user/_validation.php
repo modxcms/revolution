@@ -1,7 +1,7 @@
 <?php
 /**
  * Handles common validation for user processors
- * 
+ *
  * @package modx
  */
 class modUserValidation {
