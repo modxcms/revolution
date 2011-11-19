@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-10-23
+ * @updated 2010-11-19
  */
 // $_lang['about'] = 'About';
 $_lang['about'] = 'O MODX Revolution';
@@ -49,7 +49,7 @@ $_lang['dashboard'] = 'Nástěnka';
 $_lang['dashboards'] = 'Nástěnky';
 
 // $_lang['dashboards_desc'] = 'Manage all dashboard configurations.';
-$_lang['dashboards_desc'] = 'Spravovat nastavení všech nástěnek.';
+$_lang['dashboards_desc'] = 'Správa nastavení všech nástěnek.';
 
 // $_lang['edit_menu'] = 'Actions';
 $_lang['edit_menu'] = 'Akce';
@@ -118,7 +118,7 @@ $_lang['import_site'] = 'Importovat HTML';
 $_lang['import_site_desc'] = 'Dávkové importování HTML souborů do portálu.';
 
 // $_lang['jira'] = 'Bugs';
-$_lang['jira'] = 'JIRA';
+$_lang['jira'] = 'Chyby';
 
 // $_lang['jira_desc'] = 'Launch the MODX bugtracker to track and file bugs.';
 $_lang['jira_desc'] = 'Spustit MODX bugtracker pro sledování chyb.';
@@ -133,7 +133,7 @@ $_lang['lexicon_management_desc'] = 'Úprava všech jazykových záznamů pro MO
 $_lang['logout_desc'] = 'Odhlášení z MODX správce obsahu.';
 
 // $_lang['manage_workspaces'] = 'Package Management';
-$_lang['manage_workspaces'] = 'Správa balíčků';
+$_lang['manage_workspaces'] = 'Správce balíčků';
 
 // $_lang['manage_workspaces_desc'] = 'Download 3rd Party Components, add Providers, and install packages.';
 $_lang['manage_workspaces_desc'] = 'Stáhování komponent třetích stran, přidávání poskytovatelů a instalace balíčků.';
@@ -190,7 +190,7 @@ $_lang['policy_management_desc'] = 'Vytvoření a úprava práv pro bezpečnost 
 $_lang['preview'] = 'Náhled';
 
 // $_lang['preview_desc'] = 'Loads your home page in a new window.';
-$_lang['preview_desc'] = 'Načtení úvodní stránky do nového okna.';
+$_lang['preview_desc'] = 'Načtení úvodní stránky do nového okna/záložky prohlížeče.';
 
 // $_lang['profile'] = 'Profile';
 $_lang['profile'] = 'Profil';

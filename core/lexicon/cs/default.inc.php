@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -874,7 +874,7 @@ $_lang['permissions'] = 'Přístup';
 $_lang['permission_denied'] = 'Přístup zamezen!';
 
 // $_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
-$_lang['permission_denied_msg'] = 'Nemáte oprávnění pro zobrazení této stránky. Pokud si myslíte, že je to nedorozumnění kontaktujte administrátora.';
+$_lang['permission_denied_msg'] = 'Nemáte příslušná oprávnění přístupové politiky pro zobrazení této stránky. Pokud si myslíte, že je to nedorozumnění kontaktujte administrátora.';
 
 // $_lang['please_wait'] = 'Please wait...';
 $_lang['please_wait'] = 'Momentík...';

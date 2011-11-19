@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
 $_lang['access_category_management_msg'] = 'Správa přístupu členů uživatelské skupiny k elementům v kategoriích a možnost nastavení přístupových práv.';
@@ -136,10 +136,10 @@ $_lang['access_permission_denied'] = 'Nemáte potřebná práva pro tento dokume
 $_lang['access_permission_parent_denied'] = 'Nemáte potřebná práva pro vytvoření nebo přesun dokumentu na toto místo! Vyberte jiné umístění.';
 
 // $_lang['access_policy_err_nf'] = 'Access Policy not found.';
-$_lang['access_policy_err_nf'] = 'Přístupové právo nenalezeno.';
+$_lang['access_policy_err_nf'] = 'Přístupová politika nenalezena.';
 
 // $_lang['access_policy_err_ns'] = 'Access Policy not specified.';
-$_lang['access_policy_err_ns'] = 'Nespecifikované přístupové právo.';
+$_lang['access_policy_err_ns'] = 'Nebyla specifikována přístupová politka.';
 
 // $_lang['access_policy_grid_empty'] = 'No policies to display';
 $_lang['access_policy_grid_empty'] = 'Žádná přístupová práva k zobrazení';
@@ -274,7 +274,7 @@ $_lang['resource_group_untitled'] = '_Bezejmenná skupina dokumentů';
 $_lang['resource_group_update'] = 'Aktualizovat skupinu dokumentů';
 
 // $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
-$_lang['roles_msg'] = 'Role je postavení nebo stav, kterou má uživatel v určité situaci. Může být použita pro uživatele nebo uživatelskou skupinu. Role v MODX jsou také nazývány "Autority". Toto je číslo, které může být jakékoliv celé číslo. Úrovně autorit jsou dědičné dolů, v tom smyslu, že roli s úrovní 1 zdědí veškeré skupiny práv. A ke každé roli s vyšší úrovní než 1.';
+$_lang['roles_msg'] = 'Role je postavení nebo stav, kterou má uživatel v určité situaci. Může být použita pro uživatele nebo uživatelskou skupinu. Role v MODX jsou také nazývány "Autority". Číslo, které může být jakékoliv celé číslo. Úrovně autorit jsou dědičné dolů, v tom smyslu, že roli s úrovní 1 zdědí veškeré skupiny práv. A ke každé roli s vyšší úrovní než 1.';
 
 // $_lang['source_add'] = 'Add Media Source';
 $_lang['source_add'] = 'Přidat zdroj médií';

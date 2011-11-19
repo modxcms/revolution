@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-24
+ * @updated 2011-11-19
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -88,7 +88,7 @@ $_lang['name_desc'] = 'Název položky nastavení. Můžete zadat také klíč s
 $_lang['namespace'] = 'Jmenný prostor';
 
 // $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
-$_lang['namespace_desc'] = 'Jmenná prostor, ke kterému tato položka nastavení patří. Výchozí téma slovníku bude načteno pro tento jmenný prostor při dotazu na nastavení.';
+$_lang['namespace_desc'] = 'Jmenný prostor, ke kterému tato položka nastavení patří. Výchozí téma slovníku bude načteno pro tento jmenný prostor při dotazu na nastavení.';
 
 // $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['namespace_filter'] = 'Filtrovat dle jmenného prostoru...';
@@ -208,10 +208,10 @@ $_lang['setting_login_homepage'] = 'Úvodní stránka po přihlášení';
 $_lang['setting_login_homepage_desc'] = 'Zadejte ID dokumentu, do kterého chcete uživatele přesměrovat po té co se přihlásí do správce obsahu. <strong>Poznámka: ujistěte se, že dokument s tímto ID existuje, že je publikován a přístupný tomuto uživateli!</strong>';
 
 // $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
-$_lang['setting_access_policies_version'] = 'Verze schématu přístupových práv';
+$_lang['setting_access_policies_version'] = 'Verze schématu přístupové politiky';
 
 // $_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
-$_lang['setting_access_policies_version_desc'] = 'Verze systému přístupových práv. NEMĚŇTE.';
+$_lang['setting_access_policies_version_desc'] = 'Verze systému přístupové politiky. NEMĚŇTE.';
 
 // $_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
 $_lang['setting_allow_forward_across_contexts'] = 'Povolit přesměrování mezi kontexty';
@@ -439,7 +439,7 @@ $_lang['setting_container_suffix_desc'] = 'Přípona, která bude přidána slo�
 $_lang['setting_context_tree_sort'] = 'Povolit řazení kontextů ve stromu dokumentů';
 
 // $_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
-$_lang['setting_context_tree_sort_desc'] = 'Je-li nastaveno na Ano, kontexty se budou automaticky abecedně řadit v levém stromu dokumentů.';
+$_lang['setting_context_tree_sort_desc'] = 'Je-li nastaveno na Ano, kontexty se budou automaticky abecedně řadit v levém stromovém menu dokumentů.';
 
 // $_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortby'] = 'Pole pro řazení kontextů ve stromu dokumentů';
@@ -458,6 +458,13 @@ $_lang['setting_cultureKey'] = 'Jazyk';
 
 // $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 $_lang['setting_cultureKey_desc'] = 'Vyberte jazyk, pro všechny kontexty (kromě správce obsahu "mgr") včetně kontextu "web".';
+
+
+// $_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug'] = 'Debug';
+
+// $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
+$_lang['setting_debug_desc'] = 'Řízení režimu ladění v rámci MODX zapnuto/vypnuto a/nebo nastavení PHP úrovně error_reporting. \'\' = současné nastavení systému, \'0\' = vypnuto (error_reporting = 0), \'1\' = zapnuto (error_reporting = -1), nebo lze použít jakoukoli jinou platnou hodnotu pro error_reporting.';
 
 // $_lang['setting_default_content_type'] = 'Default Content Type';
 $_lang['setting_default_content_type'] = 'Výchozí typ obsahu';
@@ -713,6 +720,12 @@ $_lang['setting_link_tag_scheme_desc'] = 'Schéma generování URL pro tag [[~id
 
 // $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale'] = 'Locale';
+
+$_lang['setting_log_level'] = 'Úroveň logování';
+$_lang['setting_log_level_desc'] = 'Výchozí úroveň logování; čím nižší úroveň tím méně zpráv bude logováno. Možné hodnoty: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
+
+$_lang['setting_log_target'] = 'Výstup logování';
+$_lang['setting_log_target_desc'] = 'Výchozí výstup, kam mají být logy zapisovány. Možné hodnoty: \'FILE\', \'HTML\', nebo \'ECHO\'. Výchozí hodnota je \'FILE\'';
 
 // $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 $_lang['setting_locale_desc'] = 'Nastavte locale pro vaše národní použití. Ponechte prázdné pro použití výchozí hodnoty. Více informací v <a href="http://php.net/setlocale" target="_blank">PHP dokumentaci</a>.';
@@ -1318,7 +1331,7 @@ $_lang['setting_symlink_merge_fields_desc'] = 'JeIf nastaveno "Ano", dojde k aut
 $_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
 
 // $_lang['setting_topmenu_show_descriptions_desc'] = 'If set to 'No', MODX will hide the descriptions from top menu items in the manager.';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na 'Ne', MODX skryje popisky u položek horního menu v rámci správce obsahu.';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
 
 // $_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
 $_lang['setting_tree_default_sort'] = 'Výchozí řazení dokumentů ve stromu dokumentů';
@@ -1418,6 +1431,12 @@ $_lang['setting_use_multibyte'] = 'Použít Multibyte extenzi pro PHP';
 
 // $_lang['setting_use_multibyte_desc'] = 'Set to true if you want to use the mbstring extension for multibyte characters in your MODX installation. Only set to true if you have the mbstring PHP extension installed.';
 $_lang['setting_use_multibyte_desc'] = 'Nastavte na "Ano", pokud chcete používat extenzi mbstring pro multibyte znaky ve Vaší instalaci MODXu. Nastavte pouze pokud máte extenzi instalovanou v PHP. Silně doporučujeme nastavit "Ano" pro použití s češtinou.';
+
+// $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
+$_lang['setting_use_weblink_target'] = 'Použít cíl jako webový odkaz';
+
+// $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
+$_lang['setting_use_weblink_target_desc'] = 'Nastavte na "Ano" pokud chcete, aby MODX tagy odkazů a makeUrl() generovali odkazy jako cílové URL pro webové odkazy. Nastavením "Ne" budou generovány interní MODX URL.';
 
 // $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
 $_lang['setting_webpwdreminder_message'] = 'E-mail pro vyžádání nového hesla';

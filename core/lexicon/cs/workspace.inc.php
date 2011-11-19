@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-24
+ * @updated 2011-11-19
  */
 // $_lang['alphabetically'] = 'Alphabetically';
 $_lang['alphabetically'] = 'Abecedně';
@@ -24,6 +24,12 @@ $_lang['author'] = 'Autor';
 // $_lang['autoincludes_packaging'] = 'Packaging in autoincludes: [[+autoincludes]]';
 $_lang['autoincludes_packaging'] = 'Automaticky zahrnuté balíčky: [[+autoincludes]]';
 
+// $_lang['back_to_browser'] = 'Back to Package Browser';
+$_lang['back_to_browser'] = 'Zpět do prohlížeče balíčků';
+
+// $_lang['back_to_manager'] = 'Back to Package Management';
+$_lang['back_to_manager'] = 'Zpět do správce balíčků';
+
 // $_lang['back_txt'] = 'Back';
 $_lang['back_txt'] = 'Zpět';
 
@@ -38,6 +44,9 @@ $_lang['changelog'] = 'Změny';
 
 // $_lang['changelog_desc'] = 'Please review the changelog for this version.';
 $_lang['changelog_desc'] = 'Přečtěte si prosím změny v této verzi.';
+
+// $_lang['continue'] = 'Continue';
+$_lang['continue'] = 'Pokračovat';
 
 // $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
 $_lang['core_err_invalid'] = 'Pro spuštění sestavení musíte mít platnou instalaci jádra a aktivní workspace.';
@@ -63,6 +72,9 @@ $_lang['dir_err_core_comp'] = 'Vaši "core/components" složku nebylo možno vyt
 // $_lang['download'] = 'Download';
 $_lang['download'] = 'Stáhnout';
 
+// $_lang['download_success'] = 'The Extra was downloaded successfully!';
+$_lang['download_success'] = 'Balíček byl úspěšně stažen!';
+
 // $_lang['downloaded'] = 'Downloaded';
 $_lang['downloaded'] = 'Staženo';
 
@@ -75,11 +87,23 @@ $_lang['download_extras'] = 'Stáhnout Extras';
 // $_lang['downloads'] = 'Downloads';
 $_lang['downloads'] = 'Stahování';
 
+// $_lang['downloads_view'] = '{downloads} downloads';
+$_lang['downloads_view'] = '{downloads} stahování';
+
+// $_lang['information'] = 'Information';
+$_lang['information'] = 'Informace';
+
 // $_lang['installation_instructions'] = 'Installation Instructions';
 $_lang['installation_instructions'] = 'Instalační instrukce';
 
 // $_lang['installed'] = 'Installed';
 $_lang['installed'] = 'Nainstalováno';
+
+// $_lang['installed_on'] = 'Installed on <br/>[[+time]]';
+$_lang['installed_on'] = 'Nainstalováno <br/>[[+time]]';
+
+// $_lang['instructions'] = 'Instrukce';
+$_lang['instructions'] = 'Instructions';
 
 // $_lang['last_updated'] = 'Last Updated';
 $_lang['last_updated'] = 'Poslední aktualizace';
@@ -104,6 +128,12 @@ $_lang['license_agreement_desc'] = 'Přečtěte si prosím podmínky licenční 
 
 // $_lang['license_disagree'] = 'I Disagree';
 $_lang['license_disagree'] = 'Nesouhlasím';
+
+// $_lang['list_of_packages_in_provider'] = 'Below is a list of the packages in this provider.';
+$_lang['list_of_packages_in_provider'] = 'Seznam balíčků tohoto poskytovatele.';
+
+// $_lang['loading'] = 'Loading...';
+$_lang['loading'] = 'Načítám...';
 
 // $_lang['minimum_supports'] = 'Requires MODX';
 $_lang['minimum_supports'] = 'Vyžaduje MODX';
@@ -132,6 +162,9 @@ $_lang['newest_added'] = 'Nově přidané';
 // $_lang['newest_additions'] = 'Newest Additions';
 $_lang['newest_additions'] = 'Nejnovější příspěvky';
 
+// $_lang['no_preview'] = 'No Preview';
+$_lang['no_preview'] = 'Bez náhledu';
+
 // $_lang['not_installed'] = 'Not Installed';
 $_lang['not_installed'] = 'Nenainstalováno';
 
@@ -140,6 +173,9 @@ $_lang['package'] = 'Balíček';
 
 // $_lang['package_add'] = 'Add New Package';
 $_lang['package_add'] = 'Přidat nový balíček';
+
+// $_lang['package_already_downloaded'] = 'Package already downloaded';
+$_lang['package_already_downloaded'] = 'Balíček je již stažen';
 
 // $_lang['package_browser'] = 'Package Browser';
 $_lang['package_browser'] = 'Prohlížeč balíčků';
@@ -158,6 +194,9 @@ $_lang['package_confirm_uninstall'] = 'Opravdu chcete odinstalovat tento balíč
 
 // $_lang['package_created'] = 'Created new transport package with signature: [[+signature]]';
 $_lang['package_created'] = 'Vytvořen transportní balíček s podpisem: [[+signature]]';
+
+// $_lang['package_details'] = 'Package Details';
+$_lang['package_details'] = 'Detail balíčku';
 
 // $_lang['package_download_err'] = 'Could not download package at: [[+location]]';
 $_lang['package_download_err'] = 'Nepodařilo se stáhnout balíček z: [[+location]]';
@@ -238,10 +277,13 @@ $_lang['package_installer'] = 'Instalátor balíčků';
 $_lang['package_installing'] = 'Workspace prostředí inicializováno, nyní se instaluje balíček...';
 
 // $_lang['package_management'] = 'Package Management';
-$_lang['package_management'] = 'Správa balíčků';
+$_lang['package_management'] = 'Správce balíčků';
 
 // $_lang['package_obtain_method'] = 'First, select how you would like to obtain the package:';
 $_lang['package_obtain_method'] = 'Nejdříve vyberte, jakým způsobem chcete balíček získat:';
+
+// $_lang['package_preview_view'] = 'Package preview: {name}';
+$_lang['package_preview_view'] = 'Náhled balíčku: {name}';
 
 // $_lang['package_remove'] = 'Remove Package';
 $_lang['package_remove'] = 'Odstranit balíček';
@@ -268,7 +310,7 @@ $_lang['package_remove_err_tzip_nf'] = 'Transportní zip nebylo možno najít a 
 $_lang['package_remove_force'] = 'Vynutit odstranění balíčku';
 
 // $_lang['package_remove_force_desc'] = 'By selecting force, you state that you want the transport package to be removed regardless of whether or not the package is successfully uninstalled.';
-$_lang['package_remove_force_desc'] = 'Při vynuceném odstranění balíčku bude odstraněn transparentní balíček, i když nebude úspěšně odinstalován vlastní balíček.';
+$_lang['package_remove_force_desc'] = 'Při vynuceném odstranění balíčku bude odstraněn transportní balíček, i když nebude úspěšně odinstalován vlastní balíček.';
 
 // $_lang['package_remove_info_gpack'] = 'Grabbing package to remove...';
 $_lang['package_remove_info_gpack'] = 'Vyběr balíčku k odstranění...';
@@ -366,11 +408,17 @@ $_lang['package_view'] = 'Zobrazit balíček';
 // $_lang['packages'] = 'Packages';
 $_lang['packages'] = 'Balíčky';
 
+// $_lang['packages_in_category'] = 'Below is a list of the packages available in the selected Category.';
+$_lang['packages_in_category'] = 'Seznam balíčků dostupných pro zvolenou kategorii.';
+
 // $_lang['packages_browse_msg'] = 'Click details on a package to get more information. Click Download to download the package to your MODX Revolution install.';
 $_lang['packages_browse_msg'] = 'Pro více informací klikněte na balíček. Pro stažení balíčku klikněte na tlačítko "Stáhnout".';
 
 // $_lang['packages_desc'] = 'Packages are collections of MODX components that can be used within MODX in a variety of ways. Here you can manage them, update their installation status, disable or enable installed packages, or download new ones from remote providers. Right-click on a row in the grid for more options.';
 $_lang['packages_desc'] = 'Balíčky jsou kolekce MODX komponent, které mohou být použity v MODX různými způsoby. V této části je můžete spravovat, aktualizovat, aktivovat nebo deaktivovat. Také můžete stáhnout nové balíčky od různých poskytovatelů. Pravým kliknutím na řádek v tabulce získáte více možností';
+
+// $_lang['please_wait'] = 'Please wait...';
+$_lang['please_wait'] = 'Momentíček...';
 
 // $_lang['preexisting_mode_preserve'] = 'Preserve';
 $_lang['preexisting_mode_preserve'] = 'Zachovat';
@@ -498,6 +546,12 @@ $_lang['released'] = 'Vydán';
 // $_lang['released_on'] = 'Released On';
 $_lang['released_on'] = 'Výdán dne';
 
+// $_lang['save_and_go_to_browser'] = 'Save and go to Package Browser';
+$_lang['save_and_go_to_browser'] = 'Uložit a přejít na prohlížeč balíčků';
+
+// $_lang['search_results_for'] = 'Search results for <b>[[+query]]</b>';
+$_lang['search_results_for'] = 'Výsledky vyhledávání pro <b>[[+query]]</b>';
+
 // $_lang['setup_options'] = 'Setup Options';
 $_lang['setup_options'] = 'Nastavení možností';
 
@@ -512,6 +566,18 @@ $_lang['sort_by_dots'] = 'Seředit podle...';
 
 // $_lang['supports_db'] = 'Supports Databases';
 $_lang['supports_db'] = 'Podporované databáze';
+
+// $_lang['template_already_downloaded'] = 'Template already downloaded';
+$_lang['template_already_downloaded'] = 'Šablona je již stažena';
+
+// $_lang['template_preview_view'] = 'Template preview: {name}';
+$_lang['template_preview_view'] = 'Náhled šablony: {name}';
+
+// $_lang['template_select_desc'] = 'Select a Template to see its description...';
+$_lang['template_select_desc'] = 'Pro zobrazení popisu vyberte šablonu...';
+
+// $_lang['templates_in_category'] = 'Viewing Templates available in the selected Category.';
+$_lang['templates_in_category'] = 'Zobrazeny šablony dostupné pro vybranou kategorii.';
 
 // $_lang['top_rated'] = 'Top Rated';
 $_lang['top_rated'] = 'Nejlépe hodnocené';
@@ -535,7 +601,7 @@ $_lang['uninstall'] = 'Odinstalovat';
 $_lang['uploaded_on'] = 'Nahráno';
 
 // $_lang['uploaded_versions'] = 'Uploaded Versions';
-$_lang['uploaded_versions'] = 'Nahraná verze';
+$_lang['uploaded_versions'] = 'Stažené verze';
 
 // $_lang['username'] = 'Username';
 $_lang['username'] = 'Uživatelské jméno';
@@ -557,6 +623,12 @@ $_lang['workspace_scan_for_new'] = 'Hledat nové balíčky';
 
 // $_lang['workspace_scan_for_updates'] = 'Search for package updates';
 $_lang['workspace_scan_for_updates'] = 'Najít aktualizace balíčku';
+
+// $_lang['view_details'] = 'View Details';
+$_lang['view_details'] = 'Zobrazit podrobnosti';
+
+// $_lang['viewing_templates_available'] = 'Viewing Templates available in the selected Category.';
+$_lang['viewing_templates_available'] = 'Zobrazeny šablony dostuné pro vybranou kategorii.';
 
 // $_lang['version'] = 'Version';
 $_lang['version'] = 'Verze';

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['binary'] = 'Binary';
 $_lang['binary'] = 'Binární';
@@ -61,4 +61,4 @@ $_lang['content_types'] = 'Typy obsahů';
 $_lang['file_extensions'] = 'Přípony souborů';
 
 // $_lang['file_extensions_desc'] = 'This is the specified file extension for this Content Type.';
-$_lang['file_extensions_desc'] = 'Toto je přípona souboru pro tento Typ obsahu.';
+$_lang['file_extensions_desc'] = 'Přípona souboru pro tento typ obsahu.';
