@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['add_column'] = 'Added new `[[+column]]` column to `[[+table]]`.';
 $_lang['add_column'] = 'Přidán nový sloupec `[[+column]]` do tabulky `[[+table]]`.';

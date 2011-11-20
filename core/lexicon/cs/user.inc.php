@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['active'] = 'Active';
 $_lang['active'] = 'Aktivní';
@@ -85,7 +85,7 @@ $_lang['primary_group'] = 'Primární skupina';
 $_lang['profile_recent_resources'] = 'Naposledy upravované dokumenty';
 
 // $_lang['profile_recent_resources_desc'] = 'This is a list of your most recently edited Resources.';
-$_lang['profile_recent_resources_desc'] = 'Toto je seznam Vámi naposledy upravovaných dokumentů.';
+$_lang['profile_recent_resources_desc'] = 'Seznam Vámi naposledy upravovaných dokumentů.';
 
 // $_lang['remote_data'] = 'Remote Data';
 $_lang['remote_data'] = 'Vzdálená data';
@@ -130,7 +130,7 @@ $_lang['role_err_ns_name'] = 'Uveďte název role.';
 $_lang['role_err_remove'] = 'Nastala chyba při odstraňování role.';
 
 // $_lang['role_err_remove_admin'] = 'The role you are trying to delete is the admin role. This role cannot be deleted!';
-$_lang['role_err_remove_admin'] = 'Toto je administrátorská role, proto ji nelze odstranit.';
+$_lang['role_err_remove_admin'] = 'Administrátorská role, proto ji nelze odstranit.';
 
 // $_lang['role_remove'] = 'Delete Role';
 $_lang['role_remove'] = 'Vymazat roli';
@@ -349,7 +349,7 @@ $_lang['user_group_id'] = 'UG ID';
 $_lang['user_group_desc_name'] = 'Název uživatelské skupiny';
 
 // $_lang['user_group_desc_description'] = 'A short description of the User Group';
-$_lang['user_group_desc_description'] = 'Krátký popis uživatelské skupiny';
+$_lang['user_group_desc_description'] = 'Popis uživatelské skupiny';
 
 // $_lang['user_group_desc_parent'] = 'The parent group of this group. Used for organizational purposes.';
 $_lang['user_group_desc_parent'] = 'Nadřazená skupina této skupině. Využitelné pro organizační účely.';
@@ -386,6 +386,9 @@ $_lang['user_group_err_not_specified'] = 'Nespecifikovaná uživatelská skupina
 
 // $_lang['user_group_err_ns'] = 'User group not specified!';
 $_lang['user_group_err_ns'] = 'Nespecifikovaná uživatelská skupina!';
+
+// $_lang['user_group_err_ns_name'] = 'Please specify a name for this user group.';
+$_lang['user_group_err_ns_name'] = 'Zadejte název uživatelské skupiny.';
 
 // $_lang['user_group_err_remove'] = 'An error occurred while trying to remove the user group.';
 $_lang['user_group_err_remove'] = 'Nastala chyba při odtraňování uživatelské skupiny.';
