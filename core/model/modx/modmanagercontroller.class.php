@@ -532,7 +532,6 @@ abstract class modManagerController {
      * @return array|mixed|string
      */
     public function getDefaultState() {
-        $this->modx->setLogTarget('ECHO');
         /** @var modProcessorResponse $response */
         $response = $this->modx->runProcessor('system/registry/register/read',array(
             'register' => 'state',
