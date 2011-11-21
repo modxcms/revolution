@@ -1,8 +1,11 @@
 <?php
+$_lang['directory'] = 'Каталог';
 $_lang['file_confirm_remove'] = 'Вы уверены, что хотите удалить этот файл? Это может нарушить работу сайта.';
+$_lang['file_create'] = 'Создать файл';
 $_lang['file_deleted'] = 'Успешно!';
 $_lang['file_delete_file'] = 'Удалить';
 $_lang['file_delete_folder'] = 'Удалить';
+$_lang['file_download'] = 'Скачать';
 $_lang['file_download_file'] = 'Загрузить файл';
 $_lang['file_download_unzip'] = 'Разархивировать файл';
 $_lang['file_edit'] = 'Редактировать';
