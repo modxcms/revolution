@@ -9,10 +9,13 @@
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
+$_lang['directory'] = 'ディレクトリ';
 $_lang['file_confirm_remove'] = 'このファイルを本当に削除しますか？';
+$_lang['file_create'] = 'ファイルを作成';
 $_lang['file_deleted'] = '成功';
-$_lang['file_delete_file'] = 'ファイルの削除';
-$_lang['file_delete_folder'] = 'フォルダの削除';
+$_lang['file_delete_file'] = 'ファイルを削除';
+$_lang['file_delete_folder'] = 'フォルダを削除';
+$_lang['file_download'] = 'Download File';
 $_lang['file_download_file'] = 'ファイルのダウンロード';
 $_lang['file_download_unzip'] = 'ファイルの解凍';
 $_lang['file_edit'] = '編集';
@@ -82,7 +85,7 @@ $_lang['files_fileoptions'] = 'オプション';
 $_lang['files_files'] = 'ファイルマネージャー';
 $_lang['files_filesize'] = 'ファイルサイズ';
 $_lang['files_file_type'] = 'ファイルタイプ: ';
-$_lang['files_modified'] = '編集日時';
+$_lang['files_modified'] = '更新日時';
 $_lang['files_viewfile'] = 'ファイルの表示';
 $_lang['upf_abort'] = '中止';
 $_lang['upf_abort_desc'] = 'アップロードを停止します。';
