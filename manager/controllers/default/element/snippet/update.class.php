@@ -74,10 +74,10 @@ class ElementSnippetUpdateManagerController extends modManagerController {
             $data[] = array(
                 $property['name'],
                 $property['desc'],
-                $property['type'],
-                $property['options'],
+                !empty($property['type']) ? $property['type'] : 'textfield',
+                !empty($property['options']) ? $property['options'] : array(),
                 $property['value'],
-                $property['lexicon'],
+                !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
                 $property['desc_trans'],
             );
