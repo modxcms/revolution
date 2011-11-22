@@ -86,11 +86,11 @@ class modSmarty extends Smarty {
             $this->modx->cacheManager->writeTree($this->compile_dir);
         }
 
-		$this->assign('app_name','MODX');
+        $this->assign('app_name','MODX');
 
-		$this->_blocks = array();
-		$this->_derived = null;
-	}
+        $this->_blocks = array();
+        $this->_derived = null;
+    }
 
     /**
      * Sets the cache path for this Smarty instance
@@ -100,7 +100,7 @@ class modSmarty extends Smarty {
      * defaults to $this->modx->cachePath.
      */
     public function setCachePath($path = '') {
-    	$path = $this->modx->getOption(xPDO::OPT_CACHE_PATH).$path;
+        $path = $this->modx->getOption(xPDO::OPT_CACHE_PATH).$path;
         if (!is_dir($path)) {
             $this->modx->getCacheManager();
             $this->modx->cacheManager->writeTree($path);
@@ -123,28 +123,14 @@ class modSmarty extends Smarty {
     }
 
     /**
-     * Display the template through an echo statement.
+     * Display a template by echoing the output of a Smarty::fetch().
      *
-     * @access public
-     * @param string $resource_name The resource location
+     * @param string|object $template the resource handle of the template file or template object
+     * @param mixed $cache_id cache id to be used with this template
+     * @param mixed $compile_id compile id to be used with this template
+     * @param object $parent next higher level of Smarty variables
      */
-	public function display($resource_name) {
-		echo $this->fetch($resource_name);
-	}
-
-    /**
-     * Fetch the template output without displaying it.
-     *
-     * @access public
-     * @param string $resource_name The resource location
-     * @return string The fetched resource output
-     */
-	public function fetch($resource_name) {
-		$ret = parent::fetch($resource_name);
-		while ($resource = $this->_derived) {
-			$this->_derived = null;
-			$ret = parent::fetch($resource);
-		}
-		return $ret;
-	}
+    public function display($template, $cache_id = null, $compile_id = null, $parent = null) {
+        echo $this->fetch($template, $cache_id, $compile_id, $parent);
+    }
 }
