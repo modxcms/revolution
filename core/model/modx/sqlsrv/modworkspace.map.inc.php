@@ -90,7 +90,7 @@ $xpdo_meta_map['modWorkspace']= array (
         ),
       ),
     ),
-    'sctive' => 
+    'active' => 
     array (
       'alias' => 'active',
       'primary' => false,
