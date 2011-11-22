@@ -57,7 +57,12 @@
                 </div>
             </div>
             <div id="modx-navbar">
-                {include file="navbar.tpl"}
+                <div id="modx-topnav-div">
+                    <ul id="modx-topnav">
+                        {$navb}
+                        <li class="cls"></li>
+                    </ul>
+                </div>
             </div>
         </div>
         
