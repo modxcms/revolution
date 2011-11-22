@@ -404,7 +404,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'classKey' => $resource->class_key,
             'ctx' => $resource->context_key,
             'qtip' => $qtip,
-            'preview_url' => $this->modx->makeUrl($resource->get('id'), '', '', 'full'),
+            'preview_url' => $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full'),
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? $this->actions['resource/update'] : $this->actions['resource/data']).'&id='.$resource->id : '',
             'allowDrop' => true,
         );
