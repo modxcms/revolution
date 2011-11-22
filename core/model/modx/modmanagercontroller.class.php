@@ -74,7 +74,7 @@ abstract class modManagerController {
      * @param array $config A configuration array of options related to this controller's action object.
      * @return The class specified by $className
      */
-    public static function getInstance(modX &$modx,$className,$config = array()) {
+    public static function getInstance(modX &$modx, $className, array $config = array()) {
         /** @var modManagerController $controller */
         $controller = new $className($modx,$config);
         return $controller;
@@ -846,7 +846,7 @@ abstract class modExtraManagerController extends modManagerController {
      * @param array $config An array of configuration options built from the modAction object
      * @return modManagerController A newly created modManagerController instance
      */
-    public static function getInstance(modX &$modx,$className,array $config = array()) {
+    public static function getInstance(modX &$modx, $className, array $config = array()) {
         $action = call_user_func(array($className,'getDefaultController'));
         if (isset($_REQUEST['action'])) {
             $action = str_replace(array('../','./','.','-','@'),'',$_REQUEST['action']);
