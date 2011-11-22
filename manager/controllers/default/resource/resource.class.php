@@ -257,6 +257,7 @@ abstract class ResourceManagerController extends modManagerController {
                 $reloading = !empty($reloadData) && count($reloadData) > 0;
                 $this->modx->smarty->assign('tvcount',count($tvs));
                 foreach ($tvs as $tv) {
+                    $tv->set('inherited', false);
                     $cat = (int)$tv->get('category');
                     $tvid = $tv->get('id');
                     if($reloading && array_key_exists('tv'.$tvid, $reloadData)) {
@@ -285,7 +286,7 @@ abstract class ResourceManagerController extends modManagerController {
                     if (empty($inputForm)) continue;
 
                     $tv->set('formElement',$inputForm);
-                    if (!is_array($categories[$cat]->tvs)) {
+                    if (!isset($categories[$cat]->tvs) || !is_array($categories[$cat]->tvs)) {
                         $categories[$cat]->tvs = array();
                         $categories[$cat]->tvCount = 0;
                     }
@@ -307,7 +308,7 @@ abstract class ResourceManagerController extends modManagerController {
         foreach ($categories as $n => $category) {
             if (is_object($category) && $category instanceof modCategory) {
                 $category->hidden = empty($category->tvCount) ? true : false;
-                $ct = count($category->tvs);
+                $ct = isset($category->tvs) ? count($category->tvs) : 0;
                 if ($ct > 0) {
                     $finalCategories[$category->get('id')] = $category;
                     $this->tvCounts[$n] = $ct;
