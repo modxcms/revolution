@@ -42,6 +42,7 @@ class modManagerResponse extends modResponse {
         }
 
         $this->action = $this->modx->actionMap[$action];
+        if (empty($this->action)) $this->action = array();
         $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
         if (!$isLoggedIn) {
             $this->action['namespace'] = 'core';

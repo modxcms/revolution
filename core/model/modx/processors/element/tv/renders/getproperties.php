@@ -37,7 +37,7 @@ class TvPropertiesManagerController extends modManagerController {
 
 /* simulate controller with the faux class above */
 $c = new TvPropertiesManagerController($this->modx);
-$modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvPropertiesManagerController',$this->action));
+$modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvPropertiesManagerController'));
 $modx->controller->render();
 
 /* get default display properties for specific tv */
