@@ -91,19 +91,20 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return array
      */
     public function getContainerList($path) {
+        $properties = $this->getPropertyList();
         $path = $this->fileHandler->postfixSlash($path);
         $bases = $this->getBases($path);
         if (empty($bases['pathAbsolute'])) return array();
         $fullPath = $bases['pathAbsolute'].ltrim($path,'/');
                 
-        $useMultibyte = $this->getOption('use_multibyte',$this->properties,false);
-        $encoding = $this->getOption('modx_charset',$this->properties,'UTF-8');
-        $hideFiles = !empty($this->properties['hideFiles']) && $this->properties['hideFiles'] != 'false' ? true : false;
+        $useMultibyte = $this->getOption('use_multibyte',$properties,false);
+        $encoding = $this->getOption('modx_charset',$properties,'UTF-8');
+        $hideFiles = !empty($properties['hideFiles']) && $properties['hideFiles'] != 'false' ? true : false;
         $editAction = $this->getEditActionId();
 
-        $imagesExts = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
         $imagesExts = explode(',',$imagesExts);
-        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
+        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
         $skipFiles[] = '..';
@@ -119,6 +120,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             if (!$file->isReadable()) continue;
 
             $fileName = $file->getFilename();
+            if (in_array(trim($fileName,'/'),$skipFiles)) continue;
             $filePathName = $file->getPathname();
             $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
@@ -156,7 +158,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $cls[] = 'icon-file';
                 $cls[] = 'icon-'.$ext;
 
-                if (!empty($this->properties['currentFile']) && rawurldecode($this->properties['currentFile']) == $fullPath.$fileName && $this->properties['currentAction'] == $editAction) {
+                if (!empty($properties['currentFile']) && rawurldecode($properties['currentFile']) == $fullPath.$fileName && $properties['currentAction'] == $editAction) {
                     $cls[] = 'active-node';
                 }
 
@@ -446,6 +448,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return array
      */
     public function getObjectContents($objectPath) {
+        $properties = $this->getPropertyList();
         $bases = $this->getBases($objectPath);
         /** @var modFile $file */
         $file = $this->fileHandler->make($bases['pathAbsoluteWithPath']);
@@ -456,7 +459,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         if (!$file->isReadable()) {
             $this->addError('file',$this->xpdo->lexicon('file_err_perms'));
         }
-        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
         $imageExtensions = explode(',',$imageExtensions);
         $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
 
@@ -740,6 +743,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return array
      */
     public function getObjectsInContainer($path) {
+        $properties = $this->getPropertyList();
         $dir = $this->fileHandler->postfixSlash($path);
         $bases = $this->getBases($dir);
         if (empty($bases['pathAbsolute'])) return array();
@@ -748,15 +752,15 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
 
         /* get default settings */
-        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
         $imageExtensions = explode(',',$imageExtensions);
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
-        $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
+        $allowedFileTypes = $this->getOption('allowedFileTypes',$properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
-        $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
-        $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
-        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store');
+        $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
+        $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
+        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
         $skipFiles[] = '..';
