@@ -134,7 +134,11 @@ class modOutputFilter {
                             }
                             $grps= (strlen($m_val) > 0) ? explode(',', $m_val) : array ();
                             $user = $this->modx->getObject('modUser',$output);
-                            $condition[]= $user->isMember($grps);
+                            if ($user && is_object($user) && $user instanceof modUser) {
+                                $condition[]= $user->isMember($grps);
+                            } else {
+                                $condition[] = false;
+                            }
                             break;
                         case 'or':
                             $condition[]= "||";
