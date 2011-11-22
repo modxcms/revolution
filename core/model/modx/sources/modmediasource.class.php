@@ -415,7 +415,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         $list = array();
         foreach ($properties as $property) {
             $value = $property['value'];
-            if ($property['xtype'] == 'combo-boolean') {
+            if (!empty($property['xtype']) && $property['xtype'] == 'combo-boolean') {
                 $value = empty($property['value']) && $property['value'] != 'true' ? false : true;
             }
             $list[$property['name']] = $value;
