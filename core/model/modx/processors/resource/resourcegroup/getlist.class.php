@@ -78,7 +78,7 @@ class modResourceGroupResourceGetListProcessor extends modProcessor {
             if (!empty($parent) && $mode == 'create') {
                 $resourceGroupArray['access'] = in_array($resourceGroupArray['id'],$parentGroups) ? true : false;
             }
-            if(is_array($rgs) && count($rgs) > 0) {
+            if (isset($rgs) && is_array($rgs) && count($rgs) > 0) {
                 $name = $resourceGroup->get('name');
                 if(array_key_exists($name, $rgs)) {
                     $resourceGroupArray['access'] = (boolean) $rgs[$name]->get('access');
