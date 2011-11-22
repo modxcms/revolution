@@ -358,8 +358,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         m.push('-');
         
         if (ui.hasClass('pedit')) {
+            console.log('edit_'+a.type);
             m.push({
-                text: _('edit')+' '+a.elementType
+                text: _('edit_'+a.type)
                 ,type: a.type
                 ,pk: a.pk
                 ,handler: function(itm,e) {
@@ -378,7 +379,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         }
         if (ui.hasClass('pnew')) {
             m.push({
-                text: _('duplicate')+' '+a.elementType
+                text: _('duplicate_'+a.type)
                 ,pk: a.pk
                 ,type: a.type
                 ,handler: function(itm,e) {
@@ -388,14 +389,14 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         }
         if (ui.hasClass('pdelete')) {
             m.push({
-                text: _('remove')+' '+a.elementType
+                text: _('remove_'+a.type)
                 ,handler: this.removeElement
             });
         }
         m.push('-');
         if (ui.hasClass('pnew')) {
             m.push({
-                text: _('add_to_category_this',{type:a.elementType})
+                text: _('add_to_category_'+a.type)
                 ,handler: this._createElement
             });
         }
@@ -435,7 +436,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
         if (a.elementType) {
             m.push({
-                text: _('add_to_category_this',{type: Ext.util.Format.capitalize(a.type)})
+                text: _('add_to_category_'+a.type)
                 ,handler: this._createElement
             });
         }
@@ -458,7 +459,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
         if (ui.hasClass('pnew')) {
             m.push({
-                text: _('new'+'_'+a.type)
+                text: _('new_'+a.type)
                 ,handler: this._createElement
             });
             m.push({

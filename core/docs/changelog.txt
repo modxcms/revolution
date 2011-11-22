@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6093] Make for easier translations of Element context menu items
 - [#6099] Fix incorrect index name for modWorkspace
 
 MODX Revolution 2.2.0-rc-1 (November 17, 2011)
