@@ -396,7 +396,7 @@ class modOutputFilter {
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
                             $value = 0 + $output;
                             if ($value != 0 && $value != -1) {
-                                $output= strftime($m_val,$value);
+                                $output= htmlentities(strftime($m_val,$value),ENT_COMPAT,$encoding);
                             } else {
                                 $output= '';
                             }
