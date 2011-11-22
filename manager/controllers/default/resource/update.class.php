@@ -148,7 +148,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
      * @return string
      */
     public function getPreviewUrl() {
-        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),'','','full');
+        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),$this->resource->get('context_key'),'','full');
         return $this->previewUrl;
     }
 
