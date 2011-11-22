@@ -679,7 +679,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         }
         $returnArray['class_key'] = $this->object->get('class_key');
         $this->workingContext->prepare(true);
-        $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), '', '', 'full');
+        $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), $this->object->get('context_key'), '', 'full');
         return $this->success('',$returnArray);
     }
 
