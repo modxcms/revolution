@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['class_name'] = 'Class Name';
 $_lang['class_name'] = 'Třída obsahu';
@@ -65,6 +65,15 @@ $_lang['properties_remove_confirm'] = 'Opravdu chcete odstranit tyto vlastnosti?
 
 // $_lang['property_create'] = 'Create Property';
 $_lang['property_create'] = 'Vytvořit vlastnost';
+
+// $_lang['property_description_desc'] = 'A short description of the property. This can be a lexicon key of the property\'s lexicon.';
+$_lang['property_description_desc'] = 'Popis vlastnosti. Lze použít klíč vlastnosti z lexikonu.';
+
+// $_lang['property_lexicon_desc'] = 'Optional. The lexicon that this property\'s fields can be translated with.';
+$_lang['property_lexicon_desc'] = 'Volitelné. Lexikon, ze kterého mají být přeložena políčka této vlastnosti.';
+
+// $_lang['property_name_desc'] = 'The name of the property, which will be accessible via: [[+propertyName]]';
+$_lang['property_name_desc'] = 'Název vlastnosti, skrze který bude vlastnost dostupná: [[+propertyName]]';
 
 // $_lang['property_update'] = 'Update Property';
 $_lang['property_update'] = 'Upravit vlastnost';
@@ -179,6 +188,9 @@ $_lang['propertyset_save'] = 'Uložit sadu vlastností';
 
 // $_lang['propertyset_update'] = 'Update Property Set';
 $_lang['propertyset_update'] = 'Upravit sadu vlastností';
+
+// $_lang['property_xtype_desc'] = 'The input type of the property.';
+$_lang['property_xtype_desc'] = 'Vstupní typ vlastnosti.';
 
 // $_lang['propertysets'] = 'Property Sets';
 $_lang['propertysets'] = 'Sady vlastností';

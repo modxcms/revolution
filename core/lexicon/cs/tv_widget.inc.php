@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['attributes'] = 'Attributes';
 $_lang['attributes'] = 'Atributy';
@@ -96,15 +96,14 @@ $_lang['delimiter'] = 'Oddělovač';
 // $_lang['disabled_dates'] = 'Disabled Dates';
 $_lang['disabled_dates'] = 'Zakázané datumy';
 
-/*
-$_lang['disabled_dates_desc'] = 'A comma-separated list of "dates" to disable, as strings. These strings will be used to build a dynamic regular expression so they are very powerful. Some examples:<br />
-- Disable these exact dates: 2003-03-08,2003-09-16<br />
-- Disable these days for every year: 03-08,09-16<br />
-- Only match the beginning (useful if you are using short years): ^03-08<br />
-- Disable every day in March 2006: 03-..-2006<br />
-- Disable every day in every March: ^03<br />
-Note that the format of the dates included in the list should exactly match the format config. In order to support regular expressions, if you are using a date format that has "." in it, you will have to escape the dot when restricting dates.';
-*/
+
+// $_lang['disabled_dates_desc'] = 'A comma-separated list of "dates" to disable, as strings. These strings will be // used to build a dynamic regular expression so they are very powerful. Some examples:<br />
+// - Disable these exact dates: 2003-03-08,2003-09-16<br />
+// - Disable these days for every year: 03-08,09-16<br />
+// - Only match the beginning (useful if you are using short years): ^03-08<br />
+// - Disable every day in March 2006: 03-..-2006<br />
+// - Disable every day in every March: ^03<br />
+// Note that the format of the dates included in the list should exactly match the format config. In order to support // regular expressions, if you are using a date format that has "." in it, you will have to escape the dot when // // // restricting dates.';
 $_lang['disabled_dates_desc'] = 'Čárkou oddělený seznam datumů, které mají být zakázány. Tyto řetězce se použijí k vygenerování regulárního výrazu. Například:<br />
 - Přímo zakázané dny v jednom roce: 2003-03-08,2003-09-16<br />
 - Zakázané dny každý rok: 03-08,09-16<br />
@@ -116,11 +115,9 @@ Pozor na to, že formát zadávaných dat musí korespondovat s formátem nastav
 // $_lang['disabled_days'] = 'Disabled Days';
 $_lang['disabled_days'] = 'Zakázané dny';
 
-/*
-$_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0 based (defaults to null). Some examples:<br />
-- Disable Sunday and Saturday: 0,6<br />
-- Disable weekdays: 1,2,3,4,5';
-*/
+// $_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0 based (defaults to null). Some examples:<br />
+// - Disable Sunday and Saturday: 0,6<br />
+// - Disable weekdays: 1,2,3,4,5';
 $_lang['disabled_days_desc'] = 'Čárkou oddělený seznam dnů, které mají být zakázané, počítáno od 0 (výchozí hodnota je prázdné pole). Například:<br />
 - Zakázaná neděle a sobota: 0,6<br />
 - Zakázané pracovní dny: 1,2,3,4,5';

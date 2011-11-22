@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['element'] = 'Element';
 $_lang['element'] = 'Element';
@@ -63,6 +63,11 @@ $_lang['properties_export'] = 'Exportovat vlastnosti';
 // $_lang['properties_import'] = 'Import Properties';
 $_lang['properties_import'] = 'Importovat vlastnosti';
 
+// $_lang['property_preprocess'] = 'Pre-process tags in Property Values';
+$_lang['property_preprocess'] = 'Před-zpracovat tagy v hodnotě vlastnosti';
+
+// $_lang['property_preprocess_msg'] = 'If enabled, tags in Default Property/Property Set values will be processed before they are used for Element processing.';
+$_lang['property_preprocess_msg'] = 'Je-li aktivní, tagy ve Výchozí hodnotě vlastnosti nebo Sadě vlastností budou zpracovány ještě předtím než budou zpracovány v Elementech.';
 // $_lang['static_file'] = 'Static File';
 $_lang['static_file'] = 'Statický soubor';
 

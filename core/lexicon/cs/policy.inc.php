@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['active_of'] = '[[+active]] of [[+total]]';
 $_lang['active_of'] = '[[+active]] z [[+total]]';
@@ -64,10 +64,10 @@ $_lang['permissions_desc'] = 'V této části můžete definovat konkrétní opr
 $_lang['policies'] = 'Přístupová práva';
 
 // $_lang['policy'] = 'Access Policy';
-$_lang['policy'] = 'Přístupové právo';
+$_lang['policy'] = 'Přístupová politika';
 
 // $_lang['policy_create'] = 'Create Access Policy';
-$_lang['policy_create'] = 'Vytvořit přístupové právo';
+$_lang['policy_create'] = 'Vytvořit přístupovou politiku';
 
 // $_lang['policy_data'] = 'Policy Data';
 $_lang['policy_data'] = 'Přístupová data';
@@ -76,10 +76,10 @@ $_lang['policy_data'] = 'Přístupová data';
 $_lang['policy_desc'] = 'Přístupová práva jsou obecné zásady, které omezují nebo umožňují některé akce v MODX.';
 
 // $_lang['policy_desc_name'] = 'The name of the Access Policy';
-$_lang['policy_desc_name'] = 'Název Přístupového práva';
+$_lang['policy_desc_name'] = 'Název přístupové politiky';
 
 // $_lang['policy_desc_description'] = 'Optional. A short description of the Access Policy';
-$_lang['policy_desc_description'] = 'Volitelné. Popis přístupového práva';
+$_lang['policy_desc_description'] = 'Volitelné. Popis přístupové politiky';
 
 // $_lang['policy_desc_template'] = 'The Policy Template used for this Policy. Policies get their Permission lists from their Template.';
 $_lang['policy_desc_template'] = 'Šablona Přístupového práva použitá pro toto Přístupové právo. Přístupová práva získávají seznam Oprávnění ze své šablony.';
@@ -118,13 +118,13 @@ $_lang['policy_management_msg'] = 'Přístupová práva spravují, jak MODX opr�
 $_lang['policy_name'] = 'Název';
 
 // $_lang['policy_property_create'] = 'Create Access Policy Property';
-$_lang['policy_property_create'] = 'Vytvořit vlastnost přístupového práva';
+$_lang['policy_property_create'] = 'Vytvořit vlastnost přístupové politiky';
 
 // $_lang['policy_property_new'] = 'New Policy Property';
 $_lang['policy_property_new'] = 'Nová vlastnost přístupového práva';
 
 // $_lang['policy_property_remove'] = 'Delete Access Policy Property';
-$_lang['policy_property_remove'] = 'Odstranit vlastnost přístupového práva';
+$_lang['policy_property_remove'] = 'Odstranit vlastnost přístupové politiky';
 
 // $_lang['policy_property_specify_name'] = 'Please specify a policy property name:';
 $_lang['policy_property_specify_name'] = 'Zadejte název přístupového práva:';
@@ -133,7 +133,7 @@ $_lang['policy_property_specify_name'] = 'Zadejte název přístupového práva:
 $_lang['policy_remove'] = 'Odstranit přístupové právo';
 
 // $_lang['policy_remove_confirm'] = 'Are you sure you want to remove this Access Policy?';
-$_lang['policy_remove_confirm'] = 'Opravdu chcete odstranit toto přístupové právo?';
+$_lang['policy_remove_confirm'] = 'Opravdu chcete odstranit tuto přístupovou politiku?';
 
 // $_lang['policy_remove_multiple'] = 'Delete Policies';
 $_lang['policy_remove_multiple'] = 'Odstranit přístupová práva';
@@ -154,10 +154,10 @@ $_lang['policy_template.desc'] = 'Šablona přístupového práva určující op
 $_lang['policy_template_create'] = 'Vytvořit šablonu přístupového práva';
 
 // $_lang['policy_template_desc_name'] = 'The name of the Access Policy Template';
-$_lang['policy_template_desc_name'] = 'Název šablony Přístupového práva';
+$_lang['policy_template_desc_name'] = 'Název šablony přístupové politiky';
 
 // $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template';
-$_lang['policy_template_desc_description'] = 'Volitelné. Krátký popis šablony Přístupového práva';
+$_lang['policy_template_desc_description'] = 'Volitelné. Popis šablony přístupové politiky';
 
 // $_lang['policy_template_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy Template uses to translate the Permissions it owns.';
 $_lang['policy_template_desc_lexicon'] = 'Volitelné. Téma slovníku, které tato Šablona přístupového práva používá pro překlad oprávnění, které kontroluje..';
