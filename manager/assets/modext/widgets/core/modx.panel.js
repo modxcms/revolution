@@ -417,29 +417,26 @@ Ext.reg('modx-template-panel',MODx.TemplatePanel);
  */
 MODx.BreadcrumbsPanel = function(config) {
     config = config || {}; 
-	this.tpl = new Ext.XTemplate('<tpl if="typeof(trail) != &quot;undefined&quot;">'
-		+'<div class="crumb_wrapper"><ul class="crumbs">'
-			+'<tpl for="trail">'		
-				+'<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'		
-					+'<tpl if="typeof pnl != \'undefined\'">'
-						+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'							
-					+'</tpl>'
-					+'<tpl if="typeof pnl == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'										
-				+'</li>'
-			+'</tpl>'
-		+'</ul></div>'
-	+'</tpl>'
-	+'<tpl if="typeof(text) != &quot;undefined&quot;">'
-		+'<div class="panel-desc{[values.className != undefined ? \' \'+values.className+\'"\' : \'\' ]}"><p>{text}</p></div>'
-	+'</tpl>', {
-		compiled: true
-	});	
-
 	Ext.applyIf(config,{
 		frame:false
 		,plain:true
 		,border: false
 		,desc: 'This the description part of this panel'
+		,bdMarkup: '<tpl if="typeof(trail) != &quot;undefined&quot;">'
+			+'<div class="crumb_wrapper"><ul class="crumbs">'
+				+'<tpl for="trail">'		
+					+'<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'		
+						+'<tpl if="typeof pnl != \'undefined\'">'
+							+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'							
+						+'</tpl>'
+						+'<tpl if="typeof pnl == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'										
+					+'</li>'
+				+'</tpl>'
+			+'</ul></div>'
+		+'</tpl>'
+		+'<tpl if="typeof(text) != &quot;undefined&quot;">'
+			+'<div class="panel-desc{[values.className != undefined ? \' \'+values.className+\'"\' : \'\' ]}"><p>{text}</p></div>'
+		+'</tpl>'
 		,root : { 
 			text : 'Home'
 			,className: 'first'
@@ -454,6 +451,7 @@ MODx.BreadcrumbsPanel = function(config) {
 
 Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 	init: function(){
+		this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
 		this.reset(this.desc);
 		this.body.on('click', this.onClick, this);
 	}
