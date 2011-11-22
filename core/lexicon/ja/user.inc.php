@@ -135,6 +135,7 @@ $_lang['user_group_err_nf'] = 'ユーザーグループが見つかりません'
 $_lang['user_group_err_not_found'] = 'ユーザーグループが見つかりません';
 $_lang['user_group_err_not_specified'] = 'ユーザーグループが指定されていません';
 $_lang['user_group_err_ns'] = 'ユーザーグループが指定されていません';
+$_lang['user_group_err_ns_name'] = 'Please specify a name for this user group.';
 $_lang['user_group_err_remove'] = 'ユーザーグループの削除中にエラーが発生しました。';
 $_lang['user_group_err_remove_admin'] = '管理者のグループを削除できません。';
 $_lang['user_group_err_save'] = 'ユーザーグループの保存中にエラーが発生しました。';
