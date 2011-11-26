@@ -23,6 +23,7 @@ class modPluginCreateProcessor extends modElementCreateProcessor {
     public $languageTopics = array('chunk');
     public $permission = 'new_plugin';
     public $elementType = 'plugin';
+    public $objectType = 'plugin';
     public $beforeSaveEvent = 'OnBeforePluginFormSave';
     public $afterSaveEvent = 'OnPluginFormSave';
 

@@ -19,6 +19,7 @@ class modChunkCreateProcessor extends modElementCreateProcessor {
     public $languageTopics = array('chunk');
     public $permission = 'new_chunk';
     public $elementType = 'chunk';
+    public $objectType = 'chunk';
     public $beforeSaveEvent = 'OnBeforeChunkFormSave';
     public $afterSaveEvent = 'OnChunkFormSave';
 }

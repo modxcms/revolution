@@ -21,7 +21,7 @@ class modSnippetUpdateProcessor extends modElementUpdateProcessor {
     public $languageTopics = array('snippet','category');
     public $permission = 'save_snippet';
     public $objectType = 'snippet';
-    public $beforeRemoveEvent = 'OnBeforeSnipFormSave';
-    public $afterRemoveEvent = 'OnSnipFormSave';
+    public $beforeSaveEvent = 'OnBeforeSnipFormSave';
+    public $afterSaveEvent = 'OnSnipFormSave';
 }
 return 'modSnippetUpdateProcessor';

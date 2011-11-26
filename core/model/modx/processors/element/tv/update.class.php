@@ -28,8 +28,8 @@ class modElementTvUpdateProcessor extends modElementUpdateProcessor {
     public $languageTopics = array('tv','category');
     public $permission = 'save_tv';
     public $objectType = 'tv';
-    public $beforeRemoveEvent = 'OnBeforeTVFormSave';
-    public $afterRemoveEvent = 'OnTVFormSave';
+    public $beforeSaveEvent = 'OnBeforeTVFormSave';
+    public $afterSaveEvent = 'OnTVFormSave';
 
     public function beforeSave() {
         $this->setInputProperties();

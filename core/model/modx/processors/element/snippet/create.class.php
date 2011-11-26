@@ -20,6 +20,7 @@ class modSnippetCreateProcessor extends modElementCreateProcessor {
     public $languageTopics = array('snippet','category');
     public $permission = 'new_snippet';
     public $elementType = 'snippet';
+    public $objectType = 'snippet';
     public $beforeSaveEvent = 'OnBeforeSnipFormSave';
     public $afterSaveEvent = 'OnSnipFormSave';
 }
