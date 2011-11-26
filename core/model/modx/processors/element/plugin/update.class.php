@@ -24,8 +24,8 @@ class modPluginUpdateProcessor extends modElementUpdateProcessor {
     public $languageTopics = array('plugin','category');
     public $permission = 'save_plugin';
     public $objectType = 'plugin';
-    public $beforeRemoveEvent = 'OnBeforePluginFormSave';
-    public $afterRemoveEvent = 'OnPluginFormSave';
+    public $beforeSaveEvent = 'OnBeforePluginFormSave';
+    public $afterSaveEvent = 'OnPluginFormSave';
 
     public function beforeSave() {
         $disabled = (boolean)$this->getProperty('disabled',false);
