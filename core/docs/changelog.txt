@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6145] Allow sorting of plugin events by enabled flag
 - [#6065] Fix issue with missing paths in certain environments for new installs in setup
 - Fix provider select window width in Chrome/Windows
 - [#6081] Fix issue in modFileMediaSource that prevented source properties from being read in certain processors
