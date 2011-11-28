@@ -22,8 +22,8 @@ class modTemplateUpdateProcessor extends modElementUpdateProcessor {
     public $languageTopics = array('template','category');
     public $permission = 'save_template';
     public $objectType = 'template';
-    public $beforeRemoveEvent = 'OnBeforeTempFormSave';
-    public $afterRemoveEvent = 'OnTempFormSave';
+    public $beforeSaveEvent = 'OnBeforeTempFormSave';
+    public $afterSaveEvent = 'OnTempFormSave';
 
     public function afterSave() {
         $this->setTemplateVariables();
