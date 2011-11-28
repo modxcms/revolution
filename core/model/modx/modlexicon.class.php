@@ -189,6 +189,10 @@ class modLexicon {
 
                 $englishEntries = $language != 'en' ? $this->loadCache($namespace,$topic_parsed,'en') : false;
                 $entries = $this->loadCache($namespace,$topic_parsed,$language);
+                if (!is_array($entries)) {
+                    if (is_string($entries) && !empty($entries)) $entries = $this->modx->fromJSON($entries);
+                    if (empty($entries)) $entries = array();
+                }
                 if (is_array($englishEntries) && !empty($englishEntries)) {
                     $entries = array_merge($englishEntries,$entries);
                 }
