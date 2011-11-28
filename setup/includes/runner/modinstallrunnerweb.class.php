@@ -112,6 +112,24 @@ class modInstallRunnerWeb extends modInstallRunner {
             $setting->set('value',0);
             $setting->save();
         }
+        $compressCss = $this->install->settings->get('compress_css');
+        if ($compressCss === 0) {
+            /** @var modSystemSetting $setting */
+            $setting = $this->install->xpdo->getObject('modSystemSetting',array(
+                'key' => 'compress_css',
+            ));
+            if (empty($setting)) {
+                $setting = $this->install->xpdo->newObject('modSystemSetting');
+                $setting->fromArray(array(
+                    'key' => 'compress_css',
+                    'xtype' => 'combo-boolean',
+                    'namespace' => 'core',
+                    'area' => 'manager',
+                ),'',true);
+            }
+            $setting->set('value',0);
+            $setting->save();
+        }
         return true;
     }
 }
