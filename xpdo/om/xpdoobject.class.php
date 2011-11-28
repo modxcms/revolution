@@ -314,6 +314,7 @@ class xPDOObject {
         elseif (isset ($row['class_key'])) {
             $actualClass= $row['class_key'];
         }
+        /** @var xPDOObject $instance */
         $instance= $xpdo->newObject($actualClass);
         if (is_object($instance) && $instance instanceof xPDOObject) {
             if (strpos(strtolower(key($row)), strtolower($alias . '_')) === 0) {
@@ -335,7 +336,12 @@ class xPDOObject {
                     $rowPrefix= $className . '_';
                 }
             }
-            if (!$instance instanceof $className) {
+            $parentClass = $className;
+            $isSubPackage = strpos($className,'.');
+            if ($isSubPackage !== false) {
+                $parentClass = substr($className,$isSubPackage+1);
+            }
+            if (!$instance instanceof $parentClass) {
                 $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
             }
             $instance->_lazy= $actualClass !== $className ? array_keys($xpdo->getFieldMeta($className)) : array_keys($instance->_fieldMeta);
