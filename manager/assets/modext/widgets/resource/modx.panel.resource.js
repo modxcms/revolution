@@ -5,7 +5,7 @@ MODx.panel.Resource = function(config) {
         url: MODx.config.connectors_url+'resource/index.php'
         ,baseParams: {}
         ,id: 'modx-panel-resource'
-        ,class_key: 'modResource'
+        ,class_key: 'modDocument'
         ,resource: ''
         ,bodyStyle: ''
 		,cls: 'container form-with-labels'

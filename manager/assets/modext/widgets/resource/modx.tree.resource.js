@@ -117,6 +117,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             var m = [];
             switch (n.attributes.type) {
                 case 'modResource':
+                case 'modDocument':
                     m = this._getModResourceMenu(n);
                     break;
                 case 'modContext':
@@ -430,7 +431,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
     
     ,quickCreate: function(itm,e,cls,ctx,p) {
-        cls = cls || 'modResource';
+        cls = cls || 'modDocument';
         var r = {
             class_key: cls
             ,context_key: ctx || 'web'
@@ -980,7 +981,7 @@ Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 MODx.getQRContentField = function(id,cls) {
     id = id || 'qur';
-    cls = cls || 'modResource';
+    cls = cls || 'modDocument';
     var dm = Ext.getBody().getViewSize();
     var o = {};
     switch (cls) {
@@ -1030,6 +1031,7 @@ MODx.getQRContentField = function(id,cls) {
             };
             break;
         case 'modResource':
+        case 'modDocument':
         default:
             o = {
                 xtype: 'textarea'
