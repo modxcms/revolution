@@ -30,7 +30,7 @@ foreach ($images as $image) {
                 $attributes[] = $k.'="'.$v.'"';
             }
         }
-        if (empty($attributes['alt'])) $attributes[] = 'alt=""';
+        if (empty($attr['alt'])) $attributes[] = 'alt=""';
         $attributes = implode(' ',$attributes);
         $attributes .= ' '.$params['attributes'];
 
