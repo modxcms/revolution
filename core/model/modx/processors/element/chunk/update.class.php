@@ -20,7 +20,7 @@ class modChunkUpdateProcessor extends modElementUpdateProcessor {
     public $languageTopics = array('chunk','category');
     public $permission = 'save_chunk';
     public $objectType = 'chunk';
-    public $beforeRemoveEvent = 'OnBeforeChunkFormSave';
-    public $afterRemoveEvent = 'OnChunkFormSave';
+    public $beforeSaveEvent = 'OnBeforeChunkFormSave';
+    public $afterSaveEvent = 'OnChunkFormSave';
 }
 return 'modChunkUpdateProcessor';
