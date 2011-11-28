@@ -225,6 +225,9 @@ class modInstall {
                 $cache_disabled = isset ($_POST['cache_disabled']) ? $_POST['cache_disabled'] : 'false';
                 $site_sessionname = 'SN' . uniqid('');
                 $config_options = array();
+
+
+                $config = $this->setDefaultPaths($config);
                 break;
         }
         $config = array_merge($config,array(
@@ -244,9 +247,39 @@ class modInstall {
             'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
             'config_options' => $config_options,
         ));
+
+
         $this->config = array_merge($this->config, $config);
         $this->config['database_dsn'] = $this->getDatabaseDSN($this->config['database_type'],$this->config['database_server'],$this->config['dbase'],$this->config['database_connection_charset']);
         return $this->config;
+    }
+
+    public function setDefaultPaths(array $config = array()) {
+        $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
+        $config['context_web_path'] = MODX_INSTALL_PATH;
+        $config['context_web_url'] = $webUrl;
+        $config['context_mgr_path'] = MODX_INSTALL_PATH . 'manager/';
+        $config['context_mgr_url'] = $webUrl . 'manager/';
+        $config['context_connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
+        $config['context_connectors_url'] = $webUrl . 'connectors/';
+        $config['core_path'] = MODX_CORE_PATH;
+        $config['web_path_auto'] = 0;
+        $config['web_path'] = MODX_INSTALL_PATH;
+        $config['web_url_auto'] = 0;
+        $config['web_url'] = $webUrl;
+        $config['mgr_path_auto'] = 0;
+        $config['mgr_path'] = MODX_INSTALL_PATH . 'manager/';
+        $config['mgr_url_auto'] = 0;
+        $config['mgr_url'] = $webUrl . 'manager/';
+        $config['connectors_path_auto'] = 0;
+        $config['connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
+        $config['connectors_url_auto'] = 0;
+        $config['connectors_url'] = $webUrl . 'connectors/';
+        $config['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
+        $config['assets_path'] = $config['web_path'] . 'assets/';
+        $config['assets_url'] = $config['web_url'] . 'assets/';
+
+        return $config;
     }
 
     public function getDatabaseDSN($databaseType,$databaseServer,$database,$databaseConnectionCharset = '') {
