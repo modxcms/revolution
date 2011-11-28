@@ -113,15 +113,18 @@ class modResourceGroupResourceGetListProcessor extends modProcessor {
     }
 
     /**
+     * Get reload data for the ResourceGroup list
+     * @param string $token
      * @return array|mixed
      */
-    protected function getRGReloadData(string $token) {
+    protected function getRGReloadData($token) {
         $modx =& $this->modx;
         $reloadData = array();
         if(!isset($modx->registry)) {
             $modx->getService('registry', 'registry.modRegistry');
         }
         if(isset($modx->registry)) {
+            /** @var modDbRegister $reg */
             $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
             $reg = $modx->registry->resource_reload;
             if($reg->connect()) {
