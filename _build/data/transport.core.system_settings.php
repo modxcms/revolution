@@ -944,6 +944,15 @@ $settings['manager_js_cache_max_age']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_js_document_root']= $xpdo->newObject('modSystemSetting');
+$settings['manager_js_document_root']->fromArray(array (
+  'key' => 'manager_js_document_root',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_js_zlib_output_compression']= $xpdo->newObject('modSystemSetting');
 $settings['manager_js_zlib_output_compression']->fromArray(array (
   'key' => 'manager_js_zlib_output_compression',

@@ -42,6 +42,7 @@ abstract class modInstallTest {
         $this->_checkDatabase();
         $this->_checkSafeMode();
         $this->_checkSuhosin();
+        $this->_checkDocumentRoot();
 
         return $this->results;
     }
@@ -322,6 +323,22 @@ abstract class modInstallTest {
         } else {
             $this->pass('test_suhosin_max_length');
             $this->install->settings->set('compress_js',1);
+        }
+        $this->install->settings->store();
+    }
+
+    /**
+     * If the server document root is empty, don't do JS/CSS compression until they set it up manually.
+     * @return void
+     */
+    public function _checkDocumentRoot() {
+        $documentRoot = $_SERVER['DOCUMENT_ROOT'];
+        if (empty($documentRoot)) {
+            $this->install->settings->set('compress_js',0);
+            $this->install->settings->set('compress_css',0);
+        } else {
+            $this->install->settings->set('compress_js',1);
+            $this->install->settings->set('compress_css',1);
         }
         $this->install->settings->store();
     }
