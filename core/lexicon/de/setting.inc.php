@@ -396,12 +396,14 @@ $_lang['setting_manager_favicon_url'] = 'Manager-Favicon-URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Wenn hier etwas eingegeben wird, wird diese URL als favicon für den MODX-Manager geladen. Es muss eine zum Verzeichnis manager/ relative URL oder eine absolute URL eingegeben werden.';
 
 $_lang['setting_manager_html5_cache'] = 'Verwende lokalen HTML5-Cache im Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Aktiviere lokales HTML5-Caching für den Manager. Die Benutzung wird nur empfohlen, wenn der Manager mit Hilfe von modernen Browsern bedient wird.';
+$_lang['setting_manager_html5_cache_desc'] = 'Experimentell. Aktiviere lokales HTML5-Caching für den Manager. Die Benutzung wird nur empfohlen, wenn der Manager mit Hilfe von modernen Browsern bedient wird.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Datei-Sperrung für den Manager-JS/CSS-Cache aktivieren';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache-Datei-Sperrung. Setzen Sie diese Einstellung auf "Nein", wenn das Dateisystem NFS ist.';
 $_lang['setting_manager_js_cache_max_age'] = 'Cache-Alter der Manager-JS/CSS-Komprimierung';
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximales Alter des Browser-Caches für die Manager-CSS/JS-Komprimierung in Sekunden. Nach diesem Zeitraum sendet der Browser einen weiteren "Conditional GET Request". Mit einem längeren Zeitraum erreichen Sie geringeren Traffic.';
+$_lang['setting_manager_js_document_root'] = 'Document Root für JS-/CSS-Komprimierung im Manager';
+$_lang['setting_manager_js_document_root_desc'] = 'Wenn Ihr Server die Server-Variable DOCUMENT_ROOT nicht (oder nicht korrekt) zur Verfügung stellt, setzen Sie sie hier explizit, um die CCS-/JavaScript-Kompression des Managers zu ermöglichen. Ändern Sie diesen Wert nur, wenn Sie wissen, was Sie tun.';
 $_lang['setting_manager_js_zlib_output_compression'] = 'zlib-Output-Komprimierung für Manager-JS/CSS aktivieren';
 $_lang['setting_manager_js_zlib_output_compression_desc'] = 'Gibt an, ob zlib-Output-Komprimierung für komprimiertes CSS/JS im Manager aktiviert wird oder nicht. Aktivieren Sie diese Einstellung nicht, wenn Sie nicht sicher sind, dass die PHP-Konfigurationsvariable zlib.output_compression auf den Wert 1 gesetzt werden kann. MODX empfiehlt, diese Option ausgeschaltet zu lassen.';
 
