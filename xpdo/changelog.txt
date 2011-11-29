@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#4523] Log SQL errors in xPDOObject::loadCollectionGraph
 - [#6095] Log errors when xPDOManager::addField/alterField fail
 - [#6098] Fix issue with preg_replace in xPDO::parseBindings() method
 - [#5970] Fix issue with subpackages and derived classes that would cause nonsensical error

@@ -529,9 +529,14 @@ class xPDOObject {
                 $fromCache = !empty($rows);
             }
             if (!$fromCache) {
-                $stmt= $query->prepare();
-                if ($stmt && $stmt->execute()) {
-                    $objCollection= $query->hydrateGraph($stmt, $cacheFlag);
+                if ($query->prepare()) {
+                    if ($query->stmt->execute()) {
+                        $objCollection= $query->hydrateGraph($query->stmt, $cacheFlag);
+                    } else {
+                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error {$query->stmt->errorCode()} executing query: {$query->sql} - " . print_r($query->stmt->errorInfo(), true));
+                    }
+                } else {
+                    $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error {$xpdo->errorCode()} preparing statement: {$query->sql} - " . print_r($xpdo->errorInfo(), true));
                 }
             } elseif (!empty($rows)) {
                 $objCollection= $query->hydrateGraph($rows, $cacheFlag);
