@@ -362,7 +362,6 @@ $_lang['remember_username'] = 'Запомнить меня';
 $_lang['remove'] = 'Удалить';
 $_lang['remove_category'] = 'Удалить';
 $_lang['remove_chunk'] = 'Удалить';
-$_lang['remove_date'] = 'Удалить';
 $_lang['remove_plugin'] = 'Удалить';
 $_lang['remove_date'] = 'Удалить дату';
 $_lang['remove_selected'] = 'Удалить выбранное';
