@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#6098] Fix issue with preg_replace in xPDO::parseBindings() method
 - [#5970] Fix issue with subpackages and derived classes that would cause nonsensical error
 
 xPDO 2.2.0-pl (November 15, 2011)
