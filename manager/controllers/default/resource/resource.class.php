@@ -258,6 +258,7 @@ abstract class ResourceManagerController extends modManagerController {
                 $this->modx->smarty->assign('tvcount',count($tvs));
                 /** @var modTemplateVar $tv */
                 foreach ($tvs as $tv) {
+                    $v = '';
                     $tv->set('inherited', false);
                     $cat = (int)$tv->get('category');
                     $tvid = $tv->get('id');
