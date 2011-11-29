@@ -256,6 +256,7 @@ abstract class ResourceManagerController extends modManagerController {
 
                 $reloading = !empty($reloadData) && count($reloadData) > 0;
                 $this->modx->smarty->assign('tvcount',count($tvs));
+                /** @var modTemplateVar $tv */
                 foreach ($tvs as $tv) {
                     $tv->set('inherited', false);
                     $cat = (int)$tv->get('category');
@@ -279,7 +280,7 @@ abstract class ResourceManagerController extends modManagerController {
 
                     if ($tv->get('type') == 'richtext') {
                         $this->rteFields = array_merge($this->rteFields,array(
-                            'tv' . $tv->id,
+                            'tv' . $tv->get('id'),
                         ));
                     }
                     $inputForm = $tv->renderInput($this->resource->get('id'), array('value'=> $v));
@@ -292,7 +293,7 @@ abstract class ResourceManagerController extends modManagerController {
                     }
 
                     /* add to tv/category map */
-                    $tvMap[$tv->id] = $tv->category;
+                    $tvMap[$tv->get('id')] = $tv->category;
 
                     /* add TV to category array */
                     $categories[$cat]->tvs[] = $tv;
@@ -305,6 +306,7 @@ abstract class ResourceManagerController extends modManagerController {
 
         $this->tvCounts = array();
         $finalCategories = array();
+        /** @var modCategory $category */
         foreach ($categories as $n => $category) {
             if (is_object($category) && $category instanceof modCategory) {
                 $category->hidden = empty($category->tvCount) ? true : false;

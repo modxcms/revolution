@@ -105,7 +105,7 @@ class modSmarty extends Smarty {
             $this->modx->getCacheManager();
             $this->modx->cacheManager->writeTree($path);
         }
-        $this->modx->smarty->compile_dir = $path;
+        $this->compile_dir = $path;
     }
 
     /**
