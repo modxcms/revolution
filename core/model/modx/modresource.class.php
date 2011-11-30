@@ -150,6 +150,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @var boolean
      */
     public $showInContextMenu = false;
+    /**
+     * Use if extending modResource to state whether or not the derivative class can be listed in the class_key
+     * dropdown users can change when editing a resource.
+     * @var boolean
+     */
+    public $allowListingInClassKeyDropdown = true;
     
     /** @var modX $xpdo */
     public $xpdo;
