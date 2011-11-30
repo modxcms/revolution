@@ -1,32 +1,34 @@
 <?php
 /**
+ * @var string|array $value
  * @package modx
  * @subpackage processors.element.tv.renders.mgr.input
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-$value = explode(",",$value);
+$value = is_array($value) ? $value : explode(',',$value);
 
-$default = explode("||",$this->get('default_text'));
+$default = explode('||',$this->get('default_text'));
 
-$index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
+$options = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
 $opts = array();
 $defaults = array();
 $i = 0;
-while (list($item, $itemvalue) = each ($index_list)) {
-    $checked = false;
-    list($item,$itemvalue) =  (is_array($itemvalue)) ? $itemvalue : explode("==",$itemvalue);
-    if (strlen($itemvalue)==0) $itemvalue = $item;
 
-    if (in_array($itemvalue,$value)) {
+while (list($item, $itemValue) = each ($options)) {
+    $checked = false;
+    $itemValue = is_array($itemValue) ? $itemValue : explode('==',$itemValue);
+    $item = $itemValue[0];
+    $itemValue = isset($itemValue[1]) ? $itemValue : $item;
+    if (in_array($itemValue,$value)) {
         $checked = true;
     }
-    if (in_array($itemvalue,$default)) {
+    if (in_array($itemValue,$default)) {
         $defaults[] = 'tv'.$this->get('id').'-'.$i;
     }
 
     $opts[] = array(
-        'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
+        'value' => htmlspecialchars($itemValue,ENT_COMPAT,'UTF-8'),
         'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
         'checked' => $checked,
     );

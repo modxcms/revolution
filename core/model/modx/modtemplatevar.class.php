@@ -545,8 +545,8 @@ class modTemplateVar extends modElement {
         $ps = explode('&',$params);
         foreach ($ps as $p) {
             $param = explode('=',$p);
-            if ($p[0] != '') {
-                $v = $param[1];
+            if (!empty($p[0])) {
+                $v = !empty($param[1]) ? $param[1] : 0;
                 if ($v == 'true') $v = 1;
                 if ($v == 'false') $v = 0;
                 $settings[$param[0]] = $v;
