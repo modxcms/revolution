@@ -53,6 +53,11 @@ class modElement extends modAccessibleSimpleObject {
      */
     public $_content= '';
     /**
+     * The source of the element.
+     * @var string
+     */
+    public $_source= null;    
+    /**
      * The output of the element.
      * @var string
      */
@@ -767,19 +772,35 @@ class modElement extends modAccessibleSimpleObject {
     public function getSource($contextKey = '',$fallbackToDefault = true) {
         if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
 
-        $c = $this->xpdo->newQuery('sources.modMediaSource');
-        $c->innerJoin('sources.modMediaSourceElement','SourceElement');
-        $c->where(array(
-            'SourceElement.object' => $this->get('id'),
-            'SourceElement.object_class' => $this->_class,
-            'SourceElement.context_key' => $contextKey,
-        ));
-        $source = $this->xpdo->getObject('sources.modMediaSource',$c);
-        if (!$source && $fallbackToDefault) {
-            $source = modMediaSource::getDefaultSource($this->xpdo);
+        $source = $this->_source; 
+
+        if (empty($source)) {
+
+            $c = $this->xpdo->newQuery('sources.modMediaSource');
+            $c->innerJoin('sources.modMediaSourceElement','SourceElement');
+            $c->where(array(
+                'SourceElement.object' => $this->get('id'),
+                'SourceElement.object_class' => $this->_class,
+                'SourceElement.context_key' => $contextKey,
+            ));
+            $source = $this->xpdo->getObject('sources.modMediaSource',$c);
+            if (!$source && $fallbackToDefault) {
+                $source = modMediaSource::getDefaultSource($this->xpdo);
+            }
+            $this->setSource($source);
         }
+        
         return $source;
     }
+    
+    /**
+     * Setter method for the source class var.
+     *
+     * @param string $source The source to use for this element.
+     */
+    public function setSource($source) {
+        $this->_source = $source;
+    }    
 
     /**
      * Get the stored sourceCache for a context
