@@ -602,6 +602,18 @@ $events['OnUserActivate']->fromArray(array (
   'service' => 1,
   'groupname' => 'Users',
 ), '', true, true);
+$events['OnBeforeUserDeactivate']= $xpdo->newObject('modEvent');
+$events['OnBeforeUserDeactivate']->fromArray(array (
+  'name' => 'OnBeforeUserDeactivate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserDeactivate']= $xpdo->newObject('modEvent');
+$events['OnUserDeactivate']->fromArray(array (
+  'name' => 'OnUserDeactivate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
 $events['OnUserChangePassword']= $xpdo->newObject('modEvent');
 $events['OnUserChangePassword']->fromArray(array (
   'name' => 'OnUserChangePassword',
