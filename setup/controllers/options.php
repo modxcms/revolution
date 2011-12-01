@@ -15,7 +15,7 @@ if (!empty($_POST['proceed'])) {
     $_POST['installmode'] = isset ($_POST['installmode']) ? intval($_POST['installmode']) : modInstall::MODE_NEW;
 
     /* if upgrading from evo/revo, get old settings */
-    $settings = $install->getConfig($_POST['installmode']);
+    $settings = $install->request->getConfig($_POST['installmode']);
     /* merge those with POST */
     $settings = array_merge($settings,$_POST);
 
