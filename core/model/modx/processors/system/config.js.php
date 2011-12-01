@@ -7,6 +7,7 @@
  * @param string $context If set with action, will output the context info for a
  * custom context by its action
  *
+ * @var modX $modx
  * @package modx
  * @subpackage processors.system
  */
@@ -30,6 +31,7 @@ $resourceClassNames = $modx->getDescendants('modResource');
 $resourceClassNames = array_diff($resourceClassNames,array('modResource'));
 foreach ($resourceClassNames as $resourceClassName) {
     $obj = $modx->newObject($resourceClassName);
+    /** @var modResource $obj */
     if ($obj->showInContextMenu) {
         $lex = $obj->getContextMenuText();
         $resourceClasses[$resourceClassName] = $lex;

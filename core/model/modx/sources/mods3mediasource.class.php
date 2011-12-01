@@ -258,7 +258,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $list = $this->getS3ObjectList($path);
         $properties = $this->getPropertyList();
 
-        $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
+        $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
         /* get default settings */
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);

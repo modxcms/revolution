@@ -477,7 +477,7 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
             $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
             
-            $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
+            $siteId = $this->modx->user->getUserToken('mgr');
 
             $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
 

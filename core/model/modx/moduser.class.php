@@ -341,6 +341,16 @@ class modUser extends modPrincipal {
     }
 
     /**
+     * Get the user token for the user
+     * @param string $ctx
+     * @return string
+     */
+    public function getUserToken($ctx = '') {
+        if (empty($ctx)) $ctx = $this->xpdo->context->get('key');
+        return isset($_SESSION['modx.'.$ctx.'.user.token']) ? $_SESSION['modx.'.$ctx.'.user.token'] : '';
+    }
+
+    /**
      * Removes a user session context.
      *
      * @access public

@@ -749,7 +749,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         if (empty($bases['pathAbsolute'])) return array();
         $fullPath = $bases['pathAbsolute'].$dir;
 
-        $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
+        $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
         /* get default settings */
         $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
