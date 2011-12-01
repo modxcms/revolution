@@ -226,7 +226,6 @@ class modInstall {
                 $site_sessionname = 'SN' . uniqid('');
                 $config_options = array();
 
-
                 $config = $this->setDefaultPaths($config);
                 break;
         }
@@ -256,12 +255,13 @@ class modInstall {
 
     public function setDefaultPaths(array $config = array()) {
         $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
+        $webUrl= rtrim($webUrl,'/').'/';
         $defaults = array();
-        $defaults['context_web_path'] = MODX_INSTALL_PATH;
+        $defaults['context_web_path'] = rtrim(MODX_INSTALL_PATH,'/').'/';
         $defaults['context_web_url'] = $webUrl;
-        $defaults['context_mgr_path'] = MODX_INSTALL_PATH . 'manager/';
+        $defaults['context_mgr_path'] = rtrim(MODX_INSTALL_PATH,'/') . '/manager/';
         $defaults['context_mgr_url'] = $webUrl . 'manager/';
-        $defaults['context_connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
+        $defaults['context_connectors_path'] = rtrim(MODX_INSTALL_PATH,'/') . '/connectors/';
         $defaults['context_connectors_url'] = $webUrl . 'connectors/';
         $defaults['core_path'] = MODX_CORE_PATH;
 
