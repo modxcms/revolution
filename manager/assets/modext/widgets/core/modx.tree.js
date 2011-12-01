@@ -194,7 +194,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
-            a[i].scope = this;
+            a[i].scope = a[i].scope || this;
             if (a[i].handler && typeof a[i].handler == 'string') {
                 a[i].handler = eval(a[i].handler);
             }

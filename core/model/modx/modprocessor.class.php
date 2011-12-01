@@ -278,7 +278,6 @@ abstract class modProcessor {
         if (is_string($value)) {
             /* properly handle common literal structures */
             if (strpos($value, 'function(') === 0
-             || strpos($value, 'this.') === 0
              || strpos($value, 'new Function(') === 0
              || strpos($value, 'Ext.') === 0) {
                 $value = '@@' . base64_encode($value) . '@@';
