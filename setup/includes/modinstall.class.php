@@ -256,29 +256,35 @@ class modInstall {
 
     public function setDefaultPaths(array $config = array()) {
         $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
-        $config['context_web_path'] = MODX_INSTALL_PATH;
-        $config['context_web_url'] = $webUrl;
-        $config['context_mgr_path'] = MODX_INSTALL_PATH . 'manager/';
-        $config['context_mgr_url'] = $webUrl . 'manager/';
-        $config['context_connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
-        $config['context_connectors_url'] = $webUrl . 'connectors/';
-        $config['core_path'] = MODX_CORE_PATH;
-        $config['web_path_auto'] = 0;
-        $config['web_path'] = MODX_INSTALL_PATH;
-        $config['web_url_auto'] = 0;
-        $config['web_url'] = $webUrl;
-        $config['mgr_path_auto'] = 0;
-        $config['mgr_path'] = MODX_INSTALL_PATH . 'manager/';
-        $config['mgr_url_auto'] = 0;
-        $config['mgr_url'] = $webUrl . 'manager/';
-        $config['connectors_path_auto'] = 0;
-        $config['connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
-        $config['connectors_url_auto'] = 0;
-        $config['connectors_url'] = $webUrl . 'connectors/';
-        $config['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
-        $config['assets_path'] = $config['web_path'] . 'assets/';
-        $config['assets_url'] = $config['web_url'] . 'assets/';
+        $defaults = array();
+        $defaults['context_web_path'] = MODX_INSTALL_PATH;
+        $defaults['context_web_url'] = $webUrl;
+        $defaults['context_mgr_path'] = MODX_INSTALL_PATH . 'manager/';
+        $defaults['context_mgr_url'] = $webUrl . 'manager/';
+        $defaults['context_connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
+        $defaults['context_connectors_url'] = $webUrl . 'connectors/';
+        $defaults['core_path'] = MODX_CORE_PATH;
+        $defaults['web_path_auto'] = 0;
+        $defaults['web_path'] = MODX_INSTALL_PATH;
+        $defaults['web_url_auto'] = 0;
+        $defaults['web_url'] = $webUrl;
+        $defaults['mgr_path_auto'] = 0;
+        $defaults['mgr_path'] = MODX_INSTALL_PATH . 'manager/';
+        $defaults['mgr_url_auto'] = 0;
+        $defaults['mgr_url'] = $webUrl . 'manager/';
+        $defaults['connectors_path_auto'] = 0;
+        $defaults['connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
+        $defaults['connectors_url_auto'] = 0;
+        $defaults['connectors_url'] = $webUrl . 'connectors/';
+        $defaults['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
+        $defaults['assets_path'] = $defaults['web_path'] . 'assets/';
+        $defaults['assets_url'] = $defaults['web_url'] . 'assets/';
 
+        foreach ($defaults as $k => $v) {
+            if (!array_key_exists($k,$config)) {
+                $config[$k] = $defaults[$k];
+            }
+        }
         return $config;
     }
 
