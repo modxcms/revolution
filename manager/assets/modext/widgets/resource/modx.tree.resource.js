@@ -556,6 +556,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
+    ,overviewResource: function() {this.loadAction('a='+MODx.action['resource/data'])}
+    ,quickUpdateResource: function(itm,e) {
+        Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
+    }
+    ,editResource: function() {this.loadAction('a='+MODx.action['resource/update']);}
+
     ,_getModResourceMenu: function(n) {
         var a = n.attributes;
         var ui = n.getUI();
@@ -569,22 +575,20 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (ui.hasClass('pview')) {
             m.push({
                 text: _('resource_overview')
-                ,handler: function() {this.loadAction('a='+MODx.action['resource/data'])}
+                ,handler: this.overviewResource
             });
         }
         if (ui.hasClass('pedit')) {
             m.push({
                 text: _('resource_edit')
-                ,handler: function() {this.loadAction('a='+MODx.action['resource/update']);}
+                ,handler: this.editResource
             });
         }
         if (ui.hasClass('pqupdate')) {
             m.push({
                 text: _('quick_update_resource')
                 ,classKey: a.classKey
-                ,handler: function(itm,e) {
-                    Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
-                }
+                ,handler: this.quickUpdateResource
             });
         }
         if (ui.hasClass('pnew')) {
@@ -595,9 +599,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
         m.push({
             text: _('resource_refresh')
-            ,handler: function() {
-                this.refreshNode(this.cm.activeNode.id);
-            }
+            ,handler: this.refreshResource
             ,scope: this
         });
 
@@ -641,6 +643,26 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
+    ,refreshResource: function() {
+        this.refreshNode(this.cm.activeNode.id);
+    }
+
+    ,createResourceHere: function(itm) {
+        var at = this.cm.activeNode.attributes;
+        var p = itm.usePk ? itm.usePk : at.pk;
+        Ext.getCmp('modx-resource-tree').loadAction(
+            'a='+MODx.action['resource/create']
+            + '&class_key='+itm.classKey
+            + '&parent='+p
+            + (at.ctx ? '&context_key='+at.ctx : '')
+        );
+    }
+    ,createResource: function(itm,e) {
+        var at = this.cm.activeNode.attributes;
+        var p = itm.usePk ? itm.usePk : at.pk;
+        Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
+    }
+
     ,_getCreateMenus: function(m,pk,ui) {
         var types = MODx.config.resource_classes;
         var o = this.fireEvent('loadCreateMenus',types);
@@ -660,40 +682,27 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: types[k]['text_create_here']
                 ,classKey: k
                 ,usePk: pk ? pk : false
-                ,handler: function(itm) {
-                    var at = this.cm.activeNode.attributes;
-                    var p = itm.usePk ? itm.usePk : at.pk;
-                    Ext.getCmp('modx-resource-tree').loadAction(
-                        'a='+MODx.action['resource/create']
-                        + '&class_key='+itm.classKey
-                        + '&parent='+p
-                        + (at.ctx ? '&context_key='+at.ctx : '')
-                    );
-                }
+                ,handler: this.createResourceHere
                 ,scope: this
             });
             if (ui && ui.hasClass('pqcreate')) {
                 qct.push({
                     text: types[k]['text_create']
                     ,classKey: k
-                    ,handler: function(itm,e) {
-                        var at = this.cm.activeNode.attributes;
-                        var p = itm.usePk ? itm.usePk : at.pk;
-                        Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
-                    }
+                    ,handler: this.createResource
                     ,scope: this
                 });
             }
         }
         m.push({
             text: _('create')
-            ,handler: function() {return false;}
+            ,handler: Ext.emptyFn
             ,menu: {items: ct}
         });
         if (ui && ui.hasClass('pqcreate')) {
             m.push({
                text: _('quick_create')
-               ,handler: function() {return false;}
+               ,handler: Ext.emptyFn
                ,menu: {items: qct}
             });
         }
