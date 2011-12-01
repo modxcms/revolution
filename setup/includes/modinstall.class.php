@@ -275,7 +275,7 @@ class modInstall {
         $defaults['web_path'] = $defaults['context_web_path'];
         $defaults['web_url'] = $defaults['context_web_url'];
         $defaults['mgr_path'] = $defaults['context_mgr_path'];
-        $defaults['mgr_url'] = $defaults['context_manager_url'];
+        $defaults['mgr_url'] = $defaults['context_mgr_url'];
         $defaults['connectors_path'] = $defaults['context_connectors_path'];
         $defaults['connectors_url'] = $defaults['context_connectors_url'];
         $defaults['web_path_auto'] = 0;
