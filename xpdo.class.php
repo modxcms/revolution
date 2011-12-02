@@ -628,7 +628,7 @@ class xPDO {
      * @param mixed $default An optional default value to return if no value is found.
      * @return mixed The configuration option value.
      */
-    public function getOption($key, $options = null, $default = null) {
+    public function getOption($key, $options = null, $default = null, $skipEmpty = false) {
         $option= $default;
         if (is_array($key)) {
             if (!is_array($option)) {
@@ -639,9 +639,9 @@ class xPDO {
                 $option[$k]= $this->getOption($k, $options, $default);
             }
         } elseif (is_string($key) && !empty($key)) {
-            if (is_array($options) && !empty($options) && array_key_exists($key, $options)) {
+            if (is_array($options) && !empty($options) && array_key_exists($key, $options) && (!$skipEmpty || ($skipEmpty && $options[$key] !== ''))) {
                 $option= $options[$key];
-            } elseif (is_array($this->config) && !empty($this->config) && array_key_exists($key, $this->config)) {
+            } elseif (is_array($this->config) && !empty($this->config) && array_key_exists($key, $this->config) && (!$skipEmpty || ($skipEmpty && $this->config[$key] !== ''))) {
                 $option= $this->config[$key];
             }
         }
@@ -2587,7 +2587,7 @@ class xPDO {
                     } else {
                         $v= 'NULL';
                     }
-                    $bound[$pattern] = $v;
+                    $bound[$pattern] = str_replace(array('$', '\\'), array('\$', '\\\\'), $v);
                 } else {
                     $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
                     $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);
