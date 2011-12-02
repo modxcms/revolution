@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6198] Fix issue with saving user groups on a new user that caused duplicate role saving
 - [#6159] Implement OnBeforeUserActivate, OnUserActivate, OnBeforeUserDeactivate, and OnUserDeactivate events
 - [#6063] Add extra settings and checks to allow for better handling of manager CSS/JS minification on servers that do not allow DOCUMENT_ROOT access
 - [#6147] Fix element processors not firing proper events and passing wrong variables to plugins.

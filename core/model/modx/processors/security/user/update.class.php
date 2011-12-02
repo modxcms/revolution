@@ -84,6 +84,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
     public function beforeSave() {
         $this->setProfile();
         $this->setRemoteData();
+        $this->setUserGroups();
 
         $this->validator = new modUserValidation($this,$this->object,$this->profile);
         $this->validator->validate();
@@ -160,17 +161,20 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             foreach ($oldMemberships as $membership) { $membership->remove(); }
 
             /* create user group links */
+            $groupsAdded = array();
             $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
             foreach ($groups as $group) {
+                if (in_array($group['usergroup'],$groupsAdded)) continue;
                 $membership = $this->modx->newObject('modUserGroupMember');
                 $membership->set('user_group',$group['usergroup']);
                 $membership->set('role',$group['role']);
                 $membership->set('member',$this->object->get('id'));
-                $membership->set('rank',$group['rank']);
+                $membership->set('rank',isset($group['rank']) ? $group['rank'] : 0);
                 if (empty($group['rank'])) {
                     $primaryGroupId = $group['usergroup'];
                 }
                 $memberships[] = $membership;
+                $groupsAdded[] = $group['usergroup'];
             }
             $this->object->addMany($memberships,'UserGroupMembers');
             $this->object->set('primary_group',$primaryGroupId);
