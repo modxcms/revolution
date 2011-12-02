@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6204] Fix issue where multiple languages could not be loaded per page in the lexicon
 - [#6196] Ensure that MODx.Browser view updates when changing a media source from dropdown in tree
 - [#6198] Fix issue with saving user groups on a new user that caused duplicate role saving
 - [#6159] Implement OnBeforeUserActivate, OnUserActivate, OnBeforeUserDeactivate, and OnUserDeactivate events

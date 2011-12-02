@@ -1935,11 +1935,13 @@ class modX extends xPDO {
      * @access public
      * @param string $key
      * @param array $params
+     * @param string $language
      * @return null|string The translated string, or null if none is set
      */
-    public function lexicon($key,$params = array()) {
+    public function lexicon($key,$params = array(),$language = '') {
+        $language = !empty($language) ? $language : $this->getOption('cultureKey',null,'en');
         if ($this->lexicon) {
-            return $this->lexicon->process($key,$params);
+            return $this->lexicon->process($key,$params,$language);
         } else {
             $this->log(modX::LOG_LEVEL_ERROR,'Culture not initialized; cannot use lexicon.');
         }

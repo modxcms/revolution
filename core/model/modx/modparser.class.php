@@ -1347,7 +1347,7 @@ class modLexiconTag extends modTag {
                 $language = !empty($this->_properties['language']) ? $this->_properties['language'] : $this->modx->getOption('cultureKey',null,'en');
                 $this->modx->lexicon->load($language.':'.$namespace.':'.$topic);
 
-                $this->_content= $this->modx->lexicon($this->get('name'), $this->_properties);
+                $this->_content= $this->modx->lexicon($this->get('name'), $this->_properties,$language);
             }
         }
         return $this->_content;
