@@ -438,8 +438,8 @@ class modLexicon {
      * @return int
      */
     public function total($language = '') {
-        $langauge = !empty($language) ? $language : $this->modx->getOption('cultureKey',null,'en');
-        return count($this->_lexicon);
+        $language = !empty($language) ? $language : $this->modx->getOption('cultureKey',null,'en');
+        return count($this->_lexicon[$language]);
     }
 
     /**
