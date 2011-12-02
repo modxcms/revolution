@@ -68,6 +68,7 @@ MODx.tree.Directory = function(config) {
         'beforeUpload': true
         ,'afterUpload': true
         ,'fileBrowserSelect': true
+        ,'changeSource': true
     });
     this.on('click',function(n,e) {
         n.select();
@@ -112,6 +113,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var rn = this.getRootNode();
         if (rn) { rn.setText(sel.getRawValue()); }
         this.config.baseParams.source = s;
+        this.fireEvent('changeSource',s);
         this.refresh();
     }
     ,_initExpand: function() {

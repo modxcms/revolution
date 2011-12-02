@@ -185,6 +185,12 @@ MODx.browser.Window = function(config) {
         ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
+            ,'changeSource': {fn:function(s) {
+                this.config.source = s;
+                this.view.config.source = s;
+                this.view.baseParams.source = s;
+                this.view.run();
+            },scope:this}
         }
     });
     this.tree.on('click',function(node,e) {
