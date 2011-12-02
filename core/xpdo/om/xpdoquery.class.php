@@ -644,27 +644,29 @@ abstract class xPDOQuery extends xPDOCriteria {
                         if (in_array(strtoupper($operator), array('IN', 'NOT IN')) && is_array($val)) {
                             $vals = array();
                             foreach ($val as $v) {
-                                switch ($type) {
-                                    case PDO::PARAM_INT:
-                                        $vals[] = (integer) $v;
-                                        break;
-                                    case PDO::PARAM_STR:
-                                        $vals[] = $this->xpdo->quote($v);
-                                        break;
-                                    default:
-                                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($v, true));
-                                        break;
+                                if ($v === null) {
+                                    $vals[] = null;
+                                } else {
+                                    switch ($type) {
+                                        case PDO::PARAM_INT:
+                                            $vals[] = (integer) $v;
+                                            break;
+                                        case PDO::PARAM_STR:
+                                            $vals[] = $this->xpdo->quote($v);
+                                            break;
+                                        default:
+                                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($v, true));
+                                            break;
+                                    }
                                 }
                             }
-                            if (!empty($vals)) {
-                                $val = "(" . implode(',', $vals) . ")";
-                                $sql = "{$this->xpdo->escape($alias)}.{$this->xpdo->escape($key)} {$operator} {$val}";
-                                $result[]= new xPDOQueryCondition(array('sql' => $sql, 'binding' => null, 'conjunction' => $conj));
-                                continue;
-                            } else {
-                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($val, true));
-                                continue;
+                            if (empty($vals)) {
+                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Encountered empty {$operator} condition with key {$key}");
                             }
+                            $val = "(" . implode(',', $vals) . ")";
+                            $sql = "{$this->xpdo->escape($alias)}.{$this->xpdo->escape($key)} {$operator} {$val}";
+                            $result[]= new xPDOQueryCondition(array('sql' => $sql, 'binding' => null, 'conjunction' => $conj));
+                            continue;
                         }
                         $field= array ();
                         $field['sql']= $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($key) . ' ' . $operator . ' ?';
