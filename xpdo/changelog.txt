@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.1-pl (December 2, 2011)
+====================================
 - [#3976] Trigger SQL error when empty IN condition encountered
 - [#6152] Optionally skip empty string values in xPDO::getOption()
 - [#4523] Log SQL errors in xPDOObject::loadCollectionGraph
