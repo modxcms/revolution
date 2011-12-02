@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#3976] Trigger SQL error when empty IN condition encountered
 - [#6152] Optionally skip empty string values in xPDO::getOption()
 - [#4523] Log SQL errors in xPDOObject::loadCollectionGraph
 - [#6095] Log errors when xPDOManager::addField/alterField fail
