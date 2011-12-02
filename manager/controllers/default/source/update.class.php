@@ -11,7 +11,10 @@
 class SourceUpdateManagerController extends modManagerController {
     /** @var modMediaSource $source */
     public $source;
+    /** @var array $sourceArray An array of fields for the source */
     public $sourceArray = array();
+    /** @var array $sourceDefaultProperties The default properties on the source */
+    public $sourceDefaultProperties = array();
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -34,6 +37,7 @@ class SourceUpdateManagerController extends modManagerController {
         $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load({
     xtype: "modx-page-source-update"
     ,record: '.$this->modx->toJSON($this->sourceArray).'
+    ,defaultProperties: '.$this->modx->toJSON($this->sourceDefaultProperties).'
 });});</script>');
     }
 
@@ -51,6 +55,8 @@ class SourceUpdateManagerController extends modManagerController {
         $this->getProperties();
         $this->getAccess();
 
+        $this->getDefaultProperties();
+
         return array();
     }
 
@@ -60,17 +66,38 @@ class SourceUpdateManagerController extends modManagerController {
         foreach ($properties as $property) {
             $data[] = array(
                 $property['name'],
-                $property['desc'],
-                $property['type'],
+                !empty($property['desc']) ? $property['desc'] : '',
+                !empty($property['type']) ? $property['type'] : 'textfield',
                 !empty($property['options']) ? $property['options'] : array(),
                 $property['value'],
-                $property['lexicon'],
+                !empty($property['lexicon']) ? $property['lexicon'] : '',
                 !empty($property['overridden']) ? $property['overridden'] : 0,
-                $property['desc_trans'],
-                $property['name_trans'],
+                !empty($property['desc_trans']) ? $property['desc_trans'] : '',
+                !empty($property['name_trans']) ? $property['name_trans'] : '',
             );
         }
         $this->sourceArray['properties'] = $data;
+    }
+
+    public function getDefaultProperties() {
+        $default = $this->source->getDefaultProperties();
+        $default = $this->source->prepareProperties($default);
+        $data = array();
+        foreach ($default as $property) {
+            $data[] = array(
+                $property['name'],
+                !empty($property['desc']) ? $property['desc'] : '',
+                !empty($property['type']) ? $property['type'] : 'textfield',
+                !empty($property['options']) ? $property['options'] : array(),
+                $property['value'],
+                !empty($property['lexicon']) ? $property['lexicon'] : '',
+                0,
+                !empty($property['desc_trans']) ? $property['desc_trans'] : '',
+                !empty($property['name_trans']) ? $property['name_trans'] : '',
+            );
+        }
+        $this->sourceDefaultProperties = $data;
+        return $data;
     }
 
     public function getAccess() {

@@ -428,7 +428,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      * @param array $properties
      * @return array
      */
-    protected function prepareProperties(array $properties = array()) {
+    public function prepareProperties(array $properties = array()) {
         foreach ($properties as &$property) {
             if (!empty($property['lexicon'])) {
                 $this->xpdo->lexicon->load($property['lexicon']);
