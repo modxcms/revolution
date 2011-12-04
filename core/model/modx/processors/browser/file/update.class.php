@@ -26,7 +26,7 @@ class modBrowserFileUpdateProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));  
         $path = $this->source->updateObject($filePath,$this->getProperty('content'));
         if (empty($path)) {
             $msg = '';

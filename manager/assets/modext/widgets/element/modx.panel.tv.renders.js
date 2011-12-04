@@ -31,6 +31,7 @@ MODx.panel.ImageTV = function(config) {
             ,value: config.relativeValue
             ,hideFiles: true
             ,source: config.source || 1
+            ,res_id: config.res_id || false
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,openTo: config.openTo || ''
             ,listeners: {

@@ -30,7 +30,7 @@ class modBrowserFileCreateProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));  
         $path = $this->source->createObject($directory,$name,$this->getProperty('content'));
         if (empty($path)) {
             $msg = '';

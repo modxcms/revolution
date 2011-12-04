@@ -27,7 +27,7 @@ class modBrowserFileRenameProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));
         $success = $this->source->renameObject($oldFile,$this->getProperty('name'));
 
         if (empty($success)) {

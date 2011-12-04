@@ -41,7 +41,7 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));
         $success = $this->source->removeContainer($this->getProperty('dir'));
 
         if (empty($success)) {

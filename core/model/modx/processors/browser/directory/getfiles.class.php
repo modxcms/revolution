@@ -42,7 +42,7 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));
         $list = $this->source->getObjectsInContainer($this->getProperty('dir'));
         return $this->outputArray($list);
     }

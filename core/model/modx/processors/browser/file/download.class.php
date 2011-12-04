@@ -14,7 +14,7 @@ class modBrowserFileDownloadProcessor extends modProcessor {
         if ($source !== true) {
             return $source;
         }
-        
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));  
         if ($this->getProperty('download',false)) {
             return $this->download();
         } else {

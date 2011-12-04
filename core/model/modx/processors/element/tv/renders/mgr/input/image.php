@@ -38,5 +38,6 @@ if (!$source->checkPolicy('view')) {
 
 $modx->controller->setPlaceholder('params',$params);
 $modx->controller->setPlaceholder('tv',$this);
+$modx->controller->setPlaceholder('res_id',$modx->resource->get('id'));
 
 return $modx->controller->fetchTemplate('element/tv/renders/input/image.tpl');

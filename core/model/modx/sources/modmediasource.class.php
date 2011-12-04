@@ -541,6 +541,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         if (substr($src,0,4) != 'http') {
             if (strpos($src,'/') !== 0) {
                 $properties = $this->getPropertyList();
+                $properties['basePath'] = $this->processPlaceholders(null,$properties['basePath']);//Bruno
                 $src = $properties['basePath'].$src;
                 if (!empty($properties['basePathRelative'])) {
                     $src = $this->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
@@ -560,6 +561,13 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         }
         return $src;
     }
+    
+    public function processPlaceholders($placeholders,$content){
+        $chunk = $this->xpdo->newObject('modChunk');
+        $chunk->setCacheable(false);
+        $chunk->setContent($content);
+        return $chunk->process($placeholders);        
+    }    
 
     /**
      * Prepares the output URL when the Source is being used in an Element. Can be overridden to provide prefixing/post-
