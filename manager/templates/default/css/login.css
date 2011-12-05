@@ -136,18 +136,21 @@ label { cursor: pointer; }
 
 .login-form-item {
     float: left;
-    margin: 0 4px;
+    margin: 0;
+}
+.login-form-item-first {
+    margin-right: 4px;
 }
 .login-form-element {
     padding: 0;
 }
 .login-form-element .x-form-text {
     padding: 8px;
-    width: 160px;
+    width: 181px;
 }
 
 .login-cb-row {
-    padding: 9px 7px 0 12px;
+    padding: 9px 0 0 0;
 }
 .x-form-check-wrap .x-form-cb-label {
     color: #bbb;
@@ -157,7 +160,7 @@ label { cursor: pointer; }
     line-height: 18px;
     cursor: pointer;
     float: right;
-    margin: 2px 90px 0 0;
+    margin: 2px 102px 0 0;
 }
 .login-form-btn {
     padding: 8px 18px;
@@ -190,5 +193,12 @@ label { cursor: pointer; }
 }
 
 #modx-fl-btn {
-    margin-left: 4px;
+    margin-left: 0;
+}
+
+.x-panel-mr {
+    padding-right: 0;
+}
+.x-panel-mc {
+    padding: 10px 0;
 }

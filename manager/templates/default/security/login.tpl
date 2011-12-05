@@ -51,7 +51,7 @@
     {if $error_message}<p class="error">{$error_message}</p>{/if}
     </div></div></div>
 
-    <div class="x-form-item login-form-item">
+    <div class="x-form-item login-form-item login-form-item-first">
       <div class="x-form-element login-form-element">
         <input type="text" id="modx-login-username" name="username" tabindex="1" autocomplete="on" value="{$_post.username}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" />
       </div>
