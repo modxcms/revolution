@@ -20,7 +20,10 @@ p {
 }
 
 #whatwhyhow p,#footer p {
-    color: #fff;
+    color: #aaa;
+}
+#whatwhyhow a,#footer a {
+    color: #ccc !important;
 }
 
 img.left {
@@ -137,8 +140,8 @@ hr {
 
 #quickstart a,#metanav a {
     text-decoration: none;
-    color: #fff;
-    font: bold 12px/ 30px "Lucida Grande", Lucida, Verdana, sans-serif;
+    color: #ccc;
+    font: normal 12px/ 30px "Lucida Grande", Lucida, Verdana, sans-serif;
     text-transform: uppercase;
     display: block;
 }
@@ -296,7 +299,7 @@ hr {
 }
 
 #footer-inner {
-    padding-bottom: 55px;
+    padding-bottom: 35px;
 }
 #footer #footer-inner a {
     color: #88E646;
@@ -562,7 +565,6 @@ hr {
     margin-bottom: .5em;
     line-height: 1em;
     font-size: 1.7em;
-    font-weight: bold;
 }
 
 #contentarea h3 {

@@ -6,7 +6,7 @@
     <p class="note">{$_lang.restarted_msg}</p>
 {/if}
 
-<div class="setup_navbar">
+<div class="setup_navbar" style="border-top: 0;">
     <p class="title">{$_lang.choose_language}:
         <select name="language">
             {$languages}
