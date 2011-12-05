@@ -125,13 +125,15 @@ table.options td {
 .cleanup {
     float:left;
     cursor:pointer;
-    background-color: #EEE;
     color: #444;
+    margin-top: 10px;
 }
 .cleanup label {
     display:inline;
     float:none;
-    padding: .5em;
+}
+.cleanup input {
+    margin-top: 3px !important;
 }
 
 /* setup navbar */
@@ -161,4 +163,50 @@ table.options td {
     border: 1px solid #CBD499;
     border-width: 1px 0 0 0;
     margin: 10px 20px;
+}
+html {
+    overflow-y: scroll;
+    background: transparent;
+}
+.post_body {
+    height: 20px;
+    opacity: 1;
+    background: #BCCACD;
+    background: -moz-linear-gradient(top, #BCCACD 0%, #F2F2F2 69%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#BCCACD), color-stop(69%,#F2F2F2));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#BCCACD', endColorstr='#F2F2F2',GradientType=0 );
+}
+
+#content {
+    padding: 20px 20px 20px 20px;
+    border: 1px solid #e1e1e1;
+    background: white;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+html {
+    background: url(../images/bg-pattern.png) top left repeat;
+}
+
+input, button, select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    background-color: #fbfbfb;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font: normal 13px arial, tahoma, helvetica, sans-serif;
+    vertical-align: middle;
+}
+input:active, input:hover {
+    border: 1px solid green;
+}
+button {
+    height: 33px;
+}
+input[type=submit], input[type=button], button {
+    font-weight: bold;
+    padding: 8px;
 }
