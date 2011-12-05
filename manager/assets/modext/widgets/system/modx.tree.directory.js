@@ -382,7 +382,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connectors_url+'browser/file.php?action=download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connectors_url+'browser/file.php?action=download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&res_id='+this.config.res_id+'&source='+this.getSource()+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }

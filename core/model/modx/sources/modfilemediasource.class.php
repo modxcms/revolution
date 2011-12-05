@@ -49,6 +49,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         } else {
             $bases['pathAbsolute'] = $bases['path'];
         }
+        $bases['path'] = $this->processPlaceholders(null,$bases['path']);//Bruno
         $bases['pathAbsolute'] = $this->processPlaceholders(null,$bases['pathAbsolute']);//Bruno
         
         $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].$path;
@@ -59,7 +60,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         /* get relative url */
         $bases['urlIsRelative'] = false;
-        $bases['url'] = $properties['baseUrl']['value'];;
+        $bases['url'] = $properties['baseUrl']['value'];
+        
         if (!empty($properties['baseUrlRelative']['value'])) {
             $bases['urlAbsolute'] = $this->ctx->getOption('base_url',MODX_BASE_URL).$bases['url'];
             $bases['urlIsRelative'] = true;
@@ -67,6 +69,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $bases['urlAbsolute'] = $bases['url'];
         }
         $bases['urlAbsolute'] = $this->processPlaceholders(null,$bases['urlAbsolute']);//Bruno
+        $bases['url'] = $this->processPlaceholders(null,$bases['url']);//Bruno        
         $bases['urlAbsoluteWithPath'] = $bases['urlAbsolute'].ltrim($path,'/');
         $bases['urlRelative'] = ltrim($path,'/');
         return $bases;
