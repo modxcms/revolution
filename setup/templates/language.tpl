@@ -1,10 +1,5 @@
 <form id="install" action="?" method="post">
 
-<div class="right">
-    <img src="{$_lang.img_box}" alt="{$_lang.app_motto}" />
-</div>
-<img src="{$_lang.img_splash}" alt="{$_lang.modx_install}" />
-
 {if $restarted}
     <br class="clear" />
     <br class="clear" />
