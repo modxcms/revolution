@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6215] Fix issues with derivative resources and non-standard manager themes
 - [#6237] Add ability to sort users by active status in mgr grid
 - [#6197] Refresh old and new context caches when moving Resource
 - Update to xPDO 2.2.1-pl

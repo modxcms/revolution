@@ -62,6 +62,11 @@ abstract class ResourceManagerController extends modManagerController {
             $action = strtolower(str_replace(array('Resource','ManagerController'),'',$className));
             $className = str_replace('mod','',$resourceClass).ucfirst($action).'ManagerController';
             $controllerFile = $delegateView.$action.'.class.php';
+            if (!file_exists($controllerFile)) {
+                $modx->setOption('manager_theme','default');
+                $delegateView = $modx->call($resourceClass,'getControllerPath',array(&$modx));
+                $controllerFile = $delegateView.$action.'.class.php';
+            }
             require_once $controllerFile;
         }
         $controller = new $className($modx,$config);
