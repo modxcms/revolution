@@ -136,6 +136,7 @@ MODx.Browser = function(config) {
         ,scope: this
         ,source: config.source || 1
         ,res_id: config.res_id || false
+        ,autoCreateFolder: config.autoCreateFolder || false
         ,cls: 'modx-browser'
     });
     MODx.Browser.superclass.constructor.call(this,config);
@@ -167,6 +168,7 @@ MODx.browser.Window = function(config) {
         ,prependUrl: config.prependUrl || null
         ,source: config.source || MODx.config.default_media_source
         ,res_id: config.res_id || false
+        ,autoCreateFolder: config.autoCreateFolder || false
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
         ,openTo: config.openTo || ''
@@ -282,6 +284,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             dir: dir
             ,source: this.config.source
             ,res_id: this.config.res_id || false
+            ,autoCreateFolder: this.config.autoCreateFolder || false            
             ,allowedFileTypes: this.config.allowedFileTypes || ''
             ,wctx: this.config.wctx || 'web'
         });
@@ -385,6 +388,7 @@ MODx.browser.View = function(config) {
             ,prependUrl: config.prependUrl || null
             ,source: config.source || 1
             ,res_id: config.res_id || false
+            ,autoCreateFolder: config.autoCreateFolder || false            
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,dir: config.openTo || ''
@@ -432,6 +436,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
             ,res_id: this.config.res_id || false
+            ,autoCreateFolder: this.config.autoCreateFolder || false
         });
         this.store.load({
             params: p

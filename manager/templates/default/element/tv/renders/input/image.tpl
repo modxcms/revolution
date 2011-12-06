@@ -40,6 +40,7 @@ Ext.onReady(function() {
         {if $params.openTo},openTo: '{$params.openTo}'{/if}
         ,source: '{$source}'
         ,res_id: '{$res_id}'
+        ,autoCreateFolder: {if $params.autoResourceFolders == 1 || $params.autoResourceFolders == 'true'}true{else}false{/if}
     {literal}
         ,msgTarget: 'under'
         ,listeners: {
