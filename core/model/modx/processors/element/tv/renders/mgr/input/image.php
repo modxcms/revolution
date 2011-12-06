@@ -22,7 +22,10 @@ $source->initialize();
 $modx->controller->setPlaceholder('source',$source->get('id'));
 $params = array_merge($source->getPropertyList(),$params);
 
-if (!$source->checkPolicy('view')) {
+ 
+$res_id = $modx->resource->get('id');
+
+if (!$source->checkPolicy('view') || ($params['autoResourceFolders'] == 'true' && empty($res_id))) {
     $modx->controller->setPlaceholder('disabled',true);
     $this->set('disabled',true);
     $this->set('relativeValue',$this->get('value'));
@@ -38,6 +41,6 @@ if (!$source->checkPolicy('view')) {
 
 $modx->controller->setPlaceholder('params',$params);
 $modx->controller->setPlaceholder('tv',$this);
-$modx->controller->setPlaceholder('res_id',$modx->resource->get('id'));
+$modx->controller->setPlaceholder('res_id',$res_id);
 
 return $modx->controller->fetchTemplate('element/tv/renders/input/image.tpl');
