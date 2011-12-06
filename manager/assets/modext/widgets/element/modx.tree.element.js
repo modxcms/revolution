@@ -358,7 +358,6 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         m.push('-');
         
         if (ui.hasClass('pedit')) {
-            console.log('edit_'+a.type);
             m.push({
                 text: _('edit_'+a.type)
                 ,type: a.type
