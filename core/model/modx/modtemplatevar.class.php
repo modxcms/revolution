@@ -43,6 +43,7 @@ class modTemplateVar extends modElement {
         'INHERIT',
         'DIRECTORY'
     );
+
     /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
      *
@@ -327,14 +328,208 @@ class modTemplateVar extends modElement {
         }
 
         /* process only @INHERIT bindings in value, since we're inputting */
-        $bdata = $this->getBindingDataFromValue($value);
-        if ($bdata['cmd'] == 'INHERIT') {
-            $value = $this->processInheritBinding($bdata['param'], $resourceId);
+        $bindingData = $this->getBindingDataFromValue($value);
+        if ($bindingData['cmd'] == 'INHERIT') {
+            $value = $this->processInheritBinding($bindingData['param'], $resourceId);
         }
 
         /* if any FC tvDefault rules, set here */
-        if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
+        $value = $this->checkForFormCustomizationRules($value);
+        /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
+        $this->set('value',$value);
+        $this->set('processedValue',$value);
+        $this->set('default_text',$this->processBindings($this->get('default_text'),$resourceId));
+
+        /* strip tags from description */
+        $this->set('description',strip_tags($this->get('description')));
+
+        $params= array ();
+        if ($paramstring= $this->get('display_params')) {
+            $cp= explode("&", $paramstring);
+            foreach ($cp as $p => $v) {
+                $v= trim($v);
+                $ar= explode("=", $v);
+                if (is_array($ar) && count($ar) == 2) {
+                    $params[$ar[0]]= $this->decodeParamValue($ar[1]);
+                }
+            }
+        }
+
+        $params = $this->get('input_properties');
+        /* default required status to no */
+        if (!isset($params['allowBlank'])) $params['allowBlank'] = 1;
+
+        /* find the correct renderer for the TV, if not one, render a textbox */
+        $inputRenderPaths = $this->getRenderDirectories('OnTVInputRenderList','input');
+        return $this->getRender($params,$value,$inputRenderPaths,'input',$resourceId,$this->get('type'));
+    }
+
+    /**
+     * Gets the correct render given paths and type of render
+     *
+     * @param array $params The parameters to pass to the render
+     * @param mixed $value The value of the TV
+     * @param array $paths An array of paths to search
+     * @param string $method The type of Render (input/output/properties)
+     * @param integer $resourceId The ID of the current Resource
+     * @param string $type The type of render to display
+     * @return string
+     */
+    public function getRender($params,$value,array $paths,$method,$resourceId = 0,$type = 'text') {
+        /* backwards compat stuff */
+        $name= $this->get('name');
+        $id= "tv$name";
+        $format= $this->get('display');
+        $tvtype= $this->get('type');
+        if (empty($type)) $type = 'default';
+        /* end backwards compat */
+        
+        $modx =& $this->xpdo;
+        if (empty($modx->resource)) {
             if (!empty($resourceId)) {
+                $modx->resource = $modx->getObject('modResource',$resourceId);
+            }
+            if (empty($modx->resource) || empty($resourceId)) {
+                $modx->resource = $modx->newObject('modResource');
+                $modx->resource->set('id',0);
+            }
+        }
+
+        $output = '';
+        if ($className = $this->checkForRegisteredRenderMethod($type,$method)) {
+            /** @var modTemplateVarOutputRender $render */
+            $render = new $className($this);
+            $output = $render->render($value,$params);
+        } else {
+            foreach ($paths as $path) {
+                $renderFile = $path.$type.'.class.php';
+                if (file_exists($renderFile)) {
+                    $className = include $renderFile;
+                    $this->registerRenderMethod($type,$method,$className);
+                    if (class_exists($className)) {
+                        /** @var modTemplateVarOutputRender $render */
+                        $render = new $className($this);
+                        $output = $render->render($value,$params);
+                    }
+                    break;
+                }
+
+                /* 2.1< backwards compat */
+                $renderFile = $path.$type.'.php';
+                if (file_exists($renderFile)) {
+                    $output = include $renderFile;
+                    break;
+                }
+            }
+            if (empty($output)) {
+                $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$method.'/';
+                $className = $method == 'output' ? 'modTemplateVarOutputRenderText' : 'modTemplateVarInputRenderText';
+                if (!class_exists($className) && file_exists($p.'text.class.php')) {
+                    $className = include $p.'text.class.php';
+                }
+                if (class_exists($className)) {
+                    $render = new $className($this);
+                    $output = $render->render($value,$params);
+
+                /* 2.1< backwards compat */
+                } else if (file_exists($p.'text.php')) {
+                    $output = include $p.'text.php';
+                } else {
+                    $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.($method == 'input' ? 'mgr' : 'web').'/'.$method.'/';
+                    if (file_exists($p.'text.php')) {
+                        $output = include $p.'text.php';
+                    }
+                }
+            }
+        }
+        return $output;
+    }
+
+    /**
+     * Check for a registered TV render
+     * @param string $type
+     * @param string $method
+     * @return bool
+     */
+    public function checkForRegisteredRenderMethod($type,$method) {
+        $v = false;
+        if (!isset($this->xpdo->tvRenders)) $this->xpdo->tvRenders = array();
+        if (!isset($this->xpdo->tvRenders[$method])) {
+            $this->xpdo->tvRenders[$method] = array();
+        }
+        if (!empty($this->xpdo->tvRenders[$method][$type])) {
+            $v = $this->xpdo->tvRenders[$method][$type];
+        }
+        return $v;
+    }
+
+    /**
+     * Register a render method to the array cache to prevent double loading of the class
+     * @param string $type
+     * @param string $method
+     * @param string $className
+     * @return mixed
+     */
+    public function registerRenderMethod($type,$method,$className) {
+        if (!isset($this->xpdo->tvRenders)) $this->xpdo->tvRenders = array();
+        if (!isset($this->xpdo->tvRenders[$method])) {
+            $this->xpdo->tvRenders[$method] = array();
+        }
+        $this->xpdo->tvRenders[$method][$type] = $className;
+        return $className;
+    }
+
+    /**
+     * Finds the correct directories for renders
+     *
+     * @param string $event The plugin event to fire
+     * @param string $subdir The subdir to search
+     * @return array The found render directories
+     */
+    public function getRenderDirectories($event,$subdir) {
+        $renderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$subdir.'/';
+        $renderDirectories = array(
+            $renderPath,
+            $this->xpdo->getOption('processors_path').'element/tv/renders/'.($subdir == 'input' ? 'mgr' : 'web').'/'.$subdir.'/',
+        );
+        $pluginResult = $this->xpdo->invokeEvent($event,array(
+            'context' => $this->xpdo->context->get('key'),
+        ));
+        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
+        if (!empty($pluginResult)) {
+            foreach ($pluginResult as $result) {
+                if (empty($result)) continue;
+                $renderDirectories[] = $result;
+            }
+        }
+
+        /* search directories */
+        $types = array();
+        $renderPaths = array();
+        foreach ($renderDirectories as $renderDirectory) {
+            if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
+            try {
+                $dirIterator = new DirectoryIterator($renderDirectory);
+                foreach ($dirIterator as $file) {
+                    if (!$file->isReadable() || !$file->isFile()) continue;
+                    $renderPaths[] = dirname($file->getPathname()).'/';
+                }
+            } catch (UnexpectedValueException $e) {}
+        }
+        $renderPaths = array_unique($renderPaths);
+        return $renderPaths;
+    }
+
+    /**
+     * Check for any Form Customization rules for this TV
+     * @param string $value
+     * @return mixed
+     */
+    public function checkForFormCustomizationRules($value) {
+        if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
+            $resource = false;
+            if (!empty($resourceId)) {
+                /** @var modResource $resource */
                 $resource = $this->xpdo->getObject('modResource',$resourceId);
             }
             $userGroups = $this->xpdo->user->getUserGroups();
@@ -379,6 +574,7 @@ class modTemplateVar extends modElement {
             $c->sortby('FCSet.template','ASC');
             $c->sortby('modActionDom.rank','ASC');
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
+            /** @var modActionDom $rule */
             foreach ($domRules as $rule) {
                 if (!empty($resourceId)) {
                     $template = $rule->get('template');
@@ -408,128 +604,7 @@ class modTemplateVar extends modElement {
             }
             unset($domRules,$rule,$userGroups,$v,$c);
         }
-        /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
-        $this->set('value',$value);
-        $this->set('processedValue',$value);
-        $this->set('default_text',$this->processBindings($this->get('default_text'),$resourceId));
-
-        /* strip tags from description */
-        $this->set('description',strip_tags($this->get('description')));
-
-        $this->xpdo->smarty->assign('tv',$this);
-        $this->xpdo->smarty->assign('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
-
-        $params= array ();
-        if ($paramstring= $this->get('display_params')) {
-            $cp= explode("&", $paramstring);
-            foreach ($cp as $p => $v) {
-                $v= trim($v);
-                $ar= explode("=", $v);
-                if (is_array($ar) && count($ar) == 2) {
-                    $params[$ar[0]]= $this->decodeParamValue($ar[1]);
-                }
-            }
-        }
-
-        $params = $this->get('input_properties');
-        /* default required status to no */
-        if (!isset($params['allowBlank'])) $params['allowBlank'] = 1;
-        $this->xpdo->smarty->assign('params',$params);
-        $this->xpdo->lexicon->load('tv_widget');
-
-        /* find the correct renderer for the TV, if not one, render a textbox */
-        $inputRenderPaths = $this->getRenderDirectories('OnTVInputRenderList','input');
-        return $this->getRender($params,$value,$inputRenderPaths,'input',$resourceId,$this->get('type'));
-    }
-
-    /**
-     * Gets the correct render given paths and type of render
-     *
-     * @param array $params The parameters to pass to the render
-     * @param mixed $value The value of the TV
-     * @param array $paths An array of paths to search
-     * @param string $method The type of Render (input/output/properties)
-     * @param integer $resourceId The ID of the current Resource
-     * @param string $type The type of render to display
-     * @return string
-     */
-    public function getRender($params,$value,array $paths,$method,$resourceId = 0,$type = 'text') {
-        /* backwards compat stuff */
-        $name= $this->get('name');
-        $id= "tv$name";
-        $format= $this->get('display');
-        $tvtype= $this->get('type');
-        /* end backwards compat */
-        
-        $modx =& $this->xpdo;
-        if (empty($modx->resource)) {
-            if (!empty($resourceId)) {
-                $modx->resource = $modx->getObject('modResource',$resourceId);
-            }
-            if (empty($modx->resource) || empty($resourceId)) {
-                $modx->resource = $modx->newObject('modResource');
-                $modx->resource->set('id',0);
-            }
-        }
-
-        $output = '';
-        foreach ($paths as $path) {
-            $renderFile = $path.$type.'.php';
-            if (file_exists($renderFile)) {
-                $output = include $renderFile;
-                break;
-            }
-        }
-        if (empty($output)) {
-            $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$method.'/';
-            if (file_exists($p.'text.php')) {
-                $output = include $p.'text.php';
-            } else {
-                $output = include $this->xpdo->getOption('processors_path').'element/tv/renders/'.($method == 'input' ? 'mgr' : 'web').'/'.$method.'/text.php';
-            }
-        }
-        return $output;
-    }
-
-    /**
-     * Finds the correct directories for renders
-     *
-     * @param string $event The plugin event to fire
-     * @param string $subdir The subdir to search
-     * @return array The found render directories
-     */
-    public function getRenderDirectories($event,$subdir) {
-        $renderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$subdir.'/';
-        $renderDirectories = array(
-            $renderPath,
-            $this->xpdo->getOption('processors_path').'element/tv/renders/'.($subdir == 'input' ? 'mgr' : 'web').'/'.$subdir.'/',
-        );
-        $pluginResult = $this->xpdo->invokeEvent($event,array(
-            'context' => $this->xpdo->context->get('key'),
-        ));
-        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
-        if (!empty($pluginResult)) {
-            foreach ($pluginResult as $result) {
-                if (empty($result)) continue;
-                $renderDirectories[] = $result;
-            }
-        }
-
-        /* search directories */
-        $types = array();
-        $renderPaths = array();
-        foreach ($renderDirectories as $renderDirectory) {
-            if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
-            try {
-                $dirIterator = new DirectoryIterator($renderDirectory);
-                foreach ($dirIterator as $file) {
-                    if (!$file->isReadable() || !$file->isFile()) continue;
-                    $renderPaths[] = dirname($file->getPathname()).'/';
-                }
-            } catch (UnexpectedValueException $e) {}
-        }
-        $renderPaths = array_unique($renderPaths);
-        return $renderPaths;
+        return $value;
     }
 
     /**
@@ -950,5 +1025,114 @@ class modTemplateVar extends modElement {
             'templateid' => is_object($template) ? $template->get('id') : $template,
         ));
         return !empty($templateVarTemplate) && is_object($templateVarTemplate);
+    }
+}
+
+/**
+ * An abstract class meant to be used by TV renders. Do not extend this class directly; use its Input or Output
+ * derivatives instead.
+ *
+ * @package modx
+ */
+abstract class modTemplateVarRender {
+    /** @var modTemplateVar $tv */
+    public $tv;
+    /** @var modX $modx */
+    public $modx;
+    /** @var array $config */
+    public $config = array();
+
+    function __construct(modTemplateVar $tv,array $config = array()) {
+        $this->tv =& $tv;
+        $this->modx =& $tv->xpdo;
+        $this->config = array_merge($this->config,$config);
+    }
+
+    /**
+     * Get any lexicon topics for your render. You may override this method in your render to provide an array of
+     * lexicon topics to load.
+     * @return array
+     */
+    public function getLexiconTopics() {
+        return array('tv_widget');
+    }
+
+    /**
+     * Render the TV render.
+     * @param string $value
+     * @param array $params
+     * @return mixed|void
+     */
+    public function render($value,array $params = array()) {
+        $this->_loadLexiconTopics();
+        return $this->process($value,$params);
+    }
+
+    /**
+     * Load any specified lexicon topics for the render
+     */
+    protected function _loadLexiconTopics() {
+        $topics = $this->getLexiconTopics();
+        if (!empty($topics) && !is_array($topics)) {
+            foreach ($topics as $topic) {
+                $this->modx->lexicon->load($topic);
+            }
+        }
+    }
+
+    /**
+     * @param string $value
+     * @param array $params
+     * @return void|mixed
+     */
+    public function process($value,array $params = array()) {
+        return $value;
+    }
+}
+/**
+ * An abstract class for extending Output Renders for TVs.
+ * @package modx
+ */
+abstract class modTemplateVarOutputRender extends modTemplateVarRender {}
+/**
+ * An abstract class for extending Input Renders for TVs.
+ * @package modx
+ */
+abstract class modTemplateVarInputRender extends modTemplateVarRender {
+    public function render($value,array $params = array()) {
+        $this->setPlaceholder('tv',$this->tv);
+        $this->setPlaceholder('id',$this->tv->get('id'));
+        $this->setPlaceholder('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
+        $this->setPlaceholder('params',$params);
+
+        $output = parent::render($value,$params);
+
+        $tpl = $this->getTemplate();
+        return !empty($tpl) ? $this->modx->controller->fetchTemplate($tpl) : $output;
+    }
+
+    /**
+     * Set a placeholder to be used in the template
+     * @param string $k
+     * @param mixed $v
+     */
+    public function setPlaceholder($k,$v) {
+        $this->modx->controller->setPlaceholder($k,$v);
+    }
+
+    /**
+     * Return the template path to load
+     * @return string
+     */
+    public function getTemplate() {
+        return '';
+    }
+
+    /**
+     * Return the input options parsed for the TV
+     * @return mixed
+     */
+    public function getInputOptions() {
+        return $this->tv->parseInputOptions($this->tv->processBindings($this->tv->get('elements'),$this->modx->resource->get('id')));
     }
 }
