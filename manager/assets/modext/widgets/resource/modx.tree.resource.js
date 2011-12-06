@@ -801,7 +801,7 @@ MODx.window.QuickCreateResource = function(config) {
                         },{
                             xtype: 'xcheckbox'
                             ,name: 'published'
-                            ,id: 'modx-'+id+'-published'
+                            ,id: 'modx-'+this.ident+'-published'
                             ,boxLabel: _('resource_published')
                             ,description: _('resource_published_help')
                             ,inputValue: 1
@@ -811,7 +811,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,boxLabel: _('resource_hide_from_menus')
                             ,description: _('resource_hide_from_menus_help')
                             ,name: 'hidemenu'
-                            ,id: 'modx-'+id+'-hidemenu'
+                            ,id: 'modx-'+this.ident+'-hidemenu'
                             ,inputValue: 1
                             ,checked: MODx.config.hidemenu_default == '1' ? 1 : 0
                         }]
