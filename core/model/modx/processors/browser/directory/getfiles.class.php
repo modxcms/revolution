@@ -21,18 +21,15 @@ class modBrowserFolderGetFilesProcessor extends modProcessor
     /**
      @var modMediaSource|modFileMediaSource $source */
     public $source;
-    public function checkPermissions()
-    {
+    public function checkPermissions() {
         return $this->modx->hasPermission('file_list');
     }
 
-    public function getLanguageTopics()
-    {
+    public function getLanguageTopics() {
         return array('file');
     }
 
-    public function initialize()
-    {
+    public function initialize() {
         $this->setDefaultProperties(array('dir' => '', ));
         if ($this->getProperty('dir') == 'root') {
             $this->setProperty('dir', '');
@@ -40,8 +37,7 @@ class modBrowserFolderGetFilesProcessor extends modProcessor
         return true;
     }
 
-    public function process()
-    {
+    public function process() {
         if (!$this->getSource()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
@@ -72,7 +68,6 @@ class modBrowserFolderGetFilesProcessor extends modProcessor
         if ($this->getProperty('autoCreateFolder') == 'true'){
  
             $bases = $this->source->getBases();
-            //print_r($bases['pathAbsolute']);
             $targetDir = $bases['pathAbsolute'];
 
             $cacheManager = $this->modx->getCacheManager();
@@ -83,13 +78,6 @@ class modBrowserFolderGetFilesProcessor extends modProcessor
                     //return $modx->error->failure('Could not create directory: ' . $targetDir);
                 }
             }
-            /* make sure directory is readable/writable */
-            /*
-            if (!is_readable($targetDir) || !is_writable($targetDir)) {
-                $modx->log(xPDO::LOG_LEVEL_ERROR, '[MIGX] Could not write to directory: ' . $targetDir);
-                return $modx->error->failure('Could not write to directory: ' . $targetDir);
-            } 
-            */           
         }
         
         return true;
