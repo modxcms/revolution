@@ -32,6 +32,7 @@ MODx.panel.ImageTV = function(config) {
             ,hideFiles: true
             ,source: config.source || 1
             ,res_id: config.res_id || false
+            ,autoCreateFolder: config.autoCreateFolder || false
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,openTo: config.openTo || ''
             ,listeners: {
@@ -81,6 +82,8 @@ MODx.panel.FileTV = function(config) {
             ,value: config.relativeValue
             ,hideFiles: true
             ,source: config.source || 1
+            ,res_id: config.res_id || false
+            ,autoCreateFolder: config.autoCreateFolder || false            
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,openTo: config.openTo || ''
