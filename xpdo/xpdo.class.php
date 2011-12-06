@@ -1353,17 +1353,6 @@ class xPDO {
                     }
                 }
             }
-            if ($this->getInherit($className) === 'single') {
-                $descendants= $this->getDescendants($className);
-                if ($descendants) {
-                    foreach ($descendants as $descendant) {
-                        $descendantClass= $this->loadClass($descendant);
-                        if ($descendantClass && isset($this->map[$descendantClass]['fieldMeta'])) {
-                            $fieldMeta= array_merge($fieldMeta, array_diff_key($this->map[$descendantClass]['fieldMeta'], $fieldMeta));
-                        }
-                    }
-                }
-            }
         }
         return $fieldMeta;
     }
