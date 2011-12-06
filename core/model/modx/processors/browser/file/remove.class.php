@@ -27,6 +27,7 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));          
         $success = $this->source->removeObject($file);
 
         if (empty($success)) {

@@ -460,6 +460,8 @@ MODx.combo.Browser = function(config) {
        width: 300
        ,triggerAction: 'all'
        ,source: config.source || 1
+       ,res_id: config.res_id || false
+       ,autoCreateFolder: config.autoCreateFolder || false
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
     this.config = config;
@@ -478,6 +480,8 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,id: Ext.id()
                 ,multiple: true
                 ,source: this.config.source || 1
+                ,res_id: this.config.res_id || false
+                ,autoCreateFolder: this.config.autoCreateFolder || false
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
                 ,allowedFileTypes: this.config.allowedFileTypes || ''

@@ -33,6 +33,7 @@ class modBrowserFileUploadProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));        
         $success = $this->source->uploadObjectsToContainer($this->getProperty('path'),$_FILES);
 
         if (empty($success)) {

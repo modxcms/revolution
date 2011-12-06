@@ -37,7 +37,7 @@ class modBrowserFolderChmodProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));
         $success = $this->source->chmodContainer($this->getProperty('dir'),$this->getProperty('mode'));
 
         if (empty($success)) {

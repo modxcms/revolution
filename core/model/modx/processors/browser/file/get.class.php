@@ -28,6 +28,7 @@ class modBrowserFileGetProcessor extends modProcessor {
         }
         
         $this->source = $this->getProperty('source',1);
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));          
         $fileArray = $this->source->getObjectContents($file);
 
         if (empty($fileArray)) {

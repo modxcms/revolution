@@ -16,7 +16,22 @@ MODx.load({
     ,cls: 'form-with-labels'
     ,labelAlign: 'top'
     ,border: false
-    ,items: []
+    ,items: [{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('autoResourceFolders')
+        ,description: MODx.expandHelp ? '' : _('autoResourceFolders_desc')
+        ,name: 'inopt_autoResourceFolders'
+        ,hiddenName: 'inopt_autoResourceFolders'
+        ,id: 'inopt_autoResourceFolders{/literal}{$tv}{literal}'
+        ,value: params['autoResourceFolders'] == 0 || params['autoResourceFolders'] == 'true' ? true : false
+        ,width: 300
+        ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_autoResourceFolders{/literal}{$tv}{literal}'
+        ,html: _('autoResourceFolders_desc')
+        ,cls: 'desc-under'
+    }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });
 // ]]>

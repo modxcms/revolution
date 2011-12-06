@@ -36,7 +36,7 @@ class modBrowserFolderCreateProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));
         $success = $this->source->createContainer($this->getProperty('name'),$this->getProperty('parent'));
 
         if (empty($success)) {

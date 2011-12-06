@@ -49,6 +49,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         } else {
             $bases['pathAbsolute'] = $bases['path'];
         }
+        $bases['path'] = $this->processPlaceholders(null,$bases['path']);//Bruno
+        $bases['pathAbsolute'] = $this->processPlaceholders(null,$bases['pathAbsolute']);//Bruno
         
         $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].$path;
         if (is_dir($bases['pathAbsoluteWithPath'])) {
@@ -58,14 +60,16 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         /* get relative url */
         $bases['urlIsRelative'] = false;
-        $bases['url'] = $properties['baseUrl']['value'];;
+        $bases['url'] = $properties['baseUrl']['value'];
+        
         if (!empty($properties['baseUrlRelative']['value'])) {
             $bases['urlAbsolute'] = $this->ctx->getOption('base_url',MODX_BASE_URL).$bases['url'];
             $bases['urlIsRelative'] = true;
         } else {
             $bases['urlAbsolute'] = $bases['url'];
         }
-
+        $bases['urlAbsolute'] = $this->processPlaceholders(null,$bases['urlAbsolute']);//Bruno
+        $bases['url'] = $this->processPlaceholders(null,$bases['url']);//Bruno        
         $bases['urlAbsoluteWithPath'] = $bases['urlAbsolute'].ltrim($path,'/');
         $bases['urlRelative'] = ltrim($path,'/');
         return $bases;
@@ -816,6 +820,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
+                        'res_id' => $this->xpdo->getPlaceholder('mediasource.res_id'),
                     ));
                     $imageQuery = http_build_query(array(
                         'src' => $url,
@@ -826,6 +831,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'q' => $thumbnailQuality,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
+                        'res_id' => $this->xpdo->getPlaceholder('mediasource.res_id'),
                     ));
                     $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                     $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
@@ -976,6 +982,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
     public function prepareOutputUrl($value) {
         $properties = $this->getPropertyList();
         if (!empty($properties['baseUrl'])) {
+            $properties['baseUrl'] = $this->processPlaceholders(null,$properties['baseUrl']);//Bruno
             $value = $properties['baseUrl'].$value;
             if (isset($properties['baseUrlRelative']) && !empty($properties['baseUrlRelative'])) {
                 $value = $this->xpdo->context->getOption('base_url',null,MODX_BASE_URL).$value;

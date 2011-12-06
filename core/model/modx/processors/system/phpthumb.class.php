@@ -37,7 +37,14 @@ class modSystemPhpThumbProcessor extends modProcessor {
 
         $this->getSource($this->getProperty('source'));
         if (empty($this->source)) $this->failure($this->modx->lexicon('source_err_nf'));
-
+        
+        //Bruno
+        $res_id = $this->getProperty('res_id');
+        if (!empty($res_id)){
+            //$ph=$this->modx->fromJson($ph);
+            $this->modx->setPlaceholder('mediasource.res_id',$res_id);
+        }
+       
         $src = $this->source->prepareSrcForThumb($src);
         if (empty($src)) return '';
 
