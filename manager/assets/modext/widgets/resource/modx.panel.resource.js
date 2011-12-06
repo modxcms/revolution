@@ -325,6 +325,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,value: config.record.create_resource_token || ''
         },{
             xtype: 'hidden'
+            ,name: 'reloaded'
+            ,value: !Ext.isEmpty(MODx.request.reload) ? 1 : 0
+        },{
+            xtype: 'hidden'
             ,name: 'parent'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
@@ -710,6 +714,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,mode: config.mode || 'update'
                 ,"parent": config.record["parent"] || 0
                 ,"token": config.record.create_resource_token
+                ,reloaded: !Ext.isEmpty(MODx.request.reload)
                 ,listeners: {
                     'afteredit': {fn:this.fieldChangeEvent,scope:this}
                 }
