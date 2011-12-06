@@ -36,6 +36,7 @@ Ext.onReady(function() {
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,source: '{$source}'
+        ,res_id: '{$res_id}'
         
         {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
