@@ -180,7 +180,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,autoHeight: true
             ,defaults: {
                 border: false
-                ,msgTarget: 'side'
+                ,msgTarget: 'under'
                 ,width: 400
             }
             ,items: this.getMainFields(config)
@@ -197,7 +197,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,autoHeight: true
             ,defaults: {
                 border: false
-                ,msgTarget: 'side'
+                ,msgTarget: 'under'
             }
             ,items: this.getSettingFields(config)
         });
@@ -274,11 +274,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 labelSeparator: ''
                 ,labelAlign: 'top'
                 ,border: false
+                ,msgTarget: 'under'
             }
             ,items:[{
                 columnWidth: .67
                 ,layout: 'form'
                 ,id: 'modx-resource-main-left'
+                ,defaults: { msgTarget: 'under' }
                 ,items: this.getMainLeftFields(config)
             },{
                 columnWidth: .33
@@ -287,6 +289,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,border: false
                 ,id: 'modx-resource-main-right'
                 ,style: 'margin-right: 0'
+                ,defaults: { msgTarget: 'under' }
                 ,items: this.getMainRightFields(config)
             }]
         },{
@@ -466,10 +469,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,labelAlign: 'top'
                 ,border: false
                 ,layout: 'form'
+                ,msgTarget: 'under'
             }
             ,items:[{
                 columnWidth: .5
                 ,id: 'modx-page-settings-left'
+                ,defaults: { msgTarget: 'under' }
                 ,items: [{
                     xtype: 'modx-field-parent-change'
                     ,fieldLabel: _('resource_parent')
@@ -520,6 +525,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right'
+                ,defaults: { msgTarget: 'under' }
                 ,items: [{
                     xtype: 'xdatetime'
                     ,fieldLabel: _('resource_publishedon')
@@ -568,10 +574,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                             ,labelAlign: 'top'
                             ,border: false
                             ,layout: 'form'
+                            ,msgTarget: 'under'
                         }
                         ,items: [{
                             columnWidth: .5
                             ,id: 'modx-page-settings-right-box-left'
+                            ,defaults: { msgTarget: 'under' }
                             ,items: [{
                                 xtype: 'xcheckbox'
                                 ,boxLabel: _('resource_folder')
@@ -604,6 +612,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         },{
                             columnWidth: .5
                             ,id: 'modx-page-settings-right-box-right'
+                            ,defaults: { msgTarget: 'under' }
                             ,items: [{
                                 xtype: 'xcheckbox'
                                 ,boxLabel: _('resource_cacheable')
