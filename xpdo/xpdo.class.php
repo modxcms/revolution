@@ -1335,21 +1335,34 @@ class xPDO {
      * Gets a list of field (or column) definitions for an object by class name.
      *
      * These definitions are used by the objects themselves to build their
-     * own meta data based on class inheritence.
+     * own meta data based on class inheritance.
      *
      * @param string $className The name of the class to lookup fields meta data
      * for.
+     * @param boolean $includeExtended If true, include meta from all derivative
+     * classes in loaded packages.
      * @return array An array featuring field names as the array keys, and
      * arrays of metadata information as the array values; empty array is
      * returned if unsuccessful.
      */
-    public function getFieldMeta($className) {
+    public function getFieldMeta($className, $includeExtended = false) {
         $fieldMeta= array ();
         if ($className= $this->loadClass($className)) {
             if ($ancestry= $this->getAncestry($className)) {
                 for ($i= count($ancestry) - 1; $i >= 0; $i--) {
                     if (isset ($this->map[$ancestry[$i]]['fieldMeta'])) {
                         $fieldMeta= array_merge($fieldMeta, $this->map[$ancestry[$i]]['fieldMeta']);
+                    }
+                }
+            }
+            if ($includeExtended && $this->getInherit($className) === 'single') {
+                $descendants= $this->getDescendants($className);
+                if ($descendants) {
+                    foreach ($descendants as $descendant) {
+                        $descendantClass= $this->loadClass($descendant);
+                        if ($descendantClass && isset($this->map[$descendantClass]['fieldMeta'])) {
+                            $fieldMeta= array_merge($fieldMeta, array_diff_key($this->map[$descendantClass]['fieldMeta'], $fieldMeta));
+                        }
                     }
                 }
             }

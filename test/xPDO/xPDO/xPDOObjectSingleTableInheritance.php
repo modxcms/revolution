@@ -287,4 +287,39 @@ class xPDOObjectSingleTableInheritanceTest extends xPDOTestCase {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
     }
+
+    /**
+     * Test saving instances of a base and various derived classes.
+     *
+     * @param $expectedClass The expected class of the instance.
+     * @param $criteria The criteria for selecting the instance.
+     * @param $update The changes to make to the instance data to test the save.
+     * @dataProvider providerSaveDerivedObject
+     */
+    public function testSaveDerivedObject($expectedClass, $criteria, $update) {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $result = false;
+        try {
+            $object = $this->xpdo->getObject("sti.baseClass", $criteria);
+            if ($object) {
+                while (list($key, $value) = each($update)) {
+                    $object->set($key, $value);
+                }
+                $result = $object->save();
+            }
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue($result === true, "Error saving class instance for expected class {$expectedClass}.");
+    }
+    /**
+     * Data provider for testSaveDerivedObject.
+     */
+    public function providerSaveDerivedObject() {
+        return array(
+            array('baseClass', array('field1' => 1), array('field2' => 'updated base class string')),
+            array('derivedClass', array('field1' => 2), array('field2' => 'updated derived class string')),
+            array('derivedClass2', array('field1' => 3), array('field2' => 'updated derived class 2 string', 'field3' => 'updated derived field content'))
+        );
+    }
 }
