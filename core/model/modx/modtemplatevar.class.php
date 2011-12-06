@@ -43,6 +43,8 @@ class modTemplateVar extends modElement {
         'INHERIT',
         'DIRECTORY'
     );
+    /** @var modX $xpdo */
+    public $xpdo;
 
     /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
@@ -376,31 +378,24 @@ class modTemplateVar extends modElement {
      * @return string
      */
     public function getRender($params,$value,array $paths,$method,$resourceId = 0,$type = 'text') {
-        /* backwards compat stuff */
-        $name= $this->get('name');
-        $id= "tv$name";
-        $format= $this->get('display');
-        $tvtype= $this->get('type');
-        if (empty($type)) $type = 'default';
-        /* end backwards compat */
-        
-        $modx =& $this->xpdo;
-        if (empty($modx->resource)) {
+        if (empty($this->xpdo->resource)) {
             if (!empty($resourceId)) {
-                $modx->resource = $modx->getObject('modResource',$resourceId);
+                $this->xpdo->resource = $this->xpdo->getObject('modResource',$resourceId);
             }
-            if (empty($modx->resource) || empty($resourceId)) {
-                $modx->resource = $modx->newObject('modResource');
-                $modx->resource->set('id',0);
+            if (empty($this->xpdo->resource) || empty($resourceId)) {
+                $this->xpdo->resource = $this->xpdo->newObject('modResource');
+                $this->xpdo->resource->set('id',0);
             }
         }
 
-        $output = '';
         if ($className = $this->checkForRegisteredRenderMethod($type,$method)) {
             /** @var modTemplateVarOutputRender $render */
             $render = new $className($this);
             $output = $render->render($value,$params);
         } else {
+            $deprecatedClassName = $method == 'input' ? 'modTemplateVarInputRenderDeprecated' : 'modTemplateVarOutputRenderDeprecated';
+            $render = new $deprecatedClassName($this);
+
             foreach ($paths as $path) {
                 $renderFile = $path.$type.'.class.php';
                 if (file_exists($renderFile)) {
@@ -409,7 +404,6 @@ class modTemplateVar extends modElement {
                     if (class_exists($className)) {
                         /** @var modTemplateVarOutputRender $render */
                         $render = new $className($this);
-                        $output = $render->render($value,$params);
                     }
                     break;
                 }
@@ -417,12 +411,17 @@ class modTemplateVar extends modElement {
                 /* 2.1< backwards compat */
                 $renderFile = $path.$type.'.php';
                 if (file_exists($renderFile)) {
-                    $output = include $renderFile;
+                    $render = new $deprecatedClassName($this);
+                    $params['modx.renderFile'] = $renderFile;
                     break;
                 }
             }
+
+            $output = $render->render($value,$params);
+
+            /* if no output, fallback to text */
             if (empty($output)) {
-                $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$method.'/';
+                $p = $this->xpdo->getOption('processors_path').'element/tv/renders/mgr/'.$method.'/';
                 $className = $method == 'output' ? 'modTemplateVarOutputRenderText' : 'modTemplateVarInputRenderText';
                 if (!class_exists($className) && file_exists($p.'text.class.php')) {
                     $className = include $p.'text.class.php';
@@ -430,15 +429,6 @@ class modTemplateVar extends modElement {
                 if (class_exists($className)) {
                     $render = new $className($this);
                     $output = $render->render($value,$params);
-
-                /* 2.1< backwards compat */
-                } else if (file_exists($p.'text.php')) {
-                    $output = include $p.'text.php';
-                } else {
-                    $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.($method == 'input' ? 'mgr' : 'web').'/'.$method.'/';
-                    if (file_exists($p.'text.php')) {
-                        $output = include $p.'text.php';
-                    }
                 }
             }
         }
@@ -1134,5 +1124,62 @@ abstract class modTemplateVarInputRender extends modTemplateVarRender {
      */
     public function getInputOptions() {
         return $this->tv->parseInputOptions($this->tv->processBindings($this->tv->get('elements'),$this->modx->resource->get('id')));
+    }
+}
+
+/**
+ * Backwards support for <2.2-style output renders
+ * @package modx
+ */
+class modTemplateVarOutputRenderDeprecated extends modTemplateVarOutputRender {
+    /** @var modX $xpdo */
+    public $xpdo;
+
+    public function process($value,array $params = array()) {
+        $output = '';
+        $modx =& $this->modx;
+        $this->xpdo =& $this->modx;
+
+        $name= $this->tv->get('name');
+        $id= "tv$name";
+        $format= $this->tv->get('display');
+        $tvtype= $this->tv->get('type');
+        if (empty($type)) $type = 'default';
+
+        if (!empty($params['modx.renderFile']) && file_exists($params['modx.renderFile'])) {
+            $output = include $params['modx.renderFile'];
+        }
+        return $output;
+    }
+}
+
+/**
+ * Backwards support for <2.2-style input renders
+ * @package modx
+ */
+class modTemplateVarInputRenderDeprecated extends modTemplateVarInputRender {
+    /** @var modX $xpdo */
+    public $xpdo;
+
+    public function process($value,array $params = array()) {
+        $this->setPlaceholder('tv',$this->tv);
+        $this->setPlaceholder('id',$this->tv->get('id'));
+        $this->setPlaceholder('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
+        $this->setPlaceholder('params',$params);
+
+        $name= $this->tv->get('name');
+        $id= "tv$name";
+        $format= $this->tv->get('display');
+        $tvtype= $this->tv->get('type');
+        if (empty($type)) $type = 'default';
+
+        $modx =& $this->modx;
+        $this->xpdo =& $this->modx;
+
+        $output = '';
+        if (!empty($params['modx.renderFile']) && file_exists($params['modx.renderFile'])) {
+            $output = include $params['modx.renderFile'];
+        }
+        return $output;
     }
 }
