@@ -20,7 +20,7 @@ abstract class modManagerController {
     /** @var bool Set to false to prevent loading of the base MODExt JS classes. */
     public $loadBaseJavascript = true;
     /** @var array An array of possible paths to this controller's templates directory. */
-    public $templatesPaths;
+    public $templatesPaths = array();
     /** @var array An array of possible paths to this controller's directory. */
     public $controllersPaths;
     /** @var modContext The current working context. */
@@ -236,10 +236,12 @@ abstract class modManagerController {
      */
     public function fetchTemplate($tpl) {
         $templatePath = '';
-        foreach ($this->templatesPaths as $path) {
-            if (file_exists($path.$tpl)) {
-                $templatePath = $path;
-                break;
+        if (is_array($this->templatesPaths)) {
+            foreach ($this->templatesPaths as $path) {
+                if (file_exists($path.$tpl)) {
+                    $templatePath = $path;
+                    break;
+                }
             }
         }
         $this->modx->smarty->setTemplatePath($templatePath);
