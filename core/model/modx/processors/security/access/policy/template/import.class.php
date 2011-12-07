@@ -23,7 +23,7 @@ class modAccessPolicyTemplateImportProcessor extends modObjectImportProcessor {
 
     public function setTemplateGroup() {
         /** @var modAccessPolicyTemplateGroup $templateGroup */
-        $templateGroup = $this->modx->getObject('modAccessPolicyTemplateGroup',(int)$this->xml->template_group);
+        $templateGroup = $this->modx->getObject('modAccessPolicyTemplateGroup',array('name' => (string)$this->xml->template_group));
         if ($templateGroup) {
             $this->object->set('template_group',$templateGroup->get('id'));
         } else {

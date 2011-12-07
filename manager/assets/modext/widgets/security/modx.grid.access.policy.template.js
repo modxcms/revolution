@@ -344,7 +344,7 @@ MODx.window.ImportPolicyTemplate = function(config) {
     this.ident = config.ident || 'imppt-'+Ext.id();
     Ext.applyIf(config,{
         title: _('policy_template_import')
-        ,id: 'modx-window-fc-set-import'
+        ,id: 'modx-window-policy-template-import'
         ,url: MODx.config.connectors_url+'security/access/policy/template.php'
         ,action: 'import'
         ,fileUpload: true

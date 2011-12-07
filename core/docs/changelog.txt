@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5418] Add ability to export/import Access Policies
 - Add ability to import/export Policy Templates, as well as a base export/import processor class
 - [#6242] Actions on regular Resources break with Custom Resource Class extended fields
 - [#6096] Fix issue where reload token in Resource create would not allow save after validation
