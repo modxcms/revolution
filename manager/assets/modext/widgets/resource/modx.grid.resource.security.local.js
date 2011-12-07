@@ -7,24 +7,12 @@ MODx.grid.ResourceSecurity = function(config) {
         ,sortable: false
         ,hidden: MODx.perm.resourcegroup_resource_edit != 1
     });
-
-    var qs = Ext.urlDecode(window.location.search.substring(1));
     Ext.applyIf(config,{
         id: 'modx-grid-resource-security'
-        ,url: MODx.config.connectors_url+'resource/resourcegroup.php'
-        ,baseParams: {
-            action: 'getList'
-            ,resource: config.resource
-            ,"parent": config["parent"]
-            ,mode: config.mode || 'update'
-            ,"token": qs.reload || ''
-        }
-        ,saveParams: {
-            resource: config.resource
-        }
         ,fields: ['id','name','access']
-        ,paging: true
-        ,remoteSort: true
+        ,paging: false
+        ,remoteSort: false
+        ,autoHeight: true
         ,plugins: ac
         ,columns: [{
             header: _('name')
@@ -34,7 +22,8 @@ MODx.grid.ResourceSecurity = function(config) {
         },ac]
     });
     MODx.grid.ResourceSecurity.superclass.constructor.call(this,config);
+    this.propRecord = Ext.data.Record.create(config.fields);
     this.on('rowclick',MODx.fireResourceFormChange);
 };
-Ext.extend(MODx.grid.ResourceSecurity,MODx.grid.Grid);
+Ext.extend(MODx.grid.ResourceSecurity,MODx.grid.LocalGrid);
 Ext.reg('modx-grid-resource-security',MODx.grid.ResourceSecurity);

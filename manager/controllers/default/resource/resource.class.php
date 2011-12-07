@@ -22,6 +22,7 @@ abstract class ResourceManagerController extends modManagerController {
     /** @var array $rteFields */
     public $rteFields = array();
 
+    /** @var modRegister $reg */
     protected $reg;
 
     public $canPublish = true;
@@ -405,7 +406,43 @@ abstract class ResourceManagerController extends modManagerController {
                 }
             }
         }
+
         return $reloadData;
+    }
+
+
+    public function getResourceGroups() {
+        $parentGroups = array();
+        if ($this->resource->get('id') == 0) {
+            $parent = $this->modx->getObject('modResource',$this->resource->get('parent'));
+            /** @var modResource $parent */
+            if ($parent) {
+                $parentResourceGroups = $parent->getMany('ResourceGroupResources');
+                /** @var modResourceGroupResource $parentResourceGroup */
+                foreach ($parentResourceGroups as $parentResourceGroup) {
+                    $parentGroups[] = $parentResourceGroup->get('document_group');
+                }
+                $parentGroups = array_unique($parentGroups);
+            }
+        }
+
+        $this->resourceArray['resourceGroups'] = array();
+        $resourceGroups = $this->resource->getGroupsList(array('name' => 'ASC'),0,0);
+        /** @var modResourceGroup $resourceGroup */
+        foreach ($resourceGroups['collection'] as $resourceGroup) {
+            $access = (boolean) $resourceGroup->get('access');
+            if (!empty($parent) && $this->resource->get('id') == 0) {
+                $resourceGroupArray['access'] = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
+            }
+            $resourceGroupArray = array(
+                $resourceGroup->get('id'),
+                $resourceGroup->get('name'),
+                $access,
+            );
+
+            $this->resourceArray['resourceGroups'][] = $resourceGroupArray;
+        }
+        return $this->resourceArray['resourceGroups'];
     }
 
 }

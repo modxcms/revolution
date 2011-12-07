@@ -29,7 +29,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $managerUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
         $this->addJavascript($managerUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
-        $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+        $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.local.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($managerUrl.'assets/modext/sections/resource/update.js');
@@ -116,7 +116,6 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
-
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
@@ -130,6 +129,21 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         /* get TVs */
         $this->resource->set('template',$this->resourceArray['template']);
+
+        if (!empty($reloadData)) {
+            $this->resourceArray['resourceGroups'] = array();
+            $this->resourceArray['resource_groups'] = $this->modx->fromJSON($this->resourceArray['resource_groups']);
+            foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
+                $this->resourceArray['resourceGroups'][] = array(
+                    $resourceGroup['id'],
+                    $resourceGroup['name'],
+                    $resourceGroup['access'],
+                );
+            }
+            unset($this->resourceArray['resource_groups']);
+        } else {
+            $this->getResourceGroups();
+        }
 
         $this->prepareResource();
         $this->loadTVs($reloadData);

@@ -38,7 +38,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) { 
             this.getForm().setValues(this.config.record);
-            pcmb = this.getForm().findField('parent-cmb');
+            var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
             } else if (pcmb) {
@@ -47,6 +47,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+Ext.util.Format.stripTags(this.config.record.pagetitle)+'</h2>');
             }
+            if (!Ext.isEmpty(this.config.record.resourceGroups)) {
+                var g = Ext.getCmp('modx-grid-resource-security');
+                if (g && Ext.isEmpty(g.config.url)) {
+                    var s = g.getStore();
+                    if (s) { s.loadData(this.config.record.resourceGroups); }
+                }
+            }
+
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
@@ -147,7 +155,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload; // +'&template='+nt
+                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
                         },scope:this}
                     },{
                         bypassValidCheck: true
