@@ -50,23 +50,17 @@ class modResourceGroupResourceGetListProcessor extends modProcessor {
         $parentGroups = array();
         $mode = $this->getProperty('mode');
         $parent = $this->getProperty('parent',0);
-        $token = $this->getProperty('token', '');
 
-        // see if this request is in the context of a resource reload
-        if(!empty($token)) {
-            $rgs = $this->getRGReloadData($token);
-        } else {
-            if (!empty($parent) && $mode == 'create') {
-                $parent = $this->modx->getObject('modResource',$parent);
-                /** @var modResource $parent */
-                if ($parent) {
-                    $parentResourceGroups = $parent->getMany('ResourceGroupResources');
-                    /** @var modResourceGroupResource $parentResourceGroup */
-                    foreach ($parentResourceGroups as $parentResourceGroup) {
-                        $parentGroups[] = $parentResourceGroup->get('document_group');
-                    }
-                    $parentGroups = array_unique($parentGroups);
+        if (!empty($parent) && $mode == 'create') {
+            $parent = $this->modx->getObject('modResource',$parent);
+            /** @var modResource $parent */
+            if ($parent) {
+                $parentResourceGroups = $parent->getMany('ResourceGroupResources');
+                /** @var modResourceGroupResource $parentResourceGroup */
+                foreach ($parentResourceGroups as $parentResourceGroup) {
+                    $parentGroups[] = $parentResourceGroup->get('document_group');
                 }
+                $parentGroups = array_unique($parentGroups);
             }
         }
 
@@ -77,12 +71,6 @@ class modResourceGroupResourceGetListProcessor extends modProcessor {
             $resourceGroupArray['access'] = (boolean) $resourceGroupArray['access'];
             if (!empty($parent) && $mode == 'create') {
                 $resourceGroupArray['access'] = in_array($resourceGroupArray['id'],$parentGroups) ? true : false;
-            }
-            if (isset($rgs) && is_array($rgs) && count($rgs) > 0) {
-                $name = $resourceGroup->get('name');
-                if(array_key_exists($name, $rgs)) {
-                    $resourceGroupArray['access'] = (boolean) $rgs[$name]->get('access');
-                }
             }
             $list[] = $resourceGroupArray;
         }
@@ -110,51 +98,6 @@ class modResourceGroupResourceGetListProcessor extends modProcessor {
             }
         }
         return $this->resource;
-    }
-
-    /**
-     * Get reload data for the ResourceGroup list
-     * @param string $token
-     * @return array|mixed
-     */
-    protected function getRGReloadData($token) {
-        $modx =& $this->modx;
-        $reloadData = array();
-        if(!isset($modx->registry)) {
-            $modx->getService('registry', 'registry.modRegistry');
-        }
-        if(isset($modx->registry)) {
-            /** @var modDbRegister $reg */
-            $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
-            $reg = $modx->registry->resource_reload;
-            if($reg->connect()) {
-                $topic = '/' . $token . '/';
-                $reg->subscribe($topic);
-                $reloadData = $reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
-                if(is_array($reloadData) && is_string(reset($reloadData))) {
-                    $reloadData = @unserialize(reset($reloadData));
-                }
-                if(!is_array($reloadData)) {
-                    $reloadData = array();
-                }
-                $reg->unsubscribe($topic);
-            }
-        }
-        $rgCollection = array();
-        if(array_key_exists('resource_groups', $reloadData)) {
-            $rgs = @json_decode($reloadData['resource_groups']);
-            if(is_object($rgs)) {
-                foreach($rgs as $rg) {
-                    $rgCollection[$rg->name] = $modx->newObject('modResourceGroupResource', array(
-                        'access'=> $rg->access,
-                        'id'=> $rg->id,
-                        'menu'=> $rg->menu,
-                        'name'=> $rg->name
-                    ));
-                }
-            }
-        }
-        return $rgCollection;
     }
 
 }
