@@ -393,9 +393,9 @@ abstract class ResourceManagerController extends modManagerController {
                 $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
                 $this->reg = $modx->registry->resource_reload;
                 if($this->reg->connect()) {
-                    $topic = '/' . $scriptProperties['reload'] . '/';
+                    $topic = '/resourcereload/' . $scriptProperties['reload'] . '/';
                     $this->reg->subscribe($topic);
-                    $reloadData = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> false));
+                    $reloadData = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
                     if(is_array($reloadData) && is_string(reset($reloadData))) {
                         $reloadData = @unserialize(reset($reloadData));
                     }
