@@ -45,7 +45,7 @@ class modBrowserFolderRenameProcessor extends modProcessor {
         if (!$this->validate($fields)) {
             return $this->failure();
         }
-
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));
         $response = $this->source->renameContainer($fields['path'],$fields['name']);
         return $this->handleResponse($response);
     }

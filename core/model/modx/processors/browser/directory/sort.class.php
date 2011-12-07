@@ -31,6 +31,7 @@ class modBrowserFolderSortProcessor extends modProcessor {
         }
         $source->setRequestProperties($this->getProperties());
         $source->initialize();
+        $this->modx->setPlaceholder('mediasource.res_id',$this->getProperty('res_id'));
         $success = $source->moveObject($from,$to);
         if (!$success) {
             $errors = $source->getErrors();

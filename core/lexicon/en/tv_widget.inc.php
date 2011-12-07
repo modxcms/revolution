@@ -125,3 +125,6 @@ $_lang['upper_case'] = 'Upper Case';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Display Text';
 $_lang['width'] = 'Width';
+$_lang['width'] = 'Width';
+$_lang['autoResourceFolders'] = 'Auto Resource Folders';
+$_lang['autoResourceFolders_desc'] = 'Autocreate File-System-Directory for generated path from mediaSource. Only useful, with placeholder [[+mediasource.res_id]] or other dynamic tags in mediasource-path';

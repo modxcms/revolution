@@ -266,7 +266,7 @@ class modTemplateVar extends modElement {
         }
 
         /* run prepareOutput to allow for custom overriding */
-        $value = $this->prepareOutput($value);
+        $value = $this->prepareOutput($value,$resourceId);
 
         /* find the render */
         $outputRenderPaths = $this->getRenderDirectories('OnTVOutputRenderList','output');
@@ -278,7 +278,7 @@ class modTemplateVar extends modElement {
      * @param string $value
      * @return string
      */
-    public function prepareOutput($value) {
+    public function prepareOutput($value,$resourceId = false) {
         /* Allow custom source types to manipulate the output URL for image/file tvs */
         $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types',null,'image,file');
         $mTypes = explode(',',$mTypes);
@@ -293,6 +293,9 @@ class modTemplateVar extends modElement {
                     $source = $this->xpdo->newObject($classKey);
                     if ($source) {
                         $source->fromArray($sourceCache,'',true,true);
+                        if ($resourceId){
+                            $this->xpdo->setPlaceholder('mediasource.res_id',$resourceId);
+                        }                        
                         $value = $source->prepareOutputUrl($value);
                     }
                 }
