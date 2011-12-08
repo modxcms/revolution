@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6207] Prevent overwriting static element file content when changing a static source
+- [#6255] Escape html tags in readme, license and changelog files for downloaded Packages
 - [#6096] Fix more issues with Resource reloading after changing a template by making the Resource Access grid local
 - [#5418] Add ability to export/import Access Policies
 - Add ability to import/export Policy Templates, as well as a base export/import processor class
