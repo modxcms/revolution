@@ -53,6 +53,8 @@ class modPackageGetAttributeProcessor extends modProcessor {
                     $attributes['setup-options'] = include $attributeFile;
                 }
                 @ob_end_clean();
+            } else if (in_array($attribute,array('readme','license','changelog'))) {
+                $attributes[$attribute] = htmlentities($attributes[$attribute],ENT_COMPAT,'UTF-8');
             }
         }
         return $this->success('',$attributes);
