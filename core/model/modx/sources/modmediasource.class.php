@@ -163,9 +163,10 @@ interface modMediaSourceInterface
      *
      * @param string $from The location to move from
      * @param string $to The location to move to
+     * @param string $point The type of move; append, above, below
      * @return boolean
      */
-    public function moveObject($from,$to);
+    public function moveObject($from,$to,$point = 'append');
 
     /**
      * Get the name of this source type, ie, "File System"
@@ -349,7 +350,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
     public function getBasePath($object = '') { return ''; }
     public function getBaseUrl($object = '') { return ''; }
     public function getObjectUrl($object = '') { return ''; }
-    public function moveObject($from,$to) { return true; }
+    public function moveObject($from,$to,$point = 'append') { return true; }
     public function getDefaultProperties() { return array(); }
 
 

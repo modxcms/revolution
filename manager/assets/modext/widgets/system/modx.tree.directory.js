@@ -14,7 +14,7 @@ MODx.tree.Directory = function(config) {
         ,rootName: _('files')
         ,rootId: '/'
         ,title: _('files')
-        ,ddAppendOnly: true
+        ,ddAppendOnly: false
         ,enableDrag: true
         ,enableDrop: true
         ,ddGroup: 'modx-treedrop-dd'
@@ -141,6 +141,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,from: from
                 ,to: to
                 ,action: this.config.sortAction || 'sort'
+                ,point: dropEvent.point
             }
             ,listeners: {
                 'success': {fn:function(r) {
