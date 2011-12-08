@@ -212,13 +212,26 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.cm.activeNode = node;        
         this.cm.removeAll();
         var m;
-        if (this.getMenu) {
-            m = this.getMenu(node,e);
-        } else if (node.attributes.menu && node.attributes.menu.items) {
-            m = node.attributes.menu.items;
+        var handled = false;
+
+        if (!Ext.isEmpty(node.attributes.treeHandler)) {
+            var h = Ext.getCmp(node.attributes.treeHandler);
+            if (h) {
+                m = h.getMenu(node,e);
+                handled = true;
+            }
         }
-        this.addContextMenuItem(m);
-        this.cm.showAt(e.xy);
+        if (!handled) {
+            if (this.getMenu) {
+                m = this.getMenu(node,e);
+            } else if (node.attributes.menu && node.attributes.menu.items) {
+                m = node.attributes.menu.items;
+            }
+        }
+        if (m && m.length > 0) {
+            this.addContextMenuItem(m);
+            this.cm.showAt(e.xy);
+        }
         e.preventDefault();
         e.stopEvent();
     }

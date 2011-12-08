@@ -23,5 +23,9 @@ class modSnippetUpdateProcessor extends modElementUpdateProcessor {
     public $objectType = 'snippet';
     public $beforeSaveEvent = 'OnBeforeSnipFormSave';
     public $afterSaveEvent = 'OnSnipFormSave';
+
+    public function cleanup() {
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')), array('previous_category' => $this->previousCategory)));
+    }
 }
 return 'modSnippetUpdateProcessor';
