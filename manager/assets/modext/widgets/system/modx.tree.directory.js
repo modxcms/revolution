@@ -25,6 +25,7 @@ MODx.tree.Directory = function(config) {
             ,currentAction: MODx.request.a || 0
             ,currentFile: MODx.request.file || ''
             ,source: config.source || 0
+            ,res_id: config.res_id || false            
         }
         ,action: 'getList'
         ,primaryKey: 'dir'
@@ -138,6 +139,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             url: this.config.url
             ,params: {
                 source: this.config.baseParams.source
+                ,res_id: this.config.baseParams.res_id                
                 ,from: from
                 ,to: to
                 ,action: this.config.sortAction || 'sort'
@@ -231,6 +233,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,file: this.treeEditor.editNode.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
+                ,res_id: this.config.res_id || false                
             }
             ,listeners: {
                'success': {fn:this.refreshActiveNode,scope:this}
@@ -245,6 +248,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,name: node.text
             ,path: node.attributes.pathRelative
             ,source: this.getSource()
+            ,res_id: this.config.res_id || false            
         };
         if (!this.windows.renameDirectory) {
             this.windows.renameDirectory = MODx.load({
@@ -266,6 +270,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,name: node.text
             ,path: node.attributes.pathRelative
             ,source: this.getSource()
+            ,res_id: this.config.res_id || false            
         };
         if (!this.windows.renameFile) {
             this.windows.renameFile = MODx.load({
@@ -285,6 +290,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var r = {
             'parent': node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
             ,source: this.getSource()
+            ,res_id: this.config.res_id || false             
         };
         if (!this.windows.create) {
             this.windows.create = MODx.load({
@@ -307,6 +313,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             dir: node.attributes.path
             ,mode: node.attributes.perms
             ,source: this.getSource()
+            ,res_id: this.config.res_id || false            
         };
         if (!this.windows.chmod) {
             this.windows.chmod = MODx.load({
@@ -334,6 +341,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,prependPath: this.config.prependPath || null
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
+                ,res_id: this.config.res_id || false                
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -351,6 +359,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
+                ,res_id: this.config.res_id || false
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -367,11 +376,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
+                ,res_id: this.config.res_id || false
             }
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connectors_url+'browser/file.php?action=download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connectors_url+'browser/file.php?action=download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&res_id='+this.config.res_id+'&source='+this.getSource()+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -396,6 +406,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     ,baseUrlRelative: this.config.baseUrlRelative || null
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
+                    ,res_id: this.config.res_id || false                     
                 }
                 ,reset_on_hide: true
                 ,width: 550
@@ -450,6 +461,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,path: path
             ,wctx: MODx.ctx || ''
             ,source: this.getSource()
+            ,res_id: this.config.res_id || false
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
@@ -479,6 +491,9 @@ MODx.window.CreateDirectory = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'source'
+        },{
+            xtype: 'hidden'
+            ,name: 'res_id'
         },{
             xtype: 'hidden'
             ,name: 'prependPath'
@@ -526,6 +541,9 @@ MODx.window.ChmodDirectory = function(config) {
             ,name: 'source'
         },{
             xtype: 'hidden'
+            ,name: 'res_id'
+        },{
+            xtype: 'hidden'
             ,name: 'prependPath'
             ,value: config.prependPath || null
         },{
@@ -563,6 +581,9 @@ MODx.window.RenameDirectory = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'source'
+        },{
+            xtype: 'hidden'
+            ,name: 'res_id'
         },{
             xtype: 'hidden'
             ,name: 'prependPath'
@@ -606,6 +627,9 @@ MODx.window.RenameFile = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'source'
+        },{
+            xtype: 'hidden'
+            ,name: 'res_id'
         },{
             xtype: 'hidden'
             ,name: 'prependPath'

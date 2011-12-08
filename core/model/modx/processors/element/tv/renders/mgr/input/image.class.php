@@ -21,8 +21,9 @@ class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
         $source->initialize();
         $this->modx->controller->setPlaceholder('source',$source->get('id'));
         $params = array_merge($source->getPropertyList(),$params);
-        
-        if (!$source->checkPolicy('view')) {
+        $res_id = $this->modx->resource->get('id');
+
+        if (!$source->checkPolicy('view') || ($params['autoResourceFolders'] == 'true' && empty($res_id))) {
             $this->setPlaceholder('disabled',true);
             $this->tv->set('disabled',true);
             $this->tv->set('relativeValue',$this->tv->get('value'));
@@ -38,6 +39,7 @@ class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
         
         $this->setPlaceholder('params',$params);
         $this->setPlaceholder('tv',$this->tv);
+        $this->setPlaceholder('res_id',$res_id);
     }
     public function getTemplate() {
         return 'element/tv/renders/input/image.tpl';
