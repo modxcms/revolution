@@ -474,7 +474,17 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     /**
      * Abstract definition to handle drop events.
      */
-    ,_handleDrop: function() { }
+    ,_handleDrop: function(dropEvent) {
+        var node = dropEvent.dropNode;
+        if (node.isRoot) return false;
+
+        if (!Ext.isEmpty(node.attributes.treeHandler)) {
+            var h = Ext.getCmp(node.attributes.treeHandler);
+            if (h) {
+                return h.handleDrop(this,dropEvent);
+            }
+        }
+    }
 
     /**
      * Semi unique ids across edits
