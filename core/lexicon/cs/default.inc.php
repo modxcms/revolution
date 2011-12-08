@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-23
+ * @updated 2011-12-08
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -441,6 +441,9 @@ $_lang['expand_all'] = 'Rozbalit vše';
 // $_lang['expand_tree'] = 'Expand tree';
 $_lang['expand_tree'] = 'Rozbalit strom';
 
+// $_lang['export'] = 'Export';
+$_lang['export'] = 'Exportovat';
+
 // $_lang['ext_afterpage'] = 'of {0}';
 $_lang['ext_afterpage'] = 'z {0}';
 
@@ -638,6 +641,15 @@ $_lang['icon'] = 'Ikona';
 
 // $_lang['id'] = 'ID';
 $_lang['id'] = 'ID';
+
+// $_lang['import'] = 'Import';
+$_lang['import'] = 'Importovat';
+
+// $_lang['import_err_upload'] = 'An error occurred while trying to find the XML file. Please specify a valid file.';
+$_lang['import_err_upload'] = 'Nastala chyba při hledání XML souboru. Vyberte platný soubor.';
+
+// $_lang['import_err_xml'] = 'An error occurred importing the XML file. Please ensure you specified a valid XML File.';
+$_lang['import_err_xml'] = 'Nastala chyba při importu XML souboru. Ujistěte se, že vybraný soubor je platný XML soubor.';
 
 // $_lang['info'] = 'Info';
 $_lang['info'] = 'Info';
