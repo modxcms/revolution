@@ -126,10 +126,6 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         $this->preparePageTitle();
         $this->prepareAlias();
 
-        if (!$this->checkForAllowableCreateToken()) {
-            return $this->modx->lexicon('resource_err_duplicate');
-        }
-
         $this->object->set('template',$this->getProperty('template',0));
         $templateVariables = $this->addTemplateVariables();
         if (!empty($templateVariables)) {
@@ -147,6 +143,11 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             $this->object->set('class_key',$this->classKey);
         }
         $this->setMenuIndex();
+
+        $reloaded = (boolean)$this->getProperty('reloaded',false);
+        if ($reloaded && !$this->hasErrors() && !$this->checkForAllowableCreateToken()) {
+            return $this->modx->lexicon('resource_err_duplicate').print_r($this->getProperties(),true);
+        }
         return parent::beforeSave();
     }
 

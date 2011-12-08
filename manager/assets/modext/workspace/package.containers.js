@@ -100,7 +100,6 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
                 'success': {fn:function() {
                     this.activate();
 					Ext.getCmp('modx-package-grid').getStore().load();
-					setTimeout(function(){ c.hide(); }, 5000);
                 },scope:this}
                 ,'failure': {fn:function() {
                     this.activate();

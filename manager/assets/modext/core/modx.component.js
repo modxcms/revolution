@@ -328,7 +328,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     /* if Continue Editing, then don't reload the page - just hide the Progress bar
                        unless the user is on a 'Create' page...if so, then redirect
                        to the proper Edit page */
-                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id !== null) {
+                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id && res.object.id !== null) {
                         itm.params.id = res.object.id;
                         if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                         if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }

@@ -344,7 +344,7 @@ class xPDOObject {
             if (!$instance instanceof $parentClass) {
                 $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
             }
-            $instance->_lazy= $actualClass !== $className ? array_keys($xpdo->getFieldMeta($className)) : array_keys($instance->_fieldMeta);
+            $instance->_lazy= $actualClass !== $className ? array_keys($xpdo->getFieldMeta($actualClass)) : array_keys($instance->_fieldMeta);
             $instance->fromArray($row, $rowPrefix, true, true);
             $instance->_dirty= array ();
             $instance->_new= false;

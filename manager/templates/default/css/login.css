@@ -4,13 +4,14 @@ html {
     font-family: "Lucida Grande", Helvetica, Arial, sans-serif !important; /* IE ignores this and renders Arial better */
     font-family: Arial, Tahoma, Helvetica, sans-serif;
     color: #111;
-    height: auto;
-    background-color: #f7f7f7;
+    width: 100%;
+    height: 100%;
 }
 body {
     font-size: 75%; /* 12px 62.5% for 10px*/
-    background-color: #f7f7f7;
-    height: auto;
+    height: 100%;
+    width: 100%;
+    background: #eee url(../images/restyle/manager-loginscreen-bg.png) center -90px repeat-x;
 }
 
 .warning { color: #821517; font-weight: bold; }
@@ -66,7 +67,7 @@ img.loginCaptcha {
     border-radius: 10px;
 }
 .login-form-bwrap-padding {
-    background: url(../images/restyle/header-partner.jpeg) top left;
+    background: black url(../images/restyle/manager-loginscreen-form-bg.png) bottom left no-repeat;
     -moz-border-radius: 5px;
     -webkit-border-radius:5px;
     border-radius: 5px;
@@ -139,7 +140,7 @@ label { cursor: pointer; }
     margin: 0;
 }
 .login-form-item-first {
-    margin-right: 4px;
+    margin-right: 8px;
 }
 .login-form-element {
     padding: 0;

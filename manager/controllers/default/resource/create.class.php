@@ -24,7 +24,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.grid.resource.security.local.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
@@ -100,10 +100,22 @@ class ResourceCreateManagerController extends ResourceManagerController {
             $this->parent->fromArray($this->resourceArray);
             $this->parent->set('template',$defaultTemplate);
             $this->resource->set('template',$defaultTemplate);
+            $this->getResourceGroups();
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
+            $this->resourceArray['resourceGroups'] = array();
+            $this->resourceArray['resource_groups'] = $this->modx->fromJSON($this->resourceArray['resource_groups']);
+            foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
+                $this->resourceArray['resourceGroups'][] = array(
+                    $resourceGroup['id'],
+                    $resourceGroup['name'],
+                    $resourceGroup['access'],
+                );
+            }
+            unset($this->resourceArray['resource_groups']);
             $this->resource->set('template', $reloadData['template']);
         }
+
         /* handle FC rules */
         $overridden = $this->checkFormCustomizationRules($this->parent,true);
         $this->resourceArray = array_merge($this->resourceArray,$overridden);

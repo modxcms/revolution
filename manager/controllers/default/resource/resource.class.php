@@ -22,6 +22,7 @@ abstract class ResourceManagerController extends modManagerController {
     /** @var array $rteFields */
     public $rteFields = array();
 
+    /** @var modRegister $reg */
     protected $reg;
 
     public $canPublish = true;
@@ -62,6 +63,11 @@ abstract class ResourceManagerController extends modManagerController {
             $action = strtolower(str_replace(array('Resource','ManagerController'),'',$className));
             $className = str_replace('mod','',$resourceClass).ucfirst($action).'ManagerController';
             $controllerFile = $delegateView.$action.'.class.php';
+            if (!file_exists($controllerFile)) {
+                $modx->setOption('manager_theme','default');
+                $delegateView = $modx->call($resourceClass,'getControllerPath',array(&$modx));
+                $controllerFile = $delegateView.$action.'.class.php';
+            }
             require_once $controllerFile;
         }
         $controller = new $className($modx,$config);
@@ -387,9 +393,9 @@ abstract class ResourceManagerController extends modManagerController {
                 $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
                 $this->reg = $modx->registry->resource_reload;
                 if($this->reg->connect()) {
-                    $topic = '/' . $scriptProperties['reload'] . '/';
+                    $topic = '/resourcereload/' . $scriptProperties['reload'] . '/';
                     $this->reg->subscribe($topic);
-                    $reloadData = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> false));
+                    $reloadData = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
                     if(is_array($reloadData) && is_string(reset($reloadData))) {
                         $reloadData = @unserialize(reset($reloadData));
                     }
@@ -400,7 +406,43 @@ abstract class ResourceManagerController extends modManagerController {
                 }
             }
         }
+
         return $reloadData;
+    }
+
+
+    public function getResourceGroups() {
+        $parentGroups = array();
+        if ($this->resource->get('id') == 0) {
+            $parent = $this->modx->getObject('modResource',$this->resource->get('parent'));
+            /** @var modResource $parent */
+            if ($parent) {
+                $parentResourceGroups = $parent->getMany('ResourceGroupResources');
+                /** @var modResourceGroupResource $parentResourceGroup */
+                foreach ($parentResourceGroups as $parentResourceGroup) {
+                    $parentGroups[] = $parentResourceGroup->get('document_group');
+                }
+                $parentGroups = array_unique($parentGroups);
+            }
+        }
+
+        $this->resourceArray['resourceGroups'] = array();
+        $resourceGroups = $this->resource->getGroupsList(array('name' => 'ASC'),0,0);
+        /** @var modResourceGroup $resourceGroup */
+        foreach ($resourceGroups['collection'] as $resourceGroup) {
+            $access = (boolean) $resourceGroup->get('access');
+            if (!empty($parent) && $this->resource->get('id') == 0) {
+                $resourceGroupArray['access'] = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
+            }
+            $resourceGroupArray = array(
+                $resourceGroup->get('id'),
+                $resourceGroup->get('name'),
+                $access,
+            );
+
+            $this->resourceArray['resourceGroups'][] = $resourceGroupArray;
+        }
+        return $this->resourceArray['resourceGroups'];
     }
 
 }

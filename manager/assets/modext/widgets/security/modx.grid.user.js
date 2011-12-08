@@ -75,6 +75,7 @@ MODx.grid.User = function(config) {
             header: _('active')
             ,dataIndex: 'active'
             ,width: 80
+            ,sortable: true
             ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
         },{
             header: _('user_block')
