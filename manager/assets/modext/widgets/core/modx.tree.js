@@ -217,7 +217,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (!Ext.isEmpty(node.attributes.treeHandler)) {
             var h = Ext.getCmp(node.attributes.treeHandler);
             if (h) {
-                m = h.getMenu(node,e);
+                m = h.getMenu(this,node,e);
                 handled = true;
             }
         }
