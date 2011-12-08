@@ -34,7 +34,20 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                     case 'chunk': win = true; break;
                     case 'tv': win = true; break;
                     case 'file': v = data.node.attributes.url; break;
-                    default: return false; break;
+                    default:
+                        var dh = Ext.getCmp(data.node.attributes.type+'-drop-handler');
+                        if (dh) {
+                            return dh.handle(data,{
+                                ddTargetEl: ddTargetEl
+                                ,cfg: cfg
+                                ,iframe: cfg.iframe
+                                ,iframeEl: cfg.iframeEl
+                                ,onInsert: cfg.onInsert
+                                ,panel: cfg.panel
+                            });
+                        }
+                        return false;
+                        break;
                 }
                 if (win) {
                     MODx.loadInsertElement({

@@ -214,10 +214,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var m;
         var handled = false;
 
-        if (!Ext.isEmpty(node.attributes.treeHandler)) {
-            var h = Ext.getCmp(node.attributes.treeHandler);
+        if (!Ext.isEmpty(node.attributes.treeHandler) || (node.isRoot && !Ext.isEmpty(node.childNodes[0].attributes.treeHandler))) {
+            var h = Ext.getCmp(node.isRoot ? node.childNodes[0].attributes.treeHandler : node.attributes.treeHandler);
             if (h) {
-                m = h.getMenu(node,e);
+                if (node.isRoot) { node.attributes.type = 'root'; }
+                m = h.getMenu(this,node,e);
                 handled = true;
             }
         }
