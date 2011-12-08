@@ -152,6 +152,14 @@ MODx.insertForRTE = function(v,cfg) {
     }
 };
 
+MODx.insertIntoContent = function(v,opt) {
+    if (opt.iframe) {
+        MODx.insertForRTE(v,opt.cfg);
+    } else {
+        MODx.insertAtCursor(opt.ddTargetEl,v);
+    }
+}
+
 MODx.window.InsertElement = function(config) {
     config = config || {};
     Ext.applyIf(config,{
