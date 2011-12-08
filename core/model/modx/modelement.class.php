@@ -107,6 +107,9 @@ class modElement extends modAccessibleSimpleObject {
     '(',')','+','=','[',']','{','}','\'','"',';',':','\\','/','<','>','?'
     ,' ',',','`','~');
 
+    protected $staticContentChanged = false;
+    protected $staticSourceChanged = false;
+
     /**
      * Provides custom handling for retrieving the properties field of an Element.
      *
@@ -152,27 +155,25 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
-     * Overridden to handle changes to the static_file source.
-     *
-     * {@inheritdoc}
-     */
-    public function set($k, $v= null, $vType= '') {
-        $set = parent::set($k, $v, $vType);
-        if ($k === 'static_file' && $set && $this->isStatic()) {
-            $this->setContent($this->getFileContent());
-        }
-        return $set;
-    }
-
-    /**
      * Overridden to handle changes to content managed in an external file.
      *
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
-        $staticContentChange = $this->isStatic() && $this->isDirty('content');
+        $this->staticContentChanged = $this->isStatic() && $this->isDirty('content');
+        $this->staticSourceChanged = $this->isStatic() && ($this->isDirty('static') || $this->isDirty('static_file') || $this->isDirty('source'));
+        if ($this->staticSourceChanged()) {
+            $staticContent = $this->getFileContent();
+            if ($staticContent !== $this->get('content')) {
+                if ($staticContent !== '') {
+                    $this->setContent($staticContent);
+                } elseif ($this->get('content') !== '') {
+                    $this->staticContentChanged = true;
+                }
+            }
+        }
         $saved = parent::save($cacheFlag);
-        if ($saved && $staticContentChange) {
+        if ($saved && $this->staticContentChanged()) {
             $saved = $this->setFileContent($this->get('content'));
         }
         return $saved;
@@ -272,7 +273,7 @@ class modElement extends modAccessibleSimpleObject {
             $this->_output = $this->xpdo->elementCache[$this->_tag];
             $this->_processed = true;
         } else {
-	        $this->filterInput();
+            $this->filterInput();
             $this->getContent(is_string($content) ? array('content' => $content) : array());
         }
         return $this->_result;
@@ -826,5 +827,13 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function isStatic() {
         return $this->get('static');
+    }
+
+    public function staticContentChanged() {
+        return (boolean) $this->staticContentChanged;
+    }
+
+    public function staticSourceChanged() {
+        return (boolean) $this->staticSourceChanged;
     }
 }

@@ -73,7 +73,7 @@ class modPluginUpdateProcessor extends modElementUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category','disabled')), array('previous_category' => $this->previousCategory)));
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'disabled', 'plugincode')), array('previous_category' => $this->previousCategory)));
     }
 }
 return 'modPluginUpdateProcessor';
