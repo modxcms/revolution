@@ -108,6 +108,7 @@ class modManagerResponse extends modResponse {
             } catch (Exception $e) {
                 die($e->getMessage());
             }
+
             $this->body = $this->modx->controller->render();
         }
         

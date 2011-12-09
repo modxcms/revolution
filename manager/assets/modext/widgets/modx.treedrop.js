@@ -34,7 +34,20 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                     case 'chunk': win = true; break;
                     case 'tv': win = true; break;
                     case 'file': v = data.node.attributes.url; break;
-                    default: return false; break;
+                    default:
+                        var dh = Ext.getCmp(data.node.attributes.type+'-drop-handler');
+                        if (dh) {
+                            return dh.handle(data,{
+                                ddTargetEl: ddTargetEl
+                                ,cfg: cfg
+                                ,iframe: cfg.iframe
+                                ,iframeEl: cfg.iframeEl
+                                ,onInsert: cfg.onInsert
+                                ,panel: cfg.panel
+                            });
+                        }
+                        return false;
+                        break;
                 }
                 if (win) {
                     MODx.loadInsertElement({
@@ -138,6 +151,14 @@ MODx.insertForRTE = function(v,cfg) {
         }
     }
 };
+
+MODx.insertIntoContent = function(v,opt) {
+    if (opt.iframe) {
+        MODx.insertForRTE(v,opt.cfg);
+    } else {
+        MODx.insertAtCursor(opt.ddTargetEl,v);
+    }
+}
 
 MODx.window.InsertElement = function(config) {
     config = config || {};

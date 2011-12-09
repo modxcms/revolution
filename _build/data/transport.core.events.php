@@ -724,6 +724,18 @@ $events['OnManagerPageInit']->fromArray(array (
   'service' => 2,
   'groupname' => 'System',
 ), '', true, true);
+$events['OnManagerPageBeforeRender']= $xpdo->newObject('modEvent');
+$events['OnManagerPageBeforeRender']->fromArray(array (
+  'name' => 'OnManagerPageBeforeRender',
+  'service' => 2,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnManagerPageAfterRender']= $xpdo->newObject('modEvent');
+$events['OnManagerPageAfterRender']->fromArray(array (
+  'name' => 'OnManagerPageAfterRender',
+  'service' => 2,
+  'groupname' => 'System',
+), '', true, true);
 $events['OnWebPageInit']= $xpdo->newObject('modEvent');
 $events['OnWebPageInit']->fromArray(array (
   'name' => 'OnWebPageInit',

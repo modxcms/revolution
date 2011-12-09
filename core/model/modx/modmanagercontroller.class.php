@@ -109,6 +109,10 @@ abstract class modManagerController {
             return $this->modx->error->failure($this->modx->lexicon('access_denied'));
         }
 
+        $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
+            'action' => $this->config,
+        ));
+
         $this->theme = $this->modx->getOption('manager_theme',null,'default');
         
         $this->modx->lexicon->load('action');
@@ -129,9 +133,8 @@ abstract class modManagerController {
 
         $this->setPlaceholder('_config',$this->modx->config);
 
-        $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
-            'action' => $this->config,
-        ));
+        $this->modx->invokeEvent('OnManagerPageBeforeRender',array('controller' => &$this));
+
         $placeholders = $this->process($this->scriptProperties);
         if (!$this->isFailure && !empty($placeholders) && is_array($placeholders)) {
             $this->setPlaceholders($placeholders);
@@ -173,6 +176,7 @@ abstract class modManagerController {
         }
 
         $this->firePostRenderEvents();
+        $this->modx->invokeEvent('OnManagerPageAfterRender',array('controller' => &$this));
 
         return $this->content;
     }
@@ -818,7 +822,7 @@ abstract class modManagerController {
         $this->modx->lexicon->load($topic);
         $langTopics = $this->getPlaceholder('_lang_topics');
         $langTopics = explode(',',$langTopics);
-        $langTopics[] = 'analytics:default';
+        $langTopics[] = $topic;
         $langTopics = implode(',',$langTopics);
         $this->setPlaceholder('_lang_topics',$langTopics);
         return $langTopics;

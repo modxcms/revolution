@@ -739,9 +739,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      *
      * @param string $from The location to move from
      * @param string $to The location to move to
+     * @param string $point
      * @return boolean
      */
-    public function moveObject($from,$to) {
+    public function moveObject($from,$to,$point = 'append') {
         $this->xpdo->lexicon->load('source');
         $success = false;
 
