@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2011-12-08
  */
 // $_lang['active_of'] = '[[+active]] of [[+total]]';
 $_lang['active_of'] = '[[+active]] z [[+total]]';
@@ -108,6 +108,15 @@ $_lang['policy_err_remove'] = 'Nastala chyba při odstraňování přístupovéh
 // $_lang['policy_err_save'] = 'An error occurred while trying to save the Policy.';
 $_lang['policy_err_save'] = 'Nastala chyba při ukládání přístupového práva.';
 
+// $_lang['policy_export'] = 'Export Policy';
+$_lang['policy_export'] = 'Exportovat přístupové právo';
+
+// $_lang['policy_import'] = 'Import Policy';
+$_lang['policy_import'] = 'Importovat přístupové právo';
+
+// $_lang['policy_import_msg'] = 'Select an XML file to import a Policy from. It must be in the correct XML Policy format.';
+$_lang['policy_import_msg'] = 'Vyberte XML soubor, ze kterého se má naimportovat přístupové právo. Soubor musí mít plátný formát XML přístupového práva.';
+
 // $_lang['policy_management'] = 'Access Policies';
 $_lang['policy_management'] = 'Přístupová práva';
 
@@ -185,6 +194,15 @@ $_lang['policy_template_err_remove'] = 'Nastala chyba při odstraňování šabl
 
 // $_lang['policy_template_err_save'] = 'An error occurred while trying to save the Policy Template.';
 $_lang['policy_template_err_save'] = 'Nastala chyba při ukládání šablony přístupového práva.';
+
+// $_lang['policy_template_export'] = 'Export Policy Template';
+$_lang['policy_template_export'] = 'Exportovat šablonu přístupového práva';
+
+// $_lang['policy_template_import'] = 'Import Policy Template';
+$_lang['policy_template_import'] = 'Importovat šablonu přístupového práva';
+
+// $_lang['policy_template_import_msg'] = 'Select an XML file to import a Policy Template from. It must be in the correct XML Policy Template format.';
+$_lang['policy_template_import_msg'] = 'Vyberte XML soubor, ze kterého se má naimportovat šablona přístupového práva. Soubor musí mít plátný formát XML šablony přístupového práva.';
 
 // $_lang['policy_template_remove'] = 'Delete Policy Template';
 $_lang['policy_template_remove'] = 'Odstranit šablonu přístupového práva';

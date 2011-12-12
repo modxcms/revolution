@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2011-12-08
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -843,6 +843,12 @@ $_lang['setting_manager_js_cache_max_age'] = 'Staří komprimované cache JS/CSS
 
 // $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximální stáří (v sekundách) cache prohlížeče pro CSS/JS správce obsahu. Po uplynutí této doby bude prohlížeči poslán další podmíněný GET. Pro nižší trafic nastavte delší dobu.';
+
+// $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
+$_lang['setting_manager_js_document_root'] = 'Document Root pro komprimované JS/CSS ve správci obsahu';
+
+// $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
+$_lang['setting_manager_js_document_root_desc'] = 'Pokud Váš server nezpracovává proměnnou serveru DOCUMENT_ROOT a chcete používat možnost komprese JS/CSS ve správci obsahu nastavte jí zde manuálně. Pokud si nejste jist o co jde, pak toto nastavení neměňte.';
 
 // $_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
 $_lang['setting_manager_js_zlib_output_compression'] = 'Povolit zlib výstupní kompresy JS/CSS pro správce obsahu';
