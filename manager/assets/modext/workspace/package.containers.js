@@ -79,7 +79,10 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
     }
 	
 	,install: function(va){
-		var record = Ext.getCmp('modx-package-grid').getSelectionModel().getSelected();
+		var g = Ext.getCmp('modx-package-grid');
+		if (!g) return false;
+		var record = g.menu.record;
+
 		var r = record.data;
 		var topic = '/workspace/package/install/'+r.signature+'/';
         this.loadConsole(Ext.getBody(),topic);
