@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2011-12-08
  */
 // $_lang['alphabetically'] = 'Alphabetically';
 $_lang['alphabetically'] = 'Abecedně';
@@ -52,7 +52,7 @@ $_lang['continue'] = 'Pokračovat';
 $_lang['core_err_invalid'] = 'Pro spuštění sestavení musíte mít platnou instalaci jádra a aktivní workspace.';
 
 // $_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
-$_lang['curl_not_installed'] = 'Aby jste mohli používat Správce balíčků musí být nainstalována a nakonfigurována PHP extenze cURL. Více informací o cUrl nalzente na <a href="http://php.net/curl" target="_blank">Stránce PHP cURL</a>.';
+$_lang['curl_not_installed'] = 'Správce balíčků je možno používat pouze s nainstalovanou PHP extenzí cURL. Více informací o cUrl nalzente na <a href="http://php.net/curl" target="_blank">stránce PHP cURL</a>.';
 
 // $_lang['description'] = 'Description';
 $_lang['description'] = 'Popis';
