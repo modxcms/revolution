@@ -43,7 +43,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                 ,id: 'modx-button-save-resource'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: cfg.record.richtext ? false : true
+                ,checkDirty: cfg.record.richtext || MODx.request.reload ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true

@@ -55,15 +55,14 @@ if ($posted) {
 <div id="header">
     <div class="container_12">
         <div id="metaheader">
-            <div id="metanav" class="grid_9">
-               <ul>
-                    <li><a href="#"><strong>MODX Revolution</strong>&nbsp;<em>Core Finder</em></a></li>
-               </ul>
+            <div class="grid_6">
+                <div id="mainheader">
+                    <h1 id="logo" class="pngfix"><span>MODX</span></h1>
+                </div>
             </div>
-        </div>
-        <div class="clear">&nbsp;</div>
-        <div id="mainheader">
-            <h1 id="logo" class="pngfix"><span>MODX</span></h1>
+            <div id="metanav" class="grid_6">
+                <a href="#"><strong>MODX Revolution</strong>&nbsp;<em>Core Finder</em></a>
+            </div>
         </div>
         <div class="clear">&nbsp;</div>
     </div>
