@@ -44,6 +44,15 @@ MODx.combo.ComboBox = function(config,getStore) {
 Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox);
 Ext.reg('modx-combo',MODx.combo.ComboBox);
 
+Ext.util.Format.comboRenderer = function (combo,val) {
+    return function (v,md,rec,ri,ci,s) {
+        MODx.debug(val);
+        var record = combo.findRecord(combo.valueField, v);
+        return record ? record.get(combo.displayField) : val;
+    }
+};
+
+/** @deprecated MODX 2.2 */
 MODx.combo.Renderer = function(combo) {
     var loaded = false;
     return (function(v) {
