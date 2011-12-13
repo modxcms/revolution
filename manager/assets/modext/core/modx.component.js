@@ -282,6 +282,8 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                         ,dontHide: r.result.message != '' ? true : false
                     });
                     Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
+
+                    this.resetDirtyButtons(r.result);
                 },this);
                 o.form.submit({
                     headers: {
@@ -297,6 +299,13 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             location.href = '?'+Ext.urlEncode(itm.params);
         }
         return false;
+    }
+
+    ,resetDirtyButtons: function(r) {
+        for (var i=0;i<this.checkDirtyBtns.length;i=i+1) {
+            var btn = this.checkDirtyBtns[i];
+            btn.setDisabled(true);
+        }
     }
 
     ,checkStay: function(itm,e) {

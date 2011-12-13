@@ -298,6 +298,8 @@ abstract class modInstallTest {
     protected function _checkDatabase() {
         /* connect to the database */
         $this->title('dbase_connection',$this->install->lexicon('test_db_check'));
+        $GLOBALS['database_dsn'] = $this->install->settings->get('database_dsn');
+        $GLOBALS['config_options'] = $this->install->settings->get('config_options');
         $xpdo = $this->install->getConnection();
         if (!$xpdo || !$xpdo->connect()) {
             if ($this->mode > modInstall::MODE_NEW) {
