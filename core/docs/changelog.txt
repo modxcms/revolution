@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6306] Fix issue with close button always prompting changes made when changes may not have been made
+- [#6317] Fix issue with combo editor rendering in grids
 - [#6307] Save button now properly resets to disabled after save
 - [#6313] Fix issue with renaming content field label on derivative resource types
 - [#6084] Fix upgrade from 2.0.x releases
