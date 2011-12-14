@@ -41,6 +41,9 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
+        if (!$this->source->checkPolicy('remove')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $success = $this->source->removeContainer($this->getProperty('dir'));
 

@@ -40,6 +40,9 @@ class modBrowserFolderRenameProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
+        if (!$this->source->checkPolicy('save')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $fields = $this->getProperties();
         if (!$this->validate($fields)) {

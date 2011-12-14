@@ -32,6 +32,9 @@ class modBrowserFolderSortProcessor extends modProcessor {
         }
         $source->setRequestProperties($this->getProperties());
         $source->initialize();
+        if (!$source->checkPolicy('save')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
         $success = $source->moveObject($from,$to,$point);
         if (!$success) {
             $errors = $source->getErrors();

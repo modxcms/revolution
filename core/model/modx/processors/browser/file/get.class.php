@@ -22,12 +22,14 @@ class modBrowserFileGetProcessor extends modProcessor {
         $file = rawurldecode($this->getProperty('file',''));
 
 
-        $source = $this->getSource();
-        if ($source !== true) {
-            return $source;
+        $loaded = $this->getSource();
+        if ($loaded !== true) {
+            return $loaded;
         }
-        
-        $this->source = $this->getProperty('source',1);
+        if (!$this->source->checkPolicy('delete')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+
         $fileArray = $this->source->getObjectContents($file);
 
         if (empty($fileArray)) {
@@ -48,12 +50,12 @@ class modBrowserFileGetProcessor extends modProcessor {
         $source = $this->getProperty('source',1);
         /** @var modMediaSource $source */
         $this->modx->loadClass('sources.modMediaSource');
-        $source = modMediaSource::getDefaultSource($this->modx,$source);
-        if (!$source->getWorkingContext()) {
+        $this->source = modMediaSource::getDefaultSource($this->modx,$source);
+        if (!$this->source->getWorkingContext()) {
             return $this->modx->lexicon('permission_denied');
         }
-        $source->setRequestProperties($this->getProperties());
-        return $source->initialize();
+        $this->source->setRequestProperties($this->getProperties());
+        return $this->source->initialize();
     }
 }
 return 'modBrowserFileGetProcessor';
