@@ -106,6 +106,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $imagesExts = explode(',',$imagesExts);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
         $skipFiles = explode(',',$skipFiles);
+        if ($this->xpdo->getParser()) {
+            $this->xpdo->parser->processElementTags('',$skipFiles,true,true);
+        }
         $skipFiles[] = '.';
         $skipFiles[] = '..';
 
@@ -125,6 +128,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             $fileName = $file->getFilename();
             if (in_array(trim($fileName,'/'),$skipFiles)) continue;
+            if (in_array($fullPath.$fileName,$skipFiles)) continue;
             $filePathName = $file->getPathname();
             $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
