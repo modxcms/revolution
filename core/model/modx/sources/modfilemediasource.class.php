@@ -49,6 +49,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         } else {
             $bases['pathAbsolute'] = $bases['path'];
         }
+        //$this->xpdo->log(modX::LOG_LEVEL_ERROR, print_r('$bases',1));
         $bases['path'] = $this->processPlaceholders(null,$bases['path']);
         $bases['pathAbsolute'] = $this->processPlaceholders(null,$bases['pathAbsolute']);     
         $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].$path;
@@ -107,6 +108,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
         $imagesExts = explode(',',$imagesExts);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
+        $skipFiles = $this->processPlaceholders(null,$skipFiles);//line added
+        //$this->xpdo->log(modX::LOG_LEVEL_ERROR, $skipFiles); 
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
         $skipFiles[] = '..';
@@ -118,11 +121,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         /* iterate through directories */
         /** @var DirectoryIterator $file */
         foreach (new DirectoryIterator($fullPath) as $file) {
+            
             if (in_array($file,$skipFiles)) continue;
             if (!$file->isReadable()) continue;
 
             $fileName = $file->getFilename();
+            //$this->xpdo->log(modX::LOG_LEVEL_ERROR, $fullPath.$fileName); 
             if (in_array(trim($fileName,'/'),$skipFiles)) continue;
+            if (in_array($fullPath.$fileName,$skipFiles)) continue;
             $filePathName = $file->getPathname();
             $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
