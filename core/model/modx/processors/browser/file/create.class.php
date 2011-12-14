@@ -30,6 +30,9 @@ class modBrowserFileCreateProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
+        if (!$this->source->checkPolicy('create')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $path = $this->source->createObject($directory,$name,$this->getProperty('content'));
         if (empty($path)) {

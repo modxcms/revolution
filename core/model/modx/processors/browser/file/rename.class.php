@@ -27,6 +27,9 @@ class modBrowserFileRenameProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
+        if (!$this->source->checkPolicy('save')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $success = $this->source->renameObject($oldFile,$this->getProperty('name'));
 

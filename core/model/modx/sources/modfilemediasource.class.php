@@ -109,6 +109,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $skipFiles[] = '.';
         $skipFiles[] = '..';
 
+        $canSave = $this->checkPolicy('save');
+        $canRemove = $this->checkPolicy('remove');
+        $canCreate = $this->checkPolicy('create');
+
         $directories = array();
         $files = array();
         if (!is_dir($fullPath)) return array();
@@ -128,12 +132,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $cls = array();
             if ($file->isDir() && $this->hasPermission('directory_list')) {
                 $cls[] = 'folder';
-                if ($this->hasPermission('directory_chmod')) $cls[] = 'pchmod';
-                if ($this->hasPermission('directory_create')) $cls[] = 'pcreate';
-                if ($this->hasPermission('directory_remove')) $cls[] = 'premove';
-                if ($this->hasPermission('directory_update')) $cls[] = 'pupdate';
-                if ($this->hasPermission('file_upload')) $cls[] = 'pupload';
-                if ($this->hasPermission('file_create')) $cls[] = 'pcreate';
+                if ($this->hasPermission('directory_chmod') && $canSave) $cls[] = 'pchmod';
+                if ($this->hasPermission('directory_create') && $canCreate) $cls[] = 'pcreate';
+                if ($this->hasPermission('directory_remove') && $canRemove) $cls[] = 'premove';
+                if ($this->hasPermission('directory_update') && $canSave) $cls[] = 'pupdate';
+                if ($this->hasPermission('file_upload') && $canCreate) $cls[] = 'pupload';
+                if ($this->hasPermission('file_create') && $canCreate) $cls[] = 'pcreate';
 
                 $directories[$fileName] = array(
                     'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
@@ -162,8 +166,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $cls[] = 'active-node';
                 }
 
-                if ($this->hasPermission('file_remove')) $cls[] = 'premove';
-                if ($this->hasPermission('file_update')) $cls[] = 'pupdate';
+                if ($this->hasPermission('file_remove') && $canRemove) $cls[] = 'premove';
+                if ($this->hasPermission('file_update') && $canSave) $cls[] = 'pupdate';
 
                 if (!$file->isWritable()) {
                     $cls[] = 'icon-lock';
@@ -217,9 +221,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return array
      */
     public function getListContextMenu(DirectoryIterator $file,array $fileArray) {
+        $canSave = $this->checkPolicy('save');
+        $canRemove = $this->checkPolicy('remove');
+        $canCreate = $this->checkPolicy('create');
+        $canView = $this->checkPolicy('view');
+
         $menu = array();
         if (!$file->isDir()) { /* files */
-            if ($this->hasPermission('file_update')) {
+            if ($this->hasPermission('file_update') && $canSave) {
                 if (!empty($fileArray['page'])) {
                     $menu[] = array(
                         'text' => $this->xpdo->lexicon('file_edit'),
@@ -231,13 +240,13 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'handler' => 'this.renameFile',
                 );
             }
-            if ($this->hasPermission('file_view')) {
+            if ($this->hasPermission('file_view') && $canView) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_download'),
                     'handler' => 'this.downloadFile',
                 );
             }
-            if ($this->hasPermission('file_remove')) {
+            if ($this->hasPermission('file_remove') && $canRemove) {
                 if (!empty($menu)) $menu[] = '-';
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_remove'),
@@ -245,19 +254,19 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 );
             }
         } else { /* directories */
-            if ($this->hasPermission('directory_create')) {
+            if ($this->hasPermission('directory_create') && $canCreate) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_folder_create_here'),
                     'handler' => 'this.createDirectory',
                 );
             }
-            if ($this->hasPermission('directory_chmod')) {
+            if ($this->hasPermission('directory_chmod') && $canSave) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_folder_chmod'),
                     'handler' => 'this.chmodDirectory',
                 );
             }
-            if ($this->hasPermission('directory_update')) {
+            if ($this->hasPermission('directory_update') && $canSave) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('rename'),
                     'handler' => 'this.renameDirectory',
@@ -267,20 +276,20 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 'text' => $this->xpdo->lexicon('directory_refresh'),
                 'handler' => 'this.refreshActiveNode',
             );
-            if ($this->hasPermission('file_upload')) {
+            if ($this->hasPermission('file_upload') && $canCreate) {
                 $menu[] = '-';
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('upload_files'),
                     'handler' => 'this.uploadFiles',
                 );
             }
-            if ($this->hasPermission('file_create')) {
+            if ($this->hasPermission('file_create') && $canCreate) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_create'),
                     'handler' => 'this.createFile',
                 );
             }
-            if ($this->hasPermission('directory_remove')) {
+            if ($this->hasPermission('directory_remove') && $canRemove) {
                 $menu[] = '-';
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_folder_remove'),
