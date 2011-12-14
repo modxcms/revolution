@@ -384,7 +384,7 @@ class modX extends xPDO {
      * @return string A valid query string representing the parameters.
      */
     public static function toQueryString(array $parameters = array()) {
-        return http_build_query($qs);
+        return http_build_query($parameters);
     }
 
     /**
