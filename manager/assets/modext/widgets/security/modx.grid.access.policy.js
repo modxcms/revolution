@@ -19,7 +19,7 @@ MODx.panel.AccessPolicies = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px'
+            ,cls: 'main-wrapper'
             ,items: [{
                 html: '<p>'+_('policy_management_msg')+'</p>'
                 ,border: false
