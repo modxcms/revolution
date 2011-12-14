@@ -38,6 +38,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) { 
             this.getForm().setValues(this.config.record);
+            if (this.config.richtext || MODx.request.reload || MODx.request.activeSave == 1) {
+                this.markDirty();
+            }
             var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
