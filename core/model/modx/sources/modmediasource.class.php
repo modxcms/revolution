@@ -542,7 +542,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         if (substr($src,0,4) != 'http') {
             if (strpos($src,'/') !== 0) {
                 $properties = $this->getPropertyList();
-                $src = $properties['basePath'].$src;
+                $src = !empty($properties['basePath']) ? $properties['basePath'].$src : $src;
                 if (!empty($properties['basePathRelative'])) {
                     $src = $this->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
                 }
