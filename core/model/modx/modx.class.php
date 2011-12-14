@@ -384,11 +384,7 @@ class modX extends xPDO {
      * @return string A valid query string representing the parameters.
      */
     public static function toQueryString(array $parameters = array()) {
-        $qs = array();
-        foreach ($parameters as $paramKey => $paramVal) {
-            $qs[] = urlencode($paramKey) . '=' . urlencode($paramVal);
-        }
-        return implode('&', $qs);
+        return http_build_query($qs);
     }
 
     /**
