@@ -63,9 +63,11 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
     
     public function autoFolder()
     {
+        
         if ($this->getProperty('autoCreateFolder') == 'true'){
-            $bases = $this->source->getBases();
+            $bases = $this->source->getBases('');
             $targetDir = $bases['pathAbsolute'];
+            //$this->modx->log(modX::LOG_LEVEL_ERROR, $bases['pathAbsolute']);
             $cacheManager = $this->modx->getCacheManager();
             /* if directory doesnt exist, create it */
             if (!file_exists($targetDir) || !is_dir($targetDir)) {
