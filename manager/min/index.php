@@ -53,9 +53,10 @@ $min_serveOptions['rewriteCssUris'] = true;
 $min_serveOptions['maxAge'] = (int)$modx->getOption('manager_js_cache_max_age',null,3600);
 $min_serveOptions['minApp']['groupsOnly'] = false;
 $min_serveOptions['minApp']['maxFiles'] = (int)$modx->getOption('manager_js_cache_max_files',null,50);
-$min_serveOptions['minApp']['allowDirs'][] = MODX_MANAGER_PATH;
+$min_serveOptions['minApp']['allowDirs'][] = $min_documentRoot;
 $min_symlinks = array();
 if (strpos(MODX_MANAGER_PATH, $min_documentRoot) !== 0) {
+    $min_serveOptions['minApp']['allowDirs'][] = MODX_MANAGER_PATH;
     $min_serveOptions['minApp']['virtualDirs'] = array(MODX_MANAGER_URL => MODX_MANAGER_PATH);
     $min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = array(MODX_MANAGER_URL => MODX_MANAGER_PATH);
 }
