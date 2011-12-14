@@ -117,6 +117,10 @@ class modManagerResponse extends modResponse {
         }
         if (is_array($this->body)) {
             $this->modx->smarty->assign('_e', $this->body);
+            if (!file_exists($this->modx->smarty->template_dir.'error.tpl')) {
+                $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+                $this->modx->smarty->setTemplatePath($templatePath);
+            }
             echo $this->modx->smarty->fetch('error.tpl');
         } else {
             echo $this->body;
