@@ -377,14 +377,17 @@ class modX extends xPDO {
     }
 
     /**
-     * Turn an associative array into a valid query string.
+     * Turn an associative or numeric array into a valid query string.
      *
      * @static
-     * @param array $parameters An associative array of parameters.
+     * @param array $parameters An associative or numeric-indexed array of parameters.
+     * @param string $numPrefix A string prefix added to the numeric-indexed array keys.
+     * Ignored if associative array is used.
+     * @param string $argSeparator The string used to separate arguments in the resulting query string.
      * @return string A valid query string representing the parameters.
      */
-    public static function toQueryString(array $parameters = array()) {
-        return http_build_query($parameters);
+    public static function toQueryString(array $parameters = array(), $numPrefix = '', $argSeparator = '&') {
+        return http_build_query($parameters, $numPrefix, $argSeparator);
     }
 
     /**
