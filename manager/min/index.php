@@ -45,14 +45,20 @@ $min_allowDebugFlag = (boolean)$modx->getOption('manager_js_cache_allow_debug_fl
 $min_errorLogger = (boolean)$modx->getOption('manager_js_cache_debug',null,true);
 $min_enableBuilder = false;
 $min_cachePath = $cachePath;
-$documentRoot = $modx->getOption('manager_js_document_root',null,'');
+$documentRoot = $modx->getOption('manager_js_document_root', null, '');
 $min_documentRoot = !empty($documentRoot) ? $documentRoot : $_SERVER['DOCUMENT_ROOT'];
 $min_cacheFileLocking = (boolean)$modx->getOption('manager_js_cache_file_locking',null,true);
 $min_serveOptions['bubbleCssImports'] = false;
+$min_serveOptions['rewriteCssUris'] = true;
 $min_serveOptions['maxAge'] = (int)$modx->getOption('manager_js_cache_max_age',null,3600);
 $min_serveOptions['minApp']['groupsOnly'] = false;
 $min_serveOptions['minApp']['maxFiles'] = (int)$modx->getOption('manager_js_cache_max_files',null,50);
+$min_serveOptions['minApp']['allowDirs'][] = MODX_MANAGER_PATH;
 $min_symlinks = array();
+if (strpos(MODX_MANAGER_PATH, $min_documentRoot) !== 0) {
+    $min_serveOptions['minApp']['virtualDirs'] = array(MODX_MANAGER_URL => MODX_MANAGER_PATH);
+    $min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = array(MODX_MANAGER_URL => MODX_MANAGER_PATH);
+}
 $min_uploaderHoursBehind = 0;
 $min_libPath = dirname(__FILE__) . '/lib';
 @ini_set('zlib.output_compression', (int)$modx->getOption('manager_js_zlib_output_compression',null,0));
@@ -72,7 +78,7 @@ Minify::setCache(
     ,$min_cacheFileLocking
 );
 
-if ($min_documentRoot) {
+if ($min_documentRoot && (!isset($_SERVER['DOCUMENT_ROOT']) || !empty($documentRoot))) {
     $_SERVER['DOCUMENT_ROOT'] = $min_documentRoot;
     Minify::$isDocRootSet = true;
 }
