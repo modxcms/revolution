@@ -2115,6 +2115,11 @@ class modX extends xPDO {
                     $this->eventMap= & $this->context->eventMap;
                     $this->pluginCache= & $this->context->pluginCache;
                     $this->config= array_merge($this->_systemConfig, $this->context->config);
+                    $iniTZ = ini_get('date.timezone');
+                    $cfgTZ = $this->getOption('date_timezone', null, 'UTC', true);
+                    if (empty($iniTZ) || $cfgTZ !== $iniTZ) {
+                        date_default_timezone_set($cfgTZ);
+                    }
                     if ($this->_initialized) {
                         $this->getUser();
                     }

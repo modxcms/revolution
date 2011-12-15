@@ -384,6 +384,15 @@ $settings['cultureKey']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['date_timezone']= $xpdo->newObject('modSystemSetting');
+$settings['date_timezone']->fromArray(array (
+  'key' => 'date_timezone',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['debug']= $xpdo->newObject('modSystemSetting');
 $settings['debug']->fromArray(array (
   'key' => 'debug',
