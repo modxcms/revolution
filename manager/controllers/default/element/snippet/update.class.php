@@ -80,6 +80,8 @@ class ElementSnippetUpdateManagerController extends modManagerController {
                 !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
                 $property['desc_trans'],
+                !empty($property['area']) ? $property['area'] : '',
+                !empty($property['area_trans']) ? $property['area_trans'] : '',
             );
         }
         $this->snippetArray = $this->snippet->toArray();
