@@ -11,6 +11,8 @@
  *
  * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
+$_lang['area'] = 'Bereich';
+$_lang['areas'] = 'Bereiche';
 $_lang['class_name'] = 'Klassen-Name';
 $_lang['default'] = 'Standardeigenschaften';
 $_lang['duplicate_of'] = 'Duplikat von [[+name]]';
@@ -29,6 +31,8 @@ $_lang['properties_import_err_upload'] = 'Bitte geben Sie eine gültige Eigensch
 $_lang['properties_import_msg'] = 'Bitte wählen Sie eine gültige Eigenschaften-Datei aus.';
 $_lang['properties_remove'] = 'Eigenschaften löschen';
 $_lang['properties_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Eigenschaften entfernen möchten?';
+$_lang['property'] = 'Eigenschaft';
+$_lang['property_area_desc'] = 'Der Bereich oder die Gruppe, zu dem bzw. zu der diese Eigenschaft gehört.';
 $_lang['property_create'] = 'Eigensch. erstellen';
 $_lang['property_description_desc'] = 'Eine kurze Beschreibung der Eigenschaft. Dies kann ein Lexikon-Schlüssel des für die Eigenschaft zuständigen Lexikons sein.';
 $_lang['property_lexicon_desc'] = 'Optional. Das Lexikon, mittels dessen die Felder dieser Eigenschaft übersetzt werden können.';
