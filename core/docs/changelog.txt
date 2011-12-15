@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6349] Properties can now belong to areas, and are grouped in grid by area
 - [#6344] Fix various pathing issues when drag/dropping files into content
 - [#5941] Add anonymous Load Only ACL when creating contexts
 - [#6247] Fix minify issues outside of $_SERVER['DOCUMENT_ROOT']

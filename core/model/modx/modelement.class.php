@@ -135,6 +135,8 @@ class modElement extends modAccessibleSimpleObject {
                     $this->xpdo->lexicon->load($property['lexicon']);
                 }
                 $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+                $property['area'] = !empty($property['area']) ? $property['area'] : '';
+                $property['area_trans'] = $this->xpdo->lexicon($property['area']);
 
                 if (!empty($property['options'])) {
                     foreach ($property['options'] as &$option) {
@@ -642,6 +644,7 @@ class modElement extends modAccessibleSimpleObject {
                         'options' => $property[3],
                         'value' => $property[4],
                         'lexicon' => !empty($property[5]) ? $property[5] : null,
+                        'area' => !empty($property[6]) ? $property[6] : '',
                     );
                 } elseif (is_array($property) && isset($property['value'])) {
                     $key = $property['name'];
@@ -652,6 +655,7 @@ class modElement extends modAccessibleSimpleObject {
                         'options' => isset($property['options']) ? $property['options'] : array(),
                         'value' => $property['value'],
                         'lexicon' => !empty($property['lexicon']) ? $property['lexicon'] : null,
+                        'area' => !empty($property['area']) ? $property['area'] : '',
                     );
                 } else {
                     $key = $propKey;
@@ -662,6 +666,7 @@ class modElement extends modAccessibleSimpleObject {
                         'options' => array(),
                         'value' => $property,
                         'lexicon' => null,
+                        'area' => '',
                     );
                 }
 
@@ -709,6 +714,7 @@ class modElement extends modAccessibleSimpleObject {
                     $added = true;
                 } else {
                     if ($propertySet->isNew()) $propertySet->save();
+                    /** @var modElementPropertySet $link */
                     $link= $this->xpdo->newObject('modElementPropertySet');
                     $link->set('element', $this->get('id'));
                     $link->set('element_class', $this->_class);
@@ -829,10 +835,18 @@ class modElement extends modAccessibleSimpleObject {
         return $this->get('static');
     }
 
+    /**
+     * Return if static content is changed
+     * @return boolean
+     */
     public function staticContentChanged() {
         return (boolean) $this->staticContentChanged;
     }
 
+    /**
+     * Return if static source is changed
+     * @return boolean
+     */
     public function staticSourceChanged() {
         return (boolean) $this->staticSourceChanged;
     }

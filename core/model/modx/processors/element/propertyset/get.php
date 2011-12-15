@@ -10,6 +10,7 @@ $modx->lexicon->load('propertyset');
 
 /* if getting properties for an element as well */
 if (!empty($scriptProperties['elementId']) && !empty($scriptProperties['elementType'])) {
+    /** @var modElement $element */
     $element = $modx->getObject($scriptProperties['elementType'],$scriptProperties['elementId']);
     if ($element) {
         $default = $element->get('properties');
@@ -23,6 +24,7 @@ if (!isset($scriptProperties['id']) || $scriptProperties['id'] == '') {
 }
 /* if grabbing a modPropertySet */
 if ($scriptProperties['id'] != 0) {
+    /** @var modPropertySet $set */
     $set = $modx->getObject('modPropertySet',$scriptProperties['id']);
 
 } elseif (isset($default)) {
@@ -57,12 +59,14 @@ if (isset($default)) {
         $data[$property['name']] = array(
             $property['name'],
             $property['desc'],
-            $property['type'],
-            $property['options'],
+            !empty($property['type']) ? $property['type'] : 'textfield',
+            !empty($property['options']) ? $property['options'] : array(),
             $property['value'],
-            $property['lexicon'],
+            !empty($property['lexicon']) ? $property['lexicon'] : '',
             false,
             $property['desc_trans'],
+            !empty($property['area']) ? $property['area'] : '',
+            !empty($property['area_trans']) ? $property['area_trans'] : '',
         );
     }
 }
@@ -87,12 +91,14 @@ foreach ($properties as $property) {
     $data[$property['name']] = array(
         $property['name'],
         $property['desc'],
-        $property['type'],
-        $property['options'],
+        !empty($property['type']) ? $property['type'] : 'textfield',
+        !empty($property['options']) ? $property['options'] : array(),
         $property['value'],
-        $property['lexicon'],
+        !empty($property['lexicon']) ? $property['lexicon'] : '',
         $overridden,
         $property['desc_trans'],
+        !empty($property['area']) ? $property['area'] : '',
+        !empty($property['area_trans']) ? $property['area_trans'] : '',
     );
 }
 

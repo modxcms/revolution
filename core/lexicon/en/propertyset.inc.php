@@ -6,6 +6,8 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['area'] = 'Area';
+$_lang['areas'] = 'Areas';
 $_lang['class_name'] = 'Class Name';
 $_lang['default'] = 'Default';
 $_lang['duplicate_of'] = 'Duplicate of [[+name]]';
@@ -24,6 +26,8 @@ $_lang['properties_import_err_upload'] = 'Please specify a valid properties file
 $_lang['properties_import_msg'] = 'Please select a valid properties file.';
 $_lang['properties_remove'] = 'Delete Properties';
 $_lang['properties_remove_confirm'] = 'Are you sure you want to delete these properties?';
+$_lang['property'] = 'Property';
+$_lang['property_area_desc'] = 'The area, or group, this property belongs to.';
 $_lang['property_create'] = 'Create Property';
 $_lang['property_description_desc'] = 'A short description of the property. This can be a lexicon key of the property\'s lexicon.';
 $_lang['property_lexicon_desc'] = 'Optional. The lexicon that this property\'s fields can be translated with.';
