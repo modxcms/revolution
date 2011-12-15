@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#5709] Fix issue where drag/drop in left trees did not work when package management was open
 - [#6153] Prevent enter key from sending Message when typing in messages page
 - [#6349] Properties can now belong to areas, and are grouped in grid by area
 - [#6344] Fix various pathing issues when drag/dropping files into content
