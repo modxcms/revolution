@@ -411,6 +411,9 @@ $_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that be
 $_lang['setting_manager_language'] = 'Manager Language';
 $_lang['setting_manager_language_desc'] = 'Select the language for the MODX Content Manager.';
 
+$_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
+$_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
+
 $_lang['setting_manager_login_start'] = 'Manager Login Startup';
 $_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged into the manager. <strong>NOTE: make sure the ID you\'ve enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 

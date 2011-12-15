@@ -45,6 +45,11 @@ class modManagerResponse extends modResponse {
         if (empty($this->action)) $this->action = array();
         $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
         if (!$isLoggedIn) {
+            $alternateLogin = $this->modx->getOption('manager_login_url_alternate',null,'');
+            if (!empty($alternateLogin)) {
+                $this->modx->sendRedirect($alternateLogin);
+                return '';
+            }
             $this->action['namespace'] = 'core';
             $this->action['namespace_name'] = 'core';
             $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
