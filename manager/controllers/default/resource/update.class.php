@@ -88,6 +88,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         /* get context */
         $this->setContext();
+        if (!$this->context) { return $this->failure($this->modx->lexicon('access_denied')); }
 
         /* check for locked status */
         $this->checkForLocks();
