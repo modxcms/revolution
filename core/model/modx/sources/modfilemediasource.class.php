@@ -50,7 +50,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $bases['pathAbsolute'] = $bases['path'];
         }
         
-        $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].$path;
+        $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].ltrim($path,'/');
         if (is_dir($bases['pathAbsoluteWithPath'])) {
             $bases['pathAbsoluteWithPath'] = $this->fileHandler->postfixSlash($bases['pathAbsoluteWithPath']);
         }
@@ -178,7 +178,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 }
                 $encFile = rawurlencode($fullPath.$fileName);
                 $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
-                $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).($path != './' ? $path : '').$fileName;
+                $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName;
 
                 /* get relative url from manager/ */
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
@@ -192,10 +192,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
-                    'path' => $bases['pathAbsolute'].$fileName,
+                    'path' => $bases['pathAbsoluteWithPath'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'directory' => $bases['path'],
-                    'url' => $url,
+                    'url' => $bases['url'].$url,
+                    'urlAbsolute' => $bases['urlAbsolute'].ltrim($url,'/'),
                     'file' => $encFile,
                     'menu' => array(),
                 );
