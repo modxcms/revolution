@@ -51,7 +51,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
     ,removePriorVersion: function(btn,e) {
         var r = this.menu.record;
         MODx.msg.confirm({
-            title: _('warning')
+            title: _('package_version_remove')
             ,text: _('package_version_remove_confirm')
             ,url: this.config.url
             ,params: {
