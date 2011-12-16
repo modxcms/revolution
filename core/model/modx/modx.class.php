@@ -1819,12 +1819,14 @@ class modX extends xPDO {
      * context directly.
      *
      * @param string $contextKey The key of the context to switch to.
+     * @param boolean $reload Set to true to force the context data to be regenerated
+     * before being switched to.
      * @return boolean True if the switch was successful, otherwise false.
      */
-    public function switchContext($contextKey) {
+    public function switchContext($contextKey, $reload = false) {
         $switched= false;
         if ($this->context->key != $contextKey) {
-            $switched= $this->_initContext($contextKey);
+            $switched= $this->_initContext($contextKey, $reload);
             if ($switched) {
                 if (is_array($this->config)) {
                     $this->setPlaceholders($this->config, '+');
@@ -2085,7 +2087,41 @@ class modX extends xPDO {
         }
         return $removed;
     }
-    
+
+    /**
+     * Reload data for a specified Context, without switching to it.
+     *
+     * Note that the Context will be loaded even if it is not already.
+     *
+     * @param string $key The key of the Context to (re)load.
+     * @return boolean True if the Context was (re)loaded successfully; false otherwise.
+     */
+    public function reloadContext($key = null) {
+        $reloaded = false;
+        if ($this->context instanceof modContext) {
+            if (empty($key)) {
+                $key = $this->context->get('key');
+            }
+            if ($key === $this->context->get('key')) {
+                $reloaded = $this->_initContext($key, true);
+                if ($reloaded && is_array($this->config)) {
+                    $this->setPlaceholders($this->config, '+');
+                }
+            } else {
+                if (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext)) {
+                    $this->contexts[$key] = $this->newObject('modContext');
+                    $this->contexts[$key]->_fields['key']= $key;
+                }
+                $reloaded = $this->contexts[$key]->prepare(true);
+            }
+        } elseif (!empty($key) && (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext))) {
+            $this->contexts[$key] = $this->newObject('modContext');
+            $this->contexts[$key]->_fields['key']= $key;
+            $reloaded = $this->contexts[$key]->prepare(true);
+        }
+        return $reloaded;
+    }
+
     /**
      * Loads a specified Context.
      *
@@ -2094,9 +2130,10 @@ class modX extends xPDO {
      *
      * @access protected
      * @param string $contextKey A context identifier.
+     * @param boolean $regenerate If true, force regeneration of the context even if already initialized.
      * @return boolean True if the context was properly initialized
      */
-    protected function _initContext($contextKey) {
+    protected function _initContext($contextKey, $regenerate = false) {
         $initialized= false;
         $oldContext = is_object($this->context) ? $this->context->get('key') : '';
         if (isset($this->contexts[$contextKey])) {
@@ -2106,7 +2143,7 @@ class modX extends xPDO {
             $this->context->_fields['key']= $contextKey;
         }
         if ($this->context) {
-            if (!$this->context->prepare()) {
+            if (!$this->context->prepare((boolean) $regenerate)) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
                 if ($this->context->checkPolicy('load')) {
