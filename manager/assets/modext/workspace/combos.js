@@ -17,6 +17,7 @@ MODx.combo.Provider = function(config) {
             ,combo: true
         }
         ,editable: false
+        ,pageSize: 20
     });
     MODx.combo.Provider.superclass.constructor.call(this,config);
 };
@@ -38,6 +39,7 @@ MODx.combo.Workspace = function(config) {
         ,hiddenName: 'workspace'
         ,url: MODx.config.connectors_url+'workspace/index.php'
         ,editable: false
+        ,pageSize: 20
     });
     MODx.combo.Workspace.superclass.constructor.call(this,config);
 };

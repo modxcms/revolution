@@ -390,6 +390,7 @@ MODx.combo.ClassMap = function(config) {
         ,valueField: 'class'
         ,fields: ['class']
         ,editable: false
+        ,pageSize: 20
     });
     MODx.combo.ClassMap.superclass.constructor.call(this,config);
 };
@@ -539,6 +540,7 @@ MODx.combo.PropertySet = function(config) {
         ,fields: ['id','name']
         ,editable: false
         ,value: 0
+        ,pageSize: 20
     });
     MODx.combo.PropertySet.superclass.constructor.call(this,config);
 };
@@ -795,6 +797,7 @@ MODx.combo.Authority = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/role.php'
         ,baseParams: { action: 'getAuthorityList', addNone: true }
     });
