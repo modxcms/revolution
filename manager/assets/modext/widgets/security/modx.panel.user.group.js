@@ -510,6 +510,7 @@ MODx.combo.Authority = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/role.php'
         ,baseParams: { action: 'getAuthorityList', addNone: true }
     });
