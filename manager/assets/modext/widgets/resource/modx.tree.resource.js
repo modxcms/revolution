@@ -591,7 +591,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,handler: this.quickUpdateResource
             });
         }
-        if (ui.hasClass('pnew')) {
+        if (ui.hasClass('pduplicate')) {
             m.push({
                 text: _('resource_duplicate')
                 ,handler: this.duplicateResource
