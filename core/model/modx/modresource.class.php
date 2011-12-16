@@ -38,6 +38,13 @@ interface modResourceInterface {
      * @return string
      */
     public function getResourceTypeName();
+
+    /**
+     * Allows you to manipulate the tree node for a Resource before it is sent
+     * @abstract
+     * @param array $node
+     */
+    public function prepareTreeNode(array $node = array());
 }
 /**
  * Represents a web resource managed by the MODX framework.
@@ -150,6 +157,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @var boolean
      */
     public $showInContextMenu = false;
+    /**
+     * Use if extending modResource to state whether or not the derivative class can be listed in the class_key
+     * dropdown users can change when editing a resource.
+     * @var boolean
+     */
+    public $allowListingInClassKeyDropdown = true;
+    /**
+     * Whether or not to allow creation of children resources in tree. Can be overridden in a derivative Resource class.
+     * @var boolean
+     */
+    public $allowChildrenResources = true;
     
     /** @var modX $xpdo */
     public $xpdo;
@@ -1133,5 +1151,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $className = $this->_class;
         if ($className == 'modDocument') $className = 'document';
         return $this->xpdo->lexicon($className);
+    }
+
+    /**
+     * Use this in your extended Resource class to modify the tree node contents
+     * @param array $node
+     * @return array
+     */
+    public function prepareTreeNode(array $node = array()) {
+        return $node;
     }
 }

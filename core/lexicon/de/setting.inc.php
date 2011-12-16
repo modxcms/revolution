@@ -211,6 +211,12 @@ $_lang['setting_context_tree_sortdir_desc'] = 'Gibt an, ob Kontexte im Ressource
 $_lang['setting_cultureKey'] = 'Sprache';
 $_lang['setting_cultureKey_desc'] = 'Wählen Sie die Sprache für alle Nicht-Manager-Kontexte, einschließlich des Kontexts "web".';
 
+$_lang['date_timezone'] = 'Standard-Zeitzone';
+$_lang['date_timezone_desc'] = 'Gibt die Standard-Zeitzonen-Einstellung für PHP-Datumsfunktionen an, wenn die Einstellung nicht leer gelassen wird. Wird hier nichts eingegeben und die PHP-Konfigurationseinstellung date.timezone (kann mittels php.ini, date_default_timezone_set(), ini_set(), .htaccess etc. eingestellt werden) ist in Ihrer PHP-Umgebung nicht gesetzt, wird UTC vorausgesetzt.';
+
+$_lang['setting_debug'] = 'Debugging-Einstellungen';
+$_lang['setting_debug_desc'] = 'Einstellmöglichkeit zum Ein- und Ausschalten des Debugging in MODX und/oder zum Setzen des PHP-error_reporting-Levels. "" = verwende aktuellen error_reporting-Wert, "0" = false (keine Meldungen anzeigen, error_reporting = 0), "1" = true (alle Meldungen anzeigen, error_reporting = -1) oder ein beliebiger gültiger Wert für error_reporting (als Integer-Zahl).';
+
 $_lang['setting_default_content_type'] = 'Standard-Inhaltstyp';
 $_lang['setting_default_content_type_desc'] = 'Wählen Sie den Standard-Inhaltstyp, den Sie für neue Ressourcen verwenden möchten. Sie können weiterhin einen anderen Inhaltstyp im Ressourcen-Editor auswählen; mit dieser Einstellung treffen Sie nur eine Vorauswahl für einen der Inhaltstypen.';
 
@@ -338,6 +344,12 @@ $_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Setzen Sie die Locale-Einstellung für das System. Lassen Sie das Feld leer, wenn die Standardeinstellung verwendet werden soll. Konsultieren Sie <a href="http://de.php.net/setlocale" target="_blank">die PHP-Dokumentation</a>, wenn Sie weitere Informationen benötigen.';
 
+$_lang['setting_log_level'] = 'Logging-Level';
+$_lang['setting_log_level_desc'] = 'Der Standard-Logging-Level; je niedriger der Level, desto weniger Einträge werden geloggt. Verfügbare Optionen: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO) und 4 (DEBUG).';
+
+$_lang['setting_log_target'] = 'Logging-Ziel';
+$_lang['setting_log_target_desc'] = 'Das Standard-Logging-Ziel; gibt an, wohin Log-Einträge geschrieben werden. Verfügbare Optionen: "FILE", "HTML" und "ECHO". Standard ist "FILE", wenn nichts anderes angegeben wurde.';
+
 $_lang['setting_mail_charset'] = 'E-Mail-Zeichensatz';
 $_lang['setting_mail_charset_desc'] = 'Legt den Standard-Zeichensatz (charset) für E-Mails fest, z.B. "iso-8859-1" oder "utf-8"';
 
@@ -387,12 +399,14 @@ $_lang['setting_manager_favicon_url'] = 'Manager-Favicon-URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Wenn hier etwas eingegeben wird, wird diese URL als favicon für den MODX-Manager geladen. Es muss eine zum Verzeichnis manager/ relative URL oder eine absolute URL eingegeben werden.';
 
 $_lang['setting_manager_html5_cache'] = 'Verwende lokalen HTML5-Cache im Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Aktiviere lokales HTML5-Caching für den Manager. Die Benutzung wird nur empfohlen, wenn der Manager mit Hilfe von modernen Browsern bedient wird.';
+$_lang['setting_manager_html5_cache_desc'] = 'Experimentell. Aktiviere lokales HTML5-Caching für den Manager. Die Benutzung wird nur empfohlen, wenn der Manager mit Hilfe von modernen Browsern bedient wird.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Datei-Sperrung für den Manager-JS/CSS-Cache aktivieren';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache-Datei-Sperrung. Setzen Sie diese Einstellung auf "Nein", wenn das Dateisystem NFS ist.';
 $_lang['setting_manager_js_cache_max_age'] = 'Cache-Alter der Manager-JS/CSS-Komprimierung';
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximales Alter des Browser-Caches für die Manager-CSS/JS-Komprimierung in Sekunden. Nach diesem Zeitraum sendet der Browser einen weiteren "Conditional GET Request". Mit einem längeren Zeitraum erreichen Sie geringeren Traffic.';
+$_lang['setting_manager_js_document_root'] = 'Document Root für JS-/CSS-Komprimierung im Manager';
+$_lang['setting_manager_js_document_root_desc'] = 'Wenn Ihr Server die Server-Variable DOCUMENT_ROOT nicht (oder nicht korrekt) zur Verfügung stellt, setzen Sie sie hier explizit, um die CCS-/JavaScript-Kompression des Managers zu ermöglichen. Ändern Sie diesen Wert nur, wenn Sie wissen, was Sie tun.';
 $_lang['setting_manager_js_zlib_output_compression'] = 'zlib-Output-Komprimierung für Manager-JS/CSS aktivieren';
 $_lang['setting_manager_js_zlib_output_compression_desc'] = 'Gibt an, ob zlib-Output-Komprimierung für komprimiertes CSS/JS im Manager aktiviert wird oder nicht. Aktivieren Sie diese Einstellung nicht, wenn Sie nicht sicher sind, dass die PHP-Konfigurationsvariable zlib.output_compression auf den Wert 1 gesetzt werden kann. MODX empfiehlt, diese Option ausgeschaltet zu lassen.';
 

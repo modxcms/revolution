@@ -291,7 +291,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ed.store.load();
                 ed.store.isLoaded = true;
             }
-            f = MODx.combo.Renderer(ed.field,v);
+            f = Ext.util.Format.comboRenderer(ed.field,v);
             return f(v,md,rec,ri,ci,s,g);
         }
         return v;

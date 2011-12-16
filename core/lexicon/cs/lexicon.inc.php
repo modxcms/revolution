@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['duplicate'] = 'Duplicate';
 $_lang['duplicate'] = 'Zkopírovat';
@@ -80,6 +80,9 @@ $_lang['lexicon_rlfb_msg'] = 'Úspěšně obnoveno [[+num]] záznamů.';
 
 // $_lang['reload_from_base'] = 'Revert All Core Entries';
 $_lang['reload_from_base'] = 'Obnovit záznamy do výchozího stavu';
+
+// $_lang['reload_success'] = 'Successfully reloaded [[+total]] strings.';
+$_lang['reload_success'] = 'Úspěšně znovunačteno [[+total]] řetězců.';
 
 // $_lang['search_by_key'] = 'Search by Key:';
 $_lang['search_by_key'] = 'Hledat klíč:';

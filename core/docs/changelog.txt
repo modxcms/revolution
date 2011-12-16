@@ -2,6 +2,64 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.0-rc-2 (December 16, 2011)
+====================================
+- [#3033] Add method to reload Context data in same request
+- [#6372] Add explicit resource_duplicate permission for duplicating a resource
+- [#6364] Fix incorrect lexicon reference in package versions grid
+- [#6365] Add manager_login_url_alternate setting which allows for setting a custom manager login URL
+- [#6077] Override PHP default timezone via System/Context Settings
+- [#5709] Fix issue where drag/drop in left trees did not work when package management was open
+- [#6153] Prevent enter key from sending Message when typing in messages page
+- [#6349] Properties can now belong to areas, and are grouped in grid by area
+- [#6344] Fix various pathing issues when drag/dropping files into content
+- [#5941] Add anonymous Load Only ACL when creating contexts
+- [#6247] Fix minify issues outside of $_SERVER['DOCUMENT_ROOT']
+- Improve skipFiles attribute for file media sources to allow MODX tags and hiding directories
+- [#6336] Fix error when updating property via window in media source properties grid
+- Fix various issues with permissions and ACLs on Media Sources
+- [#6306] Fix issue with close button always prompting changes made when changes may not have been made
+- [#6317] Fix issue with combo editor rendering in grids
+- [#6307] Save button now properly resets to disabled after save
+- [#6313] Fix issue with renaming content field label on derivative resource types
+- [#6084] Fix upgrade from 2.0.x releases
+- Add OnManagerPageBeforeRender and OnManagerPageAfterRender events
+- [#6207] Prevent overwriting static element file content when changing a static source
+- [#6255] Escape html tags in readme, license and changelog files for downloaded Packages
+- [#6096] Fix more issues with Resource reloading after changing a template by making the Resource Access grid local
+- [#5418] Add ability to export/import Access Policies
+- Add ability to import/export Policy Templates, as well as a base export/import processor class
+- [#6242] Actions on regular Resources break with Custom Resource Class extended fields
+- [#6096] Fix issue where reload token in Resource create would not allow save after validation
+- [#6238] Fix rendering issue when opening multiple quick create resource windows at once
+- Fix various issues with TV input and output renders by properly objectifying them into base abstract classes
+- [#5763] Allow for 3rd-level deep category nesting
+- [#6215] Fix issues with derivative resources and non-standard manager themes
+- [#6237] Add ability to sort users by active status in mgr grid
+- [#6197] Refresh old and new context caches when moving Resource
+- Update to xPDO 2.2.1-pl
+- [#6080] Fix revert to default properties on Source Properties grid
+- [#6204] Fix issue where multiple languages could not be loaded per page in the lexicon
+- [#6196] Ensure that MODx.Browser view updates when changing a media source from dropdown in tree
+- [#6198] Fix issue with saving user groups on a new user that caused duplicate role saving
+- [#6159] Implement OnBeforeUserActivate, OnUserActivate, OnBeforeUserDeactivate, and OnUserDeactivate events
+- [#6063] Add extra settings and checks to allow for better handling of manager CSS/JS minification on servers that do not allow DOCUMENT_ROOT access
+- [#6147] Fix element processors not firing proper events and passing wrong variables to plugins.
+- [#6060] Fix issue where resources were getting class_key of modResource rather than modDocument
+- [#6030] Fix issue where alt attribute was duplicated on image output renders
+- [#6122] Clarify text for removing a dashboard widget from a dashboard
+- [#6124] Fix issue where element associations of various elements were not saved in respective create processors
+- [#6145] Allow sorting of plugin events by enabled flag
+- [#6065] Fix issue with missing paths in certain environments for new installs in setup
+- Fix provider select window width in Chrome/Windows
+- [#6081] Fix issue in modFileMediaSource that prevented source properties from being read in certain processors
+- [#5141] Remove dependency for navbar.tpl in manager templates
+- [#5760] Fix memberof filter if user is not logged in
+- [#6090] Fix issue with removing Content Types in 2.2-rc1
+- [#6088] Fix issue with :date output filter and umlauts
+- [#6093] Make for easier translations of Element context menu items
+- [#6099] Fix incorrect index name for modWorkspace
+
 MODX Revolution 2.2.0-rc-1 (November 17, 2011)
 ====================================
 - [#6019] Configure log_level, log_target, and debug via Settings

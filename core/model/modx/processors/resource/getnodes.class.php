@@ -81,6 +81,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'undelete_document' => $this->modx->hasPermission('undelete_document') ? 'pundelete' : '',
             'publish_document' => $this->modx->hasPermission('publish_document') ? 'ppublish' : '',
             'unpublish_document' => $this->modx->hasPermission('unpublish_document') ? 'punpublish' : '',
+            'resource_duplicate' => $this->modx->hasPermission('resource_duplicate') ? 'pduplicate' : '',
             'resource_quick_create' => $this->modx->hasPermission('resource_quick_create') ? 'pqcreate' : '',
             'resource_quick_update' => $this->modx->hasPermission('resource_quick_update') ? 'pqupdate' : '',
             'edit_context' => $this->modx->hasPermission('edit_context') ? 'pedit' : '',
@@ -350,24 +351,27 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         $class = array();
         $class[] = 'icon-'.strtolower(str_replace('mod','',$resource->get('class_key')));
-        $class[] = $resource->isfolder ? ' icon-folder' : 'x-tree-node-leaf icon-resource';
+        $class[] = $resource->isfolder ? 'icon-folder' : 'x-tree-node-leaf icon-resource';
         if (!$resource->get('published')) $class[] = 'unpublished';
         if ($resource->get('deleted')) $class[] = 'deleted';
         if ($resource->get('hidemenu')) $class[] = 'hidemenu';
 
-        $class[] = !empty($this->permissions['save_document']) ? $this->permissions['save_document'] : '';
-        $class[] = !empty($this->permissions['view_document']) ? $this->permissions['view_document'] : '';
-        $class[] = !empty($this->permissions['edit_document']) ? $this->permissions['edit_document'] : '';
-        $class[] = !empty($this->permissions['new_document']) ? $this->permissions['new_document'] : '';
-        $class[] = !empty($this->permissions['new_symlink']) ? $this->permissions['new_symlink'] : '';
-        $class[] = !empty($this->permissions['new_weblink']) ? $this->permissions['new_weblink'] : '';
-        $class[] = !empty($this->permissions['new_static_resource']) ? $this->permissions['new_static_resource'] : '';
-        $class[] = !empty($this->permissions['delete_document']) ? $this->permissions['delete_document'] : '';
-        $class[] = !empty($this->permissions['undelete_document']) ? $this->permissions['undelete_document'] : '';
-        $class[] = !empty($this->permissions['publish_document']) ? $this->permissions['publish_document'] : '';
-        $class[] = !empty($this->permissions['unpublish_document']) ? $this->permissions['unpublish_document'] : '';
-        $class[] = !empty($this->permissions['resource_quick_create']) ? $this->permissions['resource_quick_create'] : '';
-        $class[] = !empty($this->permissions['resource_quick_update']) ? $this->permissions['resource_quick_update'] : '';
+        if (!empty($this->permissions['save_document'])) $class[] = $this->permissions['save_document'];
+        if (!empty($this->permissions['view_document'])) $class[] = $this->permissions['view_document'];
+        if (!empty($this->permissions['edit_document'])) $class[] = $this->permissions['edit_document'];
+        if (!empty($this->permissions['resource_duplicate'])) $class[] = $this->permissions['resource_duplicate'];
+        if ($resource->allowChildrenResources) {
+            if (!empty($this->permissions['new_document'])) $class[] = $this->permissions['new_document'];
+            if (!empty($this->permissions['new_symlink'])) $class[] = $this->permissions['new_symlink'];
+            if (!empty($this->permissions['new_weblink'])) $class[] = $this->permissions['new_weblink'];
+            if (!empty($this->permissions['new_static_resource'])) $class[] = $this->permissions['new_static_resource'];
+            if (!empty($this->permissions['resource_quick_create'])) $class[] = $this->permissions['resource_quick_create'];
+            if (!empty($this->permissions['resource_quick_update'])) $class[] = $this->permissions['resource_quick_update'];
+        }
+        if (!empty($this->permissions['delete_document'])) $class[] = $this->permissions['delete_document'];
+        if (!empty($this->permissions['undelete_document'])) $class[] = $this->permissions['undelete_document'];
+        if (!empty($this->permissions['publish_document'])) $class[] = $this->permissions['publish_document'];
+        if (!empty($this->permissions['unpublish_document'])) $class[] = $this->permissions['unpublish_document'];
         if ($hasChildren) $class[] = 'haschildren';
         if ($this->getProperty('currentResource') == $resource->id && $this->getProperty('currentAction') == $this->actions['resource/update']) {
             $class[] = 'active-node';
@@ -388,6 +392,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $locked = $resource->getLock();
         if ($locked && $locked != $this->modx->user->get('id')) {
             $class[] = 'icon-locked';
+            /** @var modUser $lockedBy */
             $lockedBy = $this->modx->getObject('modUser',$locked);
             if ($lockedBy) {
                 $qtip .= ' - '.$this->modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
@@ -404,7 +409,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'classKey' => $resource->class_key,
             'ctx' => $resource->context_key,
             'qtip' => $qtip,
-            'preview_url' => $this->modx->makeUrl($resource->get('id'), '', '', 'full'),
+            'preview_url' => $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full'),
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? $this->actions['resource/update'] : $this->actions['resource/data']).'&id='.$resource->id : '',
             'allowDrop' => true,
         );
@@ -415,6 +420,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         } else {
             $itemArray['hasChildren'] = true;
         }
+        $itemArray = $resource->prepareTreeNode($itemArray);
         return $itemArray;
     }
 }

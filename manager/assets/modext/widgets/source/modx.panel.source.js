@@ -122,6 +122,7 @@ MODx.panel.Source = function(config) {
                     xtype: 'modx-grid-source-properties'
                     ,preventRender: true
                     ,source: config.record.id
+                    ,defaultProperties: config.defaultProperties
                     ,autoHeight: true
                     ,cls: 'main-wrapper'
                     ,listeners: {
@@ -169,17 +170,17 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
 		/* The component rendering is deferred since we are not using renderTo */
         Ext.getCmp('modx-source-header').html = '<h2>'+_('source')+': '+this.config.record.name+'</h2>';
 
+        var g,d;
         if (!Ext.isEmpty(this.config.record.properties)) {
-            var d = this.config.record.properties;
-            var g = Ext.getCmp('modx-grid-source-properties');
+            g = Ext.getCmp('modx-grid-source-properties');
             if (g) {
-                g.defaultProperties = d;
-                g.getStore().loadData(d);
+                g.defaultProperties = this.config.defaultProperties;
+                g.getStore().loadData(this.config.record.properties);
             }
         }
         if (!Ext.isEmpty(this.config.record.access)) {
-            var d = this.config.record.access;
-            var g = Ext.getCmp('modx-grid-source-access');
+            d = this.config.record.access;
+            g = Ext.getCmp('modx-grid-source-access');
             if (g) {
                 d = Ext.decode(d);
                 if (!Ext.isEmpty(d)) {

@@ -28,6 +28,7 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
     public $languageTopics = array('tv','category');
     public $permission = 'new_tv';
     public $elementType = 'tv';
+    public $objectType = 'tv';
     public $beforeSaveEvent = 'OnBeforeTVFormSave';
     public $afterSaveEvent = 'OnTVFormSave';
 
@@ -36,7 +37,7 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
      * {@inheritDoc}
      * @return boolean
      */
-    public function preSaveElement() {
+    public function beforeSave() {
         $template = $this->getProperty('template');
         if (empty($template)) { $this->setProperty('template',array()); }
 
@@ -48,12 +49,12 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
 
         $els = $this->getProperty('els',null);
         if ($els !== null) {
-            $this->element->set('elements',$els);
+            $this->object->set('elements',$els);
         }
 
         $rank = $this->getProperty('rank',0);
-        $this->element->set('rank',$rank);
-        return true;
+        $this->object->set('rank',$rank);
+        return parent::beforeSave();
     }
 
     /**
@@ -69,7 +70,7 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
                 $outputProperties[str_replace('prop_','',$key)] = $value;
             }
         }
-        $this->element->set('output_properties',$outputProperties);
+        $this->object->set('output_properties',$outputProperties);
         return $outputProperties;
     }
 
@@ -86,7 +87,7 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
                 $inputProperties[str_replace('inopt_','',$key)] = $value;
             }
         }
-        $this->element->set('input_properties',$inputProperties);
+        $this->object->set('input_properties',$inputProperties);
         return $inputProperties;
     }
 
@@ -96,11 +97,11 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
      * {@inheritDoc}
      * @return boolean
      */
-    public function postSaveElement() {
+    public function afterSave() {
         $this->setTemplateAccess();
         $this->setResourceGroupAccess();
         $this->setMediaSources();
-        return true;
+        return parent::afterSave();
     }
 
     /**
@@ -115,19 +116,19 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
                 if ($template['access']) {
                     /** @var modTemplateVarTemplate $templateVarTemplate */
                     $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(
-                        'tmplvarid' => $this->element->get('id'),
+                        'tmplvarid' => $this->object->get('id'),
                         'templateid' => $template['id'],
                     ));
                     if (empty($templateVarTemplate)) {
                         $templateVarTemplate = $this->modx->newObject('modTemplateVarTemplate');
                     }
-                    $templateVarTemplate->set('tmplvarid',$this->element->get('id'));
+                    $templateVarTemplate->set('tmplvarid',$this->object->get('id'));
                     $templateVarTemplate->set('templateid',$template['id']);
                     $templateVarTemplate->set('rank',$template['rank']);
                     $templateVarTemplate->save();
                 } else {
                     $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(
-                        'tmplvarid' => $this->element->get('id'),
+                        'tmplvarid' => $this->object->get('id'),
                         'templateid' => $template['id'],
                     ));
                     if (!empty($templateVarTemplate)) {
@@ -152,13 +153,13 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
                     if (!is_array($group)) continue;
                     /** @var modTemplateVarResourceGroup $templateVarResourceGroup */
                     $templateVarResourceGroup = $this->modx->getObject('modTemplateVarResourceGroup',array(
-                        'tmplvarid' => $this->element->get('id'),
+                        'tmplvarid' => $this->object->get('id'),
                         'documentgroup' => $group['id'],
                     ));
                     if ($group['access'] == true) {
                         if (!empty($templateVarResourceGroup)) continue;
                         $templateVarResourceGroup = $this->modx->newObject('modTemplateVarResourceGroup');
-                        $templateVarResourceGroup->set('tmplvarid',$this->element->get('id'));
+                        $templateVarResourceGroup->set('tmplvarid',$this->object->get('id'));
                         $templateVarResourceGroup->set('documentgroup',$group['id']);
                         $templateVarResourceGroup->save();
                     } else {
@@ -183,15 +184,15 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
 
                     /** @var modMediaSourceElement $sourceElement */
                     $sourceElement = $this->modx->getObject('sources.modMediaSourceElement',array(
-                        'object' => $this->element->get('id'),
-                        'object_class' => $this->element->_class,
+                        'object' => $this->object->get('id'),
+                        'object_class' => $this->object->_class,
                         'context_key' => $source['context_key'],
                     ));
                     if (!$sourceElement) {
                         $sourceElement = $this->modx->newObject('sources.modMediaSourceElement');
                         $sourceElement->fromArray(array(
-                            'object' => $this->element->get('id'),
-                            'object_class' => $this->element->_class,
+                            'object' => $this->object->get('id'),
+                            'object_class' => $this->object->_class,
                             'context_key' => $source['context_key'],
                         ),'',true,true);
                     }

@@ -45,7 +45,6 @@ class WorkspacesManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/core/modx.view.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.tree.checkbox.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package.browser.tree.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package.browser.panels.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/combos.js');

@@ -24,7 +24,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.grid.resource.security.local.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
@@ -100,23 +100,35 @@ class ResourceCreateManagerController extends ResourceManagerController {
             $this->parent->fromArray($this->resourceArray);
             $this->parent->set('template',$defaultTemplate);
             $this->resource->set('template',$defaultTemplate);
+            $this->getResourceGroups();
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
+            $this->resourceArray['resourceGroups'] = array();
+            $this->resourceArray['resource_groups'] = $this->modx->fromJSON($this->resourceArray['resource_groups']);
+            foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
+                $this->resourceArray['resourceGroups'][] = array(
+                    $resourceGroup['id'],
+                    $resourceGroup['name'],
+                    $resourceGroup['access'],
+                );
+            }
+            unset($this->resourceArray['resource_groups']);
             $this->resource->set('template', $reloadData['template']);
         }
+
         /* handle FC rules */
         $overridden = $this->checkFormCustomizationRules($this->parent,true);
         $this->resourceArray = array_merge($this->resourceArray,$overridden);
 
         /* handle checkboxes and defaults */
-        $this->resourceArray['published'] = intval($this->resourceArray['published']) == 1 ? true : false;
-        $this->resourceArray['hidemenu'] = intval($this->resourceArray['hidemenu']) == 1 ? true : false;
-        $this->resourceArray['isfolder'] = intval($this->resourceArray['isfolder']) == 1 ? true : false;
-        $this->resourceArray['richtext'] = intval($this->resourceArray['richtext']) == 1 ? true : false;
-        $this->resourceArray['searchable'] = intval($this->resourceArray['searchable']) == 1 ? true : false;
-        $this->resourceArray['cacheable'] = intval($this->resourceArray['cacheable']) == 1 ? true : false;
-        $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
-        $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
+        $this->resourceArray['published'] = isset($this->resourceArray['published']) && intval($this->resourceArray['published']) == 1 ? true : false;
+        $this->resourceArray['hidemenu'] = isset($this->resourceArray['hidemenu']) && intval($this->resourceArray['hidemenu']) == 1 ? true : false;
+        $this->resourceArray['isfolder'] = isset($this->resourceArray['isfolder']) && intval($this->resourceArray['isfolder']) == 1 ? true : false;
+        $this->resourceArray['richtext'] = isset($this->resourceArray['richtext']) && intval($this->resourceArray['richtext']) == 1 ? true : false;
+        $this->resourceArray['searchable'] = isset($this->resourceArray['searchable']) && intval($this->resourceArray['searchable']) == 1 ? true : false;
+        $this->resourceArray['cacheable'] = isset($this->resourceArray['cacheable']) && intval($this->resourceArray['cacheable']) == 1 ? true : false;
+        $this->resourceArray['deleted'] = isset($this->resourceArray['deleted']) && intval($this->resourceArray['deleted']) == 1 ? true : false;
+        $this->resourceArray['uri_override'] = isset($this->resourceArray['uri_override']) && intval($this->resourceArray['uri_override']) == 1 ? true : false;
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
@@ -151,7 +163,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
-            'modActionDom.action' => $this->action['id'],
+            'modActionDom.action' => $this->config['id'],
             'modActionDom.name' => 'template',
             'modActionDom.container' => 'modx-panel-resource',
             'modActionDom.rule' => 'fieldDefault',
@@ -169,6 +181,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
             ),
             'OR:ProfileUserGroup.usergroup:=' => null,
         ),xPDOQuery::SQL_AND,null,2);
+        /** @var modActionDom $fcDt */
         $fcDt = $this->modx->getObject('modActionDom',$c);
         if ($fcDt) {
             if ($this->parent) { /* ensure get all parents */

@@ -53,8 +53,8 @@ class Smarty_Internal_Wrapper {
      */
     function convert($name, $args) {
        // throw notice about deprecated function
-       if($this->smarty->deprecation_notices)
-         trigger_error("function call '$name' is unknown or deprecated.",E_USER_NOTICE);
+       //if($this->smarty->deprecation_notices)
+         //trigger_error("function call '$name' is unknown or deprecated.",E_USER_NOTICE);
        // get first and last part of function name
        $name_parts = explode('_',$name,2);
        switch($name_parts[0]) {

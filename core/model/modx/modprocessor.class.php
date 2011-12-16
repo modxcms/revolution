@@ -278,7 +278,6 @@ abstract class modProcessor {
         if (is_string($value)) {
             /* properly handle common literal structures */
             if (strpos($value, 'function(') === 0
-             || strpos($value, 'this.') === 0
              || strpos($value, 'new Function(') === 0
              || strpos($value, 'Ext.') === 0) {
                 $value = '@@' . base64_encode($value) . '@@';
@@ -1118,7 +1117,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
         if (!empty($this->beforeRemoveEvent)) {
             $response = $this->modx->invokeEvent($this->beforeRemoveEvent,array(
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
-                $this->objectType => &$object,
+                $this->objectType => &$this->object,
             ));
             $preventRemove = $this->processEventResponse($response);
         }
@@ -1133,9 +1132,189 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
         if (!empty($this->afterRemoveEvent)) {
             $this->modx->invokeEvent($this->afterRemoveEvent,array(
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
-                $this->objectType => &$object,
+                $this->objectType => &$this->object,
             ));
         }
+    }
+}
+
+/**
+ * Utility class for exporting an object
+ * @abstract
+ */
+abstract class modObjectExportProcessor extends modObjectGetProcessor {
+    /** @var string $downloadProperty */
+    public $downloadProperty = 'download';
+    /** @var string $nameField */
+    public $nameField = 'name';
+    /** @var XMLWriter $xml */
+    public $xml;
+
+    public function cleanup() {
+        if (!extension_loaded('XMLWriter') || !class_exists('XMLWriter')) {
+            return $this->failure($this->modx->lexicon('xmlwriter_err_nf'));
+        }
+
+        $download = $this->getProperty($this->downloadProperty);
+        if (empty($download)) {
+            return $this->cache();
+        }
+        return $this->download();
+    }
+
+    /**
+     * Cache the data to an export file
+     * @return array|string
+     */
+    public function cache() {
+        $this->xml = new XMLWriter();
+        $this->xml->openMemory();
+        $this->xml->startDocument('1.0','UTF-8');
+        $this->xml->setIndent(true);
+        $this->xml->setIndentString('    ');
+
+        $this->prepareXml();
+
+        $this->xml->endDocument();
+        $data = $this->xml->outputMemory();
+
+        $f = $this->object->get($this->nameField).'.xml';
+        $fileName = $this->modx->getOption('core_path',null,MODX_CORE_PATH).'export/'.$this->objectType.'/'.$f;
+
+        /** @var modCacheManager $cacheManager */
+        $cacheManager = $this->modx->getCacheManager();
+        $cacheManager->writeFile($fileName,$data);
+
+        $this->logManagerAction();
+
+        return $this->success($f);
+    }
+
+    /**
+     * Must be declared in your derivative class. Used to prepare the data to export.
+     * @abstract
+     */
+    abstract public function prepareXml();
+
+    /**
+     * Attempt to download the exported file to the browser
+     * @return mixed
+     */
+    public function download() {
+        $file = $this->object->get($this->nameField).'.xml';
+        $f = $this->modx->getOption('core_path').'export/'.$this->objectType.'/'.$file;
+
+        $name = strtolower(str_replace(array(' ','/'),'-',$this->object->get($this->nameField)));
+
+        if (!is_file($f)) return $this->failure($f);
+
+        $o = file_get_contents($f);
+
+        header('Content-Type: application/force-download');
+        header('Content-Disposition: attachment; filename="'.$name.'.'.$this->objectType.'.xml"');
+
+        return $o;
+    }
+
+    /**
+     * Log the export manager action
+     * @return void
+     */
+    public function logManagerAction() {
+        $this->modx->logManagerAction($this->objectType.'_export',$this->classKey,$this->object->get($this->primaryKeyField));
+    }
+}
+
+/**
+ * Utility class for importing an object
+ * @abstract
+ */
+abstract class modObjectImportProcessor extends modObjectProcessor {
+    /** @var string $nameField The name, or unique, field for the object */
+    public $nameField = 'name';
+    /** @var boolean $setName Whether or not to attempt to set the name field */
+    public $setName = true;
+    /** @var string $fileProperty The property that contains the file data */
+    public $fileProperty = 'file';
+    /** @var string $xml The parsed XML from the file */
+    public $xml = '';
+
+    public function initialize() {
+        $file = $this->getProperty($this->fileProperty);
+        if (empty($file) || !isset($file['tmp_name'])) return $this->modx->lexicon('import_err_upload');
+        if ($file['error'] != 0) return $this->modx->lexicon('import_err_upload');
+        if (!file_exists($file['tmp_name'])) return $this->modx->lexicon('import_err_upload');
+
+        $this->xml = file_get_contents($file['tmp_name']);
+        if (empty($this->xml)) return $this->modx->lexicon('import_err_upload');
+
+        if (!function_exists('simplexml_load_string')) {
+            return $this->failure($this->modx->lexicon('simplexml_err_nf'));
+        }
+
+        return true;
+    }
+
+    public function process() {
+        /** @var SimpleXmlElement $xml */
+        $this->xml = @simplexml_load_string($this->xml);
+        if (empty($this->xml)) return $this->failure($this->modx->lexicon('import_err_xml'));
+
+        $this->object = $this->modx->newObject($this->classKey);
+
+        if ($this->setName) {
+            $name = (string)$this->xml->name;
+            if ($this->alreadyExists($name)) {
+                $this->object->set($this->nameField,$this->modx->lexicon('duplicate_of',array('name' => $name)));
+            } else {
+                $this->object->set($this->nameField,$name);
+            }
+        }
+
+        $canSave = $this->beforeSave();
+        if ($canSave !== true) {
+            return $this->failure($canSave);
+        }
+
+        if (!$this->object->save()) {
+            return $this->failure($this->modx->lexicon('policy_template_err_save'));
+        }
+
+        $this->afterSave();
+        $this->logManagerAction();
+        return $this->success();
+    }
+
+    /**
+     * Do any before save logic
+     * @return boolean
+     */
+    public function beforeSave() {
+        return !$this->hasErrors();
+    }
+    /**
+     * Do any after save logic
+     * @return boolean
+     */
+    public function afterSave() {
+        return !$this->hasErrors();
+    }
+
+    /**
+     * Check to see if the object already exists with this name field
+     * @param string $name
+     * @return bool
+     */
+    public function alreadyExists($name) {
+        return $this->modx->getCount($this->classKey,array($this->nameField => $name)) > 0;
+    }
+
+    /**
+     * Log the export manager action
+     * @return void
+     */
+    public function logManagerAction() {
+        $this->modx->logManagerAction($this->objectType.'_import',$this->classKey,$this->object->get($this->primaryKeyField));
     }
 }
 

@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -145,123 +145,6 @@ class modInstall {
      */
     public function lexicon($key,array $placeholders = array()) {
         return $this->lexicon->get($key,$placeholders);
-    }
-
-    /**
-     * Get the existing or create a new configuration.
-     *
-     * @param integer $mode The install mode.
-     * @param array $config An array of config attributes.
-     * @return array A copy of the config attributes array.
-     */
-    public function getConfig($mode = 0, $config = array ()) {
-        global $database_dsn, $database_type, $database_server, $dbase, $database_user,
-                $database_password, $database_connection_charset, $table_prefix, $config_options;
-        $database_connection_charset = 'utf8';
-        if (!is_array($config)) {
-            $config = array ();
-        }
-
-        /* get http host */
-        if (php_sapi_name() != 'cli') {
-            $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
-            $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
-            $http_host= $_SERVER['HTTP_HOST'];
-            if ($_SERVER['SERVER_PORT'] != 80) {
-                $http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); /* remove port from HTTP_HOST */
-            }
-            $http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
-        } else {
-            $http_host = 'localhost';
-            $https_port = 443;
-        }
-
-        switch ($mode) {
-            case modInstall::MODE_UPGRADE_EVO :
-                @ob_start();
-                $included = @ include MODX_INSTALL_PATH . 'manager/includes/config.inc.php';
-                @ob_end_clean();
-                if ($included && isset ($dbase))
-                    break;
-
-            case modInstall::MODE_UPGRADE_REVO :
-            case modInstall::MODE_UPGRADE_REVO_ADVANCED :
-                @ob_start();
-                $included = @ include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
-                @ob_end_clean();
-                if ($included && isset ($dbase)) {
-                    $config['mgr_path'] = MODX_MANAGER_PATH;
-                    $config['connectors_path'] = MODX_CONNECTORS_PATH;
-                    $config['web_path'] = MODX_BASE_PATH;
-                    $config['context_mgr_path'] = MODX_MANAGER_PATH;
-                    $config['context_connectors_path'] = MODX_CONNECTORS_PATH;
-                    $config['context_web_path'] = MODX_BASE_PATH;
-
-                    $config['mgr_url'] = MODX_MANAGER_URL;
-                    $config['connectors_url'] = MODX_CONNECTORS_URL;
-                    $config['web_url'] = MODX_BASE_URL;
-                    $config['context_mgr_url'] = MODX_MANAGER_URL;
-                    $config['context_connectors_url'] = MODX_CONNECTORS_URL;
-                    $config['context_web_url'] = MODX_BASE_URL;
-
-                    $config['core_path'] = MODX_CORE_PATH;
-                    $config['processors_path'] = MODX_CORE_PATH.'model/modx/processors/';
-                    $config['assets_path'] = MODX_ASSETS_PATH;
-                    $config['assets_url'] = MODX_ASSETS_URL;
-
-                    $config_options = !empty($config_options) ? $config_options : array();
-                    break;
-                }
-
-            default :
-                $included = false;
-                $database_type = isset ($_POST['databasetype']) ? $_POST['databasetype'] : 'mysql';
-                $database_server = isset ($_POST['databasehost']) ? $_POST['databasehost'] : 'localhost';
-                $database_user = isset ($_POST['databaseloginname']) ? $_POST['databaseloginname'] : '';
-                $database_password = isset ($_POST['databaseloginpassword']) ? $_POST['databaseloginpassword'] : '';
-                $dbase = isset ($_POST['database_name']) ? $_POST['database_name'] : 'modx';
-                $table_prefix = isset ($_POST['tableprefix']) ? $_POST['tableprefix'] : 'modx_';
-                $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
-                $cache_disabled = isset ($_POST['cache_disabled']) ? $_POST['cache_disabled'] : 'false';
-                $site_sessionname = 'SN' . uniqid('');
-                $config_options = array();
-                break;
-        }
-        $config = array_merge($config,array(
-            'database_type' => $database_type,
-            'database_server' => $database_server,
-            'dbase' => trim($dbase, '`[]'),
-            'database_user' => $database_user,
-            'database_password' => $database_password,
-            'database_connection_charset' => $database_connection_charset,
-            'database_charset' => $database_connection_charset,
-            'table_prefix' => $table_prefix,
-            'https_port' => isset ($https_port) ? $https_port : '443',
-            'http_host' => defined('MODX_HTTP_HOST') ? MODX_HTTP_HOST : $http_host,
-            'site_sessionname' => isset ($site_sessionname) ? $site_sessionname : 'SN' . uniqid(''),
-            'cache_disabled' => isset ($cache_disabled) && $cache_disabled ? 'true' : 'false',
-            'inplace' => isset ($_POST['inplace']) ? 1 : 0,
-            'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
-            'config_options' => $config_options,
-        ));
-        $this->config = array_merge($this->config, $config);
-        $this->config['database_dsn'] = $this->getDatabaseDSN($this->config['database_type'],$this->config['database_server'],$this->config['dbase'],$this->config['database_connection_charset']);
-        return $this->config;
-    }
-
-    public function getDatabaseDSN($databaseType,$databaseServer,$database,$databaseConnectionCharset = '') {
-        $dsn = '';
-        switch ($databaseType) {
-            case 'sqlsrv':
-                $dsn = "{$databaseType}:server={$databaseServer};database={$database}";
-                break;
-            case 'mysql':
-                $dsn = "{$databaseType}:host={$databaseServer};dbname={$database};charset={$databaseConnectionCharset}";
-                break;
-            default:
-                break;
-        }
-        return $dsn;
     }
 
     /**

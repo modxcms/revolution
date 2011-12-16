@@ -602,6 +602,18 @@ $events['OnUserActivate']->fromArray(array (
   'service' => 1,
   'groupname' => 'Users',
 ), '', true, true);
+$events['OnBeforeUserDeactivate']= $xpdo->newObject('modEvent');
+$events['OnBeforeUserDeactivate']->fromArray(array (
+  'name' => 'OnBeforeUserDeactivate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserDeactivate']= $xpdo->newObject('modEvent');
+$events['OnUserDeactivate']->fromArray(array (
+  'name' => 'OnUserDeactivate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
 $events['OnUserChangePassword']= $xpdo->newObject('modEvent');
 $events['OnUserChangePassword']->fromArray(array (
   'name' => 'OnUserChangePassword',
@@ -709,6 +721,18 @@ $events['OnFileCreateFormPrerender']->fromArray(array (
 $events['OnManagerPageInit']= $xpdo->newObject('modEvent');
 $events['OnManagerPageInit']->fromArray(array (
   'name' => 'OnManagerPageInit',
+  'service' => 2,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnManagerPageBeforeRender']= $xpdo->newObject('modEvent');
+$events['OnManagerPageBeforeRender']->fromArray(array (
+  'name' => 'OnManagerPageBeforeRender',
+  'service' => 2,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnManagerPageAfterRender']= $xpdo->newObject('modEvent');
+$events['OnManagerPageAfterRender']->fromArray(array (
+  'name' => 'OnManagerPageAfterRender',
   'service' => 2,
   'groupname' => 'System',
 ), '', true, true);

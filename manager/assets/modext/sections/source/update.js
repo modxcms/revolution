@@ -24,6 +24,7 @@ MODx.page.UpdateSource = function(config) {
 		,components: [{
             xtype: 'modx-panel-source'
             ,record: config.record
+            ,defaultProperties: config.defaultProperties || []
         }]
 	});
 	MODx.page.UpdateSource.superclass.constructor.call(this,config);

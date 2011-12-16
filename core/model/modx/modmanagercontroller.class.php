@@ -20,7 +20,7 @@ abstract class modManagerController {
     /** @var bool Set to false to prevent loading of the base MODExt JS classes. */
     public $loadBaseJavascript = true;
     /** @var array An array of possible paths to this controller's templates directory. */
-    public $templatesPaths;
+    public $templatesPaths = array();
     /** @var array An array of possible paths to this controller's directory. */
     public $controllersPaths;
     /** @var modContext The current working context. */
@@ -74,7 +74,7 @@ abstract class modManagerController {
      * @param array $config A configuration array of options related to this controller's action object.
      * @return The class specified by $className
      */
-    public static function getInstance(modX &$modx,$className,$config = array()) {
+    public static function getInstance(modX &$modx, $className, array $config = array()) {
         /** @var modManagerController $controller */
         $controller = new $className($modx,$config);
         return $controller;
@@ -109,6 +109,10 @@ abstract class modManagerController {
             return $this->modx->error->failure($this->modx->lexicon('access_denied'));
         }
 
+        $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
+            'action' => $this->config,
+        ));
+
         $this->theme = $this->modx->getOption('manager_theme',null,'default');
         
         $this->modx->lexicon->load('action');
@@ -129,9 +133,8 @@ abstract class modManagerController {
 
         $this->setPlaceholder('_config',$this->modx->config);
 
-        $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
-            'action' => $this->config,
-        ));
+        $this->modx->invokeEvent('OnManagerPageBeforeRender',array('controller' => &$this));
+
         $placeholders = $this->process($this->scriptProperties);
         if (!$this->isFailure && !empty($placeholders) && is_array($placeholders)) {
             $this->setPlaceholders($placeholders);
@@ -173,6 +176,7 @@ abstract class modManagerController {
         }
 
         $this->firePostRenderEvents();
+        $this->modx->invokeEvent('OnManagerPageAfterRender',array('controller' => &$this));
 
         return $this->content;
     }
@@ -236,10 +240,12 @@ abstract class modManagerController {
      */
     public function fetchTemplate($tpl) {
         $templatePath = '';
-        foreach ($this->templatesPaths as $path) {
-            if (file_exists($path.$tpl)) {
-                $templatePath = $path;
-                break;
+        if (is_array($this->templatesPaths)) {
+            foreach ($this->templatesPaths as $path) {
+                if (file_exists($path.$tpl)) {
+                    $templatePath = $path;
+                    break;
+                }
             }
         }
         $this->modx->smarty->setTemplatePath($templatePath);
@@ -326,7 +332,7 @@ abstract class modManagerController {
      * @return array
      */
     public function getControllersPaths($coreOnly = false) {
-        if ($this->config['namespace'] != 'core' && !$coreOnly) { /* for non-core controllers */
+        if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) { /* for non-core controllers */
             $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
             $paths[] = $this->config['namespace_path'].'controllers/'.$this->theme.'/';
             $paths[] = $this->config['namespace_path'].'controllers/default/';
@@ -355,7 +361,7 @@ abstract class modManagerController {
     public function getTemplatesPaths($coreOnly = false) {
         $namespacePath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
         /* extras */
-        if ($this->config['namespace'] != 'core' && !$coreOnly) {
+        if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) {
             $paths[] = $namespacePath . 'templates/'.$this->theme.'/';
             $paths[] = $namespacePath . 'templates/default/';
             $paths[] = $namespacePath . 'templates/';
@@ -477,7 +483,7 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
             $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
             
-            $siteId = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
+            $siteId = $this->modx->user->getUserToken('mgr');
 
             $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
 
@@ -532,7 +538,6 @@ abstract class modManagerController {
      * @return array|mixed|string
      */
     public function getDefaultState() {
-        $this->modx->setLogTarget('ECHO');
         /** @var modProcessorResponse $response */
         $response = $this->modx->runProcessor('system/registry/register/read',array(
             'register' => 'state',
@@ -730,7 +735,7 @@ abstract class modManagerController {
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
-            'modActionDom.action' => $this->config['id'],
+            'modActionDom.action' => array_key_exists('id',$this->config) ? $this->config['id'] : 0,
             'modActionDom.for_parent' => $forParent,
             'FCSet.active' => true,
             'Profile.active' => true,
@@ -817,7 +822,7 @@ abstract class modManagerController {
         $this->modx->lexicon->load($topic);
         $langTopics = $this->getPlaceholder('_lang_topics');
         $langTopics = explode(',',$langTopics);
-        $langTopics[] = 'analytics:default';
+        $langTopics[] = $topic;
         $langTopics = implode(',',$langTopics);
         $this->setPlaceholder('_lang_topics',$langTopics);
         return $langTopics;
@@ -847,7 +852,7 @@ abstract class modExtraManagerController extends modManagerController {
      * @param array $config An array of configuration options built from the modAction object
      * @return modManagerController A newly created modManagerController instance
      */
-    public static function getInstance(modX &$modx,$className,array $config = array()) {
+    public static function getInstance(modX &$modx, $className, array $config = array()) {
         $action = call_user_func(array($className,'getDefaultController'));
         if (isset($_REQUEST['action'])) {
             $action = str_replace(array('../','./','.','-','@'),'',$_REQUEST['action']);

@@ -99,7 +99,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('widget_remove')
+                    text: _('widget_unplace')
                     ,handler: this.removeWidget
                 });
             }

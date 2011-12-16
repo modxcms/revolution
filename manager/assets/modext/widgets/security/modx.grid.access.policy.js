@@ -19,7 +19,7 @@ MODx.panel.AccessPolicies = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 15px'
+            ,cls: 'main-wrapper'
             ,items: [{
                 html: '<p>'+_('policy_management_msg')+'</p>'
                 ,border: false
@@ -111,6 +111,11 @@ MODx.grid.AccessPolicy = function(config) {
                 'click': {fn: this.clearFilter, scope: this}
             }
         }]
+        ,pagingItems: ['-',{
+            text: _('import')
+            ,scope: this
+            ,handler: this.importPolicy
+        }]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
 };
@@ -152,6 +157,39 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         this.windows.apc.reset();
         this.windows.apc.show(e.target);
     }
+    ,exportPolicy: function(btn,e) {
+        var id = this.menu.record.id;
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'export'
+                ,id: id
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    location.href = this.config.url+'?action=export&download=1&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                },scope:this}
+            }
+        });
+    }
+
+    ,importPolicy: function(btn,e) {
+        var r = {};
+        if (!this.windows.importPolicy) {
+            this.windows.importPolicy = MODx.load({
+                xtype: 'modx-window-policy-import'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(o) {
+                        this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.importPolicy.reset();
+        this.windows.importPolicy.setValues(r);
+        this.windows.importPolicy.show(e.target);
+    }
 
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
@@ -174,6 +212,11 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
                     ,handler: this.confirm.createDelegate(this,["duplicate","policy_duplicate_confirm"])
                 });
             }
+            if (m.length > 0) { m.push('-'); }
+            m.push({
+                text: _('policy_export')
+                ,handler: this.exportPolicy
+            });
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
@@ -292,6 +335,7 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/access/policy/template.php'
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
@@ -300,3 +344,33 @@ MODx.combo.AccessPolicyTemplate = function(config) {
 };
 Ext.extend(MODx.combo.AccessPolicyTemplate,MODx.combo.ComboBox);
 Ext.reg('modx-combo-access-policy-template',MODx.combo.AccessPolicyTemplate);
+
+MODx.window.ImportPolicy = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'imppol-'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('policy_import')
+        ,id: 'modx-window-policy-import'
+        ,url: MODx.config.connectors_url+'security/access/policy.php'
+        ,action: 'import'
+        ,fileUpload: true
+        ,saveBtnText: _('import')
+        ,fields: [{
+            html: _('policy_import_msg')
+            ,id: this.ident+'-desc'
+            ,border: false
+            ,cls: 'panel-desc'
+            ,style: 'margin-bottom: 10px;'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('file')
+            ,name: 'file'
+            ,id: this.ident+'-file'
+            ,anchor: '100%'
+            ,inputType: 'file'
+        }]
+    });
+    MODx.window.ImportPolicy.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.ImportPolicy,MODx.Window);
+Ext.reg('modx-window-policy-import',MODx.window.ImportPolicy);

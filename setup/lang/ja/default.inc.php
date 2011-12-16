@@ -1,6 +1,6 @@
 <?php
 /**
- * Japanese language files for Revolution 2.0.5 setup
+ * Japanese language files for Revolution 2.2 setup
  *
  * @package setup
  * @author KUROI Enogu http://twitter.com/enogu
@@ -34,7 +34,7 @@ $_lang['connection_collation'] = '文字セットの照合順序<br />(通常は
 $_lang['connection_connection_and_login_information'] = 'データベース接続とデータベースユーザーの指定';
 $_lang['connection_connection_note'] = 'データベース接続をテストし、設定します。まだデータベースを作成していない場合は、インストーラーはデータベースの自動作成を試みます。データベースの自動作成機能はサーバ側の権限設定に依存しており、多くの共用レンタルサーバではサポートされていないためご注意ください。';
 $_lang['connection_database_host'] = 'データベースホスト:';
-$_lang['connection_database_info'] = 'Now please enter the login data for your database.';
+$_lang['connection_database_info'] = 'データベースにログインするための情報を入力してください。';
 $_lang['connection_database_login'] = 'データベースユーザー名:';
 $_lang['connection_database_name'] = 'データベース名:';
 $_lang['connection_database_pass'] = 'データベースパスワード:';
@@ -75,7 +75,7 @@ $_lang['db_err_show_charsets'] = 'MODX could not get the available character set
 $_lang['db_err_show_collations'] = 'MODX could not get the available collations from your MySQL server.';
 $_lang['db_success'] = '問題ありません';
 $_lang['db_test_coll_msg'] = 'ここをクリックしてデータベースの選択を確認してください。<br />指定のデータベースが存在しない場合は新規作成を試みます。';
-$_lang['db_test_conn_msg'] = 'ここをクリックしてMySQLサーバへの接続をテストしてください';
+$_lang['db_test_conn_msg'] = 'ここをクリックしてデータベース接続をテストしてください';
 $_lang['default_admin_user'] = 'デフォルト管理ユーザー';
 $_lang['delete_setup_dir'] = 'セットアップディレクトリを削除する';
 $_lang['dir'] = 'ltr:左から右';
@@ -215,7 +215,7 @@ $_lang['username_err_ns'] = 'ユーザー名が不正です。';
 $_lang['version'] = 'version';
 $_lang['warning'] = 'Warning';
 $_lang['welcome'] = 'MODX Revolutionへようこそ！';
-$_lang['welcome_message'] = '<p>期待の新世代フレームワーク「MODX Revolution」を、このサーバーにインストールします。<br />このインストーラを使う限りにおいては事前の準備作業は不要。パーミッション変更・オプション選択など、必要に応じてナビゲーションいたします。</p>
+$_lang['welcome_message'] = '<p>期待の新世代フレームワーク「MODX Revolution」を、このサーバーにインストールします。<br />パーミッション変更・オプション選択など、必要に応じてナビゲーションいたします。</p>
 	<p>[次へ] をクリックしてください。</p>
 ';
 $_lang['workspace_err_nf'] = '現在の作業ディレクトリが発見できませんでした。';

@@ -76,12 +76,14 @@ class ElementTVUpdateManagerController extends modManagerController {
             $data[] = array(
                 $property['name'],
                 $property['desc'],
-                $property['type'],
-                $property['options'],
+                !empty($property['type']) ? $property['type'] : 'textfield',
+                !empty($property['options']) ? $property['options'] : array(),
                 $property['value'],
-                $property['lexicon'],
+                !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
                 $property['desc_trans'],
+                !empty($property['area']) ? $property['area'] : '',
+                !empty($property['area_trans']) ? $property['area_trans'] : '',
             );
         }
         $this->tvArray = $this->tv->toArray();

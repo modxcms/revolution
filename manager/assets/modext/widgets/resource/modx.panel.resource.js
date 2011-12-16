@@ -5,7 +5,7 @@ MODx.panel.Resource = function(config) {
         url: MODx.config.connectors_url+'resource/index.php'
         ,baseParams: {}
         ,id: 'modx-panel-resource'
-        ,class_key: 'modResource'
+        ,class_key: 'modDocument'
         ,resource: ''
         ,bodyStyle: ''
 		,cls: 'container form-with-labels'
@@ -38,7 +38,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) { 
             this.getForm().setValues(this.config.record);
-            pcmb = this.getForm().findField('parent-cmb');
+            if (this.config.richtext || MODx.request.reload || MODx.request.activeSave == 1) {
+                this.markDirty();
+            }
+            var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
             } else if (pcmb) {
@@ -47,6 +50,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+Ext.util.Format.stripTags(this.config.record.pagetitle)+'</h2>');
             }
+            if (!Ext.isEmpty(this.config.record.resourceGroups)) {
+                var g = Ext.getCmp('modx-grid-resource-security');
+                if (g && Ext.isEmpty(g.config.url)) {
+                    var s = g.getStore();
+                    if (s) { s.loadData(this.config.record.resourceGroups); }
+                }
+            }
+
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
@@ -147,7 +158,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload; // +'&template='+nt
+                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -180,7 +191,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,autoHeight: true
             ,defaults: {
                 border: false
-                ,msgTarget: 'side'
+                ,msgTarget: 'under'
                 ,width: 400
             }
             ,items: this.getMainFields(config)
@@ -197,7 +208,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,autoHeight: true
             ,defaults: {
                 border: false
-                ,msgTarget: 'side'
+                ,msgTarget: 'under'
             }
             ,items: this.getSettingFields(config)
         });
@@ -274,11 +285,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 labelSeparator: ''
                 ,labelAlign: 'top'
                 ,border: false
+                ,msgTarget: 'under'
             }
             ,items:[{
                 columnWidth: .67
                 ,layout: 'form'
                 ,id: 'modx-resource-main-left'
+                ,defaults: { msgTarget: 'under' }
                 ,items: this.getMainLeftFields(config)
             },{
                 columnWidth: .33
@@ -287,6 +300,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,border: false
                 ,id: 'modx-resource-main-right'
                 ,style: 'margin-right: 0'
+                ,defaults: { msgTarget: 'under' }
                 ,items: this.getMainRightFields(config)
             }]
         },{
@@ -320,6 +334,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'create-resource-token'
             ,id: 'modx-create-resource-token'
             ,value: config.record.create_resource_token || ''
+        },{
+            xtype: 'hidden'
+            ,name: 'reloaded'
+            ,value: !Ext.isEmpty(MODx.request.reload) ? 1 : 0
         },{
             xtype: 'hidden'
             ,name: 'parent'
@@ -466,10 +484,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,labelAlign: 'top'
                 ,border: false
                 ,layout: 'form'
+                ,msgTarget: 'under'
             }
             ,items:[{
                 columnWidth: .5
                 ,id: 'modx-page-settings-left'
+                ,defaults: { msgTarget: 'under' }
                 ,items: [{
                     xtype: 'modx-field-parent-change'
                     ,fieldLabel: _('resource_parent')
@@ -520,6 +540,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right'
+                ,defaults: { msgTarget: 'under' }
                 ,items: [{
                     xtype: 'xdatetime'
                     ,fieldLabel: _('resource_publishedon')
@@ -568,10 +589,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                             ,labelAlign: 'top'
                             ,border: false
                             ,layout: 'form'
+                            ,msgTarget: 'under'
                         }
                         ,items: [{
                             columnWidth: .5
                             ,id: 'modx-page-settings-right-box-left'
+                            ,defaults: { msgTarget: 'under' }
                             ,items: [{
                                 xtype: 'xcheckbox'
                                 ,boxLabel: _('resource_folder')
@@ -604,6 +627,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         },{
                             columnWidth: .5
                             ,id: 'modx-page-settings-right-box-right'
+                            ,defaults: { msgTarget: 'under' }
                             ,items: [{
                                 xtype: 'xcheckbox'
                                 ,boxLabel: _('resource_cacheable')
@@ -701,6 +725,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,mode: config.mode || 'update'
                 ,"parent": config.record["parent"] || 0
                 ,"token": config.record.create_resource_token
+                ,reloaded: !Ext.isEmpty(MODx.request.reload)
                 ,listeners: {
                     'afteredit': {fn:this.fieldChangeEvent,scope:this}
                 }

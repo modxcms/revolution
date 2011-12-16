@@ -10,8 +10,8 @@ MODx.panel.ResourceData = function(config) {
         ,baseParams: {}
         ,id: 'modx-panel-resource-data'
         ,class_key: 'modResource'
+        ,cls: 'container form-with-labels'
         ,resource: ''
-        ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2></h2>'
@@ -22,8 +22,8 @@ MODx.panel.ResourceData = function(config) {
             ,id: 'modx-rdata-tab-general'
             ,layout: 'form'
             ,autoHeight: true
+            ,bodyCssClass: 'main-wrapper'
             ,labelWidth: 150
-            ,bodyStyle: 'padding: 15px;'
             ,defaults: df
             ,items: [{
                 name: 'pagetitle'
@@ -117,7 +117,7 @@ MODx.panel.ResourceData = function(config) {
             ,defaults: df
             ,layout: 'form'
             ,autoHeight: true
-            ,bodyStyle: 'padding: 15px'
+            ,bodyCssClass: 'main-wrapper'
             ,defaultType: 'statictextfield'
             ,items: [{
                 name: 'createdon_adjusted'
@@ -140,7 +140,7 @@ MODx.panel.ResourceData = function(config) {
             }]
         },{
             title: _('cache_output')
-            ,bodyStyle: 'padding: 15px;'
+            ,bodyCssClass: 'main-wrapper'
             ,autoHeight: true
             ,id: 'modx-rdata-tab-source'
             ,items: [{

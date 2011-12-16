@@ -79,8 +79,9 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
     }
 	
 	,install: function(va){
-		var record = Ext.getCmp('modx-package-grid').getSelectionModel().getSelected();
-		var r = record.data;
+		var g = Ext.getCmp('modx-package-grid');
+		if (!g) return false;
+		var r = g.menu.record.data ? g.menu.record.data : g.menu.record;
 		var topic = '/workspace/package/install/'+r.signature+'/';
         this.loadConsole(Ext.getBody(),topic);
 		
@@ -100,7 +101,6 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
                 'success': {fn:function() {
                     this.activate();
 					Ext.getCmp('modx-package-grid').getStore().load();
-					setTimeout(function(){ c.hide(); }, 5000);
                 },scope:this}
                 ,'failure': {fn:function() {
                     this.activate();

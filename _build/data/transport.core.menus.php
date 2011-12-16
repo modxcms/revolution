@@ -950,7 +950,7 @@ $children[3]->fromArray(array (
   'description' => 'api_docs_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 3,
-  'handler' => 'window.open("http://api.modx.com/");',
+  'handler' => 'window.open("http://api.modx.com/revolution/2.2/");',
 ), '', true, true);
 
 $menus[8]->addMany($children,'Children');

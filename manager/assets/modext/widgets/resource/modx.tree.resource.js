@@ -117,6 +117,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             var m = [];
             switch (n.attributes.type) {
                 case 'modResource':
+                case 'modDocument':
                     m = this._getModResourceMenu(n);
                     break;
                 case 'modContext':
@@ -430,7 +431,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
     
     ,quickCreate: function(itm,e,cls,ctx,p) {
-        cls = cls || 'modResource';
+        cls = cls || 'modDocument';
         var r = {
             class_key: cls
             ,context_key: ctx || 'web'
@@ -555,6 +556,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
+    ,overviewResource: function() {this.loadAction('a='+MODx.action['resource/data'])}
+    ,quickUpdateResource: function(itm,e) {
+        Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
+    }
+    ,editResource: function() {this.loadAction('a='+MODx.action['resource/update']);}
+
     ,_getModResourceMenu: function(n) {
         var a = n.attributes;
         var ui = n.getUI();
@@ -568,25 +575,23 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (ui.hasClass('pview')) {
             m.push({
                 text: _('resource_overview')
-                ,handler: function() {this.loadAction('a='+MODx.action['resource/data'])}
+                ,handler: this.overviewResource
             });
         }
         if (ui.hasClass('pedit')) {
             m.push({
                 text: _('resource_edit')
-                ,handler: function() {this.loadAction('a='+MODx.action['resource/update']);}
+                ,handler: this.editResource
             });
         }
         if (ui.hasClass('pqupdate')) {
             m.push({
                 text: _('quick_update_resource')
                 ,classKey: a.classKey
-                ,handler: function(itm,e) {
-                    Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
-                }
+                ,handler: this.quickUpdateResource
             });
         }
-        if (ui.hasClass('pnew')) {
+        if (ui.hasClass('pduplicate')) {
             m.push({
                 text: _('resource_duplicate')
                 ,handler: this.duplicateResource
@@ -594,9 +599,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
         m.push({
             text: _('resource_refresh')
-            ,handler: function() {
-                this.refreshNode(this.cm.activeNode.id);
-            }
+            ,handler: this.refreshResource
             ,scope: this
         });
 
@@ -640,6 +643,26 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
+    ,refreshResource: function() {
+        this.refreshNode(this.cm.activeNode.id);
+    }
+
+    ,createResourceHere: function(itm) {
+        var at = this.cm.activeNode.attributes;
+        var p = itm.usePk ? itm.usePk : at.pk;
+        Ext.getCmp('modx-resource-tree').loadAction(
+            'a='+MODx.action['resource/create']
+            + '&class_key='+itm.classKey
+            + '&parent='+p
+            + (at.ctx ? '&context_key='+at.ctx : '')
+        );
+    }
+    ,createResource: function(itm,e) {
+        var at = this.cm.activeNode.attributes;
+        var p = itm.usePk ? itm.usePk : at.pk;
+        Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
+    }
+
     ,_getCreateMenus: function(m,pk,ui) {
         var types = MODx.config.resource_classes;
         var o = this.fireEvent('loadCreateMenus',types);
@@ -659,40 +682,27 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: types[k]['text_create_here']
                 ,classKey: k
                 ,usePk: pk ? pk : false
-                ,handler: function(itm) {
-                    var at = this.cm.activeNode.attributes;
-                    var p = itm.usePk ? itm.usePk : at.pk;
-                    Ext.getCmp('modx-resource-tree').loadAction(
-                        'a='+MODx.action['resource/create']
-                        + '&class_key='+itm.classKey
-                        + '&parent='+p
-                        + (at.ctx ? '&context_key='+at.ctx : '')
-                    );
-                }
+                ,handler: this.createResourceHere
                 ,scope: this
             });
             if (ui && ui.hasClass('pqcreate')) {
                 qct.push({
                     text: types[k]['text_create']
                     ,classKey: k
-                    ,handler: function(itm,e) {
-                        var at = this.cm.activeNode.attributes;
-                        var p = itm.usePk ? itm.usePk : at.pk;
-                        Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
-                    }
+                    ,handler: this.createResource
                     ,scope: this
                 });
             }
         }
         m.push({
             text: _('create')
-            ,handler: function() {return false;}
+            ,handler: Ext.emptyFn
             ,menu: {items: ct}
         });
         if (ui && ui.hasClass('pqcreate')) {
             m.push({
                text: _('quick_create')
-               ,handler: function() {return false;}
+               ,handler: Ext.emptyFn
                ,menu: {items: qct}
             });
         }
@@ -791,7 +801,7 @@ MODx.window.QuickCreateResource = function(config) {
                         },{
                             xtype: 'xcheckbox'
                             ,name: 'published'
-                            ,id: 'modx-'+id+'-published'
+                            ,id: 'modx-'+this.ident+'-published'
                             ,boxLabel: _('resource_published')
                             ,description: _('resource_published_help')
                             ,inputValue: 1
@@ -801,7 +811,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,boxLabel: _('resource_hide_from_menus')
                             ,description: _('resource_hide_from_menus_help')
                             ,name: 'hidemenu'
-                            ,id: 'modx-'+id+'-hidemenu'
+                            ,id: 'modx-'+this.ident+'-hidemenu'
                             ,inputValue: 1
                             ,checked: MODx.config.hidemenu_default == '1' ? 1 : 0
                         }]
@@ -980,7 +990,7 @@ Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 MODx.getQRContentField = function(id,cls) {
     id = id || 'qur';
-    cls = cls || 'modResource';
+    cls = cls || 'modDocument';
     var dm = Ext.getBody().getViewSize();
     var o = {};
     switch (cls) {
@@ -1030,6 +1040,7 @@ MODx.getQRContentField = function(id,cls) {
             };
             break;
         case 'modResource':
+        case 'modDocument':
         default:
             o = {
                 xtype: 'textarea'

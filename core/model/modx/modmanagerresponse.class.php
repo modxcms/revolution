@@ -27,7 +27,7 @@ class modManagerResponse extends modResponse {
         if (!isset($this->modx->request) || !isset($this->modx->request->action)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
         } else {
-            $action =& intval($this->modx->request->action);
+            $action = (integer) $this->modx->request->action;
         }
 
         $theme = $this->modx->getOption('manager_theme',null,'default');
@@ -42,8 +42,14 @@ class modManagerResponse extends modResponse {
         }
 
         $this->action = $this->modx->actionMap[$action];
+        if (empty($this->action)) $this->action = array();
         $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
         if (!$isLoggedIn) {
+            $alternateLogin = $this->modx->getOption('manager_login_url_alternate',null,'');
+            if (!empty($alternateLogin)) {
+                $this->modx->sendRedirect($alternateLogin);
+                return '';
+            }
             $this->action['namespace'] = 'core';
             $this->action['namespace_name'] = 'core';
             $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
@@ -107,6 +113,7 @@ class modManagerResponse extends modResponse {
             } catch (Exception $e) {
                 die($e->getMessage());
             }
+
             $this->body = $this->modx->controller->render();
         }
         
@@ -115,6 +122,10 @@ class modManagerResponse extends modResponse {
         }
         if (is_array($this->body)) {
             $this->modx->smarty->assign('_e', $this->body);
+            if (!file_exists($this->modx->smarty->template_dir.'error.tpl')) {
+                $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+                $this->modx->smarty->setTemplatePath($templatePath);
+            }
             echo $this->modx->smarty->fetch('error.tpl');
         } else {
             echo $this->body;

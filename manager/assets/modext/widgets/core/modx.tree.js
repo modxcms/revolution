@@ -194,7 +194,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
-            a[i].scope = this;
+            a[i].scope = a[i].scope || this;
             if (a[i].handler && typeof a[i].handler == 'string') {
                 a[i].handler = eval(a[i].handler);
             }
@@ -212,13 +212,27 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.cm.activeNode = node;        
         this.cm.removeAll();
         var m;
-        if (this.getMenu) {
-            m = this.getMenu(node,e);
-        } else if (node.attributes.menu && node.attributes.menu.items) {
-            m = node.attributes.menu.items;
+        var handled = false;
+
+        if (!Ext.isEmpty(node.attributes.treeHandler) || (node.isRoot && !Ext.isEmpty(node.childNodes[0].attributes.treeHandler))) {
+            var h = Ext.getCmp(node.isRoot ? node.childNodes[0].attributes.treeHandler : node.attributes.treeHandler);
+            if (h) {
+                if (node.isRoot) { node.attributes.type = 'root'; }
+                m = h.getMenu(this,node,e);
+                handled = true;
+            }
         }
-        this.addContextMenuItem(m);
-        this.cm.showAt(e.xy);
+        if (!handled) {
+            if (this.getMenu) {
+                m = this.getMenu(node,e);
+            } else if (node.attributes.menu && node.attributes.menu.items) {
+                m = node.attributes.menu.items;
+            }
+        }
+        if (m && m.length > 0) {
+            this.addContextMenuItem(m);
+            this.cm.showAt(e.xy);
+        }
         e.preventDefault();
         e.stopEvent();
     }
@@ -460,7 +474,17 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     /**
      * Abstract definition to handle drop events.
      */
-    ,_handleDrop: function() { }
+    ,_handleDrop: function(dropEvent) {
+        var node = dropEvent.dropNode;
+        if (node.isRoot) return false;
+
+        if (!Ext.isEmpty(node.attributes.treeHandler)) {
+            var h = Ext.getCmp(node.attributes.treeHandler);
+            if (h) {
+                return h.handleDrop(this,dropEvent);
+            }
+        }
+    }
 
     /**
      * Semi unique ids across edits

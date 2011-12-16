@@ -27,7 +27,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2011, Jason Coward
+ * @copyright Copyright (C) 2006-2012, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
@@ -628,7 +628,7 @@ class xPDO {
      * @param mixed $default An optional default value to return if no value is found.
      * @return mixed The configuration option value.
      */
-    public function getOption($key, $options = null, $default = null) {
+    public function getOption($key, $options = null, $default = null, $skipEmpty = false) {
         $option= $default;
         if (is_array($key)) {
             if (!is_array($option)) {
@@ -639,9 +639,9 @@ class xPDO {
                 $option[$k]= $this->getOption($k, $options, $default);
             }
         } elseif (is_string($key) && !empty($key)) {
-            if (is_array($options) && !empty($options) && array_key_exists($key, $options)) {
+            if (is_array($options) && !empty($options) && array_key_exists($key, $options) && (!$skipEmpty || ($skipEmpty && $options[$key] !== ''))) {
                 $option= $options[$key];
-            } elseif (is_array($this->config) && !empty($this->config) && array_key_exists($key, $this->config)) {
+            } elseif (is_array($this->config) && !empty($this->config) && array_key_exists($key, $this->config) && (!$skipEmpty || ($skipEmpty && $this->config[$key] !== ''))) {
                 $option= $this->config[$key];
             }
         }
@@ -1335,15 +1335,17 @@ class xPDO {
      * Gets a list of field (or column) definitions for an object by class name.
      *
      * These definitions are used by the objects themselves to build their
-     * own meta data based on class inheritence.
+     * own meta data based on class inheritance.
      *
      * @param string $className The name of the class to lookup fields meta data
      * for.
+     * @param boolean $includeExtended If true, include meta from all derivative
+     * classes in loaded packages.
      * @return array An array featuring field names as the array keys, and
      * arrays of metadata information as the array values; empty array is
      * returned if unsuccessful.
      */
-    public function getFieldMeta($className) {
+    public function getFieldMeta($className, $includeExtended = false) {
         $fieldMeta= array ();
         if ($className= $this->loadClass($className)) {
             if ($ancestry= $this->getAncestry($className)) {
@@ -1353,7 +1355,7 @@ class xPDO {
                     }
                 }
             }
-            if ($this->getInherit($className) === 'single') {
+            if ($includeExtended && $this->getInherit($className) === 'single') {
                 $descendants= $this->getDescendants($className);
                 if ($descendants) {
                     foreach ($descendants as $descendant) {
@@ -2587,7 +2589,7 @@ class xPDO {
                     } else {
                         $v= 'NULL';
                     }
-                    $bound[$pattern] = $v;
+                    $bound[$pattern] = str_replace(array('$', '\\'), array('\$', '\\\\'), $v);
                 } else {
                     $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
                     $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);

@@ -61,6 +61,7 @@ class modPropertySet extends xPDOSimpleObject {
                     $this->xpdo->lexicon->load($property['lexicon']);
                 }
                 $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+                $property['area'] = !empty($property['area']) ? $property['area'] : '';
                 
                 if (!empty($property['options'])) {
                     foreach ($property['options'] as &$option) {
@@ -123,6 +124,7 @@ class modPropertySet extends xPDOSimpleObject {
                         'options' => $property[3],
                         'value' => $property[4],
                         'lexicon' => !empty($property[5]) ? $property[5] : null,
+                        'area' => !empty($property[6]) ? $property[6] : '',
                     );
                 } elseif (is_array($property) && isset($property['value'])) {
                     $key = $property['name'];
@@ -133,6 +135,7 @@ class modPropertySet extends xPDOSimpleObject {
                         'options' => isset($property['options']) ? $property['options'] : array(),
                         'value' => $property['value'],
                         'lexicon' => !empty($property['lexicon']) ? $property['lexicon'] : null,
+                        'area' => !empty($property['area']) ? $property['area'] : '',
                     );
                 } else {
                     $key = $propKey;
@@ -143,6 +146,7 @@ class modPropertySet extends xPDOSimpleObject {
                         'options' => array(),
                         'value' => $property,
                         'lexicon' => null,
+                        'area' => '',
                     );
                 }
                 

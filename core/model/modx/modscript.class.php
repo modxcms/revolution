@@ -60,6 +60,7 @@ class modScript extends modElement {
                 $this->_result= $this->loadScript();
             }
             if ($this->_result) {
+                if (empty($this->xpdo->event)) $this->xpdo->event = new stdClass();
                 $this->xpdo->event->params= $this->_properties; /* store params inside event object */
                 ob_start();
                 $this->_output= $scriptName($this->_properties);

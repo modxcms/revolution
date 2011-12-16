@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -134,7 +134,11 @@ class modOutputFilter {
                             }
                             $grps= (strlen($m_val) > 0) ? explode(',', $m_val) : array ();
                             $user = $this->modx->getObject('modUser',$output);
-                            $condition[]= $user->isMember($grps);
+                            if ($user && is_object($user) && $user instanceof modUser) {
+                                $condition[]= $user->isMember($grps);
+                            } else {
+                                $condition[] = false;
+                            }
                             break;
                         case 'or':
                             $condition[]= "||";
@@ -396,7 +400,7 @@ class modOutputFilter {
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
                             $value = 0 + $output;
                             if ($value != 0 && $value != -1) {
-                                $output= strftime($m_val,$value);
+                                $output= htmlentities(strftime($m_val,$value),ENT_COMPAT,$encoding);
                             } else {
                                 $output= '';
                             }

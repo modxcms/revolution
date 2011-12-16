@@ -105,6 +105,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     return false;
                 }
             });
+            this.clearDirty();
         } else if (userId == 0) {
             location.href = '?a='+MODx.action['security/user']+'&id='+o.result.object.id;
         }

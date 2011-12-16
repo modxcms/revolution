@@ -1275,7 +1275,7 @@
         <index alias="path" name="path" primary="false" unique="true" type="BTREE">
             <column key="path" length="" collation="A" null="false" />
         </index>
-        <index alias="active" name="sctive" primary="false" unique="false" type="BTREE">
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
             <column key="active" length="" collation="A" null="false" />
         </index>
 

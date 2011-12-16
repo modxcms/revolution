@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -1347,7 +1347,7 @@ class modLexiconTag extends modTag {
                 $language = !empty($this->_properties['language']) ? $this->_properties['language'] : $this->modx->getOption('cultureKey',null,'en');
                 $this->modx->lexicon->load($language.':'.$namespace.':'.$topic);
 
-                $this->_content= $this->modx->lexicon($this->get('name'), $this->_properties);
+                $this->_content= $this->modx->lexicon($this->get('name'), $this->_properties,$language);
             }
         }
         return $this->_content;

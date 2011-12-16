@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['action'] = 'Action';
 $_lang['action'] = 'Akce';
@@ -31,7 +31,7 @@ $_lang['constraint_class_desc'] = 'Volitelné. Pokud je nastaveno spolu s polí�
 $_lang['constraint_desc'] = 'Volitelné. Hodnota políčka omezení proti, které by mělo být políčko zkontrolováno.';
 
 // $_lang['constraint_field'] = 'Constraint Field';
-$_lang['constraint_field'] = 'Políčko omezení';
+$_lang['constraint_field'] = 'Určení políčka omezení';
 
 // $_lang['constraint_field_desc'] = 'Optional. The field by which this constraint should be applied.';
 $_lang['constraint_field_desc'] = 'Volitelné. Políčko, na které by tato omezení měla být použita.';
@@ -40,7 +40,7 @@ $_lang['constraint_field_desc'] = 'Volitelné. Políčko, na které by tato omez
 $_lang['containing_panel'] = 'Obsahující panel';
 
 // $_lang['containing_panel_desc'] = 'The ID of the containing Form Panel the field is in. This is sometimes necessary for certain rules, so that the system can know what form or panel the field is in.';
-$_lang['containing_panel_desc'] = 'ID formulářového panelu, kde se nachází políčko. Toto je občas nezbytné, aby systém poznal, o které pole se jedná.';
+$_lang['containing_panel_desc'] = 'ID formulářového panelu, kde se nachází políčko. Občas je pro některá pravidla nezbytné, aby systém poznal, ve kterém formuláři nebo panelu se dané políčko nachází.';
 
 // $_lang['deactivate'] = 'Deactivate';
 $_lang['deactivate'] = 'Deaktivovat';
@@ -55,7 +55,7 @@ $_lang['export'] = 'Exportovat';
 $_lang['field'] = 'Políčko';
 
 // $_lang['field_desc'] = 'This is the field to affect. This may also be a tab, or TV. If it is a TV, please specify in this format: "tv#", where # is the ID of the TV.';
-$_lang['field_desc'] = 'Toto je políčko, které má být ovlivněno. Může to být také záložka nebo TV. Pokud je to TV, zadejte ji v tomto tvaru: "tv#", kde # je ID Template Variable.';
+$_lang['field_desc'] = 'Políčko, které má být ovlivněno. Může to být také záložka nebo TV. Pokud je to TV, zadejte ji v tomto tvaru: "tv#", kde # je ID Template Variable.';
 
 // $_lang['field_default'] = 'Field Default Value';
 $_lang['field_default'] = 'Výchozí hodnota políčka';
@@ -223,10 +223,10 @@ $_lang['set_change_template'] = 'Změnit šablonu pro sadu';
 $_lang['set_change_template_confirm'] = 'Opravdu chcete změnit šablonu? Tato volba změní šablonu, na kterou jsou tato pravidla aplikována. Pokud ano, MODX uloží provedené změny, předtím než znovu načte stránku pro obnovení nových TVs pro novou šablonu.';
 
 // $_lang['set_constraint_field_desc'] = 'Setting the Constraint field will prevent the rules in this Set from executing unless the field for this Resource matches the "constraint" value.';
-$_lang['set_constraint_field_desc'] = 'Nastavení políčka omezení zamezí aplikování pravidel této sady jestliže políčko tohoto dokumentu neobsahuje hodnotu "omezení".';
+$_lang['set_constraint_field_desc'] = 'Určení políčka omezení, které umožní zamezení aplikování pravidel této sady pokud dané políčko neobsahuje hodnotu určenou v políčku "Hodnota omezení".';
 
 // $_lang['set_constraint_desc'] = 'Set the value of the field (specified above) to restrict the rules in this Set from being executed unless the Resource has this value on the specified constraint field.';
-$_lang['set_constraint_desc'] = 'Sada hodnot políčka (definovaných výše) pro zamezení aplikování pravidel v této sadě jestliže dokument nemá tuto hodnotu ve specifikovaném políčku omezení.';
+$_lang['set_constraint_desc'] = 'Hodnota políčka (definovaného výše) pro zamezení aplikování pravidel této sady.';
 
 // $_lang['set_create'] = 'Create New Set';
 $_lang['set_create'] = 'Vytvořit novou sadu';
@@ -274,7 +274,7 @@ $_lang['set_tab_err_ae'] = 'Záložka s tímto ID již existuje. Zvolte prosím 
 $_lang['set_tabs_msg'] = 'V této části můžete přizpůsobit záložky pro tuto stránku včetně jejich viditelnosti a titulku. Pro změnu hodnoty poklikejte na řádku. Pro výchozí hodnotu ponechte políčko prázdné.';
 
 // $_lang['set_template_desc'] = 'Choosing a Template will limit the rules in the Set from executing unless the Resource has the specified Template.';
-$_lang['set_template_desc'] = 'Vybráním šablony omezíte aplikovaní pravidel ze sady jestliže dokument nemá určenou šablonu.';
+$_lang['set_template_desc'] = 'Vybráním šablony omezíte aplikovaní pravidel pouze na dokumenty využívající tuto šablonu.';
 
 // $_lang['set_tvs_msg'] = 'Here you can set visibility, labels, default values and the tabs they reside in by double-clicking on the row in the grid. Note: If you move a TV to another tab, you can adjust the order of the TV in the "Tab Rank" field. Leave a field empty to use the default setting.';
 $_lang['set_tvs_msg'] = 'V této části můžete nastavit viditelnost, jmenovky, výchozí hodnoty a záložky poklikáním na řádku v tabulce. Poznámka: Jestliže přemístítě TV do jiné záložky, můžete změnit pořadí TV v políčku "Pořadí záložky". Pro výchozí nastavení ponechte políčko prázdné.';

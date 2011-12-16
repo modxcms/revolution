@@ -679,7 +679,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         }
         $returnArray['class_key'] = $this->object->get('class_key');
         $this->workingContext->prepare(true);
-        $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), '', '', 'full');
+        $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), $this->object->get('context_key'), '', 'full');
         return $this->success('',$returnArray);
     }
 
@@ -691,11 +691,15 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $syncSite = $this->getProperty('syncsite',false);
         $clearCache = $this->getProperty('clearCache',false);
         if (!empty($syncSite) || !empty($clearCache)) {
+            $contexts = array($this->object->get('context_key'));
+            if (!empty($this->oldContext)) {
+                $contexts[] = $this->oldContext->get('key');
+            }
             $this->modx->cacheManager->refresh(array(
                 'db' => array(),
-                'auto_publish' => array('contexts' => array($this->object->get('context_key'))),
-                'context_settings' => array('contexts' => array($this->object->get('context_key'))),
-                'resource' => array('contexts' => array($this->object->get('context_key'))),
+                'auto_publish' => array('contexts' => $contexts),
+                'context_settings' => array('contexts' => $contexts),
+                'resource' => array('contexts' => $contexts),
             ));
         }
     }

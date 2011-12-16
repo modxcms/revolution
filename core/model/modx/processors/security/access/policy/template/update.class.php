@@ -30,13 +30,16 @@ class modAccessPolicyTemplateUpdateProcessor extends modObjectUpdateProcessor {
                 $permission->remove();
             }
 
+            $added = array();
             foreach ($permissions as $permissionArray) {
+                if (in_array($permissionArray['name'],$added)) continue;
                 $permission = $this->modx->newObject('modAccessPermission');
                 $permission->set('template',$this->object->get('id'));
                 $permission->set('name',$permissionArray['name']);
                 $permission->set('description',$permissionArray['description']);
                 $permission->set('value',true);
                 $permission->save();
+                $added[] = $permissionArray['name'];
             }
         }
         return parent::afterSave();

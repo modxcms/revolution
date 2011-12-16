@@ -384,6 +384,15 @@ $settings['cultureKey']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['date_timezone']= $xpdo->newObject('modSystemSetting');
+$settings['date_timezone']->fromArray(array (
+  'key' => 'date_timezone',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['debug']= $xpdo->newObject('modSystemSetting');
 $settings['debug']->fromArray(array (
   'key' => 'debug',
@@ -773,15 +782,6 @@ $settings['log_target']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
-$settings['manager_html5_cache']->fromArray(array (
-  'key' => 'manager_html5_cache',
-  'value' => 0,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['link_tag_scheme']= $xpdo->newObject('modSystemSetting');
 $settings['link_tag_scheme']->fromArray(array (
   'key' => 'link_tag_scheme',
@@ -926,6 +926,15 @@ $settings['manager_favicon_url']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
+$settings['manager_html5_cache']->fromArray(array (
+  'key' => 'manager_html5_cache',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_js_cache_file_locking']= $xpdo->newObject('modSystemSetting');
 $settings['manager_js_cache_file_locking']->fromArray(array (
   'key' => 'manager_js_cache_file_locking',
@@ -939,6 +948,15 @@ $settings['manager_js_cache_max_age']= $xpdo->newObject('modSystemSetting');
 $settings['manager_js_cache_max_age']->fromArray(array (
   'key' => 'manager_js_cache_max_age',
   'value' => 3600,
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['manager_js_document_root']= $xpdo->newObject('modSystemSetting');
+$settings['manager_js_document_root']->fromArray(array (
+  'key' => 'manager_js_document_root',
+  'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -987,6 +1005,15 @@ $settings['manager_language']->fromArray(array (
   'xtype' => 'modx-combo-language',
   'namespace' => 'core',
   'area' => 'language',
+  'editedon' => null,
+), '', true, true);
+$settings['manager_login_url_alternate']= $xpdo->newObject('modSystemSetting');
+$settings['manager_login_url_alternate']->fromArray(array (
+  'key' => 'manager_login_url_alternate',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
 $settings['manager_theme']= $xpdo->newObject('modSystemSetting');

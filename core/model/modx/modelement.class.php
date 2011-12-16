@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -53,6 +53,11 @@ class modElement extends modAccessibleSimpleObject {
      */
     public $_content= '';
     /**
+     * The source of the element.
+     * @var string
+     */
+    public $_source= null;    
+    /**
      * The output of the element.
      * @var string
      */
@@ -102,6 +107,9 @@ class modElement extends modAccessibleSimpleObject {
     '(',')','+','=','[',']','{','}','\'','"',';',':','\\','/','<','>','?'
     ,' ',',','`','~');
 
+    protected $staticContentChanged = false;
+    protected $staticSourceChanged = false;
+
     /**
      * Provides custom handling for retrieving the properties field of an Element.
      *
@@ -127,6 +135,8 @@ class modElement extends modAccessibleSimpleObject {
                     $this->xpdo->lexicon->load($property['lexicon']);
                 }
                 $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+                $property['area'] = !empty($property['area']) ? $property['area'] : '';
+                $property['area_trans'] = $this->xpdo->lexicon($property['area']);
 
                 if (!empty($property['options'])) {
                     foreach ($property['options'] as &$option) {
@@ -147,27 +157,25 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
-     * Overridden to handle changes to the static_file source.
-     *
-     * {@inheritdoc}
-     */
-    public function set($k, $v= null, $vType= '') {
-        $set = parent::set($k, $v, $vType);
-        if ($k === 'static_file' && $set && $this->isStatic()) {
-            $this->setContent($this->getFileContent());
-        }
-        return $set;
-    }
-
-    /**
      * Overridden to handle changes to content managed in an external file.
      *
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
-        $staticContentChange = $this->isStatic() && $this->isDirty('content');
+        $this->staticContentChanged = $this->isStatic() && $this->isDirty('content');
+        $this->staticSourceChanged = $this->isStatic() && ($this->isDirty('static') || $this->isDirty('static_file') || $this->isDirty('source'));
+        if ($this->staticSourceChanged()) {
+            $staticContent = $this->getFileContent();
+            if ($staticContent !== $this->get('content')) {
+                if ($staticContent !== '') {
+                    $this->setContent($staticContent);
+                } elseif ($this->get('content') !== '') {
+                    $this->staticContentChanged = true;
+                }
+            }
+        }
         $saved = parent::save($cacheFlag);
-        if ($saved && $staticContentChange) {
+        if ($saved && $this->staticContentChanged()) {
             $saved = $this->setFileContent($this->get('content'));
         }
         return $saved;
@@ -267,7 +275,7 @@ class modElement extends modAccessibleSimpleObject {
             $this->_output = $this->xpdo->elementCache[$this->_tag];
             $this->_processed = true;
         } else {
-	        $this->filterInput();
+            $this->filterInput();
             $this->getContent(is_string($content) ? array('content' => $content) : array());
         }
         return $this->_result;
@@ -636,6 +644,7 @@ class modElement extends modAccessibleSimpleObject {
                         'options' => $property[3],
                         'value' => $property[4],
                         'lexicon' => !empty($property[5]) ? $property[5] : null,
+                        'area' => !empty($property[6]) ? $property[6] : '',
                     );
                 } elseif (is_array($property) && isset($property['value'])) {
                     $key = $property['name'];
@@ -646,6 +655,7 @@ class modElement extends modAccessibleSimpleObject {
                         'options' => isset($property['options']) ? $property['options'] : array(),
                         'value' => $property['value'],
                         'lexicon' => !empty($property['lexicon']) ? $property['lexicon'] : null,
+                        'area' => !empty($property['area']) ? $property['area'] : '',
                     );
                 } else {
                     $key = $propKey;
@@ -656,6 +666,7 @@ class modElement extends modAccessibleSimpleObject {
                         'options' => array(),
                         'value' => $property,
                         'lexicon' => null,
+                        'area' => '',
                     );
                 }
 
@@ -703,6 +714,7 @@ class modElement extends modAccessibleSimpleObject {
                     $added = true;
                 } else {
                     if ($propertySet->isNew()) $propertySet->save();
+                    /** @var modElementPropertySet $link */
                     $link= $this->xpdo->newObject('modElementPropertySet');
                     $link->set('element', $this->get('id'));
                     $link->set('element_class', $this->_class);
@@ -767,19 +779,35 @@ class modElement extends modAccessibleSimpleObject {
     public function getSource($contextKey = '',$fallbackToDefault = true) {
         if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
 
-        $c = $this->xpdo->newQuery('sources.modMediaSource');
-        $c->innerJoin('sources.modMediaSourceElement','SourceElement');
-        $c->where(array(
-            'SourceElement.object' => $this->get('id'),
-            'SourceElement.object_class' => $this->_class,
-            'SourceElement.context_key' => $contextKey,
-        ));
-        $source = $this->xpdo->getObject('sources.modMediaSource',$c);
-        if (!$source && $fallbackToDefault) {
-            $source = modMediaSource::getDefaultSource($this->xpdo);
+        $source = $this->_source; 
+
+        if (empty($source)) {
+
+            $c = $this->xpdo->newQuery('sources.modMediaSource');
+            $c->innerJoin('sources.modMediaSourceElement','SourceElement');
+            $c->where(array(
+                'SourceElement.object' => $this->get('id'),
+                'SourceElement.object_class' => $this->_class,
+                'SourceElement.context_key' => $contextKey,
+            ));
+            $source = $this->xpdo->getObject('sources.modMediaSource',$c);
+            if (!$source && $fallbackToDefault) {
+                $source = modMediaSource::getDefaultSource($this->xpdo);
+            }
+            $this->setSource($source);
         }
+        
         return $source;
     }
+    
+    /**
+     * Setter method for the source class var.
+     *
+     * @param string $source The source to use for this element.
+     */
+    public function setSource($source) {
+        $this->_source = $source;
+    }    
 
     /**
      * Get the stored sourceCache for a context
@@ -805,5 +833,21 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function isStatic() {
         return $this->get('static');
+    }
+
+    /**
+     * Return if static content is changed
+     * @return boolean
+     */
+    public function staticContentChanged() {
+        return (boolean) $this->staticContentChanged;
+    }
+
+    /**
+     * Return if static source is changed
+     * @return boolean
+     */
+    public function staticSourceChanged() {
+        return (boolean) $this->staticSourceChanged;
     }
 }

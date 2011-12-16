@@ -28,8 +28,8 @@ class modElementTvUpdateProcessor extends modElementUpdateProcessor {
     public $languageTopics = array('tv','category');
     public $permission = 'save_tv';
     public $objectType = 'tv';
-    public $beforeRemoveEvent = 'OnBeforeTVFormSave';
-    public $afterRemoveEvent = 'OnTVFormSave';
+    public $beforeSaveEvent = 'OnBeforeTVFormSave';
+    public $afterSaveEvent = 'OnTVFormSave';
 
     public function beforeSave() {
         $this->setInputProperties();
@@ -202,6 +202,10 @@ class modElementTvUpdateProcessor extends modElementUpdateProcessor {
                 }
             }
         }
+    }
+
+    public function cleanup() {
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'default_text')), array('previous_category' => $this->previousCategory)));
     }
 }
 return 'modElementTvUpdateProcessor';

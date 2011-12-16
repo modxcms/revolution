@@ -10,10 +10,10 @@
  * @updated 2011-10-23
  */
 // $_lang['perm.about_desc'] = 'The About page.';
-$_lang['perm.about_desc'] = 'O MODX Revolution.';
+$_lang['perm.about_desc'] = 'Stránka "O MODX Revolution".';
 
 // $_lang['perm.access_permissions_desc'] = 'Any Access Permission-related pages and actions.';
-$_lang['perm.access_permissions_desc'] = 'Přístup k stránkám s oprávněním.';
+$_lang['perm.access_permissions_desc'] = 'Přístup na stránky spojené s přístupovými právy a akcemi.';
 
 // $_lang['perm.actions_desc'] = 'The Actions page.';
 $_lang['perm.actions_desc'] = 'Správa akcí.';
@@ -46,7 +46,7 @@ $_lang['perm.copy_desc'] = 'Schopnost kopírovat objekty.';
 $_lang['perm.countries_desc'] = 'Možnost zobrazit seznam zemí.';
 
 // $_lang['perm.create_desc'] = 'Basic "create" access on new objects.';
-$_lang['perm.create_desc'] = 'Možnost vytvořit nové objekty.';
+$_lang['perm.create_desc'] = 'Obecná možnost vytvořit nové objekty.';
 
 // $_lang['perm.credits_desc'] = 'View the Credits page.';
 $_lang['perm.credits_desc'] = 'Možnost zobrazit stránku s poděkováním.';
@@ -54,53 +54,56 @@ $_lang['perm.credits_desc'] = 'Možnost zobrazit stránku s poděkováním.';
 // $_lang['perm.customize_forms_desc'] = 'View and manage the Form Customization page.';
 $_lang['perm.customize_forms_desc'] = 'Možnost zobrazit a spravovat stránku "Přizpůsobení formulářů".';
 
+// $_lang['perm.dashboards_desc'] = 'View and manage Custom Dashboards.';
+$_lang['perm.dashboards_desc'] = 'Zobrazení a správa vlastních nástěnek.';
+
 // $_lang['perm.database_desc'] = 'The System Info page.';
 $_lang['perm.database_desc'] = 'Možnost zobrazení stránky "Systémové informace".';
 
 // $_lang['perm.database_truncate_desc'] = 'The ability to truncate a database table.';
-$_lang['perm.database_truncate_desc'] = 'Možnost vyprázdnění databázové tabulky.';
+$_lang['perm.database_truncate_desc'] = 'Možnost vyprázdnit databázové tabulky.';
 
 // $_lang['perm.delete_desc'] = 'Basic "delete" access on objects.';
-$_lang['perm.delete_desc'] = 'Možnost odstranění objektů.';
+$_lang['perm.delete_desc'] = 'Obecná možnost odstranit objekty.';
 
 // $_lang['perm.delete_category_desc'] = 'To delete or remove any Categories.';
-$_lang['perm.delete_category_desc'] = 'Možnost odstranit každou kategorii.';
+$_lang['perm.delete_category_desc'] = 'Možnost odstranit kategorii.';
 
 // $_lang['perm.delete_chunk_desc'] = 'To delete or remove any Chunks.';
-$_lang['perm.delete_chunk_desc'] = 'Možnost ostranit každý chunk';
+$_lang['perm.delete_chunk_desc'] = 'Možnost ostranit chunk';
 
 // $_lang['perm.delete_context_desc'] = 'To delete or remove any Contexts.';
-$_lang['perm.delete_context_desc'] = 'Možnost ostranit každý kontext.';
+$_lang['perm.delete_context_desc'] = 'Možnost ostranit kontext.';
 
 // $_lang['perm.delete_document_desc'] = 'To delete or remove any Resource.';
-$_lang['perm.delete_document_desc'] = 'Možnost odstranit každý dokument.';
+$_lang['perm.delete_document_desc'] = 'Možnost odstranit dokument.';
 
 // $_lang['perm.delete_eventlog_desc'] = 'To empty the Event Log.';
-$_lang['perm.delete_eventlog_desc'] = 'Možnost vyprázdnit události správce obsahu.';
+$_lang['perm.delete_eventlog_desc'] = 'Možnost odstranit události v "Události správce obsahu".';
 
 // $_lang['perm.delete_plugin_desc'] = 'To delete or remove any Plugins.';
-$_lang['perm.delete_plugin_desc'] = 'Možnost odstranit každý plugin.';
+$_lang['perm.delete_plugin_desc'] = 'Možnost odstranit plugin.';
 
 // $_lang['perm.delete_propertyset_desc'] = 'To delete or remove any Property Sets.';
-$_lang['perm.delete_propertyset_desc'] = 'Možnost odstranit každou sadu vlastností.';
+$_lang['perm.delete_propertyset_desc'] = 'Možnost odstranit sadu vlastností.';
 
 // $_lang['perm.delete_role_desc'] = 'To delete or remove any Roles.';
-$_lang['perm.delete_role_desc'] = 'Možnost odstranit každou roli.';
+$_lang['perm.delete_role_desc'] = 'Možnost odstranit uživatelskou roli.';
 
 // $_lang['perm.delete_snippet_desc'] = 'To delete or remove any Snippets.';
-$_lang['perm.delete_snippet_desc'] = 'Možnost odstranit každý snippet.';
+$_lang['perm.delete_snippet_desc'] = 'Možnost odstranit snippet.';
 
 // $_lang['perm.delete_template_desc'] = 'To delete or remove any Templates.';
-$_lang['perm.delete_template_desc'] = 'Možnost odstranit každou šablonu.';
+$_lang['perm.delete_template_desc'] = 'Možnost odstranit šablonu.';
 
 // $_lang['perm.delete_tv_desc'] = 'To delete or remove any Template Variables.';
-$_lang['perm.delete_tv_desc'] = 'Možnost odstranit každou template variable.';
+$_lang['perm.delete_tv_desc'] = 'Možnost odstranit Template Variable.';
 
 // $_lang['perm.delete_user_desc'] = 'To delete or remove any Users.';
-$_lang['perm.delete_user_desc'] = 'Možnost odstranit každého uživatele.';
+$_lang['perm.delete_user_desc'] = 'Možnost odstranit uživatele.';
 
 // $_lang['perm.directory_chmod_desc'] = 'To chmod a physical directory.';
-$_lang['perm.directory_chmod_desc'] = 'Možnost nastavit atributy složce.';
+$_lang['perm.directory_chmod_desc'] = 'Možnost nastavit složce atributy.';
 
 // $_lang['perm.directory_create_desc'] = 'To create a physical directory.';
 $_lang['perm.directory_create_desc'] = 'Možnost vytvořit složku.';
@@ -133,10 +136,10 @@ $_lang['perm.edit_locked_desc'] = 'Možnost přepisování uzamčených dokument
 $_lang['perm.edit_plugin_desc'] = 'Možnost upravovat pluginy.';
 
 // $_lang['perm.edit_propertyset_desc'] = 'To edit any Property Sets.';
-$_lang['perm.edit_propertyset_desc'] = 'Možnost upravovat sadu vlastností.';
+$_lang['perm.edit_propertyset_desc'] = 'Možnost upravovat sady vlastností.';
 
 // $_lang['perm.edit_role_desc'] = 'To edit any Roles.';
-$_lang['perm.edit_role_desc'] = 'Možnost upravovat role.';
+$_lang['perm.edit_role_desc'] = 'Možnost upravovat uživatelské role.';
 
 // $_lang['perm.edit_snippet_desc'] = 'To edit any Snippets.';
 $_lang['perm.edit_snippet_desc'] = 'Možnost upravovat snippety.';
@@ -145,13 +148,13 @@ $_lang['perm.edit_snippet_desc'] = 'Možnost upravovat snippety.';
 $_lang['perm.edit_template_desc'] = 'Možnost upravovat šablony.';
 
 // $_lang['perm.edit_tv_desc'] = 'To edit any Template Variables.';
-$_lang['perm.edit_tv_desc'] = 'Možnost upravování každé template variable.';
+$_lang['perm.edit_tv_desc'] = 'Možnost upravovat Template Variable.';
 
 // $_lang['perm.edit_user_desc'] = 'To edit any User.';
 $_lang['perm.edit_user_desc'] = 'Možnost upravovat uživatele.';
 
 // $_lang['perm.element_tree_desc'] = 'The ability to view the Elements Tree on the left nav.';
-$_lang['perm.element_tree_desc'] = 'Zobrazit strom elementů v levé navigační části.';
+$_lang['perm.element_tree_desc'] = 'Možnost zobrazit strom "Elementy" v levém stromovém menu.';
 
 // $_lang['perm.empty_cache_desc'] = 'To empty the site cache.';
 $_lang['perm.empty_cache_desc'] = 'Vyprázdnit cache.';
@@ -165,6 +168,9 @@ $_lang['perm.error_log_view_desc'] = 'Možnost zobrazení chybových zpráv.';
 // $_lang['perm.export_static_desc'] = 'To export the site to static HTML.';
 $_lang['perm.export_static_desc'] = 'Možnost exportování statických stránek.';
 
+// $_lang['perm.file_create_desc'] = 'To create a file.';
+$_lang['perm.file_create_desc'] = 'Vytváření souborů';
+
 // $_lang['perm.file_list_desc'] = 'To list files within a given physical directory.';
 $_lang['perm.file_list_desc'] = 'Možnost zobrazení seznamu souborů ve složce.';
 
@@ -175,10 +181,10 @@ $_lang['perm.file_manager_desc'] = 'Možnost použití souborového manažeru.';
 $_lang['perm.file_remove_desc'] = 'Možnost odstranění souborů.';
 
 // $_lang['perm.file_tree_desc'] = 'To view the Files Tree on the left nav.';
-$_lang['perm.file_tree_desc'] = 'Možnost zobrazení stromu souborů v levé navigační části.';
+$_lang['perm.file_tree_desc'] = 'Možnost zobrazit strom "Soubory" v levém stromovém menu.';
 
 // $_lang['perm.file_update_desc'] = 'To update the content of physical files.';
-$_lang['perm.file_update_desc'] = 'Možnost aktualizování obsahu souboru.';
+$_lang['perm.file_update_desc'] = 'Možnost upravovat obsah fyzických souborů.';
 
 // $_lang['perm.file_upload_desc'] = 'To upload files to a directory.';
 $_lang['perm.file_upload_desc'] = 'Možnost nahrání souboru do adresáře.';
@@ -190,7 +196,7 @@ $_lang['perm.file_view_desc'] = 'Možnost zobrazení obsahu souboru.';
 $_lang['perm.flush_sessions_desc'] = 'Možnost resetovat všechny přístupy.';
 
 // $_lang['perm.frames_desc'] = 'To use the MODX Manager UI at all.';
-$_lang['perm.frames_desc'] = 'Možnost použití MODX správce obsahu.';
+$_lang['perm.frames_desc'] = 'Možnost používat MODX správce obsahu.';
 
 // $_lang['perm.help_desc'] = 'To view the Help page.';
 $_lang['perm.help_desc'] = 'Možnost zobrazení nápovědy.';
@@ -202,73 +208,133 @@ $_lang['perm.home_desc'] = 'Možnost zobrazení úvodní stránky.';
 $_lang['perm.import_static_desc'] = 'Možnost použití nebo zobrazení importovacích stránek.';
 
 // $_lang['perm.languages_desc'] = 'To edit or view Lexicon Languages.';
-$_lang['perm.languages_desc'] = 'Možnost upravování nebo zobrazení slovníků.';
+$_lang['perm.languages_desc'] = 'Možnost zobrazení a úpravy slovníků.';
 
 // $_lang['perm.lexicons_desc'] = 'To edit or view Lexicons and Internationalization.';
-$_lang['perm.lexicons_desc'] = 'Možnost upravování nebo zobrazení slovníků a internacionalizace.';
+$_lang['perm.lexicons_desc'] = 'Možnost zobrazení a úpravy slovníků a internacionalizace.';
 
 // $_lang['perm.list_desc'] = 'Basic permission to "list" any object. List means to get a collection of objects.';
-$_lang['perm.list_desc'] = 'Základní oprávnění zobrazit "seznam" objektu. Seznam znamená kolekce objektů.';
+$_lang['perm.list_desc'] = 'Obecné oprávnění "procházet seznam" objektů. Seznam znamená kolekce objektů.';
 
 // $_lang['perm.load_desc'] = 'Basic permission to "load" any object, or be able to return it as an instance at all.';
-$_lang['perm.load_desc'] = 'Základní oprávnění načíst objekt, nebo aspoň vrátit instanci tohoto objektu.';
+$_lang['perm.load_desc'] = 'Obecné oprávnění "načíst" objekt nebo schopnost vrátit instanci tohoto objektu.';
 
 // $_lang['perm.logout_desc'] = 'To be able to logout as a user.';
-$_lang['perm.logout_desc'] = 'Možnost odhlášení.';
+$_lang['perm.logout_desc'] = 'Možnost odhlásit se.';
 
 // $_lang['perm.logs_desc'] = 'To view the logs, such as error and manager logs.';
 $_lang['perm.logs_desc'] = 'Možnost zobrazit logy, jako například chyby nebo obsahové chyby.';
 
+// $_lang['perm.menu_reports_desc'] = 'Show the top menu item "Reports".';
+$_lang['perm.menu_reports_desc'] = 'Zobrazit položku "Hlášení" v horním menu.';
+
+// $_lang['perm.menu_security_desc'] = 'Show the top menu item "Security".';
+$_lang['perm.menu_security_desc'] = 'Zobrazit položku "Bezpečnost" v horním menu.';
+
+// $_lang['perm.menu_site_desc'] = 'Show the top menu item "Site".';
+$_lang['perm.menu_site_desc'] = 'Zobrazit položku "Portál" v horním menu';
+
+// $_lang['perm.menu_support_desc'] = 'Show the top menu item "Support".';
+$_lang['perm.menu_support_desc'] = 'Zobrazit položku "Podpora" v horním menu';
+
+// $_lang['perm.menu_system_desc'] = 'Show the top menu item "System".';
+$_lang['perm.menu_system_desc'] = 'Zobrazit položku "Systém" v horním menu.';
+
+// $_lang['perm.menu_tools_desc'] = 'Show the top menu item "Tools".';
+$_lang['perm.menu_tools_desc'] = 'Zobrazit položku "Nástroje" v horním menu.';
+
+// $_lang['perm.menu_user_desc'] = 'Show the top menu item "User".';
+$_lang['perm.menu_user_desc'] = 'Zobrazit položku "Uživatel" v horním menu.';
+
 // $_lang['perm.menus_desc'] = 'To edit or save any top Menu items.';
-$_lang['perm.menus_desc'] = 'Možnost upravovat nebo ukládat horní položky menu.';
+$_lang['perm.menus_desc'] = 'Možnost upravovat a ukládat položky horního menu.';
 
 // $_lang['perm.messages_desc'] = 'To send or view any personal Messages.';
-$_lang['perm.messages_desc'] = 'Možnost poslat nebo zobrazit každou osobní zprávu.';
+$_lang['perm.messages_desc'] = 'Možnost poslat a zobrazit osobní zprávu.';
 
 // $_lang['perm.move_desc'] = 'Basic "move" access on any object.';
-$_lang['perm.move_desc'] = 'Základní přesunutí každého objektu.';
+$_lang['perm.move_desc'] = 'Obecné právo pro "přesun" objektu.';
 
 // $_lang['perm.namespaces_desc'] = 'To edit or view Namespaces.';
-$_lang['perm.namespaces_desc'] = 'Možnost upravit nebo zobrazit jmenné prostory.';
+$_lang['perm.namespaces_desc'] = 'Možnost zobrazení a úpravy jmenných prostorů.';
 
 // $_lang['perm.new_category_desc'] = 'To create a new Category.';
-$_lang['perm.new_category_desc'] = 'Možnost vytvořit novou kategorii.';
+$_lang['perm.new_category_desc'] = 'Možnost vytvořit kategorii.';
 
 // $_lang['perm.new_chunk_desc'] = 'To create a new Chunk.';
-$_lang['perm.new_chunk_desc'] = 'Možnost vytvořit nový chunk.';
+$_lang['perm.new_chunk_desc'] = 'Možnost vytvořit chunk.';
 
 // $_lang['perm.new_context_desc'] = 'To create a new Context.';
-$_lang['perm.new_context_desc'] = 'Možnost vytvořit nový kontext.';
+$_lang['perm.new_context_desc'] = 'Možnost vytvořit kontext.';
 
 // $_lang['perm.new_document_desc'] = 'To create a new Resource.';
-$_lang['perm.new_document_desc'] = 'Možnost vytvořit nový dokument.';
+$_lang['perm.new_document_desc'] = 'Možnost vytvořit dokument.';
 
 // $_lang['perm.new_document_in_root_desc'] = 'To be able to create a Resource at the root level.';
 $_lang['perm.new_document_in_root_desc'] = 'Možnost vytvořit dokument na nejvyšší úrovni kontextu.';
 
 // $_lang['perm.new_plugin_desc'] = 'To create a new Plugin.';
-$_lang['perm.new_plugin_desc'] = 'Možnost vytvořit nový plugin.';
+$_lang['perm.new_plugin_desc'] = 'Možnost vytvořit plugin.';
 
 // $_lang['perm.new_propertyset_desc'] = 'To create a new Property Set.';
-$_lang['perm.new_propertyset_desc'] = 'Možnost vytvořit novou sadu vlastností.';
+$_lang['perm.new_propertyset_desc'] = 'Možnost vytvořit sadu vlastností.';
 
 // $_lang['perm.new_role_desc'] = 'To create a new Role.';
-$_lang['perm.new_role_desc'] = 'Možnost vytvořit novou roli.';
+$_lang['perm.new_role_desc'] = 'Možnost vytvořit roli.';
 
 // $_lang['perm.new_snippet_desc'] = 'To create a new Snippet.';
-$_lang['perm.new_snippet_desc'] = 'Možnost vytvořit nový snippet.';
+$_lang['perm.new_snippet_desc'] = 'Možnost vytvořit snippet.';
+
+// $_lang['perm.new_static_resource_desc'] = 'To create a new Static Resource.';
+$_lang['perm.new_static_resource_desc'] = 'Možnost vytvořit statický dokument.';
+
+// $_lang['perm.new_symlink_desc'] = 'To create a new SymLink.';
+$_lang['perm.new_symlink_desc'] = 'Možnost vytvořit symbolický odkaz.';
 
 // $_lang['perm.new_template_desc'] = 'To create a new Template.';
-$_lang['perm.new_template_desc'] = 'Možnost vytvořit novou šablonu.';
+$_lang['perm.new_template_desc'] = 'Možnost vytvořit šablonu.';
 
 // $_lang['perm.new_tv_desc'] = 'To create a new Template Variable.';
-$_lang['perm.new_tv_desc'] = 'Možnost vytvořit novou template variable.';
+$_lang['perm.new_tv_desc'] = 'Možnost vytvořit Template Variable.';
 
 // $_lang['perm.new_user_desc'] = 'To create a new User.';
-$_lang['perm.new_user_desc'] = 'Možnost vytvořit nového uživatele.';
+$_lang['perm.new_user_desc'] = 'Možnost vytvořit uživatele.';
+
+// $_lang['perm.new_weblink_desc'] = 'To create a new WebLink.';
+$_lang['perm.new_weblink_desc'] = 'Možnost vytvořit webový odkaz.';
 
 // $_lang['perm.packages_desc'] = 'To use any Transport Packages in the Package Management system.';
-$_lang['perm.packages_desc'] = 'Možnost používání balíčků ve správci balíčků.';
+$_lang['perm.packages_desc'] = 'Možnost používat balíčky ve správci balíčků.';
+
+// $_lang['perm.policy_delete_desc'] = 'To delete an Access Policy.';
+$_lang['perm.policy_delete_desc'] = 'Možnost odstranit přístupovou politiku';
+
+// $_lang['perm.policy_edit_desc'] = 'To edit an Access Policy.';
+$_lang['perm.policy_edit_desc'] = 'Možnost upravovat přístupovou politiku.';
+
+// $_lang['perm.policy_new_desc'] = 'To create a new Access Policy.';
+$_lang['perm.policy_new_desc'] = 'Možnost vytvořit přístupovou politiku.';
+
+// $_lang['perm.policy_save_desc'] = 'To save an Access Policy.';
+$_lang['perm.policy_save_desc'] = 'Možnost uložit přístupovou politiku.';
+
+// $_lang['perm.policy_view_desc'] = 'To view an Access Policy.';
+$_lang['perm.policy_view_desc'] = 'Možnost zobrazit přístupové politiky.';
+
+// $_lang['perm.policy_template_delete_desc'] = 'To delete an Access Policy Template.';
+$_lang['perm.policy_template_delete_desc'] = 'Možnost odstranit šablonu přístupové politiky.';
+
+// $_lang['perm.policy_template_edit_desc'] = 'To edit an Access Policy Template.';
+$_lang['perm.policy_template_edit_desc'] = 'Možnost upravit šablonu přístupové politiky.';
+
+// $_lang['perm.policy_template_new_desc'] = 'To create a new Access Policy Template.';
+$_lang['perm.policy_template_new_desc'] = 'Možnost vytvořit šablonu přístupové politiky';
+
+// $_lang['perm.policy_template_save_desc'] = 'To save an Access Policy Template.';
+$_lang['perm.policy_template_save_desc'] = 'Možnost uložit šablonu přístupové politiky.';
+
+// $_lang['perm.policy_template_view_desc'] = 'To view an Access Policy Template.';
+$_lang['perm.policy_template_view_desc'] = 'Možnost zobrazit šablonu přístupové politiky.';
 
 // $_lang['perm.property_sets_desc'] = 'To view and edit Properties and Property Sets.';
 $_lang['perm.property_sets_desc'] = 'Možnost zobrazení a upravení vlastností a sad vlastností.';
@@ -290,6 +356,33 @@ $_lang['perm.remove_desc'] = 'Možnost odstranění každého objektu.';
 
 // $_lang['perm.remove_locks_desc'] = 'To remove all existing Locks throughout the site.';
 $_lang['perm.remove_locks_desc'] = 'Možnost odstranění zámků na všech stránkách.';
+
+// $_lang['perm.resourcegroup_delete_desc'] = 'To delete a Resource Group.';
+$_lang['perm.resourcegroup_delete_desc'] = 'Odstranění skupiny dokumentů.';
+
+// $_lang['perm.resourcegroup_edit_desc'] = 'To edit a Resource Group.';
+$_lang['perm.resourcegroup_edit_desc'] = 'Úprava skupiny dokumentů.';
+
+// $_lang['perm.resourcegroup_resource_edit_desc'] = 'To edit Resources in a Resource Group.';
+$_lang['perm.resourcegroup_resource_edit_desc'] = 'Úprava dokumentů v rámci skupiny dokumentů.';
+
+// $_lang['perm.resourcegroup_resource_list_desc'] = 'To view or list Resources in a Resource Group.';
+$_lang['perm.resourcegroup_resource_list_desc'] = 'Zobrazení a procházení dokumentů v rámci skupiny dokumentů.';
+
+// $_lang['perm.resourcegroup_new_desc'] = 'To create a new Resource Group.';
+$_lang['perm.resourcegroup_new_desc'] = 'Vytváření skupin dokumentů.';
+
+// $_lang['perm.resourcegroup_save_desc'] = 'To save a Resource Group.';
+$_lang['perm.resourcegroup_save_desc'] = 'Ukládání skupin dokumentů.';
+
+// $_lang['perm.resourcegroup_view_desc'] = 'To list Resource Groups.';
+$_lang['perm.resourcegroup_view_desc'] = 'Procházení skupin dokumentů.';
+
+// $_lang['perm.resource_quick_create_desc'] = 'To be able to use Quick Create Resource in the left-hand tree.';
+$_lang['perm.resource_quick_create_desc'] = 'Možnost rychle vytvořit dokument v levém stromovém menu dokumentů.';
+
+// $_lang['perm.resource_quick_update_desc'] = 'To be able to use Quick Update Resource in the left-hand tree.';
+$_lang['perm.resource_quick_update_desc'] = 'Možnost rychle upravit dokument v levém stromovém menu dokumentů.';
 
 // $_lang['perm.resource_tree_desc'] = 'To view the Resource Tree in the left nav.';
 $_lang['perm.resource_tree_desc'] = 'Možnost zobrazení stromu dokumentů v levé navigační části';
@@ -377,6 +470,27 @@ $_lang['perm.unpublish_desc'] = 'Možnost ukončit publikaci zdroje.';
 
 // $_lang['perm.unpublish_document_desc'] = 'To unpublish any Resources.';
 $_lang['perm.unpublish_document_desc'] = 'Možnost ukončit publikaci každého zdroje.';
+
+// $_lang['perm.usergroup_delete_desc'] = 'To delete a User Group.';
+$_lang['perm.usergroup_delete_desc'] = 'Odstranění uživatelské skupiny.';
+
+// $_lang['perm.usergroup_edit_desc'] = 'To edit a User Group.';
+$_lang['perm.usergroup_edit_desc'] = 'Úprava uživatelské skupiny.';
+
+// $_lang['perm.usergroup_user_edit_desc'] = 'To edit Resources in a User Group.';
+$_lang['perm.usergroup_user_edit_desc'] = 'Úprava uživatelů v uživatelské skupině.';
+
+// $_lang['perm.usergroup_user_list_desc'] = 'To view or list Users in a User Group.';
+$_lang['perm.usergroup_user_list_desc'] = 'Zobrazení a procházení uživatelů v uživatelské skupině.';
+
+// $_lang['perm.usergroup_new_desc'] = 'To create a new User Group.';
+$_lang['perm.usergroup_new_desc'] = 'Vytváření uživatelské skupiny.';
+
+// $_lang['perm.usergroup_save_desc'] = 'To save a User Group.';
+$_lang['perm.usergroup_save_desc'] = 'Uložení uživatelské skupiny.';
+
+// $_lang['perm.usergroup_view_desc'] = 'To view a User Group.';
+$_lang['perm.usergroup_view_desc'] = 'Zobrazení uživatelské skupiny.';
 
 // $_lang['perm.view_desc'] = 'Basic permission to "view" any object.';
 $_lang['perm.view_desc'] = 'Možnost zobrazení každého objektu.';

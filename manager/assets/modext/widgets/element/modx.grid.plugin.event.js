@@ -14,7 +14,7 @@ MODx.grid.PluginEvent = function(config) {
         ,dataIndex: 'enabled'
         ,editable: true
         ,width: 80
-        ,sortable: false
+        ,sortable: true
     });
     Ext.applyIf(config,{
         title: _('system_events')

@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -377,18 +377,17 @@ class modX extends xPDO {
     }
 
     /**
-     * Turn an associative array into a valid query string.
+     * Turn an associative or numeric array into a valid query string.
      *
      * @static
-     * @param array $parameters An associative array of parameters.
+     * @param array $parameters An associative or numeric-indexed array of parameters.
+     * @param string $numPrefix A string prefix added to the numeric-indexed array keys.
+     * Ignored if associative array is used.
+     * @param string $argSeparator The string used to separate arguments in the resulting query string.
      * @return string A valid query string representing the parameters.
      */
-    public static function toQueryString(array $parameters = array()) {
-        $qs = array();
-        foreach ($parameters as $paramKey => $paramVal) {
-            $qs[] = urlencode($paramKey) . '=' . urlencode($paramVal);
-        }
-        return implode('&', $qs);
+    public static function toQueryString(array $parameters = array(), $numPrefix = '', $argSeparator = '&') {
+        return http_build_query($parameters, $numPrefix, $argSeparator);
     }
 
     /**
@@ -1820,12 +1819,14 @@ class modX extends xPDO {
      * context directly.
      *
      * @param string $contextKey The key of the context to switch to.
+     * @param boolean $reload Set to true to force the context data to be regenerated
+     * before being switched to.
      * @return boolean True if the switch was successful, otherwise false.
      */
-    public function switchContext($contextKey) {
+    public function switchContext($contextKey, $reload = false) {
         $switched= false;
         if ($this->context->key != $contextKey) {
-            $switched= $this->_initContext($contextKey);
+            $switched= $this->_initContext($contextKey, $reload);
             if ($switched) {
                 if (is_array($this->config)) {
                     $this->setPlaceholders($this->config, '+');
@@ -1935,11 +1936,13 @@ class modX extends xPDO {
      * @access public
      * @param string $key
      * @param array $params
+     * @param string $language
      * @return null|string The translated string, or null if none is set
      */
-    public function lexicon($key,$params = array()) {
+    public function lexicon($key,$params = array(),$language = '') {
+        $language = !empty($language) ? $language : $this->getOption('cultureKey',null,'en');
         if ($this->lexicon) {
-            return $this->lexicon->process($key,$params);
+            return $this->lexicon->process($key,$params,$language);
         } else {
             $this->log(modX::LOG_LEVEL_ERROR,'Culture not initialized; cannot use lexicon.');
         }
@@ -2084,7 +2087,41 @@ class modX extends xPDO {
         }
         return $removed;
     }
-    
+
+    /**
+     * Reload data for a specified Context, without switching to it.
+     *
+     * Note that the Context will be loaded even if it is not already.
+     *
+     * @param string $key The key of the Context to (re)load.
+     * @return boolean True if the Context was (re)loaded successfully; false otherwise.
+     */
+    public function reloadContext($key = null) {
+        $reloaded = false;
+        if ($this->context instanceof modContext) {
+            if (empty($key)) {
+                $key = $this->context->get('key');
+            }
+            if ($key === $this->context->get('key')) {
+                $reloaded = $this->_initContext($key, true);
+                if ($reloaded && is_array($this->config)) {
+                    $this->setPlaceholders($this->config, '+');
+                }
+            } else {
+                if (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext)) {
+                    $this->contexts[$key] = $this->newObject('modContext');
+                    $this->contexts[$key]->_fields['key']= $key;
+                }
+                $reloaded = $this->contexts[$key]->prepare(true);
+            }
+        } elseif (!empty($key) && (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext))) {
+            $this->contexts[$key] = $this->newObject('modContext');
+            $this->contexts[$key]->_fields['key']= $key;
+            $reloaded = $this->contexts[$key]->prepare(true);
+        }
+        return $reloaded;
+    }
+
     /**
      * Loads a specified Context.
      *
@@ -2093,9 +2130,10 @@ class modX extends xPDO {
      *
      * @access protected
      * @param string $contextKey A context identifier.
+     * @param boolean $regenerate If true, force regeneration of the context even if already initialized.
      * @return boolean True if the context was properly initialized
      */
-    protected function _initContext($contextKey) {
+    protected function _initContext($contextKey, $regenerate = false) {
         $initialized= false;
         $oldContext = is_object($this->context) ? $this->context->get('key') : '';
         if (isset($this->contexts[$contextKey])) {
@@ -2105,7 +2143,7 @@ class modX extends xPDO {
             $this->context->_fields['key']= $contextKey;
         }
         if ($this->context) {
-            if (!$this->context->prepare()) {
+            if (!$this->context->prepare((boolean) $regenerate)) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
                 if ($this->context->checkPolicy('load')) {
@@ -2114,6 +2152,11 @@ class modX extends xPDO {
                     $this->eventMap= & $this->context->eventMap;
                     $this->pluginCache= & $this->context->pluginCache;
                     $this->config= array_merge($this->_systemConfig, $this->context->config);
+                    $iniTZ = ini_get('date.timezone');
+                    $cfgTZ = $this->getOption('date_timezone', null, 'UTC', true);
+                    if (empty($iniTZ) || $cfgTZ !== $iniTZ) {
+                        date_default_timezone_set($cfgTZ);
+                    }
                     if ($this->_initialized) {
                         $this->getUser();
                     }

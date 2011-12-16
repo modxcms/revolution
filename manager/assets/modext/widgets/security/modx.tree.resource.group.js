@@ -48,7 +48,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
                 text: _('resource_group_remove')
                 ,handler: this.removeResourceGroup
             });
-        } else if (n.attributes.type == 'modResource') {
+        } else if (n.attributes.type == 'modResource' || n.attributes.type == 'modDocument') {
             m.push({
                 text: _('resource_group_access_remove')
                 ,handler: this.removeResource
@@ -145,11 +145,11 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
         var docid = n.attributes.id.split('_'); docid = 'n_'+docid[1];
 
         if (e.target.findChild('id',docid) !== null) { return false; }
-        if (n.attributes.type != 'modResource') { return false; }
+        if (n.attributes.type != 'modResource' && n.attributes.type != 'modDocument') { return false; }
         if (e.point != 'append') { return false; }
         if (a.type != 'modResourceGroup') { return false; }
-        if (a.leaf === true) { return false; }
-        return true;
+        return a.leaf !== true;
+
     }
 	
     ,createDGD: function(n, text){

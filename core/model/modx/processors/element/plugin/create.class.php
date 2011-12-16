@@ -23,12 +23,13 @@ class modPluginCreateProcessor extends modElementCreateProcessor {
     public $languageTopics = array('chunk');
     public $permission = 'new_plugin';
     public $elementType = 'plugin';
+    public $objectType = 'plugin';
     public $beforeSaveEvent = 'OnBeforePluginFormSave';
     public $afterSaveEvent = 'OnPluginFormSave';
 
-    public function postSaveElement() {
+    public function afterSave() {
         $this->saveEvents();
-        return true;
+        return parent::afterSave();
     }
 
     /**
@@ -44,19 +45,19 @@ class modPluginCreateProcessor extends modElementCreateProcessor {
                 if (!empty($event['enabled'])) {
                     /** @var modPluginEvent $pluginEvent */
                     $pluginEvent = $this->modx->getObject('modPluginEvent',array(
-                        'pluginid' => $this->element->get('id'),
+                        'pluginid' => $this->object->get('id'),
                         'event' => $event['name'],
                     ));
                     if (empty($pluginEvent)) {
                         $pluginEvent = $this->modx->newObject('modPluginEvent');
                     }
-                    $pluginEvent->set('pluginid',$this->element->get('id'));
+                    $pluginEvent->set('pluginid',$this->object->get('id'));
                     $pluginEvent->set('event',$event['name']);
                     $pluginEvent->set('priority',$event['priority']);
                     $pluginEvent->save();
                 } else {
                     $pluginEvent = $this->modx->getObject('modPluginEvent',array(
-                        'pluginid' => $this->element->get('id'),
+                        'pluginid' => $this->object->get('id'),
                         'event' => $event['name'],
                     ));
                     if (!empty($pluginEvent)) {

@@ -69,7 +69,6 @@ class ResourceDataManagerController extends modManagerController {
         $this->resource->set('createdon_adjusted',strftime('%c', $this->resource->get('createdon') + $server_offset_time));
         $this->resource->set('editedon_adjusted',strftime('%c', $this->resource->get('editedon') + $server_offset_time));
 
-        $buffer = '';
         $this->resource->_contextKey= $this->resource->get('context_key');
         $buffer = $this->modx->cacheManager->get($this->resource->getCacheKey(), array(
             xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
@@ -83,10 +82,18 @@ class ResourceDataManagerController extends modManagerController {
         $placeholders['resource'] = $this->resource;
 
         /* make preview url */
-        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'));
+        $this->getPreviewUrl();
         $placeholders['_ctx'] = $this->resource->get('context_key');
 
         return $placeholders;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreviewUrl() {
+        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),$this->resource->get('context_key'));
+        return $this->previewUrl;
     }
 
     /**

@@ -15,6 +15,7 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface {
         $o = '';
         /* do some config checks */
         $modx =& $this->modx;
+        $config_check_results = '';
         $success = include $this->modx->getOption('processors_path') . 'system/config_check.inc.php';
         if (!$success) {
             $o = $config_check_results;
