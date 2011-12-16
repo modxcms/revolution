@@ -416,6 +416,9 @@ $_lang['setting_manager_lang_attribute_desc'] = 'Geben Sie den Code für die Spr
 $_lang['setting_manager_language'] = 'Manager-Sprache';
 $_lang['setting_manager_language_desc'] = 'Wählen Sie die Sprache für den MODX-Content-Manager.';
 
+$_lang['setting_manager_login_url_alternate'] = 'Alternative Manager-Login-URL';
+$_lang['setting_manager_login_url_alternate_desc'] = 'Eine alternative URL, zu der ein nicht authentifizierter Benutzer geschickt wird, wenn es nötig ist, dass er sich in den Manager einloggt. Das Login-Formular dort muss den Benutzer in den Kontext "mgr" einloggen, damit dies funktioniert.';
+
 $_lang['setting_manager_login_start'] = 'Startseite für in den Manager eingeloggte Benutzer';
 $_lang['setting_manager_login_start_desc'] = 'Geben Sie die ID des Dokuments ein, zu dem Sie den Benutzer weiterleiten möchten, nachdem er sich in den MODX-Manager eingeloggt hat. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört, dass dieses veröffentlicht wurde und dass der Benutzer Zugriff darauf hat!</strong>';
 

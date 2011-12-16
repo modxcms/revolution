@@ -206,6 +206,9 @@ $_lang['setting_context_tree_sortdir_desc'] = 'L\'ordre de classement des contex
 $_lang['setting_cultureKey'] = 'Langue';
 $_lang['setting_cultureKey_desc'] = 'Sélectionnez la langue pour tous les contextes "non-manager", web inclus.';
 
+$_lang['date_timezone'] = 'Fuseau horaire par défaut';
+$_lang['date_timezone_desc'] = 'Contrôle le fuseau horaire par défaut de PHP (timezone). Si ce paramètre et vide ainsi que le paramètre date.timezone de PHP, UTC sera utilisé.';
+
 $_lang['setting_debug'] = 'Debug';
 $_lang['setting_debug_desc'] = 'Activez ou désactiver le debugging dans MODX et/ou définissez le niveau de error_reporting de PHP. \'\' = utiliser la valeur actuelle de error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), ou toute autre valeur de error_reporting valide (un entier).';
 
@@ -407,6 +410,9 @@ $_lang['setting_manager_lang_attribute_desc'] = 'Entrez le code de langue qui co
 
 $_lang['setting_manager_language'] = 'Langue du manager';
 $_lang['setting_manager_language_desc'] = 'Sélectionnez la langue pour le gestionnaire de contenu de MODX.';
+
+$_lang['setting_manager_login_url_alternate'] = 'URL alternative de connexion au manager';
+$_lang['setting_manager_login_url_alternate_desc'] = 'Une URL alternative vers laquelle envoyer les utilisateurs non identifiés au manager. Le formulaire de connexion doit identifier l\'utilisateur au contexte « mgr » pour fonctionner.';
 
 $_lang['setting_manager_login_start'] = 'Démarrage après identification au manager';
 $_lang['setting_manager_login_start_desc'] = 'Entrez l\'ID du document vers lequel vous souhaitez envoyer un utilisateur après sa connexion au manager. <strong>NOTE: assurez-vous que l\'ID que vous avez entré appartient à un document existant, publié et accessible par cet utilisateur!</strong>';
