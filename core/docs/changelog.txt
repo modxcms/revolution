@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6372] Add explicit resource_duplicate permission for duplicating a resource
 - [#6364] Fix incorrect lexicon reference in package versions grid
 - [#6365] Add manager_login_url_alternate setting which allows for setting a custom manager login URL
 - [#6077] Override PHP default timezone via System/Context Settings
