@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix critical timezone issue introduced for [#6077]
+
 MODX Revolution 2.2.0-rc-2 (December 16, 2011)
 ====================================
 - [#3033] Add method to reload Context data in same request
