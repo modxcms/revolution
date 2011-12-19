@@ -211,8 +211,8 @@ $_lang['setting_context_tree_sortdir_desc'] = 'Gibt an, ob Kontexte im Ressource
 $_lang['setting_cultureKey'] = 'Sprache';
 $_lang['setting_cultureKey_desc'] = 'Wählen Sie die Sprache für alle Nicht-Manager-Kontexte, einschließlich des Kontexts "web".';
 
-$_lang['date_timezone'] = 'Standard-Zeitzone';
-$_lang['date_timezone_desc'] = 'Gibt die Standard-Zeitzonen-Einstellung für PHP-Datumsfunktionen an, wenn die Einstellung nicht leer gelassen wird. Wird hier nichts eingegeben und die PHP-Konfigurationseinstellung date.timezone (kann mittels php.ini, date_default_timezone_set(), ini_set(), .htaccess etc. eingestellt werden) ist in Ihrer PHP-Umgebung nicht gesetzt, wird UTC vorausgesetzt.';
+$_lang['setting_date_timezone'] = 'Standard-Zeitzone';
+$_lang['setting_date_timezone_desc'] = 'Gibt die Standard-Zeitzonen-Einstellung für PHP-Datumsfunktionen an, wenn die Einstellung nicht leer gelassen wird. Wird hier nichts eingegeben und die PHP-Konfigurationseinstellung date.timezone (kann mittels php.ini, date_default_timezone_set(), ini_set(), .htaccess etc. eingestellt werden) ist in Ihrer PHP-Umgebung nicht gesetzt, wird UTC vorausgesetzt.';
 
 $_lang['setting_debug'] = 'Debugging-Einstellungen';
 $_lang['setting_debug_desc'] = 'Einstellmöglichkeit zum Ein- und Ausschalten des Debugging in MODX und/oder zum Setzen des PHP-error_reporting-Levels. "" = verwende aktuellen error_reporting-Wert, "0" = false (keine Meldungen anzeigen, error_reporting = 0), "1" = true (alle Meldungen anzeigen, error_reporting = -1) oder ein beliebiger gültiger Wert für error_reporting (als Integer-Zahl).';
