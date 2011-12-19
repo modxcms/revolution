@@ -336,7 +336,7 @@ class modTemplateVar extends modElement {
         }
 
         /* if any FC tvDefault rules, set here */
-        $value = $this->checkForFormCustomizationRules($value);
+        $value = $this->checkForFormCustomizationRules($value,$resourceId);
         /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
         $this->set('value',$value);
         $this->set('processedValue',$value);
@@ -514,9 +514,10 @@ class modTemplateVar extends modElement {
     /**
      * Check for any Form Customization rules for this TV
      * @param string $value
+     * @param int $resourceId
      * @return mixed
      */
-    public function checkForFormCustomizationRules($value) {
+    public function checkForFormCustomizationRules($value,$resourceId = 0) {
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
             $resource = false;
             if (!empty($resourceId)) {
@@ -555,8 +556,8 @@ class modTemplateVar extends modElement {
                     'modActionDom.action' => $this->xpdo->request->action,
                 ));
             }
+            $c->select($this->xpdo->getSelectColumns('modActionDom','modActionDom'));
             $c->select(array(
-                'modActionDom.*',
                 'FCSet.constraint_class',
                 'FCSet.constraint_field',
                 'FCSet.' . $this->xpdo->escape('constraint'),
