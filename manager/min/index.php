@@ -21,7 +21,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 /* create the modX object */
 $modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 if (!is_object($modx) || !($modx instanceof modX)) {
-    $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
+    $errorMessage = 'MODX not installed!';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     header('HTTP/1.1 503 Service Unavailable');
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
@@ -32,10 +32,6 @@ $modx->initialize('mgr');
 if (!$modx->user->hasSessionContext('mgr')) die();
 
 $modx->getCacheManager();
-$cachePath = $modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/min/';
-if (!is_dir($cachePath) || !is_writable($cachePath)) {
-    $modx->cacheManager->writeTree($cachePath);
-}
 
 /* minify stuff */
 define('MINIFY_MIN_DIR', dirname(__FILE__));
@@ -44,7 +40,7 @@ define('MINIFY_MIN_DIR', dirname(__FILE__));
 $min_allowDebugFlag = (boolean)$modx->getOption('manager_js_cache_allow_debug_flag',null,true);
 $min_errorLogger = (boolean)$modx->getOption('manager_js_cache_debug',null,true);
 $min_enableBuilder = false;
-$min_cachePath = $cachePath;
+$min_cachePath = $modx->cacheManager->getCachePath() . 'mgr/min/';
 $documentRoot = $modx->getOption('manager_js_document_root', null, '');
 $min_documentRoot = !empty($documentRoot) ? $documentRoot : $_SERVER['DOCUMENT_ROOT'];
 $min_cacheFileLocking = (boolean)$modx->getOption('manager_js_cache_file_locking',null,true);
