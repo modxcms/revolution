@@ -76,7 +76,7 @@ class WorkspacesManagerController extends modManagerController {
         $errors = array();
 
         /* create assets/ */
-        $assetsPath = $this->modx->getOption('base_path').'assets/';
+        $assetsPath = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
         if (!is_dir($assetsPath)) {
             $cacheManager->writeTree($assetsPath,$directoryOptions);
         }
@@ -86,7 +86,7 @@ class WorkspacesManagerController extends modManagerController {
         unset($assetsPath);
 
         /* create assets/components/ */
-        $assetsCompPath = $this->modx->getOption('base_path').'assets/components/';
+        $assetsCompPath = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH).'components/';
         if (!is_dir($assetsCompPath)) {
             $cacheManager->writeTree($assetsCompPath,$directoryOptions);
         }
@@ -96,7 +96,7 @@ class WorkspacesManagerController extends modManagerController {
         unset($assetsCompPath);
 
         /* create core/components/ */
-        $coreCompPath = $this->modx->getOption('core_path').'components/';
+        $coreCompPath = $this->modx->getOption('core_path',null,MODX_CORE_PATH).'components/';
         if (!is_dir($coreCompPath)) {
             $cacheManager->writeTree($coreCompPath,$directoryOptions);
         }
