@@ -240,6 +240,7 @@ abstract class ResourceManagerController extends modManagerController {
         $emptyCategory->id = 0;
         $categories[0] = $emptyCategory;
         $tvMap = array();
+        $hidden = array();
         $templateId = $this->resource->get('template');
         if ($templateId && ($template = $this->modx->getObject('modTemplate', $templateId))) {
             $tvs = array();
@@ -298,24 +299,27 @@ abstract class ResourceManagerController extends modManagerController {
                     if (empty($inputForm)) continue;
 
                     $tv->set('formElement',$inputForm);
-                    if (!isset($categories[$cat]->tvs) || !is_array($categories[$cat]->tvs)) {
-                        $categories[$cat]->tvs = array();
-                        $categories[$cat]->tvCount = 0;
-                    }
-
-                    /* add to tv/category map */
-                    $tvMap[$tv->get('id')] = $tv->category;
-
-                    /* add TV to category array */
-                    $categories[$cat]->tvs[] = $tv;
                     if ($tv->get('type') != 'hidden') {
-                        $categories[$cat]->tvCount++;
+                        if (!isset($categories[$cat]->tvs) || !is_array($categories[$cat]->tvs)) {
+                            $categories[$cat]->tvs = array();
+                            $categories[$cat]->tvCount = 0;
+                        }
+
+                        /* add to tv/category map */
+                        $tvMap[$tv->get('id')] = $tv->category;
+
+                        /* add TV to category array */
+                        $categories[$cat]->tvs[] = $tv;
+                        if ($tv->get('type') != 'hidden') {
+                            $categories[$cat]->tvCount++;
+                        }
+                    } else {
+                        $hidden[] = $tv;
                     }
                 }
             }
         }
 
-        $this->tvCounts = array();
         $finalCategories = array();
         /** @var modCategory $category */
         foreach ($categories as $n => $category) {
@@ -334,6 +338,7 @@ abstract class ResourceManagerController extends modManagerController {
             'template' => $templateId,
             'resource' => $this->resource->get('id'),
             'tvCounts' => &$this->tvCounts,
+            'hidden' => &$hidden,
         ));
         if (is_array($onResourceTVFormRender)) {
             $onResourceTVFormRender = implode('',$onResourceTVFormRender);
@@ -343,6 +348,7 @@ abstract class ResourceManagerController extends modManagerController {
         $this->setPlaceholder('categories',$finalCategories);
         $this->setPlaceholder('tvCounts',$this->modx->toJSON($this->tvCounts));
         $this->setPlaceholder('tvMap',$this->modx->toJSON($tvMap));
+        $this->setPlaceholder('hidden',$hidden);
 
         if (!empty($this->scriptProperties['showCheckbox'])) {
             $this->setPlaceholder('showCheckbox',1);
