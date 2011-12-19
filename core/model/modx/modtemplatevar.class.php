@@ -378,6 +378,7 @@ class modTemplateVar extends modElement {
      * @return string
      */
     public function getRender($params,$value,array $paths,$method,$resourceId = 0,$type = 'text') {
+        if (empty($type)) $type = 'text';
         if (empty($this->xpdo->resource)) {
             if (!empty($resourceId)) {
                 $this->xpdo->resource = $this->xpdo->getObject('modResource',$resourceId);
