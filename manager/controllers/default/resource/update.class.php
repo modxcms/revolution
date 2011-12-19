@@ -214,3 +214,5 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         return 'resource/update.tpl';
     }
 }
+
+class DocumentUpdateManagerController extends ResourceUpdateManagerController {}

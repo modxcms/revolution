@@ -223,3 +223,5 @@ class ResourceCreateManagerController extends ResourceManagerController {
     }
 
 }
+
+class DocumentCreateManagerController extends ResourceCreateManagerController {}

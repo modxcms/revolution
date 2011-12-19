@@ -509,7 +509,7 @@ abstract class modManagerController {
                         $i++;
                     }
                     foreach ($sources as $scripts) {
-                        $o .= '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$scripts).'"></script>';
+                        $o .= '<script type="text/javascript" src="'.$minDir.'index.php?f='.implode(',',$scripts).'"></script>';
                     }
                 }
             } else if (empty($compressJs)) {
@@ -617,7 +617,7 @@ abstract class modManagerController {
                     $i++;
                 }
                 foreach ($sources as $scripts) {
-                    $cssjs[] = '<script type="text/javascript" src="'.$minDir.'?f='.implode(',',$scripts).'"></script>';
+                    $cssjs[] = '<script type="text/javascript" src="'.$minDir.'index.php?f='.implode(',',$scripts).'"></script>';
                 }
             } else {
                 foreach ($jsToCompress as $scr) {
@@ -632,7 +632,7 @@ abstract class modManagerController {
         }
         if (!empty($cssToCompress)) {
             if ($this->modx->getOption('compress_css',null,true)) {
-                $cssjs[] = '<link href="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$cssToCompress).'" rel="stylesheet" type="text/css" />';
+                $cssjs[] = '<link href="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/index.php?f='.implode(',',$cssToCompress).'" rel="stylesheet" type="text/css" />';
             } else {
                 foreach ($cssToCompress as $scr) {
                     $cssjs[] = '<link href="'.$scr.'" rel="stylesheet" type="text/css" />';
@@ -656,7 +656,7 @@ abstract class modManagerController {
         }
         if (!empty($lastjs)) {
             if ($this->modx->getOption('compress_js',null,true)) {
-                $cssjs[] = '<script type="text/javascript" src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/?f='.implode(',',$lastjs).'"></script>';
+                $cssjs[] = '<script type="text/javascript" src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/index.php?f='.implode(',',$lastjs).'"></script>';
             } else {
                 foreach ($lastjs as $scr) {
                     $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';

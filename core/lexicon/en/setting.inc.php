@@ -206,8 +206,8 @@ $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in
 $_lang['setting_cultureKey'] = 'Language';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
-$_lang['date_timezone'] = 'Default Time Zone';
-$_lang['date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
+$_lang['setting_date_timezone'] = 'Default Time Zone';
+$_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
 
 $_lang['setting_debug'] = 'Debug';
 $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
