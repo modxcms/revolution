@@ -2,6 +2,13 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6383] Add index.php to minify paths
+- Prevent TVs tab from showing in Resources if the only TVs are of type "hidden"
+- [#6413] Fix missing date_timezone setting description
+- [#6297] Prevent invalid characters in property set names
+- [#5997] Fix issue where components dirs were being created in assets with non-standard assets directory paths
+- Fix issue where resource ID was not being passed to FC rule checks
+- [#6417] Fix issue with modResource class_key being incorrectly set
 - Adjust modResponse contentType loading to allow overriding in custom resource classes
 - Fix critical timezone issue introduced for [#6077]
 

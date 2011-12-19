@@ -79,6 +79,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
+
     }
     
     ,beforeSubmit: function(o) {
