@@ -90,14 +90,9 @@ Ext.extend(MODx.DataView,Ext.DataView,{
             url: config.url
             ,baseParams: config.baseParams || { 
                 action: 'getList'
-                ,prependPath: config.prependPath || null
-                ,prependUrl: config.prependUrl || null
                 ,wctx: config.wctx || MODx.ctx
                 ,dir: config.openTo || ''
-                ,basePath: config.basePath || ''
-                ,basePathRelative: config.basePathRelative || null
-                ,baseUrl: config.baseUrl || ''
-                ,baseUrlRelative: config.baseUrlRelative || null
+                ,source: config.source || 0
             }
             ,root: config.root || 'results'
             ,fields: config.fields
@@ -162,8 +157,6 @@ MODx.browser.Window = function(config) {
     this.view = MODx.load({
         xtype: 'modx-browser-view'
         ,onSelect: {fn: this.onSelect, scope: this}
-        ,prependPath: config.prependPath || null
-        ,prependUrl: config.prependUrl || null
         ,source: config.source || MODx.config.default_media_source
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
