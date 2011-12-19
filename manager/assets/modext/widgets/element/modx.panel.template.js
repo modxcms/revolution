@@ -96,9 +96,7 @@ MODx.panel.Template = function(config) {
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        ,prependPath: false
-                        ,prependUrl: false
-                        ,hideFiles: false
+                        ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-template-static-file'
                         ,anchor: '100%'

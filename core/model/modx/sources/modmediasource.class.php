@@ -271,7 +271,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      */
     public function setRequestProperties(array $scriptProperties = array()) {
         if (empty($this->properties)) $this->properties = array();
-        $this->properties = array_merge($this->properties,$scriptProperties);
+        $this->properties = array_merge($this->getPropertyList(),$this->properties,$scriptProperties);
         return $this->properties;
     }
 
@@ -421,6 +421,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
             }
             $list[$property['name']] = $value;
         }
+        $list = array_merge($list,$this->properties);
         return $list;
     }
 
