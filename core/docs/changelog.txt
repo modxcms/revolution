@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6428] Fix improperly designated tooltip and UI for create namespace window
 - Fix various regression issues with rename/delete files/directories in the Files tree
 - Ensure hideFiles property works for the files tree
 - [#6383] Add index.php to minify paths

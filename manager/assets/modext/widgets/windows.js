@@ -149,10 +149,15 @@ MODx.window.CreateNamespace = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('path')
-            ,description: _('namespace_path_desc')
+            ,description: MODx.expandHelp ? '' : _('namespace_path_desc')
             ,name: 'path'
             ,id: 'modx-'+this.ident+'-path'
             ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-name'
+            ,html: _('namespace_path_desc')
+            ,cls: 'desc-under'
         }]
     });
     MODx.window.CreateNamespace.superclass.constructor.call(this,config);
