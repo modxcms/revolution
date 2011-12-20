@@ -149,7 +149,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'cls' => implode(' ',$cls),
                     'type' => 'dir',
                     'leaf' => false,
-                    'path' => $bases['pathAbsolute'].$fileName,
+                    'path' => $bases['pathAbsoluteWithPath'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'perms' => $octalPerms,
                     'menu' => array(),
@@ -359,8 +359,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return boolean
      */
     public function removeContainer($path) {
+        $this->xpdo->log(modX::LOG_LEVEL_ERROR,print_r($path,true));
         /* instantiate modDirectory object */
         /** @var modDirectory $directory */
+        $path = $this->fileHandler->postfixSlash($path);
         $directory = $this->fileHandler->make($path);
         
         /* validate and check permissions on directory */
@@ -368,6 +370,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $this->addError('path',$this->xpdo->lexicon('file_folder_err_invalid'));
             return false;
         }
+        $this->xpdo->log(modX::LOG_LEVEL_ERROR,print_r($directory->getPath(),true));
         if (!$directory->isReadable() || !$directory->isWritable()) {
             $this->addError('path',$this->xpdo->lexicon('file_folder_err_perms_remove'));
             return false;
@@ -427,6 +430,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return bool
      */
     public function renameObject($oldPath,$newName) {
+        $bases = $this->getBases($oldPath);
+        $oldPath = $bases['pathAbsolute'].$oldPath;
+
         /** @var modFile $oldFile */
         $oldFile = $this->fileHandler->make($oldPath);
 
