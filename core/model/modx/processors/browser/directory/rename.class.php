@@ -24,13 +24,8 @@ class modBrowserFolderRenameProcessor extends modProcessor {
             'name' => false,
             'parent' => '',
         ));
-        $dir = $this->getProperty('dir');
-        if (empty($dir)) return $this->modx->lexicon('file_folder_err_ns');
-        $dir = str_replace(array(
-            'root/',
-            'undefined/',
-        ),'',$this->getProperty('dir'));
-        $this->setProperty('dir',$dir);
+        $path = $this->getProperty('path');
+        if (empty($path)) return $this->modx->lexicon('file_folder_err_ns');
         return true;
     }
 
@@ -67,7 +62,7 @@ class modBrowserFolderRenameProcessor extends modProcessor {
             $this->addFieldError('name',$this->modx->lexicon('name_err_ns'));
         }
 
-        return $this->hasErrors();
+        return !$this->hasErrors();
     }
 
     /**
