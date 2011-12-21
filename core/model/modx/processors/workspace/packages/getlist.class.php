@@ -109,15 +109,15 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
      */
     public function formatDates(array $packageArray) {
         if ($packageArray['updated'] != '0000-00-00 00:00:00' && $packageArray['updated'] != null) {
-            $packageArray['updated'] = strftime($this->getProperty('dateFormat'),strtotime($packageArray['updated']));
+            $packageArray['updated'] = utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['updated'])));
         } else {
             $packageArray['updated'] = '';
         }
-        $packageArray['created']= strftime($this->getProperty('dateFormat'),strtotime($packageArray['created']));
+        $packageArray['created']= utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['created'])));
         if ($packageArray['installed'] == null || $packageArray['installed'] == '0000-00-00 00:00:00') {
             $packageArray['installed'] = null;
         } else {
-            $packageArray['installed'] = strftime($this->getProperty('dateFormat'),strtotime($packageArray['installed']));
+            $packageArray['installed'] = utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['installed'])));
         }
         return $packageArray;
     }
