@@ -21,7 +21,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 /* create the modX object */
 $modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 if (!is_object($modx) || !($modx instanceof modX)) {
-    $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
+    $errorMessage = 'MODX not installed!';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     header('HTTP/1.1 503 Service Unavailable');
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
@@ -32,10 +32,6 @@ $modx->initialize('mgr');
 if (!$modx->user->hasSessionContext('mgr')) die();
 
 $modx->getCacheManager();
-$cachePath = $modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/min/';
-if (!is_dir($cachePath) || !is_writable($cachePath)) {
-    $modx->cacheManager->writeTree($cachePath);
-}
 
 /* minify stuff */
 define('MINIFY_MIN_DIR', dirname(__FILE__));
@@ -44,7 +40,7 @@ define('MINIFY_MIN_DIR', dirname(__FILE__));
 $min_allowDebugFlag = (boolean)$modx->getOption('manager_js_cache_allow_debug_flag',null,true);
 $min_errorLogger = (boolean)$modx->getOption('manager_js_cache_debug',null,true);
 $min_enableBuilder = false;
-$min_cachePath = $cachePath;
+$min_cachePath = $modx->cacheManager->getCachePath() . 'mgr/min/';
 $documentRoot = $modx->getOption('manager_js_document_root', null, '');
 $min_documentRoot = !empty($documentRoot) ? $documentRoot : $_SERVER['DOCUMENT_ROOT'];
 $min_cacheFileLocking = (boolean)$modx->getOption('manager_js_cache_file_locking',null,true);
@@ -54,12 +50,17 @@ $min_serveOptions['maxAge'] = (int)$modx->getOption('manager_js_cache_max_age',n
 $min_serveOptions['minApp']['groupsOnly'] = false;
 $min_serveOptions['minApp']['maxFiles'] = (int)$modx->getOption('manager_js_cache_max_files',null,50);
 $min_serveOptions['minApp']['allowDirs'][] = $min_documentRoot;
+$min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = array();
 $min_symlinks = array();
-if (strpos(MODX_MANAGER_PATH, $min_documentRoot) !== 0) {
+if (strpos(MODX_MANAGER_PATH, $min_documentRoot) !== 0 || strpos(MODX_MANAGER_PATH, MODX_MANAGER_URL) === false) {
     $min_serveOptions['minApp']['allowDirs'][] = MODX_MANAGER_PATH;
-    $min_serveOptions['minApp']['virtualDirs'] = array(MODX_MANAGER_URL => MODX_MANAGER_PATH);
-    $min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = array(MODX_MANAGER_URL => MODX_MANAGER_PATH);
+    $min_serveOptions['minApp']['virtualDirs'][MODX_MANAGER_URL] = MODX_MANAGER_PATH;
 }
+if (strpos(MODX_ASSETS_PATH, $min_documentRoot) !== 0 || strpos(MODX_ASSETS_PATH, MODX_ASSETS_URL) === false) {
+    $min_serveOptions['minApp']['allowDirs'][] = MODX_ASSETS_PATH;
+    $min_serveOptions['minApp']['virtualDirs'][MODX_ASSETS_URL] = MODX_ASSETS_PATH;
+}
+$min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = $min_serveOptions['minApp']['virtualDirs'];
 $min_uploaderHoursBehind = 0;
 $min_libPath = dirname(__FILE__) . '/lib';
 @ini_set('zlib.output_compression', (int)$modx->getOption('manager_js_zlib_output_compression',null,0));

@@ -135,6 +135,11 @@ ul.x-tab-strip-top li {
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#8BAF4C,endColorstr=#658F1A,GradientType=0);
     background:linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
 }
+.x-tab-strip-closable{ padding-right: 15px !important; }
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close{
+	right: 8px;
+	top: 11px;
+}
 ul.x-tab-strip-top li:first-child { margin-left:0; }
 ul.x-tab-strip-top li.x-tab-strip-over {
 	background:#496F07;
@@ -674,6 +679,7 @@ ul.x-tab-strip-bottom {
     display:block;
     padding-right:5px;
 }
+.x-btn-text-icon .x-btn-icon-small-left .x-btn-text{ padding-left: 26px !important; }
 
 /* //end button style */
 
