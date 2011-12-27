@@ -28,8 +28,8 @@ require_once strtr(realpath(MODX_SETUP_PATH.'includes/config/modconfigreader.cla
  */
 class modRevolutionConfigReader extends modConfigReader {
     public function read(array $config = array()) {
-        global $database_dsn, $database_type, $database_server, $dbase, $database_user,
-                $database_password, $database_connection_charset, $table_prefix, $config_options;
+        global $database_dsn, $database_type, $database_server, $dbase, $database_user, $database_password,
+               $database_connection_charset, $table_prefix, $config_options, $driver_options;
         $database_connection_charset = 'utf8';
 
         /* get http host */
@@ -58,7 +58,8 @@ class modRevolutionConfigReader extends modConfigReader {
             $this->config['assets_path'] = MODX_ASSETS_PATH;
             $this->config['assets_url'] = MODX_ASSETS_URL;
 
-            $config_options = !empty($config_options) ? $config_options : array();
+            $config_options = is_array($config_options) ? $config_options : array();
+            $driver_options = is_array($driver_options) ? $driver_options : array();
 
             $this->config = array_merge(array(
                 'database_type' => $database_type,
@@ -76,6 +77,7 @@ class modRevolutionConfigReader extends modConfigReader {
                 'inplace' => isset ($_POST['inplace']) ? 1 : 0,
                 'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
                 'config_options' => $config_options,
+                'driver_options' => $driver_options,
             ),$this->config,$config);
         }
         return $this->config;
