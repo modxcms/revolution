@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Allow PDO driver options to be defined in MODX config
 - [#6383] Add index.php to minify paths in mgr templates
 
 MODX Revolution 2.2.0-rc-3 (December 22, 2011)
