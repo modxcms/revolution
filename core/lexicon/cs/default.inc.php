@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-08
+ * @updated 2011-12-29
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -49,7 +49,7 @@ $_lang['add_plugin'] = 'Vytvořit plugin';
 $_lang['add_snippet'] = 'Vytvořit snippet';
 
 // $_lang['add_tag'] = 'Add tag';
-$_lang['add_tag'] = 'Přidat tag';
+$_lang['add_tag'] = 'Přidat štítek';
 
 // $_lang['add_template'] = 'Add Template';
 $_lang['add_template'] = 'Vytvořit šablonu';
@@ -913,7 +913,7 @@ $_lang['parameter'] = 'Parametr';
 $_lang['parameters'] = 'Parametry';
 
 // $_lang['parent'] = 'Parent';
-$_lang['parent'] = 'Parent';
+$_lang['parent'] = 'Rodič';
 
 // $_lang['password'] = 'Password';
 $_lang['password'] = 'Heslo';
@@ -1033,7 +1033,7 @@ $_lang['quick_update_template'] = 'Rychlá úprava šablony';
 $_lang['quick_update_tv'] = 'Rychlá úprava template variable';
 
 // $_lang['rank'] = 'Rank';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Pořadí';
 
 // $_lang['recent_docs'] = 'Recent documents';
 $_lang['recent_docs'] = 'Naposledy upravované dokumenty';
@@ -1204,7 +1204,7 @@ $_lang['save_changes'] = 'Uložit změny';
 $_lang['save_successful'] = 'Uložení proběhlo úspěšně.';
 
 // $_lang['save_tag'] = 'Save tag';
-$_lang['save_tag'] = 'Uložení tagu';
+$_lang['save_tag'] = 'Uložení štítku';
 
 // $_lang['saving'] = 'Saving...';
 $_lang['saving'] = 'Ukládám...';
@@ -1336,13 +1336,13 @@ $_lang['sysinfo_userid'] = 'Uživatel';
 $_lang['sys_alert'] = 'Systémová upozornění';
 
 // $_lang['symlink'] = 'Symlink';
-$_lang['symlink'] = 'Symlink';
+$_lang['symlink'] = 'Symbolický odkaz';
 
 // $_lang['system'] = 'System';
 $_lang['system'] = 'Systém';
 
 // $_lang['tag'] = 'Tag';
-$_lang['tag'] = 'Tag';
+$_lang['tag'] = 'Štítek';
 
 // $_lang['target'] = 'Target';
 $_lang['target'] = 'Cíl';
@@ -1411,7 +1411,7 @@ $_lang['tv_default_desc'] = 'Výchozí hodnota této TV pokud nebude nic vybrán
 $_lang['tv_elements'] = 'Hodnoty vstupu';
 
 // $_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag.';
-$_lang['tv_elements_desc'] = 'Volitelné položky pro TVs s vícenásobným výběrem  jako rozbalovací menu nebo tag..';
+$_lang['tv_elements_desc'] = 'Volitelné položky pro TVs s vícenásobným výběrem  jako rozbalovací menu nebo štítek..';
 
 // $_lang['tv_type'] = 'Input Type';
 $_lang['tv_type'] = 'Typ vstupu';
@@ -1492,7 +1492,7 @@ $_lang['warning'] = 'Pozor!';
 $_lang['web_resources'] = 'Webové zdroje';
 
 // $_lang['weblink'] = 'Weblink';
-$_lang['weblink'] = 'Weblink';
+$_lang['weblink'] = 'Webový odkaz';
 
 // $_lang['which_editor_title'] = 'Editor to use:';
 $_lang['which_editor_title'] = 'Použít editor:';
