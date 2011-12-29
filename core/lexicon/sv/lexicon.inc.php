@@ -30,5 +30,6 @@ $_lang['lexicon_management'] = 'Lexikonhantering';
 $_lang['lexicon_management_desc'] = 'Här kan du åsidosätta alla lexikonposter i alla namnrymder och deras respektive ämnen. Dubbelklicka bara på en posts värde för att åsidosätta det. Om du vill lägga till nya poster eller ämnen skapar du deras ämnesfiler i deras namnrymds katalog.';
 $_lang['lexicon_rlfb_msg'] = 'Återskapade [[+num]] strängar.';
 $_lang['reload_from_base'] = 'Återställ alla kärnposter';
+$_lang['reload_success'] = 'Återställde [[+total]] strängar.';
 $_lang['search_by_key'] = 'Sök efter nyckel:';
 $_lang['topic'] = 'Ämne';

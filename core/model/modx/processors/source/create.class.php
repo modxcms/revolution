@@ -10,6 +10,8 @@ class modSourceCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('source');
     public $permission = 'source_save';
     public $elementType = 'source';
+    public $beforeSaveEvent = 'OnMediaSourceBeforeFormSave';
+    public $afterSaveEvent = 'OnMediaSourceFormSave';
 
     public function initialize() {
         $classKey = $this->getProperty('class_key');

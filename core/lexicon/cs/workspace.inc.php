@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-08
+ * @updated 2011-12-29
  */
 // $_lang['alphabetically'] = 'Alphabetically';
 $_lang['alphabetically'] = 'Abecedně';
@@ -49,7 +49,7 @@ $_lang['changelog_desc'] = 'Přečtěte si prosím změny v této verzi.';
 $_lang['continue'] = 'Pokračovat';
 
 // $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
-$_lang['core_err_invalid'] = 'Pro spuštění sestavení musíte mít platnou instalaci jádra a aktivní workspace.';
+$_lang['core_err_invalid'] = 'Pro spuštění sestavení musíte mít platnou instalaci jádra a aktivní pracovní prostředí.';
 
 // $_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['curl_not_installed'] = 'Správce balíčků je možno používat pouze s nainstalovanou PHP extenzí cURL. Více informací o cUrl nalzente na <a href="http://php.net/curl" target="_blank">stránce PHP cURL</a>.';
@@ -93,6 +93,9 @@ $_lang['downloads_view'] = '{downloads} stahování';
 // $_lang['information'] = 'Information';
 $_lang['information'] = 'Informace';
 
+// $_lang['install'] = 'Install';
+$_lang['install'] = 'Instalovat';
+
 // $_lang['installation_instructions'] = 'Installation Instructions';
 $_lang['installation_instructions'] = 'Instalační instrukce';
 
@@ -102,8 +105,8 @@ $_lang['installed'] = 'Nainstalováno';
 // $_lang['installed_on'] = 'Installed on <br/>[[+time]]';
 $_lang['installed_on'] = 'Nainstalováno <br/>[[+time]]';
 
-// $_lang['instructions'] = 'Instrukce';
-$_lang['instructions'] = 'Instructions';
+// $_lang['instructions'] = 'Instructions';
+$_lang['instructions'] = 'Instrukce';
 
 // $_lang['last_updated'] = 'Last Updated';
 $_lang['last_updated'] = 'Poslední aktualizace';
@@ -198,6 +201,9 @@ $_lang['package_created'] = 'Vytvořen transportní balíček s podpisem: [[+sig
 // $_lang['package_details'] = 'Package Details';
 $_lang['package_details'] = 'Detail balíčku';
 
+// $_lang['package_details_for'] = 'Package Details for [[+package]]';
+$_lang['package_details_for'] = 'Informace o balíčku [[+package]]';
+
 // $_lang['package_download_err'] = 'Could not download package at: [[+location]]';
 $_lang['package_download_err'] = 'Nepodařilo se stáhnout balíček z: [[+location]]';
 
@@ -274,7 +280,7 @@ $_lang['package_install_info_success'] = 'Balíček [[+signature]] byl úspěšn
 $_lang['package_installer'] = 'Instalátor balíčků';
 
 // $_lang['package_installing'] = 'Workspace environment initiated, now installing package...';
-$_lang['package_installing'] = 'Workspace prostředí inicializováno, nyní se instaluje balíček...';
+$_lang['package_installing'] = 'Pracovní prostředí inicializováno, nyní se instaluje balíček...';
 
 // $_lang['package_management'] = 'Package Management';
 $_lang['package_management'] = 'Správce balíčků';
@@ -334,7 +340,7 @@ $_lang['package_remove_info_tzip_start'] = 'Balíček úspěšně vybrán. Nyní
 $_lang['package_reinstall'] = 'Přeinstalování balíčku';
 
 // $_lang['package_reinstall_action_button'] = 'Reinstall';
-$_lang['package_reinstall_action_button'] = 'Reinstall';
+$_lang['package_reinstall_action_button'] = 'Přeinstalovat';
 
 // $_lang['package_reinstall_confirm'] = 'Are you sure you want to reinstall the package? This will remove any changes you have made.';
 $_lang['package_reinstall_confirm'] = 'Opravdu chcete balíček přeinstalovat? Tento krok odstraní všechny změny, které jste dosud provedli.';
@@ -346,7 +352,7 @@ $_lang['package_retriever'] = 'Přijímač balíčku';
 $_lang['package_search_local_title'] = 'Hledat balíčky lokálně';
 
 // $_lang['package_search_local_confirm'] = 'MODX will now search your core/packages directory for any valid packages, and then add them in. <br /><br />Please note that it will NOT install them, but simply add them into your workspace. <br /><br />Please make sure before proceeding that you have uploaded the packages into the core/packages directory.';
-$_lang['package_search_local_confirm'] = 'MODX nyní prohledá vaší složku "core/packages", zda zde najde nějaké platné balíčky, které lze poté nainstalovat. <br /><br />Poznámka: Balíčky nebudou přímo nainstalovány, ale pouze přidány do Vašeho workspace. <br /><br />Dejte se pozor, zda jste nahráli balíčky do složky "core/packages".';
+$_lang['package_search_local_confirm'] = 'MODX nyní prohledá vaší složku "core/packages", zda zde najde nějaké platné balíčky, které lze poté nainstalovat. <br /><br />Poznámka: Balíčky nebudou přímo nainstalovány, ale pouze přidány do Vašeho pracovního prostředí. <br /><br />Dejte se pozor, zda jste nahráli balíčky do složky "core/packages".';
 
 // $_lang['package_select_download'] = 'Select Packages to Download';
 $_lang['package_select_download'] = 'Vybrat balíčky ke stažení';
@@ -379,7 +385,7 @@ $_lang['package_uninstall_info_success'] = 'Balíček úspěšně odinstalován 
 $_lang['package_update'] = 'Upravit balíček';
 
 // $_lang['package_update_action_button'] = 'Update';
-$_lang['package_update_action_button'] = 'Update';
+$_lang['package_update_action_button'] = 'Aktualizovat';
 
 // $_lang['package_update_err_provider_empty'] = 'No packages found in the specified provider.';
 $_lang['package_update_err_provider_empty'] = 'U vybraného poskytovatele nebyly nalezeny žádné balíčky.';
@@ -607,16 +613,16 @@ $_lang['uploaded_versions'] = 'Stažené verze';
 $_lang['username'] = 'Uživatelské jméno';
 
 // $_lang['workspace'] = 'Workspace';
-$_lang['workspace'] = 'Workspace';
+$_lang['workspace'] = 'Pracovní prostředí';
 
 // $_lang['workspace_err_nf'] = 'Workspace not found.';
-$_lang['workspace_err_nf'] = 'Workspace nenalezeno.';
+$_lang['workspace_err_nf'] = 'Pracovní prostředí nenalezeno.';
 
 // $_lang['workspace_grabbing'] = 'Grabbing package workspace...';
-$_lang['workspace_grabbing'] = 'Sbírání workspace balíčku...';
+$_lang['workspace_grabbing'] = 'Zjišťování pracovního prostředí balíčku...';
 
 // $_lang['workspace_management'] = 'MODX Workspace Management';
-$_lang['workspace_management'] = 'MODX správa workspace';
+$_lang['workspace_management'] = 'MODX správa pracovního prostředí';
 
 // $_lang['workspace_scan_for_new'] = 'Search for new packages';
 $_lang['workspace_scan_for_new'] = 'Hledat nové balíčky';

@@ -19,4 +19,4 @@ $_lang['export_site_start'] = 'Starta export';
 $_lang['export_site_success'] = '<span style="color:#009900">Klart!</span>';
 $_lang['export_site_suffix'] = 'Filsuffix';
 $_lang['export_site_target_unwritable'] = 'Målkatalogen är inte skrivbar. Se till att katalogen är skrivbar och försök igen.';
-$_lang['export_site_time'] = 'Exporten är klar. Exporten tog %s sekunder att göra.';
+$_lang['export_site_time'] = 'Exporten är klar. Den tog %s sekunder att utföra.';

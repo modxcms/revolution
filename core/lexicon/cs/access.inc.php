@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2011-12-29
  */
 // $_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
 $_lang['access_category_management_msg'] = 'Správa přístupu členů uživatelské skupiny k elementům v kategoriích a možnost nastavení přístupových práv.';
@@ -289,10 +289,10 @@ $_lang['user_group_category_access_msg'] = 'V této části můžete nastavit k 
 $_lang['user_group_category_authority_desc'] = 'Minimální role, která bude mít přístup k oprávnění ve zvoleném Přístupovém právu pro tento kontext. Role se silnější autoritou (nižší čísla) zdědí tento přístup. Ve většině situací ponechte na "Member".';
 
 // $_lang['user_group_category_category_desc'] = 'The Category to grant access to.';
-$_lang['user_group_category_category_desc'] = 'The Category to grant access to.';
+$_lang['user_group_category_category_desc'] = 'Kategorie s povoleným přístupem.';
 
 // $_lang['user_group_category_context_desc'] = 'The Context to target for Elements with the above Category associated to them.';
-$_lang['user_group_category_context_desc'] = 'The Context to target for Elements with the above Category associated to them.';
+$_lang['user_group_category_context_desc'] = 'Cílový kontext pro elementy přiřazené do některé z kategorií výše.';
 
 // $_lang['user_group_category_err_ae'] = 'User Group already has access to that Category.';
 $_lang['user_group_category_err_ae'] = 'Tato uživatelská skupina již k této kategorii přístup má.';
@@ -313,7 +313,7 @@ $_lang['user_group_context_access_msg'] = 'V této častí můžete nastavit, ke
 $_lang['user_group_context_authority_desc'] = 'Minimální role, která bude mít přístup k oprávnění ve zvoleném Přístupovém právu pro tento kontext. Role se silnější autoritou (nižší čísla) zdědí tento přístup. Ve většině situací ponechte na "Member".';
 
 // $_lang['user_group_context_context_desc'] = 'The Context to grant access to.';
-$_lang['user_group_context_context_desc'] = 'The Context to grant access to.';
+$_lang['user_group_context_context_desc'] = 'Kontext s povoleným přístupem.';
 
 // $_lang['user_group_context_policy_desc'] = 'The Policy to apply to this Context for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_context_policy_desc'] = 'Přístupové právo aplikované na tento kontext pro tuto uživatelskou skupinu. Toto přidělí všem uživatelům v této Skupině uživatelů se zvolenou minimální rolí všechná oprávnění v rámci Přístupového práva.';

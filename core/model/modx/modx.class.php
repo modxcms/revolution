@@ -427,6 +427,8 @@ class modX extends xPDO {
                 $config_options,
                 $options
             );
+            if (empty($driverOptions)) $driverOptions = array();
+            if (empty($driver_options)) $driver_options = array();
             parent :: __construct(
                 $database_dsn,
                 $database_user,
