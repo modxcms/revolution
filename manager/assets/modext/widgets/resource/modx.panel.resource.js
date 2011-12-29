@@ -32,6 +32,7 @@ MODx.panel.Resource = function(config) {
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     initialized: false
     ,defaultClassKey: 'modDocument'
+    ,defaultValues: []
     ,classLexiconKey: 'document'
     ,rteElements: 'ta'
     ,rteLoaded: false
@@ -59,6 +60,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
 
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
+            this.defaultValues = this.config.record || {};
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
@@ -126,6 +128,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
+            location.href = location.href;
+        } else if (o.result.object['parent'] != this.defaultValues['parent'] && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
         } else {
             this.getForm().setValues(o.result.object);
