@@ -60,7 +60,9 @@ if (strpos(MODX_ASSETS_PATH, $min_documentRoot) !== 0 || strpos(MODX_ASSETS_PATH
     $min_serveOptions['minApp']['allowDirs'][] = MODX_ASSETS_PATH;
     $min_serveOptions['minApp']['virtualDirs'][MODX_ASSETS_URL] = MODX_ASSETS_PATH;
 }
-$min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = $min_serveOptions['minApp']['virtualDirs'];
+if (!empty($min_serveOptions['minApp']['virtualDirs'])) {
+    $min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = $min_serveOptions['minApp']['virtualDirs'];
+}
 $min_uploaderHoursBehind = 0;
 $min_libPath = dirname(__FILE__) . '/lib';
 @ini_set('zlib.output_compression', (int)$modx->getOption('manager_js_zlib_output_compression',null,0));
