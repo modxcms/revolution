@@ -52,6 +52,7 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
                 'modMediaSource.is_stream' => true,
             ));
         }
+        $this->modx->setLogLevel(xPDO::LOG_LEVEL_INFO);
         return $c;
     }
 
@@ -62,6 +63,7 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
      * @return array
      */
     public function prepareRow(xPDOObject $object) {
+    $this->modx->setLogLevel(xPDO::LOG_LEVEL_ERROR);
         $canEdit = $this->modx->hasPermission('source_edit');
         $canSave = $this->modx->hasPermission('source_save');
         $canRemove = $this->modx->hasPermission('source_delete');
