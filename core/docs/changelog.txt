@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6513] Better handling for large error.log files in mgr
 - [#6519] Ensure JS config gets working context config
 - [#6507] Add missing Media Source plugin events
 - [#6505] Remove htmlentities on date output filter
