@@ -394,11 +394,12 @@ class modX extends xPDO {
      * Construct a new modX instance.
      *
      * @param string $configPath An absolute filesystem path to look for the config file.
-     * @param array $options Options that can be passed to the instance.
+     * @param array $options xPDO options that can be passed to the instance.
+     * @param array $driverOptions PDO driver options that can be passed to the instance.
      * @return modX A new modX instance.
      */
-    public function __construct($configPath= '', array $options = array()) {
-        global $database_dsn, $database_user, $database_password, $config_options, $table_prefix, $site_id, $uuid;
+    public function __construct($configPath= '', array $options = array(), array $driverOptions = array()) {
+        global $database_dsn, $database_user, $database_password, $config_options, $driver_options, $table_prefix, $site_id, $uuid;
         modX :: protect();
         if (!defined('MODX_CONFIG_KEY')) {
             define('MODX_CONFIG_KEY', 'config');
@@ -426,14 +427,20 @@ class modX extends xPDO {
                 $config_options,
                 $options
             );
+            if (empty($driverOptions)) $driverOptions = array();
+            if (empty($driver_options)) $driver_options = array();
             parent :: __construct(
                 $database_dsn,
                 $database_user,
                 $database_password,
                 $options,
-                array (
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
-                    PDO::ATTR_PERSISTENT => false,
+                array_merge(
+                    array (
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
+                        PDO::ATTR_PERSISTENT => false,
+                    ),
+                    $driver_options,
+                    $driverOptions
                 )
             );
             $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));

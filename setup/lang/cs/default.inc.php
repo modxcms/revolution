@@ -6,7 +6,7 @@
  * @package setup
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2011-12-29
  */
 
 // $_lang['additional_css'] = '';
@@ -31,7 +31,7 @@ $_lang['app_motto'] = 'MODX Create and Do More with Less';
 $_lang['back'] = 'Zpět';
 
 // $_lang['base_template'] = 'BaseTemplate';
-$_lang['base_template'] = 'BaseTemplate';
+$_lang['base_template'] = 'Základní šablona';
 
 // $_lang['cache_manager_err'] = 'MODX's Cache Manager could not be loaded.';
 $_lang['cache_manager_err'] = 'MODX Cache Manager se nepovedlo načíst.';
@@ -247,7 +247,7 @@ $_lang['failed'] = 'Chyba!';
 $_lang['fatal_error'] = 'KRYTICKÁ CHYBA: Instalace MODX nemůže pokračovat.';
 
 // $_lang['home'] = 'Home';
-$_lang['home'] = 'Home';
+$_lang['home'] = 'Titulní stránka';
 
 // $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';

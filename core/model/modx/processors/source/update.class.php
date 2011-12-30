@@ -12,6 +12,8 @@ class modSourceUpdateProcessor extends modObjectUpdateProcessor {
     public $languageTopics = array('source');
     public $permission = 'source_save';
     public $objectType = 'source';
+    public $beforeSaveEvent = 'OnMediaSourceBeforeFormSave';
+    public $afterSaveEvent = 'OnMediaSourceFormSave';
 
     /** @var modMediaSource $object */
     public $object;

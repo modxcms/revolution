@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-08
+ * @updated 2011-12-29
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -19,7 +19,7 @@ $_lang['area_authentication'] = 'Autentizaci a zabezpečení';
 $_lang['area_caching'] = 'Cachování';
 
 // $_lang['area_core'] = 'Core Code';
-$_lang['area_core'] = 'Core Code';
+$_lang['area_core'] = 'Jádro MODX';
 
 // $_lang['area_editor'] = 'Rich-Text Editor';
 $_lang['area_editor'] = 'WYSIWYG editor';
@@ -459,6 +459,11 @@ $_lang['setting_cultureKey'] = 'Jazyk';
 // $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 $_lang['setting_cultureKey_desc'] = 'Vyberte jazyk, pro všechny kontexty (kromě správce obsahu "mgr") včetně kontextu "web".';
 
+// $_lang['setting_date_timezone'] = 'Default Time Zone';
+$_lang['setting_date_timezone'] = 'Výchozí časové pásmo';
+
+// $_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
+$_lang['setting_date_timezone_desc'] = 'Určuje výchozí nastavení časového pásma pro PHP funkce pro práci s datumem, pokud je uvedena hodnota. Není-li uvedena hodnota a nastavení PHP date.timezone ini  nastavení není nastaveno pro Vaše prostředí, bude použito pásmo UTC.';
 
 // $_lang['setting_debug'] = 'Debug';
 $_lang['setting_debug'] = 'Debug';
@@ -867,6 +872,13 @@ $_lang['setting_manager_language'] = 'Jazyk správce obsahu';
 
 // $_lang['setting_manager_language_desc'] = 'Select the language for the MODX Content Manager.';
 $_lang['setting_manager_language_desc'] = 'Zvolte jazyk pro MODX správce obsahu.';
+
+// $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
+$_lang['setting_manager_login_url_alternate'] = 'Alternativní URL pro Správce obsahu';
+
+// $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
+$_lang['setting_manager_login_url_alternate_desc'] = 'Alternativní URL, na kterou je přesměrován nepřihlášený uživatel, pokud se chce přihlásit do Správce obsahu.';
+
 
 // $_lang['setting_manager_login_start'] = 'Manager Login Startup';
 $_lang['setting_manager_login_start'] = 'Úvodní stránka po přihlášení do správce obsahu';

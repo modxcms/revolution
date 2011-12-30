@@ -39,7 +39,7 @@ Ext.extend(MODx,Ext.Component,{
         this.request = this.getURLParameters();
         this.Ajax = this.load({ xtype: 'modx-ajax' });
         Ext.override(Ext.form.Field,{
-            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
+            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on", msgTarget: 'under' }
         });
         Ext.menu.Menu.prototype.enableScrolling = false;
         this.addEvents({

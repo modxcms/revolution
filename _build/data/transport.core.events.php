@@ -1016,4 +1016,42 @@ $events['OnPropertySetBeforeRemove']->fromArray(array (
   'groupname' => 'Property Sets',
 ), '', true, true);
 
+/* Media Source */
+$events['OnMediaSourceBeforeFormDelete']= $xpdo->newObject('modEvent');
+$events['OnMediaSourceBeforeFormDelete']->fromArray(array (
+  'name' => 'OnMediaSourceBeforeFormDelete',
+  'service' => 1,
+  'groupname' => 'Media Sources',
+), '', true, true);
+$events['OnMediaSourceBeforeFormSave']= $xpdo->newObject('modEvent');
+$events['OnMediaSourceBeforeFormSave']->fromArray(array (
+  'name' => 'OnMediaSourceBeforeFormSave',
+  'service' => 1,
+  'groupname' => 'Media Sources',
+), '', true, true);
+$events['OnMediaSourceGetProperties']= $xpdo->newObject('modEvent');
+$events['OnMediaSourceGetProperties']->fromArray(array (
+  'name' => 'OnMediaSourceGetProperties',
+  'service' => 1,
+  'groupname' => 'Media Sources',
+), '', true, true);
+$events['OnMediaSourceFormDelete']= $xpdo->newObject('modEvent');
+$events['OnMediaSourceFormDelete']->fromArray(array (
+  'name' => 'OnMediaSourceFormDelete',
+  'service' => 1,
+  'groupname' => 'Media Sources',
+), '', true, true);
+$events['OnMediaSourceFormSave']= $xpdo->newObject('modEvent');
+$events['OnMediaSourceFormSave']->fromArray(array (
+  'name' => 'OnMediaSourceFormSave',
+  'service' => 1,
+  'groupname' => 'Media Sources',
+), '', true, true);
+$events['OnMediaSourceDuplicate']= $xpdo->newObject('modEvent');
+$events['OnMediaSourceDuplicate']->fromArray(array (
+  'name' => 'OnMediaSourceDuplicate',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+
 return $events;
