@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4146] Fix issue where Content Types were always binary when created
 - [#6470] Fix issue where Media Sources could not be protected due to missing reference in principal_targets setting
 - [#6520] Fix issue with Quick Create Resource and default settings
 - [#6510] Fix minify issue with virtual dirs inside the document root
