@@ -17,7 +17,7 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modChunkUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modChunk';
-    public $languageTopics = array('chunk','category');
+    public $languageTopics = array('chunk','category','element');
     public $permission = 'save_chunk';
     public $objectType = 'chunk';
     public $beforeSaveEvent = 'OnBeforeChunkFormSave';

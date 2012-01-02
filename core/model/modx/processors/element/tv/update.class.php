@@ -25,7 +25,7 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modElementTvUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modTemplateVar';
-    public $languageTopics = array('tv','category');
+    public $languageTopics = array('tv','category','element');
     public $permission = 'save_tv';
     public $objectType = 'tv';
     public $beforeSaveEvent = 'OnBeforeTVFormSave';
