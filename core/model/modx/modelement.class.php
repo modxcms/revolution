@@ -107,9 +107,6 @@ class modElement extends modAccessibleSimpleObject {
     '(',')','+','=','[',']','{','}','\'','"',';',':','\\','/','<','>','?'
     ,' ',',','`','~');
 
-    protected $staticContentChanged = false;
-    protected $staticSourceChanged = false;
-
     /**
      * Provides custom handling for retrieving the properties field of an Element.
      *
@@ -162,20 +159,24 @@ class modElement extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
-        $this->staticContentChanged = $this->isStatic() && $this->isDirty('content');
-        $this->staticSourceChanged = $this->isStatic() && ($this->isDirty('static') || $this->isDirty('static_file') || $this->isDirty('source'));
         if ($this->staticSourceChanged()) {
             $staticContent = $this->getFileContent();
             if ($staticContent !== $this->get('content')) {
-                if ($staticContent !== '') {
+                if ($this->isStaticSourceMutable() && $staticContent === '') {
+                    $this->setDirty('content');
+                } else {
                     $this->setContent($staticContent);
-                } elseif ($this->get('content') !== '') {
-                    $this->staticContentChanged = true;
                 }
             }
+            unset($staticContent);
+        }
+        $staticContentChanged = $this->staticContentChanged();
+        if ($staticContentChanged && !$this->isStaticSourceMutable()) {
+            $this->setContent($this->getFileContent());
+            $staticContentChanged = false;
         }
         $saved = parent::save($cacheFlag);
-        if ($saved && $this->staticContentChanged()) {
+        if ($saved && $staticContentChanged) {
             $saved = $this->setFileContent($this->get('content'));
         }
         return $saved;
@@ -448,10 +449,10 @@ class modElement extends modAccessibleSimpleObject {
      * Get the absolute path to the static source file for this instance.
      *
      * @param array $options An array of options.
-     * @return string The absolute path to the static source file.
+     * @return string|boolean The absolute path to the static source file or false if not static.
      */
     public function getSourceFile(array $options = array()) {
-        if ($this->isStatic() && empty($this->_sourceFile)) {
+        if ($this->isStatic() && (empty($this->_sourceFile) || $this->getOption('recalculate_source_file', $options, $this->staticSourceChanged()))) {
             $filename = $this->get('static_file');
             if (!empty($filename)) {
                 $array = array();
@@ -469,14 +470,14 @@ class modElement extends modAccessibleSimpleObject {
                 }
             }
 
-            if (!file_exists($filename)) {
+            if (!file_exists($filename) && $this->get('source') < 1) {
                 $this->getSourcePath($options);
                 $this->_sourceFile= $this->_sourcePath . $filename;
             } else {
                 $this->_sourceFile= $filename;
             }
         }
-        return $this->_sourceFile;
+        return $this->isStatic() ? $this->_sourceFile : false;
     }
 
     /**
@@ -836,18 +837,45 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
-     * Return if static content is changed
+     * Indicates if the content has changed and the Element has a mutable static source.
+     *
      * @return boolean
      */
     public function staticContentChanged() {
-        return (boolean) $this->staticContentChanged;
+        return $this->isStatic() && $this->isDirty('content');
     }
 
     /**
-     * Return if static source is changed
+     * Indicates if the static source has changed.
+     *
      * @return boolean
      */
     public function staticSourceChanged() {
-        return (boolean) $this->staticSourceChanged;
+        return $this->isStatic() && ($this->isDirty('static') || $this->isDirty('static_file') || $this->isDirty('source'));
+    }
+
+    /**
+     * Return if the static source is mutable.
+     *
+     * @return boolean True if the source file is mutable.
+     */
+    public function isStaticSourceMutable() {
+        $isMutable = false;
+        $sourceFile = $this->getSourceFile();
+        if ($sourceFile) {
+            if (file_exists($sourceFile)) {
+                $isMutable = is_writable($sourceFile);
+            } else {
+                $sourceDir = dirname($sourceFile);
+                while (!empty($sourceDir)) {
+                    if (file_exists($sourceDir) && is_dir($sourceDir)) {
+                        $isMutable = is_writable($sourceDir);
+                        if ($isMutable) break;
+                    }
+                    $sourceDir = dirname($sourceDir);
+                }
+            }
+        }
+        return $isMutable;
     }
 }

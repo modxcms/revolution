@@ -52,6 +52,10 @@ abstract class modElementCreateProcessor extends modObjectCreateProcessor {
         $this->setElementProperties();
         $this->validateElement();
 
+        if ($this->object->staticContentChanged() && $this->object->get('content') !== '' && !$this->object->isStaticSourceMutable()) {
+            $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
+        }
+
         return !$this->hasErrors();
     }
 
