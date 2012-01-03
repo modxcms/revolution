@@ -43,6 +43,9 @@ $min_enableBuilder = false;
 $min_cachePath = $modx->cacheManager->getCachePath() . 'mgr/min/';
 $documentRoot = $modx->getOption('manager_js_document_root', null, '');
 $min_documentRoot = !empty($documentRoot) ? $documentRoot : $_SERVER['DOCUMENT_ROOT'];
+if (!empty($min_documentRoot)) {
+    $min_documentRoot = realpath($min_documentRoot);
+}
 $min_cacheFileLocking = (boolean)$modx->getOption('manager_js_cache_file_locking',null,true);
 $min_serveOptions['bubbleCssImports'] = false;
 $min_serveOptions['rewriteCssUris'] = true;
