@@ -112,7 +112,7 @@ MODx.grid.Grid = function(config) {
     this.getStore().load({
         params: {
             start: config.pageStart || 0
-            ,limit: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
+            ,limit: config.hasOwnProperty('pageSize') ? config.pageSize : (parseInt(MODx.config.default_per_page) || 20)
         }
     });
     this.getStore().on('exception',this.onStoreException,this);

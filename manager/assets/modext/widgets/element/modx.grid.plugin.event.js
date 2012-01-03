@@ -23,6 +23,7 @@ MODx.grid.PluginEvent = function(config) {
         ,baseParams: {
             action: 'getList'
             ,plugin: config.plugin
+            ,limit: 0
         }
         ,saveParams: {
             plugin: config.plugin
@@ -32,6 +33,7 @@ MODx.grid.PluginEvent = function(config) {
         ,primaryKey: 'name'
         ,fields: ['name','service','groupname','enabled','priority','propertyset','menu']
         ,paging: false
+        ,pageSize: 0
         ,remoteSort: false
         ,singleText: _('event')
         ,pluralText: _('events')
