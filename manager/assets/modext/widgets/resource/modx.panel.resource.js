@@ -421,6 +421,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,baseParams: {
                 action: 'getList'
                 ,combo: '1'
+                ,limit: 0
             }
             ,listeners: {
                 'select': {fn: this.templateWarning,scope: this}
