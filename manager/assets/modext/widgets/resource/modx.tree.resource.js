@@ -784,6 +784,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,baseParams: {
                                 action: 'getList'
                                 ,combo: '1'
+                                ,limit: 0
                             }
                             ,value: MODx.config.default_template
                         },{
@@ -919,6 +920,7 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,baseParams: {
                                 action: 'getList'
                                 ,combo: '1'
+                                ,limit: 0
                             }
                         },{
                             xtype: 'textfield'
