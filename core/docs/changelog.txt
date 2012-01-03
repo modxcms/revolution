@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Better handling of dynamic lexicon topic adding and deprecated manager controllers
 - [#5905] Refactor new package versions to run ACTION_UPGRADE
 - [#6120] Improve static element behavior with immutable sources
 - [#6551] Fix issue where ID instead of name of Template showed on resource combo

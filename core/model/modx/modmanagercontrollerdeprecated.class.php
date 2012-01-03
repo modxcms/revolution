@@ -8,6 +8,7 @@
  * @package modx
  */
 class modManagerControllerDeprecated extends modManagerController {
+    public $body = '';
     /**
      * Overrides modManagerController::process to provide custom backwards-compatible support for controllers that
      * were made prior to Revolution 2.2.x.
@@ -25,16 +26,16 @@ class modManagerControllerDeprecated extends modManagerController {
         if (!file_exists($templatePath)) {
             $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
             $this->modx->config['manager_theme'] = 'default';
-            $this->modx->smarty->assign('_config',$this->modx->config);
+            $this->setPlaceholder('_config',$this->modx->config);
         }
 
         /* assign custom action topics to smarty, so can load custom topics for each page */
         $this->modx->lexicon->load('action');
         $topics = explode(',',$this->config['lang_topics']);
         foreach ($topics as $topic) { $this->modx->lexicon->load($topic); }
-        $this->modx->smarty->assign('_lang_topics',$this->config['lang_topics']);
-        $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
-        $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
+        $this->setPlaceholder('_lang_topics',$this->config['lang_topics']);
+        $this->setPlaceholder('_lang',$this->modx->lexicon->fetch());
+        $this->setPlaceholder('_ctx',$this->modx->context->get('key'));
 
         $this->registerBaseScripts($this->config['haslayout'] ? true : false);
 
@@ -58,14 +59,14 @@ class modManagerControllerDeprecated extends modManagerController {
         }
 
         if (!empty($this->ruleOutput)) {
-            $this->modx->regClientStartupHTMLBlock($this->ruleOutput);
+            $this->addHtml($this->ruleOutput);
         }
         $this->registerCssJs();
 
         /* assign later to allow for css/js registering */
         if (is_array($cbody)) {
-            $this->modx->smarty->assign('_e', $cbody);
-            $cbody = $this->modx->smarty->fetch('error.tpl');
+            $this->setPlaceholder('_e', $cbody);
+            $cbody = $this->fetchTemplate('error.tpl');
         }
         $this->body .= $cbody;
 
@@ -219,7 +220,7 @@ class modManagerControllerDeprecated extends modManagerController {
             }
         }
         /* assign css/js to header */
-        $this->modx->smarty->assign('cssjs',$this->modx->sjscripts);
+        $this->setPlaceholder('cssjs',$this->modx->sjscripts);
     }
 
     /**
@@ -230,10 +231,7 @@ class modManagerControllerDeprecated extends modManagerController {
      * @return boolean True if successful
      */
     public function addLangTopic($topic) {
-        $this->modx->lexicon->load($topic);
-        $topics = $this->getLangTopics();
-        $topics[] = $topic;
-        return $this->setLangTopics($topics);
+        return $this->addLexiconTopic($topic);
     }
     /**
      * Adds a lexicon topic to this page's language topics to load
@@ -255,7 +253,7 @@ class modManagerControllerDeprecated extends modManagerController {
 
         $topics = array_unique($topics);
         $topics = implode(',',$topics);
-        return $this->modx->smarty->assign('_lang_topics',$topics);
+        return $this->setPlaceholder('_lang_topics',$topics);
     }
 
 }
