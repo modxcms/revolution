@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6551] Fix issue where ID instead of name of Template showed on resource combo
 - [#6509] Fix minify issue when DOCUMENT_ROOT is a symlink
 - [#6546] Reposition setting grid filter dropdowns to clarify behavior
 - [#4146] Fix issue where Content Types were always binary when created
