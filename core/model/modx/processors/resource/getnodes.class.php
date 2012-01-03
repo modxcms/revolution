@@ -408,6 +408,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'type' => 'modResource',
             'classKey' => $resource->class_key,
             'ctx' => $resource->context_key,
+            'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
             'preview_url' => $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full'),
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? $this->actions['resource/update'] : $this->actions['resource/data']).'&id='.$resource->id : '',
