@@ -151,17 +151,23 @@ label { cursor: pointer; }
 }
 
 .login-cb-row {
-    padding: 9px 0 0 0;
+    padding: 9px 0 10px 0;
 }
 .x-form-check-wrap .x-form-cb-label {
     color: #bbb;
+}
+.login-cb-col {
+    width: 50%;
+    float: left;
 }
 .modx-login-fl-link {
     height: auto !important;
     line-height: 18px;
     cursor: pointer;
-    float: right;
-    margin: 2px 102px 0 0;
+    white-space: nowrap;
+    margin: 2px 0 0 2px;
+}
+.modx-login-rm-cb {
 }
 .login-form-btn {
     padding: 8px 18px;
