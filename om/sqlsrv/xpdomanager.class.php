@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2011 by MODX, LLC.
+ * Copyright 2010-2012 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -134,7 +134,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
                 }
                 $tableMeta= $this->xpdo->getTableMeta($className);
                 $sql= 'CREATE TABLE ' . $tableName . ' (';
-                $fieldMeta = $this->xpdo->getFieldMeta($className);
+                $fieldMeta = $this->xpdo->getFieldMeta($className, true);
                 $nativeGen = false;
                 $columns = array();
                 while (list($key, $meta)= each($fieldMeta)) {
@@ -213,7 +213,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
         if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
             $className = $this->xpdo->loadClass($class);
             if ($className) {
-                $meta = $this->xpdo->getFieldMeta($className);
+                $meta = $this->xpdo->getFieldMeta($className, true);
                 if (is_array($meta) && array_key_exists($name, $meta)) {
                     $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                     if (!empty($colDef)) {
@@ -278,7 +278,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
         if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
             $className = $this->xpdo->loadClass($class);
             if ($className) {
-                $meta = $this->xpdo->getFieldMeta($className);
+                $meta = $this->xpdo->getFieldMeta($className, true);
                 if (is_array($meta) && array_key_exists($name, $meta)) {
                     $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                     if (!empty($colDef)) {
