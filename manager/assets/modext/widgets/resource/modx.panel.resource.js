@@ -101,7 +101,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             this.cleanupEditor();
         }
         if(this.getForm().baseParams.action == 'create') {
-            Ext.getCmp('modx-button-save-resource').disable();
+            Ext.getCmp('modx-abtn-save').disable();
         }
         return this.fireEvent('save',{
             values: this.getForm().getValues()
@@ -138,7 +138,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
     ,failure: function(o) {
         if(this.getForm().baseParams.action == 'create') {
-            Ext.getCmp('modx-button-save-resource').enable();
+            Ext.getCmp('modx-abtn-save').enable();
         }
     }
 
