@@ -2,6 +2,11 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.0-pl2 (January 4, 2012)
+====================================
+- [#6564] Fix issue where save button on New Resource does not work due to JS DOM error
+- [#6470] Fix issue where Media Sources could not be protected on new installs only
+
 MODX Revolution 2.2.0-pl (January 4, 2012)
 ====================================
 - [#6559] Fix issue with save btn on resources not enabling after template change

@@ -14,6 +14,7 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element nicht gefunden.';
 $_lang['element_err_ns'] = 'Element nicht angegeben.';
+$_lang['element_static_source_immutable'] = 'Die statische Datei, die als Element-Quelle angegeben ist, ist nicht beschreibbar! Sie können den Inhalt dieses Elements nicht im Manager bearbeiten.';
 $_lang['is_static'] = 'Ist statisch';
 $_lang['is_static_msg'] = 'Gibt an, ob der Quellcode des Elements in einer externen Datei gespeichert ist.';
 $_lang['quick_create'] = 'Schnell erstellen';
