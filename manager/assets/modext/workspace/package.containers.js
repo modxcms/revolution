@@ -33,7 +33,6 @@ MODx.panel.Packages = function(config) {
 		,buttons: [{
 			text: _('cancel')
 			,id:'package-list-reset'
-			,iconCls:'icon-back'
 			,hidden: true
 			,handler: function(btn, e){
 				Ext.getCmp('modx-panel-packages').activate();
@@ -42,14 +41,12 @@ MODx.panel.Packages = function(config) {
 		},{
 			text: _('continue')
 			,id:'package-install-btn'
-			,iconCls:'icon-install'
 			,hidden: true
 			,handler: this.install
 			,scope: this
 		},{
 			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
-			,iconCls:'icon-install'
 			,hidden: true
 			,handler: this.onSetupOptions
 			,scope: this
