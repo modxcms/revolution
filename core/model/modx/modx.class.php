@@ -435,10 +435,6 @@ class modX extends xPDO {
                 $database_password,
                 $options,
                 array_merge(
-                    array (
-                        PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
-                        PDO::ATTR_PERSISTENT => false,
-                    ),
                     $driver_options,
                     $driverOptions
                 )
