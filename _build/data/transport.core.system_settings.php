@@ -1037,7 +1037,7 @@ $settings['modx_charset']->fromArray(array (
 $settings['principal_targets']= $xpdo->newObject('modSystemSetting');
 $settings['principal_targets']->fromArray(array (
   'key' => 'principal_targets',
-  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory',
+  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',
