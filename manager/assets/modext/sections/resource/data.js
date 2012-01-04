@@ -12,6 +12,7 @@ MODx.page.ResourceData = function(config) {
     if (config.canEdit == 1) {
         btns.push({
             process: 'edit'
+            ,id: 'modx-abtn-edit'
             ,text: _('edit')
             ,hidden: config.canEdit == 1 ? false : true
             ,handler: this.editResource
@@ -24,6 +25,7 @@ MODx.page.ResourceData = function(config) {
         ,text: _('view')
         ,handler: this.preview
         ,scope: this
+        ,id: 'modx-abtn-preview'
     });
     btns.push('-');
     btns.push({
@@ -31,6 +33,7 @@ MODx.page.ResourceData = function(config) {
         ,text: _('cancel')
         ,handler: this.cancel
         ,scope: this
+        ,id: 'modx-abtn-cancel'
     });
     Ext.applyIf(config,{
         form: 'modx-resource-data'

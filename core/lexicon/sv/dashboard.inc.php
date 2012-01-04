@@ -9,7 +9,7 @@
 $_lang['active_users_none'] = 'Inga aktiva användare just nu.';
 $_lang['add_user'] = 'Lägg till användare';
 $_lang['create_resource'] = 'Skapa resurs';
-$_lang['dashboard'] = 'Instrumentpanel';
+$_lang['dashboard'] = 'Infopanel';
 $_lang['documentation'] = 'Dokumentation';
 $_lang['file_bug'] = 'Rapportera en bugg';
 $_lang['forums'] = 'Forum';
@@ -19,7 +19,7 @@ $_lang['onlineusers_action'] = 'Handling';
 $_lang['onlineusers_actionid'] = 'Handlings-ID';
 $_lang['onlineusers_ipaddress'] = 'Användarens IP-adress';
 $_lang['onlineusers_lasthit'] = 'Senaste träff';
-$_lang['onlineusers_message'] = 'Denna lista visar alla användare som varit aktiva de senaste 20 minuterna (nuvarande tid är [[+curtime]])';
+$_lang['onlineusers_message'] = 'Denna lista visar alla användare som varit aktiva de senaste 20 minuterna (klockan är nu [[+curtime]])';
 $_lang['onlineusers_title'] = 'Användare online';
 $_lang['onlineusers_user'] = 'Användare';
 $_lang['onlineusers_userid'] = 'Användarens ID';

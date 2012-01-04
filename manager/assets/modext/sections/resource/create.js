@@ -40,7 +40,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'create'
-                ,id: 'modx-button-save-resource'
+                ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: true
@@ -54,12 +54,14 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         btns.push({
             process: 'cancel'
             ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,params: { a: MODx.action['welcome'] }
         });
         btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
+            ,id: 'modx-abtn-help'
         });
         return btns;
     }

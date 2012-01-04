@@ -44,7 +44,7 @@ class modPackageGetAttributeProcessor extends modProcessor {
             if ($attribute == 'setup-options') {
                 @ob_start();
                 $options = $this->package->toArray();
-                $options[xPDOTransport::PACKAGE_ACTION] = empty($this->package->installed)
+                $options[xPDOTransport::PACKAGE_ACTION] = $this->package->previousVersionInstalled()
                     ? xPDOTransport::ACTION_INSTALL
                     : xPDOTransport::ACTION_UPGRADE;
                 $attributeFile = $this->modx->getOption('core_path').'packages/'.$this->package->signature.'/'.$attribute.'.php';

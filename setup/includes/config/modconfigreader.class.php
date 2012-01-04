@@ -68,6 +68,7 @@ abstract class modConfigReader {
             'inplace' => isset ($_POST['inplace']) ? 1 : 0,
             'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
             'config_options' => array(),
+            'driver_options' => array(),
         ),$config);
         return $this->config;
     }

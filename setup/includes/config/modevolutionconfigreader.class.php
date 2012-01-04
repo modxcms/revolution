@@ -28,8 +28,8 @@ require_once strtr(realpath(MODX_SETUP_PATH.'includes/config/modconfigreader.cla
  */
 class modEvolutionConfigReader extends modConfigReader {
     public function read(array $config = array()) {
-        global $database_dsn, $database_type, $database_server, $dbase, $database_user,
-                $database_password, $database_connection_charset, $table_prefix, $config_options;
+        global $database_dsn, $database_type, $database_server, $dbase, $database_user, $database_password,
+               $database_connection_charset, $table_prefix, $config_options, $driver_options;
         $database_connection_charset = 'utf8';
 
         /* get http host */
@@ -39,7 +39,8 @@ class modEvolutionConfigReader extends modConfigReader {
         $included = @ include MODX_INSTALL_PATH . 'manager/includes/config.inc.php';
         @ob_end_clean();
         if ($included && isset ($dbase)) {
-            $config_options = !empty($config_options) ? $config_options : array();
+            $config_options = is_array($config_options) ? $config_options : array();
+            $driver_options = is_array($driver_options) ? $driver_options : array();
 
             $this->config = array_merge(array(
                 'database_type' => !empty($database_type) ? $database_type : 'mysql',
@@ -56,7 +57,8 @@ class modEvolutionConfigReader extends modConfigReader {
                 'cache_disabled' => isset ($cache_disabled) && $cache_disabled ? 'true' : 'false',
                 'inplace' => isset ($_POST['inplace']) ? 1 : 0,
                 'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
-                'config_options' => !empty($config_options) ? $config_options : array(),
+                'config_options' => $config_options,
+                'driver_options' => $driver_options,
             ),$this->config,$config);
         }
         return $this->config;

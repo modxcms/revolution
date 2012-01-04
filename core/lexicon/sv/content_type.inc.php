@@ -15,6 +15,7 @@ $_lang['content_type_err_nfs'] = 'Innehållstypen med ID [[+id]] kunde inte hitt
 $_lang['content_type_err_ns'] = 'Ingen innehållstyp angiven.';
 $_lang['content_type_err_ns_name'] = 'Ange ett giltigt namn på innehållstypen.';
 $_lang['content_type_err_create'] = 'Ett fel inträffade när innehållstypen skulle skapas.';
+$_lang['content_type_err_in_use'] = 'Du kan inte ta bort denna innehållstyp eftersom den används av resurser i MODX. Ange andra innehållstyper för dessa resurser innan du fortsätter.';
 $_lang['content_type_err_remove'] = 'Ett fel inträffade när innehållstypen skulle tas bort.';
 $_lang['content_type_err_save'] = 'Ett fel inträffade när innehållstypen skulle sparas.';
 $_lang['content_type_new'] = 'Ny innehållstyp';

@@ -7,8 +7,14 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2011-12-29
  */
+// $_lang['area'] = 'Area';
+$_lang['area'] = 'Oblast';
+
+// $_lang['areas'] = 'Areas';
+$_lang['areas'] = 'Oblasti';
+
 // $_lang['class_name'] = 'Class Name';
 $_lang['class_name'] = 'Třída obsahu';
 
@@ -62,6 +68,12 @@ $_lang['properties_remove'] = 'Odstranit vlastnosti';
 
 // $_lang['properties_remove_confirm'] = 'Are you sure you want to delete these properties?';
 $_lang['properties_remove_confirm'] = 'Opravdu chcete odstranit tyto vlastnosti?';
+
+// $_lang['property'] = 'Property';
+$_lang['property'] = 'Vlastnost';
+
+// $_lang['property_area_desc'] = 'The area, or group, this property belongs to.';
+$_lang['property_area_desc'] = 'Oblast nebo skupina, ke které tato vlastnost patří.';
 
 // $_lang['property_create'] = 'Create Property';
 $_lang['property_create'] = 'Vytvořit vlastnost';

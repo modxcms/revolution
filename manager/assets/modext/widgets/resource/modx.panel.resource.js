@@ -38,9 +38,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) { 
             this.getForm().setValues(this.config.record);
-            if (this.config.richtext || MODx.request.reload || MODx.request.activeSave == 1) {
-                this.markDirty();
-            }
             var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
@@ -59,6 +56,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
 
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
+            this.defaultValues = this.config.record || {};
+            if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
+                this.markDirty();
+            }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
@@ -72,6 +73,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = false;
             }
         }
+
         this.fireEvent('ready');
         this.initialized = true;
 
@@ -126,6 +128,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
+            location.href = location.href;
+        } else if (o.result.object['parent'] != this.defaultValues['parent'] && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
         } else {
             this.getForm().setValues(o.result.object);
@@ -417,6 +421,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,baseParams: {
                 action: 'getList'
                 ,combo: '1'
+                ,limit: 0
             }
             ,listeners: {
                 'select': {fn: this.templateWarning,scope: this}

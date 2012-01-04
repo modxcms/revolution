@@ -39,7 +39,7 @@ Ext.extend(MODx.page.CreateSymLink,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'create'
-                ,id: 'modx-button-save-resource'
+                ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: true
@@ -54,11 +54,13 @@ Ext.extend(MODx.page.CreateSymLink,MODx.Component,{
             process: 'cancel'
             ,text: _('cancel')
             ,params: { a: MODx.action['welcome'] }
+            ,id: 'modx-abtn-cancel'
         });
         btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
+            ,id: 'modx-abtn-help'
         });
         return btns;
     }

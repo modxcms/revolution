@@ -64,6 +64,8 @@ MODx.FormPanel = function(config) {
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     isReady: false
+    ,defaultValues: []
+    ,initialized: false
 
     ,submit: function(o) {
         var fm = this.getForm();

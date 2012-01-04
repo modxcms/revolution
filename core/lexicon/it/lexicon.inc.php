@@ -30,5 +30,6 @@ $_lang['lexicon_management'] = 'Gestione Linguaggio';
 $_lang['lexicon_management_desc'] = 'Puoi sovrascrivere ogni termine contenuto negli Spazi dei Nomi e i loro relativi Argomenti. Basta fare doppio click sul valore di un termine per modificarlo. Per aggiungere nuovi termini , basta creare i loro files di Argomento nella loro rispettiva cartella dello Spazio dei Nomi.';
 $_lang['lexicon_rlfb_msg'] = 'Rigenerate con successo [[+num]] stringhe.';
 $_lang['reload_from_base'] = 'Ripristina tutte le voci';
+$_lang['reload_success'] = 'Stringhe [[+total]] ricaricate con successo.';
 $_lang['search_by_key'] = 'Ricerca per Chiave:';
 $_lang['topic'] = 'Archivio';
