@@ -1335,15 +1335,17 @@ class xPDO {
      * Gets a list of field (or column) definitions for an object by class name.
      *
      * These definitions are used by the objects themselves to build their
-     * own meta data based on class inheritence.
+     * own meta data based on class inheritance.
      *
      * @param string $className The name of the class to lookup fields meta data
      * for.
+     * @param boolean $includeExtended If true, include meta from all derivative
+     * classes in loaded packages.
      * @return array An array featuring field names as the array keys, and
      * arrays of metadata information as the array values; empty array is
      * returned if unsuccessful.
      */
-    public function getFieldMeta($className) {
+    public function getFieldMeta($className, $includeExtended = false) {
         $fieldMeta= array ();
         if ($className= $this->loadClass($className)) {
             if ($ancestry= $this->getAncestry($className)) {
@@ -1353,7 +1355,7 @@ class xPDO {
                     }
                 }
             }
-            if ($this->getInherit($className) === 'single') {
+            if ($includeExtended && $this->getInherit($className) === 'single') {
                 $descendants= $this->getDescendants($className);
                 if ($descendants) {
                     foreach ($descendants as $descendant) {
@@ -2907,9 +2909,9 @@ class xPDOConnection {
      * @param string $username The database username credentials.
      * @param string $password The database password credentials.
      * @param array $options An array of xPDO options for the connection.
-     * @param null $driverOptions An array of PDO driver options for the connection.
+     * @param array $driverOptions An array of PDO driver options for the connection.
      */
-    public function __construct(xPDO &$xpdo, $dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
+    public function __construct(xPDO &$xpdo, $dsn, $username= '', $password= '', $options= array(), $driverOptions= array()) {
         $this->xpdo =& $xpdo;
         if (is_array($this->xpdo->config)) $options= array_merge($this->xpdo->config, $options);
         if (!isset($options[xPDO::OPT_TABLE_PREFIX])) $options[xPDO::OPT_TABLE_PREFIX]= '';
@@ -2917,7 +2919,11 @@ class xPDOConnection {
         $this->config['dsn']= $dsn;
         $this->config['username']= $username;
         $this->config['password']= $password;
-        $this->config['driverOptions']= is_array($driverOptions) ? $driverOptions : array();
+        $driverOptions = is_array($driverOptions) ? $driverOptions : array();
+        if (array_key_exists('driverOptions', $this->config) && is_array($this->config['driverOptions'])) {
+            $driverOptions = array_merge($this->config['driverOptions'], $driverOptions);
+        }
+        $this->config['driverOptions']= $driverOptions;
         if (array_key_exists(xPDO::OPT_CONN_MUTABLE, $this->config)) {
             $this->_mutable= (boolean) $this->config[xPDO::OPT_CONN_MUTABLE];
         }
@@ -2940,12 +2946,8 @@ class xPDOConnection {
      */
     public function connect($driverOptions = array()) {
         if ($this->pdo === null) {
-            if (!empty ($driverOptions)) {
-                if (is_array($this->getOption('driverOptions'))) {
-                    $this->config['driverOptions']= array_merge($this->getOption('driverOptions'), $driverOptions);
-                } else {
-                    $this->config['driverOptions']= $driverOptions;
-                }
+            if (is_array($driverOptions) && !empty($driverOptions)) {
+                $this->config['driverOptions']= array_merge($this->config['driverOptions'], $driverOptions);
             }
             try {
                 $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);

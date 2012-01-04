@@ -44,7 +44,7 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         $result= array ();
         $pk= $this->xpdo->getPK($this->_class);
         $pktype= $this->xpdo->getPKType($this->_class);
-        $fieldMeta= $this->xpdo->getFieldMeta($this->_class);
+        $fieldMeta= $this->xpdo->getFieldMeta($this->_class, true);
         $command= strtoupper($this->query['command']);
         $alias= $command == 'SELECT' ? $this->_class : $this->xpdo->getTableName($this->_class, false);
         $alias= trim($alias, $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose);
