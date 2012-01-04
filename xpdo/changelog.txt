@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.2-pl (January 4, 2012)
+====================================
 - Fix handling of driverOptions in xPDOConnection instances
 - [#6240] Derivative-only fields marked lazy in base classes
 

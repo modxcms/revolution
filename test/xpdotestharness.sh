@@ -2,7 +2,7 @@
 #
 # This script runs the xPDO Test Harness.
 #
-# Copyright 2010-2011 by MODX, LLC.
+# Copyright 2010-2012 by MODX, LLC.
 #
 # This file is part of xPDO.
 #
