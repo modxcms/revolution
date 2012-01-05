@@ -81,6 +81,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'undelete_document' => $this->modx->hasPermission('undelete_document') ? 'pundelete' : '',
             'publish_document' => $this->modx->hasPermission('publish_document') ? 'ppublish' : '',
             'unpublish_document' => $this->modx->hasPermission('unpublish_document') ? 'punpublish' : '',
+            'resource_duplicate' => $this->modx->hasPermission('resource_duplicate') ? 'pduplicate' : '',
             'resource_quick_create' => $this->modx->hasPermission('resource_quick_create') ? 'pqcreate' : '',
             'resource_quick_update' => $this->modx->hasPermission('resource_quick_update') ? 'pqupdate' : '',
             'edit_context' => $this->modx->hasPermission('edit_context') ? 'pedit' : '',
@@ -358,6 +359,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         if (!empty($this->permissions['save_document'])) $class[] = $this->permissions['save_document'];
         if (!empty($this->permissions['view_document'])) $class[] = $this->permissions['view_document'];
         if (!empty($this->permissions['edit_document'])) $class[] = $this->permissions['edit_document'];
+        if (!empty($this->permissions['resource_duplicate'])) $class[] = $this->permissions['resource_duplicate'];
         if ($resource->allowChildrenResources) {
             if (!empty($this->permissions['new_document'])) $class[] = $this->permissions['new_document'];
             if (!empty($this->permissions['new_symlink'])) $class[] = $this->permissions['new_symlink'];
@@ -406,6 +408,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'type' => 'modResource',
             'classKey' => $resource->class_key,
             'ctx' => $resource->context_key,
+            'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
             'preview_url' => $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full'),
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? $this->actions['resource/update'] : $this->actions['resource/data']).'&id='.$resource->id : '',

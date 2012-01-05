@@ -410,6 +410,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
         	return false;
         }
+        if (targetParent.attributes.hide_children_in_tree) { return false; }
         
         return dropNode.attributes.text != 'root' && dropNode.attributes.text !== '' 
             && targetParent.attributes.text != 'root' && targetParent.attributes.text !== '';
@@ -436,15 +437,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             class_key: cls
             ,context_key: ctx || 'web'
             ,'parent': p || 0
-            ,'template': this.getContextSettingForNode(this.cm.activeNode,ctx,'default_template',MODx.config.default_template)
-            ,'richtext': this.getContextSettingForNode(this.cm.activeNode,ctx,'richtext_default',MODx.config.richtext_default)
-            ,'hidemenu': this.getContextSettingForNode(this.cm.activeNode,ctx,'hidemenu_default',MODx.config.hidemenu_default)
-            ,'searchable': this.getContextSettingForNode(this.cm.activeNode,ctx,'search_default',MODx.config.search_default)
-            ,'cacheable': this.getContextSettingForNode(this.cm.activeNode,ctx,'cache_default',MODx.config.cache_default)
-            ,'published': this.getContextSettingForNode(this.cm.activeNode,ctx,'publish_default',MODx.config.publish_default)
-            ,'content_type': this.getContextSettingForNode(this.cm.activeNode,ctx,'default_content_type',MODx.config.default_content_type)
+            ,'template': parseInt(this.getContextSettingForNode(this.cm.activeNode,ctx,'default_template',MODx.config.default_template))
+            ,'richtext': parseInt(this.getContextSettingForNode(this.cm.activeNode,ctx,'richtext_default',MODx.config.richtext_default))
+            ,'hidemenu': parseInt(this.getContextSettingForNode(this.cm.activeNode,ctx,'hidemenu_default',MODx.config.hidemenu_default))
+            ,'searchable': parseInt(this.getContextSettingForNode(this.cm.activeNode,ctx,'search_default',MODx.config.search_default))
+            ,'cacheable': parseInt(this.getContextSettingForNode(this.cm.activeNode,ctx,'cache_default',MODx.config.cache_default))
+            ,'published': parseInt(this.getContextSettingForNode(this.cm.activeNode,ctx,'publish_default',MODx.config.publish_default))
+            ,'content_type': parseInt(this.getContextSettingForNode(this.cm.activeNode,ctx,'default_content_type',MODx.config.default_content_type))
         };
-
         if (this.cm.activeNode.attributes.type != 'modContext') {
             var t = this.cm.activeNode.getOwnerTree();
             var rn = t.getRootNode();
@@ -591,7 +591,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,handler: this.quickUpdateResource
             });
         }
-        if (ui.hasClass('pnew')) {
+        if (ui.hasClass('pduplicate')) {
             m.push({
                 text: _('resource_duplicate')
                 ,handler: this.duplicateResource
@@ -784,6 +784,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,baseParams: {
                                 action: 'getList'
                                 ,combo: '1'
+                                ,limit: 0
                             }
                             ,value: MODx.config.default_template
                         },{
@@ -919,6 +920,7 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,baseParams: {
                                 action: 'getList'
                                 ,combo: '1'
+                                ,limit: 0
                             }
                         },{
                             xtype: 'textfield'

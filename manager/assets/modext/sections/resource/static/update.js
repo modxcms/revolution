@@ -97,6 +97,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'update'
+                ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: cfg.richtext || MODx.request.activeSave == 1 ? false : true
@@ -111,6 +112,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 text: cfg.lockedText || _('locked')
                 ,handler: Ext.emptyFn
                 ,disabled: true
+                ,id: 'modx-abtn-locked'
             });
             btns.push('-');
         }
@@ -120,6 +122,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 ,text: _('duplicate')
                 ,handler: this.duplicateResource
                 ,scope:this
+                ,id: 'modx-abtn-duplicate'
             });
             btns.push('-');
         }
@@ -129,6 +132,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 ,text: _('delete')
                 ,handler: this.deleteResource
                 ,scope:this
+                ,id: 'modx-abtn-delete'
             });
             btns.push('-');
         }
@@ -137,6 +141,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             ,text: _('view')
             ,handler: this.preview
             ,scope: this
+            ,id: 'modx-abtn-preview'
         });
         btns.push('-');
         btns.push({
@@ -144,11 +149,13 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             ,text: _('cancel')
             ,handler: this.cancel
             ,scope: this
+            ,id: 'modx-abtn-cancel'
         });
         btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
+            ,id: 'modx-abtn-help'
         });
         return btns;
     }

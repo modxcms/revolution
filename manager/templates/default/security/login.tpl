@@ -66,16 +66,17 @@
     <br class="clear" />
 
     <div class="login-cb-row">
-        <div class="modx-login-fl-link">
-           <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.username_reset}display:none;{/if}">{$_lang.login_forget_your_login}</a>
+        <div class="login-cb-col one">
+            <div class="x-form-check-wrap modx-login-rm-cb">
+                <input type="checkbox" id="modx-login-rememberme" name="rememberme" tabindex="3" autocomplete="on" {if $_post.rememberme}checked="checked"{/if} class="x-form-checkbox x-form-field" value="1" />
+                <label for="modx-login-rememberme" class="x-form-cb-label">{$_lang.login_remember}</label>
+            </div>
         </div>
-
-        <div class="x-form-check-wrap">
-            <input type="checkbox" id="modx-login-rememberme" name="rememberme" tabindex="3" autocomplete="on" {if $_post.rememberme}checked="checked"{/if} class="x-form-checkbox x-form-field" value="1" />
-            <label for="modx-login-rememberme" class="x-form-cb-label">{$_lang.login_remember}</label>
+        <div class="login-cb-col two">
+            <div class="modx-login-fl-link">
+               <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.username_reset}display:none;{/if}">{$_lang.login_forget_your_login}</a>
+            </div>
         </div>
-
-
     </div>
 
     {$onManagerLoginFormRender}

@@ -271,7 +271,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      */
     public function setRequestProperties(array $scriptProperties = array()) {
         if (empty($this->properties)) $this->properties = array();
-        $this->properties = array_merge($this->properties,$scriptProperties);
+        $this->properties = array_merge($this->getPropertyList(),$this->properties,$scriptProperties);
         return $this->properties;
     }
 
@@ -404,6 +404,16 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         } else {
             $properties = $defaultProperties;
         }
+        /** @var array $results Allow manipulation of media source properties via event */
+        $results = $this->xpdo->invokeEvent('OnMediaSourceGetProperties',array(
+            'properties' => $this->xpdo->toJson($properties),
+        ));
+        if (!empty($results)) {
+            foreach ($results as $result) {
+                $result = is_array($result) ? $result : $this->xpdo->fromJSON($result);
+                $properties = array_merge($properties,$result);
+            }
+        }
         return $this->prepareProperties($properties);
     }
 
@@ -421,6 +431,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
             }
             $list[$property['name']] = $value;
         }
+        $list = array_merge($list,$this->properties);
         return $list;
     }
 
@@ -542,7 +553,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         if (substr($src,0,4) != 'http') {
             if (strpos($src,'/') !== 0) {
                 $properties = $this->getPropertyList();
-                $src = $properties['basePath'].$src;
+                $src = !empty($properties['basePath']) ? $properties['basePath'].$src : $src;
                 if (!empty($properties['basePathRelative'])) {
                     $src = $this->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
                 }

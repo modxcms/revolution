@@ -5,7 +5,7 @@
  * native PDO if available or provides a subset implementation for use with PHP
  * 4 on platforms that do not include the native PDO extensions.
  *
- * Copyright 2010-2011 by MODX, LLC.
+ * Copyright 2010-2012 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -2909,9 +2909,9 @@ class xPDOConnection {
      * @param string $username The database username credentials.
      * @param string $password The database password credentials.
      * @param array $options An array of xPDO options for the connection.
-     * @param null $driverOptions An array of PDO driver options for the connection.
+     * @param array $driverOptions An array of PDO driver options for the connection.
      */
-    public function __construct(xPDO &$xpdo, $dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
+    public function __construct(xPDO &$xpdo, $dsn, $username= '', $password= '', $options= array(), $driverOptions= array()) {
         $this->xpdo =& $xpdo;
         if (is_array($this->xpdo->config)) $options= array_merge($this->xpdo->config, $options);
         if (!isset($options[xPDO::OPT_TABLE_PREFIX])) $options[xPDO::OPT_TABLE_PREFIX]= '';
@@ -2919,7 +2919,11 @@ class xPDOConnection {
         $this->config['dsn']= $dsn;
         $this->config['username']= $username;
         $this->config['password']= $password;
-        $this->config['driverOptions']= is_array($driverOptions) ? $driverOptions : array();
+        $driverOptions = is_array($driverOptions) ? $driverOptions : array();
+        if (array_key_exists('driverOptions', $this->config) && is_array($this->config['driverOptions'])) {
+            $driverOptions = array_merge($this->config['driverOptions'], $driverOptions);
+        }
+        $this->config['driverOptions']= $driverOptions;
         if (array_key_exists(xPDO::OPT_CONN_MUTABLE, $this->config)) {
             $this->_mutable= (boolean) $this->config[xPDO::OPT_CONN_MUTABLE];
         }
@@ -2942,12 +2946,8 @@ class xPDOConnection {
      */
     public function connect($driverOptions = array()) {
         if ($this->pdo === null) {
-            if (!empty ($driverOptions)) {
-                if (is_array($this->getOption('driverOptions'))) {
-                    $this->config['driverOptions']= array_merge($this->getOption('driverOptions'), $driverOptions);
-                } else {
-                    $this->config['driverOptions']= $driverOptions;
-                }
+            if (is_array($driverOptions) && !empty($driverOptions)) {
+                $this->config['driverOptions']= array_merge($this->config['driverOptions'], $driverOptions);
             }
             try {
                 $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);

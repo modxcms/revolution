@@ -50,7 +50,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $bases['pathAbsolute'] = $bases['path'];
         }
         
-        $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].$path;
+        $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'].ltrim($path,'/');
         if (is_dir($bases['pathAbsoluteWithPath'])) {
             $bases['pathAbsoluteWithPath'] = $this->fileHandler->postfixSlash($bases['pathAbsoluteWithPath']);
         }
@@ -106,8 +106,15 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $imagesExts = explode(',',$imagesExts);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
         $skipFiles = explode(',',$skipFiles);
+        if ($this->xpdo->getParser()) {
+            $this->xpdo->parser->processElementTags('',$skipFiles,true,true);
+        }
         $skipFiles[] = '.';
         $skipFiles[] = '..';
+
+        $canSave = $this->checkPolicy('save');
+        $canRemove = $this->checkPolicy('remove');
+        $canCreate = $this->checkPolicy('create');
 
         $directories = array();
         $files = array();
@@ -121,6 +128,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             $fileName = $file->getFilename();
             if (in_array(trim($fileName,'/'),$skipFiles)) continue;
+            if (in_array($fullPath.$fileName,$skipFiles)) continue;
             $filePathName = $file->getPathname();
             $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
@@ -128,12 +136,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $cls = array();
             if ($file->isDir() && $this->hasPermission('directory_list')) {
                 $cls[] = 'folder';
-                if ($this->hasPermission('directory_chmod')) $cls[] = 'pchmod';
-                if ($this->hasPermission('directory_create')) $cls[] = 'pcreate';
-                if ($this->hasPermission('directory_remove')) $cls[] = 'premove';
-                if ($this->hasPermission('directory_update')) $cls[] = 'pupdate';
-                if ($this->hasPermission('file_upload')) $cls[] = 'pupload';
-                if ($this->hasPermission('file_create')) $cls[] = 'pcreate';
+                if ($this->hasPermission('directory_chmod') && $canSave) $cls[] = 'pchmod';
+                if ($this->hasPermission('directory_create') && $canCreate) $cls[] = 'pcreate';
+                if ($this->hasPermission('directory_remove') && $canRemove) $cls[] = 'premove';
+                if ($this->hasPermission('directory_update') && $canSave) $cls[] = 'pupdate';
+                if ($this->hasPermission('file_upload') && $canCreate) $cls[] = 'pupload';
+                if ($this->hasPermission('file_create') && $canCreate) $cls[] = 'pcreate';
 
                 $directories[$fileName] = array(
                     'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
@@ -141,7 +149,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'cls' => implode(' ',$cls),
                     'type' => 'dir',
                     'leaf' => false,
-                    'path' => $bases['pathAbsolute'].$fileName,
+                    'path' => $bases['pathAbsoluteWithPath'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'perms' => $octalPerms,
                     'menu' => array(),
@@ -162,15 +170,15 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $cls[] = 'active-node';
                 }
 
-                if ($this->hasPermission('file_remove')) $cls[] = 'premove';
-                if ($this->hasPermission('file_update')) $cls[] = 'pupdate';
+                if ($this->hasPermission('file_remove') && $canRemove) $cls[] = 'premove';
+                if ($this->hasPermission('file_update') && $canSave) $cls[] = 'pupdate';
 
                 if (!$file->isWritable()) {
                     $cls[] = 'icon-lock';
                 }
                 $encFile = rawurlencode($fullPath.$fileName);
                 $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
-                $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).($path != './' ? $path : '').$fileName;
+                $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName;
 
                 /* get relative url from manager/ */
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
@@ -184,10 +192,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
-                    'path' => $bases['pathAbsolute'].$fileName,
+                    'path' => $bases['pathAbsoluteWithPath'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'directory' => $bases['path'],
-                    'url' => $url,
+                    'url' => $bases['url'].$url,
+                    'urlAbsolute' => $bases['urlAbsolute'].ltrim($url,'/'),
                     'file' => $encFile,
                     'menu' => array(),
                 );
@@ -217,9 +226,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return array
      */
     public function getListContextMenu(DirectoryIterator $file,array $fileArray) {
+        $canSave = $this->checkPolicy('save');
+        $canRemove = $this->checkPolicy('remove');
+        $canCreate = $this->checkPolicy('create');
+        $canView = $this->checkPolicy('view');
+
         $menu = array();
         if (!$file->isDir()) { /* files */
-            if ($this->hasPermission('file_update')) {
+            if ($this->hasPermission('file_update') && $canSave) {
                 if (!empty($fileArray['page'])) {
                     $menu[] = array(
                         'text' => $this->xpdo->lexicon('file_edit'),
@@ -231,13 +245,13 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'handler' => 'this.renameFile',
                 );
             }
-            if ($this->hasPermission('file_view')) {
+            if ($this->hasPermission('file_view') && $canView) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_download'),
                     'handler' => 'this.downloadFile',
                 );
             }
-            if ($this->hasPermission('file_remove')) {
+            if ($this->hasPermission('file_remove') && $canRemove) {
                 if (!empty($menu)) $menu[] = '-';
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_remove'),
@@ -245,19 +259,19 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 );
             }
         } else { /* directories */
-            if ($this->hasPermission('directory_create')) {
+            if ($this->hasPermission('directory_create') && $canCreate) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_folder_create_here'),
                     'handler' => 'this.createDirectory',
                 );
             }
-            if ($this->hasPermission('directory_chmod')) {
+            if ($this->hasPermission('directory_chmod') && $canSave) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_folder_chmod'),
                     'handler' => 'this.chmodDirectory',
                 );
             }
-            if ($this->hasPermission('directory_update')) {
+            if ($this->hasPermission('directory_update') && $canSave) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('rename'),
                     'handler' => 'this.renameDirectory',
@@ -267,20 +281,20 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 'text' => $this->xpdo->lexicon('directory_refresh'),
                 'handler' => 'this.refreshActiveNode',
             );
-            if ($this->hasPermission('file_upload')) {
+            if ($this->hasPermission('file_upload') && $canCreate) {
                 $menu[] = '-';
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('upload_files'),
                     'handler' => 'this.uploadFiles',
                 );
             }
-            if ($this->hasPermission('file_create')) {
+            if ($this->hasPermission('file_create') && $canCreate) {
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_create'),
                     'handler' => 'this.createFile',
                 );
             }
-            if ($this->hasPermission('directory_remove')) {
+            if ($this->hasPermission('directory_remove') && $canRemove) {
                 $menu[] = '-';
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_folder_remove'),
@@ -347,6 +361,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
     public function removeContainer($path) {
         /* instantiate modDirectory object */
         /** @var modDirectory $directory */
+        $path = $this->fileHandler->postfixSlash($path);
         $directory = $this->fileHandler->make($path);
         
         /* validate and check permissions on directory */
@@ -413,6 +428,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return bool
      */
     public function renameObject($oldPath,$newName) {
+        $bases = $this->getBases($oldPath);
+        $oldPath = $bases['pathAbsolute'].$oldPath;
+
         /** @var modFile $oldFile */
         $oldFile = $this->fileHandler->make($oldPath);
 

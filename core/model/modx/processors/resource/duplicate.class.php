@@ -23,7 +23,7 @@ class modResourceDuplicateProcessor extends modProcessor {
     public $parentResource;
     
     public function checkPermissions() {
-        return $this->modx->hasPermission('new_document');
+        return $this->modx->hasPermission('resource_duplicate');
     }
     public function getLanguageTopics() {
         return array('resource');

@@ -115,7 +115,8 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 process: 'update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: cfg.richtext || MODx.request.reload || MODx.request.activeSave == 1 ? false : true
+                ,checkDirty: MODx.request.reload ? false : true
+                ,id: 'modx-abtn-save'
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
@@ -126,6 +127,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             btns.push({
                 text: cfg.lockedText || _('locked')
                 ,handler: Ext.emptyFn
+                ,id: 'modx-abtn-locked'
                 ,disabled: true
             });
             btns.push('-');
@@ -136,6 +138,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,text: _('duplicate')
                 ,handler: this.duplicateResource
                 ,scope:this
+                ,id: 'modx-abtn-duplicate'
             });
             btns.push('-');
         }
@@ -145,6 +148,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,text: _('delete')
                 ,handler: this.deleteResource
                 ,scope:this
+                ,id: 'modx-abtn-delete'
             });
             btns.push('-');
         }
@@ -153,6 +157,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,text: _('view')
             ,handler: this.preview
             ,scope: this
+            ,id: 'modx-abtn-preview'
         });
         btns.push('-');
         btns.push({
@@ -160,11 +165,13 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,text: _('cancel')
             ,handler: this.cancel
             ,scope: this
+            ,id: 'modx-abtn-cancel'
         });
         btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
+            ,id: 'modx-abtn-help'
         });
         return btns;
     }

@@ -2,6 +2,69 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.0-pl2 (January 4, 2012)
+====================================
+- [#6564] Fix issue where save button on New Resource does not work due to JS DOM error
+- [#6470] Fix issue where Media Sources could not be protected on new installs only
+
+MODX Revolution 2.2.0-pl (January 4, 2012)
+====================================
+- [#6559] Fix issue with save btn on resources not enabling after template change
+- Better handling of dynamic lexicon topic adding and deprecated manager controllers
+- [#5905] Refactor new package versions to run ACTION_UPGRADE
+- [#6120] Improve static element behavior with immutable sources
+- [#6551] Fix issue where ID instead of name of Template showed on resource combo
+- [#6509] Fix minify issue when DOCUMENT_ROOT is a symlink
+- [#6546] Reposition setting grid filter dropdowns to clarify behavior
+- [#4146] Fix issue where Content Types were always binary when created
+- [#6470] Fix issue where Media Sources could not be protected due to missing reference in principal_targets setting
+- [#6520] Fix issue with Quick Create Resource and default settings
+- [#6510] Fix minify issue with virtual dirs inside the document root
+- [#5229] Fix issue where changing parent did not reload Resource edit page
+- [#6513] Better handling for large error.log files in mgr
+- [#6519] Ensure JS config gets working context config
+- [#6507] Add missing Media Source plugin events
+- [#6505] Remove htmlentities on date output filter
+- Allow PDO driver options to be defined in MODX config
+- [#6383] Add index.php to minify paths in mgr templates
+
+MODX Revolution 2.2.0-rc-3 (December 22, 2011)
+====================================
+- [#6247] Fix additional minify issues with CMP controllers in MODX_ASSETS_PATH
+- [#6428] Fix improperly designated tooltip and UI for create namespace window
+- Fix various regression issues with rename/delete files/directories in the Files tree
+- Ensure hideFiles property works for the files tree
+- [#6383] Add index.php to minify paths
+- Prevent TVs tab from showing in Resources if the only TVs are of type "hidden"
+- [#6413] Fix missing date_timezone setting description
+- [#6297] Prevent invalid characters in property set names
+- [#5997] Fix issue where components dirs were being created in assets with non-standard assets directory paths
+- Fix issue where resource ID was not being passed to FC rule checks
+- [#6417] Fix issue with modResource class_key being incorrectly set
+- Adjust modResponse contentType loading to allow overriding in custom resource classes
+- Fix critical timezone issue introduced for [#6077]
+
+MODX Revolution 2.2.0-rc-2 (December 16, 2011)
+====================================
+- [#3033] Add method to reload Context data in same request
+- [#6372] Add explicit resource_duplicate permission for duplicating a resource
+- [#6364] Fix incorrect lexicon reference in package versions grid
+- [#6365] Add manager_login_url_alternate setting which allows for setting a custom manager login URL
+- [#6077] Override PHP default timezone via System/Context Settings
+- [#5709] Fix issue where drag/drop in left trees did not work when package management was open
+- [#6153] Prevent enter key from sending Message when typing in messages page
+- [#6349] Properties can now belong to areas, and are grouped in grid by area
+- [#6344] Fix various pathing issues when drag/dropping files into content
+- [#5941] Add anonymous Load Only ACL when creating contexts
+- [#6247] Fix minify issues outside of $_SERVER['DOCUMENT_ROOT']
+- Improve skipFiles attribute for file media sources to allow MODX tags and hiding directories
+- [#6336] Fix error when updating property via window in media source properties grid
+- Fix various issues with permissions and ACLs on Media Sources
+- [#6306] Fix issue with close button always prompting changes made when changes may not have been made
+- [#6317] Fix issue with combo editor rendering in grids
+- [#6307] Save button now properly resets to disabled after save
+- [#6313] Fix issue with renaming content field label on derivative resource types
+- [#6084] Fix upgrade from 2.0.x releases
 - Add OnManagerPageBeforeRender and OnManagerPageAfterRender events
 - [#6207] Prevent overwriting static element file content when changing a static source
 - [#6255] Escape html tags in readme, license and changelog files for downloaded Packages

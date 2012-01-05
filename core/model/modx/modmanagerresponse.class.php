@@ -45,6 +45,11 @@ class modManagerResponse extends modResponse {
         if (empty($this->action)) $this->action = array();
         $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
         if (!$isLoggedIn) {
+            $alternateLogin = $this->modx->getOption('manager_login_url_alternate',null,'');
+            if (!empty($alternateLogin)) {
+                $this->modx->sendRedirect($alternateLogin);
+                return '';
+            }
             $this->action['namespace'] = 'core';
             $this->action['namespace_name'] = 'core';
             $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
@@ -117,6 +122,10 @@ class modManagerResponse extends modResponse {
         }
         if (is_array($this->body)) {
             $this->modx->smarty->assign('_e', $this->body);
+            if (!file_exists($this->modx->smarty->template_dir.'error.tpl')) {
+                $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+                $this->modx->smarty->setTemplatePath($templatePath);
+            }
             echo $this->modx->smarty->fetch('error.tpl');
         } else {
             echo $this->body;

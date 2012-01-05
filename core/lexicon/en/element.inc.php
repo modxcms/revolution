@@ -8,6 +8,7 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element not found.';
 $_lang['element_err_ns'] = 'Element not specified.';
+$_lang['element_static_source_immutable'] = 'The static file specified as the element source is not writable! You cannot edit the content of this element in the manager.';
 $_lang['is_static'] = 'Is Static';
 $_lang['is_static_msg'] = 'Indicates if the element source is stored in an external file.';
 $_lang['quick_create'] = 'Quick Create';

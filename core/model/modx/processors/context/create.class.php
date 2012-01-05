@@ -36,6 +36,9 @@ class modContextCreateProcessor extends modObjectCreateProcessor {
      */
     public function afterSave() {
         $this->ensureAdministratorAccess();
+        if ($this->getProperty('enableAnonymous', true)) {
+            $this->enableAnonymousAccess();
+        }
         $this->refreshUserACLs();
         return true;
     }
@@ -71,6 +74,30 @@ class modContextCreateProcessor extends modObjectCreateProcessor {
                 $adminAdminAccess->set('policy',$adminContextPolicy->get('id'));
                 $adminAdminAccess->save();
             }
+        }
+    }
+
+    /**
+     * Enable anonymous Load Only access to a context.
+     * 
+     * @return void
+     */
+    public function enableAnonymousAccess() {
+        $anonContextPolicy = $this->modx->getObject('modAccessPolicy', array('name' => 'Load Only'));
+        $anonACL = $this->modx->getObject('modAccessContext', array(
+            'principal' => 0,
+            'principal_class' => 'modUserGroup',
+            'target' => $this->object->get('key'),
+            'authority' => 9999
+        ));
+        if ($anonContextPolicy && !$anonACL) {
+            $anonACL = $this->modx->newObject('modAccessContext');
+            $anonACL->set('principal', 0);
+            $anonACL->set('principal_class', 'modUserGroup');
+            $anonACL->set('target', $this->object->get('key'));
+            $anonACL->set('policy', $anonContextPolicy->get('id'));
+            $anonACL->set('authority', 9999);
+            $anonACL->save();
         }
     }
 

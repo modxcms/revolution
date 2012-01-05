@@ -70,7 +70,7 @@ foreach ($settings as $setting) {
             $settingArray['description_trans'] = $modx->lexicon($k.'_desc');
             $settingArray['description'] = $k.'_desc';
         } else {
-            $settingArray['description_trans'] = $settingArray['description'];
+            $settingArray['description_trans'] = !empty($settingArray['description']) ? $settingArray['description'] : '';
         }
     } else {
         $settingArray['description'] = $settingArray['description_trans'];

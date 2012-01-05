@@ -39,7 +39,7 @@ Ext.extend(MODx,Ext.Component,{
         this.request = this.getURLParameters();
         this.Ajax = this.load({ xtype: 'modx-ajax' });
         Ext.override(Ext.form.Field,{
-            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
+            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on", msgTarget: 'under' }
         });
         Ext.menu.Menu.prototype.enableScrolling = false;
         this.addEvents({
@@ -290,7 +290,13 @@ Ext.extend(MODx,Ext.Component,{
         if (ct == 'modx-panel-resource' && flds.indexOf('modx-resource-content') != -1) {
             cto = Ext.getCmp('modx-resource-content');
             if (cto) {
-                cto.setTitle(vals[0]);
+                if (cto.setTitle) {
+                    cto.setTitle(vals[0]);
+                } else if (cto.setLabel) {
+                    cto.setLabel(flds,vals);
+                } else {
+                    cto.label.update(vals[0]);
+                }
             }
         } else {
             cto = Ext.getCmp(ct);

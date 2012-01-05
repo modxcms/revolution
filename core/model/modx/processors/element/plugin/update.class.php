@@ -21,7 +21,7 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modPluginUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modPlugin';
-    public $languageTopics = array('plugin','category');
+    public $languageTopics = array('plugin','category','element');
     public $permission = 'save_plugin';
     public $objectType = 'plugin';
     public $beforeSaveEvent = 'OnBeforePluginFormSave';

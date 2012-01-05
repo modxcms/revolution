@@ -8,6 +8,7 @@
 if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
+/** @var modPropertySet $set */
 $set = $modx->getObject('modPropertySet',$scriptProperties['id']);
 if (empty($set)) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
@@ -15,12 +16,12 @@ $properties = $set->get('properties');
 if (!is_array($properties)) $properties = array();
 
 if (!empty($scriptProperties['element']) && !empty($scriptProperties['element_class'])) {
+    /** @var modElement $element */
     $element = $modx->getObject($scriptProperties['element_class'],$scriptProperties['element']);
     if ($element) {
         $default = $element->get('properties');
     }
 }
-
 
 $data = array();
 
@@ -30,12 +31,14 @@ if (isset($default) && is_array($default)) {
         $data[$property['name']] = array(
             $property['name'],
             $property['desc'],
-            $property['type'],
-            $property['options'],
+            !empty($property['type']) ? $property['type'] : 'textfield',
+            !empty($property['options']) ? $property['options'] : array(),
             $property['value'],
-            $property['lexicon'],
+            !empty($property['lexicon']) ? $property['lexicon'] : '',
             0,
             $property['desc_trans'],
+            !empty($property['area']) ? $property['area'] : '',
+            !empty($property['area_trans']) ? $property['area_trans'] : '',
         );
     }
 }
@@ -54,11 +57,13 @@ foreach ($properties as $property) {
         $property['name'],
         $modx->lexicon($property['desc']),
         $property['type'],
-        $property['options'],
+        !empty($property['options']) ? $property['options'] : array(),
         $property['value'],
-        $property['lexicon'],
+        !empty($property['lexicon']) ? $property['lexicon'] : '',
         $overridden,
-        $property['desc_trans'],
+        !empty($property['desc_trans']) ? $property['desc_trans'] : '',
+        !empty($property['area']) ? $property['area'] : '',
+        !empty($property['area_trans']) ? $property['area_trans'] : '',
     );
 }
 

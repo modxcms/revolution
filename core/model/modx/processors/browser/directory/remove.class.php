@@ -27,11 +27,6 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
         ));
         $dir = $this->getProperty('dir');
         if (empty($dir)) return $this->modx->lexicon('file_folder_err_ns');
-        $dir = str_replace(array(
-            'root/',
-            'undefined/',
-        ),'',$this->getProperty('dir'));
-        $this->setProperty('dir',$dir);
         return true;
     }
 
@@ -41,6 +36,9 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
+        if (!$this->source->checkPolicy('remove')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $success = $this->source->removeContainer($this->getProperty('dir'));
 

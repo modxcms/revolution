@@ -377,29 +377,29 @@ class modX extends xPDO {
     }
 
     /**
-     * Turn an associative array into a valid query string.
+     * Turn an associative or numeric array into a valid query string.
      *
      * @static
-     * @param array $parameters An associative array of parameters.
+     * @param array $parameters An associative or numeric-indexed array of parameters.
+     * @param string $numPrefix A string prefix added to the numeric-indexed array keys.
+     * Ignored if associative array is used.
+     * @param string $argSeparator The string used to separate arguments in the resulting query string.
      * @return string A valid query string representing the parameters.
      */
-    public static function toQueryString(array $parameters = array()) {
-        $qs = array();
-        foreach ($parameters as $paramKey => $paramVal) {
-            $qs[] = urlencode($paramKey) . '=' . urlencode($paramVal);
-        }
-        return implode('&', $qs);
+    public static function toQueryString(array $parameters = array(), $numPrefix = '', $argSeparator = '&') {
+        return http_build_query($parameters, $numPrefix, $argSeparator);
     }
 
     /**
      * Construct a new modX instance.
      *
      * @param string $configPath An absolute filesystem path to look for the config file.
-     * @param array $options Options that can be passed to the instance.
+     * @param array $options xPDO options that can be passed to the instance.
+     * @param array $driverOptions PDO driver options that can be passed to the instance.
      * @return modX A new modX instance.
      */
-    public function __construct($configPath= '', array $options = array()) {
-        global $database_dsn, $database_user, $database_password, $config_options, $table_prefix, $site_id, $uuid;
+    public function __construct($configPath= '', array $options = array(), array $driverOptions = array()) {
+        global $database_dsn, $database_user, $database_password, $config_options, $driver_options, $table_prefix, $site_id, $uuid;
         modX :: protect();
         if (!defined('MODX_CONFIG_KEY')) {
             define('MODX_CONFIG_KEY', 'config');
@@ -427,14 +427,16 @@ class modX extends xPDO {
                 $config_options,
                 $options
             );
+            if (empty($driverOptions)) $driverOptions = array();
+            if (empty($driver_options)) $driver_options = array();
             parent :: __construct(
                 $database_dsn,
                 $database_user,
                 $database_password,
                 $options,
-                array (
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
-                    PDO::ATTR_PERSISTENT => false,
+                array_merge(
+                    $driver_options,
+                    $driverOptions
                 )
             );
             $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
@@ -1820,12 +1822,14 @@ class modX extends xPDO {
      * context directly.
      *
      * @param string $contextKey The key of the context to switch to.
+     * @param boolean $reload Set to true to force the context data to be regenerated
+     * before being switched to.
      * @return boolean True if the switch was successful, otherwise false.
      */
-    public function switchContext($contextKey) {
+    public function switchContext($contextKey, $reload = false) {
         $switched= false;
         if ($this->context->key != $contextKey) {
-            $switched= $this->_initContext($contextKey);
+            $switched= $this->_initContext($contextKey, $reload);
             if ($switched) {
                 if (is_array($this->config)) {
                     $this->setPlaceholders($this->config, '+');
@@ -2086,7 +2090,41 @@ class modX extends xPDO {
         }
         return $removed;
     }
-    
+
+    /**
+     * Reload data for a specified Context, without switching to it.
+     *
+     * Note that the Context will be loaded even if it is not already.
+     *
+     * @param string $key The key of the Context to (re)load.
+     * @return boolean True if the Context was (re)loaded successfully; false otherwise.
+     */
+    public function reloadContext($key = null) {
+        $reloaded = false;
+        if ($this->context instanceof modContext) {
+            if (empty($key)) {
+                $key = $this->context->get('key');
+            }
+            if ($key === $this->context->get('key')) {
+                $reloaded = $this->_initContext($key, true);
+                if ($reloaded && is_array($this->config)) {
+                    $this->setPlaceholders($this->config, '+');
+                }
+            } else {
+                if (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext)) {
+                    $this->contexts[$key] = $this->newObject('modContext');
+                    $this->contexts[$key]->_fields['key']= $key;
+                }
+                $reloaded = $this->contexts[$key]->prepare(true);
+            }
+        } elseif (!empty($key) && (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext))) {
+            $this->contexts[$key] = $this->newObject('modContext');
+            $this->contexts[$key]->_fields['key']= $key;
+            $reloaded = $this->contexts[$key]->prepare(true);
+        }
+        return $reloaded;
+    }
+
     /**
      * Loads a specified Context.
      *
@@ -2095,9 +2133,10 @@ class modX extends xPDO {
      *
      * @access protected
      * @param string $contextKey A context identifier.
+     * @param boolean $regenerate If true, force regeneration of the context even if already initialized.
      * @return boolean True if the context was properly initialized
      */
-    protected function _initContext($contextKey) {
+    protected function _initContext($contextKey, $regenerate = false) {
         $initialized= false;
         $oldContext = is_object($this->context) ? $this->context->get('key') : '';
         if (isset($this->contexts[$contextKey])) {
@@ -2107,7 +2146,7 @@ class modX extends xPDO {
             $this->context->_fields['key']= $contextKey;
         }
         if ($this->context) {
-            if (!$this->context->prepare()) {
+            if (!$this->context->prepare((boolean) $regenerate)) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
                 if ($this->context->checkPolicy('load')) {
@@ -2116,6 +2155,15 @@ class modX extends xPDO {
                     $this->eventMap= & $this->context->eventMap;
                     $this->pluginCache= & $this->context->pluginCache;
                     $this->config= array_merge($this->_systemConfig, $this->context->config);
+                    $iniTZ = ini_get('date.timezone');
+                    $cfgTZ = $this->getOption('date_timezone', null, '');
+                    if (!empty($cfgTZ)) {
+                        if (empty($iniTZ) || $iniTZ !== $cfgTZ) {
+                            date_default_timezone_set($cfgTZ);
+                        }
+                    } elseif (empty($iniTZ)) {
+                        date_default_timezone_set('UTC');
+                    }
                     if ($this->_initialized) {
                         $this->getUser();
                     }

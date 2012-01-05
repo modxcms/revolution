@@ -56,6 +56,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
 
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
+            this.defaultValues = this.config.record || {};
+            if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
+                this.markDirty();
+            }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
@@ -69,6 +73,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = false;
             }
         }
+
         this.fireEvent('ready');
         this.initialized = true;
 
@@ -76,6 +81,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
+
     }
     
     ,beforeSubmit: function(o) {
@@ -95,7 +101,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             this.cleanupEditor();
         }
         if(this.getForm().baseParams.action == 'create') {
-            Ext.getCmp('modx-button-save-resource').disable();
+            Ext.getCmp('modx-abtn-save').disable();
         }
         return this.fireEvent('save',{
             values: this.getForm().getValues()
@@ -123,6 +129,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
+        } else if (o.result.object['parent'] != this.defaultValues['parent'] && this.config.resource != '' && this.config.resource != 0) {
+            location.href = location.href;
         } else {
             this.getForm().setValues(o.result.object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
@@ -130,7 +138,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
     ,failure: function(o) {
         if(this.getForm().baseParams.action == 'create') {
-            Ext.getCmp('modx-button-save-resource').enable();
+            Ext.getCmp('modx-abtn-save').enable();
         }
     }
 
@@ -413,6 +421,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,baseParams: {
                 action: 'getList'
                 ,combo: '1'
+                ,limit: 0
             }
             ,listeners: {
                 'select': {fn: this.templateWarning,scope: this}

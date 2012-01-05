@@ -18,7 +18,7 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modSnippetUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modSnippet';
-    public $languageTopics = array('snippet','category');
+    public $languageTopics = array('snippet','category','element');
     public $permission = 'save_snippet';
     public $objectType = 'snippet';
     public $beforeSaveEvent = 'OnBeforeSnipFormSave';

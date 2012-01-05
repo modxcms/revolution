@@ -57,11 +57,15 @@ MODx.FormPanel = function(config) {
         this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
         this.mask.show();
     }
-    this.fireEvent('setup',config);
+    if (this.fireEvent('setup',config)) {
+        this.clearDirty();
+    }
     this.focusFirstField();
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     isReady: false
+    ,defaultValues: []
+    ,initialized: false
 
     ,submit: function(o) {
         var fm = this.getForm();
