@@ -13,7 +13,7 @@ MODx.panel.ResourceTV = function(config) {
         ,title: _('template_variables')
         ,class_key: ''
         ,resource: ''
-        ,cls: MODx.config.tvs_below_content == 1 ? 'x-panel-body tvs-wrapper' : 'tvs-wrapper x-panel-body'
+        ,cls: MODx.config.tvs_below_content == 1 ? 'x-panel-body tvs-wrapper below-content' : 'tvs-wrapper x-panel-body'
         ,autoHeight: true
         ,applyTo: 'modx-resource-tvs-div'
         ,header: false
