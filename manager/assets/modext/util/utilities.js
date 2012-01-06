@@ -369,3 +369,40 @@ Ext.grid.GridView.prototype.templates.cell = new Ext.Template(
    '<div class="x-grid3-cell-inner x-grid3-col-{id}" {attr}>{value}</div>',
    '</td>'
 );
+
+/* combocolumn */
+if (!MODx.grid) { MODx.grid = {}; }
+MODx.grid.ComboColumn = Ext.extend(Ext.grid.Column,{
+    gridId: undefined
+    ,constructor: function(cfg){
+        MODx.grid.ComboColumn.superclass.constructor.call(this, cfg);
+        this.renderer = (this.editor && this.editor.triggerAction) ? MODx.grid.ComboBoxRenderer(this.editor,this.gridId) : function(value) {return value;};
+    }
+});
+Ext.grid.Column.types['combocolumn'] = MODx.grid.ComboColumn;
+MODx.grid.ComboBoxRenderer = function(combo, gridId) {
+    var getValue = function(value) {
+        var idx = combo.store.find(combo.valueField, value);
+        var rec = combo.store.getAt(idx);
+        if (rec) {
+            return rec.get(combo.displayField);
+        }
+        return value;
+    };
+
+    return function(value) {
+        if (combo.store.getCount() == 0 && gridId) {
+            combo.store.on(
+                'load',
+                function() {
+                    var grid = Ext.getCmp(gridId);
+                    if (grid) {
+                        grid.getView().refresh();
+                    }
+                },{single: true}
+            );
+            return value;
+        }
+        return getValue(value);
+    };
+};
