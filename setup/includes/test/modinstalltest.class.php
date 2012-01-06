@@ -338,9 +338,6 @@ abstract class modInstallTest {
         if (empty($documentRoot)) {
             $this->install->settings->set('compress_js',0);
             $this->install->settings->set('compress_css',0);
-        } else {
-            $this->install->settings->set('compress_js',1);
-            $this->install->settings->set('compress_css',1);
         }
         $this->install->settings->store();
     }
