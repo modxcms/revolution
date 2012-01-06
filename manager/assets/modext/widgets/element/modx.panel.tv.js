@@ -604,6 +604,9 @@ Ext.reg('modx-panel-tv-output-properties',MODx.panel.TVOutputProperties);
 
 
 MODx.grid.ElementSources = function(config) {
+    var src = new MODx.combo.MediaSource();
+    src.getStore().load();
+
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-element-sources'
@@ -616,7 +619,9 @@ MODx.grid.ElementSources = function(config) {
         },{
             header: _('source')
             ,dataIndex: 'source'
-            ,editor: { xtype: 'modx-combo-source' ,renderer: true }
+            ,xtype: 'combocolumn'
+            ,editor: src
+            ,gridId: 'modx-grid-element-sources'
         }]
     });
     MODx.grid.ElementSources.superclass.constructor.call(this,config);
