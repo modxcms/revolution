@@ -1694,8 +1694,12 @@ span.required {
     padding: 10px 5px 35px;
 }
 .x-grid3-cell-inner.x-grid3-col-main h3{
-	font-size: 16px;
-    margin: 0 0 2px;
+	font-family: arial,Helvetica,sans-serif;
+	font-size: 20px;
+	letter-spacing: -1px;
+	color: #555555;
+	line-height: 1;
+    margin: 0 0 2px;	
 }
 .x-grid3-cell-inner.x-grid3-col-main  .not-installed{
 	color: #999999;
