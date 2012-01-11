@@ -1142,13 +1142,13 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-row-collapsed .x-grid3-row-expander {
     background-position:5px 10px;
     height:30px;
-    margin-top:4px;
+    margin-top:6px;
 }
 
 .x-grid3-row-expanded .x-grid3-row-expander  {
     background-position:-31px 10px;
     height:30px;
-    margin-top:4px;
+    margin-top:6px;
 }
 
 .x-grid3-row-expander {

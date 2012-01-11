@@ -2,6 +2,11 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6567] Fix Suhosin check to disable compress_js setting
+- [#6587] Fix issue with combobox rendering in editable grids by providing combocolumn xtype for proper data rendering
+- [#6583] Fix duplicate upload_files values
+- Prevent editing and deleting of core standard Roles
+
 MODX Revolution 2.2.0-pl2 (January 4, 2012)
 ====================================
 - [#6564] Fix issue where save button on New Resource does not work due to JS DOM error
