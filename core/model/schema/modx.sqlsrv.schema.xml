@@ -808,6 +808,7 @@
         <field key="uri_override" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="hide_children_in_tree" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="show_in_tree" dbtype="bit" phptype="boolean" null="false" default="1" index="index" />
+        <field key="properties" dbtype="nvarchar" precision="max" phptype="json" null="true" />
         
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="true" />
