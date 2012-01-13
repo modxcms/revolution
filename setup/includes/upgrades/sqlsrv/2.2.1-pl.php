@@ -19,3 +19,9 @@ $class = 'modResource';
 $table = $modx->getTableName($class);
 $description = $this->install->lexicon('add_column',array('column' => 'properties','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'properties'));
+
+/* add session_stale field to modUser */
+$class = 'modUser';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'session_stale','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'session_stale'));

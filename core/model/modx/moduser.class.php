@@ -117,6 +117,16 @@ class modUser extends modPrincipal {
     public function loadAttributes($target, $context = '', $reload = false) {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         $id = $this->get('id') ? (string) $this->get('id') : '0';
+        if ($this->get('id') && !$reload) {
+            $staleContexts = $this->get('session_stale');
+            $stale = array_search($context, $staleContexts);
+            if ($stale !== false) {
+                $reload = true;
+                $staleContexts = array_diff($staleContexts, array($context));
+                $this->set('session_stale', $staleContexts);
+                $this->save();
+            }
+        }
         if ($this->_attributes === null || $reload) {
             $this->_attributes = array();
             if (isset($_SESSION["modx.user.{$id}.attributes"])) {
@@ -127,18 +137,23 @@ class modUser extends modPrincipal {
                 }
             }
         }
-        if (!isset($this->_attributes[$context])) $this->_attributes[$context] = array();
-        if (!isset($this->_attributes[$context][$target])) {
-            $this->_attributes[$context][$target] = $this->xpdo->call(
-                $target,
-                'loadAttributes',
-                array(&$this->xpdo, $context, $this->get('id'))
-            );
-            if (!isset($this->_attributes[$context][$target]) || !is_array($this->_attributes[$context][$target])) {
-                $this->_attributes[$context][$target] = array();
-            }
-            $_SESSION["modx.user.{$id}.attributes"] = $this->_attributes;
+        if (!isset($this->_attributes[$context])) {
+            $this->_attributes[$context] = array();
         }
+        $target = (array) $target;
+        foreach ($target as $t) {
+            if (!isset($this->_attributes[$context][$t])) {
+                $this->_attributes[$context][$t] = $this->xpdo->call(
+                    $t,
+                    'loadAttributes',
+                    array(&$this->xpdo, $context, $this->get('id'))
+                );
+                if (!isset($this->_attributes[$context][$t]) || !is_array($this->_attributes[$context][$t])) {
+                    $this->_attributes[$context][$t] = array();
+                }
+            }
+        }
+        $_SESSION["modx.user.{$id}.attributes"] = $this->_attributes;
     }
 
     /**
