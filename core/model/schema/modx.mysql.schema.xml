@@ -813,6 +813,7 @@
         <field key="uri_override" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="hide_children_in_tree" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="show_in_tree" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" index="index" />
+        <field key="properties" dbtype="mediumtext" phptype="json" null="true" />
         
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="true" />
@@ -1116,6 +1117,7 @@
         <field key="hash_class" dbtype="varchar" precision="100" phptype="string" null="false" default="hashing.modPBKDF2" />
         <field key="salt" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="primary_group" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="session_stale" dbtype="text" phptype="array" null="true" />
 
         <index alias="username" name="username" primary="false" unique="true" type="BTREE">
             <column key="username" length="" collation="A" null="false" />

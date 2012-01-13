@@ -173,6 +173,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     ,removeElement: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
+        MODx.debug(MODx.action);
         MODx.msg.confirm({
             title: _('warning')
             ,text: _('remove_this_confirm',{
@@ -187,6 +188,10 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             ,listeners: {
                 'success': {fn:function() {
                     this.cm.activeNode.remove();
+                    /* if editing the element being removed */
+                    if (MODx.request.a == MODx.action['element/'+oar[0]+'/update'] && MODx.request.id == oar[2]) {
+                        location.href = 'index.php?a='+MODx.action['welcome'];
+                    }
                 },scope:this}
             }
         });
