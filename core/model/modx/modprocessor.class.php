@@ -905,6 +905,14 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
     public function logManagerAction() {
         $this->modx->logManagerAction($this->objectType.'_update',$this->classKey,$this->object->get($this->primaryKeyField));
     }
+    
+    /**
+     * @param array $criteria
+     * @return int
+     */
+    public function doesAlreadyExist(array $criteria) {
+    	return $this->modx->getCount($this->classKey,$criteria);
+    }
 }
 
 /**
