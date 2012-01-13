@@ -88,7 +88,7 @@ $_lang['resource_group_resource_err_nf'] = 'Die Ressource ist nicht Teil dieser 
 $_lang['resource_hide_from_menus'] = 'Nicht in Menüs anzeigen';
 $_lang['resource_hide_from_menus_help'] = 'Wenn diese Einstellung aktiviert ist, ist die Ressource <b>nicht</b> für die Verwendung in Menüs Ihrer Website verfügbar. Bitte beachten Sie, dass einige Menü-Skripte diese Option ignorieren könnten.';
 $_lang['resource_link_attributes'] = 'Link-Attribute';
-$_lang['resource_link_attributes_help'] = 'Attribute für den Link für diese Ressource, z.B. target= or rel=.';
+$_lang['resource_link_attributes_help'] = 'Attribute für den Link für diese Ressource, z.B. target= oder rel=.';
 $_lang['resource_locked_by'] = 'Gesperrt durch [[+user]]';
 $_lang['resource_longtitle'] = 'Langer Titel';
 $_lang['resource_longtitle_help'] = 'Dies ist ein längerer Titel für Ihre Ressource. Das ist nützlich für Suchmaschinen und kann die Ressource besser beschreiben.';
