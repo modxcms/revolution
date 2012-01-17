@@ -1,9 +1,7 @@
 <?php
 /*
- * OpenExpedio ("xPDO") is an ultra-light, PHP 4.3+ compatible ORB (Object-
- * Relational Bridge) library based around PDO (http://php.net/pdo/).  It uses
- * native PDO if available or provides a subset implementation for use with PHP
- * 4 on platforms that do not include the native PDO extensions.
+ * OpenExpedio ("xPDO") is an ultra-light, PHP 5.2+ compatible ORB (Object-
+ * Relational Bridge) library based around PDO (http://php.net/pdo/).
  *
  * Copyright 2010-2012 by MODX, LLC.
  *
@@ -141,21 +139,15 @@ class xPDO {
     const SCHEMA_VERSION = '1.1';
 
     /**
-     * The primary PDO instance used by xPDO for database access.
-     * @var PDO
-     * @access public
+     * @var PDO A reference to the PDO instance used by the current xPDOConnection.
      */
     public $pdo= null;
     /**
-     * A array of xPDO configuration attributes.
-     * @var array
-     * @access public
+     * @var array Configuration options for the xPDO instance.
      */
     public $config= null;
     /**
-     * An xPDODriver instance for the connection.
-     * @var xPDODriver
-     * @access public
+     * @var xPDODriver An xPDODriver instance for the xPDOConnection instances to use.
      */
     public $driver= null;
     /**
