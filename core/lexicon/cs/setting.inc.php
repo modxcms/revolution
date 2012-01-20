@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-29
+ * @updated 2012-01-08
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -160,19 +160,19 @@ $_lang['system_settings'] = 'Konfigurace systému';
 $_lang['usergroup'] = 'Uživatelská skupina';
 
 // $_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled'] = 'Zkontrolovat přístupy ke kategoriím';
+$_lang['setting_access_category_enabled'] = 'Řízení přístupů ke kategoriím';
 
 // $_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
 $_lang['setting_access_category_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kategoriím v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kategoriím!</strong>';
 
 // $_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled'] = 'Kontrolovat přístupy ke kontextům';
+$_lang['setting_access_context_enabled'] = 'Řízení přístupů ke kontextům';
 
 // $_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 $_lang['setting_access_context_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kontextům. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kontextům! NEVYPÍNEJTE TUTO VOLBU v rámci celého systému nebo pro kontext "mgr", došlo by tím k zamezní přístupu do správce obsahu.</strong>';
 
 // $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled'] = 'Kontrolovat přístupy ke skupinám dokumentů';
+$_lang['setting_access_resource_group_enabled'] = 'Řízení přístupů ke skupinám dokumentů';
 
 // $_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke skupinám dokumentů v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke skupinám dokumentů!!</strong>';
@@ -1109,7 +1109,7 @@ $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop (ořez při zvětšen�
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Výchozí nastavení Zoom-Crop pro phpThumb pokud je použit v MODX. Výchozí hodnota je 0, tím se zabrání oříznutí při zvětšení.';
 
 // $_lang['setting_publish_default'] = 'Published default';
-$_lang['setting_publish_default'] = 'Publikováno';
+$_lang['setting_publish_default'] = 'Ve výchozím stavu publikováno';
 
 // $_lang['setting_publish_default_desc'] = 'Select 'Yes' to make all new resources published by default.';
 $_lang['setting_publish_default_desc'] = 'Zvolte "Ano", pokud chcete, aby všechny nově vytvořené dokumenty byly ve výchozím stavu publikované.';
