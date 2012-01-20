@@ -119,6 +119,7 @@ class modUser extends modPrincipal {
         $id = $this->get('id') ? (string) $this->get('id') : '0';
         if ($this->get('id') && !$reload) {
             $staleContexts = $this->get('session_stale');
+            $staleContexts = !empty($staleContexts) ? $staleContexts : array();
             $stale = array_search($context, $staleContexts);
             if ($stale !== false) {
                 $reload = true;
