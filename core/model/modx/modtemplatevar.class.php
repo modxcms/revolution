@@ -293,6 +293,7 @@ class modTemplateVar extends modElement {
                     $source = $this->xpdo->newObject($classKey);
                     if ($source) {
                         $source->fromArray($sourceCache,'',true,true);
+                        $source->initialize();
                         $value = $source->prepareOutputUrl($value);
                     }
                 }
