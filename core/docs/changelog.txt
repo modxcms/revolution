@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix CSS for active tabs in mgr in IE
 - Prevent ENTER key from firing save in textareas in various modals
 - [#6712] Fix issue with Resource Group tree being limited to 10 groups
 - Bypass modSystemSetting->clearCache() when OPT_SETUP is true

@@ -82,6 +82,7 @@ hr {
 #modx-leftbar .x-tab-strip-active{
     background-color: #fbfbfb !important;
     border-color: #999 !important;
+    filter: none;
 }
 
 #modx-leftbar ul.x-tab-strip-top span.x-tab-strip-text{}
