@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4879] Add language selector to login page
 - [#6826] Add activate/deactivate to context menu for Plugins in tree
 - [#6509] Fix minify issue in windows environments due to doc root pathing
 - Fix CSS for active tabs in mgr in IE

@@ -10,6 +10,12 @@ Ext.onReady(function() {
 
     var lu = Ext.get('modx-login-username');
     if (lu) { lu.focus(); }
+
+    Ext.get('modx-login-language-select').on('change',function(e,cb) {
+        var p = MODx.getURLParameters();
+        p.cultureKey = cb.value;
+        location.href = '?'+Ext.urlEncode(p);
+    });
 });
 
 MODx.loadFLForm = function(a) {
