@@ -159,6 +159,7 @@ ul.x-tab-strip-top li.x-tab-strip-active {
     border-bottom: 0 none;
     padding:0 0 1px;
 	text-shadow: none;
+	filter: none;
 }
 ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text {
 	color:#FFF;
