@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6712] Fix issue with Resource Group tree being limited to 10 groups
 - Bypass modSystemSetting->clearCache() when OPT_SETUP is true
 - Allow display of custom messages from form processors
 - Fix issue with extra slashes in URIs

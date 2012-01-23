@@ -17,6 +17,10 @@ MODx.tree.ResourceGroup = function(config) {
         ,enableDrop: true
         ,ddAppendOnly: true
         ,useDefaultToolbar: true
+        ,baseParams: {
+            action: 'getNodes'
+            ,limit: 0
+        }
         ,tbar: [{
             text: _('resource_group_create')
             ,scope: this
