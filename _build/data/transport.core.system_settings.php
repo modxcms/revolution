@@ -791,6 +791,15 @@ $settings['link_tag_scheme']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['lock_ttl']= $xpdo->newObject('modSystemSetting');
+$settings['lock_ttl']->fromArray(array (
+  'key' => 'lock_ttl',
+  'value' => 360,
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['mail_charset']= $xpdo->newObject('modSystemSetting');
 $settings['mail_charset']->fromArray(array (
   'key' => 'mail_charset',
