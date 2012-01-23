@@ -227,6 +227,7 @@ MODx.window.CreateContentType = function(config) {
             ,anchor: '100%'
             ,grow: true
         }]
+        ,keys: []
     });
     MODx.window.CreateContentType.superclass.constructor.call(this,config);
 };

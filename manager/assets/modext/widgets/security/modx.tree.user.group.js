@@ -222,6 +222,7 @@ MODx.window.CreateUserGroup = function(config) {
             ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'hidden'
         }]
+        ,keys: []
     });
     MODx.window.CreateUserGroup.superclass.constructor.call(this,config);
 };

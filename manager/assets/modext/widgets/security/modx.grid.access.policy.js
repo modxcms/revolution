@@ -276,7 +276,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'
@@ -289,7 +289,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,hiddenName: 'template'
             ,id: 'modx-'+this.ident+'-template'
             ,xtype: 'modx-combo-access-policy-template'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-template'
@@ -301,7 +301,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,height: 50
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -317,6 +317,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,id: 'modx-'+this.ident+'-id'
             ,xtype: 'hidden'
         }]
+        ,keys: []
     });
     MODx.window.CreateAccessPolicy.superclass.constructor.call(this,config);
 };

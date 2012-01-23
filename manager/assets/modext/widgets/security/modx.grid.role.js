@@ -128,6 +128,7 @@ MODx.window.CreateRole = function(config) {
             ,html: _('role_desc_description')
             ,cls: 'desc-under'
         }]
+        ,keys: []
     });
     MODx.window.CreateRole.superclass.constructor.call(this,config);
 };

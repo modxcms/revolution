@@ -444,6 +444,7 @@ MODx.window.CreateFCSet = function(config) {
                 }]
             }]
         }]
+        ,keys: []
     });
     MODx.window.CreateFCSet.superclass.constructor.call(this,config);
 };

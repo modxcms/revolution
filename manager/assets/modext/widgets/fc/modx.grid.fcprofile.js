@@ -348,6 +348,7 @@ MODx.window.CreateFCProfile = function(config) {
             ,checked: true
             ,anchor: '100%'
         }]
+        ,keys: []
     });
     MODx.window.CreateFCProfile.superclass.constructor.call(this,config);
 };
