@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-29
+ * @updated 2012-01-23
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -1459,7 +1459,7 @@ $_lang['untitled_weblink'] = '_Bezejmenný webový odkaz';
 $_lang['untitled_symlink'] = '_Bezejmenný symbolický odkaz';
 
 // $_lang['update'] = 'Update';
-$_lang['update'] = 'Upravit';
+$_lang['update'] = 'Aktualizovat';
 
 // $_lang['updated'] = 'Updated';
 $_lang['updated'] = 'Aktualizováno';
