@@ -197,6 +197,40 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
     }
 
+    ,activatePlugin: function(itm,e) {
+        var id = this.cm.activeNode.id.substr(2);
+        var oar = id.split('_');
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'element/plugin.php'
+            ,params: {
+                action: 'activate'
+                ,id: oar[2]
+            }
+            ,listeners: {
+                'success': {fn:function() {
+                    this.refreshParentNode();
+                },scope:this}
+            }
+        });
+    }
+
+    ,deactivatePlugin: function(itm,e) {
+        var id = this.cm.activeNode.id.substr(2);
+        var oar = id.split('_');
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'element/plugin.php'
+            ,params: {
+                action: 'deactivate'
+                ,id: oar[2]
+            }
+            ,listeners: {
+                'success': {fn:function() {
+                    this.refreshParentNode();
+                },scope:this}
+            }
+        });
+    }
+
     ,quickCreate: function(itm,e,type) {
         var r = {
             category: this.cm.activeNode.attributes.pk || ''
@@ -380,6 +414,21 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                     this.quickUpdate(itm,e,itm.type);
                 }
             });
+            if (a.classKey = 'modPlugin') {
+                if (a.active) {
+                    m.push({
+                        text: _('plugin_deactivate')
+                        ,type: a.type
+                        ,handler: this.deactivatePlugin
+                    });
+                } else {
+                    m.push({
+                        text: _('plugin_activate')
+                        ,type: a.type
+                        ,handler: this.activatePlugin
+                    });
+                }
+            }
         }
         if (ui.hasClass('pnew')) {
             m.push({
