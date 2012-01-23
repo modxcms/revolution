@@ -130,6 +130,7 @@ MODx.window.CreateContext = function(config) {
             ,anchor: '100%'
             ,grow: true
         }]
+        ,keys: []
     });
     MODx.window.CreateContext.superclass.constructor.call(this,config);
 };

@@ -424,6 +424,7 @@ MODx.window.CreateSetting = function(config) {
             ,id: 'modx-cs-value'
             ,anchor: '100%'
         }]
+        ,keys: []
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
     this.on('show',function() {this.reset();},this);
@@ -579,6 +580,7 @@ MODx.window.UpdateSetting = function(config) {
             ,id: 'modx-'+this.ident+'-value'
             ,anchor: '100%'
         }]
+        ,keys: []
     });
     MODx.window.UpdateSetting.superclass.constructor.call(this,config);
 };
