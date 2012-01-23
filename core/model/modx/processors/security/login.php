@@ -48,6 +48,7 @@ if (is_array($rt)) {
     unset($key,$value);
 }
 
+/** @var $user modUser */
 $user= $modx->getObjectGraph('modUser', '{"Profile":{},"UserSettings":{}}', array ('modUser.username' => $username));
 
 if (!$user) {

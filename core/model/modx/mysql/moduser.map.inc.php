@@ -19,6 +19,7 @@ $xpdo_meta_map['modUser']= array (
     'hash_class' => 'hashing.modPBKDF2',
     'salt' => '',
     'primary_group' => 0,
+    'session_stale' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -104,6 +105,12 @@ $xpdo_meta_map['modUser']= array (
       'null' => false,
       'default' => 0,
       'index' => 'index',
+    ),
+    'session_stale' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'array',
+      'null' => true,
     ),
   ),
   'indexes' => 

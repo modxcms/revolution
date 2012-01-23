@@ -470,9 +470,11 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,listeners: {
                         'expand': {fn:function(p) {
                             Ext.getCmp('modx-user-newpassword').setValue(true);
+                            this.markDirty();
                         },scope:this}
                         ,'collapse': {fn:function(p) {
                             Ext.getCmp('modx-user-newpassword').setValue(false);
+                            this.markDirty();
                         },scope:this}
                     }
                     ,items: [{

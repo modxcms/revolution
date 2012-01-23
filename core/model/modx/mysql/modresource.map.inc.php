@@ -51,6 +51,7 @@ $xpdo_meta_map['modResource']= array (
     'uri_override' => 0,
     'hide_children_in_tree' => 0,
     'show_in_tree' => 1,
+    'properties' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -411,6 +412,12 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 1,
       'index' => 'index',
+    ),
+    'properties' => 
+    array (
+      'dbtype' => 'mediumtext',
+      'phptype' => 'json',
+      'null' => true,
     ),
   ),
   'indexes' => 
