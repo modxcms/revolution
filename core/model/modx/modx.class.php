@@ -431,38 +431,27 @@ class modX extends xPDO {
      * @return modX A new modX instance.
      */
     public function __construct($configPath= '', $options = null, $driverOptions = null) {
-        $options = $this->loadConfig($configPath, $options, $driverOptions);
-        parent :: __construct(
-            null,
-            null,
-            null,
-            $options,
-            null
-        );
-        $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
-        $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
-        $debug = $this->getOption('debug');
-        switch ($debug) {
-            case null:
-            case '':
-                break;
-            case true:
-            case 1:
-            case '1':
-                $this->setDebug(true);
-                break;
-            case false:
-            case 0:
-            case '0':
-                $this->setDebug(false);
-                break;
-            default:
-                if ((integer) $debug > 1) {
-                    $this->setDebug($debug);
-                }
-                break;
+        try {
+            $options = $this->loadConfig($configPath, $options, $driverOptions);
+            parent :: __construct(
+                null,
+                null,
+                null,
+                $options,
+                null
+            );
+            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
+            $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
+            $debug = $this->getOption('debug');
+            if (!is_null($debug) && $debug !== '') {
+                $this->setDebug($debug);
+            }
+            $this->setPackage('modx', MODX_CORE_PATH . 'model/');
+        } catch (xPDOException $xe) {
+            $this->sendError('fatal', array('error_message' => "<p>{$xe->getMessage()}</p>"));
+        } catch (Exception $e) {
+            $this->sendError('fatal', array('error_message' => "<p>{$e->getMessage()}</p>"));
         }
-        $this->setPackage('modx', MODX_CORE_PATH . 'model/');
     }
 
     /**
