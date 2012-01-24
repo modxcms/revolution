@@ -339,6 +339,9 @@ $_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Définie la locale du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="http://php.net/setlocale" target="_blank">la documentation PHP</a> pour plus d\'information.';
 
+$_lang['setting_lock_ttl'] = 'Durée de vie du lock';
+$_lang['setting_lock_ttl_desc'] = 'Nombre de secondes qu\'une ressource restera vérouillée lorsque l\'utilisateur l\'éditant est inactif.';
+
 $_lang['setting_log_level'] = 'Niveau de log';
 $_lang['setting_log_level_desc'] = 'Le niveau par défaut de log; plus le niveau est bas, moins les informations seront log. Options disponibles : 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
 
