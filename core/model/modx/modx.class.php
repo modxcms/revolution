@@ -390,6 +390,18 @@ class modX extends xPDO {
         return http_build_query($parameters, $numPrefix, $argSeparator);
     }
 
+    /**
+     * Create, retrieve, or update specific modX instances.
+     *
+     * @static
+     * @param string|int|null $id An optional identifier for the instance. If not set
+     * a uniqid will be generated and used as the key for the instance.
+     * @param array|null $config An optional array of config data for the instance.
+     * @param bool $forceNew If true a new instance will be created even if an instance
+     * with the provided $id already exists in modX::$instances.
+     * @return modX An instance of modX.
+     * @throws xPDOException
+     */
     public static function getInstance($id = null, $config = null, $forceNew = false) {
         $class = __CLASS__;
         if (is_null($id)) {
@@ -453,6 +465,14 @@ class modX extends xPDO {
         $this->setPackage('modx', MODX_CORE_PATH . 'model/');
     }
 
+    /**
+     * Load the modX configuration when creating an instance of modX.
+     *
+     * @param string $configPath An absolute path location to search for the modX config file.
+     * @param array $data Data provided to initialize the instance with, overriding config file entries.
+     * @param null $driverOptions Driver options for the primary connection.
+     * @return array The merged config data ready for use by the modX::__construct() method.
+     */
     protected function loadConfig($configPath = '', $data = array(), $driverOptions = null) {
         if (!is_array($data)) $data = array();
         modX :: protect();
