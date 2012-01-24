@@ -301,11 +301,6 @@ class modX extends xPDO {
      * @var string $documentOutput
      */
     public $documentOutput= null;
-    /**
-     * @deprecated
-     * @var boolean $stopOnNotice
-     */
-    public $stopOnNotice= false;
 
     /**
      * Harden the environment against common security flaws.
@@ -391,6 +386,38 @@ class modX extends xPDO {
     }
 
     /**
+     * Create, retrieve, or update specific modX instances.
+     *
+     * @static
+     * @param string|int|null $id An optional identifier for the instance. If not set
+     * a uniqid will be generated and used as the key for the instance.
+     * @param array|null $config An optional array of config data for the instance.
+     * @param bool $forceNew If true a new instance will be created even if an instance
+     * with the provided $id already exists in modX::$instances.
+     * @return modX An instance of modX.
+     * @throws xPDOException
+     */
+    public static function getInstance($id = null, $config = null, $forceNew = false) {
+        $class = __CLASS__;
+        if (is_null($id)) {
+            if (!is_null($config) || $forceNew || empty(self::$instances)) {
+                $id = uniqid($class);
+            } else {
+                $id = key(self::$instances);
+            }
+        }
+        if ($forceNew || !array_key_exists($id, self::$instances) || !(self::$instances[$id] instanceof $class)) {
+            self::$instances[$id] = new $class('', $config);
+        } elseif (self::$instances[$id] instanceof $class && is_array($config)) {
+            self::$instances[$id]->config = array_merge(self::$instances[$id]->config, $config);
+        }
+        if (!(self::$instances[$id] instanceof $class)) {
+            throw new xPDOException("Error getting {$class} instance, id = {$id}");
+        }
+        return self::$instances[$id];
+    }
+
+    /**
      * Construct a new modX instance.
      *
      * @param string $configPath An absolute filesystem path to look for the config file.
@@ -398,8 +425,40 @@ class modX extends xPDO {
      * @param array $driverOptions PDO driver options that can be passed to the instance.
      * @return modX A new modX instance.
      */
-    public function __construct($configPath= '', array $options = array(), array $driverOptions = array()) {
-        global $database_dsn, $database_user, $database_password, $config_options, $driver_options, $table_prefix, $site_id, $uuid;
+    public function __construct($configPath= '', $options = null, $driverOptions = null) {
+        try {
+            $options = $this->loadConfig($configPath, $options, $driverOptions);
+            parent :: __construct(
+                null,
+                null,
+                null,
+                $options,
+                null
+            );
+            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
+            $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
+            $debug = $this->getOption('debug');
+            if (!is_null($debug) && $debug !== '') {
+                $this->setDebug($debug);
+            }
+            $this->setPackage('modx', MODX_CORE_PATH . 'model/');
+        } catch (xPDOException $xe) {
+            $this->sendError('fatal', array('error_message' => "<p>{$xe->getMessage()}</p>"));
+        } catch (Exception $e) {
+            $this->sendError('fatal', array('error_message' => "<p>{$e->getMessage()}</p>"));
+        }
+    }
+
+    /**
+     * Load the modX configuration when creating an instance of modX.
+     *
+     * @param string $configPath An absolute path location to search for the modX config file.
+     * @param array $data Data provided to initialize the instance with, overriding config file entries.
+     * @param null $driverOptions Driver options for the primary connection.
+     * @return array The merged config data ready for use by the modX::__construct() method.
+     */
+    protected function loadConfig($configPath = '', $data = array(), $driverOptions = null) {
+        if (!is_array($data)) $data = array();
         modX :: protect();
         if (!defined('MODX_CONFIG_KEY')) {
             define('MODX_CONFIG_KEY', 'config');
@@ -407,10 +466,13 @@ class modX extends xPDO {
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
         }
-        if (@ include ($configPath . MODX_CONFIG_KEY . '.inc.php')) {
+        global $database_dsn, $database_user, $database_password, $config_options, $driver_options, $table_prefix, $site_id, $uuid;
+        if (include ($configPath . MODX_CONFIG_KEY . '.inc.php')) {
             $cachePath= MODX_CORE_PATH . 'cache/';
             if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
-            $options = array_merge(
+            if (!is_array($config_options)) $config_options = array();
+            if (!is_array($driver_options)) $driver_options = array();
+            $data = array_merge(
                 array (
                     xPDO::OPT_CACHE_KEY => 'default',
                     xPDO::OPT_CACHE_HANDLER => 'xPDOFileCache',
@@ -425,49 +487,25 @@ class modX extends xPDO {
                     'cache_system_settings_key' => 'system_settings'
                 ),
                 $config_options,
-                $options
+                $data
             );
-            if (empty($driverOptions)) $driverOptions = array();
-            if (empty($driver_options)) $driver_options = array();
-            parent :: __construct(
-                $database_dsn,
-                $database_user,
-                $database_password,
-                $options,
-                array_merge(
-                    $driver_options,
-                    $driverOptions
-                )
+            $primaryConnection = array(
+                'dsn' => $database_dsn,
+                'username' => $database_user,
+                'password' => $database_password,
+                'options' => array(
+                    xPDO::OPT_CONN_MUTABLE => isset($data[xPDO::OPT_CONN_MUTABLE]) ? (boolean) $data[xPDO::OPT_CONN_MUTABLE] : true,
+                ),
+                'driverOptions' => $driver_options
             );
-            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
-            $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
-            $debug = $this->getOption('debug');
-            switch ($debug) {
-                case null:
-                case '':
-                    break;
-                case true:
-                case 1:
-                case '1':
-                    $this->setDebug(true);
-                    break;
-                case false:
-                case 0:
-                case '0':
-                    $this->setDebug(false);
-                    break;
-                default:
-                    if ((integer) $debug > 1) {
-                        $this->setDebug($debug);
-                    }
-                    break;
+            if (!array_key_exists(xPDO::OPT_CONNECTIONS, $data) || !is_array($data[xPDO::OPT_CONNECTIONS])) {
+                $data[xPDO::OPT_CONNECTIONS] = array();
             }
-            $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
+            array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
             if (!empty($site_id)) $this->site_id = $site_id;
             if (!empty($uuid)) $this->uuid = $uuid;
-        } else {
-            $this->sendError($this->getOption('error_type', null, 'unavailable'), $options);
         }
+        return $data;
     }
 
     /**
@@ -559,7 +597,7 @@ class modX extends xPDO {
      * encountering PHP errors of type E_NOTICE.
      * @return boolean|int The previous value.
      */
-    public function setDebug($debug= true, $stopOnNotice= false) {
+    public function setDebug($debug= true) {
         $oldValue= $this->getDebug();
         if ($debug === true) {
             error_reporting(-1);
@@ -571,7 +609,6 @@ class modX extends xPDO {
             error_reporting(intval($debug));
             parent :: setDebug(intval($debug));
         }
-        $this->stopOnNotice= $stopOnNotice;
         return $oldValue;
     }
 

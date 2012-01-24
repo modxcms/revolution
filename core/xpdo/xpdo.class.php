@@ -1,9 +1,7 @@
 <?php
 /*
- * OpenExpedio ("xPDO") is an ultra-light, PHP 4.3+ compatible ORB (Object-
- * Relational Bridge) library based around PDO (http://php.net/pdo/).  It uses
- * native PDO if available or provides a subset implementation for use with PHP
- * 4 on platforms that do not include the native PDO extensions.
+ * OpenExpedio ("xPDO") is an ultra-light, PHP 5.2+ compatible ORB (Object-
+ * Relational Bridge) library based around PDO (http://php.net/pdo/).
  *
  * Copyright 2010-2012 by MODX, LLC.
  *
@@ -141,21 +139,15 @@ class xPDO {
     const SCHEMA_VERSION = '1.1';
 
     /**
-     * The primary PDO instance used by xPDO for database access.
-     * @var PDO
-     * @access public
+     * @var PDO A reference to the PDO instance used by the current xPDOConnection.
      */
     public $pdo= null;
     /**
-     * A array of xPDO configuration attributes.
-     * @var array
-     * @access public
+     * @var array Configuration options for the xPDO instance.
      */
     public $config= null;
     /**
-     * An xPDODriver instance for the connection.
-     * @var xPDODriver
-     * @access public
+     * @var xPDODriver An xPDODriver instance for the xPDOConnection instances to use.
      */
     public $driver= null;
     /**
@@ -263,6 +255,41 @@ class xPDO {
     public $_quoteChar= "'";
 
     /**
+     * @var array A static collection of xPDO instances.
+     */
+    protected static $instances = array();
+
+    /**
+     * Create, retrieve, or update specific xPDO instances.
+     *
+     * @static
+     * @param string|int|null $id An optional identifier for the instance. If not set
+     * a uniqid will be generated and used as the key for the instance.
+     * @param array|null $config An optional array of config data for the instance.
+     * @param bool $forceNew If true a new instance will be created even if an instance
+     * with the provided $id already exists in xPDO::$instances.
+     * @return xPDO An instance of xPDO.
+     */
+    public static function getInstance($id = null, $config = null, $forceNew = false) {
+        if (is_null($id)) {
+            if (!is_null($config) || $forceNew || empty(self::$instances)) {
+                $id = uniqid(__CLASS__);
+            } else {
+                $id = key(self::$instances);
+            }
+        }
+        if ($forceNew || !array_key_exists($id, self::$instances) || !(self::$instances[$id] instanceof xPDO)) {
+            self::$instances[$id] = new xPDO(null, null, null, $config);
+        } elseif (self::$instances[$id] instanceof xPDO && is_array($config)) {
+            self::$instances[$id]->config = array_merge(self::$instances[$id]->config, $config);
+        }
+        if (!(self::$instances[$id] instanceof xPDO)) {
+            throw new xPDOException("Error getting " . __CLASS__ . " instance, id = {$id}");
+        }
+        return self::$instances[$id];
+    }
+
+    /**
      * The xPDO Constructor.
      *
      * This method is used to create a new xPDO object with a connection to a
@@ -280,11 +307,11 @@ class xPDO {
      * @return xPDO A unique xPDO instance.
      */
     public function __construct($dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
-        if (is_string($options)) $options= array(xPDO::OPT_TABLE_PREFIX => $options);
-        if (!is_array($options)) $options= array(xPDO::OPT_TABLE_PREFIX => '');
-        $this->config = $options;
         try {
-            $this->addConnection($dsn, $username, $password, $options, $driverOptions);
+            $this->config = $this->initConfig($options);
+            if (!empty($dsn)) {
+                $this->addConnection($dsn, $username, $password, $this->config, $driverOptions);
+            }
             if (isset($this->config[xPDO::OPT_CONNECTIONS])) {
                 $connections = $this->config[xPDO::OPT_CONNECTIONS];
                 if (is_string($connections)) {
@@ -302,7 +329,7 @@ class xPDO {
                     }
                 }
             }
-            $initOptions = array_key_exists(xPDO::OPT_CONN_INIT, $this->config) ? $this->config[xPDO::OPT_CONN_INIT] : array();
+            $initOptions = $this->getOption(xPDO::OPT_CONN_INIT, null, array());
             $this->config = array_merge($this->config, $this->getConnection($initOptions)->config);
             $this->getDriver();
             $this->setPackage('om', XPDO_CORE_PATH, $this->config[xPDO::OPT_TABLE_PREFIX]);
@@ -337,6 +364,22 @@ class xPDO {
         } catch (Exception $e) {
             throw new xPDOException("Could not instantiate xPDO: " . $e->getMessage());
         }
+    }
+
+    /**
+     * Initialize an xPDO config array.
+     *
+     * @param string|array $data The config input source. Currently accepts a PHP array,
+     * or a PHP string representing xPDO::OPT_TABLE_PREFIX (deprecated).
+     * @return array An array of xPDO config data.
+     */
+    protected function initConfig($data) {
+        if (is_string($data)) {
+            $data= array(xPDO::OPT_TABLE_PREFIX => $data);
+        } elseif (!is_array($data)) {
+            $data= array(xPDO::OPT_TABLE_PREFIX => '');
+        }
+        return $data;
     }
 
     /**
