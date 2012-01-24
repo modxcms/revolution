@@ -301,11 +301,6 @@ class modX extends xPDO {
      * @var string $documentOutput
      */
     public $documentOutput= null;
-    /**
-     * @deprecated
-     * @var boolean $stopOnNotice
-     */
-    public $stopOnNotice= false;
 
     /**
      * Harden the environment against common security flaws.
@@ -602,7 +597,7 @@ class modX extends xPDO {
      * encountering PHP errors of type E_NOTICE.
      * @return boolean|int The previous value.
      */
-    public function setDebug($debug= true, $stopOnNotice= false) {
+    public function setDebug($debug= true) {
         $oldValue= $this->getDebug();
         if ($debug === true) {
             error_reporting(-1);
@@ -614,7 +609,6 @@ class modX extends xPDO {
             error_reporting(intval($debug));
             parent :: setDebug(intval($debug));
         }
-        $this->stopOnNotice= $stopOnNotice;
         return $oldValue;
     }
 
