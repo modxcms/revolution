@@ -2226,7 +2226,7 @@ class modX extends xPDO {
             setlocale(LC_ALL, $this->getOption('locale', null, $locale));
         }
 
-        $this->getService('lexicon', $this->getOption('lexicon_class', $options, 'modLexicon'), '', $options);
+        $this->getService('lexicon', $this->getOption('lexicon_class', $options, 'modLexicon'), '', is_array($options) ? $options : array());
         $this->invokeEvent('OnInitCulture');
     }
 
@@ -2267,8 +2267,8 @@ class modX extends xPDO {
      * @param array|null $options Options to override Settings explicitly.
      */
     protected function _initSession($options = null) {
+        $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
         if ($this->getOption('session_enabled', $options, true)) {
-            $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
             if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
                 $sh= false;
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
@@ -2316,7 +2316,11 @@ class modX extends xPDO {
                         setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure);
                     }
                 }
+            } else {
+                $this->getUser($contextKey);
             }
+        } else {
+            $this->getUser($contextKey);
         }
     }
 
