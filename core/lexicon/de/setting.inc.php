@@ -344,6 +344,9 @@ $_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Setzen Sie die Locale-Einstellung für das System. Lassen Sie das Feld leer, wenn die Standardeinstellung verwendet werden soll. Konsultieren Sie <a href="http://de.php.net/setlocale" target="_blank">die PHP-Dokumentation</a>, wenn Sie weitere Informationen benötigen.';
 
+$_lang['setting_lock_ttl'] = 'Dauer der Sperre';
+$_lang['setting_lock_ttl_desc'] = 'Die Anzahl der Sekunden, für die die Sperre einer Ressource bestehen bleibt, wenn der Benutzer inaktiv ist.';
+
 $_lang['setting_log_level'] = 'Logging-Level';
 $_lang['setting_log_level_desc'] = 'Der Standard-Logging-Level; je niedriger der Level, desto weniger Einträge werden geloggt. Verfügbare Optionen: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO) und 4 (DEBUG).';
 
