@@ -61,7 +61,7 @@ class modContext extends modAccessibleObject {
      * and regenerated.
      * @return boolean Indicates if the context was successfully prepared.
      */
-    public function prepare($regenerate= false) {
+    public function prepare($regenerate= false, array $options = array()) {
         $prepared= false;
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
@@ -71,7 +71,7 @@ class modContext extends modAccessibleObject {
                     xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'cache.xPDOFileCache')),
                     xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_context_settings_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                 )))) {
-                    $context = $this->xpdo->cacheManager->generateContext($this->get('key'));
+                    $context = $this->xpdo->cacheManager->generateContext($this->get('key'), $options);
                 }
                 if (!empty($context)) {
                     foreach ($context as $var => $val) {

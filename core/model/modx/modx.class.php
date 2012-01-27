@@ -50,32 +50,6 @@ require_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php');
  */
 class modX extends xPDO {
     /**
-     * The level for fatal, application-ending errors
-     * @const LOG_LEVEL_FATAL
-     */
-    const LOG_LEVEL_FATAL = 0;
-    /**
-     * The level for error messages
-     * @const LOG_LEVEL_ERROR
-     */
-    const LOG_LEVEL_ERROR = 1;
-    /**
-     * The level for warning messages
-     * @const LOG_LEVEL_WARN
-     */
-    const LOG_LEVEL_WARN = 2;
-    /**
-     * The level for general information messages
-     * @const LOG_LEVEL_INFO
-     */
-    const LOG_LEVEL_INFO = 3;
-    /**
-     * The level for debugging information messages
-     * @const LOG_LEVEL_DEBUG
-     */
-    const LOG_LEVEL_DEBUG = 4;
-
-    /**
      * The parameter for when a session state is not able to be accessed
      * @const SESSION_STATE_UNAVAILABLE
      */
@@ -222,7 +196,7 @@ class modX extends xPDO {
      */
     public $virtualDir;
     /**
-     * @var object An error_handler for the modX instance.
+     * @var modErrorHandler|object An error_handler for the modX instance.
      */
     public $errorHandler= null;
     /**
@@ -442,6 +416,14 @@ class modX extends xPDO {
                 $this->setDebug($debug);
             }
             $this->setPackage('modx', MODX_CORE_PATH . 'model/');
+            $this->loadClass('modAccess');
+            $this->loadClass('modAccessibleObject');
+            $this->loadClass('modAccessibleSimpleObject');
+            $this->loadClass('modResource');
+            $this->loadClass('modElement');
+            $this->loadClass('modScript');
+            $this->loadClass('modPrincipal');
+            $this->loadClass('modUser');
         } catch (xPDOException $xe) {
             $this->sendError('fatal', array('error_message' => "<p>{$xe->getMessage()}</p>"));
         } catch (Exception $e) {
@@ -517,30 +499,22 @@ class modX extends xPDO {
      * initialization classes
      *
      * @param string $contextKey Indicates the context to initialize.
-     * @return void
+     * @param array|null $options An array of options for the initialization.
+     * @return bool True if initialized successfully, or already initialized.
      */
-    public function initialize($contextKey= 'web') {
+    public function initialize($contextKey= 'web', $options = null) {
         if (!$this->_initialized) {
             if (!$this->startTime) {
                 $this->startTime= $this->getMicroTime();
             }
 
-            $this->loadClass('modAccess');
-            $this->loadClass('modAccessibleObject');
-            $this->loadClass('modAccessibleSimpleObject');
-            $this->loadClass('modResource');
-            $this->loadClass('modElement');
-            $this->loadClass('modScript');
-            $this->loadClass('modPrincipal');
-            $this->loadClass('modUser');
-
             $this->getCacheManager();
             $this->getConfig();
-            $this->_initContext($contextKey);
-            $this->_loadExtensionPackages();
-            $this->_initSession();
-            $this->_initErrorHandler();
-            $this->_initCulture();
+            $this->_initContext($contextKey, false, $options);
+            $this->_loadExtensionPackages($options);
+            $this->_initSession($options);
+            $this->_initErrorHandler($options);
+            $this->_initCulture($options);
 
             $this->getService('registry', 'registry.modRegistry');
 
@@ -550,15 +524,25 @@ class modX extends xPDO {
 
             $this->_initialized= true;
         }
+        return $this->_initialized;
     }
 
     /**
-     * Loads any specified extension packages
+     * Loads any specified extension packages.
+     *
+     * @param array|null An optional array of options that can contain additional
+     * extension packages which will be merged with those specified via config.
      */
-    protected function _loadExtensionPackages() {
+    protected function _loadExtensionPackages($options = null) {
         $extPackages = $this->getOption('extension_packages');
-        if (empty($extPackages)) return;
         $extPackages = $this->fromJSON($extPackages);
+        if (!is_array($extPackages)) $extPackages = array();
+        if (is_array($options) && array_key_exists('extension_packages', $options)) {
+            $optPackages = $this->fromJSON($options['extension_packages']);
+            if (is_array($optPackages)) {
+                $extPackages = array_merge($extPackages, $optPackages);
+            }
+        }
         if (!empty($extPackages)) {
             foreach ($extPackages as $extPackage) {
                 if (!is_array($extPackage)) continue;
@@ -617,7 +601,7 @@ class modX extends xPDO {
      *
      * @param string $class The class name of the cache manager to load
      * @param array $options An array of options to send to the cache manager instance
-     * @return object A modCacheManager registered for this modX instance.
+     * @return modCacheManager A modCacheManager instance registered for this modX instance.
      */
     public function getCacheManager($class= 'cache.xPDOCacheManager', $options = array('path' => XPDO_CORE_PATH, 'ignorePkg' => true)) {
         if ($this->cacheManager === null) {
@@ -1314,6 +1298,9 @@ class modX extends xPDO {
     public function getRequest($class= 'modRequest', $path= '') {
         if ($this->request === null || !($this->request instanceof modRequest)) {
             $requestClass = $this->getOption('modRequest.class',$this->config,$class);
+            if ($requestClass !== $class) {
+                $this->loadClass('modRequest', '', false, true);
+            }
             if ($className= $this->loadClass($requestClass, $path, !empty($path), true))
                 $this->request= new $className ($this);
         }
@@ -1464,7 +1451,7 @@ class modX extends xPDO {
     public function invokeEvent($eventName, array $params= array ()) {
         if (!$eventName)
             return false;
-        if ($this->eventMap === null)
+        if ($this->eventMap === null && $this->context instanceof modContext)
             $this->_initEventMap($this->context->get('key'));
         if (!isset ($this->eventMap[$eventName])) {
             //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
@@ -2173,17 +2160,17 @@ class modX extends xPDO {
      * @param boolean $regenerate If true, force regeneration of the context even if already initialized.
      * @return boolean True if the context was properly initialized
      */
-    protected function _initContext($contextKey, $regenerate = false) {
+    protected function _initContext($contextKey, $regenerate = false, $options = null) {
         $initialized= false;
         $oldContext = is_object($this->context) ? $this->context->get('key') : '';
-        if (isset($this->contexts[$contextKey])) {
+        if (isset($this->contexts[$contextKey]) && $this->contexts[$contextKey] instanceof modContext) {
             $this->context= & $this->contexts[$contextKey];
         } else {
             $this->context= $this->newObject('modContext');
             $this->context->_fields['key']= $contextKey;
         }
         if ($this->context) {
-            if (!$this->context->prepare((boolean) $regenerate)) {
+            if (!$this->context->prepare((boolean) $regenerate, is_array($options) ? $options : array())) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
                 if ($this->context->checkPolicy('load')) {
@@ -2216,25 +2203,8 @@ class modX extends xPDO {
             $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
             $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
             $debug = $this->getOption('debug');
-            switch ($debug) {
-                case null:
-                case '':
-                    break;
-                case true:
-                case 1:
-                case '1':
-                    $this->setDebug(true);
-                    break;
-                case false:
-                case 0:
-                case '0':
-                    $this->setDebug(false);
-                    break;
-                default:
-                    if ((integer) $debug > 1) {
-                        $this->setDebug($debug);
-                    }
-                    break;
+            if (!is_null($debug) && $debug !== '') {
+                $this->setDebug($debug);
             }
         }
         return $initialized;
@@ -2243,31 +2213,34 @@ class modX extends xPDO {
     /**
      * Initializes the culture settings.
      *
-     * @access protected
+     * @param array|null $options Options for the culture initialization process.
      */
-    protected function _initCulture() {
-        $cultureKey = $this->getOption('cultureKey',null,'en');
+    protected function _initCulture($options = null) {
+        $cultureKey = $this->getOption('cultureKey', $options, 'en');
         if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
         $this->cultureKey = $cultureKey;
 
-        $locale = setlocale(LC_ALL, null);
-        setlocale(LC_ALL, $this->getOption('locale', null, $locale));
+        if ($this->getOption('setlocale', $options, true)) {
+            $locale = setlocale(LC_ALL, null);
+            setlocale(LC_ALL, $this->getOption('locale', null, $locale));
+        }
 
-        $this->getService('lexicon','modLexicon');
+        $this->getService('lexicon', $this->getOption('lexicon_class', $options, 'modLexicon'), '', is_array($options) ? $options : array());
         $this->invokeEvent('OnInitCulture');
     }
 
     /**
      * Loads the error handler for this instance.
-     * @access protected
+     *
+     * @param array|null $options An array of options for the errorHandler.
      */
-    protected function _initErrorHandler() {
+    protected function _initErrorHandler($options = null) {
         if ($this->errorHandler == null || !is_object($this->errorHandler)) {
-            if (isset ($this->config['error_handler_class']) && strlen($this->config['error_handler_class']) > 1) {
-                if ($ehClass= $this->loadClass($this->config['error_handler_class'], '', false, true)) {
+            if ($ehClass = $this->getOption('error_handler_class', $options, 'modErrorHandler', true)) {
+                if ($ehClass= $this->loadClass($ehClass, '', false, true)) {
                     if ($this->errorHandler= new $ehClass($this)) {
-                        $result= set_error_handler(array ($this->errorHandler, 'handleError'));
+                        $result= set_error_handler(array ($this->errorHandler, 'handleError'), $this->getOption('error_handler_types', $options, null, true));
                         if ($result === false) {
                             $this->log(modX::LOG_LEVEL_ERROR, 'Could not set error handler.  Make sure your class has a function called handleError(). Result: ' . print_r($result, true));
                         }
@@ -2280,7 +2253,6 @@ class modX extends xPDO {
     /**
      * Populates the map of events and registered plugins for each.
      *
-     * @access protected
      * @param string $contextKey Context identifier.
      */
     protected function _initEventMap($contextKey) {
@@ -2291,57 +2263,64 @@ class modX extends xPDO {
 
     /**
      * Loads the session handler and starts the session.
-     * @access protected
+     *
+     * @param array|null $options Options to override Settings explicitly.
      */
-    protected function _initSession() {
-        $contextKey= $this->context->get('key');
-        if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
-            $sh= false;
-            if ($sessionHandlerClass = $this->getOption('session_handler_class')) {
-                if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
-                    if ($sh= new $shClass($this)) {
-                        session_set_save_handler(
-                            array (& $sh, 'open'),
-                            array (& $sh, 'close'),
-                            array (& $sh, 'read'),
-                            array (& $sh, 'write'),
-                            array (& $sh, 'destroy'),
-                            array (& $sh, 'gc')
-                        );
+    protected function _initSession($options = null) {
+        $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
+        if ($this->getOption('session_enabled', $options, true)) {
+            if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
+                $sh= false;
+                if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
+                    if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
+                        if ($sh= new $shClass($this)) {
+                            session_set_save_handler(
+                                array (& $sh, 'open'),
+                                array (& $sh, 'close'),
+                                array (& $sh, 'read'),
+                                array (& $sh, 'write'),
+                                array (& $sh, 'destroy'),
+                                array (& $sh, 'gc')
+                            );
+                        }
                     }
                 }
-            }
-            if (!$sh) {
-                $sessionSavePath = $this->getOption('session_save_path');
-                if ($sessionSavePath && is_writable($sessionSavePath)) {
-                    session_save_path($sessionSavePath);
+                if (!$sh) {
+                    $sessionSavePath = $this->getOption('session_save_path', $options);
+                    if ($sessionSavePath && is_writable($sessionSavePath)) {
+                        session_save_path($sessionSavePath);
+                    }
                 }
+                $cookieDomain= $this->getOption('session_cookie_domain', $options, '');
+                $cookiePath= $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
+                if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
+                $cookieSecure= (boolean) $this->getOption('session_cookie_secure', $options, false);
+                $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', $options, 0);
+                $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
+                if ($gcMaxlifetime > 0) {
+                    ini_set('session.gc_maxlifetime', $gcMaxlifetime);
+                }
+                $site_sessionname= $this->getOption('session_name', $options, '');
+                if (!empty($site_sessionname)) session_name($site_sessionname);
+                session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
+                session_start();
+                $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
+                $this->getUser($contextKey);
+                $cookieExpiration= 0;
+                if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
+                    $sessionCookieLifetime= (integer) $_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
+                    if ($sessionCookieLifetime !== $cookieLifetime) {
+                        if ($sessionCookieLifetime) {
+                            $cookieExpiration= time() + $sessionCookieLifetime;
+                        }
+                        setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure);
+                    }
+                }
+            } else {
+                $this->getUser($contextKey);
             }
-            $cookieDomain= $this->getOption('session_cookie_domain',null,'');
-            $cookiePath= $this->getOption('session_cookie_path',null,MODX_BASE_URL);
-            if (empty($cookiePath)) $cookiePath = $this->getOption('base_url',null,MODX_BASE_URL);
-            $cookieSecure= (boolean) $this->getOption('session_cookie_secure',null,false);
-            $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime',null,0);
-            $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime',null,$cookieLifetime);
-            if ($gcMaxlifetime > 0) {
-                ini_set('session.gc_maxlifetime', $gcMaxlifetime);
-            }
-            $site_sessionname= $this->getOption('session_name', null,'');
-            if (!empty($site_sessionname)) session_name($site_sessionname);
-            session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
-            session_start();
-            $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
+        } else {
             $this->getUser($contextKey);
-            $cookieExpiration= 0;
-            if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
-                $sessionCookieLifetime= (integer) $_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
-                if ($sessionCookieLifetime !== $cookieLifetime) {
-                    if ($sessionCookieLifetime) {
-                        $cookieExpiration= time() + $sessionCookieLifetime;
-                    }
-                    setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure);
-                }
-            }
         }
     }
 
