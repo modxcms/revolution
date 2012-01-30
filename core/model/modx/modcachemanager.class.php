@@ -171,6 +171,7 @@ class modCacheManager extends xPDOCacheManager {
         } else {
             $results = $this->getOption("{$key}_results", $options, array());
             $cacheKey = "{$key}/context";
+            $options['cache_context_settings'] = array_key_exists('cache_context_settings', $results) ? (boolean) $results : false;
         }
         if ($this->getOption('cache_context_settings', $options, true) && is_array($results) && !empty($results)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
