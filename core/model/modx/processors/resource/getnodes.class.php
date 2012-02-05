@@ -451,7 +451,10 @@ class modResourceGetNodesProcessor extends modProcessor {
             $itemArray['expanded'] = true;
         } else {
             $itemArray['hasChildren'] = true;
-            $itemArray['children'] = $this->getChildrenNodes($itemArray);
+            $children = $this->getChildrenNodes($itemArray);
+            if (is_array($children)) {
+                $itemArray['children'] = $children;
+            }
         }
         $itemArray = $resource->prepareTreeNode($itemArray);
         return $itemArray;
@@ -473,7 +476,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
             return $children;
         }
-        return array();
+        return false;
     }
 }
 return 'modResourceGetNodesProcessor';
