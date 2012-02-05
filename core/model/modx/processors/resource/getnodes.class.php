@@ -14,6 +14,7 @@ class modResourceGetNodesProcessor extends modProcessor {
     public $items = array();
     public $actions = array();
     public $permissions = array();
+    public $expandNodes = array();
 
     public function checkPermissions() {
         return $this->modx->hasPermission('resource_tree');
@@ -23,6 +24,36 @@ class modResourceGetNodesProcessor extends modProcessor {
     }
 
     public function initialize() {
+        if (empty($this->expandNodes)) {
+            /* Get the current state for the resource tree from the Registry */
+            $response = $this->modx->runProcessor('system/registry/register/read',array(
+                'register' => 'state',
+                'topic' => '/ys/user-'.$this->modx->user->get('id').'/modx-resource-tree',
+                'include_keys' => false,
+                'poll_interval' => 1,
+                'poll_limit' => 1,
+                'remove_read' => false,
+                'show_filename' => false,
+                'time_limit' => 10,
+            ));
+            /* @var modProcessorResponse $response */
+            $state = $response->getMessage();
+            if (!empty($state)) {
+                /* Parse the state into the $this->expandNodes array as a single-level array with the node IDs as key (web_10 => true) */
+                $state = $this->modx->fromJSON($state);
+                $state = reset($state);
+                if (!empty($state)) {
+                    foreach ($state as $tree) {
+                        $parts = explode('/',$tree);
+                        foreach ($parts as $part) {
+                            if ($part == 'root' || empty($part)) continue;
+                            $this->expandNodes[$part] = true;
+                        }
+                    }
+                }
+            }
+        }
+
         $this->setDefaultProperties(array(
             'sortBy' => $this->modx->getOption('tree_default_sort',null,'menuindex'),
             'sortDir' => 'ASC',
@@ -420,9 +451,29 @@ class modResourceGetNodesProcessor extends modProcessor {
             $itemArray['expanded'] = true;
         } else {
             $itemArray['hasChildren'] = true;
+            $itemArray['children'] = $this->getChildrenNodes($itemArray);
         }
         $itemArray = $resource->prepareTreeNode($itemArray);
         return $itemArray;
+    }
+
+    public function getChildrenNodes($itemArray = array()) {
+        if (key_exists($itemArray['id'],$this->expandNodes)) {
+            /* Get the existing items and empty the items var */
+            $items = $this->items;
+            $this->items = array();
+
+            /* Set the ID of the current node as root and process it */
+            $this->setProperty('id',$itemArray['id']);
+            $this->process();
+
+            /* Get the items array, and set the original one back */
+            $children = $this->items;
+            $this->items = $items;
+
+            return $children;
+        }
+        return array();
     }
 }
 return 'modResourceGetNodesProcessor';
