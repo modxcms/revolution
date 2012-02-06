@@ -172,9 +172,9 @@ MODx.browser.Window = function(config) {
         ,hideFiles: config.hideFiles || false
         ,openTo: config.openTo || ''
         ,ident: this.ident
-        ,rootId: '/'
+        ,rootId: this.config.rootId || '/'
         ,rootName: _('files')
-        ,rootVisible: true
+        ,rootVisible: this.config.rootVisible == undefined || !Ext.isEmpty(this.config.rootId)
         ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
