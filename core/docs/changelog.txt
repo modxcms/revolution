@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6942] Add missing resource duplicate ACL permission description lexicon string
 - [#6970] Reload error log page after clearing too large error log file
 - [#6956] Fix wrong groupname for OnMediaSourceDuplicate plugin event
 - [#7013] Fix issue where modUser->getUserGroupNames was buggy with non-self users
