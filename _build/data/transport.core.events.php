@@ -1051,7 +1051,7 @@ $events['OnMediaSourceDuplicate']= $xpdo->newObject('modEvent');
 $events['OnMediaSourceDuplicate']->fromArray(array (
   'name' => 'OnMediaSourceDuplicate',
   'service' => 1,
-  'groupname' => 'Resources',
+  'groupname' => 'Media Sources',
 ), '', true, true);
 
 return $events;
