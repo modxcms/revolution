@@ -172,9 +172,9 @@ MODx.browser.Window = function(config) {
         ,hideFiles: config.hideFiles || false
         ,openTo: config.openTo || ''
         ,ident: this.ident
-        ,rootId: this.config.rootId || '/'
+        ,rootId: config.rootId || '/'
         ,rootName: _('files')
-        ,rootVisible: this.config.rootVisible == undefined || !Ext.isEmpty(this.config.rootId)
+        ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
         ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
@@ -183,6 +183,12 @@ MODx.browser.Window = function(config) {
                 this.view.config.source = s;
                 this.view.baseParams.source = s;
                 this.view.run();
+            },scope:this}
+            ,'nodeclick': {fn:function(n,e) {
+                n.select();
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
             },scope:this}
         }
     });
