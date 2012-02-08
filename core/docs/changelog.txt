@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6956] Fix wrong groupname for OnMediaSourceDuplicate plugin event
 - [#7013] Fix issue where modUser->getUserGroupNames was buggy with non-self users
 - [#6960] Fix rendering issue when tree_root_id is set
 - [#7031] Ensure setting from addr in modMail sets return-path as well
