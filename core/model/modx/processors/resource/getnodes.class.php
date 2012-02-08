@@ -174,7 +174,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'context_key' => $this->contextKey,
             'show_in_tree' => true,
         ));
-        if (empty($node) && !empty($this->defaultRootId)) {
+        if (empty($this->startNode) && !empty($this->defaultRootId)) {
             $c->where(array(
                 'id:IN' => explode(',', $this->defaultRootId),
                 'parent:NOT IN' => explode(',', $this->defaultRootId),

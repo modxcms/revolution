@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6960] Fix rendering issue when tree_root_id is set
 - [#7031] Ensure setting from addr in modMail sets return-path as well
 - [#7010] Add in rootId config option for MODx.Browser mgr widget
 - [#6874] Fix issue where duplicating a TV did not copy Media Source relationships correctly
