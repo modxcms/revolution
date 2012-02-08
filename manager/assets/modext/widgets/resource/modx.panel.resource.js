@@ -36,7 +36,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,rteElements: 'ta'
     ,rteLoaded: false
     ,setup: function() {
-        if (!this.initialized) { 
+        if (!this.initialized) {
             this.getForm().setValues(this.config.record);
             var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
@@ -83,7 +83,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         this.fireEvent('load');
 
     }
-    
+
     ,beforeSubmit: function(o) {
         var ta = Ext.get('ta');
         if (ta) {
@@ -153,7 +153,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             uri.hide();
         }
     }
-    
+
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
@@ -232,6 +232,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,forceLayout: true
             ,deferredRender: false
             ,collapsible: true
+            ,animCollapse: false
             ,itemId: 'tabs'
             ,items: it
         });
@@ -244,6 +245,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,bodyCssClass: 'main-wrapper'
                 ,autoHeight: true
                 ,collapsible: true
+                ,animCollapse: false
                 ,hideMode: 'offsets'
                 ,items: ct
                 ,style: 'margin-top: 10px'
