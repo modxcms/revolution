@@ -75,10 +75,7 @@ MODx.grid.Package = function(config) {
                 ,'render': {fn: function(pnl) {
                     new Ext.KeyMap(pnl.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: pnl
                     });
                 },scope:this}
