@@ -9,8 +9,6 @@
 MODx.tree.Directory = function(config) {
     config = config || {};
     config.id = config.id || Ext.id();
-    
-    
     Ext.applyIf(config,{
         rootVisible: true
         ,rootName: _('files')
@@ -97,12 +95,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,autoHeight: true
             ,width: '100%'
         });
-        
         var cb = MODx.load({
             xtype: 'modx-combo-source'
             ,ctCls: 'modx-leftbar-second-tb'
-//ALAN      ,value: MODx.config.default_media_source
-/*ALAN*/	,value: this.config.source || MODx.config.default_media_source
+            ,value: this.config.source || MODx.config.default_media_source
             ,width: Ext.getCmp(this.config.id).getWidth() - 12
             ,listeners: {
                 'select':{fn:this.changeSource,scope:this}
@@ -232,7 +228,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 action: 'rename'
                 ,new_name: nv
                 ,old_name: ov
-                ,prependPath: this.config.prependPath || null
                 ,file: this.treeEditor.editNode.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -295,7 +290,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.windows.create = MODx.load({
                 xtype: 'modx-window-directory-create'
                 ,record: r
-                ,prependPath: this.config.prependPath || null
                 ,listeners: {
                     'success':{fn:this.refreshActiveNode,scope:this}
                 }
@@ -317,7 +311,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.windows.chmod = MODx.load({
                 xtype: 'modx-window-directory-chmod'
                 ,record: r
-                ,prependPath: this.config.prependPath || null
                 ,listeners: {
                     'success':{fn:this.refreshActiveNode,scope:this}
                 }
@@ -336,7 +329,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,params: {
                 action: 'remove'
                 ,dir: node.attributes.path
-                ,prependPath: this.config.prependPath || null
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
@@ -393,12 +385,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 url: MODx.config.connectors_url+'browser/file.php'
                 ,base_params: {
                     action: 'upload'
-                    ,prependPath: this.config.prependPath || null
-                    ,prependUrl: this.config.prependUrl || null
-                    ,basePath: this.config.basePath || ''
-                    ,basePathRelative: this.config.basePathRelative || null
-                    ,baseUrl: this.config.baseUrl || ''
-                    ,baseUrlRelative: this.config.baseUrlRelative || null
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
                 }
@@ -446,12 +432,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
         this.uploader.setBaseParams({
             action: 'upload'
-            ,prependPath: this.config.prependPath || null
-            ,prependUrl: this.config.prependUrl || null
-            ,basePath: this.config.basePath || ''
-            ,basePathRelative: this.config.basePathRelative || null
-            ,baseUrl: this.config.baseUrl || ''
-            ,baseUrlRelative: this.config.baseUrlRelative || null
             ,path: path
             ,wctx: MODx.ctx || ''
             ,source: this.getSource()
@@ -484,10 +464,6 @@ MODx.window.CreateDirectory = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'source'
-        },{
-            xtype: 'hidden'
-            ,name: 'prependPath'
-            ,value: config.prependPath || null
         },{
             fieldLabel: _('name')
             ,name: 'name'
@@ -530,10 +506,6 @@ MODx.window.ChmodDirectory = function(config) {
             xtype: 'hidden'
             ,name: 'source'
         },{
-            xtype: 'hidden'
-            ,name: 'prependPath'
-            ,value: config.prependPath || null
-        },{
             name: 'dir'
             ,fieldLabel: _('name')
             ,xtype: 'statictextfield'
@@ -568,10 +540,6 @@ MODx.window.RenameDirectory = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'source'
-        },{
-            xtype: 'hidden'
-            ,name: 'prependPath'
-            ,value: config.prependPath || null
         },{
             fieldLabel: _('path')
             ,name: 'path'
@@ -611,10 +579,6 @@ MODx.window.RenameFile = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'source'
-        },{
-            xtype: 'hidden'
-            ,name: 'prependPath'
-            ,value: config.prependPath || null
         },{
             fieldLabel: _('path')
             ,name: 'path'
