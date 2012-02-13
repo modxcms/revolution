@@ -363,7 +363,7 @@ $collection = array ();
 include MODX_BUILD_DIR . 'data/transport.core.media_sources.php';
 $attributes = array (
     xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UPDATE_OBJECT => false,
     xPDOTransport::UNIQUE_KEY => array ('id'),
 );
 foreach ($collection as $c) {
