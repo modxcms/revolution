@@ -383,6 +383,10 @@ MODx.browser.View = function(config) {
             ,wctx: config.wctx || 'web'
             ,dir: config.openTo || ''
         }
+        ,sortInfo: {
+            field: 'name'
+            ,direction: 'ASC'
+        }
         ,tpl: this.templates.thumb
         ,listeners: {
             'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
