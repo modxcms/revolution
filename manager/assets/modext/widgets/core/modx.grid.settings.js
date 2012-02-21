@@ -72,13 +72,13 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'name_trans'
             ,sortable: true
             ,editable: false
-            ,width: 150
+            ,width: 175
         },{
             header: _('key')
             ,dataIndex: 'key'
             ,sortable: true
             ,editable: false
-            ,width: 125
+            ,width: 150
         },{
             header: _('value')
             ,dataIndex: 'value'
@@ -91,7 +91,7 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'editedon'
             ,sortable: true
             ,editable: false
-            ,width: 125
+            ,width: 100
         },{
             header: _('area')
             ,dataIndex: 'area_text'
