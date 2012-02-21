@@ -45,6 +45,10 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
             $params['where'] = $this->modx->fromJSON($params['where']);
             $c->where($params['where']);
         }
+    	if (!empty($params['limitRelatedContext']) && ($params['limitRelatedContext'] == 1 || $params['limitRelatedContext'] == 'true')) {
+			$context_key = $this->modx->resource->get('context_key');
+            $c->where(array('modResource.context_key' => $context_key));
+		}
         $c->sortby('Parent.menuindex,modResource.menuindex','ASC');
         if (!empty($params['limit'])) {
             $c->limit($params['limit']);
