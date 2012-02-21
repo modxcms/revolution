@@ -52,8 +52,12 @@ abstract class modElementCreateProcessor extends modObjectCreateProcessor {
         $this->setElementProperties();
         $this->validateElement();
 
-        if ($this->object->staticContentChanged() && $this->object->get('content') !== '' && !$this->object->isStaticSourceMutable()) {
-            $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
+        if ($this->object->staticContentChanged()) {
+            if ($this->object->get('content') !== '' && !$this->object->isStaticSourceMutable()) {
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
+            } else if (!$this->object->isStaticSourceValidPath()) {
+                $this->addFieldError('static_file',$this->modx->lexicon('element_static_source_protected_invalid'));
+            }
         }
 
         return !$this->hasErrors();

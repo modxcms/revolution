@@ -878,4 +878,22 @@ class modElement extends modAccessibleSimpleObject {
         }
         return $isMutable;
     }
+
+    /**
+     * Ensure the static source cannot browse the protected configuration directory
+     *
+     * @return boolean True if is a valid source path
+     */
+    public function isStaticSourceValidPath() {
+        $isValid = true;
+        $sourceFile = $this->getSourceFile();
+        if ($sourceFile) {
+            $sourceDirectory = rtrim(dirname($sourceFile),'/');
+            $configDirectory = rtrim($this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'config/','/');
+            if ($sourceDirectory == $configDirectory) {
+                $isValid = false;
+            }
+        }
+        return $isValid;
+    }
 }
