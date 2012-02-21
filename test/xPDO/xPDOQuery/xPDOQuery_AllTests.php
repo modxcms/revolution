@@ -20,6 +20,7 @@
  * @package xpdo-test
  */
 require_once dirname(__FILE__).'/xPDOQuery.php';
+require_once dirname(__FILE__).'/xPDOQuery_Having.php';
 require_once dirname(__FILE__).'/xPDOQuery_Limit.php';
 require_once dirname(__FILE__).'/xPDOQuery_SortBy.php';
 /**
@@ -33,6 +34,7 @@ class xPDOQuery_AllTests extends PHPUnit_Framework_TestSuite
     public static function suite() {
         $suite = new xPDOQuery_AllTests('xPDOQueryClassTest');
         $suite->addTestSuite('xPDOQueryTest');
+        $suite->addTestSuite('xPDOQueryHavingTest');
         $suite->addTestSuite('xPDOQueryLimitTest');
         $suite->addTestSuite('xPDOQuerySortByTest');
         return $suite;

@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Implement xPDOQuery::having() method
 - Add xPDO::getInstance() for singleton support
 
 xPDO 2.2.2-pl (January 4, 2012)
