@@ -168,6 +168,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     'afterRemoveRow':{fn:this.markDirty,scope:this}
                     ,'afterUpdateRole':{fn:this.markDirty,scope:this}
                     ,'afterAddGroup':{fn:this.markDirty,scope:this}
+                    ,'afterReorderGroup':{fn:this.markDirty,scope:this}
                 }
             }]
         });
