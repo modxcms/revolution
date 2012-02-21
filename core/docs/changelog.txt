@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#7194] Fix issue where save button did not enable when reordering groups on user edit screen
 - [#3818] Change modWebLink default responseCode to 301
 - [#6611] Fix issue where MODx.Browser did not sort files by name by default
 - [#7070] Do not overwrite user changes in default media sources during upgrade process
