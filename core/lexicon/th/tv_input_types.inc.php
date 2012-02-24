@@ -1,13 +1,12 @@
-<?php
+﻿<?php
 /**
  * TV Input Types Thai lexicon topic
  *
  * @language th
  * @package modx
  * @subpackage lexicon
- 
-  * @author Mr.Kittipong Intaboot COE#18,KKU
- * @updated 2010-07-21
+ * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
+ * updated 29/01/2012
  */
 $_lang['autotag'] = 'แท็กอัตโนมัติ';
 $_lang['text'] = 'ข้อความ';

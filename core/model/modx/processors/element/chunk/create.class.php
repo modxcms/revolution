@@ -16,7 +16,7 @@ require_once (dirname(dirname(__FILE__)).'/create.class.php');
  */
 class modChunkCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modChunk';
-    public $languageTopics = array('chunk');
+    public $languageTopics = array('chunk','category','element');
     public $permission = 'new_chunk';
     public $elementType = 'chunk';
     public $objectType = 'chunk';

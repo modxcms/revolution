@@ -58,7 +58,6 @@ MODx.tree.Directory = function(config) {
             ,scope: this
             ,hidden: MODx.perm.file_manager && !MODx.browserOpen ? false : true
         }]
-        ,source: 1
         ,tbarCfg: {
             id: config.id+'-tbar'
         }

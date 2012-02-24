@@ -25,7 +25,7 @@ require_once (dirname(dirname(__FILE__)).'/create.class.php');
  */
 class modTemplateVarCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modTemplateVar';
-    public $languageTopics = array('tv','category');
+    public $languageTopics = array('tv','category','element');
     public $permission = 'new_tv';
     public $elementType = 'tv';
     public $objectType = 'tv';
