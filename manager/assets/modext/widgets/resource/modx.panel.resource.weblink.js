@@ -43,5 +43,18 @@ Ext.extend(MODx.panel.WebLink,MODx.panel.Resource,{
     ,getContentField: function(config) {
         return null;
     }
+    ,getSettingLeftFields: function(config) {
+        var its = MODx.panel.WebLink.superclass.getSettingLeftFields.call(this,config);
+        its.push({
+            xtype: 'textfield'
+            ,fieldLabel: _('weblink_response_code')
+            ,description: _('weblink_response_code_help')
+            ,name: 'responseCode'
+            ,id: 'modx-weblink-responseCode'
+            ,anchor: '100%'
+            ,value: (config.record.responseCode) || 'HTTP/1.1 301 Moved Permanently'
+        });
+        return its;
+    }
 });
 Ext.reg('modx-panel-weblink',MODx.panel.WebLink);

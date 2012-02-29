@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3818] Add UI/processing to set response code for weblinks
 - [#7061] Prevent Static Element access to the core/config/ directory
 - [#7088] Tweak column widths for settings grids
 - [#7102] Improve memory_limit checks to properly check for values that are not formatted to PHP standards
