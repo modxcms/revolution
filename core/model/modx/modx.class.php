@@ -1550,7 +1550,16 @@ class modX extends xPDO {
             if ($isClass) {
                 /* ensure processor file is only included once if run multiple times in a request */
                 if (!array_key_exists($processorFile,$this->processors)) {
-                    $className = include $processorFile;
+                    $className = include_once $processorFile;
+                    /* handle already included core classes */
+                    if ($className == 1) {
+                        $s = explode('/',$action);
+                        $o = array();
+                        foreach ($s as $k) {
+                            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
+                        }
+                        $className = 'mod'.implode('',$o).'Processor';
+                    }
                     $this->processors[$processorFile] = $className;
                 } else {
                     $className = $this->processors[$processorFile];

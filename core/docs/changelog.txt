@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#7279] Handle edge case where processor classes might already be loaded with CRCs causing issues with runProcessor
 - Add dashboard name to dashboard title
 - [#3818] Add UI/processing to set response code for weblinks
 - [#7061] Prevent Static Element access to the core/config/ directory
