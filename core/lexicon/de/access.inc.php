@@ -101,7 +101,7 @@ $_lang['resource_group_untitled'] = 'Unbenannte Ressourcen-Gruppe';
 $_lang['resource_group_update'] = 'Ressourcen-Gruppe bearbeiten';
 $_lang['roles_msg'] = 'Eine Rolle ist per Definition eine Position oder ein Status, den man in einer bestimmten Situation hat. Rollen können verwendet werden, um Benutzer innerhalb einer Benutzergruppe nach Position oder Status zu gruppieren. Rollen haben in MODX zudem das, was wir "Autorität" nennen. Dies ist ein Zahlenwert, genauer gesagt eine beliebige ganze Zahl >= 0. Autoritäts-Level sind "abwärts vererbbar" in dem Sinne, dass eine Rolle mit Autorität 1 alle Gruppenrichtlinien erbt, die ihr selbst und allen Rollen mit einem höheren Autoritäts-Wert als 1 zugeordnet sind.';
 $_lang['source_add'] = 'Medienquelle hinzufügen';
-$_lang['user_group_category_access'] = 'Zugriff auf Elemente über Kategorien';
+$_lang['user_group_category_access'] = 'Element-Kategorien-Zugriff';
 $_lang['user_group_category_access_msg'] = 'Hier können Sie festlegen, auf welche Elemente diese Benutzergruppe über die Kategorien, in denen sich die Elemente befinden, zugreifen kann.';
 $_lang['user_group_category_authority_desc'] = 'Die mindestens benötigte Rolle, die Zugriff auf die Berechtigungen in der gewählten Richtlinie für diesen Kontext hat. Rollen mit stärkerer Autorität (kleinere Zahlen) erben diesen Zugriff ebenfalls. In den meisten Fällen kann hier der Wert "Member" gewählt werden.';
 $_lang['user_group_category_category_desc'] = 'Die Kategorie, auf die der Zugriff erlaubt werden soll.';
