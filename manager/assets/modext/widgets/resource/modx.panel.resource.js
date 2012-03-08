@@ -702,7 +702,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'syncsite'
             ,id: 'modx-resource-syncsite'
             ,inputValue: 1
-            ,checked: parseInt(config.record.syncsite)
+            ,checked: config.record.syncsite !== undefined && config.record.syncsite !== null ? parseInt(config.record.syncsite) : true
 
         },{
             xtype: 'xcheckbox'
