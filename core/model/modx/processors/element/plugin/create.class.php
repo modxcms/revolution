@@ -20,7 +20,7 @@ require_once (dirname(dirname(__FILE__)).'/create.class.php');
  */
 class modPluginCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modPlugin';
-    public $languageTopics = array('chunk');
+    public $languageTopics = array('plugin','category','element');
     public $permission = 'new_plugin';
     public $elementType = 'plugin';
     public $objectType = 'plugin';

@@ -136,9 +136,22 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->checkPublishingPermissions();
         $this->checkForUnPublishOnSiteStart();
         $this->checkDeletedStatus();
+        $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
         
         return parent::beforeSet();
+    }
+
+    /**
+     * Handle any properties-specific fields
+     */
+    public function handleResourceProperties() {
+        if ($this->object->get('class_key') == 'modWebLink') {
+            $responseCode = $this->getProperty('responseCode');
+            if (!empty($responseCode)) {
+                $this->object->setProperty('responseCode',$responseCode);
+            }
+        }
     }
 
     /**

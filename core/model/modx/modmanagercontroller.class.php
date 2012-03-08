@@ -100,6 +100,17 @@ abstract class modManagerController {
     }
 
     /**
+     * Prepares the language placeholders
+     */
+    public function prepareLanguage() {
+        $this->modx->lexicon->load('action');
+        $languageTopics = $this->getLanguageTopics();
+        foreach ($languageTopics as $topic) { $this->modx->lexicon->load($topic); }
+        $this->setPlaceholder('_lang_topics',implode(',',$languageTopics));
+        $this->setPlaceholder('_lang',$this->modx->lexicon->fetch());
+    }
+
+    /**
      * Render the controller.
      * 
      * @return string
@@ -114,15 +125,9 @@ abstract class modManagerController {
         ));
 
         $this->theme = $this->modx->getOption('manager_theme',null,'default');
-        
-        $this->modx->lexicon->load('action');
-        $languageTopics = $this->getLanguageTopics();
-        foreach ($languageTopics as $topic) { $this->modx->lexicon->load($topic); }
-        $this->setPlaceholder('_lang_topics',implode(',',$languageTopics));
-        $this->setPlaceholder('_lang',$this->modx->lexicon->fetch());
+
+        $this->prepareLanguage();
         $this->setPlaceholder('_ctx',$this->modx->context->get('key'));
-
-
         $this->loadControllersPath();
         $this->loadTemplatesPath();
         $content = '';

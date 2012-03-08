@@ -18,7 +18,7 @@ require_once (dirname(dirname(__FILE__)).'/create.class.php');
  */
 class modTemplateCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modTemplate';
-    public $languageTopics = array('template','category');
+    public $languageTopics = array('template','category','element');
     public $permission = 'new_template';
     public $elementType = 'template';
     public $objectType = 'template';

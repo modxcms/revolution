@@ -21,7 +21,8 @@ MODx.grid.UserGroupSource = function(config) {
         ,singleText: _('policy')
         ,pluralText: _('policies')
         ,sortBy: 'authority'
-        ,sortDir: 'DESC'
+        ,sortDir: 'ASC'
+        ,remoteSort: true
         ,plugins: [this.exp]
         ,columns: [this.exp,{
             header: _('source')

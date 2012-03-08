@@ -58,7 +58,6 @@ MODx.tree.Directory = function(config) {
             ,scope: this
             ,hidden: MODx.perm.file_manager && !MODx.browserOpen ? false : true
         }]
-        ,source: 1
         ,tbarCfg: {
             id: config.id+'-tbar'
         }
@@ -98,7 +97,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var cb = MODx.load({
             xtype: 'modx-combo-source'
             ,ctCls: 'modx-leftbar-second-tb'
-            ,value: MODx.config.default_media_source
+            ,value: this.config.source || MODx.config.default_media_source 
             ,width: Ext.getCmp(this.config.id).getWidth() - 12
             ,listeners: {
                 'select':{fn:this.changeSource,scope:this}

@@ -264,6 +264,8 @@ class modX extends xPDO {
         ,'modSnippet' => array()
         ,'modTemplateVar' => array()
     );
+    /** @var modCacheManager $cacheManager */
+    public $cacheManager;
 
     /**
      * @deprecated
@@ -1550,7 +1552,16 @@ class modX extends xPDO {
             if ($isClass) {
                 /* ensure processor file is only included once if run multiple times in a request */
                 if (!array_key_exists($processorFile,$this->processors)) {
-                    $className = include $processorFile;
+                    $className = include_once $processorFile;
+                    /* handle already included core classes */
+                    if ($className == 1) {
+                        $s = explode('/',$action);
+                        $o = array();
+                        foreach ($s as $k) {
+                            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
+                        }
+                        $className = 'mod'.implode('',$o).'Processor';
+                    }
                     $this->processors[$processorFile] = $className;
                 } else {
                     $className = $this->processors[$processorFile];
@@ -2013,7 +2024,9 @@ class modX extends xPDO {
     /**
      * Executed before the handleRequest function.
      */
-    public function beforeRequest() {}
+    public function beforeRequest() {
+        unset($this->placeholders['+username'],$this->placeholders['+password'],$this->placeholders['+dbname'],$this->placeholders['+host']);
+    }
 
     /**
      * Determines the current site_status.

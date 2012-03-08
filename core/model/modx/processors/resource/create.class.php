@@ -125,6 +125,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
         $this->preparePageTitle();
         $this->prepareAlias();
+        $this->handleResourceProperties();
 
         $this->object->set('template',$this->getProperty('template',0));
         $templateVariables = $this->addTemplateVariables();
@@ -132,6 +133,18 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             $this->object->addMany($templateVariables);
         }
         return parent::beforeSet();
+    }
+
+    /**
+     * Handle any properties-specific fields
+     */
+    public function handleResourceProperties() {
+        if ($this->object->get('class_key') == 'modWebLink') {
+            $responseCode = $this->getProperty('responseCode');
+            if (!empty($responseCode)) {
+                $this->object->setProperty('responseCode',$responseCode);
+            }
+        }
     }
 
     /**

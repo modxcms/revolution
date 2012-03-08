@@ -117,9 +117,10 @@ abstract class modInstallTest {
      */
     protected function _returnBytes($val) {
         if (is_integer($val)) return $val;
-        $val = trim($val);
-        $num = intval(substr($val,0,strlen($val)-1));
-        $last = strtolower(substr($val,-1));
+        $lval = strtolower(trim($val));
+        if (strpos($lval,'m') === false && strpos($lval,'g') === false && strpos($lval,'k') === false && intval(trim($lval)) > 0) return intval($lval);
+        $num = intval(substr($lval,0,strlen($lval)-1));
+        $last = substr($lval,-1);
         switch ($last) {
             case 'g':
                 $num *= 1024;
