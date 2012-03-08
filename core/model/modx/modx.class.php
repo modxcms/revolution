@@ -264,6 +264,8 @@ class modX extends xPDO {
         ,'modSnippet' => array()
         ,'modTemplateVar' => array()
     );
+    /** @var modCacheManager $cacheManager */
+    public $cacheManager;
 
     /**
      * @deprecated
@@ -2022,7 +2024,9 @@ class modX extends xPDO {
     /**
      * Executed before the handleRequest function.
      */
-    public function beforeRequest() {}
+    public function beforeRequest() {
+        unset($this->placeholders['+username'],$this->placeholders['+password'],$this->placeholders['+dbname'],$this->placeholders['+host']);
+    }
 
     /**
      * Determines the current site_status.
