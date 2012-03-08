@@ -161,3 +161,5 @@ $_lang['weblink_create_here'] = 'Weblink hier erstellen';
 $_lang['weblink_help'] = 'Die Adresse des Objekts, das Sie mit diesem Weblink referenzieren möchten. Wenn Sie auf eine existierende MODX-Ressource verweisen möchten, geben Sie hier deren ID ein.';
 $_lang['weblink_message'] = 'Ein Weblink ist eine Referenz auf ein Objekt im Internet. Dies kann ein Dokument innerhalb von MODX, eine Seite in einer anderen Website oder ein Bild oder eine andere Datei im Internet sein.<p>';
 $_lang['weblink_new'] = 'Neuer Weblink';
+$_lang['weblink_response_code'] = 'HTTP-Statuscode';
+$_lang['weblink_response_code_help'] = 'Der HTTP-Statuscode, der für den Weblink gesendet werden soll.';

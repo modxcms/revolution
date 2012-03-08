@@ -483,7 +483,7 @@ $_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb: maximale Anzahl an Cache-
 $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren Zugriffe am längsten zurückliegen, wenn der Cache mehr als X Dateien umfasst.';
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
-$_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
+$_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "Nein" empfohlen.';
 
 $_lang['setting_phpthumb_document_root'] = 'PHPThumb-Document-Root';
 $_lang['setting_phpthumb_document_root_desc'] = 'Tragen Sie hier etwas ein, wenn Sie Probleme mit der Server-Variablen DOCUMENT_ROOT haben oder wenn Fehler bei der Verwendung von OutputThumbnail oder !is_resource auftreten. Geben Sie den absoluten Document-Root-Pfad ein, den Sie verwenden möchten. Wenn dieses Feld leer ist, verwendet MODX die DOCUMENT_ROOT-Server-Variable.';
