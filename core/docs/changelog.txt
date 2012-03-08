@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixed ellipsis filter to not cut off html tags in property
 - [#7326] Fix inability to unset a TV's Input Option Values field
 - [#7306] Sanity check for reload data for resource groups when changing template of new resource
 - [#7279] Handle edge case where processor classes might already be loaded with CRCs causing issues with runProcessor
