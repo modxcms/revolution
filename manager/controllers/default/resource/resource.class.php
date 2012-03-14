@@ -62,6 +62,9 @@ abstract class ResourceManagerController extends modManagerController {
 
         if ($isDerivative) {
             $resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
+            if (!class_exists($resourceClass) && !$modx->loadClass($resourceClass)) {
+                $resourceClass = 'modDocument';
+            }
 
             $delegateView = $modx->call($resourceClass,'getControllerPath',array(&$modx));
             $action = strtolower(str_replace(array('Resource','ManagerController'),'',$className));
