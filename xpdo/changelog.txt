@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add xPDOScriptVehicle for manifest-based PHP scripts
 - Implement xPDOQuery::having() method
 - Add xPDO::getInstance() for singleton support
 
