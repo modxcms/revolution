@@ -104,13 +104,15 @@ class ResourceCreateManagerController extends ResourceManagerController {
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = array();
-            $this->resourceArray['resource_groups'] = $this->modx->fromJSON($this->resourceArray['resource_groups']);
-            foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
-                $this->resourceArray['resourceGroups'][] = array(
-                    $resourceGroup['id'],
-                    $resourceGroup['name'],
-                    $resourceGroup['access'],
-                );
+            $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups']) ? $this->resourceArray['resource_groups'] : $this->modx->fromJSON($this->resourceArray['resource_groups']);
+            if (is_array($this->resourceArray['resource_groups'])) {
+                foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
+                    $this->resourceArray['resourceGroups'][] = array(
+                        $resourceGroup['id'],
+                        $resourceGroup['name'],
+                        $resourceGroup['access'],
+                    );
+                }
             }
             unset($this->resourceArray['resource_groups']);
             $this->resource->set('template', $reloadData['template']);

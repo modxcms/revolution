@@ -287,6 +287,7 @@ MODx.grid.UserGroupUsers = function(config) {
         }
         ,paging: true
         ,grouping: true
+        ,remoteSort: true
         ,groupBy: 'role_name'
         ,singleText: _('user')
         ,pluralText: _('users')

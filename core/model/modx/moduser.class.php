@@ -621,6 +621,8 @@ class modUser extends modPrincipal {
             $joined = $member->save();
             if (!$joined) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
+            } else {
+                unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"]);
             }
         } else {
             $joined = true;
@@ -654,6 +656,11 @@ class modUser extends modPrincipal {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User could not leave group with key "'.$groupId.'" because the User was not a part of that group.');
         } else {
             $left = $member->remove();
+            if (!$left) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing removing the User from the User Group.');
+            } else {
+                unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"]);
+            }
         }
         return $left;
     }

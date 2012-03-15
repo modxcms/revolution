@@ -296,15 +296,35 @@ class modOutputFilter {
                             break;
                         case 'ellipsis':
                             $limit= intval($m_val) ? intval($m_val) : 100;
+                            $pad = $this->modx->getOption('ellipsis_filter_pad',null,'&#8230;');
 
                             /* ensure that filter correctly counts special chars */
-                            $str = html_entity_decode($output,ENT_COMPAT,$encoding);
-                            if ($usemb) {
-                                if (mb_strlen($str,$encoding) > $limit) {
-                                    $output = mb_substr($str,0,$limit,$encoding).'&#8230;';
+                            $output = html_entity_decode($output,ENT_COMPAT,$encoding);
+                            $breakpoint = $usemb ? mb_strpos($output," ",$limit,$encoding) : strpos($output, " ", $limit);
+                            if (false !== $breakpoint) {
+                                $len = $usemb ? mb_strlen($output) : strlen($output);
+                                if ($breakpoint < $len - 1) {
+                                    $partial = $usemb ? mb_substr($output, 0, $breakpoint,$encoding) : substr($output, 0, $breakpoint);
+                                    $output = $partial . $pad;
                                 }
-                            } else if (strlen($str) > $limit) {
-                                $output = substr($str,0,$limit).'&#8230;';
+                            }
+
+                            $opened = array();
+                            if (preg_match_all("/<(\/?[a-z]+)>?/i", $output, $matches)) {
+                                foreach ($matches[1] as $tag) {
+                                    if (preg_match("/^[a-z]+$/i", $tag, $regs)) {
+                                        $strLower = $usemb ? mb_strtolower($regs[0],$encoding) : strtolower($regs[0]);
+                                        if ($strLower != 'br' || $strLower != 'hr') {
+                                            $opened[] = $regs[0];
+                                        }
+                                    } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {
+                                        unset($opened[array_pop(array_keys($opened, $regs[1]))]);
+                                    }
+                                }
+                            }
+                            if ($opened) {
+                                $tagstoclose = array_reverse($opened);
+                                foreach ($tagstoclose as $tag) $output .= "</$tag>";
                             }
                             break;
                         /* #####  Special functions */

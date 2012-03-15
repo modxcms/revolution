@@ -73,37 +73,39 @@ class modManagerResponse extends modResponse {
             $paths = $this->getNamespacePath($theme);
             $f = $this->action['controller'];
             $className = $this->getControllerClassName();
-            $classFile = strtolower($f).'.class.php';
+            if (!class_exists($className)) {
+                $classFile = strtolower($f).'.class.php';
 
-            foreach ($paths as $controllersPath) {
-                if (!file_exists($controllersPath.$classFile)) {
-                    if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
-                        $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                foreach ($paths as $controllersPath) {
+                    if (!file_exists($controllersPath.$classFile)) {
+                        if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
+                            $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                        }
+                    } else {
+                        $classPath = $controllersPath.$classFile;
+                        break;
                     }
-                } else {
-                    $classPath = $controllersPath.$classFile;
-                    break;
                 }
-            }
 
-            /* handle Revo <2.2 controllers */
-            if (empty($classPath)) {
-                $className = 'modManagerControllerDeprecated';
-                $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
-            }
-
-            if (!file_exists($classPath)) {
-                if (file_exists(strtolower($f).'/index.class.php')) {
-                    $classPath = strtolower($f).'/index.class.php';
-                } else { /* handle Revo <2.2 controllers */
+                /* handle Revo <2.2 controllers */
+                if (empty($classPath)) {
                     $className = 'modManagerControllerDeprecated';
                     $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
                 }
-            }
 
-            ob_start();
-            require_once $classPath;
-            ob_end_clean();
+                if (!file_exists($classPath)) {
+                    if (file_exists(strtolower($f).'/index.class.php')) {
+                        $classPath = strtolower($f).'/index.class.php';
+                    } else { /* handle Revo <2.2 controllers */
+                        $className = 'modManagerControllerDeprecated';
+                        $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+                    }
+                }
+
+                ob_start();
+                require_once $classPath;
+                ob_end_clean();
+            }
             try {
                 $c = new $className($this->modx,$this->action);
                 /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
