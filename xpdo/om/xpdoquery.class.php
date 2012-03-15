@@ -75,7 +75,10 @@ abstract class xPDOQuery extends xPDOCriteria {
         ' INTERVAL(',
         ' LEAST(',
         'MATCH(',
-        'MATCH ('
+        'MATCH (',
+        'MAX(',
+        'MIN(',
+        'AVG('
     );
     protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
     protected $_class= null;
@@ -380,7 +383,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     }
 
     public function having($conditions) {
-        //TODO: implement HAVING clause support
+        $this->query['having'][] = $this->parseConditions((array) $conditions);
         return $this;
     }
 
