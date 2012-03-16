@@ -284,6 +284,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - Use Media Source
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 
+$_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
+
 $_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
 $_lang['setting_forward_merge_excludes_desc'] = 'A Symlink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the Symlink.';
 
