@@ -325,7 +325,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,displayField: 'desc'
             ,valueField: 'name'
             ,lazyInit: false
-            ,value: 'name'
+            ,value: MODx.config.modx_browser_default_sort || 'name'
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
                 data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
