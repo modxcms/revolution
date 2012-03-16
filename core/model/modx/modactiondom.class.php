@@ -60,7 +60,7 @@ class modActionDom extends modAccessibleSimpleObject {
                     $rule = '';
                     foreach ($tabs as $tab) {
                         $tab = trim($tab);
-                        $rule .= 'MODx.hideTab("'.$this->get('container').'","'.$tab.'");';
+                        $rule .= 'MODx.hideRegion("'.$this->get('container').'","'.$tab.'");';
                     }
                 }
                 break;
