@@ -937,11 +937,14 @@
     
     <object class="modSession" table="session" extends="xPDOObject">
         <field key="id" dbtype="varchar" precision="40" phptype="string" null="false" index="pk" default="" />
-        <field key="access" dbtype="int" precision="20" phptype="timestamp" null="true" attributes="unsigned" />
+        <field key="access" dbtype="int" precision="20" phptype="timestamp" null="false" attributes="unsigned" />
         <field key="data" dbtype="mediumtext" phptype="string" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="id" length="" collation="A" null="false" />
+        </index>
+        <index alias="access" name="access" primary="false" unique="false" type="BTREE">
+            <column key="access" length="" collation="A" null="false" />
         </index>
     </object>
     
