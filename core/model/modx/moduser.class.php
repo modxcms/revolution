@@ -5,6 +5,7 @@
 /**
  * The core MODX user class.
  *
+ * @property int $id The ID of the User
  * @property string $username The username for this User
  * @property string $password The encrypted password for this User
  * @property string $cachepwd A cached, encrypted password used when resetting the User's password or for confirmation
@@ -33,6 +34,8 @@
  * @package modx
  */
 class modUser extends modPrincipal {
+    /** @var modX|xPDO $xpdo */
+    public $xpdo;
     /**
      * A collection of contexts which the current principal is authenticated in.
      * @var array
@@ -520,6 +523,24 @@ class modUser extends modPrincipal {
             $_SESSION["modx.user.{$id}.userGroups"]= $groups;
         }
         return $groups;
+    }
+
+    /**
+     * Return the Primary Group of this User
+     *
+     * @return modUserGroup|null
+     */
+    public function getPrimaryGroup() {
+        if (!$this->isAuthenticated($this->xpdo->context->get('key'))) {
+            return null;
+        }
+        $c = $this->xpdo->newQuery('modUserGroup');
+        $c->innerJoin('modUserGroupMember','UserGroupMembers');
+        $c->where(array(
+            'UserGroupMembers.member' => $this->get('id'),
+        ));
+        $c->sortby('UserGroupMembers.rank','ASC');
+        return $this->xpdo->getObject('modUserGroup',$c);
     }
 
     /**

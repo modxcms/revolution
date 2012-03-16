@@ -733,7 +733,14 @@ abstract class modManagerController {
     public function checkFormCustomizationRules(&$obj = null,$forParent = false) {
         $overridden = array();
 
-        $userGroups = $this->modx->user->getUserGroups();
+        if ($this->modx->getOption('form_customization_use_all_groups',null,false)) {
+            $userGroups = $this->modx->user->getUserGroups();
+        } else {
+            $primaryGroup = $this->modx->user->getPrimaryGroup();
+            if ($primaryGroup) {
+                $userGroups = array($primaryGroup->get('id'));
+            }
+        }
         $c = $this->modx->newQuery('modActionDom');
         $c->innerJoin('modFormCustomizationSet','FCSet');
         $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');

@@ -611,6 +611,15 @@ $settings['forgot_login_email']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['form_customization_use_all_groups']= $xpdo->newObject('modSystemSetting');
+$settings['form_customization_use_all_groups']->fromArray(array (
+  'key' => 'form_customization_use_all_groups',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['forward_merge_excludes']= $xpdo->newObject('modSystemSetting');
 $settings['forward_merge_excludes']->fromArray(array (
   'key' => 'forward_merge_excludes',
