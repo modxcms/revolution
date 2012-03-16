@@ -435,6 +435,9 @@ $_lang['setting_manager_use_tabs_desc'] = 'If true, the manager will use tabs fo
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
+$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
+
 $_lang['setting_modx_charset'] = 'Character encoding';
 $_lang['setting_modx_charset_desc'] = 'Please select which character encoding you wish to use. Please note that MODX has been tested with a number of these encodings, but not all of them. For most languages, the default setting of UTF-8 is preferrable.';
 
