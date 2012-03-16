@@ -49,8 +49,8 @@
 
 
                 <div class="rightlogin">
-                    <a class="modx-user-profile" href="?a={$profileAction}">{$username}</a>
-                    <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
+                    {if $canChangeProfile}<a class="modx-user-profile" href="?a={$profileAction}">{$username}</a>{/if}
+                    {if $canLogout}<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>{/if}
                 </div>
                 <div id="modx-site-name">
                     {$_config.site_name}
