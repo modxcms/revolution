@@ -280,6 +280,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,allowedFileTypes: this.config.allowedFileTypes || ''
             ,wctx: this.config.wctx || 'web'
         });
+        this.sortImages();
     }
     
     ,sortImages : function(){
@@ -384,7 +385,7 @@ MODx.browser.View = function(config) {
             ,dir: config.openTo || ''
         }
         ,sortInfo: {
-            field: 'name'
+            field: MODx.config.modx_browser_default_sort || 'name'
             ,direction: 'ASC'
         }
         ,tpl: this.templates.thumb
