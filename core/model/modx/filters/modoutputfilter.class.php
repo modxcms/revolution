@@ -300,9 +300,10 @@ class modOutputFilter {
 
                             /* ensure that filter correctly counts special chars */
                             $output = html_entity_decode($output,ENT_COMPAT,$encoding);
+                            $len = $usemb ? mb_strlen($output) : strlen($output);
+                            if ($limit > $len) $limit = $len;
                             $breakpoint = $usemb ? mb_strpos($output," ",$limit,$encoding) : strpos($output, " ", $limit);
                             if (false !== $breakpoint) {
-                                $len = $usemb ? mb_strlen($output) : strlen($output);
                                 if ($breakpoint < $len - 1) {
                                     $partial = $usemb ? mb_substr($output, 0, $breakpoint,$encoding) : substr($output, 0, $breakpoint);
                                     $output = $partial . $pad;
