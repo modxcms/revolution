@@ -467,6 +467,7 @@ textarea.x-form-field {
 .rightlogin {
     float: right;
 }
+.rightlogin .modx-user-profile,
 .rightlogin a {
     color: #888;
     text-decoration: none;
@@ -475,6 +476,7 @@ textarea.x-form-field {
     margin: 10px 10px 0 0;
     float: left;
 }
+.rightlogin .modx-user-profile:hover,
 .rightlogin a:hover {
     color: #ddd;
 }
