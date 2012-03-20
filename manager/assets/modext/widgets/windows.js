@@ -1,6 +1,6 @@
-/** 
+/**
  * Generates the Duplicate Resource window.
- *  
+ *
  * @class MODx.window.DuplicateResource
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -260,7 +260,7 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -321,7 +321,8 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -373,7 +374,8 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -444,7 +446,8 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -497,7 +500,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
-            ,growMax: 380
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -576,7 +579,8 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -645,7 +649,8 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -746,7 +751,8 @@ MODx.window.QuickCreateTV = function(config) {
                     ,name: 'default_text'
                     ,id: 'modx-'+this.ident+'-default-text'
                     ,anchor: '100%'
-                    ,grow: true ,growMax: 380
+                    ,grow: true
+                    ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
                 },{
                     xtype: 'label'
                     ,forId: 'modx-'+this.ident+'-default-text'
@@ -844,7 +850,8 @@ MODx.window.QuickUpdateTV = function(config) {
                     ,name: 'default_text'
                     ,id: 'modx-'+this.ident+'-default-text'
                     ,anchor: '100%'
-                    ,grow: true ,growMax: 380
+                    ,grow: true
+                    ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
                 },{
                     xtype: 'label'
                     ,forId: 'modx-'+this.ident+'-default-text'
@@ -896,7 +903,7 @@ MODx.window.DuplicateContext = function(config) {
         title: _('context_duplicate')
         ,id: this.ident
         ,url: MODx.config.connectors_url+'context/index.php'
-        ,action: 'duplicate'        
+        ,action: 'duplicate'
         ,width: 400
         ,fields: [{
             xtype: 'statictextfield'
