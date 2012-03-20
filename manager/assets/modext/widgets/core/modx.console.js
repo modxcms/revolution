@@ -30,7 +30,6 @@ MODx.Console = function(config) {
             ,scope: this
         },{
             text: _('ok')
-            ,id: 'modx-console-ok'
             ,itemId: 'okBtn'
             ,disabled: true
             ,scope: this
