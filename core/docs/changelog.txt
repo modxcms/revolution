@@ -3,6 +3,7 @@ This file shows the changes in recent releases of MODX. The most current release
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 - [#6687] Fix duplicated OK buttons in MODx.Console in certain situations
+- [#6501] Fix SuperBoxSelect selections spanning multiple rows
 - [#6864] Fix rare issue where primary group is not set for user, and custom dashboard for their group does not propagate
 - [#7011] Prevent infinite recursion error in modElement::isStaticSourceMutable
 - [#7333] Prevent error when id is undefined in resource edit controller
