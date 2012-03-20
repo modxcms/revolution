@@ -867,12 +867,19 @@ class modElement extends modAccessibleSimpleObject {
                 $isMutable = is_writable($sourceFile);
             } else {
                 $sourceDir = dirname($sourceFile);
+                $i = 100;
                 while (!empty($sourceDir)) {
                     if (file_exists($sourceDir) && is_dir($sourceDir)) {
                         $isMutable = is_writable($sourceDir);
                         if ($isMutable) break;
                     }
-                    $sourceDir = dirname($sourceDir);
+                    if ($sourceDir != '/') {
+                        $sourceDir = dirname($sourceDir);
+                    } else {
+                        break;
+                    }
+                    $i--;
+                    if ($i < 0) break;
                 }
             }
         }
