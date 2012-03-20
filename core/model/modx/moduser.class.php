@@ -534,13 +534,17 @@ class modUser extends modPrincipal {
         if (!$this->isAuthenticated($this->xpdo->context->get('key'))) {
             return null;
         }
-        $c = $this->xpdo->newQuery('modUserGroup');
-        $c->innerJoin('modUserGroupMember','UserGroupMembers');
-        $c->where(array(
-            'UserGroupMembers.member' => $this->get('id'),
-        ));
-        $c->sortby('UserGroupMembers.rank','ASC');
-        return $this->xpdo->getObject('modUserGroup',$c);
+        $userGroup = $this->getOne('PrimaryGroup');
+        if (!$userGroup) {
+            $c = $this->xpdo->newQuery('modUserGroup');
+            $c->innerJoin('modUserGroupMember','UserGroupMembers');
+            $c->where(array(
+                'UserGroupMembers.member' => $this->get('id'),
+            ));
+            $c->sortby('UserGroupMembers.rank','ASC');
+            $userGroup = $this->xpdo->getObject('modUserGroup',$c);
+        }
+        return $userGroup;
     }
 
     /**
@@ -765,5 +769,27 @@ class modUser extends modPrincipal {
         }
         $this->xpdo->mail->reset();
         return true;
+    }
+
+    /**
+     * Get the dashboard for this user
+     *
+     * @return modDashboard
+     */
+    public function getDashboard() {
+        $this->xpdo->loadClass('modDashboard');
+
+        /** @var modUserGroup $userGroup */
+        $userGroup = $this->getPrimaryGroup();
+        if ($userGroup) {
+            /** @var modDashboard $dashboard */
+            $dashboard = $userGroup->getOne('Dashboard');
+            if (empty($dashboard)) {
+                $dashboard = modDashboard::getDefaultDashboard($this->xpdo);
+            }
+        } else {
+            $dashboard = modDashboard::getDefaultDashboard($this->xpdo);
+        }
+        return $dashboard;
     }
 }
