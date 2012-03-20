@@ -1059,6 +1059,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 .x-superboxselect-item-close:hover, .x-superboxselect-item-close:active  { background-position: left -12px;}
 .x-superboxselect-item-focus .x-superboxselect-item-close{ background-position: left -24px}
 .x-item-disabled .x-superboxselect-item-close{ background-position: left -36px}
+.x-superboxselect-ct .x-form-field-wrap,
+.ext-strict .x-superboxselect-ct .x-form-field-trigger-wrap .x-form-text,
+.x-superboxselect-ct .x-superboxselect { height: auto !important; }
 
 /* other */
 .modx-tree-load-msg {
