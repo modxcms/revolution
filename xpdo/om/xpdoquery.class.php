@@ -281,6 +281,9 @@ abstract class xPDOQuery extends xPDOCriteria {
                     $local= $fkMeta['local'];
                     $foreign= $fkMeta['foreign'];
                     $conditions= $this->xpdo->escape($parentAlias) . '.' . $this->xpdo->escape($local) . ' =  ' . $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($foreign);
+                    if (isset($fkMeta['criteria'])) {
+                        $conditions = array($fkMeta['criteria'], $conditions);
+                    }
                 }
             }
             $this->condition($target[$targetIdx]['conditions'], $conditions, $conjunction, $binding, $condGroup);
@@ -446,6 +449,9 @@ abstract class xPDOQuery extends xPDOCriteria {
             $foreign= $fkMeta['foreign'];
             $this->select($this->xpdo->getSelectColumns($class, $classAlias, $classAlias . '_'));
             $expression= $this->xpdo->escape($parentAlias) . '.' . $this->xpdo->escape($local) . ' = ' .  $this->xpdo->escape($classAlias) . '.' . $this->xpdo->escape($foreign);
+            if (isset($fkMeta['criteria'])) {
+                $expression = array($fkMeta['criteria'], $expression);
+            }
             $this->leftJoin($class, $classAlias, $expression);
             if (!empty ($relations)) {
                 foreach ($relations as $relationAlias => $subRelations) {
