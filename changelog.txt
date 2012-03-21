@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Add criteria support to aggregates and composites
+
 xPDO 2.2.3-pl (March 15, 2012)
 ====================================
 - Add xPDOScriptVehicle for manifest-based PHP scripts

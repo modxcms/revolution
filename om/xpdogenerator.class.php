@@ -398,6 +398,8 @@ abstract class xPDOGenerator {
                         case 'alias' :
                             $alias= "{$attrValue}";
                             break;
+                        case 'criteria' :
+                            $attrValue = $this->manager->xpdo->fromJSON($attrValue);
                         default :
                             $node[$attrName]= $attrValue;
                             break;
@@ -415,6 +417,8 @@ abstract class xPDOGenerator {
                         case 'alias' :
                             $alias= "{$attrValue}";
                             break;
+                        case 'criteria' :
+                            $attrValue = $this->manager->xpdo->fromJSON($attrValue);
                         default :
                             $node[$attrName]= $attrValue;
                             break;
