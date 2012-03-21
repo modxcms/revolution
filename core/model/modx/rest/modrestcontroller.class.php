@@ -53,6 +53,29 @@ abstract class modRestController {
 	protected $responseStatus;
 
     /**
+     * The following options are used if the default get/put/post/delete methods are not overridden. They automate
+     * the display and manipulation of data based on the classKey that is specified on the controller class, allowing
+     * for quick and easy controller creation based on standard CRUD concepts.
+     */
+
+    /** @var string $classKey The xPDO class to use */
+    public $classKey;
+    /** @var string $classAlias The alias of the class when used in the getList method */
+    public $classAlias;
+    /** @var string $defaultSortField The default field to sort by in the getList method */
+    public $defaultSortField = 'name';
+    /** @var string $defaultSortDirection The default direction to sort in the getList method */
+    public $defaultSortDirection = 'ASC';
+    /** @var int $defaultLimit The default number of records to return in the getList method */
+    public $defaultLimit = 20;
+    /** @var int $defaultOffset The default offset in the getList method */
+    public $defaultOffset = 0;
+    /** @var xPDOObject $object */
+    public $object;
+    /** @var array $searchFields Optional. An array of fields to use when the search parameter is passed */
+    public $searchFields = array();
+
+    /**
      * @param modX $modx The modX instance
      * @param modRestServiceRequest $request The rest service request class instance
      * @param array $config An array of configuration properties, passed through from modRestService
@@ -73,47 +96,6 @@ abstract class modRestController {
     public function getOption($key,$default = null) {
         return array_key_exists($key,$this->config) ? $this->config[$key] : $default;
     }
-
-    /**
-     * Route GET requests
-     * @return array
-     */
-    public function get() {
-        $pk = $this->getProperty($this->primaryKeyField);
-        if (empty($pk)) {
-            return $this->getList();
-        }
-        return $this->read($pk);
-    }
-
-    /**
-     * Abstract method for routing GET requests without a primary key passed. Must be defined in your derivative
-     * controller.
-     * @abstract
-     */
-    abstract public function getList();
-    /**
-     * Abstract method for routing GET requests with a primary key passed. Must be defined in your derivative
-     * controller.
-     * @abstract
-     * @param $id
-     */
-    abstract public function read($id);
-    /**
-     * Abstract method for routing POST requests. Must be defined in your derivative controller.
-     * @abstract
-     */
-	abstract public function post();
-	/**
-     * Abstract method for routing PUT requests. Must be defined in your derivative controller.
-     * @abstract
-     */
-	abstract public function put();
-	/**
-     * Abstract method for routing DELETE requests. Must be defined in your derivative controller.
-     * @abstract
-     */
-	abstract public function delete();
 
     /**
      * Initialize the controller
@@ -139,17 +121,21 @@ abstract class modRestController {
 	}
 
     /**
-     * Check required fields for a controller.
+     * Check for any empty fields
      *
      * @param array $fields
+     * @param boolean $setFieldError
      * @return bool|string
      */
-	public function checkRequiredFields(array $fields = array()) {
+	public function checkRequiredFields(array $fields = array(),$setFieldError = true) {
 	    $missing = array();
 	    foreach ($fields as $field) {
 	        $value = $this->getProperty($field);
 	        if (empty($value)) {
 	            $missing[] = $field;
+	            if ($setFieldError) {
+                    $this->addFieldError($field,'This field is required.');
+                }
 	        }
 	    }
 	    if (!empty($missing)) {
@@ -365,6 +351,256 @@ abstract class modRestController {
             $this->getOption('collectionTotalKey','total') => $total,
         );
         $this->responseStatus = $status;
+    }
+
+
+    /**
+     * Route GET requests
+     * @return array
+     */
+    public function get() {
+        $pk = $this->getProperty($this->primaryKeyField);
+        if (empty($pk)) {
+            return $this->getList();
+        }
+        return $this->read($pk);
+    }
+
+    /**
+     * Abstract method for routing GET requests without a primary key passed. Must be defined in your derivative
+     * controller.
+     * @abstract
+     */
+    /**
+     * Handles fetching of collections of objects
+     * @return array
+     */
+    public function getList() {
+        $this->getProperties();
+        $c = $this->modx->newQuery($this->classKey);
+        $c = $this->addSearchQuery($c);
+        $c = $this->prepareListQueryBeforeCount($c);
+        $total = $this->modx->getCount($this->classKey,$c);
+        $alias = !empty($this->classAlias) ? $this->classAlias : $this->classKey;
+        $c->select($this->modx->getSelectColumns($this->classKey,$alias));
+
+        $c = $this->prepareListQueryAfterCount($c);
+
+        $c->sortby($this->getProperty($this->getOption('propertySort','sort'),$this->defaultSortField),$this->getProperty($this->getOption('propertySortDir','dir'),$this->defaultSortDirection));
+        $limit = $this->getProperty($this->getOption('propertyLimit','limit'),$this->defaultLimit);
+        if (empty($limit)) $limit = $this->defaultLimit;
+        $c->limit($limit,$this->getProperty($this->getOption('propertyOffset','start'),$this->defaultOffset));
+        $objects = $this->modx->getCollection($this->classKey,$c);
+        if (empty($objects)) $objects = array();
+        $list = array();
+        /** @var xPDOObject $object */
+        foreach ($objects as $object) {
+            $list[] = $this->prepareListObject($object);
+        }
+        return $this->collection($list,$total);
+    }
+
+    /**
+     * Add a search query to listing calls
+     *
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    protected function addSearchQuery(xPDOQuery $c) {
+        $search = $this->getProperty($this->getOption('propertySearch','search'),false);
+        if (!empty($search) && !empty($this->searchFields)) {
+            $searchQuery = array();
+            $i = 0;
+            foreach ($this->searchFields as $searchField) {
+                $or = $i > 0 ? 'OR:' : '';
+                $searchQuery[$or.$searchField.':LIKE'] = '%'.$search.'%';
+                $i++;
+            }
+            if (!empty($searchQuery)) {
+                $c->where($searchQuery);
+            }
+        }
+        return $c;
+    }
+
+    /**
+     * Allows manipulation of the query object before the COUNT statement is called on listing calls. Override to
+     * provide custom functionality.
+     *
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    protected function prepareListQueryBeforeCount(xPDOQuery $c) {
+        return $c;
+    }
+
+    /**
+     * Allows manipulation of the query object after the COUNT statement is called on listing calls. Override to
+     * provide custom functionality.
+     *
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    protected function prepareListQueryAfterCount(xPDOQuery $c) {
+        return $c;
+    }
+
+
+    /**
+     * Returns an array of field-value pairs for the object when listing. Override to provide custom functionality.
+     *
+     * @param xPDOObject $object The current iterated object
+     * @return array An array of field-value pairs of data
+     */
+    protected function prepareListObject(xPDOObject $object) {
+        return $object->toArray();
+    }
+
+    /**
+     * Abstract method for routing GET requests with a primary key passed. Must be defined in your derivative
+     * controller.
+     * @abstract
+     * @param $id
+     */
+    public function read($id) {
+        if (empty($id)) {
+            return $this->failure($this->primaryKeyField.' not specified!');
+        }
+        /** @var xPDOObject $object */
+        $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
+        if (empty($this->object)) {
+            return $this->failure($this->classKey.' not found!');
+        }
+        if (!$this->afterRead()) {
+            return $this->failure('Error!');
+        }
+
+        return $this->success('',$this->object);
+    }
+    public function afterRead() {
+        return !$this->hasErrors();
+    }
+    /**
+     * Method for routing POST requests. Can be overridden; default behavior automates xPDOObject, class-based requests.
+     * @abstract
+     */
+    public function post() {
+        $properties = $this->getProperties();
+
+        /** @var xPDOObject $object */
+        $this->object = $this->modx->newObject($this->classKey);
+        $this->object->fromArray($properties);
+        if (!$this->beforePost()) {
+            return $this->failure('Error!');
+        }
+        if (!$this->object->save()) {
+            $this->setObjectErrors();
+            return $this->failure('An error occurred while trying to save the '.$this->classKey);
+        }
+        $this->afterPost();
+        return $this->success('',$this->object);
+    }
+    /**
+     * Fires before saving the new object. Override to provide custom functionality.
+     * @return boolean
+     */
+    public function beforePost() {
+        return !$this->hasErrors();
+    }
+    /**
+     * Fires after saving the new object. Override to provide custom functionality.
+     */
+    public function afterPost() {}
+
+    /**
+     * Handles updating of objects
+     * @return array
+     */
+    public function put() {
+        $id = $this->getProperty($this->primaryKeyField,false);
+        if (empty($id)) {
+            return $this->failure($this->primaryKeyField.' not specified!');
+        }
+        $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
+        if (empty($this->object)) {
+            return $this->failure($this->classKey.' not found!');
+        }
+
+        $this->object->fromArray($this->getProperties());
+
+        if (!$this->beforePut()) {
+            return $this->failure('Error!');
+        }
+        if (!$this->object->save()) {
+            $this->setObjectErrors();
+            return $this->failure('An error occurred while trying to save the '.$this->classKey);
+        }
+        $this->afterPut();
+
+        return $this->success('',$this->object);
+    }
+    /**
+     * Fires before saving an existing object. Override to provide custom functionality.
+     * @return boolean
+     */
+    public function beforePut() {
+        return !$this->hasErrors();
+    }
+    /**
+     * Fires after saving an existing object. Override to provide custom functionality.
+     */
+    public function afterPut() {}
+
+    /**
+     * Handle DELETE requests
+     * @return array
+     */
+    public function delete() {
+        $id = $this->getProperty($this->primaryKeyField,false);
+        if (empty($id)) {
+            return $this->failure($this->primaryKeyField.' not specified!');
+        }
+        $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
+        if (empty($this->object)) {
+            return $this->failure($this->classKey.' not found!');
+        }
+
+        $this->object->fromArray($this->getProperties());
+
+        if (!$this->beforeDelete()) {
+            return $this->failure($this->errorMessage);
+        }
+        if (!$this->object->remove()) {
+            $this->setObjectErrors();
+            return $this->failure('An error occurred while trying to remove the '.$this->classKey);
+        }
+        $this->afterDelete();
+
+        return $this->success('',$this->object);
+    }
+    /**
+     * Fires before deleting an existing object. Override to provide custom functionality.
+     * @return boolean
+     */
+    public function beforeDelete() {
+        return !$this->hasErrors();
+    }
+    /**
+     * Fires after deleting an existing object. Override to provide custom functionality.
+     */
+    public function afterDelete() {}
+
+
+    /**
+     * Set object-specific model-layer errors
+     */
+    public function setObjectErrors() {
+        if (method_exists($this->object,'getErrors')) {
+            $errors = $this->object->getErrors();
+            foreach ($errors as $k => $msg) {
+                $this->addFieldError($k,$msg);
+            }
+        }
     }
 
     /**
