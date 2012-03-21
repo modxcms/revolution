@@ -8,6 +8,8 @@
 /**
  * The basic REST client for handling REST requests
  *
+ * @deprecated To be removed in 2.3
+ *
  * @package modx
  * @subpackage rest
  */
