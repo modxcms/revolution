@@ -289,6 +289,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Achtung: Diese Einstellung wi
 $_lang['setting_forgot_login_email'] = 'Login-vergessen-Mail';
 $_lang['setting_forgot_login_email_desc'] = 'Das Template für die Mail, die User erhalten, die ihren MODX-Benutzernamen und/oder ihr Passwort vergessen haben.';
 
+$_lang['setting_form_customization_use_all_groups'] = 'Alle Benutzergruppen-Zugehörigkeiten für die Formular-Anpassung nutzen';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden für die Formular-Anpassung *alle* Sets für *alle* Benutzergruppen, denen ein Benutzer angehört, genutzt, wenn Formular-Anpassungs-Sets angewendet werden. Anderenfalls wird nur das Set verwendet, das der primären Gruppe des Benutzers zugeordnet ist. Hinweis: Wenn Sie diese Einstellung auf "Ja" setzen, kann es wegen Konflikten zwischen Formular-Anpassungs-Sets zu Problemen kommen.';
+
 $_lang['setting_forward_merge_excludes'] = 'Felder, deren Werte bei Verwendung von Symlinks nicht überschrieben werden sollen';
 $_lang['setting_forward_merge_excludes_desc'] = 'Bei Verwendung eines Symlinks werden die Werte in den Feldern der Ziel-Ressource überschrieben von den Werten des Symlinks, die nicht leer sind; verwenden Sie diese kommaseparierte Liste von Ausnahmen, um die angegebenen Felder davor zu bewahren, von den Werten des Symlinks überschrieben zu werden.';
 
@@ -436,6 +439,9 @@ $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" geset
 
 $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
+
+$_lang['setting_modx_browser_default_sort'] = 'Datei-Browser-Standard-Sortierung';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Das standardmäßige Sortierkriterium bei Benutzung des Popup-Datei-Browsers im Manager. Mögliche Werte sind: name, size, lastmod (Abkürzung für "last modified").';
 
 $_lang['setting_modx_charset'] = 'Zeichencodierung';
 $_lang['setting_modx_charset_desc'] = 'Bitte wählen Sie die Zeichencodierung, die Sie verwenden möchten. Bitte beachten Sie, dass MODX zwar mit einigen dieser Codierungen getestet wurde, aber nicht mit allen. Für die meisten Sprachen ist die Standardeinstellung "UTF-8" vorzuziehen.';
