@@ -12,7 +12,7 @@
         <label for="tv{$tv->id}" class="x-form-item-label modx-tv-label" style="width: auto;">
             <div class="modx-tv-label-title">
                 {if $showCheckbox}<input type="checkbox" name="tv{$tv->id}-checkbox" class="modx-tv-checkbox" value="1" />{/if}
-                <span class="modx-tv-caption" id="tv{$tv->id}-caption">{$tv->caption}</span>
+                <span class="modx-tv-caption" id="tv{$tv->id}-caption">{if $tv->caption}{$tv->caption}{else}{$tv->name}{/if}</span>
             </div>
             <a class="modx-tv-reset" id="modx-tv-reset-{$tv->id}" title="{$_lang.set_to_default}" style="float: left;"></a>
             {if $tv->description}
