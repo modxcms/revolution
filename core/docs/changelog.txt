@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#7456] Fix for minify not modified status in fastcgi environments
 - [#6931] Workaround for template changing issue on servers that have misconfigured date_timzeone setting
 - [#6687] Fix duplicated OK buttons in MODx.Console in certain situations
 - [#6501] Fix SuperBoxSelect selections spanning multiple rows
