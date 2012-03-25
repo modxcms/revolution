@@ -49,7 +49,7 @@ class modResourceReloadProcessor extends modProcessor {
                     ,'action'=> 'resource/create'
                 ));
             }
-            $this->reg->send($topic, array($scriptProperties['create-resource-token']=> serialize($scriptProperties)), array('ttl' => 300));
+            $this->reg->send($topic, array($scriptProperties['create-resource-token']=> serialize($scriptProperties)), array('ttl' => 300,'delay' => -time()));
         } else {
             return $modx->error->failure($modx->lexicon('resource_err_save'));
         }

@@ -297,7 +297,8 @@ class HTTP_ConditionalGet {
         }
         $isValid = ($this->resourceMatchedEtag() || $this->resourceNotModified());
         if ($isValid) {
-            $this->_headers['_responseCode'] = 'HTTP/1.0 304 Not Modified';
+            //$this->_headers['_responseCode'] = 'HTTP/1.0 304 Not Modified';
+            $this->_headers['_responseCode'] = 'Status: 304 Not Modified';
         }
         return $isValid;
     }
