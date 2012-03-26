@@ -896,6 +896,7 @@
         </index>
 
         <composite alias="ResourceGroupResources" class="modResourceGroupResource" local="id" foreign="document_group" cardinality="many" owner="local" />
+        <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="documentgroup" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessResourceGroup" local="id" foreign="target" owner="local" cardinality="many" />
     </object>
     

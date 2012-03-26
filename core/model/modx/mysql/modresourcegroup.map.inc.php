@@ -72,6 +72,14 @@ $xpdo_meta_map['modResourceGroup']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'TemplateVarResourceGroups' => 
+    array (
+      'class' => 'modTemplateVarResourceGroup',
+      'local' => 'id',
+      'foreign' => 'documentgroup',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
     'Acls' => 
     array (
       'class' => 'modAccessResourceGroup',

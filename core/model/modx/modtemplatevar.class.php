@@ -1019,6 +1019,36 @@ class modTemplateVar extends modElement {
         ));
         return !empty($templateVarTemplate) && is_object($templateVarTemplate);
     }
+
+    /**
+     * Check to see if the
+     * @param modUser|null $user
+     * @param string $context
+     * @return bool
+     */
+    public function checkResourceGroupAccess($user = null,$context = '') {
+        $context = !empty($context) ? $context : $this->xpdo->context;
+        $user = !empty($user) ? $user : $this->xpdo->user;
+
+        $c = $this->xpdo->newQuery('modResourceGroup');
+        $c->innerJoin('modTemplateVarResourceGroup','TemplateVarResourceGroups',array(
+            'TemplateVarResourceGroups.documentgroup = modResourceGroup.id',
+            'TemplateVarResourceGroups.tmplvarid' => $this->get('id'),
+        ));
+        $resourceGroups = $this->xpdo->getCollection('modResourceGroup',$c);
+        $hasAccess = true;
+        if (!empty($resourceGroups)) {
+            $hasAccess = false;
+            /** @var modResourceGroup $resourceGroup */
+            foreach ($resourceGroups as $resourceGroup) {
+                if ($resourceGroup->hasAccess($user,$context)) {
+                    $hasAccess = true;
+                    break;
+                }
+            }
+        }
+        return $hasAccess;
+    }
 }
 
 /**

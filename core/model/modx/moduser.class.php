@@ -482,8 +482,6 @@ class modUser extends modPrincipal {
      * Gets all Resource Groups this user is assigned to. This may not work in
      * the new model.
      *
-     * @deprecated
-     * @todo refactor this to actually work.
      * @access public
      * @param string $ctx The context in which to peruse for Resource Groups
      * @return array An array of Resource Group names.

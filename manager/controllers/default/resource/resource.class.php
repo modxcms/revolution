@@ -250,12 +250,6 @@ abstract class ResourceManagerController extends modManagerController {
             if ($template) {
                 $c = $this->modx->newQuery('modTemplateVar');
                 $c->query['distinct'] = 'DISTINCT';
-                $c->select($this->modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
-                $c->select($this->modx->getSelectColumns('modCategory', 'Category', 'cat_', array('category')));
-                if(empty($reloadData)) {
-                    $c->select($this->modx->getSelectColumns('modTemplateVarResource', 'TemplateVarResource', '', array('value')));
-                }
-                $c->select($this->modx->getSelectColumns('modTemplateVarTemplate', 'TemplateVarTemplate', '', array('rank')));
                 $c->leftJoin('modCategory','Category');
                 $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplate',array(
                     'TemplateVarTemplate.tmplvarid = modTemplateVar.id',
@@ -265,13 +259,23 @@ abstract class ResourceManagerController extends modManagerController {
                     'TemplateVarResource.tmplvarid = modTemplateVar.id',
                     'TemplateVarResource.contentid' => $this->resource->get('id'),
                 ));
+                $c->select($this->modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+                $c->select($this->modx->getSelectColumns('modCategory', 'Category', 'cat_', array('category')));
+                if(empty($reloadData)) {
+                    $c->select($this->modx->getSelectColumns('modTemplateVarResource', 'TemplateVarResource', '', array('value')));
+                }
+                $c->select($this->modx->getSelectColumns('modTemplateVarTemplate', 'TemplateVarTemplate', '', array('rank')));
                 $c->sortby('cat_category,TemplateVarTemplate.rank,modTemplateVar.rank','ASC');
+                //$c->construct(); echo $c->toSQL(); die();
                 $tvs = $this->modx->getCollection('modTemplateVar',$c);
 
                 $reloading = !empty($reloadData) && count($reloadData) > 0;
-                $this->modx->smarty->assign('tvcount',count($tvs));
+                $this->setPlaceholder('tvcount',count($tvs));
                 /** @var modTemplateVar $tv */
                 foreach ($tvs as $tv) {
+                    if (!$tv->checkResourceGroupAccess(null,'mgr')) {
+                        continue;
+                    }
                     $v = '';
                     $tv->set('inherited', false);
                     $cat = (int)$tv->get('category');
