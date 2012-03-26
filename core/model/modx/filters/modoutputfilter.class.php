@@ -133,6 +133,7 @@ class modOutputFilter {
                                 $output= $this->modx->user->get('id');
                             }
                             $grps= (strlen($m_val) > 0) ? explode(',', $m_val) : array ();
+                            /** @var $user modUser */
                             $user = $this->modx->getObject('modUser',$output);
                             if ($user && is_object($user) && $user instanceof modUser) {
                                 $condition[]= $user->isMember($grps);
@@ -147,30 +148,45 @@ class modOutputFilter {
                             $condition[]= "&&";
                             break;
                         case 'hide':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if ($m_con) {
-                                $output= null;
-                            }
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if ($m_con) {
+                                    $output= null;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'show':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if (!$m_con) {
-                                $output= null;
-                            }
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if (!$m_con) {
+                                    $output= null;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'then':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if ($m_con) {
-                                $output= $m_val;
-                            } else {
-                                $output= null;
-                            }
+                            $output = null;
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if ($m_con) {
+                                    $output= $m_val;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'else':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if (!$m_con) {
-                                $output= $m_val;
-                            }
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if (!$m_con) {
+                                    $output= $m_val;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'select':
                             $raw= explode("&", $m_val);
