@@ -20,6 +20,7 @@ $xpdo_meta_map['modUser']= array (
     'salt' => '',
     'primary_group' => 0,
     'session_stale' => NULL,
+    'sudo' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -111,6 +112,15 @@ $xpdo_meta_map['modUser']= array (
       'dbtype' => 'text',
       'phptype' => 'array',
       'null' => true,
+    ),
+    'sudo' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'indexes' => 

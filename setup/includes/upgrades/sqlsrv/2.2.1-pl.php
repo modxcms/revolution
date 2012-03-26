@@ -34,3 +34,27 @@ $this->processResults($class, $description, array($modx->manager, 'alterField'),
 
 $description = $this->install->lexicon('add_index',array('index' => 'access','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'access'));
+
+/* add sudo field to modUser */
+$class = 'modUser';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'sudo','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'sudo'));
+
+/* get all users who are Super Users of Administrator group and make them sudo */
+$c = $modx->newQuery('modUser');
+$c->innerJoin('modUserGroupMember','UserGroupMembers');
+$c->innerJoin('modUserGroup','UserGroup',array(
+    'UserGroup.id = UserGroupMembers.user_group',
+    'UserGroup.name' => 'Administrator',
+));
+$c->innerJoin('modUserGroupRole','Role',array(
+    'Role.id = UserGroupMembers.role',
+    'Role.name' => 'Super User',
+));
+$users = $modx->getCollection('modUser',$c);
+/** @var modUser $user */
+foreach ($users as $user) {
+    $user->set('sudo',true);
+    $user->save();
+}

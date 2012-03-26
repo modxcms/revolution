@@ -395,6 +395,15 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'xcheckbox'
                     ,inputValue: 1
                 },{
+                    id: 'modx-user-sudo'
+                    ,name: 'sudo'
+                    ,hideLabel: true
+                    ,boxLabel: _('user_sudo')
+                    ,description: _('user_sudo_desc')
+                    ,xtype: 'xcheckbox'
+                    ,inputValue: 1
+                    ,value: 0
+                },{
                     id: 'modx-user-blocked'
                     ,name: 'blocked'
                     ,hideLabel: true

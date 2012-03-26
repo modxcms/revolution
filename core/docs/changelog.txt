@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add "sudo" user attribute, which bypasses access permissions for said user; upgrade to 2.2.1 makes Super Users in Administrator group sudo users
 - [#7445] Fix issues with TVs not respecting Resource Groups limiting access
 - [#7446] Added extra checks to protect against parse errors with :then and :else output filters
 - [#7455] Fallback to TV name if caption not found when displaying TV inputs
