@@ -399,7 +399,7 @@ abstract class xPDOGenerator {
                             $alias= "{$attrValue}";
                             break;
                         case 'criteria' :
-                            $attrValue = $this->manager->xpdo->fromJSON($attrValue);
+                            $attrValue = $this->manager->xpdo->fromJSON(urldecode($attrValue));
                         default :
                             $node[$attrName]= $attrValue;
                             break;
