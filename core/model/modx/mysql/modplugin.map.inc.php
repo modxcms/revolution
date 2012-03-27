@@ -144,6 +144,21 @@ $xpdo_meta_map['modPlugin']= array (
       ),
     ),
   ),
+  'aggregates' => 
+  array (
+    'PropertySets' => 
+    array (
+      'class' => 'modElementPropertySet',
+      'local' => 'id',
+      'foreign' => 'element',
+      'criteria' => 
+      array (
+        'element_class' => 'modPlugin',
+      ),
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
+  ),
   'composites' => 
   array (
     'PluginEvents' => 

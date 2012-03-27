@@ -25,9 +25,9 @@ $xpdo_meta_map = array (
   'modAccessibleSimpleObject' => 
   array (
     0 => 'modAction',
-    1 => 'modCategory',
-    2 => 'modElement',
-    3 => 'modActionDom',
+    1 => 'modActionDom',
+    2 => 'modCategory',
+    3 => 'modElement',
     4 => 'modResource',
     5 => 'modResourceGroup',
   ),
