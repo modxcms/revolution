@@ -312,6 +312,9 @@ class xPDOForeignKeyConstraint extends xPDOValidationRule {
         }
 
         $criteria= array ($fkdef['foreign'] => $obj->get($fkdef['local']));
+        if (isset($fkdef['criteria'])) {
+            $criteria= array($fkdef['criteria'], $criteria);
+        }
         if ($object= $xpdo->getObject($fkdef['class'], $criteria)) {
            $result= ($object !== null);
         }

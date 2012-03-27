@@ -184,6 +184,18 @@ $xpdo_meta_map['modTemplate']= array (
   ),
   'aggregates' => 
   array (
+    'PropertySets' => 
+    array (
+      'class' => 'modElementPropertySet',
+      'local' => 'id',
+      'foreign' => 'element',
+      'criteria' => 
+      array (
+        'element_class' => 'modTemplate',
+      ),
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
     'Category' => 
     array (
       'class' => 'modCategory',
