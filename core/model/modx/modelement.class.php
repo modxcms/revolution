@@ -187,17 +187,6 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
-     * Remove all Property Set relations to the Element.
-     *
-     * {@inheritdoc}
-     */
-    public function remove(array $ancestors= array ()) {
-        $this->xpdo->removeCollection('modElementPropertySet', array('element' => $this->get('id'), 'element_class' => $this->_class));
-        $result = parent :: remove($ancestors);
-        return $result;
-    }
-
-    /**
      * Constructs a valid tag representation of the element.
      *
      * @return string A tag representation of the element.
