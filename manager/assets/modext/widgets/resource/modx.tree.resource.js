@@ -801,20 +801,20 @@ MODx.window.QuickCreateResource = function(config) {
                             ,anchor: '100%'
                         },{
                             xtype: 'xcheckbox'
-                            ,name: 'published'
-                            ,id: 'modx-'+this.ident+'-published'
-                            ,boxLabel: _('resource_published')
-                            ,description: _('resource_published_help')
-                            ,inputValue: 1
-                            ,checked: MODx.config.publish_default == '1' ? 1 : 0
-                        },{
-                            xtype: 'xcheckbox'
                             ,boxLabel: _('resource_hide_from_menus')
                             ,description: _('resource_hide_from_menus_help')
                             ,name: 'hidemenu'
                             ,id: 'modx-'+this.ident+'-hidemenu'
                             ,inputValue: 1
                             ,checked: MODx.config.hidemenu_default == '1' ? 1 : 0
+                        },{
+                            xtype: 'xcheckbox'
+                            ,name: 'published'
+                            ,id: 'modx-'+this.ident+'-published'
+                            ,boxLabel: _('resource_published')
+                            ,description: _('resource_published_help')
+                            ,inputValue: 1
+                            ,checked: MODx.config.publish_default == '1' ? 1 : 0
                         }]
                     }]
                 },MODx.getQRContentField(this.ident,config.record.class_key)]
@@ -936,17 +936,17 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,anchor: '100%'
                         },{
                             xtype: 'xcheckbox'
-                            ,name: 'published'
-                            ,id: 'modx-'+id+'-published'
-                            ,boxLabel: _('resource_published')
-                            ,description: _('resource_published_help')
-                            ,inputValue: 1
-                        },{
-                            xtype: 'xcheckbox'
                             ,boxLabel: _('resource_hide_from_menus')
                             ,description: _('resource_hide_from_menus_help')
                             ,name: 'hidemenu'
                             ,id: 'modx-'+id+'-hidemenu'
+                            ,inputValue: 1
+                        },{
+                            xtype: 'xcheckbox'
+                            ,name: 'published'
+                            ,id: 'modx-'+id+'-published'
+                            ,boxLabel: _('resource_published')
+                            ,description: _('resource_published_help')
                             ,inputValue: 1
                         }]
                     }]

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#7500] Make consistent positioning of published checkbox in quick update and normal edit page
 - [#7491] Prevent Media Source dropdown from showing in MODx.Browser when loaded from a TV
 - [#6894] Move Import button on Access Policy and Access Policy Template grids to top toolbar
 - [#7391] Fix UI error causing resource group checkboxes on TV edit page to not render correctly
