@@ -525,7 +525,14 @@ class modTemplateVar extends modElement {
                 /** @var modResource $resource */
                 $resource = $this->xpdo->getObject('modResource',$resourceId);
             }
-            $userGroups = $this->xpdo->user->getUserGroups();
+            if ($this->xpdo->getOption('form_customization_use_all_groups',null,false)) {
+                $userGroups = $this->xpdo->user->getUserGroups();
+            } else {
+                $primaryGroup = $this->xpdo->user->getPrimaryGroup();
+                if ($primaryGroup) {
+                    $userGroups = array($primaryGroup->get('id'));
+                }
+            }
             $c = $this->xpdo->newQuery('modActionDom');
             $c->innerJoin('modFormCustomizationSet','FCSet');
             $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
@@ -542,16 +549,18 @@ class modTemplateVar extends modElement {
                 'FCSet.active' => true,
                 'Profile.active' => true,
             ));
-            $c->where(array(
-                array(
-                    'ProfileUserGroup.usergroup:IN' => $userGroups,
+            if (!empty($userGroups)) {
+                $c->where(array(
                     array(
-                        'OR:ProfileUserGroup.usergroup:IS' => null,
-                        'AND:UGProfile.active:=' => true,
+                        'ProfileUserGroup.usergroup:IN' => $userGroups,
+                        array(
+                            'OR:ProfileUserGroup.usergroup:IS' => null,
+                            'AND:UGProfile.active:=' => true,
+                        ),
                     ),
-                ),
-                'OR:ProfileUserGroup.usergroup:=' => null,
-            ),xPDOQuery::SQL_AND,null,2);
+                    'OR:ProfileUserGroup.usergroup:=' => null,
+                ),xPDOQuery::SQL_AND,null,2);
+            }
             if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
                 $c->where(array(
                     'modActionDom.action' => $this->xpdo->request->action,
