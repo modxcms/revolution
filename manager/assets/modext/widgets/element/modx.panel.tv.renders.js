@@ -33,6 +33,7 @@ MODx.panel.ImageTV = function(config) {
             ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,openTo: config.openTo || ''
+            ,hideSourceCombo: true
             ,listeners: {
                 'select': {fn:function(data) {
                     Ext.getCmp('tv'+this.config.tv).setValue(data.relativeUrl);
@@ -83,6 +84,7 @@ MODx.panel.FileTV = function(config) {
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,openTo: config.openTo || ''
+            ,hideSourceCombo: true
             ,listeners: {
                 'select': {fn:function(data) {
                     Ext.getCmp('tv'+this.config.tv).setValue(data.relativeUrl);

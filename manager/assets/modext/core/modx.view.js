@@ -176,6 +176,7 @@ MODx.browser.Window = function(config) {
         ,rootName: _('files')
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
         ,id: this.ident+'-tree'
+        ,hideSourceCombo: config.hideSourceCombo || false
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
             ,'changeSource': {fn:function(s) {
