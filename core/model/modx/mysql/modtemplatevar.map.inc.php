@@ -239,31 +239,17 @@ $xpdo_meta_map['modTemplateVar']= array (
       ),
     ),
   ),
-  'aggregates' => 
+  'composites' => 
   array (
     'PropertySets' => 
     array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
-      'criteria' => 
-      array (
-        'element_class' => 'modTemplateVar',
-      ),
+      'criteria' => NULL,
       'owner' => 'local',
       'cardinality' => 'many',
     ),
-    'Category' => 
-    array (
-      'class' => 'modCategory',
-      'local' => 'category',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
     'TemplateVarTemplates' => 
     array (
       'class' => 'modTemplateVarTemplate',
@@ -287,6 +273,17 @@ $xpdo_meta_map['modTemplateVar']= array (
       'foreign' => 'tmplvarid',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Category' => 
+    array (
+      'class' => 'modCategory',
+      'local' => 'category',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
   'validation' => 

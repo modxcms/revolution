@@ -175,20 +175,20 @@ $xpdo_meta_map['modChunk']= array (
       ),
     ),
   ),
-  'aggregates' => 
+  'composites' => 
   array (
     'PropertySets' => 
     array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
-      'criteria' => 
-      array (
-        'element_class' => 'modChunk',
-      ),
+      'criteria' => NULL,
       'owner' => 'local',
       'cardinality' => 'many',
     ),
+  ),
+  'aggregates' => 
+  array (
     'Category' => 
     array (
       'class' => 'modCategory',
