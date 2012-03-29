@@ -250,6 +250,7 @@ $_lang['male'] = 'Male';
 $_lang['manage_files'] = 'Manage Files';
 $_lang['manager'] = 'Manager';
 $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
+$_lang['media'] = 'Media';
 $_lang['menu_order'] = 'Menu Order';
 $_lang['mime_type'] = 'MIME Type';
 $_lang['mime_type_desc'] = 'The mime type for all files with the content type.';
