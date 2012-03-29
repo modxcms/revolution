@@ -63,19 +63,6 @@ class modUser extends modPrincipal {
     }
 
     /**
-     * Prevent sudo from being set via mass-assignment
-     * @param string $key
-     * @param mixed $val
-     * @return boolean
-     */
-    protected function _setRaw($key, $val) {
-        if (!$this->getOption(xPDO::OPT_SETUP)) {
-            if ($key == 'sudo') return false;
-        }
-        return parent::_setRaw($key, $val);
-    }
-
-    /**
      * Set the sudo field explicitly
      *
      * @param boolean $sudo
