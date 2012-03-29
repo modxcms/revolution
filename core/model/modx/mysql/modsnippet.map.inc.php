@@ -138,7 +138,10 @@ $xpdo_meta_map['modSnippet']= array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
-      'criteria' => NULL,
+      'criteria' => 
+      array (
+        'element_class' => 'modSnippet',
+      ),
       'owner' => 'local',
       'cardinality' => 'many',
     ),

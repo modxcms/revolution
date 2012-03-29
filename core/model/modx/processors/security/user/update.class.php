@@ -74,6 +74,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
     public function beforeSet() {
         $this->setCheckbox('blocked');
         $this->setCheckbox('active');
+        $this->setCheckbox('sudo');
         return parent::beforeSet();
     }
 
@@ -85,6 +86,11 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         $this->setProfile();
         $this->setRemoteData();
         $this->setUserGroups();
+
+        $sudo = $this->getProperty('sudo',null);
+        if ($sudo !== null) {
+            $this->object->setSudo(!empty($sudo));
+        }
 
         $this->validator = new modUserValidation($this,$this->object,$this->profile);
         $this->validator->validate();

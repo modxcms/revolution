@@ -11,7 +11,7 @@ MODx.tree.Directory = function(config) {
     config.id = config.id || Ext.id();
     Ext.applyIf(config,{
         rootVisible: true
-        ,rootName: _('files')
+        ,rootName: _('media')
         ,rootId: '/'
         ,title: _('files')
         ,ddAppendOnly: false

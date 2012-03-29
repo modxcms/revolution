@@ -186,7 +186,6 @@
     
     <object class="modAction" table="actions" extends="modAccessibleSimpleObject">
         <field key="namespace" dbtype="nvarchar" precision="100" phptype="string" null="false" default="core" index="index" />
-        <field key="parent" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="controller" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
         <field key="haslayout" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
         <field key="lang_topics" dbtype="nvarchar" precision="max" phptype="string" null="false" />
@@ -196,16 +195,11 @@
         <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
             <column key="namespace" length="" collation="A" null="false" />
         </index>
-        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
-            <column key="parent" length="" collation="A" null="false" />
-        </index>
         <index alias="controller" name="controller" primary="false" unique="false" type="BTREE">
             <column key="controller" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" owner="foreign" cardinality="one" />
-        <aggregate alias="Parent" class="modAction" local="parent" foreign="id" owner="foreign" cardinality="one" />
-        <aggregate alias="Children" class="modAction" local="id" foreign="parent" owner="local" cardinality="many" />
         <composite alias="Menus" class="modMenu" local="id" foreign="action" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessAction" local="id" foreign="target" owner="local" cardinality="many" />
         <composite alias="Fields" class="modActionField" local="id" foreign="action" owner="local" cardinality="many" />
