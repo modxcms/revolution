@@ -10,7 +10,6 @@ $xpdo_meta_map['modAction']= array (
   'fields' => 
   array (
     'namespace' => 'core',
-    'parent' => 0,
     'controller' => NULL,
     'haslayout' => 1,
     'lang_topics' => NULL,
@@ -26,16 +25,6 @@ $xpdo_meta_map['modAction']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'core',
-      'index' => 'index',
-    ),
-    'parent' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
       'index' => 'index',
     ),
     'controller' => 
@@ -94,22 +83,6 @@ $xpdo_meta_map['modAction']= array (
         ),
       ),
     ),
-    'parent' => 
-    array (
-      'alias' => 'parent',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'parent' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
     'controller' => 
     array (
       'alias' => 'controller',
@@ -136,22 +109,6 @@ $xpdo_meta_map['modAction']= array (
       'foreign' => 'name',
       'owner' => 'foreign',
       'cardinality' => 'one',
-    ),
-    'Parent' => 
-    array (
-      'class' => 'modAction',
-      'local' => 'parent',
-      'foreign' => 'id',
-      'owner' => 'foreign',
-      'cardinality' => 'one',
-    ),
-    'Children' => 
-    array (
-      'class' => 'modAction',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'owner' => 'local',
-      'cardinality' => 'many',
     ),
   ),
   'composites' => 

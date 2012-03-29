@@ -58,3 +58,11 @@ foreach ($users as $user) {
     $user->set('sudo',true);
     $user->save();
 }
+
+/* drop modAction parent field */
+$class = 'modAction';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('drop_index',array('index' => 'parent','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeIndex'), array($class, 'parent'));
+$description = $this->install->lexicon('drop_column',array('column' => 'parent','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'parent'));
