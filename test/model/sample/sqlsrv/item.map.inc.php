@@ -3,6 +3,7 @@ $xpdo_meta_map['Item']= array (
   'package' => 'sample',
   'version' => '1.1',
   'table' => 'items',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',

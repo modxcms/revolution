@@ -3,6 +3,7 @@ $xpdo_meta_map['baseClass']= array (
   'package' => 'sample.sti',
   'version' => '1.1',
   'table' => 'sti_objects',
+  'extends' => 'xPDOSimpleObject',
   'inherit' => 'single',
   'fields' => 
   array (
@@ -71,17 +72,6 @@ $xpdo_meta_map['baseClass']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'relOne' => 
-    array (
-      'class' => 'relClassOne',
-      'local' => 'fkey',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
   'composites' => 
   array (
     'relMany' => 
@@ -91,6 +81,17 @@ $xpdo_meta_map['baseClass']= array (
       'foreign' => 'fkey',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'relOne' => 
+    array (
+      'class' => 'relClassOne',
+      'local' => 'fkey',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );
