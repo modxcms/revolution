@@ -1069,8 +1069,8 @@ class xPDOObject {
             }
             if ($criteria === null) {
                 $criteria= array ($fk => $this->get($k));
-                if (isset($fkdef['criteria'])) {
-                    $criteria= array($fkdef['criteria'], $criteria);
+                if (isset($fkdef['criteria']) && isset($fkdef['criteria']['foreign'])) {
+                    $criteria= array($fkdef['criteria']['foreign'], $criteria);
                 }
             }
             if ($object= $this->xpdo->getObject($fkdef['class'], $criteria, $cacheFlag)) {
@@ -1115,7 +1115,7 @@ class xPDOObject {
         $iterator = false;
         $fkMeta= $this->getFKDefinition($alias);
         if ($fkMeta) {
-            $fkCriteria = isset($fkMeta['criteria']) ? $fkMeta['criteria'] : null;
+            $fkCriteria = isset($fkMeta['criteria']) && isset($fkMeta['criteria']['foreign']) ? $fkMeta['criteria']['foreign'] : null;
             if ($criteria === null) {
                 $criteria= array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                 if ($fkCriteria !== null) {
@@ -1125,7 +1125,14 @@ class xPDOObject {
                 $criteria= $this->xpdo->newQuery($fkMeta['class'], $criteria);
                 $addCriteria = array("{$criteria->getAlias()}.{$fkMeta['foreign']}" => $this->get($fkMeta['local']));
                 if ($fkCriteria !== null) {
-                    $addCriteria = array($fkCriteria, $addCriteria);
+                    $fkAddCriteria = array();
+                    foreach ($fkCriteria as $fkCritKey => $fkCritVal) {
+                        if (is_numeric($fkCritKey)) continue;
+                        $fkAddCriteria["{$criteria->getAlias()}.{$fkCritKey}"] = $fkCritVal;
+                    }
+                    if (!empty($fkAddCriteria)) {
+                        $addCriteria = array($fkAddCriteria, $addCriteria);
+                    }
                 }
                 $criteria->andCondition($addCriteria);
             }
@@ -1166,8 +1173,8 @@ class xPDOObject {
                 $owner= isset ($fkMeta['owner']) ? $fkMeta['owner'] : 'local';
                 $kval= $this->get($key);
                 $fkval= $obj->get($fk);
-                $fkCriteria = isset($fkMeta['criteria']) ? $fkMeta['criteria'] : null;
                 if ($owner == 'local') {
+                    $fkCriteria = isset($fkMeta['criteria']) && isset($fkMeta['criteria']['foreign']) ? $fkMeta['criteria']['foreign'] : null;
                     $obj->set($fk, $kval);
                     if (is_array($fkCriteria)) {
                         foreach ($fkCriteria as $fkCritKey => $fkCritVal) {
@@ -1178,6 +1185,7 @@ class xPDOObject {
                 }
                 else {
                     $this->set($key, $fkval);
+                    $fkCriteria = isset($fkMeta['criteria']) && isset($fkMeta['criteria']['local']) ? $fkMeta['criteria']['local'] : null;
                     if (is_array($fkCriteria)) {
                         foreach ($fkCriteria as $fkCritKey => $fkCritVal) {
                             if (is_numeric($fkCritKey)) continue;
@@ -1507,8 +1515,8 @@ class xPDOObject {
         $criteria = isset($fkMeta['criteria']) ? $fkMeta['criteria'] : null;
         if ($owner === 'local' && $fk= $this->get($local)) {
             $obj->set($foreign, $fk);
-            if (is_array($criteria)) {
-                foreach ($criteria as $critKey => $critVal) {
+            if (isset($criteria['foreign']) && is_array($criteria['foreign'])) {
+                foreach ($criteria['foreign'] as $critKey => $critVal) {
                     if (is_numeric($critKey)) continue;
                     $obj->set($critKey, $critVal);
                 }
@@ -1521,8 +1529,8 @@ class xPDOObject {
             $fk= $obj->get($foreign);
             if ($fk) {
                 $this->set($local, $fk);
-                if (is_array($criteria)) {
-                    foreach ($criteria as $critKey => $critVal) {
+                if (isset($criteria['local']) && is_array($criteria['local'])) {
+                    foreach ($criteria['local'] as $critKey => $critVal) {
                         if (is_numeric($critKey)) continue;
                         $this->set($critKey, $critVal);
                     }
@@ -1800,7 +1808,7 @@ class xPDOObject {
             foreach ($graph as $alias => $branch) {
                 $fkMeta = $this->getFKDefinition($alias);
                 if ($fkMeta) {
-                    $fkCriteria = isset($fkMeta['criteria']) ? $fkMeta['criteria'] : null;
+                    $fkCriteria = isset($fkMeta['criteria']) && isset($fkMeta['criteria']['foreign']) ? $fkMeta['criteria']['foreign'] : null;
                     if ($criteria === null) {
                         $query= array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                         if ($fkCriteria !== null) {
@@ -1810,7 +1818,14 @@ class xPDOObject {
                         $query= $this->xpdo->newQuery($fkMeta['class'], $criteria);
                         $addCriteria= array("{$query->getAlias()}.{$fkMeta['foreign']}" => $this->get($fkMeta['local']));
                         if ($fkCriteria !== null) {
-                            $addCriteria= array($fkCriteria, $addCriteria);
+                            $fkAddCriteria = array();
+                            foreach ($fkCriteria as $fkCritKey => $fkCritVal) {
+                                if (is_numeric($fkCritKey)) continue;
+                                $fkAddCriteria["{$criteria->getAlias()}.{$fkCritKey}"] = $fkCritVal;
+                            }
+                            if (!empty($fkAddCriteria)) {
+                                $addCriteria = array($fkAddCriteria, $addCriteria);
+                            }
                         }
                         $query->andCondition($addCriteria);
                     }
@@ -2125,7 +2140,7 @@ class xPDOObject {
         } else {
             $fkMeta= $this->getFKDefinition($alias);
             if ($fkMeta) {
-                $fkCriteria = isset($fkMeta['criteria']) ? $fkMeta['criteria'] : null;
+                $fkCriteria = isset($fkMeta['criteria']) && isset($fkMeta['criteria']['foreign']) ? $fkMeta['criteria']['foreign'] : null;
                 if ($criteria === null) {
                     $criteria= array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                     if ($fkCriteria !== null) {
@@ -2135,7 +2150,14 @@ class xPDOObject {
                     $criteria= $this->xpdo->newQuery($fkMeta['class'], $criteria);
                     $addCriteria = array("{$criteria->getAlias()}.{$fkMeta['foreign']}" => $this->get($fkMeta['local']));
                     if ($fkCriteria !== null) {
-                        $addCriteria= array($fkCriteria, $addCriteria);
+                        $fkAddCriteria = array();
+                        foreach ($fkCriteria as $fkCritKey => $fkCritVal) {
+                            if (is_numeric($fkCritKey)) continue;
+                            $fkAddCriteria["{$criteria->getAlias()}.{$fkCritKey}"] = $fkCritVal;
+                        }
+                        if (!empty($fkAddCriteria)) {
+                            $addCriteria = array($fkAddCriteria, $addCriteria);
+                        }
                     }
                     $criteria->andCondition($addCriteria);
                 }

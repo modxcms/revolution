@@ -350,8 +350,20 @@ abstract class xPDOGenerator {
                                 }
                             }
                             if (!empty($compositeNode)) {
-                                if (isset($compositeNode->criteria)) {
-                                    /* TODO: implement criteria elements for composites */
+                                if (isset($composite->criteria)) {
+                                    /** @var SimpleXMLElement $criteria */
+                                    foreach ($composite->criteria as $criteria) {
+                                        $criteriaTarget = (string) $criteria['target'];
+                                        $expression = (string) $criteria;
+                                        if (!empty($expression)) {
+                                            $expression = $this->manager->xpdo->fromJSON($expression);
+                                            if (!empty($expression)) {
+                                                if (!isset($compositeNode['criteria'])) $compositeNode['criteria'] = array();
+                                                if (!isset($compositeNode['criteria'][$criteriaTarget])) $compositeNode['criteria'][$criteriaTarget] = array();
+                                                $compositeNode['criteria'][$criteriaTarget] = array_merge($compositeNode['criteria'][$criteriaTarget], (array) $expression);
+                                            }
+                                        }
+                                    }
                                 }
                                 $this->map[$class]['composites'][$compositeAlias] = $compositeNode;
                             }
@@ -375,8 +387,20 @@ abstract class xPDOGenerator {
                                 }
                             }
                             if (!empty($aggregateNode)) {
-                                if (isset($aggregateNode->criteria)) {
-                                    /* TODO: implement criteria elements for aggregates */
+                                if (isset($aggregate->criteria)) {
+                                    /** @var SimpleXMLElement $criteria */
+                                    foreach ($aggregate->criteria as $criteria) {
+                                        $criteriaTarget = (string) $criteria['target'];
+                                        $expression = (string) $criteria;
+                                        if (!empty($expression)) {
+                                            $expression = $this->manager->xpdo->fromJSON($expression);
+                                            if (!empty($expression)) {
+                                                if (!isset($aggregateNode['criteria'])) $aggregateNode['criteria'] = array();
+                                                if (!isset($aggregateNode['criteria'][$criteriaTarget])) $aggregateNode['criteria'][$criteriaTarget] = array();
+                                                $aggregateNode['criteria'][$criteriaTarget] = array_merge($aggregateNode['criteria'][$criteriaTarget], (array) $expression);
+                                            }
+                                        }
+                                    }
                                 }
                                 $this->map[$class]['aggregates'][$aggregateAlias] = $aggregateNode;
                             }
