@@ -53,12 +53,14 @@ class modManagerResponse extends modResponse {
             $this->action['namespace'] = 'core';
             $this->action['namespace_name'] = 'core';
             $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
             $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/login';
         } else if (!$this->modx->hasPermission('frames')) {
             $this->action['namespace'] = 'core';
             $this->action['namespace_name'] = 'core';
             $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
             $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/logout';
         }

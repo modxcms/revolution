@@ -23,6 +23,7 @@ class modNamespaceUpdateProcessor extends modObjectUpdateProcessor {
         $this->object->set('name',$name);
         
         $this->object->set('path',trim($this->object->get('path')));
+        $this->object->set('assets_path',trim($this->object->get('assets_path')));
         return parent::beforeSave();
     }
 }

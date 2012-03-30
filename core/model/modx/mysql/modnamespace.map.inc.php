@@ -12,6 +12,7 @@ $xpdo_meta_map['modNamespace']= array (
   array (
     'name' => '',
     'path' => '',
+    'assets_path' => '',
   ),
   'fieldMeta' => 
   array (
@@ -25,6 +26,12 @@ $xpdo_meta_map['modNamespace']= array (
       'index' => 'pk',
     ),
     'path' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'default' => '',
+    ),
+    'assets_path' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',

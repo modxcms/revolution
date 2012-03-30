@@ -686,6 +686,7 @@
     <object class="modNamespace" table="namespaces" extends="xPDOObject">
         <field key="name" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="pk" />
         <field key="path" dbtype="text" phptype="string" default="" />
+        <field key="assets_path" dbtype="text" phptype="string" default="" />
         
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
