@@ -7,6 +7,7 @@ $xpdo_meta_map['modClassMap']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'class_map',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'class' => '',

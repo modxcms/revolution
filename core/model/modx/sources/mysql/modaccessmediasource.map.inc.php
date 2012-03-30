@@ -7,6 +7,7 @@ $xpdo_meta_map['modAccessMediaSource']= array (
   'package' => 'modx.sources',
   'version' => '1.1',
   'table' => 'access_media_source',
+  'extends' => 'modAccess',
   'fields' => 
   array (
     'context_key' => '',

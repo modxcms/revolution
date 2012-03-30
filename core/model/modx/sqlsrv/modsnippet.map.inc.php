@@ -7,6 +7,7 @@ $xpdo_meta_map['modSnippet']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_snippets',
+  'extends' => 'modScript',
   'fields' => 
   array (
     'cache_type' => 0,

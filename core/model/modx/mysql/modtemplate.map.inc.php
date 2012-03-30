@@ -7,6 +7,7 @@ $xpdo_meta_map['modTemplate']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_templates',
+  'extends' => 'modElement',
   'fields' => 
   array (
     'templatename' => '',

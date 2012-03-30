@@ -7,6 +7,7 @@ $xpdo_meta_map['modResourceGroup']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'documentgroup_names',
+  'extends' => 'modAccessibleSimpleObject',
   'fields' => 
   array (
     'name' => '',
