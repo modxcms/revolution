@@ -15,28 +15,6 @@
  * @package modx
  */
 class modNamespace extends xPDOObject {
-    /**
-     * Overrides xPDOObject::get to provide placeholder substitution for the namespace path.
-     * 
-     * {@inheritdoc}
-     */
-    public function get($k,$format = null,$formatTemplate = null) {
-        $v = parent :: get($k,$format,$formatTemplate);
-        /*
-        if ($k == 'path' || $k == 'assets_path') {
-            $v = str_replace(array(
-                '{core_path}',
-                '{base_path}',
-                '{assets_path}',
-            ),array(
-                $this->xpdo->getOption('core_path',null,MODX_CORE_PATH),
-                $this->xpdo->getOption('base_path',null,MODX_BASE_PATH),
-                $this->xpdo->getOption('assets_path',null,MODX_ASSETS_PATH),
-            ),$v);
-        }*/
-        return $v;
-    }
-
     public function getCorePath() {
         $path = $this->get('path');
         return $this->xpdo->call('modNamespace','translatePath',array(&$this->xpdo,$path));
