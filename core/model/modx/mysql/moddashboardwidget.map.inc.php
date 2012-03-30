@@ -7,6 +7,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'dashboard_widget',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',
@@ -140,17 +141,6 @@ $xpdo_meta_map['modDashboardWidget']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'Namespace' => 
-    array (
-      'class' => 'modNamespace',
-      'local' => 'namespace',
-      'foreign' => 'name',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
   'composites' => 
   array (
     'Placements' => 
@@ -160,6 +150,17 @@ $xpdo_meta_map['modDashboardWidget']= array (
       'foreign' => 'widget',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Namespace' => 
+    array (
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'name',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );

@@ -7,6 +7,7 @@ $xpdo_meta_map['modChunk']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_htmlsnippets',
+  'extends' => 'modElement',
   'fields' => 
   array (
     'name' => '',
@@ -182,12 +183,15 @@ $xpdo_meta_map['modChunk']= array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
-      'criteria' => 
-      array (
-        'element_class' => 'modChunk',
-      ),
       'owner' => 'local',
       'cardinality' => 'many',
+      'criteria' => 
+      array (
+        'foreign' => 
+        array (
+          'element_class' => 'modChunk',
+        ),
+      ),
     ),
   ),
   'aggregates' => 

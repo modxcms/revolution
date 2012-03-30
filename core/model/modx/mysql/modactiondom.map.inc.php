@@ -7,6 +7,7 @@ $xpdo_meta_map['modActionDom']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'actiondom',
+  'extends' => 'modAccessibleSimpleObject',
   'fields' => 
   array (
     'set' => 0,
@@ -242,6 +243,17 @@ $xpdo_meta_map['modActionDom']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Access' => 
+    array (
+      'class' => 'modAccessActionDom',
+      'local' => 'id',
+      'foreign' => 'target',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'FCSet' => 
@@ -259,17 +271,6 @@ $xpdo_meta_map['modActionDom']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Access' => 
-    array (
-      'class' => 'modAccessActionDom',
-      'local' => 'id',
-      'foreign' => 'target',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

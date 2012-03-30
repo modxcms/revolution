@@ -7,6 +7,7 @@ $xpdo_meta_map['modAccessElement']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'access_elements',
+  'extends' => 'modAccess',
   'fields' => 
   array (
     'context_key' => '',

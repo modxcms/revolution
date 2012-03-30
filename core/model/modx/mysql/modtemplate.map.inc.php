@@ -7,6 +7,7 @@ $xpdo_meta_map['modTemplate']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_templates',
+  'extends' => 'modElement',
   'fields' => 
   array (
     'templatename' => '',
@@ -189,12 +190,15 @@ $xpdo_meta_map['modTemplate']= array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
-      'criteria' => 
-      array (
-        'element_class' => 'modTemplate',
-      ),
       'owner' => 'local',
       'cardinality' => 'many',
+      'criteria' => 
+      array (
+        'foreign' => 
+        array (
+          'element_class' => 'modTemplate',
+        ),
+      ),
     ),
     'TemplateVarTemplates' => 
     array (

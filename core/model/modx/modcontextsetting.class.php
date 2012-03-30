@@ -17,6 +17,8 @@
  * @property string $area The area of the Setting
  * @property timestamp $editedon The last edited on time of this Setting
  *
+ * @property modX|xPDO $xpdo
+ *
  * @package modx
  */
 class modContextSetting extends xPDOObject {

@@ -7,6 +7,7 @@ $xpdo_meta_map['modAction']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'actions',
+  'extends' => 'modAccessibleSimpleObject',
   'fields' => 
   array (
     'namespace' => 'core',
@@ -100,17 +101,6 @@ $xpdo_meta_map['modAction']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'Namespace' => 
-    array (
-      'class' => 'modNamespace',
-      'local' => 'namespace',
-      'foreign' => 'name',
-      'owner' => 'foreign',
-      'cardinality' => 'one',
-    ),
-  ),
   'composites' => 
   array (
     'Menus' => 
@@ -144,6 +134,17 @@ $xpdo_meta_map['modAction']= array (
       'foreign' => 'action',
       'owner' => 'local',
       'cardinality' => 'many',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Namespace' => 
+    array (
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'name',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
     ),
   ),
 );

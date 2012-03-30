@@ -7,6 +7,7 @@ $xpdo_meta_map['modContentType']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'content_type',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => NULL,

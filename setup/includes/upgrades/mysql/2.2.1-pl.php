@@ -66,3 +66,9 @@ $description = $this->install->lexicon('drop_index',array('index' => 'parent','t
 $this->processResults($class, $description, array($modx->manager, 'removeIndex'), array($class, 'parent'));
 $description = $this->install->lexicon('drop_column',array('column' => 'parent','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'parent'));
+
+/* add assets_path field to modNamespace */
+$class = 'modNamespace';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'assets_path','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'assets_path'));

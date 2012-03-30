@@ -7,6 +7,7 @@ $xpdo_meta_map['modCategory']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'categories',
+  'extends' => 'modAccessibleSimpleObject',
   'fields' => 
   array (
     'parent' => 0,

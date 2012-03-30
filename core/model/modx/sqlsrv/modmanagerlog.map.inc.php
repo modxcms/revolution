@@ -7,6 +7,7 @@ $xpdo_meta_map['modManagerLog']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'manager_log',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'user' => 0,

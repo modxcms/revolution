@@ -7,6 +7,7 @@ $xpdo_meta_map['modUserGroupRole']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'user_group_roles',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => NULL,

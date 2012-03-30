@@ -7,6 +7,7 @@ $xpdo_meta_map['modFormCustomizationProfile']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'fc_profiles',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',

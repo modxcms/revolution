@@ -133,6 +133,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Core transport package created.'); flush();
 $namespace = $xpdo->newObject('modNamespace');
 $namespace->set('name','core');
 $namespace->set('path','{core_path}');
+$namespace->set('assets_path','{assets_path}');
 $package->put($namespace,array(
     xPDOTransport::PRESERVE_KEYS => true,
     xPDOTransport::UPDATE_OBJECT => true,

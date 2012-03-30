@@ -384,7 +384,7 @@ class modCacheManager extends xPDOCacheManager {
         $c = $this->modx->newQuery('modAction');
         $c->select(array(
             $this->modx->getSelectColumns('modAction', 'modAction'),
-            $this->modx->getSelectColumns('modNamespace', 'Namespace', 'namespace_', array('name','path'))
+            $this->modx->getSelectColumns('modNamespace', 'Namespace', 'namespace_', array('name','path','assets_path'))
         ));
         $c->innerJoin('modNamespace','Namespace');
         $c->sortby('namespace','ASC');
@@ -400,15 +400,7 @@ class modCacheManager extends xPDOCacheManager {
                 if ($action['namespace_name'] != 'core') {
                     $nsPath = $action['namespace_path'];
                     if (!empty($nsPath)) {
-                        $nsPath = str_replace(array(
-                            '{core_path}',
-                            '{base_path}',
-                            '{assets_path}',
-                        ),array(
-                            $this->modx->getOption('core_path'),
-                            $this->modx->getOption('base_path'),
-                            $this->modx->getOption('assets_path'),
-                        ),$nsPath);
+                        $nsPath = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$nsPath));
                         $action['namespace_path'] = $nsPath;
                     }
                 }
