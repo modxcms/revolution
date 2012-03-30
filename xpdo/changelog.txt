@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Fix xPDOObject::_loadInstance for proper loading of graph objects
 - Refactor schema parsing using SimpleXML
 - Fix related_object installation in xPDOObjectVehicle
 - Add criteria support to aggregates and composites
