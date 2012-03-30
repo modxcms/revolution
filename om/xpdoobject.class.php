@@ -303,28 +303,20 @@ class xPDOObject {
             $alias = $className;
             $actualClass= $className;
         }
-        if (isset($row["{$className}_class_key"])) {
-            $actualClass= $row["{$className}_class_key"];
-            $rowPrefix= $className . '_';
-        }
-        elseif (isset ($row["{$alias}_class_key"])) {
+        if (isset ($row["{$alias}_class_key"])) {
             $actualClass= $row["{$alias}_class_key"];
             $rowPrefix= $alias . '_';
-        }
-        elseif (isset ($row['class_key'])) {
+        } elseif (isset($row["{$className}_class_key"])) {
+            $actualClass= $row["{$className}_class_key"];
+            $rowPrefix= $className . '_';
+        } elseif (isset ($row['class_key'])) {
             $actualClass= $row['class_key'];
         }
         /** @var xPDOObject $instance */
         $instance= $xpdo->newObject($actualClass);
         if (is_object($instance) && $instance instanceof xPDOObject) {
-            if (strpos(strtolower(key($row)), strtolower($alias . '_')) === 0) {
-                $rowPrefix= $alias . '_';
-            }
-            elseif (strpos(strtolower(key($row)), strtolower($className . '_')) === 0) {
-                $rowPrefix= $className . '_';
-            }
-            else {
-                $pk = $xpdo->getPK($actualClass);
+            $pk = $xpdo->getPK($actualClass);
+            if ($pk) {
                 if (is_array($pk)) $pk = reset($pk);
                 if (isset($row["{$alias}_{$pk}"])) {
                     $rowPrefix= $alias . '_';
@@ -335,6 +327,10 @@ class xPDOObject {
                 elseif ($className !== $alias && isset($row["{$className}_{$pk}"])) {
                     $rowPrefix= $className . '_';
                 }
+            } elseif (strpos(strtolower(key($row)), strtolower($alias . '_')) === 0) {
+                $rowPrefix= $alias . '_';
+            } elseif (strpos(strtolower(key($row)), strtolower($className . '_')) === 0) {
+                $rowPrefix= $className . '_';
             }
             $parentClass = $className;
             $isSubPackage = strpos($className,'.');
