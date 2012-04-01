@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-01-08
+ * @updated 2012-04-01
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -618,6 +618,12 @@ $_lang['setting_forgot_login_email'] = 'E-mail zapomenutého přihlášení';
 // $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 $_lang['setting_forgot_login_email_desc'] = 'Šablona e-mailu, který je odeslán pokud uživatel zapomněl své přihlašovací údaje.';
 
+// $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
+$_lang['setting_form_customization_use_all_groups'] = 'Pro přizpůsobení formulářů využit pravidla všech členských uživatelských skupiny';
+
+// $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Je-li nastaveno Ano, při aplikaci pravidel z přizpůsobení formulářů budou použita pravidla všech uživatelských skupin, do kterých je uživatel přiřazen. V opačném případě jsou použita pouze pravidla přiřazená k uživatelově primární skupině. Poznámka: volba Ano může zapříčinit chyby s konfliktními pravidly v jednotlivých uživatelských skupinách.';
+
 // $_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
 $_lang['setting_forward_merge_excludes'] = 'Potlačená políčka při symbolickém odkazování';
 
@@ -726,14 +732,20 @@ $_lang['setting_link_tag_scheme_desc'] = 'Schéma generování URL pro tag [[~id
 // $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale'] = 'Locale';
 
+// $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale_desc'] = 'Nastavte locale pro vaše národní použití. Ponechte prázdné pro použití výchozí hodnoty. Více informací v <a href="http://php.net/setlocale" target="_blank">PHP dokumentaci</a>.';
+
+// $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
+$_lang['setting_lock_ttl'] = 'Čas odstranění zámků';
+
+// $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
+$_lang['setting_lock_ttl_desc'] = 'Počet sekund, po kterou je dokument uzamčen a uživatel v něm již nic neupravil, po jehož uplynutí bude daný zámek zrušen.';
+
 $_lang['setting_log_level'] = 'Úroveň logování';
 $_lang['setting_log_level_desc'] = 'Výchozí úroveň logování; čím nižší úroveň tím méně zpráv bude logováno. Možné hodnoty: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
 
 $_lang['setting_log_target'] = 'Výstup logování';
 $_lang['setting_log_target_desc'] = 'Výchozí výstup, kam mají být logy zapisovány. Možné hodnoty: \'FILE\', \'HTML\', nebo \'ECHO\'. Výchozí hodnota je \'FILE\'';
-
-// $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
-$_lang['setting_locale_desc'] = 'Nastavte locale pro vaše národní použití. Ponechte prázdné pro použití výchozí hodnoty. Více informací v <a href="http://php.net/setlocale" target="_blank">PHP dokumentaci</a>.';
 
 // $_lang['setting_mail_charset'] = 'Mail Charset';
 $_lang['setting_mail_charset'] = 'Znaková sada e-mailu';
@@ -909,6 +921,12 @@ $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
 
 // $_lang['setting_modRequest.class_desc'] = '';
 $_lang['setting_modRequest.class_desc'] = '';
+
+// $_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
+$_lang['setting_modx_browser_default_sort'] = 'Výchozí řazení v Průzkmníku zdrojů';
+
+// $_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Výchozí nastavení řazení v Průzkumníku zdrojů (vkládání obrázků atp.). Možné hodnoty jsou: name, size, lastmod (poslední změna).';
 
 // $_lang['setting_modx_charset'] = 'Character encoding';
 $_lang['setting_modx_charset'] = 'Kódování znaků';
