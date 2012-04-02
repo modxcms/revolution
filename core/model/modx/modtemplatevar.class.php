@@ -294,7 +294,10 @@ class modTemplateVar extends modElement {
                     if ($source) {
                         $source->fromArray($sourceCache,'',true,true);
                         $source->initialize();
-                        $value = $source->prepareOutputUrl($value);
+                        $isAbsolute = strpos($value,'http://') === 0 || strpos($value,'https://') === 0 || strpos($value,'ftp://') === 0;
+                        if (!$isAbsolute) {
+                            $value = $source->prepareOutputUrl($value);
+                        }
                     }
                 }
             }
