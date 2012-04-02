@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.4-pl (April 2, 2012)
+====================================
 - Refactor aggregate/composite criteria support for targeting local/foreign
 - Fix xPDOObject::_loadInstance for proper loading of graph objects
 - Refactor schema parsing using SimpleXML
