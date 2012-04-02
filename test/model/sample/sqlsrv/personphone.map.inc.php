@@ -3,6 +3,7 @@ $xpdo_meta_map['PersonPhone']= array (
   'package' => 'sample',
   'version' => '1.1',
   'table' => 'person_phone',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'person' => NULL,
@@ -58,23 +59,23 @@ $xpdo_meta_map['PersonPhone']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'Person' => 
-    array (
-      'class' => 'Person',
-      'local' => 'person',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
   'composites' => 
   array (
     'Phone' => 
     array (
       'class' => 'Phone',
       'local' => 'phone',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Person' => 
+    array (
+      'class' => 'Person',
+      'local' => 'person',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

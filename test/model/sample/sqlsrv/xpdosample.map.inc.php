@@ -3,6 +3,7 @@ $xpdo_meta_map['xPDOSample']= array (
   'package' => 'sample',
   'version' => '1.1',
   'table' => 'xpdosample',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'parent' => 0,

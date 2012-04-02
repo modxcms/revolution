@@ -100,23 +100,10 @@ abstract class xPDOGenerator {
      * @var array $map The stored map array.
      */
     public $map= array ();
-
     /**
-     * @var string $className A placeholder for the current class name.
+     * @var SimpleXMLElement
      */
-    public $className= '';
-    /**
-     * @var string $fieldKey A placeholder for the current field key.
-     */
-    public $fieldKey= '';
-    /**
-     * @var string $indexName A placeholder for the current index name.
-     */
-    public $indexName= '';
-    /**
-     * @var string $aliasKey A placeholder for the current alias key.
-     */
-    public $aliasKey= '';
+    public $schema= null;
 
     /**
      * Constructor
@@ -200,6 +187,8 @@ abstract class xPDOGenerator {
     /**
      * Parses an XPDO XML schema and generates classes and map files from it.
      *
+     * Requires SimpleXML for parsing an XML schema.
+     *
      * @param string $schemaFile The name of the XML file representing the
      * schema.
      * @param string $outputDir The directory in which to generate the class and
@@ -213,31 +202,250 @@ abstract class xPDOGenerator {
         if (!is_file($schemaFile)) {
             $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not find specified XML schema file {$schemaFile}");
             return false;
+        }
+
+        $this->schema = new SimpleXMLElement($schemaFile, 0, true);
+        if (isset($this->schema)) {
+            foreach ($this->schema->attributes() as $attributeKey => $attribute) {
+                /** @var SimpleXMLElement $attribute */
+                $this->model[$attributeKey] = (string) $attribute;
+            }
+            if (isset($this->schema->object)) {
+                foreach ($this->schema->object as $object) {
+                    /** @var SimpleXMLElement $object */
+                    $class = (string) $object['class'];
+                    $extends = isset($object['extends']) ? (string) $object['extends'] : $this->model['baseClass'];
+                    $this->classes[$class] = array('extends' => $extends);
+                    $this->map[$class] = array(
+                        'package' => $this->model['package'],
+                        'version' => $this->model['version']
+                    );
+                    foreach ($object->attributes() as $objAttrKey => $objAttr) {
+                        if ($objAttrKey == 'class') continue;
+                        $this->map[$class][$objAttrKey]= (string) $objAttr;
+                    }
+                    $this->map[$class]['fields']= array();
+                    $this->map[$class]['fieldMeta']= array();
+                    if (isset($object->field)) {
+                        foreach ($object->field as $field) {
+                            $key = (string) $field['key'];
+                            $dbtype = (string) $field['dbtype'];
+                            $defaultType = $this->manager->xpdo->driver->getPhpType($dbtype);
+                            $this->map[$class]['fields'][$key]= null;
+                            $this->map[$class]['fieldMeta'][$key]= array();
+                            foreach ($field->attributes() as $fldAttrKey => $fldAttr) {
+                                $fldAttrValue = (string) $fldAttr;
+                                switch ($fldAttrKey) {
+                                    case 'key':
+                                        continue 2;
+                                    case 'default':
+                                        if ($fldAttrValue === 'NULL') {
+                                            $fldAttrValue = null;
+                                        }
+                                        switch ($defaultType) {
+                                            case 'integer':
+                                            case 'boolean':
+                                            case 'bit':
+                                                $fldAttrValue = (integer) $fldAttrValue;
+                                                break;
+                                            case 'float':
+                                            case 'numeric':
+                                                $fldAttrValue = (float) $fldAttrValue;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                        $this->map[$class]['fields'][$key]= $fldAttrValue;
+                                        break;
+                                    case 'null':
+                                        $fldAttrValue = (!empty($fldAttrValue) && strtolower($fldAttrValue) !== 'false') ? true : false;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                $this->map[$class]['fieldMeta'][$key][$fldAttrKey]= $fldAttrValue;
+                            }
+                        }
+                    }
+                    if (isset($object->alias)) {
+                        $this->map[$class]['fieldAliases'] = array();
+                        foreach ($object->alias as $alias) {
+                            $aliasKey = (string) $alias['key'];
+                            $aliasNode = array();
+                            foreach ($alias->attributes() as $attrName => $attr) {
+                                $attrValue = (string) $attr;
+                                switch ($attrName) {
+                                    case 'key':
+                                        continue 2;
+                                    case 'field':
+                                        $aliasNode = $attrValue;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (!empty($aliasKey) && !empty($aliasNode)) {
+                                $this->map[$class]['fieldAliases'][$aliasKey] = $aliasNode;
+                            }
+                        }
+                    }
+                    if (isset($object->index)) {
+                        $this->map[$class]['indexes'] = array();
+                        foreach ($object->index as $index) {
+                            $indexNode = array();
+                            $indexName = (string) $index['name'];
+                            foreach ($index->attributes() as $attrName => $attr) {
+                                $attrValue = (string) $attr;
+                                switch ($attrName) {
+                                    case 'name':
+                                        continue 2;
+                                    case 'primary':
+                                    case 'unique':
+                                    case 'fulltext':
+                                        $attrValue = (empty($attrValue) || $attrValue === 'false' ? false : true);
+                                    default:
+                                        $indexNode[$attrName] = $attrValue;
+                                        break;
+                                }
+                            }
+                            if (!empty($indexNode) && isset($index->column)) {
+                                $indexNode['columns']= array();
+                                foreach ($index->column as $column) {
+                                    $columnKey = (string) $column['key'];
+                                    $indexNode['columns'][$columnKey] = array();
+                                    foreach ($column->attributes() as $attrName => $attr) {
+                                        $attrValue = (string) $attr;
+                                        switch ($attrName) {
+                                            case 'key':
+                                                continue 2;
+                                            case 'null':
+                                                $attrValue = (empty($attrValue) || $attrValue === 'false' ? false : true);
+                                            default:
+                                                $indexNode['columns'][$columnKey][$attrName]= $attrValue;
+                                                break;
+                                        }
+                                    }
+                                }
+                                if (!empty($indexNode['columns'])) {
+                                    $this->map[$class]['indexes'][$indexName]= $indexNode;
+                                }
+                            }
+                        }
+                    }
+                    if (isset($object->composite)) {
+                        $this->map[$class]['composites'] = array();
+                        foreach ($object->composite as $composite) {
+                            $compositeNode = array();
+                            $compositeAlias = (string) $composite['alias'];
+                            foreach ($composite->attributes() as $attrName => $attr) {
+                                $attrValue = (string) $attr;
+                                switch ($attrName) {
+                                    case 'alias' :
+                                        continue 2;
+                                    case 'criteria' :
+                                        $attrValue = $this->manager->xpdo->fromJSON(urldecode($attrValue));
+                                    default :
+                                        $compositeNode[$attrName]= $attrValue;
+                                        break;
+                                }
+                            }
+                            if (!empty($compositeNode)) {
+                                if (isset($composite->criteria)) {
+                                    /** @var SimpleXMLElement $criteria */
+                                    foreach ($composite->criteria as $criteria) {
+                                        $criteriaTarget = (string) $criteria['target'];
+                                        $expression = (string) $criteria;
+                                        if (!empty($expression)) {
+                                            $expression = $this->manager->xpdo->fromJSON($expression);
+                                            if (!empty($expression)) {
+                                                if (!isset($compositeNode['criteria'])) $compositeNode['criteria'] = array();
+                                                if (!isset($compositeNode['criteria'][$criteriaTarget])) $compositeNode['criteria'][$criteriaTarget] = array();
+                                                $compositeNode['criteria'][$criteriaTarget] = array_merge($compositeNode['criteria'][$criteriaTarget], (array) $expression);
+                                            }
+                                        }
+                                    }
+                                }
+                                $this->map[$class]['composites'][$compositeAlias] = $compositeNode;
+                            }
+                        }
+                    }
+                    if (isset($object->aggregate)) {
+                        $this->map[$class]['aggregates'] = array();
+                        foreach ($object->aggregate as $aggregate) {
+                            $aggregateNode = array();
+                            $aggregateAlias = (string) $aggregate['alias'];
+                            foreach ($aggregate->attributes() as $attrName => $attr) {
+                                $attrValue = (string) $attr;
+                                switch ($attrName) {
+                                    case 'alias' :
+                                        continue 2;
+                                    case 'criteria' :
+                                        $attrValue = $this->manager->xpdo->fromJSON(urldecode($attrValue));
+                                    default :
+                                        $aggregateNode[$attrName]= $attrValue;
+                                        break;
+                                }
+                            }
+                            if (!empty($aggregateNode)) {
+                                if (isset($aggregate->criteria)) {
+                                    /** @var SimpleXMLElement $criteria */
+                                    foreach ($aggregate->criteria as $criteria) {
+                                        $criteriaTarget = (string) $criteria['target'];
+                                        $expression = (string) $criteria;
+                                        if (!empty($expression)) {
+                                            $expression = $this->manager->xpdo->fromJSON($expression);
+                                            if (!empty($expression)) {
+                                                if (!isset($aggregateNode['criteria'])) $aggregateNode['criteria'] = array();
+                                                if (!isset($aggregateNode['criteria'][$criteriaTarget])) $aggregateNode['criteria'][$criteriaTarget] = array();
+                                                $aggregateNode['criteria'][$criteriaTarget] = array_merge($aggregateNode['criteria'][$criteriaTarget], (array) $expression);
+                                            }
+                                        }
+                                    }
+                                }
+                                $this->map[$class]['aggregates'][$aggregateAlias] = $aggregateNode;
+                            }
+                        }
+                    }
+                    if (isset($object->validation)) {
+                        $this->map[$class]['validation'] = array();
+                        $validation = $object->validation[0];
+                        $validationNode = array();
+                        foreach ($validation->attributes() as $attrName => $attr) {
+                            $validationNode[$attrName]= (string) $attr;
+                        }
+                        if (isset($validation->rule)) {
+                            $validationNode['rules'] = array();
+                            foreach ($validation->rule as $rule) {
+                                $ruleNode = array();
+                                $field= (string) $rule['field'];
+                                $name= (string) $rule['name'];
+                                foreach ($rule->attributes() as $attrName => $attr) {
+                                    $attrValue = (string) $attr;
+                                    switch ($attrName) {
+                                        case 'field' :
+                                        case 'name' :
+                                            continue 2;
+                                        default :
+                                            $ruleNode[$attrName]= $attrValue;
+                                            break;
+                                    }
+                                }
+                                if (!empty($field) && !empty($name) && !empty($ruleNode)) {
+                                    $validationNode['rules'][$field][$name]= $ruleNode;
+                                }
+                            }
+                            if (!empty($validationNode['rules'])) {
+                                $this->map[$class]['validation'] = $validationNode;
+                            }
+                        }
+                    }
+                }
+            } else {
+                $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Schema {$schemaFile} contains no valid object elements.");
+            }
         } else {
-            $fileContent= @ file($schemaFile);
-            $this->schemaContent= implode('', $fileContent);
+            $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not read schema from {$schemaFile}.");
         }
-
-        /* Create the parser and set handlers. */
-        $this->xmlParser= xml_parser_create('UTF-8');
-
-        xml_set_object($this->xmlParser, $this);
-        xml_parser_set_option($this->xmlParser, XML_OPTION_CASE_FOLDING, 0);
-        xml_parser_set_option($this->xmlParser, XML_OPTION_TARGET_ENCODING, 'UTF-8');
-        xml_set_element_handler($this->xmlParser, '_handleOpenElement', '_handleCloseElement');
-        xml_set_character_data_handler($this->xmlParser, "_handleCData");
-
-        /* Parse it. */
-        if (!xml_parse($this->xmlParser, $this->schemaContent)) {
-            $ln= xml_get_current_line_number($this->xmlParser);
-            $msg= xml_error_string(xml_get_error_code($this->xmlParser));
-            $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing XML schema on line $ln: $msg");
-            return false;
-        }
-
-        /* Free up the parser and clear memory */
-        xml_parser_free($this->xmlParser);
-        unset ($this->xmlParser);
 
         $om_path= XPDO_CORE_PATH . 'om/';
         $path= !empty ($outputDir) ? $outputDir : $om_path;
@@ -252,226 +460,6 @@ abstract class xPDOGenerator {
         unset($this->model, $this->classes, $this->map);
         return true;
     }
-
-    /**
-     * Handles formatting of the open XML element.
-     *
-     * @access protected
-     * @param xmlParser &$parser
-     * @param string &$element
-     * @param array &$attributes
-     */
-    protected function _handleOpenElement(& $parser, & $element, & $attributes) {
-        $element= strtolower($element);
-        switch ($element) {
-            case 'model' :
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    $this->model[$attrName]= $attrValue;
-                }
-                break;
-            case 'object' :
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'class' :
-                            $this->className= "{$attrValue}";
-                            if (!isset ($this->classes[$this->className])) {
-                                $this->classes[$this->className]= array ();
-                                $this->classes[$this->className]['extends']= $this->model['baseClass'];
-                            }
-                            if (isset ($this->model['package'])) {
-                                $this->map[$this->className]['package']= $this->model['package'];
-                            }
-                            if (isset ($this->model['version'])) {
-                                $this->map[$this->className]['version']= $this->model['version'];
-                            }
-                            break;
-                        case 'table' :
-                            $this->map[$this->className]['table']= $attrValue;
-                            break;
-                        case 'extends' :
-                            $this->classes[$this->className]['extends']= $attrValue;
-                            break;
-                        case 'inherit' :
-                            $this->map[$this->className]['inherit']= $attrValue;
-                            break;
-                        default:
-                            $this->classes[$this->className][$attrName]= $attrValue;
-                            break;
-                    }
-                }
-                break;
-            case 'field' :
-                $dbtype = 'varchar';
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'key' :
-                            $this->fieldKey= "{$attrValue}";
-                            $this->map[$this->className]['fields'][$this->fieldKey]= null;
-                            $this->map[$this->className]['fieldMeta'][$this->fieldKey]= array ();
-                            break;
-                        case 'default' :
-                            $attrValue = ($attrValue === 'NULL' ? null : $attrValue);
-                            switch ($this->manager->xpdo->driver->getPhpType($dbtype)) {
-                                case 'integer':
-                                case 'boolean':
-                                case 'bit':
-                                    $attrValue = (integer) $attrValue;
-                                    break;
-                                case 'float':
-                                case 'numeric':
-                                    $attrValue = (float) $attrValue;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            $this->map[$this->className]['fields'][$this->fieldKey]= $attrValue;
-                            $this->map[$this->className]['fieldMeta'][$this->fieldKey]['default']= $attrValue;
-                            break;
-                        case 'null' :
-                            $attrValue = ($attrValue && $attrValue !== 'false' ? true : false);
-                        default :
-                            if ($attrName == 'dbtype') $dbtype = $attrValue;
-                            $this->map[$this->className]['fieldMeta'][$this->fieldKey][$attrName]= $attrValue;
-                            break;
-                    }
-                }
-                break;
-            case 'alias' :
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'key':
-                            $this->aliasKey= "{$attrValue}";
-                            break;
-                        case 'field':
-                            $this->map[$this->className]['fieldAliases'][$this->aliasKey]= $attrValue;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case 'index' :
-                $node= array ();
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'name':
-                            $this->indexName= $attrValue;
-                            break;
-                        case 'primary':
-                        case 'unique':
-                        case 'fulltext':
-                            $attrValue = (empty($attrValue) || $attrValue === 'false' ? false : true);
-                        default:
-                            $node[$attrName] = $attrValue;
-                            break;
-                    }
-                }
-                if ($node) {
-                    $node['columns']= array();
-                    $this->map[$this->className]['indexes'][$this->indexName]= $node;
-                }
-                break;
-            case 'column' :
-                $key = '';
-                $node = array ();
-                while (list($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'key':
-                            $key= $attrValue;
-                            break;
-                        case 'null':
-                            $attrValue = (empty($attrValue) || $attrValue === 'false' ? false : true);
-                        default:
-                            $node[$attrName]= $attrValue;
-                            break;
-                    }
-                }
-                if ($key) {
-                    $this->map[$this->className]['indexes'][$this->indexName]['columns'][$key]= $node;
-                }
-                break;
-            case 'aggregate' :
-                $alias= '';
-                $node= array ();
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'alias' :
-                            $alias= "{$attrValue}";
-                            break;
-                        default :
-                            $node[$attrName]= $attrValue;
-                            break;
-                    }
-                }
-                if ($alias && $node) {
-                    $this->map[$this->className]['aggregates'][$alias]= $node;
-                }
-                break;
-            case 'composite' :
-                $alias= '';
-                $node= array ();
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'alias' :
-                            $alias= "{$attrValue}";
-                            break;
-                        default :
-                            $node[$attrName]= $attrValue;
-                            break;
-                    }
-                }
-                if ($alias && $node) {
-                    $this->map[$this->className]['composites'][$alias]= $node;
-                }
-                break;
-            case 'validation' :
-                $node= array ();
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    $node[$attrName]= $attrValue;
-                }
-                if ($node) {
-                    $node['rules']= array();
-                    $this->map[$this->className]['validation']= $node;
-                }
-                break;
-            case 'rule' :
-                $field= '';
-                $name= '';
-                $node= array ();
-                while (list ($attrName, $attrValue)= each($attributes)) {
-                    switch ($attrName) {
-                        case 'field' :
-                            $field= "{$attrValue}";
-                            break;
-                        case 'name' :
-                            $name= "{$attrValue}";
-                            break;
-                        default :
-                            $node[$attrName]= $attrValue;
-                            break;
-                    }
-                }
-                if ($field && $name && $node) {
-                    $this->map[$this->className]['validation']['rules'][$field][$name]= $node;
-                }
-                break;
-        }
-    }
-
-    /**
-     * Handles the closing of XML tags.
-     *
-     * @access protected
-     */
-    protected function _handleCloseElement(& $parser, & $element) {}
-
-    /**
-     * Handles the XML CDATA tags
-     *
-     * @access protected
-     */
-    protected function _handleCData(& $parser, & $data) {}
-
 
     /**
      * Write the generated class files to the specified path.
