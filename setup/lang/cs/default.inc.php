@@ -6,7 +6,7 @@
  * @package setup
  *
  * @author modxcms.cz
- * @updated 2011-12-29
+ * @updated 2012-02-05
  */
 
 // $_lang['additional_css'] = '';
@@ -244,7 +244,7 @@ $_lang['errors_occurred'] = 'Došlo k chybám při instalaci jádra. Přečtěte
 $_lang['failed'] = 'Chyba!';
 
 // $_lang['fatal_error'] = 'FATAL ERROR: MODX Setup cannot continue.';
-$_lang['fatal_error'] = 'KRYTICKÁ CHYBA: Instalace MODX nemůže pokračovat.';
+$_lang['fatal_error'] = 'KRITICKÁ CHYBA: Instalace MODX nemůže pokračovat.';
 
 // $_lang['home'] = 'Home';
 $_lang['home'] = 'Titulní stránka';

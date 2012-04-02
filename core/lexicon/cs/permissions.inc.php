@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2012-04-01
  */
 // $_lang['perm.about_desc'] = 'The About page.';
 $_lang['perm.about_desc'] = 'Stránka "O MODX Revolution".';
@@ -377,6 +377,9 @@ $_lang['perm.resourcegroup_save_desc'] = 'Ukládání skupin dokumentů.';
 
 // $_lang['perm.resourcegroup_view_desc'] = 'To list Resource Groups.';
 $_lang['perm.resourcegroup_view_desc'] = 'Procházení skupin dokumentů.';
+
+// $_lang['perm.resource_duplicate_desc'] = 'To duplicate a Resource.';
+$_lang['perm.resource_duplicate_desc'] = 'Duplikace dokumentu.';
 
 // $_lang['perm.resource_quick_create_desc'] = 'To be able to use Quick Create Resource in the left-hand tree.';
 $_lang['perm.resource_quick_create_desc'] = 'Možnost rychle vytvořit dokument v levém stromovém menu dokumentů.';
