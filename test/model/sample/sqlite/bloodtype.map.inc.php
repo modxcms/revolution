@@ -3,6 +3,7 @@ $xpdo_meta_map['BloodType']= array (
   'package' => 'sample',
   'version' => '1.1',
   'table' => 'blood_types',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'type' => NULL,

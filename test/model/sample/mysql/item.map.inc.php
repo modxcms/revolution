@@ -3,6 +3,7 @@ $xpdo_meta_map['Item']= array (
   'package' => 'sample',
   'version' => '1.1',
   'table' => 'items',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',
@@ -43,37 +44,6 @@ $xpdo_meta_map['Item']= array (
       'null' => false,
       'default' => 'CURRENT_TIMESTAMP',
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
-    ),
-  ),
-  'indexes' => 
-  array (
-    'name' => 
-    array (
-      'primary' => false,
-      'unique' => true,
-      'columns' => 
-      array (
-        'name' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-    'color' => 
-    array (
-      'primary' => false,
-      'unique' => false,
-      'columns' => 
-      array (
-        'color' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
     ),
   ),
 );

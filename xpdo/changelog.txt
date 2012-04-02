@@ -1,5 +1,11 @@
 This file shows the changes in this release of xPDO.
 
+- Refactor aggregate/composite criteria support for targeting local/foreign
+- Fix xPDOObject::_loadInstance for proper loading of graph objects
+- Refactor schema parsing using SimpleXML
+- Fix related_object installation in xPDOObjectVehicle
+- Add criteria support to aggregates and composites
+
 xPDO 2.2.3-pl (March 15, 2012)
 ====================================
 - Add xPDOScriptVehicle for manifest-based PHP scripts
