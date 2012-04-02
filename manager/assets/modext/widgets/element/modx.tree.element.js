@@ -64,6 +64,15 @@ MODx.tree.Element = function(config) {
             }
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
+        },{
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('new_category')}
+            ,handler: function() {
+                this.createCategory(null,{target: this.getEl()});
+            }
+            ,scope: this
+            ,hidden: MODx.perm.new_category ? false : true
         }]
     });
     MODx.tree.Element.superclass.constructor.call(this,config);
@@ -76,7 +85,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
     ,createCategory: function(n,e) {
         var r = {};
-        if (this.cm.activeNode.attributes.data) {
+        if (this.cm.activeNode && this.cm.activeNode.attributes.data) {
             r['parent'] = this.cm.activeNode.attributes.data.id;
         }
 
