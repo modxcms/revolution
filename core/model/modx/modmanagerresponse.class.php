@@ -53,12 +53,14 @@ class modManagerResponse extends modResponse {
             $this->action['namespace'] = 'core';
             $this->action['namespace_name'] = 'core';
             $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
             $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/login';
         } else if (!$this->modx->hasPermission('frames')) {
             $this->action['namespace'] = 'core';
             $this->action['namespace_name'] = 'core';
             $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
             $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/logout';
         }
@@ -73,37 +75,39 @@ class modManagerResponse extends modResponse {
             $paths = $this->getNamespacePath($theme);
             $f = $this->action['controller'];
             $className = $this->getControllerClassName();
-            $classFile = strtolower($f).'.class.php';
+            if (!class_exists($className)) {
+                $classFile = strtolower($f).'.class.php';
 
-            foreach ($paths as $controllersPath) {
-                if (!file_exists($controllersPath.$classFile)) {
-                    if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
-                        $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                foreach ($paths as $controllersPath) {
+                    if (!file_exists($controllersPath.$classFile)) {
+                        if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
+                            $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                        }
+                    } else {
+                        $classPath = $controllersPath.$classFile;
+                        break;
                     }
-                } else {
-                    $classPath = $controllersPath.$classFile;
-                    break;
                 }
-            }
 
-            /* handle Revo <2.2 controllers */
-            if (empty($classPath)) {
-                $className = 'modManagerControllerDeprecated';
-                $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
-            }
-
-            if (!file_exists($classPath)) {
-                if (file_exists(strtolower($f).'/index.class.php')) {
-                    $classPath = strtolower($f).'/index.class.php';
-                } else { /* handle Revo <2.2 controllers */
+                /* handle Revo <2.2 controllers */
+                if (empty($classPath)) {
                     $className = 'modManagerControllerDeprecated';
                     $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
                 }
-            }
 
-            ob_start();
-            require_once $classPath;
-            ob_end_clean();
+                if (!file_exists($classPath)) {
+                    if (file_exists(strtolower($f).'/index.class.php')) {
+                        $classPath = strtolower($f).'/index.class.php';
+                    } else { /* handle Revo <2.2 controllers */
+                        $className = 'modManagerControllerDeprecated';
+                        $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+                    }
+                }
+
+                ob_start();
+                require_once $classPath;
+                ob_end_clean();
+            }
             try {
                 $c = new $className($this->modx,$this->action);
                 /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */

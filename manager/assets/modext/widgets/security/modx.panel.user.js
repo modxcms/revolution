@@ -168,6 +168,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     'afterRemoveRow':{fn:this.markDirty,scope:this}
                     ,'afterUpdateRole':{fn:this.markDirty,scope:this}
                     ,'afterAddGroup':{fn:this.markDirty,scope:this}
+                    ,'afterReorderGroup':{fn:this.markDirty,scope:this}
                 }
             }]
         });
@@ -394,6 +395,15 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'xcheckbox'
                     ,inputValue: 1
                 },{
+                    id: 'modx-user-sudo'
+                    ,name: 'sudo'
+                    ,hideLabel: true
+                    ,boxLabel: _('user_sudo')
+                    ,description: _('user_sudo_desc')
+                    ,xtype: 'xcheckbox'
+                    ,inputValue: 1
+                    ,value: 0
+                },{
                     id: 'modx-user-blocked'
                     ,name: 'blocked'
                     ,hideLabel: true
@@ -470,9 +480,11 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,listeners: {
                         'expand': {fn:function(p) {
                             Ext.getCmp('modx-user-newpassword').setValue(true);
+                            this.markDirty();
                         },scope:this}
                         ,'collapse': {fn:function(p) {
                             Ext.getCmp('modx-user-newpassword').setValue(false);
+                            this.markDirty();
                         },scope:this}
                     }
                     ,items: [{

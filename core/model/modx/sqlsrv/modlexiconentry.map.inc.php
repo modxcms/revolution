@@ -7,6 +7,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'lexicon_entries',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',

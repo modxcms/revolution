@@ -11,7 +11,7 @@ MODx.tree.Directory = function(config) {
     config.id = config.id || Ext.id();
     Ext.applyIf(config,{
         rootVisible: true
-        ,rootName: _('files')
+        ,rootName: _('media')
         ,rootId: '/'
         ,title: _('files')
         ,ddAppendOnly: false
@@ -19,6 +19,7 @@ MODx.tree.Directory = function(config) {
         ,enableDrop: true
         ,ddGroup: 'modx-treedrop-dd'
         ,url: MODx.config.connectors_url+'browser/directory.php'
+        ,hideSourceCombo: false
         ,baseParams: {
             hideFiles: config.hideFiles || false
             ,wctx: MODx.ctx || 'web'
@@ -58,7 +59,6 @@ MODx.tree.Directory = function(config) {
             ,scope: this
             ,hidden: MODx.perm.file_manager && !MODx.browserOpen ? false : true
         }]
-        ,source: 1
         ,tbarCfg: {
             id: config.id+'-tbar'
         }
@@ -81,6 +81,11 @@ MODx.tree.Directory = function(config) {
         this.addSourceToolbar();
     },this);
     this.addSourceToolbar();
+    this.on('show',function() {
+        if (!this.config.hideSourceCombo) {
+            try { this.sourceCombo.show(); } catch (e) {}
+        }
+    },this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
@@ -95,17 +100,21 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,autoHeight: true
             ,width: '100%'
         });
-        var cb = MODx.load({
+        this.sourceCombo = MODx.load({
             xtype: 'modx-combo-source'
             ,ctCls: 'modx-leftbar-second-tb'
-            ,value: MODx.config.default_media_source
+            ,value: this.config.source || MODx.config.default_media_source 
             ,width: Ext.getCmp(this.config.id).getWidth() - 12
             ,listeners: {
                 'select':{fn:this.changeSource,scope:this}
             }
         });
-        tb.add(cb);
-        tb.doLayout();
+        tb.add(this.sourceCombo);
+        if (this.config.hideSourceCombo) {
+            try { this.sourceCombo.hide(); } catch (e) {}
+        } else {
+            tb.doLayout();
+        }
         this.searchBar = tb;
     }
     ,changeSource: function(sel) {

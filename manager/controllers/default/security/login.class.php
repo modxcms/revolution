@@ -8,6 +8,11 @@
 class SecurityLoginManagerController extends modManagerController {
     public $loadHeader = false;
     public $loadFooter = false;
+
+    public function initialize() {
+        $this->handleLanguageChange();
+        return true;
+    }
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -48,6 +53,40 @@ class SecurityLoginManagerController extends modManagerController {
         $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
         $eventInfo= str_replace('\'','\\\'',$eventInfo);
         $this->setPlaceholder('onManagerLoginFormRender', $eventInfo);
+    }
+
+    /**
+     * Set the cultureKey for the login page and get the list of languages
+     * @return string The loaded cultureKey
+     */
+    public function handleLanguageChange() {
+        $cultureKey = $this->modx->getOption('cultureKey',$_REQUEST,'en');
+        if ($cultureKey) {
+            $cultureKey = $this->modx->sanitizeString($cultureKey);
+            $this->modx->setOption('cultureKey',$cultureKey);
+            $this->modx->setOption('manager_language',$cultureKey);
+        }
+        $this->setPlaceholder('cultureKey',$cultureKey);
+
+
+        $languages = $this->modx->lexicon->getLanguageList('core');
+
+        $list = array();
+        foreach ($languages as $language) {
+            $selected = $language == $cultureKey ? ' selected="selected"' : '';
+            $list[] = '<option value="'.$language.'"'.$selected.'>'.$language.'</option>';
+        }
+        $this->setPlaceholder('languages',implode("\n",$list));
+
+        $this->modx->lexicon->load('login');
+        $languageString = $this->modx->lexicon('login_language');
+        if (empty($languageString) || strcmp($languageString,'login_language') == 0) {
+            $this->modx->lexicon->load('en:core:login');
+            $languageString = $this->modx->lexicon('login_language',array(),'en');
+        }
+        $this->setPlaceholder('language_str',$languageString);
+
+        return $cultureKey;
     }
 
     public function checkForAllowManagerForgotPassword() {
@@ -197,7 +236,9 @@ class SecurityLoginManagerController extends modManagerController {
             $placeholders['hash'] = $activationHash;
             $placeholders['password'] = $newPassword;
             foreach ($placeholders as $k => $v) {
-                $message = str_replace('[[+'.$k.']]',$v,$message);
+                if (is_string($v)) {
+                    $message = str_replace('[[+'.$k.']]',$v,$message);
+                }
             }
 
             $this->modx->getService('mail', 'mail.modPHPMailer');

@@ -35,6 +35,32 @@ MODx.grid.Package = function(config) {
     cols.push({ header: _('release') ,dataIndex: 'release', id: 'meta-col', fixed:true, width:90 });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
     cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
+
+    var dlbtn;
+    if (MODx.curlEnabled) {
+        dlbtn = {
+            text: _('download_extras')
+			,xtype: 'splitbutton'
+            ,handler: this.onDownloadMoreExtra
+			,menu: {
+				items:[{
+					text: _('provider_select')
+					,handler: this.changeProvider
+					,scope: this
+				},{
+					text: _('package_search_local_title')
+					,handler: this.searchLocal
+					,scope: this
+				}]
+			}
+        };
+    } else {
+        dlbtn = {
+            text: _('package_search_local_title')
+            ,handler: this.searchLocal
+            ,scope: this
+        };
+    }
     
     Ext.applyIf(config,{
         title: _('packages')
@@ -49,23 +75,7 @@ MODx.grid.Package = function(config) {
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true
-        ,tbar: [{
-            text: _('download_extras')
-			,xtype: 'splitbutton'
-            ,handler: this.onDownloadMoreExtra
-            ,disabled: MODx.curlEnabled ? false : true
-			,menu: {
-				items:[{
-					text: _('provider_select')
-					,handler: this.changeProvider
-					,scope: this
-				},{
-					text: _('package_search_local_title')
-					,handler: this.searchLocal
-					,scope: this
-				}]
-			}
-        },'->',{
+        ,tbar: [dlbtn,'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-package-search'
@@ -75,10 +85,7 @@ MODx.grid.Package = function(config) {
                 ,'render': {fn: function(pnl) {
                     new Ext.KeyMap(pnl.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: pnl
                     });
                 },scope:this}

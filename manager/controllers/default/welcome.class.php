@@ -61,30 +61,9 @@ Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });
         
         $this->checkForWelcomeScreen();
 
-        $this->dashboard = $this->getDashboard();
+        $this->dashboard = $this->modx->user->getDashboard();
         $placeholders['dashboard'] = $this->dashboard->render($this);
         return $placeholders;
-    }
-
-    /**
-     * Get the active Dashboard for the User
-     * @return modDashboard|null
-     */
-    public function getDashboard() {
-        $this->modx->loadClass('modDashboard');
-
-        /** @var modUserGroup $userGroup */
-        $userGroup = $this->modx->user->getOne('PrimaryGroup');
-        if ($userGroup) {
-            /** @var modDashboard $dashboard */
-            $dashboard = $userGroup->getOne('Dashboard');
-            if (empty($dashboard)) {
-                $dashboard = modDashboard::getDefaultDashboard($this->modx);
-            }
-        } else {
-            $dashboard = modDashboard::getDefaultDashboard($this->modx);
-        }
-        return $dashboard;
     }
 
     /**

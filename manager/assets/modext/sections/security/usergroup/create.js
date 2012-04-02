@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-user-group-create' });
-});
-
 /**
  * Loads the usergroup create page
  * 
@@ -38,6 +34,7 @@ MODx.page.CreateUserGroup = function(config) {
         }]
         ,components: [{
             xtype: 'modx-panel-user-group'
+            ,record: config.record || {}
             ,renderTo: 'modx-panel-user-group-div'
         }]
     });

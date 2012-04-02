@@ -52,10 +52,7 @@ MODx.grid.SettingsGrid = function(config) {
             ,'render': {fn: function(cmp) {
                 new Ext.KeyMap(cmp.getEl(), {
                     key: Ext.EventObject.ENTER
-                    ,fn: function() {
-                        this.fireEvent('change',this.getValue());
-                        this.blur();
-                        return true;}
+                    ,fn: this.blur
                     ,scope: cmp
                 });
             },scope:this}
@@ -75,13 +72,13 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'name_trans'
             ,sortable: true
             ,editable: false
-            ,width: 150
+            ,width: 175
         },{
             header: _('key')
             ,dataIndex: 'key'
             ,sortable: true
             ,editable: false
-            ,width: 125
+            ,width: 150
         },{
             header: _('value')
             ,dataIndex: 'value'
@@ -94,7 +91,7 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'editedon'
             ,sortable: true
             ,editable: false
-            ,width: 125
+            ,width: 100
         },{
             header: _('area')
             ,dataIndex: 'area_text'
@@ -424,6 +421,7 @@ MODx.window.CreateSetting = function(config) {
             ,id: 'modx-cs-value'
             ,anchor: '100%'
         }]
+        ,keys: []
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
     this.on('show',function() {this.reset();},this);
@@ -579,6 +577,7 @@ MODx.window.UpdateSetting = function(config) {
             ,id: 'modx-'+this.ident+'-value'
             ,anchor: '100%'
         }]
+        ,keys: []
     });
     MODx.window.UpdateSetting.superclass.constructor.call(this,config);
 };

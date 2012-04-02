@@ -82,6 +82,10 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,scope: this
             ,handler: this.createPolicyTemplate
         },'-',{
+            text: _('import')
+            ,scope: this
+            ,handler: this.importPolicyTemplate
+        },'-',{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('policy_remove_multiple')
@@ -108,16 +112,11 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear'
+            ,id: 'modx-sacpoltemp-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }
-        }]
-        ,pagingItems: ['-',{
-            text: _('import')
-            ,scope: this
-            ,handler: this.importPolicyTemplate
         }]
     });
     MODx.grid.AccessPolicyTemplate.superclass.constructor.call(this,config);
@@ -280,7 +279,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'
@@ -291,7 +290,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,name: 'template_group'
             ,id: 'modx-'+this.ident+'-template-group'
             ,xtype: 'modx-combo-access-policy-template-group'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,value: 1
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -303,7 +302,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,height: 50
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -311,6 +310,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,html: _('policy_template_desc_description')
             ,cls: 'desc-under'
         }]
+        ,keys: []
     });
     MODx.window.CreateAccessPolicyTemplate.superclass.constructor.call(this,config);
 };

@@ -209,3 +209,16 @@ label { cursor: pointer; }
 .x-panel-mc {
     padding: 10px 0;
 }
+
+#modx-login-language-select-div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 4px;
+    color: #888;
+}
+#modx-login-language-select {
+    border: 1px solid #aaa;
+    background: #eee;
+    position: relative;
+}

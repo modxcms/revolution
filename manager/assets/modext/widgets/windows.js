@@ -1,6 +1,6 @@
-/** 
+/**
  * Generates the Duplicate Resource window.
- *  
+ *
  * @class MODx.window.DuplicateResource
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -142,21 +142,42 @@ MODx.window.CreateNamespace = function(config) {
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
+            ,description: MODx.expandHelp ? '' : _('namespace_name_desc')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,anchor: '100%'
             ,maxLength: 100
+
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-name'
+            ,html: _('namespace_name_desc')
+            ,cls: 'desc-under'
+
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('path')
+            ,fieldLabel: _('namespace_path')
             ,description: MODx.expandHelp ? '' : _('namespace_path_desc')
             ,name: 'path'
             ,id: 'modx-'+this.ident+'-path'
             ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-name'
+            ,forId: 'modx-'+this.ident+'-path'
             ,html: _('namespace_path_desc')
+            ,cls: 'desc-under'
+
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('namespace_assets_path')
+            ,description: MODx.expandHelp ? '' : _('namespace_assets_path_desc')
+            ,name: 'assets_path'
+            ,id: 'modx-'+this.ident+'-assets-path'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-assets-path'
+            ,html: _('namespace_assets_path_desc')
             ,cls: 'desc-under'
         }]
     });
@@ -260,7 +281,7 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -321,7 +342,8 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -373,7 +395,8 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -444,7 +467,8 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -497,7 +521,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
-            ,growMax: 380
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -576,7 +600,8 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -645,7 +670,8 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,anchor: '100%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -746,7 +772,8 @@ MODx.window.QuickCreateTV = function(config) {
                     ,name: 'default_text'
                     ,id: 'modx-'+this.ident+'-default-text'
                     ,anchor: '100%'
-                    ,grow: true ,growMax: 380
+                    ,grow: true
+                    ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
                 },{
                     xtype: 'label'
                     ,forId: 'modx-'+this.ident+'-default-text'
@@ -844,7 +871,8 @@ MODx.window.QuickUpdateTV = function(config) {
                     ,name: 'default_text'
                     ,id: 'modx-'+this.ident+'-default-text'
                     ,anchor: '100%'
-                    ,grow: true ,growMax: 380
+                    ,grow: true
+                    ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
                 },{
                     xtype: 'label'
                     ,forId: 'modx-'+this.ident+'-default-text'
@@ -896,7 +924,7 @@ MODx.window.DuplicateContext = function(config) {
         title: _('context_duplicate')
         ,id: this.ident
         ,url: MODx.config.connectors_url+'context/index.php'
-        ,action: 'duplicate'        
+        ,action: 'duplicate'
         ,width: 400
         ,fields: [{
             xtype: 'statictextfield'

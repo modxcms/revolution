@@ -97,10 +97,7 @@ MODx.grid.Sources = function(config) {
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: cmp
                     });
                 },scope:this}
@@ -261,6 +258,7 @@ MODx.window.CreateSource = function(config) {
             ,anchor: '100%'
             ,allowBlank: false
         }]
+        ,keys: []
     });
     MODx.window.CreateSource.superclass.constructor.call(this,config);
 };
@@ -271,7 +269,6 @@ Ext.reg('modx-window-source-create',MODx.window.CreateSource);
 MODx.grid.SourceTypes = function(config) {
     config = config || {};
 
-    this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'source/type.php'
         ,fields: ['class','name','description']
@@ -283,13 +280,11 @@ MODx.grid.SourceTypes = function(config) {
             ,dataIndex: 'name'
             ,width: 150
             ,sortable: true
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
-            ,editor: { xtype: 'textarea' }
         }]
         ,tbar: [/*{
             text: _('source_type_create')

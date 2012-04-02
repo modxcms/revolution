@@ -7,6 +7,7 @@ $xpdo_meta_map['modSession']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'session',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'id' => '',
@@ -28,7 +29,7 @@ $xpdo_meta_map['modSession']= array (
     array (
       'dbtype' => 'bigint',
       'phptype' => 'timestamp',
-      'null' => true,
+      'null' => false,
     ),
     'data' => 
     array (
@@ -48,6 +49,22 @@ $xpdo_meta_map['modSession']= array (
       'columns' => 
       array (
         'id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'access' => 
+    array (
+      'alias' => 'access',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'access' => 
         array (
           'length' => '',
           'collation' => 'A',

@@ -46,143 +46,155 @@ class modCacheManager extends xPDOCacheManager {
      * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
      *
      * @param string $key The modContext key to be cached.
-     * @param array $options Options for system settings generation.
+     * @param array $options Options for context settings generation.
      * @return array An array containing all the context variable values.
      */
     public function generateContext($key, array $options = array()) {
         $results = array();
-        /** @var modContext $obj */
-        $obj= $this->modx->getObject('modContext', $key, true);
-        if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
-            $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
-            $contextConfig= $this->modx->_systemConfig;
+        if (!$this->getOption('transient_context', $options, false)) {
+            /** @var modContext $obj */
+            $obj= $this->modx->getObject('modContext', $key, true);
+            if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
+                $cacheKey = $obj->getCacheKey();
+                $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
+                $contextConfig= array_merge($this->modx->_systemConfig, $options);
 
-            /* generate the ContextSettings */
-            $results['config']= array();
-            if ($settings= $obj->getMany('ContextSettings')) {
-                /** @var modContextSetting $setting */
-                foreach ($settings as $setting) {
-                    $k= $setting->get('key');
-                    $v= $setting->get('value');
-                    $matches = array();
-                    if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
-                        foreach ($matches as $match) {
-                            if (array_key_exists("{$match[1]}", $contextConfig)) {
-                                $matchValue= $contextConfig["{$match[1]}"];
-                            } else {
-                                $matchValue= '';
+                /* generate the ContextSettings */
+                $results['config']= array();
+                if ($settings= $obj->getMany('ContextSettings')) {
+                    /** @var modContextSetting $setting */
+                    foreach ($settings as $setting) {
+                        $k= $setting->get('key');
+                        $v= $setting->get('value');
+                        $matches = array();
+                        if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
+                            foreach ($matches as $match) {
+                                if (array_key_exists("{$match[1]}", $contextConfig)) {
+                                    $matchValue= $contextConfig["{$match[1]}"];
+                                } else {
+                                    $matchValue= '';
+                                }
+                                $v= str_replace($match[0], $matchValue, $v);
                             }
-                            $v= str_replace($match[0], $matchValue, $v);
+                        }
+                        $results['config'][$k]= $v;
+                        $contextConfig[$k]= $v;
+                    }
+                }
+                $results['config'] = array_merge($results['config'], $options);
+
+                /* generate the aliasMap and resourceMap */
+                $tblResource= $this->modx->getTableName('modResource');
+                $tblContextResource= $this->modx->getTableName('modContextResource');
+                $resourceFields= array('id','parent','uri');
+                $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
+                $bindings= array (
+                    ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
+                    ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
+                );
+                $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}, r.menuindex ORDER BY r.parent ASC, r.menuindex ASC";
+                $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
+                $collResources = null;
+                if ($criteria->stmt && $criteria->stmt->execute()) {
+                    $collResources= & $criteria->stmt;
+                }
+                $results['resourceMap']= array ();
+                $results['aliasMap']= array ();
+                if ($collResources) {
+                    /** @var Object $r */
+                    while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
+                        $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
+                        if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {
+                            if (array_key_exists($r->uri, $results['aliasMap'])) {
+                                $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
+                                continue;
+                            }
+                            $results['aliasMap'][$r->uri]= $r->id;
                         }
                     }
-                    $results['config'][$k]= $v;
-                    $contextConfig[$k]= $v;
                 }
-            }
 
-            /* generate the aliasMap and resourceMap */
-            $tblResource= $this->modx->getTableName('modResource');
-            $tblContextResource= $this->modx->getTableName('modContextResource');
-            $resourceFields= array('id','parent','uri');
-            $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
-            $bindings= array (
-                ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-                ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-            );
-            $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}, r.menuindex ORDER BY r.parent ASC, r.menuindex ASC";
-            $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
-            $collResources = null;
-            if ($criteria->stmt && $criteria->stmt->execute()) {
-                $collResources= & $criteria->stmt;
-            }
-            $results['resourceMap']= array ();
-            $results['aliasMap']= array ();
-            if ($collResources) {
-                /** @var Object $r */
-                while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
-                    $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
-                    if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {
-                        if (array_key_exists($r->uri, $results['aliasMap'])) {
-                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
-                            continue;
+                /* generate the webLinkMap */
+                $resourceFields= array('id','content');
+                $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
+                $bindings= array (
+                    ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
+                    ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
+                );
+                $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND r.class_key = 'modWebLink' AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}";
+                $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
+                $collWebLinks = null;
+                if ($criteria->stmt && $criteria->stmt->execute()) {
+                    $collWebLinks= & $criteria->stmt;
+                }
+                $results['webLinkMap']= array();
+                if ($collWebLinks) {
+                    while ($wl = $collWebLinks->fetch(PDO::FETCH_OBJ)) {
+                        $results['webLinkMap'][$wl->id] = $wl->content;
+                    }
+                }
+
+                /* generate the eventMap and pluginCache */
+                $results['eventMap'] = array();
+                $results['pluginCache'] = array();
+                $eventMap= $this->modx->getEventMap($obj->get('key'));
+                if (is_array ($eventMap) && !empty($eventMap)) {
+                    $results['eventMap'] = $eventMap;
+                    $pluginIds= array();
+                    $plugins= array();
+                    $this->modx->loadClass('modScript');
+                    foreach ($eventMap as $pluginKeys) {
+                        foreach ($pluginKeys as $pluginKey) {
+                            if (isset ($pluginIds[$pluginKey])) {
+                                continue;
+                            }
+                            $pluginIds[$pluginKey]= $pluginKey;
                         }
-                        $results['aliasMap'][$r->uri]= $r->id;
                     }
-                }
-            }
-
-            /* generate the webLinkMap */
-            $resourceFields= array('id','content');
-            $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
-            $bindings= array (
-                ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-                ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-            );
-            $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND r.class_key = 'modWebLink' AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}";
-            $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
-            $collWebLinks = null;
-            if ($criteria->stmt && $criteria->stmt->execute()) {
-                $collWebLinks= & $criteria->stmt;
-            }
-            $results['webLinkMap']= array();
-            if ($collWebLinks) {
-                while ($wl = $collWebLinks->fetch(PDO::FETCH_OBJ)) {
-                    $results['webLinkMap'][$wl->id] = $wl->content;
-                }
-            }
-
-            /* generate the eventMap and pluginCache */
-            $results['eventMap'] = array();
-            $results['pluginCache'] = array();
-            $eventMap= $this->modx->getEventMap($obj->get('key'));
-            if (is_array ($eventMap) && !empty($eventMap)) {
-                $results['eventMap'] = $eventMap;
-                $pluginIds= array();
-                $plugins= array();
-                $this->modx->loadClass('modScript');
-                foreach ($eventMap as $pluginKeys) {
-                    foreach ($pluginKeys as $pluginKey) {
-                        if (isset ($pluginIds[$pluginKey])) {
-                            continue;
+                    if (!empty($pluginIds)) {
+                        $pluginQuery = $this->modx->newQuery('modPlugin', array('id:IN' => array_keys($pluginIds)), true);
+                        $pluginQuery->select($this->modx->getSelectColumns('modPlugin', 'modPlugin'));
+                        if ($pluginQuery->prepare() && $pluginQuery->stmt->execute()) {
+                            $plugins= $pluginQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
                         }
-                        $pluginIds[$pluginKey]= $pluginKey;
+                    }
+                    if (!empty($plugins)) {
+                        foreach ($plugins as $plugin) {
+                            $results['pluginCache'][(string) $plugin['id']]= $plugin;
+                        }
                     }
                 }
-                if (!empty($pluginIds)) {
-                    $pluginQuery = $this->modx->newQuery('modPlugin', array('id:IN' => array_keys($pluginIds)), true);
-                    $pluginQuery->select($this->modx->getSelectColumns('modPlugin', 'modPlugin'));
-                    if ($pluginQuery->prepare() && $pluginQuery->stmt->execute()) {
-                        $plugins= $pluginQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
-                    }
-                }
-                if (!empty($plugins)) {
-                    foreach ($plugins as $plugin) {
-                        $results['pluginCache'][(string) $plugin['id']]= $plugin;
-                    }
-                }
+
+                /* cache the Context ACL policies */
+                $results['policies'] = $obj->findPolicy($contextKey);
             }
-
-            /* cache the Context ACL policies */
-            $results['policies'] = $obj->findPolicy($contextKey);
-
-            if ($this->getOption('cache_context_settings', $options, true)) {
-                $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
-                $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-                $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_context_settings_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-                $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_context_settings_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-                $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_context_settings_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-                $lifetime = (integer) $this->getOption('cache_context_settings_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
-                if (!$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
-                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $obj->get('key') . '.');
-                }
+        } else {
+            $results = $this->getOption("{$key}_results", $options, array());
+            $cacheKey = "{$key}/context";
+            $options['cache_context_settings'] = array_key_exists('cache_context_settings', $results) ? (boolean) $results : false;
+        }
+        if ($this->getOption('cache_context_settings', $options, true) && is_array($results) && !empty($results)) {
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_context_settings_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_context_settings_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_context_settings_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+            $lifetime = (integer) $this->getOption('cache_context_settings_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            if (!$this->set($cacheKey, $results, $lifetime, $options)) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $key . '.');
             }
         }
         return $results;
     }
 
     public function getElementMediaSourceCache(modElement $element,$contextKey, array $options = array()) {
+        $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
+        $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+        $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+        $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
+        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
         $cacheKey = $contextKey.'/source';
-        $sourceCache = $this->get($cacheKey);
+        $sourceCache = $this->get($cacheKey, $options);
         if (empty($sourceCache)) {
             $c = $this->modx->newQuery('sources.modMediaSourceElement');
             $c->innerJoin('sources.modMediaSource','Source');
@@ -215,11 +227,6 @@ class modCacheManager extends xPDOCacheManager {
                 $sourceArray['object'] = $source->get('object');
                 $sourceCache[$sourceArray['object']] = $sourceArray;
             }
-            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
-            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
             $lifetime = (integer) $this->getOption('cache_media_sources_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $sourceCache, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache source data for ' . $element->get('id') . '.');
@@ -377,7 +384,7 @@ class modCacheManager extends xPDOCacheManager {
         $c = $this->modx->newQuery('modAction');
         $c->select(array(
             $this->modx->getSelectColumns('modAction', 'modAction'),
-            $this->modx->getSelectColumns('modNamespace', 'Namespace', 'namespace_', array('name','path'))
+            $this->modx->getSelectColumns('modNamespace', 'Namespace', 'namespace_', array('name','path','assets_path'))
         ));
         $c->innerJoin('modNamespace','Namespace');
         $c->sortby('namespace','ASC');
@@ -393,15 +400,7 @@ class modCacheManager extends xPDOCacheManager {
                 if ($action['namespace_name'] != 'core') {
                     $nsPath = $action['namespace_path'];
                     if (!empty($nsPath)) {
-                        $nsPath = str_replace(array(
-                            '{core_path}',
-                            '{base_path}',
-                            '{assets_path}',
-                        ),array(
-                            $this->modx->getOption('core_path'),
-                            $this->modx->getOption('base_path'),
-                            $this->modx->getOption('assets_path'),
-                        ),$nsPath);
+                        $nsPath = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$nsPath));
                         $action['namespace_path'] = $nsPath;
                     }
                 }

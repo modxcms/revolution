@@ -7,6 +7,7 @@ $xpdo_meta_map['modFormCustomizationProfileUserGroup']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'fc_profiles_usergroups',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'usergroup' => 0,

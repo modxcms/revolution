@@ -79,6 +79,10 @@ MODx.grid.AccessPolicy = function(config) {
             ,scope: this
             ,handler: this.createPolicy
         },'-',{
+            text: _('import')
+            ,scope: this
+            ,handler: this.importPolicy
+        },'-',{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('policy_remove_multiple')
@@ -105,16 +109,11 @@ MODx.grid.AccessPolicy = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear'
+            ,id: 'modx-sacpol-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }
-        }]
-        ,pagingItems: ['-',{
-            text: _('import')
-            ,scope: this
-            ,handler: this.importPolicy
         }]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
@@ -276,7 +275,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'
@@ -289,7 +288,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,hiddenName: 'template'
             ,id: 'modx-'+this.ident+'-template'
             ,xtype: 'modx-combo-access-policy-template'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-template'
@@ -301,7 +300,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,height: 50
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -317,6 +316,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,id: 'modx-'+this.ident+'-id'
             ,xtype: 'hidden'
         }]
+        ,keys: []
     });
     MODx.window.CreateAccessPolicy.superclass.constructor.call(this,config);
 };

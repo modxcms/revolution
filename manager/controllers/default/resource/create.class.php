@@ -104,13 +104,16 @@ class ResourceCreateManagerController extends ResourceManagerController {
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = array();
-            $this->resourceArray['resource_groups'] = $this->modx->fromJSON($this->resourceArray['resource_groups']);
-            foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
-                $this->resourceArray['resourceGroups'][] = array(
-                    $resourceGroup['id'],
-                    $resourceGroup['name'],
-                    $resourceGroup['access'],
-                );
+            $this->resourceArray['syncsite'] = true;
+            $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups']) ? $this->resourceArray['resource_groups'] : $this->modx->fromJSON($this->resourceArray['resource_groups']);
+            if (is_array($this->resourceArray['resource_groups'])) {
+                foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
+                    $this->resourceArray['resourceGroups'][] = array(
+                        $resourceGroup['id'],
+                        $resourceGroup['name'],
+                        $resourceGroup['access'],
+                    );
+                }
             }
             unset($this->resourceArray['resource_groups']);
             $this->resource->set('template', $reloadData['template']);
@@ -129,10 +132,12 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = isset($this->resourceArray['cacheable']) && intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = isset($this->resourceArray['deleted']) && intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = isset($this->resourceArray['uri_override']) && intval($this->resourceArray['uri_override']) == 1 ? true : false;
+        $this->resourceArray['syncsite'] = isset($this->resourceArray['syncsite']) && intval($this->resourceArray['syncsite']) == 1 ? true : false;
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
             } else {
+                /** @var modResource $overriddenParent */
                 $overriddenParent = $this->modx->getObject('modResource',$this->resourceArray['parent']);
                 if ($overriddenParent) {
                     $this->resourceArray['parent_pagetitle'] = $overriddenParent->get('pagetitle');

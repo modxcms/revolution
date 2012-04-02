@@ -353,6 +353,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'type' => $elementIdentifier,
                 'elementType' => $elementType,
                 'classKey' => $elementClassKey,
+                'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
             );
         }
@@ -468,6 +469,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'type' => $map[1],
                 'elementType' => $elementType,
                 'classKey' => $elementClassKey,
+                'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
             );
         }

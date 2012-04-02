@@ -82,6 +82,7 @@ hr {
 #modx-leftbar .x-tab-strip-active{
     background-color: #fbfbfb !important;
     border-color: #999 !important;
+    filter: none;
 }
 
 #modx-leftbar ul.x-tab-strip-top span.x-tab-strip-text{}
@@ -466,6 +467,7 @@ textarea.x-form-field {
 .rightlogin {
     float: right;
 }
+.rightlogin .modx-user-profile,
 .rightlogin a {
     color: #888;
     text-decoration: none;
@@ -474,6 +476,7 @@ textarea.x-form-field {
     margin: 10px 10px 0 0;
     float: left;
 }
+.rightlogin .modx-user-profile:hover,
 .rightlogin a:hover {
     color: #ddd;
 }
@@ -1056,6 +1059,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 .x-superboxselect-item-close:hover, .x-superboxselect-item-close:active  { background-position: left -12px;}
 .x-superboxselect-item-focus .x-superboxselect-item-close{ background-position: left -24px}
 .x-item-disabled .x-superboxselect-item-close{ background-position: left -36px}
+.x-superboxselect-ct .x-form-field-wrap,
+.ext-strict .x-superboxselect-ct .x-form-field-trigger-wrap .x-form-text,
+.x-superboxselect-ct .x-superboxselect { height: auto !important; }
 
 /* other */
 .modx-tree-load-msg {
@@ -1694,8 +1700,12 @@ span.required {
     padding: 10px 5px 35px;
 }
 .x-grid3-cell-inner.x-grid3-col-main h3{
-	font-size: 16px;
-    margin: 0 0 2px;
+	font-family: arial,Helvetica,sans-serif;
+	font-size: 20px;
+	letter-spacing: -1px;
+	color: #555555;
+	line-height: 1;
+    margin: 0 0 2px;	
 }
 .x-grid3-cell-inner.x-grid3-col-main  .not-installed{
 	color: #999999;

@@ -611,6 +611,15 @@ $settings['forgot_login_email']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['form_customization_use_all_groups']= $xpdo->newObject('modSystemSetting');
+$settings['form_customization_use_all_groups']->fromArray(array (
+  'key' => 'form_customization_use_all_groups',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['forward_merge_excludes']= $xpdo->newObject('modSystemSetting');
 $settings['forward_merge_excludes']->fromArray(array (
   'key' => 'forward_merge_excludes',
@@ -789,6 +798,15 @@ $settings['link_tag_scheme']->fromArray(array (
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'site',
+  'editedon' => null,
+), '', true, true);
+$settings['lock_ttl']= $xpdo->newObject('modSystemSetting');
+$settings['lock_ttl']->fromArray(array (
+  'key' => 'lock_ttl',
+  'value' => 360,
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
   'editedon' => null,
 ), '', true, true);
 $settings['mail_charset']= $xpdo->newObject('modSystemSetting');
@@ -1020,6 +1038,15 @@ $settings['manager_theme']= $xpdo->newObject('modSystemSetting');
 $settings['manager_theme']->fromArray(array (
   'key' => 'manager_theme',
   'value' => 'default',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_default_sort']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_default_sort']->fromArray(array (
+  'key' => 'modx_browser_default_sort',
+  'value' => 'name',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1652,7 +1679,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,xls,txt,ppt,pptx,docx,xlsx,jpg,jpeg,png,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,docx,pptx,xlsx',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',

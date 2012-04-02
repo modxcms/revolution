@@ -47,6 +47,17 @@
 
         <aggregate alias="Policy" class="modAccessPolicy" local="policy" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Principal" class="modPrincipal" local="principal" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="GroupPrincipal" class="modUserGroup" local="principal" foreign="id" owner="foreign" cardinality="one">
+            <criteria target="local"><![CDATA[
+            {"principal_class":"modUserGroup"}
+            ]]></criteria>
+        </aggregate>
+        <aggregate alias="UserPrincipal" class="modUserGroup" local="principal" foreign="id" owner="foreign" cardinality="one">
+            <criteria target="local"><![CDATA[
+            {"principal_class":"modUser"}
+            ]]></criteria>
+        </aggregate>
+        <aggregate alias="MinimumRole" class="modUserGroupRole" local="authority" foreign="authority" owner="local" cardinality="one" />
     </object>
     
     <object class="modAccessAction" table="access_actions" extends="modAccess">
@@ -186,7 +197,6 @@
     
     <object class="modAction" table="actions" extends="modAccessibleSimpleObject">
         <field key="namespace" dbtype="nvarchar" precision="100" phptype="string" null="false" default="core" index="index" />
-        <field key="parent" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="controller" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
         <field key="haslayout" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
         <field key="lang_topics" dbtype="nvarchar" precision="max" phptype="string" null="false" />
@@ -196,19 +206,15 @@
         <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
             <column key="namespace" length="" collation="A" null="false" />
         </index>
-        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
-            <column key="parent" length="" collation="A" null="false" />
-        </index>
         <index alias="controller" name="controller" primary="false" unique="false" type="BTREE">
             <column key="controller" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" owner="foreign" cardinality="one" />
-        <aggregate alias="Parent" class="modAction" local="parent" foreign="id" owner="foreign" cardinality="one" />
-        <aggregate alias="Children" class="modAction" local="id" foreign="parent" owner="local" cardinality="many" />
         <composite alias="Menus" class="modMenu" local="id" foreign="action" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessAction" local="id" foreign="target" owner="local" cardinality="many" />
         <composite alias="Fields" class="modActionField" local="id" foreign="action" owner="local" cardinality="many" />
+        <composite alias="DOM" class="modActionDom" local="id" foreign="action" owner="local" cardinality="many" />
     </object>
     
     <object class="modActiveUser" table="active_users" extends="xPDOObject">
@@ -305,6 +311,11 @@
             <column key="static" length="" collation="A" null="false" />
         </index>
 
+        <composite alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
+            <criteria target="foreign"><![CDATA[
+            {"element_class":"modChunk"}
+            ]]></criteria>
+        </composite>
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-\s]+(?!\s)$/" message="chunk_err_invalid_name" />
@@ -466,7 +477,6 @@
         <field key="source" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
         <field key="property_preprocess" dbtype="bit" phptype="boolean" null="false" default="0" />
 
-        <aggregate alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessElement" local="id" foreign="target" owner="local" cardinality="many" />
         <aggregate alias="CategoryAcls" class="modAccessCategory" local="category" foreign="target" owner="local" cardinality="many" />
         <aggregate alias="Source" class="sources.modMediaSource" local="source" foreign="id" owner="foreign" cardinality="one" />
@@ -689,6 +699,7 @@
     <object class="modNamespace" table="namespaces" extends="xPDOObject">
         <field key="name" dbtype="nvarchar" precision="40" phptype="string" null="false" default="" index="pk" />
         <field key="path" dbtype="nvarchar" precision="max" phptype="string" default="" />
+        <field key="assets_path" dbtype="nvarchar" precision="max" phptype="string" default="" />
         
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -720,6 +731,11 @@
             <column key="disabled" length="" collation="A" null="false" />
         </index>
 
+        <composite alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
+            <criteria target="foreign"><![CDATA[
+            {"element_class":"modPlugin"}
+            ]]></criteria>
+        </composite>
         <composite alias="PluginEvents" class="modPluginEvent" local="id" foreign="pluginid" cardinality="many" owner="local" />
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9_-\x7f-\xff\s]+(?!\s)$/" message="plugin_err_invalid_name" />
@@ -808,6 +824,7 @@
         <field key="uri_override" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="hide_children_in_tree" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="show_in_tree" dbtype="bit" phptype="boolean" null="false" default="1" index="index" />
+        <field key="properties" dbtype="nvarchar" precision="max" phptype="json" null="true" />
         
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="true" />
@@ -895,6 +912,7 @@
         </index>
 
         <composite alias="ResourceGroupResources" class="modResourceGroupResource" local="id" foreign="document_group" cardinality="many" owner="local" />
+        <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="documentgroup" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessResourceGroup" local="id" foreign="target" owner="local" cardinality="many" />
     </object>
     
@@ -931,11 +949,14 @@
     
     <object class="modSession" table="session" extends="xPDOObject">
         <field key="id" dbtype="nvarchar" precision="40" phptype="string" null="false" index="pk" default="" />
-        <field key="access" dbtype="bigint" phptype="timestamp" null="true" />
+        <field key="access" dbtype="bigint" phptype="timestamp" null="false" />
         <field key="data" dbtype="nvarchar" precision="max" phptype="string" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="id" length="" collation="A" null="false" />
+        </index>
+        <index alias="access" name="access" primary="false" unique="false" type="BTREE">
+            <column key="access" length="" collation="A" null="false" />
         </index>
     </object>
     
@@ -957,6 +978,11 @@
             <column key="moduleguid" length="" collation="A" null="false" />
         </index>
 
+        <composite alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
+            <criteria target="foreign"><![CDATA[
+            {"element_class":"modSnippet"}
+            ]]></criteria>
+        </composite>
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-\s]+(?!\s)$/" message="snippet_err_invalid_name" />
         </validation>
@@ -1010,6 +1036,11 @@
 
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resources" class="modResource" local="id" foreign="template" cardinality="many" owner="local" />
+        <composite alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
+            <criteria target="foreign"><![CDATA[
+            {"element_class":"modTemplate"}
+            ]]></criteria>
+        </composite>
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="templateid" cardinality="many" owner="local" />
     </object>
     
@@ -1050,6 +1081,11 @@
         </index>
 
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
+            <criteria target="foreign"><![CDATA[
+            {"element_class":"modTemplateVar"}
+            ]]></criteria>
+        </composite>
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
@@ -1108,6 +1144,8 @@
         <field key="hash_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="hashing.modPBKDF2" />
         <field key="salt" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
         <field key="primary_group" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="session_stale" dbtype="nvarchar" precision="max" phptype="array" null="true" />
+        <field key="sudo" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
 
         <index alias="username" name="username" primary="false" unique="true" type="BTREE">
             <column key="username" length="" collation="A" null="false" />

@@ -7,6 +7,7 @@ $xpdo_meta_map['modResource']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_content',
+  'extends' => 'modAccessibleSimpleObject',
   'inherit' => 'single',
   'fields' => 
   array (
@@ -51,6 +52,7 @@ $xpdo_meta_map['modResource']= array (
     'uri_override' => 0,
     'hide_children_in_tree' => 0,
     'show_in_tree' => 1,
+    'properties' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -412,6 +414,12 @@ $xpdo_meta_map['modResource']= array (
       'default' => 1,
       'index' => 'index',
     ),
+    'properties' => 
+    array (
+      'dbtype' => 'mediumtext',
+      'phptype' => 'json',
+      'null' => true,
+    ),
   ),
   'indexes' => 
   array (
@@ -728,6 +736,41 @@ $xpdo_meta_map['modResource']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'TemplateVarResources' => 
+    array (
+      'class' => 'modTemplateVarResource',
+      'local' => 'id',
+      'foreign' => 'contentid',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'ResourceGroupResources' => 
+    array (
+      'class' => 'modResourceGroupResource',
+      'local' => 'id',
+      'foreign' => 'document',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Acls' => 
+    array (
+      'class' => 'modAccessResource',
+      'local' => 'id',
+      'foreign' => 'target',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
+    'ContextResources' => 
+    array (
+      'class' => 'modContextResource',
+      'local' => 'id',
+      'foreign' => 'resource',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'Parent' => 
@@ -817,41 +860,6 @@ $xpdo_meta_map['modResource']= array (
       'foreign' => 'key',
       'owner' => 'foreign',
       'cardinality' => 'one',
-    ),
-  ),
-  'composites' => 
-  array (
-    'TemplateVarResources' => 
-    array (
-      'class' => 'modTemplateVarResource',
-      'local' => 'id',
-      'foreign' => 'contentid',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'ResourceGroupResources' => 
-    array (
-      'class' => 'modResourceGroupResource',
-      'local' => 'id',
-      'foreign' => 'document',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Acls' => 
-    array (
-      'class' => 'modAccessResource',
-      'local' => 'id',
-      'foreign' => 'target',
-      'owner' => 'local',
-      'cardinality' => 'many',
-    ),
-    'ContextResources' => 
-    array (
-      'class' => 'modContextResource',
-      'local' => 'id',
-      'foreign' => 'resource',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

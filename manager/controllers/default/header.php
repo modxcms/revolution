@@ -91,6 +91,8 @@ $this->setPlaceholder('navb',$output);
 $profile = $modx->getObject('modMenu','profile');
 $this->setPlaceholder('username',$modx->getLoginUserName());
 $this->setPlaceholder('profileAction',$profile->get('action'));
+$this->setPlaceholder('canChangeProfile',$modx->hasPermission('change_profile'));
+$this->setPlaceholder('canLogout',$modx->hasPermission('logout'));
 
 /* assign welcome back text */
 $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUserName()));

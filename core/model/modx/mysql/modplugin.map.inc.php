@@ -7,6 +7,7 @@ $xpdo_meta_map['modPlugin']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_plugins',
+  'extends' => 'modScript',
   'fields' => 
   array (
     'cache_type' => 0,
@@ -146,6 +147,21 @@ $xpdo_meta_map['modPlugin']= array (
   ),
   'composites' => 
   array (
+    'PropertySets' => 
+    array (
+      'class' => 'modElementPropertySet',
+      'local' => 'id',
+      'foreign' => 'element',
+      'owner' => 'local',
+      'cardinality' => 'many',
+      'criteria' => 
+      array (
+        'foreign' => 
+        array (
+          'element_class' => 'modPlugin',
+        ),
+      ),
+    ),
     'PluginEvents' => 
     array (
       'class' => 'modPluginEvent',

@@ -158,7 +158,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         $this->onTVFormPrerender = $this->modx->invokeEvent('OnTVFormPrerender',array(
             'id' => $this->tvArray['id'],
             'tv' => &$this->tv,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
     }
@@ -171,7 +171,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender',array(
             'id' => $this->tvArray['id'],
             'tv' => &$this->tv,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormRender)) $this->onTVFormRender = implode('',$this->onTVFormRender);
         $this->onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTVFormRender);

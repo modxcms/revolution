@@ -49,7 +49,7 @@ MODx.grid.Namespace = function(config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'workspace/namespace.php'
-        ,fields: ['id','name','path','perm']
+        ,fields: ['id','name','path','assets_path','perm']
         ,anchor: '100%'
         ,paging: true
         ,autosave: true
@@ -62,8 +62,14 @@ MODx.grid.Namespace = function(config) {
             ,width: 200
             ,sortable: true
         },{
-            header: _('path')
+            header: _('namespace_path')
             ,dataIndex: 'path'
+            ,width: 500
+            ,sortable: false
+            ,editor: { xtype: 'textfield' }
+        },{
+            header: _('namespace_assets_path')
+            ,dataIndex: 'assets_path'
             ,width: 500
             ,sortable: false
             ,editor: { xtype: 'textfield' }
@@ -82,10 +88,7 @@ MODx.grid.Namespace = function(config) {
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: cmp
                     });
                 },scope:this}

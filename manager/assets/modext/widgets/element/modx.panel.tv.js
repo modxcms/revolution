@@ -259,6 +259,7 @@ MODx.panel.TV = function(config) {
             ,forceLayout: true
             ,hideMode: 'offsets'
             ,defaults: {autoHeight: true}
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('tv_access_msg')+'</p>'
 				,bodyCssClass: 'panel-desc'
@@ -266,10 +267,11 @@ MODx.panel.TV = function(config) {
                 ,border: false
             },{
                 xtype: 'modx-grid-tv-security'
-				,cls:'main-wrapper'
                 ,itemId: 'grid-access'
+                ,cls:'main-wrapper'
                 ,tv: config.tv
                 ,preventRender: true
+                ,anchor: '100%'
                 ,listeners: {
                     'rowclick': {fn:this.markDirty,scope:this}
                     ,'afteredit': {fn:this.markDirty,scope:this}
@@ -604,6 +606,9 @@ Ext.reg('modx-panel-tv-output-properties',MODx.panel.TVOutputProperties);
 
 
 MODx.grid.ElementSources = function(config) {
+    var src = new MODx.combo.MediaSource();
+    src.getStore().load();
+
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-element-sources'
@@ -616,7 +621,9 @@ MODx.grid.ElementSources = function(config) {
         },{
             header: _('source')
             ,dataIndex: 'source'
-            ,editor: { xtype: 'modx-combo-source' ,renderer: true }
+            ,xtype: 'combocolumn'
+            ,editor: src
+            ,gridId: 'modx-grid-element-sources'
         }]
     });
     MODx.grid.ElementSources.superclass.constructor.call(this,config);

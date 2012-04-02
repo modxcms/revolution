@@ -7,6 +7,7 @@ $xpdo_meta_map['modEvent']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'system_eventnames',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'name' => NULL,

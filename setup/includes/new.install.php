@@ -34,6 +34,7 @@ $settings_distro->save();
 $user = $modx->newObject('modUser');
 $user->set('username', $settings->get('cmsadmin'));
 $user->set('password', $settings->get('cmspassword'));
+$user->setSudo(true);
 $saved = $user->save();
 
 if ($saved) {

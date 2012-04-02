@@ -7,6 +7,7 @@ $xpdo_meta_map['modElement']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_element',
+  'extends' => 'modAccessibleSimpleObject',
   'fields' => 
   array (
     'source' => 0,
@@ -30,16 +31,19 @@ $xpdo_meta_map['modElement']= array (
       'default' => 0,
     ),
   ),
-  'aggregates' => 
+  'composites' => 
   array (
-    'PropertySets' => 
+    'Acls' => 
     array (
-      'class' => 'modElementPropertySet',
+      'class' => 'modAccessElement',
       'local' => 'id',
-      'foreign' => 'element',
+      'foreign' => 'target',
       'owner' => 'local',
       'cardinality' => 'many',
     ),
+  ),
+  'aggregates' => 
+  array (
     'CategoryAcls' => 
     array (
       'class' => 'modAccessCategory',
@@ -55,17 +59,6 @@ $xpdo_meta_map['modElement']= array (
       'foreign' => 'id',
       'owner' => 'foreign',
       'cardinality' => 'one',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Acls' => 
-    array (
-      'class' => 'modAccessElement',
-      'local' => 'id',
-      'foreign' => 'target',
-      'owner' => 'local',
-      'cardinality' => 'many',
     ),
   ),
 );

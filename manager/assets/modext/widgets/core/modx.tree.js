@@ -75,6 +75,7 @@ MODx.tree.Tree = function(config) {
         ,cls: 'modx-tree'
         ,root: root
         ,preventRender: false
+        ,stateful: true
         ,menuConfig: {defaultAlign: 'tl-b?' ,enableScrolling: false}
     });
     if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
@@ -349,6 +350,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {Ext.tree.TreeNode} n The most recent expanded or collapsed node.
      */
     ,_saveState: function(n) {
+        if (!this.stateful) {
+            return true;
+        }
         var s = Ext.state.Manager.get(this.treestate_id);
         var p = n.getPath();
         var i;

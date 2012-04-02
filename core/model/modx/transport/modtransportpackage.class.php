@@ -286,8 +286,9 @@ class modTransportPackage extends xPDOObject {
 
             $source= $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
 
-            /* see if user has allow_url_fopen on */
-            if (ini_get('allow_url_fopen')) {
+            /* see if user has allow_url_fopen on and is not behind a proxy */
+            $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
+            if (ini_get('allow_url_fopen') && empty($proxyHost)) {
                 if ($handle= @ fopen($source, 'rb')) {
                     $filesize= @ filesize($source);
                     $memory_limit= @ ini_get('memory_limit');
@@ -311,7 +312,7 @@ class modTransportPackage extends xPDOObject {
                 curl_setopt($ch, CURLOPT_URL, $source);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_TIMEOUT,120);
+                curl_setopt($ch, CURLOPT_TIMEOUT,180);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
                 $proxyHost = $this->xpdo->getOption('proxy_host',null,'');

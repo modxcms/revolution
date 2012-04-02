@@ -227,13 +227,22 @@ Ext.extend(MODx,Ext.Component,{
         }
     }
     ,hiddenTabs: []
-    ,hideTab: function(ct,tab) {
+    ,hideTab: function(ct,tab) {this.hideRegion(ct,tab);}
+    ,hideRegion: function(ct,tab) {
         var tp = Ext.getCmp(ct);
         if (tp) {
-            tp.hideTabStripItem(tab);
-            MODx.hiddenTabs.push(tab);
-            var idx = this._getNextActiveTab(tp,tab);
-            tp.setActiveTab(idx);
+            var tabObj = tp.getItem(tab);
+            if (tabObj) {
+                var z = tp.hideTabStripItem(tab);
+                MODx.hiddenTabs.push(tab);
+                var idx = this._getNextActiveTab(tp,tab);
+                tp.setActiveTab(idx);
+            } else {
+                var region = Ext.getCmp(tab);
+                if (region) {
+                    region.hide();
+                }
+            }
         }
     }
     ,_getNextActiveTab: function(tp,tab) {

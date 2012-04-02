@@ -29,8 +29,17 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
         $canEditUsers = $this->modx->hasPermission('usergroup_user_edit') ? 1 : 0;
         $canListUsers = $this->modx->hasPermission('usergroup_user_list') ? 1 : 0;
-        $this->addHtml('<script type="text/javascript">MODx.perm.usergroup_user_edit = '.$canEditUsers.';MODx.perm.usergroup_user_list = '.$canListUsers.';</script>');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
+        $this->addHtml('<script type="text/javascript">
+        MODx.perm.usergroup_user_edit = '.$canEditUsers.';
+        MODx.perm.usergroup_user_list = '.$canListUsers.';
+        Ext.onReady(function() {
+            MODx.load({
+                xtype: "modx-page-user-group-update"
+                 ,record: '.$this->modx->toJSON($this->userGroup->toArray()).'
+            });
+        });
+        </script>');
     }
 
     /**

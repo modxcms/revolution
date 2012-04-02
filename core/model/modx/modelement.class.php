@@ -159,38 +159,31 @@ class modElement extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
-        if ($this->staticSourceChanged()) {
-            $staticContent = $this->getFileContent();
-            if ($staticContent !== $this->get('content')) {
-                if ($this->isStaticSourceMutable() && $staticContent === '') {
-                    $this->setDirty('content');
-                } else {
-                    $this->setContent($staticContent);
+        if (!$this->getOption(xPDO::OPT_SETUP)) {
+            if ($this->staticSourceChanged()) {
+                $staticContent = $this->getFileContent();
+                if ($staticContent !== $this->get('content')) {
+                    if ($this->isStaticSourceMutable() && $staticContent === '') {
+                        $this->setDirty('content');
+                    } else {
+                        $this->setContent($staticContent);
+                    }
                 }
+                unset($staticContent);
             }
-            unset($staticContent);
-        }
-        $staticContentChanged = $this->staticContentChanged();
-        if ($staticContentChanged && !$this->isStaticSourceMutable()) {
-            $this->setContent($this->getFileContent());
-            $staticContentChanged = false;
+            $staticContentChanged = $this->staticContentChanged();
+            if ($staticContentChanged && !$this->isStaticSourceMutable()) {
+                $this->setContent($this->getFileContent());
+                $staticContentChanged = false;
+            }
         }
         $saved = parent::save($cacheFlag);
-        if ($saved && $staticContentChanged) {
-            $saved = $this->setFileContent($this->get('content'));
+        if (!$this->getOption(xPDO::OPT_SETUP)) {
+            if ($saved && $staticContentChanged) {
+                $saved = $this->setFileContent($this->get('content'));
+            }
         }
         return $saved;
-    }
-
-    /**
-     * Remove all Property Set relations to the Element.
-     *
-     * {@inheritdoc}
-     */
-    public function remove(array $ancestors= array ()) {
-        $this->xpdo->removeCollection('modElementPropertySet', array('element' => $this->get('id'), 'element_class' => $this->_class));
-        $result = parent :: remove($ancestors);
-        return $result;
     }
 
     /**
@@ -867,15 +860,40 @@ class modElement extends modAccessibleSimpleObject {
                 $isMutable = is_writable($sourceFile);
             } else {
                 $sourceDir = dirname($sourceFile);
+                $i = 100;
                 while (!empty($sourceDir)) {
                     if (file_exists($sourceDir) && is_dir($sourceDir)) {
                         $isMutable = is_writable($sourceDir);
                         if ($isMutable) break;
                     }
-                    $sourceDir = dirname($sourceDir);
+                    if ($sourceDir != '/') {
+                        $sourceDir = dirname($sourceDir);
+                    } else {
+                        break;
+                    }
+                    $i--;
+                    if ($i < 0) break;
                 }
             }
         }
         return $isMutable;
+    }
+
+    /**
+     * Ensure the static source cannot browse the protected configuration directory
+     *
+     * @return boolean True if is a valid source path
+     */
+    public function isStaticSourceValidPath() {
+        $isValid = true;
+        $sourceFile = $this->getSourceFile();
+        if ($sourceFile) {
+            $sourceDirectory = rtrim(dirname($sourceFile),'/');
+            $configDirectory = rtrim($this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'config/','/');
+            if ($sourceDirectory == $configDirectory) {
+                $isValid = false;
+            }
+        }
+        return $isValid;
     }
 }

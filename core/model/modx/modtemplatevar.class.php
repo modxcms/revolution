@@ -293,7 +293,11 @@ class modTemplateVar extends modElement {
                     $source = $this->xpdo->newObject($classKey);
                     if ($source) {
                         $source->fromArray($sourceCache,'',true,true);
-                        $value = $source->prepareOutputUrl($value);
+                        $source->initialize();
+                        $isAbsolute = strpos($value,'http://') === 0 || strpos($value,'https://') === 0 || strpos($value,'ftp://') === 0;
+                        if (!$isAbsolute) {
+                            $value = $source->prepareOutputUrl($value);
+                        }
                     }
                 }
             }
@@ -524,7 +528,14 @@ class modTemplateVar extends modElement {
                 /** @var modResource $resource */
                 $resource = $this->xpdo->getObject('modResource',$resourceId);
             }
-            $userGroups = $this->xpdo->user->getUserGroups();
+            if ($this->xpdo->getOption('form_customization_use_all_groups',null,false)) {
+                $userGroups = $this->xpdo->user->getUserGroups();
+            } else {
+                $primaryGroup = $this->xpdo->user->getPrimaryGroup();
+                if ($primaryGroup) {
+                    $userGroups = array($primaryGroup->get('id'));
+                }
+            }
             $c = $this->xpdo->newQuery('modActionDom');
             $c->innerJoin('modFormCustomizationSet','FCSet');
             $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
@@ -541,16 +552,18 @@ class modTemplateVar extends modElement {
                 'FCSet.active' => true,
                 'Profile.active' => true,
             ));
-            $c->where(array(
-                array(
-                    'ProfileUserGroup.usergroup:IN' => $userGroups,
+            if (!empty($userGroups)) {
+                $c->where(array(
                     array(
-                        'OR:ProfileUserGroup.usergroup:IS' => null,
-                        'AND:UGProfile.active:=' => true,
+                        'ProfileUserGroup.usergroup:IN' => $userGroups,
+                        array(
+                            'OR:ProfileUserGroup.usergroup:IS' => null,
+                            'AND:UGProfile.active:=' => true,
+                        ),
                     ),
-                ),
-                'OR:ProfileUserGroup.usergroup:=' => null,
-            ),xPDOQuery::SQL_AND,null,2);
+                    'OR:ProfileUserGroup.usergroup:=' => null,
+                ),xPDOQuery::SQL_AND,null,2);
+            }
             if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
                 $c->where(array(
                     'modActionDom.action' => $this->xpdo->request->action,
@@ -1017,6 +1030,36 @@ class modTemplateVar extends modElement {
             'templateid' => is_object($template) ? $template->get('id') : $template,
         ));
         return !empty($templateVarTemplate) && is_object($templateVarTemplate);
+    }
+
+    /**
+     * Check to see if the
+     * @param modUser|null $user
+     * @param string $context
+     * @return bool
+     */
+    public function checkResourceGroupAccess($user = null,$context = '') {
+        $context = !empty($context) ? $context : $this->xpdo->context;
+        $user = !empty($user) ? $user : $this->xpdo->user;
+
+        $c = $this->xpdo->newQuery('modResourceGroup');
+        $c->innerJoin('modTemplateVarResourceGroup','TemplateVarResourceGroups',array(
+            'TemplateVarResourceGroups.documentgroup = modResourceGroup.id',
+            'TemplateVarResourceGroups.tmplvarid' => $this->get('id'),
+        ));
+        $resourceGroups = $this->xpdo->getCollection('modResourceGroup',$c);
+        $hasAccess = true;
+        if (!empty($resourceGroups)) {
+            $hasAccess = false;
+            /** @var modResourceGroup $resourceGroup */
+            foreach ($resourceGroups as $resourceGroup) {
+                if ($resourceGroup->hasAccess($user,$context)) {
+                    $hasAccess = true;
+                    break;
+                }
+            }
+        }
+        return $hasAccess;
     }
 }
 

@@ -6,6 +6,7 @@
 $xpdo_meta_map['modAccessibleSimpleObject']= array (
   'package' => 'modx',
   'version' => '1.1',
+  'extends' => 'modAccessibleObject',
   'fields' => 
   array (
     'id' => NULL,

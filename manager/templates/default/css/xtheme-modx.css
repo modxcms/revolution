@@ -159,6 +159,7 @@ ul.x-tab-strip-top li.x-tab-strip-active {
     border-bottom: 0 none;
     padding:0 0 1px;
 	text-shadow: none;
+	filter: none;
 }
 ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text {
 	color:#FFF;
@@ -1142,13 +1143,13 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-row-collapsed .x-grid3-row-expander {
     background-position:5px 10px;
     height:30px;
-    margin-top:4px;
+    margin-top:6px;
 }
 
 .x-grid3-row-expanded .x-grid3-row-expander  {
     background-position:-31px 10px;
     height:30px;
-    margin-top:4px;
+    margin-top:6px;
 }
 
 .x-grid3-row-expander {
@@ -2485,7 +2486,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#d0d0d0,GradientType=0);
 	background:linear-gradient(center bottom,#d0d0d0 0%,#eeeeee 100%);
 	border-bottom:1px solid #ababab;
-	border-top:1px solid #ffffff;
 	color:#5e5e5e;
 	padding:8px;
 	text-align:center;

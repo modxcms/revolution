@@ -7,8 +7,11 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2012-04-01
  */
+
+// $_lang['login_language'] = 'Language';
+$_lang['login_language'] = 'Jazyk';
 
 // $_lang['login_activation_key_err'] = 'Activation key does not match! Please check your activation email and make sure you loaded the right URL.';
 $_lang['login_activation_key_err'] = 'Aktivační klíč neodpovídá! Zkontrolujte si aktivační e-mail a ujistěte se, že jste použili správný odkaz.';

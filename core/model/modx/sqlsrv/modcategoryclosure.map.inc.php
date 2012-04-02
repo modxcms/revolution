@@ -7,6 +7,7 @@ $xpdo_meta_map['modCategoryClosure']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'categories_closure',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'ancestor' => 0,

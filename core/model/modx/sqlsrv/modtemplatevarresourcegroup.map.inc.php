@@ -7,6 +7,7 @@ $xpdo_meta_map['modTemplateVarResourceGroup']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_tmplvar_access',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'tmplvarid' => 0,
