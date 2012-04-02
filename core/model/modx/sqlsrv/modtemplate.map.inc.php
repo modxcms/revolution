@@ -180,6 +180,21 @@ $xpdo_meta_map['modTemplate']= array (
   ),
   'composites' => 
   array (
+    'PropertySets' => 
+    array (
+      'class' => 'modElementPropertySet',
+      'local' => 'id',
+      'foreign' => 'element',
+      'owner' => 'local',
+      'cardinality' => 'many',
+      'criteria' => 
+      array (
+        'foreign' => 
+        array (
+          'element_class' => 'modTemplate',
+        ),
+      ),
+    ),
     'TemplateVarTemplates' => 
     array (
       'class' => 'modTemplateVarTemplate',

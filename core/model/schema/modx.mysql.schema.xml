@@ -47,6 +47,16 @@
 
         <aggregate alias="Policy" class="modAccessPolicy" local="policy" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Principal" class="modPrincipal" local="principal" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="GroupPrincipal" class="modUserGroup" local="principal" foreign="id" owner="foreign" cardinality="one">
+            <criteria target="local"><![CDATA[
+            {"principal_class":"modUserGroup"}
+            ]]></criteria>
+        </aggregate>
+        <aggregate alias="UserPrincipal" class="modUserGroup" local="principal" foreign="id" owner="foreign" cardinality="one">
+            <criteria target="local"><![CDATA[
+            {"principal_class":"modUser"}
+            ]]></criteria>
+        </aggregate>
         <aggregate alias="MinimumRole" class="modUserGroupRole" local="authority" foreign="authority" owner="local" cardinality="one" />
     </object>
     

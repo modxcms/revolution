@@ -2486,7 +2486,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#d0d0d0,GradientType=0);
 	background:linear-gradient(center bottom,#d0d0d0 0%,#eeeeee 100%);
 	border-bottom:1px solid #ababab;
-	border-top:1px solid #ffffff;
 	color:#5e5e5e;
 	padding:8px;
 	text-align:center;

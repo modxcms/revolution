@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2012-04-01
  */
 // $_lang['active'] = 'Active';
 $_lang['active'] = 'Aktivní';
@@ -542,6 +542,12 @@ $_lang['user_settings_desc'] = 'V této části můžete změnit specifické nas
 
 // $_lang['user_state'] = 'State';
 $_lang['user_state'] = 'Stát';
+
+// $_lang['user_sudo'] = 'Sudo User';
+$_lang['user_sudo'] = 'Sudo User';
+
+// $_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
+$_lang['user_sudo_desc'] = 'Je-li nastaveno Ano, pak se na tohoto uživatele nebudou vztahovat žádná omezení přístupových práv. *NENASTAVUJTE* pokud si nejste opravdu jistí co tato volba způsobuje!';
 
 // $_lang['user_title'] = 'Create/Edit user';
 $_lang['user_title'] = 'Vytvořit/Upravit uživatele';

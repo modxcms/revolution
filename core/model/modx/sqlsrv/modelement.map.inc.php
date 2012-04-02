@@ -44,14 +44,6 @@ $xpdo_meta_map['modElement']= array (
   ),
   'aggregates' => 
   array (
-    'PropertySets' => 
-    array (
-      'class' => 'modElementPropertySet',
-      'local' => 'id',
-      'foreign' => 'element',
-      'owner' => 'local',
-      'cardinality' => 'many',
-    ),
     'CategoryAcls' => 
     array (
       'class' => 'modAccessCategory',

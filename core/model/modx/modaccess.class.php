@@ -18,4 +18,40 @@
  * @abstract
  * @package modx
  */
-class modAccess extends xPDOSimpleObject {}
+class modAccess extends xPDOSimpleObject {
+    /**
+     * Override getOne to get the appropriate Principal class.
+     *
+     * @param $alias
+     * @param null $criteria
+     * @param bool $cacheFlag
+     * @return null|xPDOObject
+     */
+    public function & getOne($alias, $criteria= null, $cacheFlag= true) {
+        $object = null;
+        if ($alias === 'Principal') {
+            if ($fkdef= $this->getFKDefinition($alias)) {
+                $k= $fkdef['local'];
+                $fk= $fkdef['foreign'];
+                if (isset ($this->_relatedObjects[$alias])) {
+                    if (is_object($this->_relatedObjects[$alias])) {
+                        $object= & $this->_relatedObjects[$alias];
+                        return $object;
+                    }
+                }
+                if ($criteria === null) {
+                    $criteria= array(
+                        $fk => $this->get($k),
+                    );
+                }
+                $fkdef['class'] = $this->get('principal_class');
+                if ($object= $this->xpdo->getObject($fkdef['class'], $criteria, $cacheFlag)) {
+                    $this->_relatedObjects[$alias]= $object;
+                }
+            }
+        } else {
+            $object = parent::getOne($alias, $criteria, $cacheFlag);
+        }
+        return $object;
+    }
+}

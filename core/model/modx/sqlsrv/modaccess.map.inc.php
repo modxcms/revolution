@@ -161,5 +161,43 @@ $xpdo_meta_map['modAccess']= array (
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),
+    'GroupPrincipal' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'principal',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
+      'criteria' => 
+      array (
+        'local' => 
+        array (
+          'principal_class' => 'modUserGroup',
+        ),
+      ),
+    ),
+    'UserPrincipal' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'principal',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
+      'criteria' => 
+      array (
+        'local' => 
+        array (
+          'principal_class' => 'modUser',
+        ),
+      ),
+    ),
+    'MinimumRole' => 
+    array (
+      'class' => 'modUserGroupRole',
+      'local' => 'authority',
+      'foreign' => 'authority',
+      'owner' => 'local',
+      'cardinality' => 'one',
+    ),
   ),
 );
