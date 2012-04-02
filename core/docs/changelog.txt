@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#7521] Allow filtering of usergroup by request on users page
 - Add assets_path field to modNamespace
 - [#7447] Change default root node name of Files tab to "Media" to prevent confusion when a non-default source is selected
 - Drop no-longer used, deprecated modAction.parent field
