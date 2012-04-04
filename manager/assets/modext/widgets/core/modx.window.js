@@ -24,7 +24,7 @@ MODx.Window = function(config) {
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
-            ,handler: function() { this.hide(); }
+            ,handler: function() { config.closeAction !== 'close' ? this.hide() : this.close(); }
         },{
             text: config.saveBtnText || _('save')
             ,scope: this
