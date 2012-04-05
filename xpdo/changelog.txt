@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Refactor HYDRATE_FIELDS/HYDRATE_RELATED_OBJECTS using __get()/__set()
+
 xPDO 2.2.4-pl (April 2, 2012)
 ====================================
 - Refactor aggregate/composite criteria support for targeting local/foreign
