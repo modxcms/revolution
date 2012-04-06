@@ -539,9 +539,9 @@ class xPDO {
     }
 
     /**
-     * Gets a list of derivative classes for the specified xPDOObject instance.
+     * Gets a list of derivative classes for the specified className.
      *
-     * NOTE: Will not work with xPDOObject/xPDOSimpleObject.
+     * The specified className must be xPDOObject or a derivative class.
      *
      * @param string $className The name of the class to retrieve derivatives for.
      * @return array An array of derivative classes or an empty array.
