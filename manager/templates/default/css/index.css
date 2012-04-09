@@ -1082,7 +1082,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 }
 .dashboard-block {
     float: left;
-    margin: 6px;
+    margin: 6px 1% 6px 0;
     background-color: white;
     border: 1px solid #ddd;
     -webkit-border-radius: 2px;
