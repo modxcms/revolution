@@ -46,7 +46,13 @@ class modRest {
     /** @var string $url The URL to query */
     public $url;
 
-	public function __construct(modX $modx,array $config = array()) {
+    /**
+     * The modRest constructor
+     *
+     * @param modX $modx A reference to the modX instance
+     * @param array $config An array of configuration options
+     */
+	public function __construct(modX &$modx,array $config = array()) {
 		$this->modx =& $modx;
 		$this->config = array_merge(array(
             'addMethodParameter' => false,
@@ -60,6 +66,10 @@ class modRest {
             'userAgent' => 'MODX RestClient/1.0.0',
             'username' => null,
         ),$config);
+		$this->modx->getService('lexicon','modLexicon');
+        if ($this->modx->lexicon) {
+            $this->modx->lexicon->load('rest');
+        }
 	}
 
     /**
@@ -144,7 +154,7 @@ class modRest {
 /**
  * Request class for handling REST requests
  *
- * @package kingscross
+ * @package modx
  * @subpackage rest
  */
 class RestClientRequest {
@@ -169,6 +179,12 @@ class RestClientRequest {
     /** @var string $rootNode */
     public $rootNode = 'request';
 
+    /**
+     * The RestClientRequest constructor
+     *
+     * @param modX $modx A reference to the modX instance
+     * @param array $config An array of configuration options
+     */
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->config = array_merge($this->config,$config);
@@ -513,6 +529,14 @@ class RestClientResponse {
     /** @var mixed $responseHeaders */
     public $responseHeaders;
 
+    /**
+     * Constructor for RestClientResponse class.
+     *
+     * @param modX $modx A reference to the modX instance
+     * @param string $response The response data
+     * @param int $headerSize The size of the response header, in bytes
+     * @param array $config An array of configuration options
+     */
     function __construct(modX &$modx,$response = '',$headerSize = 0,array $config = array()) {
         $this->modx =& $modx;
         $this->config = array_merge($this->config,$config);
@@ -593,7 +617,17 @@ class RestClientResponse {
     }
 
     /**
-     * Convert XML into a string
+     * Convert JSON into an array
+     *
+     * @param string $data
+     * @return array
+     */
+    protected function fromJSON($data) {
+        return $this->modx->fromJSON($data);
+    }
+
+    /**
+     * Convert XML into an array
      *
      * @param string|SimpleXMLElement $xml
      * @param mixed $attributesKey

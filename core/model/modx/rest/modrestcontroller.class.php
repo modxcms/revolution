@@ -134,12 +134,14 @@ abstract class modRestController {
 	        if (empty($value)) {
 	            $missing[] = $field;
 	            if ($setFieldError) {
-                    $this->addFieldError($field,'This field is required.');
+                    $this->addFieldError($field,$this->modx->lexicon('rest.err_field_required'));
                 }
 	        }
 	    }
 	    if (!empty($missing)) {
-	        return 'The following fields are required: '.implode(', ',$missing);
+	        return $this->modx->lexicon('rest.err_fields_required',array(
+	            'fields' => implode(', ',$missing),
+            ));
 	    }
 	    return true;
 	}
@@ -368,11 +370,9 @@ abstract class modRestController {
 
     /**
      * Abstract method for routing GET requests without a primary key passed. Must be defined in your derivative
-     * controller.
+     * controller. Handles fetching of collections of objects.
+     *
      * @abstract
-     */
-    /**
-     * Handles fetching of collections of objects
      * @return array
      */
     public function getList() {
@@ -464,20 +464,33 @@ abstract class modRestController {
      */
     public function read($id) {
         if (empty($id)) {
-            return $this->failure($this->primaryKeyField.' not specified!');
+            return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+                'field' => $this->primaryKeyField,
+            )));
         }
         /** @var xPDOObject $object */
         $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
         if (empty($this->object)) {
-            return $this->failure($this->classKey.' not found!');
+            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+                'class_key' => $this->classKey,
+            )));
         }
-        if (!$this->afterRead()) {
-            return $this->failure('Error!');
+        $objectArray = $this->object->toArray();
+
+        $afterRead = $this->afterRead($objectArray);
+        if ($afterRead !== true && $afterRead !== null) {
+            return $this->failure($afterRead === false ? $this->errorMessage : $afterRead);
         }
 
-        return $this->success('',$this->object);
+        return $this->success('',$objectArray);
     }
-    public function afterRead() {
+    /**
+     * Fires after reading the object. Override to provide custom functionality.
+     *
+     * @param array $objectArray A reference to the outputting array
+     * @return boolean|string Either return true/false or a string message
+     */
+    public function afterRead(array &$objectArray) {
         return !$this->hasErrors();
     }
     /**
@@ -490,15 +503,19 @@ abstract class modRestController {
         /** @var xPDOObject $object */
         $this->object = $this->modx->newObject($this->classKey);
         $this->object->fromArray($properties);
-        if (!$this->beforePost()) {
-            return $this->failure('Error!');
+        $beforePost = $this->beforePost();
+        if ($beforePost !== true && $beforePost !== null) {
+            return $this->failure($beforePost === false ? $this->errorMessage : $beforePost);
         }
         if (!$this->object->save()) {
             $this->setObjectErrors();
-            return $this->failure('An error occurred while trying to save the '.$this->classKey);
+            return $this->failure($this->modx->lexicon('rest.err_class_save',array(
+                'class_key' => $this->classKey,
+            )));
         }
-        $this->afterPost();
-        return $this->success('',$this->object);
+        $objectArray = $this->object->toArray();
+        $this->afterPost($objectArray);
+        return $this->success('',$objectArray);
     }
     /**
      * Fires before saving the new object. Override to provide custom functionality.
@@ -509,8 +526,10 @@ abstract class modRestController {
     }
     /**
      * Fires after saving the new object. Override to provide custom functionality.
+     *
+     * @param array $objectArray A reference to the outputting array
      */
-    public function afterPost() {}
+    public function afterPost(array &$objectArray) {}
 
     /**
      * Handles updating of objects
@@ -519,25 +538,34 @@ abstract class modRestController {
     public function put() {
         $id = $this->getProperty($this->primaryKeyField,false);
         if (empty($id)) {
-            return $this->failure($this->primaryKeyField.' not specified!');
+            return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+                'field' => $this->primaryKeyField,
+            )));
         }
         $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
         if (empty($this->object)) {
-            return $this->failure($this->classKey.' not found!');
+            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+                'class_key' => $this->classKey,
+            )));
         }
 
         $this->object->fromArray($this->getProperties());
 
-        if (!$this->beforePut()) {
-            return $this->failure('Error!');
+        $beforePut = $this->beforePut();
+        if ($beforePut !== true && $beforePut !== null) {
+            return $this->failure($beforePut === false ? $this->errorMessage : $beforePut);
         }
         if (!$this->object->save()) {
             $this->setObjectErrors();
-            return $this->failure('An error occurred while trying to save the '.$this->classKey);
+            return $this->failure($this->modx->lexicon('rest.err_class_save',array(
+                'class_key' => $this->classKey,
+            )));
         }
-        $this->afterPut();
 
-        return $this->success('',$this->object);
+        $objectArray = $this->object->toArray();
+        $this->afterPut($objectArray);
+
+        return $this->success('',$objectArray);
     }
     /**
      * Fires before saving an existing object. Override to provide custom functionality.
@@ -548,8 +576,9 @@ abstract class modRestController {
     }
     /**
      * Fires after saving an existing object. Override to provide custom functionality.
+     * @param array $objectArray A reference to the outputting array
      */
-    public function afterPut() {}
+    public function afterPut(array &$objectArray) {}
 
     /**
      * Handle DELETE requests
@@ -558,25 +587,34 @@ abstract class modRestController {
     public function delete() {
         $id = $this->getProperty($this->primaryKeyField,false);
         if (empty($id)) {
-            return $this->failure($this->primaryKeyField.' not specified!');
+            return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+                'field' => $this->primaryKeyField,
+            )));
         }
         $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
         if (empty($this->object)) {
-            return $this->failure($this->classKey.' not found!');
+            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+                'class_key' => $this->classKey,
+            )));
         }
 
         $this->object->fromArray($this->getProperties());
 
-        if (!$this->beforeDelete()) {
-            return $this->failure($this->errorMessage);
+        $beforeDelete = $this->beforeDelete();
+        if ($beforeDelete !== true) {
+            return $this->failure($beforeDelete === false ? $this->errorMessage : $beforeDelete);
         }
         if (!$this->object->remove()) {
             $this->setObjectErrors();
-            return $this->failure('An error occurred while trying to remove the '.$this->classKey);
+            return $this->failure($this->modx->lexicon('rest.err_class_remove',array(
+                'class_key' => $this->classKey,
+            )));
         }
-        $this->afterDelete();
 
-        return $this->success('',$this->object);
+        $objectArray = $this->object->toArray();
+        $this->afterDelete($objectArray);
+
+        return $this->success('',$objectArray);
     }
     /**
      * Fires before deleting an existing object. Override to provide custom functionality.
@@ -587,12 +625,14 @@ abstract class modRestController {
     }
     /**
      * Fires after deleting an existing object. Override to provide custom functionality.
+     *
+     * @param array $objectArray
      */
-    public function afterDelete() {}
+    public function afterDelete(array &$objectArray) {}
 
 
     /**
-     * Set object-specific model-layer errors
+     * Set object-specific model-layer errors for classes that implement the getErrors/addFieldError methods
      */
     public function setObjectErrors() {
         if (method_exists($this->object,'getErrors')) {

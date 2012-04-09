@@ -76,6 +76,10 @@ class modRestService {
             'trimParameters' => false,
             'xmlRootNode' => 'response',
 		),$config);
+		$this->modx->getService('lexicon','modLexicon');
+        if ($this->modx->lexicon) {
+            $this->modx->lexicon->load('rest');
+        }
 	}
 
     /**
