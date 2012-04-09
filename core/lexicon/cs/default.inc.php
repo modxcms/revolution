@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-29
+ * @updated 2012-04-01
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -741,6 +741,9 @@ $_lang['manager'] = 'Správce';
 // $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
 $_lang['manager_log_err_save'] = 'Nastala chyba při přihlašování.';
 
+// $_lang['media'] = 'Media';
+$_lang['media'] = 'Média';
+
 // $_lang['menu_order'] = 'Menu Order';
 $_lang['menu_order'] = 'Indexu';
 
@@ -938,6 +941,12 @@ $_lang['please_wait'] = 'Momentík...';
 
 // $_lang['plugin'] = 'Plugin';
 $_lang['plugin'] = 'Plugin';
+
+// $_lang['plugin_activate'] = 'Activate Plugin';
+$_lang['plugin_activate'] = 'Aktivovat plugin';
+
+// $_lang['plugin_deactivate'] = 'Deactivate Plugin';
+$_lang['plugin_deactivate'] = 'Deaktivovat plugin';
 
 // $_lang['plugins'] = 'Plugins';
 $_lang['plugins'] = 'Pluginy';
@@ -1459,7 +1468,7 @@ $_lang['untitled_weblink'] = '_Bezejmenný webový odkaz';
 $_lang['untitled_symlink'] = '_Bezejmenný symbolický odkaz';
 
 // $_lang['update'] = 'Update';
-$_lang['update'] = 'Upravit';
+$_lang['update'] = 'Aktualizovat';
 
 // $_lang['updated'] = 'Updated';
 $_lang['updated'] = 'Aktualizováno';

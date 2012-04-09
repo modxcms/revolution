@@ -312,7 +312,7 @@ class modLexicon {
             /** @var modNamespace $namespaceObj */
             $namespaceObj = $this->modx->getObject('modNamespace',$namespace);
             if ($namespaceObj) {
-                $corePath = $namespaceObj->get('path');
+                $corePath = $namespaceObj->getCorePath();
             }
         }
         return $corePath;

@@ -58,6 +58,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
         $c->where(array(
             'id' => $scriptProperties['id'],
         ));
+        /** @var modFormCustomizationSet $set */
         $set = $this->modx->getObject('modFormCustomizationSet',$c);
         if (empty($set)) return $this->failure($this->modx->lexicon('set_err_nfs',array('id' => $scriptProperties['id'])));
         
@@ -66,52 +67,58 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
 
         /* format fields */
         $this->setArray['fields'] = array();
-        foreach ($setData['fields'] as $field) {
-            $this->setArray['fields'][] = array(
-                $field['id'],
-                (int)$field['action'],
-                $field['name'],
-                $field['tab'],
-                (int)$field['tab_rank'],
-                $field['other'],
-                (int)$field['rank'],
-                (boolean)$field['visible'],
-                $field['label'],
-                $field['default_value'],
-            );
+        if (!empty($setData['fields'])) {
+            foreach ($setData['fields'] as $field) {
+                $this->setArray['fields'][] = array(
+                    $field['id'],
+                    (int)$field['action'],
+                    $field['name'],
+                    $field['tab'],
+                    (int)$field['tab_rank'],
+                    $field['other'],
+                    (int)$field['rank'],
+                    (boolean)$field['visible'],
+                    $field['label'],
+                    $field['default_value'],
+                );
+            }
         }
 
         /* format tabs */
         $this->setArray['tabs'] = array();
-        foreach ($setData['tabs'] as $tab) {
-            $this->setArray['tabs'][] = array(
-                (int)$tab['id'],
-                (int)$tab['action'],
-                $tab['name'],
-                $tab['form'],
-                $tab['other'],
-                (int)$tab['rank'],
-                (boolean)$tab['visible'],
-                $tab['label'],
-                $tab['type'],
-                'core',
-            );
+        if (!empty($setData['tabs'])) {
+            foreach ($setData['tabs'] as $tab) {
+                $this->setArray['tabs'][] = array(
+                    (int)$tab['id'],
+                    (int)$tab['action'],
+                    $tab['name'],
+                    $tab['form'],
+                    $tab['other'],
+                    (int)$tab['rank'],
+                    (boolean)$tab['visible'],
+                    $tab['label'],
+                    $tab['type'],
+                    'core',
+                );
+            }
         }
 
         /* format tvs */
         $this->setArray['tvs'] = array();
-        foreach ($setData['tvs'] as $tv) {
-            $this->setArray['tvs'][] = array(
-                (int)$tv['id'],
-                $tv['name'],
-                $tv['tab'],
-                (int)$tv['rank'],
-                (boolean)$tv['visible'],
-                $tv['label'],
-                $tv['default_value'],
-                !empty($tv['category_name']) ? $tv['category_name'] : $this->modx->lexicon('none'),
-                htmlspecialchars($tv['default_text'],null,$this->modx->getOption('modx_charset',null,'UTF-8')),
-            );
+        if (!empty($setData['tvs'])) {
+            foreach ($setData['tvs'] as $tv) {
+                $this->setArray['tvs'][] = array(
+                    (int)$tv['id'],
+                    $tv['name'],
+                    $tv['tab'],
+                    (int)$tv['rank'],
+                    (boolean)$tv['visible'],
+                    $tv['label'],
+                    $tv['default_value'],
+                    !empty($tv['category_name']) ? $tv['category_name'] : $this->modx->lexicon('none'),
+                    htmlspecialchars($tv['default_text'],null,$this->modx->getOption('modx_charset',null,'UTF-8')),
+                );
+            }
         }
 
         if (empty($this->setArray['template'])) $this->setArray['template'] = 0;

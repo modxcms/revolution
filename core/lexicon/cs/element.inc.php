@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2012-04-01
  */
 // $_lang['element'] = 'Element';
 $_lang['element'] = 'Element';
@@ -17,6 +17,12 @@ $_lang['element_err_nf'] = 'Element nenalezen.';
 
 // $_lang['element_err_ns'] = 'Element not specified.';
 $_lang['element_err_ns'] = 'Nespecifikovaný element.';
+
+// $_lang['element_static_source_immutable'] = 'The static file specified as the element source is not writable! You cannot edit the content of this element in the manager.';
+$_lang['element_static_source_immutable'] = 'Statický soubor, který je nastaven pro tento element není zapisovatelný! Nelze tedy upravovat obsah tohoto elementu.';
+
+// $_lang['element_static_source_protected_invalid'] = 'You cannot point your Element to the MODX configuration directory; this is a protected, non-accessible directory.';
+$_lang['element_static_source_protected_invalid'] = 'Statický soubor nelze umístit do adresáře s konfigurací MODX, neb tento adresář je chráněn systémem a nelze do něj zapisovat.';
 
 // $_lang['is_static'] = 'Is Static';
 $_lang['is_static'] = 'Statický';

@@ -351,7 +351,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
     ,_saveState: function(n) {
         if (!this.stateful) {
-            return false;
+            return true;
         }
         var s = Ext.state.Manager.get(this.treestate_id);
         var p = n.getPath();

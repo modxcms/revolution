@@ -427,9 +427,9 @@ class modX extends xPDO {
             $this->loadClass('modPrincipal');
             $this->loadClass('modUser');
         } catch (xPDOException $xe) {
-            $this->sendError('fatal', array('error_message' => "<p>{$xe->getMessage()}</p>"));
+            $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {
-            $this->sendError('fatal', array('error_message' => "<p>{$e->getMessage()}</p>"));
+            $this->sendError('unavailable', array('error_message' => $e->getMessage()));
         }
     }
 
@@ -451,7 +451,7 @@ class modX extends xPDO {
             $configPath= MODX_CORE_PATH . 'config/';
         }
         global $database_dsn, $database_user, $database_password, $config_options, $driver_options, $table_prefix, $site_id, $uuid;
-        if (include ($configPath . MODX_CONFIG_KEY . '.inc.php')) {
+        if (file_exists($configPath . MODX_CONFIG_KEY . '.inc.php') && include ($configPath . MODX_CONFIG_KEY . '.inc.php')) {
             $cachePath= MODX_CORE_PATH . 'cache/';
             if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
             if (!is_array($config_options)) $config_options = array();
@@ -488,6 +488,8 @@ class modX extends xPDO {
             array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
             if (!empty($site_id)) $this->site_id = $site_id;
             if (!empty($uuid)) $this->uuid = $uuid;
+        } else {
+            throw new xPDOException("Could not load MODX config file.");
         }
         return $data;
     }
@@ -941,14 +943,19 @@ class modX extends xPDO {
     public function sendError($type = '', $options = array()) {
         if (!is_string($type) || empty($type)) $type = $this->getOption('error_type', $options, 'unavailable');
         while (@ob_end_clean()) {}
-        if (file_exists(MODX_CORE_PATH . "error/{$type}.include.php")) {
-            @include(MODX_CORE_PATH . "error/{$type}.include.php");
+        if (!XPDO_CLI_MODE) {
+            $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Service temporarily unavailable');
+            $errorMessage = $this->getOption('error_message', $options, '<p>Site temporarily unavailable.</p>');
+            if (file_exists(MODX_CORE_PATH . "error/{$type}.include.php")) {
+                @include(MODX_CORE_PATH . "error/{$type}.include.php");
+            }
+            header($this->getOption('error_header', $options, 'HTTP/1.1 503 Service Unavailable'));
+            echo "<html><head><title>{$errorPageTitle}</title></head><body><h1>503 Error</h1><p>{$errorMessage}</p></body></html>";
+            @session_write_close();
+        } else {
+            echo ucfirst($type) . "\n";
+            echo $this->getOption('error_message', $options, 'Service temporarily unavailable') . "\n";
         }
-        header($this->getOption('error_header', $options, 'HTTP/1.1 503 Service Unavailable'));
-        $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Site temporarily unavailable');
-        $errorMessage = $this->getOption('error_message', $options, '<h1>' . $this->getOption('site_name', $options, 'Error 503') . '</h1><p>Site temporarily unavailable.</p>');
-        echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
-        @session_write_close();
         exit();
     }
 

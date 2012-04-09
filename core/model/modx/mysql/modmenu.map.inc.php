@@ -7,6 +7,7 @@ $xpdo_meta_map['modMenu']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'menus',
+  'extends' => 'modAccessibleObject',
   'fields' => 
   array (
     'text' => '',
@@ -147,6 +148,17 @@ $xpdo_meta_map['modMenu']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Acls' => 
+    array (
+      'class' => 'modAccessMenu',
+      'local' => 'text',
+      'foreign' => 'target',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
+  ),
   'aggregates' => 
   array (
     'Action' => 
@@ -170,17 +182,6 @@ $xpdo_meta_map['modMenu']= array (
       'class' => 'modMenu',
       'local' => 'text',
       'foreign' => 'parent',
-      'owner' => 'local',
-      'cardinality' => 'many',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Acls' => 
-    array (
-      'class' => 'modAccessMenu',
-      'local' => 'text',
-      'foreign' => 'target',
       'owner' => 'local',
       'cardinality' => 'many',
     ),

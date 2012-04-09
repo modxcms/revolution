@@ -44,11 +44,14 @@ class modUser extends modPrincipal {
     public $sessionContexts= array ();
 
     /**
-     * The modUser password field is hashed automatically.
+     * The modUser password field is hashed automatically, and prevent sudo from being set via mass-assignment
      *
      * {@inheritdoc}
      */
     public function set($k, $v= null, $vType= '') {
+        if (!$this->getOption(xPDO::OPT_SETUP)) {
+            if ($k == 'sudo') return false;
+        }
         if (in_array($k, array('password', 'cachepwd')) && $this->xpdo->getService('hashing', 'hashing.modHashing')) {
             if (!$this->get('salt')) {
                 $this->set('salt', md5(uniqid(rand(),true)));
@@ -57,6 +60,18 @@ class modUser extends modPrincipal {
             $v = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
         }
         return parent::set($k, $v, $vType);
+    }
+
+    /**
+     * Set the sudo field explicitly
+     *
+     * @param boolean $sudo
+     * @return bool
+     */
+    public function setSudo($sudo) {
+        $this->_fields['sudo'] = (boolean)$sudo;
+        $this->setDirty('sudo');
+        return true;
     }
 
     /**
@@ -482,8 +497,6 @@ class modUser extends modPrincipal {
      * Gets all Resource Groups this user is assigned to. This may not work in
      * the new model.
      *
-     * @deprecated
-     * @todo refactor this to actually work.
      * @access public
      * @param string $ctx The context in which to peruse for Resource Groups
      * @return array An array of Resource Group names.

@@ -7,6 +7,7 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
   'package' => 'modx.registry.db',
   'version' => '1.1',
   'table' => 'register_topics',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'queue' => NULL,
@@ -52,28 +53,6 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
       'phptype' => 'array',
     ),
   ),
-  'aggregates' => 
-  array (
-    'Queue' => 
-    array (
-      'class' => 'registry.db.modDbRegisterQueue',
-      'local' => 'queue',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Messages' => 
-    array (
-      'class' => 'registry.db.modDbRegisterMessage',
-      'local' => 'id',
-      'foreign' => 'topic',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-  ),
   'indexes' => 
   array (
     'queue' => 
@@ -107,6 +86,28 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
           'null' => false,
         ),
       ),
+    ),
+  ),
+  'composites' => 
+  array (
+    'Messages' => 
+    array (
+      'class' => 'registry.db.modDbRegisterMessage',
+      'local' => 'id',
+      'foreign' => 'topic',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Queue' => 
+    array (
+      'class' => 'registry.db.modDbRegisterQueue',
+      'local' => 'queue',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );

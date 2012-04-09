@@ -34,6 +34,10 @@ MODx.grid.User = function(config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'security/user.php'
+        ,baseParams: {
+            action: 'getList'
+            ,usergroup: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
+        }
         ,fields: ['id','username','fullname','email','gender','blocked','role','active','cls']
         ,paging: true
         ,autosave: true
@@ -112,7 +116,7 @@ MODx.grid.User = function(config) {
                 action: 'getList'
                 ,addAll: true
             }
-            ,value: ''
+            ,value: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
             ,width: 200
             ,listeners: {
                 'select': {fn:this.filterUsergroup,scope:this}

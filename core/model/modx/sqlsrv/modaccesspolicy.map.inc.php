@@ -7,6 +7,7 @@ $xpdo_meta_map['modAccessPolicy']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'access_policies',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => NULL,
@@ -141,6 +142,17 @@ $xpdo_meta_map['modAccessPolicy']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Children' => 
+    array (
+      'class' => 'modAccessPolicy',
+      'local' => 'id',
+      'foreign' => 'parent',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
+  ),
   'aggregates' => 
   array (
     'Parent' => 
@@ -158,17 +170,6 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'foreign' => 'id',
       'owner' => 'foreign',
       'cardinality' => 'one',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Children' => 
-    array (
-      'class' => 'modAccessPolicy',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'owner' => 'local',
-      'cardinality' => 'many',
     ),
   ),
 );

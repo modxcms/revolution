@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2012-04-01
  */
 // $_lang['action'] = 'Action';
 $_lang['action'] = 'Akce';
@@ -158,6 +158,12 @@ $_lang['rank'] = 'Pořadí';
 
 // $_lang['rank_desc'] = 'The order the Rule is executed in. A lower number means that it will be executed earlier.';
 $_lang['rank_desc'] = 'Pořadí v jakém jsou pravidla aplikována. Nižší číslo znamená, že bude pravidlo aplikováno dříve.';
+
+// $_lang['region'] = 'Region';
+$_lang['region'] = 'Oblast';
+
+// $_lang['regions'] = 'Regions';
+$_lang['regions'] = 'Oblasti';
 
 // $_lang['rule'] = 'Rule';
 $_lang['rule'] = 'Pravidlo';

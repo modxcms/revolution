@@ -6,7 +6,6 @@
  * @package modx
  * @subpackage lexicon
  */
-
 $_lang['action'] = 'Action';
 $_lang['action_desc'] = 'Cette règle s\'appliquera à l\'action spécifiée.';
 $_lang['activate'] = 'Activer';
@@ -57,6 +56,8 @@ $_lang['profiles'] = 'Profils de personnalisation de formulaire';
 $_lang['profiles_msg'] = 'Liste de vos profils de personnalisation de formulaire. Les profils peuvent contenir plusieurs règles de personnalisation et être activés ou désactivés. Ils peuvent également être configurés pour ne s\'appliquer qu\'à certain groupes d\'utilisateurs.';
 $_lang['rank'] = 'Rang';
 $_lang['rank_desc'] = 'L\'ordre dans lequel les règles sont exécutées. Un petit nombre signifie qu\'il sera exécuté plus tôt.';
+$_lang['region'] = 'Région';
+$_lang['regions'] = 'Régions';
 $_lang['rule'] = 'Règle';
 $_lang['rule_create'] = 'Créer une règle';
 $_lang['rule_desc'] = 'Le type de la règle qui sera appliquée à ce champ.';
@@ -94,18 +95,18 @@ $_lang['set_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce set? Cet
 $_lang['set_remove_multiple'] = 'Supprimer plusieur sets';
 $_lang['set_remove_multiple_confirm'] = 'Êtes-vous sûr de vouloir supprimer ces sets? Cette opération est irreverssible.';
 $_lang['set_tab_err_ae'] = 'Un onglet ayant cet ID existe déjà. Veuillez en indiquer un autre.';
-$_lang['set_tabs_msg'] = 'Vous pouvez ajuster ici les onglets pour cette page, inclue leur visibilité et titre. double-cliquez sur une cellule pour éditer sa valeur. Laissez le champ vide pour utiliser la valeur par défaut.';
+$_lang['set_tabs_msg'] = 'Vous pouvez ajuster ici les onglets et régions pour cette page, inclue leur visibilité et titre. double-cliquez sur une cellule pour éditer sa valeur. Laissez le champ vide pour utiliser la valeur par défaut.';
 $_lang['set_template_desc'] = 'Choisir un modèle empêchera les règles du set de s\'exécuter, à moins que la ressource n\'utilise ce modèle.';
-$_lang['set_tvs_msg'] = 'Vous pouvez définir ici leur visibilité, leurs noms, leurs valeurs par défaut et leurs onglets en double-cliquant sur la cellule dans la grille. Note: si vous déplacez une variable de modèle dans un autre onglet, vous pouvez définir son ordre dans le champ "ordre d\'onglet". Laissez vide pour utiliser la valeur par défaut.';
+$_lang['set_tvs_msg'] = 'Vous pouvez définir ici leur visibilité, leurs noms, leurs valeurs par défaut et leurs onglets en double-cliquant sur la cellule dans la grille. Note: si vous déplacez une variable de modèle dans unu autre région, vous pouvez définir son ordre dans le champ "ordre de région". Laissez vide pour utiliser la valeur par défaut.';
 $_lang['sets'] = 'Set de personnalisation de formulaire';
 $_lang['simplexml_err_nf'] = 'MODX requiert l\'extension PHP SimpleXML pour utiliser cette fonction. Veuillez vous assurer que cette extension est installée avant de continuer.';
 $_lang['tab'] = 'Onglet';
 $_lang['tab_create'] = 'Créer un nouvel onglet';
 $_lang['tab_id'] = 'ID';
 $_lang['tab_name'] = 'Nom de l\'onglet';
-$_lang['tab_title'] = 'Titre de l\'onglet';
+$_lang['tab_title'] = 'Titre';
 $_lang['tab_new'] = 'Nouvel onglet';
-$_lang['tab_rank'] = 'Ordre de l\'onglet';
+$_lang['tab_rank'] = 'Ordre de région';
 $_lang['tab_remove'] = 'Supprimer l\'onglet';
 $_lang['tab_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cet onglet?';
 $_lang['tab_visible'] = 'Onglet visible';

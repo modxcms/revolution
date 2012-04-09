@@ -142,21 +142,42 @@ MODx.window.CreateNamespace = function(config) {
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
+            ,description: MODx.expandHelp ? '' : _('namespace_name_desc')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,anchor: '100%'
             ,maxLength: 100
+
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-name'
+            ,html: _('namespace_name_desc')
+            ,cls: 'desc-under'
+
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('path')
+            ,fieldLabel: _('namespace_path')
             ,description: MODx.expandHelp ? '' : _('namespace_path_desc')
             ,name: 'path'
             ,id: 'modx-'+this.ident+'-path'
             ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-name'
+            ,forId: 'modx-'+this.ident+'-path'
             ,html: _('namespace_path_desc')
+            ,cls: 'desc-under'
+
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('namespace_assets_path')
+            ,description: MODx.expandHelp ? '' : _('namespace_assets_path_desc')
+            ,name: 'assets_path'
+            ,id: 'modx-'+this.ident+'-assets-path'
+            ,anchor: '100%'
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'modx-'+this.ident+'-assets-path'
+            ,html: _('namespace_assets_path_desc')
             ,cls: 'desc-under'
         }]
     });

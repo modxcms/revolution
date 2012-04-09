@@ -6,6 +6,7 @@
 $xpdo_meta_map['modAccess']= array (
   'package' => 'modx',
   'version' => '1.1',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'target' => '',
@@ -165,6 +166,36 @@ $xpdo_meta_map['modAccess']= array (
       'foreign' => 'id',
       'owner' => 'foreign',
       'cardinality' => 'one',
+    ),
+    'GroupPrincipal' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'principal',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
+      'criteria' => 
+      array (
+        'local' => 
+        array (
+          'principal_class' => 'modUserGroup',
+        ),
+      ),
+    ),
+    'UserPrincipal' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'principal',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
+      'criteria' => 
+      array (
+        'local' => 
+        array (
+          'principal_class' => 'modUser',
+        ),
+      ),
     ),
     'MinimumRole' => 
     array (

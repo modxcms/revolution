@@ -20,8 +20,7 @@ class modActionUpdateProcessor extends modObjectUpdateProcessor {
     public $objectType = 'action';
 
     public function beforeSave() {
-        $hasLayout = (boolean)$this->getProperty('haslayout');
-        $this->object->set('haslayout',$hasLayout);
+        $this->setCheckbox('haslayout');
 
         $controller = $this->getProperty('controller');
         if (empty($controller)) {

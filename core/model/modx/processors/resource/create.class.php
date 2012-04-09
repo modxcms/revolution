@@ -159,7 +159,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
         $reloaded = (boolean)$this->getProperty('reloaded',false);
         if ($reloaded && !$this->hasErrors() && !$this->checkForAllowableCreateToken()) {
-            return $this->modx->lexicon('resource_err_duplicate').print_r($this->getProperties(),true);
+            return $this->modx->lexicon('resource_err_save');
         }
         return parent::beforeSave();
     }

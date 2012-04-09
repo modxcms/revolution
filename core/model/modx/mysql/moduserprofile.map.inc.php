@@ -7,6 +7,7 @@ $xpdo_meta_map['modUserProfile']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'user_attributes',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'internalKey' => NULL,

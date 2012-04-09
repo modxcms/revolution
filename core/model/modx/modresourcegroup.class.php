@@ -8,6 +8,8 @@
  * @property string $name The name of the Resource Group
  * @property boolean $private_memgroup Deprecated
  * @property boolean $private_webgroup Deprecated
+ *
+ * @property modX|xPDO $xpdo
  * @see modResourceGroupResource
  * @see modAccessResourceGroup
  * @package modx
@@ -89,9 +91,33 @@ class modResourceGroup extends modAccessibleSimpleObject {
             'principal_class' => 'modUserGroup',
         ));
         $groups= array();
+        /** @var modAccessResourceGroup $arg */
         foreach ($access as $arg) {
-            $groups[$arg->get('membergroup')]= $arg->getOne('Target');
+            $groups[$arg->get('target')]= $arg->getOne('Target');
         }
         return $groups;
+    }
+
+    /**
+     * Check to see if the passed user (or current active user) has access to this Resource Group
+     * @param null|modUser $user
+     * @param string $context
+     * @return boolean
+     */
+    public function hasAccess($user = null,$context = '') {
+        $context = !empty($context) ? $context : $this->xpdo->context;
+        /** @var modUser $user */
+        $user = !empty($user) ? $user : $this->xpdo->user;
+        $resourceGroups = $user->getResourceGroups($context);
+        $hasAccess = false;
+        if (!empty($resourceGroups)) {
+            foreach ($resourceGroups as $resourceGroup) {
+                if (intval($resourceGroup) == $this->get('id')) {
+                    $hasAccess = true;
+                    break;
+                }
+            }
+        }
+        return $hasAccess;
     }
 }

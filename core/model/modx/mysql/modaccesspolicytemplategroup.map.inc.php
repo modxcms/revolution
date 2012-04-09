@@ -7,6 +7,7 @@ $xpdo_meta_map['modAccessPolicyTemplateGroup']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'access_policy_template_groups',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',

@@ -159,38 +159,31 @@ class modElement extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
-        if ($this->staticSourceChanged()) {
-            $staticContent = $this->getFileContent();
-            if ($staticContent !== $this->get('content')) {
-                if ($this->isStaticSourceMutable() && $staticContent === '') {
-                    $this->setDirty('content');
-                } else {
-                    $this->setContent($staticContent);
+        if (!$this->getOption(xPDO::OPT_SETUP)) {
+            if ($this->staticSourceChanged()) {
+                $staticContent = $this->getFileContent();
+                if ($staticContent !== $this->get('content')) {
+                    if ($this->isStaticSourceMutable() && $staticContent === '') {
+                        $this->setDirty('content');
+                    } else {
+                        $this->setContent($staticContent);
+                    }
                 }
+                unset($staticContent);
             }
-            unset($staticContent);
-        }
-        $staticContentChanged = $this->staticContentChanged();
-        if ($staticContentChanged && !$this->isStaticSourceMutable()) {
-            $this->setContent($this->getFileContent());
-            $staticContentChanged = false;
+            $staticContentChanged = $this->staticContentChanged();
+            if ($staticContentChanged && !$this->isStaticSourceMutable()) {
+                $this->setContent($this->getFileContent());
+                $staticContentChanged = false;
+            }
         }
         $saved = parent::save($cacheFlag);
-        if ($saved && $staticContentChanged) {
-            $saved = $this->setFileContent($this->get('content'));
+        if (!$this->getOption(xPDO::OPT_SETUP)) {
+            if ($saved && $staticContentChanged) {
+                $saved = $this->setFileContent($this->get('content'));
+            }
         }
         return $saved;
-    }
-
-    /**
-     * Remove all Property Set relations to the Element.
-     *
-     * {@inheritdoc}
-     */
-    public function remove(array $ancestors= array ()) {
-        $this->xpdo->removeCollection('modElementPropertySet', array('element' => $this->get('id'), 'element_class' => $this->_class));
-        $result = parent :: remove($ancestors);
-        return $result;
     }
 
     /**

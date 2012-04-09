@@ -3,6 +3,7 @@
  * Adds all top Menu items to build
  *
  * @var xPDO $xpdo
+ * @var modAction $action
  * 
  * @package modx
  * @subpackage build
@@ -40,7 +41,6 @@ $children[0]->fromArray(array (
         $action->fromArray(array (
           'id' => 100,
           'namespace' => 'core',
-          'parent' => '',
           'controller' => 'system/dashboards',
           'haslayout' => 1,
           'lang_topics' => 'about',
@@ -132,7 +132,6 @@ $children[3]->fromArray(array (
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
           'id' => 45,
-          'parent' => 0,
           'namespace' => 'core',
           'controller' => 'search',
           'haslayout' => 1,
@@ -146,7 +145,6 @@ $children[3]->fromArray(array (
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
           'id' => 43,
-          'parent' => 36,
           'namespace' => 'core',
           'controller' => 'resource/create',
           'haslayout' => 1,
@@ -273,7 +271,6 @@ $children[0]->fromArray(array (
         $action->fromArray(array (
           'id' => 53,
           'namespace' => 'core',
-          'parent' => 46,
           'controller' => 'security/user',
           'haslayout' => 1,
           'lang_topics' => 'user',
@@ -297,7 +294,6 @@ $children[1]->fromArray(array (
         $action->fromArray(array (
           'id' => 66,
           'namespace' => 'core',
-          'parent' => 46,
           'controller' => 'security/permission',
           'haslayout' => 1,
           'lang_topics' => 'user,access,policy',
@@ -321,7 +317,6 @@ $children[2]->fromArray(array (
         $action->fromArray(array (
           'id' => 37,
           'namespace' => 'core',
-          'parent' => 46,
           'controller' => 'security/resourcegroup/index',
           'haslayout' => 1,
           'lang_topics' => 'resource,user,access',
@@ -345,7 +340,6 @@ $children[3]->fromArray(array (
         $action->fromArray(array (
           'id' => 83,
           'namespace' => 'core',
-          'parent' => 46,
           'controller' => 'security/forms',
           'haslayout' => 1,
           'lang_topics' => 'formcustomization,user,access,policy',
@@ -432,7 +426,6 @@ $children[0]->fromArray(array (
         $action->fromArray(array (
           'id' => 59,
           'namespace' => 'core',
-          'parent' => 3,
           'controller' => 'system/import',
           'haslayout' => 1,
           'lang_topics' => 'import',
@@ -455,7 +448,6 @@ $children[1]->fromArray(array (
         $action->fromArray(array (
           'id' => 60,
           'namespace' => 'core',
-          'parent' => 59,
           'controller' => 'system/import/html',
           'haslayout' => 1,
           'lang_topics' => 'import',
@@ -478,7 +470,6 @@ $children[2]->fromArray(array(
         $action->fromArray(array (
           'id' => 82,
           'namespace' => 'core',
-          'parent' => 10,
           'controller' => 'element/propertyset/index',
           'haslayout' => 1,
           'lang_topics' => 'element,category,propertyset',
@@ -502,7 +493,6 @@ $children[3]->fromArray(array(
         $action->fromArray(array (
           'id' => 83,
           'namespace' => 'core',
-          'parent' => 10,
           'controller' => 'source/index',
           'haslayout' => 1,
           'lang_topics' => 'sources,namespace',
@@ -543,7 +533,6 @@ $children[0]->fromArray(array (
         $action->fromArray(array (
           'id' => 42,
           'namespace' => 'core',
-          'parent' => 36,
           'controller' => 'resource/site_schedule',
           'haslayout' => 1,
           'lang_topics' => 'resource',
@@ -566,7 +555,6 @@ $children[1]->fromArray(array (
         $action->fromArray(array (
           'id' => 14,
           'namespace' => 'core',
-          'parent' => '',
           'controller' => 'system/logs/index',
           'haslayout' => 1,
           'lang_topics' => 'manager_log',
@@ -589,7 +577,6 @@ $children[2]->fromArray(array (
         $action->fromArray(array (
           'id' => 57,
           'namespace' => 'core',
-          'parent' => 3,
           'controller' => 'system/event',
           'haslayout' => 1,
           'lang_topics' => 'system_events',
@@ -612,7 +599,6 @@ $children[3]->fromArray(array (
         $action->fromArray(array (
           'id' => 4,
           'namespace' => 'core',
-          'parent' => 3,
           'controller' => 'system/info',
           'haslayout' => 1,
           'lang_topics' => 'system_info',
@@ -635,7 +621,6 @@ $children[4]->fromArray(array (
         $action->fromArray(array (
           'id' => 63,
           'namespace' => 'core',
-          'parent' => '',
           'controller' => 'help',
           'haslayout' => 1,
           'lang_topics' => 'about',
@@ -674,7 +659,6 @@ $children[0]->fromArray(array (
         $action->fromArray(array (
           'id' => 68,
           'namespace' => 'core',
-          'parent' => 3,
           'controller' => 'workspaces',
           'haslayout' => 1,
           'lang_topics' => 'workspace',
@@ -698,7 +682,6 @@ $children[1]->fromArray(array (
         $action->fromArray(array (
           'id' => 30,
           'namespace' => 'core',
-          'parent' => 3,
           'controller' => 'system/settings',
           'haslayout' => 1,
           'lang_topics' => 'setting',
@@ -722,7 +705,6 @@ $children[2]->fromArray(array (
         $action->fromArray(array (
           'id' => 73,
           'namespace' => 'core',
-          'parent' => 68,
           'controller' => 'workspaces/lexicon',
           'haslayout' => 1,
           'lang_topics' => 'package_builder,lexicon,namespace',
@@ -746,7 +728,6 @@ $children[3]->fromArray(array (
         $action->fromArray(array (
           'id' => 69,
           'namespace' => 'core',
-          'parent' => 3,
           'controller' => 'system/contenttype',
           'haslayout' => 1,
           'lang_topics' => 'content_type',
@@ -770,7 +751,6 @@ $children[4]->fromArray(array (
         $action->fromArray(array (
           'id' => 6,
           'namespace' => 'core',
-          'parent' => '',
           'controller' => 'context',
           'haslayout' => 1,
           'lang_topics' => 'context',
@@ -794,7 +774,6 @@ $children[5]->fromArray(array (
         $action->fromArray(array (
           'id' => 2,
           'namespace' => 'core',
-          'parent' => 3,
           'controller' => 'system/action',
           'haslayout' => 1,
           'lang_topics' => 'action,menu,namespace',
@@ -818,7 +797,6 @@ $children[6]->fromArray(array (
         $action->fromArray(array (
           'id' => 48,
           'namespace' => 'core',
-          'parent' => 68,
           'controller' => 'workspaces/namespace',
           'haslayout' => 1,
           'lang_topics' => 'workspace,package_builder,lexicon,namespace',
@@ -858,7 +836,6 @@ $children[0]->fromArray(array (
         $action->fromArray(array (
           'id' => 36,
           'namespace' => 'core',
-          'parent' => 46,
           'controller' => 'security/profile',
           'haslayout' => 1,
           'lang_topics' => 'user',
@@ -881,7 +858,6 @@ $children[1]->fromArray(array (
         $action->fromArray(array (
           'id' => 37,
           'namespace' => 'core',
-          'parent' => 46,
           'controller' => 'security/message',
           'haslayout' => 1,
           'lang_topics' => 'messages',

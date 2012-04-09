@@ -79,6 +79,10 @@ MODx.grid.AccessPolicy = function(config) {
             ,scope: this
             ,handler: this.createPolicy
         },'-',{
+            text: _('import')
+            ,scope: this
+            ,handler: this.importPolicy
+        },'-',{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('policy_remove_multiple')
@@ -105,16 +109,11 @@ MODx.grid.AccessPolicy = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear'
+            ,id: 'modx-sacpol-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }
-        }]
-        ,pagingItems: ['-',{
-            text: _('import')
-            ,scope: this
-            ,handler: this.importPolicy
         }]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);

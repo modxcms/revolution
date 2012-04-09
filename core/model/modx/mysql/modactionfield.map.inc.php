@@ -7,6 +7,7 @@ $xpdo_meta_map['modActionField']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'actions_fields',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'action' => 0,

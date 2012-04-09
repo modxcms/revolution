@@ -7,6 +7,7 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'fc_sets',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'profile' => 0,
@@ -153,6 +154,17 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Rules' => 
+    array (
+      'class' => 'modActionDom',
+      'local' => 'id',
+      'foreign' => 'set',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'Action' => 
@@ -178,17 +190,6 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Rules' => 
-    array (
-      'class' => 'modActionDom',
-      'local' => 'id',
-      'foreign' => 'set',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

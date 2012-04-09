@@ -59,6 +59,7 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
     $action = $modx->actionMap[$scriptProperties['action']];
     $c['namespace'] = $action['namespace'];
     $c['namespace_path'] = $action['namespace_path'];
+    $c['namespace_assets_path'] = $action['namespace_assets_path'];
     $baseHelpUrl = $modx->getOption('base_help_url',$scriptProperties,'http://rtfm.modx.com/display/revolution20/');
     $c['help_url'] = $baseHelpUrl.ltrim($action['help_url'],'/');
 }
@@ -87,6 +88,7 @@ if ($modx->user) {
     if ($modx->hasPermission('new_snippet')) { $o .= 'MODx.perm.new_snippet = true;'; }
     if ($modx->hasPermission('new_template')) { $o .= 'MODx.perm.new_template = true;'; }
     if ($modx->hasPermission('new_tv')) { $o .= 'MODx.perm.new_tv = true;'; }
+    if ($modx->hasPermission('new_category')) { $o .= 'MODx.perm.new_category = true;'; }
     if ($modx->hasPermission('resourcegroup_resource_edit')) { $o .= 'MODx.perm.resourcegroup_resource_edit = true;'; }
     if ($modx->hasPermission('resourcegroup_resource_list')) { $o .= 'MODx.perm.resourcegroup_resource_list = true;'; }
 

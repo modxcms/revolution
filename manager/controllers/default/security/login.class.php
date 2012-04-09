@@ -236,7 +236,9 @@ class SecurityLoginManagerController extends modManagerController {
             $placeholders['hash'] = $activationHash;
             $placeholders['password'] = $newPassword;
             foreach ($placeholders as $k => $v) {
-                $message = str_replace('[[+'.$k.']]',$v,$message);
+                if (is_string($v)) {
+                    $message = str_replace('[[+'.$k.']]',$v,$message);
+                }
             }
 
             $this->modx->getService('mail', 'mail.modPHPMailer');
