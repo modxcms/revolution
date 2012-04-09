@@ -457,6 +457,15 @@ abstract class modRestController {
     }
 
     /**
+     * Get the criteria for the getObject call for GET/PUT/DELETE requests
+     * @param mixed $id
+     * @return array
+     */
+    public function getPrimaryKeyCriteria($id) {
+        return array($this->primaryKeyField => $id);
+    }
+
+    /**
      * Abstract method for routing GET requests with a primary key passed. Must be defined in your derivative
      * controller.
      * @abstract
@@ -469,7 +478,8 @@ abstract class modRestController {
             )));
         }
         /** @var xPDOObject $object */
-        $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
+        $c = $this->getPrimaryKeyCriteria($id);
+        $this->object = $this->modx->getObject($this->classKey,$c);
         if (empty($this->object)) {
             return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
                 'class_key' => $this->classKey,
@@ -542,7 +552,8 @@ abstract class modRestController {
                 'field' => $this->primaryKeyField,
             )));
         }
-        $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
+        $c = $this->getPrimaryKeyCriteria($id);
+        $this->object = $this->modx->getObject($this->classKey,$c);
         if (empty($this->object)) {
             return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
                 'class_key' => $this->classKey,
@@ -591,7 +602,8 @@ abstract class modRestController {
                 'field' => $this->primaryKeyField,
             )));
         }
-        $this->object = $this->modx->getObject($this->classKey,array($this->primaryKeyField => $id));
+        $c = $this->getPrimaryKeyCriteria($id);
+        $this->object = $this->modx->getObject($this->classKey,$c);
         if (empty($this->object)) {
             return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
                 'class_key' => $this->classKey,
