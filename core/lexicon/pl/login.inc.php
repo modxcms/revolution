@@ -52,9 +52,6 @@ $_lang['login_hostname_error'] = 'Nie udało się wykryć Twojego adresu IP.'; #
 #$_lang['login_message'] = 'Please enter your login credentials to start your Manager session. Your username and password are case-sensitive, so please enter them carefully!';
 $_lang['login_message'] = 'Podaj dane uwierzytelniające, aby zalogować się i rozpocząć sesję w panelu administracyjnym. Wprowadzając nazwę użytkownika i hasło zachowaj uwagę, bo wielkie i małe litery są rozróżniane!'; #
 
-#$_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
-$_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
-
 #$_lang['login_password'] = 'Password';
 $_lang['login_password'] = 'Hasło'; #
 
