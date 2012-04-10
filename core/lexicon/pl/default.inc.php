@@ -740,7 +740,7 @@ $_lang['manager'] = 'Manager';
 $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
 
 #$_lang['media'] = 'Media';
-$_lang['media'] = 'Media';
+$_lang['media'] = 'Pliki'; #
 
 #$_lang['menu_order'] = 'Menu Order';
 $_lang['menu_order'] = 'Kolejność w menu'; #
