@@ -1,11 +1,11 @@
 <?php
 /**
-* TV Widget Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * TV Widget Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['attributes'] = 'Attributes';
 $_lang['attributes'] = 'Attributes';
@@ -156,42 +156,6 @@ $_lang['image_align_list'] = 'none,baseline,top,middle,bottom,texttop,absmiddle,
 #$_lang['image_alt'] = 'Alternate Text';
 $_lang['image_alt'] = 'Alternate Text';
 
-#$_lang['image_allowedfiletypes'] = 'Allowed File Extensions';
-$_lang['image_allowedfiletypes'] = 'Allowed File Extensions';
-
-#$_lang['image_allowedfiletypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the .';
-$_lang['image_allowedfiletypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the .';
-
-#$_lang['image_basepath'] = 'Base Path';
-$_lang['image_basepath'] = 'Base Path';
-
-#$_lang['image_basepath_desc'] = 'The file path to point the Image TV to. If not set, will use the filemanager_path setting, or the base MODX path. May use [[++base_path]], [[++core_path]] and [[++assets_path]] placeholders inside this value.';
-$_lang['image_basepath_desc'] = 'The file path to point the Image TV to. If not set, will use the filemanager_path setting, or the base MODX path. May use [[++base_path]], [[++core_path]] and [[++assets_path]] placeholders inside this value.';
-
-#$_lang['image_basepath_relative'] = 'Base Path Relative';
-$_lang['image_basepath_relative'] = 'Base Path Relative';
-
-#$_lang['image_basepath_relative_desc'] = 'If the Base Path setting above is not relative to the MODX install path, set this to Yes.';
-$_lang['image_basepath_relative_desc'] = 'If the Base Path setting above is not relative to the MODX install path, set this to Yes.';
-
-#$_lang['image_baseurl'] = 'Base URL';
-$_lang['image_baseurl'] = 'Base URL';
-
-#$_lang['image_baseurl_desc'] = 'The file URL to point the Image TV to. If not set, will use the filemanager_url setting, or the base MODX URL. May use [[++base_url]], [[++core_url]] and [[++assets_url]] placeholders inside this value.';
-$_lang['image_baseurl_desc'] = 'The file URL to point the Image TV to. If not set, will use the filemanager_url setting, or the base MODX URL. May use [[++base_url]], [[++core_url]] and [[++assets_url]] placeholders inside this value.';
-
-#$_lang['image_baseurl_prepend_check_slash'] = 'Prepend URL If No Beginning /';
-$_lang['image_baseurl_prepend_check_slash'] = 'Prepend URL If No Beginning /';
-
-#$_lang['image_baseurl_prepend_check_slash_desc'] = 'If true, MODX only will prepend the baseUrl if no forward slash (/) is found at the beginning of the URL when rendering the TV. Useful for setting a TV value outside the baseUrl.';
-$_lang['image_baseurl_prepend_check_slash_desc'] = 'If true, MODX only will prepend the baseUrl if no forward slash (/) is found at the beginning of the URL when rendering the TV. Useful for setting a TV value outside the baseUrl.';
-
-#$_lang['image_baseurl_relative'] = 'Base Url Relative';
-$_lang['image_baseurl_relative'] = 'Base Url Relative';
-
-#$_lang['image_baseurl_relative_desc'] = 'If the Base URL setting above is not relative to the MODX install URL, set this to Yes.';
-$_lang['image_baseurl_relative_desc'] = 'If the Base URL setting above is not relative to the MODX install URL, set this to Yes.';
-
 #$_lang['image_border_size'] = 'Border Size';
 $_lang['image_border_size'] = 'Border Size';
 
@@ -296,6 +260,12 @@ $_lang['resourcelist_includeparent'] = 'Include Parents';
 
 #$_lang['resourcelist_includeparent_desc'] = 'If Yes, will include the Resources named in the Parents field in the list.';
 $_lang['resourcelist_includeparent_desc'] = 'If Yes, will include the Resources named in the Parents field in the list.';
+
+#$_lang['resourcelist_limitrelatedcontext'] = 'Limit to Related Context';
+$_lang['resourcelist_limitrelatedcontext'] = 'Limit to Related Context';
+
+#$_lang['resourcelist_limitrelatedcontext_desc'] = 'If Yes, will only include the Resources related to the context of the current Resource.';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'If Yes, will only include the Resources related to the context of the current Resource.';
 
 #$_lang['resourcelist_limit'] = 'Limit';
 $_lang['resourcelist_limit'] = 'Limit';

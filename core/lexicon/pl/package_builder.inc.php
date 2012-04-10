@@ -1,11 +1,11 @@
 <?php
 /**
-* Package Builder Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Package Builder Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['as_system_settings'] = 'System Settings';
 $_lang['as_system_settings'] = 'System Settings';
@@ -121,11 +121,11 @@ $_lang['resolver_create'] = 'Create Resolver';
 #$_lang['resolver_name_desc'] = 'The name of the resolver. Used for organizational purposes.';
 $_lang['resolver_name_desc'] = 'The name of the resolver. Used for organizational purposes.';
 
-#$_lang['resolver_remove'] = 'Remove Resolver';
-$_lang['resolver_remove'] = 'Remove Resolver';
+#$_lang['resolver_remove'] = 'Delete Resolver';
+$_lang['resolver_remove'] = 'Delete Resolver';
 
-#$_lang['resolver_remove_confirm'] = 'Are you sure you want to remove this resolver?';
-$_lang['resolver_remove_confirm'] = 'Are you sure you want to remove this resolver?';
+#$_lang['resolver_remove_confirm'] = 'Are you sure you want to delete this resolver?';
+$_lang['resolver_remove_confirm'] = 'Are you sure you want to delete this resolver?';
 
 #$_lang['resolver_source_desc'] = 'The absolute path of the source of the resolver. If it is a file resolver, select the directory of the files you\'d like to copy. If a PHP Script, specify the script. Example: <br /><br />/public_html/modx/_build/components/demo/';
 $_lang['resolver_source_desc'] = 'The absolute path of the source of the resolver. If it is a file resolver, select the directory of the files you\'d like to copy. If a PHP Script, specify the script. Example: <br /><br />/public_html/modx/_build/components/demo/';
@@ -175,11 +175,11 @@ $_lang['vehicle_add'] = 'Add Vehicle';
 #$_lang['vehicle_create'] = 'Create Vehicle';
 $_lang['vehicle_create'] = 'Create Vehicle';
 
-#$_lang['vehicle_remove'] = 'Remove Vehicle';
-$_lang['vehicle_remove'] = 'Remove Vehicle';
+#$_lang['vehicle_remove'] = 'Delete Vehicle';
+$_lang['vehicle_remove'] = 'Delete Vehicle';
 
-#$_lang['vehicle_remove_confirm'] = 'Are you sure you want to remove this vehicle?';
-$_lang['vehicle_remove_confirm'] = 'Are you sure you want to remove this vehicle?';
+#$_lang['vehicle_remove_confirm'] = 'Are you sure you want to delete this vehicle?';
+$_lang['vehicle_remove_confirm'] = 'Are you sure you want to delete this vehicle?';
 
 #$_lang['vehicles'] = 'Vehicles';
 $_lang['vehicles'] = 'Vehicles';

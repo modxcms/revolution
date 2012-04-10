@@ -1,11 +1,14 @@
 <?php
 /**
-* Login Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Login Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
+
+#$_lang['login_language'] = 'Language';
+$_lang['login_language'] = 'Language';
 
 #$_lang['login_activation_key_err'] = 'Activation key does not match! Please check your activation email and make sure you loaded the right URL.';
 $_lang['login_activation_key_err'] = 'Token aktywacji jest niepoprawny! Sprawdź wiadomość z aktywacją konta i upewnij się, że podałeś prawidłowy adres URL.'; # ?
@@ -31,7 +34,7 @@ $_lang['login_button'] = 'Zaloguj'; #
 #$_lang['login_cannot_locate_account'] = 'That account could not be located.  Check the username and re-type the password to try again.';
 $_lang['login_cannot_locate_account'] = 'Nie znaleziono takiego konta użytkownika. Sprawdź login, wprowadź hasło i spróbuj ponownie.'; # ?
 
-#$_lang['login_copyright'] = '&copy; 2005-2011 by the <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; is licensed under the GPLv2 or later.';
+#$_lang['login_copyright'] = '&copy; 2005-2012 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_copyright'] = '&copy; 2005-2011 <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; jest udostępniany na licencji GPLv2 lub nowszej.'; #
 
 #$_lang['login_email_label'] = 'Account Email:';
@@ -52,7 +55,7 @@ $_lang['login_message'] = 'Podaj dane uwierzytelniające, aby zalogować się i 
 #$_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
 $_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
 
-#$_lang['login_password'] = 'Password: ';
+#$_lang['login_password'] = 'Password';
 $_lang['login_password'] = 'Hasło:'; #
 
 #$_lang['login_password_reset_act_sent'] = 'Password Reset Activation email sent. Please check your inbox.';
@@ -70,7 +73,7 @@ $_lang['login_title'] = 'Logowanie do panelu administracyjnego MODX'; #
 #$_lang['login_user_err_nf_email'] = 'User not found with that email. Please try again.';
 $_lang['login_user_err_nf_email'] = 'Nie znaleziono konta użytkownika odpowiadającego temu adresowi email. Spróbuj ponownie.'; # ?
 
-#$_lang['login_username'] = 'Username: ';
+#$_lang['login_username'] = 'Username';
 $_lang['login_username'] = 'Login:'; #
 
 #$_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';

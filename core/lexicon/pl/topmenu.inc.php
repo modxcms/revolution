@@ -1,11 +1,11 @@
 <?php
 /**
-* Top Menu Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Top Menu Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['about'] = 'About';
 $_lang['about'] = 'O MODX'; #
@@ -22,7 +22,7 @@ $_lang['access_permissions_desc'] = 'Manage user group access to resources and c
 #$_lang['api_docs'] = 'API Documentation';
 $_lang['api_docs'] = 'Dokumentacja API'; #
 
-#$_lang['api_docs_desc'] = 'phpDocumentor-driven documentation of the Revolution API.';
+#$_lang['api_docs_desc'] = 'Complete API documentation for MODX Revolution.';
 $_lang['api_docs_desc'] = 'Wyświetl dokumentację API MODX.';
 
 #$_lang['components'] = 'Components';
@@ -39,6 +39,15 @@ $_lang['contexts'] = 'Konteksty'; #
 
 #$_lang['contexts_desc'] = 'Manage site contexts and their settings.';
 $_lang['contexts_desc'] = 'Zarządzaj kontekstami i ich ustawieniami.'; #
+
+#$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard'] = 'Dashboard';
+
+#$_lang['dashboards'] = 'Dashboards';
+$_lang['dashboards'] = 'Dashboards';
+
+#$_lang['dashboards_desc'] = 'Manage all dashboard configurations.';
+$_lang['dashboards_desc'] = 'Manage all dashboard configurations.';
 
 #$_lang['edit_menu'] = 'Actions';
 $_lang['edit_menu'] = 'Akcje i Menu'; #
@@ -229,6 +238,12 @@ $_lang['security'] = 'Bezpieczeństwo'; #
 #$_lang['site'] = 'Site';
 $_lang['site'] = 'Serwis'; #
 
+#$_lang['sources'] = 'Media Sources';
+$_lang['sources'] = 'Media Sources';
+
+#$_lang['sources_desc'] = 'Manage your media sources here.';
+$_lang['sources_desc'] = 'Manage your media sources here.';
+
 #$_lang['support'] = 'Support';
 $_lang['support'] = 'Wsparcie'; #
 
@@ -283,6 +298,5 @@ $_lang['view_sysinfo_desc'] = 'Wyświetl informacje o systemie takie jak <code>p
 #$_lang['wiki'] = 'Wiki';
 $_lang['wiki'] = 'Dokumentacja MODX'; #
 
-#$_lang['wiki_desc'] = 'Launch the MODX Confluence wiki, where documentation on MODX Revolution is stored.';
+#$_lang['wiki_desc'] = 'Launch the official MODX documentation.';
 $_lang['wiki_desc'] = 'Wyświetl dokumentację MODX.'; #
-
