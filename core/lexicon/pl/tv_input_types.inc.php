@@ -1,11 +1,11 @@
 <?php
 /**
-* TV Input Types Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * TV Input Types Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['autotag'] = 'Auto-Tag';
 $_lang['autotag'] = 'Auto-Tag';

@@ -1,11 +1,11 @@
 <?php
 /**
-* Content Type Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Content Type Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['binary'] = 'Binary';
 $_lang['binary'] = 'Binary';
@@ -34,6 +34,9 @@ $_lang['content_type_err_ns_name'] = 'Please specify a valid name for the Conten
 #$_lang['content_type_err_create'] = 'An error occurred while trying to create the Content Type.';
 $_lang['content_type_err_create'] = 'An error occurred while trying to create the Content Type.';
 
+#$_lang['content_type_err_in_use'] = 'You cannot remove this Content Type, as it is currently in use by Resources in MODX. Please re-assign the Content Types of those Resources before proceeding.';
+$_lang['content_type_err_in_use'] = 'You cannot remove this Content Type, as it is currently in use by Resources in MODX. Please re-assign the Content Types of those Resources before proceeding.';
+
 #$_lang['content_type_err_remove'] = 'An error occurred while trying to remove the Content Type.';
 $_lang['content_type_err_remove'] = 'An error occurred while trying to remove the Content Type.';
 
@@ -43,11 +46,11 @@ $_lang['content_type_err_save'] = 'An error occurred while trying to save the Co
 #$_lang['content_type_new'] = 'New Content Type';
 $_lang['content_type_new'] = 'New Content Type';
 
-#$_lang['content_type_remove'] = 'Remove Content Type';
-$_lang['content_type_remove'] = 'Remove Content Type';
+#$_lang['content_type_remove'] = 'Delete Content Type';
+$_lang['content_type_remove'] = 'Delete Content Type';
 
-#$_lang['content_type_remove_confirm'] = 'Are you sure you want to remove this Content Type?';
-$_lang['content_type_remove_confirm'] = 'Are you sure you want to remove this Content Type?';
+#$_lang['content_type_remove_confirm'] = 'Are you sure you want to delete this Content Type?';
+$_lang['content_type_remove_confirm'] = 'Are you sure you want to delete this Content Type?';
 
 #$_lang['content_types'] = 'Content Types';
 $_lang['content_types'] = 'Content Types';

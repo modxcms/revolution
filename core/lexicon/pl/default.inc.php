@@ -1,11 +1,11 @@
 <?php
 /**
-* Default Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Default English lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['access'] = 'Access';
 $_lang['access'] = 'Access';
@@ -52,8 +52,23 @@ $_lang['add_tag'] = 'Add tag';
 #$_lang['add_template'] = 'Add Template';
 $_lang['add_template'] = 'Add Template';
 
+#$_lang['add_to_category_chunk'] = 'Create a New Chunk Here';
+$_lang['add_to_category_chunk'] = 'Create a New Chunk Here';
+
+#$_lang['add_to_category_plugin'] = 'Create a New Plugin Here';
+$_lang['add_to_category_plugin'] = 'Create a New Plugin Here';
+
+#$_lang['add_to_category_snippet'] = 'Create a New Snippet Here';
+$_lang['add_to_category_snippet'] = 'Create a New Snippet Here';
+
+#$_lang['add_to_category_template'] = 'Create a New Template Here';
+$_lang['add_to_category_template'] = 'Create a New Template Here';
+
 #$_lang['add_to_category_this'] = 'Create a New [[+type]] Here';
 $_lang['add_to_category_this'] = 'Create a New [[+type]] Here';
+
+#$_lang['add_to_category_tv'] = 'Create a New TV Here';
+$_lang['add_to_category_tv'] = 'Create a New TV Here';
 
 #$_lang['add_tv'] = 'Add TV';
 $_lang['add_tv'] = 'Add TV';
@@ -112,11 +127,14 @@ $_lang['cache_unpublish_event_error'] = '<p>ERROR: Could not determine next unpu
 #$_lang['cached'] = 'Cached';
 $_lang['cached'] = 'Cached';
 
-#$_lang['cancel'] = 'Cancel';
+#$_lang['cancel'] = 'Close';
 $_lang['cancel'] = 'Anuluj'; #
 
 #$_lang['caption'] = 'Caption';
 $_lang['caption'] = 'Caption';
+
+#$_lang['caption_desc'] = 'The name to show beside the input when editing a TV on a Resource form.';
+$_lang['caption_desc'] = 'The name to show beside the input when editing a TV on a Resource form.';
 
 #$_lang['categories'] = 'Categories';
 $_lang['categories'] = 'Categories';
@@ -133,8 +151,8 @@ $_lang['category_confirm_delete'] = 'Are you sure you want to remove this catego
 #$_lang['category_rename'] = 'Rename Category';
 $_lang['category_rename'] = 'Rename Category';
 
-#$_lang['category_remove'] = 'Remove Category';
-$_lang['category_remove'] = 'Remove Category';
+#$_lang['category_remove'] = 'Delete Category';
+$_lang['category_remove'] = 'Delete Category';
 
 #$_lang['chunk'] = 'Chunk';
 $_lang['chunk'] = 'Chunk';
@@ -223,8 +241,8 @@ $_lang['context_duplicate'] = 'Duplicate Context';
 #$_lang['context_refresh'] = 'Refresh Context';
 $_lang['context_refresh'] = 'Refresh Context';
 
-#$_lang['context_remove'] = 'Remove Context';
-$_lang['context_remove'] = 'Remove Context';
+#$_lang['context_remove'] = 'Delete Context';
+$_lang['context_remove'] = 'Delete Context';
 
 #$_lang['context_remove_confirm'] = 'Are you sure you want to remove this Context? It will also permanently remove any Resources within the Context. This is irreversible.';
 $_lang['context_remove_confirm'] = 'Are you sure you want to remove this Context? It will also permanently remove any Resources within the Context. This is irreversible.';
@@ -262,6 +280,9 @@ $_lang['createdon'] = 'Creation date';
 #$_lang['current'] = 'Current';
 $_lang['current'] = 'Current';
 
+#$_lang['dashboard'] = 'Dashboard';
+#$_lang['dashboard'] = 'Dashboard';
+
 #$_lang['data_err_load'] = 'Error loading data.';
 $_lang['data_err_load'] = 'Error loading data.';
 
@@ -295,8 +316,8 @@ $_lang['directory_refresh'] = 'Odśwież folder'; #
 #$_lang['disabled'] = 'Disabled';
 $_lang['disabled'] = 'Disabled';
 
-#$_lang['document'] = 'Resource';
-$_lang['document'] = 'Resource';
+#$_lang['document'] = 'Document';
+#$_lang['document'] = 'Document';
 
 #$_lang['documents'] = 'Resources';
 $_lang['documents'] = 'Resources';
@@ -313,8 +334,23 @@ $_lang['duplicate'] = 'Utwórz duplikat'; #
 #$_lang['duplicate_children'] = 'Duplicate Children';
 $_lang['duplicate_children'] = 'Powielenie podrzędnych'; #
 
+#$_lang['duplicate_chunk'] = 'Duplicate Chunk';
+$_lang['duplicate_chunk'] = 'Duplicate Chunk';
+
 #$_lang['duplicate_of'] = 'Duplicate of [[+name]]';
 $_lang['duplicate_of'] = 'Duplikat [[+name]]'; # ?
+
+#$_lang['duplicate_plugin'] = 'Duplicate Plugin';
+$_lang['duplicate_plugin'] = 'Duplicate Plugin';
+
+#$_lang['duplicate_snippet'] = 'Duplicate Snippet';
+$_lang['duplicate_snippet'] = 'Duplicate Snippet';
+
+#$_lang['duplicate_template'] = 'Duplicate Template';
+$_lang['duplicate_template'] = 'Duplicate Template';
+
+#$_lang['duplicate_tv'] = 'Duplicate TV';
+$_lang['duplicate_tv'] = 'Duplicate TV';
 
 #$_lang['duplication_options'] = 'Duplication Options';
 $_lang['duplication_options'] = 'Opcje Duplikatu'; #
@@ -322,8 +358,23 @@ $_lang['duplication_options'] = 'Opcje Duplikatu'; #
 #$_lang['edit'] = 'Edit';
 $_lang['edit'] = 'Edytuj'; #
 
+#$_lang['edit_chunk'] = 'Edit Chunk';
+$_lang['edit_chunk'] = 'Edit Chunk';
+
 #$_lang['edit_context'] = 'Edit context';
 $_lang['edit_context'] = 'Edit context';
+
+#$_lang['edit_plugin'] = 'Edit Plugin';
+$_lang['edit_plugin'] = 'Edit Plugin';
+
+#$_lang['edit_snippet'] = 'Edit Snippet';
+$_lang['edit_snippet'] = 'Edit Snippet';
+
+#$_lang['edit_template'] = 'Edit Template';
+$_lang['edit_template'] = 'Edit Template';
+
+#$_lang['edit_tv'] = 'Edit TV';
+$_lang['edit_tv'] = 'Edit TV';
 
 #$_lang['editing'] = 'Editing: [[+name]]';
 $_lang['editing'] = 'Editing: [[+name]]';
@@ -387,6 +438,9 @@ $_lang['expand_all'] = 'Expand All';
 
 #$_lang['expand_tree'] = 'Expand tree';
 $_lang['expand_tree'] = 'Rozwiń wszystkie'; #
+
+#$_lang['export'] = 'Export';
+$_lang['export'] = 'Export';
 
 #$_lang['ext_afterpage'] = 'of {0}';
 $_lang['ext_afterpage'] = 'spośród {0}'; #
@@ -586,6 +640,15 @@ $_lang['icon'] = 'Icon';
 #$_lang['id'] = 'ID';
 $_lang['id'] = 'ID'; #
 
+#$_lang['import'] = 'Import';
+$_lang['import'] = 'Import';
+
+#$_lang['import_err_upload'] = 'An error occurred while trying to find the XML file. Please specify a valid file.';
+$_lang['import_err_upload'] = 'An error occurred while trying to find the XML file. Please specify a valid file.';
+
+#$_lang['import_err_xml'] = 'An error occurred importing the XML file. Please ensure you specified a valid XML File.';
+$_lang['import_err_xml'] = 'An error occurred importing the XML file. Please ensure you specified a valid XML File.';
+
 #$_lang['info'] = 'Info';
 $_lang['info'] = 'Twoje konto użytkownika'; # Is used for what 'yourinfo_title' should be.
 
@@ -693,6 +756,9 @@ $_lang['modx_browser'] = 'Przeglądaj pliki'; #
 
 #$_lang['modx_resource_browser'] = 'MODX Resources Browser';
 $_lang['modx_resource_browser'] = 'MODX Resources Browser';
+
+#$_lang['more_search_results'] = 'More Search Results...';
+$_lang['more_search_results'] = 'More Search Results...';
 
 #$_lang['move'] = 'Move';
 $_lang['move'] = 'Move';
@@ -811,8 +877,8 @@ $_lang['orm_attribute_add_below'] = 'Add Attribute Below Here';
 #$_lang['orm_attribute_ae'] = 'An attribute already exists with that key at this level!';
 $_lang['orm_attribute_ae'] = 'An attribute already exists with that key at this level!';
 
-#$_lang['orm_attribute_remove'] = 'Remove Attribute';
-$_lang['orm_attribute_remove'] = 'Remove Attribute';
+#$_lang['orm_attribute_remove'] = 'Delete Attribute';
+$_lang['orm_attribute_remove'] = 'Delete Attribute';
 
 #$_lang['orm_attribute_remove_confirm'] = 'Are you sure you want to remove this attribute? This is irreversible.';
 $_lang['orm_attribute_remove_confirm'] = 'Are you sure you want to remove this attribute? This is irreversible.';
@@ -826,8 +892,8 @@ $_lang['orm_container_add_below'] = 'Add Container Below Here';
 #$_lang['orm_container_rename'] = 'Rename Container';
 $_lang['orm_container_rename'] = 'Rename Container';
 
-#$_lang['orm_container_remove'] = 'Remove Container';
-$_lang['orm_container_remove'] = 'Remove Container';
+#$_lang['orm_container_remove'] = 'Delete Container';
+$_lang['orm_container_remove'] = 'Delete Container';
 
 #$_lang['orm_container_remove_confirm'] = 'Are you sure you want to remove this container, and all attributes below it? This is irreversible.';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to remove this container, and all attributes below it? This is irreversible.';
@@ -843,6 +909,9 @@ $_lang['parameter'] = 'Parameter';
 
 #$_lang['parameters'] = 'Parameters';
 $_lang['parameters'] = 'Parameters';
+
+#$_lang['parent'] = 'Parent';
+$_lang['parent'] = 'Parent';
 
 #$_lang['password'] = 'Password';
 $_lang['password'] = 'Password';
@@ -868,8 +937,23 @@ $_lang['please_wait'] = 'Proszę czekać&hellip;'; #
 #$_lang['plugin'] = 'Plugin';
 $_lang['plugin'] = 'Plugin';
 
+#$_lang['plugin_activate'] = 'Activate Plugin';
+$_lang['plugin_activate'] = 'Activate Plugin';
+
+#$_lang['plugin_deactivate'] = 'Deactivate Plugin';
+$_lang['plugin_deactivate'] = 'Deactivate Plugin';
+
 #$_lang['plugins'] = 'Plugins';
 $_lang['plugins'] = 'Plugins';
+
+#$_lang['po_make_all_unpub'] = 'Make All Unpublished';
+$_lang['po_make_all_unpub'] = 'Make All Unpublished';
+
+#$_lang['po_make_all_pub'] = 'Make All Published';
+$_lang['po_make_all_pub'] = 'Make All Published';
+
+#$_lang['po_preserve'] = 'Preserve Published Status';
+$_lang['po_preserve'] = 'Preserve Published Status';
 
 #$_lang['preview'] = 'Preview';
 $_lang['preview'] = 'Preview';
@@ -909,6 +993,9 @@ $_lang['published'] = 'Opublikowany'; #
 
 #$_lang['publishedon'] = 'Published On';
 $_lang['publishedon'] = 'Published On';
+
+#$_lang['publishing_options'] = 'Publishing Options';
+$_lang['publishing_options'] = 'Publishing Options';
 
 #$_lang['quick_create'] = 'Quick Create';
 $_lang['quick_create'] = '<abbr title="Otwiera okno edycji podstawowych pól zasobu">Szybko utwórz tutaj</abbr>'; #
@@ -957,6 +1044,9 @@ $_lang['quick_update_template'] = 'Quick Update Template';
 
 #$_lang['quick_update_tv'] = 'Quick Update TV';
 $_lang['quick_update_tv'] = 'Quick Update TV';
+
+#$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Rank';
 
 #$_lang['recent_docs'] = 'Recent documents';
 $_lang['recent_docs'] = 'Poprzednie dokumenty'; # Seems to be used what 'activity_title' is meant for?
@@ -1024,17 +1114,32 @@ $_lang['reload'] = 'Reload';
 #$_lang['remember_username'] = 'Remember me';
 $_lang['remember_username'] = 'Remember me';
 
-#$_lang['remove'] = 'Remove';
-$_lang['remove'] = 'Remove';
+#$_lang['remove'] = 'Delete';
+$_lang['remove'] = 'Delete';
 
-#$_lang['remove_category'] = 'Remove Category';
-$_lang['remove_category'] = 'Remove Category';
+#$_lang['remove_category'] = 'Delete Category';
+$_lang['remove_category'] = 'Delete Category';
+
+#$_lang['remove_chunk'] = 'Remove Chunk';
+$_lang['remove_chunk'] = 'Remove Chunk';
 
 #$_lang['remove_date'] = 'Remove date';
 $_lang['remove_date'] = 'Remove date';
 
-#$_lang['remove_selected'] = 'Remove Selected';
-$_lang['remove_selected'] = 'Remove Selected';
+#$_lang['remove_plugin'] = 'Remove Plugin';
+$_lang['remove_plugin'] = 'Remove Plugin';
+
+#$_lang['remove_selected'] = 'Delete Selected';
+$_lang['remove_selected'] = 'Delete Selected';
+
+#$_lang['remove_snippet'] = 'Remove Snippet';
+$_lang['remove_snippet'] = 'Remove Snippet';
+
+#$_lang['remove_template'] = 'Remove Template';
+$_lang['remove_template'] = 'Remove Template';
+
+#$_lang['remove_tv'] = 'Remove TV';
+$_lang['remove_tv'] = 'Remove TV';
 
 #$_lang['remove_this_confirm'] = 'Are you sure you want to remove the [[+type]]: "[[+name]]"?';
 $_lang['remove_this_confirm'] = 'Are you sure you want to remove the [[+type]]: "[[+name]]"?';
@@ -1084,8 +1189,14 @@ $_lang['resource_name_new'] = 'Tytuł duplikatu'; #
 #$_lang['resource_preview'] = 'Preview Resource';
 $_lang['resource_preview'] = '<abbr title="Wyświetla w nowym oknie/zakładce">Wyświetl</abbr>'; #
 
+#$_lang['resource_overview'] = 'Resource Overview';
+$_lang['resource_overview'] = 'Resource Overview';
+
 #$_lang['resource_settings'] = 'Resource Settings';
 $_lang['resource_settings'] = 'Resource Settings';
+
+#$_lang['resource_type'] = 'Resource Type';
+$_lang['resource_type'] = 'Resource Type';
 
 #$_lang['role'] = 'Role';
 $_lang['role'] = 'Role';
@@ -1126,8 +1237,8 @@ $_lang['search_criteria'] = 'Search criteria';
 #$_lang['search_ellipsis'] = 'Search...';
 $_lang['search_ellipsis'] = 'Search...';
 
-#$_lang['search_results'] = 'Search results';
-$_lang['search_results'] = 'Search results';
+#$_lang['search_results'] = 'Search Results';
+$_lang['search_results'] = 'Search Results';
 
 #$_lang['security'] = 'Security';
 $_lang['security'] = 'Security';
@@ -1144,8 +1255,8 @@ $_lang['selected_activate'] = 'Activate Selected';
 #$_lang['selected_deactivate'] = 'Deactivate Selected';
 $_lang['selected_deactivate'] = 'Deactivate Selected';
 
-#$_lang['selected_remove'] = 'Remove Selected';
-$_lang['selected_remove'] = 'Remove Selected';
+#$_lang['selected_remove'] = 'Delete Selected';
+$_lang['selected_remove'] = 'Delete Selected';
 
 #$_lang['send'] = 'Send';
 $_lang['send'] = 'Send';
@@ -1210,6 +1321,9 @@ $_lang['source'] = 'Source';
 #$_lang['specify_name_error'] = 'Please specify a name.';
 $_lang['specify_name_error'] = 'Please specify a name.';
 
+#$_lang['static_resource'] = 'Static Resource';
+$_lang['static_resource'] = 'Static Resource';
+
 #$_lang['statistics'] = 'Statistics';
 $_lang['statistics'] = 'Statistics';
 
@@ -1232,7 +1346,10 @@ $_lang['sysinfo_activity_message'] = 'This list show which resources have been r
 $_lang['sysinfo_userid'] = 'User';
 
 #$_lang['sys_alert'] = 'System Alert';
-$_lang['sys_alert'] = 'Powiadomienie systemowe'; # ?
+$_lang['sys_alert'] = 'System Alert';
+
+#$_lang['symlink'] = 'Symlink';
+$_lang['symlink'] = 'Symlink';
 
 #$_lang['system'] = 'System';
 $_lang['system'] = 'System';
@@ -1300,8 +1417,14 @@ $_lang['tv'] = 'TV';
 #$_lang['tv_default'] = 'Default Value';
 $_lang['tv_default'] = 'Default Value';
 
+#$_lang['tv_default_desc'] = 'The default value this TV will have if none is specified.';
+$_lang['tv_default_desc'] = 'The default value this TV will have if none is specified.';
+
 #$_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_elements'] = 'Input Option Values';
+
+#$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with || ).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with || ).';
 
 #$_lang['tv_type'] = 'Input Type';
 $_lang['tv_type'] = 'Input Type';
@@ -1380,6 +1503,9 @@ $_lang['warning'] = 'Ostrzeżenie!'; #
 
 #$_lang['web_resources'] = 'Web Resources';
 $_lang['web_resources'] = 'Web Resources';
+
+#$_lang['weblink'] = 'Weblink';
+#$_lang['weblink'] = 'Weblink';
 
 #$_lang['which_editor_title'] = 'Editor to use:';
 $_lang['which_editor_title'] = 'Editor to use:';

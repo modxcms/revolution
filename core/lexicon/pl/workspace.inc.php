@@ -1,11 +1,11 @@
 <?php
 /**
-* Workspace Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Workspace Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['alphabetically'] = 'Alphabetically';
 $_lang['alphabetically'] = 'Alphabetically';
@@ -22,6 +22,12 @@ $_lang['author'] = 'Author';
 #$_lang['autoincludes_packaging'] = 'Packaging in autoincludes: [[+autoincludes]]';
 $_lang['autoincludes_packaging'] = 'Packaging in autoincludes: [[+autoincludes]]';
 
+#$_lang['back_to_browser'] = 'Back to Package Browser';
+$_lang['back_to_browser'] = 'Back to Package Browser';
+
+#$_lang['back_to_manager'] = 'Back to Package Management';
+$_lang['back_to_manager'] = 'Back to Package Management';
+
 #$_lang['back_txt'] = 'Back';
 $_lang['back_txt'] = 'Back';
 
@@ -37,8 +43,14 @@ $_lang['changelog'] = 'Changelog';
 #$_lang['changelog_desc'] = 'Please review the changelog for this version.';
 $_lang['changelog_desc'] = 'Please review the changelog for this version.';
 
+#$_lang['continue'] = 'Continue';
+$_lang['continue'] = 'Continue';
+
 #$_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
+
+#$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
 
 #$_lang['description'] = 'Description';
 $_lang['description'] = 'Description';
@@ -58,6 +70,9 @@ $_lang['dir_err_core_comp'] = 'Your core/components/ directory was not able to b
 #$_lang['download'] = 'Download';
 $_lang['download'] = 'Download';
 
+#$_lang['download_success'] = 'The Extra was downloaded successfully!';
+$_lang['download_success'] = 'The Extra was downloaded successfully!';
+
 #$_lang['downloaded'] = 'Downloaded';
 $_lang['downloaded'] = 'Downloaded';
 
@@ -70,11 +85,26 @@ $_lang['download_extras'] = 'Download Extras';
 #$_lang['downloads'] = 'Downloads';
 $_lang['downloads'] = 'Downloads';
 
+#$_lang['downloads_view'] = '{downloads} downloads';
+$_lang['downloads_view'] = '{downloads} downloads';
+
+#$_lang['information'] = 'Information';
+$_lang['information'] = 'Information';
+
+#$_lang['install'] = 'Install';
+$_lang['install'] = 'Install';
+
 #$_lang['installation_instructions'] = 'Installation Instructions';
 $_lang['installation_instructions'] = 'Installation Instructions';
 
 #$_lang['installed'] = 'Installed';
 $_lang['installed'] = 'Installed';
+
+#$_lang['installed_on'] = 'Installed on <br/>[[+time]]';
+$_lang['installed_on'] = 'Installed on <br/>[[+time]]';
+
+#$_lang['instructions'] = 'Instructions';
+$_lang['instructions'] = 'Instructions';
 
 #$_lang['last_updated'] = 'Last Updated';
 $_lang['last_updated'] = 'Last Updated';
@@ -99,6 +129,12 @@ $_lang['license_agreement_desc'] = 'Please review the license agreement for this
 
 #$_lang['license_disagree'] = 'I Disagree';
 $_lang['license_disagree'] = 'I Disagree';
+
+#$_lang['list_of_packages_in_provider'] = 'Below is a list of the packages in this provider.';
+$_lang['list_of_packages_in_provider'] = 'Below is a list of the packages in this provider.';
+
+#$_lang['loading'] = 'Loading...';
+$_lang['loading'] = 'Loading...';
 
 #$_lang['minimum_supports'] = 'Requires MODX';
 $_lang['minimum_supports'] = 'Requires MODX';
@@ -127,6 +163,9 @@ $_lang['newest_added'] = 'Newest Added';
 #$_lang['newest_additions'] = 'Newest Additions';
 $_lang['newest_additions'] = 'Newest Additions';
 
+#$_lang['no_preview'] = 'No Preview';
+$_lang['no_preview'] = 'No Preview';
+
 #$_lang['not_installed'] = 'Not Installed';
 $_lang['not_installed'] = 'Not Installed';
 
@@ -135,6 +174,9 @@ $_lang['package'] = 'Package';
 
 #$_lang['package_add'] = 'Add New Package';
 $_lang['package_add'] = 'Add New Package';
+
+#$_lang['package_already_downloaded'] = 'Package already downloaded';
+$_lang['package_already_downloaded'] = 'Package already downloaded';
 
 #$_lang['package_browser'] = 'Package Browser';
 $_lang['package_browser'] = 'Package Browser';
@@ -153,6 +195,12 @@ $_lang['package_confirm_uninstall'] = 'Are you sure you want to uninstall this p
 
 #$_lang['package_created'] = 'Created new transport package with signature: [[+signature]]';
 $_lang['package_created'] = 'Created new transport package with signature: [[+signature]]';
+
+#$_lang['package_details'] = 'Package Details';
+$_lang['package_details'] = 'Package Details';
+
+#$_lang['package_details_for'] = 'Package Details for [[+package]]';
+$_lang['package_details_for'] = 'Package Details for [[+package]]';
 
 #$_lang['package_download_err'] = 'Could not download package at: [[+location]]';
 $_lang['package_download_err'] = 'Could not download package at: [[+location]]';
@@ -238,8 +286,14 @@ $_lang['package_management'] = 'Package Management';
 #$_lang['package_obtain_method'] = 'First, select how you would like to obtain the package:';
 $_lang['package_obtain_method'] = 'First, select how you would like to obtain the package:';
 
+#$_lang['package_preview_view'] = 'Package preview: {name}';
+$_lang['package_preview_view'] = 'Package preview: {name}';
+
 #$_lang['package_remove'] = 'Remove Package';
 $_lang['package_remove'] = 'Remove Package';
+
+#$_lang['package_remove_action_button'] = 'Remove';
+$_lang['package_remove_action_button'] = 'Remove';
 
 #$_lang['package_remove_confirm'] = 'Are you sure you want to remove this package? This is permanent.';
 $_lang['package_remove_confirm'] = 'Are you sure you want to remove this package? This is permanent.';
@@ -283,6 +337,9 @@ $_lang['package_remove_info_tzip_start'] = 'Successfully grabbed package. Now at
 #$_lang['package_reinstall'] = 'Reinstall Package';
 $_lang['package_reinstall'] = 'Reinstall Package';
 
+#$_lang['package_reinstall_action_button'] = 'Reinstall';
+$_lang['package_reinstall_action_button'] = 'Reinstall';
+
 #$_lang['package_reinstall_confirm'] = 'Are you sure you want to reinstall the package? This will remove any changes you have made.';
 $_lang['package_reinstall_confirm'] = 'Are you sure you want to reinstall the package? This will remove any changes you have made.';
 
@@ -325,6 +382,9 @@ $_lang['package_uninstall_info_success'] = 'Package successfully uninstalled wit
 #$_lang['package_update'] = 'Update Package';
 $_lang['package_update'] = 'Update Package';
 
+#$_lang['package_update_action_button'] = 'Update';
+$_lang['package_update_action_button'] = 'Update';
+
 #$_lang['package_update_err_provider_empty'] = 'No packages found in the specified provider.';
 $_lang['package_update_err_provider_empty'] = 'No packages found in the specified provider.';
 
@@ -352,11 +412,17 @@ $_lang['package_view'] = 'View Package';
 #$_lang['packages'] = 'Packages';
 $_lang['packages'] = 'Packages';
 
+#$_lang['packages_in_category'] = 'Below is a list of the packages available in the selected Category.';
+$_lang['packages_in_category'] = 'Below is a list of the packages available in the selected Category.';
+
 #$_lang['packages_browse_msg'] = 'Click details on a package to get more information. Click Download to download the package to your MODX Revolution install.';
 $_lang['packages_browse_msg'] = 'Click details on a package to get more information. Click Download to download the package to your MODX Revolution install.';
 
 #$_lang['packages_desc'] = 'Packages are collections of MODX components that can be used within MODX in a variety of ways. Here you can manage them, update their installation status, disable or enable installed packages, or download new ones from remote providers. Right-click on a row in the grid for more options.';
 $_lang['packages_desc'] = 'Packages are collections of MODX components that can be used within MODX in a variety of ways. Here you can manage them, update their installation status, disable or enable installed packages, or download new ones from remote providers. Right-click on a row in the grid for more options.';
+
+#$_lang['please_wait'] = 'Please wait...';
+$_lang['please_wait'] = 'Please wait...';
 
 #$_lang['preexisting_mode_preserve'] = 'Preserve';
 $_lang['preexisting_mode_preserve'] = 'Preserve';
@@ -433,14 +499,14 @@ $_lang['provider_err_remove'] = 'An error occurred while trying to remove the Pr
 #$_lang['provider_err_save'] = 'An error occurred while trying to save the Provider.';
 $_lang['provider_err_save'] = 'An error occurred while trying to save the Provider.';
 
-#$_lang['provider_home_msg'] = 'Choose a repository from the left to begin browsing this Provider.';
-$_lang['provider_home_msg'] = 'Choose a repository from the left to begin browsing this Provider.';
+#$_lang['provider_home_msg'] = 'Choose a Category from the left to begin browsing this Provider.';
+$_lang['provider_home_msg'] = 'Choose a Category from the left to begin browsing this Provider.';
 
 #$_lang['provider_home_title'] = 'Download Extras';
 $_lang['provider_home_title'] = 'Download Extras';
 
-#$_lang['provider_remove'] = 'Remove Provider';
-$_lang['provider_remove'] = 'Remove Provider';
+#$_lang['provider_remove'] = 'Delete Provider';
+$_lang['provider_remove'] = 'Delete Provider';
 
 #$_lang['provider_select'] = 'Select a Provider';
 $_lang['provider_select'] = 'Select a Provider';
@@ -484,6 +550,12 @@ $_lang['released'] = 'Released';
 #$_lang['released_on'] = 'Released On';
 $_lang['released_on'] = 'Released On';
 
+#$_lang['save_and_go_to_browser'] = 'Save and go to Package Browser';
+$_lang['save_and_go_to_browser'] = 'Save and go to Package Browser';
+
+#$_lang['search_results_for'] = 'Search results for <b>[[+query]]</b>';
+$_lang['search_results_for'] = 'Search results for <b>[[+query]]</b>';
+
 #$_lang['setup_options'] = 'Setup Options';
 $_lang['setup_options'] = 'Setup Options';
 
@@ -498,6 +570,18 @@ $_lang['sort_by_dots'] = 'Sort By...';
 
 #$_lang['supports_db'] = 'Supports Databases';
 $_lang['supports_db'] = 'Supports Databases';
+
+#$_lang['template_already_downloaded'] = 'Template already downloaded';
+$_lang['template_already_downloaded'] = 'Template already downloaded';
+
+#$_lang['template_preview_view'] = 'Template preview: {name}';
+$_lang['template_preview_view'] = 'Template preview: {name}';
+
+#$_lang['template_select_desc'] = 'Select a Template to see its description...';
+$_lang['template_select_desc'] = 'Select a Template to see its description...';
+
+#$_lang['templates_in_category'] = 'Viewing Templates available in the selected Category.';
+$_lang['templates_in_category'] = 'Viewing Templates available in the selected Category.';
 
 #$_lang['top_rated'] = 'Top Rated';
 $_lang['top_rated'] = 'Top Rated';
@@ -543,6 +627,12 @@ $_lang['workspace_scan_for_new'] = 'Search for new packages';
 
 #$_lang['workspace_scan_for_updates'] = 'Search for package updates';
 $_lang['workspace_scan_for_updates'] = 'Search for package updates';
+
+#$_lang['view_details'] = 'View Details';
+$_lang['view_details'] = 'View Details';
+
+#$_lang['viewing_templates_available'] = 'Viewing Templates available in the selected Category.';
+$_lang['viewing_templates_available'] = 'Viewing Templates available in the selected Category.';
 
 #$_lang['version'] = 'Version';
 $_lang['version'] = 'Version';
