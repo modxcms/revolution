@@ -23,13 +23,13 @@ $_lang['action_err_nfs'] = 'No action with [[+id]] found.';
 $_lang['actions'] = 'Actions';
 
 #$_lang['active_users_none'] = 'No active users found.';
-$_lang['active_users_none'] = 'No active users found.';
+$_lang['active_users_none'] = 'Nie znaleziono aktywnych użytkowników'; #
 
 #$_lang['activity_message'] = 'This list shows the last resources you created or edited:';
 $_lang['activity_message'] = 'To jest lista zasobów, które zostały przez Ciebie poprzednio utworzone lub zmienione:'; #
 
 #$_lang['activity_title'] = 'Recently edited/created documents';
-$_lang['activity_title'] = 'Poprzednie dokumenty'; # ? Seems 'recent_docs' is used instead?
+$_lang['activity_title'] = 'Ostatnio edytowane'; # ? Seems 'recent_docs' is used instead?
 
 #$_lang['add'] = 'Add';
 $_lang['add'] = 'Add';
@@ -128,7 +128,7 @@ $_lang['cache_unpublish_event_error'] = '<p>ERROR: Could not determine next unpu
 $_lang['cached'] = 'Cached';
 
 #$_lang['cancel'] = 'Close';
-$_lang['cancel'] = 'Anuluj'; #
+$_lang['cancel'] = 'Zamknij'; #
 
 #$_lang['caption'] = 'Caption';
 $_lang['caption'] = 'Caption';
@@ -137,7 +137,7 @@ $_lang['caption'] = 'Caption';
 $_lang['caption_desc'] = 'The name to show beside the input when editing a TV on a Resource form.';
 
 #$_lang['categories'] = 'Categories';
-$_lang['categories'] = 'Categories';
+$_lang['categories'] = 'Kategorie'; #
 
 #$_lang['category'] = 'Category';
 $_lang['category'] = 'Category';
@@ -281,7 +281,7 @@ $_lang['createdon'] = 'Creation date';
 $_lang['current'] = 'Current';
 
 #$_lang['dashboard'] = 'Dashboard';
-#$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard'] = 'Pulpit'; #
 
 #$_lang['data_err_load'] = 'Error loading data.';
 $_lang['data_err_load'] = 'Error loading data.';
@@ -317,7 +317,7 @@ $_lang['directory_refresh'] = 'Odśwież folder'; #
 $_lang['disabled'] = 'Disabled';
 
 #$_lang['document'] = 'Document';
-#$_lang['document'] = 'Document';
+$_lang['document'] = 'Dokument'; #
 
 #$_lang['documents'] = 'Resources';
 $_lang['documents'] = 'Resources';
@@ -758,7 +758,7 @@ $_lang['modx_browser'] = 'Przeglądaj pliki'; #
 $_lang['modx_resource_browser'] = 'MODX Resources Browser';
 
 #$_lang['more_search_results'] = 'More Search Results...';
-$_lang['more_search_results'] = 'More Search Results...';
+$_lang['more_search_results'] = 'Więcej wyników...'; #
 
 #$_lang['move'] = 'Move';
 $_lang['move'] = 'Move';
@@ -926,7 +926,7 @@ $_lang['per_page'] = 'Na stronie'; #
 $_lang['permissions'] = 'Permissions';
 
 #$_lang['permission_denied'] = 'Permission denied!';
-$_lang['permission_denied'] = 'Permission denied!';
+$_lang['permission_denied'] = 'Brak uprawnień!'; #
 
 #$_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
 $_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
@@ -1049,7 +1049,7 @@ $_lang['quick_update_tv'] = 'Quick Update TV';
 $_lang['rank'] = 'Rank';
 
 #$_lang['recent_docs'] = 'Recent documents';
-$_lang['recent_docs'] = 'Poprzednie dokumenty'; # Seems to be used what 'activity_title' is meant for?
+$_lang['recent_docs'] = 'Ostatnio edytowane'; # Seems to be used what 'activity_title' is meant for?
 
 #$_lang['redirecting'] = 'Redirecting...';
 $_lang['redirecting'] = 'Redirecting...';
@@ -1190,13 +1190,13 @@ $_lang['resource_name_new'] = 'Tytuł duplikatu'; #
 $_lang['resource_preview'] = '<abbr title="Wyświetla w nowym oknie/zakładce">Wyświetl</abbr>'; #
 
 #$_lang['resource_overview'] = 'Resource Overview';
-$_lang['resource_overview'] = 'Resource Overview';
+$_lang['resource_overview'] = 'Otwórz'; #
 
 #$_lang['resource_settings'] = 'Resource Settings';
 $_lang['resource_settings'] = 'Resource Settings';
 
 #$_lang['resource_type'] = 'Resource Type';
-$_lang['resource_type'] = 'Resource Type';
+$_lang['resource_type'] = 'Rodzaj zasobu'; #
 
 #$_lang['role'] = 'Role';
 $_lang['role'] = 'Role';
@@ -1235,10 +1235,10 @@ $_lang['search'] = 'Search';
 $_lang['search_criteria'] = 'Search criteria';
 
 #$_lang['search_ellipsis'] = 'Search...';
-$_lang['search_ellipsis'] = 'Search...';
+$_lang['search_ellipsis'] = 'Wyszukaj...'; #
 
 #$_lang['search_results'] = 'Search Results';
-$_lang['search_results'] = 'Search Results';
+$_lang['search_results'] = 'Wyniki wyszukiwania'; #
 
 #$_lang['security'] = 'Security';
 $_lang['security'] = 'Security';
@@ -1274,7 +1274,7 @@ $_lang['set_to_default'] = 'Ustaw wartość domyślną'; #
 $_lang['setting'] = 'Setting';
 
 #$_lang['settings'] = 'Settings';
-$_lang['settings'] = 'Settings';
+$_lang['settings'] = 'Ustawienia'; #
 
 #$_lang['settings_general'] = 'General';
 $_lang['settings_general'] = 'General';
@@ -1322,7 +1322,7 @@ $_lang['source'] = 'Source';
 $_lang['specify_name_error'] = 'Please specify a name.';
 
 #$_lang['static_resource'] = 'Static Resource';
-$_lang['static_resource'] = 'Static Resource';
+$_lang['static_resource'] = 'Załącznik'; #
 
 #$_lang['statistics'] = 'Statistics';
 $_lang['statistics'] = 'Statistics';
@@ -1349,7 +1349,7 @@ $_lang['sysinfo_userid'] = 'User';
 $_lang['sys_alert'] = 'System Alert';
 
 #$_lang['symlink'] = 'Symlink';
-$_lang['symlink'] = 'Symlink';
+$_lang['symlink'] = 'Dowiązanie'; #
 
 #$_lang['system'] = 'System';
 $_lang['system'] = 'System';
@@ -1505,7 +1505,7 @@ $_lang['warning'] = 'Ostrzeżenie!'; #
 $_lang['web_resources'] = 'Web Resources';
 
 #$_lang['weblink'] = 'Weblink';
-#$_lang['weblink'] = 'Weblink';
+$_lang['weblink'] = 'Odnośnik'; #
 
 #$_lang['which_editor_title'] = 'Editor to use:';
 $_lang['which_editor_title'] = 'Editor to use:';

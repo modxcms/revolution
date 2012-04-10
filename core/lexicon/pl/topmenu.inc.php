@@ -23,7 +23,7 @@ $_lang['access_permissions_desc'] = 'Manage user group access to resources and c
 $_lang['api_docs'] = 'Dokumentacja API'; #
 
 #$_lang['api_docs_desc'] = 'Complete API documentation for MODX Revolution.';
-$_lang['api_docs_desc'] = 'Wyświetl dokumentację API MODX.';
+$_lang['api_docs_desc'] = 'Wyświetl dokumentację API dla MODX Revolution.';
 
 #$_lang['components'] = 'Components';
 $_lang['components'] = 'Rozszerzenia'; #
@@ -41,13 +41,13 @@ $_lang['contexts'] = 'Konteksty'; #
 $_lang['contexts_desc'] = 'Zarządzaj kontekstami i ich ustawieniami.'; #
 
 #$_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard'] = 'Pulpit'; # ?
 
 #$_lang['dashboards'] = 'Dashboards';
-$_lang['dashboards'] = 'Dashboards';
+$_lang['dashboards'] = 'Pulpity'; #
 
 #$_lang['dashboards_desc'] = 'Manage all dashboard configurations.';
-$_lang['dashboards_desc'] = 'Manage all dashboard configurations.';
+$_lang['dashboards_desc'] = 'Zarządzaj konfiguracjami pulpitów.';
 
 #$_lang['edit_menu'] = 'Actions';
 $_lang['edit_menu'] = 'Akcje i Menu'; #
@@ -239,10 +239,10 @@ $_lang['security'] = 'Bezpieczeństwo'; #
 $_lang['site'] = 'Serwis'; #
 
 #$_lang['sources'] = 'Media Sources';
-$_lang['sources'] = 'Media Sources';
+$_lang['sources'] = 'Źródła plików'; # ? Kulawe to tłumaczenie, ale nic lepszego nie mogłem wymyślić.
 
 #$_lang['sources_desc'] = 'Manage your media sources here.';
-$_lang['sources_desc'] = 'Manage your media sources here.';
+$_lang['sources_desc'] = 'Zarządzaj źródłami plików.'; #
 
 #$_lang['support'] = 'Support';
 $_lang['support'] = 'Wsparcie'; #
@@ -299,4 +299,4 @@ $_lang['view_sysinfo_desc'] = 'Wyświetl informacje o systemie takie jak <code>p
 $_lang['wiki'] = 'Dokumentacja MODX'; #
 
 #$_lang['wiki_desc'] = 'Launch the official MODX documentation.';
-$_lang['wiki_desc'] = 'Wyświetl dokumentację MODX.'; #
+$_lang['wiki_desc'] = 'Wyświetl oficjalną dokumentację MODX.'; #

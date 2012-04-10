@@ -219,7 +219,7 @@ $_lang['w_newsfeed'] = 'MODX News Feed';
 $_lang['w_newsfeed_desc'] = 'Displays the MODX News Feed';
 
 #$_lang['w_recentlyeditedresources'] = 'Recently Edited Resources';
-$_lang['w_recentlyeditedresources'] = 'Recently Edited Resources';
+$_lang['w_recentlyeditedresources'] = 'Ostatnio edytowane'; #
 
 #$_lang['w_recentlyeditedresources_desc'] = 'Shows a list of the most recently edited resources by the user.';
 $_lang['w_recentlyeditedresources_desc'] = 'Shows a list of the most recently edited resources by the user.';
@@ -231,7 +231,7 @@ $_lang['w_securityfeed'] = 'MODX Security Feed';
 $_lang['w_securityfeed_desc'] = 'Displays the MODX Security Feed';
 
 #$_lang['w_whosonline'] = 'Who\'s Online';
-$_lang['w_whosonline'] = 'Who\'s Online';
+$_lang['w_whosonline'] = 'Aktywni użytkownicy'; #
 
 #$_lang['w_whosonline_desc'] = 'Shows a list of online users.';
 $_lang['w_whosonline_desc'] = 'Shows a list of online users.';
