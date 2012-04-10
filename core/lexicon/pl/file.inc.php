@@ -14,7 +14,7 @@ $_lang['directory'] = 'Directory';
 $_lang['file_confirm_remove'] = 'Czy na pewno chcesz usunąć ten plik? To może potencjalnie spowodować błędy w działaniu serwisu.'; #
 
 #$_lang['file_create'] = 'Create File';
-$_lang['file_create'] = 'Create File';
+$_lang['file_create'] = 'Utwórz plik'; #
 
 #$_lang['file_deleted'] = 'Success!';
 $_lang['file_deleted'] = 'Success!';
@@ -26,7 +26,7 @@ $_lang['file_delete_file'] = 'Delete File';
 $_lang['file_delete_folder'] = 'Delete Folder';
 
 #$_lang['file_download'] = 'Download File';
-$_lang['file_download'] = 'Download File';
+$_lang['file_download'] = 'Pobierz plik'; #
 
 #$_lang['file_download_file'] = 'Download File';
 $_lang['file_download_file'] = 'Download File';

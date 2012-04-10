@@ -77,10 +77,10 @@ $_lang['password_notification'] = 'Password Notification';
 $_lang['password_old'] = 'Bieżące hasło'; #
 
 #$_lang['primary_group'] = 'Primary Group';
-$_lang['primary_group'] = 'Primary Group';
+$_lang['primary_group'] = 'Grupa główna'; #
 
 #$_lang['profile_recent_resources'] = 'Recent Resources';
-$_lang['profile_recent_resources'] = 'Poprzednie dokumenty'; #
+$_lang['profile_recent_resources'] = 'Ostatnio edytowane'; #
 
 #$_lang['profile_recent_resources_desc'] = 'This is a list of your most recently edited Resources.';
 $_lang['profile_recent_resources_desc'] = 'To jest lista zasobów, które zostały przez Ciebie poprzednio utworzone lub zmienione:'; #
