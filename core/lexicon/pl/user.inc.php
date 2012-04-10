@@ -541,6 +541,12 @@ $_lang['user_settings_desc'] = 'Here you can change specific settings for the us
 #$_lang['user_state'] = 'State';
 $_lang['user_state'] = 'Województwo'; #
 
+#$_lang['user_sudo'] = 'Sudo User';
+$_lang['user_sudo'] = 'Sudo User';
+
+#$_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
+$_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
+
 #$_lang['user_title'] = 'Create/Edit user';
 $_lang['user_title'] = 'Create/Edit user';
 

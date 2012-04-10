@@ -388,8 +388,8 @@ $_lang['editing_form'] = 'Editing Form';
 #$_lang['element_duplicate'] = 'Duplicate Element';
 $_lang['element_duplicate'] = 'Duplicate Element';
 
-#$_lang['element_duplicate_values'] = 'Duplicate Values?';
-$_lang['element_duplicate_values'] = 'Duplicate Values?';
+#$_lang['element_duplicate_values'] = 'Duplicate Resource Values?';
+$_lang['element_duplicate_values'] = 'Duplicate Resource Values?';
 
 #$_lang['element_name_new'] = 'Name of New Element';
 $_lang['element_name_new'] = 'Name of New Element';
@@ -738,6 +738,9 @@ $_lang['manager'] = 'Manager';
 
 #$_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
 $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
+
+#$_lang['media'] = 'Media';
+$_lang['media'] = 'Media';
 
 #$_lang['menu_order'] = 'Menu Order';
 $_lang['menu_order'] = 'Kolejność w menu'; #
@@ -1584,4 +1587,3 @@ $_lang['friday'] = 'Piątek'; #
 
 #$_lang['saturday'] = 'Saturday';
 $_lang['saturday'] = 'Sobota'; #
-
