@@ -230,7 +230,7 @@ $_lang['console_download_output'] = 'Download Output to File';
 $_lang['console_running'] = 'Console running...';
 
 #$_lang['content'] = 'Content';
-$_lang['content'] = 'Content';
+$_lang['content'] = 'Zawartość'; #
 
 #$_lang['content_elements'] = 'Content Elements';
 $_lang['content_elements'] = 'Content Elements';
@@ -308,7 +308,7 @@ $_lang['delete'] = 'Skasuj'; #
 $_lang['deleted'] = 'Skasowany'; #
 
 #$_lang['description'] = 'Description';
-$_lang['description'] = 'Description';
+$_lang['description'] = 'Opis'; #
 
 #$_lang['directory_refresh'] = 'Refresh Directory';
 $_lang['directory_refresh'] = 'Odśwież folder'; #
@@ -725,7 +725,7 @@ $_lang['logout'] = 'Wyloguj'; # topmenu
 $_lang['logout_confirm'] = 'Czy na pewno chcesz się wylogować?'; # topmenu
 
 #$_lang['long_title'] = 'Long title';
-$_lang['long_title'] = 'Long title';
+$_lang['long_title'] = 'Pełny tytuł'; #
 
 #$_lang['male'] = 'Male';
 $_lang['male'] = 'Male';
@@ -914,7 +914,7 @@ $_lang['parameter'] = 'Parameter';
 $_lang['parameters'] = 'Parameters';
 
 #$_lang['parent'] = 'Parent';
-$_lang['parent'] = 'Parent';
+$_lang['parent'] = 'Podrzędny do'; #
 
 #$_lang['password'] = 'Password';
 $_lang['password'] = 'Password';
@@ -1226,7 +1226,7 @@ $_lang['scroll_up'] = 'Scroll up';
 $_lang['search'] = 'Search';
 
 #$_lang['search_criteria'] = 'Search criteria';
-$_lang['search_criteria'] = 'Search criteria';
+$_lang['search_criteria'] = 'Kryteria wyszukiwania'; #
 
 #$_lang['search_ellipsis'] = 'Search...';
 $_lang['search_ellipsis'] = 'Wyszukaj...'; #
@@ -1436,7 +1436,7 @@ $_lang['uncategorized'] = 'uncategorized';
 $_lang['undelete'] = 'Undelete';
 
 #$_lang['undeleted'] = 'Not Deleted';
-$_lang['undeleted'] = 'Not Deleted';
+$_lang['undeleted'] = 'Nieskasowany'; #
 
 #$_lang['unpublish'] = 'Unpublish';
 $_lang['unpublish'] = 'Unpublish';
@@ -1448,7 +1448,7 @@ $_lang['unpublish_date'] = 'Data zakończenia publikacji'; #
 $_lang['unpublish_events'] = 'Un-publish Events';
 
 #$_lang['unpublished'] = 'Unpublished';
-$_lang['unpublished'] = 'Unpublished';
+$_lang['unpublished'] = 'Nieopublikowany'; #
 
 #$_lang['untitle_variable'] = 'Untitled variable';
 $_lang['untitle_variable'] = 'Untitled variable';
