@@ -918,8 +918,9 @@ class xPDOObject {
     public function get($k, $format = null, $formatTemplate= null) {
         $value= null;
         if (is_array($k)) {
-            if ($this->isLazy()) {
-                $this->_loadFieldData($k);
+            $lazy = array_intersect($k, $this->_lazy);
+            if ($lazy) {
+                $this->_loadFieldData($lazy);
             }
             foreach ($k as $key) {
                 if (array_key_exists($key, $this->_fields)) {
@@ -2365,7 +2366,8 @@ class xPDOObject {
         $criteria= $this->xpdo->newQuery($this->_class, $this->getPrimaryKey());
         $criteria->select($fields);
         if ($rows= xPDOObject :: _loadRows($this->xpdo, $this->_class, $criteria)) {
-            $row= reset($rows);
+            $row= $rows->fetch(PDO::FETCH_ASSOC);
+            $rows->closeCursor();
             $this->fromArray($row, '', false, true);
             $this->_lazy= array_diff($this->_lazy, $fields);
         }
