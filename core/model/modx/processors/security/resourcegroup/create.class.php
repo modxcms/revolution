@@ -86,7 +86,7 @@ class modResourceGroupCreateProcessor extends modObjectCreateProcessor {
             /** @var modAccessResourceGroup $acl */
             $acl = $this->modx->newObject('modAccessResourceGroup');
             $acl->fromArray(array(
-                'context_key' => $context,
+                'context_key' => trim($context),
                 'target' => $this->object->get('id'),
                 'principal_class' => 'modUserGroup',
                 'principal' => $adminGroup->get('id'),
@@ -112,7 +112,7 @@ class modResourceGroupCreateProcessor extends modObjectCreateProcessor {
             /** @var modAccessResourceGroup $acl */
             $acl = $this->modx->newObject('modAccessResourceGroup');
             $acl->fromArray(array(
-                'context_key' => $context,
+                'context_key' => trim($context),
                 'target' => $this->object->get('id'),
                 'principal_class' => 'modUserGroup',
                 'principal' => 0,
@@ -150,7 +150,7 @@ class modResourceGroupCreateProcessor extends modObjectCreateProcessor {
             /** @var modAccessResourceGroup $acl */
             $acl = $this->modx->newObject('modAccessResourceGroup');
             $acl->fromArray(array(
-                'context_key' => $context,
+                'context_key' => trim($context),
                 'target' => $this->object->get('id'),
                 'principal_class' => 'modUserGroup',
                 'principal' => $userGroup->get('id'),
@@ -178,14 +178,14 @@ class modResourceGroupCreateProcessor extends modObjectCreateProcessor {
 
         foreach ($userGroupNames as $userGroupName) {
             /** @var modUserGroup $userGroup */
-            $userGroup = $this->modx->getObject('modUserGroup',array('name' => $userGroupName));
+            $userGroup = $this->modx->getObject('modUserGroup',array('name' => trim($userGroupName)));
             if (!$userGroup) return false;
 
             foreach ($contexts as $context) {
                 /** @var modAccessResourceGroup $acl */
                 $acl = $this->modx->newObject('modAccessResourceGroup');
                 $acl->fromArray(array(
-                    'context_key' => $context,
+                    'context_key' => trim($context),
                     'target' => $this->object->get('id'),
                     'principal_class' => 'modUserGroup',
                     'principal' => $userGroup->get('id'),
