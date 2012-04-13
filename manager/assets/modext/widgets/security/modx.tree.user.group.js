@@ -190,10 +190,15 @@ MODx.window.CreateUserGroup = function(config) {
         title: _('create_user_group')
         ,id: this.ident
         ,height: 150
-        ,width: 375
+        ,width: 750
+        ,stateful: false
         ,url: MODx.config.connectors_url+'security/group.php'
         ,action: 'create'
         ,fields: [{
+            name: 'parent'
+            ,id: 'modx-'+this.ident+'-parent'
+            ,xtype: 'hidden'
+        },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,description: MODx.expandHelp ? '' : _('user_group_desc_name')
@@ -218,9 +223,118 @@ MODx.window.CreateUserGroup = function(config) {
             ,html: _('user_group_desc_description')
             ,cls: 'desc-under'
         },{
-            name: 'parent'
-            ,id: 'modx-'+this.ident+'-parent'
-            ,xtype: 'hidden'
+            xtype: 'fieldset'
+            ,collapsible: true
+            ,collapsed: false
+            ,autoHeight: true
+            ,title: _('user_group_aw')
+            ,items: [{
+                html: '<p style="margin: 5px 0 0">'+_('user_group_aw_desc')+'</p>'
+                ,cls: 'desc-under'
+            },{
+                layout: 'column'
+                ,border: false
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,anchor: '100%'
+                    ,border: false
+                }
+                ,items: [{
+                    columnWidth: .5
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'aw_users'
+                        ,fieldLabel: _('user_group_aw_users')
+                        ,description: _('user_group_aw_users_desc')
+                        ,id: this.ident+'-aw-users'
+                        ,anchor: '100%'
+                        ,value: ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-aw-users'
+                        ,html: _('user_group_aw_users_desc')
+                        ,cls: 'desc-under'
+                    },{
+                        fieldLabel: _('user_group_aw_resource_groups')
+                        ,description: _('user_group_aw_resource_groups_desc')
+                        ,name: 'aw_resource_groups'
+                        ,id: this.ident+'-aw-resource-groups'
+                        ,xtype: 'textfield'
+                        ,value: ''
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-aw-resource-groups'
+                        ,html: _('user_group_aw_resource_groups_desc')
+                        ,cls: 'desc-under'
+
+                    },{
+                        boxLabel: _('user_group_aw_parallel')
+                        ,description: _('user_group_aw_parallel_desc')
+                        ,name: 'aw_parallel'
+                        ,id: this.ident+'-aw-parallel'
+                        ,xtype: 'checkbox'
+                        ,checked: false
+                        ,inputValue: 1
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-aw-parallel'
+                        ,html: _('user_group_aw_parallel_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: .5
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'aw_contexts'
+                        ,fieldLabel: _('contexts')
+                        ,description: MODx.expandHelp ? '' : _('user_group_aw_contexts_desc')
+                        ,id: this.ident+'-aw-contexts'
+                        ,anchor: '100%'
+                        ,value: 'web'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-aw-contexts'
+                        ,html: _('user_group_aw_contexts_desc')
+                        ,cls: 'desc-under'
+
+                    },{
+                        xtype: 'modx-combo-policy'
+                        ,baseParams: {
+                            action: 'getList'
+                            ,group: 'Admin'
+                            ,combo: '1'
+                        }
+                        ,name: 'aw_manager_policy'
+                        ,fieldLabel: _('user_group_aw_manager_policy')
+                        ,description: MODx.expandHelp ? '' : _('user_group_aw_manager_policy_desc')
+                        ,id: this.ident+'-aw-manager-policy'
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-aw-manager-policy'
+                        ,html: _('user_group_aw_manager_policy_desc')
+                        ,cls: 'desc-under'
+
+                    },{
+                        fieldLabel: _('user_group_aw_categories')
+                        ,description: _('user_group_aw_categories_desc')
+                        ,name: 'aw_categories'
+                        ,id: this.ident+'-aw-categories'
+                        ,xtype: 'textfield'
+                        ,value: ''
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-aw-categories'
+                        ,html: _('user_group_aw_categories_desc')
+                        ,cls: 'desc-under'
+
+                    }]
+                }]
+            }]
         }]
         ,keys: []
     });
