@@ -2366,7 +2366,8 @@ class xPDOObject {
         $criteria= $this->xpdo->newQuery($this->_class, $this->getPrimaryKey());
         $criteria->select($fields);
         if ($rows= xPDOObject :: _loadRows($this->xpdo, $this->_class, $criteria)) {
-            $row= reset($rows);
+            $row= $rows->fetch(PDO::FETCH_ASSOC);
+            $rows->closeCursor();
             $this->fromArray($row, '', false, true);
             $this->_lazy= array_diff($this->_lazy, $fields);
         }
