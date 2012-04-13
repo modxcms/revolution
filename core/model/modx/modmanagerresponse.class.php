@@ -16,20 +16,164 @@ class modManagerResponse extends modResponse {
     /** @var array A cached array of the current modAction object */
     public $action = array();
 
+    public $namespace = 'core';
+    public $namespaces = array();
+
+    protected function _loadNamespaces() {
+        $loaded = false;
+        $cacheKey= $this->modx->context->get('key') . '/namespaces';
+        $cache = $this->modx->cacheManager->get($cacheKey, array(
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_namespaces_key', null, 'namespaces'),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_namespaces_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_namespaces_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+        ));
+        if (empty($cache)) {
+            $cache = $this->modx->cacheManager->generateNamespacesCache($cacheKey);
+        }
+        if ($cache) {
+            $this->namespaces = $cache;
+            $loaded = true;
+        }
+        return $loaded;
+    }
+
     /**
-     * Overrides modResponse::outputContent to provide mgr-context specific
-     * response.
-     *
      * @param array $options
+     * @return mixed|string
      */
     public function outputContent(array $options = array()) {
         $action = '';
         if (!isset($this->modx->request) || !isset($this->modx->request->action)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
         } else {
-            $action = (integer) $this->modx->request->action;
+            $action = $this->modx->request->action;
+            $this->namespace = $this->modx->request->namespace;
+        }
+        $theme = $this->modx->getOption('manager_theme',null,'default');
+        $this->modx->lexicon->load('dashboard','topmenu','file','action');
+        $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
+        $this->_loadNamespaces();
+
+        $namespace = array();
+        if (!array_key_exists($this->namespace,$this->namespaces)) {
+            $this->namespace = 'core';
+            $namespace = $this->namespaces['core'];
+            $this->action = '';
+        } else {
+            $namespace = $this->namespaces[$this->namespace];
+            $this->action['namespace'] = $this->namespace;
+            $this->action['namespace_name'] = $namespace['name'];
+            $this->action['namespace_path'] = $namespace['path'];
+            $this->action['namespace_assets_path'] = $namespace['assets_path'];
+            $this->action['lang_topics'] = '';
+            $this->action['controller'] = $action;
         }
 
+        if (intval($action) > 0) {
+            return $this->outputContentDeprecated($options);
+        }
+
+        if (!$isLoggedIn) {
+            $alternateLogin = $this->modx->getOption('manager_login_url_alternate',null,'');
+            if (!empty($alternateLogin)) {
+                $this->modx->sendRedirect($alternateLogin);
+                return '';
+            }
+            $this->action['namespace'] = 'core';
+            $this->action['namespace_name'] = 'core';
+            $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
+            $this->action['lang_topics'] = 'login';
+            $this->action['controller'] = 'security/login';
+        } else if (!$this->modx->hasPermission('frames')) {
+            $this->action['namespace'] = 'core';
+            $this->action['namespace_name'] = 'core';
+            $this->action['namespace_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
+            $this->action['lang_topics'] = 'login';
+            $this->action['controller'] = 'security/logout';
+        }
+
+        if ($isLoggedIn && !$this->checkForMenuPermissions($action)) {
+            $this->body = $this->modx->error->failure($this->modx->lexicon('access_denied'));
+        } else {
+            require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
+
+            $paths = $this->getNamespacePath($theme);
+            $f = $this->action['controller'];
+            $className = $this->getControllerClassName();
+            if (!class_exists($className)) {
+                $classFile = strtolower($f).'.class.php';
+                $classPath = null;
+
+                foreach ($paths as $controllersPath) {
+                    if (!file_exists($controllersPath.$classFile)) {
+                        if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
+                            $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                        }
+                    } else {
+                        $classPath = $controllersPath.$classFile;
+                        break;
+                    }
+                }
+
+                if (!file_exists($classPath)) {
+                    if (file_exists(strtolower($f).'/index.class.php')) {
+                        $classPath = strtolower($f).'/index.class.php';
+                    } else { /* handle Revo <2.2 controllers */
+                        $className = 'modManagerControllerDeprecated';
+                        $classPath = MODX_CORE_PATH.'model/modx/modmanagercontrollerdeprecated.class.php';
+                    }
+                }
+
+                ob_start();
+                require_once $classPath;
+                ob_end_clean();
+            }
+            try {
+                $c = new $className($this->modx,$this->action);
+                /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
+                $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
+                $this->modx->controller->setProperties(array_merge($_GET,$_POST));
+                $this->modx->controller->initialize();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+
+            $this->body = $this->modx->controller->render();
+        }
+
+        if (empty($this->body)) {
+            $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
+        }
+        if (is_array($this->body)) {
+            $this->modx->smarty->assign('_e', $this->body);
+            if (!file_exists($this->modx->smarty->template_dir.'error.tpl')) {
+                $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+                $this->modx->smarty->setTemplatePath($templatePath);
+            }
+            echo $this->modx->smarty->fetch('error.tpl');
+        } else {
+            echo $this->body;
+        }
+        @session_write_close();
+        exit();
+    }
+
+    /**
+     * Overrides modResponse::outputContent to provide mgr-context specific
+     * response.
+     *
+     * @param array $options
+     * @return mixed
+     */
+    public function outputContentDeprecated(array $options = array()) {
+        $action = '';
+        if (!isset($this->modx->request) || !isset($this->modx->request->action)) {
+            $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
+        } else {
+            $action = (integer) $this->modx->request->action;
+        }
         $theme = $this->modx->getOption('manager_theme',null,'default');
         $this->modx->lexicon->load('dashboard','topmenu','file','action');
         if ($action == 0 || !isset($this->modx->actionMap[$action])) {
@@ -64,6 +208,8 @@ class modManagerResponse extends modResponse {
             $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/logout';
         }
+
+        $this->namespace = $this->action['namespace'];
 
         if ($isLoggedIn && !$this->checkForMenuPermissions($action)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('access_denied'));
@@ -185,21 +331,22 @@ class modManagerResponse extends modResponse {
      * @return array An array of paths to the Namespace's controllers directory.
      */
     public function getNamespacePath($theme = 'default') {
+        $namespace = array_key_exists($this->namespace,$this->namespaces) ? $this->namespaces[$this->namespace] : $this->namespaces['core'];
         /* find context path */
-        if (isset($this->action['namespace']) && $this->action['namespace'] != 'core') {
+        if (isset($namespace['name']) && $namespace['name'] != 'core') {
             /* if a custom 3rd party path */
-            $paths[] = $this->action['namespace_path'].trim($theme,'/');
+            $paths[] = $namespace['path'].trim($theme,'/');
             if ($theme != 'default') {
-                $paths[] = $this->action['namespace_path'].'default/';
+                $paths[] = $namespace['path'].'default/';
             }
-            $paths[] = $this->action['namespace_path'];
+            $paths[] = $namespace['path'];
 
         } else {
-            $paths[] = $this->action['namespace_path'].'controllers/'.trim($theme,'/').'/';
+            $paths[] = $namespace['path'].'controllers/'.trim($theme,'/').'/';
             if ($theme != 'default') {
-                $paths[] = $this->action['namespace_path'].'controllers/default/';
+                $paths[] = $namespace['path'].'controllers/default/';
             }
-            $paths[] = $this->action['namespace_path'].'controllers/';
+            $paths[] = $namespace['path'].'controllers/';
         }
         return $paths;
 

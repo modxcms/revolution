@@ -421,6 +421,39 @@ class modCacheManager extends xPDOCacheManager {
         return $results;
     }
 
+    public function generateNamespacesCache($cacheKey, array $options = array()) {
+        $results = array();
+        $c = $this->modx->newQuery('modNamespace');
+        $c->select($this->modx->getSelectColumns('modNamespace', 'modNamespace'));
+        $c->sortby('name','ASC');
+        if ($c->prepare() && $c->stmt->execute()) {
+            $namespaces = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($namespaces as $namespace) {
+
+                if ($namespace['name'] == 'core') {
+                    $namespace['path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+                    $namespace['assets_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH).'assets/';
+                } else {
+                    $namespace['path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$namespace['path']));
+                    $namespace['assets_path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$namespace['assets_path']));
+                }
+                $results[$namespace['name']] = $namespace;
+            }
+        }
+        if (!empty($results) && $this->getOption('cache_namespaces', $options, true)) {
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_namespaces_key', $options,'namespaces');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_namespaces_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_namespaces_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_namespaces_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_namespaces_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+            $lifetime = (integer) $this->getOption('cache_namespaces_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            if (!$this->set($cacheKey, $results, $lifetime, $options)) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching namespaces {$cacheKey}");
+            }
+        }
+        return $results;
+    }
+
     /**
      * Generates a file representing an executable modScript function.
      *

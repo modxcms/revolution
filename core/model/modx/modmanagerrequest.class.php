@@ -33,7 +33,10 @@ class modManagerRequest extends modRequest {
      * @var mixed The default action to load from.
      * @access public
      */
-    public $defaultAction = 0;
+    public $defaultAction = 'welcome';
+
+    public $namespace = 'core';
+    public $namespaceVar = 'namespace';
 
     /**
      * Instantiates a modManagerRequest object.
@@ -117,7 +120,8 @@ class modManagerRequest extends modRequest {
         $this->modx->invokeEvent('OnHandleRequest');
 
         /* save page to manager object. allow custom actionVar choice for extending classes. */
-        $this->action = isset($_REQUEST[$this->actionVar]) ? $_REQUEST[$this->actionVar] : $this->defaultAction;
+        $this->action = !empty($_REQUEST[$this->actionVar]) ? trim($_REQUEST[$this->actionVar]) : $this->defaultAction;
+        $this->namespace = !empty($_REQUEST[$this->namespaceVar]) ? trim($_REQUEST[$this->namespaceVar]) : 'core';
 
         /* invoke OnManagerPageInit event */
         $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));
