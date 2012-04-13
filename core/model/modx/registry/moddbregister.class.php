@@ -236,7 +236,7 @@ class modDbRegister extends modRegister {
                             case 'php' :
                             default :
                                 $timestamp = isset($options['delay']) ? time() + intval($options['delay']) : time();
-                                $expires = isset($options['ttl']) ? time() + intval($options['ttl']) : 0;
+                                $expires = isset($options['ttl']) && intval($options['ttl']) ? time() + intval($options['ttl']) : 0;
                                 $kill = isset($options['kill']) ? (boolean) $options['kill'] : false;
                                 if (!is_int($msgIdx)) {
                                     $msgKey = $msgIdx;
