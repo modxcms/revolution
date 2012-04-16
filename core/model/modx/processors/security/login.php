@@ -80,34 +80,32 @@ if (!$user->get('active')) {
     return $modx->error->failure($modx->lexicon('login_user_inactive'));
 }
 
-$up= & $user->Profile;
-$us= & $user->UserSettings;
-foreach ($us as $settingPK => $setting) {
+foreach ($user->UserSettings as $settingPK => $setting) {
     $sname= $setting->get('key');
     $$sname= $setting->get('value');
 }
-if ($up->get('failed_logins') >= $modx->getOption('failed_login_attempts') && $up->get('blockeduntil') > time()) {
+if ($user->Profile->get('failed_logins') >= $modx->getOption('failed_login_attempts') && $user->Profile->get('blockeduntil') > time()) {
     return $modx->error->failure($modx->lexicon('login_blocked_too_many_attempts'));
 }
-if ($up->get('failedlogincount') >= $modx->getOption('failed_login_attempts')) {
-    $up->set('failedlogincount', 0);
-    $up->set('blocked', 1);
-    $up->set('blockeduntil', time() + (60 * $modx->getOption('blocked_minutes')));
-    $up->save();
+if ($user->Profile->get('failedlogincount') >= $modx->getOption('failed_login_attempts')) {
+    $user->Profile->set('failedlogincount', 0);
+    $user->Profile->set('blocked', 1);
+    $user->Profile->set('blockeduntil', time() + (60 * $modx->getOption('blocked_minutes')));
+    $user->Profile->save();
 }
-if ($up->get('blockeduntil') != 0 && $up->get('blockeduntil') < time()) {
-    $up->set('failedlogincount', 0);
-    $up->set('blocked', 0);
-    $up->set('blockeduntil', 0);
-    $up->save();
+if ($user->Profile->get('blockeduntil') != 0 && $user->Profile->get('blockeduntil') < time()) {
+    $user->Profile->set('failedlogincount', 0);
+    $user->Profile->set('blocked', 0);
+    $user->Profile->set('blockeduntil', 0);
+    $user->Profile->save();
 }
-if ($up->get('blocked')) {
+if ($user->Profile->get('blocked')) {
     return $modx->error->failure($modx->lexicon('login_blocked_admin'));
 }
-if ($up->get('blockeduntil') > time()) {
+if ($user->Profile->get('blockeduntil') > time()) {
     return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
-if ($up->get('blockedafter') > 0 && $up->get('blockedafter') < time()) {
+if ($user->Profile->get('blockedafter') > 0 && $user->Profile->get('blockedafter') < time()) {
     return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
 
@@ -147,9 +145,9 @@ if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
             $_SESSION['login_failed'] = 0;
         }
         if ($_SESSION['login_failed'] == 0) {
-            $flc = ((integer) $up->get('failedlogincount')) + 1;
-            $up->set('failedlogincount', $flc);
-            $up->save();
+            $flc = ((integer) $user->Profile->get('failedlogincount')) + 1;
+            $user->Profile->set('failedlogincount', $flc);
+            $user->Profile->save();
             $_SESSION['login_failed']++;
         } else {
             $_SESSION['login_failed'] = 0;
