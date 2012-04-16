@@ -150,4 +150,12 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('user','access','policy','formcustomization');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Form+Customization+Sets';
+    }
 }

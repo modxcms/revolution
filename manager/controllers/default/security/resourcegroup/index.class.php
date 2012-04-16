@@ -57,4 +57,12 @@ class SecurityResourceGroupManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('user','access');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Resource+Groups';
+    }
 }

@@ -168,4 +168,12 @@ class ElementTemplateUpdateManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('template','category','system_events','propertyset','element');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Templates';
+    }
 }

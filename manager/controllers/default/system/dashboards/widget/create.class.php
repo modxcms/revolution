@@ -70,4 +70,12 @@ class SystemDashboardsWidgetCreateManagerController extends modManagerController
     public function getLanguageTopics() {
         return array('dashboards','user');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Dashboard+Widgets';
+    }
 }

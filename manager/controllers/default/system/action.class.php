@@ -59,4 +59,8 @@ class SystemActionManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('topmenu','menu','namespace');
     }
+
+    public function getHelpUrl() {
+        return 'Actions+and+Menus';
+    }
 }

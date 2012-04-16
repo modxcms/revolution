@@ -59,4 +59,12 @@ class SourceManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('source','namespace');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Media+Sources';
+    }
 }

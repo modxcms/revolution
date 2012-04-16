@@ -230,7 +230,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
     public function getTemplateFile() {
         return 'resource/create.tpl';
     }
-
 }
 
 class DocumentCreateManagerController extends ResourceCreateManagerController {}

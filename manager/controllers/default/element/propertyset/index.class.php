@@ -57,4 +57,12 @@ class ElementPropertySetManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('element','category','propertyset');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Properties+and+Property+Sets';
+    }
 }

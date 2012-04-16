@@ -191,8 +191,9 @@ Ext.extend(MODx,Ext.Component,{
         return c;
     }
 
+    ,helpUrl: false
     ,loadHelpPane: function(b) {
-        var url = MODx.config.help_url;
+        var url = MODx.helpUrl;
         if (!url) { return false; }
         MODx.helpWindow = new Ext.Window({
             title: _('help')

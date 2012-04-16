@@ -74,4 +74,12 @@ class ContextViewManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('context');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Contexts';
+    }
 }
