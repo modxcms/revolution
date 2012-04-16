@@ -121,7 +121,11 @@ class modManagerRequest extends modRequest {
 
         /* save page to manager object. allow custom actionVar choice for extending classes. */
         $this->action = !empty($_REQUEST[$this->actionVar]) ? trim($_REQUEST[$this->actionVar]) : $this->defaultAction;
+        $this->action = preg_replace("/[^A-Za-z0-9_\-\/]/",'',$this->action);
+        $this->action = trim(trim(str_replace('//','',$this->action),'/'));
         $this->namespace = !empty($_REQUEST[$this->namespaceVar]) ? trim($_REQUEST[$this->namespaceVar]) : 'core';
+        $this->namespace = preg_replace("/[^A-Za-z0-9_\-\/]/",'',$this->namespace);
+        $this->namespace = trim(trim(str_replace('//','',$this->namespace),'/'));
 
         /* invoke OnManagerPageInit event */
         $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));

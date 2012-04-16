@@ -93,11 +93,6 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
                 });
                 m.push('-');
                 m.push({
-                    text: _('action_place_here')
-                    ,handler: this.createMenu
-                });
-                m.push('-');
-                m.push({
                     text: _('menu_remove')
                     ,handler: this.removeMenu
                 });
@@ -149,7 +144,7 @@ MODx.window.CreateMenu = function(config) {
             fieldLabel: _('action')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
-            ,xtype: 'modx-combo-action'
+            ,xtype: 'textfield'
             ,id: 'modx-cmen-action'
             ,anchor: '100%'
         },{
@@ -174,6 +169,12 @@ MODx.window.CreateMenu = function(config) {
             ,name: 'permissions'
             ,xtype: 'textfield'
             ,anchor: '100%'
+        },{
+            fieldLabel: _('namespace')
+            ,name: 'namespace'
+            ,xtype: 'textfield'
+            ,anchor: '100%'
+            ,value: 'core'
         }]
     });
     MODx.window.CreateMenu.superclass.constructor.call(this,config);
@@ -220,8 +221,9 @@ MODx.window.UpdateMenu = function(config) {
             fieldLabel: _('action')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
-            ,xtype: 'modx-combo-action'
+            ,xtype: 'textfield'
             ,id: 'modx-umen-action'
+            ,anchor: '100%'
         },{
             fieldLabel: _('icon')
             ,name: 'icon'
@@ -242,6 +244,11 @@ MODx.window.UpdateMenu = function(config) {
         },{
             fieldLabel: _('permissions')
             ,name: 'permissions'
+            ,xtype: 'textfield'
+            ,anchor: '100%'
+        },{
+            fieldLabel: _('namespace')
+            ,name: 'namespace'
             ,xtype: 'textfield'
             ,anchor: '100%'
         }]

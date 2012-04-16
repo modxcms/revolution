@@ -49,6 +49,9 @@ class modManagerResponse extends modResponse {
             $action = $this->modx->request->action;
             $this->namespace = $this->modx->request->namespace;
         }
+        if (empty($action)) {
+            $action = $this->namespace == 'core' ? 'welcome' : 'index';
+        }
         $theme = $this->modx->getOption('manager_theme',null,'default');
         $this->modx->lexicon->load('dashboard','topmenu','file','action');
         $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
@@ -161,8 +164,9 @@ class modManagerResponse extends modResponse {
     }
 
     /**
-     * Overrides modResponse::outputContent to provide mgr-context specific
-     * response.
+     * Overrides modResponse::outputContent to provide mgr-context specific response for 2.2 and earlier controllers.
+     *
+     * @deprecated All controllers still depending on modAction will be removed in 2.4/3.0.
      *
      * @param array $options
      * @return mixed
