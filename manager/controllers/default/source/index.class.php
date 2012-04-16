@@ -8,7 +8,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class SourceIndexManagerController extends modManagerController {
+class SourceManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool

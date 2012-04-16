@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityResourceGroupIndexManagerController extends modManagerController {
+class SecurityResourceGroupManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
