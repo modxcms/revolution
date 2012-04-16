@@ -33,7 +33,7 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
         var template = this.config.template ? this.config.template : t.getValue();
         
         this.getUpdater().update({
-            url: MODx.config.manager_url+'index.php?a='+MODx.action['resource/tvs']
+            url: MODx.config.manager_url+'index.php?a=resource/tvs'
             ,method: 'GET'
             ,params: {
                'class_key': this.config.class_key

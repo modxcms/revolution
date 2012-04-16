@@ -194,12 +194,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,editFile: function(itm,e) {
-        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+        this.loadAction('a=system/file/edit&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
     }
 
     ,createFile: function(itm,e) {
         var d = this.cm.activeNode && this.cm.activeNode.attributes ? this.cm.activeNode.attributes.id : '';
-        this.loadAction('a='+MODx.action['system/file/create']+'&directory='+d+'&source='+this.getSource());
+        this.loadAction('a=system/file/create&directory='+d+'&source='+this.getSource());
     }
 
     ,browser: null

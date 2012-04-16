@@ -11,9 +11,9 @@ MODx.page.CreatePlugin = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
         ,actions: {
-            'new': MODx.action['element/plugin/create']
-            ,edit: MODx.action['element/plugin/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'element/plugin/create'
+            ,edit: 'element/plugin/update'
+            ,cancel: 'welcome'
         }
         ,buttons: [{
             process: 'create', text: _('save'), method: 'remote'
@@ -23,7 +23,7 @@ MODx.page.CreatePlugin = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['welcome']}
+            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

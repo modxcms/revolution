@@ -183,24 +183,6 @@ unset ($collection, $c, $attributes);
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in modxcms.com provisioner reference.'); flush();
 
-/* modAction */
-$collection = include MODX_BUILD_DIR . 'data/transport.core.actions.php';
-if (!empty($collection)) {
-    $attributes = array (
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
-    );
-    foreach ($collection as $c) {
-        $package->put($c, $attributes);
-    }
-
-    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' modActions.'); flush();
-    unset ($collection, $c, $attributes);
-} else {
-    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load modActions.'); flush();
-}
-
 /* modMenu */
 $collection = include MODX_BUILD_DIR . 'data/transport.core.menus.php';
 if (!empty($collection)) {
@@ -210,39 +192,10 @@ if (!empty($collection)) {
         xPDOTransport::UNIQUE_KEY => 'text',
         xPDOTransport::RELATED_OBJECTS => true,
         xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
-            'Action' => array (
-                xPDOTransport::PRESERVE_KEYS => false,
-                xPDOTransport::UPDATE_OBJECT => true,
-                xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
-                xPDOTransport::RELATED_OBJECTS => true,
-                xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
-                    'Children' => array(
-                        xPDOTransport::PRESERVE_KEYS => false,
-                        xPDOTransport::UPDATE_OBJECT => true,
-                        xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
-                    ),
-                ),
-            ),
             'Children' => array(
                 xPDOTransport::PRESERVE_KEYS => true,
                 xPDOTransport::UPDATE_OBJECT => true,
                 xPDOTransport::UNIQUE_KEY => 'text',
-                xPDOTransport::RELATED_OBJECTS => true,
-                xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
-                    'Action' => array (
-                        xPDOTransport::PRESERVE_KEYS => false,
-                        xPDOTransport::UPDATE_OBJECT => true,
-                        xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
-                        xPDOTransport::RELATED_OBJECTS => true,
-                        xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
-                            'Children' => array(
-                                xPDOTransport::PRESERVE_KEYS => false,
-                                xPDOTransport::UPDATE_OBJECT => true,
-                                xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
-                            ),
-                        ),
-                    ),
-                ),
             ),
         ),
     );

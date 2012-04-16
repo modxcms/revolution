@@ -4,7 +4,7 @@ MODx.grid.FCSet = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set'
         ,url: MODx.config.connectors_url+'security/forms/set.php'
-        ,fields: ['id','profile','action','controller','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
+        ,fields: ['id','profile','action','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
         ,paging: true
         ,autosave: true
         ,sm: this.sm
@@ -17,7 +17,7 @@ MODx.grid.FCSet = function(config) {
             ,sortable: true
         },{
             header: _('action')
-            ,dataIndex: 'controller'
+            ,dataIndex: 'action'
             ,width: 200
             ,editable: true
             ,sortable: true
@@ -234,7 +234,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
 
     ,updateSet: function(btn,e) {
         var r = this.menu.record;
-        location.href = '?a='+MODx.action['security/forms/set/update']+'&id='+r.id;
+        location.href = '?a=security/forms/set/update&id='+r.id;
     }
     ,duplicateSet: function(btn,e) {
         MODx.Ajax.request({

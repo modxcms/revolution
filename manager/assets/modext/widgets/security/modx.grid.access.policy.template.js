@@ -138,7 +138,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         this.refresh();
     }
     ,editPolicyTemplate: function(itm,e) {
-        location.href = '?a='+MODx.action['security/access/policy/template/update']+'&id='+this.menu.record.id;
+        location.href = '?a=security/access/policy/template/update&id='+this.menu.record.id;
     }
     
     ,createPolicyTemplate: function(btn,e) {

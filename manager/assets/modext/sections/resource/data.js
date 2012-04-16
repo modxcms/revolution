@@ -38,9 +38,9 @@ MODx.page.ResourceData = function(config) {
     Ext.applyIf(config,{
         form: 'modx-resource-data'
             ,actions: {
-            'new': MODx.action['resource/create']
-            ,edit: MODx.action['resource/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'resource/create'
+            ,edit: 'resource/update'
+            ,cancel: 'welcome'
         }
         ,buttons: btns
         ,components: [{
@@ -61,10 +61,10 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
         return false;
     }
     ,editResource: function() {
-        location.href = '?a='+MODx.action['resource/update']+'&id='+this.config.record.id;
+        location.href = '?a=resource/update&id='+this.config.record.id;
     }
     ,cancel: function() {
-        location.href = '?a='+MODx.action['welcome'];
+        location.href = '?a=welcome';
     }
 });
 Ext.reg('modx-page-resource-data',MODx.page.ResourceData);

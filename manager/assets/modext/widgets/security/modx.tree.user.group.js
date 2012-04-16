@@ -78,9 +78,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
         
-        location.href = 'index.php'
-            + '?a=' + MODx.action['security/usergroup/update']
-            + '&id=' + id;
+        location.href = 'index.php?a=security/usergroup/update&id=' + id;
     }
 
     ,getMenu: function() {

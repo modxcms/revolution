@@ -16,10 +16,10 @@ MODx.page.ViewContext = function(config) {
 	Ext.applyIf(config,{
 		form: 'context_data'
 		,actions: {
-            'new': MODx.action['context/create']
-            ,edit: MODx.action['context/update']
-            ,'delete': MODx.action['context/delete']
-            ,cancel: MODx.action['context/view']
+            'new': 'context/create'
+            ,'edit': 'context/update'
+            ,'delete': 'context/delete'
+            ,'cancel': 'context/view'
         }
         ,buttons: this.getButtons()
 	});
@@ -32,7 +32,7 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	        process: 'create'
 	        ,text: _('new')
 	        ,params: {
-	            a: MODx.action['context/create']
+	            a: 'context/create'
 	        }
 	    },{
 	        process: 'edit'
@@ -59,7 +59,7 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	        process: 'cancel'
 	        ,text: _('cancel')
 	        ,params: {
-	            a: MODx.action['context']
+	            a: 'context'
 	        }
 	    });
         b.push('-',{

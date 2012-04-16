@@ -28,7 +28,6 @@ class modActionDom extends modAccessibleSimpleObject {
      * @return string The generated code that applies the rule.
      */
     public function apply($objId = '') {
-        if (empty($objId)) $objId = !empty($_REQUEST['id']) ? $_REQUEST['id'] : 0;
         $rule = '';
         $encoding = $this->xpdo->getOption('modx_charset',null,'UTF-8');
 

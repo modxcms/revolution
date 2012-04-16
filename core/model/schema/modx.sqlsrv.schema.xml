@@ -194,7 +194,8 @@
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
-    
+
+    <!-- deprecated 2.3, will be removed in 2.4/3.0 -->
     <object class="modAction" table="actions" extends="modAccessibleSimpleObject">
         <field key="namespace" dbtype="nvarchar" precision="100" phptype="string" null="false" default="core" index="index" />
         <field key="controller" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
@@ -511,7 +512,7 @@
 
     <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
         <field key="set" dbtype="int" phptype="integer" null="false" default="0" index="index" />
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="xtype" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
@@ -583,7 +584,7 @@
 
     <object class="modFormCustomizationSet" table="fc_sets" extends="xPDOSimpleObject">
         <field key="profile" dbtype="int" phptype="integer" null="false" default="0" index="index" />
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="template" dbtype="int" phptype="integer" null="false" default="0" index="index" />
@@ -611,7 +612,7 @@
     </object>
 
     <object class="modActionField" table="actions_fields" extends="xPDOSimpleObject">
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
         <field key="type" dbtype="nvarchar" precision="100" phptype="string" null="false" default="field" index="index" /> <!-- either field/tab -->
         <field key="tab" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" /> <!-- for fields, what tab they are on -->
@@ -672,13 +673,14 @@
     <object class="modMenu" table="menus" extends="modAccessibleObject">
         <field key="text" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="pk" />
         <field key="parent" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="icon" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="menuindex" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="params" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="handler" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="permissions" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <field key="namespace" dbtype="nvarchar" precision="100" phptype="string" null="false" default="core" index="index" />
         
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="text" length="" collation="A" null="false" />
@@ -688,6 +690,9 @@
         </index>
         <index alias="action" name="action" primary="false" unique="false" type="BTREE">
             <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Action" class="modAction" local="action" foreign="id" owner="foreign" cardinality="one" />

@@ -259,7 +259,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     }
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            location.href = '?a='+MODx.action['system/dashboards/widget/update']+'&id='+o.result.object.id;
+            location.href = '?a=system/dashboards/widget/update&id='+o.result.object.id;
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');

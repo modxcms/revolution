@@ -2,6 +2,8 @@
 /**
  * Export a FC Set to XML
  *
+ * @var modX $modx
+ *
  * @package modx
  * @subpackage processors.security.forms.set
  */
@@ -15,14 +17,12 @@ if (!extension_loaded('XMLWriter') || !class_exists('XMLWriter')) {
 if (empty($scriptProperties['download'])) {
     if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('set_err_ns'));
     $c = $modx->newQuery('modFormCustomizationSet');
-    $c->innerJoin('modAction','Action');
     $c->leftJoin('modTemplate','Template');
     $c->where(array(
         'id' => $scriptProperties['id'],
     ));
+    $c->select($modx->getSelectColumns('modFormCustomizationSet','modFormCustomizationSet'));
     $c->select(array(
-        'modFormCustomizationSet.*',
-        'Action.controller',
         'Template.templatename',
     ));
     $set = $modx->getObject('modFormCustomizationSet',$c);
@@ -42,7 +42,7 @@ if (empty($scriptProperties['download'])) {
 
     $xml->startElement('set');
 
-    $xml->writeElement('action',$setArray['controller']);
+    $xml->writeElement('action',$setArray['action']);
     $xml->writeElement('template',$setArray['templatename']);
     $xml->writeElement('description',$setArray['description']);
     $xml->writeElement('constraint_field',$setArray['constraint_field']);

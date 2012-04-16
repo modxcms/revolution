@@ -11,9 +11,9 @@ MODx.page.UpdateChunk = function(config) {
 	Ext.applyIf(config,{
 	   formpanel: 'modx-panel-chunk'
 	   ,actions: {
-            'new': MODx.action['element/chunk/create']
-            ,edit: MODx.action['element/chunk/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'element/chunk/create'
+            ,edit: 'element/chunk/update'
+            ,cancel: 'welcome'
         }
         ,buttons: [{
             process: 'update'
@@ -27,7 +27,7 @@ MODx.page.UpdateChunk = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['welcome']}
+            ,params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

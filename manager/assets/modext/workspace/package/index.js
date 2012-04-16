@@ -25,7 +25,7 @@ MODx.page.Package = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,handler: function() {
-                location.href= '?a='+MODx.action['workspaces'];
+                location.href = '?a=workspaces';
             }
         },'-',{
             text: _('help_ex')

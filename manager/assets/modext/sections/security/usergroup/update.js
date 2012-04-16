@@ -23,7 +23,7 @@ MODx.page.UpdateUserGroup = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['security/permission']}
+            ,params: {a:'security/permission'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

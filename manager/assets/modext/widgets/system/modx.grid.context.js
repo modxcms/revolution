@@ -59,7 +59,7 @@ MODx.grid.Context = function(config) {
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     updateContext: function(itm,e) {
-        location.href = 'index.php?a='+MODx.action['context/update']+'&key='+this.menu.record.key;
+        location.href = 'index.php?a=context/update&key='+this.menu.record.key;
     }
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();

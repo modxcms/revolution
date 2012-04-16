@@ -11,9 +11,9 @@ MODx.page.UpdateFCProfile = function(config) {
 	Ext.applyIf(config,{
 	   formpanel: 'modx-panel-fc-profile'
 	   ,actions: {
-            'new': MODx.action['security/forms/profile/create']
-            ,edit: MODx.action['security/forms/profile/update']
-            ,cancel: MODx.action['security/forms']
+            'new': 'security/forms/profile/create'
+            ,edit: 'security/forms/profile/update'
+            ,cancel: 'security/forms'
         }
         ,buttons: [{
             process: 'update'
@@ -27,7 +27,7 @@ MODx.page.UpdateFCProfile = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['security/forms']}
+            ,params: {a:'security/forms'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

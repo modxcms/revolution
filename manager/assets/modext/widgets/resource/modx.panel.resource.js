@@ -165,7 +165,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
+                            location.href = '?a='+r.result.object.action+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -374,7 +374,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    var titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
+                    var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
                 }}
