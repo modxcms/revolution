@@ -105,6 +105,9 @@ class modManagerResponse extends modResponse {
             $paths = $this->getNamespacePath($theme);
             $f = $this->action['controller'];
             $className = $this->getControllerClassName();
+            if (!class_exists($className) && $this->namespace != 'core') {
+                $className = ucfirst($this->namespace).$className;
+            }
             if (!class_exists($className)) {
                 $classFile = strtolower($f).'.class.php';
                 $classPath = null;
@@ -338,7 +341,13 @@ class modManagerResponse extends modResponse {
         $namespace = array_key_exists($this->namespace,$this->namespaces) ? $this->namespaces[$this->namespace] : $this->namespaces['core'];
         /* find context path */
         if (isset($namespace['name']) && $namespace['name'] != 'core') {
-            /* if a custom 3rd party path */
+            $paths[] = $namespace['path'].'controllers/'.trim($theme,'/').'/';
+            if ($theme != 'default') {
+                $paths[] = $namespace['path'].'controllers/default/';
+            }
+            $paths[] = $namespace['path'].'controllers/';
+
+            /* deprecated old usage */
             $paths[] = $namespace['path'].trim($theme,'/');
             if ($theme != 'default') {
                 $paths[] = $namespace['path'].'default/';

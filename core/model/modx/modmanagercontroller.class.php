@@ -855,6 +855,8 @@ abstract class modManagerController {
  * Utility abstract class for usage by Extras that has a subrequest handler that does auto-routing by the &action
  * REQUEST parameter. You must extend this class in your Extra to use it.
  *
+ * @deprecated Not really needed in 2.3 due to new pathing of controllers. Will be removed in 2.4/3.0.
+ *
  * @abstract
  * @package modx
  */
