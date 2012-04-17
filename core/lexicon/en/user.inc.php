@@ -74,6 +74,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently remove thi
 $_lang['user_country'] = 'Country';
 $_lang['user_dob'] = 'Date of birth';
 $_lang['user_doesnt_exist'] = 'User does not exist';
+$_lang['user_duplicate'] = 'Duplicate User';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 $_lang['user_email'] = 'E-mail address';
 $_lang['user_err_access_permissions_save'] = 'An error occurred while saving user access permissions.';
