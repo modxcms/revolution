@@ -21,15 +21,7 @@ class modManagerResponse extends modResponse {
 
     protected function _loadNamespaces() {
         $loaded = false;
-        $cacheKey= $this->modx->context->get('key') . '/namespaces';
-        $cache = $this->modx->cacheManager->get($cacheKey, array(
-            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_namespaces_key', null, 'namespaces'),
-            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_namespaces_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_namespaces_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-        ));
-        if (empty($cache)) {
-            $cache = $this->modx->cacheManager->generateNamespacesCache($cacheKey);
-        }
+        $cache = $this->modx->call('modNamespace','generateCache',array(&$this->modx));
         if ($cache) {
             $this->namespaces = $cache;
             $loaded = true;

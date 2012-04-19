@@ -374,17 +374,16 @@ abstract class modManagerController {
      * @return array|string
      */
     public function getTemplatesPaths($coreOnly = false) {
-        $namespacePath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
         /* extras */
         if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) {
+            $namespacePath = $this->config['namespace_path'];
             $paths[] = $namespacePath . 'templates/'.$this->theme.'/';
             $paths[] = $namespacePath . 'templates/default/';
             $paths[] = $namespacePath . 'templates/';
-        } else { /* core */
-            $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
-            $paths[] = $managerPath . 'templates/'.$this->theme.'/';
-            $paths[] = $managerPath . 'templates/default/';
         }
+        $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+        $paths[] = $managerPath . 'templates/'.$this->theme.'/';
+        $paths[] = $managerPath . 'templates/default/';
         return $paths;
     }
 
@@ -854,8 +853,6 @@ abstract class modManagerController {
 /**
  * Utility abstract class for usage by Extras that has a subrequest handler that does auto-routing by the &action
  * REQUEST parameter. You must extend this class in your Extra to use it.
- *
- * @deprecated Not really needed in 2.3 due to new pathing of controllers. Will be removed in 2.4/3.0.
  *
  * @abstract
  * @package modx
