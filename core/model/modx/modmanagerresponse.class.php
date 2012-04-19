@@ -70,7 +70,7 @@ class modManagerResponse extends modResponse {
         } else {
             $this->modx->loadClass('modManagerController','',false,true);
             $className = $this->loadControllerClass(!$isDeprecated);
-            $this->instantiateController($className);
+            $this->instantiateController($className,$isDeprecated ? 'getInstanceDeprecated' : 'getInstance');
             $this->body = $this->modx->controller->render();
         }
         if (empty($this->body)) {
@@ -180,11 +180,14 @@ class modManagerResponse extends modResponse {
         return $className;
     }
 
-    public function instantiateController($className) {
+    public function instantiateController($className,$getInstanceMethod = 'getInstance') {
         try {
             $c = new $className($this->modx,$this->action);
+            if (!($c instanceof modExtraManagerController) && $getInstanceMethod == 'getInstanceDeprecated') {
+                $getInstanceMethod = 'getInstance';
+            }
             /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
-            $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
+            $this->modx->controller = call_user_func_array(array($c,$getInstanceMethod),array($this->modx,$className,$this->action));
             $this->modx->controller->setProperties(array_merge($_GET,$_POST));
             $this->modx->controller->initialize();
         } catch (Exception $e) {
