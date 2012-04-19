@@ -866,27 +866,6 @@ abstract class modExtraManagerController extends modManagerController {
     public static function getDefaultController() { return 'index'; }
 
     /**
-     * Get an instance of this extra controller
-     * @static
-     * @param modX $modx A reference to the modX object
-     * @param string $className The string className that is being requested to load
-     * @param array $config An array of configuration options built from the modAction object
-     * @return modManagerController A newly created modManagerController instance
-     */
-    public static function getInstance(modX &$modx, $className, array $config = array()) {
-        $action = call_user_func(array($className,'getDefaultController'));
-        if (isset($_REQUEST['action'])) {
-            $action = str_replace(array('../','./','.','-','@'),'',$_REQUEST['action']);
-        }
-        $className = self::getControllerClassName($action,$config['namespace']);
-        $classPath = $config['namespace_path'].'controllers/'.$action.'.class.php';
-        require_once $classPath;
-        /** @var modManagerController $controller */
-        $controller = new $className($modx,$config);
-        return $controller;
-    }
-
-    /**
      * Return the class name of a controller given the action
      * @static
      * @param string $action The action name, eg: "home" or "create"
