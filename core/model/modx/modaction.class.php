@@ -57,10 +57,9 @@ class modAction extends modAccessibleSimpleObject {
      */
     public function rebuildCache(array $options = array()) {
         $rebuilt = false;
-        $this->modx =& $this->xpdo;
-        $cacheKey= $this->modx->context->get('key') . '/actions';
-        $this->modx->getCacheManager();
-        if ($this->modx->cacheManager->generateActionMap($cacheKey, $options)) {
+        $cacheKey= $this->xpdo->context->get('key') . '/actions';
+        $this->xpdo->getCacheManager();
+        if ($this->xpdo->cacheManager->generateActionMap($cacheKey, $options)) {
             $rebuilt = true;
         }
         return $rebuilt;
