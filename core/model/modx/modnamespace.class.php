@@ -31,7 +31,7 @@ class modNamespace extends xPDOObject {
         return $removed;
     }
 
-    public static function generateCache(modX $modx) {
+    public static function loadCache(modX $modx) {
         if (!$modx->getCacheManager()) {
             return array();
         }
