@@ -948,7 +948,7 @@
     </object>
     
     <object class="modSession" table="session" extends="xPDOObject">
-        <field key="id" dbtype="nvarchar" precision="40" phptype="string" null="false" index="pk" default="" />
+        <field key="id" dbtype="nvarchar" precision="255" phptype="string" null="false" index="pk" default="" />
         <field key="access" dbtype="bigint" phptype="timestamp" null="false" />
         <field key="data" dbtype="nvarchar" precision="max" phptype="string" />
 

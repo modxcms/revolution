@@ -9,7 +9,7 @@ include_once (dirname(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php');
 require_once (dirname(dirname(dirname(dirname(__FILE__)))) . '/config.core.php');
 require_once (dirname(dirname(dirname(dirname(__FILE__)))) . '/_build/build.properties.php');
 
-foreach (array(/*'mysql',*/ 'sqlsrv') as $driver) {
+foreach (array('mysql', 'sqlsrv') as $driver) {
     $xpdo= new xPDO(
         $properties["{$driver}_string_dsn_nodb"],
         $properties["{$driver}_string_username"],

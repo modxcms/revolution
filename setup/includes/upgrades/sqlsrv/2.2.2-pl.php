@@ -38,3 +38,9 @@ foreach ($users as $user) {
     $user->set('sudo',true);
     $user->save();
 }
+
+/* [#7646] Increase size of session.id field to handle up to 255 chars */
+$class = 'modSession';
+$table = $modx->getTableName('modSession');
+$description = $this->install->lexicon('modify_column',array('column' => 'id', 'old' => 'nvarchar(40)', 'new' => 'nvarchar(255)', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'alterField'), array($class, 'id'));
