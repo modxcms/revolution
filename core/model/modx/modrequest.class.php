@@ -226,7 +226,9 @@ class modRequest {
             $criteria = $this->modx->newQuery('modResource');
             $criteria->select(array($this->modx->escape('modResource').'.*'));
             $criteria->where(array('id' => $resourceId, 'deleted' => '0'));
-            if (!$this->modx->hasPermission('view_unpublished')) $criteria->where(array('published' => 1));
+            if (!$this->modx->hasPermission('view_unpublished') || $this->modx->getSessionState() !== modX::SESSION_STATE_INITIALIZED) {
+                $criteria->where(array('published' => 1));
+            }
             if ($resource = $this->modx->getObject('modResource', $criteria)) {
                 if ($resource instanceof modResource) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
@@ -256,7 +258,7 @@ class modRequest {
                 }
             }
         } elseif ($fromCache && $resource instanceof modResource && !$resource->get('deleted')) {
-            if ($resource->checkPolicy('load') && ($resource->get('published') || $this->modx->hasPermission('view_unpublished'))) {
+            if ($resource->checkPolicy('load') && ($resource->get('published') || ($this->modx->getSessionState() === modX::SESSION_STATE_INITIALIZED && $this->modx->hasPermission('view_unpublished')))) {
                 if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                     if (!$isForward || ($isForward && !$this->modx->getOption('allow_forward_across_contexts', $options, false))) {
                         if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
