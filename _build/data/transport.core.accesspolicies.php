@@ -117,4 +117,15 @@ $policies['10']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
+$policies['11']= $xpdo->newObject('modAccessPolicy');
+$policies['11']->fromArray(array (
+  'id' => 11,
+  'name' => 'Context',
+  'description' => 'A standard Context policy that you can apply when creating Context ACLs for basic read/write and view_unpublished access within a Context.',
+  'parent' => 0,
+  'class' => '',
+  'data' => '{"load":true,"list":true,"view":true,"save":true,"remove":true,"copy":true,"view_unpublished":true}',
+  'lexicon' => 'permissions',
+), '', true, true);
+
 return $policies;

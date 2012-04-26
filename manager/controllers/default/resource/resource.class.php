@@ -237,11 +237,21 @@ abstract class ResourceManagerController extends modManagerController {
         /* get categories */
         $c = $this->modx->newQuery('modCategory');
         $c->sortby('category','ASC');
-        $categories = $this->modx->getCollection('modCategory',$c);
-        $emptyCategory = $this->modx->newObject('modCategory');
-        $emptyCategory->set('category',ucfirst($this->modx->lexicon('uncategorized')));
-        $emptyCategory->id = 0;
-        $categories[0] = $emptyCategory;
+        $cats = $this->modx->getCollection('modCategory',$c);
+        $categories = array();
+        /** @var modCategory $cat */
+        foreach ($cats as $cat) {
+            $categories[$cat->get('id')] = $cat->toArray();
+            $categories[$cat->get('id')]['tvs'] = array();
+            $categories[$cat->get('id')]['tvCount'] = 0;
+        }
+
+        $categories[0] = array(
+            'id' => 0,
+            'category' => ucfirst($this->modx->lexicon('uncategorized')),
+            'tvs' => array(),
+            'tvCount' => 0,
+        );
         $tvMap = array();
         $hidden = array();
         $templateId = $this->resource->get('template');
@@ -266,7 +276,6 @@ abstract class ResourceManagerController extends modManagerController {
                 }
                 $c->select($this->modx->getSelectColumns('modTemplateVarTemplate', 'TemplateVarTemplate', '', array('rank')));
                 $c->sortby('cat_category,TemplateVarTemplate.rank,modTemplateVar.rank','ASC');
-                //$c->construct(); echo $c->toSQL(); die();
                 $tvs = $this->modx->getCollection('modTemplateVar',$c);
 
                 $reloading = !empty($reloadData) && count($reloadData) > 0;
@@ -302,23 +311,23 @@ abstract class ResourceManagerController extends modManagerController {
                             'tv' . $tv->get('id'),
                         ));
                     }
-                    $inputForm = $tv->renderInput($this->resource->get('id'), array('value'=> $v));
+                    $inputForm = $tv->renderInput($this->resource, array('value'=> $v));
                     if (empty($inputForm)) continue;
 
                     $tv->set('formElement',$inputForm);
                     if ($tv->get('type') != 'hidden') {
-                        if (!isset($categories[$cat]->tvs) || !is_array($categories[$cat]->tvs)) {
-                            $categories[$cat]->tvs = array();
-                            $categories[$cat]->tvCount = 0;
+                        if (!isset($categories[$cat]['tvs']) || !is_array($categories[$cat]['tvs'])) {
+                            $categories[$cat]['tvs'] = array();
+                            $categories[$cat]['tvCount'] = 0;
                         }
 
                         /* add to tv/category map */
                         $tvMap[$tv->get('id')] = $tv->category;
 
                         /* add TV to category array */
-                        $categories[$cat]->tvs[] = $tv;
+                        $categories[$cat]['tvs'][] = $tv;
                         if ($tv->get('type') != 'hidden') {
-                            $categories[$cat]->tvCount++;
+                            $categories[$cat]['tvCount']++;
                         }
                     } else {
                         $hidden[] = $tv;
@@ -330,11 +339,11 @@ abstract class ResourceManagerController extends modManagerController {
         $finalCategories = array();
         /** @var modCategory $category */
         foreach ($categories as $n => $category) {
-            if (is_object($category) && $category instanceof modCategory) {
-                $category->hidden = empty($category->tvCount) ? true : false;
-                $ct = isset($category->tvs) ? count($category->tvs) : 0;
+            if (is_array($category)) {
+                $category['hidden'] = empty($category['tvCount']) ? true : false;
+                $ct = isset($category['tvs']) ? count($category['tvs']) : 0;
                 if ($ct > 0) {
-                    $finalCategories[$category->get('id')] = $category;
+                    $finalCategories[$category['id']] = $category;
                     $this->tvCounts[$n] = $ct;
                 }
             }

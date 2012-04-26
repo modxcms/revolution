@@ -30,12 +30,12 @@ if (in_array(substr($scriptProperties['key'],0,1),$nums)) {
 /* prevent duplicate keys */
 $alreadyExists = $modx->getObject('modUserSetting',array(
     'key' => $scriptProperties['key'],
-    'user' => $scriptProperties['user'],
+    'user' => $scriptProperties['fk'],
 ));
 if ($alreadyExists) return $modx->error->failure($modx->lexicon('setting_err_ae'));
 
 
-if ($modx->error->hasError) {
+if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
 
