@@ -174,13 +174,14 @@ class modInstallCLIRequest extends modInstallRequest {
      * @param array $config
      * @return array
      */
-    public function getConfig($mode = 0,array $config = array()) {
+    public function getConfig($mode = 0, array $config = array()) {
+        $config = parent::getConfig($mode, $config);
+
         /* load the config file */
-        if (!$this->loadConfigFile()) {
-            return array();
+        if ($this->loadConfigFile()) {
+            $config = array_merge($config, $this->settings->fetch());
         }
-        $this->settings->set('dbase',$this->settings->get('database'));
-        return parent::getConfig($mode,$this->settings->fetch());
+        return $config;
     }
 
     /**
