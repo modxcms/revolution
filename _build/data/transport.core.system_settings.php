@@ -1043,6 +1043,15 @@ $settings['manager_theme']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_week_start']= $xpdo->newObject('modSystemSetting');
+$settings['manager_week_start']->fromArray(array (
+  'key' => 'manager_week_start',
+  'value' => 0,
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['modx_browser_default_sort']= $xpdo->newObject('modSystemSetting');
 $settings['modx_browser_default_sort']->fromArray(array (
   'key' => 'modx_browser_default_sort',
