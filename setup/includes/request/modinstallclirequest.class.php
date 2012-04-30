@@ -174,23 +174,22 @@ class modInstallCLIRequest extends modInstallRequest {
      * @param array $config
      * @return array
      */
-    public function getConfig($mode = 0,array $config = array()) {
+    public function getConfig($mode = 0, array $config = array()) {
         /* load the config file */
-        if (!$this->loadConfigFile()) {
-            return array();
-        }
-        $this->settings->set('dbase',$this->settings->get('database'));
-        return parent::getConfig($mode,$this->settings->fetch());
+        $config = array_merge($this->loadConfigFile(), $config);
+        $config = parent::getConfig($mode, $config);
+        $this->prepareSettings($config);
+        return $config;
     }
 
     /**
      * Attempt to load the config.xml (or other config file) to use when installing. One must be present to run
      * MODX Setup in CLI mode.
      * 
-     * @return boolean
+     * @return array
      */
     public function loadConfigFile() {
-        $loaded = false;
+        $settings = array();
         $configFile = $this->settings->get('config');
         if (empty($configFile)) $configFile = MODX_INSTALL_PATH.'setup/config.xml';
         if (!empty($configFile)) {
@@ -202,12 +201,8 @@ class modInstallCLIRequest extends modInstallRequest {
         }
         if (!empty($configFile) && file_exists($configFile)) {
             $settings = $this->parseConfigFile($configFile);
-            if (!empty($settings)) {
-                $this->prepareSettings($settings);
-                $loaded = true;
-            }
         }
-        return $loaded;
+        return $settings;
     }
 
     /**

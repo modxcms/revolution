@@ -53,7 +53,8 @@ class modPhpThumb extends phpThumb {
         $this->setParameter('zc',$this->modx->getOption('zc',$_REQUEST,$this->modx->getOption('phpthumb_zoomcrop',$this->config,0)));
         $this->setParameter('far',$this->modx->getOption('far',$_REQUEST,$this->modx->getOption('phpthumb_far',$this->config,'C')));
         $this->setParameter('cache_directory_depth',4);
-
+        $this->setParameter('config_ttf_directory',$this->modx->getOption('core_path',$this->config,MODX_CORE_PATH).'model/phpthumb/fonts/');
+        
         $documentRoot = $this->modx->getOption('phpthumb_document_root',$this->config,'');
         if (!empty($documentRoot)) {
             $this->setParameter('config_document_root',$documentRoot);

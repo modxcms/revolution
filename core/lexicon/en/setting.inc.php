@@ -432,6 +432,9 @@ $_lang['setting_manager_time_format_desc'] = 'The format string, in PHP date() f
 $_lang['setting_manager_use_tabs'] = 'Use Tabs in Manager Layout';
 $_lang['setting_manager_use_tabs_desc'] = 'If true, the manager will use tabs for rendering the content panes. Otherwise, it will use portals.';
 
+$_lang['setting_manager_week_start'] = 'Week start';
+$_lang['setting_manager_week_start_desc'] = 'Define the day starting the week. Use 0 (or leave empty) for sunday, 1 for monday and so on...';
+
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 

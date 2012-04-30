@@ -571,6 +571,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
+            ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
             ,value: config.record.publishedon
@@ -583,6 +584,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
+            ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
             ,value: config.record.pub_date
@@ -595,6 +597,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
+            ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
             ,value: config.record.unpub_date

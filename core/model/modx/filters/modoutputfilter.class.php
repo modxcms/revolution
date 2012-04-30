@@ -316,8 +316,9 @@ class modOutputFilter {
 
                             /* ensure that filter correctly counts special chars */
                             $output = html_entity_decode($output,ENT_COMPAT,$encoding);
-                            $len = $usemb ? mb_strlen($output) : strlen($output);
+                            $len = $usemb ? mb_strlen($output,$encoding) : strlen($output);
                             if ($limit > $len) $limit = $len;
+                            if ($limit < 0) $limit = 0;
                             $breakpoint = $usemb ? mb_strpos($output," ",$limit,$encoding) : strpos($output, " ", $limit);
                             if (false !== $breakpoint) {
                                 if ($breakpoint < $len - 1) {
@@ -533,7 +534,7 @@ class modOutputFilter {
                               $ago[] = $this->modx->lexicon('ago_minutes',array('time' => $agoTS['minutes']));
                             }
                             if (empty($ago)) { /* handle <1 min */
-                              $ago[] = $this->modx->lexicon('ago_seconds',array('time' => $agoTS['seconds']));
+                              $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
                             }
                             $output = implode(', ',$ago);
                             $output = $this->modx->lexicon('ago',array('time' => $output));

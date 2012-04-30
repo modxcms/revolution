@@ -41,6 +41,8 @@ Ext.extend(MODx,Ext.Component,{
         Ext.override(Ext.form.Field,{
             defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on", msgTarget: 'under' }
         });
+
+        Ext.Ajax.on('requestexception',this.onAjaxException,this);
         Ext.menu.Menu.prototype.enableScrolling = false;
         this.addEvents({
             beforeClearCache: true
@@ -94,6 +96,32 @@ Ext.extend(MODx,Ext.Component,{
             }
         }
         return arg;
+    }
+
+    ,onAjaxException: function(conn,r,opt,e) {
+        try {
+            r = Ext.decode(r.responseText);
+        } catch (e) {
+            Ext.MessageBox.show({
+                title: _('error')
+                ,msg: e.message+': '+ r.responseText
+                ,buttons: Ext.MessageBox.OK
+                ,cls: 'modx-js-parse-error'
+                ,minWidth: 600
+                ,maxWidth: 750
+                ,modal: false
+                ,width: 600
+            });
+        }
+        if (r && (r.code == 401 || (r.object && r.object.code == 401))) {
+            if (!MODx.loginWindow) {
+                MODx.loginWindow = MODx.load({
+                    xtype: 'modx-window-login'
+                    ,username: MODx.user.username
+                });
+            }
+            MODx.loginWindow.show();
+        }
     }
 
     ,loadAccordionPanels: function() { return []; }

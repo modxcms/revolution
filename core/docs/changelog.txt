@@ -4,6 +4,18 @@ development release, and is only shown to give an idea of what's currently in th
 
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
+
+- Add ability to extend manager session by relogging in without leaving manager screen
+- Add better handling for AJAX exceptions, displaying AJAX errors
+- [#7649] Prevent E_NOTICE when using ago filter within <1sec difference
+- [#7568] Add JSON to default content types
+- [#7549] Open new window for phpinfo in system info page
+- [#7531] Add manager setting for first day of week in datepicker
+- Flip page title on manager pages for easier readability in browser tabs
+- [#7543] Add extra sanity checks for ellipsis output filter
+- CLI upgrades not loading MODX config data
+- [#7652] Sessionless contexts allowing anonymous access to unpublished resources
+- [#7610] User.sudo field invalid for sqlsrv
 - [#7619] Fix issue with TV FC rules and template constraints
 - [#7613] Add ability to duplicate user
 - [#7590] Fix lazy loading errors in xPDO layer
