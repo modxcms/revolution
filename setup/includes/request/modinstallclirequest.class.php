@@ -175,12 +175,10 @@ class modInstallCLIRequest extends modInstallRequest {
      * @return array
      */
     public function getConfig($mode = 0, array $config = array()) {
-        $config = parent::getConfig($mode, $config);
-
         /* load the config file */
-        if ($this->loadConfigFile()) {
-            $config = array_merge($config, $this->settings->fetch());
-        }
+        $config = array_merge($this->loadConfigFile(), $config);
+        $config = parent::getConfig($mode, $config);
+        $this->prepareSettings($config);
         return $config;
     }
 
@@ -188,10 +186,10 @@ class modInstallCLIRequest extends modInstallRequest {
      * Attempt to load the config.xml (or other config file) to use when installing. One must be present to run
      * MODX Setup in CLI mode.
      * 
-     * @return boolean
+     * @return array
      */
     public function loadConfigFile() {
-        $loaded = false;
+        $settings = array();
         $configFile = $this->settings->get('config');
         if (empty($configFile)) $configFile = MODX_INSTALL_PATH.'setup/config.xml';
         if (!empty($configFile)) {
@@ -203,12 +201,8 @@ class modInstallCLIRequest extends modInstallRequest {
         }
         if (!empty($configFile) && file_exists($configFile)) {
             $settings = $this->parseConfigFile($configFile);
-            if (!empty($settings)) {
-                $this->prepareSettings($settings);
-                $loaded = true;
-            }
         }
-        return $loaded;
+        return $settings;
     }
 
     /**
