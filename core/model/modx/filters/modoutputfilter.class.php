@@ -316,8 +316,9 @@ class modOutputFilter {
 
                             /* ensure that filter correctly counts special chars */
                             $output = html_entity_decode($output,ENT_COMPAT,$encoding);
-                            $len = $usemb ? mb_strlen($output) : strlen($output);
+                            $len = $usemb ? mb_strlen($output,$encoding) : strlen($output);
                             if ($limit > $len) $limit = $len;
+                            if ($limit < 0) $limit = 0;
                             $breakpoint = $usemb ? mb_strpos($output," ",$limit,$encoding) : strpos($output, " ", $limit);
                             if (false !== $breakpoint) {
                                 if ($breakpoint < $len - 1) {
