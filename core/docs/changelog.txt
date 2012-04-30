@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add ability to extend manager session by relogging in without leaving manager screen
+- Add better handling for AJAX exceptions, displaying AJAX errors
 - [#7649] Prevent E_NOTICE when using ago filter within <1sec difference
 - [#7568] Add JSON to default content types
 - [#7549] Open new window for phpinfo in system info page
