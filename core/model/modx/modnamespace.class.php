@@ -15,6 +15,14 @@
  * @package modx
  */
 class modNamespace extends xPDOObject {
+    public function get($k, $format = null, $formatTemplate= null) {
+        $v = parent::get($k, $format, $formatTemplate);
+        if (in_array($k, array('path', 'assets_path'))) {
+            $v = $this->xpdo->call('modNamespace','translatePath',array(&$this->xpdo,$v));
+        }
+        return $v;
+    }
+
     public function getCorePath() {
         $path = $this->get('path');
         return $this->xpdo->call('modNamespace','translatePath',array(&$this->xpdo,$path));
