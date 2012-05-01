@@ -339,8 +339,12 @@ class modRequest {
             elseif ($this->modx->getOption('site_start', null, 1) == $this->modx->aliasMap[$identifier]) {
                 $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             } else {
-                $requestUri = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-                if ($this->modx->getOption('base_url', null, MODX_BASE_URL) . $identifier !== urldecode ($requestUri)) {
+                $requestUri = $_SERVER['REQUEST_URI'];
+                $qsPos = strpos($requestUri, '?');
+                if ($qsPos !== false) $requestUri = substr($requestUri, 0, $qsPos);
+                $fullId = $this->modx->getOption('base_url', null, MODX_BASE_URL) . $identifier;
+                $requestUri = urldecode($requestUri);
+                if ($fullId !== $requestUri && strpos($requestUri, $fullId) !== 0) {
                     $parameters = $this->getParameters();
                     unset($parameters[$this->modx->getOption('request_param_alias')]);
                     $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');
