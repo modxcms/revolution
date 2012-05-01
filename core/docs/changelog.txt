@@ -5,6 +5,11 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.2-pl (May 1, 2012)
+====================================
+- Preserve GET parameters for container_suffix redirects
+- Allow custom FURLs via URL rewriting again
+- [#7427] Fix request_method_strict with FURLs off
 - Add ability to extend manager session by relogging in without leaving manager screen
 - Add better handling for AJAX exceptions, displaying AJAX errors
 - [#7649] Prevent E_NOTICE when using ago filter within <1sec difference
