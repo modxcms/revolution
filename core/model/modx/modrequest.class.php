@@ -151,12 +151,14 @@ class modRequest {
      */
     public function getResourceMethod() {
         $method = '';
-        if ($this->modx->getOption('request_method_strict', null, false)) {
-            $method = $this->modx->getOption('friendly_urls', null, false) ? 'alias' : 'id';
-        } else {
-            if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')])) {
+        $hasId = isset($_REQUEST[$this->modx->getOption('request_param_id',null,'id')]);
+        $hasAlias = isset($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')]);
+        if ($hasId || $hasAlias) {
+            if ($this->modx->getOption('request_method_strict', null, false)) {
+                $method = $this->modx->getOption('friendly_urls', null, false) ? 'alias' : 'id';
+            } elseif ($hasAlias) {
                 $method = "alias";
-            } elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
+            } elseif ($hasId) {
                 $method = "id";
             }
         }
