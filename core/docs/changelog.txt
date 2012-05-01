@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.2.2-pl (May 1, 2012)
 ====================================
+- Preserve GET parameters for container_suffix redirects
 - Allow custom FURLs via URL rewriting again
 - [#7427] Fix request_method_strict with FURLs off
 - Add ability to extend manager session by relogging in without leaving manager screen

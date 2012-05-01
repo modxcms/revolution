@@ -330,7 +330,9 @@ class modRequest {
                         $identifier = "{$identifier}{$containerSuffix}";
                     }
                     if (isset ($this->modx->aliasMap[$identifier])) {
-                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', '', 'full');
+                        $parameters = $this->getParameters();
+                        unset($parameters[$this->modx->getOption('request_param_alias')]);
+                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');
                         $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
                     }
                     $this->modx->resourceMethod = 'alias';
