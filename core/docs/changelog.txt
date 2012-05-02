@@ -5,7 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
-MODX Revolution 2.2.2-pl (May 1, 2012)
+MODX Revolution 2.2.2-pl (May 2, 2012)
 ====================================
 - Preserve GET parameters for container_suffix redirects
 - Allow custom FURLs via URL rewriting again
