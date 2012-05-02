@@ -211,12 +211,17 @@ class modInstallCLIRequest extends modInstallRequest {
      * @param array $settings
      * @return void
      */
-    public function prepareSettings(array $settings) {
+    public function prepareSettings(array &$settings) {
         if (empty($settings['site_sessionname'])) {
             $settings['site_sessionname'] = 'SN' . uniqid('');
         }
         if (empty($settings['config_options'])) {
             $settings['config_options'] = array();
+        }
+        $dsn = $this->getDatabaseDSN($settings['database_type'],$settings['database_server'],$settings['database'],$settings['database_connection_charset']);
+        $settings['database_dsn'];
+        if (!empty($settings['database'])) {
+            $settings['dbase'] = $settings['database'];
         }
         $this->settings->fromArray($settings);
 
@@ -229,12 +234,6 @@ class modInstallCLIRequest extends modInstallRequest {
         $this->setDefaultSetting('web_url',$this->settings->get('context_web_url'));
         $this->setDefaultSetting('assets_path',$this->settings->get('context_assets_path',$this->settings->get('context_web_path').'assets/'));
         $this->setDefaultSetting('assets_url',$this->settings->get('context_assets_url',$this->settings->get('context_web_url').'assets/'));
-
-        $dsn = $this->getDatabaseDSN($this->settings->get('database_type'),$this->settings->get('database_server'),$this->settings->get('database'),$this->settings->get('database_connection_charset'));
-        $this->settings->set('database_dsn',$dsn);
-        if (!empty($settings['database'])) {
-            $this->settings->set('dbase',$settings['database']);
-        }
     }
 
     /**
