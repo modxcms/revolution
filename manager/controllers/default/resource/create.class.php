@@ -63,6 +63,10 @@ class ResourceCreateManagerController extends ResourceManagerController {
         if (!empty($this->scriptProperties['parent'])) {
             $this->parent = $this->modx->getObject('modResource',$this->scriptProperties['parent']);
             if (!$this->parent->checkPolicy('add_children')) return $this->failure($this->modx->lexicon('resource_add_children_access_denied'));
+        } else {
+            $this->parent = $this->modx->newObject('modResource');
+            $this->parent->set('id',0);
+            $this->parent->set('template',$this->modx->getOption('default_template',null,1));
         }
         $placeholders['parent'] = $this->parent;
 
@@ -83,7 +87,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->setPermissions();
 
         /* set default template */
-        if(empty($reloadData)) {
+        if (empty($reloadData)) {
             $defaultTemplate = $this->getDefaultTemplate();
             $this->resourceArray = array_merge($this->resourceArray,array(
                 'template' => $defaultTemplate,

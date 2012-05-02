@@ -156,3 +156,5 @@ $_lang['weblink_create_here'] = 'Créer un lien ici';
 $_lang['weblink_help'] = 'L\'adresse de l\'objet dont vous voulez faire référence avec ce lien internet.';
 $_lang['weblink_message'] = 'Un lien Internet est une référence à un objet sur internet. Cela pourrait être un document dans MODX, une page sur un autre site, une image ou un autre fichier sur Internet. <p>';
 $_lang['weblink_new'] = 'Nouveau lien';
+$_lang['weblink_response_code'] = 'Code de réponse';
+$_lang['weblink_response_code_help'] = 'Le code de réponse HTTP à envoyer lors de l\'accès au lien.';

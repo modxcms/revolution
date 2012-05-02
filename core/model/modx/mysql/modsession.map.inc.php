@@ -19,7 +19,7 @@ $xpdo_meta_map['modSession']= array (
     'id' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '40',
+      'precision' => '255',
       'phptype' => 'string',
       'null' => false,
       'index' => 'pk',

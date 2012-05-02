@@ -309,14 +309,20 @@ class modTemplateVar extends modElement {
      * Renders input forms for the template variable.
      *
      * @access public
-     * @param integer $resourceId The id of the resource; 0 defaults to the
-     * current resource.
+     * @param modResource|null $resource The resource; 0 defaults to the current resource.
      * @param mixed $options Array of options ('value', 'style') or deprecated $style string
      * @return mixed The rendered input for the template variable.
      */
-    public function renderInput($resourceId= 0, $options) {
+    public function renderInput($resource= null, $options = array()) {
+        if (is_int($resource)) {
+            $resource = $this->xpdo->getObject('modResource',$resource);
+        }
+        if (empty($resource)) {
+            $resource = $this->xpdo->resource;
+        }
+        $resourceId = $resource ? $resource->get('id') : 0;
 
-        if(is_string($options) && !empty($options)) {
+        if (is_string($options) && !empty($options)) {
             // fall back to deprecated $style setting
             $style = $options;
         } else {
@@ -340,7 +346,7 @@ class modTemplateVar extends modElement {
         }
 
         /* if any FC tvDefault rules, set here */
-        $value = $this->checkForFormCustomizationRules($value,$resourceId);
+        $value = $this->checkForFormCustomizationRules($value,$resource);
         /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
         $this->set('value',$value);
         $this->set('processedValue',$value);
@@ -518,15 +524,13 @@ class modTemplateVar extends modElement {
     /**
      * Check for any Form Customization rules for this TV
      * @param string $value
-     * @param int $resourceId
+     * @param modResource $resource
      * @return mixed
      */
-    public function checkForFormCustomizationRules($value,$resourceId = 0) {
+    public function checkForFormCustomizationRules($value,&$resource) {
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
-            $resource = false;
-            if (!empty($resourceId)) {
-                /** @var modResource $resource */
-                $resource = $this->xpdo->getObject('modResource',$resourceId);
+            if (empty($resource)) {
+                $resource =& $this->xpdo->resource;
             }
             if ($this->xpdo->getOption('form_customization_use_all_groups',null,false)) {
                 $userGroups = $this->xpdo->user->getUserGroups();
@@ -581,10 +585,10 @@ class modTemplateVar extends modElement {
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             /** @var modActionDom $rule */
             foreach ($domRules as $rule) {
-                if (!empty($resourceId)) {
+                if (!empty($resource)) {
                     $template = $rule->get('template');
-                    if (!empty($template)) {
-                        if ($resource && $template != $resource->get('template')) continue;
+                    if (!empty($template) && $template != $resource->get('template')) {
+                        continue;
                     }
                 }
                 switch ($rule->get('rule')) {

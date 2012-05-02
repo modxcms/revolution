@@ -114,10 +114,8 @@ $xpdo_meta_map['modUser']= array (
     ),
     'sudo' => 
     array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
+      'dbtype' => 'bit',
       'phptype' => 'boolean',
-      'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
     ),

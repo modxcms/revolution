@@ -151,12 +151,14 @@ class modRequest {
      */
     public function getResourceMethod() {
         $method = '';
-        if ($this->modx->getOption('request_method_strict', null, false)) {
-            $method = $this->modx->getOption('friendly_urls', null, false) ? 'alias' : 'id';
-        } else {
-            if (isset ($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')])) {
+        $hasId = isset($_REQUEST[$this->modx->getOption('request_param_id',null,'id')]);
+        $hasAlias = isset($_REQUEST[$this->modx->getOption('request_param_alias',null,'q')]);
+        if ($hasId || $hasAlias) {
+            if ($this->modx->getOption('request_method_strict', null, false)) {
+                $method = $this->modx->getOption('friendly_urls', null, false) ? 'alias' : 'id';
+            } elseif ($hasAlias) {
                 $method = "alias";
-            } elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id',null,'id')])) {
+            } elseif ($hasId) {
                 $method = "id";
             }
         }
@@ -226,7 +228,9 @@ class modRequest {
             $criteria = $this->modx->newQuery('modResource');
             $criteria->select(array($this->modx->escape('modResource').'.*'));
             $criteria->where(array('id' => $resourceId, 'deleted' => '0'));
-            if (!$this->modx->hasPermission('view_unpublished')) $criteria->where(array('published' => 1));
+            if (!$this->modx->hasPermission('view_unpublished') || $this->modx->getSessionState() !== modX::SESSION_STATE_INITIALIZED) {
+                $criteria->where(array('published' => 1));
+            }
             if ($resource = $this->modx->getObject('modResource', $criteria)) {
                 if ($resource instanceof modResource) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
@@ -256,7 +260,7 @@ class modRequest {
                 }
             }
         } elseif ($fromCache && $resource instanceof modResource && !$resource->get('deleted')) {
-            if ($resource->checkPolicy('load') && ($resource->get('published') || $this->modx->hasPermission('view_unpublished'))) {
+            if ($resource->checkPolicy('load') && ($resource->get('published') || ($this->modx->getSessionState() === modX::SESSION_STATE_INITIALIZED && $this->modx->hasPermission('view_unpublished')))) {
                 if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                     if (!$isForward || ($isForward && !$this->modx->getOption('allow_forward_across_contexts', $options, false))) {
                         if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
@@ -326,7 +330,9 @@ class modRequest {
                         $identifier = "{$identifier}{$containerSuffix}";
                     }
                     if (isset ($this->modx->aliasMap[$identifier])) {
-                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', '', 'full');
+                        $parameters = $this->getParameters();
+                        unset($parameters[$this->modx->getOption('request_param_alias')]);
+                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');
                         $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
                     }
                     $this->modx->resourceMethod = 'alias';
@@ -335,8 +341,12 @@ class modRequest {
             elseif ($this->modx->getOption('site_start', null, 1) == $this->modx->aliasMap[$identifier]) {
                 $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             } else {
-                $requestUri = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-                if ($this->modx->getOption('base_url', null, MODX_BASE_URL) . $identifier !== $requestUri) {
+                $requestUri = $_SERVER['REQUEST_URI'];
+                $qsPos = strpos($requestUri, '?');
+                if ($qsPos !== false) $requestUri = substr($requestUri, 0, $qsPos);
+                $fullId = $this->modx->getOption('base_url', null, MODX_BASE_URL) . $identifier;
+                $requestUri = urldecode($requestUri);
+                if ($fullId !== $requestUri && strpos($requestUri, $fullId) !== 0) {
                     $parameters = $this->getParameters();
                     unset($parameters[$this->modx->getOption('request_param_alias')]);
                     $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');

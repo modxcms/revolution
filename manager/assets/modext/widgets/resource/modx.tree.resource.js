@@ -948,6 +948,13 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,boxLabel: _('resource_published')
                             ,description: _('resource_published_help')
                             ,inputValue: 1
+                        },{
+                            xtype: 'xcheckbox'
+                            ,name: 'published'
+                            ,id: 'modx-'+id+'-published'
+                            ,boxLabel: _('resource_published')
+                            ,description: _('resource_published_help')
+                            ,inputValue: 1
                         }]
                     }]
                 },MODx.getQRContentField(this.ident,config.record.class_key)]

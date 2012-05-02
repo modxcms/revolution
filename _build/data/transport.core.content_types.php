@@ -59,3 +59,13 @@ $collection['6']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
+$collection['7']= $xpdo->newObject('modContentType');
+$collection['7']->fromArray(array (
+  'id' => 7,
+  'name' => 'JSON',
+  'description' => 'JSON',
+  'mime_type' => 'application/json',
+  'file_extensions' => '.js',
+  'headers' => 'NULL',
+  'binary' => 0,
+), '', true, true);

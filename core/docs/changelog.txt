@@ -2,6 +2,30 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.2-pl (May 2, 2012)
+====================================
+- Preserve GET parameters for container_suffix redirects
+- Allow custom FURLs via URL rewriting again
+- [#7427] Fix request_method_strict with FURLs off
+- Add ability to extend manager session by relogging in without leaving manager screen
+- Add better handling for AJAX exceptions, displaying AJAX errors
+- [#7649] Prevent E_NOTICE when using ago filter within <1sec difference
+- [#7568] Add JSON to default content types
+- [#7549] Open new window for phpinfo in system info page
+- [#7531] Add manager setting for first day of week in datepicker
+- Flip page title on manager pages for easier readability in browser tabs
+- [#7543] Add extra sanity checks for ellipsis output filter
+- CLI upgrades not loading MODX config data
+- [#7652] Sessionless contexts allowing anonymous access to unpublished resources
+- [#7610] User.sudo field invalid for sqlsrv
+- [#7619] Fix issue with TV FC rules and template constraints
+- [#7613] Add ability to duplicate user
+- [#7590] Fix lazy loading errors in xPDO layer
+- [#7608] Prevent ttl=0 set on modDbRegister from expiring immediately
+- Add wizard for User Group creation to speed up ACL workflow
+- Add Context policy for proper managing of access to non-mgr Contexts
+- Add wizard for Resource Group creation to speed up ACL workflow
+
 MODX Revolution 2.2.1-pl (April 3, 2012)
 ====================================
 - Override modAccess->getOne for Principal aggregate

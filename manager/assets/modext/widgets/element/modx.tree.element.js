@@ -94,8 +94,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 xtype: 'modx-window-category-create'
                 ,record: r
                 ,listeners: {
-                     'success': {fn:function() {
-                        this.refreshNode(this.cm.activeNode.id,true);
+                    'success': {fn:function() {
+                        var node = (this.cm.activeNode) ? this.cm.activeNode.id : 'n_category';
+                        this.refreshNode(node,true);
                     },scope:this}
                 }
             });
@@ -423,7 +424,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                     this.quickUpdate(itm,e,itm.type);
                 }
             });
-            if (a.classKey = 'modPlugin') {
+            if (a.classKey == 'modPlugin') {
                 if (a.active) {
                     m.push({
                         text: _('plugin_deactivate')
