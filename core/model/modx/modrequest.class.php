@@ -485,6 +485,9 @@ class modRequest {
 
     /**
      * Get a list of all modAction IDs
+     *
+     * @deprecated Has no meaning in 2.3; will be removed in 2.4/3.0
+     *
      * @param string $namespace
      * @return array
      */
