@@ -496,7 +496,7 @@ class modRequest {
         if (!empty($namespace)) $c['namespace'] = $namespace;
         $actions = $this->modx->getCollection('modAction',$c);
 
-        $actionList = array();
+        $actionList = $this->getAllDeprecatedActions($namespace);
         /** @var modAction $action */
         foreach ($actions as $action) {
             $key = ($action->get('namespace') == 'core' ? '' : $action->get('namespace').':').$action->get('controller');
@@ -625,5 +625,68 @@ class modRequest {
             'suspected' => $ipSus,
             'network' => $ipAll,
         );
+    }
+
+    private function getAllDeprecatedActions($namespace = '') {
+        if (!empty($namespace) && $namespace != 'core') return array();
+        $actions = array(
+            'browser',
+            'context/create',
+            'context/update',
+            'context/view',
+            'element',
+            'element/chunk',
+            'element/chunk/create',
+            'element/chunk/update',
+            'element/plugin',
+            'element/plugin/create',
+            'element/plugin/update',
+            'element/snippet',
+            'element/snippet/create',
+            'element/snippet/update',
+            'element/template',
+            'element/template/create',
+            'element/template/update',
+            'element/template/tvsort',
+            'element/tv',
+            'element/tv/create',
+            'element/tv/update',
+            'element/view',
+            'resource',
+            'resource/create',
+            'resource/data',
+            'resource/empty_recycle_bin',
+            'resource/tvs',
+            'resource/update',
+            'security',
+            'security/role',
+            'security/user/create',
+            'security/user/update',
+            'security/login',
+            'security/access/policy/update',
+            'security/access/policy/template/update',
+            'security/forms/profile/update',
+            'security/forms/set/update',
+            'security/usergroup/create',
+            'security/usergroup/update',
+            'source/create',
+            'source/update',
+            'system/dashboards/update',
+            'system/dashboards/create',
+            'system/dashboards/widget/update',
+            'system/dashboards/widget/create',
+            'system/file',
+            'system/file/create',
+            'system/file/edit',
+            'system/refresh_site',
+            'system/phpinfo',
+            'workspaces/package/view',
+        );
+
+        $actionsReturn = array();
+        foreach ($actions as $action) {
+            $actionsReturn[$action] = $action;
+        }
+        return $actionsReturn;
     }
 }
