@@ -26,7 +26,6 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-weblink-create"
         ,record: '.$this->modx->toJSON($this->resourceArray).'
-        ,access_permissions: "'.$this->showAccessPermissions.'"
         ,publish_document: "'.$this->canPublish.'"
         ,canSave: "'.($this->modx->hasPermission('save_document') ? 1 : 0).'"
         ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
@@ -42,5 +41,11 @@ Ext.onReady(function() {
      */
     public function getTemplateFile() {
         return 'resource/weblink/create.tpl';
+    }
+
+    public function process(array $scriptProperties = array()) {
+        $placeholders = parent::process($scriptProperties);
+        $this->resourceArray['responseCode'] = $this->resource->getProperty('responseCode','core','HTTP/1.1 301 Moved Permanently');
+        return $placeholders;
     }
 }

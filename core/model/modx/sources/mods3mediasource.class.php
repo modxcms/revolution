@@ -258,7 +258,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $list = $this->getS3ObjectList($path);
         $properties = $this->getPropertyList();
 
-        $modAuth = $_SESSION["modx.{$this->xpdo->context->get('key')}.user.token"];
+        $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
         /* get default settings */
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
@@ -739,9 +739,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      *
      * @param string $from The location to move from
      * @param string $to The location to move to
+     * @param string $point
      * @return boolean
      */
-    public function moveObject($from,$to) {
+    public function moveObject($from,$to,$point = 'append') {
         $this->xpdo->lexicon->load('source');
         $success = false;
 

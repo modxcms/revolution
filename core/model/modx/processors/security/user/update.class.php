@@ -16,12 +16,18 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
     public $beforeSaveEvent = 'OnBeforeUserFormSave';
     public $afterSaveEvent = 'OnUserFormSave';
 
+    /** @var boolean $activeStatusChanged */
+    public $activeStatusChanged = false;
+    /** @var boolean $newActiveStatus */
+    public $newActiveStatus = false;
+
     /** @var modUser $object */
     public $object;
     /** @var modUserProfile $profile */
     public $profile;
     /** @var modUserValidation $validator */
     public $validator;
+    /** @var string $newPassword */
     public $newPassword = '';
     
 
@@ -49,6 +55,10 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         return $processor;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return boolean|string
+     */
     public function initialize() {
         $this->setDefaultProperties(array(
             'class_key' => $this->classKey,
@@ -57,22 +67,66 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         return parent::initialize();
     }
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function beforeSet() {
         $this->setCheckbox('blocked');
         $this->setCheckbox('active');
+        $this->setCheckbox('sudo');
         return parent::beforeSet();
     }
 
-
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function beforeSave() {
         $this->setProfile();
         $this->setRemoteData();
+        $this->setUserGroups();
+
+        $sudo = $this->getProperty('sudo',null);
+        if ($sudo !== null) {
+            $this->object->setSudo(!empty($sudo));
+        }
 
         $this->validator = new modUserValidation($this,$this->object,$this->profile);
         $this->validator->validate();
+        $canChangeStatus = $this->checkActiveChange();
+        if ($canChangeStatus !== true) {
+            $this->addFieldError('active',$canChangeStatus);
+        }
         return parent::beforeSave();
     }
 
+    /**
+     * Check for an active/inactive status change
+     * @return boolean|string
+     */
+    public function checkActiveChange() {
+        $this->activeStatusChanged = $this->object->isDirty('active');
+        $this->newActiveStatus = $this->object->get('active');
+        if ($this->activeStatusChanged) {
+            $event = $this->newActiveStatus == true ? 'OnBeforeUserActivate' : 'OnBeforeUserDeactivate';
+            $OnBeforeUserActivate = $this->modx->invokeEvent($event,array(
+                'id' => $this->object->get('id'),
+                'user' => &$this->object,
+                'mode' => modSystemEvent::MODE_UPD,
+            ));
+            $canChange = $this->processEventResponse($OnBeforeUserActivate);
+            if (!empty($canChange)) {
+                return $canChange;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Set the profile data for the user
+     * @return modUserProfile
+     */
     public function setProfile() {
         $this->profile = $this->object->getOne('Profile');
         if (empty($this->profile)) {
@@ -85,6 +139,10 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         return $this->profile;
     }
 
+    /**
+     * Set the remote data for the user
+     * @return mixed
+     */
     public function setRemoteData() {
         $remoteData = $this->getProperty('remoteData',null);
         if ($remoteData !== null) {
@@ -94,6 +152,10 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         return $remoteData;
     }
 
+    /**
+     * Set user groups for the user
+     * @return array
+     */
     public function setUserGroups() {
         $memberships = array();
         $groups = $this->getProperty('groups',null);
@@ -105,17 +167,20 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             foreach ($oldMemberships as $membership) { $membership->remove(); }
 
             /* create user group links */
+            $groupsAdded = array();
             $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
             foreach ($groups as $group) {
+                if (in_array($group['usergroup'],$groupsAdded)) continue;
                 $membership = $this->modx->newObject('modUserGroupMember');
                 $membership->set('user_group',$group['usergroup']);
                 $membership->set('role',$group['role']);
                 $membership->set('member',$this->object->get('id'));
-                $membership->set('rank',$group['rank']);
+                $membership->set('rank',isset($group['rank']) ? $group['rank'] : 0);
                 if (empty($group['rank'])) {
                     $primaryGroupId = $group['usergroup'];
                 }
                 $memberships[] = $membership;
+                $groupsAdded[] = $group['usergroup'];
             }
             $this->object->addMany($memberships,'UserGroupMembers');
             $this->object->set('primary_group',$primaryGroupId);
@@ -123,11 +188,33 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         return $memberships;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function afterSave() {
         $this->sendNotificationEmail();
+        if ($this->activeStatusChanged) {
+            $this->fireAfterActiveStatusChange();
+        }
         return parent::afterSave();
     }
 
+    /**
+     * Fire the active status change event
+     */
+    public function fireAfterActiveStatusChange() {
+        $event = $this->newActiveStatus == true ? 'OnUserActivate' : 'OnUserDeactivate';
+        $this->modx->invokeEvent($event,array(
+            'id' => $this->object->get('id'),
+            'user' => &$this->object,
+            'mode' => modSystemEvent::MODE_UPD,
+        ));
+    }
+
+    /**
+     * Send notification email for changed password
+     */
     public function sendNotificationEmail() {
         if ($this->getProperty('passwordnotifymethod') == 'e') {
             $message = $this->modx->getOption('signupemail_message');

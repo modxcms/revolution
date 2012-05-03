@@ -90,6 +90,21 @@ MODx.load({
         ,html: _('resourcelist_includeparent_desc')
         ,cls: 'desc-under'
     },{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('resourcelist_limitrelatedcontext')
+        ,description: MODx.expandHelp ? '' : _('resourcelist_limitrelatedcontext_desc')
+        ,name: 'inopt_limitRelatedContext'
+        ,hiddenName: 'inopt_limitRelatedContext'
+        ,id: 'inopt_limitRelatedContext{/literal}{$tv}{literal}'
+        ,value: params['limitRelatedContext'] == 1 || params['limitRelatedContext'] == 'true' ? 1 : 0
+        ,width: 200
+        ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_limitRelatedContext{/literal}{$tv}{literal}'
+        ,html: _('resourcelist_limitrelatedcontext_desc')
+        ,cls: 'desc-under'
+    },{
         xtype: 'textarea'
         ,fieldLabel: _('resourcelist_where')
         ,description: MODx.expandHelp ? '' : _('resourcelist_where_desc')

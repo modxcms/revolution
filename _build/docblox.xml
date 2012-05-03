@@ -29,23 +29,22 @@
   <transformations>
     <template name="default" />
   </transformations>
-  <ignore>
-    <item>*.inc</item>
-    <item>*.cache.php</item>
-    <item>core/model/modx/jsonrpc/jsonrpc.inc</item>
-    <item>core/model/modx/jsonrpc/jsonrpcs.inc</item>
-    <item>core/model/modx/xmlrpc/xmlrpc.inc</item>
-    <item>core/model/modx/xmlrpc/xmlrpcs.inc</item>
-    <item>core/model/modx/xmlrpc/xmlrpc_wrappers.inc</item>
-    <item>core/model/modx/xmlrss/magpierss.class.php</item>
-    <item>core/model/modx/xmlrss/rss_utils.inc</item>
-    <item>core/model/modx/xmlrss/rsscache.class.php</item>
-    <item>core/model/modx/xmlrss/rssfetch.class.php</item>
-    <item>core/model/modx/xmlrss/extlib/snoopy.class.php</item>
-    <item>core/model/modx/mail/phpmailer/*</item>
-    <item>core/xpdo/json/*</item>
-    <item>core/xpdo/compression/pclzip.lib.php</item>
-    <!-- for now ignore processors -->
-    <item>core/model/modx/processors/*</item>
-  </ignore>
+  <ignore>*.inc</ignore>
+  <ignore>*.cache.php</ignore>
+  <ignore>core/model/modx/jsonrpc/*</ignore>
+  <ignore>core/model/modx/jsonrpc/jsonrpc.inc</ignore>
+  <ignore>core/model/modx/jsonrpc/jsonrpcs.inc</ignore>
+  <ignore>core/model/modx/xmlrpc/xmlrpc.inc</ignore>
+  <ignore>core/model/modx/xmlrpc/xmlrpcs.inc</ignore>
+  <ignore>core/model/modx/xmlrpc/xmlrpc_wrappers.inc</ignore>
+  <ignore>core/model/modx/xmlrss/magpierss.class.php</ignore>
+  <ignore>core/model/modx/xmlrss/rss_utils.inc</ignore>
+  <ignore>core/model/modx/xmlrss/rsscache.class.php</ignore>
+  <ignore>core/model/modx/xmlrss/rssfetch.class.php</ignore>
+  <ignore>core/model/modx/xmlrss/extlib/snoopy.class.php</ignore>
+  <ignore>core/model/modx/mail/phpmailer/*</ignore>
+  <ignore>core/xpdo/json/*</ignore>
+  <ignore>core/xpdo/compression/pclzip.lib.php</ignore>
+  <!-- for now ignore processors -->
+  <ignore>core/model/modx/processors/*</ignore>
 </docblox>

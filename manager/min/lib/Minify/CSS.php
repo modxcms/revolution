@@ -62,6 +62,7 @@ class Minify_CSS {
             'docRoot' => $_SERVER['DOCUMENT_ROOT'],
             'prependRelativePath' => null,
             'symlinks' => array(),
+            'virtualDirs' => array(),
         ), $options);
         
         if ($options['removeCharsets']) {
@@ -88,6 +89,7 @@ class Minify_CSS {
                 ,$options['currentDir']
                 ,$options['docRoot']
                 ,$options['symlinks']
+                ,$options['virtualDirs']
             );  
         } else {
             return Minify_CSS_UriRewriter::prepend(

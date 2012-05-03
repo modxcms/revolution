@@ -55,7 +55,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
             'blocked' => false,
             'active' => false,
         ));
-        $this->classKey = $this->getProperty('class_key');
+        $this->classKey = $this->getProperty('class_key','modUser');
         $this->setProperty('blocked',$this->getProperty('blocked') ? true : false);
         return parent::initialize();
     }
@@ -66,7 +66,11 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
      */
     public function beforeSave() {
         $this->addProfile();
-        $this->addUserGroups();
+
+        $sudo = $this->getProperty('sudo',null);
+        if ($sudo !== null) {
+            $this->object->setSudo(!empty($sudo));
+        }
 
         $this->validator = new modUserValidation($this,$this->object,$this->profile);
         $this->validator->validate();
@@ -78,19 +82,24 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
      * Add User Group memberships to the User
      * @return array
      */
-    public function addUserGroups() {
+    public function setUserGroups() {
         $memberships = array();
         $groups = $this->getProperty('groups',null);
         if ($groups !== null) {
             $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
+            $groupsAdded = array();
             foreach ($groups as $group) {
+                if (in_array($group['usergroup'],$groupsAdded)) continue;
+
                 /** @var modUserGroupMember $membership */
                 $membership = $this->modx->newObject('modUserGroupMember');
                 $membership->set('user_group',$group['usergroup']);
                 $membership->set('role',$group['role']);
+                $membership->set('member',$this->object->get('id'));
+                $membership->save();
                 $memberships[] = $membership;
+                $groupsAdded[] = $group['usergroup'];
             }
-            $this->object->addMany($memberships,'UserGroupMembers');
         }
         return $memberships;
     }
@@ -112,6 +121,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
      * @return boolean
      */
     public function afterSave() {
+        $this->setUserGroups();
         $this->sendNotificationEmail();
         return parent::afterSave();
     }

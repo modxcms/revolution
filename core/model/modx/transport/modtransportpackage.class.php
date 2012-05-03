@@ -63,6 +63,11 @@ class modTransportPackage extends xPDOObject {
         return array('collection' => array(), 'total' => 0);
     }
 
+    public function __construct(&$xpdo) {
+        parent::__construct($xpdo);
+        $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
+    }
+
     /**
      * Overrides xPDOObject::save to set a default created time if new.
      *
@@ -90,7 +95,7 @@ class modTransportPackage extends xPDOObject {
         $set = parent :: set($k, $v, $vType);
         if ($k == 'signature') {
             $this->parseSignature();
-            if ($this->_new && !$this->get('source')) {
+            if ($this->isNew() && !$this->get('source')) {
                 $this->set('source', $this->get('signature') . '.transport.zip');
             }
         }
@@ -107,12 +112,19 @@ class modTransportPackage extends xPDOObject {
         $parsed = false;
         $sig = $this->get('signature');
         if ($sig != NULL) {
-            $parsed = explode('-',$sig);
-            if (count($parsed) == 3) {
-                $this->identifier = next($parsed);
-                $this->version = next($parsed);
-                $this->release = next($parsed);
-                $parsed = true;
+            $parsedSig = xPDOTransport::parseSignature($sig);
+            if (count($parsedSig) === 2 && !empty($parsedSig[0]) && !empty($parsedSig[1])) {
+                $this->identifier = $parsedSig[0];
+                $parsedVersion = explode('-', $parsedSig[1], 2);
+                if (count($parsedVersion) === 2) {
+                    $this->version = $parsedVersion[0];
+                    $this->release = $parsedVersion[1];
+                    $parsed = true;
+                } elseif (count($parsedVersion) === 1) {
+                    $this->version = $parsedVersion[0];
+                    $this->release = '';
+                    $parsed = true;
+                }
             }
         }
         return $parsed;
@@ -127,44 +139,42 @@ class modTransportPackage extends xPDOObject {
      */
     public function getTransport($state = -1) {
         if (!is_object($this->package) || !($this->package instanceof xPDOTransport)) {
-            if ($this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true)) {
-                $workspace = $this->getOne('Workspace');
-                if ($workspace) {
-                    $packageDir = $workspace->get('path') . 'packages/';
-                    $sourceFile = $this->get('source');
-                    if ($sourceFile) {
-                        $transferred= file_exists($packageDir . $sourceFile);
-                        if (!$transferred) { /* if no transport zip, attempt to get it */
-                            if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
-                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
-                                    'sourceFile' => $sourceFile,
-                                    'packageDir' => $packageDir,
-                                )));
-                            } else {
-                                $sourceFile= basename($sourceFile);
-                            }
+            $workspace = $this->getOne('Workspace');
+            if ($workspace) {
+                $packageDir = $workspace->get('path') . 'packages/';
+                $sourceFile = $this->get('source');
+                if ($sourceFile) {
+                    $transferred= file_exists($packageDir . $sourceFile);
+                    if (!$transferred) { /* if no transport zip, attempt to get it */
+                        if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
+                                'sourceFile' => $sourceFile,
+                                'packageDir' => $packageDir,
+                            )));
+                        } else {
+                            $sourceFile= basename($sourceFile);
                         }
-                        if ($transferred) {
-                            if ($state < 0) {
-                                /* if directory is missing but zip exists, and DB state value is incorrect, fix here */
-                                $targetDir = basename($sourceFile, '.transport.zip');
-                                $state = is_dir($packageDir.$targetDir) ? $this->get('state') : xPDOTransport::STATE_PACKED;
-                            }
-                            /* retrieve the package */
-                            $this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
-                            if ($this->package) {
-                                /* set to unpacked state */
-                                if ($state == xPDOTransport::STATE_PACKED) {
-                                    $this->set('state', xPDOTransport::STATE_UNPACKED);
-                                }
-                                $this->set('source', $sourceFile);
-                                $this->set('attributes', $this->package->attributes);
-                                $this->save();
-                            }
-                        }
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_source_nf'));
                     }
+                    if ($transferred) {
+                        if ($state < 0) {
+                            /* if directory is missing but zip exists, and DB state value is incorrect, fix here */
+                            $targetDir = basename($sourceFile, '.transport.zip');
+                            $state = is_dir($packageDir.$targetDir) ? $this->get('state') : xPDOTransport::STATE_PACKED;
+                        }
+                        /* retrieve the package */
+                        $this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
+                        if ($this->package) {
+                            /* set to unpacked state */
+                            if ($state == xPDOTransport::STATE_PACKED) {
+                                $this->set('state', xPDOTransport::STATE_UNPACKED);
+                            }
+                            $this->set('source', $sourceFile);
+                            $this->set('attributes', $this->package->attributes);
+                            $this->save();
+                        }
+                    }
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_source_nf'));
                 }
             }
         }
@@ -210,7 +220,7 @@ class modTransportPackage extends xPDOObject {
             $at = is_array($this->get('attributes')) ? $this->get('attributes') : array();
             $attributes = array_merge($wc, $at);
             $attributes = array_merge($attributes, $options);
-            $attributes[xPDOTransport::PACKAGE_ACTION] = $this->get('installed') ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
+            $attributes[xPDOTransport::PACKAGE_ACTION] = $this->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
             @ini_set('max_execution_time', 0);
             $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
             if ($this->package->install($attributes)) {
@@ -276,8 +286,9 @@ class modTransportPackage extends xPDOObject {
 
             $source= $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
 
-            /* see if user has allow_url_fopen on */
-            if (ini_get('allow_url_fopen')) {
+            /* see if user has allow_url_fopen on and is not behind a proxy */
+            $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
+            if (ini_get('allow_url_fopen') && empty($proxyHost)) {
                 if ($handle= @ fopen($source, 'rb')) {
                     $filesize= @ filesize($source);
                     $memory_limit= @ ini_get('memory_limit');
@@ -301,7 +312,7 @@ class modTransportPackage extends xPDOObject {
                 curl_setopt($ch, CURLOPT_URL, $source);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_TIMEOUT,120);
+                curl_setopt($ch, CURLOPT_TIMEOUT,180);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
                 $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
@@ -442,5 +453,16 @@ class modTransportPackage extends xPDOObject {
     public function compareVersion($version,$direction = '<=') {
         $v = $this->getComparableVersion();
         return version_compare($version,$v,$direction);
+    }
+
+    /**
+     * Indicates if a previous version of the package is installed.
+     *
+     * @return boolean True if a previous version of the package is installed.
+     */
+    public function previousVersionInstalled() {
+        $this->parseSignature();
+        $count = $this->xpdo->getCount('transport.modTransportPackage', array(array("UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($this->identifier)})"), 'installed:IS NOT' => null, 'signature:!=' => $this->get('signature')));
+        return $count > 0;
     }
 }

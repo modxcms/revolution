@@ -5,6 +5,7 @@
 /**
  * The core MODX user class.
  *
+ * @property int $id The ID of the User
  * @property string $username The username for this User
  * @property string $password The encrypted password for this User
  * @property string $cachepwd A cached, encrypted password used when resetting the User's password or for confirmation
@@ -33,6 +34,8 @@
  * @package modx
  */
 class modUser extends modPrincipal {
+    /** @var modX|xPDO $xpdo */
+    public $xpdo;
     /**
      * A collection of contexts which the current principal is authenticated in.
      * @var array
@@ -41,11 +44,14 @@ class modUser extends modPrincipal {
     public $sessionContexts= array ();
 
     /**
-     * The modUser password field is hashed automatically.
+     * The modUser password field is hashed automatically, and prevent sudo from being set via mass-assignment
      *
      * {@inheritdoc}
      */
     public function set($k, $v= null, $vType= '') {
+        if (!$this->getOption(xPDO::OPT_SETUP)) {
+            if ($k == 'sudo') return false;
+        }
         if (in_array($k, array('password', 'cachepwd')) && $this->xpdo->getService('hashing', 'hashing.modHashing')) {
             if (!$this->get('salt')) {
                 $this->set('salt', md5(uniqid(rand(),true)));
@@ -54,6 +60,18 @@ class modUser extends modPrincipal {
             $v = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
         }
         return parent::set($k, $v, $vType);
+    }
+
+    /**
+     * Set the sudo field explicitly
+     *
+     * @param boolean $sudo
+     * @return bool
+     */
+    public function setSudo($sudo) {
+        $this->_fields['sudo'] = (boolean)$sudo;
+        $this->setDirty('sudo');
+        return true;
     }
 
     /**
@@ -117,6 +135,17 @@ class modUser extends modPrincipal {
     public function loadAttributes($target, $context = '', $reload = false) {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         $id = $this->get('id') ? (string) $this->get('id') : '0';
+        if ($this->get('id') && !$reload) {
+            $staleContexts = $this->get('session_stale');
+            $staleContexts = !empty($staleContexts) ? $staleContexts : array();
+            $stale = array_search($context, $staleContexts);
+            if ($stale !== false) {
+                $reload = true;
+                $staleContexts = array_diff($staleContexts, array($context));
+                $this->set('session_stale', $staleContexts);
+                $this->save();
+            }
+        }
         if ($this->_attributes === null || $reload) {
             $this->_attributes = array();
             if (isset($_SESSION["modx.user.{$id}.attributes"])) {
@@ -127,18 +156,23 @@ class modUser extends modPrincipal {
                 }
             }
         }
-        if (!isset($this->_attributes[$context])) $this->_attributes[$context] = array();
-        if (!isset($this->_attributes[$context][$target])) {
-            $this->_attributes[$context][$target] = $this->xpdo->call(
-                $target,
-                'loadAttributes',
-                array(&$this->xpdo, $context, $this->get('id'))
-            );
-            if (!isset($this->_attributes[$context][$target]) || !is_array($this->_attributes[$context][$target])) {
-                $this->_attributes[$context][$target] = array();
-            }
-            $_SESSION["modx.user.{$id}.attributes"] = $this->_attributes;
+        if (!isset($this->_attributes[$context])) {
+            $this->_attributes[$context] = array();
         }
+        $target = (array) $target;
+        foreach ($target as $t) {
+            if (!isset($this->_attributes[$context][$t])) {
+                $this->_attributes[$context][$t] = $this->xpdo->call(
+                    $t,
+                    'loadAttributes',
+                    array(&$this->xpdo, $context, $this->get('id'))
+                );
+                if (!isset($this->_attributes[$context][$t]) || !is_array($this->_attributes[$context][$t])) {
+                    $this->_attributes[$context][$t] = array();
+                }
+            }
+        }
+        $_SESSION["modx.user.{$id}.attributes"] = $this->_attributes;
     }
 
     /**
@@ -341,6 +375,16 @@ class modUser extends modPrincipal {
     }
 
     /**
+     * Get the user token for the user
+     * @param string $ctx
+     * @return string
+     */
+    public function getUserToken($ctx = '') {
+        if (empty($ctx)) $ctx = $this->xpdo->context->get('key');
+        return isset($_SESSION['modx.'.$ctx.'.user.token']) ? $_SESSION['modx.'.$ctx.'.user.token'] : '';
+    }
+
+    /**
      * Removes a user session context.
      *
      * @access public
@@ -453,8 +497,6 @@ class modUser extends modPrincipal {
      * Gets all Resource Groups this user is assigned to. This may not work in
      * the new model.
      *
-     * @deprecated
-     * @todo refactor this to actually work.
      * @access public
      * @param string $ctx The context in which to peruse for Resource Groups
      * @return array An array of Resource Group names.
@@ -483,16 +525,39 @@ class modUser extends modPrincipal {
     public function getUserGroups() {
         $groups= array();
         $id = $this->get('id') ? (string) $this->get('id') : '0';
-        if (isset($_SESSION["modx.user.{$id}.userGroups"])) {
+        if (isset($_SESSION["modx.user.{$id}.userGroups"]) && $this->xpdo->user->get('id') == $this->get('id')) {
             $groups= $_SESSION["modx.user.{$id}.userGroups"];
         } else {
             $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('UserGroupMembers.member' => $this->get('id')));
             if ($memberGroups) {
+                /** @var modUserGroup $group */
                 foreach ($memberGroups as $group) $groups[]= $group->get('id');
             }
             $_SESSION["modx.user.{$id}.userGroups"]= $groups;
         }
         return $groups;
+    }
+
+    /**
+     * Return the Primary Group of this User
+     *
+     * @return modUserGroup|null
+     */
+    public function getPrimaryGroup() {
+        if (!$this->isAuthenticated($this->xpdo->context->get('key'))) {
+            return null;
+        }
+        $userGroup = $this->getOne('PrimaryGroup');
+        if (!$userGroup) {
+            $c = $this->xpdo->newQuery('modUserGroup');
+            $c->innerJoin('modUserGroupMember','UserGroupMembers');
+            $c->where(array(
+                'UserGroupMembers.member' => $this->get('id'),
+            ));
+            $c->sortby('UserGroupMembers.rank','ASC');
+            $userGroup = $this->xpdo->getObject('modUserGroup',$c);
+        }
+        return $userGroup;
     }
 
     /**
@@ -504,11 +569,12 @@ class modUser extends modPrincipal {
     public function getUserGroupNames() {
         $groupNames= array();
         $id = $this->get('id') ? (string) $this->get('id') : '0';
-        if (isset($_SESSION["modx.user.{$id}.userGroupNames"])) {
+        if (isset($_SESSION["modx.user.{$id}.userGroupNames"]) && $this->xpdo->user->get('id') == $this->get('id')) {
             $groupNames= $_SESSION["modx.user.{$id}.userGroupNames"];
         } else {
             $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('UserGroupMembers.member' => $this->get('id')));
             if ($memberGroups) {
+                /** @var modUserGroup $group */
                 foreach ($memberGroups as $group) $groupNames[]= $group->get('name');
             }
             $_SESSION["modx.user.{$id}.userGroupNames"]= $groupNames;
@@ -593,6 +659,8 @@ class modUser extends modPrincipal {
             $joined = $member->save();
             if (!$joined) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
+            } else {
+                unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"]);
             }
         } else {
             $joined = true;
@@ -626,6 +694,11 @@ class modUser extends modPrincipal {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User could not leave group with key "'.$groupId.'" because the User was not a part of that group.');
         } else {
             $left = $member->remove();
+            if (!$left) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing removing the User from the User Group.');
+            } else {
+                unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"]);
+            }
         }
         return $left;
     }
@@ -709,5 +782,27 @@ class modUser extends modPrincipal {
         }
         $this->xpdo->mail->reset();
         return true;
+    }
+
+    /**
+     * Get the dashboard for this user
+     *
+     * @return modDashboard
+     */
+    public function getDashboard() {
+        $this->xpdo->loadClass('modDashboard');
+
+        /** @var modUserGroup $userGroup */
+        $userGroup = $this->getPrimaryGroup();
+        if ($userGroup) {
+            /** @var modDashboard $dashboard */
+            $dashboard = $userGroup->getOne('Dashboard');
+            if (empty($dashboard)) {
+                $dashboard = modDashboard::getDefaultDashboard($this->xpdo);
+            }
+        } else {
+            $dashboard = modDashboard::getDefaultDashboard($this->xpdo);
+        }
+        return $dashboard;
     }
 }

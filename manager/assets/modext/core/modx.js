@@ -39,8 +39,10 @@ Ext.extend(MODx,Ext.Component,{
         this.request = this.getURLParameters();
         this.Ajax = this.load({ xtype: 'modx-ajax' });
         Ext.override(Ext.form.Field,{
-            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
+            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on", msgTarget: 'under' }
         });
+
+        Ext.Ajax.on('requestexception',this.onAjaxException,this);
         Ext.menu.Menu.prototype.enableScrolling = false;
         this.addEvents({
             beforeClearCache: true
@@ -94,6 +96,32 @@ Ext.extend(MODx,Ext.Component,{
             }
         }
         return arg;
+    }
+
+    ,onAjaxException: function(conn,r,opt,e) {
+        try {
+            r = Ext.decode(r.responseText);
+        } catch (e) {
+            Ext.MessageBox.show({
+                title: _('error')
+                ,msg: e.message+': '+ r.responseText
+                ,buttons: Ext.MessageBox.OK
+                ,cls: 'modx-js-parse-error'
+                ,minWidth: 600
+                ,maxWidth: 750
+                ,modal: false
+                ,width: 600
+            });
+        }
+        if (r && (r.code == 401 || (r.object && r.object.code == 401))) {
+            if (!MODx.loginWindow) {
+                MODx.loginWindow = MODx.load({
+                    xtype: 'modx-window-login'
+                    ,username: MODx.user.username
+                });
+            }
+            MODx.loginWindow.show();
+        }
     }
 
     ,loadAccordionPanels: function() { return []; }
@@ -191,8 +219,9 @@ Ext.extend(MODx,Ext.Component,{
         return c;
     }
 
+    ,helpUrl: false
     ,loadHelpPane: function(b) {
-        var url = MODx.config.help_url;
+        var url = MODx.helpUrl;
         if (!url) { return false; }
         MODx.helpWindow = new Ext.Window({
             title: _('help')
@@ -227,13 +256,22 @@ Ext.extend(MODx,Ext.Component,{
         }
     }
     ,hiddenTabs: []
-    ,hideTab: function(ct,tab) {
+    ,hideTab: function(ct,tab) {this.hideRegion(ct,tab);}
+    ,hideRegion: function(ct,tab) {
         var tp = Ext.getCmp(ct);
         if (tp) {
-            tp.hideTabStripItem(tab);
-            MODx.hiddenTabs.push(tab);
-            var idx = this._getNextActiveTab(tp,tab);
-            tp.setActiveTab(idx);
+            var tabObj = tp.getItem(tab);
+            if (tabObj) {
+                var z = tp.hideTabStripItem(tab);
+                MODx.hiddenTabs.push(tab);
+                var idx = this._getNextActiveTab(tp,tab);
+                tp.setActiveTab(idx);
+            } else {
+                var region = Ext.getCmp(tab);
+                if (region) {
+                    region.hide();
+                }
+            }
         }
     }
     ,_getNextActiveTab: function(tp,tab) {
@@ -290,7 +328,13 @@ Ext.extend(MODx,Ext.Component,{
         if (ct == 'modx-panel-resource' && flds.indexOf('modx-resource-content') != -1) {
             cto = Ext.getCmp('modx-resource-content');
             if (cto) {
-                cto.setTitle(vals[0]);
+                if (cto.setTitle) {
+                    cto.setTitle(vals[0]);
+                } else if (cto.setLabel) {
+                    cto.setLabel(flds,vals);
+                } else {
+                    cto.label.update(vals[0]);
+                }
             }
         } else {
             cto = Ext.getCmp(ct);

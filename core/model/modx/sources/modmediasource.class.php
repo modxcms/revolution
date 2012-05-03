@@ -163,9 +163,10 @@ interface modMediaSourceInterface
      *
      * @param string $from The location to move from
      * @param string $to The location to move to
+     * @param string $point The type of move; append, above, below
      * @return boolean
      */
-    public function moveObject($from,$to);
+    public function moveObject($from,$to,$point = 'append');
 
     /**
      * Get the name of this source type, ie, "File System"
@@ -259,6 +260,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      * @return boolean
      */
     public function initialize() {
+        $this->setProperties($this->getProperties(true));
         $this->getPermissions();
         return true;
     }
@@ -270,7 +272,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      */
     public function setRequestProperties(array $scriptProperties = array()) {
         if (empty($this->properties)) $this->properties = array();
-        $this->properties = array_merge($this->properties,$scriptProperties);
+        $this->properties = array_merge($this->getPropertyList(),$this->properties,$scriptProperties);
         return $this->properties;
     }
 
@@ -349,7 +351,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
     public function getBasePath($object = '') { return ''; }
     public function getBaseUrl($object = '') { return ''; }
     public function getObjectUrl($object = '') { return ''; }
-    public function moveObject($from,$to) { return true; }
+    public function moveObject($from,$to,$point = 'append') { return true; }
     public function getDefaultProperties() { return array(); }
 
 
@@ -383,9 +385,10 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
 
     /**
      * Get the properties on this source
+     * @param boolean $parsed
      * @return array
      */
-    public function getProperties() {
+    public function getProperties($parsed = false) {
         $properties = $this->get('properties');
         $defaultProperties = $this->getDefaultProperties();
         if (!empty($properties) && is_array($properties)) {
@@ -403,6 +406,19 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         } else {
             $properties = $defaultProperties;
         }
+        /** @var array $results Allow manipulation of media source properties via event */
+        $results = $this->xpdo->invokeEvent('OnMediaSourceGetProperties',array(
+            'properties' => $this->xpdo->toJson($properties),
+        ));
+        if (!empty($results)) {
+            foreach ($results as $result) {
+                $result = is_array($result) ? $result : $this->xpdo->fromJSON($result);
+                $properties = array_merge($properties,$result);
+            }
+        }
+        if ($parsed) {
+            $properties = $this->parseProperties($properties);
+        }
         return $this->prepareProperties($properties);
     }
 
@@ -411,16 +427,33 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      * @return array
      */
     public function getPropertyList() {
-        $properties = $this->getProperties();
+        $properties = $this->getProperties(true);
         $list = array();
         foreach ($properties as $property) {
             $value = $property['value'];
-            if ($property['xtype'] == 'combo-boolean') {
+            if (!empty($property['xtype']) && $property['xtype'] == 'combo-boolean') {
                 $value = empty($property['value']) && $property['value'] != 'true' ? false : true;
             }
             $list[$property['name']] = $value;
         }
+        $list = array_merge($list,$this->properties);
         return $list;
+    }
+
+    /**
+     * Parse any tags in the properties
+     * @param array $properties
+     * @return array
+     */
+    public function parseProperties(array $properties) {
+        $properties = $this->getProperties();
+        $this->xpdo->getParser();
+        if ($this->xpdo->parser) {
+            foreach ($properties as &$property) {
+                $this->xpdo->parser->processElementTags('',$property['value'],true,true);
+            }
+        }
+        return $properties;
     }
 
     /**
@@ -428,7 +461,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      * @param array $properties
      * @return array
      */
-    protected function prepareProperties(array $properties = array()) {
+    public function prepareProperties(array $properties = array()) {
         foreach ($properties as &$property) {
             if (!empty($property['lexicon'])) {
                 $this->xpdo->lexicon->load($property['lexicon']);
@@ -438,6 +471,19 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
             }
             if (!empty($property['desc'])) {
                 $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+            }
+            if (!empty($property['options'])) {
+                foreach ($property['options'] as &$option) {
+                    if (empty($option['text']) && !empty($option['name'])) {
+                        $option['text'] = $option['name'];
+                        unset($option['name']);
+                    }
+                    if (empty($option['value']) && !empty($option[0])) {
+                        $option['value'] = $option[0];
+                        unset($option[0]);
+                    }
+                    $option['name'] = $this->xpdo->lexicon($option['text']);
+                }
             }
         }
         return $properties;
@@ -541,7 +587,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         if (substr($src,0,4) != 'http') {
             if (strpos($src,'/') !== 0) {
                 $properties = $this->getPropertyList();
-                $src = $properties['basePath'].$src;
+                $src = !empty($properties['basePath']) ? $properties['basePath'].$src : $src;
                 if (!empty($properties['basePathRelative'])) {
                     $src = $this->ctx->getOption('base_path',null,MODX_BASE_PATH).$src;
                 }

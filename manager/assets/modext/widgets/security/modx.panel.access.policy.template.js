@@ -306,6 +306,7 @@ MODx.combo.Permission = function(config) {
         ,forceSelection: false
         ,enableKeyEvents: true
         ,autoSelect: false
+        ,pageSize: 20
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
         ,url: MODx.config.connectors_url+'security/access/permission.php'

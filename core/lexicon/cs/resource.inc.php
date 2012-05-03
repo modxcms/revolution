@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2012-04-01
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -85,7 +85,7 @@ $_lang['resource_cacheable_help'] = 'Pokud je aktivní, dokument bude ukládán 
 $_lang['resource_cancel_dirty_confirm'] = 'V dokumentu jsou neuložené změny. Opravdu chcete pokračovat?';
 
 // $_lang['resource_class_key_help'] = 'This is the class key of the resource, showing its MODX type.';
-$_lang['resource_class_key_help'] = 'Toto je třída obsahu v rámci MODX.';
+$_lang['resource_class_key_help'] = 'Třída obsahu v rámci MODX.';
 
 // $_lang['resource_content'] = 'Content';
 $_lang['resource_content'] = 'Obsah dokumentu';
@@ -124,7 +124,7 @@ $_lang['resource_delete_confirm'] = 'Opravdu chcete odstranit tento dokument?<br
 $_lang['resource_description'] = 'Popis';
 
 // $_lang['resource_description_help'] = 'This is an optional description of the resource.';
-$_lang['resource_description_help'] = 'Toto je volitelný popis dokumentu.';
+$_lang['resource_description_help'] = 'Volitelný popis dokumentu.';
 
 // $_lang['resource_duplicate'] = 'Duplicate Resource';
 $_lang['resource_duplicate'] = 'Zkopírovat dokument';
@@ -250,13 +250,13 @@ $_lang['resource_locked_by'] = 'Uzamčeno uživatelem [[+user]]';
 $_lang['resource_longtitle'] = 'Dlouhý název';
 
 // $_lang['resource_longtitle_help'] = 'This is a longer title for your resource. It is handy for search engines, and might be more descriptive for the resource.';
-$_lang['resource_longtitle_help'] = 'Toto je delší název pro tento dokument. Je dobrý pro vyhledávače a měl by více popisovat tento dokument.';
+$_lang['resource_longtitle_help'] = 'Delší název pro tento dokument. Je dobrý pro vyhledávače a měl by více popisovat tento dokument.';
 
 // $_lang['resource_menuindex'] = 'Menu Index';
 $_lang['resource_menuindex'] = 'Index řazení';
 
 // $_lang['resource_menuindex_help'] = 'This is the order of the resource in the tree. It is usually used for ordering purposes in displaying resources dynamically. Some components might choose to ignore this setting.';
-$_lang['resource_menuindex_help'] = 'Toto je pořadí dokumentu ve stromu. Používá se také pro řazení při zobrazování dokumentů na frontendu. Některé konstruktory mohou toto nastavení ignorovat.';
+$_lang['resource_menuindex_help'] = 'Pořadí dokumentu v rámci stromu dokumentů. Používá se také pro řazení při zobrazování dokumentů na frontendu. Některé konstruktory mohou toto nastavení ignorovat.';
 
 // $_lang['resource_menutitle'] = 'Menu Title';
 $_lang['resource_menutitle'] = 'Název v menu';
@@ -340,7 +340,7 @@ $_lang['resource_status_help'] = 'Pokud je publikován je dokument dostupný ná
 $_lang['resource_summary'] = 'Perex';
 
 // $_lang['resource_summary_help'] = 'A brief summary of the resource.';
-$_lang['resource_summary_help'] = 'Krátký souhr obsahu dokumentu.';
+$_lang['resource_summary_help'] = 'Souhr obsahu dokumentu.';
 
 // $_lang['resource_syncsite'] = 'Empty Cache';
 $_lang['resource_syncsite'] = 'Vyprázdnit cache';
@@ -458,3 +458,9 @@ $_lang['weblink_message'] = 'Webový odkaz je odkazem na místo na internetu. M�
 
 // $_lang['weblink_new'] = 'New Weblink';
 $_lang['weblink_new'] = 'Nový webový odkaz';
+
+// $_lang['weblink_response_code'] = 'Response Code';
+$_lang['weblink_response_code'] = 'Kód odpovědi';
+
+// $_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';
+$_lang['weblink_response_code_help'] = 'HTTP kód odpovědi, který se má odesílat při dotazu na webový odkaz.';

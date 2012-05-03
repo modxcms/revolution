@@ -2,13 +2,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}"{if $_config.manager_html5_cache EQ 1} manifest="{$_config.manager_url}cache.manifest.php"{/if}>
 <head>
-<title>{$_config.site_name}{if $_pagetitle} :: {$_pagetitle}{/if}</title>
+<title>{if $_pagetitle}{$_pagetitle} | {/if}{$_config.site_name}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
 
 {if $_config.compress_css}
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/?f={$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css,{$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
 {else}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
@@ -22,9 +23,9 @@
 <script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {if $_config.compress_js_groups}
-<script src="{$_config.manager_url}min/?g=coreJs1" type="text/javascript"></script>
-<script src="{$_config.manager_url}min/?g=coreJs2" type="text/javascript"></script>
-<script src="{$_config.manager_url}min/?g=coreJs3" type="text/javascript"></script>
+<script src="{$_config.manager_url}min/index.php?g=coreJs1" type="text/javascript"></script>
+<script src="{$_config.manager_url}min/index.php?g=coreJs2" type="text/javascript"></script>
+<script src="{$_config.manager_url}min/index.php?g=coreJs3" type="text/javascript"></script>
 {/if}
 
 {$maincssjs}
@@ -48,8 +49,8 @@
 
 
                 <div class="rightlogin">
-                    <a class="modx-user-profile" href="?a={$profileAction}">{$username}</a>
-                    <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
+                    {if $canChangeProfile}<a class="modx-user-profile" href="?a={$profileAction}">{$username}</a>{else}<span class="modx-user-profile">{$username}</span>{/if}
+                    {if $canLogout}<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>{/if}
                 </div>
                 <div id="modx-site-name">
                     {$_config.site_name}
@@ -57,7 +58,12 @@
                 </div>
             </div>
             <div id="modx-navbar">
-                {include file="navbar.tpl"}
+                <div id="modx-topnav-div">
+                    <ul id="modx-topnav">
+                        {$navb}
+                        <li class="cls"></li>
+                    </ul>
+                </div>
             </div>
         </div>
         

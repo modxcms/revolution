@@ -21,11 +21,11 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modPluginUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modPlugin';
-    public $languageTopics = array('plugin','category');
+    public $languageTopics = array('plugin','category','element');
     public $permission = 'save_plugin';
     public $objectType = 'plugin';
-    public $beforeRemoveEvent = 'OnBeforePluginFormSave';
-    public $afterRemoveEvent = 'OnPluginFormSave';
+    public $beforeSaveEvent = 'OnBeforePluginFormSave';
+    public $afterSaveEvent = 'OnPluginFormSave';
 
     public function beforeSave() {
         $disabled = (boolean)$this->getProperty('disabled',false);
@@ -73,7 +73,7 @@ class modPluginUpdateProcessor extends modElementUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category','disabled')), array('previous_category' => $this->previousCategory)));
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'disabled', 'plugincode')), array('previous_category' => $this->previousCategory)));
     }
 }
 return 'modPluginUpdateProcessor';

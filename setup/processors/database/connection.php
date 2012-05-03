@@ -1,6 +1,7 @@
 <?php
 /**
  * @package setup
+ * @var modInstall $install
  */
 if (!isset($_POST['database'])) $_POST['database'] = $_POST['dbase'];
 $settings = $_POST;
@@ -9,7 +10,7 @@ $install->settings->store($settings);
 $mode = $install->settings->get('installmode');
 /* if advanced upgrade, get old settings */
 if($mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
-    $settings = array_merge($settings, $install->getConfig($mode));
+    $settings = array_merge($settings, $install->request->getConfig($mode));
 }
 
 $install->loadDriver();

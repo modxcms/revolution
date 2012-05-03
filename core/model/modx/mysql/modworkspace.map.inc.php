@@ -7,6 +7,7 @@ $xpdo_meta_map['modWorkspace']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'workspaces',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',
@@ -91,7 +92,7 @@ $xpdo_meta_map['modWorkspace']= array (
         ),
       ),
     ),
-    'sctive' => 
+    'active' => 
     array (
       'alias' => 'active',
       'primary' => false,

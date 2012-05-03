@@ -35,6 +35,8 @@ class modSystemPhpThumbProcessor extends modProcessor {
         $src = $this->getProperty('src');
         if (empty($src)) return $this->failure();
 
+        $this->unsetProperty('src');
+
         $this->getSource($this->getProperty('source'));
         if (empty($this->source)) $this->failure($this->modx->lexicon('source_err_nf'));
 

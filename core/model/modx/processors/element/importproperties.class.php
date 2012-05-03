@@ -36,20 +36,28 @@ class modElementImportPropertiesProcessor extends modProcessor {
 
         $data = array();
         foreach ($properties as $property) {
-            $desc = empty($property['desc']) ? '' : $property['desc'];
+            $property['desc'] = empty($property['desc']) ? '' : $property['desc'];
+            if (!empty($property['lexicon'])) {
+                $this->modx->lexicon->load($property['lexicon']);
+            }
+
 
             /* backwards compat */
-            if (empty($desc)) { $desc = empty($property['description']) ? '' : $property['description']; }
+            if (empty($property['desc'])) { $property['desc'] = empty($property['description']) ? '' : $property['description']; }
 
-            $desc = str_replace(array("\\n",'\"',"'",'<','>','[',']'),array('','&quot;','"',"&lt;","&gt;",'&#91;','&#93;'),$desc);
-            $value = str_replace(array('<','>'),array("&lt;","&gt;"),$property['value']);
+            $property['desc'] = str_replace(array("\\n",'\"',"'",'<','>','[',']'),array('','&quot;','"',"&lt;","&gt;",'&#91;','&#93;'),$property['desc']);
+            $property['desc_trans'] = $this->modx->lexicon($property['desc']);
+            $property['value'] = str_replace(array('<','>'),array("&lt;","&gt;"),$property['value']);
             $data[] = array(
                 $property['name'],
-                $desc,
+                $property['desc'],
                 $property['xtype'],
                 $property['options'],
-                $value,
+                $property['value'],
+                !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
+                $property['desc_trans'],
+                !empty($property['area']) ? $property['area'] : '',
             );
         }
         return $this->success('',$data);

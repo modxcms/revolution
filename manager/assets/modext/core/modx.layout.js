@@ -181,7 +181,7 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
             ,shift: true
             ,fn: function() {
                 var t = Ext.getCmp('modx-resource-tree');
-                if (t) { t.quickCreate(document,{},'modResource','web',0); }
+                if (t) { t.quickCreate(document,{},'modDocument','web',0); }
             }
             ,stopEvent: true
         });

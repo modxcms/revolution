@@ -13,6 +13,10 @@
     </div>
     </div>
 </div>
+
+<div class="post_body">
+
+</div>
 <!-- end footer -->
 </body>
 </html>

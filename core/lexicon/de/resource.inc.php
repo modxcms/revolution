@@ -32,7 +32,7 @@ $_lang['resource_access_message'] = 'Hier können Sie auswählen, zu welchen Res
 $_lang['resource_add_children_access_denied'] = 'Sie haben keine Berechtigung, an dieser Stelle eine Ressource zu erstellen.';
 $_lang['resource_alias'] = 'Ressourcen-Alias';
 $_lang['resource_alias_help'] = 'Ein Alias für diese Ressource. Dies wird die Ressource verfügbar machen unter:<br /><br />http://ihrserver/alias<br /><br /><strong>Hinweis:</strong> Dies funktioniert nur, wenn Sie suchmaschinenfreundliche URLs verwenden.';
-$_lang['resource_change_template_confirm'] = 'Sind Sie sicher, dass Sie das Template wechseln möchten? WARNUNG: Hierdurch werden Ihre vor dem Template-Wechsel vorgenommenen Änderungen gespeichert und die Seite neu geladen; bitte stellen Sie sicher, dass Sie bereit sind, dies zu tun, bevor Sie fortfahren. Nachdem die Seite neu geladen wurde, müssen Sie erneut speichern, wenn Sie bereit sind, auch den Template-Wechsel selbst zu speichern.';
+$_lang['resource_change_template_confirm'] = 'Sind Sie sicher, dass Sie das Template wechseln möchten?<br /><br />WARNUNG: Hierdurch werden Ihre vor dem Template-Wechsel vorgenommenen Änderungen <b>nur temporär gespeichert</b> und die Seite neu geladen; bitte stellen Sie sicher, dass Sie bereit sind, dies zu tun, bevor Sie fortfahren. Nachdem die Seite neu geladen wurde, müssen Sie die Ressource speichern, wenn Sie bereit sind, auch den Template-Wechsel selbst zu speichern.';
 $_lang['resource_cacheable'] = 'Cache aktiv';
 $_lang['resource_cacheable_help'] = 'Wenn diese Einstellung aktiviert ist, wird die Ressource in den Cache übernommen.';
 $_lang['resource_cancel_dirty_confirm'] = 'Sie haben Änderungen vorgenommen, die noch nicht gespeichert wurden; sind Sie sicher, dass Sie abbrechen möchten?';
@@ -88,7 +88,7 @@ $_lang['resource_group_resource_err_nf'] = 'Die Ressource ist nicht Teil dieser 
 $_lang['resource_hide_from_menus'] = 'Nicht in Menüs anzeigen';
 $_lang['resource_hide_from_menus_help'] = 'Wenn diese Einstellung aktiviert ist, ist die Ressource <b>nicht</b> für die Verwendung in Menüs Ihrer Website verfügbar. Bitte beachten Sie, dass einige Menü-Skripte diese Option ignorieren könnten.';
 $_lang['resource_link_attributes'] = 'Link-Attribute';
-$_lang['resource_link_attributes_help'] = 'Attribute für den Link für diese Ressource, z.B. target= or rel=.';
+$_lang['resource_link_attributes_help'] = 'Attribute für den Link für diese Ressource, z.B. target= oder rel=.';
 $_lang['resource_locked_by'] = 'Gesperrt durch [[+user]]';
 $_lang['resource_longtitle'] = 'Langer Titel';
 $_lang['resource_longtitle_help'] = 'Dies ist ein längerer Titel für Ihre Ressource. Das ist nützlich für Suchmaschinen und kann die Ressource besser beschreiben.';
@@ -161,3 +161,5 @@ $_lang['weblink_create_here'] = 'Weblink hier erstellen';
 $_lang['weblink_help'] = 'Die Adresse des Objekts, das Sie mit diesem Weblink referenzieren möchten. Wenn Sie auf eine existierende MODX-Ressource verweisen möchten, geben Sie hier deren ID ein.';
 $_lang['weblink_message'] = 'Ein Weblink ist eine Referenz auf ein Objekt im Internet. Dies kann ein Dokument innerhalb von MODX, eine Seite in einer anderen Website oder ein Bild oder eine andere Datei im Internet sein.<p>';
 $_lang['weblink_new'] = 'Neuer Weblink';
+$_lang['weblink_response_code'] = 'HTTP-Statuscode';
+$_lang['weblink_response_code_help'] = 'Der HTTP-Statuscode, der für den Weblink gesendet werden soll.';

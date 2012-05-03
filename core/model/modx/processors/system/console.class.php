@@ -70,7 +70,7 @@ class modConsoleProcessor extends modProcessor {
             );
             foreach ($messages as $messageKey => $message) {
                 if ($message['msg'] == 'COMPLETED') {
-                    $messageReturn['complete'] = true;
+                    $response['complete'] = true;
                     continue;
                 }
                 if (!empty ($message['def'])) $message['def']= $message['def'].' ';

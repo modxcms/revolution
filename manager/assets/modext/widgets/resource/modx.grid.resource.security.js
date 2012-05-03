@@ -22,7 +22,7 @@ MODx.grid.ResourceSecurity = function(config) {
         ,saveParams: {
             resource: config.resource
         }
-        ,fields: ['id','name','access','menu']
+        ,fields: ['id','name','access']
         ,paging: true
         ,remoteSort: true
         ,plugins: ac

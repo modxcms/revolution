@@ -85,7 +85,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 		this.changePProvider = true;
 	}
 	
-	,onNodeClick: function(n,e) {		
+	,onNodeClick: function(n,e) {
 		switch (n.attributes.type) {
 			case 'repository':
 				var r = Ext.getCmp('modx-package-browser-repositories');

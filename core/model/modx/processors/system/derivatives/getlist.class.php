@@ -36,6 +36,7 @@ class modSystemDerivativesGetListProcessor extends modProcessor {
             if (!$obj) continue;
 
             if ($class == 'modResource' && !$obj->showInContextMenu) continue;
+            if ($class == 'modResource' && !$obj->allowListingInClassKeyDropdown) continue;
             if ($class == 'modResource') {
                 $name = $obj->getResourceTypeName();
             } else {

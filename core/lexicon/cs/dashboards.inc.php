@@ -7,7 +7,7 @@
  * @language cs
  *
  * @author modxcms.cz
- * @updated 2011-10-24
+ * @updated 2011-11-19
  */
 // $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard'] = 'Nástěnka';
@@ -23,6 +23,12 @@ $_lang['dashboard_desc_name'] = 'Název nástěnky.';
 
 // $_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
 $_lang['dashboard_desc_description'] = 'Popis nástěnky.';
+
+// $_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
+$_lang['dashboard_desc_hide_trees'] = 'Zaškrnutím tohoto pole dojde ke schování levého stromového menu pokud je tato nástěnka zobrazena na úvodní stránce správce obsahu.';
+
+// $_lang['dashboard_hide_trees'] = 'Hide Left-Hand Trees';
+$_lang['dashboard_hide_trees'] = 'Skrýt levé stromové menu';
 
 // $_lang['dashboard_duplicate'] = 'Duplicate Dashboard';
 $_lang['dashboard_duplicate'] = 'Zkopírovat nástěnku';
@@ -86,6 +92,9 @@ $_lang['dashboards.intro_msg'] = 'Správa všech dostupných nástěnek pro MODX
 
 // $_lang['rank'] = 'Rank';
 $_lang['rank'] = 'Pořadí';
+
+// $_lang['user_group_filter'] = 'By User Group';
+$_lang['user_group_filter'] = 'Dle uživatelské skupiny';
 
 // $_lang['widget'] = 'Widget';
 $_lang['widget'] = 'Widget';
@@ -151,7 +160,7 @@ $_lang['widget_remove_multiple'] = 'Odstranit více widgetů';
 $_lang['widget_remove_multiple_confirm'] = 'Opravdu chete odstranit tyto widgety? Tato akce je nevratná a způsobí odebrání widgetů ze všech nástěnek.';
 
 // $_lang['widget_namespace'] = 'Namespace';
-$_lang['widget_namespace'] = 'Jmenná prostor';
+$_lang['widget_namespace'] = 'Jmenný prostor';
 
 // $_lang['widget_namespace_desc'] = 'The Namespace that this widget will be loaded into. Useful for custom paths.';
 $_lang['widget_namespace_desc'] = 'Jmenný prostor, ve kterém bude tento widget načítán. Vhodné pro vlastní cesty.';
@@ -223,7 +232,7 @@ $_lang['w_securityfeed'] = 'MODX Bezpečnostní novinky';
 $_lang['w_securityfeed_desc'] = 'Zobrazení novinek okolo bezpečnosti MODX';
 
 // $_lang['w_whosonline'] = 'Who\'s Online';
-$_lang['w_whosonline'] = 'Kde je právě přihlášen';
+$_lang['w_whosonline'] = 'Kdo je právě přihlášen';
 
 // $_lang['w_whosonline_desc'] = 'Shows a list of online users.';
 $_lang['w_whosonline_desc'] = 'Seznam přihlášených uživatelů.';

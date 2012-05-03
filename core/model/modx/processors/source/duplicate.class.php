@@ -20,5 +20,22 @@ class modSourceDuplicateProcessor extends modObjectDuplicateProcessor {
         if (!$this->object->checkPolicy('copy')) return $this->modx->lexicon('access_denied');
         return $initialized;
     }
+
+    public function afterSave() {
+        $this->fireDuplicateEvent();
+        return parent::afterSave();
+    }
+
+    /**
+     * Fire the OnMediaSourceDuplicate event
+     * @return void
+     */
+    public function fireDuplicateEvent() {
+        $this->modx->invokeEvent('OnMediaSourceDuplicate',array(
+            'newResource' => &$this->newObject,
+            'oldResource' => &$this->object,
+            'newName' => $this->getProperty($this->nameField,''),
+        ));
+    }
 }
 return 'modSourceDuplicateProcessor';

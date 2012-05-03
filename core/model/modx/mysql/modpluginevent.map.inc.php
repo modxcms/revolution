@@ -7,6 +7,7 @@ $xpdo_meta_map['modPluginEvent']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'site_plugin_events',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'pluginid' => 0,

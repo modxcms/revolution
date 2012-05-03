@@ -37,7 +37,7 @@ class TvPropertiesManagerController extends modManagerController {
 
 /* simulate controller with the faux class above */
 $c = new TvPropertiesManagerController($this->modx);
-$modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvPropertiesManagerController',$this->action));
+$modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvPropertiesManagerController'));
 $modx->controller->render();
 
 /* get default display properties for specific tv */
@@ -80,6 +80,18 @@ if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($
 if (!empty($pluginResult)) {
     $renderDirectories = array_merge($renderDirectories,$pluginResult);
 }
+
+/* load namespace caches */
+$cache = $modx->call('modNamespace','loadCache',array(&$this->modx));
+if (!empty($cache) && is_array($cache)) {
+    foreach ($cache as $namespace) {
+        $inputDir = rtrim($namespace['path'],'/').'/tv/properties/';
+        if (is_dir($inputDir)) {
+            $renderDirectories[] = $inputDir;
+        }
+    }
+}
+
 
 /* get controller */
 $o = '';

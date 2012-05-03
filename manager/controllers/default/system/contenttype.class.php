@@ -52,4 +52,12 @@ class SystemContentTypeManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('content_type');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Content+Types';
+    }
 }

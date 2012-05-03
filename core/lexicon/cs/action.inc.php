@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
 // $_lang['action'] = 'Action';
 $_lang['action'] = 'Akce';
@@ -63,6 +63,9 @@ $_lang['actions'] = 'Akce';
 // $_lang['controller'] = 'Controller';
 $_lang['controller'] = 'Kontroler';
 
+// $_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
+$_lang['controller_err_ae'] = 'Kontroler s touto cestou již v tomto jmeném prostoru existuje..';
+
 // $_lang['controller_err_nf'] = 'Controller file not found!';
 $_lang['controller_err_nf'] = 'Soubor kontroleru nenalezen!';
 
@@ -76,4 +79,4 @@ $_lang['controller_parent'] = 'Nadřazený kontroler';
 $_lang['lang_topics'] = 'Téma slovníku';
 
 // $_lang['lang_topics_desc'] = 'This is a list of strings that represent lexicon topics that this action should load.';
-$_lang['lang_topics_desc'] = 'Toto je seznam řetězců reprezentujících témata slovníku, které tato akce načítá.';
+$_lang['lang_topics_desc'] = 'Seznam řetězců reprezentujících témata slovníku, které tato akce načítá.';

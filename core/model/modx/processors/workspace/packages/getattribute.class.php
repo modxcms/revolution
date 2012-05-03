@@ -44,7 +44,7 @@ class modPackageGetAttributeProcessor extends modProcessor {
             if ($attribute == 'setup-options') {
                 @ob_start();
                 $options = $this->package->toArray();
-                $options[xPDOTransport::PACKAGE_ACTION] = empty($this->package->installed)
+                $options[xPDOTransport::PACKAGE_ACTION] = $this->package->previousVersionInstalled()
                     ? xPDOTransport::ACTION_INSTALL
                     : xPDOTransport::ACTION_UPGRADE;
                 $attributeFile = $this->modx->getOption('core_path').'packages/'.$this->package->signature.'/'.$attribute.'.php';
@@ -53,6 +53,8 @@ class modPackageGetAttributeProcessor extends modProcessor {
                     $attributes['setup-options'] = include $attributeFile;
                 }
                 @ob_end_clean();
+            } else if (in_array($attribute,array('readme','license','changelog'))) {
+                $attributes[$attribute] = htmlentities($attributes[$attribute],ENT_COMPAT,'UTF-8');
             }
         }
         return $this->success('',$attributes);

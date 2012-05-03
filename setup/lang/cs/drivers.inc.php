@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-12-29
  */
 // $_lang['mysql_err_ext'] = 'MODX requires the mysql extension for PHP and it does not appear to be loaded.';
 $_lang['mysql_err_ext'] = 'MODX vyžaduje MySQL extenzi pro PHP a ta se zdá být nenačtena.';

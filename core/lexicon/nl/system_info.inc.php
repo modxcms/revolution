@@ -13,7 +13,6 @@ $_lang['database_name'] = 'Database naam';
 $_lang['database_server'] = 'Database server';
 $_lang['database_tables'] = 'Database tabellen';
 $_lang['database_optimize'] = 'Optimaliseer Database';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>Let op:</strong> Overhead is ongebruikte ruimte in MySQL. Om deze ruimte vrij te geven, klik op het overhead icoontje.';
 $_lang['database_table_clickhere'] = 'Klik hier';
 $_lang['database_table_clickbackup'] = 'om de geselectere tabellen te downloaden &amp; backuppen';
 $_lang['database_table_datasize'] = 'Gegevensgrootte';

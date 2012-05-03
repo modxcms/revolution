@@ -37,14 +37,23 @@ MODx.panel.ErrorLog = function(config) {
 					,grow: true
 					,growMax: 400
 					,anchor: '100%'
+					,hidden: config.record.tooLarge ? true : false
+				},{
+				    html: '<p>'+_('error_log_too_large',{
+                        name: config.record.name
+                    })+'</p>'
+                    ,border: false
+					,hidden: config.record.tooLarge ? false : true
+				},MODx.PanelSpacer,{
+				    xtype: 'button'
+				    ,text: _('error_log_download',{size: config.record.size})
+					,hidden: config.record.tooLarge ? false : true
+					,handler: this.download
+					,scope: this
 				}]
             }]
         }]
         ,buttons: [{
-            text: _('reload')
-            ,handler: this.setup
-            ,scope: this
-        },{
             text: _('clear')
             ,handler: this.clear
             ,scope: this
@@ -55,18 +64,14 @@ MODx.panel.ErrorLog = function(config) {
     this.setup();
 };
 Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
-    setup: function() {
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getForm().setValues(r.object);
-                },scope:this}
-            }
-        });
+    initialized: false
+    ,setup: function() {
+        if (this.initialized) { this.clearDirty(); return true; }
+        this.getForm().setValues(this.config.record);
+        this.clearDirty();
+        MODx.fireEvent('ready');
+        this.initialized = true;
+        return true;
     }
     ,clear: function() {
         MODx.Ajax.request({
@@ -76,10 +81,17 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.getForm().setValues(r.object);
+                    if (this.config.tooLarge) {
+                        location.href = location.href;
+                    } else {
+                        this.getForm().setValues(r.object);
+                    }
                 },scope:this}
             }
         });
+    }
+    ,download: function() {
+        location.href = this.config.url+'?action=download&HTTP_MODAUTH='+MODx.siteId;
     }
 });
 Ext.reg('modx-panel-error-log',MODx.panel.ErrorLog);

@@ -33,31 +33,36 @@ MODx.panel.PackageMetaPanel = function(config) {
 Ext.extend(MODx.panel.PackageMetaPanel,MODx.Tabs,{
 	updatePanel: function(meta){
 		if(meta.changelog != undefined){
-			this.addTab('Changelog', 'changelog', meta);
+			this.addTab(_('changelog'), 'changelog', meta);
 		}
 		if(meta.readme != undefined){
-			this.addTab('Readme', 'readme', meta);
+			this.addTab(_('readme'), 'readme', meta);
 		}
 		if(meta.license != undefined){
-			this.addTab('License', 'license', meta);
+			this.addTab(_('license'), 'license', meta);
 		}
 		this.setActiveTab(0);
 		Ext.getCmp('modx-content').doLayout();
 	}
 
 	,addTab: function(title, id, data){
-        this.add({
-			title: title
-			,xtype:'modx-template-panel'
-			,id: id +'-tab'
-			,markup: '{'+id+'}'
-			,bodyCssClass: 'meta-wrapper'
-			,listeners: {
-				afterrender: function() {
-					this.updateDetail( data );
-				}
-			}
-        });
+	    var tab = this.getItem(id);
+	    if (!tab) {
+            this.add({
+                title: title
+                ,xtype:'modx-template-panel'
+                ,id: id +'-tab'
+                ,markup: '{'+id+'}'
+                ,bodyCssClass: 'meta-wrapper'
+                ,listeners: {
+                    afterrender: function() {
+                        this.updateDetail( data );
+                    }
+                }
+            });
+        } else {
+            tab.updateDetail(data);
+        }
     }
 });
 Ext.reg('modx-package-meta-panel',MODx.panel.PackageMetaPanel);
@@ -73,7 +78,7 @@ Ext.reg('modx-package-meta-panel',MODx.panel.PackageMetaPanel);
  */
 MODx.panel.PackageBeforeInstall = function(config) {
     config = config || {};
-	this.currentCrumbText = 'Install'
+	this.currentCrumbText = _('install');
 	this.setupOptions = null;
 
 	Ext.applyIf(config,{});
@@ -94,18 +99,18 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 	}
 
 	,updatePanel: function(meta){
-		this.updateBreadcrumbs('Review the license agreement for this package.');
+		this.updateBreadcrumbs(_('license_agreement_desc'));
 		Ext.getCmp('package-list-reset').show();
 		Ext.getCmp('package-install-btn').hide();
 		Ext.getCmp('package-show-setupoptions-btn').hide();
 		if(meta.changelog != undefined){
-			this.addTab('Changelog', 'changelog', meta);
+			this.addTab(_('changelog'), 'changelog', meta);
 		}
 		if(meta.readme != undefined){
-			this.addTab('Readme', 'readme', meta);
+			this.addTab(_('readme'), 'readme', meta);
 		}
 		if(meta.license != undefined){
-			this.addTab('License', 'license', meta);
+			this.addTab(_('license'), 'license', meta);
 		}
 
 		if(meta['setup-options'] != null && meta['setup-options'] != ''){
@@ -176,7 +181,7 @@ MODx.panel.PackageDetails = function(config) {
 						+'<h5>{package_name}</h5>'
 					+'</div>'
 					+'<div class="infos description">'
-						+'<h4>Information</h4>'
+						+'<h4>'+_('information')+'</h4>'
 						+'<ul>'
 							+'<li>'
 								+'<span class="infoname">'+_('signature')+':</span>'
@@ -219,7 +224,7 @@ Ext.extend(MODx.panel.PackageDetails,MODx.Panel,{
 	}
 
 	,updateDetail: function(rec){
-		this.updateBreadcrumbs('Details on package : '+ rec.package_name);
+		this.updateBreadcrumbs(_('package_details_for',{'package': rec.package_name}));
 		Ext.getCmp('modx-package-details-metas').updateDetail(rec);
 		Ext.getCmp('modx-package-details-aside').updateDetail(rec);
 	}

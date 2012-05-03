@@ -21,7 +21,7 @@ if (!empty ($errors)) {
 }
 
 /* check delete setup/ if not using git version [#2512] */
-if (!defined(MODX_SETUP_KEY)) { define('MODX_SETUP_KEY','@git@'); }
+if (!defined('MODX_SETUP_KEY')) { define('MODX_SETUP_KEY','@git@'); }
 $distro = trim(MODX_SETUP_KEY,'@');
 $parser->set('cleanup',$distro != 'git' ? true : false);
 

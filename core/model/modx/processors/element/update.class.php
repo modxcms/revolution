@@ -8,6 +8,8 @@
  */
 abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     public $previousCategory;
+    /** @var modElement $object */
+    public $object;
 
     public function beforeSave() {
         $locked = $this->getProperty('locked',false);
@@ -38,6 +40,15 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
 
+        /* can't change content if static source is not writable */
+        if ($this->object->staticContentChanged()) {
+            if (!$this->object->isStaticSourceMutable()) {
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
+            } else if (!$this->object->isStaticSourceValidPath()) {
+                $this->addFieldError('static_file',$this->modx->lexicon('element_static_source_protected_invalid'));
+            }
+        }
+
         return !$this->hasErrors();
     }
 
@@ -56,6 +67,6 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category')), array('previous_category' => $this->previousCategory)));
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'content')), array('previous_category' => $this->previousCategory)));
     }
 }

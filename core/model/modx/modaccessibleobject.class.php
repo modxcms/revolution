@@ -5,6 +5,7 @@
 /**
  * Defines an interface to provide configurable access policies for principals.
  *
+ * @property modX|xPDO $xpdo
  * @package modx
  */
 class modAccessibleObject extends xPDOObject {
@@ -201,6 +202,7 @@ class modAccessibleObject extends xPDOObject {
      */
     public function checkPolicy($criteria, $targets = null) {
         if ($criteria && $this->xpdo instanceof modX && $this->xpdo->getSessionState() == modX::SESSION_STATE_INITIALIZED) {
+            if ($this->xpdo->user->get('sudo')) return true;
             if (!is_array($criteria) && is_scalar($criteria)) {
                 $criteria = array("{$criteria}" => true);
             }

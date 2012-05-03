@@ -6,7 +6,8 @@
 
 
 {if $_config.compress_css}
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/?f={$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css,{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css,{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
 {else}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
@@ -20,9 +21,9 @@
 <script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {if $_config.compress_js_groups}
-<script src="{$_config.manager_url}min/?g=coreJs1" type="text/javascript"></script>
-<script src="{$_config.manager_url}min/?g=coreJs2" type="text/javascript"></script>
-<script src="{$_config.manager_url}min/?g=coreJs3" type="text/javascript"></script>
+<script src="{$_config.manager_url}min/index.php?g=coreJs1" type="text/javascript"></script>
+<script src="{$_config.manager_url}min/index.php?g=coreJs2" type="text/javascript"></script>
+<script src="{$_config.manager_url}min/index.php?g=coreJs3" type="text/javascript"></script>
 {/if}
 
 {$maincssjs}

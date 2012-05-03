@@ -29,6 +29,7 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
                 ,'groupsOnly' => false
                 ,'groups' => array()
                 ,'noMinPattern' => '@[-\\.]min\\.(?:js|css)$@i' // matched against basename
+                ,'virtualDirs' => array()
             )
             ,(isset($options['minApp']) ? $options['minApp'] : array())
         );
@@ -130,16 +131,21 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
                     return $options;
                 }
             } else {
-                $base = '/';
+                $base = '';
             }
             $allowDirs = array();
             foreach ((array)$cOptions['allowDirs'] as $allowDir) {
                 $allowDirs[] = realpath(str_replace('//', $_SERVER['DOCUMENT_ROOT'] . '/', $allowDir));
             }
+            $virtualDirs = array();
+            foreach ((array)$cOptions['virtualDirs'] as $virtualUri => $virtualDir) {
+                $virtualDirs[$virtualUri] = str_replace('//', $_SERVER['DOCUMENT_ROOT'] . '/', $virtualDir);
+            }
             $basenames = array(); // just for cache id
             foreach ($files as $file) {
                 $uri = $base . $file;
-                $path = $_SERVER['DOCUMENT_ROOT'] . $uri;
+                $path = str_replace(array_keys($virtualDirs), array_values($virtualDirs), $uri);
+                if ($path === $uri && strpos($path, $_SERVER['DOCUMENT_ROOT']) !== 0) $path = $_SERVER['DOCUMENT_ROOT'] . $path;
                 $realpath = realpath($path);
                 if (false === $realpath || ! is_file($realpath)) {
                     $this->log("The path \"{$path}\" (realpath \"{$realpath}\") could not be found (or was not a file)");

@@ -54,11 +54,27 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
                 $c->where(array('parent' => $category->get('id')));
                 $c->sortby('category','ASC');
                 $children = $category->getMany('Children',$c);
-                /** @var modCategory $subcat */
-                foreach ($children as $subcat) {
-                    $categoryArray = $subcat->toArray();
-                    $categoryArray['name'] = $category->get('category').' - '.$subcat->get('category');
+                /** @var modCategory $child */
+                foreach ($children as $child) {
+                    $grandchildrenCount = $this->modx->getCount('modCategory',array('parent' => $child->get('id')));
+
+                    $categoryArray = $child->toArray();
+                    $categoryArray['name'] = $category->get('category').' - '.$child->get('category');
                     $list[] = $categoryArray;
+
+                    /* if has subsubcategories, display here */
+                    if ($grandchildrenCount > 0) {
+                        $c = $this->modx->newQuery('modCategory');
+                        $c->where(array('parent' => $child->get('id')));
+                        $c->sortby('category','ASC');
+                        $grandchildren = $child->getMany('Children',$c);
+                        /** @var modCategory $grandchild */
+                        foreach ($grandchildren as $grandchild) {
+                            $categoryArray = $grandchild->toArray();
+                            $categoryArray['name'] = $category->get('category').' - '.$child->get('category').' - '.$grandchild->get('category');
+                            $list[] = $categoryArray;
+                        }
+                    }
                 }
             }
         }

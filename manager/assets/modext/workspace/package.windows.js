@@ -184,7 +184,8 @@ Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);
 MODx.window.ChangeProvider = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('provider_select')			
+        title: _('provider_select')
+        ,width: 400
 		,layout: 'form'
 		,items:[{
 			xtype: 'modx-template-panel'

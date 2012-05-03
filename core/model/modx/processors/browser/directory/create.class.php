@@ -36,6 +36,9 @@ class modBrowserFolderCreateProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
+        if (!$this->source->checkPolicy('create')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $success = $this->source->createContainer($this->getProperty('name'),$this->getProperty('parent'));
 

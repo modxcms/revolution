@@ -33,7 +33,7 @@ class modResourceReloadProcessor extends modProcessor {
         $scriptProperties = $this->getProperties();
         $modx = $this->modx;
         
-        $topic = '/' . $scriptProperties['create-resource-token'] . '/';
+        $topic = '/resourcereload/';
         $this->reg->subscribe($topic);
 
         if(array_key_exists('create-resource-token', $scriptProperties) && !empty($scriptProperties['create-resource-token'])) {
@@ -49,7 +49,7 @@ class modResourceReloadProcessor extends modProcessor {
                     ,'action'=> 'resource/create'
                 ));
             }
-            $this->reg->send($topic, serialize($scriptProperties), array('ttl' => 300));
+            $this->reg->send($topic, array($scriptProperties['create-resource-token']=> serialize($scriptProperties)), array('ttl' => 300,'delay' => -time()));
         } else {
             return $modx->error->failure($modx->lexicon('resource_err_save'));
         }

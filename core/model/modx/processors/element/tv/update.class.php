@@ -25,18 +25,18 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modElementTvUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modTemplateVar';
-    public $languageTopics = array('tv','category');
+    public $languageTopics = array('tv','category','element');
     public $permission = 'save_tv';
     public $objectType = 'tv';
-    public $beforeRemoveEvent = 'OnBeforeTVFormSave';
-    public $afterRemoveEvent = 'OnTVFormSave';
+    public $beforeSaveEvent = 'OnBeforeTVFormSave';
+    public $afterSaveEvent = 'OnTVFormSave';
 
     public function beforeSave() {
         $this->setInputProperties();
         $this->setOutputProperties();
 
         $els = $this->getProperty('els',null);
-        if ($els != null) {
+        if ($els !== null) {
             $this->object->set('elements',$els);
         }
 
@@ -202,6 +202,10 @@ class modElementTvUpdateProcessor extends modElementUpdateProcessor {
                 }
             }
         }
+    }
+
+    public function cleanup() {
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'default_text')), array('previous_category' => $this->previousCategory)));
     }
 }
 return 'modElementTvUpdateProcessor';

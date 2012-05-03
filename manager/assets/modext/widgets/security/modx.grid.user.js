@@ -34,6 +34,10 @@ MODx.grid.User = function(config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'security/user.php'
+        ,baseParams: {
+            action: 'getList'
+            ,usergroup: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
+        }
         ,fields: ['id','username','fullname','email','gender','blocked','role','active','cls']
         ,paging: true
         ,autosave: true
@@ -75,6 +79,7 @@ MODx.grid.User = function(config) {
             header: _('active')
             ,dataIndex: 'active'
             ,width: 80
+            ,sortable: true
             ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
         },{
             header: _('user_block')
@@ -111,7 +116,7 @@ MODx.grid.User = function(config) {
                 action: 'getList'
                 ,addAll: true
             }
-            ,value: ''
+            ,value: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
             ,width: 200
             ,listeners: {
                 'select': {fn:this.filterUsergroup,scope:this}
@@ -126,10 +131,7 @@ MODx.grid.User = function(config) {
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: cmp
                     });
                 },scope:this}
@@ -175,6 +177,13 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
                     ,handler: this.updateUser
                 });
             }
+            if (p.indexOf('pcopy') != -1) {
+                if (m.length > 0) m.push('-');
+                m.push({
+                    text: _('user_duplicate')
+                    ,handler: this.duplicateUser
+                });
+            }
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
@@ -189,7 +198,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,createUser: function() {
-        location.href = 'index.php?a='+MODx.action['security/user/create'];
+        location.href = 'index.php?a=security/user/create';
     }
 
     ,activateSelected: function() {
@@ -266,9 +275,22 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             }
         });
     }
+
+    ,duplicateUser: function() {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'duplicate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+            	'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
     
     ,updateUser: function() {
-        location.href = 'index.php?a='+MODx.action['security/user/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=security/user/update&id='+this.menu.record.id;
     }
     				
     ,rendGender: function(d,c) {
@@ -292,7 +314,6 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
         return true;
     }
     ,clearFilter: function() {

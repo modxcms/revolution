@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -45,6 +45,11 @@ class modResponse {
      * @var string $body
      */
     public $body= null;
+    /**
+     * The current content type on the resource
+     * @var modContentType $contentType
+     */
+    public $contentType = null;
 
     /**
      * @param modX $modx A reference to the modX instance
@@ -59,14 +64,14 @@ class modResponse {
      * @param array $options Various options that can be set.
      */
     public function outputContent(array $options = array()) {
-        if (!($contentType = $this->modx->resource->getOne('ContentType'))) {
+        if (!($this->contentType = $this->modx->resource->getOne('ContentType'))) {
             if ($this->modx->getDebug() === true) {
                 $this->modx->log(modX::LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->modx->resource->toArray(), true));
             }
             $this->modx->log(modX::LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.");
         }
 
-        if (!$contentType->get('binary')) {
+        if (!$this->contentType->get('binary')) {
             $this->modx->resource->_output= $this->modx->resource->process();
             $this->modx->resource->_jscripts= $this->modx->jscripts;
             $this->modx->resource->_sjscripts= $this->modx->sjscripts;
@@ -79,7 +84,7 @@ class modResponse {
             $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, true, '[[', ']]', array(), $maxIterations);
 
             /*FIXME: only do this for HTML content ?*/
-            if (strpos($contentType->get('mime_type'), 'text/html') !== false) {
+            if (strpos($this->contentType->get('mime_type'), 'text/html') !== false) {
                 /* Insert Startup jscripts & CSS scripts into template - template must have a </head> tag */
                 if (($js= $this->modx->getRegisteredClientStartupScripts()) && (strpos($this->modx->resource->_output, '</head>') !== false)) {
                     /* change to just before closing </head> */
@@ -123,16 +128,16 @@ class modResponse {
 
         /* send out content-type, content-disposition, and custom headers from the content type */
         if ($this->modx->getOption('set_header')) {
-            $type= $contentType->get('mime_type') ? $contentType->get('mime_type') : 'text/html';
+            $type= $this->contentType->get('mime_type') ? $this->contentType->get('mime_type') : 'text/html';
             $header= 'Content-Type: ' . $type;
-            if (!$contentType->get('binary')) {
+            if (!$this->contentType->get('binary')) {
                 $charset= $this->modx->getOption('modx_charset',null,'UTF-8');
                 $header .= '; charset=' . $charset;
             }
             header($header);
             if (!$this->checkPreview()) {
                 $dispositionSet= false;
-                if ($customHeaders= $contentType->get('headers')) {
+                if ($customHeaders= $this->contentType->get('headers')) {
                     foreach ($customHeaders as $headerKey => $headerString) {
                         header($headerString);
                         if (strpos($headerString, 'Content-Disposition:') !== false) $dispositionSet= true;
@@ -143,17 +148,17 @@ class modResponse {
                         $name= basename($alias);
                     } elseif ($this->modx->resource->get('alias')) {
                         $name= $this->modx->resource->get('alias');
-                        if ($ext= $contentType->getExtension()) {
+                        if ($ext= $this->contentType->getExtension()) {
                             $name .= ".{$ext}";
                         }
                     } elseif ($name= $this->modx->resource->get('pagetitle')) {
                         $name= $this->modx->resource->cleanAlias($name);
-                        if ($ext= $contentType->getExtension()) {
+                        if ($ext= $this->contentType->getExtension()) {
                             $name .= ".{$ext}";
                         }
                     } else {
                         $name= 'download';
-                        if ($ext= $contentType->getExtension()) {
+                        if ($ext= $this->contentType->getExtension()) {
                             $name .= ".{$ext}";
                         }
                     }
@@ -173,10 +178,10 @@ class modResponse {
             "_postProcess"
         ));
 
-        if ($this->modx->resource instanceof modStaticResource && $contentType->get('binary')) {
+        if ($this->modx->resource instanceof modStaticResource && $this->contentType->get('binary')) {
             $this->modx->resource->process();
         } else {
-            if ($contentType->get('binary')) {
+            if ($this->contentType->get('binary')) {
                 $this->modx->resource->_output = $this->modx->resource->process();
             }
             @session_write_close();

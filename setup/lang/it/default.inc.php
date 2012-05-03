@@ -15,6 +15,9 @@ $_lang['base_template'] = 'TemplateBase';
 $_lang['cache_manager_err'] = 'Non è stato possibile caricare il Cache Manager di MODx.';
 $_lang['choose_language'] = 'Scelta Lingua';
 $_lang['cleanup_errors_title'] = 'Nota Importante:';
+$_lang['cli_install_failed'] = 'Installazione fallita! Errori: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX non ha potuto trovare un file di configurazione (come per esempio config.xml) per la tua installazione CLI . Per lanciare il setup di MODX da linea di comando, devi fornire un file di configurazione xml . Consulta la documentazione ufficiale per maggiori informazioni.';
+$_lang['cli_tests_failed'] = 'Test di pre-installazione falliti! Errori: [[+errors]]';
 $_lang['close'] = 'chiudi';
 $_lang['config_file_err_w'] = 'Errore durante la scrittura del file di configurazione.';
 $_lang['config_file_perms_notset'] = 'I permessi del file di configurazione non sono stati aggiornati. Puoi cambiare personalmente i permessi per rendere il file sicuro da manomissioni.';
@@ -29,7 +32,7 @@ $_lang['connection_collation'] = 'Collation:';
 $_lang['connection_connection_and_login_information'] = 'Connessione al Database e dati login';
 $_lang['connection_connection_note'] = 'Inserisci il nome del database da usare o che vuoi creare per questa installazione MODx. Se il database non esiste, il programma di installazione proverà a crearlo. Questa operazione potrebbe non riuscire, infatti dipende dalla configurazione di MySql e dai permessi utente del database per il tuo dominio/sistema.';
 $_lang['connection_database_host'] = 'Host Database:';
-//$_lang['connection_database_info'] = 'Now please enter the login data for your database.';
+$_lang['connection_database_info'] = 'Ora per favore inserisci i dati di login per il tuo database.';
 $_lang['connection_database_login'] = 'Nome utente per login Database:';
 $_lang['connection_database_name'] = 'Nome del Database:';
 $_lang['connection_database_pass'] = 'Password utente del Database:';
@@ -91,6 +94,7 @@ $_lang['install_packages_options'] = 'Opzioni Installazione Pacchetti';
 $_lang['install_success'] = 'Installazione Core terminata con successo. Clicca su avanti per completare il processo di installazione.';
 $_lang['install_summary'] = 'Resoconto Installazione';
 $_lang['install_update'] = 'Installa/Aggiorna';
+$_lang['installation_finished'] = 'Installazione completata in [[+time]]';
 $_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
     <p>Usage of this software is subject to the GPL license. To help you understand
     what the GPL licence is and how it affects your ability to use the software, we

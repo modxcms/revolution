@@ -42,7 +42,7 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         if (!$this->getSource()) {
             return $this->modx->toJSON(array());
         }
-        if (!$this->source->checkPolicy('save')) {
+        if (!$this->source->checkPolicy('list')) {
             return $this->modx->toJSON(array());
         }
         $this->source->setRequestProperties($this->getProperties());

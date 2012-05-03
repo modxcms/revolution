@@ -52,10 +52,7 @@ MODx.grid.Grid = function(config) {
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: cmp
                     });
                 },scope:this}
@@ -112,7 +109,7 @@ MODx.grid.Grid = function(config) {
     this.getStore().load({
         params: {
             start: config.pageStart || 0
-            ,limit: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
+            ,limit: config.hasOwnProperty('pageSize') ? config.pageSize : (parseInt(MODx.config.default_per_page) || 20)
         }
     });
     this.getStore().on('exception',this.onStoreException,this);
@@ -264,7 +261,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     field: this.config.sortBy || 'id'
                     ,direction: this.config.sortDir || 'ASC'
                 }
-                ,remoteSort: this.config.remoteSort != false ? true : false
+                ,remoteSort: this.config.remoteSort || false
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
@@ -306,13 +303,14 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 }
                 if (typeof(c[i].editor) == 'object' && c[i].editor.xtype) {
                     var r = c[i].editor.renderer;
+                    if (Ext.isEmpty(c[i].editor.id)) { c[i].editor.id = Ext.id(); }
                     c[i].editor = Ext.ComponentMgr.create(c[i].editor);
                     if (r === true) {
                         if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded && c[i].editor.config.mode != 'local') {
                             c[i].editor.store.load();
                             c[i].editor.store.isLoaded = true;
                         }
-                        c[i].renderer = MODx.combo.Renderer(c[i].editor);
+                        c[i].renderer = Ext.util.Format.comboRenderer(c[i].editor);
                     } else if (c[i].editor.initialConfig.xtype === 'datefield') {
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
                     } else if (r === 'boolean') {
@@ -586,7 +584,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                             c[i].editor.store.load();
                             c[i].editor.store.isLoaded = true;
                         }
-                        c[i].renderer = MODx.combo.Renderer(c[i].editor);
+                        c[i].renderer = Ext.util.Format.comboRenderer(c[i].editor);
                     } else if (c[i].editor.initialConfig.xtype === 'datefield') {
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
                     } else if (r === 'boolean') {

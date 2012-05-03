@@ -36,7 +36,7 @@ a {
 <body>
 <div class="message">
     <h1>500 Error</h1>
-    <p>A fatal application error has been encountered.</p>
+    <p><?php echo $errorMessage ? $errorMessage : 'A fatal application error has been encountered.'; ?></p>
 </div>
 </body>
 <?php

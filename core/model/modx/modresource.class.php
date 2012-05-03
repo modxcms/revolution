@@ -38,6 +38,13 @@ interface modResourceInterface {
      * @return string
      */
     public function getResourceTypeName();
+
+    /**
+     * Allows you to manipulate the tree node for a Resource before it is sent
+     * @abstract
+     * @param array $node
+     */
+    public function prepareTreeNode(array $node = array());
 }
 /**
  * Represents a web resource managed by the MODX framework.
@@ -150,6 +157,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @var boolean
      */
     public $showInContextMenu = false;
+    /**
+     * Use if extending modResource to state whether or not the derivative class can be listed in the class_key
+     * dropdown users can change when editing a resource.
+     * @var boolean
+     */
+    public $allowListingInClassKeyDropdown = true;
+    /**
+     * Whether or not to allow creation of children resources in tree. Can be overridden in a derivative Resource class.
+     * @var boolean
+     */
+    public $allowChildrenResources = true;
     
     /** @var modX $xpdo */
     public $xpdo;
@@ -1133,5 +1151,67 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $className = $this->_class;
         if ($className == 'modDocument') $className = 'document';
         return $this->xpdo->lexicon($className);
+    }
+
+    /**
+     * Use this in your extended Resource class to modify the tree node contents
+     * @param array $node
+     * @return array
+     */
+    public function prepareTreeNode(array $node = array()) {
+        return $node;
+    }
+
+    /**
+     * Get a namespaced property for the Resource
+     * @param string $key
+     * @param string $namespace
+     * @param null $default
+     * @return null
+     */
+    public function getProperty($key,$namespace = 'core',$default = null) {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        return array_key_exists($namespace,$properties) && array_key_exists($key,$properties[$namespace]) ? $properties[$namespace][$key] : $default;
+    }
+    /**
+     * Get the properties for the specific namespace for the Resource
+     * @param string $namespace
+     * @return array
+     */
+    public function getProperties($namespace = 'core') {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        return array_key_exists($namespace,$properties) ? $properties[$namespace] : array();
+    }
+
+    /**
+     * Set a namespaced property for the Resource
+     * @param string $key
+     * @param mixed $value
+     * @param string $namespace
+     * @return bool
+     */
+    public function setProperty($key,$value,$namespace = 'core') {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        if (!array_key_exists($namespace,$properties)) $properties[$namespace] = array();
+        $properties[$namespace][$key] = $value;
+        return $this->set('properties',$properties);
+    }
+
+    /**
+     * Set properties for a namespace on the Resource, optionally merging them with existing ones.
+     * @param array $newProperties
+     * @param string $namespace
+     * @param bool $merge
+     * @return boolean
+     */
+    public function setProperties(array $newProperties,$namespace = 'core',$merge = true) {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        if (!array_key_exists($namespace,$properties)) $properties[$namespace] = array();
+        $properties[$namespace] = $merge ? array_merge($properties[$namespace],$newProperties) : $newProperties;
+        return $this->set('properties',$properties);
     }
 }

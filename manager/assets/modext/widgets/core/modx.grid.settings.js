@@ -18,6 +18,17 @@ MODx.grid.SettingsGrid = function(config) {
         }];
     }
     config.tbar.push('->',{
+        xtype: 'modx-combo-namespace'
+        ,name: 'namespace'
+        ,id: 'modx-filter-namespace'
+        ,emptyText: _('namespace_filter')
+        ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+        ,allowBlank: true
+        ,width: 150
+        ,listeners: {
+            'select': {fn: this.filterByNamespace, scope:this}
+        }
+    },{
         xtype: 'modx-combo-area'
         ,name: 'area'
         ,id: 'modx-filter-area'
@@ -31,17 +42,6 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
         }
-    },{
-        xtype: 'modx-combo-namespace'
-        ,name: 'namespace'
-        ,id: 'modx-filter-namespace'
-        ,emptyText: _('namespace_filter')
-        ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
-        ,allowBlank: true
-        ,width: 150
-        ,listeners: {
-            'select': {fn: this.filterByNamespace, scope:this}
-        }
     },'-',{
         xtype: 'textfield'
         ,name: 'filter_key'
@@ -52,10 +52,7 @@ MODx.grid.SettingsGrid = function(config) {
             ,'render': {fn: function(cmp) {
                 new Ext.KeyMap(cmp.getEl(), {
                     key: Ext.EventObject.ENTER
-                    ,fn: function() {
-                        this.fireEvent('change',this.getValue());
-                        this.blur();
-                        return true;}
+                    ,fn: this.blur
                     ,scope: cmp
                 });
             },scope:this}
@@ -75,13 +72,13 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'name_trans'
             ,sortable: true
             ,editable: false
-            ,width: 150
+            ,width: 175
         },{
             header: _('key')
             ,dataIndex: 'key'
             ,sortable: true
             ,editable: false
-            ,width: 125
+            ,width: 150
         },{
             header: _('value')
             ,dataIndex: 'value'
@@ -94,7 +91,7 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'editedon'
             ,sortable: true
             ,editable: false
-            ,width: 125
+            ,width: 100
         },{
             header: _('area')
             ,dataIndex: 'area_text'
@@ -291,7 +288,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ed.store.load();
                 ed.store.isLoaded = true;
             }
-            f = MODx.combo.Renderer(ed.field,v);
+            f = Ext.util.Format.comboRenderer(ed.field,v);
             return f(v,md,rec,ri,ci,s,g);
         }
         return v;
@@ -424,6 +421,7 @@ MODx.window.CreateSetting = function(config) {
             ,id: 'modx-cs-value'
             ,anchor: '100%'
         }]
+        ,keys: []
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
     this.on('show',function() {this.reset();},this);
@@ -579,6 +577,7 @@ MODx.window.UpdateSetting = function(config) {
             ,id: 'modx-'+this.ident+'-value'
             ,anchor: '100%'
         }]
+        ,keys: []
     });
     MODx.window.UpdateSetting.superclass.constructor.call(this,config);
 };

@@ -11,6 +11,7 @@ $dbase = '{dbase}';
 $table_prefix = '{table_prefix}';
 $database_dsn = '{database_dsn}';
 $config_options = {config_options};
+$driver_options = {driver_options};
 
 $lastInstallTime = {last_install_time};
 

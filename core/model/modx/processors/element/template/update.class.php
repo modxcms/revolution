@@ -19,11 +19,11 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modTemplateUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modTemplate';
-    public $languageTopics = array('template','category');
+    public $languageTopics = array('template','category','element');
     public $permission = 'save_template';
     public $objectType = 'template';
-    public $beforeRemoveEvent = 'OnBeforeTempFormSave';
-    public $afterRemoveEvent = 'OnTempFormSave';
+    public $beforeSaveEvent = 'OnBeforeTempFormSave';
+    public $afterSaveEvent = 'OnTempFormSave';
 
     public function afterSave() {
         $this->setTemplateVariables();

@@ -7,6 +7,9 @@
  * @subpackage lexicon
  */
 $_lang['chunk'] = 'Chunk';
+$_lang['chunk_desc_category'] = 'La categoria a cui appartiene il Chunk.';
+$_lang['chunk_desc_description'] = 'Una breve descrizione di questo chunk.';
+$_lang['chunk_desc_name'] = 'Il nome di questo chunk. Sarà disponibile usando i tags [[$nameOfChunk]] tags.';
 $_lang['chunk_code'] = 'Codice del Chunk (html)';
 $_lang['chunk_desc'] = 'Descrizione';
 $_lang['chunk_delete_confirm'] = 'Sei sicuro di voler cancellare questo Chunk?';

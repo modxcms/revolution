@@ -14,6 +14,9 @@ class modBrowserFileDownloadProcessor extends modProcessor {
         if ($source !== true) {
             return $source;
         }
+        if (!$this->source->checkPolicy('view')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
         
         if ($this->getProperty('download',false)) {
             return $this->download();

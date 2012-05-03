@@ -34,6 +34,7 @@ $_lang['download_extras'] = 'Télécharger des extras';
 $_lang['downloads'] = 'Téléchargements';
 $_lang['downloads_view'] = '{downloads} téléchargements';
 $_lang['information'] = 'Information';
+$_lang['install'] = 'Installer';
 $_lang['installation_instructions'] = 'Instructions d\'Installation';
 $_lang['installed'] = 'Installé';
 $_lang['installed_on'] = 'Installé le <br/>[[+time]]';

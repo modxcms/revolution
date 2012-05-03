@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -89,16 +89,15 @@ class modInstallCLIRequest extends modInstallRequest {
         $settings = $_REQUEST;
         if (empty($settings['installmode'])) $settings['installmode'] = modInstall::MODE_NEW;
         $settings['installmode'] = $this->getInstallMode($settings['installmode']);
-        $config = $this->install->getConfig($settings['installmode']);
-        if (!empty($config)) {
-            $this->settings->fromArray($config);
-        }
-        $this->settings->fromArray($settings);
+        $this->settings->fromArray($settings); /* load CLI args into settings */
 
-        /* load the config file */
-        if (!$this->loadConfigFile()) {
+        /* load the config.xml file */
+        $config = $this->getConfig($settings['installmode']);
+        if (empty($config)) {
             $this->end($this->install->lexicon('cli_no_config_file'));
         }
+        $this->settings->fromArray($config);
+        $this->settings->fromArray($settings); /* do again to allow CLI-based overrides of config.xml */
 
         /* load the driver */
         $this->install->loadDriver();
@@ -170,13 +169,27 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
+     * {@inheritDoc}
+     * @param int $mode
+     * @param array $config
+     * @return array
+     */
+    public function getConfig($mode = 0, array $config = array()) {
+        /* load the config file */
+        $config = array_merge($this->loadConfigFile(), $config);
+        $config = parent::getConfig($mode, $config);
+        $this->prepareSettings($config);
+        return $config;
+    }
+
+    /**
      * Attempt to load the config.xml (or other config file) to use when installing. One must be present to run
      * MODX Setup in CLI mode.
      * 
-     * @return boolean
+     * @return array
      */
     public function loadConfigFile() {
-        $loaded = false;
+        $settings = array();
         $configFile = $this->settings->get('config');
         if (empty($configFile)) $configFile = MODX_INSTALL_PATH.'setup/config.xml';
         if (!empty($configFile)) {
@@ -188,12 +201,8 @@ class modInstallCLIRequest extends modInstallRequest {
         }
         if (!empty($configFile) && file_exists($configFile)) {
             $settings = $this->parseConfigFile($configFile);
-            if (!empty($settings)) {
-                $this->prepareSettings($settings);
-                $loaded = true;
-            }
         }
-        return $loaded;
+        return $settings;
     }
 
     /**
@@ -202,12 +211,17 @@ class modInstallCLIRequest extends modInstallRequest {
      * @param array $settings
      * @return void
      */
-    public function prepareSettings(array $settings) {
+    public function prepareSettings(array &$settings) {
         if (empty($settings['site_sessionname'])) {
             $settings['site_sessionname'] = 'SN' . uniqid('');
         }
         if (empty($settings['config_options'])) {
             $settings['config_options'] = array();
+        }
+        $dsn = $this->getDatabaseDSN($settings['database_type'],$settings['database_server'],$settings['database'],$settings['database_connection_charset']);
+        $settings['database_dsn'];
+        if (!empty($settings['database'])) {
+            $settings['dbase'] = $settings['database'];
         }
         $this->settings->fromArray($settings);
 
@@ -220,12 +234,6 @@ class modInstallCLIRequest extends modInstallRequest {
         $this->setDefaultSetting('web_url',$this->settings->get('context_web_url'));
         $this->setDefaultSetting('assets_path',$this->settings->get('context_assets_path',$this->settings->get('context_web_path').'assets/'));
         $this->setDefaultSetting('assets_url',$this->settings->get('context_assets_url',$this->settings->get('context_web_url').'assets/'));
-
-        $dsn = $this->install->getDatabaseDSN($this->settings->get('database_type'),$this->settings->get('database_server'),$this->settings->get('database'),$this->settings->get('database_connection_charset'));
-        $this->settings->set('database_dsn',$dsn);
-        if (!empty($settings['database'])) {
-            $this->settings->set('dbase',$settings['database']);
-        }
     }
 
     /**

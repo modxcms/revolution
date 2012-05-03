@@ -44,6 +44,16 @@ MODx.combo.ComboBox = function(config,getStore) {
 Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox);
 Ext.reg('modx-combo',MODx.combo.ComboBox);
 
+Ext.util.Format.comboRenderer = function (combo,val) {
+    return function (v,md,rec,ri,ci,s) {
+        if (!s) return v;
+        if (!combo.findRecord) return v;
+        var record = combo.findRecord(combo.valueField, v);
+        return record ? record.get(combo.displayField) : val;
+    }
+};
+
+/** @deprecated MODX 2.2 */
 MODx.combo.Renderer = function(combo) {
     var loaded = false;
     return (function(v) {
@@ -380,6 +390,7 @@ MODx.combo.ClassMap = function(config) {
         ,valueField: 'class'
         ,fields: ['class']
         ,editable: false
+        ,pageSize: 20
     });
     MODx.combo.ClassMap.superclass.constructor.call(this,config);
 };
@@ -483,6 +494,8 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,allowedFileTypes: this.config.allowedFileTypes || ''
                 ,wctx: this.config.wctx || 'web'
                 ,openTo: this.config.openTo || ''
+                ,rootId: this.config.rootId || '/'
+                ,hideSourceCombo: this.config.hideSourceCombo || false
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.setValue(data.relativeUrl);
@@ -529,6 +542,7 @@ MODx.combo.PropertySet = function(config) {
         ,fields: ['id','name']
         ,editable: false
         ,value: 0
+        ,pageSize: 20
     });
     MODx.combo.PropertySet.superclass.constructor.call(this,config);
 };
@@ -785,6 +799,7 @@ MODx.combo.Authority = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/role.php'
         ,baseParams: { action: 'getAuthorityList', addNone: true }
     });

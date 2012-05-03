@@ -170,7 +170,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
 
     ,createDashboard: function() {
-        location.href = 'index.php?a='+MODx.action['system/dashboards/create'];
+        location.href = 'index.php?a=system/dashboards/create';
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -223,7 +223,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
 
     ,updateDashboard: function() {
-        location.href = 'index.php?a='+MODx.action['system/dashboards/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=system/dashboards/update&id='+this.menu.record.id;
     }
     
     ,filterUsergroup: function(cb,nv,ov) {

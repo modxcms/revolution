@@ -214,6 +214,7 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/access/policy/template.php'
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')

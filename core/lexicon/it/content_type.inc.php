@@ -15,6 +15,7 @@ $_lang['content_type_err_nfs'] = 'Tipo di Contenuto con ID [[+id]] non trovato.'
 $_lang['content_type_err_ns'] = 'Tipo di Contenuto non specificato.';
 $_lang['content_type_err_ns_name'] = 'Specifica un nome valido per il Tipo di Contenuto.';
 $_lang['content_type_err_create'] = 'Si è verificato un errore cercando di creare il Tipo di Contenuto.';
+$_lang['content_type_err_in_use'] = 'Non puoi rimuovere questo Tipo di Contesto dal momento che è correntemente usato da alcune risorse in MODX. Devi ri-assegnare il Tipo di Contenuto di queste Risorse prima di procedere.';
 $_lang['content_type_err_remove'] = 'Si è verificato un errore cercando di rimuovere il Tipo di Contenuto.';
 $_lang['content_type_err_save'] = 'Si è verificato un errore cercando di salvare il Tipo di Contenuto.';
 $_lang['content_type_new'] = 'Nuovo Tipo di Contenuto';

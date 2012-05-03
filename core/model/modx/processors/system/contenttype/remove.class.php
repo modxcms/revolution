@@ -21,7 +21,7 @@ class modContentTypeRemoveProcessor extends modObjectRemoveProcessor {
     }
 
     public function isInUse() {
-        return $this->modx->getCount('modResource',array('content_type' => $this->contentType->get('id'))) > 0;
+        return $this->modx->getCount('modResource',array('content_type' => $this->object->get('id'))) > 0;
     }
 }
 return 'modContentTypeRemoveProcessor';

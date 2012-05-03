@@ -561,6 +561,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'resource_duplicate',
+    'description' => 'perm.resource_duplicate_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'resourcegroup_delete',
     'description' => 'perm.resourcegroup_delete_desc',
     'value' => true,

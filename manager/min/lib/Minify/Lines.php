@@ -72,6 +72,7 @@ class Minify_Lines {
                 ,$options['currentDir']
                 ,isset($options['docRoot']) ? $options['docRoot'] : $_SERVER['DOCUMENT_ROOT']
                 ,isset($options['symlinks']) ? $options['symlinks'] : array()
+                ,isset($options['virtualDirs']) ? $options['virtualDirs'] : array()
             );
             $content = "/* Minify_CSS_UriRewriter::\$debugText\n\n" 
                      . Minify_CSS_UriRewriter::$debugText . "*/\n"

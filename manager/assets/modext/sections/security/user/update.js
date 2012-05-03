@@ -11,9 +11,9 @@ MODx.page.UpdateUser = function(config) {
 	Ext.applyIf(config,{
        formpanel: 'modx-panel-user'
        ,actions: {
-            'new': MODx.action['security/user/create']
-            ,edit: MODx.action['security/user/update']
-            ,cancel: MODx.action['security/user']
+            'new': 'security/user/create'
+            ,edit: 'security/user/update'
+            ,cancel: 'security/user'
        }
         ,buttons: [{
             process: 'update', text: _('save'), method: 'remote'
@@ -23,7 +23,7 @@ MODx.page.UpdateUser = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['security/user']}
+            process: 'cancel', text: _('cancel'), params: {a:'security/user'}
         },'-',{
             text: _('delete')
             ,handler: this.removeUser
@@ -55,7 +55,7 @@ Ext.extend(MODx.page.UpdateUser,MODx.Component,{
             }
             ,listeners: {
             	'success': {fn:function(r) {
-            	    location.href = '?a='+MODx.action['security/user'];
+            	    location.href = '?a=security/user';
             	},scope:this}
             }
         });

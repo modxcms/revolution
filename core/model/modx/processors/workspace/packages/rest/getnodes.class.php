@@ -35,8 +35,8 @@ class modPackageGetNodesProcessor extends modProcessor {
         /* load appropriate processor */
         $id = $this->getProperty('id','n_root_0');
         $ar = explode('_',$id);
-        $this->nodeType = $ar[1];
-        $this->nodeKey = $ar[2];
+        $this->nodeType = !empty($ar[1]) ? $ar[1] : 'root';
+        $this->nodeKey = !empty($ar[2]) ? $ar[2] : null;
         switch ($this->nodeType) {
             case 'repository':
                 $list = $this->getCategories();

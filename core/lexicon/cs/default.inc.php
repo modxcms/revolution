@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2012-04-01
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -49,13 +49,28 @@ $_lang['add_plugin'] = 'Vytvořit plugin';
 $_lang['add_snippet'] = 'Vytvořit snippet';
 
 // $_lang['add_tag'] = 'Add tag';
-$_lang['add_tag'] = 'Přidat tag';
+$_lang['add_tag'] = 'Přidat štítek';
 
 // $_lang['add_template'] = 'Add Template';
 $_lang['add_template'] = 'Vytvořit šablonu';
 
+// $_lang['add_to_category_chunk'] = 'Create a New Chunk Here';
+$_lang['add_to_category_chunk'] = 'Přidat sem nový chunk';
+
+// $_lang['add_to_category_plugin'] = 'Create a New Plugin Here';
+$_lang['add_to_category_plugin'] = 'Přidat sem nový plugin';
+
+// $_lang['add_to_category_snippet'] = 'Create a New Snippet Here';
+$_lang['add_to_category_snippet'] = 'Přidat sem nový snippet';
+
+// $_lang['add_to_category_template'] = 'Create a New Template Here';
+$_lang['add_to_category_template'] = 'Přidat sem novou šablonu';
+
 // $_lang['add_to_category_this'] = 'Create a New [[+type]] Here';
 $_lang['add_to_category_this'] = 'Přidat sem nový [[+type]]';
+
+// $_lang['add_to_category_tv'] = 'Create a New TV Here';
+$_lang['add_to_category_tv'] = 'Přidat sem novou TV';
 
 // $_lang['add_tv'] = 'Add TV';
 $_lang['add_tv'] = 'Vytvořit template variable';
@@ -321,8 +336,23 @@ $_lang['duplicate'] = 'Kopírovat';
 // $_lang['duplicate_children'] = 'Duplicate Children';
 $_lang['duplicate_children'] = 'Kopírovat potomka';
 
+// $_lang['duplicate_chunk'] = 'Duplicate Chunk';
+$_lang['duplicate_chunk'] = 'Kopírovat chunk';
+
 // $_lang['duplicate_of'] = 'Duplicate of [[+name]]';
 $_lang['duplicate_of'] = 'Kopie [[+name]]';
+
+// $_lang['duplicate_plugin'] = 'Duplicate Plugin';
+$_lang['duplicate_plugin'] = 'Kopírovat plugin';
+
+// $_lang['duplicate_snippet'] = 'Duplicate Snippet';
+$_lang['duplicate_snippet'] = 'Kopírovat snippet';
+
+// $_lang['duplicate_template'] = 'Duplicate Template';
+$_lang['duplicate_template'] = 'Kopírovat šablonu';
+
+// $_lang['duplicate_tv'] = 'Duplicate TV';
+$_lang['duplicate_tv'] = 'Kopírovat TV';
 
 // $_lang['duplication_options'] = 'Duplication Options';
 $_lang['duplication_options'] = 'Možnosti kopie';
@@ -330,8 +360,23 @@ $_lang['duplication_options'] = 'Možnosti kopie';
 // $_lang['edit'] = 'Edit';
 $_lang['edit'] = 'Upravit';
 
+// $_lang['edit_chunk'] = 'Edit Chunk';
+$_lang['edit_chunk'] = 'Upravit chunk';
+
 // $_lang['edit_context'] = 'Edit context';
 $_lang['edit_context'] = 'Upravit kontext';
+
+// $_lang['edit_plugin'] = 'Edit Plugin';
+$_lang['edit_plugin'] = 'Upravit plugin';
+
+// $_lang['edit_snippet'] = 'Edit Snippet';
+$_lang['edit_snippet'] = 'Upravit snippet';
+
+// $_lang['edit_template'] = 'Edit Template';
+$_lang['edit_template'] = 'Upravit šablonu';
+
+// $_lang['edit_tv'] = 'Edit TV';
+$_lang['edit_tv'] = 'Upravit TV';
 
 // $_lang['editing'] = 'Editing: [[+name]]';
 $_lang['editing'] = 'Úprava: [[+name]]';
@@ -395,6 +440,9 @@ $_lang['expand_all'] = 'Rozbalit vše';
 
 // $_lang['expand_tree'] = 'Expand tree';
 $_lang['expand_tree'] = 'Rozbalit strom';
+
+// $_lang['export'] = 'Export';
+$_lang['export'] = 'Exportovat';
 
 // $_lang['ext_afterpage'] = 'of {0}';
 $_lang['ext_afterpage'] = 'z {0}';
@@ -594,6 +642,15 @@ $_lang['icon'] = 'Ikona';
 // $_lang['id'] = 'ID';
 $_lang['id'] = 'ID';
 
+// $_lang['import'] = 'Import';
+$_lang['import'] = 'Importovat';
+
+// $_lang['import_err_upload'] = 'An error occurred while trying to find the XML file. Please specify a valid file.';
+$_lang['import_err_upload'] = 'Nastala chyba při hledání XML souboru. Vyberte platný soubor.';
+
+// $_lang['import_err_xml'] = 'An error occurred importing the XML file. Please ensure you specified a valid XML File.';
+$_lang['import_err_xml'] = 'Nastala chyba při importu XML souboru. Ujistěte se, že vybraný soubor je platný XML soubor.';
+
 // $_lang['info'] = 'Info';
 $_lang['info'] = 'Info';
 
@@ -683,6 +740,9 @@ $_lang['manager'] = 'Správce';
 
 // $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
 $_lang['manager_log_err_save'] = 'Nastala chyba při přihlašování.';
+
+// $_lang['media'] = 'Media';
+$_lang['media'] = 'Média';
 
 // $_lang['menu_order'] = 'Menu Order';
 $_lang['menu_order'] = 'Indexu';
@@ -856,7 +916,7 @@ $_lang['parameter'] = 'Parametr';
 $_lang['parameters'] = 'Parametry';
 
 // $_lang['parent'] = 'Parent';
-$_lang['parent'] = 'Parent';
+$_lang['parent'] = 'Rodič';
 
 // $_lang['password'] = 'Password';
 $_lang['password'] = 'Heslo';
@@ -874,13 +934,19 @@ $_lang['permissions'] = 'Přístup';
 $_lang['permission_denied'] = 'Přístup zamezen!';
 
 // $_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
-$_lang['permission_denied_msg'] = 'Nemáte oprávnění pro zobrazení této stránky. Pokud si myslíte, že je to nedorozumnění kontaktujte administrátora.';
+$_lang['permission_denied_msg'] = 'Nemáte příslušná oprávnění přístupové politiky pro zobrazení této stránky. Pokud si myslíte, že je to nedorozumnění kontaktujte administrátora.';
 
 // $_lang['please_wait'] = 'Please wait...';
 $_lang['please_wait'] = 'Momentík...';
 
 // $_lang['plugin'] = 'Plugin';
 $_lang['plugin'] = 'Plugin';
+
+// $_lang['plugin_activate'] = 'Activate Plugin';
+$_lang['plugin_activate'] = 'Aktivovat plugin';
+
+// $_lang['plugin_deactivate'] = 'Deactivate Plugin';
+$_lang['plugin_deactivate'] = 'Deaktivovat plugin';
 
 // $_lang['plugins'] = 'Plugins';
 $_lang['plugins'] = 'Pluginy';
@@ -976,7 +1042,7 @@ $_lang['quick_update_template'] = 'Rychlá úprava šablony';
 $_lang['quick_update_tv'] = 'Rychlá úprava template variable';
 
 // $_lang['rank'] = 'Rank';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Pořadí';
 
 // $_lang['recent_docs'] = 'Recent documents';
 $_lang['recent_docs'] = 'Naposledy upravované dokumenty';
@@ -1050,11 +1116,26 @@ $_lang['remove'] = 'Odstranit';
 // $_lang['remove_category'] = 'Delete Category';
 $_lang['remove_category'] = 'Odstranit kategorii';
 
+// $_lang['remove_chunk'] = 'Remove Chunk';
+$_lang['remove_chunk'] = 'Odstranit chunk';
+
 // $_lang['remove_date'] = 'Remove date';
 $_lang['remove_date'] = 'Odstranit datum';
 
+// $_lang['remove_plugin'] = 'Remove Plugin';
+$_lang['remove_plugin'] = 'Odstranit plugin';
+
 // $_lang['remove_selected'] = 'Delete Selected';
 $_lang['remove_selected'] = 'Odstranit vybrané';
+
+// $_lang['remove_snippet'] = 'Remove Snippet';
+$_lang['remove_snippet'] = 'Odstranit snippet';
+
+// $_lang['remove_template'] = 'Remove Template';
+$_lang['remove_template'] = 'Odstranit šablonu';
+
+// $_lang['remove_tv'] = 'Remove TV';
+$_lang['remove_tv'] = 'Odstranit TV';
 
 // $_lang['remove_this_confirm'] = 'Are you sure you want to remove the [[+type]]: "[[+name]]"?';
 $_lang['remove_this_confirm'] = 'Opravud chcete odstranit [[+type]]: "[[+name]]"?';
@@ -1132,7 +1213,7 @@ $_lang['save_changes'] = 'Uložit změny';
 $_lang['save_successful'] = 'Uložení proběhlo úspěšně.';
 
 // $_lang['save_tag'] = 'Save tag';
-$_lang['save_tag'] = 'Uložení tagu';
+$_lang['save_tag'] = 'Uložení štítku';
 
 // $_lang['saving'] = 'Saving...';
 $_lang['saving'] = 'Ukládám...';
@@ -1264,13 +1345,13 @@ $_lang['sysinfo_userid'] = 'Uživatel';
 $_lang['sys_alert'] = 'Systémová upozornění';
 
 // $_lang['symlink'] = 'Symlink';
-$_lang['symlink'] = 'Symlink';
+$_lang['symlink'] = 'Symbolický odkaz';
 
 // $_lang['system'] = 'System';
 $_lang['system'] = 'Systém';
 
 // $_lang['tag'] = 'Tag';
-$_lang['tag'] = 'Tag';
+$_lang['tag'] = 'Štítek';
 
 // $_lang['target'] = 'Target';
 $_lang['target'] = 'Cíl';
@@ -1339,7 +1420,7 @@ $_lang['tv_default_desc'] = 'Výchozí hodnota této TV pokud nebude nic vybrán
 $_lang['tv_elements'] = 'Hodnoty vstupu';
 
 // $_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag.';
-$_lang['tv_elements_desc'] = 'Volitelné položky pro TVs s vícenásobným výběrem  jako rozbalovací menu nebo tag..';
+$_lang['tv_elements_desc'] = 'Volitelné položky pro TVs s vícenásobným výběrem  jako rozbalovací menu nebo štítek..';
 
 // $_lang['tv_type'] = 'Input Type';
 $_lang['tv_type'] = 'Typ vstupu';
@@ -1387,7 +1468,7 @@ $_lang['untitled_weblink'] = '_Bezejmenný webový odkaz';
 $_lang['untitled_symlink'] = '_Bezejmenný symbolický odkaz';
 
 // $_lang['update'] = 'Update';
-$_lang['update'] = 'Upravit';
+$_lang['update'] = 'Aktualizovat';
 
 // $_lang['updated'] = 'Updated';
 $_lang['updated'] = 'Aktualizováno';
@@ -1420,7 +1501,7 @@ $_lang['warning'] = 'Pozor!';
 $_lang['web_resources'] = 'Webové zdroje';
 
 // $_lang['weblink'] = 'Weblink';
-$_lang['weblink'] = 'Weblink';
+$_lang['weblink'] = 'Webový odkaz';
 
 // $_lang['which_editor_title'] = 'Editor to use:';
 $_lang['which_editor_title'] = 'Použít editor:';

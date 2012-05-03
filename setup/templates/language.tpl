@@ -1,17 +1,12 @@
 <form id="install" action="?" method="post">
 
-<div class="right">
-    <img src="{$_lang.img_box}" alt="{$_lang.app_motto}" />
-</div>
-<img src="{$_lang.img_splash}" alt="{$_lang.modx_install}" />
-
 {if $restarted}
     <br class="clear" />
     <br class="clear" />
     <p class="note">{$_lang.restarted_msg}</p>
 {/if}
 
-<div class="setup_navbar">
+<div class="setup_navbar" style="border-top: 0;">
     <p class="title">{$_lang.choose_language}:
         <select name="language">
             {$languages}

@@ -27,6 +27,9 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
+        if (!$this->source->checkPolicy('remove')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
         $success = $this->source->removeObject($file);
 
         if (empty($success)) {

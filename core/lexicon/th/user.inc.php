@@ -1,12 +1,11 @@
-<?php
+﻿<?php
 /**
  * User Thai lexicon topic
  *
  * @language th
  * @package modx
  * @subpackage lexicon
- 
- * @author Mr.Kittipong Intaboot COE#18,KKU
+ * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
  * @co-author Miss.Nattayanee Darath COE#17,KKU
  * @updated 2010-07-21
  */

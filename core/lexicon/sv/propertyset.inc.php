@@ -6,6 +6,8 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['area'] = 'Område';
+$_lang['areas'] = 'Områden';
 $_lang['class_name'] = 'Klassnamn';
 $_lang['default'] = 'Standard';
 $_lang['duplicate_of'] = 'Kopia av [[+name]]';
@@ -24,8 +26,12 @@ $_lang['properties_import_err_upload'] = 'Ange en giltig egenskapsfil för uppla
 $_lang['properties_import_msg'] = 'Välj en giltig egenskapsfil.';
 $_lang['properties_remove'] = 'Ta bort egenskaper';
 $_lang['properties_remove_confirm'] = 'Är du säker på att du vill ta bort dessa egenskaper?';
+$_lang['property'] = 'Egenskap';
+$_lang['property_area_desc'] = 'Det område eller den grupp som denna egenskap hör till.';
 $_lang['property_create'] = 'Skapa egenskap';
-$_lang['property_update'] = 'Uppdatera egenskap';
+$_lang['property_description_desc'] = 'En kort beskrivning av egenskapen. Den kan vara en lexikonnyckel i egenskapens lexikon.';
+$_lang['property_lexicon_desc'] = 'Valfri. Det lexikon som denna egenskaps fält kan översättas med.';
+$_lang['property_name_desc'] = 'Egenskapens namn som kommer att bli tillgängligt via: [[+propertyName]]';
 $_lang['property_option_create'] = 'Skapa egenskapsalternativ';
 $_lang['property_option_remove'] = 'Ta bort egenskapsalternativ';
 $_lang['property_option_remove_confirm'] = 'Är du säker på att du vill ta bort detta egenskapsalternativ?';
@@ -36,6 +42,8 @@ $_lang['property_revert_all'] = 'Återställ alla till standard';
 $_lang['property_revert_all_confirm'] = 'Är du säker på att du vill återställa alla egenskaper till sina standarder?';
 $_lang['property_remove'] = 'Ta bort egenskap';
 $_lang['property_remove_confirm'] = 'Är du säker på att du vill ta bort den här egenskapen?';
+$_lang['property_update'] = 'Uppdatera egenskap';
+$_lang['property_xtype_desc'] = 'Egenskapens inmatningstyp.';
 $_lang['propertyset'] = 'Egenskapsuppsättning';
 $_lang['propertyset_add'] = 'Lägg till egenskapsuppsättning';
 $_lang['propertyset_create'] = 'Skapa egenskapsuppsättning';
@@ -48,11 +56,11 @@ $_lang['propertyset_element_remove_confirm'] = 'Är du säker på att du vill ta
 $_lang['propertyset_err_ae'] = 'Det finns redan en egenskapsuppsättning med det namnet. Ange ett annat.';
 $_lang['propertyset_err_associate'] = 'Ett fel inträffade när egenskapsuppsättningen skulle associeras med elementet.';
 $_lang['propertyset_err_create'] = 'Ett fel inträffade när egenskapsuppsättningen skulle skapas.';
-$_lang['propertyset_err_element_add'] = 'Ett fel inräffade när elementet skulle läggas till i egenskapsuppsättningen.';
+$_lang['propertyset_err_element_add'] = 'Ett fel inträffade när elementet skulle läggas till i egenskapsuppsättningen.';
 $_lang['propertyset_err_element_nf'] = 'Det elementet är inte associerat med den egenskapsuppsättningen.';
 $_lang['propertyset_err_element_remove'] = 'Ett fel inträffade när elementet skulle tas bort från egenskapsuppsättningen.';
 $_lang['propertyset_err_nf'] = 'Egenskapsuppsättningen kunde inte hittas.';
-$_lang['propertyset_err_nfs'] = 'Egenskapsuppsättninge med ID [[+id]] kunde inte hittas.';
+$_lang['propertyset_err_nfs'] = 'Egenskapsuppsättningen med ID [[+id]] kunde inte hittas.';
 $_lang['propertyset_err_ns'] = 'Ingen egenskapsuppsättning angiven.';
 $_lang['propertyset_err_ns_name'] = 'Ange ett namn för egenskapsuppsättningen.';
 $_lang['propertyset_err_remove'] = 'Ett fel inträffade när egenskapsuppsättningen skulle tas bort.';

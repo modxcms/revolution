@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-24
+ * @updated 2012-04-01
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -19,7 +19,7 @@ $_lang['area_authentication'] = 'Autentizaci a zabezpečení';
 $_lang['area_caching'] = 'Cachování';
 
 // $_lang['area_core'] = 'Core Code';
-$_lang['area_core'] = 'Core Code';
+$_lang['area_core'] = 'Jádro MODX';
 
 // $_lang['area_editor'] = 'Rich-Text Editor';
 $_lang['area_editor'] = 'WYSIWYG editor';
@@ -88,7 +88,7 @@ $_lang['name_desc'] = 'Název položky nastavení. Můžete zadat také klíč s
 $_lang['namespace'] = 'Jmenný prostor';
 
 // $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
-$_lang['namespace_desc'] = 'Jmenná prostor, ke kterému tato položka nastavení patří. Výchozí téma slovníku bude načteno pro tento jmenný prostor při dotazu na nastavení.';
+$_lang['namespace_desc'] = 'Jmenný prostor, ke kterému tato položka nastavení patří. Výchozí téma slovníku bude načteno pro tento jmenný prostor při dotazu na nastavení.';
 
 // $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['namespace_filter'] = 'Filtrovat dle jmenného prostoru...';
@@ -160,19 +160,19 @@ $_lang['system_settings'] = 'Konfigurace systému';
 $_lang['usergroup'] = 'Uživatelská skupina';
 
 // $_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled'] = 'Zkontrolovat přístupy ke kategoriím';
+$_lang['setting_access_category_enabled'] = 'Řízení přístupů ke kategoriím';
 
 // $_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
 $_lang['setting_access_category_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kategoriím v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kategoriím!</strong>';
 
 // $_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled'] = 'Kontrolovat přístupy ke kontextům';
+$_lang['setting_access_context_enabled'] = 'Řízení přístupů ke kontextům';
 
 // $_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 $_lang['setting_access_context_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kontextům. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kontextům! NEVYPÍNEJTE TUTO VOLBU v rámci celého systému nebo pro kontext "mgr", došlo by tím k zamezní přístupu do správce obsahu.</strong>';
 
 // $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled'] = 'Kontrolovat přístupy ke skupinám dokumentů';
+$_lang['setting_access_resource_group_enabled'] = 'Řízení přístupů ke skupinám dokumentů';
 
 // $_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke skupinám dokumentů v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke skupinám dokumentů!!</strong>';
@@ -208,10 +208,10 @@ $_lang['setting_login_homepage'] = 'Úvodní stránka po přihlášení';
 $_lang['setting_login_homepage_desc'] = 'Zadejte ID dokumentu, do kterého chcete uživatele přesměrovat po té co se přihlásí do správce obsahu. <strong>Poznámka: ujistěte se, že dokument s tímto ID existuje, že je publikován a přístupný tomuto uživateli!</strong>';
 
 // $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
-$_lang['setting_access_policies_version'] = 'Verze schématu přístupových práv';
+$_lang['setting_access_policies_version'] = 'Verze schématu přístupové politiky';
 
 // $_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
-$_lang['setting_access_policies_version_desc'] = 'Verze systému přístupových práv. NEMĚŇTE.';
+$_lang['setting_access_policies_version_desc'] = 'Verze systému přístupové politiky. NEMĚŇTE.';
 
 // $_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
 $_lang['setting_allow_forward_across_contexts'] = 'Povolit přesměrování mezi kontexty';
@@ -439,7 +439,7 @@ $_lang['setting_container_suffix_desc'] = 'Přípona, která bude přidána slo�
 $_lang['setting_context_tree_sort'] = 'Povolit řazení kontextů ve stromu dokumentů';
 
 // $_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
-$_lang['setting_context_tree_sort_desc'] = 'Je-li nastaveno na Ano, kontexty se budou automaticky abecedně řadit v levém stromu dokumentů.';
+$_lang['setting_context_tree_sort_desc'] = 'Je-li nastaveno na Ano, kontexty se budou automaticky abecedně řadit v levém stromovém menu dokumentů.';
 
 // $_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortby'] = 'Pole pro řazení kontextů ve stromu dokumentů';
@@ -458,6 +458,18 @@ $_lang['setting_cultureKey'] = 'Jazyk';
 
 // $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 $_lang['setting_cultureKey_desc'] = 'Vyberte jazyk, pro všechny kontexty (kromě správce obsahu "mgr") včetně kontextu "web".';
+
+// $_lang['setting_date_timezone'] = 'Default Time Zone';
+$_lang['setting_date_timezone'] = 'Výchozí časové pásmo';
+
+// $_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
+$_lang['setting_date_timezone_desc'] = 'Určuje výchozí nastavení časového pásma pro PHP funkce pro práci s datumem, pokud je uvedena hodnota. Není-li uvedena hodnota a nastavení PHP date.timezone ini  nastavení není nastaveno pro Vaše prostředí, bude použito pásmo UTC.';
+
+// $_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug'] = 'Debug';
+
+// $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
+$_lang['setting_debug_desc'] = 'Řízení režimu ladění v rámci MODX zapnuto/vypnuto a/nebo nastavení PHP úrovně error_reporting. \'\' = současné nastavení systému, \'0\' = vypnuto (error_reporting = 0), \'1\' = zapnuto (error_reporting = -1), nebo lze použít jakoukoli jinou platnou hodnotu pro error_reporting.';
 
 // $_lang['setting_default_content_type'] = 'Default Content Type';
 $_lang['setting_default_content_type'] = 'Výchozí typ obsahu';
@@ -606,6 +618,12 @@ $_lang['setting_forgot_login_email'] = 'E-mail zapomenutého přihlášení';
 // $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 $_lang['setting_forgot_login_email_desc'] = 'Šablona e-mailu, který je odeslán pokud uživatel zapomněl své přihlašovací údaje.';
 
+// $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
+$_lang['setting_form_customization_use_all_groups'] = 'Pro přizpůsobení formulářů využit pravidla všech členských uživatelských skupiny';
+
+// $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Je-li nastaveno Ano, při aplikaci pravidel z přizpůsobení formulářů budou použita pravidla všech uživatelských skupin, do kterých je uživatel přiřazen. V opačném případě jsou použita pouze pravidla přiřazená k uživatelově primární skupině. Poznámka: volba Ano může zapříčinit chyby s konfliktními pravidly v jednotlivých uživatelských skupinách.';
+
 // $_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
 $_lang['setting_forward_merge_excludes'] = 'Potlačená políčka při symbolickém odkazování';
 
@@ -716,6 +734,18 @@ $_lang['setting_locale'] = 'Locale';
 
 // $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 $_lang['setting_locale_desc'] = 'Nastavte locale pro vaše národní použití. Ponechte prázdné pro použití výchozí hodnoty. Více informací v <a href="http://php.net/setlocale" target="_blank">PHP dokumentaci</a>.';
+
+// $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
+$_lang['setting_lock_ttl'] = 'Čas odstranění zámků';
+
+// $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
+$_lang['setting_lock_ttl_desc'] = 'Počet sekund, po kterou je dokument uzamčen a uživatel v něm již nic neupravil, po jehož uplynutí bude daný zámek zrušen.';
+
+$_lang['setting_log_level'] = 'Úroveň logování';
+$_lang['setting_log_level_desc'] = 'Výchozí úroveň logování; čím nižší úroveň tím méně zpráv bude logováno. Možné hodnoty: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
+
+$_lang['setting_log_target'] = 'Výstup logování';
+$_lang['setting_log_target_desc'] = 'Výchozí výstup, kam mají být logy zapisovány. Možné hodnoty: \'FILE\', \'HTML\', nebo \'ECHO\'. Výchozí hodnota je \'FILE\'';
 
 // $_lang['setting_mail_charset'] = 'Mail Charset';
 $_lang['setting_mail_charset'] = 'Znaková sada e-mailu';
@@ -831,6 +861,12 @@ $_lang['setting_manager_js_cache_max_age'] = 'Staří komprimované cache JS/CSS
 // $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximální stáří (v sekundách) cache prohlížeče pro CSS/JS správce obsahu. Po uplynutí této doby bude prohlížeči poslán další podmíněný GET. Pro nižší trafic nastavte delší dobu.';
 
+// $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
+$_lang['setting_manager_js_document_root'] = 'Document Root pro komprimované JS/CSS ve správci obsahu';
+
+// $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
+$_lang['setting_manager_js_document_root_desc'] = 'Pokud Váš server nezpracovává proměnnou serveru DOCUMENT_ROOT a chcete používat možnost komprese JS/CSS ve správci obsahu nastavte jí zde manuálně. Pokud si nejste jist o co jde, pak toto nastavení neměňte.';
+
 // $_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
 $_lang['setting_manager_js_zlib_output_compression'] = 'Povolit zlib výstupní kompresy JS/CSS pro správce obsahu';
 
@@ -848,6 +884,13 @@ $_lang['setting_manager_language'] = 'Jazyk správce obsahu';
 
 // $_lang['setting_manager_language_desc'] = 'Select the language for the MODX Content Manager.';
 $_lang['setting_manager_language_desc'] = 'Zvolte jazyk pro MODX správce obsahu.';
+
+// $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
+$_lang['setting_manager_login_url_alternate'] = 'Alternativní URL pro Správce obsahu';
+
+// $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
+$_lang['setting_manager_login_url_alternate_desc'] = 'Alternativní URL, na kterou je přesměrován nepřihlášený uživatel, pokud se chce přihlásit do Správce obsahu.';
+
 
 // $_lang['setting_manager_login_start'] = 'Manager Login Startup';
 $_lang['setting_manager_login_start'] = 'Úvodní stránka po přihlášení do správce obsahu';
@@ -878,6 +921,12 @@ $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
 
 // $_lang['setting_modRequest.class_desc'] = '';
 $_lang['setting_modRequest.class_desc'] = '';
+
+// $_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
+$_lang['setting_modx_browser_default_sort'] = 'Výchozí řazení v Průzkmníku zdrojů';
+
+// $_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Výchozí nastavení řazení v Průzkumníku zdrojů (vkládání obrázků atp.). Možné hodnoty jsou: name, size, lastmod (poslední změna).';
 
 // $_lang['setting_modx_charset'] = 'Character encoding';
 $_lang['setting_modx_charset'] = 'Kódování znaků';
@@ -1078,7 +1127,7 @@ $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop (ořez při zvětšen�
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Výchozí nastavení Zoom-Crop pro phpThumb pokud je použit v MODX. Výchozí hodnota je 0, tím se zabrání oříznutí při zvětšení.';
 
 // $_lang['setting_publish_default'] = 'Published default';
-$_lang['setting_publish_default'] = 'Publikováno';
+$_lang['setting_publish_default'] = 'Ve výchozím stavu publikováno';
 
 // $_lang['setting_publish_default_desc'] = 'Select 'Yes' to make all new resources published by default.';
 $_lang['setting_publish_default_desc'] = 'Zvolte "Ano", pokud chcete, aby všechny nově vytvořené dokumenty byly ve výchozím stavu publikované.';
@@ -1318,7 +1367,7 @@ $_lang['setting_symlink_merge_fields_desc'] = 'JeIf nastaveno "Ano", dojde k aut
 $_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
 
 // $_lang['setting_topmenu_show_descriptions_desc'] = 'If set to 'No', MODX will hide the descriptions from top menu items in the manager.';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na 'Ne', MODX skryje popisky u položek horního menu v rámci správce obsahu.';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
 
 // $_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
 $_lang['setting_tree_default_sort'] = 'Výchozí řazení dokumentů ve stromu dokumentů';
@@ -1418,6 +1467,12 @@ $_lang['setting_use_multibyte'] = 'Použít Multibyte extenzi pro PHP';
 
 // $_lang['setting_use_multibyte_desc'] = 'Set to true if you want to use the mbstring extension for multibyte characters in your MODX installation. Only set to true if you have the mbstring PHP extension installed.';
 $_lang['setting_use_multibyte_desc'] = 'Nastavte na "Ano", pokud chcete používat extenzi mbstring pro multibyte znaky ve Vaší instalaci MODXu. Nastavte pouze pokud máte extenzi instalovanou v PHP. Silně doporučujeme nastavit "Ano" pro použití s češtinou.';
+
+// $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
+$_lang['setting_use_weblink_target'] = 'Použít cíl jako webový odkaz';
+
+// $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
+$_lang['setting_use_weblink_target_desc'] = 'Nastavte na "Ano" pokud chcete, aby MODX tagy odkazů a makeUrl() generovali odkazy jako cílové URL pro webové odkazy. Nastavením "Ne" budou generovány interní MODX URL.';
 
 // $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
 $_lang['setting_webpwdreminder_message'] = 'E-mail pro vyžádání nového hesla';

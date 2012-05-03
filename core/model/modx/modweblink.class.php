@@ -41,7 +41,7 @@ class modWebLink extends modResource implements modResourceInterface {
         } else {
             $this->_output= $this->_content;
         }
-        $this->xpdo->sendRedirect($this->_output);
+        $this->xpdo->sendRedirect($this->_output, array('responseCode' => $this->getProperty('responseCode', 'core', 'HTTP/1.1 301 Moved Permanently')));
     }
 
     /**

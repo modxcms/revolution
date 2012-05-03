@@ -64,7 +64,7 @@ class modUserGetListProcessor extends modObjectGetListProcessor {
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
         $objectArray['blocked'] = $object->get('blocked') ? true : false;
-        $objectArray['cls'] = 'pupdate premove';
+        $objectArray['cls'] = 'pupdate premove pcopy';
         unset($objectArray['password'],$objectArray['cachepwd'],$objectArray['salt']);
         return $objectArray;
     }

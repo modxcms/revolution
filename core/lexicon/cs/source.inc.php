@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-24
+ * @updated 2011-11-19
  */
 // $_lang['access'] = 'Access Permissions';
 $_lang['access'] = 'Přístupová práva';
@@ -56,6 +56,21 @@ $_lang['source_description_desc'] = 'Popis zdroje médií.';
 
 // $_lang['source_duplicate'] = 'Duplicate Media Source';
 $_lang['source_duplicate'] = 'Zkopírovat zdroj médií';
+
+// $_lang['source_err_ae_name'] = 'A Media Source with that name already exists! Please specify a new name.';
+$_lang['source_err_ae_name'] = 'Zdroj médií s tímto názvem již existuje! Zadejte jiný název.';
+
+// $_lang['source_err_nf'] = 'Media Source not found!';
+$_lang['source_err_nf'] = 'Zdroj médií nenalezen!';
+
+// $_lang['source_err_nfs'] = 'No Media Source can be found with the id: [[+id]].';
+$_lang['source_err_nfs'] = 'Nebyl nalezen žádný zdroj médií s id: [[+id]].';
+
+// $_lang['source_err_ns'] = 'Please specify the Media Source.';
+$_lang['source_err_ns'] = 'Nevybrali jste zdroj médií.';
+
+// $_lang['source_err_ns_name'] = 'Please specify a name for the Media Source.';
+$_lang['source_err_ns_name'] = 'Zadejte název zdroje médií.';
 
 // $_lang['source_name_desc'] = 'The name of the Media Source.';
 $_lang['source_name_desc'] = 'Název zdroje médií.';

@@ -93,11 +93,6 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
                 });
                 m.push('-');
                 m.push({
-                    text: _('action_place_here')
-                    ,handler: this.createMenu
-                });
-                m.push('-');
-                m.push({
                     text: _('menu_remove')
                     ,handler: this.removeMenu
                 });
@@ -124,9 +119,10 @@ Ext.reg('modx-tree-menu',MODx.tree.Menu);
  */
 MODx.window.CreateMenu = function(config) {
     config = config || {};
+    this.ident = config.ident || 'modx-cmenu-'+Ext.id();
     Ext.applyIf(config,{
         title: _('menu_create')
-        ,width: 480
+        ,width: 650
         ,height: 400
         ,url: MODx.config.connectors_url+'system/menu.php'
         ,action: 'create'
@@ -134,46 +130,111 @@ MODx.window.CreateMenu = function(config) {
             xtype: 'hidden'
             ,name: 'parent'
         },{
-            fieldLabel: _('lexicon_key')
-            ,name: 'text'
-            ,xtype: 'textfield'
-            ,allowBlank: false
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('description')
-            ,name: 'description'
-            ,xtype: 'textfield'
-            ,allowBlank: true
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('action')
-            ,name: 'action_id'
-            ,hiddenName: 'action_id'
-            ,xtype: 'modx-combo-action'
-            ,id: 'modx-cmen-action'
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('icon')
-            ,name: 'icon'
-            ,xtype: 'textfield'
-            ,allowBlank: true
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('parameters')
-            ,name: 'params'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('handler')
-            ,name: 'handler'
-            ,xtype: 'textarea'
-            ,anchor: '100%'
-            ,grow: false
-        },{
-            fieldLabel: _('permissions')
-            ,name: 'permissions'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: [{
+                    fieldLabel: _('lexicon_key')
+                    ,description: MODx.expandHelp ? '' : _('lexicon_key_desc')
+                    ,name: 'text'
+                    ,xtype: 'textfield'
+                    ,allowBlank: false
+                    ,anchor: '100%'
+                    ,id: this.ident+'-text'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-text'
+                    ,html: _('lexicon_key_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('description')
+                    ,description: MODx.expandHelp ? '' : _('description_desc')
+                    ,name: 'description'
+                    ,xtype: 'textfield'
+                    ,allowBlank: true
+                    ,anchor: '100%'
+                    ,id: this.ident+'-description'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-description'
+                    ,html: _('description_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('handler')
+                    ,description: MODx.expandHelp ? '' : _('handler_desc')
+                    ,name: 'handler'
+                    ,xtype: 'textarea'
+                    ,anchor: '100%'
+                    ,grow: false
+                    ,id: this.ident+'-handler'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-handler'
+                    ,html: _('handler_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('permissions')
+                    ,description: MODx.expandHelp ? '' : _('permissions_desc')
+                    ,name: 'permissions'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-permissions'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-permissions'
+                    ,html: _('permissions_desc')
+                    ,cls: 'desc-under'
+                }]
+            },{
+                columnWidth: .5
+                ,items: [{
+                    fieldLabel: _('action')
+                    ,description: MODx.expandHelp ? '' : _('action_desc')
+                    ,name: 'action_id'
+                    ,hiddenName: 'action_id'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-action-id'
+                    ,allowBlank: false
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-action-id'
+                    ,html: _('action_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('parameters')
+                    ,description: MODx.expandHelp ? '' : _('parameters_desc')
+                    ,name: 'params'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-params'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-params'
+                    ,html: _('parameters_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('namespace')
+                    ,description: MODx.expandHelp ? '' : _('namespace_desc')
+                    ,name: 'namespace'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,value: 'core'
+                    ,id: this.ident+'-namespace'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-namespace'
+                    ,html: _('namespace_desc')
+                    ,cls: 'desc-under'
+                }]
+            }]
         }]
     });
     MODx.window.CreateMenu.superclass.constructor.call(this,config);
@@ -194,7 +255,7 @@ MODx.window.UpdateMenu = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('menu_update')
-        ,width: 480
+        ,width: 650
         ,height: 400
         ,url: MODx.config.connectors_url+'system/menu.php'
         ,action: 'update'
@@ -202,48 +263,111 @@ MODx.window.UpdateMenu = function(config) {
             name: 'parent'
             ,xtype: 'hidden'
         },{
-            name: 'text'
-            ,xtype: 'hidden'
-        },{
-            fieldLabel: _('lexicon_key')
-            ,name: 'new_text'
-            ,xtype: 'textfield'
-            ,allowBlank: false
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('description')
-            ,name: 'description'
-            ,xtype: 'textfield'
-            ,allowBlank: true
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('action')
-            ,name: 'action_id'
-            ,hiddenName: 'action_id'
-            ,xtype: 'modx-combo-action'
-            ,id: 'modx-umen-action'
-        },{
-            fieldLabel: _('icon')
-            ,name: 'icon'
-            ,xtype: 'textfield'
-            ,allowBlank: true
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('parameters')
-            ,name: 'params'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-        },{
-            fieldLabel: _('handler')
-            ,name: 'handler'
-            ,xtype: 'textarea'
-            ,anchor: '100%'
-            ,grow: false
-        },{
-            fieldLabel: _('permissions')
-            ,name: 'permissions'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: [{
+                    fieldLabel: _('lexicon_key')
+                    ,description: MODx.expandHelp ? '' : _('lexicon_key_desc')
+                    ,name: 'text'
+                    ,xtype: 'statictextfield'
+                    ,submitValue: true
+                    ,allowBlank: false
+                    ,anchor: '100%'
+                    ,id: this.ident+'-text'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-text'
+                    ,html: _('lexicon_key_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('description')
+                    ,description: MODx.expandHelp ? '' : _('description_desc')
+                    ,name: 'description'
+                    ,xtype: 'textfield'
+                    ,allowBlank: true
+                    ,anchor: '100%'
+                    ,id: this.ident+'-description'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-description'
+                    ,html: _('description_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('handler')
+                    ,description: MODx.expandHelp ? '' : _('handler_desc')
+                    ,name: 'handler'
+                    ,xtype: 'textarea'
+                    ,anchor: '100%'
+                    ,grow: false
+                    ,id: this.ident+'-handler'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-handler'
+                    ,html: _('handler_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('permissions')
+                    ,description: MODx.expandHelp ? '' : _('permissions_desc')
+                    ,name: 'permissions'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-permissions'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-permissions'
+                    ,html: _('permissions_desc')
+                    ,cls: 'desc-under'
+                }]
+            },{
+                columnWidth: .5
+                ,items: [{
+                    fieldLabel: _('action')
+                    ,description: MODx.expandHelp ? '' : _('action_desc')
+                    ,name: 'action_id'
+                    ,hiddenName: 'action_id'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-action-id'
+                    ,allowBlank: false
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-action-id'
+                    ,html: _('action_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('parameters')
+                    ,description: MODx.expandHelp ? '' : _('parameters_desc')
+                    ,name: 'params'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-params'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-params'
+                    ,html: _('parameters_desc')
+                    ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('namespace')
+                    ,description: MODx.expandHelp ? '' : _('namespace_desc')
+                    ,name: 'namespace'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-namespace'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-namespace'
+                    ,html: _('namespace_desc')
+                    ,cls: 'desc-under'
+                }]
+            }]
         }]
     });
     MODx.window.UpdateMenu.superclass.constructor.call(this,config);

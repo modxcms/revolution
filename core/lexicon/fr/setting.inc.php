@@ -206,6 +206,9 @@ $_lang['setting_context_tree_sortdir_desc'] = 'L\'ordre de classement des contex
 $_lang['setting_cultureKey'] = 'Langue';
 $_lang['setting_cultureKey_desc'] = 'Sélectionnez la langue pour tous les contextes "non-manager", web inclus.';
 
+$_lang['setting_date_timezone'] = 'Fuseau horaire par défaut';
+$_lang['setting_date_timezone_desc'] = 'Contrôle le fuseau horaire par défaut de PHP (timezone). Si ce paramètre et vide ainsi que le paramètre date.timezone de PHP, UTC sera utilisé.';
+
 $_lang['setting_debug'] = 'Debug';
 $_lang['setting_debug_desc'] = 'Activez ou désactiver le debugging dans MODX et/ou définissez le niveau de error_reporting de PHP. \'\' = utiliser la valeur actuelle de error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), ou toute autre valeur de error_reporting valide (un entier).';
 
@@ -281,6 +284,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Si votre paramètre filemanag
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'Le modèle de l\'email qui est envoyé quand un utilisateur a oublié ses identifiants et/ou mot de passe de MODX.';
 
+$_lang['setting_form_customization_use_all_groups'] = 'Utiliser la personnalisation des formulaires pour tous les groupes';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Lorsque cette option est activée, la personnalisation des formulaires sera appliquée même lorsque le groupe ne sera pas le groupe principal de l\'utilisateur. Sinon, elle ne s\'appliquera que lorsque l\'utilisateur aura ce groupe d\'utilisateur en tant que groupe principal. Note : activer cette option peut entrainer des conflits entre les sets.';
+
 $_lang['setting_forward_merge_excludes'] = 'Faire suivre exclue les champs "fusionnés"';
 $_lang['setting_forward_merge_excludes_desc'] = 'Un lien symbolique qui fusionne les valeurs des champs non vides vers les valeurs de la ressource cible; utiliser une liste "d\'exclusions", séparées par des virgules, évite que les champs indiqués soient écrasés par le lien symbolique.';
 
@@ -331,10 +337,13 @@ $_lang['setting_inline_help'] = 'Afficher l\'aide sous les champs';
 $_lang['setting_inline_help_desc'] = '« Oui » affiche le texte d\'aide directement sous le champs. « Non » affiche le texte d\'aide dans un tooltip.';
 
 $_lang['setting_link_tag_scheme'] = 'Schéma de génération d\'URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le tag [[~id]]. Options disponibles: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le tag [[~id]]. Options disponibles <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">dans la documentation de l\'API</a>';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Définie la locale du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="http://php.net/setlocale" target="_blank">la documentation PHP</a> pour plus d\'information.';
+
+$_lang['setting_lock_ttl'] = 'Durée de vie du lock';
+$_lang['setting_lock_ttl_desc'] = 'Nombre de secondes qu\'une ressource restera vérouillée lorsque l\'utilisateur l\'éditant est inactif.';
 
 $_lang['setting_log_level'] = 'Niveau de log';
 $_lang['setting_log_level_desc'] = 'Le niveau par défaut de log; plus le niveau est bas, moins les informations seront log. Options disponibles : 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
@@ -391,12 +400,14 @@ $_lang['setting_manager_favicon_url'] = 'URL de favicon du manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour le manager de MODX. Doit être relatif au répertoire manager/ ou une URL absolue.';
 
 $_lang['setting_manager_html5_cache'] = 'Utiliser le cache local HTML5 dans le manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Active le cache local HTML5 pour le manager. Recommendé uniquement avec l\'utilisation de navigateurs récents (supportant le cache HTML5).';
+$_lang['setting_manager_html5_cache_desc'] = 'Expérimental. Active le cache local HTML5 pour le manager. Recommendé uniquement avec l\'utilisation de navigateurs récents (supportant le cache HTML5).';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Activer le verrouillage des fichiers JS/CSS du manager';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Mettre en cache le verrouillage des fichiers. Sélectionnez non si votre système de fichier est NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Durée du cache des JS/CSS compressés';
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Durée maximale du cache navigateur pour les fichiers CSS/JS du manager, en secondes. Au delà de ctte période, le navigateur enverra un GET "conditionnel". Utilisez une valeur élevée pour moins de traffic.';
+$_lang['setting_manager_js_document_root'] = 'Compression JS/CSS à la racine';
+$_lang['setting_manager_js_document_root_desc'] = 'Si votre serveur ne prend pas en compte la variable serveur DOCUMENT_ROOT, définissez-la ici pour activer la compression CSS/JS du manager. Ne configurez cette option que si vous savez ce que vous faites.';
 $_lang['setting_manager_js_zlib_output_compression'] = 'Activer la compression zlib pour les JS/CSS du manager';
 $_lang['setting_manager_js_zlib_output_compression_desc'] = 'Autorise ou non la compression zlib sur les fichiers CSS/JS du manager. N\'activez pas cette fonction à moins d\'être sûr que votre configuration PHP autorise le changement de la variable zlib.output_compression à 1. MODX recommande de laisser cette fonction désactivée..';
 
@@ -405,6 +416,9 @@ $_lang['setting_manager_lang_attribute_desc'] = 'Entrez le code de langue qui co
 
 $_lang['setting_manager_language'] = 'Langue du manager';
 $_lang['setting_manager_language_desc'] = 'Sélectionnez la langue pour le gestionnaire de contenu de MODX.';
+
+$_lang['setting_manager_login_url_alternate'] = 'URL alternative de connexion au manager';
+$_lang['setting_manager_login_url_alternate_desc'] = 'Une URL alternative vers laquelle envoyer les utilisateurs non identifiés au manager. Le formulaire de connexion doit identifier l\'utilisateur au contexte « mgr » pour fonctionner.';
 
 $_lang['setting_manager_login_start'] = 'Démarrage après identification au manager';
 $_lang['setting_manager_login_start_desc'] = 'Entrez l\'ID du document vers lequel vous souhaitez envoyer un utilisateur après sa connexion au manager. <strong>NOTE: assurez-vous que l\'ID que vous avez entré appartient à un document existant, publié et accessible par cet utilisateur!</strong>';
@@ -420,6 +434,9 @@ $_lang['setting_manager_use_tabs_desc'] = 'Si oui, le manager utilisera les ongl
 
 $_lang['setting_modRequest.class'] = 'Classe de prise en charge de requête';
 $_lang['setting_modRequest.class_desc'] = '';
+
+$_lang['setting_modx_browser_default_sort'] = 'Listing des fichiers';
+$_lang['setting_modx_browser_default_sort_desc'] = 'L\'ordre d\'affichage des fichiers par défaut lors de l\'utilisation de la popup du navigateur de fichier dans le manager. Les valeurs acceptées sont : name, size, lastmod (date de modification).';
 
 $_lang['setting_modx_charset'] = 'Encodage de caractère';
 $_lang['setting_modx_charset_desc'] = 'Veuillez indiquer quel encodage de caractère vous souhaitez utiliser. Veuillez noter que MODX a été testé certains encodages mais pas tous. Pour la plupart des langues, l\'option par défaut UTF-8 est préférable.';

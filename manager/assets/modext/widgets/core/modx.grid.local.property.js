@@ -45,7 +45,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
     
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
         var r = s.getAt(ri).data;
-        var f;
+        var f,idx;
         var oz = v;
         var xtype = this.config.dynProperty;
         if (!r[xtype] || r[xtype] == 'combo-boolean') {
@@ -70,7 +70,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
                 cb = ed.field;
             }
             if (r[xtype] != 'list') {
-                f = MODx.combo.Renderer(ed.field);
+                f = Ext.util.Format.comboRenderer(ed.field);
                 oz = f(v);
             } else if (cb) {
                 idx = cb.getStore().find(cb.valueField,v);

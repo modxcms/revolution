@@ -26,7 +26,7 @@ class BrowserManagerController extends modManagerController {
     public function loadCustomCssJs() {
         /* invoke OnRichTextBrowserInit */
         $this->addHtml('<script type="text/javascript">
-MODx.siteId = "'.$_SESSION["modx.{$this->modx->context->get('key')}.user.token"].'";
+MODx.siteId = "'.$this->modx->user->getUserToken($this->modx->context->get('key')).'";
 MODx.ctx = "'.$this->ctx.'";
 </script>');
     }
@@ -46,7 +46,7 @@ MODx.ctx = "'.$this->ctx.'";
         $this->ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'web';
         $placeholders['_ctx'] = $this->ctx;
 
-        $_SERVER['HTTP_MODAUTH'] = $_SESSION["modx.{$this->modx->context->get('key')}.user.token"];
+        $_SERVER['HTTP_MODAUTH'] = $this->modx->user->getUserToken($this->modx->context->get('key'));
         $placeholders['site_id'] = $_SERVER['HTTP_MODAUTH'];
 
         $placeholders['source'] = $this->modx->getOption('source',$scriptProperties,$this->modx->getOption('default_media_source',null,1));

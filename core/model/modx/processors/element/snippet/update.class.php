@@ -18,10 +18,14 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modSnippetUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modSnippet';
-    public $languageTopics = array('snippet','category');
+    public $languageTopics = array('snippet','category','element');
     public $permission = 'save_snippet';
     public $objectType = 'snippet';
-    public $beforeRemoveEvent = 'OnBeforeSnipFormSave';
-    public $afterRemoveEvent = 'OnSnipFormSave';
+    public $beforeSaveEvent = 'OnBeforeSnipFormSave';
+    public $afterSaveEvent = 'OnSnipFormSave';
+
+    public function cleanup() {
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')), array('previous_category' => $this->previousCategory)));
+    }
 }
 return 'modSnippetUpdateProcessor';

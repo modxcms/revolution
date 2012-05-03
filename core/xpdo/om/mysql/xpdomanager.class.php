@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2011 by MODX, LLC.
+ * Copyright 2010-2012 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -140,7 +140,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $uniqueIndexes= array ();
                 $stdIndexes= array ();
                 $sql= 'CREATE TABLE ' . $tableName . ' (';
-                $fieldMeta = $this->xpdo->getFieldMeta($className);
+                $fieldMeta = $this->xpdo->getFieldMeta($className, true);
                 $columns = array();
                 while (list($key, $meta)= each($fieldMeta)) {
                     $columns[] = $this->getColumnDef($className, $key, $meta);
@@ -285,7 +285,7 @@ class xPDOManager_mysql extends xPDOManager {
         if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
             $className = $this->xpdo->loadClass($class);
             if ($className) {
-                $meta = $this->xpdo->getFieldMeta($className);
+                $meta = $this->xpdo->getFieldMeta($className, true);
                 if (is_array($meta) && array_key_exists($name, $meta)) {
                     $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                     if (!empty($colDef)) {
@@ -300,7 +300,11 @@ class xPDOManager_mysql extends xPDOManager {
                         } else {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
                         }
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: Could not get column definition");
                     }
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: No metadata defined");
                 }
             }
         } else {
@@ -324,7 +328,11 @@ class xPDOManager_mysql extends xPDOManager {
                         } else {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
                         }
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: Could not get index definition");
                     }
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: No metadata defined");
                 }
             }
         } else {
@@ -338,7 +346,7 @@ class xPDOManager_mysql extends xPDOManager {
         if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
             $className = $this->xpdo->loadClass($class);
             if ($className) {
-                $meta = $this->xpdo->getFieldMeta($className);
+                $meta = $this->xpdo->getFieldMeta($className, true);
                 if (is_array($meta) && array_key_exists($name, $meta)) {
                     $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                     if (!empty($colDef)) {
@@ -353,7 +361,11 @@ class xPDOManager_mysql extends xPDOManager {
                         } else {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
                         }
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: Could not get column definition");
                     }
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: No metadata defined");
                 }
             }
         } else {

@@ -25,6 +25,7 @@ MODx.combo.LexiconTopic = function(config) {
             ,'namespace': 'core'
             ,'language': 'en'
         }
+        ,pageSize: 20
     });
     MODx.combo.LexiconTopic.superclass.constructor.call(this,config);
 };

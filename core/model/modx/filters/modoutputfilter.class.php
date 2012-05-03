@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -133,8 +133,13 @@ class modOutputFilter {
                                 $output= $this->modx->user->get('id');
                             }
                             $grps= (strlen($m_val) > 0) ? explode(',', $m_val) : array ();
+                            /** @var $user modUser */
                             $user = $this->modx->getObject('modUser',$output);
-                            $condition[]= $user->isMember($grps);
+                            if ($user && is_object($user) && $user instanceof modUser) {
+                                $condition[]= $user->isMember($grps);
+                            } else {
+                                $condition[] = false;
+                            }
                             break;
                         case 'or':
                             $condition[]= "||";
@@ -143,30 +148,45 @@ class modOutputFilter {
                             $condition[]= "&&";
                             break;
                         case 'hide':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if ($m_con) {
-                                $output= null;
-                            }
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if ($m_con) {
+                                    $output= null;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'show':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if (!$m_con) {
-                                $output= null;
-                            }
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if (!$m_con) {
+                                    $output= null;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'then':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if ($m_con) {
-                                $output= $m_val;
-                            } else {
-                                $output= null;
-                            }
+                            $output = null;
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if ($m_con) {
+                                    $output= $m_val;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'else':
-                            $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                            if (!$m_con) {
-                                $output= $m_val;
-                            }
+                            $conditional = join(' ', $condition);
+                            try {
+                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = intval($m_con);
+                                if (!$m_con) {
+                                    $output= $m_val;
+                                }
+                            } catch (Exception $e) {}
                             break;
                         case 'select':
                             $raw= explode("&", $m_val);
@@ -292,15 +312,37 @@ class modOutputFilter {
                             break;
                         case 'ellipsis':
                             $limit= intval($m_val) ? intval($m_val) : 100;
+                            $pad = $this->modx->getOption('ellipsis_filter_pad',null,'&#8230;');
 
                             /* ensure that filter correctly counts special chars */
-                            $str = html_entity_decode($output,ENT_COMPAT,$encoding);
-                            if ($usemb) {
-                                if (mb_strlen($str,$encoding) > $limit) {
-                                    $output = mb_substr($str,0,$limit,$encoding).'&#8230;';
+                            $output = html_entity_decode($output,ENT_COMPAT,$encoding);
+                            $len = $usemb ? mb_strlen($output,$encoding) : strlen($output);
+                            if ($limit > $len) $limit = $len;
+                            if ($limit < 0) $limit = 0;
+                            $breakpoint = $usemb ? mb_strpos($output," ",$limit,$encoding) : strpos($output, " ", $limit);
+                            if (false !== $breakpoint) {
+                                if ($breakpoint < $len - 1) {
+                                    $partial = $usemb ? mb_substr($output, 0, $breakpoint,$encoding) : substr($output, 0, $breakpoint);
+                                    $output = $partial . $pad;
                                 }
-                            } else if (strlen($str) > $limit) {
-                                $output = substr($str,0,$limit).'&#8230;';
+                            }
+
+                            $opened = array();
+                            if (preg_match_all("/<(\/?[a-z]+)>?/i", $output, $matches)) {
+                                foreach ($matches[1] as $tag) {
+                                    if (preg_match("/^[a-z]+$/i", $tag, $regs)) {
+                                        $strLower = $usemb ? mb_strtolower($regs[0],$encoding) : strtolower($regs[0]);
+                                        if ($strLower != 'br' || $strLower != 'hr') {
+                                            $opened[] = $regs[0];
+                                        }
+                                    } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {
+                                        unset($opened[array_pop(array_keys($opened, $regs[1]))]);
+                                    }
+                                }
+                            }
+                            if ($opened) {
+                                $tagstoclose = array_reverse($opened);
+                                foreach ($tagstoclose as $tag) $output .= "</$tag>";
                             }
                             break;
                         /* #####  Special functions */
@@ -492,7 +534,7 @@ class modOutputFilter {
                               $ago[] = $this->modx->lexicon('ago_minutes',array('time' => $agoTS['minutes']));
                             }
                             if (empty($ago)) { /* handle <1 min */
-                              $ago[] = $this->modx->lexicon('ago_seconds',array('time' => $agoTS['seconds']));
+                              $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
                             }
                             $output = implode(', ',$ago);
                             $output = $this->modx->lexicon('ago',array('time' => $output));

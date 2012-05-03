@@ -2,6 +2,7 @@
 /**
  * Loads the lexicon into a JS-compatible function _()
  *
+ * @var modX $modx
  * @package modx
  * @subpackage lexicon
  */

@@ -58,10 +58,7 @@ MODx.grid.DashboardWidgets = function(config) {
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: cmp
                     });
                 },scope:this}
@@ -99,7 +96,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('widget_remove')
+                    text: _('widget_unplace')
                     ,handler: this.removeWidget
                 });
             }
@@ -110,7 +107,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,createDashboard: function() {
-        location.href = 'index.php?a='+MODx.action['system/dashboards/widget/create'];
+        location.href = 'index.php?a=system/dashboards/widget/create';
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -150,7 +147,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,updateWidget: function() {
-        location.href = 'index.php?a='+MODx.action['system/dashboards/widget/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=system/dashboards/widget/update&id='+this.menu.record.id;
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

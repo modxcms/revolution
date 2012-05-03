@@ -8,6 +8,8 @@
 /**
  * The basic REST client for handling REST requests
  *
+ * @deprecated To be removed in 2.3. See modRest instead.
+ *
  * @package modx
  * @subpackage rest
  */
@@ -193,6 +195,11 @@ class modRestResponse {
      * @var string The type of response format
      */
     public $responseType = 'xml';
+    /** @var SimpleXMLElement $xml */
+    public $xml = null;
+    /** @var string $json */
+    public $json = null;
+    
     /**
      * The constructor for the modRestResponse class.
      *
@@ -218,7 +225,7 @@ class modRestResponse {
      * @return SimpleXMLElement
      */
     public function toXml() {
-        if ($this->xml instanceof SimpleXMLElement) return $this->xml;
+        if (!empty($this->xml) && $this->xml instanceof SimpleXMLElement) return $this->xml;
 
         try {
             $this->xml = simplexml_load_string($this->response);

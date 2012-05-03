@@ -82,6 +82,10 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,scope: this
             ,handler: this.createPolicyTemplate
         },'-',{
+            text: _('import')
+            ,scope: this
+            ,handler: this.importPolicyTemplate
+        },'-',{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('policy_remove_multiple')
@@ -108,7 +112,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear'
+            ,id: 'modx-sacpoltemp-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -134,7 +138,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         this.refresh();
     }
     ,editPolicyTemplate: function(itm,e) {
-        location.href = '?a='+MODx.action['security/access/policy/template/update']+'&id='+this.menu.record.id;
+        location.href = '?a=security/access/policy/template/update&id='+this.menu.record.id;
     }
     
     ,createPolicyTemplate: function(btn,e) {
@@ -154,6 +158,40 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         this.windows.aptc.reset();
         this.windows.aptc.show(e.target);
     }
+    ,exportPolicyTemplate: function(btn,e) {
+        var id = this.menu.record.id;
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'export'
+                ,id: id
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    location.href = this.config.url+'?action=export&download=1&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                },scope:this}
+            }
+        });
+    }
+
+    ,importPolicyTemplate: function(btn,e) {
+        var r = {};
+        if (!this.windows.importPolicyTemplate) {
+            this.windows.importPolicyTemplate = MODx.load({
+                xtype: 'modx-window-policy-template-import'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(o) {
+                        this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.importPolicyTemplate.reset();
+        this.windows.importPolicyTemplate.setValues(r);
+        this.windows.importPolicyTemplate.show(e.target);
+    }
+
 
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
@@ -177,6 +215,12 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
                     ,handler: this.confirm.createDelegate(this,["duplicate","policy_template_duplicate_confirm"])
                 });
             }
+            if (m.length > 0) { m.push('-'); }
+            m.push({
+                text: _('policy_template_export')
+                ,handler: this.exportPolicyTemplate
+            });
+
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
@@ -235,7 +279,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'
@@ -246,7 +290,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,name: 'template_group'
             ,id: 'modx-'+this.ident+'-template-group'
             ,xtype: 'modx-combo-access-policy-template-group'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,value: 1
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -258,7 +302,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,height: 50
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -266,6 +310,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
             ,html: _('policy_template_desc_description')
             ,cls: 'desc-under'
         }]
+        ,keys: []
     });
     MODx.window.CreateAccessPolicyTemplate.superclass.constructor.call(this,config);
 };
@@ -292,3 +337,34 @@ MODx.combo.AccessPolicyTemplateGroups = function(config) {
 };
 Ext.extend(MODx.combo.AccessPolicyTemplateGroups,MODx.combo.ComboBox);
 Ext.reg('modx-combo-access-policy-template-group',MODx.combo.AccessPolicyTemplateGroups);
+
+
+MODx.window.ImportPolicyTemplate = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'imppt-'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('policy_template_import')
+        ,id: 'modx-window-policy-template-import'
+        ,url: MODx.config.connectors_url+'security/access/policy/template.php'
+        ,action: 'import'
+        ,fileUpload: true
+        ,saveBtnText: _('import')
+        ,fields: [{
+            html: _('policy_template_import_msg')
+            ,id: this.ident+'-desc'
+            ,border: false
+            ,cls: 'panel-desc'
+            ,style: 'margin-bottom: 10px;'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('file')
+            ,name: 'file'
+            ,id: this.ident+'-file'
+            ,anchor: '100%'
+            ,inputType: 'file'
+        }]
+    });
+    MODx.window.ImportPolicyTemplate.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.ImportPolicyTemplate,MODx.Window);
+Ext.reg('modx-window-policy-template-import',MODx.window.ImportPolicyTemplate);

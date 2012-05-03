@@ -110,7 +110,7 @@ Ext.reg('modx-component',MODx.Component);
 MODx.toolbar.ActionButtons = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        actions: { 'close': MODx.action.welcome }
+        actions: { 'close': 'welcome' }
         ,formpanel: false
         ,id: 'modx-action-buttons'
         ,loadStay: false
@@ -278,10 +278,12 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     /* allow for success messages */
                     MODx.msg.status({
                         title: _('success')
-                        ,message: _('save_successful')
+                        ,message: r.result.message || _('save_successful')
                         ,dontHide: r.result.message != '' ? true : false
                     });
                     Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
+
+                    this.resetDirtyButtons(r.result);
                 },this);
                 o.form.submit({
                     headers: {
@@ -297,6 +299,13 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             location.href = '?'+Ext.urlEncode(itm.params);
         }
         return false;
+    }
+
+    ,resetDirtyButtons: function(r) {
+        for (var i=0;i<this.checkDirtyBtns.length;i=i+1) {
+            var btn = this.checkDirtyBtns[i];
+            btn.setDisabled(true);
+        }
     }
 
     ,checkStay: function(itm,e) {
@@ -328,7 +337,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     /* if Continue Editing, then don't reload the page - just hide the Progress bar
                        unless the user is on a 'Create' page...if so, then redirect
                        to the proper Edit page */
-                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id !== null) {
+                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id && res.object.id !== null) {
                         itm.params.id = res.object.id;
                         if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                         if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }

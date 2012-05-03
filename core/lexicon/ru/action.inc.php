@@ -17,6 +17,7 @@ $_lang['action_remove'] = 'Удалить';
 $_lang['action_update'] = 'Редактировать';
 $_lang['actions'] = 'Действия';
 $_lang['controller'] = 'Контроллер';
+$_lang['controller_err_ae'] = 'Уже существует контроллер с таким путём для этого пространства имён.';
 $_lang['controller_err_nf'] = 'Файл контроллера не найден!';
 $_lang['controller_err_ns'] = 'Контроллер не указан!';
 $_lang['controller_parent'] = 'Родительский контроллер';

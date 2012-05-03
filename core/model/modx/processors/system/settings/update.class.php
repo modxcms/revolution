@@ -119,11 +119,6 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
      * @return void
      */
     public function clearCache() {
-        $this->modx->cacheManager->deleteTree($this->modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
-           'deleteTop' => false,
-            'skipDirs' => false,
-            'extensions' => array('.cache.php','.php'),
-        ));
         $this->modx->reloadConfig();
     }
 }

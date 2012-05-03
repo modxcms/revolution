@@ -6,14 +6,17 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['directory'] = 'Katalog';
 $_lang['file_confirm_remove'] = 'Är du säker på att du vill ta bort den här filen? Det här kan potentiellt ha sönder din webbplats.';
+$_lang['file_create'] = 'Skapa fil';
 $_lang['file_deleted'] = 'Klart!';
 $_lang['file_delete_file'] = 'Ta bort fil';
 $_lang['file_delete_folder'] = 'Ta bort katalog';
+$_lang['file_download'] = 'Ladda ner fil';
 $_lang['file_download_file'] = 'Ladda ner fil';
 $_lang['file_download_unzip'] = 'Zippa upp fil';
 $_lang['file_edit'] = 'Redigera fil';
-$_lang['file_err_chmod'] = 'Ett okänt fel inträffade när målet skulle chmod:as.';
+$_lang['file_err_chmod'] = 'Ett okänt fel inträffade när målet skulle chmodas.';
 $_lang['file_err_chmod_ns'] = 'Ange ett läge att chmoda till.';
 $_lang['file_err_ext_not_allowed'] = 'Filändelsen `[[+ext]]` är inte tillåten.';
 $_lang['file_err_filter'] = 'Inga filer matchar det angivna filtret.';

@@ -75,12 +75,14 @@ class ElementPluginUpdateManagerController extends modManagerController {
             $data[] = array(
                 $property['name'],
                 $property['desc'],
-                $property['type'],
-                $property['options'],
+                !empty($property['type']) ? $property['type'] : 'textfield',
+                !empty($property['options']) ? $property['options'] : array(),
                 $property['value'],
-                $property['lexicon'],
+                !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
                 $property['desc_trans'],
+                !empty($property['area']) ? $property['area'] : '',
+                !empty($property['area_trans']) ? $property['area_trans'] : '',
             );
         }
         $this->pluginArray = $this->plugin->toArray();
@@ -125,7 +127,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $this->onPluginFormPrerender = $this->modx->invokeEvent('OnPluginFormPrerender',array(
             'id' => $this->pluginArray['id'],
             'plugin' => &$this->plugin,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
     }
@@ -138,7 +140,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender',array(
             'id' => $this->pluginArray['id'],
             'plugin' => &$this->plugin,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onPluginFormRender)) $this->onPluginFormRender = implode('',$this->onPluginFormRender);
         $this->onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onPluginFormRender);
@@ -168,5 +170,13 @@ class ElementPluginUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('plugin','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Plugins';
     }
 }

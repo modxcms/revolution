@@ -68,11 +68,17 @@ class modDashboardWidget extends xPDOSimpleObject {
                 if (file_exists($content)) {
                     $modx =& $this->xpdo;
                     $scriptProperties = $this->toArray();
+                    ob_start();
                     $className = include_once $content;
+                    $buffer = ob_get_contents();
+                    ob_end_clean();
                     if (class_exists($className)) { /* is a class-based widget */
                         /** @var modDashboardWidgetInterface $widget */
                         $widget = new $className($this->xpdo,$this,$controller);
                     } else { /* just a standard file with a return */
+                        if (($className === 1 || $className === true) && !empty($buffer)) {
+                            $className = $buffer;
+                        }
                         $widget = new modDashboardFileWidget($this->xpdo,$this,$controller);
                         $widget->setContent($className);
                     }
@@ -269,14 +275,18 @@ abstract class modDashboardWidgetInterface {
      */
     public function getFileChunk($tpl,array $placeholders = array()) {
         $output = '';
-        if (!file_exists($tpl)) {
-            $tpl = $this->modx->getOption('manager_path').'templates/'.$this->modx->getOption('manager_theme',null,'default').'/'.$tpl;
+        $file = $tpl;
+        if (!file_exists($file)) {
+            $file = $this->modx->getOption('manager_path').'templates/'.$this->modx->getOption('manager_theme',null,'default').'/'.$tpl;
         }
-        if (file_exists($tpl)) {
+        if (!file_exists($file)) {
+            $file = $this->modx->getOption('manager_path').'templates/default/'.$tpl;
+        }
+        if (file_exists($file)) {
             /** @var modChunk $chunk */
             $chunk = $this->modx->newObject('modChunk');
             $chunk->setCacheable(false);
-            $tplContent = file_get_contents($tpl);
+            $tplContent = file_get_contents($file);
             $chunk->setContent($tplContent);
             $output = $chunk->process($placeholders);
         }

@@ -33,7 +33,10 @@ class modManagerRequest extends modRequest {
      * @var mixed The default action to load from.
      * @access public
      */
-    public $defaultAction = 0;
+    public $defaultAction = 'welcome';
+
+    public $namespace = 'core';
+    public $namespaceVar = 'namespace';
 
     /**
      * Instantiates a modManagerRequest object.
@@ -96,11 +99,6 @@ class modManagerRequest extends modRequest {
 
         /* load default core cache file of lexicon strings */
         $this->modx->lexicon->load('core:default');
-
-        if ($this->modx->actionMap === null || !is_array($this->modx->actionMap)) {
-            $this->loadActionMap();
-        }
-
         return true;
     }
 
@@ -117,7 +115,12 @@ class modManagerRequest extends modRequest {
         $this->modx->invokeEvent('OnHandleRequest');
 
         /* save page to manager object. allow custom actionVar choice for extending classes. */
-        $this->action = isset($_REQUEST[$this->actionVar]) ? $_REQUEST[$this->actionVar] : $this->defaultAction;
+        $this->action = !empty($_REQUEST[$this->actionVar]) ? trim($_REQUEST[$this->actionVar]) : $this->defaultAction;
+        $this->action = preg_replace("/[^A-Za-z0-9_\-\/]/",'',$this->action);
+        $this->action = trim(trim(str_replace('//','',$this->action),'/'));
+        $this->namespace = !empty($_REQUEST[$this->namespaceVar]) ? trim($_REQUEST[$this->namespaceVar]) : 'core';
+        $this->namespace = preg_replace("/[^A-Za-z0-9_\-\/]/",'',$this->namespace);
+        $this->namespace = trim(trim(str_replace('//','',$this->namespace),'/'));
 
         /* invoke OnManagerPageInit event */
         $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));

@@ -17,10 +17,14 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  */
 class modChunkUpdateProcessor extends modElementUpdateProcessor {
     public $classKey = 'modChunk';
-    public $languageTopics = array('chunk','category');
+    public $languageTopics = array('chunk','category','element');
     public $permission = 'save_chunk';
     public $objectType = 'chunk';
-    public $beforeRemoveEvent = 'OnBeforeChunkFormSave';
-    public $afterRemoveEvent = 'OnChunkFormSave';
+    public $beforeSaveEvent = 'OnBeforeChunkFormSave';
+    public $afterSaveEvent = 'OnChunkFormSave';
+
+    public function cleanup() {
+        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')), array('previous_category' => $this->previousCategory)));
+    }
 }
 return 'modChunkUpdateProcessor';

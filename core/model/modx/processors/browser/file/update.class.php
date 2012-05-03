@@ -26,6 +26,9 @@ class modBrowserFileUpdateProcessor extends modProcessor {
         if (!($this->source instanceof modMediaSource)) {
             return $loaded;
         }
+        if (!$this->source->checkPolicy('save')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $path = $this->source->updateObject($filePath,$this->getProperty('content'));
         if (empty($path)) {

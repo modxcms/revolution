@@ -7,10 +7,15 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2011-11-19
  */
+// $_lang['directory'] = 'Directory';
+$_lang['directory'] = 'Složka';
 // $_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? This could potentially break your website.';
 $_lang['file_confirm_remove'] = 'Opravdu chcete odstranit tento soubor? Může to zapříčinit nefunkčnost celého portálu.';
+
+// $_lang['file_create'] = 'Create File';
+$_lang['file_create'] = 'Vytvořit soubor';
 
 // $_lang['file_deleted'] = 'Success!';
 $_lang['file_deleted'] = 'Odstraněno!';
@@ -20,6 +25,9 @@ $_lang['file_delete_file'] = 'Odstranit soubor';
 
 // $_lang['file_delete_folder'] = 'Delete Folder';
 $_lang['file_delete_folder'] = 'Odstranit složku';
+
+// $_lang['file_download'] = 'Download File';
+$_lang['file_download'] = 'Stáhnout soubor';
 
 // $_lang['file_download_file'] = 'Download File';
 $_lang['file_download_file'] = 'Stáhnout soubor';
@@ -133,7 +141,7 @@ $_lang['file_folder_err_ns'] = 'Určete platnou složku.';
 $_lang['file_folder_err_ns_name'] = 'Určete platný název této složky.';
 
 // $_lang['file_folder_err_parent_invalid'] = 'Specified parent directory is not a directory.';
-$_lang['file_folder_err_parent_invalid'] = 'Vybraný rodič není složkou.';
+$_lang['file_folder_err_parent_invalid'] = 'Vybraná nadřazená složka není složkou.';
 
 // $_lang['file_folder_err_perms'] = 'The webserver does not have the necessary permissions to update the directory.';
 $_lang['file_folder_err_perms'] = 'Systém MODX nemá potřebná práva upravovat složku.';

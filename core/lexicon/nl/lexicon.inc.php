@@ -32,5 +32,6 @@ $_lang['lexicon_management'] = 'Lexicon Management';
 $_lang['lexicon_management_desc'] = 'Hier kun je elk Lexicon item overschrijven in de namespaces en de respectievelijke onderwerpen. Enkel dubbelklik op een willekeurige waarde om deze te overschrijven. Om een nieuwe Lexicon items of onderwerpen toe te voegen, maak je simpel een onderwerp-bestand in de respectievelijke namespace map.';
 $_lang['lexicon_rlfb_msg'] = 'Met succes [[+num]] nieuwe strings aangemaakt.';
 $_lang['reload_from_base'] = 'Draai alle core items terug';
+$_lang['reload_success'] = 'Met success [[+total]] strings teruggedraaid.';
 $_lang['search_by_key'] = 'Sleutel zoeken:';
 $_lang['topic'] = 'Onderwerp';

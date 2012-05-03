@@ -169,7 +169,7 @@ class modPackageDownloadProcessor extends modProcessor {
         $metadata = array();
         $this->modx->rest->xml2array($metadataXml,$metadata);
         $this->package->set('metadata',$metadata);
-        $this->package->set('package_name',$metadataXml->name);
+        $this->package->set('package_name', (string) $metadataXml->name);
 
         return true;
     }

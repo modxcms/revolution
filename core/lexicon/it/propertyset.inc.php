@@ -6,6 +6,8 @@
  * @package modx 
  * @subpackage lexicon
  */
+$_lang['area'] = 'Area';
+$_lang['areas'] = 'Aree';
 $_lang['class_name'] = 'Nome Classe';
 $_lang['default'] = 'Default';
 $_lang['duplicate_of'] = 'Duplicato di [[+name]]';
@@ -24,8 +26,14 @@ $_lang['properties_import_err_upload'] = 'Specifica un file di Proprietà valido
 $_lang['properties_import_msg'] = 'Seleziona un file di Proprietà valido.';
 $_lang['properties_remove'] = 'Rimuovi Proprietà';
 $_lang['properties_remove_confirm'] = 'Sei sicuro di voler rimuovere queste Proprietà?';
+$_lang['property'] = 'Proprietà';
+$_lang['property_area_desc'] = 'L\'area, o il gruppo, a cui appartiene questa proprietà.';
 $_lang['property_create'] = 'Crea Proprietà';
+$_lang['property_description_desc'] = 'Una breve descrizione della proprietà. Questa può essere una chiave lessicale del lessico delle proprietà.';
+$_lang['property_lexicon_desc'] = 'Opzionale. Il lessico con cui questi campi della proprietà possono essere tradotti.';
+$_lang['property_name_desc'] = 'Il nome della proprietà, che sarà accessibile via: [[+propertyName]]';
 $_lang['property_update'] = 'Aggiorna Proprietà';
+$_lang['property_xtype_desc'] = 'Il Tipo di input della proprietà.';
 $_lang['property_option_create'] = 'Crea Opzione Proprietà';
 $_lang['property_option_remove'] = 'Rimuovi Opzione Proprietà';
 $_lang['property_option_remove_confirm'] = 'Sei sicuro di voler rimuovere questa Opzione della Proprietà?';

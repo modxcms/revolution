@@ -18,15 +18,16 @@ require_once (dirname(dirname(__FILE__)).'/create.class.php');
  */
 class modTemplateCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modTemplate';
-    public $languageTopics = array('template','category');
+    public $languageTopics = array('template','category','element');
     public $permission = 'new_template';
     public $elementType = 'template';
+    public $objectType = 'template';
     public $beforeSaveEvent = 'OnBeforeTempFormSave';
     public $afterSaveEvent = 'OnTempFormSave';
 
-    public function postSaveElement() {
+    public function afterSave() {
         $this->saveTemplateVariables();
-        return true;
+        return parent::afterSave();
     }
 
     /**
@@ -44,19 +45,19 @@ class modTemplateCreateProcessor extends modElementCreateProcessor {
                         /** @var modTemplateVarTemplate $templateVarTemplate */
                         $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(
                             'tmplvarid' => $tv['id'],
-                            'templateid' => $this->element->get('id'),
+                            'templateid' => $this->object->get('id'),
                         ));
                         if (empty($templateVarTemplate)) {
                             $templateVarTemplate = $this->modx->newObject('modTemplateVarTemplate');
                         }
                         $templateVarTemplate->set('tmplvarid',$tv['id']);
-                        $templateVarTemplate->set('templateid',$this->element->get('id'));
+                        $templateVarTemplate->set('templateid',$this->object->get('id'));
                         $templateVarTemplate->set('rank',$tv['rank']);
                         $templateVarTemplate->save();
                     } else {
                         $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(
                             'tmplvarid' => $tv['id'],
-                            'templateid' => $this->element->get('id'),
+                            'templateid' => $this->object->get('id'),
                         ));
                         if ($templateVarTemplate && $templateVarTemplate instanceof modTemplateVarTemplate) {
                             $templateVarTemplate->remove();

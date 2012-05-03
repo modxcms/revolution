@@ -16,10 +16,10 @@ MODx.page.UpdateWebLink = function(config) {
         ,id: 'modx-page-update-resource'
         ,action: 'update'
         ,actions: {
-            'new': MODx.action['resource/create']
-            ,edit: MODx.action['resource/update']
-            ,preview: MODx.action['resource/preview']
-            ,cancel: MODx.action['welcome']
+            'new': 'resource/create'
+            ,edit: 'resource/update'
+            ,preview: 'resource/preview'
+            ,cancel: 'welcome'
         }
         ,components: [{
             xtype: 'modx-panel-weblink'
@@ -51,7 +51,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    location.href = '?a=resource/update&id='+r.object.id;
                 },scope:this}
             }
         });
@@ -67,7 +67,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    location.href = '?a=resource/update&id='+r.object.id;
                 },scope:this}
             }
         });
@@ -80,12 +80,12 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    location.href = '?a='+MODx.action['welcome'];                    
+                    location.href = '?a=welcome';
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            location.href = '?a='+MODx.action['welcome'];
+            location.href = '?a=welcome';
         }
     }
     
@@ -94,6 +94,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'update'
+                ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: cfg.richtext || MODx.request.activeSave == 1 ? false : true
@@ -108,12 +109,14 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 text: cfg.lockedText || _('locked')
                 ,handler: Ext.emptyFn
                 ,disabled: true
+                ,id: 'modx-abtn-locked'
             });
             btns.push('-');
         }
         if (cfg.canCreate == 1) {
             btns.push({
                 process: 'duplicate'
+                ,id: 'modx-abtn-duplicate'
                 ,text: _('duplicate')
                 ,handler: this.duplicateResource
                 ,scope:this
@@ -123,6 +126,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
                 process: 'delete'
+                ,id: 'modx-abtn-delete'
                 ,text: _('delete')
                 ,handler: this.deleteResource
                 ,scope:this
@@ -131,6 +135,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         }
         btns.push({
             process: 'preview'
+            ,id: 'modx-abtn-preview'
             ,text: _('view')
             ,handler: this.preview
             ,scope: this
@@ -138,6 +143,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         btns.push('-');
         btns.push({
             process: 'cancel'
+            ,id: 'modx-abtn-cancel'
             ,text: _('cancel')
             ,handler: this.cancel
             ,scope: this
@@ -146,6 +152,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
+            ,id: 'modx-abtn-help'
         });
         return btns;
     }

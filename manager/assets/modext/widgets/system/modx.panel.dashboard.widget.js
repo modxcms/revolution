@@ -92,7 +92,7 @@ MODx.panel.DashboardWidget = function(config) {
                     ,fieldLabel: _('widget_type')
                     ,description: _('widget_type_desc')
                     ,anchor: '100%'
-                    ,value: 'html'
+                    ,value: config.record.type || 'html'
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-dashboard-widget-type'
@@ -109,7 +109,7 @@ MODx.panel.DashboardWidget = function(config) {
                     ,fieldLabel: _('widget_size')
                     ,description: _('widget_size_desc')
                     ,anchor: '100%'
-                    ,value: 'half'
+                    ,value: config.record.size || 'half'
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-dashboard-widget-size'
@@ -123,7 +123,7 @@ MODx.panel.DashboardWidget = function(config) {
                     ,fieldLabel: _('widget_namespace')
                     ,description: _('widget_namespace_desc')
                     ,anchor: '100%'
-                    ,value: 'core'
+                    ,value: config.record.namespace || 'core'
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-dashboard-widget-namespace'
@@ -137,7 +137,7 @@ MODx.panel.DashboardWidget = function(config) {
                     ,fieldLabel: _('lexicon')
                     ,description: _('widget_lexicon_desc')
                     ,anchor: '100%'
-                    ,value: 'core:dashboards'
+                    ,value: config.record.lexicon || 'core:dashboards'
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-dashboard-widget-lexicon'
@@ -259,7 +259,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     }
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            location.href = '?a='+MODx.action['system/dashboards/widget/update']+'&id='+o.result.object.id;
+            location.href = '?a=system/dashboards/widget/update&id='+o.result.object.id;
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');

@@ -43,6 +43,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
         $c->sortby('modActionField.rank','ASC');
         $fields = $this->xpdo->getCollection('modActionField',$c);
 
+        /** @var modActionField $field */
         foreach ($fields as $field) {
             $c = $this->xpdo->newQuery('modActionDom');
             $c->where(array(
@@ -55,6 +56,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
             $fieldArray['visible'] = true;
             $fieldArray['label'] = '';
             $fieldArray['default_value'] = '';
+            /** @var modActionDom $rule */
             foreach ($rules as $rule) {
                 switch ($rule->get('rule')) {
                     case 'fieldVisible':
@@ -101,6 +103,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
             $c->sortby('modTemplateVar.name','ASC');
             $tvs = $this->xpdo->getCollection('modTemplateVar',$c);
         }
+        /** @var modTemplateVar $tv */
         foreach ($tvs as $tv) {
             $c = $this->xpdo->newQuery('modActionDom');
             $c->where(array(
@@ -118,6 +121,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
             $tvArray['default_value'] = $tv->get('default_text');
             $tvArray['tab'] = 'modx-panel-resource-tv';
             $tvArray['rank'] = '';
+            /** @var modActionDom $rule */
             foreach ($rules as $rule) {
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
@@ -153,6 +157,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
         $c->sortby('rank','ASC');
         $tabs = $this->xpdo->getCollection('modActionField',$c);
 
+        /** @var modActionField $tab */
         foreach ($tabs as $tab) {
             $c = $this->xpdo->newQuery('modActionDom');
             $c->where(array(

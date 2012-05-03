@@ -132,8 +132,9 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             ,record: this.menu.record
             ,listeners: {
                 'success': {fn:function(r) {
-                    var def = this.isDefaultPropSet();
                     var s = this.getStore();
+                    var ri = this.menu.recordIndex;
+                    var d = this.defaultProperties[ri][4];
                     var rec = s.getAt(this.menu.recordIndex);
                     rec.set('name',r.name);
                     rec.set('desc',r.desc);
@@ -142,7 +143,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
                     rec.set('options',r.options);
                     rec.set('value',r.value);
                     rec.set('lexicon',r.lexicon);
-                    rec.set('overridden',r.overridden == 2 ? 2 : (!def ? 1 : 0));
+                    rec.set('overridden',r.overridden == 2 ? 2 : (d.toString() == r.value.toString() ? 0 : 1));
                     this.getView().refresh();
                     this.onDirty();
                 },scope:this}
@@ -188,11 +189,6 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
                 }
             }
         },this);
-    }
-
-    ,isDefaultPropSet: function() {
-        var ps = Ext.getCmp('modx-combo-property-set').getValue();
-        return (ps == 0 || ps == _('default'));
     }
 
     ,_showMenu: function(g,ri,e) {

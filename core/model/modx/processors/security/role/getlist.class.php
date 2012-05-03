@@ -39,14 +39,16 @@ class modUserGroupRoleGetListProcessor extends modObjectGetListProcessor {
 
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
-        $menu = array();
-        if ($this->canRemove) {
-            $menu[] = array(
-                'text' => $this->modx->lexicon('role_remove'),
-                'handler' => 'this.remove.createDelegate(this,["role_remove_confirm"])',
-            );
+        $isCoreRole = $object->get('id') == 1 || $object->get('id') == 2 || $object->get('name') == 'Super User' || $object->get('name') == 'Member';
+
+        $perm = array();
+        if (!$isCoreRole) {
+            $perm[] = 'edit';
+            if ($this->canRemove) {
+                $perm[] = 'remove';
+            }
         }
-        $objectArray['menu'] = $menu;
+        $objectArray['perm'] = implode(' ',$perm);
 
         return $objectArray;
     }

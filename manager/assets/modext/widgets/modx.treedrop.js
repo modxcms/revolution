@@ -22,6 +22,9 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                     var el = ddTarget.getEl();
                     if (el) { el.frame(); }
                 }
+                if (el.focus) {
+                    el.focus();
+                }
             }
             ,notifyDrop: function(ddSource, e, data) {
                 if (!data.node || !data.node.attributes || !data.node.attributes.type) return false;
@@ -34,7 +37,20 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                     case 'chunk': win = true; break;
                     case 'tv': win = true; break;
                     case 'file': v = data.node.attributes.url; break;
-                    default: return false; break;
+                    default:
+                        var dh = Ext.getCmp(data.node.attributes.type+'-drop-handler');
+                        if (dh) {
+                            return dh.handle(data,{
+                                ddTargetEl: ddTargetEl
+                                ,cfg: cfg
+                                ,iframe: cfg.iframe
+                                ,iframeEl: cfg.iframeEl
+                                ,onInsert: cfg.onInsert
+                                ,panel: cfg.panel
+                            });
+                        }
+                        return false;
+                        break;
                 }
                 if (win) {
                     MODx.loadInsertElement({
@@ -116,10 +132,13 @@ MODx.insertAtCursor = function(myField, myValue,h) {
     } else if (myField.selectionStart || myField.selectionStart == '0') {
         var startPos = myField.selectionStart; 
         var endPos = myField.selectionEnd; 
-        myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length); 
+        myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length);   
+        myField.selectionStart = startPos + myValue.length;
+        myField.selectionEnd = myField.selectionStart;
     } else { 
         myField.value += myValue; 
     }
+    myField.focus();
 };
 MODx.insertForRTE = function(v,cfg) {
     var fn = cfg.onInsert || false;
@@ -138,6 +157,14 @@ MODx.insertForRTE = function(v,cfg) {
         }
     }
 };
+
+MODx.insertIntoContent = function(v,opt) {
+    if (opt.iframe) {
+        MODx.insertForRTE(v,opt.cfg);
+    } else {
+        MODx.insertAtCursor(opt.ddTargetEl,v);
+    }
+}
 
 MODx.window.InsertElement = function(config) {
     config = config || {};

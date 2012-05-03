@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2011 by MODX, LLC.
+ * Copyright 2010-2012 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -75,7 +75,10 @@ abstract class xPDOQuery extends xPDOCriteria {
         ' INTERVAL(',
         ' LEAST(',
         'MATCH(',
-        'MATCH ('
+        'MATCH (',
+        'MAX(',
+        'MIN(',
+        'AVG('
     );
     protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
     protected $_class= null;
@@ -278,6 +281,34 @@ abstract class xPDOQuery extends xPDOCriteria {
                     $local= $fkMeta['local'];
                     $foreign= $fkMeta['foreign'];
                     $conditions= $this->xpdo->escape($parentAlias) . '.' . $this->xpdo->escape($local) . ' =  ' . $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($foreign);
+                    if (isset($fkMeta['criteria']['local'])) {
+                        $localCriteria = array();
+                        if (is_array($fkMeta['criteria']['local'])) {
+                            foreach ($fkMeta['criteria']['local'] as $critKey => $critVal) {
+                                if (is_numeric($critKey)) {
+                                    $localCriteria[] = $critVal;
+                                } else {
+                                    $localCriteria["{$this->_class}.{$critKey}"] = $critVal;
+                                }
+                            }
+                        }
+                        if (!empty($localCriteria)) {
+                            $conditions = array($localCriteria, $conditions);
+                        }
+                        $foreignCriteria = array();
+                        if (is_array($fkMeta['criteria']['foreign'])) {
+                            foreach ($fkMeta['criteria']['foreign'] as $critKey => $critVal) {
+                                if (is_numeric($critKey)) {
+                                    $foreignCriteria[] = $critVal;
+                                } else {
+                                    $foreignCriteria["{$parentAlias}.{$critKey}"] = $critVal;
+                                }
+                            }
+                        }
+                        if (!empty($foreignCriteria)) {
+                            $conditions = array($foreignCriteria, $conditions);
+                        }
+                    }
                 }
             }
             $this->condition($target[$targetIdx]['conditions'], $conditions, $conjunction, $binding, $condGroup);
@@ -380,7 +411,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     }
 
     public function having($conditions) {
-        //TODO: implement HAVING clause support
+        $this->query['having'][] = $this->parseConditions((array) $conditions);
         return $this;
     }
 
@@ -443,6 +474,34 @@ abstract class xPDOQuery extends xPDOCriteria {
             $foreign= $fkMeta['foreign'];
             $this->select($this->xpdo->getSelectColumns($class, $classAlias, $classAlias . '_'));
             $expression= $this->xpdo->escape($parentAlias) . '.' . $this->xpdo->escape($local) . ' = ' .  $this->xpdo->escape($classAlias) . '.' . $this->xpdo->escape($foreign);
+            if (isset($fkMeta['criteria']['local'])) {
+                $localCriteria = array();
+                if (is_array($fkMeta['criteria']['local'])) {
+                    foreach ($fkMeta['criteria']['local'] as $critKey => $critVal) {
+                        if (is_numeric($critKey)) {
+                            $localCriteria[] = $critVal;
+                        } else {
+                            $localCriteria["{$classAlias}.{$critKey}"] = $critVal;
+                        }
+                    }
+                }
+                if (!empty($localCriteria)) {
+                    $expression = array($localCriteria, $expression);
+                }
+                $foreignCriteria = array();
+                if (is_array($fkMeta['criteria']['foreign'])) {
+                    foreach ($fkMeta['criteria']['foreign'] as $critKey => $critVal) {
+                        if (is_numeric($critKey)) {
+                            $foreignCriteria[] = $critVal;
+                        } else {
+                            $foreignCriteria["{$parentAlias}.{$critKey}"] = $critVal;
+                        }
+                    }
+                }
+                if (!empty($foreignCriteria)) {
+                    $expression = array($foreignCriteria, $expression);
+                }
+            }
             $this->leftJoin($class, $classAlias, $expression);
             if (!empty ($relations)) {
                 foreach ($relations as $relationAlias => $subRelations) {
@@ -565,7 +624,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         $result= array ();
         $pk= $this->xpdo->getPK($this->_class);
         $pktype= $this->xpdo->getPKType($this->_class);
-        $fieldMeta= $this->xpdo->getFieldMeta($this->_class);
+        $fieldMeta= $this->xpdo->getFieldMeta($this->_class, true);
         $fieldAliases= $this->xpdo->getFieldAliases($this->_class);
         $command= strtoupper($this->query['command']);
         $alias= $command == 'SELECT' ? $this->_class : $this->xpdo->getTableName($this->_class, false);
@@ -644,27 +703,29 @@ abstract class xPDOQuery extends xPDOCriteria {
                         if (in_array(strtoupper($operator), array('IN', 'NOT IN')) && is_array($val)) {
                             $vals = array();
                             foreach ($val as $v) {
-                                switch ($type) {
-                                    case PDO::PARAM_INT:
-                                        $vals[] = (integer) $v;
-                                        break;
-                                    case PDO::PARAM_STR:
-                                        $vals[] = $this->xpdo->quote($v);
-                                        break;
-                                    default:
-                                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($v, true));
-                                        break;
+                                if ($v === null) {
+                                    $vals[] = null;
+                                } else {
+                                    switch ($type) {
+                                        case PDO::PARAM_INT:
+                                            $vals[] = (integer) $v;
+                                            break;
+                                        case PDO::PARAM_STR:
+                                            $vals[] = $this->xpdo->quote($v);
+                                            break;
+                                        default:
+                                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($v, true));
+                                            break;
+                                    }
                                 }
                             }
-                            if (!empty($vals)) {
-                                $val = "(" . implode(',', $vals) . ")";
-                                $sql = "{$this->xpdo->escape($alias)}.{$this->xpdo->escape($key)} {$operator} {$val}";
-                                $result[]= new xPDOQueryCondition(array('sql' => $sql, 'binding' => null, 'conjunction' => $conj));
-                                continue;
-                            } else {
-                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($val, true));
-                                continue;
+                            if (empty($vals)) {
+                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Encountered empty {$operator} condition with key {$key}");
                             }
+                            $val = "(" . implode(',', $vals) . ")";
+                            $sql = "{$this->xpdo->escape($alias)}.{$this->xpdo->escape($key)} {$operator} {$val}";
+                            $result[]= new xPDOQueryCondition(array('sql' => $sql, 'binding' => null, 'conjunction' => $conj));
+                            continue;
                         }
                         $field= array ();
                         $field['sql']= $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($key) . ' ' . $operator . ' ?';

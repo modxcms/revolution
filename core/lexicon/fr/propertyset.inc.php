@@ -6,6 +6,8 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['area'] = 'Groupe';
+$_lang['areas'] = 'Groupes';
 $_lang['class_name'] = 'Nom de classe';
 $_lang['default'] = 'Défaut';
 $_lang['duplicate_of'] = 'Duplicata de [[+name]]';
@@ -24,6 +26,8 @@ $_lang['properties_import_err_upload'] = 'Veuillez spécifier un fichier de prop
 $_lang['properties_import_msg'] = 'Veuillez sélectionner un fichier de propriétés valide.';
 $_lang['properties_remove'] = 'Supprimer les propriétés';
 $_lang['properties_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ces propriétés?';
+$_lang['property'] = 'Propriété';
+$_lang['property_area_desc'] = 'Le groupe auquel appartient cette propriété.';
 $_lang['property_create'] = 'Créer une propriété';
 $_lang['property_description_desc'] = 'Courte description de la propriété. Peut être une clé du lexique des propriétés.';
 $_lang['property_lexicon_desc'] = 'Optionnel. Le lexique à utiliser pour traduire les champs de cette propriété.';

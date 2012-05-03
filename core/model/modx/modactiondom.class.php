@@ -28,7 +28,6 @@ class modActionDom extends modAccessibleSimpleObject {
      * @return string The generated code that applies the rule.
      */
     public function apply($objId = '') {
-        if (empty($objId)) $objId = $_REQUEST['id'];
         $rule = '';
         $encoding = $this->xpdo->getOption('modx_charset',null,'UTF-8');
 
@@ -60,7 +59,7 @@ class modActionDom extends modAccessibleSimpleObject {
                     $rule = '';
                     foreach ($tabs as $tab) {
                         $tab = trim($tab);
-                        $rule .= 'MODx.hideTab("'.$this->get('container').'","'.$tab.'");';
+                        $rule .= 'MODx.hideRegion("'.$this->get('container').'","'.$tab.'");';
                     }
                 }
                 break;

@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2011 by MODX, LLC.
+ * Copyright 2006-2012 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -198,16 +198,20 @@ class modPackageBuilder {
      * @param string $path The path for the namespace to be created.
      * @return boolean True if successful.
      */
-    public function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '') {
+    public function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '',$assetsPath = '') {
         if (!($ns instanceof modNamespace)) {
             $namespace = $this->modx->getObject('modNamespace', $ns);
             if (!$namespace) {
                 $namespace = $this->modx->newObject('modNamespace');
                 $namespace->set('name', $ns);
                 $namespace->set('path',$path);
+                $namespace->set('assets_path',$assetsPath);
             }
             if (!empty($path)) {
                 $namespace->set('path',$path);
+            }
+            if (!empty($assetsPath)) {
+                $namespace->set('assets_path',$assetsPath);
             }
         } else {
             $namespace = $ns;

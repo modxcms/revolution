@@ -15,9 +15,9 @@ MODx.page.CreateWebLink = function(config) {
         ,which_editor: 'none'
         ,action: 'create'
         ,actions: {
-            'new': MODx.action['resource/create']
-            ,edit: MODx.action['resource/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'resource/create'
+            ,edit: 'resource/update'
+            ,cancel: 'welcome'
         }
         ,buttons: this.getButtons(config)
         ,loadStay: true
@@ -39,7 +39,7 @@ Ext.extend(MODx.page.CreateWebLink,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'create'
-                ,id: 'modx-button-save-resource'
+                ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: true
@@ -53,12 +53,14 @@ Ext.extend(MODx.page.CreateWebLink,MODx.Component,{
         btns.push({
             process: 'cancel'
             ,text: _('cancel')
-            ,params: { a: MODx.action['welcome'] }
+            ,id: 'modx-abtn-cancel'
+            ,params: { a: 'welcome' }
         });
         btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
+            ,id: 'modx-abtn-help'
         });
         return btns;
     }

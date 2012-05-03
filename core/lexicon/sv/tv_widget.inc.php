@@ -39,7 +39,7 @@ $_lang['disabled_dates_desc'] = 'En kommaseparerad lista med "datum" som ska ina
 - Inaktivera dessa exakta datum: 2003-03-08,2003-09-16<br />
 - Inaktivera dessa datum varje år: 03-08,09-16<br />
 - Matcha bara början (användbart om du använder korta årtal): ^03-08<br />
-- Inaktivera varja dag i mars 2006: 03-..-2006<br />
+- Inaktivera varje dag i mars 2006: 03-..-2006<br />
 - Inaktivera varje dag i mars alla år: ^03<br />
 Notera att formatet på de datum som läggs till i listan exakt måste matcha hanterarens datumformat. För att stödja reguljära uttryck måste du, om du använder ett datumformat som innehåller punkter (.), undanta punkterna med ett omvänt snedstreck när du begränsar datum.';
 $_lang['disabled_days'] = 'Inaktiverade dagar';
@@ -61,18 +61,6 @@ $_lang['image_align'] = 'Justera';
 $_lang['image'] = 'Bild';
 $_lang['image_align_list'] = 'ingen,baslinje,toppen,mitten,botten,toppen av texten,absoluta mitten,absoluta botten,vänster,höger';
 $_lang['image_alt'] = 'Alternativtext';
-$_lang['image_allowedfiletypes'] = 'Tillåtna filändelser';
-$_lang['image_allowedfiletypes_desc'] = 'Om du anger något här kommer de filer som visas att begränsas till de angivna filändelserna. Ange en kommaseparerad lista utan punkter.';
-$_lang['image_basepath'] = 'Rotsökväg';
-$_lang['image_basepath_desc'] = 'Den sökväg som bildmallvariabeln ska pekas mot. Om inget anges här kommer inställningen filemanager_path eller MODX rotsökväg att användas. Du kan även använda följande platshållare: [[++base_path]], [[++core_path]] och [[++assets_path]] i detta värde.';
-$_lang['image_basepath_relative'] = 'Relativ rotsökväg';
-$_lang['image_basepath_relative_desc'] = 'Om inställningen för rotsökväg ovan inte är relativ till MODX installationssökväg sätter du denna till "Ja".';
-$_lang['image_baseurl'] = 'Rot-URL';
-$_lang['image_baseurl_desc'] = 'Den fil-URL som bildmallvariablen ska pekas mot. Om inget anges här kommer inställningen filemanager_url eller MODX bas-URL att användas. Du kan även använda platshållarna [[++base_url]], [[++core_url]] och [[++assets_url]] i detta värde.';
-$_lang['image_baseurl_prepend_check_slash'] = 'Lägg till URL om inget inledande /';
-$_lang['image_baseurl_prepend_check_slash_desc'] = 'Om denna sätts till "Ja" kommer MODX bara att lägga till baseURL i början av sökvägen om inget snedstreck (/) finns i början av URL:en när en mallvariabel ska visas. Det här är användbart om du vill ange ett värde på en mallvariabel som ligger utanför baseURL.';
-$_lang['image_baseurl_relative'] = 'Relativ rot-URL';
-$_lang['image_baseurl_relative_desc'] = 'Om inställningen för rot-URL ovan inte är relativ till MODX installations-URL sätter du denna till "Ja".';
 $_lang['image_border_size'] = 'Ramstorlek';
 $_lang['image_hspace'] = 'Horisontalrymd';
 $_lang['image_vspace'] = 'Vertikalrymd';

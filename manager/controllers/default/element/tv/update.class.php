@@ -76,12 +76,14 @@ class ElementTVUpdateManagerController extends modManagerController {
             $data[] = array(
                 $property['name'],
                 $property['desc'],
-                $property['type'],
-                $property['options'],
+                !empty($property['type']) ? $property['type'] : 'textfield',
+                !empty($property['options']) ? $property['options'] : array(),
                 $property['value'],
-                $property['lexicon'],
+                !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
                 $property['desc_trans'],
+                !empty($property['area']) ? $property['area'] : '',
+                !empty($property['area_trans']) ? $property['area_trans'] : '',
             );
         }
         $this->tvArray = $this->tv->toArray();
@@ -156,7 +158,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         $this->onTVFormPrerender = $this->modx->invokeEvent('OnTVFormPrerender',array(
             'id' => $this->tvArray['id'],
             'tv' => &$this->tv,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
     }
@@ -169,7 +171,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender',array(
             'id' => $this->tvArray['id'],
             'tv' => &$this->tv,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormRender)) $this->onTVFormRender = implode('',$this->onTVFormRender);
         $this->onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTVFormRender);
@@ -199,5 +201,13 @@ class ElementTVUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('tv','category','tv_widget','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Template+Variables';
     }
 }

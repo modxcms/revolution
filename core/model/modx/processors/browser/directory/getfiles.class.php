@@ -42,6 +42,9 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
+        if (!$this->source->checkPolicy('list')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
 
         $list = $this->source->getObjectsInContainer($this->getProperty('dir'));
         return $this->outputArray($list);

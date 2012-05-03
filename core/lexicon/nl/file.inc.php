@@ -8,10 +8,13 @@
  * 
  * @author Bert Oost <bertoost85@gmail.com>
  */
+$_lang['directory'] = 'Map';
 $_lang['file_confirm_remove'] = 'Weet je zeker dat je dit bestand wilt verwijderen? Dit kan uw website potentieel breken!';
+$_lang['file_create'] = 'Maak Bestand';
 $_lang['file_deleted'] = 'Succes!';
 $_lang['file_delete_file'] = 'Verwijder Bestand';
 $_lang['file_delete_folder'] = 'Verwijder Map';
+$_lang['file_download'] = 'Download Bestand';
 $_lang['file_download_file'] = 'Download Bestand';
 $_lang['file_download_unzip'] = 'Bestand Uitpakken';
 $_lang['file_edit'] = 'Bestand Bewerken';

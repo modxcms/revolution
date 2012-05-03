@@ -24,7 +24,7 @@ MODx.Window = function(config) {
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
-            ,handler: function() { this.hide(); }
+            ,handler: function() { config.closeAction !== 'close' ? this.hide() : this.close(); }
         },{
             text: config.saveBtnText || _('save')
             ,scope: this
@@ -115,7 +115,7 @@ Ext.extend(MODx.Window,Ext.Window,{
                         Ext.callback(this.config.success,this.config.scope || this,[frm,a]);
                     }
                     this.fireEvent('success',{f:frm,a:a});
-                    if (close) { this.hide(); }
+                    if (close) { this.config.closeAction !== 'close' ? this.hide() : this.close(); }
                 }
             });
         }

@@ -17,6 +17,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
+strong { font-weight: bold; }
+em { font-style: italic; }
 
 .ext-el-mask {
     background-color: #C0C0C0;
@@ -133,6 +135,11 @@ ul.x-tab-strip-top li {
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#8BAF4C,endColorstr=#658F1A,GradientType=0);
     background:linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
 }
+.x-tab-strip-closable{ padding-right: 15px !important; }
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close{
+	right: 8px;
+	top: 11px;
+}
 ul.x-tab-strip-top li:first-child { margin-left:0; }
 ul.x-tab-strip-top li.x-tab-strip-over {
 	background:#496F07;
@@ -152,6 +159,7 @@ ul.x-tab-strip-top li.x-tab-strip-active {
     border-bottom: 0 none;
     padding:0 0 1px;
 	text-shadow: none;
+	filter: none;
 }
 ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text {
 	color:#FFF;
@@ -672,6 +680,7 @@ ul.x-tab-strip-bottom {
     display:block;
     padding-right:5px;
 }
+.x-btn-text-icon .x-btn-icon-small-left .x-btn-text{ padding-left: 26px !important; }
 
 /* //end button style */
 
@@ -1134,13 +1143,13 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-row-collapsed .x-grid3-row-expander {
     background-position:5px 10px;
     height:30px;
-    margin-top:4px;
+    margin-top:6px;
 }
 
 .x-grid3-row-expanded .x-grid3-row-expander  {
     background-position:-31px 10px;
     height:30px;
-    margin-top:4px;
+    margin-top:6px;
 }
 
 .x-grid3-row-expander {
@@ -2477,7 +2486,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#d0d0d0,GradientType=0);
 	background:linear-gradient(center bottom,#d0d0d0 0%,#eeeeee 100%);
 	border-bottom:1px solid #ababab;
-	border-top:1px solid #ffffff;
 	color:#5e5e5e;
 	padding:8px;
 	text-align:center;

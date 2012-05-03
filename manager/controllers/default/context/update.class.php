@@ -141,4 +141,12 @@ class ContextUpdateManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('context','setting','access','policy','user');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Contexts';
+    }
 }

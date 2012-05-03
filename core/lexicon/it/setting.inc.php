@@ -9,6 +9,7 @@
 $_lang['area'] = 'Area';
 $_lang['area_authentication'] = 'Autenticazione e Sicurezza';
 $_lang['area_caching'] = 'Caching';
+$_lang['area_core'] = 'Codice Core';
 $_lang['area_editor'] = 'Rich-Text Editor';
 $_lang['area_file'] = 'File System';
 $_lang['area_filter'] = 'Filtra per area...';
@@ -17,6 +18,7 @@ $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lessico e Lingue';
 $_lang['area_mail'] = 'Mail';
 $_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Sessioni e Cookie';
 $_lang['area_lexicon_string'] = 'Denominazione Area';
@@ -26,7 +28,11 @@ $_lang['area_system'] = 'Sistema e Server';
 $_lang['areas'] = 'Aree';
 $_lang['charset'] = 'Codifica (Charset)';
 $_lang['country'] = 'Stato';
+$_lang['description_desc'] = 'Una breve descrizione della Impostazione. Può essere una chiave del Lessico.';
+$_lang['key_desc'] = 'La chiave per l\'impostazione. Sarà disponibile nei tuoi contenuti tramite il placeholder [[++key]].';
+$_lang['name_desc'] = 'Un nome per l\'impostazione. Questo può essere una Chiave del Lessico.';
 $_lang['namespace'] = 'Blocco (Namespace)';
+$_lang['namespace_desc'] = 'Il Blocco (Namespace) a cui questa impostazione è associata. Il Topic Lexicon di default sarà caricato per questo Blocco quando prende le Impostazioni.';
 $_lang['namespace_filter'] = 'Filtra per Blocco (Namespace)...';
 $_lang['search_by_key'] = 'Cerca per Chiave...';
 $_lang['setting_create'] = 'Crea Nuova Impostazione';
@@ -82,6 +88,9 @@ $_lang['setting_access_policies_version_desc'] = 'La versione del sistema della 
 
 $_lang['setting_allow_forward_across_contexts'] = 'Consenti Reindirizzamento (Forwarding) fra Contesti';
 $_lang['setting_allow_forward_across_contexts_desc'] = 'Se abilitato, Symlinks e le chiamate API modX::sendForward() possono inoltrare richieste alle Risorse in altri Contesti.';
+
+$_lang['setting_allow_manager_login_forgot_password'] = 'Consenti la Password Dimenticata nella schermata di login';
+$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Impostando su "No" viene disabilitata la possibilità "password dimenticata" nella schermata di login del manager.';
 
 $_lang['setting_allow_tags_in_post'] = 'Consenti Tags HTML in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se falso, tutte le azioni di tipo POST dentro il manager elimineranno qualsiasi tags. MODX raccomanda di lasciare questa opzione impostata su VERO.';
@@ -175,6 +184,12 @@ $_lang['setting_compress_css_desc'] = 'Se impostato su "SI", verrà usata una ve
 $_lang['setting_compress_js'] = 'Usa Librerie JavaScript Compresse';
 $_lang['setting_compress_js_desc'] = 'Se impostato su "SI", verrà usata una versione compressa delle proprie librerie JavaScript. Questo riduce in modo significativo il tempo di caricamento ed esecuzione dentro al manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
 
+$_lang['setting_compress_js_groups'] = 'Usa il Raggruppamento (Grouping) durante la Compressione JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Raggruppa i JavaScript del core del manager di MODX usando l\'opzione groupsConfig di minify. Imposta su SI se stai usando suhosin o altri fattori limitanti.';
+
+$_lang['setting_compress_js_max_files'] = 'Soglia Massima per la Compressione di Files JavaScript';
+$_lang['setting_compress_js_max_files_desc'] = 'Il numero massimo di files JavaScript  che MODX proverà a comprimere in una volta quando compress_js è abilitato. Imposta su un numero minore se incontri problemi con Google Minify nel manager.';
+
 $_lang['setting_concat_js'] = 'Usa Librerie Javascript Concatenate';
 $_lang['setting_concat_js_desc'] = 'Se impostato su "SI", verrà usata una versione concatenata delle librerie Javascript nell\'interfaccia del manager.  Questo riduce in modo significativo il tempo di caricamento e di esecuzione dentro al manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
 
@@ -191,8 +206,20 @@ $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in
 $_lang['setting_cultureKey'] = 'Lingua';
 $_lang['setting_cultureKey_desc'] = 'Seleziona la lingua per tutti i Contesti "non-manager", compreso web.';
 
-$_lang['setting_custom_resource_classes'] = 'Classi Personali Risorse';
-$_lang['setting_custom_resource_classes_desc'] = 'Un elenco di classi di Risorse personalizzate, separate da virgola. Specificale con la sintassi lowercase_lexicon_key:className (Es: wiki_resource:WikiResource). Tutte le classi personali devono estendere modResource. Per indicare la posizione del controllore per ogni classe, aggiungi un\'impostazione con [nameOfClassLowercase]_delegate_path con il percorso della directory dei files php create/update. Es: wikiresource_delegate_path per una classe WikiResource che estenda modResource.';
+$_lang['setting_date_timezone'] = 'Default Time Zone';
+$_lang['setting_date_timezone_desc'] = 'Controlla l\'impostazione di default del timezone per le funzioni delle date in PHP, se non è vuoto. Se è vuoto e il parametro del PHP ini date.timezone setting non è impostato nel tuo ambiente, sarà usato UTC.';
+
+$_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug_desc'] = 'Controlla il debugging su on/off in MODX e/o imposta il livello di report degli errori PHP (error_reporting). \'\' = usa corrente error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), o qualsiasi valore di error_reporting value valido (come un intero).';
+
+$_lang['setting_default_content_type'] = 'Tipo di Content Default';
+$_lang['setting_default_content_type_desc'] = 'Seleziona il Tipo di Content di default Content che vorresti usare per le nuove Risorse. Puoi sempre selezionare un Content Type diverso dall\'editor stesso della risorsa; questa impostazione pre-seleziona soltanto il Tipo di Contenuto.';
+
+$_lang['setting_default_duplicate_publish_option'] = 'Opzioni di Pubblicazione di Default per la Duplicazione delle Risorse';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'L\'opzione di default selezionata quando si duplica una risorsa. Può essere "unpublish" per rendere non pubblicate tutti i nuovi duplicati, "publish" per pubblicarli, o "preserve" per conservare la situazione di pubblicazione della Risorsa duplicata.';
+
+$_lang['setting_default_media_source'] = 'Sorgente Media Default';
+$_lang['setting_default_media_source_desc'] = 'La Sorgente Media di default da caricare.';
 
 $_lang['setting_default_template'] = 'Template Default';
 $_lang['setting_default_template_desc'] = 'Seleziona il Template che vorresti usare di default per le nuove Risorse. Puoi sempre selezionare un template diverso nell\'editor della Risorsa, questa impostazione semplicemente pre-seleziona uno dei tuoi Template.';
@@ -303,8 +330,20 @@ $_lang['setting_global_duplicate_uri_check_desc'] = 'Seleziona \'Si\' per fare i
 $_lang['setting_hidemenu_default'] = 'Nascondi di Default dai Menu';
 $_lang['setting_hidemenu_default_desc'] = 'Seleziona \'SI\' per impostare di default che tutte le nuove risorse non siano mostrate nei menu .';
 
+$_lang['setting_inline_help'] = 'Mostra il Testo di Aiuto in linea per i campi';
+$_lang['setting_inline_help_desc'] = 'SE \'SI\', allora i campi mostreranno il loro testo di aiuto direttamente sotto il campo. Se \'No\', tutti i campi avranno un aiuto di tipo tooltip.';
+
 $_lang['setting_link_tag_scheme'] = 'Schema Generazione URL';
 $_lang['setting_link_tag_scheme_desc'] = 'Lo schema di generazione URL per i tag [[~id]]. Opzioni disponibili: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+
+$_lang['setting_locale'] = 'Locale';
+$_lang['setting_locale_desc'] = 'Imposta il valore locale per il sistema. Lascia vuoto per usare il valore di default. Leggi <a href="http://php.net/setlocale" target="_blank">la documentazione PHP </a> per maggiori informazioni.';
+
+$_lang['setting_log_level'] = 'Livello Logging';
+$_lang['setting_log_level_desc'] = 'Il livello di logging di default; più basso è il livello, meno messaggi saranno loggati. Opzioni disponibili: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
+
+$_lang['setting_log_target'] = 'Target del Logging';
+$_lang['setting_log_target_desc'] = 'Il target predefinito per il logging quando i messaggi di log sono scritti. Opzioni disponibili: \'FILE\', \'HTML\', or \'ECHO\'. Default è \'FILE\' se non specificato.';
 
 $_lang['setting_mail_charset'] = 'Charset Mail';
 $_lang['setting_mail_charset_desc'] = 'Il charset di default da utilizzare per le e-mails, e.g. \'iso-8859-1\' or \'utf-8\'';
@@ -354,11 +393,26 @@ $_lang['setting_manager_date_format_desc'] = 'La stringa, nel formato PHP date()
 $_lang['setting_manager_favicon_url'] = 'Favicon URL Manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Se impostata, caricherà questa URL come favicon per il manager di MODX. Deve essere una URL relativa alla directory manager/ , o un URL assoluto.';
 
+$_lang['setting_manager_html5_cache'] = 'Usa la Cache locale di  HTML5 nel Manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Sperimentale. Usa il caching locale di HTML5 per il Manager. Si raccomanda di usarlo solo con browser moderni.';
+
+$_lang['setting_manager_js_cache_file_locking'] = 'Abilita il File Locking per la Cache JS/CSS del Manager';
+$_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Imposta su No se il filesystem è NFS.';
+$_lang['setting_manager_js_cache_max_age'] = 'Durata della Compressione della Cache JS/CSS del Manager';
+$_lang['setting_manager_js_cache_max_age_desc'] = 'Durata Massima in secondi della cache della compressione CSS/JS del manager per il browser. Dopo questo periodo, il browser manderà un altro GET condizionale. Usa un periodo più alto per traffico minore.';
+$_lang['setting_manager_js_document_root'] = 'Radice Docuemtni per la Compressione JS/CSS del Manager';
+$_lang['setting_manager_js_document_root_desc'] = 'Se il tuo server non gestisce la variabile DOCUMENT_ROOT, impostala esplicitamente qui per abilitare la compressione CSS/JS del manager. Non cambiare questo valore a meno che tu non sappia cosa stai facendo.';
+$_lang['setting_manager_js_zlib_output_compression'] = 'Abilita Output Compressione zlib per JS/CSS Manager';
+$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Stabilisce se abilitare o meno l\'output compresso zlib per i file compressi CSS/JS del manager. Non abilitarlo a meno che tu non sia sicuro che la variabile di PGP zlib.output_compression possa essere impostata su 1. MODX raccomanda di lasciare su off.';
+
 $_lang['setting_manager_lang_attribute'] = 'Gestione Attributi Lingue per HTML e XML';
 $_lang['setting_manager_lang_attribute_desc'] = 'Inserisci il codice della lingua che soddisfa meglio la tua scelta della lingua del manager, questo assicura che il browser mostri il contenuto nel miglior formato per la tua lingua. Verrà inserito per xml:lamg=".." nell\'headers. ';
 
 $_lang['setting_manager_language'] = 'Gestione Lingua';
 $_lang['setting_manager_language_desc'] = 'Seleziona la lingua per il Content Manager.';
+
+$_lang['setting_manager_login_url_alternate'] = 'URL Alternativa Login Manager';
+$_lang['setting_manager_login_url_alternate_desc'] = 'Una URL alternativa a cui indirizzare un utente non autenticato quando si deve loggare nel manager. La form di login deve consentire il login dell\'utente nel contesto "mg" per funzionare.';
 
 $_lang['setting_manager_login_start'] = 'Pagina Iniziale Manager';
 $_lang['setting_manager_login_start_desc'] = 'Inserisci l\'ID del documento che vuoi mostrare all\'utente dopo che questo si è loggato dentro il manager. <strong>NOTA: assicurati che l\'ID che inserisci appartenga a un documento esistente, pubblicato e accessibile dall\'utente!</strong>';
@@ -554,6 +608,9 @@ $_lang['setting_settings_distro_desc'] = 'La distribuzione correntemente install
 $_lang['setting_set_header'] = 'Imposta Headers HTTP';
 $_lang['setting_set_header_desc'] = 'Se abilitato "SI", MODX proverà a impostare gli headers HTTP per le Risorse.';
 
+$_lang['setting_show_tv_categories_header'] = 'Mostra il Tab con la testata "Categorie" con le TVs';
+$_lang['setting_show_tv_categories_header_desc'] = 'Se "SI", MODX mosterà l\'intestazione della "Categoria" sopra il primo tab della categoria durante la modifica delle variabili di template in una Risorsa.';
+
 $_lang['setting_signupemail_message'] = 'E-mail Registrazione';
 $_lang['setting_signupemail_message_desc'] = 'Qui puoi impostare il messaggio da spedire agli utenti quando crei loro un account e scegli di far mandare loro direttamente da MODX una mail con lo username e la password. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando viene inviato un messaggio: <br /><br />[[+sname]] - Nome del tuo sito, <br />[[+saddr]] - L\'indirizzo email del tuo sito, <br />[[+surl]] - L\'url del tuo sito, <br />[[+uid]] - Nome Login o id utente, <br />[[+pwd]] - Password Utente, <br />[[+ufn]] - Nome completo Utente. <br /><br /><strong>Lascia [[+uid]] e [[+pwd]] nella e-mail, o lo username e la password non saranno inviati nella mail e i tuoi utenti non conosceranno i propri username e password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli del login per il Pannello di Controllo di: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato nel contente Manager ([[+surl]]), potra cambiare la tua password.\n\\Cordiali saluti,\nl\'amministratore del sito';
@@ -592,6 +649,12 @@ $_lang['setting_tree_default_sort_desc'] = 'Quale campo della Risorsa usare per 
 $_lang['setting_tree_root_id'] = 'ID Radice Albero';
 $_lang['setting_tree_root_id_desc'] = 'Imposta un ID valido di una Risorsa. Il nodo della Risorsa diventerà la radice dell\'Albero a sinistra. L\'utente potrà vedere soltanto le Risorse che sono figli della Risorsa specificata. Impostando 0 sarà possibile vedere TUTTO';
 
+$_lang['setting_tvs_below_content'] = 'Sposta le TVs sotto al Contenuto';
+$_lang['setting_tvs_below_content_desc'] = 'Imposta su SI per spostare le Variabli di Template sotto il Contenuto principale durante la modifica di una risorsa.';
+
+$_lang['setting_ui_debug_mode'] = 'Modalità Debug UI';
+$_lang['setting_ui_debug_mode_desc'] = 'Imposta su SI per mostrare i messaggi di debug quando si utilizza la UI per il tema di default del manager. Devi usare un browser che supporti console.log.';
+
 $_lang['setting_udperms_allowroot'] = 'Consenti in Radice';
 $_lang['setting_udperms_allowroot_desc'] = 'Vuoi permettere ai tuoi utenti di creare nuove risorse nella radice principale del sito? ';
 
@@ -627,6 +690,9 @@ $_lang['setting_use_editor_err'] = 'Specifica se vuoi usare un Editor Rich Text.
 
 $_lang['setting_use_multibyte'] = 'Usa Estensione Multibyte';
 $_lang['setting_use_multibyte_desc'] = 'Imposta su \'Si\' se vuoi usare l\'estensione mbstring per i caratteri multibyte nella tua installazione MODX. Imposta su \'SI\' SOLO se hai l\'estensione mbstring di PHP installata.';
+
+$_lang['setting_use_weblink_target'] = 'Usa Target WebLink';
+$_lang['setting_use_weblink_target_desc'] = 'Imposta su vero se vuoi che i tags link di MODX e makeUrl() generino links come URL bersagli per WebLinks. Altrimenti, l\'URL interno di MODX sarà generato dal metodo tags link e makeUrl().';
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail Recupero Dati Accesso';
 $_lang['setting_webpwdreminder_message_desc'] = 'Inserisci il messaggio da inviare tramite mail, quando gli utenti chiedono una nuova password via email. Il Manager invierà loro una e-mail contenente la nuova password e le informazioni di attivazione. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando il messaggio verrà inviato:<br /><br /> [[+sname]] - Nome del sito, <br />[[+saddr]] - Indirizzo email del sito, <br />[[+surl]] - Url del sito, <br />[[+uid]] - Login o id dell\'utente, <br />[[+pwd]] - Password utente, <br />[[+ufn]] - Nome completo dell\'utente.<br /><br /><strong>Lasciate [[+uid]] e [[+pwd]] nella e-mail, altrimenti il nome utente e la password non verranno inviati!</strong>';

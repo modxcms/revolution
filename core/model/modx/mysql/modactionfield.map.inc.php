@@ -7,9 +7,10 @@ $xpdo_meta_map['modActionField']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'actions_fields',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
-    'action' => 0,
+    'action' => '',
     'name' => '',
     'type' => 'field',
     'tab' => '',
@@ -21,11 +22,11 @@ $xpdo_meta_map['modActionField']= array (
   array (
     'action' => 
     array (
-      'dbtype' => 'integer',
-      'precision' => '11',
-      'phptype' => 'integer',
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 0,
+      'default' => '',
       'index' => 'index',
     ),
     'name' => 

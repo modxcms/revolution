@@ -34,6 +34,7 @@ MODx.grid.UserGroups = function(config) {
             ,targetCfg: {}
             ,listeners: {
                 'afterrowmove': {fn:this.onAfterRowMove,scope:this}
+                ,'beforerowmove': {fn:this.onBeforeRowMove,scope:this}
             }
         })]
         ,tbar: [{
@@ -43,11 +44,18 @@ MODx.grid.UserGroups = function(config) {
     });
     MODx.grid.UserGroups.superclass.constructor.call(this,config);
     this.userRecord = new Ext.data.Record.create(['usergroup','name','member','role','rolename','primary_group']);
-    this.addEvents('beforeUpdateRole','afterUpdateRole','beforeAddGroup','afterAddGroup');
+    this.addEvents('beforeUpdateRole','afterUpdateRole','beforeAddGroup','afterAddGroup','beforeReorderGroup','afterReorderGroup');
 };
 Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
 
-    onAfterRowMove: function(dt,sri,ri,sels) {
+    onBeforeRowMove: function(dt,sri,ri,sels) {
+        if (!this.fireEvent('beforeReorderGroup',{dt:dt,sri:sri,ri:ri,sels:sels})) {
+            return false;
+        }
+        return true;
+    }
+
+    ,onAfterRowMove: function(dt,sri,ri,sels) {
         var s = this.getStore();
         var sourceRec = s.getAt(sri);
         var belowRec = s.getAt(ri);
@@ -65,6 +73,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
                 brec.commit();
             }
         }
+        this.fireEvent('afterReorderGroup');
         return true;
     }
     ,updateRole: function(btn,e) {

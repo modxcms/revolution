@@ -11,7 +11,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
     public $objectType = 'package';
     public $checkListPermission = false;
     public $permission = 'packages';
-    public $languageTopics = array('lexicon');
+    public $languageTopics = array('workspace');
 
     public function initialize() {
         $this->setDefaultProperties(array(
