@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-04-01
+ * @updated 2012-05-01
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -915,6 +915,12 @@ $_lang['setting_manager_use_tabs'] = 'Používat záložky ve správci obsahu';
 
 // $_lang['setting_manager_use_tabs_desc'] = 'If true, the manager will use tabs for rendering the content panes. Otherwise, it will use portals.';
 $_lang['setting_manager_use_tabs_desc'] = 'Je-li aktivní, správce obsahu použije pro vykreslení obsahu záložky, jinak budou panely vykresleny pod sebou.';
+
+// $_lang['setting_manager_week_start'] = 'Week start';
+$_lang['setting_manager_week_start'] = 'Začátek týdne';
+
+// $_lang['setting_manager_week_start_desc'] = 'Define the day starting the week. Use 0 (or leave empty) for sunday, 1 for monday and so on...';
+$_lang['setting_manager_week_start_desc'] = 'Určuje den, kterým začíná týden. 0 nebo prázdné pole je neděle, 1 pondělí, atd. ';
 
 // $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
