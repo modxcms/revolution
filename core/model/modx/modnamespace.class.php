@@ -35,7 +35,7 @@ class modNamespace extends xPDOObject {
         if (!$modx->getCacheManager()) {
             return array();
         }
-        $cacheKey= $modx->context->get('key') . '/namespaces';
+        $cacheKey= 'namespaces';
         $cache = $modx->cacheManager->get($cacheKey, array(
             xPDO::OPT_CACHE_KEY => $modx->getOption('cache_namespaces_key', null, 'namespaces'),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_namespaces_handler', null,$modx->getOption(xPDO::OPT_CACHE_HANDLER)),
@@ -48,7 +48,7 @@ class modNamespace extends xPDOObject {
     }
 
     public static function clearCache(modX $modx) {
-        $cacheKey= $modx->context->get('key') . '/namespaces';
+        $cacheKey= 'namespaces';
         $cleared = $modx->cacheManager->delete($cacheKey, array(
             xPDO::OPT_CACHE_KEY => $modx->getOption('cache_namespaces_key', null, 'namespaces'),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_namespaces_handler', null,$modx->getOption(xPDO::OPT_CACHE_HANDLER)),

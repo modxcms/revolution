@@ -8,6 +8,7 @@
  */
 /* handle new class creation */
 $classes = array(
+    'modExtensionPackage',
 );
 if (!empty($classes)) {
     $this->createTable($classes);
@@ -43,3 +44,6 @@ $this->processResults($class, $description, array($modx->manager, 'alterField'),
 /* add modMenu.namespace field */
 $description = $this->install->lexicon('add_column',array('column' => 'namespace','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'namespace'));
+
+/* migrate extension_packages setting to DB table */
+include dirname(dirname(__FILE__)).'/common/2.3-extension-packages.php';

@@ -716,6 +716,30 @@
         <composite alias="UserSettings" class="modUserSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="Actions" class="modAction" local="name" foreign="namespace" cardinality="many" owner="local" />
     </object>
+
+    <!--
+        Extension packages load xPDO models during modX instantiation, allowing for custom database tables and other
+        models to be loaded prior to modX request handling. Useful for when you want to integrate custom data and
+        extensions, such as Custom Resource Classes, into the core.
+    -->
+    <object class="modExtensionPackage" table="extension_packages" extends="xPDOObject">
+        <!-- The namespace the extension package relates to -->
+        <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" index="index" />
+        <!-- If empty, will assume the Namespace path -->
+        <field key="path" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <!-- If empty, will assume no table prefix and delegate to package schema -->
+        <field key="table_prefix" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <!-- If specified, will create an instance of the class with this name using modX.getService on the loading of this extension package -->
+        <field key="service_class" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <!-- The name to give the service on the modX object when instantiating. Only valid if service_class is not empty. -->
+        <field key="service_name" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
+    </object>
     
     <object class="modPlugin" table="site_plugins" extends="modScript">
         <field key="cache_type" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
