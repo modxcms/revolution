@@ -17,8 +17,21 @@ class modExtensionPackage extends xPDOSimpleObject {
                 $this->set('updated_at',strftime('%Y-%m-%d %H:%M:%S'));
             }
         }
-        return parent::save($cacheFlag);
+        $saved = parent::save($cacheFlag);
+        if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
+            $this->xpdo->call('modExtensionPackage','clearCache',array(&$this->xpdo));
+        }
+        return $saved;
     }
+
+    public function remove(array $ancestors = array()) {
+        $removed = parent::remove($ancestors);
+        if ($removed && !$this->getOption(xPDO::OPT_SETUP)) {
+            $this->xpdo->call('modExtensionPackage','clearCache',array(&$this->xpdo));
+        }
+        return $removed;
+    }
+
 
     /**
      * @static
