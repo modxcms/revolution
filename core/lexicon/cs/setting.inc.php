@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-05-01
+ * @updated 2012-05-07
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -1067,7 +1067,7 @@ $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb Cesta k ImageMagick';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Volitelné. Nastavení cesty k ImageMagick pro alternativní generování náhledů pomocí phpThumb, pokud není ve výchozím nastavení PHP.';
 
 // $_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking Disabled';
-$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking: vypnut';
+$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking: aktivní';
 
 // $_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Remote servers are allowed in the src parameter unless you disable hotlinking in phpThumb.';
 $_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Vzdálené servery jsou povoleny v atributu src jestliže, není tato volba nastavena na "Ne".';
