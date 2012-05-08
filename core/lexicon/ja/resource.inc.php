@@ -8,6 +8,7 @@
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
+ * @author honda http://kogs.org
  */
 $_lang['access'] = 'アクセス';
 $_lang['cache_output'] = 'キャッシュ出力';
@@ -30,7 +31,7 @@ $_lang['resource_access_message'] = 'このリソースが属するリソース�
 $_lang['resource_add_children_access_denied'] = '現在のアカウントにはここにリソースを作成する権限がありません。';
 $_lang['resource_alias'] = 'エイリアス';
 $_lang['resource_alias_help'] = 'このリソースの別名。この名前はURL表現にも使用されます。<br /><br />http://example.com/alias<br /><br />フレンドリーURL設定が有効な場合のみ動作します。';
-$_lang['resource_change_template_confirm'] = 'このテンプレートを変更しますか？ WARNING: This will save your prior changes to the change and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save again when you are ready to save the Template change.';
+$_lang['resource_change_template_confirm'] = 'このテンプレートを変更しますか？<br /><br /><strong>警告：この操作はテンプレート変更の前に、一旦リソースに加えられた変更を保存します。保存する準備ができている事を確認して実行してください。<br /><br />また、ページが再読込された後、テンプレートの変更を実際に反映するには、再度手動で保存を実行する必要があります。</strong>';
 $_lang['resource_cacheable'] = 'キャッシュ有効';
 $_lang['resource_cacheable_help'] = '有効にすると、リソースはキャッシュに保存されます。';
 $_lang['resource_cancel_dirty_confirm'] = '未確定の変更があります。本当にキャンセルしますか？';
@@ -64,7 +65,7 @@ $_lang['resource_err_delete_sitestart'] = '「サイトスタート」のリソ�
 $_lang['resource_err_delete_siteunavailable'] = '「メンテナンスモード用ページとして使用されているため、削除できません';
 $_lang['resource_err_duplicate'] = 'リソースを複製中にエラーが発生しました。';
 $_lang['resource_err_move_to_child'] = '自身のサブリソースには移動できません。';
-$_lang['resource_err_move_sitestart'] = 'The resource is linked to the site_start variable and cannot be moved to another context!';
+$_lang['resource_err_move_sitestart'] = 'リソースが site_start として指定されているため、別のコンテキストに移動できません。';
 $_lang['resource_err_nf'] = 'リソースが見つかりませんでした。';
 $_lang['resource_err_nfs'] = 'ID [[+id]] のリソースが見つかりません。';
 $_lang['resource_err_ns'] = 'リソースが指定されていません。';
@@ -132,9 +133,9 @@ $_lang['resource_unpublishdate_help'] = '公開終了予定日時を設定する
 $_lang['resource_unpublished'] = '公開終了';
 $_lang['resource_untitled'] = '無題のリソース';
 $_lang['resource_uri'] = 'URI';
-$_lang['resource_uri_help'] = 'The full relative URL for this Resource.';
-$_lang['resource_uri_override'] = 'Freeze URI';
-$_lang['resource_uri_override_help'] = 'Checking this will allow you to freeze the URI for this Resource at the value in the textbox below.';
+$_lang['resource_uri_help'] = 'このリソースの完全な相対URLを指定します。';
+$_lang['resource_uri_override'] = 'URIを固定';
+$_lang['resource_uri_override_help'] = '有効にすると、下に表示されるテキストボックスに入れた値で、このリソースのURIを固定することができます。';
 $_lang['resource_with_id_not_found'] = 'リソースID %s が見つかりません。';
 $_lang['resource_view'] = 'リソースの表示(プレビュー)';
 $_lang['show_sort_options'] = 'ソートオプションの表示';
@@ -148,7 +149,7 @@ $_lang['status'] = 'ステータス';
 $_lang['symlink'] = 'シムリンク';
 $_lang['symlink_create'] = 'シムリンクを作成';
 $_lang['symlink_create_here'] = 'ここにシムリンクを作成';
-$_lang['symlink_help'] = 'The address of the object you wish to reference with this Symlink. If you want to point to an existing MODX Resource, enter the ID here.';
+$_lang['symlink_help'] = 'このシムリンクが参照するオブジェクトのアドレスを指定。既存のMODXのリソースを指定する場合は、対象リソースのIDを入力します。';
 $_lang['symlink_message'] = 'シムリンクは、他の任意のリソースのクローンです。クローン元の内容がそのまま表示されますが、URLはここで指定したものが反映されます。';
 $_lang['symlink_new'] = '新しいシムリンク';
 $_lang['template_variables'] = 'テンプレート変数';
@@ -159,3 +160,5 @@ $_lang['weblink_create_here'] = 'ここにウェブリンクを作成';
 $_lang['weblink_help'] = 'このウェブリンクによって参照させたいオブジェクトのアドレスを設定します。';
 $_lang['weblink_message'] = 'ウェブリンクは、インターネット上のあらゆるオブジェクトに対するショートカットのようなものです。オブジェクトとは、MODX内のリソース・他サイトのページや画像などを含みます。基本的にはリンク先のオブジェクトへリダイレクトします。<p>';
 $_lang['weblink_new'] = '新しいウェブリンク';
+$_lang['weblink_response_code'] = 'Response Code';
+$_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';

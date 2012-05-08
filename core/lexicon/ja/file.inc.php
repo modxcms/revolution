@@ -5,20 +5,25 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
+ * @author honda http://kogus.org
  */
+$_lang['directory'] = 'ディレクトリ';
 $_lang['file_confirm_remove'] = 'このファイルを本当に削除しますか？';
+$_lang['file_create'] = 'ファイルを作成';
 $_lang['file_deleted'] = '成功';
-$_lang['file_delete_file'] = 'ファイルの削除';
-$_lang['file_delete_folder'] = 'フォルダの削除';
+$_lang['file_delete_file'] = 'ファイルを削除';
+$_lang['file_delete_folder'] = 'フォルダを削除';
+$_lang['file_download'] = 'Download File';
 $_lang['file_download_file'] = 'ファイルのダウンロード';
 $_lang['file_download_unzip'] = 'ファイルの解凍';
 $_lang['file_edit'] = '編集';
 $_lang['file_err_chmod'] = 'chmod実行中に予期せぬエラーが起こりました';
 $_lang['file_err_chmod_ns'] = 'chmod設定を行ってください。';
-$_lang['file_err_ext_not_allowed'] = 'File extension `[[+ext]]` is not permitted.';
+$_lang['file_err_ext_not_allowed'] = '拡張子が`[[+ext]]`のファイルをアップロードする許可がありません。';
 $_lang['file_err_filter'] = '絞り込み条件ではファイルが見つりませんでした。';
 $_lang['file_err_invalid'] = 'このファイルは通常のファイルではないため削除できませんでした。';
 $_lang['file_err_nf'] = 'ファイルが存在しません';
@@ -29,7 +34,7 @@ $_lang['file_err_perms_remove'] = 'ファイルの削除に必要なパーミッ
 $_lang['file_err_rename'] = 'ファイル名を変更できませんでいた。パーミッションが正しく設定されているかどうか確認してください。';
 $_lang['file_err_remove'] = 'ファイルを削除できませんでした。パーミッションが正しく設定されているかどうか確認してください。';
 $_lang['file_err_save'] = 'ファイルを保存できません。保存先のディレクトリが書き込み可能かどうか確認してください。';
-$_lang['file_err_too_large'] = 'Uploaded file is too large at [[+size]] bytes. Please ensure your files are less than [[+allowed]] bytes.';
+$_lang['file_err_too_large'] = 'アップロードされたファイル([[+size]]バイト)はサイズが大きすぎるため保存できませんでした。[[+allowed]]バイトを超えないようにしてください。';
 $_lang['file_err_unzip'] = 'ファイルの解凍が失敗しました';
 $_lang['file_err_unzip_invalid_path'] = '解凍済みファイルのパスが不適切です。';
 $_lang['file_err_unzip_missing_lib'] = ' zipライブラリが見当たりません。 (php_zip.dll / zip.so)';
@@ -69,7 +74,7 @@ $_lang['file_saved'] = 'ファイルが正常に保存されました';
 $_lang['file_size'] = 'ファイル容量';
 $_lang['file_unzip'] = '解凍に成功しました';
 $_lang['file_upload'] = 'ファイルアップロード';
-$_lang['file_upload_here'] = 'ここにファイルW-アップロード';
+$_lang['file_upload_here'] = 'ここにファイルをアップロード';
 $_lang['file_view'] = 'ファイル閲覧';
 $_lang['files_access_denied'] = 'アクセスが拒否されました';
 $_lang['files_data'] = 'データ';
@@ -82,7 +87,7 @@ $_lang['files_fileoptions'] = 'オプション';
 $_lang['files_files'] = 'ファイルマネージャー';
 $_lang['files_filesize'] = 'ファイルサイズ';
 $_lang['files_file_type'] = 'ファイルタイプ: ';
-$_lang['files_modified'] = '編集日時';
+$_lang['files_modified'] = '更新日時';
 $_lang['files_viewfile'] = 'ファイルの表示';
 $_lang['upf_abort'] = '中止';
 $_lang['upf_abort_desc'] = 'アップロードを停止します。';

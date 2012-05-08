@@ -5,6 +5,8 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author enogu http://www.kuroienogu.net/
+ * @author honda http://kogus.org
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -12,7 +14,7 @@
 $_lang['categories'] = 'カテゴリー';
 $_lang['category_confirm_delete'] = 'カテゴリーを削除しますか？このカテゴリーに属している全てのエレメントは「カテゴリーなし」に分類されます。';
 $_lang['category_create'] = 'カテゴリーを作成';
-$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
+$_lang['category_err_ae'] = '同じ名前のカテゴリーが既に存在するため、このカテゴリーを保存できませんでした。';
 $_lang['category_err_create'] = 'カテゴリーの作成中にエラーが発生しました。';
 $_lang['category_err_not_found'] = 'カテゴリーが見つかりませんでした。';
 $_lang['category_err_nf'] = 'カテゴリーが見つかりませんでした。.';
