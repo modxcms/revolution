@@ -125,6 +125,7 @@ class xPDOManager_sqlite extends xPDOManager {
                 $tableConstraints = array();
                 if (!empty ($indexes)) {
                     foreach ($indexes as $indexkey => $indexdef) {
+                        $indexkey = $this->xpdo->literal($instance->_table) . '_' . $indexkey;
                         $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE' : 'INDEX'));
                         $index = $indexdef['columns'];
                         if (is_array($index)) {
