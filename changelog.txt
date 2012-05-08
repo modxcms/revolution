@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Prefix indexes with table name for sqlite
 - Fix lazy loading of fields on demand
 - [#7607] xPDOObject->get(array) triggering invalid lazy loading
 - xPDOObject/xPDOSimpleObject support for xPDO::getDescendants()
