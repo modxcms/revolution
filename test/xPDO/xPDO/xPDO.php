@@ -312,7 +312,7 @@ class xPDOTest extends xPDOTestCase {
         $diff = array_diff($fields,$correctFields);
         $diff2 = array_diff($correctFields,$fields);
         $success = is_array($fields) && empty($diff) && empty($diff2);
-        $this->assertTrue($success);
+        $this->assertEquals($correctFields, $fields);
     }
     /**
      * Data provider for testGetFields
@@ -320,18 +320,34 @@ class xPDOTest extends xPDOTestCase {
      */
     public function providerGetFields() {
         return array(
-            array('Person',array (
-              'id' => null,
-              'first_name' => '',
-              'last_name' => '',
-              'middle_name' => '',
-              'date_modified' => 'CURRENT_TIMESTAMP',
-              'dob' => '',
-              'gender' => '',
-              'blood_type' => null,
-              'username' => '',
-              'password' => '',
-              'security_level' => 1,
+            array('Person', array(
+                'id' => null,
+                'first_name' => '',
+                'last_name' => '',
+                'middle_name' => '',
+                'date_modified' => 'CURRENT_TIMESTAMP',
+                'dob' => '',
+                'gender' => '',
+                'blood_type' => null,
+                'username' => '',
+                'password' => '',
+                'security_level' => 1,
+            )),
+            array('xPDOSample', array(
+                'id' => NULL,
+                'parent' => 0,
+                'unique_varchar' => NULL,
+                'varchar' => NULL,
+                'text' => NULL,
+                'timestamp' => 'CURRENT_TIMESTAMP',
+                'unix_timestamp' => 0,
+                'date_time' => NULL,
+                'date' => NULL,
+                'enum' => NULL,
+                'password' => NULL,
+                'integer' => NULL,
+                'float' => 1.01230,
+                'boolean' => NULL,
             )),
         );
     }

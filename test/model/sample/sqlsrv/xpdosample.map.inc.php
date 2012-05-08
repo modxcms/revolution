@@ -18,7 +18,7 @@ $xpdo_meta_map['xPDOSample']= array (
     'password' => NULL,
     'integer' => NULL,
     'float' => 1.0123,
-    'boolean' => 0,
+    'boolean' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -105,7 +105,6 @@ $xpdo_meta_map['xPDOSample']= array (
       'dbtype' => 'bit',
       'phptype' => 'boolean',
       'null' => false,
-      'default' => 0,
     ),
   ),
   'indexes' => 
