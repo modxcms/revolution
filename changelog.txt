@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#7797] Avoid E_NOTICE from array_diff_assoc change in 5.4
 - Prefix indexes with table name for sqlite
 - Fix lazy loading of fields on demand
 - [#7607] xPDOObject->get(array) triggering invalid lazy loading
