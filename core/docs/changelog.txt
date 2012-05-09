@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#7793] Fix issue with saving a new media source access on user group edit screen
 - [#7712] Fix Resource quick update showing 2 checkboxes
 
 MODX Revolution 2.2.2-pl (May 2, 2012)
