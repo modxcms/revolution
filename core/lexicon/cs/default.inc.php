@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-04-01
+ * @updated 2012-05-01
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -1260,6 +1260,12 @@ $_lang['send'] = 'Odeslat';
 // $_lang['service_url'] = 'Service URL';
 $_lang['service_url'] = 'Servisní URL';
 
+// $_lang['session_extended'] = 'Session extended!';
+$_lang['session_extended'] = 'Session prodloužena!';
+
+// $_lang['session_logging_out'] = 'Your session has expired. Please proceed to login again.';
+$_lang['session_logging_out'] = 'Vaše session vypršela. Přihlašte se znovu.';
+
 // $_lang['set'] = 'Set';
 $_lang['set'] = 'Nastavit';
 
@@ -1475,6 +1481,9 @@ $_lang['updated'] = 'Aktualizováno';
 
 // $_lang['upload'] = 'Upload';
 $_lang['upload'] = 'Nahrát';
+
+// $_lang['username'] = 'Username';
+$_lang['username'] = 'Uživatelské jméno';
 
 // $_lang['value'] = 'Value';
 $_lang['value'] = 'Hodnota';

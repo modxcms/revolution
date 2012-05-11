@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-29
+ * @updated 2012-05-01
  */
 // $_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
 $_lang['access_category_management_msg'] = 'Správa přístupu členů uživatelské skupiny k elementům v kategoriích a možnost nastavení přístupových práv.';
@@ -273,11 +273,87 @@ $_lang['resource_group_untitled'] = '_Bezejmenná skupina dokumentů';
 // $_lang['resource_group_update'] = 'Update Resource Group';
 $_lang['resource_group_update'] = 'Aktualizovat skupinu dokumentů';
 
+// $_lang['resource_group_access_contexts'] = 'A comma-separated list of Contexts that the Resource Group should pertain to for the following options.';
+$_lang['resource_group_access_contexts'] = 'Čárkou oddělený seznam kontextů, ke kterým by měla skupina dokumentů náležet a mají pro ni platit následující možnosti.';
+
+// $_lang['resource_group_automatic_access'] = 'Access Wizard';
+$_lang['resource_group_automatic_access'] = 'Rozšířené možnosti';
+
+// $_lang['resource_group_automatic_access_desc'] = 'Note: You may have to flush sessions after adding the Resource Group if you check any of the options below.';
+$_lang['resource_group_automatic_access_desc'] = 'Poznámka: Pokud zaškrtnete některou z voleb níže resetujte následně všechny přístupy.';
+
+// $_lang['resource_group_access_admin'] = 'Automatically Give Adminstrator Group Access';
+$_lang['resource_group_access_admin'] = 'Automaticky zpřístupnit administrátorům';
+
+// $_lang['resource_group_access_admin_desc'] = 'If checked, will give the Administrator Group view and editing access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_admin_desc'] = 'Zaškrtnutím dojde ke zpřístupnění skupiny dokumentů všem administrátorům, kteří mají práva pro některý z výše uvedených kontextů.';
+
+// $_lang['resource_group_access_anon'] = 'Automatically Give Anonymous Access';
+$_lang['resource_group_access_anon'] = 'Automaticky zpřístupnit nepřihlášeným uživatelům';
+
+// $_lang['resource_group_access_anon_desc'] = 'If checked, will give non-logged-in users view access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_anon_desc'] = 'Zaškrtnutím dostanou nepřihlášení uživatelé právo pro zobrazení této skupiny dokumentů v některém z výše uvedených kontextů.';
+
+// $_lang['resource_group_access_parallel'] = 'Create Parallel User Group';
+$_lang['resource_group_access_parallel'] = 'Současně založit uživatelskou skupinu';
+
+// $_lang['resource_group_access_parallel_desc'] = 'If checked, will automatically create a User Group with the same name, and give it view access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_parallel_desc'] = 'Zaškrtnutím se po uložení automaticky vytvoří uživatelská skupina stejného názvu a budou ji nastavena práva pro zobrazení této skupiny dokumentů v rámci výše uvedených kontextů.';
+
+// $_lang['resource_group_access_ugs'] = 'Automatically Give Other User Groups Access';
+$_lang['resource_group_access_ugs'] = 'Automaticky zpřístupnit dalším uživatelským skupinám';
+
+// $_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group names. If non-blank, will give the User Groups specified here view access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_ugs_desc'] = 'Čárkou oddělený seznam uživatelských skupin, které mají také získat právo pro zobrazení této skupiny dokumentů v rámci výše uvedených kontextů.';
+
 // $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
 $_lang['roles_msg'] = 'Role je postavení nebo stav, kterou má uživatel v určité situaci. Může být použita pro uživatele nebo uživatelskou skupinu. Role v MODX jsou také nazývány "Autority". Číslo, které může být jakékoliv celé číslo. Úrovně autorit jsou dědičné dolů, v tom smyslu, že roli s úrovní 1 zdědí veškeré skupiny práv. A ke každé roli s vyšší úrovní než 1.';
 
 // $_lang['source_add'] = 'Add Media Source';
 $_lang['source_add'] = 'Přidat zdroj médií';
+
+// $_lang['user_group_aw'] = 'Access Wizard';
+$_lang['user_group_aw'] = 'Rozšířené možnosti';
+
+// $_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after adding the User Group if you check any of the options below.';
+$_lang['user_group_aw_desc'] = 'Poznámka: Pokud zaškrtnete některou z voleb níže resetujte následně všechny přístupy.';
+
+// $_lang['user_group_aw_contexts'] = 'Contexts';
+$_lang['user_group_aw_contexts'] = 'Kontexty';
+
+// $_lang['user_group_aw_contexts_desc'] = 'A comma-separated list of Contexts that this User Group should be able to view.';
+$_lang['user_group_aw_contexts_desc'] = 'Čárkou oddělený seznam kontextů, které má tato uživatelská skupina vidět.';
+
+// $_lang['user_group_aw_manager_policy'] = 'Manager Policy';
+$_lang['user_group_aw_manager_policy'] = 'Přístupové právo pro správce obsahu';
+
+// $_lang['user_group_aw_manager_policy_desc'] = 'The Policy to give the User Group for editing in the manager. Select (no policy) if you do not want to grant manager access.';
+$_lang['user_group_aw_manager_policy_desc'] = 'Přístupové právo při úpravách v rámci správce obsahu. Pokud nechcete uživatelské skupině povolit přístup do správce obsahu vyberte (žádné oprávnění).';
+
+// $_lang['user_group_aw_users'] = 'Users';
+$_lang['user_group_aw_users'] = 'Uživatelé';
+
+// $_lang['user_group_aw_users_desc'] = 'A comma-separated list of usernames to add to this User Group. You can use the format username:role to set the role; otherwise, Member will be assumed.';
+$_lang['user_group_aw_users_desc'] = 'Čárkou oddělený seznam uživatelů, které chcete přiřadit do této uživatelské skupiny. Lze také použít zápis ve tvaru uzivatel:role pro nastavení definované role, pokud není role definována bude uživateli přiřazena role Member.';
+
+// $_lang['user_group_aw_resource_groups'] = 'Resource Groups';
+$_lang['user_group_aw_resource_groups'] = 'Skupiny dokumentů';
+
+// $_lang['user_group_aw_resource_groups_desc'] = 'A comma-separated list of Resource Groups to give access to in the Contexts specified above.';
+$_lang['user_group_aw_resource_groups_desc'] = 'Čárkou oddělený seznam skupin dokumentů v rámci výše uvedených kontextů, ke kterým má mít uživatelská skupina přístup.';
+
+// $_lang['user_group_aw_categories'] = 'Element Categories';
+$_lang['user_group_aw_categories'] = 'Kategorie elementů';
+
+// $_lang['user_group_aw_categories_desc'] = 'A comma-separated list of Element Categories to give access to in the Contexts specified above.';
+$_lang['user_group_aw_categories_desc'] = 'Čárkou oddělený seznam kategorií elementů v rámci výše uvedených kontextů, ke kterým má mít uživatelská skupina přístup.';
+
+// $_lang['user_group_aw_parallel'] = 'Create Parallel Resource Group';
+$_lang['user_group_aw_parallel'] = 'Současně založit skupinu dokumentů';
+
+// $_lang['user_group_aw_parallel_desc'] = 'If checked, will automatically create a Resource Group with the same name, and give this User Group view access to it in the Contexts specified above.';
+$_lang['user_group_aw_parallel_desc'] = 'Zaškrtnutím se po uložení automaticky vytvoří skupina dokumentů stejného názvu a budou ji nastavena práva pro zobrazení touto uživatelskou skupinou v rámci výše uvedených kontextů.';
+
 
 // $_lang['user_group_category_access'] = 'Element Category Access';
 $_lang['user_group_category_access'] = 'Přístup uživatelské skupiny ke kategoriím';
