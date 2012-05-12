@@ -220,7 +220,8 @@ MODx.window.CreateResourceGroup = function(config) {
         title: _('resource_group_create')
         ,id: this.ident
         ,height: 150
-        ,width: 500
+        ,width: 650
+        ,stateful: false
         ,url: MODx.config.connectors_url+'security/resourcegroup.php'
         ,action: 'create'
         ,fields: [{
@@ -232,7 +233,7 @@ MODx.window.CreateResourceGroup = function(config) {
         },{
             xtype: 'fieldset'
             ,collapsible: true
-            ,collapsed: true
+            ,collapsed: false
             ,title: _('resource_group_automatic_access')
             ,items: [{
                 html: '<br /><p>'+_('resource_group_automatic_access_desc')+'</p>'
@@ -251,60 +252,76 @@ MODx.window.CreateResourceGroup = function(config) {
                 ,html: _('resource_group_access_contexts')
                 ,cls: 'desc-under'
             },{
-                boxLabel: _('resource_group_access_admin')
-                ,description: _('resource_group_access_admin_desc')
-                ,name: 'access_admin'
-                ,id: this.ident+'-access-admin'
-                ,xtype: 'checkbox'
-                ,checked: false
-                ,inputValue: 1
-                ,anchor: '100%'
-            },{
-                xtype: MODx.expandHelp ? 'label' : 'hidden'
-                ,forId: this.ident+'-access-admin'
-                ,html: _('resource_group_access_admin_desc')
-                ,cls: 'desc-under'
-            },{
-                boxLabel: _('resource_group_access_anon')
-                ,description: _('resource_group_access_anon_desc')
-                ,name: 'access_anon'
-                ,id: this.ident+'-access-anon'
-                ,xtype: 'checkbox'
-                ,checked: false
-                ,inputValue: 1
-                ,anchor: '100%'
-            },{
-                xtype: MODx.expandHelp ? 'label' : 'hidden'
-                ,forId: this.ident+'-access-anon'
-                ,html: _('resource_group_access_anon_desc')
-                ,cls: 'desc-under'
-            },{
-                boxLabel: _('resource_group_access_parallel')
-                ,description: _('resource_group_access_parallel_desc')
-                ,name: 'access_parallel'
-                ,id: this.ident+'-access-parallel'
-                ,xtype: 'checkbox'
-                ,checked: false
-                ,inputValue: 1
-                ,anchor: '100%'
-            },{
-                xtype: MODx.expandHelp ? 'label' : 'hidden'
-                ,forId: this.ident+'-access-parallel'
-                ,html: _('resource_group_access_parallel_desc')
-                ,cls: 'desc-under'
-            },{
-                fieldLabel: _('resource_group_access_ugs')
-                ,description: _('resource_group_access_ugs_desc')
-                ,name: 'access_usergroups'
-                ,id: this.ident+'-access-usergroups'
-                ,xtype: 'textfield'
-                ,value: ''
-                ,anchor: '100%'
-            },{
-                xtype: MODx.expandHelp ? 'label' : 'hidden'
-                ,forId: this.ident+'-access-usergroups'
-                ,html: _('resource_group_access_ugs_desc')
-                ,cls: 'desc-under'
+                layout: 'column'
+                ,border: false
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,anchor: '100%'
+                    ,border: false
+                }
+                ,items: [{
+                    columnWidth: .5
+                    ,items: [{
+                        boxLabel: _('resource_group_access_admin')
+                        ,description: _('resource_group_access_admin_desc')
+                        ,name: 'access_admin'
+                        ,id: this.ident+'-access-admin'
+                        ,xtype: 'checkbox'
+                        ,checked: false
+                        ,inputValue: 1
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-access-admin'
+                        ,html: _('resource_group_access_admin_desc')
+                        ,cls: 'desc-under'
+                    },{
+                        boxLabel: _('resource_group_access_anon')
+                        ,description: _('resource_group_access_anon_desc')
+                        ,name: 'access_anon'
+                        ,id: this.ident+'-access-anon'
+                        ,xtype: 'checkbox'
+                        ,checked: false
+                        ,inputValue: 1
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-access-anon'
+                        ,html: _('resource_group_access_anon_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: .5
+                    ,items: [{
+                        boxLabel: _('resource_group_access_parallel')
+                        ,description: _('resource_group_access_parallel_desc')
+                        ,name: 'access_parallel'
+                        ,id: this.ident+'-access-parallel'
+                        ,xtype: 'checkbox'
+                        ,checked: false
+                        ,inputValue: 1
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-access-parallel'
+                        ,html: _('resource_group_access_parallel_desc')
+                        ,cls: 'desc-under'
+                    },{
+                        fieldLabel: _('resource_group_access_ugs')
+                        ,description: _('resource_group_access_ugs_desc')
+                        ,name: 'access_usergroups'
+                        ,id: this.ident+'-access-usergroups'
+                        ,xtype: 'textfield'
+                        ,value: ''
+                        ,anchor: '100%'
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: this.ident+'-access-usergroups'
+                        ,html: _('resource_group_access_ugs_desc')
+                        ,cls: 'desc-under'
+                    }]
+                }]
             }]
         }]
     });

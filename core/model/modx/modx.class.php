@@ -532,12 +532,33 @@ class modX extends xPDO {
     }
 
     /**
-     * Loads any specified extension packages.
+     * Loads any extension packages.
      *
      * @param array|null An optional array of options that can contain additional
      * extension packages which will be merged with those specified via config.
      */
     protected function _loadExtensionPackages($options = null) {
+        $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
+        if (!empty($cache)) {
+            foreach ($cache as $package) {
+                $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                $this->addPackage($package['namespace'],$package['path'],$package['tablePrefix']);
+                if (!empty($package['serviceName']) && !empty($package['serviceClass'])) {
+                    $this->getService($package['serviceName'],$package['serviceClass'],$package['path']);
+                }
+            }
+        }
+        $this->_loadExtensionPackagesDeprecated($options);
+    }
+
+    /**
+     * Load system-setting based extension packages. This is not recommended; use modExtensionPackage from 2.3 onward.
+     * The System Setting will be automatically removed in 2.4/3.0 and no longer functional.
+     *
+     * @deprecated To be removed in 2.4/3.0
+     * @param null $options
+     */
+    protected function _loadExtensionPackagesDeprecated($options = null) {
         $extPackages = $this->getOption('extension_packages');
         $extPackages = $this->fromJSON($extPackages);
         if (!is_array($extPackages)) $extPackages = array();
@@ -547,6 +568,7 @@ class modX extends xPDO {
                 $extPackages = array_merge($extPackages, $optPackages);
             }
         }
+
         if (!empty($extPackages)) {
             foreach ($extPackages as $extPackage) {
                 if (!is_array($extPackage)) continue;
@@ -575,6 +597,7 @@ class modX extends xPDO {
             }
         }
     }
+
 
     /**
      * Sets the debugging features of the modX instance.

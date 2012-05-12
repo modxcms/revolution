@@ -23,6 +23,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
         $this->modx->getService('fileHandler','modFileHandler','',array(
             'context' => $this->getProperty('wctx')
         ));
+        error_reporting(E_ALL);
         return true;
     }
 

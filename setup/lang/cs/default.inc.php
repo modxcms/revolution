@@ -6,7 +6,7 @@
  * @package setup
  *
  * @author modxcms.cz
- * @updated 2012-02-05
+ * @updated 2012-05-01
  */
 
 // $_lang['additional_css'] = '';
@@ -97,13 +97,13 @@ $_lang['connection_database_host'] = 'Databázový server:';
 $_lang['connection_database_info'] = 'Nyní zadejte přihlašovací údaje pro databázi.';
 
 // $_lang['connection_database_login'] = 'Database login name:';
-$_lang['connection_database_login'] = 'Uživatelské jméno pro databázi:';
+$_lang['connection_database_login'] = 'Uživatel databáze:';
 
 // $_lang['connection_database_name'] = 'Database name:';
 $_lang['connection_database_name'] = 'Název databáze:';
 
 // $_lang['connection_database_pass'] = 'Database password:';
-$_lang['connection_database_pass'] = 'Heslo pro databázi:';
+$_lang['connection_database_pass'] = 'Heslo databáze:';
 
 // $_lang['connection_database_type'] = 'Database type:';
 $_lang['connection_database_type'] = 'Typ databáze:';

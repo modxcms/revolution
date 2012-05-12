@@ -5,6 +5,13 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#7798] Avoid E_NOTICE in PHP 5.4 from array_diff_assoc in xPDO::loadClass()
+- [#7796] Fix issue with phpthumb calling non-static methods statically
+- [#7764] Compress and default to open Resource Group access wizard in window
+- [#7762] Fix issue with add/decr output filter not adding 0 if 0 is passed
+- [#7793] Fix issue with saving a new media source access on user group edit screen
+- [#7712] Fix Resource quick update showing 2 checkboxes
+
 MODX Revolution 2.2.2-pl (May 2, 2012)
 ====================================
 - Preserve GET parameters for container_suffix redirects
