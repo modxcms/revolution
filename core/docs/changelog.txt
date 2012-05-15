@@ -2,6 +2,27 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#7798] Avoid E_NOTICE in PHP 5.4 from array_diff_assoc in xPDO::loadClass()
+- [#7796] Fix issue with phpthumb calling non-static methods statically
+- [#7764] Compress and default to open Resource Group access wizard in window
+- [#7762] Fix issue with add/decr output filter not adding 0 if 0 is passed
+- [#7793] Fix issue with saving a new media source access on user group edit screen
+- [#7712] Fix Resource quick update showing 2 checkboxes
+
+MODX Revolution 2.2.2-pl (May 2, 2012)
+====================================
+- Preserve GET parameters for container_suffix redirects
+- Allow custom FURLs via URL rewriting again
+- [#7427] Fix request_method_strict with FURLs off
+- Add ability to extend manager session by relogging in without leaving manager screen
+- Add better handling for AJAX exceptions, displaying AJAX errors
+- [#7649] Prevent E_NOTICE when using ago filter within <1sec difference
+- [#7568] Add JSON to default content types
+- [#7549] Open new window for phpinfo in system info page
+- [#7531] Add manager setting for first day of week in datepicker
+- Flip page title on manager pages for easier readability in browser tabs
+- [#7543] Add extra sanity checks for ellipsis output filter
+- CLI upgrades not loading MODX config data
 - [#7652] Sessionless contexts allowing anonymous access to unpublished resources
 - [#7610] User.sudo field invalid for sqlsrv
 - [#7619] Fix issue with TV FC rules and template constraints
