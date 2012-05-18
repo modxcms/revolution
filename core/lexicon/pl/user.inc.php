@@ -211,6 +211,9 @@ $_lang['user_dob'] = 'Data urodzenia'; #
 #$_lang['user_doesnt_exist'] = 'User does not exist';
 $_lang['user_doesnt_exist'] = 'User does not exist';
 
+#$_lang['user_duplicate'] = 'Duplicate User';
+$_lang['user_duplicate'] = 'Duplicate User';
+
 #$_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 

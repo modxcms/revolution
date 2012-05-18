@@ -1267,6 +1267,12 @@ $_lang['send'] = 'Send';
 #$_lang['service_url'] = 'Service URL';
 $_lang['service_url'] = 'Service URL';
 
+#$_lang['session_extended'] = 'Session extended!';
+$_lang['session_extended'] = 'Sesja została przedłużona!'; # ?
+
+#$_lang['session_logging_out'] = 'Your session has expired. Please proceed to login again.';
+$_lang['session_logging_out'] = 'Your session has expired. Please proceed to login again.';
+
 #$_lang['set'] = 'Set';
 $_lang['set'] = 'Set';
 
@@ -1482,6 +1488,9 @@ $_lang['updated'] = 'Updated';
 
 #$_lang['upload'] = 'Upload';
 $_lang['upload'] = 'Upload';
+
+#$_lang['username'] = 'Username';
+$_lang['username'] = 'Nazwa użytkownika'; # ?
 
 #$_lang['value'] = 'Value';
 $_lang['value'] = 'Value';
