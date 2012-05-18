@@ -353,7 +353,7 @@ $_lang['duplicate_template'] = 'Duplicate Template';
 $_lang['duplicate_tv'] = 'Duplicate TV';
 
 #$_lang['duplication_options'] = 'Duplication Options';
-$_lang['duplication_options'] = 'Opcje Duplikatu'; #
+$_lang['duplication_options'] = 'Opcje duplikowania'; #
 
 #$_lang['edit'] = 'Edit';
 $_lang['edit'] = 'Edytuj'; #
@@ -950,13 +950,13 @@ $_lang['plugin_deactivate'] = 'Deactivate Plugin';
 $_lang['plugins'] = 'Plugins';
 
 #$_lang['po_make_all_unpub'] = 'Make All Unpublished';
-$_lang['po_make_all_unpub'] = 'Make All Unpublished';
+$_lang['po_make_all_unpub'] = 'Wszystkie nieopublikowane'; #
 
 #$_lang['po_make_all_pub'] = 'Make All Published';
-$_lang['po_make_all_pub'] = 'Make All Published';
+$_lang['po_make_all_pub'] = 'Wszystkie opublikowane'; #
 
 #$_lang['po_preserve'] = 'Preserve Published Status';
-$_lang['po_preserve'] = 'Preserve Published Status';
+$_lang['po_preserve'] = 'Tak jak obecnie'; #
 
 #$_lang['preview'] = 'Preview';
 $_lang['preview'] = 'Preview';
@@ -998,7 +998,7 @@ $_lang['published'] = 'Opublikowany'; #
 $_lang['publishedon'] = 'Published On';
 
 #$_lang['publishing_options'] = 'Publishing Options';
-$_lang['publishing_options'] = 'Publishing Options';
+$_lang['publishing_options'] = 'Stan publikacji duplikatu'; #
 
 #$_lang['quick_create'] = 'Quick Create';
 $_lang['quick_create'] = '<abbr title="Otwiera okno edycji podstawowych pól zasobu">Szybko utwórz tutaj</abbr>'; #
