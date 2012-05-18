@@ -49,11 +49,11 @@ $_lang['dashboards'] = 'Pulpity'; #
 #$_lang['dashboards_desc'] = 'Manage all dashboard configurations.';
 $_lang['dashboards_desc'] = 'Zarządzaj konfiguracjami pulpitów.';
 
-#$_lang['edit_menu'] = 'Actions';
-$_lang['edit_menu'] = 'Akcje i Menu'; #
+#$_lang['edit_menu'] = 'Top Menu';
+$_lang['edit_menu'] = 'Menu Główne'; #
 
-#$_lang['edit_menu_desc'] = 'Manage Actions and the Top Menu structure.';
-$_lang['edit_menu_desc'] = 'Zarządzaj <var title="Actions">akcjami</var> i strukturą głównego menu.'; #
+#$_lang['edit_menu_desc'] = 'Manage the Top Menu structure.';
+$_lang['edit_menu_desc'] = 'Zarządzaj strukturą głównego menu.'; #
 
 #$_lang['eventlog_viewer'] = 'Error Log';
 $_lang['eventlog_viewer'] = 'Dziennik Błędów'; #
