@@ -6,6 +6,7 @@
  * @subpackage lexicon
  * @author KUROI Enogu http://twitter.com/enogu
  * @author yamamoto http://kyms.jp
+ * @author honda http://kogus.org
  */
 $_lang['test_config_file'] = '<span class="mono">[[+file]]</span>が書き込み可能になっているか確認します:';
 $_lang['test_config_file_nw'] = 'Linux/Unix環境に新しくインストールする場合、<span class="mono">core/config/</span>ディレクトリーに<span class="mono">[[+key]].inc.php</span>という名前の空ファイルを作成し、PHPからの書き込みを許可してください。';
@@ -18,7 +19,7 @@ $_lang['test_dependencies_fail_zlib'] = 'お使いのPHP実行環境ではzlib�
 $_lang['test_directory_exists'] = '<span class="mono">[[+dir]]</span>ディレクトリーの存在: ';
 $_lang['test_directory_writable'] = '<span class="mono">[[+dir]]</span>ディレクトリーの書き込み属性: ';
 $_lang['test_memory_limit'] = 'メモリーサイズ(24M以上必要)の確認: ';
-$_lang['test_memory_limit_fail'] = 'このサーバのmemory_limit設定の値は [[+memory]] になっています。MODXのインストーラを実行するためには24MB必要であるため一時的に自動設定を試みましたが、変更できませんでした。サーバのphp.ini設定を確認し、memory_limitの値を24MB以上(できれば32-64MB以上)に設定してください';
+$_lang['test_memory_limit_fail'] = 'このサーバのmemory_limit設定の値は [[+memory]] になっています。MODXのインストーラを実行するためには24MB必要であるため一時的な設定の変更を試みましたが、変更できませんでした。サーバのphp.ini設定を確認し、memory_limitの値を24MB以上(できれば32-64MB以上)に設定してください。';
 $_lang['test_memory_limit_success'] = '問題なし - [[+memory]]に設定されています。';
 $_lang['test_mysql_version_5051'] = 'お使いのMySQL環境([[+version]])のPDOドライバーには複数の不具合があるため、MODXが正常に動作しない恐れがあります。MySQLをアップグレードし、適切なパッチを当てることをおすすめします。';
 $_lang['test_mysql_version_client_nf'] = 'MySQLクライアントのバージョンが確認できません。';
@@ -36,15 +37,15 @@ $_lang['test_php_version_516'] = 'お使いのPHP実行環境([[+version]])のPD
 $_lang['test_php_version_520'] = 'お使いのPHP実行環境([[+version]])のPDOドライバーには複数の不具合があるため、MODXが正常に動作しない恐れがあります。PHPを5.3.0以上にバージョンアップし、必要なパッチを当てることをおすすめします。MODXはPHP 5.3.2以上で最適に動作します。';
 $_lang['test_php_version_start'] = 'PHPバージョンの確認: ';
 $_lang['test_php_version_success'] = '問題なし - 実行中のバージョン : [[+version]]';
-$_lang['test_safe_mode_start'] = 'Checking to make sure safe_mode is off:';
-$_lang['test_safe_mode_fail'] = 'MODX has found safe_mode to be on. You must disable safe_mode in your PHP configuration to proceed.';
+$_lang['test_safe_mode_start'] = 'セーフモード（safe_mode）の無効を確認:';
+$_lang['test_safe_mode_fail'] = 'お使いのPHPではセーフモードが有効です。処理を続行するには、セーフモードを無効にする必要があります。';
 $_lang['test_sessions_start'] = 'セッション設定の確認: ';
 $_lang['test_simplexml'] = 'SimpleXMLの確認:';
 $_lang['test_simplexml_nf'] = 'SimpleXMLが見つかりません';
 $_lang['test_simplexml_nf_msg'] = 'お使いのPHP実行環境ではSimpleXMLが有効になっていません。パッケージマネジメントシステム、ならびに一部の機能が動作しなくなります。このままインストールを続行することも可能ですが、MODXの先進的な機能を十分に利用するためにはSimpleXMLを有効にすることを強くおすすめします。';
-$_lang['test_suhosin'] = 'Checking for suhosin issues:';
-$_lang['test_suhosin_max_length'] = 'Suhosin GET max value too low!';
-$_lang['test_suhosin_max_length_err'] = 'Currently, you are using the PHP suhosin extension, and your suhosin.get.max_value_length is set too low for MODX to properly compress JS files in the manager. MODX recommends upping that value to 4096; until then, MODX will automatically set your JS compression (compress_js setting) to 0 to prevent errors.';
+$_lang['test_suhosin'] = 'Suhosinによる問題をチェックしています:';
+$_lang['test_suhosin_max_length'] = 'Suhosinによって制限されたGETの最大値が低すぎます。';
+$_lang['test_suhosin_max_length_err'] = 'お使いのPHP実行環境では、PHP用セキュリティパッチ『Suhosin』が適用されています。そのSuhoshinの設定suhosin.get.max_value_lengthが、MODXが管理画面用JavaScriptを圧縮するには低すぎる値です。MODXを利用する場合、値を4096に引き上げることをおすすめします。<br />それまでの間このエラーを避けるために、MODXは自動的にJavaScriptの圧縮設定（compress_js）を0に設定します。';
 $_lang['test_table_prefix'] = 'テーブルプレフィックス`[[+prefix]]`を確認: ';
 $_lang['test_table_prefix_inuse'] = 'このテーブルプレフィックスはすでに使用されています。';
 $_lang['test_table_prefix_inuse_desc'] = '指定されたテーブルプレフィックスが既に使用されているため、インストールを続行できませんでした。別のプレフィックスを指定し、テストを再試行してください。';
