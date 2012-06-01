@@ -1,5 +1,8 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.5-pl (June 1, 2012)
+====================================
+- [#8060] Implement __isset() to fix empty()/isset() on hydrated vars
 - [#7797] Avoid E_NOTICE from array_diff_assoc change in 5.4
 - Prefix indexes with table name for sqlite
 - Fix lazy loading of fields on demand
