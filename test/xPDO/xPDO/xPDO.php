@@ -182,6 +182,43 @@ class xPDOTest extends xPDOTestCase {
     }
 
     /**
+     * Tests xPDO::getDescendants and make sure it returns an array of the correct
+     * data.
+     * 
+     * @dataProvider providerGetDescendants
+     */
+    public function testGetDescendants($class,array $correct = array()) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $derv = $this->xpdo->getDescendants($class);
+        $diff = array_diff($correct,$derv);
+        $diff2 = array_diff($derv,$correct);
+        $success = is_array($derv) && empty($diff) && empty($diff2);
+        $this->assertTrue($success);
+    }
+    /**
+     * Data provider for testGetDescendants
+     */
+    public function providerGetDescendants() {
+        return array(
+            array('xPDOSimpleObject',array (
+              0 => 'Person',
+              1 => 'Phone',
+              2 => 'xPDOSample',
+              3 => 'Item',
+            )),
+            array('xPDOObject',array (
+              0 => 'xPDOSimpleObject',
+              1 => 'PersonPhone',
+              2 => 'BloodType',
+              3 => 'Person',
+              4 => 'Phone',
+              5 => 'xPDOSample',
+              6 => 'Item',
+            )),
+        );
+    }
+
+    /**
      * Test xPDO->getSelectColumns.
      *
      * $className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false
@@ -275,7 +312,7 @@ class xPDOTest extends xPDOTestCase {
         $diff = array_diff($fields,$correctFields);
         $diff2 = array_diff($correctFields,$fields);
         $success = is_array($fields) && empty($diff) && empty($diff2);
-        $this->assertTrue($success);
+        $this->assertEquals($correctFields, $fields);
     }
     /**
      * Data provider for testGetFields
@@ -283,18 +320,34 @@ class xPDOTest extends xPDOTestCase {
      */
     public function providerGetFields() {
         return array(
-            array('Person',array (
-              'id' => null,
-              'first_name' => '',
-              'last_name' => '',
-              'middle_name' => '',
-              'date_modified' => 'CURRENT_TIMESTAMP',
-              'dob' => '',
-              'gender' => '',
-              'blood_type' => null,
-              'username' => '',
-              'password' => '',
-              'security_level' => 1,
+            array('Person', array(
+                'id' => null,
+                'first_name' => '',
+                'last_name' => '',
+                'middle_name' => '',
+                'date_modified' => 'CURRENT_TIMESTAMP',
+                'dob' => '',
+                'gender' => '',
+                'blood_type' => null,
+                'username' => '',
+                'password' => '',
+                'security_level' => 1,
+            )),
+            array('xPDOSample', array(
+                'id' => NULL,
+                'parent' => 0,
+                'unique_varchar' => NULL,
+                'varchar' => NULL,
+                'text' => NULL,
+                'timestamp' => 'CURRENT_TIMESTAMP',
+                'unix_timestamp' => 0,
+                'date_time' => NULL,
+                'date' => NULL,
+                'enum' => NULL,
+                'password' => NULL,
+                'integer' => NULL,
+                'float' => 1.01230,
+                'boolean' => NULL,
             )),
         );
     }
