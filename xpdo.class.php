@@ -539,9 +539,9 @@ class xPDO {
     }
 
     /**
-     * Gets a list of derivative classes for the specified xPDOObject instance.
+     * Gets a list of derivative classes for the specified className.
      *
-     * NOTE: Will not work with xPDOObject/xPDOSimpleObject.
+     * The specified className must be xPDOObject or a derivative class.
      *
      * @param string $className The name of the class to retrieve derivatives for.
      * @return array An array of derivative classes or an empty array.
@@ -615,12 +615,11 @@ class xPDO {
         } elseif (isset ($this->packages[$this->package])) {
             $pqn= $this->package . '.' . $fqn;
             if (!$pkgClass= $this->_loadClass($class, $pqn, $included, $this->packages[$this->package]['path'], $transient)) {
-                if ($otherPkgs= array_diff_assoc($this->packages, array($this->package => $this->packages[$this->package]))) {
-                    foreach ($otherPkgs as $pkg => $pkgDef) {
-                        $pqn= $pkg . '.' . $fqn;
-                        if ($pkgClass= $this->_loadClass($class, $pqn, $included, $pkgDef['path'], $transient)) {
-                            break;
-                        }
+                foreach ($this->packages as $pkg => $pkgDef) {
+                    if ($pkg === $this->package) continue;
+                    $pqn= $pkg . '.' . $fqn;
+                    if ($pkgClass= $this->_loadClass($class, $pqn, $included, $pkgDef['path'], $transient)) {
+                        break;
                     }
                 }
             }
