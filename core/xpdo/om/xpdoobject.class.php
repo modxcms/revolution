@@ -734,6 +734,13 @@ class xPDOObject {
         }
     }
 
+    public function __isset($name) {
+        return ($this->getOption(xPDO::OPT_HYDRATE_FIELDS) && array_key_exists($name, $this->_fields) && isset($this->_fields[$name]))
+            || ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)
+                && ((array_key_exists($name, $this->_composites) && isset($this->_composites[$name]))
+                || (array_key_exists($name, $this->_aggregates) && isset($this->_aggregates[$name]))));
+    }
+
     /**
      * Set a field value by the field key or name.
      *
