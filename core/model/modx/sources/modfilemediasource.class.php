@@ -665,7 +665,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         /* invoke event */
         $this->xpdo->invokeEvent('OnFileManagerUpload',array(
             'files' => &$objects,
-            'directory' => $container,
+            'directory' => &$directory,
             'source' => &$this,
         ));
 
