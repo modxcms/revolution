@@ -730,6 +730,12 @@ $events['OnFileCreateFormPrerender']->fromArray(array (
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
+$events['OnFileEditFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnFileEditFormPrerender']->fromArray(array (
+  'name' => 'OnFileEditFormPrerender',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
 $events['OnManagerPageInit']= $xpdo->newObject('modEvent');
 $events['OnManagerPageInit']->fromArray(array (
   'name' => 'OnManagerPageInit',
