@@ -5,7 +5,7 @@
  * @language nl
  * @package modx
  * @subpackage lexicon
- * 
+ *
  * @author Bert Oost, <bertoost85@gmail.com>
  */
 $_lang['action'] = 'Actie';
