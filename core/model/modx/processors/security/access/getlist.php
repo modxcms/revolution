@@ -67,7 +67,7 @@ $data = array();
 foreach ($collection as $key => $object) {
     $principal = $modx->getObject($object->get('principal_class'), $object->get('principal'));
     if (!$principal) $principal = $modx->newObject($object->get('principal_class'), array('name' => '(anonymous)'));
-    $policyName = !empty($object->Policy) ? $object->Policy->get('name') : $modx->lexicon('no_policy_option');
+    $policyName = $object->Policy ? $object->Policy->get('name') : $modx->lexicon('no_policy_option');
 
     if ($object->Target) {
         $targetName = $accessClass == 'modAccessContext' ? $object->Target->get('key') : $object->Target->get('name');
