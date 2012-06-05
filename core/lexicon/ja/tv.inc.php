@@ -1,14 +1,15 @@
 <?php
 /**
- * TV Japanese lexicon topic
- *
- * @language ja
- * @package modx
- * @subpackage lexicon
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
- */
+* TV Japanese lexicon topic
+*
+* @language ja
+* @package modx
+* @subpackage lexicon
+* @author Nick http://smallworld.west-tokyo.com
+* @author shimojo http://www.priqia.com/
+* @author yamamoto http://kyms.jp
+* @author honda http://kogus.org
+*/
 $_lang['has_access'] = 'アクセスしますか？';
 $_lang['rank'] = 'ランク';
 $_lang['rendering_options'] = 'レンダリングオプション';
@@ -17,10 +18,10 @@ $_lang['tv_access_msg'] = 'このテンプレート変数が所属するリソ�
 $_lang['tv_binding_msg'] = 'このフィールドは、＠コマンドを使用し、データソースバインディングをサポートしています。';
 $_lang['tv_caption'] = '説明';
 $_lang['tv_change_template_msg'] = 'このテンプレートを変更するとこのページのテンプレート変数を再読み込みします。保存されていない変更は失われます。<br /><br />本当にテンプレートを変更しますか？';
-$_lang['tv_desc_caption'] = 'The text that will be used beside the TV when editing it in a Resource.';
-$_lang['tv_desc_category'] = 'The Category this TV belongs in.';
-$_lang['tv_desc_description'] = 'A short description of this TV.';
-$_lang['tv_desc_name'] = 'The name of this TV. It will be available using the [[*NameOfTV]] tags.';
+$_lang['tv_desc_caption'] = 'リソース編集時、テンプレート変数の横に表示されるテキスト。';
+$_lang['tv_desc_category'] = 'このテンプレート変数が属するカテゴリー。';
+$_lang['tv_desc_description'] = 'このテンプレート変数の簡単な説明。';
+$_lang['tv_desc_name'] = 'テンプレート変数の名前。テンプレート変数は[[*テンプレート変数名]]という書式で利用できるようになります。';
 $_lang['tv_description'] = '説明';
 $_lang['tv_err_delete'] = 'テンプレート変数の削除中にエラーが発生しました。';
 $_lang['tv_err_duplicate'] = 'テンプレート変数の複製中にエラーが発生しました。';
