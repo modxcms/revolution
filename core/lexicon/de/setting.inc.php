@@ -437,6 +437,9 @@ $_lang['setting_manager_time_format_desc'] = 'Das Format für Uhrzeitangaben im 
 $_lang['setting_manager_use_tabs'] = 'Reiter im Layout des MODX-Managers verwenden';
 $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, so werden Reiter für die Darstellung der Inhalte verwendet. Anderenfalls wird eine Portal-Darstellung verwendet.';
 
+$_lang['setting_manager_week_start'] = 'Wochenanfang';
+$_lang['setting_manager_week_start_desc'] = 'Legen Sie den Wochentag fest, mit dem die Woche beginnt. Geben Sie "0" ein (oder lassen Sie das Feld leer) wenn die Woche am Sonntag beginnt, "1", wenn sie am Montag beginnt, und so weiter...';
+
 $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
 
