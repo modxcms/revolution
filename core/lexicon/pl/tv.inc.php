@@ -1,11 +1,11 @@
 <?php
 /**
-* TV Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * TV Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['has_access'] = 'Has Access?';
 $_lang['has_access'] = 'Has Access?';
@@ -30,6 +30,18 @@ $_lang['tv_caption'] = 'Caption';
 
 #$_lang['tv_change_template_msg'] = 'Changing this template will cause the page to reload the Template Variables, losing any unsaved changes.<br /><br /> Are you sure you want to change this template?';
 $_lang['tv_change_template_msg'] = 'Changing this template will cause the page to reload the Template Variables, losing any unsaved changes.<br /><br /> Are you sure you want to change this template?';
+
+#$_lang['tv_desc_caption'] = 'The text that will be used beside the TV when editing it in a Resource.';
+$_lang['tv_desc_caption'] = 'The text that will be used beside the TV when editing it in a Resource.';
+
+#$_lang['tv_desc_category'] = 'The Category this TV belongs in.';
+$_lang['tv_desc_category'] = 'The Category this TV belongs in.';
+
+#$_lang['tv_desc_description'] = 'A short description of this TV.';
+$_lang['tv_desc_description'] = 'A short description of this TV.';
+
+#$_lang['tv_desc_name'] = 'The name of this TV. It will be available using the [[*NameOfTV]] tags.';
+$_lang['tv_desc_name'] = 'The name of this TV. It will be available using the [[*NameOfTV]] tags.';
 
 #$_lang['tv_description'] = 'Description';
 $_lang['tv_description'] = 'Description';
@@ -120,6 +132,9 @@ $_lang['tv_rank'] = 'Sort Order';
 
 #$_lang['tv_reset_params'] = 'Reset parameters';
 $_lang['tv_reset_params'] = 'Reset parameters';
+
+#$_lang['tv_sources.intro_msg'] = 'Here you can assign the Media Sources that are to be used for this TV in each specified Context. Double-click on the Source name in the grid to change it.';
+$_lang['tv_sources.intro_msg'] = 'Here you can assign the Media Sources that are to be used for this TV in each specified Context. Double-click on the Source name in the grid to change it.';
 
 #$_lang['tv_tmpl_access'] = 'Template Access';
 $_lang['tv_tmpl_access'] = 'Template Access';
