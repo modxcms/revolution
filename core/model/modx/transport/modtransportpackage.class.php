@@ -313,7 +313,11 @@ class modTransportPackage extends xPDOObject {
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_TIMEOUT,180);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                $safeMode = @ini_get('safe_mode');
+                $openBasedir = @ini_get('open_basedir');
+                if (empty($safeMode) && empty($openBasedir)) {
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                }
 
                 $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
                 if (!empty($proxyHost)) {

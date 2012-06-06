@@ -122,6 +122,7 @@ $_lang['perm.resourcegroup_resource_list_desc'] = 'Просматривать р
 $_lang['perm.resourcegroup_new_desc'] = 'Создавать новые группы ресурсов.';
 $_lang['perm.resourcegroup_save_desc'] = 'Сохранять группы ресурсов.';
 $_lang['perm.resourcegroup_view_desc'] = 'Просматривать группы ресурсов.';
+$_lang['perm.resource_duplicate_desc'] = 'Создавать копию ресурса.';
 $_lang['perm.resource_quick_create_desc'] = 'Использовать «Быстро создать ресурс» в контекстном меню.';
 $_lang['perm.resource_quick_update_desc'] = 'Использовать «Быстро обновить ресурс» в контекстном меню.';
 $_lang['perm.resource_tree_desc'] = 'Смотреть дерево ресурсов в левой навигационной панели.';
