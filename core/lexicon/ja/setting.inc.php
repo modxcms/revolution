@@ -5,7 +5,11 @@
 * @language ja
 * @package modx
 * @subpackage lexicon
+<<<<<<< HEAD
 * @author honda http://kogus.org 2012-05-07
+=======
+* @author honda http://kogus.org
+>>>>>>> yama/develop
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
 * @author yamamoto http://kyms.jp
