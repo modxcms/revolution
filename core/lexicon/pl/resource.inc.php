@@ -1,11 +1,11 @@
 <?php
 /**
-* Resource Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Resource Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['access'] = 'Access';
 $_lang['access'] = 'Przypisanie'; #
@@ -21,18 +21,6 @@ $_lang['class_key'] = 'Class Key'; # Celowo nie tłumaczone.
 
 #$_lang['context'] = 'Context';
 $_lang['context'] = 'Kontekst'; #
-
-#$_lang['createedit_document'] = 'Create/Edit Document';
-$_lang['createedit_document'] = 'Edycja'; #
-
-#$_lang['createedit_static'] = 'Create/Edit Static Resource';
-$_lang['createedit_static'] = 'Edycja'; #
-
-#$_lang['createedit_symlink'] = 'Create/Edit Symlink';
-$_lang['createedit_symlink'] = 'Edycja'; #
-
-#$_lang['createedit_weblink'] = 'Create/Edit Weblink';
-$_lang['createedit_weblink'] = 'Edycja'; #
 
 #$_lang['document'] = 'Document';
 $_lang['document'] = 'Dokument'; #
@@ -64,7 +52,7 @@ $_lang['markup'] = 'Markup/Structure';
 #$_lang['none'] = 'None';
 $_lang['none'] = 'Brak wartości'; # ?
 
-#$_lang['page_settings'] = 'Page Settings';
+#$_lang['page_settings'] = 'Settings';
 $_lang['page_settings'] = 'Ustawienia'; #
 
 #$_lang['preview'] = 'Preview';
@@ -82,8 +70,8 @@ $_lang['resource_alias'] = 'Alias'; #
 #$_lang['resource_alias_help'] = 'An alias for this resource. This will make the resource accessible using:<br /><br />http://yourserver/alias<br /><br /><strong>Note</strong>This only works if you\'re using friendly URLs.';
 $_lang['resource_alias_help'] = 'Opisowy adres do tego zasobu, który umożliwi wyświetlenie go przy użyciu URL:<br /><br /><code>http://twojserwis/alias</code><br /><br /><strong>Uwaga!</strong> Wymaga włączonej opcji przyjaznych URL.'; #
 
-#$_lang['resource_change_template_confirm'] = 'Are you sure you want to change the Template? WARNING: This will save your prior changes to the change and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save again when you are ready to save the Template change.';
-$_lang['resource_change_template_confirm'] = 'Czy na pewno chcesz zmienić szablon? <strong>Uwaga:</strong> Spowoduje to zapisanie dotychczasowych zmian i ponowne wczytanie strony. Upewnij się, że jesteś do tego przygotowany.<br /><br />Po ponownym wczytaniu strony, musisz zapisać zmiany, aby zachować nowe ustawienie szablonu.'; #
+#$_lang['resource_change_template_confirm'] = 'Are you sure you want to change the Template? <br /><br />WARNING: This will <b>only temporarily store</b> your prior changes and reload the page; ensure you are ready to do so before proceeding. After the page has reloaded, you will need to save when you are ready to save the Template change.';
+$_lang['resource_change_template_confirm'] = 'Czy na pewno chcesz zmienić szablon? <strong>Uwaga:</strong> Spowoduje to <b>tylko tymczasowe zapisanie</b> dotychczasowych zmian i ponowne wczytanie strony. Upewnij się, że jesteś do tego przygotowany.<br /><br />Po ponownym wczytaniu strony, musisz zapisać zmiany, aby zachować nowe ustawienie szablonu.'; #
 
 #$_lang['resource_cacheable'] = 'Cacheable';
 $_lang['resource_cacheable'] = 'Pamięć podręczna'; #
@@ -97,7 +85,7 @@ $_lang['resource_cancel_dirty_confirm'] = 'Istnieją nie zapisane zmiany! Czy na
 #$_lang['resource_class_key_help'] = 'This is the class key of the resource, showing its MODX type.';
 $_lang['resource_class_key_help'] = 'This is the class key of the resource, showing its MODX type.';
 
-#$_lang['resource_content'] = 'Resource Content';
+#$_lang['resource_content'] = 'Content';
 $_lang['resource_content'] = 'Zawartość'; #
 
 #$_lang['resource_contentdispo'] = 'Content Disposition';
@@ -401,7 +389,7 @@ $_lang['resource_uri_override_help'] = 'Jeżeli zaznaczone, alias do tego zasobu
 $_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';
 
 #$_lang['resource_view'] = 'View Resource';
-$_lang['resource_view'] = 'Otwórz'; # ? 'Otwórz' zwykle kojarzy się z edycją, ale menu ma oddzielną pozycję 'Edytuj' i trzeba odróżnić to polecenie od wyświetlenia w nowym oknie/zakładce.
+$_lang['resource_view'] = 'Wyświetl'; # ? 'Otwórz' zwykle kojarzy się z edycją, ale menu ma oddzielną pozycję 'Edytuj' i trzeba odróżnić to polecenie od wyświetlenia w nowym oknie/zakładce.
 
 #$_lang['show_sort_options'] = 'Show Sorting Options';
 $_lang['show_sort_options'] = 'Pokaż opcje sortowania'; #
@@ -469,3 +457,8 @@ $_lang['weblink_message'] = 'Odnośnik to odwołanie do innego obiektu w Interne
 #$_lang['weblink_new'] = 'New Weblink';
 $_lang['weblink_new'] = 'Utwórz nowy Odnośnik'; #
 
+#$_lang['weblink_response_code'] = 'Response Code';
+$_lang['weblink_response_code'] = 'Kod odpowiedzi HTTP'; #
+
+#$_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';
+$_lang['weblink_response_code_help'] = 'Kod odpowiedzi HTTP, który ma być wysyłany dla tego odnośnika.'; #

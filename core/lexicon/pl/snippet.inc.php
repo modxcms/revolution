@@ -1,11 +1,11 @@
 <?php
 /**
-* Snippet Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Snippet Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['snippet'] = 'Snippet';
 $_lang['snippet'] = 'Snippet';
@@ -21,6 +21,15 @@ $_lang['snippet_delete_confirm'] = 'Are you sure you want to delete this snippet
 
 #$_lang['snippet_desc'] = 'Description';
 $_lang['snippet_desc'] = 'Description';
+
+#$_lang['snippet_desc_category'] = 'The Category this Snippet belongs in.';
+$_lang['snippet_desc_category'] = 'The Category this Snippet belongs in.';
+
+#$_lang['snippet_desc_description'] = 'A short description of this Snippet.';
+$_lang['snippet_desc_description'] = 'A short description of this Snippet.';
+
+#$_lang['snippet_desc_name'] = 'The name of this Snippet. It will be available using the [[NameOfSnippet]] tags.';
+$_lang['snippet_desc_name'] = 'The name of this Snippet. It will be available using the [[NameOfSnippet]] tags.';
 
 #$_lang['snippet_duplicate_confirm'] = 'Are you sure you want to duplicate this snippet?';
 $_lang['snippet_duplicate_confirm'] = 'Are you sure you want to duplicate this snippet?';

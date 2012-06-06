@@ -1,11 +1,11 @@
 <?php
 /**
-* Welcome Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Welcome Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['modx_news'] = 'MODX News';
 $_lang['modx_news'] = 'Aktualności od MODX'; #

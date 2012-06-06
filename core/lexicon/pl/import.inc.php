@@ -1,11 +1,11 @@
 <?php
 /**
-* Import Polish lexicon entries
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Import Polish lexicon entries
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['import_allowed_extensions'] = 'Specify a comma-delimited list of file extensions to import.<br /><small><em>Leave blank to import all files according to the content types available in your site. Unknown types will be mapped as plain text.</em></small>';
 $_lang['import_allowed_extensions'] = 'Specify a comma-delimited list of file extensions to import.<br /><small><em>Leave blank to import all files according to the content types available in your site. Unknown types will be mapped as plain text.</em></small>';

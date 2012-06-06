@@ -1,11 +1,11 @@
 <?php
 /**
-* Plugin Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Plugin Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['event'] = 'Event';
 $_lang['event'] = 'Event';
@@ -30,6 +30,15 @@ $_lang['plugin_config'] = 'Plugin configuration';
 
 #$_lang['plugin_desc'] = 'Description';
 $_lang['plugin_desc'] = 'Description';
+
+#$_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
+$_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
+
+#$_lang['plugin_desc_description'] = 'A short description of this Plugin.';
+$_lang['plugin_desc_description'] = 'A short description of this Plugin.';
+
+#$_lang['plugin_desc_name'] = 'The name of this Plugin.';
+$_lang['plugin_desc_name'] = 'The name of this Plugin.';
 
 #$_lang['plugin_delete_confirm'] = 'Are you sure you want to delete this plugin?';
 $_lang['plugin_delete_confirm'] = 'Are you sure you want to delete this plugin?';
