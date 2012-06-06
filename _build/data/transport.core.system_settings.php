@@ -429,6 +429,15 @@ $settings['default_per_page']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['default_context']= $xpdo->newObject('modSystemSetting');
+$settings['default_context']->fromArray(array (
+  'key' => 'default_context',
+  'value' => 'web',
+  'xtype' => 'modx-combo-context',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['default_template']= $xpdo->newObject('modSystemSetting');
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',
