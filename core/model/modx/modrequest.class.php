@@ -320,7 +320,6 @@ class modRequest {
             $containerSuffix = trim($this->modx->getOption('container_suffix', null, ''));
             if (!isset ($this->modx->aliasMap[$identifier])) {
                 if (!empty ($containerSuffix)) {
-                    $suffixPos = strpos($identifier, $containerSuffix);
                     $suffixLen = strlen($containerSuffix);
                     $identifierLen = strlen($identifier);
                     if (substr($identifier, $identifierLen - $suffixLen) === $containerSuffix) {
@@ -339,18 +338,23 @@ class modRequest {
                 }
             }
             elseif ($this->modx->getOption('site_start', null, 1) == $this->modx->aliasMap[$identifier]) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                $parameters = $this->getParameters();
+                unset($parameters[$this->modx->getOption('request_param_alias')]);
+                $url = $this->modx->makeUrl($this->modx->getOption('site_start', null, 1), '', $parameters, 'full');
+                $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             } else {
-                $requestUri = $_SERVER['REQUEST_URI'];
-                $qsPos = strpos($requestUri, '?');
-                if ($qsPos !== false) $requestUri = substr($requestUri, 0, $qsPos);
-                $fullId = $this->modx->getOption('base_url', null, MODX_BASE_URL) . $identifier;
-                $requestUri = urldecode($requestUri);
-                if ($fullId !== $requestUri && strpos($requestUri, $fullId) !== 0) {
-                    $parameters = $this->getParameters();
-                    unset($parameters[$this->modx->getOption('request_param_alias')]);
-                    $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');
-                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                if ($this->modx->getOption('friendly_urls_strict', null, false)) {
+                    $requestUri = $_SERVER['REQUEST_URI'];
+                    $qsPos = strpos($requestUri, '?');
+                    if ($qsPos !== false) $requestUri = substr($requestUri, 0, $qsPos);
+                    $fullId = $this->modx->getOption('base_url', null, MODX_BASE_URL) . $identifier;
+                    $requestUri = urldecode($requestUri);
+                    if ($fullId !== $requestUri && strpos($requestUri, $fullId) !== 0) {
+                        $parameters = $this->getParameters();
+                        unset($parameters[$this->modx->getOption('request_param_alias')]);
+                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');
+                        $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                    }
                 }
                 $this->modx->resourceMethod = 'alias';
             }
