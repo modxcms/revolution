@@ -56,7 +56,8 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
     $c['namespace'] = $action['namespace'];
     $c['namespace_path'] = $action['namespace_path'];
     $baseHelpUrl = $modx->getOption('base_help_url',$scriptProperties,'http://rtfm.modx.com/display/revolution20/');
-    $c['help_url'] = $baseHelpUrl.ltrim($action['help_url'],'/');
+    //$c['help_url'] = $baseHelpUrl.ltrim($action['help_url'],'/');
+    $c['help_url'] = $baseHelpUrl === 'http://rtfm.modx.com/display/revolution20/' ? $baseHelpUrl.ltrim($action['help_url'],'/') : $baseHelpUrl;
 }
 
 $actions = $modx->request->getAllActionIDs();
