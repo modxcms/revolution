@@ -130,6 +130,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
+        $this->setPlaceholder('onPluginFormPrerender', $this->onPluginFormPrerender);
     }
 
     /**

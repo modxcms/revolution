@@ -161,6 +161,7 @@ class ElementTVUpdateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
+        $this->setPlaceholder('onTVFormPrerender', $this->onTVFormPrerender);
     }
 
     /**

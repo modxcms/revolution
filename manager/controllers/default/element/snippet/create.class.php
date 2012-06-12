@@ -79,6 +79,7 @@ class ElementSnippetCreateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
+        $this->setPlaceholder('onSnipFormPrerender', $this->onSnipFormPrerender);
     }
 
     /**
