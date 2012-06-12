@@ -106,6 +106,7 @@ Ext.onReady(function() {
             'mode' => modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
+        $this->setPlaceholder('onTVFormPrerender', $this->onTVFormPrerender);
     }
 
     /**
