@@ -6,6 +6,10 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.3-pl (June 13, 2012)
+====================================
+- Add setting to be able to set default context for new Resources
+- Pass http_host in provider requests
 - [#7933] Add friendly_urls_strict to optionally enable non-canonical redirects
 - [#6428] Fix help tooltip for new namespace window
 - [#8054] Fix transport provider verify processor consistency

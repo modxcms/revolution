@@ -20,10 +20,10 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
             ,notifyEnter: function(ddSource, e, data) {
                 if (ddTarget.getEl) {
                     var el = ddTarget.getEl();
-                    if (el) { el.frame(); }
-                }
-                if (el.focus) {
-                    el.focus();
+                    if (el) { 
+                        el.frame(); 
+                        el.focus();
+                    }
                 }
             }
             ,notifyDrop: function(ddSource, e, data) {
@@ -125,21 +125,22 @@ MODx.insertAtCursor = function(myField, myValue,h) {
             myValue = z;
         }
     }
-    if (document.selection) { 
-        myField.focus(); 
-        sel = document.selection.createRange(); 
-        sel.text = myValue; 
+    myField.blur();
+    if (document.selection) {
+        sel = document.selection.createRange();
+        sel.text = myValue;
     } else if (myField.selectionStart || myField.selectionStart == '0') {
-        var startPos = myField.selectionStart; 
-        var endPos = myField.selectionEnd; 
-        myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length);   
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length); 
         myField.selectionStart = startPos + myValue.length;
         myField.selectionEnd = myField.selectionStart;
-    } else { 
-        myField.value += myValue; 
+    } else {
+        myField.value += myValue;
     }
     myField.focus();
 };
+
 MODx.insertForRTE = function(v,cfg) {
     var fn = cfg.onInsert || false;
     if (fn) {

@@ -123,6 +123,7 @@ class ElementChunkCreateManagerController extends modManagerController {
             'chunk' => null,
         ));
         if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }
+        $this->setPlaceholder('onChunkFormPrerender', $this->onChunkFormPrerender);
     }
 
     /**

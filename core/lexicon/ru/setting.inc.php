@@ -496,3 +496,5 @@ $_lang['setting_which_element_editor'] = 'Редактор для элемент
 $_lang['setting_which_element_editor_desc'] = 'Здесь вы можете выбрать какой редактор использовать при редактировании элементов.';
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 $_lang['setting_xhtml_urls_desc'] = 'Если включен этот параметр, то все амперсанды (&amp;) в ссылках будут заменены на конструкцию &amp;amp; в соответствии с форматом XHTML.';
+$_lang['setting_default_context'] = 'Контекст по умолчанию';
+$_lang['setting_default_context_desc'] = 'Контекст, используемый по умолчанию при создании нового ресурса.';

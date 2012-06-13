@@ -127,6 +127,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTempFormPrerender)) $this->onTempFormPrerender = implode('',$this->onTempFormPrerender);
+        $this->setPlaceholder('onTempFormPrerender', $this->onTempFormPrerender);
     }
 
     /**
