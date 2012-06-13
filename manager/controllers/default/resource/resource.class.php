@@ -216,7 +216,12 @@ abstract class ResourceManagerController extends modManagerController {
      * @return modContext
      */
     public function setContext() {
-        $this->ctx = !empty($this->scriptProperties['context_key']) ? $this->scriptProperties['context_key'] : 'web';
+        if(!empty($this->scriptProperties['context_key'])) {
+                $this->ctx = $this->scriptProperties['context_key'];
+        } else {
+                $this->ctx = !empty($this->resource) ? $this->resource->get('context_key') : $this->modx->getOption('default_context');
+        }
+
         $this->setPlaceholder('_ctx',$this->ctx);
         $this->context = $this->modx->getContext($this->ctx);
         return $this->context;

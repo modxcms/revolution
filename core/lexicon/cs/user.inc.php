@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-04-01
+ * @updated 2012-05-01
  */
 // $_lang['active'] = 'Active';
 $_lang['active'] = 'Aktivní';
@@ -212,6 +212,9 @@ $_lang['user_dob'] = 'Datum narození';
 
 // $_lang['user_doesnt_exist'] = 'User does not exist';
 $_lang['user_doesnt_exist'] = 'Uživatel neexistuje';
+
+// $_lang['user_duplicate'] = 'Duplicate User';
+$_lang['user_duplicate'] = 'Zkopírovat uživatele';
 
 // $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 $_lang['user_edit_self_msg'] = 'Nejspíše se budete muset odhlásit a poté znovu přihlásit, pro úplné aktualizování profilu.</strong><br>Také je doporučeno nechat si vygenerovat nové heslo, bude Vám posláno e-mailem.';

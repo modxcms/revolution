@@ -2,6 +2,23 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.3-pl (June 13, 2012)
+====================================
+- Add setting to be able to set default context for new Resources
+- Pass http_host in provider requests
+- [#7933] Add friendly_urls_strict to optionally enable non-canonical redirects
+- [#6428] Fix help tooltip for new namespace window
+- [#8054] Fix transport provider verify processor consistency
+- [#8051] Added extra sanitization for modFileHandler.sanitizePath
+- [#7925] Fix error editing Resources in multi-context sites
+- [#8052] Fix empty()/isset() on hydrated fields/related objects
+- [#7798] Avoid E_NOTICE in PHP 5.4 from array_diff_assoc in xPDO::loadClass()
+- [#7796] Fix issue with phpthumb calling non-static methods statically
+- [#7764] Compress and default to open Resource Group access wizard in window
+- [#7762] Fix issue with add/decr output filter not adding 0 if 0 is passed
+- [#7793] Fix issue with saving a new media source access on user group edit screen
+- [#7712] Fix Resource quick update showing 2 checkboxes
+
 MODX Revolution 2.2.2-pl (May 2, 2012)
 ====================================
 - Preserve GET parameters for container_suffix redirects

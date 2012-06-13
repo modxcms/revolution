@@ -27,7 +27,11 @@ class modProviderCreateProcessor extends modObjectCreateProcessor {
 
         $verified = $this->object->verify();
         if ($verified !== true) {
-            $this->addFieldError('service_url',$this->modx->lexicon('provider_err_not_verified'));
+            if (!is_bool($verified)) {
+                $this->addFieldError('service_url',$verified);
+            } else {
+                $this->addFieldError('service_url',$this->modx->lexicon('provider_err_not_verified'));
+            }
         }
 
         return parent::beforeSave();

@@ -429,6 +429,15 @@ $settings['default_per_page']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['default_context']= $xpdo->newObject('modSystemSetting');
+$settings['default_context']->fromArray(array (
+  'key' => 'default_context',
+  'value' => 'web',
+  'xtype' => 'modx-combo-context',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['default_template']= $xpdo->newObject('modSystemSetting');
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',
@@ -731,6 +740,15 @@ $settings['friendly_alias_word_delimiters']->fromArray(array (
 $settings['friendly_urls']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_urls']->fromArray(array (
   'key' => 'friendly_urls',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_urls_strict']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_urls_strict']->fromArray(array (
+  'key' => 'friendly_urls_strict',
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',

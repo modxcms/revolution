@@ -367,8 +367,9 @@ class modOutputFilter {
                         case 'increment':
                         case 'incr':
                             /* Returns input incremented by option (default: +1) */
-                            if (empty($m_val))
+                            if (empty($m_val) && $m_val !== 0 && $m_val !== '0') {
                                 $m_val = 1;
+                            }
                             $output = (float)$output + (float)$m_val;
                             break;
 
@@ -376,24 +377,27 @@ class modOutputFilter {
                         case 'decrement':
                         case 'decr':
                             /* Returns input decremented by option (default: -1) */
-                            if (empty($m_val))
+                            if (empty($m_val) && $m_val !== 0 && $m_val !== '0') {
                                 $m_val = 1;
+                            }
                             $output = (float)$output - (float)$m_val;
                             break;
 
                         case 'multiply':
                         case 'mpy':
                             /* Returns input multiplied by option (default: *2) */
-                            if (empty($m_val))
+                            if (empty($m_val) && $m_val !== 0 && $m_val !== '0') {
                                 $m_val = 1;
+                            }
                             $output = (float)$output * (float)$m_val;
                             break;
 
                         case 'divide':
                         case 'div':
                             /* Returns input divided by option (default: /2) */
-                            if (empty($m_val))
+                            if (empty($m_val)) {
                                 $m_val = 2;
+                            }
                             if (!empty($output)) {
                                 $output = (float)$output / (float)$m_val;
                             } else {
