@@ -111,13 +111,7 @@ class modFileHandler {
      * @return string The sanitized path
      */
     public function sanitizePath($path) {
-        $replace = array('../' => '', './' => '', '\\' => '/', '//'  => '/');
-        foreach ($replace as $from => $to) {
-            while (stristr($from,$path)) {
-                $path = str_replace($from,$to,$path);
-            }
-        }
-        return $path;
+        return preg_replace(array('/\.*[\/|\\\]/i', '/[\/|\\\]+/i'), array('/', '/'), $path);
     }
 
     /**

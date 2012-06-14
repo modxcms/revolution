@@ -6,6 +6,10 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.4-pl (June 14, 2012)
+====================================
+- [#8105], [#8051] Fix modFileHandler::sanitizePath() infinite recursion
+
 MODX Revolution 2.2.3-pl (June 13, 2012)
 ====================================
 - Add setting to be able to set default context for new Resources
