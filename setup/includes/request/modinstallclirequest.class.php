@@ -218,8 +218,10 @@ class modInstallCLIRequest extends modInstallRequest {
         if (empty($settings['config_options'])) {
             $settings['config_options'] = array();
         }
-        $dsn = $this->getDatabaseDSN($settings['database_type'],$settings['database_server'],$settings['database'],$settings['database_connection_charset']);
-        $settings['database_dsn'];
+        if (empty($settings['database']) && !empty($settings['dbase'])) {
+            $settings['database'] = $settings['dbase'];
+        }
+        $settings['database_dsn'] = $this->getDatabaseDSN($settings['database_type'],$settings['database_server'],$settings['database'],$settings['database_connection_charset']);
         if (!empty($settings['database'])) {
             $settings['dbase'] = $settings['database'];
         }

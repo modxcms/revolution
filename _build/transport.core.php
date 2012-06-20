@@ -275,6 +275,7 @@ include MODX_BUILD_DIR . 'data/transport.core.context_settings.php';
 $attributes= array(
     xPDOTransport::PRESERVE_KEYS => true,
     xPDOTransport::UPDATE_OBJECT => false,
+    xPDOTransport::UNIQUE_KEY => array('context_key', 'key')
 );
 foreach ($collection as $c) {
     $package->put($c, $attributes);
