@@ -100,7 +100,7 @@ class SystemFileCreateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('file_create');
+        return $this->modx->lexicon('new_file');
     }
 
     /**
