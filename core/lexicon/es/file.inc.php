@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * File Spanish lexicon topic
  *
@@ -6,10 +6,14 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['directory'] = 'Directory';
+$_lang['file'] = 'Archivo';
 $_lang['file_confirm_remove'] = 'Estás seguro de que quieres remover este archivo?  Esto puede potencialmente romper tu sitio web.';
+$_lang['file_create'] = 'Crear Archivo';
 $_lang['file_deleted'] = 'Éxito!';
 $_lang['file_delete_file'] = 'Borrar Archivo';
 $_lang['file_delete_folder'] = 'Borrar Carpeta';
+$_lang['file_download'] = 'Descargar Archivo';
 $_lang['file_download_file'] = 'Descargar Archivo';
 $_lang['file_download_unzip'] = 'Unzip Archivo';
 $_lang['file_edit'] = 'Editar Archivo';
@@ -34,6 +38,7 @@ $_lang['file_err_upload'] = 'Ocurrió un error mientras se trataban de subir los
 $_lang['file_exists_hk'] = 'El archivo <b>{0}</b> ya existe';
 $_lang['file_extensions'] = 'Extensiones de Archivo';
 $_lang['file_folder_enter_new'] = 'Ingresar el Nombre de la Carpeta Nueva';
+$_lang['file_chmod'] = 'Chmod';
 $_lang['file_folder_chmod'] = 'Directorio Chmod';
 $_lang['file_folder_create'] = 'Crear Directorio';
 $_lang['file_folder_create_here'] = 'Crear Directorio Aquí';
@@ -57,11 +62,16 @@ $_lang['file_folder_err_remove'] = 'Ocurrió un error mientras se trataba de rem
 $_lang['file_folder_parent'] = 'Directorio Padre';
 $_lang['file_folder_remove'] = 'Remover Directorio';
 $_lang['file_folder_remove_confirm'] = 'Estás seguro de que quieres remover este directorio?  Esto potencialmente puede romper tu sitio.';
+$_lang['file_folder_rename'] = 'Renombrar Directorio';
 $_lang['file_last_accessed'] = 'Último Accesado';
 $_lang['file_last_modified'] = 'Último Modificado';
 $_lang['file_name'] = 'Nombre del Archivo';
+$_lang['file_new'] = 'Archivo Nuevo';
+$_lang['file_quick_create'] = 'Crear Archivo Rápido';
+$_lang['file_quick_update'] = 'Actualizar Archivo Rápido';
 $_lang['file_remove'] = 'Remover Archivo';
 $_lang['file_remove_confirm'] = 'Estás seguro de que quieres remover este archivo completamente?';
+$_lang['file_rename'] = 'Renombrar Archivo';
 $_lang['file_saved'] = 'Archivo actualizado exitosamente!';
 $_lang['file_size'] = 'Tamaño del Archivo';
 $_lang['file_unzip'] = 'La descompresión fue exitosa!';
@@ -106,5 +116,4 @@ $_lang['upf_upload_desc'] = 'Subir los archivos en la fila al servidor.';
 $_lang['upf_upload_err'] = 'Error de subida.';
 $_lang['upf_uploading'] = 'Subiendo...';
 $_lang['upf_uploading_desc'] = 'Subiendo: {0} de {1} archivos completados.';
-$_lang['upload_files'] = 'Upload Files';
-
+$_lang['upload_files'] = 'Subir Archivos';
