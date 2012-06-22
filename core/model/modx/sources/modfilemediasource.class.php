@@ -236,8 +236,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             if ($this->hasPermission('file_update') && $canSave) {
                 if (!empty($fileArray['page'])) {
                     $menu[] = array(
-                        'text' => $this->xpdo->lexicon('file_edit'),
+                        'text' => $this->xpdo->lexicon('edit'),
                         'handler' => 'this.editFile',
+                    );
+                    $menu[] = array(
+                        'text' => $this->xpdo->lexicon('quick_update'),
+                        'handler' => 'this.quickEditFile',
                     );
                 }
                 $menu[] = array(
@@ -247,14 +251,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             }
             if ($this->hasPermission('file_view') && $canView) {
                 $menu[] = array(
-                    'text' => $this->xpdo->lexicon('file_download'),
+                    'text' => $this->xpdo->lexicon('download'),
                     'handler' => 'this.downloadFile',
                 );
             }
             if ($this->hasPermission('file_remove') && $canRemove) {
                 if (!empty($menu)) $menu[] = '-';
                 $menu[] = array(
-                    'text' => $this->xpdo->lexicon('file_remove'),
+                    'text' => $this->xpdo->lexicon('remove'),
                     'handler' => 'this.removeFile',
                 );
             }
@@ -267,7 +271,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             }
             if ($this->hasPermission('directory_chmod') && $canSave) {
                 $menu[] = array(
-                    'text' => $this->xpdo->lexicon('file_folder_chmod'),
+                    'text' => $this->xpdo->lexicon('file_chmod'),
                     'handler' => 'this.chmodDirectory',
                 );
             }
@@ -278,7 +282,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 );
             }
             $menu[] = array(
-                'text' => $this->xpdo->lexicon('directory_refresh'),
+                'text' => $this->xpdo->lexicon('refresh'),
                 'handler' => 'this.refreshActiveNode',
             );
             if ($this->hasPermission('file_upload') && $canCreate) {
@@ -293,11 +297,15 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'text' => $this->xpdo->lexicon('file_create'),
                     'handler' => 'this.createFile',
                 );
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_quick_create'),
+                    'handler' => 'this.quickCreateFile',
+                );
             }
             if ($this->hasPermission('directory_remove') && $canRemove) {
                 $menu[] = '-';
                 $menu[] = array(
-                    'text' => $this->xpdo->lexicon('file_folder_remove'),
+                    'text' => $this->xpdo->lexicon('remove'),
                     'handler' => 'this.removeDirectory',
                 );
             }
