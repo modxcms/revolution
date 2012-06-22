@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Katalog';
+$_lang['file'] = 'Fil';
 $_lang['file_confirm_remove'] = 'Är du säker på att du vill ta bort den här filen? Det här kan potentiellt ha sönder din webbplats.';
 $_lang['file_create'] = 'Skapa fil';
 $_lang['file_deleted'] = 'Klart!';
@@ -37,6 +38,7 @@ $_lang['file_err_upload'] = 'Ett fel inträffade när filerna skulle laddas upp.
 $_lang['file_exists_hk'] = 'Filen <b>{0}</b> finns redan';
 $_lang['file_extensions'] = 'Filändelser';
 $_lang['file_folder_enter_new'] = 'Ange den nya katalogens namn';
+$_lang['file_chmod'] = 'Chmoda';
 $_lang['file_folder_chmod'] = 'Chmoda katalog';
 $_lang['file_folder_create'] = 'Skapa katalog';
 $_lang['file_folder_create_here'] = 'Skapa katalog här';
@@ -60,11 +62,16 @@ $_lang['file_folder_err_remove'] = 'Ett fel inträffade när katalogen skulle ta
 $_lang['file_folder_parent'] = 'Föräldrakatalog';
 $_lang['file_folder_remove'] = 'Ta bort katalog';
 $_lang['file_folder_remove_confirm'] = 'Är du säker på att du vill ta bort den här katalogen? Detta kan potentiellt ha sönder din webbplats.';
+$_lang['file_folder_rename'] = 'Byt namn på katalog';
 $_lang['file_last_accessed'] = 'Senast använd';
 $_lang['file_last_modified'] = 'Senast ändrad';
 $_lang['file_name'] = 'Filnamn';
+$_lang['file_new'] = 'Ny fil';
+$_lang['file_quick_create'] = 'Snabbskapa fil';
+$_lang['file_quick_update'] = 'Snabbuppdatera fil';
 $_lang['file_remove'] = 'Ta bort fil';
 $_lang['file_remove_confirm'] = 'Är du säker på att du vill ta bort den här filen helt och hållet?';
+$_lang['file_rename'] = 'Byt namn på fil';
 $_lang['file_saved'] = 'Filen uppdaterades utan problem!';
 $_lang['file_size'] = 'Filstorlek';
 $_lang['file_unzip'] = 'Uppzippningen klar!';
