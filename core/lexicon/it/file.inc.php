@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Directory';
+$_lang['file'] = 'File';
 $_lang['file_confirm_remove'] = 'Sei sicuro di voler rimuovere questo file? Il sito potrebbe danneggiarsi.';
 $_lang['file_create'] = 'Crea File';
 $_lang['file_deleted'] = '<span style="color:#009900">Successo!</span>';
@@ -37,6 +38,7 @@ $_lang['file_err_upload'] = 'Si è verificato un errore cercando di caricare i f
 $_lang['file_exists_hk'] = 'Il file <b>{0}</b> esiste già';
 $_lang['file_extensions'] = 'Estensioni  file';
 $_lang['file_folder_enter_new'] = 'Inserisci un nuovo nome per la cartella';
+$_lang['file_chmod'] = 'Chmod';
 $_lang['file_folder_chmod'] = 'Chmod directory';
 $_lang['file_folder_create'] = 'Crea directory';
 $_lang['file_folder_create_here'] = 'Crea directory qui';
@@ -60,11 +62,16 @@ $_lang['file_folder_err_remove'] = 'Si è verificato un errore tentando di rimuo
 $_lang['file_folder_parent'] = 'Directory genitore';
 $_lang['file_folder_remove'] = 'Rimuovi directory';
 $_lang['file_folder_remove_confirm'] = 'Sei sicuro di voler rimuovere questa directory? Il sito potrebbe danneggiarsi.';
+$_lang['file_folder_rename'] = 'Rinomina Directory';
 $_lang['file_last_accessed'] = 'Ultimo accesso';
 $_lang['file_last_modified'] = 'Ultima modifica';
 $_lang['file_name'] = 'Nome del file';
+$_lang['file_new'] = 'Nuovo File';
+$_lang['file_quick_create'] = 'Creazione rapida File';
+$_lang['file_quick_update'] = 'Modifica rapida File';
 $_lang['file_remove'] = 'Rimuovi file';
 $_lang['file_remove_confirm'] = 'Sei sicuro di voler rimuovere completamente questo file?';
+$_lang['file_rename'] = 'Rinomina file';
 $_lang['file_saved'] = 'File aggiornato con successo!';
 $_lang['file_size'] = 'Dimensione del file';
 $_lang['file_unzip'] = 'Decompressione effettuata con successo!';
