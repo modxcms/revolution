@@ -12,6 +12,7 @@
  * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['directory'] = 'Verzeichnis';
+$_lang['file'] = 'Datei';
 $_lang['file_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Datei löschen möchten? Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
 $_lang['file_create'] = 'Datei erstellen';
 $_lang['file_deleted'] = 'Erfolgreich!';
@@ -41,8 +42,8 @@ $_lang['file_err_unzip_missing_lib'] = 'ZIP-Bibliothek fehlt (php_zip.dll / zip.
 $_lang['file_err_upload'] = 'Ein Fehler trat auf bei dem Versuch, die Dateien hochzuladen.';
 $_lang['file_exists_hk'] = 'Datei <b>{0}</b> existiert bereits';
 $_lang['file_extensions'] = 'Dateiendungen';
-// $_lang['file_extensions_desc'] = 'Dies sind die erlaubten Dateiendungen für den Inhaltstyp.';
 $_lang['file_folder_enter_new'] = 'Geben Sie einen neuen Verzeichnisnamen ein';
+$_lang['file_chmod'] = 'Verzeichnisrechte bearbeiten (CHMOD)';
 $_lang['file_folder_chmod'] = 'Verzeichnisrechte bearbeiten (CHMOD)';
 $_lang['file_folder_create'] = 'Verzeichnis anlegen';
 $_lang['file_folder_create_here'] = 'Verzeichnis hier anlegen';
@@ -66,11 +67,16 @@ $_lang['file_folder_err_remove'] = 'Ein Fehler trat auf beim Versuch, das Verzei
 $_lang['file_folder_parent'] = 'Elternverzeichnis';
 $_lang['file_folder_remove'] = 'Verzeichnis löschen';
 $_lang['file_folder_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Verzeichnis löschen möchten? Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
+$_lang['file_folder_rename'] = 'Verzeichnis umbenennen';
 $_lang['file_last_accessed'] = 'Letzter Zugriff';
 $_lang['file_last_modified'] = 'Letzte Änderung';
 $_lang['file_name'] = 'Dateiname';
+$_lang['file_new'] = 'Neuer Datei';
+$_lang['file_quick_create'] = 'Datei schnell erstellen';
+$_lang['file_quick_update'] = 'Datei schnell bearbeiten';
 $_lang['file_remove'] = 'Datei löschen';
 $_lang['file_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Datei endgültig löschen möchten?';
+$_lang['file_rename'] = 'Datei umbenennen';
 $_lang['file_saved'] = 'Datei erfolgreich aktualisiert!';
 $_lang['file_size'] = 'Dateigröße';
 $_lang['file_unzip'] = 'Das Entpacken war erfolgreich!';
