@@ -9,6 +9,7 @@
  * @author Bert Oost <bertoost85@gmail.com>
  */
 $_lang['directory'] = 'Map';
+$_lang['file'] = 'Bestand';
 $_lang['file_confirm_remove'] = 'Weet je zeker dat je dit bestand wilt verwijderen? Dit kan uw website potentieel breken!';
 $_lang['file_create'] = 'Maak Bestand';
 $_lang['file_deleted'] = 'Succes!';
@@ -39,6 +40,7 @@ $_lang['file_err_upload'] = 'Er is een fout opgetreden bij het uploaden.';
 $_lang['file_exists_hk'] = 'Bestand <b>{0}</b> bestaat al';
 $_lang['file_extensions'] = 'Bestands Extensie';
 $_lang['file_folder_enter_new'] = 'Typ de naam voor de nieuwe map';
+$_lang['file_chmod'] = 'Chmod';
 $_lang['file_folder_chmod'] = 'Chmod Map';
 $_lang['file_folder_create'] = 'Maak Map';
 $_lang['file_folder_create_here'] = 'Maak Map Hier';
@@ -62,11 +64,16 @@ $_lang['file_folder_err_remove'] = 'Er is een onbekende fout opgetreden bij een 
 $_lang['file_folder_parent'] = 'Bovenliggende Map';
 $_lang['file_folder_remove'] = 'Verwijder Map';
 $_lang['file_folder_remove_confirm'] = 'Weet je zeker dat je deze map wilt verwijderen? Dit kan je website in de war maken.';
+$_lang['file_folder_rename'] = 'Hernoem Map';
 $_lang['file_last_accessed'] = 'Laatste Toegang';
 $_lang['file_last_modified'] = 'Laatst Bewerkt';
 $_lang['file_name'] = 'Bestandsnaam';
+$_lang['file_new'] = 'Nieuwe Bestand';
+$_lang['file_quick_create'] = 'Maak Bestand';
+$_lang['file_quick_update'] = 'Bewerken Bestand';
 $_lang['file_remove'] = 'Bestand Verwijderen';
 $_lang['file_remove_confirm'] = 'Weet je zeker dat je dit bestand geheel wilt verwijderen?';
+$_lang['file_rename'] = 'Hernoem Bestand';
 $_lang['file_saved'] = 'Bestand met succes bijgewerkt!';
 $_lang['file_size'] = 'Bestand grootte';
 $_lang['file_unzip'] = 'Unzip was succesvol!';
