@@ -113,7 +113,7 @@ class SystemFileEditManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('file_edit').': '.basename($this->filename);
+        return $this->modx->lexicon('file').': '.basename($this->filename);
     }
 
     /**
