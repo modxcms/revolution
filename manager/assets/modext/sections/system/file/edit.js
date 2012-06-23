@@ -70,7 +70,7 @@ MODx.panel.EditFile = function(config) {
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure([{
-            title: _('edit_file')
+            title: _('file_edit')
             ,id: 'modx-form-file-edit'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
