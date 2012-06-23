@@ -62,12 +62,12 @@ MODx.panel.CreateFile = function(config) {
         ,template: ''
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('new_file')+'</h2>'
+            html: '<h2>'+_('file_new')+'</h2>'
             ,id: 'modx-file-header'
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure([{
-            title: _('create_file')
+            title: _('file_create')
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-template-form'
