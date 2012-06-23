@@ -1,4 +1,11 @@
 <?php
+/**
+ * Default Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['access'] = 'Доступ';
 $_lang['access_denied'] = 'Доступ закрыт.';
 $_lang['action'] = 'Действие';
@@ -27,7 +34,7 @@ $_lang['alias'] = 'Псевдоним';
 $_lang['and'] = 'и';
 $_lang['anonymous'] = 'аноним';
 $_lang['assets'] = 'Ресурсы';
-$_lang['at'] = 'В';
+$_lang['at'] = 'в';
 $_lang['attachment'] = 'Прикреплённый файл';
 $_lang['attributes'] = 'Атрибуты';
 $_lang['back'] = '&lt;- Назад';
@@ -105,6 +112,7 @@ $_lang['disabled'] = 'Отключён';
 $_lang['document'] = 'Документ';
 $_lang['documents'] = 'Ресурсы';
 $_lang['done'] = 'Выполнено';
+$_lang['download'] = 'Скачать';
 $_lang['downloading'] = 'Загружается...';
 $_lang['duplicate'] = 'Копировать';
 $_lang['duplicate_children'] = 'Сделать копию дочернего ресурса';
@@ -269,7 +277,7 @@ $_lang['new_tv'] = 'Новое дополнительное поле';
 $_lang['new_user'] = 'Новый пользователь';
 $_lang['next'] = 'Дальше -&gt;';
 $_lang['no'] = 'Нет';
-$_lang['none'] = 'Не указанно';
+$_lang['none'] = 'Не указано';
 $_lang['notset'] = 'Не указан';
 $_lang['not_deleted'] = 'не был удалён.';
 $_lang['not_logged_in'] = 'Не вошёл!';
@@ -337,6 +345,7 @@ $_lang['quick_create_resource'] = 'Быстро создать ресурс';
 $_lang['quick_create_snippet'] = 'Быстро создать сниппет';
 $_lang['quick_create_template'] = 'Быстро создать шаблон';
 $_lang['quick_create_tv'] = 'Быстро создать TV';
+$_lang['quick_update'] = 'Быстро обновить';
 $_lang['quick_update_chunk'] = 'Быстро обновить чанк';
 $_lang['quick_update_plugin'] = 'Быстро обновить плагин';
 $_lang['quick_update_resource'] = 'Быстро обновить';
@@ -346,6 +355,7 @@ $_lang['quick_update_tv'] = 'Быстро обновить TV';
 $_lang['rank'] = 'Сортировка';
 $_lang['recent_docs'] = 'Недавние документы';
 $_lang['redirecting'] = 'Перенаправление...';
+$_lang['refresh'] = 'Обновить';
 $_lang['refresh_action_map'] = 'Очистка кэша карты действий';
 $_lang['refresh_auto_publish'] = 'Обработка дат автоматической публикацию';
 $_lang['refresh_context_settings'] = 'Восстанавление кэшей контекстов';
@@ -369,8 +379,8 @@ $_lang['remember_username'] = 'Запомнить меня';
 $_lang['remove'] = 'Удалить';
 $_lang['remove_category'] = 'Удалить';
 $_lang['remove_chunk'] = 'Удалить';
-$_lang['remove_plugin'] = 'Удалить';
 $_lang['remove_date'] = 'Удалить дату';
+$_lang['remove_plugin'] = 'Удалить';
 $_lang['remove_selected'] = 'Удалить выбранное';
 $_lang['remove_snippet'] = 'Удалить';
 $_lang['remove_template'] = 'Удалить';
@@ -507,6 +517,7 @@ $_lang['xtype'] = 'Тип поля';
 $_lang['xtype_desc'] = 'Настройка типа поля. Может быть: текстовое поле, область текста, или логическая переменная.';
 $_lang['yes'] = 'Да';
 $_lang['yesno'] = 'Да/Нет';
+
 $_lang['january'] = 'Январь';
 $_lang['february'] = 'Февраль';
 $_lang['march'] = 'Март';
@@ -519,6 +530,7 @@ $_lang['september'] = 'Сентябрь';
 $_lang['october'] = 'Октябрь';
 $_lang['november'] = 'Ноябрь';
 $_lang['december'] = 'Декабрь';
+
 $_lang['sunday'] = 'воскресенье';
 $_lang['monday'] = 'понедельник';
 $_lang['tuesday'] = 'вторник';

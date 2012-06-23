@@ -6,10 +6,14 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['directory'] = 'Directory';
+$_lang['file'] = 'Fail';
 $_lang['file_confirm_remove'] = 'Oled kindel, et soovid eemaldada selle faili? See võib teie veebilehe katki teha.';
+$_lang['file_create'] = 'Loo Fail';
 $_lang['file_deleted'] = 'Edukas!';
 $_lang['file_delete_file'] = 'Kustuta Fail';
 $_lang['file_delete_folder'] = 'Kustuta Kaust';
+$_lang['file_download'] = 'Lae alla Fail';
 $_lang['file_download_file'] = 'Lae alla Fail';
 $_lang['file_download_unzip'] = 'Pakilahti Fail';
 $_lang['file_edit'] = 'Muuda Faili';
@@ -33,8 +37,8 @@ $_lang['file_err_unzip_missing_lib'] = 'Puudub PHP zip toetus (php_zip.dll / zip
 $_lang['file_err_upload'] = 'Tekkis viga failide üleslaadmisel.';
 $_lang['file_exists_hk'] = 'Fail <b>{0}</b> juba eksiteerib';
 $_lang['file_extensions'] = 'Faili Laiendused';
-$_lang['file_extensions_desc'] = 'Need on lubatud laiendused selle content type-ile.';
 $_lang['file_folder_enter_new'] = 'Sisesta Uus Kausta Nimi';
+$_lang['file_chmod'] = 'Chmod-i';
 $_lang['file_folder_chmod'] = 'Chmod-i Kausta';
 $_lang['file_folder_create'] = 'Loo Kaust';
 $_lang['file_folder_create_here'] = 'Loo Kaust Siia';
@@ -58,11 +62,16 @@ $_lang['file_folder_err_remove'] = 'Tekkis viga kaust eemaldamisel.';
 $_lang['file_folder_parent'] = 'Parent Kataloog';
 $_lang['file_folder_remove'] = 'Eemalda Kataloog';
 $_lang['file_folder_remove_confirm'] = 'Oled kindel, et soovid eemaldada selle kausta? See võib lõhkuda teie veebilehe.';
+$_lang['file_folder_rename'] = 'Nimeta ümber Kaust';
 $_lang['file_last_accessed'] = 'Viimati vaadatud';
 $_lang['file_last_modified'] = 'Viimati muudetud';
 $_lang['file_name'] = 'Failinimi';
+$_lang['file_new'] = 'Uus Fail';
+$_lang['file_quick_create'] = 'Loo kiirelt Fail';
+$_lang['file_quick_update'] = 'Muuda kiirelt Fail';
 $_lang['file_remove'] = 'Eemalda fail';
 $_lang['file_remove_confirm'] = 'Oled kindel, et soovid eemaldada selle faili?';
+$_lang['file_rename'] = 'Nimeta ümber Fail';
 $_lang['file_saved'] = 'Faili üleslaadimine oli edukas!';
 $_lang['file_size'] = 'Faili suurus';
 $_lang['file_unzip'] = 'Lahtipakkimine oli edukas!';
@@ -108,4 +117,3 @@ $_lang['upf_upload_err'] = 'Üleslaadmise viga.';
 $_lang['upf_uploading'] = 'Laen üles...';
 $_lang['upf_uploading_desc'] = 'Laen üles: {0} / {1} faili.';
 $_lang['upload_files'] = 'Lae üles failid';
-
