@@ -1,7 +1,7 @@
 MODExt Revolution 1.0
-Copyright (c) 2007-2011, Shaun McCormick
+Copyright (c) 2007-2012, Shaun McCormick
 All rights reserved
-MODx-specific JS extension for ExtJS 2.2
+MODx-specific JS extension for ExtJS 3
 
 -------------
 

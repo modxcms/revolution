@@ -80,6 +80,7 @@ class ElementPluginCreateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
+        $this->setPlaceholder('onPluginFormPrerender', $this->onPluginFormPrerender);
     }
 
     /**
