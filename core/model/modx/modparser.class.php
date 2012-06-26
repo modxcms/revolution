@@ -507,7 +507,10 @@ class modParser {
         $realname = $this->realname($name);
         if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
             /* @var modMediaSource $source */
-            $source = $this->modx->newObject('sources.modMediaSource');
+            $sourceClassKey = !empty($this->modx->sourceCache[$class][$realname]['source']['class_key'])
+                ? $this->modx->sourceCache[$class][$realname]['source']['class_key']
+                : 'sources.modMediaSource';
+            $source = $this->modx->newObject($sourceClassKey);
             if (!empty($this->modx->sourceCache[$class][$realname]['source'])) {
                 $source->fromArray($this->modx->sourceCache[$class][$realname]['source'],'',true,true);
             } else {
