@@ -408,7 +408,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         }
         /** @var array $results Allow manipulation of media source properties via event */
         $results = $this->xpdo->invokeEvent('OnMediaSourceGetProperties',array(
-            'properties' => $this->xpdo->toJson($properties),
+            'properties' => $this->xpdo->toJSON($properties),
         ));
         if (!empty($results)) {
             foreach ($results as $result) {
