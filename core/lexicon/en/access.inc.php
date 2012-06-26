@@ -123,7 +123,6 @@ $_lang['user_group_aw_categories_desc'] = 'A comma-separated list of Element Cat
 $_lang['user_group_aw_parallel'] = 'Create Parallel Resource Group';
 $_lang['user_group_aw_parallel_desc'] = 'If checked, will automatically create a Resource Group with the same name, and give this User Group view access to it in the Contexts specified above.';
 
-
 $_lang['user_group_category_access'] = 'Element Category Access';
 $_lang['user_group_category_access_msg'] = 'Here you can set which Elements this User Group can access by the Categories the Elements are in.';
 $_lang['user_group_category_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
