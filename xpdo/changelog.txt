@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- [#8176] xPDO->updateCollection() fails to set NULL values
+
 xPDO 2.2.5-pl (June 1, 2012)
 ====================================
 - [#8060] Implement __isset() to fix empty()/isset() on hydrated vars

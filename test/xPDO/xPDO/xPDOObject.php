@@ -496,9 +496,10 @@ class xPDOObjectTest extends xPDOTestCase {
      */
     public function providerUpdateCollection() {
         return array(
-            array('Person', array('dob' => '2011-08-09'), null, array(2, array(array('dob' => '2011-08-09'), array('dob' => '2011-08-09')))),
-            array('Person', array('security_level' => 5), null, array(2, array(array('security_level' => 5), array('security_level' => 5)))),
+            array('Person', array('dob' => '2011-08-09'), array('dob:<' => '1951-01-01'), array(1, array())),
+            array('Person', array('security_level' => 5), array('security_level' => 3), array(1, array())),
             array('Person', array('date_of_birth' => '2011-09-01'), null, array(2, array(array('date_of_birth' => '2011-09-01'), array('date_of_birth' => '2011-09-01')))),
+            array('Person', array('date_of_birth' => null), array('security_level' => 3), array(1, array(array('date_of_birth' => null)))),
         );
     }
 
