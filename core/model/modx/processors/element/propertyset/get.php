@@ -4,6 +4,7 @@
  *
  * @package modx
  * @subpackage processors.element.propertyset
+ * @var modX $modx
  */
 if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset');
@@ -51,11 +52,13 @@ $data = array();
 /* put in default properties for element */
 if (isset($default)) {
     foreach ($default as $property) {
-        foreach($property['options'] as &$option) {
-            if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
-            $option['text'] = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
+        if (!empty($property['options']) && is_array($property['options'])) {
+            foreach ($property['options'] as &$option) {
+                if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
+                $option['text'] = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
+            }
         }
-        
+
         $data[$property['name']] = array(
             $property['name'],
             $property['desc'],
@@ -82,12 +85,12 @@ foreach ($properties as $property) {
     if (!isset($data[$property['name']]) && !empty($scriptProperties['elementId'])) {
         $overridden = 2;
     }
-    
+
     foreach($property['options'] as &$option) {
         if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
         $option['text'] = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
     }
-    
+
     $data[$property['name']] = array(
         $property['name'],
         $property['desc'],
