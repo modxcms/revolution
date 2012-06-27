@@ -5,10 +5,10 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-06-05
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['access'] = 'アクセス';
 $_lang['access_denied'] = 'アクセスは拒否されました。';
@@ -100,14 +100,14 @@ $_lang['create_new'] = '新規作成';
 $_lang['create_user_group'] = 'ユーザーグループを作成';
 $_lang['created'] = '作成日';
 $_lang['createdon'] = '作成日時';
-$_lang['current'] = 'Current';
+$_lang['current'] = '現在';
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['data_err_load'] = 'データ読み込みエラー';
 $_lang['date'] = '日付';
 $_lang['datechanged'] = '編集日時';
 $_lang['db_header'] = 'データベーステーブル';
 $_lang['db_info_mysql'] = 'テーブルがオーバーヘッドを持つ場合、オーバーヘッドカラムのリンクをクリックすることで最適化が可能かもしれません。';
-$_lang['db_info_sqlsrv'] = 'You may rebuild a table\'s index by clicking on the link in the Unused column.';
+$_lang['db_info_sqlsrv'] = '未使用カラムのリンクをクリックして、テーブルのインデックスを再構築できます。';
 $_lang['delete'] = '削除';
 $_lang['deleted'] = '削除済み';
 $_lang['description'] = '説明';
@@ -321,12 +321,12 @@ $_lang['permission_denied'] = '権限がありません';
 $_lang['permission_denied_msg'] = 'このページを見るための権限がありません。エラーと思われる場合は管理者に確認してください。';
 $_lang['please_wait'] = 'しばらくお待ちください';
 $_lang['plugin'] = 'プラグイン';
-$_lang['plugin_activate'] = 'Activate Plugin';
-$_lang['plugin_deactivate'] = 'Deactivate Plugin';
+$_lang['plugin_activate'] = 'プラグインをアクティブにする';
+$_lang['plugin_deactivate'] = 'プラグインを非アクティブにする';
 $_lang['plugins'] = 'プラグイン';
-$_lang['po_make_all_unpub'] = 'Make All Unpublished';
-$_lang['po_make_all_pub'] = 'Make All Published';
-$_lang['po_preserve'] = 'Preserve Published Status';
+$_lang['po_make_all_unpub'] = '全てを非公開にする';
+$_lang['po_make_all_pub'] = '全てを公開する';
+$_lang['po_preserve'] = '公開ステータスを維持';
 $_lang['preview'] = 'プレビュー(別窓)';
 $_lang['private'] = 'プライベート';
 $_lang['processor_err_nf'] = '[[+target]] - プロセッサーが見つかりませんでした。';
@@ -417,7 +417,7 @@ $_lang['scroll_dn'] = '下へスクロール';
 $_lang['scroll_up'] = '上へスクロール';
 $_lang['search'] = '検索';
 $_lang['search_criteria'] = '検索 条件';
-$_lang['search_ellipsis'] = 'Search...';
+$_lang['search_ellipsis'] = '検索...';
 $_lang['search_results'] = '検索結果';
 $_lang['security'] = '権限管理';
 $_lang['select_date'] = '日付を選択';
@@ -427,8 +427,8 @@ $_lang['selected_deactivate'] = '選択項目の無効化';
 $_lang['selected_remove'] = '選択項目の削除';
 $_lang['send'] = '送信';
 $_lang['service_url'] = 'サービスURL';
-$_lang['session_extended'] = 'Session extended!';
-$_lang['session_logging_out'] = 'Your session has expired. Please proceed to login again.';
+$_lang['session_extended'] = 'セッションが延長されました';
+$_lang['session_logging_out'] = 'ログインセッションが期限切れです。再度ログインしてください。';
 $_lang['set'] = '更新';
 $_lang['set_to_default'] = 'デフォルトを設定';
 $_lang['setting'] = '設定';
@@ -501,7 +501,7 @@ $_lang['untitled_symlink'] = '無題のシムリンク';
 $_lang['update'] = '更新';
 $_lang['updated'] = '更新済み';
 $_lang['upload'] = 'アップロード';
-$_lang['username'] = 'Username';
+$_lang['username'] = 'ユーザーネーム';
 $_lang['value'] = '値';
 $_lang['version'] = 'バージョン';
 $_lang['view'] = 'プレビュー';
