@@ -610,6 +610,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, u
 $_lang['setting_session_cookie_secure'] = 'Sichere Session-Cookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen.';
 
+$_lang['setting_session_cookie_httponly'] = 'Session-Cookie: HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Verwenden Sie diese Einstellung, um das HttpOnly-Flag für Session-Cookies zu setzen.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'Maximale Lebensdauer des Session-Garbage-Collectors';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Erlaubt Anpassung der PHP-Konfigurationseinstellung session.gc_maxlifetime bei Benutzung von "modSessionHandler".';
 
