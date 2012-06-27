@@ -5,11 +5,11 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-06-05
  * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['directory'] = 'ディレクトリ';
 $_lang['file_confirm_remove'] = 'このファイルを本当に削除しますか？';
@@ -17,7 +17,7 @@ $_lang['file_create'] = 'ファイルを作成';
 $_lang['file_deleted'] = '成功';
 $_lang['file_delete_file'] = 'ファイルを削除';
 $_lang['file_delete_folder'] = 'フォルダを削除';
-$_lang['file_download'] = 'Download File';
+$_lang['file_download'] = 'ファイルをダウンロード';
 $_lang['file_download_file'] = 'ファイルのダウンロード';
 $_lang['file_download_unzip'] = 'ファイルの解凍';
 $_lang['file_edit'] = '編集';
