@@ -1,4 +1,12 @@
 <?php
+/**
+ * Login Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
+$_lang['login_language'] = 'Language';
 $_lang['login_activation_key_err'] = 'Неверный код активации! Пожалуйста, проверьте письмо с кодом активации и убедитесь, что вы загрузили правильный URL.';
 $_lang['login_blocked_admin'] = 'Ваш доступ к системе управления заблокирован администратором.';
 $_lang['login_blocked_error'] = 'Вы временно заблокированы и не можете войти в систему управления сайтом. Попробуйте позже.';
