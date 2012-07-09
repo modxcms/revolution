@@ -1673,22 +1673,12 @@ class modX extends xPDO {
      */
     public function runSnippet($snippetName, array $params= array ()) {
         $output= '';
-        if (array_key_exists($snippetName, $this->sourceCache['modSnippet'])) {
-            $snippet = $this->newObject('modSnippet');
-            $snippet->fromArray($this->sourceCache['modSnippet'][$snippetName]['fields'], '', true, true);
-            $snippet->setPolicies($this->sourceCache['modSnippet'][$snippetName]['policies']);
-        } else {
-            $snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true);
-            if (!empty($snippet)) {
-                $this->sourceCache['modSnippet'][$snippetName] = array (
-                    'fields' => $snippet->toArray(),
-                    'policies' => $snippet->getPolicies()
-                );
+        if ($this->getParser()) {
+            $snippet= $this->parser->getElement('modSnippet', $snippetName);
+            if ($snippet instanceof modSnippet) {
+                $snippet->setCacheable(false);
+                $output= $snippet->process($params);
             }
-        }
-        if (!empty($snippet)) {
-            $snippet->setCacheable(false);
-            $output= $snippet->process($params);
         }
         return $output;
     }
@@ -1703,22 +1693,12 @@ class modX extends xPDO {
      */
     public function getChunk($chunkName, array $properties= array ()) {
         $output= '';
-        if (array_key_exists($chunkName, $this->sourceCache['modChunk'])) {
-            $chunk = $this->newObject('modChunk');
-            $chunk->fromArray($this->sourceCache['modChunk'][$chunkName]['fields'], '', true, true);
-            $chunk->setPolicies($this->sourceCache['modChunk'][$chunkName]['policies']);
-        } else {
-            $chunk= $this->getObject('modChunk', array ('name' => $chunkName), true);
-            if (!empty($chunk) || $chunk === '0') {
-                $this->sourceCache['modChunk'][$chunkName]= array (
-                    'fields' => $chunk->toArray(),
-                    'policies' => $chunk->getPolicies()
-                );
+        if ($this->getParser()) {
+            $chunk= $this->parser->getElement('modChunk', $chunkName);
+            if ($chunk instanceof modChunk) {
+                $chunk->setCacheable(false);
+                $output= $chunk->process($properties);
             }
-        }
-        if (!empty($chunk) || $chunk === '0') {
-            $chunk->setCacheable(false);
-            $output= $chunk->process($properties);
         }
         return $output;
     }
