@@ -6,6 +6,9 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- Allow numeric value in modWebLink to redirect to Resource by id
+- [#7763] Fix additional Media Source path issues with static elements
+- [#8208] Fix modDbRegister->read() with include_keys option
 - Fix PropertySet switching from Element create/update controllers
 - [#7392] Get correct modMediaSource derivative in modParser->getElement()
 

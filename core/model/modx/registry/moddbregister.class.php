@@ -130,7 +130,7 @@ class modDbRegister extends modRegister {
                         if (!$includeKeys) {
                             $topicMessages[] = $newMsg;
                         } else {
-                            $topicMessages[$msg] = $newMsg;
+                            $topicMessages[$msg->id] = $newMsg;
                         }
                         $msgCount++;
                     } else {
