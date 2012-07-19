@@ -76,7 +76,7 @@ MODx.grid.Grid = function(config) {
         });
     }
     if (config.tbar) {
-        for (var ix = 0;i<config.tbar.length;i++) {
+        for (var ix = 0;ix<config.tbar.length;ix++) {
             var itm = config.tbar[ix];
             if (itm.handler && typeof(itm.handler) == 'object' && itm.handler.xtype) {
                 itm.handler = this.loadWindow.createDelegate(this,[itm.handler],true);
