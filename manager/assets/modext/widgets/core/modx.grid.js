@@ -117,7 +117,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             this.getView().refresh(false);
         }
     }
-    
     ,saveRecord: function(e) {
         e.record.data.menu = null;
         var p = this.config.saveParams || {};
@@ -131,20 +130,18 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,data: d
             }
             ,listeners: {
-                'success': {fn:this.afterSaveRecord,scope:this}
+                'success': {fn:function(r) {
+                    if (this.config.save_callback) {
+                        Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
+                    }
+                    e.record.commit();
+                    if (!this.config.preventSaveRefresh) {
+                        this.refresh();
+                    }
+                    this.fireEvent('afterAutoSave',r);
+                },scope:this}
             }
         });
-        return true;
-    }
-    ,afterSaveRecord: function(r) {
-        if (this.config.save_callback) {
-            Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
-        }
-        e.record.commit();
-        if (!this.config.preventSaveRefresh) {
-            this.refresh();
-        }
-        this.fireEvent('afterAutoSave',r);
     }
 
     ,onChangePerPage: function(tf,nv) {
