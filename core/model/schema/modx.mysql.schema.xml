@@ -888,6 +888,11 @@
             <column key="introtext" length="" collation="A" null="true" />
             <column key="content" length="" collation="A" null="true" />
         </index>
+        <index alias="cache_refresh_index" name="cache_refresh_idx" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+            <column key="menuindex" length="" collation="A" null="false" />
+            <column key="id" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="Parent" class="modResource" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Children" class="modResource" local="id" foreign="parent" cardinality="many" owner="local" />
