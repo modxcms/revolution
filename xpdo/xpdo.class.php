@@ -2506,11 +2506,11 @@ class xPDO {
     /**
      * Convert current microtime() result into seconds.
      *
+     * @deprecated Use microtime(true) directly; this was to emulate PHP 5 behavior in PHP 4.
      * @return float
      */
     public function getMicroTime() {
-       list($usec, $sec) = explode(' ', microtime());
-       return ((float)$usec + (float)$sec);
+       return microtime(true);
     }
 
     /**

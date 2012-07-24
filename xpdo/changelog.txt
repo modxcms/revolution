@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Deprecate xPDO->getMicroTime()
 - [#8176] xPDO->updateCollection() fails to set NULL values
 
 xPDO 2.2.5-pl (June 1, 2012)
