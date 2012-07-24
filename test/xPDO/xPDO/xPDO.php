@@ -238,7 +238,7 @@ class xPDOTest extends xPDOTestCase {
         $columns = $this->xpdo->getSelectColumns('Person','Person','test_');
         $this->assertEquals($columns,$correct);
 
-        $includeColumns = array('id','last_name','dob');
+        $includeColumns = array('dob','last_name','id');
         $correct = implode(', ', array_map(array($this->xpdo, 'escape'), $includeColumns));
         $columns = $this->xpdo->getSelectColumns('Person','','',$includeColumns);
         $this->assertEquals($columns,$correct);
