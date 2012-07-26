@@ -1,4 +1,11 @@
 <?php
+/**
+ * Menu Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['lexicon_key'] = 'Имя';
 $_lang['menu_create'] = 'Добавить пункт';
 $_lang['menu_confirm_remove'] = 'Вы уверены, что хотите удалить этот пункт из меню?';
@@ -14,4 +21,4 @@ $_lang['menu_remove'] = 'Удалить';
 $_lang['menu_top'] = 'Верхнее меню';
 $_lang['menu_update'] = 'Редактировать';
 $_lang['topmenu'] = 'Верхнее меню';
-$_lang['topmenu_desc'] = 'Здесь вы можете связать «действия» с пунктами  верхнего меню бэкенда. ';
+$_lang['topmenu_desc'] = 'Здесь вы можете связать «действия» с пунктами верхнего меню бэкэнда. ';

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Message Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['all'] = 'Все';
 $_lang['date_sent'] = 'Дата отправки';
 $_lang['forward'] = 'Переслать';

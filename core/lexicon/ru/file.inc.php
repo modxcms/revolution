@@ -1,4 +1,11 @@
 <?php
+/**
+ * File Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['directory'] = 'Каталог';
 $_lang['file_confirm_remove'] = 'Вы уверены, что хотите удалить этот файл? Это может нарушить работу сайта.';
 $_lang['file_create'] = 'Создать файл';
@@ -9,7 +16,7 @@ $_lang['file_download'] = 'Скачать';
 $_lang['file_download_file'] = 'Загрузить файл';
 $_lang['file_download_unzip'] = 'Разархивировать файл';
 $_lang['file_edit'] = 'Редактировать';
-$_lang['file_err_chmod'] = 'Произошла неизвестная ошибка  при изменении прав файла.';
+$_lang['file_err_chmod'] = 'Произошла неизвестная ошибка при изменении прав файла.';
 $_lang['file_err_chmod_ns'] = 'Пожалуйста, задайте режим для изменения прав файла (chmod).';
 $_lang['file_err_ext_not_allowed'] = 'Расширение файла `[[+ext]]` не допускается.';
 $_lang['file_err_filter'] = 'Ни один файл не попадает под заданный фильтр.';
@@ -27,7 +34,7 @@ $_lang['file_err_unzip'] = 'Не удалось разархивировать!'
 $_lang['file_err_unzip_invalid_path'] = 'Неверный путь для разархивированного файла.';
 $_lang['file_err_unzip_missing_lib'] = ' Отсутствует библиотека архиватора (php_zip.dll / zip.so)';
 $_lang['file_err_upload'] = 'Произошла ошибка при попытке загрузить файлы.';
-$_lang['file_exists_hk'] = 'Файл<b>{0}</b> уже существует';
+$_lang['file_exists_hk'] = 'Файл <b>{0}</b> уже существует';
 $_lang['file_extensions'] = 'Расширение файла';
 $_lang['file_folder_enter_new'] = 'Введите новое название каталога';
 $_lang['file_folder_chmod'] = 'Изменить права на каталог';
