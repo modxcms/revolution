@@ -1,4 +1,11 @@
 <?php
+/**
+ * System Info Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['database_charset'] = 'Кодировка базы данных';
 $_lang['database_name'] = 'Имя базы данных';
 $_lang['database_server'] = 'Сервер базы данных';
@@ -16,12 +23,12 @@ $_lang['database_table_records'] = 'Записей';
 $_lang['database_table_tablename'] = 'Имя таблицы';
 $_lang['database_table_totalsize'] = 'Общий размер';
 $_lang['database_table_totals'] = 'Итого:';
-$_lang['database_table_unused'] = 'Не использовнно';
+$_lang['database_table_unused'] = 'Не использовано';
 $_lang['database_type'] = 'Тип базы данных';
 $_lang['database_version'] = 'Версия базы данных';
 $_lang['extjs_version'] = 'Версия <a href="http://extjs.com/" target="_blank">ExtJS</a>';
 $_lang['localtime'] = 'Местное время';
-$_lang['magpie_version'] = 'Версия  <a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a>';
+$_lang['magpie_version'] = 'Версия <a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a>';
 $_lang['modx_version'] = 'Версия MODX';
 $_lang['onlineusers_action'] = 'Действие';
 $_lang['onlineusers_actionid'] = 'ID действия';
@@ -31,14 +38,14 @@ $_lang['onlineusers_message'] = 'Этот список показывает вс
 $_lang['onlineusers_title'] = 'Пользователи онлайн';
 $_lang['onlineusers_user'] = 'Пользователь';
 $_lang['onlineusers_userid'] = 'ID пользователя';
-$_lang['optimize_table'] = 'Для оптимизации таблицы  нажмите сюда';
+$_lang['optimize_table'] = 'Для оптимизации таблицы нажмите сюда';
 $_lang['optimize_table_err'] = 'Ошибка оптимизации таблицы';
 $_lang['phpmailer_version'] = 'Версия <a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a>';
 $_lang['server'] = 'Сервер';
 $_lang['servertime'] = 'Серверное время';
 $_lang['serveroffset'] = 'Смещение серверного времени';
 $_lang['smarty_version'] = 'Версия <a href="http://smarty.net/" target="_blank">Smarty</a>';
-$_lang['sysinfo_desc'] = 'Здесь вы можете просматривать общую информацию о среде в которой работает MODX.';
+$_lang['sysinfo_desc'] = 'Здесь вы можете просматривать общую информацию о среде, в которой работает MODX.';
 $_lang['view_sysinfo'] = 'Информация о системе';
 $_lang['table_prefix'] = 'Префикс таблицы';
 $_lang['truncate_table'] = 'Для очистки таблицы нажмите сюда';

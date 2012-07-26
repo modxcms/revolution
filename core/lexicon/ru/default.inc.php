@@ -1,4 +1,11 @@
 <?php
+/**
+ * Default Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['access'] = 'Доступ';
 $_lang['access_denied'] = 'Доступ закрыт.';
 $_lang['action'] = 'Действие';
@@ -159,10 +166,10 @@ $_lang['ext_emptygroup'] = '(Не указанно)';
 $_lang['ext_emptymsg'] = 'Нет данных для вывода';
 $_lang['ext_first'] = 'Первая страница';
 $_lang['ext_groupby'] = 'Группировать по этому полю';
-$_lang['ext_inv_alpha'] = 'Это поле может содержать  только буквы и _';
-$_lang['ext_inv_alphanum'] = 'Это поле может содержать  только буквы, числа и _';
+$_lang['ext_inv_alpha'] = 'Это поле может содержать только буквы и _';
+$_lang['ext_inv_alphanum'] = 'Это поле может содержать только буквы, числа и "_"';
 $_lang['ext_inv_email'] = 'Это поле должно быть адресом электронной почты в формате "user@domain.com"';
-$_lang['ext_inv_url'] = 'Это поле должно быть  URL в формате "http://www.domain.com"';
+$_lang['ext_inv_url'] = 'Это поле должно быть URL в формате "http://www.domain.com"';
 $_lang['ext_invalidfield'] = 'Значение этого поля неправильно.';
 $_lang['ext_last'] = 'Последняя страница';
 $_lang['ext_mindate'] = 'Эта дата раньше, чем минимальная дата.';
@@ -307,7 +314,7 @@ $_lang['path'] = 'Путь';
 $_lang['per_page'] = 'На странице';
 $_lang['permissions'] = 'Права доступа';
 $_lang['permission_denied'] = 'Доступ запрещен!';
-$_lang['permission_denied_msg'] = 'У вас нет достаточных прав для просмотра этой страницы. Если вам кажется что это ошибка, то свяжитесь пожалуйста с вашим администратором.';
+$_lang['permission_denied_msg'] = 'У вас нет достаточных прав для просмотра этой страницы. Если вам кажется, что это ошибка, то свяжитесь пожалуйста с вашим администратором.';
 $_lang['please_wait'] = 'Пожалуйста подождите...';
 $_lang['plugin'] = 'Плагин';
 $_lang['plugin_activate'] = 'Активировать плагин';
@@ -347,7 +354,7 @@ $_lang['rank'] = 'Сортировка';
 $_lang['recent_docs'] = 'Недавние документы';
 $_lang['redirecting'] = 'Перенаправление...';
 $_lang['refresh_action_map'] = 'Очистка кэша карты действий';
-$_lang['refresh_auto_publish'] = 'Обработка дат автоматической публикацию';
+$_lang['refresh_auto_publish'] = 'Обработка дат автоматической публикации';
 $_lang['refresh_context_settings'] = 'Восстанавление кэшей контекстов';
 $_lang['refresh_db'] = 'Очистка кэша запросов к базе данных';
 $_lang['refresh_default'] = 'Очистка основного кэша';
@@ -369,13 +376,13 @@ $_lang['remember_username'] = 'Запомнить меня';
 $_lang['remove'] = 'Удалить';
 $_lang['remove_category'] = 'Удалить';
 $_lang['remove_chunk'] = 'Удалить';
-$_lang['remove_plugin'] = 'Удалить';
 $_lang['remove_date'] = 'Удалить дату';
+$_lang['remove_plugin'] = 'Удалить';
 $_lang['remove_selected'] = 'Удалить выбранное';
 $_lang['remove_snippet'] = 'Удалить';
 $_lang['remove_template'] = 'Удалить';
 $_lang['remove_tv'] = 'Удалить';
-$_lang['remove_this_confirm'] = 'Вы уверены, что хотите удалить [[+type]]: "[[+name]]"?';
+$_lang['remove_this_confirm'] = 'Вы уверены, что хотите удалить [[+type]]: «[[+name]]»?';
 $_lang['remove_user_from_group'] = 'Удалить пользователя из группы';
 $_lang['rename'] = 'Переименовать';
 $_lang['reset'] = 'Сбросить';
@@ -406,7 +413,7 @@ $_lang['scroll_dn'] = 'Прокрутить вниз';
 $_lang['scroll_up'] = 'Прокрутить вверх';
 $_lang['search'] = 'Поиск';
 $_lang['search_criteria'] = 'Условия поиска';
-$_lang['search_ellipsis'] = 'Поиск ...';
+$_lang['search_ellipsis'] = 'Поиск...';
 $_lang['search_results'] = 'Результаты поиска';
 $_lang['security'] = 'Безопасность';
 $_lang['select_date'] = 'Выберите дату';
