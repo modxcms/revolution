@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#8329] Fix syncsite checkbox being unchecked by default on resource/create
 - [#8296] Fix function passed by reference in ellipsis output filter
 - Allow numeric value in modWebLink to redirect to Resource by id
 - [#7763] Fix additional Media Source path issues with static elements
