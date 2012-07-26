@@ -100,6 +100,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 'published' => $this->context->getOption('publish_default', 0, $this->modx->_userConfig),
                 'searchable' => $this->context->getOption('search_default', 1, $this->modx->_userConfig),
                 'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
+                'syncsite' => true,
             ));
             $this->parent->fromArray($this->resourceArray);
             $this->parent->set('template',$defaultTemplate);

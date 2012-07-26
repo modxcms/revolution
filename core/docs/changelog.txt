@@ -6,6 +6,9 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#6918] Fix importing access policy items always being checked
+- [#8329] Fix syncsite checkbox being unchecked by default on resource/create
+- [#8296] Fix function passed by reference in ellipsis output filter
 - Allow numeric value in modWebLink to redirect to Resource by id
 - [#7763] Fix additional Media Source path issues with static elements
 - [#8208] Fix modDbRegister->read() with include_keys option

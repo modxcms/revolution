@@ -336,7 +336,11 @@ class modOutputFilter {
                                             $opened[] = $regs[0];
                                         }
                                     } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {
-                                        unset($opened[array_pop(array_keys($opened, $regs[1]))]);
+                                        $tmpArray = array_keys($opened, (string) $regs[1]);
+                                        $tmpVar = array_pop($tmpArray);
+                                        if ($tmpVar !== null) {
+                                            unset($opened[$tmpVar]);
+                                        }
                                     }
                                 }
                             }
