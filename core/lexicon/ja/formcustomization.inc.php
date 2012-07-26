@@ -5,9 +5,9 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author yamamoto http://kyms.jp 2012-07-27
+ * @author honda http://kogus.org 2012-06-22
  * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['action'] = '操作内容';
 $_lang['action_desc'] = '指定したアクションにこのルールが適用されます。';
@@ -17,21 +17,21 @@ $_lang['constraint_class'] = 'このルールの対象';
 $_lang['constraint_class_desc'] = '任意。「テンプレートIDが4の場合にこのルールを有効にする」などの条件をここでセットします。投稿画面の場合「modResource」でよいみたいです(※注・日本チーム) Optional. If set, along with the Constraint Field and Constraint options, will restrict this rule to the constraints applied.';
 $_lang['constraint_desc'] = '任意。有効条件と見なす値をセットします。たとえば「テンプレートIDが4の場合にこのルールを有効にする」の場合「4」をここにセットします。Optional. The value of the Constraint Field that should be checked against.';
 $_lang['constraint_field'] = '制約フィールド';
-$_lang['constraint_field_desc'] = '任意。制約条件としたいフィールドの名前を記述します。たとえば「template」など。Optional. The field by which this constraint should be applied.';
+$_lang['constraint_field_desc'] = '任意。制約条件としたいフィールドの名前を記述します。たとえば「template」など。';
 $_lang['containing_panel'] = 'これを含む領域';
 $_lang['containing_panel_desc'] = '対象オブジェクト(フィールドやタブ)を含むDIV領域のID名。modx-panel-resource・modx-page-settings・modx-resource-tabsのうちのいずれか。This is sometimes necessary for certain rules, so that the system can know what form or panel the field is in.';
 $_lang['deactivate'] = '無効化';
 $_lang['default_value'] = 'デフォルト値';
 $_lang['export'] = 'エクスポート';
 $_lang['field'] = 'フィールド';
-$_lang['field_desc'] = 'This is the field to affect. This may also be a tab, or TV. If it is a TV, please specify in this format: "tv#", where # is the ID of the TV.';
+$_lang['field_desc'] = '影響を受けるフィールドです。それはタブ、またはテンプレート変数の場合もあります。テンプレート変数の場合は、次の書式で指定してください。"tv#"（#にはテンプレート変数のIDを入力）';
 $_lang['field_default'] = 'フィールドのデフォルト値';
 $_lang['field_label'] = 'フィールドのラベル';
 $_lang['field_visible'] = 'フィールドの表示／非表示';
 $_lang['fields'] = 'フィールド';
 $_lang['file'] = 'ファイル';
-$_lang['filter_by_action'] = 'Filter by Action...';
-$_lang['filter_by_rule_type'] = 'Filter by Rule...';
+$_lang['filter_by_action'] = 'アクションで絞込み...';
+$_lang['filter_by_rule_type'] = 'ルールで絞込み...';
 $_lang['filter_by_search'] = 'Search...';
 $_lang['for_parent'] = 'For Parent';
 $_lang['for_parent_desc'] = 'このルールを親リソースに適用させたい場合はチェックしてください。Only use with Resources or objects with a `parent` field. Useful for the "create" page of Resources.';
@@ -56,11 +56,11 @@ $_lang['profile_remove_multiple_confirm'] = 'これらのプロファイルを�
 $_lang['profile_usergroup_err_ae'] = 'ユーザーグループはすでにこのプロファイルに割り当てられています。';
 $_lang['profile_usergroups_msg'] = 'このプロファイルが適用されるユーザーグループを指定します。<br />指定しない場合、プロファイルは全てのユーザーに適用されます。';
 $_lang['profiles'] = 'カスタマイズプロファイル';
-$_lang['profiles_msg'] = 'This is a list of your Form Customization Profiles. Profiles can contain many Form Customization Rules, and can be activated or deactivated. They can also be configured to only apply to certain User Groups.';
+$_lang['profiles_msg'] = 'フォームのカスタマイズプロファイルのリストです。プロファイルは様々なカスタマイズの規則を保持でき、一括して有効無効を切り替えられます。また、任意のユーザーグループにだけ適用させることも可能です。';
 $_lang['rank'] = 'ランク';
 $_lang['rank_desc'] = 'ルールが適用される順番を数値で指定します。数値が小さいほど、ルールは先に適用されます。';
-$_lang['region'] = 'Region';
-$_lang['regions'] = 'Regions';
+$_lang['region'] = 'リージョン';
+$_lang['regions'] = 'リージョン';
 $_lang['rule'] = 'ルール';
 $_lang['rule_create'] = 'ルールを作成';
 $_lang['rule_desc'] = 'このフィールドに適用されるルールの種類';
