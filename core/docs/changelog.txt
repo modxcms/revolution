@@ -6,6 +6,10 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#8299] Clear action_map (and menus) in system/action create/update processors
+- [#8168] Fix JS error when compress_js=Off and compress_js_groups=On
+- [#8341] Allow Resource data pages to be extended by CRCs
+- [#6695] Close sessions before min scripts terminate
 - [#6918] Fix importing access policy items always being checked
 - [#8329] Fix syncsite checkbox being unchecked by default on resource/create
 - [#8296] Fix function passed by reference in ellipsis output filter

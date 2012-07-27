@@ -85,8 +85,8 @@ if ($posted) {
 <?php
 if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 ?>
-                        <span class="field_error">ERROR: Your includes/config.core.php is not writable; please make it writable
-                        OR edit the file with the correct MODX_CORE_PATH and click Submit.</span>
+                        <span class="field_error">ERROR: Your setup/includes/config.core.php is not writable; please make it writable
+                        OR edit the file manually with the correct MODX_CORE_PATH and click Submit.</span>
 <?php
 } else {
 ?>

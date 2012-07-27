@@ -65,5 +65,19 @@ class modActionCreateProcessor extends modObjectCreateProcessor {
 
         return !$this->hasErrors();
     }
+
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function cleanup() {
+        $this->modx->cacheManager->refresh(
+            array(
+                $this->modx->getOption('cache_action_map_key', null, 'action_map'),
+                $this->modx->getOption('cache_menu_key', null, 'menu'),
+            )
+        );
+        return parent::cleanup();
+    }
 }
 return 'modActionCreateProcessor';
