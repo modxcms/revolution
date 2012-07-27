@@ -438,6 +438,8 @@ class Minify {
         list(, $code) = explode(' ', $header, 3);
         header($header, true, $code);
         header('Content-Type: text/html; charset=utf-8');
+        // MODX session no longer required
+        @session_write_close();
         echo "<h1>$h1</h1>";
         echo "<p>Please see <a href='$url'>$url</a>.</p>";
         exit();
