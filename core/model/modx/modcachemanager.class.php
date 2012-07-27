@@ -461,12 +461,12 @@ class modCacheManager extends xPDOCacheManager {
                 'context_settings' => array('contexts' => $contexts),
                 'db' => array(),
                 'media_sources' => array(),
+                'lexicon_topics' => array(),
                 'scripts' => array(),
                 'default' => array(),
                 'resource' => array('contexts' => array_diff($contexts, array('mgr'))),
                 'menu' => array(),
-                'action_map' => array(),
-                'lexicon_topics' => array()
+                'action_map' => array()
             );
         }
         $cleared = array();
