@@ -619,6 +619,17 @@ class modOutputFilter {
                             $this->modx->regClientScript($output,$m_val);
                             break;
 
+                        case 'firstchild':
+    						$c = $this->modx->newQuery('modResource');
+							$c->select('`modResource`.`id`');
+							$c->where(array('parent' => $output, 'published' => true));
+							$c->sortby('menuindex', 'ASC');
+							$c->limit(1);
+							$child = $this->modx->getObject('modResource', $c);
+							if(!empty($child) && $child instanceof modResource) {
+								$output = $child->get('id');
+							}
+                            break;
 
                         /* Default, custom modifier (run snippet with modifier name) */
                         default:
