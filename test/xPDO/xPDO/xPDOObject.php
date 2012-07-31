@@ -141,7 +141,54 @@ class xPDOObjectTest extends xPDOTestCase {
         }
         parent::tearDown();
     }
-    
+
+    /**
+     * Test validating an object.
+     *
+     * @dataProvider providerValidate
+     * @param $class
+     * @param $data
+     * @param $options
+     * @param $expected
+     */
+    public function testValidate($class, $data, $options, $expected) {
+        try {
+            /** @var xPDOObject $object  */
+            $object = $this->xpdo->newObject($class);
+            $object->fromArray($data);
+            $validated = $object->validate($options);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertEquals($expected, $validated, "Expected validation failed: " . print_r($object->_validator->getMessages(), true));
+    }
+    public function providerValidate() {
+        return array(
+            array(
+                'Person',
+                array(
+                    'first_name' => 'My',
+                    'middle_name' => 'Name',
+                    'last_name' => 'Is',
+                ),
+                array(),
+                false
+            ),
+            array(
+                'Person',
+                array(
+                    'first_name' => 'My',
+                    'middle_name' => 'Name',
+                    'last_name' => 'Is',
+                    'dob' => '2012-01-01',
+                    'password' => 'foodisbeer'
+                ),
+                array(),
+                true
+            ),
+        );
+    }
+
     /**
      * Test saving an object.
      */
