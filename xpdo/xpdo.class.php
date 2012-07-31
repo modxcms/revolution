@@ -2631,7 +2631,7 @@ class xPDO {
                     } else {
                         $v= 'NULL';
                     }
-                    $bound[$pattern] = str_replace(array('$', '\\'), array('\$', '\\\\'), $v);
+                    $bound[$pattern] = str_replace(array('\\', '$'), array('\\\\', '\$'), $v);
                 } else {
                     $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
                     $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);

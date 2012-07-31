@@ -532,6 +532,25 @@ class xPDOTest extends xPDOTestCase {
     }
 
     /**
+     * Test xPDO->parseBindings()
+     *
+     * @dataProvider providerParseBindings
+     * @param $sql
+     * @param $bindings
+     * @param $expected
+     */
+    public function testParseBindings($sql, $bindings, $expected) {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $this->assertEquals($expected, $this->xpdo->parseBindings($sql, $bindings));
+    }
+    public function providerParseBindings() {
+        return array(
+            array('SELECT * FROM a WHERE a.a=?', array("$1.00"), "SELECT * FROM a WHERE a.a='$1.00'"),
+            array('SELECT * FROM a WHERE a.a=:a', array(':a' => "$1.00"), "SELECT * FROM a WHERE a.a='$1.00'"),
+        );
+    }
+
+    /**
      * Test xPDO->call()
      */
     public function testCall() {
