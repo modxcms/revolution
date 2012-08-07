@@ -5,9 +5,9 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author yamamoto http://kyms.jp 2012-07-27
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  * @author honda http://kogus.org
  */
 $_lang['about'] = 'MODXについて';
@@ -24,8 +24,8 @@ $_lang['contexts_desc'] = 'サイトのコンテキストを管理';
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboards'] = 'ダッシュボード';
 $_lang['dashboards_desc'] = 'ダッシュボードの管理';
-$_lang['edit_menu'] = 'アクション';
-$_lang['edit_menu_desc'] = '管理画面のアクションとトップメニュー構成の管理';
+$_lang['edit_menu'] = 'トップメニュー';
+$_lang['edit_menu_desc'] = '管理画面トップメニュー構成の管理';
 $_lang['eventlog_viewer'] = 'イベントログ';
 $_lang['eventlog_viewer_desc'] = 'エラーログを表示';
 $_lang['export_site'] = 'サイトのエクスポート';

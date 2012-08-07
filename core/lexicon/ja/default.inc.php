@@ -5,10 +5,10 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author yamamoto http://kyms.jp 2012-08-06
  * @author honda http://kogus.org 2012-06-05
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['access'] = 'アクセス';
 $_lang['access_denied'] = 'アクセスは拒否されました。';
@@ -219,7 +219,7 @@ $_lang['help_ex'] = 'ヘルプ';
 $_lang['help_not_yet'] = 'コンポーネントのヘルプがまだ作成されていません。';
 $_lang['hide_tree'] = 'ツリーを非表示';
 $_lang['home'] = 'ホーム';
-$_lang['icon'] = '操作';
+$_lang['icon'] = 'アイコン';
 $_lang['id'] = 'ID';
 $_lang['import'] = 'インポート';
 $_lang['import_err_upload'] = 'XMLファイルの検出時、エラーが発生しました。有効なファイルを指定してください。';
