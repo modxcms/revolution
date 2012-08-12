@@ -140,7 +140,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 	}
 
 	,search: function(tf, newValue) {
-        var nv = newValue || tf;
+        var nv = newValue || tf.originalValue;
 
 		var grid = Ext.getCmp('modx-package-browser-grid');
 		grid.getStore().setBaseParam('tag', '');
