@@ -34,7 +34,7 @@ $xpdo_meta_map['modAccessPermission']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
-      'index' => 'index',
+      'index' => 'pk',
     ),
     'description' => 
     array (
