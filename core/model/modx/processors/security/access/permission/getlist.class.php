@@ -20,7 +20,7 @@ class modAccessPermissionGetListProcessor extends modObjectGetListProcessor {
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->leftJoin('modAccessPolicyTemplate','Template');
-        $c->query['DISTINCT'] = 'DISTINCT';
+        $c->query['distinct'] = 'DISTINCT';
         $query = $this->getProperty('query','');
         if (!empty($query)) {
             $c->where(array(
