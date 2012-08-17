@@ -119,6 +119,8 @@ class xPDO {
     const OPT_HYDRATE_FIELDS = 'hydrate_fields';
     const OPT_HYDRATE_ADHOC_FIELDS = 'hydrate_adhoc_fields';
     const OPT_HYDRATE_RELATED_OBJECTS = 'hydrate_related_objects';
+    const OPT_LOCKFILE_EXTENSION = 'lockfile_extension';
+    const OPT_USE_FLOCK = 'use_flock';
     /**
      * @deprecated
      * @see call()
