@@ -29,7 +29,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
     public $validator;
     /** @var string $newPassword */
     public $newPassword = '';
-    
+
 
     /**
      * Allow for Users to use derivative classes for their processors
@@ -169,18 +169,20 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             /* create user group links */
             $groupsAdded = array();
             $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
+            $idx = 0;
             foreach ($groups as $group) {
                 if (in_array($group['usergroup'],$groupsAdded)) continue;
                 $membership = $this->modx->newObject('modUserGroupMember');
                 $membership->set('user_group',$group['usergroup']);
                 $membership->set('role',$group['role']);
                 $membership->set('member',$this->object->get('id'));
-                $membership->set('rank',isset($group['rank']) ? $group['rank'] : 0);
+                $membership->set('rank',isset($group['rank']) ? $group['rank'] : $idx);
                 if (empty($group['rank'])) {
                     $primaryGroupId = $group['usergroup'];
                 }
                 $memberships[] = $membership;
                 $groupsAdded[] = $group['usergroup'];
+                $idx++;
             }
             $this->object->addMany($memberships,'UserGroupMembers');
             $this->object->set('primary_group',$primaryGroupId);
