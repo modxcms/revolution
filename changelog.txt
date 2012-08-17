@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#8423] Add flock-independent file locking to xPDOCacheManager::writeFile()
 - [#6930] Fix improper escaping of $ in parseBindings
 - [#8148] Prevent update from criteria using raw NATIVE_KEY on install
 - [#8320] Preserve order of $columns in xPDOObject::getSelectColumns()
