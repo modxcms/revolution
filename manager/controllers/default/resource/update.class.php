@@ -163,6 +163,10 @@ class ResourceUpdateManagerController extends ResourceManagerController {
      * @return string
      */
     public function getPreviewUrl() {
+        if(($this->modx->getOption('friendly_urls') == 1)&&($this->resourceArray['uri']!='')) {                      
+            $alias = array_search($this->resourceArray['id'], $this->context->aliasMap);
+            if(!$alias)$this->context->aliasMap[$this->resourceArray['uri']] = $this->resourceArray['id'];            
+        }
         $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),$this->resource->get('context_key'),'','full');
         return $this->previewUrl;
     }
