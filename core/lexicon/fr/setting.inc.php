@@ -327,6 +327,9 @@ $_lang['setting_friendly_urls'] = 'Utiliser les URLs simples';
 $_lang['setting_friendly_urls_desc'] = 'Ceci vous autorise à utiliser les URLs simple (pour les moteurs de recherche). Veuillez noter que cette option ne fonctionne que pour les installations MODX tournant avec Apache et que vous aurez besoin d\'écrire un fichier .htaccess pour que cela fonctionne. Regardez le fichier .htaccess inclu dans la distribution pour plus d\'informations.';
 $_lang['setting_friendly_urls_err'] = 'Veuillez indiquer si vous souhaitez utiliser les URLs simples';
 
+$_lang['setting_friendly_urls_strict'] = 'Utiliser les URLs simplifiées strictes';
+$_lang['setting_friendly_urls_strict_desc'] = 'Lorsque les URLs simplifiées sont activées, cette option force les requêtes non canonical correspondant à une ressource à utiliser une redirection 301 vers l\'URI canonical de cette ressource. ATTENTION : n\'utilisez pas cette cette option si vous utilisez des règles de rewrite (réécriture) qui ne correspondent pas au début de l\'URI canonical. Par exemple, pour une URI canonical foo/ avec une régle de rewrite personnalisée en foo/bar.html fonctionnera, mais les tentatives de réécriture de bar/foo.html en foo/ forcera la redirection vers foo/ avec cette option activée.';
+
 $_lang['setting_global_duplicate_uri_check'] = 'Vérifier les URIs identiques dans tous les contextes';
 $_lang['setting_global_duplicate_uri_check_desc'] = 'Sélectionnez \'Oui\' pour vérifier l\'existance de doublons d\'URI dans tous les contextes. Sinon, seul le contexte dans lequel la ressource est enregistrée est vérifié.';
 
@@ -431,6 +434,9 @@ $_lang['setting_manager_time_format_desc'] = 'Le format de chaine de caratères,
 
 $_lang['setting_manager_use_tabs'] = 'Utiliser les onglets dans l\'agencement du manager';
 $_lang['setting_manager_use_tabs_desc'] = 'Si oui, le manager utilisera les onglets pour afficher les panneaux de contenu. Sinon il utilisera les "portails".';
+
+$_lang['setting_manager_week_start'] = 'Début de semaine';
+$_lang['setting_manager_week_start_desc'] = 'Indiquez le jour débutant la semaine. Utilisez 0 (ou laissez vide) pour dimanche, 1 pour lundi et ainsi de suite…';
 
 $_lang['setting_modRequest.class'] = 'Classe de prise en charge de requête';
 $_lang['setting_modRequest.class_desc'] = '';
@@ -726,3 +732,5 @@ $_lang['setting_which_element_editor_desc'] = 'Vous pouvez indiquer ici quel éd
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 $_lang['setting_xhtml_urls_desc'] = 'Toutes les URLs générées par MODX seront XHTML-compliant, inclu l\'encoding du caractère ampersand.';
 
+$_lang['setting_default_context'] = 'Contexte par défaut';
+$_lang['setting_default_context_desc'] = 'Sélectionnez le contexte par défaut lors de la création de nouvelles ressources.';
