@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#8420] Provide flock-independent file locking to avoid cache corruption
 - [#7498] Fix Media Source error reporting for file uploads
 - [#8299] Clear action_map (and menus) in system/action create/update processors
 - [#8168] Fix JS error when compress_js=Off and compress_js_groups=On
