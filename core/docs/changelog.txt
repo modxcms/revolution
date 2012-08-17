@@ -6,6 +6,8 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#8420] Provide flock-independent file locking to avoid cache corruption
+- [#7498] Fix Media Source error reporting for file uploads
 - [#8299] Clear action_map (and menus) in system/action create/update processors
 - [#8168] Fix JS error when compress_js=Off and compress_js_groups=On
 - [#8341] Allow Resource data pages to be extended by CRCs
