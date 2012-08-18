@@ -241,6 +241,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     );
                 }
                 $menu[] = array(
+                    'text' => $this->xpdo->lexicon('quick_update_file'),
+                    'handler' => 'this.quickUpdateFile',
+	            );
+                $menu[] = array(
                     'text' => $this->xpdo->lexicon('rename'),
                     'handler' => 'this.renameFile',
                 );
@@ -292,6 +296,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_create'),
                     'handler' => 'this.createFile',
+                );
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('quick_create_file'),
+                    'handler' => 'this.quickCreateFile',
                 );
             }
             if ($this->hasPermission('directory_remove') && $canRemove) {
