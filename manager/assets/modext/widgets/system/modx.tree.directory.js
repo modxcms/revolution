@@ -216,15 +216,14 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                         ,source: this.getSource()
                         ,content: response.object.content
                     };
-                    if (!this.windows.QuickUpdateFile) {
-                        this.windows.QuickUpdateFile = MODx.load({
-                            xtype: 'modx-window-file-quick-update'
-                            ,record: r
-                        });
-                    }
-                    this.windows.QuickUpdateFile.reset();
-                    this.windows.QuickUpdateFile.setValues(r);
-                    this.windows.QuickUpdateFile.show(e.target);
+                    var w = MODx.load({
+                        xtype: 'modx-window-file-quick-update'
+                        ,record: r
+                        ,listeners: {
+                            'hide':{fn:function() {this.destroy();}}
+                        }
+                    });
+                    w.show(e.target);
                 },scope:this}
             }
         });
@@ -241,18 +240,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             directory: node.attributes.id
             ,source: this.getSource()
         };
-        if (!this.windows.QuickCreateFile) {
-            this.windows.QuickCreateFile = MODx.load({
-                xtype: 'modx-window-file-quick-create'
-                ,record: r
-                ,listeners: {
-                    'success':{fn:this.refreshActiveNode,scope:this}
-                }
-            });
-        }
-        this.windows.QuickCreateFile.reset();
-        this.windows.QuickCreateFile.setValues(r);
-        this.windows.QuickCreateFile.show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-file-quick-create'
+            ,record: r
+            ,listeners: {
+                'success':{fn:this.refreshActiveNode,scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
     }
 
     ,browser: null
@@ -308,17 +304,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,path: node.attributes.pathRelative
             ,source: this.getSource()
         };
-        if (!this.windows.renameDirectory) {
-            this.windows.renameDirectory = MODx.load({
-                xtype: 'modx-window-directory-rename'
-                ,record: r
-                ,listeners: {
-                    'success':{fn:this.refreshParentNode,scope:this}
-                }
-            });
-        }
-        this.windows.renameDirectory.setValues(r);
-        this.windows.renameDirectory.show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-directory-rename'
+            ,record: r
+            ,listeners: {
+                'success':{fn:this.refreshParentNode,scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
     }
 
     ,renameFile: function(item,e) {
@@ -329,17 +323,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,path: node.attributes.pathRelative
             ,source: this.getSource()
         };
-        if (!this.windows.renameFile) {
-            this.windows.renameFile = MODx.load({
-                xtype: 'modx-window-file-rename'
-                ,record: r
-                ,listeners: {
-                    'success':{fn:this.refreshParentNode,scope:this}
-                }
-            });
-        }
-        this.windows.renameFile.setValues(r);
-        this.windows.renameFile.show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-file-rename'
+            ,record: r
+            ,listeners: {
+                'success':{fn:this.refreshParentNode,scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
     }
     
     ,createDirectory: function(item,e) {
@@ -348,18 +340,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             'parent': node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
             ,source: this.getSource()
         };
-        if (!this.windows.create) {
-            this.windows.create = MODx.load({
-                xtype: 'modx-window-directory-create'
-                ,record: r
-                ,listeners: {
-                    'success':{fn:this.refreshActiveNode,scope:this}
-                }
-            });
-        }
-        this.windows.create.reset();
-        this.windows.create.setValues(r);
-        this.windows.create.show(e ? e.target : Ext.getBody());
+        var w = MODx.load({
+            xtype: 'modx-window-directory-create'
+            ,record: r
+            ,listeners: {
+                'success':{fn:this.refreshActiveNode,scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e ? e.target : Ext.getBody());
     }
 	
     ,chmodDirectory: function(item,e) {
@@ -369,18 +358,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,mode: node.attributes.perms
             ,source: this.getSource()
         };
-        if (!this.windows.chmod) {
-            this.windows.chmod = MODx.load({
-                xtype: 'modx-window-directory-chmod'
-                ,record: r
-                ,listeners: {
-                    'success':{fn:this.refreshActiveNode,scope:this}
-                }
-            });
-        }
-        this.windows.chmod.reset();
-        this.windows.chmod.setValues(r);
-        this.windows.chmod.show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-directory-chmod'
+            ,record: r
+            ,listeners: {
+                'success':{fn:this.refreshActiveNode,scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
     }
 
     ,removeDirectory: function(item,e) {
