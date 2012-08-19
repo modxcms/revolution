@@ -5,14 +5,14 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author yamamoto http://kyms.jp 2012-08-06
  * @author honda http://kogus.org 2012-06-05
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['access'] = 'アクセス';
 $_lang['access_denied'] = 'アクセスは拒否されました。';
-$_lang['action'] = '操作内容';
+$_lang['action'] = 'アクション';
 $_lang['action_err_nfs'] = '[[+id]] のアクションが見つかりません。';
 $_lang['actions'] = 'アクション';
 $_lang['active_users_none'] = 'アクティブなユーザーはいません。';
@@ -120,7 +120,7 @@ $_lang['downloading'] = 'ダウンロード中';
 $_lang['duplicate'] = '複製 - ';
 $_lang['duplicate_children'] = '子を複製';
 $_lang['duplicate_chunk'] = 'チャンクを複製';
-$_lang['duplicate_of'] = 'この[[+name]]を複製する';
+$_lang['duplicate_of'] = '[[+name]] - コピー';
 $_lang['duplicate_plugin'] = 'プラグインを複製';
 $_lang['duplicate_snippet'] = 'スニペットを複製';
 $_lang['duplicate_template'] = 'テンプレートを複製';
@@ -219,7 +219,7 @@ $_lang['help_ex'] = 'ヘルプ';
 $_lang['help_not_yet'] = 'コンポーネントのヘルプがまだ作成されていません。';
 $_lang['hide_tree'] = 'ツリーを非表示';
 $_lang['home'] = 'ホーム';
-$_lang['icon'] = '操作';
+$_lang['icon'] = 'アイコン';
 $_lang['id'] = 'ID';
 $_lang['import'] = 'インポート';
 $_lang['import_err_upload'] = 'XMLファイルの検出時、エラーが発生しました。有効なファイルを指定してください。';
@@ -268,7 +268,7 @@ $_lang['new'] = '新規';
 $_lang['new_category'] = 'カテゴリー作成';
 $_lang['new_chunk'] = '新しいチャンク';
 $_lang['new_folder'] = '新しいフォルダー';
-$_lang['new_key'] = '新しいキー';
+$_lang['new_key'] = '新しいキー名';
 $_lang['new_message'] = '新しいメッセージ';
 $_lang['new_name'] = '新規名称';
 $_lang['new_parent'] = '新しい親ドキュメント';
@@ -292,7 +292,7 @@ $_lang['no_records_found'] = 'レコードはありません。';
 $_lang['no_results'] = '結果がありません';
 $_lang['offline'] = 'オフライン';
 $_lang['ok'] = 'OK';
-$_lang['old_key'] = '古いキー';
+$_lang['old_key'] = '複製元のキー名';
 $_lang['old_name'] = '古い名前';
 $_lang['on'] = 'On';
 $_lang['online'] = 'オンライン';

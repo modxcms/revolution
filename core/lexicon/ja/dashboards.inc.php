@@ -5,8 +5,8 @@
  * @package modx
  * @subpackage lexicon
  * @language ja
+ * @author honda http://kogus.org 2012-08-16
  * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboard_add'] = 'ダッシュボードを追加';
@@ -36,7 +36,7 @@ $_lang['dashboard_widgets.intro_msg'] = 'ダッシュボードに割り当てる
 $_lang['dashboards'] = 'ダッシュボード';
 $_lang['dashboards.intro_msg'] = '管理画面用ダッシュボードを管理します。';
 $_lang['rank'] = 'ランク';
-$_lang['user_group_filter'] = 'By User Group';
+$_lang['user_group_filter'] = 'By ユーザーグループ';
 $_lang['widget'] = 'ウィジェット';
 $_lang['widget_content'] = 'ウィジェットの内容';
 $_lang['widget_create'] = 'ウィジェットを作成';
@@ -59,9 +59,9 @@ $_lang['widget_remove_confirm'] = 'このウィジェットを削除してよろ
 $_lang['widget_remove_multiple'] = '複数のウィジェットを削除';
 $_lang['widget_remove_multiple_confirm'] = 'これらのウィジェットを削除してよろしいですか？　この操作は取り消しできず、全てのダッシュボードからこれら全てのウィジェットは取り除かれます。';
 $_lang['widget_namespace'] = 'ネームスペース';
-$_lang['widget_namespace_desc'] = 'The Namespace that this widget will be loaded into. Useful for custom paths.';
+$_lang['widget_namespace_desc'] = 'このウィジェットがロードされているネームスペース。カスタムパスの利用時に便利です。';
 $_lang['widget_php'] = 'インラインPHPウィジェット';
-$_lang['widget_place'] = 'Place Widget';
+$_lang['widget_place'] = 'ウィジェットの場所';
 $_lang['widget_size'] = 'サイズ';
 $_lang['widget_size_desc'] = 'ウィジェットのサイズを指定します。"ハーフ"はウィジェット表示エリアの半分の横幅、"フル"はエリアの横幅いっぱいに表示されます。また、"ダブル"はエリアの横幅いっぱいに、2段分の高さで表示されます。';
 $_lang['widget_size_double'] = 'ダブル(最大)';
@@ -69,7 +69,7 @@ $_lang['widget_size_full'] = 'フル(横幅いっぱい)';
 $_lang['widget_size_half'] = 'ハーフ(半分の横幅)';
 $_lang['widget_snippet'] = 'スニペット';
 $_lang['widget_type'] = 'ウィジェットのタイプ';
-$_lang['widget_type_desc'] = 'ウィジェットには以下のタイプがあります。"スニペット"ウィジェットは、MODXのスニペットの実行結果を返します。"HTML"ウィジェットは、入力されたHTMLコードをそのまま出力します。 "File" widgets are loaded directly from files, which can either return their output or the name of the modDashboardWidgetClass-extended class to load. "インラインPHP"ウィジェットはスニペットに似ていて、実行したいPHPコードを直接記入できます。';
+$_lang['widget_type_desc'] = 'ウィジェットには以下のタイプがあります。"スニペット"ウィジェットは、MODXのスニペットの実行結果を返します。"HTML"ウィジェットは、入力されたHTMLコードをそのまま出力します。 "ファイル"ウィジェットは、ファイルから直接読み込まれます。ファイルは、直接出力を返すか、modDashboardWidgetClassクラスを継承している必要があります。 "インラインPHP"ウィジェットはスニペットに似ていて、実行したいPHPコードを直接記入できます。';
 $_lang['widget_unplace'] = 'ウィジェットを削除';
 $_lang['widget_update'] = 'ウィジェットの設定を編集';
 $_lang['widgets'] = 'ウィジェット';

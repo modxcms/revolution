@@ -9,7 +9,7 @@
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
-$_lang['action'] = '操作内容';
+$_lang['action'] = 'アクション';
 $_lang['date_end'] = '終了日';
 $_lang['date_start'] = '開始日';
 $_lang['filter_clear'] = '絞り込みをクリア';
