@@ -488,6 +488,8 @@ class modX extends xPDO {
             array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
             if (!empty($site_id)) $this->site_id = $site_id;
             if (!empty($uuid)) $this->uuid = $uuid;
+        } elseif(!defined('MODX_BASE_PATH') && is_dir(dirname($_SERVER['SCRIPT_FILENAME']) . '/setup')) {
+            throw new xPDOException('<a href="setup/">MODX not installed. Install now?</a>');
         } else {
             throw new xPDOException("Could not load MODX config file.");
         }
