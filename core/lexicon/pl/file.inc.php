@@ -169,6 +169,12 @@ $_lang['file_last_modified'] = 'Ostatnio zmieniono'; #
 #$_lang['file_name'] = 'File Name';
 $_lang['file_name'] = 'Nazwa pliku'; #
 
+#$_lang['file_quick_create'] = 'Quick Create File';
+$_lang['file_quick_create'] = 'Quick Create File';
+
+#$_lang['file_quick_update'] = 'Quick Update File';
+$_lang['file_quick_update'] = 'Quick Update File';
+
 #$_lang['file_remove'] = 'Remove File';
 $_lang['file_remove'] = 'Usuń plik'; #
 
