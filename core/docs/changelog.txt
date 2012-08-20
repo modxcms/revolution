@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add Quick Create/Update File feature in Files tab
 - [#6522] Retain page in Package Manager after install/upgrade
 - [#7630] Save modUserGroupMember rank upon creation
 - [#8420] Provide flock-independent file locking to avoid cache corruption

@@ -160,17 +160,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             key: key
             ,newkey: ''
         };
-        if (!this.windows.duplicateContext) {
-            this.windows.duplicateContext = MODx.load({
-                xtype: 'modx-window-context-duplicate'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:function() {this.refresh();},scope:this}
-                }
-            });
-        }
-        this.windows.duplicateContext.setValues(r);
-        this.windows.duplicateContext.show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-context-duplicate'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {this.refresh();},scope:this}
+            }
+        });
+        w.show(e.target);
     }
     ,removeContext: function(itm,e) {
         var node = this.cm.activeNode;
@@ -1097,7 +1094,7 @@ MODx.getQRSettings = function(id,va) {
                 ,fieldLabel: _('resource_content_type')
                 ,name: 'content_type'
                 ,hiddenName: 'content_type'
-                ,id: 'modx-'+this.ident+'-type'
+                ,id: 'modx-'+id+'-type'
                 ,anchor: '100%'
                 ,value: va['content_type'] != undefined ? va['content_type'] : (MODx.config.default_content_type || 1)
 
@@ -1106,7 +1103,7 @@ MODx.getQRSettings = function(id,va) {
                 ,fieldLabel: _('resource_contentdispo')
                 ,name: 'content_dispo'
                 ,hiddenName: 'content_dispo'
-                ,id: 'modx-'+this.ident+'-dispo'
+                ,id: 'modx-'+id+'-dispo'
                 ,anchor: '100%'
                 ,value: va['content_dispo'] != undefined ? va['content_dispo'] : 0
             },{
@@ -1115,7 +1112,7 @@ MODx.getQRSettings = function(id,va) {
                 ,description: '<b>[[*class_key]]</b><br />'
                 ,name: 'class_key'
                 ,hiddenName: 'class_key'
-                ,id: 'modx-'+this.ident+'-class-key'
+                ,id: 'modx-'+id+'-class-key'
                 ,anchor: '100%'
                 ,value: va['class_key'] != undefined ? va['class_key'] : 'modDocument'
             }]
