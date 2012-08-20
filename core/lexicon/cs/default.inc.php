@@ -1008,6 +1008,9 @@ $_lang['quick_create'] = 'Vytvořit v okně';
 // $_lang['quick_create_chunk'] = 'Quick Create Chunk';
 $_lang['quick_create_chunk'] = 'Rychlé vytvoření chunku';
 
+// $_lang['quick_create_file'] = 'Quick Create File';
+$_lang['quick_create_file'] = 'Rychlé vytvoření souboru';
+
 // $_lang['quick_create_plugin'] = 'Quick Create Plugin';
 $_lang['quick_create_plugin'] = 'Rychlé vytvoření pluginu';
 
@@ -1023,8 +1026,14 @@ $_lang['quick_create_template'] = 'Rychlé vytvoření šablony';
 // $_lang['quick_create_tv'] = 'Quick Create TV';
 $_lang['quick_create_tv'] = 'Rychlé vytvoření template variable';
 
+// $_lang['quick_update'] = 'Quick Update';
+$_lang['quick_create'] = 'Rychlá úprava';
+
 // $_lang['quick_update_chunk'] = 'Quick Update Chunk';
 $_lang['quick_update_chunk'] = 'Rychlá úprava chunku';
+
+// $_lang['quick_update_file'] = 'Quick Update File';
+$_lang['quick_update_file'] = 'Rychlá úprava souboru';
 
 // $_lang['quick_update_plugin'] = 'Quick Update Plugin';
 $_lang['quick_update_plugin'] = 'Rychlá úprava pluginu';
