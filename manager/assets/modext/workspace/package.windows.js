@@ -232,7 +232,12 @@ Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would cre
             var tree = Ext.getCmp('modx-package-browser-tree');
             tree.setProvider(vs.provider);
             if (tree.rendered) {
-                tree.getLoader().load(tree.root);
+                var loader = tree.getLoader();
+                loader.baseParams = {
+                    action: 'getNodes'
+                    ,provider: vs.provider
+                };
+                loader.load(tree.root);
             }
             MODx.debug('Switching to: '+MODx.provider);
 			this.hide();
