@@ -1004,9 +1004,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $properties = $this->getPropertyList();
         if (!empty($properties['baseUrl'])) {
             $value = $properties['baseUrl'].$value;
-            if (isset($properties['baseUrlRelative']) && !empty($properties['baseUrlRelative'])) {
+            /*if (isset($properties['baseUrlRelative']) && !empty($properties['baseUrlRelative'])) {
                 $value = $this->xpdo->context->getOption('base_url',null,MODX_BASE_URL).$value;
-            }
+            }*/
         }
         return $value;
     }
