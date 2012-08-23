@@ -91,7 +91,7 @@ MODx.Layout = function(config){
     Ext.applyIf(config,{
          layout: 'border'
         ,id: 'modx-layout'
-		,saveState: true
+        ,saveState: true
         ,items: [{
             xtype: 'box'
             ,region: 'north'
@@ -133,10 +133,10 @@ MODx.Layout = function(config){
                 }
                 ,items: tabs
             }]
-			,listeners:{
-				statesave: this.onStatesave
-				,scope: this
-			}
+            ,listeners:{
+                statesave: this.onStatesave
+                ,scope: this
+            }
         },{
             region: 'center'
             ,applyTo: 'modx-content'
@@ -164,7 +164,7 @@ MODx.Layout = function(config){
     this.fireEvent('afterLayout');
 };
 Ext.extend(MODx.Layout,Ext.Viewport,{
-	loadKeys: function() {
+    loadKeys: function() {
         Ext.KeyMap.prototype.stopEvent = true;
         var k = new Ext.KeyMap(Ext.get(document));
         k.addBinding({
@@ -210,17 +210,36 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
         this.leftbarVisible ? this.hideLeftbar(.3) : this.showLeftbar(.3);
         this.leftbarVisible = !this.leftbarVisible;
     }
-    ,hideLeftbar: function(anim, state) {	
-		Ext.getCmp('modx-leftbar-tabs').collapse(anim);
-		if(state != undefined){	this.saveState = state;	}
+    ,hideLeftbar: function(anim, state) {
+        Ext.getCmp('modx-leftbar-tabs').collapse(anim);
+        if(state != undefined){	this.saveState = state;	}
     }
-	,onStatesave: function(p, state){
-		var panelState = state.collapsed;
-		if(panelState && !this.saveState){
-			Ext.state.Manager.set('modx-leftbar-tabs', {collapsed: false});
-			this.saveState = true;
-		}
-	}
+    ,onStatesave: function(p, state){
+        var panelState = state.collapsed;
+        if (!panelState) {
+            var wrap = Ext.get('modx-leftbar').down('div');
+            if (!wrap.isVisible()) {
+                // Set the "masking div" to visible
+                wrap.setVisible(true);
+                this.reDrawWest();
+            }
+        }
+        if(panelState && !this.saveState){
+            Ext.state.Manager.set('modx-leftbar-tabs', {collapsed: false});
+            this.saveState = true;
+        }
+    }
+    ,reDrawWest: function() {
+        // Resize the topToolbar
+        var rTree = Ext.getCmp('modx-resource-tree');
+        rTree.getTopToolbar().setWidth(298);
+        // Redraw the search toolbar (because of bad size)
+        Ext.get('modx-resource-tree-tbar').setWidth(298);
+        Ext.get('modx-resource-searchbar').remove();
+        rTree.addSearchToolbar();
+        // Now expand the tabPanel
+        Ext.getCmp('modx-leftbar-tabpanel').expand(true);
+    }
     ,showLeftbar: function(anim) {
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
