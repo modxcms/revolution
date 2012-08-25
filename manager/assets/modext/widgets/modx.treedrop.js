@@ -173,6 +173,8 @@ MODx.window.InsertElement = function(config) {
         title: _('select_el_opts')
         ,id: 'modx-window-insert-element' 
         ,width: 600
+        ,labelAlign: 'left'
+        ,labelWidth: 160
         ,url: MODx.config.connectors_url+'element/template.php'
         ,action: 'create'
         ,fields: [{
