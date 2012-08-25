@@ -2587,3 +2587,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	padding:8px;
 }
 .x-window .x-dlg-mask { background-color:#cccccc; }
+.x-window-maximized .x-window-tc {
+	padding-left: 0;
+	padding-right: 0;
+}
