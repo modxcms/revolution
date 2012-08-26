@@ -1496,8 +1496,7 @@ span.required {
 }
 
 #modx-resource-tvs-div {
-    border-top: 0;
-    border-bottom: 0;
+    border: 1px solid #999;
 }
 #modx-tv-tabs .x-tab-panel-header {
     border-top: 1px solid #999;

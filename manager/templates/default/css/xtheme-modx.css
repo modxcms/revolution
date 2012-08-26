@@ -244,8 +244,7 @@ ul.x-tab-strip-bottom {
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-right { background-image:url(../images/modx-theme/tabs/tab-btm-right-bg.gif); }
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-left { background-image:url(../images/modx-theme/tabs/tab-btm-left-bg.gif); }
 .x-tab-panel-body {
-	border-left: 1px solid #999;
-	border-right: 1px solid #999;
+	border: 1px solid #999;
 	background-color:#ffffff;
 }
 .x-tab-panel-body-top { border-top:0 none; }
@@ -1843,6 +1842,10 @@ a.x-menu-item {
     background-color:#fff;
 }
 
+.x-panel-noborder{
+    border: none;
+}
+
 .x-panel-body-noheader{
 
 }
@@ -2373,7 +2376,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	border: 1px solid #C0C0C0;
 	padding:0;
 	overflow:hidden;
-	z-index: 10000 !important;
 }
 .x-window .desc-under .warning { color:#df8d00; }
 .x-window h2 {
@@ -2383,12 +2385,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	padding: 8px 15px;
 	border-bottom: 1px solid #D6DFC3;
 	text-shadow: 0 1px 1px #FFFFFF;
-}
-.x-window .x-form-text,
-.x-window .x-form.textarea {
-	height: 20px !important;
-	padding: 5px;
-	font-size: 13px;
 }
 .x-window .x-panel-tl,
 .x-window .x-panel-ml,
