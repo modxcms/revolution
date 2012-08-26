@@ -717,20 +717,27 @@ MODx.window.QuickCreateResource = function(config) {
         title: _('quick_create_resource')
         ,id: this.ident
         ,width: 700
+        ,height: ['modResource', 'modDocument'].indexOf(config.record.class_key) == -1 ? 498 : 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'create'
         ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
+            ,border: true
             ,deferredRender: false
-            ,autoHeight: true
+            ,autoHeight: false
+            ,autoScroll: false
+            ,anchor: '100% 100%'
             ,items: [{
                 title: _('resource')
                 ,layout: 'form'
                 ,cls: 'modx-panel'
                 ,bodyStyle: { background: 'transparent', padding: '10px' }
-                ,autoHeight: true
+                ,autoHeight: false
+                ,anchor: '100% 100%'
                 ,labelWidth: 100
                 ,items: [{
                     layout: 'column'
@@ -848,21 +855,27 @@ MODx.window.QuickUpdateResource = function(config) {
         title: _('quick_update_resource')
         ,id: this.ident
         ,width: 700
+        ,height: ['modResource', 'modDocument'].indexOf(config.record.class_key) == -1 ? 498 : 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'update'
-        ,autoHeight: true
         ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
-            ,autoHeight: true
+            ,border: true
+            ,autoHeight: false
+            ,autoScroll: false
+            ,anchor: '100% 100%'
             ,deferredRender: false
             ,items: [{
                 title: _('resource')
                 ,layout: 'form'
                 ,cls: 'modx-panel'
-                ,bodyStyle: { background: 'transparent', padding: '10px' }
-                ,autoHeight: true
+                ,bodyStyle: { background: 'transparent', padding: '10px', overflow: 'hidden' }
+                ,autoHeight: false
+                ,anchor: '100% 100%'
                 ,labelWidth: 100
                 ,items: [{
                     xtype: 'hidden'
@@ -1047,8 +1060,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,hideLabel: true
                 ,labelSeparator: ''
-                ,anchor: '100%'
-                ,height: dm.height <= 768 ? 200 : 280
+                ,anchor: '100% -274'
             };
             break;
     }
