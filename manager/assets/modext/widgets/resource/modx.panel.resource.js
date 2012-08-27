@@ -254,6 +254,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (MODx.config.tvs_below_content == 1) {
             var tvs = this.getTemplateVariablesPanel(config);
             tvs.style = 'margin-top: 10px';
+            tvs.border = false;
             its.push(tvs);
         }
         return its;
