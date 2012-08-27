@@ -718,9 +718,57 @@ $events['OnSiteRefresh']->fromArray(array (
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
+$events['OnFileManagerDirCreate']= $xpdo->newObject('modEvent');
+$events['OnFileManagerDirCreate']->fromArray(array (
+  'name' => 'OnFileManagerDirCreate',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerDirRemove']= $xpdo->newObject('modEvent');
+$events['OnFileManagerDirRemove']->fromArray(array (
+  'name' => 'OnFileManagerDirRemove',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerDirRename']= $xpdo->newObject('modEvent');
+$events['OnFileManagerDirRename']->fromArray(array (
+  'name' => 'OnFileManagerDirRename',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerFileRename']= $xpdo->newObject('modEvent');
+$events['OnFileManagerFileRename']->fromArray(array (
+  'name' => 'OnFileManagerFileRename',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerFileRemove']= $xpdo->newObject('modEvent');
+$events['OnFileManagerFileRemove']->fromArray(array (
+  'name' => 'OnFileManagerFileRemove',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerFileUpdate']= $xpdo->newObject('modEvent');
+$events['OnFileManagerFileUpdate']->fromArray(array (
+  'name' => 'OnFileManagerFileUpdate',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerFileCreate']= $xpdo->newObject('modEvent');
+$events['OnFileManagerFileCreate']->fromArray(array (
+  'name' => 'OnFileManagerFileCreate',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
 $events['OnFileManagerUpload']= $xpdo->newObject('modEvent');
 $events['OnFileManagerUpload']->fromArray(array (
   'name' => 'OnFileManagerUpload',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerMoveObject']= $xpdo->newObject('modEvent');
+$events['OnFileManagerMoveObject']->fromArray(array (
+  'name' => 'OnFileManagerMoveObject',
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
