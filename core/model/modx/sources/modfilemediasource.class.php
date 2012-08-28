@@ -409,7 +409,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         /* sanitize new path */
         $newPath = $this->fileHandler->sanitizePath($newName);
         $newPath = $this->fileHandler->postfixSlash($newPath);
-        $newPath = dirname($oldPath).DIRECTORY_SEPARATOR.$newPath;
+        $newPath = dirname($oldPath).'/'.$newPath;
 
         /* rename the dir */
         if (!$oldDirectory->rename($newPath)) {
@@ -446,7 +446,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         /* sanitize new path */
         $newPath = $this->fileHandler->sanitizePath($newName);
-        $newPath = dirname($oldPath).DIRECTORY_SEPARATOR.$newPath;
+        $newPath = dirname($oldPath).'/'.$newPath;
 
         /* rename the file */
         if (!$oldFile->rename($newPath)) {
