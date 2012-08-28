@@ -13,7 +13,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modUser';
     public $languageTopics = array('user');
     public $permission = 'new_user';
-    public $elementType = 'user';
+    public $objectType = 'user';
     public $beforeSaveEvent = 'OnBeforeUserFormSave';
     public $afterSaveEvent = 'OnUserFormSave';
 
