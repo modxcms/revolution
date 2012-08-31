@@ -229,13 +229,18 @@ MODx.window.InsertElement = function(config) {
             ,autoScroll: true
             ,items: [{
                 html: '<div id="modx-iprops-form"></div>'
+                ,id: 'modx-iprops-container'
                 ,height: 400
                 ,autoScroll: true
             }]
         }]
     });
     MODx.window.InsertElement.superclass.constructor.call(this,config);
-    this.on('show',function() { this.center(); },this);
+    this.on('show',function() {
+        this.center();
+        this.mask = new Ext.LoadMask(Ext.get('modx-iprops-container'), {msg:_('loading')});
+        this.mask.show();
+    },this);
 };
 Ext.extend(MODx.window.InsertElement,MODx.Window,{
     changePropertySet: function(cb) {
@@ -256,6 +261,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             ,scope: this
         });
         this.modps = [];
+        this.mask.show();
     }
     ,createStore: function(data) {
         return new Ext.data.SimpleStore({
@@ -282,6 +288,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             ,items: vs
             ,renderTo: 'modx-iprops-form'
         });
+        this.mask.hide();
     }
     ,submit: function() {
         var v = '[[';
