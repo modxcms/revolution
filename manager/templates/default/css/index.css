@@ -65,8 +65,8 @@ hr {
     border-radius: 4px;
     background: none repeat scroll 0 0 transparent;
     border: 0;
-    margin: 20px 0 10px 10px;
-    padding: 0;
+    margin: 20px 0 10px 0;
+    padding: 0 0 0 10px;
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
