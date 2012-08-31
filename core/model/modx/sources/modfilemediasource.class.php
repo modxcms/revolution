@@ -239,11 +239,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'text' => $this->xpdo->lexicon('file_edit'),
                         'handler' => 'this.editFile',
                     );
+                    $menu[] = array(
+                        'text' => $this->xpdo->lexicon('quick_update_file'),
+                        'handler' => 'this.quickUpdateFile',
+                    );
                 }
-                $menu[] = array(
-                    'text' => $this->xpdo->lexicon('quick_update_file'),
-                    'handler' => 'this.quickUpdateFile',
-	            );
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('rename'),
                     'handler' => 'this.renameFile',
