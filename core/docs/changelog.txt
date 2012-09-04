@@ -6,6 +6,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#8482] RTE Output Option for TVs does not render on frontend
 - Add Quick Create/Update File feature in Files tab
 - [#6522] Retain page in Package Manager after install/upgrade
 - [#7630] Save modUserGroupMember rank upon creation
