@@ -499,6 +499,7 @@ unset ($policies,$policy,$idx,$ct,$attributes);
 $c = $xpdo->newObject('modContext');
 $c->fromArray(array (
     'key' => 'web',
+    'name' => 'Website',
     'description' => 'The default front-end context for your web site.',
 ), '', true, true);
 $attributes = array (
@@ -529,6 +530,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in web context.'); flush();
 $c = $xpdo->newObject('modContext');
 $c->fromArray(array (
     'key' => 'mgr',
+    'name' => 'Manager',
     'description' => 'The default manager or administration context for content management activity.',
 ), '', true, true);
 $attributes = array (
