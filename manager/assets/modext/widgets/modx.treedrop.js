@@ -270,6 +270,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         });
     }
     ,onPropFormLoad: function(el,s,r) {
+        this.mask.hide();
         var vs = Ext.decode(r.responseText);
         if (!vs || vs.length <= 0) { return false; }
         for (var i=0;i<vs.length;i++) {
@@ -288,7 +289,6 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             ,items: vs
             ,renderTo: 'modx-iprops-form'
         });
-        this.mask.hide();
     }
     ,submit: function() {
         var v = '[[';
