@@ -57,6 +57,16 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 		this.getProviderInfos(MODx.provider);
 	}
 
+    ,onLoad: function(ldr,node,resp) {
+        var r = Ext.decode(resp.responseText);
+        if (r.message) {
+            MODx.msg.alert(_('error'), r.message, function() {
+                location.href = location.href;
+            });
+            return false;
+        }
+    }
+
 	,changeGProvider: false
 	,changePProvider: false
 
