@@ -217,9 +217,9 @@ ul.x-tab-strip-bottom {
 	border-width: 0 1px 0 !important;
 	border-color: #999;
 	border-top: 1px solid #999 !important;
-    -moz-border-radius-topright: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-top-right-radius: 3px;
+    -moz-border-radius: 0 4px 0 0;
+    -webkit-border-radius: 0 4px 0 0;
+    border-radius: 0 4px 0 0;
 
 }
 
@@ -245,6 +245,9 @@ ul.x-tab-strip-bottom {
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-left { background-image:url(../images/modx-theme/tabs/tab-btm-left-bg.gif); }
 .x-tab-panel-body {
 	border: 1px solid #999;
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
 	background-color:#ffffff;
 }
 .x-tab-panel-body-top { border-top:0 none; }
