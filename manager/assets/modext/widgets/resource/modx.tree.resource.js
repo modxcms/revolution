@@ -717,7 +717,7 @@ MODx.window.QuickCreateResource = function(config) {
         title: _('quick_create_resource')
         ,id: this.ident
         ,width: 700
-        ,height: ['modResource', 'modDocument'].indexOf(config.record.class_key) == -1 ? 498 : 640
+        ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
         ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'resource/index.php'
@@ -855,7 +855,7 @@ MODx.window.QuickUpdateResource = function(config) {
         title: _('quick_update_resource')
         ,id: this.ident
         ,width: 700
-        ,height: ['modResource', 'modDocument'].indexOf(config.record.class_key) == -1 ? 498 : 640
+        ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
         ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'resource/index.php'
