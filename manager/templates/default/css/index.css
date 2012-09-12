@@ -1494,16 +1494,12 @@ span.required {
     color: #777;
     padding: 0 0 10px;
 }
-
-#modx-resource-tvs-div {
-    border-top: none;
-    border-bottom: none;
+#modx-resource-tvs-div{
+    border-top-width: 0;
 }
-#modx-resource-content ~ #modx-resource-tvs-div {
-    border: 1px solid #999;
-}
-#modx-tv-tabs .x-tab-panel-header {
-    border-top: 1px solid #999;
+#modx-resource-tvs-div.below-content{
+    border-top-width: 1px;
+    margin-top: 10px;
 }
 
 /* for selectability in ext grids */
