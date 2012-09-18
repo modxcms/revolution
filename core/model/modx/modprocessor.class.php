@@ -625,12 +625,6 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
 
         $this->object->fromArray($this->getProperties());
 
-        /* run the before save logic */
-        $canSave = $this->beforeSave();
-        if ($canSave !== true) {
-            return $this->failure($canSave);
-        }
-
         /* run object validation */
         if (!$this->object->validate()) {
             /** @var modValidator $validator */
