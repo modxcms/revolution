@@ -1,24 +1,24 @@
 <?php
 /**
-* TV Japanese lexicon topic
-*
-* @language ja
-* @package modx
-* @subpackage lexicon
-* @author honda http://kogus.org 2012-05-23
-* @author Nick http://smallworld.west-tokyo.com
-* @author shimojo http://www.priqia.com/
-* @author yamamoto http://kyms.jp
-*/
+ * TV Japanese lexicon topic
+ *
+ * @language ja
+ * @package modx
+ * @subpackage lexicon
+ * @author yamamoto http://kyms.jp 2012-08-07
+ * @author honda http://kogus.org 2012-05-23
+ * @author Nick http://smallworld.west-tokyo.com
+ * @author shimojo http://www.priqia.com/
+ */
 $_lang['has_access'] = 'アクセスしますか？';
 $_lang['rank'] = 'ランク';
 $_lang['rendering_options'] = 'レンダリングオプション';
 $_lang['tv'] = 'テンプレート変数';
 $_lang['tv_access_msg'] = 'このテンプレート変数が所属するリソースグループを選択して下さい。選択したグループへのアクセス権を持つユーザのみがこのテンプレート変数を修正することができます。 もしグループが選ばれていなければ、管理画面へのアクセス権を持つ全てのユーザがテンプレート変数を修正することができます。';
-$_lang['tv_binding_msg'] = 'このフィールドは、＠コマンドを使用し、データソースバインディングをサポートしています。';
-$_lang['tv_caption'] = '説明';
-$_lang['tv_change_template_msg'] = 'このテンプレートを変更するとこのページのテンプレート変数を再読み込みします。保存されていない変更は失われます。<br /><br />本当にテンプレートを変更しますか？';
-$_lang['tv_desc_caption'] = 'リソース編集時、テンプレート変数の横に表示されるテキスト。';
+$_lang['tv_binding_msg'] = 'このフィールドはデータソースバインディング(@コマンド)をサポートしています。';
+$_lang['tv_caption'] = 'キャプション(見出し)';
+$_lang['tv_change_template_msg'] = 'このテンプレートを変更するとこのページのテンプレート変数を再読み込みします。保存されていない変更は失われます。<br />本当にテンプレートを変更しますか？';
+$_lang['tv_desc_caption'] = 'リソース編集時、テンプレート変数の横に見出しとして表示されるテキスト。';
 $_lang['tv_desc_category'] = 'このテンプレート変数が属するカテゴリー。';
 $_lang['tv_desc_description'] = 'このテンプレート変数の簡単な説明。';
 $_lang['tv_desc_name'] = 'テンプレート変数の名前。テンプレート変数は[[*テンプレート変数名]]という書式で利用できるようになります。';

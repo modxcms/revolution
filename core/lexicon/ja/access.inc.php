@@ -5,13 +5,13 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-08-16
  * @author enogu http://www.kuroienogu.net/
- * @author honda http://kogus.org
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
-$_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
+$_lang['access_category_management_msg'] = 'エレメントへのユーザーグループメンバーのアクセスを管理します。カテゴリーを介する管理、または任意のアクセスポリシーを適用できます。';
 $_lang['access_category_err_ae'] = '指定されたカテゴリーのアクセス制御リストは既に存在します。';
 $_lang['access_category_err_nf'] = 'カテゴリーのアクセス制御リストが見つかりませんでした。';
 $_lang['access_category_err_ns'] = 'カテゴリーのアクセス制御リストが指定されていません。';
@@ -49,7 +49,7 @@ $_lang['access_permissions_users_in_group'] = '<strong>グループ内ユーザ�
 $_lang['access_permissions_users_tab'] = 'ユーザーグループの設定一覧を表示します。グループの作成・リネーム・削除もここで操作します。また、ユーザーがどのグループのメンバーになっているかを閲覧することができます。ユーザーをグループに追加したり、グループから削除するには、個々のユーザー設定を直接編集してください。<br />※管理者(ロールID 1が割り当てられているユーザー)は常に全てのドキュメントにアクセスすることができるため、管理者をグループに追加する必要はありません。';
 $_lang['access_permissions_user_group'] = 'ユーザーグループ:';
 $_lang['access_permissions_user_groups'] = 'ユーザーグループ:';
-$_lang['access_permissions_user_group_access'] = 'Resource Groups this User Group has access to:';
+$_lang['access_permissions_user_group_access'] = 'このユーザーグループがアクセス権を持つリソースグループ：';
 $_lang['access_permissions_user_message'] = 'ユーザーが所属するグループを選択できます。<br>ユーザーグループのリストはドラッグ&ドロップで並べ替えることができます。一番上(ランク0)のユーザーグループがこのユーザーのプライマリーグループとなります。この設定はダッシュボードの表示内容などに影響を与えます。';
 $_lang['access_permission_denied'] = 'このドキュメントにアクセスする権限がありません。';
 $_lang['access_permission_parent_denied'] = 'ここにドキュメントを作成する権限がありません';
@@ -100,29 +100,29 @@ $_lang['resource_group_resource_err_remove'] = 'リソースをリソースグ�
 $_lang['resource_group_untitled'] = '無名のリソースグループ';
 $_lang['resource_group_update'] = 'リソースグループの編集';
 $_lang['resource_group_access_contexts'] = 'A comma-separated list of Contexts that the Resource Group should pertain to for the following options.';
-$_lang['resource_group_automatic_access'] = 'Access Wizard';
-$_lang['resource_group_automatic_access_desc'] = 'Note: You may have to flush sessions after adding the Resource Group if you check any of the options below.';
-$_lang['resource_group_access_admin'] = 'Automatically Give Adminstrator Group Access';
-$_lang['resource_group_access_admin_desc'] = 'If checked, will give the Administrator Group view and editing access to this Resource Group for the above contexts.';
-$_lang['resource_group_access_anon'] = 'Automatically Give Anonymous Access';
-$_lang['resource_group_access_anon_desc'] = 'If checked, will give non-logged-in users view access to this Resource Group for the above contexts.';
-$_lang['resource_group_access_parallel'] = 'Create Parallel User Group';
-$_lang['resource_group_access_parallel_desc'] = 'If checked, will automatically create a User Group with the same name, and give it view access to this Resource Group for the above contexts.';
-$_lang['resource_group_access_ugs'] = 'Automatically Give Other User Groups Access';
-$_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group names. If non-blank, will give the User Groups specified here view access to this Resource Group for the above contexts.';
+$_lang['resource_group_automatic_access'] = 'アクセスウィザード';
+$_lang['resource_group_automatic_access_desc'] = '注：いずれかのオプションをチェックしてリソースグループを追加した場合、追加後にセッションをクリアする必要があります。';
+$_lang['resource_group_access_admin'] = 'Adminstratorグループのアクセス権を自動付与';
+$_lang['resource_group_access_admin_desc'] = 'チェックした場合、上記コンテキストでこのリソースグループに対し、Adminstratorグループの表示と編集アクセス権を付与します。';
+$_lang['resource_group_access_anon'] = '匿名アクセス権の自動付与';
+$_lang['resource_group_access_anon_desc'] = 'チェックした場合、上記コンテキストでこのリソースグループに対し、非ログインユーザーの表示アクセス権を付与します。';
+$_lang['resource_group_access_parallel'] = 'パラレルユーザーグループの作成';
+$_lang['resource_group_access_parallel_desc'] = 'チェックした場合、自動的に同名のユーザーグループが作成され、上記コンテキストでこのリソースグループに対する表示アクセス権を付与されます。';
+$_lang['resource_group_access_ugs'] = '他ユーザーグループアクセス権の自動付与';
+$_lang['resource_group_access_ugs_desc'] = 'ユーザーグループ名をカンマ区切りのリストで指定します。指定した場合、上記コンテキストでこのリソースグループに対し、指定したグループへ表示アクセス権が付与されます。';
 $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
-$_lang['source_add'] = 'Add Media Source';
-$_lang['user_group_aw'] = 'Access Wizard';
-$_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after adding the User Group if you check any of the options below.';
-$_lang['user_group_aw_contexts'] = 'Contexts';
-$_lang['user_group_aw_contexts_desc'] = 'A comma-separated list of Contexts that this User Group should be able to view.';
+$_lang['source_add'] = 'メディアソースの追加';
+$_lang['user_group_aw'] = 'アクセスウィザード';
+$_lang['user_group_aw_desc'] = '注：いずれかのオプションをチェックしてユーザーグループを追加した場合、追加後にセッションをクリアする必要があります。';
+$_lang['user_group_aw_contexts'] = 'コンテキスト';
+$_lang['user_group_aw_contexts_desc'] = 'このユーザーグループが表示可能なコンテキストを、カンマ区切りのリストで指定。';
 $_lang['user_group_aw_manager_policy'] = 'Manager Policy';
 $_lang['user_group_aw_manager_policy_desc'] = 'The Policy to give the User Group for editing in the manager. Select (no policy) if you do not want to grant manager access.';
-$_lang['user_group_aw_users'] = 'Users';
+$_lang['user_group_aw_users'] = 'ユーザー';
 $_lang['user_group_aw_users_desc'] = 'A comma-separated list of usernames to add to this User Group. You can use the format username:role to set the role; otherwise, Member will be assumed.';
-$_lang['user_group_aw_resource_groups'] = 'Resource Groups';
+$_lang['user_group_aw_resource_groups'] = 'リソースグループ';
 $_lang['user_group_aw_resource_groups_desc'] = 'A comma-separated list of Resource Groups to give access to in the Contexts specified above.';
-$_lang['user_group_aw_categories'] = 'Element Categories';
+$_lang['user_group_aw_categories'] = 'エレメントのカテゴリー';
 $_lang['user_group_aw_categories_desc'] = 'A comma-separated list of Element Categories to give access to in the Contexts specified above.';
 $_lang['user_group_aw_parallel'] = 'Create Parallel Resource Group';
 $_lang['user_group_aw_parallel_desc'] = 'If checked, will automatically create a Resource Group with the same name, and give this User Group view access to it in the Contexts specified above.';

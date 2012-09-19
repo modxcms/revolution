@@ -5,9 +5,9 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author yamamoto http://kyms.jp 2012-08-11
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  * @author honda http://kogus.org
  */
 $_lang['about'] = 'MODXについて';
@@ -24,8 +24,8 @@ $_lang['contexts_desc'] = 'サイトのコンテキストを管理';
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboards'] = 'ダッシュボード';
 $_lang['dashboards_desc'] = 'ダッシュボードの管理';
-$_lang['edit_menu'] = 'アクション';
-$_lang['edit_menu_desc'] = '管理画面のアクションとトップメニュー構成の管理';
+$_lang['edit_menu'] = 'トップメニューの設定';
+$_lang['edit_menu_desc'] = '管理画面トップメニュー構成の管理';
 $_lang['eventlog_viewer'] = 'イベントログ';
 $_lang['eventlog_viewer_desc'] = 'エラーログを表示';
 $_lang['export_site'] = 'サイトのエクスポート';
@@ -38,7 +38,7 @@ $_lang['flush_sessions_confirm'] = '全ユーザーのセッション情報を�
 $_lang['flush_sessions_desc'] = '全セッションを初期化し全てのユーザーを強制ログアウト';
 $_lang['flush_sessions_err'] = '現在のユーザーセッションを初期化中にエラーが発生しました';
 $_lang['flush_sessions_not_supported'] = '現在のアカウントは、ユーザーセッションの初期化権限を持っていません';
-$_lang['form_customization'] = '管理画面カスタマイズ機能';
+$_lang['form_customization'] = '管理画面カスタマイズ';
 $_lang['form_customization_desc'] = '管理画面のフォームをカスタマイズ。ロール単位で設定可能';
 $_lang['forums'] = 'フォーラム';
 $_lang['forums_desc'] = '公式MODXフォーラムへアクセス';

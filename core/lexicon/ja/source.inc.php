@@ -5,15 +5,15 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-08-17
  * @author enogu http://www.kuroienogu.net/
- * @author honda http://kogus.org
  * @author yamamoto http://kyms.jp
  */
 $_lang['access'] = 'アクセス許可';
-$_lang['base_path'] = 'Base Path';
-$_lang['base_path_relative'] = 'Base Path Relative?';
-$_lang['base_url'] = 'Base URL';
-$_lang['base_url_relative'] = 'Base URL Relative?';
+$_lang['base_path'] = 'ベースパス';
+$_lang['base_path_relative'] = 'ベースパスは相対パスですか？';
+$_lang['base_url'] = 'ベースURL';
+$_lang['base_url_relative'] = 'ベースURLは相対URLですか？';
 $_lang['minimum_role'] = 'ミニマムロール';
 $_lang['path_options'] = 'パスオプション';
 $_lang['policy'] = 'ポリシー';
@@ -53,7 +53,7 @@ $_lang['prop_file.allowedFileTypes_desc'] = 'ここに拡張子(ピリオドは�
 $_lang['prop_file.basePath_desc'] = 'ソースの場所を示すファイルパス。';
 $_lang['prop_file.basePathRelative_desc'] = 'ベースパスがMODXのインストールされたディレクトリの外にある場合、"はい"にしてください。';
 $_lang['prop_file.baseUrl_desc'] = 'このソースにアクセスするためのURL';
-$_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'If true, MODX only will prepend the baseUrl if no forward slash (/) is found at the beginning of the URL when rendering the TV. Useful for setting a TV value outside the baseUrl.';
+$_lang['prop_file.baseUrlPrependCheckSlash_desc'] = '有効にすると、テンプレート変数のレンダリング時、スラッシュ（/）がURLの先頭に場合にbaseURLを付加します。ベースURLをテンプレート変数外で設定しておく場合に便利です。';
 $_lang['prop_file.baseUrlRelative_desc'] = 'ベースURLがMODXのインストールされているURLの外にある場合、"はい"にしてください。';
 $_lang['prop_file.imageExtensions_desc'] = '画像ファイルの拡張子のリストをカンマ区切りで設定します。MODXはこのリストで設定された拡張子のファイルに対応するサムネイル画像を作成します。';
 $_lang['prop_file.skipFiles_desc'] = '表示しないファイル名のリストをカンマ区切りで設定します。MODXはいずれかのパターンに当てはまるファイル、およびディレクトリを表示しません。';
@@ -62,10 +62,10 @@ $_lang['prop_file.thumbnailType_desc'] = 'サムネイル画像の種類を設�
 $_lang['bucket'] = 'バケット';
 $_lang['prop_s3.bucket_desc'] = 'Amazon S3のバケットからデータをロードします。';
 $_lang['prop_s3.key_desc'] = 'バケットの認証に用いるAmazon Key';
-$_lang['prop_s3.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
-$_lang['prop_s3.secret_key_desc'] = 'The Amazon secret key for authentication to the bucket.';
-$_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
-$_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
-$_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
-$_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
-$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+$_lang['prop_s3.imageExtensions_desc'] = '画像として扱うファイル拡張子のカンマ区切りリストを指定。指定した拡張子を持つファイルはサムネイル作成が試みられます。';
+$_lang['prop_s3.secret_key_desc'] = 'バケットの認証に使用するAmazon secret key。';
+$_lang['prop_s3.skipFiles_desc'] = 'カンマ区切りのリストを指定。指定のいずれかに一致するファイルやフォルダはスキップされ非表示になります。';
+$_lang['prop_s3.thumbnailQuality_desc'] = '作成されるサムネイルの品質を0～100で指定。';
+$_lang['prop_s3.thumbnailType_desc'] = '作成されるサムネイルのタイプ。';
+$_lang['prop_s3.url_desc'] = 'Amazon S3インスタンスのURL。';
+$_lang['s3_no_move_folder'] = 'S3ドライバは、現時点ではフォルダの移動をサポートしていません。';
