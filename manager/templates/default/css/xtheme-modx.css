@@ -125,7 +125,7 @@ ul.x-tab-strip-top li {
 	border-style:solid solid none;
 	border-width:1px 1px 0;
 	margin:1px 0 1px 2px;
-	padding:2px;	
+	padding:2px 0;
 	background:#658F1A;
     background:-moz-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%) repeat scroll 0 0 transparent;
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#8BAF4C),color-stop(100%,#658F1A));
@@ -217,9 +217,9 @@ ul.x-tab-strip-bottom {
 	border-width: 0 1px 0 !important;
 	border-color: #999;
 	border-top: 1px solid #999 !important;
-    -moz-border-radius-topright: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-top-right-radius: 3px;
+    -moz-border-radius: 0 4px 0 0;
+    -webkit-border-radius: 0 4px 0 0;
+    border-radius: 0 4px 0 0;
 
 }
 
@@ -244,8 +244,10 @@ ul.x-tab-strip-bottom {
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-right { background-image:url(../images/modx-theme/tabs/tab-btm-right-bg.gif); }
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-left { background-image:url(../images/modx-theme/tabs/tab-btm-left-bg.gif); }
 .x-tab-panel-body {
-	border-left: 1px solid #999;
-	border-right: 1px solid #999;
+	border: 1px solid #999;
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
 	background-color:#ffffff;
 }
 .x-tab-panel-body-top { border-top:0 none; }
@@ -1843,6 +1845,10 @@ a.x-menu-item {
     background-color:#fff;
 }
 
+.x-panel-noborder{
+    border: none;
+}
+
 .x-panel-body-noheader{
 
 }
@@ -2373,7 +2379,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	border: 1px solid #C0C0C0;
 	padding:0;
 	overflow:hidden;
-	z-index: 10000 !important;
 }
 .x-window .desc-under .warning { color:#df8d00; }
 .x-window h2 {
@@ -2383,12 +2388,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	padding: 8px 15px;
 	border-bottom: 1px solid #D6DFC3;
 	text-shadow: 0 1px 1px #FFFFFF;
-}
-.x-window .x-form-text,
-.x-window .x-form.textarea {
-	height: 20px !important;
-	padding: 5px;
-	font-size: 13px;
 }
 .x-window .x-panel-tl,
 .x-window .x-panel-ml,
@@ -2587,3 +2586,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	padding:8px;
 }
 .x-window .x-dlg-mask { background-color:#cccccc; }
+.x-window-maximized .x-window-tc {
+	padding-left: 0;
+	padding-right: 0;
+}
