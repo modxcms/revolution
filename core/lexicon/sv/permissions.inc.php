@@ -129,6 +129,7 @@ $_lang['perm.resourcegroup_resource_list_desc'] = 'Se eller lista resurser i en 
 $_lang['perm.resourcegroup_new_desc'] = 'Skapa en ny resursgrupp.';
 $_lang['perm.resourcegroup_save_desc'] = 'Spara en resursgrupp.';
 $_lang['perm.resourcegroup_view_desc'] = 'Lista resursgrupper.';
+$_lang['perm.resource_duplicate_desc'] = 'Duplicera en resurs.';
 $_lang['perm.resource_quick_create_desc'] = 'Använda "Snabbskapa resurs" i resursträdet till vänster.';
 $_lang['perm.resource_quick_update_desc'] = 'Använda "Snabbuppdatera resurs" i resursträdet till vänster.';
 $_lang['perm.resource_tree_desc'] = 'Se resursträdet till vänster.';

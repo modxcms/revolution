@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['login_language'] = 'Språk';
 $_lang['login_activation_key_err'] = 'Aktiveringsnyckeln stämmer inte! Kontrollera ditt aktiveringsmeddelande och försäkra dig om att du laddade rätt URL.';
 $_lang['login_blocked_admin'] = 'Du har blivit blockerad från hanteraren av en administratör.';
 $_lang['login_blocked_error'] = 'Du är tillfälligt blockerad och kan inte logga in. Försök senare.';
