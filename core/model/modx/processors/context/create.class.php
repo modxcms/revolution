@@ -63,7 +63,7 @@ class modContextCreateProcessor extends modObjectCreateProcessor {
         /** @var modUserGroup $adminGroup */
         $adminGroup = $this->modx->getObject('modUserGroup',array('name' => 'Administrator'));
         /** @var modAccessPolicy $adminContextPolicy */
-        $adminContextPolicy = $this->modx->getObject('modAccessPolicy',array('name' => 'Object'));
+        $adminContextPolicy = $this->modx->getObject('modAccessPolicy',array('name' => 'Context'));
         if ($adminGroup) {
             if ($adminContextPolicy) {
                 /** @var modAccessContext $adminAdminAccess */

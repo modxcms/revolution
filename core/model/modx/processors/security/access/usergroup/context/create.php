@@ -32,41 +32,25 @@ if ($alreadyExists) $modx->error->addField('target',$modx->lexicon('access_conte
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
-/* ensure that Admin usergroup always has access to this context */
+/* ensure that Admin usergroup always has access to this context, if not adding Admin ACL */
 $adminGroup = $modx->getObject('modUserGroup',array('name' => 'Administrator'));
-$adminAdminPolicy = $modx->getObject('modAccessPolicy',array('name' => 'Administrator'));
-$adminResourcePolicy = $modx->getObject('modAccessPolicy',array('name' => 'Resource'));
-if ($adminGroup) {
-    if ($adminAdminPolicy) {
-        $adminAdminAccess = $modx->getObject('modAccessContext',array(
-            'principal' => $adminGroup->get('id'),
-            'principal_class' => 'modUserGroup',
-            'target' => $scriptProperties['target'],
-            'policy' => $adminAdminPolicy->get('id'),
-        ));
-        if (!$adminAdminAccess) {
-            $adminAdminAccess = $modx->newObject('modAccessContext');
-            $adminAdminAccess->set('principal',$adminGroup->get('id'));
-            $adminAdminAccess->set('principal_class','modUserGroup');
-            $adminAdminAccess->set('target',$scriptProperties['target']);
-            $adminAdminAccess->set('policy',$adminAdminPolicy->get('id'));
-            $adminAdminAccess->save();
-        }
-    }
-    if ($adminResourcePolicy) {
-        $adminResourceAccess = $modx->getObject('modAccessContext',array(
-            'principal' => $adminGroup->get('id'),
-            'principal_class' => 'modUserGroup',
-            'target' => $scriptProperties['target'],
-            'policy' => $adminResourcePolicy->get('id'),
-        ));
-        if (!$adminResourceAccess) {
-            $adminResourceAccess = $modx->newObject('modAccessContext');
-            $adminResourceAccess->set('principal',$adminGroup->get('id'));
-            $adminResourceAccess->set('principal_class','modUserGroup');
-            $adminResourceAccess->set('target',$scriptProperties['target']);
-            $adminResourceAccess->set('policy',$adminResourcePolicy->get('id'));
-            $adminResourceAccess->save();
+if ((integer) $scriptProperties['principal'] !== $adminGroup->get('id')) {
+    $adminContextPolicy = $modx->getObject('modAccessPolicy',array('name' => 'Context'));
+    if ($adminGroup) {
+        if ($adminContextPolicy) {
+            $adminContextAccess = $modx->getObject('modAccessContext',array(
+                'principal' => $adminGroup->get('id'),
+                'principal_class' => 'modUserGroup',
+                'target' => $scriptProperties['target'],
+            ));
+            if (!$adminContextAccess) {
+                $adminContextAccess = $modx->newObject('modAccessContext');
+                $adminContextAccess->set('principal',$adminGroup->get('id'));
+                $adminContextAccess->set('principal_class','modUserGroup');
+                $adminContextAccess->set('target',$scriptProperties['target']);
+                $adminContextAccess->set('policy',$adminContextPolicy->get('id'));
+                $adminContextAccess->save();
+            }
         }
     }
 }
