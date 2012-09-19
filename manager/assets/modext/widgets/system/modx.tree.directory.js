@@ -682,6 +682,9 @@ MODx.window.QuickUpdateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_update')
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'browser/file.php'
         ,action: 'update'
         ,fields: [{
@@ -708,8 +711,7 @@ MODx.window.QuickUpdateFile = function(config) {
             fieldLabel: _('content')
             ,xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100%'
-            ,grow: true, growMax: 380
+            ,anchor: '100% -118'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -749,6 +751,9 @@ MODx.window.QuickCreateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_create')
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'browser/file.php'
         ,action: 'create'
         ,fields: [{
@@ -774,8 +779,7 @@ MODx.window.QuickCreateFile = function(config) {
             fieldLabel: _('content')
             ,xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100%'
-            ,grow: true, growMax: 380
+            ,anchor: '100% -120'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER

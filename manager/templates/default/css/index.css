@@ -65,8 +65,8 @@ hr {
     border-radius: 4px;
     background: none repeat scroll 0 0 transparent;
     border: 0;
-    margin: 20px 0 10px 10px;
-    padding: 0;
+    margin: 20px 0 10px 0;
+    padding: 0 0 0 10px;
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
@@ -1494,13 +1494,12 @@ span.required {
     color: #777;
     padding: 0 0 10px;
 }
-
-#modx-resource-tvs-div {
-    border-top: 0;
-    border-bottom: 0;
+#modx-resource-tvs-div{
+    border-top-width: 0;
 }
-#modx-tv-tabs .x-tab-panel-header {
-    border-top: 1px solid #999;
+#modx-resource-tvs-div.below-content{
+    border-top-width: 1px;
+    margin-top: 10px;
 }
 
 /* for selectability in ext grids */

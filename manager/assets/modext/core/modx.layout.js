@@ -111,6 +111,7 @@ MODx.Layout = function(config){
             ,useSplitTips: true
             ,monitorResize: true
             ,forceLayout: true
+            ,layout: 'anchor'
             ,items: [{
                  xtype: 'modx-tabs'
                 ,plain: true
@@ -122,6 +123,7 @@ MODx.Layout = function(config){
                 }
                 ,id: 'modx-leftbar-tabpanel'
                 ,border: false
+                ,anchor: '100%'
                 ,activeTab: activeTab
                 ,stateful: true
                 ,stateId: 'modx-leftbar-tabs'
