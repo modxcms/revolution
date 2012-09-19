@@ -1,11 +1,11 @@
 <?php
 /**
-* Menu Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Menu Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['lexicon_key'] = 'Lexicon Key';
 $_lang['lexicon_key'] = 'Lexicon Key';
@@ -40,8 +40,8 @@ $_lang['menu_parent_err_ns'] = 'Parent menu not specified!';
 #$_lang['menu_parent_err_nf'] = 'Parent menu not found!';
 $_lang['menu_parent_err_nf'] = 'Parent menu not found!';
 
-#$_lang['menu_remove'] = 'Remove Menu Item';
-$_lang['menu_remove'] = 'Remove Menu Item';
+#$_lang['menu_remove'] = 'Delete Menu Item';
+$_lang['menu_remove'] = 'Delete Menu Item';
 
 #$_lang['menu_top'] = 'Top Menu';
 $_lang['menu_top'] = 'Top Menu';

@@ -1,11 +1,11 @@
 <?php
 /**
-* Custom Filters Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Custom Filters Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['ago'] = '[[+time]] ago';
 $_lang['ago'] = '[[+time]] ago';

@@ -1,11 +1,11 @@
 <?php
 /**
-* Access Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Access Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
 $_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
@@ -121,11 +121,11 @@ $_lang['access_permissions_user_group'] = 'User group:';
 #$_lang['access_permissions_user_groups'] = 'User groups';
 $_lang['access_permissions_user_groups'] = 'User groups';
 
-#$_lang['access_permissions_user_group_access'] = 'Document groups this user group has access to:';
-$_lang['access_permissions_user_group_access'] = 'Document groups this user group has access to:';
+#$_lang['access_permissions_user_group_access'] = 'Resource Groups this User Group has access to:';
+$_lang['access_permissions_user_group_access'] = 'Resource Groups this User Group has access to:';
 
-#$_lang['access_permissions_user_message'] = 'Here you can select which user groups this user belongs to:';
-$_lang['access_permissions_user_message'] = 'Here you can select which user groups this user belongs to:';
+#$_lang['access_permissions_user_message'] = 'Here you can select which User Groups this user belongs to. You can drag and drop each row to reorder the rank of each User Group. The User Group that has a rank of 0 will be declared the User\'s Primary Group, and will be the User Group that determines the User\'s Dashboard.';
+$_lang['access_permissions_user_message'] = 'Here you can select which User Groups this user belongs to. You can drag and drop each row to reorder the rank of each User Group. The User Group that has a rank of 0 will be declared the User\'s Primary Group, and will be the User Group that determines the User\'s Dashboard.';
 
 #$_lang['access_permission_denied'] = 'You do not have the correct permissions for this document.';
 $_lang['access_permission_denied'] = 'You do not have the correct permissions for this document.';
@@ -166,6 +166,12 @@ $_lang['access_rgroup_remove'] = 'Remove Resource Group Access';
 #$_lang['access_rgroup_update'] = 'Update Resource Group Access';
 $_lang['access_rgroup_update'] = 'Update Resource Group Access';
 
+#$_lang['access_source_remove'] = 'Remove Media Source Access';
+$_lang['access_source_remove'] = 'Remove Media Source Access';
+
+#$_lang['access_source_update'] = 'Update Media Source Access';
+$_lang['access_source_update'] = 'Update Media Source Access';
+
 #$_lang['access_to_contexts'] = 'Access to Contexts';
 $_lang['access_to_contexts'] = 'Access to Contexts';
 
@@ -202,8 +208,14 @@ $_lang['filter_by_resource_group'] = 'Filter by Resource Group...';
 #$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['filter_by_category'] = 'Filter by Category...';
 
+#$_lang['filter_by_source'] = 'Filter by Media Source...';
+$_lang['filter_by_source'] = 'Filter by Media Source...';
+
 #$_lang['no_policy_option'] = ' (no policy) ';
 $_lang['no_policy_option'] = ' (no policy) ';
+
+#$_lang['permissions_in_policy'] = 'Permissions in Selected Policy';
+$_lang['permissions_in_policy'] = 'Permissions in Selected Policy';
 
 #$_lang['resource_group'] = 'Resource Group';
 $_lang['resource_group'] = 'Resource Group';
@@ -235,8 +247,8 @@ $_lang['resource_group_err_ns'] = 'Resource group not specified.';
 #$_lang['resource_group_err_remove'] = 'An error occurred while trying to remove the resource group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to remove the resource group.';
 
-#$_lang['resource_group_remove'] = 'Remove Resource Group';
-$_lang['resource_group_remove'] = 'Remove Resource Group';
+#$_lang['resource_group_remove'] = 'Delete Resource Group';
+$_lang['resource_group_remove'] = 'Delete Resource Group';
 
 #$_lang['resource_group_remove_confirm'] = 'Are you sure you want to remove this resource group?';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to remove this resource group?';
@@ -256,8 +268,89 @@ $_lang['resource_group_resource_err_remove'] = 'An error occurred while trying t
 #$_lang['resource_group_untitled'] = 'Untitled Resource Group';
 $_lang['resource_group_untitled'] = 'Untitled Resource Group';
 
+#$_lang['resource_group_update'] = 'Update Resource Group';
+$_lang['resource_group_update'] = 'Update Resource Group';
+
+#$_lang['resource_group_access_contexts'] = 'A comma-separated list of Contexts that the Resource Group should pertain to for the following options.';
+$_lang['resource_group_access_contexts'] = 'A comma-separated list of Contexts that the Resource Group should pertain to for the following options.';
+
+#$_lang['resource_group_automatic_access'] = 'Access Wizard';
+$_lang['resource_group_automatic_access'] = 'Access Wizard';
+
+#$_lang['resource_group_automatic_access_desc'] = 'Note: You may have to flush sessions after adding the Resource Group if you check any of the options below.';
+$_lang['resource_group_automatic_access_desc'] = 'Note: You may have to flush sessions after adding the Resource Group if you check any of the options below.';
+
+#$_lang['resource_group_access_admin'] = 'Automatically Give Adminstrator Group Access';
+$_lang['resource_group_access_admin'] = 'Automatically Give Adminstrator Group Access';
+
+#$_lang['resource_group_access_admin_desc'] = 'If checked, will give the Administrator Group view and editing access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_admin_desc'] = 'If checked, will give the Administrator Group view and editing access to this Resource Group for the above contexts.';
+
+#$_lang['resource_group_access_anon'] = 'Automatically Give Anonymous Access';
+$_lang['resource_group_access_anon'] = 'Automatically Give Anonymous Access';
+
+#$_lang['resource_group_access_anon_desc'] = 'If checked, will give non-logged-in users view access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_anon_desc'] = 'If checked, will give non-logged-in users view access to this Resource Group for the above contexts.';
+
+#$_lang['resource_group_access_parallel'] = 'Create Parallel User Group';
+$_lang['resource_group_access_parallel'] = 'Create Parallel User Group';
+
+#$_lang['resource_group_access_parallel_desc'] = 'If checked, will automatically create a User Group with the same name, and give it view access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_parallel_desc'] = 'If checked, will automatically create a User Group with the same name, and give it view access to this Resource Group for the above contexts.';
+
+#$_lang['resource_group_access_ugs'] = 'Automatically Give Other User Groups Access';
+$_lang['resource_group_access_ugs'] = 'Automatically Give Other User Groups Access';
+
+#$_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group names. If non-blank, will give the User Groups specified here view access to this Resource Group for the above contexts.';
+$_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group names. If non-blank, will give the User Groups specified here view access to this Resource Group for the above contexts.';
+
 #$_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
 $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
+
+#$_lang['source_add'] = 'Add Media Source';
+$_lang['source_add'] = 'Add Media Source';
+
+#$_lang['user_group_aw'] = 'Access Wizard';
+$_lang['user_group_aw'] = 'Access Wizard';
+
+#$_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after adding the User Group if you check any of the options below.';
+$_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after adding the User Group if you check any of the options below.';
+
+#$_lang['user_group_aw_contexts'] = 'Contexts';
+$_lang['user_group_aw_contexts'] = 'Contexts';
+
+#$_lang['user_group_aw_contexts_desc'] = 'A comma-separated list of Contexts that this User Group should be able to view.';
+$_lang['user_group_aw_contexts_desc'] = 'A comma-separated list of Contexts that this User Group should be able to view.';
+
+#$_lang['user_group_aw_manager_policy'] = 'Manager Policy';
+$_lang['user_group_aw_manager_policy'] = 'Manager Policy';
+
+#$_lang['user_group_aw_manager_policy_desc'] = 'The Policy to give the User Group for editing in the manager. Select (no policy) if you do not want to grant manager access.';
+$_lang['user_group_aw_manager_policy_desc'] = 'The Policy to give the User Group for editing in the manager. Select (no policy) if you do not want to grant manager access.';
+
+#$_lang['user_group_aw_users'] = 'Users';
+$_lang['user_group_aw_users'] = 'Users';
+
+#$_lang['user_group_aw_users_desc'] = 'A comma-separated list of usernames to add to this User Group. You can use the format username:role to set the role; otherwise, Member will be assumed.';
+$_lang['user_group_aw_users_desc'] = 'A comma-separated list of usernames to add to this User Group. You can use the format username:role to set the role; otherwise, Member will be assumed.';
+
+#$_lang['user_group_aw_resource_groups'] = 'Resource Groups';
+$_lang['user_group_aw_resource_groups'] = 'Resource Groups';
+
+#$_lang['user_group_aw_resource_groups_desc'] = 'A comma-separated list of Resource Groups to give access to in the Contexts specified above.';
+$_lang['user_group_aw_resource_groups_desc'] = 'A comma-separated list of Resource Groups to give access to in the Contexts specified above.';
+
+#$_lang['user_group_aw_categories'] = 'Element Categories';
+$_lang['user_group_aw_categories'] = 'Element Categories';
+
+#$_lang['user_group_aw_categories_desc'] = 'A comma-separated list of Element Categories to give access to in the Contexts specified above.';
+$_lang['user_group_aw_categories_desc'] = 'A comma-separated list of Element Categories to give access to in the Contexts specified above.';
+
+#$_lang['user_group_aw_parallel'] = 'Create Parallel Resource Group';
+$_lang['user_group_aw_parallel'] = 'Create Parallel Resource Group';
+
+#$_lang['user_group_aw_parallel_desc'] = 'If checked, will automatically create a Resource Group with the same name, and give this User Group view access to it in the Contexts specified above.';
+$_lang['user_group_aw_parallel_desc'] = 'If checked, will automatically create a Resource Group with the same name, and give this User Group view access to it in the Contexts specified above.';
 
 #$_lang['user_group_category_access'] = 'Element Category Access';
 $_lang['user_group_category_access'] = 'Element Category Access';
@@ -265,8 +358,20 @@ $_lang['user_group_category_access'] = 'Element Category Access';
 #$_lang['user_group_category_access_msg'] = 'Here you can set which Elements this User Group can access by the Categories the Elements are in.';
 $_lang['user_group_category_access_msg'] = 'Here you can set which Elements this User Group can access by the Categories the Elements are in.';
 
+#$_lang['user_group_category_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_category_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+
+#$_lang['user_group_category_category_desc'] = 'The Category to grant access to.';
+$_lang['user_group_category_category_desc'] = 'The Category to grant access to.';
+
+#$_lang['user_group_category_context_desc'] = 'The Context to target for Elements with the above Category associated to them.';
+$_lang['user_group_category_context_desc'] = 'The Context to target for Elements with the above Category associated to them.';
+
 #$_lang['user_group_category_err_ae'] = 'User Group already has access to that Category.';
 $_lang['user_group_category_err_ae'] = 'User Group already has access to that Category.';
+
+#$_lang['user_group_category_policy_desc'] = 'The Policy to apply to this Context with Elements in the Category for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+$_lang['user_group_category_policy_desc'] = 'The Policy to apply to this Context with Elements in the Category for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 
 #$_lang['user_group_category_remove_confirm'] = 'Are you sure you want to remove this Category from this User Group?';
 $_lang['user_group_category_remove_confirm'] = 'Are you sure you want to remove this Category from this User Group?';
@@ -276,6 +381,15 @@ $_lang['user_group_context_access'] = 'Context Access';
 
 #$_lang['user_group_context_access_msg'] = 'Here you can set which Contexts this User Group can access.';
 $_lang['user_group_context_access_msg'] = 'Here you can set which Contexts this User Group can access.';
+
+#$_lang['user_group_context_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_context_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+
+#$_lang['user_group_context_context_desc'] = 'The Context to grant access to.';
+$_lang['user_group_context_context_desc'] = 'The Context to grant access to.';
+
+#$_lang['user_group_context_policy_desc'] = 'The Policy to apply to this Context for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+$_lang['user_group_context_policy_desc'] = 'The Policy to apply to this Context for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 
 #$_lang['user_group_context_err_ae'] = 'User Group already has access to that context.';
 $_lang['user_group_context_err_ae'] = 'User Group already has access to that context.';
@@ -289,11 +403,44 @@ $_lang['user_group_resourcegroup_access'] = 'Resource Group Access';
 #$_lang['user_group_resourcegroup_access_msg'] = 'Here you can set which Resource Groups this User Group can access.';
 $_lang['user_group_resourcegroup_access_msg'] = 'Here you can set which Resource Groups this User Group can access.';
 
+#$_lang['user_group_resourcegroup_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_resourcegroup_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+
+#$_lang['user_group_resourcegroup_context_desc'] = 'The Context to target for items with the above Resource Group associated to them.';
+$_lang['user_group_resourcegroup_context_desc'] = 'The Context to target for items with the above Resource Group associated to them.';
+
 #$_lang['user_group_resourcegroup_err_ae'] = 'User Group already has access to that Resource Group.';
 $_lang['user_group_resourcegroup_err_ae'] = 'User Group already has access to that Resource Group.';
 
+#$_lang['user_group_resourcegroup_policy_desc'] = 'The Policy to apply to this Context with Resources in the Resource Group for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+$_lang['user_group_resourcegroup_policy_desc'] = 'The Policy to apply to this Context with Resources in the Resource Group for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
 #$_lang['user_group_resourcegroup_remove_confirm'] = 'Are you sure you want to remove this Resource Group from this User Group?';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Are you sure you want to remove this Resource Group from this User Group?';
+
+#$_lang['user_group_resourcegroup_resource_group_desc'] = 'The Resource Group to grant access to.';
+$_lang['user_group_resourcegroup_resource_group_desc'] = 'The Resource Group to grant access to.';
+
+#$_lang['user_group_source_access'] = 'Media Source Access';
+$_lang['user_group_source_access'] = 'Media Source Access';
+
+#$_lang['user_group_source_access_msg'] = 'Here you can set which Media Sources this User Group can access.';
+$_lang['user_group_source_access_msg'] = 'Here you can set which Media Sources this User Group can access.';
+
+#$_lang['user_group_source_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_source_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+
+#$_lang['user_group_source_err_ae'] = 'User Group already has access to that Media Source.';
+$_lang['user_group_source_err_ae'] = 'User Group already has access to that Media Source.';
+
+#$_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Source for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+$_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Source for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+#$_lang['user_group_source_remove_confirm'] = 'Are you sure you want to remove this Media Source from this User Group?';
+$_lang['user_group_source_remove_confirm'] = 'Are you sure you want to remove this Media Source from this User Group?';
+
+#$_lang['user_group_source_source_desc'] = 'The Media Source to grant access to.';
+$_lang['user_group_source_source_desc'] = 'The Media Source to grant access to.';
 
 #$_lang['user_group_user_access_msg'] = 'Select which users you want in this User Group.';
 $_lang['user_group_user_access_msg'] = 'Select which users you want in this User Group.';
