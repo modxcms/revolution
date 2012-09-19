@@ -36,10 +36,10 @@ $_lang['delim'] = 'Avgränsare';
 $_lang['delimiter'] = 'Avgränsare';
 $_lang['disabled_dates'] = 'Inaktiverade datum';
 $_lang['disabled_dates_desc'] = 'En kommaseparerad lista med "datum" som ska inaktiveras som strängar. Dessa strängar kommer att användas för att dynamiskt bygga ett reguljärt uttryck, så de är mycket kraftfulla. Några exempel:<br />
-- Inaktivera dessa exakta datum: 2003-03-08,2003-09-16<br />
+- Inaktivera dessa exakta datum: 2012-03-08,2012-09-16<br />
 - Inaktivera dessa datum varje år: 03-08,09-16<br />
-- Matcha bara början (användbart om du använder korta årtal): ^03-08<br />
-- Inaktivera varje dag i mars 2006: 03-..-2006<br />
+- Matcha bara början (användbart om du använder korta årtal): ^10-12<br />
+- Inaktivera varje dag i mars 2012: 2012-03-..<br />
 - Inaktivera varje dag i mars alla år: ^03<br />
 Notera att formatet på de datum som läggs till i listan exakt måste matcha hanterarens datumformat. För att stödja reguljära uttryck måste du, om du använder ett datumformat som innehåller punkter (.), undanta punkterna med ett omvänt snedstreck när du begränsar datum.';
 $_lang['disabled_days'] = 'Inaktiverade dagar';
@@ -96,6 +96,8 @@ $_lang['resourcelist_depth'] = 'Djup';
 $_lang['resourcelist_depth_desc'] = 'Anger hur många nivåer neråt som kommer att sökas i databasen när listan med resurser ska hämtas. Standard är 10.';
 $_lang['resourcelist_includeparent'] = 'Inkludera föräldrar';
 $_lang['resourcelist_includeparent_desc'] = 'Om denna sätts till "Ja" kommer resurserna som anges i föräldrafältet att inkluderas i listan.';
+$_lang['resourcelist_limitrelatedcontext'] = 'Begränsa till relaterad kontext';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Om denna sätts till "Ja" kommer bara resurser som är relaterade till den nuvarande resursens kontext att inkluderas.';
 $_lang['resourcelist_limit'] = 'Begränsning';
 $_lang['resourcelist_limit_desc'] = 'Det antal resurser som listan kommer att begränsas till. 0 eller inget värde innebär att ingen begränsning görs.';
 $_lang['resourcelist_parents'] = 'Föräldrar';
