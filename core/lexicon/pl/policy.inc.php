@@ -1,11 +1,11 @@
 <?php
 /**
-* Access Policy Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Access Policy Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['active_of'] = '[[+active]] of [[+total]]';
 $_lang['active_of'] = '[[+active]] of [[+total]]';
@@ -43,8 +43,8 @@ $_lang['permission_err_save'] = 'An error occurred while trying to save this per
 #$_lang['permission_new'] = 'New Permission';
 $_lang['permission_new'] = 'New Permission';
 
-#$_lang['permission_remove'] = 'Remove Permission';
-$_lang['permission_remove'] = 'Remove Permission';
+#$_lang['permission_remove'] = 'Delete Permission';
+$_lang['permission_remove'] = 'Delete Permission';
 
 #$_lang['permission_remove_confirm'] = 'Are you sure you want to remove this permission?';
 $_lang['permission_remove_confirm'] = 'Are you sure you want to remove this permission?';
@@ -73,6 +73,18 @@ $_lang['policy_data'] = 'Policy Data';
 #$_lang['policy_desc'] = 'Access policies are generic policies that restrict or enable certain actions with MODX.';
 $_lang['policy_desc'] = 'Access policies are generic policies that restrict or enable certain actions with MODX.';
 
+#$_lang['policy_desc_name'] = 'The name of the Access Policy';
+$_lang['policy_desc_name'] = 'The name of the Access Policy';
+
+#$_lang['policy_desc_description'] = 'Optional. A short description of the Access Policy';
+$_lang['policy_desc_description'] = 'Optional. A short description of the Access Policy';
+
+#$_lang['policy_desc_template'] = 'The Policy Template used for this Policy. Policies get their Permission lists from their Template.';
+$_lang['policy_desc_template'] = 'The Policy Template used for this Policy. Policies get their Permission lists from their Template.';
+
+#$_lang['policy_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy uses to translate the Permissions it owns.';
+$_lang['policy_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy uses to translate the Permissions it owns.';
+
 #$_lang['policy_duplicate'] = 'Duplicate Policy';
 $_lang['policy_duplicate'] = 'Duplicate Policy';
 
@@ -93,6 +105,15 @@ $_lang['policy_err_remove'] = 'An error occurred while trying to remove the Poli
 
 #$_lang['policy_err_save'] = 'An error occurred while trying to save the Policy.';
 $_lang['policy_err_save'] = 'An error occurred while trying to save the Policy.';
+
+#$_lang['policy_export'] = 'Export Policy';
+$_lang['policy_export'] = 'Export Policy';
+
+#$_lang['policy_import'] = 'Import Policy';
+$_lang['policy_import'] = 'Import Policy';
+
+#$_lang['policy_import_msg'] = 'Select an XML file to import a Policy from. It must be in the correct XML Policy format.';
+$_lang['policy_import_msg'] = 'Select an XML file to import a Policy from. It must be in the correct XML Policy format.';
 
 #$_lang['policy_management'] = 'Access Policies';
 $_lang['policy_management'] = 'Access Policies';
@@ -115,14 +136,14 @@ $_lang['policy_property_remove'] = 'Delete Access Policy Property';
 #$_lang['policy_property_specify_name'] = 'Please specify a policy property name:';
 $_lang['policy_property_specify_name'] = 'Please specify a policy property name:';
 
-#$_lang['policy_remove'] = 'Remove Policy';
-$_lang['policy_remove'] = 'Remove Policy';
+#$_lang['policy_remove'] = 'Delete Policy';
+$_lang['policy_remove'] = 'Delete Policy';
 
 #$_lang['policy_remove_confirm'] = 'Are you sure you want to remove this Access Policy?';
 $_lang['policy_remove_confirm'] = 'Are you sure you want to remove this Access Policy?';
 
-#$_lang['policy_remove_multiple'] = 'Remove Policies';
-$_lang['policy_remove_multiple'] = 'Remove Policies';
+#$_lang['policy_remove_multiple'] = 'Delete Policies';
+$_lang['policy_remove_multiple'] = 'Delete Policies';
 
 #$_lang['policy_remove_multiple_confirm'] = 'Are you sure you want to remove these Access Policies? This is irreversible.';
 $_lang['policy_remove_multiple_confirm'] = 'Are you sure you want to remove these Access Policies? This is irreversible.';
@@ -138,6 +159,18 @@ $_lang['policy_template.desc'] = 'A Policy Template defines what Permissions wil
 
 #$_lang['policy_template_create'] = 'Create Policy Template';
 $_lang['policy_template_create'] = 'Create Policy Template';
+
+#$_lang['policy_template_desc_name'] = 'The name of the Access Policy Template';
+$_lang['policy_template_desc_name'] = 'The name of the Access Policy Template';
+
+#$_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template';
+$_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template';
+
+#$_lang['policy_template_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy Template uses to translate the Permissions it owns.';
+$_lang['policy_template_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy Template uses to translate the Permissions it owns.';
+
+#$_lang['policy_template_desc_template_group'] = 'The Policy Template Group to use. This is used when selecting Policies from a dropdown menu; usually they are filtered by template group. Select an appropriate group for your Policy Template.';
+$_lang['policy_template_desc_template_group'] = 'The Policy Template Group to use. This is used when selecting Policies from a dropdown menu; usually they are filtered by template group. Select an appropriate group for your Policy Template.';
 
 #$_lang['policy_template_duplicate'] = 'Duplicate Policy Template';
 $_lang['policy_template_duplicate'] = 'Duplicate Policy Template';
@@ -160,14 +193,23 @@ $_lang['policy_template_err_remove'] = 'An error occurred while trying to remove
 #$_lang['policy_template_err_save'] = 'An error occurred while trying to save the Policy Template.';
 $_lang['policy_template_err_save'] = 'An error occurred while trying to save the Policy Template.';
 
-#$_lang['policy_template_remove'] = 'Remove Policy Template';
-$_lang['policy_template_remove'] = 'Remove Policy Template';
+#$_lang['policy_template_export'] = 'Export Policy Template';
+$_lang['policy_template_export'] = 'Export Policy Template';
+
+#$_lang['policy_template_import'] = 'Import Policy Template';
+$_lang['policy_template_import'] = 'Import Policy Template';
+
+#$_lang['policy_template_import_msg'] = 'Select an XML file to import a Policy Template from. It must be in the correct XML Policy Template format.';
+$_lang['policy_template_import_msg'] = 'Select an XML file to import a Policy Template from. It must be in the correct XML Policy Template format.';
+
+#$_lang['policy_template_remove'] = 'Delete Policy Template';
+$_lang['policy_template_remove'] = 'Delete Policy Template';
 
 #$_lang['policy_template_remove_confirm'] = 'Are you sure you want to remove this Policy Template? It will remove all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.';
 $_lang['policy_template_remove_confirm'] = 'Are you sure you want to remove this Policy Template? It will remove all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.';
 
-#$_lang['policy_template_remove_multiple'] = 'Remove Selected Policy Templates';
-$_lang['policy_template_remove_multiple'] = 'Remove Selected Policy Templates';
+#$_lang['policy_template_remove_multiple'] = 'Delete Selected Policy Templates';
+$_lang['policy_template_remove_multiple'] = 'Delete Selected Policy Templates';
 
 #$_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to remove these Policy Templates? It will remove all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to remove these Policy Templates? It will remove all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
