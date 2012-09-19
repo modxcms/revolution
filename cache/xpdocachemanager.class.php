@@ -271,7 +271,7 @@ class xPDOCacheManager {
         $lockFile = $file . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
         if (!file_exists($lockFile)) {
             $myPID = getmypid();
-            $tmpLockFile = dirname($file) . '/' . uniqid($file . '-') . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
+            $tmpLockFile = dirname($file) . '/' . uniqid(basename($file) . '-') . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
             if (file_put_contents($tmpLockFile, $myPID, LOCK_EX)) {
                 if (rename($tmpLockFile, $lockFile) && is_readable($lockFile)) {
                     $lockPID = @file_get_contents($lockFile);
