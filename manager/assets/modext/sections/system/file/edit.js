@@ -81,6 +81,10 @@ MODx.panel.EditFile = function(config) {
 				,layout: 'form'
 				,cls:'main-wrapper'
                 ,items: [{
+                    xtype: 'hidden'
+                    ,name: 'source'
+                    ,value: config.record.source || 0
+                },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('file_name')
                     ,name: 'basename'
