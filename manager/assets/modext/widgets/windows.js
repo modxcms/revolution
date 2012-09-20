@@ -943,14 +943,14 @@ MODx.window.DuplicateContext = function(config) {
         },{
             xtype: 'checkbox',
             id: 'modx-'+this.ident+'-preservealias'
-            ,fieldLabel: 'Preserve Duplicated Resources Alias' // Todo: add translation
+            ,fieldLabel: _('preserve_alias') // Todo: add translation
             ,name: 'preserve_alias'
             ,anchor: '100%'
             ,checked: true
         },{
             xtype: 'checkbox',
             id: 'modx-'+this.ident+'-preservemenuindex'
-            ,fieldLabel: 'Preserve Duplicated Resources Order' // Todo: add translation
+            ,fieldLabel: _('preserve_menuindex') // Todo: add translation
             ,name: 'preserve_menuindex'
             ,anchor: '100%'
             ,checked: true
