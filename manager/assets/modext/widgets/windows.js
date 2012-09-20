@@ -940,6 +940,20 @@ MODx.window.DuplicateContext = function(config) {
             ,name: 'newkey'
             ,anchor: '100%'
             ,value: ''
+        },{
+            xtype: 'checkbox',
+            id: 'modx-'+this.ident+'-preservealias'
+            ,fieldLabel: 'Preserve Duplicated Resources Alias' // Todo: add translation
+            ,name: 'preserve_alias'
+            ,anchor: '100%'
+            ,checked: true
+        },{
+            xtype: 'checkbox',
+            id: 'modx-'+this.ident+'-preservemenuindex'
+            ,fieldLabel: 'Preserve Duplicated Resources Order' // Todo: add translation
+            ,name: 'preserve_menuindex'
+            ,anchor: '100%'
+            ,checked: true
         }]
     });
     MODx.window.DuplicateContext.superclass.constructor.call(this,config);
