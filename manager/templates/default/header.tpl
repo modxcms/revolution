@@ -32,11 +32,6 @@
 {foreach from=$cssjs item=scr}
 {$scr}
 {/foreach}
-
-<!--[if IE]>
-<style type="text/css">body { behavior: url("{$_config.manager_url}templates/default/css/csshover3.htc"); }</style>
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/ie.css" />
-<![endif]-->
 </head>
 <body id="modx-body-tag">
 

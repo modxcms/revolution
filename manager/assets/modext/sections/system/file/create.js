@@ -79,6 +79,10 @@ MODx.panel.CreateFile = function(config) {
                 ,layout: 'form'
                 ,labelAlign: 'top'
                 ,items: [{
+                    xtype: 'hidden'
+                    ,name: 'source'
+                    ,value: config.record.source || 0
+                },{
                     xtype: 'statictextfield'
                     ,submitValue: true
                     ,fieldLabel: _('directory')

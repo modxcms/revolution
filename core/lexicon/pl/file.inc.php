@@ -176,16 +176,15 @@ $_lang['file_last_accessed'] = 'Ostatnio otwarto'; #
 $_lang['file_last_modified'] = 'Ostatnio zmieniono'; #
 
 #$_lang['file_name'] = 'File Name';
-$_lang['file_name'] = 'Nazwa pliku'; #
+$_lang['file_name'] = 'File Name';
 
 #$_lang['file_quick_create'] = 'Quick Create File';
-$_lang['file_quick_create'] = 'Quick Create File';
+$_lang['file_quick_create'] = 'Szybko utwórz plik'; #
 
 #$_lang['file_quick_update'] = 'Quick Update File';
-$_lang['file_quick_update'] = 'Quick Update File';
+$_lang['file_quick_update'] = 'Szybko zmień plik'; #
 
-#$_lang['file_remove'] = 'Remove File';
-
+#$_lang['file_remove'] = 'Delete File';
 $_lang['file_remove'] = 'Usuń plik'; #
 
 #$_lang['file_remove_confirm'] = 'Are you sure you want to remove this file entirely?';

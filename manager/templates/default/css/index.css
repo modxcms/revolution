@@ -31,6 +31,17 @@ hr {
     margin: 20px;
 }
 
+/* normalize */
+textarea{
+    overflow: auto;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+
 .aleft { text-align: left; }
 .aright { text-align: right; }
 .right { float: right; }
@@ -65,8 +76,8 @@ hr {
     border-radius: 4px;
     background: none repeat scroll 0 0 transparent;
     border: 0;
-    margin: 20px 0 10px 10px;
-    padding: 0;
+    margin: 20px 0 10px 0;
+    padding: 0 0 0 10px;
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
@@ -128,8 +139,8 @@ hr {
 	padding: 0;
 }
 #modx-leftbar .x-btn button {
-	height: 20px !important;
-	padding: 3px 9px 0 !important;
+    width: 18px;
+    padding: 3px 8px 0 !important;
 }
 
 #modx-content {
@@ -365,8 +376,8 @@ textarea.x-form-field {
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
-    background-color:#eaeaea;
     background-color:rgba(224, 224, 224, 0.75);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0e0e0e0,endColorstr=#c0e0e0e0);
     padding:5px;
     position:fixed;
     right:20px;
@@ -1130,6 +1141,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	border-top-left-radius:2px;
 	border-top-right-radius:2px;
 	margin:0;
+    zoom: 1;
 }
 .dashboard-block-half {
     width: 48%;
@@ -1494,13 +1506,12 @@ span.required {
     color: #777;
     padding: 0 0 10px;
 }
-
-#modx-resource-tvs-div {
-    border-top: 0;
-    border-bottom: 0;
+#modx-resource-tvs-div{
+    border-top-width: 0;
 }
-#modx-tv-tabs .x-tab-panel-header {
-    border-top: 1px solid #999;
+#modx-resource-tvs-div.below-content{
+    border-top-width: 1px;
+    margin-top: 10px;
 }
 
 /* for selectability in ext grids */

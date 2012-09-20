@@ -1,7 +1,7 @@
 <div class="modx-page" style="padding-top: 15px;">
+<h2>{$_lang.about_title}</h2>
 <div id="tabs_div"></div>
 <div id="modx-tab-about" class="padding x-hide-display">
-    <h2>{$_lang.about_title}</h2>
     <p>{$_lang.about_msg}</p>
 
     <h2>{$_lang.help}</h2>

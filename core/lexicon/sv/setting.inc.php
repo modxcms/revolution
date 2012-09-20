@@ -283,6 +283,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Föråldrad - använd mediak�
 $_lang['setting_forgot_login_email'] = 'E-post vid bortglömda inloggningsuppgifter';
 $_lang['setting_forgot_login_email_desc'] = 'Mallen för det e-postmeddelande som skickas när en användare har glömt sitt användarnamn och/eller sitt lösenord till MODX.';
 
+$_lang['setting_form_customization_use_all_groups'] = 'Använd alla medlemskap i användargrupper för formuläranpassning';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Om denna sätts till "Ja" kommer formuläranpassningen att använda *alla* set för *alla* användargrupper som en användare är medlem i när formuläranpassningsset tillämpas. I annat fall kommer bara det set som hör till användarens primära grupp att användas. Notera: Om denna sätts till "Ja" kan det orsaka buggar på grund av motstridiga formuläranpassningsset.';
+
 $_lang['setting_forward_merge_excludes'] = 'Undantagsfält för sammanslagning vid vidarebefordran';
 $_lang['setting_forward_merge_excludes_desc'] = 'En symlänks värden i ifyllda fält "skriver över" motsvarande värden i målresursen. Genom att använda denna kommaavgränsade lista med undantag, så förhindras de angivna fälten från att "skrivas över" av symlänken.';
 
@@ -323,6 +326,9 @@ $_lang['setting_friendly_urls'] = 'Använd vänliga adresser';
 $_lang['setting_friendly_urls_desc'] = 'Detta låter dig använda adresser som är vänliga mot sökmotorer. Notera att detta endast fungerar när MODX körs på Apache, och du måste skriva en .htaccess-fil för att det ska fungera. Se .htaccess-filen som följde med i distributionen för mer information.';
 $_lang['setting_friendly_urls_err'] = 'Ange om du vill använda vänliga adresser eller inte.';
 
+$_lang['setting_friendly_urls_strict'] = 'Använd strikta vänliga adresser';
+$_lang['setting_friendly_urls_strict_desc'] = 'När vänliga URL:er är aktiverade kommer detta alternativ att tvinga ickenormaliserade anrop som matchar en resurs att 301-hänvisas till den normaliserade URI:n för den resursen. VARNING: Aktivera inte den här om du använder anpassade omskrivningsregler som inte matchar åtminstone början på den normaliserade URI:n. Till exempel, en normaliserad URI som foo/ med anpassade omskrivningar för foo/bar.html skulle fungera, men försök att omskriva bar/foo.html som foo/ skulle tvinga en omdirigering till foo/ med detta alternativ aktiverat.';
+
 $_lang['setting_global_duplicate_uri_check'] = 'Kontrollera URI-dubbletter i alla kontexter';
 $_lang['setting_global_duplicate_uri_check_desc'] = 'Om du väljer "Ja" kommer kontroller av URI-dubbletter att inkludera alla kontexter. Väljer du "Nej" görs kontrollen bara i den kontext som resursen sparas i.';
 
@@ -333,10 +339,13 @@ $_lang['setting_inline_help'] = 'Visa hjälptexter för fält inline';
 $_lang['setting_inline_help_desc'] = 'Om denna sätts till "Ja" kommer hjälptexten för fält att visas direkt nedanför fältet. Om den sätts till "Nej" kommer alla fält att visa hjälptexten som verktygstips.';
 
 $_lang['setting_link_tag_scheme'] = 'Schema för att skapa URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Schema för URL-skapande för taggen [[~id]]. Tillgängliga alternativ: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'Schema för URL-skapande för taggen [[~id]]. Tillgängliga alternativ <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">här</a>.';
 
 $_lang['setting_locale'] = 'Systemspråk';
 $_lang['setting_locale_desc'] = 'Anger språket (locale) för systemet. Lämna fältet tomt för att använda standardinställningen. Se <a href="http://php.net/setlocale" target="_blank">PHP-dokumentationen</a> för mer information.';
+
+$_lang['setting_lock_ttl'] = 'Livstid för lås';
+$_lang['setting_lock_ttl_desc'] = 'Det antal sekunder som ett lås på en resurs kommer att vara kvar om användaren är inaktiv.';
 
 $_lang['setting_log_level'] = 'Loggningsnivå';
 $_lang['setting_log_level_desc'] = 'Standardnivån för loggning. Ju lägre nivå desto färre meddelanden loggas. Tillgängliga val: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO) och 4 (DEBUG).';
@@ -425,8 +434,14 @@ $_lang['setting_manager_time_format_desc'] = 'Formateringssträngen, i PHP:s dat
 $_lang['setting_manager_use_tabs'] = 'Använd flikar i hanterarens layout';
 $_lang['setting_manager_use_tabs_desc'] = 'Om denna aktiveras kommer hanteraren att använda flikar för att visa de olika panelerna. I annat fall kommer portaler att användas.';
 
+$_lang['setting_manager_week_start'] = 'Veckostart';
+$_lang['setting_manager_week_start_desc'] = 'Ange den dag som inleder en vecka. Använd 0 (eller lämna tom) för söndag eller 1 för måndag och så vidare...';
+
 $_lang['setting_modRequest.class'] = 'Anropshanterarens klass';
 $_lang['setting_modRequest.class_desc'] = '';
+
+$_lang['setting_modx_browser_default_sort'] = 'Standardsortering i filutforskare';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Den sorteringsmetod som ska användas som standard när popup-filutforskaren används i hanteraren. Tillgängliga värden är: name (namn), size (storlek), lastmod (senast modifierad).';
 
 $_lang['setting_modx_charset'] = 'Teckenkodning';
 $_lang['setting_modx_charset_desc'] = 'Välj den teckenkodning du vill använda. Notera att MODX har testats med ett antal av dessa kodningar, men inte alla. För de flesta språk är standardalternativet UTF-8 att föredra.</b>';
@@ -679,9 +694,9 @@ $_lang['setting_upload_media_desc'] = 'Här kan du skriva en lista med de typer 
 $_lang['setting_use_alias_path'] = 'Använd vänliga aliassökvägar';
 $_lang['setting_use_alias_path_desc'] = 'Sätts detta val till "Ja", kommer hela sökvägen till resursen att visas om resursen har ett alias. Till exempel, om en resurs med aliaset "barn" befinner sig i en behållare med aliaset "foralder", kommer hela sökvägen att visas som "/foralder/barn.html".<br /><strong>Notera: När detta sätts till "Ja" (slår på aliassökvägar), måste du referera objekt (som bilder, css, javascript etc) med en absolut sökväg. Exempel: "/assets/images" istället för "assets/images". Genom att göra så förhindrar du att webbläsaren (eller webbservern) lägger till den relativa sökvägen till aliassökvägen.</strong>';
 
-$_lang['setting_use_browser'] = 'Använd resursläsare';
-$_lang['setting_use_browser_desc'] = 'Välj "Ja" för att använda resursläsaren. Detta låter dina användare läsa och ladda upp resurser såsom bilder, flash- och mediafiler till servern.';
-$_lang['setting_use_browser_err'] = 'Ange om du vill använda resursläsaren eller inte.';
+$_lang['setting_use_browser'] = 'Använd resursutforskare';
+$_lang['setting_use_browser_desc'] = 'Välj "Ja" för att använda resursutforskaren. Detta låter dina användare läsa och ladda upp resurser såsom bilder, flash- och mediafiler till servern.';
+$_lang['setting_use_browser_err'] = 'Ange om du vill använda resursutforskaren eller inte.';
 
 $_lang['setting_use_editor'] = 'Aktivera richtext-editor';
 $_lang['setting_use_editor_desc'] = 'Vill du aktivera en richtext-editor? Om du trivs bättre med att skriva HTML, kan du stänga av editorn genom att ändra denna inställning.<br /><strong>OBS: Denna inställning gäller för samtliga dokument och alla användare!</strong>';
@@ -715,3 +730,6 @@ $_lang['setting_which_element_editor_desc'] = 'Här kan du välja vilken richtex
 
 $_lang['setting_xhtml_urls'] = 'XHTML-URL:er';
 $_lang['setting_xhtml_urls_desc'] = 'Om denna sätts till "Ja" kommer alla URL:er som genereras av MODX att vara XHTML-kompatibla inklusive kodning av et-tecken.';
+
+$_lang['setting_default_context'] = 'Standardkontext';
+$_lang['setting_default_context_desc'] = 'Ange den kontext som du vill använda för nya resurser.';

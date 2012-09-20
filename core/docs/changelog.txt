@@ -6,6 +6,14 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#7661] Prevent changing template from unsetting Empty Cache
+- [#8620] Enable type-ahead on User and Country combos
+- [#8529] Prevent empty multi-value TVs from saving as '||'
+- [#8018] Fix file creation/editing on non-default Media Source
+- [#8556] Ensure regClient functions inject only once
+- CSS Style fixes for IE 9 (8, 7)
+- [#8560] Fix Context Admin ACL automation and use Context Policy
+- [#8432] Package Browser tree not reloading on Provider change
 - [#8482] RTE Output Option for TVs does not render on frontend
 - Add Quick Create/Update File feature in Files tab
 - [#6522] Retain page in Package Manager after install/upgrade
