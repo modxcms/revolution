@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#8620] Enable type-ahead on User and Country combos
 - [#8529] Prevent empty multi-value TVs from saving as '||'
 - [#8018] Fix file creation/editing on non-default Media Source
 - [#8556] Ensure regClient functions inject only once
