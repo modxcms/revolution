@@ -171,7 +171,7 @@ MODx.grid.ElementProperties = function(config) {
     this.on('afterRemoveRow', this.propertyChanged, this);
     this.on('celldblclick',this.onDirty,this);
     this.on('render',function() {
-        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        this.mask = new Ext.LoadMask(this.getEl());
     },this);
     
     if (this.config.lockProperties) {
@@ -234,7 +234,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         }
         try {
             if (!this.mask) {
-                this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+                this.mask = new Ext.LoadMask(this.getEl());
             }
             if (this.mask) { this.mask.show(); }
         } catch (e) { }

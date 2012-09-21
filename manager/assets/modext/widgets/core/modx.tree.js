@@ -141,7 +141,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         config.listeners.render = {fn:function() {
             this.root.expand();
             var tl = this.getLoader();
-            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')})});
+            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl())});
             tl.fullMask.removeMask=false;
             tl.on({
                 'load' : function(){this.fullMask.hide();}
