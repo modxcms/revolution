@@ -11,6 +11,7 @@ $xpdo_meta_map['modContext']= array (
   'fields' => 
   array (
     'key' => NULL,
+    'name' => NULL,
     'description' => NULL,
     'rank' => 0,
   ),
@@ -23,6 +24,12 @@ $xpdo_meta_map['modContext']= array (
       'phptype' => 'string',
       'null' => false,
       'index' => 'pk',
+    ),
+    'name' =>
+    array (
+        'dbtype' => 'nvarchar',
+        'precision' => '100',
+        'phptype' => 'string',
     ),
     'description' => 
     array (

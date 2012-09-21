@@ -34,11 +34,17 @@ MODx.panel.Context = function(config) {
 					,fieldLabel: _('key')
 					,name: 'key'
 					,width: 300
-					,maxLength: 255
+					,maxLength: 100
 					,enableKeyEvents: true
 					,allowBlank: true
 					,value: config.context
 					,submitValue: true
+				},{
+					xtype: 'textfield'
+					,fieldLabel: _('name')
+					,name: 'name'
+					,width: 300
+					,maxLength: 100
 				},{
 					xtype: 'textarea'
 					,fieldLabel: _('description')

@@ -15,8 +15,8 @@ class modContextRemoveProcessor extends modObjectRemoveProcessor {
     public $primaryKeyField = 'key';
 
     public function beforeRemove() {
-        /* prevent removing of mgr/web contexts */
-        if ($this->object->get('key') == 'web' || $this->object->get('key') == 'mgr') {
+        /* prevent removing of mgr context */
+        if ($this->object->get('key') == 'mgr') {
             return $this->modx->lexicon('permission_denied');
         }
         return true;
