@@ -647,11 +647,6 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
             return $this->failure($preventSave);
         }
 
-        $canSave = $this->beforeSave();
-        if ($canSave !== true) {
-            return $this->failure($canSave);
-        }
-
         /* save element */
         if ($this->object->save() == false) {
             $this->modx->error->checkValidation($this->object);
