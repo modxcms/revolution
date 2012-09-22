@@ -77,7 +77,7 @@ if ($errpage == null || !is_array($errpage)) {
 /* clear file info cache */
 clearstatcache();
 if (!empty($warnings)) {
-    $config_check_results = '<h4>' . $modx->lexicon('configcheck_notok') . '</h4><ul>';
+    $config_check_results = '<h4>' . $modx->lexicon('configcheck_notok') . '</h4><br /><ul>';
 
     for ($i = 0; $i < count($warnings); $i++) {
         switch ($warnings[$i][0]) {
@@ -120,12 +120,10 @@ if (!empty($warnings)) {
                             <p><strong>' . $modx->lexicon('configcheck_warning') . '</strong> ' . $warnings[$i][0] . '</p>
                             <p><em>' . $modx->lexicon('configcheck_what') . '</em></p>
                             <p>' . $warnings[$i][1] . ' </p>
+                            <br />
                             </li>';
-        if ($i != count($warnings) - 1) {
-            $config_check_results .= '<br />';
-        }
-        $config_check_results .= '</ul>';
     }
+    $config_check_results .= '</ul>';
     return false;
 } else {
     $config_check_results = $modx->lexicon('configcheck_ok');
