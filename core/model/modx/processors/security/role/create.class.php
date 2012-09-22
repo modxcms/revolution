@@ -9,7 +9,6 @@ class modUserGroupRoleCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modUserGroupRole';
     public $languageTopics = array('user');
     public $permission = 'new_role';
-    public $elementType = 'role';
     public $objectType = 'role';
 
     public function beforeSave() {

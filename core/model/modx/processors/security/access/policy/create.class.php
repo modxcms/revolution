@@ -16,7 +16,6 @@ class modAccessPolicyCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modAccessPolicy';
     public $languageTopics = array('policy');
     public $permission = 'policy_new';
-    public $elementType = 'policy';
     public $objectType = 'policy';
     
     public function beforeSet() {

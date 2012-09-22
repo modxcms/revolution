@@ -11,7 +11,6 @@ class modElementCategoryCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modCategory';
     public $languageTopics = array('category');
     public $permission = 'save_category';
-    public $elementType = 'category';
     public $objectType = 'category';
 
     /**

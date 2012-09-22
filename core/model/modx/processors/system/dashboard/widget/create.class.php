@@ -13,7 +13,6 @@ class modDashboardWidgetCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modDashboardWidget';
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
-    public $elementType = 'widget';
     public $objectType = 'widget';
     
     public function beforeSave() {

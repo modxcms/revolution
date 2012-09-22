@@ -9,7 +9,6 @@ class modFormCustomizationProfileCreateProcessor extends modObjectCreateProcesso
     public $classKey = 'modFormCustomizationProfile';
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
-    public $elementType = 'profile';
     public $objectType = 'profile';
 }
 return 'modFormCustomizationProfileCreateProcessor';

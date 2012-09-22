@@ -14,7 +14,6 @@ class modContextCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modContext';
     public $languageTopics = array('context');
     public $permission = 'new_context';
-    public $elementType = 'context';
     public $objectType = 'context';
     public $primaryKeyField = 'key';
 
