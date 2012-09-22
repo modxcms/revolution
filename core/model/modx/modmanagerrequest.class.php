@@ -56,10 +56,6 @@ class modManagerRequest extends modRequest {
      * @return boolean True if successful.
      */
     public function initialize() {
-        if (!defined('MODX_INCLUDES_PATH')) {
-            define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
-        }
-
         /* load smarty template engine */
         $theme = $this->modx->getOption('manager_theme',null,'default');
         $templatePath = $this->modx->getOption('manager_path') . 'templates/' . $theme . '/';
@@ -82,7 +78,7 @@ class modManagerRequest extends modRequest {
         header('Cache-Control: post-check=0, pre-check=0', false);
         header('Pragma: no-cache');
         /* send the charset header */
-        header('Content-Type: text/html; charset='.$this->modx->getOption('modx_charset'));
+        header('Content-Type: '.$this->modx->getOption('manager_content_type', null, 'text/html').'; charset='.$this->modx->getOption('modx_charset'));
 
         /*
          * TODO: implement destroy active sessions if installing
