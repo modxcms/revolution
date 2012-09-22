@@ -15,6 +15,8 @@ class modContextCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('context');
     public $permission = 'new_context';
     public $elementType = 'context';
+    public $objectType = 'context';
+    public $primaryKeyField = 'key';
 
     public function beforeSave() {
         $key = $this->getProperty('key');

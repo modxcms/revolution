@@ -10,6 +10,7 @@ class modUserGroupRoleCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('user');
     public $permission = 'new_role';
     public $elementType = 'role';
+    public $objectType = 'role';
 
     public function beforeSave() {
         $name = $this->getProperty('name');

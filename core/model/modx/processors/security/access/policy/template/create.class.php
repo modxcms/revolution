@@ -13,6 +13,7 @@ class modAccessPolicyTemplateCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('policy');
     public $permission = 'policy_template_new';
     public $elementType = 'policy_template';
+    public $objectType = 'policy_template';
 
     public function beforeSet() {
         $name = $this->getProperty('name');

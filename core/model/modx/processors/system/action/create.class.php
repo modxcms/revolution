@@ -18,6 +18,7 @@ class modActionCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('action','menu','namespace');
     public $permission = 'actions';
     public $elementType = 'action';
+    public $objectType = 'action';
 
     public function initialize() {
         $this->setDefaultProperties(array(

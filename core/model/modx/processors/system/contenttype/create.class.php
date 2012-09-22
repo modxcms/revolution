@@ -18,6 +18,7 @@ class modContentTypeCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('content_type');
     public $permission = 'content_types';
     public $elementType = 'content_type';
+    public $objectType = 'content_type';
 
     public function beforeSet() {
         $binary = $this->getProperty('binary',false);

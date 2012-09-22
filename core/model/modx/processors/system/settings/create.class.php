@@ -18,6 +18,7 @@ class modSystemSettingsCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('setting','namespace');
     public $permission = 'settings';
     public $elementType = 'setting';
+    public $objectType = 'setting';
     public $primaryKeyField = 'key';
 
     public function beforeSave() {

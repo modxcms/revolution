@@ -14,6 +14,7 @@ class modDashboardWidgetCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
     public $elementType = 'widget';
+    public $objectType = 'widget';
     
     public function beforeSave() {
         $name = $this->getProperty('name');

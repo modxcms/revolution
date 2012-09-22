@@ -16,6 +16,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
     public $elementType = 'set';
+    public $objectType = 'set';
 
     /** @var array $newRules */
     public $newRules = array();

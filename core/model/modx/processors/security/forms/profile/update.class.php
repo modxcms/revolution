@@ -10,6 +10,7 @@ class modFormCustomizationProfileUpdateProcessor extends modObjectUpdateProcesso
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
     public $elementType = 'profile';
+    public $objectType = 'profile';
 
     public function beforeSave() {
         $active = $this->getProperty('active',null);
