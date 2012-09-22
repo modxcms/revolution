@@ -20,8 +20,8 @@ class SystemSettingsManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->addHtml('<script type="text/javascript">
-        // <[!CDATA[
+        $this->addHtml('<script>
+        // <![CDATA[
         MODx.onSiteSettingsRender = "'.$this->onSiteSettingsRender.'";
         // ]]>
         </script>');
