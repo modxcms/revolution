@@ -943,6 +943,18 @@ $events['OnContextFormRender']->fromArray(array (
   'service' => 2,
   'groupname' => 'Contexts',
 ), '', true, true);
+$events['OnContextManagerUrlForm']= $xpdo->newObject('modEvent');
+$events['OnContextManagerUrlForm']->fromArray(array (
+  'name' => 'OnContextManagerUrlForm',
+  'service' => 2,
+  'groupname' => 'Contexts',
+), '', true, true);
+$events['OnContextWebUrlForm']= $xpdo->newObject('modEvent');
+$events['OnContextWebUrlForm']->fromArray(array (
+  'name' => 'OnContextWebUrlForm',
+  'service' => 2,
+  'groupname' => 'Contexts',
+), '', true, true);
 
 
 /* Plugins */
