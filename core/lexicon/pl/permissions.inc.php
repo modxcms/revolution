@@ -1,11 +1,11 @@
 <?php
 /**
-* Permissions Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Permissions Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['perm.about_desc'] = 'The About page.';
 $_lang['perm.about_desc'] = 'The About page.';
@@ -51,6 +51,9 @@ $_lang['perm.credits_desc'] = 'View the Credits page.';
 
 #$_lang['perm.customize_forms_desc'] = 'View and manage the Form Customization page.';
 $_lang['perm.customize_forms_desc'] = 'View and manage the Form Customization page.';
+
+#$_lang['perm.dashboards_desc'] = 'View and manage Custom Dashboards.';
+$_lang['perm.dashboards_desc'] = 'View and manage Custom Dashboards.';
 
 #$_lang['perm.database_desc'] = 'The System Info page.';
 $_lang['perm.database_desc'] = 'The System Info page.';
@@ -163,6 +166,9 @@ $_lang['perm.error_log_view_desc'] = 'To view the error log.';
 #$_lang['perm.export_static_desc'] = 'To export the site to static HTML.';
 $_lang['perm.export_static_desc'] = 'To export the site to static HTML.';
 
+#$_lang['perm.file_create_desc'] = 'To create a file.';
+$_lang['perm.file_create_desc'] = 'To create a file.';
+
 #$_lang['perm.file_list_desc'] = 'To list files within a given physical directory.';
 $_lang['perm.file_list_desc'] = 'To list files within a given physical directory.';
 
@@ -217,6 +223,27 @@ $_lang['perm.logout_desc'] = 'To be able to logout as a user.';
 #$_lang['perm.logs_desc'] = 'To view the logs, such as error and manager logs.';
 $_lang['perm.logs_desc'] = 'To view the logs, such as error and manager logs.';
 
+#$_lang['perm.menu_reports_desc'] = 'Show the top menu item "Reports".';
+$_lang['perm.menu_reports_desc'] = 'Show the top menu item "Reports".';
+
+#$_lang['perm.menu_security_desc'] = 'Show the top menu item "Security".';
+$_lang['perm.menu_security_desc'] = 'Show the top menu item "Security".';
+
+#$_lang['perm.menu_site_desc'] = 'Show the top menu item "Site".';
+$_lang['perm.menu_site_desc'] = 'Show the top menu item "Site".';
+
+#$_lang['perm.menu_support_desc'] = 'Show the top menu item "Support".';
+$_lang['perm.menu_support_desc'] = 'Show the top menu item "Support".';
+
+#$_lang['perm.menu_system_desc'] = 'Show the top menu item "System".';
+$_lang['perm.menu_system_desc'] = 'Show the top menu item "System".';
+
+#$_lang['perm.menu_tools_desc'] = 'Show the top menu item "Tools".';
+$_lang['perm.menu_tools_desc'] = 'Show the top menu item "Tools".';
+
+#$_lang['perm.menu_user_desc'] = 'Show the top menu item "User".';
+$_lang['perm.menu_user_desc'] = 'Show the top menu item "User".';
+
 #$_lang['perm.menus_desc'] = 'To edit or save any top Menu items.';
 $_lang['perm.menus_desc'] = 'To edit or save any top Menu items.';
 
@@ -256,6 +283,12 @@ $_lang['perm.new_role_desc'] = 'To create a new Role.';
 #$_lang['perm.new_snippet_desc'] = 'To create a new Snippet.';
 $_lang['perm.new_snippet_desc'] = 'To create a new Snippet.';
 
+#$_lang['perm.new_static_resource_desc'] = 'To create a new Static Resource.';
+$_lang['perm.new_static_resource_desc'] = 'To create a new Static Resource.';
+
+#$_lang['perm.new_symlink_desc'] = 'To create a new SymLink.';
+$_lang['perm.new_symlink_desc'] = 'To create a new SymLink.';
+
 #$_lang['perm.new_template_desc'] = 'To create a new Template.';
 $_lang['perm.new_template_desc'] = 'To create a new Template.';
 
@@ -265,8 +298,41 @@ $_lang['perm.new_tv_desc'] = 'To create a new Template Variable.';
 #$_lang['perm.new_user_desc'] = 'To create a new User.';
 $_lang['perm.new_user_desc'] = 'To create a new User.';
 
+#$_lang['perm.new_weblink_desc'] = 'To create a new WebLink.';
+$_lang['perm.new_weblink_desc'] = 'To create a new WebLink.';
+
 #$_lang['perm.packages_desc'] = 'To use any Transport Packages in the Package Management system.';
 $_lang['perm.packages_desc'] = 'To use any Transport Packages in the Package Management system.';
+
+#$_lang['perm.policy_delete_desc'] = 'To delete an Access Policy.';
+$_lang['perm.policy_delete_desc'] = 'To delete an Access Policy.';
+
+#$_lang['perm.policy_edit_desc'] = 'To edit an Access Policy.';
+$_lang['perm.policy_edit_desc'] = 'To edit an Access Policy.';
+
+#$_lang['perm.policy_new_desc'] = 'To create a new Access Policy.';
+$_lang['perm.policy_new_desc'] = 'To create a new Access Policy.';
+
+#$_lang['perm.policy_save_desc'] = 'To save an Access Policy.';
+$_lang['perm.policy_save_desc'] = 'To save an Access Policy.';
+
+#$_lang['perm.policy_view_desc'] = 'To view an Access Policy.';
+$_lang['perm.policy_view_desc'] = 'To view an Access Policy.';
+
+#$_lang['perm.policy_template_delete_desc'] = 'To delete an Access Policy Template.';
+$_lang['perm.policy_template_delete_desc'] = 'To delete an Access Policy Template.';
+
+#$_lang['perm.policy_template_edit_desc'] = 'To edit an Access Policy Template.';
+$_lang['perm.policy_template_edit_desc'] = 'To edit an Access Policy Template.';
+
+#$_lang['perm.policy_template_new_desc'] = 'To create a new Access Policy Template.';
+$_lang['perm.policy_template_new_desc'] = 'To create a new Access Policy Template.';
+
+#$_lang['perm.policy_template_save_desc'] = 'To save an Access Policy Template.';
+$_lang['perm.policy_template_save_desc'] = 'To save an Access Policy Template.';
+
+#$_lang['perm.policy_template_view_desc'] = 'To view an Access Policy Template.';
+$_lang['perm.policy_template_view_desc'] = 'To view an Access Policy Template.';
 
 #$_lang['perm.property_sets_desc'] = 'To view and edit Properties and Property Sets.';
 $_lang['perm.property_sets_desc'] = 'To view and edit Properties and Property Sets.';
@@ -288,6 +354,36 @@ $_lang['perm.remove_desc'] = 'Basic permission to remove any object.';
 
 #$_lang['perm.remove_locks_desc'] = 'To remove all existing Locks throughout the site.';
 $_lang['perm.remove_locks_desc'] = 'To remove all existing Locks throughout the site.';
+
+#$_lang['perm.resourcegroup_delete_desc'] = 'To delete a Resource Group.';
+$_lang['perm.resourcegroup_delete_desc'] = 'To delete a Resource Group.';
+
+#$_lang['perm.resourcegroup_edit_desc'] = 'To edit a Resource Group.';
+$_lang['perm.resourcegroup_edit_desc'] = 'To edit a Resource Group.';
+
+#$_lang['perm.resourcegroup_resource_edit_desc'] = 'To edit Resources in a Resource Group.';
+$_lang['perm.resourcegroup_resource_edit_desc'] = 'To edit Resources in a Resource Group.';
+
+#$_lang['perm.resourcegroup_resource_list_desc'] = 'To view or list Resources in a Resource Group.';
+$_lang['perm.resourcegroup_resource_list_desc'] = 'To view or list Resources in a Resource Group.';
+
+#$_lang['perm.resourcegroup_new_desc'] = 'To create a new Resource Group.';
+$_lang['perm.resourcegroup_new_desc'] = 'To create a new Resource Group.';
+
+#$_lang['perm.resourcegroup_save_desc'] = 'To save a Resource Group.';
+$_lang['perm.resourcegroup_save_desc'] = 'To save a Resource Group.';
+
+#$_lang['perm.resourcegroup_view_desc'] = 'To list Resource Groups.';
+$_lang['perm.resourcegroup_view_desc'] = 'To list Resource Groups.';
+
+#$_lang['perm.resource_duplicate_desc'] = 'To duplicate a Resource.';
+$_lang['perm.resource_duplicate_desc'] = 'To duplicate a Resource.';
+
+#$_lang['perm.resource_quick_create_desc'] = 'To be able to use Quick Create Resource in the left-hand tree.';
+$_lang['perm.resource_quick_create_desc'] = 'To be able to use Quick Create Resource in the left-hand tree.';
+
+#$_lang['perm.resource_quick_update_desc'] = 'To be able to use Quick Update Resource in the left-hand tree.';
+$_lang['perm.resource_quick_update_desc'] = 'To be able to use Quick Update Resource in the left-hand tree.';
 
 #$_lang['perm.resource_tree_desc'] = 'To view the Resource Tree in the left nav.';
 $_lang['perm.resource_tree_desc'] = 'To view the Resource Tree in the left nav.';
@@ -334,6 +430,21 @@ $_lang['perm.search_desc'] = 'To use the Search page.';
 #$_lang['perm.settings_desc'] = 'To view and edit any System Settings.';
 $_lang['perm.settings_desc'] = 'To view and edit any System Settings.';
 
+#$_lang['perm.source_delete_desc'] = 'To delete a Media Source.';
+$_lang['perm.source_delete_desc'] = 'To delete a Media Source.';
+
+#$_lang['perm.source_edit_desc'] = 'To edit a Media Source.';
+$_lang['perm.source_edit_desc'] = 'To edit a Media Source.';
+
+#$_lang['perm.source_save_desc'] = 'To create or save a Media Source.';
+$_lang['perm.source_save_desc'] = 'To create or save a Media Source.';
+
+#$_lang['perm.source_view_desc'] = 'To view and list Media Sources.';
+$_lang['perm.source_view_desc'] = 'To view and list Media Sources.';
+
+#$_lang['perm.sources_desc'] = 'To manage Media Sources and Media Source Types.';
+$_lang['perm.sources_desc'] = 'To manage Media Sources and Media Source Types.';
+
 #$_lang['perm.steal_lock_desc'] = 'To "steal", or remove, a lock from a Resource.';
 $_lang['perm.steal_lock_desc'] = 'To "steal", or remove, a lock from a Resource.';
 
@@ -360,6 +471,27 @@ $_lang['perm.unpublish_desc'] = 'To unpublish any Resource.';
 
 #$_lang['perm.unpublish_document_desc'] = 'To unpublish any Resources.';
 $_lang['perm.unpublish_document_desc'] = 'To unpublish any Resources.';
+
+#$_lang['perm.usergroup_delete_desc'] = 'To delete a User Group.';
+$_lang['perm.usergroup_delete_desc'] = 'To delete a User Group.';
+
+#$_lang['perm.usergroup_edit_desc'] = 'To edit a User Group.';
+$_lang['perm.usergroup_edit_desc'] = 'To edit a User Group.';
+
+#$_lang['perm.usergroup_user_edit_desc'] = 'To edit Resources in a User Group.';
+$_lang['perm.usergroup_user_edit_desc'] = 'To edit Resources in a User Group.';
+
+#$_lang['perm.usergroup_user_list_desc'] = 'To view or list Users in a User Group.';
+$_lang['perm.usergroup_user_list_desc'] = 'To view or list Users in a User Group.';
+
+#$_lang['perm.usergroup_new_desc'] = 'To create a new User Group.';
+$_lang['perm.usergroup_new_desc'] = 'To create a new User Group.';
+
+#$_lang['perm.usergroup_save_desc'] = 'To save a User Group.';
+$_lang['perm.usergroup_save_desc'] = 'To save a User Group.';
+
+#$_lang['perm.usergroup_view_desc'] = 'To view a User Group.';
+$_lang['perm.usergroup_view_desc'] = 'To view a User Group.';
 
 #$_lang['perm.view_desc'] = 'Basic permission to "view" any object.';
 $_lang['perm.view_desc'] = 'Basic permission to "view" any object.';

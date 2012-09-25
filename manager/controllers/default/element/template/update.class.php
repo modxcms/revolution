@@ -127,6 +127,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTempFormPrerender)) $this->onTempFormPrerender = implode('',$this->onTempFormPrerender);
+        $this->setPlaceholder('onTempFormPrerender', $this->onTempFormPrerender);
     }
 
     /**
@@ -167,5 +168,13 @@ class ElementTemplateUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('template','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Templates';
     }
 }

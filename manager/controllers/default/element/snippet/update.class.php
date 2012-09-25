@@ -129,6 +129,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
+        $this->setPlaceholder('onSnipFormPrerender', $this->onSnipFormPrerender);
     }
 
     /**
@@ -169,5 +170,13 @@ class ElementSnippetUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('snippet','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Snippets';
     }
 }

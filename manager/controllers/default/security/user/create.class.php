@@ -87,4 +87,12 @@ class SecurityUserCreateManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('user','setting','access');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Users';
+    }
 }

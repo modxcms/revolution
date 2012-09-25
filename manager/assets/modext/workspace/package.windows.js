@@ -73,7 +73,7 @@ MODx.window.RemovePackage = function(config) {
         },{
             html: _('package_remove_confirm')
         },MODx.PanelSpacer,{
-            html: _('package_remove_force_desc') 
+            html: _('package_remove_force_desc')
             ,border: false
         },MODx.PanelSpacer,{
             xtype: 'xcheckbox'
@@ -90,7 +90,7 @@ MODx.window.RemovePackage = function(config) {
 Ext.extend(MODx.window.RemovePackage,MODx.Window,{
     submit: function() {
         var r = this.config.record;
-        if (this.fp.getForm().isValid()) {            
+        if (this.fp.getForm().isValid()) {
             Ext.getCmp('modx-package-grid').loadConsole(Ext.getBody(),r.topic);
             this.fp.getForm().baseParams = {
                 action: 'remove'
@@ -99,8 +99,8 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
                 ,topic: r.topic
                 ,force: Ext.getCmp('modx-rpack-force').getValue()
             };
-            
-            this.fp.getForm().submit({ 
+
+            this.fp.getForm().submit({
                 waitMsg: _('saving')
                 ,scope: this
                 ,failure: function(frm,a) {
@@ -124,7 +124,7 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
     }
 });
 Ext.reg('modx-window-package-remove',MODx.window.RemovePackage);
-	
+
 /**
  * @class MODx.window.SetupOptions
  * @extends MODx.Window
@@ -137,7 +137,7 @@ MODx.window.SetupOptions = function(config) {
     Ext.applyIf(config,{
         title: _('setup_options')
 		,layout: 'form'
-		,items:[{			
+		,items:[{
 			xtype: 'modx-template-panel'
 			,id: 'modx-setupoptions-panel'
 			,bodyCssClass: 'win-desc panel-desc'
@@ -148,7 +148,7 @@ MODx.window.SetupOptions = function(config) {
 			,xtype: 'form'
 			,bodyCssClass: 'inline-form'
 			,id: 'modx-setupoptions-form'
-		}] 
+		}]
 		,buttons :[{
 			text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -166,14 +166,14 @@ Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 	fetch: function(content){
 		Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content);
 	}
-	
-	,install: function(btn, ev){	
+
+	,install: function(btn, ev){
 		this.hide();
 		var options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
-		Ext.getCmp('modx-panel-packages').install( options );		
+		Ext.getCmp('modx-panel-packages').install( options );
 	}
 });
-Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);	
+Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);
 
 /**
  * @class MODx.window.ChangeProvider
@@ -207,8 +207,8 @@ MODx.window.ChangeProvider = function(config) {
                     action: 'getList'
                     ,showNone: false
                 }
-			}]			
-		}] 
+			}]
+		}]
 		,buttons :[{
 			text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -222,18 +222,27 @@ MODx.window.ChangeProvider = function(config) {
     });
     MODx.window.ChangeProvider.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would create an empty unused form (It's not a bug)) 
-	submit: function(o) {		
+Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would create an empty unused form (It's not a bug))
+	submit: function(o) {
 		var fm = Ext.getCmp('change-provider-form');
         if (fm.getForm().isValid()) {
             var vs = fm.getForm().getValues();
             MODx.provider = vs.provider;
             MODx.providerName = fm.getForm().findField('provider').getRawValue();
-            Ext.getCmp('modx-package-browser-tree').setProvider(vs.provider);
+            var tree = Ext.getCmp('modx-package-browser-tree');
+            tree.setProvider(vs.provider);
+            if (tree.rendered) {
+                var loader = tree.getLoader();
+                loader.baseParams = {
+                    action: 'getNodes'
+                    ,provider: vs.provider
+                };
+                loader.load(tree.root);
+            }
             MODx.debug('Switching to: '+MODx.provider);
 			this.hide();
 			Ext.getCmp('modx-panel-packages-browser').activate();
-        }		
+        }
     }
 });
 Ext.reg('modx-package-changeprovider', MODx.window.ChangeProvider);

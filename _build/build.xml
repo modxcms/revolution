@@ -19,8 +19,8 @@
     <property name="project.manager.dir" value="${project.root.dir}/manager" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.2.1" />
-    <property name="modx.core.release" value="pl" />
+    <property name="modx.core.version" value="2.3.0" />
+    <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}" />
@@ -56,12 +56,12 @@
 
     <!-- Make sure the image directory exists and is clean -->
     <target name="prepare-build-image" description="prepare the build image directory">
-        <mkdir dir="${build.image.basedir}" />
-        <delete includeemptydirs="true">
+        <delete includeemptydirs="true" failonerror="false">
             <fileset dir="${build.image.basedir}">
                 <include name="**" />
             </fileset>
         </delete>
+        <mkdir dir="${build.image.basedir}" />
     </target>
 
     <!-- Export a build image from a local Git repository tree; requires a local Git clone of the repository -->
@@ -93,8 +93,8 @@
                 <property name="transport.image" value="${build.distrib.name}" />
             </else>
         </if>
-        <delete file="${core.dir}/packages/core.transport.zip" />
-        <delete dir="${core.dir}/packages/core" />
+        <delete file="${core.dir}/packages/core.transport.zip" failonerror="false" />
+        <delete dir="${core.dir}/packages/core" failonerror="false" />
         <exec dir="${project.basedir}" command="${php.command} transport.core.php ${transport.image}" />
     </target>
 
@@ -139,8 +139,8 @@
 
     <!-- Copy the core transport package from a working copy to an exported image and extract it -->
     <target name="copy-core-transport" description="copy the core transport to the image" if="build.distrib">
-        <delete file="${build.image.dir}/core/packages/core.transport.zip" />
-        <delete dir="${build.image.dir}/core/packages/core" includeemptydirs="true" />
+        <delete file="${build.image.dir}/core/packages/core.transport.zip" failonerror="false" />
+        <delete dir="${build.image.dir}/core/packages/core" includeemptydirs="true" failonerror="false" />
         <copy file="${project.core.dir}/packages/core.transport.zip" todir="${build.image.dir}/core/packages" />
         <unzip file="${build.image.dir}/core/packages/core.transport.zip" todir="${build.image.dir}/core/packages" />
     </target>

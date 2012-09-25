@@ -164,7 +164,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         });
     }
     ,createSource: function() {
-        location.href = 'index.php?a='+MODx.action['system/source/create'];
+        location.href = 'index.php?a=system/source/create';
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -204,7 +204,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
 
     ,updateSource: function() {
-        location.href = 'index.php?a='+MODx.action['source/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=source/update&id='+this.menu.record.id;
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
@@ -335,7 +335,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,createSourceType: function() {
-        location.href = 'index.php?a='+MODx.action['system/source/type/create'];
+        location.href = 'index.php?a=system/source/type/create';
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -375,7 +375,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,updateSourceType: function() {
-        location.href = 'index.php?a='+MODx.action['source/type/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=source/type/update&id='+this.menu.record.id;
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

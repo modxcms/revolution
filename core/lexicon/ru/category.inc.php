@@ -1,4 +1,11 @@
 <?php
+/**
+ * Category Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['categories'] = 'Категории';
 $_lang['category_confirm_delete'] = 'Вы уверены что хотите удалить эту категорию? Все элементы в ней будут помечены как &laquo; Без категории&raquo;.';
 $_lang['category_create'] = 'Создать категорию';
@@ -13,7 +20,7 @@ $_lang['category_err_remove'] = 'Произошла ошибка при удал
 $_lang['category_err_save'] = 'Произошла ошибка при сохранении категории.';
 $_lang['category_existing'] = 'Существующая категория';
 $_lang['category_heading'] = 'Категория';
-$_lang['category_msg'] = 'Здесь вы можете просматривать и редактировать все ресурсы сгруппированные по категориям.';
+$_lang['category_msg'] = 'Здесь вы можете просматривать и редактировать все ресурсы, сгруппированные по категориям.';
 $_lang['category_no_chunks'] = 'В этой категории нет чанков.';
 $_lang['category_no_plugins'] = 'В этой категории нет плагинов.';
 $_lang['category_no_snippets'] = 'В этой категории нет сниппетов.';

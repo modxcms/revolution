@@ -169,4 +169,12 @@ class WorkspacesManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('workspace','namespace');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Package+Management';
+    }
 }

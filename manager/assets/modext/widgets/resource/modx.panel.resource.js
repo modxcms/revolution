@@ -165,7 +165,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
+                            location.href = '?a='+r.result.object.action+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -253,7 +253,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         if (MODx.config.tvs_below_content == 1) {
             var tvs = this.getTemplateVariablesPanel(config);
-            tvs.style = 'margin-top: 10px';
             its.push(tvs);
         }
         return its;
@@ -280,6 +279,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,template: config.record.template
             ,anchor: '100%'
             ,border: true
+            ,bodyStyle: 'display: none'
         };
     }
 
@@ -374,7 +374,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    var titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
+                    var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
                 }}
@@ -571,6 +571,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
+            ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
             ,value: config.record.publishedon
@@ -583,6 +584,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
+            ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
             ,value: config.record.pub_date
@@ -595,6 +597,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
+            ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
             ,value: config.record.unpub_date

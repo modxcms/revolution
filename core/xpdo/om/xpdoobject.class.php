@@ -563,20 +563,32 @@ class xPDOObject {
                 $tableAlias= $xpdo->escape($tableAlias);
                 $tableAlias.= '.';
             }
-            foreach (array_keys($aColumns) as $k) {
-                if ($exclude && in_array($k, $columns)) {
-                    continue;
+            if (!$exclude && !empty($columns)) {
+                foreach ($columns as $column) {
+                    if (!in_array($column, array_keys($aColumns))) {
+                        continue;
+                    }
+                    $columnarray[$column]= "{$tableAlias}" . $xpdo->escape($column);
+                    if (!empty ($columnPrefix)) {
+                        $columnarray[$column]= $columnarray[$column] . " AS " . $xpdo->escape("{$columnPrefix}{$column}");
+                    }
                 }
-                elseif (empty ($columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
-                }
-                elseif ($exclude || in_array($k, $columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
-                } else {
-                    continue;
-                }
-                if (!empty ($columnPrefix)) {
-                    $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->escape("{$columnPrefix}{$k}");
+            } else {
+                foreach (array_keys($aColumns) as $k) {
+                    if ($exclude && in_array($k, $columns)) {
+                        continue;
+                    }
+                    elseif (empty ($columns)) {
+                        $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
+                    }
+                    elseif ($exclude || in_array($k, $columns)) {
+                        $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
+                    } else {
+                        continue;
+                    }
+                    if (!empty ($columnPrefix)) {
+                        $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->escape("{$columnPrefix}{$k}");
+                    }
                 }
             }
         }
@@ -619,9 +631,7 @@ class xPDOObject {
         $this->_fieldAliases= $xpdo->getFieldAliases($this->_class);
         $this->_aggregates= $xpdo->getAggregates($this->_class);
         $this->_composites= $xpdo->getComposites($this->_class);
-        $classVars= array ();
         if ($relatedObjs= array_merge($this->_aggregates, $this->_composites)) {
-            if ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) $classVars= get_object_vars($this);
             foreach ($relatedObjs as $aAlias => $aMeta) {
                 if (!array_key_exists($aAlias, $this->_relatedObjects)) {
                     if ($aMeta['cardinality'] == 'many') {
@@ -630,18 +640,6 @@ class xPDOObject {
                     else {
                         $this->_relatedObjects[$aAlias]= null;
                     }
-                }
-                if ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS) && !array_key_exists($aAlias, $classVars)) {
-                    $this->$aAlias= & $this->_relatedObjects[$aAlias];
-                    $classVars[$aAlias]= 1;
-                }
-            }
-        }
-        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
-            if (!$this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) $classVars= get_object_vars($this);
-            foreach ($this->_fields as $fldKey => $fldVal) {
-                if (!array_key_exists($fldKey, $classVars)) {
-                    $this->$fldKey= & $this->_fields[$fldKey];
                 }
             }
         }
@@ -670,14 +668,6 @@ class xPDOObject {
                     }
                 }
                 $added = true;
-                if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS)) {
-                    $classVars= get_object_vars($this);
-                    if (!array_key_exists($alias, $classVars)) {
-                        $this->$alias =& $this->_fields[$alias];
-                    } else {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "The alias {$alias} is already in use as a class var for class {$this->_class}", '', __METHOD__, __FILE__, __LINE__);
-                    }
-                }
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "The alias {$alias} is already in use as a field name in objects of class {$this->_class}", '', __METHOD__, __FILE__, __LINE__);
             }
@@ -712,6 +702,55 @@ class xPDOObject {
      */
     public function setOption($key, $value) {
         $this->_options[$key]= $value;
+    }
+
+    public function __get($name) {
+        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS) && array_key_exists($name, $this->_fields)) {
+            return $this->_fields[$name];
+        } elseif ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) {
+            if (array_key_exists($name, $this->_composites)) {
+                $fkMeta = $this->_composites[$name];
+            } elseif (array_key_exists($name, $this->_aggregates)) {
+                $fkMeta = $this->_aggregates[$name];
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+        if ($fkMeta['cardinality'] === 'many') {
+            return $this->getMany($name);
+        } else {
+            return $this->getOne($name);
+        }
+    }
+
+    public function __set($name, $value) {
+        if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS) && array_key_exists($name, $this->_fields)) {
+            return $this->_setRaw($name, $value);
+        } elseif ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) {
+            if (array_key_exists($name, $this->_composites)) {
+                $fkMeta = $this->_composites[$name];
+            } elseif (array_key_exists($name, $this->_aggregates)) {
+                $fkMeta = $this->_aggregates[$name];
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        if ($fkMeta['cardinality'] === 'many') {
+            return $this->addMany($value, $name);
+        } else {
+            return $this->addOne($value, $name);
+        }
+    }
+
+    public function __isset($name) {
+        return ($this->getOption(xPDO::OPT_HYDRATE_FIELDS) && array_key_exists($name, $this->_fields) && isset($this->_fields[$name]))
+            || ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)
+                && ((array_key_exists($name, $this->_composites) && isset($this->_composites[$name]))
+                || (array_key_exists($name, $this->_aggregates) && isset($this->_aggregates[$name]))));
     }
 
     /**
@@ -873,9 +912,6 @@ class xPDOObject {
             } else {
                 $set= false;
             }
-            if ($set && $this->getOption(xPDO::OPT_HYDRATE_FIELDS) && !isset ($this->$k)) {
-                $this->$k= & $this->_fields[$k];
-            }
         } else {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'xPDOObject - Called set() with an invalid field name: ' . print_r($k, 1));
         }
@@ -901,8 +937,9 @@ class xPDOObject {
     public function get($k, $format = null, $formatTemplate= null) {
         $value= null;
         if (is_array($k)) {
-            if ($this->isLazy()) {
-                $this->_loadFieldData($k);
+            $lazy = array_intersect($k, $this->_lazy);
+            if ($lazy) {
+                $this->_loadFieldData($lazy);
             }
             foreach ($k as $key) {
                 if (array_key_exists($key, $this->_fields)) {
@@ -1959,11 +1996,6 @@ class xPDOObject {
                 elseif ($adhocValues || $this->getOption(xPDO::OPT_HYDRATE_ADHOC_FIELDS)) {
                     if ($rawValues) {
                         $this->_setRaw($key, $val);
-                        if (!isset ($this->$key)) {
-                            if ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS) && is_object($val) || $this->getOption(xPDO::OPT_HYDRATE_FIELDS) && !is_object($val)) {
-                                $this->$key= & $this->_fields[$key];
-                            }
-                        }
                     } else {
                         $this->set($key, $val);
                     }
@@ -2353,7 +2385,8 @@ class xPDOObject {
         $criteria= $this->xpdo->newQuery($this->_class, $this->getPrimaryKey());
         $criteria->select($fields);
         if ($rows= xPDOObject :: _loadRows($this->xpdo, $this->_class, $criteria)) {
-            $row= reset($rows);
+            $row= $rows->fetch(PDO::FETCH_ASSOC);
+            $rows->closeCursor();
             $this->fromArray($row, '', false, true);
             $this->_lazy= array_diff($this->_lazy, $fields);
         }

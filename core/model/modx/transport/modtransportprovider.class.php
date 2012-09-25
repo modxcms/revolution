@@ -59,6 +59,7 @@ class modTransportProvider extends xPDOSimpleObject {
             'uuid' => $this->xpdo->uuid,
             'database' => $this->xpdo->config['dbtype'],
             'revolution_version' => $productVersion,
+            'http_host' => $this->xpdo->getOption('http_host'),
         ),$params);
         return $this->xpdo->rest->request($this->get('service_url'),$path,$method,$params);
     }

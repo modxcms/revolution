@@ -1,11 +1,17 @@
 <?php
 /**
-* Property Set Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Property Set Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
+
+#$_lang['area'] = 'Area';
+$_lang['area'] = 'Area';
+
+#$_lang['areas'] = 'Areas';
+$_lang['areas'] = 'Areas';
 
 #$_lang['class_name'] = 'Class Name';
 $_lang['class_name'] = 'Class Name';
@@ -55,26 +61,38 @@ $_lang['properties_import_err_upload'] = 'Please specify a valid properties file
 #$_lang['properties_import_msg'] = 'Please select a valid properties file.';
 $_lang['properties_import_msg'] = 'Please select a valid properties file.';
 
-#$_lang['properties_remove'] = 'Remove Properties';
-$_lang['properties_remove'] = 'Remove Properties';
+#$_lang['properties_remove'] = 'Delete Properties';
+$_lang['properties_remove'] = 'Delete Properties';
 
-#$_lang['properties_remove_confirm'] = 'Are you sure you want to remove these properties?';
-$_lang['properties_remove_confirm'] = 'Are you sure you want to remove these properties?';
+#$_lang['properties_remove_confirm'] = 'Are you sure you want to delete these properties?';
+$_lang['properties_remove_confirm'] = 'Are you sure you want to delete these properties?';
+
+#$_lang['property'] = 'Property';
+$_lang['property'] = 'Property';
+
+#$_lang['property_area_desc'] = 'The area, or group, this property belongs to.';
+$_lang['property_area_desc'] = 'The area, or group, this property belongs to.';
 
 #$_lang['property_create'] = 'Create Property';
 $_lang['property_create'] = 'Create Property';
 
-#$_lang['property_update'] = 'Update Property';
-$_lang['property_update'] = 'Update Property';
+#$_lang['property_description_desc'] = 'A short description of the property. This can be a lexicon key of the property\'s lexicon.';
+$_lang['property_description_desc'] = 'A short description of the property. This can be a lexicon key of the property\'s lexicon.';
+
+#$_lang['property_lexicon_desc'] = 'Optional. The lexicon that this property\'s fields can be translated with.';
+$_lang['property_lexicon_desc'] = 'Optional. The lexicon that this property\'s fields can be translated with.';
+
+#$_lang['property_name_desc'] = 'The name of the property, which will be accessible via: [[+propertyName]]';
+$_lang['property_name_desc'] = 'The name of the property, which will be accessible via: [[+propertyName]]';
 
 #$_lang['property_option_create'] = 'Create Property Option';
 $_lang['property_option_create'] = 'Create Property Option';
 
-#$_lang['property_option_remove'] = 'Remove Property Option';
-$_lang['property_option_remove'] = 'Remove Property Option';
+#$_lang['property_option_remove'] = 'Delete Property Option';
+$_lang['property_option_remove'] = 'Delete Property Option';
 
-#$_lang['property_option_remove_confirm'] = 'Are you sure you want to remove this property option?';
-$_lang['property_option_remove_confirm'] = 'Are you sure you want to remove this property option?';
+#$_lang['property_option_remove_confirm'] = 'Are you sure you want to delete this property option?';
+$_lang['property_option_remove_confirm'] = 'Are you sure you want to delete this property option?';
 
 #$_lang['property_options'] = 'Property Options';
 $_lang['property_options'] = 'Property Options';
@@ -91,11 +109,17 @@ $_lang['property_revert_all'] = 'Revert All to Default';
 #$_lang['property_revert_all_confirm'] = 'Are you sure you want to revert all properties to their defaults?';
 $_lang['property_revert_all_confirm'] = 'Are you sure you want to revert all properties to their defaults?';
 
-#$_lang['property_remove'] = 'Remove Property';
-$_lang['property_remove'] = 'Remove Property';
+#$_lang['property_remove'] = 'Delete Property';
+$_lang['property_remove'] = 'Delete Property';
 
-#$_lang['property_remove_confirm'] = 'Are you sure you want to remove this property?';
-$_lang['property_remove_confirm'] = 'Are you sure you want to remove this property?';
+#$_lang['property_remove_confirm'] = 'Are you sure you want to delete this property?';
+$_lang['property_remove_confirm'] = 'Are you sure you want to delete this property?';
+
+#$_lang['property_update'] = 'Update Property';
+$_lang['property_update'] = 'Update Property';
+
+#$_lang['property_xtype_desc'] = 'The input type of the property.';
+$_lang['property_xtype_desc'] = 'The input type of the property.';
 
 #$_lang['propertyset'] = 'Property Set';
 $_lang['propertyset'] = 'Property Set';
@@ -166,11 +190,11 @@ $_lang['propertyset_new'] = 'New Property Set';
 #$_lang['propertyset_panel_desc'] = 'Here you can create a property set, or select an existing one to attach to this element.';
 $_lang['propertyset_panel_desc'] = 'Here you can create a property set, or select an existing one to attach to this element.';
 
-#$_lang['propertyset_remove'] = 'Remove Property Set';
-$_lang['propertyset_remove'] = 'Remove Property Set';
+#$_lang['propertyset_remove'] = 'Delete Property Set';
+$_lang['propertyset_remove'] = 'Delete Property Set';
 
-#$_lang['propertyset_remove_confirm'] =  'Are you sure you want to remove this property set?';
-$_lang['propertyset_remove_confirm'] =  'Are you sure you want to remove this property set?';
+#$_lang['propertyset_remove_confirm'] =  'Are you sure you want to delete this property set?';
+$_lang['propertyset_remove_confirm'] =  'Are you sure you want to delete this property set?';
 
 #$_lang['propertyset_save'] = 'Save Property Set';
 $_lang['propertyset_save'] = 'Save Property Set';

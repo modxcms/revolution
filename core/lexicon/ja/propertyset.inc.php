@@ -1,14 +1,17 @@
 <?php
 /**
- * Property Set Japanese lexicon topic
- *
- * @language ja
- * @package modx
- * @subpackage lexicon
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
- */
+* Property Set Japanese lexicon topic
+*
+* @language ja
+* @package modx
+* @subpackage lexicon
+* @author Nick http://smallworld.west-tokyo.com
+* @author shimojo http://www.priqia.com/
+* @author yamamoto http://kyms.jp
+* @author honda http://kogus.org
+*/
+$_lang['area'] = 'Area';
+$_lang['areas'] = 'Areas';
 $_lang['class_name'] = 'クラス名';
 $_lang['default'] = '初期値';
 $_lang['duplicate_of'] = '[[+name]]の複製';
@@ -19,28 +22,30 @@ $_lang['new_name'] = '新規名称';
 $_lang['object'] = 'オブジェクト';
 $_lang['properties'] = 'プロパティ';
 $_lang['properties_default_locked'] = 'ロック';
-$_lang['properties_default_locked_msg'] = 'Only a user with the "unlock_element_properties" permission may unlock default properties.';
+$_lang['properties_default_locked_msg'] = '"unlock_element_properties"パーミッションを持つユーザーだけが、デフォルトプロパティのロックを解除できます。';
 $_lang['properties_default_unlocked'] = 'ロック';
 $_lang['properties_import'] = 'インポート';
-$_lang['properties_import_err_invalid'] = 'The file you specified is not a valid properties file. Please try again.';
-$_lang['properties_import_err_upload'] = 'Please specify a valid properties file to upload.';
-$_lang['properties_import_msg'] = 'Please select a valid properties file.';
+$_lang['properties_import_err_invalid'] = '指定されたファイルは有効なプロパティファイルではありません。もう一度指定してください。';
+$_lang['properties_import_err_upload'] = '有効なプロパティファイルをアップロードしてください。';
+$_lang['properties_import_msg'] = '有効なプロパティファイルを選択してください。';
 $_lang['properties_remove'] = 'これらのプロパティを削除';
-$_lang['properties_remove_confirm'] = 'Are you sure you want to delete these properties?';
+$_lang['properties_remove_confirm'] = 'これらのプロパティを削除してよろしいですか？';
+$_lang['property'] = 'プロパティ';
+$_lang['property_area_desc'] = 'The area, or group, this property belongs to.';
 $_lang['property_create'] = '新規作成';
 $_lang['property_description_desc'] = 'A short description of the property. This can be a lexicon key of the property\'s lexicon.';
 $_lang['property_lexicon_desc'] = 'Optional. The lexicon that this property\'s fields can be translated with.';
 $_lang['property_name_desc'] = 'The name of the property, which will be accessible via: [[+propertyName]]';
 $_lang['property_option_create'] = 'プロパティオプションを新規作成';
 $_lang['property_option_remove'] = 'プロパティオプションを削除';
-$_lang['property_option_remove_confirm'] = 'Are you sure you want to delete this property option?';
+$_lang['property_option_remove_confirm'] = 'プロパティオプションを削除してよろしいですか？';
 $_lang['property_options'] = 'プロパティオプション';
-$_lang['property_revert'] = 'Revert Property to Default';
-$_lang['property_revert_confirm'] = 'Are you sure you want to revert this property to the default?';
+$_lang['property_revert'] = 'プロパティをデフォルトの値に戻す';
+$_lang['property_revert_confirm'] = 'プロパティをデフォルトに戻してよろしいですか？';
 $_lang['property_revert_all'] = '全てデフォルトに戻す';
-$_lang['property_revert_all_confirm'] = 'Are you sure you want to revert all properties to their defaults?';
+$_lang['property_revert_all_confirm'] = '全てのプロパティをデフォルトに戻してよろしいですか？';
 $_lang['property_remove'] = '削除';
-$_lang['property_remove_confirm'] = 'Are you sure you want to delete this property?';
+$_lang['property_remove_confirm'] = 'このプロパティを削除してよろしいですか？';
 $_lang['property_update'] = '編集';
 $_lang['property_xtype_desc'] = 'The input type of the property.';
 $_lang['propertyset'] = 'プロパティセット';
@@ -48,27 +53,27 @@ $_lang['propertyset_add'] = 'プロパティセットを追加';
 $_lang['propertyset_create'] = '新規作成';
 $_lang['propertyset_create_new'] = 'プロパティセットを新規作成';
 $_lang['propertyset_duplicate'] = '複製';
-$_lang['propertyset_duplicate_copyels'] = 'Copy Element associations?';
-$_lang['propertyset_element_add'] = 'エレメントを紐付ける';
+$_lang['propertyset_duplicate_copyels'] = 'エレメントとの関連付けをコピーしますか？';
+$_lang['propertyset_element_add'] = 'エレメントを関連付ける';
 $_lang['propertyset_element_remove'] = 'このエレメントを外す';
-$_lang['propertyset_element_remove_confirm'] = 'Are you sure you want to unattach this element from this property set?';
-$_lang['propertyset_err_ae'] = 'A property set already exists with that name. Please specify another.';
-$_lang['propertyset_err_associate'] = 'An error occurred while trying to associate the property set to the element.';
-$_lang['propertyset_err_create'] = 'An error occurred while trying to create the property set.';
-$_lang['propertyset_err_element_add'] = 'An error occurred while trying to add the element to the property set.';
-$_lang['propertyset_err_element_nf'] = 'That element is not associated to that property set.';
-$_lang['propertyset_err_element_remove'] = 'An error occurred while trying to remove the element from the property set.';
+$_lang['propertyset_element_remove_confirm'] = 'このエレメントをプロパティセットから外してもよろしいですか？';
+$_lang['propertyset_err_ae'] = 'すでに同名のプロパティセットが存在します。異なる名前を指定してください。';
+$_lang['propertyset_err_associate'] = 'エレメントのプロパティセット関連付けにエラーが発生しました。';
+$_lang['propertyset_err_create'] = 'プロパティセットの作成にエラーが発生しました。';
+$_lang['propertyset_err_element_add'] = 'エレメントのプロパティセット追加にエラーが発生しました。';
+$_lang['propertyset_err_element_nf'] = 'そのエレメントはプロパティセットに関連付けられていません。';
+$_lang['propertyset_err_element_remove'] = 'エレメントのプロパティセットからの削除にエラーが発生しました。';
 $_lang['propertyset_err_nf'] = 'プロパティセットはありません。';
-$_lang['propertyset_err_nfs'] = 'Property set not found with ID [[+id]].';
-$_lang['propertyset_err_ns'] = 'Property set not specified.';
-$_lang['propertyset_err_ns_name'] = 'Please specify a name for the property set.';
-$_lang['propertyset_err_remove'] = 'An error occurred while trying to remove the property set.';
-$_lang['propertyset_err_update'] = 'An error occurred while trying to update the property set.';
+$_lang['propertyset_err_nfs'] = 'ID [[+id]] のプロパティセットはありません。';
+$_lang['propertyset_err_ns'] = 'プロパティセットが指定されていません。';
+$_lang['propertyset_err_ns_name'] = 'プロパティセットの名前を指定してください。';
+$_lang['propertyset_err_remove'] = 'プロパティセットの削除にエラーが発生しました。';
+$_lang['propertyset_err_update'] = 'プロパティセットの更新にエラーが発生しました。';
 $_lang['propertyset_new'] = '新規作成';
-$_lang['propertyset_panel_desc'] = 'Here you can create a property set, or select an existing one to attach to this element.';
+$_lang['propertyset_panel_desc'] = 'ここではプロパティセットを作成するか、既存のものを選択できます。';
 $_lang['propertyset_remove'] = '削除';
-$_lang['propertyset_remove_confirm'] = 'Are you sure you want to delete this property set?';
+$_lang['propertyset_remove_confirm'] = 'このプロパティセットを削除してよろしいですか？';
 $_lang['propertyset_save'] = '保存';
 $_lang['propertyset_update'] = '編集';
 $_lang['propertysets'] = 'プロパティセットの管理';
-$_lang['propertysets_desc'] = 'Here you can manage your property sets. Click a set in the tree to load that set\'s properties into the grid, where you can modify them specifically. You can also right-click on property sets in the tree to attach or unattach elements for them.';
+$_lang['propertysets_desc'] = 'ここではプロパティセットを管理できます。Click a set in the tree to load that set\'s properties into the grid, where you can modify them specifically. You can also right-click on property sets in the tree to attach or unattach elements for them.';

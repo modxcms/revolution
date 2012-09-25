@@ -22,7 +22,7 @@ Ext.reg('modx-page-system-info',MODx.page.SystemInfo);
 
 
 var viewPHPInfo = function() {
-    window.location.href= MODx.config.connectors_url+'system/phpinfo.php?HTTP_MODAUTH='+MODx.siteId;
+    window.open(MODx.config.connectors_url+'system/phpinfo.php?HTTP_MODAUTH='+MODx.siteId);
 };
 
 MODx.panel.SystemInfo = function(config) {

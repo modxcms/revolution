@@ -58,3 +58,44 @@ Contributors
 ------------
 
 * Grzegorz Adamiak <http://modxcms.com/forums/index.php?action=profile;u=1841>
+
+How to
+------
+
+Here's a little help on how to work with lexicon files when updating translation:
+
+* Convert upstream files by duplicating and commenting out all entries:
+
+      #!/bin/bash
+      for i in core/lexicon/en/*.php
+      do
+        sed -i 's/^\$.*$/\n#\0\n\0/' $i
+      done
+
+* Find which files contain translated strings:
+
+      #!/bin/bash
+      cd core/lexicon/pl
+      grep -c '; #' *.php | grep -v ':0' | sed -e 's/:.*//'
+
+* Find which upstream entries have changed:
+
+      #!/bin/bash
+      cd core/lexicon/pl
+      for f in *.php
+      do
+        echo $f
+        diff <(grep '^#.*' $f) <(grep '^#.*' ../en/$f)
+      done
+
+* Find which upstream files contain changed entries:
+
+      #!/bin/bash
+      cd core/lexicon/pl
+      for f in *.php
+      do
+        if [[ -n $(diff <(grep '^#.*' $f) <(grep '^#.*' ../en/$f)) ]]
+        then
+          echo $f
+        fi
+      done

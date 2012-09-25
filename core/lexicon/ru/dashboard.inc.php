@@ -1,4 +1,11 @@
 <?php
+/**
+ * Dashboard Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['active_users_none'] = 'Сейчас нет пользователей онлайн.';
 $_lang['add_user'] = 'Добавить пользователя';
 $_lang['create_resource'] = 'Создать ресурс';
@@ -9,7 +16,7 @@ $_lang['forums'] = 'Форум';
 $_lang['help'] = 'Помощь';
 $_lang['modx_news'] = 'Новости MODX ';
 $_lang['onlineusers_action'] = 'Действия';
-$_lang['onlineusers_actionid'] = 'ID - Действия';
+$_lang['onlineusers_actionid'] = 'ID действия';
 $_lang['onlineusers_ipaddress'] = 'IP адрес пользователя';
 $_lang['onlineusers_lasthit'] = 'Последний визит';
 $_lang['onlineusers_message'] = 'Этот список показывает всех активных пользователей за 20 минут (текущее время [[+curtime]])';

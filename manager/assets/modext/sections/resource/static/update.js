@@ -20,10 +20,10 @@ MODx.page.UpdateStatic = function(config) {
         ,id: 'modx-page-update-resource'
         ,action: 'update'
         ,actions: {
-            'new': MODx.action['resource/create']
-            ,edit: MODx.action['resource/update']
-            ,preview: MODx.action['resource/preview']
-            ,cancel: MODx.action['welcome']
+            'new': 'resource/create'
+            ,edit: 'resource/update'
+            ,preview: 'resource/preview'
+            ,cancel: 'welcome'
         }
         ,components: [{
             xtype: 'modx-panel-static'
@@ -55,7 +55,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    location.href = '?a=resource/update&id='+r.object.id;
                 },scope:this}
             }
         });
@@ -71,7 +71,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    location.href = '?a=resource/update&id='+r.object.id;
                 },scope:this}
             }
         });
@@ -84,12 +84,12 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    location.href = '?a='+MODx.action['welcome'];                    
+                    location.href = '?a=welcome';
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            location.href = '?a='+MODx.action['welcome'];
+            location.href = '?a=welcome';
         }
     }
     ,getButtons: function(cfg) {

@@ -1,8 +1,15 @@
 <?php
+/**
+ * Chunk Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['chunk'] = 'Чанк';
-$_lang['chunk_desc_category'] = 'Категория к которой принадлежит чанк.';
+$_lang['chunk_desc_category'] = 'Категория, к которой принадлежит чанк.';
 $_lang['chunk_desc_description'] = 'Краткое описание этого чанка.';
-$_lang['chunk_desc_name'] = 'Название чанка. Чанк будет доступен через подстановщик [[$названиеЧанка]].';
+$_lang['chunk_desc_name'] = 'Название чанка. Чанк будет доступен через подстановщик [[$ИмяЧанка]].';
 $_lang['chunk_code'] = 'Код чанка (html)';
 $_lang['chunk_desc'] = 'Описание';
 $_lang['chunk_delete_confirm'] = 'Вы уверены, что хотите удалить этот чанк?';

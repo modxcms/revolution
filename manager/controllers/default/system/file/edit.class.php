@@ -54,6 +54,7 @@ class SystemFileEditManagerController extends modManagerController {
 
         $source = $this->getSource();
         $this->fileRecord = $source->getObjectContents($this->filename);
+        $this->fileRecord['source'] = $source->get('id');
 
         if (empty($this->fileRecord)) {
             $errors = $source->getErrors();

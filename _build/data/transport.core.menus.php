@@ -3,7 +3,6 @@
  * Adds all top Menu items to build
  *
  * @var xPDO $xpdo
- * @var modAction $action
  * 
  * @package modx
  * @subpackage build
@@ -16,7 +15,7 @@ $menus[0]= $xpdo->newObject('modMenu');
 $menus[0]->fromArray(array (
   'text' => 'dashboard',
   'parent' => '',
-  'action' => 0,
+  'action' => 'welcome',
   'description' => '',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 0,
@@ -31,23 +30,12 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'dashboards',
   'parent' => 'reports',
-  'action' => 100,
+  'action' => 'system/dashboards',
   'description' => 'dashboards_desc',
   'icon' => 'images/icons/information.png',
   'menuindex' => 0,
   'permissions' => 'dashboards',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 100,
-          'namespace' => 'core',
-          'controller' => 'system/dashboards',
-          'haslayout' => 1,
-          'lang_topics' => 'about',
-          'assets' => '',
-          'help_url' => 'Dashboards',
-        ), '', true, true);
-        $children[0]->addOne($action);
 
 $menus[0]->addMany($children,'Children');
 unset($children);
@@ -59,7 +47,7 @@ $menus[1]= $xpdo->newObject('modMenu');
 $menus[1]->fromArray(array (
   'text' => 'site',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => '',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 1,
@@ -73,7 +61,7 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'preview',
   'parent' => 'site',
-  'action' => 0,
+  'action' => '',
   'description' => 'preview_desc',
   'icon' => 'images/icons/show.gif',
   'menuindex' => 0,
@@ -86,7 +74,7 @@ $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'refresh_site',
   'parent' => 'site',
-  'action' => 0,
+  'action' => '',
   'description' => 'refresh_site_desc',
   'icon' => 'images/icons/refresh.png',
   'menuindex' => 1,
@@ -99,7 +87,7 @@ $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'text' => 'remove_locks',
   'parent' => 'site',
-  'action' => 0,
+  'action' => '',
   'description' => 'remove_locks_desc',
   'icon' => 'images/ext/default/grid/hmenu-unlock.png',
   'menuindex' => 2,
@@ -123,98 +111,70 @@ $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
   'text' => 'search',
   'parent' => 'site',
-  'action' => 45,
+  'action' => 'search',
   'description' => 'search_desc',
   'icon' => 'images/icons/context_view.gif',
   'menuindex' => 3,
   'permissions' => 'search',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 45,
-          'namespace' => 'core',
-          'controller' => 'search',
-          'haslayout' => 1,
-          'lang_topics' => '',
-          'assets' => '',
-        ), '', true, true);
-        $children[3]->addOne($action);
-
-
-/* resource pages */
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 43,
-          'namespace' => 'core',
-          'controller' => 'resource/create',
-          'haslayout' => 1,
-          'lang_topics' => 'resource',
-          'assets' => '',
-          'help_url' => 'Resource',
-        ), '', true, true);
 
 /* new document resource */
 $children[4]= $xpdo->newObject('modMenu');
 $children[4]->fromArray(array (
   'text' => 'new_document',
   'parent' => 'site',
-  'action' => 44,
+  'action' => 'resource/create',
   'description' => 'new_document_desc',
   'icon' => 'images/icons/folder_page_add.png',
   'menuindex' => 4,
   'permissions' => 'new_document',
 ), '', true, true);
-$children[4]->addOne($action);
 
 /* new weblink resource */
 $children[5]= $xpdo->newObject('modMenu');
 $children[5]->fromArray(array (
   'text' => 'new_weblink',
   'parent' => 'site',
-  'action' => 44,
+  'action' => 'resource/create',
   'description' => 'new_weblink_desc',
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 5,
   'params' => '&class_key=modWebLink',
   'permissions' => 'new_weblink',
 ), '', true, true);
-$children[5]->addOne($action);
 
 /* new symlink resource */
 $children[6]= $xpdo->newObject('modMenu');
 $children[6]->fromArray(array (
   'text' => 'new_symlink',
   'parent' => 'site',
-  'action' => 44,
+  'action' => 'resource/create',
   'description' => 'new_symlink_desc',
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 6,
   'params' => '&class_key=modSymLink',
   'permissions' => 'new_symlink',
 ), '', true, true);
-$children[6]->addOne($action);
 
 /* new static resource */
 $children[7]= $xpdo->newObject('modMenu');
 $children[7]->fromArray(array (
   'text' => 'new_static_resource',
   'parent' => 'site',
-  'action' => 44,
+  'action' => 'resource/create',
   'description' => 'new_static_resource_desc',
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 7,
   'params' => '&class_key=modStaticResource',
   'permissions' => 'new_static_resource',
 ), '', true, true);
-$children[7]->addOne($action);
-unset($action);
 
 /* logout */
 $children[8]= $xpdo->newObject('modMenu');
 $children[8]->fromArray(array (
   'text' => 'logout',
   'parent' => 'site',
-  'action' => 0,
+  'action' => '',
   'description' => 'logout_desc',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 8,
@@ -235,7 +195,7 @@ $menus[2]= $xpdo->newObject('modMenu');
 $menus[2]->fromArray(array (
   'text' => 'components',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => '',
   'icon' => 'images/icons/plugin.gif',
   'menuindex' => 2,
@@ -248,7 +208,7 @@ $menus[3]= $xpdo->newObject('modMenu');
 $menus[3]->fromArray(array (
   'text' => 'security',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => '',
   'icon' => 'images/icons/lock.gif',
   'menuindex' => 3,
@@ -261,99 +221,55 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'user_management',
   'parent' => 'security',
-  'action' => 53,
+  'action' => 'security/user',
   'description' => 'user_management_desc',
   'icon' => 'images/icons/user.gif',
   'menuindex' => 0,
   'permissions' => 'view_user',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 53,
-          'namespace' => 'core',
-          'controller' => 'security/user',
-          'haslayout' => 1,
-          'lang_topics' => 'user',
-          'assets' => '',
-          'help_url' => 'Users',
-        ), '', true, true);
-        $children[0]->addOne($action);
 
 /* user group management */
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'user_group_management',
   'parent' => 'security',
-  'action' => 66,
+  'action' => 'security/permission',
   'description' => 'user_group_management_desc',
   'icon' => 'images/icons/mnu_users.gif',
   'menuindex' => 1,
   'permissions' => 'access_permissions',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 66,
-          'namespace' => 'core',
-          'controller' => 'security/permission',
-          'haslayout' => 1,
-          'lang_topics' => 'user,access,policy',
-          'assets' => '',
-          'help_url' => 'Security',
-        ), '', true, true);
-        $children[1]->addOne($action);
 
 /* access controls */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'text' => 'resource_groups',
   'parent' => 'security',
-  'action' => 37,
+  'action' => 'security/resourcegroup',
   'description' => 'resource_groups_desc',
   'icon' => '',
   'menuindex' => 2,
   'permissions' => 'access_permissions',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 37,
-          'namespace' => 'core',
-          'controller' => 'security/resourcegroup/index',
-          'haslayout' => 1,
-          'lang_topics' => 'resource,user,access',
-          'assets' => '',
-          'help_url' => 'Resource+Groups',
-        ), '', true, true);
-        $children[2]->addOne($action);
 
 /* form customization */
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
   'text' => 'form_customization',
   'parent' => 'security',
-  'action' => 83,
+  'action' => 'security/forms',
   'description' => 'form_customization_desc',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 3,
   'permissions' => 'customize_forms'
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 83,
-          'namespace' => 'core',
-          'controller' => 'security/forms',
-          'haslayout' => 1,
-          'lang_topics' => 'formcustomization,user,access,policy',
-          'assets' => '',
-          'help_url' => 'Customizing+The+Manager',
-        ), '', true, true);
-        $children[3]->addOne($action);
 
 /* flush permissions */
 $children[4]= $xpdo->newObject('modMenu');
 $children[4]->fromArray(array (
   'text' => 'flush_access',
   'parent' => 'security',
-  'action' => 0,
+  'action' => '',
   'description' => 'flush_access_desc',
   'icon' => 'images/icons/unzip.gif',
   'menuindex' => 4,
@@ -376,7 +292,7 @@ $children[5]= $xpdo->newObject('modMenu');
 $children[5]->fromArray(array (
   'text' => 'flush_sessions',
   'parent' => 'security',
-  'action' => 0,
+  'action' => '',
   'description' => 'flush_sessions_desc',
   'icon' => 'images/icons/unzip.gif',
   'menuindex' => 5,
@@ -403,7 +319,7 @@ $menus[4]= $xpdo->newObject('modMenu');
 $menus[4]->fromArray(array (
   'text' => 'tools',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => '',
   'icon' => 'images/icons/menu_settings.gif',
   'menuindex' => 4,
@@ -416,91 +332,48 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'import_resources',
   'parent' => 'tools',
-  'action' => 59,
+  'action' => 'system/import',
   'description' => 'import_resources_desc',
   'icon' => 'images/icons/application_side_contract.png',
   'menuindex' => 0,
   'permissions' => 'import_static',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 59,
-          'namespace' => 'core',
-          'controller' => 'system/import',
-          'haslayout' => 1,
-          'lang_topics' => 'import',
-          'assets' => '',
-        ), '', true, true);
-        $children[0]->addOne($action);
 
 /* import html */
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'import_site',
   'parent' => 'tools',
-  'action' => 60,
+  'action' => 'system/import/html',
   'description' => 'import_site_desc',
   'icon' => 'images/icons/application_side_contract.png',
   'menuindex' => 1,
   'permissions' => 'import_static',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 60,
-          'namespace' => 'core',
-          'controller' => 'system/import/html',
-          'haslayout' => 1,
-          'lang_topics' => 'import',
-          'assets' => '',
-        ), '', true, true);
-        $children[1]->addOne($action);
 
 /* property sets */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array(
   'text' => 'propertysets',
   'parent' => 'tools',
-  'action' => 82,
+  'action' => 'element/propertyset',
   'description' => 'propertysets_desc',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 2,
   'permissions' => 'property_sets',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 82,
-          'namespace' => 'core',
-          'controller' => 'element/propertyset/index',
-          'haslayout' => 1,
-          'lang_topics' => 'element,category,propertyset',
-          'assets' => '',
-          'help_url' => 'Properties+and+Property+Sets',
-        ), '', true, true);
-        $children[2]->addOne($action);
 
 /* media sources */
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array(
   'text' => 'sources',
   'parent' => 'tools',
-  'action' => 83,
+  'action' => 'source',
   'description' => 'sources_desc',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 2,
   'permissions' => 'sources',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 83,
-          'namespace' => 'core',
-          'controller' => 'source/index',
-          'haslayout' => 1,
-          'lang_topics' => 'sources,namespace',
-          'assets' => '',
-          'help_url' => 'Media+Sources',
-        ), '', true, true);
-        $children[3]->addOne($action);
-
 
 $menus[4]->addMany($children,'Children');
 unset($children);
@@ -510,7 +383,7 @@ $menus[5]= $xpdo->newObject('modMenu');
 $menus[5]->fromArray(array(
   'text' => 'reports',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => '',
   'icon' => 'images/icons/menu_settings16.gif',
   'menuindex' => 5,
@@ -523,110 +396,60 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'site_schedule',
   'parent' => 'reports',
-  'action' => 42,
+  'action' => 'resource/site_schedule',
   'description' => 'site_schedule_desc',
   'icon' => 'images/icons/cal.gif',
   'menuindex' => 0,
   'permissions' => 'view_document',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 42,
-          'namespace' => 'core',
-          'controller' => 'resource/site_schedule',
-          'haslayout' => 1,
-          'lang_topics' => 'resource',
-          'assets' => '',
-        ), '', true, true);
-        $children[0]->addOne($action);
 
 /* manager actions */
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'view_logging',
   'parent' => 'reports',
-  'action' => 14,
+  'action' => 'system/logs',
   'description' => 'view_logging_desc',
   'icon' => '',
   'menuindex' => 1,
   'permissions' => 'logs',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 14,
-          'namespace' => 'core',
-          'controller' => 'system/logs/index',
-          'haslayout' => 1,
-          'lang_topics' => 'manager_log',
-          'assets' => '',
-        ), '', true, true);
-        $children[1]->addOne($action);
 
 /* error log */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'text' => 'eventlog_viewer',
   'parent' => 'reports',
-  'action' => 57,
+  'action' => 'system/event',
   'description' => 'eventlog_viewer_desc',
   'icon' => 'images/icons/comment.gif',
   'menuindex' => 2,
   'permissions' => 'view_eventlog',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 57,
-          'namespace' => 'core',
-          'controller' => 'system/event',
-          'haslayout' => 1,
-          'lang_topics' => 'system_events',
-          'assets' => '',
-        ), '', true, true);
-        $children[2]->addOne($action);
         
 /* system info */
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
   'text' => 'view_sysinfo',
   'parent' => 'reports',
-  'action' => 4,
+  'action' => 'system/info',
   'description' => 'view_sysinfo_desc',
   'icon' => 'images/icons/logging.gif',
   'menuindex' => 3,
   'permissions' => 'view_sysinfo',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 4,
-          'namespace' => 'core',
-          'controller' => 'system/info',
-          'haslayout' => 1,
-          'lang_topics' => 'system_info',
-          'assets' => '',
-        ), '', true, true);
-        $children[3]->addOne($action);
 
 /* about */
 $children[4]= $xpdo->newObject('modMenu');
 $children[4]->fromArray(array (
   'text' => 'about',
   'parent' => 'reports',
-  'action' => 63,
+  'action' => 'help',
   'description' => 'about_desc',
   'icon' => 'images/icons/information.png',
   'menuindex' => 4,
   'permissions' => 'about',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 63,
-          'namespace' => 'core',
-          'controller' => 'help',
-          'haslayout' => 1,
-          'lang_topics' => 'about',
-          'assets' => '',
-        ), '', true, true);
-        $children[4]->addOne($action);
 
 $menus[5]->addMany($children,'Children');
 unset($children);
@@ -636,7 +459,7 @@ $menus[6]= $xpdo->newObject('modMenu');
 $menus[6]->fromArray(array (
   'text' => 'system',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => '',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 6,
@@ -649,161 +472,84 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'manage_workspaces',
   'parent' => 'system',
-  'action' => 68,
+  'action' => 'workspaces',
   'description' => 'manage_workspaces_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 0,
   'permissions' => 'packages',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 68,
-          'namespace' => 'core',
-          'controller' => 'workspaces',
-          'haslayout' => 1,
-          'lang_topics' => 'workspace',
-          'assets' => '',
-          'help_url' => 'Package+Management',
-        ), '', true, true);
-        $children[0]->addOne($action);
         
 /* system settings */
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'system_settings',
   'parent' => 'system',
-  'action' => 61,
+  'action' => 'system/settings',
   'description' => 'system_settings_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 1,
   'permissions' => 'settings',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 30,
-          'namespace' => 'core',
-          'controller' => 'system/settings',
-          'haslayout' => 1,
-          'lang_topics' => 'setting',
-          'assets' => '',
-          'help_url' => 'Settings',
-        ), '', true, true);
-        $children[1]->addOne($action);
 
 /* lexicon management */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'text' => 'lexicon_management',
   'parent' => 'system',
-  'action' => 73,
+  'action' => 'workspaces/lexicon',
   'description' => 'lexicon_management_desc',
   'icon' => 'images/icons/logging.gif',
   'menuindex' => 2,
   'permissions' => 'lexicons',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 73,
-          'namespace' => 'core',
-          'controller' => 'workspaces/lexicon',
-          'haslayout' => 1,
-          'lang_topics' => 'package_builder,lexicon,namespace',
-          'assets' => '',
-          'help_url' => 'Internationalization',
-        ), '', true, true);
-        $children[2]->addOne($action);
 
 /* content types */
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
   'text' => 'content_types',
   'parent' => 'system',
-  'action' => 69,
+  'action' => 'system/contenttype',
   'description' => 'content_types_desc',
   'icon' => 'images/icons/logging.gif',
   'menuindex' => 3,
   'permissions' => 'content_types',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 69,
-          'namespace' => 'core',
-          'controller' => 'system/contenttype',
-          'haslayout' => 1,
-          'lang_topics' => 'content_type',
-          'assets' => '',
-          'help_url' => 'Content+Types',
-        ), '', true, true);
-        $children[3]->addOne($action);
         
 /* contexts */
 $children[4]= $xpdo->newObject('modMenu');
 $children[4]->fromArray(array (
   'text' => 'contexts',
   'parent' => 'system',
-  'action' => 6,
+  'action' => 'context',
   'description' => 'contexts_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 4,
   'permissions' => 'view_context',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 6,
-          'namespace' => 'core',
-          'controller' => 'context',
-          'haslayout' => 1,
-          'lang_topics' => 'context',
-          'assets' => '',
-          'help_url' => 'Contexts',
-        ), '', true, true);
-        $children[4]->addOne($action);
 
 /* menus and actions */
 $children[5]= $xpdo->newObject('modMenu');
 $children[5]->fromArray(array (
   'text' => 'edit_menu',
   'parent' => 'system',
-  'action' => 2,
+  'action' => 'system/action',
   'description' => 'edit_menu_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 5,
   'permissions' => 'menus,actions',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 2,
-          'namespace' => 'core',
-          'controller' => 'system/action',
-          'haslayout' => 1,
-          'lang_topics' => 'action,menu,namespace',
-          'assets' => '',
-          'help_url' => 'Actions+and+Menus',
-        ), '', true, true);
-        $children[5]->addOne($action);
 
 /* namespaces */
 $children[6]= $xpdo->newObject('modMenu');
 $children[6]->fromArray(array (
   'text' => 'namespaces',
   'parent' => 'system',
-  'action' => 74,
+  'action' => 'workspaces/namespace',
   'description' => 'namespaces_desc',
   'icon' => '',
   'menuindex' => 6,
   'permissions' => 'namespaces',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 48,
-          'namespace' => 'core',
-          'controller' => 'workspaces/namespace',
-          'haslayout' => 1,
-          'lang_topics' => 'workspace,package_builder,lexicon,namespace',
-          'assets' => '',
-          'help_url' => 'Namespaces',
-        ), '', true, true);
-        $children[6]->addOne($action);
 
 $menus[6]->addMany($children,'Children');
 unset($children);
@@ -813,7 +559,7 @@ $menus[7]= $xpdo->newObject('modMenu');
 $menus[7]->fromArray(array (
   'text' => 'user',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => '',
   'icon' => 'images/icons/user_go.png',
   'menuindex' => 7,
@@ -826,44 +572,24 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'profile',
   'parent' => 'user',
-  'action' => 49,
+  'action' => 'security/profile',
   'description' => 'profile_desc',
   'icon' => '',
   'menuindex' => 0,
   'permissions' => 'change_profile',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 36,
-          'namespace' => 'core',
-          'controller' => 'security/profile',
-          'haslayout' => 1,
-          'lang_topics' => 'user',
-          'assets' => '',
-        ), '', true, true);
-        $children[0]->addOne($action);
 
 /* messages */
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'messages',
   'parent' => 'user',
-  'action' => 47,
+  'action' => 'security/message',
   'description' => 'messages_desc',
   'icon' => 'images/icons/messages.gif',
   'menuindex' => 1,
   'permissions' => 'messages',
 ), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 37,
-          'namespace' => 'core',
-          'controller' => 'security/message',
-          'haslayout' => 1,
-          'lang_topics' => 'messages',
-          'assets' => '',
-        ), '', true, true);
-        $children[1]->addOne($action);
 
 $menus[7]->addMany($children,'Children');
 unset($children);
@@ -873,7 +599,7 @@ $menus[8]= $xpdo->newObject('modMenu');
 $menus[8]->fromArray(array (
   'text' => 'support',
   'parent' => '',
-  'action' => 0,
+  'action' => '',
   'description' => 'support_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 8,
@@ -886,7 +612,7 @@ $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'forums',
   'parent' => 'support',
-  'action' => 0,
+  'action' => '',
   'description' => 'forums_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 0,
@@ -898,7 +624,7 @@ $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'wiki',
   'parent' => 'support',
-  'action' => 0,
+  'action' => '',
   'description' => 'wiki_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 1,
@@ -910,7 +636,7 @@ $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'text' => 'jira',
   'parent' => 'support',
-  'action' => 0,
+  'action' => '',
   'description' => 'jira_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 2,
@@ -922,7 +648,7 @@ $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
   'text' => 'api_docs',
   'parent' => 'support',
-  'action' => 0,
+  'action' => '',
   'description' => 'api_docs_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 3,
@@ -931,20 +657,5 @@ $children[3]->fromArray(array (
 
 $menus[8]->addMany($children,'Children');
 unset($children);
-
-
-/* export site */
-/*
-$children[2]= $xpdo->newObject('modMenu');
-$children[2]->fromArray(array (
-  'text' => 'export_site',
-  'parent' => 'tools',
-  'action' => 1,
-  'description' => 'export_site_desc',
-  'icon' => 'images/icons/application_side_expand.png',
-  'menuindex' => 2,
-), '', true, true);
-*/
-
 
 return $menus;

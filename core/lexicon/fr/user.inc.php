@@ -74,6 +74,7 @@ $_lang['user_confirm_remove'] = 'Voulez-vous vraiment supprimer définitivement 
 $_lang['user_country'] = 'Pays';
 $_lang['user_dob'] = 'Date de naissance';
 $_lang['user_doesnt_exist'] = 'L\'utilisateur n\'existe pas';
+$_lang['user_duplicate'] = 'Dupliquer l\'utilisateur';
 $_lang['user_edit_self_msg'] = 'Vous pourriez avoir besoin de vous déconnecter et reconnecter après avoir enregistré vos informations.</strong><br>Si vous choississez de générer un nouveau mot de passe, celui-ci vous sera envoyé par email.';
 $_lang['user_email'] = 'Adresse email';
 $_lang['user_err_access_permissions_save'] = 'Une erreur s\'est produite pendant l\'enregistrement des permissions d\'accès de l\'utilisateur.';

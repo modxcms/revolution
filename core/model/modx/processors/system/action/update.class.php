@@ -48,5 +48,21 @@ class modActionUpdateProcessor extends modObjectUpdateProcessor {
 
         return parent::beforeSave();
     }
+
+    /**
+     * {@inheritDoc}
+     * @return mixed
+     */
+    public function cleanup() {
+        $partitions = array(
+            $this->modx->getOption('cache_action_map_key', null, 'action_map') => array(),
+            $this->modx->getOption('cache_menu_key', null, 'menu') => array(),
+        );
+        if ($this->modx->getOption('cache_db', null, false)) {
+            $partitions['db'] = array();
+        }
+        $this->modx->cacheManager->refresh($partitions);
+        return parent::cleanup();
+    }
 }
 return 'modActionUpdateProcessor';

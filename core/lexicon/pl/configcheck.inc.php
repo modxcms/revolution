@@ -1,11 +1,11 @@
 <?php
 /**
-* Config Check Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Config Check Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['configcheck_admin'] = 'Please contact a systems administrator and warn them about this message!';
 $_lang['configcheck_admin'] = 'Please contact a systems administrator and warn them about this message!';
@@ -19,8 +19,8 @@ $_lang['configcheck_cache_msg'] = 'MODX cannot write to the cache directory. MOD
 #$_lang['configcheck_configinc'] = 'Config file still writable!';
 $_lang['configcheck_configinc'] = 'Config file still writable!';
 
-#$_lang['configcheck_configinc_msg'] = 'Your site is vulnerable to hackers who could do a lot of damage to the site. Please make your config file read only! If you are not the site admin, please contact a systems administrator and warn them about this message! It is located at core/config/config.inc.php';
-$_lang['configcheck_configinc_msg'] = 'Your site is vulnerable to hackers who could do a lot of damage to the site. Please make your config file read only! If you are not the site admin, please contact a systems administrator and warn them about this message! It is located at core/config/config.inc.php';
+#$_lang['configcheck_configinc_msg'] = 'Your site is vulnerable to hackers who could do a lot of damage to the site. Please make your config file read only! If you are not the site admin, please contact a systems administrator and warn them about this message! It is located at [[+path]]';
+$_lang['configcheck_configinc_msg'] = 'Your site is vulnerable to hackers who could do a lot of damage to the site. Please make your config file read only! If you are not the site admin, please contact a systems administrator and warn them about this message! It is located at [[+path]]';
 
 #$_lang['configcheck_default_msg'] = 'An unspecified warning was found. Which is strange.';
 $_lang['configcheck_default_msg'] = 'An unspecified warning was found. Which is strange.';
@@ -46,8 +46,8 @@ $_lang['configcheck_images_msg'] = 'The images directory isn\'t writable, or doe
 #$_lang['configcheck_installer'] = 'Installer still present';
 $_lang['configcheck_installer'] = 'Installer still present';
 
-#$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! He\'d probably not get too far, because he\'ll need to enter some user information for the database, but it\'s still best to remove this folder from your server.';
-$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! He\'d probably not get too far, because he\'ll need to enter some user information for the database, but it\'s still best to remove this folder from your server.';
+#$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to remove this folder from your server. It is located at: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to remove this folder from your server. It is located at: [[+path]]';
 
 #$_lang['configcheck_lang_difference'] = 'Incorrect number of entries in language file';
 $_lang['configcheck_lang_difference'] = 'Incorrect number of entries in language file';

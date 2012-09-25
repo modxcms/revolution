@@ -26,48 +26,37 @@ if (empty($id)) $id = '';
 
 $c = $modx->newQuery('modMenu');
 $c->leftJoin('modMenu','Children');
-$c->leftJoin('modAction','Action');
 $modMenuCols = $modx->getSelectColumns('modMenu','modMenu');
+$c->select($modMenuCols);
 $c->select(array(
-    $modMenuCols,
-    'Action.controller',
-    'Action.namespace',
+    'COUNT(Children.text) AS childrenCount'
 ));
-$c->select('COUNT(Children.text) AS childrenCount');
 $c->where(array(
     'modMenu.parent' => $id,
 ));
 $c->sortby($sort,$dir);
-$c->groupby($modMenuCols . ', controller, namespace');
+$c->groupby($modMenuCols . ', action, namespace');
 $c->prepare();
 if ($isLimit) $c->limit($limit,$start);
 $menus = $modx->getCollection('modMenu',$c);
 
 $list = array();
+/** @var modMenu $menu */
 foreach ($menus as $menu) {
-    $controller = $menu->get('controller');
-    if (empty($controller)) $controller = '';
-        if (strlen($controller) > 1 && substr($controller,strlen($controller)-4,strlen($controller)) != '.php') {
-            if (!file_exists($modx->getOption('manager_path').'controllers/'.$controller.'.php')) {
-                $controller .= '/index.php';
-                $controller = strtr($controller,'//','/');
-        } else {
-            $controller .= '.php';
-        }
-    }
+    $controller = $menu->get('action');
     $namespace = $menu->get('namespace');
-    if(!in_array($namespace, array('core', '', null))) {
+    if (!in_array($namespace, array('core', '', null))) {
         $modx->lexicon->load($namespace . ':default');
     }
     $text = $modx->lexicon($menu->get('text'));
 
     $list[] = array(
-        'text' => $text.($controller != '' ? ' <i>('.$controller.')</i>' : ''),
+        'text' => $text.($controller != '' ? ' <i>('.$namespace.':'.$controller.')</i>' : ''),
         'id' => 'n_'.$menu->get('text'),
         'cls' => 'icon-menu',
         'type' => 'menu',
         'pk' => $menu->get('text'),
-        'leaf' => false,
+        'leaf' => $menu->get('childrenCount') > 0 ? false : true,
         'data' => $menu->toArray(),
     );
 }

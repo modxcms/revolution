@@ -532,12 +532,33 @@ class modX extends xPDO {
     }
 
     /**
-     * Loads any specified extension packages.
+     * Loads any extension packages.
      *
      * @param array|null An optional array of options that can contain additional
      * extension packages which will be merged with those specified via config.
      */
     protected function _loadExtensionPackages($options = null) {
+        $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
+        if (!empty($cache)) {
+            foreach ($cache as $package) {
+                $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                $this->addPackage($package['namespace'],$package['path'],$package['tablePrefix']);
+                if (!empty($package['serviceName']) && !empty($package['serviceClass'])) {
+                    $this->getService($package['serviceName'],$package['serviceClass'],$package['path']);
+                }
+            }
+        }
+        $this->_loadExtensionPackagesDeprecated($options);
+    }
+
+    /**
+     * Load system-setting based extension packages. This is not recommended; use modExtensionPackage from 2.3 onward.
+     * The System Setting will be automatically removed in 2.4/3.0 and no longer functional.
+     *
+     * @deprecated To be removed in 2.4/3.0
+     * @param null $options
+     */
+    protected function _loadExtensionPackagesDeprecated($options = null) {
         $extPackages = $this->getOption('extension_packages');
         $extPackages = $this->fromJSON($extPackages);
         if (!is_array($extPackages)) $extPackages = array();
@@ -547,6 +568,7 @@ class modX extends xPDO {
                 $extPackages = array_merge($extPackages, $optPackages);
             }
         }
+
         if (!empty($extPackages)) {
             foreach ($extPackages as $extPackage) {
                 if (!is_array($extPackage)) continue;
@@ -575,6 +597,7 @@ class modX extends xPDO {
             }
         }
     }
+
 
     /**
      * Sets the debugging features of the modX instance.
@@ -1673,22 +1696,12 @@ class modX extends xPDO {
      */
     public function runSnippet($snippetName, array $params= array ()) {
         $output= '';
-        if (array_key_exists($snippetName, $this->sourceCache['modSnippet'])) {
-            $snippet = $this->newObject('modSnippet');
-            $snippet->fromArray($this->sourceCache['modSnippet'][$snippetName]['fields'], '', true, true);
-            $snippet->setPolicies($this->sourceCache['modSnippet'][$snippetName]['policies']);
-        } else {
-            $snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true);
-            if (!empty($snippet)) {
-                $this->sourceCache['modSnippet'][$snippetName] = array (
-                    'fields' => $snippet->toArray(),
-                    'policies' => $snippet->getPolicies()
-                );
+        if ($this->getParser()) {
+            $snippet= $this->parser->getElement('modSnippet', $snippetName);
+            if ($snippet instanceof modSnippet) {
+                $snippet->setCacheable(false);
+                $output= $snippet->process($params);
             }
-        }
-        if (!empty($snippet)) {
-            $snippet->setCacheable(false);
-            $output= $snippet->process($params);
         }
         return $output;
     }
@@ -1703,22 +1716,12 @@ class modX extends xPDO {
      */
     public function getChunk($chunkName, array $properties= array ()) {
         $output= '';
-        if (array_key_exists($chunkName, $this->sourceCache['modChunk'])) {
-            $chunk = $this->newObject('modChunk');
-            $chunk->fromArray($this->sourceCache['modChunk'][$chunkName]['fields'], '', true, true);
-            $chunk->setPolicies($this->sourceCache['modChunk'][$chunkName]['policies']);
-        } else {
-            $chunk= $this->getObject('modChunk', array ('name' => $chunkName), true);
-            if (!empty($chunk) || $chunk === '0') {
-                $this->sourceCache['modChunk'][$chunkName]= array (
-                    'fields' => $chunk->toArray(),
-                    'policies' => $chunk->getPolicies()
-                );
+        if ($this->getParser()) {
+            $chunk= $this->parser->getElement('modChunk', $chunkName);
+            if ($chunk instanceof modChunk) {
+                $chunk->setCacheable(false);
+                $output= $chunk->process($properties);
             }
-        }
-        if (!empty($chunk) || $chunk === '0') {
-            $chunk->setCacheable(false);
-            $output= $chunk->process($properties);
         }
         return $output;
     }
@@ -2315,6 +2318,7 @@ class modX extends xPDO {
                 $cookiePath= $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
                 if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
                 $cookieSecure= (boolean) $this->getOption('session_cookie_secure', $options, false);
+                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, false);
                 $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', $options, 0);
                 $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
                 if ($gcMaxlifetime > 0) {
@@ -2322,7 +2326,7 @@ class modX extends xPDO {
                 }
                 $site_sessionname= $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
-                session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
+                session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
                 session_start();
                 $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
                 $this->getUser($contextKey);
@@ -2333,7 +2337,7 @@ class modX extends xPDO {
                         if ($sessionCookieLifetime) {
                             $cookieExpiration= time() + $sessionCookieLifetime;
                         }
-                        setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure);
+                        setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
                     }
                 }
             } else {

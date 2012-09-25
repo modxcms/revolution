@@ -614,6 +614,18 @@ $events['OnUserDeactivate']->fromArray(array (
   'service' => 1,
   'groupname' => 'Users',
 ), '', true, true);
+$events['OnBeforeUserDuplicate']= $xpdo->newObject('modEvent');
+$events['OnBeforeUserDuplicate']->fromArray(array (
+  'name' => 'OnBeforeUserDuplicate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserDuplicate']= $xpdo->newObject('modEvent');
+$events['OnUserDuplicate']->fromArray(array (
+  'name' => 'OnUserDuplicate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
 $events['OnUserChangePassword']= $xpdo->newObject('modEvent');
 $events['OnUserChangePassword']->fromArray(array (
   'name' => 'OnUserChangePassword',
@@ -715,6 +727,12 @@ $events['OnFileManagerUpload']->fromArray(array (
 $events['OnFileCreateFormPrerender']= $xpdo->newObject('modEvent');
 $events['OnFileCreateFormPrerender']->fromArray(array (
   'name' => 'OnFileCreateFormPrerender',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileEditFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnFileEditFormPrerender']->fromArray(array (
+  'name' => 'OnFileEditFormPrerender',
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
@@ -922,6 +940,18 @@ $events['OnContextFormPrerender']->fromArray(array (
 $events['OnContextFormRender']= $xpdo->newObject('modEvent');
 $events['OnContextFormRender']->fromArray(array (
   'name' => 'OnContextFormRender',
+  'service' => 2,
+  'groupname' => 'Contexts',
+), '', true, true);
+$events['OnContextManagerUrlForm']= $xpdo->newObject('modEvent');
+$events['OnContextManagerUrlForm']->fromArray(array (
+  'name' => 'OnContextManagerUrlForm',
+  'service' => 2,
+  'groupname' => 'Contexts',
+), '', true, true);
+$events['OnContextWebUrlForm']= $xpdo->newObject('modEvent');
+$events['OnContextWebUrlForm']->fromArray(array (
+  'name' => 'OnContextWebUrlForm',
   'service' => 2,
   'groupname' => 'Contexts',
 ), '', true, true);

@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class SystemLogsIndexManagerController extends modManagerController {
+class SystemLogsManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool

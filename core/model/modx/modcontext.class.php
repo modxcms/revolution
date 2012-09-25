@@ -50,6 +50,30 @@ class modContext extends modAccessibleObject {
     protected $_cacheKey= '[contextKey]/context';
 
     /**
+     * Prepare and execute a PDOStatement to retrieve data needed for $aliasMap and $resourceMap.
+     *
+     * @static
+     * @param modContext &$context A reference to a specific modContext instance.
+     * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
+     * if the statement could not be prepared or executed.
+     */
+    public static function getResourceCacheMapStmt(&$context) {
+        return false;
+    }
+
+    /**
+     * Prepare and execute a PDOStatement to retrieve data needed for $webLinkMap.
+     *
+     * @static
+     * @param modContext &$context A reference to a specific modContext instance.
+     * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
+     * if the statement could not be prepared or executed.
+     */
+    public static function getWebLinkCacheMapStmt(&$context) {
+        return false;
+    }
+
+    /**
      * Prepare a context for use.
      *
      * @uses modCacheManager::generateContext() This method is responsible for
@@ -233,33 +257,59 @@ class modContext extends modAccessibleObject {
                         }
                     }
                 }
-                $targetHasQS = (empty($config['friendly_urls']) || strpos($alias, '?') !== false);
-                if (is_array($args)) {
-                    $args = modX::toQueryString($args);
-                }
-                if ($args != '') {
-                    if (!$targetHasQS) {
-                        /* add ? to $args if missing */
-                        $c= substr($args, 0, 1);
-                        if ($c == '&') {
-                            $args= '?' . substr($args, 1);
-                        } elseif ($c != '?') {
-                            $args= '?' . $args;
-                        }
-                    } elseif ($args != '') {
-                        /* add & to $args if missing */
-                        $c= substr($args, 0, 1);
-                        if ($c == '?')
-                            $args= '&' . substr($args, 1);
-                        elseif ($c != '&') $args= '&' . $args;
-                    }
-                }
+                
                 if ($config['friendly_urls'] == 1 || $target !== null) {
-                    $url= $alias . $args;
+                    $url = $alias;
                 } else {
-                    $url= $config['request_controller'] . '?' . $config['request_param_id'] . '=' . $id . $args;
+                    $url = $config['request_controller'] . '?' . $config['request_param_id'] . '=' . $id;
                 }
-
+                
+                $onUrlFormParams = array(
+                    'id' => $id,
+                    'args' => $args,
+                    'scheme' => $scheme,
+                    'options' => $options,
+                    'attributes' => array(
+                        'url' => & $url,
+                    )
+                );
+                
+                $rt = false;
+                
+                if ($this->get("key") == 'mgr') {
+                    $rt = $modx->invokeEvent("OnContextManagerUrlForm", $onUrlFormParams);
+                }
+                else {
+                    $rt = $modx->invokeEvent("OnContextWebUrlForm", $onUrlFormParams);
+                }
+                
+                /* check if plugin processed arguments */
+                if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
+                    /* process arguments with default mechanism */
+                    $targetHasQS = (empty($config['friendly_urls']) || strpos($alias, '?') !== false);
+                    if (is_array($args)) {
+                        $args = modX::toQueryString($args);
+                    }
+                    if ($args != '') {
+                        if (!$targetHasQS) {
+                            /* add ? to $args if missing */
+                            $c= substr($args, 0, 1);
+                            if ($c == '&') {
+                                $args= '?' . substr($args, 1);
+                            } elseif ($c != '?') {
+                                $args= '?' . $args;
+                            }
+                        } elseif ($args != '') {
+                            /* add & to $args if missing */
+                            $c= substr($args, 0, 1);
+                            if ($c == '?')
+                                $args= '&' . substr($args, 1);
+                            elseif ($c != '&') $args= '&' . $args;
+                        }
+                    }
+                    $url = $url . $args;
+                }
+                
                 $host= '';
                 if ($target === null && $scheme !== -1 && $scheme !== '') {
                     if ($scheme === 1 || $scheme === 0) {
@@ -342,5 +392,23 @@ class modContext extends modAccessibleObject {
             ));
         }
         return $saved;
+    }
+
+    /**
+     * Get and execute a PDOStatement representing data for the aliasMap and resourceMap.
+     *
+     * @return PDOStatement|null
+     */
+    public function getResourceCacheMap() {
+        return $this->xpdo->call('modContext', 'getResourceCacheMapStmt', array(&$this));
+    }
+
+    /**
+     * Get and execute a PDOStatement representing data for the webLinkMap.
+     *
+     * @return PDOStatement|null
+     */
+    public function getWebLinkCacheMap() {
+        return $this->xpdo->call('modContext', 'getWebLinkCacheMapStmt', array(&$this));
     }
 }

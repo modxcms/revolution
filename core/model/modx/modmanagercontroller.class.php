@@ -137,6 +137,12 @@ abstract class modManagerController {
         $this->checkFormCustomizationRules();
 
         $this->setPlaceholder('_config',$this->modx->config);
+        /* help url */
+        $helpUrl = $this->getHelpUrl();
+        if (substr($helpUrl,0,4) != 'http') {
+            $helpUrl = $this->modx->getOption('base_help_url',null,'http://rtfm.modx.com/display/revolution20/').$helpUrl;
+        }
+        $this->addHtml('<script type="text/javascript">MODx.helpUrl = "'.($helpUrl).'"</script>');
 
         $this->modx->invokeEvent('OnManagerPageBeforeRender',array('controller' => &$this));
 
@@ -184,6 +190,10 @@ abstract class modManagerController {
         $this->modx->invokeEvent('OnManagerPageAfterRender',array('controller' => &$this));
 
         return $this->content;
+    }
+
+    public function getHelpUrl() {
+        return '';
     }
 
     /**
@@ -364,17 +374,16 @@ abstract class modManagerController {
      * @return array|string
      */
     public function getTemplatesPaths($coreOnly = false) {
-        $namespacePath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
         /* extras */
         if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) {
+            $namespacePath = $this->config['namespace_path'];
             $paths[] = $namespacePath . 'templates/'.$this->theme.'/';
             $paths[] = $namespacePath . 'templates/default/';
             $paths[] = $namespacePath . 'templates/';
-        } else { /* core */
-            $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
-            $paths[] = $managerPath . 'templates/'.$this->theme.'/';
-            $paths[] = $managerPath . 'templates/default/';
         }
+        $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+        $paths[] = $managerPath . 'templates/'.$this->theme.'/';
+        $paths[] = $managerPath . 'templates/default/';
         return $paths;
     }
 
@@ -747,7 +756,7 @@ abstract class modManagerController {
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
-            'modActionDom.action' => array_key_exists('id',$this->config) ? $this->config['id'] : 0,
+            'modActionDom.action' => array_key_exists('controller',$this->config) ? $this->config['controller'] : '',
             'modActionDom.for_parent' => $forParent,
             'FCSet.active' => true,
             'Profile.active' => true,
@@ -864,7 +873,7 @@ abstract class modExtraManagerController extends modManagerController {
      * @param array $config An array of configuration options built from the modAction object
      * @return modManagerController A newly created modManagerController instance
      */
-    public static function getInstance(modX &$modx, $className, array $config = array()) {
+    public static function getInstanceDeprecated(modX &$modx, $className, array $config = array()) {
         $action = call_user_func(array($className,'getDefaultController'));
         if (isset($_REQUEST['action'])) {
             $action = str_replace(array('../','./','.','-','@'),'',$_REQUEST['action']);

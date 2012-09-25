@@ -1,11 +1,12 @@
 <?php
+require_once dirname(__FILE__).'/resource.class.php';
 /**
  * Loads the resource data page
  *
  * @package modx
  * @subpackage manager.controllers
  */
-class ResourceDataManagerController extends modManagerController {
+class ResourceDataManagerController extends ResourceManagerController {
     /** @var modResource $resource */
     public $resource;
     /** @var string $previewUrl */
@@ -119,5 +120,13 @@ class ResourceDataManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('resource');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Resources';
     }
 }

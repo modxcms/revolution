@@ -177,6 +177,13 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
                     ,handler: this.updateUser
                 });
             }
+            if (p.indexOf('pcopy') != -1) {
+                if (m.length > 0) m.push('-');
+                m.push({
+                    text: _('user_duplicate')
+                    ,handler: this.duplicateUser
+                });
+            }
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
@@ -191,7 +198,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,createUser: function() {
-        location.href = 'index.php?a='+MODx.action['security/user/create'];
+        location.href = 'index.php?a=security/user/create';
     }
 
     ,activateSelected: function() {
@@ -268,9 +275,22 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             }
         });
     }
+
+    ,duplicateUser: function() {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'duplicate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+            	'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
     
     ,updateUser: function() {
-        location.href = 'index.php?a='+MODx.action['security/user/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=security/user/update&id='+this.menu.record.id;
     }
     				
     ,rendGender: function(d,c) {

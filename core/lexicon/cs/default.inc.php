@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-04-01
+ * @updated 2012-05-01
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -1008,6 +1008,9 @@ $_lang['quick_create'] = 'Vytvořit v okně';
 // $_lang['quick_create_chunk'] = 'Quick Create Chunk';
 $_lang['quick_create_chunk'] = 'Rychlé vytvoření chunku';
 
+// $_lang['quick_create_file'] = 'Quick Create File';
+$_lang['quick_create_file'] = 'Rychlé vytvoření souboru';
+
 // $_lang['quick_create_plugin'] = 'Quick Create Plugin';
 $_lang['quick_create_plugin'] = 'Rychlé vytvoření pluginu';
 
@@ -1023,8 +1026,14 @@ $_lang['quick_create_template'] = 'Rychlé vytvoření šablony';
 // $_lang['quick_create_tv'] = 'Quick Create TV';
 $_lang['quick_create_tv'] = 'Rychlé vytvoření template variable';
 
+// $_lang['quick_update'] = 'Quick Update';
+$_lang['quick_create'] = 'Rychlá úprava';
+
 // $_lang['quick_update_chunk'] = 'Quick Update Chunk';
 $_lang['quick_update_chunk'] = 'Rychlá úprava chunku';
+
+// $_lang['quick_update_file'] = 'Quick Update File';
+$_lang['quick_update_file'] = 'Rychlá úprava souboru';
 
 // $_lang['quick_update_plugin'] = 'Quick Update Plugin';
 $_lang['quick_update_plugin'] = 'Rychlá úprava pluginu';
@@ -1260,6 +1269,12 @@ $_lang['send'] = 'Odeslat';
 // $_lang['service_url'] = 'Service URL';
 $_lang['service_url'] = 'Servisní URL';
 
+// $_lang['session_extended'] = 'Session extended!';
+$_lang['session_extended'] = 'Session prodloužena!';
+
+// $_lang['session_logging_out'] = 'Your session has expired. Please proceed to login again.';
+$_lang['session_logging_out'] = 'Vaše session vypršela. Přihlašte se znovu.';
+
 // $_lang['set'] = 'Set';
 $_lang['set'] = 'Nastavit';
 
@@ -1475,6 +1490,9 @@ $_lang['updated'] = 'Aktualizováno';
 
 // $_lang['upload'] = 'Upload';
 $_lang['upload'] = 'Nahrát';
+
+// $_lang['username'] = 'Username';
+$_lang['username'] = 'Uživatelské jméno';
 
 // $_lang['value'] = 'Value';
 $_lang['value'] = 'Hodnota';

@@ -1,6 +1,33 @@
 <?php
 
 $xpdo_meta_map = array (
+  'xPDOSimpleObject' => 
+  array (
+    0 => 'modAccess',
+    1 => 'modAccessPolicy',
+    2 => 'modAccessPolicyTemplate',
+    3 => 'modAccessPolicyTemplateGroup',
+    4 => 'modAccessPermission',
+    5 => 'modClassMap',
+    6 => 'modContentType',
+    7 => 'modDashboard',
+    8 => 'modDashboardWidget',
+    9 => 'modFormCustomizationProfile',
+    10 => 'modFormCustomizationSet',
+    11 => 'modActionField',
+    12 => 'modLexiconEntry',
+    13 => 'modManagerLog',
+    14 => 'modPrincipal',
+    15 => 'modPropertySet',
+    16 => 'modResourceGroupResource',
+    17 => 'modTemplateVarResource',
+    18 => 'modTemplateVarResourceGroup',
+    19 => 'modUserGroupMember',
+    20 => 'modUserGroupRole',
+    21 => 'modUserMessage',
+    22 => 'modUserProfile',
+    23 => 'modWorkspace',
+  ),
   'modAccess' => 
   array (
     0 => 'modAccessAction',
@@ -15,6 +42,25 @@ $xpdo_meta_map = array (
   'modAccessElement' => 
   array (
     0 => 'modAccessTemplateVar',
+  ),
+  'xPDOObject' => 
+  array (
+    0 => 'modAccessibleObject',
+    1 => 'modActiveUser',
+    2 => 'modCategoryClosure',
+    3 => 'modContextSetting',
+    4 => 'modContextResource',
+    5 => 'modDashboardWidgetPlacement',
+    6 => 'modElementPropertySet',
+    7 => 'modEvent',
+    8 => 'modFormCustomizationProfileUserGroup',
+    9 => 'modNamespace',
+    10 => 'modExtensionPackage',
+    11 => 'modPluginEvent',
+    12 => 'modSession',
+    13 => 'modSystemSetting',
+    14 => 'modTemplateVarTemplate',
+    15 => 'modUserSetting',
   ),
   'modAccessibleObject' => 
   array (

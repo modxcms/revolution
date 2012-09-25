@@ -194,6 +194,9 @@ MODx.window.QuickCreateChunk = function(config) {
         title: _('quick_create_chunk')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/chunk.php'
         ,action: 'create'
         ,fields: [{
@@ -220,8 +223,7 @@ MODx.window.QuickCreateChunk = function(config) {
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true, growMax: 380
+            ,anchor: '100% -216'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -242,6 +244,9 @@ MODx.window.QuickUpdateChunk = function(config) {
         title: _('quick_update_chunk')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/chunk.php'
         ,action: 'update'
         ,fields: [{
@@ -268,20 +273,20 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
-            xtype: 'xcheckbox'
-            ,name: 'clearCache'
-            ,id: 'modx-'+this.ident+'-clearcache'
-            ,fieldLabel: _('clear_cache_on_save')
-            ,description: _('clear_cache_on_save_msg')
-            ,inputValue: 1
-            ,checked: true
-        },{
             xtype: 'textarea'
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,anchor: '100% -246'
+        },{
+            xtype: 'xcheckbox'
+            ,name: 'clearCache'
+            ,id: 'modx-'+this.ident+'-clearcache'
+            ,hideLabel: true
+            ,boxLabel: _('clear_cache_on_save')
+            ,description: _('clear_cache_on_save_msg')
+            ,inputValue: 1
+            ,checked: true
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -315,6 +320,9 @@ MODx.window.QuickCreateTemplate = function(config) {
         title: _('quick_create_template')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/template.php'
         ,action: 'create'
         ,fields: [{
@@ -341,9 +349,7 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,name: 'content'
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,anchor: '100% -216'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -364,6 +370,9 @@ MODx.window.QuickUpdateTemplate = function(config) {
         title: _('quick_update_template')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/template.php'
         ,action: 'update'
         ,fields: [{
@@ -394,9 +403,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,name: 'content'
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,anchor: '100% -246'
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -440,6 +447,9 @@ MODx.window.QuickCreateSnippet = function(config) {
         title: _('quick_create_snippet')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/snippet.php'
         ,action: 'create'
         ,fields: [{
@@ -466,9 +476,7 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,anchor: '100% -216'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -489,6 +497,9 @@ MODx.window.QuickUpdateSnippet = function(config) {
         title: _('quick_update_snippet')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/snippet.php'
         ,action: 'update'
         ,fields: [{
@@ -519,9 +530,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,anchor: '100% -246'
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -566,6 +575,9 @@ MODx.window.QuickCreatePlugin = function(config) {
         title: _('quick_create_plugin')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/plugin.php'
         ,action: 'create'
         ,fields: [{
@@ -588,20 +600,19 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
-            xtype: 'xcheckbox'
-            ,name: 'disabled'
-            ,id: 'modx-'+this.ident+'-disabled'
-            ,fieldLabel: _('disabled')
-            ,inputValue: 1
-            ,checked: false
-        },{
             xtype: 'textarea'
             ,name: 'plugincode'
             ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,anchor: '100% -246'
+        },{
+            xtype: 'xcheckbox'
+            ,name: 'disabled'
+            ,id: 'modx-'+this.ident+'-disabled'
+            ,boxLabel: _('disabled')
+            ,hideLabel: true
+            ,inputValue: 1
+            ,checked: false
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -622,6 +633,9 @@ MODx.window.QuickUpdatePlugin = function(config) {
         title: _('quick_update_plugin')
         ,id: this.ident
         ,width: 600
+        ,height: 640
+        ,autoHeight: false
+        ,layout: 'anchor'
         ,url: MODx.config.connectors_url+'element/plugin.php'
         ,action: 'update'
         ,fields: [{
@@ -648,6 +662,12 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
+            xtype: 'textarea'
+            ,name: 'plugincode'
+            ,id: 'modx-'+this.ident+'-plugincode'
+            ,fieldLabel: _('code')
+            ,anchor: '100% -270'
+        },{
             xtype: 'xcheckbox'
             ,name: 'disabled'
             ,id: 'modx-'+this.ident+'-disabled'
@@ -664,14 +684,6 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,description: _('clear_cache_on_save_msg')
             ,inputValue: 1
             ,checked: true
-        },{
-            xtype: 'textarea'
-            ,name: 'plugincode'
-            ,id: 'modx-'+this.ident+'-plugincode'
-            ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -946,3 +958,67 @@ MODx.window.DuplicateContext = function(config) {
 };
 Ext.extend(MODx.window.DuplicateContext,MODx.Window);
 Ext.reg('modx-window-context-duplicate',MODx.window.DuplicateContext);
+
+MODx.window.Login = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'dupctx'+Ext.id();
+    Ext.Ajax.timeout = 0;
+    Ext.applyIf(config,{
+        title: _('login')
+        ,id: this.ident
+        ,url: MODx.config.connectors_url+'security/login.php'
+        ,action: 'login'
+        ,width: 400
+        ,fields: [{
+            html: '<p>'+_('session_logging_out')+'</p>'
+            ,bodyCssClass: 'panel-desc'
+        },{
+            xtype: 'textfield'
+            ,id: 'modx-'+this.ident+'-username'
+            ,fieldLabel: _('username')
+            ,name: 'username'
+            ,anchor: '100%'
+        },{
+            xtype: 'textfield'
+            ,inputType: 'password'
+            ,id: 'modx-'+this.ident+'-password'
+            ,fieldLabel: _('password')
+            ,name: 'password'
+            ,anchor: '100%'
+        },{
+            xtype: 'hidden'
+            ,name: 'rememberme'
+            ,value: 1
+        }]
+        ,buttons: [{
+            text: _('logout')
+            ,scope: this
+            ,handler: function() { location.href = '?logout=1' }
+        },{
+            text: _('login')
+            ,scope: this
+            ,handler: this.submit
+        }]
+    });
+    MODx.window.Login.superclass.constructor.call(this,config);
+    this.on('success',this.onLogin,this);
+};
+Ext.extend(MODx.window.Login,MODx.Window,{
+    onLogin: function(o) {
+        var r = o.a.result;
+        if (r.object && r.object.token) {
+            Ext.Ajax.defaultHeaders = {
+                'modAuth': r.object.token
+            };
+            Ext.Ajax.extraParams = {
+                'HTTP_MODAUTH': r.object.token
+            };
+            MODx.siteId = r.object.token;
+            MODx.msg.status({
+                message: _('session_extended')
+            });
+        }
+    }
+});
+Ext.reg('modx-window-login',MODx.window.Login);
+

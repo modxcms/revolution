@@ -211,7 +211,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
 
     ,updateProfile: function(btn,e) {
         var r = this.menu.record;
-        location.href = '?a='+MODx.action['security/forms/profile/update']+'&id='+r.id;
+        location.href = '?a=security/forms/profile/update&id='+r.id;
     }
     ,duplicateProfile: function(btn,e) {
         MODx.Ajax.request({

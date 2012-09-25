@@ -85,8 +85,8 @@ if ($posted) {
 <?php
 if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 ?>
-                        <span class="field_error">ERROR: Your includes/config.core.php is not writable; please make it writable
-                        OR edit the file with the correct MODX_CORE_PATH and click Submit.</span>
+                        <span class="field_error">ERROR: Your setup/includes/config.core.php is not writable; please make it writable
+                        OR edit the file manually with the correct MODX_CORE_PATH and click Submit.</span>
 <?php
 } else {
 ?>
@@ -114,7 +114,7 @@ if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 <div id="footer">
     <div id="footer-inner">
     <div class="container_12">
-        <p>&copy; 2005-2011 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+        <p>&copy; 2005-2012 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
         <p>MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!</p>
     </div>
     </div>

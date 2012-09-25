@@ -11,7 +11,7 @@ $xpdo_meta_map['modActionDom']= array (
   'fields' => 
   array (
     'set' => 0,
-    'action' => 0,
+    'action' => '',
     'name' => '',
     'description' => NULL,
     'xtype' => '',
@@ -38,11 +38,11 @@ $xpdo_meta_map['modActionDom']= array (
     ),
     'action' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '11',
-      'phptype' => 'integer',
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 0,
+      'default' => '',
       'index' => 'index',
     ),
     'name' => 

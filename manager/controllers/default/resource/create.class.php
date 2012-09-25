@@ -63,6 +63,10 @@ class ResourceCreateManagerController extends ResourceManagerController {
         if (!empty($this->scriptProperties['parent'])) {
             $this->parent = $this->modx->getObject('modResource',$this->scriptProperties['parent']);
             if (!$this->parent->checkPolicy('add_children')) return $this->failure($this->modx->lexicon('resource_add_children_access_denied'));
+        } else {
+            $this->parent = $this->modx->newObject('modResource');
+            $this->parent->set('id',0);
+            $this->parent->set('template',$this->modx->getOption('default_template',null,1));
         }
         $placeholders['parent'] = $this->parent;
 
@@ -83,7 +87,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->setPermissions();
 
         /* set default template */
-        if(empty($reloadData)) {
+        if (empty($reloadData)) {
             $defaultTemplate = $this->getDefaultTemplate();
             $this->resourceArray = array_merge($this->resourceArray,array(
                 'template' => $defaultTemplate,
@@ -96,6 +100,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 'published' => $this->context->getOption('publish_default', 0, $this->modx->_userConfig),
                 'searchable' => $this->context->getOption('search_default', 1, $this->modx->_userConfig),
                 'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
+                'syncsite' => true,
             ));
             $this->parent->fromArray($this->resourceArray);
             $this->parent->set('template',$defaultTemplate);
@@ -168,7 +173,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
-            'modActionDom.action' => $this->config['id'],
+            'modActionDom.action' => 'resource/create',
             'modActionDom.name' => 'template',
             'modActionDom.container' => 'modx-panel-resource',
             'modActionDom.rule' => 'fieldDefault',
@@ -226,7 +231,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
     public function getTemplateFile() {
         return 'resource/create.tpl';
     }
-
 }
 
 class DocumentCreateManagerController extends ResourceCreateManagerController {}

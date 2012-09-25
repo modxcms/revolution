@@ -130,6 +130,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
+        $this->setPlaceholder('onPluginFormPrerender', $this->onPluginFormPrerender);
     }
 
     /**
@@ -170,5 +171,13 @@ class ElementPluginUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('plugin','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Plugins';
     }
 }

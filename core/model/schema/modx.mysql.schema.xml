@@ -194,7 +194,8 @@
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
-    
+
+    <!-- deprecated 2.3, will be removed in 2.4/3.0 -->
     <object class="modAction" table="actions" extends="modAccessibleSimpleObject">
         <field key="namespace" dbtype="varchar" precision="100" phptype="string" null="false" default="core" index="index" />
         <field key="controller" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
@@ -219,7 +220,7 @@
 
     <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
         <field key="set" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-        <field key="action" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
@@ -258,7 +259,7 @@
     </object>
 
     <object class="modActionField" table="actions_fields" extends="xPDOSimpleObject">
-        <field key="action" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
         <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" default="field" index="index" /> <!-- either field/tab -->
         <field key="tab" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" /> <!-- for fields, what tab they are on -->
@@ -606,7 +607,7 @@
 
     <object class="modFormCustomizationSet" table="fc_sets" extends="xPDOSimpleObject">
         <field key="profile" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
-        <field key="action" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="template" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
@@ -673,13 +674,14 @@
     <object class="modMenu" table="menus" extends="modAccessibleObject">
         <field key="text" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="pk" />
         <field key="parent" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
-        <field key="action" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="icon" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="menuindex" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="params" dbtype="text" phptype="string" null="false" default="" />
         <field key="handler" dbtype="text" phptype="string" null="false" default="" />
         <field key="permissions" dbtype="text" phptype="string" null="false" default="" />
+        <field key="namespace" dbtype="varchar" precision="100" phptype="string" null="false" default="core" index="index" />
         
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="text" length="" collation="A" null="false" />
@@ -690,16 +692,26 @@
         <index alias="action" name="action" primary="false" unique="false" type="BTREE">
             <column key="action" length="" collation="A" null="false" />
         </index>
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="Action" class="modAction" local="action" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Parent" class="modMenu" local="parent" foreign="text" owner="foreign" cardinality="one" />
         <aggregate alias="Children" class="modMenu" local="text" foreign="parent" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessMenu" local="text" foreign="target" owner="local" cardinality="many" />
     </object>
-    
+
+    <!--
+        Development namespacing object by which MODX extension development is done. Provides a centralized path location
+        and grouping name for organizing development silos within MODX.
+    -->
     <object class="modNamespace" table="namespaces" extends="xPDOObject">
+        <!-- A lowercase namespace name that this Namespace will be referred as -->
         <field key="name" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="pk" />
+        <!-- The core path of the Namespace, where the PHP files will reside -->
         <field key="path" dbtype="text" phptype="string" default="" />
+        <!-- The assets path of the Namespace, where images/css/js and any public-facing files will reside -->
         <field key="assets_path" dbtype="text" phptype="string" default="" />
         
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
@@ -710,7 +722,43 @@
         <composite alias="SystemSettings" class="modSystemSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="ContextSettings" class="modContextSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="UserSettings" class="modUserSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
+        <composite alias="ExtensionPackages" class="modExtensionPackage" local="name" foreign="namespace" cardinality="many" owner="local" />
+
+        <!-- @deprecated to be removed in 2.4/3.0 -->
         <composite alias="Actions" class="modAction" local="name" foreign="namespace" cardinality="many" owner="local" />
+    </object>
+
+    <!--
+        Extension packages load xPDO models during modX instantiation, allowing for custom database tables and other
+        models to be loaded prior to modX request handling. Useful for when you want to integrate custom data and
+        extensions, such as Custom Resource Classes, into the core.
+    -->
+    <object class="modExtensionPackage" table="extension_packages" extends="xPDOSimpleObject">
+        <!-- The namespace the extension package relates to -->
+        <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" index="index" />
+        <!-- If empty, will assume the Namespace name -->
+        <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="core" index="index" />
+        <!-- If empty, will assume the Namespace path -->
+        <field key="path" dbtype="text" phptype="string" null="true" />
+        <!-- If empty, will assume no table prefix and delegate to package schema -->
+        <field key="table_prefix" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <!-- If specified, will create an instance of the class with this name using modX.getService on the loading of this extension package -->
+        <field key="service_class" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <!-- The name to give the service on the modX object when instantiating. Only valid if service_class is not empty. -->
+        <field key="service_name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <!-- When this extension package was made -->
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="true" />
+		<!-- The last time this extension package was updated -->
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modPlugin" table="site_plugins" extends="modScript">
@@ -888,6 +936,11 @@
             <column key="introtext" length="" collation="A" null="true" />
             <column key="content" length="" collation="A" null="true" />
         </index>
+        <index alias="cache_refresh_index" name="cache_refresh_idx" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+            <column key="menuindex" length="" collation="A" null="false" />
+            <column key="id" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="Parent" class="modResource" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Children" class="modResource" local="id" foreign="parent" cardinality="many" owner="local" />
@@ -952,7 +1005,7 @@
     </object>
     
     <object class="modSession" table="session" extends="xPDOObject">
-        <field key="id" dbtype="varchar" precision="40" phptype="string" null="false" index="pk" default="" />
+        <field key="id" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" default="" />
         <field key="access" dbtype="int" precision="20" phptype="timestamp" null="false" attributes="unsigned" />
         <field key="data" dbtype="mediumtext" phptype="string" />
 

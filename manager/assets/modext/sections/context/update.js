@@ -16,10 +16,10 @@ MODx.page.UpdateContext = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-context'
         ,actions: {
-            'new': MODx.action['context/create']
-            ,edit: MODx.action['context/update']
-            ,'delete': MODx.action['context/delete']
-            ,cancel: MODx.action['context/view']
+            'new': 'context/create'
+            ,edit: 'context/update'
+            ,'delete': 'context/delete'
+            ,cancel: 'context/view'
         }
         ,buttons: [{
             process: 'update'
@@ -34,7 +34,7 @@ MODx.page.UpdateContext = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,params: {
-                a: MODx.action['context']
+                a: 'context'
             }
         },'-',{
             text: _('help_ex')

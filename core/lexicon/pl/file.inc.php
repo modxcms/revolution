@@ -1,14 +1,20 @@
 <?php
 /**
-* File Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * File Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
+
+#$_lang['directory'] = 'Directory';
+$_lang['directory'] = 'Directory';
 
 #$_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? This could potentially break your website.';
 $_lang['file_confirm_remove'] = 'Czy na pewno chcesz usunąć ten plik? To może potencjalnie spowodować błędy w działaniu serwisu.'; #
+
+#$_lang['file_create'] = 'Create File';
+$_lang['file_create'] = 'Utwórz plik'; #
 
 #$_lang['file_deleted'] = 'Success!';
 $_lang['file_deleted'] = 'Success!';
@@ -18,6 +24,9 @@ $_lang['file_delete_file'] = 'Delete File';
 
 #$_lang['file_delete_folder'] = 'Delete Folder';
 $_lang['file_delete_folder'] = 'Delete Folder';
+
+#$_lang['file_download'] = 'Download File';
+$_lang['file_download'] = 'Pobierz plik'; #
 
 #$_lang['file_download_file'] = 'Download File';
 $_lang['file_download_file'] = 'Download File';
@@ -154,7 +163,7 @@ $_lang['file_folder_err_remove'] = 'W trakcie usuwania folderu wystąpił błąd
 #$_lang['file_folder_parent'] = 'Parent Directory';
 $_lang['file_folder_parent'] = '<abbr title="Ścieżka do folderu nadrzędnego">Wewnątrz</abbr>'; #
 
-#$_lang['file_folder_remove'] = 'Remove Directory';
+#$_lang['file_folder_remove'] = 'Delete Directory';
 $_lang['file_folder_remove'] = 'Usuń folder'; #
 
 #$_lang['file_folder_remove_confirm'] = 'Are you sure you want to remove this directory? This could potentially break your website.';
@@ -167,9 +176,15 @@ $_lang['file_last_accessed'] = 'Ostatnio otwarto'; #
 $_lang['file_last_modified'] = 'Ostatnio zmieniono'; #
 
 #$_lang['file_name'] = 'File Name';
-$_lang['file_name'] = 'Nazwa pliku'; #
+$_lang['file_name'] = 'File Name';
 
-#$_lang['file_remove'] = 'Remove File';
+#$_lang['file_quick_create'] = 'Quick Create File';
+$_lang['file_quick_create'] = 'Szybko utwórz plik'; #
+
+#$_lang['file_quick_update'] = 'Quick Update File';
+$_lang['file_quick_update'] = 'Szybko zmień plik'; #
+
+#$_lang['file_remove'] = 'Delete File';
 $_lang['file_remove'] = 'Usuń plik'; #
 
 #$_lang['file_remove_confirm'] = 'Are you sure you want to remove this file entirely?';
@@ -274,10 +289,10 @@ $_lang['upf_progress_wait'] = 'Oczkiwanie&hellip;'; #
 #$_lang['upf_queued'] = 'Queued for upload.';
 $_lang['upf_queued'] = 'Oczekuje na wysłanie.'; #
 
-#$_lang['upf_remove'] = 'Remove';
+#$_lang['upf_remove'] = 'Delete';
 $_lang['upf_remove'] = 'Usuń'; #
 
-#$_lang['upf_remove_desc'] = 'Remove file from upload queue.';
+#$_lang['upf_remove_desc'] = 'Delete file from upload queue.';
 $_lang['upf_remove_desc'] = 'Usuń plik z kolejki wysyłania.'; #
 
 #$_lang['upf_reset'] = 'Reset';
@@ -309,4 +324,3 @@ $_lang['upf_uploading_desc'] = 'Ukończono wysyłanie {0} z {1} plików.'; #
 
 #$_lang['upload_files'] = 'Upload Files';
 $_lang['upload_files'] = 'Wyślij pliki'; #
-

@@ -2,11 +2,12 @@
 /**
  * @package modx
  * @subpackage rest
- *
- * @deprecated To be removed in 2.3
  */
 require_once dirname(__FILE__) . '/modrestclient.class.php';
 /**
+ *
+ * @deprecated To be removed in 2.3. See modRest instead.
+ *
  * @package modx
  * @subpackage rest
  */

@@ -161,6 +161,7 @@ class ElementTVUpdateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
+        $this->setPlaceholder('onTVFormPrerender', $this->onTVFormPrerender);
     }
 
     /**
@@ -201,5 +202,13 @@ class ElementTVUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('tv','category','tv_widget','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Template+Variables';
     }
 }

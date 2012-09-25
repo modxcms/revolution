@@ -429,6 +429,15 @@ $settings['default_per_page']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['default_context']= $xpdo->newObject('modSystemSetting');
+$settings['default_context']->fromArray(array (
+  'key' => 'default_context',
+  'value' => 'web',
+  'xtype' => 'modx-combo-context',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['default_template']= $xpdo->newObject('modSystemSetting');
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',
@@ -737,6 +746,15 @@ $settings['friendly_urls']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['friendly_urls_strict']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_urls_strict']->fromArray(array (
+  'key' => 'friendly_urls_strict',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['global_duplicate_uri_check']= $xpdo->newObject('modSystemSetting');
 $settings['global_duplicate_uri_check']->fromArray(array (
   'key' => 'global_duplicate_uri_check',
@@ -1038,6 +1056,15 @@ $settings['manager_theme']= $xpdo->newObject('modSystemSetting');
 $settings['manager_theme']->fromArray(array (
   'key' => 'manager_theme',
   'value' => 'default',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['manager_week_start']= $xpdo->newObject('modSystemSetting');
+$settings['manager_week_start']->fromArray(array (
+  'key' => 'manager_week_start',
+  'value' => 0,
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1489,6 +1516,15 @@ $settings['session_cookie_path']->fromArray(array (
 $settings['session_cookie_secure']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_secure']->fromArray(array (
   'key' => 'session_cookie_secure',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
+$settings['session_cookie_httponly']= $xpdo->newObject('modSystemSetting');
+$settings['session_cookie_httponly']->fromArray(array (
+  'key' => 'session_cookie_httponly',
   'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',

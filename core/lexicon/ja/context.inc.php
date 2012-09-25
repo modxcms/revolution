@@ -32,5 +32,5 @@ $_lang['context_remove_confirm'] = '本当にこのコンテキストを削除�
 $_lang['context_settings'] = 'コンテキスト設定';
 $_lang['context_settings_desc'] = 'サイトごとのコンテキストを設定します。コンテキストは、サイト単位の「システム設定」のようなものです。たとえばsite_start ・base_url・http_host・site_urlなどをここで設定します。定義しない値に関してはグローバルのシステム設定の値が継承されます。';
 $_lang['context_update'] = 'コンテキストを編集';
-$_lang['context_with_key_not_found'] = 'キー%sのコンテキストが見つかりません';
+$_lang['context_with_key_not_found'] = 'キー %s のコンテキストが見つかりません';
 $_lang['contexts'] = 'コンテキスト';

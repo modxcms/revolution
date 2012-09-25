@@ -1,4 +1,11 @@
 <?php
+/**
+ * Manager Log Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['action'] = 'Действие';
 $_lang['date_end'] = 'Дата окончания';
 $_lang['date_start'] = 'Дата начала';

@@ -11,9 +11,9 @@ MODx.page.UpdateTV = function(config) {
 	Ext.applyIf(config,{
 		formpanel: 'modx-panel-tv'		
 		,actions: {
-            'new': MODx.action['element/tv/create']
-            ,edit: MODx.action['element/tv/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'element/tv/create'
+            ,edit: 'element/tv/update'
+            ,cancel: 'welcome'
         }
         ,buttons: [{
             process: 'update'
@@ -27,7 +27,7 @@ MODx.page.UpdateTV = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['welcome']}
+            ,params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

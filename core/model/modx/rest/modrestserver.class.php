@@ -28,7 +28,7 @@
 /**
  * An extendable class for handling REST requests.
  *
- * @deprecated To be removed in 2.3
+ * @deprecated To be removed in 2.3. See modRestService instead.
  *
  * @package modx
  * @subpackage rest

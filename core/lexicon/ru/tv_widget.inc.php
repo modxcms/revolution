@@ -1,26 +1,33 @@
 <?php
+/**
+ * TV Widget Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['attributes'] = 'Атрибуты';
 $_lang['capitalize'] = 'Прописные';
-$_lang['checkbox'] = 'Флажки(checkbox)';
+$_lang['checkbox'] = 'Флажки (checkbox)';
 $_lang['class'] = 'Класс';
 $_lang['combo_allowaddnewdata'] = 'Allow Add New Items';
 $_lang['combo_allowaddnewdata_desc'] = 'When Yes, allows items to be added that do not already exist in the list. Defaults to No.';
 $_lang['combo_forceselection'] = 'Force Selection to List';
 $_lang['combo_forceselection_desc'] = 'If using Type-Ahead, if this is set to Yes, only allow inputting of items in the list.';
 $_lang['combo_listempty_text'] = 'Текст для пустого списка';
-$_lang['combo_listempty_text_desc'] = 'If Type-Ahead is on, and the user types a value not in the list, display this text.';
+$_lang['combo_listempty_text_desc'] = 'Если автозавершение включено, и пользователь вводит значение, отсутствующее в списке, будет отображён указанный текст.';
 $_lang['combo_listwidth'] = 'Ширина списка';
 $_lang['combo_listwidth_desc'] = 'Ширина выпадающего списка в пикселях. По умолчанию ширина поля с выпадающим списком.';
 $_lang['combo_maxheight'] = 'Максимальная высота';
-$_lang['combo_maxheight_desc'] = 'Максимальная высота выпадающего списка в пикселях  до того как будет показана прокрутка (по умолчанию 300px).';
-$_lang['combo_stackitems'] = 'Stack Selected Items';
-$_lang['combo_stackitems_desc'] = 'When set to Yes, the items will be stacked 1 per line. Defaults to No which displays the items inline.';
+$_lang['combo_maxheight_desc'] = 'Максимальная высота выпадающего списка в пикселях до того как будет показана прокрутка (по умолчанию 300px).';
+$_lang['combo_stackitems'] = 'Выбранные значения в столбик';
+$_lang['combo_stackitems_desc'] = 'Если выбрать «Да», выбранные значения будут выстраиваться вертикально. По умолчанию «Нет», при этом значения выстраиваются в одну строку.';
 $_lang['combo_title'] = 'Заголовок списка';
-$_lang['combo_title_desc'] = 'If supplied, a header element is created containing this text and added into the top of the dropdown list.';
-$_lang['combo_typeahead'] = 'Enable Type-Ahead';
-$_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type Ahead Delay) if it matches a known value (defaults to off.).';
-$_lang['combo_typeahead_delay'] = 'Type-Ahead Delay';
-$_lang['combo_typeahead_delay_desc'] = 'The length of time in milliseconds to wait until the Type-Ahead text is displayed if Type-Ahead is enabled (defaults to 250).';
+$_lang['combo_title_desc'] = 'Если указано, в начале выпадающего списка будет создан заголовок, содержащий указанный текст.';
+$_lang['combo_typeahead'] = 'Включить автозавершение';
+$_lang['combo_typeahead_desc'] = 'Если выбрать «Да», набираемое значение будет завершаться, если оно совпадает с одним из возможных значений, и автоматически выбираться (по умолчанию выключено).';
+$_lang['combo_typeahead_delay'] = 'Задержка автозавершения';
+$_lang['combo_typeahead_delay_desc'] = 'Задержка в милисекундах перед автозавершением набираемого значения, если автозавершение включено (по умолчанию 250).';
 $_lang['date'] = 'Дата';
 $_lang['date_format'] = 'Формат даты';
 $_lang['date_use_current'] = 'Если не установлено, использовать текущую дату';
@@ -28,27 +35,19 @@ $_lang['default'] = 'По умолчанию';
 $_lang['delim'] = 'Разделитель';
 $_lang['delimiter'] = 'Разделитель';
 $_lang['disabled_dates'] = 'Неактивные даты';
-$_lang['disabled_dates_desc'] = 'A comma-separated list of "dates" to disable, as strings. These strings will be used to build a dynamic regular expression so they are very powerful. Some examples:<br />
-- Disable these exact dates: 2003-03-08,2003-09-16<br />
-- Disable these days for every year: 03-08,09-16<br />
-- Only match the beginning (useful if you are using short years): ^03-08<br />
-- Disable every day in March 2006: 03-..-2006<br />
-- Disable every day in every March: ^03<br />
-Note that the format of the dates included in the list should exactly match the format config. In order to support regular expressions, if you are using a date format that has "." in it, you will have to escape the dot when restricting dates.';
+$_lang['disabled_dates_desc'] = 'Список дат через запятую, недоступных для выбора. На основе этого списка будет сгенерировано регулярное выражение, что дает широкие возможности. Некоторые примеры:<br />- Запретить перечисленные даты: 2003-03-08,2003-09-16<br />- Запретить перечисленные дни для любого года: 03-08,09-16<br />- Только совпадающие вначале: ^03-08<br />- Запретить все дни марта 2006: 03-..-2006<br />- Запретить все дни марта: ^03<br />Следует обратить внимание, что формат дат, указываемых в списке, должен соответствовать формату, заданному в настройках. Если в формате даты используется точка, то необходимо экранировать ее в данном списке.';
 $_lang['disabled_days'] = 'Неактивные дни';
-$_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0 based (defaults to null). Some examples:<br />
-- Disable Sunday and Saturday: 0,6<br />
-- Disable weekdays: 1,2,3,4,5';
+$_lang['disabled_days_desc'] = 'Список недоступных для выбора дней недели, через запятую. Дни пронумерованы, начиная с нуля. Некоторые примеры:<br>- Запретить воскресенье и субботу: 0,6<br>- Запретить будние дни: 1,2,3,4,5';
 $_lang['dropdown'] = 'Выпадающий список';
 $_lang['earliest_date'] = 'Ранняя дата';
-$_lang['earliest_date_desc'] = 'Самая ранняя дата которую можно выбрать.';
+$_lang['earliest_date_desc'] = 'Самая ранняя дата, которую можно выбрать.';
 $_lang['earliest_time'] = 'Раннее время';
 $_lang['earliest_time_desc'] = 'Самое раннее время, которое может быть выбрано.';
 $_lang['email'] = 'Адрес электронной почты';
 $_lang['file'] = 'Файл';
 $_lang['height'] = 'Высота';
 $_lang['hidden'] = 'Скрытый';
-$_lang['htmlarea'] = 'HTML Area';
+$_lang['htmlarea'] = 'HTML поле';
 $_lang['htmltag'] = 'HTML тег';
 $_lang['image'] = 'Изображение';
 $_lang['image_align'] = 'Выравнивание';
@@ -72,35 +71,37 @@ $_lang['number_allowdecimals'] = 'Разрешить десятичные';
 $_lang['number_allownegative'] = 'Разрешить минус';
 $_lang['number_decimalprecision'] = 'Точность';
 $_lang['number_decimalprecision_desc'] = 'Число знаков после десятичного разделителя (по умолчанию 2).';
-$_lang['number_decimalseparator'] = 'Разделитель ';
+$_lang['number_decimalseparator'] = 'Разделитель';
 $_lang['number_decimalseparator_desc'] = 'Символ(ы), используемый в качестве десятичного разделителя (по умолчанию ".")';
 $_lang['number_maxvalue'] = 'Максимальное значение';
 $_lang['number_minvalue'] = 'Минимальное значение';
-$_lang['option'] = 'Переключатели(radio)';
+$_lang['option'] = 'Переключатели (radio)';
 $_lang['parent_resources'] = 'Родительские ресурсы';
 $_lang['radio_columns'] = 'Столбцы';
-$_lang['radio_columns_desc'] = 'Число столбцов на которые будут разделены радио кнопки.';
+$_lang['radio_columns_desc'] = 'Число столбцов, на которые будут разделены переключатели.';
 $_lang['rawtext'] = 'Сырой текст (устарело)';
-$_lang['rawtextarea'] = 'область сырого текста (устарело)';
+$_lang['rawtextarea'] = 'Область сырого текста (устарело)';
 $_lang['required'] = 'Необязательно';
 $_lang['required_desc'] = 'Если выбрать «Нет», MODX не разрешит пользователю сохранить ресурс пока это поле не будет заполнено.';
 $_lang['resourcelist'] = 'Список ресурсов';
 $_lang['resourcelist_depth'] = 'Глубина';
 $_lang['resourcelist_depth_desc'] = 'По умолчанию 10.';
 $_lang['resourcelist_includeparent'] = 'Включать родителей';
-$_lang['resourcelist_includeparent_desc'] = 'Если выбрать «Да», в список будут включаться  ресурсы, указанные в поле «Родители».';
+$_lang['resourcelist_includeparent_desc'] = 'Если выбрать «Да», в список будут включаться ресурсы, указанные в поле «Родители».';
+$_lang['resourcelist_limitrelatedcontext'] = 'Ограничить текущим контекстом';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Если выбрать «Да», в список будут включаться ресурсы только из того же контекста, что и текущий ресурс.';
 $_lang['resourcelist_limit'] = 'Лимит';
 $_lang['resourcelist_limit_desc'] = 'Количество ресурсов в списке. 0 или пусто обозначает отсутствие ограничений.';
 $_lang['resourcelist_parents'] = 'Родители';
 $_lang['resourcelist_parents_desc'] = 'Список идентификаторов ресурсов, из их дочерние ресурсов будет состоять список.';
 $_lang['resourcelist_where'] = 'Where условие';
-$_lang['resourcelist_where_desc'] = 'Объект JSON, с условиями для фильтрации запроса выводящего список ресурсов. (фильтрация по TV не поддерживается)';
+$_lang['resourcelist_where_desc'] = 'Объект JSON, с условиями для фильтрации запроса выводящего список ресурсов (фильтрация по TV не поддерживается).';
 $_lang['richtext'] = 'Текстовый редактор';
 $_lang['sentence_case'] = 'Чувствительный к регистру';
 $_lang['shownone'] = 'Разрешить пустой выбор';
-$_lang['shownone_desc'] = 'Allow the user to select an empty choice which is a blank value.';
+$_lang['shownone_desc'] = 'Разрешить пользователю делать пустой выбор, определяющий пустое значение.';
 $_lang['start_day'] = 'Первый день недели';
-$_lang['start_day_desc'] = 'День с которого начинается неделя, (по умолчанию 0, неделя начинается с воскресенья)';
+$_lang['start_day_desc'] = 'День, с которого начинается неделя (по умолчанию 0, неделя начинается с воскресенья).';
 $_lang['string'] = 'Строка';
 $_lang['string_format'] = 'Строковый формат';
 $_lang['style'] = 'Стиль';
@@ -112,7 +113,7 @@ $_lang['textarea'] = 'Текстовая область';
 $_lang['textareamini'] = 'Текстовая область (мини)';
 $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Приращение времени';
-$_lang['time_increment_desc'] = 'Количество минут между каждым значение времени в списке (по умолчанию 15).';
+$_lang['time_increment_desc'] = 'Количество минут между каждым значением времени в списке (по умолчанию 15).';
 $_lang['title'] = 'Название';
 $_lang['upper_case'] = 'Верхний регистр';
 $_lang['url'] = 'URL';

@@ -100,14 +100,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
                     if (userId == 0) {
-                        location.href = '?a='+MODx.action['security/user']+'&id='+o.result.object.id;
+                        location.href = '?a=security/user&id='+o.result.object.id;
                     }
                     return false;
                 }
             });
             this.clearDirty();
         } else if (userId == 0) {
-            location.href = '?a='+MODx.action['security/user']+'&id='+o.result.object.id;
+            location.href = '?a=security/user&id='+o.result.object.id;
         }
     }
     

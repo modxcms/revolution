@@ -124,7 +124,7 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
                     }
                     $templateVarTemplate->set('tmplvarid',$this->object->get('id'));
                     $templateVarTemplate->set('templateid',$template['id']);
-                    $templateVarTemplate->set('rank',$template['rank']);
+                    $templateVarTemplate->set('rank',!empty($template['rank']) ? $template['rank'] : 0);
                     $templateVarTemplate->save();
                 } else {
                     $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(

@@ -1,10 +1,10 @@
 <?php
 /**
- * English language strings for Dashboards
+ * Dashboards Russian lexicon topic
  *
+ * @language ru
  * @package modx
  * @subpackage lexicon
- * @language en
  */
 $_lang['dashboard'] = 'Панель';
 $_lang['dashboard_add'] = 'Добавить панель';
@@ -17,7 +17,7 @@ $_lang['dashboard_duplicate'] = 'Копировать';
 $_lang['dashboard_remove'] = 'Удалить';
 $_lang['dashboard_remove_confirm'] = 'Вы уверены, что хотите удалить панель?';
 $_lang['dashboard_update'] = 'Редактировать';
-$_lang['dashboard_err_ae_name'] = 'Панель с названием "[[+name]]" уже существует! Выберите другое название.';
+$_lang['dashboard_err_ae_name'] = 'Панель с названием «[[+name]]» уже существует! Выберите другое название.';
 $_lang['dashboard_err_duplicate'] = 'Произошла ошибка при попытке копирования панели.';
 $_lang['dashboard_err_nf'] = 'Панель не найдена.';
 $_lang['dashboard_err_ns'] = 'Панель не указана.';
@@ -38,7 +38,7 @@ $_lang['user_group_filter'] = 'По группе пользователей';
 $_lang['widget'] = 'Виджет';
 $_lang['widget_content'] = 'Содержимое виджета';
 $_lang['widget_create'] = 'Создать виджет';
-$_lang['widget_err_ae_name'] = 'Виджет с именем "[[+name]]" уже существует! Выберите другое имя.';
+$_lang['widget_err_ae_name'] = 'Виджет с именем «[[+name]]» уже существует! Выберите другое имя.';
 $_lang['widget_err_nf'] = 'Виджет не найден!';
 $_lang['widget_err_ns'] = 'Виджет не указан!';
 $_lang['widget_err_ns_name'] = 'Укажите название виджета.';
@@ -49,7 +49,7 @@ $_lang['widget_dashboards.intro_msg'] = 'Список панелей на кот
 $_lang['widget_dashboard_remove'] = 'Убрать виджет с панели';
 $_lang['widget_description_desc'] = 'Описание виджета, текст или ключ записи словаря.';
 $_lang['widget_html'] = 'HTML';
-$_lang['widget_lexicon_desc'] = 'Тема словаря которая загружается вместе с виджетом. Используется для перевода имени и описания, или любого другого текста в виджете.';
+$_lang['widget_lexicon_desc'] = 'Тема словаря, которая загружается вместе с виджетом. Используется для перевода имени и описания, или любого другого текста в виджете.';
 $_lang['widget_name_desc'] = 'Название виджета, текст или ключ записи словаря.';
 $_lang['widget_new'] = 'Новый виджет';
 $_lang['widget_remove'] = 'Удалить';
@@ -57,7 +57,7 @@ $_lang['widget_remove_confirm'] = 'Вы действительно хотите 
 $_lang['widget_remove_multiple'] = 'Удалить несколько виджетов';
 $_lang['widget_remove_multiple_confirm'] = 'Вы уверены, что хотите удалить эти виджеты? Это необратимо, и удалит эти виджеты из всех панелей.';
 $_lang['widget_namespace'] = 'Пространство имён';
-$_lang['widget_namespace_desc'] = 'Пространство имён которое будет использовать виджет.';
+$_lang['widget_namespace_desc'] = 'Пространство имён, которое будет использовать виджет.';
 $_lang['widget_php'] = 'Встроенный PHP';
 $_lang['widget_place'] = 'Добавить виджет';
 $_lang['widget_size'] = 'Размер';
@@ -67,7 +67,7 @@ $_lang['widget_size_full'] = 'Полный';
 $_lang['widget_size_half'] = 'Половина';
 $_lang['widget_snippet'] = 'Сниппет';
 $_lang['widget_type'] = 'Тип виджета';
-$_lang['widget_type_desc'] = 'Виджет типа «Сниппет» — это обычный сниппет, результаты его работы будет выведен в виджете. Виджет типа «HTML» - выведет HTML. Виджет типа «Файл» - загружается из php-файла, путь к которому указан в содержимом виджета, в файле надо использовать return для вывода или return \'имяКласса\' наследующего класс modDashboardWidgetClass. Виджет типа «Встроенный PHP» выводит результаты выполнения PHP кода из содержимого виджета. <a href="http://rtfm.modx.com/display/revolution20/Dashboard+Widget+Types">Документация по тиапм виджетов</a>. ';
+$_lang['widget_type_desc'] = 'Виджет типа «Сниппет» — это обычный сниппет, результаты его работы будет выведен в виджете. Виджет типа «HTML» - выведет HTML. Виджет типа «Файл» — загружается из php-файла, путь к которому указан в содержимом виджета, в файле надо использовать return для вывода или return \'имяКласса\' наследующего класс modDashboardWidgetClass. Виджет типа «Встроенный PHP» выводит результаты выполнения PHP кода из содержимого виджета. <a href="http://rtfm.modx.com/display/revolution20/Dashboard+Widget+Types">Документация по тиапм виджетов</a>. ';
 $_lang['widget_unplace'] = 'Удалить';
 $_lang['widget_update'] = 'Редактировать';
 $_lang['widgets'] = 'Виджеты';
