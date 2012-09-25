@@ -33,6 +33,7 @@ MODx.page.UpdateStatic = function(config) {
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
             ,show_tvs: config.show_tvs
+            ,url: config.url
         }]
         ,loadStay: true
         ,buttons: this.getButtons(config)
