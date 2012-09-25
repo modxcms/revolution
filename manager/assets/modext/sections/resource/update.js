@@ -34,6 +34,7 @@ MODx.page.UpdateResource = function(config) {
             ,access_permissions: config.access_permissions
             ,show_tvs: config.show_tvs
             ,mode: config.mode
+            ,url: config.url
         }]
         ,buttons: this.getButtons(config)
     });
