@@ -30,6 +30,7 @@ MODx.page.CreateResource = function(config) {
             ,publish_document: config.publish_document
             ,show_tvs: config.show_tvs
             ,mode: config.mode
+            ,url: config.url
         }]
     });
     MODx.page.CreateResource.superclass.constructor.call(this,config);
