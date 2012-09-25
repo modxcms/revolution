@@ -5,10 +5,10 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-09-21
+ * @author yamamoto http://kyms.jp 2012-08-11
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['about'] = 'MODXについて';
 $_lang['about_desc'] = 'MODX Revolutionに関する情報';
@@ -18,27 +18,27 @@ $_lang['api_docs'] = 'APIドキュメント';
 $_lang['api_docs_desc'] = 'MODX Revolution APIドキュメント（英語）を表示';
 $_lang['components'] = 'コンポーネント';
 $_lang['content_types'] = 'コンテントタイプ';
-$_lang['content_types_desc'] = 'リソースのコンテンツタイプを管理。フレンドリーURL設定時に付加される拡張子もここで設定';
+$_lang['content_types_desc'] = 'リソースのコンテントタイプを管理。フレンドリーURL設定時に付加される拡張子もここで設定';
 $_lang['contexts'] = 'コンテキスト';
 $_lang['contexts_desc'] = 'サイトのコンテキストを管理';
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboards'] = 'ダッシュボード';
 $_lang['dashboards_desc'] = 'ダッシュボードの管理';
-$_lang['edit_menu'] = 'アクション';
-$_lang['edit_menu_desc'] = '管理画面のアクションとトップメニュー構成の管理';
+$_lang['edit_menu'] = 'トップメニューの設定';
+$_lang['edit_menu_desc'] = '管理画面トップメニュー構成の管理';
 $_lang['eventlog_viewer'] = 'イベントログ';
 $_lang['eventlog_viewer_desc'] = 'エラーログを表示';
 $_lang['export_site'] = 'サイトのエクスポート';
 $_lang['export_site_desc'] = '現在のウェブサイトを静的なhtmlへエクスポート';
 $_lang['flush_access'] = 'アクセス許可をリロード';
-$_lang['flush_access_confirm'] = '正しいアクセス許可設定を読み直しますか？注: これは他のユーザーへ影響を与えません';
+$_lang['flush_access_confirm'] = '正しいアクセス許可設定を読み直しますか？　注:これは他のユーザーへ影響を与えません。';
 $_lang['flush_access_desc'] = '一時的にキャッシュされている権限情報を初期化し正しく読み直す';
 $_lang['flush_sessions'] = '全セッションを初期化';
-$_lang['flush_sessions_confirm'] = '全ユーザーのセッション情報を初期化しますか？自分自身を含めた全ユーザーのセッション情報が初期化されます';
+$_lang['flush_sessions_confirm'] = '全ユーザーのセッション情報を初期化しますか？　自分自身を含めた全ユーザーのセッション情報が初期化されます。';
 $_lang['flush_sessions_desc'] = '全セッションを初期化し全てのユーザーを強制ログアウト';
-$_lang['flush_sessions_err'] = '現在のユーザーセッションを初期化中にエラーが発生しました';
-$_lang['flush_sessions_not_supported'] = '現在のアカウントは、ユーザーセッションの初期化権限を持っていません';
-$_lang['form_customization'] = '管理画面カスタマイズ機能';
+$_lang['flush_sessions_err'] = '現在のユーザーセッションを初期化中にエラーが発生しました。';
+$_lang['flush_sessions_not_supported'] = '現在のアカウントは、ユーザーセッションの初期化権限を持っていません。';
+$_lang['form_customization'] = '管理画面カスタマイズ';
 $_lang['form_customization_desc'] = '管理画面のフォームをカスタマイズ。ロール単位で設定可能';
 $_lang['forums'] = 'フォーラム';
 $_lang['forums_desc'] = '公式MODXフォーラムへアクセス';
@@ -79,7 +79,7 @@ $_lang['refresh_site'] = 'キャッシュをクリア';
 $_lang['refresh_site_desc'] = 'キャッシュを初期化。管理画面のレキシコン(言語管理)のキャッシュなども含む';
 $_lang['remove_locks'] = 'ロックを解除';
 $_lang['remove_locks_desc'] = 'サイト全体の編集ロックを解除';
-$_lang['remove_locks_error'] = 'ロックの解除中にエラーが発生しました';
+$_lang['remove_locks_error'] = 'ロックの解除中にエラーが発生しました。';
 $_lang['reports'] = 'レポート';
 $_lang['resource_groups'] = 'リソースグループ';
 $_lang['resource_groups_desc'] = 'リソースグループを管理';

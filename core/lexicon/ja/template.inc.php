@@ -5,6 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-09-21
  * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
@@ -37,7 +38,7 @@ $_lang['template_err_remove'] = 'テンプレートの削除中にエラーが�
 $_lang['template_err_save'] = 'テンプレートの保存中にエラーが発生しました。';
 $_lang['template_lock'] = 'テンプレート編集をロック';
 $_lang['template_lock_msg'] = 'このテンプレートを編集するためにはロックを解除する必要があります。';
-$_lang['template_locked_message'] = 'このテンプレートはロックされています';
+$_lang['template_locked_message'] = 'このテンプレートはロックされています。';
 $_lang['template_management_msg'] = '<h3 style="font-weight:bold;">テンプレートデザインの管理</h3><p>テンプレートはいくつでも作成でき、ドキュメントごとに自由に割り当てることができます。</p>';
 $_lang['template_msg'] = 'テンプレートを作成/編集します。';
 $_lang['template_name'] = 'テンプレート名';
