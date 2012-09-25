@@ -61,6 +61,18 @@ Ext.onReady(function() {
         ,lastText: _('ext_last')
         ,refreshText: _('ext_refresh')
     });
+    Ext.apply(Ext.Updater.prototype,{
+        text: _('loading')
+    });
+    Ext.apply(Ext.LoadMask.prototype,{
+        msg : _('loading')
+    });
+    Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype,{
+        splitTip: _('ext_splittip')
+    });
+    Ext.apply(Ext.form.BasicForm.prototype,{
+        waitTitle: _('please_wait')
+    });
     Ext.apply(Ext.form.ComboBox.prototype,{
         loadingText: _('loading')
     });
