@@ -4,6 +4,7 @@
  *
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-05-23
  * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
@@ -12,9 +13,9 @@
 $_lang['element'] = 'エレメント';
 $_lang['element_err_nf'] = 'エレメントが見つかりません。';
 $_lang['element_err_ns'] = 'エレメントを特定できません。';
-$_lang['element_static_source_immutable'] = 'エレメントのソースとして指定されたファイルは書き込み可能ではありません。管理画面ではこの要素を編集する事ができません。';
-$_lang['element_static_source_protected_invalid'] = 'You cannot point your Element to the MODX configuration directory; this is a protected, non-accessible directory.';
-$_lang['is_static'] = '静的エレメント';
+$_lang['element_static_source_immutable'] = 'エレメントのソースとして指定されたファイルは書き込み可能ではありません。管理画面ではこのエレメントを編集できません。';
+$_lang['element_static_source_protected_invalid'] = 'エレメントのソースとしてMODXの設定ディレクトリは指定できません。これは保護されたアクセス不可のディレクトリです。';
+$_lang['is_static'] = 'スタティックエレメント';
 $_lang['is_static_msg'] = 'エレメントのソースコードが外部のファイルに存在する場合にチェックします。';
 $_lang['quick_create'] = 'クイック作成';
 $_lang['quick_create_chunk'] = 'チャンクをクイック作成';
@@ -34,7 +35,7 @@ $_lang['property_preprocess_msg'] = 'プロパティセットのデフォルト�
 $_lang['static_file'] = 'ファイル名';
 $_lang['static_file_msg'] = 'ソースコードの保存場所を指定します。';
 $_lang['static_source'] = 'メディアソース';
-$_lang['static_source_msg'] = 'MODXが静的エレメントファイルを探す起点となるディレクトリを指示します。ファイル名を絶対パスで指定する場合、Noneに設定してください。';
+$_lang['static_source_msg'] = 'エレメントとして読み込むスタティックファイルが含まれるディレクトリを指定します。ファイル名を絶対パスで指定する場合は「なし」に設定してください。';
 $_lang['tv_elements'] = 'オプション値を入力';
 $_lang['tv_default'] = '既定値';
 $_lang['tv_type'] = '入力種別';

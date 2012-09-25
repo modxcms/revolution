@@ -5,11 +5,11 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author yamamoto http://kyms.jp 2012-07-27
+ * @author honda http://kogus.org 2012-09-21
  * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
-$_lang['action'] = '操作内容';
+$_lang['action'] = 'アクション';
 $_lang['action_desc'] = '指定したアクションにこのルールが適用されます。';
 $_lang['activate'] = '有効化';
 $_lang['constraint'] = '制約の条件';
@@ -17,21 +17,21 @@ $_lang['constraint_class'] = 'このルールの対象';
 $_lang['constraint_class_desc'] = '任意。「テンプレートIDが4の場合にこのルールを有効にする」などの条件をここでセットします。投稿画面の場合「modResource」でよいみたいです(※注・日本チーム) Optional. If set, along with the Constraint Field and Constraint options, will restrict this rule to the constraints applied.';
 $_lang['constraint_desc'] = '任意。有効条件と見なす値をセットします。たとえば「テンプレートIDが4の場合にこのルールを有効にする」の場合「4」をここにセットします。Optional. The value of the Constraint Field that should be checked against.';
 $_lang['constraint_field'] = '制約フィールド';
-$_lang['constraint_field_desc'] = '任意。制約条件としたいフィールドの名前を記述します。たとえば「template」など。Optional. The field by which this constraint should be applied.';
+$_lang['constraint_field_desc'] = '任意。制約条件としたいフィールドの名前を記述します。たとえば「template」など。';
 $_lang['containing_panel'] = 'これを含む領域';
 $_lang['containing_panel_desc'] = '対象オブジェクト(フィールドやタブ)を含むDIV領域のID名。modx-panel-resource・modx-page-settings・modx-resource-tabsのうちのいずれか。This is sometimes necessary for certain rules, so that the system can know what form or panel the field is in.';
 $_lang['deactivate'] = '無効化';
-$_lang['default_value'] = 'デフォルト値';
+$_lang['default_value'] = '新デフォルト値';
 $_lang['export'] = 'エクスポート';
 $_lang['field'] = 'フィールド';
-$_lang['field_desc'] = 'This is the field to affect. This may also be a tab, or TV. If it is a TV, please specify in this format: "tv#", where # is the ID of the TV.';
+$_lang['field_desc'] = '影響を受けるフィールドです。それはタブ、またはテンプレート変数の場合もあります。テンプレート変数の場合は、次の書式で指定してください。"tv#"（#にはテンプレート変数のIDを入力）';
 $_lang['field_default'] = 'フィールドのデフォルト値';
 $_lang['field_label'] = 'フィールドのラベル';
 $_lang['field_visible'] = 'フィールドの表示／非表示';
 $_lang['fields'] = 'フィールド';
 $_lang['file'] = 'ファイル';
-$_lang['filter_by_action'] = 'Filter by Action...';
-$_lang['filter_by_rule_type'] = 'Filter by Rule...';
+$_lang['filter_by_action'] = 'アクションで絞込み...';
+$_lang['filter_by_rule_type'] = 'ルールで絞込み...';
 $_lang['filter_by_search'] = 'Search...';
 $_lang['for_parent'] = 'For Parent';
 $_lang['for_parent_desc'] = 'このルールを親リソースに適用させたい場合はチェックしてください。Only use with Resources or objects with a `parent` field. Useful for the "create" page of Resources.';
@@ -56,16 +56,16 @@ $_lang['profile_remove_multiple_confirm'] = 'これらのプロファイルを�
 $_lang['profile_usergroup_err_ae'] = 'ユーザーグループはすでにこのプロファイルに割り当てられています。';
 $_lang['profile_usergroups_msg'] = 'このプロファイルが適用されるユーザーグループを指定します。<br />指定しない場合、プロファイルは全てのユーザーに適用されます。';
 $_lang['profiles'] = 'カスタマイズプロファイル';
-$_lang['profiles_msg'] = 'This is a list of your Form Customization Profiles. Profiles can contain many Form Customization Rules, and can be activated or deactivated. They can also be configured to only apply to certain User Groups.';
+$_lang['profiles_msg'] = 'フォームのカスタマイズプロファイルのリストです。プロファイルは様々なカスタマイズの規則を保持でき、一括して有効無効を切り替えられます。また、任意のユーザーグループにだけ適用させることも可能です。';
 $_lang['rank'] = 'ランク';
 $_lang['rank_desc'] = 'ルールが適用される順番を数値で指定します。数値が小さいほど、ルールは先に適用されます。';
-$_lang['region'] = 'Region';
-$_lang['regions'] = 'Regions';
+$_lang['region'] = 'リージョン';
+$_lang['regions'] = 'リージョン';
 $_lang['rule'] = 'ルール';
 $_lang['rule_create'] = 'ルールを作成';
 $_lang['rule_desc'] = 'このフィールドに適用されるルールの種類';
 $_lang['rule_description_desc'] = 'オプション。ルールの詳細';
-$_lang['rule_err_ae'] = 'そのフィールドにはすでにルールが設定されています';
+$_lang['rule_err_ae'] = 'そのフィールドにはすでにルールが設定されています。';
 $_lang['rule_err_duplicate'] = 'ルールの複製中にエラーが発生しました。';
 $_lang['rule_err_nf'] = 'ルールが見つかりません。';
 $_lang['rule_err_ns'] = 'ルールが指定されていません。';
@@ -74,7 +74,7 @@ $_lang['rule_err_save'] = 'ルールの保存中にエラーが発生しまし�
 $_lang['rule_remove'] = 'ルールを削除';
 $_lang['rule_remove_confirm'] = '本当にこのルールを削除しますか？';
 $_lang['rule_remove_multiple'] = '複数のルールを削除';
-$_lang['rule_remove_multiple_confirm'] = '本当にこれらのルールを削除しますか？元には戻せません。';
+$_lang['rule_remove_multiple_confirm'] = '本当にこれらのルールを削除しますか？　元には戻せません。';
 $_lang['rule_update'] = 'ルールを編集';
 $_lang['rule_value_desc'] = 'ルールに値を設定します。';
 $_lang['rules'] = 'ルール';
@@ -100,7 +100,7 @@ $_lang['set_remove_multiple_confirm'] = 'これらのセットをA級に削除�
 $_lang['set_tab_err_ae'] = '同じIDを持つタブがすでに存在します。異なるIDを指定してください。';
 $_lang['set_tabs_msg'] = 'タブの表示やラベルを設定します。<br />ラベルを変更する場合、目的の行の「タブのタイトル」列をダブルクリックしてください。値が空の場合、デフォルト値が使用されます。';
 $_lang['set_template_desc'] = 'テンプレートを指定すると、カスタマイズはそのテンプレートを持ったリソースにのみ適用されます。';
-$_lang['set_tvs_msg'] = 'テンプレート変数のラベル、デフォルト値、表示の有無や表示するタブなどを設定します。<br />注：別のタブにテンプレート変数を移動する場合、「タブの順序」フィールドで並び順を指定できます。このフィールドが空の場合、デフォルトの並び順が使用されます。';
+$_lang['set_tvs_msg'] = 'テンプレート変数のラベル、デフォルト値、表示の有無や表示するタブなどを設定します。<br />注：別のタブにテンプレート変数を移動する場合、「順序」フィールドで並び順を指定できます。このフィールドが空の場合、デフォルトの並び順が使用されます。';
 $_lang['sets'] = 'フォームカスタマイズセット';
 $_lang['simplexml_err_nf'] = 'この機能を使用するには、PHPのSimpleXMLエクステンションが必要です。続行前に、エクステンションがインストールされている事を確認してください。';
 $_lang['tab'] = 'タブ';
@@ -109,7 +109,7 @@ $_lang['tab_id'] = 'ID';
 $_lang['tab_name'] = 'タブ名';
 $_lang['tab_title'] = 'タブのタイトル';
 $_lang['tab_new'] = '新しいタブ';
-$_lang['tab_rank'] = 'タブの順序';
+$_lang['tab_rank'] = '順序';
 $_lang['tab_remove'] = 'タブを外す';
 $_lang['tab_remove_confirm'] = 'このタブを削除します。';
 $_lang['tab_visible'] = 'タブの表示／非表示';
@@ -117,7 +117,7 @@ $_lang['tabs'] = 'タブの構成';
 $_lang['tv'] = 'テンプレート変数';
 $_lang['tv_default'] = '既定値';
 $_lang['tv_label'] = 'テンプレート変数のラベル';
-$_lang['tv_name'] = 'Name';
+$_lang['tv_name'] = 'テンプレート変数名';
 $_lang['tv_move'] = 'テンプレート変数をタブに移動';
 $_lang['tv_visible'] = 'テンプレート変数の表示／非表示';
 $_lang['tvs'] = 'テンプレート変数';
@@ -127,5 +127,5 @@ $_lang['usergroup_desc'] = 'オプション。設定すると、このルール�
 $_lang['usergroup_remove'] = '適用ユーザーグループを削除';
 $_lang['usergroup_remove_confirm'] = '削除すると、プロファイルがこのユーザーグループに適用されなくなります。<br />削除してよろしいですか？';
 $_lang['usergroups'] = 'ユーザーグループ';
-$_lang['visible'] = '表示する';
+$_lang['visible'] = '表示';
 $_lang['xmlwriter_err_nf'] = 'この機能を使用するには、PHPのXMLWriterエクステンションが必要です。続行前に、エクステンションがインストールされている事を確認してください。';
