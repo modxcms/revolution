@@ -5,27 +5,27 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-05-24
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['attributes'] = '属性';
 $_lang['capitalize'] = '先頭を大文字';
 $_lang['checkbox'] = 'チェックボックス';
 $_lang['class'] = 'クラス';
-$_lang['combo_allowaddnewdata'] = 'Allow Add New Items';
-$_lang['combo_allowaddnewdata_desc'] = 'When Yes, allows items to be added that do not already exist in the list. Defaults to No.';
+$_lang['combo_allowaddnewdata'] = '新たな項目の追加を許可';
+$_lang['combo_allowaddnewdata_desc'] = '「はい」を選ぶと、リストに存在しない項目の追加を許可します。デフォルトは「いいえ」です。';
 $_lang['combo_forceselection'] = 'オプション値からの入力を強制';
 $_lang['combo_forceselection_desc'] = '「はい」を指定すると、オプション値からの入力が強制されます。一致するものがオプション値にない場合、入力は無視され元の値に戻ります。';
 $_lang['combo_listempty_text'] = 'オプション値と不一致時のメッセージ';
 $_lang['combo_listempty_text_desc'] = '入力した値がオプション値に含まれていない場合、ここで指定した値がリストの代わりに表示されます。';
 $_lang['combo_listwidth'] = 'リストの表示幅（px）';
 $_lang['combo_listwidth_desc'] = 'ドロップダウンリストの表示幅をpxで指定します。デフォルトはコンボボックスの幅です。';
-$_lang['combo_maxheight'] = 'Max Height';
-$_lang['combo_maxheight_desc'] = 'The maximum height in pixels of the dropdown list before scrollbars are shown (defaults to 300).';
-$_lang['combo_stackitems'] = 'Stack Selected Items';
-$_lang['combo_stackitems_desc'] = '選択された値をリストの上部に積み上げて表示します（この機能には問題があり、うまく表示されない場合があります）。';
+$_lang['combo_maxheight'] = '最大の高さ（px）';
+$_lang['combo_maxheight_desc'] = 'スクロールバー非表示の状態の、ドロップダウンリストの最大の高さをピクセル数で指定します（デフォルトは300ピクセル）。';
+$_lang['combo_stackitems'] = '選択した項目をスタックする';
+$_lang['combo_stackitems_desc'] = '選択された項目をリストの上部に積み上げて表示します（この機能には問題があり、うまく表示されない場合があります）。';
 $_lang['combo_title'] = 'リスト内の見出し';
 $_lang['combo_title_desc'] = 'ここに設定した値が、リスト項目の先頭に見出しとして挿入されます。';
 $_lang['combo_typeahead'] = '入力補完を有効にする';
@@ -102,8 +102,8 @@ $_lang['resourcelist_depth'] = '対象とする深さ';
 $_lang['resourcelist_depth_desc'] = 'リストに表示するリソースの範囲を、親リソースからの深さで指定します。デフォルトは10です。';
 $_lang['resourcelist_includeparent'] = '親を含む';
 $_lang['resourcelist_includeparent_desc'] = '「はい」を指定した場合、リストには指定した親リソースも含まれます。';
-$_lang['resourcelist_limitrelatedcontext'] = 'Limit to Related Context';
-$_lang['resourcelist_limitrelatedcontext_desc'] = 'If Yes, will only include the Resources related to the context of the current Resource.';
+$_lang['resourcelist_limitrelatedcontext'] = '関連するコンテキストのみに制限';
+$_lang['resourcelist_limitrelatedcontext_desc'] = '「はい」を指定した場合、現在のリソースのコンテキストに関連するリソースのみが含まれるようになります。';
 $_lang['resourcelist_limit'] = 'リストの上限数';
 $_lang['resourcelist_limit_desc'] = 'リストに表示するリソースの上限数を指定します。0を指定した場合、無制限となります。';
 $_lang['resourcelist_parents'] = '親リソース（id）';
@@ -111,7 +111,7 @@ $_lang['resourcelist_parents_desc'] = 'リストアップしたいリソース�
 $_lang['resourcelist_where'] = 'リストのフィルタリング';
 $_lang['resourcelist_where_desc'] = 'JSONによる条件指定で表示するリソースをフィルタリングします。条件は {"pagetitle":"foo"} のように、項目と値をペアにしたJSONオブジェクトとして指定します。（テンプレート変数の検索には対応していません）。';
 $_lang['richtext'] = 'リッチテキスト';
-$_lang['sentence_case'] = 'Sentence Case';
+$_lang['sentence_case'] = '文頭の大文字化';
 $_lang['shownone'] = '選択なしを許可する';
 $_lang['shownone_desc'] = '値を選択しないことを許可します。';
 $_lang['start_day'] = '週の開始曜日';
@@ -125,7 +125,7 @@ $_lang['target'] = 'ターゲット';
 $_lang['text'] = 'テキスト';
 $_lang['textarea'] = '複数行テキスト';
 $_lang['textareamini'] = '複数テキスト (ミニ)';
-$_lang['textbox'] = 'Textbox';
+$_lang['textbox'] = 'テキストボックス';
 $_lang['time_increment'] = '時刻の間隔';
 $_lang['time_increment_desc'] = '時刻リストでの各項目の間隔を、分数で指定します（デフォルトは15）。';
 $_lang['title'] = 'タイトル';

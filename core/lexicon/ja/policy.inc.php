@@ -5,22 +5,22 @@
 * @language ja
 * @package modx
 * @subpackage lexicon
+* @author honda http://kogus.org 2012-09-21
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
 * @author yamamoto http://kyms.jp
-* @author honda http://kogus.org
 */
 $_lang['active_of'] = '[[+active]] of [[+total]]';
 $_lang['active_permissions'] = '有効な権限';
 $_lang['no_policy_option'] = ' (ポリシーなし) ';
 $_lang['permission'] = '権限';
 $_lang['permission_add'] = '権限を追加';
-$_lang['permission_add_template'] = 'テンプレートに権限を付か';
-$_lang['permission_err_ae'] = 'すでにこのポリシーに登録されている権限です';
-$_lang['permission_err_nf'] = '不明な権限です';
-$_lang['permission_err_ns'] = '権限が指定されていません';
-$_lang['permission_err_remove'] = '権限を削除しようとしてエラーが発生しました';
-$_lang['permission_err_save'] = '権限を保存しようとしてエラーが発生しました';
+$_lang['permission_add_template'] = 'テンプレートに権限を付加';
+$_lang['permission_err_ae'] = 'すでにこのポリシーに登録されている権限です。';
+$_lang['permission_err_nf'] = '不明な権限です。';
+$_lang['permission_err_ns'] = '権限が指定されていません。';
+$_lang['permission_err_remove'] = '権限を削除しようとしてエラーが発生しました。';
+$_lang['permission_err_save'] = '権限を保存しようとしてエラーが発生しました。';
 $_lang['permission_new'] = '新しい権限';
 $_lang['permission_remove'] = '権限を削除';
 $_lang['permission_remove_confirm'] = 'この権限を本当に削除してよいですか？';
@@ -52,7 +52,7 @@ $_lang['policy_name'] = 'ポリシー名';
 $_lang['policy_property_create'] = 'アクセスポリシープロパティを作成';
 $_lang['policy_property_new'] = '新しいポリシープロパティ';
 $_lang['policy_property_remove'] = 'アクセスポリシープロパティの削除';
-$_lang['policy_property_specify_name'] = 'ポリシープロパティ名が空欄です。:';
+$_lang['policy_property_specify_name'] = 'ポリシープロパティ名を指定してください。:';
 $_lang['policy_remove'] = 'アクセスポリシーを削除';
 $_lang['policy_remove_confirm'] = 'アクセスポリシーを削除しますか？';
 $_lang['policy_remove_multiple'] = 'ポリシーを削除';
