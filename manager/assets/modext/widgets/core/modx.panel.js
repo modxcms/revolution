@@ -54,7 +54,7 @@ MODx.FormPanel = function(config) {
     });
     this.on('ready',this.onReady);
     if (this.config.useLoadingMask) {
-        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        this.mask = new Ext.LoadMask(this.getEl());
         this.mask.show();
     }
     if (this.fireEvent('setup',config)) {
