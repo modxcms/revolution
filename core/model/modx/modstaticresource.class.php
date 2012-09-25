@@ -87,13 +87,12 @@ class modStaticResource extends modResource implements modResourceInterface {
      * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
-        $content = '';
+        $content = false; // Going to sendErrorPage() if couldn't populate the $content
         $this->getSourceFile($options);
         if (!empty ($this->_sourceFile)) {
             if (file_exists($this->_sourceFile)) {
                 $content= $this->getFileContent($this->_sourceFile);
                 if ($content === false) {
-                    $content = '';
                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "No content could be retrieved from source file: {$this->_sourceFile}");
                 }
             } else {
@@ -101,6 +100,9 @@ class modStaticResource extends modResource implements modResourceInterface {
             }
         } else {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "No source file specified.");
+        }
+        if($content===false) {
+            $this->xpdo->sendErrorPage();
         }
         return $content;
     }
