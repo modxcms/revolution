@@ -257,33 +257,59 @@ class modContext extends modAccessibleObject {
                         }
                     }
                 }
-                $targetHasQS = (empty($config['friendly_urls']) || strpos($alias, '?') !== false);
-                if (is_array($args)) {
-                    $args = modX::toQueryString($args);
-                }
-                if ($args != '') {
-                    if (!$targetHasQS) {
-                        /* add ? to $args if missing */
-                        $c= substr($args, 0, 1);
-                        if ($c == '&') {
-                            $args= '?' . substr($args, 1);
-                        } elseif ($c != '?') {
-                            $args= '?' . $args;
-                        }
-                    } elseif ($args != '') {
-                        /* add & to $args if missing */
-                        $c= substr($args, 0, 1);
-                        if ($c == '?')
-                            $args= '&' . substr($args, 1);
-                        elseif ($c != '&') $args= '&' . $args;
-                    }
-                }
+                
                 if ($config['friendly_urls'] == 1 || $target !== null) {
-                    $url= $alias . $args;
+                    $url = $alias;
                 } else {
-                    $url= $config['request_controller'] . '?' . $config['request_param_id'] . '=' . $id . $args;
+                    $url = $config['request_controller'] . '?' . $config['request_param_id'] . '=' . $id;
                 }
-
+                
+                $onUrlFormParams = array(
+                    'id' => $id,
+                    'args' => $args,
+                    'scheme' => $scheme,
+                    'options' => $options,
+                    'attributes' => array(
+                        'url' => & $url,
+                    )
+                );
+                
+                $rt = false;
+                
+                if ($this->get("key") == 'mgr') {
+                    $rt = $modx->invokeEvent("OnContextManagerUrlForm", $onUrlFormParams);
+                }
+                else {
+                    $rt = $modx->invokeEvent("OnContextWebUrlForm", $onUrlFormParams);
+                }
+                
+                /* check if plugin processed arguments */
+                if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
+                    /* process arguments with default mechanism */
+                    $targetHasQS = (empty($config['friendly_urls']) || strpos($alias, '?') !== false);
+                    if (is_array($args)) {
+                        $args = modX::toQueryString($args);
+                    }
+                    if ($args != '') {
+                        if (!$targetHasQS) {
+                            /* add ? to $args if missing */
+                            $c= substr($args, 0, 1);
+                            if ($c == '&') {
+                                $args= '?' . substr($args, 1);
+                            } elseif ($c != '?') {
+                                $args= '?' . $args;
+                            }
+                        } elseif ($args != '') {
+                            /* add & to $args if missing */
+                            $c= substr($args, 0, 1);
+                            if ($c == '?')
+                                $args= '&' . substr($args, 1);
+                            elseif ($c != '&') $args= '&' . $args;
+                        }
+                    }
+                    $url = $url . $args;
+                }
+                
                 $host= '';
                 if ($target === null && $scheme !== -1 && $scheme !== '') {
                     if ($scheme === 1 || $scheme === 0) {
