@@ -51,7 +51,7 @@ MODx.page.ResourceData = function(config) {
             ,class_key: config.record.class_key
             ,pagetitle: config.record.pagetitle
             ,border: false
-			,url: config.url
+            ,url: config.url
         }]
     });
     MODx.page.ResourceData.superclass.constructor.call(this,config);

@@ -29,7 +29,7 @@ MODx.page.CreateWebLink = function(config) {
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
             ,show_tvs: config.show_tvs
-			,url: config.url       
+            ,url: config.url       
         }]
     });
     MODx.page.CreateWebLink.superclass.constructor.call(this,config);
