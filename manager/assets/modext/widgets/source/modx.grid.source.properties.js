@@ -69,7 +69,7 @@ MODx.grid.SourceProperties = function(config) {
     this.on('afterRemoveRow', this.propertyChanged, this);
     this.on('celldblclick',this.onDirty,this);
     this.on('render',function() {
-        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        this.mask = new Ext.LoadMask(this.getEl());
     },this);
 };
 Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{

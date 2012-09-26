@@ -6,7 +6,7 @@
 * @package modx
 * @subpackage lexicon
 * @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org
+* @author honda http://kogus.org 2012-09-21
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
 * @author yamamoto http://kyms.jp
@@ -27,7 +27,7 @@ $_lang['snippet_err_duplicate'] = 'スニペットの複製中にエラーが発
 $_lang['snippet_err_exists_name'] = '[[+name]]という名前のスニペットがすでに存在します。';
 $_lang['snippet_err_invalid_name'] = '無効なスニペット名です。';
 $_lang['snippet_err_locked'] = 'このスニペットは編集中のためロックされています。';
-$_lang['snippet_err_nf'] = 'スニペットが見つかりません';
+$_lang['snippet_err_nf'] = 'スニペットが見つかりません。';
 $_lang['snippet_err_ns'] = 'スニペットが指定されていません。';
 $_lang['snippet_err_ns_name'] = 'スニペットの名前を指定してください。';
 $_lang['snippet_err_remove'] = 'スニペットの削除中にエラーが発生しました。';

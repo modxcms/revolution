@@ -6,7 +6,7 @@
 * @package modx
 * @subpackage lexicon
 * @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org
+* @author honda http://kogus.org 2012-09-21
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
 * @author yamamoto http://kyms.jp
@@ -27,7 +27,7 @@ $_lang['chunk_err_invalid_name'] = '無効なチャンク名です。';
 $_lang['chunk_err_locked'] = 'チャンクはロックされています。';
 $_lang['chunk_err_remove'] = 'チャンクの削除中にエラーが発生しました。';
 $_lang['chunk_err_save'] = 'チャンクの保存中にエラーが発生しました。';
-$_lang['chunk_err_nf'] = 'チャンクが見つかりません';
+$_lang['chunk_err_nf'] = 'チャンクが見つかりません。';
 $_lang['chunk_err_nfs'] = 'ID [[+id]]のチャンクが見つかりません。';
 $_lang['chunk_err_ns'] = 'チャンクが指定されていません。';
 $_lang['chunk_err_ns_name'] = 'チャンク名を指定してください。';

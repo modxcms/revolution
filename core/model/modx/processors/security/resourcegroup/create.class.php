@@ -11,7 +11,6 @@ class modResourceGroupCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modResourceGroup';
     public $languageTopics = array('access');
     public $permission = 'resourcegroup_new';
-    public $elementType = 'resource_group';
     public $objectType = 'resource_group';
     public $beforeSaveEvent = 'OnBeforeChunkFormSave';
     public $afterSaveEvent = 'OnChunkFormSave';

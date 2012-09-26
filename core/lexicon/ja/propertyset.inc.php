@@ -5,25 +5,25 @@
 * @language ja
 * @package modx
 * @subpackage lexicon
+* @author yamamoto http://kyms.jp 2012-08-28
+* @author honda http://kogus.org 2012-07-09
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
-* @author yamamoto http://kyms.jp
-* @author honda http://kogus.org
 */
-$_lang['area'] = 'Area';
-$_lang['areas'] = 'Areas';
+$_lang['area'] = 'エリア';
+$_lang['areas'] = 'エリア';
 $_lang['class_name'] = 'クラス名';
 $_lang['default'] = '初期値';
 $_lang['duplicate_of'] = '[[+name]]の複製';
 $_lang['element_properties_desc'] = 'プロパティの初期値やプロパティセットの設定ができます。詳細についてはヘルプをご覧ください。<b>注</b>:もし初期値を編集した場合 When you edit the default set, you will be saving the properties to the default properties. Editing a specific property set will save those property settings to the property set.<br /><br />When you\'ve selected a property set to edit, the default properties will show in the grid in the color <span style="color: gray;">gray</span>. Properties in gray are not in the property set, but show up there for easier editing. Properties in <span style="color: green">green</span> are properties that have been overridden from the default. Properties in <span style="color: purple">purple</span> are new properties in the custom set that are not in the default properties.';
 $_lang['file'] = 'ファイル';
 $_lang['import'] = 'インポート';
-$_lang['new_name'] = '新規名称';
+$_lang['new_name'] = '新しい名前';
 $_lang['object'] = 'オブジェクト';
 $_lang['properties'] = 'プロパティ';
-$_lang['properties_default_locked'] = 'ロック';
-$_lang['properties_default_locked_msg'] = '"unlock_element_properties"パーミッションを持つユーザーだけが、デフォルトプロパティのロックを解除できます。';
-$_lang['properties_default_unlocked'] = 'ロック';
+$_lang['properties_default_locked'] = 'ロック中';
+$_lang['properties_default_locked_msg'] = '"unlock_element_properties" パーミッションを持つユーザーだけが、デフォルトプロパティのロックを解除できます。';
+$_lang['properties_default_unlocked'] = 'ロック解除中';
 $_lang['properties_import'] = 'インポート';
 $_lang['properties_import_err_invalid'] = '指定されたファイルは有効なプロパティファイルではありません。もう一度指定してください。';
 $_lang['properties_import_err_upload'] = '有効なプロパティファイルをアップロードしてください。';
@@ -31,11 +31,11 @@ $_lang['properties_import_msg'] = '有効なプロパティファイルを選択
 $_lang['properties_remove'] = 'これらのプロパティを削除';
 $_lang['properties_remove_confirm'] = 'これらのプロパティを削除してよろしいですか？';
 $_lang['property'] = 'プロパティ';
-$_lang['property_area_desc'] = 'The area, or group, this property belongs to.';
+$_lang['property_area_desc'] = 'このプロパティが属するエリアを指定します。';
 $_lang['property_create'] = '新規作成';
-$_lang['property_description_desc'] = 'A short description of the property. This can be a lexicon key of the property\'s lexicon.';
-$_lang['property_lexicon_desc'] = 'Optional. The lexicon that this property\'s fields can be translated with.';
-$_lang['property_name_desc'] = 'The name of the property, which will be accessible via: [[+propertyName]]';
+$_lang['property_description_desc'] = 'プロパティの簡単な説明を入力します。property\'sのレキシコン領域からレキシコンキーを指定することもできます。';
+$_lang['property_lexicon_desc'] = '省略可能。このプロパティを翻訳可能なレキシコンを指定します。';
+$_lang['property_name_desc'] = 'プロパティの名前を指定します。[[+propertyName]] という記述で、プロパティへのアクセスが可能になります。';
 $_lang['property_option_create'] = 'プロパティオプションを新規作成';
 $_lang['property_option_remove'] = 'プロパティオプションを削除';
 $_lang['property_option_remove_confirm'] = 'プロパティオプションを削除してよろしいですか？';
@@ -47,7 +47,7 @@ $_lang['property_revert_all_confirm'] = '全てのプロパティをデフォル
 $_lang['property_remove'] = '削除';
 $_lang['property_remove_confirm'] = 'このプロパティを削除してよろしいですか？';
 $_lang['property_update'] = '編集';
-$_lang['property_xtype_desc'] = 'The input type of the property.';
+$_lang['property_xtype_desc'] = 'プロパティの入力タイプ';
 $_lang['propertyset'] = 'プロパティセット';
 $_lang['propertyset_add'] = 'プロパティセットを追加';
 $_lang['propertyset_create'] = '新規作成';
@@ -76,4 +76,4 @@ $_lang['propertyset_remove_confirm'] = 'このプロパティセットを削除�
 $_lang['propertyset_save'] = '保存';
 $_lang['propertyset_update'] = '編集';
 $_lang['propertysets'] = 'プロパティセットの管理';
-$_lang['propertysets_desc'] = 'ここではプロパティセットを管理できます。Click a set in the tree to load that set\'s properties into the grid, where you can modify them specifically. You can also right-click on property sets in the tree to attach or unattach elements for them.';
+$_lang['propertysets_desc'] = 'ここでは、設定値を柔軟に取り扱う「プロパティ」をまとめた、「プロパティセット」の管理を行います。<br /><br />ツリーからセットを選択すると、そのセットに含まれるプロパティが表示されます。また、セットのエレメントへの割り当てや解除は、ツリー上でセットを右クリックして表示されるメニューから行います。';

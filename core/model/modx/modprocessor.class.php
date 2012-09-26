@@ -705,6 +705,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
                 'data' => $this->object->toArray(),
                 $this->primaryKeyField => 0,
                 $this->objectType => &$this->object,
+                'object' => &$this->object, // for backwards compatibility, do not use this key
             ));
             if (is_array($OnBeforeFormSave)) {
                 $preventSave = false;
@@ -730,6 +731,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
                 'mode' => modSystemEvent::MODE_NEW,
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object, // for backwards compatibility, do not use this key
             ));
         }
     }

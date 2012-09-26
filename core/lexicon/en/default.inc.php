@@ -187,6 +187,7 @@ $_lang['ext_refresh'] = 'Refresh';
 $_lang['ext_showgroups'] = 'Show in Groups';
 $_lang['ext_sortasc'] = 'Sort Ascending';
 $_lang['ext_sortdesc'] = 'Sort Descending';
+$_lang['ext_splittip'] = 'Drag to resize.';
 $_lang['ext_tabclose'] = 'Close this tab';
 $_lang['ext_timeinv'] = '{0} is not a valid time';
 $_lang['ext_timemax'] = 'The time in this field must be equal to or before {0}';

@@ -7,7 +7,7 @@ class modSecurityAccessUserGroupSourceCreateProcessor extends modObjectCreatePro
     public $classKey = 'sources.modAccessMediaSource';
     public $languageTopics = array('source','access','user');
     public $permission = 'access_permissions';
-    public $elementType = 'source';
+    public $objectType = 'source';
 
     public function beforeSet() {
         $policyId = $this->getProperty('policy');

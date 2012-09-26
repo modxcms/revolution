@@ -6,6 +6,11 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#8754] Change elementType to objectType in various processors
+- [#4430] Return 404 error if static resource target is invalid
+- [#8767] Fix MODx.panel.Resource to inherit config.url
+- [#8545] Add ability to localize ExtJS pre-loading message
+- [#8089] Fix ability to disable drag/drop in Resource tree
 - [#7661] Prevent changing template from unsetting Empty Cache
 - [#8620] Enable type-ahead on User and Country combos
 - [#8529] Prevent empty multi-value TVs from saving as '||'
