@@ -78,11 +78,7 @@ $_lang['user_created_password_message'] = 'ユーザーを作成しました。 
 $_lang['user_confirm_remove'] = 'このユーザーを本当に削除しますか？';
 $_lang['user_country'] = '国';
 $_lang['user_dob'] = '誕生日';
-<<<<<<< HEAD
-$_lang['user_doesnt_exist'] = 'ユーザー登録がありません';
-=======
 $_lang['user_doesnt_exist'] = 'ユーザー登録がありません。';
->>>>>>> release-2.2
 $_lang['user_duplicate'] = 'ユーザーを複製';
 $_lang['user_edit_self_msg'] = 'ユーザー情報を変更した場合は、変更を反映させるためにログアウトして再度ログインしてください。<br />新しいパスワードの作成をチェックした場合、新しいパスワードがメール送信されます。</b>';
 $_lang['user_email'] = 'メールアドレス';
@@ -138,17 +134,10 @@ $_lang['user_group_document_group_err_not_found'] = 'そのユーザーグルー
 $_lang['user_group_document_group_err_remove'] = 'ユーザーグループをドキュメントグループから削除中にエラーが発生しました。';
 $_lang['user_group_err_already_exists'] = '同名のユーザーグループが存在します。';
 $_lang['user_group_err_create'] = 'ユーザーグループの作成中にエラーが発生しました。';
-<<<<<<< HEAD
-$_lang['user_group_err_nf'] = 'ユーザーグループが見つかりません';
-$_lang['user_group_err_not_found'] = 'ユーザーグループが見つかりません';
-$_lang['user_group_err_not_specified'] = 'ユーザーグループが指定されていません';
-$_lang['user_group_err_ns'] = 'ユーザーグループが指定されていません';
-=======
 $_lang['user_group_err_nf'] = 'ユーザーグループが見つかりません。';
 $_lang['user_group_err_not_found'] = 'ユーザーグループが見つかりません。';
 $_lang['user_group_err_not_specified'] = 'ユーザーグループが指定されていません。';
 $_lang['user_group_err_ns'] = 'ユーザーグループが指定されていません。';
->>>>>>> release-2.2
 $_lang['user_group_err_ns_name'] = 'このユーザーグループの名前を指定してください。';
 $_lang['user_group_err_remove'] = 'ユーザーグループの削除中にエラーが発生しました。';
 $_lang['user_group_err_remove_admin'] = '管理者のグループを削除できません。';
