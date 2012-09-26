@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- [#8754] Add missing objectType in user/create processor
+- [#8754] Change elementType to objectType in various processors
 - [#4430] Return 404 error if static resource target is invalid
 - [#8767] Fix MODx.panel.Resource to inherit config.url
 - [#8545] Add ability to localize ExtJS pre-loading message

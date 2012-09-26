@@ -20,7 +20,6 @@ class modTemplateCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modTemplate';
     public $languageTopics = array('template','category','element');
     public $permission = 'new_template';
-    public $elementType = 'template';
     public $objectType = 'template';
     public $beforeSaveEvent = 'OnBeforeTempFormSave';
     public $afterSaveEvent = 'OnTempFormSave';

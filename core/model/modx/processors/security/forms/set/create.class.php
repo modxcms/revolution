@@ -9,7 +9,7 @@ class modFormCustomizationSetCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modFormCustomizationSet';
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
-    public $elementType = 'set';
+    public $objectType = 'set';
 
     public function beforeSave() {
         $this->object->set('constraint_class','modResource');
