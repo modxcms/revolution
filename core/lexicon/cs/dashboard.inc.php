@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-10-23
+ * @updated 2012-09-27
  */
 // $_lang['active_users_none'] = 'No currently active users.';
 $_lang['active_users_none'] = 'V tuto chvíli není přihlášen žádný jiný uživatel.';
@@ -19,7 +19,7 @@ $_lang['add_user'] = 'Přidat uživatele';
 $_lang['create_resource'] = 'Vytvořit dokument';
 
 // $_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard'] = 'Ovládací panel';
+$_lang['dashboard'] = 'Nástěnka';
 
 // $_lang['documentation'] = 'Documentation';
 $_lang['documentation'] = 'Dokumentace';
