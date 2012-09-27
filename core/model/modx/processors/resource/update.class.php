@@ -505,6 +505,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             $tvs = $this->object->getTemplateVars();
             /** @var modTemplateVar $tv */
             foreach ($tvs as $tv) {
+                if (!$tv->checkResourceGroupAccess()) {
+                    continue;
+                }
+
                 $tvKey = 'tv'.$tv->get('id');
                 $value = $this->getProperty($tvKey,null);
                 /* set value of TV */
