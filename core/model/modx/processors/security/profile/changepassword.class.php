@@ -30,10 +30,15 @@ class modProfileChangePasswordProcessor extends modProcessor {
 
         /* log manager action */
         $this->logManagerAction();
-
-        return $this->success($this->modx->lexicon('user_password_changed',array(
-            'password' => $this->getProperty('password_new'),
-        )));
+        
+        if ($this->getProperty('password_method_screen')) {
+            return $this->success($this->modx->lexicon('user_password_changed',array(
+                'password' => $this->getProperty('password_new'),
+            )));
+        }
+        else {
+            return $this->success('',$this->modx->user);
+        }
     }
 
     public function validate() {
