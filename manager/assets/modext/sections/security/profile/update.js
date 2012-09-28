@@ -217,6 +217,14 @@ MODx.panel.ChangeProfilePassword = function(config) {
             ,inputType: 'password'
             ,maxLength: 255
             ,anchor: '100%'
+        },{
+            xtype: 'xcheckbox'
+            ,boxLabel: _('password_method_screen')
+            ,name: 'password_method_screen'
+            ,id: 'modx-password-method-screen'
+            ,inputValue: true
+            ,hideLabel: true
+            ,checked: true
         }]
         ,buttons: [{
             text: _('save')
