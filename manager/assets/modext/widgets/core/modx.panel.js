@@ -158,6 +158,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         ctype = 'check';
                         break;
                 }
+                if (cmp.xtype.indexOf("modx-combo")==0) {
+                    ctype = 'select';
+                }
                 cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
             }
         }
