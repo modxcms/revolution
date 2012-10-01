@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#8186] Apply FC rules to Resources when changing Template
 - [#8790] Add ability to hide changed password in Update Profile
 - [#7551] Ensure static element path is not existing directory
 - [#7631] Fix duplicate beforeSave() in modObjectCreateProcessor::process()
