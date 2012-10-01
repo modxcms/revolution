@@ -86,6 +86,9 @@ class ResourceCreateManagerController extends ResourceManagerController {
         /* check permissions */
         $this->setPermissions();
 
+        /* initialize FC rules */
+        $overridden = array();
+        
         /* set default template */
         if (empty($reloadData)) {
             $defaultTemplate = $this->getDefaultTemplate();
@@ -106,6 +109,9 @@ class ResourceCreateManagerController extends ResourceManagerController {
             $this->parent->set('template',$defaultTemplate);
             $this->resource->set('template',$defaultTemplate);
             $this->getResourceGroups();
+            
+            /* check FC rules */
+            $overridden = $this->checkFormCustomizationRules($this->parent,true);
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = array();
@@ -121,11 +127,13 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 }
             }
             unset($this->resourceArray['resource_groups']);
-            $this->resource->set('template', $reloadData['template']);
+            $this->resource->fromArray($reloadData); // We should have in Reload Data everything needed to do form customization checkings
+            
+            /* check FC rules */
+            $overridden = $this->checkFormCustomizationRules($this->resource,true); // This "forParent" doesn't seems logical for me, but it seems that all "resource/create" rules require this (see /core/model/modx/processors/security/forms/set/import.php for example)
         }
 
-        /* handle FC rules */
-        $overridden = $this->checkFormCustomizationRules($this->parent,true);
+        /* apply FC rules */
         $this->resourceArray = array_merge($this->resourceArray,$overridden);
 
         /* handle checkboxes and defaults */
