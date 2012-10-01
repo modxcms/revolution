@@ -187,6 +187,7 @@ $_lang['ext_refresh'] = 'Actualiser';
 $_lang['ext_showgroups'] = 'Afficher par groupe';
 $_lang['ext_sortasc'] = 'Tri croissant';
 $_lang['ext_sortdesc'] = 'Tri décroissant';
+$_lang['ext_splittip'] = 'Redimensionner';
 $_lang['ext_tabclose'] = 'Fermer l\'onglet';
 $_lang['ext_timeinv'] = '{0} n\'est pas une heure valide';
 $_lang['ext_timemax'] = 'L\'heure indiquée dans ce champ doit être inférieure ou égale à {0}';
