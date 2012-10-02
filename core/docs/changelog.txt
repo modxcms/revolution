@@ -6,6 +6,9 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.5-pl (October 2, 2012)
+====================================
+- [#8753] Fix variable name in security/user/removemultiple processor
 - [#7654] Fix Update processor for ResourceGroup-restricted TVs
 - [#8196] Enable save button when combo selections are made
 - [#8186] Apply FC rules to Resources when changing Template

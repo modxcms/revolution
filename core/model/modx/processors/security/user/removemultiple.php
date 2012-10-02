@@ -20,7 +20,7 @@ $OnBeforeUserFormDelete = $modx->invokeEvent('OnBeforeUserFormDelete',array(
 ));
 $canRemove = $this->processEventResponse($OnBeforeUserFormDelete);
 if (!empty($canRemove)) {
-    return $modx->error->failure($canSave);
+    return $modx->error->failure($canRemove);
 }
 
 /* loop through ids */
