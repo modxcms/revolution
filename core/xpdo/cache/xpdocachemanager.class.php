@@ -230,7 +230,12 @@ class xPDOCacheManager {
                 $attempts = (integer) $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1);
                 $attemptDelay = (integer) $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000);
                 while (!$locked && ($attempts === 0 || $attempt <= $attempts)) {
-                    $locked = flock($file, LOCK_EX | LOCK_NB);
+                    if ($this->getOption('use_flock', $options, true)) {
+                        $locked = flock($file, LOCK_EX | LOCK_NB);
+                    } else {
+                        $lockFile = $this->lockFile($filename, $options);
+                        $locked = $lockFile != false;
+                    }
                     if (!$locked && $attemptDelay > 0 && ($attempts === 0 || $attempt < $attempts)) {
                         usleep($attemptDelay);
                     }
@@ -240,12 +245,56 @@ class xPDOCacheManager {
                     fseek($file, 0);
                     ftruncate($file, 0);
                     $written= fwrite($file, $content);
-                    flock($file, LOCK_UN);
+                    if ($this->getOption('use_flock', $options, true)) {
+                        flock($file, LOCK_UN);
+                    } else {
+                        $this->unlockFile($filename, $options);
+                    }
                 }
             }
             @fclose($file);
         }
         return ($written !== false);
+    }
+
+    /**
+     * Add an exclusive lock to a file for atomic write operations in multi-threaded environments.
+     *
+     * xPDO::OPT_USE_FLOCK must be set to false (or 0) or xPDO will assume flock is reliable.
+     *
+     * @param string $file The name of the file to lock.
+     * @param array $options An array of options for the process.
+     * @return boolean True only if the file is locked by the current PID.
+     */
+    public function lockFile($file, array $options = array()) {
+        $locked = false;
+        $lockFile = $file . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
+        if (!file_exists($lockFile)) {
+            $myPID = getmypid();
+            $tmpLockFile = dirname($file) . '/' . uniqid(basename($file) . '-') . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
+            if (file_put_contents($tmpLockFile, $myPID, LOCK_EX)) {
+                if (rename($tmpLockFile, $lockFile) && is_readable($lockFile)) {
+                    $lockPID = @file_get_contents($lockFile);
+                    if (!empty($lockPID) && (integer)$lockPID === $myPID) {
+                        $locked = true;
+                    }
+                } else {
+                    @unlink($tmpLockFile);
+                }
+            }
+        }
+        return $locked;
+    }
+
+    /**
+     * Release an exclusive lock on a file created by lockFile().
+     *
+     * @param string $file The name of the file to unlock.
+     * @param array $options An array of options for the process.
+     */
+    public function unlockFile($file, array $options = array()) {
+        $lockFilename = $file . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
+        @unlink($lockFilename);
     }
 
     /**

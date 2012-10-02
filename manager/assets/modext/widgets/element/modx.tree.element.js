@@ -89,43 +89,38 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             r['parent'] = this.cm.activeNode.attributes.data.id;
         }
 
-        if (!this.windows.createCategory) {
-            this.windows.createCategory = MODx.load({
-                xtype: 'modx-window-category-create'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:function() {
-                        var node = (this.cm.activeNode) ? this.cm.activeNode.id : 'n_category';
-                        this.refreshNode(node,true);
-                    },scope:this}
-                }
-            });
-        }
-        this.windows.createCategory.reset();
-        this.windows.createCategory.setValues(r);
-        this.windows.createCategory.show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-category-create'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {
+                    var node = (this.cm.activeNode) ? this.cm.activeNode.id : 'n_category';
+                    this.refreshNode(node,true);
+                },scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
     }
 
     ,renameCategory: function(itm,e) {
         var r = this.cm.activeNode.attributes.data;
-        if (!this.windows.renameCategory) {
-            this.windows.renameCategory = MODx.load({
-                xtype: 'modx-window-category-rename'
-                ,record: r
-                ,listeners: {
-                    'success':{fn:function(r) {
-                        var c = r.a.result.object;
-                        var n = this.cm.activeNode;
-                        n.setText(c.category+' ('+c.id+')');
-                        Ext.get(n.getUI().getEl()).frame();
-                        n.attributes.data.id = c.id;
-                        n.attributes.data.category = c.category;
-                    },scope:this}
-                }
-            });
-        }
-        this.windows.renameCategory.setValues(r);
-        this.windows.renameCategory.show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-category-rename'
+            ,record: r
+            ,listeners: {
+                'success':{fn:function(r) {
+                    var c = r.a.result.object;
+                    var n = this.cm.activeNode;
+                    n.setText(c.category+' ('+c.id+')');
+                    Ext.get(n.getUI().getEl()).frame();
+                    n.attributes.data.id = c.id;
+                    n.attributes.data.category = c.category;
+                },scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
     }
 		
     ,removeCategory: function(itm,e) {
@@ -152,32 +147,15 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             ,type: type
             ,name: _('duplicate_of',{name: this.cm.activeNode.attributes.name})
         };
-        if (!this.windows.duplicateElement) {
-            this.windows.duplicateElement = MODx.load({
-                xtype: 'modx-window-element-duplicate'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
-                }
-            });
-        } else {
-            var u = MODx.config.connectors_url+'element/'+type+'.php';
-            this.windows.duplicateElement.fp.getForm().url = u;
-            var dv = this.windows.duplicateElement.fp.getForm().findField('duplicateValues');
-            if (dv) {
-                if (type != 'tv') {
-                    dv.hide();
-                    var d = dv.getEl().up('.x-form-item');
-                    if (d) { d.setDisplayed(false); }
-                } else {
-                    dv.show();
-                    var d = dv.getEl().up('.x-form-item');
-                    if (d) { d.setDisplayed(true); }
-                }
+        var w = MODx.load({
+            xtype: 'modx-window-element-duplicate'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
             }
-        }
-        this.windows.duplicateElement.setValues(r);
-        this.windows.duplicateElement.show(e.target);
+        });
+        w.show(e.target);
     }
 	
     ,removeElement: function(itm,e) {
@@ -250,11 +228,11 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             ,record: r
             ,listeners: {
                 'success':{fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
             }
         });
         w.setValues(r);
         w.show(e.target);
-        w.on('hide',function() {delete w;},this);
     }
     
     ,quickUpdate: function(itm,e,type) {
@@ -273,6 +251,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                             'success':{fn:function(r) {
                                 this.refreshNode(this.cm.activeNode.id);
                             },scope:this}
+                            ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
                     w.setValues(r.object);

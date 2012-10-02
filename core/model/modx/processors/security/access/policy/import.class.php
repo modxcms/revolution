@@ -32,7 +32,8 @@ class modAccessPolicyImportProcessor extends modObjectImportProcessor {
     public function addPermissions() {
         $permissions = array();
         foreach ($this->xml->permissions->permission as $permissionXml) {
-            $permissions[(string)$permissionXml->name] = (boolean)$permissionXml->value;
+            $v = (integer) $permissionXml->value;
+            $permissions[(string)$permissionXml->name] = (!empty($v) ? true : false);
         }
         $this->object->set('data',$permissions);
     }

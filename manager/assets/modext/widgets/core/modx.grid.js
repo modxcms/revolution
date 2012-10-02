@@ -5,7 +5,7 @@ MODx.grid.Grid = function(config) {
     this.config = config;
     this._loadStore();
     this._loadColumnModel();
-	
+
     Ext.applyIf(config,{
         store: this.store
         ,cm: this.cm
@@ -40,15 +40,7 @@ MODx.grid.Grid = function(config) {
             ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
             ,width: 40
             ,listeners: {
-                'change': {fn:function(tf,nv,ov) {
-                    if (Ext.isEmpty(nv)) return false;
-                    nv = parseInt(nv);
-                    this.getBottomToolbar().pageSize = nv;
-                    this.store.load({params:{
-                        start:0
-                        ,limit: nv
-                    }});
-                },scope:this}
+                'change': {fn:this.onChangePerPage,scope:this}
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
@@ -74,18 +66,18 @@ MODx.grid.Grid = function(config) {
     }
     if (config.grouping) {
         Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView({ 
-            forceFit: true 
+          view: new Ext.grid.GroupingView({
+            forceFit: true
             ,scrollOffset: 0
             ,groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
                 +(config.pluralText || _('records')) + '" : "'
-                +(config.singleText || _('record'))+'"]})' 
+                +(config.singleText || _('record'))+'"]})'
           })
         });
     }
     if (config.tbar) {
-        for (var i = 0;i<config.tbar.length;i++) {
-            var itm = config.tbar[i];
+        for (var ix = 0;ix<config.tbar.length;ix++) {
+            var itm = config.tbar[ix];
             if (itm.handler && typeof(itm.handler) == 'object' && itm.handler.xtype) {
                 itm.handler = this.loadWindow.createDelegate(this,[itm.handler],true);
             }
@@ -96,12 +88,12 @@ MODx.grid.Grid = function(config) {
     this._loadMenu(config);
     this.addEvents('beforeRemoveRow','afterRemoveRow','afterAutoSave');
     if (!config.preventRender) { this.render(); }
-	
-    this.on('rowcontextmenu',this._showMenu,this);    
+
+    this.on('rowcontextmenu',this._showMenu,this);
     if (config.autosave) {
         this.on('afteredit',this.saveRecord,this);
     }
-	
+
     if (config.paging && config.grouping) {
         this.getBottomToolbar().bind(this.store);
     }
@@ -125,7 +117,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             this.getView().refresh(false);
         }
     }
-    
     ,saveRecord: function(e) {
         e.record.data.menu = null;
         var p = this.config.saveParams || {};
@@ -151,7 +142,16 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 },scope:this}
             }
         });
-        return true;
+    }
+
+    ,onChangePerPage: function(tf,nv) {
+        if (Ext.isEmpty(nv)) return false;
+        nv = parseInt(nv);
+        this.getBottomToolbar().pageSize = nv;
+        this.store.load({params:{
+            start:0
+            ,limit: nv
+        }});
     }
     
     ,loadWindow: function(btn,e,win,or) {
@@ -327,9 +327,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
     
     ,addContextMenuItem: function(items) {
-        var a = items, l = a.length;
+        var l = items.length;
         for(var i = 0; i < l; i++) {
-            var options = a[i];
+            var options = items[i];
             
             if (options == '-') {
                 this.menu.add('-');
@@ -342,21 +342,19 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     h = this.loadWindow.createDelegate(this,[h],true);
                 }
             } else {
-                h = function(itm,e) {
+                h = function(itm) {
                     var o = itm.options;
                     var id = this.menu.record.id;
                     if (o.confirm) {
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
-                                var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = 'index.php?id='+id+'&'+a;
-                                location.href = s;
+                                var act = Ext.urlEncode(o.params || {action: o.action});
+                                location.href = 'index.php?id='+id+'&'+act;
                             }
                         },this);
                     } else {
-                        var a = Ext.urlEncode(o.params || {action: o.action});
-                        var s = 'index.php?id='+id+'&'+a;
-                        location.href = s;
+                        var act = Ext.urlEncode(o.params || {action: o.action});
+                        location.href = 'index.php?id='+id+'&'+act;
                     }
                 };
             }
@@ -374,9 +372,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.getStore().reload();
     }
 
-    ,rendPassword: function(v,md) {
-        var z = ''
-        for (i=0;i<v.length;i++) {
+    ,rendPassword: function(v) {
+        var z = '';
+        for (var i=0;i<v.length;i++) {
             z = z+'*';
         }
         return z;
@@ -621,9 +619,9 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
     }
     
     ,addContextMenuItem: function(items) {
-        var a = items, l = a.length;
+        var l = items.length;
         for(var i = 0; i < l; i++) {
-            var options = a[i];
+            var options = items[i];
             
             if (options == '-') {
                 this.menu.add('-');
@@ -636,7 +634,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                     h = this.loadWindow.createDelegate(this,[h],true);
                 }
             } else {
-                h = function(itm,e) {
+                h = function(itm) {
                     var o = itm.options;
                     var id = this.menu.record.id;
                     var w = Ext.get('modx_content');
@@ -731,9 +729,9 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         }
     }
 
-    ,rendPassword: function(v,md) {
+    ,rendPassword: function(v) {
         var z = '';
-        for (i=0;i<v.length;i++) {
+        for (var i=0;i<v.length;i++) {
             z = z+'*';
         }
         return z;

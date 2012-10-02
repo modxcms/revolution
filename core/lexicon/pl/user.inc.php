@@ -1,14 +1,14 @@
 <?php
 /**
-* User Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * User Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['active'] = 'Active';
-$_lang['active'] = 'Konto aktywne'; #
+$_lang['active'] = 'Włączone'; #
 
 #$_lang['address'] = 'Address';
 $_lang['address'] = 'Adres'; #
@@ -76,8 +76,11 @@ $_lang['password_notification'] = 'Password Notification';
 #$_lang['password_old'] = 'Old Password';
 $_lang['password_old'] = 'Bieżące hasło'; #
 
+#$_lang['primary_group'] = 'Primary Group';
+$_lang['primary_group'] = 'Grupa główna'; #
+
 #$_lang['profile_recent_resources'] = 'Recent Resources';
-$_lang['profile_recent_resources'] = 'Poprzednie dokumenty'; #
+$_lang['profile_recent_resources'] = 'Ostatnio edytowane'; #
 
 #$_lang['profile_recent_resources_desc'] = 'This is a list of your most recently edited Resources.';
 $_lang['profile_recent_resources_desc'] = 'To jest lista zasobów, które zostały przez Ciebie poprzednio utworzone lub zmienione:'; #
@@ -90,6 +93,15 @@ $_lang['role'] = 'Role';
 
 #$_lang['role_create'] = 'Create Role';
 $_lang['role_create'] = 'Create Role';
+
+#$_lang['role_desc_authority'] = 'The Authority level of the role. Lower Authority levels are stronger, and inherit the Permissions of Roles with higher authorities in the groups they are assigned to.';
+$_lang['role_desc_authority'] = 'The Authority level of the role. Lower Authority levels are stronger, and inherit the Permissions of Roles with higher authorities in the groups they are assigned to.';
+
+#$_lang['role_desc_name'] = 'A name for the Role, such as Content Editor, Publisher, System Administrator, etc.';
+$_lang['role_desc_name'] = 'A name for the Role, such as Content Editor, Publisher, System Administrator, etc.';
+
+#$_lang['role_desc_description'] = 'A short description of the Role.';
+$_lang['role_desc_description'] = 'A short description of the Role.';
 
 #$_lang['role_err_ae'] = 'A role already exists with that name.';
 $_lang['role_err_ae'] = 'A role already exists with that name.';
@@ -118,11 +130,11 @@ $_lang['role_err_remove'] = 'An error occurred while trying to remove the role.'
 #$_lang['role_err_remove_admin'] = 'The role you are trying to delete is the admin role. This role cannot be deleted!';
 $_lang['role_err_remove_admin'] = 'The role you are trying to delete is the admin role. This role cannot be deleted!';
 
-#$_lang['role_remove'] = 'Remove Role';
-$_lang['role_remove'] = 'Remove Role';
+#$_lang['role_remove'] = 'Delete Role';
+$_lang['role_remove'] = 'Delete Role';
 
-#$_lang['role_remove_confirm'] = 'Are you sure you want to remove this role?';
-$_lang['role_remove_confirm'] = 'Are you sure you want to remove this role?';
+#$_lang['role_remove_confirm'] = 'Are you sure you want to delete this role?';
+$_lang['role_remove_confirm'] = 'Are you sure you want to delete this role?';
 
 #$_lang['roles'] = 'Roles';
 $_lang['roles'] = 'Roles';
@@ -198,6 +210,9 @@ $_lang['user_dob'] = 'Data urodzenia'; #
 
 #$_lang['user_doesnt_exist'] = 'User does not exist';
 $_lang['user_doesnt_exist'] = 'User does not exist';
+
+#$_lang['user_duplicate'] = 'Duplicate User';
+$_lang['user_duplicate'] = 'Duplicate User';
 
 #$_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
@@ -331,6 +346,18 @@ $_lang['user_group_create'] = 'Create User Group';
 #$_lang['user_group_id'] = 'UG ID';
 $_lang['user_group_id'] = 'UG ID';
 
+#$_lang['user_group_desc_name'] = 'The name of the User Group';
+$_lang['user_group_desc_name'] = 'The name of the User Group';
+
+#$_lang['user_group_desc_description'] = 'A short description of the User Group';
+$_lang['user_group_desc_description'] = 'A short description of the User Group';
+
+#$_lang['user_group_desc_parent'] = 'The parent group of this group. Used for organizational purposes.';
+$_lang['user_group_desc_parent'] = 'The parent group of this group. Used for organizational purposes.';
+
+#$_lang['user_group_desc_dashboard'] = 'The Dashboard that members of this Group (who have this Group as their Primary Group) will use.';
+$_lang['user_group_desc_dashboard'] = 'The Dashboard that members of this Group (who have this Group as their Primary Group) will use.';
+
 #$_lang['user_group_document_group_err_already_exists'] = 'The user group is already attached to that document group.';
 $_lang['user_group_document_group_err_already_exists'] = 'The user group is already attached to that document group.';
 
@@ -360,6 +387,9 @@ $_lang['user_group_err_not_specified'] = 'No user group specified!';
 
 #$_lang['user_group_err_ns'] = 'User group not specified!';
 $_lang['user_group_err_ns'] = 'User group not specified!';
+
+#$_lang['user_group_err_ns_name'] = 'Please specify a name for this user group.';
+$_lang['user_group_err_ns_name'] = 'Please specify a name for this user group.';
 
 #$_lang['user_group_err_remove'] = 'An error occurred while trying to remove the user group.';
 $_lang['user_group_err_remove'] = 'An error occurred while trying to remove the user group.';
@@ -394,11 +424,11 @@ $_lang['user_group_new'] = 'New User Group';
 #$_lang['user_group_parent'] = 'Parent Group';
 $_lang['user_group_parent'] = 'Parent Group';
 
-#$_lang['user_group_remove'] = 'Remove User Group';
-$_lang['user_group_remove'] = 'Remove User Group';
+#$_lang['user_group_remove'] = 'Delete User Group';
+$_lang['user_group_remove'] = 'Delete User Group';
 
-#$_lang['user_group_remove_confirm'] = 'Are you sure you want to remove this User Group?';
-$_lang['user_group_remove_confirm'] = 'Are you sure you want to remove this User Group?';
+#$_lang['user_group_remove_confirm'] = 'Are you sure you want to delete this User Group?';
+$_lang['user_group_remove_confirm'] = 'Are you sure you want to delete this User Group?';
 
 #$_lang['user_group_untitled'] = 'Untitled User Group';
 $_lang['user_group_untitled'] = 'Untitled User Group';
@@ -408,6 +438,12 @@ $_lang['user_group_update'] = 'Update User Group';
 
 #$_lang['user_group_user_add'] = 'Add User to Group';
 $_lang['user_group_user_add'] = 'Add User to Group';
+
+#$_lang['user_group_user_add_user_desc'] = 'The username of the User to add to the User Group';
+$_lang['user_group_user_add_user_desc'] = 'The username of the User to add to the User Group';
+
+#$_lang['user_group_user_add_role_desc'] = 'The Role that the User should have in the Group. This may affect the Permissions that the User is granted.';
+$_lang['user_group_user_add_role_desc'] = 'The Role that the User should have in the Group. This may affect the Permissions that the User is granted.';
 
 #$_lang['user_group_user_remove'] = 'Remove User from Group';
 $_lang['user_group_user_remove'] = 'Remove User from Group';
@@ -475,17 +511,17 @@ $_lang['user_profile_err_nf'] = 'FATAL ERROR: User profile not found.';
 #$_lang['user_profile_err_save'] = 'An error occurred while attempting to save the user attributes.';
 $_lang['user_profile_err_save'] = 'An error occurred while attempting to save the user attributes.';
 
-#$_lang['user_remove'] = 'Remove User';
-$_lang['user_remove'] = 'Remove User';
+#$_lang['user_remove'] = 'Delete User';
+$_lang['user_remove'] = 'Delete User';
 
-#$_lang['user_remove_confirm'] = 'Are you sure you want to remove this user? This is irreversible!';
-$_lang['user_remove_confirm'] = 'Are you sure you want to remove this user? This is irreversible!';
+#$_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
+$_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
 
-#$_lang['user_remove_multiple'] = 'Remove Multiple Users';
-$_lang['user_remove_multiple'] = 'Remove Multiple Users';
+#$_lang['user_remove_multiple'] = 'Delete Multiple Users';
+$_lang['user_remove_multiple'] = 'Delete Multiple Users';
 
-#$_lang['user_remove_multiple_confirm'] = 'Are you sure you want to remove these users? This is irreversible!';
-$_lang['user_remove_multiple_confirm'] = 'Are you sure you want to remove these users? This is irreversible!';
+#$_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
+$_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
 
 #$_lang['user_remote_data_msg'] = 'Edit remote user data here.';
 $_lang['user_remote_data_msg'] = 'Edit remote user data here.';
@@ -507,6 +543,12 @@ $_lang['user_settings_desc'] = 'Here you can change specific settings for the us
 
 #$_lang['user_state'] = 'State';
 $_lang['user_state'] = 'Województwo'; #
+
+#$_lang['user_sudo'] = 'Sudo User';
+$_lang['user_sudo'] = 'Sudo User';
+
+#$_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
+$_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
 
 #$_lang['user_title'] = 'Create/Edit user';
 $_lang['user_title'] = 'Create/Edit user';

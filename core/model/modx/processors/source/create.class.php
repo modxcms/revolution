@@ -9,7 +9,7 @@ class modSourceCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'sources.modMediaSource';
     public $languageTopics = array('source');
     public $permission = 'source_save';
-    public $elementType = 'source';
+    public $objectType = 'source';
     public $beforeSaveEvent = 'OnMediaSourceBeforeFormSave';
     public $afterSaveEvent = 'OnMediaSourceFormSave';
 

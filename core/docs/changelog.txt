@@ -2,6 +2,47 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.5-pl (October 2, 2012)
+====================================
+- [#8753] Fix variable name in security/user/removemultiple processor
+- [#7654] Fix Update processor for ResourceGroup-restricted TVs
+- [#8196] Enable save button when combo selections are made
+- [#8186] Apply FC rules to Resources when changing Template
+- [#8790] Add ability to hide changed password in Update Profile
+- [#7551] Ensure static element path is not existing directory
+- [#7631] Fix duplicate beforeSave() in modObjectCreateProcessor::process()
+- [#8754] Change elementType to objectType in various processors
+- [#4430] Return 404 error if static resource target is invalid
+- [#8767] Fix MODx.panel.Resource to inherit config.url
+- [#8545] Add ability to localize ExtJS pre-loading message
+- [#8089] Fix ability to disable drag/drop in Resource tree
+- [#7661] Prevent changing template from unsetting Empty Cache
+- [#8620] Enable type-ahead on User and Country combos
+- [#8529] Prevent empty multi-value TVs from saving as '||'
+- [#8018] Fix file creation/editing on non-default Media Source
+- [#8556] Ensure regClient functions inject only once
+- CSS Style fixes for IE 9 (8, 7)
+- [#8560] Fix Context Admin ACL automation and use Context Policy
+- [#8432] Package Browser tree not reloading on Provider change
+- [#8482] RTE Output Option for TVs does not render on frontend
+- Add Quick Create/Update File feature in Files tab
+- [#6522] Retain page in Package Manager after install/upgrade
+- [#7630] Save modUserGroupMember rank upon creation
+- [#8420] Provide flock-independent file locking to avoid cache corruption
+- [#7498] Fix Media Source error reporting for file uploads
+- [#8299] Clear action_map (and menus) in system/action create/update processors
+- [#8168] Fix JS error when compress_js=Off and compress_js_groups=On
+- [#8341] Allow Resource data pages to be extended by CRCs
+- [#6695] Close sessions before min scripts terminate
+- [#6918] Fix importing access policy items always being checked
+- [#8329] Fix syncsite checkbox being unchecked by default on resource/create
+- [#8296] Fix function passed by reference in ellipsis output filter
+- Allow numeric value in modWebLink to redirect to Resource by id
+- [#7763] Fix additional Media Source path issues with static elements
+- [#8208] Fix modDbRegister->read() with include_keys option
+- Fix PropertySet switching from Element create/update controllers
+- [#7392] Get correct modMediaSource derivative in modParser->getElement()
+
 MODX Revolution 2.2.4-pl (June 14, 2012)
 ====================================
 - [#8105], [#8051] Fix modFileHandler::sanitizePath() infinite recursion

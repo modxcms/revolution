@@ -14,7 +14,7 @@ class modUserGroupCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modUserGroup';
     public $languageTopics = array('user');
     public $permission = 'usergroup_new';
-    public $elementType = 'user_group';
+    public $objectType = 'user_group';
     public $beforeSaveEvent = 'OnUserGroupBeforeFormSave';
     public $afterSaveEvent = 'OnUserGroupFormSave';
 

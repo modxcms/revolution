@@ -13,7 +13,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modUser';
     public $languageTopics = array('user');
     public $permission = 'new_user';
-    public $elementType = 'user';
+    public $objectType = 'user';
     public $beforeSaveEvent = 'OnBeforeUserFormSave';
     public $afterSaveEvent = 'OnUserFormSave';
 
@@ -88,6 +88,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
         if ($groups !== null) {
             $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
             $groupsAdded = array();
+            $idx = 0;
             foreach ($groups as $group) {
                 if (in_array($group['usergroup'],$groupsAdded)) continue;
 
@@ -96,9 +97,11 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
                 $membership->set('user_group',$group['usergroup']);
                 $membership->set('role',$group['role']);
                 $membership->set('member',$this->object->get('id'));
+                $membership->set('rank',isset($group['rank']) ? $group['rank'] : $idx);
                 $membership->save();
                 $memberships[] = $membership;
                 $groupsAdded[] = $group['usergroup'];
+                $idx++;
             }
         }
         return $memberships;

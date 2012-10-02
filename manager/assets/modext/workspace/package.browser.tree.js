@@ -1,6 +1,6 @@
 /**
  * The tree panel holding the repository categories
- * 
+ *
  * @class MODx.tree.PackageBrowserTree
  * @extends MODx.tree.Tree
  * @param {Object} config An object of options.
@@ -13,7 +13,7 @@ MODx.tree.PackageBrowserTree = function(config) {
 		,baseParams: {
 			action: 'getNodes'
 			,provider: MODx.provider
-		}	
+		}
 		,loaderConfig: {
             preloadChildren: false
         }
@@ -40,7 +40,7 @@ MODx.tree.PackageBrowserTree = function(config) {
 				,specialkey: function( form, e ) {
 					if(e.getKey() == Ext.EventObject.ENTER){
 						form.blur();
-					}		
+					}
 				}
 				,scope:this
 			}
@@ -52,14 +52,24 @@ MODx.tree.PackageBrowserTree = function(config) {
 };
 Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 	initEvents: function(){
-		MODx.tree.PackageBrowserTree.superclass.initEvents.call(this);		
+		MODx.tree.PackageBrowserTree.superclass.initEvents.call(this);
 		this.getRootNode().expand();
 		this.getProviderInfos(MODx.provider);
 	}
-	
+
+    ,onLoad: function(ldr,node,resp) {
+        var r = Ext.decode(resp.responseText);
+        if (r.message) {
+            MODx.msg.alert(_('error'), r.message, function() {
+                location.href = location.href;
+            });
+            return false;
+        }
+    }
+
 	,changeGProvider: false
 	,changePProvider: false
-	
+
 	,getProviderInfos: function(pv){
 		MODx.Ajax.request({
             url: this.config.url
@@ -75,8 +85,8 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
         });
 	}
-	
-	
+
+
 	,setProvider: function(pv){
 	    if (Ext.isEmpty(pv) || pv == undefined) { pv = MODx.defaultProvider; }
 	    this.getLoader().baseParams.provider = pv;
@@ -84,7 +94,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 		this.changeGProvider = true;
 		this.changePProvider = true;
 	}
-	
+
 	,onNodeClick: function(n,e) {
 		switch (n.attributes.type) {
 			case 'repository':
@@ -93,12 +103,12 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 				r.updateDetail(n.attributes.data);
 				break;
 			case 'tag':
-				var tp = n.parentNode;				
-				if (tp && tp.attributes.data.templated == 1) {		
+				var tp = n.parentNode;
+				if (tp && tp.attributes.data.templated == 1) {
 					var p = Ext.getCmp('modx-package-browser-thumbs-view');
                     p.store.baseParams.tag = n.attributes.data.id;
 					if(this.changePProvider){
-						p.store.baseParams.provider = MODx.provider; 
+						p.store.baseParams.provider = MODx.provider;
 						this.changePProvider = false;
 					}
                     p.run();
@@ -108,13 +118,13 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 					grid.getStore().setBaseParam('tag', n.attributes.data.id);
 					grid.getStore().setBaseParam('query', '');
 					if(this.changeGProvider){
-						grid.getStore().setBaseParam('provider', MODx.provider); 
+						grid.getStore().setBaseParam('provider', MODx.provider);
 						grid.getStore().removeAll();
 						this.changeGProvider = false;
 					}
-					grid.getStore().load();		
+					grid.getStore().load();
 					grid.activate(n.attributes.data.name);
-				}				
+				}
 				break;
 			default:
 				var home = Ext.getCmp('modx-package-browser-home');
@@ -123,7 +133,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 				break;
 		}
 	}
-	
+
 	,onBeforeLoad: function(node) {
 		if(node.attributes.type == 'repository'){
 			this.loader.baseParams.type = 'repository';
@@ -132,19 +142,20 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 			this.getSelectionModel().select(this.root.childNodes[0]);
 		}
 	}
-	
-	,searchFor: function(name){	
+
+	,searchFor: function(name){
 		var f = Ext.getCmp('package-browser-search-fld');
 		f.setValue(name);
 		this.search(f, name);
 	}
-	
+
 	,search: function(tf, newValue) {
-        var nv = newValue || tf;
-		
+        var nv = newValue || tf.originalValue;
+
 		var grid = Ext.getCmp('modx-package-browser-grid');
 		grid.getStore().setBaseParam('tag', '');
 		grid.getStore().setBaseParam('query', nv);
+		grid.getStore().setBaseParam('provider', MODx.provider);
 		grid.getStore().load();
 		grid.activate(_('search'), nv);
         return true;

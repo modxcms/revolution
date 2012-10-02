@@ -173,6 +173,8 @@ MODx.window.InsertElement = function(config) {
         title: _('select_el_opts')
         ,id: 'modx-window-insert-element' 
         ,width: 600
+        ,labelAlign: 'left'
+        ,labelWidth: 160
         ,url: MODx.config.connectors_url+'element/template.php'
         ,action: 'create'
         ,fields: [{
@@ -227,13 +229,18 @@ MODx.window.InsertElement = function(config) {
             ,autoScroll: true
             ,items: [{
                 html: '<div id="modx-iprops-form"></div>'
+                ,id: 'modx-iprops-container'
                 ,height: 400
                 ,autoScroll: true
             }]
         }]
     });
     MODx.window.InsertElement.superclass.constructor.call(this,config);
-    this.on('show',function() { this.center(); },this);
+    this.on('show',function() {
+        this.center();
+        this.mask = new Ext.LoadMask(Ext.get('modx-iprops-container'), {msg:_('loading')});
+        this.mask.show();
+    },this);
 };
 Ext.extend(MODx.window.InsertElement,MODx.Window,{
     changePropertySet: function(cb) {
@@ -254,6 +261,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             ,scope: this
         });
         this.modps = [];
+        this.mask.show();
     }
     ,createStore: function(data) {
         return new Ext.data.SimpleStore({
@@ -262,6 +270,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         });
     }
     ,onPropFormLoad: function(el,s,r) {
+        this.mask.hide();
         var vs = Ext.decode(r.responseText);
         if (!vs || vs.length <= 0) { return false; }
         for (var i=0;i<vs.length;i++) {

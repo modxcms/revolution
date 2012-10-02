@@ -1,11 +1,11 @@
 <?php
 /**
-* Context Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Context Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['context'] = 'Context';
 $_lang['context'] = 'Context';
@@ -64,8 +64,8 @@ $_lang['context_management_message'] = 'Manage site Contexts.';
 #$_lang['context_refresh'] = 'Refresh Context';
 $_lang['context_refresh'] = 'Refresh Context';
 
-#$_lang['context_remove'] = 'Remove Context';
-$_lang['context_remove'] = 'Remove Context';
+#$_lang['context_remove'] = 'Delete Context';
+$_lang['context_remove'] = 'Delete Context';
 
 #$_lang['context_remove_confirm'] = 'Are you sure you want to remove this Context? This is permanent and irreversible.';
 $_lang['context_remove_confirm'] = 'Are you sure you want to remove this Context? This is permanent and irreversible.';

@@ -5,10 +5,10 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-09-21
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
- * @author honda http://kogs.org
  */
 $_lang['access'] = 'アクセス';
 $_lang['cache_output'] = 'キャッシュ出力';
@@ -39,8 +39,8 @@ $_lang['resource_class_key_help'] = 'リソースのクラスキー(documentObje
 $_lang['resource_content'] = 'コンテンツ';
 $_lang['resource_contentdispo'] = 'コンテンツの渡し方';
 $_lang['resource_contentdispo_help'] = 'このの項目を使用して、このリソースがブラウザでどのように扱われるかを指定します。「Attachment」を選択するとファイルのダウンロードとみなします。';
-$_lang['resource_content_type'] = 'コンテンツタイプ';
-$_lang['resource_content_type_help'] = 'このリソースのコンテンツタイプを設定します。どのコンテンツタイプを選択すればよいかが分からない場合は、「text/html」のままにして下さい。';
+$_lang['resource_content_type'] = 'コンテントタイプ';
+$_lang['resource_content_type_help'] = 'このリソースのコンテントタイプを設定します。どのコンテントタイプを選択すればよいかが分からない場合は、「text/html」のままにして下さい。';
 $_lang['resource_create_access_denied'] = '現在のアカウントにはリソースを作成する権限がありません。';
 $_lang['resource_create_here'] = 'ここにリソースを作成する';
 $_lang['resource_createdby'] = '作成者';
@@ -50,7 +50,7 @@ $_lang['resource_delete_confirm'] = '本当にこのリソースを削除しま�
 $_lang['resource_description'] = '説明(Description)';
 $_lang['resource_description_help'] = 'リソースの説明。検索エンジン対策などに。[[*description]]として呼び出します。';
 $_lang['resource_duplicate'] = '複製を作る';
-$_lang['resource_duplicate_confirm'] = '本当にこのリソースを複製しますか？サブリソースも複製されます。';
+$_lang['resource_duplicate_confirm'] = '本当にこのリソースを複製しますか？　サブリソースも複製されます。';
 $_lang['resource_edit'] = '編集する';
 $_lang['resource_editedby'] = '編集者';
 $_lang['resource_editedon'] = '編集日';
@@ -61,8 +61,8 @@ $_lang['resource_err_delete'] = 'リソースの削除中にエラーが発生�
 $_lang['resource_err_delete_children'] = 'サブリソースを削除中にエラーが発生しました。';
 $_lang['resource_err_delete_container_sitestart'] = '削除しようとしているリソースは、リソース [[+id]] を含むコンテナです。このリソースは「サイトスタート」として登録されているため、削除できません。他のリソースを「サイトスタート」に設定してからリトライしてください。';
 $_lang['resource_err_delete_container_siteunavailable'] = '削除しようとしているリソースはリソース [[+id]] を含むフォルダーです。このリソースは、「メンテナンスモード用ページ」として登録されているため、削除できません。他のリソースを「メンテナンスモード用ページ」に設定してからリトライしてください。';
-$_lang['resource_err_delete_sitestart'] = '「サイトスタート」のリソースであるため、削除できません';
-$_lang['resource_err_delete_siteunavailable'] = '「メンテナンスモード用ページとして使用されているため、削除できません';
+$_lang['resource_err_delete_sitestart'] = '「サイトスタート」のリソースであるため、削除できません。';
+$_lang['resource_err_delete_siteunavailable'] = '「メンテナンスモード用ページとして使用されているため、削除できません。';
 $_lang['resource_err_duplicate'] = 'リソースを複製中にエラーが発生しました。';
 $_lang['resource_err_move_to_child'] = '自身のサブリソースには移動できません。';
 $_lang['resource_err_move_sitestart'] = 'リソースが site_start として指定されているため、別のコンテキストに移動できません。';
@@ -79,7 +79,7 @@ $_lang['resource_err_undelete'] = 'リソースの復活中にエラーが発生
 $_lang['resource_err_undelete_children'] = 'サブリソースを復活中にエラーが発生しました。';
 $_lang['resource_err_unpublish'] = 'リソースの公開終了日時設定中にエラーが発生しました。';
 $_lang['resource_err_unpublish_sitestart'] = 'このリソースはトップページ(site_start)として設定されています。非公開に設定することはできません。';
-$_lang['resource_err_unpublish_sitestart_dates'] = 'リソースはサイトスタート変数にリンクされていて、公開開始・終了の日付情報を保持することはできません';
+$_lang['resource_err_unpublish_sitestart_dates'] = 'リソースはサイトスタート変数にリンクされていて、公開開始・終了の日付情報を保持することはできません。';
 $_lang['resource_folder'] = 'コンテナ属性';
 $_lang['resource_folder_help'] = 'これにチェックを入れると、リソースは他のリソースのコンテナとして機能します。「コンテナ」はフォルダのようなもので、これだけがコンテンツを持つことができます。';
 $_lang['resource_group_resource_err_ae'] = 'リソースは既にそのリソースグループに含まれます。';
@@ -160,5 +160,5 @@ $_lang['weblink_create_here'] = 'ここにウェブリンクを作成';
 $_lang['weblink_help'] = 'このウェブリンクによって参照させたいオブジェクトのアドレスを設定します。';
 $_lang['weblink_message'] = 'ウェブリンクは、インターネット上のあらゆるオブジェクトに対するショートカットのようなものです。オブジェクトとは、MODX内のリソース・他サイトのページや画像などを含みます。基本的にはリンク先のオブジェクトへリダイレクトします。<p>';
 $_lang['weblink_new'] = '新しいウェブリンク';
-$_lang['weblink_response_code'] = 'Response Code';
-$_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';
+$_lang['weblink_response_code'] = 'レスポンスコード';
+$_lang['weblink_response_code_help'] = 'ウェブリンクが送出するHTTPのレスポンスコード。';

@@ -28,7 +28,8 @@ MODx.page.CreateWebLink = function(config) {
             ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
-            ,show_tvs: config.show_tvs       
+            ,show_tvs: config.show_tvs
+            ,url: config.url       
         }]
     });
     MODx.page.CreateWebLink.superclass.constructor.call(this,config);

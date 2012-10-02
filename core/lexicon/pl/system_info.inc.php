@@ -1,11 +1,11 @@
 <?php
 /**
-* System Info Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * System Info Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['database_charset'] = 'Database charset';
 $_lang['database_charset'] = 'Database charset';

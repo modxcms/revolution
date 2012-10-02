@@ -1,11 +1,11 @@
 <?php
 /**
-* Lexicon Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Lexicon Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['duplicate'] = 'Duplicate';
 $_lang['duplicate'] = 'Duplicate';
@@ -78,6 +78,9 @@ $_lang['lexicon_rlfb_msg'] = 'Successfully regenerated [[+num]] strings.';
 
 #$_lang['reload_from_base'] = 'Revert All Core Entries';
 $_lang['reload_from_base'] = 'Revert All Core Entries';
+
+#$_lang['reload_success'] = 'Successfully reloaded [[+total]] strings.';
+$_lang['reload_success'] = 'Successfully reloaded [[+total]] strings.';
 
 #$_lang['search_by_key'] = 'Search by Key:';
 $_lang['search_by_key'] = 'Search by Key:';

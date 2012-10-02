@@ -79,6 +79,7 @@ $_lang['user_confirm_remove'] = 'Sind Sie sicher, dass Sie diesen Benutzer dauer
 $_lang['user_country'] = 'Land';
 $_lang['user_dob'] = 'Geburtsdatum';
 $_lang['user_doesnt_exist'] = 'Benutzer existiert nicht';
+$_lang['user_duplicate'] = 'Benutzer duplizieren';
 $_lang['user_edit_self_msg'] = 'Sie müssen sich nach dem Speichern evtl. aus- und wieder einloggen, um Ihre Daten komplett zu aktualisieren</strong><br />Sollten Sie sich ein neues Passwort generieren lassen, wird Ihnen dieses per E-Mail zugeschickt.';
 $_lang['user_email'] = 'E-Mail-Adresse';
 $_lang['user_err_access_permissions_save'] = 'Ein Fehler trat auf beim Speichern von Benutzer-Zugriffsrechten.';

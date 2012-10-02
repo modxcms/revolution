@@ -505,6 +505,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             $tvs = $this->object->getTemplateVars();
             /** @var modTemplateVar $tv */
             foreach ($tvs as $tv) {
+                if (!$tv->checkResourceGroupAccess()) {
+                    continue;
+                }
+
                 $tvKey = 'tv'.$tv->get('id');
                 $value = $this->getProperty($tvKey,null);
                 /* set value of TV */
@@ -541,6 +545,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                         if (is_array($value)) {
                             $featureInsert = array();
                             while (list($featureValue, $featureItem) = each($value)) {
+                                if(empty($featureItem)) { continue; }
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
                             $value = implode('||',$featureInsert);

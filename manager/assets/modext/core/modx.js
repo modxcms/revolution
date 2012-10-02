@@ -226,7 +226,9 @@ Ext.extend(MODx,Ext.Component,{
             title: _('help')
             ,width: 850
             ,height: 500
-            ,modal: Ext.isIE ? false : true
+            ,resizable: true
+            ,maximizable: true
+            ,modal: false
             ,layout: 'fit'
             ,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
         });
@@ -470,7 +472,10 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
 
     ,highlightField: function(f) {
         if (f.id !== undefined && f.id !== 'forEach' && f.id !== '') {
-            Ext.get(f.id).dom.style.border = '1px solid red';
+            var fld = Ext.get(f.id);
+            if (fld && fld.dom) {
+                fld.dom.style.border = '1px solid red';
+            }
             var ef = Ext.get(f.id+'_error');
             if (ef) { ef.innerHTML = f.msg; }
             this.fields.push(f.id);

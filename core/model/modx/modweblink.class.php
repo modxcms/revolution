@@ -29,15 +29,13 @@ class modWebLink extends modResource implements modResourceInterface {
         if (empty ($this->_content)) {
             $this->xpdo->sendErrorPage();
         }
-        if (is_numeric($this->_content)) {
-            $this->_output= intval($this->_content);
-        } else {
+        if (!is_numeric($this->_content)) {
             $this->xpdo->getParser();
             $maxIterations= isset ($this->xpdo->config['parser_max_iterations']) ? intval($this->xpdo->config['parser_max_iterations']) : 10;
             $this->xpdo->parser->processElementTags($this->_tag, $this->_content, true, true, '[[', ']]', array(), $maxIterations);
         }
         if (is_numeric($this->_content)) {
-            $this->_output= intval($this->_content);
+            $this->_output= $this->xpdo->makeUrl(intval($this->_content), '', '', 'full');
         } else {
             $this->_output= $this->_content;
         }

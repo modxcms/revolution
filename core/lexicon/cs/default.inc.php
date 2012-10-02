@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-05-01
+ * @updated 2012-09-27
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -55,22 +55,22 @@ $_lang['add_tag'] = 'Přidat štítek';
 $_lang['add_template'] = 'Vytvořit šablonu';
 
 // $_lang['add_to_category_chunk'] = 'Create a New Chunk Here';
-$_lang['add_to_category_chunk'] = 'Přidat sem nový chunk';
+$_lang['add_to_category_chunk'] = 'Vytvořit chunk';
 
 // $_lang['add_to_category_plugin'] = 'Create a New Plugin Here';
-$_lang['add_to_category_plugin'] = 'Přidat sem nový plugin';
+$_lang['add_to_category_plugin'] = 'Vytvořit plugin';
 
 // $_lang['add_to_category_snippet'] = 'Create a New Snippet Here';
-$_lang['add_to_category_snippet'] = 'Přidat sem nový snippet';
+$_lang['add_to_category_snippet'] = 'Vytvořit snippet';
 
 // $_lang['add_to_category_template'] = 'Create a New Template Here';
-$_lang['add_to_category_template'] = 'Přidat sem novou šablonu';
+$_lang['add_to_category_template'] = 'Vytvořit šablonu';
 
 // $_lang['add_to_category_this'] = 'Create a New [[+type]] Here';
-$_lang['add_to_category_this'] = 'Přidat sem nový [[+type]]';
+$_lang['add_to_category_this'] = 'Vytvořit [[+type]]';
 
 // $_lang['add_to_category_tv'] = 'Create a New TV Here';
-$_lang['add_to_category_tv'] = 'Přidat sem novou TV';
+$_lang['add_to_category_tv'] = 'Vytvořit template variable';
 
 // $_lang['add_tv'] = 'Add TV';
 $_lang['add_tv'] = 'Vytvořit template variable';
@@ -283,7 +283,7 @@ $_lang['createdon'] = 'Vytvořeno';
 $_lang['current'] = 'Současně';
 
 // $_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard'] = 'Nástěnka';
 
 // $_lang['data_err_load'] = 'Error loading data.';
 $_lang['data_err_load'] = 'Chyba při načítání dat.';
@@ -552,6 +552,9 @@ $_lang['ext_sortasc'] = 'Řadit vzestupně';
 // $_lang['ext_sortdesc'] = 'Sort Descending';
 $_lang['ext_sortdesc'] = 'Řadit sestupně';
 
+// $_lang['ext_splittip'] = 'Drag to resize.';
+$_lang['ext_splittip'] = 'Tažením myši změníte velikost.';
+
 // $_lang['ext_tabclose'] = 'Close this tab';
 $_lang['ext_tabclose'] = 'Závřít tuto záložku';
 
@@ -565,7 +568,7 @@ $_lang['ext_timemax'] = 'Čas v tomto políčku musí být roven nebo menší ne
 $_lang['ext_timemin'] = 'Čas v tomto políčku musí být roven nebo větší než {0}';
 
 // $_lang['ext_today_tip'] = '{0} (Spacebar)';
-$_lang['ext_today_tip'] = '{0} (Spacebar)';
+$_lang['ext_today_tip'] = '{0} (mezerník)';
 
 // $_lang['failure'] = 'Failure';
 $_lang['failure'] = 'Porucha';
@@ -775,19 +778,19 @@ $_lang['name'] = 'Název';
 $_lang['new'] = 'Vytvořit';
 
 // $_lang['new_category'] = 'New Category';
-$_lang['new_category'] = 'Nová kategorie';
+$_lang['new_category'] = 'Vytvořit kategorii';
 
 // $_lang['new_chunk'] = 'New Chunk';
-$_lang['new_chunk'] = 'Nový chunk';
+$_lang['new_chunk'] = 'Vytvořit chunk';
 
 // $_lang['new_folder'] = 'New Folder';
-$_lang['new_folder'] = 'Nová složka';
+$_lang['new_folder'] = 'Vytvořit složku';
 
 // $_lang['new_key'] = 'New Key';
-$_lang['new_key'] = 'Nový klíč';
+$_lang['new_key'] = 'Vytvořit klíč';
 
 // $_lang['new_message'] = 'New Message';
-$_lang['new_message'] = 'Nová zpráva';
+$_lang['new_message'] = 'Vytvořit zprávu';
 
 // $_lang['new_name'] = 'New Name';
 $_lang['new_name'] = 'Nový název';
@@ -796,19 +799,19 @@ $_lang['new_name'] = 'Nový název';
 $_lang['new_parent'] = 'Nový rodič';
 
 // $_lang['new_plugin'] = 'New Plugin';
-$_lang['new_plugin'] = 'Nový plugin';
+$_lang['new_plugin'] = 'Vytvořit plugin';
 
 // $_lang['new_role'] = 'Create a new role';
 $_lang['new_role'] = 'Nová role';
 
 // $_lang['new_snippet'] = 'New Snippet';
-$_lang['new_snippet'] = 'Nový snippet';
+$_lang['new_snippet'] = 'Vytvořit snippet';
 
 // $_lang['new_template'] = 'New Template';
-$_lang['new_template'] = 'Nová šablona';
+$_lang['new_template'] = 'Vytvořit šablonu';
 
 // $_lang['new_tv'] = 'New Template Variable';
-$_lang['new_tv'] = 'Nová template variable';
+$_lang['new_tv'] = 'Vytvořit template variable';
 
 // $_lang['new_user'] = 'New user';
 $_lang['new_user'] = 'Nový uživatel';
@@ -1006,40 +1009,49 @@ $_lang['publishing_options'] = 'Možnosti publikování';
 $_lang['quick_create'] = 'Vytvořit v okně';
 
 // $_lang['quick_create_chunk'] = 'Quick Create Chunk';
-$_lang['quick_create_chunk'] = 'Rychlé vytvoření chunku';
+$_lang['quick_create_chunk'] = 'Vytvořit chunk v okně';
+
+// $_lang['quick_create_file'] = 'Quick Create File';
+$_lang['quick_create_file'] = 'Vytvořit soubor v okně';
 
 // $_lang['quick_create_plugin'] = 'Quick Create Plugin';
-$_lang['quick_create_plugin'] = 'Rychlé vytvoření pluginu';
+$_lang['quick_create_plugin'] = 'Vytvořit plugin v okně';
 
 // $_lang['quick_create_resource'] = 'Quick Create Resource';
-$_lang['quick_create_resource'] = 'Rychlé vytvoření dokumentu';
+$_lang['quick_create_resource'] = 'Vytvořit dokument v okně';
 
 // $_lang['quick_create_snippet'] = 'Quick Create Snippet';
-$_lang['quick_create_snippet'] = 'Rychlé vytvoření snippetu';
+$_lang['quick_create_snippet'] = 'Vytvořit snippet v okně';
 
 // $_lang['quick_create_template'] = 'Quick Create Template';
-$_lang['quick_create_template'] = 'Rychlé vytvoření šablony';
+$_lang['quick_create_template'] = 'Vytvořit šablonu v okně';
 
 // $_lang['quick_create_tv'] = 'Quick Create TV';
-$_lang['quick_create_tv'] = 'Rychlé vytvoření template variable';
+$_lang['quick_create_tv'] = 'Vytvořit template variable v okně';
+
+// $_lang['quick_update'] = 'Quick Update';
+$_lang['quick_update'] = 'Upravit v okně';
 
 // $_lang['quick_update_chunk'] = 'Quick Update Chunk';
-$_lang['quick_update_chunk'] = 'Rychlá úprava chunku';
+$_lang['quick_update_chunk'] = 'Upravit chunk v okně';
+
+// $_lang['quick_update_file'] = 'Quick Update File';
+$_lang['quick_update_file'] = 'Upravit soubor v okně';
 
 // $_lang['quick_update_plugin'] = 'Quick Update Plugin';
-$_lang['quick_update_plugin'] = 'Rychlá úprava pluginu';
+$_lang['quick_update_plugin'] = 'Upravit plugin v okně';
 
 // $_lang['quick_update_resource'] = 'Quick Update Resource';
-$_lang['quick_update_resource'] = 'Rychlá úprava dokumentu';
+$_lang['quick_update_resource'] = 'Upravit dokument v okně';
 
 // $_lang['quick_update_snippet'] = 'Quick Update Snippet';
-$_lang['quick_update_snippet'] = 'Rychlá úprava snippetu';
+$_lang['quick_update_snippet'] = 'Upravit snippet v okně';
 
 // $_lang['quick_update_template'] = 'Quick Update Template';
-$_lang['quick_update_template'] = 'Rychlá úprava šablony';
+$_lang['quick_update_template'] = 'Upravit šablonu v okně';
 
 // $_lang['quick_update_tv'] = 'Quick Update TV';
-$_lang['quick_update_tv'] = 'Rychlá úprava template variable';
+$_lang['quick_update_tv'] = 'Upravit template variable v okně';
 
 // $_lang['rank'] = 'Rank';
 $_lang['rank'] = 'Pořadí';
