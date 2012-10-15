@@ -28,39 +28,37 @@
  * @package xpdo
  * @subpackage om.mysql
  */
-$xpdo_meta_map = array(
-    'xPDOSimpleObject' => array(
-        'table' => null,
-        'fields' => array(
-            'id' => null,
-        ),
-        'fieldMeta' => array(
-            'id' => array(
-                'dbtype' => 'INTEGER',
-                'phptype' => 'integer',
-                'null' => false,
-                'index' => 'pk',
-                'generated' => 'native',
-                'attributes' => 'unsigned',
-            )
-        ),
-        'indexes' => array(
-            'PRIMARY' =>
+$xpdo_meta_map['xPDOSimpleObject'] = array(
+    'table' => null,
+    'fields' => array(
+        'id' => null,
+    ),
+    'fieldMeta' => array(
+        'id' => array(
+            'dbtype' => 'INTEGER',
+            'phptype' => 'integer',
+            'null' => false,
+            'index' => 'pk',
+            'generated' => 'native',
+            'attributes' => 'unsigned',
+        )
+    ),
+    'indexes' => array(
+        'PRIMARY' =>
+        array(
+            'alias' => 'PRIMARY',
+            'primary' => true,
+            'unique' => true,
+            'type' => 'BTREE',
+            'columns' =>
             array(
-                'alias' => 'PRIMARY',
-                'primary' => true,
-                'unique' => true,
-                'type' => 'BTREE',
-                'columns' =>
+                'id' =>
                 array(
-                    'id' =>
-                    array(
-                        'length' => '',
-                        'collation' => 'A',
-                        'null' => false,
-                    ),
+                    'length' => '',
+                    'collation' => 'A',
+                    'null' => false,
                 ),
-            )
+            ),
         )
     )
 );
