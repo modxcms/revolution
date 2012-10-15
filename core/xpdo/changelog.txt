@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#8962] Prevent xPDOSimpleObject from overwriting xPDOObject map entry
 - [#8423] Fix tmpLockFile naming issue in xPDOCacheManager::lockFile()
 - [#8440] Add memcached implementation of xPDOCache (xPDOMemCached)
 - [#8423] Add flock-independent file locking to xPDOCacheManager::writeFile()

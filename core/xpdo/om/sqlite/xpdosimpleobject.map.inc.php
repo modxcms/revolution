@@ -28,29 +28,27 @@
  * @package xpdo
  * @subpackage om.sqlite
  */
-$xpdo_meta_map = array (
-    'xPDOSimpleObject' => array (
-        'table' => null,
-        'fields' => array (
-            'id' => null,
-        ),
-        'fieldMeta' => array (
-            'id' => array(
-                'dbtype' => 'INTEGER',
-                'phptype' => 'integer',
-                'null' => false,
-                'index' => 'pk',
-                'generated' => 'native',
-            )
-        ),
-        'indexes' => array (
-            'PRIMARY' => array (
-                'columns' => array(
-                    'id' => array()
-                ),
-                'primary' => true,
-                'unique' => true
-            )
+$xpdo_meta_map['xPDOSimpleObject'] = array (
+    'table' => null,
+    'fields' => array (
+        'id' => null,
+    ),
+    'fieldMeta' => array (
+        'id' => array(
+            'dbtype' => 'INTEGER',
+            'phptype' => 'integer',
+            'null' => false,
+            'index' => 'pk',
+            'generated' => 'native',
+        )
+    ),
+    'indexes' => array (
+        'PRIMARY' => array (
+            'columns' => array(
+                'id' => array()
+            ),
+            'primary' => true,
+            'unique' => true
         )
     )
 );
