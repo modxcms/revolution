@@ -295,7 +295,7 @@ class xPDOTest extends xPDOTestCase {
      */
     public function providerGetTableMeta() {
         return array(
-            array('Person',null),
+            array('Person',array('engine' => 'MyISAM')),
         );
     }
 
