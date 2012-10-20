@@ -123,6 +123,7 @@ class ElementChunkCreateManagerController extends modManagerController {
             'chunk' => null,
         ));
         if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }
+        $this->setPlaceholder('onChunkFormPrerender', $this->onChunkFormPrerender);
     }
 
     /**
@@ -148,5 +149,13 @@ class ElementChunkCreateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('chunk','category','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Chunks';
     }
 }

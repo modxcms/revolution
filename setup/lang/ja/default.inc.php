@@ -3,8 +3,9 @@
  * Japanese language files for Revolution 2.2 setup
  *
  * @package setup
+ * @author yamamoto http://kyms.jp 2012-08-28
  * @author KUROI Enogu http://twitter.com/enogu
- * @author yamamoto http://kyms.jp
+ * @author honda http://kogus.org
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'アドオン';
@@ -17,9 +18,9 @@ $_lang['base_template'] = 'BaseTemplate';
 $_lang['cache_manager_err'] = 'キャッシュマネージャーをロードできません。';
 $_lang['choose_language'] = '言語を選択してください';
 $_lang['cleanup_errors_title'] = 'Important Note:';
-$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
-$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
-$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
+$_lang['cli_install_failed'] = 'インストールに失敗しました。 エラー: [[+errors]]';
+$_lang['cli_no_config_file'] = 'CLIインストールの構成ファイル(例えば config.xml)が見つかりませんでした。コマンドラインからMODXをセットアップするには、構成ファイルを用意する必要があります。詳しくは公式ドキュメントを参照してください。';
+$_lang['cli_tests_failed'] = 'インストールの事前テストに失敗しました。 エラー: [[+errors]]';
 $_lang['close'] = '閉じる';
 $_lang['config_file_err_w'] = '設定ファイルの書き込みに失敗しました。';
 $_lang['config_file_perms_notset'] = 'configファイルのパーミッションが書き込み可能になっています。configファイルを保護するために、適切なパーミッションに変更することを強くお勧めします。';
@@ -28,13 +29,13 @@ $_lang['config_file_written'] = '設定ファイルの作成が完了しまし�
 $_lang['config_key'] = 'Configuration Key をここで指定';
 $_lang['config_key_change'] = 'Configuration Keyを変更したい場合は <a id="cck-href" href="javascript:void(0);">ここをクリックしてください。</a><br />※通常は変更する必要はありません。';
 $_lang['config_key_override'] = '/setup/includes/config.core.php内のMODX_CONFIG_KEY定数による指定を変更したい場合は、ここで新しいキー名を指定してください。';
-$_lang['config_not_writable_err'] = 'You have attempted to change a setting in setup/includes/config.core.php but the file is not writable. Make the file writable or edit the file manually before continuing.';
+$_lang['config_not_writable_err'] = '設定ファイル setup/includes/config.core.php が書き込み可能ではありません。パーミッションを書き込み可能に変更してください。';
 $_lang['connection_character_set'] = 'データベース接続の文字セット<br />(通常はutf-8):';
 $_lang['connection_collation'] = '文字セットの照合順序<br />(通常はutf8_general_ci):';
 $_lang['connection_connection_and_login_information'] = 'データベース接続とデータベースユーザーの指定';
 $_lang['connection_connection_note'] = 'データベース接続をテストし、設定します。まだデータベースを作成していない場合は、インストーラーはデータベースの自動作成を試みます。データベースの自動作成機能はサーバ側の権限設定に依存しており、多くの共用レンタルサーバではサポートされていないためご注意ください。';
 $_lang['connection_database_host'] = 'データベースホスト:';
-$_lang['connection_database_info'] = 'データベースにログインするための情報を入力してください。';
+$_lang['connection_database_info'] = 'データベースへのログイン情報';
 $_lang['connection_database_login'] = 'データベースユーザー名:';
 $_lang['connection_database_name'] = 'データベース名:';
 $_lang['connection_database_pass'] = 'データベースパスワード:';
@@ -70,9 +71,9 @@ $_lang['db_err_connect'] = 'データベースに接続できませんでした�
 $_lang['db_err_connect_upgrade'] = 'アップデートを試みましたが、データベースに接続できません。設定をもう一度確認してください。';
 $_lang['db_err_connect_server'] = 'データベースサーバに接続できません。設定をもう一度確認してください。';
 $_lang['db_err_create'] = 'データベースの作成中にエラーが発生しました。';
-$_lang['db_err_create_database'] = 'MODX could not create your database. Please manually create your database and then try again.';
-$_lang['db_err_show_charsets'] = 'MODX could not get the available character sets from your MySQL server.';
-$_lang['db_err_show_collations'] = 'MODX could not get the available collations from your MySQL server.';
+$_lang['db_err_create_database'] = 'データベースを作成できませんでした。手動でデータベースを作成後、再度試してください。';
+$_lang['db_err_show_charsets'] = 'MySQLサーバーから利用可能なキャラクターセットが取得できませんした。';
+$_lang['db_err_show_collations'] = 'MySQLサーバから利用可能な照合順序を得ることができませんでした。';
 $_lang['db_success'] = '問題ありません';
 $_lang['db_test_coll_msg'] = 'ここをクリックしてデータベースの選択を確認してください。<br />指定のデータベースが存在しない場合は新規作成を試みます。';
 $_lang['db_test_conn_msg'] = 'ここをクリックしてデータベース接続をテストしてください';
@@ -80,10 +81,10 @@ $_lang['default_admin_user'] = 'デフォルト管理ユーザー';
 $_lang['delete_setup_dir'] = 'セットアップディレクトリを削除する';
 $_lang['dir'] = 'ltr:左から右';
 $_lang['email_err_ns'] = 'メールアドレスが正しくありません';
-$_lang['err_occ'] = 'エラーが発生しました!';
-$_lang['err_update_table'] = 'Error updating table for class [[+class]]';
+$_lang['err_occ'] = 'エラーが発生しました。';
+$_lang['err_update_table'] = 'class [[+class]] のテーブル更新時にエラーが発生しました。';
 $_lang['errors_occurred'] = 'コアのインストール中にエラーが発生しました。インストール状態を確認し、問題を解消してから再開してください。';
-$_lang['failed'] = '問題あり';
+$_lang['failed'] = '要変更';
 $_lang['fatal_error'] = '致命的なエラー: インストールを続行できません。';
 $_lang['home'] = 'Home';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
@@ -96,7 +97,7 @@ $_lang['install_packages_options'] = 'パッケージのインストールオプ
 $_lang['install_success'] = 'MODXコアは正常にインストールされました。「次へ」ボタンを押して、インストール作業を完了させてください。';
 $_lang['install_summary'] = 'インストールの概要';
 $_lang['install_update'] = 'インストール/アップデート';
-$_lang['installation_finished'] = 'Installation finished in [[+time]]';
+$_lang['installation_finished'] = 'インストール完了：[[+time]]';
 $_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
 	<p>Usage of this software is subject to the GPL license. To help you understand
 	what the GPL licence is and how it affects your ability to use the software, we
@@ -150,7 +151,7 @@ $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
 $_lang['modx_err_instantiate'] = 'MODXオブジェクトを生成できません。';
 $_lang['modx_err_instantiate_mgr'] = '管理画面コンテキストの初期化に失敗しました。';
-$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2012 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Revolutionのインストール';
 $_lang['modx_install_complete'] = 'MODXのインストールが完了しました';
@@ -165,7 +166,7 @@ $_lang['options_core_unpacked_note'] = 'MODX公式サイト(本家または日�
 $_lang['options_install_new_copy'] = 'MODX Revolutionを新規インストールします - ';
 $_lang['options_install_new_note'] = '<br />すでにMODX Revolutionがインストールされている場合、このオプションを選ぶとデータは上書きされます。';
 $_lang['options_important_upgrade'] = 'Important Upgrade Note';
-$_lang['options_important_upgrade_note'] = 'アップデートする前に、全ての管理画面のユーザーがログアウトしたことを確認してください。もしアップデート後に不具合が発生した場合、全ての管理画面からログアウトし、ブラウザキャッシュをクリアしてもう一度ログインしてください。<!--Make sure all Manager users <strong>log out before upgrading</strong> to prevent problems (e.g., not being able to access resources). If you have trouble after upgrading, log out of any Manager sessions, clear your browser cache, then log in again.-->';
+$_lang['options_important_upgrade_note'] = 'アップデートを実行する前に、全ての管理画面ユーザーがログアウトしていることを確認してください。もしアップデート後に不具合が発生した場合、全ての管理画面からログアウトし、ブラウザキャッシュをクリアしてもう一度ログインしてください。';
 $_lang['options_new_file_permissions'] = '新規ファイルのパーミッション';
 $_lang['options_new_file_permissions_note'] = 'MODXのシステムを通じてファイルを新規作成する時のパーミッションをここで指定できます。(例：0664・0666など)';
 $_lang['options_new_folder_permissions'] = '新規ディレクトリのパーミッション';
@@ -176,14 +177,14 @@ $_lang['options_upgrade_advanced'] = 'アドバンスアップデート<br />(�
 $_lang['options_upgrade_advanced_note'] = '接続設定が異なるデータベースに変更した場合は、このオプションを選択してください。 <strong>新規インストールと同様、データベース名・ユーザ名・パスワード・文字セットの照合順序の情報などが必要になります。</strong>';
 $_lang['options_upgrade_existing'] = '既存サイトのアップデート';
 $_lang['options_upgrade_existing_note'] = 'システムをアップデートします(ファイル・データベース構成・設定情報など)。';
-$_lang['package_execute_err_retrieve'] = 'The install failed because MODX could not unpack the [[+path]]packages/core.transport.zip package. Make sure that the [[+path]]packages/core.transport.zip file exists and is writable, and that you have made the [[+path]]packages/ directory writable.';
+$_lang['package_execute_err_retrieve'] = 'パッケージ [[+path]]packages/core.transport.zip が展開できないため、インストールに失敗しました。[[+path]]packages/core.transport.zip が存在し書き込み可能であること、また [[+path]]packages/ ディレクトリが書き込み可能であることを確認してください。';
 $_lang['package_err_install'] = '[[+package]] のインストールに失敗しました。';
 $_lang['package_err_nf'] = '[[+package]] の取得に失敗しました。';
 $_lang['package_installed'] = '[[+package]] は正しくインストールされました。';
-$_lang['password_err_invchars'] = 'Your password may not contain any invalid characters, such as /, \\, &apos;, &quot;, (, ) or {}.';
+$_lang['password_err_invchars'] = '/, \\, &apos;, &quot;, (, ) or {} などの、パスワードに使用できない文字が含まれています。';
 $_lang['password_err_nomatch'] = 'パスワードが一致しません。';
 $_lang['password_err_ns'] = 'パスワードを入力してください。';
-$_lang['password_err_short'] = 'Your password must be at least 6 characters long.';
+$_lang['password_err_short'] = 'パスワードは6文字以上である必要があります。';
 $_lang['please_select_login'] = 'ログインボタンをクリックすると管理画面にアクセスできます。';
 $_lang['preinstall_failure'] = 'インストール環境テストで問題が発見されました。問題を解消してから再試行してください。';
 $_lang['preinstall_success'] = 'インストール環境テストをクリアしました。インストールボタンを押して続行してください。';
@@ -193,7 +194,7 @@ $_lang['restarted_msg'] = 'インストール処理が進まないまま15分が
 $_lang['retry'] = '再試行';
 $_lang['security_notice'] = 'セキュリティー情報';
 $_lang['select'] = '選択';
-$_lang['settings_handler_err_nf'] = 'MODX could not find the modInstallSettings class at: [[+path]]. Please ensure you have uploaded all the files.';
+$_lang['settings_handler_err_nf'] = 'modInstallSettingsクラスが [[+path]] 内に見つかりません。全てのファイルがアップロードされているか、確認して下さい。';
 $_lang['setup_err_remove'] = 'セットアップディレクトリの削除中にエラーが発生しました。';
 $_lang['setup_err_assets'] = '[[+path]] に assets/ ディレクトリがありません。<br />このディレクトリは拡張機能の追加と管理に必要です。';
 $_lang['setup_err_assets_comp'] = '[[+path]] に assets/components/ ディレクトリがありません。<br />このディレクトリは拡張機能の追加と管理に必要です。';
@@ -202,11 +203,11 @@ $_lang['skip_to_bottom'] = '下までスクロール';
 $_lang['success'] = '成功';
 $_lang['table_created'] = '[[+class]] クラスに対応したテーブルは正しく作成されました。';
 $_lang['table_err_create'] = '[[+class]] クラスに対応したテーブルの作成中にエラーが発生しました。';
-$_lang['table_updated'] = 'Successfully upgraded table for class [[+class]]';
+$_lang['table_updated'] = '[[+class]] クラスに対応したテーブルのアップグレードに成功しました。';
 $_lang['test_class_nf'] = '[[+path]] のインストールテストクラスが発見できませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
-$_lang['test_version_class_nf'] = 'Could not find the Install Test Versioner class at: [[+path]] <br />Please make sure you\'ve uploaded all the necessary files.';
+$_lang['test_version_class_nf'] = '[[+path]] にインストールのテストVersionerクラスが見つかりませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
 $_lang['thank_installing'] = 'おつかれさまでした！<br />新しいタイプのCMS「MODX Revolution」を<br />お楽しみください！ - ';
-$_lang['transport_class_err_load'] = 'Error loading transport class.';
+$_lang['transport_class_err_load'] = 'transportクラスの読み込みでエラーが発生しました。';
 $_lang['toggle'] = '表示/非表示の切り替え';
 $_lang['toggle_success'] = '完了メッセージの表示を切り替える';
 $_lang['toggle_warnings'] = '警告メッセージの表示を切り替える';
@@ -221,7 +222,7 @@ $_lang['welcome_message'] = '<p>期待の新世代フレームワーク「MODX R
 $_lang['workspace_err_nf'] = '現在の作業ディレクトリが発見できませんでした。';
 $_lang['workspace_err_path'] = '作業ディレクトリの設定中にエラーが発生しました。';
 $_lang['workspace_path_updated'] = '作業ディレクトリ情報は正しく更新されました。';
-$_lang['versioner_err_nf'] = 'Could not find the Install Versioner at: [[+path]] <br />Please make sure you\'ve uploaded all the necessary files.';
+$_lang['versioner_err_nf'] = '[[+path]] にインストールのVersionerクラスが見つかりませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
 $_lang['xpdo_err_ins'] = 'xPDOの初期化中にエラーが発生しました。';
 $_lang['xpdo_err_nf'] = '[[+path]] にxPDOのファイルがありません。全てのファイルが正しくアップロードされているか確認してください。';
 $_lang['preload_err_cache'] = '[[+path]]cache ディレクトリーをPHPプロセスから書き込める状態にしてください。';

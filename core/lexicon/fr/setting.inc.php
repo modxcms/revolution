@@ -284,6 +284,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Si votre paramètre filemanag
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'Le modèle de l\'email qui est envoyé quand un utilisateur a oublié ses identifiants et/ou mot de passe de MODX.';
 
+$_lang['setting_form_customization_use_all_groups'] = 'Utiliser la personnalisation des formulaires pour tous les groupes';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Lorsque cette option est activée, la personnalisation des formulaires sera appliquée même lorsque le groupe ne sera pas le groupe principal de l\'utilisateur. Sinon, elle ne s\'appliquera que lorsque l\'utilisateur aura ce groupe d\'utilisateur en tant que groupe principal. Note : activer cette option peut entrainer des conflits entre les sets.';
+
 $_lang['setting_forward_merge_excludes'] = 'Faire suivre exclue les champs "fusionnés"';
 $_lang['setting_forward_merge_excludes_desc'] = 'Un lien symbolique qui fusionne les valeurs des champs non vides vers les valeurs de la ressource cible; utiliser une liste "d\'exclusions", séparées par des virgules, évite que les champs indiqués soient écrasés par le lien symbolique.';
 
@@ -324,6 +327,9 @@ $_lang['setting_friendly_urls'] = 'Utiliser les URLs simples';
 $_lang['setting_friendly_urls_desc'] = 'Ceci vous autorise à utiliser les URLs simple (pour les moteurs de recherche). Veuillez noter que cette option ne fonctionne que pour les installations MODX tournant avec Apache et que vous aurez besoin d\'écrire un fichier .htaccess pour que cela fonctionne. Regardez le fichier .htaccess inclu dans la distribution pour plus d\'informations.';
 $_lang['setting_friendly_urls_err'] = 'Veuillez indiquer si vous souhaitez utiliser les URLs simples';
 
+$_lang['setting_friendly_urls_strict'] = 'Utiliser les URLs simplifiées strictes';
+$_lang['setting_friendly_urls_strict_desc'] = 'Lorsque les URLs simplifiées sont activées, cette option force les requêtes non canonical correspondant à une ressource à utiliser une redirection 301 vers l\'URI canonical de cette ressource. ATTENTION : n\'utilisez pas cette cette option si vous utilisez des règles de rewrite (réécriture) qui ne correspondent pas au début de l\'URI canonical. Par exemple, pour une URI canonical foo/ avec une régle de rewrite personnalisée en foo/bar.html fonctionnera, mais les tentatives de réécriture de bar/foo.html en foo/ forcera la redirection vers foo/ avec cette option activée.';
+
 $_lang['setting_global_duplicate_uri_check'] = 'Vérifier les URIs identiques dans tous les contextes';
 $_lang['setting_global_duplicate_uri_check_desc'] = 'Sélectionnez \'Oui\' pour vérifier l\'existance de doublons d\'URI dans tous les contextes. Sinon, seul le contexte dans lequel la ressource est enregistrée est vérifié.';
 
@@ -334,10 +340,13 @@ $_lang['setting_inline_help'] = 'Afficher l\'aide sous les champs';
 $_lang['setting_inline_help_desc'] = '« Oui » affiche le texte d\'aide directement sous le champs. « Non » affiche le texte d\'aide dans un tooltip.';
 
 $_lang['setting_link_tag_scheme'] = 'Schéma de génération d\'URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le tag [[~id]]. Options disponibles: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le tag [[~id]]. Options disponibles <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">dans la documentation de l\'API</a>';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Définie la locale du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="http://php.net/setlocale" target="_blank">la documentation PHP</a> pour plus d\'information.';
+
+$_lang['setting_lock_ttl'] = 'Durée de vie du lock';
+$_lang['setting_lock_ttl_desc'] = 'Nombre de secondes qu\'une ressource restera vérouillée lorsque l\'utilisateur l\'éditant est inactif.';
 
 $_lang['setting_log_level'] = 'Niveau de log';
 $_lang['setting_log_level_desc'] = 'Le niveau par défaut de log; plus le niveau est bas, moins les informations seront log. Options disponibles : 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
@@ -426,8 +435,14 @@ $_lang['setting_manager_time_format_desc'] = 'Le format de chaine de caratères,
 $_lang['setting_manager_use_tabs'] = 'Utiliser les onglets dans l\'agencement du manager';
 $_lang['setting_manager_use_tabs_desc'] = 'Si oui, le manager utilisera les onglets pour afficher les panneaux de contenu. Sinon il utilisera les "portails".';
 
+$_lang['setting_manager_week_start'] = 'Début de semaine';
+$_lang['setting_manager_week_start_desc'] = 'Indiquez le jour débutant la semaine. Utilisez 0 (ou laissez vide) pour dimanche, 1 pour lundi et ainsi de suite…';
+
 $_lang['setting_modRequest.class'] = 'Classe de prise en charge de requête';
 $_lang['setting_modRequest.class_desc'] = '';
+
+$_lang['setting_modx_browser_default_sort'] = 'Listing des fichiers';
+$_lang['setting_modx_browser_default_sort_desc'] = 'L\'ordre d\'affichage des fichiers par défaut lors de l\'utilisation de la popup du navigateur de fichier dans le manager. Les valeurs acceptées sont : name, size, lastmod (date de modification).';
 
 $_lang['setting_modx_charset'] = 'Encodage de caractère';
 $_lang['setting_modx_charset_desc'] = 'Veuillez indiquer quel encodage de caractère vous souhaitez utiliser. Veuillez noter que MODX a été testé certains encodages mais pas tous. Pour la plupart des langues, l\'option par défaut UTF-8 est préférable.';
@@ -717,3 +732,5 @@ $_lang['setting_which_element_editor_desc'] = 'Vous pouvez indiquer ici quel éd
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 $_lang['setting_xhtml_urls_desc'] = 'Toutes les URLs générées par MODX seront XHTML-compliant, inclu l\'encoding du caractère ampersand.';
 
+$_lang['setting_default_context'] = 'Contexte par défaut';
+$_lang['setting_default_context_desc'] = 'Sélectionnez le contexte par défaut lors de la création de nouvelles ressources.';

@@ -98,6 +98,7 @@ class modTemplateVarDuplicateProcessor extends modElementDuplicateProcessor {
                     'object' => $this->newObject->get('id'),
                     'object_class' => 'modTemplateVar',
                     'context_key' => $sourceElement->get('context_key'),
+                    'source' => $sourceElement->get('source'),
                 ),'',true,true);
                 $newSourceElement->save();
             }

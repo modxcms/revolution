@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2012-09-27
  */
 // $_lang['element'] = 'Element';
 $_lang['element'] = 'Element';
@@ -17,6 +17,12 @@ $_lang['element_err_nf'] = 'Element nenalezen.';
 
 // $_lang['element_err_ns'] = 'Element not specified.';
 $_lang['element_err_ns'] = 'Nespecifikovaný element.';
+
+// $_lang['element_static_source_immutable'] = 'The static file specified as the element source is not writable! You cannot edit the content of this element in the manager.';
+$_lang['element_static_source_immutable'] = 'Statický soubor, který je nastaven pro tento element není zapisovatelný! Nelze tedy upravovat obsah tohoto elementu.';
+
+// $_lang['element_static_source_protected_invalid'] = 'You cannot point your Element to the MODX configuration directory; this is a protected, non-accessible directory.';
+$_lang['element_static_source_protected_invalid'] = 'Statický soubor nelze umístit do adresáře s konfigurací MODX, neb tento adresář je chráněn systémem a nelze do něj zapisovat.';
 
 // $_lang['is_static'] = 'Is Static';
 $_lang['is_static'] = 'Statický';
@@ -43,19 +49,19 @@ $_lang['quick_create_template'] = 'Vytvořit šablonu v okně';
 $_lang['quick_create_tv'] = 'Vytvořit template variable v okně';
 
 // $_lang['quick_update_chunk'] = 'Quick Update Chunk';
-$_lang['quick_update_chunk'] = 'Rychlá úprava chunku';
+$_lang['quick_update_chunk'] = 'Upravit chunk v okně';
 
 // $_lang['quick_update_plugin'] = 'Quick Update Plugin';
-$_lang['quick_update_plugin'] = 'Rychlá úprava pluginu';
+$_lang['quick_update_plugin'] = 'Upravit plugin v okně';
 
 // $_lang['quick_update_snippet'] = 'Quick Update Snippet';
-$_lang['quick_update_snippet'] = 'Rychlá úprava snippetu';
+$_lang['quick_update_snippet'] = 'Upravit snippet v okně';
 
 // $_lang['quick_update_template'] = 'Quick Update Template';
-$_lang['quick_update_template'] = 'Rychlá úprava šablony';
+$_lang['quick_update_template'] = 'Upravit šablonu v okně';
 
 // $_lang['quick_update_tv'] = 'Quick Update TV';
-$_lang['quick_update_tv'] = 'Rychlá úprava template variable';
+$_lang['quick_update_tv'] = 'Upravit template variable v okně';
 
 // $_lang['properties_export'] = 'Export Properties';
 $_lang['properties_export'] = 'Exportovat vlastnosti';

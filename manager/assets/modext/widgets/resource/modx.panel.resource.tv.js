@@ -13,7 +13,7 @@ MODx.panel.ResourceTV = function(config) {
         ,title: _('template_variables')
         ,class_key: ''
         ,resource: ''
-        ,cls: MODx.config.tvs_below_content == 1 ? 'x-panel-body tvs-wrapper' : 'tvs-wrapper x-panel-body'
+        ,cls: MODx.config.tvs_below_content == 1 ? 'x-panel-body tvs-wrapper below-content' : 'tvs-wrapper x-panel-body'
         ,autoHeight: true
         ,applyTo: 'modx-resource-tvs-div'
         ,header: false
@@ -33,7 +33,7 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
         var template = this.config.template ? this.config.template : t.getValue();
         
         this.getUpdater().update({
-            url: MODx.config.manager_url+'index.php?a='+MODx.action['resource/tvs']
+            url: MODx.config.manager_url+'index.php?a=resource/tvs'
             ,method: 'GET'
             ,params: {
                'class_key': this.config.class_key

@@ -11,9 +11,9 @@ MODx.page.UpdateSnippet = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-snippet'
         ,actions: {
-            'new': MODx.action['element/snippet/create']
-            ,edit: MODx.action['element/snippet/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'element/snippet/create'
+            ,edit: 'element/snippet/update'
+            ,cancel: 'welcome'
         }
         ,buttons: [{
             process: 'update'
@@ -27,7 +27,7 @@ MODx.page.UpdateSnippet = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params:{a:MODx.action['welcome']}
+            ,params:{a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

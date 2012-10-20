@@ -301,7 +301,8 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		if(cat != undefined){
 			this.bdText = cat;
 		}
-		var msg = (query != undefined) ? _('search_results_for',{'query': query}) : _('packages_in_category');
+		var msg = (!Ext.isEmpty(query) && !Ext.isObject(query)) ? _('search_results_for',{'query': query}) : _('packages_in_category');
+
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
 		this.updateBreadcrumbs(msg);
 	}

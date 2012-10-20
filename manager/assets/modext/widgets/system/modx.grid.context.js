@@ -41,10 +41,7 @@ MODx.grid.Context = function(config) {
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: cmp
                     });
                 },scope:this}
@@ -62,7 +59,7 @@ MODx.grid.Context = function(config) {
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     updateContext: function(itm,e) {
-        location.href = 'index.php?a='+MODx.action['context/update']+'&key='+this.menu.record.key;
+        location.href = 'index.php?a=context/update&key='+this.menu.record.key;
     }
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
@@ -130,6 +127,7 @@ MODx.window.CreateContext = function(config) {
             ,anchor: '100%'
             ,grow: true
         }]
+        ,keys: []
     });
     MODx.window.CreateContext.superclass.constructor.call(this,config);
 };

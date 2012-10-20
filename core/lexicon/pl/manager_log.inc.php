@@ -1,11 +1,11 @@
 <?php
 /**
-* Manager Log Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Manager Log Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['action'] = 'Action';
 $_lang['action'] = 'Action';

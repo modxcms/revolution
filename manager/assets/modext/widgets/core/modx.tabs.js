@@ -7,8 +7,7 @@ MODx.Tabs = function(config) {
         ,deferredRender: true
         ,hideMode: 'offsets'
 		,defaults: {
-			autoScroll: true
-			,autoHeight: true
+			autoHeight: true
             ,hideMode: 'offsets'
             ,border: true
             ,autoWidth: true
@@ -16,6 +15,7 @@ MODx.Tabs = function(config) {
 		}
 	    ,activeTab: 0
         ,border: false
+        ,autoScroll: true
         ,autoHeight: true
         ,cls: 'modx-tabs'
 	});

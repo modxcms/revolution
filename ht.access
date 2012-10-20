@@ -30,7 +30,7 @@ RewriteBase /
 # Rewrite secure requests properly to prevent SSL cert warnings, e.g. prevent 
 # https://www.domain.com when your cert only allows https://secure.domain.com
 #RewriteCond %{SERVER_PORT} !^443
-#RewriteRule (.*) https://example-domain-please-change.com.com/$1 [R=301,L]
+#RewriteRule (.*) https://example-domain-please-change.com/$1 [R=301,L]
 
 
 

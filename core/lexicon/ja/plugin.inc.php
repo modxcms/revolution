@@ -5,6 +5,8 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-09-21
+ * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -17,12 +19,12 @@ $_lang['plugin_add_to_event'] = 'イベントへプラグインを追加';
 $_lang['plugin_code'] = 'プラグイン コード (php)';
 $_lang['plugin_config'] = 'プラグイン設定';
 $_lang['plugin_desc'] = '説明';
-$_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
-$_lang['plugin_desc_description'] = 'A short description of this Plugin.';
-$_lang['plugin_desc_name'] = 'The name of this Plugin.';
-$_lang['plugin_delete_confirm'] = 'プラグインを削除しますか?';
+$_lang['plugin_desc_category'] = 'このプラグインを所属させるカテゴリーを設定します。';
+$_lang['plugin_desc_description'] = 'プラグインの説明文を設定します。';
+$_lang['plugin_desc_name'] = 'プラグインの名前を設定します。';
+$_lang['plugin_delete_confirm'] = 'プラグインを削除しますか？';
 $_lang['plugin_disabled'] = 'プラグインの停止';
-$_lang['plugin_duplicate_confirm'] = 'プラグインを複製しますか?';
+$_lang['plugin_duplicate_confirm'] = 'プラグインを複製しますか？';
 $_lang['plugin_err_create'] = 'プラグインの作成中にエラーが発生しました。';
 $_lang['plugin_err_exists_name'] = '[[+name]]という名前のプラグインがすでに存在します。';
 $_lang['plugin_err_invalid_name'] = 'プラグイン名は無効です。';

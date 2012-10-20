@@ -3,9 +3,9 @@ MODx.page.UpdateDashboardWidget = function(config) {
 	Ext.applyIf(config,{
        formpanel: 'modx-panel-dashboard-widget'
        ,actions: {
-            'new': MODx.action['system/dashboards/widget/create']
-            ,edit: MODx.action['system/dashboards/widget/update']
-            ,cancel: MODx.action['system/dashboards']
+            'new': 'system/dashboards/widget/create'
+            ,edit: 'system/dashboards/widget/update'
+            ,cancel: 'system/dashboards'
        }
        ,buttons: [{
             process: 'update', text: _('save'), method: 'remote'
@@ -16,7 +16,7 @@ MODx.page.UpdateDashboardWidget = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['system/dashboards']}
+            process: 'cancel', text: _('cancel'), params: {a:'system/dashboards'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

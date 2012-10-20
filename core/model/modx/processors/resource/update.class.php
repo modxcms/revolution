@@ -136,9 +136,22 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->checkPublishingPermissions();
         $this->checkForUnPublishOnSiteStart();
         $this->checkDeletedStatus();
+        $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
         
         return parent::beforeSet();
+    }
+
+    /**
+     * Handle any properties-specific fields
+     */
+    public function handleResourceProperties() {
+        if ($this->object->get('class_key') == 'modWebLink') {
+            $responseCode = $this->getProperty('responseCode');
+            if (!empty($responseCode)) {
+                $this->object->setProperty('responseCode',$responseCode);
+            }
+        }
     }
 
     /**
@@ -492,6 +505,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             $tvs = $this->object->getTemplateVars();
             /** @var modTemplateVar $tv */
             foreach ($tvs as $tv) {
+                if (!$tv->checkResourceGroupAccess()) {
+                    continue;
+                }
+
                 $tvKey = 'tv'.$tv->get('id');
                 $value = $this->getProperty($tvKey,null);
                 /* set value of TV */
@@ -528,6 +545,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                         if (is_array($value)) {
                             $featureInsert = array();
                             while (list($featureValue, $featureItem) = each($value)) {
+                                if(empty($featureItem)) { continue; }
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
                             $value = implode('||',$featureInsert);
@@ -671,7 +689,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->object->removeLock();
         $this->clearCache();
 
-        $returnArray = $this->object->get(array_diff(array_keys($this->object->_fields), array('content','ta','introtext','description','link_attributes','pagetitle','longtitle','menutitle')));
+        $returnArray = $this->object->get(array_diff(array_keys($this->object->_fields), array('content','ta','introtext','description','link_attributes','pagetitle','longtitle','menutitle','properties')));
         foreach ($returnArray as $k => $v) {
             if (strpos($k,'tv') === 0) {
                 unset($returnArray[$k]);

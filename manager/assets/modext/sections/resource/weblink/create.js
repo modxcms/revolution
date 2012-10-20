@@ -15,9 +15,9 @@ MODx.page.CreateWebLink = function(config) {
         ,which_editor: 'none'
         ,action: 'create'
         ,actions: {
-            'new': MODx.action['resource/create']
-            ,edit: MODx.action['resource/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'resource/create'
+            ,edit: 'resource/update'
+            ,cancel: 'welcome'
         }
         ,buttons: this.getButtons(config)
         ,loadStay: true
@@ -28,7 +28,8 @@ MODx.page.CreateWebLink = function(config) {
             ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
-            ,show_tvs: config.show_tvs       
+            ,show_tvs: config.show_tvs
+            ,url: config.url       
         }]
     });
     MODx.page.CreateWebLink.superclass.constructor.call(this,config);
@@ -54,7 +55,7 @@ Ext.extend(MODx.page.CreateWebLink,MODx.Component,{
             process: 'cancel'
             ,text: _('cancel')
             ,id: 'modx-abtn-cancel'
-            ,params: { a: MODx.action['welcome'] }
+            ,params: { a: 'welcome' }
         });
         btns.push('-');
         btns.push({

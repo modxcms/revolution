@@ -24,6 +24,13 @@
     <meta name="robots" content="noindex, nofollow" />
 </head>
 <body id="login">
+<div id="modx-login-language-select-div">
+    <label>{$language_str}:
+    <select name="cultureKey" id="modx-login-language-select">
+        {$languages}
+    </select>
+    </label>
+</div>
 {$onManagerLoginFormPrerender}
 <br />
 

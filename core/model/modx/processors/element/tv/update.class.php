@@ -36,7 +36,7 @@ class modElementTvUpdateProcessor extends modElementUpdateProcessor {
         $this->setOutputProperties();
 
         $els = $this->getProperty('els',null);
-        if ($els != null) {
+        if ($els !== null) {
             $this->object->set('elements',$els);
         }
 

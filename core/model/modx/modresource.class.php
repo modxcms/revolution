@@ -1161,4 +1161,57 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function prepareTreeNode(array $node = array()) {
         return $node;
     }
+
+    /**
+     * Get a namespaced property for the Resource
+     * @param string $key
+     * @param string $namespace
+     * @param null $default
+     * @return null
+     */
+    public function getProperty($key,$namespace = 'core',$default = null) {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        return array_key_exists($namespace,$properties) && array_key_exists($key,$properties[$namespace]) ? $properties[$namespace][$key] : $default;
+    }
+    /**
+     * Get the properties for the specific namespace for the Resource
+     * @param string $namespace
+     * @return array
+     */
+    public function getProperties($namespace = 'core') {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        return array_key_exists($namespace,$properties) ? $properties[$namespace] : array();
+    }
+
+    /**
+     * Set a namespaced property for the Resource
+     * @param string $key
+     * @param mixed $value
+     * @param string $namespace
+     * @return bool
+     */
+    public function setProperty($key,$value,$namespace = 'core') {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        if (!array_key_exists($namespace,$properties)) $properties[$namespace] = array();
+        $properties[$namespace][$key] = $value;
+        return $this->set('properties',$properties);
+    }
+
+    /**
+     * Set properties for a namespace on the Resource, optionally merging them with existing ones.
+     * @param array $newProperties
+     * @param string $namespace
+     * @param bool $merge
+     * @return boolean
+     */
+    public function setProperties(array $newProperties,$namespace = 'core',$merge = true) {
+        $properties = $this->get('properties');
+        $properties = !empty($properties) ? $properties : array();
+        if (!array_key_exists($namespace,$properties)) $properties[$namespace] = array();
+        $properties[$namespace] = $merge ? array_merge($properties[$namespace],$newProperties) : $newProperties;
+        return $this->set('properties',$properties);
+    }
 }

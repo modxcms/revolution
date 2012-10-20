@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2012-05-01
  */
 // $_lang['active'] = 'Active';
 $_lang['active'] = 'Aktivní';
@@ -212,6 +212,9 @@ $_lang['user_dob'] = 'Datum narození';
 
 // $_lang['user_doesnt_exist'] = 'User does not exist';
 $_lang['user_doesnt_exist'] = 'Uživatel neexistuje';
+
+// $_lang['user_duplicate'] = 'Duplicate User';
+$_lang['user_duplicate'] = 'Zkopírovat uživatele';
 
 // $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 $_lang['user_edit_self_msg'] = 'Nejspíše se budete muset odhlásit a poté znovu přihlásit, pro úplné aktualizování profilu.</strong><br>Také je doporučeno nechat si vygenerovat nové heslo, bude Vám posláno e-mailem.';
@@ -542,6 +545,12 @@ $_lang['user_settings_desc'] = 'V této části můžete změnit specifické nas
 
 // $_lang['user_state'] = 'State';
 $_lang['user_state'] = 'Stát';
+
+// $_lang['user_sudo'] = 'Sudo User';
+$_lang['user_sudo'] = 'Sudo User';
+
+// $_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
+$_lang['user_sudo_desc'] = 'Je-li nastaveno Ano, pak se na tohoto uživatele nebudou vztahovat žádná omezení přístupových práv. *NENASTAVUJTE* pokud si nejste opravdu jistí co tato volba způsobuje!';
 
 // $_lang['user_title'] = 'Create/Edit user';
 $_lang['user_title'] = 'Vytvořit/Upravit uživatele';

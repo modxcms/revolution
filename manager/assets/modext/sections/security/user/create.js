@@ -22,7 +22,7 @@ MODx.page.CreateUser = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['security/user']}
+            process: 'cancel', text: _('cancel'), params: {a:'security/user'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

@@ -50,4 +50,10 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
     public function getTemplateFile() {
         return 'resource/weblink/update.tpl';
     }
+
+    public function process(array $scriptProperties = array()) {
+        $placeholders = parent::process($scriptProperties);
+        $this->resourceArray['responseCode'] = $this->resource->getProperty('responseCode','core','HTTP/1.1 301 Moved Permanently');
+        return $placeholders;
+    }
 }

@@ -14,9 +14,9 @@ MODx.page.ListRoles = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
 		buttons: [{
-            process: 'new', text: _('new'), params: {a:MODx.action['security/role/create']}
+            process: 'new', text: _('new'), params: {a:'security/role/create'}
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['welcome']}
+            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

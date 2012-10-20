@@ -134,6 +134,7 @@ $_lang['perm.resourcegroup_resource_list_desc'] = 'Ressourcen in einer Ressource
 $_lang['perm.resourcegroup_new_desc'] = 'Neue Ressourcen-Gruppen erstellen.';
 $_lang['perm.resourcegroup_save_desc'] = 'Ressourcen-Gruppen speichern.';
 $_lang['perm.resourcegroup_view_desc'] = 'Ressourcen-Gruppen auflisten lassen.';
+$_lang['perm.resource_duplicate_desc'] = 'Ressourcen duplizieren.';
 $_lang['perm.resource_quick_create_desc'] = '"Ressource schnell erstellen" im Ressourcen-Baum auf der linken Seite nutzen zu können.';
 $_lang['perm.resource_quick_update_desc'] = '"Ressource schnell bearbeiten" im Ressourcen-Baum auf der linken Seite nutzen zu können.';
 $_lang['perm.resource_tree_desc'] = 'Den Ressourcen-Baum im linken Navigations-Bereich anzeigen.';

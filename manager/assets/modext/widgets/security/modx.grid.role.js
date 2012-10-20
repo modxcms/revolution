@@ -13,7 +13,7 @@ MODx.grid.Role = function(config) {
         title: _('roles')
         ,id: 'modx-grid-role'
         ,url: MODx.config.connectors_url+'security/role.php'
-        ,fields: ['id','name','description','authority','menu']
+        ,fields: ['id','name','description','authority','perm']
         ,paging: true
         ,autosave: true
         ,columns: [{
@@ -46,9 +46,27 @@ MODx.grid.Role = function(config) {
         }]
     });
     MODx.grid.Role.superclass.constructor.call(this,config);
+    this.on('beforeedit',this.checkEditable,this);
 };
 Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
-    createRole: function(btn,e) {
+    checkEditable: function(o) {
+        var p = o.record.data.perm || '';
+        return p.indexOf('edit') != -1;
+    }
+
+    ,getMenu: function() {
+        var r = this.getSelectionModel().getSelected();
+        var p = r.data.perm || '';
+        var m = [];
+        if (p.indexOf('remove') != -1) {
+            m.push({
+                text: _('role_remove')
+                ,handler: this.remove.createDelegate(this,['role_remove_confirm'])
+            });
+        }
+        return m;
+    }
+    ,createRole: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-role-create'
             ,listeners: {
@@ -110,6 +128,7 @@ MODx.window.CreateRole = function(config) {
             ,html: _('role_desc_description')
             ,cls: 'desc-under'
         }]
+        ,keys: []
     });
     MODx.window.CreateRole.superclass.constructor.call(this,config);
 };

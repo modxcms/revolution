@@ -15,6 +15,7 @@ class modDatabaseTableGetListProcessor extends modDriverSpecificProcessor {
     
     public function process() {
         $tables = $this->getTables();
+        if (empty($tables)) $tables = array();
         return $this->outputArray($tables);
     }
 

@@ -7,6 +7,7 @@ $xpdo_meta_map['modUser']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'users',
+  'extends' => 'modPrincipal',
   'fields' => 
   array (
     'username' => '',
@@ -19,6 +20,8 @@ $xpdo_meta_map['modUser']= array (
     'hash_class' => 'hashing.modPBKDF2',
     'salt' => '',
     'primary_group' => 0,
+    'session_stale' => NULL,
+    'sudo' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -105,6 +108,21 @@ $xpdo_meta_map['modUser']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'session_stale' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'array',
+      'null' => true,
+    ),
+    'sudo' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
   ),
   'indexes' => 
   array (
@@ -173,6 +191,33 @@ $xpdo_meta_map['modUser']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Profile' => 
+    array (
+      'class' => 'modUserProfile',
+      'local' => 'id',
+      'foreign' => 'internalKey',
+      'cardinality' => 'one',
+      'owner' => 'local',
+    ),
+    'UserSettings' => 
+    array (
+      'class' => 'modUserSetting',
+      'local' => 'id',
+      'foreign' => 'user',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'UserGroupMembers' => 
+    array (
+      'class' => 'modUserGroupMember',
+      'local' => 'id',
+      'foreign' => 'member',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'CreatedResources' => 
@@ -230,33 +275,6 @@ $xpdo_meta_map['modUser']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Profile' => 
-    array (
-      'class' => 'modUserProfile',
-      'local' => 'id',
-      'foreign' => 'internalKey',
-      'cardinality' => 'one',
-      'owner' => 'local',
-    ),
-    'UserSettings' => 
-    array (
-      'class' => 'modUserSetting',
-      'local' => 'id',
-      'foreign' => 'user',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'UserGroupMembers' => 
-    array (
-      'class' => 'modUserGroupMember',
-      'local' => 'id',
-      'foreign' => 'member',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

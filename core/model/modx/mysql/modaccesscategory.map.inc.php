@@ -7,6 +7,7 @@ $xpdo_meta_map['modAccessCategory']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'access_category',
+  'extends' => 'modAccess',
   'fields' => 
   array (
     'context_key' => '',

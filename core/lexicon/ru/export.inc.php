@@ -1,4 +1,11 @@
 <?php
+/**
+ * Export Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['export_site_cacheable'] = 'Включать некэшируемые файлы:';
 $_lang['export_site_exporting_document'] = 'Экспортируется файл <strong>%s</strong> из <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $_lang['export_site_failed'] = '<span style="color:#990000">Неудача!</span>';
@@ -11,5 +18,5 @@ $_lang['export_site_prefix'] = 'Префикс файла:';
 $_lang['export_site_start'] = 'Начать экспорт';
 $_lang['export_site_success'] = '<span style="color:#009900">Успех!</span>';
 $_lang['export_site_suffix'] = 'Суффикс файла:';
-$_lang['export_site_target_unwritable'] = 'Не возможно произвести запись в папку. Please ensure the directory is writable, and try again.';
+$_lang['export_site_target_unwritable'] = 'Невозможно произвести запись в папку. Убедитесь в том, что папка доступна для записи, и повторите попытку.';
 $_lang['export_site_time'] = 'Экспорт закончен. Экспорт занял %s секунд.';

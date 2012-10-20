@@ -239,6 +239,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'text' => $this->xpdo->lexicon('file_edit'),
                         'handler' => 'this.editFile',
                     );
+                    $menu[] = array(
+                        'text' => $this->xpdo->lexicon('quick_update_file'),
+                        'handler' => 'this.quickUpdateFile',
+                    );
                 }
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('rename'),
@@ -292,6 +296,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_create'),
                     'handler' => 'this.createFile',
+                );
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('quick_create_file'),
+                    'handler' => 'this.quickCreateFile',
                 );
             }
             if ($this->hasPermission('directory_remove') && $canRemove) {
@@ -634,7 +642,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         foreach ($objects as $file) {
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
-            $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
+            $ext = pathinfo($file['name'],PATHINFO_EXTENSION);
             $ext = strtolower($ext);
 
             if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
@@ -643,7 +651,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 )));
                 continue;
             }
-            $size = @filesize($file['tmp_name']);
+            $size = filesize($file['tmp_name']);
 
             if ($size > $maxFileSize) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_too_large',array(
@@ -656,7 +664,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $newPath = $this->fileHandler->sanitizePath($file['name']);
             $newPath = $directory->getPath().$newPath;
 
-            if (!@move_uploaded_file($file['tmp_name'],$newPath)) {
+            if (!move_uploaded_file($file['tmp_name'],$newPath)) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
                 continue;
             }
@@ -671,7 +679,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $this->xpdo->logManagerAction('file_upload','',$directory->getPath());
 
-        return true;
+        return !$this->hasErrors();
     }
 
     /**

@@ -156,3 +156,5 @@ $_lang['weblink_create_here'] = 'Skapa en webblänk här';
 $_lang['weblink_help'] = 'Ange adressen till objektet du vill referera till med denna webblänk. Om du vill referera till en existerande MODX-resurs anger du dess ID här.';
 $_lang['weblink_message'] = 'En webblänk är en referens till ett objekt på Internet. Detta kan vara en resurs i MODX, en sida på en annan webbplats, en bild, eller en annan typ av fil på Internet.<p>';
 $_lang['weblink_new'] = 'Ny webblänk';
+$_lang['weblink_response_code'] = 'Svarskod';
+$_lang['weblink_response_code_help'] = 'Den HTTP-svarskod som ska sändas för webblänken.';

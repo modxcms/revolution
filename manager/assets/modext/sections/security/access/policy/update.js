@@ -11,9 +11,9 @@ MODx.page.UpdateAccessPolicy = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-access-policy'
         ,actions: {
-            'new': MODx.action['security/access/policy']
-            ,edit: MODx.action['security/access/policy/update']
-            ,cancel: MODx.action['security/permission']
+            'new': 'security/access/policy'
+            ,edit: 'security/access/policy/update'
+            ,cancel: 'security/permission'
         }
         ,buttons: [{
             process: 'update'
@@ -27,7 +27,7 @@ MODx.page.UpdateAccessPolicy = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['security/permission']}
+            ,params: {a:'security/permission'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-user-group-create' });
-});
-
 /**
  * Loads the usergroup create page
  * 
@@ -15,9 +11,9 @@ MODx.page.CreateUserGroup = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-user-group'
         ,actions: {
-            'new': MODx.action['security/usergroup/create']
-            ,edit: MODx.action['security/usergroup/update']
-            ,cancel: MODx.action['security/permission']
+            'new': 'security/usergroup/create'
+            ,edit: 'security/usergroup/update'
+            ,cancel: 'security/permission'
         }
         ,buttons: [{
             process: 'create'
@@ -31,13 +27,14 @@ MODx.page.CreateUserGroup = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['security/permission']}
+            ,params: {a:'security/permission'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{
             xtype: 'modx-panel-user-group'
+            ,record: config.record || {}
             ,renderTo: 'modx-panel-user-group-div'
         }]
     });

@@ -70,4 +70,17 @@ if (is_array($permissions)) {
     $templates['5']->addMany($permissions);
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Media Source Template Permissions.'); }
 
+/* context template policies */
+$templates['6']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['6']->fromArray(array(
+    'id' => 6,
+    'name' => 'ContextTemplate',
+    'description' => 'Context Policy Template with all attributes.',
+    'lexicon' => 'permissions',
+));
+$permissions = include dirname(__FILE__).'/permissions/transport.policy.tpl.context.php';
+if (is_array($permissions)) {
+    $templates['6']->addMany($permissions);
+} else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Context Template Permissions.'); }
+
 return $templates;

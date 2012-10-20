@@ -7,10 +7,12 @@ $xpdo_meta_map['modNamespace']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'namespaces',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'name' => '',
     'path' => '',
+    'assets_path' => '',
   ),
   'fieldMeta' => 
   array (
@@ -24,6 +26,12 @@ $xpdo_meta_map['modNamespace']= array (
       'index' => 'pk',
     ),
     'path' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'default' => '',
+    ),
+    'assets_path' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
@@ -78,6 +86,14 @@ $xpdo_meta_map['modNamespace']= array (
     'UserSettings' => 
     array (
       'class' => 'modUserSetting',
+      'local' => 'name',
+      'foreign' => 'namespace',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'ExtensionPackages' => 
+    array (
+      'class' => 'modExtensionPackage',
       'local' => 'name',
       'foreign' => 'namespace',
       'cardinality' => 'many',

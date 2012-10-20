@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2012-04-01
  */
 // $_lang['attributes'] = 'Attributes';
 $_lang['attributes'] = 'Atributy';
@@ -271,6 +271,12 @@ $_lang['resourcelist_includeparent'] = 'Zobrazit rodiče';
 
 // $_lang['resourcelist_includeparent_desc'] = 'If Yes, will include the Resources named in the Parents field in the list.';
 $_lang['resourcelist_includeparent_desc'] = 'Je-li nastaveno na Ano, budou v seznamu zobrazeny také dokumenty uvedené v nastavení Rodiče.';
+
+// $_lang['resourcelist_limitrelatedcontext'] = 'Limit to Related Context';
+$_lang['resourcelist_limitrelatedcontext'] = 'Omezit na související kontexty';
+
+// $_lang['resourcelist_limitrelatedcontext_desc'] = 'If Yes, will only include the Resources related to the context of the current Resource.';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Je-li nastaveno Ano, budou zahrnuty pouze dokumenty související s kontextem aktuálního dokumentu.';
 
 // $_lang['resourcelist_limit'] = 'Limit';
 $_lang['resourcelist_limit'] = 'Limit';

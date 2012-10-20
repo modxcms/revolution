@@ -274,9 +274,8 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-snippet-which-editor').getValue();
-            MODx.request.a = MODx.action['element/snippet/update'];
-            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
-            location.href = u;
+            MODx.request.a = 'element/snippet/update';
+            location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
     }    

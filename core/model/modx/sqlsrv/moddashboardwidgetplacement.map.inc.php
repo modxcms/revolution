@@ -7,6 +7,7 @@ $xpdo_meta_map['modDashboardWidgetPlacement']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'dashboard_widget_placement',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'dashboard' => 0,

@@ -15,7 +15,7 @@ class modFormCustomizationSetGetListProcessor extends modObjectGetListProcessor 
     public $classKey = 'modFormCustomizationSet';
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
-    public $defaultSortField = 'controller';
+    public $defaultSortField = 'action';
     public $canEdit = false;
     public $canRemove = false;
 
@@ -30,7 +30,6 @@ class modFormCustomizationSetGetListProcessor extends modObjectGetListProcessor 
     }
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
-        $c->innerJoin('modAction','Action');
         $c->leftJoin('modTemplate','Template');
         $profile = $this->getProperty('profile');
         if (!empty($profile)) {
@@ -51,7 +50,6 @@ class modFormCustomizationSetGetListProcessor extends modObjectGetListProcessor 
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->select($this->modx->getSelectColumns('modFormCustomizationSet','modFormCustomizationSet'));
         $c->select(array(
-            'Action.controller',
             'Template.templatename',
         ));
         return $c;

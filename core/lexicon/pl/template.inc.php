@@ -1,11 +1,11 @@
 <?php
 /**
-* Template Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Template Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['access'] = 'Access';
 $_lang['access'] = 'Access';
@@ -27,6 +27,15 @@ $_lang['template_code'] = 'Template code (html)';
 
 #$_lang['template_desc'] = 'Description';
 $_lang['template_desc'] = 'Description';
+
+#$_lang['template_desc_category'] = 'The Category this Template belongs in.';
+$_lang['template_desc_category'] = 'The Category this Template belongs in.';
+
+#$_lang['template_desc_description'] = 'A short description of this Template.';
+$_lang['template_desc_description'] = 'A short description of this Template.';
+
+#$_lang['template_desc_name'] = 'The name of this Template.';
+$_lang['template_desc_name'] = 'The name of this Template.';
 
 #$_lang['template_delete_confirm'] = 'Are you sure you want to delete this template?';
 $_lang['template_delete_confirm'] = 'Are you sure you want to delete this template?';

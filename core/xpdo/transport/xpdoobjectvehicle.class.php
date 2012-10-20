@@ -102,10 +102,10 @@ class xPDOObjectVehicle extends xPDOVehicle {
      */
     protected function _installObject(& $transport, $options, $element, & $parentObject, $fkMeta) {
         $saved = false;
-        $preserveKeys = false;
         $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
         $upgrade = false;
         $exists = false;
+        /** @var xPDOObject $object */
         $object = $this->get($transport, $options, $element);
         if (is_object($object) && $object instanceof xPDOObject) {
             $vOptions = array_merge($options, $element);
@@ -134,12 +134,46 @@ class xPDOObjectVehicle extends xPDOVehicle {
             elseif (isset ($vOptions['key_expr']) && isset ($vOptions['key_format'])) {
                 //TODO: implement ability to generate new keys
             } else {
-                $criteria = $vOptions[xPDOTransport::NATIVE_KEY];
+                $pk = $object->getPK();
+                $nativeKey = $vOptions[xPDOTransport::NATIVE_KEY];
+                if (is_array($pk) && is_array($nativeKey)) {
+                    $criteria = array_combine($pk, $nativeKey);
+                } elseif (is_string($pk) && is_scalar($nativeKey)) {
+                    $criteria = array($pk => $nativeKey);
+                } else {
+                    $criteria = $nativeKey;
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'The native key provided in the vehicle does not match the primary key field(s) for the object: ' . print_r($nativeKey, true));
+                }
             }
             if (!empty ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
                 $preExistingMode = intval($vOptions[xPDOTransport::PREEXISTING_MODE]);
             }
             if ($this->validate($transport, $object, $vOptions)) {
+                if (!$this->_installRelated($transport, $object, $element, $options, 'foreign')) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install related objects with foreign owned keys for vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not install related objects for vehicle: ' . print_r($vOptions, true));
+                } elseif (!empty($vOptions[xPDOTransport::UNIQUE_KEY])) {
+                    $uniqueKey = $object->get($vOptions[xPDOTransport::UNIQUE_KEY]);
+                    if (is_array($uniqueKey)) {
+                        $criteria = array_combine($vOptions[xPDOTransport::UNIQUE_KEY], $uniqueKey);
+                    } else {
+                        $criteria = array (
+                            $vOptions[xPDOTransport::UNIQUE_KEY] => $uniqueKey
+                        );
+                    }
+                } else {
+                    $pk = $object->getPK();
+                    $nativeKey = $object->get($pk);
+                    if (is_array($pk) && is_array($nativeKey)) {
+                        $criteria = array_combine($pk, $nativeKey);
+                    } elseif (is_string($pk) && is_scalar($nativeKey)) {
+                        $criteria = array($pk => $nativeKey);
+                    } else {
+                        $criteria = $nativeKey;
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'The native key provided in the vehicle does not match the primary key field(s) for the object: ' . print_r($nativeKey, true));
+                    }
+                }
+                /** @var xPDOObject $obj */
                 if ($obj = $transport->xpdo->getObject($vClass, $criteria)) {
                     $exists = true;
                     if ($preExistingMode !== xPDOTransport::REMOVE_PREEXISTING) {
@@ -150,6 +184,11 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     }
                     if ($upgrade) {
                         $obj->fromArray($object->toArray('', true), '', false, true);
+                        $object = $obj;
+                    } else {
+                        if (is_array($criteria)) {
+                            $obj->fromArray($criteria, '', true);
+                        }
                         $object = $obj;
                     }
                 }
@@ -167,24 +206,22 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     if (!$saved) {
                         $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error saving vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
                         if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Error saving vehicle object: " . print_r($vOptions, true));
-                    } else {
-                        if ($parentObject !== null && $fkMeta !== null) {
-                            if ($fkMeta['owner'] == 'foreign') {
-                                if ($object->get($fkMeta['foreign']) !== $parentObject->get($fkMeta['local'])) {
-                                    $parentObject->set($fkMeta['local'], $object->get($fkMeta['foreign']));
-                                    if (!$parentObject->save()) {
-                                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error saving changes to parent object fk field {$fkMeta['local']}");
-                                    }
-                                }
-                            }
-                        }
                     }
                 } else {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping vehicle object of class {$vClass} (data object exists and cannot be upgraded); criteria: " . print_r($criteria, true));
                     if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Skipping vehicle object (data object exists and cannot be upgraded): ' . print_r($vOptions, true));
                 }
-                if (($saved || $exists) && !$this->_installRelated($transport, $object, $element, $options)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install related objects for vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                if (($saved || $exists)) {
+                    if ($parentObject !== null && $fkMeta !== null) {
+                        if ($fkMeta['owner'] == 'foreign') {
+                            if ($object->get($fkMeta['foreign']) !== $parentObject->get($fkMeta['local'])) {
+                                $parentObject->set($fkMeta['local'], $object->get($fkMeta['foreign']));
+                            }
+                        }
+                    }
+                }
+                if (($saved || $exists) && !$this->_installRelated($transport, $object, $element, $options, 'local')) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install related objects with locally owned keys for vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
                     if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not install related objects for vehicle: ' . print_r($vOptions, true));
                 }
                 if ($parentObject === null && !$this->resolve($transport, $object, $vOptions)) {
@@ -203,17 +240,30 @@ class xPDOObjectVehicle extends xPDOVehicle {
 
     /**
      * Installs a related object from the vehicle.
+     *
+     * @param xPDOTransport &$transport
+     * @param xPDOObject &$parent
+     * @param array $element
+     * @param array $options
+     * @return bool
      */
-    public function _installRelated(& $transport, & $parent, $element, $options) {
+    public function _installRelated(& $transport, & $parent, $element, $options, $owner = '') {
         $installed = true;
         if (is_object($parent) && isset ($element[xPDOTransport::RELATED_OBJECTS]) && is_array($element[xPDOTransport::RELATED_OBJECTS])) {
-            $installed = false;
             foreach ($element[xPDOTransport::RELATED_OBJECTS] as $rAlias => $rVehicles) {
-                $parentClass = $parent->_class;
-                $rMeta = $transport->xpdo->getFKDefinition($parentClass, $rAlias);
+                $rMeta = $parent->getFKDefinition($rAlias);
                 if ($rMeta) {
+                    if (!empty($owner) && $owner !== $rMeta['owner']) continue;
+                    $rOptions = $options;
+                    if (isset($element[xPDOTransport::RELATED_OBJECT_ATTRIBUTES])) {
+                        if (isset($element[xPDOTransport::RELATED_OBJECT_ATTRIBUTES][$rAlias])) {
+                            $rOptions = array_merge($rOptions, $element[xPDOTransport::RELATED_OBJECT_ATTRIBUTES][$rAlias]);
+                        } elseif (isset($element[xPDOTransport::RELATED_OBJECT_ATTRIBUTES][$rMeta['class']])) {
+                            $rOptions = array_merge($rOptions, $element[xPDOTransport::RELATED_OBJECT_ATTRIBUTES][$rMeta['class']]);
+                        }
+                    }
                     foreach ($rVehicles as $rKey => $rVehicle) {
-                        $installed = $this->_installObject($transport, $options, $rVehicle, $parent, $rMeta);
+                        $installed = $this->_installObject($transport, $rOptions, $rVehicle, $parent, $rMeta);
                     }
                 }
             }

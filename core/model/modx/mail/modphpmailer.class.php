@@ -60,6 +60,7 @@ class modPHPMailer extends modMail {
                 break;
             case modMail::MAIL_FROM :
                 $this->mailer->From= $this->attributes[$key];
+                $this->mailer->Sender= $this->attributes[$key];
                 break;
             case modMail::MAIL_FROM_NAME :
                 $this->mailer->FromName= $this->attributes[$key];

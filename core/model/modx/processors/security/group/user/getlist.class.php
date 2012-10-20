@@ -59,5 +59,11 @@ class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
         }
         return $c;
     }
+
+    public function prepareRow(xPDOObject $object) {
+        $objectArray = $object->toArray();
+        $objectArray['role_name'] .= ' - '.$objectArray['authority'];
+        return $objectArray;
+    }
 }
 return 'modUserGroupUserGetListProcessor';

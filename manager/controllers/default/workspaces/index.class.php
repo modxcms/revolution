@@ -65,8 +65,6 @@ class WorkspacesManagerController extends modManagerController {
      * @return mixed
      */
     public function process(array $scriptProperties = array()) {
-        $placeholders = array();
-
         /* ensure directories for Package Management are created */
         /** @var modCacheManager $cacheManager */
         $cacheManager = $this->modx->getCacheManager();
@@ -111,13 +109,18 @@ class WorkspacesManagerController extends modManagerController {
 
         if (!empty($errors)) {
             $placeholders['errors'] = $errors;
+            $this->setPlaceholder('errors',$errors);
             $this->templateFile = 'workspaces/error.tpl';
+            $this->prepareLanguage();
+            $error = $this->fetchTemplate($this->templateFile);
+            $this->setPlaceholder('error',$error);
+            $this->templateFile = 'workspaces/index.tpl';
             return $placeholders;
         }
 
         $this->getDefaultProvider();
 
-        return $placeholders;
+        return true;
     }
 
     /**
@@ -165,5 +168,13 @@ class WorkspacesManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('workspace','namespace');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Package+Management';
     }
 }

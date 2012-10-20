@@ -97,10 +97,7 @@ MODx.grid.Sources = function(config) {
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
+                        ,fn: this.blur
                         ,scope: cmp
                     });
                 },scope:this}
@@ -167,7 +164,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         });
     }
     ,createSource: function() {
-        location.href = 'index.php?a='+MODx.action['system/source/create'];
+        location.href = 'index.php?a=system/source/create';
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -207,7 +204,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
 
     ,updateSource: function() {
-        location.href = 'index.php?a='+MODx.action['source/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=source/update&id='+this.menu.record.id;
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
@@ -261,6 +258,7 @@ MODx.window.CreateSource = function(config) {
             ,anchor: '100%'
             ,allowBlank: false
         }]
+        ,keys: []
     });
     MODx.window.CreateSource.superclass.constructor.call(this,config);
 };
@@ -271,7 +269,6 @@ Ext.reg('modx-window-source-create',MODx.window.CreateSource);
 MODx.grid.SourceTypes = function(config) {
     config = config || {};
 
-    this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'source/type.php'
         ,fields: ['class','name','description']
@@ -283,13 +280,11 @@ MODx.grid.SourceTypes = function(config) {
             ,dataIndex: 'name'
             ,width: 150
             ,sortable: true
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
-            ,editor: { xtype: 'textarea' }
         }]
         ,tbar: [/*{
             text: _('source_type_create')
@@ -340,7 +335,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,createSourceType: function() {
-        location.href = 'index.php?a='+MODx.action['system/source/type/create'];
+        location.href = 'index.php?a=system/source/type/create';
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -380,7 +375,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,updateSourceType: function() {
-        location.href = 'index.php?a='+MODx.action['source/type/update']+'&id='+this.menu.record.id;
+        location.href = 'index.php?a=source/type/update&id='+this.menu.record.id;
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

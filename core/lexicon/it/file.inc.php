@@ -8,7 +8,7 @@
  */
 $_lang['directory'] = 'Directory';
 $_lang['file_confirm_remove'] = 'Sei sicuro di voler rimuovere questo file? Il sito potrebbe danneggiarsi.';
-$_lang['file_create'] = 'Crea File';
+$_lang['file_create'] = 'Creare File';
 $_lang['file_deleted'] = '<span style="color:#009900">Successo!</span>';
 $_lang['file_delete_file'] = 'Elimina file';
 $_lang['file_delete_folder'] = 'Elimina cartella';
@@ -63,6 +63,8 @@ $_lang['file_folder_remove_confirm'] = 'Sei sicuro di voler rimuovere questa dir
 $_lang['file_last_accessed'] = 'Ultimo accesso';
 $_lang['file_last_modified'] = 'Ultima modifica';
 $_lang['file_name'] = 'Nome del file';
+$_lang['file_quick_create'] = 'Creazione rapida file';
+$_lang['file_quick_update'] = 'Modifica rapida file';
 $_lang['file_remove'] = 'Rimuovi file';
 $_lang['file_remove_confirm'] = 'Sei sicuro di voler rimuovere completamente questo file?';
 $_lang['file_saved'] = 'File aggiornato con successo!';

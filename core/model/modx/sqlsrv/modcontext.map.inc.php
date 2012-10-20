@@ -7,6 +7,7 @@ $xpdo_meta_map['modContext']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'context',
+  'extends' => 'modAccessibleObject',
   'fields' => 
   array (
     'key' => NULL,

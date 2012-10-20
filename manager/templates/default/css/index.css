@@ -31,6 +31,17 @@ hr {
     margin: 20px;
 }
 
+/* normalize */
+textarea{
+    overflow: auto;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+
 .aleft { text-align: left; }
 .aright { text-align: right; }
 .right { float: right; }
@@ -65,8 +76,8 @@ hr {
     border-radius: 4px;
     background: none repeat scroll 0 0 transparent;
     border: 0;
-    margin: 20px 0 10px 10px;
-    padding: 0;
+    margin: 20px 0 10px 0;
+    padding: 0 0 0 10px;
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
@@ -82,6 +93,7 @@ hr {
 #modx-leftbar .x-tab-strip-active{
     background-color: #fbfbfb !important;
     border-color: #999 !important;
+    filter: none;
 }
 
 #modx-leftbar ul.x-tab-strip-top span.x-tab-strip-text{}
@@ -127,8 +139,8 @@ hr {
 	padding: 0;
 }
 #modx-leftbar .x-btn button {
-	height: 20px !important;
-	padding: 3px 9px 0 !important;
+    width: 18px;
+    padding: 3px 8px 0 !important;
 }
 
 #modx-content {
@@ -364,8 +376,8 @@ textarea.x-form-field {
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
-    background-color:#eaeaea;
     background-color:rgba(224, 224, 224, 0.75);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0e0e0e0,endColorstr=#c0e0e0e0);
     padding:5px;
     position:fixed;
     right:20px;
@@ -466,6 +478,7 @@ textarea.x-form-field {
 .rightlogin {
     float: right;
 }
+.rightlogin .modx-user-profile,
 .rightlogin a {
     color: #888;
     text-decoration: none;
@@ -474,6 +487,7 @@ textarea.x-form-field {
     margin: 10px 10px 0 0;
     float: left;
 }
+.rightlogin .modx-user-profile:hover,
 .rightlogin a:hover {
     color: #ddd;
 }
@@ -1056,6 +1070,9 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 .x-superboxselect-item-close:hover, .x-superboxselect-item-close:active  { background-position: left -12px;}
 .x-superboxselect-item-focus .x-superboxselect-item-close{ background-position: left -24px}
 .x-item-disabled .x-superboxselect-item-close{ background-position: left -36px}
+.x-superboxselect-ct .x-form-field-wrap,
+.ext-strict .x-superboxselect-ct .x-form-field-trigger-wrap .x-form-text,
+.x-superboxselect-ct .x-superboxselect { height: auto !important; }
 
 /* other */
 .modx-tree-load-msg {
@@ -1076,7 +1093,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 }
 .dashboard-block {
     float: left;
-    margin: 6px;
+    margin: 6px 1% 6px 0;
     background-color: white;
     border: 1px solid #ddd;
     -webkit-border-radius: 2px;
@@ -1124,6 +1141,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	border-top-left-radius:2px;
 	border-top-right-radius:2px;
 	margin:0;
+    zoom: 1;
 }
 .dashboard-block-half {
     width: 48%;
@@ -1488,13 +1506,12 @@ span.required {
     color: #777;
     padding: 0 0 10px;
 }
-
-#modx-resource-tvs-div {
-    border-top: 0;
-    border-bottom: 0;
+#modx-resource-tvs-div{
+    border-top-width: 0;
 }
-#modx-tv-tabs .x-tab-panel-header {
-    border-top: 1px solid #999;
+#modx-resource-tvs-div.below-content{
+    border-top-width: 1px;
+    margin-top: 10px;
 }
 
 /* for selectability in ext grids */
@@ -1694,8 +1711,12 @@ span.required {
     padding: 10px 5px 35px;
 }
 .x-grid3-cell-inner.x-grid3-col-main h3{
-	font-size: 16px;
-    margin: 0 0 2px;
+	font-family: arial,Helvetica,sans-serif;
+	font-size: 20px;
+	letter-spacing: -1px;
+	color: #555555;
+	line-height: 1;
+    margin: 0 0 2px;	
 }
 .x-grid3-cell-inner.x-grid3-col-main  .not-installed{
 	color: #999999;

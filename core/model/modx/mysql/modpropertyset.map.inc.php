@@ -7,6 +7,7 @@ $xpdo_meta_map['modPropertySet']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'property_set',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',
@@ -84,6 +85,17 @@ $xpdo_meta_map['modPropertySet']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Elements' => 
+    array (
+      'class' => 'modElementPropertySet',
+      'local' => 'id',
+      'foreign' => 'property_set',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'Category' => 
@@ -94,17 +106,6 @@ $xpdo_meta_map['modPropertySet']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Elements' => 
-    array (
-      'class' => 'modElementPropertySet',
-      'local' => 'id',
-      'foreign' => 'property_set',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

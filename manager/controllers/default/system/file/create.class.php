@@ -8,6 +8,8 @@
 class SystemFileCreateManagerController extends modManagerController {
     /** @var string The directory to create in */
     public $directory = '';
+    /** @var modMediaSource $source */
+    public $source = null;
 
     /**
      * Check for any permissions or requirements to load page
@@ -35,7 +37,8 @@ class SystemFileCreateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-file-create"
                 ,record: {
-                    directory: "'.$this->directory.'"
+                    directory: "'.$this->directory.'",
+                    source: "'.$this->source->get('id')  .'"
                 }
             });
         });</script>');
@@ -49,6 +52,7 @@ class SystemFileCreateManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
         $this->modx->lexicon->load('file');
+        $this->getSource();
 
         $directory = !empty($scriptProperties['directory']) ? $scriptProperties['directory'] : '';
         $this->directory = ltrim(strip_tags(str_replace(array('../','./'),'',$directory)),'/');
@@ -65,20 +69,23 @@ class SystemFileCreateManagerController extends modManagerController {
      */
     public function getSource() {
         /** @var modMediaSource|modFileMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $source = $this->modx->getOption('source',$this->scriptProperties,false);
-        if (!empty($source)) {
-            $source = $this->modx->getObject('source.modMediaSource',$source);
+        if (!$this->source) {
+            $this->modx->loadClass('sources.modMediaSource');
+            $source = $this->modx->getOption('source',$this->scriptProperties,false);
+            if (!empty($source)) {
+                $source = $this->modx->getObject('source.modMediaSource',$source);
+            }
+            if (empty($source)) {
+                $source = modMediaSource::getDefaultSource($this->modx);
+            }
+            if (!$source->getWorkingContext()) {
+                return $this->failure($this->modx->lexicon('permission_denied'));
+            }
+            $source->setRequestProperties($this->scriptProperties);
+            $source->initialize();
+            $this->source = $source;
         }
-        if (empty($source)) {
-            $source = modMediaSource::getDefaultSource($this->modx);
-        }
-        if (!$source->getWorkingContext()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        $source->setRequestProperties($this->scriptProperties);
-        $source->initialize();
-        return $source;
+        return $this->source;
     }
 
     /**

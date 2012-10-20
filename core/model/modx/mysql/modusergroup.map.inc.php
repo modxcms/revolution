@@ -7,6 +7,7 @@ $xpdo_meta_map['modUserGroup']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'membergroup_names',
+  'extends' => 'modPrincipal',
   'fields' => 
   array (
     'name' => '',
@@ -129,6 +130,25 @@ $xpdo_meta_map['modUserGroup']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'UserGroupMembers' => 
+    array (
+      'class' => 'modUserGroupMember',
+      'local' => 'id',
+      'foreign' => 'user_group',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'FormCustomizationProfiles' => 
+    array (
+      'class' => 'modFormCustomizationProfileUserGroup',
+      'local' => 'id',
+      'foreign' => 'usergroup',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'Parent' => 
@@ -154,25 +174,6 @@ $xpdo_meta_map['modUserGroup']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'UserGroupMembers' => 
-    array (
-      'class' => 'modUserGroupMember',
-      'local' => 'id',
-      'foreign' => 'user_group',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'FormCustomizationProfiles' => 
-    array (
-      'class' => 'modFormCustomizationProfileUserGroup',
-      'local' => 'id',
-      'foreign' => 'usergroup',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

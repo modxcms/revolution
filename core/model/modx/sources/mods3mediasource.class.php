@@ -528,7 +528,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         $this->xpdo->logManagerAction('file_upload','',$container);
 
-        return true;
+        return !$this->hasErrors();
     }
 
     /**

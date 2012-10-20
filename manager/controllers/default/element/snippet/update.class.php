@@ -126,9 +126,10 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender',array(
             'id' => $this->snippetArray['id'],
             'snippet' => &$this->snippet,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
+        $this->setPlaceholder('onSnipFormPrerender', $this->onSnipFormPrerender);
     }
 
     /**
@@ -139,7 +140,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->onSnipFormRender = $this->modx->invokeEvent('OnSnipFormRender',array(
             'id' => $this->snippetArray['id'],
             'snippet' => &$this->snippet,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onSnipFormRender)) $this->onSnipFormRender = implode('',$this->onSnipFormRender);
         $this->onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onSnipFormRender);
@@ -169,5 +170,13 @@ class ElementSnippetUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('snippet','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Snippets';
     }
 }

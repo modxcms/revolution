@@ -75,7 +75,10 @@ abstract class xPDOQuery extends xPDOCriteria {
         ' INTERVAL(',
         ' LEAST(',
         'MATCH(',
-        'MATCH ('
+        'MATCH (',
+        'MAX(',
+        'MIN(',
+        'AVG('
     );
     protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
     protected $_class= null;
@@ -278,6 +281,34 @@ abstract class xPDOQuery extends xPDOCriteria {
                     $local= $fkMeta['local'];
                     $foreign= $fkMeta['foreign'];
                     $conditions= $this->xpdo->escape($parentAlias) . '.' . $this->xpdo->escape($local) . ' =  ' . $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($foreign);
+                    if (isset($fkMeta['criteria']['local'])) {
+                        $localCriteria = array();
+                        if (is_array($fkMeta['criteria']['local'])) {
+                            foreach ($fkMeta['criteria']['local'] as $critKey => $critVal) {
+                                if (is_numeric($critKey)) {
+                                    $localCriteria[] = $critVal;
+                                } else {
+                                    $localCriteria["{$this->_class}.{$critKey}"] = $critVal;
+                                }
+                            }
+                        }
+                        if (!empty($localCriteria)) {
+                            $conditions = array($localCriteria, $conditions);
+                        }
+                        $foreignCriteria = array();
+                        if (is_array($fkMeta['criteria']['foreign'])) {
+                            foreach ($fkMeta['criteria']['foreign'] as $critKey => $critVal) {
+                                if (is_numeric($critKey)) {
+                                    $foreignCriteria[] = $critVal;
+                                } else {
+                                    $foreignCriteria["{$parentAlias}.{$critKey}"] = $critVal;
+                                }
+                            }
+                        }
+                        if (!empty($foreignCriteria)) {
+                            $conditions = array($foreignCriteria, $conditions);
+                        }
+                    }
                 }
             }
             $this->condition($target[$targetIdx]['conditions'], $conditions, $conjunction, $binding, $condGroup);
@@ -380,7 +411,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     }
 
     public function having($conditions) {
-        //TODO: implement HAVING clause support
+        $this->query['having'][] = $this->parseConditions((array) $conditions);
         return $this;
     }
 
@@ -443,6 +474,34 @@ abstract class xPDOQuery extends xPDOCriteria {
             $foreign= $fkMeta['foreign'];
             $this->select($this->xpdo->getSelectColumns($class, $classAlias, $classAlias . '_'));
             $expression= $this->xpdo->escape($parentAlias) . '.' . $this->xpdo->escape($local) . ' = ' .  $this->xpdo->escape($classAlias) . '.' . $this->xpdo->escape($foreign);
+            if (isset($fkMeta['criteria']['local'])) {
+                $localCriteria = array();
+                if (is_array($fkMeta['criteria']['local'])) {
+                    foreach ($fkMeta['criteria']['local'] as $critKey => $critVal) {
+                        if (is_numeric($critKey)) {
+                            $localCriteria[] = $critVal;
+                        } else {
+                            $localCriteria["{$classAlias}.{$critKey}"] = $critVal;
+                        }
+                    }
+                }
+                if (!empty($localCriteria)) {
+                    $expression = array($localCriteria, $expression);
+                }
+                $foreignCriteria = array();
+                if (is_array($fkMeta['criteria']['foreign'])) {
+                    foreach ($fkMeta['criteria']['foreign'] as $critKey => $critVal) {
+                        if (is_numeric($critKey)) {
+                            $foreignCriteria[] = $critVal;
+                        } else {
+                            $foreignCriteria["{$parentAlias}.{$critKey}"] = $critVal;
+                        }
+                    }
+                }
+                if (!empty($foreignCriteria)) {
+                    $expression = array($foreignCriteria, $expression);
+                }
+            }
             $this->leftJoin($class, $classAlias, $expression);
             if (!empty ($relations)) {
                 foreach ($relations as $relationAlias => $subRelations) {

@@ -64,4 +64,12 @@ class SecurityPermissionManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('user','access','policy','context');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Security';
+    }
 }

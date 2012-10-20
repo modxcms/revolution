@@ -61,13 +61,12 @@ class modElementGetNodesProcessor extends modProcessor {
     }
 
     public function getActions() {
-        $actions = $this->modx->request->getAllActionIDs();
         $this->actionMap = array(
-            'template' => $actions['element/template/update'],
-            'tv' => $actions['element/tv/update'],
-            'chunk' => $actions['element/chunk/update'],
-            'snippet' => $actions['element/snippet/update'],
-            'plugin' => $actions['element/plugin/update'],
+            'template' => 'element/template/update',
+            'tv' => 'element/tv/update',
+            'chunk' => 'element/chunk/update',
+            'snippet' => 'element/snippet/update',
+            'plugin' => 'element/plugin/update',
         );
     }
 
@@ -353,6 +352,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'type' => $elementIdentifier,
                 'elementType' => $elementType,
                 'classKey' => $elementClassKey,
+                'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
             );
         }
@@ -468,6 +468,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'type' => $map[1],
                 'elementType' => $elementType,
                 'classKey' => $elementClassKey,
+                'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
             );
         }

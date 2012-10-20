@@ -88,7 +88,7 @@ $_lang['resource_group_resource_err_nf'] = 'Die Ressource ist nicht Teil dieser 
 $_lang['resource_hide_from_menus'] = 'Nicht in Menüs anzeigen';
 $_lang['resource_hide_from_menus_help'] = 'Wenn diese Einstellung aktiviert ist, ist die Ressource <b>nicht</b> für die Verwendung in Menüs Ihrer Website verfügbar. Bitte beachten Sie, dass einige Menü-Skripte diese Option ignorieren könnten.';
 $_lang['resource_link_attributes'] = 'Link-Attribute';
-$_lang['resource_link_attributes_help'] = 'Attribute für den Link für diese Ressource, z.B. target= or rel=.';
+$_lang['resource_link_attributes_help'] = 'Attribute für den Link für diese Ressource, z.B. target= oder rel=.';
 $_lang['resource_locked_by'] = 'Gesperrt durch [[+user]]';
 $_lang['resource_longtitle'] = 'Langer Titel';
 $_lang['resource_longtitle_help'] = 'Dies ist ein längerer Titel für Ihre Ressource. Das ist nützlich für Suchmaschinen und kann die Ressource besser beschreiben.';
@@ -161,3 +161,5 @@ $_lang['weblink_create_here'] = 'Weblink hier erstellen';
 $_lang['weblink_help'] = 'Die Adresse des Objekts, das Sie mit diesem Weblink referenzieren möchten. Wenn Sie auf eine existierende MODX-Ressource verweisen möchten, geben Sie hier deren ID ein.';
 $_lang['weblink_message'] = 'Ein Weblink ist eine Referenz auf ein Objekt im Internet. Dies kann ein Dokument innerhalb von MODX, eine Seite in einer anderen Website oder ein Bild oder eine andere Datei im Internet sein.<p>';
 $_lang['weblink_new'] = 'Neuer Weblink';
+$_lang['weblink_response_code'] = 'HTTP-Statuscode';
+$_lang['weblink_response_code_help'] = 'Der HTTP-Statuscode, der für den Weblink gesendet werden soll.';

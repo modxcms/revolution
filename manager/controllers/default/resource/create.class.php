@@ -63,6 +63,10 @@ class ResourceCreateManagerController extends ResourceManagerController {
         if (!empty($this->scriptProperties['parent'])) {
             $this->parent = $this->modx->getObject('modResource',$this->scriptProperties['parent']);
             if (!$this->parent->checkPolicy('add_children')) return $this->failure($this->modx->lexicon('resource_add_children_access_denied'));
+        } else {
+            $this->parent = $this->modx->newObject('modResource');
+            $this->parent->set('id',0);
+            $this->parent->set('template',$this->modx->getOption('default_template',null,1));
         }
         $placeholders['parent'] = $this->parent;
 
@@ -82,8 +86,11 @@ class ResourceCreateManagerController extends ResourceManagerController {
         /* check permissions */
         $this->setPermissions();
 
+        /* initialize FC rules */
+        $overridden = array();
+        
         /* set default template */
-        if(empty($reloadData)) {
+        if (empty($reloadData)) {
             $defaultTemplate = $this->getDefaultTemplate();
             $this->resourceArray = array_merge($this->resourceArray,array(
                 'template' => $defaultTemplate,
@@ -96,28 +103,37 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 'published' => $this->context->getOption('publish_default', 0, $this->modx->_userConfig),
                 'searchable' => $this->context->getOption('search_default', 1, $this->modx->_userConfig),
                 'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
+                'syncsite' => true,
             ));
             $this->parent->fromArray($this->resourceArray);
             $this->parent->set('template',$defaultTemplate);
             $this->resource->set('template',$defaultTemplate);
             $this->getResourceGroups();
+            
+            /* check FC rules */
+            $overridden = $this->checkFormCustomizationRules($this->parent,true);
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = array();
-            $this->resourceArray['resource_groups'] = $this->modx->fromJSON($this->resourceArray['resource_groups']);
-            foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
-                $this->resourceArray['resourceGroups'][] = array(
-                    $resourceGroup['id'],
-                    $resourceGroup['name'],
-                    $resourceGroup['access'],
-                );
+            $this->resourceArray['syncsite'] = true;
+            $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups']) ? $this->resourceArray['resource_groups'] : $this->modx->fromJSON($this->resourceArray['resource_groups']);
+            if (is_array($this->resourceArray['resource_groups'])) {
+                foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
+                    $this->resourceArray['resourceGroups'][] = array(
+                        $resourceGroup['id'],
+                        $resourceGroup['name'],
+                        $resourceGroup['access'],
+                    );
+                }
             }
             unset($this->resourceArray['resource_groups']);
-            $this->resource->set('template', $reloadData['template']);
+            $this->resource->fromArray($reloadData); // We should have in Reload Data everything needed to do form customization checkings
+            
+            /* check FC rules */
+            $overridden = $this->checkFormCustomizationRules($this->resource,true); // This "forParent" doesn't seems logical for me, but it seems that all "resource/create" rules require this (see /core/model/modx/processors/security/forms/set/import.php for example)
         }
 
-        /* handle FC rules */
-        $overridden = $this->checkFormCustomizationRules($this->parent,true);
+        /* apply FC rules */
         $this->resourceArray = array_merge($this->resourceArray,$overridden);
 
         /* handle checkboxes and defaults */
@@ -129,10 +145,12 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = isset($this->resourceArray['cacheable']) && intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = isset($this->resourceArray['deleted']) && intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = isset($this->resourceArray['uri_override']) && intval($this->resourceArray['uri_override']) == 1 ? true : false;
+        $this->resourceArray['syncsite'] = isset($this->resourceArray['syncsite']) && intval($this->resourceArray['syncsite']) == 1 ? true : false;
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
             } else {
+                /** @var modResource $overriddenParent */
                 $overriddenParent = $this->modx->getObject('modResource',$this->resourceArray['parent']);
                 if ($overriddenParent) {
                     $this->resourceArray['parent_pagetitle'] = $overriddenParent->get('pagetitle');
@@ -163,7 +181,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
-            'modActionDom.action' => $this->config['id'],
+            'modActionDom.action' => 'resource/create',
             'modActionDom.name' => 'template',
             'modActionDom.container' => 'modx-panel-resource',
             'modActionDom.rule' => 'fieldDefault',
@@ -221,7 +239,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
     public function getTemplateFile() {
         return 'resource/create.tpl';
     }
-
 }
 
 class DocumentCreateManagerController extends ResourceCreateManagerController {}

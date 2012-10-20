@@ -124,9 +124,10 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $this->onTempFormPrerender = $this->modx->invokeEvent('OnTempFormPrerender',array(
             'id' => $this->templateArray['id'],
             'template' => &$this->template,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTempFormPrerender)) $this->onTempFormPrerender = implode('',$this->onTempFormPrerender);
+        $this->setPlaceholder('onTempFormPrerender', $this->onTempFormPrerender);
     }
 
     /**
@@ -137,7 +138,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $this->onTempFormRender = $this->modx->invokeEvent('OnTempFormRender',array(
             'id' => $this->templateArray['id'],
             'template' => &$this->template,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTempFormRender)) $this->onTempFormRender = implode('',$this->onTempFormRender);
         $this->onTempFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTempFormRender);
@@ -167,5 +168,13 @@ class ElementTemplateUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('template','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Templates';
     }
 }

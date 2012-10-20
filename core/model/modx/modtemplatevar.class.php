@@ -293,7 +293,11 @@ class modTemplateVar extends modElement {
                     $source = $this->xpdo->newObject($classKey);
                     if ($source) {
                         $source->fromArray($sourceCache,'',true,true);
-                        $value = $source->prepareOutputUrl($value);
+                        $source->initialize();
+                        $isAbsolute = strpos($value,'http://') === 0 || strpos($value,'https://') === 0 || strpos($value,'ftp://') === 0;
+                        if (!$isAbsolute) {
+                            $value = $source->prepareOutputUrl($value);
+                        }
                     }
                 }
             }
@@ -305,14 +309,20 @@ class modTemplateVar extends modElement {
      * Renders input forms for the template variable.
      *
      * @access public
-     * @param integer $resourceId The id of the resource; 0 defaults to the
-     * current resource.
+     * @param modResource|null $resource The resource; 0 defaults to the current resource.
      * @param mixed $options Array of options ('value', 'style') or deprecated $style string
      * @return mixed The rendered input for the template variable.
      */
-    public function renderInput($resourceId= 0, $options) {
+    public function renderInput($resource= null, $options = array()) {
+        if (is_int($resource)) {
+            $resource = $this->xpdo->getObject('modResource',$resource);
+        }
+        if (empty($resource)) {
+            $resource = $this->xpdo->resource;
+        }
+        $resourceId = $resource ? $resource->get('id') : 0;
 
-        if(is_string($options) && !empty($options)) {
+        if (is_string($options) && !empty($options)) {
             // fall back to deprecated $style setting
             $style = $options;
         } else {
@@ -336,7 +346,7 @@ class modTemplateVar extends modElement {
         }
 
         /* if any FC tvDefault rules, set here */
-        $value = $this->checkForFormCustomizationRules($value,$resourceId);
+        $value = $this->checkForFormCustomizationRules($value,$resource);
         /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
         $this->set('value',$value);
         $this->set('processedValue',$value);
@@ -514,17 +524,22 @@ class modTemplateVar extends modElement {
     /**
      * Check for any Form Customization rules for this TV
      * @param string $value
-     * @param int $resourceId
+     * @param modResource $resource
      * @return mixed
      */
-    public function checkForFormCustomizationRules($value,$resourceId = 0) {
+    public function checkForFormCustomizationRules($value,&$resource) {
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
-            $resource = false;
-            if (!empty($resourceId)) {
-                /** @var modResource $resource */
-                $resource = $this->xpdo->getObject('modResource',$resourceId);
+            if (empty($resource)) {
+                $resource =& $this->xpdo->resource;
             }
-            $userGroups = $this->xpdo->user->getUserGroups();
+            if ($this->xpdo->getOption('form_customization_use_all_groups',null,false)) {
+                $userGroups = $this->xpdo->user->getUserGroups();
+            } else {
+                $primaryGroup = $this->xpdo->user->getPrimaryGroup();
+                if ($primaryGroup) {
+                    $userGroups = array($primaryGroup->get('id'));
+                }
+            }
             $c = $this->xpdo->newQuery('modActionDom');
             $c->innerJoin('modFormCustomizationSet','FCSet');
             $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
@@ -541,16 +556,18 @@ class modTemplateVar extends modElement {
                 'FCSet.active' => true,
                 'Profile.active' => true,
             ));
-            $c->where(array(
-                array(
-                    'ProfileUserGroup.usergroup:IN' => $userGroups,
+            if (!empty($userGroups)) {
+                $c->where(array(
                     array(
-                        'OR:ProfileUserGroup.usergroup:IS' => null,
-                        'AND:UGProfile.active:=' => true,
+                        'ProfileUserGroup.usergroup:IN' => $userGroups,
+                        array(
+                            'OR:ProfileUserGroup.usergroup:IS' => null,
+                            'AND:UGProfile.active:=' => true,
+                        ),
                     ),
-                ),
-                'OR:ProfileUserGroup.usergroup:=' => null,
-            ),xPDOQuery::SQL_AND,null,2);
+                    'OR:ProfileUserGroup.usergroup:=' => null,
+                ),xPDOQuery::SQL_AND,null,2);
+            }
             if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
                 $c->where(array(
                     'modActionDom.action' => $this->xpdo->request->action,
@@ -568,10 +585,10 @@ class modTemplateVar extends modElement {
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             /** @var modActionDom $rule */
             foreach ($domRules as $rule) {
-                if (!empty($resourceId)) {
+                if (!empty($resource)) {
                     $template = $rule->get('template');
-                    if (!empty($template)) {
-                        if ($resource && $template != $resource->get('template')) continue;
+                    if (!empty($template) && $template != $resource->get('template')) {
+                        continue;
                     }
                 }
                 switch ($rule->get('rule')) {
@@ -1017,6 +1034,36 @@ class modTemplateVar extends modElement {
             'templateid' => is_object($template) ? $template->get('id') : $template,
         ));
         return !empty($templateVarTemplate) && is_object($templateVarTemplate);
+    }
+
+    /**
+     * Check to see if the
+     * @param modUser|null $user
+     * @param string $context
+     * @return bool
+     */
+    public function checkResourceGroupAccess($user = null,$context = '') {
+        $context = !empty($context) ? $context : $this->xpdo->context;
+        $user = !empty($user) ? $user : $this->xpdo->user;
+
+        $c = $this->xpdo->newQuery('modResourceGroup');
+        $c->innerJoin('modTemplateVarResourceGroup','TemplateVarResourceGroups',array(
+            'TemplateVarResourceGroups.documentgroup = modResourceGroup.id',
+            'TemplateVarResourceGroups.tmplvarid' => $this->get('id'),
+        ));
+        $resourceGroups = $this->xpdo->getCollection('modResourceGroup',$c);
+        $hasAccess = true;
+        if (!empty($resourceGroups)) {
+            $hasAccess = false;
+            /** @var modResourceGroup $resourceGroup */
+            foreach ($resourceGroups as $resourceGroup) {
+                if ($resourceGroup->hasAccess($user,$context)) {
+                    $hasAccess = true;
+                    break;
+                }
+            }
+        }
+        return $hasAccess;
     }
 }
 

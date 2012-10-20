@@ -126,7 +126,7 @@ MODx.panel.FCSet = function(config) {
                 }]
             }]
         },{
-            title: _('tabs')
+            title: _('regions')
             ,border: false
             ,items: [{
                 html: '<p>'+_('set_tabs_msg')+'</p>'
@@ -241,7 +241,7 @@ MODx.grid.FCSetFields = function(config) {
             ,dataIndex: 'name'
             ,width: 200
         },{
-            header: _('tab')
+            header: _('region')
             ,dataIndex: 'tab'
             ,width: 100
         },this.vcb,{
@@ -459,14 +459,14 @@ MODx.grid.FCSetTVs = function(config) {
             ,dataIndex: 'default_text'
             ,editable: false
         },{
-            header: _('tab')
+            header: _('region')
             ,dataIndex: 'tab'
             ,width: 100
             ,editor: { xtype: 'textfield' }
         },{
             header: _('tab_rank')
             ,dataIndex: 'rank'
-            ,width: 60
+            ,width: 70
             ,editor: { xtype: 'textfield' }
         }]
         ,viewConfig: {

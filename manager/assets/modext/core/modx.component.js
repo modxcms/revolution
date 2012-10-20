@@ -110,7 +110,7 @@ Ext.reg('modx-component',MODx.Component);
 MODx.toolbar.ActionButtons = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        actions: { 'close': MODx.action.welcome }
+        actions: { 'close': 'welcome' }
         ,formpanel: false
         ,id: 'modx-action-buttons'
         ,loadStay: false
@@ -278,7 +278,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     /* allow for success messages */
                     MODx.msg.status({
                         title: _('success')
-                        ,message: _('save_successful')
+                        ,message: r.result.message || _('save_successful')
                         ,dontHide: r.result.message != '' ? true : false
                     });
                     Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);

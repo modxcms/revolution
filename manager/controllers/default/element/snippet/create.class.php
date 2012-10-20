@@ -79,6 +79,7 @@ class ElementSnippetCreateManagerController extends modManagerController {
             'mode' => modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
+        $this->setPlaceholder('onSnipFormPrerender', $this->onSnipFormPrerender);
     }
 
     /**
@@ -118,5 +119,13 @@ class ElementSnippetCreateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('snippet','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Snippets';
     }
 }

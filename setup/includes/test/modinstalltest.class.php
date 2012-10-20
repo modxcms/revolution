@@ -117,9 +117,10 @@ abstract class modInstallTest {
      */
     protected function _returnBytes($val) {
         if (is_integer($val)) return $val;
-        $val = trim($val);
-        $num = intval(substr($val,0,strlen($val)-1));
-        $last = strtolower(substr($val,-1));
+        $lval = strtolower(trim($val));
+        if (strpos($lval,'m') === false && strpos($lval,'g') === false && strpos($lval,'k') === false && intval(trim($lval)) > 0) return intval($lval);
+        $num = intval(substr($lval,0,strlen($lval)-1));
+        $last = substr($lval,-1);
         switch ($last) {
             case 'g':
                 $num *= 1024;
@@ -338,9 +339,6 @@ abstract class modInstallTest {
         if (empty($documentRoot)) {
             $this->install->settings->set('compress_js',0);
             $this->install->settings->set('compress_css',0);
-        } else {
-            $this->install->settings->set('compress_js',1);
-            $this->install->settings->set('compress_css',1);
         }
         $this->install->settings->store();
     }

@@ -7,6 +7,7 @@ $xpdo_meta_map['modActiveUser']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'active_users',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'internalKey' => 0,

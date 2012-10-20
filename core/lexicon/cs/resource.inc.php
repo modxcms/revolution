@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2012-04-01
  */
 // $_lang['access'] = 'Access';
 $_lang['access'] = 'Přístup';
@@ -458,3 +458,9 @@ $_lang['weblink_message'] = 'Webový odkaz je odkazem na místo na internetu. M�
 
 // $_lang['weblink_new'] = 'New Weblink';
 $_lang['weblink_new'] = 'Nový webový odkaz';
+
+// $_lang['weblink_response_code'] = 'Response Code';
+$_lang['weblink_response_code'] = 'Kód odpovědi';
+
+// $_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';
+$_lang['weblink_response_code_help'] = 'HTTP kód odpovědi, který se má odesílat při dotazu na webový odkaz.';

@@ -1,11 +1,11 @@
 <?php
 /**
-* Welcome Page Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Welcome Page Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['active_users_none'] = 'No currently active users.';
 $_lang['active_users_none'] = 'W tej chwili nie ma aktywnych użytkowników.'; #

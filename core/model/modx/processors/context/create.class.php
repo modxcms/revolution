@@ -14,7 +14,8 @@ class modContextCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modContext';
     public $languageTopics = array('context');
     public $permission = 'new_context';
-    public $elementType = 'context';
+    public $objectType = 'context';
+    public $primaryKeyField = 'key';
 
     public function beforeSave() {
         $key = $this->getProperty('key');
@@ -63,7 +64,7 @@ class modContextCreateProcessor extends modObjectCreateProcessor {
         /** @var modUserGroup $adminGroup */
         $adminGroup = $this->modx->getObject('modUserGroup',array('name' => 'Administrator'));
         /** @var modAccessPolicy $adminContextPolicy */
-        $adminContextPolicy = $this->modx->getObject('modAccessPolicy',array('name' => 'Object'));
+        $adminContextPolicy = $this->modx->getObject('modAccessPolicy',array('name' => 'Context'));
         if ($adminGroup) {
             if ($adminContextPolicy) {
                 /** @var modAccessContext $adminAdminAccess */

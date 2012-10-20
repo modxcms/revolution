@@ -129,6 +129,7 @@ $_lang['perm.resourcegroup_resource_list_desc'] = 'Voir ou lister les ressources
 $_lang['perm.resourcegroup_new_desc'] = 'Créer de nouveaux groupes de ressources.';
 $_lang['perm.resourcegroup_save_desc'] = 'Sauvegarder des groupes de ressources.';
 $_lang['perm.resourcegroup_view_desc'] = 'Lister les groupes de ressources.';
+$_lang['perm.resource_duplicate_desc'] = 'Dupliquer les ressources.';
 $_lang['perm.resource_quick_create_desc'] = 'Peut utiliser la création rapide de ressource dans l\'arborescence.';
 $_lang['perm.resource_quick_update_desc'] = 'Peut utiliser la mise à jour rapide de ressource dans l\'arborescence.';
 $_lang['perm.resource_tree_desc'] = 'Voir l\'arborescence dans le menu de gauche.';

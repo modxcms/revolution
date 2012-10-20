@@ -7,6 +7,7 @@ $xpdo_meta_map['modMediaSourceContext']= array (
   'package' => 'modx.sources',
   'version' => '1.1',
   'table' => 'media_sources_contexts',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'source' => 0,

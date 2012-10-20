@@ -7,6 +7,7 @@ $xpdo_meta_map['modUserMessage']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'user_messages',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'type' => '',

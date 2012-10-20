@@ -306,9 +306,8 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-plugin-which-editor').getValue();
-            MODx.request.a = MODx.action['element/plugin/update'];
-            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
-            location.href = u;
+            MODx.request.a = 'element/plugin/update';
+            location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
     }    

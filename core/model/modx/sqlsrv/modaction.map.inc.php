@@ -7,10 +7,10 @@ $xpdo_meta_map['modAction']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'actions',
+  'extends' => 'modAccessibleSimpleObject',
   'fields' => 
   array (
     'namespace' => 'core',
-    'parent' => 0,
     'controller' => NULL,
     'haslayout' => 1,
     'lang_topics' => NULL,
@@ -26,14 +26,6 @@ $xpdo_meta_map['modAction']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'core',
-      'index' => 'index',
-    ),
-    'parent' => 
-    array (
-      'dbtype' => 'int',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
       'index' => 'index',
     ),
     'controller' => 
@@ -94,22 +86,6 @@ $xpdo_meta_map['modAction']= array (
         ),
       ),
     ),
-    'parent' => 
-    array (
-      'alias' => 'parent',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'parent' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
     'controller' => 
     array (
       'alias' => 'controller',
@@ -125,33 +101,6 @@ $xpdo_meta_map['modAction']= array (
           'null' => false,
         ),
       ),
-    ),
-  ),
-  'aggregates' => 
-  array (
-    'Namespace' => 
-    array (
-      'class' => 'modNamespace',
-      'local' => 'namespace',
-      'foreign' => 'name',
-      'owner' => 'foreign',
-      'cardinality' => 'one',
-    ),
-    'Parent' => 
-    array (
-      'class' => 'modAction',
-      'local' => 'parent',
-      'foreign' => 'id',
-      'owner' => 'foreign',
-      'cardinality' => 'one',
-    ),
-    'Children' => 
-    array (
-      'class' => 'modAction',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'owner' => 'local',
-      'cardinality' => 'many',
     ),
   ),
   'composites' => 
@@ -179,6 +128,25 @@ $xpdo_meta_map['modAction']= array (
       'foreign' => 'action',
       'owner' => 'local',
       'cardinality' => 'many',
+    ),
+    'DOM' => 
+    array (
+      'class' => 'modActionDom',
+      'local' => 'id',
+      'foreign' => 'action',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Namespace' => 
+    array (
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'name',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
     ),
   ),
 );

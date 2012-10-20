@@ -6,6 +6,9 @@
 require_once dirname(__FILE__) . '/modrestclient.class.php';
 /**
  * Handles REST requests through a cURL-based client
+ *
+ * @deprecated To be removed in 2.3. See modRest instead.
+ *
  * @package modx
  * @subpackage rest
  */

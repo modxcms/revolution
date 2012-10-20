@@ -117,6 +117,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
+        $this->resourceArray['syncsite'] = !isset($this->resourceArray['syncsite']) || intval($this->resourceArray['syncsite']) == 1 ? true : false;
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');

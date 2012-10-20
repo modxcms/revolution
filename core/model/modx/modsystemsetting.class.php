@@ -35,7 +35,7 @@ class modSystemSetting extends xPDOObject {
     }
 
     public function clearCache() {
-        if ($this->xpdo->getCacheManager()) {
+        if (!$this->xpdo->getOption(xPDO::OPT_SETUP) && $this->xpdo->getCacheManager()) {
             $this->xpdo->cacheManager->deleteTree($this->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
                'deleteTop' => false,
                 'skipDirs' => false,

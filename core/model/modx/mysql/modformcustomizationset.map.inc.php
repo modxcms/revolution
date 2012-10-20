@@ -7,10 +7,11 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'fc_sets',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'profile' => 0,
-    'action' => 0,
+    'action' => '',
     'description' => '',
     'active' => 0,
     'template' => 0,
@@ -31,11 +32,11 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
     ),
     'action' => 
     array (
-      'dbtype' => 'integer',
-      'precision' => '11',
-      'phptype' => 'integer',
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 0,
+      'default' => '',
       'index' => 'index',
     ),
     'description' => 
@@ -155,6 +156,17 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Rules' => 
+    array (
+      'class' => 'modActionDom',
+      'local' => 'id',
+      'foreign' => 'set',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'Action' => 
@@ -180,17 +192,6 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Rules' => 
-    array (
-      'class' => 'modActionDom',
-      'local' => 'id',
-      'foreign' => 'set',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

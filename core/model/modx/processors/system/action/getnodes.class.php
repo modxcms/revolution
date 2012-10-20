@@ -36,9 +36,6 @@ class modActionGetNodesProcessor extends modProcessor {
             case 'namespace':
                 $list = $this->getNodesInNamespace($map);
                 break;
-            case 'action':
-                $list = $this->getSubActions($map);
-                break;
             case 'root':
             default:
                 $list = $this->getRootNodes($map);
@@ -99,12 +96,8 @@ class modActionGetNodesProcessor extends modProcessor {
         $list = array();
 
         $c = $this->modx->newQuery('modAction');
-        $c->leftJoin('modAction','Children');
         $modActionCols = $this->modx->getSelectColumns('modAction','modAction');
         $c->select($modActionCols);
-        $c->select(array(
-            'COUNT('.$this->modx->escape('Children').'.'.$this->modx->escape('id').') AS '.$this->modx->escape('childrenCount'),
-        ));
         $c->where(array(
             'modAction.namespace' => $map['id'],
         ));
@@ -118,46 +111,7 @@ class modActionGetNodesProcessor extends modProcessor {
                 'text' => $action->get('controller').' ('.$action->get('id').')',
                 'id' => 'n_action_'.$action->get('id'),
                 'pk' => $action->get('id'),
-                'leaf' => $action->get('childrenCount') <= 0,
-                'cls' => 'icon-action',
-                'type' => 'action',
-                'data' => $action->toArray(),
-            );
-        }
-        return $list;
-    }
-
-    /**
-     * Get all subactions.
-     *
-     * @deprecated Actions no longer have parents.
-     * @param array $map
-     * @return array
-     */
-    public function getSubActions(array $map) {
-        $list = array();
-
-        $c = $this->modx->newQuery('modAction');
-        $c->leftJoin('modAction','Children');
-        $modActionCols = $this->modx->getSelectColumns('modAction','modAction');
-        $c->select($modActionCols);
-        $c->select(array(
-            'COUNT('.$this->modx->getSelectColumns('modAction','Children','',array('id')).') '.$this->modx->escape('childrenCount'),
-        ));
-        $c->where(array(
-            'modAction.parent' => $map['id'],
-        ));
-        $c->groupby($modActionCols);
-        $c->sortby($this->modx->getSelectColumns('modAction','modAction','',array('controller')),'ASC');
-        $actions = $this->modx->getIterator('modAction',$c);
-
-        /** @var modAction $action */
-        foreach ($actions as $action) {
-            $list[] = array(
-                'text' => $action->get('controller').' ('.$action->get('id').')',
-                'id' => 'n_action_'.$action->get('id'),
-                'pk' => $action->get('id'),
-                'leaf' => $action->get('childrenCount') <= 0,
+                'leaf' => true,
                 'cls' => 'icon-action',
                 'type' => 'action',
                 'data' => $action->toArray(),

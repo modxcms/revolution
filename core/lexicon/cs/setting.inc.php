@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-12-29
+ * @updated 2012-09-27
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -160,19 +160,19 @@ $_lang['system_settings'] = 'Konfigurace systému';
 $_lang['usergroup'] = 'Uživatelská skupina';
 
 // $_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled'] = 'Zkontrolovat přístupy ke kategoriím';
+$_lang['setting_access_category_enabled'] = 'Řízení přístupů ke kategoriím';
 
 // $_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
 $_lang['setting_access_category_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kategoriím v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kategoriím!</strong>';
 
 // $_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled'] = 'Kontrolovat přístupy ke kontextům';
+$_lang['setting_access_context_enabled'] = 'Řízení přístupů ke kontextům';
 
 // $_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 $_lang['setting_access_context_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kontextům. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kontextům! NEVYPÍNEJTE TUTO VOLBU v rámci celého systému nebo pro kontext "mgr", došlo by tím k zamezní přístupu do správce obsahu.</strong>';
 
 // $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled'] = 'Kontrolovat přístupy ke skupinám dokumentů';
+$_lang['setting_access_resource_group_enabled'] = 'Řízení přístupů ke skupinám dokumentů';
 
 // $_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke skupinám dokumentů v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke skupinám dokumentů!!</strong>';
@@ -618,6 +618,12 @@ $_lang['setting_forgot_login_email'] = 'E-mail zapomenutého přihlášení';
 // $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 $_lang['setting_forgot_login_email_desc'] = 'Šablona e-mailu, který je odeslán pokud uživatel zapomněl své přihlašovací údaje.';
 
+// $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
+$_lang['setting_form_customization_use_all_groups'] = 'Pro přizpůsobení formulářů využit pravidla všech členských uživatelských skupiny';
+
+// $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Je-li nastaveno Ano, při aplikaci pravidel z přizpůsobení formulářů budou použita pravidla všech uživatelských skupin, do kterých je uživatel přiřazen. V opačném případě jsou použita pouze pravidla přiřazená k uživatelově primární skupině. Poznámka: volba Ano může zapříčinit chyby s konfliktními pravidly v jednotlivých uživatelských skupinách.';
+
 // $_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
 $_lang['setting_forward_merge_excludes'] = 'Potlačená políčka při symbolickém odkazování';
 
@@ -691,13 +697,19 @@ $_lang['setting_friendly_alias_word_delimiters'] = 'Povolené oddělovače slov'
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Znaky, které budou použity jako oddělovače slov při vytváření přátelských URL.';
 
 // $_lang['setting_friendly_urls'] = 'Use Friendly URLs';
-$_lang['setting_friendly_urls'] = 'Používat přátelská URL';
+$_lang['setting_friendly_urls'] = 'Používat přátelské URL';
 
 // $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you'll need to write a .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
-$_lang['setting_friendly_urls_desc'] = 'Nastavení zda má MODX používat přátelská URL (lepší pro zpracování vyhledávači). Toto nastavení funguje pouze pro MODX instalace běžící serveru Apache, pro správnou funkčnost je také nutné nastavit soubor .htaccess. Pro více informací náhledněte do souboru .htaccess přiloženého v MODX distribuci.';
+$_lang['setting_friendly_urls_desc'] = 'Nastavení zda má MODX používat přátelské URL (lepší pro zpracování vyhledávači). Toto nastavení funguje pouze pro MODX instalace běžící serveru Apache, pro správnou funkčnost je také nutné nastavit soubor .htaccess. Pro více informací náhledněte do souboru .htaccess přiloženého v MODX distribuci.';
 
 // $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 $_lang['setting_friendly_urls_err'] = 'Zvolte zda chcete používat přátelská URL či nikoli.';
+
+// $_lang['setting_friendly_urls_strict'] = 'Use Strict Friendly URLs';
+$_lang['setting_friendly_urls_strict'] = 'Používat striktní přátelské URL';
+
+// $_lang['setting_friendly_urls_strict_desc'] = 'When friendly URLs are enabled, this option forces non-canonical requests that match a Resource to 301 redirect to the canonical URI for that Resource. WARNING: Do not enable if you use custom rewrite rules which do not match at least the beginning of the canonical URI. For example, a canonical URI of foo/ with custom rewrites for foo/bar.html would work, but attempts to rewrite bar/foo.html as foo/ would force a redirect to foo/ with this option enabled.';
+$_lang['setting_friendly_urls_strict_desc'] = 'Pokud používáte přátelské URL, pak tato volba vynutí při ne-kánonickém dotazu, který odpovídá některému dokumentu přesměrování 301 na jeho kánonickou URI. POZOR: Nepoužívejte pokud používáte vlastní přepisovací pravidla, která nezachycují kánonické URI od začátku. Například: kánonické URI foo/ s vlastní přepisem na foo/bar.html bude fungovat, ale pokus o přepsání bar/foo.html na foo/ vynutí přesměrování na foo/ pokud je tato volba aktivní.';
 
 // $_lang['setting_global_duplicate_uri_check'] = 'Check for Duplicate URIs Across All Contexts';
 $_lang['setting_global_duplicate_uri_check'] = 'Kontrola duplicitních URI napříč kontexty';
@@ -726,14 +738,20 @@ $_lang['setting_link_tag_scheme_desc'] = 'Schéma generování URL pro tag [[~id
 // $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale'] = 'Locale';
 
+// $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale_desc'] = 'Nastavte locale pro vaše národní použití. Ponechte prázdné pro použití výchozí hodnoty. Více informací v <a href="http://php.net/setlocale" target="_blank">PHP dokumentaci</a>.';
+
+// $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
+$_lang['setting_lock_ttl'] = 'Čas odstranění zámků';
+
+// $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
+$_lang['setting_lock_ttl_desc'] = 'Počet sekund, po kterou je dokument uzamčen a uživatel v něm již nic neupravil, po jehož uplynutí bude daný zámek zrušen.';
+
 $_lang['setting_log_level'] = 'Úroveň logování';
 $_lang['setting_log_level_desc'] = 'Výchozí úroveň logování; čím nižší úroveň tím méně zpráv bude logováno. Možné hodnoty: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
 
 $_lang['setting_log_target'] = 'Výstup logování';
 $_lang['setting_log_target_desc'] = 'Výchozí výstup, kam mají být logy zapisovány. Možné hodnoty: \'FILE\', \'HTML\', nebo \'ECHO\'. Výchozí hodnota je \'FILE\'';
-
-// $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
-$_lang['setting_locale_desc'] = 'Nastavte locale pro vaše národní použití. Ponechte prázdné pro použití výchozí hodnoty. Více informací v <a href="http://php.net/setlocale" target="_blank">PHP dokumentaci</a>.';
 
 // $_lang['setting_mail_charset'] = 'Mail Charset';
 $_lang['setting_mail_charset'] = 'Znaková sada e-mailu';
@@ -904,11 +922,23 @@ $_lang['setting_manager_use_tabs'] = 'Používat záložky ve správci obsahu';
 // $_lang['setting_manager_use_tabs_desc'] = 'If true, the manager will use tabs for rendering the content panes. Otherwise, it will use portals.';
 $_lang['setting_manager_use_tabs_desc'] = 'Je-li aktivní, správce obsahu použije pro vykreslení obsahu záložky, jinak budou panely vykresleny pod sebou.';
 
+// $_lang['setting_manager_week_start'] = 'Week start';
+$_lang['setting_manager_week_start'] = 'Začátek týdne';
+
+// $_lang['setting_manager_week_start_desc'] = 'Define the day starting the week. Use 0 (or leave empty) for sunday, 1 for monday and so on...';
+$_lang['setting_manager_week_start_desc'] = 'Určuje den, kterým začíná týden. 0 nebo prázdné pole je neděle, 1 pondělí, atd. ';
+
 // $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
 
 // $_lang['setting_modRequest.class_desc'] = '';
 $_lang['setting_modRequest.class_desc'] = '';
+
+// $_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
+$_lang['setting_modx_browser_default_sort'] = 'Výchozí řazení v Průzkmníku zdrojů';
+
+// $_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Výchozí nastavení řazení v Průzkumníku zdrojů (vkládání obrázků atp.). Možné hodnoty jsou: name, size, lastmod (poslední změna).';
 
 // $_lang['setting_modx_charset'] = 'Character encoding';
 $_lang['setting_modx_charset'] = 'Kódování znaků';
@@ -1043,7 +1073,7 @@ $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb Cesta k ImageMagick';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Volitelné. Nastavení cesty k ImageMagick pro alternativní generování náhledů pomocí phpThumb, pokud není ve výchozím nastavení PHP.';
 
 // $_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking Disabled';
-$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking: vypnut';
+$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking: aktivní';
 
 // $_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Remote servers are allowed in the src parameter unless you disable hotlinking in phpThumb.';
 $_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Vzdálené servery jsou povoleny v atributu src jestliže, není tato volba nastavena na "Ne".';
@@ -1109,7 +1139,7 @@ $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop (ořez při zvětšen�
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Výchozí nastavení Zoom-Crop pro phpThumb pokud je použit v MODX. Výchozí hodnota je 0, tím se zabrání oříznutí při zvětšení.';
 
 // $_lang['setting_publish_default'] = 'Published default';
-$_lang['setting_publish_default'] = 'Publikováno';
+$_lang['setting_publish_default'] = 'Ve výchozím stavu publikováno';
 
 // $_lang['setting_publish_default_desc'] = 'Select 'Yes' to make all new resources published by default.';
 $_lang['setting_publish_default_desc'] = 'Zvolte "Ano", pokud chcete, aby všechny nově vytvořené dokumenty byly ve výchozím stavu publikované.';
@@ -1503,3 +1533,9 @@ $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 
 // $_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODX will be XHTML-compliant, including encoding of the ampersand character.';
 $_lang['setting_xhtml_urls_desc'] = 'Pokud je nastaveno na Ano, všechny odkazy, které generuje MODX budou v souladu s xHTML včetně zakódování ampersandů.';
+
+// $_lang['setting_default_context'] = 'Default Context';
+$_lang['setting_default_context'] = 'Výchozí kontext';
+
+// $_lang['setting_default_context_desc'] = 'Select the default Context you wish to use for new Resources.';
+$_lang['setting_default_context_desc'] = 'Zvolte jaký kontext má být předvybraný při vytváření nového dokumentu.';

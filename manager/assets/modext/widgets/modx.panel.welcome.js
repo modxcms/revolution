@@ -5,13 +5,14 @@
  * @xtype modx-panel-welcome
  */
 MODx.panel.Welcome = function(config) {
+    dashboardName = config.dashboard.id == 1 ? MODx.config.site_name : MODx.config.site_name+' - '+config.dashboard.name;
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-welcome'
 		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+MODx.config.site_name+'</h2>'
+            html: '<h2>'+dashboardName+'</h2>'
             ,id: 'modx-welcome-header'
             ,cls: 'modx-page-header'
             ,border: false

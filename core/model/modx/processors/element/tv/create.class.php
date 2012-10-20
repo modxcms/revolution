@@ -25,9 +25,8 @@ require_once (dirname(dirname(__FILE__)).'/create.class.php');
  */
 class modTemplateVarCreateProcessor extends modElementCreateProcessor {
     public $classKey = 'modTemplateVar';
-    public $languageTopics = array('tv','category');
+    public $languageTopics = array('tv','category','element');
     public $permission = 'new_tv';
-    public $elementType = 'tv';
     public $objectType = 'tv';
     public $beforeSaveEvent = 'OnBeforeTVFormSave';
     public $afterSaveEvent = 'OnTVFormSave';
@@ -124,7 +123,7 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
                     }
                     $templateVarTemplate->set('tmplvarid',$this->object->get('id'));
                     $templateVarTemplate->set('templateid',$template['id']);
-                    $templateVarTemplate->set('rank',$template['rank']);
+                    $templateVarTemplate->set('rank',!empty($template['rank']) ? $template['rank'] : 0);
                     $templateVarTemplate->save();
                 } else {
                     $templateVarTemplate = $this->modx->getObject('modTemplateVarTemplate',array(

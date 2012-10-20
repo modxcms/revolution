@@ -435,6 +435,7 @@ MODx.window.CreatePropertySet = function(config) {
             ,anchor: '100%'
             ,grow: true
         }]
+        ,keys: []
     });
     MODx.window.CreatePropertySet.superclass.constructor.call(this,config);
 };
@@ -483,6 +484,7 @@ MODx.window.UpdatePropertySet = function(config) {
             ,anchor: '100%'
             ,grow: true
         }]
+        ,keys: []
     });
     MODx.window.UpdatePropertySet.superclass.constructor.call(this,config);
 };

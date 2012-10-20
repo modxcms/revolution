@@ -30,8 +30,8 @@ class modPackageGetInfoProcessor extends modProcessor {
 
         /* setup output properties */
         $properties = array(
-            'packages' => number_format((string)$info->packages),
-            'downloads' => number_format((string)$info->downloads),
+            'packages' => number_format((integer)$info->packages),
+            'downloads' => number_format((integer)$info->downloads),
             'topdownloaded' => array(),
             'newest' => array(),
         );
@@ -41,7 +41,7 @@ class modPackageGetInfoProcessor extends modProcessor {
                 'url' => (string)$info->url,
                 'id' => (string)$package->id,
                 'name' => (string)$package->name,
-                'downloads' => number_format((string)$package->downloads,0),
+                'downloads' => number_format((integer)$package->downloads,0),
             );
         }
 

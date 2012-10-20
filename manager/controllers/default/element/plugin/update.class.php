@@ -127,9 +127,10 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $this->onPluginFormPrerender = $this->modx->invokeEvent('OnPluginFormPrerender',array(
             'id' => $this->pluginArray['id'],
             'plugin' => &$this->plugin,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
+        $this->setPlaceholder('onPluginFormPrerender', $this->onPluginFormPrerender);
     }
 
     /**
@@ -140,7 +141,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender',array(
             'id' => $this->pluginArray['id'],
             'plugin' => &$this->plugin,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onPluginFormRender)) $this->onPluginFormRender = implode('',$this->onPluginFormRender);
         $this->onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onPluginFormRender);
@@ -170,5 +171,13 @@ class ElementPluginUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('plugin','category','system_events','propertyset','element');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Plugins';
     }
 }

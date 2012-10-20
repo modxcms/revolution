@@ -7,6 +7,7 @@ $xpdo_meta_map['modTransportPackage']= array (
   'package' => 'modx.transport',
   'version' => '1.1',
   'table' => 'transport_packages',
+  'extends' => 'xPDOObject',
   'fields' => 
   array (
     'signature' => NULL,

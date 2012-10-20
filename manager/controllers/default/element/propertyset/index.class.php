@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class ElementPropertySetIndexManagerController extends modManagerController {
+class ElementPropertySetManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -56,5 +56,13 @@ class ElementPropertySetIndexManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('element','category','propertyset');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Properties+and+Property+Sets';
     }
 }

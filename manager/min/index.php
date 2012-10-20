@@ -44,7 +44,7 @@ $min_cachePath = $modx->cacheManager->getCachePath() . 'mgr/min/';
 $documentRoot = $modx->getOption('manager_js_document_root', null, '');
 $min_documentRoot = !empty($documentRoot) ? $documentRoot : $_SERVER['DOCUMENT_ROOT'];
 if (!empty($min_documentRoot)) {
-    $min_documentRoot = realpath($min_documentRoot);
+    $min_documentRoot = str_replace('\\', '/', realpath($min_documentRoot));
 }
 $min_cacheFileLocking = (boolean)$modx->getOption('manager_js_cache_file_locking',null,true);
 $min_serveOptions['bubbleCssImports'] = false;
@@ -71,6 +71,9 @@ if (!empty($min_serveOptions['minApp']['virtualDirs'])) {
 $min_uploaderHoursBehind = 0;
 $min_libPath = dirname(__FILE__) . '/lib';
 @ini_set('zlib.output_compression', (int)$modx->getOption('manager_js_zlib_output_compression',null,0));
+
+// MODX session no longer required
+@session_write_close();
 
 // setup include path
 @set_include_path($min_libPath . PATH_SEPARATOR . get_include_path());

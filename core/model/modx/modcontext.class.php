@@ -50,6 +50,30 @@ class modContext extends modAccessibleObject {
     protected $_cacheKey= '[contextKey]/context';
 
     /**
+     * Prepare and execute a PDOStatement to retrieve data needed for $aliasMap and $resourceMap.
+     *
+     * @static
+     * @param modContext &$context A reference to a specific modContext instance.
+     * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
+     * if the statement could not be prepared or executed.
+     */
+    public static function getResourceCacheMapStmt(&$context) {
+        return false;
+    }
+
+    /**
+     * Prepare and execute a PDOStatement to retrieve data needed for $webLinkMap.
+     *
+     * @static
+     * @param modContext &$context A reference to a specific modContext instance.
+     * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
+     * if the statement could not be prepared or executed.
+     */
+    public static function getWebLinkCacheMapStmt(&$context) {
+        return false;
+    }
+
+    /**
      * Prepare a context for use.
      *
      * @uses modCacheManager::generateContext() This method is responsible for
@@ -61,7 +85,7 @@ class modContext extends modAccessibleObject {
      * and regenerated.
      * @return boolean Indicates if the context was successfully prepared.
      */
-    public function prepare($regenerate= false) {
+    public function prepare($regenerate= false, array $options = array()) {
         $prepared= false;
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
@@ -71,7 +95,7 @@ class modContext extends modAccessibleObject {
                     xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'cache.xPDOFileCache')),
                     xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_context_settings_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                 )))) {
-                    $context = $this->xpdo->cacheManager->generateContext($this->get('key'));
+                    $context = $this->xpdo->cacheManager->generateContext($this->get('key'), $options);
                 }
                 if (!empty($context)) {
                     foreach ($context as $var => $val) {
@@ -342,5 +366,23 @@ class modContext extends modAccessibleObject {
             ));
         }
         return $saved;
+    }
+
+    /**
+     * Get and execute a PDOStatement representing data for the aliasMap and resourceMap.
+     *
+     * @return PDOStatement|null
+     */
+    public function getResourceCacheMap() {
+        return $this->xpdo->call('modContext', 'getResourceCacheMapStmt', array(&$this));
+    }
+
+    /**
+     * Get and execute a PDOStatement representing data for the webLinkMap.
+     *
+     * @return PDOStatement|null
+     */
+    public function getWebLinkCacheMap() {
+        return $this->xpdo->call('modContext', 'getWebLinkCacheMapStmt', array(&$this));
     }
 }

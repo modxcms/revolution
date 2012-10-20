@@ -289,6 +289,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Achtung: Diese Einstellung wi
 $_lang['setting_forgot_login_email'] = 'Login-vergessen-Mail';
 $_lang['setting_forgot_login_email_desc'] = 'Das Template für die Mail, die User erhalten, die ihren MODX-Benutzernamen und/oder ihr Passwort vergessen haben.';
 
+$_lang['setting_form_customization_use_all_groups'] = 'Alle Benutzergruppen-Zugehörigkeiten für die Formular-Anpassung nutzen';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden für die Formular-Anpassung *alle* Sets für *alle* Benutzergruppen, denen ein Benutzer angehört, genutzt, wenn Formular-Anpassungs-Sets angewendet werden. Anderenfalls wird nur das Set verwendet, das der primären Gruppe des Benutzers zugeordnet ist. Hinweis: Wenn Sie diese Einstellung auf "Ja" setzen, kann es wegen Konflikten zwischen Formular-Anpassungs-Sets zu Problemen kommen.';
+
 $_lang['setting_forward_merge_excludes'] = 'Felder, deren Werte bei Verwendung von Symlinks nicht überschrieben werden sollen';
 $_lang['setting_forward_merge_excludes_desc'] = 'Bei Verwendung eines Symlinks werden die Werte in den Feldern der Ziel-Ressource überschrieben von den Werten des Symlinks, die nicht leer sind; verwenden Sie diese kommaseparierte Liste von Ausnahmen, um die angegebenen Felder davor zu bewahren, von den Werten des Symlinks überschrieben zu werden.';
 
@@ -325,9 +328,12 @@ $_lang['setting_friendly_alias_word_delimiter_desc'] = 'Das bevorzugte Wort-Tren
 $_lang['setting_friendly_alias_word_delimiters'] = 'Suchmaschinenfreundliche Aliasse: mögliche Wort-Trennzeichen';
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Zeichen, die Wort-Trennzeichen repräsentieren, wenn suchmaschinenfreundliche Aliasse verarbeitet werden. Diese Zeichen werden konvertiert und konsolidiert zu dem bevorzugten Wort-Trennzeichen für suchmaschinenfreundliche Aliasse.';
 
-$_lang['setting_friendly_urls'] = 'Suchmaschinenfreundliche URLs benutzen';
+$_lang['setting_friendly_urls'] = 'Suchmaschinenfreundliche URLs verwenden';
 $_lang['setting_friendly_urls_desc'] = 'Dies erlaubt Ihnen, suchmaschinenfreundliche URLs mit MODX zu verwenden. Bitte beachten Sie, dass dies nur für MODX-Installationen gilt, die auf einem Apache-Webserver laufen, und dass Sie eine .htaccess-Datei schreiben müssen, damit dies funktioniert. Mehr Informationen finden Sie in der .htaccess-Datei, die in der MODX-Distribution enthalten ist.';
 $_lang['setting_friendly_urls_err'] = 'Bitte geben Sie an, ob Sie suchmaschinenfreundliche URLs verwenden möchten oder nicht.';
+
+$_lang['setting_friendly_urls_strict'] = 'Strikte suchmaschinenfreundliche URLs verwenden';
+$_lang['setting_friendly_urls_strict_desc'] = 'Wenn suchmaschinenfreundliche URLs aktiviert sind, bewirkt diese Option, dass nicht-kanonische Requests, die zu einer Ressource passen, mit dem Statuscode 301 zur kanonischen URL für diese Ressource weitergeleitet werden. WARNUNG: Aktivieren Sie diese Option nicht, wenn Sie eigene Weiterleitungsregeln verwenden, deren Weiterleitungsziel nicht zumindest mit dem Anfang der kanonischen URL übereinstimmt. Beispiel: Eine kanonische URL foo/ und eigene Weiterleitungen zu foo/bar.html würden funktionieren, aber Versuche, bei einer kanonischen URL bar/foo.html zu foo/ weiterzuleiten, würden eine Weiterleitung zu foo/ statt zu bar/foo.html erzwingen, wenn diese Option aktiviert ist.';
 
 $_lang['setting_global_duplicate_uri_check'] = 'In allen Kontexten nach doppelten URIs suchen';
 $_lang['setting_global_duplicate_uri_check_desc'] = 'Wählen Sie "Ja", wenn bei der Überprüfung auf doppelte URIs alle Kontexte berücksichtigt werden sollen. Anderenfalls wird nur der Kontext, in dem die Ressource gespeichert wird, überprüft.';
@@ -339,10 +345,13 @@ $_lang['setting_inline_help'] = 'Inline-Erläuterungstexte für Felder anzeigen'
 $_lang['setting_inline_help_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Erläuterungstexte der Eingabefelder direkt unter den jeweiligen Feldern angezeigt. Wird "Nein" gewählt, so erhalten alle Felder stattdessen Tooltipp-basierte Erläuterungstexte.';
 
 $_lang['setting_link_tag_scheme'] = 'URL-Generierungs-Schema';
-$_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [[~id]]. Mögliche Optionen: siehe <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [[~id]]. Mögliche Optionen: siehe <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">hier</a>.';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Setzen Sie die Locale-Einstellung für das System. Lassen Sie das Feld leer, wenn die Standardeinstellung verwendet werden soll. Konsultieren Sie <a href="http://de.php.net/setlocale" target="_blank">die PHP-Dokumentation</a>, wenn Sie weitere Informationen benötigen.';
+
+$_lang['setting_lock_ttl'] = 'Dauer der Sperre';
+$_lang['setting_lock_ttl_desc'] = 'Die Anzahl der Sekunden, für die die Sperre einer Ressource bestehen bleibt, wenn der Benutzer inaktiv ist.';
 
 $_lang['setting_log_level'] = 'Logging-Level';
 $_lang['setting_log_level_desc'] = 'Der Standard-Logging-Level; je niedriger der Level, desto weniger Einträge werden geloggt. Verfügbare Optionen: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO) und 4 (DEBUG).';
@@ -431,8 +440,14 @@ $_lang['setting_manager_time_format_desc'] = 'Das Format für Uhrzeitangaben im 
 $_lang['setting_manager_use_tabs'] = 'Reiter im Layout des MODX-Managers verwenden';
 $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, so werden Reiter für die Darstellung der Inhalte verwendet. Anderenfalls wird eine Portal-Darstellung verwendet.';
 
+$_lang['setting_manager_week_start'] = 'Wochenanfang';
+$_lang['setting_manager_week_start_desc'] = 'Legen Sie den Wochentag fest, mit dem die Woche beginnt. Geben Sie "0" ein (oder lassen Sie das Feld leer) wenn die Woche am Sonntag beginnt, "1", wenn sie am Montag beginnt, und so weiter...';
+
 $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
+
+$_lang['setting_modx_browser_default_sort'] = 'Datei-Browser-Standard-Sortierung';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Das standardmäßige Sortierkriterium bei Benutzung des Popup-Datei-Browsers im Manager. Mögliche Werte sind: name, size, lastmod (Abkürzung für "last modified").';
 
 $_lang['setting_modx_charset'] = 'Zeichencodierung';
 $_lang['setting_modx_charset_desc'] = 'Bitte wählen Sie die Zeichencodierung, die Sie verwenden möchten. Bitte beachten Sie, dass MODX zwar mit einigen dieser Codierungen getestet wurde, aber nicht mit allen. Für die meisten Sprachen ist die Standardeinstellung "UTF-8" vorzuziehen.';
@@ -480,7 +495,7 @@ $_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb: maximale Anzahl an Cache-
 $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren Zugriffe am längsten zurückliegen, wenn der Cache mehr als X Dateien umfasst.';
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
-$_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
+$_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "Nein" empfohlen.';
 
 $_lang['setting_phpthumb_document_root'] = 'PHPThumb-Document-Root';
 $_lang['setting_phpthumb_document_root_desc'] = 'Tragen Sie hier etwas ein, wenn Sie Probleme mit der Server-Variablen DOCUMENT_ROOT haben oder wenn Fehler bei der Verwendung von OutputThumbnail oder !is_resource auftreten. Geben Sie den absoluten Document-Root-Pfad ein, den Sie verwenden möchten. Wenn dieses Feld leer ist, verwendet MODX die DOCUMENT_ROOT-Server-Variable.';
@@ -594,6 +609,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, u
 
 $_lang['setting_session_cookie_secure'] = 'Sichere Session-Cookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen.';
+
+$_lang['setting_session_cookie_httponly'] = 'Session-Cookie: HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Verwenden Sie diese Einstellung, um das HttpOnly-Flag für Session-Cookies zu setzen.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Maximale Lebensdauer des Session-Garbage-Collectors';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Erlaubt Anpassung der PHP-Konfigurationseinstellung session.gc_maxlifetime bei Benutzung von "modSessionHandler".';
@@ -721,3 +739,6 @@ $_lang['setting_which_element_editor_desc'] = 'Hier können Sie auswählen, welc
 
 $_lang['setting_xhtml_urls'] = 'XHTML-URLs';
 $_lang['setting_xhtml_urls_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden alle URLs, die von MODX generiert werden, XHTML-valide erzeugt, einschließlich Codierung des Ampersand-Zeichens ("kaufmännisches Und").';
+
+$_lang['setting_default_context'] = 'Standard-Kontext';
+$_lang['setting_default_context_desc'] = 'Wählen Sie den Standard-Kontext, den Sie für neue Ressourcen verwenden möchten.';

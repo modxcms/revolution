@@ -15,12 +15,10 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modFormCustomizationSet';
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
-    public $elementType = 'set';
+    public $objectType = 'set';
 
     /** @var array $newRules */
     public $newRules = array();
-    /** @var modAction $action */
-    public $action;
 
     public function beforeSet() {
         $this->setCheckbox('active');
@@ -38,7 +36,6 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
     }
 
     public function afterSave() {
-        $this->action = $this->object->getOne('Action');
         $this->clearOldRules();
         $this->setFieldRules();
         $this->setTabRules();
@@ -84,7 +81,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 $rule->set('rank',5);
@@ -102,7 +99,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 $rule->set('rank',4);
@@ -120,7 +117,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 $rule->set('rank',0);
@@ -140,7 +137,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
 
         foreach ($tabs as $tab) {
             $tabField = $this->modx->getObject('modActionField',array(
-                'action' => $this->action->get('id'),
+                'action' => $this->object->get('action'),
                 'name' => $tab['name'],
                 'type' => 'tab',
             ));
@@ -158,7 +155,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 $rule->set('rank',1);
@@ -177,7 +174,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                     $rule->set('constraint_field',$this->object->get('constraint_field'));
                     $rule->set('constraint',$this->object->get('constraint'));
                     $rule->set('active',true);
-                    if ($this->action && $this->action->get('controller') == 'resource/create') {
+                    if ($this->object->get('action') == 'resource/create') {
                         $rule->set('for_parent',true);
                     }
                     $rule->set('rank',2);
@@ -195,7 +192,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                     $rule->set('constraint_field',$this->object->get('constraint_field'));
                     $rule->set('constraint',$this->object->get('constraint'));
                     $rule->set('active',true);
-                    if ($this->action && $this->action->get('controller') == 'resource/create') {
+                    if ($this->object->get('action') == 'resource/create') {
                         $rule->set('for_parent',true);
                     }
                     $rule->set('rank',3);
@@ -232,7 +229,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 $rule->set('rank',12);
@@ -250,7 +247,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 $rule->set('rank',11);
@@ -268,7 +265,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 $rule->set('rank',10);
@@ -286,7 +283,7 @@ class modFormCustomizationSetUpdateProcessor extends modObjectUpdateProcessor {
                 $rule->set('constraint_field',$this->object->get('constraint_field'));
                 $rule->set('constraint',$this->object->get('constraint'));
                 $rule->set('active',true);
-                if ($this->action && $this->action->get('controller') == 'resource/create') {
+                if ($this->object->get('action') == 'resource/create') {
                     $rule->set('for_parent',true);
                 }
                 /* add 20 to rank to make sure happens after tab create */

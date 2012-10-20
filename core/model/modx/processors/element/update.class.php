@@ -8,6 +8,8 @@
  */
 abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     public $previousCategory;
+    /** @var modElement $object */
+    public $object;
 
     public function beforeSave() {
         $locked = $this->getProperty('locked',false);
@@ -42,6 +44,8 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
         if ($this->object->staticContentChanged()) {
             if (!$this->object->isStaticSourceMutable()) {
                 $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
+            } else if (!$this->object->isStaticSourceValidPath()) {
+                $this->addFieldError('static_file',$this->modx->lexicon('element_static_source_protected_invalid'));
             }
         }
 

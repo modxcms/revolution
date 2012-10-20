@@ -41,6 +41,7 @@ $classes= array (
     'modDashboardWidgetPlacement',
     'modElementPropertySet',
     'modEvent',
+    'modExtensionPackage',
     'modFormCustomizationProfile',
     'modFormCustomizationProfileUserGroup',
     'modFormCustomizationSet',

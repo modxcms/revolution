@@ -172,10 +172,11 @@ MODx.browser.Window = function(config) {
         ,hideFiles: config.hideFiles || false
         ,openTo: config.openTo || ''
         ,ident: this.ident
-        ,rootId: '/'
+        ,rootId: config.rootId || '/'
         ,rootName: _('files')
-        ,rootVisible: true
+        ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
         ,id: this.ident+'-tree'
+        ,hideSourceCombo: config.hideSourceCombo || false
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
             ,'changeSource': {fn:function(s) {
@@ -183,6 +184,12 @@ MODx.browser.Window = function(config) {
                 this.view.config.source = s;
                 this.view.baseParams.source = s;
                 this.view.run();
+            },scope:this}
+            ,'nodeclick': {fn:function(n,e) {
+                n.select();
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
             },scope:this}
         }
     });
@@ -274,6 +281,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,allowedFileTypes: this.config.allowedFileTypes || ''
             ,wctx: this.config.wctx || 'web'
         });
+        this.sortImages();
     }
     
     ,sortImages : function(){
@@ -319,7 +327,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,displayField: 'desc'
             ,valueField: 'name'
             ,lazyInit: false
-            ,value: 'name'
+            ,value: MODx.config.modx_browser_default_sort || 'name'
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
                 data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
@@ -376,6 +384,10 @@ MODx.browser.View = function(config) {
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,dir: config.openTo || ''
+        }
+        ,sortInfo: {
+            field: MODx.config.modx_browser_default_sort || 'name'
+            ,direction: 'ASC'
         }
         ,tpl: this.templates.thumb
         ,listeners: {

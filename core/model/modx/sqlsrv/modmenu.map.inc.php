@@ -7,17 +7,19 @@ $xpdo_meta_map['modMenu']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'menus',
+  'extends' => 'modAccessibleObject',
   'fields' => 
   array (
     'text' => '',
     'parent' => '',
-    'action' => 0,
+    'action' => '',
     'description' => '',
     'icon' => '',
     'menuindex' => 0,
     'params' => '',
     'handler' => '',
     'permissions' => '',
+    'namespace' => 'core',
   ),
   'fieldMeta' => 
   array (
@@ -41,10 +43,11 @@ $xpdo_meta_map['modMenu']= array (
     ),
     'action' => 
     array (
-      'dbtype' => 'int',
-      'phptype' => 'integer',
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 0,
+      'default' => '',
       'index' => 'index',
     ),
     'description' => 
@@ -93,6 +96,15 @@ $xpdo_meta_map['modMenu']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'namespace' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'core',
+      'index' => 'index',
     ),
   ),
   'indexes' => 
@@ -145,6 +157,33 @@ $xpdo_meta_map['modMenu']= array (
         ),
       ),
     ),
+    'namespace' => 
+    array (
+      'alias' => 'namespace',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'namespace' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
+  'composites' => 
+  array (
+    'Acls' => 
+    array (
+      'class' => 'modAccessMenu',
+      'local' => 'text',
+      'foreign' => 'target',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
   ),
   'aggregates' => 
   array (
@@ -169,17 +208,6 @@ $xpdo_meta_map['modMenu']= array (
       'class' => 'modMenu',
       'local' => 'text',
       'foreign' => 'parent',
-      'owner' => 'local',
-      'cardinality' => 'many',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Acls' => 
-    array (
-      'class' => 'modAccessMenu',
-      'local' => 'text',
-      'foreign' => 'target',
       'owner' => 'local',
       'cardinality' => 'many',
     ),

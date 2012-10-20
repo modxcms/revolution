@@ -39,8 +39,8 @@ if ($isLimit) $c->limit($limit,$start);
 $resources = $modx->getCollection('modResource',$c);
 
 /* iterate */
-$actions = $modx->request->getAllActionIDs();
 $list = array();
+/** @var modResource $resource */
 foreach ($resources as $resource) {
     if (!$resource->checkPolicy('view')) continue;
 
@@ -49,7 +49,7 @@ foreach ($resources as $resource) {
     $resourceArray['menu'][] = array(
         'text' => $modx->lexicon('resource_view'),
         'params' => array(
-            'a' => $actions['resource/data'],
+            'a' => 'resource/data',
             'id' => $resource->get('id'),
         ),
     );
@@ -57,7 +57,7 @@ foreach ($resources as $resource) {
         $resourceArray['menu'][] = array(
             'text' => $modx->lexicon('resource_edit'),
             'params' => array(
-                'a' => $actions['resource/update'],
+                'a' => 'resource/update',
                 'id' => $resource->get('id'),
             ),
         );

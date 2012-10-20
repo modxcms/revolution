@@ -15,9 +15,9 @@ MODx.page.CreateResource = function(config) {
         ,which_editor: 'none'
         ,action: 'create'
     	,actions: {
-            'new': MODx.action['resource/create']
-            ,edit: MODx.action['resource/update']
-            ,cancel: MODx.action['welcome']
+            'new': 'resource/create'
+            ,edit: 'resource/update'
+            ,cancel: 'welcome'
         }
     	,buttons: this.getButtons(config)
     	,loadStay: true
@@ -30,6 +30,7 @@ MODx.page.CreateResource = function(config) {
             ,publish_document: config.publish_document
             ,show_tvs: config.show_tvs
             ,mode: config.mode
+            ,url: config.url
         }]
     });
     MODx.page.CreateResource.superclass.constructor.call(this,config);
@@ -55,7 +56,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
             process: 'cancel'
             ,text: _('cancel')
             ,id: 'modx-abtn-cancel'
-            ,params: { a: MODx.action['welcome'] }
+            ,params: { a: 'welcome' }
         });
         btns.push('-');
         btns.push({
