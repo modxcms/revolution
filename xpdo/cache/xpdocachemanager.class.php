@@ -486,7 +486,7 @@ class xPDOCacheManager {
                         if ($file != '.' && $file != '..') { /* Ignore . and .. */
                             $path= $dirname . $file;
                             if (is_dir($path)) {
-                                $suboptions = $this->getOption('deleteTop', $options, false) ? $options : array_merge($options, array('deleteTop' => false));
+                                $suboptions = array_merge($options, array('deleteTop' => !$this->getOption('skipDirs', $options, false)));
                                 if ($subresult= $this->deleteTree($path, $suboptions)) {
                                     $result= array_merge($result, $subresult);
                                 }
@@ -503,7 +503,6 @@ class xPDOCacheManager {
                     }
                     closedir($handle);
                 }
-                $options['deleteTop']= $this->getOption('skipDirs', $options, false) ? false : $this->getOption('deleteTop', $options, false);
                 if ($this->getOption('deleteTop', $options, false)) {
                     if (@ rmdir($dirname)) {
                         array_push($result, $dirname);
