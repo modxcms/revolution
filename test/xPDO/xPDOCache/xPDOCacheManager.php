@@ -19,7 +19,7 @@
  *
  * @package xpdo-test
  */
-require_once dirname(dirname(dirname(__FILE__))).'/xPDOTestCase.php';
+
 /**
  * Tests related to basic xPDOCacheManager methods
  *
