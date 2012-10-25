@@ -19,27 +19,17 @@
  *
  * @package xpdo-test
  */
-require_once dirname(__FILE__).'/xPDOSetUp.php';
-require_once dirname(__FILE__).'/xPDOTearDown.php';
-require_once dirname(__FILE__).'/xPDO/xPDO_AllTests.php';
-require_once dirname(__FILE__).'/xPDOCache/xPDOCache_AllTests.php';
-require_once dirname(__FILE__).'/xPDOZip/xPDOZip_AllTests.php';
-require_once dirname(__FILE__).'/xPDOQuery/xPDOQuery_AllTests.php';
+require_once 'xPDOZip.php';
 /**
- * Main Suite handling all xPDO tests.
+ * Suite handling all xPDOCache related tests.
  *
  * @package xpdo-test
- * @subpackage xpdosuite
+ * @subpackage xpdocache
  */
-class xPDOSuite_AllTests {
+class xPDOZip_AllTests extends PHPUnit_Framework_TestSuite {
     public static function suite() {
-        $suite = new PHPUnit_Framework_TestSuite('xPDOSuite');
-        $suite->addTestSuite('xPDOSetUpTest');
-        $suite->addTest(xPDO_AllTests::suite());
-        $suite->addTest(xPDOCache_AllTests::suite());
-        $suite->addTest(xPDOZip_AllTests::suite());
-        $suite->addTest(xPDOQuery_AllTests::suite());
-		$suite->addTestSuite('xPDOTearDownTest');
+        $suite = new xPDOZip_AllTests('xPDOZipTests');
+        $suite->addTestSuite('xPDOZipTest');
         return $suite;
     }
 }
