@@ -348,10 +348,6 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
                 var data = lookup[selNode.id];
                 Ext.callback(callback,scope || this,[data]);
                 this.fireEvent('select',data);
-                if (window.top.opener) {
-                    window.top.close();
-                    window.top.opener.focus();
-                }
             }
         },scope);
     }
