@@ -6,6 +6,10 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#8928] Error saving Resource with access-restricted TemplateVars
+- [#8978] Fix issue where change template was not fired due to onsave check overriding listener
+- [#9026] Prevent new Content Types from having binary checked
+
 MODX Revolution 2.2.5-pl (October 2, 2012)
 ====================================
 - [#8753] Fix variable name in security/user/removemultiple processor

@@ -158,10 +158,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         ctype = 'check';
                         break;
                 }
-                if (cmp.xtype.indexOf("modx-combo")==0) {
+                if (cmp.xtype && cmp.xtype.indexOf('modx-combo') == 0) {
                     ctype = 'select';
                 }
-                cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
+                if (cmp.listeners[ctype] && cmp.listeners[ctype].fn) {
+                    cmp.listeners[ctype] = {fn:this.fieldChangeEvent.createSequence(cmp.listeners[ctype].fn,cmp.listeners[ctype].scope),scope:this}
+                } else {
+                    cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
+                }
             }
         }
     }

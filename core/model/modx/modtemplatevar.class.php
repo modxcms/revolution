@@ -1043,8 +1043,7 @@ class modTemplateVar extends modElement {
      * @return bool
      */
     public function checkResourceGroupAccess($user = null,$context = '') {
-        $context = !empty($context) ? $context : $this->xpdo->context;
-        $user = !empty($user) ? $user : $this->xpdo->user;
+        $context = !empty($context) ? $context : '';
 
         $c = $this->xpdo->newQuery('modResourceGroup');
         $c->innerJoin('modTemplateVarResourceGroup','TemplateVarResourceGroups',array(
