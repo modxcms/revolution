@@ -187,6 +187,7 @@ $_lang['ext_refresh'] = 'Aggiorna';
 $_lang['ext_showgroups'] = 'Mostra in gruppi';
 $_lang['ext_sortasc'] = 'Ordinamento crescente';
 $_lang['ext_sortdesc'] = 'Ordinamento decrescente';
+$_lang['ext_splittip'] = 'Trascina per ridimensionare.';
 $_lang['ext_tabclose'] = 'Chiudi scheda';
 $_lang['ext_timeinv'] = '{0} non è un orario valido';
 $_lang['ext_timemax'] = 'L\'ora deve essere uguale o inferiore alle {0}';
