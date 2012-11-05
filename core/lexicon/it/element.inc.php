@@ -9,6 +9,8 @@
 $_lang['element'] = 'Elemento';
 $_lang['element_err_nf'] = 'Elemento non trovato.';
 $_lang['element_err_ns'] = 'Elemento non specificato.';
+$_lang['element_static_source_immutable'] = 'Il file statico specificato come sorgente per l\'elemento non &egrave; scrivibile! Non puoi modificare il contenuto di questo elemento dal manager.';
+$_lang['element_static_source_protected_invalid'] = 'Non puoi far puntare il tuo Elemento alla directory con la configurazione di MODX; questa &egrave; una directory protetta, non accessibile.';
 $_lang['is_static'] = 'E\' Statico';
 $_lang['is_static_msg'] = 'Indica se la sorgente di un elemento è salvata in un file esterno.';
 $_lang['quick_create'] = 'Creazione rapida';
