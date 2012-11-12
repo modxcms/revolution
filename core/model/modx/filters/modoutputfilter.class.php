@@ -360,13 +360,6 @@ class modOutputFilter {
                             $output = $tag;
                             break;
 
-                        case 'math':
-                            /* Returns the result of an advanced calculation (expensive) */
-                            $filter= preg_replace("~([a-zA-Z\n\r\t\s])~", "", $m_val);
-                            $filter= str_replace('?', $output, $filter);
-                            $output= eval("return " . $filter . ";");
-                            break;
-
                         case 'add':
                         case 'increment':
                         case 'incr':
