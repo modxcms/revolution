@@ -229,7 +229,8 @@ class modX extends xPDO {
     public $sanitizePatterns = array(
         'scripts'   => '@<script[^>]*?>.*?</script>@si',
         'entities'  => '@&#(\d+);@e',
-        'tags'      => '@\[\[(.[^\[\[]*?)\]\]@si',
+        'opentags'      => '@\[\[@si',
+        'closetags'     => '@\]\]@si',
     );
     /**
      * @var integer An integer representing the session state of modX.
