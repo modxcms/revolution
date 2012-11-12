@@ -317,7 +317,7 @@ class modX extends xPDO {
             } elseif (is_string($value)) {
                 if (!empty($patterns)) {
                     foreach ($patterns as $pattern) {
-                        $nesting = ((integer) $nesting ? (integer) $nesting : 99);
+                        $nesting = ((integer) $nesting ? (integer) $nesting : 10);
                         $iteration = 1;
                         while ($iteration <= $nesting && preg_match($pattern, $value)) {
                             $value= preg_replace($pattern, '', $value);
