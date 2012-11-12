@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- [#9080] Separate open and close tags in modX::$sanitizePatterns
+- [#9080] Fix modX::stripTags() bug allowing script execution vulnerability
 - [#9007] Prevent MODx.Browser closing window when manager loaded in a new tab
 - [#8928] Error saving Resource with access-restricted TemplateVars
 - [#8978] Fix issue where change template was not fired due to onsave check overriding listener
