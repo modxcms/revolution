@@ -92,8 +92,8 @@ $_lang['setting_allow_forward_across_contexts_desc'] = 'Les Symlinks et les appe
 $_lang['setting_allow_manager_login_forgot_password'] = 'Formulaire d\'oubli de mot de passe sur l\'écran de connexion';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Non désactive la fonction de récupération de mot de passe sur la page de connexion du manager.';
 
-$_lang['setting_allow_tags_in_post'] = 'Autoriser les tags HTML en POST';
-$_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les actions POST à l\'intérieur du manager seront débarrassées de tout tags. Modx recommande de laisser cette option activée.';
+$_lang['setting_allow_tags_in_post'] = 'Autoriser les tags dans POST';
+$_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les variables de POST seront vidées des tags HTML, entitées numériques ainsi que des tags MODX. Modx recommande de désactiver cette option pour les contextes autres que « mgr », qui a cette option activée par défaut.';
 
 $_lang['setting_archive_with'] = 'Forcer l\'archivage PCLZip';
 $_lang['setting_archive_with_desc'] = 'Utiliser PCLZip à la place de ZipArchive en tant qu\'extenssion de zip. Activer cette option si vous obtenez des erreurs d\'extraction ou avez des problèmes de décompression dans le gestionnaire de paquets.';
