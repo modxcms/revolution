@@ -316,13 +316,25 @@ class modX extends xPDO {
                 modX :: sanitize($value, $patterns, $depth-1);
             } elseif (is_string($value)) {
                 if (!empty($patterns)) {
-                    foreach ($patterns as $pattern) {
-                        $nesting = ((integer) $nesting ? (integer) $nesting : 10);
-                        $iteration = 1;
-                        while ($iteration <= $nesting && preg_match($pattern, $value)) {
-                            $value= preg_replace($pattern, '', $value);
-                            $iteration++;
+                    $iteration = 1;
+                    $nesting = ((integer) $nesting ? (integer) $nesting : 10);
+                    while ($iteration <= $nesting) {
+                        $matched = false;
+                        foreach ($patterns as $pattern) {
+                            $patternIterator = 1;
+                            $patternMatches = preg_match($pattern, $value);
+                            if ($patternMatches > 0) {
+                                $matched = true;
+                                while ($patternMatches > 0 && $patternIterator <= $nesting) {
+                                    $value= preg_replace($pattern, '', $value);
+                                    $patternMatches = preg_match($pattern, $value);
+                                }
+                            }
                         }
+                        if (!$matched) {
+                            break;
+                        }
+                        $iteration++;
                     }
                 }
                 if (get_magic_quotes_gpc()) {
