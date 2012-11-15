@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-	MODx.load({ xtype: 'modx-page-access-policies' });
-});
-
 /**
  * Loads the access policies page
  * 

@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-package' });
-});
-
 MODx.page.Package = function(config) {
     config = config || {};
     Ext.applyIf(config,{
