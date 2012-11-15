@@ -171,7 +171,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         }
         m.push({
             text: _('delete')
-            ,handler: this.remove.createDelegate(this,["message_remove_confirm"])
+            ,handler: this.removeRow.createDelegate(this,["message_remove_confirm"])
         });
         return m;
     }

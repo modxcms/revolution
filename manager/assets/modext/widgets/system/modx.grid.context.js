@@ -75,7 +75,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             m.push('-');
             m.push({
                 text: _('context_remove')
-                ,handler: this.remove.createDelegate(this,["context_remove_confirm"])
+                ,handler: this.removeRow.createDelegate(this,["context_remove_confirm"])
             });
         }
         return m;

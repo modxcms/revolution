@@ -191,7 +191,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
     }
     
-    ,remove: function(text) {
+    ,removeRow: function(text) {
         var r = this.menu.record;
         text = text || 'confirm_remove';
         var p = this.config.saveParams || {};
@@ -668,7 +668,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
     }
     
     
-    ,remove: function(config) {
+    ,removeRow: function(config) {
         var r = this.getSelectionModel().getSelected();
         if (this.fireEvent('beforeRemoveRow',r)) {
             Ext.Msg.confirm(config.title || '',config.text || '',function(e) {
