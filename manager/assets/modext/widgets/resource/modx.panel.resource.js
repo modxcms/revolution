@@ -33,7 +33,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     initialized: false
     ,defaultClassKey: 'modDocument'
     ,classLexiconKey: 'document'
-    ,rteElements: 'ta'
     ,rteLoaded: false
     ,setup: function() {
         if (!this.initialized) {
@@ -64,7 +63,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
             if (f && f.getValue() == 1 && !this.rteLoaded) {
-                MODx.loadRTE(this.rteElements);
+                MODx.loadRTE('ta');
                 this.rteLoaded = true;
             } else if (f && f.getValue() == 0 && this.rteLoaded) {
                 if (MODx.unloadRTE) {
@@ -82,6 +81,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
 
+    }
+    ,onDestroy: function(e){
+        if (this.rteLoaded && MODx.unloadRTE){
+            MODx.unloadRTE('ta');
+            this.rteLoaded = false;
+        }
     }
 
     ,beforeSubmit: function(o) {
