@@ -67,7 +67,6 @@ class SystemFileEditManagerController extends modManagerController {
         $this->canSave = $this->fileRecord['is_writable'] ? true : false;
 
         $placeholders['fa'] = $this->fileRecord;
-        $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();
 
         return $placeholders;
     }
@@ -98,7 +97,7 @@ class SystemFileEditManagerController extends modManagerController {
      * Invoke OnFileEditFormPrerender event
      * @return string
      */
-    public function fireEvents() {
+    public function firePreRenderEvents() {
         $onFileEditFormPrerender = $this->modx->invokeEvent('OnFileEditFormPrerender',array(
             'mode' => modSystemEvent::MODE_UPD,
             'file' => $this->filename,
