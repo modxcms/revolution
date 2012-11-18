@@ -295,7 +295,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     /**
      * Abstracted remove function
      */
-    ,remove: function(text,substr,split) {
+    ,removeNode: function(text,substr,split) {
         var node = this.cm.activeNode;
         var id = this._extractId(node.id,substr,split);
         var p = {action: this.config.removeAction || 'remove'};
