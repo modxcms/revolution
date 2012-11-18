@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['event'] = 'Gebeurtenis';
 $_lang['events'] = 'Gebeurtenissen';
@@ -16,6 +16,9 @@ $_lang['plugin_add_to_event'] = 'Voeg een plugin aan een gebeurtenis toe';
 $_lang['plugin_code'] = 'Plugin code (php)';
 $_lang['plugin_config'] = 'Plugin configuratie';
 $_lang['plugin_desc'] = 'Omschrijving';
+$_lang['plugin_desc_category'] = 'De Categorie voor de Plugin.';
+$_lang['plugin_desc_description'] = 'Een korte beschrijving van de Plugin.';
+$_lang['plugin_desc_name'] = 'De naam van de Plugin.';
 $_lang['plugin_delete_confirm'] = 'Weet je zeker dat je deze plugin wilt verwijderen?';
 $_lang['plugin_disabled'] = 'Plugin uitgeschakeld';
 $_lang['plugin_duplicate_confirm'] = 'Weet je zeker dat je deze plugin wilt dupliceren?';

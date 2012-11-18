@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['action'] = 'Actie';
 $_lang['action_confirm_remove'] = 'Weet je zeker dat je deze actie wilt verwijderen? Dit kan eventueel de werking van jouw MODX manager be�nvloeden.';
@@ -26,6 +26,7 @@ $_lang['action_remove'] = 'Actie verwijderen';
 $_lang['action_update'] = 'Actie aanpassen';
 $_lang['actions'] = 'Acties';
 $_lang['controller'] = 'Controller';
+$_lang['controller_err_ae'] = 'Controller met dit pad bestaat al voor deze Namespace.';
 $_lang['controller_err_nf'] = 'Controller bestand niet gevonden!';
 $_lang['controller_err_ns'] = 'Geen controller gespecificeerd!';
 $_lang['controller_parent'] = 'Bovenliggende controller';

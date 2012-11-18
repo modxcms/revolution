@@ -6,19 +6,21 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['area'] = 'Gebied';
 $_lang['area_authentication'] = 'Authenticatie en beveiliging';
 $_lang['area_caching'] = 'Caching';
+$_lang['area_core'] = 'Core';
 $_lang['area_editor'] = 'Rich-Tekst Editor';
 $_lang['area_file'] = 'Bestandssysteem';
 $_lang['area_filter'] = 'Filter op gebied...';
 $_lang['area_furls'] = 'Vriendelijke URLs';
 $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexicon en taal';
-$_lang['area_mail'] = 'Mail';
+$_lang['area_mail'] = 'E-mail';
 $_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_phpthumb'] = 'PhpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session en Cookie';
 $_lang['area_lexicon_string'] = 'Gebied Lexicon Entry';
@@ -28,7 +30,11 @@ $_lang['area_system'] = 'Systeem en Server';
 $_lang['areas'] = 'Gebieden';
 $_lang['charset'] = 'Karakterset';
 $_lang['country'] = 'Land';
+$_lang['description_desc'] = 'Een korte beschrijving van de instelling. Kan een Lexicon key zijn.';
+$_lang['key_desc'] = 'De key voor de instelling. De instelling zal beschikbaar zijn via de [[++key]] tags.';
+$_lang['name_desc'] = 'Een Naam voor de instelling, kan een Lexicon key zijn.';
 $_lang['namespace'] = 'Namespace';
+$_lang['namespace_desc'] = 'De Namespace waar deze Instelling bij hoort. Het "default" Lexicon Topic voor de Namespace zal beschikbaar zijn wanneer Instellingen worden geladen.';
 $_lang['namespace_filter'] = 'Filter op namespace...';
 $_lang['search_by_key'] = 'Zoek op key...';
 $_lang['setting_create'] = 'Maak nieuwe instelling';
@@ -48,12 +54,21 @@ $_lang['settings_desc'] = 'Hier kun je algemene instellingen en configuratie ins
 $_lang['settings_furls'] = 'Vriendelijke URLs';
 $_lang['settings_misc'] = 'Diversen';
 $_lang['settings_site'] = 'Site';
-$_lang['settings_ui'] = 'Interface &amp; Features';
+$_lang['settings_ui'] = 'Interface & Features';
 $_lang['settings_users'] = 'Gebruiker';
 $_lang['system_settings'] = 'Systeeminstellingen';
 $_lang['usergroup'] = 'Gebruikersgroep';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Check Category Access';
+$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Check Context Access';
+$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
+
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Toegang';
 $_lang['setting_allow_mgr_access_desc'] = 'Selecteer deze optie om toegang tot de manager interface aan of uit te zetten. <strong>Let op: Als deze op nee is ingesteld dan zal de gebruiker naar de Manager Login of Site startpagina gestuurd worden</strong>';
 
@@ -75,6 +90,9 @@ $_lang['setting_access_policies_version_desc'] = 'De versie van het toegangsbele
 
 $_lang['setting_allow_forward_across_contexts'] = 'Sta forwarding over contexts toe';
 $_lang['setting_allow_forward_across_contexts_desc'] = 'Indien waar, Symlinks en modX::sendForward() API calls kunnen requests naar documenten in andere contexts forwarden.';
+
+$_lang['setting_allow_manager_login_forgot_password'] = 'Wachtwoord vergeten toestaan in de Manager Login';
+$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Deze instelling op "Nee" zetten zal het Wachtwoord vergeten van de manager login verwijderen.';
 
 $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
@@ -113,10 +131,13 @@ $_lang['setting_cache_db'] = 'Database Cache inschakelen';
 $_lang['setting_cache_db_desc'] = 'Indien ingeschakeld, objects en ruwe resultaatsets van SQL queries worden gecached om de snelheid significant te verbeteren.';
 
 $_lang['setting_cache_db_expires'] = 'Verlooptijd voor Database Cache';
-$_lang['setting_cache_db_expires_desc'] = 'Deze waarde (in seconden) stelt de verlooptijd voor de laatste cache bestanden van de database in.';
+$_lang['setting_cache_db_expires_desc'] = 'Deze waarde (in seconden) stelt de verlooptijd voor de cache bestanden van de database in.';
 
-$_lang['setting_cache_format'] = 'Te gebruiken caching formaat';
-$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. Een van de formaten.';
+$_lang['setting_cache_db_session'] = 'Database Sessie Cache inschakelen';
+$_lang['setting_cache_db_session_desc'] = 'Indien ingeschakeld, en cache_db is ingeschakeld, database sessies worden gecached in de DB result-set cache.';
+
+$_lang['setting_cache_db_session_lifetime'] = 'Verlooptijd voor DB Sessie Cache';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'Deze waarde (in seconden) stelt de verlooptijd voor de cache bestanden van de database in.';
 
 $_lang['setting_cache_default'] = 'Cacheable standaard';
 $_lang['setting_cache_default_desc'] = 'Stel in op \'Ja\' om alle nieuwe documenten standaard cacheable te maken.';
@@ -128,6 +149,9 @@ $_lang['setting_cache_disabled_err'] = 'Vermeld of je wilt dat cache ingeschakel
 
 $_lang['setting_cache_expires'] = 'Verlooptijd van standaard Cache';
 $_lang['setting_cache_expires_desc'] = 'Deze waarde (in seconden) stelt de verlooptijd voor de laatste cache bestanden van de standaard in.';
+
+$_lang['setting_cache_format'] = 'Te gebruiken caching formaat';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. Een van de formaten.';
 
 $_lang['setting_cache_handler'] = 'Caching Handler Class';
 $_lang['setting_cache_handler_desc'] = 'De class naam van het type handler te gebruiken voor caching.';
@@ -162,17 +186,42 @@ $_lang['setting_compress_css_desc'] = 'Indien ingeschakeld, MODX zal een gecompr
 $_lang['setting_compress_js'] = 'Gebruik Gecomprimeerde Javascript Libraries';
 $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn Javascript libraries gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
 
+$_lang['setting_compress_js_groups'] = 'Gebruik groepen bij compressie van JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Groepeer de core MODX JavaScript middels groupsConfig. Stel in op Ja indien je suhosin of andere limiet factoren gebruikt.';
+
+$_lang['setting_compress_js_max_files'] = 'Maximale grens voor compressie van JavaScript bestanden';
+$_lang['setting_compress_js_max_files_desc'] = 'Het maximum aantal JavaScript bestanden dat MODX in 1x probeert te compressen als compress_js aan is. Stel lager in als je problemen ondervindt met Google Minify in de Manager.';
+
 $_lang['setting_concat_js'] = 'Gebruik Samengevoegde Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'Indien ingeschakeld, MODX zal een samengevoegde versie gebruiken van zijn Javascript libraries in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
 
 $_lang['setting_container_suffix'] = 'Container Achtervoegsel';
 $_lang['setting_container_suffix_desc'] = 'Het achtervoegsel voor documenten indien het containers zijn en als er gebruikt gemaakt wordt van FURLs.';
 
+$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
+$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
+$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
+$_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
+
 $_lang['setting_cultureKey'] = 'Taal';
 $_lang['setting_cultureKey_desc'] = 'Selecteer de taal voor alle niet-manager Contexts, inclusief web.';
 
-$_lang['setting_custom_resource_classes'] = 'Aangepaste Document Classes';
-$_lang['setting_custom_resource_classes_desc'] = 'Een komma-gescheiden lijst van aangepaste document classes. Specificeer met kleine letters de lexicon_key:className (vb: wiki_resource:WikiResource). Alle classes moeten extenden van modResource. Om de locatie van de controller te specificeren voor elke class, voeg een instelling toe met kleine letters [deNaamVanDeClass]_delegate_path met een pad naar de map met de php maak/wijzig bestanden. Vb: wikiresource_delegate_path voor de class WikiResource welke modResource extend.';
+$_lang['setting_date_timezone'] = 'Standaard Tijdzone';
+$_lang['setting_date_timezone_desc'] = 'Handelt de standaard tijdzone voor PHP date functies, indien niet leeg. Indien leeg en de PHP date.timezone ini insteling is niet gezet in jouw omgeving, UTC wordt aangehouden.';
+
+$_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug_desc'] = 'Zet debugging aan en/of uit in MODX en/of bepaald de PHP error_reporting level. \'\' = gebruik huidige error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), of elke geldige error_reporting waarde (als een nummer).';
+
+$_lang['setting_default_content_type'] = 'Standaard Content Type';
+$_lang['setting_default_content_type_desc'] = 'Selecteer de standaard Content Type voor nieuwe Resources. Je kunt nog altijd andere Content Types selecteren bij het wijzigen van een Resource. Het is enkel een voor-selectie.';
+
+$_lang['setting_default_duplicate_publish_option'] = 'Standaard optie voor Resource duplicatie';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'De standaard geselecteerde optie voor dupliceren van een Resource. Kan zijn "unpublish", voor niet-gepubliceerde duplicaten, "publish" voor gepubliceerde duplicaten, of "preserve" voor de staat van de Resource die je dupliceert.';
+
+$_lang['setting_default_media_source'] = 'Standaard Media bron';
+$_lang['setting_default_media_source_desc'] = 'De standaard te laden Media bron.';
 
 $_lang['setting_default_template'] = 'Standaard Template';
 $_lang['setting_default_template_desc'] = 'Selecteer de standaard template welke je wilt gebruiken voor nieuwe documenten. Uiteraard kun je altijd nog een andere template kiezen in de document-editor, deze instelling selecteert er alvast een voor jou.';
@@ -237,6 +286,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Indien filemanager_url instel
 $_lang['setting_forgot_login_email'] = 'Inlog vergeten e-mail';
 $_lang['setting_forgot_login_email_desc'] = 'Het template voor de e-mail welke gestuurd wordt zodra een gebruiker zijn MODX gebruikersnaam/wachtwoord vergeten is';
 
+$_lang['setting_form_customization_use_all_groups'] = 'Gebruik alle gebruikersgroep lidmaatschappen voor Form Customization';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Indien Ja is ingesteld, zal FC *alle* sets op *alle* gebruikersgroepen met leden gebruiken. Anders, worden alleen de Sets gebruikt die behoren bij de primaire gebruikersgroep. Instellen op Ja kan voor problemen zorgen met conflicterende FC Sets.';
+
 $_lang['setting_forward_merge_excludes'] = 'sendForward sluit velden bij samenvoegen uit';
 $_lang['setting_forward_merge_excludes_desc'] = 'Een Symlink voegt niet-lege veld waarden met het doel document samen; deze komma gescheiden lijst van velden worden van samenvoegen uitgesloten door de Symlink.';
 
@@ -277,14 +329,32 @@ $_lang['setting_friendly_urls'] = 'Gebruik vriendelijke URLs';
 $_lang['setting_friendly_urls_desc'] = 'Dit staat je toe om zoekmachine vriendelijke URLs te gebruiken met MODX. Let op: dit zal alleen werken in MODX installaties draaiend op Apache en je moet een .htaccess bestand gemaakt hebben om dit te laten werken. Bekijk de .htaccess bestand welke is meegeleverd voor meer info.';
 $_lang['setting_friendly_urls_err'] = 'Vul in of je wel of niet gebruik wilt maken van vriendelijke URLs.';
 
+$_lang['setting_friendly_urls_strict'] = 'Gebruik stricte Vriendelijke URLs';
+$_lang['setting_friendly_urls_strict_desc'] = 'Als vriendelijke URLs ingeschakeld zijn, forceert deze optie non-canonical requests welke met een Resource overeenkomen naar een 301 redirect naar de canonical URI voor betreffende Resource. PAS OP: Zet deze niet aan indien je custom rewrite regels gebruikt welke niet overeenkomen, op z\'n minst aan het begin van een canonical URI. Ter voorbeeld; een canonical URI als foo/ met custom rewrites voor foo/bar.html zal werken, maar zal proberen bar/foo.html te rewriten als foo/ zal een redirect forceren naar foo/ met deze optie ingeschakeld.';
+
 $_lang['setting_global_duplicate_uri_check'] = 'Controleer op gedupliceerde URIs in alle contexts';
 $_lang['setting_global_duplicate_uri_check_desc'] = 'Selecteer \'Ja\' voor controles op gedupliceerde URIs voor alle contexts tijdens het zoeken. Anders, wordt alleen de context waar het document zich in bevindt gecontroleerd.';
 
 $_lang['setting_hidemenu_default'] = 'Standaard verbergen in menu';
 $_lang['setting_hidemenu_default_desc'] = 'Selecteer \'Ja\' om alle nieuwe documenten standaard te verbergen in het menu.';
 
+$_lang['setting_inline_help'] = 'Toon inline Help tekst voor velden';
+$_lang['setting_inline_help_desc'] = 'Indien \'Ja\', dan zullen velden hun help tekst direct onder het veld getoond worden. Indien \'Nee\', alle velden krijgen tooltip gebaseerde help.';
+
 $_lang['setting_link_tag_scheme'] = 'URL Generator Schema';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generator schema voor tag [[~id]]. Beschikbare opties: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generator schema voor tag . Beschikbare opties: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+
+$_lang['setting_locale'] = 'Locale';
+$_lang['setting_locale_desc'] = 'Stel de locale in voor het systeem. Laat leeg om de standaard te gebruiken. Zie <a href="http://php.net/setlocale" target="_blank">de PHP documentatie</a> voor meer info.';
+
+$_lang['setting_lock_ttl'] = 'Vergrendel Time-to-Live';
+$_lang['setting_lock_ttl_desc'] = 'Het aantal seconden dat de Resource vergrendeld blijft zodra de gebruiker inactief is.';
+
+$_lang['setting_log_level'] = 'Logging niveau';
+$_lang['setting_log_level_desc'] = 'De standaard logging niveau. Hoe lager het niveau, hoe minder meldingen er gelogd worden. Mogelijkheden: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO) en 4 (DEBUG).';
+
+$_lang['setting_log_target'] = 'Logging doel';
+$_lang['setting_log_target_desc'] = 'De standaard loggin doel waar log meldingen geschreven worden. Mogelijkheden: \'FILE\', \'HTML\' of \'ECHO\'. Standaard is \'FILE\' indien niet opgegeven.';
 
 $_lang['setting_mail_charset'] = 'Mail Karakterset';
 $_lang['setting_mail_charset_desc'] = 'Het (standaard) karakterset voor e-mails, bijv. \'iso-8859-1\' of \'UTF-8\'';
@@ -334,11 +404,26 @@ $_lang['setting_manager_date_format_desc'] = 'Het formaat, in PHP date() formaat
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Indien gezet, dan zal deze URL als favicon voor de manager geladen worden. Moet een relatieve URL zijn ten opzichte van de manager/ map of een absolute URL.';
 
+$_lang['setting_manager_html5_cache'] = 'Gebruik HTML5 Lokale Cache in Manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Experimenteel. Gebruik HTML5 lokale caching voor de Manager. Alleen aan te raden als de manager in modernere browsers gebruikt wordt.';
+
+$_lang['setting_manager_js_cache_file_locking'] = 'Schakel Bestandsvergrendeling voor Manager JS/CSS Cache in';
+$_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache bestandsvergrendeling. Stel in op Nee als bestandssysteem NFS is.';
+$_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compressie Cache Leeftijd';
+$_lang['setting_manager_js_cache_max_age_desc'] = 'De maximale leeftijd van browser cache van de manager CSS/JS compressie in seconden. Na deze periode, zal de browser een andere conditionele GET sturen. Gebruik lagere periode bij minder verkeerd.';
+$_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compressie Document Root';
+$_lang['setting_manager_js_document_root_desc'] = 'Als jouw server de DOCUMENT_ROOT niet beschikbaar heeft, stel deze hier expliciet in voor de manager CSS/JS compressie. Verander dit niet behalve als je weet wat je doet.';
+$_lang['setting_manager_js_zlib_output_compression'] = 'Schakel zlib Output Compression in voor Manager JS/CSS';
+$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Het wel of niet inschakelen van zlib output compressie voor gecompresseerde CSS/JS in de manager. Schakel niet in behalve als je zeker weet dat de PHP config variabele zlib.output_compression 1 kan zijn. MODX beveelt aan deze uit te laten.';
+
 $_lang['setting_manager_lang_attribute'] = 'Manager HTML en XML taal attribuut';
 $_lang['setting_manager_lang_attribute_desc'] = 'Vul een taalcode in dat het beste past bij de gekozen manager taal, dit zal ervoor zorgen dat de browser de content in een zo goed mogelijk formaat kan tonen.';
 
 $_lang['setting_manager_language'] = 'Manager taal';
 $_lang['setting_manager_language_desc'] = 'Selecteer de taal voor de MODX content manager.';
+
+$_lang['setting_manager_login_url_alternate'] = 'Alternatieve Manager Login URL';
+$_lang['setting_manager_login_url_alternate_desc'] = 'Een alternatieve URL om niet geauthoriseerde gebruikers heen te sturen als ze moeten inloggen. Het login formulier moet de gebruiker inloggen voor de "mgr" context, om dit te laten werken.';
 
 $_lang['setting_manager_login_start'] = 'Manager inlog start';
 $_lang['setting_manager_login_start_desc'] = 'Vul het ID in van het document waar de gebruiker naartoe gestuurd moet worden zodra hij/zij inlogt in de manager. <strong>Let op: controleer of het ID behoort tot een bestaand document en dat het gepubliceerd is en bereikbaar voor deze gebruiker!</strong>';
@@ -352,8 +437,14 @@ $_lang['setting_manager_time_format_desc'] = 'Het formaat, in PHP date(), voor d
 $_lang['setting_manager_use_tabs'] = 'Gebruik tabs in de manager layout';
 $_lang['setting_manager_use_tabs_desc'] = 'Indien waar, de manager zal tabs gebruiken voor het renderen van de content panelen. Anders gebruikt het portalen.';
 
+$_lang['setting_manager_week_start'] = 'Week start';
+$_lang['setting_manager_week_start_desc'] = 'Definieer de startdag van de week. Gebruik 0 (of laat leeg) voor Zondag, 1 voor maandag enzovoorts...';
+
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
+
+$_lang['setting_modx_browser_default_sort'] = 'Bestand Browser Standaard Sortering';
+$_lang['setting_modx_browser_default_sort_desc'] = 'De standaard sortering voor pop bestand browser in de manager. Mogelijkheden zijn: name, size, lastmod (last modified).';
 
 $_lang['setting_modx_charset'] = 'Karakter encoding';
 $_lang['setting_modx_charset_desc'] = 'Selecteer welek karakter encoding je wilt gebruiken. Onthoud dat MODX is getest met een aantal van deze encodings, maar niet met alle. Voor de meeste talen is de standaard instelling UTF-8 de voorkeur.';
@@ -470,6 +561,9 @@ $_lang['setting_rb_base_url_err'] = 'Vul een document browser basis URL in.';
 $_lang['setting_request_controller'] = 'Request controller bestandsnaam';
 $_lang['setting_request_controller_desc'] = 'De bestandsnaam van de hoofd request controller vanwaar MODX geladen is. De meeste gebruikers kunnen dit laten staan op index.php.';
 
+$_lang['setting_request_method_strict'] = 'Stricte Aanvraag Methode';
+$_lang['setting_request_method_strict_desc'] = 'Indien ingeschakeld, aanvragen via de Aanvraag ID Parameter worden genegeeerd indien FURLs ingeschakeld zijn en de Aanvraag Alias Parameter wordt genegeeerd indien FURLs uitgeschakeld zijn.';
+
 $_lang['setting_request_param_alias'] = 'Request alias parameter';
 $_lang['setting_request_param_alias_desc'] = 'De naam van de GET parameter om document aliassen te identificeren bij doorsturen met FURLs.';
 
@@ -492,9 +586,6 @@ $_lang['setting_search_default'] = 'Standaard doorzoekbaar';
 $_lang['setting_search_default_desc'] = 'Selecteer \'Ja\' om alle nieuwe documenten standaard doorzoekbaar in te stellen.';
 $_lang['setting_search_default_err'] = 'Geef aan of documenten standaard doorzoekbaar moeten zijn of niet.';
 
-$_lang['setting_request_method_strict'] = 'Stricte Aanvraag Methode';
-$_lang['setting_request_method_strict_desc'] = 'Indien ingeschakeld, aanvragen via de Aanvraag ID Parameter worden genegeeerd indien FURLs ingeschakeld zijn en de Aanvraag Alias Parameter wordt genegeeerd indien FURLs uitgeschakeld zijn.';
-
 $_lang['setting_server_offset_time'] = 'Server offset tijd';
 $_lang['setting_server_offset_time_desc'] = 'Selecteer het aantal uren in tijdsverschil in waar jij bent en waar de server is.';
 
@@ -516,6 +607,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Gebruik deze instelling om het coo
 $_lang['setting_session_cookie_secure'] = 'Sessie cookie beveiligd';
 $_lang['setting_session_cookie_secure_desc'] = 'Activeer deze instelling om beveiligde cookies te gebruiken.';
 
+$_lang['setting_session_gc_maxlifetime'] = 'Sessie Garbage Collector Max Lifetime';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Staat aanpassingen toe van de session.gc_maxlifetime PHP ini instelling wanneer \'modSessionHandler\' wordt gebruikt.';
+
 $_lang['setting_session_handler_class'] = 'Sessie handler classnaam';
 $_lang['setting_session_handler_class_desc'] = 'Voor database gestuurde sessies, gebruik \'modSessionHandler\'. Laat deze leeg voor de standaard PHP sessie management.';
 
@@ -531,13 +625,16 @@ $_lang['setting_settings_distro_desc'] = 'De huidige geinstalleerde distributie 
 $_lang['setting_set_header'] = 'Stel HTTP Headers in';
 $_lang['setting_set_header_desc'] = 'Indien geactiveerd, MODX zal proberen de HTTP headers in te stellen voor documenten.';
 
+$_lang['setting_show_tv_categories_header'] = 'Toon "Categorieën" Tabs Header met TVs';
+$_lang['setting_show_tv_categories_header_desc'] = 'Indien "Ja", MODX toont de "Categorieën" header boven de eerste categorie tab bij het bewerken van Resource TVs.';
+
 $_lang['setting_signupemail_message'] = 'Inschrijf e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]]\n\nHier zijn jouw logingegevens voor [[+sname]] Content Manager:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nAls je inlogt in de Content Manager ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite beheerder';
 
 $_lang['setting_site_name'] = 'Site naam';
 $_lang['setting_site_name_desc'] = 'Vul de naam van jouw site in!';
-$_lang['setting_site_name_err']  = 'Vul een site naam in';
+$_lang['setting_site_name_err'] = 'Vul een site naam in';
 
 $_lang['setting_site_start'] = 'Site start';
 $_lang['setting_site_start_desc'] = 'Vul het ID van het document in dat jij als startpagina wilt hebben. <strong>Let op:</strong> controleer of dit ID behoort tot een bestaand document en dat dit document gepubliceerd is!</strong>';
@@ -568,6 +665,12 @@ $_lang['setting_tree_default_sort_desc'] = 'Het standaard sorteerveld voor de do
 
 $_lang['setting_tree_root_id'] = 'Structuur Root ID';
 $_lang['setting_tree_root_id_desc'] = 'Stel dit in naar een geldig ID van een document om boomstructuur aan de linkerkant te starten als root. De gebruiker zal alleen de documenten zien dat subs zijn van dit document.';
+
+$_lang['setting_tvs_below_content'] = 'Verplaats TVs onder Content';
+$_lang['setting_tvs_below_content_desc'] = 'Stel in op Ja om Template Variabelen onder de Content te verplaatsen bij het bewerken van een Resourcen.';
+
+$_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
+$_lang['setting_ui_debug_mode_desc'] = 'Stel in op Ja om debug meldingen te tonen wanneer u de standaard manager theme gebruikt. Je moet een browser gebruiken die console.log ondersteunt.';
 
 $_lang['setting_udperms_allowroot'] = 'Root toestaan';
 $_lang['setting_udperms_allowroot_desc'] = 'Wil je gebruikers toestaan om nieuwe documenten te maken in de root van jouw site?';
@@ -605,6 +708,9 @@ $_lang['setting_use_editor_err'] = 'Geef aan of je de RTE editor wel of niet wil
 $_lang['setting_use_multibyte'] = 'Gebruik multibyte extensie';
 $_lang['setting_use_multibyte_desc'] = 'Stel in op waar als je gebruik wilt maken van mbstring extentie voor multibyte karakters in jouw MODX installatie. Alleen op waar instellen als de mbstring PHP extentie ge�nstalleerd is.';
 
+$_lang['setting_use_weblink_target'] = 'Gebruik WebLink doel';
+$_lang['setting_use_weblink_target_desc'] = 'Stel in als Ja als je wilt dat MODX link tags en makeUrl() links genereren moet voor Weblinks. Anders wordt de interne MODX URL gegenereerd door link tags en de makeUrl() methode.';
+
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\n\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\n\n[[+surl]]\n\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\n\nWachtwoord: [[+pwd]]\n\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\n\nMet vriendelijke groet,\nSite beheerder';
@@ -627,3 +733,6 @@ $_lang['setting_which_element_editor_desc'] = 'Hier kun je selecteren welke rich
 
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 $_lang['setting_xhtml_urls_desc'] = 'Indien op waar gezet, alle URLs gegenereerd door MODX zijn XHTML-compliant, inclusief de encoding van het ampersand karakter.';
+
+$_lang['setting_default_context'] = 'Standaard Context';
+$_lang['setting_default_context_desc'] = 'Selecteer de standaard Context die je wilt gebruiken bij nieuwe Resources.';

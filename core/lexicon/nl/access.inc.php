@@ -2,11 +2,11 @@
 /**
  * Access Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['access_category_management_msg'] = 'Beheer gebruikersgroep leden toegang voor element via categorie�n en optioneel toegansbeleid toevoegen.';
 $_lang['access_category_err_ae'] = 'Een ACL voor deze categorie bestaat reeds!';
@@ -16,7 +16,7 @@ $_lang['access_category_err_remove'] = 'Er is een fout opgetreden tijdens het ve
 $_lang['access_category_remove'] = 'Categorietoegang verwijderen';
 $_lang['access_category_update'] = 'Categorietoegang aanpassen';
 $_lang['access_confirm_remove'] = 'Weet je zeker dat je deze beveiligingsrecord wilt verwijderen?';
-$_lang['access_context_management_msg'] = 'Beheer gebruikersgroep leden toegang voor contexts en optioneel toegansbeleid toevoegen.';
+$_lang['access_context_management_msg'] = 'Beheer gebruikersgroep leden toegang voor contexten en optioneel toegansbeleid toevoegen.';
 $_lang['access_context_err_ae'] = 'Een ACL voor deze context bestaat reeds!';
 $_lang['access_context_err_nf'] = 'Context ACL niet gevonden.';
 $_lang['access_context_err_ns'] = 'Context ACL niet gespecificeerd.';
@@ -63,7 +63,7 @@ $_lang['access_rgroup_remove'] = 'Verwijder documentgroep toegang';
 $_lang['access_rgroup_update'] = 'Documentgroep toegang aanpassen';
 $_lang['access_source_remove'] = 'Verwijder Media Source Toegang';
 $_lang['access_source_update'] = 'Media Source Toegang Aanpassen';
-$_lang['access_to_contexts'] = 'Toegang tot Contexts';
+$_lang['access_to_contexts'] = 'Toegang tot Contexten';
 $_lang['access_to_resource_groups'] = 'Toegang tot documentgroepen';
 $_lang['access_type_err_ns'] = 'Doeltype of ID niet gedefinieerd!';
 $_lang['acl_add'] = 'Toegangscontrole toevoegen';
@@ -96,8 +96,35 @@ $_lang['resource_group_resource_err_nf'] = 'Dit document is geen onderdeel of di
 $_lang['resource_group_resource_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van het document uit de documentgroep.';
 $_lang['resource_group_untitled'] = 'Naamloze documentgroep';
 $_lang['resource_group_update'] = 'Documentgroep Aanpassen';
+$_lang['resource_group_access_contexts'] = 'Een komma gescheiden lijst van Contexten waar de Resource Groep betrekking op heeft voor de volgende opties.';
+$_lang['resource_group_automatic_access'] = 'Toegangswizard';
+$_lang['resource_group_automatic_access_desc'] = 'Let op: je zult wellicht de sessies moeten flushen nadat je de Resource Groep hebt toegevoegd en je gebruik maakt van de onderstaande opties.';
+$_lang['resource_group_access_admin'] = 'Geef Administrator groep automatisch toegang';
+$_lang['resource_group_access_admin_desc'] = 'Indien aangevinkt, zal de Administrator groep bekijk en bewerk toegang geven tot deze Resource groep voor de bovenstaande contexten.';
+$_lang['resource_group_access_anon'] = 'Geef Anonymous groep automatisch toegang';
+$_lang['resource_group_access_anon_desc'] = 'Indien aangevinkt, zal niet ingelogde gebruikers bekijk en bewerk toegang geven tot deze Resource groep voor de bovenstaande contexten.';
+$_lang['resource_group_access_parallel'] = 'Maak gebruikersgroep parallel aan';
+$_lang['resource_group_access_parallel_desc'] = 'Indien aangevinkt, wordt er automatisch een gebruikersgroep met dezelfde naam aangemaakt en krijgt het bekijk toegang tot deze Resource groep voor de bovenstaande contexten.';
+$_lang['resource_group_access_ugs'] = 'Geeft andere gebruikersgroepen automatisch toegang';
+$_lang['resource_group_access_ugs_desc'] = 'Een komma gescheiden lijst van gebruikersgroep namen. Indien niet leeg, krijgen deze gebruikersgroepen bekijk toegang tot deze Resource groep voor de bovenstaande contexten.';
 $_lang['roles_msg'] = 'Een rol is, per definitie, een positie of status houdt men binnen een bepaalde situatie. Ze kunnen worden gebruikt om gebruikers te groeperen in een positie of status binnen een gebruikersgroep. Rollen in MODX hebben ook wat we noemen "Autoriteit". Dit is een nummerieke waarde van elk geldig getal. Autoriteitlevels zijn erfelijk, in die zin dat een rol met Autoriteit 1 zal erven alle groepsbeleid toegewezen aan zichzelf, en alle rollen met een hogere autoriteit niveau dan 1.';
 $_lang['source_add'] = 'Media Source Toevoegen';
+
+$_lang['user_group_aw'] = 'Toegangswizard';
+$_lang['user_group_aw_desc'] = 'Let op: je zult wellicht de sessies moeten flushen nadat je de Resource Groep hebt toegevoegd en je gebruik maakt van de onderstaande opties.';
+$_lang['user_group_aw_contexts'] = 'Contexten';
+$_lang['user_group_aw_contexts_desc'] = 'Een komma gescheiden lijst van Contexten welke deze gebruikersgroep moet kunnen bekijken.';
+$_lang['user_group_aw_manager_policy'] = 'Manager beleid';
+$_lang['user_group_aw_manager_policy_desc'] = 'Het beleid voor de gebruikersgroep voor bewerken in de manager. Selecteer (geen beleid) om geen toegang tot de manager te geven.';
+$_lang['user_group_aw_users'] = 'Gebruikers';
+$_lang['user_group_aw_users_desc'] = 'Een komma gescheiden lijst van gebruikersnamen om toe te voegen aan deze gebruikersgroep. Je kunt gebruikersnaam:rol formaat gebruiken voor het instellen van een rol; anders wordt Member aangenomen.';
+$_lang['user_group_aw_resource_groups'] = 'Resource Groepen';
+$_lang['user_group_aw_resource_groups_desc'] = 'Een komma gescheiden lijst van Resource groepen om toegang te geven tot de Contexten hierboven gespecificeerd.';
+$_lang['user_group_aw_categories'] = 'Element Categorieën';
+$_lang['user_group_aw_categories_desc'] = 'Een komma gescheiden lijst van Element categorieën om toegang te geven tot de Contexten hierboven gespecificeerd.';
+$_lang['user_group_aw_parallel'] = 'Maak Resource groep parallel aan';
+$_lang['user_group_aw_parallel_desc'] = 'Indien aangevinkt, wordt er automatisch een Resource groep met dezelfde naam aangemaakt en krijgt het bekijk toegang voor de Contexten hierboven gespecificeerd.';
+
 $_lang['user_group_category_access'] = 'Element categorietoegang';
 $_lang['user_group_category_access_msg'] = 'Hier kun je instellen welke elementen van deze gebruikersgroep toegang hebben tot de categoriën waar de elementen in zitten.';
 $_lang['user_group_category_authority_desc'] = 'De minimum Rol welke toegang zal hebben tot de toegangsrechten in het geselecteerde beleid. Rollen met een hogere autoriteit (lagere nummers) zullen deze toegangsrechten ook krijgen. In de meeste situaties kan dit blijven als "Member".';
@@ -105,9 +132,10 @@ $_lang['user_group_category_category_desc'] = 'De Categorie waartoe je toegang w
 $_lang['user_group_category_context_desc'] = 'De Context waarvoor dit toegangsbeleid geld voor elementen in de bovenstaande categorie.';
 $_lang['user_group_category_policy_desc'] = 'Het Beleid om toe te passen in deze Context met Elementen in de Categorie voor deze Gebruikersgroep. Dit geeft elke Gebruiker in deze Gebruikersgroep met de geselecteerde minimale rol toegang tot de rechten in het Beleid.';
 $_lang['user_group_category_err_ae'] = 'Gebruikersgroep heeft reeds toegang tot die categorie.';
+$_lang['user_group_category_policy_desc'] = 'Het Beleid om toe te passen in deze Context met Elementen in de Categorie voor deze Gebruikersgroep. Dit geeft elke Gebruiker in deze Gebruikersgroep met de geselecteerde minimale rol toegang tot de rechten in het Beleid.';
 $_lang['user_group_category_remove_confirm'] = 'Weet je heel zeker dat je deze categorie uit deze gebruikersgroep wilt verwijderen?';
 $_lang['user_group_context_access'] = 'Context toegang';
-$_lang['user_group_context_access_msg'] = 'Hier kun je instellen welke contexts toegang hebben tot deze gebruikersgroep.';
+$_lang['user_group_context_access_msg'] = 'Hier kun je instellen welke contexten toegang hebben tot deze gebruikersgroep.';
 $_lang['user_group_context_authority_desc'] = 'De minimum Rol welke toegang zal hebben tot de toegangsrechten in het geselecteerde beleid. Rollen met een hogere autoriteit (lagere nummers) zullen deze toegangsrechten ook krijgen. In de meeste situaties kan dit blijven als "Member".';
 $_lang['user_group_context_context_desc'] = 'De Context om toegang tot te geven.';
 $_lang['user_group_context_policy_desc'] = 'Het Beleid om toe te passen voor deze Context voor deze Gebruikersgroep. Dit geeft elke Gebruiker in deze Gebruikersgroep met de geselecteerde minimale rol toegang tot de rechten in het Beleid.';

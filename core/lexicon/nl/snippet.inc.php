@@ -2,17 +2,20 @@
 /**
  * Snippet Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets_available'] = 'Snippets beschikbaar voor jou om te includen in jouw pagina';
 $_lang['snippet_code'] = 'Snippet code (php)';
 $_lang['snippet_delete_confirm'] = 'Weet je zeker dat je deze snippet wilt verwijderen?';
 $_lang['snippet_desc'] = 'Omschrijving';
+$_lang['snippet_desc_category'] = 'De Categorie voor de Snippet.';
+$_lang['snippet_desc_description'] = 'Een korte beschrijving van de Snippet.';
+$_lang['snippet_desc_name'] = 'De naam van Snippet. De snippet zal te gebruiken zijn via de [[NaamVanSnippet]] tags.';
 $_lang['snippet_duplicate_confirm'] = 'Weet je zeker dat je deze snippet wilt dupliceren?';
 $_lang['snippet_duplicate_error'] = 'Er is een fout opgetreden tijdens het dupliceren van de snippet.';
 $_lang['snippet_err_create'] = 'Er is een fout opgetreden tijdens het maken van de snippet.';

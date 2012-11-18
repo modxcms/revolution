@@ -2,11 +2,11 @@
 /**
  * Top Menu Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['about'] = 'Over';
 $_lang['about_desc'] = 'Meer informatie over MODX Revolution.';
@@ -19,6 +19,9 @@ $_lang['content_types'] = 'Content Types';
 $_lang['content_types_desc'] = 'Voeg nieuwe content types toe voor documenten, als .html, .js etc.';
 $_lang['contexts'] = 'Contexts';
 $_lang['contexts_desc'] = 'Beheer site contexts en hun instellingen.';
+$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboards'] = 'Dashboards';
+$_lang['dashboards_desc'] = 'Beheer de dashboard configuratie.';
 $_lang['edit_menu'] = 'Acties';
 $_lang['edit_menu_desc'] = 'Beheer acties en de topmenu structuur.';
 $_lang['eventlog_viewer'] = 'Error Log';
@@ -68,8 +71,8 @@ $_lang['preview'] = 'Voorbeeld';
 $_lang['preview_desc'] = 'Laad jouw website in een nieuwe scherm.';
 $_lang['profile'] = 'Profiel';
 $_lang['profile_desc'] = 'Update jouw persoonlijk profiel.';
-$_lang['propertysets'] = 'Eigenschapsets';
-$_lang['propertysets_desc'] = 'Beheer al jouw site\'s eigenschapsets en de elementen waar ze aan gekoppeld zijn.';
+$_lang['propertysets'] = 'Propertysets';
+$_lang['propertysets_desc'] = 'Beheer al jouw site\'s propertysets en de elementen waar ze aan gekoppeld zijn.';
 $_lang['refresh_site'] = 'Leeg cache';
 $_lang['refresh_site_desc'] = 'Leeg jouw site\'s cache.';
 $_lang['remove_locks'] = 'Verwijder vergrendelingen';
@@ -82,6 +85,8 @@ $_lang['search'] = 'Zoeken';
 $_lang['search_desc'] = 'Zoek naar documenten.';
 $_lang['security'] = 'Beveiliging';
 $_lang['site'] = 'Site';
+$_lang['sources'] = 'Media Sources';
+$_lang['sources_desc'] = 'Beheer je media sources hier.';
 $_lang['support'] = 'Ondersteuning';
 $_lang['support_desc'] = '';
 $_lang['site_schedule'] = 'Site Rooster';
