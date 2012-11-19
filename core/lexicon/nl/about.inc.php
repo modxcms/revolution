@@ -6,9 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author GP Sietzema, Sterc.nl
- * @version 2.0.1
- * @updated 2010-09-14
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['about_msg'] = 'MODX is een <a href="http://modx.com/" target="_blank">PHP Application Framework en Content Management Systeem</a> gelicenseerd onder de <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> en/of welke latere versie dan ook.';
 $_lang['about_title'] = 'Over MODX';

@@ -1,10 +1,12 @@
 <?php
 /**
- * Sources English lexicon topic
+ * Sources Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
+ *
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['access'] = 'Toegangs Controle';
 $_lang['base_path'] = 'Standaard Pad';

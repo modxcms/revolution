@@ -32,10 +32,10 @@ MODx.tree.Resource = function(config) {
         var el = Ext.get('modx-resource-tree');
         el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
         el.createChild({tag: 'div', id: 'modx-resource-tree_filter'});
+        this.addSearchToolbar();
     },this);
     this.addEvents('loadCreateMenus');
     this.on('afterSort',this._handleAfterDrop,this);
-    this.addSearchToolbar();
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     forms: {}
@@ -89,6 +89,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         tb.add(tf);
         tb.doLayout();
         this.searchBar = tb;
+        this.on('resize', function(){
+            tf.setWidth(this.getWidth() - 12);
+        }, this);
     }
 
     ,search: function(nv) {

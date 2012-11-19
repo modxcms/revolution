@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['mail_err_address_ns'] = 'Je moet een geldig e-mailadres opgeven om naar te versturen.';
 $_lang['mail_err_derive_getmailer'] = 'Poging om abstracte functie _getMailer() in modMail aan te roepen. Je moet deze functie implementeren in een afgeleide van modMail.';

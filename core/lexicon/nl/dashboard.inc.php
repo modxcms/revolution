@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author MJ Hofland, veiliggesteld.nl
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['active_users_none'] = 'Er zijn geen actieve gebruikers.';
 $_lang['add_user'] = 'Nieuwe Gebruiker';

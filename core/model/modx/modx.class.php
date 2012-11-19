@@ -227,9 +227,10 @@ class modX extends xPDO {
      * @var array An array of regex patterns regulary cleansed from content.
      */
     public $sanitizePatterns = array(
-        'scripts'   => '@<script[^>]*?>.*?</script>@si',
-        'entities'  => '@&#(\d+);@e',
-        'tags'      => '@\[\[(.[^\[\[]*?)\]\]@si',
+        'scripts'       => '@<script[^>]*?>.*?</script>@si',
+        'entities'      => '@&#(\d+);@e',
+        'tags1'          => '@\[\[(.*?)\]\]@si',
+        'tags2'          => '@(\[\[|\]\])@si',
     );
     /**
      * @var integer An integer representing the session state of modX.
@@ -309,19 +310,31 @@ class modX extends xPDO {
      * @param integer $nesting The maximum nesting level in which to dive
      * @return array The sanitized array.
      */
-    public static function sanitize(array &$target, array $patterns= array(), $depth= 3, $nesting= 10) {
-        while (list($key, $value)= each($target)) {
+    public static function sanitize(array &$target, array $patterns= array(), $depth= 99, $nesting= 10) {
+        foreach ($target as $key => &$value) {
             if (is_array($value) && $depth > 0) {
                 modX :: sanitize($value, $patterns, $depth-1);
             } elseif (is_string($value)) {
                 if (!empty($patterns)) {
-                    foreach ($patterns as $pattern) {
-                        $nesting = ((integer) $nesting ? (integer) $nesting : 10);
-                        $iteration = 1;
-                        while ($iteration <= $nesting && preg_match($pattern, $value)) {
-                            $value= preg_replace($pattern, '', $value);
-                            $iteration++;
+                    $iteration = 1;
+                    $nesting = ((integer) $nesting ? (integer) $nesting : 10);
+                    while ($iteration <= $nesting) {
+                        $matched = false;
+                        foreach ($patterns as $pattern) {
+                            $patternIterator = 1;
+                            $patternMatches = preg_match($pattern, $value);
+                            if ($patternMatches > 0) {
+                                $matched = true;
+                                while ($patternMatches > 0 && $patternIterator <= $nesting) {
+                                    $value= preg_replace($pattern, '', $value);
+                                    $patternMatches = preg_match($pattern, $value);
+                                }
+                            }
                         }
+                        if (!$matched) {
+                            break;
+                        }
+                        $iteration++;
                     }
                 }
                 if (get_magic_quotes_gpc()) {

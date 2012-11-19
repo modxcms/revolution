@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['alphabetically'] = 'Alfabetisch';
 $_lang['already_downloaded'] = 'Je hebt dit pakket al gedownload.';
@@ -37,6 +37,7 @@ $_lang['download_extras'] = 'Download extras';
 $_lang['downloads'] = 'Downloads';
 $_lang['downloads_view'] = '{downloads} downloads';
 $_lang['information'] = 'Informatie';
+$_lang['install'] = 'Installeer';
 $_lang['version'] = 'Versie';
 $_lang['installation_instructions'] = 'Installatie instructies';
 $_lang['installed'] = 'Geïnstalleerd';
@@ -73,6 +74,7 @@ $_lang['package_confirm_remove'] = 'Weet je zeker dat je dit pakket wilt verwijd
 $_lang['package_confirm_uninstall'] = 'Weet je zeker dat je dit pakket wilt deïnstalleren?';
 $_lang['package_created'] = 'Nieuw transport pakket aangemaakt met kenmerk: [[+signature]]';
 $_lang['package_details'] = 'Pakket Details';
+$_lang['package_details_for'] = 'Package Details voor [[+package]]';
 $_lang['package_download_err'] = 'Kon pakket niet downloaden van: [[+location]]';
 $_lang['package_download_err_create'] = 'Kon pakket niet downloaden of aanmaken met kenmerk: [[+signature]]';
 $_lang['package_download_err_ns'] = 'Selecteer tenminste een pakket versie om te downloaden.';

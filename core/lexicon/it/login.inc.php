@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['login_language'] = 'Lingua';
 $_lang['login_activation_key_err'] = 'Chiave di Attivazione non corrispondente! Per favore controlla la mail di attivazione e accertati di aver caricato l\' URL corretto.';
 $_lang['login_blocked_admin'] = 'Sei stato bloccato nella gestione da un amministratore.';
 $_lang['login_blocked_error'] = 'Sei stato temporaneamente bloccato e non puoi accedere. Riprova più tardi.';

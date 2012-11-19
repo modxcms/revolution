@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['action'] = 'Actie';
 $_lang['action_desc'] = 'De actie waar deze regel op van toepassing is.';
@@ -58,6 +58,8 @@ $_lang['profiles'] = 'Form Customization profielen';
 $_lang['profiles_msg'] = 'Dit is een lijst van jouw Form Customization profielen. Profielen kunnen Form Customization regels bevatten en kunnen geactiveerd of gedeactiveerd worden. Ze kunnen ook toegepast worden voor bepaalde gebruikersgroepen.';
 $_lang['rank'] = 'Rang';
 $_lang['rank_desc'] = 'De sortering waar de regel in uitgevoerd wordt. Een lager getal betekend dat het eerder wordt uitgevoerd.';
+$_lang['region'] = 'Regio';
+$_lang['regions'] = 'Regio\'s';
 $_lang['rule'] = 'Regel';
 $_lang['rule_create'] = 'Regel maken';
 $_lang['rule_desc'] = 'De regeltype welke toegepast wordt op dit veld.';

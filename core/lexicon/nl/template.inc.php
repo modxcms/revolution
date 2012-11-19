@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['access'] = 'Toegang';
 $_lang['filter_by_category'] = 'Filter op categorie...';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['binary'] = 'Binair';
 $_lang['binary_desc'] = 'Is het bestand een binair bestand of tekst/ASCII?';

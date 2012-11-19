@@ -369,7 +369,7 @@ class modRequest {
      */
     public function sanitizeRequest() {
         $modxtags = array_values($this->modx->sanitizePatterns);
-        modX :: sanitize($_GET, $modxtags, 0);
+        modX :: sanitize($_GET, $modxtags);
         if ($this->modx->getOption('allow_tags_in_post',null,true)) {
             modX :: sanitize($_POST);
         } else {

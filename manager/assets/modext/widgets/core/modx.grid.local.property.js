@@ -12,9 +12,7 @@ MODx.grid.LocalProperty = function(config) {
 Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
     onCellDblClick: function(g,ri,ci,e) {
         var cm = this.getColumnModel();
-        if (cm.getColumnId(ci) != this.config.dynField) {
-            this.onCellDblClick(g,ri,ci,e);
-        } else {
+        if (cm.getColumnId(ci) == this.config.dynField) {
             e.preventDefault();
             var r = this.getStore().getAt(ri).data;
             this.initEditor(cm,ci,ri,r);

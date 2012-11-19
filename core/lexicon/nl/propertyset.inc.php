@@ -6,13 +6,14 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
+$_lang['area'] = 'Ruimte';
+$_lang['areas'] = 'Ruimten';
 $_lang['class_name'] = 'Class naam';
 $_lang['default'] = 'Standaard';
 $_lang['duplicate_of'] = 'Dupliceer van [[+name]]';
-$_lang['element_properties_desc'] = '
-Hier kun je standaard propertysets voor een element of een specifieke set wijzigen. <b>Let op:</b> Wanneer je de standaard set wijzigt, dan overschrijf je de standaard properties. Wijzigingen in een specifieke propertyset worden alleen in die set opgeslagen.<br /><br />Wanneer je een set aangeklikt hebt om te wijzigen, de standaard waarden worden dan in het <span style="color: gray;">grijs</span> getoond. Properties in het grijs zitten niet in de set, maar worden getoond om het wijzigen makkelijker te maken. Properties in het <span style="color: green">groen</span> zijn properties welke de standaard hebben overschreven. Properties in het <span style="color: purple">paars</span> zijn nieuwe properties welke niet in de standaard set aanwezig zijn.<br /><br /><b>Note:</b> Het is beter om standaard properties niet te wijzigen voor snippets geinstalleerd via de Pakket Manager, want als je deze snippets update, worden de properties overschreven. Gebruik daarom bij voorkeur een Propertyset!';
+$_lang['element_properties_desc'] = 'Hier kun je standaard propertysets voor een element of een specifieke set wijzigen. <b>Let op:</b> Wanneer je de standaard set wijzigt, dan overschrijf je de standaard properties. Wijzigingen in een specifieke propertyset worden alleen in die set opgeslagen.<br /><br />Wanneer je een set aangeklikt hebt om te wijzigen, de standaard waarden worden dan in het <span style="color: gray;">grijs</span> getoond. Properties in het grijs zitten niet in de set, maar worden getoond om het wijzigen makkelijker te maken. Properties in het <span style="color: green">groen</span> zijn properties welke de standaard hebben overschreven. Properties in het <span style="color: purple">paars</span> zijn nieuwe properties welke niet in de standaard set aanwezig zijn.<br /><br /><b>Note:</b> Het is beter om standaard properties niet te wijzigen voor snippets geinstalleerd via de Pakket Manager, want als je deze snippets update, worden de properties overschreven. Gebruik daarom bij voorkeur een Propertyset!';
 $_lang['file'] = 'Bestand';
 $_lang['import'] = 'Importerr';
 $_lang['new_name'] = 'Nieuwe naam';
@@ -27,6 +28,8 @@ $_lang['properties_import_err_upload'] = 'Selecteer een geldig propertiesbestand
 $_lang['properties_import_msg'] = 'Selecteer een geldig propertiesbestand.';
 $_lang['properties_remove'] = 'Properties verwijderen';
 $_lang['properties_remove_confirm'] = 'Weet je zeker dat je deze properties wilt verwijderen?';
+$_lang['property'] = 'Property';
+$_lang['property_area_desc'] = 'De ruimte, of groep, waar deze property toe behoort.';
 $_lang['property_create'] = 'Property maken';
 $_lang['property_description_desc'] = 'Een korte beschrijving van deze property. Dit kan een Lexicon key zijn.';
 $_lang['property_lexicon_desc'] = 'Optioneel. Het Lexicon waarmee de property velden vertaald kunnen worden.';

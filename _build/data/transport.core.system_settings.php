@@ -63,7 +63,7 @@ $settings['allow_multiple_emails']->fromArray(array (
 $settings['allow_tags_in_post']= $xpdo->newObject('modSystemSetting');
 $settings['allow_tags_in_post']->fromArray(array (
   'key' => 'allow_tags_in_post',
-  'value' => '1',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
