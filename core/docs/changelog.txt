@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9097] Fix leftbar tree toolbar resizing issues
 - Image optimization applied across distribution
 - [#9006] Fix ImageMagick which convert issue (PHP 5.3.2+)
 - [#9069] Remove math output filter

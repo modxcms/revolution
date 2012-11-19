@@ -31,58 +31,24 @@ MODx.Layout = function(config){
     if (MODx.perm.resource_tree) {
        tabs.push({
             title: _('resources')
-            ,id: 'modx-resource-tree-ct'
-            ,listeners: {
-              activate : function(panel){
-                if (Ext.get('modx-resource-tree') == null){
-                  Ext.get(Ext.query('#'+panel.id+' div.x-panel-bwrap')).item(0).remove();
-                  MODx.load({
-                      xtype: 'modx-tree-resource'
-                      ,id: 'modx-resource-tree'
-                      ,renderTo: panel.id
-                  });
-                }
-              }
-            }
+            ,xtype: 'modx-tree-resource'
+            ,id: 'modx-resource-tree'
         });
         showTree = true;
     }
     if (MODx.perm.element_tree) {
         tabs.push({
             title: _('elements')
-            ,id: 'modx-element-tree-ct'
-            ,listeners: {
-              activate : function(panel){
-                if (Ext.get('modx-element-tree') == null){
-                  Ext.get(Ext.query('#'+panel.id+' div.x-panel-bwrap')).item(0).remove();
-                  MODx.load({
-                      xtype: 'modx-tree-element'
-                      ,id: 'modx-element-tree'
-                      ,renderTo: panel.id
-                  });
-                }
-              }
-            }
+            ,xtype: 'modx-tree-element'
+            ,id: 'modx-tree-element'
         });
         showTree = true;
     }
     if (MODx.perm.file_tree) {
         tabs.push({
             title: _('files')
-            ,id: 'modx-file-tree-ct'
-            ,hideFiles: false
-            ,listeners: {
-              activate : function(panel){
-                if (Ext.get('modx-file-tree') == null){
-                  Ext.get(Ext.query('#'+panel.id+' div.x-panel-bwrap')).item(0).remove();
-                  MODx.load({
-                      xtype: 'modx-tree-directory'
-                      ,id: 'modx-file-tree'
-                      ,renderTo: panel.id
-                  });
-                }
-              }
-            }
+            ,xtype: 'modx-tree-directory'
+            ,id: 'modx-file-tree'
         });
         showTree = true;
     }
@@ -110,13 +76,10 @@ MODx.Layout = function(config){
             ,collapseMode: 'mini'
             ,useSplitTips: true
             ,monitorResize: true
-            ,forceLayout: true
             ,layout: 'anchor'
             ,items: [{
                  xtype: 'modx-tabs'
                 ,plain: true
-                ,forceLayout: true
-                ,deferredRender: false
                 ,defaults: {
                      autoScroll: true
                     ,fitToFrame: true
@@ -223,24 +186,13 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
             if (!wrap.isVisible()) {
                 // Set the "masking div" to visible
                 wrap.setVisible(true);
-                this.reDrawWest();
+                Ext.getCmp('modx-leftbar-tabpanel').expand(true);
             }
         }
         if(panelState && !this.saveState){
             Ext.state.Manager.set('modx-leftbar-tabs', {collapsed: false});
             this.saveState = true;
         }
-    }
-    ,reDrawWest: function() {
-        // Resize the topToolbar
-        var rTree = Ext.getCmp('modx-resource-tree');
-        rTree.getTopToolbar().setWidth(298);
-        // Redraw the search toolbar (because of bad size)
-        Ext.get('modx-resource-tree-tbar').setWidth(298);
-        Ext.get('modx-resource-searchbar').remove();
-        rTree.addSearchToolbar();
-        // Now expand the tabPanel
-        Ext.getCmp('modx-leftbar-tabpanel').expand(true);
     }
     ,showLeftbar: function(anim) {
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
