@@ -2,11 +2,11 @@
 /**
  * Top Menu Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['about'] = 'Over';
 $_lang['about_desc'] = 'Meer informatie over MODX Revolution.';
@@ -71,8 +71,8 @@ $_lang['preview'] = 'Voorbeeld';
 $_lang['preview_desc'] = 'Laad jouw website in een nieuwe scherm.';
 $_lang['profile'] = 'Profiel';
 $_lang['profile_desc'] = 'Update jouw persoonlijk profiel.';
-$_lang['propertysets'] = 'Eigenschapsets';
-$_lang['propertysets_desc'] = 'Beheer al jouw site\'s eigenschapsets en de elementen waar ze aan gekoppeld zijn.';
+$_lang['propertysets'] = 'Propertysets';
+$_lang['propertysets_desc'] = 'Beheer al jouw site\'s propertysets en de elementen waar ze aan gekoppeld zijn.';
 $_lang['refresh_site'] = 'Leeg cache';
 $_lang['refresh_site_desc'] = 'Leeg jouw site\'s cache.';
 $_lang['remove_locks'] = 'Verwijder vergrendelingen';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Kevin van Haare, Webton.nl
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['modx_news'] = 'MODX nieuws';
 $_lang['security_notices'] = 'Beveiligings mededelingen';

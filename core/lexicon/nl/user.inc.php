@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['active'] = 'Actief';
 $_lang['address'] = 'Adres';
@@ -76,6 +76,7 @@ $_lang['user_confirm_remove'] = 'Weet je zeker dat je deze gebruiker definitief 
 $_lang['user_country'] = 'Land';
 $_lang['user_dob'] = 'Geboortedatum';
 $_lang['user_doesnt_exist'] = 'Gebruiker bestaat niet';
+$_lang['user_duplicate'] = 'Gebruiker dupliceren';
 $_lang['user_edit_self_msg'] = 'Wellicht moet je opnieuw inloggen nadat je de gegevens volledig aangepast hebt.</strong><br>Daarnaast moet je er voor kiezen om een nieuw wachtwoord te genereren voor jezelf, deze wordt je per e-mail toegestuurd.';
 $_lang['user_email'] = 'E-mailadres';
 $_lang['user_err_access_permissions_save'] = 'Er is een fout opgetreden tijdens het opslaan van de rechten voor de gebruiker.';
@@ -186,6 +187,8 @@ $_lang['user_setting_err_save'] = 'Er is een fout opgetreden tijdens het opslaan
 $_lang['user_settings'] = 'Gebruikersinstellingen';
 $_lang['user_settings_desc'] = 'Hier kun je specifieke instellingen voor deze gebruiker wijzigen.';
 $_lang['user_state'] = 'Staat';
+$_lang['user_sudo'] = 'Sudo Gebruiker';
+$_lang['user_sudo_desc'] = 'Indien aangevinkt, zal deze gebruiker volledig toegang hebben tot de site en Toegangsrechten worden genegeerd. *NIET AANVINKEN* tenzij je weet wat je doet!';
 $_lang['user_title'] = 'Maak/wijzig gebruiker';
 $_lang['user_update'] = 'Gebruiker aanpassen';
 $_lang['user_updated_password_message'] = 'De gebruiker is aangepast. Dit is het nieuwe wachtwoord: [[+password]]';

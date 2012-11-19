@@ -17,6 +17,9 @@ $_lang['base_template'] = 'BasisTemplate';
 $_lang['cache_manager_err'] = 'MODX\'s Cache Manager kan niet geladen worden.';
 $_lang['choose_language'] = 'Kies taal';
 $_lang['cleanup_errors_title'] = 'Belangrijk:';
+$_lang['cli_install_failed'] = 'Installatie mislukt! Fouten: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX kan geen configuratie bestand vinden (als config.xml) voor jouw CLI installatie. Om MODX Setup te draaien vanaf command line moet je een config xml bestand leveren. Zie de officiele documentatie voor meer informatie.';
+$_lang['cli_tests_failed'] = 'Voor-Installatie Tests Mislukt! Fouten: [[+errors]]';
 $_lang['test_zip_memory_limit_fail'] = 'MODX heeft jouw memory_limit instelling gevonden maar is lager dan de aanbevolen 24M. MODX probeert deze in te stellen naar 24M, maar dat was onsuccesvol. Stel de memory_limit op 24M of hoger in, in jouw php.ini bestand voordat je doorgaat, zodat de zip extenties naar behoren zullen werken.';
 $_lang['close'] = 'sluit';
 $_lang['config_file_err_w'] = 'Fout bij schrijven configuratiebestand.';
@@ -32,6 +35,7 @@ $_lang['connection_collation'] = 'Vergelijking:';
 $_lang['connection_connection_and_login_information'] = 'Database verbinding en inlog informatie';
 $_lang['connection_connection_note'] = 'Vul de naam van de database voor MODX in. Indien deze nog niet bestaat dan zal de installatie deze proberen te maken. Dit zal falen afhankelijk van de MySQL configuratie of de database rechten voor jouw domein/installatie.';
 $_lang['connection_database_host'] = 'Database host:';
+$_lang['connection_database_info'] = 'Vul de inlog gegevens van jouw database in.';
 $_lang['connection_database_login'] = 'Database inlognaam:';
 $_lang['connection_database_name'] = 'Databasen naam:';
 $_lang['connection_database_pass'] = 'Database wachtwoord:';
@@ -93,6 +97,7 @@ $_lang['install_packages_options'] = 'Pakket Installatie Opties';
 $_lang['install_success'] = 'Core installatie is succesvol. Klik op volgende om het installatieproces af te ronden.';
 $_lang['install_summary'] = 'Installatie overzicht';
 $_lang['install_update'] = 'Installeer/Update';
+$_lang['installation_finished'] = 'Installatie voltooid in [[+time]]';
 $_lang['license'] = '<p class="title">Je moet akkoord gaan met de licentie voordat u verder gaat met de installatie.</p>
 	<p>Usage of this software is subject to the GPL license. To help you understand
     what the GPL licence is and how it affects your ability to use the software, we

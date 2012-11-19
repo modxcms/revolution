@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['attributes'] = 'Attributen';
 $_lang['capitalize'] = 'Kapitaliseren';
@@ -100,6 +100,8 @@ $_lang['resourcelist_depth'] = 'Diepte';
 $_lang['resourcelist_depth_desc'] = 'Het aantal levels dat de query zal gaan om documenten te zoeken. Standaard is 10 diep.';
 $_lang['resourcelist_includeparent'] = 'Inclusief bovenliggende';
 $_lang['resourcelist_includeparent_desc'] = 'Indien Ja, zal het document in het parent veld opgenomen worden in de lijst.';
+$_lang['resourcelist_limitrelatedcontext'] = 'Limiet voor Related Context';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Indien Ja, enkel de aan de huidige Resource gerelateerde context Resources worden gebruikt.';
 $_lang['resourcelist_limit'] = 'Limiet';
 $_lang['resourcelist_limit_desc'] = 'Het aantal documenten dat in de lijst getoond wordt. 0 of leeg betekent oneindig.';
 $_lang['resourcelist_parents'] = 'Bovenliggenden';
