@@ -230,10 +230,6 @@ ul.x-tab-strip li.x-tab-edge{
 
 }
 
-.x-panel-collapsed {
-    border-bottom:
-}
-
 .x-tab-strip span.x-tab-strip-text {
 	font:normal 11px arial, tahoma, helvetica;
 	color:#aaaaaa;
@@ -2383,7 +2379,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 
 .x-window {
 	-moz-border-radius:3px;
-	-webkit-border-radius:3px0;
+	-webkit-border-radius:3px;
 	border-radius:3px;
 	-moz-box-shadow:0 0 5px #A0A0A0;
 	-webkit-box-shadow:0 0 5px #A0A0A0;
