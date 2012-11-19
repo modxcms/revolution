@@ -1047,7 +1047,7 @@ ul.modx-tag-list li.modx-tag-checked {
 
 /* superbox */
 .x-superboxselect {position:relative; height: auto !important; margin: 0; width: auto !important; overflow: hidden; padding:2px; display:block; outline: none !important;}
-.x-superboxselect input[disabled] {background-color: transparent;};
+.x-superboxselect input[disabled] {background-color: transparent;}
 .x-superboxselect ul {overflow: hidden; cursor: text;}
 .x-superboxselect-display-btns {padding-right: 33px !important;}
 .x-superboxselect-btns {position: absolute; right: 1px; top: 0; overflow:hidden; padding:2px;}
