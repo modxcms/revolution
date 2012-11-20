@@ -1214,4 +1214,22 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $properties[$namespace] = $merge ? array_merge($properties[$namespace],$newProperties) : $newProperties;
         return $this->set('properties',$properties);
     }
+
+    /**
+     * Clearing cache of this resource
+     * @param string $context Key of context for clearing
+     * @return void
+     */
+    public function clearCache($context = null) {
+        if (empty($context)) {
+            $context = $this->context_key;
+        }
+        $this->_contextKey = $context;
+
+        /** @var xPDOFileCache $cache */
+        $cache = $this->xpdo->cacheManager->getCacheProvider($this->xpdo->getOption('cache_resource_key', null, 'resource'));
+        $key = $this->getCacheKey();
+        $cache->delete($key, array('deleteTop' => true));
+        $cache->delete($key);
+    }
 }
