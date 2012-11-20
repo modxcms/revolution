@@ -861,12 +861,12 @@ MODx.window.UpdateElementProperty = function(config) {
                     ,fieldLabel: _('area')
                     ,description: MODx.expandHelp ? '' : _('property_area_desc')
                     ,name: 'area'
-                    ,id: 'modx-cep-area'
+                    ,id: 'modx-uep-area'
                     ,anchor: '100%'
                     ,allowBlank: true
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-cep-area'
+                    ,forId: 'modx-uep-area'
                     ,html: _('property_area_desc')
                     ,cls: 'desc-under'
                 }]

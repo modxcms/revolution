@@ -6,6 +6,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#7916] Fix Area functionality in Element Properties and Property Sets
 - [#9097] Fix leftbar tree toolbar resizing issues
 - Image optimization applied across distribution
 - [#9006] Fix ImageMagick which convert issue (PHP 5.3.2+)
