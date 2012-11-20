@@ -20,11 +20,16 @@ $map = array(
 
 $policies = $transport->xpdo->getCollection('modAccessPolicy');
 foreach ($policies as $policy) {
-    $pk = isset($map[$policy->get('name')]) ? $map[$policy->get('name')] : 'Administrator';
-    $template = $transport->xpdo->getObject('modAccessPolicyTemplate',array('name' => $pk));
-    if ($template) {
-        $policy->set('template',$template->get('id'));
-        $success = $policy->save();
+    if (isset($map[$policy->get('name')])) {
+        $template = $transport->xpdo->getObject('modAccessPolicyTemplate',array('name' => $map[$policy->get('name')]));
+        if ($template) {
+            $policy->set('template',$template->get('id'));
+            $success = $policy->save();
+        } else {
+            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Core AccessPolicyTemplate {$map[$policy->get('name')]} is missing! Could not resolve AccessPolicy {$policy->get('name')}.");
+        }
+    } else {
+        $success = true;
     }
 }
 return $success;
