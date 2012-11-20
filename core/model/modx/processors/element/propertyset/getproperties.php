@@ -63,15 +63,12 @@ foreach ($properties as $property) {
         $overridden,
         !empty($property['desc_trans']) ? $property['desc_trans'] : '',
         !empty($property['area']) ? $property['area'] : '',
-        !empty($property['area_trans']) ? $property['area_trans'] : '',
+        !empty($property['area_trans']) ? $property['area_trans'] : $property['area'],
     );
 }
 
 
 /* reformat data array for store */
-$props = array();
-foreach ($data as $key => $d) {
-    $props[] = $d;
-}
+$props = array_values($data);
 
 return $modx->error->success('',$props);

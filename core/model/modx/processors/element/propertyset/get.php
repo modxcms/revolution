@@ -101,15 +101,12 @@ foreach ($properties as $property) {
         $overridden,
         $property['desc_trans'],
         !empty($property['area']) ? $property['area'] : '',
-        !empty($property['area_trans']) ? $property['area_trans'] : '',
+        !empty($property['area_trans']) ? $property['area_trans'] : $property['area'],
     );
 }
 
 /* reformat data array for store */
-$props = array();
-foreach ($data as $key => $d) {
-    $props[] = $d;
-}
+$props = array_values($data);
 $set->set('data','(' . $modx->toJSON($props) . ')');
 
 return $modx->error->success('',$set);
