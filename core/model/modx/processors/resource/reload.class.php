@@ -32,11 +32,54 @@ class modResourceReloadProcessor extends modProcessor {
         $return = '';
         $scriptProperties = $this->getProperties();
         $modx = $this->modx;
-        
-        $topic = '/resourcereload/';
-        $this->reg->subscribe($topic);
+
+        foreach ($scriptProperties as $key => &$value) {
+            $matched = preg_match("/^tv(\d+)$/i", $key, $matches);
+            if ($matched && !empty($matches[1])) {
+                $tv = $this->modx->getObject('modTemplateVar', $matches[1]);
+                if ($tv) {
+                    /* validation for different types */
+                    switch ($tv->get('type')) {
+                        case 'url':
+                            $prefix = $this->getProperty($key.'_prefix','');
+                            if ($prefix != '--') {
+                                $value = str_replace(array('ftp://','http://'),'', $value);
+                                $value = $prefix.$value;
+                            }
+                            break;
+                        case 'date':
+                            $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+                            break;
+                        /* ensure tag types trim whitespace from tags */
+                        case 'tag':
+                        case 'autotag':
+                            $tags = explode(',',$value);
+                            $newTags = array();
+                            foreach ($tags as $tag) {
+                                $newTags[] = trim($tag);
+                            }
+                            $value = implode(',',$newTags);
+                            break;
+                        default:
+                            /* handles checkboxes & multiple selects elements */
+                            if (is_array($value)) {
+                                $featureInsert = array();
+                                while (list($featureValue, $featureItem) = each($value)) {
+                                    if(empty($featureItem)) { continue; }
+                                    $featureInsert[count($featureInsert)] = $featureItem;
+                                }
+                                $value = implode('||',$featureInsert);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
 
         if(array_key_exists('create-resource-token', $scriptProperties) && !empty($scriptProperties['create-resource-token'])) {
+            $topic = '/resourcereload/';
+            $this->reg->subscribe($topic);
+
             if(array_key_exists('id', $scriptProperties) && is_numeric($scriptProperties['id']) && intval($scriptProperties['id']) > 0) {
                 $return = $modx->error->success('', array(
                     'id'=> $scriptProperties['id']
@@ -49,13 +92,11 @@ class modResourceReloadProcessor extends modProcessor {
                     ,'action'=> 'resource/create'
                 ));
             }
-            $this->reg->send($topic, array($scriptProperties['create-resource-token']=> serialize($scriptProperties)), array('ttl' => 300,'delay' => -time()));
+            $this->reg->send($topic, array($scriptProperties['create-resource-token'] => $scriptProperties), array('ttl' => 300,'delay' => -time()));
+            $this->reg->unsubscribe($topic);
         } else {
             return $modx->error->failure($modx->lexicon('resource_err_save'));
         }
-
-        $this->reg->unsubscribe($topic);
-
         return $return;
     }
 }
