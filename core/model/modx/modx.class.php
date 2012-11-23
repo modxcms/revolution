@@ -1567,7 +1567,7 @@ class modX extends xPDO {
         $response = '';
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
-            if (!isset($this->error)) $this->request->loadErrorHandler();
+            if (!isset($this->error)) $this->getService('error', 'modError');
 
             if ($isClass) {
                 /* ensure processor file is only included once if run multiple times in a request */
