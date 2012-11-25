@@ -98,13 +98,13 @@ class SystemFileEditManagerController extends modManagerController {
      * @return string
      */
     public function firePreRenderEvents() {
-        $onFileEditFormPrerender = $this->modx->invokeEvent('OnFileEditFormPrerender',array(
+        $this->onFileEditFormPrerender = $this->modx->invokeEvent('OnFileEditFormPrerender',array(
             'mode' => modSystemEvent::MODE_UPD,
             'file' => $this->filename,
             'fa' => &$this->fileRecord,
         ));
-        if (is_array($onFileEditFormPrerender)) $onFileEditFormPrerender = implode('',$onFileEditFormPrerender);
-        return $onFileEditFormPrerender;
+        if (is_array($this->onFileEditFormPrerender)) $this->onFileEditFormPrerender = implode('',$this->onFileEditFormPrerender);
+        $this->setPlaceholder('onFileEditFormPrerender', $this->onFileEditFormPrerender);
     }
 
     /**

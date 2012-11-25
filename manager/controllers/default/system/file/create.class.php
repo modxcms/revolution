@@ -87,16 +87,17 @@ class SystemFileCreateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnFileEditFormPrerender event
+     * Invoke OnFileCreateFormPrerender event
      * @return string
      */
     public function firePreRenderEvents() {
-        $OnFileCreateFormPrerender = $this->modx->invokeEvent('OnFileCreateFormPrerender',array(
-            'mode' => modSystemEvent::MODE_NEW,
-            'directory' => $this->directory,
+        $this->OnFileCreateFormPrerender = $this->modx->invokeEvent('OnFileCreateFormPrerender',array(
+            'mode' => modSystemEvent::MODE_UPD,
+            'file' => $this->filename,
+            'fa' => &$this->fileRecord,
         ));
-        if (is_array($OnFileCreateFormPrerender)) $OnFileCreateFormPrerender = implode('',$OnFileCreateFormPrerender);
-        return $OnFileCreateFormPrerender;
+        if (is_array($this->OnFileCreateFormPrerender)) $this->OnFileCreateFormPrerender = implode('',$this->OnFileCreateFormPrerender);
+        $this->setPlaceholder('OnFileCreateFormPrerender', $this->OnFileCreateFormPrerender);
     }
 
     /**
