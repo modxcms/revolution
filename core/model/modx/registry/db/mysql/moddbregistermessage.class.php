@@ -17,7 +17,7 @@ class modDbRegisterMessage_mysql extends modDbRegisterMessage {
         $limitClause = $limit > 0 ? "LIMIT {$limit}" : '';
         $query = new xPDOCriteria(
             $register->modx,
-            "SELECT msg.* FROM {$msgTable} msg JOIN {$topicTable} topic ON msg.valid <= NOW() AND (topic.name = :topic OR (topic.name = :topicbase AND msg.id = :topicmsg)) AND topic.id = msg.topic ORDER BY msg.created ASC {$limitClause}",
+            "SELECT msg.* FROM {$msgTable} msg JOIN {$topicTable} topic ON msg.valid <= '".strftime('%Y-%m-%d %H:%M:%S')."' AND (topic.name = :topic OR (topic.name = :topicbase AND msg.id = :topicmsg)) AND topic.id = msg.topic ORDER BY msg.created ASC {$limitClause}",
             array(
                 ':topic' => $topic,
                 ':topicbase' => $topicBase,
