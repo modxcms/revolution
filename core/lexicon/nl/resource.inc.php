@@ -2,11 +2,11 @@
 /**
  * Resource Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['access'] = 'Toegang';
 $_lang['cache_output'] = 'Cache uitvoer';
@@ -18,7 +18,7 @@ $_lang['document_create'] = 'Maak document';
 $_lang['document_create_here'] = 'Maak een document hier';
 $_lang['document_new'] = 'Nieuw document';
 $_lang['documents'] = 'Documenten';
-$_lang['duplicate_uri_found'] = 'Document [[+id]] gebruikt reeds de URI [[+ujl]]. Vul een unieke alias in of gebruik Freeze URI om het handmatig te overschrijven.';
+$_lang['duplicate_uri_found'] = 'Document [[+id]] gebruikt reeds de URI [[+ujl]]. Vul een unieke alias in of gebruik Bevries URI om het handmatig te overschrijven.';
 $_lang['empty_template'] = '(leeg)';
 $_lang['general'] = 'Algemeen';
 $_lang['markup'] = 'Opmaak/structuur';
@@ -133,7 +133,7 @@ $_lang['resource_unpublished'] = 'Gedepubliceerd';
 $_lang['resource_untitled'] = 'Naamloos document';
 $_lang['resource_uri'] = 'URI';
 $_lang['resource_uri_help'] = 'De volledige relatieve URL voor dit document.';
-$_lang['resource_uri_override'] = 'Freeze URI';
+$_lang['resource_uri_override'] = 'Bevries URI';
 $_lang['resource_uri_override_help'] = 'Deze aanvinken zal toestaan om de waarde in de tekstbox hieronder voor dit document vast te zetten.';
 $_lang['resource_with_id_not_found'] = 'Document met ID %s niet gevonden!';
 $_lang['resource_view'] = 'Bekijk document';
@@ -159,3 +159,5 @@ $_lang['weblink_create_here'] = 'Maak een nieuwe weblink hier';
 $_lang['weblink_help'] = 'Het adres van het object waarna je wenst te refereren met deze weblink.';
 $_lang['weblink_message'] = 'Een weblink is een referentie naar een object op het internet. Dit kan een document zijn binnen MODX of een pagina of een plaatje op een andere website op internet<p>';
 $_lang['weblink_new'] = 'Nieuwe weblink';
+$_lang['weblink_response_code'] = 'Response Code';
+$_lang['weblink_response_code_help'] = 'De HTTP response code dat verstuurd moet worden voor de Weblink.';

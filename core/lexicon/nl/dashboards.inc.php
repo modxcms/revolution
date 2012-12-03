@@ -1,10 +1,12 @@
 <?php
 /**
- * English language strings for Dashboards
+ * Dutch language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
- * @language en
+ * @language nl
+ * 
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Voeg Dashboard Toe';

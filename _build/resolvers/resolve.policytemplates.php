@@ -19,11 +19,16 @@ $map = array(
 
 $templates = $transport->xpdo->getCollection('modAccessPolicyTemplate');
 foreach ($templates as $template) {
-    $pk = isset($map[$template->get('name')]) ? $map[$template->get('name')] : 'Admin';
-    $templateGroup = $transport->xpdo->getObject('modAccessPolicyTemplateGroup',array('name' => $pk));
-    if ($templateGroup) {
-        $template->set('template_group',$templateGroup->get('id'));
-        $success = $template->save();
+    if (isset($map[$template->get('name')])) {
+        $templateGroup = $transport->xpdo->getObject('modAccessPolicyTemplateGroup',array('name' => $map[$template->get('name')]));
+        if ($templateGroup) {
+            $template->set('template_group',$templateGroup->get('id'));
+            $success = $template->save();
+        } else {
+            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Core AccessPolicyTemplateGroup {$map[$template->get('name')]} is missing!");
+        }
+    } else {
+        $success = true;
     }
 }
 return $success;

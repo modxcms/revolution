@@ -2,11 +2,11 @@
 /**
  * Snippet Dutch lexicon topic
  *
- * @language en
+ * @language nl
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets_available'] = 'Snippets beschikbaar voor jou om te includen in jouw pagina';

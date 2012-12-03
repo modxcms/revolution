@@ -52,7 +52,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
     die('Site temporarily unavailable!');
 }
 
-/* create the modX object */
+/* @var modX $modx create the modX object */
 $modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 if (!is_object($modx) || !($modx instanceof modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';

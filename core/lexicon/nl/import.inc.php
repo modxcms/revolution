@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['import_allowed_extensions'] = 'Specificeer een komma-gescheiden lijst van te importeren bestandsextenties.<br /><small><em>Laat leeg om alle bestandstypen te importeren welke gelijk zijn aan de contenttypes van jouw site. Onbekende typen worden naar platte tekst omgezet.</em></small>';
 $_lang['import_base_path'] = 'Vul het bestandspad in waar de bestanden gevonden kunnen worden.<br /><small><em>Laat leeg om het context\'s statische bestandspad instelling te gebruiken</em></small>';

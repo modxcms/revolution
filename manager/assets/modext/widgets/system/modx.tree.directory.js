@@ -116,6 +116,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             tb.doLayout();
         }
         this.searchBar = tb;
+        this.on('resize', function(){
+            this.sourceCombo.setWidth(this.getWidth() - 12);
+        }, this);
     }
     ,changeSource: function(sel) {
         var s = sel.getValue();

@@ -218,15 +218,15 @@ hr {
 /* Logo and Main Navigation */
 #logo {
     width: 228px;
-    height: 63px;
-    line-height: 63px;
+    height: 65px;
+    line-height: 65px;
     margin: 34px 0 0;
     display: block;
-    background-image: url(images/modx-logo.png);
     text-indent: -9999px;
     position: absolute;
     top: 0;
     left: 0;
+    background: url(images/modx-logo.png) no-repeat left top;
 }
 
 #mainnav {

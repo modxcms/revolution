@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['action'] = 'Actie';
 $_lang['action_confirm_remove'] = 'Weet je zeker dat je deze actie wilt verwijderen? Dit kan eventueel de werking van jouw MODX manager be�nvloeden.';

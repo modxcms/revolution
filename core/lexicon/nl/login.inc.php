@@ -6,8 +6,9 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
+$_lang['login_language'] = 'Taal';
 $_lang['login_activation_key_err'] = 'De activatie-sleutel komt niet overeen! Controleer de activatie e-mail en weet zeker dat je de juiste URL hebt geladen.';
 $_lang['login_blocked_admin'] = 'Je bent geblokkeerd voor de manager door een beheerder.';
 $_lang['login_blocked_error'] = 'Je bent tijdelijk geblokkeerd en kunt niet inloggen. Probeer het later nog eens.';

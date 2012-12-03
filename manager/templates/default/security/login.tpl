@@ -13,7 +13,6 @@
     <script src="assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
     <script src="assets/ext3/ext-all.js" type="text/javascript"></script>
     <script src="assets/modext/core/modx.js" type="text/javascript"></script>
-	<script src="{$_config.connectors_url}lang.js.php?topic=login" type="text/javascript"></script>
 
     <script src="assets/modext/core/modx.component.js" type="text/javascript"></script>
     <script src="assets/modext/util/utilities.js" type="text/javascript"></script>

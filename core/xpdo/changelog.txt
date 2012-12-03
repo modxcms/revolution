@@ -1,5 +1,8 @@
 This file shows the changes in this release of xPDO.
 
+- [#9020] Allow xPDOZip to pack empty directories
+- [#9023] Fix removal of subdirs when deleteTop = false in xPDOCacheManager::deleteTree()
+- [#8962] Prevent xPDOSimpleObject from overwriting xPDOObject map entry
 - [#8423] Fix tmpLockFile naming issue in xPDOCacheManager::lockFile()
 - [#8440] Add memcached implementation of xPDOCache (xPDOMemCached)
 - [#8423] Add flock-independent file locking to xPDOCacheManager::writeFile()

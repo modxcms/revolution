@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-09-27
+ * @updated 2012-11-13
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -225,11 +225,11 @@ $_lang['setting_allow_manager_login_forgot_password'] = 'Zobrazit možnost "Zapo
 // $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "No" will disable the forgot password ability on the manager login screen.';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Nastavení na "Ne", znemožníte možnost nechat si zaslat zapomenuté hesla na přihlašovací obrazovce správce obsahu.';
 
-// $_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
-$_lang['setting_allow_tags_in_post'] = 'Povolit HTML tagy v POST';
+// $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
+$_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';
 
-// $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODX Recommends to leave this set at true.';
-$_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy. Doporučujeme nechat tuto hodnotu na "Ano".';
+// $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
+$_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy, číselné entity a MODX tagy. Doporučujeme nechat tuto hodnotu na "Ne" pro jiné kontexty než "mgr", kde je ve výchozím stavu povolen.';
 
 // $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with'] = 'Používat PCLZip archivaci';

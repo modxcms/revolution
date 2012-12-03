@@ -502,7 +502,7 @@ class modUser extends modPrincipal {
      * @return array An array of Resource Group names.
      */
     public function getResourceGroups($ctx = '') {
-        if (empty($ctx)) $ctx = $this->xpdo->context->get('key');
+        if (empty($ctx) && is_object($this->xpdo->context)) $ctx = $this->xpdo->context->get('key');
         $resourceGroups= array ();
         $id = $this->get('id') ? (string) $this->get('id') : '0';
         if (isset($_SESSION["modx.user.{$id}.resourceGroups"][$ctx])) {

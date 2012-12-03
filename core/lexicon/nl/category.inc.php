@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['categories'] = 'Categorie&euml;n';
 $_lang['category_confirm_delete'] = 'Weet je zeker dat je deze category wilt verwijderen? Alle elementen in deze categorie worden losgekoppeld.';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['chunk'] = 'Chunk';
 $_lang['chunk_desc_category'] = 'De Categorie waar de chunk bijhoort.';
