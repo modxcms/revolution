@@ -6,6 +6,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#9178] Use PHP time for valid check in modDbRegisterMessage::getValidMessages()
 - [#9165] Fix modError::hasError false positives when loaded via getService
 - [#9029] Remove modRequest->loadErrorHandler dependency in runProcessor
 - [#9156] Fix reload data for rendering multi-value TV types properly
