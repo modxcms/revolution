@@ -19,12 +19,14 @@ class modElementSortProcessor extends modProcessor {
         $data = $this->getData();
         if (empty($data)) return $this->failure();
 
+		$error = false;
         if (!empty($data['n_category']) && is_array($data['n_category'])) {
-            $this->handleCategoryDrop($data['n_category']);
+            $error = $this->handleCategoryDrop($data['n_category']);
         } else if (!empty($data)) {
-            $this->handleSubCategoryDrop($data);
+            $error = $this->handleSubCategoryDrop($data);
         }
 
+		if (is_string($error)) return $this->failure($error);
         return $this->success();
     }
 
@@ -49,7 +51,7 @@ class modElementSortProcessor extends modProcessor {
      * Handle dropping of Elements or Categories onto Categories
      * 
      * @param array $data
-     * @return void
+     * @return boolean|string
      */
     public function handleCategoryDrop(array $data) {
         /* if dropping an element onto a category, do that here */
@@ -83,16 +85,20 @@ class modElementSortProcessor extends modProcessor {
             /** @var modCategory $category */
             $category = $this->modx->getObject('modCategory',$categoryArray['id']);
             if ($category && $categoryArray['parent'] != $category->get('parent')) {
+				$exists = $this->modx->getCount('modCategory',array('category' => $category->get('category'), 'parent' => $categoryArray['parent'])) > 0;
+				if ($exists) return $this->modx->lexicon('category_err_ae');
+				
                 $category->set('parent',$categoryArray['parent']);
                 $category->save();
             }
         }
+		return true;
     }
 
     /**
      * Handle dropping of Categories onto other Categories
      * @param array $data
-     * @return void
+     * @return boolean
      */
     public function handleSubCategoryDrop(array $data) {
         $cdata = array();
@@ -113,6 +119,7 @@ class modElementSortProcessor extends modProcessor {
                 }
             }
         }
+		return true;
     }
 
 

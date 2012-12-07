@@ -19,9 +19,10 @@ class modElementCategoryCreateProcessor extends modObjectCreateProcessor {
      */
     public function beforeSave() {
         $name = $this->getProperty('category');
+        $parent = $this->getProperty('parent', 0);
         if (empty($name)) {
             $this->addFieldError('category',$this->modx->lexicon('category_err_ns'));
-        } else if ($this->alreadyExists($name)) {
+        } else if ($this->alreadyExists($name, $parent)) {
             $this->addFieldError('category',$this->modx->lexicon('category_err_ae'));
         }
 
@@ -29,13 +30,14 @@ class modElementCategoryCreateProcessor extends modObjectCreateProcessor {
     }
 
     /**
-     * Check to see if a Category with that name already exists
+     * Check to see if a Category with that name and same parent already exists
      * 
      * @param string $name The name to check against
+     * @param integer $parent The parent ID to check against
      * @return boolean
      */
-    public function alreadyExists($name) {
-        return $this->modx->getCount('modCategory',array('category' => $name)) > 0;
+    public function alreadyExists($name, $parent=0) {
+        return $this->modx->getCount('modCategory',array('category' => $name, 'parent' => $parent)) > 0;
     }
 }
 return 'modElementCategoryCreateProcessor';
