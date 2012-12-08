@@ -143,14 +143,13 @@ abstract class ResourceManagerController extends modManagerController {
      * @return array|bool|string
      */
     public function firePreRenderEvents() {
+
         $resourceId = !empty($this->resource) ? $this->resource->get('id') : (!empty($this->scriptProperties['id']) ? $this->scriptProperties['id'] : 0);
         $properties = array(
             'id' => $resourceId,
+            'resource' => &$this->resource,
             'mode' => !empty($resourceId) ? modSystemEvent::MODE_UPD : modSystemEvent::MODE_NEW,
         );
-        if (!empty($resourceId)) {
-            $properties['resource'] =& $this->resource;
-        }
         $onDocFormPrerender = $this->modx->invokeEvent('OnDocFormPrerender',$properties);
         if (is_array($onDocFormPrerender)) {
             $onDocFormPrerender = implode('',$onDocFormPrerender);

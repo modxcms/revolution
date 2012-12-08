@@ -57,8 +57,6 @@ class SystemFileCreateManagerController extends modManagerController {
         $directory = !empty($scriptProperties['directory']) ? $scriptProperties['directory'] : '';
         $this->directory = ltrim(strip_tags(str_replace(array('../','./'),'',$directory)),'/');
         $this->loadWorkingContext();
-        
-        $placeholders['OnFileCreateFormPrerender'] = $this->fireEvents();
 
         return $placeholders;
     }
@@ -89,16 +87,16 @@ class SystemFileCreateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnFileEditFormPrerender event
+     * Invoke OnFileCreateFormPrerender event
      * @return string
      */
-    public function fireEvents() {
-        $OnFileCreateFormPrerender = $this->modx->invokeEvent('OnFileCreateFormPrerender',array(
+    public function firePreRenderEvents() {
+        $this->OnFileCreateFormPrerender = $this->modx->invokeEvent('OnFileCreateFormPrerender',array(
             'mode' => modSystemEvent::MODE_NEW,
-            'directory' => $this->directory,
+            'directory' => $this->directory
         ));
-        if (is_array($OnFileCreateFormPrerender)) $OnFileCreateFormPrerender = implode('',$OnFileCreateFormPrerender);
-        return $OnFileCreateFormPrerender;
+        if (is_array($this->OnFileCreateFormPrerender)) $this->OnFileCreateFormPrerender = implode('',$this->OnFileCreateFormPrerender);
+        $this->setPlaceholder('OnFileCreateFormPrerender', $this->OnFileCreateFormPrerender);
     }
 
     /**
