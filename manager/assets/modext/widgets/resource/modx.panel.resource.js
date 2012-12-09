@@ -165,7 +165,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
+                            location.href = '?a='+MODx.action[r.result.object.action]+'&class_key='+ r.result.object.class_key+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
                         },scope:this}
                     },{
                         bypassValidCheck: true

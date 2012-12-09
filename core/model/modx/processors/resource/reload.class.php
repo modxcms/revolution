@@ -85,11 +85,13 @@ class modResourceReloadProcessor extends modProcessor {
                     'id'=> $scriptProperties['id']
                     ,'reload'=> $scriptProperties['create-resource-token']
                     ,'action'=> 'resource/update'
+                    ,'class_key' => $scriptProperties['class_key']
                 ));
             } else {
                 $return = $modx->error->success('', array(
                     'reload'=> $scriptProperties['create-resource-token']
                     ,'action'=> 'resource/create'
+                    ,'class_key' => $scriptProperties['class_key']
                 ));
             }
             $this->reg->send($topic, array($scriptProperties['create-resource-token'] => $scriptProperties), array('ttl' => 300,'delay' => -time()));
