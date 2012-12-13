@@ -270,18 +270,19 @@ class xPDOCacheManager {
         $locked = false;
         $lockFile = $file . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
         if (!file_exists($lockFile)) {
-            $myPID = getmypid();
-            $tmpLockFile = dirname($file) . '/' . uniqid(basename($file) . '-') . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
-            if (file_put_contents($tmpLockFile, $myPID, LOCK_EX)) {
+            $myPID = (XPDO_CLI_MODE || !isset($_SERVER['SERVER_ADDR']) ? gethostname() : $_SERVER['SERVER_ADDR']) . '|' . getmypid();
+            $tmpLockFile = dirname($file) . DIRECTORY_SEPARATOR . uniqid(basename($file) . '-') . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
+            if (file_put_contents($tmpLockFile, $myPID)) {
                 if (rename($tmpLockFile, $lockFile) && is_readable($lockFile)) {
                     $lockPID = @file_get_contents($lockFile);
-                    if (!empty($lockPID) && (integer)$lockPID === $myPID) {
+                    if (!empty($lockPID) && $lockPID === $myPID) {
                         $locked = true;
                     }
                 } else {
                     @unlink($tmpLockFile);
                 }
             }
+            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, (!$locked ? 'Could not lock ' : 'Locked ') . "{$file} using {$myPID}" . (!$locked && !empty($lockPID) ? " - already locked by {$lockPID}" : ''));
         }
         return $locked;
     }
