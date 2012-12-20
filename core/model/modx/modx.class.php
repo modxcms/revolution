@@ -2308,7 +2308,7 @@ class modX extends xPDO {
                 $cookiePath= $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
                 if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
                 $cookieSecure= (boolean) $this->getOption('session_cookie_secure', $options, false);
-                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, false);
+                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, true);
                 $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', $options, 0);
                 $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
                 if ($gcMaxlifetime > 0) {
@@ -2316,7 +2316,11 @@ class modX extends xPDO {
                 }
                 $site_sessionname= $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
-                session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
+                if (version_compare(PHP_VERSION, '5.2', '>=')) {
+                    session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
+                } else {
+                    session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
+                }
                 session_start();
                 $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
                 $this->getUser($contextKey);

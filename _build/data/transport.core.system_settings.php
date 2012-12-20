@@ -1525,7 +1525,7 @@ $settings['session_cookie_secure']->fromArray(array (
 $settings['session_cookie_httponly']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_httponly']->fromArray(array (
   'key' => 'session_cookie_httponly',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'session',
