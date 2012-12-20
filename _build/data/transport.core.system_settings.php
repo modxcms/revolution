@@ -1522,6 +1522,15 @@ $settings['session_cookie_secure']->fromArray(array (
   'area' => 'session',
   'editedon' => null,
 ), '', true, true);
+$settings['session_cookie_httponly']= $xpdo->newObject('modSystemSetting');
+$settings['session_cookie_httponly']->fromArray(array (
+  'key' => 'session_cookie_httponly',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
 $settings['session_gc_maxlifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_gc_maxlifetime']->fromArray(array (
   'key' => 'session_gc_maxlifetime',
