@@ -2331,7 +2331,7 @@ class modX extends xPDO {
                 $cookiePath= $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
                 if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
                 $cookieSecure= (boolean) $this->getOption('session_cookie_secure', $options, false);
-                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, false);
+                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, true);
                 $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', $options, 0);
                 $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
                 if ($gcMaxlifetime > 0) {

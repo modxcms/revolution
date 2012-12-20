@@ -311,6 +311,8 @@ class xPDO {
     public function __construct($dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
         try {
             $this->config = $this->initConfig($options);
+            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_FATAL, true));
+            $this->setLogTarget($this->getOption('log_target', null, XPDO_CLI_MODE ? 'ECHO' : 'HTML', true));
             if (!empty($dsn)) {
                 $this->addConnection($dsn, $username, $password, $this->config, $driverOptions);
             }
