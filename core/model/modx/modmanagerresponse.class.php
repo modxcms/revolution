@@ -151,6 +151,7 @@ class modManagerResponse extends modResponse {
                 if (!file_exists($controllersPath.$classFile)) {
                     if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
                         $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                        break;
                     }
                 } else {
                     $classPath = $controllersPath.$classFile;
