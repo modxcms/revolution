@@ -374,11 +374,18 @@ class modCacheManager extends xPDOCacheManager {
                 }
 
                 if ($action['namespace_name'] != 'core') {
-                    $nsPath = $action['namespace_path'];
-                    if (!empty($nsPath)) {
-                        $nsPath = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$nsPath));
-                        $action['namespace_path'] = $nsPath;
+                    $paths = array(
+                        'namespace_path',
+                        'namespace_assets_path'
+                    );
+                    foreach($paths as $path){
+                        $nsPath = $action[$path];
+                        if (!empty($nsPath)) {
+                            $nsPath = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$nsPath));
+                            $action[$path] = $nsPath;
+                        }
                     }
+                    unset($paths, $path, $nsPath);
                 }
                 $results[$action['id']] = $action;
             }
