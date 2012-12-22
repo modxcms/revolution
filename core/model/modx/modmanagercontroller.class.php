@@ -377,7 +377,7 @@ abstract class modManagerController {
         /* extras */
         if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) {
             $namespacePath = $this->config['namespace_path'];
-            $paths[] = $namespacePath . 'templates/'.$this->theme.'/';
+            if($this->theme != 'default') $paths[] = $namespacePath . 'templates/'.$this->theme.'/';
             $paths[] = $namespacePath . 'templates/default/';
             $paths[] = $namespacePath . 'templates/';
         }
