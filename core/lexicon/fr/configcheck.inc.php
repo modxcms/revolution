@@ -7,6 +7,10 @@
  * @subpackage lexicon
  */
 $_lang['configcheck_admin'] = 'Veuillez contacter l\'administrateur du système et le prévenir de ce message!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'Paramètre de contexte allow_tags_in_post activé pour un contexte autre que `mgr`';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'Le paramètre de contexte allow_tags_in_post est activé. MODX recommande de désactiver ce paramètre à moins que vous n\'ayez besoin que vos utilisateurs puissent poster des tags MODX, des entitées numériques ou encore de tags HTML script via POST. En général, ce paramètre doit être désactivé, sauf pour le contexte « mgr ».';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'Paramètre allow_tags_in_post activé';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'Le paramètre système allow_tags_in_post est activé. MODX recommande de désactiver ce paramètre à moins que vous n\'ayez besoin que vos utilisateurs puissent poster des tags MODX, des entitées numériques ou encore de tags HTML script via POST. Il est préférable d\'activer ce paramètre juste pour les contextes concernés.';
 $_lang['configcheck_cache'] = 'répertoire de cache non accessible en écriture';
 $_lang['configcheck_cache_msg'] = 'MODX ne peut pas écrire dans le répertoire de cache. MODX fonctionnera malgré tout comme attendu, mais sans la possibilité de mettre en cache. Pour résoudre ceci, veuillez rendre le répertoire /_cache/ accessible en écriture.';
 $_lang['configcheck_configinc'] = 'Fichier de configuration toujours accessible en écriture!';
