@@ -317,7 +317,6 @@ h3 {
 .green { color: green !important; }
 .error { color: red !important; }
 
-.ext-el-mask { z-index: 10; }
 .modx-lockmask { z-index: 11; }
 .x-menu a { text-decoration: none !important; }
 
@@ -395,7 +394,7 @@ h3 {
     position: absolute;
     top: 31px;
     right: 0;
-    z-index: 9999;
+    z-index: 10;
 }
 #modx-resource-tabs.x-panel-collapsed .x-tool-toggle {
     right: 16px !important;
@@ -830,9 +829,7 @@ input.x-static-text-field {
 }
 
 /* console */
-.modx-console {
-    z-index: 10001;
-}
+
 .modx-console .debug { color: gray; }
 .modx-console .success { color: green; }
 .modx-console .warn { color: blue; }
