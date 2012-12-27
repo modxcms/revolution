@@ -282,8 +282,12 @@ ul.x-tab-strip li.x-tab-edge{
 .x-form-field{
     font: normal 13px arial, tahoma, helvetica, sans-serif;
 }
+textarea.x-form-field, .x-form-textarea{
+    font-family: "Courier New", Courier, monospace;
+}
 
-.x-form-text, textarea.x-form-field{
+.x-form-text, textarea.x-form-field, .x-form-textarea{
+    border: 1px solid;
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
     -o-border-radius:2px;
@@ -303,6 +307,13 @@ ul.x-tab-strip li.x-tab-edge{
 
 .x-form-check-wrap, .x-form-check-wrap label, .x-form-checkbox {
     cursor: pointer;
+}
+.x-form-checkbox{
+    margin: 2px;
+}
+.x-form-checkbox:focus{
+    outline: 1px solid rgba(100,140,50,1) !important;
+    outline-offset: 1px;
 }
 .x-form-check-group-label {
     border-bottom: 1px solid #d0d0d0;
@@ -432,8 +443,7 @@ ul.x-tab-strip li.x-tab-edge{
 .x-form-field-wrap .x-form-search-trigger{
     background-image: url(../images/modx-theme/form/search-trigger.gif);
 }
-
-.x-form-focus, textarea.x-form-focus {
+.x-trigger-wrap-focus, .x-form-focus, textarea.x-form-focus {
     border-color: #658F1A;
     background-color: #FFFFFF;
 }
@@ -600,6 +610,17 @@ ul.x-tab-strip li.x-tab-edge{
     background-image:none;
     margin:0 1px;
 	border-color: #CFCFCF #C0C0C0 #AAAAAA;
+}
+.x-btn-focus{
+    background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223,223,223,1);
+    background:-moz-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#dfdfdf));
+    background:-webkit-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dfdfdf,GradientType=0);
+    background:linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
+    border:1px solid #658F1A;
 }
 .x-btn-group {
     -moz-border-radius:3px;
