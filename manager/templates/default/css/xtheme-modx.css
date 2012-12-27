@@ -17,9 +17,6 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-strong { font-weight: bold; }
-em { font-style: italic; }
-
 .ext-el-mask {
     background-color: #C0C0C0;
     z-index: 10;
@@ -311,7 +308,7 @@ textarea.x-form-field, .x-form-textarea{
     cursor: pointer;
 }
 .x-form-checkbox{
-    margin: 2px;
+    margin: 0 2px;
 }
 .x-form-checkbox:focus{
     outline: 1px solid rgba(100,140,50,1) !important;

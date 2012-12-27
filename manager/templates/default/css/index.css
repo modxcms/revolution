@@ -1,26 +1,29 @@
 /**
  * MODX Revolution 2.0.0 CSS Stylesheet
  */
-body, html {
-    height: 100%;
-    background-color: #fafafa;
-}
-
-.x-viewport {
-    overflow:auto;
-}
-
 body {
-    margin-bottom: 1px; /* avoid jumping scrollbars */
     color: #111;
     font: 13px/17px Arial, Helvetica, sans-serif;
 }
 
-img, a img {
-    border: 0;
-    text-decoration: none;
-    padding: 0;
-    margin: 0;
+h2 {
+    color: #5E5E5E;
+    font: normal 25px helvetica,arial,freesans,clean,sans-serif;
+    letter-spacing: -1px;
+    margin: 0 0 8px;
+}
+
+h3 {
+    margin: 0 0 8px;
+    font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
 }
 
 hr {
@@ -31,10 +34,10 @@ hr {
     margin: 20px;
 }
 
-/* normalize */
 textarea{
     overflow: auto;
 }
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;
@@ -288,18 +291,6 @@ input::-moz-focus-inner {
     background-color: #fff;
 }
 
-h2 {
-    color: #5E5E5E;
-    font: normal 25px helvetica,arial,freesans,clean,sans-serif;
-    letter-spacing: -1px;
-    margin: 0 0 8px;
-}
-
-h3 {
-    margin: 0 0 8px;
-    font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
-}
-
 .dashed {
     border-bottom: 1px #90b1b9 dashed;
 }
@@ -310,12 +301,6 @@ h3 {
     clear: both;
     margin-top: -1px;
 }
-
-/* modext stylings */
-.not-installed { color: red; }
-.red { color: red !important; }
-.green { color: green !important; }
-.error { color: red !important; }
 
 .modx-lockmask { z-index: 11; }
 .x-menu a { text-decoration: none !important; }
@@ -444,15 +429,11 @@ h3 {
     position: relative;
     text-shadow:1px -1px 0 #1f1f1f;
     z-index: 19;
-}
-.ext-gecko #modx-navbar {
     background: -moz-linear-gradient(
         #777 10%,
         #666 50%,
         #555 100%
     );
-}
-.ext-safari #modx-navbar, .ext-webkit #modx-navbar {
     background: -webkit-gradient(
         linear,
         left bottom,
@@ -1330,21 +1311,6 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 span.required {
     color: #777;
 }
-.desc-trans {
-    padding: 0;
-    margin: 0;
-    font-weight: normal;
-    color: #444 !important;
-}
-
-.resource-alias {
-    left: 0 !important;
-}
-.resource-url-prefix {
-    color: #777;
-    padding: 5px 0 !important;
-}
-
 
 /* tv table */
 #modx-tv-tabs {width: 100%;}
