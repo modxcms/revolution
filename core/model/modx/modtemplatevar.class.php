@@ -1111,7 +1111,7 @@ abstract class modTemplateVarRender {
      */
     protected function _loadLexiconTopics() {
         $topics = $this->getLexiconTopics();
-        if (!empty($topics) && !is_array($topics)) {
+        if (!empty($topics) && is_array($topics)) {
             foreach ($topics as $topic) {
                 $this->modx->lexicon->load($topic);
             }
