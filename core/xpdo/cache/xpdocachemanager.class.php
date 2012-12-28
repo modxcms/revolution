@@ -264,26 +264,28 @@ class xPDOCacheManager {
      *
      * @param string $file The name of the file to lock.
      * @param array $options An array of options for the process.
-     * @return boolean True only if the file is locked by the current PID.
+     * @return boolean True only if the current process obtained an exclusive lock for writing.
      */
     public function lockFile($file, array $options = array()) {
         $locked = false;
-        $lockFile = $file . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
-        if (!file_exists($lockFile)) {
-            $myPID = (XPDO_CLI_MODE || !isset($_SERVER['SERVER_ADDR']) ? gethostname() : $_SERVER['SERVER_ADDR']) . '|' . getmypid();
-            $tmpLockFile = dirname($file) . DIRECTORY_SEPARATOR . uniqid(basename($file) . '-') . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
-            if (file_put_contents($tmpLockFile, $myPID)) {
-                if (rename($tmpLockFile, $lockFile) && is_readable($lockFile)) {
-                    $lockPID = @file_get_contents($lockFile);
-                    if (!empty($lockPID) && $lockPID === $myPID) {
+        $lockDir = $this->getOption('lock_dir', $options, $this->getCachePath() . 'locks' . DIRECTORY_SEPARATOR);
+        if ($this->writeTree($lockDir, $options)) {
+            $lockFile = $this->lockFileName($file, $options);
+            if (!file_exists($lockFile)) {
+                $myPID = (XPDO_CLI_MODE || !isset($_SERVER['SERVER_ADDR']) ? gethostname() : $_SERVER['SERVER_ADDR']) . '.' . getmypid();
+                $myPID .= mt_rand();
+                $tmpLockFile = "{$lockFile}.{$myPID}";
+                if (file_put_contents($tmpLockFile, $myPID)) {
+                    if (link($tmpLockFile, $lockFile)) {
                         $locked = true;
                     }
-                } else {
                     @unlink($tmpLockFile);
                 }
             }
-            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, (!$locked ? 'Could not lock ' : 'Locked ') . "{$file} using {$myPID}" . (!$locked && !empty($lockPID) ? " - already locked by {$lockPID}" : ''));
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "The lock_dir at {$lockDir} is not writable and could not be created");
         }
+        if (!$locked) $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Attempt to lock file {$file} failed");
         return $locked;
     }
 
@@ -294,8 +296,19 @@ class xPDOCacheManager {
      * @param array $options An array of options for the process.
      */
     public function unlockFile($file, array $options = array()) {
-        $lockFilename = $file . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
-        @unlink($lockFilename);
+        @unlink($this->lockFileName($file, $options));
+    }
+
+    /**
+     * Get an absolute path to a lock file for a specified file path.
+     *
+     * @param string $file The absolute path to get the lock filename for.
+     * @param array $options An array of options for the process.
+     * @return string The absolute path for the lock file
+     */
+    protected function lockFileName($file, array $options = array()) {
+        $lockDir = $this->getOption('lock_dir', $options, $this->getCachePath() . 'locks' . DIRECTORY_SEPARATOR);
+        return $lockDir . preg_replace('/\W/', '_', $file) . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
     }
 
     /**
