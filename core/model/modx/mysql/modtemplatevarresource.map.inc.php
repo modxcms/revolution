@@ -75,6 +75,28 @@ $xpdo_meta_map['modTemplateVarResource']= array (
         ),
       ),
     ),
+    'tv_cnt' => 
+    array (
+      'alias' => 'tv_cnt',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'tmplvarid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'contentid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'aggregates' => 
   array (
