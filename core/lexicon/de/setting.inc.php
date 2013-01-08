@@ -97,8 +97,8 @@ $_lang['setting_allow_forward_across_contexts_desc'] = 'Wenn diese Einstellung a
 $_lang['setting_allow_manager_login_forgot_password'] = 'Passwort-vergessen-Funktion auf Manager-Login-Seite zulassen';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird die Möglichkeit, sich ein neues Passwort zuschicken zu lassen, wenn man das bisherige vergessen hat, auf der Login-Seite des Managers deaktiviert.';
 
-$_lang['setting_allow_tags_in_post'] = 'HTML-Tags in POST-Requests erlauben';
-$_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, können POST-Requests HTML-Formular-Tags enthalten.';
+$_lang['setting_allow_tags_in_post'] = 'Tags in POST-Requests erlauben';
+$_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt ist, werden HTML-Script-Tags, numerische HTML-Entities und MODX-Tags aus allen POST-Variablen entfernt. MODX empfiehlt, diese Einstellung für alle Kontexte auf "Nein" zu belassen, außer für den Kontext mgr, für den diese Einstellung standardmäßig auf "Ja" gesetzt ist.';
 
 $_lang['setting_archive_with'] = 'Erzwinge PCLZip-Archive';
 $_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Extension zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
