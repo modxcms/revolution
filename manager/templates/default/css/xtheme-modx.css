@@ -1850,7 +1850,8 @@ a.x-menu-item {
 }
 
 .x-combo-list-item {
-    border-color:#fff;
+    border: none;
+    padding: 3px;
 }
 
 .x-combo-list .x-combo-selected{
