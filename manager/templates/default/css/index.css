@@ -156,7 +156,6 @@ input::-moz-focus-inner {
     height: 100%;
     width: 100%;
     padding: 0;
-    z-index: 9993;
     background: url(../images/restyle/contentArea_bg.png) repeat-x 100% 0 !important;
 }
 
@@ -387,7 +386,11 @@ input::-moz-focus-inner {
 
 /* top bar */
 #modx-header{
-	height: 78px !important;
+    height: 78px !important;
+}
+.ext-ie7 #modx-header{
+    position: relative;
+    z-index: 10;
 }
 #modx-topbar {
     height: 35px;
@@ -426,9 +429,7 @@ input::-moz-focus-inner {
     border-top: 1px solid #1E1E1E;
     border-bottom: 1px solid #1E1E1E;
     height: 40px;
-    position: relative;
     text-shadow:1px -1px 0 #1f1f1f;
-    z-index: 19;
     background: -moz-linear-gradient(
         #777 10%,
         #666 50%,
@@ -573,9 +574,7 @@ table.classy tr.odd td {
 #modx-topnav-div {
     background: transparent;
     margin-left: 8px;
-    position: relative;
     width: 100%;
-    z-index: 20;
 }
 #modx-topnav {
     width: 100%;
@@ -587,7 +586,6 @@ table.classy tr.odd td {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid #1E1E1E;
-    z-index: 21;
 }
 #modx-topnav li {
     float: left;
@@ -595,7 +593,6 @@ table.classy tr.odd td {
     padding:4px 13px 0;
     position: relative;
     background: transparent url("../images/style/separator/menu_sep.png") no-repeat scroll right 0;
-    z-index: 22;
 }
 #modx-topnav li a {
     padding: 9px 5px 10px;
@@ -616,7 +613,7 @@ table.classy tr.odd td {
     list-style: none;
     font-size: 12px;
     position: absolute;
-    z-index: 23 !important;
+    z-index: 10000;
     left: 0;
     top: 40px;
     background: #444;
