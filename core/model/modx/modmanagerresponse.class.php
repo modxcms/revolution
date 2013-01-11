@@ -151,6 +151,7 @@ class modManagerResponse extends modResponse {
                 if (!file_exists($controllersPath.$classFile)) {
                     if (file_exists($controllersPath.strtolower($f).'/index.class.php')) {
                         $classPath = $controllersPath.strtolower($f).'/index.class.php';
+                        break;
                     }
                 } else {
                     $classPath = $controllersPath.$classFile;
@@ -253,7 +254,7 @@ class modManagerResponse extends modResponse {
             $paths[] = $namespace['path'].'controllers/';
 
             /* deprecated old usage */
-            $paths[] = $namespace['path'].trim($theme,'/');
+            $paths[] = $namespace['path'].trim($theme,'/').'/';
             if ($theme != 'default') {
                 $paths[] = $namespace['path'].'default/';
             }
