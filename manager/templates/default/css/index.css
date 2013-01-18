@@ -1832,19 +1832,21 @@ span.required {
 }
 .modx-pb-thumb{
     border: 1px solid #dddddd;
-    width: 80px;
-    height: 60px;
     padding: 5px;
+    height: 80px;
+    width: 100px;
+    line-height: 80px;
+    text-align: center;
 }
 .modx-pb-thumb img{
-    height: 60px;
-    width: 80px;
+    vertical-align: middle;
 }
 .modx-pb-thumb-wrap {
     float: left;
-    margin: 4px;
-    margin-right: 0;
-    padding: 5px;
+    margin: 4px 0 4px 4px;
+    padding: 4px;
+    overflow: hidden;
+    border: 1px solid transparent;
 }
 .modx-pb-thumb-wrap span{
     display: block;
