@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#6150] Fix issues with auto_publish when encountering invalid data
 - [#8936] Fix modTemplateVarRender::_loadLexiconTopics()
 - [#9257] Fix workspace/lexicon/getlist strict notice in PHP 5.4+
 - [#9339] Use Resource context_key in update processor when not specified
