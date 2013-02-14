@@ -2673,6 +2673,7 @@ class xPDO {
  */
 class xPDOCriteria {
     public $sql= '';
+    /** @var PDOStatement */
     public $stmt= null;
     public $bindings= array ();
     public $cacheFlag= false;
