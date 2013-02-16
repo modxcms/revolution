@@ -376,6 +376,13 @@ $_lang['edit_template'] = 'Edit Template';
 #$_lang['edit_tv'] = 'Edit TV';
 $_lang['edit_tv'] = 'Edit TV';
 
+$_lang['edit_chunk_in_new_window'] = 'Edit Chunk in new window';
+$_lang['edit_context_in_new_window'] = 'Edit context in new window';
+$_lang['edit_plugin_in_new_window'] = 'Edit Plugin in new window';
+$_lang['edit_snippet_in_new_window'] = 'Edit Snippet in new window';
+$_lang['edit_template_in_new_window'] = 'Edit Template in new window';
+$_lang['edit_tv_in_new_window'] = 'Edit TV in new window';
+
 #$_lang['editing'] = 'Editing: [[+name]]';
 $_lang['editing'] = 'Editing: [[+name]]';
 
