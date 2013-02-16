@@ -398,7 +398,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 ,type: a.type
                 ,pk: a.pk
                 ,handler: function(itm,e) {
-                    window.open('index.php?a=element/'+itm.type+'/update&id='+itm.pk,'_blank')
+                     window.open('index.php?a='+MODx.action['element/'+itm.type+'/update']+'&id='+itm.pk,'_blank');
                 }
             });
             m.push({
