@@ -724,7 +724,7 @@ class modX extends xPDO {
                 $context = $options['context'];
             }
             $resourceMap = !empty($context) && !empty($this->contexts[$context]->resourceMap) ? $this->contexts[$context]->resourceMap : $this->resourceMap;
-            
+
             if (isset ($resourceMap["{$id}"])) {
                 if ($children= $resourceMap["{$id}"]) {
                     foreach ($children as $child) {
@@ -2209,6 +2209,9 @@ class modX extends xPDO {
             if (!$this->context->prepare((boolean) $regenerate, is_array($options) ? $options : array())) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
+                //This fixes error with multiple contexts
+                $this->contexts[$contextKey]=$this->context;
+
                 if ($this->context->checkPolicy('load')) {
                     $this->aliasMap= & $this->context->aliasMap;
                     $this->resourceMap= & $this->context->resourceMap;
