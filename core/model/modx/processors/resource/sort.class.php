@@ -153,7 +153,7 @@ class modResourceSortProcessor extends modProcessor {
             'nodes' => &$this->nodes,
             'nodesAffected' => &$this->nodesAffected,
             'contexts' => &$this->contexts,
-            'contexts' => &$this->contextsAffected,
+            'contextsAffected' => &$this->contextsAffected,
             'modifiedNodes' => &$this->nodesAffected, /* backward compat */
         ));
 
