@@ -667,7 +667,7 @@ class modX extends xPDO {
      * @return modParser The modParser for this modX instance.
      */
     public function getParser() {
-        return $this->getService('parser', 'modParser');
+        return $this->getService('parser', $this->getOption('parser_class', null, 'modParser'), $this->getOption('parser_class_path', null));
     }
 
     /**
