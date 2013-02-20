@@ -436,7 +436,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,description: '<b>[[*alias]]</b><br />'+_('resource_alias_help')
             ,name: 'alias'
             ,id: 'modx-resource-alias'
-            ,maxLength: 100
+            ,maxLength: MODx.config.friendly_alias_max_length || 100
             ,anchor: '100%'
             ,value: config.record.alias || ''
 
