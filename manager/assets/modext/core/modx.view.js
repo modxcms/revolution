@@ -223,7 +223,7 @@ MODx.browser.Window = function(config) {
             ,cls: 'modx-pb-view-ct'
             ,region: 'center'
             ,autoScroll: true
-            ,width: 450
+            //,width: 635
             ,border: false
             ,items: this.view
             ,tbar: this.getToolbar()
@@ -233,9 +233,7 @@ MODx.browser.Window = function(config) {
             ,region: 'east'
             ,split: true
             ,border: false
-            ,width: 150
-            ,minWidth: 150
-            ,maxWidth: 250
+            ,width: 250
         }]
         ,buttons: [{
             id: this.ident+'-ok-btn'
@@ -300,9 +298,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
     
     ,getToolbar: function() {
-        return [{
+        return ['-', {
             text: _('filter')+':'
-        },{
+            ,xtype: 'label'
+        }, '-', {
             xtype: 'textfield'
             ,id: this.ident+'filter'
             ,selectOnFocus: true
@@ -314,9 +313,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
                     }, this, {buffer:500});
                 }, scope:this}
             }
-        }, ' ', '-', {
+        }, '-', {
             text: _('sort_by')+':'
-        }, {
+            ,xtype: 'label'
+        }, '-', {
             id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true
@@ -466,8 +466,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,_initTemplates: function() {
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
-                ,'<div class="modx-pb-thumb-wrap" id="{name}">'
-                ,'<div class="modx-pb-thumb"><img src="{thumb}" title="{name}" width="90" height="90" /></div>'
+                ,'<div class="modx-pb-thumb-wrap" id="{name}" title="{name}">'
+                ,'<div class="modx-pb-thumb"><img src="{thumb}" title="{name}" /></div>'
                 ,'<span>{shortName}</span></div>'
             ,'</tpl>'
         );
@@ -476,7 +476,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
             ,'<tpl for=".">'
-                ,'<div class="modx-pb-detail-thumb"><img src="{thumb}" alt="" width="80" height="60" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" /></div>'
+                ,'<div class="modx-pb-detail-thumb">' 
+                    ,'<img src="{thumb}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
+                ,'</div>'
                 ,'<div class="modx-pb-details-info">'
                 ,'<b>'+_('file_name')+':</b>'
                 ,'<span>{name}</span>'
@@ -499,7 +501,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     }
     ,showFullView: function(name,ident) {
         var data = this.lookup[name];
-        if (!data) return false;
+        if (!data) return;
         
         if (!this.fvWin) {
             this.fvWin = new Ext.Window({
