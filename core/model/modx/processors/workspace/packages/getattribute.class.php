@@ -13,7 +13,7 @@ class modPackageGetAttributeProcessor extends modProcessor {
     public $package;
     /** @var xPDOTransport $transport */
     public $transport;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('packages');
     }
@@ -45,8 +45,8 @@ class modPackageGetAttributeProcessor extends modProcessor {
                 @ob_start();
                 $options = $this->package->toArray();
                 $options[xPDOTransport::PACKAGE_ACTION] = $this->package->previousVersionInstalled()
-                    ? xPDOTransport::ACTION_INSTALL
-                    : xPDOTransport::ACTION_UPGRADE;
+                    ? xPDOTransport::ACTION_UPGRADE
+                    : xPDOTransport::ACTION_INSTALL;
                 $attributeFile = $this->modx->getOption('core_path').'packages/'.$this->package->signature.'/'.$attribute.'.php';
                 if (file_exists($attributeFile) && $attribute != '') {
                     $modx =& $this->modx;
