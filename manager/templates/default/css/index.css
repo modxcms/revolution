@@ -1,26 +1,29 @@
 /**
  * MODX Revolution 2.0.0 CSS Stylesheet
  */
-body, html {
-    height: 100%;
-    background-color: #fafafa;
-}
-
-.x-viewport {
-    overflow:auto;
-}
-
 body {
-    margin-bottom: 1px; /* avoid jumping scrollbars */
     color: #111;
     font: 13px/17px Arial, Helvetica, sans-serif;
 }
 
-img, a img {
-    border: 0;
-    text-decoration: none;
-    padding: 0;
-    margin: 0;
+h2 {
+    color: #5E5E5E;
+    font: normal 25px helvetica,arial,freesans,clean,sans-serif;
+    letter-spacing: -1px;
+    margin: 0 0 8px;
+}
+
+h3 {
+    margin: 0 0 8px;
+    font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
 }
 
 hr {
@@ -31,10 +34,10 @@ hr {
     margin: 20px;
 }
 
-/* normalize */
 textarea{
     overflow: auto;
 }
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;
@@ -153,7 +156,6 @@ input::-moz-focus-inner {
     height: 100%;
     width: 100%;
     padding: 0;
-    z-index: 9993;
     background: url(../images/restyle/contentArea_bg.png) repeat-x 100% 0 !important;
 }
 
@@ -288,18 +290,6 @@ input::-moz-focus-inner {
     background-color: #fff;
 }
 
-h2 {
-    color: #5E5E5E;
-    font: normal 25px helvetica,arial,freesans,clean,sans-serif;
-    letter-spacing: -1px;
-    margin: 0 0 8px;
-}
-
-h3 {
-    margin: 0 0 8px;
-    font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
-}
-
 .dashed {
     border-bottom: 1px #90b1b9 dashed;
 }
@@ -311,18 +301,6 @@ h3 {
     margin-top: -1px;
 }
 
-/* modext stylings */
-.not-installed { color: red; }
-.red { color: red !important; }
-.green { color: green !important; }
-.error { color: red !important; }
-
-textarea.x-form-field {
-    font-family: "Courier New", Courier, monospace;
-    font-weight: normal;
-}
-
-.ext-el-mask { z-index: 10; }
 .modx-lockmask { z-index: 11; }
 .x-menu a { text-decoration: none !important; }
 
@@ -400,7 +378,7 @@ textarea.x-form-field {
     position: absolute;
     top: 31px;
     right: 0;
-    z-index: 9999;
+    z-index: 10;
 }
 #modx-resource-tabs.x-panel-collapsed .x-tool-toggle {
     right: 16px !important;
@@ -408,7 +386,11 @@ textarea.x-form-field {
 
 /* top bar */
 #modx-header{
-	height: 78px !important;
+    height: 78px !important;
+}
+.ext-ie7 #modx-header{
+    position: relative;
+    z-index: 10;
 }
 #modx-topbar {
     height: 35px;
@@ -447,18 +429,12 @@ textarea.x-form-field {
     border-top: 1px solid #1E1E1E;
     border-bottom: 1px solid #1E1E1E;
     height: 40px;
-    position: relative;
     text-shadow:1px -1px 0 #1f1f1f;
-    z-index: 19;
-}
-.ext-gecko #modx-navbar {
     background: -moz-linear-gradient(
         #777 10%,
         #666 50%,
         #555 100%
     );
-}
-.ext-safari #modx-navbar, .ext-webkit #modx-navbar {
     background: -webkit-gradient(
         linear,
         left bottom,
@@ -598,9 +574,7 @@ table.classy tr.odd td {
 #modx-topnav-div {
     background: transparent;
     margin-left: 8px;
-    position: relative;
     width: 100%;
-    z-index: 20;
 }
 #modx-topnav {
     width: 100%;
@@ -612,7 +586,6 @@ table.classy tr.odd td {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid #1E1E1E;
-    z-index: 21;
 }
 #modx-topnav li {
     float: left;
@@ -620,7 +593,6 @@ table.classy tr.odd td {
     padding:4px 13px 0;
     position: relative;
     background: transparent url("../images/style/separator/menu_sep.png") no-repeat scroll right 0;
-    z-index: 22;
 }
 #modx-topnav li a {
     padding: 9px 5px 10px;
@@ -641,7 +613,7 @@ table.classy tr.odd td {
     list-style: none;
     font-size: 12px;
     position: absolute;
-    z-index: 23 !important;
+    z-index: 10000;
     left: 0;
     top: 40px;
     background: #444;
@@ -835,9 +807,7 @@ input.x-static-text-field {
 }
 
 /* console */
-.modx-console {
-    z-index: 10001;
-}
+
 .modx-console .debug { color: gray; }
 .modx-console .success { color: green; }
 .modx-console .warn { color: blue; }
@@ -1338,21 +1308,6 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 span.required {
     color: #777;
 }
-.desc-trans {
-    padding: 0;
-    margin: 0;
-    font-weight: normal;
-    color: #444 !important;
-}
-
-.resource-alias {
-    left: 0 !important;
-}
-.resource-url-prefix {
-    color: #777;
-    padding: 5px 0 !important;
-}
-
 
 /* tv table */
 #modx-tv-tabs {width: 100%;}
@@ -1832,19 +1787,21 @@ span.required {
 }
 .modx-pb-thumb{
     border: 1px solid #dddddd;
-    width: 80px;
-    height: 60px;
     padding: 5px;
+    height: 80px;
+    width: 100px;
+    line-height: 80px;
+    text-align: center;
 }
 .modx-pb-thumb img{
-    height: 60px;
-    width: 80px;
+    vertical-align: middle;
 }
 .modx-pb-thumb-wrap {
     float: left;
-    margin: 4px;
-    margin-right: 0;
-    padding: 5px;
+    margin: 4px 0 4px 4px;
+    padding: 4px;
+    overflow: hidden;
+    border: 1px solid transparent;
 }
 .modx-pb-thumb-wrap span{
     display: block;

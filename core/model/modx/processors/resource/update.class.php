@@ -123,7 +123,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $properties = $this->getProperties();
         if (isset($properties['ta'])) $this->setProperty('content',$properties['ta']);
 
-        $this->workingContext = $this->modx->getContext($this->getProperty('context_key'));
+        $this->workingContext = $this->modx->getContext($this->getProperty('context_key', $this->object->get('context_key') ? $this->object->get('context_key') : 'web'));
 
         $this->trimPageTitle();
         $this->handleParent();

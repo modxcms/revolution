@@ -963,7 +963,7 @@ class modTemplateVar extends modElement {
                             "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
                             "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                             "AND ResourceGroup.tmplvarid = :element " .
-                            "AND ResourceGroup.documentgroup = acl.target " .
+                            "AND ResourceGroup.documentgroup = Acl.target " .
                             "ORDER BY Acl.target, Acl.principal, Acl.authority";
                     $bindings = array(
                         ':element' => $this->get('id'),
@@ -1111,7 +1111,7 @@ abstract class modTemplateVarRender {
      */
     protected function _loadLexiconTopics() {
         $topics = $this->getLexiconTopics();
-        if (!empty($topics) && !is_array($topics)) {
+        if (!empty($topics) && is_array($topics)) {
             foreach ($topics as $topic) {
                 $this->modx->lexicon->load($topic);
             }
