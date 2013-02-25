@@ -25,6 +25,7 @@ MODx.panel.Resource = function(config) {
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
+    this.on('beforedestroy',this.beforeDestroy,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
     if (urio) { urio.on('check',this.freezeUri); }
     this.addEvents('tv-reset');
@@ -68,7 +69,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = true;
             } else if (f && f.getValue() == 0 && this.rteLoaded) {
                 if (MODx.unloadRTE) {
-                    MODx.unloadRTE('ta');
+                    MODx.unloadRTE(this.rteElements);
                 }
                 this.rteLoaded = false;
             }
@@ -82,6 +83,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
 
+    }
+    ,beforeDestroy: function(e){
+        if (this.rteLoaded && MODx.unloadRTE){
+            MODx.unloadRTE(this.rteElements);
+            this.rteLoaded = false;
+        }
     }
 
     ,beforeSubmit: function(o) {
