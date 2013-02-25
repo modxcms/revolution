@@ -131,7 +131,7 @@ Ext.extend(MODx.panel.CreateFile,MODx.FormPanel,{
         return true;
     }
     ,success: function(r) {
-        location.href = 'index.php?a='+MODx.action['system/file/edit']+'&file='+r.result.object.file+'&source='+MODx.request.source;
+        MODx.loadPage(MODx.action['system/file/edit'], 'file='+r.result.object.file+'&source='+MODx.request.source);
     }
     ,beforeSubmit: function(o) {
         this.cleanupEditor();
