@@ -208,7 +208,7 @@ MODx.LayoutMgr = function() {
     var _activeMenu = 'menu0';
     return {
         loadPage: function(a,p) {
-            location.href = '?a='+a+'&'+(p || '');
+            location.href = '?a=' + a + (p ? '&' + p : '');
             return false;
         }
         ,changeMenu: function(a,sm) {

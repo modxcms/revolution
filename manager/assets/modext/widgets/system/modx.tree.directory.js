@@ -197,7 +197,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,editFile: function(itm,e) {
-        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+        this.loadAction(MODx.action['system/file/edit'], 'file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
     }
 
     ,quickUpdateFile: function(itm,e) {
@@ -234,7 +234,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,createFile: function(itm,e) {
         var d = this.cm.activeNode && this.cm.activeNode.attributes ? this.cm.activeNode.attributes.id : '';
-        this.loadAction('a='+MODx.action['system/file/create']+'&directory='+d+'&source='+this.getSource());
+        this.loadAction(MODx.action['system/file/create'], 'directory='+d+'&source='+this.getSource());
     }
 
     ,quickCreateFile: function(itm,e) {

@@ -526,7 +526,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: _('edit_context')
                 ,handler: function() {
                     var at = this.cm.activeNode.attributes;
-                    this.loadAction('a='+MODx.action['context/update']+'&key='+at.pk);
+                    this.loadAction(MODx.action['context/update'], 'key='+at.pk);
                 }
             });
         }
@@ -556,11 +556,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
-    ,overviewResource: function() {this.loadAction('a='+MODx.action['resource/data'])}
+    ,overviewResource: function() {this.loadAction(MODx.action['resource/data'])}
     ,quickUpdateResource: function(itm,e) {
         Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
     }
-    ,editResource: function() {this.loadAction('a='+MODx.action['resource/update']);}
+    ,editResource: function() {this.loadAction(MODx.action['resource/update']);}
 
     ,_getModResourceMenu: function(n) {
         var a = n.attributes;
@@ -651,10 +651,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
         Ext.getCmp('modx-resource-tree').loadAction(
-            'a='+MODx.action['resource/create']
-            + '&class_key='+itm.classKey
-            + '&parent='+p
-            + (at.ctx ? '&context_key='+at.ctx : '')
+            MODx.action['resource/create'],
+            'class_key=' + itm.classKey + '&parent=' + p
+            + (at.ctx ? '&context_key=' + at.ctx : '')
         );
     }
     ,createResource: function(itm,e) {

@@ -178,7 +178,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                     this.cm.activeNode.remove();
                     /* if editing the element being removed */
                     if (MODx.request.a == MODx.action['element/'+oar[0]+'/update'] && MODx.request.id == oar[2]) {
-                        location.href = 'index.php?a='+MODx.action['welcome'];
+                        MODx.loadPage(MODx.action['welcome']);
                     }
                 },scope:this}
             }
@@ -391,9 +391,8 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 ,type: a.type
                 ,pk: a.pk
                 ,handler: function(itm,e) {
-                    location.href = 'index.php?a='
-                        + MODx.action['element/'+itm.type+'/update']
-                        + '&id='+itm.pk;
+                    MODx.loadPage(MODx.action['element/'+itm.type+'/update'],
+                        'id='+itm.pk);
                 }
             });
             m.push({

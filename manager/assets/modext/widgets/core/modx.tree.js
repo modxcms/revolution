@@ -507,13 +507,13 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         location.href = loc;
     }
 	
-    ,loadAction: function(p) {
-        var id = '';
+    ,loadAction: function(a,p) {
+        p = p || '';
         if (this.cm.activeNode && this.cm.activeNode.id) {
             var pid = this.cm.activeNode.id.split('_');
-            id = 'id='+pid[1];
+            p += (p ? '&' : '') + 'id='+pid[1];
         }
-        location.href = 'index.php?'+id+'&'+p;
+        MODx.loadPage(a, p);
     }
     /**
      * Loads the default toolbar for the tree.
