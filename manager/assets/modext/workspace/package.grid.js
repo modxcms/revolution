@@ -355,6 +355,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     
 	/* Remove a package entirely */
     ,remove: function(btn,e) {
+        if (this.destroying) {
+            return MODx.grid.Package.superclass.remove.apply(this, arguments);
+        }
     	var r = this.menu.record;
         var topic = '/workspace/package/remove/'+r.signature+'/';
         
