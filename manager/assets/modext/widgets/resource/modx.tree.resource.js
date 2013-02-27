@@ -558,7 +558,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
     ,overviewResource: function() {this.loadAction(MODx.action['resource/data'])}
     ,quickUpdateResource: function(itm,e) {
-        Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
+        this.quickUpdate(itm,e,itm.classKey);
     }
     ,editResource: function() {this.loadAction(MODx.action['resource/update']);}
 
@@ -647,19 +647,24 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.refreshNode(this.cm.activeNode.id);
     }
 
+    ,createResource: function(classKey) {
+        MODx.loadPage(MODx.action['resource/create'], classKey ? 'class_key=' + classKey : '');
+    }
+
     ,createResourceHere: function(itm) {
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
-        Ext.getCmp('modx-resource-tree').loadAction(
+        this.loadAction(
             MODx.action['resource/create'],
             'class_key=' + itm.classKey + '&parent=' + p
             + (at.ctx ? '&context_key=' + at.ctx : '')
         );
     }
-    ,createResource: function(itm,e) {
+
+    ,quickCreateResource: function(itm,e) {
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
-        Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
+        this.quickCreate(itm,e,itm.classKey,at.ctx,p);
     }
 
     ,_getCreateMenus: function(m,pk,ui) {
@@ -688,7 +693,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 qct.push({
                     text: types[k]['text_create']
                     ,classKey: k
-                    ,handler: this.createResource
+                    ,handler: this.quickCreateResource
                     ,scope: this
                 });
             }
