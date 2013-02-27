@@ -188,7 +188,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 			this.menu.record = record.data; 
 			switch (act) {
                 case 'remove':
-                    this.remove(record, e);
+                    this.removePackage(record, e);
                     break;
                 case 'install':                                       
                 case 'reinstall':                                       
@@ -354,7 +354,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
     
 	/* Remove a package entirely */
-    ,remove: function(btn,e) {
+    ,removePackage: function(btn,e) {
     	var r = this.menu.record;
         var topic = '/workspace/package/remove/'+r.signature+'/';
         

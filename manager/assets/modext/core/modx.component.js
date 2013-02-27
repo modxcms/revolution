@@ -37,6 +37,7 @@ Ext.extend(MODx.Component,Ext.Component,{
 
     ,_loadActionButtons: function() {
         if (!this.config.buttons) { return false; }
+
         this.ab = MODx.load({
             xtype: 'modx-actionbuttons'
             ,form: this.form || null
@@ -124,6 +125,7 @@ MODx.toolbar.ActionButtons = function(config) {
     if (config.loadStay === true) {
         config.items.push('-',this.getStayMenu());
     }
+    this.checkDirtyBtns = [];
     MODx.toolbar.ActionButtons.superclass.constructor.call(this,config);
     this.config = config;
 };
@@ -132,8 +134,6 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
     ,buttons: []
     ,options: { a_close: 'welcome' }
     ,stay: 'stay'
-
-    ,checkDirtyBtns: []
 
     ,add: function() {
         var a = arguments, l = a.length;

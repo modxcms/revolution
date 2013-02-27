@@ -169,7 +169,6 @@ MODx.grid.ElementProperties = function(config) {
     MODx.grid.ElementProperties.superclass.constructor.call(this,config);
     this.on('afteredit', this.propertyChanged, this);
     this.on('afterRemoveRow', this.propertyChanged, this);
-    this.on('celldblclick',this.onDirty,this);
     this.on('render',function() {
         this.mask = new Ext.LoadMask(this.getEl());
     },this);
