@@ -24,7 +24,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
-                this.redirect('index.php?a='+MODx.action['element/template/create']);
+                this._createElement('template');
             }
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
@@ -33,7 +33,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
-                this.redirect('index.php?a='+MODx.action['element/tv/create']);
+                this._createElement('tv');
             }
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
@@ -42,7 +42,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
-                this.redirect('index.php?a='+MODx.action['element/chunk/create']);
+                this._createElement('chunk');
             }
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
@@ -51,7 +51,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
-                this.redirect('index.php?a='+MODx.action['element/snippet/create']);
+                this._createElement('snippet');
             }
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
@@ -60,7 +60,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
-                this.redirect('index.php?a='+MODx.action['element/plugin/create']);
+                this._createElement('plugin');
             }
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
@@ -261,15 +261,8 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
     }
 	
-    ,_createElement: function(itm,e,type) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
-        var type = oar[0] == 'type' ? oar[1] : oar[0];
-        var cat_id = oar[0] == 'type' ? 0 : (oar[1] == 'category' ? oar[2] : oar[3]);
-        var a = MODx.action['element/'+type+'/create'];
-        this.redirect('index.php?a='+a+'&category='+cat_id);
-        this.cm.hide();
-        return false;
+    ,_createElement: function(type, category) {
+        MODx.loadPage(MODx.action['element/'+type+'/create'], category ? '&category=' + category : '');
     }
     
     ,afterSort: function(o) {
@@ -438,7 +431,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         if (ui.hasClass('pnew')) {
             m.push({
                 text: _('add_to_category_'+a.type)
-                ,handler: this._createElement
+                ,handler: function(){
+                    this._createElement(a.type, a.category);
+                }
             });
         }
         if (ui.hasClass('pnewcat')) {
@@ -478,7 +473,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         if (a.elementType) {
             m.push({
                 text: _('add_to_category_'+a.type)
-                ,handler: this._createElement
+                ,handler: function() {
+                    this._createElement(a.type, a.category);
+                }
             });
         }
         this._getQuickCreateMenu(n,m);
@@ -501,7 +498,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         if (ui.hasClass('pnew')) {
             m.push({
                 text: _('new_'+a.type)
-                ,handler: this._createElement
+                ,handler: function(){
+                    this._createElement(a.type);
+                }
             });
             m.push({
                 text: _('quick_create_'+a.type)
