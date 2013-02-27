@@ -506,8 +506,17 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,redirect: function(loc) {
         location.href = loc;
     }
-	
+
+    /**
+     * Redirects the page to the given action for the selected active node
+     * @param {Number} action Action to redirect to
+     * @param {String} parameters Optional query parameters
+     */
     ,loadAction: function(a,p) {
+        // Handles deprecated calls when first argument is a query string
+        if (isNaN(a)) {
+            p = a.replace(/&?a=([^&]*)/, function(match, capture) {a = capture; return ''});
+        }
         p = p || '';
         if (this.cm.activeNode && this.cm.activeNode.id) {
             var pid = this.cm.activeNode.id.split('_');
