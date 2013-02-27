@@ -190,6 +190,7 @@ $_lang['user_state'] = 'State';
 $_lang['user_sudo'] = 'Sudo User';
 $_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
 $_lang['user_title'] = 'Create/Edit user';
+$_lang['user_transgender'] = 'Transgender';
 $_lang['user_update'] = 'Update User';
 $_lang['user_updated_password_message'] = 'The User has been updated. The password is: [[+password]]';
 $_lang['user_upload_message'] = ' If you wish to stop this user uploading any filetypes in this category, make sure that the \'Use Main Configuration Setting\' checkbox is not ticked and leave the field blank.';
