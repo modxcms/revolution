@@ -394,6 +394,14 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 }
             });
             m.push({
+                text: _('edit_'+a.type+'_in_new_window')
+                ,type: a.type
+                ,pk: a.pk
+                ,handler: function(itm,e) {
+                     window.open('index.php?a='+MODx.action['element/'+itm.type+'/update']+'&id='+itm.pk,'_blank');
+                }
+            });
+            m.push({
                 text: _('quick_update_'+a.type)
                 ,type: a.type
                 ,handler: function(itm,e) {
