@@ -408,7 +408,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (this.disableHref) {return true;}
         if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
-            location.href = n.attributes.page;
+            MODx.loadPage(n.attributes.page);
         } else {
             n.toggle();
         }
@@ -504,7 +504,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {String} loc The URL to direct to.
      */
     ,redirect: function(loc) {
-        location.href = loc;
+        MODx.loadPage(loc);
     }
 	
     ,loadAction: function(p) {
@@ -513,7 +513,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             var pid = this.cm.activeNode.id.split('_');
             id = 'id='+pid[1];
         }
-        location.href = 'index.php?'+id+'&'+p;
+        MODx.loadPage('?'+id+'&'+p);
     }
     /**
      * Loads the default toolbar for the tree.
