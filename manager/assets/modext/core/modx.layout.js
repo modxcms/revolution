@@ -222,7 +222,9 @@ MODx.LayoutMgr = function() {
                 }
                 url = '?' + parts.join('&');
             }
-            location.href = url;
+            if (MODx.fireEvent('beforeLoadPage', url)) {
+                location.href = url;
+            }
         }
         ,changeMenu: function(a,sm) {
             if (sm === _activeMenu) return false;
