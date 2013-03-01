@@ -7,6 +7,31 @@
  */
 $warnings = array();
 
+/* Function recommended by php.net for validating ini settings which on some systems can be set as: */
+/* yes, true, 1 which are all valid */
+/* MODx currently only checks for TRUE */
+
+function ini_get_bool($a)
+{
+    $b = ini_get($a);
+
+    switch (strtolower($b))
+    {
+    case 'on':
+    case 'yes':
+    case 'true':
+        return 'assert.active' !== $a;
+
+    case 'stdout':
+    case 'stderr':
+        return 'display_errors' === $a;
+
+    default:
+        return (bool) (int) $b;
+    }
+}
+
+
 /* bypasses policy check to check for absolute existence */
 function getResourceBypass(modX &$modx,$criteria) {
     $resource = null;
@@ -45,7 +70,8 @@ if (!is_writable($cachePath)) {
     );
 }
 
-if (@ini_get('register_globals') == true) {
+/* changed to use ini_get_bool function, which can handle yes, 1 and true values */
+if (@ini_get_bool('register_globals') == true) {
     $warnings[] = array (
         $modx->lexicon('configcheck_register_globals')
     );
