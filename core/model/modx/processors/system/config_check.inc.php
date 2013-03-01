@@ -7,30 +7,33 @@
  */
 $warnings = array();
 
-/* Function recommended by php.net for validating ini settings which on some systems can be set as: */
-/* yes, true, 1 which are all valid */
-/* MODx currently only checks for TRUE */
+if (!function_exists('ini_get_bool')) {
+    /**
+     * Return a proper boolean from an ini_get value.
+     *
+     * @param string $key The ini setting key to check.
+     * @return bool TRUE if the ini_get value evaluates to a positive boolean value for the specified key.
+     */
+    function ini_get_bool($key) {
+        $value = ini_get($key);
 
-function ini_get_bool($a)
-{
-    $b = ini_get($a);
-
-    switch (strtolower($b))
-    {
-    case 'on':
-    case 'yes':
-    case 'true':
-        return 'assert.active' !== $a;
-
-    case 'stdout':
-    case 'stderr':
-        return 'display_errors' === $a;
-
-    default:
-        return (bool) (int) $b;
+        switch (strtolower($value)) {
+            case 'on':
+            case 'yes':
+            case 'true':
+                $value = 'assert.active' !== $key;
+                break;
+            case 'stdout':
+            case 'stderr':
+                $value = 'display_errors' === $key;
+                break;
+            default:
+                $value = (int) $value;
+                break;
+        }
+        return (bool) $value;
     }
 }
-
 
 /* bypasses policy check to check for absolute existence */
 function getResourceBypass(modX &$modx,$criteria) {
