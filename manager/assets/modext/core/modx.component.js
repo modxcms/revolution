@@ -296,7 +296,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             }
         } else { /* if just doing a URL redirect */
             Ext.applyIf(itm.params || {},o.baseParams || {});
-            location.href = '?'+Ext.urlEncode(itm.params);
+            MODx.loadPage('?'+Ext.urlEncode(itm.params));
         }
         return false;
     }
@@ -347,7 +347,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     } else if (itm.process === 'delete') {
                         itm.params.a = o.actions.cancel;
                         url = Ext.urlEncode(itm.params);
-                        location.href = '?'+url;
+                        MODx.loadPage('?'+url);
                     }
                 }
                 break;
