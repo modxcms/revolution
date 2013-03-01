@@ -129,8 +129,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
         }
         var object = o.result.object;
-        if (this.config.resource && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
-            MODx.loadPage(object.action, 'id=' + object.id);
+        // object.parent is undefined on template changing.
+        if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
+            MODx.loadPage(location.href);
         } else {
             this.getForm().setValues(object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
