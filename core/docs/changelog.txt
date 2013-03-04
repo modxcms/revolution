@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- Fix invalid ini boolean evaluation in config_check processor
 - Allow modX::getParser() to get an extended modParser instance
 - [#9524] Fix invalid context assignment in modX::switchContext()
 - [#9517] modPackageGetAttributeProcessor returning wrong PACKAGE_ACTION
