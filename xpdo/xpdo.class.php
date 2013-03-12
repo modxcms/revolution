@@ -2530,6 +2530,8 @@ class xPDO {
         $query= false;
         if ($this->loadClass($this->config['dbtype'] . '.xPDOQuery', '', false, true)) {
             $xpdoQueryClass= 'xPDOQuery_' . $this->config['dbtype'];
+            if (!class_exists($xpdoQueryClass, false))
+                include_once dirname(__FILE__) . '/om/' . $this->config['dbtype'] . '/xpdoquery.class.php';
             if ($query= new $xpdoQueryClass($this, $class, $criteria)) {
                 $query->cacheFlag= $cacheFlag;
             }
