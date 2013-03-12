@@ -5,6 +5,21 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- Fix invalid ini boolean evaluation in config_check processor
+- Allow modX::getParser() to get an extended modParser instance
+- [#9524] Fix invalid context assignment in modX::switchContext()
+- [#9517] modPackageGetAttributeProcessor returning wrong PACKAGE_ACTION
+- [#9451] Add modx-combo-source as settings type
+- [#5515] MODx.Browser UX improvements
+- Increase width of file and image TVs
+- [#9282] Fix Minify errors when manager on different subdomain
+- Various Manager UI Fixes
+- [#6150] Fix issues with auto_publish when encountering invalid data
+- [#8936] Fix modTemplateVarRender::_loadLexiconTopics()
+- [#9257] Fix workspace/lexicon/getlist strict notice in PHP 5.4+
+- [#9339] Use Resource context_key in update processor when not specified
+- [#9212] Fix SQL syntax error in modTemplateVar->findPolicy()
+- [#9239] Make sure class_key is passed when switching templates
 - [#8101] Add support for httpOnly session cookies in PHP 5.2+
 - [#8420] Provide multi-node support to flock-independent file locking
 - [#8420] Remove LOCK_EX from flock-independent file locking method

@@ -605,6 +605,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Utilisez cette option pour personn
 $_lang['setting_session_cookie_secure'] = 'Sessions sécurisées de Cookie';
 $_lang['setting_session_cookie_secure_desc'] = 'Activez cette option pour utiliser les sessions sécurisées de coockies.';
 
+$_lang['setting_session_cookie_httponly'] = 'Cookie de session HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Activez ce paramètre pour utiliser le flag HttpOnly dans le cookie de session.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Autorise la personnalisation du paramètre session.gc_maxlifetime (PHP ini) lors de l\'utilisation de \'modSessionHandler\'.';
 

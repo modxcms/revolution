@@ -605,17 +605,17 @@ class modCacheManager extends xPDOCacheManager {
         /* publish and unpublish resources using pub_date and unpub_date checks */
         $tblResource= $this->modx->getTableName('modResource');
         $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
-        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon=pub_date, pub_date=0 WHERE published = 0 AND pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
-        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon=0, pub_date=0, unpub_date=0 WHERE published = 1 AND unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
+        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon=pub_date, pub_date=0 WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
+        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon=0, pub_date=0, unpub_date=0 WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
 
         /* update publish time file */
         $timesArr= array ();
         $minpub= 0;
         $minunpub= 0;
-        $sql= "SELECT MIN(pub_date) FROM {$tblResource} WHERE pub_date > ?";
+        $sql= "SELECT MIN(pub_date) FROM {$tblResource} WHERE published = 0 AND pub_date > ?";
         $stmt= $this->modx->prepare($sql);
         if ($stmt) {
-            $stmt->bindValue(1, time());
+            $stmt->bindValue(1, 0);
             if ($stmt->execute()) {
                 foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
                     $minpub= $value[0];
@@ -631,10 +631,10 @@ class modCacheManager extends xPDOCacheManager {
         }
         if ($minpub) $timesArr[]= $minpub;
 
-        $sql= "SELECT MIN(unpub_date) FROM {$tblResource} WHERE unpub_date > ?";
+        $sql= "SELECT MIN(unpub_date) FROM {$tblResource} WHERE published = 1 AND unpub_date > ?";
         $stmt= $this->modx->prepare($sql);
         if ($stmt) {
-            $stmt->bindValue(1, time());
+            $stmt->bindValue(1, 0);
             if ($stmt->execute()) {
                 foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
                     $minunpub= $value[0];
