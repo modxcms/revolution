@@ -3021,8 +3021,21 @@ class xPDOConnection {
         return $connected;
     }
 
+    /**
+     * Get an option set for this xPDOConnection instance.
+     *
+     * @param string $key The option key to get a value for.
+     * @param array|null $options An optional array of options to consider.
+     * @param mixed $default A default value to use if the option is not found.
+     * @return mixed The option value.
+     */
     public function getOption($key, $options = null, $default = null) {
-        return $this->xpdo->getOption($key, array_merge($this->config, $options), $default);
+        if (is_array($options)) {
+            $options = array_merge($this->config, $options);
+        } else {
+            $options = $this->config;
+        }
+        return $this->xpdo->getOption($key, $options, $default);
     }
 }
 
