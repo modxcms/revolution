@@ -814,7 +814,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if (!empty($allowedFileTypes) && !in_array($fileExtension,$allowedFileTypes)) continue;
 
                 $filesize = @filesize($filePathName);
-                $url = ltrim($dir.$fileName,'/');
+                $url = urlencode(ltrim($dir.$fileName,'/'));
 
                 /* get thumbnail */
                 if (in_array($fileExtension,$imageExtensions)) {
