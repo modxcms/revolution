@@ -408,6 +408,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (this.disableHref) {return true;}
         if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
+            if (e.button == 1) return window.open(n.attributes.page,'_blank');
             location.href = n.attributes.page;
         } else {
             n.toggle();
