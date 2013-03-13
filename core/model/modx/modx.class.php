@@ -357,7 +357,7 @@ class modX extends xPDO {
      */
     public function sanitizeString($str,$chars = array('/',"'",'"','(',')',';','>','<'),$allowedTags = '') {
         $str = str_replace($chars,'',strip_tags($str,$allowedTags));
-        return preg_replace("/[^A-Za-z0-9_\-\.\/]/",'',$str);
+        return preg_replace("/[^A-Za-z0-9_\-\.\/\\p{L}[\p{L} _.-]/u",'',$str);
     }
 
     /**
