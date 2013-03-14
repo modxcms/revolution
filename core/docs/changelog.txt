@@ -5,6 +5,9 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#9359] Report errors about unpublishing site_start to user
+- [#9197] Load RTE for SymLinks in manager
+- [#9364] Allow Unicode chars via modX::sanitizeString()
 - [#9631] Fix image preview with special chars in filename
 - [#9608] Remove connections data from MODx.config
 - Fix invalid ini boolean evaluation in config_check processor

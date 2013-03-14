@@ -113,9 +113,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $locked = $this->addLock();
         if ($locked !== true) {
             if ($this->lockedUser) {
-                return $this->failure($this->modx->lexicon('resource_locked_by', array('id' => $this->object->get('id'), 'user' => $this->lockedUser->get('username'))));
+                return $this->modx->lexicon('resource_locked_by', array('id' => $this->object->get('id'), 'user' => $this->lockedUser->get('username')));
             } else {
-                return $this->failure($this->modx->lexicon('access_denied'));
+                return $this->modx->lexicon('access_denied');
             }
         }
 
@@ -134,7 +134,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->setUnPublishDate();
         $this->checkPublishedOn();
         $this->checkPublishingPermissions();
-        $this->checkForUnPublishOnSiteStart();
+        $result = $this->checkForUnPublishOnSiteStart();
+        if ($result !== true) {
+            return $result;
+        }
         $this->checkDeletedStatus();
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
@@ -415,11 +418,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $publishDate = $this->getProperty('pub_date');
         $unPublishDate = $this->getProperty('unpub_date');
         if ($this->isSiteStart && ($published !== null && empty($published))) {
-            $this->addFieldError('published',$this->modx->lexicon('resource_err_unpublish_sitestart'));
-            $passed = false;
+            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart');
         } else if ($this->isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
-            $this->addFieldError('published',$this->modx->lexicon('resource_err_unpublish_sitestart_dates'));
-            $passed = false;
+            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
         }
         return $passed;
     }

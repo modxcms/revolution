@@ -41,6 +41,8 @@ class SymlinkUpdateManagerController extends ResourceUpdateManagerController {
         });
         // ]]>
         </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
     
     /**
