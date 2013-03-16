@@ -101,11 +101,13 @@ class xPDOQuery_mysql extends xPDOQuery {
                     $type = $setVal['type'];
                     if ($value !== null && in_array($type, array(PDO::PARAM_INT, PDO::PARAM_STR))) {
                         $value = $this->xpdo->quote($value, $type);
+                    } elseif ($value === null) {
+                        $value = 'NULL';
                     }
                     $clauses[] = $this->xpdo->escape($setKey) . ' = ' . $value;
                 }
                 if (!empty($clauses)) {
-                    $sql.= 'SET ' . implode(', ', $clauses);
+                    $sql.= 'SET ' . implode(', ', $clauses) . ' ';
                 }
                 unset($clauses);
             }

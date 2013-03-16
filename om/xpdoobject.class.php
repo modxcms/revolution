@@ -563,20 +563,32 @@ class xPDOObject {
                 $tableAlias= $xpdo->escape($tableAlias);
                 $tableAlias.= '.';
             }
-            foreach (array_keys($aColumns) as $k) {
-                if ($exclude && in_array($k, $columns)) {
-                    continue;
+            if (!$exclude && !empty($columns)) {
+                foreach ($columns as $column) {
+                    if (!in_array($column, array_keys($aColumns))) {
+                        continue;
+                    }
+                    $columnarray[$column]= "{$tableAlias}" . $xpdo->escape($column);
+                    if (!empty ($columnPrefix)) {
+                        $columnarray[$column]= $columnarray[$column] . " AS " . $xpdo->escape("{$columnPrefix}{$column}");
+                    }
                 }
-                elseif (empty ($columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
-                }
-                elseif ($exclude || in_array($k, $columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
-                } else {
-                    continue;
-                }
-                if (!empty ($columnPrefix)) {
-                    $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->escape("{$columnPrefix}{$k}");
+            } else {
+                foreach (array_keys($aColumns) as $k) {
+                    if ($exclude && in_array($k, $columns)) {
+                        continue;
+                    }
+                    elseif (empty ($columns)) {
+                        $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
+                    }
+                    elseif ($exclude || in_array($k, $columns)) {
+                        $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
+                    } else {
+                        continue;
+                    }
+                    if (!empty ($columnPrefix)) {
+                        $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->escape("{$columnPrefix}{$k}");
+                    }
                 }
             }
         }
@@ -1366,7 +1378,7 @@ class xPDOObject {
                 elseif ($this->_fieldMeta[$_k]['phptype'] == 'timestamp' && preg_match('/int/i', $this->_fieldMeta[$_k]['dbtype'])) {
                     $fieldType= PDO::PARAM_INT;
                 }
-                elseif (!in_array($this->_fieldMeta[$_k]['phptype'], array ('string','password','datetime','timestamp','date','time','array','json'))) {
+                elseif (!in_array($this->_fieldMeta[$_k]['phptype'], array ('string','password','datetime','timestamp','date','time','array','json','float'))) {
                     $fieldType= PDO::PARAM_INT;
                 }
                 if ($this->_new) {
@@ -1388,7 +1400,7 @@ class xPDOObject {
                         $where= '';
                         foreach ($pkn as $k => $v) {
                             $vt= PDO::PARAM_INT;
-                            if ($this->_fieldMeta[$k]['phptype'] == 'string') {
+                            if (in_array($this->_fieldMeta[$k]['phptype'], array('string', 'float'))) {
                                 $vt= PDO::PARAM_STR;
                             }
                             if ($iteration) {
@@ -1402,7 +1414,7 @@ class xPDOObject {
                     } else {
                         $pkn= $this->getPK();
                         $pkt= PDO::PARAM_INT;
-                        if ($this->_fieldMeta[$pkn]['phptype'] == 'string') {
+                        if (in_array($this->_fieldMeta[$pkn]['phptype'], array('string', 'float'))) {
                             $pkt= PDO::PARAM_STR;
                         }
                         $bindings[":{$pkn}"]['value']= $pk;
