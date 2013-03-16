@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.6-pl (March 16, 2013)
+====================================
 - [#7452] Fix sql errors with decimal fields in some locales
 - [#9062] Fix problem loading multiple xPDOQuery driver classes
 - [#9629] Fix notice in xPDOConnection::getOption() when $options not an array
