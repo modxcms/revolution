@@ -238,7 +238,7 @@ class xPDOTest extends xPDOTestCase {
         $columns = $this->xpdo->getSelectColumns('Person','Person','test_');
         $this->assertEquals($columns,$correct);
 
-        $includeColumns = array('id','last_name','dob');
+        $includeColumns = array('dob','last_name','id');
         $correct = implode(', ', array_map(array($this->xpdo, 'escape'), $includeColumns));
         $columns = $this->xpdo->getSelectColumns('Person','','',$includeColumns);
         $this->assertEquals($columns,$correct);
@@ -295,7 +295,7 @@ class xPDOTest extends xPDOTestCase {
      */
     public function providerGetTableMeta() {
         return array(
-            array('Person',null),
+            array('Person',array('engine' => 'MyISAM')),
         );
     }
 
@@ -528,6 +528,25 @@ class xPDOTest extends xPDOTestCase {
             array('Person', 1, array('BloodType' => array(), 'PersonPhone' => array())),
             array('Person', 0, array()),
             array('Person', 1000, array('BloodType' => array(), 'PersonPhone' => array('Phone' => array()))),
+        );
+    }
+
+    /**
+     * Test xPDO->parseBindings()
+     *
+     * @dataProvider providerParseBindings
+     * @param $sql
+     * @param $bindings
+     * @param $expected
+     */
+    public function testParseBindings($sql, $bindings, $expected) {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $this->assertEquals($expected, $this->xpdo->parseBindings($sql, $bindings));
+    }
+    public function providerParseBindings() {
+        return array(
+            array('SELECT * FROM a WHERE a.a=?', array("$1.00"), "SELECT * FROM a WHERE a.a='$1.00'"),
+            array('SELECT * FROM a WHERE a.a=:a', array(':a' => "$1.00"), "SELECT * FROM a WHERE a.a='$1.00'"),
         );
     }
 

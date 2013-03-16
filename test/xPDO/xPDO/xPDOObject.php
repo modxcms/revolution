@@ -141,7 +141,54 @@ class xPDOObjectTest extends xPDOTestCase {
         }
         parent::tearDown();
     }
-    
+
+    /**
+     * Test validating an object.
+     *
+     * @dataProvider providerValidate
+     * @param $class
+     * @param $data
+     * @param $options
+     * @param $expected
+     */
+    public function testValidate($class, $data, $options, $expected) {
+        try {
+            /** @var xPDOObject $object  */
+            $object = $this->xpdo->newObject($class);
+            $object->fromArray($data);
+            $validated = $object->validate($options);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertEquals($expected, $validated, "Expected validation failed: " . print_r($object->_validator->getMessages(), true));
+    }
+    public function providerValidate() {
+        return array(
+            array(
+                'Person',
+                array(
+                    'first_name' => 'My',
+                    'middle_name' => 'Name',
+                    'last_name' => 'Is',
+                ),
+                array(),
+                false
+            ),
+            array(
+                'Person',
+                array(
+                    'first_name' => 'My',
+                    'middle_name' => 'Name',
+                    'last_name' => 'Is',
+                    'dob' => '2012-01-01',
+                    'password' => 'foodisbeer'
+                ),
+                array(),
+                true
+            ),
+        );
+    }
+
     /**
      * Test saving an object.
      */
@@ -496,9 +543,10 @@ class xPDOObjectTest extends xPDOTestCase {
      */
     public function providerUpdateCollection() {
         return array(
-            array('Person', array('dob' => '2011-08-09'), null, array(2, array(array('dob' => '2011-08-09'), array('dob' => '2011-08-09')))),
-            array('Person', array('security_level' => 5), null, array(2, array(array('security_level' => 5), array('security_level' => 5)))),
+            array('Person', array('dob' => '2011-08-09'), array('dob:<' => '1951-01-01'), array(1, array())),
+            array('Person', array('security_level' => 5), array('security_level' => 3), array(1, array())),
             array('Person', array('date_of_birth' => '2011-09-01'), null, array(2, array(array('date_of_birth' => '2011-09-01'), array('date_of_birth' => '2011-09-01')))),
+            array('Person', array('date_of_birth' => null), array('security_level' => 3), array(1, array(array('date_of_birth' => null)))),
         );
     }
 

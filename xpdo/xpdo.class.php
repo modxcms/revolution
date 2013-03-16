@@ -119,6 +119,8 @@ class xPDO {
     const OPT_HYDRATE_FIELDS = 'hydrate_fields';
     const OPT_HYDRATE_ADHOC_FIELDS = 'hydrate_adhoc_fields';
     const OPT_HYDRATE_RELATED_OBJECTS = 'hydrate_related_objects';
+    const OPT_LOCKFILE_EXTENSION = 'lockfile_extension';
+    const OPT_USE_FLOCK = 'use_flock';
     /**
      * @deprecated
      * @see call()
@@ -309,6 +311,8 @@ class xPDO {
     public function __construct($dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
         try {
             $this->config = $this->initConfig($options);
+            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_FATAL, true));
+            $this->setLogTarget($this->getOption('log_target', null, XPDO_CLI_MODE ? 'ECHO' : 'HTML', true));
             if (!empty($dsn)) {
                 $this->addConnection($dsn, $username, $password, $this->config, $driverOptions);
             }
@@ -2506,11 +2510,11 @@ class xPDO {
     /**
      * Convert current microtime() result into seconds.
      *
+     * @deprecated Use microtime(true) directly; this was to emulate PHP 5 behavior in PHP 4.
      * @return float
      */
     public function getMicroTime() {
-       list($usec, $sec) = explode(' ', microtime());
-       return ((float)$usec + (float)$sec);
+       return microtime(true);
     }
 
     /**
@@ -2526,6 +2530,8 @@ class xPDO {
         $query= false;
         if ($this->loadClass($this->config['dbtype'] . '.xPDOQuery', '', false, true)) {
             $xpdoQueryClass= 'xPDOQuery_' . $this->config['dbtype'];
+            if (!class_exists($xpdoQueryClass, false))
+                include_once dirname(__FILE__) . '/om/' . $this->config['dbtype'] . '/xpdoquery.class.php';
             if ($query= new $xpdoQueryClass($this, $class, $criteria)) {
                 $query->cacheFlag= $cacheFlag;
             }
@@ -2631,7 +2637,7 @@ class xPDO {
                     } else {
                         $v= 'NULL';
                     }
-                    $bound[$pattern] = str_replace(array('$', '\\'), array('\$', '\\\\'), $v);
+                    $bound[$pattern] = str_replace(array('\\', '$'), array('\\\\', '\$'), $v);
                 } else {
                     $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
                     $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);
@@ -3017,8 +3023,21 @@ class xPDOConnection {
         return $connected;
     }
 
+    /**
+     * Get an option set for this xPDOConnection instance.
+     *
+     * @param string $key The option key to get a value for.
+     * @param array|null $options An optional array of options to consider.
+     * @param mixed $default A default value to use if the option is not found.
+     * @return mixed The option value.
+     */
     public function getOption($key, $options = null, $default = null) {
-        return $this->xpdo->getOption($key, array_merge($this->config, $options), $default);
+        if (is_array($options)) {
+            $options = array_merge($this->config, $options);
+        } else {
+            $options = $this->config;
+        }
+        return $this->xpdo->getOption($key, $options, $default);
     }
 }
 
