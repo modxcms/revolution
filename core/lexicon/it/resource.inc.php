@@ -156,3 +156,5 @@ $_lang['weblink_create_here'] = 'Crea Weblink qui';
 $_lang['weblink_help'] = 'L\'indirizzo dell\'oggetto al quale vorresti riferirti con questo weblink. Se vuoi che punti a una Risorsa di MODX esistente, inserisci qui il suo ID.';
 $_lang['weblink_message'] = 'Un weblink è un riferimento ad un oggetto in internet. Potrebbe essere un documento in MODX, una pagina in un altro sito o un\'immagine o un altro tipo di file internet.<p>';
 $_lang['weblink_new'] = 'Nuovo Weblink';
+$_lang['weblink_response_code'] = 'Codice Risposta';
+$_lang['weblink_response_code_help'] = 'Il codice HTTP di risposta che dovrebbe essere inviato per il weblink.';

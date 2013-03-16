@@ -9,7 +9,7 @@ class modTemplateVarOutputRenderRichText extends modTemplateVarOutputRender {
         $value= $this->tv->parseInput($value);
         $w= !empty($params['w']) ? $params['w'] : '100%';
         $h= !empty($params['h']) ? $params['h'] : '400px';
-        $richtexteditor= $params['edt'] ? $params['edt'] : "";
+        $richtexteditor= $params['edt'] ? $params['edt'] : $this->modx->getOption('which_editor', null, '');
         $o= '<div class="MODX_RichTextWidget"><textarea id="' . $id . '" name="' . $id . '" style="width:' . $w . '; height:' . $h . ';">';
         $o .= htmlspecialchars($value);
         $o .= '</textarea></div>';

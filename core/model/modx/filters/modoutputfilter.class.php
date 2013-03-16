@@ -336,7 +336,11 @@ class modOutputFilter {
                                             $opened[] = $regs[0];
                                         }
                                     } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {
-                                        unset($opened[array_pop(array_keys($opened, $regs[1]))]);
+                                        $tmpArray = array_keys($opened, (string) $regs[1]);
+                                        $tmpVar = array_pop($tmpArray);
+                                        if ($tmpVar !== null) {
+                                            unset($opened[$tmpVar]);
+                                        }
                                     }
                                 }
                             }
@@ -354,13 +358,6 @@ class modOutputFilter {
                             $tag = str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $tag);
                             $tag = str_replace(":tag","",$tag);
                             $output = $tag;
-                            break;
-
-                        case 'math':
-                            /* Returns the result of an advanced calculation (expensive) */
-                            $filter= preg_replace("~([a-zA-Z\n\r\t\s])~", "", $m_val);
-                            $filter= str_replace('?', $output, $filter);
-                            $output= eval("return " . $filter . ";");
                             break;
 
                         case 'add':

@@ -647,11 +647,6 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
             return $this->failure($preventSave);
         }
 
-        $canSave = $this->beforeSave();
-        if ($canSave !== true) {
-            return $this->failure($canSave);
-        }
-
         /* save element */
         if ($this->object->save() == false) {
             $this->modx->error->checkValidation($this->object);
@@ -705,6 +700,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
                 'data' => $this->object->toArray(),
                 $this->primaryKeyField => 0,
                 $this->objectType => &$this->object,
+                'object' => &$this->object, // for backwards compatibility, do not use this key
             ));
             if (is_array($OnBeforeFormSave)) {
                 $preventSave = false;
@@ -730,6 +726,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
                 'mode' => modSystemEvent::MODE_NEW,
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object, // for backwards compatibility, do not use this key
             ));
         }
     }

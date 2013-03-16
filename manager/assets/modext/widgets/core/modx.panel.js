@@ -54,7 +54,7 @@ MODx.FormPanel = function(config) {
     });
     this.on('ready',this.onReady);
     if (this.config.useLoadingMask) {
-        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        this.mask = new Ext.LoadMask(this.getEl());
         this.mask.show();
     }
     if (this.fireEvent('setup',config)) {
@@ -158,7 +158,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         ctype = 'check';
                         break;
                 }
-                cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
+                if (cmp.xtype && cmp.xtype.indexOf('modx-combo') == 0) {
+                    ctype = 'select';
+                }
+                if (cmp.listeners[ctype] && cmp.listeners[ctype].fn) {
+                    cmp.listeners[ctype] = {fn:this.fieldChangeEvent.createSequence(cmp.listeners[ctype].fn,cmp.listeners[ctype].scope),scope:this}
+                } else {
+                    cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
+                }
             }
         }
     }

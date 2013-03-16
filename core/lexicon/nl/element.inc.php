@@ -5,13 +5,15 @@
  * @language nl
  * @package modx
  * @subpackage lexicon
- * 
- * @author MJ Hofland, veiliggesteld.nl
+ *
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element niet gevonden.';
 $_lang['element_err_ns'] = 'Element niet gespecificeerd.';
-$_lang['is_static'] = 'Is Static';
+$_lang['element_static_source_immutable'] = 'Het statisch gespecificeerde bestand als bron voor het element is niet schrijfbaar! Je kunt de inhoud van dit element niet bewerken in de manager.';
+$_lang['element_static_source_protected_invalid'] = 'Je kunt jouw element niet wijzen naar de MODX configuratie map; dit is een beveiligde, niet toegankelijke map.';
+$_lang['is_static'] = 'Extern Bestand';
 $_lang['is_static_msg'] = 'Geeft aan of de bron van dit element in een extern bestand is opgeslagen.';
 $_lang['quick_create'] = 'Quick Create';
 $_lang['quick_create_chunk'] = 'Quick Create Chunk';
@@ -26,7 +28,7 @@ $_lang['quick_update_template'] = 'Quick Update Template';
 $_lang['quick_update_tv'] = 'Quick Update TV';
 $_lang['properties_export'] = 'Exporteer Properties';
 $_lang['properties_import'] = 'Importeer Properties';
-$_lang['property_preprocess'] = 'Tags Uitvoeren';
+$_lang['property_preprocess'] = 'Tags uitvoeren in Property waardes';
 $_lang['property_preprocess_msg'] = 'Wanneer ingeschakeld zullen tags in de Properties uitgevoerd worden voordat het element ze gebruikt.';
 $_lang['static_file'] = 'Static Bestand';
 $_lang['static_file_msg'] = 'Een externe bestandslocatie waar de element bron is opgeslagen.';

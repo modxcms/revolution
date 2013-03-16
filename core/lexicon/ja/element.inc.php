@@ -4,6 +4,8 @@
  *
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-05-23
+ * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -11,8 +13,10 @@
 $_lang['element'] = 'エレメント';
 $_lang['element_err_nf'] = 'エレメントが見つかりません。';
 $_lang['element_err_ns'] = 'エレメントを特定できません。';
-$_lang['is_static'] = 'Is Static';
-$_lang['is_static_msg'] = 'Indicates if the element source is stored in an external file.';
+$_lang['element_static_source_immutable'] = 'エレメントのソースとして指定されたファイルは書き込み可能ではありません。管理画面ではこのエレメントを編集できません。';
+$_lang['element_static_source_protected_invalid'] = 'エレメントのソースとしてMODXの設定ディレクトリは指定できません。これは保護されたアクセス不可のディレクトリです。';
+$_lang['is_static'] = 'スタティックエレメント';
+$_lang['is_static_msg'] = 'エレメントのソースコードが外部のファイルに存在する場合にチェックします。';
 $_lang['quick_create'] = 'クイック作成';
 $_lang['quick_create_chunk'] = 'チャンクをクイック作成';
 $_lang['quick_create_plugin'] = 'プラグインをクイック作成';
@@ -26,12 +30,12 @@ $_lang['quick_update_template'] = 'テンプレートをクイック編集';
 $_lang['quick_update_tv'] = 'テンプレート変数をクイック編集';
 $_lang['properties_export'] = 'エクスポート';
 $_lang['properties_import'] = 'プロパティをインポート';
-$_lang['property_preprocess'] = 'Pre-process tags in Property Values';
-$_lang['property_preprocess_msg'] = 'If enabled, tags in Default Property/Property Set values will be processed before they are used for Element processing.';
-$_lang['static_file'] = 'Static File';
-$_lang['static_file_msg'] = 'An external file location where the element source is stored.';
-$_lang['static_source'] = 'Media Source for Static File';
-$_lang['static_source_msg'] = 'MODX will use this Media Source as a base path when looking for the Static Element file. Using "None" will assume you are specifying an absolute path.';
+$_lang['property_preprocess'] = 'タグを事前に処理する';
+$_lang['property_preprocess_msg'] = 'プロパティセットのデフォルト値に含まれるタグを、エレメントで使用する前に処理します。';
+$_lang['static_file'] = 'ファイル名';
+$_lang['static_file_msg'] = 'ソースコードの保存場所を指定します。';
+$_lang['static_source'] = 'メディアソース';
+$_lang['static_source_msg'] = 'エレメントとして読み込むスタティックファイルが含まれるディレクトリを指定します。ファイル名を絶対パスで指定する場合は「なし」に設定してください。';
 $_lang['tv_elements'] = 'オプション値を入力';
 $_lang['tv_default'] = '既定値';
 $_lang['tv_type'] = '入力種別';

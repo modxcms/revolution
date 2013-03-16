@@ -15,7 +15,7 @@ class modDashboardCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modDashboard';
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
-    public $elementType = 'dashboard';
+    public $objectType = 'dashboard';
 
     public function beforeSave() {
         /* validate name field */

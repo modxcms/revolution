@@ -506,19 +506,21 @@ class modParser {
     public function getElement($class, $name) {
         $realname = $this->realname($name);
         if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
-            /* @var modMediaSource $source */
-            $source = $this->modx->newObject('sources.modMediaSource');
-            if (!empty($this->modx->sourceCache[$class][$realname]['source'])) {
-                $source->fromArray($this->modx->sourceCache[$class][$realname]['source'],'',true,true);
-            } else {
-                $source->set('id',0);
-            }
             /** @var modElement $element */
             $element = $this->modx->newObject($class);
-            $element->set('source',0);
-            $element->addOne($source,'Source');
             $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
             $element->setPolicies($this->modx->sourceCache[$class][$realname]['policies']);
+
+            if (!empty($this->modx->sourceCache[$class][$realname]['source'])) {
+                if (!empty($this->modx->sourceCache[$class][$realname]['source']['class_key'])) {
+                    $sourceClassKey = $this->modx->sourceCache[$class][$realname]['source']['class_key'];
+                    $this->modx->loadClass('sources.modMediaSource');
+                    /* @var modMediaSource $source */
+                    $source = $this->modx->newObject($sourceClassKey);
+                    $source->fromArray($this->modx->sourceCache[$class][$realname]['source'],'',true,true);
+                    $element->addOne($source,'Source');
+                }
+            }
         } else {
             /** @var modElement $element */
             $element = $this->modx->getObjectGraph($class,array('Source' => array()),array('name' => $realname), true);

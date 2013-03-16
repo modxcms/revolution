@@ -227,9 +227,10 @@ class modX extends xPDO {
      * @var array An array of regex patterns regulary cleansed from content.
      */
     public $sanitizePatterns = array(
-        'scripts'   => '@<script[^>]*?>.*?</script>@si',
-        'entities'  => '@&#(\d+);@e',
-        'tags'      => '@\[\[(.[^\[\[]*?)\]\]@si',
+        'scripts'       => '@<script[^>]*?>.*?</script>@si',
+        'entities'      => '@&#(\d+);@e',
+        'tags1'          => '@\[\[(.*?)\]\]@si',
+        'tags2'          => '@(\[\[|\]\])@si',
     );
     /**
      * @var integer An integer representing the session state of modX.
@@ -309,19 +310,31 @@ class modX extends xPDO {
      * @param integer $nesting The maximum nesting level in which to dive
      * @return array The sanitized array.
      */
-    public static function sanitize(array &$target, array $patterns= array(), $depth= 3, $nesting= 10) {
-        while (list($key, $value)= each($target)) {
+    public static function sanitize(array &$target, array $patterns= array(), $depth= 99, $nesting= 10) {
+        foreach ($target as $key => &$value) {
             if (is_array($value) && $depth > 0) {
                 modX :: sanitize($value, $patterns, $depth-1);
             } elseif (is_string($value)) {
                 if (!empty($patterns)) {
-                    foreach ($patterns as $pattern) {
-                        $nesting = ((integer) $nesting ? (integer) $nesting : 10);
-                        $iteration = 1;
-                        while ($iteration <= $nesting && preg_match($pattern, $value)) {
-                            $value= preg_replace($pattern, '', $value);
-                            $iteration++;
+                    $iteration = 1;
+                    $nesting = ((integer) $nesting ? (integer) $nesting : 10);
+                    while ($iteration <= $nesting) {
+                        $matched = false;
+                        foreach ($patterns as $pattern) {
+                            $patternIterator = 1;
+                            $patternMatches = preg_match($pattern, $value);
+                            if ($patternMatches > 0) {
+                                $matched = true;
+                                while ($patternMatches > 0 && $patternIterator <= $nesting) {
+                                    $value= preg_replace($pattern, '', $value);
+                                    $patternMatches = preg_match($pattern, $value);
+                                }
+                            }
                         }
+                        if (!$matched) {
+                            break;
+                        }
+                        $iteration++;
                     }
                 }
                 if (get_magic_quotes_gpc()) {
@@ -344,7 +357,7 @@ class modX extends xPDO {
      */
     public function sanitizeString($str,$chars = array('/',"'",'"','(',')',';','>','<'),$allowedTags = '') {
         $str = str_replace($chars,'',strip_tags($str,$allowedTags));
-        return preg_replace("/[^A-Za-z0-9_\-\.\/]/",'',$str);
+        return preg_replace("/[^A-Za-z0-9_\-\.\/\\p{L}[\p{L} _.-]/u",'',$str);
     }
 
     /**
@@ -654,7 +667,7 @@ class modX extends xPDO {
      * @return modParser The modParser for this modX instance.
      */
     public function getParser() {
-        return $this->getService('parser', 'modParser');
+        return $this->getService('parser', $this->getOption('parser_class', null, 'modParser'), $this->getOption('parser_class_path', null, ''));
     }
 
     /**
@@ -711,7 +724,7 @@ class modX extends xPDO {
                 $context = $options['context'];
             }
             $resourceMap = !empty($context) && !empty($this->contexts[$context]->resourceMap) ? $this->contexts[$context]->resourceMap : $this->resourceMap;
-            
+
             if (isset ($resourceMap["{$id}"])) {
                 if ($children= $resourceMap["{$id}"]) {
                     foreach ($children as $child) {
@@ -1577,7 +1590,7 @@ class modX extends xPDO {
         $response = '';
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
-            if (!isset($this->error)) $this->request->loadErrorHandler();
+            if (!isset($this->error)) $this->getService('error', 'modError');
 
             if ($isClass) {
                 /* ensure processor file is only included once if run multiple times in a request */
@@ -1696,22 +1709,12 @@ class modX extends xPDO {
      */
     public function runSnippet($snippetName, array $params= array ()) {
         $output= '';
-        if (array_key_exists($snippetName, $this->sourceCache['modSnippet'])) {
-            $snippet = $this->newObject('modSnippet');
-            $snippet->fromArray($this->sourceCache['modSnippet'][$snippetName]['fields'], '', true, true);
-            $snippet->setPolicies($this->sourceCache['modSnippet'][$snippetName]['policies']);
-        } else {
-            $snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true);
-            if (!empty($snippet)) {
-                $this->sourceCache['modSnippet'][$snippetName] = array (
-                    'fields' => $snippet->toArray(),
-                    'policies' => $snippet->getPolicies()
-                );
+        if ($this->getParser()) {
+            $snippet= $this->parser->getElement('modSnippet', $snippetName);
+            if ($snippet instanceof modSnippet) {
+                $snippet->setCacheable(false);
+                $output= $snippet->process($params);
             }
-        }
-        if (!empty($snippet)) {
-            $snippet->setCacheable(false);
-            $output= $snippet->process($params);
         }
         return $output;
     }
@@ -1726,22 +1729,12 @@ class modX extends xPDO {
      */
     public function getChunk($chunkName, array $properties= array ()) {
         $output= '';
-        if (array_key_exists($chunkName, $this->sourceCache['modChunk'])) {
-            $chunk = $this->newObject('modChunk');
-            $chunk->fromArray($this->sourceCache['modChunk'][$chunkName]['fields'], '', true, true);
-            $chunk->setPolicies($this->sourceCache['modChunk'][$chunkName]['policies']);
-        } else {
-            $chunk= $this->getObject('modChunk', array ('name' => $chunkName), true);
-            if (!empty($chunk) || $chunk === '0') {
-                $this->sourceCache['modChunk'][$chunkName]= array (
-                    'fields' => $chunk->toArray(),
-                    'policies' => $chunk->getPolicies()
-                );
+        if ($this->getParser()) {
+            $chunk= $this->parser->getElement('modChunk', $chunkName);
+            if ($chunk instanceof modChunk) {
+                $chunk->setCacheable(false);
+                $output= $chunk->process($properties);
             }
-        }
-        if (!empty($chunk) || $chunk === '0') {
-            $chunk->setCacheable(false);
-            $output= $chunk->process($properties);
         }
         return $output;
     }
@@ -2216,6 +2209,9 @@ class modX extends xPDO {
             if (!$this->context->prepare((boolean) $regenerate, is_array($options) ? $options : array())) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
+                //This fixes error with multiple contexts
+                $this->contexts[$contextKey]=$this->context;
+
                 if ($this->context->checkPolicy('load')) {
                     $this->aliasMap= & $this->context->aliasMap;
                     $this->resourceMap= & $this->context->resourceMap;
@@ -2338,6 +2334,7 @@ class modX extends xPDO {
                 $cookiePath= $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
                 if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
                 $cookieSecure= (boolean) $this->getOption('session_cookie_secure', $options, false);
+                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, true);
                 $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', $options, 0);
                 $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
                 if ($gcMaxlifetime > 0) {
@@ -2345,7 +2342,7 @@ class modX extends xPDO {
                 }
                 $site_sessionname= $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
-                session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
+                session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
                 session_start();
                 $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
                 $this->getUser($contextKey);
@@ -2356,7 +2353,7 @@ class modX extends xPDO {
                         if ($sessionCookieLifetime) {
                             $cookieExpiration= time() + $sessionCookieLifetime;
                         }
-                        setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure);
+                        setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
                     }
                 }
             } else {

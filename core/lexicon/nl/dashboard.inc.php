@@ -5,8 +5,8 @@
  * @language nl
  * @package modx
  * @subpackage lexicon
- * 
- * @author MJ Hofland, veiliggesteld.nl
+ *
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['active_users_none'] = 'Er zijn geen actieve gebruikers.';
 $_lang['add_user'] = 'Nieuwe Gebruiker';
@@ -33,6 +33,6 @@ $_lang['welcome_messages'] = 'Er zijn <strong>%d</strong> berichten in je inbox,
 $_lang['welcome_title'] = 'Welkom bij de MODX Content Manager';
 $_lang['yourinfo_message'] = 'Deze sectie laat informatie over jou zien:';
 $_lang['yourinfo_previous_login'] = 'Je laatste login:';
-$_lang['yourinfo_title'] = 'jouw info';
+$_lang['yourinfo_title'] = 'Jouw info';
 $_lang['yourinfo_total_logins'] = 'Totaal aantal logins:';
 $_lang['yourinfo_username'] = 'Je bent ingelogd als:';

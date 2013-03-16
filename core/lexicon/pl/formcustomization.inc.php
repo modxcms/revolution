@@ -1,11 +1,11 @@
 <?php
 /**
-* Form Customization Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Form Customization Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['action'] = 'Action';
 $_lang['action'] = 'Action';
@@ -127,14 +127,14 @@ $_lang['profile_msg'] = 'Here you can specify Sets for this Profile. A Set is a 
 #$_lang['profile_new'] = 'New Form Customizaton Profile';
 $_lang['profile_new'] = 'New Form Customizaton Profile';
 
-#$_lang['profile_remove'] = 'Remove Profile';
-$_lang['profile_remove'] = 'Remove Profile';
+#$_lang['profile_remove'] = 'Delete Profile';
+$_lang['profile_remove'] = 'Delete Profile';
 
 #$_lang['profile_remove_confirm'] = 'Are you sure you want to completely remove this Profile? This is irreversible.';
 $_lang['profile_remove_confirm'] = 'Are you sure you want to completely remove this Profile? This is irreversible.';
 
-#$_lang['profile_remove_multiple'] = 'Remove Multiple Profiles';
-$_lang['profile_remove_multiple'] = 'Remove Multiple Profiles';
+#$_lang['profile_remove_multiple'] = 'Delete Multiple Profiles';
+$_lang['profile_remove_multiple'] = 'Delete Multiple Profiles';
 
 #$_lang['profile_remove_multiple_confirm'] = 'Are you sure you want to completely remove these Profiles? This is irreversible.';
 $_lang['profile_remove_multiple_confirm'] = 'Are you sure you want to completely remove these Profiles? This is irreversible.';
@@ -156,6 +156,12 @@ $_lang['rank'] = 'Rank';
 
 #$_lang['rank_desc'] = 'The order the Rule is executed in. A lower number means that it will be executed earlier.';
 $_lang['rank_desc'] = 'The order the Rule is executed in. A lower number means that it will be executed earlier.';
+
+#$_lang['region'] = 'Region';
+$_lang['region'] = 'Region';
+
+#$_lang['regions'] = 'Regions';
+$_lang['regions'] = 'Regions';
 
 #$_lang['rule'] = 'Rule';
 $_lang['rule'] = 'Rule';
@@ -187,14 +193,14 @@ $_lang['rule_err_remove'] = 'An error occurred while trying to remove the rule.'
 #$_lang['rule_err_save'] = 'An error occurred while trying to save the rule.';
 $_lang['rule_err_save'] = 'An error occurred while trying to save the rule.';
 
-#$_lang['rule_remove'] = 'Remove Rule';
-$_lang['rule_remove'] = 'Remove Rule';
+#$_lang['rule_remove'] = 'Delete Rule';
+$_lang['rule_remove'] = 'Delete Rule';
 
 #$_lang['rule_remove_confirm'] = 'Are you sure you want to remove this Rule?';
 $_lang['rule_remove_confirm'] = 'Are you sure you want to remove this Rule?';
 
-#$_lang['rule_remove_multiple'] = 'Remove Multiple Rules';
-$_lang['rule_remove_multiple'] = 'Remove Multiple Rules';
+#$_lang['rule_remove_multiple'] = 'Delete Multiple Rules';
+$_lang['rule_remove_multiple'] = 'Delete Multiple Rules';
 
 #$_lang['rule_remove_multiple_confirm'] = 'Are you sure you want to remove these Rules? This is irreversible.';
 $_lang['rule_remove_multiple_confirm'] = 'Are you sure you want to remove these Rules? This is irreversible.';
@@ -253,14 +259,14 @@ $_lang['set_msg'] = 'Here you can edit what fields, tabs and Template Variables 
 #$_lang['set_new'] = 'Create New Set';
 $_lang['set_new'] = 'Create New Set';
 
-#$_lang['set_remove'] = 'Remove Set';
-$_lang['set_remove'] = 'Remove Set';
+#$_lang['set_remove'] = 'Delete Set';
+$_lang['set_remove'] = 'Delete Set';
 
 #$_lang['set_remove_confirm'] = 'Are you sure you want to permanently remove this set? This is irreversable.';
 $_lang['set_remove_confirm'] = 'Are you sure you want to permanently remove this set? This is irreversable.';
 
-#$_lang['set_remove_multiple'] = 'Remove Multiple Sets';
-$_lang['set_remove_multiple'] = 'Remove Multiple Sets';
+#$_lang['set_remove_multiple'] = 'Delete Multiple Sets';
+$_lang['set_remove_multiple'] = 'Delete Multiple Sets';
 
 #$_lang['set_remove_multiple_confirm'] = 'Are you sure you want to permanently remove these sets? This is irreversable.';
 $_lang['set_remove_multiple_confirm'] = 'Are you sure you want to permanently remove these sets? This is irreversable.';
@@ -268,14 +274,14 @@ $_lang['set_remove_multiple_confirm'] = 'Are you sure you want to permanently re
 #$_lang['set_tab_err_ae'] = 'A tab already exists with that ID. Please specify another.';
 $_lang['set_tab_err_ae'] = 'A tab already exists with that ID. Please specify another.';
 
-#$_lang['set_tabs_msg'] = 'Here you adjust the tabs for this page, including their visibility and title. Just double-click on a row to edit its value. Leave a field empty to use the default setting.';
-$_lang['set_tabs_msg'] = 'Here you adjust the tabs for this page, including their visibility and title. Just double-click on a row to edit its value. Leave a field empty to use the default setting.';
+#$_lang['set_tabs_msg'] = 'Here you adjust the tabs and regions for this page, including their visibility and title. Just double-click on a row to edit its value. Leave a field empty to use the default setting.';
+$_lang['set_tabs_msg'] = 'Here you adjust the tabs and regions for this page, including their visibility and title. Just double-click on a row to edit its value. Leave a field empty to use the default setting.';
 
 #$_lang['set_template_desc'] = 'Choosing a Template will limit the rules in the Set from executing unless the Resource has the specified Template.';
 $_lang['set_template_desc'] = 'Choosing a Template will limit the rules in the Set from executing unless the Resource has the specified Template.';
 
-#$_lang['set_tvs_msg'] = 'Here you can set visibility, labels, default values and the tabs they reside in by double-clicking on the row in the grid. Note: If you move a TV to another tab, you can adjust the order of the TV in the "Tab Rank" field. Leave a field empty to use the default setting.';
-$_lang['set_tvs_msg'] = 'Here you can set visibility, labels, default values and the tabs they reside in by double-clicking on the row in the grid. Note: If you move a TV to another tab, you can adjust the order of the TV in the "Tab Rank" field. Leave a field empty to use the default setting.';
+#$_lang['set_tvs_msg'] = 'Here you can set visibility, labels, default values and the tabs they reside in by double-clicking on the row in the grid. Note: If you move a TV to another Region, you can adjust the order of the TV in the "Region Rank" field. Leave a field empty to use the default setting.';
+$_lang['set_tvs_msg'] = 'Here you can set visibility, labels, default values and the tabs they reside in by double-clicking on the row in the grid. Note: If you move a TV to another Region, you can adjust the order of the TV in the "Region Rank" field. Leave a field empty to use the default setting.';
 
 #$_lang['sets'] = 'Form Customization Sets';
 $_lang['sets'] = 'Form Customization Sets';
@@ -295,20 +301,20 @@ $_lang['tab_id'] = 'ID';
 #$_lang['tab_name'] = 'Tab Name';
 $_lang['tab_name'] = 'Tab Name';
 
-#$_lang['tab_title'] = 'Tab Title';
-$_lang['tab_title'] = 'Tab Title';
+#$_lang['tab_title'] = 'Title';
+$_lang['tab_title'] = 'Title';
 
 #$_lang['tab_new'] = 'New Tab';
 $_lang['tab_new'] = 'New Tab';
 
-#$_lang['tab_rank'] = 'Tab Rank';
-$_lang['tab_rank'] = 'Tab Rank';
+#$_lang['tab_rank'] = 'Region Rank';
+$_lang['tab_rank'] = 'Region Rank';
 
-#$_lang['tab_remove'] = 'Remove Tab';
-$_lang['tab_remove'] = 'Remove Tab';
+#$_lang['tab_remove'] = 'Delete Tab';
+$_lang['tab_remove'] = 'Delete Tab';
 
-#$_lang['tab_remove_confirm'] = 'Are you sure you want to remove this tab?';
-$_lang['tab_remove_confirm'] = 'Are you sure you want to remove this tab?';
+#$_lang['tab_remove_confirm'] = 'Are you sure you want to delete this tab?';
+$_lang['tab_remove_confirm'] = 'Are you sure you want to delete this tab?';
 
 #$_lang['tab_visible'] = 'Tab Visible';
 $_lang['tab_visible'] = 'Tab Visible';

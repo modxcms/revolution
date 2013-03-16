@@ -105,9 +105,9 @@ class modResourceGroup extends modAccessibleSimpleObject {
      * @return boolean
      */
     public function hasAccess($user = null,$context = '') {
-        $context = !empty($context) ? $context : $this->xpdo->context;
         /** @var modUser $user */
         $user = !empty($user) ? $user : $this->xpdo->user;
+        if (is_object($context)) $context = $context->get('key');
         $resourceGroups = $user->getResourceGroups($context);
         $hasAccess = false;
         if (!empty($resourceGroups)) {

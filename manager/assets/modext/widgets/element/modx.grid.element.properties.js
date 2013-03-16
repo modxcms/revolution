@@ -171,7 +171,7 @@ MODx.grid.ElementProperties = function(config) {
     this.on('afterRemoveRow', this.propertyChanged, this);
     this.on('celldblclick',this.onDirty,this);
     this.on('render',function() {
-        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        this.mask = new Ext.LoadMask(this.getEl());
     },this);
     
     if (this.config.lockProperties) {
@@ -234,7 +234,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         }
         try {
             if (!this.mask) {
-                this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+                this.mask = new Ext.LoadMask(this.getEl());
             }
             if (this.mask) { this.mask.show(); }
         } catch (e) { }
@@ -861,12 +861,12 @@ MODx.window.UpdateElementProperty = function(config) {
                     ,fieldLabel: _('area')
                     ,description: MODx.expandHelp ? '' : _('property_area_desc')
                     ,name: 'area'
-                    ,id: 'modx-cep-area'
+                    ,id: 'modx-uep-area'
                     ,anchor: '100%'
                     ,allowBlank: true
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-cep-area'
+                    ,forId: 'modx-uep-area'
                     ,html: _('property_area_desc')
                     ,cls: 'desc-under'
                 }]

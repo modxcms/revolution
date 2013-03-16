@@ -45,6 +45,8 @@ foreach ($map as $widgetName) {
             $placement->set('dashboard',$dashboard->get('id'));
             $placement->set('rank',$idx);
             $success = $placement->save();
+        } else {
+            $success = true;
         }
         $idx++;
     }

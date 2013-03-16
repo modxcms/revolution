@@ -1,4 +1,11 @@
 <?php
+/**
+ * Welcome Russian lexicon topic
+ *
+ * @language ru
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['modx_news'] = 'Новости MODX ';
 $_lang['security_notices'] = 'Уведомления о безопасности';
 $_lang['welcome_messages'] = 'Всего сообщений в вашем почтовом ящике<strong>%d</strong>, из них не прочитано <strong>%s</strong>.';

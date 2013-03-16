@@ -216,7 +216,12 @@ abstract class ResourceManagerController extends modManagerController {
      * @return modContext
      */
     public function setContext() {
-        $this->ctx = !empty($this->scriptProperties['context_key']) ? $this->scriptProperties['context_key'] : 'web';
+        if(!empty($this->scriptProperties['context_key'])) {
+                $this->ctx = $this->scriptProperties['context_key'];
+        } else {
+                $this->ctx = !empty($this->resource) ? $this->resource->get('context_key') : $this->modx->getOption('default_context');
+        }
+
         $this->setPlaceholder('_ctx',$this->ctx);
         $this->context = $this->modx->getContext($this->ctx);
         return $this->context;
@@ -419,11 +424,11 @@ abstract class ResourceManagerController extends modManagerController {
                 $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
                 $this->reg = $modx->registry->resource_reload;
                 if($this->reg->connect()) {
-                    $topic = '/resourcereload/' . $scriptProperties['reload'] . '/';
+                    $topic = '/resourcereload/' . $scriptProperties['reload'];
                     $this->reg->subscribe($topic);
-                    $reloadData = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
-                    if(is_array($reloadData) && is_string(reset($reloadData))) {
-                        $reloadData = @unserialize(reset($reloadData));
+                    $msgs = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
+                    if(is_array($msgs)) {
+                        $reloadData = reset($msgs);
                     }
                     if(!is_array($reloadData)) {
                         $reloadData = array();

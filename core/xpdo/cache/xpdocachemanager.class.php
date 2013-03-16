@@ -230,7 +230,12 @@ class xPDOCacheManager {
                 $attempts = (integer) $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1);
                 $attemptDelay = (integer) $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000);
                 while (!$locked && ($attempts === 0 || $attempt <= $attempts)) {
-                    $locked = flock($file, LOCK_EX | LOCK_NB);
+                    if ($this->getOption('use_flock', $options, true)) {
+                        $locked = flock($file, LOCK_EX | LOCK_NB);
+                    } else {
+                        $lockFile = $this->lockFile($filename, $options);
+                        $locked = $lockFile != false;
+                    }
                     if (!$locked && $attemptDelay > 0 && ($attempts === 0 || $attempt < $attempts)) {
                         usleep($attemptDelay);
                     }
@@ -240,12 +245,70 @@ class xPDOCacheManager {
                     fseek($file, 0);
                     ftruncate($file, 0);
                     $written= fwrite($file, $content);
-                    flock($file, LOCK_UN);
+                    if ($this->getOption('use_flock', $options, true)) {
+                        flock($file, LOCK_UN);
+                    } else {
+                        $this->unlockFile($filename, $options);
+                    }
                 }
             }
             @fclose($file);
         }
         return ($written !== false);
+    }
+
+    /**
+     * Add an exclusive lock to a file for atomic write operations in multi-threaded environments.
+     *
+     * xPDO::OPT_USE_FLOCK must be set to false (or 0) or xPDO will assume flock is reliable.
+     *
+     * @param string $file The name of the file to lock.
+     * @param array $options An array of options for the process.
+     * @return boolean True only if the current process obtained an exclusive lock for writing.
+     */
+    public function lockFile($file, array $options = array()) {
+        $locked = false;
+        $lockDir = $this->getOption('lock_dir', $options, $this->getCachePath() . 'locks' . DIRECTORY_SEPARATOR);
+        if ($this->writeTree($lockDir, $options)) {
+            $lockFile = $this->lockFileName($file, $options);
+            if (!file_exists($lockFile)) {
+                $myPID = (XPDO_CLI_MODE || !isset($_SERVER['SERVER_ADDR']) ? gethostname() : $_SERVER['SERVER_ADDR']) . '.' . getmypid();
+                $myPID .= mt_rand();
+                $tmpLockFile = "{$lockFile}.{$myPID}";
+                if (file_put_contents($tmpLockFile, $myPID)) {
+                    if (link($tmpLockFile, $lockFile)) {
+                        $locked = true;
+                    }
+                    @unlink($tmpLockFile);
+                }
+            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "The lock_dir at {$lockDir} is not writable and could not be created");
+        }
+        if (!$locked) $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Attempt to lock file {$file} failed");
+        return $locked;
+    }
+
+    /**
+     * Release an exclusive lock on a file created by lockFile().
+     *
+     * @param string $file The name of the file to unlock.
+     * @param array $options An array of options for the process.
+     */
+    public function unlockFile($file, array $options = array()) {
+        @unlink($this->lockFileName($file, $options));
+    }
+
+    /**
+     * Get an absolute path to a lock file for a specified file path.
+     *
+     * @param string $file The absolute path to get the lock filename for.
+     * @param array $options An array of options for the process.
+     * @return string The absolute path for the lock file
+     */
+    protected function lockFileName($file, array $options = array()) {
+        $lockDir = $this->getOption('lock_dir', $options, $this->getCachePath() . 'locks' . DIRECTORY_SEPARATOR);
+        return $lockDir . preg_replace('/\W/', '_', $file) . $this->getOption(xPDO::OPT_LOCKFILE_EXTENSION, $options, '.lock');
     }
 
     /**
@@ -437,7 +500,7 @@ class xPDOCacheManager {
                         if ($file != '.' && $file != '..') { /* Ignore . and .. */
                             $path= $dirname . $file;
                             if (is_dir($path)) {
-                                $suboptions = $this->getOption('deleteTop', $options, false) ? $options : array_merge($options, array('deleteTop' => false));
+                                $suboptions = array_merge($options, array('deleteTop' => !$this->getOption('skipDirs', $options, false)));
                                 if ($subresult= $this->deleteTree($path, $suboptions)) {
                                     $result= array_merge($result, $subresult);
                                 }
@@ -454,7 +517,6 @@ class xPDOCacheManager {
                     }
                     closedir($handle);
                 }
-                $options['deleteTop']= $this->getOption('skipDirs', $options, false) ? false : $this->getOption('deleteTop', $options, false);
                 if ($this->getOption('deleteTop', $options, false)) {
                     if (@ rmdir($dirname)) {
                         array_push($result, $dirname);

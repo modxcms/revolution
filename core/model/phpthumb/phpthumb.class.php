@@ -1113,7 +1113,7 @@ class phpthumb {
 			$which_convert = $this->ImageMagickWhichConvert();
 			$IMversion     = $this->ImageMagickVersion();
 
-			if ($which_convert && ($which_convert{0} == '/') && @file_exists($which_convert)) {
+			if ($which_convert && ($which_convert{0} == '/') && (function_exists('stream_resolve_include_path') ? @stream_resolve_include_path($which_convert) : @file_exists($which_convert))) {
 
 				// `which convert` *should* return the path if "convert" exist, or nothing if it doesn't
 				// other things *may* get returned, like "sh: convert: not found" or "no convert in /usr/local/bin /usr/sbin /usr/bin /usr/ccs/bin"

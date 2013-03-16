@@ -134,7 +134,16 @@ class xPDOObjectVehicle extends xPDOVehicle {
             elseif (isset ($vOptions['key_expr']) && isset ($vOptions['key_format'])) {
                 //TODO: implement ability to generate new keys
             } else {
-                $criteria = $vOptions[xPDOTransport::NATIVE_KEY];
+                $pk = $object->getPK();
+                $nativeKey = $vOptions[xPDOTransport::NATIVE_KEY];
+                if (is_array($pk) && is_array($nativeKey)) {
+                    $criteria = array_combine($pk, $nativeKey);
+                } elseif (is_string($pk) && is_scalar($nativeKey)) {
+                    $criteria = array($pk => $nativeKey);
+                } else {
+                    $criteria = $nativeKey;
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'The native key provided in the vehicle does not match the primary key field(s) for the object: ' . print_r($nativeKey, true));
+                }
             }
             if (!empty ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
                 $preExistingMode = intval($vOptions[xPDOTransport::PREEXISTING_MODE]);
@@ -152,6 +161,17 @@ class xPDOObjectVehicle extends xPDOVehicle {
                             $vOptions[xPDOTransport::UNIQUE_KEY] => $uniqueKey
                         );
                     }
+                } else {
+                    $pk = $object->getPK();
+                    $nativeKey = $object->get($pk);
+                    if (is_array($pk) && is_array($nativeKey)) {
+                        $criteria = array_combine($pk, $nativeKey);
+                    } elseif (is_string($pk) && is_scalar($nativeKey)) {
+                        $criteria = array($pk => $nativeKey);
+                    } else {
+                        $criteria = $nativeKey;
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'The native key provided in the vehicle does not match the primary key field(s) for the object: ' . print_r($nativeKey, true));
+                    }
                 }
                 /** @var xPDOObject $obj */
                 if ($obj = $transport->xpdo->getObject($vClass, $criteria)) {
@@ -166,7 +186,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                         $obj->fromArray($object->toArray('', true), '', false, true);
                         $object = $obj;
                     } else {
-                        if (!empty($criteria)) {
+                        if (is_array($criteria)) {
                             $obj->fromArray($criteria, '', true);
                         }
                         $object = $obj;

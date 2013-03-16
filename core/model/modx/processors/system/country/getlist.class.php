@@ -31,6 +31,14 @@ class modCountryGetListProcessor extends modProcessor {
             include_once $this->modx->getOption('core_path').'lexicon/country/'.$this->modx->getOption('manager_language').'.inc.php';
         }
         asort($_country_lang);
+        $search = $this->getProperty('query','');
+        if (!empty($search)) {
+            foreach ($_country_lang as $key => $value) {
+                if (!stristr($value, $search)) {
+                    unset($_country_lang[$key]);
+                }
+            }
+        }
         return $_country_lang;
     }
 }

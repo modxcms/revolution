@@ -72,11 +72,6 @@ class modSystemClearCacheProcessor extends modProcessor {
     }
 
     public function getPartitions() {
-        $partitions = array();
-        if ($this->modx->getOption('cache_db', null, false)) {
-            $partitions['db'] = array();
-        }
-
         $contextKeys = $this->getProperty('contexts',array());
         $contextKeys = is_string($contextKeys) ? explode(',',$contextKeys) : $contextKeys;
         if (!empty($contextKeys)) {
@@ -89,31 +84,49 @@ class modSystemClearCacheProcessor extends modProcessor {
             }
         }
 
-        $publishing = (boolean)$this->getProperty('publishing',true);
-        if ($publishing) {
+        $partitions = array();
+
+        if ($this->getProperty('publishing', true)) {
             $partitions['auto_publish'] = array('contexts' => array_diff($contextKeys, array('mgr')));
         }
 
-        $partitions['mgr'] = array();
         $partitions['system_settings'] = array();
         $partitions['context_settings'] = array('contexts' => $contextKeys);
-        $elements = $this->getProperty('elements');
-        if ($elements === null || $elements) {
+
+        if ($this->modx->getOption('cache_db', null, false)) {
+            $partitions['db'] = array();
+        }
+
+        if ($this->getProperty('media_sources', false)) {
+            $partitions['media_sources'] = array();
+        }
+
+        if ($this->getProperty('lexicons', true)) {
+            $partitions['lexicon_topics'] = array();
+        }
+
+        if ($this->getProperty('elements', true)) {
             $partitions['scripts'] = array();
         }
 
+        $partitions['default'] = array();
+
         $partitions['resource'] = array('contexts' => array_diff($contextKeys, array('mgr')));
 
-        $lexicons = $this->getProperty('lexicons');
-        if ($lexicons === null || $lexicons) {
-            $partitions['lexicon_topics'] = array();
+        if ($this->getProperty('menu', false)) {
+            $partitions['menu'] = array();
+        };
+
+        if ($this->getProperty('action_map', false)) {
+            $partitions['action_map'] = array();
         }
+
         return $partitions;
     }
 
     public function clearByPaths() {
         $pathResults = array();
-        /* deprecated Ñ use a dedicated cache partition rather than specifying paths */
+        /* deprecated: use a dedicated cache partition rather than specifying paths */
         $paths = $this->getProperty('paths',false);
         if (!empty($paths)) {
             $paths = array_walk(explode(',',$paths), 'trim');

@@ -1,11 +1,11 @@
 <?php
 /**
-* Export Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Export Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['export_site_cacheable'] = 'Include non-cacheable files:';
 $_lang['export_site_cacheable'] = 'Include non-cacheable files:';

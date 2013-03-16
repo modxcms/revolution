@@ -55,12 +55,12 @@ $min_serveOptions['minApp']['maxFiles'] = (int)$modx->getOption('manager_js_cach
 $min_serveOptions['minApp']['allowDirs'][] = $min_documentRoot;
 $min_serveOptions['minifierOptions']['text/css']['virtualDirs'] = array();
 $min_symlinks = array();
-$hasVirtualManagerURL = empty($min_documentRoot) || strpos(MODX_MANAGER_PATH, $min_documentRoot) !== 0 || strpos(MODX_MANAGER_PATH, MODX_MANAGER_URL) === false || substr(MODX_MANAGER_PATH, 0, strpos(MODX_MANAGER_PATH, MODX_MANAGER_URL)) !== $min_documentRoot;
+$hasVirtualManagerURL = empty($min_documentRoot) || strpos(MODX_MANAGER_PATH, $min_documentRoot) !== 0 || strpos(MODX_MANAGER_PATH, MODX_MANAGER_URL) === false || substr(MODX_MANAGER_PATH, 0, strrpos(MODX_MANAGER_PATH, MODX_MANAGER_URL)) !== $min_documentRoot;
 if ($hasVirtualManagerURL) {
     $min_serveOptions['minApp']['allowDirs'][] = MODX_MANAGER_PATH;
     $min_serveOptions['minApp']['virtualDirs'][MODX_MANAGER_URL] = MODX_MANAGER_PATH;
 }
-$hasVirtualAssetsURL = empty($min_documentRoot) || strpos(MODX_ASSETS_PATH, $min_documentRoot) !== 0 || strpos(MODX_ASSETS_PATH, MODX_ASSETS_URL) === false || substr(MODX_ASSETS_PATH, 0, strpos(MODX_ASSETS_PATH, MODX_ASSETS_URL)) !== $min_documentRoot;
+$hasVirtualAssetsURL = empty($min_documentRoot) || strpos(MODX_ASSETS_PATH, $min_documentRoot) !== 0 || strpos(MODX_ASSETS_PATH, MODX_ASSETS_URL) === false || substr(MODX_ASSETS_PATH, 0, strrpos(MODX_ASSETS_PATH, MODX_ASSETS_URL)) !== $min_documentRoot;
 if ($hasVirtualAssetsURL) {
     $min_serveOptions['minApp']['allowDirs'][] = MODX_ASSETS_PATH;
     $min_serveOptions['minApp']['virtualDirs'][MODX_ASSETS_URL] = MODX_ASSETS_PATH;
@@ -71,6 +71,9 @@ if (!empty($min_serveOptions['minApp']['virtualDirs'])) {
 $min_uploaderHoursBehind = 0;
 $min_libPath = dirname(__FILE__) . '/lib';
 @ini_set('zlib.output_compression', (int)$modx->getOption('manager_js_zlib_output_compression',null,0));
+
+// MODX session no longer required
+@session_write_close();
 
 // setup include path
 @set_include_path($min_libPath . PATH_SEPARATOR . get_include_path());

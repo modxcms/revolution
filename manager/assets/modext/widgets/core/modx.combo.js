@@ -118,6 +118,8 @@ MODx.combo.User = function(config) {
         ,fields: ['username','id']
         ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/user.php'
+        ,typeAhead: true
+        ,editable: true
     });
     MODx.combo.User.superclass.constructor.call(this,config);
 };
@@ -523,8 +525,9 @@ MODx.combo.Country = function(config) {
         ,displayField: 'value'
         ,valueField: 'value'
         ,fields: ['value']
-        ,editable: false
+        ,editable: true
         ,value: 0
+        ,typeAhead: true
     });
     MODx.combo.Country.superclass.constructor.call(this,config);
 };

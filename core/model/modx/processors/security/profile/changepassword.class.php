@@ -30,9 +30,11 @@ class modProfileChangePasswordProcessor extends modProcessor {
 
         /* log manager action */
         $this->logManagerAction();
-
+        
         return $this->success($this->modx->lexicon('user_password_changed',array(
-            'password' => $this->getProperty('password_new'),
+            'password' => $this->getProperty('password_method_screen')
+                ? $this->getProperty('password_new')
+                : str_repeat('*', rand((integer)$this->modx->getOption('password_min_length',null,8), strlen($this->getProperty('password_new')) * 2)),
         )));
     }
 

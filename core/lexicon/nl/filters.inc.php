@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author MJ Hofland, veiliggesteld.nl
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['ago'] = '[[+time]] terug';
 $_lang['ago_day'] = '[[+time]] dag';

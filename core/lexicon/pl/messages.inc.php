@@ -71,8 +71,8 @@ $_lang['user'] = 'User';
 $_lang['usergroup'] = 'User Group';
 
 
-#$/^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/glang['message_err_not_found'/^\_s\{2,}/\r/g = 'Message not found.';
-$/^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/g^\_s\{2,}/\r/glang['message_err_not_found'/^\_s\{2,}/\r/g = 'Message not found.';
+#$_lang['message_err_not_found'] = 'Message not found.';
+$_lang['message_err_not_found'] = 'Message not found.';
 
 #$_lang['message_err_not_specified_subject'] = 'Subject not specified!';
 $_lang['message_err_not_specified_subject'] = 'Subject not specified!';

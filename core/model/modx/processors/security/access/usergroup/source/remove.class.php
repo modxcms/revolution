@@ -11,6 +11,6 @@ class modSecurityAccessUserGroupSourceRemoveProcessor extends modObjectRemovePro
     public $classKey = 'sources.modAccessMediaSource';
     public $languageTopics = array('source','access','user');
     public $permission = 'access_permissions';
-    public $elementType = 'access_source';
+    public $objectType = 'access_source';
 }
 return 'modSecurityAccessUserGroupSourceRemoveProcessor';

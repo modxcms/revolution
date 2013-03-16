@@ -113,9 +113,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $locked = $this->addLock();
         if ($locked !== true) {
             if ($this->lockedUser) {
-                return $this->failure($this->modx->lexicon('resource_locked_by', array('id' => $this->object->get('id'), 'user' => $this->lockedUser->get('username'))));
+                return $this->modx->lexicon('resource_locked_by', array('id' => $this->object->get('id'), 'user' => $this->lockedUser->get('username')));
             } else {
-                return $this->failure($this->modx->lexicon('access_denied'));
+                return $this->modx->lexicon('access_denied');
             }
         }
 
@@ -123,7 +123,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $properties = $this->getProperties();
         if (isset($properties['ta'])) $this->setProperty('content',$properties['ta']);
 
-        $this->workingContext = $this->modx->getContext($this->getProperty('context_key'));
+        $this->workingContext = $this->modx->getContext($this->getProperty('context_key', $this->object->get('context_key') ? $this->object->get('context_key') : 'web'));
 
         $this->trimPageTitle();
         $this->handleParent();
@@ -134,7 +134,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->setUnPublishDate();
         $this->checkPublishedOn();
         $this->checkPublishingPermissions();
-        $this->checkForUnPublishOnSiteStart();
+        $result = $this->checkForUnPublishOnSiteStart();
+        if ($result !== true) {
+            return $result;
+        }
         $this->checkDeletedStatus();
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
@@ -415,11 +418,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $publishDate = $this->getProperty('pub_date');
         $unPublishDate = $this->getProperty('unpub_date');
         if ($this->isSiteStart && ($published !== null && empty($published))) {
-            $this->addFieldError('published',$this->modx->lexicon('resource_err_unpublish_sitestart'));
-            $passed = false;
+            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart');
         } else if ($this->isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
-            $this->addFieldError('published',$this->modx->lexicon('resource_err_unpublish_sitestart_dates'));
-            $passed = false;
+            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
         }
         return $passed;
     }
@@ -505,6 +506,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             $tvs = $this->object->getTemplateVars();
             /** @var modTemplateVar $tv */
             foreach ($tvs as $tv) {
+                if (!$tv->checkResourceGroupAccess()) {
+                    continue;
+                }
+
                 $tvKey = 'tv'.$tv->get('id');
                 $value = $this->getProperty($tvKey,null);
                 /* set value of TV */
@@ -541,6 +546,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                         if (is_array($value)) {
                             $featureInsert = array();
                             while (list($featureValue, $featureItem) = each($value)) {
+                                if(empty($featureItem)) { continue; }
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
                             $value = implode('||',$featureInsert);

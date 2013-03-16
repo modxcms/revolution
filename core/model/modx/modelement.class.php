@@ -857,7 +857,7 @@ class modElement extends modAccessibleSimpleObject {
         $sourceFile = $this->getSourceFile();
         if ($sourceFile) {
             if (file_exists($sourceFile)) {
-                $isMutable = is_writable($sourceFile);
+                $isMutable = is_writable($sourceFile) && !is_dir($sourceFile);
             } else {
                 $sourceDir = dirname($sourceFile);
                 $i = 100;

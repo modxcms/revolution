@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['database_charset'] = 'Database karakterset';
 $_lang['database_name'] = 'Database naam';

@@ -1,11 +1,11 @@
 <?php
 /**
-* Action Polish lexicon topic
-*
-* @language pl
-* @package modx
-* @subpackage lexicon
-*/
+ * Action Polish lexicon topic
+ *
+ * @language pl
+ * @package modx
+ * @subpackage lexicon
+ */
 
 #$_lang['action'] = 'Action';
 $_lang['action'] = 'Action';
@@ -49,8 +49,8 @@ $_lang['action_parent_err_ns'] = 'Parent Action not specified!';
 #$_lang['action_place_here'] = 'Place Action Here';
 $_lang['action_place_here'] = 'Place Action Here';
 
-#$_lang['action_remove'] = 'Remove Action';
-$_lang['action_remove'] = 'Remove Action';
+#$_lang['action_remove'] = 'Delete Action';
+$_lang['action_remove'] = 'Delete Action';
 
 #$_lang['action_update'] = 'Update Action';
 $_lang['action_update'] = 'Update Action';
@@ -60,6 +60,9 @@ $_lang['actions'] = 'Actions';
 
 #$_lang['controller'] = 'Controller';
 $_lang['controller'] = 'Controller';
+
+#$_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
+$_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
 
 #$_lang['controller_err_nf'] = 'Controller file not found!';
 $_lang['controller_err_nf'] = 'Controller file not found!';

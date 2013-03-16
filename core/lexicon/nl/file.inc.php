@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['directory'] = 'Map';
 $_lang['file_confirm_remove'] = 'Weet je zeker dat je dit bestand wilt verwijderen? Dit kan uw website potentieel breken!';
@@ -65,6 +65,8 @@ $_lang['file_folder_remove_confirm'] = 'Weet je zeker dat je deze map wilt verwi
 $_lang['file_last_accessed'] = 'Laatste Toegang';
 $_lang['file_last_modified'] = 'Laatst Bewerkt';
 $_lang['file_name'] = 'Bestandsnaam';
+$_lang['file_quick_create'] = 'Quick Create Bestand';
+$_lang['file_quick_update'] = 'Quick Update Bestand';
 $_lang['file_remove'] = 'Bestand Verwijderen';
 $_lang['file_remove_confirm'] = 'Weet je zeker dat je dit bestand geheel wilt verwijderen?';
 $_lang['file_saved'] = 'Bestand met succes bijgewerkt!';
@@ -102,8 +104,8 @@ $_lang['upf_progress_wait'] = 'Een moment geduld a.u.b...';
 $_lang['upf_queued'] = 'Zet in wachtrij voor upload.';
 $_lang['upf_remove'] = 'Verwijder';
 $_lang['upf_remove_desc'] = 'Verwijder bestand uit wachtrij.';
-$_lang['upf_reset'] = 'Reset';
-$_lang['upf_reset_desc'] = 'Reset wachtrij.';
+$_lang['upf_reset'] = 'Herstel';
+$_lang['upf_reset_desc'] = 'Herstel wachtrij.';
 $_lang['upf_state'] = 'Staat';
 $_lang['upf_success'] = 'OK.';
 $_lang['upf_upload'] = 'Upload';

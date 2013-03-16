@@ -68,7 +68,7 @@ class modPackageCheckForUpdatesProcessor extends modProcessor {
         }
 
         $list = array();
-        /** @var SimpleXMLObject $p */
+        /** @var SimpleXMLElement $package */
         foreach ($packages as $package) {
             $packageArray = array(
                 'id' => (string)$package->id,

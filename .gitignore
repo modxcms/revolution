@@ -26,8 +26,9 @@ modext.js
 .settings/
 nbproject/
 
-# ignore PHP files beginning with test
-test*.php
+# ignore php and txt files beginning with test in root directory
+/test*.php
+/test*.txt
 
 # ignore mac files
 .DS_Store

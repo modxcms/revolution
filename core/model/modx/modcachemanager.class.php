@@ -84,20 +84,7 @@ class modCacheManager extends xPDOCacheManager {
                 $results['config'] = array_merge($results['config'], $options);
 
                 /* generate the aliasMap and resourceMap */
-                $tblResource= $this->modx->getTableName('modResource');
-                $tblContextResource= $this->modx->getTableName('modContextResource');
-                $resourceFields= array('id','parent','uri');
-                $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
-                $bindings= array (
-                    ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-                    ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-                );
-                $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}, r.menuindex ORDER BY r.parent ASC, r.menuindex ASC";
-                $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
-                $collResources = null;
-                if ($criteria->stmt && $criteria->stmt->execute()) {
-                    $collResources= & $criteria->stmt;
-                }
+                $collResources = $obj->getResourceCacheMap();
                 $results['resourceMap']= array ();
                 $results['aliasMap']= array ();
                 if ($collResources) {
@@ -115,18 +102,7 @@ class modCacheManager extends xPDOCacheManager {
                 }
 
                 /* generate the webLinkMap */
-                $resourceFields= array('id','content');
-                $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
-                $bindings= array (
-                    ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-                    ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-                );
-                $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND r.class_key = 'modWebLink' AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}";
-                $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
-                $collWebLinks = null;
-                if ($criteria->stmt && $criteria->stmt->execute()) {
-                    $collWebLinks= & $criteria->stmt;
-                }
+                $collWebLinks = $obj->getWebLinkCacheMap();
                 $results['webLinkMap']= array();
                 if ($collWebLinks) {
                     while ($wl = $collWebLinks->fetch(PDO::FETCH_OBJ)) {
@@ -567,12 +543,12 @@ class modCacheManager extends xPDOCacheManager {
                 'context_settings' => array('contexts' => $contexts),
                 'db' => array(),
                 'media_sources' => array(),
+                'lexicon_topics' => array(),
                 'scripts' => array(),
                 'default' => array(),
                 'resource' => array('contexts' => array_diff($contexts, array('mgr'))),
                 'menu' => array(),
-                'action_map' => array(),
-                'lexicon_topics' => array()
+                'action_map' => array()
             );
         }
         $cleared = array();
@@ -629,17 +605,17 @@ class modCacheManager extends xPDOCacheManager {
         /* publish and unpublish resources using pub_date and unpub_date checks */
         $tblResource= $this->modx->getTableName('modResource');
         $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
-        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon=pub_date, pub_date=0 WHERE published = 0 AND pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
-        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon=0, pub_date=0, unpub_date=0 WHERE published = 1 AND unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
+        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon=pub_date, pub_date=0 WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
+        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon=0, pub_date=0, unpub_date=0 WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
 
         /* update publish time file */
         $timesArr= array ();
         $minpub= 0;
         $minunpub= 0;
-        $sql= "SELECT MIN(pub_date) FROM {$tblResource} WHERE pub_date > ?";
+        $sql= "SELECT MIN(pub_date) FROM {$tblResource} WHERE published = 0 AND pub_date > ?";
         $stmt= $this->modx->prepare($sql);
         if ($stmt) {
-            $stmt->bindValue(1, time());
+            $stmt->bindValue(1, 0);
             if ($stmt->execute()) {
                 foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
                     $minpub= $value[0];
@@ -655,10 +631,10 @@ class modCacheManager extends xPDOCacheManager {
         }
         if ($minpub) $timesArr[]= $minpub;
 
-        $sql= "SELECT MIN(unpub_date) FROM {$tblResource} WHERE unpub_date > ?";
+        $sql= "SELECT MIN(unpub_date) FROM {$tblResource} WHERE published = 1 AND unpub_date > ?";
         $stmt= $this->modx->prepare($sql);
         if ($stmt) {
-            $stmt->bindValue(1, time());
+            $stmt->bindValue(1, 0);
             if ($stmt->execute()) {
                 foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
                     $minunpub= $value[0];

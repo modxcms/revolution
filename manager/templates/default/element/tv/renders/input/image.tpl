@@ -14,7 +14,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,renderTo: 'tv-image-{$tv->id}'
         ,value: '{$tv->value|escape}'
-        ,width: 400
+        ,anchor: '100%'
         ,msgTarget: 'under'
     {literal}
     });
@@ -34,7 +34,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,value: '{$tv->value|escape}'
         ,relativeValue: '{$tv->value|escape}'
-        ,width: '97%'
+        ,width: '100%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
         {if $params.openTo},openTo: '{$params.openTo}'{/if}

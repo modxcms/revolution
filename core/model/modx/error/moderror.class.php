@@ -67,7 +67,13 @@ class modError {
      */
     function __construct(modX &$modx, $message = '') {
         $this->modx =& $modx;
-        $this->message = $message;
+        if (is_string($message)) {
+            $this->message = $message;
+        } elseif (is_array($message) && isset($message['message'])) {
+            $this->message = $message['message'];
+        } else {
+            $this->message = '';
+        }
         $this->errors = array ();
     }
 

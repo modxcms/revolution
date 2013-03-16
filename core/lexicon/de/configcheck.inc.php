@@ -12,6 +12,10 @@
  * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['configcheck_admin'] = 'Bitte kontaktieren Sie einen Systemadministrator und setzen Sie ihn über diese Nachricht in Kenntnis!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'Kontext-Einstellung allow_tags_in_post außerhalb von "mgr" aktiviert';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'Die Kontext-Einstellung allow_tags_in_post ist in Ihrer Installation außerhalb des mgr-Kontexts aktiviert. MODX empfiehlt, diese Einstellung zu deaktivieren, wenn Sie nicht ausdrücklich Benutzern erlauben müssen, MODX-Tags, numerische HTML-Entities (z.B. &amp;#174; für ®) oder HTML-Script-Tags mittels POST an eine Seite Ihrer Site zu übertragen. Dies sollte grundsätzlich deaktiviert sein, außer im mgr-Kontext.';  // an ein Formular in Ihrer Site???
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'Systemeinstellung allow_tags_in_post aktiviert';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'Die Systemeinstellung allow_tags_in_post in Ihrer Installation aktiviert. MODX empfiehlt, diese Einstellung zu deaktivieren, wenn Sie nicht ausdrücklich Benutzern erlauben müssen, MODX-Tags, numerische HTML-Entities (z.B. &amp;#174; für ®) oder HTML-Script-Tags mittels POST an eine Seite Ihrer Site zu übertragen. Es ist besser, dies mittels Kontext-Einstellungen für bestimmte Kontexte zu aktivieren.';  // an ein Formular in Ihrer Site???
 $_lang['configcheck_cache'] = 'Cache-Verzeichnis nicht beschreibbar';
 $_lang['configcheck_cache_msg'] = 'MODX kann nicht in das Cache-Verzeichnis schreiben. MODX wird trotzdem wie erwartet funktionieren, aber es findet kein Caching statt. Um dies zu beheben, sorgen Sie dafür, dass das Verzeichnis /_cache/ beschreibbar ist.';
 $_lang['configcheck_configinc'] = 'Config-Datei ist noch beschreibbar!';

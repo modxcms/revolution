@@ -165,7 +165,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+r.result.object.action+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
+                            location.href = '?a='+r.result.object.action+'&class_key='+ r.result.object.class_key+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -253,7 +253,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         if (MODx.config.tvs_below_content == 1) {
             var tvs = this.getTemplateVariablesPanel(config);
-            tvs.style = 'margin-top: 10px';
             its.push(tvs);
         }
         return its;
@@ -280,6 +279,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,template: config.record.template
             ,anchor: '100%'
             ,border: true
+            ,bodyStyle: 'display: none'
         };
     }
 
