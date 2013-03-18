@@ -52,7 +52,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a=resource/update&id='+r.object.id;
+                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -68,7 +68,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a=resource/update&id='+r.object.id;
+                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -81,12 +81,12 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    location.href = '?a=welcome';
+                    MODx.loadPage(MODx.action['welcome']);
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            location.href = '?a=welcome';
+            MODx.loadPage(MODx.action['welcome']);
         }
     }
     

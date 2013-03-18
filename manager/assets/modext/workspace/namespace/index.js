@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-namespaces' });
-});
-
 /**
  * @class MODx.page.Namespaces
  * @extends MODx.Component

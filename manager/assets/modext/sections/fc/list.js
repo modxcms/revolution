@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-	MODx.add('modx-page-form-customization');
-});
-
 MODx.page.FormCustomization = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{

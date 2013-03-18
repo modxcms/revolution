@@ -23,6 +23,10 @@ class SystemImportHtmlManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.tree.resource.simple.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.panel.import.html.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/system/import/html.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-import-html' });
+            });</script>");
     }
 
     /**

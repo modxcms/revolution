@@ -19,6 +19,10 @@ class SystemContentTypeManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.content.type.js');
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/content.type.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-content-type'});
+            });</script>");
     }
 
     /**

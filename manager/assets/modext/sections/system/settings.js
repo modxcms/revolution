@@ -1,6 +1,3 @@
-Ext.onReady(function() {
-    MODx.add('modx-page-system-settings');
-});
 /**
  * Loads the configuration page
  * 

@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-import-html' });
-});
-
 MODx.page.ImportHTML = function(config) {
     config = config || {};
     Ext.applyIf(config,{

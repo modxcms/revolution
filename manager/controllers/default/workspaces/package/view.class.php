@@ -24,6 +24,10 @@ class WorkspacesPackageViewManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package/package.versions.grid.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package/package.panel.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package/index.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-package' });
+            });</script>");
     }
 
     /**

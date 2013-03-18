@@ -48,6 +48,7 @@ Ext.extend(MODx,Ext.Component,{
             beforeClearCache: true
             ,beforeLogout: true
             ,beforeReleaseLocks: true
+            ,beforeLoadPage: true
             ,afterClearCache: true
             ,afterLogout: true
             ,afterReleaseLocks: true

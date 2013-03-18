@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.add('modx-page-workspace');
-});
-
 /**
  * Loads the MODx Workspace environment
  * 
