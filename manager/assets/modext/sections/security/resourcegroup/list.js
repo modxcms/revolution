@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-resource-groups' });
-});
-
 /**
  * Loads the groups and roles page
  * 

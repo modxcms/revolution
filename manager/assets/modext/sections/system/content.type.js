@@ -1,6 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-content-type'});
-});
 /**
  * Loads the content type management page
  * 

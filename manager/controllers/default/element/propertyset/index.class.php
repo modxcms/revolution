@@ -24,6 +24,10 @@ class ElementPropertySetIndexManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.property.set.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/propertyset/index.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-property-sets' });
+            });</script>");
     }
 
     /**

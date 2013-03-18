@@ -55,7 +55,11 @@ class WorkspacesManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/workspace/provider.grid.js');
         $this->addJavascript($mgrUrl.'assets/modext/workspace/workspace.panel.js');
         $this->addJavascript($mgrUrl.'assets/modext/util/lightbox.js');
-        $this->addHtml('<script type="text/javascript">MODx.defaultProvider = "'.$this->providerId.'";MODx.provider = "'.$this->providerId.'";MODx.providerName = "'.$this->providerName.'";MODx.curlEnabled = '.($this->curlEnabled ? 1 : 0).'; Ext.ux.Lightbox.register("a.lightbox");</script>');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.defaultProvider = '".$this->providerId."';MODx.provider = '".$this->providerId."';MODx.providerName = '".$this->providerName."';MODx.curlEnabled = ".(integer)$this->curlEnabled."; Ext.ux.Lightbox.register('a.lightbox');
+                MODx.add('modx-page-workspace');
+            });</script>");
         $this->addJavascript($mgrUrl.'assets/modext/workspace/index.js');
     }
 

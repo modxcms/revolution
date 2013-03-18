@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-	MODx.add('modx-page-resource-schedule');
-});
-
 /**
  * Loads the Site Schedule page
  * 

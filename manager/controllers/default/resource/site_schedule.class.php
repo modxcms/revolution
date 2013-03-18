@@ -22,6 +22,10 @@ class ResourceSiteScheduleManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.schedule.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/schedule.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.add('modx-page-resource-schedule');
+            });</script>");
     }
 
     /**

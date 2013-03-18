@@ -1,6 +1,3 @@
-Ext.onReady(function() {
-	MODx.load({ xtype: 'modx-page-help' });
-});
 /**
  * Loads the help page
  * 

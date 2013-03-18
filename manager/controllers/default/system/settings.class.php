@@ -22,6 +22,9 @@ class SystemSettingsManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $this->addHtml('<script type="text/javascript">
         // <[!CDATA[
+        Ext.onReady(function() {
+            MODx.add("modx-page-system-settings");
+        });
         MODx.onSiteSettingsRender = "'.$this->onSiteSettingsRender.'";
         // ]]>
         </script>');

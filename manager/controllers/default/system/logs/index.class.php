@@ -21,6 +21,10 @@ class SystemLogsIndexManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.manager.log.js');
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/logs.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-manager-log' });
+            });</script>");
     }
 
     /**
