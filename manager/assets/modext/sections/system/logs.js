@@ -1,6 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-manager-log' });
-});
 /**
  * Loads the manager log page
  * 

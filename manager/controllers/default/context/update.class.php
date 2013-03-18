@@ -47,12 +47,18 @@ class ContextUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addHtml('<script type="text/javascript">
-        // <![CDATA[
-        MODx.onContextFormRender = "'.$this->onContextFormRender.'";
-        MODx.ctx = "'.$this->contextKey.'";
-        // ]]>
-        </script>');
+        $this->addHtml("<script>
+            // <![CDATA[
+            MODx.onContextFormRender = '".$this->onContextFormRender."';
+            MODx.ctx = '".$this->contextKey."';
+            Ext.onReady(function() {
+                MODx.load({
+                    xtype: 'modx-page-context-update'
+                    ,context: MODx.request.key
+                });
+            });
+            // ]]>
+            </script>");
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.context.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.grid.context.settings.js');

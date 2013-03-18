@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-package' });
-});
-
 MODx.page.Package = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -25,7 +21,7 @@ MODx.page.Package = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,handler: function() {
-                location.href = '?a=workspaces';
+                MODx.loadPage(MODx.action['workspaces']);
             }
         },'-',{
             text: _('help_ex')

@@ -27,6 +27,9 @@ class SecurityUserCreateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.js');
         $this->addHtml('<script type="text/javascript">
         // <![CDATA[
+        Ext.onReady(function() {
+            MODx.load({ xtype: "modx-page-user-create" });
+        });
         MODx.onUserFormRender = "'.$this->onUserFormRender.'";
         // ]]>
         </script>');

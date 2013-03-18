@@ -107,7 +107,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,createDashboard: function() {
-        location.href = 'index.php?a=system/dashboards/widget/create';
+        MODx.loadPage(MODx.action['system/dashboards/widget/create']);
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -147,7 +147,11 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,updateWidget: function() {
+<<<<<<< HEAD
         location.href = 'index.php?a=system/dashboards/widget/update&id='+this.menu.record.id;
+=======
+        MODx.loadPage(MODx.action['system/dashboards/widget/update'], 'id='+this.menu.record.id);
+>>>>>>> release-2.2
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

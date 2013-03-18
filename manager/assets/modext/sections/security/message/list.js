@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-messages' });
-});
-
 /**
  * @class MODx.page.Messages
  * @extends MODx.Component

@@ -21,7 +21,13 @@ class ContextViewManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({
+                   xtype: 'page-context-view'
+                   ,key: MODx.request.key
+                });
+            });</script>");
     }
 
     /**
