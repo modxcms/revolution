@@ -22,6 +22,10 @@ class SecurityUserManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/user/list.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-users' });
+            });</script>");
     }
 
     /**

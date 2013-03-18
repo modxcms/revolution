@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-property-sets' });
-});
-
 /**
  * Loads the property sets page
  * 

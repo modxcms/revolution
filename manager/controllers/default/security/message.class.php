@@ -22,6 +22,10 @@ class SecurityMessageManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.message.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/message/list.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-messages' });
+            });</script>");
     }
 
     /**

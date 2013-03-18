@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.add('modx-page-lexicon-management');
-});
-
 /**
  * @class MODx.page.LexiconManagement
  * @extends MODx.Component

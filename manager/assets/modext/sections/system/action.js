@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-	MODx.load({ xtype: 'modx-page-actions'});
-});
-
 /**
  * Loads the actions page
  * 
