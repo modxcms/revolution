@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-import-resource' });
-});
-
 MODx.page.ImportResource = function(config) {
     config = config || {};
     Ext.applyIf(config,{

@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-	MODx.add('modx-page-groups-roles');
-});
-
 /**
  * Loads the groups and roles page
  * 

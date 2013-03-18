@@ -25,6 +25,7 @@ MODx.panel.Resource = function(config) {
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
+    this.on('beforedestroy',this.beforeDestroy,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
     if (urio) { urio.on('check',this.freezeUri); }
     this.addEvents('tv-reset');
@@ -68,7 +69,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = true;
             } else if (f && f.getValue() == 0 && this.rteLoaded) {
                 if (MODx.unloadRTE) {
-                    MODx.unloadRTE('ta');
+                    MODx.unloadRTE(this.rteElements);
                 }
                 this.rteLoaded = false;
             }
@@ -82,6 +83,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
 
+    }
+    ,beforeDestroy: function(e){
+        if (this.rteLoaded && MODx.unloadRTE){
+            MODx.unloadRTE(this.rteElements);
+            this.rteLoaded = false;
+        }
     }
 
     ,beforeSubmit: function(o) {
@@ -128,13 +135,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 t.refreshNode(v,true);
             }
         }
-        if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
-            location.href = location.href;
-        } else if (o.result.object['parent'] != this.defaultValues['parent'] && this.config.resource != '' && this.config.resource != 0) {
-            location.href = location.href;
+        var object = o.result.object;
+        // object.parent is undefined on template changing.
+        if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
+            MODx.loadPage(location.href);
         } else {
-            this.getForm().setValues(o.result.object);
-            Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
+            this.getForm().setValues(object);
+            Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
     }
     ,failure: function(o) {
@@ -165,7 +172,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action[r.result.object.action]+'&class_key='+ r.result.object.class_key+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
+                            MODx.loadPage(MODx.action[r.result.object.action], 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
                         },scope:this}
                     },{
                         bypassValidCheck: true

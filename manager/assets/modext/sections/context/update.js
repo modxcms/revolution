@@ -1,10 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({
-        xtype: 'modx-page-context-update'
-        ,context: MODx.request.key
-    });
-});
-
 /** 
  * @class MODx.page.UpdateContext
  * @extends MODx.Component

@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-	MODx.load({ xtype: 'modx-page-users' });
-});
-
 /**
  * Loads the users page
  * 
