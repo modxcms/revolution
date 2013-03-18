@@ -40,7 +40,7 @@ foreach ($menus as $menu) {
     if (!empty($menu['handler'])) {
         $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].'</a>'."\n";
     } else if (!empty($menu['action'])) {
-        $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].'</a>'."\n";
+        $menuTpl .= '<a href="?a='.htmlentities($menu['action'].$menu['params']).'">'.$menu['text'].'</a>'."\n";
     } else {
         $menuTpl .= '<a>'.$menu['text'].'</a>'."\n";
     }
@@ -78,7 +78,7 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
             $smTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
         } else {
             $url = '?a='.$menu['action'].$menu['params'];
-            $smTpl .= '<a href="'.$url.'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
+            $smTpl .= '<a href="'.htmlentities($url).'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
         }
 
         if (!empty($menu['children'])) {

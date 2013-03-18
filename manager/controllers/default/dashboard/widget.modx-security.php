@@ -24,6 +24,8 @@ class modDashboardWidgetSecurityFeed extends modDashboardWidgetInterface {
             $rss = $this->rss->parse($url);
             foreach (array_keys($rss->items) as $key) {
                 $item= &$rss->items[$key];
+                $item['title'] = str_replace('&', '&amp;', $item['title']);
+                $item['description'] = str_replace('&', '&amp;', $item['description']);
                 $item['pubdate'] = strftime('%c',$item['date_timestamp']);
                 $o[] = $this->getFileChunk('dashboard/rssitem.tpl',$item);
             }

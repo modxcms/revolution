@@ -116,7 +116,7 @@ class SecurityLoginManagerController extends modManagerController {
         if (!empty($_SERVER['REQUEST_URI'])) {
             $chars = array("'",'"','(',')',';','>','<','!');
             $returnUrl = str_replace($chars,'',$_SERVER['REQUEST_URI']);
-            $this->setPlaceholder('returnUrl',$returnUrl);
+            $this->setPlaceholder('returnUrl',htmlentities($returnUrl));
         }
     }
     
