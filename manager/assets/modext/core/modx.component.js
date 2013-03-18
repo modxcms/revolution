@@ -37,6 +37,7 @@ Ext.extend(MODx.Component,Ext.Component,{
 
     ,_loadActionButtons: function() {
         if (!this.config.buttons) { return false; }
+
         this.ab = MODx.load({
             xtype: 'modx-actionbuttons'
             ,form: this.form || null
@@ -124,6 +125,7 @@ MODx.toolbar.ActionButtons = function(config) {
     if (config.loadStay === true) {
         config.items.push('-',this.getStayMenu());
     }
+    this.checkDirtyBtns = [];
     MODx.toolbar.ActionButtons.superclass.constructor.call(this,config);
     this.config = config;
 };
@@ -132,8 +134,6 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
     ,buttons: []
     ,options: { a_close: 'welcome' }
     ,stay: 'stay'
-
-    ,checkDirtyBtns: []
 
     ,add: function() {
         var a = arguments, l = a.length;
@@ -182,15 +182,11 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 },scope:this}
             }
 
-            /* add button to toolbar */
-            MODx.toolbar.ActionButtons.superclass.add.call(this,el);
-
             if (el.keys) {
-                var map = new Ext.KeyMap(Ext.get(document));
-                var y = el.keys.length;
-                for (var x=0;x<y;x=x+1) {
-                    var k = el.keys[x];
-                    Ext.applyIf(k,{
+                el.keyMap = new Ext.KeyMap(Ext.get(document));
+                for (var j = 0; j < el.keys.length; j++) {
+                    var key = el.keys[j];
+                    Ext.applyIf(key,{
                         scope: this
                         ,stopEvent: true
                         ,fn: function(e) {
@@ -198,10 +194,15 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                             if (b) this.checkConfirm(b,e);
                         }
                     });
-                    map.addBinding(k);
+                    el.keyMap.addBinding(key);
                 }
+                el.listeners['destroy'] = {fn:function(btn) {
+                    btn.keyMap.disable();
+                },scope:this}
             }
-            delete el;
+
+            /* add button to toolbar */
+            MODx.toolbar.ActionButtons.superclass.add.call(this,el);
         }
     }
 
