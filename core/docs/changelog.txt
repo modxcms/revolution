@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9592] Iterate all inherited parent FC rules
 - Replace location redirects with MODx.loadPage proxy
 - Add MODx.beforeLoadPage event to modExt components
 - [#9143] Fix destructors in modExt components

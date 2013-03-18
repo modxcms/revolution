@@ -199,9 +199,9 @@ class ResourceCreateManagerController extends ResourceManagerController {
             ),
             'OR:ProfileUserGroup.usergroup:=' => null,
         ),xPDOQuery::SQL_AND,null,2);
-        /** @var modActionDom $fcDt */
-        $fcDt = $this->modx->getObject('modActionDom',$c);
-        if ($fcDt) {
+        /** @var modActionDom $fcDt see http://tracker.modx.com/issues/9592 */        
+        $fcDtColl = $this->modx->getCollection('modActionDom',$c);
+        if ($fcDtColl) {
             if ($this->parent) { /* ensure get all parents */
                 $p = $this->parent ? $this->parent->get('id') : 0;
                 $parentIds = $this->modx->getParentIds($p,10,array(
@@ -212,14 +212,17 @@ class ResourceCreateManagerController extends ResourceManagerController {
             } else {
                 $parentIds = array(0);
             }
-
-            $constraintField = $fcDt->get('constraint_field');
-            if (($constraintField == 'id' || $constraintField == 'parent') && in_array($fcDt->get('constraint'),$parentIds)) {
-                $defaultTemplate = $fcDt->get('value');
-            } else if (empty($constraintField)) {
-                $defaultTemplate = $fcDt->get('value');
+            /* Check for any FC rules relevant to this page's parents */
+            foreach ($fcDtColl as $fcDt) {
+                $constraintField = $fcDt->get('constraint_field');
+                if (($constraintField == 'id' || $constraintField == 'parent') && in_array($fcDt->get('constraint'),$parentIds)) {
+                    $defaultTemplate = $fcDt->get('value');
+                } else if (empty($constraintField)) {
+                    $defaultTemplate = $fcDt->get('value');
+                }
             }
         }
+        
         return $defaultTemplate;
     }
 
