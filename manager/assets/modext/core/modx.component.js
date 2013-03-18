@@ -296,7 +296,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             }
         } else { /* if just doing a URL redirect */
             Ext.applyIf(itm.params || {},o.baseParams || {});
-            location.href = '?'+Ext.urlEncode(itm.params);
+            MODx.loadPage('?'+Ext.urlEncode(itm.params));
         }
         return false;
     }
@@ -325,8 +325,8 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                     if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
                     if (MODx.request.class_key) { itm.params.class_key = MODx.request.class_key; }
-                    var a = Ext.urlEncode(itm.params);
-                    location.href = '?a='+o.actions['new']+'&'+a;
+                    var params = Ext.urlEncode(itm.params);
+                    MODx.loadPage(o.actions['new'], params);
                 }
                 break;
             case 'stay':
@@ -337,17 +337,17 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     /* if Continue Editing, then don't reload the page - just hide the Progress bar
                        unless the user is on a 'Create' page...if so, then redirect
                        to the proper Edit page */
-                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id && res.object.id !== null) {
+                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id) {
                         itm.params.id = res.object.id;
                         if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                         if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
                         url = Ext.urlEncode(itm.params);
-                        location.href = '?a='+o.actions.edit+'&'+url;
+                        MODx.loadPage(o.actions.edit, url);
 
                     } else if (itm.process === 'delete') {
                         itm.params.a = o.actions.cancel;
                         url = Ext.urlEncode(itm.params);
-                        location.href = '?'+url;
+                        MODx.loadPage('?'+url);
                     }
                 }
                 break;
@@ -355,7 +355,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 if (o.form.hasListener('actionClose')) {
                     o.form.fireEvent('actionClose',itm.params);
                 } else if (o.actions) {
-                    location.href = '?a='+o.actions.cancel+'&'+Ext.encode(itm.params);
+                    MODx.loadPage(o.actions.cancel, Ext.encode(itm.params));
                 }
                 break;
         }

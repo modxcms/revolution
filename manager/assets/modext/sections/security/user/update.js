@@ -54,9 +54,9 @@ Ext.extend(MODx.page.UpdateUser,MODx.Component,{
                 ,id: this.config.user
             }
             ,listeners: {
-            	'success': {fn:function(r) {
-            	    location.href = '?a='+MODx.action['security/user'];
-            	},scope:this}
+                'success': {fn:function(r) {
+                    MODx.loadPage(MODx.action['security/user']);
+                },scope:this}
             }
         });
     }

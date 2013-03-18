@@ -207,9 +207,24 @@ Ext.reg('modx-layout',MODx.Layout);
 MODx.LayoutMgr = function() {
     var _activeMenu = 'menu0';
     return {
-        loadPage: function(a,p) {
-            location.href = '?a='+a+'&'+(p || '');
-            return false;
+        loadPage: function(action, parameters) {
+            var url = '';
+            // Handles url, passed as first argument
+            if (isNaN(action)) {
+                url = action;
+            } else {
+                var parts = [];
+                if (action) {
+                    parts.push('a=' + action);
+                }
+                if (parameters) {
+                    parts.push(parameters);
+                }
+                url = '?' + parts.join('&');
+            }
+            if (MODx.fireEvent('beforeLoadPage', url)) {
+                location.href = url;
+            }
         }
         ,changeMenu: function(a,sm) {
             if (sm === _activeMenu) return false;
