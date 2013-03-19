@@ -5,12 +5,8 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
-<<<<<<< HEAD
- * @author yama http://kyms.jp/ 2012-06-14
-=======
  * @author honda http://kogus.org 2012-09-21
  * @author yama http://kyms.jp/ 2012-08-19
->>>>>>> release-2.2
  * @author shimojo http://www.priqia.com/
  */
 $_lang['namespace'] = 'ネームスペース';
