@@ -172,11 +172,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-<<<<<<< HEAD
-                            location.href = '?a='+r.result.object.action+'&class_key='+ r.result.object.class_key+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
-=======
                             MODx.loadPage(MODx.action[r.result.object.action], 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
->>>>>>> release-2.2
                         },scope:this}
                     },{
                         bypassValidCheck: true
