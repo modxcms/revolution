@@ -16,8 +16,8 @@ MODx.page.UpdateDashboardWidget = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            text: _('cancel'),
-            handler: function() {
+            text: _('cancel')
+            ,handler: function() {
                 MODx.loadPage('system/dashboards');
             }
         },'-',{
