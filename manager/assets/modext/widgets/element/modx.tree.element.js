@@ -177,8 +177,8 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 'success': {fn:function() {
                     this.cm.activeNode.remove();
                     /* if editing the element being removed */
-                    if (MODx.request.a == MODx.action['element/'+oar[0]+'/update'] && MODx.request.id == oar[2]) {
-                        MODx.loadPage(MODx.action['welcome']);
+                    if (MODx.request.a == 'element/'+oar[0]+'/update' && MODx.request.id == oar[2]) {
+                        MODx.loadPage('welcome');
                     }
                 },scope:this}
             }
@@ -391,7 +391,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 ,type: a.type
                 ,pk: a.pk
                 ,handler: function(itm,e) {
-                    MODx.loadPage(MODx.action['element/'+itm.type+'/update'],
+                    MODx.loadPage('element/'+itm.type+'/update',
                         'id='+itm.pk);
                 }
             });

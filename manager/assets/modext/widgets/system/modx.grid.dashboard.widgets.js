@@ -110,7 +110,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,createDashboard: function() {
-        MODx.loadPage(MODx.action['system/dashboards/widget/create']);
+        MODx.loadPage('system/dashboards/widget/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -150,7 +150,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,updateWidget: function() {
-        MODx.loadPage(MODx.action['system/dashboards/widget/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('system/dashboards/widget/update', 'id='+this.menu.record.id);
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

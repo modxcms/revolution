@@ -171,7 +171,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'resource/reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            MODx.loadPage(MODx.action[r.result.object.action], 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
+                            MODx.loadPage(r.result.object.action, 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
                         },scope:this}
                     },{
                         bypassValidCheck: true

@@ -167,7 +167,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         });
     }
     ,createSource: function() {
-        MODx.loadPage(MODx.action['system/source/create']);
+        MODx.loadPage('system/source/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -207,7 +207,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
 
     ,updateSource: function() {
-        MODx.loadPage(MODx.action['source/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('source/update', 'id='+this.menu.record.id);
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
@@ -341,7 +341,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,createSourceType: function() {
-        MODx.loadPage(MODx.action['system/source/type/create']);
+        MODx.loadPage('system/source/type/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -381,7 +381,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,updateSourceType: function() {
-        MODx.loadPage(MODx.action['source/type/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('source/type/update', 'id='+this.menu.record.id);
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

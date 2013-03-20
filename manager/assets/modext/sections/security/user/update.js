@@ -55,7 +55,7 @@ Ext.extend(MODx.page.UpdateUser,MODx.Component,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    MODx.loadPage(MODx.action['security/user']);
+                    MODx.loadPage('security/user');
                 },scope:this}
             }
         });

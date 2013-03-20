@@ -173,7 +173,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
 
     ,createDashboard: function() {
-        MODx.loadPage(MODx.action['system/dashboards/create']);
+        MODx.loadPage('system/dashboards/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -226,7 +226,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
 
     ,updateDashboard: function() {
-        MODx.loadPage(MODx.action['system/dashboards/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('system/dashboards/update', 'id='+this.menu.record.id);
     }
     
     ,filterUsergroup: function(cb,nv,ov) {

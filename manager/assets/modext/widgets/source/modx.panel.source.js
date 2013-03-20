@@ -208,7 +208,7 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
     }
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            MODx.loadPage(MODx.action['source/update'], 'id='+o.result.object.id);
+            MODx.loadPage('source/update', 'id='+o.result.object.id);
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-source-properties');
