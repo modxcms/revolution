@@ -66,6 +66,7 @@ MODx.grid.Package = function(config) {
         title: _('packages')
         ,id: 'modx-package-grid'
         ,url: MODx.config.connector_url
+        ,action: 'workspace/packages/getlist'
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
