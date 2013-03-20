@@ -219,7 +219,7 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
     
     ,filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
-        p.action = 'search';
+        p.action = 'resource/search';
         
         var g = Ext.getCmp('modx-grid-search');
         if (g) {
