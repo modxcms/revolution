@@ -2,9 +2,9 @@ MODx.panel.Source = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-source'
-        ,url: MODx.config.connectors_url+'source/index.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'source/update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
 		,cls: 'container form-with-labels'

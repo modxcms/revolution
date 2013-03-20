@@ -52,9 +52,9 @@ MODx.panel.CreateFile = function(config) {
     config.record = config.record || {};
     Ext.applyIf(config,{
         id: 'modx-panel-file-create'
-        ,url: MODx.config.connectors_url+'browser/file.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'create'
+            action: 'browser/file/create'
             ,directory: config.directory
             ,wctx: MODx.request.wctx
         }

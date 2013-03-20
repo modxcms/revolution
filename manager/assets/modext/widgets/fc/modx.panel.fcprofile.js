@@ -7,8 +7,10 @@
 MODx.panel.FCProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'security/forms/profile.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/forms/profile/get'
+        }
         ,id: 'modx-panel-fc-profile'
 		,cls: 'container'
         ,class_key: 'modFormCustomizationProfile'
@@ -77,7 +79,7 @@ MODx.panel.FCProfile = function(config) {
                 xtype: 'modx-grid-fc-set'
 				,cls:'main-wrapper'
                 ,baseParams: {
-                    action: 'getList'
+                    action: 'security/forms/set/getList'
                     ,profile: config.record.id
                 }
                 ,preventRender: true

@@ -24,7 +24,10 @@ MODx.panel.Profile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-profile'
-        ,url: MODx.config.connectors_url+'security/profile.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/profile'
+        }
         ,layout: 'fit'
         ,cls: 'container'
         ,bodyStyle: 'background: none;'
@@ -84,9 +87,9 @@ MODx.panel.UpdateProfile = function(config) {
     Ext.applyIf(config,{
         title: _('general_information')
         ,id: 'modx-panel-profile-update'
-        ,url: MODx.config.connectors_url+'security/profile.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'security/profile/update'
             ,id: config.user
         }
         ,layout: 'form'
@@ -156,9 +159,9 @@ MODx.panel.UpdateProfile = function(config) {
 Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
     setup: function() {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'security/profile.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'get'
+                action: 'security/profile/get'
                 ,id: this.config.user
             }
             ,listeners: {
@@ -183,9 +186,9 @@ MODx.panel.ChangeProfilePassword = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('reset_password')
-        ,url: MODx.config.connectors_url+'security/profile.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'changepassword'
+            action: 'security/profile/changepassword'
             ,id: config.user
         }
         ,frame: true

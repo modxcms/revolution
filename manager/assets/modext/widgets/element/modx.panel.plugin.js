@@ -8,8 +8,10 @@
 MODx.panel.Plugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'element/plugin.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'element/plugin/get'
+        }
         ,id: 'modx-panel-plugin'
 		,cls: 'container form-with-labels'
         ,class_key: 'modPlugin'

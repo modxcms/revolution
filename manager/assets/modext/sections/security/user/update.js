@@ -48,9 +48,9 @@ Ext.extend(MODx.page.UpdateUser,MODx.Component,{
         MODx.msg.confirm({
             title: _('user_remove')
             ,text: _('user_confirm_remove')
-            ,url: MODx.config.connectors_url+'security/user.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'delete'
+                action: 'security/user/delete'
                 ,id: this.config.user
             }
             ,listeners: {

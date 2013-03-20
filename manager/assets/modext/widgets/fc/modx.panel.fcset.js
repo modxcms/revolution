@@ -7,8 +7,10 @@
 MODx.panel.FCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'security/forms/set.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/forms/set/get'
+        }
         ,id: 'modx-panel-fc-set'
         ,class_key: 'modFormCustomizationSet'
         ,cls: 'container'
@@ -64,7 +66,7 @@ MODx.panel.FCSet = function(config) {
                     ,lazyInit: false
                     ,lazyRender: false
                     ,baseParams: {
-                        action: 'getList'
+                        action: 'element/template/getList'
                         ,combo: true
                     }
                     ,listeners: {

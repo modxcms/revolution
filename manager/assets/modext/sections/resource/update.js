@@ -13,7 +13,7 @@ MODx.page.UpdateResource = function(config) {
         'parent-cmb': config.record['parent']
     });
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
@@ -64,9 +64,9 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'duplicate'
+                action: 'resource/duplicate'
                 ,id: this.config.resource
             }
             ,listeners: {
@@ -80,9 +80,9 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     ,deleteResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_delete_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'delete'
+                action: 'resource/delete'
                 ,id: this.config.resource
             }
             ,listeners: {

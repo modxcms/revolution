@@ -10,11 +10,11 @@ MODx.page.UpdateWebLink = function(config) {
     config = config || {};
         
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'update'
+        ,action: 'resource/update'
         ,actions: {
             'new': 'resource/create'
             ,edit: 'resource/update'
@@ -45,9 +45,9 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
     ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'duplicate'
+                action: 'resource/duplicate'
                 ,id: this.config.resource
             }
             ,listeners: {
@@ -61,9 +61,9 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
     ,deleteResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_delete_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'delete'
+                action: 'resource/delete'
                 ,id: this.config.resource
             }
             ,listeners: {

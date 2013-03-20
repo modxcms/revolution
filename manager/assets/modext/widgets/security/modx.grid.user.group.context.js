@@ -8,9 +8,9 @@ MODx.grid.UserGroupContext = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-contexts'
-        ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/access/usergroup/context/getList'
             ,usergroup: config.usergroup
         }
         ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
@@ -58,7 +58,7 @@ MODx.grid.UserGroupContext = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Admin'
             }
             ,listeners: {
@@ -172,8 +172,8 @@ MODx.window.CreateUGAccessContext = function(config) {
     this.ident = config.ident || 'cugactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/context/create'
         ,width: 600
         ,fields: [{
             xtype: 'modx-combo-context'
@@ -211,7 +211,7 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Admin,Object'
                 ,combo: '1'
             }
@@ -275,8 +275,8 @@ MODx.window.UpdateUGAccessContext = function(config) {
     this.ident = config.ident || 'uugactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/context/update'
         ,width: 600
         ,fields: [{
             xtype: 'hidden'
@@ -316,7 +316,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Admin,Object'
                 ,combo: '1'
             }

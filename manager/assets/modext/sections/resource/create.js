@@ -9,7 +9,7 @@
 MODx.page.CreateResource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'

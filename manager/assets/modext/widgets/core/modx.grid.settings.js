@@ -12,7 +12,10 @@ MODx.grid.SettingsGrid = function(config) {
             ,scope: this
             ,handler: {
                 xtype: 'modx-window-setting-create'
-                ,url: config.url || MODx.config.connectors_url+'system/settings.php'
+                ,url: config.url || MODx.config.connector_url
+                ,baseParams: {
+                    action: 'system/settings/getlist'
+                }
                 ,blankValues: true
             }
         }];
@@ -34,7 +37,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
         ,baseParams: {
-            action: 'getAreas'
+            action: 'system/settings/getAreas'
             ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
         }
         ,width: 250
@@ -124,7 +127,7 @@ MODx.grid.SettingsGrid = function(config) {
          cm: this.cm
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
         ,baseParams: {
-            action: 'getList'
+            action: 'system/settings/getList'
             ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
         }
         ,clicksToEdit: 2
@@ -218,7 +221,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,clearFilter: function() {
         var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'system/settings/getList'
             ,'namespace': ns
     	};
         Ext.getCmp('modx-filter-namespace').reset();
@@ -305,9 +308,9 @@ MODx.combo.Area = function(config) {
         ,displayField: 'd'
         ,valueField: 'v'
         ,fields: ['d','v']
-        ,url: MODx.config.connectors_url+'system/settings.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getAreas'
+            action: 'system/settings/getAreas'
         }
     });
     MODx.combo.Area.superclass.constructor.call(this,config);
@@ -474,7 +477,7 @@ MODx.window.UpdateSetting = function(config) {
         title: _('setting_update')
         ,width: 600
         ,url: config.grid.config.url
-        ,action: 'update'
+        ,action: 'system/settings/update'
         ,fields: [{
             layout: 'column'
             ,border: false

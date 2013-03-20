@@ -9,7 +9,8 @@
 MODx.tree.Resource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
+        ,action: 'resource/getNodes'
         ,title: ''
         ,rootVisible: false
         ,expandFirst: true
@@ -21,8 +22,7 @@ MODx.tree.Resource = function(config) {
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
         ,baseParams: {
-            action: 'getNodes'
-            ,sortBy: this.getDefaultSortBy(config)
+            sortBy: this.getDefaultSortBy(config)
             ,currentResource: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
         }
@@ -178,9 +178,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('context_remove')
             ,text: _('context_remove_confirm')
-            ,url: MODx.config.connectors_url+'context/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'context/remove'
                 ,key: key
             }
             ,listeners: {
@@ -199,9 +199,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('resource_delete')
             ,text: _('resource_delete_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'delete'
+                action: 'resource/delete'
                 ,id: id
             }
             ,listeners: {
@@ -223,9 +223,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'undelete'
+                action: 'resource/undelete'
                 ,id: id
             }
             ,listeners: {
@@ -249,9 +249,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('resource_publish')
             ,text: _('resource_publish_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'publish'
+                action: 'resource/publish'
                 ,id: id
             }
             ,listeners: {
@@ -270,9 +270,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('resource_unpublish')
             ,text: _('resource_unpublish_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'unpublish'
+                action: 'resource/unpublish'
                 ,id: id
             }
             ,listeners: {
@@ -289,9 +289,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('empty_recycle_bin')
             ,text: _('empty_recycle_bin_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'emptyRecycleBin'
+                action: 'resource/emptyRecycleBin'
             }
             ,listeners: {
                 'success':{fn:function() {
@@ -481,9 +481,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
     ,quickUpdate: function(itm,e,cls) {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'get'
+                action: 'resource/get'
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -720,8 +720,8 @@ MODx.window.QuickCreateResource = function(config) {
         ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'resource/index.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'resource/create'
         ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -786,7 +786,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,editable: false
                             ,anchor: '100%'
                             ,baseParams: {
-                                action: 'getList'
+                                action: 'element/template/getList'
                                 ,combo: '1'
                                 ,limit: 0
                             }
@@ -858,8 +858,8 @@ MODx.window.QuickUpdateResource = function(config) {
         ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'resource/index.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'resource/update'
         ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -928,7 +928,7 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,editable: false
                             ,anchor: '100%'
                             ,baseParams: {
-                                action: 'getList'
+                                action: 'element/template/getList'
                                 ,combo: '1'
                                 ,limit: 0
                             }

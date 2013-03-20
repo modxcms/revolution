@@ -12,7 +12,10 @@ MODx.grid.Role = function(config) {
     Ext.applyIf(config,{
         title: _('roles')
         ,id: 'modx-grid-role'
-        ,url: MODx.config.connectors_url+'security/role.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/role/getlist'
+        }
         ,fields: ['id','name','description','authority','perm']
         ,paging: true
         ,autosave: true
@@ -87,8 +90,8 @@ MODx.window.CreateRole = function(config) {
         title: _('role_create')
         ,height: 150
         ,width: 400
-        ,url: MODx.config.connectors_url+'security/role.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/role/create'
         ,fields: [{
             name: 'name'
             ,fieldLabel: _('name')+'<span class="required">*</span>'

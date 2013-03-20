@@ -53,7 +53,10 @@ MODx.grid.Sources = function(config) {
 
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'source/index.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'source/getlist'
+        }
         ,fields: ['id','name','description','class_key','cls']
         ,paging: true
         ,autosave: true
@@ -236,8 +239,8 @@ MODx.window.CreateSource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('source_create')
-        ,url: MODx.config.connectors_url+'source/index.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'source/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -270,7 +273,10 @@ MODx.grid.SourceTypes = function(config) {
     config = config || {};
 
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'source/type.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'source/type/getlist'
+        }
         ,fields: ['class','name','description']
         ,paging: true
         ,autosave: true

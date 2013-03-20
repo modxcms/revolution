@@ -2,8 +2,7 @@ MODx.panel.Resource = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
         ,id: 'modx-panel-resource'
         ,class_key: 'modDocument'
         ,resource: ''
@@ -107,7 +106,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
-        if(this.getForm().baseParams.action == 'create') {
+        if(this.getForm().baseParams.action == 'resource/create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.disable(); }
         }
@@ -145,7 +144,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,failure: function(o) {
-        if(this.getForm().baseParams.action == 'create') {
+        if(this.getForm().baseParams.action == 'resource/create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
@@ -169,7 +168,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 if (e == 'yes') {
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
-                    f.config.action = 'reload';
+                    f.config.action = 'resource/reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
                             MODx.loadPage(MODx.action[r.result.object.action], 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
@@ -430,7 +429,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,anchor: '100%'
             ,editable: false
             ,baseParams: {
-                action: 'getList'
+                action: 'element/template/getList'
                 ,combo: '1'
                 ,limit: 0
             }

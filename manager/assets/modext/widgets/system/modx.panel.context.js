@@ -7,8 +7,10 @@
 MODx.panel.Context = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'context/index.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'context/get'
+        }
         ,id: 'modx-panel-context'
 		,cls: 'container'
         ,class_key: 'modContext'
@@ -104,7 +106,7 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'get'
+                action: 'context/get'
                 ,key: this.config.context
             }
             ,listeners: {

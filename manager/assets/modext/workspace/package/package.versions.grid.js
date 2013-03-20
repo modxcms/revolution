@@ -8,9 +8,9 @@ MODx.grid.PackageVersions = function(config) {
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-grid-package-versions'
-        ,url: MODx.config.connectors_url+'workspace/package/version.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'workspace/package/version/getList'
             ,signature: config.signature
         }
         ,fields: ['signature','name','version','release','created','updated','installed','state'
@@ -55,7 +55,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
             ,text: _('package_version_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'workspace/package/version/remove'
                 ,signature: r.signature
             }
             ,listeners: {

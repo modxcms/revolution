@@ -8,9 +8,9 @@ MODx.grid.UserGroupCategory = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-categories'
-        ,url: MODx.config.connectors_url+'security/access/usergroup/category.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/access/usergroup/category/getList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -62,7 +62,7 @@ MODx.grid.UserGroupCategory = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Object'
             }
             ,listeners: {
@@ -147,8 +147,8 @@ MODx.window.CreateUGCat = function(config) {
     this.ident = config.ident || 'cugcat'+Ext.id();
     Ext.applyIf(config,{
         title: _('category_add')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/category.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/category/create'
         ,height: 250
         ,width: 500
         ,fields: [{
@@ -212,7 +212,7 @@ MODx.window.CreateUGCat = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Element,Object'
                 ,combo: '1'
             }
@@ -273,8 +273,8 @@ MODx.window.UpdateUGCat = function(config) {
     this.ident = config.ident || 'updugcat'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_category_update')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/category.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/category/update'
         ,height: 250
         ,width: 500
         ,fields: [{
@@ -340,7 +340,7 @@ MODx.window.UpdateUGCat = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Element,Object'
                 ,combo: '1'
             }

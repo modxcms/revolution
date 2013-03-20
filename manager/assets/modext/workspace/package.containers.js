@@ -84,7 +84,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 
 		va = va || {};
         Ext.apply(va,{
-            action: 'install'
+            action: 'workspace/packages/install'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic
@@ -92,7 +92,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 
 		var c = this.console;
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'workspace/packages.php'
+            url: MODx.config.connector_url
             ,params: va
             ,listeners: {
                 'success': {fn:function() {

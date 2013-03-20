@@ -250,9 +250,9 @@ MODx.grid.Search = function(config) {
     Ext.applyIf(config,{
         title: _('search_results')
         ,id: 'modx-grid-search'
-        ,url: MODx.config.connectors_url+'resource/index.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'search'
+            action: 'resource/search'
         }
         ,fields: ['id','pagetitle','description','published','deleted','menu']
         ,paging: true

@@ -13,7 +13,8 @@ MODx.tree.Element = function(config) {
         ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,title: ''
-        ,url: MODx.config.connectors_url+'element/index.php'
+        ,url: MODx.config.connector_url
+        ,action: 'element/getnodes'
         ,useDefaultToolbar: true
         ,baseParams: {
             currentElement: MODx.request.id || 0
@@ -128,9 +129,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('warning')
             ,text: _('category_confirm_delete')
-            ,url: MODx.config.connectors_url+'element/category.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'element/category/remove'
                 ,id: id
             }
             ,listeners: {
@@ -167,9 +168,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 type: oar[0]
                 ,name: this.cm.activeNode.attributes.name
             })
-            ,url: MODx.config.connectors_url+'element/'+oar[0]+'.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'element/'+oar[0]+'/remove'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -188,9 +189,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'activate'
+                action: 'element/plugin/activate'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -205,9 +206,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'deactivate'
+                action: 'element/plugin/deactivate'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -236,9 +237,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     
     ,quickUpdate: function(itm,e,type) {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/'+type+'.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'get'
+                action: 'element/'+type+'/get'
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -561,8 +562,8 @@ MODx.window.DuplicateElement = function(config) {
     }
     Ext.applyIf(config,{
         title: _('element_duplicate')
-        ,url: MODx.config.connectors_url+'element/'+config.record.type+'.php'
-        ,action: 'duplicate'
+        ,url: MODx.config.connector_url
+        ,action: 'element/'+config.record.type+'/duplicate'
         ,fields: flds
         ,labelWidth: 150
     });
@@ -588,8 +589,8 @@ MODx.window.RenameCategory = function(config) {
         title: _('category_rename')
         ,height: 150
         ,width: 350
-        ,url: MODx.config.connectors_url+'element/category.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/category/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

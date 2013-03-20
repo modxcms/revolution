@@ -2,9 +2,9 @@ MODx.panel.Dashboard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-dashboard'
-        ,url: MODx.config.connectors_url+'system/dashboard.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'system/dashboard/update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -190,8 +190,8 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-widget-placements'
-        ,url: MODx.config.connectors_url+'system/dashboard/widget/placement.php'
-        ,action: 'getList'
+        ,url: MODx.config.connector_url
+        ,action: 'system/dashboard/widget/placement/getList'
         ,fields: ['dashboard','widget','rank','name','name_trans','description','description_trans']
         ,autoHeight: true
         ,primaryKey: 'widget'
@@ -357,8 +357,8 @@ MODx.grid.DashboardUserGroups = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-usergroups'
-        ,url: MODx.config.connectors_url+'system/dashboard/group.php'
-        ,action: 'getList'
+        ,url: MODx.config.connector_url
+        ,action: 'system/dashboard/group/getList'
         ,fields: ['id','name']
         ,autoHeight: true
         ,primaryKey: 'user'
@@ -461,7 +461,11 @@ MODx.combo.DashboardWidgets = function(config) {
         ,fields: ['id','name','name_trans','description','description_trans']
         ,listWidth: 400
         ,pageSize: 20
-        ,url: MODx.config.connectors_url+'system/dashboard/widget.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/dashboard/widget'
+            ,combo: true
+        }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
             ,'<h4 class="modx-combo-title">{name_trans}</h4>'

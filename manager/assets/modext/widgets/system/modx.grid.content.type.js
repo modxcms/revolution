@@ -9,9 +9,9 @@ MODx.panel.ContentType = function(config) {
     Ext.applyIf(config,{
         id: 'modx-panel-content-type'
 		,cls: 'container'
-        ,url: MODx.config.connectors_url+'system/contenttype.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'updateFromGrid'
+            action: 'system/contenttype/updateFromGrid'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -75,7 +75,10 @@ MODx.grid.ContentType = function(config) {
     });
 
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'system/contenttype.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/contenttype/getlist'
+        }
         ,fields: ['id','name','mime_type','file_extensions','headers','binary','description']
         ,paging: true
         ,remoteSort: true
@@ -120,7 +123,7 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
         m.push({
             text: _('content_type_remove')
             ,handler: this.confirm.createDelegate(this,["remove",_('content_type_remove_confirm')])
-        })
+        });
         this.menu.record.menu = m;
     }
 });
@@ -141,8 +144,8 @@ MODx.window.CreateContentType = function(config) {
     Ext.applyIf(config,{
         title: _('content_type_new')
         ,width: 550
-        ,url: MODx.config.connectors_url+'system/contenttype.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'system/contenttype/create'
         ,fields: [{
             layout: 'column'
             ,border: false
