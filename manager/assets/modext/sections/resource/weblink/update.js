@@ -8,7 +8,6 @@
  */
 MODx.page.UpdateWebLink = function(config) {
     config = config || {};
-        
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,which_editor: 'none'

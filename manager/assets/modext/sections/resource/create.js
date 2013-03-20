@@ -13,7 +13,7 @@ MODx.page.CreateResource = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
-        ,action: 'create'
+        ,action: 'resource/create'
     	,actions: {
             'new': 'resource/create'
             ,edit: 'resource/update'

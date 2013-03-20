@@ -3,6 +3,7 @@ MODx.panel.Resource = function(config) {
     config.record = config.record || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
+        ,baseParams: {}
         ,id: 'modx-panel-resource'
         ,class_key: 'modDocument'
         ,resource: ''
