@@ -211,12 +211,16 @@ MODx.LayoutMgr = function() {
             // Handles url, passed as first argument
             var parts = [];
             if (action) {
-                parts.push('a=' + action);
+                if (action.substr(0,1) == '?') {
+                    parts.push(action);
+                } else {
+                    parts.push('?a=' + action);
+                }
             }
             if (parameters) {
                 parts.push(parameters);
             }
-            var url = '?' + parts.join('&');
+            var url = parts.join('&');
             if (MODx.fireEvent('beforeLoadPage', url)) {
                 location.href = url;
             }
