@@ -10,9 +10,9 @@ MODx.tree.PackageBrowserTree = function(config) {
     config = config || {};
     Ext.applyIf(config,{
 		url: MODx.config.connector_url
+        ,action: 'workspace/packages/rest/getNodes'
 		,baseParams: {
-			action: 'workspace/packages/rest/getNodes'
-			,provider: MODx.provider
+			provider: MODx.provider
 		}
 		,loaderConfig: {
             preloadChildren: false
