@@ -66,9 +66,9 @@ class ResourceDataManagerController extends ResourceManagerController {
         $this->resource->getOne('EditedBy');
         $this->resource->getOne('Template');
 
-        $server_offset_time= intval($this->modx->getOption('server_offset_time',null,0));
-        $this->resource->set('createdon_adjusted',strftime('%c', $this->resource->get('createdon') + $server_offset_time));
-        $this->resource->set('editedon_adjusted',strftime('%c', $this->resource->get('editedon') + $server_offset_time));
+        $server_offset_time_seconds = floatval($this->modx->getOption('server_offset_time',null,0)) * 3600;
+        $this->resource->set('createdon_adjusted',strftime('%c', $this->resource->get('createdon') + $server_offset_time_seconds));
+        $this->resource->set('editedon_adjusted',strftime('%c', $this->resource->get('editedon') + $server_offset_time_seconds));
 
         $this->resource->_contextKey= $this->resource->get('context_key');
         $buffer = $this->modx->cacheManager->get($this->resource->getCacheKey(), array(
