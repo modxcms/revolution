@@ -1106,6 +1106,10 @@
         <index alias="contentid" name="contentid" primary="false" unique="false" type="BTREE">
             <column key="contentid" length="" collation="A" null="false" />
         </index>
+        <index alias="tv_cnt" name="tv_cnt" primary="false" unique="false" type="BTREE">
+            <column key="tmplvarid" length="" collation="A" null="false" />
+            <column key="contentid" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" local="contentid" foreign="id" cardinality="one" owner="foreign" />
