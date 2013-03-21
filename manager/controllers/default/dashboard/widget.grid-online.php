@@ -9,7 +9,7 @@
  */
 class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
     public function render() {
-        $timetocheck = (time()-(60*20))+$this->modx->getOption('server_offset_time',null,0);
+        $timetocheck = (time()-(60*20))+floatval($this->modx->getOption('server_offset_time',null,0)) * 3600;
         $c = $this->modx->newQuery('modManagerLog');
         $c->innerJoin('modUser','User');
 
@@ -40,7 +40,7 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
         
         $output = $this->getFileChunk('dashboard/onlineusers.tpl',array(
             'users' => implode("\n",$users),
-            'curtime' => strftime('%I:%M %p',time()+$this->modx->getOption('server_offset_time',null,0)),
+            'curtime' => strftime('%I:%M %p',time()+floatval($this->modx->getOption('server_offset_time',null,0)) * 3600),
         ));
         return $output;
     }

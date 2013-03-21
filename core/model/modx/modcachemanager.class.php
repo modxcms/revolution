@@ -604,7 +604,7 @@ class modCacheManager extends xPDOCacheManager {
         $publishingResults= array();
         /* publish and unpublish resources using pub_date and unpub_date checks */
         $tblResource= $this->modx->getTableName('modResource');
-        $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
+        $timeNow= time() + floatval($this->modx->getOption('server_offset_time', null, 0)) * 3600;
         $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon=pub_date, pub_date=0 WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
         $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon=0, pub_date=0, unpub_date=0 WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
 

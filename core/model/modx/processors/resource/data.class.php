@@ -78,18 +78,18 @@ class modResourceDataProcessor extends modProcessor {
         $resourceArray['unpub_date'] = !empty($resourceArray['unpub_date']) && $resourceArray['unpub_date'] != $emptyDate ? $resourceArray['unpub_date'] : $this->modx->lexicon('none');
         $resourceArray['status'] = $resourceArray['published'] ? $this->modx->lexicon('resource_published') : $this->modx->lexicon('resource_unpublished');
         
-        $server_offset_time= intval($this->modx->getOption('server_offset_time',null,0));
-        $resourceArray['createdon_adjusted'] = strftime('%c', strtotime($this->resource->get('createdon')) + $server_offset_time);
+        $server_offset_time_seconds = floatval($this->modx->getOption('server_offset_time',null,0)) * 3600 ;
+        $resourceArray['createdon_adjusted'] = strftime('%c', strtotime($this->resource->get('createdon')) + $server_offset_time_seconds);
         $resourceArray['createdon_by'] = $this->resource->get('creator');
         if (!empty($resourceArray['editedon']) && $resourceArray['editedon'] != $emptyDate) {
-            $resourceArray['editedon_adjusted'] = strftime('%c', strtotime($this->resource->get('editedon')) + $server_offset_time);
+            $resourceArray['editedon_adjusted'] = strftime('%c', strtotime($this->resource->get('editedon')) + $server_offset_time_seconds);
             $resourceArray['editedon_by'] = $this->resource->get('editor');
         } else {
             $resourceArray['editedon_adjusted'] = $this->modx->lexicon('none');
             $resourceArray['editedon_by'] = $this->modx->lexicon('none');
         }
         if (!empty($resourceArray['publishedon']) && $resourceArray['publishedon'] != $emptyDate) {
-            $resourceArray['publishedon_adjusted'] = strftime('%c', strtotime($this->resource->get('editedon')) + $server_offset_time);
+            $resourceArray['publishedon_adjusted'] = strftime('%c', strtotime($this->resource->get('editedon')) + $server_offset_time_seconds);
             $resourceArray['publishedon_by'] = $this->resource->get('publisher');
         } else {
             $resourceArray['publishedon_adjusted'] = $this->modx->lexicon('none');
