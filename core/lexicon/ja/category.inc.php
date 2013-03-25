@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 202-08-16
+ * @author honda http://kogus.org 2012-12-04
  * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
@@ -20,7 +20,7 @@ $_lang['category_err_not_found'] = 'カテゴリーが見つかりませんで�
 $_lang['category_err_nf'] = 'カテゴリーが見つかりませんでした。.';
 $_lang['category_err_nfs'] = '%sに関連するカテゴリーは見つかりませんでした。';
 $_lang['category_err_ns'] = 'カテゴリーが指定されていません。';
-$_lang['category_err_ns_name'] = '正しいカテゴリー名を指定して下さい。';
+$_lang['category_err_ns_name'] = '正しいカテゴリー名を指定してください。';
 $_lang['category_err_remove'] = 'カテゴリーの削除中にエラーが発生しました。';
 $_lang['category_err_save'] = 'カテゴリーの保存中にエラーが発生しました。';
 $_lang['category_existing'] = '存在するカテゴリー';

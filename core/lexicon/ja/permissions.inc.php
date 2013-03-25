@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  */
 $_lang['perm.about_desc'] = '情報のページ';
 $_lang['perm.access_permissions_desc'] = 'アクセス権限関係のページとアクション';
@@ -71,7 +71,7 @@ $_lang['perm.file_view_desc'] = 'ファイルのコンテンツを表示';
 $_lang['perm.flush_sessions_desc'] = 'サイトのセッションを削除することが可能';
 $_lang['perm.frames_desc'] = '全てにおいてMODX管理画面UIを使用';
 $_lang['perm.help_desc'] = 'ヘルプページを表示';
-$_lang['perm.home_desc'] = 'ウェルカムページ(ダッシュボード)を表示';
+$_lang['perm.home_desc'] = 'ウェルカムページ（ダッシュボード）を表示';
 $_lang['perm.import_static_desc'] = 'インポートページを表示・利用';
 $_lang['perm.languages_desc'] = '言語を表示・編集';
 $_lang['perm.lexicons_desc'] = 'レキシコン管理機能を表示・編集';

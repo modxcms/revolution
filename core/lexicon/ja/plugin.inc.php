@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
@@ -16,7 +16,7 @@ $_lang['events'] = 'イベント';
 $_lang['plugin'] = 'プラグイン';
 $_lang['plugin_add'] = 'プラグイン追加';
 $_lang['plugin_add_to_event'] = 'イベントへプラグインを追加';
-$_lang['plugin_code'] = 'プラグイン コード (php)';
+$_lang['plugin_code'] = 'プラグイン コード（php）';
 $_lang['plugin_config'] = 'プラグイン設定';
 $_lang['plugin_desc'] = '説明';
 $_lang['plugin_desc_category'] = 'このプラグインを所属させるカテゴリーを設定します。';
