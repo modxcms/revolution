@@ -47,7 +47,6 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
                 'Resource.id:IN' => $ids,
             ));
         }
-        $c->sortby('value','ASC');
         $tags = $this->modx->getCollection('modTemplateVarResource',$c);
         $options = array();
         /** @var modTemplateVarResource $tag */
@@ -56,7 +55,7 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
             $options = array_merge($options,$vs);
         }
         $options = array_unique($options);
-        ksort($options);
+        sort($options);
         $opts = array();
         $defaults = array();
         $i = 0;
