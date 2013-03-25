@@ -5,6 +5,9 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- Make caching the aliasMap optional to reduce memory usage
+- [#9672] Fix invalid ini_get call in modDbRegister
+- [#8489] Add compound index to modTemplateVarResource
 - [#9592] Iterate all inherited parent FC rules
 - Replace location redirects with MODx.loadPage proxy
 - Add MODx.beforeLoadPage event to modExt components
