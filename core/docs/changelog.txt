@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9368][#9437] Fix modProcessorResponse->isError()
 - [#9681] Allow country/getlist processor to work more than once
 - Fix Auto-Tag TV value sorting
 - Make caching the aliasMap optional to reduce memory usage
