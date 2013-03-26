@@ -439,6 +439,7 @@ class modX extends xPDO {
             $this->loadClass('modScript');
             $this->loadClass('modPrincipal');
             $this->loadClass('modUser');
+            $this->loadClass('sources.modMediaSource');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {
