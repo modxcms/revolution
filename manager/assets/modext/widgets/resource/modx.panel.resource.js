@@ -581,6 +581,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.publishedon
         },{
             xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
@@ -594,6 +595,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.pub_date
         },{
             xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
@@ -607,6 +609,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.unpub_date
         },{
             xtype: 'fieldset'
