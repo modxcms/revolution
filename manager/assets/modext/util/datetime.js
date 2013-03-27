@@ -468,7 +468,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      */
     ,setDate:function(date) {
         if (date && this.offset_time != 0) {
-            date = date.add(Date.HOUR, new Number(this.offset_time));
+            date = date.add(Date.MINUTE, 60 * new Number(this.offset_time));
         }
         this.df.setValue(date);
     } // eo function setDate
@@ -479,7 +479,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      */
     ,setTime:function(date) {
         if (date && this.offset_time != 0) {
-            date = date.add(Date.HOUR, new Number(this.offset_time));
+            date = date.add(Date.MINUTE, 60 * new Number(this.offset_time));
         }
         this.tf.setValue(date);
     } // eo function setTime
@@ -643,7 +643,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         if(this.isRendered) {
             var value = '';
             if (this.dateValue instanceof Date) {
-                value = this.dateValue.add(Date.HOUR, 0 - new Number(this.offset_time)).format(this.hiddenFormat);
+                value = this.dateValue.add(Date.MINUTE, 0 - 60 * new Number(this.offset_time)).format(this.hiddenFormat);
             }
             this.el.dom.value = value;
         }
