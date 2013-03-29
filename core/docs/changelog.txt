@@ -5,6 +5,12 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- [#9690] Fix various issues with server_offset_time
+- [#9738] Prevent working context overriding user settings
+- Fix error getting MediaSource table classes on cached Resources
+- [#9368][#9437] Fix modProcessorResponse->isError()
+- [#9681] Allow country/getlist processor to work more than once
+- Fix Auto-Tag TV value sorting
 - Make caching the aliasMap optional to reduce memory usage
 - [#9672] Fix invalid ini_get call in modDbRegister
 - [#8489] Add compound index to modTemplateVarResource

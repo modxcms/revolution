@@ -14,7 +14,7 @@ class modSystemInfoProcessor extends modProcessor {
         $data = array();
 
         $this->modx->getVersionData();
-        $serverOffset = $this->modx->getOption('server_offset_time',null,0) * 60 * 60;
+        $serverOffset = floatval($this->modx->getOption('server_offset_time',null,0)) * 3600;
 
         /* general */
         $data['modx_version'] = $this->modx->version['full_appname'];

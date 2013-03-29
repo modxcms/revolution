@@ -480,7 +480,7 @@ class modRequest {
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_auto_publish_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER))
         ));
         if ($cacheRefreshTime > 0) {
-            $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
+            $timeNow= time();
             if ($cacheRefreshTime <= $timeNow) {
                 $this->modx->cacheManager->refresh();
             }
