@@ -144,7 +144,7 @@ class modResponse {
                     }
                 }
                 if (!$dispositionSet && $this->modx->resource->get('content_dispo')) {
-                    if ($alias= array_search($this->modx->resourceIdentifier, $this->modx->aliasMap)) {
+                    if ($alias= $this->modx->resource->get('uri')) {
                         $name= basename($alias);
                     } elseif ($this->modx->resource->get('alias')) {
                         $name= $this->modx->resource->get('alias');

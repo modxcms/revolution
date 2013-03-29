@@ -193,9 +193,8 @@ class modStaticImport extends modImport {
 
         $iterations= 3;
         $origAlias= $alias;
-        while (isset ($resourceContext->aliasMap[$fullAlias]) && $iterations > 0) {
+        while ($duplicateId = $this->modx->findResource($fullAlias) && $iterations > 0) {
             $iterations--;
-            $duplicateId= $resourceContext->aliasMap[$fullAlias];
             $this->log($this->modx->lexicon('import_duplicate_alias_found',array(
                 'id' => $duplicateId,
                 'alias' => $fullAlias,
