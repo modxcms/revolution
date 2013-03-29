@@ -102,7 +102,7 @@ foreach ($settings as $setting) {
         '-',
         array(
             'text' => $modx->lexicon('setting_remove'),
-            'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
+            'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm","context/setting/remove"])',
         ),
     );
     $list[] = $settingArray;

@@ -47,7 +47,7 @@ class modProviderGetListProcessor extends modObjectGetListProcessor {
                 '-',
                 array(
                     'text' => $this->modx->lexicon('provider_remove'),
-                    'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove"])',
+                    'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove", "workspace/providers/remove"])',
                 )
             );
         }

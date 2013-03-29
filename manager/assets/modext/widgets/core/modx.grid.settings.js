@@ -191,7 +191,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ,handler: this.updateSetting
             },'-',{
                 text: _('setting_remove')
-                ,handler: this.remove.createDelegate(this,['setting_remove_confirm'])
+                ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'system/settings/remove'])
             });
         }
         if (m.length > 0) {

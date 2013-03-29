@@ -96,7 +96,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
                 if (m.length > 0) { m.push('-'); }
                 m.push({
                     text: _('access_context_remove')
-                    ,handler: this.confirm.createDelegate(this,["remove"])
+                    ,handler: this.remove.createDelegate(this,["confirm_remove","security/access/usergroup/context/remove"])
                 });
             }
         }

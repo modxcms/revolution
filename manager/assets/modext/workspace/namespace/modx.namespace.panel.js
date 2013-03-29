@@ -122,7 +122,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push({
                     text: _('namespace_remove')
-                    ,handler: this.remove.createDelegate(this,["namespace_remove_confirm"])
+                    ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','workspace/namespace/remove'])
                 });
             }
         }

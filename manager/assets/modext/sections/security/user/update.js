@@ -16,14 +16,19 @@ MODx.page.UpdateUser = function(config) {
             ,cancel: 'security/user'
        }
         ,buttons: [{
-            process: 'update', text: _('save'), method: 'remote'
+            process: 'security/user/update'
+            ,text: _('save')
+            ,method: 'remote'
             ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:'security/user'}
+            text: _('cancel')
+            ,handler: function() {
+                MODx.loadPage('security/user')
+            }
         },'-',{
             text: _('delete')
             ,handler: this.removeUser

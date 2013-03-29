@@ -64,7 +64,7 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
         if (p.indexOf('remove') != -1) {
             m.push({
                 text: _('role_remove')
-                ,handler: this.remove.createDelegate(this,['role_remove_confirm'])
+                ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'security/role/remove'])
             });
         }
         return m;
