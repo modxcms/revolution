@@ -93,7 +93,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'update'
+                process: 'resource/update'
                 ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
@@ -115,8 +115,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         }
         if (cfg.canCreate == 1) {
             btns.push({
-                process: 'duplicate'
-                ,id: 'modx-abtn-duplicate'
+                id: 'modx-abtn-duplicate'
                 ,text: _('duplicate')
                 ,handler: this.duplicateResource
                 ,scope:this
@@ -125,8 +124,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
         }
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
-                process: 'delete'
-                ,id: 'modx-abtn-delete'
+                id: 'modx-abtn-delete'
                 ,text: _('delete')
                 ,handler: this.deleteResource
                 ,scope:this
@@ -134,16 +132,14 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             btns.push('-');
         }
         btns.push({
-            process: 'preview'
-            ,id: 'modx-abtn-preview'
+            id: 'modx-abtn-preview'
             ,text: _('view')
             ,handler: this.preview
             ,scope: this
         });
         btns.push('-');
         btns.push({
-            process: 'cancel'
-            ,id: 'modx-abtn-cancel'
+            id: 'modx-abtn-cancel'
             ,text: _('cancel')
             ,handler: this.cancel
             ,scope: this

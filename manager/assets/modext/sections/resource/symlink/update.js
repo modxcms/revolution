@@ -94,7 +94,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'update'
+                process: 'resource/update'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: cfg.richtext || MODx.request.activeSave == 1 ? false : true
@@ -114,8 +114,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
         }
         if (cfg.canCreate == 1) {
             btns.push({
-                process: 'duplicate'
-                ,text: _('duplicate')
+                text: _('duplicate')
                 ,handler: this.duplicateResource
                 ,scope:this
             });
@@ -123,23 +122,20 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
         }
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
-                process: 'delete'
-                ,text: _('delete')
+                text: _('delete')
                 ,handler: this.deleteResource
                 ,scope:this
             });
             btns.push('-');
         }
         btns.push({
-            process: 'preview'
-            ,text: _('view')
+            text: _('view')
             ,handler: this.preview
             ,scope: this
         });
         btns.push('-');
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
+            text: _('cancel')
             ,handler: this.cancel
             ,scope: this
         });

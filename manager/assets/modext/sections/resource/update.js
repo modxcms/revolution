@@ -17,7 +17,7 @@ MODx.page.UpdateResource = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'resource/update'
+        ,action: 'edit'
         ,actions: {
             'new': 'resource/create'
             ,edit: 'resource/update'
@@ -113,7 +113,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'update'
+                process: 'resource/update'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: MODx.request.reload ? false : true
@@ -135,8 +135,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         }
         if (cfg.canDuplicate == 1) {
             btns.push({
-                process: 'duplicate'
-                ,text: _('duplicate')
+                text: _('duplicate')
                 ,handler: this.duplicateResource
                 ,scope:this
                 ,id: 'modx-abtn-duplicate'
@@ -145,8 +144,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         }
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
-                process: 'delete'
-                ,text: _('delete')
+                text: _('delete')
                 ,handler: this.deleteResource
                 ,scope:this
                 ,id: 'modx-abtn-delete'
@@ -154,16 +152,14 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             btns.push('-');
         }
         btns.push({
-            process: 'preview'
-            ,text: _('view')
+            text: _('view')
             ,handler: this.preview
             ,scope: this
             ,id: 'modx-abtn-preview'
         });
         btns.push('-');
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
+            text: _('cancel')
             ,handler: this.cancel
             ,scope: this
             ,id: 'modx-abtn-cancel'

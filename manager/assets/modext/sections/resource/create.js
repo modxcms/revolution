@@ -40,7 +40,8 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'create'
+                process: 'resource/create'
+                ,reload: true
                 ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'

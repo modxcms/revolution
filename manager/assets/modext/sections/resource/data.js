@@ -11,8 +11,7 @@ MODx.page.ResourceData = function(config) {
     var btns = [];
     if (config.canEdit == 1) {
         btns.push({
-            process: 'edit'
-            ,id: 'modx-abtn-edit'
+            id: 'modx-abtn-edit'
             ,text: _('edit')
             ,hidden: config.canEdit == 1 ? false : true
             ,handler: this.editResource
@@ -21,23 +20,21 @@ MODx.page.ResourceData = function(config) {
         btns.push('-');
     }
     btns.push({
-        process: 'preview'
-        ,text: _('view')
+        text: _('view')
         ,handler: this.preview
         ,scope: this
         ,id: 'modx-abtn-preview'
     });
     btns.push('-');
     btns.push({
-        process: 'cancel'
-        ,text: _('cancel')
+        text: _('cancel')
         ,handler: this.cancel
         ,scope: this
         ,id: 'modx-abtn-cancel'
     });
     Ext.applyIf(config,{
         form: 'modx-resource-data'
-            ,actions: {
+        ,actions: {
             'new': 'resource/create'
             ,edit: 'resource/update'
             ,cancel: 'welcome'
