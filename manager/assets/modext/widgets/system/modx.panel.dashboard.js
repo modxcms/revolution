@@ -463,7 +463,7 @@ MODx.combo.DashboardWidgets = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget'
+            action: 'system/dashboard/widget/getlist'
             ,combo: true
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
