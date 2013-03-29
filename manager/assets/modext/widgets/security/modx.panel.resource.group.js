@@ -39,9 +39,9 @@ MODx.panel.ResourceGroups = function(config) {
                     ,items: [{
                         xtype: 'modx-tree-resource-simple'
                         ,id: 'modx-gr-tree-resource'
-                        ,url: MODx.config.connectors_url+'resource/index.php'
+                        ,url: MODx.config.connector_url
                         ,baseParams: {
-                            action: 'getNodes'
+                            action: 'resource/getNodes'
                             ,noMenu: true
                         }
                         ,ddGroup: 'rg2resource'

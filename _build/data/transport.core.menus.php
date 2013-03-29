@@ -95,9 +95,9 @@ $children[2]->fromArray(array (
 MODx.msg.confirm({
     title: _(\'remove_locks\')
     ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url+\'system/remove_locks.php\'
+    ,url: MODx.config.connector_url
     ,params: {
-        action: \'remove\'
+        action: \'system/remove_locks\'
     }
     ,listeners: {
         \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
@@ -276,9 +276,9 @@ $children[4]->fromArray(array (
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_access\')
     ,text: _(\'flush_access_confirm\')
-    ,url: MODx.config.connectors_url+\'security/access/index.php\'
+    ,url: MODx.config.connector_url
     ,params: {
-        action: \'flush\'
+        action: \'security/access/flush\'
     }
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}
@@ -299,9 +299,9 @@ $children[5]->fromArray(array (
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_sessions\')
     ,text: _(\'flush_sessions_confirm\')
-    ,url: MODx.config.connectors_url+\'security/flush.php\'
+    ,url: MODx.config.connector_url
     ,params: {
-        action: \'flush\'
+        action: \'security/flush\'
     }
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}

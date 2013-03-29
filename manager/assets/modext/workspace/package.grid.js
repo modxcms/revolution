@@ -65,7 +65,8 @@ MODx.grid.Package = function(config) {
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-package-grid'
-        ,url: MODx.config.connectors_url+'workspace/packages.php'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/packages/getlist'
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
@@ -133,7 +134,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'workspace/packages/getList'
     	};
         Ext.getCmp('modx-package-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -213,9 +214,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	/* Install a package */
 	,install: function( record ){
 		Ext.Ajax.request({
-			url : MODx.config.connectors_url+'workspace/packages.php'
+			url : MODx.config.connector_url
 			,params : { 
-				action : 'getAttribute'
+				action : 'workspace/packages/getAttribute'
 				,attributes: 'license,readme,changelog,setup-options'
 				,signature: record.data.signature
 			}
@@ -265,9 +266,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.msg.confirm({
            title: _('package_search_local_title')
            ,text: _('package_search_local_confirm')
-           ,url: MODx.config.connectors_url+'workspace/packages.php'
+           ,url: MODx.config.connector_url
            ,params: {
-                action: 'scanLocal'
+                action: 'workspace/packages/scanLocal'
            }
            ,listeners: {
                 'success':{fn:function(r) {
@@ -279,7 +280,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	
 	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
-        MODx.loadPage(MODx.action['workspaces/package/view'], 'signature='+this.menu.record.signature);
+        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature);
     }
     
 	/* Search for a package update - only for installed package */
@@ -287,7 +288,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'update-remote'
+                action: 'workspace/packages/update-remote'
                 ,signature: this.menu.record.signature
             }
             ,listeners: {
@@ -330,7 +331,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         var topic = '/workspace/package/uninstall/'+r.signature+'/';
         this.loadConsole(btn,topic);
         Ext.apply(va,{
-            action: 'uninstall'
+            action: 'workspace/packages/uninstall'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic
@@ -395,8 +396,8 @@ MODx.window.PackageUpdate = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('package_update')
-        ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
-        ,action: 'download'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/packages/rest/download'
         ,height: 400
         ,width: 400
         ,id: 'modx-window-package-update'

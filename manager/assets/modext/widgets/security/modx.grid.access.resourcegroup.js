@@ -10,9 +10,9 @@ MODx.grid.AccessResourceGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('ugrg_grid_title')
-        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/access/getList'
             ,type: config.type || 'modAccessResourceGroup'
         }
         ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','policy','policy_name','context_key','menu']
@@ -45,7 +45,7 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
                 ,listeners: {
                     'success': {fn: function(frm,a) {
                         this.getStore().baseParams = {
-                            action: 'getList'
+                            action: 'security/access/getList'
                             ,type: this.config.type
                             ,target: this.combos.rg.getValue()
                             ,principal: this.combos.rg.getValue()
@@ -84,7 +84,7 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
             ,text: _('access_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'removeAcl'
+                action: 'security/access/removeAcl'
                 ,id: this.menu.record.id
                 ,type: this.config.type
             }
@@ -96,7 +96,7 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
     
     ,clearFilter: function(btn,e) {
         this.getStore().baseParams = { 
-            action: 'getList'
+            action: 'security/access/getList'
             ,type: this.config.type
             ,target: ''
             ,principal: ''
@@ -111,7 +111,7 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
         this.combos.ug = MODx.load({ xtype: 'modx-combo-usergroup' });
         this.combos.ug.on('select',function(btn,e) {
             this.getStore().baseParams = {
-                action: 'getList'
+                action: 'security/access/getList'
                 ,type: this.config.type
                 ,target: this.combos.rg.getValue()
                 ,principal: this.combos.ug.getValue()
@@ -122,7 +122,7 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
         this.combos.rg = MODx.load({ xtype: 'modx-combo-resourcegroup' });
         this.combos.rg.on('select',function(btn,e) {
             this.getStore().baseParams = {
-                action: 'getList'
+                action: 'security/access/getList'
                 ,type: this.config.type
                 ,target: this.combos.rg.getValue()
                 ,principal: this.combos.ug.getValue()
@@ -166,8 +166,11 @@ MODx.window.CreateAccessResourceGroup = function(config) {
     this.ident = config.ident || 'caccrg'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugrg_mutate')
-        ,url: MODx.config.connectors_url+'security/access/index.php'
-        ,baseParams: { action: 'addAcl', type: 'modAccessResourceGroup' }
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/addAcl'
+            ,type: 'modAccessResourceGroup'
+        }
         ,autoHeight: true
         ,width: 350
         ,type: 'modAccessResourceGroup'
@@ -185,10 +188,6 @@ MODx.window.CreateAccessResourceGroup = function(config) {
             ,name: 'principal'
             ,hiddenName: 'principal'
             ,id: 'modx-'+this.ident+'-principal'
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
             ,anchor: '100%'
         },{
             xtype: 'textfield'
@@ -202,10 +201,6 @@ MODx.window.CreateAccessResourceGroup = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,id: 'modx-'+this.ident+'-policy'
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
             ,anchor: '100%'
         },{
             xtype: 'modx-combo-context'
@@ -233,8 +228,11 @@ MODx.window.UpdateAccessResourceGroup = function(config) {
     this.ident = config.ident || 'uaccrg'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugrg_mutate')
-        ,url: MODx.config.connectors_url+'security/access/index.php'
-        ,baseParams: { action: 'updateAcl', type: 'modAccessResourceGroup' }
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/updateAcl'
+            ,type: 'modAccessResourceGroup'
+        }
         ,autoHeight: true
         ,width: 350
         ,type: 'modAccessResourceGroup'
@@ -253,10 +251,6 @@ MODx.window.UpdateAccessResourceGroup = function(config) {
             ,hiddenName: 'principal'
             ,id: 'modx-'+this.ident+'-principal'
             ,value: r.principal || ''
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('authority')
@@ -271,10 +265,6 @@ MODx.window.UpdateAccessResourceGroup = function(config) {
             ,hiddenName: 'policy'
             ,id: 'modx-'+this.ident+'-policy'
             ,value: r.policy || ''
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
         },{
             xtype: 'modx-combo-context'
             ,fieldLabel: _('context')

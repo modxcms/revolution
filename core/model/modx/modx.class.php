@@ -1329,6 +1329,8 @@ class modX extends xPDO {
                 $this->config['connectors_path']= MODX_CONNECTORS_PATH;
             if (!isset ($this->config['connectors_url']))
                 $this->config['connectors_url']= MODX_CONNECTORS_URL;
+            if (!isset ($this->config['connector_url']))
+                $this->config['connector_url']= MODX_CONNECTORS_URL . 'index.php';
             if (!isset ($this->config['processors_path']))
                 $this->config['processors_path']= MODX_PROCESSORS_PATH;
             if (!isset ($this->config['request_param_id']))

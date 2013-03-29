@@ -54,9 +54,9 @@ MODx.panel.EditFile = function(config) {
     config.record = config.record || {};
     Ext.applyIf(config,{
         id: 'modx-panel-file-edit'
-        ,url: MODx.config.connectors_url+'browser/file.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'browser/file/update'
             ,file: config.file
             ,wctx: MODx.request.wctx
         }

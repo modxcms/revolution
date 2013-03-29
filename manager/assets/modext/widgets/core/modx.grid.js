@@ -191,14 +191,15 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
     }
     
-    ,remove: function(text) {
+    ,remove: function(text, action) {
         if (this.destroying) {
             return MODx.grid.Grid.superclass.remove.apply(this, arguments);
         }
         var r = this.menu.record;
         text = text || 'confirm_remove';
         var p = this.config.saveParams || {};
-        Ext.apply(p,{ action: 'remove' });
+        Ext.apply(p,{ action: action || 'remove' });
+        console.log(action, p);
         var k = this.config.primaryKey || 'id';
         p[k] = r[k];
         

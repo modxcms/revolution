@@ -191,9 +191,9 @@ MODx.panel.DashboardWidget = function(config) {
 
     Ext.applyIf(config,{
         id: 'modx-panel-dashboard-widget'
-        ,url: MODx.config.connectors_url+'system/dashboard/widget.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'system/dashboard/widget/update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -259,7 +259,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     }
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            MODx.loadPage(MODx.action['system/dashboards/widget/update'], 'id='+o.result.object.id);
+            MODx.loadPage('system/dashboards/widget/update', 'id='+o.result.object.id);
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
@@ -274,8 +274,8 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-widget-dashboards'
-        ,url: MODx.config.connectors_url+'system/dashboard.php'
-        ,action: 'getList'
+        ,url: MODx.config.connector_url
+        ,action: 'system/dashboard/getList'
         ,fields: ['id','name','description']
         ,autoHeight: true
         ,primaryKey: 'widget'

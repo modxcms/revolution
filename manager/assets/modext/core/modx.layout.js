@@ -208,23 +208,23 @@ MODx.LayoutMgr = function() {
     var _activeMenu = 'menu0';
     return {
         loadPage: function(action, parameters) {
-            var url = '';
             // Handles url, passed as first argument
-            if (isNaN(action)) {
-                url = action;
-            } else {
-                var parts = [];
-                if (action) {
-                    parts.push('a=' + action);
+            var parts = [];
+            if (action) {
+                if (action.substr(0,1) == '?' || (action.substr(0, "index.php?".length) == 'index.php?')) {
+                    parts.push(action);
+                } else {
+                    parts.push('?a=' + action);
                 }
-                if (parameters) {
-                    parts.push(parameters);
-                }
-                url = '?' + parts.join('&');
             }
+            if (parameters) {
+                parts.push(parameters);
+            }
+            var url = parts.join('&');
             if (MODx.fireEvent('beforeLoadPage', url)) {
                 location.href = url;
             }
+            return false;
         }
         ,changeMenu: function(a,sm) {
             if (sm === _activeMenu) return false;

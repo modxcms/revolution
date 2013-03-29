@@ -14,11 +14,11 @@ MODx.page.UpdateStatic = function(config) {
     });
         
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'update'
+        ,action: 'resource/update'
         ,actions: {
             'new': 'resource/create'
             ,edit: 'resource/update'
@@ -49,14 +49,14 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
     ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'duplicate'
+                action: 'resource/duplicate'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
+                    MODx.loadPage('resource/update', 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -65,14 +65,14 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
     ,deleteResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_delete_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'delete'
+                action: 'resource/delete'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
+                    MODx.loadPage('resource/update', 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -85,19 +85,19 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage(MODx.action['welcome']);
+                    MODx.loadPage('welcome');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage(MODx.action['welcome']);
+            MODx.loadPage('welcome');
         }
     }
     ,getButtons: function(cfg) {
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'update'
+                process: 'resource/update'
                 ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
@@ -119,8 +119,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
         }
         if (cfg.canCreate == 1) {
             btns.push({
-                process: 'duplicate'
-                ,text: _('duplicate')
+                text: _('duplicate')
                 ,handler: this.duplicateResource
                 ,scope:this
                 ,id: 'modx-abtn-duplicate'
@@ -129,8 +128,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
         }
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
-                process: 'delete'
-                ,text: _('delete')
+                text: _('delete')
                 ,handler: this.deleteResource
                 ,scope:this
                 ,id: 'modx-abtn-delete'
@@ -138,16 +136,14 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             btns.push('-');
         }
         btns.push({
-            process: 'preview'
-            ,text: _('view')
+            text: _('view')
             ,handler: this.preview
             ,scope: this
             ,id: 'modx-abtn-preview'
         });
         btns.push('-');
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
+            text: _('cancel')
             ,handler: this.cancel
             ,scope: this
             ,id: 'modx-abtn-cancel'

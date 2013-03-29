@@ -11,7 +11,10 @@ MODx.grid.ManagerLog = function(config) {
     Ext.applyIf(config,{
         title: _('manager_log')
         ,id: 'modx-grid-manager-log'
-        ,url: MODx.config.connectors_url+'system/log.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/log/getlist'
+        }
         ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
         ,autosave: false
         ,paging: true
@@ -166,7 +169,7 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
     filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
         var g = Ext.getCmp('modx-grid-manager-log');
-        p.action = 'getList';
+        p.action = 'system/log/getList';
         g.getStore().baseParams = p;
         g.getStore().load({
             params: p
@@ -186,9 +189,9 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
         MODx.msg.confirm({
             title: _('warning')
             ,text: _('mgrlog_clear_confirm')
-            ,url: MODx.config.connectors_url+'system/log.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'truncate'
+                action: 'system/log/truncate'
             }
             ,listeners: {
                 'success': {fn:function() {

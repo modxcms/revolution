@@ -12,7 +12,7 @@ MODx.page.UpdateUserGroup = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-user-group'
         ,buttons: [{
-            process: 'update'
+            process: 'security/group/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -21,9 +21,10 @@ MODx.page.UpdateUserGroup = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: {a:'security/permission'}
+            text: _('cancel')
+            ,handler: function() {
+                MODx.loadPage('security/user')
+            }
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

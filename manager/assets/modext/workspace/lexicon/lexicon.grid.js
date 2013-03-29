@@ -10,10 +10,10 @@ MODx.grid.Lexicon = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-lexicon'
-        ,url: MODx.config.connectors_url+'workspace/lexicon/index.php'
+        ,url: MODx.config.connector_url
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
-            action: 'getList'
+            action: 'workspace/lexicon/getList'
             ,'namespace': 'core'
             ,topic: ''
             ,language: MODx.config.manager_language || 'en'
@@ -149,7 +149,7 @@ MODx.grid.Lexicon = function(config) {
                     xtype: 'modx-window-lexicon-export'
                     ,listeners: {
                         'success': {fn:function(o) {
-                            location.href = MODx.config.connectors_url+'workspace/lexicon/index.php?action=export&HTTP_MODAUTH='+MODx.siteId+'&download='+o.a.result.message;
+                            location.href = MODx.config.connector_url+'?action=workspace/lexicon/export&HTTP_MODAUTH='+MODx.siteId+'&download='+o.a.result.message;
                         },scope:this}
                         ,'show': {fn:function() {
                             var w = this.windows['modx-window-lexicon-export'];
@@ -190,7 +190,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.store.baseParams = {
-            action: 'getList'
+            action: 'workspace/lexicon/getList'
             ,'namespace': 'core'
             ,topic: 'default'
             ,language: 'en'
@@ -295,7 +295,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     	MODx.Ajax.request({
     	   url: this.config.url
-    	   ,params: {action: 'reloadFromBase' ,register: 'mgr' ,topic: topic}
+    	   ,params: {action: 'workspace/lexicon/reloadFromBase' ,register: 'mgr' ,topic: topic}
     	   ,listeners: {
                 'success': {fn:function(r) {
                     this.refresh();
@@ -306,7 +306,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     ,revertEntry: function() {
         var p = this.menu.record;
-        p.action = 'revert';
+        p.action = 'workspace/lexicon/revert';
 
     	MODx.Ajax.request({
     	   url: this.config.url
@@ -371,8 +371,8 @@ MODx.window.ExportLexicon = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('lexicon_export')
-        ,url: MODx.config.connectors_url+'workspace/lexicon/index.php'
-        ,action: 'export'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/lexicon/export'
         ,fileUpload: true
         ,fields: [{
             html: _('lexicon_export_desc')
@@ -427,8 +427,8 @@ MODx.window.LexiconEntryCreate = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('entry_create')
-        ,url: MODx.config.connectors_url+'workspace/lexicon/index.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/lexicon/create'
         ,fileUpload: true
         ,fields: [{
             xtype: 'textfield'

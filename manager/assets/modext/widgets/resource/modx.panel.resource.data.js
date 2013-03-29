@@ -6,8 +6,10 @@ MODx.panel.ResourceData = function(config) {
         ,width: 300
     };
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'resource/data'
+        }
         ,id: 'modx-panel-resource-data'
         ,class_key: 'modResource'
         ,cls: 'container form-with-labels'
@@ -168,9 +170,9 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
         	return false;
         }
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'data'
+                action: 'resource/data'
                 ,id: this.config.resource
                 ,class_key: this.config.class_key
             }

@@ -10,7 +10,10 @@ MODx.grid.Context = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('contexts')
-        ,url: MODx.config.connectors_url+'context/index.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'context/getlist'
+        }
         ,fields: ['key','description','perm']
         ,paging: true
         ,autosave: true
@@ -59,7 +62,7 @@ MODx.grid.Context = function(config) {
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     updateContext: function(itm,e) {
-        MODx.loadPage(MODx.action['context/update'], 'key='+this.menu.record.key);
+        MODx.loadPage('context/update', 'key='+this.menu.record.key);
     }
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
@@ -75,7 +78,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             m.push('-');
             m.push({
                 text: _('context_remove')
-                ,handler: this.remove.createDelegate(this,["context_remove_confirm"])
+                ,handler: this.remove.createDelegate(this,['context_remove_confirm','context/remove'])
             });
         }
         return m;
@@ -90,7 +93,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'context/getList'
     	};
         Ext.getCmp('modx-ctx-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -112,8 +115,8 @@ MODx.window.CreateContext = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('context_create')
-        ,url: MODx.config.connectors_url+'context/index.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'context/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('context_key')

@@ -10,9 +10,9 @@ MODx.grid.AccessContext = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-access-context'
-        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/access/getList'
             ,type: config.type || 'modAccessContext'
             ,target: config.context_key
         }
@@ -113,7 +113,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
             ,text: _('access_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'removeAcl'
+                action: 'security/access/removeAcl'
                 ,id: this.menu.record.id
                 ,type: this.config.type || 'modAccessContext'
             }
@@ -132,8 +132,11 @@ MODx.window.UpdateAccessContext = function(config) {
     this.ident = config.ident || 'uactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,url: MODx.config.connectors_url+'security/access/index.php'
-        ,baseParams: { action: 'updateAcl', type: config.type || 'modAccessContext' }
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/updateAcl'
+            ,type: config.type || 'modAccessContext'
+        }
         ,height: 250
         ,width: 350
         ,type: 'modAccessContext'
@@ -151,8 +154,8 @@ MODx.window.UpdateAccessContext = function(config) {
             ,id: 'modx-'+this.ident+'-principal'
             ,value: r.principal || ''
             ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
+                action: 'security/group/getList'
+                ,combo: true
             }
             ,anchor: '90%'
         },{
@@ -169,10 +172,6 @@ MODx.window.UpdateAccessContext = function(config) {
             ,hiddenName: 'policy'
             ,id: 'modx-'+this.ident+'-policy'
             ,value: r.policy || ''
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
             ,anchor: '90%'
         },{
             xtype: 'hidden'
@@ -198,8 +197,11 @@ MODx.window.CreateAccessContext = function(config) {
     this.ident = config.ident || 'cactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,url: MODx.config.connectors_url+'security/access/index.php'
-        ,baseParams: { action: 'addAcl', type: config.type || 'modAccessContext' }
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/addAcl'
+            ,type: config.type || 'modAccessContext'
+        }
         ,height: 250
         ,width: 350
         ,type: 'modAccessContext'
@@ -219,10 +221,6 @@ MODx.window.CreateAccessContext = function(config) {
             ,name: 'principal'
             ,hiddenName: 'principal'
             ,id: 'modx-'+this.ident+'-usergroup'
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
             ,anchor: '90%'
         },{
             xtype: 'textfield'
@@ -236,10 +234,6 @@ MODx.window.CreateAccessContext = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,id: 'modx-'+this.ident+'-policy'
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
             ,anchor: '90%'
         }]
     });

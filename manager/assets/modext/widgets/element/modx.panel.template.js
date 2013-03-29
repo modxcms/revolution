@@ -10,8 +10,10 @@ MODx.panel.Template = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'element/template.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'element/template/get'
+        }
         ,id: 'modx-panel-template'
 		,cls: 'container form-with-labels'
         ,class_key: 'modTemplate'
