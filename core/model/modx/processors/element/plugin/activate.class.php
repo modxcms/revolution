@@ -19,6 +19,11 @@ class modPluginActivateProcessor extends modObjectUpdateProcessor {
         return parent::beforeSave();
     }
 
+    public function afterSave() {
+        $this->modx->cacheManager->refresh();
+        return parent::afterSave();
+    }
+
     public function cleanup() {
         return $this->success('',array($this->object->get('id')));
     }

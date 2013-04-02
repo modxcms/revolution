@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9132] Refresh cache when enabling/disabling plugin
 - [#9690] Fix various issues with server_offset_time
 - [#9738] Prevent working context overriding user settings
 - Fix error getting MediaSource table classes on cached Resources
