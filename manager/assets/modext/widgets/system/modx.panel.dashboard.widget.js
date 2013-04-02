@@ -213,7 +213,7 @@ MODx.panel.DashboardWidget = function(config) {
             ,forceLayout: true
             ,deferredRender: false
             ,stateful: true
-            ,stateId: 'modx-dashboard-widget-tabpanel'
+            ,stateId: 'modx-dashboard-widget-tabpanel' + ((Ext.isEmpty(config.record.id)) ? '-new' : '')
             ,stateEvents: ['tabchange']
             ,getState:function() {
                 return {activeTab:this.items.indexOf(this.getActiveTab())};
