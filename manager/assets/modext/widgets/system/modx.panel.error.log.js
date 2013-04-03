@@ -61,6 +61,11 @@ MODx.panel.ErrorLog = function(config) {
             ,handler: this.clear
             ,scope: this
             ,hidden: MODx.hasEraseErrorLog ? false : true
+        },{
+            text: _('ext_refresh')
+            ,handler: this.refreshLog
+            ,scope: this
+            ,hidden: config.record.tooLarge
         }]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
@@ -77,6 +82,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         return true;
     }
     ,clear: function() {
+        this.el.mask(_('working'));
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
@@ -84,6 +90,26 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
+                    this.el.unmask();
+                    if (this.config.tooLarge) {
+                        location.href = location.href;
+                    } else {
+                        this.getForm().setValues(r.object);
+                    }
+                },scope:this}
+            }
+        });
+    }
+    ,refreshLog: function() {
+        this.el.mask(_('working'));
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'get'
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.el.unmask();
                     if (this.config.tooLarge) {
                         location.href = location.href;
                     } else {
