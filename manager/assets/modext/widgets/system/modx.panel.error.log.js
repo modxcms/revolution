@@ -19,7 +19,6 @@ MODx.panel.ErrorLog = function(config) {
             ,hideLabels: true
             ,autoHeight: true
             ,border: true
-            ,buttonAlign: 'center'
             ,items: [{
                 html: '<p>'+_('error_log_desc')+'</p>'
 				,bodyCssClass: 'panel-desc'
@@ -51,16 +50,17 @@ MODx.panel.ErrorLog = function(config) {
 					,scope: this
 				}]
             }]
-        },{
-            xtype: 'button'
-            ,text: _('clear')
-            ,style: {
-                margin: '20px auto 0'
-                ,padding: '1px 10px'
-            }
-            ,handler: this.clear
-            ,scope: this
-            ,hidden: MODx.hasEraseErrorLog ? false : true
+            ,buttonAlign: 'center'
+            ,buttons: [{
+                text: _('clear')
+                ,handler: this.clear
+                ,scope: this
+                ,hidden: MODx.hasEraseErrorLog ? false : true
+            },{
+                text: _('ext_refresh')
+                ,handler: this.refreshLog
+                ,scope: this
+            }]
         }]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
@@ -77,14 +77,38 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         return true;
     }
     ,clear: function() {
+        this.el.mask(_('working'));
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
                 action: 'clear'
             }
             ,listeners: {
+                'success': {
+                    fn: function(r) {
+                        this.el.unmask();
+                        if (this.config.record.tooLarge) {
+                            location.href = location.href;
+                        } else {
+                            this.getForm().setValues(r.object);
+                        }
+                    }
+                    ,scope:this
+                }
+            }
+        });
+    }
+    ,refreshLog: function() {
+        this.el.mask(_('working'));
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'get'
+            }
+            ,listeners: {
                 'success': {fn:function(r) {
-                    if (this.config.tooLarge) {
+                    this.el.unmask();
+                    if (r.object.tooLarge) {
                         location.href = location.href;
                     } else {
                         this.getForm().setValues(r.object);
