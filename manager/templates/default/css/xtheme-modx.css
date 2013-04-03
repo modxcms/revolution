@@ -204,7 +204,7 @@ ul.x-tab-strip li.x-tab-edge{
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
     -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;    
+    -webkit-border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background-color: #777 !important;
@@ -2111,7 +2111,7 @@ a.x-menu-item {
 	font-size:14px;
 	font-weight:bold;
 	padding:10px 10px 8px;
-	text-shadow:0 1px 1px #ffffff;	
+	text-shadow:0 1px 1px #ffffff;
 	margin-top:0;
 }
 .x-portal-space {
@@ -2230,6 +2230,27 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-layout-cmini-west .x-layout-mini {
     background-image:url(../images/modx-theme/layout/mini-right.gif);
 }
+
+#modx-leftbar-tabs-xcollapsed,
+#modx-leftbar-tabs-xsplit {
+    background-color: transparent;
+}
+    #modx-leftbar-tabs-xcollapsed .x-layout-mini,
+    #modx-leftbar-tabs-xsplit .x-layout-mini {
+        opacity: 1;
+    }
+    #modx-leftbar-tabs-xsplit .x-layout-mini-west {
+        background-image:url(../images/modx-theme/layout/mini-left-green.gif);
+    }
+    #modx-leftbar-tabs-xsplit .x-layout-mini-west:hover {
+        background-image:url(../images/modx-theme/layout/mini-left-over.gif);
+    }
+    #modx-leftbar-tabs-xcollapsed .x-layout-mini-west {
+        background-image:url(../images/modx-theme/layout/mini-right-green.gif);
+    }
+    #modx-leftbar-tabs-xcollapsed .x-layout-mini-west:hover {
+        background-image:url(../images/modx-theme/layout/mini-right-over.gif);
+    }
 
 .x-layout-cmini-east .x-layout-mini {
     background-image:url(../images/modx-theme/layout/mini-left.gif);
@@ -2440,7 +2461,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 .x-window .x-panel-mc { border:0 none; }
 .x-window .x-panel-ml { border:0 none; }
-.x-window .x-panel-bl.x-panel-nofooter, 
+.x-window .x-panel-bl.x-panel-nofooter,
 .x-window .x-panel-tl {
 	background-color:transparent;
 	background-image:none;
@@ -2452,12 +2473,12 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	background-color:#f5f5f5;
 	border-color:0 none !important;
 }
-.x-window-plain .x-window-body { 
-	border:0 none; 
+.x-window-plain .x-window-body {
+	border:0 none;
 }
 .x-window-body{
 	background-color: white;
-    border-bottom: 1px solid #D0D0D0;    
+    border-bottom: 1px solid #D0D0D0;
     border-top: 1px solid #F7F7F7;
 }
 .x-window-dlg .x-window-body {
@@ -2558,15 +2579,15 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-window-dlg .x-window-header-text { font-size:14px; }
 .x-window .x-window-dlg .x-window-body { padding:15px; }
 .x-window .x-window-dlg .x-panel-btns { border-top:0 none; }
-.x-window .x-window-tc, 
+.x-window .x-window-tc,
 .x-window .x-window-bc { background-image:none; }
-.x-window .x-window-tr, 
-.x-window .x-window-br, 
+.x-window .x-window-tr,
+.x-window .x-window-br,
 .x-window .x-window-mr {
 	background-image:none;
 	padding-right:0;
 }
-.x-window .x-window-tl, 
+.x-window .x-window-tl,
 .x-window .x-window-ml {
 	background-image:none;
 	padding-left:0;
@@ -2588,7 +2609,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 	border:0 none;
 }
 .x-window .x-window-maximized .x-window-tc { background-color:#ffffff; }
-.x-window .x-window-bbar .x-toolbar, 
+.x-window .x-window-bbar .x-toolbar,
 .x-window .x-window-bbar-noborder .x-toolbar {
 	background:#d5dade;
 	background:-moz-linear-gradient(center bottom,#d5dade 0%,#eff0f4 100%) repeat scroll 0 0 transparent;
