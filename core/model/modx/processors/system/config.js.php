@@ -81,6 +81,21 @@ $c = array_merge($modx->config,$workingContext->config,$modx->_userConfig,$c);
 
 unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username'],$c['connections'],$c['connection_init'],$c['connection_mutable'],$c['dbname'],$c['database'],$c['driverOptions'],$c['dsn'],$c['session_name']);
 
+$config = $modx->invokeEvent('OnBeforeConfigSet', array(
+    'config' => $c,
+));
+if (!empty($config) && is_array($config)) {
+    foreach ($config as $key) {
+        if (is_array($key)) {
+            foreach ($key as $keyName) {
+                unset($c[$keyName]);
+            }
+        } else {
+            unset($c[$key]);
+        }
+    }
+}
+
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);
 $o .= '; MODx.perm = {};';
