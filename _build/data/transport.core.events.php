@@ -805,6 +805,12 @@ $events['OnSiteSettingsRender']->fromArray(array (
   'service' => 1,
   'groupname' => 'Settings',
 ), '', true, true);
+$events['OnBeforeConfigSet']= $xpdo->newObject('modEvent');
+$events['OnBeforeConfigSet']->fromArray(array (
+  'name' => 'OnBeforeConfigSet',
+  'service' => 1,
+  'groupname' => 'Settings',
+), '', true, true);
 
 
 /* Internationalization */
