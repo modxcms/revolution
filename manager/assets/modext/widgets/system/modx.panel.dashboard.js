@@ -170,7 +170,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
     }
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            MODx.loadPage(MODx.action['system/dashboards/update'], 'id='+o.result.object.id);
+            MODx.loadPage('system/dashboards/update', 'id='+o.result.object.id);
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
@@ -327,7 +327,7 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
         var fldStore = fld.getStore();
         var fldRi = fldStore.find('id',fld.getValue());
         var rec = fldStore.getAt(fldRi);
-        
+
         if (id != '' && this.fp.getForm().isValid()) {
 
             if (this.fireEvent('success',{
