@@ -19,53 +19,49 @@ MODx.panel.ErrorLog = function(config) {
             ,hideLabels: true
             ,autoHeight: true
             ,border: true
-            ,buttonAlign: 'center'
             ,items: [{
                 html: '<p>'+_('error_log_desc')+'</p>'
-				,bodyCssClass: 'panel-desc'
+                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
-				xtype: 'panel'
-				,border: false
-				,cls:'main-wrapper'
-				,layout: 'form'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,name: 'log'
-					,grow: true
-					,growMax: 400
-					,anchor: '100%'
-					,hidden: config.record.tooLarge ? true : false
-				},{
-				    html: '<p>'+_('error_log_too_large',{
+                xtype: 'panel'
+                ,border: false
+                ,cls:'main-wrapper'
+                ,layout: 'form'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'textarea'
+                    ,name: 'log'
+                    ,grow: true
+                    ,growMax: 400
+                    ,anchor: '100%'
+                    ,hidden: config.record.tooLarge ? true : false
+                },{
+                    html: '<p>'+_('error_log_too_large',{
                         name: config.record.name
                     })+'</p>'
                     ,border: false
-					,hidden: config.record.tooLarge ? false : true
-				},MODx.PanelSpacer,{
-				    xtype: 'button'
-				    ,text: _('error_log_download',{size: config.record.size})
-					,hidden: config.record.tooLarge ? false : true
-					,handler: this.download
-					,scope: this
-				}]
+                    ,hidden: config.record.tooLarge ? false : true
+                },MODx.PanelSpacer,{
+                    xtype: 'button'
+                    ,text: _('error_log_download',{size: config.record.size})
+                    ,hidden: config.record.tooLarge ? false : true
+                    ,handler: this.download
+                    ,scope: this
+                }]
             }]
-        },{
-            xtype: 'button'
-            ,text: _('clear')
-            ,style: {
-                margin: '20px auto 0'
-                ,padding: '1px 10px'
-            }
-            ,handler: this.clear
-            ,scope: this
-            ,hidden: MODx.hasEraseErrorLog ? false : true
-        },{
-            text: _('ext_refresh')
-            ,handler: this.refreshLog
-            ,scope: this
-            ,hidden: config.record.tooLarge
+            ,buttonAlign: 'center'
+            ,buttons: [{
+                text: _('clear')
+                ,handler: this.clear
+                ,scope: this
+                ,hidden: MODx.hasEraseErrorLog ? false : true
+            },{
+                text: _('ext_refresh')
+                ,handler: this.refreshLog
+                ,scope: this
+                ,hidden: config.record.tooLarge
+            }]
         }]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
