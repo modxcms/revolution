@@ -87,7 +87,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.el.unmask();
-                    if (this.config.tooLarge) {
+                    if (this.config.record.tooLarge) {
                         location.href = location.href;
                     } else {
                         this.getForm().setValues(r.object);
@@ -106,7 +106,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.el.unmask();
-                    if (this.config.tooLarge) {
+                    if (this.config.record.tooLarge) {
                         location.href = location.href;
                     } else {
                         this.getForm().setValues(r.object);
