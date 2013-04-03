@@ -55,12 +55,14 @@ MODx.panel.Packages = function(config) {
 	MODx.panel.Packages.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.Packages,MODx.Panel,{
-	activate: function(){
-		Ext.getCmp('modx-layout').showLeftbar();
-		Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
-		Ext.getCmp('modx-package-grid').activate();
-		Ext.each(this.buttons, function(btn){ Ext.getCmp(btn.id).hide(); });
-	}
+    activate: function() {
+        if (MODx.defaultState['modx-leftbar-tabs'] && (MODx.defaultState['modx-leftbar-tabs'].collapsed != true)) {
+            Ext.getCmp('modx-layout').showLeftbar();
+        }
+        Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
+        Ext.getCmp('modx-package-grid').activate();
+        Ext.each(this.buttons, function(btn){ Ext.getCmp(btn.id).hide(); });
+    }
 
 	,loadConsole: function(btn,topic) {
     	if (this.console === null || this.console == undefined) {
