@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9571] Fix template/update always refreshing cache
 - [#9093] Make collapsed tree panel tab more visible
 - [#8859] Add button to refresh error log
 - [#9772] Fix deprecated value for CURLOPT_SSL_VERIFYHOST
