@@ -1,6 +1,6 @@
 /**
  * Loads the Template panel
- * 
+ *
  * @class MODx.panel.Template
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -72,7 +72,7 @@ MODx.panel.Template = function(config) {
                             }}
                         }
                     },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-template-templatename'
                         ,html: _('template_desc_name')
                         ,cls: 'desc-under'
@@ -127,7 +127,7 @@ MODx.panel.Template = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                     },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-template-category'
                         ,html: _('template_desc_category')
                         ,cls: 'desc-under'
@@ -140,7 +140,7 @@ MODx.panel.Template = function(config) {
                         ,inputValue: 1
                         ,checked: config.record.locked || false
                     },{
-                        xtype: 'checkbox'
+                        xtype: 'xcheckbox'
                         ,boxLabel: _('clear_cache_on_save')
                         ,description: _('clear_cache_on_save_msg')
                         ,hideLabel: true
@@ -197,7 +197,7 @@ MODx.panel.Template = function(config) {
 				,labelAlign: 'top'
 				,items: [{
 					xtype: 'textarea'
-					,fieldLabel: _('template_code')						
+					,fieldLabel: _('template_code')
 					,name: 'content'
 					,id: 'modx-template-content'
 					,anchor: '100%'
@@ -287,7 +287,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         Ext.getCmp('modx-grid-template-tv').getStore().commitChanges();
         this.getForm().setValues(r.result.object);
-        
+
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-template-category').getValue();
@@ -307,7 +307,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
             location.href = u;
         });
         this.submit();
-    }    
+    }
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-template-content');
