@@ -7,8 +7,7 @@ MODx.panel.ErrorLog = function(config) {
         ,baseParams: {
             action: 'clear'
         }
-        ,buttonAlign: 'center'
-        ,layout: 'fit'
+        ,layout: 'form'
         ,items: [{
             html: '<h2>'+_('error_log')+'</h2>'
             ,id: 'modx-error-log-header'
@@ -52,9 +51,13 @@ MODx.panel.ErrorLog = function(config) {
 					,scope: this
 				}]
             }]
-        }]
-        ,buttons: [{
-            text: _('clear')
+        },{
+            xtype: 'button'
+            ,text: _('clear')
+            ,style: {
+                margin: '20px auto 0'
+                ,padding: '1px 10px'
+            }
             ,handler: this.clear
             ,scope: this
             ,hidden: MODx.hasEraseErrorLog ? false : true
