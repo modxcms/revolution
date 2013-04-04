@@ -575,6 +575,7 @@ MODx.window.UpdateSetting = function(config) {
             xtype: config.record ? config.record.xtype : 'textarea'
             ,fieldLabel: _('value')
             ,name: 'value'
+            ,hiddenName: 'value'
             ,id: 'modx-'+this.ident+'-value'
             ,anchor: '100%'
         }]
