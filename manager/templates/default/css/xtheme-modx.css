@@ -2231,27 +2231,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
     background-image:url(../images/modx-theme/layout/mini-right.gif);
 }
 
-#modx-leftbar-tabs-xcollapsed,
-#modx-leftbar-tabs-xsplit {
-    background-color: transparent;
-}
-    #modx-leftbar-tabs-xcollapsed .x-layout-mini,
-    #modx-leftbar-tabs-xsplit .x-layout-mini {
-        opacity: 1;
-    }
-    #modx-leftbar-tabs-xsplit .x-layout-mini-west {
-        background-image:url(../images/modx-theme/layout/mini-left-green.gif);
-    }
-    #modx-leftbar-tabs-xsplit .x-layout-mini-west:hover {
-        background-image:url(../images/modx-theme/layout/mini-left-over.gif);
-    }
-    #modx-leftbar-tabs-xcollapsed .x-layout-mini-west {
-        background-image:url(../images/modx-theme/layout/mini-right-green.gif);
-    }
-    #modx-leftbar-tabs-xcollapsed .x-layout-mini-west:hover {
-        background-image:url(../images/modx-theme/layout/mini-right-over.gif);
-    }
-
 .x-layout-cmini-east .x-layout-mini {
     background-image:url(../images/modx-theme/layout/mini-left.gif);
 }
