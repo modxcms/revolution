@@ -243,7 +243,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
     public function cleanup() {
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod');
         if (!empty($passwordNotifyMethod) && !empty($this->newPassword) && $passwordNotifyMethod  == 's') {
-            return $this->success($this->modx->lexicon('user_created_password_message',array(
+            return $this->success($this->modx->lexicon('user_updated_password_message',array(
                 'password' => $this->newPassword,
             )),$this->object);
         } else {
