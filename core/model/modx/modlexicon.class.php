@@ -343,6 +343,7 @@ class modLexicon {
                 }
             }
         }
+        sort($topics);
         return $topics;
     }
 
@@ -365,6 +366,7 @@ class modLexicon {
                 $languages[] = $language->getFilename();
             }
         }
+        sort($languages);
         return $languages;
     }
 
