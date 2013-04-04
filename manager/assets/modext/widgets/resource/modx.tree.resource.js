@@ -696,13 +696,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
         m.push({
             text: _('create')
-            ,handler: Ext.emptyFn
+            ,handler: function() {return false;}
             ,menu: {items: ct}
         });
         if (ui && ui.hasClass('pqcreate')) {
             m.push({
                text: _('quick_create')
-               ,handler: Ext.emptyFn
+                ,handler: function() {return false;}
                ,menu: {items: qct}
             });
         }
