@@ -1,6 +1,6 @@
 /**
  * Loads the update snippet page
- * 
+ *
  * @class MODx.page.UpdateSnippet
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -25,6 +25,10 @@ MODx.page.UpdateSnippet = function(config) {
                 ,ctrl: true
             }]
         },'-',{
+            text: _('duplicate')
+            ,handler: this.duplicate
+            ,scope: this
+        },'-',{
             process: 'cancel'
             ,text: _('cancel')
             ,params:{a:MODx.action['welcome']}
@@ -42,5 +46,26 @@ MODx.page.UpdateSnippet = function(config) {
     });
     MODx.page.UpdateSnippet.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.page.UpdateSnippet,MODx.Component);
+Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
+    duplicate: function(btn, e) {
+        var rec = {
+            id: this.record.id
+            ,type: 'snippet'
+            ,name: _('duplicate_of',{name: this.record.name})
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-element-duplicate'
+            ,record: rec
+            ,listeners: {
+                success: {
+                    fn: function(r) {
+                        var response = Ext.decode(r.a.response.responseText);
+                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                    },scope:this}
+                ,hide:{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
+    }
+});
 Ext.reg('modx-page-snippet-update',MODx.page.UpdateSnippet);
