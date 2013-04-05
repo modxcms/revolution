@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010-2012 by MODX, LLC.
+ * Copyright 2010-2013 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
