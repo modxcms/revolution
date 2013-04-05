@@ -1,6 +1,6 @@
 /**
  * Generates the Element Tree
- * 
+ *
  * @class MODx.tree.Element
  * @extends MODx.tree.Tree
  * @param {Object} config An object of options.
@@ -24,7 +24,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
-                this.redirect('index.php?a=element/template/create');
+                this.redirect('?a=element/template/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
@@ -33,7 +33,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
-                this.redirect('index.php?a=element/tv/create');
+                this.redirect('?a=element/tv/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
@@ -42,7 +42,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
-                this.redirect('index.php?a=element/chunk/create');
+                this.redirect('?a=element/chunk/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
@@ -51,7 +51,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
-                this.redirect('index.php?a=element/snippet/create');
+                this.redirect('?a=element/snippet/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
@@ -60,7 +60,7 @@ MODx.tree.Element = function(config) {
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
-                this.redirect('index.php?a=element/plugin/create');
+                this.redirect('?a=element/plugin/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
@@ -122,7 +122,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-		
+
     ,removeCategory: function(itm,e) {
         var id = this.cm.activeNode.attributes.data.id;
         MODx.msg.confirm({
@@ -140,7 +140,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	    
+
     ,duplicateElement: function(itm,e,id,type) {
         var r = {
             id: id
@@ -157,7 +157,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-	
+
     ,removeElement: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
@@ -176,8 +176,8 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 'success': {fn:function() {
                     this.cm.activeNode.remove();
                     /* if editing the element being removed */
-                    if (MODx.request.a == MODx.action['element/'+oar[0]+'/update'] && MODx.request.id == oar[2]) {
-                        MODx.loadPage(MODx.action['welcome']);
+                    if (MODx.request.a == ('element/'+oar[0]+'/update') && MODx.request.id == oar[2]) {
+                        MODx.loadPage('welcome');
                     }
                 },scope:this}
             }
@@ -233,7 +233,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         w.setValues(r);
         w.show(e.target);
     }
-    
+
     ,quickUpdate: function(itm,e,type) {
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/'+type+'.php'
@@ -259,18 +259,18 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	
+
     ,_createElement: function(itm,e,t) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         var type = oar[0] == 'type' ? oar[1] : oar[0];
         var cat_id = oar[0] == 'type' ? 0 : (oar[1] == 'category' ? oar[2] : oar[3]);
         var a = 'element/'+type+'/create';
-        this.redirect('index.php?a='+a+'&category='+cat_id);
+        this.redirect('?a='+a+'&category='+cat_id);
         this.cm.hide();
         return false;
     }
-    
+
     ,afterSort: function(o) {
         var tn = o.event.target.attributes;
         if (tn.type == 'category') {
@@ -283,7 +283,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         }
     }
-		
+
     ,_handleDrop: function(e) {
         var target = e.target;
         if (e.point == 'above' || e.point == 'below') {return false;}
@@ -294,7 +294,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
         return target.getDepth() > 0;
     }
-    
+
     ,isCorrectType: function(dropNode,targetNode) {
         var r = false;
         /* types must be the same */
@@ -376,21 +376,21 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var a = n.attributes;
         var ui = n.getUI();
         var m = [];
-        
+
         m.push({
             text: '<b>'+a.text+'</b>'
             ,handler: function() { return false; }
             ,header: true
         });
         m.push('-');
-        
+
         if (ui.hasClass('pedit')) {
             m.push({
                 text: _('edit_'+a.type)
                 ,type: a.type
                 ,pk: a.pk
                 ,handler: function(itm,e) {
-                    MODx.loadPage(MODx.action['element/'+itm.type+'/update'],
+                    MODx.loadPage('element/'+itm.type+'/update',
                         'id='+itm.pk);
                 }
             });
@@ -491,7 +491,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         }
         return m;
     }
-    
+
     ,_getRootMenu: function(n) {
         var a = n.attributes;
         var ui = n.getUI();
@@ -518,16 +518,16 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 ,handler: this.createCategory
             });
         }
-        
+
         return m;
     }
 });
 Ext.reg('modx-tree-element',MODx.tree.Element);
 
 
-/** 
+/**
  * Generates the Duplicate Element window
- * 
+ *
  * @class MODx.window.DuplicateElement
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -573,9 +573,9 @@ Ext.reg('modx-window-element-duplicate',MODx.window.DuplicateElement);
 
 
 
-/** 
+/**
  * Generates the Rename Category window.
- *  
+ *
  * @class MODx.window.RenameCategory
  * @extends MODx.Window
  * @param {Object} config An object of options.

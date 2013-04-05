@@ -1,6 +1,6 @@
 /**
  * Loads the resource data page
- * 
+ *
  * @class MODx.page.ResourceData
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -62,10 +62,10 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
         return false;
     }
     ,editResource: function() {
-        MODx.loadPage(MODx.action['resource/update'], 'id='+this.config.record.id);
+        MODx.loadPage('resource/update', 'id='+this.config.record.id);
     }
     ,cancel: function() {
-        MODx.loadPage(MODx.action['welcome']);
+        MODx.loadPage('welcome');
     }
 });
 Ext.reg('modx-page-resource-data',MODx.page.ResourceData);

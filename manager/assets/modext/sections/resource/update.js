@@ -1,6 +1,6 @@
 /**
  * Loads the resource update page
- * 
+ *
  * @class MODx.page.UpdateResource
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -60,7 +60,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         window.open(this.config.preview_url);
         return false;
     }
-    
+
     ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
@@ -71,7 +71,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
+                    MODx.loadPage('resource/update', 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -87,7 +87,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
+                    MODx.loadPage('resource/update', 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -100,15 +100,15 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage(MODx.action['welcome']);
+                    MODx.loadPage('welcome');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage(MODx.action['welcome']);
+            MODx.loadPage('welcome');
         }
     }
-    
+
     ,getButtons: function(cfg) {
         var btns = [];
         if (cfg.canSave == 1) {

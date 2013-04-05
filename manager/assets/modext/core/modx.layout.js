@@ -210,7 +210,7 @@ MODx.LayoutMgr = function() {
         loadPage: function(action, parameters) {
             var url = '';
             // Handles url, passed as first argument
-            if (isNaN(action)) {
+            if (0 === action.indexOf('?a=')) {
                 url = action;
             } else {
                 var parts = [];
