@@ -1826,7 +1826,7 @@ class modX extends xPDO {
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
         $ml->set('action', empty($action) ? 'unknown' : $action);
-        $ml->set('classKey', empty($class_key) ? 'unknown' : $class_key);
+        $ml->set('classKey', empty($class_key) ? '' : $class_key);
         $ml->set('item', empty($item) ? 'unknown' : $item);
 
         if (!$ml->save()) {
