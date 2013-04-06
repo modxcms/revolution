@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- [#9793] Preserve numeric keys in xPDOObject::getMany()
+
 xPDO 2.2.6-pl (March 16, 2013)
 ====================================
 - [#7452] Fix sql errors with decimal fields in some locales

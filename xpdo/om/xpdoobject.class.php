@@ -2194,7 +2194,7 @@ class xPDOObject {
                     $criteria->andCondition($addCriteria);
                 }
                 if ($collection= $this->xpdo->getCollection($fkMeta['class'], $criteria, $cacheFlag)) {
-                    $this->_relatedObjects[$alias]= array_merge($this->_relatedObjects[$alias], $collection);
+                    $this->_relatedObjects[$alias]= array_diff_key($this->_relatedObjects[$alias], $collection) + $collection;
                 }
             }
         }
