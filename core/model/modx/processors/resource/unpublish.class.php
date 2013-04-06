@@ -13,7 +13,7 @@ class modResourceUnPublishProcessor extends modProcessor {
     public $resource;
     /** @var modUser $user */
     public $lockedUser;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('unpublish_document');
     }
@@ -38,6 +38,10 @@ class modResourceUnPublishProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('resource_locked_by', array('id' => $this->resource->get('id'), 'user' => $this->lockedUser->get('username'))));
         }
 
+        if ($this->isSiteStart()) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_sitestart'));
+        }
+
         $this->resource->set('published',false);
         $this->resource->set('pub_date',false);
         $this->resource->set('unpub_date',false);
@@ -54,6 +58,15 @@ class modResourceUnPublishProcessor extends modProcessor {
         $this->logManagerAction();
         $this->clearCache();
         return $this->success('',$this->resource->get(array('id')));
+    }
+
+    /**
+     * Checks if the given resource is set as site_start
+     * @return bool
+     */
+    public function isSiteStart() {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption('site_start') || $this->resource->get('id') == $this->modx->getOption('site_start'));
     }
 
     /**
