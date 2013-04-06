@@ -1,6 +1,6 @@
 /**
  * Loads the chunk update page
- * 
+ *
  * @class MODx.page.UpdateChunk
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -25,6 +25,10 @@ MODx.page.UpdateChunk = function(config) {
                 ,ctrl: true
             }]
         },'-',{
+            text: _('duplicate')
+            ,handler: this.duplicate
+            ,scope: this
+        },'-',{
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:MODx.action['welcome']}
@@ -43,5 +47,26 @@ MODx.page.UpdateChunk = function(config) {
 	});
 	MODx.page.UpdateChunk.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.page.UpdateChunk,MODx.Component);
+Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
+    duplicate: function(btn, e) {
+        var rec = {
+            id: this.record.id
+            ,type: 'chunk'
+            ,name: _('duplicate_of',{name: this.record.name})
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-element-duplicate'
+            ,record: rec
+            ,listeners: {
+                success: {
+                    fn: function(r) {
+                        var response = Ext.decode(r.a.response.responseText);
+                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                    },scope:this}
+                ,hide:{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
+    }
+});
 Ext.reg('modx-page-chunk-update',MODx.page.UpdateChunk);
