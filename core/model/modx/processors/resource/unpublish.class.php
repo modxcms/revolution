@@ -60,6 +60,10 @@ class modResourceUnPublishProcessor extends modProcessor {
         return $this->success('',$this->resource->get(array('id')));
     }
 
+    /**
+     * Checks if the given resource is set as site_start
+     * @return bool
+     */
     public function isSiteStart() {
         $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
         return ($this->resource->get('id') == $workingContext->getOption('site_start') || $this->resource->get('id') == $this->modx->getOption('site_start'));
