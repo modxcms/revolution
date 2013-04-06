@@ -9,6 +9,10 @@
  * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['configcheck_admin'] = 'Neem contact op met de beheerder en waarschuw hem over deze melding!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post Context Setting is ingeschakeld buiten de `mgr` context';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'De allow_tags_in_post Context Setting is in deze installatie ingeschakeld buiten de "mgr" context. Tenzij de gebruikers van de website specifiek MODX tags, genummerde entities of HTML script tags via POST naar een of meerdere formulieren op de site moeten kunnen sturen is het sterk aan te raden deze instelling te deactiveren. Over het algemeen moet alleen de "mgr" context deze instelling gebruiken.';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post System Setting Ingeschakeld';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'De allow_tags_in_post System Setting is in deze installatie ingeschakeld. Tenzij de gebruikers van de website specifiek MODX tags, genummerde entities of HTML script tags via POST naar een of meerdere formulieren op de site moeten kunnen sturen is het sterk aan te raden deze instelling te deactiveren. Indien deze instelling nodig is, kan dit het beste op context niveau worden ingeschakeld met Context Settings.';
 $_lang['configcheck_cache'] = 'cache map is niet schrijfbaar';
 $_lang['configcheck_cache_msg'] = 'MODX kan niet schrijven naar de cache map. MODX zal nog steeds functioneren als verwacht maar caching zal niet werken. Om dit op te lossen maak de /cache/ map schrijfbaar.';
 $_lang['configcheck_configinc'] = 'Configuratiebestand nog steeds schrijfbaar!';
