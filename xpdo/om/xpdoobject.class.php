@@ -303,16 +303,14 @@ class xPDOObject {
             $alias = $className;
             $actualClass= $className;
         }
-        if ($xpdo->getInherit($className) === 'single') {
-            if (isset ($row["{$alias}_class_key"])) {
-                $actualClass= $row["{$alias}_class_key"];
-                $rowPrefix= $alias . '_';
-            } elseif (isset($row["{$className}_class_key"])) {
-                $actualClass= $row["{$className}_class_key"];
-                $rowPrefix= $className . '_';
-            } elseif (isset ($row['class_key'])) {
-                $actualClass= $row['class_key'];
-            }
+        if (isset ($row["{$alias}_class_key"])) {
+            $actualClass= $row["{$alias}_class_key"];
+            $rowPrefix= $alias . '_';
+        } elseif (isset($row["{$className}_class_key"])) {
+            $actualClass= $row["{$className}_class_key"];
+            $rowPrefix= $className . '_';
+        } elseif (isset ($row['class_key'])) {
+            $actualClass= $row['class_key'];
         }
         /** @var xPDOObject $instance */
         $instance= $xpdo->newObject($actualClass);

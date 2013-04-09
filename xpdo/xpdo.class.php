@@ -1319,20 +1319,16 @@ class xPDO {
     public function getInherit($className) {
         $inherit= false;
         if ($className= $this->loadClass($className)) {
-            if (version_compare($this->getModelVersion($className), '1.0', '>')) {
-                if (isset ($this->map[$className]['inherit'])) {
-                    $inherit= $this->map[$className]['inherit'];
-                }
-                if (!$inherit && $ancestry= $this->getAncestry($className, false)) {
-                    foreach ($ancestry as $ancestor) {
-                        if (isset ($this->map[$ancestor]['inherit'])) {
-                            $inherit= $this->map[$ancestor]['inherit'];
-                            break;
-                        }
+            if (isset ($this->map[$className]['inherit'])) {
+                $inherit= $this->map[$className]['inherit'];
+            }
+            if (!$inherit && $ancestry= $this->getAncestry($className, false)) {
+                foreach ($ancestry as $ancestor) {
+                    if (isset ($this->map[$ancestor]['inherit'])) {
+                        $inherit= $this->map[$ancestor]['inherit'];
+                        break;
                     }
                 }
-            } elseif (in_array('class_key', array_keys($this->getFields($className)))) {
-                $inherit= 'single';
             }
         }
         if (!empty($inherit)) {
