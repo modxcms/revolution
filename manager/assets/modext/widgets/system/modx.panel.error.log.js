@@ -7,8 +7,7 @@ MODx.panel.ErrorLog = function(config) {
         ,baseParams: {
             action: 'clear'
         }
-        ,buttonAlign: 'center'
-        ,layout: 'fit'
+        ,layout: 'form'
         ,items: [{
             html: '<h2>'+_('error_log')+'</h2>'
             ,id: 'modx-error-log-header'
@@ -20,44 +19,49 @@ MODx.panel.ErrorLog = function(config) {
             ,hideLabels: true
             ,autoHeight: true
             ,border: true
-            ,buttonAlign: 'center'
             ,items: [{
                 html: '<p>'+_('error_log_desc')+'</p>'
-				,bodyCssClass: 'panel-desc'
+                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
-				xtype: 'panel'
-				,border: false
-				,cls:'main-wrapper'
-				,layout: 'form'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,name: 'log'
-					,grow: true
-					,growMax: 400
-					,anchor: '100%'
-					,hidden: config.record.tooLarge ? true : false
-				},{
-				    html: '<p>'+_('error_log_too_large',{
+                xtype: 'panel'
+                ,border: false
+                ,cls:'main-wrapper'
+                ,layout: 'form'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'textarea'
+                    ,name: 'log'
+                    ,grow: true
+                    ,growMax: 400
+                    ,anchor: '100%'
+                    ,hidden: config.record.tooLarge ? true : false
+                },{
+                    html: '<p>'+_('error_log_too_large',{
                         name: config.record.name
                     })+'</p>'
                     ,border: false
-					,hidden: config.record.tooLarge ? false : true
-				},MODx.PanelSpacer,{
-				    xtype: 'button'
-				    ,text: _('error_log_download',{size: config.record.size})
-					,hidden: config.record.tooLarge ? false : true
-					,handler: this.download
-					,scope: this
-				}]
+                    ,hidden: config.record.tooLarge ? false : true
+                },MODx.PanelSpacer,{
+                    xtype: 'button'
+                    ,text: _('error_log_download',{size: config.record.size})
+                    ,hidden: config.record.tooLarge ? false : true
+                    ,handler: this.download
+                    ,scope: this
+                }]
             }]
-        }]
-        ,buttons: [{
-            text: _('clear')
-            ,handler: this.clear
-            ,scope: this
-            ,hidden: MODx.hasEraseErrorLog ? false : true
+            ,buttonAlign: 'center'
+            ,buttons: [{
+                text: _('clear')
+                ,handler: this.clear
+                ,scope: this
+                ,hidden: MODx.hasEraseErrorLog ? false : true
+            },{
+                text: _('ext_refresh')
+                ,handler: this.refreshLog
+                ,scope: this
+                ,hidden: config.record.tooLarge
+            }]
         }]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
@@ -74,6 +78,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         return true;
     }
     ,clear: function() {
+        this.el.mask(_('working'));
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
@@ -81,7 +86,27 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    if (this.config.tooLarge) {
+                    this.el.unmask();
+                    if (!r.object.tooLarge && this.config.record.tooLarge) {
+                        location.href = location.href;
+                    } else {
+                        this.getForm().setValues(r.object);
+                    }
+                },scope:this}
+            }
+        });
+    }
+    ,refreshLog: function() {
+        this.el.mask(_('working'));
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'get'
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.el.unmask();
+                    if (r.object.tooLarge) {
                         location.href = location.href;
                     } else {
                         this.getForm().setValues(r.object);

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-11-13
+ * @updated 2013-04-07
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -281,6 +281,12 @@ $_lang['setting_blocked_minutes_desc'] = 'Počet minut, po které bude uživatel
 
 // $_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
 $_lang['setting_cache_action_map'] = 'Povolit cache mapy akcí';
+
+// $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
+$_lang['setting_cache_alias_map'] = 'Povolit cache mapy aliasů v rámci kontextu';
+
+// $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
+$_lang['setting_cache_alias_map_desc'] = 'Je-li nastaveno "Ano", URI všech dokumentů jsou ukládány do cache kontextu. Pro lepší výkon toto povolte na menších a zakažte na rozsáhlejších portálech.';
 
 // $_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
 $_lang['setting_cache_action_map_desc'] = 'Je-li nastaveno "Ano", akce (nebo kontrolní mapy) budou ukládány do cache a tím se zkrátí doba načítání správce obsahu.';
@@ -1269,6 +1275,12 @@ $_lang['setting_session_cookie_secure'] = 'Zabezpečení session cookie';
 
 // $_lang['setting_session_cookie_secure_desc'] = 'Enable this setting to use secure session cookies.';
 $_lang['setting_session_cookie_secure_desc'] = 'Aktivací této možnosti dojde k zabezpečení session cookie.';
+
+// $_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
+$_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
+
+// $_lang['setting_session_cookie_httponly_desc'] = 'Use this setting to set the HttpOnly flag on session cookies.';
+$_lang['setting_session_cookie_httponly_desc'] = 'Povolte toto nastavení pro nastavení příznaku HttpOnly v session cookies.';
 
 // $_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
 $_lang['setting_session_gc_maxlifetime'] = 'Maximální životnost Session Garbage Collectoru';

@@ -9,7 +9,7 @@
  * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['area'] = 'Gebied';
-$_lang['area_authentication'] = 'Authenticatie en beveiliging';
+$_lang['area_authentication'] = 'Authenticatie en Beveiliging';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core';
 $_lang['area_editor'] = 'Rich-Tekst Editor';
@@ -22,7 +22,7 @@ $_lang['area_mail'] = 'E-mail';
 $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'PhpThumb';
 $_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session en Cookie';
+$_lang['area_session'] = 'Sessie en Cookie';
 $_lang['area_lexicon_string'] = 'Gebied Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Vul hier een key in van een lexicon entry gebied. Indien er geen lexicon entry is, dan wordt de key van het gebied getoond.<br />Core gebieden:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Site';
@@ -107,6 +107,10 @@ $_lang['setting_blocked_minutes'] = 'Geblokkeerde minuten';
 $_lang['setting_blocked_minutes_desc'] = 'Hier kun je het aantal minuten definieren dat een gebruiker geblokkeerd is na het bereiken van het maximale aantal foutieve inlogpogingen. Vul alleen cijfers in (geen komma\'s, spaties etc.)';
 $_lang['setting_cache_action_map'] = 'Actie Map Cache inschakelen';
 $_lang['setting_cache_action_map_desc'] = 'Indien ingeschakeld, acties (of controller maps) worden gecached om de laadtijd van de manager te beforderen.';
+
+$_lang['setting_cache_alias_map'] = 'Context Alias Map Cache inschakelen';
+$_lang['setting_cache_alias_map_desc'] = 'Indien ingeschakeld zullen alle Document URIs per context gecached worden. Bij grote (10.000+ documenten) websites kan er mogelijk verbeterde performance worden behaald door dit uit te zetten.';
+
 $_lang['setting_cache_context_settings'] = 'Context Instellingen Cache';
 $_lang['setting_cache_context_settings_desc'] = 'Indien ingeschakeld, context instellingen worden gecached om de laadtijd te bevorderen.';
 $_lang['setting_cache_db'] = 'Database Cache inschakelen';
@@ -475,7 +479,10 @@ $_lang['setting_session_cookie_lifetime_desc'] = 'Gebruik deze instelling om de 
 $_lang['setting_session_cookie_path'] = 'Sessie cookie pad';
 $_lang['setting_session_cookie_path_desc'] = 'Gebruik deze instelling om het cookie pad aan te passen voor het identificeren van specifieke site sessie cookies';
 $_lang['setting_session_cookie_secure'] = 'Sessie cookie beveiligd';
-$_lang['setting_session_cookie_secure_desc'] = 'Activeer deze instelling om beveiligde cookies te gebruiken.';
+$_lang['setting_session_cookie_secure_desc'] = 'Activeer deze instelling om beveiligde cookies te gebruiken voor SSL verbindingen.';
+
+$_lang['setting_session_cookie_httponly'] = 'Sessie Cookie HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Gebruik deze instelling om de HttpOnly flag op sessie cookies in te stellen.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Sessie Garbage Collector Max Lifetime';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Staat aanpassingen toe van de session.gc_maxlifetime PHP ini instelling wanneer \'modSessionHandler\' wordt gebruikt.';

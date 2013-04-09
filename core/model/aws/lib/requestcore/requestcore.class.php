@@ -622,7 +622,7 @@ class RequestCore
 		if ($this->ssl_verification)
 		{
 			curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, true);
-			curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, true);
+			curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, 2);
 		}
 		else
 		{

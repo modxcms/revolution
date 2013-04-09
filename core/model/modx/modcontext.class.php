@@ -397,7 +397,7 @@ class modContext extends modAccessibleObject {
         if (isset($this->aliasMap)) {
             $uri= array_search($id, $this->aliasMap);
         } else {
-            $query = $this->xpdo->newQuery('modResource', array('id' => $id, 'deleted' => false, 'published' => true, 'context_key' => $this->get('key')));
+            $query = $this->xpdo->newQuery('modResource', array('id' => $id, 'deleted' => false, 'context_key' => $this->get('key')));
             $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('uri')));
             $uri = $this->xpdo->getValue($query->prepare());
         }

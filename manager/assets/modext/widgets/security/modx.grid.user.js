@@ -85,6 +85,7 @@ MODx.grid.User = function(config) {
             header: _('user_block')
             ,dataIndex: 'blocked'
             ,width: 80
+            ,sortable: true
             ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
         }]
         ,tbar: [{
@@ -260,7 +261,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         });
         return true;
     }
-    
+
     ,removeUser: function() {
         MODx.msg.confirm({
             title: _('user_remove')
@@ -288,7 +289,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             }
         });
     }
-    
+
     ,updateUser: function() {
         MODx.loadPage(MODx.action['security/user/update'], 'id='+this.menu.record.id);
     }
