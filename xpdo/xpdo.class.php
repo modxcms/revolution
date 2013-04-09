@@ -3,7 +3,7 @@
  * OpenExpedio ("xPDO") is an ultra-light, PHP 5.2+ compatible ORB (Object-
  * Relational Bridge) library based around PDO (http://php.net/pdo/).
  *
- * Copyright 2010-2012 by MODX, LLC.
+ * Copyright 2010-2013 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -25,7 +25,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2012, Jason Coward
+ * @copyright Copyright (C) 2006-2013, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
@@ -1319,16 +1319,20 @@ class xPDO {
     public function getInherit($className) {
         $inherit= false;
         if ($className= $this->loadClass($className)) {
-            if (isset ($this->map[$className]['inherit'])) {
-                $inherit= $this->map[$className]['inherit'];
-            }
-            if (!$inherit && $ancestry= $this->getAncestry($className, false)) {
-                foreach ($ancestry as $ancestor) {
-                    if (isset ($this->map[$ancestor]['inherit'])) {
-                        $inherit= $this->map[$ancestor]['inherit'];
-                        break;
+            if (version_compare($this->getModelVersion($className), '1.0', '>')) {
+                if (isset ($this->map[$className]['inherit'])) {
+                    $inherit= $this->map[$className]['inherit'];
+                }
+                if (!$inherit && $ancestry= $this->getAncestry($className, false)) {
+                    foreach ($ancestry as $ancestor) {
+                        if (isset ($this->map[$ancestor]['inherit'])) {
+                            $inherit= $this->map[$ancestor]['inherit'];
+                            break;
+                        }
                     }
                 }
+            } elseif (in_array('class_key', array_keys($this->getFields($className)))) {
+                $inherit= 'single';
             }
         }
         if (!empty($inherit)) {

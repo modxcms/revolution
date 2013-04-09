@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2012 by MODX, LLC.
+ * Copyright 2010-2013 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -303,14 +303,16 @@ class xPDOObject {
             $alias = $className;
             $actualClass= $className;
         }
-        if (isset ($row["{$alias}_class_key"])) {
-            $actualClass= $row["{$alias}_class_key"];
-            $rowPrefix= $alias . '_';
-        } elseif (isset($row["{$className}_class_key"])) {
-            $actualClass= $row["{$className}_class_key"];
-            $rowPrefix= $className . '_';
-        } elseif (isset ($row['class_key'])) {
-            $actualClass= $row['class_key'];
+        if ($xpdo->getInherit($className) === 'single') {
+            if (isset ($row["{$alias}_class_key"])) {
+                $actualClass= $row["{$alias}_class_key"];
+                $rowPrefix= $alias . '_';
+            } elseif (isset($row["{$className}_class_key"])) {
+                $actualClass= $row["{$className}_class_key"];
+                $rowPrefix= $className . '_';
+            } elseif (isset ($row['class_key'])) {
+                $actualClass= $row['class_key'];
+            }
         }
         /** @var xPDOObject $instance */
         $instance= $xpdo->newObject($actualClass);
@@ -2194,7 +2196,7 @@ class xPDOObject {
                     $criteria->andCondition($addCriteria);
                 }
                 if ($collection= $this->xpdo->getCollection($fkMeta['class'], $criteria, $cacheFlag)) {
-                    $this->_relatedObjects[$alias]= array_merge($this->_relatedObjects[$alias], $collection);
+                    $this->_relatedObjects[$alias]= array_diff_key($this->_relatedObjects[$alias], $collection) + $collection;
                 }
             }
         }

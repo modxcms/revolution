@@ -67,6 +67,7 @@
         <field key="integer" dbtype="int" phptype="integer" null="false" />
         <field key="float" dbtype="decimal" precision="10,5" phptype="float" null="false" default="1.01230" />
         <field key="boolean" dbtype="tinyint" precision="1" phptype="boolean" null="false" />
+        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="Foo" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="id" />

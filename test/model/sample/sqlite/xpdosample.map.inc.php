@@ -19,6 +19,7 @@ $xpdo_meta_map['xPDOSample']= array (
     'integer' => NULL,
     'float' => '1.01230',
     'boolean' => NULL,
+    'class_key' => 'Foo',
   ),
   'fieldMeta' => 
   array (
@@ -107,6 +108,14 @@ $xpdo_meta_map['xPDOSample']= array (
       'precision' => '1',
       'phptype' => 'boolean',
       'null' => false,
+    ),
+    'class_key' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'Foo',
     ),
   ),
   'indexes' => 
