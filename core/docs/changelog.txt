@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9768] Fix array merge in xPDOObject::getMany()
 - [#9773] Fix classKey errors viewing manager actions
 - [#9774] Prevent resource/unpublish on site_start
 - [#8312] Allow sorting users by blocked status
