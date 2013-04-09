@@ -348,7 +348,6 @@ class xPDOTest extends xPDOTestCase {
                 'integer' => NULL,
                 'float' => 1.01230,
                 'boolean' => NULL,
-                'class_key' => 'Foo',
             )),
         );
     }

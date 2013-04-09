@@ -1,8 +1,5 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.2.7-pl (April 9, 2013)
-====================================
-- [#6271] Limit reserved class_key column to inherit="single"
 - [#9793] Preserve numeric keys in xPDOObject::getMany()
 
 xPDO 2.2.6-pl (March 16, 2013)
