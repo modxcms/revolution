@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  *
- * @updated 2011-10-23
+ * @updated 2013-04-07
  */
 // $_lang['has_access'] = 'Has Access?';
 $_lang['has_access'] = 'Má přístup?';
@@ -27,7 +27,7 @@ $_lang['tv_access_msg'] = 'Zvolte skupinu dokumentů, ke které má patřit tato
 $_lang['tv_binding_msg'] = 'Toto políčko podporuje zadávat data pomocí @ příkazu (tzv. bindování)';
 
 // $_lang['tv_caption'] = 'Caption';
-$_lang['tv_caption'] = 'Název';
+$_lang['tv_caption'] = 'Název TV';
 
 // $_lang['tv_change_template_msg'] = 'Changing this template will cause the page to reload the Template Variables, losing any unsaved changes.<br /><br /> Are you sure you want to change this template?';
 $_lang['tv_change_template_msg'] = 'Uprava této šablony způsobí znovunačtení template variable, tím můžete ztratit neuložená data.<br /><br /> Opravdu chcete změnit šablonu?';

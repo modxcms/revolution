@@ -231,11 +231,11 @@ class modContext extends modAccessibleObject {
             }
 
             if ($config['friendly_urls'] == 1) {
-                if ($id == $config['site_start']) {
+                if ((integer) $id === (integer) $config['site_start']) {
                     $alias= ($scheme === '' || $scheme === -1) ? $config['base_url'] : '';
                     $found= true;
                 } else {
-                    $alias= array_search($id, $this->aliasMap);
+                    $alias= $this->getResourceURI($id);
                     if (!$alias) {
                         $alias= '';
                         $this->xpdo->log(xPDO::LOG_LEVEL_WARN, '`' . $id . '` was requested but no alias was located.');
@@ -384,5 +384,23 @@ class modContext extends modAccessibleObject {
      */
     public function getWebLinkCacheMap() {
         return $this->xpdo->call('modContext', 'getWebLinkCacheMapStmt', array(&$this));
+    }
+
+    /**
+     * Get a Resource URI in this Context by id.
+     *
+     * @param string|integer $id The integer id of the Resource.
+     * @return string|bool The URI of the Resource, or false if not found in this Context.
+     */
+    public function getResourceURI($id) {
+        $uri = false;
+        if (isset($this->aliasMap)) {
+            $uri= array_search($id, $this->aliasMap);
+        } else {
+            $query = $this->xpdo->newQuery('modResource', array('id' => $id, 'deleted' => false, 'context_key' => $this->get('key')));
+            $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('uri')));
+            $uri = $this->xpdo->getValue($query->prepare());
+        }
+        return $uri;
     }
 }

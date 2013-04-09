@@ -66,9 +66,9 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
 
 $actions = $modx->request->getAllActionIDs();
 
-$c = array_merge($modx->config,$workingContext->config,$c);
+$c = array_merge($modx->config,$workingContext->config,$modx->_userConfig,$c);
 
-unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username']);
+unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username'],$c['connections'],$c['connection_init'],$c['connection_mutable'],$c['dbname'],$c['database'],$c['driverOptions'],$c['dsn'],$c['session_name']);
 
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);

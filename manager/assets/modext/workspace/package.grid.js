@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Packages.
- * 
+ *
  * @class MODx.grid.Package
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -13,7 +13,7 @@ MODx.grid.Package = function(config) {
             '<p class="package-readme"><i>{readme}</i></p>'
         )
     });
-	
+
 	/* Package name + action button renderer */
 	this.mainColumnTpl = new Ext.XTemplate('<tpl for=".">'
 		+'<h3 class="main-column{state:defaultValue("")}">{name}</h3>'
@@ -27,7 +27,7 @@ MODx.grid.Package = function(config) {
 	+'</tpl>', {
 		compiled: true
 	});
-    
+
     var cols = [];
     cols.push(this.exp);
     cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
@@ -61,7 +61,7 @@ MODx.grid.Package = function(config) {
             ,scope: this
         };
     }
-    
+
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-package-grid'
@@ -107,22 +107,24 @@ MODx.grid.Package = function(config) {
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	console: null
-    
-	,activate: function(){
-		Ext.getCmp('modx-layout').showLeftbar();
-		Ext.getCmp('modx-panel-packages').getLayout().setActiveItem(this.id);
-		this.updateBreadcrumbs(_('packages_desc'));
-	}
-	
+
+    ,activate: function(){
+        if (MODx.defaultState['modx-leftbar-tabs'] && (MODx.defaultState['modx-leftbar-tabs'].collapsed != true)) {
+            Ext.getCmp('modx-layout').showLeftbar();
+        }
+        Ext.getCmp('modx-panel-packages').getLayout().setActiveItem(this.id);
+        this.updateBreadcrumbs(_('packages_desc'));
+    }
+
 	,updateBreadcrumbs: function(msg, highlight){
 		msg = Ext.getCmp('packages-breadcrumbs').desc;
-        if(highlight){ 
+        if(highlight){
 			msg.text = msg;
 			msg.className = 'highlight';
 		}
 		Ext.getCmp('packages-breadcrumbs').reset(msg);
 	}
-	
+
 	,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -130,7 +132,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         this.refresh();
         return true;
     }
-	
+
     ,clearFilter: function() {
     	this.getStore().baseParams = {
             action: 'getList'
@@ -139,8 +141,8 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
-	
-		
+
+
 	/* Main column renderer */
 	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
 		var rec = record.data;
@@ -163,96 +165,96 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         }
         h.push({ className:'remove', text: _('package_remove_action_button') });
         h.push({ className:'details', text: _('view_details') });
-		values.actions = h;		
+		values.actions = h;
 		return this.mainColumnTpl.apply(values);
 	}
-    
+
     ,dateColumnRenderer: function(d,c) {
         switch(d) {
             case '':
             case null:
-                c.css = 'not-installed';				
+                c.css = 'not-installed';
                 return _('not_installed');
             default:
                 c.css = '';
                 return _('installed_on',{'time':d});
         }
     }
-    
+
 	,onClick: function(e){
 		var t = e.getTarget();
 		var elm = t.className.split(' ')[0];
 		if(elm == 'controlBtn'){
 			var act = t.className.split(' ')[1];
 			var record = this.getSelectionModel().getSelected();
-			this.menu.record = record.data; 
+			this.menu.record = record.data;
 			switch (act) {
                 case 'remove':
                     this.remove(record, e);
                     break;
-                case 'install':                                       
-                case 'reinstall':                                       
+                case 'install':
+                case 'reinstall':
 					this.install(record);
                     break;
-                case 'uninstall':                                       
+                case 'uninstall':
 					this.uninstall(record, e);
                     break;
 				case 'update':
 				case 'checkupdate':
                     this.update(record, e);
-                    break; 
+                    break;
 				case 'details':
                     this.viewPackage(record, e);
-                    break; 
+                    break;
 				default:
 					break;
             }
 		}
 	}
-	
+
 	/* Install a package */
 	,install: function( record ){
 		Ext.Ajax.request({
 			url : MODx.config.connectors_url+'workspace/packages.php'
-			,params : { 
+			,params : {
 				action : 'getAttribute'
 				,attributes: 'license,readme,changelog,setup-options'
 				,signature: record.data.signature
 			}
 			,method: 'GET'
 			,scope: this
-			,success: function ( result, request ) { 
+			,success: function ( result, request ) {
 				this.processResult( result.responseText, record );
 			}
-			,failure: function ( result, request) { 
+			,failure: function ( result, request) {
 				Ext.MessageBox.alert(_('failed'), result.responseText);
-			} 
+			}
 		});
 	}
-	
+
 	/* Go through the install process */
 	,processResult: function( response, record ){
 		var data = Ext.util.JSON.decode( response );
-		
-		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){	
+
+		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){
 			/* Show license/changelog panel */
-			p = Ext.getCmp('modx-package-beforeinstall');			
+			p = Ext.getCmp('modx-package-beforeinstall');
 			p.activate();
 			p.updatePanel( data.object, record );
-		} 
+		}
 		else if ( data.object['setup-options'] !== null ) {
 			/* No license/changelog, show setup-options */
-			Ext.getCmp('modx-panel-packages').onSetupOptions();			
+			Ext.getCmp('modx-panel-packages').onSetupOptions();
 		} else {
 			/* No license/changelog, no setup-options, install directly */
 			Ext.getCmp('modx-panel-packages').install();
 		}
 	}
-    
+
 	/* Launch Package Browser */
 	,onDownloadMoreExtra: function(btn,e){
 	    MODx.provider = MODx.defaultProvider;
-		Ext.getCmp('modx-panel-packages-browser').activate();				
+		Ext.getCmp('modx-panel-packages-browser').activate();
 	}
 
 	,changeProvider: function(btn, e){
@@ -260,7 +262,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             xtype: 'modx-package-changeprovider'
         });
 	}
-	
+
 	,searchLocal: function() {
         MODx.msg.confirm({
            title: _('package_search_local_title')
@@ -275,15 +277,15 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 },scope:this}
            }
         });
-    }	
-	
+    }
+
 	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
-        location.href = 'index.php?a='+MODx.action['workspaces/package/view']+'&signature='+this.menu.record.signature;
+        MODx.loadPage(MODx.action['workspaces/package/view'], 'signature='+this.menu.record.signature);
     }
-    
+
 	/* Search for a package update - only for installed package */
-    ,update: function(btn,e) {        
+    ,update: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
@@ -313,7 +315,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             }
         });
     }
-	
+
 	/* Uninstall a package */
 	,uninstall: function(btn,e) {
         this.loadWindow(btn,e,{
@@ -323,7 +325,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             }
         });
     }
-    
+
     ,_uninstall: function(r,va,btn) {
         r = this.menu.record;
         va = va || {};
@@ -335,7 +337,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             ,register: 'mgr'
             ,topic: topic
         });
-        
+
         MODx.Ajax.request({
             url: this.config.url
             ,params: va
@@ -352,12 +354,15 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             }
         });
     }
-    
+
 	/* Remove a package entirely */
     ,remove: function(btn,e) {
+        if (this.destroying) {
+            return MODx.grid.Package.superclass.remove.apply(this, arguments);
+        }
     	var r = this.menu.record;
         var topic = '/workspace/package/remove/'+r.signature+'/';
-        
+
         this.loadWindow(btn,e,{
             xtype: 'modx-window-package-remove'
             ,record: {
@@ -367,7 +372,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             }
         });
     }
-    
+
 	/* Load the console */
     ,loadConsole: function(btn,topic) {
     	if (this.console === null) {
@@ -381,7 +386,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         }
         this.console.show(btn);
     }
-    
+
     ,getConsole: function() {
         return this.console;
     }

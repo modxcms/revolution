@@ -2,6 +2,67 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.7-pl (April 9, 2013)
+====================================
+- [#9634] Fix notices in system/settings/update processor
+- [#9768] Fix array merge in xPDOObject::getMany()
+- [#9773] Fix classKey errors viewing manager actions
+- [#9774] Prevent resource/unpublish on site_start
+- [#8312] Allow sorting users by blocked status
+- [#1] Allow Element duplication when editing
+- [#9237] Return object from ContextSetting create/update
+- [#8327] Don't close context menu on click
+- [#8980] Fix lexicon when updating user password
+- [#9258] List languages and topics alphabetically
+- [#9152] Use default_context for New Resource toolbar actions
+- [#8138] Fix Combo Settings not saving from update dialog
+- [#9571] Fix template/update always refreshing cache
+- [#9093] Make collapsed tree panel tab more visible
+- [#8859] Add button to refresh error log
+- [#9772] Fix deprecated value for CURLOPT_SSL_VERIFYHOST
+- [#9728] Fix empty create Dashboard Widget tab
+- [#9734] Fix save button state on Content Types grid
+- Fix resizing of error log textarea
+- [#9287] Enable save button when switching templates
+- [#9132] Refresh cache when enabling/disabling plugin
+- [#9690] Fix various issues with server_offset_time
+- [#9738] Prevent working context overriding user settings
+- Fix error getting MediaSource table classes on cached Resources
+- [#9368][#9437] Fix modProcessorResponse->isError()
+- [#9681] Allow country/getlist processor to work more than once
+- Fix Auto-Tag TV value sorting
+- Make caching the aliasMap optional to reduce memory usage
+- [#9672] Fix invalid ini_get call in modDbRegister
+- [#8489] Add compound index to modTemplateVarResource
+- [#9592] Iterate all inherited parent FC rules
+- Replace location redirects with MODx.loadPage proxy
+- Add MODx.beforeLoadPage event to modExt components
+- [#9143] Fix destructors in modExt components
+- Allow loading of modExt files asynchronously
+- [#9359] Report errors about unpublishing site_start to user
+- [#9197] Load RTE for SymLinks in manager
+- [#9364] Allow Unicode chars via modX::sanitizeString()
+- [#9631] Fix image preview with special chars in filename
+- [#9608] Remove connections data from MODx.config
+- Fix invalid ini boolean evaluation in config_check processor
+- Allow modX::getParser() to get an extended modParser instance
+- [#9524] Fix invalid context assignment in modX::switchContext()
+- [#9517] modPackageGetAttributeProcessor returning wrong PACKAGE_ACTION
+- [#9451] Add modx-combo-source as settings type
+- [#5515] MODx.Browser UX improvements
+- Increase width of file and image TVs
+- [#9282] Fix Minify errors when manager on different subdomain
+- Various Manager UI Fixes
+- [#6150] Fix issues with auto_publish when encountering invalid data
+- [#8936] Fix modTemplateVarRender::_loadLexiconTopics()
+- [#9257] Fix workspace/lexicon/getlist strict notice in PHP 5.4+
+- [#9339] Use Resource context_key in update processor when not specified
+- [#9212] Fix SQL syntax error in modTemplateVar->findPolicy()
+- [#9239] Make sure class_key is passed when switching templates
+- [#8101] Add support for httpOnly session cookies in PHP 5.2+
+- [#8420] Provide multi-node support to flock-independent file locking
+- [#8420] Remove LOCK_EX from flock-independent file locking method
+
 MODX Revolution 2.2.6-pl (December 3, 2012)
 ====================================
 - [#9178] Use PHP time for valid check in modDbRegisterMessage::getValidMessages()

@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-	MODx.load({ xtype: 'modx-page-user-create' });
-});
-
 /**
  * Loads the create user page 
  * 

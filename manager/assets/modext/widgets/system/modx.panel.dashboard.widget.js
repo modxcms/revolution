@@ -213,7 +213,7 @@ MODx.panel.DashboardWidget = function(config) {
             ,forceLayout: true
             ,deferredRender: false
             ,stateful: true
-            ,stateId: 'modx-dashboard-widget-tabpanel'
+            ,stateId: 'modx-dashboard-widget-tabpanel' + ((Ext.isEmpty(config.record.id)) ? '-new' : '')
             ,stateEvents: ['tabchange']
             ,getState:function() {
                 return {activeTab:this.items.indexOf(this.getActiveTab())};
@@ -259,7 +259,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     }
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            location.href = '?a='+MODx.action['system/dashboards/widget/update']+'&id='+o.result.object.id;
+            MODx.loadPage(MODx.action['system/dashboards/widget/update'], 'id='+o.result.object.id);
         } else {
             Ext.getCmp('modx-btn-save').setDisabled(false);
             var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');

@@ -24,6 +24,10 @@ class SecurityResourceGroupIndexManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.tree.resource.group.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.resource.group.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/resourcegroup/list.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-resource-groups' });
+            });</script>");
     }
 
     /**

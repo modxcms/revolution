@@ -1,6 +1,6 @@
 /**
  * Loads the update symlink resource page
- * 
+ *
  * @class MODx.page.UpdateSymLink
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -8,7 +8,7 @@
  */
 MODx.page.UpdateSymLink = function(config) {
     config = config || {};
-        
+
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
@@ -41,7 +41,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
         window.open(this.config.preview_url);
         return false;
     }
-    
+
     ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
@@ -52,7 +52,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -68,7 +68,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    MODx.loadPage(MODx.action['resource/update'], 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -81,15 +81,15 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    location.href = '?a='+MODx.action['welcome'];                    
+                    MODx.loadPage(MODx.action['welcome']);
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            location.href = '?a='+MODx.action['welcome'];
+            MODx.loadPage(MODx.action['welcome']);
         }
     }
-    
+
     ,getButtons: function(cfg) {
         var btns = [];
         if (cfg.canSave == 1) {
@@ -97,7 +97,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
                 process: 'update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: cfg.richtext || MODx.request.activeSave == 1 ? false : true
+                ,checkDirty: cfg.richtext || MODx.request.reload ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true

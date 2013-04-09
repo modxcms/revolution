@@ -23,6 +23,10 @@ class HelpManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/help.js');
+        $this->addHtml("<script>
+            Ext.onReady(function() {
+                MODx.load({ xtype: 'modx-page-help' });
+            });</script>");
     }
 
     /**

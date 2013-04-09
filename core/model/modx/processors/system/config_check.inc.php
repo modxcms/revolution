@@ -7,6 +7,34 @@
  */
 $warnings = array();
 
+if (!function_exists('ini_get_bool')) {
+    /**
+     * Return a proper boolean from an ini_get value.
+     *
+     * @param string $key The ini setting key to check.
+     * @return bool TRUE if the ini_get value evaluates to a positive boolean value for the specified key.
+     */
+    function ini_get_bool($key) {
+        $value = ini_get($key);
+
+        switch (strtolower($value)) {
+            case 'on':
+            case 'yes':
+            case 'true':
+                $value = 'assert.active' !== $key;
+                break;
+            case 'stdout':
+            case 'stderr':
+                $value = 'display_errors' === $key;
+                break;
+            default:
+                $value = (int) $value;
+                break;
+        }
+        return (bool) $value;
+    }
+}
+
 /* bypasses policy check to check for absolute existence */
 function getResourceBypass(modX &$modx,$criteria) {
     $resource = null;
@@ -45,7 +73,8 @@ if (!is_writable($cachePath)) {
     );
 }
 
-if (@ini_get('register_globals') == true) {
+/* changed to use ini_get_bool function, which can handle yes, 1 and true values */
+if (@ini_get_bool('register_globals') == true) {
     $warnings[] = array (
         $modx->lexicon('configcheck_register_globals')
     );

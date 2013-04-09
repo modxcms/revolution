@@ -37,6 +37,7 @@ Ext.extend(MODx.Component,Ext.Component,{
 
     ,_loadActionButtons: function() {
         if (!this.config.buttons) { return false; }
+
         this.ab = MODx.load({
             xtype: 'modx-actionbuttons'
             ,form: this.form || null
@@ -124,6 +125,7 @@ MODx.toolbar.ActionButtons = function(config) {
     if (config.loadStay === true) {
         config.items.push('-',this.getStayMenu());
     }
+    this.checkDirtyBtns = [];
     MODx.toolbar.ActionButtons.superclass.constructor.call(this,config);
     this.config = config;
 };
@@ -132,8 +134,6 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
     ,buttons: []
     ,options: { a_close: 'welcome' }
     ,stay: 'stay'
-
-    ,checkDirtyBtns: []
 
     ,add: function() {
         var a = arguments, l = a.length;
@@ -182,15 +182,11 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 },scope:this}
             }
 
-            /* add button to toolbar */
-            MODx.toolbar.ActionButtons.superclass.add.call(this,el);
-
             if (el.keys) {
-                var map = new Ext.KeyMap(Ext.get(document));
-                var y = el.keys.length;
-                for (var x=0;x<y;x=x+1) {
-                    var k = el.keys[x];
-                    Ext.applyIf(k,{
+                el.keyMap = new Ext.KeyMap(Ext.get(document));
+                for (var j = 0; j < el.keys.length; j++) {
+                    var key = el.keys[j];
+                    Ext.applyIf(key,{
                         scope: this
                         ,stopEvent: true
                         ,fn: function(e) {
@@ -198,10 +194,15 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                             if (b) this.checkConfirm(b,e);
                         }
                     });
-                    map.addBinding(k);
+                    el.keyMap.addBinding(key);
                 }
+                el.listeners['destroy'] = {fn:function(btn) {
+                    btn.keyMap.disable();
+                },scope:this}
             }
-            delete el;
+
+            /* add button to toolbar */
+            MODx.toolbar.ActionButtons.superclass.add.call(this,el);
         }
     }
 
@@ -296,7 +297,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             }
         } else { /* if just doing a URL redirect */
             Ext.applyIf(itm.params || {},o.baseParams || {});
-            location.href = '?'+Ext.urlEncode(itm.params);
+            MODx.loadPage('?'+Ext.urlEncode(itm.params));
         }
         return false;
     }
@@ -325,8 +326,8 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                     if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
                     if (MODx.request.class_key) { itm.params.class_key = MODx.request.class_key; }
-                    var a = Ext.urlEncode(itm.params);
-                    location.href = '?a='+o.actions['new']+'&'+a;
+                    var params = Ext.urlEncode(itm.params);
+                    MODx.loadPage(o.actions['new'], params);
                 }
                 break;
             case 'stay':
@@ -337,17 +338,17 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     /* if Continue Editing, then don't reload the page - just hide the Progress bar
                        unless the user is on a 'Create' page...if so, then redirect
                        to the proper Edit page */
-                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id && res.object.id !== null) {
+                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id) {
                         itm.params.id = res.object.id;
                         if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                         if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
                         url = Ext.urlEncode(itm.params);
-                        location.href = '?a='+o.actions.edit+'&'+url;
+                        MODx.loadPage(o.actions.edit, url);
 
                     } else if (itm.process === 'delete') {
                         itm.params.a = o.actions.cancel;
                         url = Ext.urlEncode(itm.params);
-                        location.href = '?'+url;
+                        MODx.loadPage('?'+url);
                     }
                 }
                 break;
@@ -355,7 +356,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 if (o.form.hasListener('actionClose')) {
                     o.form.fireEvent('actionClose',itm.params);
                 } else if (o.actions) {
-                    location.href = '?a='+o.actions.cancel+'&'+Ext.encode(itm.params);
+                    MODx.loadPage(o.actions.cancel, Ext.encode(itm.params));
                 }
                 break;
         }

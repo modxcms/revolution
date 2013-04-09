@@ -814,14 +814,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if (!empty($allowedFileTypes) && !in_array($fileExtension,$allowedFileTypes)) continue;
 
                 $filesize = @filesize($filePathName);
-                $url = ltrim($dir.$fileName,'/');
+                $url = urlencode(ltrim($dir.$fileName,'/'));
 
                 /* get thumbnail */
                 if (in_array($fileExtension,$imageExtensions)) {
                     $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                     $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
-                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 60);
-                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
+                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
+                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
 
                     $size = @getimagesize($filePathName);
                     if (is_array($size)) {
@@ -840,6 +840,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'h' => $thumbHeight,
                         'f' => $thumbnailType,
                         'q' => $thumbnailQuality,
+                        'far' => 1,
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
@@ -858,8 +859,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                 } else {
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
-                    $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
-                    $thumbHeight = $imageHeight = $this->ctx->getOption('filemanager_thumb_height', 60);
+                    $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
+                    $thumbHeight = $imageHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
                 }
                 $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 

@@ -214,7 +214,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         uss.setValues(r);
         uss.show(e.target);
     }
-    
+
     ,clearFilter: function() {
         var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
     	this.getStore().baseParams = {
@@ -448,6 +448,7 @@ MODx.combo.xType = function(config) {
                 ,[_('user'),'modx-combo-user']
                 ,[_('usergroup'),'modx-combo-usergroup']
                 ,[_('language'),'modx-combo-language']
+                ,[_('source'),'modx-combo-source']
             ]
         })
         ,displayField: 'd'
@@ -574,6 +575,7 @@ MODx.window.UpdateSetting = function(config) {
             xtype: config.record ? config.record.xtype : 'textarea'
             ,fieldLabel: _('value')
             ,name: 'value'
+            ,hiddenName: 'value'
             ,id: 'modx-'+this.ident+'-value'
             ,anchor: '100%'
         }]

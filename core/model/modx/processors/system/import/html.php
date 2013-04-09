@@ -68,7 +68,7 @@ if (!function_exists('importFiles')) {
                 $results .= sprintf($modx->lexicon('import_site_importing_document'), $alias);
 
                 if (!$resource->save()) {
-                    $results .= "Could not import resource from {$filepath}/{$filename}: <br />" . nl2br(print_r($modx->errorInfo(), true));
+                    $results .= "Could not import resource from {$filepath}/{$id}: <br />" . nl2br(print_r($modx->errorInfo(), true));
                 } else {
                     $results .= $modx->lexicon('import_site_success') . "<br />";
                     importFiles($modx, $results, $allowedfiles, $resource->get('id'), $filepath . "/{$id}/", $value, $context);
@@ -178,9 +178,8 @@ if (!function_exists('aliasCheck')) {
 
         $iterations= 3;
         $origAlias= $alias;
-        while (isset ($resourceContext->aliasMap[$fullAlias]) && $iterations > 0) {
+        while ($duplicateId = $modx->findResource($fullAlias, $resourceContext->get('key')) && $iterations > 0) {
             $iterations--;
-            $duplicateId= $resourceContext->aliasMap[$fullAlias];
             $results .= $modx->lexicon('import_duplicate_alias_found',array(
                 'id' => $duplicateId,
                 'alias' => $fullAlias

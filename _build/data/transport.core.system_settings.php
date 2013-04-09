@@ -141,6 +141,15 @@ $settings['cache_action_map']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['cache_alias_map']= $xpdo->newObject('modSystemSetting');
+$settings['cache_alias_map']->fromArray(array (
+  'key' => 'cache_alias_map',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
 $settings['cache_context_settings']= $xpdo->newObject('modSystemSetting');
 $settings['cache_context_settings']->fromArray(array (
   'key' => 'cache_context_settings',
@@ -1517,6 +1526,15 @@ $settings['session_cookie_secure']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_secure']->fromArray(array (
   'key' => 'session_cookie_secure',
   'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
+$settings['session_cookie_httponly']= $xpdo->newObject('modSystemSetting');
+$settings['session_cookie_httponly']->fromArray(array (
+  'key' => 'session_cookie_httponly',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'session',

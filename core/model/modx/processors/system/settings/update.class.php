@@ -94,12 +94,17 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
      * @return void
      */
     public function updateTranslations(array $fields) {
-        $this->object->updateTranslation('setting_'.$this->object->get('key'),$fields['name'],array(
-            'namespace' => $this->object->get('namespace'),
-        ));
-        $this->object->updateTranslation('setting_'.$this->object->get('key').'_desc',$fields['description'],array(
-            'namespace' => $this->object->get('namespace'),
-        ));
+        if(isset($fields['name'])){
+            $this->object->updateTranslation('setting_'.$this->object->get('key'),$fields['name'],array(
+                'namespace' => $this->object->get('namespace'),
+            ));
+        }
+
+        if(isset($fields['description'])){
+            $this->object->updateTranslation('setting_'.$this->object->get('key').'_desc',$fields['description'],array(
+                'namespace' => $this->object->get('namespace'),
+            ));
+        }
     }
 
     /**

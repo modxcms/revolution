@@ -7,6 +7,10 @@
  * @subpackage lexicon
  */
 $_lang['configcheck_admin'] = 'Contatta un amministratore di sistema e avvisalo di questo messaggio!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post Impostazione del Contesto abilitata fuori da `mgr`';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'L\'impostazione del Contesto allow_tags_in_post &egrave; abilitata per la tua installazione al di fuori del Contesto mgr. MODX raccomanda che questa impostazione sia disabilitata a meno che tu non abbia bisogno di permettere esplicitamente agli utenti di inviare tags di MODX, entities numeriche, o tags di script HTML tramite il metodo POST a un form del tuo sito. Questo dovrebber generalmente essere disabilitato eccetto che nel contesto mgr.';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post Impostazione di Sistema Abilitata';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'L\'impostazione di sistema allow_tags_in_post &egrave; abilitata per la tua installazione. MODX raccomanda che questa impostazione sia disabilitata a meno che tu non abbia bisogno di permettere esplicitamente agli utenti di inviare tags di MODX, entities numeriche, o tags di script HTML tramite il metodo POST a un form del tuo sito. Se proprio devi &egrave; meglio abilitare questa opzione tramite le impostazioni dei Contesti per Contesti specifici.';
 $_lang['configcheck_cache'] = 'Directory cache non scrivibile';
 $_lang['configcheck_cache_msg'] = 'MODX non può scrivere nella directory cache. MODX funzionerà regolarmente, ma senza inserire in cache. Per risolvere il problema, assegna i permessi di scrittura alla directory /_cache/';
 $_lang['configcheck_configinc'] = '<b>File Config ancora scrivibile!</b>';

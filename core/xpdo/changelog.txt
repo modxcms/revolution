@@ -1,5 +1,16 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.7-pl (April 9, 2013)
+====================================
+- [#9793] Preserve numeric keys in xPDOObject::getMany()
+
+xPDO 2.2.6-pl (March 16, 2013)
+====================================
+- [#7452] Fix sql errors with decimal fields in some locales
+- [#9062] Fix problem loading multiple xPDOQuery driver classes
+- [#9629] Fix notice in xPDOConnection::getOption() when $options not an array
+- [#9020] Prevent xPDOZip from attempting to add empty targets
+- [#9272] Implement NFS-safe flock-independent file locking
 - [#9020] Allow xPDOZip to pack empty directories
 - [#9023] Fix removal of subdirs when deleteTop = false in xPDOCacheManager::deleteTree()
 - [#8962] Prevent xPDOSimpleObject from overwriting xPDOObject map entry

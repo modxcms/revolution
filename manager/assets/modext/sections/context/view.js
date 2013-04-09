@@ -1,10 +1,3 @@
-Ext.onReady(function() {
-	MODx.load({
-	   xtype: 'page-context-view'
-	   ,key: MODx.request.key
-	});
-});
-
 /**
  * @class MODx.page.ViewContext
  * @extends MODx.Component

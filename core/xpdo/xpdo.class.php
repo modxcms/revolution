@@ -3,7 +3,7 @@
  * OpenExpedio ("xPDO") is an ultra-light, PHP 5.2+ compatible ORB (Object-
  * Relational Bridge) library based around PDO (http://php.net/pdo/).
  *
- * Copyright 2010-2012 by MODX, LLC.
+ * Copyright 2010-2013 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -25,7 +25,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2012, Jason Coward
+ * @copyright Copyright (C) 2006-2013, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
@@ -311,6 +311,8 @@ class xPDO {
     public function __construct($dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
         try {
             $this->config = $this->initConfig($options);
+            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_FATAL, true));
+            $this->setLogTarget($this->getOption('log_target', null, XPDO_CLI_MODE ? 'ECHO' : 'HTML', true));
             if (!empty($dsn)) {
                 $this->addConnection($dsn, $username, $password, $this->config, $driverOptions);
             }
@@ -2528,6 +2530,8 @@ class xPDO {
         $query= false;
         if ($this->loadClass($this->config['dbtype'] . '.xPDOQuery', '', false, true)) {
             $xpdoQueryClass= 'xPDOQuery_' . $this->config['dbtype'];
+            if (!class_exists($xpdoQueryClass, false))
+                include_once dirname(__FILE__) . '/om/' . $this->config['dbtype'] . '/xpdoquery.class.php';
             if ($query= new $xpdoQueryClass($this, $class, $criteria)) {
                 $query->cacheFlag= $cacheFlag;
             }
@@ -3019,8 +3023,21 @@ class xPDOConnection {
         return $connected;
     }
 
+    /**
+     * Get an option set for this xPDOConnection instance.
+     *
+     * @param string $key The option key to get a value for.
+     * @param array|null $options An optional array of options to consider.
+     * @param mixed $default A default value to use if the option is not found.
+     * @return mixed The option value.
+     */
     public function getOption($key, $options = null, $default = null) {
-        return $this->xpdo->getOption($key, array_merge($this->config, $options), $default);
+        if (is_array($options)) {
+            $options = array_merge($this->config, $options);
+        } else {
+            $options = $this->config;
+        }
+        return $this->xpdo->getOption($key, $options, $default);
     }
 }
 

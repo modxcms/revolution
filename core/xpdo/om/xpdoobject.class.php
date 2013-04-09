@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2012 by MODX, LLC.
+ * Copyright 2010-2013 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -1378,7 +1378,7 @@ class xPDOObject {
                 elseif ($this->_fieldMeta[$_k]['phptype'] == 'timestamp' && preg_match('/int/i', $this->_fieldMeta[$_k]['dbtype'])) {
                     $fieldType= PDO::PARAM_INT;
                 }
-                elseif (!in_array($this->_fieldMeta[$_k]['phptype'], array ('string','password','datetime','timestamp','date','time','array','json'))) {
+                elseif (!in_array($this->_fieldMeta[$_k]['phptype'], array ('string','password','datetime','timestamp','date','time','array','json','float'))) {
                     $fieldType= PDO::PARAM_INT;
                 }
                 if ($this->_new) {
@@ -1400,7 +1400,7 @@ class xPDOObject {
                         $where= '';
                         foreach ($pkn as $k => $v) {
                             $vt= PDO::PARAM_INT;
-                            if ($this->_fieldMeta[$k]['phptype'] == 'string') {
+                            if (in_array($this->_fieldMeta[$k]['phptype'], array('string', 'float'))) {
                                 $vt= PDO::PARAM_STR;
                             }
                             if ($iteration) {
@@ -1414,7 +1414,7 @@ class xPDOObject {
                     } else {
                         $pkn= $this->getPK();
                         $pkt= PDO::PARAM_INT;
-                        if ($this->_fieldMeta[$pkn]['phptype'] == 'string') {
+                        if (in_array($this->_fieldMeta[$pkn]['phptype'], array('string', 'float'))) {
                             $pkt= PDO::PARAM_STR;
                         }
                         $bindings[":{$pkn}"]['value']= $pk;
@@ -2194,7 +2194,7 @@ class xPDOObject {
                     $criteria->andCondition($addCriteria);
                 }
                 if ($collection= $this->xpdo->getCollection($fkMeta['class'], $criteria, $cacheFlag)) {
-                    $this->_relatedObjects[$alias]= array_merge($this->_relatedObjects[$alias], $collection);
+                    $this->_relatedObjects[$alias]= array_diff_key($this->_relatedObjects[$alias], $collection) + $collection;
                 }
             }
         }

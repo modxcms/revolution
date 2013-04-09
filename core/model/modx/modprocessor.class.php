@@ -1347,7 +1347,7 @@ class modProcessorResponse {
      */
     public $modx = null;
     /**
-     * @var array A reference to the full response
+     * @var array|string A reference to the full response
      */
     public $response = null;
     /**
@@ -1397,7 +1397,7 @@ class modProcessorResponse {
      * @return Returns true if the response was a success, otherwise false
      */
     public function isError() {
-        return empty($this->response) || empty($this->response['success']);
+        return empty($this->response) || (is_array($this->response) && (!array_key_exists('success', $this->response) || empty($this->response['success'])));
     }
 
     /**
@@ -1405,7 +1405,7 @@ class modProcessorResponse {
      * @return boolean True if there is a general message
      */
     public function hasMessage() {
-        return !empty($this->response['message']) ? true : false;
+        return isset($this->response['message']) && !empty($this->response['message']) ? true : false;
     }
 
     /**
@@ -1413,7 +1413,7 @@ class modProcessorResponse {
      * @return string The status message
      */
     public function getMessage() {
-        return !empty($this->response['message']) ? $this->response['message'] : '';
+        return isset($this->response['message']) ? $this->response['message'] : '';
     }
 
     /**
@@ -1429,7 +1429,7 @@ class modProcessorResponse {
      * @return boolean True if an object was sent.
      */
     public function hasObject() {
-        return !empty($this->response['object']) ? true : false;
+        return isset($this->response['object']) && !empty($this->response['object']) ? true : false;
     }
 
     /**
@@ -1437,7 +1437,7 @@ class modProcessorResponse {
      * @return array The object in the response, usually the object being performed on.
      */
     public function getObject() {
-        return !empty($this->response['object']) ? $this->response['object'] : array();
+        return isset($this->response['object']) ? $this->response['object'] : array();
     }
 
     /**
@@ -1504,8 +1504,8 @@ class modProcessorResponseError {
      */
     function __construct($error = array()) {
         $this->error = $error;
-        if (!empty($error['id'])) { $this->field = $error['id']; }
-        if (!empty($error['msg'])) { $this->message = $error['msg']; }
+        if (isset($error['id']) && !empty($error['id'])) { $this->field = $error['id']; }
+        if (isset($error['msg']) && !empty($error['msg'])) { $this->message = $error['msg']; }
     }
 
     /**
