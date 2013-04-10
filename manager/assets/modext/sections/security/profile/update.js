@@ -51,6 +51,7 @@ MODx.panel.Profile = function(config) {
             ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-profile-recent-docs'
             ,autoHeight: true
+            ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('profile_recent_resources_desc')+'</p><br />'
                 ,id: 'modx-profile-recent-docs-msg'
