@@ -1,6 +1,6 @@
 /**
  * Loads the create file page
- * 
+ *
  * @class MODx.page.CreateFile
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -41,7 +41,7 @@ Ext.extend(MODx.page.CreateFile,MODx.Component);
 Ext.reg('modx-page-file-create',MODx.page.CreateFile);
 /**
  * Loads the CreateFile panel
- * 
+ *
  * @class MODx.panel.CreateFile
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -131,7 +131,7 @@ Ext.extend(MODx.panel.CreateFile,MODx.FormPanel,{
         return true;
     }
     ,success: function(r) {
-        MODx.loadPage(MODx.action['system/file/edit'], 'file='+r.result.object.file+'&source='+MODx.request.source);
+        MODx.loadPage('system/file/edit', 'file='+r.result.object.file+'&source='+MODx.request.source);
     }
     ,beforeSubmit: function(o) {
         this.cleanupEditor();

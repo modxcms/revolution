@@ -199,7 +199,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,createUser: function() {
-        MODx.loadPage(MODx.action['security/user/create']);
+        MODx.loadPage('security/user/create');
     }
 
     ,activateSelected: function() {
@@ -291,7 +291,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,updateUser: function() {
-        MODx.loadPage(MODx.action['security/user/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('security/user/update', 'id='+this.menu.record.id);
     }
 
     ,rendGender: function(d,c) {

@@ -1,6 +1,6 @@
 /**
  * Loads the panel for managing access policy templates.
- * 
+ *
  * @class MODx.panel.AccessPolicyTemplates
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -36,7 +36,7 @@ Ext.reg('modx-panel-access-policy-templates',MODx.panel.AccessPolicyTemplates);
 
 /**
  * Loads a grid of modAccessPolicyTemplates.
- * 
+ *
  * @class MODx.grid.AccessPolicyTemplates
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -138,9 +138,9 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         this.refresh();
     }
     ,editPolicyTemplate: function(itm,e) {
-        MODx.loadPage(MODx.action['security/access/policy/template/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('security/access/policy/template/update', 'id='+this.menu.record.id);
     }
-    
+
     ,createPolicyTemplate: function(btn,e) {
         var r = this.menu.record;
         if (!this.windows.aptc) {
@@ -260,7 +260,7 @@ Ext.reg('modx-grid-access-policy-templates',MODx.grid.AccessPolicyTemplate);
 
 /**
  * Generates a window for creating Access Policies.
- *  
+ *
  * @class MODx.window.CreateAccessPolicy
  * @extends MODx.Window
  * @param {Object} config An object of options.

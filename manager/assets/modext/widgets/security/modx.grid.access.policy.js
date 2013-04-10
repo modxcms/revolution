@@ -1,6 +1,6 @@
 /**
  * Loads the panel for managing access policies.
- * 
+ *
  * @class MODx.panel.AccessPolicies
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -36,7 +36,7 @@ Ext.reg('modx-panel-access-policies',MODx.panel.AccessPolicies);
 
 /**
  * Loads a grid of modAccessPolicies.
- * 
+ *
  * @class MODx.grid.AccessPolicy
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -136,9 +136,9 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
     }
 
     ,editPolicy: function(itm,e) {
-        MODx.loadPage(MODx.action['security/access/policy/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('security/access/policy/update', 'id='+this.menu.record.id);
     }
-    
+
     ,createPolicy: function(btn,e) {
         var r = this.menu.record;
         if (!this.windows.apc) {
@@ -221,7 +221,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
                 m.push({
                     text: _('policy_remove')
                     ,handler: this.confirm.createDelegate(this,["remove","policy_remove_confirm"])
-                });                
+                });
             }
         }
 
@@ -255,7 +255,7 @@ Ext.reg('modx-grid-access-policy',MODx.grid.AccessPolicy);
 
 /**
  * Generates a window for creating Access Policies.
- *  
+ *
  * @class MODx.window.CreateAccessPolicy
  * @extends MODx.Window
  * @param {Object} config An object of options.

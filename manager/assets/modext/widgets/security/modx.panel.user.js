@@ -59,7 +59,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
-                    
+
                     var d = Ext.decode(r.object.groups);
                     var g = Ext.getCmp('modx-grid-user-groups');
                     if (g) {
@@ -77,7 +77,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         var d = {};
         var g = Ext.getCmp('modx-grid-user-settings');
         if (g) { d.settings = g.encodeModified(); }
-        
+
         var h = Ext.getCmp('modx-grid-user-groups');
         if (h) { d.groups = h.encode(); }
 
@@ -86,10 +86,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
 
         var et = Ext.getCmp('modx-extended-tree');
         if (et) { d.extended = et.encode(); }
-        
+
         Ext.apply(o.form.baseParams,d);
     }
-    
+
     ,success: function(o) {
         var userId = this.config.user;
         if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === true && o.result.message != '') {
@@ -100,17 +100,17 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
                     if (userId == 0) {
-                        MODx.loadPage(MODx.action['security/user'], 'id='+o.result.object.id);
+                        MODx.loadPage('security/user', 'id='+o.result.object.id);
                     }
                     return false;
                 }
             });
             this.clearDirty();
         } else if (userId == 0) {
-            MODx.loadPage(MODx.action['security/user'], 'id='+o.result.object.id);
+            MODx.loadPage('security/user', 'id='+o.result.object.id);
         }
     }
-    
+
     ,showNewPassword: function(cb,v) {
         var el = Ext.getCmp('modx-user-panel-newpassword').getEl();
         if (v) {
@@ -119,7 +119,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             el.slideOut('t',{useDisplay:true});
         }
     }
-    
+
     ,getFields: function(config) {
         var f = [{
             title: _('general_information')
@@ -561,7 +561,7 @@ Ext.reg('modx-panel-user',MODx.panel.User);
 
 /**
  * Displays a gender combo
- * 
+ *
  * @class MODx.combo.Gender
  * @extends Ext.form.ComboBox
  * @param {Object} config An object of configuration properties

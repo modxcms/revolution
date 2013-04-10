@@ -526,7 +526,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: _('edit_context')
                 ,handler: function() {
                     var at = this.cm.activeNode.attributes;
-                    this.loadAction('a=context/update&key='+at.pk);
+                    MODx.loadPage('context/update', 'key='+at.pk);
                 }
             });
         }
@@ -650,9 +650,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,createResourceHere: function(itm) {
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
-        Ext.getCmp('modx-resource-tree').loadAction(
-            'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
-        );
+        MODx.loadPage('resource/create', 'class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : ''));
     }
     ,createResource: function(itm,e) {
         var at = this.cm.activeNode.attributes;
