@@ -84,6 +84,8 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
         $childrenCt++;
     }
 }
+$emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
+$output = str_replace($emptySub, '', $output);
 $this->setPlaceholder('navb',$output);
 
 /* assign logged in text and link */
