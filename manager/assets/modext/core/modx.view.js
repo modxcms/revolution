@@ -183,6 +183,7 @@ MODx.browser.Window = function(config) {
                 this.config.source = s;
                 this.view.config.source = s;
                 this.view.baseParams.source = s;
+                this.view.dir = '/';
                 this.view.run();
             },scope:this}
             ,'nodeclick': {fn:function(n,e) {
