@@ -413,7 +413,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.run({ ctx: MODx.ctx });
+                    this.run();
                 },scope:this}
             }
         });
