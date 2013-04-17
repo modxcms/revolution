@@ -275,7 +275,9 @@ class modRequest {
             } else {
                 return null;
             }
-            $this->modx->invokeEvent('OnLoadWebPageCache');
+            $this->modx->invokeEvent('OnLoadWebPageCache', array(
+                'resource'  => &$resource,
+            ));
         }
         return $resource;
     }
