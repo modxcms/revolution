@@ -5,6 +5,38 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.7-pl (April 9, 2013)
+====================================
+- [#9634] Fix notices in system/settings/update processor
+- [#9768] Fix array merge in xPDOObject::getMany()
+- [#9773] Fix classKey errors viewing manager actions
+- [#9774] Prevent resource/unpublish on site_start
+- [#8312] Allow sorting users by blocked status
+- [#1] Allow Element duplication when editing
+- [#9237] Return object from ContextSetting create/update
+- [#8327] Don't close context menu on click
+- [#8980] Fix lexicon when updating user password
+- [#9258] List languages and topics alphabetically
+- [#9152] Use default_context for New Resource toolbar actions
+- [#8138] Fix Combo Settings not saving from update dialog
+- [#9571] Fix template/update always refreshing cache
+- [#9093] Make collapsed tree panel tab more visible
+- [#8859] Add button to refresh error log
+- [#9772] Fix deprecated value for CURLOPT_SSL_VERIFYHOST
+- [#9728] Fix empty create Dashboard Widget tab
+- [#9734] Fix save button state on Content Types grid
+- Fix resizing of error log textarea
+- [#9287] Enable save button when switching templates
+- [#9132] Refresh cache when enabling/disabling plugin
+- [#9690] Fix various issues with server_offset_time
+- [#9738] Prevent working context overriding user settings
+- Fix error getting MediaSource table classes on cached Resources
+- [#9368][#9437] Fix modProcessorResponse->isError()
+- [#9681] Allow country/getlist processor to work more than once
+- Fix Auto-Tag TV value sorting
+- Make caching the aliasMap optional to reduce memory usage
+- [#9672] Fix invalid ini_get call in modDbRegister
+- [#8489] Add compound index to modTemplateVarResource
 - [#9592] Iterate all inherited parent FC rules
 - Replace location redirects with MODx.loadPage proxy
 - Add MODx.beforeLoadPage event to modExt components

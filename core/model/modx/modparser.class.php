@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2012 by MODX, LLC.
+ * Copyright 2006-2013 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -1236,12 +1236,24 @@ class modLinkTag extends modTag {
                     array(),
                     $maxIterations
                 );
-                if (isset ($this->modx->aliasMap[$this->_output])) {
-                    $this->_output= $this->modx->aliasMap[$this->_output];
+                $context = '';
+                if ($this->modx->getOption('friendly_urls', null, false)) {
+                    if (array_key_exists('context', $this->_properties)) {
+                        $context = $this->_properties['context'];
+                    } elseif (isset($this->modx->resource)) {
+                        $context = $this->modx->resource->get('context_key');
+                    } elseif (isset($this->modx->context)) {
+                        $context = $this->modx->context->get('key');
+                    }
+                    if ($context) {
+                        $resource = $this->modx->findResource($context, $this->_output);
+                        if ($resource) {
+                            $this->_output = $resource;
+                        }
+                    }
                 }
                 if (!empty($this->_output)) {
                     $qs = '';
-                    $context = '';
                     $scheme = $this->modx->getOption('link_tag_scheme',null,-1);
                     $options = array();
                     if (is_array($this->_properties) && !empty($this->_properties)) {
@@ -1260,7 +1272,7 @@ class modLinkTag extends modTag {
                             unset($this->_properties['use_weblink_target']);
                         }
                         foreach ($this->_properties as $propertyKey => $propertyValue) {
-                            if (in_array($propertyKey, array('context', 'scheme'))) continue;
+                            if (in_array($propertyKey, array('context', 'scheme', 'use_weblink_target'))) continue;
                             $qs[]= "{$propertyKey}={$propertyValue}";
                         }
                         if ($qs= implode('&', $qs)) {

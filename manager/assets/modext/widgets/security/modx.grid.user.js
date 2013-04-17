@@ -85,6 +85,7 @@ MODx.grid.User = function(config) {
             header: _('user_block')
             ,dataIndex: 'blocked'
             ,width: 80
+            ,sortable: true
             ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
         }]
         ,tbar: [{
@@ -260,7 +261,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         });
         return true;
     }
-    
+
     ,removeUser: function() {
         MODx.msg.confirm({
             title: _('user_remove')
@@ -288,15 +289,11 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             }
         });
     }
-    
+
     ,updateUser: function() {
-<<<<<<< HEAD
-        location.href = 'index.php?a=security/user/update&id='+this.menu.record.id;
-=======
         MODx.loadPage(MODx.action['security/user/update'], 'id='+this.menu.record.id);
->>>>>>> release-2.2
     }
-    				
+
     ,rendGender: function(d,c) {
         switch(d.toString()) {
             case '0':

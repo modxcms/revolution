@@ -111,4 +111,4 @@ $modx->cacheManager->refresh(array(
     'resource' => array('contexts' => array($context->get('key'))),
 ));
 
-return $modx->error->success();
+return $modx->error->success('', $setting);

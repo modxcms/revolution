@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2012 by MODX, LLC.
+ * Copyright 2006-2013 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -243,7 +243,7 @@ class modX extends xPDO {
     /**
      * @var array A config array that stores the system-wide settings.
      */
-    public $_systemConfig= null;
+    public $_systemConfig= array();
     /**
      * @var array A config array that stores the user settings.
      */
@@ -439,6 +439,7 @@ class modX extends xPDO {
             $this->loadClass('modScript');
             $this->loadClass('modPrincipal');
             $this->loadClass('modUser');
+            $this->loadClass('sources.modMediaSource');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {
@@ -947,9 +948,10 @@ class modX extends xPDO {
             if (empty($url) && ($context !== $this->context->get('key'))) {
                 $ctx= null;
                 if ($context == '') {
-                    if ($results = $this->query("SELECT context_key FROM " . $this->getTableName('modResource') . " WHERE id = {$id}")) {
-                        $contexts= $results->fetchAll(PDO::FETCH_COLUMN);
-                        if ($contextKey = reset($contexts)) {
+                    /** @var PDOStatement $stmt  */
+                    if ($stmt = $this->prepare("SELECT context_key FROM " . $this->getTableName('modResource') . " WHERE id = :id")) {
+                        $stmt->bindValue(':id', $id);
+                        if ($contextKey = $this->getValue($stmt)) {
                             $ctx = $this->getContext($contextKey);
                         }
                     }
@@ -968,6 +970,36 @@ class modX extends xPDO {
             $this->log(modX::LOG_LEVEL_ERROR, '`' . $id . '` is not a valid integer and may not be passed to makeUrl()');
         }
         return $url;
+    }
+
+    public function findResource($uri, $context = '') {
+        $resourceId = false;
+        if (empty($context) && isset($this->context)) $context = $this->context->get('key');
+        if (!empty($context) && (!empty($uri) || $uri === '0')) {
+            $useAliasMap = (boolean) $this->getOption('cache_alias_map', null, false);
+            if ($useAliasMap) {
+                if (isset($this->context) && $this->context->get('key') === $context && array_key_exists($uri, $this->aliasMap)) {
+                    $resourceId = (integer) $this->aliasMap[$uri];
+                } elseif ($ctx = $this->getContext($context)) {
+                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && array_key_exists($uri, $ctx->aliasMap);
+                    if ($useAliasMap && array_key_exists($uri, $ctx->aliasMap)) {
+                        $resourceId = (integer) $ctx->aliasMap[$uri];
+                    }
+                }
+            }
+            if (!$resourceId && !$useAliasMap) {
+                $query = $this->newQuery('modResource', array('context_key' => $context, 'uri' => $uri, 'deleted' => false));
+                $query->select($this->getSelectColumns('modResource', '', '', array('id')));
+                $stmt = $query->prepare();
+                if ($stmt) {
+                    $value = $this->getValue($stmt);
+                    if ($value) {
+                        $resourceId = $value;
+                    }
+                }
+            }
+        }
+        return $resourceId;
     }
 
     /**
@@ -1817,7 +1849,7 @@ class modX extends xPDO {
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
         $ml->set('action', empty($action) ? 'unknown' : $action);
-        $ml->set('classKey', empty($class_key) ? 'unknown' : $class_key);
+        $ml->set('classKey', empty($class_key) ? '' : $class_key);
         $ml->set('item', empty($item) ? 'unknown' : $item);
 
         if (!$ml->save()) {

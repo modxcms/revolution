@@ -122,6 +122,9 @@ $_lang['setting_blocked_minutes_desc'] = 'Qui puoi inserire il numero di minuti 
 $_lang['setting_cache_action_map'] = 'Abilita la Cache della "Mappa Azioni"';
 $_lang['setting_cache_action_map_desc'] = 'Se impostata su "SI", le azioni (o le mappe dei controlli) saranno inserite in cache per ridurre il tempo di caricamento delle pagine del manager.';
 
+$_lang['setting_cache_alias_map'] = 'Abilita Context Alias Map Cache';
+$_lang['setting_cache_alias_map_desc'] = 'Quando abilitato, tutti gli URIs delle Risorse sono inseriti nella cache del Contesto. Abilitalo su siti pi&ugrave; piccoli e disabilitalo su siti pi&ugrave; grandi per avere prestazioni migliori.';
+
 $_lang['setting_cache_context_settings'] = 'Abilita Cache Impostazione dei Contesti';
 $_lang['setting_cache_context_settings_desc'] = 'Se impostata su "SI", le impostazioni dei contesti saranno inserite in cache per ridurre il tempo di caricamento.';
 
@@ -604,6 +607,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Con questa impostazione puoi perso
 
 $_lang['setting_session_cookie_secure'] = 'Sicurezza Cookie Sessione';
 $_lang['setting_session_cookie_secure_desc'] = 'Abilita questa opzione per usare cookies per sessioni sicure.';
+
+$_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Utilizza questa opzione per spuntare il flag HttpOnly sui cookies della sessione.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'modSessionHandler\'.';

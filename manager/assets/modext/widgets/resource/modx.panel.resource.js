@@ -172,11 +172,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-<<<<<<< HEAD
-                            location.href = '?a='+r.result.object.action+'&class_key='+ r.result.object.class_key+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
-=======
                             MODx.loadPage(MODx.action[r.result.object.action], 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
->>>>>>> release-2.2
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -585,6 +581,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.publishedon
         },{
             xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
@@ -598,6 +595,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.pub_date
         },{
             xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
@@ -611,6 +609,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.unpub_date
         },{
             xtype: 'fieldset'

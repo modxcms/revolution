@@ -40,7 +40,7 @@ MODx.panel.ContentType = function(config) {
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
         }
     });
-    MODx.panel.ContentType.superclass.constructor.call(this,config);  
+    MODx.panel.ContentType.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.ContentType,MODx.FormPanel,{
     initialized: false
@@ -53,13 +53,14 @@ Ext.extend(MODx.panel.ContentType,MODx.FormPanel,{
     }
     ,success: function(o) {
         this.getComponent('form').getComponent('grid').getStore().commitChanges();
+        Ext.getCmp('save-type-btn').disable();
     }
 });
 Ext.reg('modx-panel-content-type',MODx.panel.ContentType);
 
 /**
  * Loads a grid of content types
- * 
+ *
  * @class MODx.grid.ContentType
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -113,6 +114,9 @@ MODx.grid.ContentType = function(config) {
         }]
     });
     MODx.grid.ContentType.superclass.constructor.call(this,config);
+    this.on('afteredit', function() {
+        Ext.getCmp('save-type-btn').enable();
+    });
 };
 Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
     getMenu: function() {
@@ -127,9 +131,9 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
 Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
 
 
-/** 
+/**
  * Generates the ContentType window.
- *  
+ *
  * @class MODx.window.ContentType
  * @extends MODx.Window
  * @param {Object} config An object of options.

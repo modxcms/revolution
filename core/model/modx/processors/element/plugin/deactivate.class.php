@@ -3,7 +3,7 @@
  * Deactivate a plugin.
  *
  * @param integer $id The ID of the plugin.
- * 
+ *
  * @package modx
  * @subpackage processors.element.plugin
  */
@@ -17,6 +17,11 @@ class modPluginDeactivateProcessor extends modObjectUpdateProcessor {
     public function beforeSave() {
         $this->object->set('disabled',true);
         return parent::beforeSave();
+    }
+
+    public function afterSave() {
+        $this->modx->cacheManager->refresh();
+        return parent::afterSave();
     }
 
     public function cleanup() {

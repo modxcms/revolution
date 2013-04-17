@@ -5,17 +5,10 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
-<<<<<<< HEAD
- * @author honda http://kogus.org 2012-06-05
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
-=======
  * @author yamamoto http://kyms.jp 2012-08-06
  * @author honda http://kogus.org 2012-09-21
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
->>>>>>> release-2.2
  */
 $_lang['access'] = 'アクセス';
 $_lang['access_denied'] = 'アクセスは拒否されました。';

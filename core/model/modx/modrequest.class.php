@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2012 by MODX, LLC.
+ * Copyright 2006-2013 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -90,9 +90,9 @@ class modRequest {
             $this->modx->resourceMethod = $this->getResourceMethod();
             $this->modx->resourceIdentifier = $this->getResourceIdentifier($this->modx->resourceMethod);
             if ($this->modx->resourceMethod == 'id' && $this->modx->getOption('friendly_urls', null, false) && !$this->modx->getOption('request_method_strict', null, false)) {
-                $uri = array_search($this->modx->resourceIdentifier, $this->modx->aliasMap);
+                $uri = $this->modx->context->getResourceURI($this->modx->resourceIdentifier);
                 if (!empty($uri)) {
-                    if ($this->modx->resourceIdentifier == $this->modx->getOption('site_start', null, 1)) {
+                    if ((integer) $this->modx->resourceIdentifier === (integer) $this->modx->getOption('site_start', null, 1)) {
                         $url = $this->modx->getOption('site_url', null, MODX_SITE_URL);
                     } else {
                         $url = $this->modx->getOption('site_url', null, MODX_SITE_URL) . $uri;
@@ -108,8 +108,9 @@ class modRequest {
             $this->modx->resourceIdentifier = $this->_cleanResourceIdentifier($this->modx->resourceIdentifier);
         }
         if ($this->modx->resourceMethod == "alias") {
-            if (isset ($this->modx->aliasMap[$this->modx->resourceIdentifier])) {
-                $this->modx->resourceIdentifier = $this->modx->aliasMap[$this->modx->resourceIdentifier];
+            $found = $this->modx->findResource($this->modx->resourceIdentifier);
+            if ($found) {
+                $this->modx->resourceIdentifier = $found;
                 $this->modx->resourceMethod = 'id';
             } else {
                 $this->modx->sendErrorPage();
@@ -178,7 +179,7 @@ class modRequest {
     public function getResource($method, $identifier, array $options = array()) {
         $resource = null;
         if ($method == 'alias') {
-            $resourceId = $this->modx->aliasMap[$identifier];
+            $resourceId = $this->modx->findResource($identifier);
         } else {
             $resourceId = $identifier;
         }
@@ -318,29 +319,28 @@ class modRequest {
         }
         elseif ($this->modx->getOption('friendly_urls', null, false) && $this->modx->resourceMethod = 'alias') {
             $containerSuffix = trim($this->modx->getOption('container_suffix', null, ''));
-            if (!isset ($this->modx->aliasMap[$identifier])) {
-                if (!empty ($containerSuffix)) {
-                    $suffixLen = strlen($containerSuffix);
-                    $identifierLen = strlen($identifier);
-                    if (substr($identifier, $identifierLen - $suffixLen) === $containerSuffix) {
-                        $identifier = substr($identifier, 0, $identifierLen - $suffixLen);
-                    }
-                    elseif (isset ($this->modx->aliasMap["{$identifier}{$containerSuffix}"])) {
-                        $identifier = "{$identifier}{$containerSuffix}";
-                    }
-                    if (isset ($this->modx->aliasMap[$identifier])) {
-                        $parameters = $this->getParameters();
-                        unset($parameters[$this->modx->getOption('request_param_alias')]);
-                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');
-                        $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
-                    }
-                    $this->modx->resourceMethod = 'alias';
+            $found = $this->modx->findResource($identifier);
+            if ($found === false && !empty ($containerSuffix)) {
+                $suffixLen = strlen($containerSuffix);
+                $identifierLen = strlen($identifier);
+                if (substr($identifier, $identifierLen - $suffixLen) === $containerSuffix) {
+                    $identifier = substr($identifier, 0, $identifierLen - $suffixLen);
+                    $found = $this->modx->findResource($identifier);
+                } else {
+                    $identifier = "{$identifier}{$containerSuffix}";
+                    $found = $this->modx->findResource("{$identifier}{$containerSuffix}");
                 }
-            }
-            elseif ($this->modx->getOption('site_start', null, 1) == $this->modx->aliasMap[$identifier]) {
+                if ($found) {
+                    $parameters = $this->getParameters();
+                    unset($parameters[$this->modx->getOption('request_param_alias')]);
+                    $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
+                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                }
+                $this->modx->resourceMethod = 'alias';
+            } elseif ((integer) $this->modx->getOption('site_start', null, 1) === $found) {
                 $parameters = $this->getParameters();
                 unset($parameters[$this->modx->getOption('request_param_alias')]);
-                $url = $this->modx->makeUrl($this->modx->getOption('site_start', null, 1), '', $parameters, 'full');
+                $url = $this->modx->makeUrl($this->modx->getOption('site_start', null, 1), $this->modx->context->get('key'), $parameters, 'full');
                 $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             } else {
                 if ($this->modx->getOption('friendly_urls_strict', null, false)) {
@@ -352,7 +352,7 @@ class modRequest {
                     if ($fullId !== $requestUri && strpos($requestUri, $fullId) !== 0) {
                         $parameters = $this->getParameters();
                         unset($parameters[$this->modx->getOption('request_param_alias')]);
-                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', $parameters, 'full');
+                        $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
                         $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
                     }
                 }
@@ -480,7 +480,7 @@ class modRequest {
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_auto_publish_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER))
         ));
         if ($cacheRefreshTime > 0) {
-            $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
+            $timeNow= time();
             if ($cacheRefreshTime <= $timeNow) {
                 $this->modx->cacheManager->refresh();
             }
