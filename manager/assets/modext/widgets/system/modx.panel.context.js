@@ -34,11 +34,17 @@ MODx.panel.Context = function(config) {
 					,fieldLabel: _('key')
 					,name: 'key'
 					,width: 300
-					,maxLength: 255
+					,maxLength: 100
 					,enableKeyEvents: true
 					,allowBlank: true
 					,value: config.context
 					,submitValue: true
+				},{
+					xtype: 'textfield'
+					,fieldLabel: _('name')
+					,name: 'name'
+					,width: 300
+					,maxLength: 255
 				},{
 					xtype: 'textarea'
 					,fieldLabel: _('description')
@@ -46,7 +52,7 @@ MODx.panel.Context = function(config) {
 					,width: 300
 					,grow: true
 				},{
-					html: MODx.onContextFormRender 
+					html: MODx.onContextFormRender
 					,border: false
 				}]
 			}]
@@ -121,17 +127,17 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
     }
     ,beforeSubmit: function(o) {
         var r = {};
-        
+
         var g = Ext.getCmp('modx-grid-context-settings');
         if (g) { r.settings = g.encodeModified(); }
-        
+
         Ext.apply(o.form.baseParams,r);
     }
     ,success: function(o) {
         var g = Ext.getCmp('modx-grid-context-settings');
         if (g) { g.getStore().commitChanges(); }
-        
-        var t = parent.Ext.getCmp('modx-resource-tree');        
+
+        var t = parent.Ext.getCmp('modx-resource-tree');
         if (t) { t.refreshNode(this.config.context+'_0',true); }
     }
 });

@@ -54,3 +54,13 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 
 /* migrate extension_packages setting to DB table */
 include dirname(dirname(__FILE__)).'/common/2.3-extension-packages.php';
+
+/* add modContext.name field */
+$class = 'modContext';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'name','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'name'));
+
+/* add index on modContext.name */
+$description = $this->install->lexicon('add_index',array('index' => 'name','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'name'));
