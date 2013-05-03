@@ -423,6 +423,7 @@
     
     <object class="modContext" table="context" extends="modAccessibleObject">
         <field key="key" dbtype="varchar" precision="100" phptype="string" null="false" index="pk" />
+        <field key="name" dbtype="varchar" precision="100" phptype="string" />
         <field key="description" dbtype="tinytext" phptype="string" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         

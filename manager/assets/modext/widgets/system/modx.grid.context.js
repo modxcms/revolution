@@ -11,16 +11,22 @@ MODx.grid.Context = function(config) {
     Ext.applyIf(config,{
         title: _('contexts')
         ,url: MODx.config.connectors_url+'context/index.php'
-        ,fields: ['key','description','perm']
+        ,fields: ['key','name','description','perm']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
         ,primaryKey: 'key'
         ,columns: [{
-            header: _('context_key')
+            header: _('key')
             ,dataIndex: 'key'
+            ,width: 100
+            ,sortable: true
+        },{
+            header: _('name')
+            ,dataIndex: 'name'
             ,width: 150
             ,sortable: true
+            ,editor: { xtype: 'textfield' }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -118,6 +124,12 @@ MODx.window.CreateContext = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('context_key')
             ,name: 'key'
+            ,anchor: '100%'
+            ,maxLength: 100
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
             ,anchor: '100%'
             ,maxLength: 100
         },{
