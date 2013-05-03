@@ -118,6 +118,8 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
                     'overrides' => array(
                         'context_key' => $this->newObject->get('key'),
                     ),
+                    'preserve_alias' => ($this->getProperty('preserve_alias') == 'on') ? true : false,
+                    'preserve_menuindex' => ($this->getProperty('preserve_menuindex') == 'on') ? true: false,
                 ));
             }
         }
