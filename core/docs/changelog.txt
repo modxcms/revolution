@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add preserve menuindex/alias options to Duplicate Context
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
@@ -804,7 +805,7 @@ MODX Revolution 2.1.0-rc-1 (March 28, 2011)
 - [#3615] Fix issue with modx->user->getResourceGroups, set resource groups in "modx.user.{$id}.resourceGroups" session key
 - [#3568] Fix double error->failure reference in resource/create processor
 - [#3425] MODx.Browser now loads directory of TV's current value on load
-- [#3481], [#3571], [#3304], [#3569] Fix issue with filemanager_path in non-web contexts 
+- [#3481], [#3571], [#3304], [#3569] Fix issue with filemanager_path in non-web contexts
 - [#3009] Add ability to assign TVs to specific directories and base paths, limit file extensions shown
 - [#2679] Add Input Options to TVs, allowing TV inputs to be customized and tweaked
 
@@ -880,7 +881,7 @@ MODX Revolution 2.0.5-pl (December 8th, 2010)
 - Fix bug when editing FC profiles from a grid, issue where UserGroup wasn't respected
 - Ensure radio TV values still can select if default value is 0
 - [#2869] Fix issue with parent display text in Resource panel
-- [#2892] Fix problem creating folders on filesystem from file manager and browser 
+- [#2892] Fix problem creating folders on filesystem from file manager and browser
 - [#22] Allow SymLinks metadata to override target Resource metadata
 - Cache Resource ACL Policies with the Resource
 - [#2888] Fix problem with elementCache in modX::sendForward()
