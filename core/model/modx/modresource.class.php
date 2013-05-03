@@ -972,23 +972,29 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $newResource->set('editedon',0);
 
         /* get new alias */
+        $preserve_alias = $this->xpdo->getOption('preserve_alias', $options, false);
         $alias = $newResource->cleanAlias($newName);
         if ($this->xpdo->getOption('friendly_urls', $options, false)) {
-            /* auto assign alias */
-            $aliasPath = $newResource->getAliasPath($newName);
-            $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
-            if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
-                $alias = '';
-                if ($newResource->get('uri_override')) {
-                    $newResource->set('uri_override', false);
+            if(!($preserve_alias)){
+                /* auto assign alias */
+                $aliasPath = $newResource->getAliasPath($newName);
+                $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
+                if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
+                    $alias = '';
+                    if ($newResource->get('uri_override')) {
+                        $newResource->set('uri_override', false);
+                    }
                 }
+                $newResource->set('alias',$alias);
             }
         }
-        $newResource->set('alias',$alias);
 
+        $preserve_menuindex = $this->xpdo->getOption('preserve_menuindex', $options, false);
         /* set new menuindex */
-        $childrenCount = $this->xpdo->getCount('modResource',array('parent' => $this->get('parent')));
-        $newResource->set('menuindex',$childrenCount);
+        if(!$preserve_menuindex){
+            $menuindex = $this->xpdo->getCount('modResource',array('parent' => $this->get('parent')));
+            $newResource->set('menuindex',$menuindex);
+        }
 
         /* save resource */
         if (!$newResource->save()) {
@@ -1020,7 +1026,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
-            
+
             $children = $this->getMany('Children');
             if (is_array($children) && count($children) > 0) {
                 /** @var modResource $child */
@@ -1031,11 +1037,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                         'prefixDuplicate' => $prefixDuplicate,
                         'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
                         'publishedMode' => $publishedMode,
+                        'preserve_alias' => $preserve_alias,
+                        'preserve_menuindex' => $preserve_menuindex
                     ));
                 }
             }
         }
         return $newResource;
+
     }
 
     /**
