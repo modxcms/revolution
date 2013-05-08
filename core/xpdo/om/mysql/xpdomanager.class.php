@@ -429,6 +429,7 @@ class xPDOManager_mysql extends xPDOManager {
         $notNull= !isset ($meta['null']) ? false : ($meta['null'] === 'false' || empty($meta['null']));
         $null= $notNull ? ' NOT NULL' : ' NULL';
         $extra= '';
+        $comment= '';
         if (isset($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') {
             $extra= ' AUTO_INCREMENT';
         }
@@ -445,10 +446,13 @@ class xPDOManager_mysql extends xPDOManager {
             }
         }
         $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
+        if(!empty($meta['comment'])){
+            $comment= ' COMMENT \''.$meta['comment'].'\'';
+        }
         if (strpos(strtolower($attributes), 'unsigned') !== false) {
-            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra;
+            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra . $comment;
         } else {
-            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra;
+            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra . $comment;
         }
         return $result;
     }
