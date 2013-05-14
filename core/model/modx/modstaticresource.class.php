@@ -167,7 +167,7 @@ class modStaticResource extends modResource implements modResourceInterface {
                     }
                 }
                 @session_write_close();
-                while (@ob_end_clean()) {}
+                while (ob_get_level() && @ob_end_clean()) {}
                 readfile($file);
                 die();
             }

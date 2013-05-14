@@ -1010,7 +1010,7 @@ class modX extends xPDO {
      */
     public function sendError($type = '', $options = array()) {
         if (!is_string($type) || empty($type)) $type = $this->getOption('error_type', $options, 'unavailable');
-        while (@ob_end_clean()) {}
+        while (ob_get_level() && @ob_end_clean()) {}
         if (!XPDO_CLI_MODE) {
             $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Service temporarily unavailable');
             $errorMessage = $this->getOption('error_message', $options, '<p>Site temporarily unavailable.</p>');
@@ -2455,7 +2455,7 @@ class modX extends xPDO {
             }
         } else {
             if ($level === modX::LOG_LEVEL_FATAL) {
-                while (@ob_end_clean()) {}
+                while (ob_get_level() && @ob_end_clean()) {}
                 if ($targetObj == 'FILE' && $cacheManager= $this->getCacheManager()) {
                     $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
                     $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;

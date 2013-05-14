@@ -71,7 +71,7 @@ class modInstallJSONError extends modInstallError {
     }
 
     public function failure($message = '', $object = null) {
-        while (@ ob_end_clean()) {}
+        while (ob_get_level() && @ob_end_clean()) {}
         die($this->process($message, false, $object));
     }
 
