@@ -1978,7 +1978,7 @@ class xPDO {
             $file= (isset ($_SERVER['PHP_SELF']) || $target == 'ECHO') ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_FILENAME'];
         }
         if ($level === xPDO::LOG_LEVEL_FATAL) {
-            while (@ob_end_flush()) {}
+            while (ob_get_level() && @ob_end_flush()) {}
             exit ('[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''));
         }
         if ($this->_debug === true || $level <= $this->logLevel) {
