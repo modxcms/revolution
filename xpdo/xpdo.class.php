@@ -1530,33 +1530,51 @@ class xPDO {
     public function getPK($className) {
         $pk= null;
         if (strcasecmp($className, 'xPDOObject') !== 0) {
-        if ($actualClassName= $this->loadClass($className)) {
-            if (isset ($this->map[$actualClassName]['fieldMeta'])) {
-                foreach ($this->map[$actualClassName]['fieldMeta'] as $k => $v) {
-                    if (isset ($v['index']) && isset ($v['phptype']) && $v['index'] == 'pk') {
-                        $pk[$k]= $k;
+            if ($actualClassName= $this->loadClass($className)) {
+                if (isset ($this->map[$actualClassName]['indexes'])) {
+                    foreach ($this->map[$actualClassName]['indexes'] as $k => $v) {
+                        if (isset ($this->map[$actualClassName]['fieldMeta'][$k]['phptype'])) {
+                            if (isset ($v['primary']) && $v['primary'] == true) {
+                                $pk[$k]= $k;
+                            }
+                        }
                     }
                 }
-            }
-            if ($ancestry= $this->getAncestry($actualClassName)) {
-                foreach ($ancestry as $ancestor) {
-                    if ($ancestorClassName= $this->loadClass($ancestor)) {
-                        if (isset ($this->map[$ancestorClassName]['fieldMeta'])) {
-                            foreach ($this->map[$ancestorClassName]['fieldMeta'] as $k => $v) {
-                                if (isset ($v['index']) && isset ($v['phptype']) && $v['index'] == 'pk') {
-                                    $pk[$k]= $k;
+                if (isset ($this->map[$actualClassName]['fieldMeta'])) {
+                    foreach ($this->map[$actualClassName]['fieldMeta'] as $k => $v) {
+                        if (isset ($v['index']) && isset ($v['phptype']) && $v['index'] == 'pk') {
+                            $pk[$k]= $k;
+                        }
+                    }
+                }
+                if ($ancestry= $this->getAncestry($actualClassName)) {
+                    foreach ($ancestry as $ancestor) {
+                        if ($ancestorClassName= $this->loadClass($ancestor)) {
+                            if (isset ($this->map[$ancestorClassName]['indexes'])) {
+                                foreach ($this->map[$ancestorClassName]['indexes'] as $k => $v) {
+                                    if (isset ($this->map[$ancestorClassName]['fieldMeta'][$k]['phptype'])) {
+                                        if (isset ($v['primary']) && $v['primary'] == true) {
+                                            $pk[$k]= $k;
+                                        }
+                                    }
+                                }
+                            }
+                            if (isset ($this->map[$ancestorClassName]['fieldMeta'])) {
+                                foreach ($this->map[$ancestorClassName]['fieldMeta'] as $k => $v) {
+                                    if (isset ($v['index']) && isset ($v['phptype']) && $v['index'] == 'pk') {
+                                        $pk[$k]= $k;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
                 if ($pk && count($pk) === 1) {
                     $pk= current($pk);
                 }
-        } else {
+            } else {
                 $this->log(xPDO::LOG_LEVEL_ERROR, "Could not load class {$className}");
-        }
+            }
         }
         return $pk;
     }
