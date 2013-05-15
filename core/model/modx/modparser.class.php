@@ -1240,10 +1240,6 @@ class modLinkTag extends modTag {
                 if ($this->modx->getOption('friendly_urls', null, false)) {
                     if (array_key_exists('context', $this->_properties)) {
                         $context = $this->_properties['context'];
-                    } elseif (isset($this->modx->resource)) {
-                        $context = $this->modx->resource->get('context_key');
-                    } elseif (isset($this->modx->context)) {
-                        $context = $this->modx->context->get('key');
                     }
                     if ($context) {
                         $resource = $this->modx->findResource($context, $this->_output);
