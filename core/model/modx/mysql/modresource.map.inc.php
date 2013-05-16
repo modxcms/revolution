@@ -641,7 +641,7 @@ $xpdo_meta_map['modResource']= array (
       array (
         'uri' => 
         array (
-          'length' => '1000',
+          'length' => '333',
           'collation' => 'A',
           'null' => true,
         ),
