@@ -1242,7 +1242,7 @@ class modLinkTag extends modTag {
                         $context = $this->_properties['context'];
                     }
                     if ($context) {
-                        $resource = $this->modx->findResource($context, $this->_output);
+                        $resource = $this->modx->findResource($this->_output, $context);
                         if ($resource) {
                             $this->_output = $resource;
                         }
