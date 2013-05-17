@@ -12,7 +12,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,renderTo: 'tvpanel{$tv->id}'
         ,value: '{$tv->value|escape}'
-        ,anchor: '100%'
+        ,width: '99%'
         ,msgTarget: 'under'
     {literal}
     });
@@ -32,7 +32,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,value: '{$tv->value|escape}'
         ,relativeValue: '{$tv->value|escape}'
-        ,width: '100%'
+        ,width: '97%'
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,source: '{$source}'
