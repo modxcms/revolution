@@ -394,6 +394,7 @@ input::-moz-focus-inner {
 }
 #modx-manager-search {
     margin: 4px 0 0 5px;
+    position: relative;
 }
     #modx-manager-search input {
         padding: 4px;
@@ -401,6 +402,19 @@ input::-moz-focus-inner {
         font-size: 13px;
         line-height: 17px;
         width: 170px;
+    }
+    #modx-manager-search-results {
+        width:500px;
+        padding: 10px;
+        position: absolute;
+        z-index:100;
+        top:28px;
+        left:-150px;
+        background: rgba(240,240,240,.95);
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0px 1px 0 rgba(0,0,0,.2);
+        transition: all 1s ease-in-out;
+        -webkit-transition: all 1s ease-in-out;
     }
 #modx-site-name {
     padding: 3px 0 0 10px;
@@ -461,7 +475,7 @@ input::-moz-focus-inner {
     padding: 0;
     display: none;
     float: left;
-    width: 225px;
+    width: 260px;
     border: 1px solid #111;
 }
 /* #limenu-Dashboard a {
@@ -501,7 +515,7 @@ input::-moz-focus-inner {
 }
 html #modx-navbar ul.modx-subnav li a {
     float: left;
-    width: 205px;
+    width: 240px;
     background-color: #333;
     background-image: none;
     text-indent: 0;

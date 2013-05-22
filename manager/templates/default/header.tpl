@@ -128,7 +128,24 @@
                     {$navb}
                     <li class="cls"></li>
                 </ul>
-                <span id="modx-manager-search"><input type="search" placeholder="Search…" /></span>
+                <span id="modx-manager-search">
+                    <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
+                    <div id="modx-manager-search-results" style="display:none">
+                        <div class="left">
+                            <h3>Content</h3>
+                            <p>Welcome to MODX…</p>
+                        </div >
+                        <div class="right">
+                            <h3>Chunks</h3>
+                            <p>welcome.tpl</p>
+                            <h3>Templates</h3>
+                            <p>Welcome template</p>
+                            <h3>Snippets</h3>
+                            <p>WelcomeBack—display a logged in username</p>
+                        </div>
+                    </div>
+                    <!-- end #modx-manager-search-results -->
+                </span>
             </div>
         </div>
         

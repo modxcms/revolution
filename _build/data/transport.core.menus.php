@@ -51,7 +51,7 @@ $menus[0]->fromArray(array (
   'action' => '',
   'description' => '',
   'icon' => '',
-  'menuindex' => 1,
+  'menuindex' => 0,
   'permissions' => 'menu_site',
 ), '', true, true);
 
@@ -81,43 +81,43 @@ $children[1]->fromArray(array (
   'permissions' => 'new_document',
 ), '', true, true);
 
-/* new weblink resource */
+/* new static resource */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
-  'text' => 'new_weblink',
-  'parent' => 'content',
-  'action' => 'resource/create',
-  'description' => 'new_weblink_desc',
-  'icon' => '',
-  'menuindex' => 2,
-  'params' => '&class_key=modWebLink',
-  'permissions' => 'new_weblink',
-), '', true, true);
-
-/* new symlink resource */
-$children[3]= $xpdo->newObject('modMenu');
-$children[3]->fromArray(array (
-  'text' => 'new_symlink',
-  'parent' => 'content',
-  'action' => 'resource/create',
-  'description' => 'new_symlink_desc',
-  'icon' => '',
-  'menuindex' => 3,
-  'params' => '&class_key=modSymLink',
-  'permissions' => 'new_symlink',
-), '', true, true);
-
-/* new static resource */
-$children[4]= $xpdo->newObject('modMenu');
-$children[4]->fromArray(array (
   'text' => 'new_static_resource',
   'parent' => 'content',
   'action' => 'resource/create',
   'description' => 'new_static_resource_desc',
   'icon' => '',
-  'menuindex' => 4,
+  'menuindex' => 2,
   'params' => '&class_key=modStaticResource',
   'permissions' => 'new_static_resource',
+), '', true, true);
+
+/* new weblink resource */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
+  'text' => 'new_weblink',
+  'parent' => 'content',
+  'action' => 'resource/create',
+  'description' => 'new_weblink_desc',
+  'icon' => '',
+  'menuindex' => 3,
+  'params' => '&class_key=modWebLink',
+  'permissions' => 'new_weblink',
+), '', true, true);
+
+/* new symlink resource */
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
+  'text' => 'new_symlink',
+  'parent' => 'content',
+  'action' => 'resource/create',
+  'description' => 'new_symlink_desc',
+  'icon' => '',
+  'menuindex' => 4,
+  'params' => '&class_key=modSymLink',
+  'permissions' => 'new_symlink',
 ), '', true, true);
 
 /* import html */
@@ -169,7 +169,7 @@ $menus[1]->fromArray(array (
   'action' => '',
   'description' => 'media_desc',
   'icon' => '',
-  'menuindex' => 2,
+  'menuindex' => 1,
   'permissions' => 'file_manager',
 ), '', true, true);
 
@@ -189,14 +189,13 @@ $children[0]->fromArray(array (
 /* media sources */
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array(
-  'text' => 'sources',
-  'parent' => 'media',
-  'action' => 'source',
+  'menuindex'   => 1,
+  'text'        => 'sources',
   'description' => 'sources_desc',
-  'icon' => 'images/icons/elements2.png',
-  'menuindex' => 1,
-  'anchor_last' => true,
+  'action'      => 'source',
   'permissions' => 'sources',
+  'parent'      => '',
+  'icon'        => 'images/icons/elements2.png',
 ), '', true, true);
 
 $menus[1]->addMany($children,'Children');
@@ -211,7 +210,7 @@ $menus[2]->fromArray(array (
   'action' => '',
   'description' => '',
   'icon' => '',
-  'menuindex' => 3,
+  'menuindex' => 2,
   'permissions' => 'components',
 ), '', true, true);
 
@@ -219,7 +218,7 @@ $menus[2]->fromArray(array (
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'installer',
-  'parent' => 'apps',
+  'parent' => '',
   'action' => 'workspaces',
   'description' => 'installer_desc',
   'icon' => '',
@@ -232,7 +231,7 @@ $menus[2]->addMany($children,'Children');
 unset($children);
 
 
-/* ***************** TOOLS MENU ***************** */
+/* ***************** ADMIN MENU ***************** */
 $menus[3]= $xpdo->newObject('modMenu');
 $menus[3]->fromArray(array (
   'text' => 'admin',
@@ -240,7 +239,7 @@ $menus[3]->fromArray(array (
   'action' => '',
   'description' => '',
   'icon' => '',
-  'menuindex' => 4,
+  'menuindex' => 3,
   'permissions' => 'menu_tools',
 ), '', true, true);
 $children = array();
@@ -249,7 +248,7 @@ $children = array();
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'users',
-  'parent' => 'user',
+  'parent' => '',
   'action' => 'security/user',
   'description' => 'user_management_desc',
   'icon' => '',
@@ -261,7 +260,7 @@ $children[0]->fromArray(array (
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'text' => 'refresh_site',
-  'parent' => 'tools',
+  'parent' => '',
   'action' => '',
   'description' => 'refresh_site_desc',
   'icon' => '',
@@ -274,7 +273,7 @@ $children[1]->fromArray(array (
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'text' => 'remove_locks',
-  'parent' => 'tools',
+  'parent' => '',
   'action' => '',
   'description' => 'remove_locks_desc',
   'icon' => '',
