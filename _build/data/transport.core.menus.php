@@ -235,114 +235,13 @@ unset($children);
 /* ***************** TOOLS MENU ***************** */
 $menus[3]= $xpdo->newObject('modMenu');
 $menus[3]->fromArray(array (
-  'text' => 'tools',
+  'text' => 'admin',
   'parent' => '',
   'action' => '',
   'description' => '',
   'icon' => '',
   'menuindex' => 4,
   'permissions' => 'menu_tools',
-), '', true, true);
-$children = array();
-
-/* clear cache */
-$children[0]= $xpdo->newObject('modMenu');
-$children[0]->fromArray(array (
-  'text' => 'refresh_site',
-  'parent' => 'tools',
-  'action' => '',
-  'description' => 'refresh_site_desc',
-  'icon' => '',
-  'menuindex' => 0,
-  'handler' => 'MODx.clearCache(); return false;',
-  'permissions' => 'empty_cache',
-), '', true, true);
-
-/* remove locks */
-$children[1]= $xpdo->newObject('modMenu');
-$children[1]->fromArray(array (
-  'text' => 'remove_locks',
-  'parent' => 'tools',
-  'action' => '',
-  'description' => 'remove_locks_desc',
-  'icon' => '',
-  'menuindex' => 1,
-  'handler' => '
-MODx.msg.confirm({
-    title: _(\'remove_locks\')
-    ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url+\'system/remove_locks.php\'
-    ,params: {
-        action: \'remove\'
-    }
-    ,listeners: {
-        \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
-    }
-});',
-  'permissions' => 'remove_locks',
-), '', true, true);
-
-/* flush sessions */
-$children[2]= $xpdo->newObject('modMenu');
-$children[2]->fromArray(array (
-  'text' => 'flush_sessions',
-  'parent' => 'tools',
-  'action' => '',
-  'description' => 'flush_sessions_desc',
-  'icon' => '',
-  'menuindex' => 2,
-  'handler' => 'MODx.msg.confirm({
-    title: _(\'flush_sessions\')
-    ,text: _(\'flush_sessions_confirm\')
-    ,url: MODx.config.connectors_url+\'security/flush.php\'
-    ,params: {
-        action: \'flush\'
-    }
-    ,listeners: {
-        \'success\': {fn:function() { location.href = \'./\'; },scope:this}
-    }
-});',
-    'permissions' => 'flush_sessions',
-), '', true, true);
-
-/* flush permissions */
-$children[3]= $xpdo->newObject('modMenu');
-$children[3]->fromArray(array (
-  'text' => 'flush_access',
-  'parent' => 'tools',
-  'action' => '',
-  'description' => 'flush_access_desc',
-  'icon' => '',
-  'menuindex' => 3,
-  'handler' => 'MODx.msg.confirm({
-    title: _(\'flush_access\')
-    ,text: _(\'flush_access_confirm\')
-    ,url: MODx.config.connectors_url+\'security/access/index.php\'
-    ,params: {
-        action: \'flush\'
-    }
-    ,listeners: {
-        \'success\': {fn:function() { location.href = \'./\'; },scope:this}
-    }
-});',
-    'permissions' => 'access_permissions',
-), '', true, true);
-
-
-$menus[3]->addMany($children,'Children');
-unset($children);
-
-
-/* ****************** USERS MENU ****************** */
-$menus[4]= $xpdo->newObject('modMenu');
-$menus[4]->fromArray(array (
-  'text' => 'users',
-  'parent' => '',
-  'action' => '',
-  'description' => '',
-  'icon' => '',
-  'menuindex' => 5,
-  'permissions' => 'menu_security',
 ), '', true, true);
 $children = array();
 
@@ -358,44 +257,126 @@ $children[0]->fromArray(array (
   'permissions' => 'view_user',
 ), '', true, true);
 
-/* user group management */
+/* clear cache */
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
+  'text' => 'refresh_site',
+  'parent' => 'tools',
+  'action' => '',
+  'description' => 'refresh_site_desc',
+  'icon' => '',
+  'menuindex' => 1,
+  'handler' => 'MODx.clearCache(); return false;',
+  'permissions' => 'empty_cache',
+), '', true, true);
+
+/* remove locks */
+$children[2]= $xpdo->newObject('modMenu');
+$children[2]->fromArray(array (
+  'text' => 'remove_locks',
+  'parent' => 'tools',
+  'action' => '',
+  'description' => 'remove_locks_desc',
+  'icon' => '',
+  'menuindex' => 2,
+  'handler' => '
+MODx.msg.confirm({
+    title: _(\'remove_locks\')
+    ,text: _(\'confirm_remove_locks\')
+    ,url: MODx.config.connectors_url+\'system/remove_locks.php\'
+    ,params: {
+        action: \'remove\'
+    }
+    ,listeners: {
+        \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
+    }
+});',
+  'permissions' => 'remove_locks',
+), '', true, true);
+
+/* user group management */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
   'text' => 'user_group_management',
   'parent' => 'user',
   'action' => 'security/permission',
   'description' => 'user_group_management_desc',
   'icon' => '',
-  'menuindex' => 1,
+  'menuindex' => 3,
   'permissions' => 'access_permissions',
 ), '', true, true);
 
 /* access controls */
-$children[2]= $xpdo->newObject('modMenu');
-$children[2]->fromArray(array (
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
   'text' => 'resource_groups',
   'parent' => 'user',
   'action' => 'security/resourcegroup',
   'description' => 'resource_groups_desc',
   'icon' => '',
-  'menuindex' => 2,
+  'menuindex' => 4,
   'permissions' => 'access_permissions',
 ), '', true, true);
 
-$menus[4]->addMany($children,'Children');
+/* flush permissions */
+$children[5]= $xpdo->newObject('modMenu');
+$children[5]->fromArray(array (
+  'text' => 'flush_access',
+  'parent' => 'tools',
+  'action' => '',
+  'description' => 'flush_access_desc',
+  'icon' => '',
+  'menuindex' => 5,
+  'handler' => 'MODx.msg.confirm({
+    title: _(\'flush_access\')
+    ,text: _(\'flush_access_confirm\')
+    ,url: MODx.config.connectors_url+\'security/access/index.php\'
+    ,params: {
+        action: \'flush\'
+    }
+    ,listeners: {
+        \'success\': {fn:function() { location.href = \'./\'; },scope:this}
+    }
+});',
+    'permissions' => 'access_permissions',
+), '', true, true);
+
+/* flush sessions */
+$children[6]= $xpdo->newObject('modMenu');
+$children[6]->fromArray(array (
+  'text' => 'flush_sessions',
+  'parent' => 'tools',
+  'action' => '',
+  'description' => 'flush_sessions_desc',
+  'icon' => '',
+  'menuindex' => 6,
+  'handler' => 'MODx.msg.confirm({
+    title: _(\'flush_sessions\')
+    ,text: _(\'flush_sessions_confirm\')
+    ,url: MODx.config.connectors_url+\'security/flush.php\'
+    ,params: {
+        action: \'flush\'
+    }
+    ,listeners: {
+        \'success\': {fn:function() { location.href = \'./\'; },scope:this}
+    }
+});',
+    'permissions' => 'flush_sessions',
+), '', true, true);
+
+$menus[3]->addMany($children,'Children');
 unset($children);
 
 
-
 /* ***************** REPORTS MENU ***************** */
-$menus[5]= $xpdo->newObject('modMenu');
-$menus[5]->fromArray(array(
+$menus[4]= $xpdo->newObject('modMenu');
+$menus[4]->fromArray(array(
   'text' => 'reports',
   'parent' => '',
   'action' => '',
   'description' => '',
   'icon' => '',
-  'menuindex' => 6,
+  'menuindex' => 4,
   'permissions' => 'menu_reports',
 ), '', true, true);
 $children = array();
@@ -448,7 +429,7 @@ $children[3]->fromArray(array (
   'permissions' => 'view_sysinfo',
 ), '', true, true);
 
-$menus[5]->addMany($children,'Children');
+$menus[4]->addMany($children,'Children');
 unset($children);
 
 /* ***************** SETTINGS MENU ***************** 
