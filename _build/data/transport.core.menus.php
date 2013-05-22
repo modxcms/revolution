@@ -248,7 +248,7 @@ $children = array();
 /* user management */
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
-  'text' => 'user_management',
+  'text' => 'users',
   'parent' => 'user',
   'action' => 'security/user',
   'description' => 'user_management_desc',
