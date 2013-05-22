@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 {/if}
-
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
 <!--[if gte IE 9]>
   <style type="text/css">
     #modx-navbar {
@@ -69,7 +69,7 @@
                         <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
                     {/if}
                     {if $canModifySettings}
-                        <a id="modx-settings-toggle" href="#" onclick="toggle_visibility('modx-settings-menu');">{$_lang.settings}
+                        <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');"><i class="icon-cog icon-large"></i>
                         </a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
                             <li>
@@ -117,6 +117,9 @@
                     {/if}
                 </div>
                 <ul id="modx-topnav">
+                    <li>
+                        <a href="?a=welcome"><i class="icon-desktop icon-large"></i></a>
+                    </li>
                     {$navb}
                     <li class="cls"></li>
                 </ul>

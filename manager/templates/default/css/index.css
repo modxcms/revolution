@@ -464,14 +464,14 @@ input::-moz-focus-inner {
     width: 225px;
     border: 1px solid #111;
 }
-#limenu-Dashboard a {
+/* #limenu-Dashboard a {
     width: 16px;
     height: 16px;
     padding: 11px 5px;
     text-indent: -999px;
     overflow: hidden;
     background: transparent 5px 10px url(../images/restyle/icons/context.png) no-repeat;
-}
+}*/
 #modx-navbar ul#modx-settings-menu {
     left: auto;
     right: 0;
@@ -590,9 +590,6 @@ html #modx-navbar ul.modx-subnav li a:hover{
     width: 16px;
     height: 16px;
     padding: 11px;
-    text-indent:-999px;
-    overflow: hidden;
-    background: transparent 10px 14px url(../images/restyle/icons/elements2.png) no-repeat;
 }
 
 /* top navbar */
@@ -608,7 +605,7 @@ html #modx-navbar ul.modx-subnav li a:hover{
 #modx-topnav li {
     float: left;
     margin: 0;
-    padding: 4px 13px 0;
+    padding: 0;
     position: relative;
     background: transparent;
 }
@@ -616,7 +613,7 @@ html #modx-navbar ul.modx-subnav li a:hover{
     background: rgba(0,0,0,.2);
 }
 #modx-topnav a {
-    padding: 9px 5px 10px;
+    padding: 13px 15px 10px;
     color: #ccc;
     display: block;
     text-decoration: none;

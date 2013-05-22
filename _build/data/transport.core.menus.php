@@ -10,7 +10,7 @@
 $menus = array();
 
 /* ***************** DASHBOARD MENU ***************** */
-
+/*
 $menus[0]= $xpdo->newObject('modMenu');
 $menus[0]->fromArray(array (
   'text' => 'dashboard',
@@ -22,7 +22,7 @@ $menus[0]->fromArray(array (
   'handler' => 'MODx.loadPage(""); return false;',
   'permissions' => 'home',
 ), '', true, true);
-/*
+
 $children = array();
 
 /* search */ 
@@ -44,8 +44,8 @@ unset($children);
 */
 
 /* ***************** CONTENT MENU ***************** */
-$menus[1]= $xpdo->newObject('modMenu');
-$menus[1]->fromArray(array (
+$menus[0]= $xpdo->newObject('modMenu');
+$menus[0]->fromArray(array (
   'text' => 'content',
   'parent' => '',
   'action' => '',
@@ -157,17 +157,17 @@ $children[7]->fromArray(array (
 ), '', true, true);
 
 
-$menus[1]->addMany($children,'Children');
+$menus[0]->addMany($children,'Children');
 unset($children);
 
 
 /* ***************** MEDIA MENU ***************** */
-$menus[2]= $xpdo->newObject('modMenu');
-$menus[2]->fromArray(array (
+$menus[1]= $xpdo->newObject('modMenu');
+$menus[1]->fromArray(array (
   'text' => 'media',
   'parent' => '',
   'action' => '',
-  'description' => '',
+  'description' => 'media_desc',
   'icon' => '',
   'menuindex' => 2,
   'permissions' => 'file_manager',
@@ -178,9 +178,9 @@ $menus[2]->fromArray(array (
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'text' => 'file_browser',
+  'description' => 'file_browser_desc',
   'parent' => 'media',
   'action' => 'media/browser',
-  'description' => 'file_browser_desc',
   'icon' => '',
   'menuindex' => 0,
   'permissions' => 'file_manager',
@@ -199,13 +199,13 @@ $children[1]->fromArray(array(
   'permissions' => 'sources',
 ), '', true, true);
 
-$menus[2]->addMany($children,'Children');
+$menus[1]->addMany($children,'Children');
 unset($children);
 
 
 /* ***************** APPS MENU ***************** */
-$menus[3]= $xpdo->newObject('modMenu');
-$menus[3]->fromArray(array (
+$menus[2]= $xpdo->newObject('modMenu');
+$menus[2]->fromArray(array (
   'text' => 'apps',
   'parent' => '',
   'action' => '',
@@ -228,13 +228,13 @@ $children[0]->fromArray(array (
   'permissions' => 'packages',
 ), '', true, true);
 
-$menus[3]->addMany($children,'Children');
+$menus[2]->addMany($children,'Children');
 unset($children);
 
 
 /* ***************** TOOLS MENU ***************** */
-$menus[4]= $xpdo->newObject('modMenu');
-$menus[4]->fromArray(array (
+$menus[3]= $xpdo->newObject('modMenu');
+$menus[3]->fromArray(array (
   'text' => 'tools',
   'parent' => '',
   'action' => '',
@@ -329,13 +329,13 @@ $children[3]->fromArray(array (
 ), '', true, true);
 
 
-$menus[4]->addMany($children,'Children');
+$menus[3]->addMany($children,'Children');
 unset($children);
 
 
 /* ****************** USERS MENU ****************** */
-$menus[5]= $xpdo->newObject('modMenu');
-$menus[5]->fromArray(array (
+$menus[4]= $xpdo->newObject('modMenu');
+$menus[4]->fromArray(array (
   'text' => 'users',
   'parent' => '',
   'action' => '',
@@ -382,14 +382,14 @@ $children[2]->fromArray(array (
   'permissions' => 'access_permissions',
 ), '', true, true);
 
-$menus[5]->addMany($children,'Children');
+$menus[4]->addMany($children,'Children');
 unset($children);
 
 
 
 /* ***************** REPORTS MENU ***************** */
-$menus[6]= $xpdo->newObject('modMenu');
-$menus[6]->fromArray(array(
+$menus[5]= $xpdo->newObject('modMenu');
+$menus[5]->fromArray(array(
   'text' => 'reports',
   'parent' => '',
   'action' => '',
@@ -448,7 +448,7 @@ $children[3]->fromArray(array (
   'permissions' => 'view_sysinfo',
 ), '', true, true);
 
-$menus[6]->addMany($children,'Children');
+$menus[5]->addMany($children,'Children');
 unset($children);
 
 /* ***************** SETTINGS MENU ***************** 
