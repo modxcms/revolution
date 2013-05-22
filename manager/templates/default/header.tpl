@@ -16,6 +16,14 @@
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 {/if}
 
+<!--[if gte IE 9]>
+  <style type="text/css">
+    #modx-navbar {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
@@ -28,6 +36,19 @@
 <script src="{$_config.manager_url}min/index.php?g=coreJs3" type="text/javascript"></script>
 {/if}
 
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+
+
 {$maincssjs}
 {foreach from=$cssjs item=scr}
 {$scr}
@@ -39,26 +60,67 @@
 <div id="modx-container">
     <div id="modx-mainpanel">
         <div id="modx-header">
-            <div id="modx-topbar">
-                <div id="modx-logo"><a href="http://modx.com" onclick="window.open(this.href); return false;"><img src="templates/default/images/style/modx-logo-header.png" alt="" /></a></div>
-
-
-                <div class="rightlogin">
-                    {if $canChangeProfile}<a class="modx-user-profile" href="?a={$profileAction}">{$username}</a>{else}<span class="modx-user-profile">{$username}</span>{/if}
-                    {if $canLogout}<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>{/if}
-                </div>
-                <div id="modx-site-name">
-                    {$_config.site_name}
-                    <span class="modx-version">MODX Revolution {$_config.settings_version} ({$_config.settings_distro})</span>
-                </div>
-            </div>
             <div id="modx-navbar">
-                <div id="modx-topnav-div">
-                    <ul id="modx-topnav">
-                        {$navb}
-                        <li class="cls"></li>
-                    </ul>
+                <div id="modx-user-menu">
+                    {if $canChangeProfile}
+                        <a class="modx-user-profile" href="?a=security/user">{$username}</a>{else}<span class="modx-user-profile">{$username}</span>
+                    {/if}
+                    {if $canLogout}
+                        <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
+                    {/if}
+                    {if $canModifySettings}
+                        <a id="modx-settings-toggle" href="#" onclick="toggle_visibility('modx-settings-menu');">{$_lang.settings}
+                        </a>
+                        <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
+                            <li>
+                                <a href="?a=system/settings">{$_lang.system_settings} 
+                                    <span class="description">{$_lang.system_settings_desc}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?a=security/forms">{$_lang.bespoke_manager}
+                                    <span class="description">{$_lang.bespoke_manager_desc}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?a=system/dashboards">{$_lang.dashboards}
+                                    <span class="description">{$_lang.dashboards_desc}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?a=context">{$_lang.contexts}
+                                    <span class="description">{$_lang.contexts_desc}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?a=system/action">{$_lang.edit_menu}
+                                    <span class="description">{$_lang.edit_menu_desc}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?a=element/propertyset">{$_lang.propertysets}
+                                    <span class="description">{$_lang.propertysets_desc}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?a=workspaces/lexicon">{$_lang.lexicon_management}
+                                    <span class="description">{$_lang.lexicon_management_desc}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?a=workspaces/namespace">{$_lang.namespaces}
+                                    <span class="description">{$_lang.namespaces_desc}</span>
+                                </a>
+                            </li>
+                        </ul>
+                        </a>
+                    {/if}
                 </div>
+                <ul id="modx-topnav">
+                    {$navb}
+                    <li class="cls"></li>
+                </ul>
+                <span id="modx-manager-search"><input type="search" placeholder="Search…" /></span>
             </div>
         </div>
         
