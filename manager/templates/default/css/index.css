@@ -393,14 +393,14 @@ input::-moz-focus-inner {
     z-index: 10;
 }
 #modx-manager-search {
-    margin: 4px 0 0 20px;
+    margin: 4px 0 0 5px;
 }
     #modx-manager-search input {
         padding: 4px;
         margin: 11px 5px 10px;
         font-size: 13px;
         line-height: 17px;
-        width: 200px;
+        width: 170px;
     }
 #modx-site-name {
     padding: 3px 0 0 10px;

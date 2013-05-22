@@ -98,6 +98,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="?a=security/permission">{$_lang.acls}
+                                    <span class="description">{$_lang.acls_desc}</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="?a=element/propertyset">{$_lang.propertysets}
                                     <span class="description">{$_lang.propertysets_desc}</span>
                                 </a>
@@ -118,7 +123,7 @@
                 </div>
                 <ul id="modx-topnav">
                     <li>
-                        <a href="?a=welcome"><i class="icon-desktop icon-large"></i></a>
+                        <a href="?a=welcome"><i class="icon-home icon-large"></i></a>
                     </li>
                     {$navb}
                     <li class="cls"></li>

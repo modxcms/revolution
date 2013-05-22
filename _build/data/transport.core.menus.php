@@ -294,7 +294,7 @@ MODx.msg.confirm({
   'permissions' => 'remove_locks',
 ), '', true, true);
 
-/* user group management */
+/* access controls 
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
   'text' => 'user_group_management',
@@ -305,28 +305,29 @@ $children[3]->fromArray(array (
   'menuindex' => 3,
   'permissions' => 'access_permissions',
 ), '', true, true);
+*/
 
-/* access controls */
-$children[4]= $xpdo->newObject('modMenu');
-$children[4]->fromArray(array (
+/* user group management */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
   'text' => 'resource_groups',
   'parent' => 'user',
   'action' => 'security/resourcegroup',
   'description' => 'resource_groups_desc',
   'icon' => '',
-  'menuindex' => 4,
+  'menuindex' => 3,
   'permissions' => 'access_permissions',
 ), '', true, true);
 
 /* flush permissions */
-$children[5]= $xpdo->newObject('modMenu');
-$children[5]->fromArray(array (
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
   'text' => 'flush_access',
   'parent' => 'tools',
   'action' => '',
   'description' => 'flush_access_desc',
   'icon' => '',
-  'menuindex' => 5,
+  'menuindex' => 4,
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_access\')
     ,text: _(\'flush_access_confirm\')
@@ -342,14 +343,14 @@ $children[5]->fromArray(array (
 ), '', true, true);
 
 /* flush sessions */
-$children[6]= $xpdo->newObject('modMenu');
-$children[6]->fromArray(array (
+$children[5]= $xpdo->newObject('modMenu');
+$children[5]->fromArray(array (
   'text' => 'flush_sessions',
   'parent' => 'tools',
   'action' => '',
   'description' => 'flush_sessions_desc',
   'icon' => '',
-  'menuindex' => 6,
+  'menuindex' => 5,
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_sessions\')
     ,text: _(\'flush_sessions_confirm\')
