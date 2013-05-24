@@ -105,10 +105,18 @@ MODx.Layout = function(config){
         },{
             region: 'center'
             ,applyTo: 'modx-content'
+            ,padding: '0 1px 0 0'
+            ,bodyStyle: 'background-color:transparent;'
             ,id: 'modx-content'
             ,border: false
             ,autoScroll: true
-            ,padding: '0 1px 0 0'
+        },{
+            region: 'south'
+            ,border: false
+            ,id: 'modx-footer'
+            ,html: '<div id="modx-logo"><a href="http://modx.com/" onclick="window.open(this.href); return false;" title="MODX Revolution ' + MODx.config.settings_version + ' (' + MODx.config.settings_distro + ')"><img src="templates/default/images/style/modx-logo-header.png" alt="MODX Logo" /></a></div>' +
+                '<p><b>' + MODx.config.site_name + '</b>: powered by the <a href="http://modx.com/" onclick="window.open(this.href); return false;">MODX® adaptive content platform</a>.</p>' + 
+                '</div>'
             ,bodyStyle: 'background-color:transparent;'
         }]
     });
