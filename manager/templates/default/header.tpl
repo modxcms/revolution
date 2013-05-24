@@ -118,8 +118,9 @@
                                 </a>
                             </li>
                         </ul>
-                        </a>
                     {/if}
+                    <a id="modx-settings-toggle-large" href="?a=help"><i class="icon-question-sign icon-large"></i></a>
+
                 </div>
                 <ul id="modx-topnav">
                     <li>
