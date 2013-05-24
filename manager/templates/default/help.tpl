@@ -1,19 +1,39 @@
 <div class="modx-page" style="padding-top: 15px;">
-<h2>{$_lang.about_title}</h2>
-<div id="tabs_div"></div>
-<div id="modx-tab-about" class="padding x-hide-display">
-    <p>{$_lang.about_msg}</p>
 
-    <h2>{$_lang.help}</h2>
-    <p>{$_lang.help_msg}</p>
+    <h2>{$_lang.about_title}</h2>
 
-    <h2>{$_lang.credits}</h2>
-    <ul>
-        <li>{$_lang.credits_php}</li>
-        <li>{$_lang.credits_database}</li>
-        <li>{$_lang.credits_xpdo}</li>
-        <li>{$_lang.credits_sencha}</li>
-        <li>{$_lang.credits_smarty}</li>
-    </ul>
-</div>
+
+    <div id="managerbuttons">
+        <ul>
+            <li>
+                <a href="http://forums.modx.com/" title="MODX Community Forums">
+                    <i class="icon-comments icon-2x"></i>Forums
+                    <p>Free help from the awesome MODX Community</span>
+                </a>
+            </li>
+              
+            <li>
+                <a href="http://rtfm.modx.com/" title="Read the Fabulous (MODX) Manual">
+                    <i class="icon-book icon-2x"></i>Documentation
+                    <p>Write a new Blog Post</span>   
+                </a>
+            </li>
+              
+            <li>
+                <a href="http://rtfm.modx.com/" title="Read the Fabulous (MODX) Manual">
+                    <i class="icon-exclamation-sign icon-2x"></i>Bugtracker
+                    <p>Found a problem? Let us know!</span>   
+                </a>
+            </li>
+
+            <li>
+                <a href="http://rtfm.modx.com/" title="Read the Fabulous (MODX) Manual">
+                    <i class="icon-credit-card icon-2x"></i>Emergency Support
+                    <p>Get priority support, straight from the source</span>   
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
 </div>
