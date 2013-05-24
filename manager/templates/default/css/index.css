@@ -2172,95 +2172,98 @@ span.required {
 
 /* Thanks to Christian Seele for these! http://chsmedien.com/blog/2013/02/customize-your-modx-dashboard */
 #managerbuttons {
-    width: 100%;
-    overflow: hidden;   
-}
- 
-#managerbuttons ul:before,
-#managerbuttons ul:after {
-    content: " ";
-    display: table;
-}
-  
-#managerbuttons ul:after {
-    clear: both;
-}
-  
-#managerbuttons ul {
-    width: 102%;
-    margin: -1% 0 0 -1%;
-    /* clearfix */
-    *zoom: 1;
-}
-  
-#managerbuttons ul li {
-    display: table;
-    position: relative;
-    float: left;
-    width: 33%;
-    margin: 0;
-    padding: 1% 0 0 1%;
-}
-  
-#managerbuttons ul li a {
-    display: table-cell;
-    height: 65px;
-    width: 100%;
-    position: relative;
-    padding: 0px 15px 0px 52px;
-    text-decoration: none;
-    vertical-align: middle;
-      
-    /* MODX 2.x.x Manager Button Styles */
-    font: bold 11px tahoma, verdana, helvetica, sans-serif;
-    color: #53595f;
-    background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(222,222,222,1);
-    background:-moz-linear-gradient(center bottom,#dedede 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#dedede));
-    background:-webkit-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    background:-o-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    background:-ms-linear-gradient(center bottom,#dedede 0%,#ffffff 100%); 
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dedede,GradientType=0);
-    background:linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    -khtml-border-radius:3px;
-    border-radius:3px;
-    border: 1px solid gray;
-    border-color: #CACACA #C0C0C0 #AAA;
-    -moz-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
-    -webkit-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
-    -o-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
-    box-shadow:rgba(0,0,0,0.2) 0 0 1px;
-}
- 
-#managerbuttons ul li a:hover {
-    background:-moz-linear-gradient(center bottom,#cecece 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#cecece));
-    background:-webkit-linear-gradient(center bottom,#cecece 0%,#ffffff 100%);
-    background:-o-linear-gradient(center bottom,#cecece 0%,#ffffff 100%);
-    background:-ms-linear-gradient(center bottom,#cecece 0%,#ffffff 100%); 
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#cecece,GradientType=0);
-    background:linear-gradient(center bottom,#cecece 0%,#ffffff 100%);
-}
-  
-#managerbuttons ul li a {
-    display: block;
-    line-height: 1.4;
-    font-size: 12px;
-}
-  
-#managerbuttons ul li a p {
-    font-weight: normal;
-}
-  
-#managerbuttons ul li a i {
-    display: block;
-    width: 52px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: transparent center center no-repeat;
+    width: 100%;
+    overflow: hidden;   
 }
 
+#managerbuttons ul:before,
+#managerbuttons ul:after {
+    content: " ";
+    display: table;
+}
+
+#managerbuttons ul:after {
+    clear: both;
+}
+
+#managerbuttons ul {
+    width: 102%;
+    margin: -1% 0 0 -1%;
+    /* clearfix */
+    *zoom: 1;
+}
+
+#managerbuttons ul li {
+    display: table;
+    position: relative;
+    float: left;
+    width: 23%;
+    margin: 0;
+    padding: 1% 0 0 1%;
+}
+
+#managerbuttons ul li a {
+    display: table-cell;
+    height: 65px;
+    width: 100%;
+    position: relative;
+    padding: 0px 15px 0px 52px;
+    text-decoration: none;
+    vertical-align: middle;
+    /* MODX 2.x.x Manager Button Styles */
+    font: bold 11px tahoma, verdana, helvetica, sans-serif;
+    color: #53595f;
+    background:-moz-linear-gradient(center bottom,#dedede 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#dedede));
+    background:-webkit-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#dedede 0%,#ffffff 100%); 
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dedede,GradientType=0);
+    background:linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -khtml-border-radius:3px;
+    border-radius:3px;
+    border: 1px solid gray;
+    border-color: #CACACA #C0C0C0 #AAA;
+    -moz-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
+    -webkit-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
+    -o-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
+    box-shadow:rgba(0,0,0,0.2) 0 0 1px;
+}
+
+#managerbuttons ul li a:hover {
+    background:-moz-linear-gradient(center bottom,#cecece 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#cecece));
+    background:-webkit-linear-gradient(center bottom,#cecece 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#cecece 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#cecece 0%,#ffffff 100%); 
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#cecece,GradientType=0);
+    background:linear-gradient(center bottom,#cecece 0%,#ffffff 100%);
+}
+
+#managerbuttons ul li a span {
+    display: block;
+    line-height: 1.4;
+}
+
+#managerbuttons ul li a span.headline {
+    font-size: 12px;
+}
+
+#managerbuttons ul li a span.subline {
+    font-weight: normal;
+}
+
+#managerbuttons ul li a span.icon {
+    display: block;
+    width: 52px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent center center no-repeat;
+}
+#managerbuttons ul li a span.icon {
+    padding: 16px 10px;
+}
