@@ -405,7 +405,7 @@ input::-moz-focus-inner {
     }
     #modx-manager-search-results {
         width:500px;
-        padding: 1em;
+        padding: 1em 0;
         position: absolute;
         z-index:100;
         top:28px;
@@ -424,9 +424,22 @@ input::-moz-focus-inner {
     #modx-manager-search-results .left h3:first-of-type, #modx-manager-search-results .right h3:first-of-type {
         margin-top:0;
     }
+    #modx-manager-search-results, #modx-manager-search-results .left, #modx-manager-search-results .right {
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+             -o-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+                box-sizing: border-box;
+    }
+    #modx-manager-search-results .left, #modx-manager-search-results .right {
+        width:50%;
+        padding:0 1em;
+    }
+    #modx-manager-search-results .left {
+
+    }
     #modx-manager-search-results .right {
         border-left:1px solid #DDD;
-        padding-left:1em;
     }
 #modx-site-name {
     padding: 3px 0 0 10px;
