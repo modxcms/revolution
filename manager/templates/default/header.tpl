@@ -132,15 +132,19 @@
                 <span id="modx-manager-search">
                     <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
                     <div id="modx-manager-search-results" style="display:none">
-                        <div class="left">
+                        <div class="section">
                             <h3>Content</h3>
                             <p>Welcome to MODX…</p>
                         </div >
-                        <div class="right">
+                        <div class="section">
                             <h3>Chunks</h3>
-                            <p>welcome.tpl</p>
+                            <p>welcome.tpl</p> 
+                        </div>
+                        <div class="section">
                             <h3>Templates</h3>
                             <p>Welcome template</p>
+                        </div>
+                        <div class="section">
                             <h3>Snippets</h3>
                             <p>WelcomeBack—display a logged in username</p>
                         </div>
