@@ -57,28 +57,28 @@ $menus[0]->fromArray(array (
 
 $children = array();
 
-/* preview */
+/* new document resource */
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
-  'text' => 'preview',
-  'parent' => 'dashboard',
-  'action' => '',
-  'description' => 'preview_desc',
-  'icon' => '',
-  'menuindex' => 0,
-  'handler' => 'MODx.preview(); return false;',
-), '', true, true);
-
-/* new document resource */
-$children[1]= $xpdo->newObject('modMenu');
-$children[1]->fromArray(array (
   'text' => 'new_resource',
   'parent' => 'content',
   'action' => 'resource/create',
   'description' => 'new_resource_desc',
   'icon' => '',
-  'menuindex' => 1,
+  'menuindex' => 0,
   'permissions' => 'new_document',
+), '', true, true);
+
+/* preview */
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array (
+  'text' => 'preview',
+  'parent' => 'dashboard',
+  'action' => '',
+  'description' => 'preview_desc',
+  'icon' => '',
+  'menuindex' => 1,
+  'handler' => 'MODx.preview(); return false;',
 ), '', true, true);
 
 /* new static resource 
