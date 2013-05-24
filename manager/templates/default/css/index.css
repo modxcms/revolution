@@ -214,6 +214,11 @@ input::-moz-focus-inner {
     z-index: 5;
     display: none;
 }
+
+.modx-tree span {
+    font:normal 11px arial,tahoma,helvetica,sans-serif; /* override FontAwesome ridiculousness */
+}
+
 .modx-tree .x-toolbar {
     background: #eee;
     border: 0;
@@ -2258,3 +2263,4 @@ span.required {
     left: 0;
     background: transparent center center no-repeat;
 }
+
