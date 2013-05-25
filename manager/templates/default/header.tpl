@@ -68,55 +68,73 @@
                     {if $canLogout}
                         <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
                     {/if}
-                    {if $canModifySettings}
+                    {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
                         <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');"><i class="icon-cog icon-large"></i>
                         </a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
+                        {if $canModifySettings}
                             <li>
                                 <a href="?a=system/settings">{$_lang.system_settings} 
                                     <span class="description">{$_lang.system_settings_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canCustomizeManager}
                             <li>
                                 <a href="?a=security/forms">{$_lang.bespoke_manager}
                                     <span class="description">{$_lang.bespoke_manager_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canManageDashboards}
                             <li>
                                 <a href="?a=system/dashboards">{$_lang.dashboards}
                                     <span class="description">{$_lang.dashboards_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canManageContexts}
                             <li>
                                 <a href="?a=context">{$_lang.contexts}
                                     <span class="description">{$_lang.contexts_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canManageTopNav}
                             <li>
                                 <a href="?a=system/action">{$_lang.edit_menu}
                                     <span class="description">{$_lang.edit_menu_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canManageACLs}
                             <li>
                                 <a href="?a=security/permission">{$_lang.acls}
                                     <span class="description">{$_lang.acls_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canManageProperties}
                             <li>
                                 <a href="?a=element/propertyset">{$_lang.propertysets}
                                     <span class="description">{$_lang.propertysets_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canManageLexicons}
                             <li>
                                 <a href="?a=workspaces/lexicon">{$_lang.lexicon_management}
                                     <span class="description">{$_lang.lexicon_management_desc}</span>
                                 </a>
                             </li>
+                        {/if}
+                        {if $canManageNamespaces}
                             <li>
                                 <a href="?a=workspaces/namespace">{$_lang.namespaces}
                                     <span class="description">{$_lang.namespaces_desc}</span>
                                 </a>
                             </li>
+                        {/if}
                         </ul>
                     {/if}
                     <a id="modx-settings-toggle-large" href="?a=help"><i class="icon-question-sign icon-large"></i></a>

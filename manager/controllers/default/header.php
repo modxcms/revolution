@@ -100,6 +100,14 @@ $this->setPlaceholder('username',$modx->getLoginUserName());
 $this->setPlaceholder('canChangeProfile',$modx->hasPermission('change_profile'));
 $this->setPlaceholder('canLogout',$modx->hasPermission('logout'));
 $this->setPlaceholder('canModifySettings',$modx->hasPermission('logout'));
+$this->setPlaceholder('canCustomizeManager',$modx->hasPermission('customize_forms'));
+$this->setPlaceholder('canManageDashboards',$modx->hasPermission('dashboards'));
+$this->setPlaceholder('canManageContexts',$modx->hasPermission('view_contexts'));
+$this->setPlaceholder('canManageTopNav',$modx->hasPermission('actions'));
+$this->setPlaceholder('canManageACLs',$modx->hasPermission('access_permissions'));
+$this->setPlaceholder('canManageProperties',$modx->hasPermission('property_sets'));
+$this->setPlaceholder('canManageLexicons',$modx->hasPermission('lexicons'));
+$this->setPlaceholder('canManageNamespaces',$modx->hasPermission('namespaces'));
 
 /* assign welcome back text */
 $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUserName()));
