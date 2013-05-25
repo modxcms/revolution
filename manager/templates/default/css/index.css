@@ -2209,10 +2209,15 @@ span.required {
     padding: 0 15px;
     z-index: 100000000;
     border-top: 1px solid #ccc;
-}
-#modx-footer a,
-#modx-footer p {
     color: #777;
+}
+#modx-footer a {
+    color: #777;
+    text-decoration: none;
+    border-bottom: 1px dotted #888;
+}
+#modx-logo a {
+    border: none;
 }
 #modx-site-name {
     padding: 3px 0 0 10px;
