@@ -585,7 +585,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             ,handler: this.expandNodes
             ,scope: this
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-level-up" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-level-up" style=" font-size: 1.4em; text-align: center; padding-left: 4px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('tree_collapse')}
             ,handler: this.collapseNodes
