@@ -575,29 +575,6 @@ html #modx-navbar ul.modx-subnav li a:hover{
     display: block;
 }
 
-#modx-user-menu {
-    position: absolute;
-    top: 0;
-    right: 10px;
-}
-#modx-user-menu a {
-    color: #ccc;
-    text-decoration: none;
-    display: block;
-    float: left;
-    margin: 0;
-    padding: 13px 10px 10px;
-    line-height: 17px;
-}
-#modx-user-menu a:hover {
-    color: #ddd;
-}
-#modx-settings-toggle {
-    width: 16px;
-    height: 16px;
-    padding: 11px;
-}
-
 /* top navbar */
 #modx-topnav {
     float: left;
@@ -608,33 +585,58 @@ html #modx-navbar ul.modx-subnav li a:hover{
     margin: 0;
     padding: 0;
 }
-#modx-topnav li {
+#modx-topnav li,
+#modx-topnav a,
+#modx-user-menu a  {
     float: left;
     margin: 0;
     padding: 0;
     position: relative;
     background: transparent;
-    border-left:1px solid transparent;
-    border-right:1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
 }
-#modx-topnav li:hover {
+#modx-topnav li:hover,
+#modx-user-menu a:hover {
     background: rgba(0,0,0,.2);
-    border-left:1px solid #333;
-    border-right:1px solid #333;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    -webkit-transition: all 120ms ease-in;
+    -moz-transition: all 120ms ease-in;
+    -o-transition: all 120ms ease-in;
+    transition: all 120ms ease-in; 
+
 }
-#modx-topnav a {
+#modx-topnav a,
+#modx-user-menu a  {
     padding: 13px 15px 10px;
     color: #ccc;
     display: block;
     text-decoration: none;
     float: left;
     cursor: pointer;
-    -webkit-transition: all 240ms ease-out;
-    -moz-transition: all 240ms ease-out;
-    -o-transition: all 240ms ease-out;
-    transition: all 240ms ease-out; 
+    -webkit-transition: all 120ms ease-in;
+    -moz-transition: all 120ms ease-in;
+    -o-transition: all 120ms ease-in;
+    transition: all 120ms ease-in; 
 }
-
+#modx-user-menu {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+/*#modx-user-menu a {
+    margin: 0;
+    line-height: 17px;
+}*/
+#modx-user-menu a:hover {
+    color: #ddd;
+}
+#modx-settings-toggle {
+    width: 16px;
+    height: 16px;
+    padding: 11px;
+}
 
 
 /* panel stylings */
