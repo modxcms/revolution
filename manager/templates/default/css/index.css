@@ -2207,7 +2207,7 @@ span.required {
     height: 40px;
     line-height: 40px;
     padding: 0 15px;
-    clear:both;
+    z-index: 100000000;
     border-top: 1px solid #ccc;
 }
 #modx-site-name {
