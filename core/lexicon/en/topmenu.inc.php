@@ -73,6 +73,7 @@ $_lang['new_weblink'] = 'New Weblink';
 $_lang['new_weblink_desc'] = 'Redirect to an existing URL';
 $_lang['policy_management'] = 'Access Policies';
 $_lang['policy_management_desc'] = 'Create and edit security policies';
+$_lang['powered_by'] = 'is powered by';
 $_lang['preview'] = 'Preview Site';
 $_lang['preview_desc'] = 'View your website in a new window';
 $_lang['profile'] = 'Profile';

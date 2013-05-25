@@ -2210,6 +2210,10 @@ span.required {
     z-index: 100000000;
     border-top: 1px solid #ccc;
 }
+#modx-footer a,
+#modx-footer p {
+    color: #777;
+}
 #modx-site-name {
     padding: 3px 0 0 10px;
     color: #bbb;
