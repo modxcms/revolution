@@ -463,31 +463,6 @@ input::-moz-focus-inner {
     #modx-manager-search-results .right {
         border-left:1px solid #DDD;
     }*/
-#modx-site-name {
-    padding: 3px 0 0 10px;
-    color: #bbb;
-}
-
-.modx-version {
-    display: block;
-    clear: left;
-    color: #888;
-    font-size: 10px;
-    line-height: 8px;
-    font-style: italic;
-    margin: 0;
-}
-
-#modx-logo {
-    position:absolute;
-    right:11px;
-    bottom:4px;
-}
-#modx-logo img {
-    vertical-align: middle;
-}
-
-
 /* Main MODX Manager navbar */
 #modx-navbar {
     background-color: #666;
@@ -2175,24 +2150,20 @@ span.required {
     width: 100%;
     overflow: hidden;   
 }
-
 #managerbuttons ul:before,
 #managerbuttons ul:after {
     content: " ";
     display: table;
 }
-
 #managerbuttons ul:after {
     clear: both;
 }
-
 #managerbuttons ul {
     width: 102%;
     margin: -1% 0 0 -1%;
     /* clearfix */
     *zoom: 1;
 }
-
 #managerbuttons ul li {
     display: table;
     position: relative;
@@ -2201,7 +2172,6 @@ span.required {
     margin: 0;
     padding: 1% 0 0 1%;
 }
-
 #managerbuttons ul li a {
     display: table-cell;
     height: 65px;
@@ -2231,7 +2201,6 @@ span.required {
     -o-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
     box-shadow:rgba(0,0,0,0.2) 0 0 1px;
 }
-
 #managerbuttons ul li a:hover {
     background:-moz-linear-gradient(center bottom,#cecece 0%,#ffffff 100%) repeat scroll 0 0 transparent;
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#cecece));
@@ -2241,31 +2210,16 @@ span.required {
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#cecece,GradientType=0);
     background:linear-gradient(center bottom,#cecece 0%,#ffffff 100%);
 }
-
 #managerbuttons ul li a span {
     display: block;
     line-height: 1.4;
 }
-
 #managerbuttons ul li a span.headline {
     font-size: 12px;
 }
-
 #managerbuttons ul li a span.subline {
     font-weight: normal;
 }
-
-
-#modx-footer {
-    padding: 12px 15px 8px 334px;
-    background:#EBEBEB;
-    border-top:1px solid #D2D2D2;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-         -o-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-            box-sizing: border-box;
-
 #managerbuttons ul li a span.icon {
     display: block;
     width: 52px;
@@ -2277,4 +2231,23 @@ span.required {
 }
 #managerbuttons ul li a span.icon {
     padding: 16px 10px;
+}
+#modx-footer {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    clear:both;
+    border-top: 1px solid #ccc;
+}
+#modx-site-name {
+    padding: 3px 0 0 10px;
+    color: #bbb;
+}
+#modx-logo {
+    position:absolute;
+    right:11px;
+    bottom:4px;
+}
+#modx-logo img {
+    vertical-align: middle;
 }

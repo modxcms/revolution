@@ -113,6 +113,7 @@ MODx.Layout = function(config){
         },{
             region: 'south'
             ,border: false
+            ,unstyled : true
             ,id: 'modx-footer'
             ,html: '<div id="modx-logo"><a href="http://modx.com/" onclick="window.open(this.href); return false;" title="MODX Revolution ' + MODx.config.settings_version + ' (' + MODx.config.settings_distro + ')"><img src="templates/default/images/style/modx-logo-header.png" alt="MODX Logo" /></a></div>' +
                 '<p><b>' + MODx.config.site_name + '</b>: powered by the <a href="http://modx.com/" onclick="window.open(this.href); return false;">MODX® adaptive content platform</a>.</p>' + 
