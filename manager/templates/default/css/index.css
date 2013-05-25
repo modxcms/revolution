@@ -443,27 +443,8 @@ input::-moz-focus-inner {
     #modx-manager-search-results p {
         padding:0 1em 0.5em 1em;
     }
-    /*#modx-manager-search-results .left h3:first-of-type, #modx-manager-search-results .right h3:first-of-type {
-        margin-top:0;
-    }
-    #modx-manager-search-results {
-        -webkit-box-sizing: border-box;
-           -moz-box-sizing: border-box;
-             -o-box-sizing: border-box;
-            -ms-box-sizing: border-box;
-                box-sizing: border-box;
-    }
-    #modx-manager-search-results .left, #modx-manager-search-results .right {
-        width:50%;
-        padding:0 1em;
-    }
-    #modx-manager-search-results .left {
-
-    }
-    #modx-manager-search-results .right {
-        border-left:1px solid #DDD;
-    }*/
-/* Main MODX Manager navbar */
+ 
+ /* Main MODX Manager navbar */
 #modx-navbar {
     background-color: #666;
     border-bottom: 1px solid #1E1E1E;
@@ -498,33 +479,21 @@ input::-moz-focus-inner {
     padding: 0;
     display: none;
     float: left;
-    width: 260px;
     border: 1px solid #111;
 }
-/* #limenu-Dashboard a {
-    width: 16px;
-    height: 16px;
-    padding: 11px 5px;
-    text-indent: -999px;
-    overflow: hidden;
-    background: transparent 5px 10px url(../images/restyle/icons/context.png) no-repeat;
-}*/
 #modx-navbar ul#modx-settings-menu {
     left: auto;
     right: 0;
 }
-
 #modx-navbar li:hover ul.modx-subnav {
     display: block;
 }
-
 #modx-navbar ul.modx-subnav li {
     margin: 0;
     padding: 0;
     border-top: 1px solid #444;
     border-bottom: 1px solid #252525;
     clear: both;
-    width: 100%;
 }
 #modx-navbar ul.modx-subnav li a span {
     color: #AFAFAF;
@@ -560,7 +529,7 @@ html #modx-navbar ul.modx-subnav li a:hover{
     -webkit-border-radius: 0 5px 5px 0;
     border-radius: 0 5px 5px 0;
     position: absolute;
-    left: 225px;
+    left: 255px;
     top: 2px;
     list-style: none;
     padding-left: 0;
