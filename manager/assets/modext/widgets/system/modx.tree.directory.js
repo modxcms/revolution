@@ -31,28 +31,28 @@ MODx.tree.Directory = function(config) {
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
         ,tbar: [{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen194" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-folder-close" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-folder-close" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('file_folder_create')}
             ,handler: this.createDirectory
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen196" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-file" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-file" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('file_create')}
             ,handler: this.createFile
             ,scope: this
             ,hidden: MODx.perm.file_create ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen62" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-upload" style=" font-size: 1.4em; text-align: center; padding-left: 2px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-upload" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('upload_files')}
             ,handler: this.uploadFiles
             ,scope: this
             ,hidden: MODx.perm.file_upload ? false : true
         },'->',{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen64" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-external-link" style=" font-size: 1.4em; text-align: center; padding-left: 1px;">' + '&nbsp;' + this.id + '</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-external-link" style=" font-size: 1.4em; text-align: center; padding-left: 1px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('modx_browser')}
             ,handler: this.loadFileManager
