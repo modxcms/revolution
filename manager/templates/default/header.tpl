@@ -9,13 +9,13 @@
 
 {if $_config.compress_css}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css,{$_config.manager_url}templates/default/css/font-awesome.min.css" />
 {else}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
+<link rel="stylesheet" href="{$_config.manager_url}templates/default/css/font-awesome.min.css">
 {/if}
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
 <!--[if gte IE 9]>
   <style type="text/css">
     #modx-navbar {
