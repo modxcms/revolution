@@ -118,57 +118,49 @@ ul.x-tab-strip-top li {
 	-webkit-border-radius:4px 4px 0 0;
 	-khtml-border-radius:4px 4px 0 0;
 	border-radius:4px 4px 0 0;
-	border-color: #658F1A;
-	border-style:solid solid none;
+	border-color: transparent;
+	border-style: solid solid none;
 	border-width:1px 1px 0;
 	margin:1px 0 1px 2px;
 	padding:2px 0;
-    background: url(../images/modx-theme/tabs/tab-bg.svg) #658F1A;
-    background:-moz-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#8BAF4C),color-stop(100%,#658F1A));
-    background:-webkit-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
-    background:-o-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
-    background:-ms-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#8BAF4C,endColorstr=#658F1A,GradientType=0);
-    background:linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
 }
-
 .ext-ie9 ul.x-tab-strip-top li{filter: none}
 .x-tab-strip-closable{ padding-right: 15px !important; }
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close{
 	right: 8px;
 	top: 11px;
 }
-ul.x-tab-strip-top li:first-child { margin-left:0; }
-ul.x-tab-strip-top li.x-tab-strip-over {
-    background: url(../images/modx-theme/tabs/tab-bg-over.svg) #496F07;
-    background:-moz-linear-gradient(center bottom,#496F07 0%,#779F31 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#779F31),color-stop(100%,#496F07));
-    background:-webkit-linear-gradient(center bottom,#496F07 0%,#779F31 100%);
-    background:-o-linear-gradient(center bottom,#496F07 0%,#779F31 100%);
-    background:-ms-linear-gradient(center bottom,#496F07 0%,#779F31 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#779F31,endColorstr=#496F07,GradientType=0);
-    background:linear-gradient(center bottom,#496F07 0%,#779F31 100%);
+ul.x-tab-strip-top li:first-child { 
+    margin-left:0; 
 }
-.ext-ie9 ul.x-tab-strip-top li.x-tab-strip-over{filter: none}
-ul.x-tab-strip-top li.x-tab-strip-over .x-tab-right span.x-tab-strip-text {}
+.ext-ie9 ul.x-tab-strip-top li.x-tab-strip-over{
+    filter: none
+}
 ul.x-tab-strip-top li.x-tab-strip-active {
-    background: white none !important;
-    overflow:hidden;
+    background: #fff none !important;
+    overflow: hidden;
     border: 1px solid #999;
     border-bottom: 0 none;
     padding:0 0 1px;
 	text-shadow: none;
 	filter: none;
 }
-ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text {
-	color:#FFF;
-	text-shadow:0 1px 0 #dee1e6;
-
-	background-color:transparent;
-	padding-bottom:8px !important;
+ul.x-tab-strip span.x-tab-strip-text {
+    font: normal 1em arial, tahoma, helvetica;
+    color: #aaa;
+    text-shadow: 0 1px 0 #fff;
+    color: #777;
+    padding: 4px 0 5px;
+}
+ul.x-tab-strip span.x-tab-strip-text:hover {
+    color: #444;
+}
+ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text {
+	background-color: transparent;
+	padding-bottom: 8px !important;
 	margin-top: 2px;
 }
+
 ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right {
 	border:1px solid transparent;
 	margin-bottom:-2px;
@@ -182,16 +174,12 @@ ul.x-tab-strip-top .x-tab-right {
 ul.x-tab-strip-top .x-tab-left {
 	padding-right: 8px;
 }
-ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text { text-shadow: none !important; color: #444; }
-ul.x-tab-strip-top .x-tab-right, ul.x-tab-strip-top .x-tab-left, ul.x-tab-strip-top .x-tab-strip-inner {
+ul.x-tab-strip-top .x-tab-right, 
+ul.x-tab-strip-top .x-tab-left, 
+ul.x-tab-strip-top .x-tab-strip-inner {
 	background-image:none;
 	border:1px solid transparent;
 	border-bottom:0 none;
-}
-ul.x-tab-strip-top span.x-tab-strip-text {
-	color: #FFFFFF;
-    padding: 4px 0 5px;
-    text-shadow: 0 -1px 0 #3D5F00;
 }
 ul.x-tab-strip-bottom {
 	background-color:#f4f4f4;
@@ -201,24 +189,16 @@ ul.x-tab-strip li.x-tab-edge{
     filter: none;
 }
 .x-tab-panel-header-plain {
-    -moz-border-radius-topleft: 3px;
-    -moz-border-radius-topright: 3px;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    background-color: #777 !important;
+    -moz-border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    border-radius: 3px 3px 0 0;
     background-color: transparent !important;
     padding: 0;
 }
-.x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer {
-	background-color:#666;
-	background-color: white;
-	/*
-	border-color:#555 #555 transparent;
-	border-style:solid solid none;
-	border-width:1px 1px 0; */
-	height:3px;
+.x-tab-panel-header-plain .x-tab-strip-spacer, 
+.x-tab-panel-footer-plain .x-tab-strip-spacer {
+	background-color: #fff;
+	height: 3px;
 	margin-top:-3px;
 	border-width: 0 1px 0 !important;
 	border-color: #999;
@@ -226,21 +206,11 @@ ul.x-tab-strip li.x-tab-edge{
     -moz-border-radius: 0 4px 0 0;
     -webkit-border-radius: 0 4px 0 0;
     border-radius: 0 4px 0 0;
-
 }
-
-.x-tab-strip span.x-tab-strip-text {
-	font:normal 11px arial, tahoma, helvetica;
-	color:#aaaaaa;
-	text-shadow:0 1px 0 #ffffff;
-}
-.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close { background-image:url(../images/modx-theme/tabs/tab-close.gif); }
-.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close:hover { background-image:url(../images/modx-theme/tabs/tab-close.gif); }
-.x-tab-strip-over span.x-tab-strip-text {
-	color:#73797f;
-	text-shadow:0 1px 0 #dee1e6;
-}
-.x-tab-strip-disabled .x-tabs-text { color:#aaaaaa; }
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close { 
+        background-image:url(../images/modx-theme/tabs/tab-close.gif); 
+    }
+.x-tab-strip-disabled .x-tabs-text { color:#aaa; }
 .x-tab-strip-bottom .x-tab-right { background-image:url(../images/modx-theme/tabs/tab-btm-inactive-right-bg.gif); }
 .x-tab-strip-bottom .x-tab-left { background-image:url(../images/modx-theme/tabs/tab-btm-inactive-left-bg.gif); }
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-right { background-image:url(../images/modx-theme/tabs/tab-btm-right-bg.gif); }
