@@ -482,6 +482,16 @@ input::-moz-focus-inner {
     float: left;
     border: 1px solid #111;
 }
+#modx-navbar #modx-home-dashboard {
+    text-indent: -9999px;
+    width: 91px;
+    overflow: hidden;
+    background: url(../images/modx-home-logo.png) no-repeat 15px 6px;
+}
+#modx-navbar #modx-home-dashboard:hover {
+    background-color: rgba(0,0,0,.2);
+}
+
 #modx-navbar ul#modx-settings-menu {
     left: auto;
     right: 0;

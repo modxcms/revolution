@@ -142,8 +142,8 @@
 
                 </div>
                 <ul id="modx-topnav">
-                    <li>
-                        <a href="?a=welcome"><i class="icon-home icon-large"></i></a>
+                    <li id="modx-home-dashboard">
+                        <a href="?a=welcome">{$_lang.dashboard}</a>
                     </li>
                     {$navb}
                     <li class="cls"></li>
