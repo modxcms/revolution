@@ -462,8 +462,13 @@ input::-moz-focus-inner {
     background: #474D61;
     color: rgba(255,255,255,0.9);
 }
-#modx-navbar li:hover a,
-#modx-navbar ul.modx-subnav li:hover a {
+#modx-navbar li:hover a {
+    color: rgba(255,255,255,0.9);
+}
+#modx-navbar ul#modx-settings-menu {
+    left: auto;
+    right: 47px;
+    background: #474D61;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar ul.modx-subnav {
@@ -494,10 +499,6 @@ input::-moz-focus-inner {
     overflow: hidden;
     width: 100%;
     padding: 0;
-}
-#modx-navbar ul#modx-settings-menu {
-    left: auto;
-    right: 0;
 }
 #modx-navbar li:hover ul.modx-subnav {
     display: block;
@@ -625,17 +626,10 @@ input::-moz-focus-inner {
 #modx-user-menu {
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 0;
 }
 #modx-user-menu a:hover {
-    color: #ddd;
 }
-#modx-settings-toggle {
-    width: 16px;
-    height: 16px;
-    padding: 11px;
-}
-
 
 /* panel stylings */
 .modx-page-header, .modx-page-header div {

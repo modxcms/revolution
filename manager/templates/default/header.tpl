@@ -70,8 +70,7 @@
                         <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
                     {/if}
                     {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
-                        <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');"><i class="icon-cog icon-large"></i>
-                        </a>
+                        <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
                         {if $canModifySettings}
                             <li>
@@ -138,12 +137,12 @@
                         {/if}
                         </ul>
                     {/if}
-                    <a id="modx-settings-toggle-large" href="?a=help"><i class="icon-question-sign icon-large"></i></a>
+                    <a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-question-sign icon-large"></i></a>
 
                 </div>
                 <ul id="modx-topnav">
                     <li id="modx-home-dashboard">
-                        <a href="?a=welcome">{$_lang.dashboard}</a>
+                        <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                     </li>
                     {$navb}
                     <li class="cls"></li>

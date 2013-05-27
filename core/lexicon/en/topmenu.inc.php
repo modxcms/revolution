@@ -47,6 +47,7 @@ $_lang['form_customization'] = 'Form Customization';
 $_lang['form_customization_desc'] = 'Create bespoke MODX Manager interfaces';
 $_lang['forums'] = 'Forums';
 $_lang['forums_desc'] = 'View the MODX Forums';
+$_lang['help'] = 'Help';
 $_lang['import_resources'] = 'Import Static Resources';
 $_lang['import_resources_desc'] = 'Import any Content Type based on file extension to Static Resources';
 $_lang['import_site'] = 'Import HTML';
