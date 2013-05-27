@@ -114,8 +114,7 @@ MODx.Layout = function(config){
             region: 'south'
             ,border: false
             ,id: 'modx-footer'
-            ,html: '<div id="modx-logo"><a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Logo" onclick="window.open(this.href); return false;" title="MODX Revolution ' + MODx.config.settings_version + ' (' + MODx.config.settings_distro + ')"><img src="templates/default/images/style/modx-logo-header.png" alt="MODX Logo" /></a></div>' +
-                '<p><b>' + MODx.config.site_name + '</b> ' + _('powered_by') + ' <a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Link" onclick="window.open(this.href); return false;">MODX®</a></p>' + 
+            ,html: '<p><b>' + MODx.config.site_name + '</b> ' + _('powered_by') + ' <a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Link" onclick="window.open(this.href); return false;" title="Visit the MODX website">MODX®</a></p>' + 
                 '</div>'
             ,bodyStyle: 'background-color:transparent;'
         }]
