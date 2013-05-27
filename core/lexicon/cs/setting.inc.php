@@ -135,7 +135,7 @@ $_lang['setting_update'] = 'Upravit položku';
 // $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you've controlled the settings, press 'Save' to update the settings database.<br /><br />';
 $_lang['settings_after_install'] = 'Protože se jedná o novou instalaci, je třeba aby jste zkontroloval tyto položky konfigurace a změnil všechny, které je třeba. Poté co vše zkontrolujete klikněte na "Uložit" a tím dojde k aktualizaci databáze.<br /><br />';
 
-// $_lang['settings_desc'] = 'Manage general preferences and configuration settings. Double-click the value to edit or right-click on a setting for more options. Click the "+" sign to view the setting description.';
+// $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. Double-click on the value column for the setting you'd like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_desc'] = 'V této části lze nastavit obecnou konfiguraci, nastavení správce obsahu a to jak se stránky chovají. Poklikáním na hodnotu ve sloupci Hodnota můžete danou hodnotu upravit přímo v tabulce, nebo klikněte pravým tlačítkem pro další možnosti. Kliknutím na symbol "+" se zobrazí popis dané položky konfigurace.';
 
 // $_lang['settings_furls'] = 'Friendly URLs';
