@@ -20,7 +20,7 @@ MODx.tree.Element = function(config) {
             ,currentAction: MODx.request.a || 0
         }
         ,tbar: [{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-columns" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/template.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
@@ -29,7 +29,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-list-alt" style=" font-size: 1.4em; text-align: center; padding-left: 1px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/tv.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
@@ -38,7 +38,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-th-large" style=" font-size: 1.4em; text-align: center; padding-left: 2px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/chunk.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
@@ -47,7 +47,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-code" style=" font-size: 1.4em; text-align: center; padding-left: 2px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/snippet.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
@@ -56,7 +56,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-cogs" style=" font-size: 1.4em; text-align: center; padding-left: 1px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/plugin.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
@@ -65,7 +65,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-folder-close" style=" font-size: 1.4em; text-align: center; padding-left: 2px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new_category')}
             ,handler: function() {
@@ -122,7 +122,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-		
+        
     ,removeCategory: function(itm,e) {
         var id = this.cm.activeNode.attributes.data.id;
         MODx.msg.confirm({
@@ -140,7 +140,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	    
+        
     ,duplicateElement: function(itm,e,id,type) {
         var r = {
             id: id
@@ -157,7 +157,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-	
+    
     ,removeElement: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
@@ -259,7 +259,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	
+    
     ,_createElement: function(itm,e,t) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
@@ -283,7 +283,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         }
     }
-		
+        
     ,_handleDrop: function(e) {
         var target = e.target;
         if (e.point == 'above' || e.point == 'below') {return false;}
