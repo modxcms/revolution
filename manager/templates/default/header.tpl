@@ -1,11 +1,10 @@
-{if $_config.manager_html5_cache EQ 1}<!DOCTYPE HTML>{else}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">{/if}
-
-<html xmlns="http://www.w3.org/1999/xhtml" {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}"{if $_config.manager_html5_cache EQ 1} manifest="{$_config.manager_url}cache.manifest.php"{/if}>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{$_config.manager_direction}" lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}"{if $_config.manager_html5_cache EQ 1} manifest="{$_config.manager_url}cache.manifest.php"{/if}>
 <head>
 <title>{if $_pagetitle}{$_pagetitle} | {/if}{$_config.site_name}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 
-{if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
+{if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
 {if $_config.compress_css}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
@@ -16,20 +15,13 @@
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 {/if}
 
-<link rel="stylesheet" href="{$_config.manager_url}templates/default/css/font-awesome.min.css" />
-<!--[if gte IE 9]>
-  <style type="text/css">
-    #modx-navbar {
-       filter: none;
-    }
-  </style>
-<![endif]-->
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/font-awesome.min.css" />
 
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&amp;topic=topmenu,file,resource,{$_lang_topics}&amp;action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&amp;wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {if $_config.compress_js && $_config.compress_js_groups}
 <script src="{$_config.manager_url}min/index.php?g=coreJs1" type="text/javascript"></script>
@@ -145,7 +137,6 @@
                         <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                     </li>
                     {$navb}
-                    <li class="cls"></li>
                 </ul>
                 <span id="modx-manager-search">
                     <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
