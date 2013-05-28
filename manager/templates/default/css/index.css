@@ -2201,6 +2201,7 @@ span.required {
     border-top: 1px solid #ccc;
     color: #777;
     text-align: right;
+    z-index: 100;
 }
 #modx-footer a {
     color: #777;
