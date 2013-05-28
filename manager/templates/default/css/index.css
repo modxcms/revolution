@@ -454,11 +454,11 @@ input::-moz-focus-inner {
 #modx-navbar {
     position: relative;
     height: 34px;
-    background: #474D61;
+    background: #4d5056;
 }
 #modx-navbar li,
 #modx-navbar ul.modx-subnav li {
-    background: #474D61;
+    background: #4d5056;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar li:hover a {
