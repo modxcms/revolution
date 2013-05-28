@@ -625,6 +625,7 @@ input::-moz-focus-inner {
     -o-transition: all 120ms ease-in;
     transition: all 120ms ease-in; 
 }
+#modx-topnav > li.top > a { cursor: default; }
 #modx-user-menu {
     position: absolute;
     top: 0;
