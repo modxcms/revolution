@@ -403,16 +403,18 @@ input::-moz-focus-inner {
 }
     #modx-manager-search input {
         padding: 4px;
-        margin: 6px 5px 0;
+        margin: 5px 5px 0;
         font-size: 16px;
         line-height: 1;
         width: 170px;
-        opacity: .9;
-        transition: 150ms all ease-in-out;
+        opacity: .7;
+        transition: opacity 150ms ease-out;
+        -webkit-transition: opacity 150ms ease-out;
     }
     #modx-manager-search input:hover {
         opacity: 1;
-        transition: 150ms all ease-in-out;
+        transition: opacity 150ms ease-in;
+        -webkit-transition: opacity 150ms ease-in;
     }
 
     #modx-manager-search-results {
@@ -1139,7 +1141,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 
 /* MODExt common classes */
 
-.container {  margin: 16px 15px 20px 0; } /* Wrap the main content */
+.container {  margin: 15px 15px 20px 0; } /* Wrap the main content */
 .structure-tabs{ margin-top: -1px; } /* Realign modx-tabs for getPageStructure */
 
 /* Panel description text */
