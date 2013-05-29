@@ -1,5 +1,6 @@
         </div>
         <!-- #modx-content-->
+        <div id="modx-footer"></div>
 <!--
 		<div id="modx-footer">
 		    <div id="modx-logo"><a href="http://modx.com/" onclick="window.open(this.href); return false;" title="MODX Revolution {$_config.settings_version} ({$_config.settings_distro})"><img src="templates/default/images/style/modx-logo-header.png" alt="MODX Logo" /></a></div>

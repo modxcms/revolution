@@ -112,6 +112,7 @@ MODx.Layout = function(config){
             ,autoScroll: true
         },{
             region: 'south'
+            ,applyTo: 'modx-footer'
             ,border: false
             ,id: 'modx-footer'
             ,html: '<p><b>' + MODx.config.site_name + '</b> ' + _('powered_by') + ' <a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Link" onclick="window.open(this.href); return false;" title="Visit the MODX website">MODX®</a></p>'
