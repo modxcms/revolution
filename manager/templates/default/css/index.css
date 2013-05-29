@@ -489,6 +489,7 @@ input::-moz-focus-inner {
 #modx-navbar #modx-home-dashboard {
     width: 91px;
     background: url(../images/modx-home-logo.png) no-repeat 15px 6px;
+    background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
 }
 #modx-navbar #modx-home-dashboard:hover {
     background-color: rgba(0,0,0,.2);
