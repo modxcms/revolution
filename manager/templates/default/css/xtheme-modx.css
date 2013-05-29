@@ -344,7 +344,8 @@ textarea.x-form-field, .x-form-textarea{
     -webkit-border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    background: transparent url(../images/modx-theme/form/trigger.png);
+    background-color: transparent;
+    background-image: url(../images/modx-theme/form/trigger.png);
     border-bottom: 1px solid #C5C5C5 !important;
     border-left: 0 none;
     border-right: 1px solid #C5C5C5 !important;
@@ -431,7 +432,7 @@ textarea.x-form-field, .x-form-textarea{
 .x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-over { background-position:center center; }
 .x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-click { background-position:right center; }
 
-.x-form-field-wrap .x-form-date-trigger{
+.x-form-field-wrap .x-form-date-trigger, .x-small-editor .x-form-field-wrap .x-form-date-trigger {
     background-image: url(../images/modx-theme/form/calendar.png);
 }
 
