@@ -153,7 +153,6 @@ input::-moz-focus-inner {
 #modx-container {
     height: 100%;
     width: 100%;
-    background: url(../images/restyle/contentArea_bg.png) repeat-x 100% 0 !important;
 }
 
 /* leftbar tabs */
@@ -396,7 +395,10 @@ input::-moz-focus-inner {
 }
 #modx-manager-search {
     margin-left: 5px;
-    position: relative;
+	float: left;
+    border-right: 1px solid #D0D0D0;
+    border-left: 1px solid #D0D0D0;
+    height: 34px;
 }
     #modx-manager-search input {
         padding: 4px;
@@ -407,6 +409,7 @@ input::-moz-focus-inner {
         opacity: .7;
         transition: opacity 150ms ease-out;
         -webkit-transition: opacity 150ms ease-out;
+        border-radius: 4px;
     }
     #modx-manager-search input:hover {
         opacity: 1;
@@ -454,11 +457,12 @@ input::-moz-focus-inner {
 #modx-navbar {
     position: relative;
     height: 34px;
-    background: #4d5056;
+    background: #DDDDDD;
+    border-bottom: 1px solid #D2D2D2;
 }
 #modx-navbar li,
 #modx-navbar ul.modx-subnav li {
-    background: #4d5056;
+    background: #DDDDDD;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar li:hover a {
@@ -484,12 +488,13 @@ input::-moz-focus-inner {
     padding: 0;
     display: none;
     float: left;
-    border: 1px solid #111;
+    border: 1px solid #D2D2D2;
 }
 #modx-navbar #modx-home-dashboard {
-    width: 91px;
-    background: url(../images/modx-home-logo.png) no-repeat 15px 6px;
+    width: 101px;
+    background: url(../images/modx-home-logo.png) no-repeat 22px 8px;
     background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
+    border-right: 1px solid #D0D0D0;
 }
 #modx-navbar #modx-home-dashboard:hover {
     background-color: rgba(0,0,0,.2);
@@ -583,6 +588,7 @@ input::-moz-focus-inner {
 #modx-topnav {
     float: left;
     font-size: 13px;
+    font-family: Helvetica, sans-serif;
     font-weight: bold;
     list-style: none;
     margin: 0;
@@ -602,8 +608,8 @@ input::-moz-focus-inner {
 #modx-topnav li:hover,
 #modx-user-menu a:hover {
     background: rgba(0,0,0,.2);
-    border-left: 1px solid #333;
-    border-right: 1px solid #333;
+    border-left: 1px solid #D0D0D0;
+    border-right: 1px solid #D0D0D0;
     -webkit-transition: all 120ms ease-in;
     -moz-transition: all 120ms ease-in;
     -o-transition: all 120ms ease-in;
@@ -614,7 +620,7 @@ input::-moz-focus-inner {
 #modx-user-menu a  {
     padding: 0 15px;
     line-height: 34px;
-    color: #ddd;
+    color: #4A4A4A;
     display: block;
     text-decoration: none;
     cursor: pointer;
