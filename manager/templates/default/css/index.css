@@ -212,7 +212,7 @@ input::-moz-focus-inner {
     display: none;
 }
 
-.modx-tree span {
+.modx-tree span, .x-tree-node, .x-tree-node .x-tree-node-el {
     font:normal 11px arial,tahoma,helvetica,sans-serif; /* override FontAwesome ridiculousness */
 }
 
