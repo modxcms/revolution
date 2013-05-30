@@ -636,7 +636,7 @@ input::-moz-focus-inner {
 #modx-user-menu a:hover {
     background: rgba(0,0,0,.15);
     border-left: 1px solid #c5c5c5;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #c5c5c5;
     -webkit-transition: all 120ms ease-in;
     -moz-transition: all 120ms ease-in;
     -o-transition: all 120ms ease-in;
