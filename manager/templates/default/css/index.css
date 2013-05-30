@@ -635,7 +635,8 @@ input::-moz-focus-inner {
     -webkit-transition: all 120ms ease-in;
     -moz-transition: all 120ms ease-in;
     -o-transition: all 120ms ease-in;
-    transition: all 120ms ease-in; 
+    transition: all 120ms ease-in;
+    z-index: 10000;
 
 }
 #modx-topnav a,
