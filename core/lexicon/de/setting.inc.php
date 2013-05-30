@@ -127,6 +127,9 @@ $_lang['setting_blocked_minutes_desc'] = 'Hier können Sie die Anzahl der Minute
 $_lang['setting_cache_action_map'] = 'Aktionen-Cache aktivieren';
 $_lang['setting_cache_action_map_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Aktionen (bzw. Controller-Maps) gecacht, um die Ladezeiten von Manager-Seiten zu reduzieren.';
 
+$_lang['setting_cache_alias_map'] = 'Kontext-Alias-Cache aktivieren';
+$_lang['setting_cache_alias_map_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Ressourcen-URIs in den Kontext gecacht. Diese Einstellung sollte für kleinere Sites aktiviert und für größere Sites deaktiviert werden, um die Performance zu verbessern.';
+
 $_lang['setting_cache_context_settings'] = 'Kontext-Einstellungen-Cache aktivieren';
 $_lang['setting_cache_context_settings_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Kontext-Einstellungen gecacht, um die Ladezeiten zu verringern.';
 
@@ -609,6 +612,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, u
 
 $_lang['setting_session_cookie_secure'] = 'Sichere Session-Cookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen.';
+
+$_lang['setting_session_cookie_httponly'] = 'Session-Cookie: HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Verwenden Sie diese Einstellung, um das HttpOnly-Flag für Session-Cookies zu setzen.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Maximale Lebensdauer des Session-Garbage-Collectors';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Erlaubt Anpassung der PHP-Konfigurationseinstellung session.gc_maxlifetime bei Benutzung von "modSessionHandler".';
