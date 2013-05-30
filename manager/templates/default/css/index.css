@@ -393,6 +393,8 @@ input::-moz-focus-inner {
     position: relative;
     z-index: 10;
 }
+
+/* MODX MANAGER SEARCH */
 #modx-manager-search {
     margin-left: 5px;
 	float: left;
@@ -401,22 +403,29 @@ input::-moz-focus-inner {
     height: 41px;
 }
     #modx-manager-search input {
-        padding: 4px;
-        margin: 5px 5px 0;
-        font-size: 16px;
-        line-height: 1;
+        padding: 5px;
+        margin: 7px 20px 0 0;
         width: 170px;
         opacity: .7;
         transition: opacity 150ms ease-out;
         -webkit-transition: opacity 150ms ease-out;
         border-radius: 4px;
+		background: #F6F6F6;
+		border: 1px solid #C8C3C3;
+		font-size: 12px;
+		color: #565353;
     }
     #modx-manager-search input:hover {
         opacity: 1;
         transition: opacity 150ms ease-in;
         -webkit-transition: opacity 150ms ease-in;
     }
-
+	#modx-manager-search .icon-search{
+		position: relative;
+		left: 170px;
+		z-index: 15;
+		color: #4A4A4A;
+	}
     #modx-manager-search-results {
         width:500px;
         padding: 1em 0;
@@ -452,7 +461,10 @@ input::-moz-focus-inner {
     #modx-manager-search-results p {
         padding:0 1em 0.5em 1em;
     }
- 
+	#modx-manager-search input[type=search] {
+		   -moz-appearance:none;
+		   -webkit-appearance:none;
+	}
  /* Main MODX Manager navbar */
 #modx-navbar {
     position: relative;

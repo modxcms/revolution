@@ -56,6 +56,7 @@
             <div id="modx-navbar">
                 <div id="modx-user-menu">
                    	<span id="modx-manager-search">
+                   		<i class="icon-search icon-large"></i>
 	                    <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
 	                    <div id="modx-manager-search-results" style="display:none">
 	                        <div class="section">
