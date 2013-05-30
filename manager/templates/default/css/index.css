@@ -475,20 +475,21 @@ input::-moz-focus-inner {
     height: 41px;
     background: #DDD;
     border-bottom: 1px solid #D2D2D2;
-	background-image: linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);    
-	background-image: -webkit-linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);
-	background-image: -moz-linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);
-	background-image: -o-linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);
+	background-image: linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);    
+	background-image: -webkit-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
+	background-image: -moz-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
+	background-image: -o-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
 }
 #modx-navbar li,
 #modx-navbar ul.modx-subnav li {
-    background: #EEE;
+    background: #eee;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar li:hover a {
-    color: rgba(255,255,255,0.9);
+    color: #fff;
 }
-#modx-navbar ul#modx-settings-menu, #modx-navbar ul#modx-user-submenu {
+#modx-navbar ul#modx-settings-menu, 
+#modx-navbar ul#modx-user-submenu {
     left: auto;
     right: 53px;
     background: #EEE;
@@ -511,6 +512,7 @@ input::-moz-focus-inner {
     padding: 0;
     display: none;
     float: left;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
@@ -629,15 +631,14 @@ input::-moz-focus-inner {
 }
 #modx-topnav li:hover,
 #modx-user-menu a:hover {
-    background: rgba(0,0,0,.2);
-    border-left: 1px solid #D0D0D0;
-    border-right: 1px solid #D0D0D0;
+    background: rgba(0,0,0,.15);
+    border-left: 1px solid #c5c5c5;
+    border-right: 1px solid #eee;
     -webkit-transition: all 120ms ease-in;
     -moz-transition: all 120ms ease-in;
     -o-transition: all 120ms ease-in;
     transition: all 120ms ease-in;
     z-index: 10000;
-
 }
 #modx-topnav a,
 #modx-user-menu a  {
@@ -658,9 +659,6 @@ input::-moz-focus-inner {
     top: 0;
     right: 0;
 }
-#modx-user-menu a:hover {
-}
-
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
     background-color: transparent !important;
