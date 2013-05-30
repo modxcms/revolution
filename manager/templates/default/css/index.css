@@ -465,16 +465,24 @@ input::-moz-focus-inner {
 		   -moz-appearance:none;
 		   -webkit-appearance:none;
 	}
+	#modx-manager-search input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    }
+    
  /* Main MODX Manager navbar */
 #modx-navbar {
     position: relative;
     height: 41px;
-    background: #DDDDDD;
+    background: #DDD;
     border-bottom: 1px solid #D2D2D2;
+	background-image: linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);    
+	background-image: -webkit-linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);
+	background-image: -moz-linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);
+	background-image: -o-linear-gradient(-90deg, rgba(255,255,255,0.50) 0%, rgba(243,243,243,0.50) 100%);
 }
 #modx-navbar li,
 #modx-navbar ul.modx-subnav li {
-    background: #DDDDDD;
+    background: #EEE;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar li:hover a {
@@ -483,7 +491,7 @@ input::-moz-focus-inner {
 #modx-navbar ul#modx-settings-menu, #modx-navbar ul#modx-user-submenu {
     left: auto;
     right: 53px;
-    background: #DDDDDD;
+    background: #EEE;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar ul#modx-user-submenu {
@@ -498,12 +506,11 @@ input::-moz-focus-inner {
     position: absolute;
     z-index: 10000;
     left: 0;
-    top: 41px;
+    top: 42px;
     margin: 0 0 0 -1px;
     padding: 0;
     display: none;
     float: left;
-    border: 1px solid #D2D2D2;
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
@@ -526,13 +533,10 @@ input::-moz-focus-inner {
 #modx-navbar ul.modx-subnav li {
     margin: 0;
     padding: 0;
-    border-top: 1px solid rgba(255,255,255,0.075);
     border-bottom: 1px solid rgba(0,0,0,0.15);
     clear: both;
 }
-#modx-navbar ul.modx-subnav li:hover {
-    border-top: 1px solid rgba(0,0,0,0.4);
-}
+
 #modx-navbar ul.modx-subnav li a {
     float: left;
     width: 240px;
@@ -562,7 +566,6 @@ input::-moz-focus-inner {
 }
 #modx-navbar ul.modx-subnav ul {
     display: none;
-    border: 1px solid #252525;
     -moz-border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
     border-radius: 0 5px 5px 0;
@@ -638,7 +641,7 @@ input::-moz-focus-inner {
 #modx-topnav a,
 #modx-user-menu a  {
     padding: 0 18px;
-    line-height: 41px;
+    line-height: 42px;
     color: #4A4A4A;
     display: block;
     text-decoration: none;
