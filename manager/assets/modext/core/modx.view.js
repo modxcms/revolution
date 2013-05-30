@@ -401,7 +401,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
         var d = '';
-        if (typeof(this.dir) != 'object') { d = this.dir; }
+        if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
         MODx.msg.confirm({
             text: _('file_remove_confirm')
             ,url: MODx.config.connectors_url+'browser/file.php'
