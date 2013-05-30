@@ -201,7 +201,7 @@ class modRequest {
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
                 $resource->_content = $cachedResource['resource']['_content'];
-                $resource->_isForward = isset($cachedResource['resource']['_isForward']) && !empty($cachedResource['resource']['_isForward']);
+                $resource->_isForward = $isForward;
                 if (isset($cachedResource['contentType'])) {
                     $contentType = $this->modx->newObject('modContentType');
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
@@ -575,7 +575,7 @@ class modRequest {
 
     /**
      * Get the true client IP. Returns an array of values:
-     * 
+     *
      * * ip - The real, true client IP
      * * suspected - The suspected IP, if not alike to REMOTE_ADDR
      * * network - The client's network IP
