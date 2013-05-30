@@ -55,12 +55,46 @@
         <div id="modx-header">
             <div id="modx-navbar">
                 <div id="modx-user-menu">
+                   	<span id="modx-manager-search">
+                   		<i class="icon-search icon-large"></i>
+	                    <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
+	                    <div id="modx-manager-search-results" style="display:none">
+	                        <div class="section">
+	                            <h3>Content</h3>
+	                            <p>Welcome to MODX…</p>
+	                        </div >
+	                        <div class="section">
+	                            <h3>Chunks</h3>
+	                            <p>welcome.tpl</p> 
+	                        </div>
+	                        <div class="section">
+	                            <h3>Templates</h3>
+	                            <p>Welcome template</p>
+	                        </div>
+	                        <div class="section">
+	                            <h3>Snippets</h3>
+	                            <p>WelcomeBack—display a logged in username</p>
+	                        </div>
+	                    </div>
+	                    <!-- end #modx-manager-search-results -->
+	            	</span>               
+                    <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
+                    <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                     {if $canChangeProfile}
-                        <a class="modx-user-profile" href="?a=security/user">{$username}</a>{else}<span class="modx-user-profile">{$username}</span>
+                    	<li>
+                        	<a class="modx-user-profile" href="?a=security/user">Edit account
+	                        	<span class="description">Update account email, password or info. </span>
+                        	</a>
+                        </li>
                     {/if}
-                    {if $canLogout}
-                        <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
-                    {/if}
+	            		{if $canLogout}
+							<li>
+								<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
+									<span class="description">Log out from MODX</span>
+								</a>
+							</li>
+						{/if}
+	            	</ul> 
                     {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
                         <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
@@ -130,7 +164,6 @@
                         </ul>
                     {/if}
                     <a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-question-sign icon-large"></i></a>
-
                 </div>
                 <ul id="modx-topnav">
                     <li id="modx-home-dashboard">
@@ -138,28 +171,6 @@
                     </li>
                     {$navb}
                 </ul>
-                <span id="modx-manager-search">
-                    <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
-                    <div id="modx-manager-search-results" style="display:none">
-                        <div class="section">
-                            <h3>Content</h3>
-                            <p>Welcome to MODX…</p>
-                        </div >
-                        <div class="section">
-                            <h3>Chunks</h3>
-                            <p>welcome.tpl</p> 
-                        </div>
-                        <div class="section">
-                            <h3>Templates</h3>
-                            <p>Welcome template</p>
-                        </div>
-                        <div class="section">
-                            <h3>Snippets</h3>
-                            <p>WelcomeBack—display a logged in username</p>
-                        </div>
-                    </div>
-                    <!-- end #modx-manager-search-results -->
-                </span>
             </div>
         </div>
         
