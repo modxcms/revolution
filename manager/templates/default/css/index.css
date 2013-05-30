@@ -468,11 +468,14 @@ input::-moz-focus-inner {
 #modx-navbar li:hover a {
     color: rgba(255,255,255,0.9);
 }
-#modx-navbar ul#modx-settings-menu {
+#modx-navbar ul#modx-settings-menu, #modx-navbar ul#modx-user-submenu {
     left: auto;
     right: 53px;
     background: #DDDDDD;
     color: rgba(255,255,255,0.9);
+}
+#modx-navbar ul#modx-user-submenu {
+    right: 107px;
 }
 #modx-navbar ul.modx-subnav {
     -moz-border-radius: 0 0 5px 5px;
