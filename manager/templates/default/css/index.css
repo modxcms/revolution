@@ -153,7 +153,6 @@ input::-moz-focus-inner {
 #modx-container {
     height: 100%;
     width: 100%;
-    background: url(../images/restyle/contentArea_bg.png) repeat-x 100% 0 !important;
 }
 
 /* leftbar tabs */
@@ -361,7 +360,7 @@ input::-moz-focus-inner {
     padding:5px;
     position:fixed;
     right: 15px;
-    top: 38px;
+    top: 45px;
     z-index:12;
     zoom: 1;
 }
@@ -388,38 +387,51 @@ input::-moz-focus-inner {
 
 /* top bar */
 #modx-header{
-    height: 34px !important;
+    height: 41px !important;
 }
 .ext-ie7 #modx-header{
     position: relative;
     z-index: 10;
 }
+
+/* MODX MANAGER SEARCH */
 #modx-manager-search {
     margin-left: 5px;
-    position: relative;
+	float: left;
+    border-right: 1px solid #D0D0D0;
+    border-left: 1px solid #D0D0D0;
+    height: 41px;
 }
     #modx-manager-search input {
-        padding: 4px;
-        margin: 5px 5px 0;
-        font-size: 16px;
-        line-height: 1;
+        padding: 5px;
+        margin: 7px 20px 0 0;
         width: 170px;
         opacity: .7;
         transition: opacity 150ms ease-out;
         -webkit-transition: opacity 150ms ease-out;
+        border-radius: 4px;
+		background: #F6F6F6;
+		border: 1px solid #C8C3C3;
+		font-size: 12px;
+		color: #565353;
     }
     #modx-manager-search input:hover {
         opacity: 1;
         transition: opacity 150ms ease-in;
         -webkit-transition: opacity 150ms ease-in;
     }
-
+	#modx-manager-search .icon-search{
+		position: relative;
+		left: 170px;
+		z-index: 15;
+		color: #4A4A4A;
+	}
     #modx-manager-search-results {
         width:500px;
         padding: 1em 0;
         position: absolute;
         z-index:100;
-        top:28px;
+        top:41px;
         left:0;
         background: rgba(240,240,240,.95);
         border-radius: 0 0 5px 5px;
@@ -449,26 +461,33 @@ input::-moz-focus-inner {
     #modx-manager-search-results p {
         padding:0 1em 0.5em 1em;
     }
- 
+	#modx-manager-search input[type=search] {
+		   -moz-appearance:none;
+		   -webkit-appearance:none;
+	}
  /* Main MODX Manager navbar */
 #modx-navbar {
     position: relative;
-    height: 34px;
-    background: #4d5056;
+    height: 41px;
+    background: #DDDDDD;
+    border-bottom: 1px solid #D2D2D2;
 }
 #modx-navbar li,
 #modx-navbar ul.modx-subnav li {
-    background: #4d5056;
+    background: #DDDDDD;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar li:hover a {
     color: rgba(255,255,255,0.9);
 }
-#modx-navbar ul#modx-settings-menu {
+#modx-navbar ul#modx-settings-menu, #modx-navbar ul#modx-user-submenu {
     left: auto;
-    right: 47px;
-    background: #4D5056;
+    right: 53px;
+    background: #DDDDDD;
     color: rgba(255,255,255,0.9);
+}
+#modx-navbar ul#modx-user-submenu {
+    right: 107px;
 }
 #modx-navbar ul.modx-subnav {
     -moz-border-radius: 0 0 5px 5px;
@@ -479,17 +498,18 @@ input::-moz-focus-inner {
     position: absolute;
     z-index: 10000;
     left: 0;
-    top: 34px;
+    top: 41px;
     margin: 0 0 0 -1px;
     padding: 0;
     display: none;
     float: left;
-    border: 1px solid #111;
+    border: 1px solid #D2D2D2;
 }
 #modx-navbar #modx-home-dashboard {
-    width: 91px;
-    background: url(../images/modx-home-logo.png) no-repeat 15px 6px;
+    width: 110px;
+    background: url(../images/modx-home-logo.png) no-repeat 28px 12px;
     background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
+    border-right: 1px solid #D0D0D0;
 }
 #modx-navbar #modx-home-dashboard:hover {
     background-color: rgba(0,0,0,.2);
@@ -529,8 +549,12 @@ input::-moz-focus-inner {
     opacity: 0.9;
     filter: alpha(opacity=90);
 }
+#modx-navbar ul.modx-subnav li a{
+    color: rgba(74, 74, 74, 0.9);    
+}
 #modx-navbar ul.modx-subnav li a:hover{
-    background: rgba(0,0,0,.3);
+    background: rgba(0, 0, 0, .2);
+    color: rgba(255,255,255,0.9);    
 }
 #modx-navbar ul.modx-subnav li a:hover span {
     opacity: 1;
@@ -580,9 +604,10 @@ input::-moz-focus-inner {
 }
 
 /* top navbar */
-#modx-topnav {
+#modx-topnav, #modx-user-menu a {
     float: left;
     font-size: 13px;
+    font-family: Helvetica, sans-serif;
     font-weight: bold;
     list-style: none;
     margin: 0;
@@ -602,8 +627,8 @@ input::-moz-focus-inner {
 #modx-topnav li:hover,
 #modx-user-menu a:hover {
     background: rgba(0,0,0,.2);
-    border-left: 1px solid #333;
-    border-right: 1px solid #333;
+    border-left: 1px solid #D0D0D0;
+    border-right: 1px solid #D0D0D0;
     -webkit-transition: all 120ms ease-in;
     -moz-transition: all 120ms ease-in;
     -o-transition: all 120ms ease-in;
@@ -612,9 +637,9 @@ input::-moz-focus-inner {
 }
 #modx-topnav a,
 #modx-user-menu a  {
-    padding: 0 15px;
-    line-height: 34px;
-    color: #ddd;
+    padding: 0 18px;
+    line-height: 41px;
+    color: #4A4A4A;
     display: block;
     text-decoration: none;
     cursor: pointer;
