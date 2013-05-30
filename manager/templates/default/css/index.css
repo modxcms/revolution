@@ -470,8 +470,8 @@ input::-moz-focus-inner {
 }
 #modx-navbar ul#modx-settings-menu {
     left: auto;
-    right: 47px;
-    background: #4D5056;
+    right: 53px;
+    background: #DDDDDD;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar ul.modx-subnav {
@@ -589,7 +589,7 @@ input::-moz-focus-inner {
 }
 
 /* top navbar */
-#modx-topnav {
+#modx-topnav, #modx-user-menu a {
     float: left;
     font-size: 13px;
     font-family: Helvetica, sans-serif;
