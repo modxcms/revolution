@@ -360,7 +360,8 @@ textarea.x-form-field, .x-form-textarea{
     background-color: transparent !important;
 }
 .x-grid-editor .x-form-field-wrap img {
-    background: white url(../images/modx-theme/form/trigger.png);
+    background-image: url(../images/modx-theme/form/trigger.png);
+    background-color: white;
 }
 
 .x-form-field-trigger-wrap {
