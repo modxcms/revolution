@@ -78,6 +78,8 @@
             ,listWidth: 270
             ,height: 41
             ,boxMinHeight: 41
+
+            ,onTypeAhead : function() {}
         });
 
         var map = new Ext.KeyMap(Ext.get(document));
