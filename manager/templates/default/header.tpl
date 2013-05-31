@@ -48,6 +48,7 @@
             renderTo: 'nav-search'
             ,listClass: 'modx-manager-search-results'
             ,emptyText: 'Awesomesauce…'
+            ,id: 'modx-awesomebar'
             ,typeAhead: true
             ,autoSelect: false
             ,minChars: 1

@@ -158,6 +158,15 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
             ,stopEvent: true
         });
         k.addBinding({
+            key: Ext.EventObject.A
+            ,ctrl: true
+            ,shift: true
+            ,fn: function() {
+                Ext.getCmp('modx-awesomebar').focus(true,10); 
+            }
+            ,stopEvent: true
+        });
+        k.addBinding({
             key: Ext.EventObject.U
             ,ctrl: true
             ,shift: true
