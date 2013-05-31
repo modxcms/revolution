@@ -44,7 +44,7 @@
 <script type="text/javascript">
     Ext.onReady(function() {
         // @todo make use of an xtype and put the code in an external JS file
-        new Ext.form.ComboBox({
+        var bar = new Ext.form.ComboBox({
             renderTo: 'nav-search'
             ,listClass: 'modx-manager-search-results'
             ,emptyText: 'Awesomesauce…'
@@ -80,6 +80,27 @@
             ,boxMinHeight: 41
         });
 
+        var map = new Ext.KeyMap(Ext.get(document));
+        map.addBinding({
+            key: 'u'
+            ,handler: function(code, vent) {
+                var nop = ['INPUT', 'TEXTAREA'];
+                if (nop.indexOf(vent.target.nodeName) == -1) {
+                    bar.focus();
+                }
+            }
+            //,stopEvent: true
+        });
+        map.addBinding({
+            key: 'u'
+            ,ctrl: false
+            ,shift: false
+            ,alt: true
+            ,handler: function(code, vent) {
+                bar.focus();
+            }
+            ,stopEvent: true
+        });
     });
 </script>
 {/literal}
