@@ -46,8 +46,8 @@
         // @todo make use of an xtype and put the code in an external JS file
         new Ext.form.ComboBox({
             renderTo: 'nav-search'
-            ,cls: 'icon-search icon-large'
             ,listClass: 'modx-manager-search-results'
+            ,emptyText: 'Awesomesauce…'
             ,typeAhead: true
             ,autoSelect: false
             ,minChars: 1

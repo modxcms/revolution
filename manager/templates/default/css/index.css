@@ -398,13 +398,15 @@ input::-moz-focus-inner {
 #modx-manager-search {
     /*margin-left: 5px;*/
 	float: left;
-    border-right: 1px solid #D0D0D0;
-    border-left: 1px solid #D0D0D0;
-    height: 41px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #f5f5f5;
+    box-shadow: -1px 0 0 #ddd, 1px 0 0 #f5f5f5;
+    padding: 5px 6px 0 8px;
+    height: 36px;
 }
     /*#modx-manager-search input {
-        padding: 5px;
         margin: 7px 20px 0 0;
+        padding: 5px;
         width: 170px;
         opacity: .7;
         transition: opacity 150ms ease-out;
@@ -413,9 +415,9 @@ input::-moz-focus-inner {
 		background: #F6F6F6;
 		border: 1px solid #C8C3C3;
 		font-size: 12px;
-		color: #565353;
+		color: #565353; */
     }
-    #modx-manager-search input:hover {
+    /*#modx-manager-search input:hover {
         opacity: 1;
         transition: opacity 150ms ease-in;
         -webkit-transition: opacity 150ms ease-in;
