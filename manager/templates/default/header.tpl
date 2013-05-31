@@ -40,6 +40,57 @@
     }
 //-->
 </script>
+{literal}
+<script type="text/javascript">
+    Ext.onReady(function() {
+        var search = new Ext.form.ComboBox({
+            renderTo: 'nav-search'
+            ,cls: 'icon-search icon-large'
+            //,emptyText: 'Search...'
+            //,listAlign: 'tr-br'
+            ,mode: 'local'
+            ,listClass: 'modx-manager-search-results'
+            ,tpl: new Ext.XTemplate(
+                '<tpl for=".">' +
+                    '<div>' +
+                    //'<div id="modx-manager-search-results">' +
+                        '<div class="section">' +
+                            '<h3 onmousedown="console.log(\'load more {name}\')">{name}</h3>' +
+                            '<tpl for="records"><p onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></p></tpl>' +
+                        '</div >' +
+                    '</div>' +
+                '</tpl>'
+            )
+            ,store: new Ext.data.ArrayStore({
+                fields: ['name', 'records']
+                ,data: [
+                    ['Resources', [{
+                        name: 'Resource 1'
+                        ,description: 'some desc somehow longer than'
+                        ,action: 'resource/update&id=1'
+                    },{
+                        name: 'Resource 2'
+                        ,description: ''
+                        ,action: 'resource/update&id=2'
+                    }]]
+                    ,['Snippets', [{
+                        name: 'Snippet 1'
+                        ,description: ''
+                        ,action: 'element/snippet/update&id=1'
+                    },{
+                        name: 'Snippet 2'
+                        ,description: ''
+                        ,action: 'element/snippet/update&id=2'
+                    }]]]
+            })
+            ,width: 170
+            ,height: 41
+            ,boxMinHeight: 41
+        });
+
+    });
+</script>
+{/literal}
 
 
 {$maincssjs}
@@ -56,8 +107,9 @@
             <div id="modx-navbar">
                 <div id="modx-user-menu">
                    	<span id="modx-manager-search">
-                   		<i class="icon-search icon-large"></i>
-	                    <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
+                        <!--<i class="icon-search icon-large"></i>-->
+	                    <div id="nav-search"></div>
+	                    <!--<input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
 	                    <div id="modx-manager-search-results" style="display:none">
 	                        <div class="section">
 	                            <h3>Content</h3>
@@ -65,7 +117,7 @@
 	                        </div >
 	                        <div class="section">
 	                            <h3>Chunks</h3>
-	                            <p>welcome.tpl</p> 
+	                            <p>welcome.tpl</p>
 	                        </div>
 	                        <div class="section">
 	                            <h3>Templates</h3>
@@ -75,9 +127,9 @@
 	                            <h3>Snippets</h3>
 	                            <p>WelcomeBack—display a logged in username</p>
 	                        </div>
-	                    </div>
+	                    </div>-->
 	                    <!-- end #modx-manager-search-results -->
-	            	</span>               
+	            	</span>
                     <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
                     <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                     {if $canChangeProfile}
@@ -94,13 +146,13 @@
 								</a>
 							</li>
 						{/if}
-	            	</ul> 
+	            	</ul>
                     {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
                         <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
                         {if $canModifySettings}
                             <li>
-                                <a href="?a=system/settings">{$_lang.system_settings} 
+                                <a href="?a=system/settings">{$_lang.system_settings}
                                     <span class="description">{$_lang.system_settings_desc}</span>
                                 </a>
                             </li>
@@ -173,7 +225,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
         <div id="modx-content">
