@@ -24,10 +24,18 @@ class modSearchProcessor extends modProcessor
             } else {
                 // Search elements & resources
                 $output = $this->searchResources($query, $output);
-                $output = $this->searchTVs($query, $output);
-                $output = $this->searchSnippets($query, $output);
-                $output = $this->searchChunks($query, $output);
-                $output = $this->searchTemplates($query, $output);
+                if ($this->modx->hasPermission('view_tv')) {
+                    $output = $this->searchTVs($query, $output);
+                }
+                if ($this->modx->hasPermission('view_snippet')) {
+                    $output = $this->searchSnippets($query, $output);
+                }
+                if ($this->modx->hasPermission('view_chunk')) {
+                    $output = $this->searchChunks($query, $output);
+                }
+                if ($this->modx->hasPermission('view_template')) {
+                    $output = $this->searchTemplates($query, $output);
+                }
             }
         }
 

@@ -74,7 +74,7 @@
                 ,totalProperty: 'total'
                 ,fields: ['name', 'action', 'description', 'type']
             })
-            ,width: 170
+            //,width: 170
             ,listWidth: 270
             ,height: 41
             ,boxMinHeight: 41
@@ -82,14 +82,38 @@
             ,onTypeAhead : function() {}
         });
 
-        var map = new Ext.KeyMap(Ext.get(document));
+// Playground for animations. Might not be a good idea because of "renderTo" preventing ExtJS components to be resized properly
+//        var container = Ext.get('nav-search');
+//        bar.on('focus', function() {
+//            container.animate({
+//                width: {
+//                    to: 300
+//                    ,from: container.getWidth()
+//                }
+//            }, 0.25);
+//            bar.el.animate({
+//                width: {
+//                    to: 300
+//                    ,from: bar.el.getWidth()
+//                }
+//            }, 0.25);
+//        }, bar);
+//        bar.on('blur', function() {
+//            container.animate({
+//                width: {
+//                    to: 170
+//                    ,from: container.getWidth()
+//                }
+//            }, 0.25);
+//        }, bar);
+
         var nop = ['INPUT', 'TEXTAREA'];
         Ext.EventManager.on(Ext.get(document), 'keyup', function(vent) {
             if (vent.keyCode === 85 && nop.indexOf(vent.target.nodeName) == -1) {
                 bar.focus();
             }
         });
-        map.addBinding({
+        new Ext.KeyMap(Ext.get(document)).addBinding({
             key: 'u'
             ,ctrl: false
             ,shift: false
