@@ -161,7 +161,7 @@ function fetch_rss ($url) {
         
         $resp = _fetch_remote_file( $url, $request_headers );
 
-        if (isset($resp) and $resp) {
+        if ($resp) {
           if ($resp->status == '304' ) {
                 // we have the most current copy
                 if ( MAGPIE_DEBUG > 1) {
@@ -186,6 +186,10 @@ function fetch_rss ($url) {
                 $errormsg = "Failed to fetch $url ";
                 if ( $resp->status == '-100' ) {
                     $errormsg .= "(Request timed out after " . MAGPIE_FETCH_TIME_OUT . " seconds)";
+                }
+                elseif ( $resp->status == '0' ) {
+                    // you sir, are offline
+                    return false;
                 }
                 elseif ( $resp->error ) {
                     # compensate for Snoopy's annoying habbit to tacking
