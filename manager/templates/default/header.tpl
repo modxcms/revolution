@@ -43,47 +43,38 @@
 {literal}
 <script type="text/javascript">
     Ext.onReady(function() {
-        var search = new Ext.form.ComboBox({
+        // @todo make use of an xtype and put the code in an external JS file
+        new Ext.form.ComboBox({
             renderTo: 'nav-search'
             ,cls: 'icon-search icon-large'
-            //,emptyText: 'Search...'
-            //,listAlign: 'tr-br'
-            ,mode: 'local'
             ,listClass: 'modx-manager-search-results'
+            ,typeAhead: true
+            ,autoSelect: false
+            ,minChars: 1
+            ,displayField: 'name'
+            ,valueField: 'action'
             ,tpl: new Ext.XTemplate(
-                '<tpl for=".">' +
-                    '<div>' +
-                    //'<div id="modx-manager-search-results">' +
-                        '<div class="section">' +
-                            '<h3 onmousedown="console.log(\'load more {name}\')">{name}</h3>' +
-                            '<tpl for="records"><p onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></p></tpl>' +
-                        '</div >' +
-                    '</div>' +
+                '<tpl for=".">',
+                    '<div class="section">',
+                        '<tpl if="this.type != values.type">',
+                            '<tpl exec="this.type = values.type"></tpl>',
+                            '<h3>{type}</h3>',
+                        '</tpl>',
+                        '<p onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></p>',
+                    '</div >',
                 '</tpl>'
             )
-            ,store: new Ext.data.ArrayStore({
-                fields: ['name', 'records']
-                ,data: [
-                    ['Resources', [{
-                        name: 'Resource 1'
-                        ,description: 'some desc somehow longer than'
-                        ,action: 'resource/update&id=1'
-                    },{
-                        name: 'Resource 2'
-                        ,description: ''
-                        ,action: 'resource/update&id=2'
-                    }]]
-                    ,['Snippets', [{
-                        name: 'Snippet 1'
-                        ,description: ''
-                        ,action: 'element/snippet/update&id=1'
-                    },{
-                        name: 'Snippet 2'
-                        ,description: ''
-                        ,action: 'element/snippet/update&id=2'
-                    }]]]
+            ,store: new Ext.data.JsonStore({
+                url: MODx.config.connectors_url + 'search/search.php'
+                ,baseParams: {
+                    action: 'search'
+                }
+                ,root: 'results'
+                ,totalProperty: 'total'
+                ,fields: ['name', 'action', 'description', 'type']
             })
             ,width: 170
+            ,listWidth: 270
             ,height: 41
             ,boxMinHeight: 41
         });
@@ -106,47 +97,26 @@
         <div id="modx-header">
             <div id="modx-navbar">
                 <div id="modx-user-menu">
-                   	<span id="modx-manager-search">
-                        <!--<i class="icon-search icon-large"></i>-->
-	                    <div id="nav-search"></div>
-	                    <!--<input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
-	                    <div id="modx-manager-search-results" style="display:none">
-	                        <div class="section">
-	                            <h3>Content</h3>
-	                            <p>Welcome to MODX…</p>
-	                        </div >
-	                        <div class="section">
-	                            <h3>Chunks</h3>
-	                            <p>welcome.tpl</p>
-	                        </div>
-	                        <div class="section">
-	                            <h3>Templates</h3>
-	                            <p>Welcome template</p>
-	                        </div>
-	                        <div class="section">
-	                            <h3>Snippets</h3>
-	                            <p>WelcomeBack—display a logged in username</p>
-	                        </div>
-	                    </div>-->
-	                    <!-- end #modx-manager-search-results -->
-	            	</span>
+                       <span id="modx-manager-search">
+                        <div id="nav-search"></div>
+                    </span>
                     <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
                     <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                     {if $canChangeProfile}
-                    	<li>
-                        	<a class="modx-user-profile" href="?a=security/user">Edit account
-	                        	<span class="description">Update account email, password or info. </span>
-                        	</a>
+                        <li>
+                            <a class="modx-user-profile" href="?a=security/user">Edit account
+                                <span class="description">Update account email, password or info. </span>
+                            </a>
                         </li>
                     {/if}
-	            		{if $canLogout}
-							<li>
-								<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
-									<span class="description">Log out from MODX</span>
-								</a>
-							</li>
-						{/if}
-	            	</ul>
+                        {if $canLogout}
+                            <li>
+                                <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
+                                    <span class="description">Log out from MODX</span>
+                                </a>
+                            </li>
+                        {/if}
+                    </ul>
                     {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
                         <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
