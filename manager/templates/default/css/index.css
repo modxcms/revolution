@@ -480,8 +480,8 @@ input::-moz-focus-inner {
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar li:hover a {
-    color: #fff;
-    text-shadow: 0 0 3px rgba(0,0,0,.3);
+    /*color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,.3);*/
 
 }
 #modx-navbar ul#modx-settings-menu, 
@@ -557,9 +557,9 @@ input::-moz-focus-inner {
     color: #444;
 }
 #modx-navbar ul.modx-subnav li a:hover{
-    background: rgba(0, 0, 0, .2);
-    color: #fff;
-    text-shadow: 0 0 3px rgba(0,0,0,0.3);    
+    background: rgba(0, 0, 0, .09);
+    /*color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,0.3);*/
 }
 #modx-navbar ul.modx-subnav li a:hover span {
     opacity: 1;
@@ -630,7 +630,7 @@ input::-moz-focus-inner {
 }
 #modx-topnav li:hover,
 #modx-user-menu a:hover {
-    background: rgba(0,0,0,.15);
+    background: rgba(0,0,0,.09);
     border-left: 1px solid #c5c5c5;
     border-right: 1px solid #c5c5c5;
     z-index: 10000;
