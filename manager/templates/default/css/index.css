@@ -464,6 +464,10 @@ input::-moz-focus-inner {
     .modx-manager-search-results p {
         padding:0 1em 0.5em 1em;
     }
+    .modx-manager-search-results a {
+        display:block;
+        cursor:pointer;
+    }
 /*	#modx-manager-search input[type=search] {
 		   -moz-appearance:none;
 		   -webkit-appearance:none;

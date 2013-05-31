@@ -61,7 +61,7 @@
                             '<tpl exec="this.type = values.type"></tpl>',
                             '<h3>{type}</h3>',
                         '</tpl>',
-                        '<p onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></p>',
+                        '<p><a onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></a></p>',
                     '</div >',
                 '</tpl>'
             )
