@@ -81,15 +81,11 @@
         });
 
         var map = new Ext.KeyMap(Ext.get(document));
-        map.addBinding({
-            key: 'u'
-            ,handler: function(code, vent) {
-                var nop = ['INPUT', 'TEXTAREA'];
-                if (nop.indexOf(vent.target.nodeName) == -1) {
-                    bar.focus();
-                }
+        var nop = ['INPUT', 'TEXTAREA'];
+        Ext.EventManager.on(Ext.get(document), 'keyup', function(vent) {
+            if (vent.keyCode === 85 && nop.indexOf(vent.target.nodeName) == -1) {
+                bar.focus();
             }
-            //,stopEvent: true
         });
         map.addBinding({
             key: 'u'
