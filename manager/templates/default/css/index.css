@@ -514,12 +514,14 @@ input::-moz-focus-inner {
     width: 110px;
     background: url(../images/modx-home-logo.png) no-repeat 20px 10px;
     background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
-    border-right: 1px solid #D0D0D0;
+    border-right: 1px solid transparent;
 }
 #modx-navbar #modx-home-dashboard:hover {
-    background: url(../images/modx-home-logo.png) no-repeat 20px -71px;
+    /*background: url(../images/modx-home-logo.png) no-repeat 20px -71px;
     background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.2);*/
+    border-right-color: transparent;
+
 }
 #modx-navbar #modx-home-dashboard a {
     text-indent: -9999px;
