@@ -80,6 +80,14 @@
             ,boxMinHeight: 41
 
             ,onTypeAhead : function() {}
+
+            ,listeners: {
+                beforequery: {
+                    fn: function() {
+                        if (this.tpl.type) this.tpl.type = null;
+                    }
+                }
+            }
         });
 
 // Playground for animations. Might not be a good idea because of "renderTo" preventing ExtJS components to be resized properly

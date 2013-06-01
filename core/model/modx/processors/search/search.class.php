@@ -43,7 +43,7 @@ class modSearchProcessor extends modProcessor
         return $this->outputArray($output);
     }
 
-    public function searchActions($query, array $output)
+    public function searchActions($query)
     {
         $query = ltrim($query, $this->actionToken);
         $this->actions = array(
@@ -51,21 +51,32 @@ class modSearchProcessor extends modProcessor
                 'name' => 'Welcome',
                 'action' => 'welcome',
                 'description' => 'Go back home',
-                'type' => 'Actions'
+                'type' => 'Actions',
+                'perms' => array(),
             ),
             array(
                 'name' => 'Error log',
                 'action' => 'system/event',
                 'description' => 'View error log',
-                'type' => 'Actions'
+                'type' => 'Actions',
+                'perms' => array(),
             ),
             array(
                 'name' => 'Clear cache',
                 'action' => 'system/refresh_site',
                 'description' => 'Refresh the cache',
-                'type' => 'Actions'
+                'type' => 'Actions',
+                'perms' => array(),
+            ),
+            array(
+                'name' => 'Edit chunk',
+                'action' => 'element/chunk/update',
+                'description' => 'Edit the given chunk',
+                'type' => 'Actions',
+                'perms' => array(),
             ),
         );
+
         return $this->filterActions($query);
 //        $class = 'modMenu';
 //        $c = $this->modx->newQuery($class);
@@ -90,11 +101,17 @@ class modSearchProcessor extends modProcessor
     {
         // source : http://stackoverflow.com/questions/5808923/filter-values-from-an-array-similar-to-sql-like-search-using-php
         $query = preg_quote($query, '~');
-        $data = array();
+        $names = array();
+//        $actions = array();
+//        $descriptions = array();
         foreach ($this->actions as $idx => $action) {
-            $data[$idx] = $action['name'];
+            $names[$idx] = $action['name'];
+//            $actions[$idx] = $action['action'];
+//            $descriptions[$idx] = $action['description'];
         }
-        $results = preg_grep('~' . $query . '~', $data);
+        $results = preg_grep('~' . $query . '~', $names);
+//        $results = array_merge($results, preg_grep('~' . $query . '~', $actions));
+//        $results = array_merge($results, preg_grep('~' . $query . '~', $descriptions));
 
         $output = array();
         if ($results) {
@@ -102,6 +119,8 @@ class modSearchProcessor extends modProcessor
                 $output[] = $this->actions[$idx];
             }
         }
+
+        //$output = array_unique($output);
 
         return $output;
     }
