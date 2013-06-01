@@ -20,6 +20,7 @@
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/widgets/core/modx.searchbar.js" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
@@ -40,100 +41,11 @@
     }
 //-->
 </script>
-{literal}
 <script type="text/javascript">
     Ext.onReady(function() {
-        // @todo make use of an xtype and put the code in an external JS file
-        var bar = new Ext.form.ComboBox({
-            renderTo: 'nav-search'
-            ,listClass: 'modx-manager-search-results'
-            ,emptyText: 'Awesomesauce…'
-            ,id: 'modx-awesomebar'
-            ,typeAhead: true
-            ,autoSelect: false
-            ,minChars: 1
-            ,displayField: 'name'
-            ,valueField: 'action'
-            ,tpl: new Ext.XTemplate(
-                '<tpl for=".">',
-                    '<div class="section">',
-                        '<tpl if="this.type != values.type">',
-                            '<tpl exec="this.type = values.type"></tpl>',
-                            '<h3>{type}</h3>',
-                        '</tpl>',
-                        '<p><a onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></a></p>',
-                    '</div >',
-                '</tpl>'
-            )
-            ,store: new Ext.data.JsonStore({
-                url: MODx.config.connector_url
-                ,baseParams: {
-                    action: 'search/search'
-                }
-                ,root: 'results'
-                ,totalProperty: 'total'
-                ,fields: ['name', 'action', 'description', 'type']
-            })
-            //,width: 170
-            ,listWidth: 270
-            ,height: 41
-            ,boxMinHeight: 41
-
-            ,onTypeAhead : function() {}
-
-            ,listeners: {
-                beforequery: {
-                    fn: function() {
-                        if (this.tpl.type) this.tpl.type = null;
-                    }
-                }
-            }
-        });
-
-// Playground for animations. Might not be a good idea because of "renderTo" preventing ExtJS components to be resized properly
-//        var container = Ext.get('nav-search');
-//        bar.on('focus', function() {
-//            container.animate({
-//                width: {
-//                    to: 300
-//                    ,from: container.getWidth()
-//                }
-//            }, 0.25);
-//            bar.el.animate({
-//                width: {
-//                    to: 300
-//                    ,from: bar.el.getWidth()
-//                }
-//            }, 0.25);
-//        }, bar);
-//        bar.on('blur', function() {
-//            container.animate({
-//                width: {
-//                    to: 170
-//                    ,from: container.getWidth()
-//                }
-//            }, 0.25);
-//        }, bar);
-
-        var nop = ['INPUT', 'TEXTAREA'];
-        Ext.EventManager.on(Ext.get(document), 'keyup', function(vent) {
-            if (vent.keyCode === 85 && nop.indexOf(vent.target.nodeName) == -1) {
-                bar.focus();
-            }
-        });
-        new Ext.KeyMap(Ext.get(document)).addBinding({
-            key: 'u'
-            ,ctrl: false
-            ,shift: false
-            ,alt: true
-            ,handler: function(code, vent) {
-                bar.focus();
-            }
-            ,stopEvent: true
-        });
+        new MODx.SearchBar;
     });
 </script>
-{/literal}
 
 
 {$maincssjs}
