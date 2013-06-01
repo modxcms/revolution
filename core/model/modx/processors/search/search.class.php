@@ -9,6 +9,7 @@ class modSearchProcessor extends modProcessor
 {
     public $maxResults = 5;
     public $actionToken = ':';
+    private $actions = array();
 
     /**
      * @return string JSON formatted results
@@ -44,14 +45,28 @@ class modSearchProcessor extends modProcessor
 
     public function searchActions($query, array $output)
     {
-        // @todo
-        //$query = ltrim($query, $this->actionToken);
-        $output[] = array(
-            'name' => 'Welcome',
-            'action' => 'welcome',
-            'description' => 'Go back home',
-            'type' => 'Actions'
+        $query = ltrim($query, $this->actionToken);
+        $this->actions = array(
+            array(
+                'name' => 'Welcome',
+                'action' => 'welcome',
+                'description' => 'Go back home',
+                'type' => 'Actions'
+            ),
+            array(
+                'name' => 'Error log',
+                'action' => 'system/event',
+                'description' => 'View error log',
+                'type' => 'Actions'
+            ),
+            array(
+                'name' => 'Clear cache',
+                'action' => 'system/refresh_site',
+                'description' => 'Refresh the cache',
+                'type' => 'Actions'
+            ),
         );
+        return $this->filterActions($query);
 //        $class = 'modMenu';
 //        $c = $this->modx->newQuery($class);
 //        $c->where(array(
@@ -69,7 +84,25 @@ class modSearchProcessor extends modProcessor
 //                'type' => 'Actions',
 //            );
 //        }
-//
+    }
+
+    private function filterActions($query)
+    {
+        // source : http://stackoverflow.com/questions/5808923/filter-values-from-an-array-similar-to-sql-like-search-using-php
+        $query = preg_quote($query, '~');
+        $data = array();
+        foreach ($this->actions as $idx => $action) {
+            $data[$idx] = $action['name'];
+        }
+        $results = preg_grep('~' . $query . '~', $data);
+
+        $output = array();
+        if ($results) {
+            foreach ($results as $idx => $field) {
+                $output[] = $this->actions[$idx];
+            }
+        }
+
         return $output;
     }
 
