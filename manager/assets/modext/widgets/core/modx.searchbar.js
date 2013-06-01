@@ -45,12 +45,16 @@ MODx.SearchBar = function(config) {
                     if (this.tpl.type) this.tpl.type = null;
                 }
             }
+            ,specialkey: function(elem, e) {
+                elem.playWithKeyboard(e);
+            }
         }
     });
     MODx.SearchBar.superclass.constructor.call(this, config);
     this.setKeyMap();
 };
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
+    // Initialize the keyboard shortcuts to focus the bar
     setKeyMap: function() {
         var nop = ['INPUT', 'TEXTAREA'];
         Ext.EventManager.on(Ext.get(document), 'keyup', function(vent) {
@@ -70,6 +74,36 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             ,scope: this
             ,stopEvent: true
         });
+    }
+
+    // Some keyboard shortcuts when the bar is focused
+    ,playWithKeyboard: function(e) {
+        // @todo: find a proper method name ;)
+        //e.preventDefault();
+        var store = this.getStore()
+            ,results = store.getCount();
+        switch (e.getKey()) {
+            case e.ENTER:
+                console.log('enter pressed, perform some kind of validation');
+                break;
+            case e.TAB:
+                if (results === 1) {
+                    var record = store.getAt(0);
+                    this.setValue(record.get('action'));
+                } else if (results > 1) {
+                    // select the appropriate element
+                }
+                break;
+            case e.DOWN:
+                console.log('select the appropriate record');
+                break;
+            case e.ESC:
+                console.log('reset the combo');
+                this.reset();
+                this.blur();
+                this.focus();
+                break;
+        }
     }
 });
 Ext.reg('modx-searchbar', MODx.SearchBar);
