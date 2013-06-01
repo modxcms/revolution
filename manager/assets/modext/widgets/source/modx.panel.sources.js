@@ -53,7 +53,10 @@ MODx.grid.Sources = function(config) {
 
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'source/index.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'source/getlist'
+        }
         ,fields: ['id','name','description','class_key','cls']
         ,paging: true
         ,autosave: true
@@ -164,7 +167,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         });
     }
     ,createSource: function() {
-        MODx.loadPage(MODx.action['system/source/create']);
+        MODx.loadPage('system/source/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -204,7 +207,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
 
     ,updateSource: function() {
-        MODx.loadPage(MODx.action['source/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('source/update', 'id='+this.menu.record.id);
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
@@ -236,8 +239,8 @@ MODx.window.CreateSource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('source_create')
-        ,url: MODx.config.connectors_url+'source/index.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'source/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -270,7 +273,10 @@ MODx.grid.SourceTypes = function(config) {
     config = config || {};
 
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'source/type.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'source/type/getlist'
+        }
         ,fields: ['class','name','description']
         ,paging: true
         ,autosave: true
@@ -335,7 +341,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,createSourceType: function() {
-        MODx.loadPage(MODx.action['system/source/type/create']);
+        MODx.loadPage('system/source/type/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -375,7 +381,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
 
     ,updateSourceType: function() {
-        MODx.loadPage(MODx.action['source/type/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('source/type/update', 'id='+this.menu.record.id);
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

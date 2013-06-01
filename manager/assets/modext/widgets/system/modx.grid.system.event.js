@@ -10,7 +10,10 @@ MODx.grid.SystemEvent = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('system_events')
-        ,url: MODx.config.connectors_url+'system/event.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/event/getlist'
+        }
         ,fields: ['id','name','service','groupname','menu']
         ,autosave: true
         ,paging: true

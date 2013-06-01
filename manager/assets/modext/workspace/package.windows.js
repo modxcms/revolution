@@ -8,8 +8,8 @@ MODx.window.PackageUninstall = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('package_uninstall')
-        ,url: MODx.config.connectors_url+'workspace/packages.php'
-        ,action: ''
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/packages/uninstall'
         ,height: 400
         ,width: 500
         ,id: 'modx-window-package-uninstall'
@@ -60,9 +60,9 @@ MODx.window.RemovePackage = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('package_remove')
-        ,url: MODx.config.connectors_url+'workspace/packages.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'uninstall'
+            action: 'workspace/packages/uninstall'
         }
         ,defaults: { border: false }
         ,fields: [{
@@ -93,7 +93,7 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
         if (this.fp.getForm().isValid()) {
             Ext.getCmp('modx-package-grid').loadConsole(Ext.getBody(),r.topic);
             this.fp.getForm().baseParams = {
-                action: 'remove'
+                action: 'workspace/packages/remove'
                 ,signature: r.signature
                 ,register: 'mgr'
                 ,topic: r.topic
@@ -204,7 +204,7 @@ MODx.window.ChangeProvider = function(config) {
 				,id: 'modx-pdselprov-provider'
 				,allowBlank: false
 				,baseParams: {
-                    action: 'getList'
+                    action: 'workspace/providers/getList'
                     ,showNone: false
                 }
 			}]
@@ -234,7 +234,7 @@ Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would cre
             if (tree.rendered) {
                 var loader = tree.getLoader();
                 loader.baseParams = {
-                    action: 'getNodes'
+                    action: 'workspace/packages/rest/getNodes'
                     ,provider: vs.provider
                 };
                 loader.load(tree.root);

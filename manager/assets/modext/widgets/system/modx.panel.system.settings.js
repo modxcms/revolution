@@ -51,7 +51,10 @@ Ext.reg('modx-panel-system-settings',MODx.panel.SystemSettings);
 MODx.grid.SystemSettings = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'system/settings.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/settings/getlist'
+        }
     });
     MODx.grid.SystemSettings.superclass.constructor.call(this,config);
 };

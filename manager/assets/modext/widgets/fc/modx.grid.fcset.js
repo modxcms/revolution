@@ -3,7 +3,10 @@ MODx.grid.FCSet = function(config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set'
-        ,url: MODx.config.connectors_url+'security/forms/set.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/forms/set/getlist'
+        }
         ,fields: ['id','profile','action','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
         ,paging: true
         ,autosave: true
@@ -167,7 +170,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'security/forms/set/getList'
             ,profile: MODx.request.id
     	};
         Ext.getCmp('modx-fcs-search').reset();
@@ -180,12 +183,12 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'export'
+                action: 'security/forms/set/export'
                 ,id: id
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = this.config.url+'?action=export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                    location.href = this.config.url+'?action=security/forms/set/export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });
@@ -240,7 +243,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'duplicate'
+                action: 'security/forms/set/duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -253,7 +256,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'activate'
+                action: 'security/forms/set/activate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -269,7 +272,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'activateMultiple'
+                action: 'security/forms/set/activateMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -285,7 +288,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'deactivate'
+                action: 'security/forms/set/deactivate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -300,7 +303,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'deactivateMultiple'
+                action: 'security/forms/set/deactivateMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -321,7 +324,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             ,text: _('set_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeMultiple'
+                action: 'security/forms/set/removeMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -341,8 +344,8 @@ MODx.window.CreateFCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('set_create')
-        ,url: MODx.config.connectors_url+'security/forms/set.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/forms/set/create'
         ,height: 150
         ,width: 650
         ,fields: [{
@@ -403,7 +406,7 @@ MODx.window.CreateFCSet = function(config) {
                     ,description: MODx.expandHelp ? '' : _('set_template_desc')
                     ,id: 'modx-fcsc-template'
                     ,anchor: '100%'
-                    ,baseParams: { action: 'getList', combo: true }
+                    ,baseParams: { action: 'element/template/getList', combo: true }
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-fcsc-template'
@@ -454,8 +457,8 @@ MODx.window.ImportFCSet = function(config) {
     Ext.applyIf(config,{
         title: _('import_from_xml')
         ,id: 'modx-window-fc-set-import'
-        ,url: MODx.config.connectors_url+'security/forms/set.php'
-        ,action: 'import'
+        ,url: MODx.config.connector_url
+        ,action: 'security/forms/set/import'
         ,fileUpload: true
         ,saveBtnText: _('import')
         ,fields: [{

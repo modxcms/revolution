@@ -11,7 +11,10 @@ MODx.grid.UserGroups = function(config) {
     Ext.applyIf(config,{
         title: ''
         ,id: 'modx-grid-user-groups'
-        ,url: MODx.config.connectors_url+'security/group.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/group/getlist'
+        }
         ,fields: ['usergroup','name','member','role','rolename','primary_group','rank']
         ,cls: 'modx-grid modx-grid-draggable'
         ,columns: [{
@@ -146,8 +149,8 @@ MODx.window.AddGroupToUser = function(config) {
         title: _('user_group_user_add')
         ,height: 150
         ,width: 375
-        ,url: MODx.config.connectors_url+'security/user/group.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/group/user/create'
         ,fields: [{
             fieldLabel: _('user_group')
             ,name: 'usergroup'
@@ -200,8 +203,8 @@ MODx.window.UpdateUserGroupsRole = function(config) {
     Ext.applyIf(config,{
         id: 'modx-window-user-groups-role-update'
         ,title: _('user_group_user_update_role')
-        ,url: MODx.config.connectors_url+'security/user.php'
-        ,action: 'updateRole'
+        ,url: MODx.config.connector_url
+        ,action: 'security/group/user/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'user'

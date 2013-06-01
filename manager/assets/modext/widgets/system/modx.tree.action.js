@@ -17,8 +17,8 @@ MODx.tree.Action = function(config) {
         ,enableDrop: true
         ,ddAppendOnly: true
         ,ddGroup: 'modx-action'
-        ,url: MODx.config.connectors_url + 'system/action.php'
-        ,action: 'getNodes'
+        ,url: MODx.config.connector_url
+        ,action: 'system/action/getNodes'
     });
     MODx.tree.Action.superclass.constructor.call(this,config);
 };
@@ -114,7 +114,7 @@ Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
             ,text: _('action_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'system/action/remove'
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -141,8 +141,8 @@ MODx.window.CreateAction = function(config) {
     Ext.applyIf(config,{
         title: _('action_create')
         ,width: 430
-        ,url: MODx.config.connectors_url+'system/action.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'system/action/create'
         ,fields: [{
             fieldLabel: _('controller')
             ,name: 'controller'
@@ -184,8 +184,8 @@ MODx.window.UpdateAction = function(config) {
     Ext.applyIf(config,{
         title: _('action_update')
         ,width: 430
-        ,url: MODx.config.connectors_url+'system/action.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'system/action/update'
         ,fields: [{
             name: 'id'
             ,xtype: 'hidden'

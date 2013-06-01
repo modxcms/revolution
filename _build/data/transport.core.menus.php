@@ -56,8 +56,24 @@ $children[2]->fromArray(array (
   'description' => 'new_static_resource_desc',
   'icon' => '',
   'menuindex' => 2,
+<<<<<<< HEAD
   'params' => '&class_key=modStaticResource',
   'permissions' => 'new_static_resource',
+=======
+  'handler' => '
+MODx.msg.confirm({
+    title: _(\'remove_locks\')
+    ,text: _(\'confirm_remove_locks\')
+    ,url: MODx.config.connector_url
+    ,params: {
+        action: \'system/remove_locks\'
+    }
+    ,listeners: {
+        \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
+    }
+});',
+  'permissions' => 'remove_locks',
+>>>>>>> efd61725a3fd23880b842392cd3272f382c43bbd
 ), '', true, true);
 
 /* new weblink resource 
@@ -283,9 +299,9 @@ $children[4]->fromArray(array (
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_access\')
     ,text: _(\'flush_access_confirm\')
-    ,url: MODx.config.connectors_url+\'security/access/index.php\'
+    ,url: MODx.config.connector_url
     ,params: {
-        action: \'flush\'
+        action: \'security/access/flush\'
     }
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}
@@ -306,9 +322,9 @@ $children[5]->fromArray(array (
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_sessions\')
     ,text: _(\'flush_sessions_confirm\')
-    ,url: MODx.config.connectors_url+\'security/flush.php\'
+    ,url: MODx.config.connector_url
     ,params: {
-        action: \'flush\'
+        action: \'security/flush\'
     }
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}

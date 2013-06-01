@@ -52,7 +52,10 @@ MODx.grid.Dashboards = function(config) {
 
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'system/dashboard.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/dashboard/getlist'
+        }
         ,fields: ['id','name','description','cls']
         ,paging: true
         ,autosave: true
@@ -94,7 +97,7 @@ MODx.grid.Dashboards = function(config) {
             ,itemId: 'usergroup'
             ,emptyText: _('user_group_filter')+'...'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/user/group/getList'
                 ,addAll: true
             }
             ,value: ''
@@ -170,7 +173,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
 
     ,createDashboard: function() {
-        MODx.loadPage(MODx.action['system/dashboards/create']);
+        MODx.loadPage('system/dashboards/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -181,7 +184,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             ,text: _('dashboard_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeMultiple'
+                action: 'system/dashboard/removeMultiple'
                 ,users: cs
             }
             ,listeners: {
@@ -200,7 +203,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             ,text: _('dashboard_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'system/dashboard/remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -213,7 +216,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'duplicate'
+                action: 'system/dashboard/duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -223,7 +226,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
 
     ,updateDashboard: function() {
-        MODx.loadPage(MODx.action['system/dashboards/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('system/dashboards/update', 'id='+this.menu.record.id);
     }
     
     ,filterUsergroup: function(cb,nv,ov) {
@@ -241,7 +244,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'system/dashboard/getList'
     	};
         Ext.getCmp('modx-dashboard-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();

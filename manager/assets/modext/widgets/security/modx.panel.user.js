@@ -7,7 +7,7 @@
 MODx.panel.User = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'security/user.php'
+        url: MODx.config.connector_url
         ,baseParams: {}
         ,id: 'modx-panel-user'
 		,cls: 'container'
@@ -52,7 +52,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'get'
+                action: 'security/user/get'
                 ,id: this.config.user
                 ,getGroups: true
             }
@@ -100,14 +100,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
                     if (userId == 0) {
-                        MODx.loadPage(MODx.action['security/user'], 'id='+o.result.object.id);
+                        MODx.loadPage('security/user', 'id='+o.result.object.id);
                     }
                     return false;
                 }
             });
             this.clearDirty();
         } else if (userId == 0) {
-            MODx.loadPage(MODx.action['security/user'], 'id='+o.result.object.id);
+            MODx.loadPage('security/user', 'id='+o.result.object.id);
         }
     }
     
