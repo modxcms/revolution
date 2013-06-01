@@ -153,8 +153,8 @@ Ext.extend(MODx,Ext.Component,{
         this.console.show(Ext.getBody());
 
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'system/index.php'
-            ,params: { action: 'clearCache',register: 'mgr' ,topic: topic }
+            url: MODx.config.connector_url
+            ,params: { action: 'system/clearcache',register: 'mgr' ,topic: topic }
             ,listeners: {
                 'success':{fn:function() {
                     this.console.fireEvent('complete');
@@ -167,9 +167,9 @@ Ext.extend(MODx,Ext.Component,{
     ,releaseLock: function(id) {
         if (this.fireEvent('beforeReleaseLocks')) {
             MODx.Ajax.request({
-                url: MODx.config.connectors_url+'resource/locks.php'
+                url: MODx.config.connector_url
                 ,params: {
-                    action: 'release'
+                    action: 'resource/locks/release'
                     ,id: id
                 }
                 ,listeners: {
@@ -193,9 +193,9 @@ Ext.extend(MODx,Ext.Component,{
             MODx.msg.confirm({
                 title: _('logout')
                 ,text: _('logout_confirm')
-                ,url: MODx.config.connectors_url+'security/logout.php'
+                ,url: MODx.config.connector_url
                 ,params: {
-                    action: 'logout'
+                    action: 'security/logout'
                     ,login_context: 'mgr'
                 }
                 ,listeners: {
@@ -637,15 +637,15 @@ MODx.HttpProvider = function(config) {
         ,autoStart: true
         ,autoRead: true
         ,queue: {}
-        ,readUrl: MODx.config.connectors_url+'system/registry/register.php'
-        ,writeUrl: MODx.config.connectors_url+'system/registry/register.php'
+        ,readUrl: MODx.config.connector_url
+        ,writeUrl: MODx.config.connector_url
         ,method: 'post'
         ,baseParams: {
             register: 'state'
             ,topic: ''
         }
         ,writeBaseParams: {
-            action: 'send'
+            action: 'system/registry/register/send'
             ,message: ''
             ,message_key: ''
             ,message_format: 'json'
@@ -654,7 +654,7 @@ MODx.HttpProvider = function(config) {
             ,kill: 0
         }
         ,readBaseParams: {
-            action: 'read'
+            action: 'system/registry/register/read'
             ,format: 'json'
             ,poll_limit: 1
             ,poll_interval: 1

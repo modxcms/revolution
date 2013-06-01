@@ -15,8 +15,8 @@ MODx.tree.Menu = function(config) {
         ,expandFirst: true
         ,enableDrag: true
         ,enableDrop: true
-        ,url: MODx.config.connectors_url + 'system/menu.php'
-        ,action: 'getNodes'
+        ,url: MODx.config.connector_url
+        ,action: 'system/menu/getNodes'
         ,primaryKey: 'text'
         ,useDefaultToolbar: true
         ,ddGroup: 'modx-menu'
@@ -74,7 +74,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
             ,text: _('menu_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'system/menu/remove'
                 ,text: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -124,8 +124,8 @@ MODx.window.CreateMenu = function(config) {
         title: _('menu_create')
         ,width: 650
         ,height: 400
-        ,url: MODx.config.connectors_url+'system/menu.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'system/menu/create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'
@@ -257,8 +257,8 @@ MODx.window.UpdateMenu = function(config) {
         title: _('menu_update')
         ,width: 650
         ,height: 400
-        ,url: MODx.config.connectors_url+'system/menu.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'system/menu/update'
         ,fields: [{
             name: 'parent'
             ,xtype: 'hidden'
@@ -388,7 +388,11 @@ MODx.combo.Menu = function(config) {
     Ext.applyIf(config,{
         name: 'menu'
         ,hiddenName: 'menu'
-        ,url: MODx.config.connectors_url+'system/menu.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/menu/getlist'
+            ,combo: true
+        }
         ,fields: ['text','text_lex']
         ,displayField: 'text_lex'
         ,valueField: 'text'

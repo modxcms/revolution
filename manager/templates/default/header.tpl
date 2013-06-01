@@ -20,8 +20,8 @@
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&amp;topic=topmenu,file,resource,{$_lang_topics}&amp;action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&amp;wctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {if $_config.compress_js && $_config.compress_js_groups}
 <script src="{$_config.manager_url}min/index.php?g=coreJs1" type="text/javascript"></script>
@@ -155,20 +155,20 @@
                     <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
                     <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                     {if $canChangeProfile}
-                        <li>
-                            <a class="modx-user-profile" href="?a=security/user">Edit account
-                                <span class="description">Update account email, password or info. </span>
-                            </a>
+                    	<li>
+                        	<a class="modx-user-profile" href="?a=security/profile">Edit account
+	                        	<span class="description">Update account email, password or info. </span>
+                        	</a>
                         </li>
                     {/if}
-                        {if $canLogout}
-                            <li>
-                                <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
-                                    <span class="description">Log out from MODX</span>
-                                </a>
-                            </li>
-                        {/if}
-                    </ul>
+	            		{if $canLogout}
+							<li>
+								<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
+									<span class="description">Log out from MODX</span>
+								</a>
+							</li>
+						{/if}
+	            	</ul>
                     {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
                         <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">

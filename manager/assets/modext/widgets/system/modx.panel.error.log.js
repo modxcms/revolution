@@ -1,11 +1,11 @@
 MODx.panel.ErrorLog = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'system/errorlog.php'
+        url: MODx.config.connector_url
         ,id: 'modx-panel-error-log'
 		,cls: 'container'
         ,baseParams: {
-            action: 'clear'
+            action: 'system/errorlog/clear'
         }
         ,layout: 'form'
         ,items: [{
@@ -82,7 +82,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'clear'
+                action: 'system/errorlog/clear'
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -116,7 +116,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         });
     }
     ,download: function() {
-        location.href = this.config.url+'?action=download&HTTP_MODAUTH='+MODx.siteId;
+        location.href = this.config.url+'?action=system/errorlog/download&HTTP_MODAUTH='+MODx.siteId;
     }
 });
 Ext.reg('modx-panel-error-log',MODx.panel.ErrorLog);

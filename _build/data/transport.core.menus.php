@@ -283,9 +283,9 @@ $children[4]->fromArray(array (
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_access\')
     ,text: _(\'flush_access_confirm\')
-    ,url: MODx.config.connectors_url+\'security/access/index.php\'
+    ,url: MODx.config.connector_url
     ,params: {
-        action: \'flush\'
+        action: \'security/access/flush\'
     }
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}
@@ -306,9 +306,9 @@ $children[5]->fromArray(array (
   'handler' => 'MODx.msg.confirm({
     title: _(\'flush_sessions\')
     ,text: _(\'flush_sessions_confirm\')
-    ,url: MODx.config.connectors_url+\'security/flush.php\'
+    ,url: MODx.config.connector_url
     ,params: {
-        action: \'flush\'
+        action: \'security/flush\'
     }
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}

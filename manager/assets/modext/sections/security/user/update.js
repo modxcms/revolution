@@ -16,14 +16,19 @@ MODx.page.UpdateUser = function(config) {
             ,cancel: 'security/user'
        }
         ,buttons: [{
-            process: 'update', text: _('save'), method: 'remote'
+            process: 'security/user/update'
+            ,text: _('save')
+            ,method: 'remote'
             ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:'security/user'}
+            text: _('cancel')
+            ,handler: function() {
+                MODx.loadPage('security/user')
+            }
         },'-',{
             text: _('delete')
             ,handler: this.removeUser
@@ -48,14 +53,14 @@ Ext.extend(MODx.page.UpdateUser,MODx.Component,{
         MODx.msg.confirm({
             title: _('user_remove')
             ,text: _('user_confirm_remove')
-            ,url: MODx.config.connectors_url+'security/user.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'delete'
+                action: 'security/user/delete'
                 ,id: this.config.user
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    MODx.loadPage(MODx.action['security/user']);
+                    MODx.loadPage('security/user');
                 },scope:this}
             }
         });

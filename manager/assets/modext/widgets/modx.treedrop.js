@@ -175,8 +175,8 @@ MODx.window.InsertElement = function(config) {
         ,width: 600
         ,labelAlign: 'left'
         ,labelWidth: 160
-        ,url: MODx.config.connectors_url+'element/template.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'element/template/create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'pk'
@@ -209,9 +209,9 @@ MODx.window.InsertElement = function(config) {
         },{
             id: 'modx-dise-proplist'
             ,autoLoad: {
-                url: MODx.config.connectors_url+'element/index.php'
+                url: MODx.config.connector_url
                 ,params: {
-                   'action': 'getInsertProperties'
+                   'action': 'element/getinsertproperties'
                    ,classKey: config.record.classKey
                    ,pk: config.record.pk
                    ,propertySet: 0
@@ -249,9 +249,9 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
 
         var u = Ext.getCmp('modx-dise-proplist').getUpdater();
         u.update({
-            url: MODx.config.connectors_url+'element/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                'action': 'getInsertProperties'
+                'action': 'element/getinsertproperties'
                 ,classKey: this.config.record.classKey
                 ,pk: this.config.record.pk
                 ,propertySet: cb.getValue()
