@@ -36,6 +36,7 @@ MODx.SearchBar = function(config) {
         ,listWidth: 270
         ,height: 41
         ,boxMinHeight: 41
+        ,selected: 0
 
         ,onTypeAhead : function() {}
 
@@ -45,8 +46,14 @@ MODx.SearchBar = function(config) {
                     if (this.tpl.type) this.tpl.type = null;
                 }
             }
-            ,specialkey: function(elem, e) {
-                elem.playWithKeyboard(e);
+            ,specialkey: {
+                fn: this.keyboardNav
+                ,scope: this
+            }
+            // Select existing text if any
+            ,focus: {
+                fn: this.selectText
+                ,scope: this
             }
         }
     });
@@ -77,8 +84,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     }
 
     // Some keyboard shortcuts when the bar is focused
-    ,playWithKeyboard: function(e) {
-        // @todo: find a proper method name ;)
+    ,keyboardNav: function(elem, e) {
         //e.preventDefault();
         var store = this.getStore()
             ,results = store.getCount();
@@ -87,14 +93,19 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 console.log('enter pressed, perform some kind of validation');
                 break;
             case e.TAB:
+                e.preventDefault();
                 if (results === 1) {
                     var record = store.getAt(0);
-                    this.setValue(record.get('action'));
+                    this.setValue(record.data[this.valueField]);
                 } else if (results > 1) {
                     // select the appropriate element
+                    this.cycleChoice(e.shiftKey);
                 }
                 break;
             case e.DOWN:
+                console.log('select the appropriate record');
+                break;
+            case e.RIGHT:
                 console.log('select the appropriate record');
                 break;
             case e.ESC:
@@ -104,6 +115,16 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 this.focus();
                 break;
         }
+    }
+
+    ,cycleChoice: function(shift) {
+        if (shift === true) {
+            this.selectPrev();
+        } else {
+            this.selectNext();
+        }
+        var record = this.getStore().getAt(this.selectedIndex);
+        this.setValue(record.data[this.valueField]);
     }
 });
 Ext.reg('modx-searchbar', MODx.SearchBar);
