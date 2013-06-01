@@ -32,11 +32,6 @@ MODx.SearchBar = function(config) {
             ,totalProperty: 'total'
             ,fields: ['name', 'action', 'description', 'type']
         })
-        //,width: 170
-        ,listWidth: 270
-        ,height: 41
-        ,boxMinHeight: 41
-        ,selected: 0
 
         ,onTypeAhead : function() {}
 
@@ -50,9 +45,12 @@ MODx.SearchBar = function(config) {
                 fn: this.keyboardNav
                 ,scope: this
             }
-            // Select existing text if any
             ,focus: {
-                fn: this.selectText
+                fn: this.focusBar
+                ,scope: this
+            }
+            ,blur: {
+                fn: this.blurBar
                 ,scope: this
             }
         }
@@ -83,6 +81,28 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         });
     }
 
+    ,focusBar: function() {
+        this.selectText();
+        this.originalWidth = this.getWidth();
+        this.animate();
+    }
+    ,blurBar: function() {
+        this.animate(true);
+    }
+    ,animate: function(blur) {
+        var container = Ext.get('nav-search')
+            ,to = blur ? this.originalWidth : 300
+            ,me = this;
+        container.animate({
+            width: {
+                to: to
+                ,from: container.getWidth()
+            }
+        }, 0.25, function() {
+            !blur ? me.setWidth(to).render() : '';
+        });
+        blur ? this.setWidth(to).render() : '';
+    }
     // Some keyboard shortcuts when the bar is focused
     ,keyboardNav: function(elem, e) {
         //e.preventDefault();
@@ -91,6 +111,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         switch (e.getKey()) {
             case e.ENTER:
                 console.log('enter pressed, perform some kind of validation');
+                this.onViewClick();
                 break;
             case e.TAB:
                 e.preventDefault();
@@ -104,9 +125,11 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 break;
             case e.DOWN:
                 console.log('select the appropriate record');
+                this.cycleChoice();
                 break;
-            case e.RIGHT:
+            case e.UP:
                 console.log('select the appropriate record');
+                this.cycleChoice(true);
                 break;
             case e.ESC:
                 console.log('reset the combo');
@@ -116,9 +139,9 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 break;
         }
     }
-
-    ,cycleChoice: function(shift) {
-        if (shift === true) {
+    // Cycle up/down in the results
+    ,cycleChoice: function(prev) {
+        if (prev === true) {
             this.selectPrev();
         } else {
             this.selectNext();
