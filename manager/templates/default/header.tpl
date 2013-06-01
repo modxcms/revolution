@@ -65,7 +65,7 @@
 	                        </div >
 	                        <div class="section">
 	                            <h3>Chunks</h3>
-	                            <p>welcome.tpl</p> 
+	                            <p>welcome.tpl</p>
 	                        </div>
 	                        <div class="section">
 	                            <h3>Templates</h3>
@@ -77,12 +77,12 @@
 	                        </div>
 	                    </div>
 	                    <!-- end #modx-manager-search-results -->
-	            	</span>               
+	            	</span>
                     <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
                     <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                     {if $canChangeProfile}
                     	<li>
-                        	<a class="modx-user-profile" href="?a=security/user">Edit account
+                        	<a class="modx-user-profile" href="?a=security/profile">Edit account
 	                        	<span class="description">Update account email, password or info. </span>
                         	</a>
                         </li>
@@ -94,13 +94,13 @@
 								</a>
 							</li>
 						{/if}
-	            	</ul> 
+	            	</ul>
                     {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
                         <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
                         {if $canModifySettings}
                             <li>
-                                <a href="?a=system/settings">{$_lang.system_settings} 
+                                <a href="?a=system/settings">{$_lang.system_settings}
                                     <span class="description">{$_lang.system_settings_desc}</span>
                                 </a>
                             </li>
@@ -173,7 +173,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
         <div id="modx-content">
