@@ -66,9 +66,9 @@
                 '</tpl>'
             )
             ,store: new Ext.data.JsonStore({
-                url: MODx.config.connectors_url + 'search/search.php'
+                url: MODx.config.connector_url
                 ,baseParams: {
-                    action: 'search'
+                    action: 'search/search'
                 }
                 ,root: 'results'
                 ,totalProperty: 'total'
