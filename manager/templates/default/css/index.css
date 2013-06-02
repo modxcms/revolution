@@ -467,28 +467,22 @@ input::-moz-focus-inner {
 #modx-navbar {
     position: relative;
     height: 41px;
-    background: #DDD;
+    background: #ddd;
     border-bottom: 1px solid #D2D2D2;
 	background-image: linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);    
 	background-image: -webkit-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
 	background-image: -moz-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
 	background-image: -o-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
 }
-#modx-navbar li,
-#modx-navbar ul.modx-subnav li {
-    background: #eee;
-    color: rgba(255,255,255,0.9);
-}
 #modx-navbar li:hover a {
-    /*color: #fff;
-    text-shadow: 0 0 3px rgba(0,0,0,.3);*/
-
+    color: #333;
+    text-shadow: none;
 }
 #modx-navbar ul#modx-settings-menu, 
 #modx-navbar ul#modx-user-submenu {
     left: auto;
     right: 53px;
-    background: #EEE;
+    background: #eee;
     color: rgba(255,255,255,0.9);
 }
 #modx-navbar ul#modx-user-submenu {
@@ -514,14 +508,11 @@ input::-moz-focus-inner {
     width: 110px;
     background: url(../images/modx-home-logo.png) no-repeat 20px 10px;
     background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
-    border-right: 1px solid transparent;
 }
-#modx-navbar #modx-home-dashboard:hover {
-    /*background: url(../images/modx-home-logo.png) no-repeat 20px -71px;
-    background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
-    background-color: rgba(0,0,0,.2);*/
-    border-right-color: transparent;
-
+#modx-navbar #modx-home-dashboard:hover a {
+    background-color: rgba(0,0,0,.09);
+    border-right: 1px solid #d0d0d0;
+    text-shadow: 1px 0 0 #eee;
 }
 #modx-navbar #modx-home-dashboard a {
     text-indent: -9999px;
@@ -535,6 +526,7 @@ input::-moz-focus-inner {
 #modx-navbar ul.modx-subnav li {
     margin: 0;
     padding: 0;
+    background: #eee;
     border-bottom: 1px solid rgba(0,0,0,0.15);
     clear: both;
 }
@@ -546,6 +538,11 @@ input::-moz-focus-inner {
     padding: 5px 10px 6px;
     line-height: 1.4;
     text-shadow: none;
+    color: #444;
+}
+#modx-navbar ul.modx-subnav li a:hover{
+    background: rgba(0, 0, 0, .09);
+    color: #333;
 }
 #modx-navbar ul.modx-subnav li a span {
     display: block;
@@ -554,14 +551,6 @@ input::-moz-focus-inner {
     width: 100%;
     opacity: 0.9;
     filter: alpha(opacity=90);
-}
-#modx-navbar ul.modx-subnav li a{
-    color: #444;
-}
-#modx-navbar ul.modx-subnav li a:hover{
-    background: rgba(0, 0, 0, .09);
-    /*color: #fff;
-    text-shadow: 0 0 3px rgba(0,0,0,0.3);*/
 }
 #modx-navbar ul.modx-subnav li a:hover span {
     opacity: 1;
@@ -633,8 +622,9 @@ input::-moz-focus-inner {
 #modx-topnav li:hover,
 #modx-user-menu a:hover {
     background: rgba(0,0,0,.09);
-    border-left: 1px solid #c5c5c5;
-    border-right: 1px solid #c5c5c5;
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    text-shadow: 1px 0 0 #eee;
     z-index: 10000;
 }
 #modx-topnav a,
@@ -1295,7 +1285,6 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#fee1a0,endColorstr=#fec95b,GradientType=0);
 	background:linear-gradient(center bottom,#fec95b 0%,#fee1a0 100%);
 }
-.actions button.green,
 .inline-button.green {
 	background:#9fcb57;
 	background:-moz-linear-gradient(center bottom,#9fcb57 0%,#d7e9a4 100%) repeat scroll 0 0 transparent;
@@ -1309,7 +1298,6 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	border:1px solid #85a948;
 	color:#556f14 !important;
 }
-.actions button.green:hover,
 .inline-button.green:hover {
 	background:#9fcb57;
 	background:-moz-linear-gradient(center bottom,#9fcb57 0%,#e6efd1 100%) repeat scroll 0 0 transparent;
