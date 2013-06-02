@@ -101,7 +101,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'get'
+                action: 'system/errorlog/get'
             }
             ,listeners: {
                 'success': {fn:function(r) {
