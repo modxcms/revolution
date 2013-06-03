@@ -397,12 +397,15 @@ input::-moz-focus-inner {
 /* MODX MANAGER SEARCH */
 #modx-manager-search {
     /*margin-left: 5px;*/
-	float: left;
-    border-right: 1px solid #ddd;
+    float: left;
+    border-right: 1px solid #d0d0d0;
     border-left: 1px solid #f5f5f5;
     box-shadow: -1px 0 0 #ddd, 1px 0 0 #f5f5f5;
     padding: 5px 6px 0 8px;
     height: 36px;
+}
+li:hover #modx-manager-search {
+    border-left-color: transparent;
 }
     #modx-manager-search .x-form-empty-field {
         color: #bbb;

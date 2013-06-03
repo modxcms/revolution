@@ -61,9 +61,6 @@
         <div id="modx-header">
             <div id="modx-navbar">
                 <div id="modx-user-menu">
-                       <span id="modx-manager-search">
-                        <div id="nav-search"></div>
-                    </span>
                     <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
                     <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                     {if $canChangeProfile}
@@ -154,6 +151,11 @@
                 <ul id="modx-topnav">
                     <li id="modx-home-dashboard">
                         <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
+                    </li>
+                    <li>
+                        <div id="modx-manager-search">
+                            <div id="nav-search"></div>
+                        </div>
                     </li>
                     {$navb}
                 </ul>
