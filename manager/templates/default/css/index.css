@@ -432,8 +432,8 @@ li:hover #modx-manager-search {
 		color: #4A4A4A;
 	}*/
     .modx-manager-search-results {
-/*        width:500px;
-        padding: 1em 0;
+        width:420px !important;
+/*        padding: 1em 0;
         position: absolute;
         z-index:100;
         top:41px;
@@ -443,24 +443,47 @@ li:hover #modx-manager-search {
         box-shadow: 0 2px 4px 0 rgba(30,30,30,.2);
         /*transition: all 1s ease-in-out;
         -webkit-transition: all 1s ease-in-out;*/
-        border:1px solid #d7d5d5;
+        border: 1px solid #d7d5d5;
         -webkit-box-sizing: border-box;
            -moz-box-sizing: border-box;
              -o-box-sizing: border-box;
             -ms-box-sizing: border-box;
                 box-sizing: border-box;
     }
+    .modx-manager-search-results {
+        width: 450px !important;
+    }
+    .modx-manager-search-results .x-combo-list-inner{
+        width: 100% !important;
+    }
+    .modx-manager-search-results .section {
+        position: relative;
+    }
+    .modx-manager-search-results .section:hover,
+    .modx-manager-search-results .section:hover h3,
+    .modx-manager-search-results .section:hover p {
+        background-color: #4a7090;
+        border-color: transparent;
+        color: #fff !important;
+    }
     .modx-manager-search-results h3 {
-        font-weight:normal;
-        color:#999;
-        margin-bottom:0.5em;
-        background-color:#e8e8e8;
-        padding:0.25em 1em;
-        border-top:1px solid #d7d5d5;
-        border-bottom:1px solid #d7d5d5;
+        font-weight: normal;
+        color: #aaa;
+        font-size: .9em;
+        position: absolute;
+        left: 5px;
+        top: 0;
+        padding: 0.5555555556em 1em 0;
+        width: 95px;
+        text-align: right;
+        line-height: 1.666666666667;
     }
     .modx-manager-search-results p {
-        padding:0 1em 0.5em 1em;
+        padding: 0.5em 1em 0.5em 0.5em;
+        margin-left: 117px;
+        border-left: 1px solid #e5e5e5;
+        background-color: #f9f9f9;
+        line-height: 1.5;
     }
     .modx-manager-search-results a {
         display:block;
