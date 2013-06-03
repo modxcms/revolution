@@ -25,10 +25,12 @@ class modDashboardWidgetNewsFeed extends modDashboardWidgetInterface {
         $newsEnabled = $this->modx->getOption('feed_modx_news_enabled',null,true);
         if (!empty($url) && !empty($newsEnabled)) {
             $rss = $this->rss->parse($url);
-            foreach (array_keys($rss->items) as $key) {
-                $item= &$rss->items[$key];
-                $item['pubdate'] = strftime('%c',$item['date_timestamp']);
-                $o[] = $this->getFileChunk('dashboard/rssitem.tpl',$item);
+            if (is_object($rss)) {
+                foreach (array_keys($rss->items) as $key) {
+                    $item= &$rss->items[$key];
+                    $item['pubdate'] = strftime('%c',$item['date_timestamp']);
+                    $o[] = $this->getFileChunk('dashboard/rssitem.tpl',$item);
+                }
             }
         }
         return implode("\n",$o);
