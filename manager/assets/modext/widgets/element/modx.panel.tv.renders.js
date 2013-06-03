@@ -25,7 +25,6 @@ MODx.panel.ImageTV = function(config) {
             ,value: config.value
         },{
             xtype: 'modx-combo-browser'
-            ,anchor: '100%'
             ,browserEl: 'tvbrowser'+config.tv
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv
@@ -76,7 +75,6 @@ MODx.panel.FileTV = function(config) {
             ,value: config.value
         },{
             xtype: 'modx-combo-browser'
-            ,anchor: '100%'
             ,browserEl: 'tvbrowser'+config.tv
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv

@@ -470,6 +470,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             }
         } else {
             this.refresh();
+            this.fireEvent('afterUpload');
         }
     }    
     ,beforeUpload: function() {

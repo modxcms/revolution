@@ -7,6 +7,19 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- Refresh file tree after removing file
+- [#9946] Do not cache modResource::$_isForward
+- Force browser to root on Media Source change
+- Refresh file tree after root upload
+- Fix remove file from root if no folder selected
+- [#8877] Fix inline grid datefield icon
+- [#6945] Fix datefield icon in grid toolbars
+- [#9825] Revert width increase of file and image TVs
+- [#9901] Fix empty resourceMap in sqlsrv
+- [#9912] Fix length of modResource.uri index
+- [#9846] Fix incorrect parameter order passed to findResource
+- [#9814] Fix empty cross-context links using link tags
+
 MODX Revolution 2.2.7-pl (April 9, 2013)
 ====================================
 - [#9634] Fix notices in system/settings/update processor

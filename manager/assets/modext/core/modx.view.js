@@ -183,6 +183,7 @@ MODx.browser.Window = function(config) {
                 this.config.source = s;
                 this.view.config.source = s;
                 this.view.baseParams.source = s;
+                this.view.dir = '/';
                 this.view.run();
             },scope:this}
             ,'nodeclick': {fn:function(n,e) {
@@ -401,7 +402,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
         var d = '';
-        if (typeof(this.dir) != 'object') { d = this.dir; }
+        if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
         MODx.msg.confirm({
             text: _('file_remove_confirm')
             ,url: MODx.config.connectors_url+'browser/file.php'
@@ -413,7 +414,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.run({ ctx: MODx.ctx });
+                    this.run();
                 },scope:this}
             }
         });
