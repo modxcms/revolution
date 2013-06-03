@@ -369,6 +369,6 @@ $children[3]->fromArray(array (
 
 $menus[4]->addMany($children,'Children');
 unset($children);
+*/
 
 return $menus;
-*/
