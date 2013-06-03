@@ -200,7 +200,7 @@ class modSearchProcessor extends modProcessor
         foreach ($collection as $record) {
             $output[] = array(
                 'name' => $record->get('name'),
-                'action' => 'element/snippet/update&id=' . $record->get('id'),
+                'action' => 'element/chunk/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => 'Chunks',
             );
@@ -224,7 +224,7 @@ class modSearchProcessor extends modProcessor
         foreach ($collection as $record) {
             $output[] = array(
                 'name' => $record->get('templatename'),
-                'action' => 'element/snippet/update&id=' . $record->get('id'),
+                'action' => 'element/template/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => 'Templates',
             );
