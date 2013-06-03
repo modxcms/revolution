@@ -459,35 +459,43 @@ li:hover #modx-manager-search {
     .modx-manager-search-results .section {
         position: relative;
     }
-    .modx-manager-search-results .section:hover,
-    .modx-manager-search-results .section:hover h3,
-    .modx-manager-search-results .section:hover p {
-        background-color: #4a7090;
-        border-color: transparent;
-        color: #fff !important;
-    }
     .modx-manager-search-results h3 {
         font-weight: normal;
         color: #aaa;
         font-size: .9em;
         position: absolute;
-        left: 5px;
+        left: 0;
         top: 0;
-        padding: 0.5555555556em 1em 0;
+        padding: 8px;
         width: 95px;
         text-align: right;
-        line-height: 1.666666666667;
+        line-height: 17px;
     }
     .modx-manager-search-results p {
-        padding: 0.5em 1em 0.5em 0.5em;
+        padding: 8px;
         margin-left: 117px;
         border-left: 1px solid #e5e5e5;
         background-color: #f9f9f9;
-        line-height: 1.5;
+        line-height: 17px;
     }
     .modx-manager-search-results a {
         display:block;
         cursor:pointer;
+    }
+    .modx-manager-search-results .section:hover h3,
+    .modx-manager-search-results .section:hover p {
+        color: #fff !important;
+        background-color: #4a7090;
+    }
+    .modx-manager-search-results .section:hover p {
+        border-left-color: transparent;
+    }
+    .modx-manager-search-results .section:hover {
+        color: #fff !important;
+        background-color: #4a7090;
+        border-bottom: 1px solid #385C6F;
+        margin-bottom: -1px;
+        z-index: 10;
     }
 /*	#modx-manager-search input[type=search] {
 		   -moz-appearance:none;
