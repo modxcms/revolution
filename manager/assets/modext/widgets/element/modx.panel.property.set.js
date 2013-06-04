@@ -110,9 +110,9 @@ MODx.tree.PropertySets = function(config) {
         rootVisible: false
         ,enableDD: false
         ,title: ''
-        ,url: MODx.config.connectors_url+'element/propertyset.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getNodes'
+            action: 'element/propertyset/getNodes'
         }
         ,tbar: [{
             text: _('propertyset_new')
@@ -129,9 +129,9 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
         var ar = n.id.split('_');
         if (ar[0] == 'ps') {
             MODx.Ajax.request({
-                url: MODx.config.connectors_url+'element/propertyset.php'
+                url: MODx.config.connector_url
                 ,params: {
-                    action: 'getProperties'
+                    action: 'element/propertyset/getProperties'
                     ,id: ar[1]
                 }
                 ,listeners: {
@@ -151,9 +151,9 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
             });
         } else if (ar[0] == 'el' && ar[2] && ar[3]) {
             MODx.Ajax.request({
-                url: MODx.config.connectors_url+'element/propertyset.php'
+                url: MODx.config.connector_url
                 ,params: {
-                    action: 'getProperties'
+                    action: 'element/propertyset/getProperties'
                     ,id: ar[1]
                     ,element: ar[2]
                     ,element_class: ar[3]
@@ -235,9 +235,9 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
         id = id[1];
         MODx.msg.confirm({
             text: _('propertyset_remove_confirm') 
-            ,url: MODx.config.connectors_url+'element/propertyset.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'element/propertyset/remove'
                 ,id: id
             }
             ,listeners: {
@@ -276,9 +276,9 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
         var d = this.cm.activeNode.attributes;
         MODx.msg.confirm({
             text: _('propertyset_element_remove_confirm') 
-            ,url: MODx.config.connectors_url+'element/propertyset.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'removeElement'
+                action: 'element/propertyset/removeElement'
                 ,element: d.pk
                 ,element_class: d.element_class
                 ,propertyset: d.propertyset
@@ -301,9 +301,9 @@ MODx.window.AddElementToPropertySet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('propertyset_element_add')
-        ,url: MODx.config.connectors_url+'element/propertyset.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'addElement'
+            action: 'element/propertyset/addElement'
         }
         ,width: 400
         ,fields: [{
@@ -360,9 +360,9 @@ MODx.combo.ElementClass = function(config) {
         ,listWidth: 300
         ,pageSize: 20
         ,editable: false
-        ,url: MODx.config.connectors_url+'element/index.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getClasses'
+            action: 'element/getClasses'
         }
     });
     MODx.combo.ElementClass.superclass.constructor.call(this,config);
@@ -387,9 +387,9 @@ MODx.combo.Elements = function(config) {
         ,listWidth: 300
         ,pageSize: 20
         ,editable: false
-        ,url: MODx.config.connectors_url+'element/index.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getListByClass'
+            action: 'element/getListByClass'
             ,element_class: 'modSnippet'
         }
     });
@@ -408,9 +408,9 @@ MODx.window.CreatePropertySet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('propertyset_create')
-        ,url: MODx.config.connectors_url+'element/propertyset.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'create'
+            action: 'element/propertyset/create'
         }
         ,width: 550
         ,fields: [{
@@ -453,9 +453,9 @@ MODx.window.UpdatePropertySet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('propertyset_update')
-        ,url: MODx.config.connectors_url+'element/propertyset.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'element/propertyset/update'
         }
         ,width: 550
         ,fields: [{
@@ -503,9 +503,9 @@ MODx.window.DuplicatePropertySet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('propertyset_duplicate')
-        ,url: MODx.config.connectors_url+'element/propertyset.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'duplicate'
+            action: 'element/propertyset/duplicate'
         }
         ,width: 550
         ,fields: [{

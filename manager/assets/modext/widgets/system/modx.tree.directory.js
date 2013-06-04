@@ -18,7 +18,7 @@ MODx.tree.Directory = function(config) {
         ,enableDrag: true
         ,enableDrop: true
         ,ddGroup: 'modx-treedrop-dd'
-        ,url: MODx.config.connectors_url+'browser/directory.php'
+        ,url: MODx.config.connector_url
         ,hideSourceCombo: false
         ,baseParams: {
             hideFiles: config.hideFiles || false
@@ -27,32 +27,32 @@ MODx.tree.Directory = function(config) {
             ,currentFile: MODx.request.file || ''
             ,source: config.source || 0
         }
-        ,action: 'getList'
+        ,action: 'browser/directory/getList'
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
         ,tbar: [{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-folder-close" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('file_folder_create')}
             ,handler: this.createDirectory
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-file" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/page_white.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('file_create')}
             ,handler: this.createFile
             ,scope: this
             ,hidden: MODx.perm.file_create ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-upload" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_upload.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('upload_files')}
             ,handler: this.uploadFiles
             ,scope: this
             ,hidden: MODx.perm.file_upload ? false : true
         },'->',{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-external-link" style=" font-size: 1.4em; text-align: center; padding-left: 1px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_manager.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('modx_browser')}
             ,handler: this.loadFileManager
@@ -152,7 +152,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 source: this.config.baseParams.source
                 ,from: from
                 ,to: to
-                ,action: this.config.sortAction || 'sort'
+                ,action: this.config.sortAction || 'browser/directory/sort'
                 ,point: dropEvent.point
             }
             ,listeners: {
@@ -203,9 +203,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,quickUpdateFile: function(itm,e) {
         var node = this.cm.activeNode;
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'browser/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'file/get'
+                action: 'browser/file/get'
                 ,file:  node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -284,9 +284,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     
     ,renameNode: function(field,nv,ov) {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'browser/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'rename'
+                action: 'browser/file/rename'
                 ,new_name: nv
                 ,old_name: ov
                 ,file: this.treeEditor.editNode.id
@@ -298,7 +298,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             }
         });
     }
-	
+    
     ,renameDirectory: function(item,e) {
         var node = this.cm.activeNode;
         var r = {
@@ -353,7 +353,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         w.show(e ? e.target : Ext.getBody());
     }
-	
+    
     ,chmodDirectory: function(item,e) {
         var node = this.cm.activeNode;
         var r = {
@@ -376,9 +376,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var node = this.cm.activeNode;
         MODx.msg.confirm({
             text: _('file_folder_remove_confirm')
-            ,url: MODx.config.connectors_url+'browser/directory.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'browser/directory/remove'
                 ,dir: node.attributes.path
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -393,9 +393,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var node = this.cm.activeNode;
         MODx.msg.confirm({
             text: _('file_confirm_remove')
-            ,url: MODx.config.connectors_url+'browser/file.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'browser/file/remove'
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -409,9 +409,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,downloadFile: function(item,e) {
         var node = this.cm.activeNode;
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'browser/file.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'download'
+                action: 'browser/file/download'
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -419,7 +419,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connectors_url+'browser/file.php?action=download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -433,9 +433,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,uploadFiles: function(btn,e) {
         if (!this.uploader) {
             this.uploader = new Ext.ux.UploadDialog.Dialog({
-                url: MODx.config.connectors_url+'browser/file.php'
+                url: MODx.config.connector_url
                 ,base_params: {
-                    action: 'upload'
+                    action: 'browser/file/upload'
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
                 }
@@ -482,7 +482,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         } else { path = '/'; }
 
         this.uploader.setBaseParams({
-            action: 'upload'
+            action: 'browser/file/upload'
             ,path: path
             ,wctx: MODx.ctx || ''
             ,source: this.getSource()
@@ -506,8 +506,8 @@ MODx.window.CreateDirectory = function(config) {
         width: 430
         ,height: 200
         ,title: _('file_folder_create')
-        ,url: MODx.config.connectors_url+'browser/directory.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'browser/directory/create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -547,8 +547,8 @@ MODx.window.ChmodDirectory = function(config) {
         title: _('file_folder_chmod')
         ,width: 430
         ,height: 200
-        ,url: MODx.config.connectors_url+'browser/directory.php'
-        ,action: 'chmod'
+        ,url: MODx.config.connector_url
+        ,action: 'browser/directory/chmod'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -589,8 +589,8 @@ MODx.window.RenameDirectory = function(config) {
         title: _('rename')
         ,width: 430
         ,height: 200
-        ,url: MODx.config.connectors_url+'browser/directory.php'
-        ,action: 'rename'
+        ,url: MODx.config.connector_url
+        ,action: 'browser/directory/rename'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -636,8 +636,8 @@ MODx.window.RenameFile = function(config) {
         title: _('rename')
         ,width: 430
         ,height: 200
-        ,url: MODx.config.connectors_url+'browser/file.php'
-        ,action: 'rename'
+        ,url: MODx.config.connector_url
+        ,action: 'browser/file/rename'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -688,8 +688,8 @@ MODx.window.QuickUpdateFile = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'browser/file.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'browser/file/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -757,8 +757,8 @@ MODx.window.QuickCreateFile = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'browser/file.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'browser/file/create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'

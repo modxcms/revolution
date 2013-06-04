@@ -112,6 +112,7 @@ MODx.Layout = function(config){
             ,autoScroll: true
         },{
             region: 'south'
+            ,applyTo: 'modx-footer'
             ,border: false
             ,id: 'modx-footer'
             ,html: '<p><b>' + MODx.config.site_name + '</b> ' + _('powered_by') + ' <a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Link" onclick="window.open(this.href); return false;" title="Visit the MODX website">MODX®</a></p>'
@@ -214,23 +215,23 @@ MODx.LayoutMgr = function() {
     var _activeMenu = 'menu0';
     return {
         loadPage: function(action, parameters) {
-            var url = '';
             // Handles url, passed as first argument
-            if (isNaN(action)) {
-                url = action;
-            } else {
-                var parts = [];
-                if (action) {
-                    parts.push('a=' + action);
+            var parts = [];
+            if (action) {
+                if (action.substr(0,1) == '?' || (action.substr(0, "index.php?".length) == 'index.php?')) {
+                    parts.push(action);
+                } else {
+                    parts.push('?a=' + action);
                 }
-                if (parameters) {
-                    parts.push(parameters);
-                }
-                url = '?' + parts.join('&');
             }
+            if (parameters) {
+                parts.push(parameters);
+            }
+            var url = parts.join('&');
             if (MODx.fireEvent('beforeLoadPage', url)) {
                 location.href = url;
             }
+            return false;
         }
         ,changeMenu: function(a,sm) {
             if (sm === _activeMenu) return false;

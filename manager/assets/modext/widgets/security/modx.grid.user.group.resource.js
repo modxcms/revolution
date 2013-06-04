@@ -8,9 +8,9 @@ MODx.grid.UserGroupResourceGroup = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-resource-groups'
-        ,url: MODx.config.connectors_url+'security/access/usergroup/resourcegroup.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/access/usergroup/resourcegroup/getList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -61,7 +61,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,id: 'modx-ugrg-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Object'
             }
             ,allowBlank: true
@@ -147,8 +147,8 @@ MODx.window.CreateUGRG = function(config) {
     this.ident = config.ident || 'crgactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('resource_group_add')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/resourcegroup.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/resourcegroup/create'
         ,height: 250
         ,width: 600
         ,fields: [{
@@ -208,7 +208,7 @@ MODx.window.CreateUGRG = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Resource,Object'
                 ,combo: '1'
             }
@@ -267,8 +267,8 @@ MODx.window.UpdateUGRG = function(config) {
     this.ident = config.ident || 'ugrgactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_rgroup_update')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/resourcegroup.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/resourcegroup/update'
         ,height: 250
         ,width: 600
         ,fields: [{
@@ -331,7 +331,7 @@ MODx.window.UpdateUGRG = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Resource,Object'
                 ,combo: '1'
             }

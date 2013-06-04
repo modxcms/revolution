@@ -2,7 +2,7 @@
 MODx.panel.Package = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'workspace/package/index.php'
+        url: MODx.config.connector_url
         ,baseParams: {}
         ,id: 'modx-panel-package'
 		,cls: 'container'
@@ -106,7 +106,7 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'get'
+                action: 'workspace/package/get'
                 ,signature: this.config.signature
             }
             ,listeners: {

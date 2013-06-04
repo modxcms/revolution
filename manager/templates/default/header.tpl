@@ -20,8 +20,8 @@
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&amp;topic=topmenu,file,resource,{$_lang_topics}&amp;action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&amp;wctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {if $_config.compress_js && $_config.compress_js_groups}
 <script src="{$_config.manager_url}min/index.php?g=coreJs1" type="text/javascript"></script>
@@ -55,18 +55,29 @@
         <div id="modx-header">
             <div id="modx-navbar">
                 <div id="modx-user-menu">
+                    <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
+                    <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                     {if $canChangeProfile}
-                        <a class="modx-user-profile" href="?a=security/user">{$username}</a>{else}<span class="modx-user-profile">{$username}</span>
+                    	<li>
+                        	<a class="modx-user-profile" href="?a=security/profile">Edit account
+	                        	<span class="description">Update account email, password or info. </span>
+                        	</a>
+                        </li>
                     {/if}
-                    {if $canLogout}
-                        <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
-                    {/if}
+	            		{if $canLogout}
+							<li>
+								<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
+									<span class="description">Log out from MODX</span>
+								</a>
+							</li>
+						{/if}
+	            	</ul>
                     {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
                         <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
                         <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
                         {if $canModifySettings}
                             <li>
-                                <a href="?a=system/settings">{$_lang.system_settings} 
+                                <a href="?a=system/settings">{$_lang.system_settings}
                                     <span class="description">{$_lang.system_settings_desc}</span>
                                 </a>
                             </li>
@@ -130,39 +141,39 @@
                         </ul>
                     {/if}
                     <a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-question-sign icon-large"></i></a>
-
                 </div>
                 <ul id="modx-topnav">
                     <li id="modx-home-dashboard">
                         <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                     </li>
+                    <li id="modx-manager-search">
+                        <i class="icon-search icon-large"></i>
+                        <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
+                        <div id="modx-manager-search-results" style="display:none">
+                            <div class="section">
+                                <h3>Content</h3>
+                                <p>Welcome to MODX…</p>
+                            </div >
+                            <div class="section">
+                                <h3>Chunks</h3>
+                                <p>welcome.tpl</p>
+                            </div>
+                            <div class="section">
+                                <h3>Templates</h3>
+                                <p>Welcome template</p>
+                            </div>
+                            <div class="section">
+                                <h3>Snippets</h3>
+                                <p>WelcomeBack—display a logged in username</p>
+                            </div>
+                        </div>
+                        <!-- end #modx-manager-search-results -->
+                    </li>
                     {$navb}
                 </ul>
-                <span id="modx-manager-search">
-                    <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
-                    <div id="modx-manager-search-results" style="display:none">
-                        <div class="section">
-                            <h3>Content</h3>
-                            <p>Welcome to MODX…</p>
-                        </div >
-                        <div class="section">
-                            <h3>Chunks</h3>
-                            <p>welcome.tpl</p> 
-                        </div>
-                        <div class="section">
-                            <h3>Templates</h3>
-                            <p>Welcome template</p>
-                        </div>
-                        <div class="section">
-                            <h3>Snippets</h3>
-                            <p>WelcomeBack—display a logged in username</p>
-                        </div>
-                    </div>
-                    <!-- end #modx-manager-search-results -->
-                </span>
             </div>
         </div>
-        
+
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
         <div id="modx-content">

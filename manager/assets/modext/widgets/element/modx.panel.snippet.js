@@ -7,8 +7,10 @@
 MODx.panel.Snippet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'element/snippet.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'element/snippet/get'
+        }
         ,id: 'modx-panel-snippet'
 		,cls: 'container form-with-labels'
         ,class_key: 'modSnippet'

@@ -40,9 +40,9 @@ MODx.grid.ResourceSchedule = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('site_schedule')
-        ,url: MODx.config.connectors_url+'resource/event.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'resource/event/getList'
             ,mode: 'pub_date'
         }
         ,fields: ['id','pagetitle','class_key'

@@ -62,7 +62,7 @@ Ext.extend(MODx.page.UpdateTemplate,MODx.Component, {
                 success: {
                     fn: function(r) {
                         var response = Ext.decode(r.a.response.responseText);
-                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
                     },scope:this}
                 ,hide:{fn:function() {this.destroy();}}
             }

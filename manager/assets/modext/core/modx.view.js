@@ -364,7 +364,7 @@ MODx.browser.View = function(config) {
     
     this._initTemplates();
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'browser/directory.php'
+        url: MODx.config.connector_url
         ,id: this.ident
         ,fields: [
             'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled'
@@ -373,7 +373,7 @@ MODx.browser.View = function(config) {
             ,'menu'
         ]
         ,baseParams: { 
-            action: 'getFiles'
+            action: 'browser/directory/getfiles'
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
             ,source: config.source || 1
@@ -404,9 +404,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         if (typeof(this.dir) != 'object') { d = this.dir; }
         MODx.msg.confirm({
             text: _('file_remove_confirm')
-            ,url: MODx.config.connectors_url+'browser/file.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'browser/file/remove'
                 ,file: d+'/'+node.id
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'

@@ -3,7 +3,10 @@ MODx.grid.ActionDom = function(config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-actiondom'
-        ,url: MODx.config.connectors_url+'security/forms/rule.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/forms/rule/getlist'
+        }
         ,fields: ['id'
             ,'action','controller'
             ,'principal','principal_class'
@@ -58,7 +61,7 @@ MODx.grid.ActionDom = function(config) {
             header: _('usergroup')
             ,dataIndex: 'principal'
             ,width: 150
-            ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true, baseParams: { action: 'getList', addNone: true }}
+            ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true, baseParams: { action: 'security/group/getList', addNone: true }}
             ,editable: true
             ,sortable: true
         },{
@@ -223,7 +226,7 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
     }
     ,clearFilter: function() {        
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'security/forms/rule/getList'
     	};
         Ext.getCmp('modx-adom-filter-action').reset();
         Ext.getCmp('modx-adom-filter-rule-type').reset();
@@ -249,7 +252,7 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'duplicate'
+                action: 'security/forms/rule/duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -262,7 +265,7 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'activate'
+                action: 'security/forms/rule/activate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -278,7 +281,7 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'activateMultiple'
+                action: 'security/forms/rule/activateMultiple'
                 ,rules: cs
             }
             ,listeners: {
@@ -294,7 +297,7 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'deactivate'
+                action: 'security/forms/rule/deactivate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -309,7 +312,7 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'deactivateMultiple'
+                action: 'security/forms/rule/deactivateMultiple'
                 ,rules: cs
             }
             ,listeners: {
@@ -330,7 +333,7 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
             ,text: _('rule_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeMultiple'
+                action: 'security/forms/rule/removeMultiple'
                 ,rules: cs
             }
             ,listeners: {
@@ -351,15 +354,15 @@ MODx.window.CreateActionDom = function(config) {
     Ext.applyIf(config,{
         width: 400
         ,title: _('rule_create')
-        ,url: MODx.config.connectors_url+'security/forms/rule.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/forms/rule/create'
         ,fields: [{
             fieldLabel: _('action')
             ,description: _('action_desc')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
-            ,baseParams: { action: 'getList' ,showNone: 0 }
+            ,baseParams: { action: 'system/action/getList' ,showNone: 0 }
             ,id: 'modx-'+this.ident+'-action'
             ,anchor: '90%'
         },{
@@ -368,7 +371,7 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'principal'
             ,hiddenName: 'principal'
             ,xtype: 'modx-combo-usergroup'
-            ,baseParams: { action: 'getList' ,addNone: true }
+            ,baseParams: { action: 'security/group/getList' ,addNone: true }
             ,id: 'modx-'+this.ident+'-usergroup'
             ,anchor: '90%'
             
@@ -472,8 +475,8 @@ MODx.window.UpdateActionDom = function(config) {
     Ext.applyIf(config,{
         width: 400
         ,title: _('rule_update')
-        ,url: MODx.config.connectors_url+'security/forms/rule.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'security/forms/rule/update'
         ,fields: [{
             name: 'id'
             ,xtype: 'hidden'
@@ -484,7 +487,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
-            ,baseParams: { action: 'getList' ,showNone: false }
+            ,baseParams: { action: 'system/action/getList' ,showNone: false }
             ,id: 'modx-'+this.ident+'-action'
             ,anchor: '90%'
         },{
@@ -493,7 +496,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'principal'
             ,hiddenName: 'principal'
             ,xtype: 'modx-combo-usergroup'
-            ,baseParams: { action: 'getList' ,addNone: true }
+            ,baseParams: { action: 'security/user/getList' ,addNone: true }
             ,id: 'modx-'+this.ident+'-usergroup'
             ,anchor: '90%'
             
@@ -599,8 +602,8 @@ MODx.combo.RuleTypes = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
-        ,url: MODx.config.connectors_url+'security/forms/rule.php'
-        ,baseParams: { action: 'getTypeList' }
+        ,url: MODx.config.connector_url
+        ,baseParams: { action: 'security/forms/rule/getTypeList' }
     });
     MODx.combo.RuleTypes.superclass.constructor.call(this,config);
 };

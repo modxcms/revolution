@@ -13,14 +13,15 @@ MODx.tree.Element = function(config) {
         ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,title: ''
-        ,url: MODx.config.connectors_url+'element/index.php'
+        ,url: MODx.config.connector_url
+        ,action: 'element/getnodes'
         ,useDefaultToolbar: true
         ,baseParams: {
             currentElement: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
         }
         ,tbar: [{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-columns" style=" font-size: 1.4em; text-align: center; padding-left: 3px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/template.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
@@ -29,7 +30,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-list-alt" style=" font-size: 1.4em; text-align: center; padding-left: 1px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/tv.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
@@ -38,7 +39,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-th-large" style=" font-size: 1.4em; text-align: center; padding-left: 2px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/chunk.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
@@ -47,7 +48,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-code" style=" font-size: 1.4em; text-align: center; padding-left: 2px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/snippet.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
@@ -56,7 +57,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-cogs" style=" font-size: 1.4em; text-align: center; padding-left: 1px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/plugin.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
@@ -65,7 +66,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
         },{
-            html: '<tbody class="x-btn-small x-btn-icon-small-left"><tr><td class="x-btn-tl"><i>&nbsp;</i></td><td class="x-btn-tc"></td><td class="x-btn-tr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-ml"><i>&nbsp;</i></td><td class="x-btn-mc"><button type="button" id="ext-gen115" class=" x-btn-text" style=" position: relative; padding: 0 !important; text-align: center;"><i class="icon-folder-close" style=" font-size: 1.4em; text-align: center; padding-left: 2px;">&nbsp;</i></button></td><td class="x-btn-mr"><i>&nbsp;</i></td></tr><tr><td class="x-btn-bl"><i>&nbsp;</i></td><td class="x-btn-bc"></td><td class="x-btn-br"><i>&nbsp;</i></td></tr></tbody>'
+            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('new_category')}
             ,handler: function() {
@@ -122,15 +123,15 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-		
+        
     ,removeCategory: function(itm,e) {
         var id = this.cm.activeNode.attributes.data.id;
         MODx.msg.confirm({
             title: _('warning')
             ,text: _('category_confirm_delete')
-            ,url: MODx.config.connectors_url+'element/category.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'element/category/remove'
                 ,id: id
             }
             ,listeners: {
@@ -140,7 +141,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	    
+        
     ,duplicateElement: function(itm,e,id,type) {
         var r = {
             id: id
@@ -157,7 +158,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-	
+    
     ,removeElement: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
@@ -167,17 +168,17 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 type: oar[0]
                 ,name: this.cm.activeNode.attributes.name
             })
-            ,url: MODx.config.connectors_url+'element/'+oar[0]+'.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'element/'+oar[0]+'/remove'
                 ,id: oar[2]
             }
             ,listeners: {
                 'success': {fn:function() {
                     this.cm.activeNode.remove();
                     /* if editing the element being removed */
-                    if (MODx.request.a == MODx.action['element/'+oar[0]+'/update'] && MODx.request.id == oar[2]) {
-                        MODx.loadPage(MODx.action['welcome']);
+                    if (MODx.request.a == 'element/'+oar[0]+'/update' && MODx.request.id == oar[2]) {
+                        MODx.loadPage('welcome');
                     }
                 },scope:this}
             }
@@ -188,9 +189,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'activate'
+                action: 'element/plugin/activate'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -205,9 +206,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'deactivate'
+                action: 'element/plugin/deactivate'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -236,9 +237,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     
     ,quickUpdate: function(itm,e,type) {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/'+type+'.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'get'
+                action: 'element/'+type+'/get'
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -259,7 +260,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	
+    
     ,_createElement: function(itm,e,t) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
@@ -283,7 +284,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         }
     }
-		
+        
     ,_handleDrop: function(e) {
         var target = e.target;
         if (e.point == 'above' || e.point == 'below') {return false;}
@@ -390,7 +391,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 ,type: a.type
                 ,pk: a.pk
                 ,handler: function(itm,e) {
-                    MODx.loadPage(MODx.action['element/'+itm.type+'/update'],
+                    MODx.loadPage('element/'+itm.type+'/update',
                         'id='+itm.pk);
                 }
             });
@@ -561,8 +562,8 @@ MODx.window.DuplicateElement = function(config) {
     }
     Ext.applyIf(config,{
         title: _('element_duplicate')
-        ,url: MODx.config.connectors_url+'element/'+config.record.type+'.php'
-        ,action: 'duplicate'
+        ,url: MODx.config.connector_url
+        ,action: 'element/'+config.record.type+'/duplicate'
         ,fields: flds
         ,labelWidth: 150
     });
@@ -588,8 +589,8 @@ MODx.window.RenameCategory = function(config) {
         title: _('category_rename')
         ,height: 150
         ,width: 350
-        ,url: MODx.config.connectors_url+'element/category.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/category/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
