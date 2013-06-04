@@ -392,7 +392,8 @@ class modX extends xPDO {
             if (!is_null($config) || $forceNew || empty(self::$instances)) {
                 $id = uniqid($class);
             } else {
-                $id = key(self::$instances);
+                $instances =& self::$instances;
+                $id = key($instances);
             }
         }
         if ($forceNew || !array_key_exists($id, self::$instances) || !(self::$instances[$id] instanceof $class)) {
