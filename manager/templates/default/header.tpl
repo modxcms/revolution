@@ -154,7 +154,7 @@
                     </li>
                     <li>
                         <div id="modx-manager-search">
-                        	<i class="icon-search icon-large"></i>
+                        	<i class="icon-magic icon-large"></i>
                         </div>
                     </li>
                     {$navb}
