@@ -43,10 +43,6 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
     ));
     @session_write_close();
     die();
-} else {
-    @session_write_close();
-    var_dump($modx->context->toArray());
-    die();
 }
 
 if ($ctx == 'mgr') {
