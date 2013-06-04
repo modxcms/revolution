@@ -3,7 +3,7 @@ MODx.SearchBar = function(config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        renderTo: 'nav-search'
+        renderTo: 'modx-manager-search'
         ,listClass: 'modx-manager-search-results'
         ,emptyText: 'Awesomesauce…'
         ,id: 'modx-awesomebar'
@@ -90,7 +90,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         this.animate(true);
     }
     ,animate: function(blur) {
-        var container = Ext.get('nav-search')
+        var container = Ext.get('modx-manager-search')
             ,to = blur ? this.originalWidth : 300
             ,me = this;
         container.animate({
