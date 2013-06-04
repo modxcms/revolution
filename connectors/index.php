@@ -34,7 +34,7 @@ $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 
 $modx->initialize($ctx);
 
 if (defined('MODX_REQP') && MODX_REQP === false) {
-} else if (!$modx->context->checkPolicy('load')) {
+} else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
     header('HTTP/1.1 401 Not Authorized');
     echo $modx->toJSON(array(
@@ -42,6 +42,10 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
         'code' => 401,
     ));
     @session_write_close();
+    die();
+} else {
+    @session_write_close();
+    var_dump($modx->context->toArray());
     die();
 }
 
