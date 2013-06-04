@@ -148,6 +148,8 @@ class modCacheManager extends xPDOCacheManager {
 
                 /* cache the Context ACL policies */
                 $results['policies'] = $obj->findPolicy($contextKey);
+            } else {
+                $results = false;
             }
         } else {
             $results = $this->getOption("{$key}_results", $options, array());

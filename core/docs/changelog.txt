@@ -7,6 +7,12 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.8-pl (June 4, 2013)
+====================================
+- [#9450] Prevent non-existent Context initialization
+- [#9896] Improve performance of modTemplateVar::getRenderDirectories()
+- [#9859] Prevent conditional output filter recursion
+- [#6138] Handle offline errors in RSS feeds
 - Refresh file tree after removing file
 - [#9946] Do not cache modResource::$_isForward
 - Force browser to root on Media Source change

@@ -392,7 +392,8 @@ class modX extends xPDO {
             if (!is_null($config) || $forceNew || empty(self::$instances)) {
                 $id = uniqid($class);
             } else {
-                $id = key(self::$instances);
+                $instances =& self::$instances;
+                $id = key($instances);
             }
         }
         if ($forceNew || !array_key_exists($id, self::$instances) || !(self::$instances[$id] instanceof $class)) {
@@ -1834,7 +1835,7 @@ class modX extends xPDO {
 
     /**
      * Logs a manager action.
-     * 
+     *
      * @param string $action The action to pull from the lexicon module.
      * @param string $class_key The class key that the action is being performed on.
      * @param mixed $item The primary key id or array of keys to grab the object with.
@@ -2099,7 +2100,7 @@ class modX extends xPDO {
 
     /**
      * Add an extension package to MODX
-     * 
+     *
      * @param string $name
      * @param string $path
      * @param array $options
@@ -2153,7 +2154,7 @@ class modX extends xPDO {
 
     /**
      * Remove an extension package from MODX
-     * 
+     *
      * @param string $name
      * @return boolean
      */
@@ -2239,6 +2240,7 @@ class modX extends xPDO {
         }
         if ($this->context) {
             if (!$this->context->prepare((boolean) $regenerate, is_array($options) ? $options : array())) {
+                $this->context= null;
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
                 //This fixes error with multiple contexts
