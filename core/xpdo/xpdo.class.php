@@ -2481,6 +2481,8 @@ class xPDO {
                 $quoted = (integer) trim($quoted, "'");
                 break;
             default:
+                $this->log(xPDO::LOG_LEVEL_ERROR, 'Unknown quote type', '', __METHOD__, __FILE__, __LINE__);
+                $quoted = trim($quoted);
                 break;
         }
         return $quoted;
