@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.2.8-pl (June 4, 2013)
 ====================================
+- Prevent empty HTTP_MODAUTH from succeeding
 - [#9450] Prevent non-existent Context initialization
 - [#9896] Improve performance of modTemplateVar::getRenderDirectories()
 - [#9859] Prevent conditional output filter recursion
