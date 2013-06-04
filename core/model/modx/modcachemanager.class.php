@@ -97,8 +97,8 @@ class modCacheManager extends xPDOCacheManager {
                         }
                         $results['resourceMap'][(integer) $r->parent][] = (integer) $r->id;
                         if ($this->modx->getOption('friendly_urls', $contextConfig, false) && $this->getOption('cache_alias_map', $options, false)) {
-                            if (array_key_exists($r->uri, $results['aliasMap'])) {
-                                $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
+                            if (isset($results['aliasMap'][$r->uri])) {
+                                $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}. Turn off cache_alias_map in System Settings to prevent these errors.");
                                 continue;
                             }
                             $results['aliasMap'][$r->uri]= (integer) $r->id;
