@@ -32,7 +32,7 @@ MODx.SearchBar = function(config) {
                         case 'Templates':
                             return 'columns';
                         case 'Snippets':
-                            return 'puzzle-code';
+                            return 'code';
                         case 'TVs':
                             return 'asterisk';
                         case 'Plugins':
