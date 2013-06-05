@@ -490,11 +490,21 @@ li:hover #modx-manager-search {
         line-height: 17px;
     }
     .modx-manager-search-results a {
-        display:block;
+        display:inline-block;
         cursor:pointer;
+        margin-left: 6px;
+    }
+    .modx-manager-search-results i {
+        color: #4a7090;
+    }
+    .modx-manager-search-results a i {
+        color: inherit;
+        font-style: normal;
+        opacity: 0.5;
     }
     .modx-manager-search-results .section:hover h3,
-    .modx-manager-search-results .section:hover p {
+    .modx-manager-search-results .section:hover p,
+    .modx-manager-search-results .section:hover i {
         color: #fff !important;
         background-color: #4a7090;
     }
