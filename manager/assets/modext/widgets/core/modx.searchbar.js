@@ -19,9 +19,23 @@ MODx.SearchBar = function(config) {
             '<tpl exec="this.type = values.type"></tpl>',
                 '<h3>{type}</h3>',
             '</tpl>',
-                '<p><a onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></a></p>',
+                '<p><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl><a onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"> - <i>{description}</i></tpl></a></p>',
             '</div >',
-            '</tpl>'
+            '</tpl>', {
+                getClass: function(values) {
+                    //console.log('in test!', values);
+                    switch (values.type) {
+                        case 'Chunks':
+                            return 'th';
+                        case 'Plugins':
+                            return 'puzzle-piece';
+                        case 'Snippets':
+                            return 'puzzle-code';
+                        case 'Resources':
+                            return 'file-alt';
+                    }
+                }
+            }
         )
         ,store: new Ext.data.JsonStore({
             url: MODx.config.connector_url
