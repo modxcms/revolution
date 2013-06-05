@@ -490,15 +490,18 @@ li:hover #modx-manager-search {
         line-height: 17px;
     }
     .modx-manager-search-results a {
-        display:inline-block;
+        display: inline-block;
         cursor:pointer;
-        margin-left: 6px;
+        padding-left: 18px;
+        position: relative;
     }
     .modx-manager-search-results i {
         color: #4a7090;
+        position: absolute;
+        top:2px;
+        left:0;
     }
-    .modx-manager-search-results a i {
-        color: inherit;
+    .modx-manager-search-results em {
         font-style: normal;
         opacity: 0.5;
     }

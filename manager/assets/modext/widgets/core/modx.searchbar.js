@@ -19,7 +19,7 @@ MODx.SearchBar = function(config) {
             '<tpl exec="this.type = values.type"></tpl>',
                 '<h3>{type}</h3>',
             '</tpl>',
-                '<p><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl><a onmousedown="MODx.loadPage(\'?a={action}\');">{name}<tpl if="description"><i> – {description}</i></tpl></a></p>',
+                '<p><a onmousedown="MODx.loadPage(\'?a={action}\');"><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
             '</div >',
             '</tpl>', {
                 getClass: function(values) {
@@ -33,6 +33,8 @@ MODx.SearchBar = function(config) {
                             return 'columns';
                         case 'Snippets':
                             return 'puzzle-code';
+                        case 'TVs':
+                            return 'asterisk';
                         case 'Plugins':
                             return 'puzzle-piece';
                     }
