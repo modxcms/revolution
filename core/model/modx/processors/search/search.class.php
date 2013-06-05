@@ -25,17 +25,20 @@ class modSearchProcessor extends modProcessor
             } else {
                 // Search elements & resources
                 $output = $this->searchResources($query, $output);
+                if ($this->modx->hasPermission('view_chunk')) {
+                    $output = $this->searchChunks($query, $output);
+                }
+                if ($this->modx->hasPermission('view_template')) {
+                    $output = $this->searchTemplates($query, $output);
+                }
                 if ($this->modx->hasPermission('view_tv')) {
                     $output = $this->searchTVs($query, $output);
                 }
                 if ($this->modx->hasPermission('view_snippet')) {
                     $output = $this->searchSnippets($query, $output);
                 }
-                if ($this->modx->hasPermission('view_chunk')) {
-                    $output = $this->searchChunks($query, $output);
-                }
-                if ($this->modx->hasPermission('view_template')) {
-                    $output = $this->searchTemplates($query, $output);
+                if ($this->modx->hasPermission('view_plugin')) {
+                    $output = $this->searchPlugins($query, $output);
                 }
             }
         }
@@ -167,6 +170,7 @@ class modSearchProcessor extends modProcessor
         $c = $this->modx->newQuery('modSnippet');
         $c->where(array(
             'name:LIKE' => '%' . $query . '%',
+            'OR:description:LIKE' => '%' . $query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -191,6 +195,7 @@ class modSearchProcessor extends modProcessor
         $c = $this->modx->newQuery($class);
         $c->where(array(
             'name:LIKE' => '%' . $query . '%',
+            'OR:description:LIKE' => '%' . $query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -215,6 +220,7 @@ class modSearchProcessor extends modProcessor
         $c = $this->modx->newQuery($class);
         $c->where(array(
             'templatename:LIKE' => '%' . $query . '%',
+            'OR:description:LIKE' => '%' . $query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -233,12 +239,38 @@ class modSearchProcessor extends modProcessor
         return $output;
     }
 
+    public function searchPlugins($query, array $output)
+    {
+        $class = 'modPlugin';
+        $c = $this->modx->newQuery($class);
+        $c->where(array(
+            'name:LIKE' => '%' . $query . '%',
+            'OR:description:LIKE' => '%' . $query .'%',
+        ));
+
+        $c->limit($this->maxResults);
+
+        $collection = $this->modx->getCollection($class, $c);
+        /** @var modPlugin $record */
+        foreach ($collection as $record) {
+            $output[] = array(
+                'name' => $record->get('name'),
+                'action' => 'element/plugin/update&id=' . $record->get('id'),
+                'description' => $record->get('description'),
+                'type' => 'Plugins',
+            );
+        }
+
+        return $output;
+    }
+
     public function searchTVs($query, array $output)
     {
         $class = 'modTemplateVar';
         $c = $this->modx->newQuery($class);
         $c->where(array(
             'name:LIKE' => '%' . $query . '%',
+            'OR:description:LIKE' => '%' . $query .'%',
         ));
 
         $c->limit($this->maxResults);
