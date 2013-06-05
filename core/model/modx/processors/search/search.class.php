@@ -270,7 +270,7 @@ class modSearchProcessor extends modProcessor
         $c = $this->modx->newQuery($class);
         $c->where(array(
             'name:LIKE' => '%' . $query . '%',
-            'OR:description:LIKE' => '%' . $query .'%',
+            'OR:caption:LIKE' => '%' . $query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -281,7 +281,7 @@ class modSearchProcessor extends modProcessor
             $output[] = array(
                 'name' => $record->get('name'),
                 'action' => 'element/tv/update&id=' . $record->get('id'),
-                'description' => $record->get('description'),
+                'description' => $record->get('caption'),
                 'type' => 'TVs',
             );
         }
