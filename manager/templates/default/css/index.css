@@ -444,16 +444,10 @@ li:hover #modx-manager-search {
 	}
     .modx-manager-search-results {
         width:420px !important;
-/*        padding: 1em 0;
-        position: absolute;
-        z-index:100;
-        top:41px;
-        left:0;*/
+        margin: 2px 0 0;
         background: rgba(240,240,240,.95);
         border-radius: 0 0 5px 5px;
-        box-shadow: 0 2px 4px 0 rgba(30,30,30,.2);
-        /*transition: all 1s ease-in-out;
-        -webkit-transition: all 1s ease-in-out;*/
+        box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
         border: 1px solid #d7d5d5;
         -webkit-box-sizing: border-box;
            -moz-box-sizing: border-box;
