@@ -20,6 +20,7 @@
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/widgets/core/modx.searchbar.js" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
@@ -39,6 +40,11 @@
           e.style.display = 'block';
     }
 //-->
+</script>
+<script type="text/javascript">
+    Ext.onReady(function() {
+        new MODx.SearchBar;
+    });
 </script>
 
 
@@ -146,28 +152,10 @@
                     <li id="modx-home-dashboard">
                         <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                     </li>
-                    <li id="modx-manager-search">
-                        <i class="icon-search icon-large"></i>
-                        <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
-                        <div id="modx-manager-search-results" style="display:none">
-                            <div class="section">
-                                <h3>Content</h3>
-                                <p>Welcome to MODX…</p>
-                            </div >
-                            <div class="section">
-                                <h3>Chunks</h3>
-                                <p>welcome.tpl</p>
-                            </div>
-                            <div class="section">
-                                <h3>Templates</h3>
-                                <p>Welcome template</p>
-                            </div>
-                            <div class="section">
-                                <h3>Snippets</h3>
-                                <p>WelcomeBack—display a logged in username</p>
-                            </div>
+                    <li>
+                        <div id="modx-manager-search">
+                        	<i class="icon-magic icon-large"></i>
                         </div>
-                        <!-- end #modx-manager-search-results -->
                     </li>
                     {$navb}
                 </ul>
