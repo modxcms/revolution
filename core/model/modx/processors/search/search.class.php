@@ -40,6 +40,7 @@ class modSearchProcessor extends modProcessor
                 if ($this->modx->hasPermission('view_plugin')) {
                     $output = $this->searchPlugins($query, $output);
                 }
+                $output = $this->searchUsers($query, $output);
             }
         }
 
@@ -283,6 +284,37 @@ class modSearchProcessor extends modProcessor
                 'action' => 'element/tv/update&id=' . $record->get('id'),
                 'description' => $record->get('caption'),
                 'type' => 'TVs',
+            );
+        }
+
+        return $output;
+    }
+
+    public function searchUsers($query, array $output)
+    {
+        $class = 'modUser';
+        $c = $this->modx->newQuery($class);
+        $c->select(array(
+            $this->modx->getSelectColumns($class, $class),
+            $this->modx->getSelectColumns('modUserProfile', 'Profile', ''),
+        ));
+        $c->leftJoin('modUserProfile', 'Profile');
+        $c->where(array(
+            'username:LIKE' => '%' . $query . '%',
+            'OR:Profile.fullname:LIKE' => '%' . $query .'%',
+            'OR:Profile.email:LIKE' => '%' . $query .'%',
+        ));
+
+        $c->limit($this->maxResults);
+
+        $collection = $this->modx->getCollection($class, $c);
+        /** @var modTemplate $record */
+        foreach ($collection as $record) {
+            $output[] = array(
+                'name' => $record->get('username'),
+                'action' => 'security/user/update&id=' . $record->get('id'),
+                'description' => $record->get('fullname') .' / '. $record->get('email'),
+                'type' => 'Users',
             );
         }
 
