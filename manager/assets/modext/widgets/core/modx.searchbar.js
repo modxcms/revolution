@@ -7,6 +7,7 @@ MODx.SearchBar = function(config) {
         ,listClass: 'modx-manager-search-results'
         ,emptyText: 'Awesomesauce…'
         ,id: 'modx-awesomebar'
+        ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
         ,autoSelect: false
         ,minChars: 1
@@ -166,6 +167,15 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         }
         var record = this.getStore().getAt(this.selectedIndex);
         this.setValue(record.data[this.valueField]);
+    }
+    ,getViewPortSize: function() {
+        var height = 300;
+        if (window.innerHeight !== 'undefined') {
+            height = window.innerHeight;
+        }
+        //console.log(height);
+
+        return height - 70;
     }
 });
 Ext.reg('modx-searchbar', MODx.SearchBar);
