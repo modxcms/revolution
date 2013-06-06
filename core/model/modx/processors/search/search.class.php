@@ -2,9 +2,7 @@
 /**
  * Class modSearchProcessor
  * Searches for elements (all but plugins) & resources
- *
- * @todo : take care of users rights (ie. view/edit elements/contexts/resources...)
- */
+ **/
 class modSearchProcessor extends modProcessor
 {
     public $maxResults = 5;
@@ -40,7 +38,9 @@ class modSearchProcessor extends modProcessor
                 if ($this->modx->hasPermission('view_plugin')) {
                     $output = $this->searchPlugins($query, $output);
                 }
-                $output = $this->searchUsers($query, $output);
+                if ($this->modx->hasPermission('view_user')) {
+                    $output = $this->searchUsers($query, $output);
+                }
             }
         }
 
@@ -308,7 +308,7 @@ class modSearchProcessor extends modProcessor
         $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
-        /** @var modTemplate $record */
+        /** @var modUserProfile $record */
         foreach ($collection as $record) {
             $output[] = array(
                 'name' => $record->get('username'),

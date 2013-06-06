@@ -38,6 +38,10 @@ MODx.SearchBar = function(config) {
                             return 'asterisk';
                         case 'Plugins':
                             return 'puzzle-piece';
+                        case 'Users':
+                            return 'user';
+                        case 'Actions':
+                            return 'mail-forward';
                     }
                 }
             }
