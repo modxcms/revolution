@@ -488,6 +488,7 @@ li:hover #modx-manager-search {
 .modx-manager-search-results p {
     padding: 4px 8px;
     line-height: 17px;
+    margin: 0;
 }
 .modx-manager-search-results h3 {
     font-weight: normal;
