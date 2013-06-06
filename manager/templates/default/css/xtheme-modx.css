@@ -413,8 +413,9 @@ textarea.x-form-field, .x-form-textarea{
     background-image: url(../images/modx-theme/form/search-trigger.gif);
 }
 .x-trigger-wrap-focus, .x-form-focus, textarea.x-form-focus {
-    border-color: #658F1A;
+    border: 3px solid #658F1A;
     background-color: #FFFFFF;
+    margin: -2px;
 }
 
 .x-form-invalid, textarea.x-form-invalid{
