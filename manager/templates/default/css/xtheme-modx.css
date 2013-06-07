@@ -141,16 +141,15 @@ ul.x-tab-strip-top li.x-tab-strip-active {
     overflow: hidden;
     border: 1px solid #999;
     border-bottom: 0 none;
-    padding:0 0 1px;
+    padding:2px 0 0;
 	text-shadow: none;
 	filter: none;
 }
 ul.x-tab-strip span.x-tab-strip-text {
     font: normal 1em arial, tahoma, helvetica;
-    color: #aaa;
     text-shadow: 0 1px 0 #fff;
     color: #777;
-    padding: 4px 0 5px;
+    padding: 5px 11px;
 }
 ul.x-tab-strip span.x-tab-strip-text:hover {
     color: #444;
@@ -158,7 +157,6 @@ ul.x-tab-strip span.x-tab-strip-text:hover {
 ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text {
 	background-color: transparent;
 	padding-bottom: 8px !important;
-	margin-top: 2px;
 }
 
 ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right {

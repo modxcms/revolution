@@ -101,8 +101,6 @@ input::-moz-focus-inner {
 }
 ul.x-tab-strip-top li.x-tab-strip-active {
     box-shadow: 0 1px 0 #fff, 3px 1px 0 rgba(0,0,0,.1);
-    border-bottom: 2px solid #fff !important;
-    margin-bottom: -1px;
 }
 .x-tab-panel-header-plain {
     margin-left: 15px;
@@ -1501,6 +1499,7 @@ span.required {
 .vertical-tabs-header{
 	width: 150px !important;
 	padding: 13px 0 !important;
+    margin-left: 0;
 	float: left;
     background-color: transparent !important;
 }
@@ -1531,7 +1530,7 @@ span.required {
 }
 .vertical-tabs-header ul.x-tab-strip-top li.x-tab-strip-active{
 	background: none repeat scroll 0 0 #fff !important;
-	border: 0 none;
+    border-width: 0 0 1px;
 }
 .vertical-tabs-header ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text{
 	color: #555;
