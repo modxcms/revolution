@@ -500,3 +500,9 @@ MODx.grid.ComboBoxRenderer = function(combo, gridId) {
         return getValue(value);
     };
 };
+
+
+Ext.Button.buttonTemplate = new Ext.Template(
+    '<span id="{4}" class="x-btn {1} {2} {3}" unselectable="on"><button type="{0}"></button></span>'
+);
+Ext.Button.buttonTemplate.compile();

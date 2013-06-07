@@ -506,8 +506,7 @@ textarea.x-form-field, .x-form-textarea{
     background:-o-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
     background:-ms-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-    background:linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
-    border-collapse:separate;
+    background:linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);;
     line-height:1;
     margin:0 1px;
     text-decoration:none;
@@ -516,20 +515,19 @@ textarea.x-form-field, .x-form-textarea{
     border-width:1px;
     position:relative;
     cursor:pointer;
+    display: inline-block;
+    *display: inline;
+    padding: 7px 3px;
     zoom: 1;
 }
 .ext-ie9 .x-btn{ filter:none; }
 .x-btn button {
     color:#53595f;
     font:bold 11px tahoma, verdana, helvetica, sans-serif;
-    height:24px !important;
     cursor:pointer;
-    padding:4px 6px 5px!important;
+    height: 16px;
     text-shadow:0 1px 0 #fcfcfc;
-}
-.x-btn em {
-    font-style:normal;
-    font-weight:normal;
+    vertical-align: middle;
 }
 .x-btn-icon {
     background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(222,222,222,1);
@@ -540,10 +538,11 @@ textarea.x-form-field, .x-form-textarea{
     background:-ms-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dedede,GradientType=0);
     background:linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    padding: 1px 3px;
+    padding: 7px;
 }
-.x-btn-icon button{
-	height: 20px !important;
+.x-btn-icon.x-btn-small .x-btn-text{
+    width: 16px;
+    height: 16px;
 }
 .x-html-editor-tb .x-btn {
     -moz-box-shadow:none;
