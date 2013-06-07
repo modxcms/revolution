@@ -366,7 +366,7 @@ ul.x-tab-strip-top li.x-tab-strip-active {
     position:fixed;
     right: 15px;
     top: 45px;
-    z-index:12;
+    z-index:9;
     zoom: 1;
 }
 #modx-action-buttons {
@@ -561,6 +561,7 @@ li:hover #modx-manager-search {
     right: 53px;
     background: #eee;
     color: rgba(255,255,255,0.9);
+    z-index: 20;
 }
 #modx-navbar ul#modx-user-submenu {
     right: 107px;
@@ -574,12 +575,13 @@ li:hover #modx-manager-search {
     position: absolute;
     z-index: 10000;
     left: 0;
-    top: 42px;
+    top: 39px;
     margin: 0 0 0 -1px;
     padding: 0;
     display: none;
     float: left;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    border: 1px solid #d7d5d5;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
