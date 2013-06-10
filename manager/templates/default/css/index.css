@@ -294,12 +294,6 @@ ul.x-tab-strip-top li.x-tab-strip-active {
     padding-bottom: 4px;
 }
 
-/* tabs */
-.x-tab-strip-top {
-    border-bottom: 1px solid #ddd;
-}
-.x-tab-strip span.x-tab-strip-text { font-size: 12px; }
-
 /* form fields */
 .modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 14px; }
 .modx-form .x-form-text {
