@@ -270,7 +270,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
    */
   createInputFile : function()
   {
-    var button_container = this.el.child('tbody' /* JYJ '.x-btn-center'*/);
+    var button_container = this.el;
         button_container.position('relative');
        this.wrap = this.el.wrap({cls:'tbody'});    
        this.input_file = this.wrap.createChild({
