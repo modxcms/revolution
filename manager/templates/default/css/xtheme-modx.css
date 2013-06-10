@@ -106,79 +106,52 @@
 
 .x-tab-strip-wrap {
     padding-left: 0;
+    /* border-bottom: 1px solid #ddd; */
+}
+ul.x-tab-strip,
+ul.x-tab-strip-top {
+    overflow: hidden;
 }
 
 ul.x-tab-strip-top {
-	background-color:#f7f7f7;
-	background-image:none;
-	border-bottom-color:transparent;
+	background-color: #f7f7f7;
+	background-image: none;
+	border-bottom-color: transparent;
 }
 ul.x-tab-strip-top li {
 	-moz-border-radius:4px 4px 0 0;
 	-webkit-border-radius:4px 4px 0 0;
 	-khtml-border-radius:4px 4px 0 0;
 	border-radius:4px 4px 0 0;
-	border-color: transparent;
-	border-style: solid solid none;
-	border-width:1px 1px 0;
-	margin:1px 0 1px 2px;
-	padding:2px 0;
+	border: 1px solid transparent;
+	border-width: 1px 1px 0;
+	margin: 1px 0 1px 2px;
+	padding: 2px 0;
 }
-.ext-ie9 ul.x-tab-strip-top li{filter: none}
+ul.x-tab-strip li.x-tab-strip-active {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: #fff;
+    margin-bottom: -1px;
+}
+
 .x-tab-strip-closable{ padding-right: 15px !important; }
-.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close{
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
 	right: 8px;
 	top: 11px;
 }
 ul.x-tab-strip-top li:first-child { 
     margin-left:0; 
 }
-.ext-ie9 ul.x-tab-strip-top li.x-tab-strip-over{
-    filter: none
-}
-ul.x-tab-strip-top li.x-tab-strip-active {
-    background: #fff none !important;
-    overflow: hidden;
-    border: 1px solid #999;
-    border-bottom: 0 none;
-    padding:2px 0 0;
-	text-shadow: none;
-	filter: none;
-}
-ul.x-tab-strip span.x-tab-strip-text {
-    font: normal 1em arial, tahoma, helvetica;
-    text-shadow: 0 1px 0 #fff;
+ul.x-tab-strip li {
     color: #777;
     padding: 5px 11px;
 }
-ul.x-tab-strip span.x-tab-strip-text:hover {
+ul.x-tab-strip li:hover,
+ul.x-tab-strip li.x-tab-strip-active {
     color: #444;
 }
-ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text {
-	background-color: transparent;
-	padding-bottom: 8px !important;
-}
 
-ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right {
-	border:1px solid transparent;
-	margin-bottom:-2px;
-}
-.ext-ie7 ul.x-tab-strip-top li.x-tab-strip-active {
-	margin-bottom:-1px;
-}
-ul.x-tab-strip-top .x-tab-right {
-	padding-left: 8px;
-}
-ul.x-tab-strip-top .x-tab-left {
-	padding-right: 8px;
-}
-ul.x-tab-strip-top .x-tab-right, 
-ul.x-tab-strip-top .x-tab-left, 
-ul.x-tab-strip-top .x-tab-strip-inner {
-	background-image:none;
-	border:1px solid transparent;
-	border-bottom:0 none;
-}
 ul.x-tab-strip-bottom {
 	background-color:#f4f4f4;
 	border-top-color:#dfdfdf;
