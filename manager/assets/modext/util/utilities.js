@@ -508,8 +508,8 @@ Ext.Button.buttonTemplate = new Ext.Template(
 Ext.Button.buttonTemplate.compile();
 
 Ext.TabPanel.prototype.itemTpl = new Ext.Template(
-     '<li class="{cls}" id="{id}"><a class="x-tab-strip-close {iconCls}"></a>',
-     '<span class="x-tab-strip-text">{text}</span></li>'
+     '<li class="{cls}" id="{id}"><a class="x-tab-strip-close"></a>',
+     '<span class="x-tab-strip-text {iconCls}">{text}</span></li>'
 );
 Ext.TabPanel.prototype.itemTpl.disableFormats = true;
 Ext.TabPanel.prototype.itemTpl.compile();
