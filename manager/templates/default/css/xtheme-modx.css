@@ -491,7 +491,7 @@ textarea.x-form-field, .x-form-textarea{
     cursor:pointer;
     display: inline-block;
     *display: inline;
-    padding: 7px 3px;
+    padding: 7px;
     zoom: 1;
 }
 .ext-ie9 .x-btn{ filter:none; }
@@ -503,20 +503,12 @@ textarea.x-form-field, .x-form-textarea{
     text-shadow:0 1px 0 #fcfcfc;
     vertical-align: middle;
 }
-.x-btn-icon {
-    background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(222,222,222,1);
-    background:-moz-linear-gradient(center bottom,#dedede 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#dedede));
-    background:-webkit-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    background:-o-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    background:-ms-linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dedede,GradientType=0);
-    background:linear-gradient(center bottom,#dedede 0%,#ffffff 100%);
-    padding: 7px;
-}
-.x-btn-icon.x-btn-small .x-btn-text{
+.x-btn-icon button{
     width: 16px;
     height: 16px;
+}
+.x-btn-text-icon button{
+    padding-left: 20px !important;
 }
 .x-html-editor-tb .x-btn {
     -moz-box-shadow:none;
@@ -634,10 +626,6 @@ textarea.x-form-field, .x-form-textarea{
 .x-btn-group-mr {
     background-image:none;
     padding-right:1px;
-}
-.ext-gecko .x-btn button, .ext-webkit .x-btn button {
-    padding-left:8px;
-    padding-right:8px;
 }
 .x-btn-mc em.x-btn-arrow {
     background-position:right 9px;
