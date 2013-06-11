@@ -503,7 +503,7 @@ MODx.grid.ComboBoxRenderer = function(combo, gridId) {
 
 
 Ext.Button.buttonTemplate = new Ext.Template(
-    '<span id="{4}" class="x-btn {1} {2} {3}" unselectable="on"><button type="{0}"></button></span>'
+    '<span id="{4}" class="x-btn {1} {3}" unselectable="on"><em class="{2}"><button type="{0}"></button></em></span>'
 );
 Ext.Button.buttonTemplate.compile();
 
