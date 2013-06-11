@@ -1222,7 +1222,9 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
     /*background-color:#fff;*/
     /*border:1px solid #E4E4E4;*/
 }
-
+.x-tree-node-el .x-tree-node-icon{
+    display: inline-block;
+}
 .x-tree-node-expanded .x-tree-node-icon{
 	background-image:url(../images/modx-theme/tree/folder-open.gif);
 }

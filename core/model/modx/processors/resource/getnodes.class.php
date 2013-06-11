@@ -301,7 +301,6 @@ class modResourceGetNodesProcessor extends modProcessor {
      */
     public function prepareContextNode(modContext $context) {
         $class = array();
-        $class[] = 'icon-context';
         $class[] = !empty($this->permissions['edit_context']) ? $this->permissions['edit_context'] : '';
         $class[] = !empty($this->permissions['new_context']) ? $this->permissions['new_context'] : '';
         $class[] = !empty($this->permissions['delete_context']) ? $this->permissions['delete_context'] : '';
@@ -328,6 +327,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             ),
             'leaf' => false,
             'cls' => implode(' ',$class),
+            'iconCls' => 'icon-context',
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => 'modContext',
             'page' => !$this->getProperty('noHref') ? '?a=context/update&key='.$context->get('key') : '',
@@ -348,8 +348,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         $hasChildren = (int)$resource->get('childrenCount') > 0 && $resource->get('hide_children_in_tree') == 0 ? true : false;
 
         $class = array();
-        $class[] = 'icon-'.strtolower(str_replace('mod','',$resource->get('class_key')));
-        $class[] = $resource->isfolder ? 'icon-folder' : 'x-tree-node-leaf icon-resource';
+        if (!$resource->isfolder) {
+            $class[] = 'x-tree-node-leaf';
+        }
         if (!$resource->get('published')) $class[] = 'unpublished';
         if ($resource->get('deleted')) $class[] = 'deleted';
         if ($resource->get('hidemenu')) $class[] = 'hidemenu';
@@ -371,8 +372,10 @@ class modResourceGetNodesProcessor extends modProcessor {
         if (!empty($this->permissions['publish_document'])) $class[] = $this->permissions['publish_document'];
         if (!empty($this->permissions['unpublish_document'])) $class[] = $this->permissions['unpublish_document'];
         if ($hasChildren) $class[] = 'haschildren';
+
+        $active = false;
         if ($this->getProperty('currentResource') == $resource->id && $this->getProperty('currentAction') == 'resource/update') {
-            $class[] = 'active-node';
+            $active = true;
         }
 
         $qtip = '';
@@ -387,9 +390,15 @@ class modResourceGetNodesProcessor extends modProcessor {
             }
         }
 
+        $iconCls = array('icon-resource');
+        $iconCls[] = 'icon-'. strtolower(ltrim($resource->get('class_key'), 'mod'));
+        if ($resource->isfolder) {
+            $iconCls[] = 'icon-folder';
+        }
+
         $locked = $resource->getLock();
         if ($locked && $locked != $this->modx->user->get('id')) {
-            $class[] = 'icon-locked';
+            $iconCls[] = 'icon-locked';
             /** @var modUser $lockedBy */
             $lockedBy = $this->modx->getObject('modUser',$locked);
             if ($lockedBy) {
@@ -403,7 +412,9 @@ class modResourceGetNodesProcessor extends modProcessor {
             'id' => $resource->context_key . '_'.$resource->id,
             'pk' => $resource->id,
             'cls' => implode(' ',$class),
+            'iconCls' => implode(' ',$iconCls),
             'type' => 'modResource',
+            'selected' => $active,
             'classKey' => $resource->class_key,
             'ctx' => $resource->context_key,
             'hide_children_in_tree' => $resource->hide_children_in_tree,

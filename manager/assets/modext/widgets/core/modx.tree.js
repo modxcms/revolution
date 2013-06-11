@@ -119,6 +119,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,disableHref: false
 
     ,onLoad: function(ldr,node,resp) {
+        Ext.each(node.childNodes, function(node){
+            if (node.attributes.selected) {
+                node.select();
+            }
+        });
         var r = Ext.decode(resp.responseText);
         if (r.message) {
             var el = this.getTreeEl();

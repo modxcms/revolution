@@ -163,8 +163,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $ext = $useMultibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
 
                 $cls = array();
-                $cls[] = 'icon-file';
-                $cls[] = 'icon-'.$ext;
 
                 if (!empty($properties['currentFile']) && rawurldecode($properties['currentFile']) == $fullPath.$fileName && $properties['currentAction'] == $editAction) {
                     $cls[] = 'active-node';
@@ -173,9 +171,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if ($this->hasPermission('file_remove') && $canRemove) $cls[] = 'premove';
                 if ($this->hasPermission('file_update') && $canSave) $cls[] = 'pupdate';
 
-                if (!$file->isWritable()) {
-                    $cls[] = 'icon-lock';
-                }
                 $encFile = rawurlencode($fullPath.$fileName);
                 $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
                 $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName;
@@ -187,6 +182,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
+                    'iconCls' => 'icon-file' . ' icon-'.$ext . ($file->isWritable() ? '' : ' icon-lock'),
                     'type' => 'file',
                     'leaf' => true,
                     'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
