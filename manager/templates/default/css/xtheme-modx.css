@@ -368,10 +368,13 @@ textarea.x-form-field, .x-form-textarea{
 .x-form-field-wrap .x-form-search-trigger{
     background-image: url(../images/modx-theme/form/search-trigger.gif);
 }
-.x-trigger-wrap-focus, .x-form-focus, textarea.x-form-focus {
-    border: 3px solid #ddd;
-    margin: -2px !important;
-    background-color: #FFFFFF;
+.x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus {
+    outline: 2px solid #ddd !important;
+    outline-offset: 0;
+    border-radius: 0;
+}
+.x-viewport .x-trigger-wrap-focus .x-form-focus{
+    outline: none !important;
 }
 
 .x-datetime-wrap {
@@ -1784,6 +1787,9 @@ a.x-menu-item {
 /*.x-panel {
     border:0 none;
 }*/
+.x-panel-bwrap{
+    overflow: visible;
+}
 
 .x-panel-body {
     background-color:#fff;
@@ -2035,9 +2041,11 @@ a.x-menu-item {
     padding: 0;
 }
 .x-column {
-    float:left;
+    overflow: visible;
     margin:0 15px 0 0;
-    padding:0px;
+}
+.x-column-inner{
+    overflow: visible;
 }
 
 .x-panel-nofooter .x-panel-bc{
@@ -2121,9 +2129,10 @@ body.x-body-masked .x-window-plain .x-window-mc {
     background-image: url(../images/modx-theme/panel/light-hd.gif);
 }
 
-.x-layout-collapsed{
+.x-layout-collapsed {
     background-color:#E4E4E4;
-	border-color:#DFDFDF;
+    border-color:#DFDFDF;
+    width: 7px !important;
 }
 
 .x-layout-collapsed-over{

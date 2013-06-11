@@ -145,12 +145,6 @@ input::-moz-focus-inner {
     padding: 4px;
 }
 
-/* media sources */
-#modx-leftbar .modx-leftbar-second-tb {
-    padding: 1px 6px 6px;
-}
-
-
 .x-panel-header {
     border: none;
     background: none;
@@ -284,6 +278,9 @@ li:hover #modx-manager-search {
     }
     #modx-manager-search .x-form-field-wrap{
 	    background: transparent;
+    }
+    #modx-manager-search .x-trigger-wrap-focus{
+        outline: none !important;
     }
     #ext-gen11 {
 	    display: none;

@@ -69,7 +69,7 @@ MODx.Layout = function(config){
             ,id: 'modx-leftbar-tabs'
             ,split: true
             ,width: 310
-            ,minSize: 150
+            ,minSize: 288
             ,maxSize: 800
             ,autoScroll: true
             ,unstyled: true

@@ -90,35 +90,23 @@ MODx.tree.Directory = function(config) {
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
     ,addSourceToolbar: function() {
-        var t = Ext.get(this.config.id+'-tbar');
-        if (!t) { return; }
-        var ae = Ext.get(this.config.id+'-sourcebar');
-        if (ae) { return; }
-        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: this.config.id+'-sourcebar'});
-        var tb = new Ext.Toolbar({
-            applyTo: fbd
-            ,autoHeight: true
-            ,width: '100%'
-        });
-        this.sourceCombo = MODx.load({
-            xtype: 'modx-combo-source'
-            ,ctCls: 'modx-leftbar-second-tb'
-            ,value: this.config.source || MODx.config.default_media_source 
-            ,width: Ext.getCmp(this.config.id).getWidth() - 12
+        this.sourceCombo = new MODx.combo.MediaSource({
+            value: this.config.source || MODx.config.default_media_source
             ,listeners: {
                 'select':{fn:this.changeSource,scope:this}
             }
         });
-        tb.add(this.sourceCombo);
-        if (this.config.hideSourceCombo) {
-            try { this.sourceCombo.hide(); } catch (e) {}
-        } else {
-            tb.doLayout();
-        }
-        this.searchBar = tb;
+        this.searchBar = new Ext.Toolbar({
+            renderTo: this.tbar
+            ,id: this.config.id+'-sourcebar'
+            ,items: [this.sourceCombo]
+        });
         this.on('resize', function(){
             this.sourceCombo.setWidth(this.getWidth() - 12);
         }, this);
+        if (this.config.hideSourceCombo) {
+            try { this.sourceCombo.hide(); } catch (e) {}
+        }
     }
     ,changeSource: function(sel) {
         var s = sel.getValue();

@@ -60,19 +60,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     ,addSearchToolbar: function() {
-        var t = Ext.get(this.config.id+'-tbar');
-        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: 'modx-resource-searchbar'});
-        var tb = new Ext.Toolbar({
-            applyTo: fbd
-            ,autoHeight: true
-            ,width: '100%'
-        });
-        var tf = new Ext.form.TextField({
-            name: 'search'
-            ,value: ''
-			,ctCls: 'modx-leftbar-second-tb'
-            ,width: Ext.getCmp('modx-resource-tree').getWidth() - 12
-            ,emptyText: _('search_ellipsis')
+        this.searchField = new Ext.form.TextField({
+            emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search,scope:this}
                 ,'render': {fn: function(cmp) {
@@ -87,11 +76,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 },scope:this}
             }
         });
-        tb.add(tf);
-        tb.doLayout();
-        this.searchBar = tb;
+        this.searchBar = new Ext.Toolbar({
+            renderTo: this.tbar
+            ,id: 'modx-resource-searchbar'
+            ,items: [this.searchField]
+        });
         this.on('resize', function(){
-            tf.setWidth(this.getWidth() - 12);
+            this.searchField.setWidth(this.getWidth() - 12);
         }, this);
     }
 
