@@ -76,7 +76,22 @@ MODx.tree.Tree = function(config) {
         ,root: root
         ,preventRender: false
         ,stateful: true
-        ,menuConfig: {defaultAlign: 'tl-b?' ,enableScrolling: false}
+        ,menuConfig: {
+            defaultAlign: 'tl-b?',
+            enableScrolling: false,
+            listeners: {
+                show: function() {
+                    var node = this.activeNode;
+                    if (node)
+                        node.ui.addClass('x-tree-selected');
+                },
+                hide: function() {
+                    var node = this.activeNode;
+                    if (node)
+                        node.isSelected() || node.ui.removeClass('x-tree-selected');
+                }
+            }
+        }
     });
     if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
         Ext.Ajax.request({
@@ -214,8 +229,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {Ext.EventObject} e The event object run.
      */
     ,_showContextMenu: function(node,e) {
-        node.select();
-        this.cm.activeNode = node;        
+        this.cm.activeNode = node;
         this.cm.removeAll();
         var m;
         var handled = false;

@@ -102,7 +102,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
      * @param {Ext.EventObject} e The event object run.
      */
     ,_showContextMenu: function(n,e) {
-        n.select();
         this.cm.activeNode = n;
         this.cm.removeAll();
         if (n.attributes.menu && n.attributes.menu.items) {

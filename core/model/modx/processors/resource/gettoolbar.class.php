@@ -71,7 +71,7 @@ class modResourceGetToolbarProcessor extends modProcessor {
             'handler' => 'this.showFilter',
         );
         if ($this->modx->hasPermission('purge_deleted')) {
-            $items[] = '-';
+            $items[] = '->';
             $items[] = array(
                 'icon' => $p.'trash.png',
                 'tooltip' => $this->modx->lexicon('empty_recycle_bin'),
