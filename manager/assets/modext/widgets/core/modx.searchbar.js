@@ -9,10 +9,14 @@ MODx.SearchBar = function(config) {
         ,id: 'modx-awesomebar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
-        ,autoSelect: false
+        //,autoSelect: false
+        ,triggerConfig: {tag: 'span', cls: 'x-form-trigger icon-large icon-magic'}
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: 'action'
+        ,width: 180
+        ,maxWidth: 300
+        ,itemSelector: '.section'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
             '<div class="section">',
@@ -20,7 +24,7 @@ MODx.SearchBar = function(config) {
             '<tpl exec="this.type = values.type"></tpl>',
                 '<h3>{type}</h3>',
             '</tpl>',
-                '<p><a onmousedown="MODx.loadPage(\'?a={action}\');"><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<p><a><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
             '</div >',
             '</tpl>', {
                 getClass: function(values) {
@@ -57,16 +61,15 @@ MODx.SearchBar = function(config) {
         })
 
         ,onTypeAhead : function() {}
+        ,onSelect: function(record) {
+            MODx.loadPage('?a=' + record.data.action);
+        }
 
         ,listeners: {
             beforequery: {
                 fn: function() {
-                    if (this.tpl.type) this.tpl.type = null;
+                    this.tpl.type = null;
                 }
-            }
-            ,specialkey: {
-                fn: this.keyboardNav
-                ,scope: this
             }
             ,focus: {
                 fn: this.focusBar
@@ -106,75 +109,19 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
     ,focusBar: function() {
         this.selectText();
-        this.originalWidth = this.getWidth();
         this.animate();
     }
     ,blurBar: function() {
         this.animate(true);
     }
     ,animate: function(blur) {
-        var container = Ext.get('modx-manager-search')
-            ,to = blur ? this.originalWidth : 300
-            ,me = this;
-        container.animate({
-            width: {
-                to: to
-                ,from: container.getWidth()
-            }
-        }, 0.25, function() {
-            !blur ? me.setWidth(to).render() : '';
-        });
-        blur ? this.setWidth(to).render() : '';
-    }
-    // Some keyboard shortcuts when the bar is focused
-    ,keyboardNav: function(elem, e) {
-        //e.preventDefault();
-        var store = this.getStore()
-            ,results = store.getCount();
-        switch (e.getKey()) {
-            case e.ENTER:
-                console.log('enter pressed, perform some kind of validation');
-                this.onViewClick();
-                break;
-            case e.TAB:
-                e.preventDefault();
-                if (results === 1) {
-                    var record = store.getAt(0);
-                    this.setValue(record.data[this.valueField]);
-                } else if (results > 1) {
-                    // select the appropriate element
-                    this.cycleChoice(e.shiftKey);
-                }
-                break;
-            case e.DOWN:
-                console.log('select the appropriate record');
-                this.cycleChoice();
-                break;
-            case e.UP:
-                console.log('select the appropriate record');
-                this.cycleChoice(true);
-                break;
-            case e.ESC:
-                console.log('reset the combo');
-                this.reset();
-                this.blur();
-                this.focus();
-                break;
-        }
-    }
-    // Cycle up/down in the results
-    ,cycleChoice: function(prev) {
-        if (prev === true) {
-            this.selectPrev();
-        } else {
-            this.selectNext();
-        }
-        var record = this.getStore().getAt(this.selectedIndex);
-        this.setValue(record.data[this.valueField]);
+        var to = blur ? this.width : this.maxWidth;
+        this.wrap.setWidth(to, true);
+        this.el.setWidth(to - this.getTriggerWidth(), true);
     }
     ,getViewPortSize: function() {
         var height = 300;
-        if (window.innerHeight !== 'undefined') {
+        if (window.innerHeight !== undefined) {
             height = window.innerHeight;
         }
         //console.log(height);

@@ -1,8 +1,6 @@
-        </div>
-        <!-- #modx-content-->
-        <div id="modx-footer"></div>
     </div>
-    <!-- #modx-mainpanel -->
+    <!-- #modx-content-->
+    <div id="modx-footer"></div>
 </div>
 <!-- #modx-container -->
 
