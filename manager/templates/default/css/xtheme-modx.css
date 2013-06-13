@@ -124,7 +124,7 @@ ul.x-tab-strip li.x-tab-strip-active {
     background-color: #fff;
     border: 1px solid #ddd;
     border-bottom-color: #fff;
-    margin-bottom: -1px;
+    margin-bottom: 0;
     cursor: default;
 }
 ul.x-tab-strip-top li.x-tab-strip-active {
@@ -491,6 +491,7 @@ textarea.x-form-field, .x-form-textarea{
     height: 16px;
     text-shadow:0 1px 0 #fcfcfc;
     vertical-align: middle;
+    min-width: 100%;
 }
 .x-btn-icon button{
     width: 16px;

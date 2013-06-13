@@ -345,7 +345,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $nodeField = $this->getProperty('nodeField');
         $noHref = $this->getProperty('noHref',false);
 
-        $hasChildren = (int)$resource->get('childrenCount') > 0 && $resource->get('hide_children_in_tree') == 0 ? true : false;
+        $hasChildren = $resource->get('childrenCount') > 0 && !$resource->get('hide_children_in_tree');
 
         $class = array();
         if (!$resource->isfolder) {
@@ -371,7 +371,6 @@ class modResourceGetNodesProcessor extends modProcessor {
         if (!empty($this->permissions['undelete_document'])) $class[] = $this->permissions['undelete_document'];
         if (!empty($this->permissions['publish_document'])) $class[] = $this->permissions['publish_document'];
         if (!empty($this->permissions['unpublish_document'])) $class[] = $this->permissions['unpublish_document'];
-        if ($hasChildren) $class[] = 'haschildren';
 
         $active = false;
         if ($this->getProperty('currentResource') == $resource->id && $this->getProperty('currentAction') == 'resource/update') {
@@ -394,6 +393,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         $iconCls[] = 'icon-'. strtolower(ltrim($resource->get('class_key'), 'mod'));
         if ($resource->isfolder) {
             $iconCls[] = 'icon-folder';
+        }
+        if ($hasChildren){
+            $iconCls[] = 'icon-haschildren';
         }
 
         $locked = $resource->getLock();
