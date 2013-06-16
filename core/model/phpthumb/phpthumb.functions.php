@@ -861,6 +861,7 @@ class phpthumb_functions {
 					switch ($file) {
 						case '.':
 						case '..':
+						case 'index.html':  // leave out index.html too; don't want to delete it
 							break;
 
 						default:

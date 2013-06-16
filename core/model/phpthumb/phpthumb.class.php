@@ -657,13 +657,11 @@ class phpthumb {
 			$CacheDirOldFilesSize = array();
 			$AllFilesInCacheDirectory = phpthumb_functions::GetAllFilesInSubfolders($this->config_cache_directory);
 			foreach ($AllFilesInCacheDirectory as $fullfilename) {
-				if (preg_match('/^phpThumb\_cache\_/i', basename($fullfilename)) && file_exists($fullfilename)) {
-					$CacheDirOldFilesAge[$fullfilename] = @fileatime($fullfilename);
-					if ($CacheDirOldFilesAge[$fullfilename] == 0) {
-						$CacheDirOldFilesAge[$fullfilename] = @filemtime($fullfilename);
-					}
-					$CacheDirOldFilesSize[$fullfilename] = @filesize($fullfilename);
+				$CacheDirOldFilesAge[$fullfilename] = @fileatime($fullfilename);
+				if ($CacheDirOldFilesAge[$fullfilename] == 0) {
+					$CacheDirOldFilesAge[$fullfilename] = @filemtime($fullfilename);
 				}
+				$CacheDirOldFilesSize[$fullfilename] = @filesize($fullfilename);
 			}
 			if (empty($CacheDirOldFilesSize)) {
 				return true;
