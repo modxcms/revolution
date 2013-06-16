@@ -318,6 +318,9 @@ textarea.x-form-field, .x-form-textarea{
     border-bottom: 1px solid #d0d0d0;
     color: #434343;
 }
+.x-form-radio {
+    margin-left:1px;
+}
 
 .x-editor .x-form-check-wrap {
     background-color: #fff;
