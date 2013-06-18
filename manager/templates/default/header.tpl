@@ -145,7 +145,7 @@
                     {/if}
                     </ul>
                 {/if}
-                <a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-question-sign icon-large"></i></a>
+                <a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-info-sign icon-large"></i></a>
             </div>
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
