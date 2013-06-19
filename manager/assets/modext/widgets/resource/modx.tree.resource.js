@@ -33,7 +33,7 @@ MODx.tree.Resource = function(config) {
         var el = Ext.get('modx-resource-tree');
         el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
         el.createChild({tag: 'div', id: 'modx-resource-tree_filter'});
-        this.addSearchToolbar();
+        //this.addSearchToolbar();
     },this);
     this.addEvents('loadCreateMenus');
     this.on('afterSort',this._handleAfterDrop,this);
@@ -59,7 +59,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
     }
 
-    ,addSearchToolbar: function() {
+    /*,addSearchToolbar: function() {
         this.searchField = new Ext.form.TextField({
             emptyText: _('search_ellipsis')
             ,listeners: {
@@ -84,7 +84,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.on('resize', function(){
             this.searchField.setWidth(this.getWidth() - 12);
         }, this);
-    }
+    }*/
 
     ,search: function(nv) {
         Ext.state.Manager.set(this.treestate_id+'-search',nv);
