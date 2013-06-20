@@ -10,13 +10,8 @@ MODx.page.UpdateTV = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
 		formpanel: 'modx-panel-tv'
-		,actions: {
-            'new': 'element/tv/create'
-            ,edit: 'element/tv/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: [{
-            process: 'update'
+            process: 'element/tv/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -29,14 +24,14 @@ MODx.page.UpdateTV = function(config) {
             ,handler: this.duplicate
             ,scope: this
         },'-',{
-            process: 'cancel'
+            process: 'welcome'
             ,text: _('cancel')
             ,params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
+        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'

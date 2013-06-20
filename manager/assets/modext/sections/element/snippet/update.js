@@ -16,7 +16,7 @@ MODx.page.UpdateSnippet = function(config) {
             ,cancel: 'welcome'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'element/snippet/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -29,14 +29,14 @@ MODx.page.UpdateSnippet = function(config) {
             ,handler: this.duplicate
             ,scope: this
         },'-',{
-            process: 'cancel'
+            process: 'welcome'
             ,text: _('cancel')
             ,params:{a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
+        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-snippet'
             ,renderTo: 'modx-panel-snippet-div'

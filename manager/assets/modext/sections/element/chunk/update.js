@@ -10,13 +10,8 @@ MODx.page.UpdateChunk = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
 	   formpanel: 'modx-panel-chunk'
-	   ,actions: {
-            'new': 'element/chunk/create'
-            ,edit: 'element/chunk/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: [{
-            process: 'update'
+            process: 'element/chunk/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -29,20 +24,19 @@ MODx.page.UpdateChunk = function(config) {
             ,handler: this.duplicate
             ,scope: this
         },'-',{
-            process: 'cancel'
+            process: 'welcome'
             ,text: _('cancel')
             ,params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
+        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-chunk'
             ,renderTo: 'modx-panel-chunk-div'
             ,chunk: config.record.id || MODx.request.id
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateChunk.superclass.constructor.call(this,config);

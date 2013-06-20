@@ -10,33 +10,30 @@ MODx.page.CreateChunk = function(config) {
 	config = config || {};	
 	Ext.applyIf(config,{
 		formpanel: 'modx-panel-chunk'
-	    ,actions: {
-            'new': 'element/chunk/create'
-            ,edit: 'element/chunk/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: [{
-            process: 'create'
+            process: 'element/chunk/create'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
+            ,reload: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
+            process: 'welcome'
+            ,text: _('cancel')
+            ,params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
+        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-chunk'
             ,renderTo: 'modx-panel-chunk-div'
             ,chunk: config.record.id || MODx.request.id
             ,record: config.record || {}
-            ,baseParams: { action: 'create', category: MODx.request.category }
         }]
 	});
 	MODx.page.CreateChunk.superclass.constructor.call(this,config);

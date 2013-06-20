@@ -10,29 +10,29 @@ MODx.page.CreatePlugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
-        ,actions: {
-            'new': 'element/plugin/create'
-            ,edit: 'element/plugin/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: [{
-            process: 'create', text: _('save'), method: 'remote'
+            process: 'element/plugin/create'
+            ,text: _('save')
+            ,method: 'remote'
             ,checkDirty: true
+            ,reload: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
+            process: 'welcome'
+            ,text: _('cancel')
+            ,params: {a:'welcome'}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
+        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'
-            ,plugin: 0
+            ,plugin: config.record.id || MODx.request.id
             ,record: config.record || {}
         }]
     });
