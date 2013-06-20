@@ -429,7 +429,7 @@ input::-moz-focus-inner {
 	height:41px;
 }
 #modx-navbar #modx-home-dashboard:hover {
-	background-color: rgba(255,255,255,0.8);
+	/*background-color: rgba(255,255,255,0.8);*/
 }
 #modx-navbar #modx-home-dashboard a:hover {
     /*background-color: rgba(0,0,0,.09);*/
