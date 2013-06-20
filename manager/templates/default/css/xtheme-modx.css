@@ -105,10 +105,10 @@ ul.x-tab-strip-top {
 	border-bottom-color: transparent;
 }
 ul.x-tab-strip li {
-	-moz-border-radius:4px 4px 0 0;
+	/*-moz-border-radius:4px 4px 0 0;
 	-webkit-border-radius:4px 4px 0 0;
 	-khtml-border-radius:4px 4px 0 0;
-	border-radius:4px 4px 0 0;
+	border-radius:4px 4px 0 0;*/
 	border: 1px solid transparent;
 	border-width: 1px 1px 0;
 	margin: 1px 0 1px 2px;
@@ -117,18 +117,25 @@ ul.x-tab-strip li {
     line-height: 2.2;
     cursor: pointer;
     color: #777;
-    padding: 0 11px;
+    padding: 0 15px;
 
 }
 ul.x-tab-strip li.x-tab-strip-active {
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-bottom-color: #fff;
-    margin-bottom: 0;
+    border: 1px solid #E2E3DE;
+    border-width: 0 1px;
+    margin: 3px 0 0 2px;
     cursor: default;
+    box-shadow: 0 -3px 0 green;
 }
-ul.x-tab-strip-top li.x-tab-strip-active {
+/*ul.x-tab-strip-top li.x-tab-strip-active {
     box-shadow: 0 1px 0 #fff, 3px 1px 0 rgba(0,0,0,.1);
+}*/
+
+.x-tab-strip-wrap,
+.x-tab-panel-header,
+.x-tab-panel {
+    overflow: visible;
 }
 
 .x-tab-strip-closable{ padding-right: 15px !important; }
@@ -149,19 +156,19 @@ ul.x-tab-strip-bottom {
 	border-top-color:#dfdfdf;
 }
 .x-tab-panel-header-plain {
-    -moz-border-radius: 3px 3px 0 0;
+/*    -moz-border-radius: 3px 3px 0 0;
     -webkit-border-radius: 3px 3px 0 0;
-    border-radius: 3px 3px 0 0;
-    margin-left: 15px;
+    border-radius: 3px 3px 0 0; 
+    margin-left: 15px;*/
+    background-color: #f7f8f3;
 }
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
     margin-top: -2px;
     background-color: #fff;
     height: 3px;
+    border: 1px solid #E2E3DE;
     border-width: 1px 0 0 !important;
-    border-color: #ddd;
-    border-style: solid;
 }
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close { 
         background-image:url(../images/modx-theme/tabs/tab-close.gif); 

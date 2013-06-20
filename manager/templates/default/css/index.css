@@ -81,20 +81,20 @@ input::-moz-focus-inner {
     padding-bottom: 10px;
 }
 
-#modx-leftbar .x-tab-panel-noborder {
-    border-bottom: 1px solid #ddd;
-    margin: 20px 0 10px 0;
+/*#modx-leftbar*/ .x-tab-panel-noborder {
+    border: 1px solid #E2E3DE;
+    margin: 20px 10px 10px;
+    background-color: #f7f8f3;
+    overflow: visible;
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
     padding-bottom: 5px;
-    background-color: #fbfbfb;
+    background-color: #fff;
 }
-#modx-leftbar ul.x-tab-strip-top li:first-child {
-    margin-left: 7px;
-}
-#modx-leftbar .x-tab-panel-header-plain {
-    margin-left: 0;
+/*#modx-leftbar*/ ul.x-tab-strip-top {
+    margin: -1px;
+    width: auto;
 }
 
 
@@ -102,17 +102,31 @@ input::-moz-focus-inner {
     -moz-border-radius:0 0 3px 3px;
     -webkit-border-radius:0 0 3px 3px;
     border-radius:0 0 3px 3px;
-	background-color: #fbfbfb;
     padding: 6px;
+}
+/* tree menu splitter */
+.x-layout-split {
+    width: 7px;
+    box-shadow: -4px 0 0 rgba(0,0,0,0.035);
+    z-index: 0;
+    border-right: 1px solid #f5f5f5;
+    background: #f7f8f3;
+}
+.x-layout-mini {
+    left: 2px;
 }
 
 /* fix leftbar toolbar */
-#modx-leftbar .x-btn{
-    padding: 4px;
+#modx-leftbar {
+    background-color: #ecede8;
 }
 #modx-content {
-    padding: 0;
-    background: #fff;
+    padding: 0 0 0 8px;
+    background: #ecede8;
+}
+
+#modx-leftbar .x-btn{
+    padding: 4px;
 }
 #modx-container {
     height: 100%;
@@ -121,11 +135,7 @@ input::-moz-focus-inner {
 
 /* leftbar tabs */
 #modx-leftbar .x-tree .x-panel-body {
-    background-color:#fbfbfb;
-    border-color:#fafafa;
-    border-right:0 none;
-    border-style:solid none none;
-    border-width:1px 0 0;
+    background: #fff;
 }
 #modx-leftbar .x-tab-panel-body {
     background-color: transparent;
@@ -214,7 +224,7 @@ input::-moz-focus-inner {
 #modx-action-buttons {
     position: fixed;
     z-index: 9;
-    top: 45px;
+    top: 61px;
     left: auto;
     right: 15px;
     padding: 7px;
@@ -228,20 +238,14 @@ input::-moz-focus-inner {
 }
 /* collapse for resource panel */
 #modx-resource-tabs .x-tool-toggle {
-    margin-top: 16px;
+    margin-top: 0;
     position: absolute;
-    top: 31px;
-    right: 0;
+    top: 60px;
+    right: 20px;
     z-index: 10;
-}
-#modx-resource-tabs.x-panel-collapsed .x-tool-toggle {
-    right: 16px !important;
 }
 
 /* top bar */
-#modx-header{
-    height: 41px !important;
-}
 .ext-ie7 #modx-header{
     position: relative;
     z-index: 10;
@@ -249,27 +253,28 @@ input::-moz-focus-inner {
 
 /* MODX MANAGER SEARCH */
 #modx-navbar #modx-manager-search {
-    padding: 5px 20px;
-    border-right: 1px solid #ddd;
-    border-left: 1px solid #f5f5f5;
+    padding: 10px 20px;
+/*    border-right: 1px solid #ddd;
+    border-left: 1px solid #f5f5f5;*/
 }
 #modx-navbar #modx-manager-search:hover{
     background: none;
+    border-color: transparent
 }
 #modx-manager-search .x-form-trigger {
     background: none;
     padding: 7px 4px;
     width: 16px;
     height: 16px;
-    right: 0;
-    color: #a2a2a2;
+    left: 0;
+    color: #555;
     cursor: default;
 }
 #modx-manager-search .x-form-field-wrap {
     opacity: 0.7;
-    background: #F6F6F6;
-    border-radius: 4px;
-    border: 1px solid #C8C3C3;
+    background: #fff;
+    border-radius: 0;
+    border: 1px solid transparent;
     font-size: 12px;
     color: #565353;
 }
@@ -277,7 +282,13 @@ input::-moz-focus-inner {
 #modx-manager-search .x-trigger-wrap-focus {
     opacity: 1;
     outline: none !important;
+    border: 1px solid #C8C3C3;
+    border-color: transparent;
+    background-color: #ffd;
 }
+#modx-awesomebar {
+    margin-left: 20px;
+} 
 
 #modx-manager-search .x-form-empty-field {
     color: #bbb; 
@@ -285,7 +296,7 @@ input::-moz-focus-inner {
     font-weight: normal;
 }
 .modx-manager-search-results {
-    width:420px !important;
+    width: 420px !important;
     margin: 2px 0 0;
     background: rgba(240,240,240,.95);
     border-radius: 0 0 5px 5px;
@@ -378,13 +389,14 @@ input::-moz-focus-inner {
 /* Main MODX Manager navbar */
 #modx-navbar {
     position: relative;
-    height: 41px;
-    background: #ddd;
-    border-bottom: 1px solid #D2D2D2;
-	background-image: linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
+    height: 51px;
+    background: #fff;
+    border-top: 3px solid green;
+    border-bottom: 1px solid #E2E3DE;
+	/*background-image: linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
 	background-image: -webkit-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
 	background-image: -moz-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
-	background-image: -o-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);
+	background-image: -o-linear-gradient(-90deg, rgba(255,255,255,0.60) 0%, rgba(243,243,243,0.30) 100%);*/
     z-index: 10;
 }
 #modx-navbar li:hover a {
@@ -411,7 +423,7 @@ input::-moz-focus-inner {
     position: absolute;
     z-index: 10000;
     left: 0;
-    top: 39px;
+    top: 51px;
     margin: 0 0 0 -1px;
     padding: 0;
     display: none;
@@ -421,19 +433,17 @@ input::-moz-focus-inner {
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
-    background: url(../images/modx-home-logo.png) no-repeat 20px 10px;
+    background: url(../images/modx-home-logo.png) 20px 15px no-repeat ;
     background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
-}
-#modx-navbar #modx-home-dashboard:hover a {
-    background-color: rgba(0,0,0,.09);
-    border-right: 1px solid #d0d0d0;
-    text-shadow: 1px 0 0 #eee;
 }
 #modx-navbar #modx-home-dashboard a {
     text-indent: -9999px;
     overflow: hidden;
     width: 100%;
     padding: 0;
+}
+#modx-navbar #modx-home-dashboard:hover {
+    background-color: #ddd;
 }
 #modx-navbar li:hover ul.modx-subnav {
     display: block;
@@ -445,7 +455,6 @@ input::-moz-focus-inner {
     border-bottom: 1px solid rgba(0,0,0,0.15);
     clear: both;
 }
-
 #modx-navbar ul.modx-subnav li a {
     float: left;
     width: 240px;
@@ -456,7 +465,8 @@ input::-moz-focus-inner {
     color: #444;
 }
 #modx-navbar ul.modx-subnav li a:hover{
-    background: rgba(0, 0, 0, .09);
+    /*background: rgba(0, 0, 0, .09);*/
+	background-color: rgba(255,255,255,0.8);
     color: #333;
 }
 #modx-navbar ul.modx-subnav li a span {
@@ -473,9 +483,9 @@ input::-moz-focus-inner {
 }
 #modx-navbar ul.modx-subnav ul {
     display: none;
-    -moz-border-radius: 0 5px 5px 0;
+    /*-moz-border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;*/
     position: absolute;
     left: 255px;
     top: 2px;
@@ -539,39 +549,26 @@ input::-moz-focus-inner {
     background: rgba(0,0,0,.09);
     border-left: 1px solid #d0d0d0;
     border-right: 1px solid #d0d0d0;
-    text-shadow: 1px 0 0 #eee;
+    text-shadow: 1px 0 0 #eee;*/
     z-index: 10000;
 }
 #modx-topnav a,
 #modx-user-menu a  {
-    padding: 0 18px;
-    line-height: 42px;
+    padding: 0 25px;
+    line-height: 52px;
     color: #444;
-    text-shadow: 0 1px 0 #fff;
     display: block;
     text-decoration: none;
     cursor: pointer;
+}
+#modx-user-menu a  {
+    padding: 0 15px;
 }
 #modx-topnav > li.top > a { cursor: default; }
 #modx-user-menu {
     position: absolute;
     top: 0;
-    right: 0;
-}
-
-/* tree menu splitter */
-#modx-leftbar {
-    background-color: #f4f4f4;
-}
-.x-layout-split {
-    width: 7px;
-    box-shadow: -4px 0 0 rgba(0,0,0,0.035);
-    z-index: 0;
-    border-right: 1px solid #f5f5f5;
-    background: #fff;
-}
-.x-layout-mini {
-    left: 2px;
+    right: 10px;
 }
 
 /* panel stylings */
