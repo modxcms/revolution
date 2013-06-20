@@ -153,9 +153,9 @@ input::-moz-focus-inner {
     font-size: 16px;
     border-bottom: 1px solid #ddd;
 }
-#modx-resource-searchbar {
+/*#modx-resource-searchbar {
     border-bottom: 1px solid #e4e4e4;
-}
+}*/
 
 #modx-resource-tree-panel .x-accordion-hd {
     background-position: 0 0;

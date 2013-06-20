@@ -84,7 +84,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.on('resize', function(){
             this.searchField.setWidth(this.getWidth() - 12);
         }, this);
-    }*/
+    }
 
     ,search: function(nv) {
         Ext.state.Manager.set(this.treestate_id+'-search',nv);
@@ -94,7 +94,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,search: this.config.search
         };
         this.refresh();
-    }
+    }*/
 
     /**
      * Shows the current context menu.
