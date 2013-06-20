@@ -24,7 +24,6 @@ MODx.page.UpdateResource = function(config) {
             ,preview: 'resource/preview'
             ,cancel: 'welcome'
         }
-        ,loadStay: true
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'

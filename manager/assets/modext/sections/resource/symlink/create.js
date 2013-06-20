@@ -20,7 +20,6 @@ MODx.page.CreateSymLink = function(config) {
             ,cancel: 'welcome'
         }
         ,buttons: this.getButtons(config)
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-symlink'
             ,renderTo: 'modx-panel-symlink-div'

@@ -31,7 +31,6 @@ MODx.page.CreateRole = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,tabs: [
             {contentEl: 'tab_information', title: _('settings_general')}
             ,{contentEl: 'tab_permissions', title: _('permissions')}

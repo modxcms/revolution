@@ -10,6 +10,11 @@ MODx.page.CreateTemplate = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-template'
+        ,actions: {
+            'new': 'element/template/create'
+            ,'edit': 'element/template/update'
+            ,'cancel': 'welcome'
+        }
         ,buttons: [{
             process: 'element/template/create'
             ,text: _('save')
@@ -28,7 +33,6 @@ MODx.page.CreateTemplate = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-template'
             ,renderTo: 'modx-panel-template-div'

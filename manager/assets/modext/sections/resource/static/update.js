@@ -35,7 +35,6 @@ MODx.page.UpdateStatic = function(config) {
             ,show_tvs: config.show_tvs
             ,url: config.url
         }]
-        ,loadStay: true
         ,buttons: this.getButtons(config)
     });
     MODx.page.UpdateStatic.superclass.constructor.call(this,config);

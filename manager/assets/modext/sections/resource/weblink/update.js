@@ -30,7 +30,6 @@ MODx.page.UpdateWebLink = function(config) {
             ,show_tvs: config.show_tvs
             ,url: config.url
         }]
-    	,loadStay: true
         ,buttons: this.getButtons(config)
     });
     MODx.page.UpdateWebLink.superclass.constructor.call(this,config);

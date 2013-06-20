@@ -10,6 +10,11 @@ MODx.page.CreateSnippet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-snippet'
+        ,actions: {
+            'new': 'element/snippet/create'
+            ,'edit': 'element/snippet/update'
+            ,'cancel': 'welcome'
+        }
         ,buttons: [{
             process: 'element/snippet/create'
             ,text: _('save')
@@ -28,7 +33,6 @@ MODx.page.CreateSnippet = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-snippet'
             ,renderTo: 'modx-panel-snippet-div'

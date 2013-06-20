@@ -223,7 +223,7 @@ MODx.panel.Chunk = function(config) {
         }
     });
     MODx.panel.Chunk.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-element-tree').expand();",1000);
+
     var isStatic = Ext.getCmp('modx-chunk-static');
     if (isStatic) { isStatic.on('check',this.toggleStaticFile); }
 };

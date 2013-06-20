@@ -33,7 +33,6 @@ MODx.page.CreateTV = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'

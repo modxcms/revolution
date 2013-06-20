@@ -32,7 +32,6 @@ MODx.page.UpdateTemplate = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-template'
             ,renderTo: 'modx-panel-template-div'

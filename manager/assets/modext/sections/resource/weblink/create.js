@@ -20,7 +20,6 @@ MODx.page.CreateWebLink = function(config) {
             ,cancel: 'welcome'
         }
         ,buttons: this.getButtons(config)
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-weblink'
             ,renderTo: 'modx-panel-weblink-div'

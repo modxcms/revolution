@@ -20,7 +20,6 @@ MODx.page.CreateResource = function(config) {
             ,cancel: 'welcome'
         }
     	,buttons: this.getButtons(config)
-    	,loadStay: true
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'

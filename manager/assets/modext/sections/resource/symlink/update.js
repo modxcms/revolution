@@ -31,7 +31,6 @@ MODx.page.UpdateSymLink = function(config) {
             ,show_tvs: config.show_tvs
             ,url: config.url
         }]
-    	,loadStay: true
         ,buttons: this.getButtons(config)
     });
     MODx.page.UpdateSymLink.superclass.constructor.call(this,config);

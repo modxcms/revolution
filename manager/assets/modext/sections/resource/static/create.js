@@ -20,7 +20,6 @@ MODx.page.CreateStatic = function(config) {
             ,cancel: 'welcome'
         }
         ,buttons: this.getButtons(config)
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-static'
             ,renderTo: 'modx-panel-static-div'

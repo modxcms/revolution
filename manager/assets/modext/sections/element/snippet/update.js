@@ -12,8 +12,8 @@ MODx.page.UpdateSnippet = function(config) {
         formpanel: 'modx-panel-snippet'
         ,actions: {
             'new': 'element/snippet/create'
-            ,edit: 'element/snippet/update'
-            ,cancel: 'welcome'
+            ,'edit': 'element/snippet/update'
+            ,'cancel': 'welcome'
         }
         ,buttons: [{
             process: 'element/snippet/update'
@@ -36,7 +36,6 @@ MODx.page.UpdateSnippet = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-snippet'
             ,renderTo: 'modx-panel-snippet-div'

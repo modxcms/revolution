@@ -10,6 +10,11 @@ MODx.page.CreatePlugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
+        ,actions: {
+            'new': 'element/plugin/create'
+            ,'edit': 'element/plugin/update'
+            ,'cancel': 'welcome'
+        }
         ,buttons: [{
             process: 'element/plugin/create'
             ,text: _('save')
@@ -28,7 +33,6 @@ MODx.page.CreatePlugin = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: false
         ,components: [{
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'
