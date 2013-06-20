@@ -5,12 +5,12 @@ MODx.SearchBar = function(config) {
     Ext.applyIf(config, {
         renderTo: 'modx-manager-search'
         ,listClass: 'modx-manager-search-results'
-        ,emptyText: 'Awesomesauce…'
+        ,emptyText: 'Search or actions…'
         ,id: 'modx-awesomebar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
         //,autoSelect: false
-        ,triggerConfig: {tag: 'span', cls: 'x-form-trigger icon-large icon-magic'}
+        ,triggerConfig: {tag: 'span', cls: 'x-form-trigger icon-large icon-search'}
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: 'action'
