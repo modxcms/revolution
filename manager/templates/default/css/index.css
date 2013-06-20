@@ -424,16 +424,24 @@ input::-moz-focus-inner {
     background: url(../images/modx-home-logo.png) no-repeat 20px 10px;
     background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
 }
-#modx-navbar #modx-home-dashboard:hover a {
-    background-color: rgba(0,0,0,.09);
-    border-right: 1px solid #d0d0d0;
-    text-shadow: 1px 0 0 #eee;
+#modx-navbar #modx-home-dashboard {
+	border-right:1px solid #d0d0d0;
+	height:41px;
+}
+#modx-navbar #modx-home-dashboard:hover {
+	background-color: rgba(255,255,255,0.8);
+}
+#modx-navbar #modx-home-dashboard a:hover {
+    /*background-color: rgba(0,0,0,.09);*/
+    /*border-right: 1px solid #d0d0d0;*/
+	
 }
 #modx-navbar #modx-home-dashboard a {
     text-indent: -9999px;
     overflow: hidden;
     width: 100%;
     padding: 0;
+	text-shadow: 1px 0 0 #eee;
 }
 #modx-navbar li:hover ul.modx-subnav {
     display: block;
@@ -456,7 +464,8 @@ input::-moz-focus-inner {
     color: #444;
 }
 #modx-navbar ul.modx-subnav li a:hover{
-    background: rgba(0, 0, 0, .09);
+    /*background: rgba(0, 0, 0, .09);*/
+	background-color: rgba(255,255,255,0.8);
     color: #333;
 }
 #modx-navbar ul.modx-subnav li a span {
@@ -536,7 +545,8 @@ input::-moz-focus-inner {
 }
 #modx-topnav li:hover,
 #modx-user-menu a:hover {
-    background: rgba(0,0,0,.09);
+    /*background: rgba(0,0,0,.09);*/
+	background-color: rgba(255,255,255,0.8);
     border-left: 1px solid #d0d0d0;
     border-right: 1px solid #d0d0d0;
     text-shadow: 1px 0 0 #eee;
