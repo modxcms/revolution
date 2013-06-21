@@ -253,7 +253,7 @@ input::-moz-focus-inner {
 
 /* MODX MANAGER SEARCH */
 #modx-navbar #modx-manager-search {
-    padding: 10px 20px;
+    padding: 5px 20px;
 }
 #modx-navbar #modx-manager-search:hover{
     background: none;
@@ -382,7 +382,7 @@ input::-moz-focus-inner {
 /* Main MODX Manager navbar */
 #modx-navbar {
     position: relative;
-    height: 55px;
+    height: 100%;
     background: #fff;
     border-top: 1px solid rgb(200,200,200);
     border-bottom:1px solid rgb(200,200,200);
@@ -413,7 +413,7 @@ input::-moz-focus-inner {
     position: absolute;
     z-index: 10000;
     left: 0;
-    top: 51px;
+    top: 43px;
     margin: 0 0 0 -1px;
     padding: 0;
     display: none;
@@ -423,8 +423,8 @@ input::-moz-focus-inner {
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
-    background: url(../images/modx-home-logo.png) 20px 15px no-repeat ;
-    background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x);
+    background: url(../images/modx-home-logo.png) 20px 11px no-repeat ;
+    background-image: -webkit-image-set(url(../images/modx-home-logo.png) 1x, url(../images/modx-home-logo@2X.png) 2x); /* don't tell mark */
 }
 #modx-navbar #modx-home-dashboard a {
     text-indent: -9999px;
@@ -552,7 +552,7 @@ input::-moz-focus-inner {
 #modx-topnav a,
 #modx-user-menu a  {
     padding: 0 25px;
-    line-height: 52px;
+    line-height: 43px;
     color: #444;
     display: block;
     text-decoration: none;
