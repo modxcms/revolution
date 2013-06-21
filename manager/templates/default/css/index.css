@@ -418,8 +418,8 @@ input::-moz-focus-inner {
     padding: 0;
     display: none;
     float: left;
-    border: 1px solid #d7d5d5;
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
+    border: 1px solid rgb(220,220,220);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
