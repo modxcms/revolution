@@ -393,6 +393,7 @@ input::-moz-focus-inner {
     text-shadow: none;
     background-color: rgb(230,230,230);
 }
+#modx-navbar li:hover li a { background-color:rgb(240,240,240) }
 #modx-navbar ul#modx-settings-menu,
 #modx-navbar ul#modx-user-submenu {
     left: auto;
