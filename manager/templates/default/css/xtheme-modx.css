@@ -126,7 +126,7 @@ ul.x-tab-strip li.x-tab-strip-active {
     border-width: 0 1px;
     margin: 3px 0 0 2px;
     cursor: default;
-    box-shadow: 0 -3px 0 green;
+    /*box-shadow: 0 -2px 0 rgb(200,200,200);*/
 }
 /*ul.x-tab-strip-top li.x-tab-strip-active {
     box-shadow: 0 1px 0 #fff, 3px 1px 0 rgba(0,0,0,.1);
@@ -307,14 +307,14 @@ textarea.x-form-field, .x-form-textarea{
     border:0 none;
 }
 .x-form-field-wrap {
-    background:#ececec;
-    background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:rgb(230,230,230);
+    /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
     background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
     background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
     background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
-    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
     -o-border-radius:2px;
@@ -336,14 +336,14 @@ textarea.x-form-field, .x-form-textarea{
 .x-form-field-wrap .x-form-trigger.x-form-trigger-over { background-position:center center; }
 .x-form-field-wrap .x-form-trigger.x-form-trigger-click { background-position:right center; }
 .x-small-editor .x-form-field-wrap {
-    background:#ececec;
-    background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:rgb(240,240,240);
+    /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
     background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
     background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
     background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
-    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
     -o-border-radius:2px;
@@ -470,13 +470,14 @@ textarea.x-form-field, .x-form-textarea{
     -o-box-shadow:rgba(0,0,0,0.2) 0 0 1px;
     box-shadow:rgba(0,0,0,0.2) 0 0 1px;
     background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(220,220,220,1);
-    background:-moz-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#fcfcfc),color-stop(100%,#dcdcdc));
-    background:-webkit-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
-    background:-o-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
-    background:-ms-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-    background:linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
+    background:rgb(240,240,240);
+    /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+    background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
     line-height:1;
     margin:0 1px;
     text-decoration:none;
@@ -520,13 +521,14 @@ textarea.x-form-field, .x-form-textarea{
 .x-html-editor-tb .x-btn-over { border:0 none; }
 .x-btn-over {
     background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223,223,223,1);
-    background:-moz-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#dfdfdf));
-    background:-webkit-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    background:-o-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    background:-ms-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dfdfdf,GradientType=0);
-    background:linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
+    background:rgb(240,240,240);
+    /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+    background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
     border:1px solid #9caf78;
 }
 .x-btn-over button {
@@ -545,13 +547,14 @@ textarea.x-form-field, .x-form-textarea{
 }
 .x-btn-focus{
     background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223,223,223,1);
-    background:-moz-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#dfdfdf));
-    background:-webkit-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    background:-o-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    background:-ms-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dfdfdf,GradientType=0);
-    background:linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
+    background:rgb(240,240,240);
+    /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+    background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
     border:1px solid #658F1A;
 }
 .x-btn-group {
@@ -581,13 +584,14 @@ textarea.x-form-field, .x-form-textarea{
 }
 .x-btn-group .x-btn-over {
     background:#dfdfdf;
-    background:-moz-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#dfdfdf));
-    background:-webkit-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    background:-o-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    background:-ms-linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dfdfdf,GradientType=0);
-    background:linear-gradient(center bottom,#dfdfdf 0%,#ffffff 100%);
+    background:rgb(240,240,240);
+    /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+    background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+    background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
     border:1px solid #dbe0e4;
 }
 .x-btn-group .x-btn-over button {
@@ -916,14 +920,14 @@ textarea.x-form-field, .x-form-textarea{
 }
 
 .x-panel-body-noheader .x-grid3-header{
-	background:#606060;
-	background:-moz-linear-gradient(center bottom,#606060 0%,#808080 100%) repeat scroll 0 0 transparent;
+	background:rgb(100,100,100);
+	/*background:-moz-linear-gradient(center bottom,#606060 0%,#808080 100%) repeat scroll 0 0 transparent;
 	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#808080),color-stop(100%,#606060));
 	background:-webkit-linear-gradient(center bottom,#606060 0%,#808080 100%);
 	background:-o-linear-gradient(center bottom,#606060 0%,#808080 100%);
 	background:-ms-linear-gradient(center bottom,#606060 0%,#808080 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#808080,endColorstr=#606060,GradientType=0);
-	background:linear-gradient(center bottom,#606060 0%,#808080 100%);
+	background:linear-gradient(center bottom,#606060 0%,#808080 100%);*/
 	border:0 none;
 	border-bottom:1px solid #333;
 }
