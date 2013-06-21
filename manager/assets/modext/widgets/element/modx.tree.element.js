@@ -15,6 +15,7 @@ MODx.tree.Element = function(config) {
         ,title: ''
         ,url: MODx.config.connector_url
         ,action: 'element/getnodes'
+        ,sortAction: 'element/sort'
         ,useDefaultToolbar: true
         ,baseParams: {
             currentElement: MODx.request.id || 0

@@ -18,6 +18,7 @@ MODx.tree.Resource = function(config) {
         ,ddGroup: 'modx-treedrop-dd'
         ,remoteToolbar: true
         ,remoteToolbarAction: 'resource/gettoolbar'
+        ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
