@@ -383,7 +383,7 @@ input::-moz-focus-inner {
 #modx-navbar {
     position: relative;
     height: 100%;
-    background: #fff;
+    background: rgb(230,230,230);
     border-top: 1px solid rgb(200,200,200);
     border-bottom:1px solid rgb(200,200,200);
     z-index: 10;
@@ -435,11 +435,11 @@ input::-moz-focus-inner {
 }
 #modx-navbar #modx-home-dashboard:hover {
     /*background-color: #ddd;*/
-    border-color:transparent;
+    /*border-color:transparent;*/
 }
 #modx-navbar #modx-home-dashboard:hover a {
     background-color:transparent;
-    border-color:transparent;
+    /*border-color:transparent;*/
 }
 #modx-navbar li:hover ul.modx-subnav {
     display: block;
@@ -537,16 +537,26 @@ input::-moz-focus-inner {
     padding: 0;
     position: relative;
     background: transparent;
-    border-left: 1px solid transparent;
+    
     border-right: 1px solid transparent;
+}
+#modx-topnav li#limenu-Reports {
+    border-right-color:rgb(220,220,220);
+}
+#modx-topnav li:last-of-type a:hover {
+    border-right:1px solid white;
+}
+#modx-topnav li,#modx-user-menu a {
+    border-left: 1px solid rgb(220,220,220);
 }
 #modx-topnav li:hover,
 #modx-user-menu a:hover {
     /*background: rgba(0,0,0,.09);*/
-	background-color: rgba(255,255,255,0.8);
-    border-left: 1px solid #d0d0d0;
-    border-right: 1px solid #d0d0d0;
-    text-shadow: 1px 0 0 #eee;*/
+	/*background-color: rgba(255,255,255,0.8);*/
+    border-right:1px solid #fff;
+    /*border-left: 1px solid #d0d0d0;*/
+    /*border-right: 1px solid #d0d0d0;*/
+    /*text-shadow: 1px 0 0 #eee;*/
     z-index: 10000;
 }
 #modx-topnav a,
@@ -565,7 +575,7 @@ input::-moz-focus-inner {
 #modx-user-menu {
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 1px;
 }
 
 /* panel stylings */
