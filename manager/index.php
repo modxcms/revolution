@@ -29,6 +29,8 @@
 @include dirname(__FILE__) . '/config.core.php';
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 
+if(!isset($optionsContext) || !is_array($optionsContext)){ $optionsContext = null; }
+
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
 if (!defined('MODX_API_MODE')) {
@@ -62,7 +64,7 @@ if (!is_object($modx) || !($modx instanceof modX)) {
     exit();
 }
 
-$modx->initialize('mgr');
+$modx->initialize('mgr',$optionsContext);
 
 $modx->getRequest();
 $modx->getParser();

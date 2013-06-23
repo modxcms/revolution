@@ -37,6 +37,8 @@ $modx_cache_disabled= false;
 /* include custom core config and define core path */
 @include(dirname(__FILE__) . '/config.core.php');
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__FILE__) . '/core/');
+if(!isset($optionsContext) || !is_array($optionsContext)){ $optionsContext = null; }
+if(empty($context) || !is_scalar($context) || $context == 'mgr'){ $context = 'web'; } 
 
 /* include the modX class */
 if (!@include_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
@@ -65,7 +67,7 @@ if (!is_object($modx) || !($modx instanceof modX)) {
 $modx->startTime= $tstart;
 
 /* Initialize the default 'web' context */
-$modx->initialize('web');
+$modx->initialize($context, $optionsContext);
 
 /* execute the request handler */
 if (!MODX_API_MODE) {
