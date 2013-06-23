@@ -144,7 +144,7 @@ class modConnectorResponse extends modResponse {
         if (!isset($_FILES)) {
             header("Content-Type: application/json; charset=UTF-8");
             $message = 'OK';
-            if (array_key_exists($this->responseCode,$this->_responseCodes)) {
+            if (isset($this->_responseCodes[$this->responseCode])) {
                 $message = $this->_responseCodes[$this->responseCode];
             }
             header('Status: HTTP/1.1 '.$this->responseCode.' '.$message);

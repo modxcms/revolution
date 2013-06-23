@@ -505,7 +505,7 @@ class modParser {
      */
     public function getElement($class, $name) {
         $realname = $this->realname($name);
-        if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
+        if (isset($this->modx->sourceCache[$class]) && isset($this->modx->sourceCache[$class][$realname])) {
             /** @var modElement $element */
             $element = $this->modx->newObject($class);
             $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
@@ -524,7 +524,7 @@ class modParser {
         } else {
             /** @var modElement $element */
             $element = $this->modx->getObjectGraph($class,array('Source' => array()),array('name' => $realname), true);
-            if ($element && array_key_exists($class, $this->modx->sourceCache)) {
+            if ($element && isset($this->modx->sourceCache[$class])) {
                 $this->modx->sourceCache[$class][$realname] = array(
                     'fields' => $element->toArray(),
                     'policies' => $element->getPolicies(),
@@ -1238,7 +1238,7 @@ class modLinkTag extends modTag {
                 );
                 $context = '';
                 if ($this->modx->getOption('friendly_urls', null, false)) {
-                    if (array_key_exists('context', $this->_properties)) {
+                    if (isset($this->_properties['context'])) {
                         $context = $this->_properties['context'];
                     }
                     if ($context) {
@@ -1254,16 +1254,16 @@ class modLinkTag extends modTag {
                     $options = array();
                     if (is_array($this->_properties) && !empty($this->_properties)) {
                         $qs = array();
-                        if (array_key_exists('context', $this->_properties)) {
+                        if (isset($this->_properties['context'])) {
                             $context = $this->_properties['context'];
                             unset($this->_properties['context']);
                         }
-                        if (array_key_exists('scheme', $this->_properties)) {
+                        if (isset($this->_properties['scheme'])) {
                             $scheme = $this->_properties['scheme'];
                             unset($this->_properties['scheme']);
                             if (is_numeric($scheme)) $scheme = (integer) $scheme;
                         }
-                        if (array_key_exists('use_weblink_target', $this->_properties)) {
+                        if (isset($this->_properties['use_weblink_target'])) {
                             $options['use_weblink_target'] = $this->_properties['use_weblink_target'];
                             unset($this->_properties['use_weblink_target']);
                         }

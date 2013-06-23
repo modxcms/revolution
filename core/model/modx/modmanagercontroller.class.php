@@ -756,7 +756,7 @@ abstract class modManagerController {
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
-            'modActionDom.action' => array_key_exists('controller',$this->config) ? $this->config['controller'] : '',
+            'modActionDom.action' => isset($this->config['controller']) ? $this->config['controller'] : '',
             'modActionDom.for_parent' => $forParent,
             'FCSet.active' => true,
             'Profile.active' => true,

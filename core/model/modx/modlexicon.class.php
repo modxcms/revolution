@@ -175,7 +175,7 @@ class modLexicon {
                 foreach ($this->_paths as $namespace => $path) {
                     $entries = $this->loadCache($namespace,$topic);
                     if (is_array($entries)) {
-                        if (!array_key_exists($defaultLanguage,$this->_lexicon)) $this->_lexicon[$defaultLanguage] = array();
+                        if (!isset($this->_lexicon[$defaultLanguage])) $this->_lexicon[$defaultLanguage] = array();
                         $this->_lexicon[$defaultLanguage] = is_array($this->_lexicon[$defaultLanguage]) ? array_merge($this->_lexicon[$defaultLanguage],$entries) : $entries;
                     }
                 }
@@ -202,7 +202,7 @@ class modLexicon {
                 }
                 if (is_array($entries)) {
                     $this->_loadedTopics[] = $topicStr;
-                    if (!array_key_exists($language,$this->_lexicon)) $this->_lexicon[$language] = array();
+                    if (!isset($this->_lexicon[$language])) $this->_lexicon[$language] = array();
                     $this->_lexicon[$language] = is_array($this->_lexicon[$language]) ? array_merge($this->_lexicon[$language], $entries) : $entries;
                 }
             }

@@ -2559,35 +2559,25 @@ class xPDO {
         $split= array();
         $charPos = strpos($str, $char);
         if ($charPos !== false) {
-            if ($charPos === 0) {
-                $searchPos = 1;
-                $startPos = 1;
-            } else {
-                $searchPos = 0;
-                $startPos = 0;
+            $exit = strpos($str,$escToken);
+            if($exit !== false){
+                $exitstr = substr($str,0,$exit);
+                if($limit>0){
+                    $split=explode($char, $exitstr, $limit);
+                }else{
+                    $split=explode($char, $exitstr);
+                }
+                $split[count($split)-1] .= substr($str,$exit);
+            }else{
+                if($limit>0){
+                    $split = explode($char,$str,$limit);
+                }else{
+                    $split = explode($char,$str);
+                }
             }
-            $escOpen = false;
-            $strlen = strlen($str);
-            for ($i = $startPos; $i <= $strlen; $i++) {
-                if ($i == $strlen) {
-                    $tmp= trim(substr($str, $searchPos));
-                    if (!empty($tmp)) $split[]= $tmp;
-                    break;
-                }
-                if ($str[$i] == $escToken) {
-                    $escOpen = $escOpen == true ? false : true;
-                    continue;
-                }
-                if (!$escOpen && $str[$i] == $char) {
-                    $tmp= trim(substr($str, $searchPos, $i - $searchPos));
-                    if (!empty($tmp)) {
-                        $split[]= $tmp;
-                        if ($limit > 0 && count($split) >= $limit) {
-                            break;
-                        }
-                    }
-                    $searchPos = $i + 1;
-                }
+
+            foreach($split as &$item){
+                $item = trim($item);
             }
         } else {
             $split[]= trim($str);

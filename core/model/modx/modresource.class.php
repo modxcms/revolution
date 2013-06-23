@@ -248,8 +248,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return void
      */
     public static function refreshURIs(modX &$modx, $parent = 0, array $options = array()) {
-        $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean) $options['resetOverrides'] : false;
-        $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
+        $resetOverrides = isset($options['resetOverrides']) ? (boolean) $options['resetOverrides'] : false;
+        $contexts = isset($options['contexts']) ? explode(',', $options['contexts']) : null;
         $criteria = $modx->newQuery('modResource', array('parent' => $parent));
         if (!$resetOverrides) {
             $criteria->where(array('uri_override' => false));

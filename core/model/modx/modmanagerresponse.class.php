@@ -42,7 +42,7 @@ class modManagerResponse extends modResponse {
         $this->modx->lexicon->load('dashboard','topmenu','file','action');
         $this->_loadNamespaces();
 
-        if (!array_key_exists($this->namespace,$this->namespaces)) {
+        if (!isset($this->namespaces[$this->namespace])) {
             $this->namespace = 'core';
             $this->action = array();
         } else {
@@ -243,7 +243,7 @@ class modManagerResponse extends modResponse {
      * @return array An array of paths to the Namespace's controllers directory.
      */
     public function getNamespacePath($theme = 'default') {
-        $namespace = array_key_exists($this->namespace,$this->namespaces) ? $this->namespaces[$this->namespace] : $this->namespaces['core'];
+        $namespace = isset($this->namespaces[$this->namespace]) ? $this->namespaces[$this->namespace] : $this->namespaces['core'];
         /* find context path */
         if (isset($namespace['name']) && $namespace['name'] != 'core') {
             $paths[] = $namespace['path'].'controllers/'.trim($theme,'/').'/';

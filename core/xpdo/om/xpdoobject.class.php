@@ -44,6 +44,20 @@
  */
 class xPDOObject {
     /**
+     * Cache database data type for the specified field.
+     * @var array
+     * @access private
+     */
+    private $_cacheDataType = array();
+
+    /**
+     * Cache php data type for the specified field.
+     * @var array
+     * @access private
+     */
+    private $_cachePHPType = array();
+
+    /**
      * A convenience reference to the xPDO object.
      * @var xPDO
      * @access public
@@ -708,9 +722,9 @@ class xPDOObject {
         if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS) && array_key_exists($name, $this->_fields)) {
             return $this->_fields[$name];
         } elseif ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) {
-            if (array_key_exists($name, $this->_composites)) {
+            if (isset($this->_composites[$name])) {
                 $fkMeta = $this->_composites[$name];
-            } elseif (array_key_exists($name, $this->_aggregates)) {
+            } elseif (isset($this->_aggregates[$name])) {
                 $fkMeta = $this->_aggregates[$name];
             } else {
                 return null;
@@ -729,9 +743,9 @@ class xPDOObject {
         if ($this->getOption(xPDO::OPT_HYDRATE_FIELDS) && array_key_exists($name, $this->_fields)) {
             return $this->_setRaw($name, $value);
         } elseif ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)) {
-            if (array_key_exists($name, $this->_composites)) {
+            if (isset($this->_composites[$name])) {
                 $fkMeta = $this->_composites[$name];
-            } elseif (array_key_exists($name, $this->_aggregates)) {
+            } elseif (isset($this->_aggregates[$name])) {
                 $fkMeta = $this->_aggregates[$name];
             } else {
                 return false;
@@ -748,9 +762,7 @@ class xPDOObject {
 
     public function __isset($name) {
         return ($this->getOption(xPDO::OPT_HYDRATE_FIELDS) && array_key_exists($name, $this->_fields) && isset($this->_fields[$name]))
-            || ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS)
-                && ((array_key_exists($name, $this->_composites) && isset($this->_composites[$name]))
-                || (array_key_exists($name, $this->_aggregates) && isset($this->_aggregates[$name]))));
+            || ($this->getOption(xPDO::OPT_HYDRATE_RELATED_OBJECTS) && (isset($this->_composites[$name]) || isset($this->_aggregates[$name])));
     }
 
     /**
@@ -2344,6 +2356,7 @@ class xPDOObject {
      * @return string The DB data type of the field.
      */
     protected function _getDataType($key) {
+        if(isset($this->_cacheDataType[$key])) return $this->_cacheDataType[$key];
         $type= 'text';
         $actualKey = $this->getField($key, true);
         if ($actualKey !== false && isset($this->_fieldMeta[$actualKey]['dbtype'])) {
@@ -2351,7 +2364,7 @@ class xPDOObject {
         } elseif ($this->xpdo->getDebug() === true) {
             $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "xPDOObject::_getDataType() -- No data type specified for field ({$key}), using `text`.");
         }
-        return $type;
+        return $this->_cacheDataType[$key]=$type;
     }
 
     /**
@@ -2362,6 +2375,7 @@ class xPDOObject {
      * @return string The PHP data type of the field.
      */
     protected function _getPHPType($key) {
+        if(isset($this->_cachePHPType[$key])) return $this->_cachePHPType[$key];
         $type= 'string';
         $actualKey = $this->getField($key, true);
         if ($actualKey !== false && isset($this->_fieldMeta[$actualKey]['phptype'])) {
@@ -2369,7 +2383,7 @@ class xPDOObject {
         } elseif ($this->xpdo->getDebug() === true) {
             $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "xPDOObject::_getPHPType() -- No PHP type specified for field ({$key}), using `string`.");
         }
-        return $type;
+        return $this->_cachePHPType[$key]=$type;
     }
 
     /**

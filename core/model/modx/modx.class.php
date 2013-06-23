@@ -396,7 +396,7 @@ class modX extends xPDO {
                 $id = key($instances);
             }
         }
-        if ($forceNew || !array_key_exists($id, self::$instances) || !(self::$instances[$id] instanceof $class)) {
+        if ($forceNew || !isset(self::$instances[$id]) || !(self::$instances[$id] instanceof $class)) {
             self::$instances[$id] = new $class('', $config);
         } elseif (self::$instances[$id] instanceof $class && is_array($config)) {
             self::$instances[$id]->config = array_merge(self::$instances[$id]->config, $config);
@@ -497,7 +497,7 @@ class modX extends xPDO {
                 ),
                 'driverOptions' => $driver_options
             );
-            if (!array_key_exists(xPDO::OPT_CONNECTIONS, $data) || !is_array($data[xPDO::OPT_CONNECTIONS])) {
+            if (!isset($data[xPDO::OPT_CONNECTIONS]) || !is_array($data[xPDO::OPT_CONNECTIONS])) {
                 $data[xPDO::OPT_CONNECTIONS] = array();
             }
             array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
@@ -979,11 +979,11 @@ class modX extends xPDO {
         if (!empty($context) && (!empty($uri) || $uri === '0')) {
             $useAliasMap = (boolean) $this->getOption('cache_alias_map', null, false);
             if ($useAliasMap) {
-                if (isset($this->context) && $this->context->get('key') === $context && array_key_exists($uri, $this->aliasMap)) {
+                if (isset($this->context) && $this->context->get('key') === $context && isset($this->aliasMap[$uri])) {
                     $resourceId = (integer) $this->aliasMap[$uri];
                 } elseif ($ctx = $this->getContext($context)) {
-                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && array_key_exists($uri, $ctx->aliasMap);
-                    if ($useAliasMap && array_key_exists($uri, $ctx->aliasMap)) {
+                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && isset($ctx->aliasMap[$uri]);
+                    if ($useAliasMap) {
                         $resourceId = (integer) $ctx->aliasMap[$uri];
                     }
                 }
@@ -1072,7 +1072,7 @@ class modX extends xPDO {
         }
         $this->elementCache = array();
         if ($idInt > 0) {
-            $merge = array_key_exists('merge', $options) && !empty($options['merge']);
+            $merge = !empty($options['merge']);
             $currentResource = array();
             if ($merge) {
                 $excludes = array_merge(
@@ -1434,9 +1434,7 @@ class modX extends xPDO {
      * @return void
      */
     public function regClientStartupScript($src, $plaintext= false) {
-        if (!empty ($src) && !array_key_exists($src, $this->loadedjscripts)) {
-            if (isset ($this->loadedjscripts[$src]))
-                return;
+        if (!empty ($src) && !isset($this->loadedjscripts[$src])) {
             $this->loadedjscripts[$src]= true;
             if ($plaintext == true) {
                 $this->sjscripts[count($this->sjscripts)]= $src;
@@ -1627,7 +1625,7 @@ class modX extends xPDO {
 
             if ($isClass) {
                 /* ensure processor file is only included once if run multiple times in a request */
-                if (!array_key_exists($processorFile,$this->processors)) {
+                if (!isset($this->processors[$processorFile])) {
                     $className = include_once $processorFile;
                     /* handle already included core classes */
                     if ($className == 1) {
@@ -2204,13 +2202,13 @@ class modX extends xPDO {
                     $this->setPlaceholders($this->config, '+');
                 }
             } else {
-                if (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext)) {
+                if (!isset($this->contexts[$key]) || !($this->contexts[$key] instanceof modContext)) {
                     $this->contexts[$key] = $this->newObject('modContext');
                     $this->contexts[$key]->_fields['key']= $key;
                 }
                 $reloaded = $this->contexts[$key]->prepare(true);
             }
-        } elseif (!empty($key) && (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext))) {
+        } elseif (!empty($key) && (!isset($this->contexts[$key]) || !($this->contexts[$key] instanceof modContext))) {
             $this->contexts[$key] = $this->newObject('modContext');
             $this->contexts[$key]->_fields['key']= $key;
             $reloaded = $this->contexts[$key]->prepare(true);
