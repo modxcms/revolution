@@ -2556,34 +2556,53 @@ class xPDO {
      * array.
      */
     public static function escSplit($char, $str, $escToken = '`', $limit = 0) {
-        $split= array();
-        $charPos = strpos($str, $char);
-        if ($charPos !== false) {
-            $exit = strpos($str,$escToken);
-            if($exit !== false){
-                $exitstr = substr($str,0,$exit);
-                if($limit>0){
-                    $split=explode($char, $exitstr, $limit);
+            $split= array();
+            $charPos = strpos($str, $char);
+            if ($charPos !== false) {
+                $exit = strpos($str,$escToken);
+                if($exit !== false){
+                    $tmpSplit = explode($char, $str);
+                    $countItem = count($tmpSplit);
+                    $flag = false;
+                    for($i=0;$i<=$countItem;$i++){
+                        $countEsc = substr_count($tmpSplit[$i], $escToken)%2 == 1;
+                        if(isset($tmpSplit[$i+1]) && ($flag || $countEsc)){
+                            if(!$flag) $flag = $i;
+                            $tmpSplit[$flag] .= $char.$tmpSplit[$i+1];
+                            unset($tmpSplit[$i+1]);
+                        }
+                    }
+                    $split = array();
+                    if($limit>0){
+                        $count = 0;
+                        foreach($tmpSplit as $splititem){
+                            $count++;
+                            if($count<=$limit){
+                                $split[]=$splititem;
+                            }else{
+                                break;
+                            }
+                        }
+                    }else{
+                        $split = $tmpSplit;
+                        ksort($split);
+                    }
                 }else{
-                    $split=explode($char, $exitstr);
+                    if($limit>0){
+                        $split = explode($char,$str,$limit);
+                    }else{
+                        $split = explode($char,$str);
+                    }
                 }
-                $split[count($split)-1] .= substr($str,$exit);
-            }else{
-                if($limit>0){
-                    $split = explode($char,$str,$limit);
-                }else{
-                    $split = explode($char,$str);
-                }
-            }
 
-            foreach($split as &$item){
-                $item = trim($item);
+                foreach($split as &$item){
+                    $item = trim($item);
+                }
+            } else {
+                $split[]= trim($str);
             }
-        } else {
-            $split[]= trim($str);
+            return $split;
         }
-        return $split;
-    }
 
     /**
      * Parses parameter bindings in SQL prepared statements.
