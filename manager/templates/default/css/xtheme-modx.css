@@ -307,7 +307,7 @@ textarea.x-form-field, .x-form-textarea{
     border:0 none;
 }
 .x-form-field-wrap {
-    background:rgb(230,230,230);
+    background:rgb(240,240,240);
     /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
     background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);

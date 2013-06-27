@@ -1143,7 +1143,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
-.main-wrapper { padding: 15px 0 15px 15px; }
+.main-wrapper { padding: 15px 15px 15px 15px; }
 .with-title .main-wrapper{
 	padding: 0 15px 10px 15px;
 }
@@ -2151,4 +2151,17 @@ body.ext-ie7 .x-superboxselect-item {
     color: #777;
     text-decoration: none;
     border-bottom: 1px dotted #888;
+}
+
+.x-tab-strip-wrap .x-tab-strip.x-tab-strip-top li:not(.x-tab-edge) {
+    width:32%;
+    text-align:center;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+         -o-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+}
+#modx-leftbar-tabpanel__modx-file-tree {
+    float:right;
 }
