@@ -456,14 +456,14 @@ input::-moz-focus-inner {
     float: left;
     width: 240px;
     margin: 0;
-    padding: 5px 10px 6px;
-    line-height: 1.4;
+    padding: 8px 10px 8px;
+    line-height: 1.5;
     text-shadow: none;
     color: #444;
 }
 #modx-navbar ul.modx-subnav li a:hover{
     /*background: rgba(0, 0, 0, .09);*/
-	background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.8);
     color: #333;
 }
 #modx-navbar ul.modx-subnav li a span {
@@ -472,6 +472,8 @@ input::-moz-focus-inner {
     font-weight: normal;
     width: 100%;
     opacity: 0.9;
+    font-size:12px;
+    line-height:1.3em;
     filter: alpha(opacity=90);
 }
 #modx-navbar ul.modx-subnav li a:hover span {
