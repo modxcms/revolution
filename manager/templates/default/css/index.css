@@ -253,7 +253,7 @@ input::-moz-focus-inner {
 
 /* MODX MANAGER SEARCH */
 #modx-navbar #modx-manager-search {
-    padding: 5px 20px;
+    padding: 5px 8px 5px 10px;
 }
 #modx-navbar #modx-manager-search:hover{
     background: none;
@@ -2153,7 +2153,7 @@ body.ext-ie7 .x-superboxselect-item {
     border-bottom: 1px dotted #888;
 }
 
-.x-tab-strip-wrap .x-tab-strip.x-tab-strip-top li:not(.x-tab-edge) {
+#modx-leftbar .x-tab-strip-wrap .x-tab-strip.x-tab-strip-top li:not(.x-tab-edge) {
     width:32%;
     text-align:center;
     -webkit-box-sizing: border-box;
