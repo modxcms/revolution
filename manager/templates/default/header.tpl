@@ -7,13 +7,13 @@
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
 {if $_config.compress_css}
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
 {else}
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 {/if}
+
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" /><!-- this is Sass now and prepends xtheme-modx.css -->
+
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/font-awesome.min.css" />
 

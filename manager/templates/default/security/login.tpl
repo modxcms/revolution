@@ -6,7 +6,7 @@
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
     
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
+	<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
 	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login.css" />
     
