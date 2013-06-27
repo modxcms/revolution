@@ -14,7 +14,7 @@ MODx.SearchBar = function(config) {
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: 'action'
-        ,width: 172
+        ,width: 174
         ,maxWidth: 300
         ,itemSelector: '.section'
         ,tpl: new Ext.XTemplate(
