@@ -1,8 +1,20 @@
 @import "xtheme-modx";
 
-/**
- * MODX Revolution 2.0.0 CSS Stylesheet
- */
+
+         /*___   ____     __   __     
+ /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
+/\      \ \ \/\ \ \ \/\ \\ `\`\/'/'   
+\ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <     
+ \ \ \_/\ \ \ \_\ \ \ \_\ \  \/'/\`\  
+  \ \_\\ \_\ \_____\ \____/  /\_\\ \_\
+   \/_/ \/_/\/_____/\/___/   \/_/ \/*/
+
+/* start colors */
+$bg:rgb(240,240,240);
+$navbarBg:rgb(230,230,230);
+$dropdownBg:$navbarBg; /* why set to value of another var?, incase we want to change it later */
+/* end colors */
+                                      
 body {
     color: #111;
     font: 13px/17px Arial, Helvetica, sans-serif;
@@ -124,7 +136,7 @@ input::-moz-focus-inner {
 }
 #modx-content {
     padding: 0 0 0 8px;
-    background:rgb(240,240,240);
+    background:$bg;
 }
 
 #modx-leftbar .x-btn{
@@ -272,7 +284,7 @@ input::-moz-focus-inner {
 }
 #modx-manager-search .x-form-field-wrap {
     opacity: 0.7;
-    background: #fff;
+    background: $dropdownBg;
     border-radius:4px;
     outline: none !important;
     border: 1px solid rgb(180,180,180);
@@ -385,7 +397,7 @@ input::-moz-focus-inner {
 #modx-navbar {
     position: relative;
     height: 100%;
-    background: rgb(230,230,230);
+    background: $navbarBg;
     border-top: 1px solid rgb(200,200,200);
     border-bottom:1px solid rgb(200,200,200);
     z-index: 10;
@@ -1418,12 +1430,8 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* for selectability in ext grids */
 .x-selectable, .x-selectable * {
-    -webkit-user-select: text !important;
-    -o-user-select: text !important;
+    @include user-select(text !important);
     -khtml-user-select: all !important;
-    -ms-user-select: text !important;
-    user-select: text !important;
-    -moz-user-select: text !important;
 }
 
 /* Breadcrumbs */
@@ -1445,6 +1453,7 @@ body.ext-ie7 .x-superboxselect-item {
 	border-bottom:1px solid #EFEFEF;
 	height:34px;
 }
+
 .crumbs li {
 	background:url("../images/style/crumbs-bg.png") no-repeat scroll right center transparent;
 	color:#53595F;
@@ -2036,11 +2045,7 @@ body.ext-ie7 .x-superboxselect-item {
     margin-bottom: 2px;
 }
 .inline-form input[type=text], .inline-form textarea{
-	 -moz-border-radius:2px;
-    -webkit-border-radius:2px;
-    -o-border-radius:2px;
-    -ms-border-radius:2px;
-    -khtml-border-radius:2px;
+	 @include border-radius(2px);
     border-radius:2px;
     position: relative;
     background-color: #fbfbfb;
@@ -2158,11 +2163,7 @@ body.ext-ie7 .x-superboxselect-item {
 #modx-leftbar .x-tab-strip-wrap .x-tab-strip.x-tab-strip-top li:not(.x-tab-edge) {
     width:32%;
     text-align:center;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-         -o-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-            box-sizing: border-box;
+    @include box-sizing();
 }
 #modx-leftbar-tabpanel__modx-file-tree {
     float:right;
