@@ -4,6 +4,7 @@
 @import "user-select";
 @import "box-sizing";
 @import "box-shadow";
+@import "transition";
 
 
          /*___   ____     __   __     
@@ -18,6 +19,7 @@
 $bg:rgb(240,240,240);
 $navbarBg:rgb(230,230,230);
 $dropdownBg:$navbarBg; /* why set to value of another var?, incase we want to change it later */
+$almostWhite:rgb(250,250,250);
 /* end colors */
                                       
 body {
@@ -275,7 +277,7 @@ input::-moz-focus-inner {
 }
 #modx-manager-search .x-form-trigger {
     background: none;
-    padding: 7px 4px;
+    padding: 7px 4px 7px 6px;
     width: 16px;
     height: 16px;
     left: 0;
@@ -283,8 +285,8 @@ input::-moz-focus-inner {
     cursor: default;
 }
 #modx-manager-search .x-form-field-wrap {
-    opacity: 0.7;
     background: $dropdownBg;
+    @include transition(background-color,360ms,ease-out);
     border-radius:4px;
     outline: none !important;
     border: 1px solid rgb(180,180,180);
@@ -293,7 +295,8 @@ input::-moz-focus-inner {
 }
 #modx-manager-search .x-form-field-wrap:hover,
 #modx-manager-search .x-trigger-wrap-focus {
-    opacity: 1;
+    background: $almostWhite;
+    @include transition(background-color,360ms,ease-in);
     /*outline: none !important;*/
     /*border-radius:4px;*/
     /*border: 1px solid #C8C3C3;*/
