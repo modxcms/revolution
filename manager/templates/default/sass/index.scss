@@ -5,6 +5,7 @@
 @import "box-sizing";
 @import "box-shadow";
 @import "transition";
+@import "utility";
 
 
          /*___   ____     __   __     
@@ -107,7 +108,7 @@ input::-moz-focus-inner {
 
 /*#modx-leftbar*/ .x-tab-panel-noborder {
     border: 1px solid #E2E3DE;
-    margin: 20px 10px 10px;
+    margin: 10px 10px 10px 6px; /* oh, ExtJS */
     background-color: rgb(240,240,240);
     overflow: visible;
 }
@@ -320,7 +321,7 @@ input::-moz-focus-inner {
 }
 .modx-manager-search-results {
     width: 420px !important;
-    margin: 2px 0 0;
+    margin: 2px 0 -2px -32px; /* or this could be positioned to snap left using ExtJS */
     background: rgba(240,240,240,.95);
     border-radius: 0 0 5px 5px;
     box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
@@ -328,11 +329,12 @@ input::-moz-focus-inner {
     @include box-sizing();
 }
 .modx-manager-search-results {
-    width: 450px !important;
+    width: 412px !important;
     height: auto !important;
 }
 .modx-manager-search-results .x-combo-list-inner{
     width: 100% !important;
+    margin:0 0 -2px 0;
 }
 .modx-manager-search-results .section {
     position: relative;
