@@ -28,10 +28,10 @@ MODx.page.UpdateAccessPolicy = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:'security/permission'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{ 
             xtype: 'modx-panel-access-policy'
             ,renderTo: 'modx-panel-access-policy-div'

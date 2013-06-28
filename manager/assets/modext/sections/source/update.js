@@ -17,10 +17,10 @@ MODx.page.UpdateSource = function(config) {
             }]
         },'-',{
             process: 'cancel', text: _('cancel'), params: {a:'source/index'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
 		,components: [{
             xtype: 'modx-panel-source'
             ,record: config.record

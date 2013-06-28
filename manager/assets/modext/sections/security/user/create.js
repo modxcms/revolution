@@ -25,10 +25,10 @@ MODx.page.CreateUser = function(config) {
             ,handler: function() {
                 MODx.loadPage('security/user')
             }
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{
             xtype: 'modx-panel-user'
             ,renderTo: 'modx-panel-user-div'

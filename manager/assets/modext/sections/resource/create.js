@@ -58,12 +58,12 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
             ,id: 'modx-abtn-cancel'
             ,params: { a: 'welcome' }
         });
-        btns.push('-');
+        /*btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });
+        });*/
         return btns;
     }
 });

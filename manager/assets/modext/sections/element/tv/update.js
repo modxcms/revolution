@@ -32,10 +32,10 @@ MODx.page.UpdateTV = function(config) {
             process: 'welcome'
             ,text: _('cancel')
             ,params: {a:'welcome'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'

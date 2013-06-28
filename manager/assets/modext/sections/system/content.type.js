@@ -22,10 +22,10 @@ MODx.page.ContentType = function(config) {
             }]
         },'-',{
             process: 'cancel', text: _('cancel'), params: {a:'welcome'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
 		,components: [{
             xtype: 'modx-panel-content-type'
             ,title: ''

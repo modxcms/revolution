@@ -29,10 +29,10 @@ MODx.page.CreateUserGroup = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:'security/permission'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{
             xtype: 'modx-panel-user-group'
             ,record: config.record || {}

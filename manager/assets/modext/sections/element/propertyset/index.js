@@ -12,10 +12,10 @@ MODx.page.PropertySets = function(config) {
         components: [{
             xtype: 'modx-panel-property-sets'
         }]
-        ,buttons: [{
+        ,buttons: [/*{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
     });
     MODx.page.PropertySets.superclass.constructor.call(this,config);    
 };

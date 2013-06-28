@@ -32,10 +32,10 @@ MODx.page.UpdatePlugin = function(config) {
             process: 'welcome'
             ,text: _('cancel')
             ,params: {a:'welcome'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'

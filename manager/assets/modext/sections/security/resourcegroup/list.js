@@ -12,10 +12,10 @@ MODx.page.ResourceGroups = function(config) {
         components: [{
             xtype: 'modx-panel-resource-groups'
         }]
-        ,buttons: [{
+        ,buttons: [/*{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
     });
     MODx.page.ResourceGroups.superclass.constructor.call(this,config);
 };

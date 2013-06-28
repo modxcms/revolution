@@ -25,10 +25,10 @@ MODx.page.UpdateUserGroup = function(config) {
             ,handler: function() {
                 MODx.loadPage('security/user')
             }
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{
             xtype: 'modx-panel-user-group'
             ,record: config.record || {}

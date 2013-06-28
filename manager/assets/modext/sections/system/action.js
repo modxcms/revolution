@@ -12,10 +12,10 @@ MODx.page.Actions = function(config) {
         components: [{
             xtype: 'modx-panel-actions'
         }]
-        ,buttons: [{
+        ,buttons: [/*{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
 	});
 	MODx.page.Actions.superclass.constructor.call(this,config);
 };
