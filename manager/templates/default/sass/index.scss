@@ -16,11 +16,12 @@
    \/_/ \/_/\/_____/\/___/   \/_/ \/*/
 
 /* start colors */
-$bg:rgb(240,240,240);
+$borderColor:rgb(210,210,210);
+$softGrey:rgb(220,220,220);
 $navbarBg:rgb(230,230,230);
-$dropdownBg:$navbarBg; /* why set to value of another var?, incase we want to change it later */
+$bg:rgb(240,240,240);
 $almostWhite:rgb(250,250,250);
-$borderColor:210;
+$dropdownBg:$navbarBg; /* why set to value of another var?, incase we want to change it later */
 /* end colors */
                                       
 body, body.x-border-layout-ct {
@@ -132,9 +133,9 @@ input::-moz-focus-inner {
     width: 7px;
     box-shadow: -4px 0 0 rgba(0,0,0,0.035);
     z-index: 0;
-    border-right: 1px solid #f5f5f5;
+    /*border-left: 1px solid #f5f5f5;*/
     background:transparent;
-    border-right:1px solid $borderColor;
+    border-right:1px solid rgb(220,220,220);
 }
 .x-layout-mini {
     left: 2px;
@@ -289,7 +290,8 @@ input::-moz-focus-inner {
 }
 #modx-manager-search .x-form-field-wrap {
     background: $dropdownBg;
-    @include transition(background-color,360ms,ease-out);
+    @include transition(background-color,440ms,ease-out);
+    @include transition-delay(180ms);
     border-radius:4px;
     outline: none !important;
     border: 1px solid rgb(180,180,180);
@@ -300,6 +302,7 @@ input::-moz-focus-inner {
 #modx-manager-search .x-trigger-wrap-focus {
     background: $almostWhite;
     @include transition(background-color,360ms,ease-in);
+    @include transition-delay(0);
     /*outline: none !important;*/
     /*border-radius:4px;*/
     /*border: 1px solid #C8C3C3;*/
