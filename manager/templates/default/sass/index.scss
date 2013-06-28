@@ -9,9 +9,9 @@
 
          /*___   ____     __   __     
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
-/\      \ \ \/\ \ \ \/\ \\ `\`\/'/'   
-\ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <     
- \ \ \_/\ \ \ \_\ \ \ \_\ \  \/'/\`\  
+/\      \ \ \/\ \ \ \/\ \\ `\`\/'/'   // if you are a contributor pleaes sign the guestbook below:
+\ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <        - Ryan Trash @rthrash
+ \ \ \_/\ \ \ \_\ \ \ \_\ \  \/'/\`\     - JP DeVries @jpdevries
   \ \_\\ \_\ \_____\ \____/  /\_\\ \_\
    \/_/ \/_/\/_____/\/___/   \/_/ \/*/
 
@@ -20,11 +20,13 @@ $bg:rgb(240,240,240);
 $navbarBg:rgb(230,230,230);
 $dropdownBg:$navbarBg; /* why set to value of another var?, incase we want to change it later */
 $almostWhite:rgb(250,250,250);
+$borderColor:210;
 /* end colors */
                                       
-body {
+body, body.x-border-layout-ct {
     color: #111;
     font: 13px/17px Arial, Helvetica, sans-serif;
+    background:$bg;
 }
 
 h2 {
@@ -131,7 +133,8 @@ input::-moz-focus-inner {
     box-shadow: -4px 0 0 rgba(0,0,0,0.035);
     z-index: 0;
     border-right: 1px solid #f5f5f5;
-    background: #f7f8f3;
+    background:transparent;
+    border-right:1px solid $borderColor;
 }
 .x-layout-mini {
     left: 2px;
