@@ -250,7 +250,7 @@ class modContext extends modAccessibleObject {
             if ($found) {
                 $target = null;
                 if (isset($config['use_weblink_target']) && !empty($config['use_weblink_target'])) {
-                    if (array_key_exists($id, $this->webLinkMap)) {
+                    if (isset($this->webLinkMap[$id])) {
                         $target = $this->webLinkMap[$id];
                         if (!empty($target)) {
                             $alias = $target;

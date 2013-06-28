@@ -2556,44 +2556,53 @@ class xPDO {
      * array.
      */
     public static function escSplit($char, $str, $escToken = '`', $limit = 0) {
-        $split= array();
-        $charPos = strpos($str, $char);
-        if ($charPos !== false) {
-            if ($charPos === 0) {
-                $searchPos = 1;
-                $startPos = 1;
-            } else {
-                $searchPos = 0;
-                $startPos = 0;
-            }
-            $escOpen = false;
-            $strlen = strlen($str);
-            for ($i = $startPos; $i <= $strlen; $i++) {
-                if ($i == $strlen) {
-                    $tmp= trim(substr($str, $searchPos));
-                    if (!empty($tmp)) $split[]= $tmp;
-                    break;
-                }
-                if ($str[$i] == $escToken) {
-                    $escOpen = $escOpen == true ? false : true;
-                    continue;
-                }
-                if (!$escOpen && $str[$i] == $char) {
-                    $tmp= trim(substr($str, $searchPos, $i - $searchPos));
-                    if (!empty($tmp)) {
-                        $split[]= $tmp;
-                        if ($limit > 0 && count($split) >= $limit) {
-                            break;
+            $split= array();
+            $charPos = strpos($str, $char);
+            if ($charPos !== false) {
+                $exit = strpos($str,$escToken);
+                if($exit !== false){
+                    $tmpSplit = explode($char, $str);
+                    $countItem = count($tmpSplit);
+                    $flag = false;
+                    for($i=0;$i<=$countItem;$i++){
+                        $countEsc = substr_count($tmpSplit[$i], $escToken)%2 == 1;
+                        if(isset($tmpSplit[$i+1]) && ($flag || $countEsc)){
+                            if(!$flag) $flag = $i;
+                            $tmpSplit[$flag] .= $char.$tmpSplit[$i+1];
+                            unset($tmpSplit[$i+1]);
                         }
                     }
-                    $searchPos = $i + 1;
+                    $split = array();
+                    if($limit>0){
+                        $count = 0;
+                        foreach($tmpSplit as $splititem){
+                            $count++;
+                            if($count<=$limit){
+                                $split[]=$splititem;
+                            }else{
+                                break;
+                            }
+                        }
+                    }else{
+                        $split = $tmpSplit;
+                        ksort($split);
+                    }
+                }else{
+                    if($limit>0){
+                        $split = explode($char,$str,$limit);
+                    }else{
+                        $split = explode($char,$str);
+                    }
                 }
+
+                foreach($split as &$item){
+                    $item = trim($item);
+                }
+            } else {
+                $split[]= trim($str);
             }
-        } else {
-            $split[]= trim($str);
+            return $split;
         }
-        return $split;
-    }
 
     /**
      * Parses parameter bindings in SQL prepared statements.

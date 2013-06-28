@@ -100,54 +100,49 @@ class modParser {
      */
     public function collectElementTags($origContent, array &$matches, $prefix= '[[', $suffix= ']]') {
         $matchCount= 0;
-        if (!empty ($origContent) && is_string($origContent) && strpos($origContent, $prefix) !== false) {
-            $openCount= 0;
-            $offset= 0;
-            $openPos= 0;
-            $closePos= 0;
-            if (($startPos= strpos($origContent, $prefix)) === false) {
+        $startPos = strpos($origContent, $prefix);
+        $slen_prefix = strlen($prefix);
+        $slen_suffix = strlen($suffix);
+        if (!empty ($origContent) && is_string($origContent) && $startPos !== false) {
+            $offset= $startPos + $slen_prefix;
+            if (($stopPos= strrpos($origContent, $suffix, $offset)) === false) {
                 return $matchCount;
             }
-            $offset= $startPos +strlen($prefix);
-            if (($stopPos= strrpos($origContent, $suffix)) === false) {
-                return $matchCount;
-            }
-            $stopPos= $stopPos + strlen($suffix);
-            $length= $stopPos - $startPos;
-            $content= $origContent;
+            $stopPos = $stopPos + $slen_suffix;
+            $length = $stopPos - $startPos;
+            $content = $origContent;
             while ($length > 0) {
-                $openCount= 0;
-                $content= substr($content, $startPos);
-                $openPos= 0;
-                $offset= strlen($prefix);
+                $openCount = 0;
+                $content = substr($content, $startPos);
+                $offset = $slen_prefix;
                 if (($closePos= strpos($content, $suffix, $offset)) === false) {
                     break;
                 }
-                $nextOpenPos= strpos($content, $prefix, $offset);
+                $nextOpenPos = strpos($content, $prefix, $offset);
                 while ($nextOpenPos !== false && $nextOpenPos < $closePos) {
                     $openCount++;
-                    $offset= $nextOpenPos + strlen($prefix);
+                    $offset = $nextOpenPos + $slen_prefix;
                     $nextOpenPos= strpos($content, $prefix, $offset);
                 }
-                $nextClosePos= strpos($content, $suffix, $closePos + strlen($suffix));
+                $nextClosePos = strpos($content, $suffix, $closePos + $slen_suffix);
                 while ($openCount > 0 && $nextClosePos !== false) {
                     $openCount--;
-                    $closePos= $nextClosePos;
-                    $nextOpenPos= strpos($content, $prefix, $offset);
+                    $closePos = $nextClosePos;
+                    $nextOpenPos = strpos($content, $prefix, $offset);
                     while ($nextOpenPos !== false && $nextOpenPos < $closePos) {
                         $openCount++;
-                        $offset= $nextOpenPos + strlen($prefix);
-                        $nextOpenPos= strpos($content, $prefix, $offset);
+                        $offset = $nextOpenPos + $slen_prefix;
+                        $nextOpenPos = strpos($content, $prefix, $offset);
                     }
-                    $nextClosePos= strpos($content, $suffix, $closePos + strlen($suffix));
+                    $nextClosePos = strpos($content, $suffix, $closePos + $slen_suffix);
                 }
-                $closePos= $closePos +strlen($suffix);
+                $closePos= $closePos + $slen_suffix;
 
-                $outerTagLength= $closePos - $openPos;
-                $innerTagLength= ($closePos -strlen($suffix)) - ($openPos +strlen($prefix));
+                $outerTagLength= $closePos;
+                $innerTagLength= ($closePos - $slen_suffix) - $slen_prefix;
 
-                $matches[$matchCount][0]= substr($content, $openPos, $outerTagLength);
-                $matches[$matchCount][1]= substr($content, ($openPos +strlen($prefix)), $innerTagLength);
+                $matches[$matchCount][0] = substr($content, 0, $outerTagLength);
+                $matches[$matchCount][1] = substr($content, $slen_prefix, $innerTagLength);
                 $matchCount++;
 
                 if ($nextOpenPos === false) {
@@ -155,7 +150,7 @@ class modParser {
                 }
                 if ($nextOpenPos !== false) {
                     $startPos= $nextOpenPos;
-                    $length= $length - $nextOpenPos;
+                    $length = $length - $nextOpenPos;
                 } else {
                     $length= 0;
                 }
@@ -505,7 +500,7 @@ class modParser {
      */
     public function getElement($class, $name) {
         $realname = $this->realname($name);
-        if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
+        if (isset($this->modx->sourceCache[$class]) && isset($this->modx->sourceCache[$class][$realname])) {
             /** @var modElement $element */
             $element = $this->modx->newObject($class);
             $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
@@ -524,7 +519,7 @@ class modParser {
         } else {
             /** @var modElement $element */
             $element = $this->modx->getObjectGraph($class,array('Source' => array()),array('name' => $realname), true);
-            if ($element && array_key_exists($class, $this->modx->sourceCache)) {
+            if ($element && isset($this->modx->sourceCache[$class])) {
                 $this->modx->sourceCache[$class][$realname] = array(
                     'fields' => $element->toArray(),
                     'policies' => $element->getPolicies(),
@@ -1238,7 +1233,7 @@ class modLinkTag extends modTag {
                 );
                 $context = '';
                 if ($this->modx->getOption('friendly_urls', null, false)) {
-                    if (array_key_exists('context', $this->_properties)) {
+                    if (isset($this->_properties['context'])) {
                         $context = $this->_properties['context'];
                     }
                     if ($context) {
@@ -1254,16 +1249,16 @@ class modLinkTag extends modTag {
                     $options = array();
                     if (is_array($this->_properties) && !empty($this->_properties)) {
                         $qs = array();
-                        if (array_key_exists('context', $this->_properties)) {
+                        if (isset($this->_properties['context'])) {
                             $context = $this->_properties['context'];
                             unset($this->_properties['context']);
                         }
-                        if (array_key_exists('scheme', $this->_properties)) {
+                        if (isset($this->_properties['scheme'])) {
                             $scheme = $this->_properties['scheme'];
                             unset($this->_properties['scheme']);
                             if (is_numeric($scheme)) $scheme = (integer) $scheme;
                         }
-                        if (array_key_exists('use_weblink_target', $this->_properties)) {
+                        if (isset($this->_properties['use_weblink_target'])) {
                             $options['use_weblink_target'] = $this->_properties['use_weblink_target'];
                             unset($this->_properties['use_weblink_target']);
                         }

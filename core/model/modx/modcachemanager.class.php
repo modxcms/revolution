@@ -97,7 +97,7 @@ class modCacheManager extends xPDOCacheManager {
                         }
                         $results['resourceMap'][(integer) $r->parent][] = (integer) $r->id;
                         if ($this->modx->getOption('friendly_urls', $contextConfig, false) && $this->getOption('cache_alias_map', $options, false)) {
-                            if (array_key_exists($r->uri, $results['aliasMap'])) {
+                            if (isset($results['aliasMap'][$r->uri])) {
                                 $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
                                 continue;
                             }
@@ -154,7 +154,7 @@ class modCacheManager extends xPDOCacheManager {
         } else {
             $results = $this->getOption("{$key}_results", $options, array());
             $cacheKey = "{$key}/context";
-            $options['cache_context_settings'] = array_key_exists('cache_context_settings', $results) ? (boolean) $results : false;
+            $options['cache_context_settings'] = isset($results['cache_context_settings']) ? (boolean) $results : false;
         }
         if ($this->getOption('cache_context_settings', $options, true) && is_array($results) && !empty($results)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
@@ -576,7 +576,7 @@ class modCacheManager extends xPDOCacheManager {
                     $results['system_settings'] = ($this->generateConfig($partOptions) ? true : false);
                     break;
                 case 'context_settings':
-                    if (array_key_exists('contexts', $partOptions)) {
+                    if (isset($partOptions['contexts'])) {
                         $contextResults = array();
                         foreach ($partOptions['contexts'] as $context) {
                             $contextResults[$context] = ($this->generateContext($context) ? true : false);

@@ -187,7 +187,7 @@ class modRequest {
         if (!is_numeric($resourceId)) {
             $this->modx->sendErrorPage();
         }
-        $isForward = array_key_exists('forward', $options) && !empty($options['forward']);
+        $isForward = !empty($options['forward']);
         $fromCache = false;
         $cacheKey = $this->modx->context->get('key') . "/resources/{$resourceId}";
         $cachedResource = $this->modx->cacheManager->get($cacheKey, array(
@@ -195,7 +195,7 @@ class modRequest {
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
             xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
-        if (is_array($cachedResource) && array_key_exists('resource', $cachedResource) && is_array($cachedResource['resource'])) {
+        if (is_array($cachedResource) && isset($cachedResource['resource']) && is_array($cachedResource['resource'])) {
             /** @var modResource $resource */
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
@@ -567,7 +567,7 @@ class modRequest {
                 }
             } else {
                 if ($type != 'GET' || $keys != $methodIdentifier) {
-                    if (array_key_exists($keys, $this->parameters[$type])) {
+                    if (isset($this->parameters[$type][$keys])) {
                         $value = $this->parameters[$type][$keys];
                     }
                 }
