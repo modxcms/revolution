@@ -39,7 +39,7 @@
     white-space: normal;
 }
 .vertical-tabs-header ul.x-tab-strip-top li.x-tab-strip-active {
-	background: none repeat scroll 0 0 #fff !important;
+	background: #fff !important;
     border-width: 0 0 1px;
 	color: #555;
 	padding-bottom: 5px !important;
@@ -72,10 +72,6 @@ ul.x-tab-strip-top {
 	border-bottom-color: transparent;
 }
 ul.x-tab-strip li {
-	/*-moz-border-radius:4px 4px 0 0;
-	-webkit-border-radius:4px 4px 0 0;
-	-khtml-border-radius:4px 4px 0 0;
-	border-radius:4px 4px 0 0;*/
 	border: 1px solid transparent;
 	border-width: 1px 1px 0;
 	margin: 1px 0 1px 2px;
@@ -93,18 +89,13 @@ ul.x-tab-strip li.x-tab-strip-active {
     border-width: 0 1px;
     margin: 3px 0 0 2px;
     cursor: default;
-    /*box-shadow: 0 -2px 0 rgb(200,200,200);*/
+    box-shadow: 0 -3px 0 $uberBlue;
 }
-/*ul.x-tab-strip-top li.x-tab-strip-active {
-    box-shadow: 0 1px 0 #fff, 3px 1px 0 rgba(0,0,0,.1);
-}*/
-
 .x-tab-strip-wrap,
 .x-tab-panel-header,
 .x-tab-panel {
     overflow: visible;
 }
-
 .x-tab-strip-closable{ padding-right: 15px !important; }
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
 	right: 8px;
@@ -113,7 +104,9 @@ ul.x-tab-strip li.x-tab-strip-active {
 ul.x-tab-strip-top li:first-child { 
     margin-left:0; 
 }
-ul.x-tab-strip li:hover,
+ul.x-tab-strip li:hover {
+	color: $uberBlue;
+}
 ul.x-tab-strip li.x-tab-strip-active {
     color: #444;
 }
@@ -123,10 +116,6 @@ ul.x-tab-strip-bottom {
 	border-top-color:#dfdfdf;
 }
 .x-tab-panel-header-plain {
-/*    -moz-border-radius: 3px 3px 0 0;
-    -webkit-border-radius: 3px 3px 0 0;
-    border-radius: 3px 3px 0 0; 
-    margin-left: 15px;*/
     background-color: #f7f8f3;
 }
 .x-tab-panel-header-plain .x-tab-strip-spacer,
@@ -172,16 +161,16 @@ ul.x-tab-strip-bottom {
 	background-image:url(../images/modx-theme/tabs/scroll-right.gif);
 	border-bottom-color:#dfdfdf;
 }
-.x-tab-panel-bbar .x-toolbar, .x-tab-panel-tbar .x-toolbar { border-color:#dfdfdf; }
-
-.x-tab-panel-body-noborder .x-panel-body-noheader:first-child{
+.x-tab-panel-bbar .x-toolbar, 
+.x-tab-panel-tbar .x-toolbar { 
+	border-color:#dfdfdf; 
+}
+.x-tab-panel-body-noborder .x-panel-body-noheader:first-child {
 	border-top: 0 none;
 }
-
 .x-tab-panel-bbar-noborder .x-toolbar {
     border-top-color:transparent;
 }
-
 .x-tab-panel-tbar-noborder .x-toolbar {
     border-bottom-color:transparent;
 }
