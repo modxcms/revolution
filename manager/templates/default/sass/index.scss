@@ -12,6 +12,7 @@
 @import "uberbar";
 @import "tree";
 @import "xtheme-modx";
+@import "utility";
 
 /*        ____   ____     __   __     
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
@@ -183,6 +184,7 @@ input::-moz-focus-inner {
     right: 20px;
     z-index: 10;
 }
+
 
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
