@@ -1,0 +1,74 @@
+/*#modx-leftbar*/ .x-tab-panel-noborder {
+    border: 1px solid #E2E3DE;
+    margin: 20px 10px 10px;
+    background-color: rgb(240,240,240);
+    overflow: visible;
+}
+
+#modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
+    padding-bottom: 5px;
+    background-color: #fff;
+}
+/*#modx-leftbar*/ ul.x-tab-strip-top {
+    margin: -1px;
+    width: auto;
+}
+
+
+#modx-leftbar .x-tree-root-ct {
+    -moz-border-radius:0 0 3px 3px;
+    -webkit-border-radius:0 0 3px 3px;
+    border-radius:0 0 3px 3px;
+    padding: 6px;
+}
+
+/* leftbar tabs */
+#modx-leftbar .x-tree .x-panel-body {
+    background: #fff;
+}
+#modx-leftbar .x-tab-panel-body {
+    background-color: transparent;
+}
+#modx-leftbar .x-toolbar {
+    border-bottom: 0;
+    padding:4px 5px 5px;
+}
+.modx-leftbar .x-tree-root-ct {
+    @include border-radius(inherit inherit 3px 3px);
+    background-color: #eee;
+    padding: 4px;
+}
+
+#modx-resource-tree-panel .x-accordion-hd {
+    background-position: 0 0;
+}
+#modx-element-tree-panel .x-accordion-hd {
+    background-position: 0 -32px;
+}
+#modx-file-tree-panel .x-accordion-hd {
+    background-position: 0 -64px;
+}
+#modx-static-page-settings .x-accordion-hd {
+    background-position: 0 -96px;
+}
+
+/* tree menu splitter */
+.x-layout-split {
+    width: 7px;
+    box-shadow: -4px 0 0 rgba(0,0,0,0.035);
+    z-index: 0;
+    /*border-left: 1px solid #f5f5f5;*/
+    background:transparent;
+    border-right:1px solid rgb(220,220,220);
+}
+
+/*
+#modx-leftbar .x-tab-strip-wrap .x-tab-strip.x-tab-strip-top li:not(.x-tab-edge) {
+    width:32%;
+    text-align:center;
+    @include box-sizing();
+}
+#modx-leftbar-tabpanel__modx-file-tree {
+    float:right;
+}
+*/
