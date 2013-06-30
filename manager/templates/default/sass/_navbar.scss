@@ -6,29 +6,26 @@
     border: 1px solid $borderColor;
     border-width: 0 0 1px;
     z-index: 10;
-    @include box-shadow(1px 0 0 $borderShadow);
+    @include box-shadow(0 1px 0 $borderShadow);
 }
 #modx-navbar li:hover a {
-    color: #333;
     text-shadow: none;
-    background-color: rgb(230,230,230);
-}
-#modx-navbar li:hover li a { 
-    background-color:rgb(240,240,240) 
+    background-color: $navbarHover;
 }
 #modx-navbar ul#modx-settings-menu,
 #modx-navbar ul#modx-user-submenu {
     left: auto;
     right: 53px;
-    background: #eee;
-    color: rgba(255,255,255,0.9);
+    background: $navbarDrop;
+    border: 1px solid $borderColor;
+    border-top: none;
     z-index: 20;
 }
 #modx-navbar ul#modx-user-submenu {
     right: 107px;
 }
 #modx-navbar ul.modx-subnav {
-    @include border-radius(0 0 5px 5px);
+    @include border-radius(0 0 $navbarRadius $navbarRadius);
     list-style: none;
     line-height: 1.1;
     position: absolute;
@@ -40,7 +37,8 @@
     display: none;
     float: left;
     border: 1px solid $borderColor;
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+    border-top: none;
+    @include box-shadow($shadower);
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
@@ -52,7 +50,6 @@
     overflow: hidden;
     width: 100%;
     padding: 0;
-	text-shadow: 1px 0 0 #eee;
 }
 #modx-navbar #modx-home-dashboard:hover a {
     background-color:transparent;
@@ -63,21 +60,26 @@
 #modx-navbar ul.modx-subnav li {
     margin: 0;
     padding: 0;
-    background: #eee;
-    border-bottom: 1px solid rgba(0,0,0,0.15);
+    background: $navbarDrop;
+    border-bottom: 1px solid $navbarHover;
     clear: both;
 }
+#modx-navbar ul.modx-subnav li:first-child a
+{
+    @include background(linear-gradient($navbarHover, $navbarDrop) top repeat);
+}
+
 #modx-navbar ul.modx-subnav li a {
     float: left;
     width: 240px;
     margin: 0;
-    padding: 8px 10px 8px;
+    padding: 8px 15px;
     line-height: 1.5;
     text-shadow: none;
-    color: #444;
+    background-color: $navbarDrop;
 }
 #modx-navbar ul.modx-subnav li a:hover{
-    background-color: rgba(255,255,255,0.8);
+    background-color: $navbarHover;
     color: #333;
 }
 #modx-navbar ul.modx-subnav li a span {
@@ -89,6 +91,7 @@
     opacity: 0.9;
     font-size: 12px;
     line-height: 1.3;
+    margin-top: 3px;
 }
 #modx-navbar ul.modx-subnav li a:hover span {
     opacity: 1;
@@ -105,21 +108,15 @@
 }
 #modx-navbar ul.modx-subnav ul li:first-child,
 #modx-navbar ul.modx-subnav ul li:first-child a {
-    -moz-border-radius: 0 2px 0 0;
-    -webkit-border-radius: 0 2px 0 0;
-    border-radius: 0 2px 0 0;
+    @include border-radius(0 2px 0 0);
 }
 #modx-navbar ul.modx-subnav ul li:last-child,
 #modx-navbar ul.modx-subnav ul li:last-child a {
-    -moz-border-radius: 0 0 2px 0;
-    -webkit-border-radius: 0 0 2px 0;
-    border-radius: 0 0 2px 0;
+    @include border-radius(0 0 2px 0);
 }
 #modx-navbar ul.modx-subnav ul ul li:last-child,
 #modx-navbar ul.modx-subnav ul ul li:last-child a {
-    -moz-border-radius: 0 0 2px 2px;
-    -webkit-border-radius: 0 0 2px 2px;
-    border-radius: 0 0 2px 2px;
+    @include border-radius(0 0 2px 2px);
 }
 #modx-navbar ul.modx-subnav li:hover ul ul,
 #modx-navbar ul.modx-subnav ul li:hover ul ul,
@@ -134,7 +131,9 @@
 }
 
 /* top navbar */
-#modx-topnav, #modx-user-menu a {
+#modx-topnav, 
+#modx-user-menu a 
+{
     float: left;
     font-size: 13px;
     font-weight: bold;
@@ -163,18 +162,25 @@
 }
 #modx-topnav a,
 #modx-user-menu a  {
-    padding: 0 25px;
+    padding: 0 15px;
     line-height: 43px;
-    color: #444;
+    color: $navbarText;
     display: block;
     text-decoration: none;
     cursor: pointer;
 }
-#modx-user-menu a  {
+#modx-user-menu a 
+{
     padding: 0 15px;
 }
-#modx-topnav > li.top > a { cursor: default; }
-#modx-user-menu {
+
+#modx-topnav > li.top > a
+{ 
+    cursor: default;
+}
+
+#modx-user-menu
+{
     position: absolute;
     top: 0;
     right: 1px;
