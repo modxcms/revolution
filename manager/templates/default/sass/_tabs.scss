@@ -89,7 +89,7 @@ ul.x-tab-strip li.x-tab-strip-active {
     border-width: 0 1px;
     margin: 3px 0 0 2px;
     cursor: default;
-    box-shadow: 0 -3px 0 $uberBlue;
+    box-shadow: 0 -3px 0 $colorSplash;
 }
 .x-tab-strip-wrap,
 .x-tab-panel-header,
@@ -105,7 +105,7 @@ ul.x-tab-strip-top li:first-child {
     margin-left:0; 
 }
 ul.x-tab-strip li:hover {
-	color: $uberBlue;
+	color: $colorSplash;
 }
 ul.x-tab-strip li.x-tab-strip-active {
     color: #444;

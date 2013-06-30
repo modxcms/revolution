@@ -87,7 +87,7 @@
     position: relative;
 }
 .modx-manager-search-results i {
-    color: $uberBlue;
+    color: $colorSplash;
     position: absolute;
     top: 2px;
     left: 0;
@@ -106,14 +106,14 @@
 }
 .modx-manager-search-results .x-combo-selected {
     color: #fff !important;
-    background-color: $uberBlue !important;
+    background-color: $colorSplash !important;
     border: none;
     padding-left: 117px;
     margin-left: 0;
 }
 .modx-manager-search-results .x-combo-selected {
     color: #fff !important;
-    background-color: $uberBlue !important;
-    box-shadow: inset 0 -1px 1px darken($uberBlue,50%);
+    background-color: $colorSplash !important;
+    box-shadow: inset 0 -1px 1px darken($colorSplash,50%);
     z-index: 10;
 }
