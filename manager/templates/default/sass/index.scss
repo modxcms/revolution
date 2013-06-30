@@ -19,14 +19,14 @@
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
 /\      \ \ \/\ \ \ \/\ \\ `\`\/'/'   // if you are a contributor pleaes sign the guestbook below:
 \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <        - Ryan Trash @rthrash
- \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\     - JP DeVries @jpdevries
+ \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\      - JP DeVries @jpdevries
   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\
    \/_/ \/_/\/_____/\/___/  \/_/ \/*/
                                       
 body, body.x-border-layout-ct {
     color: #111;
     font: 13px/17px Arial, Helvetica, sans-serif;
-    background:$bg;
+;
 }
 
 h2 {
@@ -110,11 +110,11 @@ input::-moz-focus-inner {
 
 /* fix leftbar toolbar */
 #modx-leftbar {
-    background-color:rgb(240,240,240);
+    background-color: $mainBg;
 }
 #modx-content {
     padding: 0 0 0 8px;
-    background:$bg;
+    background: $mainBg;
 }
 
 #modx-leftbar .x-btn{
@@ -692,7 +692,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* MODExt common classes */
 
-.container {  margin: 15px 15px 20px 0; } /* Wrap the main content */
+.container {  margin: 20px 15px 20px 0; } /* Wrap the main content */
 .structure-tabs{ margin-top: -1px; } /* Realign modx-tabs for getPageStructure */
 
 /* Panel description text */
