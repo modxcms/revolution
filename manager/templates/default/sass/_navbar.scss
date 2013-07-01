@@ -8,21 +8,28 @@
     z-index: 10;
     @include box-shadow(0 1px 0 $borderShadow);
 }
-#modx-navbar li:hover a {
-    text-shadow: none;
+#modx-navbar li:hover a,
+#modx-user-menu a:hover,
+#modx-user-menu a > ul:hover {
     background-color: $navbarHover;
 }
+
+#modx-user-menu a:hover ul 
+{
+    display: block
+}
+
 #modx-navbar ul#modx-settings-menu,
 #modx-navbar ul#modx-user-submenu {
     left: auto;
-    right: 53px;
+    right: 45px;
     background: $navbarDrop;
     border: 1px solid $borderColor;
     border-top: none;
     z-index: 20;
 }
 #modx-navbar ul#modx-user-submenu {
-    right: 107px;
+    right: 90px;
 }
 #modx-navbar ul.modx-subnav {
     @include border-radius(0 0 $navbarRadius $navbarRadius);
@@ -42,8 +49,8 @@
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
-    background: url(../images/modx-home-logo.png) 20px 11px no-repeat ;
-    @include image-set('../images/modx-home-logo.png','../images/modx-home-logo@2X.png'); /* don't tell mark */
+    background: $navbarBg url(../images/modx-logo.png) 18px 9px no-repeat;
+    @include image-set('../images/modx-logo.png','../images/modx-logo@2X.png'); /* don't tell mark */
 }
 #modx-navbar #modx-home-dashboard a {
     text-indent: -9999px;
@@ -52,7 +59,10 @@
     padding: 0;
 }
 #modx-navbar #modx-home-dashboard:hover a {
-    background-color:transparent;
+    background-color: transparent;
+}
+#modx-navbar #modx-home-dashboard:hover {
+    background-color: $navbarHover;
 }
 #modx-navbar li:hover ul.modx-subnav {
     display: block;
@@ -78,24 +88,19 @@
     text-shadow: none;
     background-color: $navbarDrop;
 }
+#modx-navbar ul.modx-subnav li:first-child a:hover,
+#modx-navbar ul.modx-subnav:hover li a:hover,
 #modx-navbar ul.modx-subnav li a:hover{
-    background-color: $navbarHover;
-    color: #333;
+    background: $navbarHover !important;
 }
 #modx-navbar ul.modx-subnav li a span {
     font-weight: normal;
-    filter: alpha(opacity=90);
     display: block;
     float: none;
     width: 100%;
-    opacity: 0.9;
     font-size: 12px;
     line-height: 1.3;
     margin-top: 3px;
-}
-#modx-navbar ul.modx-subnav li a:hover span {
-    opacity: 1;
-    filter: alpha(opacity=100);
 }
 #modx-navbar ul.modx-subnav ul {
     display: none;
@@ -154,7 +159,8 @@
 }
 #modx-topnav li:last-of-type a:hover {
 }
-#modx-topnav li,#modx-user-menu a {
+#modx-topnav li,
+#modx-user-menu a {
 }
 #modx-topnav li:hover,
 #modx-user-menu a:hover {

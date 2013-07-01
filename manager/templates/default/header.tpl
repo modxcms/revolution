@@ -6,15 +6,8 @@
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
-{if $_config.compress_css}
-{else}
-{/if}
-
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" /><!-- this is Sass now and prepends xtheme-modx.css -->
-
-
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/font-awesome.min.css" />
 
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
@@ -60,7 +53,7 @@
     <div id="modx-header">
         <div id="modx-navbar">
             <div id="modx-user-menu">
-                <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
+                <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a>
                 <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
                 {if $canChangeProfile}
                 	<li>

@@ -64,8 +64,9 @@
     padding: 0 0 10px;
 }*/
 
-.x-tab-panel-header, .x-tab-panel-footer {
-    border-color: #C0C0C0;
+.x-tab-panel-header, 
+.x-tab-panel-footer {
+    border-color: $borderColor;
 }
 
 ul.x-tab-strip-top {
@@ -75,11 +76,11 @@ ul.x-tab-strip li {
 	border: 1px solid transparent;
 	border-width: 1px 1px 0;
 	margin: 1px 0 1px 2px;
+    color: $tabInactiveText;
 	padding: 0;
     font-size: 12px;
     line-height: 2.2;
     cursor: pointer;
-    color: #777;
     padding: 0 15px;
 
 }
@@ -105,10 +106,10 @@ ul.x-tab-strip-top li:first-child {
     margin-left:0; 
 }
 ul.x-tab-strip li:hover {
-	color: $colorSplash;
+	color: $tabHoverText;
 }
 ul.x-tab-strip li.x-tab-strip-active {
-    color: #444;
+    color: $tabText;
 }
 
 ul.x-tab-strip-bottom {

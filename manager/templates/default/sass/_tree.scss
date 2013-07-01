@@ -58,12 +58,16 @@
 
 /* tree menu splitter */
 .x-layout-split {
-    width: 7px;
-    box-shadow: -4px 0 0 rgba(0,0,0,0.035);
+    width: 10px;
+    box-shadow: -2px 0 2px $borderShadow;
     z-index: 0;
-    /*border-left: 1px solid #f5f5f5;*/
-    background:transparent;
-    border-right:1px solid rgb(220,220,220);
+    background: $mainBg;
+    border: 1px solid $borderColor;
+    border-width: 0 1px;
+}
+.x-layout-split:hover 
+{
+    background: $navbarHover;
 }
 
 /*
