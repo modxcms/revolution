@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9133] Fix various issues with Number TV
 - Fix visibility of Quick Edit independent of allowChildrenResources
 - [#8453] Add several File Management system events
 - [#7866] Add columns option to Checkbox TV
