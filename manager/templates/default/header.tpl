@@ -24,17 +24,6 @@
 {/if}
 
 <script type="text/javascript">
-<!--
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-    }
-//-->
-</script>
-<script type="text/javascript">
     Ext.onReady(function() {
         new MODx.SearchBar;
     });
@@ -52,27 +41,28 @@
 <div id="modx-container">
     <div id="modx-header">
         <div id="modx-navbar">
-            <div id="modx-user-menu">
-                <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a>
-                <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
-                {if $canChangeProfile}
-                	<li>
-                    	<a class="modx-user-profile" href="?a=security/profile">Edit account
-                        	<span class="description">Update account email, password or info. </span>
-                    	</a>
-                    </li>
-                {/if}
+            <ul id="modx-user-menu">
+                <li><a id="modx-user-submenu-toggle-large" href="#" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a>
+                    <ul id="modx-user-submenu" class="modx-subnav">
+                    {if $canChangeProfile}
+                    	<li>
+                        	<a class="modx-user-profile" href="?a=security/profile">Edit account
+                            	<span class="description">Update account email, password or info. </span>
+                        	</a>
+                        </li>
+                    {/if}
             		{if $canLogout}
-						<li>
-							<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
-								<span class="description">Log out from MODX</span>
-							</a>
-						</li>
-					{/if}
-            	</ul>
+    					<li>
+    						<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
+    							<span class="description">Log out from MODX</span>
+    						</a>
+    					</li>
+    				{/if}
+        	       </ul>
+                </li>
                 {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
-                    <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
-                    <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
+                <li><a id="modx-settings-toggle-large" href="#" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
+                    <ul id="modx-settings-menu" class="modx-subnav">
                     {if $canModifySettings}
                         <li>
                             <a href="?a=system/settings">{$_lang.system_settings}
@@ -137,9 +127,10 @@
                         </li>
                     {/if}
                     </ul>
+                </li>
                 {/if}
-                <a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-info-sign icon-large"></i></a>
-            </div>
+                <li><a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-info-sign icon-large"></i></a></li>
+            </ul>
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
                     <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>

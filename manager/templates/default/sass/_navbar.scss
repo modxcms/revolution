@@ -8,28 +8,51 @@
     z-index: 10;
     @include box-shadow(0 1px 0 $borderShadow);
 }
-#modx-navbar li:hover a,
-#modx-user-menu a:hover,
-#modx-user-menu a > ul:hover {
+#modx-user-menu {
+    float:right;
+    margin-right: 15px;
+}
+
+#modx-topnav
+{
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#modx-navbar li,
+#modx-navbar a  {
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: transparent;
+}
+#modx-navbar li:hover {
+    z-index: 10000;
+}
+#modx-navbar a  {
+    padding: 0 15px;
+    line-height: 43px;
+    color: $navbarText;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modx-topnav > li.top > a
+{ 
+    cursor: default;
+}
+#modx-navbar li:hover a {
     background-color: $navbarHover;
 }
-
-#modx-user-menu a:hover ul 
-{
-    display: block
-}
-
 #modx-navbar ul#modx-settings-menu,
 #modx-navbar ul#modx-user-submenu {
     left: auto;
-    right: 45px;
-    background: $navbarDrop;
-    border: 1px solid $borderColor;
-    border-top: none;
-    z-index: 20;
-}
-#modx-navbar ul#modx-user-submenu {
-    right: 90px;
+    right: 0;
 }
 #modx-navbar ul.modx-subnav {
     @include border-radius(0 0 $navbarRadius $navbarRadius);
@@ -134,64 +157,6 @@
 #modx-navbar ul.modx-subnav ul ul ul li:hover ul {
     display: block;
 }
-
-/* top navbar */
-#modx-topnav, 
-#modx-user-menu a 
-{
-    float: left;
-    font-size: 13px;
-    font-weight: bold;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-#modx-topnav li,
-#modx-topnav a,
-#modx-user-menu a  {
-    float: left;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    background: transparent;
-}
-#modx-topnav li#limenu-Reports {
-}
-#modx-topnav li:last-of-type a:hover {
-}
-#modx-topnav li,
-#modx-user-menu a {
-}
-#modx-topnav li:hover,
-#modx-user-menu a:hover {
-    z-index: 10000;
-}
-#modx-topnav a,
-#modx-user-menu a  {
-    padding: 0 15px;
-    line-height: 43px;
-    color: $navbarText;
-    display: block;
-    text-decoration: none;
-    cursor: pointer;
-}
-#modx-user-menu a 
-{
-    padding: 0 15px;
-}
-
-#modx-topnav > li.top > a
-{ 
-    cursor: default;
-}
-
-#modx-user-menu
-{
-    position: absolute;
-    top: 0;
-    right: 1px;
-}
-
 .ext-ie7 #modx-header{
     position: relative;
     z-index: 10;
