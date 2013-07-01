@@ -9,6 +9,8 @@
 $_lang['attributes'] = 'Attributes';
 $_lang['capitalize'] = 'Capitalize';
 $_lang['checkbox'] = 'Check Box';
+$_lang['checkbox_columns'] = 'Columns';
+$_lang['checkbox_columns_desc'] = 'The number of columns the checkboxes are displayed in.';
 $_lang['class'] = 'Class';
 $_lang['combo_allowaddnewdata'] = 'Allow Add New Items';
 $_lang['combo_allowaddnewdata_desc'] = 'When Yes, allows items to be added that do not already exist in the list. Defaults to No.';
