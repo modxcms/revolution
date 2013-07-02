@@ -54,25 +54,20 @@
 .vertical-tabs-body{
 	padding: 20px 30px 20px 25px;
 }
-.vertical-tabs-bwrap{}
-
-
-/*#modx-resource-vtabs-header-title {
-    margin-left: 15px;
-    font-size: 14px;
-    color: #777;
-    padding: 0 0 10px;
-}*/
-
 .x-tab-panel-header, 
 .x-tab-panel-footer {
     border-color: $borderColor;
 }
-
-ul.x-tab-strip-top {
+ul.x-tab-strip-top 
+{
 	border-bottom-color: transparent;
 }
-ul.x-tab-strip li {
+ul.x-tab-strip
+{
+	padding-left: 1px;
+}
+ul.x-tab-strip li 
+{
 	border: 1px solid transparent;
 	border-width: 1px 1px 0;
 	margin: 1px 0 1px 2px;
@@ -82,22 +77,22 @@ ul.x-tab-strip li {
     line-height: 2.2;
     cursor: pointer;
     padding: 0 15px;
-
 }
-ul.x-tab-strip li.x-tab-strip-active {
+ul.x-tab-strip li.x-tab-strip-active 
+{
     background-color: #fff;
-    border: 1px solid #E2E3DE;
-    border-width: 0 1px;
     margin: 3px 0 0 2px;
     cursor: default;
-    box-shadow: 0 -3px 0 $colorSplash;
+    box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
 }
 .x-tab-strip-wrap,
 .x-tab-panel-header,
 .x-tab-panel {
     overflow: visible;
 }
-.x-tab-strip-closable{ padding-right: 15px !important; }
+.x-tab-strip-closable { 
+	padding-right: 15px !important;
+}
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
 	right: 8px;
 	top: 11px;
