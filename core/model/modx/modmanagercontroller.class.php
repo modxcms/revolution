@@ -485,6 +485,7 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.treenodeui.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';

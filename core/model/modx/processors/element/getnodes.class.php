@@ -78,11 +78,29 @@ class modElementGetNodesProcessor extends modProcessor {
         return explode('_',$id);
     }
 
+
+    /**
+     * Default icons for element types
+     * @param $elementIdentifier string Element Type
+     * @return string
+     */
+    public function getNodeIcon($elementIdentifier){
+        $defaults = array(
+            'template' => 'icon-columns',
+            'tv' => 'icon-list-alt',
+            'chunk' => 'icon-th-large',
+            'snippet' => 'icon-code',
+            'plugin' => 'icon-cogs',
+            'category' => 'icon-folder-close-alt'
+        );
+        return $this->modx->getOption('mgr_tree_icon_'.$elementIdentifier,null, $defaults[$elementIdentifier]);
+    }
+
     public function getRootNodes(array $map) {
         $elementType = ucfirst($map[0]);
         $nodes = array();
 
-        /* templates */
+        /* Templates */
         if ($this->modx->hasPermission('view_template')) {
             $class = $this->modx->hasPermission('new_template') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
@@ -92,7 +110,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'id' => 'n_type_template',
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-template',
+                'iconCls' => $this->getNodeIcon('template'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'template',
@@ -110,7 +129,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'id' => 'n_type_tv',
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-tv',
+                'iconCls' => $this->getNodeIcon('tv'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'tv',
@@ -118,7 +138,7 @@ class modElementGetNodesProcessor extends modProcessor {
             );
         }
 
-        /* chunks */
+        /* Chunks */
         if ($this->modx->hasPermission('view_chunk')) {
             $class = $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
@@ -128,7 +148,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'id' => 'n_type_chunk',
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-chunk',
+                'iconCls' => $this->getNodeIcon('chunk'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'chunk',
@@ -136,7 +157,7 @@ class modElementGetNodesProcessor extends modProcessor {
             );
         }
 
-        /* snippets */
+        /* Snippets */
         if ($this->modx->hasPermission('view_snippet')) {
             $class = $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
@@ -146,7 +167,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'id' => 'n_type_snippet',
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-snippet',
+                'iconCls' => $this->getNodeIcon('snippet'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'snippet',
@@ -154,7 +176,7 @@ class modElementGetNodesProcessor extends modProcessor {
             );
         }
 
-        /* plugins */
+        /* Plugins */
         if ($this->modx->hasPermission('view_plugin')) {
             $class = $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
@@ -164,7 +186,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'id' => 'n_type_plugin',
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-plugin',
+                'iconCls' => $this->getNodeIcon('plugin'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'plugin',
@@ -172,7 +195,7 @@ class modElementGetNodesProcessor extends modProcessor {
             );
         }
 
-        /* categories */
+        /* Categories */
         if ($this->modx->hasPermission('view_category')) {
             $class = $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
 
@@ -181,7 +204,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'id' => 'n_category',
                 'leaf' => 0,
                 'cls' => $class,
-                'iconCls' => 'icon-category',
+                'iconCls' => $this->getNodeIcon('category'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'category',
@@ -245,7 +269,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'category' => $category->get('id'),
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-category',
+                'iconCls' => $this->getNodeIcon('category'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'modCategory',
                 'type' => 'category',
@@ -302,7 +327,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'data' => $category->toArray(),
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-category',
+                'iconCls' => $this->getNodeIcon('category'),
+                'uiProvider' => 'modx',
                 'classKey' => 'modCategory',
                 'elementType' => $elementType,
                 'page' => '',
@@ -340,7 +366,9 @@ class modElementGetNodesProcessor extends modProcessor {
             if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
                 $class[] = 'element-node-disabled';
             }
-        
+
+
+
             $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
             $nodes[] = array(
                 'text' => strip_tags($name) . $idNote,
@@ -350,7 +378,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'leaf' => 1,
                 'name' => $name,
                 'cls' => implode(' ',$class),
-                'iconCls' => 'icon-'.$elementIdentifier,
+                'iconCls' => $this->getNodeIcon($elementIdentifier),
+                'uiProvider' => 'modx',
                 'page' => 'index.php?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
                 'type' => $elementIdentifier,
                 'elementType' => $elementType,
@@ -415,7 +444,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'data' => $category->toArray(),
                 'leaf' => false,
                 'cls' => $class,
-                'iconCls' => 'icon-category',
+                'iconCls' => $this->getNodeIcon('category'),
+                'uiProvider' => 'modx',
                 'page' => '',
                 'classKey' => 'modCategory',
                 'elementType' => $elementType,
@@ -468,7 +498,8 @@ class modElementGetNodesProcessor extends modProcessor {
                 'leaf' => true,
                 'name' => $name,
                 'cls' => implode(' ',$class),
-                'iconCls' => 'icon-'.$map[1],
+                'iconCls' => $this->getNodeIcon($map[1]),
+                'uiProvider' => 'modx',
                 'page' => '?a='.$this->actionMap[$map[1]].'&id='.$element->get('id'),
                 'type' => $map[1],
                 'elementType' => $elementType,

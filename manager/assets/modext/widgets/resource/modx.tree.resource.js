@@ -20,6 +20,11 @@ MODx.tree.Resource = function(config) {
         ,remoteToolbarAction: 'resource/gettoolbar'
         ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
+        ,loaderConfig: {
+            uiProviders: {
+                modx: MODx.tree.TreeNodeUI
+            }
+        }
         ,tbarCfg: {
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
