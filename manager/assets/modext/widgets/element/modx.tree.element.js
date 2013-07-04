@@ -21,11 +21,6 @@ MODx.tree.Element = function(config) {
             currentElement: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
         }
-        ,loaderConfig: {
-            uiProviders: {
-                modx: MODx.tree.TreeNodeUI
-            }
-        }
         ,tbar: [{
             icon: MODx.config.manager_url+'templates/default/images/restyle/icons/template.png'
             ,cls: 'x-btn-icon'
