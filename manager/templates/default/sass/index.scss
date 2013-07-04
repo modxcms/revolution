@@ -12,8 +12,9 @@
 @import "navbar";
 @import "uberbar";
 @import "tree";
-@import "xtheme-modx";
 @import "utility";
+@import "xtheme-modx";
+@import "font-awesome";
 
 /*        ____   ____     __   __     
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
@@ -248,7 +249,7 @@ input::-moz-focus-inner {
 .icon-namespace { background-image:url(../images/restyle/icons/computer.png) !important; }
 .icon-propertyset { background-image:url(../images/restyle/icons/property-set.png) !important; }
 
-.icon-file { background-image:url(../images/restyle/icons/disk.png) !important; }
+/*.icon-file { background-image:url(../images/restyle/icons/disk.png) !important; }*/
 .icon-rss { background-image:url(../images/restyle/icons/feed.png) !important; }
 .icon-cal { background-image:url(../images/restyle/icons/calendar.png) !important; }
 .icon-sql { background-image:url(../images/restyle/icons/database_table.png) !important; }

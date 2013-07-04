@@ -8,7 +8,6 @@
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/font-awesome.min.css" />
 
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>

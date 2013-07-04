@@ -1210,20 +1210,20 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-tree-node{
-    color: #000;
-    font: normal 11px arial, tahoma, helvetica, sans-serif;
+    color: $treeText;
+    font: normal 12px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-tree-node a, .x-dd-drag-ghost a{
-    color: #000;
+    color: $treeText;
 }
 
 .x-tree-node a span, .x-dd-drag-ghost a span{
-    color: #000;
+    color: $treeText;
 }
 
 .x-tree-node .x-tree-node-disabled a span{
-    color: gray !important;
+    color: lighten($treeText,50%);
 }
 
 .x-tree-node div.x-tree-drag-insert-below{

@@ -327,7 +327,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             ),
             'leaf' => false,
             'cls' => implode(' ',$class),
-            'iconCls' => $this->modx->getOption('mgr_tree_icon_context',null,'icon-sitemap'),
+            'iconCls' => $this->modx->getOption('mgr_tree_icon_context',null,'icon-globe'),
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => 'modContext',
             'page' => !$this->getProperty('noHref') ? '?a=context/update&key='.$context->get('key') : '',
@@ -391,14 +391,14 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Check for an icon class on the resource template
         $tplIcon = $resource->getOne('Template')->get('icon');
-        $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.strtolower(ltrim($resource->get('class_key'), 'mod')), null,'icon-file-text-alt');
+        $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.strtolower(ltrim($resource->get('class_key'), 'mod')), null,'icon-file');
 
         $iconCls[] = $defaultIcon;
         if ($resource->isfolder) {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'icon-folder-close-alt');
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'icon-folder-close');
         }
         if ($hasChildren){
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'icon-folder-close-alt');
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'icon-folder-close');
         }
 
         $locked = $resource->getLock();
