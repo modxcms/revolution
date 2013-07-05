@@ -392,19 +392,34 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Check for an icon class on the resource template
         $tplIcon = $resource->getOne('Template')->get('icon');
-        $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.strtolower(ltrim($resource->get('class_key'), 'mod')), null,'icon-file');
+        $rsrcType = ltrim(strtolower($resource->get('class_key')),'mod');
+        $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.$rsrcType, null,'icon-file');
 
-        $iconCls[] = $defaultIcon;
-        if ($resource->isfolder) {
+        if (strlen($tplIcon)) {
+            $iconCls[] = $defaultIcon;
+        }
+        elseif ($rsrcType === 'weblink') {
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink',null,'icon-external-link');
+        }
+        elseif ($rsrcType === 'symlink') {
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_symlink',null,'icon-copy');
+        }
+        elseif ($rsrcType === 'staticresource') {
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_staticresource',null,'icon-file-text');
+        }
+        elseif ($resource->isfolder) {
             $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'icon-folder-close');
         }
+        else $iconCls[] = $defaultIcon;
+
+
+        // Modifiers to indicate resource _state_
         if ($hasChildren){
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'icon-folder-close');
+            $iconCls[] = 'parent-resource';
         }
-
         $locked = $resource->getLock();
         if ($locked && $locked != $this->modx->user->get('id')) {
-            $iconCls[] = 'icon-locked';
+            $iconCls[] = 'locked-resource';
             /** @var modUser $lockedBy */
             $lockedBy = $this->modx->getObject('modUser',$locked);
             if ($lockedBy) {
