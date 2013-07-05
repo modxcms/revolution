@@ -529,12 +529,17 @@ ul.x-tab-strip-bottom {
   font-weight: normal; }
 
 .modx-manager-search-results {
+  position: relative;
   width: 450px !important;
   height: auto !important;
-  margin: 2px 0 0 -20px;
+  margin: 2px 0 0 0;
   background: rgba(240, 240, 240, 0.95);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.05);
   border: #dedede;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
+  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
+  -ms-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
+  -o-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
@@ -606,10 +611,13 @@ ul.x-tab-strip-bottom {
   padding-left: 117px;
   margin-left: 0; }
 
+.modx-manager-search-results .icon-user {
+  background-image: none !important; }
+
 .modx-manager-search-results .x-combo-selected {
   color: #fff !important;
   background-color: #3875ae !important;
-  box-shadow: inset 0 -1px 1px black;
+  box-shadow: inset 0 -1px 1px #2c5b87, inset 0 1px 1px #528ec7;
   z-index: 10; }
 
 /*#modx-leftbar*/
@@ -655,6 +663,179 @@ ul.x-tab-strip-top {
   border-radius: inherit inherit 3px 3px;
   background-color: #eee; }
 
+/* icons */
+.icon-resource {
+  background-image: url(../images/restyle/icons/page_white.png) !important; }
+
+.icon-folder {
+  background-image: url(../images/restyle/icons/folder_page_white.png) !important; }
+
+.icon-haschildren {
+  background-image: url(../images/restyle/icons/folder.png) !important; }
+
+.icon-chunk {
+  background-image: url(../images/restyle/icons/chunk.png) !important; }
+
+.icon-plugin {
+  background-image: url(../images/restyle/icons/plugin.png) !important; }
+
+.icon-snippet {
+  background-image: url(../images/restyle/icons/snippet.png) !important; }
+
+.icon-template {
+  background-image: url(../images/restyle/icons/template.png) !important; }
+
+.icon-tv, .icon-templatevar {
+  background-image: url(../images/restyle/icons/tv.png) !important; }
+
+.icon-context {
+  background-image: url(../images/restyle/icons/context.png) !important; }
+
+.icon-symlink {
+  background-image: url(../images/restyle/icons/page_white_copy.png) !important; }
+
+.icon-weblink {
+  background-image: url(../images/restyle/icons/page_white_link.png) !important; }
+
+.icon-staticresource {
+  background-image: url(../images/restyle/icons/page_white_gear.png) !important; }
+
+.icon-menu {
+  background-image: url(../images/restyle/icons/resources.png) !important; }
+
+.icon-action {
+  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important; }
+
+.icon-namespace {
+  background-image: url(../images/restyle/icons/computer.png) !important; }
+
+.icon-propertyset {
+  background-image: url(../images/restyle/icons/property-set.png) !important; }
+
+/*.icon-file { background-image:url(../images/restyle/icons/disk.png) !important; }*/
+.icon-rss {
+  background-image: url(../images/restyle/icons/feed.png) !important; }
+
+.icon-cal {
+  background-image: url(../images/restyle/icons/calendar.png) !important; }
+
+.icon-sql {
+  background-image: url(../images/restyle/icons/database_table.png) !important; }
+
+.icon-db {
+  background-image: url(../images/restyle/icons/database.png) !important; }
+
+.icon-java, .icon-jar {
+  background-image: url(../images/restyle/icons/cup.png) !important; }
+
+.icon-css {
+  background-image: url(../images/restyle/icons/css.png) !important; }
+
+.icon-zip, .icon-tar, .icon-tgz, .icon-gz {
+  background-image: url(../images/restyle/icons/compress.png) !important; }
+
+.icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
+  background-image: url(../images/restyle/icons/picture.png) !important; }
+
+.icon-bat, .icon-scr {
+  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important; }
+
+.icon-log {
+  background-image: url(../images/restyle/icons/computer.png) !important; }
+
+.icon-html, .icon-htm {
+  background-image: url(../images/restyle/icons/html_valid.png) !important; }
+
+.icon-avi, .icon-mpg, .icon-mov {
+  background-image: url(../images/restyle/icons/film.png) !important; }
+
+.icon-rb {
+  background-image: url(../images/restyle/icons/ruby.png) !important; }
+
+.icon-doc {
+  background-image: url(../images/restyle/icons/page_white_word.png) !important; }
+
+.icon-ppt {
+  background-image: url(../images/restyle/icons/page_white_powerpoint.png) !important; }
+
+.icon-access, .icon-htaccess {
+  background-image: url(../images/restyle/icons/lock.png) !important; }
+
+.icon-php {
+  background-image: url(../images/restyle/icons/page_white_php.png) !important; }
+
+.icon-flv, .icon-swf {
+  background-image: url(../images/restyle/icons/page_white_flash.png) !important; }
+
+.icon-xls {
+  background-image: url(../images/restyle/icons/page_white_excel.png) !important; }
+
+.icon-cfm {
+  background-image: url(../images/restyle/icons/page_white_coldfusion.png) !important; }
+
+.icon-pdf {
+  background-image: url(../images/restyle/icons/page_white_acrobat.png) !important; }
+
+.icon-js {
+  background-image: url(../images/restyle/icons/javascript.png) !important; }
+
+.icon-group {
+  background-image: url(../images/restyle/icons/group.png) !important; }
+
+.icon-user {
+  background-image: url(../images/restyle/icons/user.png) !important; }
+
+.icon-resourcegroup {
+  background-image: url(../images/restyle/icons/application_cascade.png) !important; }
+
+.icon-list-new {
+  background-image: url(../images/restyle/icons/layout_add.png) !important; }
+
+.icon-mark-active {
+  background-image: url(../images/restyle/icons/layout_edit.png) !important; }
+
+.icon-mark-complete {
+  background-image: url(../images/restyle/icons/layout_header.png) !important; }
+
+.icon-package {
+  background-image: url(../images/restyle/icons/package.png) !important;
+  padding-right: 5px !important; }
+
+.icon-locked {
+  background-image: url(../images/restyle/icons/lock_edit.png) !important; }
+
+.icon-lock {
+  background-image: url(../images/restyle/icons/lock.png) !important; }
+
+/* main styles for the various tree states */
+.x-tree-node-el a span {
+  padding-left: 7px;
+  line-height: 1.6; }
+
+.x-tree-node-el a span span {
+  padding-left: 0; }
+
+.unpublished,
+.unpublished a span {
+  font-style: normal;
+  color: #919191 !important; }
+
+.hidemenu a span {
+  color: #919191 !important; }
+
+.deleted {
+  color: red !important; }
+
+.deleted a span {
+  color: #CC3333 !important;
+  text-decoration: line-through !important; }
+
+.element-node-disabled a span {
+  color: gray !important; }
+
+.element-node-locked a span {
+  font-style: italic; }
+
 #modx-resource-tree-panel .x-accordion-hd {
   background-position: 0 0; }
 
@@ -681,16 +862,6 @@ ul.x-tab-strip-top {
 .x-layout-split:hover {
   background: #f7f7f7; }
 
-/*
-#modx-leftbar .x-tab-strip-wrap .x-tab-strip.x-tab-strip-top li:not(.x-tab-edge) {
-    width:32%;
-    text-align:center;
-    @include box-sizing();
-}
-#modx-leftbar-tabpanel__modx-file-tree {
-    float:right;
-}
-*/
 /* Tree icons (fontawesome */
 .x-tree-node i {
   margin-right: .5em; }
@@ -4592,169 +4763,6 @@ input::-moz-focus-inner {
   font-style: italic;
   color: #535d6c;
   font-size: 11px; }
-
-/* icons */
-.icon-resource {
-  background-image: url(../images/restyle/icons/page_white.png) !important; }
-
-.icon-folder {
-  background-image: url(../images/restyle/icons/folder_page_white.png) !important; }
-
-.icon-haschildren {
-  background-image: url(../images/restyle/icons/folder.png) !important; }
-
-.icon-chunk {
-  background-image: url(../images/restyle/icons/chunk.png) !important; }
-
-.icon-plugin {
-  background-image: url(../images/restyle/icons/plugin.png) !important; }
-
-.icon-snippet {
-  background-image: url(../images/restyle/icons/snippet.png) !important; }
-
-.icon-template {
-  background-image: url(../images/restyle/icons/template.png) !important; }
-
-.icon-tv, .icon-templatevar {
-  background-image: url(../images/restyle/icons/tv.png) !important; }
-
-.icon-context {
-  background-image: url(../images/restyle/icons/context.png) !important; }
-
-.icon-symlink {
-  background-image: url(../images/restyle/icons/page_white_copy.png) !important; }
-
-.icon-weblink {
-  background-image: url(../images/restyle/icons/page_white_link.png) !important; }
-
-.icon-staticresource {
-  background-image: url(../images/restyle/icons/page_white_gear.png) !important; }
-
-.icon-menu {
-  background-image: url(../images/restyle/icons/resources.png) !important; }
-
-.icon-action {
-  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important; }
-
-.icon-namespace {
-  background-image: url(../images/restyle/icons/computer.png) !important; }
-
-.icon-propertyset {
-  background-image: url(../images/restyle/icons/property-set.png) !important; }
-
-/*.icon-file { background-image:url(../images/restyle/icons/disk.png) !important; }*/
-.icon-rss {
-  background-image: url(../images/restyle/icons/feed.png) !important; }
-
-.icon-cal {
-  background-image: url(../images/restyle/icons/calendar.png) !important; }
-
-.icon-sql {
-  background-image: url(../images/restyle/icons/database_table.png) !important; }
-
-.icon-db {
-  background-image: url(../images/restyle/icons/database.png) !important; }
-
-.icon-java, .icon-jar {
-  background-image: url(../images/restyle/icons/cup.png) !important; }
-
-.icon-css {
-  background-image: url(../images/restyle/icons/css.png) !important; }
-
-.icon-zip, .icon-tar, .icon-tgz, .icon-gz {
-  background-image: url(../images/restyle/icons/compress.png) !important; }
-
-.icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
-  background-image: url(../images/restyle/icons/picture.png) !important; }
-
-.icon-bat, .icon-scr {
-  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important; }
-
-.icon-log {
-  background-image: url(../images/restyle/icons/computer.png) !important; }
-
-.icon-html, .icon-htm {
-  background-image: url(../images/restyle/icons/html_valid.png) !important; }
-
-.icon-avi, .icon-mpg, .icon-mov {
-  background-image: url(../images/restyle/icons/film.png) !important; }
-
-.icon-rb {
-  background-image: url(../images/restyle/icons/ruby.png) !important; }
-
-.icon-doc {
-  background-image: url(../images/restyle/icons/page_white_word.png) !important; }
-
-.icon-ppt {
-  background-image: url(../images/restyle/icons/page_white_powerpoint.png) !important; }
-
-.icon-access, .icon-htaccess {
-  background-image: url(../images/restyle/icons/lock.png) !important; }
-
-.icon-php {
-  background-image: url(../images/restyle/icons/page_white_php.png) !important; }
-
-.icon-flv, .icon-swf {
-  background-image: url(../images/restyle/icons/page_white_flash.png) !important; }
-
-.icon-xls {
-  background-image: url(../images/restyle/icons/page_white_excel.png) !important; }
-
-.icon-cfm {
-  background-image: url(../images/restyle/icons/page_white_coldfusion.png) !important; }
-
-.icon-pdf {
-  background-image: url(../images/restyle/icons/page_white_acrobat.png) !important; }
-
-.icon-js {
-  background-image: url(../images/restyle/icons/javascript.png) !important; }
-
-.icon-group {
-  background-image: url(../images/restyle/icons/group.png) !important; }
-
-.icon-user {
-  background-image: url(../images/restyle/icons/user.png) !important; }
-
-.icon-resourcegroup {
-  background-image: url(../images/restyle/icons/application_cascade.png) !important; }
-
-.icon-list-new {
-  background-image: url(../images/restyle/icons/layout_add.png) !important; }
-
-.icon-mark-active {
-  background-image: url(../images/restyle/icons/layout_edit.png) !important; }
-
-.icon-mark-complete {
-  background-image: url(../images/restyle/icons/layout_header.png) !important; }
-
-.icon-package {
-  background-image: url(../images/restyle/icons/package.png) !important;
-  padding-right: 5px !important; }
-
-.icon-locked {
-  background-image: url(../images/restyle/icons/lock_edit.png) !important; }
-
-.icon-lock {
-  background-image: url(../images/restyle/icons/lock.png) !important; }
-
-.unpublished {
-  font-style: italic; }
-
-.hidemenu a span {
-  color: #888 !important; }
-
-.deleted {
-  color: red !important; }
-
-.deleted a span {
-  color: #CC3333 !important;
-  text-decoration: line-through !important; }
-
-.element-node-disabled a span {
-  color: gray !important; }
-
-.element-node-locked a span {
-  font-style: italic; }
 
 /* ext extensions */
 .x-static-text-field {

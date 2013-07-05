@@ -2,7 +2,7 @@
 #modx-navbar #modx-manager-search {
     padding: 5px 8px 5px 10px;
 }
-#modx-navbar #modx-manager-search:hover{
+#modx-navbar #modx-manager-search:hover {
     background: none;
     border-color: transparent
 }
@@ -42,16 +42,17 @@
     font-weight: normal;
 }
 .modx-manager-search-results {
+    position: relative;
     width: 450px !important;
     height: auto !important;
-    margin: 2px 0 0 -20px;
+    margin: 2px 0 0 0;
     background: rgba(240,240,240,.95);
-    box-shadow: 3px 3px 0 rgba(0,0,0,0.05);
     border: $borderColor;
+    @include box-shadow($shadower);
     @include box-sizing();
     @include border-radius(0 0 2px 2px);
 }
-.modx-manager-search-results .x-combo-list-inner{
+.modx-manager-search-results .x-combo-list-inner {
     width: 100% !important;
 }
 .modx-manager-search-results .section {
@@ -111,9 +112,12 @@
     padding-left: 117px;
     margin-left: 0;
 }
+.modx-manager-search-results .icon-user {
+    background-image: none !important;
+}
 .modx-manager-search-results .x-combo-selected {
     color: #fff !important;
     background-color: $colorSplash !important;
-    box-shadow: inset 0 -1px 1px darken($colorSplash,50%);
+    box-shadow: inset 0 -1px 1px darken($colorSplash,10%), inset 0 1px 1px lighten($colorSplash,10%);
     z-index: 10;
 }
