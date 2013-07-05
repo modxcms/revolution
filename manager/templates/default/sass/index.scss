@@ -15,13 +15,14 @@
 @import "utility";
 @import "xtheme-modx";
 @import "font-awesome";
+@import "leftbar";
 
 /*        ____   ____     __   __     
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
 /\      \ \ \/\ \ \ \/\ \\ `\`\/'/'   // if you are a contributor pleaes sign the guestbook below:
 \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <        - Ryan Trash @rthrash
  \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\      - JP DeVries @jpdevries
-  \ \_\\ \_\ \_____\ \____/ /\_\\ \_\
+  \ \_\\ \_\ \_____\ \____/ /\_\\ \_\    - Alan Pich @_alanpich
    \/_/ \/_/\/_____/\/___/  \/_/ \/*/
                                       
 body, body.x-border-layout-ct {
@@ -109,10 +110,6 @@ input::-moz-focus-inner {
     left: 2px;
 }
 
-/* fix leftbar toolbar */
-#modx-leftbar {
-    background-color: $mainBg;
-}
 #modx-content {
     background: $mainBg;
 }
