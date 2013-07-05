@@ -300,7 +300,7 @@ class modResourceGetNodesProcessor extends modProcessor {
      * @return array
      */
     public function prepareContextNode(modContext $context) {
-        $class = array();
+        $class = array('modx-tree-group-header','tree-pseudoroot-node');
         $class[] = !empty($this->permissions['edit_context']) ? $this->permissions['edit_context'] : '';
         $class[] = !empty($this->permissions['new_context']) ? $this->permissions['new_context'] : '';
         $class[] = !empty($this->permissions['delete_context']) ? $this->permissions['delete_context'] : '';
@@ -330,7 +330,8 @@ class modResourceGetNodesProcessor extends modProcessor {
             'iconCls' => $this->modx->getOption('mgr_tree_icon_context',null,'icon-globe'),
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => 'modContext',
-            'page' => !$this->getProperty('noHref') ? '?a=context/update&key='.$context->get('key') : '',
+            'pseudoroot' => true,
+    //        'page' => !$this->getProperty('noHref') ? '?a=context/update&key='.$context->get('key') : '',
         );
     }
 

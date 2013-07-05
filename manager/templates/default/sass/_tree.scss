@@ -6,7 +6,6 @@
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-    padding-bottom: 5px;
     background-color: #fff;
 }
 /*#modx-leftbar*/ ul.x-tab-strip-top {
@@ -40,7 +39,7 @@
 .modx-leftbar .x-tree-root-ct {
     @include border-radius(inherit inherit 3px 3px);
     background-color: #eee;
-    padding: 4px;
+    //padding: 4px;
 }
 
 #modx-resource-tree-panel .x-accordion-hd {
@@ -58,12 +57,16 @@
 
 /* tree menu splitter */
 .x-layout-split {
-    width: 10px;
+    width: 2px;
     box-shadow: -2px 0 2px $borderShadow;
     z-index: 0;
-    background: $mainBg;
+    background: $navbarHover;
     border: 1px solid $borderColor;
     border-width: 0 1px;
+
+  .x-layout-mini {
+    left: -4px;
+  }
 }
 .x-layout-split:hover 
 {

@@ -104,6 +104,7 @@ class modElementGetNodesProcessor extends modProcessor {
         if ($this->modx->hasPermission('view_template')) {
             $class = $this->modx->hasPermission('new_template') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('templates'),
@@ -115,6 +116,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'root',
                 'type' => 'template',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
@@ -122,6 +124,7 @@ class modElementGetNodesProcessor extends modProcessor {
         if ($this->modx->hasPermission('view_tv')) {
             $class = $this->modx->hasPermission('new_tv') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('tmplvars'),
@@ -133,6 +136,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'root',
                 'type' => 'tv',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
@@ -140,6 +144,7 @@ class modElementGetNodesProcessor extends modProcessor {
         if ($this->modx->hasPermission('view_chunk')) {
             $class = $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('chunks'),
@@ -151,6 +156,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'root',
                 'type' => 'chunk',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
@@ -158,6 +164,7 @@ class modElementGetNodesProcessor extends modProcessor {
         if ($this->modx->hasPermission('view_snippet')) {
             $class = $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('snippets'),
@@ -169,6 +176,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'root',
                 'type' => 'snippet',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
@@ -176,6 +184,7 @@ class modElementGetNodesProcessor extends modProcessor {
         if ($this->modx->hasPermission('view_plugin')) {
             $class = $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('plugins'),
@@ -187,12 +196,14 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'root',
                 'type' => 'plugin',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
         /* Categories */
         if ($this->modx->hasPermission('view_category')) {
             $class = $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('categories'),
@@ -204,6 +215,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'root',
                 'type' => 'category',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 

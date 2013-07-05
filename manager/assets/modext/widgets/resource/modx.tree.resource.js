@@ -20,7 +20,9 @@ MODx.tree.Resource = function(config) {
         ,remoteToolbarAction: 'resource/gettoolbar'
         ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
+
         ,tbarCfg: {
+        //    hidden: true
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
         ,baseParams: {
@@ -164,6 +166,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
+
     ,removeContext: function(itm,e) {
         var node = this.cm.activeNode;
         var key = node.attributes.pk;
@@ -349,6 +352,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this._filterVisible = true;
         return true;
     }
+
     ,getDefaultSortBy: function(config) {
         var v = 'menuindex';
         if (!Ext.isEmpty(config) && !Ext.isEmpty(config.sortBy)) {
@@ -380,6 +384,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.filterBar.destroy();
         this._filterVisible = false;
     }
+
     ,_handleAfterDrop: function(o,r) {
         var targetNode = o.event.target;
         if (o.event.point == 'append' && targetNode) {
@@ -549,9 +554,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     ,overviewResource: function() {this.loadAction('a=resource/data')}
+
     ,quickUpdateResource: function(itm,e) {
         Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
     }
+
     ,editResource: function() {this.loadAction('a=resource/update');}
 
     ,_getModResourceMenu: function(n) {
@@ -646,6 +653,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         );
     }
+
     ,createResource: function(itm,e) {
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
@@ -697,6 +705,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
         return m;
     }
+
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);
 
@@ -1177,3 +1186,15 @@ MODx.handleQUCB = function(cb) {
         h.setValue(0);
     }
 }
+
+
+
+Ext.override(Ext.tree.AsyncTreeNode,{
+
+    listeners: {
+        click: {fn: function(){
+            console.log('Clicked me!',arguments);
+            return false;
+        },scope: this}
+    }
+});

@@ -1,6 +1,70 @@
 /* fix leftbar toolbar */
 #modx-leftbar {
-  background-color: white; //$mainBg;
+  background-color: $almostWhite; //$mainBg;
+}
+
+#modx-leftbar-tabpanel {
+  margin: 0 !important;
+
+  /* tab headers */
+  .x-tab-panel-header {
+
+
+      /* active tab header */
+      .x-tab-strip-active {
+        box-shadow: none;
+      }
+
+
+  }// end .x-tab-panel-header
+
+
+
+
+
+
+  .x-tree-root-ct {
+    @include border-radius(0);
+    padding: 0 !important;
+    overflow: hidden;
+  }
+
+
+
 }
 
 
+  .x-tree-root-node > .x-tree-node > .x-tree-node-ct {
+    padding: 0;
+    margin: 0 !important;
+    margin-left: -14px !important;
+  }
+
+  .x-tree-node-el {
+    padding: .2em 0;
+  }
+
+
+
+
+.tree-pseudoroot-node,
+.modx-tree-group-header {
+  background-color: $softGrey;
+
+  padding: .5em .4em;
+
+  border-bottom:1px solid #ccc;
+  font-weight:bold;
+
+   > .icon-large {
+    font-weight: normal;
+  }
+
+  > /* elbow icon */
+  .x-tree-ec-icon {
+    float: right;
+
+  }
+
+
+}

@@ -71,7 +71,7 @@ MODx.Layout = function(config){
             ,width: 310
             ,minSize: 288
             ,maxSize: 800
-            ,autoScroll: true
+            ,autoScroll: false
             ,unstyled: true
             ,collapseMode: 'mini'
             ,useSplitTips: true
