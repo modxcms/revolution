@@ -399,7 +399,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             $iconCls[] = $defaultIcon;
         }
         elseif ($rsrcType === 'weblink') {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink',null,'icon-external-link');
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink',null,'icon-link');
         }
         elseif ($rsrcType === 'symlink') {
             $iconCls[] = $this->modx->getOption('mgr_tree_icon_symlink',null,'icon-copy');
