@@ -4546,20 +4546,19 @@ a .icon-flip-vertical:before {
 .x-tree-node-el {
   padding: .2em 0; }
 
-.tree-pseudoroot-node,
-.modx-tree-group-header {
+.tree-pseudoroot-node {
   background-color: gainsboro;
   padding: .5em .4em;
   border-bottom: 1px solid #ccc;
-  font-weight: bold; }
-  .tree-pseudoroot-node > .icon-large,
-  .modx-tree-group-header > .icon-large {
+  font-weight: bold;
+  /*  > */
+  /* elbow icon */
+                       /*
+ .x-tree-ec-icon {
+//   display:none;
+ }*/ }
+  .tree-pseudoroot-node > .icon-large {
     font-weight: normal; }
-  .tree-pseudoroot-node >
-  .x-tree-ec-icon,
-  .modx-tree-group-header >
-  .x-tree-ec-icon {
-    float: right; }
 
                                   /*        ____   ____     __   __     
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme

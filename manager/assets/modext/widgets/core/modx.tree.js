@@ -41,19 +41,26 @@ MODx.tree.Tree = function(config) {
             ,text: config.root_name || config.rootName || ''
             ,draggable: false
             ,id: config.root_id || config.rootId || 'root'
+            ,pseudoroot: true
+            ,attributes: {
+                pseudoroot: true
+            }
+            ,cls: 'tree-pseudoroot-node'
         };
-    } else {        
+    } else {
         tl = new Ext.tree.TreeLoader({
             preloadChildren: true
             ,baseAttrs: {
                 uiProvider: MODx.tree.CheckboxNodeUI
             }
         });
+        console.log('else');
         root = new Ext.tree.TreeNode({
             text: this.config.rootName || ''
             ,draggable: false
             ,id: this.config.rootId || 'root'
             ,children: this.config.data || []
+            ,pseudoroot: true
         });
     }
     Ext.applyIf(config,{
@@ -185,6 +192,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('load',this._initExpand,this,{single: true});
         this.on('expandnode',this._saveState,this);
         this.on('collapsenode',this._saveState,this);
+
+
 		
         /* Absolute positionning fix  */
         this.on('expandnode',function(){ var cnt = Ext.getCmp('modx-content'); if (cnt) { cnt.doLayout(); } },this);

@@ -47,8 +47,7 @@
 
 
 
-.tree-pseudoroot-node,
-.modx-tree-group-header {
+.tree-pseudoroot-node {
   background-color: $softGrey;
 
   padding: .5em .4em;
@@ -60,11 +59,16 @@
     font-weight: normal;
   }
 
-  > /* elbow icon */
-  .x-tree-ec-icon {
-    float: right;
 
-  }
+/*  > *//* elbow icon *//*
+  .x-tree-ec-icon {
+ //   display:none;
+  }*/
+
+  //> .expanded-icon {
+  //  float: right;
+  //  color: #777;
+  //}
 
 
 }

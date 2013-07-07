@@ -11,7 +11,7 @@ MODx.tree.Directory = function(config) {
     config.id = config.id || Ext.id();
     Ext.applyIf(config,{
         rootVisible: true
-        ,rootName: _('media')
+        ,rootName: 'Filesystem'
         ,rootId: '/'
         ,title: _('files')
         ,ddAppendOnly: false
@@ -79,16 +79,23 @@ MODx.tree.Directory = function(config) {
         el.createChild({tag: 'div', id: this.config.id+'_tb'});
         el.createChild({tag: 'div', id: this.config.id+'_filter'});
         this.addSourceToolbar();
+
+//        this.getRootNode().pseudoroot = true
+//        console.log(this.getRootNode())
+
     },this);
     this.addSourceToolbar();
     this.on('show',function() {
         if (!this.config.hideSourceCombo) {
             try { this.sourceCombo.show(); } catch (e) {}
         }
+        console.log(this.getRootNode());
     },this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
+
     windows: {}
+
     ,addSourceToolbar: function() {
         this.sourceCombo = new MODx.combo.MediaSource({
             value: this.config.source || MODx.config.default_media_source
@@ -108,6 +115,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             try { this.sourceCombo.hide(); } catch (e) {}
         }
     }
+
     ,changeSource: function(sel) {
         var s = sel.getValue();
         var rn = this.getRootNode();
@@ -116,6 +124,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.fireEvent('changeSource',s);
         this.refresh();
     }
+
     ,_initExpand: function() {
         var treeState;
         if (!Ext.isEmpty(this.config.openTo)) {
@@ -126,6 +135,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.selectPath(treeState,'text');
         }
     }
+
     ,_saveState: function(n) {
         var p = n.getPath('text');
         Ext.state.Manager.set(this.treestate_id,p);
@@ -243,6 +253,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,browser: null
+
     ,loadFileManager: function(btn,e) {
         var refresh = false;
         if (this.browser === null) {
@@ -439,7 +450,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.uploader.base_params.source = this.getSource();
         this.uploader.show(btn);
     }
+
     ,uploadError: function(dlg,file,data,rec) {}
+
     ,uploadFailed: function(dlg,file,rec) {}
     
     ,uploadSuccess:function() {
@@ -459,7 +472,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         } else {
             this.refresh();
         }
-    }    
+    }
+
     ,beforeUpload: function() {
         var path;
         if (this.cm.activeNode) {
@@ -477,6 +491,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
+
 });
 Ext.reg('modx-tree-directory',MODx.tree.Directory);
 

@@ -300,7 +300,7 @@ class modResourceGetNodesProcessor extends modProcessor {
      * @return array
      */
     public function prepareContextNode(modContext $context) {
-        $class = array('modx-tree-group-header','tree-pseudoroot-node');
+        $class = array('tree-pseudoroot-node');
         $class[] = !empty($this->permissions['edit_context']) ? $this->permissions['edit_context'] : '';
         $class[] = !empty($this->permissions['new_context']) ? $this->permissions['new_context'] : '';
         $class[] = !empty($this->permissions['delete_context']) ? $this->permissions['delete_context'] : '';

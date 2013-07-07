@@ -232,22 +232,24 @@ Ext.override(Ext.tree.TreeNodeUI,{
         
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
 
-        var elbowMarkup = n.attributes.pseudoroot ?
-            '<i class="icon-large icon-caret-down x-tree-node-inline-icon"></i>' :
-            '<img alt="" src="'+ this.emptyIcon+ '" class="x-tree-ec-icon x-tree-elbow" />'
 
         var cb = Ext.isBoolean(a.checked),
             nel,
             href = this.getHref(a.href),
-            buf = ['<li class="x-tree-node"><div ext:tree-node-id="',n.id,'" class="x-tree-node-el x-tree-node-leaf x-unselectable ', a.cls,'" unselectable="on">',
-                '<span class="x-tree-node-indent">',this.indentMarkup,"</span>",
-                elbowMarkup,
-                '<i class="icon-large',(a.icon ? " x-tree-node-inline-icon" : ""),(a.iconCls ? " "+a.iconCls : ""),'" unselectable="on"></i>',
-                cb ? ('<input class="x-tree-node-cb" type="checkbox" ' + (a.checked ? 'checked="checked" />' : '/>')) : '',
-                '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',
-                a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',n.text,"</span></a></div>",
-                '<ul class="x-tree-node-ct" style="display:none;"></ul>',
-                "</li>"].join('');
+            iconMarkup = '<i class="icon-large'+(a.icon ? " x-tree-node-inline-icon" : "")+(a.iconCls ? " "+a.iconCls : "")+'" unselectable="on"></i>',
+            elbowMarkup = n.attributes.pseudoroot ?
+                '<i class="icon-sort-down expanded-icon"></i>' :
+                '<img alt="" src="'+ this.emptyIcon+ '" class="x-tree-ec-icon x-tree-elbow" />',
+
+            buf =  ['<li class="x-tree-node"><div ext:tree-node-id="',n.id,'" class="x-tree-node-el x-tree-node-leaf x-unselectable ', a.cls,'" unselectable="on">',
+                    '<span class="x-tree-node-indent">',this.indentMarkup,"</span>",
+                    elbowMarkup,
+                    iconMarkup,
+                    cb ? ('<input class="x-tree-node-cb" type="checkbox" ' + (a.checked ? 'checked="checked" />' : '/>')) : '',
+                    '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',
+                    a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',n.text,"</span></a></div>",
+                    '<ul class="x-tree-node-ct" style="display:none;"></ul>',
+                    "</li>"].join('');
 
         if(bulkRender !== true && n.nextSibling && (nel = n.nextSibling.ui.getEl())){
             this.wrap = Ext.DomHelper.insertHtml("beforeBegin", nel, buf);
