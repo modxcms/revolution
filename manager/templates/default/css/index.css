@@ -65,21 +65,22 @@
 ul.x-tab-strip-top {
   border-bottom-color: transparent; }
 
-ul.x-tab-strip {
+.x-tab-panel-header,
+.x-tab-strip {
   padding-left: 1px; }
 
-ul.x-tab-strip li {
+.x-tab-strip li {
   border: 1px solid transparent;
   border-width: 1px 1px 0;
   margin: 1px 0 1px 2px;
   color: #333333;
   padding: 0;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 2.2;
   cursor: pointer;
   padding: 0 15px; }
 
-ul.x-tab-strip li.x-tab-strip-active {
+li.x-tab-strip-active {
   background-color: #fff;
   margin: 3px 0 0 2px;
   cursor: default;
@@ -98,7 +99,7 @@ ul.x-tab-strip li.x-tab-strip-active {
   top: 11px; }
 
 ul.x-tab-strip-top li:first-child {
-  margin-left: 0; }
+  margin-left: -1px; }
 
 ul.x-tab-strip li:hover {
   color: #1f4161; }
@@ -115,7 +116,7 @@ ul.x-tab-strip-bottom {
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
-  margin-top: -2px;
+  margin: -2px 0 0 -1px;
   background-color: #fff;
   height: 3px;
   border: 1px solid #E2E3DE;
@@ -309,10 +310,12 @@ ul.x-tab-strip-bottom {
   float: right;
   margin-right: 15px; }
 
+#modx-navbar {
+  font: normal 13px arial, helvetica, tahoma, sans-serif;
+  font-weight: bold; }
+
 #modx-topnav {
   float: left;
-  font-size: 13px;
-  font-weight: bold;
   list-style: none;
   margin: 0;
   padding: 0; }
@@ -620,17 +623,15 @@ ul.x-tab-strip-bottom {
   box-shadow: inset 0 -1px 1px #2c5b87, inset 0 1px 1px #528ec7;
   z-index: 10; }
 
-/*#modx-leftbar*/
 .x-tab-panel-noborder {
   border: 1px solid #E2E3DE;
-  margin: 20px 10px 10px;
+  margin: 20px 0 10px;
   background-color: #f0f0f0;
   overflow: visible; }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
   background-color: #fff; }
 
-/*#modx-leftbar*/
 ul.x-tab-strip-top {
   margin: -1px;
   width: auto; }
@@ -810,7 +811,7 @@ ul.x-tab-strip-top {
 /* main styles for the various tree states */
 .x-tree-node-el a span {
   padding-left: 7px;
-  line-height: 1.6; }
+  line-height: 2; }
 
 .x-tree-node-el a span span {
   padding-left: 0; }
@@ -850,21 +851,21 @@ ul.x-tab-strip-top {
 
 /* tree menu splitter */
 .x-layout-split {
-  width: 2px;
-  box-shadow: -2px 0 2px rgba(0, 0, 0, 0.025);
+  width: 8px;
   z-index: 0;
-  background: #f7f7f7;
+  background: #eaeaea;
   border: 1px solid #dedede;
-  border-width: 0 1px; }
+  border-width: 0 0 0 1px; }
   .x-layout-split .x-layout-mini {
-    left: -4px; }
+    left: -6px; }
 
 .x-layout-split:hover {
-  background: #f7f7f7; }
-
-/* Tree icons (fontawesome */
-.x-tree-node i {
-  margin-right: .5em; }
+  background: #f7f7f7;
+  -webkit-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
+  -moz-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
+  -ms-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
+  -o-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
+  box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025); }
 
 @-moz-document url-prefix() { }
 
@@ -1944,13 +1945,13 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-tree-node .x-tree-drag-append a span {
   background-color: #ddd;
-  border-color: gray; }
+  border-color: #dedede; }
 
 .x-tree-node .x-tree-node-over {
-  background-color: #eee; }
+  background-color: #fafafa; }
 
 .x-tree-node .x-tree-selected {
-  background-color: #e6e6e6; }
+  background-color: #cfe0f0; }
 
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-add.gif); }
@@ -2055,13 +2056,13 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   background-color: #fff; }
 
 .x-date-mp td {
-  font: normal 11px arial, helvetica,tahoma,sans-serif; }
+  font: normal 11px arial, helvetica, tahoma, sans-serif; }
 
 .x-date-mp-btns button {
   background-color: #373737;
   color: #fff;
   border-color: #686868 #101010 #101010 #686868;
-  font: normal 11px arial, helvetica,tahoma,sans-serif; }
+  font: normal 11px arial, helvetica, tahoma, sans-serif; }
 
 .x-date-mp-btns {
   background-color: #ebebeb;
@@ -2089,10 +2090,13 @@ td.x-date-mp-sep {
   border-right-color: #DFDFDF; }
 
 .x-tip {
-  -moz-border-radius: 5px 5px 5px 5px;
-  background-color: #eee;
-  background-image: none;
-  border: 1px solid #D7D7D7;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  background: #616161;
+  border: 1px solid #dedede;
   padding: 5px; }
 
 .x-tip .x-tip-close {
@@ -2102,18 +2106,18 @@ td.x-date-mp-sep {
   background-image: none; }
 
 .x-tip .x-tip-mc {
-  font: normal 11px arial,tahoma,helvetica,sans-serif; }
+  font: normal 11px arial, helvetica, tahoma, sans-serif; }
 
 .x-tip .x-tip-ml {
   background-color: transparent; }
 
 .x-tip .x-tip-header-text {
-  font: bold 13px arial, tahoma, helvetica,sans-serif;
-  color: #555; }
+  font: normal 13px arial, helvetica, tahoma, sans-serif;
+  color: #fafafa; }
 
 .x-tip .x-tip-body {
-  font: normal 12px arial, tahoma, helvetica,sans-serif;
-  color: #717F37; }
+  font: normal 12px arial, helvetica, tahoma, sans-serif;
+  color: #fafafa; }
 
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
 .x-form-invalid-tip .x-tip-bl, .x-form-invalid-tip .x-tip-br, .x-form-invalid-tip .x-tip-ml, .x-form-invalid-tip .x-tip-mr {
@@ -2139,7 +2143,7 @@ td.x-date-mp-sep {
   background-image: none; }
 
 .x-menu-list-item {
-  font: normal 11px arial,tahoma, sans-serif; }
+  font: normal 11px arial, helvetica, tahoma, sans-serif; }
 
 .x-menu-item-arrow {
   background-image: url(../images/modx-theme/menu/menu-parent.gif); }
@@ -2155,7 +2159,6 @@ a.x-menu-item {
 
 .x-menu-item-active {
   background-image: none;
-  /*background-color: #BACC8D;*/
   background-color: #e6e6e6;
   border: 0 none;
   margin: 0;
@@ -4518,65 +4521,64 @@ a .icon-flip-vertical:before {
 .icon-renren:before {
   content: "\f18b"; }
 
-/* fix leftbar toolbar */
 #modx-leftbar {
-  background-color: #fafafa; }
+  background-color: #eaeaea; }
 
 #modx-leftbar-tabpanel {
-  margin: 0 !important;
-  /* tab headers */ }
-  #modx-leftbar-tabpanel .x-tab-panel-header {
-    /* active tab header */ }
-    #modx-leftbar-tabpanel .x-tab-panel-header .x-tab-strip-active {
-      box-shadow: none; }
-  #modx-leftbar-tabpanel .x-tree-root-ct {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -o-border-radius: 0;
-    -ms-border-radius: 0;
-    border-radius: 0;
-    padding: 0 !important;
-    overflow: hidden; }
+  margin: inherit 6px !important; }
+
+.x-tree-root-ct {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+  padding: 0 !important;
+  overflow: hidden; }
+
+.x-tree-root-node {
+  margin: 0; }
 
 .x-tree-root-node > .x-tree-node > .x-tree-node-ct {
   padding: 0;
   margin: 0 !important;
-  margin-left: -14px !important; }
-
-.x-tree-node-el {
-  padding: .2em 0; }
+  margin-left: -7px !important; }
 
 .tree-pseudoroot-node {
-  background-color: gainsboro;
-  padding: .5em .4em;
-  border-bottom: 1px solid #ccc;
-  font-weight: bold;
-  /*  > */
-  /* elbow icon */
-                       /*
- .x-tree-ec-icon {
-//   display:none;
- }*/ }
+  background-color: #f2f2f2;
+  padding: 0 .4em;
+  line-height: 2;
+  border-bottom: 1px solid #dedede;
+  font-weight: bold; }
   .tree-pseudoroot-node > .icon-large {
     font-weight: normal; }
+  .tree-pseudoroot-node >
+  .x-tree-ec-icon {
+    float: right;
+    margin-top: 2px; }
 
-                                  /*        ____   ____     __   __     
+/*
+          ____   ____     __   __     
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
 /\      \ \ \/\ \ \ \/\ \ `\`\/'/'   // if you are a contributor pleaes sign the guestbook below:
 \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <        - Ryan Trash @rthrash
  \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\      - JP DeVries @jpdevries
   \ \_\ \_\ \_____\ \____/ /\_\ \_\    - Alan Pich @_alanpich
-   \/_/ \/_/\/_____/\/___/  \/_/ \/*/
+   \/_/ \/_/\/_____/\/___/  \/_/ \/_/    - Danya Postfactum
+                                         - Christian Seele @christianseel
+
+*/
 body, body.x-border-layout-ct {
-  color: #111;
-  font: 13px/17px Arial, Helvetica, sans-serif; }
+  color: #444;
+  font: normal 13px/1.4 Arial, Helvetica, sans-serif; }
 
 h2 {
-  color: #5E5E5E;
-  font: normal 25px helvetica,arial,freesans,clean,sans-serif;
-  letter-spacing: -1px;
-  margin: 0 0 8px 15px; }
+  color: #555555;
+  font: normal 13px arial, helvetica, tahoma, sans-serif;
+  font-size: 25px;
+  margin: 0 0 8px 5px; }
 
+/* TODO: conver font heirarchy into a vertical rhythm formula */
 h3 {
   margin: 0 0 8px 15px;
   font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif; }
@@ -4678,7 +4680,8 @@ input::-moz-focus-inner {
   border-bottom: 1px solid #ddd; }
 
 /* form fields */
-.modx-form .x-form-text, .modx-form .x-form-textarea {
+.modx-form .x-form-text,
+.modx-form .x-form-textarea {
   font-size: 14px; }
 
 .modx-form .x-form-text {
@@ -5879,7 +5882,6 @@ body.ext-ie7 .x-superboxselect-item {
 .x-grid3-cell-inner.x-grid3-col-main h3 {
   font-family: arial,Helvetica,sans-serif;
   font-size: 20px;
-  letter-spacing: -1px;
   color: #555555;
   line-height: 1;
   margin: 0 0 2px; }

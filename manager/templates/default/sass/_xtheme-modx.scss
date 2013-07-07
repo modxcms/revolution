@@ -1244,15 +1244,15 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-tree-node .x-tree-drag-append a span{
 	 background-color:#ddd;
-	 border-color:gray;
+	 border-color: $borderColor;
 }
 
 .x-tree-node .x-tree-node-over {
-    background-color: #eee;
+    background-color: $almostWhite;
 }
 
 .x-tree-node .x-tree-selected {
-    background-color: #e6e6e6;
+    background-color: lighten($colorSplash,42.5%);
 }
 
 .x-tree-drop-ok-append .x-dd-drop-icon{
@@ -1384,14 +1384,14 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-mp td {
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	font: $fontSmall;
 }
 
 .x-date-mp-btns button {
 	background-color:#373737;
 	color:#fff;
     border-color: #686868 #101010 #101010 #686868;
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	font: $fontSmall;
 }
 
 .x-date-mp-btns {
@@ -1427,14 +1427,13 @@ td.x-date-mp-sep {
 }
 
 .x-tip {
-    -moz-border-radius:5px 5px 5px 5px;
-    background-color:#eee;
-    background-image:none;
-    border:1px solid #D7D7D7;
-    padding:5px;
+    @include border-radius(3px);
+    background: darken($tipText,60%);
+    border: 1px solid $borderColor;
+    padding: 5px;
 }
 
-.x-tip .x-tip-close{
+.x-tip .x-tip-close {
     background-image: url(../images/modx-theme/qtip/close.gif);
 }
 
@@ -1443,20 +1442,20 @@ td.x-date-mp-sep {
 }
 
 .x-tip .x-tip-mc {
-    font: normal 11px arial,tahoma,helvetica,sans-serif;
+    font: $fontSmall;
 }
 .x-tip .x-tip-ml {
 	background-color: transparent;
 }
 
 .x-tip .x-tip-header-text {
-    font: bold 13px arial, tahoma, helvetica,sans-serif;
-    color:#555;
+    font: $fontNormal;
+    color: $tipText;
 }
 
 .x-tip .x-tip-body {
-    font: normal 12px arial, tahoma, helvetica,sans-serif;
-    color:#717F37;
+    font: $fontMedium;
+    color: complement($tipText);
 }
 
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
@@ -1489,7 +1488,7 @@ td.x-date-mp-sep {
 }
 
 .x-menu-list-item{
-	font:normal 11px arial,tahoma, sans-serif;
+	font: $fontSmall;
 }
 
 .x-menu-item-arrow{
@@ -1509,7 +1508,6 @@ a.x-menu-item {
 
 .x-menu-item-active {
     background-image:none;
-    /*background-color: #BACC8D;*/
     background-color: #e6e6e6;
     border:0 none;
     margin: 0;

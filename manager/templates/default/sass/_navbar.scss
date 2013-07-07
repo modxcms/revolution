@@ -13,11 +13,14 @@
     margin-right: 15px;
 }
 
+#modx-navbar
+{
+    font: $fontNormal;
+    font-weight: bold;
+}
 #modx-topnav
 {
     float: left;
-    font-size: 13px;
-    font-weight: bold;
     list-style: none;
     margin: 0;
     padding: 0;

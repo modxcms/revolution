@@ -17,30 +17,35 @@
 @import "font-awesome";
 @import "leftbar";
 
-/*        ____   ____     __   __     
+/*
+          ____   ____     __   __     
  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
 /\      \ \ \/\ \ \ \/\ \\ `\`\/'/'   // if you are a contributor pleaes sign the guestbook below:
 \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <        - Ryan Trash @rthrash
  \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\      - JP DeVries @jpdevries
   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\    - Alan Pich @_alanpich
-   \/_/ \/_/\/_____/\/___/  \/_/ \/*/
-                                      
+   \/_/ \/_/\/_____/\/___/  \/_/ \/_/    - Danya Postfactum
+                                         - Christian Seele @christianseel
+
+*/                                      
 body, body.x-border-layout-ct {
-    color: #111;
-    font: 13px/17px Arial, Helvetica, sans-serif;
+    color: #444;
+    font: $baseText;
 ;
 }
 
 h2 {
-    color: #5E5E5E;
-    font: normal 25px helvetica,arial,freesans,clean,sans-serif;
-    letter-spacing: -1px;
-    margin: 0 0 8px 15px;
+    color: $headerText;
+    font: $fontNormal;
+    font-size: 25px;
+    margin: 0 0 8px 5px;
 }
+
+/* TODO: conver font heirarchy into a vertical rhythm formula */
 
 h3 {
     margin: 0 0 8px 15px;
-    font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+    font: $fontH3;
 }
 
 strong {
@@ -68,7 +73,6 @@ input::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
-
 
 .aleft { text-align: left; }
 .aright { text-align: right; }
@@ -131,7 +135,10 @@ input::-moz-focus-inner {
 }
 
 /* form fields */
-.modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 14px; }
+.modx-form .x-form-text, 
+.modx-form .x-form-textarea { 
+    font-size: 14px; 
+}
 .modx-form .x-form-text {
 	height: 20px !important;
 	padding: 5px;
@@ -961,7 +968,6 @@ body.ext-ie7 .x-superboxselect-item {
 .x-grid3-cell-inner.x-grid3-col-main h3{
 	font-family: arial,Helvetica,sans-serif;
 	font-size: 20px;
-	letter-spacing: -1px;
 	color: #555555;
 	line-height: 1;
     margin: 0 0 2px;

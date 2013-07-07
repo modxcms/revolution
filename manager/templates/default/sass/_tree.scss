@@ -1,6 +1,6 @@
-/*#modx-leftbar*/ .x-tab-panel-noborder {
+.x-tab-panel-noborder {
     border: 1px solid #E2E3DE;
-    margin: 20px 10px 10px;
+    margin: 20px 0 10px;
     background-color: rgb(240,240,240);
     overflow: visible;
 }
@@ -8,7 +8,7 @@
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
     background-color: #fff;
 }
-/*#modx-leftbar*/ ul.x-tab-strip-top {
+ul.x-tab-strip-top {
     margin: -1px;
     width: auto;
 }
@@ -39,7 +39,6 @@
 .modx-leftbar .x-tree-root-ct {
     @include border-radius(inherit inherit 3px 3px);
     background-color: #eee;
-    //padding: 4px;
 }
 
 /* icons */
@@ -105,7 +104,7 @@
 /* main styles for the various tree states */
 .x-tree-node-el a span {
     padding-left: 7px;
-    line-height: 1.6;
+    line-height: 2;
 }
 .x-tree-node-el a span span {
     padding-left: 0;
@@ -147,25 +146,20 @@
 }
 
 
-
 /* tree menu splitter */
 .x-layout-split {
-    width: 2px;
-    box-shadow: -2px 0 2px $borderShadow;
+    width: 8px;
     z-index: 0;
-    background: $navbarHover;
+    background: $mainBg;
     border: 1px solid $borderColor;
-    border-width: 0 1px;
+    border-width: 0 0 0 1px;
 
   .x-layout-mini {
-    left: -4px;
+    left: -6px;
   }
 }
 .x-layout-split:hover 
 {
     background: $navbarHover;
-}
-/* Tree icons (fontawesome */
-.x-tree-node i {
-  margin-right: .5em;
+    @include box-shadow (2px 0 2px $borderShadow);
 }
