@@ -47,7 +47,7 @@ MODx.Layout = function(config){
     if (MODx.perm.file_tree) {
         tabs.push({
             title: _('files')
-            ,xtype: 'modx-tree-directory'
+            ,xtype: 'modx-panel-filetree'
             ,id: 'modx-file-tree'
         });
         showTree = true;

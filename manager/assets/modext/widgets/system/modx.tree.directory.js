@@ -89,7 +89,6 @@ MODx.tree.Directory = function(config) {
         if (!this.config.hideSourceCombo) {
             try { this.sourceCombo.show(); } catch (e) {}
         }
-        console.log(this.getRootNode());
     },this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{

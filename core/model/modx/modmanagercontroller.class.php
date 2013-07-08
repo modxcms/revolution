@@ -480,22 +480,30 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
             $externals[] = $managerUrl.'assets/modext/util/utilities.js';
             $externals[] = $managerUrl.'assets/modext/util/uploaddialog.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
+
+
 
             $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
             $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
+
+
+            $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.treeloader.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.asynctreenode.js';
 
             $externals[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
             $externals[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
             $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
+            $externals[] = $managerUrl.'assets/modext/widgets/system/modx.panel.filetree.js';
             $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
             
             $siteId = $this->modx->user->getUserToken('mgr');

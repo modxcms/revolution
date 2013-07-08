@@ -28,7 +28,8 @@ MODx.tree.Tree = function(config) {
     this.config = config;
     var tl,root;
     if (this.config.url) {
-        tl = new Ext.tree.TreeLoader(config.loaderConfig);
+        //@TODO extend TreeLoader here
+        tl = new MODx.tree.TreeLoader(config.loaderConfig);
         tl.on('beforeload',function(l,node) {
             tl.dataUrl = this.config.url+'?action='+this.config.action+'&id='+node.attributes.id;
             if (node.attributes.type) {
@@ -134,6 +135,9 @@ MODx.tree.Tree = function(config) {
     }
     this.setup(config);
     this.config = config;
+
+    this.on('append',this._onAppend,this)
+
 };
 Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     menu: null
@@ -306,6 +310,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
              c.destroy();
         }
     }
+
     ,loadRemoteData: function(data) {
         this.removeChildren(this.getRootNode());
         for (var c in data) {
@@ -445,8 +450,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         }
         return true;
     }
-    
-    
+
     ,encode: function(node) {
         if (!node) {node = this.getRootNode();}
         var _encode = function(node) {
@@ -643,5 +647,72 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         }
         return a;
     }
+
+    /**
+     * Allow pseudoroot actions
+     * @param tree {this}
+     * @param parent {Ext.tree.TreeNode} Parent node
+     * @param node {Ext.tree.TreeNode} Node to be inserted
+     */
+    ,_onAppend: function(tree, parent, node){
+        if(node.attributes.pseudoroot){
+
+            setTimeout((function(tree){ return function(){
+
+                console.log(node, node.ui.elNode )
+
+                var elId = node.ui.elNode.id+ '_tools';
+                var el = document.createElement('div');
+                    el.id = elId;
+                    el.className = 'modx-tree-node-tool-ct'
+                    el.style.float = 'right';
+                node.ui.elNode.appendChild(el);
+
+
+                var btn = MODx.load({
+                    xtype: 'modx-button',
+                    text: '',
+                    scope: this,
+                    node: node,
+                    handler: function(btn,evt){
+                        evt.stopPropagation(evt);
+                        node.reload();
+                    },
+                    iconCls: 'icon-refresh',
+                    renderTo: elId
+                });
+
+                var btn = MODx.load({
+                    xtype: 'modx-button',
+                    text: 'help',
+                    scope: this,
+                    node: node,
+                    handler: function(btn,evt){
+                        evt.stopPropagation(evt);
+                        node.reload();
+                    },
+                    iconCls: 'icon-beer',
+                    renderTo: elId
+                });
+
+
+                window.BTNS.push(btn);
+
+
+            }}(this)),200);
+
+            return false;
+
+            var btn = document.createElement('div');
+                btn.innerHTML = 'H';
+
+            console.log(node.ui.elNode);
+            node.el.appendChild(btn);
+        }
+    }
+
 });
 Ext.reg('modx-tree',MODx.tree.Tree);
+
+
+window.BTNS = [];

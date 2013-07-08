@@ -232,7 +232,6 @@ Ext.override(Ext.tree.TreeNodeUI,{
         
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
 
-
         var cb = Ext.isBoolean(a.checked),
             nel,
             href = this.getHref(a.href),

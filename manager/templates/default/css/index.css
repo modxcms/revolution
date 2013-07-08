@@ -4556,6 +4556,19 @@ a .icon-flip-vertical:before {
   .x-tree-ec-icon {
     float: right;
     margin-top: 2px; }
+  .tree-pseudoroot-node .modx-tree-node-tool-ct .x-btn {
+    margin-left: 2px; }
+  .tree-pseudoroot-node:hover .modx-tree-node-tool-ct {
+    display: block; }
+
+.x-btn-fontawesome {
+  display: inline !important;
+  padding: 2px 4px !important;
+  text-align: center; }
+  .x-btn-fontawesome i {
+    font-style: normal; }
+  .x-btn-fontawesome button {
+    display: none; }
 
 /*
           ____   ____     __   __     

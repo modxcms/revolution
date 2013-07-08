@@ -40,4 +40,32 @@
     margin-top: 2px;
   }
 
+  .modx-tree-node-tool-ct {
+  //  display: none;
+
+    .x-btn {
+      margin-left: 2px;
+    }
+  }
+
+  &:hover .modx-tree-node-tool-ct {
+    display: block;
+  }
+
+}
+
+
+
+.x-btn-fontawesome {
+  display: inline !important;
+  padding: 2px 4px !important;
+  text-align:center;
+
+  i {
+    font-style: normal;
+  }
+
+  button {
+    display:none;
+  }
 }
