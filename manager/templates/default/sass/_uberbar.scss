@@ -21,6 +21,7 @@
     font-size: 12px;
     color: #565353;
     @include border-radius(0);
+    background-color: $almostWhite;
 }
 #modx-manager-search .x-form-field-trigger-wrap {
     border-width: 0;

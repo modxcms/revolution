@@ -1401,6 +1401,7 @@ body.ext-ie7 .x-superboxselect-item {
 #managerbuttons {
     width:100%;
     overflow:hidden;
+    margin-bottom: 1em;
 }
 #managerbuttons ul:before,
 #managerbuttons ul:after {
@@ -1420,7 +1421,7 @@ body.ext-ie7 .x-superboxselect-item {
     display: table;
     position: relative;
     float: left;
-    width: 23%;
+    width: 24.5%;
     margin: 0;
     padding: 1% 0 0 1%;
 }
@@ -1483,4 +1484,38 @@ body.ext-ie7 .x-superboxselect-item {
 }
 #managerbuttons ul li a span.icon {
     padding: 16px 10px;
+}
+
+#helpBanner {
+    background:rgba(0,0,0,0.1);
+    text-align:center;
+    padding: 3em;
+    margin:0 0 1em;
+}
+
+#contactus {
+    text-align: center;
+    padding: 1em;
+    margin: 0 0 1em;
+    border: 1px solid $borderColor;
+}
+#contactus form {
+    display: inline;
+}
+#contactus a {
+    text-decoration: none;
+    padding: .25em .5em;
+    margin-left: 1em;
+    color: $colorSplash;
+    @include border-radius(3px);
+    border: 1px solid $colorSplash;
+    background-color: lighten($colorSplash,40%);
+    white-space: nowrap;
+}
+#contactus a:hover {
+    background-color: $colorSplash;
+    color: #fff;
+}
+#aboutMODX p {
+    margin: 0 0 1em;
 }

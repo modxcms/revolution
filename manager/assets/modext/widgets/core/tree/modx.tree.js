@@ -668,6 +668,18 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                     el.style.float = 'right';
                 node.ui.elNode.appendChild(el);
 
+                var btn = MODx.load({
+                    xtype: 'modx-button',
+                    text: '',
+                    scope: this,
+                    node: node,
+                    handler: function(btn,evt){
+                        evt.stopPropagation(evt);
+                        node.reload();
+                    },
+                    iconCls: 'icon-plus-sign',
+                    renderTo: elId
+                });
 
                 var btn = MODx.load({
                     xtype: 'modx-button',
@@ -679,19 +691,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                         node.reload();
                     },
                     iconCls: 'icon-refresh',
-                    renderTo: elId
-                });
-
-                var btn = MODx.load({
-                    xtype: 'modx-button',
-                    text: 'help',
-                    scope: this,
-                    node: node,
-                    handler: function(btn,evt){
-                        evt.stopPropagation(evt);
-                        node.reload();
-                    },
-                    iconCls: 'icon-beer',
                     renderTo: elId
                 });
 
