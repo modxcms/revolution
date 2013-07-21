@@ -6,7 +6,7 @@ MODx.SearchBar = function(config) {
         renderTo: 'modx-manager-search'
         ,listClass: 'modx-manager-search-results'
         ,emptyText: 'Search or actions…'
-        ,id: 'modx-awesomebar'
+        ,id: 'modx-uberbar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
         //,autoSelect: false
@@ -88,17 +88,10 @@ MODx.SearchBar = function(config) {
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     // Initialize the keyboard shortcuts to focus the bar
     setKeyMap: function() {
-        var nop = ['INPUT', 'TEXTAREA'];
-        Ext.EventManager.on(Ext.get(document), 'keyup', function(vent) {
-            if (vent.keyCode === 85 && nop.indexOf(vent.target.nodeName) == -1) {
-                this.focus();
-            }
-        }, this);
-
         new Ext.KeyMap(Ext.get(document)).addBinding({
-            key: 'u'
+            key: 191
             ,ctrl: false
-            ,shift: false
+            ,shift: true
             ,alt: true
             ,handler: function(code, vent) {
                 this.focus();
