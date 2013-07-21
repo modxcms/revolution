@@ -33,7 +33,7 @@ This will be fed with amazing informations via the Ajaxes with a local fallback.
             </li>
 
             <li>
-                <a href="{$_lang.support_link}" target="_blank" title="{$_lang.support_title}">
+                <a href="{$_lang.support_link}" class="supportTicket" title="{$_lang.support_title}">
                     <span class="icon"><i class="icon-credit-card icon-3x"></i></span>
                     <span class="headline">{$_lang.support}</span>
                     <span class="subline">{$_lang.support_description}</span>
@@ -67,3 +67,29 @@ This will be fed with amazing informations via the Ajaxes with a local fallback.
     <p>{$_lang.help_credit}</p>
 
 </div>
+
+  <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+
+
+  <script>
+    $('.supportTicket').click(function(){
+      var token = function(res){
+        var $input = $('<input type=hidden name=stripeToken />').val(res.id);
+        $('form').append($input).submit();
+      };
+
+      StripeCheckout.open({
+        key:         'pk_test_hT0zzA6jxhqLhyxltfU61Ld3',
+        address:     false,
+        amount:      30000,
+        currency:    'usd',
+        name:        '{$_lang.support_ticket_title}',
+        description: '{$_lang.support_ticket_subtitle}',
+        panelLabel:  '{$_lang.support_ticket_button}',
+        token:       token
+      });
+
+      return false;
+    });
+  </script>
