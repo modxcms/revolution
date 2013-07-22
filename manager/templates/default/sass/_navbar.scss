@@ -51,6 +51,9 @@
 }
 #modx-navbar li:hover a {
     background-color: $navbarHover;
+    &:hover.modx-help {
+        color: $colorSplash;
+    }
 }
 #modx-navbar ul#modx-settings-menu,
 #modx-navbar ul#modx-user-submenu {
