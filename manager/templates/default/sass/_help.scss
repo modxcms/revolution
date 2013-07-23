@@ -64,8 +64,8 @@
 #helpBanner,
 #contactus {
     background: #fff;
-    padding: 1.5em;
-    margin: 0 0 1em;
+    padding: 18px;
+    margin: 0.75em 0 1.75em;
     width: 100%;
     @include box-shadow(0 1px 0 $borderShadow);
     border: 1px solid $borderColor;
@@ -76,12 +76,14 @@
     }
 }
 #helpBanner {
-    min-height: 76px;
+    min-height: 112px;
+    margin-top: 1.5em;
 
     #helpLogo {
         float: right;
         width: 200px;
         height: 76px;
+        margin-right: 1em;
     }
 }
 
@@ -132,7 +134,7 @@
 
 #adblock {
     float: left;
-    margin-left: 2%;
+    margin: 1em 0 0 2%;
     width: 38%;
     padding: 1em;
     background: $softGrey;

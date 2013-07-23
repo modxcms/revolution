@@ -1,15 +1,14 @@
-<div class="container">
+<div class="container" style="position:absolute;overflow:auto;">
 
     <h2>{$_lang.help_page_title}</h2>
 
     <div id="helpBanner">
         <div id="helpLogo">
-            <img src="{$_config.template_url}/images/modx-help-logo.png">
+            <img src="{$_config.manager_url}templates/default/images/modx-help-logo.png">
         </div>
         <h3>{$_lang.help_main_head}</h3>
         <p>{$_lang.help_main_subhead}</p>
     </div>
-
 
     <div id="managerbuttons">
         <ul>
@@ -72,21 +71,21 @@
     </div>
 
     <div id="adblock">
-    This will be fed with amazing informations via the Ajaxes with a local fallback. Included will be important notices, MODX Professionals Ads, Site Sponsor Ads, etc. Likely using the Orbit Ad Server: http://orbitopenadserver.com
+        <p>This will be fed with amazing informations via the Ajaxes with a local fallback. Included will be important notices, MODX Professionals Ads, Site Sponsor Ads, etc. Likely using the Orbit Ad Server: http://orbitopenadserver.com</p>
     </div>
 
     <div id="aboutMODX">
-    <p>{$_lang.help_about}</p>
+        <p>{$_lang.help_about}</p>
 
-    <p>{$_lang.help_credit}</p>
-
+        <p>{$_lang.help_credit}</p>
+    </div>
 </div>
 
-  <script src="https://checkout.stripe.com/v2/checkout.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+<script src="https://checkout.stripe.com/v2/checkout.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 
 
-  <script>
+<script>
     $('.supportTicket').click(function(){
       var token = function(res){
         var $input = $('<input type=hidden name=stripeToken />').val(res.id);
@@ -106,4 +105,5 @@
 
       return false;
     });
-  </script>
+</script>
+
