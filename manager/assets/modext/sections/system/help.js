@@ -21,8 +21,9 @@ MODx.page.Help = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel'
-            ,renderTo: 'alans-div'
+            ,renderTo: 'help-content-here-people'
             ,html: contentHTML
+            ,cls: 'nobg'
         }]
     });
     MODx.page.Help.superclass.constructor.call(this,config);
