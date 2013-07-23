@@ -1,4 +1,5 @@
-<div class="container" style="position:absolute;overflow:auto;">
+<div id="alans-div"></div>
+<div class="container" id="modx-page-help-content" style="position:absolute;overflow:auto;">
 
     <h2>{$_lang.help_page_title}</h2>
 
@@ -7,6 +8,7 @@
             <img src="{$_config.manager_url}templates/default/images/modx-help-logo.png">
         </div>
         <h3>{$_lang.help_main_head}</h3>
+
         <p>{$_lang.help_main_subhead}</p>
     </div>
 
@@ -52,26 +54,29 @@
         <h3>{$_lang.email_sub} </h3>
         <p>{$_lang.email_sub_description}</p>
         <form id="mcsignup" action="http://modxcms.list-manage.com/subscribe/post" method="post">
-            <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
-            <input type="hidden" name="id" value="848cf40420" />
+            <input type="hidden" name="u" value="08b25a8de68a29fe03a483720"/>
+            <input type="hidden" name="id" value="848cf40420"/>
 
             <input type="hidden" name="MERGE7" value="[[++site_url]] Manager" id="MERGE7">
 
-            <input type="email" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" />
-            <input  type="submit" name="Submit" value="{$_lang.email_sub_button}" />
+            <input type="email" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value=""
+                   class="textbox"/>
+            <input type="submit" name="Submit" value="{$_lang.email_sub_button}"/>
         </form>
 
         <p>{$_lang.social_follows}</p>
 
-        <p><a href=""><i class="icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a> </p>
+        <p><a href=""><i class="icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a></p>
 
-        <p><a href=""><i class="icon-2x icon-facebook-sign"></i>Facebook: www.facebook.com/modxcms </a> </p>
-        
-        <p><a href=""><i class="icon-2x icon-google-plus"></i>Google+: google.com/+modx </a> </p>
+        <p><a href=""><i class="icon-2x icon-facebook-sign"></i>Facebook: www.facebook.com/modxcms </a></p>
+
+        <p><a href=""><i class="icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
     </div>
 
     <div id="adblock">
-        <p>This will be fed with amazing informations via the Ajaxes with a local fallback. Included will be important notices, MODX Professionals Ads, Site Sponsor Ads, etc. Likely using the Orbit Ad Server: http://orbitopenadserver.com</p>
+        <p>This will be fed with amazing informations via the Ajaxes with a local fallback. Included will be important
+            notices, MODX Professionals Ads, Site Sponsor Ads, etc. Likely using the Orbit Ad Server:
+            http://orbitopenadserver.com</p>
     </div>
 
     <div id="aboutMODX">
@@ -86,24 +91,24 @@
 
 
 <script>
-    $('.supportTicket').click(function(){
-      var token = function(res){
-        var $input = $('<input type=hidden name=stripeToken />').val(res.id);
-        $('form').append($input).submit();
-      };
+    $('.supportTicket').click(function () {
+        var token = function (res) {
+            var $input = $('<input type=hidden name=stripeToken />').val(res.id);
+            $('form').append($input).submit();
+        };
 
-      StripeCheckout.open({
-        key:         'pk_test_hT0zzA6jxhqLhyxltfU61Ld3',
-        address:     false,
-        amount:      30000,
-        currency:    'usd',
-        name:        '{$_lang.support_ticket_title}',
-        description: '{$_lang.support_ticket_subtitle}',
-        panelLabel:  '{$_lang.support_ticket_button}',
-        token:       token
-      });
+        StripeCheckout.open({
+            key: 'pk_test_hT0zzA6jxhqLhyxltfU61Ld3',
+            address: false,
+            amount: 30000,
+            currency: 'usd',
+            name: '{$_lang.support_ticket_title}',
+            description: '{$_lang.support_ticket_subtitle}',
+            panelLabel: '{$_lang.support_ticket_button}',
+            token: token
+        });
 
-      return false;
+        return false;
     });
 </script>
 
