@@ -48,7 +48,6 @@ Ext.extend(MODx.Button,Ext.Button,{
 
 
         targs.iconCls = this.iconCls;
-        console.log(targs);
 
         if(position){
             btn = this.template.insertBefore(position, targs, true);

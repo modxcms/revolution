@@ -659,8 +659,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 
             setTimeout((function(tree){ return function(){
 
-                console.log(node, node.ui.elNode )
-
                 var elId = node.ui.elNode.id+ '_tools';
                 var el = document.createElement('div');
                     el.id = elId;
