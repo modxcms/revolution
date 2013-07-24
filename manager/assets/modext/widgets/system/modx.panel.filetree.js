@@ -4,33 +4,43 @@ MODx.panel.FileTree = function(config) {
         border:0,
         padding:0,
         margin:0,
-        id: 'modx-leftbar-filetree'
+        id: 'modx-leftbar-filetree',
+        listeners: {
+            render: {fn: this.getSourceList,scope:this}
+        }
     });
     MODx.panel.FileTree.superclass.constructor.call(this,config);
 
-    MODx.Ajax.request({
-        url: MODx.config.connectors_url
-        ,params: {
-            action: 'source/getList'
-        }
-        ,listeners: {
-            success: {fn: function(data){
+
+ //   this.on('render',this.o)
+};
+Ext.extend(MODx.panel.FileTree,MODx.FormPanel,{
+
+    sourceTrees: []
+
+
+
+    ,getSourceList: function(){
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url
+            ,params: {
+                action: 'source/getList'
+            }
+            ,listeners: {
+                success: {fn: function(data){
                     console.log('data received');
                     this.onSourceListReceived(data.results);
                 },scope:this},
-            failure: {fn: function(data){
+                failure: {fn: function(data){
                     // Check if this really is an error
                     if(data.total > 0 && data.results != undefined){
                         this.onSourceListReceived(data.results);
                     }
                     return false;
                 },scope: this}
-        }
-    })
-};
-Ext.extend(MODx.panel.FileTree,MODx.FormPanel,{
-
-    sourceTrees: []
+            }
+        })
+    }
 
 
     ,onSourceListReceived: function(sources){
@@ -53,7 +63,7 @@ Ext.extend(MODx.panel.FileTree,MODx.FormPanel,{
             this.add(this.sourceTrees[source.name]);
         }
 
-        this.render();
+      //  this.render();
     }
 
 
