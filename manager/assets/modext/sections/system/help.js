@@ -15,12 +15,18 @@ MODx.page.Help = function(config) {
     var content = document.getElementById('modx-page-help-content');
     var contentHTML = content.innerHTML;
     content.parentNode.removeChild(content);
-    console.log(contentHTML);
 
 
     Ext.applyIf(config,{
-        components: [{
+        padding: 0
+        ,margin: 0
+        ,components: [{
             xtype: 'modx-panel'
+            ,style: {
+                margin: 0
+            }
+            ,padding: 10
+            ,margin:0
             ,renderTo: 'alans-div'
             ,html: contentHTML
         }]
