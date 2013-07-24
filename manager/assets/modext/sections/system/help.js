@@ -27,8 +27,9 @@ MODx.page.Help = function(config) {
             }
             ,padding: 10
             ,margin:0
-            ,renderTo: 'alans-div'
+            ,renderTo: 'help-content-here-people'
             ,html: contentHTML
+            ,cls: 'nobg'
         }]
     });
     MODx.page.Help.superclass.constructor.call(this,config);

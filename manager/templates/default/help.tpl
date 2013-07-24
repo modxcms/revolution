@@ -1,5 +1,5 @@
-<div id="alans-div"></div>
-<div class="container" id="modx-page-help-content" style="position:absolute;overflow:auto;">
+<div class="container" id="help-content-here-people"></div>
+<div id="modx-page-help-content">
 
     <h2>{$_lang.help_page_title}</h2>
 

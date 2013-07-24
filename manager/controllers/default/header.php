@@ -97,6 +97,7 @@ $this->setPlaceholder('navb',$output);
 /** @var modMenu $profile */
 $profile = $modx->getObject('modMenu','profile');
 $this->setPlaceholder('username',$modx->getLoginUserName());
+//$this->setPlaceholder('user_email',$modx->getLoginUserEmail());
 $this->setPlaceholder('canChangeProfile',$modx->hasPermission('change_profile'));
 $this->setPlaceholder('canLogout',$modx->hasPermission('logout'));
 $this->setPlaceholder('canModifySettings',$modx->hasPermission('logout'));
