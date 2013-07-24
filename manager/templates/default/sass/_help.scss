@@ -19,7 +19,7 @@
 }
 #managerbuttons ul {
     width: 102%;
-    margin: -1% 0 0 -1%;
+    margin: 0 -1%;
     /* clearfix */
     *zoom: 1;
 }
@@ -27,9 +27,9 @@
     display: table;
     position: relative;
     float: left;
-    width: 24.82%;
+    width: 25%;
     margin: 0;
-    padding: 1% 0 0 1%;
+    padding: 0 1%;
 }
 #managerbuttons ul li a {
     display: table-cell;
@@ -110,9 +110,17 @@
 	    @include box-sizing;
     }
 
+    input[type=submit] {
+        font-size: 1.1em;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        padding: 6px 10px;
+    }
+
     p {
         margin: 1em 0;
-        color: lighten($mainText,20%)
+        color: lighten($mainText,15%)
     }
 
     form + p {
@@ -148,7 +156,7 @@
 }
 #aboutMODX {
     clear:both;
-    padding: 3em;
+    padding: 1em 3em;
     p {
         margin: 0 0 1em;
         line-height: 1.6
@@ -157,6 +165,7 @@
         color: $colorSplash;
         padding: 2px 4px;
         margin: -2px -4px;
+
         &:hover {
             color: #fff;
             background-color: $colorSplash;
