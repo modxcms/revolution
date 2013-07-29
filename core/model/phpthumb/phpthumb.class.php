@@ -3207,7 +3207,6 @@ exit;
 				$this->DebugMessage(@$ImageCreateFromFunctionName.'() was attempted but FAILED', __FILE__, __LINE__);
 			}
 			$this->DebugMessage('Populating $rawimagedata', __FILE__, __LINE__);
-            #$rawimagedata = file_get_contents($filename);
             $rawimagedata = file_get_contents(str_replace(' ','%20',$filename));
 			if (empty($rawimagedata)) {
 				$this->DebugMessage('cannot fopen('.$filename.')', __FILE__, __LINE__);
