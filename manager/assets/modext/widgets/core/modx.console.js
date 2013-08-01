@@ -102,7 +102,11 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
 
     ,onComplete: function() {
-        this.provider.disconnect();
+        if (this.provider && this.provider.disconnect) {
+            try {
+                this.provider.disconnect();
+            } catch (e) {}
+        }
         this.fbar.setDisabled(false);
         this.keyMap.setDisabled(false);
     }
