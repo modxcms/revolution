@@ -1,10 +1,11 @@
-MODx Revolution - Content Application Platform
+MODx Revolution
 =====================
+Content Application Platform
+------------
 Creative. Freedom.
 
 *Latest Version: 2.2.8*
 
------------
 MODX Revolution power-packs all sorts of features that the MODX community asked for, such as site contexts, improved caching, increased flexibility, transport packaging, a brand-new revamped manager interface, multiple database server support and much more. 
 
 You asked. We listened. Here is our answer: Revolution.
