@@ -785,39 +785,17 @@ abstract class modManagerController {
         $rules = array();
         /** @var modActionDom $rule */
         foreach ($domRules as $rule) {
-
-            // Which template is used in the rule set
             $template = $rule->get('template');
-
             if (!empty($template) && $obj) {
-                // If there is a template provided, restrict to template of the resource, else proceed
                 if ($template != $obj->get('template')) continue;
             }
-
             $constraintClass = $rule->get('constraint_class');
             if (!empty($constraintClass)) {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
                 $constraintField = $rule->get('constraint_field');
-
-                // This is the magic constraint value
                 $constraint = $rule->get('constraint');
-                $multipleConstraintValues = false;
-
-                // Multiple values through comma wanted, by user-input
-                // TODO: This is working for the field "parent" as expected - tests with over fields could/will fail..
-                if (is_string($constraint) && is_int(strpos($constraint, ","))) {
-                    $multipleConstraintValues = true;
-                    $constraintValues = explode(',', $constraint);
-                }
-
-                if ($multipleConstraintValues === true) {
-                    if (!in_array($obj->get($constraintField), $constraintValues)) {
-                        continue;
-                    }
-                } else {
-                    if ($obj->get($constraintField) != $constraint) {
-                        continue;
-                    }
+                if ($obj->get($constraintField) != $constraint) {
+                    continue;
                 }
             }
             if ($rule->get('rule') == 'fieldDefault') {
@@ -832,8 +810,6 @@ abstract class modManagerController {
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }
-
-        // If necessary, command the rules
         if (!empty($rules)) {
             $this->ruleOutput[] = '<script type="text/javascript">Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
         }
