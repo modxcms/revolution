@@ -1,6 +1,6 @@
 /**
  * Loads a grid of modContexts.
- * 
+ *
  * @class MODx.grid.Context
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -65,7 +65,7 @@ MODx.grid.Context = function(config) {
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     updateContext: function(itm,e) {
-        MODx.loadPage(MODx.action['context/update'], 'key='+this.menu.record.key);
+        MODx.loadPage('context/update', 'key='+this.menu.record.key);
     }
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
@@ -108,7 +108,7 @@ Ext.reg('modx-grid-contexts',MODx.grid.Context);
 
 /**
  * Generates the create context window.
- *  
+ *
  * @class MODx.window.CreateContext
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -148,7 +148,7 @@ Ext.reg('modx-window-context-create',MODx.window.CreateContext);
 
 /**
  * Loads the Contexts panel
- * 
+ *
  * @class MODx.panel.Contexts
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration options

@@ -1,6 +1,6 @@
 /**
  * Abstract class for Ext.DataView creation in MODx
- * 
+ *
  * @class MODx.DataView
  * @extends Ext.DataView
  * @constructor
@@ -10,7 +10,7 @@
 MODx.DataView = function(config) {
     config = config || {};
     this._loadStore(config);
-    
+
     Ext.applyIf(config.listeners || {},{
         'loadexception': {fn:this.onLoadException, scope: this}
         ,'beforeselect': {fn:function(view){ return view.store.getRange().length > 0;}}
@@ -29,20 +29,20 @@ MODx.DataView = function(config) {
 };
 Ext.extend(MODx.DataView,Ext.DataView,{
     lookup: {}
-    
+
     ,onLoadException: function(){
-        this.getEl().update('<div style="padding:10px;">'+_('data_err_load')+'</div>'); 
+        this.getEl().update('<div style="padding:10px;">'+_('data_err_load')+'</div>');
     }
-    
+
     /**
      * Add context menu items to the dataview.
-     * @param {Object, Array} items Either an Object config or array of Object configs.  
+     * @param {Object, Array} items Either an Object config or array of Object configs.
      */
     ,_addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i=0;i<l;i=i+1) {
             var options = a[i];
-            
+
             if (options === '-') {
                 this.cm.add('-');
                 continue;
@@ -59,7 +59,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e === 'yes') {
                                 var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = 'index.php?id='+id+'&'+a;
+                                var s = '?id='+id+'&'+a;
                                 if (w === null) {
                                     location.href = s;
                                 } else { w.dom.src = s; }
@@ -67,7 +67,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                         },this);
                     } else {
                         var a = Ext.urlEncode(o.params);
-                        var s = 'index.php?id='+id+'&'+a;
+                        var s = '?id='+id+'&'+a;
                         if (w === null) {
                             location.href = s;
                         } else { w.dom.src = s; }
@@ -83,12 +83,12 @@ Ext.extend(MODx.DataView,Ext.DataView,{
             });
         }
     }
-    
-    
+
+
     ,_loadStore: function(config) {
         this.store = new Ext.data.JsonStore({
             url: config.url
-            ,baseParams: config.baseParams || { 
+            ,baseParams: config.baseParams || {
                 action: 'getList'
                 ,wctx: config.wctx || MODx.ctx
                 ,dir: config.openTo || ''
@@ -103,7 +103,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
         });
         this.store.load();
     }
-    
+
     ,_showContextMenu: function(v,i,n,e) {
         e.preventDefault();
         var data = this.lookup[n.id];
@@ -124,7 +124,7 @@ Ext.namespace('MODx.browser');
 MODx.Browser = function(config) {
     if (MODx.browserOpen && !config.multiple) return false;
     if (!config.multiple) MODx.browserOpen = true;
-    
+
     config = config || {};
     Ext.applyIf(config,{
         onSelect: function(data) {}
@@ -134,7 +134,7 @@ MODx.Browser = function(config) {
     });
     MODx.Browser.superclass.constructor.call(this,config);
     this.config = config;
-    
+
     this.win = new MODx.browser.Window(config);
     this.win.reset();
 };
@@ -147,7 +147,7 @@ Ext.extend(MODx.Browser,Ext.Component,{
         this.win.tree.config.baseParams.source = source;
         this.win.view.config.baseParams.source = source;
     }
-    
+
 });
 Ext.reg('modx-browser',MODx.Browser);
 
@@ -197,7 +197,7 @@ MODx.browser.Window = function(config) {
     this.tree.on('click',function(node,e) {
         this.load(node.id);
     },this);
-    
+
     Ext.applyIf(config,{
         title: _('modx_browser')+' ('+(MODx.ctx ? MODx.ctx : 'web')+')'
         ,cls: 'modx-pb-win'
@@ -261,17 +261,17 @@ MODx.browser.Window = function(config) {
 };
 Ext.extend(MODx.browser.Window,Ext.Window,{
     returnEl: null
-    
+
     ,filter : function(){
         var filter = Ext.getCmp(this.ident+'filter');
         this.view.store.filter('name', filter.getValue(),true);
         this.view.select(0);
     }
-    
+
     ,setReturn: function(el) {
         this.returnEl = el;
     }
-    
+
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
@@ -282,13 +282,13 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         });
         this.sortImages();
     }
-    
+
     ,sortImages : function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
         this.view.select(0);
     }
-    
+
     ,reset: function(){
         if(this.rendered){
             Ext.getCmp(this.ident+'filter').reset();
@@ -297,7 +297,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         this.view.store.clearFilter();
         this.view.select(0);
     }
-    
+
     ,getToolbar: function() {
         return ['-', {
             text: _('filter')+':'
@@ -338,7 +338,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             }
         }];
     }
-    
+
     ,onSelect: function(data) {
         var selNode = this.view.getSelectedNodes()[0];
         var callback = this.config.onSelect || this.onSelectHandler;
@@ -352,7 +352,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             }
         },scope);
     }
-    
+
     ,onSelectHandler: function(data) {
         Ext.get(this.returnEl).dom.value = unescape(data.url);
     }
@@ -362,7 +362,7 @@ Ext.reg('modx-browser-window',MODx.browser.Window);
 MODx.browser.View = function(config) {
     config = config || {};
     this.ident = config.ident+'-view' || 'modx-browser-'+Ext.id()+'-view';
-    
+
     this._initTemplates();
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'browser/directory.php'
@@ -373,7 +373,7 @@ MODx.browser.View = function(config) {
             ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
             ,'menu'
         ]
-        ,baseParams: { 
+        ,baseParams: {
             action: 'getFiles'
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
@@ -397,7 +397,7 @@ MODx.browser.View = function(config) {
 };
 Ext.extend(MODx.browser.View,MODx.DataView,{
     templates: {}
-    
+
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
@@ -419,7 +419,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             }
         });
     }
-    
+
     ,run: function(p) {
         p = p || {};
         if (p.dir) { this.dir = p.dir; }
@@ -434,7 +434,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,scope: this
         });
     }
-    
+
     ,showDetails : function(){
         var selNode = this.getSelectedNodes();
         var detailEl = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
@@ -473,11 +473,11 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'</tpl>'
         );
         this.templates.thumb.compile();
-        
+
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
             ,'<tpl for=".">'
-                ,'<div class="modx-pb-detail-thumb">' 
+                ,'<div class="modx-pb-detail-thumb">'
                     ,'<img src="{thumb}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
                 ,'</div>'
                 ,'<div class="modx-pb-details-info">'
@@ -498,12 +498,12 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 return (v == '' || v == null || v == undefined || v === 0);
             }
         });
-        this.templates.details.compile(); 
+        this.templates.details.compile();
     }
     ,showFullView: function(name,ident) {
         var data = this.lookup[name];
         if (!data) return;
-        
+
         if (!this.fvWin) {
             this.fvWin = new Ext.Window({
                 layout:'fit'

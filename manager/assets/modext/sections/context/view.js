@@ -10,15 +10,15 @@ MODx.page.ViewContext = function(config) {
 		form: 'context_data'
 		,actions: {
             'new': 'context/create'
-            ,'edit': 'context/update'
+            ,edit: 'context/update'
             ,'delete': 'context/delete'
-            ,'cancel': 'context/view'
+            ,cancel: 'context/view'
         }
         ,buttons: this.getButtons()
 	});
 	MODx.page.ViewContext.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.page.ViewContext,MODx.Component,{	
+Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	getButtons: function(config) {
 		var b = [];
 	    b.push({

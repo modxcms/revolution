@@ -1,6 +1,6 @@
 /**
  * Loads the update user page
- * 
+ *
  * @class MODx.page.UpdateUser
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -55,7 +55,7 @@ Ext.extend(MODx.page.UpdateUser,MODx.Component,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    MODx.loadPage(MODx.action['security/user']);
+                    MODx.loadPage('security/user');
                 },scope:this}
             }
         });
