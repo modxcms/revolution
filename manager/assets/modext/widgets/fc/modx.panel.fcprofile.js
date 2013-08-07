@@ -213,7 +213,7 @@ Ext.extend(MODx.window.AddGroupToProfile,MODx.Window,{
         var rec = {};
         rec.id = Ext.getCmp('modx-fcaug-usergroup').getValue();
         rec.name = Ext.getCmp('modx-fcaug-usergroup').getRawValue();
-        
+
         var g = Ext.getCmp('modx-grid-fc-profile-usergroups');
         var s = g.getStore();
         var v = s.findExact('id',rec.id);
