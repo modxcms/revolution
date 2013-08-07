@@ -212,6 +212,8 @@ MODx.LayoutMgr = function() {
             // Handles url, passed as first argument
             if (0 === action.indexOf('?a=')) {
                 url = action;
+            } else if (action.substr(0, "index.php?".length) == 'index.php?') {
+                url = action.substr("index.php".length);
             } else {
                 var parts = [];
                 if (action) {

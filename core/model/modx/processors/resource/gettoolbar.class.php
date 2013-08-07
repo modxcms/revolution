@@ -33,28 +33,28 @@ class modResourceGetToolbarProcessor extends modProcessor {
             $items[] = array(
                 'icon' => $p.'folder_page_add.png',
                 'tooltip' => $this->modx->lexicon('document_new'),
-                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create'. $context .'\");");',
+                'handler' => 'new Function("this.redirect(\"?a=resource/create'. $context .'\");");',
             );
         }
         if ($this->modx->hasPermission('new_weblink')) {
             $items[] = array(
                 'icon' => $p.'page_white_link.png',
                 'tooltip' => $this->modx->lexicon('add_weblink'),
-                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modWebLink'. $context .'\");");',
+                'handler' => 'new Function("this.redirect(\"?a=resource/create&class_key=modWebLink'. $context .'\");");',
             );
         }
         if ($this->modx->hasPermission('new_symlink')) {
             $items[] = array(
                 'icon' => $p.'page_white_copy.png',
                 'tooltip' => $this->modx->lexicon('add_symlink'),
-                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modSymLink'. $context .'\");");',
+                'handler' => 'new Function("this.redirect(\"?a=resource/create&class_key=modSymLink'. $context .'\");");',
             );
         }
         if ($this->modx->hasPermission('new_static_resource')) {
             $items[] = array(
                 'icon' => $p.'page_white_gear.png',
                 'tooltip' => $this->modx->lexicon('static_resource_new'),
-                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modStaticResource'. $context .'\");");',
+                'handler' => 'new Function("this.redirect(\"?a=resource/create&class_key=modStaticResource'. $context .'\");");',
             );
         }
         unset($context);
