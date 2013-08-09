@@ -23,7 +23,8 @@
  * @subpackage connectors
  */
 
-$included = (reset(get_included_files()) !== __FILE__);
+$included = get_included_files();
+$included = (reset($included) !== __FILE__);
 
 if (!defined('MODX_CORE_PATH')) {
     if (file_exists(dirname(__FILE__) . '/config.core.php')) {
