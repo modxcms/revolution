@@ -10,7 +10,8 @@ MODx.tree.ResourceGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('resource_groups')
-        ,url: MODx.config.connectors_url+'security/resourcegroup.php'
+        ,url: MODx.config.connector_url
+        ,action: 'security/resourcegroup/getnodes'
         ,root_id: '0'
         ,root_name: _('resource_groups')
         ,enableDrag: false
@@ -18,8 +19,7 @@ MODx.tree.ResourceGroup = function(config) {
         ,ddAppendOnly: true
         ,useDefaultToolbar: true
         ,baseParams: {
-            action: 'getNodes'
-            ,limit: 0
+            limit: 0
         }
         ,tbar: [{
             text: _('resource_group_create')
@@ -88,7 +88,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             text: _('resource_group_access_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeResource'
+                action: 'security/resourcegroup/removeResource'
                 ,resource: resourceId
                 ,resourceGroup: resourceGroupId
             }
@@ -106,7 +106,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             text: _('resource_group_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'security/resourcegroup/remove'
                 ,id: id
             }
             ,listeners: {
@@ -193,7 +193,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             ,params: {
                 resource: dropEvent.dropNode.attributes.id
                 ,resourceGroup: dropEvent.target.attributes.id
-                ,action: 'updateResourcesIn'
+                ,action: 'security/resourcegroup/updateResourcesIn'
             }
             ,listeners: {
                 'success': {fn: function(r,o) {
@@ -222,8 +222,8 @@ MODx.window.CreateResourceGroup = function(config) {
         ,height: 150
         ,width: 650
         ,stateful: false
-        ,url: MODx.config.connectors_url+'security/resourcegroup.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/resourcegroup/create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
@@ -338,8 +338,8 @@ MODx.window.UpdateResourceGroup = function(config) {
         ,id: this.ident
         ,height: 150
         ,width: 350
-        ,url: MODx.config.connectors_url+'security/resourcegroup.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'security/resourcegroup/update'
         ,fields: [{
             name: 'id'
             ,xtype: 'hidden'

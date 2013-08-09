@@ -109,11 +109,11 @@ class modConnectorResponse extends modResponse {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'),array('code' => 401));
 
         /* verify the location and action */
-        } else if (!isset($options['location']) || !isset($options['action'])) {
+        } /*else if (!isset($options['location']) || !isset($options['action'])) {
             $this->responseCode = 404;
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'),array('code' => 404));
 
-        } else if (empty($options['action'])) {
+        }*/ else if (empty($options['action'])) {
             $this->responseCode = 404;
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'),array('code' => 404));
 

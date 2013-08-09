@@ -1,9 +1,9 @@
 MODx.panel.ImportResources = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'system/import/index.php'
+        url: MODx.config.connector_url
         ,baseParams: {
-            action: 'index'
+            action: 'system/import/index'
         }
         ,id: 'modx-panel-import-resources'
 		,cls: 'container'
@@ -78,7 +78,8 @@ MODx.panel.ImportResources = function(config) {
 				},MODx.PanelSpacer,{
 					xtype: 'modx-tree-resource-simple'
 					,title: _('import_use_doc_tree')
-					,url: MODx.config.connectors_url+'resource/index.php'
+					,url: MODx.config.connector_url
+                    ,action: 'resource/getnodes'
 					,id: 'modx-ih-resource-tree'
 					,enableDrop: false
 					,rootVisible: false

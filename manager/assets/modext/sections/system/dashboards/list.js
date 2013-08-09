@@ -13,10 +13,10 @@ MODx.page.Dashboards = function(config) {
             xtype: 'modx-panel-dashboards'
             ,renderTo: 'modx-panel-dashboards-div'
         }]
-        ,buttons: [{
+        ,buttons: [/*{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
 	});
 	MODx.page.Dashboards.superclass.constructor.call(this,config);
 };

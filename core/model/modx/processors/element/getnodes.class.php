@@ -78,114 +78,144 @@ class modElementGetNodesProcessor extends modProcessor {
         return explode('_',$id);
     }
 
+
+    /**
+     * Default icons for element types
+     * @param $elementIdentifier string Element Type
+     * @return string
+     */
+    public function getNodeIcon($elementIdentifier){
+        $defaults = array(
+            'template' => 'icon-columns',
+            'chunk' => 'icon-th-large',
+            'tv' => 'icon-asterisk',
+            'snippet' => 'icon-code',
+            'plugin' => 'icon-cog',
+            'category' => 'icon-folder-close'
+        );
+        return $this->modx->getOption('mgr_tree_icon_'.$elementIdentifier,null, $defaults[$elementIdentifier]);
+    }
+
     public function getRootNodes(array $map) {
         $elementType = ucfirst($map[0]);
         $nodes = array();
 
-        /* templates */
+        /* Templates */
         if ($this->modx->hasPermission('view_template')) {
-            $class = 'icon-template';
-            $class .= $this->modx->hasPermission('new_template') ? ' pnew' : '';
+            $class = $this->modx->hasPermission('new_template') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('templates'),
                 'id' => 'n_type_template',
                 'leaf' => false,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('template'),
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'template',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
-        /* TVs */
-        if ($this->modx->hasPermission('view_tv')) {
-            $class = 'icon-tv';
-            $class .= $this->modx->hasPermission('new_tv') ? ' pnew' : '';
-            $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
-
-            $nodes[] = array(
-                'text' => $this->modx->lexicon('tmplvars'),
-                'id' => 'n_type_tv',
-                'leaf' => false,
-                'cls' => $class,
-                'page' => '',
-                'classKey' => 'root',
-                'type' => 'tv',
-                'draggable' => false,
-            );
-        }
-
-        /* chunks */
+        /* Chunks */
         if ($this->modx->hasPermission('view_chunk')) {
-            $class = 'icon-chunk';
-            $class .= $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
+            $class = $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('chunks'),
                 'id' => 'n_type_chunk',
                 'leaf' => false,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('chunk'),
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'chunk',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
-        /* snippets */
-        if ($this->modx->hasPermission('view_snippet')) {
-            $class = 'icon-snippet';
-            $class .= $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
+        /* TVs */
+        if ($this->modx->hasPermission('view_tv')) {
+            $class = $this->modx->hasPermission('new_tv') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
+
+            $nodes[] = array(
+                'text' => $this->modx->lexicon('tmplvars'),
+                'id' => 'n_type_tv',
+                'leaf' => false,
+                'cls' => $class,
+                'iconCls' => $this->getNodeIcon('tv'),
+                'page' => '',
+                'classKey' => 'root',
+                'type' => 'tv',
+                'draggable' => false,
+                'pseudoroot' => true,
+            );
+        }
+
+        /* Snippets */
+        if ($this->modx->hasPermission('view_snippet')) {
+            $class = $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
+            $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('snippets'),
                 'id' => 'n_type_snippet',
                 'leaf' => false,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('snippet'),
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'snippet',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
-        /* plugins */
+        /* Plugins */
         if ($this->modx->hasPermission('view_plugin')) {
-            $class = 'icon-plugin';
-            $class .= $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
+            $class = $this->modx->hasPermission('new_snippet') ? ' pnew' : '';
             $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('plugins'),
                 'id' => 'n_type_plugin',
                 'leaf' => false,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('plugin'),
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'plugin',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
-        /* categories */
+        /* Categories */
         if ($this->modx->hasPermission('view_category')) {
-            $class = 'icon-category';
-            $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class = $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
 
             $nodes[] = array(
                 'text' => $this->modx->lexicon('categories'),
                 'id' => 'n_category',
                 'leaf' => 0,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('category'),
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'category',
                 'draggable' => false,
+                'pseudoroot' => true,
             );
         }
 
@@ -217,7 +247,7 @@ class modElementGetNodesProcessor extends modProcessor {
         $c->groupby($this->modx->getSelectColumns('modCategory','modCategory'));
         
         /* set permissions as css classes */
-        $class = array('icon-category','folder');
+        $class = array('folder');
         $types = array('template','tv','chunk','snippet','plugin');
         foreach ($types as $type) {
             if ($this->modx->hasPermission('new_'.$type)) {
@@ -245,6 +275,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'category' => $category->get('id'),
                 'leaf' => false,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('category'),
                 'page' => '',
                 'classKey' => 'modCategory',
                 'type' => 'category',
@@ -275,7 +306,7 @@ class modElementGetNodesProcessor extends modProcessor {
         $categories = $this->modx->getCollection('modCategory',$c);
         
         /* set permissions as css classes */
-        $class = array('icon-category','folder');
+        $class = array('folder');
         $types = array('template','tv','chunk','snippet','plugin');
         foreach ($types as $type) {
             if ($this->modx->hasPermission('new_'.$type)) {
@@ -301,6 +332,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'data' => $category->toArray(),
                 'leaf' => false,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('category'),
                 'classKey' => 'modCategory',
                 'elementType' => $elementType,
                 'page' => '',
@@ -329,7 +361,7 @@ class modElementGetNodesProcessor extends modProcessor {
             if (!$element->checkPolicy('list')) continue;
             $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
         
-            $class = array('icon-'.$elementIdentifier);
+            $class = array();
             if ($canNewElement) $class[] = 'pnew';
             if ($canEditElement && $element->checkPolicy(array('save' => true, 'view' => true))) $class[] = 'pedit';
             if ($canDeleteElement && $element->checkPolicy('remove')) $class[] = 'pdelete';
@@ -338,7 +370,9 @@ class modElementGetNodesProcessor extends modProcessor {
             if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
                 $class[] = 'element-node-disabled';
             }
-        
+
+
+
             $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
             $nodes[] = array(
                 'text' => strip_tags($name) . $idNote,
@@ -348,6 +382,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'leaf' => 1,
                 'name' => $name,
                 'cls' => implode(' ',$class),
+                'iconCls' => $element->get('static') ? 'icon-file-text-alt' : 'icon-file-alt',
                 'page' => 'index.php?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
                 'type' => $elementIdentifier,
                 'elementType' => $elementType,
@@ -382,7 +417,7 @@ class modElementGetNodesProcessor extends modProcessor {
         $categories = $this->modx->getCollection('modCategory',$c);
         
         /* set permissions as css classes */
-        $class = 'icon-category folder';
+        $class = 'folder';
         $types = array('template','tv','chunk','snippet','plugin');
         foreach ($types as $type) {
             if ($this->modx->hasPermission('new_'.$type)) {
@@ -412,6 +447,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'data' => $category->toArray(),
                 'leaf' => false,
                 'cls' => $class,
+                'iconCls' => $this->getNodeIcon('category'),
                 'page' => '',
                 'classKey' => 'modCategory',
                 'elementType' => $elementType,
@@ -442,7 +478,7 @@ class modElementGetNodesProcessor extends modProcessor {
             /* handle templatename case */
             $name = $elementClassKey == 'modTemplate' ? $element->get('templatename') : $element->get('name');
         
-            $class = array('icon-'.$map[1]);
+            $class = array();
             if ($canNewElement) $class[] = 'pnew';
             if ($canEditElement && $element->checkPolicy(array('save' => true,'view' => true))) $class[] = 'pedit';
             if ($canDeleteElement && $element->checkPolicy('remove')) $class[] = 'pdelete';
@@ -464,6 +500,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'leaf' => true,
                 'name' => $name,
                 'cls' => implode(' ',$class),
+                'iconCls' => $element->get('static') ? 'icon-file-text-alt' : 'icon-file-alt',
                 'page' => '?a='.$this->actionMap[$map[1]].'&id='.$element->get('id'),
                 'type' => $map[1],
                 'elementType' => $elementType,

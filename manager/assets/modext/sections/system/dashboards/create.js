@@ -1,14 +1,17 @@
 MODx.page.CreateDashboard = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-       formpanel: 'modx-panel-dashboard'
-       ,actions: {
-            'new': 'system/dashboards/create'
-            ,edit: 'system/dashboards/update'
+        formpanel: 'modx-panel-dashboard'
+        ,actions: {
+            'new': 'system/dashboard/create'
+            ,edit: 'system/dashboard/update'
             ,cancel: 'system/dashboards'
-       }
-       ,buttons: [{
-            process: 'create', text: _('save'), method: 'remote'
+        }
+        ,buttons: [{
+            process: 'system/dashboard/create'
+            ,reload: true
+            ,text: _('save')
+            ,method: 'remote'
             ,checkDirty: false
             ,id: 'modx-btn-save'
             ,keys: [{
@@ -16,11 +19,14 @@ MODx.page.CreateDashboard = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:'system/dashboards'}
-        },'-',{
+            text: _('cancel')
+            ,handler: function() {
+                MODx.loadPage('system/dashboards');
+            }
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
 		,components: [{
             xtype: 'modx-panel-dashboard'
             ,renderTo: 'modx-panel-dashboard-div'

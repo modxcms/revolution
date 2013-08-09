@@ -16,21 +16,23 @@ MODx.page.CreateTV = function(config) {
             ,cancel: 'welcome'
         }
         ,buttons: [{
-            process: 'create'
+            process: 'element/tv/create'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
+            ,reload: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
-        },'-',{
+            process: 'welcome'
+            ,text: _('cancel')
+            ,params: {a:'welcome'}
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
-        ,loadStay: true
+        }*/]
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'

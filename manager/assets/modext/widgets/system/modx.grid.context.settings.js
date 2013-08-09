@@ -11,9 +11,9 @@ MODx.grid.ContextSettings = function(config) {
     Ext.applyIf(config,{
         title: _('context_settings')
         ,id: 'modx-grid-context-settings'
-        ,url: MODx.config.connectors_url+'context/setting.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'context/setting/getList'
             ,context_key: config.context_key
         }
         ,saveParams: {
@@ -26,7 +26,10 @@ MODx.grid.ContextSettings = function(config) {
             ,scope: this
             ,handler: { 
                 xtype: 'modx-window-setting-create'
-                ,url: MODx.config.connectors_url+'context/setting.php'
+                ,url: MODx.config.connector_url
+                ,baseParams: {
+                    action: 'context/setting/create'
+                }
                 ,fk: config.context_key
             }
         }]
@@ -53,8 +56,8 @@ MODx.window.UpdateContextSetting = function(config) {
         title: _('setting_update')
         ,height: 200
         ,width: 600
-        ,url: MODx.config.connectors_url+'context/setting.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'context/setting/update'
         ,bodyStyle: 'padding: 0'
         ,fields: [{
             xtype: 'hidden'

@@ -11,13 +11,8 @@ MODx.page.UpdateTemplate = function(config) {
 
 	Ext.applyIf(config,{
 		formpanel: 'modx-panel-template'
-		,actions: {
-            'new': 'element/template/create'
-            ,edit: 'element/template/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: [{
-            process: 'update'
+            process: 'element/template/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -30,20 +25,18 @@ MODx.page.UpdateTemplate = function(config) {
             ,handler: this.duplicate
             ,scope: this
         },'-',{
-            process: 'cancel'
+            process: 'welcome'
             ,text: _('cancel')
             ,params: {a:'welcome'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
-        ,loadStay: true
+        }*/]
         ,components: [{
             xtype: 'modx-panel-template'
             ,renderTo: 'modx-panel-template-div'
             ,template: config.id
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateTemplate.superclass.constructor.call(this,config);
@@ -62,7 +55,7 @@ Ext.extend(MODx.page.UpdateTemplate,MODx.Component, {
                 success: {
                     fn: function(r) {
                         var response = Ext.decode(r.a.response.responseText);
-                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
                     },scope:this}
                 ,hide:{fn:function() {this.destroy();}}
             }

@@ -3,7 +3,10 @@ MODx.panel.Messages = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-message'
-        ,url: MODx.config.connectors_url+'security/message.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/message/getlist'
+        }
         ,layout: 'fit'
         ,bodyStyle: 'background: none;'
         ,cls: 'container form-with-labels'
@@ -63,7 +66,10 @@ MODx.grid.Message = function(config) {
     Ext.applyIf(config,{
         title: _('messages')
         ,id: 'modx-grid-message'
-        ,url: MODx.config.connectors_url+'security/message.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/message/getlist'
+        }
         ,fields: ['id','type','subject','message','sender','recipient','private'
             ,'date_sent'
             ,'read','sender_name']
@@ -130,7 +136,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'read'
+                action: 'security/message/read'
                 ,id: r.id
             }
             ,listeners: {
@@ -148,7 +154,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'unread'
+                action: 'security/message/unread'
                 ,id: rec.data.id
             }
             ,listeners: {
@@ -171,7 +177,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         }
         m.push({
             text: _('delete')
-            ,handler: this.remove.createDelegate(this,["message_remove_confirm"])
+            ,handler: this.remove.createDelegate(this,['message_remove_confirm', 'security/message/remove'])
         });
         return m;
     }
@@ -185,7 +191,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'security/message/getList'
     	};
         Ext.getCmp('modx-messages-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -206,8 +212,8 @@ MODx.window.CreateMessage = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('message_create')
-        ,url: MODx.config.connectors_url+'security/message.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/message/create'
         ,fields: [{
             xtype: 'combo'
             ,fieldLabel: _('recipient_type')

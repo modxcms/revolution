@@ -47,7 +47,7 @@ MODx.Layout = function(config){
     if (MODx.perm.file_tree) {
         tabs.push({
             title: _('files')
-            ,xtype: 'modx-tree-directory'
+            ,xtype: 'modx-panel-filetree'
             ,id: 'modx-file-tree'
         });
         showTree = true;
@@ -62,16 +62,16 @@ MODx.Layout = function(config){
             xtype: 'box'
             ,region: 'north'
             ,applyTo: 'modx-header'
-            ,height: 92
+            ,height: 43
         },{
              region: 'west'
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
             ,split: true
             ,width: 310
-            ,minSize: 150
+            ,minSize: 288
             ,maxSize: 800
-            ,autoScroll: true
+            ,autoScroll: false
             ,unstyled: true
             ,collapseMode: 'mini'
             ,useSplitTips: true
@@ -105,12 +105,19 @@ MODx.Layout = function(config){
         },{
             region: 'center'
             ,applyTo: 'modx-content'
+            ,padding: '0 1px 0 0'
+            ,bodyStyle: 'background-color:transparent;'
             ,id: 'modx-content'
             ,border: false
             ,autoScroll: true
-            ,padding: '0 1px 0 0'
+        }/*,{
+            region: 'south' // ya, you're going south alright 
+            ,applyTo: 'modx-footer'
+            ,border: false
+            ,id: 'modx-footer'
+            ,html: '<p><b>' + MODx.config.site_name + '</b> ' + _('powered_by') + ' <a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Link" onclick="window.open(this.href); return false;" title="Visit the MODX website">MODX®</a></p>'
             ,bodyStyle: 'background-color:transparent;'
-        }]
+        }*/]
     });
     MODx.Layout.superclass.constructor.call(this,config);
     this.config = config;
@@ -154,6 +161,7 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
             key: Ext.EventObject.U
             ,ctrl: true
             ,shift: true
+            ,alt: false
             ,fn: MODx.clearCache
             ,scope: this
             ,stopEvent: true
@@ -208,23 +216,23 @@ MODx.LayoutMgr = function() {
     var _activeMenu = 'menu0';
     return {
         loadPage: function(action, parameters) {
-            var url = '';
             // Handles url, passed as first argument
-            if (isNaN(action)) {
-                url = action;
-            } else {
-                var parts = [];
-                if (action) {
-                    parts.push('a=' + action);
+            var parts = [];
+            if (action) {
+                if (action.substr(0,1) == '?' || (action.substr(0, "index.php?".length) == 'index.php?')) {
+                    parts.push(action);
+                } else {
+                    parts.push('?a=' + action);
                 }
-                if (parameters) {
-                    parts.push(parameters);
-                }
-                url = '?' + parts.join('&');
             }
+            if (parameters) {
+                parts.push(parameters);
+            }
+            var url = parts.join('&');
             if (MODx.fireEvent('beforeLoadPage', url)) {
                 location.href = url;
             }
+            return false;
         }
         ,changeMenu: function(a,sm) {
             if (sm === _activeMenu) return false;

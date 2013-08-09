@@ -13,7 +13,9 @@ MODx.tree.Element = function(config) {
         ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,title: ''
-        ,url: MODx.config.connectors_url+'element/index.php'
+        ,url: MODx.config.connector_url
+        ,action: 'element/getnodes'
+        ,sortAction: 'element/sort'
         ,useDefaultToolbar: true
         ,baseParams: {
             currentElement: MODx.request.id || 0
@@ -122,15 +124,15 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-		
+        
     ,removeCategory: function(itm,e) {
         var id = this.cm.activeNode.attributes.data.id;
         MODx.msg.confirm({
             title: _('warning')
             ,text: _('category_confirm_delete')
-            ,url: MODx.config.connectors_url+'element/category.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'element/category/remove'
                 ,id: id
             }
             ,listeners: {
@@ -140,7 +142,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	    
+        
     ,duplicateElement: function(itm,e,id,type) {
         var r = {
             id: id
@@ -157,7 +159,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-	
+    
     ,removeElement: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
@@ -167,17 +169,17 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 type: oar[0]
                 ,name: this.cm.activeNode.attributes.name
             })
-            ,url: MODx.config.connectors_url+'element/'+oar[0]+'.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'element/'+oar[0]+'/remove'
                 ,id: oar[2]
             }
             ,listeners: {
                 'success': {fn:function() {
                     this.cm.activeNode.remove();
                     /* if editing the element being removed */
-                    if (MODx.request.a == MODx.action['element/'+oar[0]+'/update'] && MODx.request.id == oar[2]) {
-                        MODx.loadPage(MODx.action['welcome']);
+                    if (MODx.request.a == 'element/'+oar[0]+'/update' && MODx.request.id == oar[2]) {
+                        MODx.loadPage('welcome');
                     }
                 },scope:this}
             }
@@ -188,9 +190,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'activate'
+                action: 'element/plugin/activate'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -205,9 +207,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'deactivate'
+                action: 'element/plugin/deactivate'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -236,9 +238,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     
     ,quickUpdate: function(itm,e,type) {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/'+type+'.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'get'
+                action: 'element/'+type+'/get'
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -259,7 +261,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         });
     }
-	
+    
     ,_createElement: function(itm,e,t) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
@@ -283,7 +285,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
         }
     }
-		
+        
     ,_handleDrop: function(e) {
         var target = e.target;
         if (e.point == 'above' || e.point == 'below') {return false;}
@@ -318,7 +320,6 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
      * @param {Ext.EventObject} e The event object run.
      */
     ,_showContextMenu: function(n,e) {
-        n.select();
         this.cm.activeNode = n;
         this.cm.removeAll();
         if (n.attributes.menu && n.attributes.menu.items) {
@@ -390,7 +391,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 ,type: a.type
                 ,pk: a.pk
                 ,handler: function(itm,e) {
-                    MODx.loadPage(MODx.action['element/'+itm.type+'/update'],
+                    MODx.loadPage('element/'+itm.type+'/update',
                         'id='+itm.pk);
                 }
             });
@@ -561,8 +562,8 @@ MODx.window.DuplicateElement = function(config) {
     }
     Ext.applyIf(config,{
         title: _('element_duplicate')
-        ,url: MODx.config.connectors_url+'element/'+config.record.type+'.php'
-        ,action: 'duplicate'
+        ,url: MODx.config.connector_url
+        ,action: 'element/'+config.record.type+'/duplicate'
         ,fields: flds
         ,labelWidth: 150
     });
@@ -588,8 +589,8 @@ MODx.window.RenameCategory = function(config) {
         title: _('category_rename')
         ,height: 150
         ,width: 350
-        ,url: MODx.config.connectors_url+'element/category.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/category/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

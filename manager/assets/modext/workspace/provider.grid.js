@@ -11,7 +11,10 @@ MODx.grid.Provider = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('providers')
-        ,url: MODx.config.connectors_url+'workspace/providers.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'workspace/providers/getlist'
+        }
         ,fields: ['id','name','description','service_url','username','api_key','menu']
         ,paging: true
         ,autosave: true
@@ -55,8 +58,8 @@ MODx.window.CreateProvider = function(config) {
         title: _('provider_add')
         ,id: 'modx-window-provider-create'
         ,width: 400
-        ,url: MODx.config.connectors_url+'workspace/providers.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/providers/create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
@@ -112,8 +115,8 @@ MODx.window.UpdateProvider = function(config) {
         title: _('provider_update')
         ,id: 'modx-window-provider-update'
         ,width: 400
-        ,url: MODx.config.connectors_url+'workspace/providers.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/providers/update'
         ,fields: [{
             name: 'id'
             ,xtype: 'hidden'
