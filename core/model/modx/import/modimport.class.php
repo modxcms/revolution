@@ -109,7 +109,7 @@ class modImport {
      * @return string The content-type of the file
      */
     public function getFileContentType($extension) {
-        $extEscaped = preg_replace('/([%_])/', '/$1', $extension);
+        $extEscaped = preg_replace('/([%_\[])/', '/$1', $extension);
         $extQuoted = $this->modx->quote("%{$extEscaped}%");
         if (!$contentType= $this->modx->getObject('modContentType', "file_extensions LIKE {$extQuoted} ESCAPE '/'")) {
             $this->log("Could not find content type for extension '$extension'; using <tt>text/plain</tt>.");
