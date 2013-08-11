@@ -410,8 +410,8 @@ abstract class xPDOQuery extends xPDOCriteria {
         return $this;
     }
 
-    public function having($conditions) {
-        $this->query['having'][] = $this->parseConditions((array) $conditions);
+    public function having($conditions, $conjunction= xPDOQuery::SQL_AND) {
+        $this->query['having'][] = $this->parseConditions((array) $conditions, $conjunction);
         return $this;
     }
 
