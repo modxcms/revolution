@@ -135,7 +135,10 @@ class modManagerRequest extends modRequest {
      */
     public function loadErrorHandler($class = 'modError') {
         parent :: loadErrorHandler($class);
-        $this->registerLogging($_POST);
+        $data = array_merge($_POST, array(
+            'register_class' => 'registry.modFileRegister'
+        ));
+        $this->registerLogging($data);
     }
 
     /**
