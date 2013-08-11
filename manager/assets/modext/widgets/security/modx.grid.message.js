@@ -49,14 +49,19 @@ Ext.reg('modx-panel-messages',MODx.panel.Messages);
  */
 MODx.grid.Message = function(config) {
     config = config || {};
-    
+
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<span style="float: right;">'
-            ,'<i>'+_('sent_by')+': {sender_name} <br />'+_('sent_on')+': {date_sent}</i><br /><br />'
+            ,'<i>'+_('sent_by')+': {sender_name:this.htmlEncode} <br />'+_('sent_on')+': {date_sent}</i><br /><br />'
             ,'</span>'
-            ,'<h3>{subject}</h3>'
-            ,'<p>{message}</p>'
+            ,'<h3>{subject:this.htmlEncode}</h3>'
+            ,'<p>{message:this.htmlEncode}</p>'
+            , {
+                htmlEncode: function(value){
+                    return Ext.util.Format.htmlEncode(value);
+                }
+            }
         )
     });
     this.exp.on('expand',this.read,this);
@@ -78,10 +83,12 @@ MODx.grid.Message = function(config) {
             header: _('sender')
             ,dataIndex: 'sender_name'
             ,width: 120
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('subject')
             ,dataIndex: 'subject'
             ,width: 200
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('date_sent')
             ,dataIndex: 'date_sent'
