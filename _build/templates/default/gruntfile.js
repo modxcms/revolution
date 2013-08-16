@@ -120,7 +120,7 @@ module.exports = function(grunt) {
   //grunt.renameTask( 'bower', 'bowerInstall' );
   //grunt.loadNpmTasks( 'grunt-bower' );
   //grunt.loadNpmTasks( 'grunt-rename' );
-  grunt.loadNpmTasks( 'grunt-contrib-sass' );
+  grunt.loadNpmTasks( 'grunt-sass' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
   //grunt.loadNpmTasks( 'grunt-contrib-concat' );
   //grunt.loadNpmTasks( 'grunt-contrib-uglify' );
