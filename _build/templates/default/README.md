@@ -6,7 +6,7 @@ In terminal, cd to _build/templates/default. Then run:
 
 	npm install -g grunt-cli
 	
-Cool, you just installed grunt. Now install any necessary grunt packages by running this command:
+Cool, you just [installed grunt](http://gruntjs.com/getting-started#installing-the-cli). Now [install any necessary grunt packages](http://gruntjs.com/getting-started#installing-grunt-and-gruntplugins) by running this command:
 
 	npm install
 	
