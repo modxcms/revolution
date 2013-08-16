@@ -12,6 +12,12 @@ config.core.php
 *-min.css
 *-min.js
 
+#ignore bourbon Sass library and grunt files
+_build/templates/default/sass/bourbon
+.sass-cache/
+node_modules/
+
+
 # ignore concatenated js
 modext.js
 
