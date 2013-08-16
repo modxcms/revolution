@@ -1,5 +1,5 @@
 ## Contributing to MODX Using Grunt
-MODX Revolution 2.3 introduces CSS preprocessing to the process of contributing to the Manager CSS. 
+MODX Revolution 2.3 introduces CSS preprocessing to the Manager CSS. 
 
 ### Install Grunt
 In terminal, cd to _build/templates/default. Then run:
