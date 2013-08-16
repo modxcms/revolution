@@ -10,6 +10,22 @@ Cool, you just [installed grunt](http://gruntjs.com/getting-started#installing-t
 
 	npm install
 	
+### Installing Bourbon
+Bourbon is a Sass Mixin Framework you will need to compile the Sass.
+
+cd to the sass directory
+	
+	cd _build/templates/default/sass
+	
+Install [bourbon](https://github.com/thoughtbot/bourbon#non-rails-projects)
+
+	gem install bourbon
+	bourbon install
+	
+You now have a sass/bourbon directory that mixins can be imported from using
+
+	@import 'bourbon/bourbon';
+	
 ### Using the different Grunt Tasks
 To compile the Sass and then watch for changes run:
 
@@ -24,4 +40,3 @@ To just compile the Sass run:
 To prepare the project for distribution and ensure minification is used run:
 
 	grunt prod
-
