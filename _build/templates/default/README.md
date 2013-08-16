@@ -1,6 +1,8 @@
 ## Contributing to MODX Using Grunt
 MODX Revolution 2.3 introduces CSS preprocessing to the Manager CSS. 
 
+_Note: If you haven't already you'll first need to [setup node.js and npm](http://shapeshed.com/setting-up-nodejs-and-npm-on-mac-osx/)._
+
 ### Install Grunt
 In terminal, cd to _build/templates/default. Then run:
 
