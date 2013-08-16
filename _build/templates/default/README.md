@@ -15,9 +15,9 @@ To compile the Sass and then watch for changes run:
 
 	grunt
 	
-You can now make changes to index.scss and login.scss and see them automatically compiled CSS.
+You can now make changes to index.scss and login.scss and see them automatically compile CSS.
 	
-To compile the Sass run:
+To just compile the Sass run:
 
 	grunt build
 	
