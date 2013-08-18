@@ -103,14 +103,16 @@ class modSystemLogGetListProcessor extends modProcessor {
     public function prepareLog(modManagerLog $log) {
         $logArray = $log->toArray();
         if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
+            $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
             /** @var xPDOObject $obj */
             $obj = $this->modx->getObject($logArray['classKey'],$logArray['item']);
             if ($obj) {
                 $nameField = $this->getNameField($logArray['classKey']);
-                $pk = $obj->get('id');
-                $logArray['name'] = $obj->get($nameField).(!empty($pk) ? ' ('.$pk.')' : '');
-            } else {
-                $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
+                $k = $obj->getField($nameField, true);
+                if (!empty($k)) {
+                    $pk = $obj->get('id');
+                    $logArray['name'] = $obj->get($nameField).(!empty($pk) ? ' ('.$pk.')' : '');
+                }
             }
         } else {
             $logArray['name'] = $log->get('item');
