@@ -306,6 +306,50 @@ $children[5]->fromArray(array (
   'action' => 'reports',
 ), '', true, true);
 
+/* site schedule */
+$children[0]= $xpdo->newObject('modMenu');
+$children[0]->fromArray(array (
+  'menuindex' => 0,
+  'text' => 'site_schedule',
+  'description' => 'site_schedule_desc',
+  'parent' => 'reports',
+  'permissions' => 'view_document',
+  'action' => 'resource/site_schedule',
+), '', true, true);
+
+/* manager actions */ 
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array (
+  'menuindex' => 1,
+  'text' => 'view_logging',
+  'description' => 'view_logging_desc',
+  'parent' => 'reports',
+  'permissions' => 'logs',
+  'action' => 'system/logs',
+), '', true, true);
+
+/* error log */
+$children[2]= $xpdo->newObject('modMenu');
+$children[2]->fromArray(array (
+  'menuindex' => 2,
+  'text' => 'eventlog_viewer',
+  'description' => 'eventlog_viewer_desc',
+  'parent' => 'reports',
+  'permissions' => 'view_eventlog',
+  'action' => 'system/event',
+), '', true, true);
+        
+/* system info */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
+  'menuindex' => 3,
+  'text' => 'view_sysinfo',
+  'description' => 'view_sysinfo_desc',
+  'parent' => 'reports',
+  'permissions' => 'view_sysinfo',
+  'action' => 'system/info',
+), '', true, true);
+
 
 $menus[3]->addMany($children,'Children');
 unset($children);
@@ -323,52 +367,9 @@ $menus[4]->fromArray(array(
 ), '', true, true);
 $children = array();
 
-/* site schedule 
-$children[0]= $xpdo->newObject('modMenu');
-$children[0]->fromArray(array (
-  'menuindex' => 0,
-  'text' => 'site_schedule',
-  'description' => 'site_schedule_desc',
-  'parent' => '',
-  'permissions' => 'view_document',
-  'action' => 'resource/site_schedule',
-), '', true, true);
-
-/* manager actions 
-$children[1]= $xpdo->newObject('modMenu');
-$children[1]->fromArray(array (
-  'menuindex' => 1,
-  'text' => 'view_logging',
-  'description' => 'view_logging_desc',
-  'parent' => '',
-  'permissions' => 'logs',
-  'action' => 'system/logs',
-), '', true, true);
-
-/* error log 
-$children[2]= $xpdo->newObject('modMenu');
-$children[2]->fromArray(array (
-  'menuindex' => 2,
-  'text' => 'eventlog_viewer',
-  'description' => 'eventlog_viewer_desc',
-  'parent' => '',
-  'permissions' => 'view_eventlog',
-  'action' => 'system/event',
-), '', true, true);
-        
-/* system info 
-$children[3]= $xpdo->newObject('modMenu');
-$children[3]->fromArray(array (
-  'menuindex' => 3,
-  'text' => 'view_sysinfo',
-  'description' => 'view_sysinfo_desc',
-  'parent' => 'reports',
-  'permissions' => 'view_sysinfo',
-  'action' => 'system/info',
-), '', true, true);
-
 $menus[4]->addMany($children,'Children');
 unset($children);
+
 */
 
 /* ***************** USER MENU ***************** */
