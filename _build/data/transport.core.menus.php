@@ -171,7 +171,7 @@ unset($children);
 $menus[2]= $xpdo->newObject('modMenu');
 $menus[2]->fromArray(array (
   'menuindex' => 2,
-  'text' => 'apps',
+  'text' => 'components',
   'description' => '',
   'parent' => 'modx-topnav',
   'permissions' => 'components',
@@ -184,7 +184,7 @@ $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'installer',
   'description' => 'installer_desc',
-  'parent' => 'apps',
+  'parent' => 'components',
   'permissions' => 'packages',
   'action' => 'workspaces',
 ), '', true, true);
