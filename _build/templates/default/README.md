@@ -51,7 +51,7 @@ Each anchor tag should have the i tags displayed below and contain a title.
       </div>
 ```
 
-## Invoking the Plugin
+## Using the Plugin
 Call the bonsai jQuery plugin like so on the element(s) of your choice:
 
 ```js
