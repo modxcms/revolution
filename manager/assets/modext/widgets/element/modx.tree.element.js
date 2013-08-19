@@ -510,6 +510,13 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                     this.quickCreate(itm,e,itm.type);
                 }
             });
+            m.push({
+                text: _('ext_refresh')
+                ,type: a.type
+                ,handler: function(itm,e) {
+                    this.refreshActiveNode();
+                }
+            })
         }
 
         if (ui.hasClass('pnewcat')) {
