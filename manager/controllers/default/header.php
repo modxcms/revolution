@@ -66,7 +66,7 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
             foreach ($exploded as $permission) $permissions[trim($permission)]= true;
             if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
         }
-        $smTpl = '<li>'."\n";
+        $smTpl = '<li id="'.$menu['text'].'">'."\n";
 
         if ($menu['namespace'] != 'core') {
             $menu['action'] .= '&namespace='.$menu['namespace'];
@@ -77,7 +77,7 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
         if (!empty($menu['handler'])) {
             $smTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
         } else {
-            $url = '?a='.$menu['action'].$menu['params'];
+            $url = ($menu['action'] ? '?a='.$menu['action'].$menu['params'] : '#');
             $smTpl .= '<a href="'.$url.'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
         }
 
