@@ -11,40 +11,22 @@ module.exports = function(grunt) {
 		}
 	},*/
 	dirs: { /* just defining some properties */
-		dest: 'lib',
-		scss: 'sass/'//,
+		lib: './lib',
+		scss: './sass/'//,
 		//js: 'js/'
 	},
-	/*bower: { /* package management 
-		dev: {
-			dest: 'lib/', 
+	bower: {
+		install: {
 			options: {
-				stripJSAffix: false
+				targetDir: './lib'
 			}
 		}
 	},
-	bowerInstall: {
-		install: {
-			options: {
-				verbose: true,
-				layout: 'byType',
-				cleanTargetDir: true,
-				'targetDir':'sources/'
-			}
-		}
-	},*/
-	/*rename: { /* move files 
-		jquery: {
-			src: '_build/lib/jquery.js',
-			dest: 'assets/js/lib/jquery.js'
-		},
-		modernizr: {
-			src: '_build/lib/modernizr.js',
-			dest: 'assets/js/lib/modernizr.dev.js'
-		},
-		requirejs: {
-			src: '_build/lib/requirejs.js',
-			dest: 'assets/js/lib/requirejs.js'
+	rename: { /* move files */
+		bourbon: {
+			src: './lib/bourbon/',
+			dest: './sass/',
+			force:true
 		}
 	},
 	/*concat: { /* concatenate javascript 
@@ -97,7 +79,7 @@ module.exports = function(grunt) {
 			livereload: true
 		},
 		scss: {
-			files: 'sass/*',
+			files: './sass/*',
 			tasks: ['sass:dev']
 		},
 		/*script: {
@@ -109,27 +91,25 @@ module.exports = function(grunt) {
 			tasks: [ 'uglify' ]
 		}*/
 	},
-	/*clean: {  take out the trash 
-		buildLib: {
-			dirs:['_build/lib']
-		}
-	}*/
+	clean: { /* take out the trash */
+		prebuild: ['./sass/bourbon']
+	},
   });
 
   grunt.loadNpmTasks( 'grunt-bower-task' );
   //grunt.renameTask( 'bower', 'bowerInstall' );
   //grunt.loadNpmTasks( 'grunt-bower' );
-  //grunt.loadNpmTasks( 'grunt-rename' );
+  grunt.loadNpmTasks( 'grunt-rename' );
   grunt.loadNpmTasks( 'grunt-sass' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
   //grunt.loadNpmTasks( 'grunt-contrib-concat' );
   //grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-  //grunt.loadNpmTasks('grunt-cleanx');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   //grunt.loadNpmTasks( 'grunt-notify' );
 
   // Tasks
 
   grunt.registerTask('default', ['sass:dev','watch']);
-  grunt.registerTask('build', ['sass:dev']);
+  grunt.registerTask('build', ['clean:prebuild','bower','rename','sass']);
   grunt.registerTask('prod',['sass:dist']);
 };
