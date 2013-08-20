@@ -196,6 +196,7 @@ if (!$setting) {
     $c->sortby('name','ASC');
     $policies = $modx->getCollection('modAccessPolicy',$c);
 
+    /** @var modAccessPolicy $policy */
     foreach ($policies as $policy) {
         /* standard policies */
         if (in_array($policy->get('name'),$standards)) {
@@ -251,9 +252,11 @@ if (!$setting) {
         } else {
             $modx->log(xPDO::LOG_LEVEL_DEBUG,'Found non-standard policy: '.$policy->get('name'));
             /* non-standard policies */
-            $policyTpl = $modx->getObject('modAccessPolicyTemplate',array(
-                'name' => $policy->get('name'),
-            ));
+            if (!$policyTpl = $policy->getOne('Template')) {
+                $policyTpl = $modx->getObject('modAccessPolicyTemplate',array(
+                    'name' => $policy->get('name'),
+                ));
+            }
             if (!$policyTpl) {
                 /* array_diff data with standard admin policy */
                 $data = $policy->get('data');
