@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Prevent session write errors from phpthumb cache
 - [#9964] Fix Import HTML to use context of parent
 - [#9916] Add TABLE to TRUNCATE command in flushSessions (SQLSRV)
 - [#9527] Fix password reset by user email

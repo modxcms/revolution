@@ -186,6 +186,7 @@ class modPhpThumb extends phpThumb {
             } else {
                 @readfile($this->cache_filename);
             }
+            session_write_close();
             exit;
 
         }
