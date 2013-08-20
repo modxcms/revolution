@@ -11,7 +11,7 @@ $_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Access Control Lists';
 $_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Policies';
-$_lang['admin'] = 'Admin';
+$_lang['admin'] = '<i class="icon-gear icon-large"></i>';
 $_lang['api_docs'] = 'API Documentation';
 $_lang['api_docs_desc'] = 'Complete API documentation for MODX Revolution.';
 $_lang['bespoke_manager'] = 'Manager Customization';
