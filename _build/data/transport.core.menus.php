@@ -54,43 +54,6 @@ $children[0]->fromArray(array (
   'action' => 'resource/create',
 ), '', true, true);
 
-    /* new static resource
-    $children[1]= $xpdo->newObject('modMenu');
-    $children[1]->fromArray(array (
-      'menuindex' => 10,
-      'text' => 'new_static_resource',
-      'description' => 'new_static_resource_desc',
-      'parent' => 'site',
-      'permissions' => 'new_static_resource',
-      'action' => 'resource/create',
-      'params' => '&class_key=modStaticResource',
-    ), '', true, true);
-
-    /* new weblink resource
-    $children[2]= $xpdo->newObject('modMenu');
-    $children[2]->fromArray(array (
-      'menuindex' => 11,
-      'text' => 'new_weblink',
-      'description' => 'new_weblink_desc',
-      'parent' => 'site',
-      'permissions' => 'new_weblink',
-      'action' => 'resource/create',
-      'params' => '&class_key=modWebLink',
-    ), '', true, true);
-
-    /* new symlink resource
-    $children[3]= $xpdo->newObject('modMenu');
-    $children[3]->fromArray(array (
-      'menuindex' => 12,
-      'text' => 'new_symlink',
-      'description' => 'new_symlink_desc',
-      'parent' => 'site',
-      'permissions' => 'new_symlink',
-      'action' => 'resource/create',
-      'params' => '&class_key=modSymLink',
-    ), '', true, true);
-*/
-
 /* Preview */
 $children[4]= $xpdo->newObject('modMenu');
 $children[4]->fromArray(array (
