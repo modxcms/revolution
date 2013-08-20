@@ -24,11 +24,17 @@ $class= 'modStaticResource';
 if (isset ($scriptProperties['import_resource_class'])) {
     $class= $modx->loadClass($scriptProperties['import_resource_class']);
 }
+// is import_context being used anywhere? It isn't in the manager form...
 if (isset ($scriptProperties['import_context'])) {
     $context= $scriptProperties['import_context'];
 }
 if (isset ($scriptProperties['import_parent'])) {
     $parent= intval($scriptProperties['import_parent']);
+}
+if ($parentRes = $modx->getObject('modResource', $parent)) {
+    if ($context_key = $parentRes->get('context_key')) {
+        $context= $context_key;
+    }
 }
 $filepath= $modx->getOption('core_path') . 'import/';
 $basefilepath= $filepath;
