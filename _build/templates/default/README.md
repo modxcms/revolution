@@ -50,7 +50,7 @@ Then, to compile the Sass and watch files for changes type the following:
 ```bash
 grunt
 ```
-_Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated._
+_Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated.<br>Install the [LiveReload browser](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-) extension to inject CSS changes without a page refresh._
 
 Fetch dependencies (such as bourbon), move items into place and compile by running:
 
