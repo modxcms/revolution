@@ -55,7 +55,7 @@ Ext.extend(MODx,Ext.Component,{
             ,ready: true
         });
     }
-	
+
     ,add: function(cmp) {
         var ctr = Ext.getCmp('modx-content');
         if (ctr) {
@@ -154,7 +154,14 @@ Ext.extend(MODx,Ext.Component,{
 
         MODx.Ajax.request({
             url: MODx.config.connector_url
-            ,params: { action: 'system/clearcache',register: 'mgr' ,topic: topic }
+            ,params: {
+                action: 'system/clearcache'
+                ,register: 'mgr'
+                ,topic: topic
+                ,media_sources: true
+                ,menu: true
+                ,action_map: true
+            }
             ,listeners: {
                 'success':{fn:function() {
                     this.console.fireEvent('complete');

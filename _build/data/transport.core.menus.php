@@ -9,13 +9,34 @@
  */
 $menus = array();
 
-/* ***************** CONTENT MENU ***************** */
 $menus[0]= $xpdo->newObject('modMenu');
 $menus[0]->fromArray(array (
+    'menuindex' => 0,
+    'text' => 'topnav',
+    'description' => 'topnav_desc',
+    'parent' => '',
+    'permissions' => '',
+    'action' => '',
+), '', true, true);
+
+$menus[1]= $xpdo->newObject('modMenu');
+$menus[1]->fromArray(array (
+    'menuindex' => 0,
+    'text' => 'usernav',
+    'description' => 'usernav_desc',
+    'parent' => '',
+    'permissions' => '',
+    'action' => '',
+), '', true, true);
+
+
+/* ***************** CONTENT MENU ***************** */
+$topNavMenus[0]= $xpdo->newObject('modMenu');
+$topNavMenus[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'site',
   'description' => '',
-  'parent' => 'modx-topnav',
+  'parent' => 'topnav',
   'permissions' => 'menu_site',
   'action' => '',
 ), '', true, true);
@@ -126,17 +147,17 @@ $children[8]->fromArray(array (
   'action' => 'system/contenttype',
 ), '', true, true);
 
-$menus[0]->addMany($children,'Children');
+$topNavMenus[0]->addMany($children,'Children');
 unset($children);
 
 
 /* ***************** MEDIA MENU ***************** */
-$menus[1]= $xpdo->newObject('modMenu');
-$menus[1]->fromArray(array (
+$topNavMenus[1]= $xpdo->newObject('modMenu');
+$topNavMenus[1]->fromArray(array (
   'menuindex' => 1,
   'text' => 'media',
   'description' => 'media_desc',
-  'parent' => 'modx-topnav',
+  'parent' => 'topnav',
   'permissions' => 'file_manager',
   'action' => '',
 ), '', true, true);
@@ -163,17 +184,17 @@ $children[1]->fromArray(array(
   'action'      => 'source',
 ), '', true, true);
 
-$menus[1]->addMany($children,'Children');
+$topNavMenus[1]->addMany($children,'Children');
 unset($children);
 
 
 /* ***************** APPS MENU ***************** */
-$menus[2]= $xpdo->newObject('modMenu');
-$menus[2]->fromArray(array (
+$topNavMenus[2]= $xpdo->newObject('modMenu');
+$topNavMenus[2]->fromArray(array (
   'menuindex' => 2,
   'text' => 'components',
   'description' => '',
-  'parent' => 'modx-topnav',
+  'parent' => 'topnav',
   'permissions' => 'components',
   'action' => '',
 ), '', true, true);
@@ -189,17 +210,17 @@ $children[0]->fromArray(array (
   'action' => 'workspaces',
 ), '', true, true);
 
-$menus[2]->addMany($children,'Children');
+$topNavMenus[2]->addMany($children,'Children');
 unset($children);
 
 
 /* ***************** ADMIN MENU ***************** */
-$menus[3]= $xpdo->newObject('modMenu');
-$menus[3]->fromArray(array (
+$topNavMenus[3]= $xpdo->newObject('modMenu');
+$topNavMenus[3]->fromArray(array (
   'menuindex' => 3,
   'text' => 'manage',
   'description' => '',
-  'parent' => 'modx-topnav',
+  'parent' => 'topnav',
   'permissions' => 'menu_tools',
   'action' => '',
 ), '', true, true);
@@ -353,17 +374,17 @@ $childrenOfReports[3]->fromArray(array (
 $children[5]->addMany($childrenOfReports, 'Children');
 
 
-$menus[3]->addMany($children,'Children');
+$topNavMenus[3]->addMany($children,'Children');
 unset($children, $childrenOfReports);
 
 
 /* ***************** USER MENU ***************** */
-$menus[5]= $xpdo->newObject('modMenu');
-$menus[5]->fromArray(array(
+$userNavMenus[0]= $xpdo->newObject('modMenu');
+$userNavMenus[0]->fromArray(array(
   'menuindex' => 5,
   'text' => 'user',
   'description' => '',
-  'parent' => 'modx-user-menu',
+  'parent' => 'usernav',
   'permissions' => 'menu_reports',
   'action' => '',
 ), '', true, true);
@@ -402,16 +423,16 @@ $children[2]->fromArray(array (
   'action' => 'system/event',
 ), '', true, true);
 
-$menus[5]->addMany($children,'Children');
+$userNavMenus[0]->addMany($children,'Children');
 unset($children);
 
 /* ***************** ADMIN/SETTINGS MENU ***************** */
-$menus[6]= $xpdo->newObject('modMenu');
-$menus[6]->fromArray(array(
+$userNavMenus[1]= $xpdo->newObject('modMenu');
+$userNavMenus[1]->fromArray(array(
   'menuindex' => 6,
   'text' => 'admin',
   'description' => '',
-  'parent' => 'modx-user-menu',
+  'parent' => 'usernav',
   'permissions' => '',
   'action' => '',
 ), '', true, true);
@@ -516,19 +537,25 @@ $children[8]->fromArray(array (
   'action' => 'workspaces/namespace',
 ), '', true, true);
 
-$menus[6]->addMany($children,'Children');
+$userNavMenus[1]->addMany($children,'Children');
 unset($children);
 
 /* ***************** ADMIN/SETTINGS MENU ***************** */
-$menus[7]= $xpdo->newObject('modMenu');
-$menus[7]->fromArray(array(
+$userNavMenus[2]= $xpdo->newObject('modMenu');
+$userNavMenus[2]->fromArray(array(
   'menuindex' => 7,
   'text' => 'about',
   'description' => '',
-  'parent' => 'modx-user-menu',
+  'parent' => 'usernav',
   'permissions' => '',
   'action' => 'help',
 ), '', true, true);
 $children = array();
+
+/* add topnav and usernav menu children */
+$menus[0]->addMany($topNavMenus, 'Children');
+$menus[1]->addMany($userNavMenus, 'Children');
+
+unset($topNavMenus, $userNavMenus);
 
 return $menus;
