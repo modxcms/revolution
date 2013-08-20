@@ -27,7 +27,11 @@ module.exports = function(grunt) {
 			src: './lib/bourbon/',
 			dest: './sass/',
 			force:true
-		}
+		}/*,
+		raw: {
+			src: '../../../manager/templates/default/css/raw.css',
+			dest: './sass/_raw.scss'
+		}*/
 	},
 	/*concat: { /* concatenate javascript 
 		script: {
@@ -94,6 +98,12 @@ module.exports = function(grunt) {
 	clean: { /* take out the trash */
 		prebuild: ['./sass/bourbon']
 	},
+	growl:{
+		sass : {
+			message : "Sass files created",
+			title : "grunt"
+		}
+	}
   });
 
   grunt.loadNpmTasks( 'grunt-bower-task' );
@@ -105,11 +115,12 @@ module.exports = function(grunt) {
   //grunt.loadNpmTasks( 'grunt-contrib-concat' );
   //grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-growl');
   //grunt.loadNpmTasks( 'grunt-notify' );
 
   // Tasks
 
   grunt.registerTask('default', ['sass:dev','watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','rename','sass']);
+  grunt.registerTask('build', ['clean:prebuild','bower','rename','sass','growl:sass']);
   grunt.registerTask('prod',['sass:dist']);
 };
