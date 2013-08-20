@@ -22,16 +22,23 @@ module.exports = function(grunt) {
 			}
 		}
 	},
+	copy: {
+		main: {
+			files: [
+				{expand:true,filter: 'isFile',cwd:'../../../manager/templates/default/css/',src:'raw.css', dest: './sass/'}
+			]
+		}
+	},
 	rename: { /* move files */
 		bourbon: {
 			src: './lib/bourbon/',
 			dest: './sass/',
 			force:true
-		}/*,
+		},
 		raw: {
-			src: '../../../manager/templates/default/css/raw.css',
+			src: './sass/raw.css',
 			dest: './sass/_raw.scss'
-		}*/
+		}
 	},
 	/*concat: { /* concatenate javascript 
 		script: {
@@ -102,6 +109,10 @@ module.exports = function(grunt) {
 		sass : {
 			message : "Sass files created",
 			title : "grunt"
+		},
+		build : {
+			title : "grunt",
+			message : "Build complete"
 		}
 	}
   });
@@ -112,6 +123,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks( 'grunt-rename' );
   grunt.loadNpmTasks( 'grunt-sass' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
+  grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks( 'grunt-contrib-concat' );
   //grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -121,6 +133,6 @@ module.exports = function(grunt) {
   // Tasks
 
   grunt.registerTask('default', ['sass:dev','watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','rename','sass','growl:sass']);
+  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass','growl:sass']);
   grunt.registerTask('prod',['sass:dist']);
 };
