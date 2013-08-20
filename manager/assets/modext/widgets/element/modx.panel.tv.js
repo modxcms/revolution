@@ -9,8 +9,10 @@
 MODx.panel.TV = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'element/tv.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'element/tv/get'
+        }
         ,id: 'modx-panel-tv'
 		,cls: 'container form-with-labels'
         ,class_key: 'modTemplateVar'
@@ -520,10 +522,10 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
 
         try {
             pu.update({
-                url: MODx.config.connectors_url+'element/tv/renders.php'
+                url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'getInputProperties'
+                   'action': 'element/tv/renders/getInputProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'
@@ -589,10 +591,10 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
 
         try {
             pu.update({
-                url: MODx.config.connectors_url+'element/tv/renders.php'
+                url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'getProperties'
+                   'action': 'element/tv/renders/getProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'

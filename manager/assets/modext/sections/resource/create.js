@@ -9,18 +9,17 @@
 MODx.page.CreateResource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
-        ,action: 'create'
+        ,action: 'resource/create'
     	,actions: {
             'new': 'resource/create'
             ,edit: 'resource/update'
             ,cancel: 'welcome'
         }
     	,buttons: this.getButtons(config)
-    	,loadStay: true
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -40,7 +39,8 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'create'
+                process: 'resource/create'
+                ,reload: true
                 ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
@@ -58,12 +58,12 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
             ,id: 'modx-abtn-cancel'
             ,params: { a: 'welcome' }
         });
-        btns.push('-');
+        /*btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });
+        });*/
         return btns;
     }
 });

@@ -17,10 +17,10 @@ MODx.page.ListRoles = function(config) {
             process: 'new', text: _('new'), params: {a:'security/role/create'}
         },'-',{
             process: 'cancel', text: _('cancel'), params: {a:'welcome'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{
             xtype: 'grid-role'
             ,renderTo: 'role_grid'

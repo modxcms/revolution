@@ -81,9 +81,9 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         });
 
         this.fp = this.createForm({
-            url: this.config.url || MODx.config.connectors_url+'resource/index.php'
+            url: this.config.url || MODx.config.connector_url
             ,baseParams: this.config.baseParams || {
-                action: 'duplicate'
+                action: 'resource/duplicate'
                 ,id: this.config.resource
                 ,prefixDuplicate: true
             }
@@ -106,8 +106,8 @@ MODx.window.CreateCategory = function(config) {
         ,id: this.ident
         ,height: 150
         ,width: 350
-        ,url: MODx.config.connectors_url+'element/category.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'element/category/create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'category'
@@ -137,8 +137,8 @@ MODx.window.CreateNamespace = function(config) {
         title: _('namespace_create')
         ,id: this.ident
         ,width: 600
-        ,url: MODx.config.connectors_url+'workspace/namespace.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/namespace/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -197,8 +197,8 @@ MODx.window.QuickCreateChunk = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/chunk.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'element/chunk/create'
         ,fields: [{
             xtype: 'textfield'
             ,name: 'name'
@@ -247,8 +247,8 @@ MODx.window.QuickUpdateChunk = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/chunk.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/chunk/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -323,8 +323,8 @@ MODx.window.QuickCreateTemplate = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/template.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'element/template/create'
         ,fields: [{
             xtype: 'textfield'
             ,name: 'templatename'
@@ -373,8 +373,8 @@ MODx.window.QuickUpdateTemplate = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/template.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/template/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -450,8 +450,8 @@ MODx.window.QuickCreateSnippet = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/snippet.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'element/snippet/create'
         ,fields: [{
             xtype: 'textfield'
             ,name: 'name'
@@ -500,8 +500,8 @@ MODx.window.QuickUpdateSnippet = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/snippet.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/snippet/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -578,8 +578,8 @@ MODx.window.QuickCreatePlugin = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/plugin.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'element/plugin/create'
         ,fields: [{
             xtype: 'textfield'
             ,name: 'name'
@@ -636,8 +636,8 @@ MODx.window.QuickUpdatePlugin = function(config) {
         ,height: 640
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'element/plugin.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/plugin/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -718,8 +718,8 @@ MODx.window.QuickCreateTV = function(config) {
         title: _('quick_create_tv')
         ,id: this.ident
         ,width: 700
-        ,url: MODx.config.connectors_url+'element/tv.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'element/tv/create'
         ,fields: [{
             layout: 'column'
             ,border: false
@@ -813,8 +813,8 @@ MODx.window.QuickUpdateTV = function(config) {
         title: _('quick_update_tv')
         ,id: this.ident
         ,width: 700
-        ,url: MODx.config.connectors_url+'element/tv.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'element/tv/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -935,8 +935,8 @@ MODx.window.DuplicateContext = function(config) {
     Ext.applyIf(config,{
         title: _('context_duplicate')
         ,id: this.ident
-        ,url: MODx.config.connectors_url+'context/index.php'
-        ,action: 'duplicate'
+        ,url: MODx.config.connector_url
+        ,action: 'context/duplicate'
         ,width: 400
         ,fields: [{
             xtype: 'statictextfield'
@@ -980,8 +980,8 @@ MODx.window.Login = function(config) {
     Ext.applyIf(config,{
         title: _('login')
         ,id: this.ident
-        ,url: MODx.config.connectors_url+'security/login.php'
-        ,action: 'login'
+        ,url: MODx.config.connector_url
+        ,action: 'security/login'
         ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'

@@ -540,43 +540,15 @@ $attributes = array (
     'vehicle_class' => 'xPDOFileVehicle',
 );
 $files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/browser',
-    'target' => "return MODX_CONNECTORS_PATH;",
-);
-$files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/context',
-    'target' => "return MODX_CONNECTORS_PATH;",
-);
-$files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/element',
-    'target' => "return MODX_CONNECTORS_PATH;",
-);
-$files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/layout',
-    'target' => "return MODX_CONNECTORS_PATH;",
-);
-$files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/resource',
-    'target' => "return MODX_CONNECTORS_PATH;",
-);
-$files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/security',
-    'target' => "return MODX_CONNECTORS_PATH;",
-);
-$files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/source',
-    'target' => "return MODX_CONNECTORS_PATH;",
-);
-$files[] = array (
     'source' => MODX_BASE_PATH . 'connectors/system',
     'target' => "return MODX_CONNECTORS_PATH;",
 );
 $files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/workspace',
+    'source' => MODX_BASE_PATH . 'connectors/lang.js.php',
     'target' => "return MODX_CONNECTORS_PATH;",
 );
 $files[] = array (
-    'source' => MODX_BASE_PATH . 'connectors/lang.js.php',
+    'source' => MODX_BASE_PATH . 'connectors/modx.config.js.php',
     'target' => "return MODX_CONNECTORS_PATH;",
 );
 foreach ($files as $fileset) {

@@ -17,10 +17,10 @@ MODx.grid.TemplateTV = function(config) {
     Ext.applyIf(config,{
         title: _('template_assignedtv_tab')
         ,id: 'modx-grid-template-tv'
-        ,url: MODx.config.connectors_url+'element/template/tv.php'
+        ,url: MODx.config.connector_url
         ,fields: ['id','name','description','tv_rank','access','category_name','category']
         ,baseParams: {
-            action: 'getList'
+            action: 'element/template/tv/getlist'
             ,template: config.template
         }
         ,saveParams: {

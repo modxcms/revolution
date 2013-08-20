@@ -9,20 +9,24 @@
 MODx.tree.Resource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
+        ,action: 'resource/getNodes'
         ,title: ''
         ,rootVisible: false
         ,expandFirst: true
         ,enableDD: (MODx.config.enable_dragdrop != '0') ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,remoteToolbar: true
+        ,remoteToolbarAction: 'resource/gettoolbar'
+        ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
+
         ,tbarCfg: {
+        //    hidden: true
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
         ,baseParams: {
-            action: 'getNodes'
-            ,sortBy: this.getDefaultSortBy(config)
+            sortBy: this.getDefaultSortBy(config)
             ,currentResource: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
         }
@@ -32,7 +36,7 @@ MODx.tree.Resource = function(config) {
         var el = Ext.get('modx-resource-tree');
         el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
         el.createChild({tag: 'div', id: 'modx-resource-tree_filter'});
-        this.addSearchToolbar();
+        //this.addSearchToolbar();
     },this);
     this.addEvents('loadCreateMenus');
     this.on('afterSort',this._handleAfterDrop,this);
@@ -58,20 +62,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
     }
 
-    ,addSearchToolbar: function() {
-        var t = Ext.get(this.config.id+'-tbar');
-        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true, id: 'modx-resource-searchbar'});
-        var tb = new Ext.Toolbar({
-            applyTo: fbd
-            ,autoHeight: true
-            ,width: '100%'
-        });
-        var tf = new Ext.form.TextField({
-            name: 'search'
-            ,value: ''
-			,ctCls: 'modx-leftbar-second-tb'
-            ,width: Ext.getCmp('modx-resource-tree').getWidth() - 12
-            ,emptyText: _('search_ellipsis')
+    /*,addSearchToolbar: function() {
+        this.searchField = new Ext.form.TextField({
+            emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search,scope:this}
                 ,'render': {fn: function(cmp) {
@@ -86,11 +79,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 },scope:this}
             }
         });
-        tb.add(tf);
-        tb.doLayout();
-        this.searchBar = tb;
+        this.searchBar = new Ext.Toolbar({
+            renderTo: this.tbar
+            ,id: 'modx-resource-searchbar'
+            ,items: [this.searchField]
+        });
         this.on('resize', function(){
-            tf.setWidth(this.getWidth() - 12);
+            this.searchField.setWidth(this.getWidth() - 12);
         }, this);
     }
 
@@ -102,7 +97,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,search: this.config.search
         };
         this.refresh();
-    }
+    }*/
 
     /**
      * Shows the current context menu.
@@ -110,7 +105,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
      * @param {Ext.EventObject} e The event object run.
      */
     ,_showContextMenu: function(n,e) {
-        n.select();
         this.cm.activeNode = n;
         this.cm.removeAll();
         if (n.attributes.menu && n.attributes.menu.items) {
@@ -172,15 +166,16 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
+
     ,removeContext: function(itm,e) {
         var node = this.cm.activeNode;
         var key = node.attributes.pk;
         MODx.msg.confirm({
             title: _('context_remove')
             ,text: _('context_remove_confirm')
-            ,url: MODx.config.connectors_url+'context/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'context/remove'
                 ,key: key
             }
             ,listeners: {
@@ -199,9 +194,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('resource_delete')
             ,text: _('resource_delete_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'delete'
+                action: 'resource/delete'
                 ,id: id
             }
             ,listeners: {
@@ -223,9 +218,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'undelete'
+                action: 'resource/undelete'
                 ,id: id
             }
             ,listeners: {
@@ -249,9 +244,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('resource_publish')
             ,text: _('resource_publish_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'publish'
+                action: 'resource/publish'
                 ,id: id
             }
             ,listeners: {
@@ -270,9 +265,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('resource_unpublish')
             ,text: _('resource_unpublish_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'unpublish'
+                action: 'resource/unpublish'
                 ,id: id
             }
             ,listeners: {
@@ -289,9 +284,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('empty_recycle_bin')
             ,text: _('empty_recycle_bin_confirm')
-            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'emptyRecycleBin'
+                action: 'resource/emptyRecycleBin'
             }
             ,listeners: {
                 'success':{fn:function() {
@@ -357,6 +352,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this._filterVisible = true;
         return true;
     }
+
     ,getDefaultSortBy: function(config) {
         var v = 'menuindex';
         if (!Ext.isEmpty(config) && !Ext.isEmpty(config.sortBy)) {
@@ -388,6 +384,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.filterBar.destroy();
         this._filterVisible = false;
     }
+
     ,_handleAfterDrop: function(o,r) {
         var targetNode = o.event.target;
         if (o.event.point == 'append' && targetNode) {
@@ -481,9 +478,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
     ,quickUpdate: function(itm,e,cls) {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'get'
+                action: 'resource/get'
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -557,9 +554,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     ,overviewResource: function() {this.loadAction('a=resource/data')}
+
     ,quickUpdateResource: function(itm,e) {
         Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
     }
+
     ,editResource: function() {this.loadAction('a=resource/update');}
 
     ,_getModResourceMenu: function(n) {
@@ -654,6 +653,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         );
     }
+
     ,createResource: function(itm,e) {
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
@@ -705,6 +705,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
         return m;
     }
+
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);
 
@@ -720,8 +721,8 @@ MODx.window.QuickCreateResource = function(config) {
         ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'resource/index.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'resource/create'
         ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -786,7 +787,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,editable: false
                             ,anchor: '100%'
                             ,baseParams: {
-                                action: 'getList'
+                                action: 'element/template/getList'
                                 ,combo: '1'
                                 ,limit: 0
                             }
@@ -858,8 +859,8 @@ MODx.window.QuickUpdateResource = function(config) {
         ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
         ,autoHeight: false
         ,layout: 'anchor'
-        ,url: MODx.config.connectors_url+'resource/index.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'resource/update'
         ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -928,7 +929,7 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,editable: false
                             ,anchor: '100%'
                             ,baseParams: {
-                                action: 'getList'
+                                action: 'element/template/getList'
                                 ,combo: '1'
                                 ,limit: 0
                             }
@@ -1185,3 +1186,15 @@ MODx.handleQUCB = function(cb) {
         h.setValue(0);
     }
 }
+
+
+
+Ext.override(Ext.tree.AsyncTreeNode,{
+
+    listeners: {
+        click: {fn: function(){
+            console.log('Clicked me!',arguments);
+            return false;
+        },scope: this}
+    }
+});

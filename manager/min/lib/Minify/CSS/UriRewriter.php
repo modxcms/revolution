@@ -14,6 +14,7 @@ class Minify_CSS_UriRewriter {
     
     /**
      * rewrite() and rewriteRelative() append debugging information here
+     *
      * @var string
      */
     public static $debugText = '';
@@ -40,14 +41,13 @@ class Minify_CSS_UriRewriter {
      * 
      * @return string
      */
-    public static function rewrite($css, $currentDir, $docRoot = null, $symlinks = array(), $virtualDirs = array())
+    public static function rewrite($css, $currentDir, $docRoot = null, $symlinks = array()) 
     {
         self::$_docRoot = self::_realpath(
             $docRoot ? $docRoot : $_SERVER['DOCUMENT_ROOT']
         );
         self::$_currentDir = self::_realpath($currentDir);
         self::$_symlinks = array();
-        self::$_virtualDirs = $virtualDirs;
         
         // normalize symlinks
         foreach ($symlinks as $link => $target) {
@@ -139,7 +139,7 @@ class Minify_CSS_UriRewriter {
      * 
      * @return string
      */
-    public static function rewriteRelative($uri, $realCurrentDir, $realDocRoot, $symlinks = array(), $virtualDirs = array())
+    public static function rewriteRelative($uri, $realCurrentDir, $realDocRoot, $symlinks = array())
     {
         // prepend path with current dir separator (OS-independent)
         $path = strtr($realCurrentDir, '/', DIRECTORY_SEPARATOR)  
@@ -160,18 +160,12 @@ class Minify_CSS_UriRewriter {
             }
         }
         // strip doc root
-        if (strpos($path, $realDocRoot) === 0) {
-            $path = substr($path, strlen($realDocRoot));
-        } elseif (!empty($virtualDirs)) {
-            $path = str_replace(array_values($virtualDirs), array_keys($virtualDirs), $path);
-        }
+        $path = substr($path, strlen($realDocRoot));
         
         self::$debugText .= "docroot stripped   : {$path}\n";
         
         // fix to root-relative URI
-
         $uri = strtr($path, '/\\', '//');
-
         $uri = self::removeDots($uri);
       
         self::$debugText .= "traversals removed : {$uri}\n\n";
@@ -181,7 +175,9 @@ class Minify_CSS_UriRewriter {
 
     /**
      * Remove instances of "./" and "../" where possible from a root-relative URI
+     *
      * @param string $uri
+     *
      * @return string
      */
     public static function removeDots($uri)
@@ -197,6 +193,7 @@ class Minify_CSS_UriRewriter {
     /**
      * Defines which class to call as part of callbacks, change this
      * if you extend Minify_CSS_UriRewriter
+     *
      * @var string
      */
     protected static $className = 'Minify_CSS_UriRewriter';
@@ -219,27 +216,39 @@ class Minify_CSS_UriRewriter {
     }
 
     /**
-     * @var string directory of this stylesheet
+     * Directory of this stylesheet
+     *
+     * @var string
      */
     private static $_currentDir = '';
 
     /**
-     * @var string DOC_ROOT
+     * DOC_ROOT
+     *
+     * @var string
      */
     private static $_docRoot = '';
 
     /**
-     * @var array directory replacements to map symlink targets back to their
+     * directory replacements to map symlink targets back to their
      * source (within the document root) E.g. '/var/www/symlink' => '/var/realpath'
+     *
+     * @var array
      */
     private static $_symlinks = array();
-    private static $_virtualDirs = array();
 
     /**
-     * @var string path to prepend
+     * Path to prepend
+     *
+     * @var string
      */
     private static $_prependPath = null;
 
+    /**
+     * @param string $css
+     *
+     * @return string
+     */
     private static function _trimUrls($css)
     {
         return preg_replace('/
@@ -251,6 +260,11 @@ class Minify_CSS_UriRewriter {
         /x', 'url($1)', $css);
     }
 
+    /**
+     * @param array $m
+     *
+     * @return string
+     */
     private static function _processUriCB($m)
     {
         // $m matched either '/@import\\s+([\'"])(.*?)[\'"]/' or '/url\\(\\s*([^\\)\\s]+)\\s*\\)/'
@@ -275,7 +289,7 @@ class Minify_CSS_UriRewriter {
         ) {
             // URI is file-relative: rewrite depending on options
             if (self::$_prependPath === null) {
-                $uri = self::rewriteRelative($uri, self::$_currentDir, self::$_docRoot, self::$_symlinks, self::$_virtualDirs);
+                $uri = self::rewriteRelative($uri, self::$_currentDir, self::$_docRoot, self::$_symlinks);
             } else {
                 $uri = self::$_prependPath . $uri;
                 if ($uri[0] === '/') {

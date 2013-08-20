@@ -64,3 +64,6 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 /* add index on modContext.name */
 $description = $this->install->lexicon('add_index',array('index' => 'name','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'name'));
+
+/* remove old menus */
+$modx->removeCollection('modMenu', array('text:IN' => array('new_document', 'new_static_resource', 'new_symlink', 'new_weblink')));

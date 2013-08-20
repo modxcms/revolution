@@ -11,7 +11,10 @@ MODx.grid.DatabaseTables = function(config) {
 	Ext.applyIf(config,{
         title: _('database_tables')
         ,id: 'modx-grid-dbtable'
-        ,url: MODx.config.connectors_url+'system/databasetables.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/databasetables/getlist'
+        }
         ,fields: ['Name','Rows','Data_size','Data_free','Effective_size','Index_length','Total_size']
         ,paging: false
         ,columns: [{
@@ -60,7 +63,7 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'truncate'
+                action: 'system/databasetable/truncate'
                 ,t: table
             }
             ,listeners: {
@@ -77,7 +80,7 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'optimize'
+                action: 'system/databasetable/optimize'
                 ,t: table
             }
             ,listeners: {
@@ -90,7 +93,7 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'optimizeDatabase'
+                action: 'system/databasetable/optimizeDatabase'
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}

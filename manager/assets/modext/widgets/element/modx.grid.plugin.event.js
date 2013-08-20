@@ -19,9 +19,9 @@ MODx.grid.PluginEvent = function(config) {
     Ext.applyIf(config,{
         title: _('system_events')
         ,id: 'modx-grid-plugin-event'
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'element/plugin/event/getList'
             ,plugin: config.plugin
             ,limit: 0
         }
@@ -139,8 +139,8 @@ MODx.window.UpdatePluginEvent = function(config) {
     Ext.applyIf(config,{
         title: _('plugin_event_update')
         ,id: 'modx-window-plugin-event-update'
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
-        ,action: 'associate'
+        ,url: MODx.config.connector_url
+        ,action: 'element/plugin/event/associate'
         ,autoHeight: true
         ,width: 600
         ,fields: [{
@@ -165,9 +165,9 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     onShow: function() {
         var evt = this.fp.getForm().findField('name').getValue();
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin/event.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'getAssoc'
+                action: 'element/plugin/event/getAssoc'
                 ,'event': evt
             }
             ,listeners: {
@@ -199,9 +199,9 @@ MODx.grid.PluginEventAssoc = function(config) {
     Ext.applyIf(config,{
         title: _('plugins')
         ,id: this.ident
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getPlugins'
+            action: 'element/plugin/event/getPlugins'
             ,plugin: config.plugin
         }
         ,saveParams: {
@@ -294,8 +294,8 @@ MODx.window.AddPluginToEvent = function(config) {
     Ext.applyIf(config,{
         title: _('plugin_add_to_event')
         ,id: this.ident
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
-        ,action: 'addplugin'
+        ,url: MODx.config.connector_url
+        ,action: 'element/plugin/event/addplugin'
         ,height: 250
         ,width: 600
         ,fields: [{
@@ -339,7 +339,10 @@ Ext.reg('modx-window-plugin-event-add-plugin',MODx.window.AddPluginToEvent);
 MODx.combo.Plugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'element/plugin.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'element/plugin/getlist'
+        }
         ,fields: ['id','name','description']
         ,name: 'plugin'
         ,hiddenName: 'plugin'

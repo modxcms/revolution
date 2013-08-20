@@ -12,11 +12,11 @@ MODx.page.UpdatePlugin = function(config) {
         formpanel: 'modx-panel-plugin'
         ,actions: {
             'new': 'element/plugin/create'
-            ,edit: 'element/plugin/update'
-            ,cancel: 'welcome'
+            ,'edit': 'element/plugin/update'
+            ,'cancel': 'welcome'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'element/plugin/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -29,14 +29,13 @@ MODx.page.UpdatePlugin = function(config) {
             ,handler: this.duplicate
             ,scope: this
         },'-',{
-            process: 'cancel'
+            process: 'welcome'
             ,text: _('cancel')
             ,params: {a:'welcome'}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
-        ,loadStay: true
+        }*/]
         ,components: [{
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'
@@ -60,7 +59,7 @@ Ext.extend(MODx.page.UpdatePlugin,MODx.Component, {
                 success: {
                     fn: function(r) {
                         var response = Ext.decode(r.a.response.responseText);
-                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
                     },scope:this}
                 ,hide:{fn:function() {this.destroy();}}
             }

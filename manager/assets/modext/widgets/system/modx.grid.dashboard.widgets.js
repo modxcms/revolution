@@ -9,7 +9,10 @@ MODx.grid.DashboardWidgets = function(config) {
 
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'system/dashboard/widget.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/dashboard/widget/getlist'
+        }
         ,fields: ['id','name','name_trans','description','description_trans','type','content','namespace','lexicon','size','cls']
         ,paging: true
         ,remoteSort: true
@@ -107,7 +110,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,createDashboard: function() {
-        MODx.loadPage(MODx.action['system/dashboards/widget/create']);
+        MODx.loadPage('system/dashboards/widget/create');
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
@@ -118,7 +121,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             ,text: _('widget_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeMultiple'
+                action: 'system/dashboard/widget/removeMultiple'
                 ,widgets: cs
             }
             ,listeners: {
@@ -137,7 +140,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             ,text: _('widget_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'system/dashboard/widget/remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -147,7 +150,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
 
     ,updateWidget: function() {
-        MODx.loadPage(MODx.action['system/dashboards/widget/update'], 'id='+this.menu.record.id);
+        MODx.loadPage('system/dashboards/widget/update', 'id='+this.menu.record.id);
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
@@ -158,7 +161,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'system/dashboard/widget/getlist'
     	};
         Ext.getCmp('modx-dashboard-widget-search').reset();
     	this.getBottomToolbar().changePage(1);

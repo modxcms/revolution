@@ -16,12 +16,12 @@ MODx.combo.LexiconTopic = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
-        ,url: MODx.config.connectors_url+'workspace/lexicon/topic.php'
+        ,url: MODx.config.connector_url
         ,fields: ['name']
         ,displayField: 'name'
         ,valueField: 'name'
         ,baseParams: {
-            action: 'getList'
+            action: 'workspace/lexicon/topic/getList'
             ,'namespace': 'core'
             ,'language': 'en'
         }

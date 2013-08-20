@@ -221,7 +221,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             return true;
         }
         var p = {
-            action: 'updatefromelement'
+            action: 'element/propertyset/updatefromelement'
             ,id: cb.getValue()
             ,data: d
         };
@@ -239,7 +239,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         } catch (e) { }
         
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/propertyset.php'
+            url: MODx.config.connector_url
             ,params: p
             ,listeners: {
                 'success': {fn:function(r) {
@@ -315,9 +315,9 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         }
         
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/propertyset.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'get'
+                action: 'element/propertyset/get'
                 ,id: ps
                 ,elementId: this.config.elementId
                 ,elementType: this.config.elementType
@@ -432,15 +432,15 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
     ,exportProperties: function (btn,e) {
         var id = Ext.getCmp('modx-combo-property-set').getValue();
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'exportProperties'
+                action: 'element/exportProperties'
                 ,data: this.encode()
                 ,id: id
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                    location.href = MODx.config.connector_url+'?action=element/exportProperties&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });
@@ -1051,9 +1051,9 @@ MODx.combo.PropertySet = function(config) {
     Ext.applyIf(config,{
         name: 'propertyset'
         ,hiddenName: 'propertyset'
-        ,url: MODx.config.connectors_url+'element/propertyset.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'element/propertyset/getList'
         }
         ,displayField: 'name'
         ,valueField: 'id'
@@ -1078,8 +1078,8 @@ MODx.window.AddPropertySet = function(config) {
     Ext.applyIf(config,{
         title: _('propertyset_add')
         ,id: 'modx-window-element-property-set-add'
-        ,url: MODx.config.connectors_url+'element/propertyset.php'
-        ,action: 'associate'
+        ,url: MODx.config.connector_url
+        ,action: 'element/propertyset/associate'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'elementId'
@@ -1151,8 +1151,8 @@ MODx.window.ImportProperties = function(config) {
     Ext.applyIf(config,{
         title: _('properties_import')
         ,id: 'modx-window-properties-import'
-        ,url: MODx.config.connectors_url+'element/index.php'
-        ,action: 'importProperties'
+        ,url: MODx.config.connector_url
+        ,action: 'element/importProperties'
         ,fileUpload: true
         ,saveBtnText: _('import')
         ,fields: [{

@@ -167,3 +167,59 @@ div.autosuggest ul em
 	font-style: normal;
 	color: #6EADE7;
 }
+
+/* May 2013 - 2.3.x setup styles */
+/* The Magnificent Clearfix: Updated to prevent margin-collapsing on child elements. j.mp/bestclearfix */
+/*.clear:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.clear:after { clear: both; }*/
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+/*.clear { zoom: 1; }*/
+
+html, body { 
+  height: 100%;
+}
+html #contentarea div.clear {
+  height: 213px; 
+}
+#contentarea {
+  margin-top: 77px;
+  height: 100%;
+  min-height: 90%;
+  height: auto !important; /* IE6 min-height hack */
+  margin-bottom: -213px;
+}
+#header, #footer {
+  -webkit-filter: grayscale(50%);
+  -moz-filter: grayscale(50%);
+  -ms-filter: grayscale(50%);
+  -o-filter: grayscale(50%);
+  filter: grayscale(50%);
+}
+#content {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.5);
+}
+a {
+  color: #0F7096;
+}
+input:hover, input:focus, a:hover {
+  transition: all 500ms;
+  color: #264F41;
+}
+input:active, input:hover {
+  border: 1px solid #264F41;
+}
+input, button, select {
+  border-radius: 2px;
+}
+.options td[style="background: #fffdbb; padding:0 1em; border:2px solid #CBD499"] {
+  background: #ffffcc !important;
+  border: 1px solid #ccccaa !important;
+  padding-top: 1em !important;
+}
+.options img {
+  position: relative;
+  top: -10px;
+}

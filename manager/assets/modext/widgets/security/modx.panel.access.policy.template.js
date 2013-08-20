@@ -10,9 +10,9 @@ MODx.panel.AccessPolicyTemplate = function(config) {
     config = config || {};
     var r = config.record || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'security/access/policy/template.php'
+        url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'security/access/policy/template/update'
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy-template'
@@ -242,8 +242,8 @@ MODx.window.NewTemplatePermission = function(config) {
         title: _('permission_add_template')
         ,height: 150
         ,width: 475
-        ,url: MODx.config.connectors_url+'security/access/policy/index.php'
-        ,action: 'addProperty'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/policy/addProperty'
         ,saveBtnText: _('add')
         ,fields: [{
             xtype: 'modx-combo-permission'
@@ -309,7 +309,10 @@ MODx.combo.Permission = function(config) {
         ,pageSize: 20
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
-        ,url: MODx.config.connectors_url+'security/access/permission.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/permission/getlist'
+        }
     });
     MODx.combo.Permission.superclass.constructor.call(this,config);
 };

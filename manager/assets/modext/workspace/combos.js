@@ -11,9 +11,9 @@ MODx.combo.Provider = function(config) {
     Ext.applyIf(config,{
         name: 'provider'
         ,hiddenName: 'provider'
-        ,url: MODx.config.connectors_url+'workspace/providers.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'workspace/providers/getList'
             ,combo: true
         }
         ,editable: false
@@ -37,7 +37,10 @@ MODx.combo.Workspace = function(config) {
     Ext.applyIf(config,{
         name: 'workspace'
         ,hiddenName: 'workspace'
-        ,url: MODx.config.connectors_url+'workspace/index.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'workspace/getlist'
+        }
         ,editable: false
         ,pageSize: 20
     });

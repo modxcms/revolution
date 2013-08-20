@@ -28,10 +28,10 @@ MODx.page.UpdateFCSet = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:'security/forms/profile/update', id: config.record.profile}
-        },'-',{
+        }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]
+        }*/]
         ,components: [{
             xtype: 'modx-panel-fc-set'
             ,renderTo: 'modx-panel-fc-set-div'

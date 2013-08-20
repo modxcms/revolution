@@ -8,9 +8,9 @@ MODx.grid.UserGroupSource = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-sources'
-        ,url: MODx.config.connectors_url+'security/access/usergroup/source.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/access/usergroup/source/getList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -57,7 +57,7 @@ MODx.grid.UserGroupSource = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'MediaSource'
             }
             ,listeners: {
@@ -142,8 +142,8 @@ MODx.window.CreateUGSource = function(config) {
     this.ident = config.ident || 'cugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('source_add')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/source.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/source/create'
         ,height: 250
         ,width: 500
         ,fields: [{
@@ -197,7 +197,7 @@ MODx.window.CreateUGSource = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'MediaSource'
             }
             ,anchor: '100%'
@@ -257,8 +257,8 @@ MODx.window.UpdateUGSource = function(config) {
     this.ident = config.ident || 'updugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_source_update')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/source.php'
-        ,action: 'update'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/source/update'
         ,height: 250
         ,width: 500
         ,fields: [{
@@ -315,7 +315,7 @@ MODx.window.UpdateUGSource = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'MediaSource'
             }
             ,anchor: '100%'

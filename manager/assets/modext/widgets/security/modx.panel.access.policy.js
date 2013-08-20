@@ -8,9 +8,9 @@
 MODx.panel.AccessPolicy = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'security/access/policy.php'
+        url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'security/access/policy/update'
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy'
@@ -161,9 +161,9 @@ MODx.grid.PolicyPermissions = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-policy-permissions'
-        ,url: MODx.config.connectors_url+'security/access/policy/index.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getAttributes'
+            action: 'security/access/policy/getAttributes'
         }
         ,cls: 'modx-grid modx-policy-permissions-grid'
         ,fields: ['name','description','description_trans','value','enabled']
@@ -215,7 +215,10 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,allowBlank: false
         ,listWidth: 300
         ,pageSize: 20
-        ,url: MODx.config.connectors_url+'security/access/policy/template.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/policy/template/getlist'
+        }
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
     });

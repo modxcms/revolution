@@ -55,10 +55,10 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	            a: 'context'
 	        }
 	    });
-        b.push('-',{
+        /*b.push('-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        });
+        });*/
 	    return b;
 	}
 });

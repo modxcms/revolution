@@ -40,7 +40,10 @@ define('MINIFY_MIN_DIR', dirname(__FILE__));
 $min_allowDebugFlag = (boolean)$modx->getOption('manager_js_cache_allow_debug_flag',null,true);
 $min_errorLogger = (boolean)$modx->getOption('manager_js_cache_debug',null,true);
 $min_enableBuilder = false;
-$min_cachePath = $modx->cacheManager->getCachePath() . 'mgr/min/';
+$min_cachePath = $modx->cacheManager->getCachePath() . 'mgr/min';
+if (!is_dir($min_cachePath)) {
+    $modx->cacheManager->writeTree($min_cachePath);
+}
 $documentRoot = $modx->getOption('manager_js_document_root', null, '');
 $min_documentRoot = !empty($documentRoot) ? $documentRoot : $_SERVER['DOCUMENT_ROOT'];
 if (!empty($min_documentRoot)) {
