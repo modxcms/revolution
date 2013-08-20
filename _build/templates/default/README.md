@@ -1,44 +1,65 @@
-## Contributing to MODX Using Grunt
-MODX Revolution 2.3 introduces CSS preprocessing to the Manager CSS. 
+Contribution Guides
+--------------------------------------
 
-_Note: If you haven't already you'll first need to [setup node.js and npm](http://shapeshed.com/setting-up-nodejs-and-npm-on-mac-osx/)._
+In the spirit of open source software development, MODX always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly:
 
-### Install Grunt
-In terminal, cd to _build/templates/default. Then run:
+What you need
+--------------------------------------
 
-	npm install -g grunt-cli
-	
-Cool, you just [installed grunt](http://gruntjs.com/getting-started#installing-the-cli). Now [install any necessary grunt packages](http://gruntjs.com/getting-started#installing-grunt-and-gruntplugins) by running this command:
+In order to build MODX front end assets, you need to have Node.js/npm latest and git 1.7 or later.
+(Earlier versions might work OK, but are not tested.)
 
-	npm install
-	
-### Installing Bourbon
-Bourbon is a Sass Mixin Framework you will need to compile the Sass.
+For Windows you have to download and install [git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/download/).
 
-cd to the sass directory
-	
-	cd _build/templates/default/sass
-	
-Install [bourbon](https://github.com/thoughtbot/bourbon#non-rails-projects)
+Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git,
+and `brew install node` to install Node.js.
 
-	gem install bourbon
-	bourbon install
-	
-You now have a sass/bourbon directory that mixins can be imported from using
+Linux/BSD users should use their appropriate package managers to install git and Node.js, or build from source
+if you swing that way. Easy-peasy.
 
-	@import 'bourbon/bourbon';
-	
-### Using the different Grunt Tasks
-To compile the Sass and then watch for changes run:
+How to build
+----------------------------
 
-	grunt
-	
-You can now make changes to index.scss and login.scss and see them automatically compile CSS.
-	
-To just compile the Sass run:
+First, clone a copy of this git repo by running:
 
-	grunt build
-	
-To prepare the project for distribution and ensure minification is used run:
+```bash
+git clone git://github.com/rthrash/revolution.git
+```
 
-	grunt prod
+Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) and [bower](http://bower.io/) packages if you haven't before. These should be done as global installs:
+
+```bash
+npm install -g grunt-cli bower
+```
+
+Make sure you have `grunt` and `bower` installed by testing:
+
+```bash
+grunt -version
+bower -version
+```
+
+Enter the default template directory and install the Node and Bower dependencies, this time *without* specifying a global(-g) install:
+
+```bash
+cd _built/templates/default && npm install
+```
+
+Then, to compile the Sass and watch files for changes type the following:
+
+```bash
+grunt
+```
+_Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated._
+
+Fetch dependencies (such as bourbon), move items into place and compile by running:
+
+```bash
+grunt build
+```
+
+Compile Sass and minify for production by running:
+
+```bash
+grunt prod
+```
