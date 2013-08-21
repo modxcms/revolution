@@ -566,10 +566,10 @@ class modOutputFilter {
                                     $userInfo= $user->get(array ('username', 'password'));
                                     if ($user->getOne('Profile')) {
                                         $userInfo= array_merge($userInfo, $user->Profile->toArray());
-                                    }
-                                    
-                                    foreach ($userInfo['extended'] as $extKey => $extValue) {
-                                        $userInfo['extended.' . $extKey] = $extValue;
+                                        
+                                        foreach ($userInfo['extended'] as $extKey => $extValue) {
+                                            $userInfo['extended.'.$extKey] = $extValue;
+                                        }
                                     }
                                 }
                                 $output = $userInfo && isset($userInfo[$key]) ? $userInfo[$key] : null;
