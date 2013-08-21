@@ -86,7 +86,7 @@ class modScript extends modElement {
             }
         }
         $this->_processed= true;
-
+        $this->xpdo->parser->setProcessingElement(false);
         /* finally, return the processed element content */
         return $this->_output;
     }
