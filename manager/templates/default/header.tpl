@@ -41,7 +41,7 @@
     <div id="modx-header">
         <div id="modx-navbar">
             <ul id="modx-user-menu">
-                {$navb-user}
+                {$navbUser}
             </ul>
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">

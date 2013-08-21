@@ -25,7 +25,7 @@ class modSecurityFlushProcessor extends modProcessor {
     public function flushSessions() {
         $flushed = true;
         $sessionTable = $this->modx->getTableName('modSession');
-        if ($this->modx->query("TRUNCATE {$sessionTable}") == false) {
+        if ($this->modx->query("TRUNCATE TABLE {$sessionTable}") == false) {
             $flushed = false;
         } else {
             $this->modx->user->endSession();

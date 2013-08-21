@@ -2,10 +2,51 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#9133] Fix various issues with Number TV
+- Fix visibility of Quick Edit independent of allowChildrenResources
+- [#8453] Add several File Management system events
+- [#7866] Add columns option to Checkbox TV
+- Add OnMODXInit event in modX::initialize()
 - Add name field to Contexts
 - Add preserve menuindex/alias options to Duplicate Context
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
+
+
+- [#9809] Remove empty ULs in topmenu
+- [#7569] Add bottom border to collapsed panels
+- [#146] Also fire field change event on change event
+- Fix contextsAffected in resource/sort processor
+- [#9815] Improved manager redraw on browser resize
+- [#6294] Apply htmlspecialchars to modError->message
+- Fix clearcache timing issue with MODx.Console
+- Prevent accumulation of MODx.Console onMessage callbacks
+- Prevent session write errors from phpthumb cache
+- [#9964] Fix Import HTML to use context of parent
+- [#9916] Add TABLE to TRUNCATE command in flushSessions (SQLSRV)
+- [#9527] Fix password reset by user email
+- Fix login processor to use absolute url redirects for mgr
+- [#9826] Fix errant creation of Policy Templates
+
+MODX Revolution 2.2.8-pl (June 4, 2013)
+====================================
+- Prevent empty HTTP_MODAUTH from succeeding
+- [#9450] Prevent non-existent Context initialization
+- [#9896] Improve performance of modTemplateVar::getRenderDirectories()
+- [#9859] Prevent conditional output filter recursion
+- [#6138] Handle offline errors in RSS feeds
+- Refresh file tree after removing file
+- [#9946] Do not cache modResource::$_isForward
+- Force browser to root on Media Source change
+- Refresh file tree after root upload
+- Fix remove file from root if no folder selected
+- [#8877] Fix inline grid datefield icon
+- [#6945] Fix datefield icon in grid toolbars
+- [#9825] Revert width increase of file and image TVs
+- [#9901] Fix empty resourceMap in sqlsrv
+- [#9912] Fix length of modResource.uri index
+- [#9846] Fix incorrect parameter order passed to findResource
+- [#9814] Fix empty cross-context links using link tags
 
 MODX Revolution 2.2.7-pl (April 9, 2013)
 ====================================

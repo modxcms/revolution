@@ -352,6 +352,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             return false;
         }
 
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerDirCreate',array(
+            'directory' => $newDirectoryPath,
+            'source' => &$this,
+        ));
+
         $this->xpdo->logManagerAction('directory_create','',$newDirectory->getPath());
         return true;
     }
@@ -383,6 +389,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         if ($result == false) {
             $this->addError('path',$this->xpdo->lexicon('file_folder_err_remove'));
         }
+
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerDirRemove',array(
+            'directory' => $path,
+            'source' => &$this,
+        ));
 
         $this->xpdo->logManagerAction('directory_remove','',$directory->getPath());
         return true;
@@ -421,6 +433,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             return false;
         }
 
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerDirRename',array(
+            'directory' => $newPath,
+            'source' => &$this,
+        ));
+
         $this->xpdo->logManagerAction('directory_rename','',$oldDirectory->getPath());
         return true;
     }
@@ -457,6 +475,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $this->addError('name',$this->xpdo->lexicon('file_folder_err_rename'));
             return false;
         }
+
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerFileRename',array(
+            'path' => $newPath,
+            'source' => &$this,
+        ));
 
         $this->xpdo->logManagerAction('file_rename','',$oldFile->getPath());
         return true;
@@ -536,6 +560,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             return false;
         }
 
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerFileRemove',array(
+            'path' => $fullPath,
+            'source' => &$this,
+        ));
+
         /* log manager action */
         $this->xpdo->logManagerAction('file_remove','',$file->getPath());
         return true;
@@ -565,6 +595,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         /* write file */
         $file->setContent($content);
         $file->save();
+
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerFileUpdate',array(
+            'path' => $fullPath,
+            'source' => &$this,
+        ));
 
         $this->xpdo->logManagerAction('file_update','',$file->getPath());
 
@@ -597,6 +633,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $this->addError('file',$this->xpdo->lexicon('file_err_nf').': '.$fullPath);
             return false;
         }
+
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerFileCreate',array(
+            'path' => $fullPath,
+            'source' => &$this,
+        ));
 
         $this->xpdo->logManagerAction('file_create','',$file->getPath());
 
@@ -659,6 +701,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             $newPath = $this->fileHandler->sanitizePath($file['name']);
             $newPath = $directory->getPath().$newPath;
+
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerBeforeUpload',array(
+            'files' => &$objects,
+            'file' => &$file,
+            'directory' => $container,
+            'source' => &$this,
+        ));
 
             if (!move_uploaded_file($file['tmp_name'],$newPath)) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
@@ -756,6 +806,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         if (!$success) {
             $this->addError('from',$this->xpdo->lexicon('file_err_chmod'));
         }
+
+        /* invoke event */
+        $this->xpdo->invokeEvent('OnFileManagerMoveObject',array(
+            'from' => $fromObject->getPath(),
+            'to' => $toObject->getPath(),
+            'source' => &$this,
+        ));
+
         return $success;
     }
 
