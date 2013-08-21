@@ -41,6 +41,11 @@ class modParser {
      */
     protected $_processingTag = false;
     /**
+     * If the parser is currently processing an element
+     * @var bool $_processingElement
+     */
+    protected $_processingElement = false;
+    /**
      * If the parser is currently processing an uncacheable tag
      * @var bool $_processingUncacheable
      */
@@ -64,7 +69,7 @@ class modParser {
      */
     public function isProcessingUncacheable() {
         $result = false;
-        if ($this->isProcessingTag()) $result = (boolean) $this->_processingUncacheable;
+        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_processingUncacheable;
         return $result;
     }
 
@@ -74,7 +79,7 @@ class modParser {
      */
     public function isRemovingUnprocessed() {
         $result = false;
-        if ($this->isProcessingTag()) $result = (boolean) $this->_removingUnprocessed;
+        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_removingUnprocessed;
         return $result;
     }
 
@@ -84,6 +89,24 @@ class modParser {
      */
     public function isProcessingTag() {
         return (boolean) $this->_processingTag;
+    }
+
+    /**
+     * Returns true if the parser is currently processing an element
+     * @return bool
+     */
+    public function isProcessingElement() {
+        return (boolean) $this->_processingElement;
+    }
+
+    public function setProcessingElement($arg = null) {
+        if (is_bool($arg)) {
+            $this->_processingElement = $arg;
+        } elseif ($arg === null) {
+            $this->_processingElement = !$this->_processingElement ? true : false;
+        } else {
+            $this->_processingElement = (boolean)$arg;
+        }
     }
 
     /**
@@ -780,6 +803,7 @@ abstract class modTag {
      */
     public function process($properties= null, $content= null) {
         $this->modx->getParser();
+        $this->modx->parser->setProcessingElement(true);
         $this->getProperties($properties);
         $this->getTag();
         $this->filterInput();

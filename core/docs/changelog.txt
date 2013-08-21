@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#10007] Fix parser logic when processing elements via API
 - [#10087] Avoid stat warnings with missing static sources
 - [#9809] Remove empty ULs in topmenu
 - [#7569] Add bottom border to collapsed panels
