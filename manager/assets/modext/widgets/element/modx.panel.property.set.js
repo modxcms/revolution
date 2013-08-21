@@ -48,7 +48,7 @@ MODx.panel.PropertySet = function(config) {
         }]
     });
     MODx.panel.PropertySet.superclass.constructor.call(this,config);
-    
+
     /* load after b/c of safari/ie focus bug */
     (function() {
     MODx.load({
@@ -144,7 +144,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
                         delete g.config.elementType;
                         s.removeAll();
                         s.loadData(d);
-                        
+
                         Ext.getCmp('modx-combo-property-set').setValue(ar[1]);
                     },scope:this}
                 }
@@ -168,20 +168,20 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
                         g.config.elementType = ar[3];
                         s.removeAll();
                         s.loadData(d);
-                        
+
                         Ext.getCmp('modx-combo-property-set').setValue(ar[1]);
                     },scope:this}
                 }
             });
         }
     }
-    
-    ,createSet: function(btn,e) {        
+
+    ,createSet: function(btn,e) {
         if (!this.winCreateSet) {
             this.winCreateSet = MODx.load({
                 xtype: 'modx-window-property-set-create'
                 ,listeners: {
-                    'success':{fn:function() { 
+                    'success':{fn:function() {
                         this.refresh();
                         Ext.getCmp('modx-combo-property-set').store.reload();
                     },scope:this}
@@ -190,7 +190,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
         }
         this.winCreateSet.show(e.target);
     }
-    
+
     ,duplicateSet: function(btn,e) {
         var id = this.cm.activeNode.id.split('_');
         var r = this.cm.activeNode.attributes.data;
@@ -201,7 +201,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
                 xtype: 'modx-window-property-set-duplicate'
                 ,record: r
                 ,listeners: {
-                    'success':{fn:function() { 
+                    'success':{fn:function() {
                         this.refresh();
                         Ext.getCmp('modx-combo-property-set').store.reload();
                     },scope:this}
@@ -220,7 +220,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
                 xtype: 'modx-window-property-set-update'
                 ,record: r
                 ,listeners: {
-                    'success':{fn:function() { 
+                    'success':{fn:function() {
                         this.refresh();
                         Ext.getCmp('modx-combo-property-set').store.reload();
                     },scope:this}
@@ -234,14 +234,14 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
         var id = this.cm.activeNode.id.split('_');
         id = id[1];
         MODx.msg.confirm({
-            text: _('propertyset_remove_confirm') 
+            text: _('propertyset_remove_confirm')
             ,url: MODx.config.connectors_url+'element/propertyset.php'
             ,params: {
                 action: 'remove'
                 ,id: id
             }
             ,listeners: {
-                'success': {fn:function() { 
+                'success': {fn:function() {
                     this.refreshNode(this.cm.activeNode.id);
                     var g = Ext.getCmp('modx-grid-element-properties');
                     g.getStore().removeAll();
@@ -258,7 +258,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
             propertysetName: this.cm.activeNode.text
             ,propertyset: id
         };
-        
+
         if (!this.winPSEA) {
             this.winPSEA = MODx.load({
                 xtype: 'modx-window-propertyset-element-add'
@@ -275,7 +275,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
     ,removeElement: function(btn,e) {
         var d = this.cm.activeNode.attributes;
         MODx.msg.confirm({
-            text: _('propertyset_element_remove_confirm') 
+            text: _('propertyset_element_remove_confirm')
             ,url: MODx.config.connectors_url+'element/propertyset.php'
             ,params: {
                 action: 'removeElement'
