@@ -1888,6 +1888,15 @@ a.x-menu-item {
 .x-tool-plus { background-position:left -208px; }
 .x-tool-plus-over { background-position:right -208px; }
 
+.x-panel-collapsed {
+    border-bottom: 1px solid #999;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
 .x-panel-dd-spacer {
     border-color:#DFDFDF;
 }

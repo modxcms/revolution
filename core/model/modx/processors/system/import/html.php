@@ -37,6 +37,7 @@ if (!function_exists('importFiles')) {
             return;
         if ($parent > 0) {
             if ($parentResource= $modx->getObject('modResource', $parent)) {
+                $context = $parentResource->get('context_key');
                 $parentResource->set('isfolder', true);
                 $parentResource->save();
             } else {

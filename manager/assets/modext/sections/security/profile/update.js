@@ -1,6 +1,6 @@
 /**
  * Loads the profile page
- * 
+ *
  * @class MODx.page.Profile
  * @extends MODx.Component
  * @param {Object} config An object of configuration properties
@@ -28,7 +28,7 @@ MODx.panel.Profile = function(config) {
         ,baseParams: {
             action: 'security/profile'
         }
-        ,layout: 'fit'
+        ,layout: 'anchor'
         ,cls: 'container'
         ,bodyStyle: 'background: none;'
         ,border: false
@@ -54,6 +54,7 @@ MODx.panel.Profile = function(config) {
             ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-profile-recent-docs'
             ,autoHeight: true
+            ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('profile_recent_resources_desc')+'</p><br />'
                 ,id: 'modx-profile-recent-docs-msg'
@@ -76,7 +77,7 @@ Ext.reg('modx-panel-profile',MODx.panel.Profile);
 
 /**
  * The information panel for the profile
- * 
+ *
  * @class MODx.panel.UpdateProfile
  * @extends MODx.FormPanel
  * @param {Object} config An object of config properties
@@ -176,7 +177,7 @@ Ext.reg('modx-panel-profile-update',MODx.panel.UpdateProfile);
 
 /**
  * A panel for changing the user password
- * 
+ *
  * @class MODx.panel.ChangeProfilePassword
  * @extends MODx.FormPanel
  * @param {Object} config An object of config properties

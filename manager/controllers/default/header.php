@@ -103,6 +103,8 @@ foreach ($topNavMenus as $menu) {
     }
     $order++;
 }
+$emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
+$output = str_replace($emptySub, '', $output);
 $this->setPlaceholder('navb',$output);
 
 /* get user navbar */
@@ -156,6 +158,8 @@ foreach ($userNavMenus as $menu) {
     }
     $order++;
 }
+$emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
+$output = str_replace($emptySub, '', $output);
 $this->setPlaceholder('navbUser',$output);
 
 /* assign logged in text and link */
