@@ -124,11 +124,12 @@ class modScript extends modElement {
      */
     public function loadScript() {
         $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
-        $result = file_exists($includeFilename);
+        $result = is_readable($includeFilename);
         $outdated = false;
-        if ($result && $this->isStatic()) {
+        $sourceFile = $this->getSourceFile();
+        if ($this->isStatic() && $result && !empty($sourceFile) && is_readable($sourceFile)) {
             $includeMTime = filemtime($includeFilename);
-            $sourceMTime = filemtime($this->getSourceFile());
+            $sourceMTime = filemtime($sourceFile);
             $outdated = $sourceMTime > $includeMTime;
         }
         if (!$result || $outdated) {
