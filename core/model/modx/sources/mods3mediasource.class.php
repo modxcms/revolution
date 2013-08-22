@@ -495,12 +495,6 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean|string
      */
     public function updateObject($objectPath,$content) {
-        /* check to see if file already exists */
-//        if ($this->driver->if_object_exists($this->bucket,$objectPath.$name)) {
-//            $this->addError('file',sprintf($this->xpdo->lexicon('file_err_ae'),$objectPath.$name));
-//            return false;
-//        }
-
         /* create empty file that acts as folder */
         $created = $this->driver->create_object($this->bucket,$objectPath,array(
                  'body' => $content,
