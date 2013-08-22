@@ -63,6 +63,12 @@ class modActionCreateProcessor extends modObjectCreateProcessor {
             $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_nf'));
         }
 
+        /* set lang_topcis to namespace:default if it is empty */
+        $lang_topics = $this->getProperty('lang_topics');
+        if(empty($lang_topics)){
+            $this->object->set('lang_topics', $namespace->name . ':default');
+        }
+
         return !$this->hasErrors();
     }
 
