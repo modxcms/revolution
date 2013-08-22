@@ -121,12 +121,26 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
     }
 
     /**
+     * Get the ID of the edit file action
+     *
+     * @return boolean|int
+     */
+    public function getEditActionId() {
+        $editAction = false;
+        /** @var modAction $act */
+        $act = $this->xpdo->getObject('modAction',array('controller' => 'system/file/edit'));
+        if ($act) { $editAction = $act->get('id'); }
+        return $editAction;
+    }
+
+    /**
      * @param string $path
      * @return array
      */
     public function getContainerList($path) {
         $properties = $this->getPropertyList();
         $list = $this->getS3ObjectList($path);
+        $editAction = $this->getEditActionId();
 
         $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
@@ -159,13 +173,27 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 );
                 $directories[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$directories[$currentPath]));
             } else {
+                $page = '?a='.$editAction.'&file='.$currentPath.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
+
+                $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
+
+                $cls = array();
+                $cls[] = 'icon-'.$extension;
+                if($isBinary) {
+                    $cls[] = 'icon-lock';
+                }
+
+                if ($this->hasPermission('file_remove')) $cls[] = 'premove';
+                if ($this->hasPermission('file_update')) $cls[] = 'pupdate';
+
                 $files[$currentPath] = array(
                     'id' => $currentPath,
                     'text' => $fileName,
-                    'cls' => 'icon-'.$extension,
+                    'cls' => implode(' ', $cls),
                     'type' => 'file',
                     'leaf' => true,
                     'path' => $currentPath,
+                    'page' => $isBinary ? null : $page,
                     'pathRelative' => $currentPath,
                     'directory' => $currentPath,
                     'url' => rtrim($properties['url'],'/').'/'.$currentPath,
@@ -201,6 +229,16 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $menu = array();
         if (!$isDir) { /* files */
             if ($this->hasPermission('file_update')) {
+                if ($fileArray['page'] != null) {
+                    $menu[] = array(
+                        'text' => $this->xpdo->lexicon('file_edit'),
+                        'handler' => 'this.editFile',
+                    );
+                    $menu[] = array(
+                        'text' => $this->xpdo->lexicon('quick_update_file'),
+                        'handler' => 'this.quickUpdateFile',
+                    );
+                }
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('rename'),
                     'handler' => 'this.renameFile',
@@ -235,6 +273,16 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('upload_files'),
                     'handler' => 'this.uploadFiles',
+                );
+            }
+            if ($this->hasPermission('file_create')) {
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_create'),
+                    'handler' => 'this.createFile',
+                );
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('quick_create_file'),
+                    'handler' => 'this.quickCreateFile',
                 );
             }
             if ($this->hasPermission('directory_remove')) {
@@ -406,6 +454,61 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $this->xpdo->logManagerAction('directory_remove','',$path);
 
         return !empty($deleted);
+    }
+
+    /**
+     * Create a file
+     *
+     * @param string $objectPath
+     * @param string $name
+     * @param string $content
+     * @return boolean|string
+     */
+    public function createObject($objectPath,$name,$content) {
+        /* check to see if file already exists */
+        if ($this->driver->if_object_exists($this->bucket,$objectPath.$name)) {
+            $this->addError('file',sprintf($this->xpdo->lexicon('file_err_ae'),$objectPath.$name));
+            return false;
+        }
+
+        /* create empty file that acts as folder */
+        $created = $this->driver->create_object($this->bucket,$objectPath.$name,array(
+                'body' => $content,
+                'acl' => AmazonS3::ACL_PUBLIC,
+                'length' => 0,
+           ));
+
+        if (!$created) {
+            $this->addError('name',$this->xpdo->lexicon('file_err_create').$objectPath.$name);
+            return false;
+        }
+
+        $this->xpdo->logManagerAction('file_create','',$objectPath.$name);
+        return true;
+    }
+
+    /**
+     * Update the contents of a file
+     *
+     * @param string $objectPath
+     * @param string $content
+     * @return boolean|string
+     */
+    public function updateObject($objectPath,$content) {
+        /* create empty file that acts as folder */
+        $created = $this->driver->create_object($this->bucket,$objectPath,array(
+                 'body' => $content,
+                 'acl' => AmazonS3::ACL_PUBLIC,
+                 'length' => 0,
+            ));
+
+        if (!$created) {
+            $this->addError('name',$this->xpdo->lexicon('file_err_create').$objectPath);
+            return false;
+        }
+
+        $this->xpdo->logManagerAction('file_create','',$objectPath);
+        return true;
     }
 
 
@@ -900,6 +1003,24 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         return $properties['url'].$object;
     }
 
+    public function getObjectFileSize($filename) {
+        return $this->driver->get_object_filesize($this->bucket, $filename);
+    }
+
+    /**
+     * Tells if a file is a binary file or not.
+     *
+     * @param string $file
+     * @return boolean True if a binary file.
+     */
+    public function isBinary($file, $isContent = false) {
+        if(!$isContent) {
+            $file = file_get_contents($file, null, null, null, 512);
+        }
+
+        $content = str_replace(array("\n", "\r", "\t"), '', $file);
+        return ctype_print($content) ? false : true;
+    }
 
     /**
      * Get the contents of a specified file
@@ -915,18 +1036,18 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
         $imageExtensions = explode(',',$imageExtensions);
         $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
-        
+
         return array(
             'name' => $objectPath,
             'basename' => basename($objectPath),
             'path' => $objectPath,
-            'size' => '',
+            'size' => $this->getObjectFileSize($objectPath),
             'last_accessed' => '',
             'last_modified' => '',
             'content' => $contents,
             'image' => in_array($fileExtension,$imageExtensions) ? true : false,
-            'is_writable' => false,
-            'is_readable' => false,
+            'is_writable' => !$this->isBinary($contents, true),
+            'is_readable' => true,
         );
     }
 }
