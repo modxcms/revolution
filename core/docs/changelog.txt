@@ -13,6 +13,13 @@ development release, and is only shown to give an idea of what's currently in th
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
 
+- [#10093] Add create/update methods to S3 Media Sources
+- [#9902] Added error window when package download fails
+- [#10070] fix potential SQL injection vulnerability in modImport
+- [#9843] Added lang_topics field to create and update action window
+- [#10094] Defaults overwriting properties in ResourceCreateProcessor
+- [#10007] Fix parser logic when processing elements via API
+- [#10087] Avoid stat warnings with missing static sources
 - [#9809] Remove empty ULs in topmenu
 - [#7569] Add bottom border to collapsed panels
 - [#146] Also fire field change event on change event

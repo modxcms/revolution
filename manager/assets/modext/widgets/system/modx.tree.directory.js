@@ -1,6 +1,6 @@
 /**
  * Generates the Directory Tree
- * 
+ *
  * @class MODx.tree.Directory
  * @extends MODx.tree.Tree
  * @param {Object} config An object of options.
@@ -166,7 +166,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             }
         });
     }
-    
+
     ,getPath:function(node) {
         var path, p, a;
 
@@ -279,7 +279,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.browser.show();
         }
     }
-    
+
     ,renameNode: function(field,nv,ov) {
         MODx.Ajax.request({
             url: MODx.config.connector_url
@@ -296,7 +296,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             }
         });
     }
-    
+
     ,renameDirectory: function(item,e) {
         var node = this.cm.activeNode;
         var r = {
@@ -334,7 +334,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         w.show(e.target);
     }
-    
+
     ,createDirectory: function(item,e) {
         var node = this.cm && this.cm.activeNode ? this.cm.activeNode : false;
         var r = {
@@ -351,7 +351,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
         w.show(e ? e.target : Ext.getBody());
     }
-    
+
     ,chmodDirectory: function(item,e) {
         var node = this.cm.activeNode;
         var r = {
@@ -427,7 +427,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,getSource: function() {
         return this.config.baseParams.source;
     }
-    
+
     ,uploadFiles: function(btn,e) {
         if (!this.uploader) {
             this.uploader = new Ext.ux.UploadDialog.Dialog({
@@ -453,7 +453,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,uploadError: function(dlg,file,data,rec) {}
 
     ,uploadFailed: function(dlg,file,rec) {}
-    
+
     ,uploadSuccess:function() {
         if (this.cm.activeNode) {
             var node = this.cm.activeNode;
@@ -497,7 +497,7 @@ Ext.reg('modx-tree-directory',MODx.tree.Directory);
 
 /**
  * Generates the Create Directory window
- * 
+ *
  * @class MODx.window.CreateDirectory
  * @extends MODx.Window
  * @param {Object} config An object of configuration options.
@@ -538,7 +538,7 @@ Ext.reg('modx-window-directory-create',MODx.window.CreateDirectory);
 
 /**
  * Generates the Chmod Directory window
- * 
+ *
  * @class MODx.window.ChmodDirectory
  * @extends MODx.Window
  * @param {Object} config An object of configuration options.
@@ -580,7 +580,7 @@ Ext.reg('modx-window-directory-chmod',MODx.window.ChmodDirectory);
 
 /**
  * Generates the Rename Directory window
- * 
+ *
  * @class MODx.window.RenameDirectory
  * @extends MODx.Window
  * @param {Object} config An object of configuration options.
@@ -627,7 +627,7 @@ Ext.reg('modx-window-directory-rename',MODx.window.RenameDirectory);
 
 /**
  * Generates the Rename File window
- * 
+ *
  * @class MODx.window.RenameFile
  * @extends MODx.Window
  * @param {Object} config An object of configuration options.
@@ -677,7 +677,7 @@ Ext.reg('modx-window-file-rename',MODx.window.RenameFile);
 
 /**
  * Generates the Quick Update File window
- * 
+ *
  * @class MODx.window.QuickUpdateFile
  * @extends MODx.Window
  * @param {Object} config An object of configuration options.
@@ -746,7 +746,7 @@ Ext.reg('modx-window-file-quick-update',MODx.window.QuickUpdateFile);
 
 /**
  * Generates the Quick Create File window
- * 
+ *
  * @class MODx.window.QuickCreateFile
  * @extends MODx.Window
  * @param {Object} config An object of configuration options.

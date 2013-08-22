@@ -163,6 +163,11 @@ MODx.window.CreateAction = function(config) {
             ,editable: false
             ,anchor: '100%'
             ,id: 'modx-cact-parent'
+        },{
+            fieldLabel: _('lang_topics')
+            ,name: 'lang_topics'
+            ,xtype: 'textfield'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateAction.superclass.constructor.call(this,config);
@@ -210,6 +215,11 @@ MODx.window.UpdateAction = function(config) {
             ,hiddenName: 'parent'
             ,xtype: 'modx-combo-action'
             ,editable: false
+            ,anchor: '100%'
+        },{
+            fieldLabel: _('lang_topics')
+            ,name: 'lang_topics'
+            ,xtype: 'textfield'
             ,anchor: '100%'
         }]
     });
