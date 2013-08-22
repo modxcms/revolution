@@ -112,3 +112,5 @@ $_lang['upf_upload_err'] = 'Upload error.';
 $_lang['upf_uploading'] = 'Uploading...';
 $_lang['upf_uploading_desc'] = 'Uploading: {0} of {1} files complete.';
 $_lang['upload_files'] = 'Upload Files';
+$_lang['file_err_ae'] = 'File %s already exists';
+$_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';
