@@ -272,7 +272,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 				this.processResult( result.responseText );
 			}
 			,failure: function ( result, request) {
-				Ext.MessageBox.alert('Failed', result.responseText);
+				Ext.MessageBox.alert(_('failure'), result.responseText);
 				c.hideWait();
 			}
 		});
@@ -292,7 +292,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		}
 		else {
 			Ext.getCmp('modx-panel-packages-browser').hideWait();
-			Ext.MessageBox.alert('Failed', data.message);
+			Ext.MessageBox.alert(_('failure'), data.message);
 		}
 	}
 
