@@ -290,6 +290,10 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 				me.updateBreadcrumbs(_('list_of_packages_in_provider'));
 			}, 5000);
 		}
+		else {
+			Ext.getCmp('modx-panel-packages-browser').hideWait();
+			Ext.MessageBox.alert('Failed', data.message);
+		}
 	}
 
 	,onDetails: function(rec){
