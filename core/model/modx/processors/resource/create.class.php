@@ -202,12 +202,18 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         $scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (integer) $this->workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
         $scriptProperties['content_type'] = !isset($scriptProperties['content_type']) ? (integer) $this->workingContext->getOption('default_content_type',1) : (integer)$scriptProperties['content_type'];
         $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
-        $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
-        $scriptProperties['createdby'] = $this->modx->user->get('id');
         $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
         $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
         $scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) ? 0 : 1;
-
+        
+        if(empty($scriptProperties['createdon'])){
+            $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
+        }
+        
+        if(empty($scriptProperties['createdby'])){
+            $scriptProperties['createdby'] = $this->modx->user->get('id');
+        }
+        
         /* publish and unpublish dates */
         $now = time();
         if (isset($scriptProperties['pub_date'])) {
@@ -247,7 +253,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             } else {
                 $scriptProperties['publishedon'] = strtotime($scriptProperties['publishedon']);
             }
-            $scriptProperties['publishedby'] = $scriptProperties['published'] ? $this->modx->user->get('id') : 0;
+            $scriptProperties['publishedby'] = $scriptProperties['published'] ? !empty($scriptProperties['publishedby']) ? $scriptProperties['publishedby'] : $this->modx->user->get('id') : 0;
         }
         
         $this->setProperties($scriptProperties);
