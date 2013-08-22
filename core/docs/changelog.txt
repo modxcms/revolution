@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#10070] fix potential SQL injection vulnerability in modImport
 - [#9843] Added lang_topics field to create and update action window
 - [#10094] Defaults overwriting properties in ResourceCreateProcessor
 - [#10007] Fix parser logic when processing elements via API
