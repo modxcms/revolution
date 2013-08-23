@@ -17,7 +17,7 @@ and `brew install node` to install Node.js.
 Linux/BSD users should use their appropriate package managers to install git and Node.js, or build from source
 if you swing that way. Easy-peasy.
 
-How to build
+Installing Grunt & Grunt Packages
 ----------------------------
 
 First, clone a copy of this git repo by running:
@@ -44,20 +44,27 @@ Enter the default template directory and install the Node and Bower dependencies
 ```bash
 cd _built/templates/default && npm install
 ```
+_Note: `npm install` updates dependencies and should be run whenever you pull from git._
 
-Then, to compile the Sass and watch files for changes type the following:
+Grunt Commands
+----------------------------
 
-```bash
-grunt
-```
-_Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated.<br>Install the LiveReload [browser extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-) to inject CSS changes without a page refresh._
-
+__Build__<br>
 Fetch dependencies (such as bourbon), move items into place and compile by running:
 
 ```bash
 grunt build
 ```
 
+__Watch__<br>
+Compile the Sass and watch files for changes type the following:
+
+```bash
+grunt
+```
+_Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated.<br>Install the LiveReload [browser extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-) to inject CSS changes without a page refresh._
+
+__Ship__<br>
 Compile Sass and minify for production by running:
 
 ```bash
