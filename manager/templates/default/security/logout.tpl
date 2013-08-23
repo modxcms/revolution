@@ -9,10 +9,11 @@
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/login.css" />
 
 
-    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
     {if $_config.ext_debug}
+    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
     {else}
+    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
     {/if}
     <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
