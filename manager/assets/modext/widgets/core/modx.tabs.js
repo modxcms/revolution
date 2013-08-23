@@ -12,7 +12,6 @@ MODx.Tabs = function(config) {
             ,border: true
             ,autoWidth: true
             ,bodyCssClass: 'tab-panel-wrapper'
-            ,layout: 'form'
         }
         ,activeTab: 0
         ,border: false
