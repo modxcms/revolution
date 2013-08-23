@@ -251,6 +251,9 @@ $_lang['setting_error_page'] = 'Error Page';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
 
+$_lang['setting_ext_debug'] = 'ExtJS debug';
+$_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to help debug your ExtJS code.';
+
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
 

@@ -4,14 +4,19 @@
 	<title>{$_lang.login_title}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
-    
+
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
 	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login.css" />
-    
-    <script src="assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
-    <script src="assets/ext3/ext-all.js" type="text/javascript"></script>
+
+    {if $_config.ext_debug}
+    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
+    <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
+    {else}
+    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
+    <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
+    {/if}
     <script src="assets/modext/core/modx.js" type="text/javascript"></script>
 
     <script src="assets/modext/core/modx.component.js" type="text/javascript"></script>
@@ -19,7 +24,7 @@
 	<script src="assets/modext/widgets/core/modx.panel.js" type="text/javascript"></script>
     <script src="assets/modext/widgets/core/modx.window.js" type="text/javascript"></script>
     <script src="assets/modext/sections/login.js" type="text/javascript"></script>
-    
+
     <meta name="robots" content="noindex, nofollow" />
 </head>
 <body id="login">
@@ -44,16 +49,16 @@
   <div class="x-panel-ml">
    <div class="x-panel-mr">
     <div class="x-panel-mc">
-    
+
 <form id="modx-login-form" action="" method="post">
     <input type="hidden" name="login_context" value="mgr" />
     <input type="hidden" name="modahsh" value="{$modahsh}" />
     <input type="hidden" name="returnUrl" value="{$returnUrl}" />
-    	    
+
     <div class="x-panel x-panel-noborder"><div class="x-panel-bwrap"><div class="x-panel-body x-panel-body-noheader">
     <h2>{$_config.site_name}</h2>
     <br class="clear" />
-    
+
     {if $error_message}<p class="error">{$error_message}</p>{/if}
     </div></div></div>
 
@@ -62,7 +67,7 @@
         <input type="text" id="modx-login-username" name="username" tabindex="1" autocomplete="on" value="{$_post.username}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" />
       </div>
     </div>
-    
+
     <div class="x-form-item login-form-item">
       <div class="x-form-element login-form-element">
         <input type="password" id="modx-login-password" name="password" tabindex="2" autocomplete="on" class="x-form-text x-form-field" placeholder="{$_lang.login_password}" />
@@ -86,7 +91,7 @@
     </div>
 
     {$onManagerLoginFormRender}
-    
+
     <br class="clear" />
 
     <button class="x-btn-text login-form-btn" name="login" type="submit" value="1" id="modx-login-btn" tabindex="4">{$_lang.login_button}</button>
@@ -96,7 +101,7 @@
     <div class="modx-forgot-login">
     <form id="modx-fl-form" action="" method="post">
        <div id="modx-forgot-login-form" style="{if NOT $_post.username_reset}display: none;{/if}">
-                      
+
            <div class="x-form-item login-form-item">
               <div class="x-form-element login-form-element">
                 <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset}" placeholder="{$_lang.login_username}" />
@@ -105,14 +110,14 @@
            </div>
 
            <br class="clear" />
-           
+
            <button class="x-btn-text login-form-btn" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
-           
+
        </div>
     </form>
     </div>
     {/if}
-    
+
     <br class="clear" />
 
     </div>
