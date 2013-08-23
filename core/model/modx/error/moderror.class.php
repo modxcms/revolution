@@ -176,7 +176,7 @@ class modError {
         $objarray = $this->toArray($object);
         return array (
             'success' => $status,
-            'message' => htmlspecialchars($this->message),
+            'message' => $this->message,
             'total' => isset ($this->total) && $this->total != 0 ? $this->total : count($this->errors),
             'errors' => $this->errors,
             'object' => $objarray,

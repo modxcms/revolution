@@ -15,7 +15,6 @@ development release, and is only shown to give an idea of what's currently in th
 - [#146] Also fire field change event on change event
 - Fix contextsAffected in resource/sort processor
 - [#9815] Improved manager redraw on browser resize
-- [#6294] Apply htmlspecialchars to modError->message
 - Fix clearcache timing issue with MODx.Console
 - Prevent accumulation of MODx.Console onMessage callbacks
 - Prevent session write errors from phpthumb cache
