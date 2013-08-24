@@ -46,6 +46,11 @@ cd _built/templates/default && npm install
 ```
 _Note: `npm install` updates dependencies and should be run whenever you pull from git._
 
+To enable Growl notifications install [terminal-notifier](https://github.com/alextucker/grunt-growl#getting-started) with RubyGems:
+```bash
+sudo gem install terminal-notifier
+```
+
 Grunt Commands
 ----------------------------
 
