@@ -60,3 +60,13 @@ $this->processResults($class, $description, array($modx->manager, 'addIndex'), a
 
 /* remove old menus */
 $modx->removeCollection('modMenu', array('text:IN' => array('new_document', 'new_static_resource', 'new_symlink', 'new_weblink')));
+
+/* Remove context_key from forward_merge_excludes System Setting */
+$object = $modx->getObject('modSystemSetting', array('key' => 'forward_merge_excludes'));
+if ($object) {
+    $value = $object->get('value');
+    $exploded = explode(',', $value);
+    $exploded = array_diff($exploded, array('context_key'));
+    $object->set('value', implode(',', $exploded));
+    $object->save();
+}

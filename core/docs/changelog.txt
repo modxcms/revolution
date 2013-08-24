@@ -13,6 +13,9 @@ development release, and is only shown to give an idea of what's currently in th
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
 
+- Set default error_handler_types to error_reporting()
+- Upgrade to ExtJS 3.4.1.1 and add ExtJS debug support
+- [#9976] Fix cross-context symlink caching
 - [#10093] Add create/update methods to S3 Media Sources
 - [#9902] Added error window when package download fails
 - [#10070] fix potential SQL injection vulnerability in modImport
@@ -25,7 +28,6 @@ development release, and is only shown to give an idea of what's currently in th
 - [#146] Also fire field change event on change event
 - Fix contextsAffected in resource/sort processor
 - [#9815] Improved manager redraw on browser resize
-- [#6294] Apply htmlspecialchars to modError->message
 - Fix clearcache timing issue with MODx.Console
 - Prevent accumulation of MODx.Console onMessage callbacks
 - Prevent session write errors from phpthumb cache
