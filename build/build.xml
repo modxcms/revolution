@@ -11,8 +11,8 @@
     <property name="project.build.dir" value="${project.root.dir}/build" />
 
     <!-- Set the project version -->
-    <property name="xpdo.core.version" value="2.2.7" />
-    <property name="xpdo.core.release" value="pl" />
+    <property name="xpdo.core.version" value="2.2.8" />
+    <property name="xpdo.core.release" value="dev" />
 
     <!-- Set some common build properties -->
     <property name="build.src.tree" value="HEAD" />
@@ -26,8 +26,8 @@
     <property name="build.distrib.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}" />
     <property name="build.apidocs.dir" value="${build.image.dir}/docs" />
 
-    <!-- ================================= 
-          target: complete              
+    <!-- =================================
+          target: complete
          ================================= -->
     <target name="complete" description="--> Complete Build">
         <phingcall target="git-export-build-image" />
@@ -98,6 +98,6 @@
 
     <!-- Publish a distrib to a server -->
     <target name="publish-build" description="publish the build to a server for download">
-        
+
     </target>
 </project>
