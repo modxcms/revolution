@@ -18,6 +18,8 @@ Ext.onReady(function() {
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+        {if $params.maxLength != '' && $params.maxLength > 0}{if $params.minLength != '' && $params.minLength >= 0 && $params.maxLength > $params.minLength},maxLength: {$params.maxLength|string_format:"%d"}{/if} {/if} 
+        {if $params.minLength != '' && $params.minLength >= 0},minLength: {$params.minLength|string_format:"%d"}{/if} 
     {literal}
         ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
     });

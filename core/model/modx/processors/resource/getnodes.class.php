@@ -366,8 +366,8 @@ class modResourceGetNodesProcessor extends modProcessor {
             if (!empty($this->permissions['new_weblink'])) $class[] = $this->permissions['new_weblink'];
             if (!empty($this->permissions['new_static_resource'])) $class[] = $this->permissions['new_static_resource'];
             if (!empty($this->permissions['resource_quick_create'])) $class[] = $this->permissions['resource_quick_create'];
-            if (!empty($this->permissions['resource_quick_update'])) $class[] = $this->permissions['resource_quick_update'];
         }
+        if (!empty($this->permissions['resource_quick_update'])) $class[] = $this->permissions['resource_quick_update'];
         if (!empty($this->permissions['delete_document'])) $class[] = $this->permissions['delete_document'];
         if (!empty($this->permissions['undelete_document'])) $class[] = $this->permissions['undelete_document'];
         if (!empty($this->permissions['publish_document'])) $class[] = $this->permissions['publish_document'];

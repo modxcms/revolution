@@ -145,27 +145,32 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 this.addChangeEvent(cmp.items);
             } else if (cmp.xtype) {
                 if (!cmp.listeners) { cmp.listeners = {}; }
-                var ctype = 'change';
+                var ctypes = ['change'];
                 cmp.enableKeyEvents = true;
                 switch (cmp.xtype) {
+                    case 'numberfield':
                     case 'textfield':
                     case 'textarea':
-                        ctype = 'keydown';
+                        ctypes = ['keydown', 'change'];
                         break;
                     case 'checkbox':
                     case 'xcheckbox':
                     case 'radio':
-                        ctype = 'check';
+                        ctypes = ['check'];
                         break;
                 }
                 if (cmp.xtype && cmp.xtype.indexOf('modx-combo') == 0) {
-                    ctype = 'select';
+                    ctypes = ['select'];
                 }
-                if (cmp.listeners[ctype] && cmp.listeners[ctype].fn) {
-                    cmp.listeners[ctype] = {fn:this.fieldChangeEvent.createSequence(cmp.listeners[ctype].fn,cmp.listeners[ctype].scope),scope:this}
-                } else {
-                    cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
-                }
+
+                var that = this;
+                Ext.iterate(ctypes, function(ctype) {
+                    if (cmp.listeners[ctype] && cmp.listeners[ctype].fn) {
+                        cmp.listeners[ctype] = {fn:that.fieldChangeEvent.createSequence(cmp.listeners[ctype].fn,cmp.listeners[ctype].scope),scope:that}
+                    } else {
+                        cmp.listeners[ctype] = {fn:that.fieldChangeEvent,scope:that};
+                    }
+                });
             }
         }
     }

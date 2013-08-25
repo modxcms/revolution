@@ -41,101 +41,13 @@
     <div id="modx-header">
         <div id="modx-navbar">
             <ul id="modx-user-menu">
-                <li><a id="modx-user-submenu-toggle-large" href="#" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a>
-                    <ul id="modx-user-submenu" class="modx-subnav">
-                    {if $canChangeProfile}
-                    	<li>
-                        	<a class="modx-user-profile" href="?a=security/profile">Edit account
-                            	<span class="description">Update account email, password or info. </span>
-                        	</a>
-                        </li>
-                    {/if}
-            		{if $canLogout}
-    					<li>
-    						<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
-    							<span class="description">Log out from MODX</span>
-    						</a>
-    					</li>
-    				{/if}
-        	       </ul>
-                </li>
-                {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
-                <li><a id="modx-settings-toggle-large" href="#" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
-                    <ul id="modx-settings-menu" class="modx-subnav">
-                    {if $canModifySettings}
-                        <li>
-                            <a href="?a=system/settings">{$_lang.system_settings}
-                                <span class="description">{$_lang.system_settings_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canCustomizeManager}
-                        <li>
-                            <a href="?a=security/forms">{$_lang.bespoke_manager}
-                                <span class="description">{$_lang.bespoke_manager_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canManageDashboards}
-                        <li>
-                            <a href="?a=system/dashboards">{$_lang.dashboards}
-                                <span class="description">{$_lang.dashboards_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canManageContexts}
-                        <li>
-                            <a href="?a=context">{$_lang.contexts}
-                                <span class="description">{$_lang.contexts_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canManageTopNav}
-                        <li>
-                            <a href="?a=system/action">{$_lang.edit_menu}
-                                <span class="description">{$_lang.edit_menu_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canManageACLs}
-                        <li>
-                            <a href="?a=security/permission">{$_lang.acls}
-                                <span class="description">{$_lang.acls_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canManageProperties}
-                        <li>
-                            <a href="?a=element/propertyset">{$_lang.propertysets}
-                                <span class="description">{$_lang.propertysets_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canManageLexicons}
-                        <li>
-                            <a href="?a=workspaces/lexicon">{$_lang.lexicon_management}
-                                <span class="description">{$_lang.lexicon_management_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    {if $canManageNamespaces}
-                        <li>
-                            <a href="?a=workspaces/namespace">{$_lang.namespaces}
-                                <span class="description">{$_lang.namespaces_desc}</span>
-                            </a>
-                        </li>
-                    {/if}
-                    </ul>
-                </li>
-                {/if}
-                <li><a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-question-sign icon-large"></i></a></li>
+                {$navbUser}
             </ul>
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
                     <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
-                <li id="modx-manager-search">
-                </li>
+                <li id="modx-manager-search"></li>
                 {$navb}
             </ul>
         </div>

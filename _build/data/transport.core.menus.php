@@ -13,9 +13,9 @@ $menus = array();
 $menus[0]= $xpdo->newObject('modMenu');
 $menus[0]->fromArray(array (
   'menuindex' => 0,
-  'text' => 'content',
+  'text' => 'site',
   'description' => '',
-  'parent' => '',
+  'parent' => 'modx-topnav',
   'permissions' => 'menu_site',
   'action' => '',
 ), '', true, true);
@@ -28,7 +28,7 @@ $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'new_resource',
   'description' => 'new_resource_desc',
-  'parent' => '',
+  'parent' => 'site',
   'permissions' => 'new_document',
   'action' => 'resource/create',
 ), '', true, true);
@@ -39,7 +39,7 @@ $children[0]->fromArray(array (
       'menuindex' => 10,
       'text' => 'new_static_resource',
       'description' => 'new_static_resource_desc',
-      'parent' => 'new_resource',
+      'parent' => 'site',
       'permissions' => 'new_static_resource',
       'action' => 'resource/create',
       'params' => '&class_key=modStaticResource',
@@ -51,7 +51,7 @@ $children[0]->fromArray(array (
       'menuindex' => 11,
       'text' => 'new_weblink',
       'description' => 'new_weblink_desc',
-      'parent' => 'new_resource',
+      'parent' => 'site',
       'permissions' => 'new_weblink',
       'action' => 'resource/create',
       'params' => '&class_key=modWebLink',
@@ -63,7 +63,7 @@ $children[0]->fromArray(array (
       'menuindex' => 12,
       'text' => 'new_symlink',
       'description' => 'new_symlink_desc',
-      'parent' => 'new_resource',
+      'parent' => 'site',
       'permissions' => 'new_symlink',
       'action' => 'resource/create',
       'params' => '&class_key=modSymLink',
@@ -76,7 +76,7 @@ $children[4]->fromArray(array (
   'menuindex' => 4,
   'text' => 'preview',
   'description' => 'preview_desc',
-  'parent' => '',
+  'parent' => 'site',
   'permissions' => '',
   'action' => '',
   'handler' => 'MODx.preview(); return false;',
@@ -88,7 +88,7 @@ $children[5]->fromArray(array (
   'menuindex' => 5,
   'text' => 'import_site',
   'description' => 'import_site_desc',
-  'parent' => '',
+  'parent' => 'site',
   'permissions' => 'import_static',
   'action' => 'system/import/html',
 ), '', true, true);
@@ -99,7 +99,7 @@ $children[6]->fromArray(array (
   'menuindex' => 6,
   'text' => 'import_resources',
   'description' => 'import_resources_desc',
-  'parent' => '',
+  'parent' => 'site',
   'permissions' => 'import_static',
   'action' => 'system/import',
 ), '', true, true);
@@ -110,7 +110,7 @@ $children[7]->fromArray(array (
   'menuindex' => 7,
   'text' => 'resource_groups',
   'description' => 'resource_groups_desc',
-  'parent' => '',
+  'parent' => 'site',
   'permissions' => 'access_permissions',
   'action' => 'security/resourcegroup',
 ), '', true, true);
@@ -121,7 +121,7 @@ $children[8]->fromArray(array (
   'menuindex' => 8,
   'text' => 'content_types',
   'description' => 'content_types_desc',
-  'parent' => 'content',
+  'parent' => 'site',
   'permissions' => 'content_types',
   'action' => 'system/contenttype',
 ), '', true, true);
@@ -136,7 +136,7 @@ $menus[1]->fromArray(array (
   'menuindex' => 1,
   'text' => 'media',
   'description' => 'media_desc',
-  'parent' => '',
+  'parent' => 'modx-topnav',
   'permissions' => 'file_manager',
   'action' => '',
 ), '', true, true);
@@ -147,7 +147,7 @@ $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'file_browser',
   'description' => 'file_browser_desc',
-  'parent' => '',
+  'parent' => 'media',
   'permissions' => 'file_manager',
   'action' => 'media/browser',
 ), '', true, true);
@@ -158,7 +158,7 @@ $children[1]->fromArray(array(
   'menuindex'   => 1,
   'text'        => 'sources',
   'description' => 'sources_desc',
-  'parent'      => '',
+  'parent'      => 'media',
   'permissions' => 'sources',
   'action'      => 'source',
 ), '', true, true);
@@ -171,9 +171,9 @@ unset($children);
 $menus[2]= $xpdo->newObject('modMenu');
 $menus[2]->fromArray(array (
   'menuindex' => 2,
-  'text' => 'apps',
+  'text' => 'components',
   'description' => '',
-  'parent' => '',
+  'parent' => 'modx-topnav',
   'permissions' => 'components',
   'action' => '',
 ), '', true, true);
@@ -184,7 +184,7 @@ $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'installer',
   'description' => 'installer_desc',
-  'parent' => '',
+  'parent' => 'components',
   'permissions' => 'packages',
   'action' => 'workspaces',
 ), '', true, true);
@@ -199,7 +199,7 @@ $menus[3]->fromArray(array (
   'menuindex' => 3,
   'text' => 'manage',
   'description' => '',
-  'parent' => '',
+  'parent' => 'modx-topnav',
   'permissions' => 'menu_tools',
   'action' => '',
 ), '', true, true);
@@ -211,7 +211,7 @@ $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'users',
   'description' => 'user_management_desc',
-  'parent' => '',
+  'parent' => 'manage',
   'permissions' => 'view_user',
   'action' => 'security/user',
 ), '', true, true);
@@ -222,7 +222,7 @@ $children[1]->fromArray(array (
   'menuindex' => 1,
   'text' => 'refresh_site',
   'description' => 'refresh_site_desc',
-  'parent' => '',
+  'parent' => 'manage',
   'permissions' => 'empty_cache',
   'action' => '',
   'handler' => 'MODx.clearCache(); return false;',
@@ -234,7 +234,7 @@ $children[2]->fromArray(array (
   'menuindex' => 2,
   'text' => 'remove_locks',
   'description' => 'remove_locks_desc',
-  'parent' => '',
+  'parent' => 'manage',
   'permissions' => 'remove_locks',
   'action' => '',
   'handler' => '
@@ -257,7 +257,7 @@ $children[3]->fromArray(array (
   'menuindex' => 3,
   'text' => 'flush_access',
   'description' => 'flush_access_desc',
-  'parent' => 'tools',
+  'parent' => 'manage',
   'permissions' => 'access_permissions',
   'action' => '',
   'handler' => 'MODx.msg.confirm({
@@ -279,7 +279,7 @@ $children[4]->fromArray(array (
   'menuindex' => 4,
   'text' => 'flush_sessions',
   'description' => 'flush_sessions_desc',
-  'parent' => 'tools',
+  'parent' => 'manage',
   'permissions' => 'flush_sessions',
   'action' => '',
   'handler' => 'MODx.msg.confirm({
@@ -301,9 +301,53 @@ $children[5]->fromArray(array (
   'menuindex' => 5,
   'text' => 'reports',
   'description' => 'reports_desc',
-  'parent' => '',
+  'parent' => 'manage',
   'permissions' => 'menu_reports',
   'action' => 'reports',
+), '', true, true);
+
+/* site schedule */
+$children[0]= $xpdo->newObject('modMenu');
+$children[0]->fromArray(array (
+  'menuindex' => 0,
+  'text' => 'site_schedule',
+  'description' => 'site_schedule_desc',
+  'parent' => 'reports',
+  'permissions' => 'view_document',
+  'action' => 'resource/site_schedule',
+), '', true, true);
+
+/* manager actions */ 
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array (
+  'menuindex' => 1,
+  'text' => 'view_logging',
+  'description' => 'view_logging_desc',
+  'parent' => 'reports',
+  'permissions' => 'logs',
+  'action' => 'system/logs',
+), '', true, true);
+
+/* error log */
+$children[2]= $xpdo->newObject('modMenu');
+$children[2]->fromArray(array (
+  'menuindex' => 2,
+  'text' => 'eventlog_viewer',
+  'description' => 'eventlog_viewer_desc',
+  'parent' => 'reports',
+  'permissions' => 'view_eventlog',
+  'action' => 'system/event',
+), '', true, true);
+        
+/* system info */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
+  'menuindex' => 3,
+  'text' => 'view_sysinfo',
+  'description' => 'view_sysinfo_desc',
+  'parent' => 'reports',
+  'permissions' => 'view_sysinfo',
+  'action' => 'system/info',
 ), '', true, true);
 
 
@@ -323,52 +367,183 @@ $menus[4]->fromArray(array(
 ), '', true, true);
 $children = array();
 
-/* site schedule 
+$menus[4]->addMany($children,'Children');
+unset($children);
+
+*/
+
+/* ***************** USER MENU ***************** */
+$menus[5]= $xpdo->newObject('modMenu');
+$menus[5]->fromArray(array(
+  'menuindex' => 5,
+  'text' => 'user',
+  'description' => '',
+  'parent' => 'modx-user-menu',
+  'permissions' => 'menu_reports',
+  'action' => '',
+), '', true, true);
+$children = array();
+
+/* edit account */
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'menuindex' => 0,
-  'text' => 'site_schedule',
-  'description' => 'site_schedule_desc',
-  'parent' => '',
-  'permissions' => 'view_document',
-  'action' => 'resource/site_schedule',
+  'text' => 'profile',
+  'description' => 'profile_desc',
+  'parent' => 'user',
+  'permissions' => 'canChangeProfile',
+  'action' => 'security/profile',
 ), '', true, true);
 
-/* manager actions 
+/* messages */ 
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'menuindex' => 1,
-  'text' => 'view_logging',
-  'description' => 'view_logging_desc',
-  'parent' => '',
-  'permissions' => 'logs',
-  'action' => 'system/logs',
+  'text' => 'messages',
+  'description' => 'messages_desc',
+  'parent' => 'user',
+  'permissions' => 'messages',
+  'action' => 'security/messages',
 ), '', true, true);
 
-/* error log 
+/* logout */ 
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'menuindex' => 2,
-  'text' => 'eventlog_viewer',
-  'description' => 'eventlog_viewer_desc',
-  'parent' => '',
-  'permissions' => 'view_eventlog',
+  'text' => 'logout',
+  'description' => 'logout_desc',
+  'parent' => 'user',
+  'permissions' => 'logout',
   'action' => 'system/event',
 ), '', true, true);
         
-/* system info 
+$menus[5]->addMany($children,'Children');
+unset($children);
+
+/* ***************** ADMIN/SETTINGS MENU ***************** */
+$menus[6]= $xpdo->newObject('modMenu');
+$menus[6]->fromArray(array(
+  'menuindex' => 6,
+  'text' => 'admin',
+  'description' => '',
+  'parent' => 'modx-user-menu',
+  'permissions' => 'settings,customize_forms,dashboards,view_contexts,actions,access_permissions,property_sets,lexicons,namespaces',
+  'action' => '',
+), '', true, true);
+$children = array();
+
+/* system settings */
+$children[0]= $xpdo->newObject('modMenu');
+$children[0]->fromArray(array (
+  'menuindex' => 0,
+  'text' => 'settings',
+  'description' => 'settings_desc',
+  'parent' => 'admin',
+  'permissions' => 'settings',
+  'action' => 'system/settings',
+), '', true, true);
+
+/* customize manager */ 
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array (
+  'menuindex' => 1,
+  'text' => 'bespoke_manager',
+  'description' => 'bespoke_manager_desc',
+  'parent' => 'admin',
+  'permissions' => 'customize_forms',
+  'action' => 'security/forms',
+), '', true, true);
+
+/* Dashboards */ 
+$children[2]= $xpdo->newObject('modMenu');
+$children[2]->fromArray(array (
+  'menuindex' => 2,
+  'text' => 'dashboards',
+  'description' => 'dashboards_desc',
+  'parent' => 'admin',
+  'permissions' => 'dashboards',
+  'action' => 'system/dashboards',
+), '', true, true);
+
+/* Contexts */ 
 $children[3]= $xpdo->newObject('modMenu');
 $children[3]->fromArray(array (
   'menuindex' => 3,
-  'text' => 'view_sysinfo',
-  'description' => 'view_sysinfo_desc',
-  'parent' => 'reports',
-  'permissions' => 'view_sysinfo',
-  'action' => 'system/info',
+  'text' => 'contexts',
+  'description' => 'contexts_desc',
+  'parent' => 'admin',
+  'permissions' => 'view_contexts',
+  'action' => 'context',
 ), '', true, true);
 
-$menus[4]->addMany($children,'Children');
+/* Manager Menus */ 
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
+  'menuindex' => 4,
+  'text' => 'edit_menu',
+  'description' => 'edit_menu_desc',
+  'parent' => 'admin',
+  'permissions' => 'actions',
+  'action' => 'system/action',
+), '', true, true);
+
+/* ACLs */ 
+$children[5]= $xpdo->newObject('modMenu');
+$children[5]->fromArray(array (
+  'menuindex' => 5,
+  'text' => 'acls',
+  'description' => 'acls_desc',
+  'parent' => 'admin',
+  'permissions' => 'access_permissions',
+  'action' => 'security/permission',
+), '', true, true);
+
+/* Property Sets */ 
+$children[6]= $xpdo->newObject('modMenu');
+$children[6]->fromArray(array (
+  'menuindex' => 6,
+  'text' => 'propertysets',
+  'description' => 'propertysets_desc',
+  'parent' => 'admin',
+  'permissions' => 'property_sets',
+  'action' => 'element/propertyset',
+), '', true, true);
+
+/* Lexicons */ 
+$children[7]= $xpdo->newObject('modMenu');
+$children[7]->fromArray(array (
+  'menuindex' => 7,
+  'text' => 'lexicon_management',
+  'description' => 'lexicon_management_desc',
+  'parent' => 'admin',
+  'permissions' => 'lexicons',
+  'action' => 'workspaces/lexicon',
+), '', true, true);
+
+/* Namespaces */ 
+$children[8]= $xpdo->newObject('modMenu');
+$children[8]->fromArray(array (
+  'menuindex' => 8,
+  'text' => 'namespaces',
+  'description' => 'namespaces_desc',
+  'parent' => 'admin',
+  'permissions' => 'namespaces',
+  'action' => 'workspaces/namespace',
+), '', true, true);
+
+$menus[6]->addMany($children,'Children');
 unset($children);
-*/
+
+/* ***************** ADMIN/SETTINGS MENU ***************** */
+$menus[7]= $xpdo->newObject('modMenu');
+$menus[7]->fromArray(array(
+  'menuindex' => 7,
+  'text' => 'about',
+  'description' => '',
+  'parent' => 'modx-user-menu',
+  'permissions' => '',
+  'action' => 'help',
+), '', true, true);
+$children = array();
 
 return $menus;

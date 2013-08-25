@@ -83,7 +83,7 @@ class modConnectorResponse extends modResponse {
      *
      * {@inheritdoc}
      */
-    public function outputContent(array $options = array()) {        
+    public function outputContent(array $options = array()) {
         /* variable pointer for easier access */
         $modx =& $this->modx;
 
@@ -96,7 +96,7 @@ class modConnectorResponse extends modResponse {
         $isLogin = $target == 'login';
 
         /* ensure headers are sent for proper authentication */
-        if (!$isLogin && !isset($_SERVER['HTTP_MODAUTH']) && !isset($_REQUEST['HTTP_MODAUTH'])) {
+        if (!$isLogin && !isset($_SERVER['HTTP_MODAUTH']) && (!isset($_REQUEST['HTTP_MODAUTH']) || empty($_REQUEST['HTTP_MODAUTH']))) {
             $this->responseCode = 401;
             $this->body = $modx->error->failure($modx->lexicon('access_denied'),array('code' => 401));
 

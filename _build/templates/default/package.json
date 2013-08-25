@@ -10,6 +10,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "growl": "~1.7.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-growl": "~0.1.5"
+    "grunt-growl": "~0.1.5",
+    "grunt-grunticon": "~0.6.8"
   }
 }

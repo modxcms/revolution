@@ -121,6 +121,7 @@ MODx.panel.FCSet = function(config) {
                 id: 'modx-fcs-fields-form'
                 ,msgTarget: 'side'
                 ,cls: 'main-wrapper'
+                ,layout: 'anchor'
                 ,items: [{
                     xtype: 'modx-grid-fc-set-fields'
                     ,data: config.record.fields || []
@@ -173,7 +174,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
         if (!Ext.isEmpty(this.config.record.controller)) {
             Ext.getCmp('modx-fcs-header').getEl().update('<h2>'+_('set')+': '+this.config.record.controller+'</h2>');
         }
-        
+
         this.fireEvent('ready',this.config.record);
         this.clearDirty();
         this.initialized = true;

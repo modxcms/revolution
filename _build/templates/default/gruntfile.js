@@ -103,7 +103,7 @@ module.exports = function(grunt) {
 		}*/
 	},
 	clean: { /* take out the trash */
-		prebuild: ['./sass/bourbon']
+		prebuild: ['./sass/bourbon'] 
 	},
 	growl:{
 		sass : {

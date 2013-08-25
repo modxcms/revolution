@@ -49,7 +49,7 @@ class modOutputFilter {
     /**
      * Filters the output
      * 
-     * @param mixed $element The element to filter
+     * @param modElement $element The element to filter
      */
     public function filter(&$element) {
         $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
@@ -633,6 +633,8 @@ class modOutputFilter {
                     $this->modx->log(modX::LOG_LEVEL_ERROR,$e->getMessage());
                 }
             }
+            // convert $output to string if there were any processing
+            $output = (string)$output;
         }
     }
 
