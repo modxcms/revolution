@@ -63,12 +63,14 @@ MODx.grid.User = function(config) {
             ,dataIndex: 'username'
             ,width: 150
             ,sortable: true
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('user_full_name')
             ,dataIndex: 'fullname'
             ,width: 180
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('email')
             ,dataIndex: 'email'
