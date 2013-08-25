@@ -615,10 +615,11 @@ abstract class xPDOQuery extends xPDOCriteria {
     }
 
     /**
-     * Parses an xPDO condition expression.
+     * Parses an xPDO condition expression into one or more xPDOQueryConditions.
      *
      * @param mixed $conditions A valid xPDO condition expression.
      * @param string $conjunction The optional conjunction for the condition( s ).
+     * @return array||xPDOQueryCondition An xPDOQueryCondition or array of xPDOQueryConditions.
      */
     public function parseConditions($conditions, $conjunction = xPDOQuery::SQL_AND) {
         $result= array ();
@@ -630,9 +631,8 @@ abstract class xPDOQuery extends xPDOCriteria {
         $alias= $command == 'SELECT' ? $this->_class : $this->xpdo->getTableName($this->_class, false);
         $alias= trim($alias, $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose);
         if (is_array($conditions)) {
-            if (isset ($conditions[0]) && !$this->isConditionalClause($conditions[0]) && is_array($pk) && count($conditions) == count($pk)) {
+            if (isset($conditions[0]) && is_scalar($conditions[0]) && !$this->isConditionalClause($conditions[0]) && is_array($pk) && count($conditions) == count($pk)) {
                 $iteration= 0;
-                $sql= '';
                 foreach ($pk as $k) {
                     if (!isset ($conditions[$iteration])) {
                         $conditions[$iteration]= null;
@@ -650,7 +650,6 @@ abstract class xPDOQuery extends xPDOCriteria {
                     $iteration++;
                 }
             } else {
-                $bindings= array ();
                 reset($conditions);
                 while (list ($key, $val)= each($conditions)) {
                     if (is_int($key)) {
