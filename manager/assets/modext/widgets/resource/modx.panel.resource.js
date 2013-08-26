@@ -131,7 +131,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 t.refresh();
                 Ext.getCmp('modx-resource-parent-old-hidden').setValue(pa);
             } else {
-                n.leaf = false;
+                if(typeof n!=="undefined"){
+                    n.leaf = false;
+                }
                 t.refreshNode(v,true);
             }
         }
