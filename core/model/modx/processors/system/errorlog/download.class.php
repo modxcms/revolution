@@ -17,7 +17,7 @@ class modSystemErrorLogDownloadProcessor extends modProcessor {
         header('Content-Type: application/force-download');
         header('Content-Length: ' . filesize($f));
         header('Content-Disposition: attachment; filename="error.'.time().'.log');
-        @ob_end_flush();
+        ob_get_level() && @ob_end_flush();
         readfile($f);
         die();
     }
