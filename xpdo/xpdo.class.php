@@ -2447,7 +2447,7 @@ class xPDO {
         if (!$this->connect()) {
             return false;
         }
-        return $this->pdo->prepare($statement, $driver_options= array ());
+        return $this->pdo->prepare($statement, $driver_options);
     }
 
     /**
