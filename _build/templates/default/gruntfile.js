@@ -34,11 +34,11 @@ module.exports = function(grunt) {
 			src: './lib/bourbon/',
 			dest: './sass/',
 			force:true
-		}/*,
+		},
 		raw: {
 			src: './sass/raw.css',
 			dest: './sass/_raw.scss'
-		}*/
+		}
 	},
 	asciify:{
 		dontEdit: {
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 	        banner: '/*!\n <%= asciify_dontEdit %> \n see _build/templates/default/README.md\n*/\n'
 	      },
 	      files: {
-	        src: ['../../../manager/templates/default/css/*.css' ]
+	        src: ['../../../manager/templates/default/css/index.css','../../../manager/templates/default/css/login.css' ]
 	      }
 	    }
 	  },
@@ -154,6 +154,6 @@ module.exports = function(grunt) {
   // Tasks
 
   grunt.registerTask('default', ['sass:dev','asciify','usebanner','watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','rename','sass','asciify','usebanner','growl:sass']);
+  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass','asciify','usebanner','growl:sass']);
   grunt.registerTask('prod',['sass:dist']);
 };
