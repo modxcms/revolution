@@ -4,7 +4,6 @@
 @import "user-select";
 @import "box-sizing"; 
 @import "box-shadow";
-@import "transition";
 @import "colors-and-vars";
 @import "type";
 @import "tabs";
@@ -237,7 +236,7 @@ input::-moz-focus-inner {
     border: none;
     color: inherit;
     opacity: 1;
-    filter: alpha(opacity=100);
+    /*filter: alpha(opacity=100);*/
 }
 
 /* console */
@@ -356,7 +355,7 @@ input::-moz-focus-inner {
 
 /* filetree */
 /*.icon-ob{background-image:url(../../../assets/modext/util/filetree/img/icons/ob_16.png)!important}.icon-graph{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/chart_curve.png)!important}.icon-chart{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/chart_bar.png)!important}.icon-prefs{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_form.png)!important}.icon-ok{background-image:url(../../../assets/modext/util/filetree/img/icons/ok16.png)!important}.icon-view-tile{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_view_tile.png)!important}.icon-check,.icon-check-off{background-image:url(../ext/resources/images/default/menu/unchecked.gif)!important}.icon-check-on{background-image:url(../ext/resources/images/default/menu/checked.gif)!important}.icon-stat-data{background-image:url(../../../assets/modext/util/filetree/img/icons/kate_16.png)!important}.icon-rename{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/textfield_rename.png)!important}.icon-add-col{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_add.png)!important}.icon-del-col{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_delete.png)!important}.icon-save-table{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/table_save.png)!important}.icon-add-tab{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/tab_add.png)!important}.icon-del-tab{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/tab_delete.png)!important}.icon-go-tab{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/tab_go.png)!important}.icon-add-table{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/table_add.png)!important}.icon-del-table{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/table_delete.png)!important}.icon-admin{background-image:url(../../../assets/modext/util/filetree/img/icons/adv_settings_16.png)!important}.icon-grid{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/grid.png)!important}.icon-key{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/key.png)!important}.icon-key2{background-image:url(../../../assets/modext/util/filetree/img/icons/key_16.png)!important}.icon-expand-all{background-image:url(../../../assets/modext/util/filetree/img/icons/expand-all.gif)!important}.icon-collapse-all{background-image:url(../../../assets/modext/util/filetree/img/icons/collapse-all.gif)!important}.icon-tree-orgboard{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/chart_organisation.png)!important}.icon-tree-area{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/post_title.png)!important}.icon-tree-post{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white.png)!important}.icon-plus{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/add.png)!important}.icon-minus{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/delete.png)!important}.icon-house{background-image:url(../../../assets/modext/util/filetree/img/icons/house_16.png)!important}.icon-user{background-image:url(../../../assets/modext/util/filetree/img/icons/user2_16.png)!important}.icon-trash-empty{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/bin_empty.png)!important}.icon-trash-closed{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/bin_closed.png)!important}.icon-disk{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/disk.png)!important}.icon-disk-bullet{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/bullet_disk.png)!important}.icon-undo{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/arrow_undo.png)!important}.icon-loading{background-image:url(../ext/resources/images/default/grid/grid-loading.gif)!important}.icon-db-refresh{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/database_refresh.png)!important}.icon-magnifier{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/magnifier.png)!important}.icon-wrench{background-image:url(../../../assets/modext/util/filetree/img/icons/wrench_16.png)!important}.icon-wrench-orange{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/wrench_orange.png)!important}.icon-star{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/star.png)!important}.icon-lock-go{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/lock_go.png)!important}.icon-group-add{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/group_add.png)!important}.icon-group-del{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/group_delete.png)!important}.icon-stat-portal{background-image:url(../../../assets/modext/util/filetree/img/icons/stat_portal_16.png)!important}.icon-stat-list{background-image:url(../../../assets/modext/util/filetree/img/icons/stat_list_16.png)!important}.icon-cancel{background-image:url(../../../assets/modext/util/filetree/img/icons/cancel16.png)!important}.icon-cross{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/cross.png)!important}.icon-defaults{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/arrow_rotate_clockwise.png)!important}.icon-load{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/database_go.png)!important}.icon-working{background-image:url(../ext/resources/images/default/grid/wait.gif)!important}.icon-upload{background-image:url(../../../assets/modext/util/filetree/img/icons/up.png)!important}.icon-folder-add{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/folder_add.png)!important}.icon-open{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_go.png)!important}.icon-open-self{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application.png)!important}.icon-open-popup{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_double.png)!important}.icon-open-blank{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_cascade.png)!important}.icon-open-download{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_put.png)!important}.icon-refresh{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/arrow_refresh.png)!important}.icon-pencil{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/pencil.png)!important}.icon-stop{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/control_stop.png)!important}.icon-email{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/email.png)!important}.icon-email-compose{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/email_edit.png)!important}.icon-coins{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/coins.png)!important}.icon-clock{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/clock.png)!important}.icon-zoom{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/zoom.png)!important}.icon-print{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/printer.png)!important}.icon-folder-component{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/folder_brick.png)!important}.icon-extension{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/brick.png)!important}.icon-function{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/flag_yellow.png)!important}.icon-bulb{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/lightbulb.png)!important}.icon-bulb-off{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/lightbulb_off.png)!important}.icon-copy{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_copy.png)!important}.icon-db-gear,.icon-reconfigure{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/database_gear.png)!important}
-*/.ux-up-item{line-height:17px;height:17px;cursor:default;margin-bottom:1px;position:relative;background-color:#f0f0f0;background-image:url(../../../assets/modext/util/filetree/img/white_bg.png);background-repeat:no-repeat}.ux-up-icon-file{width:16px;height:16px;vertical-align:-3px;margin-right:4px;float:left}.ux-up-indicator{background-color:#FF0;height:17px;width:40px;position:absolute;opacity: 0.4;filter: alpha(opacity=40);}.ux-up-icon-state{width:16px;float:right;margin-right:2px;cursor:pointer;z-index:-1}.ux-up-icon-queued{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_get.png)}.ux-up-icon-uploading{background-image:url(../../../../ext2/resources/images/default/grid/wait.gif)}.ux-up-icon-done{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/accept.png)}.ux-up-icon-failed{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/error.png)}.ux-up-icon-stopped{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/stop.png)}.ux-up-text{float:left}.ux-ftm-nodename{color:#000;font-weight:700;cursor:default!important}.ux-icon-combo-icon{background-repeat:no-repeat;background-position:0 50%;width:18px;height:14px}.ux-icon-combo-input{padding-left:25px}.x-form-field-wrap .ux-icon-combo-icon{top:3px;left:5px}.ux-icon-combo-item{background-repeat:no-repeat!important;background-position:3px 50%!important;padding-left:24px!important}
+*/.ux-up-item{line-height:17px;height:17px;cursor:default;margin-bottom:1px;position:relative;background-color:#f0f0f0;background-image:url(../../../assets/modext/util/filetree/img/white_bg.png);background-repeat:no-repeat}.ux-up-icon-file{width:16px;height:16px;vertical-align:-3px;margin-right:4px;float:left}.ux-up-indicator{background-color:#FF0;height:17px;width:40px;position:absolute;opacity: 0.4;/*filter: alpha(opacity=40);*/}.ux-up-icon-state{width:16px;float:right;margin-right:2px;cursor:pointer;z-index:-1}.ux-up-icon-queued{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_get.png)}.ux-up-icon-uploading{background-image:url(../../../../ext2/resources/images/default/grid/wait.gif)}.ux-up-icon-done{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/accept.png)}.ux-up-icon-failed{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/error.png)}.ux-up-icon-stopped{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/stop.png)}.ux-up-text{float:left}.ux-ftm-nodename{color:#000;font-weight:700;cursor:default!important}.ux-icon-combo-icon{background-repeat:no-repeat;background-position:0 50%;width:18px;height:14px}.ux-icon-combo-input{padding-left:25px}.x-form-field-wrap .ux-icon-combo-icon{top:3px;left:5px}.ux-icon-combo-item{background-repeat:no-repeat!important;background-position:3px 50%!important;padding-left:24px!important}
 
 /* status messages */
 .modx-status-msg {
@@ -368,7 +367,7 @@ input::-moz-focus-inner {
     background: #f4f4f4;
     padding: 5px;
     opacity: .8;
-    filter: alpha(opacity=80);
+    /*filter: alpha(opacity=80);*/
     margin: 0;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -704,7 +703,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .modx-tv-label:hover .modx-tv-reset {
     opacity: 100;
-    filter: alpha(opacity=100);
+    /*filter: alpha(opacity=100);*/
 }
 .modx-tv-label-title {
     float: left;
@@ -718,7 +717,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .modx-tv-reset {
     opacity: 0;
-    filter: alpha(opacity=0);
+    /*filter: alpha(opacity=0);*/
 
     float: left;
     width: 16px;
@@ -979,8 +978,8 @@ body.ext-ie7 .x-superboxselect-item {
 
 .package-installed {
     opacity: .5;
-    filter: alpha(opacity=50);
-    color: gray;
+    /*filter: alpha(opacity=50);*/
+    color: gray; 
 }
 #modx-grid-package .green { text-align: center; }
 #modx-grid-package .green a{ color: red !important; }
@@ -1064,7 +1063,7 @@ body.ext-ie7 .x-superboxselect-item {
 .pbr-details-right { float: right !important; text-align: right !important; }
 .pbr-thumb-downloaded {
     opacity: .5;
-    filter: alpha(opacity=50);
+    /*filter: alpha(opacity=50);*/
 }
 
 #package-browser-card-container{
@@ -1321,7 +1320,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 .thumb-wrapper.selected{
 	background-color: #FFFFFF;
-    padding: 0 0 12px;
+    padding: 0 0 12px;   
 }
 
 .thumb-wrapper.selected img{
@@ -1397,3 +1396,5 @@ body.ext-ie7 .x-superboxselect-item {
 	padding: 5px;
 	font-size: 13px;
 }
+
+@import "raw";
