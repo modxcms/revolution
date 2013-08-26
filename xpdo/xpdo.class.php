@@ -2899,10 +2899,11 @@ class xPDOIterator implements Iterator {
     }
 
     public function next() {
-        if ($this->fetch()) {
-            $this->index++;
-        } else {
+        $this->fetch();
+        if (!$this->valid()) {
             $this->index = null;
+        } else {
+            $this->index++;
         }
         return $this->current();
     }
