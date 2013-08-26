@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.8-pl (August 26, 2013)
+====================================
 - [#9864] Identify compound PK's properly in xPDOQuery::parseConditions()
 
 xPDO 2.2.7-pl (April 9, 2013)
