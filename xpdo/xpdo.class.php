@@ -270,25 +270,27 @@ class xPDO {
      * @param array|null $config An optional array of config data for the instance.
      * @param bool $forceNew If true a new instance will be created even if an instance
      * with the provided $id already exists in xPDO::$instances.
+     * @throws xPDOException If a valid instance is not retrieved.
      * @return xPDO An instance of xPDO.
      */
     public static function getInstance($id = null, $config = null, $forceNew = false) {
+        $instances =& self::$instances;
         if (is_null($id)) {
-            if (!is_null($config) || $forceNew || empty(self::$instances)) {
+            if (!is_null($config) || $forceNew || empty($instances)) {
                 $id = uniqid(__CLASS__);
             } else {
-                $id = key(self::$instances);
+                $id = key($instances);
             }
         }
-        if ($forceNew || !array_key_exists($id, self::$instances) || !(self::$instances[$id] instanceof xPDO)) {
-            self::$instances[$id] = new xPDO(null, null, null, $config);
-        } elseif (self::$instances[$id] instanceof xPDO && is_array($config)) {
-            self::$instances[$id]->config = array_merge(self::$instances[$id]->config, $config);
+        if ($forceNew || !array_key_exists($id, $instances) || !($instances[$id] instanceof xPDO)) {
+            $instances[$id] = new xPDO(null, null, null, $config);
+        } elseif ($instances[$id] instanceof xPDO && is_array($config)) {
+            $instances[$id]->config = array_merge($instances[$id]->config, $config);
         }
-        if (!(self::$instances[$id] instanceof xPDO)) {
+        if (!($instances[$id] instanceof xPDO)) {
             throw new xPDOException("Error getting " . __CLASS__ . " instance, id = {$id}");
         }
-        return self::$instances[$id];
+        return $instances[$id];
     }
 
     /**
