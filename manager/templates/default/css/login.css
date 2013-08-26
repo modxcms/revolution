@@ -1,3 +1,17 @@
+/*!
+   __                                          __                           __             __      
+ /\ \                                        /\ \__                       /\ \     __    /\ \__   
+ \_\ \     ___                ___      ___   \ \ ,_\                __    \_\ \   /\_\   \ \ ,_\  
+ /'_` \   / __`\            /' _ `\   / __`\  \ \ \/              /'__`\  /'_` \  \/\ \   \ \ \/  
+/\ \L\ \ /\ \L\ \           /\ \/\ \ /\ \L\ \  \ \ \_            /\  __/ /\ \L\ \  \ \ \   \ \ \_ 
+\ \___,_\\ \____/           \ \_\ \_\\ \____/   \ \__\           \ \____\\ \___,_\  \ \_\   \ \__\
+ \/__,_ / \/___/             \/_/\/_/ \/___/     \/__/            \/____/ \/__,_ /   \/_/    \/__/
+                                                                                                  
+                                                                                                  
+ 
+ see _build/templates/default/README.md
+*/
+
 html {
   font-size: 100.01%;
   /* avoids obscure font-size bug */
@@ -6,7 +20,7 @@ html {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif !important;
   /* IE ignores this and renders Arial better */
   font-family: Arial, Tahoma, Helvetica, sans-serif;
-  color: #111;
+  color: #111111;
   width: 100%;
   height: 100%; }
 
@@ -22,7 +36,7 @@ body {
   font-weight: bold; }
 
 .success {
-  color: #090;
+  color: #009900;
   font-weight: bold; }
 
 #container {
@@ -39,19 +53,19 @@ body {
   border: 1px solid #e0e0e0; }
 
 img.loginCaptcha {
-  border: 1px solid #039;
+  border: 1px solid #003399;
   width: 148px;
   height: 60px; }
 
 .loginLicense {
   width: 460px;
-  color: #555;
+  color: #555555;
   margin: 0 auto;
   font-size: 90%;
   padding-left: 20px; }
 
 #modx-login-form-panel {
-  border: 1px solid #ddd; }
+  border: 1px solid #dddddd; }
 
 .x-panel-tl, .x-panel-tl .x-panel-header {
   padding: 3px 5px;
@@ -65,7 +79,7 @@ img.loginCaptcha {
 .login-form-bwrap {
   padding: 5px;
   background-color: white;
-  color: #eee;
+  color: #eeeeee;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px; }
@@ -78,7 +92,7 @@ img.loginCaptcha {
   padding-bottom: 10px; }
 
 h2 {
-  color: #eee; }
+  color: #eeeeee; }
 
 .x-panel-ml {
   padding: 10px 20px 22px;
@@ -92,28 +106,28 @@ h2 {
 
 .x-btn:hover {
   background: #dfdfdf;
-  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, white 100%) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dfdfdf));
-  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
-  background: -o-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
-  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #ffffff 100%) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #dfdfdf));
+  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, #ffffff 100%);
+  background: -o-linear-gradient(center bottom, #dfdfdf 0%, #ffffff 100%);
+  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dfdfdf,GradientType=0);
-  background: linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: linear-gradient(center bottom, #dfdfdf 0%, #ffffff 100%);
   border: 1px solid #9caf78; }
 
 .x-btn:hover button {
-  color: #636F4C;
-  text-shadow: 0 1px 0 #ffffff; }
+  color: #636f4c;
+  text-shadow: 0 1px 0 white; }
 
 .x-btn:active {
   -moz-box-shadow: 0 0 3px #aaaaaa inset;
   -webkit-box-shadow: 0 0 3px #aaaaaa inset;
   -o-box-shadow: 0 0 3px #aaaaaa inset;
   box-shadow: 0 0 3px #aaaaaa inset;
-  background-color: #ffffff;
+  background-color: white;
   background-image: none;
   margin: 0 1px;
-  border-color: #CFCFCF #C0C0C0 #AAAAAA; }
+  border-color: #cfcfcf silver #aaaaaa; }
 
 .modx-forgot-login {
   float: left;
@@ -121,7 +135,7 @@ h2 {
 
 a {
   text-decoration: none;
-  color: #bbb; }
+  color: #bbbbbb; }
 
 a:hover {
   text-decoration: underline; }
@@ -156,7 +170,7 @@ label {
   padding: 9px 0 10px 0; }
 
 .x-form-check-wrap .x-form-cb-label {
-  color: #bbb; }
+  color: #bbbbbb; }
 
 .login-cb-col {
   width: 50%;
@@ -169,12 +183,13 @@ label {
   white-space: nowrap;
   margin: 2px 0 0 2px; }
 
+
 .login-form-btn {
   padding: 8px 18px;
-  background: #eee;
+  background: #eeeeee;
   font: bold 13px arial, tahoma, helvetica, sans-serif;
-  color: #555;
-  border: 2px solid #ddd;
+  color: #555555;
+  border: 2px solid #dddddd;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -183,19 +198,19 @@ label {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   background: url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 bottom gainsboro;
-  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
-  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -moz-linear-gradient(center bottom, #dcdcdc 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, #dcdcdc));
+  background: -webkit-linear-gradient(center bottom, #dcdcdc 0%, #fcfcfc 100%);
+  background: -o-linear-gradient(center bottom, #dcdcdc 0%, #fcfcfc 100%);
+  background: -ms-linear-gradient(center bottom, #dcdcdc 0%, #fcfcfc 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-  background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%); }
+  background: linear-gradient(center bottom, #dcdcdc 0%, #fcfcfc 100%); }
 
 #modx-login-btn {
   float: right; }
 
 #modx-login-btn:hover {
-  background: #ddd; }
+  background: #dddddd; }
 
 #modx-fl-btn {
   margin-left: 0; }
@@ -211,9 +226,9 @@ label {
   bottom: 0;
   left: 0;
   padding: 4px;
-  color: #888; }
+  color: #888888; }
 
 #modx-login-language-select {
-  border: 1px solid #aaa;
-  background: #eee;
+  border: 1px solid #aaaaaa;
+  background: #eeeeee;
   position: relative; }
