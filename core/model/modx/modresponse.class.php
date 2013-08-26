@@ -186,7 +186,7 @@ class modResponse {
             }
             @session_write_close();
             echo $this->modx->resource->_output;
-            while (@ob_end_flush()) {}
+            while (ob_get_level() && @ob_end_flush()) {}
             flush();
             exit();
         }

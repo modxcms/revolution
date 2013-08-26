@@ -13,6 +13,11 @@ development release, and is only shown to give an idea of what's currently in th
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
 
+- Avoid critical error when resource tree not initialized
+- Avoid suppressed warnings with ob_get_level()
+- Upgrade xPDO to 2.2.8-pl
+- [#10043] Fix class-loading LFI in registerLogging
+- [#6937] Fix Persistent/Reflected XSS in User Messaging
 - Set default error_handler_types to error_reporting()
 - Upgrade to ExtJS 3.4.1.1 and add ExtJS debug support
 - [#9976] Fix cross-context symlink caching
