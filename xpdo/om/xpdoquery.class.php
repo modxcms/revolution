@@ -514,8 +514,12 @@ abstract class xPDOQuery extends xPDOCriteria {
     /**
      * Hydrates a graph of related objects from a single result set.
      *
-     * @param array $rows A collection of result set rows for hydrating the graph.
-     * @return array A collection of objects with all related objects from the graph pre-populated.
+     * @param array|PDOStatement $rows A collection of result set rows or an
+     * executed PDOStatement to fetch rows from to hydrating the graph.
+     * @param bool $cacheFlag Indicates if the objects should be cached and
+     * optionally, by specifying an integer value, for how many seconds.
+     * @return array A collection of objects with all related objects from the
+     * graph pre-populated.
      */
     public function hydrateGraph($rows, $cacheFlag = true) {
         $instances= array ();

@@ -308,6 +308,7 @@ class xPDO {
      * table names that might need to coexist in a single database container. It is preferrable to
      * include the table_prefix option in the array for future compatibility.
      * @param array|null $driverOptions Driver-specific PDO options.
+     * @throws xPDOException If an error occurs creating the instance.
      * @return xPDO A unique xPDO instance.
      */
     public function __construct($dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
@@ -439,7 +440,9 @@ class xPDO {
     /**
      * Get or create a PDO connection to a database specified in the configuration.
      *
-     * @param array $driverOptions An optional array of driver options to use when creating the connection.
+     * @param array $driverOptions An optional array of driver options to use
+     * when creating the connection.
+     * @param array $options An array of xPDO options for the connection.
      * @return boolean Returns true if the PDO connection was created successfully.
      */
     public function connect($driverOptions= array (), array $options= array()) {
@@ -469,7 +472,6 @@ class xPDO {
      * @return bool
      */
     public function setPackage($pkg= '', $path= '', $prefix= null) {
-        $set= false;
         if (empty($path) && isset($this->packages[$pkg])) {
             $path= $this->packages[$pkg]['path'];
             $prefix= !is_string($prefix) && array_key_exists('prefix', $this->packages[$pkg]) ? $this->packages[$pkg]['prefix'] : $prefix;
@@ -577,6 +579,9 @@ class xPDO {
      *    XPDO_CORE_PATH/om/dir_a/dir_b/dir_c/dbtype/classname.class.php
      *
      * @param string $fqn The fully-qualified name of the class to load.
+     * @param string $path An optional path to start the search from.
+     * @param bool $ignorePkg True if currently loaded packages should be ignored.
+     * @param bool $transient True if the class is not a persistent table class.
      * @return string|boolean The actual classname if successful, or false if
      * not.
      */
@@ -1126,7 +1131,8 @@ class xPDO {
      * provide a convenient location for similar features in the future.
      *
      * @param string $className A valid xPDOObject derivative table class.
-     * @param xPDOCriteria $criteria A valid xPDOCriteria instance.
+     * @param xPDOQuery $criteria A valid xPDOQuery instance.
+     * @return xPDOQuery The xPDOQuery instance with derivative criteria added.
      */
     public function addDerivativeCriteria($className, $criteria) {
         if ($criteria instanceof xPDOQuery && !isset($this->map[$className]['table'])) {
@@ -1315,7 +1321,7 @@ class xPDO {
     /**
      * Indicates the inheritance model for the xPDOObject class specified.
      *
-     * @param $className The class to determine the table inherit type from.
+     * @param string $className The class to determine the table inherit type from.
      * @return string single, multiple, or none
      */
     public function getInherit($className) {
@@ -1566,11 +1572,11 @@ class xPDO {
     /**
      * Gets the type of primary key field for a class.
      *
-     * @param string className The name of the class to lookup the primary key
+     * @param string $className The name of the class to lookup the primary key
      * type for.
+     * @param mixed $pk Optional specific PK column or columns to get type(s) for.
      * @return string The type of the field representing a class instance primary
      * key, or null if no primary key is found or defined for the class.
-     * @todo Refactor method to return array of types rather than compound!
      */
     public function getPKType($className, $pk= false) {
         $pktype= null;
@@ -1698,8 +1704,8 @@ class xPDO {
     /**
      * Retrieves the complete ancestry for a class.
      *
-     * @param string className The name of the class.
-     * @param boolean includeSelf Determines if the specified class should be
+     * @param string $className The name of the class.
+     * @param bool $includeSelf Determines if the specified class should be
      * included in the resulting array.
      * @return array An array of string class names representing the class
      * hierarchy, or an empty array if unsuccessful.
@@ -2047,7 +2053,6 @@ class xPDO {
      * @return string The string representation of a valid logging level.
      */
     protected function _getLogLevel($level) {
-        $levelText= '';
         switch ($level) {
             case xPDO::LOG_LEVEL_DEBUG :
                 $levelText= 'DEBUG';
@@ -2836,9 +2841,11 @@ class xPDOIterator implements Iterator {
     private $xpdo = null;
     private $index = 0;
     private $current = null;
+    /** @var null|PDOStatement */
     private $stmt = null;
     private $class = null;
     private $alias = null;
+    /** @var null|int|str|array|xPDOQuery */
     private $criteria = null;
     private $criteriaType = 'xPDOQuery';
     private $cacheFlag = false;
