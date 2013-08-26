@@ -2264,7 +2264,7 @@ class xPDO {
                     }
                 }
                 if (empty($sigKey) && is_string($signature)) $sigKey= $signature;
-                if (empty($sigKey) && object instanceof xPDOObject) $sigKey= $object->getPrimaryKey();
+                if (empty($sigKey) && $object instanceof xPDOObject) $sigKey= $object->getPrimaryKey();
                 if ($sigClass && $sigKey) {
                     $sigHash= md5($this->toJSON(is_array($sigKey) ? $sigKey : array($sigKey)));
                     $sig= implode('/', array ($sigClass, $sigHash));
