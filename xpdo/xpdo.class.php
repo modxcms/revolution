@@ -1110,7 +1110,7 @@ class xPDO {
         if ($type === 'object') {
             $type = get_class($criteria);
             if (!$criteria instanceof xPDOCriteria) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Invalid criteria object of class {$type} encountered.", '', __METHOD__, __FILE__, __LINE__);
+                $this->log(xPDO::LOG_LEVEL_WARN, "Invalid criteria object of class {$type} encountered.", '', __METHOD__, __FILE__, __LINE__);
                 $type = null;
             }
         }
