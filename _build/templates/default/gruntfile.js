@@ -127,6 +127,10 @@ module.exports = function(grunt) {
 		build : {
 			title : "grunt",
 			message : "Build complete"
+		},
+		watch : {
+			title : "grunt",
+			message : "Watching. Grunt has its eye on you."
 		}
 	}
   });
@@ -148,7 +152,7 @@ module.exports = function(grunt) {
 
   // Tasks
 
-  grunt.registerTask('default', ['sass:dev','asciify','usebanner','watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass','asciify','usebanner','growl:sass']);
-  grunt.registerTask('prod',['sass:dist']);
+  grunt.registerTask('default', ['sass:dev','growl:sass','asciify','usebanner','watch','growl:watch']);
+  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass','growl:sass','asciify','usebanner']);
+  grunt.registerTask('prod',['sass:dist','growl:sass']);
 };
