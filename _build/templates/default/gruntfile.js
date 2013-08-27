@@ -152,7 +152,7 @@ module.exports = function(grunt) {
 
   // Tasks
 
-  grunt.registerTask('default', ['sass:dev','growl:sass','asciify','usebanner','watch','growl:watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass','growl:sass','asciify','usebanner']);
+  grunt.registerTask('default', ['sass:dev','growl:sass','asciify','usebanner','watch','grunt:watch']);
+  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass','grunt:sass','asciify','usebanner']);
   grunt.registerTask('prod',['sass:dist','growl:sass']);
 };
