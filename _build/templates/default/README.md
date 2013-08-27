@@ -23,7 +23,7 @@ Installing Grunt & Grunt Packages
 First, clone a copy of this git repo by running:
 
 ```bash
-git clone -b grunt git://github.com/rthrash/revolution.git
+git clone -b gruntjs git://github.com/rthrash/revolution.git
 ```
 
 Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) and [bower](http://bower.io/) packages if you haven't before. These should be done as global installs:
