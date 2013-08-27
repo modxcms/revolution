@@ -41,7 +41,7 @@ class SystemSettingsManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $onSiteSettingsRender = $this->modx->invokeEvent('OnSiteSettingsRender');
         if (is_array($onSiteSettingsRender)) {
-            $this->onSiteSettingsRender = implode("\n",$onSiteSettingsRender);
+            $this->onSiteSettingsRender = implode("\"\n+ \"",$onSiteSettingsRender);
         }
     }
 
