@@ -77,33 +77,28 @@ module.exports = function(grunt) {
 		dest: 'assets/js/main-min.js'
       }
     },*/
-	sass: { /* compile Sass */
-		options: {
-			trace: true,
-			compass: true//,
-			/*loadPath: [
-				'lib/matter'
-			]*/
-		},
-		dist: {
-			options: {
-				outputStyle: 'compressed'
-			},
-			files: {
-				'../../../manager/templates/default/css/index.css' : 'sass/index.scss',
-				'../../../manager/templates/default/css/login.css' : 'sass/login.scss'
-			}
-		},
-		dev: {
-			options: {
-				outputStyle: 'nested'
-			},
-			files: {
-				'../../../manager/templates/default/css/index.css' : 'sass/index.scss',
-				'../../../manager/templates/default/css/login.css' : 'sass/login.scss'
-			}
-		} 
-	},
+  sass: {                             
+    dist: {                           
+      options: {                      
+        style: 'expanded',
+        compass: true
+      },
+      files: {                        
+'../../../manager/templates/default/css/index.css' : 'sass/index.scss',
+'../../../manager/templates/default/css/login.css' : 'sass/login.scss'
+      }
+    },
+    dev: {                           
+      options: {                     
+        style: 'expanded',
+        compass:true,
+      },
+      files: {                        
+'../../../manager/templates/default/css/index.css' : 'sass/index.scss',
+'../../../manager/templates/default/css/login.css' : 'sass/login.scss'
+      }
+    }
+  },
 	watch: { /* trigger tasks on save */
 		options: {
 			livereload: true
@@ -140,7 +135,7 @@ module.exports = function(grunt) {
   //grunt.renameTask( 'bower', 'bowerInstall' );
   //grunt.loadNpmTasks( 'grunt-bower' );
   grunt.loadNpmTasks( 'grunt-rename' );
-  grunt.loadNpmTasks( 'grunt-sass' );
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
   grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks( 'grunt-contrib-concat' );
