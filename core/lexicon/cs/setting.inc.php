@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2013-04-07
+ * @updated 2013-08-27
  */
 // $_lang['area'] = 'Area';
 $_lang['area'] = 'Oblast';
@@ -551,6 +551,12 @@ $_lang['setting_error_page_desc'] = 'Zadejte ID dokumentu, na který chcete pře
 
 // $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
 $_lang['setting_error_page_err'] = 'Zadejte ID dokumentu, který bude sloužit jako chybová stránka.';
+
+// $_lang['setting_ext_debug'] = 'ExtJS debug';
+$_lang['setting_ext_debug'] = 'ExtJS debug';
+
+// $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to help debug your ExtJS code.';
+$_lang['setting_ext_debug_desc'] = 'Pokud chcete načíst ext-all-debug.js pro jednodušší ladění ExtJS kódu.';
 
 // $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages'] = 'Rozšíření balíčky';
