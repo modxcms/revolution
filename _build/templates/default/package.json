@@ -1,0 +1,17 @@
+{
+  "name": "revolution",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-bower-task": "~0.3.1",
+    "grunt-rename": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-grunticon": "~0.6.8",
+    "grunt-banner": "~0.1.4",
+    "grunt-asciify": "~0.2.1",
+    "grunt-growl": "~0.1.5",
+    "grunt-contrib-sass": "~0.5.0"
+  }
+}
