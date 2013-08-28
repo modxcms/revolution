@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.9-pl (August 28, 2013)
+====================================
 - Avoid critical error when resource tree not initialized
 - Avoid suppressed warnings with ob_get_level()
 - Upgrade xPDO to 2.2.8-pl
