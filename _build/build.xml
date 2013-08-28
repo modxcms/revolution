@@ -45,11 +45,12 @@
     <target name="complete" description="--> Complete Build">
         <phingcall target="prepare-build-image" />
         <phingcall target="git-export-build-image" />
-        <phingcall target="generate-core-transport" />
         <!--<phingcall target="copy-core-transport" />-->
         <phingcall target="prepare-build-distrib" />
-        <phingcall target="generate-phpdocs" />
+        <!--<phingcall target="generate-phpdocs" />-->
+        <phingcall target="generate-core-transport" />
         <phingcall target="build-sdk" />
+        <phingcall target="generate-core-transport" />
         <phingcall target="build-traditional" />
         <phingcall target="build-advanced" />
     </target>
@@ -156,7 +157,7 @@
     </target>
 
     <!-- Build a MODX SDK distrib with all files in place and extracted -->
-    <target name="build-sdk" description="create the traditional distribution package" if="build.distrib" unless="build.nodocs">
+    <target name="build-sdk" description="create the SDK distribution package" if="build.distrib">
         <if>
             <istrue value="${build.timestamp}" />
             <then>
@@ -180,9 +181,9 @@
                 </replacetokens>
             </filterchain>
         </reflexive>
-        <copy todir="${build.image.dir}/docs">
+        <!--<copy todir="${build.image.dir}/docs">
             <fileset dir="${build.apidocs.dir}" />
-        </copy>
+        </copy>-->
         <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/config.core.php">
             <filterchain>
                 <replacetokens>
@@ -205,7 +206,9 @@
             </filterchain>
         </copy>
         <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
-            <fileset dir="${build.image.dir}" />
+            <fileset dir="${build.image.dir}">
+                <include name="**" />
+            </fileset>
         </zip>
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
@@ -225,6 +228,12 @@
         <delete file="${build.image.dir}/manager/config.core.php" />
         <delete file="${build.image.dir}/connectors/config.core.php" />
         <delete dir="${build.image.dir}/docs" includeemptydirs="true" />
+        <delete>
+            <fileset dir="${build.image.dir}">
+                <include name="manager/assets/ext3/ext-all-debug.js" />
+                <include name="manager/assets/ext3/adapter/ext/ext-base-debug.js" />
+            </fileset>
+        </delete>
     </target>
 
     <!-- Build a traditional MODX distrib with all files in place and extracted -->
@@ -276,6 +285,7 @@
         <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
             <fileset dir="${build.image.dir}">
                 <exclude name="_build/**" />
+                <exclude name="manager/assets/ext3/**/*-debug.js" />
                 <include name="**/.gitignore" />
                 <include name=".gitignore" />
                 <include name="ht.access" />
