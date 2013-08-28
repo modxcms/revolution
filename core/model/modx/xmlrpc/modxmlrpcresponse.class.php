@@ -54,8 +54,8 @@ class modXMLRPCResponse extends modResponse {
         }
 
         $this->server->service();
-        @ ob_end_flush();
-        while (@ ob_end_clean()) {}
+        ob_get_level() && @ob_end_flush();
+        while (ob_get_level() && @ob_end_clean()) {}
         exit();
     }
 

@@ -87,18 +87,20 @@ Ext.extend(MODx.Console,Ext.Window,{
             }
         });
         Ext.Direct.addProvider(this.provider);
-        Ext.Direct.on('message', function(e,p) {
-            var out = this.getComponent('body');
-            if (out) {
-                out.el.insertHtml('beforeEnd',e.data);
-                e.data = '';
-                out.el.scroll('b', out.el.getHeight(), true);
-            }
-            if (e.complete) {
-                this.fireEvent('complete');
-            }
-            delete e;
-        },this);
+        Ext.Direct.on('message', this.onMessage, this);
+    }
+
+    ,onMessage: function(e,p) {
+        var out = this.getComponent('body');
+        if (out) {
+            out.el.insertHtml('beforeEnd',e.data);
+            e.data = '';
+            out.el.scroll('b', out.el.getHeight(), true);
+        }
+        if (e.complete) {
+            this.fireEvent('complete');
+        }
+        delete e;
     }
 
     ,onComplete: function() {

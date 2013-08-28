@@ -3,7 +3,7 @@
  * @var modInstall $install
  * @var modInstallParser $parser
  * @var modInstallRequest $this
- * 
+ *
  * @package setup
  */
 $install->settings->check();
@@ -47,7 +47,7 @@ if (file_exists(MODX_INSTALL_PATH . 'manager/index.php') &&
     file_exists(MODX_INSTALL_PATH . 'index.php') &&
     file_exists(MODX_INSTALL_PATH . 'connectors/index.php')
 ) {
-    $files_exist = !in_array(MODX_SETUP_KEY, array('@advanced@', '@sdk@')) ? 1 : 0;
+    $files_exist = MODX_SETUP_KEY != '@advanced@' ? 1 : 0;
 }
 
 $manifest= 0;

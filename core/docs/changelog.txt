@@ -2,6 +2,37 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.9-pl (August 28, 2013)
+====================================
+- Avoid critical error when resource tree not initialized
+- Avoid suppressed warnings with ob_get_level()
+- Upgrade xPDO to 2.2.8-pl
+- [#10043] Fix class-loading LFI in registerLogging
+- [#6937] Fix Persistent/Reflected XSS in User Messaging
+- Set default error_handler_types to error_reporting()
+- Upgrade to ExtJS 3.4.1.1 and add ExtJS debug support
+- [#9976] Fix cross-context symlink caching
+- [#10093] Add create/update methods to S3 Media Sources
+- [#9902] Added error window when package download fails
+- [#10070] fix potential SQL injection vulnerability in modImport
+- [#9843] Added lang_topics field to create and update action window
+- [#10094] Defaults overwriting properties in ResourceCreateProcessor
+- [#10007] Fix parser logic when processing elements via API
+- [#10087] Avoid stat warnings with missing static sources
+- [#9809] Remove empty ULs in topmenu
+- [#7569] Add bottom border to collapsed panels
+- [#146] Also fire field change event on change event
+- Fix contextsAffected in resource/sort processor
+- [#9815] Improved manager redraw on browser resize
+- Fix clearcache timing issue with MODx.Console
+- Prevent accumulation of MODx.Console onMessage callbacks
+- Prevent session write errors from phpthumb cache
+- [#9964] Fix Import HTML to use context of parent
+- [#9916] Add TABLE to TRUNCATE command in flushSessions (SQLSRV)
+- [#9527] Fix password reset by user email
+- Fix login processor to use absolute url redirects for mgr
+- [#9826] Fix errant creation of Policy Templates
+
 MODX Revolution 2.2.8-pl (June 4, 2013)
 ====================================
 - Prevent empty HTTP_MODAUTH from succeeding

@@ -71,7 +71,7 @@ class modTemplate extends modElement {
             $msg = $isNew ? $this->xpdo->lexicon('template_err_create') : $this->xpdo->lexicon('template_err_save');
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
         }
-        
+
         return $saved;
     }
 
@@ -122,6 +122,7 @@ class modTemplate extends modElement {
             $this->filterOutput();
             $this->_processed= true;
         }
+        $this->xpdo->parser->setProcessingElement(false);
         return $this->_output;
     }
 
@@ -188,7 +189,7 @@ class modTemplate extends modElement {
 
     /**
      * Check to see if this Template is assigned the specified Template Var
-     * 
+     *
      * @param mixed $tvPk Either the ID, name or object of the Template Var
      * @return boolean True if the TV is assigned to this Template
      */

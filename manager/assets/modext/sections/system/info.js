@@ -1,6 +1,6 @@
 /**
  * Loads the system info page
- * 
+ *
  * @class MODx.page.SystemInfo
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -58,7 +58,7 @@ MODx.panel.SystemInfo = function(config) {
 		xtype: 'statictextfield'
 		,fieldLabel: _('extjs_version')
 		,name: 'extjs_version'
-		,value: '3.4.0'
+		,value: '3.4.1'
 	},{
 		xtype: 'statictextfield'
 		,fieldLabel: _('smarty_version')
@@ -123,13 +123,13 @@ MODx.panel.SystemInfo = function(config) {
 		,border: false
 		,cls:'main-wrapper'
 		,layout: 'form'
-		,defaults: { border: false, msgTarget: 'side', anchor: '97%' }
+		,defaults: { border: false, msgTarget: 'side', anchor: '100%' }
 		,items: [info]
 	}];
     Ext.applyIf(config,{
         id: 'modx-panel-system-info'
         ,url: MODx.config.connectors_url+'system/index.php'
-        ,layout: 'fit'
+        ,layout: 'anchor'
 		,cls: 'container'
         ,items: [{
             html: '<h2>'+_('view_sysinfo')+'</h2>'
@@ -147,6 +147,7 @@ MODx.panel.SystemInfo = function(config) {
         },{
             title: _('db_header')
             ,id: 'modx-sysinfo-dbtables'
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('db_info_' + MODx.config.dbtype)+'</p>'
                 ,id: 'modx-sysinfo-dbtables-msg'

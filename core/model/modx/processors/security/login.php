@@ -196,7 +196,9 @@ $response = array(
 );
 switch ($loginContext) {
     case 'mgr':
-        $manager_login_startup_url = $modx->getOption('manager_url', null, $returnUrl);
+        $manager_login_startup_url = !empty($returnUrl)
+            ? $returnUrl
+            : $modx->getOption('url_scheme') . $modx->getOption('http_host') . $modx->getOption('manager_url', null, MODX_MANAGER_URL);
         if (!empty($manager_login_startup)) {
             $manager_login_startup= intval($manager_login_startup);
             if ($manager_login_startup) $manager_login_startup_url .= '?id=' . $manager_login_startup;

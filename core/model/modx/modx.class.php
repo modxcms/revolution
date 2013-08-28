@@ -988,7 +988,7 @@ class modX extends xPDO {
      */
     public function sendError($type = '', $options = array()) {
         if (!is_string($type) || empty($type)) $type = $this->getOption('error_type', $options, 'unavailable');
-        while (@ob_end_clean()) {}
+        while (ob_get_level() && @ob_end_clean()) {}
         if (!XPDO_CLI_MODE) {
             $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Service temporarily unavailable');
             $errorMessage = $this->getOption('error_message', $options, '<p>Site temporarily unavailable.</p>');
@@ -1053,7 +1053,7 @@ class modX extends xPDO {
             $currentResource = array();
             if ($merge) {
                 $excludes = array_merge(
-                    explode(',', $this->getOption('forward_merge_excludes', $options, 'type,published,class_key,context_key')),
+                    explode(',', $this->getOption('forward_merge_excludes', $options, 'type,published,class_key')),
                     array(
                         'content'
                         ,'pub_date'
@@ -2290,7 +2290,7 @@ class modX extends xPDO {
             if ($ehClass = $this->getOption('error_handler_class', $options, 'modErrorHandler', true)) {
                 if ($ehClass= $this->loadClass($ehClass, '', false, true)) {
                     if ($this->errorHandler= new $ehClass($this)) {
-                        $result= set_error_handler(array ($this->errorHandler, 'handleError'), $this->getOption('error_handler_types', $options, null, true));
+                        $result= set_error_handler(array ($this->errorHandler, 'handleError'), $this->getOption('error_handler_types', $options, error_reporting(), true));
                         if ($result === false) {
                             $this->log(modX::LOG_LEVEL_ERROR, 'Could not set error handler.  Make sure your class has a function called handleError(). Result: ' . print_r($result, true));
                         }
@@ -2438,7 +2438,7 @@ class modX extends xPDO {
             }
         } else {
             if ($level === modX::LOG_LEVEL_FATAL) {
-                while (@ob_end_clean()) {}
+                while (ob_get_level() && @ob_end_clean()) {}
                 if ($targetObj == 'FILE' && $cacheManager= $this->getCacheManager()) {
                     $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
                     $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;

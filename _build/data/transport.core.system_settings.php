@@ -641,7 +641,7 @@ $settings['form_customization_use_all_groups']->fromArray(array (
 $settings['forward_merge_excludes']= $xpdo->newObject('modSystemSetting');
 $settings['forward_merge_excludes']->fromArray(array (
   'key' => 'forward_merge_excludes',
-  'value' => 'type,published,class_key,context_key',
+  'value' => 'type,published,class_key',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',

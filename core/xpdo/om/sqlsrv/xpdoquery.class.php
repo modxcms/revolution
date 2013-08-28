@@ -49,9 +49,8 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         $alias= $command == 'SELECT' ? $this->_class : $this->xpdo->getTableName($this->_class, false);
         $alias= trim($alias, $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose);
         if (is_array($conditions)) {
-            if (isset ($conditions[0]) && !$this->isConditionalClause($conditions[0]) && is_array($pk) && count($conditions) == count($pk)) {
+            if (isset($conditions[0]) && is_scalar($conditions[0]) && !$this->isConditionalClause($conditions[0]) && is_array($pk) && count($conditions) == count($pk)) {
                 $iteration= 0;
-                $sql= '';
                 foreach ($pk as $k) {
                     if (!isset ($conditions[$iteration])) {
                         $conditions[$iteration]= null;
@@ -69,7 +68,6 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
                     $iteration++;
                 }
             } else {
-                $bindings= array ();
                 reset($conditions);
                 while (list ($key, $val)= each($conditions)) {
                     if (is_int($key)) {

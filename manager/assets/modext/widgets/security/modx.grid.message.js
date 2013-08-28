@@ -4,7 +4,7 @@ MODx.panel.Messages = function(config) {
     Ext.applyIf(config,{
         id: 'modx-panel-message'
         ,url: MODx.config.connectors_url+'security/message.php'
-        ,layout: 'fit'
+        ,layout: 'anchor'
         ,bodyStyle: 'background: none;'
         ,cls: 'container form-with-labels'
         ,border: false
@@ -41,7 +41,7 @@ Ext.reg('modx-panel-messages',MODx.panel.Messages);
 
 /**
  * Loads a grid of Messages.
- * 
+ *
  * @class MODx.grid.Message
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -49,14 +49,19 @@ Ext.reg('modx-panel-messages',MODx.panel.Messages);
  */
 MODx.grid.Message = function(config) {
     config = config || {};
-    
+
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<span style="float: right;">'
-            ,'<i>'+_('sent_by')+': {sender_name} <br />'+_('sent_on')+': {date_sent}</i><br /><br />'
+            ,'<i>'+_('sent_by')+': {sender_name:this.htmlEncode} <br />'+_('sent_on')+': {date_sent}</i><br /><br />'
             ,'</span>'
-            ,'<h3>{subject}</h3>'
-            ,'<p>{message}</p>'
+            ,'<h3>{subject:this.htmlEncode}</h3>'
+            ,'<p>{message:this.htmlEncode}</p>'
+            , {
+                htmlEncode: function(value){
+                    return Ext.util.Format.htmlEncode(value);
+                }
+            }
         )
     });
     this.exp.on('expand',this.read,this);
@@ -78,10 +83,12 @@ MODx.grid.Message = function(config) {
             header: _('sender')
             ,dataIndex: 'sender_name'
             ,width: 120
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('subject')
             ,dataIndex: 'subject'
             ,width: 200
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('date_sent')
             ,dataIndex: 'date_sent'
@@ -196,7 +203,7 @@ Ext.reg('modx-grid-message',MODx.grid.Message);
 
 /**
  * Generates the new message window.
- *  
+ *
  * @class MODx.window.CreateMessage
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -279,14 +286,14 @@ MODx.window.CreateMessage = function(config) {
 };
 Ext.extend(MODx.window.CreateMessage,MODx.Window,{
     tps: ['user','usergroup','role','all']
-    
+
     ,initRecipient: function() {
         for (var i=1;i<this.tps.length;i++) {
             var f = this.fp.getForm().findField('mc-recipient-'+this.tps[i]);
             if (f) { this.hideField(f); }
         }
     }
-    
+
     ,showRecipient: function(cb,rec,i) {
         for (var x=0;x<this.tps.length;x++) {
             var f = this.fp.getForm().findField('mc-recipient-'+this.tps[x]);
