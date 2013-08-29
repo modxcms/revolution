@@ -2,7 +2,7 @@
 /**
  * Action Spanish lexicon topic
  *
- * @language es_MX
+ * @language es
  * @package modx
  * @subpackage lexicon
  */
@@ -24,6 +24,7 @@ $_lang['action_remove'] = 'Remover Acción';
 $_lang['action_update'] = 'Actualizar Acción';
 $_lang['actions'] = 'Acciones';
 $_lang['controller'] = 'Controlador';
+$_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
 $_lang['controller_err_nf'] = '¡Archivo Controlador no encontrado!';
 $_lang['controller_err_ns'] = '¡No se especificó el controlador!';
 $_lang['controller_parent'] = 'Controlador Paterno';
