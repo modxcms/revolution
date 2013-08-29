@@ -391,7 +391,7 @@ abstract class modMail {
      * @access public
      * @return null|modError
      */
-    public function getErrors() {
+    public function getError() {
         return $this->error;
     }
 }
