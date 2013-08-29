@@ -6,7 +6,7 @@
  * @var modInstall $install
  * @var xPDO $modx
  * @var modInstallSettings $settings
- * 
+ *
  * @package modx
  * @subpackage setup
  */
@@ -248,6 +248,23 @@ if ($language != 'en') {
         ));
     }
     $setting->set('value',$language);
+    $setting->save();
+}
+
+/* add ext_debug setting for sdk distro */
+if ('sdk' === trim($currentVersion['distro'], '@')) {
+    $setting = $modx->newObject('modSystemSetting');
+    $setting->fromArray(
+        array(
+            'key' => 'ext_debug',
+            'namespace' => 'core',
+            'xtype' => 'combo-boolean',
+            'area' => 'system',
+            'value' => false
+        ),
+        '',
+        true
+    );
     $setting->save();
 }
 

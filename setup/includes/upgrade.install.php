@@ -541,4 +541,25 @@ if ($setting && $setting->get('value') == '') {
 }
 unset($setting);
 
+/* add ext_debug setting for sdk distro and turn it off if it exists outside sdk */
+$setting = $modx->getObject('modSystemSetting', array('key' => 'ext_debug'));
+if (!$setting && 'sdk' === trim($currentVersion['distro'], '@')) {
+    $setting = $modx->newObject('modSystemSetting');
+    $setting->fromArray(
+        array(
+            'key' => 'ext_debug',
+            'namespace' => 'core',
+            'xtype' => 'combo-boolean',
+            'area' => 'system',
+            'value' => false
+        ),
+        '',
+        true
+    );
+    $setting->save();
+} elseif ($setting && 'sdk' !== trim($currentVersion['distro'], '@')) {
+    $setting->set('value', false);
+    $setting->save();
+}
+
 return true;
