@@ -1008,7 +1008,8 @@ class xPDO {
                 $expr= $this->getSelectColumns($className, $query->getAlias(), '', $pk);
             }
             if (isset($query->query['columns'])) $query->query['columns'] = array();
-            $query->select(array ("COUNT(DISTINCT {$expr})"));
+            $exprs = explode(',',$expr);            
+            $query->select(array ("COUNT(DISTINCT {$exprs[count($exprs)-1]})"));
             if ($stmt= $query->prepare()) {
                 if ($stmt->execute()) {
                     if ($results= $stmt->fetchAll(PDO::FETCH_COLUMN)) {
