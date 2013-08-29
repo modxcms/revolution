@@ -177,6 +177,12 @@ abstract class modMail {
      * @var array
      */
     public $files= array();
+    /**
+     * Error
+     * @access protected
+     * @var modError
+     */
+     protected $error = null;
 
     /**
      * Constructs a new instance of the modMail class.
@@ -367,5 +373,25 @@ abstract class modMail {
      */
     public function clearAttachments() {
         $this->files = array();
+    }
+    
+    /**
+     * Check if there is any error.
+     * 
+     * @access public
+     * @return boolean Indicates if there is error.
+     */
+    public function hasError() {
+        return $this->error !== null && $this->error instanceof modError && $this->error->hasError();
+    }
+    
+    /**
+     * Get error object
+     * 
+     * @access public
+     * @return null|modError
+     */
+    public function getErrors() {
+        return $this->error;
     }
 }
