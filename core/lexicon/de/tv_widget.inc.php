@@ -14,6 +14,8 @@
 $_lang['attributes'] = 'Tag-Attribute';
 $_lang['capitalize'] = 'Alle Worte groß';
 $_lang['checkbox'] = 'Checkbox';
+$_lang['checkbox_columns'] = 'Spalten';
+$_lang['checkbox_columns_desc'] = 'Die Anzahl der Spalten, in denen die Checkboxen angezeigt werden.';
 $_lang['class'] = 'CSS-Klasse';
 $_lang['combo_allowaddnewdata'] = 'Das Hinzufügen neuer Werte erlauben';
 $_lang['combo_allowaddnewdata_desc'] = 'Wenn diese Einstellung auf "Ja" steht, können Werte hinzugefügt werden, die nicht bereits in der Liste vorkommen. Standard ist "Nein".';
