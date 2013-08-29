@@ -177,6 +177,11 @@ abstract class modMail {
      * @var array
      */
     public $files= array();
+    /**
+     * An array of embedded images
+     * @var array
+     */
+    public $images= array();
 
     /**
      * Constructs a new instance of the modMail class.
@@ -358,6 +363,27 @@ abstract class modMail {
      */
     public function attach($file) {
         array_push($this->files,$file);
+    }
+    
+    /**
+     * Add an embedded image.
+     *
+     * @access public
+     * @param string $image The absolute path to the file
+     * @param string $cid Id of the image by wich it will be available in html.
+     *        Example: <img src="cid:<$cid>" />
+     */
+    public function embedImage($image, $cid) {
+        array_push($this->images,array('image' => $image, 'cid' => $cid));
+    }
+    
+    /**
+     * Clear all embedded images.
+     *
+     * @access public
+     */
+    public function clearEmbeddedImages() {
+        $this->images = array();
     }
 
     /**
