@@ -409,6 +409,7 @@ class modRequest {
      * <li>topic: the topic to record to (required)</li>
      * <li>register_class: the modRegister class (defaults to modFileRegister)</li>
      * <li>log_level: the logging level (defaults to MODX_LOG_LEVEL_INFO)</li>
+     * <li>clear: set flag to clear register before logging new messages into it  (optional)</li>
      * </ul>
      *
      * @param array $options An array containing all the options required to
@@ -421,7 +422,8 @@ class modRequest {
                 $register = $this->modx->registry->getRegister($options['register'], $register_class);
                 if ($register) {
                     $level = isset($options['log_level']) ? $options['log_level'] : modX::LOG_LEVEL_INFO;
-                    $this->modx->registry->setLogging($register, $options['topic'], $level);
+                    $clear = (!empty($options['clear']));
+                    $this->modx->registry->setLogging($register, $options['topic'], $level, $clear);
                 }
             }
         }

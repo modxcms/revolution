@@ -82,6 +82,7 @@ Ext.extend(MODx.Console,Ext.Window,{
                 action: 'system/console'
                 ,register: this.config.register || ''
                 ,topic: this.config.topic || ''
+                ,clear: false
                 ,show_filename: this.config.show_filename || 0
                 ,format: this.config.format || 'html_log'
             }
