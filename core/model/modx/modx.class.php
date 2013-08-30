@@ -2239,7 +2239,8 @@ class modX extends xPDO {
      * @access protected
      * @param string $contextKey A context identifier.
      * @param boolean $regenerate If true, force regeneration of the context even if already initialized.
-     * @return boolean True if the context was properly initialized
+     * @param array $options Array of options to override context settings.
+     * @return boolean True if the context was properly initialized.
      */
     protected function _initContext($contextKey, $regenerate = false, $options = null) {
         $initialized= false;
@@ -2265,7 +2266,7 @@ class modX extends xPDO {
                     $this->pluginCache= & $this->context->pluginCache;
                     $this->config= array_merge($this->_systemConfig, $this->context->config);
                     $iniTZ = ini_get('date.timezone');
-                    $cfgTZ = $this->getOption('date_timezone', null, '');
+                    $cfgTZ = $this->getOption('date_timezone', $options, '');
                     if (!empty($cfgTZ)) {
                         if (empty($iniTZ) || $iniTZ !== $cfgTZ) {
                             date_default_timezone_set($cfgTZ);
@@ -2285,8 +2286,8 @@ class modX extends xPDO {
             }
         }
         if ($initialized) {
-            $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
-            $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
+            $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
+            $this->setLogTarget($this->getOption('log_target', $options, 'FILE'));
             $debug = $this->getOption('debug');
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
