@@ -1094,13 +1094,15 @@ class modX extends xPDO {
                         ,'_processed'
                     )
                 );
-                reset($this->resource->_fields);
-                while (list($fkey, $fval) = each($this->resource->_fields)) {
-                    if (!in_array($fkey, $excludes)) {
-                        if (is_scalar($fval) && $fval !== '') {
-                            $currentResource[$fkey] = $fval;
-                        } elseif (is_array($fval) && count($fval) === 5 && $fval[1] !== '') {
-                            $currentResource[$fkey] = $fval;
+                if (!empty($this->resource->_fields)) {
+                    reset($this->resource->_fields);
+                    while (list($fkey, $fval) = each($this->resource->_fields)) {
+                        if (!in_array($fkey, $excludes)) {
+                            if (is_scalar($fval) && $fval !== '') {
+                                $currentResource[$fkey] = $fval;
+                            } elseif (is_array($fval) && count($fval) === 5 && $fval[1] !== '') {
+                                $currentResource[$fkey] = $fval;
+                            }
                         }
                     }
                 }

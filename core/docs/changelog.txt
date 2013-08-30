@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix notice when resource not set in modX::sendForward()
 - [#9841] Add access to resource OnLoadWebPageCache
 - [#9072] Set upload_maxsize to php upload_max_filesize value on install
 - [#10146] Add embedded image support to modMail
