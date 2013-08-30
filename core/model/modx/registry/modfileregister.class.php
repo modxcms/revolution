@@ -53,6 +53,19 @@ class modFileRegister extends modRegister {
     }
 
     /**
+     * Clear the register messages.
+     *
+     * {@inheritdoc}
+     */
+    public function clear($topic) {
+        $topicDirectory = $this->directory;
+        $topicDirectory.= $topic[0] == '/' ? substr($topic, 1) : $topic ;
+        return $this->modx->cacheManager->deleteTree($topicDirectory, array(
+            'extensions' => '.msg.php'
+        ));
+    }
+    
+    /**
      * {@inheritdoc}
      *
      * This implementation supports the following options and default behavior:

@@ -70,6 +70,16 @@ class modDbRegister extends modRegister {
     }
 
     /**
+     * Clear the register messages.
+     *
+     * {@inheritdoc}
+     */
+    public function clear($topic) {
+        $result = $this->modx->removeCollection('modDbRegisterMessage', array('topic' => $topic));
+        return (bool)$result;
+    }
+
+    /**
      * This implementation supports the following options and default behavior:
      * <ul>
      * <li>msg_limit: Only poll until the specified limit of messages has
