@@ -136,6 +136,7 @@ Ext.extend(MODx,Ext.Component,{
                xtype: 'modx-console'
                ,register: 'mgr'
                ,topic: topic
+               ,clear: true
                ,show_filename: 0
                ,listeners: {
                     'shutdown': {fn:function() {

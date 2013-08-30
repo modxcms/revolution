@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Clear register before calling clear cache
 - Add clear flag to modRequest::registerLogging()
 - Add modRegister::clear() method
 - Show custom xPDO class names in Manager Log
