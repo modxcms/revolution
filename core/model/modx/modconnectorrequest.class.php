@@ -54,6 +54,9 @@ class modConnectorRequest extends modManagerRequest {
      * @return boolean
      */
     public function handleRequest(array $options = array()) {
+        if (!isset($options['action'])) {
+            $options['action'] = '';
+        }
         if (isset($options['action']) && !is_string($options['action'])) return false;
         if ((!isset($options['action']) || $options['action'] == '') && isset($_REQUEST['action'])) {
             $options['action'] = $_REQUEST['action'];
