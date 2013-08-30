@@ -17,9 +17,10 @@ Here's what you need to get started or upgrade to MODX Revoluton 2.2.9:
 + [Read the MODX Revolution Documentation](http://rtfm.modx.com/revolution/2.x/ "Home - MODx Revolution 2.x - MODx Documentation")
 
 ##Other Important Stuff
-MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](http://tracker.modx.com/projects/revo/issues "Revolution - Issues - MODX Project Tracker"). Make sure you [read the documentation](http://rtfm.modx.com/revolution/2.x/ "Home - MODx Revolution 2.x - MODx Documentation"), [post feedback and share your successes](http://forums.modx.com/board/?board=264 "MODX :: Revolution 2.2") in the MODX community forums. To join us in the quest for *Creative Freedom* [become a Contributor](http://rtfm.modx.com/community/)
+MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](http://tracker.modx.com/projects/revo/issues "Revolution - Issues - MODX Project Tracker"). Make sure you [read the documentation](http://rtfm.modx.com/revolution/2.x/ "Home - MODx Revolution 2.x - MODx Documentation"), [post feedback and share your successes](http://forums.modx.com/board/?board=264 "MODX :: Revolution 2.2") in the MODX community forums. To join us in the quest for *Creative Freedom* [become a Contributor](http://rtfm.modx.com/community/).
 
 On behalf of the entire MODX Team,
+
 Thank-you for using MODX!
 
 ##License
