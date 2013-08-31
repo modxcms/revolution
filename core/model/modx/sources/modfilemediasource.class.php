@@ -36,8 +36,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @param string $path A path to the active directory
      * @return array
      */
-    public function getBases($path) {
-        if (empty($path)) $path = '';
+    public function getBases($path = '') {
         $properties = $this->getProperties();
         $bases = array();
         $path = $this->fileHandler->sanitizePath($path);
