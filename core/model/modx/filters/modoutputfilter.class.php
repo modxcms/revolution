@@ -48,7 +48,7 @@ class modOutputFilter {
 
     /**
      * Filters the output
-     * 
+     *
      * @param modElement $element The element to filter
      */
     public function filter(&$element) {
@@ -311,7 +311,7 @@ class modOutputFilter {
                             }
                             break;
                         case 'ellipsis':
-                            $limit = isset($m_val) ? (int) $m_val : 100;
+                            $limit = empty($m_val) ? 100 : (int) $m_val;
                             $pad = $this->modx->getOption('ellipsis_filter_pad', null, '&#8230;');
 
                             /* ensure that filter correctly counts special chars */
