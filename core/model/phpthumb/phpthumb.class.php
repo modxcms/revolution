@@ -3207,7 +3207,7 @@ exit;
 				$this->DebugMessage(@$ImageCreateFromFunctionName.'() was attempted but FAILED', __FILE__, __LINE__);
 			}
 			$this->DebugMessage('Populating $rawimagedata', __FILE__, __LINE__);
-            $rawimagedata = file_get_contents(str_replace(' ','%20',$filename));
+            		$rawimagedata = file_get_contents($this->formatGetContents($filename));
 			if (empty($rawimagedata)) {
 				$this->DebugMessage('cannot fopen('.$filename.')', __FILE__, __LINE__);
 			}
@@ -3218,7 +3218,12 @@ exit;
 		}
 		return $gd_image;
 	}
-
+	function formatGetContents($path) {
+	        $parts = parse_url($path);
+	        // check to see if local path - if it is, leave untouched
+	        if(!isset($parts["host"])) return $path;
+	        return str_replace(array(" ","'"),array("%20","%27"),$path);
+	}
 	function SourceImageToGD() {
 		if (is_resource($this->gdimg_source)) {
 			$this->source_width  = ImageSX($this->gdimg_source);
