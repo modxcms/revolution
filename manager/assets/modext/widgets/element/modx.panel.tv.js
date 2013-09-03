@@ -1,6 +1,6 @@
 /**
  * Loads the TV panel
- * 
+ *
  * @class MODx.panel.TV
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -361,7 +361,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         MODx.fireEvent('ready');
         return true;
     }
-    
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-tv-template');
         var rg = Ext.getCmp('modx-grid-tv-security');
@@ -384,7 +384,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         Ext.getCmp('modx-grid-element-sources').getStore().commitChanges();
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
-        
+
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-tv-category').getValue();
@@ -394,7 +394,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             t.refreshNode(u,true);
         }
     }
-    
+
     ,changeEditor: function() {
         this.cleanupEditor();
         this.submit();
@@ -433,7 +433,7 @@ MODx.panel.TVInputProperties = function(config) {
         ,header: false
 		,border: false
         ,defaults: { border: false }
-        ,cls: 'container form-with-labels'
+        ,cls: 'form-with-labels'
         ,items: [{
             html: _('tv_input_options_msg')
 			,bodyCssClass: 'panel-desc'
@@ -546,7 +546,7 @@ MODx.panel.TVOutputProperties = function(config) {
         ,title: _('tv_output_options')
         ,header: false
         ,layout: 'form'
-        ,cls: 'container form-with-labels'
+        ,cls: 'form-with-labels'
         ,defaults: {border: false}
         ,items: [{
             html: _('tv_output_options_msg')
