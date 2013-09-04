@@ -26,6 +26,13 @@ gem install sass
 gem install compass
 ```
 
+Make sure you have `sass` and `compass` installed by testing:
+
+```bash
+sass --version
+compass --version
+```
+
 Installing Grunt & Grunt Packages
 ----------------------------
 
@@ -35,19 +42,17 @@ First, clone a copy of this git repo by running:
 git clone -b grunt git://github.com/rthrash/revolution.git
 ```
 
-Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli), [bower](http://bower.io/), [sass](http://sass-lang.com/) and [compass](http://compass-style.org/) packages if you haven't before. These should be done as global installs:
+Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) and [bower](http://bower.io/) packages if you haven't before. These should be done as global installs:
 
 ```bash
-npm install -g grunt-cli bower sass compass
+npm install -g grunt-cli bower
 ```
 
-Make sure you have `grunt`, `bower`, `sass` and `compass` installed by testing:
+Make sure you have `grunt` and `bower` installed by testing:
 
 ```bash
 grunt --version
 bower --version
-sass --version
-compass --version
 ```
 
 Enter the default template directory and install the Node and Bower dependencies, this time *without* specifying a global(-g) install:
