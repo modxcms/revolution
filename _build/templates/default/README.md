@@ -17,6 +17,15 @@ and `brew install node` to install Node.js.
 Linux/BSD users should use their appropriate package managers to install git and Node.js, or build from source
 if you swing that way. Easy-peasy.
 
+Installing Ruby and Ruby Gems
+----------------------------
+You'll need ruby and sass and compass gems installed. If you're on OS X or Linux you probably already have Ruby installed; test with ruby -v in your terminal. When you've confirmed you have Ruby installed, run gem install sass to install Sass.
+
+```bash
+gem install sass
+gem install compass
+```
+
 Installing Grunt & Grunt Packages
 ----------------------------
 
@@ -26,18 +35,19 @@ First, clone a copy of this git repo by running:
 git clone -b grunt git://github.com/rthrash/revolution.git
 ```
 
-Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli), [bower](http://bower.io/) and [sass](http://sass-lang.com/) packages if you haven't before. These should be done as global installs:
+Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli), [bower](http://bower.io/), [sass](http://sass-lang.com/) and [compass](http://compass-style.org/) packages if you haven't before. These should be done as global installs:
 
 ```bash
-npm install -g grunt-cli bower sass
+npm install -g grunt-cli bower sass compass
 ```
 
 Make sure you have `grunt`, `bower` and `sass` installed by testing:
 
 ```bash
-grunt -version
-bower -version
-sass -version
+grunt --version
+bower --version
+sass --version
+compass --version
 ```
 
 Enter the default template directory and install the Node and Bower dependencies, this time *without* specifying a global(-g) install:
