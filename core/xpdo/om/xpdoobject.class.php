@@ -234,10 +234,6 @@ class xPDOObject {
             if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Attempting to execute query using PDO statement object: " . print_r($criteria->sql, true) . print_r($criteria->bindings, true));
             $tstart= $xpdo->getMicroTime();
             if (!$criteria->stmt->execute()) {
-                $tend= $xpdo->getMicroTime();
-                $totaltime= $tend - $tstart;
-                $xpdo->queryTime= $xpdo->queryTime + $totaltime;
-                $xpdo->executedQueries= $xpdo->executedQueries + 1;
                 $errorInfo= $criteria->stmt->errorInfo();
                 $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error ' . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($errorInfo, true));
                 if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $xpdo->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
@@ -246,15 +242,15 @@ class xPDOObject {
                         if (!$criteria->stmt->execute()) {
                             $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
                         }
-                        $tend= $xpdo->getMicroTime();
-                        $totaltime= $tend - $tstart;
-                        $xpdo->queryTime= $xpdo->queryTime + $totaltime;
-                        $xpdo->executedQueries= $xpdo->executedQueries + 1;
                     } else {
                         $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $xpdo->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($xpdo->errorInfo(), true));
                     }
                 }
             }
+            $tend= $xpdo->getMicroTime();
+            $totaltime= $tend - $tstart;
+            $xpdo->queryTime= $xpdo->queryTime + $totaltime;
+            $xpdo->executedQueries= $xpdo->executedQueries + 1;
             $rows= & $criteria->stmt;
         } else {
             $errorInfo = $xpdo->errorInfo();
