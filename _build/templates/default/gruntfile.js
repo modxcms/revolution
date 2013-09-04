@@ -22,22 +22,11 @@ module.exports = function(grunt) {
 			}
 		}
 	},
-	copy: {
-		main: {
-			files: [
-				{expand:true,filter: 'isFile',cwd:'../../../manager/templates/default/css/',src:'raw.css', dest: './sass/'}
-			]
-		}
-	},
 	rename: { /* move files */
 		bourbon: {
 			src: './lib/bourbon/',
 			dest: './sass/',
 			force:true
-		},
-		raw: {
-			src: './sass/raw.css',
-			dest: './sass/_raw.scss'
 		}
 	},
 	asciify:{
@@ -141,7 +130,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks( 'grunt-rename' );
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
-  grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks( 'grunt-contrib-concat' );
   //grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -153,6 +141,6 @@ module.exports = function(grunt) {
   // Tasks
 
   grunt.registerTask('default', ['sass:dev','growl:sass','asciify','usebanner','growl:watch','watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass','growl:sass','asciify','usebanner']);
+  grunt.registerTask('build', ['clean:prebuild','bower','rename','sass','growl:sass','asciify','usebanner']);
   grunt.registerTask('prod',['sass:dist','growl:sass']);
 };
