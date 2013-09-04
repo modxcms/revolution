@@ -80,7 +80,7 @@ module.exports = function(grunt) {
   sass: {                             
     dist: {                           
       options: {                      
-        style: 'expanded',
+        style: 'compressed',
         compass: true
       },
       files: {                        
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
     },
     dev: {                           
       options: {                     
-        style: 'expanded',
+        style: 'compressed',
         compass:true,
       },
       files: {                        
