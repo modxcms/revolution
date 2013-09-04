@@ -258,10 +258,6 @@ ul.x-tab-strip-bottom {
 
 .actions button,
 .inline-button {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   background: #dcdcdc;
   background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
@@ -300,8 +296,6 @@ ul.x-tab-strip-bottom {
 .inline-button:active {
   -webkit-box-shadow: 0 0 3px #aaaaaa inset;
   -moz-box-shadow: 0 0 3px #aaaaaa inset;
-  -ms-box-shadow: 0 0 3px #aaaaaa inset;
-  -o-box-shadow: 0 0 3px #aaaaaa inset;
   box-shadow: 0 0 3px #aaaaaa inset;
   background-color: #ffffff;
   background-image: none;
@@ -367,8 +361,6 @@ ul.x-tab-strip-bottom {
   z-index: 10;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
-  -ms-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
-  -o-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
 }
 
@@ -429,10 +421,6 @@ ul.x-tab-strip-bottom {
 }
 
 #modx-navbar ul.modx-subnav {
-  -webkit-border-radius: 0 0 2px 2px;
-  -moz-border-radius: 0 0 2px 2px;
-  -o-border-radius: 0 0 2px 2px;
-  -ms-border-radius: 0 0 2px 2px;
   border-radius: 0 0 2px 2px;
   list-style: none;
   line-height: 1.1;
@@ -448,8 +436,6 @@ ul.x-tab-strip-bottom {
   border-top: none;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
   -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
-  -ms-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
-  -o-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
 }
 
@@ -531,28 +517,16 @@ ul.x-tab-strip-bottom {
 
 #modx-navbar ul.modx-subnav ul li:first-child,
 #modx-navbar ul.modx-subnav ul li:first-child a {
-  -webkit-border-radius: 0 2px 0 0;
-  -moz-border-radius: 0 2px 0 0;
-  -o-border-radius: 0 2px 0 0;
-  -ms-border-radius: 0 2px 0 0;
   border-radius: 0 2px 0 0;
 }
 
 #modx-navbar ul.modx-subnav ul li:last-child,
 #modx-navbar ul.modx-subnav ul li:last-child a {
-  -webkit-border-radius: 0 0 2px 0;
-  -moz-border-radius: 0 0 2px 0;
-  -o-border-radius: 0 0 2px 0;
-  -ms-border-radius: 0 0 2px 0;
   border-radius: 0 0 2px 0;
 }
 
 #modx-navbar ul.modx-subnav ul ul li:last-child,
 #modx-navbar ul.modx-subnav ul ul li:last-child a {
-  -webkit-border-radius: 0 0 2px 2px;
-  -moz-border-radius: 0 0 2px 2px;
-  -o-border-radius: 0 0 2px 2px;
-  -ms-border-radius: 0 0 2px 2px;
   border-radius: 0 0 2px 2px;
 }
 
@@ -599,10 +573,6 @@ ul.x-tab-strip-bottom {
   outline: none !important;
   font-size: 12px;
   color: #565353;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  -ms-border-radius: 0;
   border-radius: 0;
   background-color: #f0f0f0;
 }
@@ -642,18 +612,10 @@ ul.x-tab-strip-bottom {
   border: #dedede;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
   -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
-  -ms-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
-  -o-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-border-radius: 0 0 2px 2px;
-  -moz-border-radius: 0 0 2px 2px;
-  -o-border-radius: 0 0 2px 2px;
-  -ms-border-radius: 0 0 2px 2px;
   border-radius: 0 0 2px 2px;
 }
 
@@ -781,10 +743,6 @@ ul.x-tab-strip-top {
 }
 
 .modx-leftbar .x-tree-root-ct {
-  -webkit-border-radius: inherit inherit 3px 3px;
-  -moz-border-radius: inherit inherit 3px 3px;
-  -o-border-radius: inherit inherit 3px 3px;
-  -ms-border-radius: inherit inherit 3px 3px;
   border-radius: inherit inherit 3px 3px;
   background-color: #eee;
 }
@@ -1049,8 +1007,6 @@ ul.x-tab-strip-top {
   background: #f0f0f0;
   -webkit-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
   -moz-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
-  -ms-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
-  -o-box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
   box-shadow: 2px 0 2px rgba(0, 0, 0, 0.025);
 }
 
@@ -1201,6 +1157,10 @@ textarea.x-form-field, .x-form-textarea {
 .x-form-check-group-label {
   border-bottom: 1px solid #d0d0d0;
   color: #434343;
+}
+
+.x-form-radio {
+  margin-left: 1px;
 }
 
 .x-editor .x-form-check-wrap {
@@ -2568,10 +2528,6 @@ td.x-date-mp-sep {
 }
 
 .x-tip {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   background: #575757;
   border: 1px solid #dedede;
@@ -3755,7 +3711,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   padding-right: 0;
 }
 
-/*
+/*!
  *  Font Awesome 3.2.1
  *  the iconic font designed for Bootstrap
  *  ------------------------------------------------------------------------------
@@ -5665,10 +5621,6 @@ a .icon-flip-vertical:before {
 }
 
 .x-tree-root-ct {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  -ms-border-radius: 0;
   border-radius: 0;
   padding: 0 !important;
   overflow: hidden;
@@ -5775,10 +5727,6 @@ a .icon-flip-vertical:before {
   vertical-align: middle;
   /* MODX 2.x.x Manager Button Styles */
   font: bold 11px tahoma, verdana, helvetica, sans-serif;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   background-color: white;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, whitesmoke));
@@ -5786,8 +5734,6 @@ a .icon-flip-vertical:before {
   background-image: linear-gradient(to bottom,white, whitesmoke);
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
-  -ms-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
-  -o-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   border: 1px solid #dedede;
   color: #53595f;
@@ -5825,14 +5771,10 @@ a .icon-flip-vertical:before {
   width: 100%;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
-  -ms-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
-  -o-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
   border: 1px solid #dedede;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
 #helpBanner h3,
@@ -5856,8 +5798,6 @@ a .icon-flip-vertical:before {
   float: left;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
 #contactus form {
@@ -5870,8 +5810,6 @@ a .icon-flip-vertical:before {
   width: 70%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
 #contactus input[type=submit] {
@@ -5911,8 +5849,6 @@ a .icon-flip-vertical:before {
   background: gainsboro;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
   min-height: 300px;
 }
@@ -6424,8 +6360,6 @@ input::-moz-focus-inner {
 .ux-row-action-item:active {
   -webkit-box-shadow: 0 0 3px #aaaaaa inset;
   -moz-box-shadow: 0 0 3px #aaaaaa inset;
-  -ms-box-shadow: 0 0 3px #aaaaaa inset;
-  -o-box-shadow: 0 0 3px #aaaaaa inset;
   box-shadow: 0 0 3px #aaaaaa inset;
   background-color: #ffffff;
   background-image: none;
@@ -6438,15 +6372,9 @@ input::-moz-focus-inner {
 }
 
 .ux-row-action-item {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
-  -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
-  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
@@ -6948,10 +6876,6 @@ body.ext-ie .x-superboxselect-input input {
 }
 
 .x-superboxselect-item {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
   border-radius: 6px;
   background-color: #DEE7F8;
   border: 1px solid #CAD8F3;
@@ -7032,10 +6956,6 @@ body.ext-ie7 .x-superboxselect-item {
   margin: 6px 1% 6px 0;
   background-color: white;
   border: 1px solid #ddd;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
 }
 
@@ -7081,10 +7001,6 @@ body.ext-ie7 .x-superboxselect-item {
   color: #5E5E5E;
   padding: 10px 10px 8px;
   text-shadow: 0 1px 1px #ffffff;
-  -webkit-border-radius: 2px 2px 0 0;
-  -moz-border-radius: 2px 2px 0 0;
-  -o-border-radius: 2px 2px 0 0;
-  -ms-border-radius: 2px 2px 0 0;
   border-radius: 2px 2px 0 0;
   margin: 0;
   zoom: 1;
@@ -7294,10 +7210,10 @@ body.ext-ie7 .x-superboxselect-item {
 /* for selectability in ext grids */
 .x-selectable, .x-selectable * {
   -webkit-user-select: text !important;
-  -o-user-select: text !important;
-  -ms-user-select: text !important;
-  user-select: text !important;
   -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  -o-user-select: text !important;
+  user-select: text !important;
   -khtml-user-select: all !important;
 }
 
@@ -7809,10 +7725,6 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-template-detail .selected img {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #aaaaaa;
   height: 80px;
@@ -7894,10 +7806,6 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* Template browser */
 .thumb-wrapper {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
   -khtml-border-radius: 2px;
   float: left;
@@ -8046,10 +7954,6 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .inline-form input[type=text], .inline-form textarea {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
   border-radius: 2px;
   position: relative;
