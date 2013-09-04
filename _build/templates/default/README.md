@@ -41,7 +41,7 @@ Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli), 
 npm install -g grunt-cli bower sass compass
 ```
 
-Make sure you have `grunt`, `bower` and `sass` installed by testing:
+Make sure you have `grunt`, `bower`, `sass` and `compass` installed by testing:
 
 ```bash
 grunt --version
