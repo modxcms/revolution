@@ -6,7 +6,7 @@ In the spirit of open source software development, MODX always encourages commun
 What you need
 --------------------------------------
 
-In order to build MODX front end assets, you need to have Node.js/npm latest and git 1.7 or later.
+In order to build MODX front end assets, you need to have Ruby, Node.js/npm latest and git 1.7 or later.
 (Earlier versions might work OK, but are not tested.)
 
 For Windows you have to download and install [git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/download/).
