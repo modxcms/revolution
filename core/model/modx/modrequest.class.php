@@ -422,7 +422,7 @@ class modRequest {
                 $register = $this->modx->registry->getRegister($options['register'], $register_class);
                 if ($register) {
                     $level = isset($options['log_level']) ? $options['log_level'] : modX::LOG_LEVEL_INFO;
-                    $clear = (!empty($options['clear']));
+                    $clear = (!empty($options['clear']) && $options['clear'] !== 'false');
                     $this->modx->registry->setLogging($register, $options['topic'], $level, $clear);
                 }
             }
