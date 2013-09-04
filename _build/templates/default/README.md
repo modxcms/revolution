@@ -23,20 +23,21 @@ Installing Grunt & Grunt Packages
 First, clone a copy of this git repo by running:
 
 ```bash
-git clone -b gruntjs git://github.com/rthrash/revolution.git
+git clone -b grunt git://github.com/rthrash/revolution.git
 ```
 
-Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) and [bower](http://bower.io/) packages if you haven't before. These should be done as global installs:
+Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli), [bower](http://bower.io/) and [sass](http://sass-lang.com/) packages if you haven't before. These should be done as global installs:
 
 ```bash
-npm install -g grunt-cli bower
+npm install -g grunt-cli bower sass
 ```
 
-Make sure you have `grunt` and `bower` installed by testing:
+Make sure you have `grunt`, `bower` and `sass` installed by testing:
 
 ```bash
 grunt -version
 bower -version
+sass -version
 ```
 
 Enter the default template directory and install the Node and Bower dependencies, this time *without* specifying a global(-g) install:
