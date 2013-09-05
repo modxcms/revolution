@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 		csso: {
 			compress: {
 				options: {
-					report: 'gzip',
+					report: 'min',
 					banner: '/*!\n <%= asciify_dontEdit %> \n see _build/templates/default/README.md\n*/\n'
 				},
 				files: {
