@@ -315,7 +315,7 @@ input::-moz-focus-inner {
 	color:#636F4C !important
 }
 .ux-row-action-item:active{
-    @include box-shadow(0 0 3px #aaaaaa inset);
+    box-shadow:0 0 3px #aaaaaa inset;
     background-color:#ffffff;
     background-image:none;
     margin:2px 1px 0;

@@ -48,14 +48,15 @@ module.exports = function(grunt) {
 			text: 'do not edit'
 		}
 	},
-	  usebanner: {
-	    dist: {
+	  csso: {
+	    compress: {
 	      options: {
-	        position: 'top',
+		    report:'gzip',
 	        banner: '/*!\n <%= asciify_dontEdit %> \n see _build/templates/default/README.md\n*/\n'
 	      },
 	      files: {
-	        src: ['../../../manager/templates/default/css/index.css','../../../manager/templates/default/css/login.css' ]
+	        '../../../manager/templates/default/css/index.css': '../../../manager/templates/default/css/index.css',
+	        '../../../manager/templates/default/css/login.css': '../../../manager/templates/default/css/login.css'
 	      }
 	    }
 	  },
@@ -99,13 +100,32 @@ module.exports = function(grunt) {
       }
     }
   },
+  autoprefixer: { /* this expands the css so it needs to get compressed with csso afterwards */
+    options: {
+      // Task-specific options go here.
+    },
+
+    // just prefix the specified file
+    index: {
+      options: {
+      },
+      src: '../../../manager/templates/default/css/index.css',
+      dest: '../../../manager/templates/default/css/index.css'
+    },
+    login: {
+      options: {
+      },
+      src: '../../../manager/templates/default/css/login.css',
+      dest: '../../../manager/templates/default/css/login.css'
+    }
+  },
 	watch: { /* trigger tasks on save */
 		options: {
 			livereload: true
 		},
 		scss: {
 			files: './sass/*',
-			tasks: ['sass:dist']
+			tasks: ['sass:dist','autoprefixer','asciify','csso','growl:sass']
 		},
 		/*script: {
 			files: [ 'assets/js/main.js', 'assets/js/plugins.js' ],
@@ -121,12 +141,16 @@ module.exports = function(grunt) {
 	},
 	growl:{
 		sass : {
-			message : "Sass files created",
+			message : "Sass files created.",
 			title : "grunt"
 		},
 		build : {
 			title : "grunt",
-			message : "Build complete"
+			message : "Build complete."
+		},
+		prefixes : {
+			title : "grunt",
+			message : "CSS prefixes added."
 		},
 		watch : {
 			title : "grunt",
@@ -147,12 +171,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-growl');
   grunt.loadNpmTasks('grunt-asciify');
-  grunt.loadNpmTasks('grunt-banner');
+  grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-csso');
   //grunt.loadNpmTasks( 'grunt-notify' );
 
   // Tasks
 
-  grunt.registerTask('default', ['sass:dist','growl:sass','asciify','usebanner','growl:watch','watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass:dist','growl:sass','asciify','usebanner']);
-  grunt.registerTask('expand',['sass:dist','growl:sass']);
+  grunt.registerTask('default', ['sass:dist','autoprefixer','growl:prefixes','growl:sass','asciify','csso','growl:watch','watch']);
+  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass:dist','autoprefixer','growl:prefixes','growl:sass','asciify','csso']);
+  grunt.registerTask('expand',['sass:dev','autoprefixer','growl:prefixes','growl:sass']);
 };
