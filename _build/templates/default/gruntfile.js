@@ -105,7 +105,7 @@ module.exports = function(grunt) {
 		},
 		scss: {
 			files: './sass/*',
-			tasks: ['sass:dev']
+			tasks: ['sass:dist']
 		},
 		/*script: {
 			files: [ 'assets/js/main.js', 'assets/js/plugins.js' ],
