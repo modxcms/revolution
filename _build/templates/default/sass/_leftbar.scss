@@ -7,9 +7,9 @@
 }
 
 .x-tree-root-ct {
-  @include border-radius(0);
-  padding: 0 !important;
+  border-radius: 0;
   overflow: hidden;
+  padding: 0 !important;
 }
 
 .x-tree-root-node {
@@ -17,59 +17,53 @@
 }
 
 .x-tree-root-node > .x-tree-node > .x-tree-node-ct {
-  padding: 0;
-  margin: 0 !important;
   margin-left: -7px !important;
+  margin: 0 !important;
+  padding: 0;
 }
 
 .tree-pseudoroot-node {
-  background-color: darken($navbarHover,2%);
-  padding: 0 .4em;
-  line-height: 2;
+  background-color: darken($navbarHover, 2%);
   border-bottom: 1px solid $borderColor;
   font-weight: bold;
-
-   > .icon-large {
+  line-height: 2;
+  padding: 0 .4em;
+  > .icon-large {
     font-weight: normal;
   }
-
-
-  > /* elbow icon */
   .x-tree-ec-icon {
     float: right;
     margin-top: 2px;
   }
-
   .modx-tree-node-tool-ct {
-  //  display: none;
-
+    //  display: none;
     .x-btn {
       margin-left: 2px;
     }
   }
-
   &:hover .modx-tree-node-tool-ct {
     display: block;
   }
-
 }
 
 .x-btn-fontawesome {
-  display: inline;
-  padding: 6px;
-  text-align:center;
-  border: 0;
   background: none;
+  border: 0;
+  display: inline;
   opacity: 0.2;
-
+  padding: 6px;
+  text-align: center;
   i {
     font-style: normal;
   }
-
   button {
-    display:none;
+    display: none;
   }
-  &:hover { opacity: 1 !important}
+  &:hover {
+    opacity: 1 !important;
+  }
 }
 
-.tree-pseudoroot-node:hover .x-btn-fontawesome { opacity: 0.65; }
+.tree-pseudoroot-node:hover .x-btn-fontawesome {
+  opacity: 0.65;
+}

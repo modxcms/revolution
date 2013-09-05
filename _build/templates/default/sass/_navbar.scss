@@ -1,169 +1,190 @@
 /* Main MODX Manager navbar */
 #modx-navbar {
-    position: relative;
-    height: 100%;
-    background: $navbarBg;
-    border: 1px solid $borderColor;
-    border-width: 0 0 1px;
-    z-index: 10;
-    @include box-shadow(0 1px 0 $borderShadow);
+  background: $navbarBg;
+  border-width: 0 0 1px;
+  border: 1px solid $borderColor;
+  box-shadow: 0 1px 0 $borderShadow;
+  height: 100%;
+  position: relative;
+  z-index: 10;
 }
+
 #modx-user-menu {
-    float:right;
-    margin-right: 15px;
+  float: right;
+  margin-right: 15px;
 }
 
-#modx-navbar
-{
-    font: $fontNormal;
-    font-weight: bold;
+#modx-navbar {
+  font-weight: bold;
+  font: $fontNormal;
 }
-#modx-topnav
-{
-    float: left;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+#modx-topnav {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
 #modx-navbar li,
-#modx-navbar a  {
-    float: left;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    background: transparent;
-}
-#modx-navbar li:hover {
-    z-index: 10000;
-}
-#modx-navbar a  {
-    padding: 0 15px;
-    line-height: 43px;
-    color: $navbarText;
-    display: block;
-    text-decoration: none;
-    cursor: pointer;
+#modx-navbar a {
+  background: transparent;
+  float: left;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
-#modx-topnav > li.top > a
-{ 
-    cursor: default;
+#modx-navbar li:hover {
+  z-index: 10000;
 }
+
+#modx-navbar a {
+  color: $navbarText;
+  cursor: pointer;
+  display: block;
+  line-height: 43px;
+  padding: 0 15px;
+  text-decoration: none;
+}
+
+#modx-topnav > li.top > a {
+  cursor: default;
+}
+
 #modx-navbar li:hover a {
-    background-color: $navbarHover;
-    &:hover.modx-help {
-        color: $colorSplash;
-    }
+  background-color: $navbarHover;
+  &:hover.modx-help {
+    color: $colorSplash;
+  }
 }
+
 #modx-navbar ul#modx-settings-menu,
 #modx-navbar ul#modx-user-submenu {
-    left: auto;
-    right: 0;
+  left: auto;
+  right: 0;
 }
+
 #modx-navbar ul.modx-subnav {
-    @include border-radius(0 0 $navbarRadius $navbarRadius);
-    list-style: none;
-    line-height: 1.1;
-    position: absolute;
-    z-index: 10000;
-    left: 0;
-    top: 43px;
-    margin: 0 0 0 -1px;
-    padding: 0;
-    display: none;
-    float: left;
-    border: 1px solid $borderColor;
-    border-top: none;
-    @include box-shadow($shadower);
+  border-radius: 0 0 $navbarRadius $navbarRadius;
+  border-top: none;
+  border: 1px solid $borderColor;
+  box-shadow: $shadower;
+  display: none;
+  float: left;
+  left: 0;
+  line-height: 1.1;
+  list-style: none;
+  margin: 0 0 0 -1px;
+  padding: 0;
+  position: absolute;
+  top: 43px;
+  z-index: 10000;
 }
+
 #modx-navbar #modx-home-dashboard {
-    width: 110px;
-    background: $navbarBg url(../images/modx-logo.png) 18px 9px no-repeat;
-    @include image-set('../images/modx-logo.png','../images/modx-logo@2X.png'); /* don't tell mark */
+  @include image-set("../images/modx-logo.png", "../images/modx-logo@2X.png");
+  background: $navbarBg url(../images/modx-logo.png) 18px 9px no-repeat;
+  width: 110px;
+  /* don't tell mark */
 }
+
 #modx-navbar #modx-home-dashboard a {
-    text-indent: -9999px;
-    overflow: hidden;
-    width: 100%;
-    padding: 0;
+  overflow: hidden;
+  padding: 0;
+  text-indent: -9999px;
+  width: 100%;
 }
+
 #modx-navbar #modx-home-dashboard:hover a {
-    background-color: transparent;
+  background-color: transparent;
 }
+
 #modx-navbar #modx-home-dashboard:hover {
-    background-color: $navbarHover;
+  background-color: $navbarHover;
 }
+
 #modx-navbar li:hover ul.modx-subnav {
-    display: block;
+  display: block;
 }
+
 #modx-navbar ul.modx-subnav li {
-    margin: 0;
-    padding: 0;
-    background: $navbarDrop;
-    border-bottom: 1px solid $navbarHover;
-    clear: both;
+  background: $navbarDrop;
+  border-bottom: 1px solid $navbarHover;
+  clear: both;
+  margin: 0;
+  padding: 0;
 }
-#modx-navbar ul.modx-subnav li:first-child a
-{
-    @include background(linear-gradient($navbarHover, $navbarDrop) top repeat);
+
+#modx-navbar ul.modx-subnav li:first-child a {
+  @include background(linear-gradient($navbarHover, $navbarDrop) top repeat);
 }
 
 #modx-navbar ul.modx-subnav li a {
-    float: left;
-    width: 240px;
-    margin: 0;
-    padding: 8px 15px;
-    line-height: 1.5;
-    text-shadow: none;
-    background-color: $navbarDrop;
+  background-color: $navbarDrop;
+  float: left;
+  line-height: 1.5;
+  margin: 0;
+  padding: 8px 15px;
+  text-shadow: none;
+  width: 240px;
 }
+
 #modx-navbar ul.modx-subnav li:first-child a:hover,
 #modx-navbar ul.modx-subnav:hover li a:hover,
-#modx-navbar ul.modx-subnav li a:hover{
-    background: $navbarHover !important;
+#modx-navbar ul.modx-subnav li a:hover {
+  background: $navbarHover !important;
 }
+
 #modx-navbar ul.modx-subnav li a span {
-    font-weight: normal;
-    display: block;
-    float: none;
-    width: 100%;
-    font-size: 12px;
-    line-height: 1.3;
-    margin-top: 6px;
+  display: block;
+  float: none;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.3;
+  margin-top: 6px;
+  width: 100%;
 }
+
 #modx-navbar ul.modx-subnav ul {
-    display: none;
-    position: absolute;
-    left: 255px;
-    top: 2px;
-    list-style: none;
-    padding-left: 0;
-    z-index: 24;
+  display: none;
+  left: 255px;
+  list-style: none;
+  padding-left: 0;
+  position: absolute;
+  top: 2px;
+  z-index: 24;
 }
+
 #modx-navbar ul.modx-subnav ul li:first-child,
 #modx-navbar ul.modx-subnav ul li:first-child a {
-    @include border-radius(0 2px 0 0);
+  border-radius: 0 2px 0 0;
 }
+
 #modx-navbar ul.modx-subnav ul li:last-child,
 #modx-navbar ul.modx-subnav ul li:last-child a {
-    @include border-radius(0 0 2px 0);
+  border-radius: 0 0 2px 0;
 }
+
 #modx-navbar ul.modx-subnav ul ul li:last-child,
 #modx-navbar ul.modx-subnav ul ul li:last-child a {
-    @include border-radius(0 0 2px 2px);
+  border-radius: 0 0 2px 2px;
 }
+
 #modx-navbar ul.modx-subnav li:hover ul ul,
 #modx-navbar ul.modx-subnav ul li:hover ul ul,
 #modx-navbar ul.modx-subnav ul ul li:hover ul ul {
-    display: none;
+  display: none;
 }
+
 #modx-navbar ul.modx-subnav li:hover ul,
 #modx-navbar ul.modx-subnav ul li:hover ul,
 #modx-navbar ul.modx-subnav ul ul li:hover ul,
 #modx-navbar ul.modx-subnav ul ul ul li:hover ul {
-    display: block;
+  display: block;
 }
-.ext-ie7 #modx-header{
-    position: relative;
-    z-index: 10;
+
+.ext-ie7 #modx-header {
+  position: relative;
+  z-index: 10;
 }
