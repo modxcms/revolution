@@ -1,7 +1,7 @@
 Contribution Guides
 --------------------------------------
 
-In the spirit of open source software development, MODX always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly.
+The visual design of the MODX Manager UI is developed using Sass and Grunt to allow front end developers to quickly create custom themes and contribute to the core. In the spirit of open source software development, MODX always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly.
 
 What you need
 --------------------------------------
@@ -19,19 +19,18 @@ if you swing that way. Easy-peasy.
 
 Installing Ruby and Ruby Gems
 ----------------------------
-You'll need ruby and sass and compass gems installed. If you're on OS X or Linux you probably already have Ruby installed; test with ruby -v in your terminal. When you've confirmed you have Ruby installed, run gem install sass to install Sass.
+You'll need ruby and sass gems installed. If you're on OS X or Linux you probably already have Ruby installed; test with ruby -v in your terminal. When you've confirmed you have Ruby installed, run gem install sass to install Sass.
 
 ```bash
 gem install sass
-gem install compass
 ```
 
-Make sure you have `sass` and `compass` installed by testing:
+Make sure you have `sass` installed by testing:
 
 ```bash
 sass --version
-compass --version
 ```
+_Note: if you aren't using homebrew you may need to install gems using `sudo gem install sass`._
 
 Installing Grunt & Grunt Packages
 ----------------------------
@@ -85,9 +84,10 @@ grunt
 ```
 _Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated.<br>Install the LiveReload [browser extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-) to inject CSS changes without a page refresh._
 
-__Ship__<br>
-Compile Sass and minify for production by running:
+__Expand__<br>
+Compile Sass using expanded output style for development by running:
 
 ```bash
-grunt prod
+grunt expand
 ```
+_Note: do not check in uncompressed CSS._

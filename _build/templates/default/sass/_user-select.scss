@@ -1,7 +1,7 @@
-@mixin user-select( $type: auto ) {
-    -webkit-user-select: $type;
-       -moz-user-select: $type;
-        -ms-user-select: $type;
-         -o-user-select: $type;
-            user-select: $type;
+@mixin user-select($type: auto) {
+  -moz-user-select: $type;
+  -ms-user-select: $type;
+  -o-user-select: $type;
+  -webkit-user-select: $type;
+  user-select: $type;
 }
