@@ -1,124 +1,144 @@
 /* MODX MANAGER SEARCH */
 #modx-navbar #modx-manager-search {
-    padding: 5px 8px 5px 10px;
+  padding: 5px 8px 5px 10px;
 }
+
 #modx-navbar #modx-manager-search:hover {
-    background: none;
-    border-color: transparent
+  background: none;
+  border-color: transparent;
 }
+
 #modx-manager-search .x-form-trigger {
-    background: none;
-    padding: 7px 4px 7px 6px;
-    width: 16px;
-    height: 16px;
-    left: 0;
-    color: #555;
-    cursor: default;
+  background: none;
+  color: #555;
+  cursor: default;
+  height: 16px;
+  left: 0;
+  padding: 7px 4px 7px 6px;
+  width: 16px;
 }
+
 #modx-manager-search .x-form-field-wrap {
-    background: $dropdownBg;
-    outline: none !important;
-    font-size: 12px;
-    color: #565353;
-    border-radius:0;;
-    background-color: $almostWhite;
+  background-color: $almostWhite;
+  background: $dropdownBg;
+  border-radius: 0;
+  color: #565353;
+  font-size: 12px;
+  outline: none !important;
 }
+
 #modx-manager-search .x-form-field-trigger-wrap {
-    border-width: 0;
-    height: auto;
+  border-width: 0;
+  height: auto;
 }
 
 #modx-manager-search .x-form-field-wrap:hover,
 #modx-manager-search .x-trigger-wrap-focus {
-    background: $almostWhite;
-    @include transition(background-color,360ms,ease-in);
-    @include transition-delay(0);
+  @include transition(background-color, 360ms, ease-in);
+  @include transition-delay(0);
+  background: $almostWhite;
 }
+
 #modx-uberbar {
-    margin-left: 20px;
-} 
+  margin-left: 20px;
+}
+
 #modx-manager-search .x-form-empty-field {
-    color: #bbb; 
-    text-shadow: none;
-    font-weight: normal;
+  color: #bbb;
+  font-weight: normal;
+  text-shadow: none;
 }
+
 .modx-manager-search-results {
-    position: relative;
-    width: 450px !important;
-    height: auto !important;
-    margin: 2px 0 0 0;
-    background: rgba(240,240,240,.95);
-    border: $borderColor;
-    box-shadow:$shadower;
-    @include box-sizing();
-    border-radius:0 0 2px 2px;
+  @include box-sizing;
+  background: rgba(240, 240, 240, 0.95);
+  border-radius: 0 0 2px 2px;
+  border: $borderColor;
+  box-shadow: $shadower;
+  height: auto !important;
+  margin: 2px 0 0 0;
+  position: relative;
+  width: 450px !important;
 }
+
 .modx-manager-search-results .x-combo-list-inner {
-    width: 100% !important;
+  width: 100% !important;
 }
+
 .modx-manager-search-results .section {
-    position: relative;
-    border-left: 1px solid #e5e5e5;
-    background-color: #f9f9f9;
-    margin-left: 116px;
-    font-size: 13px;
+  background-color: #f9f9f9;
+  border-left: 1px solid #e5e5e5;
+  font-size: 13px;
+  margin-left: 116px;
+  position: relative;
 }
+
 .modx-manager-search-results .x-combo-selected h3 {
-    left: 0;
+  left: 0;
 }
+
 .modx-manager-search-results h3,
 .modx-manager-search-results p {
-    padding: 4px 8px;
-    line-height: 17px;
-    margin: 0;
+  line-height: 17px;
+  margin: 0;
+  padding: 4px 8px;
 }
+
 .modx-manager-search-results h3 {
-    font-weight: normal;
-    color: #aaa;
-    font-size: .85em;
-    position: absolute;
-    left: -116px;
-    top: 0;
-    width: 95px;
-    text-align: right;
+  color: #aaa;
+  font-size: .85em;
+  font-weight: normal;
+  left: -116px;
+  position: absolute;
+  text-align: right;
+  top: 0;
+  width: 95px;
 }
+
 .modx-manager-search-results a {
-    display: inline-block;
-    cursor: pointer;
-    padding-left: 18px;
-    position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding-left: 18px;
+  position: relative;
 }
+
 .modx-manager-search-results i {
-    color: $colorSplash;
-    position: absolute;
-    top: 2px;
-    left: 0;
+  color: $colorSplash;
+  left: 0;
+  position: absolute;
+  top: 2px;
 }
+
 .modx-manager-search-results em {
-    font-style: normal;
-    opacity: 0.5;
+  font-style: normal;
+  opacity: 0.5;
 }
+
 .modx-manager-search-results .x-combo-selected h3,
 .modx-manager-search-results .x-combo-selected p,
 .modx-manager-search-results .x-combo-selected i {
-    color: #fff;
+  color: #fff;
 }
+
 .modx-manager-search-results .x-combo-selected p {
-    border-left-color: transparent;
+  border-left-color: transparent;
 }
+
 .modx-manager-search-results .x-combo-selected {
-    color: #fff !important;
-    background-color: $colorSplash !important;
-    border: none;
-    padding-left: 117px;
-    margin-left: 0;
+  background-color: $colorSplash !important;
+  border: none;
+  color: #fff !important;
+  margin-left: 0;
+  padding-left: 117px;
 }
+
 .modx-manager-search-results .icon-user {
-    background-image: none !important;
+  background-image: none !important;
 }
+
 .modx-manager-search-results .x-combo-selected {
-    color: #fff !important;
-    background-color: $colorSplash !important;
-    box-shadow: inset 0 -1px 1px darken($colorSplash,10%), inset 0 1px 1px lighten($colorSplash,10%);
-    z-index: 10;
+  background-color: $colorSplash !important;
+  box-shadow: inset 0 -1px 1px darken($colorSplash, 10%), inset 0 1px 1px lighten($colorSplash, 10%);
+  color: #fff !important;
+  z-index: 10;
 }
