@@ -19,18 +19,16 @@ if you swing that way. Easy-peasy.
 
 Installing Ruby and Ruby Gems
 ----------------------------
-You'll need ruby and sass and compass gems installed. If you're on OS X or Linux you probably already have Ruby installed; test with ruby -v in your terminal. When you've confirmed you have Ruby installed, run gem install sass to install Sass.
+You'll need ruby and sass gems installed. If you're on OS X or Linux you probably already have Ruby installed; test with ruby -v in your terminal. When you've confirmed you have Ruby installed, run gem install sass to install Sass.
 
 ```bash
 gem install sass
-gem install compass
 ```
 
-Make sure you have `sass` and `compass` installed by testing:
+Make sure you have `sass` installed by testing:
 
 ```bash
 sass --version
-compass --version
 ```
 
 Installing Grunt & Grunt Packages
