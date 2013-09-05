@@ -14,26 +14,11 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		copy: {
-			main: {
-				files: [{
-					expand: true,
-					filter: 'isFile',
-					cwd: '<%= dirs.css %>',
-					src: 'raw.css',
-					dest: './sass/'
-				}]
-			}
-		},
 		rename: { /* move files */
 			bourbon: {
 				src: './lib/bourbon/',
 				dest: './sass/',
 				force: true
-			},
-			raw: {
-				src: './sass/raw.css',
-				dest: './sass/_raw.scss'
 			}
 		},
 		asciify: {
@@ -47,7 +32,7 @@ module.exports = function(grunt) {
 		csso: {
 			compress: {
 				options: {
-					report: 'gzip',
+					report: 'min',
 					banner: '/*!\n <%= asciify_dontEdit %> \n see _build/templates/default/README.md\n*/\n'
 				},
 				files: {
@@ -77,14 +62,6 @@ module.exports = function(grunt) {
 					'<%= dirs.css %>login.css': 'sass/login.scss'
 				}
 			}
-		},
-		prettysass: {
-			options: {
-				alphabetize: true
-			},
-			scss: {
-				src: ['<%= dirs.scss %>**/*.scss','!<%= dirs.scss %>bourbon/**/*.scss']
-			},
 		},
 		autoprefixer: { /* this expands the css so it needs to get compressed with csso afterwards */
 			options: {
@@ -138,9 +115,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-rename');
 	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-prettysass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-growl');
 	grunt.loadNpmTasks('grunt-asciify');
@@ -150,7 +125,6 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild', 'bower', 'copy', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso']);
+	grunt.registerTask('build', ['clean:prebuild', 'bower', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass']);
-	grunt.registerTask('pretty',['prettysass']);
 };
