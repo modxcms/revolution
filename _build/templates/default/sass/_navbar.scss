@@ -6,7 +6,7 @@
     border: 1px solid $borderColor;
     border-width: 0 0 1px;
     z-index: 10;
-    @include box-shadow(0 1px 0 $borderShadow);
+    box-shadow:0 1px 0 $borderShadow;
 }
 #modx-user-menu {
     float:right;
@@ -61,7 +61,7 @@
     right: 0;
 }
 #modx-navbar ul.modx-subnav {
-    @include border-radius(0 0 $navbarRadius $navbarRadius);
+    border-radius:0 0 $navbarRadius $navbarRadius;
     list-style: none;
     line-height: 1.1;
     position: absolute;
@@ -74,7 +74,7 @@
     float: left;
     border: 1px solid $borderColor;
     border-top: none;
-    @include box-shadow($shadower);
+    box-shadow:$shadower;
 }
 #modx-navbar #modx-home-dashboard {
     width: 110px;
@@ -142,15 +142,15 @@
 }
 #modx-navbar ul.modx-subnav ul li:first-child,
 #modx-navbar ul.modx-subnav ul li:first-child a {
-    @include border-radius(0 2px 0 0);
+    border-radius:0 2px 0 0;
 }
 #modx-navbar ul.modx-subnav ul li:last-child,
 #modx-navbar ul.modx-subnav ul li:last-child a {
-    @include border-radius(0 0 2px 0);
+    border-radius:0 0 2px 0;
 }
 #modx-navbar ul.modx-subnav ul ul li:last-child,
 #modx-navbar ul.modx-subnav ul ul li:last-child a {
-    @include border-radius(0 0 2px 2px);
+   border-radius:0 0 2px 2px;
 }
 #modx-navbar ul.modx-subnav li:hover ul ul,
 #modx-navbar ul.modx-subnav ul li:hover ul ul,

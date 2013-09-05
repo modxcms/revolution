@@ -1432,7 +1432,7 @@ td.x-date-mp-sep {
 }
 
 .x-tip {
-    @include border-radius(3px);
+    border-radius:3px;
     background: darken($tipText,60%);
     border: 1px solid $borderColor;
     padding: 5px;

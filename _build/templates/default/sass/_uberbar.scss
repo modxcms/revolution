@@ -20,7 +20,7 @@
     outline: none !important;
     font-size: 12px;
     color: #565353;
-    @include border-radius(0);
+    border-radius:0;;
     background-color: $almostWhite;
 }
 #modx-manager-search .x-form-field-trigger-wrap {
@@ -49,9 +49,9 @@
     margin: 2px 0 0 0;
     background: rgba(240,240,240,.95);
     border: $borderColor;
-    @include box-shadow($shadower);
+    box-shadow:$shadower;
     @include box-sizing();
-    @include border-radius(0 0 2px 2px);
+    border-radius:0 0 2px 2px;
 }
 .modx-manager-search-results .x-combo-list-inner {
     width: 100% !important;

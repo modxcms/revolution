@@ -1,9 +1,7 @@
 @import "bourbon/bourbon";
 @import "image-set";
-@import "border-radius";
 @import "user-select";
 @import "box-sizing"; 
-@import "box-shadow";
 @import "colors-and-vars";
 @import "type";
 @import "tabs";
@@ -323,8 +321,8 @@ input::-moz-focus-inner {
 }
 .ux-row-action-item:active span {text-shadow:none;}
 .ux-row-action-item{
-	@include border-radius(3px);
-    @include box-shadow(rgba(0,0,0,0.2) 0 0 1px);
+	border-radius:3px;
+    box-shadow:rgba(0,0,0,0.2) 0 0 1px;
     background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom #DCDCDC;
     background:-moz-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%) repeat scroll 0 0 transparent;
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#fcfcfc),color-stop(100%,#dcdcdc));
@@ -495,7 +493,7 @@ body.ext-ie .x-superboxselect-input input {
     margin-top:3px;
 }
 .x-superboxselect-item {
-    @include border-radius(6px);
+    border-radius:6px;
     background-color:#DEE7F8;
     border:1px solid #CAD8F3;
     padding:1px 15px 1px 5px !important;
@@ -566,7 +564,7 @@ body.ext-ie7 .x-superboxselect-item {
     margin: 6px 1% 6px 0;
     background-color: white;
     border: 1px solid #ddd;
-    @include border-radius(2px);
+    border-radius:2px;
 }
 
 .dashboard-block h4 {
@@ -602,7 +600,7 @@ body.ext-ie7 .x-superboxselect-item {
 	color: #5E5E5E;
 	padding:10px 10px 8px;
 	text-shadow:0 1px 1px #ffffff;
-    @include border-radius(2px 2px 0 0);
+    border-radius:2px 2px 0 0;
 	margin:0;
     zoom: 1;
 }
@@ -1185,7 +1183,7 @@ body.ext-ie7 .x-superboxselect-item {
 	color: #53595F;
 }
 .modx-template-detail .selected img {
-	@include border-radius(3px);
+	border-radius:3px;
 	border:1px solid #aaaaaa;
 	height:80px;
 	width:90px;
@@ -1256,7 +1254,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* Template browser */
 
 .thumb-wrapper {
-    @include border-radius(2px);
+    border-radius:2px;
     -khtml-border-radius: 2px;
     float:left;
     margin:0 15px 15px 0;
@@ -1383,7 +1381,6 @@ body.ext-ie7 .x-superboxselect-item {
     margin-bottom: 2px;
 }
 .inline-form input[type=text], .inline-form textarea{
-	 @include border-radius(2px);
     border-radius:2px;
     position: relative;
     background-color: #fbfbfb;
