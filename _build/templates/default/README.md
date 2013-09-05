@@ -83,9 +83,10 @@ grunt
 ```
 _Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated.<br>Install the LiveReload [browser extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-) to inject CSS changes without a page refresh._
 
-__Ship__<br>
-Compile Sass and minify for production by running:
+__Expand__<br>
+Compile Sass using expanded output style for development by running:
 
 ```bash
-grunt prod
+grunt expand
 ```
+_Note: do not check in uncompressed CSS._

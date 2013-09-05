@@ -90,7 +90,7 @@ module.exports = function(grunt) {
     },
     dev: {                           
       options: {                     
-        style: 'compressed',
+        style: 'expanded',
         compass:false,
       },
       files: {                        
@@ -152,7 +152,7 @@ module.exports = function(grunt) {
 
   // Tasks
 
-  grunt.registerTask('default', ['sass:dev','growl:sass','asciify','usebanner','growl:watch','watch']);
-  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass:dev','growl:sass','asciify','usebanner']);
-  grunt.registerTask('prod',['sass:dist','growl:sass']);
+  grunt.registerTask('default', ['sass:dist','growl:sass','asciify','usebanner','growl:watch','watch']);
+  grunt.registerTask('build', ['clean:prebuild','bower','copy','rename','sass:dist','growl:sass','asciify','usebanner']);
+  grunt.registerTask('expand',['sass:dist','growl:sass']);
 };
