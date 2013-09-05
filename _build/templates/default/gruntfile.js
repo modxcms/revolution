@@ -14,26 +14,11 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		copy: {
-			main: {
-				files: [{
-					expand: true,
-					filter: 'isFile',
-					cwd: '<%= dirs.css %>',
-					src: 'raw.css',
-					dest: './sass/'
-				}]
-			}
-		},
 		rename: { /* move files */
 			bourbon: {
 				src: './lib/bourbon/',
 				dest: './sass/',
 				force: true
-			},
-			raw: {
-				src: './sass/raw.css',
-				dest: './sass/_raw.scss'
 			}
 		},
 		asciify: {
@@ -140,7 +125,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-prettysass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-growl');
 	grunt.loadNpmTasks('grunt-asciify');
@@ -150,7 +134,7 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild', 'bower', 'copy', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso']);
+	grunt.registerTask('build', ['clean:prebuild', 'bower', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass']);
 	grunt.registerTask('pretty',['prettysass']);
 };
