@@ -1,7 +1,7 @@
 Contribution Guides
 --------------------------------------
 
-In the spirit of open source software development, MODX always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly.
+The visual design of the MODX Manager UI is developed using Sass and Grunt to allow front end developers to quickly create custom themes and contribute to the core. In the spirit of open source software development, MODX always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly.
 
 What you need
 --------------------------------------
@@ -30,6 +30,7 @@ Make sure you have `sass` installed by testing:
 ```bash
 sass --version
 ```
+_Note: if you aren't using homebrew you may need to install gems using `sudo gem install sass`._
 
 Installing Grunt & Grunt Packages
 ----------------------------
