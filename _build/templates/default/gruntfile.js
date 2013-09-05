@@ -4,7 +4,8 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		dirs: { /* just defining some properties */
 			lib: './lib',
-			scss: './sass/'
+			scss: './sass/',
+			css: '../../../manager/templates/default/css/'
 		},
 		bower: {
 			install: {
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					filter: 'isFile',
-					cwd: '../../../manager/templates/default/css/',
+					cwd: '<%= dirs.css %>',
 					src: 'raw.css',
 					dest: './sass/'
 				}]
@@ -50,8 +51,8 @@ module.exports = function(grunt) {
 					banner: '/*!\n <%= asciify_dontEdit %> \n see _build/templates/default/README.md\n*/\n'
 				},
 				files: {
-					'../../../manager/templates/default/css/index.css': '../../../manager/templates/default/css/index.css',
-					'../../../manager/templates/default/css/login.css': '../../../manager/templates/default/css/login.css'
+					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
+					'<%= dirs.css %>login.css': '<%= dirs.css %>login.css'
 				}
 			}
 		},
@@ -62,8 +63,8 @@ module.exports = function(grunt) {
 					compass: false
 				},
 				files: {
-					'../../../manager/templates/default/css/index.css': 'sass/index.scss',
-					'../../../manager/templates/default/css/login.css': 'sass/login.scss'
+					'<%= dirs.css %>index.css': 'sass/index.scss',
+					'<%= dirs.css %>login.css': 'sass/login.scss'
 				}
 			},
 			dev: {
@@ -72,8 +73,8 @@ module.exports = function(grunt) {
 					compass: false,
 				},
 				files: {
-					'../../../manager/templates/default/css/index.css': 'sass/index.scss',
-					'../../../manager/templates/default/css/login.css': 'sass/login.scss'
+					'<%= dirs.css %>index.css': 'sass/index.scss',
+					'<%= dirs.css %>login.css': 'sass/login.scss'
 				}
 			}
 		},
@@ -85,13 +86,13 @@ module.exports = function(grunt) {
 			// just prefix the specified file
 			index: {
 				options: {},
-				src: '../../../manager/templates/default/css/index.css',
-				dest: '../../../manager/templates/default/css/index.css'
+				src: '<%= dirs.css %>index.css',
+				dest: '<%= dirs.css %>index.css'
 			},
 			login: {
 				options: {},
-				src: '../../../manager/templates/default/css/login.css',
-				dest: '../../../manager/templates/default/css/login.css'
+				src: '<%= dirs.css %>login.css',
+				dest: '<%= dirs.css %>login.css'
 			}
 		},
 		watch: { /* trigger tasks on save */
