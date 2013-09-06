@@ -1642,9 +1642,21 @@ class xPDOObject {
                     if ($callback && is_callable($callback)) {
                         call_user_func($callback, array('className' => $this->_class, 'criteria' => $delete, 'object' => $this));
                     }
-                    if ($this->xpdo->_cacheEnabled) {
-                        $cacheKey= is_array($pk) ? implode('_', $pk) : $pk;
-                        $this->xpdo->toCache($this->xpdo->getTableClass($this->_class) . '_' . $cacheKey, null, 0, array('modified' => true));
+                    if ($this->xpdo->_cacheEnabled && $this->xpdo->getOption('cache_db', null, false)) {
+                        /** @var xPDOCache $dbCache */
+                        $dbCache = $this->xpdo->getCacheManager()->getCacheProvider(
+                            $this->getOption('cache_db_key', null, 'db'),
+                            array(
+                                xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', null, 'db'),
+                                xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, null, $this->getOption(xPDO::OPT_CACHE_HANDLER, null, 'cache.xPDOFileCache')),
+                                xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                                xPDO::OPT_CACHE_EXPIRES => (integer) $this->getOption(xPDO::OPT_CACHE_DB_EXPIRES, null, $this->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
+                                xPDO::OPT_CACHE_PREFIX => $this->getOption('cache_db_prefix', null, xPDOCacheManager::CACHE_DIR)
+                            )
+                        );
+                        if (!$dbCache->delete($this->_class, array('multiple_object_delete' => true))) {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Could not remove cache entries for {$this->_class}", '', __METHOD__, __FILE__, __LINE__);
+                        }
                     }
                     $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Removed {$this->_class} instance with primary key " . print_r($pk, true));
                 }

@@ -20,6 +20,7 @@
  * @package xpdo-test
  */
 require_once 'xPDOCacheManager.php';
+require_once 'xPDOCacheDb.php';
 /**
  * Suite handling all xPDOCache related tests.
  *
@@ -30,6 +31,7 @@ class xPDOCache_AllTests extends PHPUnit_Framework_TestSuite {
     public static function suite() {
         $suite = new xPDOCache_AllTests('xPDOCacheTest');
         $suite->addTestSuite('xPDOCacheManagerTest');
+        $suite->addTestSuite('xPDOCacheDbTest');
         return $suite;
     }
 }
