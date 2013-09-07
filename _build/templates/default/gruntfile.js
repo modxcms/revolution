@@ -3,22 +3,29 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		dirs: { /* just defining some properties */
-			lib: './lib',
+			lib: './lib/',
 			scss: './sass/',
 			css: '../../../manager/templates/default/css/'
 		},
 		bower: {
 			install: {
 				options: {
-					targetDir: './lib'
+					targetDir: './lib',
+					layout:'byComponent'
 				}
 			}
 		},
 		rename: { /* move files */
 			bourbon: {
-				src: './lib/bourbon/',
+				src: '<%= dirs.lib %>bourbon/',
 				dest: '<%= dirs.scss %>',
-				force: true
+				force: true /* not sure if this is neccessary or doing anything */
+			},
+			fontawesome: {
+				src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',
+				dest: '<%= dirs.scss %>font-awesome/',
+				expand:true,
+				flatten:true
 			}
 		},
 		asciify: {
@@ -33,7 +40,7 @@ module.exports = function(grunt) {
 			compress: {
 				options: {
 					report: 'min',
-					banner: '/*!\n <%= asciify_revolution %> learn how to contribute at https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
+					banner: '/*!\n <%= asciify_revolution %> \n see _build/templates/default/README.md\n*/\n'
 				},
 				files: {
 					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
@@ -45,7 +52,8 @@ module.exports = function(grunt) {
 			dist: {
 				options: {
 					style: 'compressed',
-					compass: false
+					compass: false,
+					banner: '/*\n <%= asciify_revolution %> learn how to contribute at https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -56,6 +64,7 @@ module.exports = function(grunt) {
 				options: {
 					style: 'expanded',
 					compass: false,
+					banner: '/*\n <%= asciify_revolution %> learn how to contribute at https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -90,7 +99,7 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: { /* take out the trash */
-			prebuild: ['<%= dirs.scss %>bourbon'],
+			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
 			postbuild: ['<%= dirs.lib %>']
 		},
 		growl: {
@@ -126,6 +135,6 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild', 'bower', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso','clean:postbuild']);
+	grunt.registerTask('build', ['clean:prebuild','bower', 'rename', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','asciify','csso']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass']);
 };

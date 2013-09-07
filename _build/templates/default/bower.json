@@ -1,12 +1,17 @@
 {
-	"name":"ryanlution",
-	"version":"0.0.1",
-	"dependencies":{
-		"bourbon":"*"
-	},
-	"exportsOverride":{
-		"bourbon":{
-			"":"app/assets/stylesheets/"
-		}
-	}
+  "name": "ryanlution",
+  "version": "0.0.1",
+  "dependencies": {
+    "bourbon": "*",
+    "font-awesome": "~3.2.1"
+  },
+  "exportsOverride": {
+    "bourbon": {
+      "": "app/assets/stylesheets/"
+    },
+    "font-awesome": {
+      "scss": ["scss"],
+      "font": ["font"]
+    }
+  }
 }
