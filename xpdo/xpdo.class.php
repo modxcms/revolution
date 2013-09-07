@@ -1010,11 +1010,18 @@ class xPDO {
             if (isset($query->query['columns'])) $query->query['columns'] = array();
             $query->select(array ("COUNT(DISTINCT {$expr})"));
             if ($stmt= $query->prepare()) {
+                $tstart = microtime(true);
                 if ($stmt->execute()) {
+                    $this->queryTime += microtime(true) - $tstart;
+                    $this->executedQueries++;
                     if ($results= $stmt->fetchAll(PDO::FETCH_COLUMN)) {
                         $count= reset($results);
                         $count= intval($count);
                     }
+                } else {
+                    $this->queryTime += microtime(true) - $tstart;
+                    $this->executedQueries++;
+                    $this->log(xPDO::LOG_LEVEL_ERROR, "Error " . $stmt->errorCode() . " executing statement: \n" . print_r($stmt->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
                 }
             }
         }
@@ -1077,10 +1084,19 @@ class xPDO {
     public function getValue($stmt, $column= null) {
         $value = null;
         if (is_object($stmt) && $stmt instanceof PDOStatement) {
+            $tstart = microtime(true);
             if ($stmt->execute()) {
+                $this->queryTime += microtime(true) - $tstart;
+                $this->executedQueries++;
                 $value= $stmt->fetchColumn($column);
                 $stmt->closeCursor();
+            } else {
+                $this->queryTime += microtime(true) - $tstart;
+                $this->executedQueries++;
+                $this->log(xPDO::LOG_LEVEL_ERROR, "Error " . $stmt->errorCode() . " executing statement: \n" . print_r($stmt->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
             }
+        } else {
+            $this->log(xPDO::LOG_LEVEL_ERROR, "No valid PDOStatement provided to getValue", '', __METHOD__, __FILE__, __LINE__);
         }
         return $value;
     }
@@ -2416,12 +2432,10 @@ class xPDO {
         if (!$this->connect(null, array(xPDO::OPT_CONN_MUTABLE => true))) {
             return false;
         }
-        $tstart= $this->getMicroTime();
+        $tstart= microtime(true);
         $return= $this->pdo->exec($query);
-        $tend= $this->getMicroTime();
-        $totaltime= $tend - $tstart;
-        $this->queryTime= $this->queryTime + $totaltime;
-        $this->executedQueries= $this->executedQueries + 1;
+        $this->queryTime += microtime(true) - $tstart;
+        $this->executedQueries++;
         return $return;
     }
 
@@ -2482,12 +2496,10 @@ class xPDO {
         if (!$this->connect()) {
             return false;
         }
-        $tstart= $this->getMicroTime();
+        $tstart= microtime(true);
         $return= $this->pdo->query($query);
-        $tend= $this->getMicroTime();
-        $totaltime= $tend - $tstart;
-        $this->queryTime= $this->queryTime + $totaltime;
-        $this->executedQueries= $this->executedQueries + 1;
+        $this->queryTime += microtime(true) - $tstart;
+        $this->executedQueries++;
         return $return;
     }
 
@@ -2912,8 +2924,14 @@ class xPDOIterator implements Iterator {
             $this->stmt->closeCursor();
         }
         $this->stmt = $this->criteria->prepare();
+        $tstart = microtime(true);
         if ($this->stmt && $this->stmt->execute()) {
+            $this->xpdo->queryTime += microtime(true) - $tstart;
+            $this->xpdo->executedQueries++;
             $this->fetch();
+        } elseif ($this->stmt) {
+            $this->xpdo->queryTime += microtime(true) - $tstart;
+            $this->xpdo->executedQueries++;
         }
     }
 
