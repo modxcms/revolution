@@ -90,7 +90,8 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: { /* take out the trash */
-			prebuild: ['<%= dirs.scss %>bourbon']
+			prebuild: ['<%= dirs.scss %>bourbon'],
+			postbuild: ['<%= dirs.lib %>']
 		},
 		growl: {
 			sass: {
@@ -125,6 +126,6 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild', 'bower', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso']);
+	grunt.registerTask('build', ['clean:prebuild', 'bower', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso','clean:postbuild']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass']);
 };
