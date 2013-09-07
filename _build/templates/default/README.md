@@ -30,7 +30,7 @@ Make sure you have `sass` installed by testing:
 ```bash
 sass --version
 ```
-_Note: if you aren't using homebrew you may need to install gems using `sudo gem install sass`._
+_Note: Depending on your ruby setup you may need to install gems using `sudo gem install sass`._
 
 Installing Grunt & Grunt Packages
 ----------------------------
@@ -38,7 +38,7 @@ Installing Grunt & Grunt Packages
 First, clone a copy of this git repo by running:
 
 ```bash
-git clone -b grunt git://github.com/modxcms/revolution.git
+git clone -b develop git://github.com/modxcms/revolution.git
 ```
 
 Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) and [bower](http://bower.io/) packages if you haven't before. These should be done as global installs:
@@ -57,7 +57,7 @@ bower --version
 Enter the default template directory and install the Node and Bower dependencies, this time *without* specifying a global(-g) install:
 
 ```bash
-cd _built/templates/default && npm install
+cd revolution/_build/templates/default && npm install
 ```
 _Note: `npm install` updates dependencies and should be run whenever you pull from git._
 
