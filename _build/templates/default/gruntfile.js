@@ -17,23 +17,23 @@ module.exports = function(grunt) {
 		rename: { /* move files */
 			bourbon: {
 				src: './lib/bourbon/',
-				dest: './sass/',
+				dest: '<%= dirs.scss %>',
 				force: true
 			}
 		},
 		asciify: {
-			dontEdit: {
+			revolution: {
 				options: {
 					font: 'larry3d'
 				},
-				text: 'do not edit'
+				text: 'MODX Revolution'
 			}
 		},
 		csso: {
 			compress: {
 				options: {
 					report: 'min',
-					banner: '/*!\n <%= asciify_dontEdit %> \n see _build/templates/default/README.md\n*/\n'
+					banner: '/*!\n <%= asciify_revolution %> learn how to contribute at https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
 				},
 				files: {
 					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: { /* take out the trash */
-			prebuild: ['./sass/bourbon']
+			prebuild: ['<%= dirs.scss %>bourbon']
 		},
 		growl: {
 			sass: {
