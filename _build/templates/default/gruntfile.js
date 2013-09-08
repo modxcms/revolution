@@ -5,7 +5,8 @@ module.exports = function(grunt) {
 		dirs: { /* just defining some properties */
 			lib: './lib/',
 			scss: './sass/',
-			css: '../../../manager/templates/default/css/'
+			css: '../../../manager/templates/default/css/',
+			template: '../../../manager/templates/default/'
 		},
 		bower: {
 			install: {
@@ -18,12 +19,13 @@ module.exports = function(grunt) {
 		copy: { /* move files */
 			bourbon: {
 				files:[
-				{src:'bourbon/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
+					{src:'bourbon/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
 				]
 			},
 			fontawesome: {
 				files:[
-				{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true}
+					{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true},
+					{src: 'font/**/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
 				]
 			}
 		},
