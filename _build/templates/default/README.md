@@ -63,8 +63,9 @@ _Note: `npm install` updates dependencies and should be run whenever you pull fr
 
 To enable Growl notifications install [terminal-notifier](https://github.com/alextucker/grunt-growl#getting-started) with RubyGems:
 ```bash
-sudo gem install terminal-notifier
+gem install terminal-notifier
 ```
+_Note: Depending on your ruby setup you may need to install gems using `sudo gem install terminal-notifier`._
 
 Grunt Commands
 ----------------------------
