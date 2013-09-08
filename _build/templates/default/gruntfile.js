@@ -15,17 +15,16 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		rename: { /* move files */
+		copy: { /* move files */
 			bourbon: {
-				src: '<%= dirs.lib %>bourbon/',
-				dest: '<%= dirs.scss %>',
-				force: true /* not sure if this is neccessary or doing anything */
+				files:[
+				{src:'bourbon/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
+				]
 			},
 			fontawesome: {
-				src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',
-				dest: '<%= dirs.scss %>font-awesome/',
-				expand:true,
-				flatten:true
+				files:[
+				{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true}
+				]
 			}
 		},
 		asciify: {
@@ -40,7 +39,7 @@ module.exports = function(grunt) {
 			compress: {
 				options: {
 					report: 'min',
-					banner: '/*!\n <%= asciify_revolution %> \n see _build/templates/default/README.md\n*/\n'
+					banner: '/*!\n <%= asciify_revolution %> \n see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
 				},
 				files: {
 					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
@@ -123,7 +122,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-bower-task');
-	grunt.loadNpmTasks('grunt-rename');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-clean');
@@ -135,6 +134,6 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild','bower', 'rename', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','asciify','csso']);
+	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','asciify','csso','clean:postbuild']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass']);
 };

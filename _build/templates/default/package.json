@@ -12,6 +12,7 @@
     "grunt-growl": "~0.1.5",
     "grunt-contrib-sass": "~0.5.0",
     "grunt-csso": "~0.5.0",
-    "grunt-autoprefixer": "~0.3.0"
+    "grunt-autoprefixer": "~0.3.0",
+    "grunt-contrib-copy": "~0.4.1"
   }
 }
