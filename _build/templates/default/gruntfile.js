@@ -119,6 +119,10 @@ module.exports = function(grunt) {
 			watch: {
 				title: "grunt",
 				message: "Watching. Grunt has its eye on you."
+			},
+			expand: {
+				title: "grunt",
+				message: "CSS Expanded. Don't check it in."
 			}
 		}
 	});
@@ -137,5 +141,5 @@ module.exports = function(grunt) {
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
 	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','asciify','csso','clean:postbuild']);
-	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass']);
+	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
 };
