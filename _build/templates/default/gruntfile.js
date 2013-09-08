@@ -90,6 +90,14 @@ module.exports = function(grunt) {
 				dest: '<%= dirs.css %>login.css'
 			}
 		},
+		csslint: {
+		  strict: {
+		    options: {
+		      import: 2
+		    },
+		    src: ['<%= dirs.css %>*.css']
+		  }
+		},
 		watch: { /* trigger tasks on save */
 			options: {
 				livereload: true
@@ -136,6 +144,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-asciify');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-csso');
+	grunt.loadNpmTasks('grunt-contrib-csslint');
 
 
 	// Tasks
