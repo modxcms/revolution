@@ -57,7 +57,8 @@ bower --version
 Enter the default template directory and install the Node and Bower dependencies, this time *without* specifying a global(-g) install:
 
 ```bash
-cd revolution/_build/templates/default && npm install
+cd revolution/_build/templates/default
+npm install
 ```
 _Note: `npm install` updates dependencies and should be run whenever you pull from git._
 
