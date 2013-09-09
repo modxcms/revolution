@@ -9,12 +9,11 @@
     "grunt-contrib-watch": "~0.5.2",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-grunticon": "~0.6.8",
-    "grunt-asciify": "~0.2.1",
     "grunt-growl": "~0.1.5",
     "grunt-contrib-sass": "~0.5.0",
-    "grunt-csso": "~0.5.0",
     "grunt-autoprefixer": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-csslint": "~0.1.2"
+    "grunt-contrib-csslint": "~0.1.2",
+    "grunt-contrib-cssmin": "~0.6.1"
   }
 }

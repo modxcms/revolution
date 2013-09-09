@@ -29,19 +29,12 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		asciify: {
-			revolution: {
-				options: {
-					font: 'larry3d'
-				},
-				text: 'MODX Revolution'
-			}
-		},
-		csso: {
+		cssmin: {
 			compress: {
 				options: {
 					report: 'min',
-					banner: '/*!\n <%= asciify_revolution %> \n <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
+					keepSpecialComments:1,
+					banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
 				},
 				files: {
 					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
@@ -71,7 +64,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		autoprefixer: { /* this expands the css so it needs to get compressed with csso afterwards */
+		autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
 			options: {
 				// Task-specific options go here.
 			},
@@ -102,7 +95,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: '<%= dirs.scss %>*',
-				tasks: ['sass:dist', 'autoprefixer', 'asciify', 'csso', 'growl:sass']
+				tasks: ['sass:dist', 'autoprefixer', 'cssmin', 'growl:sass']
 			}
 		},
 		clean: { /* take out the trash */
@@ -139,14 +132,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-growl');
-	grunt.loadNpmTasks('grunt-asciify');
 	grunt.loadNpmTasks('grunt-autoprefixer');
-	grunt.loadNpmTasks('grunt-csso');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 
 
 	// Tasks
-	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','asciify','csso','clean:postbuild']);
+	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'cssmin', 'growl:watch', 'watch']);
+	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin','clean:postbuild']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
 };
