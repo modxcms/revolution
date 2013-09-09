@@ -41,7 +41,7 @@ module.exports = function(grunt) {
 			compress: {
 				options: {
 					report: 'min',
-					banner: '/*!\n <%= asciify_revolution %> \n see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
+					banner: '/*!\n <%= asciify_revolution %> \n <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
 				},
 				files: {
 					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
@@ -53,8 +53,7 @@ module.exports = function(grunt) {
 			dist: {
 				options: {
 					style: 'compressed',
-					compass: false,
-					banner: '/*\n <%= asciify_revolution %> learn how to contribute at https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
+					compass: false
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -64,8 +63,7 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
-					compass: false,
-					banner: '/*\n <%= asciify_revolution %> learn how to contribute at https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/\n'
+					compass: false
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
