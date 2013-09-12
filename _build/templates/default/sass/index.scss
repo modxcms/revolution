@@ -210,8 +210,8 @@ input::-moz-focus-inner {
   left: auto;
   padding: 7px;
   position: fixed;
-  right: 15px;
-  top: 61px;
+  right: 34px;
+  top: 50px;
   z-index: 9;
 }
 
@@ -1176,12 +1176,12 @@ body.ext-ie7 .x-superboxselect-item {
 /* MODExt common classes */
 
 .container {
-  margin: 20px 15px 20px 0;
+  margin: 20px 15px 20px;
 }
 
 /* Wrap the main content */
 .structure-tabs {
-  margin-top: -1px;
+  /* margin-top: -1px; */
 }
 
 /* Realign modx-tabs for getPageStructure */
