@@ -74,7 +74,7 @@ class xPDOTest extends xPDOTestCase {
     /**
      * Test xPDO::escSplit
      */
-    public function testEscSplit() {        
+    public function testEscSplit() {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $str = '1,2,3';
         $result = xPDO::escSplit(',',$str,$this->xpdo->_escapeCharOpen);
@@ -146,7 +146,7 @@ class xPDOTest extends xPDOTestCase {
         $cachePath = $this->xpdo->getCachePath();
         $this->assertEquals($cachePath, xPDOTestHarness::$properties['xpdo_test_path'].'cache/','xpdo->getCachePath() did not return the correct cache path.');
     }
-    
+
     /**
      * Verify xPDO::newQuery returns a xPDOQuery object
      */
@@ -160,7 +160,7 @@ class xPDOTest extends xPDOTestCase {
     /**
      * Tests xPDO::getAncestry and make sure it returns an array of the correct
      * data.
-     * 
+     *
      * @dataProvider providerGetAncestry
      */
     public function testGetAncestry($class,array $correct = array(),$includeSelf = true) {
@@ -184,7 +184,7 @@ class xPDOTest extends xPDOTestCase {
     /**
      * Tests xPDO::getDescendants and make sure it returns an array of the correct
      * data.
-     * 
+     *
      * @dataProvider providerGetDescendants
      */
     public function testGetDescendants($class,array $correct = array()) {
@@ -242,7 +242,7 @@ class xPDOTest extends xPDOTestCase {
         $correct = implode(', ', array_map(array($this->xpdo, 'escape'), $includeColumns));
         $columns = $this->xpdo->getSelectColumns('Person','','',$includeColumns);
         $this->assertEquals($columns,$correct);
-        
+
         $excludeColumns = array('first_name','middle_name','dob','gender','security_level','blood_type');
         $correct = implode(', ', array_map(array($this->xpdo, 'escape'), array('id', 'last_name', 'date_modified', 'username', 'password')));
         $columns = $this->xpdo->getSelectColumns('Person','','',$excludeColumns,true);
@@ -257,7 +257,7 @@ class xPDOTest extends xPDOTestCase {
 
     /**
      * Test xPDO->getPackage.
-     * 
+     *
      * @dataProvider providerGetPackage
      * @param string $class The class to test.
      * @param string $correctMeta The correct table package name that should be returned.
@@ -279,7 +279,7 @@ class xPDOTest extends xPDOTestCase {
 
     /**
      * Test xPDO->getTableMeta
-     * 
+     *
      * @dataProvider providerGetTableMeta
      * @param string $class The class to test.
      * @param array/null $correctMeta The correct table meta that should be returned.
@@ -287,6 +287,9 @@ class xPDOTest extends xPDOTestCase {
     public function testGetTableMeta($class,$correctMeta = null) {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $tableMeta = $this->xpdo->getTableMeta($class);
+        if (xPDOTestHarness::$properties['xpdo_driver'] !== 'mysql') {
+            $correctMeta = null;
+        }
         $this->assertEquals($correctMeta,$tableMeta);
     }
     /**
@@ -301,7 +304,7 @@ class xPDOTest extends xPDOTestCase {
 
     /**
      * Test xPDO->getFields
-     * 
+     *
      * @dataProvider providerGetFields
      * @param string $class The name of the class to test.
      * @param array $correctFields An array of fields that should result.
@@ -375,7 +378,7 @@ class xPDOTest extends xPDOTestCase {
 
     /**
      * Test xPDO->getPK
-     * 
+     *
      * @dataProvider providerGetPK
      * @param string $class The class name to check.
      * @param string $correctPk The PK that should result.
@@ -399,7 +402,7 @@ class xPDOTest extends xPDOTestCase {
 
     /**
      * Tests xPDO->getPKType
-     * 
+     *
      * @dataProvider providerGetPKType
      * @param string $class
      * @param string $correctType

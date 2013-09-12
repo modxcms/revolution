@@ -1,5 +1,10 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.2.9-pl (September 12, 2013)
+====================================
+- Improve accuracy of query statistics
+- [#10183] Fix cache entry removal on xPDOObject::remove()
+
 xPDO 2.2.8-pl (August 26, 2013)
 ====================================
 - [#9864] Identify compound PK's properly in xPDOQuery::parseConditions()
