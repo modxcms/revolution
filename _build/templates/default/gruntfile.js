@@ -34,7 +34,26 @@ module.exports = function(grunt) {
 				options: {
 					report: 'min',
 					keepSpecialComments:1,
-					banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
+					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
+					banner : '/*!'
++  '\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>'
++  '\n* '
++  '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC'
++  '\n* '
++  '\n* This file is part of <%= pkg.title %> and was compiled using Grunt.'
++  '\n* '
++  '\n* <%= pkg.title %> is free software: you can redistribute it and/or modify it under the terms of the'
++  '\n* GNU General Public License as published by the Free Software Foundation, either version 2 of the'
++  '\n* License, or (at your option) any later version.'
++  '\n* '
++  '\n* <%= pkg.title %> is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;'
++  '\n* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
++  '\n* '
++  '\n* See the GNU General Public License for more details. You should have received a copy of the GNU'
++  '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.'
++  '\n* '
+//+  '\n* Authors: TODO'
++  '\n*/'
 				},
 				files: {
 					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',

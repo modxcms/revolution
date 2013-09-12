@@ -1,7 +1,8 @@
 {
   "name": "revolution-theme-default",
-  "title": "MODX Revolution Default Theme",
-  "version": "0.1.1",
+  "title": "MODX Revolution",
+  "version": "2.3.0",
+  "repository":"https://github.com/modxcms/revolution",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-bower-task": "~0.3.1",
