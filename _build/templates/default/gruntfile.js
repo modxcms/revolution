@@ -3,37 +3,57 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		dirs: { /* just defining some properties */
-			lib: './lib',
+			lib: './lib/',
 			scss: './sass/',
-			css: '../../../manager/templates/default/css/'
+			css: '../../../manager/templates/default/css/',
+			template: '../../../manager/templates/default/'
 		},
 		bower: {
 			install: {
 				options: {
-					targetDir: './lib'
+					targetDir: './lib',
+					layout:'byComponent'
 				}
 			}
 		},
-		rename: { /* move files */
+		copy: { /* move files */
 			bourbon: {
-				src: './lib/bourbon/',
-				dest: './sass/',
-				force: true
+				files:[
+					{src:'bourbon/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
+				]
+			},
+			fontawesome: {
+				files:[
+					{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true},
+					{src: 'font/**/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
+				]
 			}
 		},
-		asciify: {
-			dontEdit: {
-				options: {
-					font: 'larry3d'
-				},
-				text: 'do not edit'
-			}
-		},
-		csso: {
+		cssmin: {
 			compress: {
 				options: {
 					report: 'min',
-					banner: '/*!\n <%= asciify_dontEdit %> \n see _build/templates/default/README.md\n*/\n'
+					keepSpecialComments:1,
+					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
+					banner : '/*!'
++  '\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>'
++  '\n* '
++  '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC'
++  '\n* '
++  '\n* This file is part of <%= pkg.title %> and was compiled using Grunt.'
++  '\n* '
++  '\n* <%= pkg.title %> is free software: you can redistribute it and/or modify it under the terms of the'
++  '\n* GNU General Public License as published by the Free Software Foundation, either version 2 of the'
++  '\n* License, or (at your option) any later version.'
++  '\n* '
++  '\n* <%= pkg.title %> is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;'
++  '\n* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
++  '\n* '
++  '\n* See the GNU General Public License for more details. You should have received a copy of the GNU'
++  '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.'
++  '\n* '
+//+  '\n* Authors: TODO'
++  '\n*/'
 				},
 				files: {
 					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
@@ -55,7 +75,7 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
-					compass: false,
+					compass: false
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -63,7 +83,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		autoprefixer: { /* this expands the css so it needs to get compressed with csso afterwards */
+		autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
 			options: {
 				// Task-specific options go here.
 			},
@@ -80,17 +100,26 @@ module.exports = function(grunt) {
 				dest: '<%= dirs.css %>login.css'
 			}
 		},
+		csslint: {
+		  strict: {
+		    options: {
+		      import: 2
+		    },
+		    src: ['<%= dirs.css %>*.css']
+		  }
+		},
 		watch: { /* trigger tasks on save */
 			options: {
 				livereload: true
 			},
 			scss: {
 				files: '<%= dirs.scss %>*',
-				tasks: ['sass:dist', 'autoprefixer', 'asciify', 'csso', 'growl:sass']
+				tasks: ['sass:dist', 'autoprefixer', 'cssmin', 'growl:sass']
 			}
 		},
 		clean: { /* take out the trash */
-			prebuild: ['./sass/bourbon']
+			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
+			postbuild: ['<%= dirs.lib %>']
 		},
 		growl: {
 			sass: {
@@ -108,23 +137,27 @@ module.exports = function(grunt) {
 			watch: {
 				title: "grunt",
 				message: "Watching. Grunt has its eye on you."
+			},
+			expand: {
+				title: "grunt",
+				message: "CSS Expanded. Don't check it in."
 			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-bower-task');
-	grunt.loadNpmTasks('grunt-rename');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-growl');
-	grunt.loadNpmTasks('grunt-asciify');
 	grunt.loadNpmTasks('grunt-autoprefixer');
-	grunt.loadNpmTasks('grunt-csso');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-csslint');
 
 
 	// Tasks
-	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild', 'bower', 'rename', 'sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'csso']);
-	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass']);
+	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'asciify', 'cssmin', 'growl:watch', 'watch']);
+	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin','clean:postbuild']);
+	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
 };
