@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * User Brazilian Portuguese lexicon topic
  *
@@ -35,9 +35,9 @@ $_lang['profile_recent_resources_desc'] = 'Esta é uma lista dos recuros que voc
 $_lang['remote_data'] = 'Dados Remotos';
 $_lang['role'] = 'Função';
 $_lang['role_create'] = 'Criar Função';
-$ _LANG ['role_desc_authority'] = 'O nível de autoridade da função. Os níveis de autoridade mais baixas são mais fortes, e herdam as Permissões de funções com as autoridades mais elevadas nos grupos que são atribuídos a .';
-$ _LANG ['role_desc_name'] = 'Um nome para a função, como Editor de Conteúdo, Publisher, Administrador de Sistemas, etc ';
-$ _LANG ['role_desc_description'] = 'Uma breve descrição da função.';
+$_lang['role_desc_authority'] = 'O nível de autoridade da função. Os níveis de autoridade mais baixas são mais fortes, e herdam as Permissões de funções com as autoridades mais elevadas nos grupos que são atribuídos a .';
+$_lang['role_desc_name'] = 'Um nome para a função, como Editor de Conteúdo, Publisher, Administrador de Sistemas, etc ';
+$_lang['role_desc_description'] = 'Uma breve descrição da função.';
 $_lang['role_err_ae'] = 'Uma função já existe com este nome.';
 $_lang['role_err_duplicate'] = 'Um erro ocorreu enquanto duplicava a função.';
 $_lang['role_err_has_users'] = 'Existem usuários que desempenham esta função. Não pode ser excluída.';
@@ -62,9 +62,9 @@ $_lang['user_active_desc'] = 'Se sim ou não este usuário está ativo. Se um us
 $_lang['user_add_group'] = 'Adicionar Grupo de Usuários para Usuário';
 $_lang['user_already_in_use'] = 'Nome de usuário já está em uso!';
 $_lang['user_block'] = 'Bloqueado';
-$ _LANG ['user_block_desc'] = 'Se marcado, este usuário será permanentemente bloqueado para log in';
-$ _LANG ['user_blockedafter'] = 'Bloqueado Após';
-$ _LANG ['user_blockedafter_desc'] = 'Se definido, o usuário será bloqueado após este período ocorre.';
+$_lang['user_block_desc'] = 'Se marcado, este usuário será permanentemente bloqueado para log in';
+$_lang['user_blockedafter'] = 'Bloqueado Após';
+$_lang['user_blockedafter_desc'] = 'Se definido, o usuário será bloqueado após este período ocorre.';
 $_lang['user_blockedafter'] = 'Bloqueado Em';
 $_lang['user_blockeduntil'] = 'Bloqueado Até';
 $_lang['user_changeddata'] = 'Seus dados foram alterados. Por favor, entre novamente.';
@@ -110,19 +110,19 @@ $_lang['user_err_password_no_match'] = 'As senhas não conferem.';
 $_lang['user_err_remove'] = 'Um erro ocorreu na tentativa de remover o usuário.';
 $_lang['user_err_resource_subdirectory'] = 'O diretório que você especificou não contei os %s diretórios.';
 $_lang['user_err_save'] = 'Um erro ocorreu ao salvar o usuário.';
-$ _LANG ['user_err_username_invalid'] = 'Nome de usuário inválido especificado.';
+$_lang['user_err_username_invalid'] = 'Nome de usuário inválido especificado.';
 $_lang['user_failedlogincount'] = 'Tentativas de login';
-$ _LANG ['user_failedlogincount_desc'] = 'O número de vezes que este usuário não conseguiu acessar, digitando uma senha incorreta.';
+$_lang['user_failedlogincount_desc'] = 'O número de vezes que este usuário não conseguiu acessar, digitando uma senha incorreta.';
 $_lang['user_fax'] = 'Fax';
 $_lang['user_female'] = 'Feminino';
 $_lang['user_full_name'] = 'Nome Completo';
 $_lang['user_group'] = 'Grupo de Usuários';
 $_lang['user_group_create'] = 'Criar Grupo de Usuários';
 $_lang['user_group_id'] = 'GU ID';
-$ _LANG ['user_group_desc_name'] = 'O nome do grupo de usuários';
-$ _LANG ['user_group_desc_description'] = 'Uma breve descrição do Grupo de Usuário';
-$ _LANG ['user_group_desc_parent'] = 'O grupo pai desse grupo. Utilizada para fins de organização .';
-$ _LANG ['user_group_desc_dashboard'] = 'O Painel que os membros deste grupo (que tem esse grupo como seu grupo primário) vai usar.';
+$_lang['user_group_desc_name'] = 'O nome do grupo de usuários';
+$_lang['user_group_desc_description'] = 'Uma breve descrição do Grupo de Usuário';
+$_lang['user_group_desc_parent'] = 'O grupo pai desse grupo. Utilizada para fins de organização .';
+$_lang['user_group_desc_dashboard'] = 'O Painel que os membros deste grupo (que tem esse grupo como seu grupo primário) vai usar.';
 $_lang['user_group_document_group_err_already_exists'] = 'O grupo de usuários já está anexo a este grupo de documentos.';
 $_lang['user_group_document_group_err_create'] = 'Um erro ocorreu enquanto tentava anexar o grupo de usuários do grupo de documentos.';
 $_lang['user_group_document_group_err_not_found'] = 'Este grupo de usuários não está anexo a este grupo de documentos!';

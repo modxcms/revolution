@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * TV Widget Brazilian Portuguese lexicon topic
  *

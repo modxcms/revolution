@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Resource Brazilian Portuguese lexicon topic
  *

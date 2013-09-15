@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * System Events Brazlian Portuguese lexicon topic
  *
- * @language br
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */

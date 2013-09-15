@@ -1,12 +1,12 @@
 <?php
 /**
- * Setting English lexicon topic
+ * Setting Brazilian Portuguese lexicon topic
  *
- * @language en
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Area';
+$_lang['area'] = 'Área';
 $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core Code';
