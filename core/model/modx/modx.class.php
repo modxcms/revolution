@@ -1663,7 +1663,9 @@ class modX extends xPDO {
                 $processor = new modDeprecatedProcessor($this);
             }
             $processor->setPath($processorFile);
-            $processor->setProperties($scriptProperties);
+            if (empty($className)) {
+                $processor->setProperties($scriptProperties);
+            }
             $response = $processor->run();
         } else {
             $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processorFile} does not exist; " . print_r($options, true));
