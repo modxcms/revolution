@@ -2,7 +2,7 @@
 /**
  * Default Brazilian Portuguese lexicon topic
  *
- * @language br
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
@@ -447,7 +447,6 @@ $_lang['xtype'] = 'Tipo de Campo';
 $_lang['xtype_desc'] = 'O tipo de campo da definição. Pode ser: textfield, textarea, ou boolean.';
 $_lang['yes'] = 'Sim';
 $_lang['yesno'] = 'Sim/Não';
-
 $_lang['january'] = 'Janeiro';
 $_lang['february'] = 'Fevereiro';
 $_lang['march'] = 'Março';
@@ -460,7 +459,6 @@ $_lang['september'] = 'Setembro';
 $_lang['october'] = 'Outubro';
 $_lang['november'] = 'Novembro';
 $_lang['december'] = 'Dezembro';
-
 $_lang['sunday'] = 'Domingo';
 $_lang['monday'] = 'Segunda';
 $_lang['tuesday'] = 'Terça';
