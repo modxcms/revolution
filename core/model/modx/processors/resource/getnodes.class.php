@@ -38,7 +38,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return mixed
      */
     public function process() {
@@ -101,7 +101,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Determine the context and root and start nodes for the tree
-     * 
+     *
      * @return void
      */
     public function getRootNode() {
@@ -189,7 +189,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Add search results to tree nodes
-     * 
+     *
      * @param string $query
      * @return void
      */
@@ -263,7 +263,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Iterate across the collection of items from the query
-     * 
+     *
      * @param array $collection
      * @return void
      */
@@ -295,7 +295,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Prepare a Context for being shown in the tree
-     * 
+     *
      * @param modContext $context
      * @return array
      */
@@ -337,7 +337,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Prepare a Resource for being shown in the tree
-     * 
+     *
      * @param modResource $resource
      * @return array
      */
@@ -391,7 +391,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         }
 
         // Check for an icon class on the resource template
-        $tplIcon = $resource->getOne('Template')->get('icon');
+        $tplIcon = $resource->Template ? $resource->Template->icon : '';
         $rsrcType = ltrim(strtolower($resource->get('class_key')),'mod');
         $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.$rsrcType, null,'icon-file');
 
