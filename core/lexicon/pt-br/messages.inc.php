@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
- * Messages English lexicon topic
+ * Messages Brazilian Portuguese lexicon topic
  *
- * @language en
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
@@ -27,32 +27,31 @@ $_lang['sent_on'] = 'Enviado em';
 $_lang['subject'] = 'Assunto';
 $_lang['user'] = 'Usuário';
 $_lang['usergroup'] = 'Grupo de Usuários';
-
-$_lang['message_err_not_found'] = 'Message not found.';
-$_lang['message_err_not_specified_subject'] = 'Subject not specified!';
-$_lang['message_err_remove'] = 'An error occured while trying to delete the message.';
-$_lang['message_err_remove_notauth'] ='You are not authorized to delete this message.';
-$_lang['message_err_save'] = 'An error occurred while saving the message.';
-$_lang['messages_all'] = 'Everyone';
-$_lang['messages_compose'] = 'Compose a message';
+$_lang['message_err_not_found'] = 'Mensagem não foi encontrado.';
+$_lang['message_err_not_specified_subject'] = 'Assunto não especificado';
+$_lang['message_err_remove'] = 'Ocorreu um erro ao tentar excluir a mensagem.';
+$_lang['message_err_remove_notauth'] = 'Você não está autorizado a excluir esta mensagem.';
+$_lang['message_err_save'] = 'Ocorreu um erro ao salvar a mensagem.';
+$_lang['messages_all'] = 'Todos';
+$_lang['messages_compose'] = 'Compor uma mensagem';
 $_lang['messages_forward'] = 'Forward';
 $_lang['messages_from'] = 'From';
-$_lang['messages_group'] = 'A group';
-$_lang['messages_inbox'] = 'Inbox';
-$_lang['messages_mark_as_unread'] = 'Mark as unread';
-$_lang['messages_message'] = 'Message';
-$_lang['messages_not_allowed_to_read'] = 'You\'re not allowed to read this message!';
-$_lang['messages_no_messages'] = 'No messages in Inbox.';
+$_lang['messages_group'] = 'Um grupo';
+$_lang['messages_inbox'] = 'Caixa de Entrada';
+$_lang['messages_mark_as_unread'] = 'Marcar como não lido';
+$_lang['messages_message'] = 'Mensagem';
+$_lang['messages_not_allowed_to_read'] = 'Você não está autorizado a ler esta mensagem!';
+$_lang['messages_no_messages'] = 'Nenhuma mensagem na Caixa de Entrada.';
 $_lang['messages_private'] = 'Private';
-$_lang['messages_read_message'] = 'Read message';
-$_lang['messages_reply'] = 'Reply';
-$_lang['messages_role'] = 'Role';
-$_lang['messages_select_group'] = 'Select a group';
-$_lang['messages_select_user'] = 'Select a user';
-$_lang['messages_send'] = 'Send';
-$_lang['messages_send_to'] = 'Send to';
-$_lang['messages_sent'] = 'Sent on';
-$_lang['messages_subject'] = 'Subject';
+$_lang['messages_read_message'] = 'Ler mensagem';
+$_lang['messages_reply'] = 'Responder';
+$_lang['messages_role'] = 'Papel';
+$_lang['messages_select_group'] = 'Selecione um grupo';
+$_lang['messages_select_user'] = 'Selecione um usuário';
+$_lang['messages_send'] = 'Enviar';
+$_lang['messages_send_to'] = 'Enviar para';
+$_lang['messages_sent'] = 'Enviados';
+$_lang['messages_subject'] = 'Assunto';
 $_lang['messages_system_user'] = '[System]';
-$_lang['messages_title'] = 'Messages';
-$_lang['messages_user'] = 'User';
+$_lang['messages_title'] = 'Mensagens';
+$_lang['messages_user'] = 'Usuário';
