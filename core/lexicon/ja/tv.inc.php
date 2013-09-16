@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * @author yamamoto http://kyms.jp 2012-08-07
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  */
@@ -14,9 +14,9 @@ $_lang['has_access'] = 'アクセスしますか？';
 $_lang['rank'] = 'ランク';
 $_lang['rendering_options'] = 'レンダリングオプション';
 $_lang['tv'] = 'テンプレート変数';
-$_lang['tv_access_msg'] = 'このテンプレート変数が所属するリソースグループを選択して下さい。選択したグループへのアクセス権を持つユーザのみがこのテンプレート変数を修正することができます。 もしグループが選ばれていなければ、管理画面へのアクセス権を持つ全てのユーザがテンプレート変数を修正することができます。';
-$_lang['tv_binding_msg'] = 'このフィールドはデータソースバインディング(@コマンド)をサポートしています。';
-$_lang['tv_caption'] = 'キャプション(見出し)';
+$_lang['tv_access_msg'] = 'このテンプレート変数が所属するリソースグループを選択してください。選択したグループへのアクセス権を持つユーザのみがこのテンプレート変数を修正することができます。<br />もしグループが選ばれていなければ、管理画面へのアクセス権を持つ全てのユーザがテンプレート変数を修正することができます。';
+$_lang['tv_binding_msg'] = 'このフィールドはデータソースバインディング（@コマンド）をサポートしています。';
+$_lang['tv_caption'] = 'キャプション（見出し）';
 $_lang['tv_change_template_msg'] = 'このテンプレートを変更するとこのページのテンプレート変数を再読み込みします。保存されていない変更は失われます。<br />本当にテンプレートを変更しますか？';
 $_lang['tv_desc_caption'] = 'リソース編集時、テンプレート変数の横に見出しとして表示されるテキスト。';
 $_lang['tv_desc_category'] = 'このテンプレート変数が属するカテゴリー。';
@@ -54,7 +54,7 @@ $_lang['tv_rank'] = 'ソート順';
 $_lang['tv_reset_params'] = 'パラメーターのリセット';
 $_lang['tv_sources.intro_msg'] = '各コンテキストごとに、このテンプレート変数で使用するメディアソースを指定できます。<br />編集するには、表の「ソース」セルをダブルクリックしてください。';
 $_lang['tv_tmpl_access'] = 'テンプレートの割当';
-$_lang['tv_tmpl_access_msg'] = 'このテンプレート変数へのアクセスを許可するテンプレートを選択して下さい。';
+$_lang['tv_tmpl_access_msg'] = 'このテンプレート変数へのアクセスを許可するテンプレートを選択してください。';
 $_lang['tv_widget'] = 'ウィジェット';
 $_lang['tv_widget_prop'] = 'ウィジェットのプロパティ';
 $_lang['tvd_err_remove'] = 'ドキュメントからテンプレート変数を削除中にエラーが発生しました。';

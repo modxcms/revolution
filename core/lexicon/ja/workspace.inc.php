@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -77,7 +77,7 @@ $_lang['package_details'] = 'パッケージの詳細';
 $_lang['package_details_for'] = 'パッケージ [[+package]] の詳細';
 $_lang['package_download_err'] = '[[+location]] でパッケージをダウンロードできませんでした。';
 $_lang['package_download_err_create'] = 'シグネイチャ：[[+signature]] のパッケージの、ダウンロードと作成時にエラーが発生しました。';
-$_lang['package_download_err_ns'] = 'ダウンロードするために、少なくとも1つはパッケージを選択して下さい。';
+$_lang['package_download_err_ns'] = 'ダウンロードするために、少なくとも1つはパッケージを選択してください。';
 $_lang['package_err_create'] = 'パッケージを作成できませんでした。';
 $_lang['package_err_file_read'] = '[[+source]] を読み込むためにファイルが開けませんでした。';
 $_lang['package_err_install'] = 'シグネイチャ：[[+signature]] のパッケージインストール時にエラーが発生しました。';
@@ -88,21 +88,21 @@ $_lang['package_err_nfs'] = 'シグネイチャ：[[+signature]] のパッケー
 $_lang['package_err_ns'] = 'パッケージが指定されていません。';
 $_lang['package_err_remove'] = 'シグネイチャ：[[+signature]] のパッケージ削除時にエラーが発生しました。';
 $_lang['package_err_source_nf'] = 'パッケージに有効なソースが指定されていません。';
-$_lang['package_err_spa'] = 'setPackageAttributes() の前に、createPackage() を使用してパッケージを作成する必要があります。';
+$_lang['package_err_spa'] = 'setPackageAttributes（） の前に、createPackage（） を使用してパッケージを作成する必要があります。';
 $_lang['package_err_target_write'] = 'ターゲットディレクトリのいずれかが、書き込み可能ではありません：[[+targetDir]]。';
 $_lang['package_err_transfer'] = '[[+sourceFile]] から [[+packageDir]] へ、パッケージを転送できませんでした。';
 $_lang['package_err_transfer_fopen'] = '[[+sourceFile]] から [[+packageDir]] へ、パッケージを転送できませんでした。設定で allow_url_fopen が無効になっています。';
 $_lang['package_err_uninstall'] = 'シグネイチャ：[[+signature]] パッケージのアンインストール時にエラーが発生しました。';
-$_lang['package_err_uptodate'] = 'このパッケージは既に「[[+signature]]」にアップデートされています。';
+$_lang['package_err_uptodate'] = 'このパッケージは既にバージョン [[+signature]] に更新済みです。';
 $_lang['package_information'] = 'パッケージ情報';
 $_lang['package_install'] = 'パッケージをインストール';
 $_lang['package_install_info_start'] = '「[[+signature]]」のシグネイチャを持つパッケージを確認し、インストール準備を開始します。';
 $_lang['package_install_info_found'] = 'パッケージが見つかりました。インストールの準備中です。';
-$_lang['package_install_info_success'] = 'パッケージのインストールに成功しました。([[+signature]])';
+$_lang['package_install_info_success'] = 'パッケージのインストールに成功しました。（[[+signature]]）';
 $_lang['package_installer'] = 'パッケージインストーラー';
 $_lang['package_installing'] = 'ワークスペース環境を開始し、パッケージをインストールしています...';
 $_lang['package_management'] = 'パッケージマネージャー';
-$_lang['package_obtain_method'] = 'どのようにパッケージを取得するかを選択して下さい。';
+$_lang['package_obtain_method'] = 'どのようにパッケージを取得するかを選択してください。';
 $_lang['package_preview_view'] = 'パッケージ {name} プレビュー';
 $_lang['package_remove'] = 'パッケージを削除';
 $_lang['package_remove_action_button'] = '削除';
@@ -123,14 +123,14 @@ $_lang['package_reinstall'] = 'パッケージを再インストール';
 $_lang['package_reinstall_action_button'] = '再インストール';
 $_lang['package_reinstall_confirm'] = 'パッケージを再インストールしてよろしいですか？　現在パッケージに行われている変更は削除されます。';
 $_lang['package_retriever'] = 'パッケージを取得';
-$_lang['package_search_local_title'] = 'すでにサーバ上に転送済みのパッケージ';
+$_lang['package_search_local_title'] = '転送済みパッケージの取得';
 $_lang['package_search_local_confirm'] = '"core/packages" ディレクトリを検索し、任意の有効なパッケージを追加します。<br /><br />パッケージはインストールされず、単にワークスペースへ追加される点に注意してください。<br /><br />"core/packages" ディレクトリにパッケージがアップロードされていること確認し、続行してください。';
 $_lang['package_select_download'] = 'ダウンロードするパッケージを選択';
 $_lang['package_select_download_desc'] = 'ダウンロードするパッケージを選択してください。Ctrlキーを押しながらクリックすると、複数のパッケージを選択できます。';
 $_lang['package_select_download_ns'] = 'ダウンロードを実行するには、少なくともひとつのパッケージを選択してください。';
 $_lang['package_signature'] = 'シグネチャ';
 $_lang['package_state'] = '状態';
-$_lang['package_uninstall'] = 'パッケージを削除(オプション選択)';
+$_lang['package_uninstall'] = 'パッケージを削除（オプション選択）';
 $_lang['package_uninstall_info_find'] = 'シグネチャによるパッケージの検索: [[+signature]]';
 $_lang['package_uninstall_info_prep'] = 'パッケージが見つかりました。アンインストールの準備をしています。';
 $_lang['package_uninstall_info_success'] = 'シグネチャによるアンインストールが成功しました。: [[+signature]]';
@@ -147,11 +147,11 @@ $_lang['package_view'] = 'パッケージを表示';
 $_lang['packages'] = 'パッケージ一覧';
 $_lang['packages_in_category'] = '以下に、選択したカテゴリの利用可能なパッケージの一覧が表示されます。';
 $_lang['packages_browse_msg'] = '「詳細」をクリックすると、パッケージのより詳しい情報を取得します。「ダウンロード」をクリックすると、インストール可能なパッケージのファイルがダウンロードされます。';
-$_lang['packages_desc'] = '「パッケージ」は、拡張機能やテンプレート・管理画面デザイン・サンプルデータなど、コア以外の拡張要素を手軽にインストール及び更新・削除できるようにまとめたものです。<br />セット済みのプロバイダからパッケージを取得する場合は<b>「プロバイダから取得」</b>を利用してください。<br />/core/packages/ ディレクトリ上に置いたパッケージを追加したい場合、またはプロバイダを新規登録したい場合は<b>「取得ウィザード」</b>を利用してください。';
-$_lang['please_wait'] = 'しばらくお待ちください';
+$_lang['packages_desc'] = '「パッケージ」とは、MODXを拡張する様々な要素をまとめたものです。テンプレートやプラグイン、スニペットなどのエレメントや、その動作設定とサンプルデータなどを一括して取り扱います。ダウンロードからインストール、更新、削除まで、MODXの管理画面から直接実行できます。<br />登録したプロバイダからパッケージを取得する場合は<b>「プロバイダから取得」</b>を選択してください。<br />/core/packages/ ディレクトリ上に置いたパッケージを追加したい場合は<b>「転送済みパッケージの取得」</b>を、またプロバイダを新規登録したい場合は、上部の<b>「プロバイダ一覧」</b>タブに切り替えてください。';
+$_lang['please_wait'] = 'しばらくお待ちください...';
 $_lang['preexisting_mode_preserve'] = '設定を維持';
-$_lang['preexisting_mode_preserve_desc'] = 'より新しいバージョンをアンインストールしますが、コンポーネントの設定または値は、以前の状態を維持します。';
-$_lang['preexisting_mode_remove'] = '削除(アンインストール)';
+$_lang['preexisting_mode_preserve_desc'] = 'より新しいバージョンをアンインストールしますが、コンポーネントの設定または値は以前の状態を維持します。';
+$_lang['preexisting_mode_remove'] = 'アンインストール';
 $_lang['preexisting_mode_remove_desc'] = 'このパッケージの全てのバージョンをアンインストールします。但し、パッケージは再インストール可能な状態で保持されます。';
 $_lang['preexisting_mode_restore'] = 'リストア';
 $_lang['preexisting_mode_restore_desc'] = 'すでに以前のバージョンがインストールされていたため、新しいバージョンではその設定を復元して利用します。';
@@ -184,14 +184,14 @@ $_lang['provider_total_packages'] = 'このプロバイダーの総パッケー�
 $_lang['provider_update'] = '登録情報を編集';
 $_lang['provider_url'] = 'Service URL';
 $_lang['providers'] = 'プロバイダー一覧';
-$_lang['providers_desc'] = 'パッケージプロバイダーを登録・管理できます。デフォルトでMODX本家開発サイトのリポジトリがプロバイダーとして登録されています。';
+$_lang['providers_desc'] = 'パッケージプロバイダーを登録・管理します。<br />デフォルトではMODX本家開発サイトのリポジトリ（modx.com）が、プロバイダーとして登録されています。';
 $_lang['provisioner'] = 'プロビジョナー';
 $_lang['provisioners'] = 'プロビジョナー';
 $_lang['readme'] = 'Readme';
 $_lang['readme_desc'] = 'このパッケージの ReadMe をお読みください。使用方法など重要な記述が含まれていることがあります。インストール後にパッケージ一覧から右クリックで確認することもできます。';
 $_lang['released'] = 'リリース';
 $_lang['released_on'] = 'リリース日';
-$_lang['save_and_go_to_browser'] = '保存してパッケージブラウザーに移動';
+$_lang['save_and_go_to_browser'] = '選択してパッケージブラウザーに移動';
 $_lang['search_results_for'] = '<b>「[[+query]]」</b>の検索結果';
 $_lang['setup_options'] = 'セットアップオプション';
 $_lang['setup_options_desc'] = 'オプションを選択してください。';

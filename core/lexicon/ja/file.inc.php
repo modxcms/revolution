@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
@@ -34,10 +34,10 @@ $_lang['file_err_perms_remove'] = 'ファイルの削除に必要なパーミッ
 $_lang['file_err_rename'] = 'ファイル名を変更できませんでいた。パーミッションが正しく設定されているかどうか確認してください。';
 $_lang['file_err_remove'] = 'ファイルを削除できませんでした。パーミッションが正しく設定されているかどうか確認してください。';
 $_lang['file_err_save'] = 'ファイルを保存できません。保存先のディレクトリが書き込み可能かどうか確認してください。';
-$_lang['file_err_too_large'] = 'アップロードされたファイル([[+size]]バイト)はサイズが大きすぎるため保存できませんでした。[[+allowed]]バイトを超えないようにしてください。';
+$_lang['file_err_too_large'] = 'アップロードされたファイル（[[+size]]バイト）はサイズが大きすぎるため保存できませんでした。[[+allowed]]バイトを超えないようにしてください。';
 $_lang['file_err_unzip'] = 'ファイルの解凍が失敗しました。';
 $_lang['file_err_unzip_invalid_path'] = '解凍済みファイルのパスが不適切です。';
-$_lang['file_err_unzip_missing_lib'] = ' zipライブラリが見当たりません。 (php_zip.dll / zip.so)';
+$_lang['file_err_unzip_missing_lib'] = ' zipライブラリが見当たりません。（php_zip.dll / zip.so）';
 $_lang['file_err_upload'] = 'ファイルのアップロード中にエラーが発生しました。';
 $_lang['file_exists_hk'] = '<b>{0}</b>ファイルは既に存在します。';
 $_lang['file_extensions'] = 'ファイル拡張子';
@@ -99,7 +99,7 @@ $_lang['upf_add_desc'] = 'アップロードキューにファイルを追加し
 $_lang['upf_close'] = '閉じる';
 $_lang['upf_close_desc'] = 'ウィンドウを閉じます。';
 $_lang['upf_err_failed'] = 'サーバーは利用できないか、内部エラーが発生しています。';
-$_lang['upf_err_filetype'] = '選択されたファイルの拡張子は許可されていません。<br/>次に示す許可された拡張子のファイルを選択して下さい： {1}';
+$_lang['upf_err_filetype'] = '選択されたファイルの拡張子は許可されていません。<br/>次に示す許可された拡張子のファイルを選択してください： {1}';
 $_lang['upf_error'] = 'エラー';
 $_lang['upf_filename'] = 'ファイル名';
 $_lang['upf_note'] = 'ノート';

@@ -6,7 +6,7 @@
 * @package modx
 * @subpackage lexicon
 * @author yamamoto http://kyms.jp 2012-08-28
-* @author honda http://kogus.org 2012-07-09
+* @author honda http://kogus.org 2012-12-04
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
 */
@@ -76,4 +76,4 @@ $_lang['propertyset_remove_confirm'] = 'このプロパティセットを削除�
 $_lang['propertyset_save'] = '保存';
 $_lang['propertyset_update'] = '編集';
 $_lang['propertysets'] = 'プロパティセットの管理';
-$_lang['propertysets_desc'] = 'ここでは、設定値を柔軟に取り扱う「プロパティ」をまとめた、「プロパティセット」の管理を行います。<br /><br />ツリーからセットを選択すると、そのセットに含まれるプロパティが表示されます。また、セットのエレメントへの割り当てや解除は、ツリー上でセットを右クリックして表示されるメニューから行います。';
+$_lang['propertysets_desc'] = 'ここでは、設定値を柔軟に取り扱う「プロパティ」をまとめた、「プロパティセット」の管理を行います。<br />ツリーからセットを選択すると、そのセットに含まれるプロパティが表示されます。また、セットのエレメントへの割り当てや解除は、ツリー上でセットを右クリックして表示されるメニューから行います。';
