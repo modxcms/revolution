@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * @author yamamoto http://kyms.jp 2012-07-27
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author shimojo http://www.priqia.com/
  */
 $_lang['action'] = 'アクション';
@@ -14,12 +14,12 @@ $_lang['action_desc'] = '指定したアクションにこのルールが適用�
 $_lang['activate'] = '有効化';
 $_lang['constraint'] = '制約の条件';
 $_lang['constraint_class'] = 'このルールの対象';
-$_lang['constraint_class_desc'] = '任意。「テンプレートIDが4の場合にこのルールを有効にする」などの条件をここでセットします。投稿画面の場合「modResource」でよいみたいです(※注・日本チーム) Optional. If set, along with the Constraint Field and Constraint options, will restrict this rule to the constraints applied.';
+$_lang['constraint_class_desc'] = '任意。「テンプレートIDが4の場合にこのルールを有効にする」などの条件をここでセットします。投稿画面の場合「modResource」でよいみたいです（※注・日本チーム） Optional. If set, along with the Constraint Field and Constraint options, will restrict this rule to the constraints applied.';
 $_lang['constraint_desc'] = '任意。有効条件と見なす値をセットします。たとえば「テンプレートIDが4の場合にこのルールを有効にする」の場合「4」をここにセットします。Optional. The value of the Constraint Field that should be checked against.';
 $_lang['constraint_field'] = '制約フィールド';
 $_lang['constraint_field_desc'] = '任意。制約条件としたいフィールドの名前を記述します。たとえば「template」など。';
 $_lang['containing_panel'] = 'これを含む領域';
-$_lang['containing_panel_desc'] = '対象オブジェクト(フィールドやタブ)を含むDIV領域のID名。modx-panel-resource・modx-page-settings・modx-resource-tabsのうちのいずれか。This is sometimes necessary for certain rules, so that the system can know what form or panel the field is in.';
+$_lang['containing_panel_desc'] = '対象オブジェクト（フィールドやタブ）を含むDIV領域のID名。modx-panel-resource・modx-page-settings・modx-resource-tabsのうちのいずれか。This is sometimes necessary for certain rules, so that the system can know what form or panel the field is in.';
 $_lang['deactivate'] = '無効化';
 $_lang['default_value'] = '新デフォルト値';
 $_lang['export'] = 'エクスポート';

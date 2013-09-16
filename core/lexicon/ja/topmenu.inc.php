@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author yamamoto http://kyms.jp 2012-08-11
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
@@ -49,7 +49,7 @@ $_lang['import_site_desc'] = 'HTMLファイルの一括インポート';
 $_lang['jira'] = 'バグトラッカー';
 $_lang['jira_desc'] = 'MODX バグトラッカーにアクセスし不具合や改善要望を報告';
 $_lang['lexicon_management'] = 'レキシコン管理';
-$_lang['lexicon_management_desc'] = 'レキシコン(辞書機能・従来の言語ファイルに相当)を管理';
+$_lang['lexicon_management_desc'] = 'レキシコン（辞書機能・従来の言語ファイルに相当）を管理';
 $_lang['logout_desc'] = '管理画面からログアウト';
 $_lang['manage_workspaces'] = 'パッケージマネージャー';
 $_lang['manage_workspaces_desc'] = '拡張機能やテンプレートを入手・インストール・アンインストール。パッケージ単位で管理';
@@ -62,21 +62,21 @@ $_lang['new_document_desc'] = 'ドキュメントを新規作成';
 $_lang['new_resource'] = '新しいリソース';
 $_lang['new_resource_desc'] = 'リソースを新規作成';
 $_lang['new_static_resource'] = 'スタティックリソースを新規作成';
-$_lang['new_static_resource_desc'] = 'スタティックリソース(任意のファイルのクローン)を新規作成';
+$_lang['new_static_resource_desc'] = 'スタティックリソース（任意のファイルのクローン）を新規作成';
 $_lang['new_symlink'] = 'シムリンクを新規作成';
-$_lang['new_symlink_desc'] = 'シムリンク(任意のリソースのクローン)を新規作成';
+$_lang['new_symlink_desc'] = 'シムリンク（任意のリソースのクローン）を新規作成';
 $_lang['new_weblink'] = 'ウェブリンクを新規作成';
-$_lang['new_weblink_desc'] = 'ウェブリンク(任意のURLのエイリアス)を新規作成';
+$_lang['new_weblink_desc'] = 'ウェブリンク（任意のURLのエイリアス）を新規作成';
 $_lang['policy_management'] = 'アクセスポリシー';
 $_lang['policy_management_desc'] = 'セキュリティプロセスのためのポリシー設定';
 $_lang['preview'] = 'プレビュー';
-$_lang['preview_desc'] = 'サイトを表示(別窓)';
+$_lang['preview_desc'] = 'サイトを表示（別窓）';
 $_lang['profile'] = 'プロフィール';
 $_lang['profile_desc'] = '自分自身の個人プロフィールを編集';
 $_lang['propertysets'] = 'プロパティセット';
 $_lang['propertysets_desc'] = 'プロパティセットと、それらが配置されるエレメントのすべてを管理';
 $_lang['refresh_site'] = 'キャッシュをクリア';
-$_lang['refresh_site_desc'] = 'キャッシュを初期化。管理画面のレキシコン(言語管理)のキャッシュなども含む';
+$_lang['refresh_site_desc'] = 'キャッシュを初期化。管理画面のレキシコン（言語管理）のキャッシュなども含む';
 $_lang['remove_locks'] = 'ロックを解除';
 $_lang['remove_locks_desc'] = 'サイト全体の編集ロックを解除';
 $_lang['remove_locks_error'] = 'ロックの解除中にエラーが発生しました。';
@@ -91,8 +91,8 @@ $_lang['sources'] = 'メディアソース';
 $_lang['sources_desc'] = 'メディアソースの管理';
 $_lang['support'] = 'サポート';
 $_lang['support_desc'] = '';
-$_lang['site_schedule'] = '公開状態の一覧';
-$_lang['site_schedule_desc'] = '公開および公開終了の予定一覧';
+$_lang['site_schedule'] = '公開スケジュールの一覧';
+$_lang['site_schedule_desc'] = '予定された公開および公開終了スケジュールの一覧';
 $_lang['system'] = 'システム';
 $_lang['system_settings'] = 'システム設定';
 $_lang['system_settings_desc'] = 'サイト全体の設定変更';

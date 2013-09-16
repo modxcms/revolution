@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -21,7 +21,7 @@ $_lang['document_create_here'] = 'ここにドキュメントを作成';
 $_lang['document_new'] = '新しいドキュメント';
 $_lang['documents'] = 'ドキュメント';
 $_lang['duplicate_uri_found'] = 'リソース [[+id]] はすでにURLとして [[+uri]] を使用しています。エイリアスまたはFreeze URIを入力し直してください。';
-$_lang['empty_template'] = '(空)';
+$_lang['empty_template'] = '（空）';
 $_lang['general'] = '一般';
 $_lang['markup'] = 'マークアップ/構造';
 $_lang['none'] = 'なし';
@@ -35,19 +35,19 @@ $_lang['resource_change_template_confirm'] = 'このテンプレートを変更�
 $_lang['resource_cacheable'] = 'キャッシュ有効';
 $_lang['resource_cacheable_help'] = '有効にすると、リソースはキャッシュに保存されます。';
 $_lang['resource_cancel_dirty_confirm'] = '未確定の変更があります。本当にキャンセルしますか？';
-$_lang['resource_class_key_help'] = 'リソースのクラスキー(documentObject[type])です。';
+$_lang['resource_class_key_help'] = 'リソースのクラスキー（documentObject[type]）です。';
 $_lang['resource_content'] = 'コンテンツ';
 $_lang['resource_contentdispo'] = 'コンテンツの渡し方';
 $_lang['resource_contentdispo_help'] = 'このの項目を使用して、このリソースがブラウザでどのように扱われるかを指定します。「Attachment」を選択するとファイルのダウンロードとみなします。';
 $_lang['resource_content_type'] = 'コンテントタイプ';
-$_lang['resource_content_type_help'] = 'このリソースのコンテントタイプを設定します。どのコンテントタイプを選択すればよいかが分からない場合は、「text/html」のままにして下さい。';
+$_lang['resource_content_type_help'] = 'このリソースのコンテントタイプを設定します。どのコンテントタイプを選択すればよいかが分からない場合は、「text/html」のままにしてください。';
 $_lang['resource_create_access_denied'] = '現在のアカウントにはリソースを作成する権限がありません。';
 $_lang['resource_create_here'] = 'ここにリソースを作成する';
 $_lang['resource_createdby'] = '作成者';
 $_lang['resource_createdon'] = '作成日';
 $_lang['resource_delete'] = '削除する';
 $_lang['resource_delete_confirm'] = '本当にこのリソースを削除しますか？<br />サブリソースも同時に削除されます。';
-$_lang['resource_description'] = '説明(Description)';
+$_lang['resource_description'] = '説明（Description）';
 $_lang['resource_description_help'] = 'リソースの説明。検索エンジン対策などに。[[*description]]として呼び出します。';
 $_lang['resource_duplicate'] = '複製を作る';
 $_lang['resource_duplicate_confirm'] = '本当にこのリソースを複製しますか？　サブリソースも複製されます。';
@@ -74,11 +74,11 @@ $_lang['resource_err_publish'] = 'リソースの公開開始日時設定中に�
 $_lang['resource_err_new_parent_nf'] = 'ID [[+id]] の親リソースが見つかりません。';
 $_lang['resource_err_remove'] = 'リソースの削除中にエラーが発生しました。';
 $_lang['resource_err_save'] = 'リソースの保存中にエラーが発生しました。';
-$_lang['resource_err_select_parent'] = '親リソースを選択して下さい。';
+$_lang['resource_err_select_parent'] = '親リソースを選択してください。';
 $_lang['resource_err_undelete'] = 'リソースの復活中にエラーが発生しました。';
 $_lang['resource_err_undelete_children'] = 'サブリソースを復活中にエラーが発生しました。';
 $_lang['resource_err_unpublish'] = 'リソースの公開終了日時設定中にエラーが発生しました。';
-$_lang['resource_err_unpublish_sitestart'] = 'このリソースはトップページ(site_start)として設定されています。非公開に設定することはできません。';
+$_lang['resource_err_unpublish_sitestart'] = 'このリソースはトップページ（site_start）として設定されています。非公開に設定することはできません。';
 $_lang['resource_err_unpublish_sitestart_dates'] = 'リソースはサイトスタート変数にリンクされていて、公開開始・終了の日付情報を保持することはできません。';
 $_lang['resource_folder'] = 'コンテナ属性';
 $_lang['resource_folder_help'] = 'これにチェックを入れると、リソースは他のリソースのコンテナとして機能します。「コンテナ」はフォルダのようなもので、これだけがコンテンツを持つことができます。';
@@ -101,7 +101,7 @@ $_lang['resource_pagetitle'] = 'タイトル';
 $_lang['resource_pagetitle_help'] = 'リソース名を指定します。バックスラッシュは使えません。[[*pagetitle]]として呼び出します。サイトツリーの表示が煩雑にならないよう、短めの名前をつけるとよいでしょう。長めのタイトルが必要な場合は「長いタイトル」をお使いください。';
 $_lang['resource_parent'] = '親リソース';
 $_lang['resource_parent_help'] = '親リソースのIDを設定します。';
-$_lang['resource_parent_select_node'] = '左のリストからノードを選択して下さい。';
+$_lang['resource_parent_select_node'] = '左のリストからノードを選択してください。';
 $_lang['resource_publish'] = '公開する';
 $_lang['resource_publish_confirm'] = 'ここで公開すると、このリソースに設定されている公開日時情報が初期化されます。もし設定を維持したい場合はリソース編集画面を開いて必要に応じて編集してください。<br />続けますか？';
 $_lang['resource_publishdate'] = '公開開始予定日時';
@@ -119,7 +119,7 @@ $_lang['resource_searchable_help'] = '有効にすると、リソースを検索
 $_lang['resource_settings'] = 'リソース設定';
 $_lang['resource_status'] = 'ステータス';
 $_lang['resource_status_help'] = '公開開始されている場合はリソースは保存された直後に一般の人に閲覧可能になります。それ以外の場合は、公開サイトからは見えません。';
-$_lang['resource_summary'] = '要約(リード文)';
+$_lang['resource_summary'] = '要約（リード文）';
 $_lang['resource_summary_help'] = 'リソースの簡単な概要。新着情報の一覧やRSSフィードなどで用いるとよいでしょう。';
 $_lang['resource_syncsite'] = '更新時にキャッシュ削除';
 $_lang['resource_syncsite_help'] = 'ここにチェックを入れると、リソースの保存時にキャッシュを初期化します。';
@@ -137,10 +137,10 @@ $_lang['resource_uri_help'] = 'このリソースの完全な相対URLを指定�
 $_lang['resource_uri_override'] = 'URIを固定';
 $_lang['resource_uri_override_help'] = '有効にすると、下に表示されるテキストボックスに入れた値で、このリソースのURIを固定することができます。';
 $_lang['resource_with_id_not_found'] = 'リソースID %s が見つかりません。';
-$_lang['resource_view'] = 'リソースの表示(プレビュー)';
+$_lang['resource_view'] = 'リソースの表示（プレビュー）';
 $_lang['show_sort_options'] = 'ソートオプションの表示';
-$_lang['site_schedule'] = '公開状態の一覧';
-$_lang['site_schedule_desc'] = '公開および公開終了の予定一覧';
+$_lang['site_schedule'] = '公開スケジュールの一覧';
+$_lang['site_schedule_desc'] = 'ドキュメントの公開および公開終了スケジュールの一覧です。';
 $_lang['source'] = 'ソース';
 $_lang['static_resource'] = 'スタティックリソース';
 $_lang['static_resource_create_here'] = 'ここにスタティックリソースを作成';

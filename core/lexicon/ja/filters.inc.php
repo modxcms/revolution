@@ -5,6 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-12-04
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -21,5 +22,5 @@ $_lang['ago_week'] = '[[+time]] 週間';
 $_lang['ago_weeks'] = '[[+time]] 週間';
 $_lang['ago_year'] = '[[+time]] 年';
 $_lang['ago_years'] = '[[+time]] 年';
-$_lang['today_at'] = '今日([[+time]])';
-$_lang['yesterday_at'] = '昨日([[+time]])';
+$_lang['today_at'] = '今日（[[+time]]）';
+$_lang['yesterday_at'] = '昨日（[[+time]]）';
