@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Export Brazilian Portuguese lexicon topic
@@ -7,7 +6,6 @@
  * @package modx
  * @subpackage lexicon
  */
-
 $_lang['export_site_cacheable'] = 'Incluir arquivos que não são inclusos no cache:';
 $_lang['export_site_exporting_document'] = 'Exportando arquivo <strong>%s</strong> de <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $_lang['export_site_failed'] = '<span style="color:#990000">Falhou!</span>';

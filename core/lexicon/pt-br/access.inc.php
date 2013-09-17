@@ -2,7 +2,7 @@
 /**
  * Access Brazilian Portuguese lexicon topic
  *
- * @language br
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
@@ -59,6 +59,8 @@ $_lang['access_rgroup_err_ns'] = 'ACL de Grupo de Recursos não especificada.';
 $_lang['access_rgroup_err_remove'] = 'Umn erro ocorreu enquanto tentava remover a ACL do grupo de Recursos.';
 $_lang['access_rgroup_remove'] = 'Remover Acesso ao Grupo de Recursos';
 $_lang['access_rgroup_update'] = 'Atualizar Acesso ao Grupo de Recursos';
+$_lang['access_source_remove'] = 'Remover Acesso à Fonte de Mídia';
+$_lang['access_source_update'] = 'Atualizar Acesso à Fonte de Mídia';
 $_lang['access_to_contexts'] = 'Acesso aos Contextos';
 $_lang['access_to_resource_groups'] = 'Acesso aos Grupos de Recuross';
 $_lang['access_type_err_ns'] = 'Tipo de Target ou ID não especificado!';
@@ -71,7 +73,9 @@ $_lang['filter_by_context'] = 'Filtrar por Contexto...';
 $_lang['filter_by_policy'] = 'Filtrar por Politicas...';
 $_lang['filter_by_resource_group'] = 'Filtrar por Grupos de Recursos...';
 $_lang['filter_by_category'] = 'Filtrar por Categoria...';
+$_lang['filter_by_source'] = 'Filtrar por Fonte de Mídia...';
 $_lang['no_policy_option'] = ' (sem política) ';
+$_lang['permissions_in_policy'] = 'Permissões na Política Selecionada';
 $_lang['resource_group'] = 'Grupo de Recursos';
 $_lang['resource_group_add'] = 'Adicionar Grupo de Recursos';
 $_lang['resource_group_access_remove'] = 'Remover Recurso do Grupo';
@@ -89,17 +93,63 @@ $_lang['resource_group_resource_err_create'] = 'Um erro ocorreu enquanto tentava
 $_lang['resource_group_resource_err_nf'] = 'O recurso não é parte daquele grupo de recursos.';
 $_lang['resource_group_resource_err_remove'] = 'An error occurred while trying to remove the resource from the resource group.';
 $_lang['resource_group_untitled'] = 'Grupo de Recursos Sem Título';
+$_lang['resource_group_update'] = 'Atualizar Resource Group';
+$_lang['resource_group_access_contexts'] = 'A lista separada por vírgulas de contextos que o Grupo Resource deve pertencem a para as seguintes opções.';
+$_lang['resource_group_automatic_access'] = 'Acesso Wizard';
+$_lang['resource_group_automatic_access_desc'] = 'Nota:. Você pode ter que liberar as sessões após a adição do Grupo Resource se verifique qualquer uma das opções abaixo';
+$_lang['resource_group_access_admin'] = 'Enviar automaticamente Administrador Grupo de Acesso';
+$_lang['resource_group_access_admin_desc'] = 'Se marcada, dará a visão do Grupo Administrador e edição de acesso a este Grupo de Recursos para os contextos acima.';
+$_lang['resource_group_access_anon'] = 'automaticamente dar acesso anônimo';
+$_lang['resource_group_access_anon_desc'] = 'Se marcada, vai dar não-usuários registrados visualizar o acesso a este Grupo de Recursos para os contextos acima.';
+$_lang['resource_group_access_parallel'] = 'Criar Paralela Grupo de Usuários';
+$_lang['resource_group_access_parallel_desc'] = 'Se marcado, irá criar automaticamente um grupo de usuários com o mesmo nome, e dar-lhe ver o acesso a este Grupo de Recursos para os contextos acima.';
+$_lang['resource_group_access_ugs'] = 'Enviar automaticamente outros grupos de utilizadores de acesso';
+$_lang['resource_group_access_ugs_desc'] = 'A lista separada por vírgulas de nomes de grupo de usuários. Se não-branco, dará aos grupos de usuários especificados aqui ver o acesso a este Grupo de Recursos para os contextos acima .';
 $_lang['roles_msg'] = 'Uma função seria, em definição, a posição ou responsabilidade que alguém segura em uma determinada situação. Eles podem ser usadas para agrupar Usuários em uma posição ou status além do Grupo de Usuários que ele pertence. Funções no MODx também tem o que é chamado de "Autoridade". Isto é um valor numério que pode ser qualquer valor inteiro. Os níveis de autoridade são "herdaveis abaixo", no sentido que a Função com autoridade 1 vai herdar todas as Políticas de Grupo assinadas a ela, e para qualquer Funções com nível autoridade maior que 1.';
+$_lang['source_add'] = 'Adicionar Fonte de Mídia';
+
+$_lang['user_group_aw'] = 'Acesso à Wizard';
+$_lang['user_group_aw_desc'] = 'Nota:. Você pode ter que liberar as sessões depois de adicionar o Grupo de Usuários se você marcar qualquer uma das opções abaixo';
+$_lang['user_group_aw_contexts'] = 'Contextos';
+$_lang['user_group_aw_contexts_desc'] = 'Uma lista separada por vírgulas de contextos que este Grupo de Usuários devem ser capazes de ver.';
+$_lang['user_group_aw_manager_policy'] = 'Gerenciar de Política ';
+$_lang['user_group_aw_manager_policy_desc'] = 'A política de dar ao Grupo de Usuários para edição no gerente. Selecione (sem política), se você não deseja conceder acesso ao gerenciador'.;
+$_lang['user_group_aw_users'] = 'Usuários';
+$_lang['user_group_aw_users_desc'] = 'Uma lista separada por vírgulas de nomes para adicionar a este Grupo de Usuários. Você pode usar o nome de usuário formato: função para definir a função, caso contrário, Membro será assumido ';.
+$_lang['user_group_aw_resource_groups'] = 'Grupos de Recursos';
+$_lang['user_group_aw_resource_groups_desc'] = 'Uma lista separada por vírgulas de Grupos de Recursos para dar acesso aos contextos especificados acima.';
+$_lang['user_group_aw_categories'] = 'Elementos Elementos';
+$_lang['user_group_aw_categories_desc'] = 'Uma lista separada por vírgulas de Categorias de Elementos para dar acesso aos contextos especificados acima.';
+$_lang['user_group_aw_parallel'] = 'Criar um Grupo de Recursos Paralelo';
+$_lang['user_group_aw_parallel_desc'] = 'Se marcado, irá criar automaticamente um Grupo de Recursos com o mesmo nome, e dar a este Grupo de Usuários acesso à vista aos contextos especificados acima.';
+$_lang['user_group_context_authority_desc'] = 'A Função mínima que terá acesso às Permissões na Política selecionada para este contexto. Funções com a Autoridade mais forte (números menores) irão herdar esse acesso também. A maioria das situações pode deixar isso em "Membro".';
+$_lang['user_group_context_context_desc'] = 'O Contexto para conceder acesso.';
+$_lang['user_group_context_policy_desc'] = 'A Política de aplicar a este contexto para esse Grupo de Usuários. Isto irá conceder a todos os Usuários neste Grupo de Usuários com a mínima Função selecionada todas as Permissões na Política .';
 $_lang['user_group_category_access'] = 'Acesso a Categoria de Elementos';
 $_lang['user_group_category_access_msg'] = 'Aqui você pode definir quais Elementos este Grupo de Usuários pode acessar pelas Categorias que os Elementos estão inseridos.';
-$_lang['user_group_category_err_ae'] = 'Grupo de Usuários já tem acesso a esta Categoria.';
+$_lang['user_group_category_authority_desc'] = 'A função mínima que terá acesso às Permissões na Política selecionada para este contexto. Funções com a Autoridade mais forte (números menores) vai herdar esse acesso também. A maioria das situações pode deixar isso no "Membro".';
+$_lang['user_group_category_category_desc'] = 'A categoria para conceder acesso.';
+$_lang['user_group_category_context_desc'] = 'O Contexto para direcionar para elementos com a categoria acima associados a eles.';
+$_lang['user_group_category_err_ae'] = 'Grupo de Usuários já tem acesso a essa categoria.';
 $_lang['user_group_category_remove_confirm'] = 'Você tem certeza que deseja remover esta Categoria deste Grupo de Usuários?';
+$_lang['user_group_category_policy_desc'] = 'A Política de aplicar a este Contexto com elementos da categoria para este Grupo de Usuários. Isto irá conceder a todos os usuários neste grupo do usuário com o mínimo função selecionada todas as permissões na Política.';
 $_lang['user_group_context_access'] = 'Acesso à Contexto';
 $_lang['user_group_context_access_msg'] = 'Aqui você pode definir quais Contextos este Grupo de Usuários pode acessar.';
 $_lang['user_group_context_err_ae'] = 'Grupo de usuários já tem acesso a este contexto.';
 $_lang['user_group_context_remove_confirm'] = 'Você tem certeza que deseja remover este Contexto deste Grupo de Usuários?';
 $_lang['user_group_resourcegroup_access'] = 'Acesso a Grupo de Recursos';
 $_lang['user_group_resourcegroup_access_msg'] = 'Aqui você pode definir quais Grupos de Recursos este Grupo de Usuários pode acessar.';
+$_lang['user_group_resourcegroup_authority_desc'] = 'A Função mínima que terá acesso às Permissões na Política selecionada para este contexto. Funções com a Autoridade mais forte (números menores) irão herdar esse acesso também. A maioria das situações pode deixar isso no "Membro".';
+$_lang['user_group_resourcegroup_context_desc'] = 'O Contexto para direcionar para os itens acima com o Grupo de Recursos associado a eles.';
 $_lang['user_group_resourcegroup_err_ae'] = 'Grupo de Usuários já tem acesso a este Grupo de Recursos.';
+$_lang['user_group_resourcegroup_policy_desc'] = 'A Política a aplicar a este Contexto, com os Recursos no Grupo de Recursos para esse Grupo de Usuários. Isto irá conceder a todos os Usuários neste Grupo de Usuários com a mínima Função selecionada todas as Permissões na Política.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Você tem certeza que você deseja remover este Grupo de Recursos deste Grupo de Usuários?';
+$_lang['user_group_resourcegroup_resource_group_desc'] = 'O Grupo de Recursos para conceder acesso.';
+$_lang['user_group_source_access'] = 'Acesso à Fonte de Mídia ';
+$_lang['user_group_source_access_msg'] = 'Aqui você pode definir que Fontes de Mídia este Grupo de Usuários pode acessar.';
+$_lang['user_group_source_authority_desc'] = 'A Função mínima que terá acesso às Permissões na Política selecionada. Funções com a Autoridade mais forte (números menores) irão herdar esse acesso também. A maioria das situações pode deixar isso em "Membro".';
+$_lang['user_group_source_err_ae'] = 'Grupo de Usuários já tem acesso a essa Fonte de Mídia.';
+$_lang['user_group_source_policy_desc'] = 'A Política para aplicar a esta Fonte Mídia para esse Grupo de Usuários. Isto irá conceder a todos os Usuários neste Grupo de Usuários com a mínima Função selecionada todas as Permissões na Política .';
+$_lang['user_group_source_remove_confirm'] = 'Você tem certeza que deseja remover esta Fonte de Mídia deste Grupo de Usuários?';
+$_lang['user_group_source_source_desc'] = 'A Fonte de Mídia para conceder acesso.';
 $_lang['user_group_user_access_msg'] = 'Selecione quais usuários você quer neste Grupo de Usuários.';

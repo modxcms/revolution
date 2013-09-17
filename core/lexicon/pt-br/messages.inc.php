@@ -27,6 +27,7 @@ $_lang['sent_on'] = 'Enviado em';
 $_lang['subject'] = 'Assunto';
 $_lang['user'] = 'Usuário';
 $_lang['usergroup'] = 'Grupo de Usuários';
+
 $_lang['message_err_not_found'] = 'Mensagem não foi encontrado.';
 $_lang['message_err_not_specified_subject'] = 'Assunto não especificado';
 $_lang['message_err_remove'] = 'Ocorreu um erro ao tentar excluir a mensagem.';

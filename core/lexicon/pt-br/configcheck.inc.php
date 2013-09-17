@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Config Brazilian Portuguese lexicon topic
  *
@@ -8,6 +7,10 @@
  * @subpackage lexicon
  */
 $_lang['configcheck_admin'] = 'Por favor entre em contato com o administrador do sistema e avise sobre esta mensagem!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'Configuração de Contexto allow_tags_in_post está ativa fora do `mgr`';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'A Configuração de Contexto allow_tags_in_post está ativa em sua instalação fora do Contexto mgr. O MODX recomenda que esta configuração esteja desativada a menos que você precisa permitir explicitamente que os usuários enviem tags de MODX, entidades numéricos, ou tags de script HTML através do método POST de um formulário em seu site. Este geralmente deve ser desativado, exceto no Contexto mgr.';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'A Configuração do sistema allow_tags_in_post está Ativa';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'A Configuração do sistema allow_tags_in_post System Setting está ativa em sua instalação. O MODX recomenda que esta configuração esteja desativada a menos que você precisa permitir explicitamente que os usuários enviem tags MODX, entidades numéricas, ou tags de script HTML através do método POST de um formulário em seu site. É melhor permitir que este via Configurações de Contexto para Contextos específicos.';
 $_lang['configcheck_cache'] = 'diretório de cache não tem permissão de escrita';
 $_lang['configcheck_cache_msg'] = 'MODx não pode escrever no diretório de cache. MODx vai continuar funcionando, mas não será feito cache. Para resolver isto faça com que o diretório /_cache/ ter permissão para escrita.';
 $_lang['configcheck_configinc'] = 'Arquivo de configuração tem permissões de acesso!';

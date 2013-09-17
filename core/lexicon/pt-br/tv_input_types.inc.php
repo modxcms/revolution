@@ -2,7 +2,7 @@
 /**
  * TV Input Types Brazilian Portuguese lexicon topic
  *
- * @language br
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
