@@ -2,9 +2,9 @@
 /**
  * Brazilian Portuguese language strings for Dashboards
  *
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
- * @language pt-br
  */
 $_lang['dashboard'] = 'Painel';
 $_lang['dashboard_add'] = 'Adicionar Painel';
@@ -72,6 +72,7 @@ $_lang['widget_unplace'] = 'Remover Widget do Painel';
 $_lang['widget_update'] = 'Atualizar Widget';
 $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Abaixo está uma lista de todos os widgets do Dashboard instalados que você tem.';
+
 $_lang['w_configcheck'] = 'Configuração Check';
 $_lang['w_configcheck_desc'] = 'Mostra uma verificação de configuração que garante que o seu MODX instalação é segura. ';
 $_lang['w_newsfeed'] = 'MODX News Feed';

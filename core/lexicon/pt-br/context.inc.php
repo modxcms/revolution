@@ -2,7 +2,7 @@
 /**
  * Context Brazilian Portuguese lexicon topic
  *
- * @language pt-BR
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */

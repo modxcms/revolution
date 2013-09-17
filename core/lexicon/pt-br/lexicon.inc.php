@@ -30,5 +30,6 @@ $_lang['lexicon_management'] = 'Gerenciamento de Linguagem';
 $_lang['lexicon_management_desc'] = 'Aqui você pode sobrepor qual Entradas de Linguagem atraves dos Namespaces e seus respectivos tópicos. Apenas clique duas vezes em qualquer valor de Entrada para sobrepor ela. Para adicionar novas Entradas de Linguagem ou Tópicos, apenas crie o aruiqvo de tópicos em seus respectivos diretórios de Namespaces.';
 $_lang['lexicon_rlfb_msg'] = 'Regenerou com sucesso [[+num]] strings.';
 $_lang['reload_from_base'] = 'Reverter Todas As Entradas do Núcleo';
+$_lang['reload_success'] = 'Recarregadas com sucesso [[+total]] strings.';
 $_lang['search_by_key'] = 'Buscar por Chave:';
 $_lang['topic'] = 'Tópico';

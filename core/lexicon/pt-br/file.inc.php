@@ -6,15 +6,20 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['directory'] = 'Diretório';
 $_lang['file_confirm_remove'] = 'Tem certeza que deseja remover este arquivo? Isto pode potencialmente quebrar seu site.';
+$_lang['file_create'] = 'Criar Arquivo';
 $_lang['file_deleted'] = 'Sucesso!';
 $_lang['file_delete_file'] = 'Excluir Arquivo';
 $_lang['file_delete_folder'] = 'Excluir Pasta';
+$_lang['file_download'] = 'Baixar Arquivo';
 $_lang['file_download_file'] = 'Baixar Arquivo';
 $_lang['file_download_unzip'] = 'Dezipar Arquivo';
 $_lang['file_edit'] = 'Editar Arquivo';
+$_lang['file_err_ae'] = 'Arquivo %s já existe';
 $_lang['file_err_chmod'] = 'Um erro desconhecido ocurreu quando tentava utilizar chmod no destino.';
 $_lang['file_err_chmod_ns'] = 'Especifique um modo de chmod para.';
+$_lang['file_err_create'] = 'Ocorreu um erro desconhecido ao tentar criar o arquivo.';
 $_lang['file_err_ext_not_allowed'] = 'Extensão `[[+ext]]` não permitida.';
 $_lang['file_err_filter'] = 'Nenhum arquivo se encaixa no filtro especificado.';
 $_lang['file_err_invalid'] = 'O arquivo não é um arquivo comum e não pode ser removido.';
@@ -33,7 +38,7 @@ $_lang['file_err_unzip_missing_lib'] = ' Falta biblioteca Zip (php_zip.dll / zip
 $_lang['file_err_upload'] = 'Um erro ocorreu ao tentar enviar os arquivos.';
 $_lang['file_exists_hk'] = 'Arquivo <b>{0}</b> já existe';
 $_lang['file_extensions'] = 'Extensões de Arquivo';
-$_lang['file_extensions_desc'] = 'These are the allowed file extensions for the content type.';
+$_lang['file_extensions_desc'] = 'Estas são as extensões de arquivos permitidos para o tipo de conteúdo.';
 $_lang['file_folder_enter_new'] = 'Digite Um Nome Para a Nova Pasta';
 $_lang['file_folder_chmod'] = 'Chmod no Diretório';
 $_lang['file_folder_create'] = 'Criar Diretório';
@@ -61,6 +66,8 @@ $_lang['file_folder_remove_confirm'] = 'Are you sure you want to remove this dir
 $_lang['file_last_accessed'] = 'Último Acesso';
 $_lang['file_last_modified'] = 'Última Modificação';
 $_lang['file_name'] = 'Nome do Arquivo';
+$_lang['file_quick_create'] = 'Criação Rápida de Arquivo';
+$_lang['file_quick_update'] = 'Atualização Rápida de Arquivo';
 $_lang['file_remove'] = 'Remover Arquivo';
 $_lang['file_remove_confirm'] = 'Você tem certeza que deseja remover este arquivo completamente?';
 $_lang['file_saved'] = 'Arquivo atualizado com sucesso!';

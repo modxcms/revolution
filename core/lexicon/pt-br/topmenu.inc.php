@@ -102,5 +102,5 @@ $_lang['view_logging'] = 'Gerente de Ações';
 $_lang['view_logging_desc'] = 'Ver o gerente atividade recente.';
 $_lang['view_sysinfo'] = 'Informações do Sistema';
 $_lang['view_sysinfo_desc'] = 'Exibir informações do servidor, tais como phpinfo, info db mysql, e muito mais.';
-$_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'Inicie a documentação MODX.';
+$_lang['wiki'] = 'Documentação';
+$_lang['wiki_desc'] = 'Abrir a documentação official MODX (em inglês).';

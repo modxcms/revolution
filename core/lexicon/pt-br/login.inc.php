@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['login_language'] = 'Língua';
 $_lang['login_activation_key_err'] = 'Chave de ativação não combina! Por favor, verifique seu e-mail de ativação e verifique se você carregou a URL correta.';
 $_lang['login_blocked_admin'] = 'Você foi bloqueado do gerenciador por um administrador.';
 $_lang['login_blocked_error'] = 'Você está temporariamente bloqueado e não pode entrar. Por favor, tente novamente mais tarde.';
@@ -14,13 +15,12 @@ $_lang['login_blocked_time'] = 'Você não tem permissão para fazer login no mo
 $_lang['login_blocked_too_many_attempts'] = 'Você foi bloqueado devido a muitas tentativas de login.';
 $_lang['login_button'] = 'Entrar';
 $_lang['login_cannot_locate_account'] = 'Essa conta não pôde ser localizada. Verifique o nome de usuário e redigite a senha para tentar novamente.';
-$_lang['login_copyright'] = '&copy; 2005-2013 pela <a href="http://modxcms.com/" target="_blank">Equipe MODx</a>. <strong>MODx</strong>&trade; está licenciado sob a GPLv2 ou posterior.';
+$_lang['login_copyright'] = '&copy; 2005-2013 pela <a href="http://modxcms.com/" target="_blank">MODX, LLC</a>. ODX Revolution&trade; está licenciado sob a GPLv2 ou posterior.';
 $_lang['login_email_label'] = 'Email da Conta:';
 $_lang['login_err_unknown'] = 'Ocorreu um erro desconhecido ao tentar para entrar.';
 $_lang['login_forget_your_login'] = 'Esqueceu seu Acesso?';
 $_lang['login_hostname_error'] = 'Seu hostname não aponta de volta para o seu endereço IP.';
 $_lang['login_message'] = 'Por favor insira as suas credenciais de login para iniciar sua sessão Manager. Seu nome de usuário e senha fazem distinção entre maiúsculas e minúsculas, digite-os cuidadosamente!';
-$_lang['login_modx_support'] = '<p>Apoiado por:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>A Comunidade MODx</strong></a></p>';
 $_lang['login_password'] = 'Senha: ';
 $_lang['login_password_reset_act_sent'] = 'Redefinição de senha de e-mail de ativação enviado. Por favor, verifique sua caixa de entrada.';
 $_lang['login_remember'] = 'Lembrar de mim';
