@@ -7,80 +7,80 @@
  * @subpackage lexicon
  */
 $_lang['area'] = 'Área';
-$_lang['area_authentication'] = 'Authentication and Security';
-$_lang['area_caching'] = 'Caching';
-$_lang['area_core'] = 'Core Code';
-$_lang['area_editor'] = 'Rich-Text Editor';
-$_lang['area_file'] = 'File System';
-$_lang['area_filter'] = 'Filter by area...';
-$_lang['area_furls'] = 'Friendly URL';
+$_lang['area_authentication'] = 'Autenticação e Segurança ';
+$_lang['area_caching'] = 'Armazenamento em cache';
+$_lang['area_core'] = 'Código do Núcleo';
+$_lang['area_editor'] = 'Editor de Rich-Text';
+$_lang['area_file'] = 'Sistema de arquivos';
+$_lang['area_filter'] = 'Filtro por área...';
+$_lang['area_furls'] = 'URL Amigável';
 $_lang['area_gateway'] = 'Gateway';
-$_lang['area_language'] = 'Lexicon and Language';
-$_lang['area_mail'] = 'Mail';
-$_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_language'] = 'Léxico e Linguagem ';
+$_lang['area_mail'] = 'E-mail';
+$_lang['area_manager'] = 'Gestor de Back-end';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session and Cookie';
-$_lang['area_lexicon_string'] = 'Area Lexicon Entry';
-$_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
+$_lang['area_session'] = 'Sessão e Cookie';
+$_lang['area_lexicon_string'] = 'Área da entrada de Léxico';
+$_lang['area_lexicon_string_msg'] = 'Digite a chave da entrada do léxico para a área aqui. Se não houver nenhuma entrada léxico, ela só vai exibir a chave área <br /> Áreas Principais:. Autenticação, cache, arquivos, furls, gateway, língua, gerente de sessão, site, sistema';
 $_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'System and Server';
-$_lang['areas'] = 'Areas';
-$_lang['charset'] = 'Charset';
-$_lang['country'] = 'Country';
-$_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
-$_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
-$_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
-$_lang['namespace'] = 'Namespace';
-$_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
-$_lang['namespace_filter'] = 'Filter by namespace...';
-$_lang['search_by_key'] = 'Search by key...';
-$_lang['setting_create'] = 'Create New Setting';
-$_lang['setting_err'] = 'Please check your data for the following fields: ';
-$_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
-$_lang['setting_err_nf'] = 'Setting not found.';
-$_lang['setting_err_ns'] = 'Setting not specified';
-$_lang['setting_err_remove'] = 'An error occurred while trying to remove the setting.';
-$_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
-$_lang['setting_err_startint'] = 'Settings may not start with an integer.';
-$_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
-$_lang['setting_remove'] = 'Delete Setting';
-$_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Update Setting';
-$_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
-$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
-$_lang['settings_furls'] = 'Friendly URLs';
-$_lang['settings_misc'] = 'Miscellaneous';
+$_lang['area_system'] = 'Sistema e Servidor';
+$_lang['áreas'] = 'Áreas';
+$_lang['charset'] = 'charset';
+$_lang['country'] = 'País';
+$_lang['description_desc'] = 'Uma breve descrição da configuração. Esta pode ser uma Entrada Léxico baseada na chave, de acordo com o formato "setting_" + tecla + "_desc" .';
+$_lang['key_desc'] = 'A chave para o ajuste. Ele estará disponível em seu conteúdo através do marcador [[++key]].';
+$_lang['name_desc'] = 'Uma nome para a configuração. Esta pode ser uma Entrada Léxico com base na chave, seguindo o formato "setting_" + chave.';
+$_lang['namespace'] = 'Espaço Nominal';
+$_lang['namespace_desc'] = 'Espaço Nominal que esta configuração está associado. O tópico léxico padrão será carregado para este espaço nominal ao pegar Configurações.';
+$_lang['namespace_filter'] = 'Filtrar por espaço nominal...';
+$_lang['search_by_key'] = 'Pesquisa por chave...';
+$_lang['setting_create'] = 'Criar Nova Configuração';
+$_lang['setting_err'] = 'Por favor verifique os dados para os seguintes campos:';
+$_lang['setting_err_ae'] = 'Configuração com essa chave já existe. Por favor, especifique outro nome de chave.';
+$_lang['setting_err_nf'] = 'Configuração não encontrada.';
+$_lang['setting_err_ns'] = 'A configuração não especificada';
+$_lang['setting_err_remove'] = 'Ocorreu um erro ao tentar remover a configuração. ';
+$_lang['setting_err_save'] = 'Ocorreu um erro ao tentar salvar a configuração.';
+$_lang['setting_err_startint'] = 'Configurações não podem começar com um número inteiro.';
+$_lang['setting_err_invalid_document'] = 'Não há nenhum documento com ID %d. Por favor, especifique um documento existente.';
+$_lang['setting_remove'] = 'Excluir Configuração';
+$_lang['setting_remove_confirm'] = 'Tem certeza de que deseja excluir essa configuração? Isso pode quebrar sua instalação MODX .';
+$_lang['setting_update'] = 'Atualizar Configuração';
+$_lang['settings_after_install'] = 'Como se trata de uma nova instalação, você é obrigado a controlar essas configurações, e mudar tudo o que possa desejar. Depois de ter controlado as configurações, pressione "Salvar" para atualizar o banco de dados de configurações. <br /> <br />';
+$_lang['settings_desc'] = 'Aqui você pode definir preferências gerais e definições de configuração para a interface do gerenciador MODX, bem como a forma como o seu site MODX é executado. Clique duas vezes na coluna de valor para a configuração que deseja editar para editar de forma dinâmica através da grade, ou o botão direito do mouse em uma configuração para mais opções. Você também pode clicar no sinal de "+" para obter uma descrição da configuração.';
+$_lang['settings_furls'] = 'URLs amigáveis';
+$_lang['settings_misc'] = 'Diversos';
 $_lang['settings_site'] = 'Site';
-$_lang['settings_ui'] = 'Interface &amp; Features';
-$_lang['settings_users'] = 'User';
-$_lang['system_settings'] = 'System Settings';
-$_lang['usergroup'] = 'User Group';
+$_lang['settings_ui'] = 'Interface & Funcionalidades';
+$_lang['settings_users'] = 'Usuário';
+$_lang['system_settings'] = 'Configurações do Sistema';
+$_lang['usergroup'] = 'Grupo de Usuários';
 
 // user settings
-$_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
+$_lang['setting_access_category_enabled'] = 'Verificar Acesso à Categoria';
+$_lang['setting_access_category_enabled_desc'] = 'Use para ativar ou desativar verificações de ACL da categoria (por Contexto). <strong> NOTA: Se esta opção estiver definida como não, então todas as permissões de acesso Categoria serão ignorados </ strong> ';
 
-$_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+$_lang['setting_access_context_enabled'] = 'Verificar acesso ao contexto';
+$_lang['setting_access_context_enabled_desc'] = 'Use para ativar ou desativar Contexto verificações de ACL. <strong> NOTA: Se esta opção estiver definida como não, então TODAS as permissões de Acesso à Contexto serão ignoradas. NÃO desative esse de todo o sistema ou para o contexto mgr ou você vai desabilitar o acesso à interface do gerenciador </strong>.';
 
-$_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
+$_lang['setting_access_resource_group_enabled'] = 'Verificar Acesso ao Grupo de Recursos ';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Use para ativar ou desativar de Recursos do Grupo verificações de ACL (por Contexto). <strong> NOTA: Se esta opção estiver definida como não, então TODAS as permissões Acesso à do grupo de recursos será ignorado </strong> ';
 
-$_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
-$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no then the user will be redirected the the Manager Login Startup or Site Start web page.</strong>';
+$_lang['setting_allow_mgr_access'] = 'Acesso à interface do gerenciador';
+$_lang['setting_allow_mgr_access_desc'] = 'Selecione essa opção para ativar ou desativar o acesso à interface do gerenciador. <strong> NOTA:. Se esta opção estiver definida como não, então o usuário será redirecionado a sessão de inicialização do Gestor ou a página inicial do site </strong> ';
 
-$_lang['setting_failed_login'] = 'Failed Login Attempts';
-$_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
+$_lang['setting_failed_login'] = 'Tentativas Frustradas de Login';
+$_lang['setting_failed_login_desc'] = 'Aqui você pode digitar o número de tentativas fracassadas de login que são permitidas antes que um usuário seja bloqueado.';
 
-$_lang['setting_login_allowed_days'] = 'Allowed Days';
-$_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
+$_lang['setting_login_allowed_days'] = 'Dias Autorizados ';
+$_lang['setting_login_allowed_days_desc'] = 'Selecione os dias em que este usuário tem permissão para entrar. ';
 
-$_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
-$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to login from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
+$_lang['setting_login_allowed_ip'] = 'Endereços de IP Permitidos. ';
+$_lang['setting_login_allowed_ip_desc'] = 'Digite os endereços IP que este usuário tem permissão para iniciar sessão . <strong> NOTA: Separe vários endereços IP com uma vírgula (,) </strong> ';
 
-$_lang['setting_login_homepage'] = 'Login Home Page';
-$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send user to after he/she has logged in. <strong>NOTE: make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_login_homepage'] = 'Página de Entrada';
+$_lang['setting_login_homepage_desc'] = 'Digite o ID do documento que pretende enviar ao usuário depois que ele fez o acesso. <strong> NOTA: verifique se o ID que você inserir pertence a um documento existente, e que foi publicado e é acessível por este usuário! </strong> ';
 
 // system settings
 $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
@@ -726,20 +726,20 @@ $_lang['setting_websignupemail_message'] = 'Web Signup e-mail';
 $_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an e-mail containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]]:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
-$_lang['setting_welcome_screen'] = 'Show Welcome Screen';
-$_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
+$_lang['setting_welcome_screen'] = 'Mostrar tela de Boas Vindas';
+$_lang['setting_welcome_screen_desc'] = 'Se definido como true, a tela de boas-vindas será exibida no próximo carregamento sucesso da página de boas-vindas, e depois não vai aparecer depois disso.';
 
-$_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
-$_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODX Revolution.';
+$_lang['setting_welcome_screen_url'] = 'URL da Tela de Boas Vindas';
+$_lang['setting_welcome_screen_url_desc'] = 'A URL para a tela de boas-vindas que carrega no primeiro carregamento do MODX Revolution. ';
 
-$_lang['setting_which_editor'] = 'Editor to use';
-$_lang['setting_which_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use. You can download and install additional Rich Text Editors from Package Management.';
+$_lang['setting_which_editor'] = 'Editor para usar';
+$_lang['setting_which_editor_desc'] = 'Aqui você pode selecionar quais Editor de Rich Text você deseja usar. Você pode baixar e instalar editores de Rich Text adicionais a partir do Gerenciador de Pacotes.';
 
-$_lang['setting_which_element_editor'] = 'Editor to use for Elements';
-$_lang['setting_which_element_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use when editing Elements. You can download and install additional Rich Text Editors from Package Management.';
+$_lang['setting_which_element_editor'] = 'Editor de usar para elementos "';
+$_lang['setting_which_element_editor_desc'] = 'Aqui você pode selecionar quais Editor de Rich Text você deseja usar durante a edição Elementos. Você pode baixar e instalar editores de Rich Text adicionais a partir do Gerenciador de Pacotes.';
 
-$_lang['setting_xhtml_urls'] = 'XHTML URLs';
-$_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODX will be XHTML-compliant, including encoding of the ampersand character.';
+$_lang['setting_xhtml_urls'] = 'URLs XHTML';
+$_lang['setting_xhtml_urls_desc'] = 'Se definido como true, todas as URLs geradas por MODX serão compatíveis com XHTML, incluindo a codificação do caractere e comercial.';
 
-$_lang['setting_default_context'] = 'Default Context';
-$_lang['setting_default_context_desc'] = 'Select the default Context you wish to use for new Resources.';
+$_lang['setting_default_context'] = 'Contexto Padrão';
+$_lang['setting_default_context_desc'] = 'Selecione o Contexto padrão que você deseja usar para novos Recursos.';

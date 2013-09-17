@@ -24,6 +24,7 @@ $_lang['action_remove'] = 'Remover Ação';
 $_lang['action_update'] = 'Atualizar Ação';
 $_lang['actions'] = 'Ações';
 $_lang['controller'] = 'Controlador';
+$_lang['controller_err_ae'] = 'Controlador já existe com este caminho para este Espaço nominal.';
 $_lang['controller_err_nf'] = 'Arquivo do controlador não econtrado!';
 $_lang['controller_err_ns'] = 'Controlador não especificado!';
 $_lang['controller_parent'] = 'Controlador Pai';

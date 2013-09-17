@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['lexicon_key'] = 'Dicionário Chave';
+$_lang['lexicon_key'] = 'Chave Léxica';
 $_lang['menu_create'] = 'Criar Menu';
 $_lang['menu_confirm_remove'] = 'Tem certeza que deseja remover essa ação do menu?';
 $_lang['menu_err_ae'] = 'Um menu já existe com esse nome. Por favor, especifique um valor de texto diferente.';
