@@ -83,62 +83,62 @@ $_lang['setting_login_homepage'] = 'Página de Entrada';
 $_lang['setting_login_homepage_desc'] = 'Digite o ID do documento que pretende enviar ao usuário depois que ele fez o acesso. <strong> NOTA: verifique se o ID que você inserir pertence a um documento existente, e que foi publicado e é acessível por este usuário! </strong> ';
 
 // system settings
-$_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
-$_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
+$_lang['setting_access_policies_version'] = 'Versão do Esquema de Política de Acesso';
+$_lang['setting_access_policies_version_desc'] = 'A versão do sistema de Política de Acesso. NÃO MUDAR.';
 
-$_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
-$_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
+$_lang['setting_allow_forward_across_contexts'] = 'Permitir o Encaminhamento Através de Contextos';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Quando true,  Symlinks e chamadas de API modX::sendForward() pode encaminhar solicitações a Recursos em outros contextos.';
 
-$_lang['setting_allow_manager_login_forgot_password'] = 'Allow Forgot Password in Manager Login Screen';
-$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "No" will disable the forgot password ability on the manager login screen.';
+$_lang['setting_allow_manager_login_forgot_password'] = 'Permitir que o usuário recupere a senha na tela de login do Gestor';
+$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Configurando para "Não" irá desativar a capacidade "equeceu sua senha?" na tela de login do gestor.';
 
-$_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
-$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
+$_lang['setting_allow_tags_in_post'] = 'Permitir Tags em POST';
+$_lang['setting_allow_tags_in_post_desc'] = 'Se for falso, todas as variáveis POST serão despojadas de tags HTML, entidades numéricas e tags MODX. MODX recomenda deixar este conjunto para false para contextos que não são o mgr, onde é definido como true por padrão.';
 
-$_lang['setting_archive_with'] = 'Force PCLZip Archives';
-$_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
+$_lang['setting_archive_with'] = 'Força Arquivos PCLZip';
+$_lang['setting_archive_with_desc'] = 'Se for verdade, vai usar PCLZip em vez de ZipArchive como a extensão zip. Ligue isso em se você está recebendo erros extractTo ou está tendo problemas com a descompactação em Gestão de pacotes '.;
 
-$_lang['setting_auto_menuindex'] = 'Menu indexing default';
-$_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
+$_lang['setting_auto_menuindex'] = 'Indexação padrão de menu';
+$_lang['setting_auto_menuindex_desc'] = 'Selecione "Sim" para ligar índice de menus automático incrementado por padrão.';
 
-$_lang['setting_auto_check_pkg_updates'] = 'Automatic Check for Package Updates';
-$_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatically check for updates for packages in Package Management. This may slow the loading of the grid.';
+$_lang['setting_auto_check_pkg_updates'] = 'Verificação Automática de Atualizações de pacotes';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'Se "Sim", MODX irá automaticamente verificar se há atualizações para os pacotes no Gerenciamento de pacotes. Isso pode diminuir a carga da rede.';
 
-$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
-$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
+$_lang['setting_auto_check_pkg_updates_cache_expire'] 'Tempo de Expiração de Cache para verificação automática de atualizações de pacotes' =;
+$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'O número de minutos que a Gerenciamento de Pacotes armazenará em cache os resultados para verificar se há atualizações de pacotes.';
 
-$_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
-$_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
+$_lang['setting_allow_multiple_emails'] = 'Permitir emails duplicados para usuários';
+$_lang['setting_allow_multiple_emails_desc'] = 'Se habilitada, os usuários podem compartilhar o mesmo endereço de e-mail.';
 
-$_lang['setting_automatic_alias'] = 'Automatically generate alias';
-$_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
+$_lang['setting_automatic_alias'] = 'Gerar automaticamente o alias';
+$_lang['setting_automatic_alias_desc'] = 'Selecione "Sim" para que o sistema gere automaticamente um alias com base no título da página do Recurso ao salvar.';
 
-$_lang['setting_base_help_url'] = 'Base Help URL';
-$_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
+$_lang['setting_base_help_url'] = 'URL Base da Ajuda ';
+$_lang['setting_base_help_url_desc'] = 'A URL base através da qual serão construidos os links da Ajuda no canto superior direito das páginas do gestor.';
 
-$_lang['setting_blocked_minutes'] = 'Blocked Minutes';
-$_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minutes that a user will be blocked for if they reach their maximum number of allowed failed login attempts. Please enter this value as numbers only (no commas, spaces etc.)';
+$_lang['setting_blocked_minutes'] = 'Minutos Bloqueados';
+$_lang['setting_blocked_minutes_desc'] = 'Aqui você pode digitar o número de minutos que o usuário será bloqueado se atingir o número máximo permitido de tentativas de login. Por favor, insira este valor como apenas números (sem vírgulas, espaços e etc.) ';
 
-$_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
-$_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
+$_lang['setting_cache_action_map'] = 'Ativar Cache para Mapa da Ação';
+$_lang['setting_cache_action_map_desc'] = 'Quando habilitada, as ações (ou mapas do controlador) serão armazenados em cache para reduzir o tempo de carregamento da página gestor.';
 
-$_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
-$_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
+$_lang['setting_cache_alias_map'] = 'Ativar o Cache de Mapa de Alias de Contexto';
+$_lang['setting_cache_alias_map_desc'] = 'Quando ativado, todos os URIs de recursos são armazenados em cache no contexto. Habilitar em sites menores, e desativar em sites maiores para uma melhor performance.';
 
-$_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
-$_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
+$_lang['setting_cache_context_settings'] = 'Ativar Cache para Configurações de Contexto.';
+$_lang['setting_cache_context_settings_desc'] = 'Quando ativo, as configurações de contexto será armazenado em cache para reduzir o tempo de carga.';
 
-$_lang['setting_cache_db'] = 'Enable Database Cache';
-$_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
+$_lang['setting_cache_db'] = 'Ativar o Cache de Banco de Dados';
+$_lang['setting_cache_db_desc'] = 'Quando habilitada, os objetos e conjuntos de resultados brutos de consultas SQL são armazenados em cache para reduzir significativamente as cargas de banco de dados.';
 
-$_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
-$_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
+$_lang['setting_cache_db_expires'] = 'Tempo de Expiração para Cache de DB';
+$_lang['setting_cache_db_expires_desc'] = 'Este valor (em segundos) define a quantidade de tempo que os arquivos de cache durar "conjunto de resultados" da DB em cache.';
 
-$_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
-$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+$_lang['setting_cache_db_session'] = 'Ativar o Cache de Sessão de Banco de Dados';
+$_lang['setting_cache_db_session_desc'] = 'Quando habilitado, e cache_db está ativado, as sessões de banco de dados serão armazenados em cache no cache do conjunto de resultados da DB.';
 
-$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
-$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+$_lang['setting_cache_db_session_lifetime'] = 'Tempo de expiração de cache de sessão do BD';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'Este valor (em segundos) define a quantidade de arquivos de cache tempo duram as entradas de sessão em cache do conjunto de resultados da BD.';
 
 $_lang['setting_cache_default'] = 'Cacheable default';
 $_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
