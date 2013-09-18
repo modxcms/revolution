@@ -48,8 +48,8 @@ $_lang['sources.intro_msg'] = 'Gerenciar todas as suas Fontes de Mídia aqui.';
 $_lang['user_group'] = 'Grupo de Usuários ';
 
 /* file source type */
-$_lang['prop_file.allowedFileTypes_desc'] = 'Se definido, vai restringir os arquivos mostrados apenas para as extensões especificadas. Por favor, especifique em uma lista separada por vírgulas, sem o '.;
-$_lang['prop_file.basePath_desc'] = 'O caminho do arquivo para apontar a fonte de.';
+$_lang['prop_file.allowedFileTypes_desc'] = 'Se definido, vai restringir os arquivos mostrados apenas para as extensões especificadas. Por favor, especifique em uma lista separada por vírgulas';
+$_lang['prop_file.basePath_desc'] = 'O caminho do arquivo para apontar a Fonte de Mídia.';
 $_lang['prop_file.basePathRelative_desc'] = 'Se a base de dados de configuração de caminho acima não é relativo ao caminho de instalação MODX, defina-o para Não.';
 $_lang['prop_file.baseUrl_desc'] = 'O URL que esta fonte pode ser acessado a partir de.';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Se for verdade, MODX só irá preceder o baseUrl se nenhuma barra (/) é encontrado no início da URL ao processamento de TV. Útil para definir um valor fora da TV baseUrl .';
