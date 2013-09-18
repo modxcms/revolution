@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Permitir Tags em POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se for falso, todas as variáveis POST serão despojadas de tags HTML, entidades numéricas e tags MODX. MODX recomenda deixar este conjunto para false para contextos que não são o mgr, onde é definido como true por padrão.';
 
 $_lang['setting_archive_with'] = 'Força Arquivos PCLZip';
-$_lang['setting_archive_with_desc'] = 'Se for verdade, vai usar PCLZip em vez de ZipArchive como a extensão zip. Ligue isso em se você está recebendo erros extractTo ou está tendo problemas com a descompactação em Gestão de pacotes '.;
+$_lang['setting_archive_with_desc'] = 'Se for verdade, vai usar PCLZip em vez de ZipArchive como a extensão zip. Ligue isso em se você está recebendo erros extractTo ou está tendo problemas com a descompactação em Gestão de pacotes.';
 
 $_lang['setting_auto_menuindex'] = 'Indexação padrão de menu';
 $_lang['setting_auto_menuindex_desc'] = 'Selecione "Sim" para ligar índice de menus automático incrementado por padrão.';
@@ -104,7 +104,7 @@ $_lang['setting_auto_menuindex_desc'] = 'Selecione "Sim" para ligar índice de m
 $_lang['setting_auto_check_pkg_updates'] = 'Verificação Automática de Atualizações de pacotes';
 $_lang['setting_auto_check_pkg_updates_desc'] = 'Se "Sim", MODX irá automaticamente verificar se há atualizações para os pacotes no Gerenciamento de pacotes. Isso pode diminuir a carga da rede.';
 
-$_lang['setting_auto_check_pkg_updates_cache_expire'] 'Tempo de Expiração de Cache para verificação automática de atualizações de pacotes' =;
+$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Tempo de Expiração de Cache para verificação automática de atualizações de pacotes';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'O número de minutos que a Gerenciamento de Pacotes armazenará em cache os resultados para verificar se há atualizações de pacotes.';
 
 $_lang['setting_allow_multiple_emails'] = 'Permitir emails duplicados para usuários';
