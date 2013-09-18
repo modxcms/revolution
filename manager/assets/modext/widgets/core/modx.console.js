@@ -34,7 +34,7 @@ MODx.Console = function(config) {
             ,itemId: 'okBtn'
             ,disabled: true
             ,scope: this
-            ,handler: this.hide
+            ,handler: this.hideConsole
         }]
         ,keys: [{
             key: Ext.EventObject.S
@@ -43,7 +43,7 @@ MODx.Console = function(config) {
             ,scope: this
         },{
             key: Ext.EventObject.ENTER
-            ,fn: this.hide
+            ,fn: this.hideConsole
             ,scope: this
         }]
     });
