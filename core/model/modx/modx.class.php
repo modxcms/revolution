@@ -2275,6 +2275,7 @@ class modX extends xPDO {
                         date_default_timezone_set('UTC');
                     }
                     if ($this->_initialized) {
+                        $this->user = null;
                         $this->getUser();
                     }
                     $initialized = true;
