@@ -673,7 +673,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                     node: node,
                     handler: function(btn,evt){
                         evt.stopPropagation(evt);
-                        node.reload();
+                        node.getOwnerTree().handleCreateClick(node);
                     },
                     iconCls: 'icon-plus-sign',
                     renderTo: elId
@@ -707,6 +707,14 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             node.el.appendChild(btn);
         }
     }
+
+    /**
+     * Handled inline add button click
+     * Need to be extended in MODx.tree.Tree instances to work properly
+     *
+     * @param Ext.tree.AsyncTreeNode node
+     */
+    ,handleCreateClick: function(node){}
 
 });
 Ext.reg('modx-tree',MODx.tree.Tree);

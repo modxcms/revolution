@@ -522,6 +522,11 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         
         return m;
     }
+
+    ,handleCreateClick: function(node){
+        this.cm.activeNode = node;
+        this._createElement();
+    }
 });
 Ext.reg('modx-tree-element',MODx.tree.Element);
 
