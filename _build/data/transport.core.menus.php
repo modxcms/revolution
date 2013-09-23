@@ -348,8 +348,8 @@ $userNavMenus[0]->fromArray(array(
   'text' => 'user',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => 'menu_reports',
-  'action' => '',
+  'permissions' => 'menu_reports,canChangeProfile',
+  'action' => 'security/profile',
 ), '', true, true);
 $children = array();
 
@@ -383,7 +383,7 @@ $children[2]->fromArray(array (
   'description' => 'logout_desc',
   'parent' => 'user',
   'permissions' => 'logout',
-  'action' => 'system/event',
+  'action' => 'security/logout',
 ), '', true, true);
 
 $userNavMenus[0]->addMany($children,'Children');
@@ -396,8 +396,8 @@ $userNavMenus[1]->fromArray(array(
   'text' => 'admin',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => '',
-  'action' => '',
+  'permissions' => 'settings',
+  'action' => 'system/settings',
 ), '', true, true);
 $children = array();
 
