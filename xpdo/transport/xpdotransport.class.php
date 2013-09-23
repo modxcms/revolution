@@ -175,8 +175,8 @@ class xPDOTransport {
      * Compares two package versions by signature.
      *
      * @static
-     * @param $signature1 A package signature.
-     * @param $signature2 Another package signature to compare.
+     * @param string $signature1 A package signature.
+     * @param string $signature2 Another package signature to compare.
      * @return bool|int Returns -1 if the first version is lower than the second, 0 if they
      * are equal, and 1 if the second is lower if the package names in the provided
      * signatures are equal; otherwise returns false.
@@ -327,6 +327,7 @@ class xPDOTransport {
      * can be anything from rules describing how to pack or unpack the artifact,
      * or any other data that might be useful when dealing with a transportable
      * artifact.
+     * @return bool TRUE if the artifact is successfully registered in the transport.
      */
     public function put($artifact, $attributes = array ()) {
         $added= false;
@@ -337,6 +338,7 @@ class xPDOTransport {
             if (empty($vehiclePackage)) $vehiclePackage = $attributes['vehicle_package'] = 'transport';
             if (empty($vehicleClass)) $vehicleClass = $attributes['vehicle_class'] = 'xPDOObjectVehicle';
             if ($className = $this->xpdo->loadClass("{$vehiclePackage}.{$vehicleClass}", $vehiclePackagePath, true, true)) {
+                /** @var xPDOVehicle $vehicle */
                 $vehicle = new $className();
                 $vehicle->put($this, $artifact, $attributes);
                 if ($added= $vehicle->store($this)) {
@@ -566,10 +568,11 @@ class xPDOTransport {
      * @todo Implement ability to store a package to a specified location, supporting various
      * transport methods.
      * @param mixed $location The location to store the package.
+     * @return bool TRUE if the package is stored successfully.
      */
     public function store($location) {
         $stored= false;
-        if ($this->state === xPDOTransport::PACKED) {}
+        if ($this->state === xPDOTransport::STATE_PACKED) {}
         return $stored;
     }
 
