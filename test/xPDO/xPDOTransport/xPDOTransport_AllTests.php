@@ -19,20 +19,17 @@
  *
  * @package xpdo-test
  */
-
+require_once 'xPDOTransport.php';
 /**
- * Extends the basic PHPUnit TestCase class to provide xPDO specific methods
+ * Suite handling all xPDOTransport related tests.
  *
  * @package xpdo-test
+ * @subpackage xpdotransport
  */
-class xPDOTestCase extends PHPUnit_Framework_TestCase {
-    /** @var xPDO $xpdo */
-    public $xpdo = null;
-
-    protected function setUp() {
-       $this->xpdo = xPDOTestHarness::getInstance();
-    }
-    protected function tearDown() {
-       $this->xpdo = null;
+class xPDOTransport_AllTests extends PHPUnit_Framework_TestSuite {
+    public static function suite() {
+        $suite = new xPDOZip_AllTests('xPDOTransportTests');
+        $suite->addTestSuite('xPDOTransportTest');
+        return $suite;
     }
 }
