@@ -31,7 +31,7 @@
          ================================= -->
     <target name="complete" description="--> Complete Build">
         <phingcall target="git-export-build-image" />
-        <phingcall target="generate-phpdocs" />
+        <!--<phingcall target="generate-phpdocs" />-->
         <phingcall target="prepare-build-image" />
         <phingcall target="build-sdk" />
         <phingcall target="build-minimal" />
