@@ -94,7 +94,7 @@ $_lang['resource_groups_desc'] = 'Assign Resources to Groups';
 $_lang['search'] = 'Search';
 $_lang['search_desc'] = 'Search for resources.';
 $_lang['security'] = 'Security';
-$_lang['settings'] = '<i class="icon-cog icon-large"></i>';
+$_lang['settings'] = 'Settings';
 $_lang['site'] = 'Content';
 $_lang['sources'] = 'Drivers';
 $_lang['sources_desc'] = 'Media drivers for use of media from remote services or servers';

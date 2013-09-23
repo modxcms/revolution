@@ -405,8 +405,8 @@ $children = array();
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'menuindex' => 0,
-  'text' => 'settings',
-  'description' => 'settings_desc',
+  'text' => 'system_settings',
+  'description' => 'system_settings_desc',
   'parent' => 'admin',
   'permissions' => 'settings',
   'action' => 'system/settings',
@@ -503,7 +503,7 @@ $children[8]->fromArray(array (
 $userNavMenus[1]->addMany($children,'Children');
 unset($children);
 
-/* ***************** ADMIN/SETTINGS MENU ***************** */
+/* ***************** ADMIN/ABOUT MENU ***************** */
 $userNavMenus[2]= $xpdo->newObject('modMenu');
 $userNavMenus[2]->fromArray(array(
   'menuindex' => 7,
