@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Add dependency metadata/API to xPDOTransport
+
 xPDO 2.2.9-pl (September 12, 2013)
 ====================================
 - Improve accuracy of query statistics
