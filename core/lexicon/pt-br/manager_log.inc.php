@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * Manager Log Brazilian Portuguese lexicon topic
  *
- * @language br
+ * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
@@ -16,5 +16,6 @@ $_lang['mgrlog_clear_confirm'] = 'Tem certeza que quer esvaziar completamente o 
 $_lang['mgrlog_query_msg'] = 'Por favor, faça uma seleção para ver os relatórios. Você pode selecionar entradas de relatório por data ,mas esteja ciente de que as datas que você digitou não são inclusivas - para selecionar cada entrada de log para Janeiro de 2010 , defina "data de início" a 01/01/2010 e "data final" para 01/02/2010 .';
 $_lang['mgrlog_query'] = 'Registrar Consultas';
 $_lang['mgrlog_view'] = 'Ver Relatórios do Gerenciador';
+$_lang['object'] = 'Objeto';
 $_lang['occurred'] = 'Ocorreu';
 $_lang['user'] = 'Usuário';

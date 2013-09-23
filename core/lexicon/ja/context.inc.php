@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -26,7 +26,7 @@ $_lang['context_err_remove'] = 'コンテキストの削除中にエラーが発
 $_lang['context_err_save'] = 'コンテキストの保存中にエラーが発生しました。';
 $_lang['context_id'] = 'コンテキストID';
 $_lang['context_key'] = 'コンテキストキー';
-$_lang['context_management_message'] = 'サイトのコンテキストを管理します。複数サイトを管理・運用する場合に、必要なサイトの数だけコンテキストを作成し、コントローラーファイル(index.php)内で関連付けて運用します。管理画面もMODXを利用して作られていますので、ここでコンテキストを管理しています。';
+$_lang['context_management_message'] = 'サイトのコンテキストを管理します。複数サイトを管理・運用する場合に、必要なサイトの数だけコンテキストを作成し、コントローラーファイル（index.php）内で関連付けて運用します。管理画面もMODXを利用して作られていますので、ここでコンテキストを管理しています。';
 $_lang['context_refresh'] = 'コンテキストの再読み込み';
 $_lang['context_remove'] = 'コンテキストを削除';
 $_lang['context_remove_confirm'] = '本当にこのコンテキストを削除しますか？　復活できません。';
