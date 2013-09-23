@@ -25,6 +25,7 @@ require_once dirname(__FILE__).'/xPDO/xPDO_AllTests.php';
 require_once dirname(__FILE__).'/xPDOCache/xPDOCache_AllTests.php';
 require_once dirname(__FILE__).'/xPDOZip/xPDOZip_AllTests.php';
 require_once dirname(__FILE__).'/xPDOQuery/xPDOQuery_AllTests.php';
+require_once dirname(__FILE__).'/xPDOTransport/xPDOTransport_AllTests.php';
 /**
  * Main Suite handling all xPDO tests.
  *
@@ -39,7 +40,8 @@ class xPDOSuite_AllTests {
         $suite->addTest(xPDOCache_AllTests::suite());
         $suite->addTest(xPDOZip_AllTests::suite());
         $suite->addTest(xPDOQuery_AllTests::suite());
-		$suite->addTestSuite('xPDOTearDownTest');
+        $suite->addTest(xPDOTransport_AllTests::suite());
+        $suite->addTestSuite('xPDOTearDownTest');
         return $suite;
     }
 }
