@@ -13,9 +13,6 @@ MODx.grid.SettingsGrid = function(config) {
             ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: config.url || MODx.config.connector_url
-                ,baseParams: {
-                    action: 'system/settings/getlist'
-                }
                 ,blankValues: true
             }
         }];
@@ -139,6 +136,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,plugins: this.exp
         ,primaryKey: 'key'
         ,autosave: true
+        ,save_action: 'system/settings/updatefromgrid'
         ,pageSize: MODx.config.default_per_page > 30 ? MODx.config.default_per_page : 30
         ,paging: true
         ,collapseFirst: false
@@ -236,8 +234,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         this.refresh();
     }
     ,filterByKey: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.key = nv;
+        this.getStore().baseParams.key = newValue;
         this.getStore().baseParams.namespace = '';
         this.getBottomToolbar().changePage(1);
         this.refresh();
@@ -325,7 +322,7 @@ MODx.window.CreateSetting = function(config) {
         title: _('setting_create')
         ,width: 600
         ,url: config.url
-        ,action: 'create'
+        ,action: 'system/settings/create'
         ,fields: [{
             layout: 'column'
             ,border: false
@@ -427,7 +424,13 @@ MODx.window.CreateSetting = function(config) {
         ,keys: []
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
-    this.on('show',function() {this.reset();},this);
+    this.on('show',function() {
+        this.reset();
+        this.setValues({
+            namespace: Ext.getCmp('modx-filter-namespace').value
+            ,area: Ext.getCmp('modx-filter-area').value
+        });
+    },this);
 };
 Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
