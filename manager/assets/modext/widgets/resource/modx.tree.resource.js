@@ -706,6 +706,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
+    ,handleCreateClick: function(node){
+        this.cm.activeNode = node;
+        var itm = {
+            usePk: '0'
+            ,classKey: 'modDocument'
+        };
+
+        this.createResourceHere(itm);
+    }
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);
 
