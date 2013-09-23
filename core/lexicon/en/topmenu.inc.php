@@ -107,7 +107,7 @@ $_lang['system_settings'] = 'System Settings';
 $_lang['system_settings_desc'] = 'Configure all system settings';
 $_lang['tools'] = 'Tools';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['user'] = '<i class="icon-user icon-large"></i>&nbsp;[[+username]]';
+$_lang['user'] = '[[+username]]';
 $_lang['users'] = 'Users';
 $_lang['user_management'] = 'Manage Users';
 $_lang['user_management_desc'] = 'Manage Users and their Permissions';
