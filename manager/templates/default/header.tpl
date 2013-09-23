@@ -45,6 +45,7 @@
 <div id="modx-container">
     <div id="modx-header">
         <div id="modx-navbar">
+            <span id="user-avatar">{$userImage}</span>
             <ul id="modx-user-menu">
                 {$navbUser}
             </ul>

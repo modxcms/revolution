@@ -162,6 +162,27 @@ $emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
 $output = str_replace($emptySub, '', $output);
 $this->setPlaceholder('navbUser',$output);
 
+/** @var modUserProfile $userProfile */
+$userProfile = $modx->user->getOne('Profile');
+
+if ($userProfile->photo) {
+    $src = $modx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?zc=1&h=32&w=32&src=' . $userProfile->photo;
+    $userImage = '<img src="' . $src . '" />';
+} else {
+    $gravemail = md5( strtolower( trim( $userProfile->email ) ) );
+    $gravsrc = 'http://www.gravatar.com/avatar/' . $gravemail . '?s=32';
+    $gravcheck = 'http://www.gravatar.com/avatar/' . $gravemail . '?d=404';
+    $response = get_headers($gravcheck);
+
+    if ($response != false){
+        $userImage = '<img src="' . $gravsrc . '" />';
+    } else {
+        $userImage = '<i class="icon-user icon-large"></i>';
+    }
+}
+
+$this->setPlaceholder('userImage',$userImage);
+
 /* assign logged in text and link */
 /** @var modMenu $profile */
 $profile = $modx->getObject('modMenu','profile');
