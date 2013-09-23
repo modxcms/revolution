@@ -522,6 +522,16 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         
         return m;
     }
+
+    ,handleCreateClick: function(node){
+        this.cm.activeNode = node;
+        var type = this.cm.activeNode.id.substr(2).split('_');
+        if (type[0] != 'category') {
+            this._createElement(null, null, null);
+        } else {
+            this.createCategory(null, {target: this});
+        }
+    }
 });
 Ext.reg('modx-tree-element',MODx.tree.Element);
 
