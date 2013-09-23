@@ -729,7 +729,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             var btn = document.createElement('div');
                 btn.innerHTML = 'H';
 
-            console.log(node.ui.elNode);
             node.el.appendChild(btn);
         }
     }
