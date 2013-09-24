@@ -18,7 +18,7 @@
  * @param $childrenCt
  * @param bool $showDescriptions
  */
-function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescriptions = true) {
+function _modProcessMenus(modX &$modx, &$output, $menus, &$childrenCt, $showDescriptions = true) {
     foreach ($menus as $menu) {
         if (!empty($menu['permissions'])) {
             $permissions = array();
@@ -52,6 +52,46 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescript
     }
 }
 
+function _buildMenu(modX &$modx, $menus, &$output, &$order, $showDescriptions) {
+    foreach ($menus as $menu) {
+        $childrenCt = 0;
+
+        if (!empty($menu['permissions'])) {
+            $permissions = array();
+            $exploded = explode(',', $menu['permissions']);
+            foreach ($exploded as $permission) $permissions[trim($permission)]= true;
+            if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
+        }
+        if ($menu['namespace'] != 'core') {
+            $menu['action'] .= '&namespace='.$menu['namespace'];
+        }
+
+        $description = !empty($menu['description']) ? '<span class="description">'.$menu['description'].'</span>'."\n" : '';
+
+        $menuTpl = '<li id="limenu-'.$menu['id'].'" class="top'.'">'."\n";
+        if (!empty($menu['handler'])) {
+            $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].'</a>'."\n";
+        } else if (!empty($menu['action'])) {
+            $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
+        } else {
+            $menuTpl .= '<a>'.$menu['text'].'</a>'."\n";
+        }
+
+        if (!empty($menu['children'])) {
+            $menuTpl .= '<ul class="modx-subnav">'."\n";
+            _modProcessMenus($modx,$menuTpl,$menu['children'],$childrenCt,$showDescriptions);
+            $menuTpl .= '</ul>'."\n";
+        }
+        $menuTpl .= '</li>'."\n";
+
+        /* if has no permissable children, and is not clickable, hide top menu item */
+        if (!empty($childrenCt) || !empty($menu['action']) || !empty($menu['handler'])) {
+            $output .= $menuTpl;
+        }
+        $order++;
+    }
+}
+
 /* get top navbar */
 $topNavCacheKey = 'menus/topnav/' . $modx->getOption('manager_language', null, $modx->getOption('cultureKey', null, 'en'));
 $topNavMenus = $modx->cacheManager->get($topNavCacheKey, array(
@@ -68,47 +108,15 @@ if ($topNavMenus == null || !is_array($topNavMenus)) {
 $output = '';
 $order = 0;
 $showDescriptions = (boolean)$modx->getOption('topmenu_show_descriptions',null,true);
-foreach ($topNavMenus as $menu) {
-    $childrenCt = 0;
 
-    if (!empty($menu['permissions'])) {
-        $permissions = array();
-        $exploded = explode(',', $menu['permissions']);
-        foreach ($exploded as $permission) $permissions[trim($permission)]= true;
-        if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
-    }
-    if ($menu['namespace'] != 'core') {
-        $menu['action'] .= '&namespace='.$menu['namespace'];
-    }
+_buildMenu($modx, $topNavMenus, $output, $order, $showDescriptions);
 
-    $menuTpl = '<li id="limenu-'.$menu['id'].'" class="top'.'">'."\n";
-    if (!empty($menu['handler'])) {
-        $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].'</a>'."\n";
-    } else if (!empty($menu['action'])) {
-        $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].'</a>'."\n";
-    } else {
-        $menuTpl .= '<a>'.$menu['text'].'</a>'."\n";
-    }
-
-    if (!empty($menu['children'])) {
-        $menuTpl .= '<ul class="modx-subnav">'."\n";
-        _modProcessMenus($modx,$menuTpl,$menu['children'],$childrenCt,$showDescriptions);
-        $menuTpl .= '</ul>'."\n";
-    }
-    $menuTpl .= '</li>'."\n";
-
-    /* if has no permissable children, and is not clickable, hide top menu item */
-    if (!empty($childrenCt) || !empty($menu['action']) || !empty($menu['handler'])) {
-        $output .= $menuTpl;
-    }
-    $order++;
-}
 $emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
 $output = str_replace($emptySub, '', $output);
 $this->setPlaceholder('navb',$output);
 
 /* get user navbar */
-$userNavCacheKey = 'menus/usernav/' . $modx->getOption('manager_language', null, $modx->getOption('cultureKey', null, 'en'));
+$userNavCacheKey = 'menus/user/' . $modx->getOption('manager_language', null, $modx->getOption('cultureKey', null, 'en'));
 $userNavMenus = $modx->cacheManager->get($userNavCacheKey, array(
     xPDO::OPT_CACHE_KEY => $modx->getOption('cache_menu_key', null, 'menu'),
     xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_menu_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
@@ -117,50 +125,41 @@ $userNavMenus = $modx->cacheManager->get($userNavCacheKey, array(
 if ($userNavMenus == null || !is_array($userNavMenus)) {
     /** @var modMenu $menu */
     $menu = $modx->newObject('modMenu');
-    $userNavMenus = $menu->rebuildCache('usernav');
+    $userNavMenus = $menu->rebuildCache('user');
     unset($menu);
 }
 $output = '';
 $order = 0;
 $showDescriptions = (boolean)$modx->getOption('topmenu_show_descriptions',null,true);
-foreach ($userNavMenus as $menu) {
-    $childrenCt = 0;
 
-    if (!empty($menu['permissions'])) {
-        $permissions = array();
-        $exploded = explode(',', $menu['permissions']);
-        foreach ($exploded as $permission) $permissions[trim($permission)]= true;
-        if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
-    }
-    if ($menu['namespace'] != 'core') {
-        $menu['action'] .= '&namespace='.$menu['namespace'];
-    }
+_buildMenu($modx, $userNavMenus, $output, $order, $showDescriptions);
 
-    $menuTpl = '<li id="limenu-'.$menu['id'].'" class="top'.'">'."\n";
-    if (!empty($menu['handler'])) {
-        $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].'</a>'."\n";
-    } else if (!empty($menu['action'])) {
-        $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].'</a>'."\n";
-    } else {
-        $menuTpl .= '<a>'.$menu['text'].'</a>'."\n";
-    }
-
-    if (!empty($menu['children'])) {
-        $menuTpl .= '<ul class="modx-subnav">'."\n";
-        _modProcessMenus($modx,$menuTpl,$menu['children'],$childrenCt,$showDescriptions);
-        $menuTpl .= '</ul>'."\n";
-    }
-    $menuTpl .= '</li>'."\n";
-
-    /* if has no permissable children, and is not clickable, hide top menu item */
-    if (!empty($childrenCt) || !empty($menu['action']) || !empty($menu['handler'])) {
-        $output .= $menuTpl;
-    }
-    $order++;
-}
 $emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
 $output = str_replace($emptySub, '', $output);
 $this->setPlaceholder('navbUser',$output);
+
+/* get settings navbar */
+$adminNavCacheKey = 'menus/admin/' . $modx->getOption('manager_language', null, $modx->getOption('cultureKey', null, 'en'));
+$adminNavMenus = $modx->cacheManager->get($adminNavCacheKey, array(
+    xPDO::OPT_CACHE_KEY => $modx->getOption('cache_menu_key', null, 'menu'),
+    xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_menu_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+    xPDO::OPT_CACHE_FORMAT => (integer) $modx->getOption('cache_menu_format', null, $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+));
+if ($adminNavMenus == null || !is_array($adminNavMenus)) {
+    /** @var modMenu $menu */
+    $menu = $modx->newObject('modMenu');
+    $adminNavMenus = $menu->rebuildCache('admin');
+    unset($menu);
+}
+$output = '';
+$order = 0;
+$showDescriptions = (boolean)$modx->getOption('topmenu_show_descriptions',null,true);
+
+_buildMenu($modx, $adminNavMenus, $output, $order, $showDescriptions);
+
+$emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
+$output = str_replace($emptySub, '', $output);
+$this->setPlaceholder('navbAdmin',$output);
 
 /** @var modUserProfile $userProfile */
 $userProfile = $modx->user->getOne('Profile');
