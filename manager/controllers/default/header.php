@@ -52,7 +52,7 @@ function _modProcessMenus(modX &$modx, &$output, $menus, &$childrenCt, $showDesc
     }
 }
 
-function _buildMenu(modX &$modx, $menus, &$output, &$order, $showDescriptions) {
+function _buildMenu(modX &$modx, $menus, &$output, &$order, $showDescriptions = true, $showTopDescription = false) {
     foreach ($menus as $menu) {
         $childrenCt = 0;
 
@@ -72,7 +72,7 @@ function _buildMenu(modX &$modx, $menus, &$output, &$order, $showDescriptions) {
         if (!empty($menu['handler'])) {
             $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].'</a>'."\n";
         } else if (!empty($menu['action'])) {
-            $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
+            $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].($showTopDescription ? $description : '').'</a>'."\n";
         } else {
             $menuTpl .= '<a>'.$menu['text'].'</a>'."\n";
         }
@@ -132,7 +132,7 @@ $output = '';
 $order = 0;
 $showDescriptions = (boolean)$modx->getOption('topmenu_show_descriptions',null,true);
 
-_buildMenu($modx, $userNavMenus, $output, $order, $showDescriptions);
+_buildMenu($modx, $userNavMenus, $output, $order, $showDescriptions, true);
 
 $emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
 $output = str_replace($emptySub, '', $output);
@@ -155,7 +155,7 @@ $output = '';
 $order = 0;
 $showDescriptions = (boolean)$modx->getOption('topmenu_show_descriptions',null,true);
 
-_buildMenu($modx, $adminNavMenus, $output, $order, $showDescriptions);
+_buildMenu($modx, $adminNavMenus, $output, $order, $showDescriptions, true);
 
 $emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
 $output = str_replace($emptySub, '', $output);
