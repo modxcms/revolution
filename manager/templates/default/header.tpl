@@ -47,7 +47,7 @@
         <div id="modx-navbar">
             <ul id="modx-user-menu">
                 <li id="limenu-user" class="top">
-                    <a><span id="user-avatar">{$userImage}</span> {$username}</a>
+                    <a><span id="user-avatar">{$userImage}</span> <span id="user-username">{$username}</span></a>
                     <ul class="modx-subnav">
                         {$navbUser}
                     </ul>
