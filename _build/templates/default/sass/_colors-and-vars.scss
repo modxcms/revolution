@@ -2,38 +2,50 @@ $softGrey: rgb(220, 220, 220);
 $almostWhite: rgb(240, 240, 240);
 $dropdownBg: $almostWhite;
 
+
+
 /* Hightlight Color:
    use this for tab top borders, etc. … anywhere some personality is needed */
-$colorSplash: #3875ae;
+$colorSplash: rgb(93,152,197);
+$primaryAction: rgb(158,189,94);
+$lightBg: rgb(242,242,242);
+$mediumBg: rgb(204,204,204);
+$mediumDkBg: rgb(153,153,153);
+$darkBg: rgb(51,51,51);
+$darkestBg: rgb(0,0,0);
 
 $mainText: #444444;
-$headerText: #555555;
+$headerText: rgb(51,51,51);
+$labelText: rgb(102,102,102);
+$divider: $labelText;
+$triggerBorder: $lightBg;
 
 /* Tree menus */
-$treeText: #444444;
+$treeText: rgb(153,153,153);
 $tipText: $almostWhite;
 $iconColor: $treeText;
-$unpublished: lighten($treeText, 30%) !important;
+$unpublished: rgb(102,102,102) !important;
 $unpubText: normal;
 $hidden: $unpublished;
+$treeDivider: rgb(64,64,64);
 
 /* Top navigation colors */
-$navbarBg: rgb(255, 255, 255);
-$navbarHover: rgb(240, 240, 240);
+$navbarBg: $lightBg;
+$navbarHover: white;
 $navbarDrop: $navbarBg;
-$navbarText: #222222;
+$navbarText: rgb(51,51,51);
 $navbarRadius: 2px;
 
 $borderColor: rgb(222, 222, 222);
 $borderShadow: rgba(0, 0, 0, 0.025);
 
-$mainBg: rgb(234, 234, 234);
-$tabBg: white;
-$tabInactiveBg: $navbarHover;
-$tabHoverBg: $navbarHover;
-$tabText: #333333;
-$tabInactiveText: $tabText;
-$tabHoverText: darken($colorSplash, 20%);
+$mainBg: white;
+$tabBg: rgb(242,242,242);
+$tabInactiveBg: $mediumBg;
+$tabHoverBg: $lightBg;
+$tabText: $headerText;
+$tabInactiveText: white;
+$tabHoverText: $labelText;
 
 $baseText: normal 13px / 1.4 Arial, Helvetica, sans-serif;
 $fontSmall: normal 11px arial, helvetica, tahoma, sans-serif;
