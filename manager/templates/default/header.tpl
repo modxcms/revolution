@@ -46,7 +46,21 @@
     <div id="modx-header">
         <div id="modx-navbar">
             <ul id="modx-user-menu">
-                {$navbUser}
+                <li id="limenu-user" class="top">
+                    <a href="?a=security/profile" title="{$_lang.profile_desc}"><span id="user-avatar">{$userImage}</span> <span id="user-username">{$username}</span></a>
+                    <ul class="modx-subnav">
+                        {$navbUser}
+                    </ul>
+                </li>
+                <li id="limenu-admin" class="top">
+                    <a href="?a=system/settings" title="{$_lang.system_settings_desc}"><i class="icon-gear icon-large"></i></a>
+                    <ul class="modx-subnav">
+                        {$navbAdmin}
+                    </ul>
+                </li>
+                <li id="limenu-about" class="top">
+                    <a href="?a=help" title="{$_lang.about_desc}"><i class="icon-question-sign icon-large"></i></a>
+                </li>
             </ul>
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">

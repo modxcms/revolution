@@ -7,6 +7,8 @@
 *   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\    - Alan Pich @_alanpich
 *    \/_/ \/_/\/_____/\/___/  \/_/ \/_/    - Danya Postfactum
 *                                          - Christian Seele @christianseel
+*                                          - Sipko Groefsema @sipko
+*                                          - GP Sietzeme @gpsietzema
 */
 
 @import "bourbon/bourbon";
@@ -14,27 +16,29 @@
 @import "user-select";
 @import "box-sizing";
 @import "colors-and-vars";
+@import "xtheme-modx";
+@import "form";
+@import "buttons";
 @import "type";
 @import "tabs";
 @import "buttons";
 @import "navbar";
 @import "uberbar";
-@import "tree";
 @import "utility";
-@import "xtheme-modx";
 @import "font-awesome/font-awesome";
 @import "leftbar";
+@import "tree";
 @import "help";
 
 body, body.x-border-layout-ct {
-  color: #444;
+  color: $mainText;
   font: $baseText;
 }
 
 h2 {
   color: $headerText;
-  font-size: 25px;
   font: $fontNormal;
+  font-size: 25px;
   margin: 0 0 8px 5px;
 }
 
@@ -158,41 +162,6 @@ input::-moz-focus-inner {
   width: 100%;
 }
 
-.x-panel-header {
-  background: none;
-  border-bottom: 1px solid #ddd;
-  border: none;
-  font-size: 16px;
-  margin: 0 0 0 15px;
-  padding: 0 0 8px;
-}
-
-/* form fields */
-
-.modx-form .x-form-text,
-.modx-form .x-form-textarea {
-  font-size: 14px;
-}
-
-.modx-form .x-form-text {
-  height: 20px !important;
-  padding: 5px;
-}
-
-.modx-form .x-form-item label {
-  color: #505050;
-  font-size: 14px;
-}
-
-.x-form-check-wrap {
-  height: auto !important;
-}
-
-.x-form-check-wrap .x-form-cb-label {
-  color: #777;
-  font-weight: normal;
-}
-
 /* grids */
 .x-small-editor .x-form-field {
   font-size: 12px !important;
@@ -200,24 +169,6 @@ input::-moz-focus-inner {
 
 .grid-row-inactive {
   color: #999 !important;
-}
-
-/* action buttons bar */
-#modx-action-buttons {
-  background-color: rgba(224, 224, 224, 0.2);
-  border-radius: 3px;
-  border: none;
-  left: auto;
-  padding: 7px;
-  position: fixed;
-  right: 34px;
-  top: 50px;
-  z-index: 9;
-}
-
-#modx-action-buttons .x-toolbar-left {
-  width: auto !important;
-  zoom: 1;
 }
 
 /* collapse for resource panel */
@@ -1176,7 +1127,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* MODExt common classes */
 
 .container {
-  margin: 20px 15px 20px;
+  margin: 15px;
 }
 
 /* Wrap the main content */
@@ -1231,11 +1182,15 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  padding: 15px 15px 15px 15px;
+  padding: 15px;
+}
+
+#modx-resource-content .main-wrapper {
+  padding-top: 3px;
 }
 
 .with-title .main-wrapper {
-  padding: 0 15px 10px 15px;
+  padding: 0 15px 10px;
 }
 
 .left-col {

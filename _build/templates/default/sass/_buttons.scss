@@ -1,3 +1,248 @@
+/* action buttons bar */
+#modx-action-buttons {
+  position: fixed;
+  top: 57px;
+  right: 12px;
+  z-index: 9;
+  left: auto;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+#modx-action-buttons .x-toolbar-left {
+  width: auto !important;
+  zoom: 1;
+}
+
+/* standard buttons */
+.x-btn {
+  *display: inline;
+  background: $lightBg;
+  line-height: 1;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 1px;
+  padding: 7px 12px;
+  position: relative;
+  text-decoration: none;
+  zoom: 1;
+
+  button {
+    font-size: 12px;
+    color: $labelText;
+    cursor: pointer;
+    height: 16px;
+    min-width: 100%;
+    vertical-align: middle;
+  }
+
+  #modx-leftbar & {
+    font-size: 10px;
+    background: transparent;
+    border: 2px solid $labelText;
+    border-radius: 8px;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1.0
+    }
+  }
+  #modx-leftbar .modx-tree-node-tool-ct & {
+    background: none;
+    color: $mediumBg;
+    border: none;
+  }
+}
+
+#modx-abtn-save {
+  background: $primaryAction;
+
+  & button,
+  &.x-item-disabled * {
+    color: white !important;
+  }
+}
+
+.x-btn-icon button {
+  height: 16px;
+  width: 16px;
+}
+
+.x-btn-text-icon button {
+  padding-left: 20px !important;
+}
+
+.x-html-editor-tb .x-btn {
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: transparent;
+  background-image: none;
+  border: 0 none;
+  box-shadow: none;
+  margin: 0;
+}
+
+.x-html-editor-tb .x-btn-over {
+  border: 0 none;
+}
+
+.x-btn-over {
+  background: $mediumBg;
+}
+.x-btn-click {
+  -moz-box-shadow: 0 0 3px #aaaaaa inset;
+  -o-box-shadow: 0 0 3px #aaaaaa inset;
+  -webkit-box-shadow: 0 0 3px #aaaaaa inset;
+  background-color: #ffffff;
+  background-image: none;
+  border-color: #CFCFCF #C0C0C0 #AAAAAA;
+  box-shadow: 0 0 3px #aaaaaa inset;
+  margin: 0 1px;
+}
+
+.x-btn-focus {
+  background: rgb(240, 240, 240);
+  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
+  /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+  background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+  background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+  background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+  background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
+  border: 1px solid #658F1A;
+}
+
+.x-btn-group {
+  -khtml-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #dbe0e4;
+  margin-right: 2px;
+  padding: 0;
+}
+
+.x-btn-group .x-btn {
+  -moz-box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
+  -o-box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
+}
+
+.x-btn-group .x-btn button {
+  color: #868b8f;
+  height: auto !important;
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+.x-btn-group .x-btn-over {
+  background: #dfdfdf;
+  background: rgb(240, 240, 240);
+  /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
+  background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+  background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+  background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
+  background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
+  border: 1px solid #dbe0e4;
+}
+
+.x-btn-group .x-btn-over button {
+  color: #5b7a98;
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+.x-btn-group .x-btn-click {
+  background-color: #ffffff;
+  background-image: none;
+  box-shadow: 0 0 3px #aaaaaa inset;
+  margin: 0 2px 0 0;
+}
+
+.x-btn-click .x-btn-text, .x-btn-menu-active .x-btn-text, .x-btn-pressed .x-btn-text {
+  color: #73797f;
+}
+
+.x-btn-disabled * {
+  color: gray !important;
+}
+
+.x-btn-group-bwrap {
+  padding: 1px 0 0;
+}
+
+.x-btn-group-header {
+  background-color: #dbe0e4;
+  color: #73797f;
+  text-shadow: 0 1px 0 #fafafa;
+}
+
+.x-btn-group-tl, .x-btn-group-tr {
+  background-image: none;
+  padding: 0;
+}
+
+.x-btn-group-tc, .x-btn-group-bc, .x-btn-group-bl, .x-btn-group-br {
+  background-image: none;
+}
+
+.x-btn-group-ml {
+  background-image: none;
+  padding-left: 1px;
+}
+
+.x-btn-group-mr {
+  background-image: none;
+  padding-right: 1px;
+}
+
+.x-btn em.x-btn-split {
+  background-image: url(../images/modx-theme/button/s-arrow.gif);
+  background: rgba(0, 0, 0, 0) no-repeat right center;
+  display: block;
+  padding-right: 14px;
+}
+
+.x-btn em.x-btn-arrow {
+  background-image: url(../images/modx-theme/button/arrow.gif);
+  background: rgba(0, 0, 0, 0) no-repeat right center;
+  display: block;
+  padding-right: 10px;
+}
+
+/* //end button style */
+
+.x-btn-over em.x-btn-split, .x-btn-click em.x-btn-split, .x-btn-menu-active em.x-btn-split, .x-btn-pressed em.x-btn-split {
+  background-image: url(../images/modx-theme/button/s-arrow-o.gif);
+}
+
+.x-btn em.x-btn-arrow-bottom {
+  background-image: url(../images/modx-theme/button/s-arrow-b-noline.gif);
+}
+
+.x-btn em.x-btn-split-bottom {
+  background-image: url(../images/modx-theme/button/s-arrow-b.gif);
+}
+
+.x-btn-over em.x-btn-split-bottom, .x-btn-click em.x-btn-split-bottom, .x-btn-menu-active em.x-btn-split-bottom, .x-btn-pressed em.x-btn-split-bottom {
+  background-image: url(../images/modx-theme/button/s-arrow-bo.gif);
+}
+
+.x-btn-group-notitle .x-btn-group-tc {
+  background-image: url(../images/modx-theme/button/group-tb.gif);
+}
+
+
 /* Action buttons */
 .actions {
   bottom: 8px;
