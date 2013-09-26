@@ -94,34 +94,59 @@ class modTransportProvider extends xPDOSimpleObject {
         return $info;
     }
 
-    public function latest($name, $constraint = '*', array $args = array()) {
-        $latest = false;
-        /** @var modRestResponse $response */
-        $response = $this->request(
-            'package/versions',
-            'GET',
-            array_merge(
-                array(
-                    'package' => $name,
-                    'supports' => $this->xpdo->version['code_name'] . '-' . $this->xpdo->version['full_version']
-                ),
-                $args
-            )
-        );
-        if ($response) {
-            if (!$response->isError()) {
-                /** @var SimpleXMLElement $xml */
-                $xml = $response->toXml();
-                /** @var SimpleXMLElement $resolver */
-                foreach ($xml as $resolver) {
-                    if (xPDOTransport::satisfies((string)$resolver->version, $constraint)) {
-                        $latest = array();
-                        $this->fromXML($resolver, $latest);
-                        break;
+    public function latest($identifier, $constraint = '*', array $args = array()) {
+        $latest = array();
+        if (strpos($identifier, '-') === false) {
+            /** @var modRestResponse $response */
+            $response = $this->request(
+                'package/versions',
+                'GET',
+                array_merge(
+                    array(
+                        'package' => $identifier,
+                        'constraint' => $constraint
+                    ),
+                    $args
+                )
+            );
+            if ($response) {
+                if (!$response->isError()) {
+                    $xml = $response->toXml();
+                    /** @var SimpleXMLElement $resolver */
+                    foreach ($xml as $resolver) {
+                        $node = array();
+                        if (xPDOTransport::satisfies((string)$resolver->version, $constraint)) {
+                            $this->fromXML($resolver, $node);
+                            array_push($latest, $node);
+                        }
+                    }
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $response->getError(), '', __METHOD__, __FILE__, __LINE__);
+                }
+            }
+        } else {
+            $response = $this->request(
+                'package/update',
+                'GET',
+                array_merge(
+                    array(
+                        'signature' => $identifier,
+                        'constraint' => $constraint
+                    ),
+                    $args
+                )
+            );
+            if ($response) {
+                if (!$response->isError()) {
+                    $xml = $response->toXml();
+                    foreach ($xml as $resolver) {
+                        $node = array();
+                        if (xPDOTransport::satisfies((string)$resolver->version, $constraint)) {
+                            $this->fromXML($resolver, $node);
+                            array_push($latest, $node);
+                        }
                     }
                 }
-            } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $response->getError(), '', __METHOD__, __FILE__, __LINE__);
             }
         }
         return $latest;
