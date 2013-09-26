@@ -666,30 +666,56 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                     el.style.float = 'right';
                 node.ui.elNode.appendChild(el);
 
+                var inlineButtonsLang = tree.getInlineButtonsLang(node);
+
                 var btn = MODx.load({
                     xtype: 'modx-button',
                     text: '',
                     scope: this,
+                    tooltip: new Ext.ToolTip({
+                        title: inlineButtonsLang.add
+                        ,target: this
+                    }),
                     node: node,
                     handler: function(btn,evt){
                         evt.stopPropagation(evt);
                         node.getOwnerTree().handleCreateClick(node);
                     },
                     iconCls: 'icon-plus-sign',
-                    renderTo: elId
+                    renderTo: elId,
+                    listeners: {
+                        mouseover: function(button, e){
+                            button.tooltip.onTargetOver(e);
+                        }
+                        ,mouseout: function(button, e){
+                            button.tooltip.onTargetOut(e);
+                        }
+                    }
                 });
 
                 var btn = MODx.load({
                     xtype: 'modx-button',
                     text: '',
                     scope: this,
+                    tooltip: new Ext.ToolTip({
+                        title: inlineButtonsLang.refresh
+                        ,target: this
+                    }),
                     node: node,
                     handler: function(btn,evt){
                         evt.stopPropagation(evt);
                         node.reload();
                     },
                     iconCls: 'icon-refresh',
-                    renderTo: elId
+                    renderTo: elId,
+                    listeners: {
+                        mouseover: function(button, e){
+                            button.tooltip.onTargetOver(e);
+                        }
+                        ,mouseout: function(button, e){
+                            button.tooltip.onTargetOut(e);
+                        }
+                    }
                 });
 
 
@@ -703,7 +729,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             var btn = document.createElement('div');
                 btn.innerHTML = 'H';
 
-            console.log(node.ui.elNode);
             node.el.appendChild(btn);
         }
     }
@@ -715,6 +740,23 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param Ext.tree.AsyncTreeNode node
      */
     ,handleCreateClick: function(node){}
+
+    ,getInlineButtonsLang: function(node){
+        var langs = {};
+        if (node.id != undefined) {
+            var type = node.id.substr(2).split('_');
+            if (type[0] == 'type') {
+                langs.add = _('new_' + type[1]);
+            } else if (type[0] == 'category') {
+                langs.add = _('new_' + type[0]);
+            } else {
+                langs.add = _('new_document');
+            }
+        }
+
+        langs.refresh = _('ext_refresh');
+        return langs;
+    }
 
 });
 Ext.reg('modx-tree',MODx.tree.Tree);
