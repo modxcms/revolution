@@ -163,7 +163,7 @@ textarea.x-form-field, .x-form-textarea {
   font-weight: bold;
   height: 20px !important;
   padding: 6px !important;
-  text-shadow: 1px -1px 0 #FFFFFF;
+  /*text-shadow: 1px -1px 0 #FFFFFF;*/
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger {
@@ -403,7 +403,7 @@ textarea.x-form-field, .x-form-textarea {
   -webkit-border-radius: 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   background: rgb(240, 240, 240);
-  background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(220, 220, 220, 1);
+  /*background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(220, 220, 220, 1);*/
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -436,7 +436,7 @@ textarea.x-form-field, .x-form-textarea {
   font: bold 11px tahoma, verdana, helvetica, sans-serif;
   height: 16px;
   min-width: 100%;
-  text-shadow: 0 1px 0 #fcfcfc;
+  /*text-shadow: 0 1px 0 #fcfcfc;*/
   vertical-align: middle;
 }
 
@@ -466,7 +466,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-over {
   background: rgb(240, 240, 240);
-  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
+  /*background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);*/
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -479,7 +479,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-over button {
   color: #636F4C;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-click {
@@ -495,7 +495,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-focus {
   background: rgb(240, 240, 240);
-  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
+  /*background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);*/
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -531,7 +531,7 @@ textarea.x-form-field, .x-form-textarea {
 .x-btn-group .x-btn button {
   color: #868b8f;
   height: auto !important;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-group .x-btn-over {
@@ -549,7 +549,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-group .x-btn-over button {
   color: #5b7a98;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-group .x-btn-click {
@@ -574,7 +574,7 @@ textarea.x-form-field, .x-form-textarea {
 .x-btn-group-header {
   background-color: #dbe0e4;
   color: #73797f;
-  text-shadow: 0 1px 0 #fafafa;
+  /*text-shadow: 0 1px 0 #fafafa;*/
 }
 
 .x-btn-group-tl, .x-btn-group-tr {
@@ -917,7 +917,7 @@ textarea.x-form-field, .x-form-textarea {
 }
 .x-grid3-header .x-grid3-hd-row td {
   color: #F0F0F0;
-  text-shadow: 0 -1px 0 #363636;
+  /*text-shadow: 0 -1px 0 #363636;*/
 }
 .x-grid3-header-pop {
   border-left-color: #DFDFDF;
@@ -1852,7 +1852,7 @@ a.x-menu-item {
 .x-panel-tl .x-panel-header {
   color: #6A6A6A;
   font: bold 12px arial,tahoma,verdana,sans-serif;
-  text-shadow: 0 1px 0 #FAFAFA;
+  /*text-shadow: 0 1px 0 #FAFAFA;*/
 }
 .x-panel-tl .x-panel-icon, .x-window-tl .x-panel-icon {
   background-position: 0 8px;
@@ -2226,7 +2226,7 @@ a.x-menu-item {
   font-weight: bold;
   margin-top: 0;
   padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #ffffff;
+  /*text-shadow: 0 1px 1px #ffffff;*/
 }
 .x-portal-space {
   border-bottom: 1px solid #afafaf;
@@ -2487,7 +2487,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   font: bold 18px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
   margin: 0 0 11px;
   padding: 8px 15px;
-  text-shadow: 0 1px 1px #FFFFFF;
+  /*text-shadow: 0 1px 1px #FFFFFF;*/
 }
 .x-window .x-panel-tl,
 .x-window .x-panel-ml,
@@ -2599,7 +2599,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   margin-top: 0;
   padding: 8px;
   text-align: center;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 .x-window .x-window-bl {
   -khtml-border-bottom-left-radius: 3px;

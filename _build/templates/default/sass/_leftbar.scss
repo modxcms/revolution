@@ -1,5 +1,6 @@
 #modx-leftbar {
   background-color: $mainBg;
+  background:$almostWhite;
 }
 
 #modx-leftbar-tabpanel {
@@ -65,5 +66,5 @@
 }
 
 .tree-pseudoroot-node:hover .x-btn-fontawesome {
-  opacity: 0.65;
+  /*opacity: 0.65;*/
 }

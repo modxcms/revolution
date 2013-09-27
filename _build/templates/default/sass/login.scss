@@ -121,7 +121,7 @@ h2 {
 
     button {
       color: #636F4C;
-      text-shadow: 0 1px 0 #ffffff;
+      /*text-shadow: 0 1px 0 #ffffff;*/
     }
   }
 
@@ -228,7 +228,7 @@ label {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 bottom gainsboro;
+  /*background: url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 bottom gainsboro;*/
   border-radius: 3px;
   border: 2px solid #ddd;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;

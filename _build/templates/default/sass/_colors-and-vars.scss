@@ -5,10 +5,15 @@ $seriouslyAlmostWhite:lighten($almostWhite,5%);
 $dropdownBg: $almostWhite;
 $white:white;
 $black:#020608;
+$lightBg:$almostWhite;
+$labelText:$black;
+$mediumBg:$softGrey;
+$primaryAction:#2277AF;
 
 /* Hightlight Color:
    use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: #3875ae;
+$desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
 
 $mainText: #444444;
 $headerText: $black;
