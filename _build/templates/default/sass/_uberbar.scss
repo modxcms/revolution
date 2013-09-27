@@ -19,16 +19,15 @@
 }
 
 #modx-manager-search .x-form-field-wrap {
-  background-color: $almostWhite;
-  background: $dropdownBg;
+  background: $white;
   border-radius: 0;
+  border:1px solid $softGrey;
   color: #565353;
   font-size: 12px;
   outline: none !important;
 }
 
 #modx-manager-search .x-form-field-trigger-wrap {
-  border-width: 0;
   height: auto;
 }
 
