@@ -239,8 +239,12 @@ ul.x-tab-strip-top {
 
 /* main styles for the various tree states */
 .x-tree-node-el a span {
-  line-height: 2;
+  /*line-height: 2;*/
   padding-left: 7px;
+}
+
+.x-tree-node-ct {
+	padding-top:4px;
 }
 
 .x-tree-node-el a span span {
