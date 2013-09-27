@@ -103,7 +103,8 @@
 }
 
 textarea.x-form-field, .x-form-textarea {
-  font-family: "Courier New", Courier, monospace;
+  /*font-family: "Courier New", Courier, monospace;*/
+  font-family:"Lucida Console", Monaco, monospace;
 }
 
 .x-form-text, textarea.x-form-field, .x-form-textarea {
@@ -112,11 +113,10 @@ textarea.x-form-field, .x-form-textarea {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   -webkit-border-radius: 2px;
-  background-color: #fbfbfb;
+  background-color:$white;
   background-image: none;
-  border-color: #CCCCCC;
   border-radius: 2px;
-  border: 1px solid;
+  border: 1px solid $borderGrey;
   position: relative;
 }
 
@@ -213,7 +213,7 @@ textarea.x-form-field, .x-form-textarea {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   -webkit-border-radius: 2px;
-  background: rgb(240, 240, 240);
+  background: $white;
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -381,7 +381,11 @@ textarea.x-form-field, .x-form-textarea {
 }
 
 .x-fieldset {
-  border-color: #C5C5C5;
+  border-color: $borderGrey;
+  background:$white;
+  .x-panel-body {
+	background:$white;
+  }
 }
 
 .x-fieldset legend {
@@ -1782,7 +1786,7 @@ a.x-menu-item {
   overflow: visible;
 }
 .x-panel-body {
-  background-color: #fff;
+  background-color: $seriouslyAlmostWhite;
   border: 0;
   overflow: visible;
 }
@@ -2386,7 +2390,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   background-image: url(../images/modx-theme/slider/slider-v-thumb.png);
 }
 .x-form fieldset {
-  border: 1px solid #dedede;
+  border: 1px solid $borderGrey;
 }
 .x-form fieldset legend {
   color: #606060;

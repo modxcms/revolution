@@ -14,6 +14,7 @@
 @import "user-select";
 @import "box-sizing";
 @import "colors-and-vars";
+@import "buttons";
 @import "type";
 @import "tabs";
 @import "buttons";
@@ -27,14 +28,18 @@
 @import "help";
 
 body, body.x-border-layout-ct {
-  color: #444;
+  color: $black;
   font: $baseText;
+}
+
+input,textarea {
+	color:$black;
 }
 
 h2 {
   color: $headerText;
   font-size: 25px;
-  font: $fontNormal;
+  font: $fontH2; 
   margin: 0 0 8px 5px;
 }
 
@@ -130,6 +135,18 @@ input::-moz-focus-inner {
 
 .dashed {
   border-bottom: 1px #90b1b9 dashed;
+}
+
+#modx-resource-content {
+	.x-panel-header {
+		padding:0;
+	}
+	.x-panel-header-text {
+		font-size:12px;
+	}
+	.x-panel-body {
+		padding-top:1px;
+	}
 }
 
 /* panel setups */
