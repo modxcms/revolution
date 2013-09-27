@@ -60,7 +60,7 @@ ul.x-tab-strip-top {
 .unpublished,
 .unpublished a span {
   color: $unpublished;
-  font-style: $unpubText;
+  font-style: $unpubTextStyle;
 }
 
 .hidemenu a span {
@@ -68,12 +68,13 @@ ul.x-tab-strip-top {
 }
 
 .deleted {
-  color: $unpublished;
+  color: $deleted;
 }
 
 .deleted a span {
-  color: $unpublished;
-  text-decoration: line-through !important;
+  color: $deleted;
+  text-decoration: $delTextDeco;
+  font-style: $delTextStyle;
 }
 
 .element-node-disabled a span {

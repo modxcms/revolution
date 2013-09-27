@@ -25,7 +25,10 @@ $treeText: rgb(153,153,153);
 $tipText: $almostWhite;
 $iconColor: $treeText;
 $unpublished: rgb(102,102,102) !important;
-$unpubText: italic;
+$unpubTextStyle: italic;
+$deleted: rgb(102,102,102) !important;
+$delTextStyle: normal;
+$delTextDeco: line-through;
 $hidden: $unpublished;
 $treeDivider: rgb(64,64,64);
 
