@@ -4,10 +4,11 @@ $dropdownBg: $almostWhite;
 
 
 
-/* Hightlight Color:
+/* hightlight color:
    use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: rgb(93,152,197);
-$primaryAction: rgb(158,189,94);
+
+/* backgroun colors */
 $lightBg: rgb(242,242,242);
 $mediumBg: rgb(204,204,204);
 $mediumDkBg: rgb(153,153,153);
@@ -20,7 +21,15 @@ $labelText: rgb(102,102,102);
 $divider: $labelText;
 $triggerBorder: $lightBg;
 
-/* Tree menus */
+/* button colors */
+$buttonColor: $lightBg;
+$buttonColorOver: $mediumBg;
+$buttonColorActive: darket($buttonColorOver,10%);
+$primaryAction: rgb(158,189,94);
+$buttonText: $labelText;
+$primaryActionText: white; 
+
+/* tree menus */
 $treeText: rgb(153,153,153);
 $tipText: $almostWhite;
 $iconColor: $treeText;
