@@ -2532,7 +2532,33 @@ body.x-body-masked .x-window-plain .x-window-mc {
   border: 0 none;
 }
 .x-window-body {
-  background-color: white;
+	.x-panel-ml {
+		background:$almostWhite;
+	}
+	.x-tab-panel-bwrap {
+		background:$seriouslyAlmostWhite;
+	}
+	.x-panel-mc, .x-panel-mr, .x-panel-ml {
+		background:$almostWhite !important; /* #shame */
+	}
+	.x-tab-panel-body {
+		border-color:$borderGrey;
+	}
+   .x-panel-mc {
+	
+	.x-tab-panel-header-plain .x-tab-strip-spacer,
+	.x-tab-panel-footer-plain .x-tab-strip-spacer {
+		background:$seriouslyAlmostWhite;
+		border-width:1px !important; /* #shame */
+		border-top:none;		
+		border-right: 1px solid $borderGrey;	
+		border-bottom:none;		
+		border-left: 1px solid $borderGrey;	
+	}
+	ul.x-tab-strip li.x-tab-strip-active {
+		background:$seriouslyAlmostWhite;
+	}
+  }
   border-bottom: 1px solid #D0D0D0;
   border-top: 1px solid #F7F7F7;
 }
