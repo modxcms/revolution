@@ -15,7 +15,7 @@ $success:#81B548;
    use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
-$desturatedSuccess:desaturate($success,30%);
+$desturatedSuccess:lighten(desaturate($success,100%),10%);
 
 $mainText: #444444;
 $headerText: $black;
