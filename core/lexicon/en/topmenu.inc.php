@@ -6,12 +6,13 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['about'] = '<i class="icon-question-sign icon-large"></i>';
+$_lang['about'] = 'About';
+$_lang['about_desc'] = 'Learn more and get help with MODX';
 $_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Access Control Lists';
 $_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Policies';
-$_lang['admin'] = '<i class="icon-gear icon-large"></i>';
+$_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'API Documentation';
 $_lang['api_docs_desc'] = 'Complete API documentation for MODX Revolution.';
 $_lang['bespoke_manager'] = 'Manager Customization';
@@ -107,7 +108,7 @@ $_lang['system_settings'] = 'System Settings';
 $_lang['system_settings_desc'] = 'Configure all system settings';
 $_lang['tools'] = 'Tools';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['user'] = '<i class="icon-user icon-large"></i>&nbsp;[[+username]]';
+$_lang['user'] = '[[+username]]';
 $_lang['users'] = 'Users';
 $_lang['user_management'] = 'Manage Users';
 $_lang['user_management_desc'] = 'Manage Users and their Permissions';

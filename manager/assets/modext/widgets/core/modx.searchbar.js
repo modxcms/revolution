@@ -10,13 +10,13 @@ MODx.SearchBar = function(config) {
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
         //,autoSelect: false
-        ,listAlign: [ 'tl-bl?', [-20,0] ]
+        ,listAlign: [ 'tl-bl?', [0,0] ]
         ,triggerConfig: {tag: 'span', cls: 'x-form-trigger icon-large icon-search'}
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: 'action'
-        ,width: 174
-        ,maxWidth: 300
+        ,width: 250
+        ,maxWidth: 250
         ,itemSelector: '.section'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
