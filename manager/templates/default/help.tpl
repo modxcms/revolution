@@ -66,11 +66,13 @@
 
         <p>{$_lang.social_follows}</p>
 
-        <p><a href=""><i class="icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a></p>
+        <p><a href="" class="social"><i class="icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a></p>
 
-        <p><a href=""><i class="icon-2x icon-facebook-sign"></i>Facebook: www.facebook.com/modxcms </a></p>
+        <p><a href="" class="social"><i class="icon-2x icon-facebook-sign"></i>Facebook: www.facebook.com/modxcms </a></p>
 
-        <p><a href=""><i class="icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
+        <p><a href="" class="social"><i class="icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
+
+        <p><a href="" class="social"><i class="icon-2x icon-github"></i>Github: github.com/modxcms </a></p>
     </div>
 
     <div id="adblock">
