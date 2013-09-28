@@ -8,12 +8,14 @@ $black:#020608;
 $lightBg:$almostWhite;
 $labelText:$black;
 $mediumBg:$softGrey;
-$primaryAction:#2277AF;
+$primaryAction:#0F90C3;
+$success:#81B548;
 
 /* Hightlight Color:
    use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
+$desturatedSuccess:desaturate($success,30%);
 
 $mainText: #444444;
 $headerText: $black;
