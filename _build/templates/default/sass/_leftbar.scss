@@ -1,6 +1,6 @@
 #modx-leftbar {
-  background-color: $darkBg;
-  padding: 1px 0 0;
+  background-color: $mainBg;
+  background:$almostWhite;
 }
 
 #modx-leftbar-tabpanel {
@@ -8,7 +8,7 @@
 }
 
 .x-tree-root-ct {
-  border-radius: 0 !important;
+  border-radius: 0;
   overflow: hidden;
   padding: 0 !important;
 }
@@ -24,11 +24,12 @@
 }
 
 .tree-pseudoroot-node {
-  background-color: $mediumBg;
-  border-bottom: 1px solid $treeDivider;
+  background-color: darken($navbarHover, 2%);
+  border-bottom: 1px solid $borderColor;
   font-weight: bold;
   line-height: 2;
   padding: 0 .4em;
+  margin-bottom:10px;
   > .icon-large {
     font-weight: normal;
   }
@@ -66,5 +67,5 @@
 }
 
 .tree-pseudoroot-node:hover .x-btn-fontawesome {
-  opacity: 0.65;
+  /*opacity: 0.65;*/
 }

@@ -1,32 +1,35 @@
 .x-tab-panel-noborder {
-
-}
-#modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-  background-color: #fff;
-  background-color: $darkBg;
-  border: none;
-  margin: 0 0 20px;
-  margin: 3px 0 0;
+  background-color: rgb(240, 240, 240);
+  border: 1px solid #E2E3DE;
+  margin: 20px 0 10px;
   overflow: visible;
 }
 
+#modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
+  background-color: #fff;
+}
+
 ul.x-tab-strip-top {
+  margin: -1px;
   width: auto;
 }
 
-/* the wrapper for every context */
-#modx-leftbar ul.x-tree-root-ct {
-  padding: 6px;
-  background: $darkBg;
-}
-.tree-pseudoroot-node {
-  background: $darkBg;
-  border-top: 1px solid $treeDivider;
+#modx-leftbar .x-tab-panel-noborder {
+  margin: 15px 10px 10px;
 }
 
-/* leftbar tabs 
+.unpublished { font-style:$unpubText }
+
+#modx-leftbar .x-tree-root-ct {
+  -moz-border-radius: 0 0 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+  padding: 6px;
+}
+
+/* leftbar tabs */
 #modx-leftbar .x-tree .x-panel-body {
-  background: $darkBg;
+  background: #fff;
 }
 
 #modx-leftbar .x-tab-panel-body {
@@ -39,18 +42,209 @@ ul.x-tab-strip-top {
 }
 
 .modx-leftbar .x-tree-root-ct {
-  background-color: $darkestBg;
-}*/
-
-/* main styles for the various tree states */
-.x-tree-node-el {
-  border-bottom: 1px solid $treeDivider;
-  line-height: 2;
+  background-color: #eee;
+  border-radius: inherit inherit 3px 3px;
 }
 
+/* icons */
+.icon-resource {
+  background-image: url(../images/restyle/icons/page_white.png) !important;
+}
+
+.icon-folder {
+  background-image: url(../images/restyle/icons/folder_page_white.png) !important;
+}
+
+.icon-haschildren {
+  background-image: url(../images/restyle/icons/folder.png) !important;
+}
+
+.icon-chunk {
+  background-image: url(../images/restyle/icons/chunk.png) !important;
+}
+
+.icon-plugin {
+  background-image: url(../images/restyle/icons/plugin.png) !important;
+}
+
+.icon-snippet {
+  background-image: url(../images/restyle/icons/snippet.png) !important;
+}
+
+.icon-template {
+  background-image: url(../images/restyle/icons/template.png) !important;
+}
+
+.icon-tv, .icon-templatevar {
+  background-image: url(../images/restyle/icons/tv.png) !important;
+}
+
+.icon-context {
+  background-image: url(../images/restyle/icons/context.png) !important;
+}
+
+.icon-symlink {
+  background-image: url(../images/restyle/icons/page_white_copy.png) !important;
+}
+
+.icon-weblink {
+  background-image: url(../images/restyle/icons/page_white_link.png) !important;
+}
+
+.icon-staticresource {
+  background-image: url(../images/restyle/icons/page_white_gear.png) !important;
+}
+
+.icon-menu {
+  background-image: url(../images/restyle/icons/resources.png) !important;
+}
+
+.icon-action {
+  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+}
+
+.icon-namespace {
+  background-image: url(../images/restyle/icons/computer.png) !important;
+}
+
+.icon-propertyset {
+  background-image: url(../images/restyle/icons/property-set.png) !important;
+}
+
+/*.icon-file { background-image:url(../images/restyle/icons/disk.png) !important; }*/
+.icon-rss {
+  background-image: url(../images/restyle/icons/feed.png) !important;
+}
+
+.icon-cal {
+  background-image: url(../images/restyle/icons/calendar.png) !important;
+}
+
+.icon-sql {
+  background-image: url(../images/restyle/icons/database_table.png) !important;
+}
+
+.icon-db {
+  background-image: url(../images/restyle/icons/database.png) !important;
+}
+
+.icon-java, .icon-jar {
+  background-image: url(../images/restyle/icons/cup.png) !important;
+}
+
+.icon-css {
+  background-image: url(../images/restyle/icons/css.png) !important;
+}
+
+.icon-zip, .icon-tar, .icon-tgz, .icon-gz {
+  background-image: url(../images/restyle/icons/compress.png) !important;
+}
+
+.icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
+  background-image: url(../images/restyle/icons/picture.png) !important;
+}
+
+.icon-bat, .icon-scr {
+  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+}
+
+.icon-log {
+  background-image: url(../images/restyle/icons/computer.png) !important;
+}
+
+.icon-html, .icon-htm {
+  background-image: url(../images/restyle/icons/html_valid.png) !important;
+}
+
+.icon-avi, .icon-mpg, .icon-mov {
+  background-image: url(../images/restyle/icons/film.png) !important;
+}
+
+.icon-rb {
+  background-image: url(../images/restyle/icons/ruby.png) !important;
+}
+
+.icon-doc {
+  background-image: url(../images/restyle/icons/page_white_word.png) !important;
+}
+
+.icon-ppt {
+  background-image: url(../images/restyle/icons/page_white_powerpoint.png) !important;
+}
+
+.icon-access, .icon-htaccess {
+  background-image: url(../images/restyle/icons/lock.png) !important;
+}
+
+.icon-php {
+  background-image: url(../images/restyle/icons/page_white_php.png) !important;
+}
+
+.icon-flv, .icon-swf {
+  background-image: url(../images/restyle/icons/page_white_flash.png) !important;
+}
+
+.icon-xls {
+  background-image: url(../images/restyle/icons/page_white_excel.png) !important;
+}
+
+.icon-cfm {
+  background-image: url(../images/restyle/icons/page_white_coldfusion.png) !important;
+}
+
+.icon-pdf {
+  background-image: url(../images/restyle/icons/page_white_acrobat.png) !important;
+}
+
+.icon-js {
+  background-image: url(../images/restyle/icons/javascript.png) !important;
+}
+
+.icon-group {
+  background-image: url(../images/restyle/icons/group.png) !important;
+}
+
+.icon-user {
+  /*background-image: url(../images/restyle/icons/user.png) !important;*/
+}
+
+.icon-resourcegroup {
+  background-image: url(../images/restyle/icons/application_cascade.png) !important;
+}
+
+.icon-list-new {
+  background-image: url(../images/restyle/icons/layout_add.png) !important;
+}
+
+.icon-mark-active {
+  background-image: url(../images/restyle/icons/layout_edit.png) !important;
+}
+
+.icon-mark-complete {
+  background-image: url(../images/restyle/icons/layout_header.png) !important;
+}
+
+.icon-package {
+  background-image: url(../images/restyle/icons/package.png) !important;
+  padding-right: 5px !important;
+}
+
+.icon-locked {
+  background-image: url(../images/restyle/icons/lock_edit.png) !important;
+}
+
+.icon-lock {
+  background-image: url(../images/restyle/icons/lock.png) !important;
+}
+
+/* main styles for the various tree states */
 .x-tree-node-el a span {
-  line-height: 2;
+  /*line-height: 2;*/
   padding-left: 7px;
+}
+
+.x-tree-node-ct {
+	padding-top:4px;
 }
 
 .x-tree-node-el a span span {
@@ -59,22 +253,21 @@ ul.x-tab-strip-top {
 
 .unpublished,
 .unpublished a span {
-  color: $unpublished;
-  font-style: $unpubTextStyle;
+  /*color: $unpublished;*/
+  font-style: $unpubText;
 }
 
-.hidemenu a span {
+.hidemenu, .hidemenu a span {
   color: $hidden;
 }
 
 .deleted {
-  color: $deleted;
+  color: red !important;
 }
 
 .deleted a span {
-  color: $deleted;
-  text-decoration: $delTextDeco;
-  font-style: $delTextStyle;
+  color: #CC3333 !important;
+  text-decoration: line-through !important;
 }
 
 .element-node-disabled a span {
@@ -85,151 +278,35 @@ ul.x-tab-strip-top {
   font-style: italic;
 }
 
-.x-tree .x-panel-body {
-  /*background-color:#fff;*/
-  /*border:1px solid #E4E4E4;*/
-}
-.x-tree-node-el .x-tree-node-icon {
-  display: inline-block;
-}
-.x-tree-node-expanded .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/folder-open.gif);
-}
-.x-tree-node-leaf .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/leaf.gif);
-}
-.x-tree-node-collapsed .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/folder.gif);
-}
-.x-tree-node-loading .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/loading.gif) !important;
-}
-.x-tree-node .x-tree-node-inline-icon {
-  background-image: none;
-}
-.x-tree-node-loading a span {
-  color: #444444;
-  font-style: italic;
-}
-.ext-ie .x-tree-node-el input {
-  height: 15px;
-  width: 15px;
+#modx-resource-tree-panel .x-accordion-hd {
+  background-position: 0 0;
 }
 
-.x-tree-node,
-.x-tree-node a, 
-.x-dd-drag-ghost a,
-.x-tree-node a span, 
-.x-dd-drag-ghost a span {
-  color: $treeText;
-}
-.x-tree-node .x-tree-node-disabled a span {
-  color: lighten($treeText, 50%);
-}
-.x-tree-node .x-tree-node-over {
-  background-color: $lightBg;
-}
-#modx-leftbar .x-tree-selected,
-#modx-leftbar .x-tree-selected a span,
-#modx-leftbar .x-tree-selected.unpublished,
-#modx-leftbar .x-tree-selected.unpublished a span  {
-  background-color: $colorSplash;
-  color: #fff !important;
+#modx-element-tree-panel .x-accordion-hd {
+  background-position: 0 -32px;
 }
 
-
-
-.x-tree-lines .x-tree-elbow {
-  background-image: url(../images/modx-theme/tree/elbow.gif);
-}
-.x-tree-lines .x-tree-elbow-plus {
-  background-image: url(../images/modx-theme/tree/elbow-plus.gif);
-}
-.x-tree-lines .x-tree-elbow-minus {
-  background-image: url(../images/modx-theme/tree/elbow-minus.gif);
-}
-.x-tree-lines .x-tree-elbow-end {
-  background-image: url(../images/modx-theme/tree/elbow-end.gif);
-}
-.x-tree-lines .x-tree-elbow-end-plus {
-  background-image: url(../images/modx-theme/tree/elbow-end-plus.gif);
-}
-.x-tree-lines .x-tree-elbow-end-minus {
-  background-image: url(../images/modx-theme/tree/elbow-end-minus.gif);
-}
-.x-tree-lines .x-tree-elbow-line {
-  background-image: url(../images/modx-theme/tree/elbow-line.gif);
-}
-.x-tree-no-lines .x-tree-elbow-plus {
-  background-image: url(../images/modx-theme/tree/elbow-plus-nl.gif);
-}
-.x-tree-no-lines .x-tree-elbow-minus {
-  background-image: url(../images/modx-theme/tree/elbow-minus-nl.gif);
-}
-.x-tree-no-lines .x-tree-elbow-end-plus {
-  background-image: url(../images/modx-theme/tree/elbow-end-plus-nl.gif);
-}
-.x-tree-no-lines .x-tree-elbow-end-minus {
-  background-image: url(../images/modx-theme/tree/elbow-end-minus-nl.gif);
-}
-.x-tree-arrows .x-tree-elbow-plus {
-  background-image: url(../images/modx-theme/tree/arrows2.gif);
-}
-.x-tree-arrows .x-tree-elbow-minus {
-  background-image: url(../images/modx-theme/tree/arrows2.gif);
-}
-.x-tree-arrows .x-tree-elbow-end-plus {
-  background-image: url(../images/modx-theme/tree/arrows2.gif);
-}
-.x-tree-arrows .x-tree-elbow-end-minus {
-  background-image: url(../images/modx-theme/tree/arrows2.gif);
+#modx-file-tree-panel .x-accordion-hd {
+  background-position: 0 -64px;
 }
 
-/* drag and drop between nodes */
-.x-tree-node div.x-tree-drag-insert-below {
-  border-bottom-color: #686868;
+#modx-static-page-settings .x-accordion-hd {
+  background-position: 0 -96px;
 }
-.x-tree-node div.x-tree-drag-insert-above {
-  border-top-color: #686868;
-}
-.x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-below a {
-  border-bottom-color: #686868;
-}
-.x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-above a {
-  border-top-color: #686868;
-}
-.x-tree-node .x-tree-drag-append a span {
-  background-color: #ddd;
-  border-color: $borderColor;
-}
-
-.x-tree-drop-ok-append .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-add.gif);
-}
-.x-tree-drop-ok-above .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-over.gif);
-}
-.x-tree-drop-ok-below .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-under.gif);
-}
-.x-tree-drop-ok-between .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-between.gif);
-}
-
 
 /* tree menu splitter */
 .x-layout-split {
-  background: white;
+  background: $mainBg;
   border-width: 0 0 0 1px;
   border: 1px solid $borderColor;
   width: 8px;
   z-index: 0;
   .x-layout-mini {
-    left: 3px;
+    left: -6px;
   }
 }
 
 .x-layout-split:hover {
-  background: $lightBg;
+  background: $navbarHover;
   box-shadow: 2px 0 2px $borderShadow;
 }

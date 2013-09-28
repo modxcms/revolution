@@ -7,8 +7,6 @@
 *   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\    - Alan Pich @_alanpich
 *    \/_/ \/_/\/_____/\/___/  \/_/ \/_/    - Danya Postfactum
 *                                          - Christian Seele @christianseel
-*                                          - Sipko Groefsema @sipko
-*                                          - GP Sietzeme @gpsietzema
 */
 
 @import "bourbon/bourbon";
@@ -16,29 +14,32 @@
 @import "user-select";
 @import "box-sizing";
 @import "colors-and-vars";
-@import "xtheme-modx";
-@import "form";
 @import "buttons";
 @import "type";
 @import "tabs";
 @import "buttons";
 @import "navbar";
 @import "uberbar";
+@import "tree";
 @import "utility";
+@import "xtheme-modx";
 @import "font-awesome/font-awesome";
 @import "leftbar";
-@import "tree";
 @import "help";
 
 body, body.x-border-layout-ct {
-  color: $mainText;
+  color: $black;
   font: $baseText;
+}
+
+input,textarea {
+	color:$black;
 }
 
 h2 {
   color: $headerText;
-  font: $fontNormal;
   font-size: 25px;
+  font: $fontH2; 
   margin: 0 0 8px 5px;
 }
 
@@ -136,6 +137,22 @@ input::-moz-focus-inner {
   border-bottom: 1px #90b1b9 dashed;
 }
 
+#modx-resource-content {
+	.x-panel-header {
+		padding:0;
+		margin:0;
+	}
+	.x-panel-header-text {
+		font-size:12px;
+	}
+	.x-panel-body {
+		padding-top:1px;
+	}
+	.main-wrapper {
+	  padding: 0;
+	}
+}
+
 /* panel setups */
 #modx-leftbar, #modx-content, #modx-footer {
   position: absolute;
@@ -162,6 +179,41 @@ input::-moz-focus-inner {
   width: 100%;
 }
 
+.x-panel-header {
+  background: none;
+  border-bottom: 1px solid #ddd;
+  border: none;
+  font-size: 16px;
+  margin: 0 0 0 15px;
+  padding: 0 0 8px;
+}
+
+/* form fields */
+
+.modx-form .x-form-text,
+.modx-form .x-form-textarea {
+  font-size: 14px;
+}
+
+.modx-form .x-form-text {
+  height: 20px !important;
+  padding: 5px;
+}
+
+.modx-form .x-form-item label {
+  color: #505050;
+  font-size: 14px;
+}
+
+.x-form-check-wrap {
+  height: auto !important;
+}
+
+.x-form-check-wrap .x-form-cb-label {
+  color: #777;
+  font-weight: normal;
+}
+
 /* grids */
 .x-small-editor .x-form-field {
   font-size: 12px !important;
@@ -169,6 +221,28 @@ input::-moz-focus-inner {
 
 .grid-row-inactive {
   color: #999 !important;
+}
+
+/* action buttons bar */
+#modx-action-buttons {
+  background-color: transparent;
+  border-radius: 3px;
+  border: none;
+  left: auto;
+  padding: 7px 0 7px 7px;
+  position: fixed;
+  right: 28px;
+  top: 50px;
+  z-index: 9;
+  .xtb-sep {
+	width:2px;
+	margin:0 1px;
+  }
+}
+
+#modx-action-buttons .x-toolbar-left {
+  width: auto !important;
+  zoom: 1;
 }
 
 /* collapse for resource panel */
@@ -473,7 +547,7 @@ input::-moz-focus-inner {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
+  /*background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;*/
   border-collapse: separate;
   border-color: #CACACA #C0C0C0 #AAA;
   border-radius: 3px;
@@ -489,7 +563,7 @@ input::-moz-focus-inner {
   overflow: hidden;
   padding: 3px;
   position: relative;
-  text-shadow: 0 1px 0 #FAFAFA;
+  /*text-shadow: 0 1px 0 #FAFAFA;*/
 }
 
 /* checkbox tree */
@@ -1099,7 +1173,7 @@ body.ext-ie7 .x-superboxselect-item {
   font-weight: bold;
   margin: 0;
   padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #ffffff;
+  /*text-shadow: 0 1px 1px #ffffff;*/
   zoom: 1;
 }
 
@@ -1127,7 +1201,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* MODExt common classes */
 
 .container {
-  margin: 15px;
+  margin: 20px 15px 20px;
 }
 
 /* Wrap the main content */
@@ -1177,20 +1251,16 @@ body.ext-ie7 .x-superboxselect-item {
   font-style: italic;
   line-height: 1.4;
   padding: 0 10px 10px;
-  text-shadow: 0 1px 0 #FFFFFF;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  padding: 15px;
-}
-
-#modx-resource-content .main-wrapper {
-  padding-top: 3px;
+  padding: 15px 15px 15px 15px;
 }
 
 .with-title .main-wrapper {
-  padding: 0 15px 10px;
+  padding: 0 15px 10px 15px;
 }
 
 .left-col {
@@ -1332,7 +1402,7 @@ body.ext-ie7 .x-superboxselect-item {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
+  /*background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;*/
   border-bottom: 1px solid #EFEFEF;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
   height: 34px;
@@ -1346,7 +1416,7 @@ body.ext-ie7 .x-superboxselect-item {
   font-weight: normal;
   line-height: 35px;
   padding: 0 20px 0 15px;
-  text-shadow: 0 1px 0 #FFF;
+  /*text-shadow: 0 1px 0 #FFF;*/
 }
 
 .crumbs li button {
@@ -1773,7 +1843,7 @@ body.ext-ie7 .x-superboxselect-item {
   color: #53595F;
   font-size: 14px;
   margin: 10px 0;
-  text-shadow: 0 1px 0 #FFFFFF;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
   text-transform: uppercase;
 }
 .modx-template-detail .aside-details h4 {
