@@ -14,6 +14,7 @@
 @import "user-select";
 @import "box-sizing";
 @import "colors-and-vars";
+@import "buttons";
 @import "type";
 @import "tabs";
 @import "buttons";
@@ -27,14 +28,18 @@
 @import "help";
 
 body, body.x-border-layout-ct {
-  color: #444;
+  color: $black;
   font: $baseText;
+}
+
+input,textarea {
+	color:$black;
 }
 
 h2 {
   color: $headerText;
   font-size: 25px;
-  font: $fontNormal;
+  font: $fontH2; 
   margin: 0 0 8px 5px;
 }
 
@@ -132,6 +137,22 @@ input::-moz-focus-inner {
   border-bottom: 1px #90b1b9 dashed;
 }
 
+#modx-resource-content {
+	.x-panel-header {
+		padding:0;
+		margin:0;
+	}
+	.x-panel-header-text {
+		font-size:12px;
+	}
+	.x-panel-body {
+		padding-top:1px;
+	}
+	.main-wrapper {
+	  padding: 0;
+	}
+}
+
 /* panel setups */
 #modx-leftbar, #modx-content, #modx-footer {
   position: absolute;
@@ -204,15 +225,19 @@ input::-moz-focus-inner {
 
 /* action buttons bar */
 #modx-action-buttons {
-  background-color: rgba(224, 224, 224, 0.2);
+  background-color: transparent;
   border-radius: 3px;
   border: none;
   left: auto;
-  padding: 7px;
+  padding: 7px 0 7px 7px;
   position: fixed;
-  right: 34px;
+  right: 28px;
   top: 50px;
   z-index: 9;
+  .xtb-sep {
+	width:2px;
+	margin:0 1px;
+  }
 }
 
 #modx-action-buttons .x-toolbar-left {
@@ -522,7 +547,7 @@ input::-moz-focus-inner {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
+  /*background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;*/
   border-collapse: separate;
   border-color: #CACACA #C0C0C0 #AAA;
   border-radius: 3px;
@@ -538,7 +563,7 @@ input::-moz-focus-inner {
   overflow: hidden;
   padding: 3px;
   position: relative;
-  text-shadow: 0 1px 0 #FAFAFA;
+  /*text-shadow: 0 1px 0 #FAFAFA;*/
 }
 
 /* checkbox tree */
@@ -1148,7 +1173,7 @@ body.ext-ie7 .x-superboxselect-item {
   font-weight: bold;
   margin: 0;
   padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #ffffff;
+  /*text-shadow: 0 1px 1px #ffffff;*/
   zoom: 1;
 }
 
@@ -1226,7 +1251,7 @@ body.ext-ie7 .x-superboxselect-item {
   font-style: italic;
   line-height: 1.4;
   padding: 0 10px 10px;
-  text-shadow: 0 1px 0 #FFFFFF;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
@@ -1377,7 +1402,7 @@ body.ext-ie7 .x-superboxselect-item {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
+  /*background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;*/
   border-bottom: 1px solid #EFEFEF;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
   height: 34px;
@@ -1391,7 +1416,7 @@ body.ext-ie7 .x-superboxselect-item {
   font-weight: normal;
   line-height: 35px;
   padding: 0 20px 0 15px;
-  text-shadow: 0 1px 0 #FFF;
+  /*text-shadow: 0 1px 0 #FFF;*/
 }
 
 .crumbs li button {
@@ -1818,7 +1843,7 @@ body.ext-ie7 .x-superboxselect-item {
   color: #53595F;
   font-size: 14px;
   margin: 10px 0;
-  text-shadow: 0 1px 0 #FFFFFF;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
   text-transform: uppercase;
 }
 .modx-template-detail .aside-details h4 {

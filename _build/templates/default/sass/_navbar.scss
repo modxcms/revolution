@@ -59,8 +59,8 @@
   }
 }
 
-#modx-navbar ul#modx-settings-menu,
-#modx-navbar ul#modx-user-submenu {
+#modx-navbar #limenu-admin ul.modx-subnav,
+#modx-navbar #limenu-user ul.modx-subnav {
   left: auto;
   right: 0;
 }
@@ -86,7 +86,17 @@
   @include image-set("../images/modx-logo.png", "../images/modx-logo@2X.png");
   background: $navbarBg url(../images/modx-logo.png) 18px 9px no-repeat;
   width: 110px;
-  /* don't tell mark */
+}
+#user-avatar img {
+  border-radius: 16px;
+  margin: 6px 4px 0 0;
+  margin: 6px 6px 0 0;
+  line-height: 18px; 
+  display: block;
+  float: left;
+}
+#user-username {
+
 }
 
 #modx-navbar #modx-home-dashboard a {
@@ -100,9 +110,9 @@
   background-color: transparent;
 }
 
-#modx-navbar #modx-home-dashboard:hover {
-  background-color: $navbarHover;
-}
+/*#modx-navbar #modx-home-dashboard:hover {
+  background-color: transparent;
+}*/
 
 #modx-navbar li:hover ul.modx-subnav {
   display: block;
@@ -123,6 +133,7 @@
 #modx-navbar ul.modx-subnav li a {
   background-color: $navbarDrop;
   float: left;
+  font-weight: bold;
   line-height: 1.5;
   margin: 0;
   padding: 8px 15px;

@@ -103,7 +103,8 @@
 }
 
 textarea.x-form-field, .x-form-textarea {
-  font-family: "Courier New", Courier, monospace;
+  /*font-family: "Courier New", Courier, monospace;*/
+  font-family:"Lucida Console", Monaco, monospace;
 }
 
 .x-form-text, textarea.x-form-field, .x-form-textarea {
@@ -112,11 +113,10 @@ textarea.x-form-field, .x-form-textarea {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   -webkit-border-radius: 2px;
-  background-color: #fbfbfb;
+  background-color:$white;
   background-image: none;
-  border-color: #CCCCCC;
   border-radius: 2px;
-  border: 1px solid;
+  border: 1px solid $borderGrey;
   position: relative;
 }
 
@@ -163,7 +163,7 @@ textarea.x-form-field, .x-form-textarea {
   font-weight: bold;
   height: 20px !important;
   padding: 6px !important;
-  text-shadow: 1px -1px 0 #FFFFFF;
+  /*text-shadow: 1px -1px 0 #FFFFFF;*/
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger {
@@ -213,7 +213,7 @@ textarea.x-form-field, .x-form-textarea {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   -webkit-border-radius: 2px;
-  background: rgb(240, 240, 240);
+  background: $white;
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -381,7 +381,11 @@ textarea.x-form-field, .x-form-textarea {
 }
 
 .x-fieldset {
-  border-color: #C5C5C5;
+  border-color: $borderGrey;
+  background:$white;
+  .x-panel-body {
+	background:$white;
+  }
 }
 
 .x-fieldset legend {
@@ -399,7 +403,7 @@ textarea.x-form-field, .x-form-textarea {
   -webkit-border-radius: 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   background: rgb(240, 240, 240);
-  background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(220, 220, 220, 1);
+  /*background: url(../images/modx-theme/form/button-bg.svg) repeat-x scroll 0 bottom rgba(220, 220, 220, 1);*/
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -432,7 +436,7 @@ textarea.x-form-field, .x-form-textarea {
   font: bold 11px tahoma, verdana, helvetica, sans-serif;
   height: 16px;
   min-width: 100%;
-  text-shadow: 0 1px 0 #fcfcfc;
+  /*text-shadow: 0 1px 0 #fcfcfc;*/
   vertical-align: middle;
 }
 
@@ -462,7 +466,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-over {
   background: rgb(240, 240, 240);
-  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
+  /*background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);*/
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -475,7 +479,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-over button {
   color: #636F4C;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-click {
@@ -491,7 +495,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-focus {
   background: rgb(240, 240, 240);
-  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
+  /*background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);*/
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -527,7 +531,7 @@ textarea.x-form-field, .x-form-textarea {
 .x-btn-group .x-btn button {
   color: #868b8f;
   height: auto !important;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-group .x-btn-over {
@@ -545,7 +549,7 @@ textarea.x-form-field, .x-form-textarea {
 
 .x-btn-group .x-btn-over button {
   color: #5b7a98;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-group .x-btn-click {
@@ -570,7 +574,7 @@ textarea.x-form-field, .x-form-textarea {
 .x-btn-group-header {
   background-color: #dbe0e4;
   color: #73797f;
-  text-shadow: 0 1px 0 #fafafa;
+  /*text-shadow: 0 1px 0 #fafafa;*/
 }
 
 .x-btn-group-tl, .x-btn-group-tr {
@@ -913,7 +917,7 @@ textarea.x-form-field, .x-form-textarea {
 }
 .x-grid3-header .x-grid3-hd-row td {
   color: #F0F0F0;
-  text-shadow: 0 -1px 0 #363636;
+  /*text-shadow: 0 -1px 0 #363636;*/
 }
 .x-grid3-header-pop {
   border-left-color: #DFDFDF;
@@ -1435,10 +1439,11 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $almostWhite;
+  background-color: transparent;
 }
 .x-tree-node .x-tree-selected {
-  background-color: lighten($colorSplash, 42.5%);
+  /*background-color: $almostWhite;*/
+  font-weight:bold;
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-add.gif);
@@ -1782,7 +1787,7 @@ a.x-menu-item {
   overflow: visible;
 }
 .x-panel-body {
-  background-color: #fff;
+  background-color: $seriouslyAlmostWhite;
   border: 0;
   overflow: visible;
 }
@@ -1848,7 +1853,7 @@ a.x-menu-item {
 .x-panel-tl .x-panel-header {
   color: #6A6A6A;
   font: bold 12px arial,tahoma,verdana,sans-serif;
-  text-shadow: 0 1px 0 #FAFAFA;
+  /*text-shadow: 0 1px 0 #FAFAFA;*/
 }
 .x-panel-tl .x-panel-icon, .x-window-tl .x-panel-icon {
   background-position: 0 8px;
@@ -2222,7 +2227,7 @@ a.x-menu-item {
   font-weight: bold;
   margin-top: 0;
   padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #ffffff;
+  /*text-shadow: 0 1px 1px #ffffff;*/
 }
 .x-portal-space {
   border-bottom: 1px solid #afafaf;
@@ -2386,7 +2391,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   background-image: url(../images/modx-theme/slider/slider-v-thumb.png);
 }
 .x-form fieldset {
-  border: 1px solid #dedede;
+  border: 1px solid $borderGrey;
 }
 .x-form fieldset legend {
   color: #606060;
@@ -2483,7 +2488,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   font: bold 18px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
   margin: 0 0 11px;
   padding: 8px 15px;
-  text-shadow: 0 1px 1px #FFFFFF;
+  /*text-shadow: 0 1px 1px #FFFFFF;*/
 }
 .x-window .x-panel-tl,
 .x-window .x-panel-ml,
@@ -2528,7 +2533,33 @@ body.x-body-masked .x-window-plain .x-window-mc {
   border: 0 none;
 }
 .x-window-body {
-  background-color: white;
+	.x-panel-ml {
+		background:$almostWhite;
+	}
+	.x-tab-panel-bwrap {
+		background:$seriouslyAlmostWhite;
+	}
+	.x-panel-mc, .x-panel-mr, .x-panel-ml {
+		background:$almostWhite !important; /* #shame */
+	}
+	.x-tab-panel-body {
+		border-color:$borderGrey;
+	}
+   .x-panel-mc {
+	
+	.x-tab-panel-header-plain .x-tab-strip-spacer,
+	.x-tab-panel-footer-plain .x-tab-strip-spacer {
+		background:$seriouslyAlmostWhite;
+		border-width:1px !important; /* #shame */
+		border-top:none;		
+		border-right: 1px solid $borderGrey;	
+		border-bottom:none;		
+		border-left: 1px solid $borderGrey;	
+	}
+	ul.x-tab-strip li.x-tab-strip-active {
+		background:$seriouslyAlmostWhite;
+	}
+  }
   border-bottom: 1px solid #D0D0D0;
   border-top: 1px solid #F7F7F7;
 }
@@ -2595,7 +2626,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   margin-top: 0;
   padding: 8px;
   text-align: center;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 .x-window .x-window-bl {
   -khtml-border-bottom-left-radius: 3px;
