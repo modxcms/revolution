@@ -1,10 +1,15 @@
 /* main tabs */
 .x-tab-panel-header,
 .x-tab-panel-footer {
+
 }
 
 ul.x-tab-strip-top {
   border-bottom-color: transparent;
+
+  .x-tab-panel-header-plain & {
+    background: $mainBg !important;
+  }
 
   #modx-leftbar & {
     background: $darkestBg !important;
@@ -87,7 +92,11 @@ ul.x-tab-strip-bottom {
 }
 
 .x-tab-panel-header-plain {
-  background-color: #f7f8f3;
+  background-color: $lightBg;
+
+  & {
+    background-color: $lightBg;
+  }
 }
 
 .x-tab-panel-header-plain .x-tab-strip-spacer {
@@ -114,11 +123,11 @@ ul.x-tab-strip-bottom {
 }
 
 .x-tab-panel-body-top {
-  border-top: 0 none;
+  border: none;
 }
 
 .x-tab-panel-body-bottom {
-  border-bottom: 0 none;
+  border: 0;
 }
 
 

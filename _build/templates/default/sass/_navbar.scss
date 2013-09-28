@@ -86,8 +86,8 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include image-set("../images/modx-logo.png", "../images/modx-logo@2X.png");
-  background: $navbarBg url(../images/modx-logo.png) 18px 9px no-repeat;
+  @include image-set("../images/modx-logo.png", "../images/modx-logo@2x.png");
+  background: $navbarBg url(../images/modx-logo.png) 15px 10px no-repeat;
   width: 110px;
 }
 #user-avatar img {

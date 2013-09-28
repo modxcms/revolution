@@ -1,4 +1,14 @@
 /* form fields */
+.x-form fieldset {
+  border: 1px solid #dedede;
+}
+.x-form fieldset legend {
+  color: #606060;
+  font: bold 11px arial, verdana, tahoma, helvetica, sans-serif;
+}
+.x-fieldset-body {
+  font-size: 12px;
+}
 
 .modx-form .x-form-text,
 .modx-form .x-form-textarea {
@@ -14,15 +24,25 @@
   min-height: 20px;
   padding: 5px;
 }
-.form-with-labels .x-form-label-top .x-form-element {
-  padding: 0;
-  margin-top: 3px;
-}
-.form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
+.x-form-item-label {
   color: $labelText;
   font-size: 12px;
   font-weight: normal;
+  padding: 0;
+  margin: 3px 0 0;
+  width: auto;
+  float: none;
+  display: inline-block;
 }
+
+.form-with-labels .x-form-label-top .x-form-element {
+  padding: 0;
+}
+
+/* override for resources, etc.
+.form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
+} */
+
 .form-with-labels .desc-under,
 .x-window .desc-under {
   color: #aaaaaa;
@@ -37,14 +57,9 @@
 }
 .form-with-labels .desc-under .warning,
 .x-window {
-  -moz-border-radius: 3px;
-  -moz-box-shadow: 0 0 5px #A0A0A0;
-  -o-box-shadow: 0 0 5px #A0A0A0;
-  -webkit-border-radius: 3px;
-  -webkit-box-shadow: 0 0 5px #A0A0A0;
   border-radius: 3px;
-  border: 1px solid #C0C0C0;
-  box-shadow: 0 0 5px #A0A0A0;
+  border: $outlineBorder;
+  box-shadow: 0 0 5px rgba(0,0,0,.33);
   overflow: hidden;
   padding: 0;
 }
@@ -97,10 +112,11 @@ textarea.x-form-field,
 .x-form-text, 
 textarea.x-form-field, 
 .x-form-textarea {
-  background: #fbfbfb;
-  border: none;
+  background: $mainBg;
+  border: $fieldBorders;
   position: relative;
 }
+
 
 .x-form-select-one {
   background-color: #fff;
@@ -115,6 +131,8 @@ textarea.x-form-field,
 
 .x-form-checkbox {
   margin: 0 2px;
+  width: auto !important;
+  height: auto !important;
 }
 
 .x-form-checkbox:focus {
@@ -143,29 +161,53 @@ textarea.x-form-field,
 
 .x-small-editor .x-form-field-wrap .x-form-trigger, 
 .x-form-field-wrap .x-form-trigger {
-  background-color: transparent;
-  background-image: url(../images/modx-theme/form/trigger.png);
-  background-position: left center;
-  background-repeat: no-repeat;
-  border: none;
+  background: transparent url(../images/modx-theme/form/trigger.png) no-repeat left center;
   height: 30px;
   width: 32px;
+  border: 0;
+  border-left: $fieldBorders;
 }
 
 .x-form-field-wrap,
 .x-small-editor .x-form-field-wrap {
   background: white;
-}
-.x-form-field-trigger-wrap {
   height: 30px;
   margin-right: 1px;
+  border: $fieldBorders;
 }
-.x-form-field-wrap .x-form-trigger-over {
-  background-position: right;
+.x-form-field-wrap {
+
+  .x-form-text,
+  &.x-datetime-wrap {
+    border: none;
+  }
+  .x-form-trigger-over {
+    background-position: right;
+  }
 }
+
+/* combo list rows */
+.x-combo-list-item {
+  border: none;
+  padding: 3px;
+}
+.x-combo-list .x-combo-selected {
+  background-color: $colorSplashHighlight;
+  border: 0 none !important;
+}
+.x-combo-list .x-toolbar {
+  border-top-color: #bcbcbc;
+}
+.x-combo-list-small {
+  font: normal 11px arial, tahoma, helvetica, sans-serif;
+}
+
+
+
+
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
-  background: #f6f2f7 url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0px 100%;
+  background: #f6f2f7 url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0 100%;
 }
 
 .x-grid-editor .x-form-field-wrap input {
@@ -173,26 +215,20 @@ textarea.x-form-field,
 }
 
 .x-grid-editor .x-form-field-wrap img {
-  background-color: white;
-  background-image: url(../images/modx-theme/form/trigger.png);
-}
-
-.x-form-field-trigger-wrap .x-form-text {
-  border: none;
-  background: white;
+  background: white url(../images/modx-theme/form/trigger.png);
 }
 
 .x-form-field-wrap .x-form-arrow-trigger,
 .x-small-editor .x-form-field-wrap .x-form-arrow-trigger {
   background: transparent url("../images/modx-theme/form/trigger.png") no-repeat scroll left center;
-  border-left: 1px solid $triggerBorder;
 }
 
 .x-form-field-wrap .x-form-trigger.x-form-trigger-over {
   background-position: center center;
 }
 
-.x-form-field-wrap .x-form-trigger.x-form-trigger-click {
+.x-form-field-wrap .x-form-trigger.x-form-trigger-click,
+.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-click {
   background-position: right center;
 }
 
@@ -205,12 +241,18 @@ textarea.x-form-field,
   background-position: center center;
 }
 
-.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-click {
-  background-position: right center;
-}
-
-.x-form-field-wrap .x-form-date-trigger, .x-small-editor .x-form-field-wrap .x-form-date-trigger {
+.x-small-editor .x-form-field-wrap .x-form-date-trigger {
   background-image: url(../images/modx-theme/form/calendar.png);
+}
+.x-form-field-wrap .x-form-date-trigger {
+  background-image: url(../images/modx-theme/form/calendar.png);
+  background-position-x: -3px;
+
+  &:hover,
+  &:active {
+      background-position-x: -3px!important; 
+  }
+  
 }
 
 .x-form-field-wrap .x-form-clear-trigger,
