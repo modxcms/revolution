@@ -61,15 +61,10 @@
 }
 
 #modx-abtn-save {
-  background: #509D42;
-  border-color:darken($success,14%) !important; /* #shame */
-  &.x-btn-over {
-	border-color:darken($success,20%) !important; /* #shame */
-}
+  background: $primaryAction;
   &.x-item-disabled {
 	opacity:1;
-	background:$desturatedSuccess;
-	border-color:darken(desaturate($success,100%),4%) !important; /* #shame */
+	background:$desaturatedSplash;
 }
   & button,
   &.x-item-disabled * {
