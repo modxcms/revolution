@@ -10,6 +10,7 @@
  * @subpackage jsonrpc
  */
 class modJSONRPCResource extends modResource {
+	public $allowListingInClassKeyDropdown = false;
     /**
      * Overrides the modResource constructor to set the response class and class_key for this Resource type
      * @param xPDO $xpdo
