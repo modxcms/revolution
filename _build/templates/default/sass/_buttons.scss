@@ -20,7 +20,7 @@
   *display: inline;
   background: $buttonColor;
   line-height: 1;
-  border-radius: 3px;
+  border-radius: $buttonRadius;
   cursor: pointer;
   display: inline-block;
   margin: 0 1px;
@@ -39,14 +39,18 @@
   }
 
   #modx-leftbar & {
-    font-size: 10px;
+    font-size: 9px;
     background: transparent;
     border: 2px solid $buttonText;
-    border-radius: 8px;
-    opacity: 0.6;
+    border-radius: 16px;
+    padding: 4px;
 
     &:hover {
-      opacity: 1.0
+      border-color: lighten($buttonText,20%);
+    }
+
+    &:hover button {
+      color: lighten($buttonText,20%);
     }
   }
   #modx-leftbar .modx-tree-node-tool-ct & {
@@ -101,7 +105,7 @@
 }
 
 .x-btn-group {
-  border-radius: 3px;
+  border-radius: $buttonRadius;
   border: 1px solid #dbe0e4;
   margin-right: 2px;
   padding: 0;
@@ -238,7 +242,7 @@
 .inline-button {
   background: #dcdcdc;
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  border-radius: 3px;
+  border-radius: $buttonRadius;
   border: 1px solid #cccccc;
   color: #888888;
   cursor: pointer;

@@ -29,7 +29,7 @@ MODx.Layout = function(config){
     var tabs = [];
     var showTree = false;
     if (MODx.perm.resource_tree) {
-       tabs.push({
+        tabs.push({
             title: _('resources')
             ,xtype: 'modx-tree-resource'
             ,id: 'modx-resource-tree'
@@ -55,69 +55,67 @@ MODx.Layout = function(config){
     var activeTab = 0;
 
     Ext.applyIf(config,{
-         layout: 'border'
-        ,id: 'modx-layout'
-        ,saveState: true
-        ,items: [{
-            xtype: 'box'
-            ,region: 'north'
-            ,applyTo: 'modx-header'
-            ,height: 43
-        },{
-             region: 'west'
-            ,applyTo: 'modx-leftbar'
-            ,id: 'modx-leftbar-tabs'
-            ,split: true
-            ,width: 310
-            ,minSize: 288
-            ,maxSize: 800
-            ,autoScroll: false
-            ,unstyled: true
-            ,collapseMode: 'mini'
-            ,useSplitTips: true
-            ,monitorResize: true
-            ,layout: 'anchor'
-            ,items: [{
-                 xtype: 'modx-tabs'
-                ,plain: true
-                ,defaults: {
-                     autoScroll: true
-                    ,fitToFrame: true
-                }
-                ,id: 'modx-leftbar-tabpanel'
-                ,border: false
-                ,anchor: '100%'
-                ,activeTab: activeTab
-                ,stateful: true
-                ,stateId: 'modx-leftbar-tabs'
-                ,stateEvents: ['tabchange']
-                ,getState:function() {
+        layout: 'border',
+        id: 'modx-layout',
+        saveState: true,
+        items: [{
+            region: 'west',
+            applyTo: 'modx-leftbar',
+            id: 'modx-leftbar-tabs',
+            split: true,
+            width: 310,
+            minSize: 288,
+            maxSize: 800,
+            autoScroll: true,
+            unstyled: true,
+            collapseMode: 'mini',
+            useSplitTips: true,
+            monitorResize: true,
+            layout: 'anchor',
+            items: [{
+                xtype: 'modx-tabs',
+                plain: true,
+                defaults: {
+                    autoScroll: true,
+                    fitToFrame: true
+                },
+                id: 'modx-leftbar-tabpanel',
+                border: false,
+                anchor: '100%',
+                activeTab: activeTab,
+                stateful: true,
+                stateId: 'modx-leftbar-tabs',
+                stateEvents: ['tabchange'],
+                getState:function() {
                     return {
                         activeTab:this.items.indexOf(this.getActiveTab())
                     };
-                }
-                ,items: tabs
-            }]
-            ,listeners:{
-                statesave: this.onStatesave
-                ,scope: this
+                },
+                items: tabs
+            }],
+            listeners:{
+                statesave: this.onStatesave,
+                scope: this
             }
         },{
-            region: 'center'
-            ,applyTo: 'modx-content'
-            ,padding: '0 1px 0 0'
-            ,bodyStyle: 'background-color:transparent;'
-            ,id: 'modx-content'
-            ,border: false
-            ,autoScroll: true
-        }/*,{
-            region: 'south' // ya, you're going south alright 
-            ,applyTo: 'modx-footer'
-            ,border: false
-            ,id: 'modx-footer'
-            ,html: '<p><b>' + MODx.config.site_name + '</b> ' + _('powered_by') + ' <a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Link" onclick="window.open(this.href); return false;" title="Visit the MODX website">MODX®</a></p>'
-            ,bodyStyle: 'background-color:transparent;'
-        }*/]
+            region: 'center',
+            applyTo: 'modx-content',
+            padding: '0 1px 0 0',
+            bodyStyle: 'background-color:transparent;',
+            id: 'modx-content',
+            border: false,
+            autoScroll: true,
+            layout : {
+                type: 'vbox',
+                align : 'stretch'
+            },items : [{
+                xtype: 'box',
+                height: 43, 
+                unstyled: true,
+                monitorResize: true,
+                contentEl: 'modx-navbar'
+            }]
+        }]
     });
     MODx.Layout.superclass.constructor.call(this,config);
     this.config = config;
@@ -185,7 +183,7 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
     }
     ,hideLeftbar: function(anim, state) {
         Ext.getCmp('modx-leftbar-tabs').collapse(anim);
-        if(state != undefined){	this.saveState = state;	}
+        if(state != undefined){ this.saveState = state; }
     }
     ,onStatesave: function(p, state){
         var panelState = state.collapsed;

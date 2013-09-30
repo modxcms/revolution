@@ -2,11 +2,12 @@ $softGrey: rgb(220, 220, 220);
 $almostWhite: rgb(240, 240, 240);
 $dropdownBg: $almostWhite;
 
-/* hightlight color:
+/* highlight color:
    use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: rgb(93,152,197);
 $colorSplashHighlight: lighten($colorSplash,33%);
-/* backgroun colors */
+
+/* background colors */
 $mainBg: white;
 $lightBg2: rgb(242,242,242);
 $lightBg: darken($lightBg2,1%);
@@ -24,13 +25,14 @@ $divider: $labelText;
 $outlineBorder: 1px solid $mediumBg;
 $fieldBorders: 1px solid darken($lightBg, 3%);
 
-/* button colors */
+/* buttons */
 $buttonColor: $lightBg;
 $buttonColorOver: $mediumBg;
 $buttonColorActive: darken($buttonColorOver,10%);
 $primaryAction: rgb(158,189,94);
 $buttonText: $labelText;
 $primaryActionText: white; 
+$buttonRadius: 2px;
 
 /* tree menus */
 $treeText: rgb(153,153,153);
@@ -49,7 +51,7 @@ $navbarBg: $lightBg;
 $navbarHover: white;
 $navbarDrop: $navbarBg;
 $navbarText: rgb(51,51,51);
-$navbarRadius: 2px;
+$navbarRadius: $buttonRadius;
 
 $borderColor: rgb(222, 222, 222);
 $borderShadow: rgba(0, 0, 0, 0.025);
