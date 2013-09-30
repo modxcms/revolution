@@ -9,13 +9,15 @@
 }
 
 #modx-manager-search .x-form-trigger {
-  background: none;
-  color: #555;
+  background: lighten($colorSplash,20%);
+  color: #fff;
   cursor: default;
   height: 16px;
-  left: 0;
-  padding: 7px 4px 7px 6px;
-  width: 16px;
+  right: 0;
+  border-radius: 0;
+  border: none;
+  padding: 7px 4px 9px 7px;
+  width: 17px;
 }
 
 #modx-manager-search .x-form-field-wrap {
@@ -25,6 +27,7 @@
   color: #565353;
   font-size: 12px;
   outline: none !important;
+  text-shadow: none;
 }
 
 #modx-manager-search .x-form-field-trigger-wrap {
@@ -40,7 +43,7 @@
 }
 
 #modx-uberbar {
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #modx-manager-search .x-form-empty-field {
@@ -57,6 +60,7 @@
   box-shadow: $shadower;
   height: auto !important;
   margin: 2px 0 0 0;
+  left: 20px;
   position: relative;
   width: 450px !important;
 }
