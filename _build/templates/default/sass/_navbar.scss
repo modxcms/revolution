@@ -7,16 +7,13 @@
   height: 100%;
   position: relative;
   z-index: 10;
+  font-weight: bold;
+  font: $fontNormal;
 }
 
 #modx-user-menu {
   float: right;
   margin-right: 15px;
-}
-
-#modx-navbar {
-  font-weight: bold;
-  font: $fontNormal;
 }
 
 #modx-topnav {
@@ -39,13 +36,19 @@
   z-index: 10000;
 }
 
-#modx-navbar a {
-  color: $navbarText;
-  cursor: pointer;
-  display: block;
-  line-height: 43px;
-  padding: 0 15px;
-  text-decoration: none;
+#modx-navbar {
+  a {
+    color: $navbarText;
+    cursor: pointer;
+    display: block;
+    line-height: 43px;
+    padding: 0 15px;
+    text-decoration: none;
+  }
+  & #limenu-admin > a,
+  & #limenu-about > a {
+    color: $mediumDkBg;
+  }
 }
 
 #modx-topnav > li.top > a {
@@ -59,8 +62,8 @@
   }
 }
 
-#modx-navbar ul#modx-settings-menu,
-#modx-navbar ul#modx-user-submenu {
+#modx-navbar #limenu-admin ul.modx-subnav,
+#modx-navbar #limenu-user ul.modx-subnav {
   left: auto;
   right: 0;
 }
@@ -83,10 +86,18 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include image-set("../images/modx-logo.png", "../images/modx-logo@2X.png");
-  background: $navbarBg url(../images/modx-logo.png) 18px 9px no-repeat;
+  @include image-set("../images/modx-logo.png", "../images/modx-logo@2x.png");
+  background: $navbarBg url(../images/modx-logo.png) 15px 10px no-repeat;
   width: 110px;
-  /* don't tell mark */
+}
+#user-avatar img {
+  border-radius: 16px;
+  margin: 6px 4px 0 0;
+  line-height: 18px; 
+  display: block;
+  float: left;
+}
+#user-username {
 }
 
 #modx-navbar #modx-home-dashboard a {
@@ -123,6 +134,7 @@
 #modx-navbar ul.modx-subnav li a {
   background-color: $navbarDrop;
   float: left;
+  font-weight: bold;
   line-height: 1.5;
   margin: 0;
   padding: 8px 15px;

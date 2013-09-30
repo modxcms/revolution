@@ -6,13 +6,14 @@
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
-
 {if $_config.ext_debug}
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
 {else}
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 {/if}
@@ -33,7 +34,6 @@
     });
 </script>
 
-
 {$maincssjs}
 {foreach from=$cssjs item=scr}
 {$scr}
@@ -43,21 +43,37 @@
 
 <div id="modx-browser"></div>
 <div id="modx-container">
-    <div id="modx-header">
-        <div id="modx-navbar">
-            <ul id="modx-user-menu">
-                {$navbUser}
-            </ul>
-            <ul id="modx-topnav">
-                <li id="modx-home-dashboard">
-                    <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
-                </li>
-                <li id="modx-manager-search"></li>
-                {$navb}
-            </ul>
-        </div>
 
+    <div id="modx-leftbar"></div>
+        
+    <div id="modx-content">
+        <div id="modx-header">
+            <div id="modx-navbar">
+                <ul id="modx-user-menu">
+                    <li id="limenu-user" class="top">
+                        <a href="?a=security/profile" title="{$_lang.profile_desc}">
+                            <span id="user-avatar">{$userImage}</span> <span id="user-username">{$username}</span>
+                        </a> 
+                        <ul class="modx-subnav"> {$navbUser} </ul>
+                    </li>
+                    <li id="limenu-admin" class="top">
+                        <a href="?a=system/settings" title="{$_lang.system_settings_desc}"><i class="icon-gear icon-large"></i></a> 
+                        <ul class="modx-subnav"> {$navbAdmin} </ul> 
+                    </li>
+                    <li id="limenu-about" class="top">
+                        <a href="?a=help" title="{$_lang.about_desc}"><i class="icon-question-sign icon-large"></i></a>
+                    </li>
+                </ul>
+                <ul id="modx-topnav">
+                    <li id="modx-home-dashboard">
+                        <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
+                    </li>
+                    <li id="modx-manager-search"></li> 
+                    {$navb}
+                </ul>
+            </div>
+            <!-- close #modx-navbar -->
+        </div>
+        <!-- close #modx-header -->
         <div id="modAB"></div>
-        <div id="modx-leftbar"></div>
-        <div id="modx-content">
-            <div id="modx-panel-holder"></div>
+        <div id="modx-panel-holder"></div>

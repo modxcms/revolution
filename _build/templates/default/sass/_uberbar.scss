@@ -1,28 +1,29 @@
 /* MODX MANAGER SEARCH */
 #modx-navbar #modx-manager-search {
-  padding: 5px 8px 5px 10px;
+  padding: 7px 8px 7px 10px;
+
+  & .x-form-empty-field {
+    color: $lightBg;
+    background: $mediumBg !important;
+    font-weight: normal;
+    text-shadow: none;
+  }
 }
 
-#modx-navbar #modx-manager-search:hover {
-  background: none;
-  border-color: transparent;
-}
 
 #modx-manager-search .x-form-trigger {
-  background: none;
-  color: #555;
+  background: $colorSplash;
+  color: #fff;
   cursor: default;
   height: 16px;
-  left: 0;
-  padding: 7px 4px 7px 6px;
-  width: 16px;
+  right: 0;
+  border: none;
+  padding: 6px 4px 8px 7px;
+  width: 17px;
 }
 
 #modx-manager-search .x-form-field-wrap {
-  background-color: $almostWhite;
-  background: $dropdownBg;
-  border-radius: 0;
-  color: #565353;
+  background: $mediumBg !important;
   font-size: 12px;
   outline: none !important;
 }
@@ -30,23 +31,23 @@
 #modx-manager-search .x-form-field-trigger-wrap {
   border-width: 0;
   height: auto;
+  color: $lightBg;
 }
 
 #modx-manager-search .x-form-field-wrap:hover,
 #modx-manager-search .x-trigger-wrap-focus {
   @include transition(background-color, 360ms, ease-in);
   @include transition-delay(0);
-  background: $almostWhite;
+
+  & .x-form-text {
+    color: $mainText;
+    text-shadow: none;
+    background: $mediumBg !important;
+  }
 }
 
 #modx-uberbar {
-  margin-left: 20px;
-}
-
-#modx-manager-search .x-form-empty-field {
-  color: #bbb;
-  font-weight: normal;
-  text-shadow: none;
+  margin-right: 20px;
 }
 
 .modx-manager-search-results {
@@ -57,6 +58,7 @@
   box-shadow: $shadower;
   height: auto !important;
   margin: 2px 0 0 0;
+  left: 20px;
   position: relative;
   width: 450px !important;
 }

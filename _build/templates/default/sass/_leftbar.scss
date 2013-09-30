@@ -1,5 +1,6 @@
 #modx-leftbar {
-  background-color: $mainBg;
+  background-color: $darkBg;
+  padding: 1px 0 0;
 }
 
 #modx-leftbar-tabpanel {
@@ -7,7 +8,7 @@
 }
 
 .x-tree-root-ct {
-  border-radius: 0;
+  border-radius: 0 !important;
   overflow: hidden;
   padding: 0 !important;
 }
@@ -23,8 +24,8 @@
 }
 
 .tree-pseudoroot-node {
-  background-color: darken($navbarHover, 2%);
-  border-bottom: 1px solid $borderColor;
+  background-color: $mediumBg;
+  border-bottom: 1px solid $treeDivider;
   font-weight: bold;
   line-height: 2;
   padding: 0 .4em;

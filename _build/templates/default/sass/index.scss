@@ -7,6 +7,8 @@
 *   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\    - Alan Pich @_alanpich
 *    \/_/ \/_/\/_____/\/___/  \/_/ \/_/    - Danya Postfactum
 *                                          - Christian Seele @christianseel
+*                                          - Sipko Groefsema @sipko
+*                                          - GP Sietzeme @gpsietzema
 */
 
 @import "bourbon/bourbon";
@@ -14,27 +16,30 @@
 @import "user-select";
 @import "box-sizing";
 @import "colors-and-vars";
+@import "xtheme-modx";
+@import "modals";
+@import "form";
+@import "buttons";
 @import "type";
 @import "tabs";
 @import "buttons";
 @import "navbar";
 @import "uberbar";
-@import "tree";
 @import "utility";
-@import "xtheme-modx";
 @import "font-awesome/font-awesome";
 @import "leftbar";
+@import "tree";
 @import "help";
 
 body, body.x-border-layout-ct {
-  color: #444;
+  color: $mainText;
   font: $baseText;
 }
 
 h2 {
   color: $headerText;
-  font-size: 25px;
   font: $fontNormal;
+  font-size: 25px;
   margin: 0 0 8px 5px;
 }
 
@@ -149,48 +154,9 @@ input::-moz-focus-inner {
   background: $mainBg;
 }
 
-#modx-leftbar .x-btn {
-  padding: 4px;
-}
-
 #modx-container {
   height: 100%;
   width: 100%;
-}
-
-.x-panel-header {
-  background: none;
-  border-bottom: 1px solid #ddd;
-  border: none;
-  font-size: 16px;
-  margin: 0 0 0 15px;
-  padding: 0 0 8px;
-}
-
-/* form fields */
-
-.modx-form .x-form-text,
-.modx-form .x-form-textarea {
-  font-size: 14px;
-}
-
-.modx-form .x-form-text {
-  height: 20px !important;
-  padding: 5px;
-}
-
-.modx-form .x-form-item label {
-  color: #505050;
-  font-size: 14px;
-}
-
-.x-form-check-wrap {
-  height: auto !important;
-}
-
-.x-form-check-wrap .x-form-cb-label {
-  color: #777;
-  font-weight: normal;
 }
 
 /* grids */
@@ -200,24 +166,6 @@ input::-moz-focus-inner {
 
 .grid-row-inactive {
   color: #999 !important;
-}
-
-/* action buttons bar */
-#modx-action-buttons {
-  background-color: rgba(224, 224, 224, 0.2);
-  border-radius: 3px;
-  border: none;
-  left: auto;
-  padding: 7px;
-  position: fixed;
-  right: 34px;
-  top: 50px;
-  z-index: 9;
-}
-
-#modx-action-buttons .x-toolbar-left {
-  width: auto !important;
-  zoom: 1;
 }
 
 /* collapse for resource panel */
@@ -492,15 +440,9 @@ input::-moz-focus-inner {
 
 .ux-row-action-item:hover {
   background: #dfdfdf;
-  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, white 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
-  background: -o-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dfdfdf));
-  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   background: linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   border: 1px solid #9caf78;
   color: #636f4c !important;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dfdfdf,GradientType=0);
 }
 
 .ux-row-action-item:active {
@@ -516,11 +458,6 @@ input::-moz-focus-inner {
 }
 
 .ux-row-action-item {
-  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
-  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
@@ -531,7 +468,6 @@ input::-moz-focus-inner {
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   color: #444;
   cursor: pointer;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
   float: left;
   font-weight: bold;
   margin: 2px 1px 0;
@@ -1176,7 +1112,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* MODExt common classes */
 
 .container {
-  margin: 20px 15px 20px;
+  margin: 15px;
 }
 
 /* Wrap the main content */
@@ -1231,11 +1167,15 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  padding: 15px 15px 15px 15px;
+  padding: 15px;
+}
+
+#modx-resource-content .main-wrapper {
+  padding-top: 3px;
 }
 
 .with-title .main-wrapper {
-  padding: 0 15px 10px 15px;
+  padding: 0 15px 10px;
 }
 
 .left-col {
