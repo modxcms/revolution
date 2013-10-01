@@ -262,7 +262,6 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function process($properties= null, $content= null) {
         $this->xpdo->getParser();
-        $this->xpdo->parser->setProcessingElement(true);
         $this->getProperties($properties);
         $this->getTag();
         if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true));
@@ -273,6 +272,7 @@ class modElement extends modAccessibleSimpleObject {
             $this->filterInput();
             $this->getContent(is_string($content) ? array('content' => $content) : array());
         }
+		$this->xpdo->parser->setProcessingElement($this->_processed);
         return $this->_result;
     }
 
