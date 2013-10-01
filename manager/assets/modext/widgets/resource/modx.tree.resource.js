@@ -20,7 +20,6 @@ MODx.tree.Resource = function(config) {
         ,remoteToolbarAction: 'resource/gettoolbar'
         ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
-
         ,tbarCfg: {
         //    hidden: true
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
@@ -1207,3 +1206,41 @@ Ext.override(Ext.tree.AsyncTreeNode,{
         },scope: this}
     }
 });
+
+
+MODx.tree.SortBy = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['name','value']
+            ,data: [
+                [_('menu_order'),'menuindex']
+                ,[_('page_title'),'pagetitle']
+                ,[_('publish_date'),'pub_date']
+                ,[_('unpublish_date'),'unpub_date']
+                ,[_('createdon'),'createdon']
+                ,[_('editedon'),'editedon']
+                ,[_('publishedon'),'publishedon']
+                ,[_('alias'),'alias']
+            ]
+        })
+        ,displayField: 'name'
+        ,valueField: 'value'
+        ,forceSelection: false
+        ,editable: true
+        ,mode: 'local'
+        ,id: 'modx-resource-tree-sortby'
+        ,triggerAction: 'all'
+        ,selectOnFocus: false
+        ,width: 150
+        ,value: config.scope.getDefaultSortBy(config.scope.config)
+        ,listeners: {
+            'select': {fn:config.scope.filterSort,scope:config.scope}
+            ,'change': {fn:config.scope.filterSort,scope:config.scope}
+        }
+    });
+    MODx.tree.SortBy.superclass.constructor.call(this,config);
+    this.config = config;
+};
+Ext.extend(MODx.tree.SortBy,Ext.form.ComboBox);
+Ext.reg('modx-tree-sort-by',MODx.tree.SortBy);
