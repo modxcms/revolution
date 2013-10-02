@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 /*
  * MODX CMS and PHP Application Framework ("MODX")
  * Copyright 2006, 2007, 2008 by MODX, LLC.
@@ -57,12 +57,12 @@
         <field key="attributes" dbtype="mediumtext" phptype="array" />
         <field key="package_name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
         <field key="metadata" dbtype="text" phptype="array" />
-        <field key="version_major" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
-        <field key="version_minor" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
-        <field key="version_patch" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />        
+        <field key="version_major" dbtype="smallint" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="version_minor" dbtype="smallint" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="version_patch" dbtype="smallint" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="release" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="index" />
-        <field key="release_index" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
-        
+        <field key="release_index" dbtype="smallint" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="signature" length="" collation="A" null="false" />
         </index>

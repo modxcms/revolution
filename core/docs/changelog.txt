@@ -24,6 +24,9 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+- Increase modTransportPackage version columns range to smallint
+- [#10211] Fix parser state bug triggered by media sources
+- Fix loading modResource derivatives in class_key dropdown
 - [#9973] Prevent extended user classes being set to modUser
 - Upgrade xPDO to 2.2.9-pl
 - [#10182] Improve sanitization of processor_err_nf response

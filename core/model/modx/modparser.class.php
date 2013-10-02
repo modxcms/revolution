@@ -212,6 +212,9 @@ class modParser {
      * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        $_processingTag = $this->_processingTag;
+        $_processingUncacheable = $this->_processingUncacheable;
+        $_removingUnprocessed = $this->_removingUnprocessed;
         $this->_processingTag = true;
         $this->_processingUncacheable = (boolean) $processUncacheable;
         $this->_removingUnprocessed = (boolean) $removeUnprocessed;
@@ -256,7 +259,10 @@ class modParser {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
         }
-        $this->_processingTag = false;
+
+        $this->_removingUnprocessed = $_removingUnprocessed;
+        $this->_processingUncacheable = $_processingUncacheable;
+        $this->_processingTag = $_processingTag;
         return $processed;
     }
 
