@@ -1,3 +1,31 @@
+#modx-leftbar #emptifier.x-btn {
+  border-radius: 15px;
+  background: $almostWhite;
+  padding: 0;
+  border-color: $softGrey;
+  opacity: .7;
+
+  &:hover {
+    opacity: 1;
+
+    span {
+      display: inline-block;
+    }
+  }
+
+  .icon-large {
+    padding: 6px 8px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  span {
+    font-size: 14px;
+    display: none;
+    padding: 2px 10px 0 0;
+    vertical-align: middle;
+  }
+}
+
 /* Action buttons */
 .actions {
   bottom: 8px;
