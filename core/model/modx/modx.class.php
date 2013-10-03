@@ -1184,7 +1184,7 @@ class modX extends xPDO {
     }
 
     /**
-     * Get the current authenticated User and assigns it to the modX instance.
+     * Get the current authenticated User and assign it to the modX instance.
      *
      * @param string $contextKey An optional context to get the user from.
      * @param boolean $forceLoadSettings If set to true, will load settings
@@ -1208,15 +1208,16 @@ class modX extends xPDO {
                 if (isset ($_SESSION["modx.{$contextKey}.user.config"])) {
                     $this->_userConfig= $_SESSION["modx.{$contextKey}.user.config"];
                 } else {
-                    $settings= $this->user->getMany('UserSettings');
+                    $this->_userConfig= array();
+                    $settings= $this->user->getSettings();
                     if (is_array($settings) && !empty ($settings)) {
-                        foreach ($settings as $setting) {
-                            $v= $setting->get('value');
+                        foreach ($settings as $k => $v) {
                             $matches= array();
                             if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
-                                $matchValue= '';
                                 foreach ($matches as $match) {
-                                    if (isset ($this->config["{$match[1]}"])) {
+                                    if (isset($this->_userConfig["{$match[1]}"])) {
+                                        $matchValue= $this->_userConfig["{$match[1]}"];
+                                    } elseif (isset($this->config["{$match[1]}"])) {
                                         $matchValue= $this->config["{$match[1]}"];
                                     } else {
                                         $matchValue= '';
@@ -1224,12 +1225,12 @@ class modX extends xPDO {
                                     $v= str_replace($match[0], $matchValue, $v);
                                 }
                             }
-                            $this->_userConfig[$setting->get('key')]= $v;
+                            $this->_userConfig[$k]= $v;
                         }
                     }
-                }
-                if (is_array ($this->_userConfig) && !empty ($this->_userConfig)) {
                     $_SESSION["modx.{$contextKey}.user.config"]= $this->_userConfig;
+                }
+                if (is_array($this->_userConfig) && !empty($this->_userConfig)) {
                     $this->config= array_merge($this->config, $this->_userConfig);
                 }
             }
