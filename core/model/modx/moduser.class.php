@@ -76,7 +76,7 @@ class modUser extends modPrincipal {
 
     /**
      * Overrides xPDOObject::save to fire modX-specific events
-     * 
+     *
      * {@inheritDoc}
      */
     public function save($cacheFlag = false) {
@@ -91,7 +91,7 @@ class modUser extends modPrincipal {
         }
 
         $saved = parent :: save($cacheFlag);
-        
+
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserSave',array(
                 'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
@@ -484,6 +484,10 @@ class modUser extends modPrincipal {
      */
     public function getSettings() {
         $settings = array();
+        $gss = $this->getUserGroupSettings();
+        foreach ($gss as $gs) {
+            $settings[$gs->get('key')] = $gs->get('value');
+        }
         $uss = $this->getMany('UserSettings');
         /** @var modUserSetting $us */
         foreach ($uss as $us) {
@@ -491,6 +495,34 @@ class modUser extends modPrincipal {
         }
         $this->settings = $settings;
         return $settings;
+    }
+
+    /**
+     * Get all group settings for the user in array format.
+     *
+     * Preference is set by group rank + member rank, with primary_group having
+     * highest priority.
+     *
+     * @return array An associative array of group settings.
+     */
+    public function getUserGroupSettings() {
+        $settings = array();
+        $primary = array();
+        $query = $this->xpdo->newQuery('modUserGroupSetting');
+        $query->join('modUserGroup', 'UserGroup', array('UserGroup.id = modUserGroupSetting.group'));
+        $query->join('modUserGroupMember', 'Member', array('Member.member' => $this->get('id'), 'UserGroup.id = Member.user_group'));
+        $query->sortby('UserGroup.rank', 'DESC');
+        $query->sortby('Member.rank', 'DESC');
+        $ugss = $this->xpdo->getCollection('modUserGroupSetting', $query);
+        /** @var modUserGroupSetting $ugs */
+        foreach ($ugss as $ugs) {
+            if ($ugs->get('group') === $this->get('primary_group')) {
+                $primary[$ugs->get('key')] = $ugs->get('value');
+            } else {
+                $settings[$ugs->get('key')] = $ugs->get('value');
+            }
+        }
+        return array_merge($settings, $primary);
     }
 
     /**
@@ -768,7 +800,7 @@ class modUser extends modPrincipal {
 
         $this->xpdo->getService('mail', 'mail.modPHPMailer');
         if (!$this->xpdo->mail) return false;
-        
+
         $this->xpdo->mail->set(modMail::MAIL_BODY, $message);
         $this->xpdo->mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from',$options,$this->xpdo->getOption('emailsender')));
         $this->xpdo->mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName',$options,$this->xpdo->getOption('site_name')));

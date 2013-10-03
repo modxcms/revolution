@@ -1269,6 +1269,24 @@
         <aggregate alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="role" cardinality="many" owner="local" />
     </object>
 
+    <object class="modUserGroupSetting" table="user_group_settings" extends="xPDOObject">
+        <field key="group" dbtype="integer" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
+        <field key="key" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="pk" />
+        <field key="value" dbtype="nvarchar" precision="max" phptype="string" />
+        <field key="xtype" dbtype="nvarchar" precision="75" phptype="string" null="false" default="textfield" />
+        <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" />
+        <field key="area" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+        <field key="editedon" dbtype="datetime" phptype="timestamp" null="true" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="group" length="" collation="A" null="false" />
+            <column key="key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="UserGroup" class="modUserGroup" local="group" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modUserMessage" table="user_messages" extends="xPDOSimpleObject">
         <field key="type" dbtype="nvarchar" precision="15" phptype="string" null="false" default="" />
         <field key="subject" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />

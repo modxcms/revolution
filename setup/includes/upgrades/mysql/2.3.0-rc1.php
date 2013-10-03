@@ -9,6 +9,7 @@
 /* handle new class creation */
 $classes = array(
     'modExtensionPackage',
+    'modUserGroupSetting'
 );
 if (!empty($classes)) {
     $this->createTable($classes);

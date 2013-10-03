@@ -5,7 +5,7 @@
  * @var xPDO $modx
  * @var modInstall $install
  * @var modInstallRunner $this
- * 
+ *
  * @package setup
  */
 
@@ -68,6 +68,7 @@ $classes= array (
     'modUserGroup',
     'modUserGroupMember',
     'modUserGroupRole',
+    'modUserGroupSetting',
     'modUserMessage',
     'modUserSetting',
     'modWorkspace',
