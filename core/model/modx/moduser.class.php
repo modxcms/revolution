@@ -483,11 +483,7 @@ class modUser extends modPrincipal {
      * @return array A key -> value array of settings.
      */
     public function getSettings() {
-        $settings = array();
-        $gss = $this->getUserGroupSettings();
-        foreach ($gss as $gs) {
-            $settings[$gs->get('key')] = $gs->get('value');
-        }
+        $settings = $this->getUserGroupSettings();
         $uss = $this->getMany('UserSettings');
         /** @var modUserSetting $us */
         foreach ($uss as $us) {
