@@ -299,59 +299,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
     }
 
-    ,showFilter: function(itm,e) {
-        if (this._filterVisible) {return false;}
-
-        var t = Ext.get(this.config.id+'-tbar');
-        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true});
-        var tb = new Ext.Toolbar({
-            applyTo: fbd
-            ,autoHeight: true
-            ,width: '100%'
-        });
-        var cb = new Ext.form.ComboBox({
-            store: new Ext.data.SimpleStore({
-                fields: ['name','value']
-                ,data: [
-                    [_('menu_order'),'menuindex']
-                    ,[_('page_title'),'pagetitle']
-                    ,[_('publish_date'),'pub_date']
-                    ,[_('unpublish_date'),'unpub_date']
-                    ,[_('createdon'),'createdon']
-                    ,[_('editedon'),'editedon']
-                    ,[_('publishedon'),'publishedon']
-                    ,[_('alias'),'alias']
-                ]
-            })
-            ,displayField: 'name'
-            ,valueField: 'value'
-            ,forceSelection: false
-            ,editable: true
-            ,mode: 'local'
-            ,id: 'modx-resource-tree-sortby'
-            ,triggerAction: 'all'
-            ,selectOnFocus: false
-            ,width: 100
-            ,value: this.getDefaultSortBy(this.config)
-            ,listeners: {
-                'select': {fn:this.filterSort,scope:this}
-                ,'change': {fn:this.filterSort,scope:this}
-            }
-        });
-        tb.add(_('sort_by')+':');
-        tb.addField(cb);
-        tb.add('-',{
-            scope: this
-            ,cls: 'x-btn-text'
-            ,text: _('close')
-            ,handler: this.hideFilter
-        });
-        tb.doLayout();
-        this.filterBar = tb;
-        this._filterVisible = true;
-        return true;
-    }
-
     ,getDefaultSortBy: function(config) {
         var v = 'menuindex';
         if (!Ext.isEmpty(config) && !Ext.isEmpty(config.sortBy)) {
@@ -369,15 +316,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return v;
     }
 
-    ,filterSort: function(cb,r,i) {
-        Ext.state.Manager.set(this.treestate_id+'-sort',cb.getValue());
-        this.config.sortBy = cb.getValue();
+    ,filterSort: function(itm, e) {
         this.getLoader().baseParams = {
             action: this.config.action
-            ,sortBy: this.config.sortBy
+            ,sortBy: itm.sortBy
+            ,node: this.cm.activeNode.ide
         };
-        this.refresh();
+        this.refreshActiveNode()
     }
+
 
     ,hideFilter: function(itm,e) {
         this.filterBar.destroy();
@@ -702,7 +649,61 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                ,menu: {items: qct}
             });
         }
+
+        if( ui && !ui.hasClass('x-tree-node-leaf')) {
+            m.push(this._getSortMenu());
+        }
         return m;
+    }
+
+    ,_getSortMenu: function(){
+        return [{
+            text: _('sort_by')
+            ,handler: function() {return false;}
+            ,menu: {
+                items:[{
+                    text: _('menu_order')
+                    ,sortBy: 'menuindex'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('page_title')
+                    ,sortBy: 'pagetitle'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('publish_date')
+                    ,sortBy: 'pub_date'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('unpublish_date')
+                    ,sortBy: 'unpub_date'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('createdon')
+                    ,sortBy: 'createdon'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('editedon')
+                    ,sortBy: 'editedon'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('publishedon')
+                    ,sortBy: 'publishedon'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('alias')
+                    ,sortBy: 'alias'
+                    ,handler: this.filterSort
+                    ,scope: this
+                }]
+            }
+        }];
     }
 
     ,handleCreateClick: function(node){
@@ -1206,41 +1207,3 @@ Ext.override(Ext.tree.AsyncTreeNode,{
         },scope: this}
     }
 });
-
-
-MODx.tree.SortBy = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        store: new Ext.data.SimpleStore({
-            fields: ['name','value']
-            ,data: [
-                [_('menu_order'),'menuindex']
-                ,[_('page_title'),'pagetitle']
-                ,[_('publish_date'),'pub_date']
-                ,[_('unpublish_date'),'unpub_date']
-                ,[_('createdon'),'createdon']
-                ,[_('editedon'),'editedon']
-                ,[_('publishedon'),'publishedon']
-                ,[_('alias'),'alias']
-            ]
-        })
-        ,displayField: 'name'
-        ,valueField: 'value'
-        ,forceSelection: false
-        ,editable: true
-        ,mode: 'local'
-        ,id: 'modx-resource-tree-sortby'
-        ,triggerAction: 'all'
-        ,selectOnFocus: false
-        ,width: 150
-        ,value: config.scope.getDefaultSortBy(config.scope.config)
-        ,listeners: {
-            'select': {fn:config.scope.filterSort,scope:config.scope}
-            ,'change': {fn:config.scope.filterSort,scope:config.scope}
-        }
-    });
-    MODx.tree.SortBy.superclass.constructor.call(this,config);
-    this.config = config;
-};
-Ext.extend(MODx.tree.SortBy,Ext.form.ComboBox);
-Ext.reg('modx-tree-sort-by',MODx.tree.SortBy);
