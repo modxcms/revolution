@@ -76,7 +76,6 @@ class modResourceGetToolbarProcessor extends modProcessor {
         if ($this->modx->hasPermission('purge_deleted')) {
             $deletedResources = $this->modx->getCount('modResource', array('deleted' => 1));
 
-
             $items[] = array(
                 'icon' => $p.'trash.png',
                 'id' => 'emptifier',

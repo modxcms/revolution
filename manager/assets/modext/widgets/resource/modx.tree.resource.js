@@ -199,7 +199,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,id: id
             }
             ,listeners: {
-                'success': {fn:function() {
+                'success': {fn:function(data) {
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    if (trashButton) {
+                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    }
+
                     var n = this.cm.activeNode;
                     var ui = n.getUI();
 
@@ -223,7 +228,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,id: id
             }
             ,listeners: {
-                'success': {fn:function() {
+                'success': {fn:function(data) {
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    if (trashButton) {
+                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    }
+                    
                     var n = this.cm.activeNode;
                     var ui = n.getUI();
 
