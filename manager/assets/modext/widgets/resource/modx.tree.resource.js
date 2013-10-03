@@ -497,6 +497,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,handler: this.removeContext
             });
         }
+
+        if(!ui.hasClass('x-tree-node-leaf')) {
+            m.push('-');
+            m.push(this._getSortMenu());
+        }
+        
         return m;
     }
 
@@ -579,6 +585,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 });
             }
         }
+
+        if(!ui.hasClass('x-tree-node-leaf')) {
+            m.push('-');
+            m.push(this._getSortMenu());
+        }
+
         if (ui.hasClass('pview')) {
             m.push('-');
             m.push({
@@ -651,9 +663,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
         }
 
-        if( ui && !ui.hasClass('x-tree-node-leaf')) {
-            m.push(this._getSortMenu());
-        }
         return m;
     }
 
