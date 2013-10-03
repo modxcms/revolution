@@ -78,10 +78,10 @@ class modResourceGetToolbarProcessor extends modProcessor {
 
 
             $items[] = array(
-                'html' => '<i class="icon-trash icon-large"></i><span>' . $deletedResources . '</span>',
+                'html' => '<i class="icon-trash icon-large"></i>',
                 'cls' => '',
                 'id' => 'emptifier',
-                'tooltip' => $this->modx->lexicon('empty_recycle_bin'),
+                'tooltip' => $this->modx->lexicon('empty_recycle_bin') . '(' . $deletedResources . ')',
                 'handler' => 'this.emptyRecycleBin',
             );
         }

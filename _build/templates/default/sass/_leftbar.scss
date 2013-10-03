@@ -31,9 +31,10 @@
   > .icon-large {
     font-weight: normal;
   }
-  .x-tree-ec-icon {
-    float: right;
-    margin-top: 2px;
+  .x-tree-ec-icon {;
+    margin: 1px 4px 0;
+    display: inline-block;
+    width: 10px;
   }
   .modx-tree-node-tool-ct {
     //  display: none;
