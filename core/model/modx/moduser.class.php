@@ -509,8 +509,8 @@ class modUser extends modPrincipal {
         $settings = array();
         $primary = array();
         $query = $this->xpdo->newQuery('modUserGroupSetting');
-        $query->join('modUserGroup', 'UserGroup', array('UserGroup.id = modUserGroupSetting.group'));
-        $query->join('modUserGroupMember', 'Member', array('Member.member' => $this->get('id'), 'UserGroup.id = Member.user_group'));
+        $query->innerJoin('modUserGroup', 'UserGroup', array('UserGroup.id = modUserGroupSetting.group'));
+        $query->innerJoin('modUserGroupMember', 'Member', array('Member.member' => $this->get('id'), 'UserGroup.id = Member.user_group'));
         $query->sortby('UserGroup.rank', 'DESC');
         $query->sortby('Member.rank', 'DESC');
         $ugss = $this->xpdo->getCollection('modUserGroupSetting', $query);
