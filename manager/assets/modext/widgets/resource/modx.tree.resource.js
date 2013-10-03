@@ -320,6 +320,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.getLoader().baseParams = {
             action: this.config.action
             ,sortBy: itm.sortBy
+            ,sortDir: itm.sortDir
             ,node: this.cm.activeNode.ide
         };
         this.refreshActiveNode()
@@ -662,43 +663,57 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,handler: function() {return false;}
             ,menu: {
                 items:[{
-                    text: _('menu_order')
+                    text: _('tree_order')
                     ,sortBy: 'menuindex'
+                    ,sortDir: 'ASC'
                     ,handler: this.filterSort
                     ,scope: this
                 },{
-                    text: _('page_title')
-                    ,sortBy: 'pagetitle'
+                    text: _('recently_updated')
+                    ,sortBy: 'editedon'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('newest')
+                    ,sortBy: 'createdon'
+                    ,sortDir: 'DESC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('oldest')
+                    ,sortBy: 'createdon'
+                    ,sortDir: 'ASC'
                     ,handler: this.filterSort
                     ,scope: this
                 },{
                     text: _('publish_date')
                     ,sortBy: 'pub_date'
+                    ,sortDir: 'ASC'
                     ,handler: this.filterSort
                     ,scope: this
                 },{
                     text: _('unpublish_date')
                     ,sortBy: 'unpub_date'
-                    ,handler: this.filterSort
-                    ,scope: this
-                },{
-                    text: _('createdon')
-                    ,sortBy: 'createdon'
-                    ,handler: this.filterSort
-                    ,scope: this
-                },{
-                    text: _('editedon')
-                    ,sortBy: 'editedon'
+                    ,sortDir: 'ASC'
                     ,handler: this.filterSort
                     ,scope: this
                 },{
                     text: _('publishedon')
                     ,sortBy: 'publishedon'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('title')
+                    ,sortBy: 'pagetitle'
+                    ,sortDir: 'ASC'
                     ,handler: this.filterSort
                     ,scope: this
                 },{
                     text: _('alias')
                     ,sortBy: 'alias'
+                    ,sortDir: 'ASC'
                     ,handler: this.filterSort
                     ,scope: this
                 }]
