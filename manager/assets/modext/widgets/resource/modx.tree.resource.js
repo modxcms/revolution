@@ -202,6 +202,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 'success': {fn:function(data) {
                     var trashButton = this.getTopToolbar().findById('emptifier');
                     if (trashButton) {
+                        if (data.object.deletedCount == 0) {
+                            trashButton.disable();
+                        } else {
+                            trashButton.enable();
+                        }
+
                         trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
 
@@ -231,9 +237,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 'success': {fn:function(data) {
                     var trashButton = this.getTopToolbar().findById('emptifier');
                     if (trashButton) {
+                        if (data.object.deletedCount == 0) {
+                            trashButton.disable();
+                        } else {
+                            trashButton.enable();
+                        }
+
                         trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
-                    
+
                     var n = this.cm.activeNode;
                     var ui = n.getUI();
 

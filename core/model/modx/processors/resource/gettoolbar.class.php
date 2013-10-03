@@ -80,6 +80,7 @@ class modResourceGetToolbarProcessor extends modProcessor {
                 'icon' => $p.'trash.png',
                 'id' => 'emptifier',
                 'tooltip' => $this->modx->lexicon('empty_recycle_bin') . ' (' . $deletedResources . ')',
+                'disabled' => ($deletedResources == 0) ? true : false,
                 'handler' => 'this.emptyRecycleBin',
             );
         }
