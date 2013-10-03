@@ -150,10 +150,11 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('settings')
-                ,layout: 'form'
+                ,forceLayout: true
                 ,hideMode: 'offsets'
+                ,layout: 'form'
                 ,items: [{
-                    html: '<h3>'+_('group_settings')+'</h3><p>'+_('group_settings_desc')+'</p>'
+                    html: '<p>'+_('user_group_settings_desc')+'</p>'
                     ,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
@@ -161,10 +162,11 @@ MODx.panel.UserGroup = function(config) {
                     ,cls: 'main-wrapper'
                     ,preventRender: true
                     ,group: config.record.id
+                    ,autoHeight: true
                     ,width: '97%'
-                    ,listeners: {
-                        'afterAutoSave':{fn:this.markDirty,scope:this}
-                    }
+//                    ,listeners: {
+//                        'afterAutoSave':{fn:this.markDirty,scope:this}
+//                    }
                 }]
             },{
                 title: _('user_group_context_access')

@@ -9,7 +9,7 @@
 MODx.grid.GroupSettings = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('group_settings')
+        title: _('user_group_settings')
         ,id: 'modx-grid-group-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
