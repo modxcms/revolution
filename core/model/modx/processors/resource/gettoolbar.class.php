@@ -28,49 +28,49 @@ class modResourceGetToolbarProcessor extends modProcessor {
 //            'handler' => 'this.collapseAll',
 //        );
 //        $items[] = '-';
-//        $context = '&context_key=' . $this->modx->getOption('default_context');
-//        if ($this->modx->hasPermission('new_document')) {
-//            $items[] = array(
-//                'icon' => $p.'folder_page_add.png',
-//                'tooltip' => $this->modx->lexicon('document_new'),
-//                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create'. $context .'\");");',
-//            );
-//        }
-//        if ($this->modx->hasPermission('new_weblink')) {
-//            $items[] = array(
-//                'icon' => $p.'page_white_link.png',
-//                'tooltip' => $this->modx->lexicon('add_weblink'),
-//                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modWebLink'. $context .'\");");',
-//            );
-//        }
-//        if ($this->modx->hasPermission('new_symlink')) {
-//            $items[] = array(
-//                'icon' => $p.'page_white_copy.png',
-//                'tooltip' => $this->modx->lexicon('add_symlink'),
-//                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modSymLink'. $context .'\");");',
-//            );
-//        }
-//        if ($this->modx->hasPermission('new_static_resource')) {
-//            $items[] = array(
-//                'icon' => $p.'page_white_gear.png',
-//                'tooltip' => $this->modx->lexicon('static_resource_new'),
-//                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modStaticResource'. $context .'\");");',
-//            );
-//        }
-//        unset($context);
-//        $items[] = '-';
+        $context = '&context_key=' . $this->modx->getOption('default_context');
+        if ($this->modx->hasPermission('new_document')) {
+            $items[] = array(
+                'icon' => $p.'folder_page_add.png',
+                'tooltip' => $this->modx->lexicon('document_new'),
+                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create'. $context .'\");");',
+            );
+        }
+        if ($this->modx->hasPermission('new_weblink')) {
+            $items[] = array(
+                'icon' => $p.'page_white_link.png',
+                'tooltip' => $this->modx->lexicon('add_weblink'),
+                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modWebLink'. $context .'\");");',
+            );
+        }
+        if ($this->modx->hasPermission('new_symlink')) {
+            $items[] = array(
+                'icon' => $p.'page_white_copy.png',
+                'tooltip' => $this->modx->lexicon('add_symlink'),
+                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modSymLink'. $context .'\");");',
+            );
+        }
+        if ($this->modx->hasPermission('new_static_resource')) {
+            $items[] = array(
+                'icon' => $p.'page_white_gear.png',
+                'tooltip' => $this->modx->lexicon('static_resource_new'),
+                'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modStaticResource'. $context .'\");");',
+            );
+        }
+        unset($context);
+        $items[] = '-';
 //
 //        $items[] = array(
 //            'icon' => $p.'refresh.png',
 //            'tooltip' => $this->modx->lexicon('refresh_tree'),
 //            'handler' => 'this.refresh',
 //        );
-        $items[] = array(
-            'xtype' => 'modx-tree-sort-by'
+//        $items[] = array(
+//            'xtype' => 'modx-tree-sort-by'
 //            'icon' => $p.'unzip.gif',
 //            'tooltip' => $this->modx->lexicon('show_sort_options'),
 //            'handler' => 'this.showFilter',
-        );
+//        );
 
         $items[] = '->';
         if ($this->modx->hasPermission('purge_deleted')) {
