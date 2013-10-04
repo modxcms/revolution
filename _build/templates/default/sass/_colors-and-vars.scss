@@ -6,6 +6,7 @@ $dropdownBg: $almostWhite;
    use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: #3875ae;
 
+$lightSplash:lighten($colorSplash, 42.5%);
 $mainText: #444444;
 $headerText: #555555;
 
