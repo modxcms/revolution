@@ -1,59 +1,7 @@
 @import "font-awesome/variables";
 @import "font-awesome/mixins";
 
-/* icons for the top button bar */
-/* trash */
-.x-icon-trash > em > button:before {
-  @include icon($trash);
-}
-/* new resource */
-.x-icon-file-alt > em > button:before {
-  @include icon($file-alt);
-}
-/* new weblink */
-.x-icon-link > em > button:before {
-  @include icon($link);
-}
-/* new symlink */
-.x-icon-copy > em > button:before {
-  @include icon($copy);
-}
-/* new static resource */
-.x-icon-file-text-alt > em > button:before {
-  @include icon($file-text-alt);
-}
-/* new template */
-.x-icon-columns > em > button:before {
-  @include icon($columns);
-}
-/* new TV */
-.x-icon-list-alt > em > button:before {
-  @include icon($list-alt);
-}
-/* new chunk */
-.x-icon-th-large > em > button:before {
-  @include icon($th-large);
-}
-/* new snippet */
-.x-icon-code > em > button:before {
-  @include icon($code);
-}
-/* new plugin */
-.x-icon-gears > em > button:before {
-  @include icon($cogs);
-}
-/* new category */
-.x-icon-folder-close > em > button:before {
-  @include icon($folder-close);
-}
-/* alignment overrides */
-#modx-leftbar .x-toolbar-ct .x-btn.x-icon-copy > em > button {
-  top: 5px;
-  left: 2px;
-}
-#modx-leftbar .x-toolbar-ct .x-btn.x-icon-link > em > button {
-  left: 2px;
-}
+/* basic tree toolbar styles */
 #modx-leftbar .x-toolbar-ct .x-btn {
   border-radius: 15px;
   background: $almostWhite;
@@ -86,6 +34,53 @@
 }
 #modx-leftbar #emptifier.x-item-disabled  {
   opacity: .4 !important;
+}
+
+
+/* resource tree toolbar icons */
+.tree-new-resource > em > button:before {
+  @include icon($file-alt);
+}
+.tree-new-weblink > em > button:before {
+  @include icon($link);
+}
+.tree-new-symlink > em > button:before {
+  @include icon($copy);
+}
+.tree-new-static-resource > em > button:before {
+  @include icon($file-text-alt);
+}
+.tree-trash > em > button:before {
+  @include icon($trash);
+}
+  /* alignment overrides */
+  #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
+    top: 5px;
+    left: 2px;
+  }
+  #modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink > em > button {
+    left: 2px;
+  }
+
+
+/* element tree toolbar */
+.tree-new-template > em > button:before {
+  @include icon($columns);
+}
+.tree-new-tv > em > button:before {
+  @include icon($list-alt);
+}
+.tree-new-chunk > em > button:before {
+  @include icon($th-large);
+}
+.tree-new-snippet > em > button:before {
+  @include icon($code);
+}
+.tree-new-plugin > em > button:before {
+  @include icon($cogs);
+}
+.tree-new-category > em > button:before {
+  @include icon($folder-close);
 }
 
 /* Action buttons */

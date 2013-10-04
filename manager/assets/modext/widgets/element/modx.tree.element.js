@@ -22,7 +22,7 @@ MODx.tree.Element = function(config) {
             ,currentAction: MODx.request.a || 0
         }
         ,tbar: [{
-            cls: 'x-icon-columns'
+            cls: 'tree-new-template'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
                 this.redirect('index.php?a=element/template/create');
@@ -30,7 +30,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
         },{
-            cls: 'x-icon-list-alt'
+            cls: 'tree-new-tv'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
                 this.redirect('index.php?a=element/tv/create');
@@ -38,7 +38,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
         },{
-            cls: 'x-icon-th-large'
+            cls: 'tree-new-chunk'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
                 this.redirect('index.php?a=element/chunk/create');
@@ -46,7 +46,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
         },{
-            cls: 'x-icon-code'
+            cls: 'tree-new-snippet'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
                 this.redirect('index.php?a=element/snippet/create');
@@ -54,7 +54,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
         },{
-            cls: 'x-icon-gears'
+            cls: 'tree-new-plugin'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
                 this.redirect('index.php?a=element/plugin/create');
@@ -62,7 +62,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
         },{
-            cls: 'x-icon-folder-close'
+            cls: 'tree-new-category'
             ,tooltip: {text: _('new_category')}
             ,handler: function() {
                 this.createCategory(null,{target: this.getEl()});

@@ -31,28 +31,28 @@ class modResourceGetToolbarProcessor extends modProcessor {
         $context = '&context_key=' . $this->modx->getOption('default_context');
         if ($this->modx->hasPermission('new_document')) {
             $items[] = array(
-                'cls' => 'x-icon-file-alt',
+                'cls' => 'tree-new-resource',
                 'tooltip' => $this->modx->lexicon('document_new'),
                 'handler' => 'new Function("this.redirect(\"index.php?a=resource/create'. $context .'\");");',
             );
         }
         if ($this->modx->hasPermission('new_weblink')) {
             $items[] = array(
-                'cls' => 'x-icon-link',
+                'cls' => 'tree-new-weblink',
                 'tooltip' => $this->modx->lexicon('add_weblink'),
                 'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modWebLink'. $context .'\");");',
             );
         }
         if ($this->modx->hasPermission('new_symlink')) {
             $items[] = array(
-                'cls' => 'x-icon-copy',
+                'cls' => 'tree-new-symlink',
                 'tooltip' => $this->modx->lexicon('add_symlink'),
                 'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modSymLink'. $context .'\");");',
             );
         }
         if ($this->modx->hasPermission('new_static_resource')) {
             $items[] = array(
-                'cls' => 'x-icon-file-text-alt',
+                'cls' => 'tree-new-static-resource',
                 'tooltip' => $this->modx->lexicon('static_resource_new'),
                 'handler' => 'new Function("this.redirect(\"index.php?a=resource/create&class_key=modStaticResource'. $context .'\");");',
             );
@@ -78,7 +78,7 @@ class modResourceGetToolbarProcessor extends modProcessor {
 
             $items[] = array(
                 'id' => 'emptifier',
-                'cls' => 'x-icon-trash',
+                'cls' => 'tree-trash',
                 'tooltip' => $this->modx->lexicon('empty_recycle_bin') . ' (' . $deletedResources . ')',
                 'disabled' => ($deletedResources == 0) ? true : false,
                 'handler' => 'this.emptyRecycleBin',
