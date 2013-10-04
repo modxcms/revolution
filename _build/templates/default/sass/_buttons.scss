@@ -22,14 +22,8 @@
     vertical-align: middle;
   }
 }
-#modx-leftbar #emptifier {
-  width: auto;
-
-  span {
-    font-size: 12px;
-    padding: 2px 0 0 6px;
-    vertical-align: baseline;
-  }
+#modx-leftbar #emptifier.x-item-disabled  {
+  opacity: .4 !important;
 }
 
 /* Action buttons */
