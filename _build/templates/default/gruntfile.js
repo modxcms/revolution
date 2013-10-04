@@ -36,6 +36,32 @@ module.exports = function(grunt) {
 					keepSpecialComments:1,
 					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
 					banner : '/*!'
++  '\n* This file is part of <%= pkg.title %> and was compiled using Grunt.'
++  '\n* '
++  '\n* <%= pkg.title %> is free software: you can redistribute it and/or modify it under the terms of the'
++  '\n* GNU General Public License as published by the Free Software Foundation, either version 2 of the'
++  '\n* License, or (at your option) any later version.'
++  '\n* '
++  '\n* <%= pkg.title %> is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;'
++  '\n* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
++  '\n* '
++  '\n* See the GNU General Public License for more details. You should have received a copy of the GNU'
++  '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.'
++  '\n* '
+//+  '\n* Authors: TODO'
++  '\n*/'
+				},
+				files: {
+					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
+					'<%= dirs.css %>login.css': '<%= dirs.css %>login.css'
+				}
+			},
+			ship: {
+				options: {
+					report: 'min',
+					keepSpecialComments:1,
+					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
+					banner : '/*!'
 +  '\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>'
 +  '\n* '
 +  '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC'
@@ -114,7 +140,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: '<%= dirs.scss %>*',
-				tasks: ['sass:dist', 'autoprefixer', 'cssmin', 'growl:sass']
+				tasks: ['sass:dist', 'autoprefixer', 'cssmin:compress', 'growl:sass']
 			}
 		},
 		clean: { /* take out the trash */
@@ -157,7 +183,8 @@ module.exports = function(grunt) {
 
 
 	// Tasks
-	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin','clean:postbuild']);
+	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'growl:watch', 'watch']);
+	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
+	grunt.registerTask('ship', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:ship','clean:postbuild']);
 };
