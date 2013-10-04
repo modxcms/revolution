@@ -13,7 +13,7 @@ MODx.grid.DatabaseTables = function(config) {
         ,id: 'modx-grid-dbtable'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/databasetables/getlist'
+            action: 'system/databasetable/getlist'
         }
         ,fields: ['Name','Rows','Data_size','Data_free','Effective_size','Index_length','Total_size']
         ,paging: false
@@ -48,7 +48,7 @@ MODx.grid.DatabaseTables = function(config) {
         }]
         ,tbar: [{
             text: _('database_optimize')
-            ,handler: this.optimizeDatabase
+//            ,handler: this.optimizeDatabase
             ,scope: this
         }]
     });
