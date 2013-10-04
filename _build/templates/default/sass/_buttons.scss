@@ -22,6 +22,30 @@
 .x-icon-file-text-alt > em > button:before {
   @include icon($file-text-alt);
 }
+/* new template */
+.x-icon-columns > em > button:before {
+  @include icon($columns);
+}
+/* new TV */
+.x-icon-list-alt > em > button:before {
+  @include icon($list-alt);
+}
+/* new chunk */
+.x-icon-th-large > em > button:before {
+  @include icon($th-large);
+}
+/* new snippet */
+.x-icon-code > em > button:before {
+  @include icon($code);
+}
+/* new plugin */
+.x-icon-gears > em > button:before {
+  @include icon($cogs);
+}
+/* new category */
+.x-icon-folder-close > em > button:before {
+  @include icon($folder-close);
+}
 /* alignment overrides */
 #modx-leftbar .x-toolbar-ct .x-btn.x-icon-copy > em > button {
   top: 5px;
