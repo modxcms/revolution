@@ -13,7 +13,7 @@ MODx.grid.DatabaseTables = function(config) {
         ,id: 'modx-grid-dbtable'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/databasetables/getlist'
+            action: 'system/databasetable/getlist'
         }
         ,fields: ['Name','Rows','Reserved','Data_size','Index_length','Data_free']
         ,paging: false
