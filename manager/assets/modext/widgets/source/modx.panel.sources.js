@@ -158,7 +158,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'duplicate'
+                action: 'source/duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -178,7 +178,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
             ,text: _('source_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeMultiple'
+                action: 'source/removeMultiple'
                 ,sources: cs
             }
             ,listeners: {
@@ -197,7 +197,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
             ,text: _('source_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'source/remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
