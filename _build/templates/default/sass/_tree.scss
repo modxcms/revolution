@@ -1,3 +1,6 @@
+@import "font-awesome/variables";
+@import "font-awesome/mixins";
+
 .x-tab-panel-noborder {
   background-color: rgb(240, 240, 240);
   border: 1px solid #E2E3DE;
@@ -397,11 +400,7 @@ ul.x-tab-strip-top {
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: '\f0da';
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: inherit;
+  @include icon($caret-right);
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
@@ -410,9 +409,44 @@ ul.x-tab-strip-top {
 }
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: '\f0d7';
+  @include icon($caret-down);
   padding-left: 4px;
   width: 12px;
+}
+
+.x-icon-trash > em > button:before {
+  @include icon($trash);
+  font-size: 16px;
+  position: relative;
+  top: -2px;
+}
+
+.x-icon-file-alt > em > button:before {
+  @include icon($file-alt);
+  font-size: 16px;
+  position: relative;
+  top: -2px;
+}
+
+.x-icon-link > em > button:before {
+  @include icon($link);
+  font-size: 16px;
+  position: relative;
+  top: -2px;
+}
+
+.x-icon-copy > em > button:before {
+  @include icon($copy);
+  font-size: 16px;
+  position: relative;
+  top: -2px;
+}
+
+.x-icon-file-text-alt > em > button:before {
+  @include icon($file-text-alt);
+  font-size: 16px;
+  position: relative;
+  top: -2px;
 }
 /*.x-tree-arrows img.x-tree-elbow-plus:after,
 .x-tree-arrows img.x-tree-elbow-end-plus:after,
