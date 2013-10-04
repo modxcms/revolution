@@ -8,7 +8,7 @@ MODx.page.UpdateSource = function(config) {
             ,cancel: 'source'
        }
        ,buttons: [{
-            process: 'update', text: _('save'), method: 'remote'
+            process: 'source/update', text: _('save'), method: 'remote'
             ,checkDirty: false
             ,id: 'modx-btn-save'
             ,keys: [{
@@ -16,7 +16,7 @@ MODx.page.UpdateSource = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:'source/index'}
+            process: 'cancel', text: _('cancel'), params: {a:'source'}
         }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
