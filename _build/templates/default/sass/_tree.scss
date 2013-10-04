@@ -288,19 +288,216 @@ ul.x-tab-strip-top {
   background-position: 0 -96px;
 }
 
-/* tree menu splitter */
-.x-layout-split {
-  background: $mainBg;
-  border-width: 0 0 0 1px;
-  border: 1px solid $borderColor;
-  width: 8px;
-  z-index: 0;
-  .x-layout-mini {
-    left: -6px;
+
+.x-tree .x-panel-body {
+  /*background-color:#fff;*/
+  /*border:1px solid #E4E4E4;*/
+}
+.x-tree-node-el .x-tree-node-icon {
+  display: inline-block;
+}
+/*.x-tree-node-expanded .x-tree-node-icon {
+  background-image: url(../images/modx-theme/tree/folder-open.gif);
+}
+.x-tree-node-leaf .x-tree-node-icon {
+  background-image: url(../images/modx-theme/tree/leaf.gif);
+}
+.x-tree-node-collapsed .x-tree-node-icon {
+  background-image: url(../images/modx-theme/tree/folder.gif);
+}*/
+.x-tree-node-loading .x-tree-node-icon {
+  background-image: url(../images/modx-theme/tree/loading.gif) !important;
+}
+/*.x-tree-node .x-tree-node-inline-icon {
+  background-image: none;
+}*/
+.x-tree-node-loading a span {
+  color: #444444;
+  font-style: italic;
+}
+.ext-ie .x-tree-node-el input {
+  height: 15px;
+  width: 15px;
+}
+/*.x-tree-lines .x-tree-elbow {
+  background-image: url(../images/modx-theme/tree/elbow.gif);
+}
+.x-tree-lines .x-tree-elbow-plus {
+  background-image: url(../images/modx-theme/tree/elbow-plus.gif);
+}
+.x-tree-lines .x-tree-elbow-minus {
+  background-image: url(../images/modx-theme/tree/elbow-minus.gif);
+}
+.x-tree-lines .x-tree-elbow-end {
+  background-image: url(../images/modx-theme/tree/elbow-end.gif);
+}
+.x-tree-lines .x-tree-elbow-end-plus {
+  background-image: url(../images/modx-theme/tree/elbow-end-plus.gif);
+}
+.x-tree-lines .x-tree-elbow-end-minus {
+  background-image: url(../images/modx-theme/tree/elbow-end-minus.gif);
+}
+.x-tree-lines .x-tree-elbow-line {
+  background-image: url(../images/modx-theme/tree/elbow-line.gif);
+}
+.x-tree-no-lines .x-tree-elbow-plus {
+  background-image: url(../images/modx-theme/tree/elbow-plus-nl.gif);
+}
+.x-tree-no-lines .x-tree-elbow-minus {
+  background-image: url(../images/modx-theme/tree/elbow-minus-nl.gif);
+}
+.x-tree-no-lines .x-tree-elbow-end-plus {
+  background-image: url(../images/modx-theme/tree/elbow-end-plus-nl.gif);
+}
+.x-tree-no-lines .x-tree-elbow-end-minus {
+  background-image: url(../images/modx-theme/tree/elbow-end-minus-nl.gif);
+}*/
+.x-tree-root-ct {
+  border-radius: 0;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.x-tree-root-node {
+  margin: 0;
+}
+
+.x-tree-root-node > .x-tree-node > .x-tree-node-ct {
+  margin-left: -7px !important;
+  margin: 0 !important;
+  padding: 0;
+}
+.tree-pseudoroot-node {
+  background-color: darken($navbarHover, 2%);
+  border-bottom: 1px solid $borderColor;
+  font-weight: bold;
+  line-height: 2;
+  padding: 0 .4em 0 16px;
+  
+  > .icon-large {
+    font-weight: normal;
+  }
+
+  .modx-tree-node-tool-ct .x-btn {
+      margin-left: 2px;
   }
 }
 
-.x-layout-split:hover {
-  background: $navbarHover;
-  box-shadow: 2px 0 2px $borderShadow;
+.tree-pseudoroot-node:hover .x-btn-fontawesome {
+  opacity: 0.65;
+}
+
+.x-tree-arrows .x-tree-elbow-plus,
+.x-tree-arrows .x-tree-elbow-minus,
+.x-tree-arrows .x-tree-elbow-end-plus,
+.x-tree-arrows .x-tree-elbow-end-minus {
+  background: none;
+}
+.x-tree-arrows .x-tree-elbow-plus:before,
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-plus:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before {
+  content: '\f0da';
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  background: transparent 0 0;
+  display: inline-block;
+  width: 10px;
+  padding-left: 6px;
+  margin: 0 0 0 -16px;
+}
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before {
+  content: '\f0d7';
+  padding-left: 4px;
+  width: 12px;
+}
+/*.x-tree-arrows img.x-tree-elbow-plus:after,
+.x-tree-arrows img.x-tree-elbow-end-plus:after,
+.x-tree-arrows img.x-tree-elbow-minus:after,
+.x-tree-arrows img.x-tree-elbow-end-minus:after,
+.x-tree-lines img.x-tree-elbow-plus:after,
+.x-tree-lines img.x-tree-elbow-end-plus:after,
+.x-tree-lines img.x-tree-elbow-minus:after,
+.x-tree-lines img.x-tree-elbow-end-minus:after,
+.x-tree-no-lines img.x-tree-elbow-plus:after,
+.x-tree-no-lines img.x-tree-elbow-end-plus:after,
+.x-tree-no-lines img.x-tree-elbow-minus:after,*/
+/*i.x-tree-elbow-end-minus:after,
+i.x-tree-elbow-plus:after,
+i.x-tree-elbow-end-plus:after,
+i.x-tree-elbow-minus:after,
+i.x-tree-elbow-end-minus:after,
+img.x-tree-elbow-end-minus:after,
+img.x-tree-elbow-plus:after,
+img.x-tree-elbow-end-plus:after,
+img.x-tree-elbow-minus:after,
+img.x-tree-elbow-end-minus:after {
+  content: '\f0da';
+  font-family: FontAwesome !important;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  background: none !important;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 16px;
+  height: 18px;
+}
+i.x-tree-elbow-minus:after,
+i.x-tree-elbow-end-minus:after,
+img.x-tree-elbow-minus:after,
+img.x-tree-elbow-end-minus:after {
+  content: '\f0d7';
+}*/
+
+.x-tree-node {
+  color: $treeText;
+  font: normal 12px arial, tahoma, helvetica, sans-serif;
+}
+.x-tree-node a, .x-dd-drag-ghost a {
+  color: $treeText;
+}
+.x-tree-node a span, .x-dd-drag-ghost a span {
+  color: $treeText;
+}
+.x-tree-node .x-tree-node-disabled a span {
+  color: lighten($treeText, 50%);
+}
+.x-tree-node div.x-tree-drag-insert-below {
+  border-bottom-color: #686868;
+}
+.x-tree-node div.x-tree-drag-insert-above {
+  border-top-color: #686868;
+}
+.x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-below a {
+  border-bottom-color: #686868;
+}
+.x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-above a {
+  border-top-color: #686868;
+}
+.x-tree-node .x-tree-drag-append a span {
+  background-color: #ddd;
+  border-color: $borderColor;
+}
+.x-tree-node .x-tree-node-over {
+  background-color: $almostWhite;
+}
+.x-tree-node .x-tree-selected {
+  background-color: lighten($colorSplash, 42.5%);
+}
+.x-tree-drop-ok-append .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-add.gif);
+}
+.x-tree-drop-ok-above .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-over.gif);
+}
+.x-tree-drop-ok-below .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-under.gif);
+}
+.x-tree-drop-ok-between .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-between.gif);
 }
