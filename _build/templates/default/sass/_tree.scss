@@ -22,9 +22,6 @@ ul.x-tab-strip-top {
 }
 
 #modx-leftbar .x-tree-root-ct {
-  -moz-border-radius: 0 0 3px 3px;
-  -webkit-border-radius: 0 0 3px 3px;
-  border-radius: 0 0 3px 3px;
   padding: 6px;
 }
 
@@ -48,7 +45,7 @@ ul.x-tab-strip-top {
 }
 
 /* icons */
-.icon-resource {
+/*.icon-resource {
   background-image: url(../images/restyle/icons/page_white.png) !important;
 }
 
@@ -95,7 +92,7 @@ ul.x-tab-strip-top {
 .icon-staticresource {
   background-image: url(../images/restyle/icons/page_white_gear.png) !important;
 }
-/*
+
 .icon-menu {
   background-image: url(../images/restyle/icons/resources.png) !important;
 }*/
@@ -112,7 +109,9 @@ ul.x-tab-strip-top {
   background-image: url(../images/restyle/icons/property-set.png) !important;
 }
 
-/*.icon-file { background-image:url(../images/restyle/icons/disk.png) !important; }*/
+/*.icon-file { 
+  background-image:url(../images/restyle/icons/disk.png) !important; 
+}*/
 .icon-rss {
   background-image: url(../images/restyle/icons/feed.png) !important;
 }
@@ -291,29 +290,17 @@ ul.x-tab-strip-top {
   background-position: 0 -96px;
 }
 
-
+/*
 .x-tree .x-panel-body {
-  /*background-color:#fff;*/
-  /*border:1px solid #E4E4E4;*/
-}
+  background-color:#fff;
+  border:1px solid #E4E4E4;
+}*/
 .x-tree-node-el .x-tree-node-icon {
   display: inline-block;
 }
-/*.x-tree-node-expanded .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/folder-open.gif);
-}
-.x-tree-node-leaf .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/leaf.gif);
-}
-.x-tree-node-collapsed .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/folder.gif);
-}*/
 .x-tree-node-loading .x-tree-node-icon {
   background-image: url(../images/modx-theme/tree/loading.gif) !important;
 }
-/*.x-tree-node .x-tree-node-inline-icon {
-  background-image: none;
-}*/
 .x-tree-node-loading a span {
   color: #444444;
   font-style: italic;
@@ -322,39 +309,6 @@ ul.x-tab-strip-top {
   height: 15px;
   width: 15px;
 }
-/*.x-tree-lines .x-tree-elbow {
-  background-image: url(../images/modx-theme/tree/elbow.gif);
-}
-.x-tree-lines .x-tree-elbow-plus {
-  background-image: url(../images/modx-theme/tree/elbow-plus.gif);
-}
-.x-tree-lines .x-tree-elbow-minus {
-  background-image: url(../images/modx-theme/tree/elbow-minus.gif);
-}
-.x-tree-lines .x-tree-elbow-end {
-  background-image: url(../images/modx-theme/tree/elbow-end.gif);
-}
-.x-tree-lines .x-tree-elbow-end-plus {
-  background-image: url(../images/modx-theme/tree/elbow-end-plus.gif);
-}
-.x-tree-lines .x-tree-elbow-end-minus {
-  background-image: url(../images/modx-theme/tree/elbow-end-minus.gif);
-}
-.x-tree-lines .x-tree-elbow-line {
-  background-image: url(../images/modx-theme/tree/elbow-line.gif);
-}
-.x-tree-no-lines .x-tree-elbow-plus {
-  background-image: url(../images/modx-theme/tree/elbow-plus-nl.gif);
-}
-.x-tree-no-lines .x-tree-elbow-minus {
-  background-image: url(../images/modx-theme/tree/elbow-minus-nl.gif);
-}
-.x-tree-no-lines .x-tree-elbow-end-plus {
-  background-image: url(../images/modx-theme/tree/elbow-end-plus-nl.gif);
-}
-.x-tree-no-lines .x-tree-elbow-end-minus {
-  background-image: url(../images/modx-theme/tree/elbow-end-minus-nl.gif);
-}*/
 .x-tree-root-ct {
   border-radius: 0;
   overflow: hidden;
@@ -414,79 +368,28 @@ ul.x-tab-strip-top {
   width: 12px;
 }
 
-.x-icon-trash > em > button:before {
-  @include icon($trash);
-  font-size: 16px;
-  position: relative;
-  top: -2px;
+/* icons for the various tree elements */
+.tree-context:before {
+  @include icon($globe);
 }
-
-.x-icon-file-alt > em > button:before {
+.x-tree-node-expanded .tree-folder:before {
+  @include icon($folder-open);
+}
+.x-tree-node-collapsed .tree-folder:before {
+  @include icon($folder-close);
+}
+.tree-resource:before {
   @include icon($file-alt);
-  font-size: 16px;
-  position: relative;
-  top: -2px;
 }
-
-.x-icon-link > em > button:before {
-  @include icon($link);
-  font-size: 16px;
-  position: relative;
-  top: -2px;
-}
-
-.x-icon-copy > em > button:before {
-  @include icon($copy);
-  font-size: 16px;
-  position: relative;
-  top: -2px;
-}
-
-.x-icon-file-text-alt > em > button:before {
+.tree-static-resource:before {
   @include icon($file-text-alt);
-  font-size: 16px;
-  position: relative;
-  top: -2px;
 }
-/*.x-tree-arrows img.x-tree-elbow-plus:after,
-.x-tree-arrows img.x-tree-elbow-end-plus:after,
-.x-tree-arrows img.x-tree-elbow-minus:after,
-.x-tree-arrows img.x-tree-elbow-end-minus:after,
-.x-tree-lines img.x-tree-elbow-plus:after,
-.x-tree-lines img.x-tree-elbow-end-plus:after,
-.x-tree-lines img.x-tree-elbow-minus:after,
-.x-tree-lines img.x-tree-elbow-end-minus:after,
-.x-tree-no-lines img.x-tree-elbow-plus:after,
-.x-tree-no-lines img.x-tree-elbow-end-plus:after,
-.x-tree-no-lines img.x-tree-elbow-minus:after,*/
-/*i.x-tree-elbow-end-minus:after,
-i.x-tree-elbow-plus:after,
-i.x-tree-elbow-end-plus:after,
-i.x-tree-elbow-minus:after,
-i.x-tree-elbow-end-minus:after,
-img.x-tree-elbow-end-minus:after,
-img.x-tree-elbow-plus:after,
-img.x-tree-elbow-end-plus:after,
-img.x-tree-elbow-minus:after,
-img.x-tree-elbow-end-minus:after {
-  content: '\f0da';
-  font-family: FontAwesome !important;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: inherit;
-  background: none !important;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  width: 16px;
-  height: 18px;
+.tree-weblink:before {
+  @include icon($link);
 }
-i.x-tree-elbow-minus:after,
-i.x-tree-elbow-end-minus:after,
-img.x-tree-elbow-minus:after,
-img.x-tree-elbow-end-minus:after {
-  content: '\f0d7';
-}*/
+.tree-symlink:before {
+  @include icon($copy);
+}
 
 .x-tree-node {
   color: $treeText;
