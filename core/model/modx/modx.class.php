@@ -981,6 +981,18 @@ class modX extends xPDO {
         return $url;
     }
 
+    /**
+     * Filter a string for use as a URL path segment.
+     *
+     * @param string $string The string to filter into a valid path segment.
+     * @param array $options Optional filter setting overrides.
+     *
+     * @return string|null A valid path segment string or null if an error occurs.
+     */
+    public function filterPathSegment($string, array $options = array()) {
+        return $this->call('modResource', 'filterPathSegment', array(&$this, $string, $options));
+    }
+
     public function findResource($uri, $context = '') {
         $resourceId = false;
         if (empty($context) && isset($this->context)) $context = $this->context->get('key');
