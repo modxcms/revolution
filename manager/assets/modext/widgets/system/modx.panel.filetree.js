@@ -11,14 +11,10 @@ MODx.panel.FileTree = function(config) {
     });
     MODx.panel.FileTree.superclass.constructor.call(this,config);
 
-
  //   this.on('render',this.o)
 };
 Ext.extend(MODx.panel.FileTree,MODx.FormPanel,{
-
     sourceTrees: []
-
-
 
     ,getSourceList: function(){
         MODx.Ajax.request({
@@ -42,9 +38,7 @@ Ext.extend(MODx.panel.FileTree,MODx.FormPanel,{
         })
     }
 
-
     ,onSourceListReceived: function(sources){
-
         for(var k=0;k<sources.length;k++){
             var source = sources[k];
             if(!this.sourceTrees[source.name]){
@@ -62,12 +56,9 @@ Ext.extend(MODx.panel.FileTree,MODx.FormPanel,{
 
             this.add(this.sourceTrees[source.name]);
         }
-
+        this.doLayout();
       //  this.render();
     }
-
-
-
 });
 Ext.reg('modx-panel-filetree',MODx.panel.FileTree);
 
