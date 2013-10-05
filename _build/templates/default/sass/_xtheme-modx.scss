@@ -107,16 +107,10 @@ textarea.x-form-field, .x-form-textarea {
 }
 
 .x-form-text, textarea.x-form-field, .x-form-textarea {
-  -khtml-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  -webkit-border-radius: 2px;
   background-color: #fbfbfb;
   background-image: none;
-  border-color: #CCCCCC;
   border-radius: 2px;
-  border: 1px solid;
+  border: 1px solid $borderColor;
   position: relative;
 }
 
