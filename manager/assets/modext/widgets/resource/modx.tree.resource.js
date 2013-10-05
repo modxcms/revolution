@@ -20,7 +20,6 @@ MODx.tree.Resource = function(config) {
         ,remoteToolbarAction: 'resource/gettoolbar'
         ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
-
         ,tbarCfg: {
         //    hidden: true
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
@@ -200,7 +199,18 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,id: id
             }
             ,listeners: {
-                'success': {fn:function() {
+                'success': {fn:function(data) {
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    if (trashButton) {
+                        if (data.object.deletedCount == 0) {
+                            trashButton.disable();
+                        } else {
+                            trashButton.enable();
+                        }
+
+                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    }
+
                     var n = this.cm.activeNode;
                     var ui = n.getUI();
 
@@ -224,7 +234,18 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,id: id
             }
             ,listeners: {
-                'success': {fn:function() {
+                'success': {fn:function(data) {
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    if (trashButton) {
+                        if (data.object.deletedCount == 0) {
+                            trashButton.disable();
+                        } else {
+                            trashButton.enable();
+                        }
+
+                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    }
+
                     var n = this.cm.activeNode;
                     var ui = n.getUI();
 
@@ -300,59 +321,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
     }
 
-    ,showFilter: function(itm,e) {
-        if (this._filterVisible) {return false;}
-
-        var t = Ext.get(this.config.id+'-tbar');
-        var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true});
-        var tb = new Ext.Toolbar({
-            applyTo: fbd
-            ,autoHeight: true
-            ,width: '100%'
-        });
-        var cb = new Ext.form.ComboBox({
-            store: new Ext.data.SimpleStore({
-                fields: ['name','value']
-                ,data: [
-                    [_('menu_order'),'menuindex']
-                    ,[_('page_title'),'pagetitle']
-                    ,[_('publish_date'),'pub_date']
-                    ,[_('unpublish_date'),'unpub_date']
-                    ,[_('createdon'),'createdon']
-                    ,[_('editedon'),'editedon']
-                    ,[_('publishedon'),'publishedon']
-                    ,[_('alias'),'alias']
-                ]
-            })
-            ,displayField: 'name'
-            ,valueField: 'value'
-            ,forceSelection: false
-            ,editable: true
-            ,mode: 'local'
-            ,id: 'modx-resource-tree-sortby'
-            ,triggerAction: 'all'
-            ,selectOnFocus: false
-            ,width: 100
-            ,value: this.getDefaultSortBy(this.config)
-            ,listeners: {
-                'select': {fn:this.filterSort,scope:this}
-                ,'change': {fn:this.filterSort,scope:this}
-            }
-        });
-        tb.add(_('sort_by')+':');
-        tb.addField(cb);
-        tb.add('-',{
-            scope: this
-            ,cls: 'x-btn-text'
-            ,text: _('close')
-            ,handler: this.hideFilter
-        });
-        tb.doLayout();
-        this.filterBar = tb;
-        this._filterVisible = true;
-        return true;
-    }
-
     ,getDefaultSortBy: function(config) {
         var v = 'menuindex';
         if (!Ext.isEmpty(config) && !Ext.isEmpty(config.sortBy)) {
@@ -370,15 +338,16 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return v;
     }
 
-    ,filterSort: function(cb,r,i) {
-        Ext.state.Manager.set(this.treestate_id+'-sort',cb.getValue());
-        this.config.sortBy = cb.getValue();
+    ,filterSort: function(itm, e) {
         this.getLoader().baseParams = {
             action: this.config.action
-            ,sortBy: this.config.sortBy
+            ,sortBy: itm.sortBy
+            ,sortDir: itm.sortDir
+            ,node: this.cm.activeNode.ide
         };
-        this.refresh();
+        this.refreshActiveNode()
     }
+
 
     ,hideFilter: function(itm,e) {
         this.filterBar.destroy();
@@ -550,6 +519,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,handler: this.removeContext
             });
         }
+
+        if(!ui.hasClass('x-tree-node-leaf')) {
+            m.push('-');
+            m.push(this._getSortMenu());
+        }
+        
         return m;
     }
 
@@ -632,6 +607,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 });
             }
         }
+
+        if(!ui.hasClass('x-tree-node-leaf')) {
+            m.push('-');
+            m.push(this._getSortMenu());
+        }
+
         if (ui.hasClass('pview')) {
             m.push('-');
             m.push({
@@ -703,7 +684,72 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                ,menu: {items: qct}
             });
         }
+
         return m;
+    }
+
+    ,_getSortMenu: function(){
+        return [{
+            text: _('sort_by')
+            ,handler: function() {return false;}
+            ,menu: {
+                items:[{
+                    text: _('tree_order')
+                    ,sortBy: 'menuindex'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('recently_updated')
+                    ,sortBy: 'editedon'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('newest')
+                    ,sortBy: 'createdon'
+                    ,sortDir: 'DESC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('oldest')
+                    ,sortBy: 'createdon'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('publish_date')
+                    ,sortBy: 'pub_date'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('unpublish_date')
+                    ,sortBy: 'unpub_date'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('publishedon')
+                    ,sortBy: 'publishedon'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('title')
+                    ,sortBy: 'pagetitle'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                },{
+                    text: _('alias')
+                    ,sortBy: 'alias'
+                    ,sortDir: 'ASC'
+                    ,handler: this.filterSort
+                    ,scope: this
+                }]
+            }
+        }];
     }
 
     ,handleCreateClick: function(node){

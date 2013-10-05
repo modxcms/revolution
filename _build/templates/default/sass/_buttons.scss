@@ -1,3 +1,6 @@
+@import "font-awesome/variables";
+@import "font-awesome/mixins";
+
 /* action buttons bar */
 #modx-action-buttons {
   position: fixed;
@@ -9,19 +12,14 @@
   padding: 0;
   border: 0;
   font-family:$verdana;
-  td, .x-toolbar span, .x-toolbar input, div, select, label { /* #janky #shame */
-	font-family:$verdana;
+
+  .x-toolbar-left {
+    width: auto !important;
+    zoom: 1;
   }
 }
 
-
-
-#modx-action-buttons .x-toolbar-left {
-  width: auto !important;
-  zoom: 1;
-}
-
-/* standard buttons */
+/* btn style */
 .x-btn {
   *display: inline;
   background: $lightBg;
@@ -43,35 +41,18 @@
     min-width: 100%;
     vertical-align: middle;
   }
-
-  /*#modx-leftbar & {
-    font-size: 10px;
-    background: transparent;
-    border: 1px solid $borderGrey;
-    border-radius: 8px;
-    opacity: 0.6;
-
-    &:hover {
-      opacity: 1.0
-    }
-  }
-  #modx-leftbar .modx-tree-node-tool-ct & {
-    background: none;
-    color: $mediumBg;
-    border: none;
-  }*/
 }
 
 .x-btn-over {
-	border-color:darken($almostWhite,40%) !important; /* #shame */
+  border-color:darken($almostWhite,40%) !important; /* #shame */
 }
 
 #modx-abtn-save {
   background: $primaryAction;
   &.x-item-disabled {
-	opacity:1;
-	background:$desaturatedSplash;
-}
+    opacity:1;
+    background:$desaturatedSplash;
+  }
   & button,
   &.x-item-disabled * {
     color: white !important;
@@ -102,9 +83,6 @@
   border: 0 none;
 }
 
-/*.x-btn-over {
-  background: $mediumBg;
-}*/
 .x-btn-click {
   -moz-box-shadow: 0 0 3px #aaaaaa inset;
   -o-box-shadow: 0 0 3px #aaaaaa inset;
@@ -118,23 +96,11 @@
 
 .x-btn-focus {
   background: rgb(240, 240, 240);
-  /*background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);*/
-  /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
-  background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
-  background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
+  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
   border: 1px solid #658F1A;
 }
 
 .x-btn-group {
-  -khtml-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  -webkit-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #dbe0e4;
   margin-right: 2px;
@@ -160,13 +126,6 @@
 .x-btn-group .x-btn-over {
   background: #dfdfdf;
   background: rgb(240, 240, 240);
-  /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
-  background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
-  background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
   border: 1px solid #dbe0e4;
 }
 
@@ -197,7 +156,7 @@
 .x-btn-group-header {
   background-color: #dbe0e4;
   color: #73797f;
-  /*text-shadow: 0 1px 0 #fafafa;*/
+  text-shadow: 0 1px 0 #fafafa;
 }
 
 .x-btn-group-tl, .x-btn-group-tr {
@@ -361,4 +320,108 @@
   background: -webkit-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
   background: linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e6efd1,endColorstr=#9fcb57,GradientType=0);
+}
+
+/* basic tree toolbar styles */
+#modx-leftbar .x-toolbar-ct .x-btn {
+  border-radius: 15px;
+  background: $almostWhite;
+  margin: 0 3px;
+  padding: 7px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid $softGrey;
+  opacity: .7;
+  display: inline-block;
+  position: relative;
+
+  & > em > button {
+    font-size: 15px;
+    text-shadow: 0 !important;
+    overflow: visible;
+    position: absolute;
+    width: 16px;
+    height: 18px;
+    top: 6px;
+    left: 3px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  span {
+    vertical-align: middle;
+  }
+}
+#modx-leftbar #emptifier.x-item-disabled  {
+  opacity: .4 !important;
+}
+
+
+/* resource tree toolbar icons */
+.tree-new-resource > em > button:before {
+  @include icon($file-alt);
+}
+.tree-new-weblink > em > button:before {
+  @include icon($link);
+}
+.tree-new-symlink > em > button:before {
+  @include icon($copy);
+}
+.tree-new-static-resource > em > button:before {
+  @include icon($file-text-alt);
+}
+.tree-trash > em > button:before {
+  @include icon($trash);
+}
+  /* alignment overrides */
+  #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
+    top: 5px;
+    left: 2px;
+  }
+  #modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink > em > button {
+    left: 2px;
+  }
+
+
+/* element tree toolbar */
+.tree-new-template > em > button:before {
+  @include icon($columns);
+}
+.tree-new-tv > em > button:before {
+  @include icon($list-alt);
+}
+.tree-new-chunk > em > button:before {
+  @include icon($th-large);
+}
+.tree-new-snippet > em > button:before {
+  @include icon($code);
+}
+.tree-new-plugin > em > button:before {
+  @include icon($cogs);
+}
+.tree-new-category > em > button:before {
+  @include icon($folder-close);
+}
+
+
+/* accordion header row icons */
+#modx-leftbar .x-btn-fontawesome {
+  background: none;
+  border: 0;
+  display: inline;
+  opacity: 0.6;
+  margin: 0;
+  padding: 3px;
+  text-align: center;
+  i {
+    font-style: normal;
+  }
+  button {
+    display: none;
+  }
+  &:hover {
+    opacity: 1 !important;
+  }
 }

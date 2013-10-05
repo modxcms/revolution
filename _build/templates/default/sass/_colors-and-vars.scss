@@ -11,10 +11,11 @@ $primaryAction:#0f90c3;
 $success:#81B548;
 
 /* Hightlight Color:
-   use this for tab top borders, etc. … anywhere some personality is needed */
+   use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
+$lightSplash:lighten($colorSplash, 42.5%);
 
 $lightSplash:lighten($colorSplash, 42.5%);
 $mainText: #444444;
@@ -25,7 +26,7 @@ $treeText: #444444;
 $tipText: $almostWhite;
 $iconColor: $treeText;
 $unpublished: lighten($treeText, 30%) !important;
-$unpubText: normal;
+$unpubText: italic;
 $hidden: $unpublished;
 
 /* Top navigation colors */

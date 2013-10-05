@@ -86,12 +86,18 @@ class modResourceDeleteProcessor extends modProcessor {
         /* empty cache */
         $this->clearCache();
 
-        return $this->success('', $this->resource->get(array (
+        $deletedCount = $this->modx->getCount('modResource', array('deleted' => 1));
+
+        $outputArray = $this->resource->get(array (
             'id',
             'deleted',
             'deletedby',
             'deletedon'
-        )));
+        ));
+
+        $outputArray['deletedCount'] = $deletedCount;
+
+        return $this->success('', $outputArray);
     }
 
     /**
