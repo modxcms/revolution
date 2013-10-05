@@ -117,7 +117,7 @@ input::-moz-focus-inner {
 
 .wait {
   background: url("../images/style/wait.gif") no-repeat scroll center 55px transparent;
-  color: #53595F;
+  color: $darkNeutral;
   font-size: 15px;
   font-weight: bold;
   padding: 20px 10px 60px;
@@ -196,24 +196,6 @@ input::-moz-focus-inner {
 
 .grid-row-inactive {
   color: #999 !important;
-}
-
-/* action buttons bar */
-#modx-action-buttons {
-  background-color: rgba(224, 224, 224, 0.2);
-  border-radius: 3px;
-  border: none;
-  left: auto;
-  padding: 7px;
-  position: fixed;
-  right: 34px;
-  top: 50px;
-  z-index: 9;
-}
-
-#modx-action-buttons .x-toolbar-left {
-  width: auto !important;
-  zoom: 1;
 }
 
 /* collapse for resource panel */
@@ -1381,7 +1363,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 .crumbs li {
   background: url("../images/style/crumbs-bg.png") no-repeat scroll right center transparent;
-  color: #53595F;
+  color: $darkNeutral;
   float: left;
   font-size: 12px;
   font-weight: normal;
@@ -1393,7 +1375,7 @@ body.ext-ie7 .x-superboxselect-item {
 .crumbs li button {
   background-color: transparent;
   border: 0 none;
-  color: #53595F;
+  color: $darkNeutral;
   cursor: pointer;
   font-family: Arial,Helvetica,sans-serif;
   font-size: 12px;
@@ -1607,7 +1589,7 @@ body.ext-ie7 .x-superboxselect-item {
 .home-panel ol li button {
   background-color: transparent;
   border: 0 none;
-  color: #53595F;
+  color: $darkNeutral;
   cursor: pointer;
   display: block;
   font-size: 15px;
@@ -1789,7 +1771,7 @@ body.ext-ie7 .x-superboxselect-item {
   margin-right: 0;
 }
 .modx-template-detail .selected h5 {
-  color: #53595F;
+  color: $darkNeutral;
   font-size: 14px;
   margin: 10px 0;
 }
@@ -1807,11 +1789,11 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.4;
 }
 .modx-template-detail .item a {
-  color: #53595F;
+  color: $darkNeutral;
   font-style: italic;
 }
 .modx-template-detail h4 {
-  color: #53595F;
+  color: $darkNeutral;
   font-size: 14px;
   margin: 10px 0;
   text-shadow: 0 1px 0 #FFFFFF;
@@ -1912,7 +1894,7 @@ body.ext-ie7 .x-superboxselect-item {
   width: 100%;
 }
 .thumb-wrapper .name {
-  color: #53595F;
+  color: $darkNeutral;
   font-size: 12px;
   font-weight: bold;
   margin-top: 10px;
@@ -1952,7 +1934,7 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: center;
 }
 .x-grid3-col-meta-col {
-  color: #53595F;
+  color: $darkNeutral;
 }
 .x-grid3-col-info-col {
   color: #92AF4C;

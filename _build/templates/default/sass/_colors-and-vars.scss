@@ -1,10 +1,20 @@
 $softGrey: rgb(220, 220, 220);
 $almostWhite: rgb(240, 240, 240);
 $dropdownBg: $almostWhite;
+$white:white;
+$black:#020608;
+$lightBg:$almostWhite;
+$darkNeutral:#53595F;
+$labelText:$darkNeutral;
+$mediumBg:$softGrey;
+$primaryAction:#0f90c3;
+$success:#81B548;
 
 /* Hightlight Color:
-   use this for tab top borders, etc. … anywhere some personality is needed */
-$colorSplash: #3875ae;
+   use this for tab top borders, etc. … anywhere some personality is needed */
+$colorSplash: $primaryAction;
+$desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
+$desturatedSuccess:lighten(desaturate($success,100%),10%);
 
 $mainText: #444444;
 $headerText: #555555;
@@ -14,7 +24,7 @@ $treeText: #444444;
 $tipText: $almostWhite;
 $iconColor: $treeText;
 $unpublished: lighten($treeText, 30%) !important;
-$unpubText: italic;
+$unpubText: normal;
 $hidden: $unpublished;
 
 /* Top navigation colors */
@@ -26,6 +36,7 @@ $navbarRadius: 2px;
 
 $borderColor: rgb(222, 222, 222);
 $borderShadow: rgba(0, 0, 0, 0.025);
+$primaryBorder:rgb(192,192,192);
 
 $mainBg: rgb(234, 234, 234);
 $tabBg: white;
@@ -40,5 +51,6 @@ $fontSmall: normal 11px arial, helvetica, tahoma, sans-serif;
 $fontMedium: normal 12px arial, helvetica, tahoma, sans-serif;
 $fontNormal: normal 13px arial, helvetica, tahoma, sans-serif;
 $fontH3: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+$fontH2: normal 25px helvetica,arial,freesans,clean,sans-serif;
 
 $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;

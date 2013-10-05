@@ -420,7 +420,7 @@ ul.x-tab-strip-top {
   background-color: $almostWhite;
 }
 .x-tree-node .x-tree-selected {
-  background-color: lighten($colorSplash, 42.5%);
+  background-color: lighten(desaturate($colorSplash,45%),50%);
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-add.gif);
