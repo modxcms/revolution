@@ -15,6 +15,7 @@ $success:#81B548;
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
+$lightSplash:lighten($colorSplash, 42.5%);
 
 $mainText: #444444;
 $headerText: #555555;
