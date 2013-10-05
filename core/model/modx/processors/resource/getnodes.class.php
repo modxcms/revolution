@@ -327,7 +327,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             ),
             'leaf' => false,
             'cls' => implode(' ',$class),
-            'iconCls' => $this->modx->getOption('mgr_tree_icon_context',null,'icon-globe'),
+            'iconCls' => $this->modx->getOption('mgr_tree_icon_context',null,'tree-context'),
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => 'modContext',
             'pseudoroot' => true,
@@ -393,22 +393,22 @@ class modResourceGetNodesProcessor extends modProcessor {
         // Check for an icon class on the resource template
         $tplIcon = $resource->Template ? $resource->Template->icon : '';
         $rsrcType = ltrim(strtolower($resource->get('class_key')),'mod');
-        $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.$rsrcType, null,'icon-file');
+        $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.$rsrcType, null,'tree-resource');
 
         if (strlen($tplIcon)) {
             $iconCls[] = $defaultIcon;
         }
         elseif ($rsrcType === 'weblink') {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink',null,'icon-link');
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink',null,'tree-weblink');
         }
         elseif ($rsrcType === 'symlink') {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_symlink',null,'icon-copy');
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_symlink',null,'tree-symlink');
         }
         elseif ($rsrcType === 'staticresource') {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_staticresource',null,'icon-file-text');
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_staticresource',null,'tree-static-resource');
         }
         elseif ($resource->isfolder) {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'icon-folder-close');
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'tree-folder');
         }
         else $iconCls[] = $defaultIcon;
 

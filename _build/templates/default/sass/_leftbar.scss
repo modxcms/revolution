@@ -6,64 +6,19 @@
   margin: inherit 6px !important;
 }
 
-.x-tree-root-ct {
-  border-radius: 0;
-  overflow: hidden;
-  padding: 0 !important;
-}
-
-.x-tree-root-node {
-  margin: 0;
-}
-
-.x-tree-root-node > .x-tree-node > .x-tree-node-ct {
-  margin-left: -7px !important;
-  margin: 0 !important;
-  padding: 0;
-}
-
-.tree-pseudoroot-node {
-  background-color: darken($navbarHover, 2%);
-  border-bottom: 1px solid $borderColor;
-  font-weight: bold;
-  line-height: 2;
-  padding: 0 .4em;
-  > .icon-large {
-    font-weight: normal;
-  }
-  .x-tree-ec-icon {
-    float: right;
-    margin-top: 2px;
-  }
-  .modx-tree-node-tool-ct {
-    //  display: none;
-    .x-btn {
-      margin-left: 2px;
-    }
-  }
-  &:hover .modx-tree-node-tool-ct {
-    display: block;
+/* tree menu splitter */
+.x-layout-split {
+  background: $mainBg;
+  border-width: 0 0 0 1px;
+  border: 1px solid $borderColor;
+  width: 8px;
+  z-index: 0;
+  .x-layout-mini {
+    left: -6px;
   }
 }
 
-.x-btn-fontawesome {
-  background: none;
-  border: 0;
-  display: inline;
-  opacity: 0.2;
-  padding: 6px;
-  text-align: center;
-  i {
-    font-style: normal;
-  }
-  button {
-    display: none;
-  }
-  &:hover {
-    opacity: 1 !important;
-  }
-}
-
-.tree-pseudoroot-node:hover .x-btn-fontawesome {
-  opacity: 0.65;
+.x-layout-split:hover {
+  background: $navbarHover;
+  box-shadow: 2px 0 2px $borderShadow;
 }

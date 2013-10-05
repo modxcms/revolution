@@ -16,14 +16,13 @@ MODx.tree.Element = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'element/getnodes'
         ,sortAction: 'element/sort'
-        ,useDefaultToolbar: true
+        ,useDefaultToolbar: false
         ,baseParams: {
             currentElement: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
         }
         ,tbar: [{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/template.png'
-            ,cls: 'x-btn-icon'
+            cls: 'tree-new-template'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
                 this.redirect('index.php?a=element/template/create');
@@ -31,8 +30,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/tv.png'
-            ,cls: 'x-btn-icon'
+            cls: 'tree-new-tv'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
                 this.redirect('index.php?a=element/tv/create');
@@ -40,8 +38,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/chunk.png'
-            ,cls: 'x-btn-icon'
+            cls: 'tree-new-chunk'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
                 this.redirect('index.php?a=element/chunk/create');
@@ -49,8 +46,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/snippet.png'
-            ,cls: 'x-btn-icon'
+            cls: 'tree-new-snippet'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
                 this.redirect('index.php?a=element/snippet/create');
@@ -58,8 +54,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/plugin.png'
-            ,cls: 'x-btn-icon'
+            cls: 'tree-new-plugin'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
                 this.redirect('index.php?a=element/plugin/create');
@@ -67,8 +62,7 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
-            ,cls: 'x-btn-icon'
+            cls: 'tree-new-category'
             ,tooltip: {text: _('new_category')}
             ,handler: function() {
                 this.createCategory(null,{target: this.getEl()});

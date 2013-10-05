@@ -149,10 +149,6 @@ input::-moz-focus-inner {
   background: $mainBg;
 }
 
-#modx-leftbar .x-btn {
-  padding: 4px;
-}
-
 #modx-container {
   height: 100%;
   width: 100%;
@@ -200,24 +196,6 @@ input::-moz-focus-inner {
 
 .grid-row-inactive {
   color: #999 !important;
-}
-
-/* action buttons bar */
-#modx-action-buttons {
-  background-color: rgba(224, 224, 224, 0.2);
-  border-radius: 3px;
-  border: none;
-  left: auto;
-  padding: 7px;
-  position: fixed;
-  right: 34px;
-  top: 50px;
-  z-index: 9;
-}
-
-#modx-action-buttons .x-toolbar-left {
-  width: auto !important;
-  zoom: 1;
 }
 
 /* collapse for resource panel */
