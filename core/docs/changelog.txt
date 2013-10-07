@@ -25,6 +25,8 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.10-pl (October 7, 2013)
+====================================
 - Increase modTransportPackage version columns range to smallint
 - [#10211] Fix parser state bug triggered by media sources
 - Fix loading modResource derivatives in class_key dropdown
