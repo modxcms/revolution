@@ -5,6 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-12-04
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -22,7 +23,7 @@ $_lang['onlineusers_action'] = 'アクション';
 $_lang['onlineusers_actionid'] = 'アクションID';
 $_lang['onlineusers_ipaddress'] = 'IPアドレス';
 $_lang['onlineusers_lasthit'] = '最終アクセス';
-$_lang['onlineusers_message'] = '直近20分以内のアクティブなユーザー一覧を表示しています。(現在時刻 [[+curtime]])';
+$_lang['onlineusers_message'] = '直近20分以内のアクティブなユーザー一覧を表示しています。（現在時刻 [[+curtime]]）';
 $_lang['onlineusers_title'] = 'オンラインユーザー';
 $_lang['onlineusers_user'] = 'ユーザー';
 $_lang['onlineusers_userid'] = 'ユーザーID';

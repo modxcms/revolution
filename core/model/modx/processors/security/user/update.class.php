@@ -63,7 +63,6 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         $this->setDefaultProperties(array(
             'class_key' => $this->classKey,
         ));
-        $this->classKey = $this->getProperty('class_key');
         return parent::initialize();
     }
 

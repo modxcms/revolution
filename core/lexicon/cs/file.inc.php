@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-11-19
+ * @updated 2013-08-27
  */
 // $_lang['directory'] = 'Directory';
 $_lang['directory'] = 'Složka';
@@ -325,3 +325,9 @@ $_lang['upf_uploading_desc'] = 'Nahrávám: {0} z {1} souboru v pořádku.';
 
 // $_lang['upload_files'] = 'Upload Files';
 $_lang['upload_files'] = 'Nahrát soubory';
+
+// $_lang['file_err_ae'] = 'File %s already exists';
+$_lang['file_err_ae'] = 'Soubor %s již existuje';
+
+// $_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';
+$_lang['file_err_create'] = 'Při vytváření souboru nastala neznámá chyba.';

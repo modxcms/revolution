@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * @author enogu http://www.kuroienogu.net/
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp 2012-05-28
@@ -38,7 +38,7 @@ $_lang['primary_group'] = 'プライマリーグループ';
 $_lang['profile_recent_resources'] = '最近のリソース';
 $_lang['profile_recent_resources_desc'] = '一番最近編集されたリスト.';
 $_lang['remote_data'] = 'リモートデータ';
-$_lang['role'] = 'ロール(役割)';
+$_lang['role'] = 'ロール（役割）';
 $_lang['role_create'] = 'ロールを作成';
 $_lang['role_desc_authority'] = '絶対的な数字である0を最強として、特権レベルは数字が大きいほど弱くなります。同じグループに複数のロールが存在するとき、特権レベルが強いロールはより弱い特権レベルのロールに割り当てられたパーミッションを継承します。';
 $_lang['role_desc_name'] = 'ロールの名前を設定します。コンテンツ編集者、発行担当者、システム管理者、といった役割に応じた名前をつけられます。';
@@ -54,7 +54,7 @@ $_lang['role_err_remove'] = 'ロールの削除中にエラーが発生しまし
 $_lang['role_err_remove_admin'] = '管理権限は削除できません。';
 $_lang['role_remove'] = 'ロールを削除';
 $_lang['role_remove_confirm'] = 'このロールを削除しますか？';
-$_lang['roles'] = 'ロール(役割)';
+$_lang['roles'] = 'ロール（役割）';
 $_lang['rrg_drag'] = 'リソースをリソースグループの中にドラッグしてください。';
 $_lang['ugc_mutate'] = 'ユーザーグループを追加';
 $_lang['ugc_grid_title'] = 'コンテキストへアクセス可能なユーザーグループ';
@@ -73,7 +73,7 @@ $_lang['user_blockedafter_desc'] = '指定した日時以降、ユーザーの�
 $_lang['user_blockeduntil'] = 'この日までアクセス停止';
 $_lang['user_blockeduntil_desc'] = '指定した日時までの間、ユーザーのログインはブロックされます。';
 $_lang['user_changeddata'] = 'ユーザー情報が変更されました。もう一度ログインしなおしてください。';
-$_lang['user_class_key_desc'] = 'このユーザーのMODXクラスキー。この値の役割を理解していない限り、変更しないで下さい。';
+$_lang['user_class_key_desc'] = 'このユーザーのMODXクラスキー。この値の役割を理解していない限り、変更しないでください。';
 $_lang['user_created_password_message'] = 'ユーザーを作成しました。 パスワードは[[+password]]です。';
 $_lang['user_confirm_remove'] = 'このユーザーを本当に削除しますか？';
 $_lang['user_country'] = '国';
@@ -94,14 +94,14 @@ $_lang['user_err_not_specified_blockedafter'] = 'アクセス停止日の起点�
 $_lang['user_err_not_specified_blockeduntil'] = 'アクセス停止日の終点を mm/dd/yyyy 形式で入力してください。 ';
 $_lang['user_err_not_specified_dob'] = '誕生日を mm/dd/yyyy 形式で入力してください。';
 $_lang['user_err_not_specified_email'] = '正しいメールアドレスを入力してください。';
-$_lang['user_err_not_specified_fileman_path'] = '指定したディレクトリは:<br />1) 存在しない<br />2) 読み込み権限がない.<br />3) ディレクトリではない';
+$_lang['user_err_not_specified_fileman_path'] = '指定したディレクトリは:<br />1） 存在しない<br />2） 読み込み権限がない.<br />3） ディレクトリではない';
 $_lang['user_err_not_specified_manageraccess'] = '管理画面へのアクセス権限を指定してください。';
 $_lang['user_err_not_specified_managerstartup'] = 'ログイン直後にリダイレクトさせたいドキュメントのIDを選んでください。';
 $_lang['user_err_not_specified_managertheme'] = '選択した管理画面のテーマファイルは存在しません。';
-$_lang['user_err_not_specified_mobnumber'] = '携帯電話の入力欄が空欄です。 (もしアメリカの場合、地域コードを入力してください)';
+$_lang['user_err_not_specified_mobnumber'] = '携帯電話の入力欄が空欄です。 （もしアメリカの場合、地域コードを入力してください）';
 $_lang['user_err_not_specified_notification_method'] = '新しいパスワードの通知方法を決定してください。';
-$_lang['user_err_not_specified_password'] = 'パスワードを入力して下さい。';
-$_lang['user_err_not_specified_phonenumber'] = '電話番号の入力欄が空欄です。 (もしアメリカの場合、地域コードを入力してください)';
+$_lang['user_err_not_specified_password'] = 'パスワードを入力してください。';
+$_lang['user_err_not_specified_phonenumber'] = '電話番号の入力欄が空欄です。 （もしアメリカの場合、地域コードを入力してください）';
 $_lang['user_err_not_specified_resourcedir'] = '入力したディレクトリ情報は不正です。';
 $_lang['user_err_not_specified_resource_baseurl'] = 'URLを正しく入力してください。.';
 $_lang['user_err_not_specified_uploadsize'] = 'アップロードファイルの容量を正しく入力してください。';
@@ -168,7 +168,7 @@ $_lang['user_is_blocked'] = 'このユーザー名はアクセス拒否されて
 $_lang['user_logincount'] = 'ログイン回数';
 $_lang['user_logincount_desc'] = 'このユーザーがログインした回数';
 $_lang['user_male'] = '男性';
-$_lang['user_management_msg'] = 'サイト(管理画面も含む)を利用できるユーザーの情報を編集します。';
+$_lang['user_management_msg'] = 'サイト（管理画面も含む）を利用できるユーザーの情報を編集します。';
 $_lang['user_mobile'] = '携帯電話番号';
 $_lang['user_new'] = '新規ユーザー';
 $_lang['user_password_changed'] = 'パスワードは正常に変更されました: [[+password]]';

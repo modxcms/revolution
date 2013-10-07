@@ -6,7 +6,7 @@
 * @package modx
 * @subpackage lexicon
 * @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org 2012-09-21
+* @author honda http://kogus.org 2012-12-04
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
 * @author yamamoto http://kyms.jp
@@ -17,7 +17,7 @@ $_lang['chunk'] = 'チャンク';
 $_lang['chunk_desc_category'] = 'このチャンクを所属させるカテゴリーを選択します。';
 $_lang['chunk_desc_description'] = 'チャンクの説明文を設定します。';
 $_lang['chunk_desc_name'] = 'チャンクの名前を設定します。この値はタグ名として使用されます。';
-$_lang['chunk_code'] = 'チャンク コード (html)';
+$_lang['chunk_code'] = 'チャンク コード（html）';
 $_lang['chunk_desc'] = '説明';
 $_lang['chunk_delete_confirm'] = 'このチャンクを本当に削除しますか？';
 $_lang['chunk_duplicate_confirm'] = 'このチャンクを複製しますか？';

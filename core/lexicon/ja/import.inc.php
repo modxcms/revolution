@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-08-16
+ * @author honda http://kogus.org 2012-12-04
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -23,7 +23,7 @@ $_lang['import_site_failed'] = '<span style="color:#990000">失敗</span>';
 $_lang['import_site_html'] = 'htmlからサイトをインポート';
 $_lang['import_site_importing_document'] = 'インポート中のファイル <strong>%s</strong> ';
 $_lang['import_site_maxtime'] = '<span style="white-space:nowrap;">インポート時間の上限:</span>';
-$_lang['import_site_maxtime_message'] = 'サイトのインポート処理に使用できる最大秒数を指定します。（PHPの指定処理秒数を上書きします）0は処理時間の制限なしを意味します。0や大きな数字を指定することはサーバーに負荷をかけ問題を起こしやすくなるため、お勧めできません。';
+$_lang['import_site_maxtime_message'] = 'サイトのインポート処理に使用できる最大秒数を指定します（PHPの指定処理秒数を上書きします）。0は処理時間の制限なしを意味します。0や大きな数字を指定することはサーバーに負荷をかけ問題を起こしやすくなるため、お勧めできません。';
 $_lang['import_site_message'] = 'この機能を使うと、htmlで記述されたサイトを丸ごとデータベースにインポートすることができます。まずインポートするファイルやフォルダをassets/importフォルダにコピーして置きます。<p />「インポート開始」ボタンをクリックすればスタートします。インポートしたファイルのデータはドキュメントツリーの選択した場所に格納されます。ファイル名はエイリアスになり、ページタイトルはドキュメントのタイトルになります。';
 $_lang['import_site_resource'] = '静的ファイルからリソースをインポート';
 $_lang['import_site_resource_message'] = '<p>このツールを使用すると、静的ファイルのセットからデータベースへ、リソースをインポートできます。 <em>core/import へファイルやフォルダをコピーする必要があります</em></p><p>下記のフォームに情報を入力し、必要に応じてインポート先となる親リソースのidをツリーで確認して入力してください。その後「リソースのインポート」ボタンを押すと、インポートが開始されます。<br />インポートされたファイルは、指定した場所にリソースとして保存されます。可能であれば、ファイル名がリソースのエイリアスとして使用され、htmlファイルの場合はページタイトルがドキュメントのタイトルとして使用されます。</p>';
