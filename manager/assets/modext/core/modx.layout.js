@@ -206,7 +206,6 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
 });
-Ext.reg('modx-layout',MODx.Layout);
 
 /**
  * Handles layout functions. In module format for easier privitization.

@@ -388,6 +388,26 @@ abstract class modManagerController {
     }
 
     /**
+     * Get an array of possible URLs to the template's directory.
+     * Override this to point to a custom directory.
+     *
+     * @param bool $specificThemeOnly Return URL only to theme specified in system settings
+     * @return array
+     */
+    public function getTemplatesUrls($specificThemeOnly = false) {
+        $urls = array();
+        $managerUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+
+        $urls[] = $managerUrl . 'templates/'.$this->theme.'/';
+
+        if ($specificThemeOnly === false) {
+            $urls[] = $managerUrl . 'templates/default/';
+        }
+
+        return $urls;
+    }
+
+    /**
      * Do permission checking in this method. Returning false will present a "permission denied" message.
      * 
      * @abstract
@@ -509,6 +529,12 @@ abstract class modManagerController {
             $siteId = $this->modx->user->getUserToken('mgr');
 
             $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
+
+            $urls = $this->getTemplatesUrls(true);
+
+            foreach($urls as $url) {
+                $externals[] = $url . 'js/layout.js';
+            }
 
             $o = '';
             $compressJs = (boolean)$this->modx->getOption('compress_js',null,true);
