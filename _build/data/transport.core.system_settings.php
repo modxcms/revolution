@@ -1065,7 +1065,7 @@ $settings['manager_theme']= $xpdo->newObject('modSystemSetting');
 $settings['manager_theme']->fromArray(array (
   'key' => 'manager_theme',
   'value' => 'default',
-  'xtype' => 'textfield',
+  'xtype' => 'modx-combo-manager-theme',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,

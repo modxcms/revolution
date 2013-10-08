@@ -455,6 +455,7 @@ MODx.combo.xType = function(config) {
                 ,[_('usergroup'),'modx-combo-usergroup']
                 ,[_('language'),'modx-combo-language']
                 ,[_('source'),'modx-combo-source']
+                ,[_('setting_manager_theme'),'modx-combo-manager-theme']
             ]
         })
         ,displayField: 'd'
