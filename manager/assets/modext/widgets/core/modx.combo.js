@@ -455,7 +455,7 @@ MODx.combo.ContentDisposition = function(config) {
     });
     MODx.combo.ContentDisposition.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.combo.ContentDisposition,Ext.form.ComboBox);
+Ext.extend(MODx.combo.ContentDisposition,MODx.combo.ComboBox);
 Ext.reg('modx-combo-content-disposition',MODx.combo.ContentDisposition);
 
 MODx.combo.ClassMap = function(config) {
