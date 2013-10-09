@@ -79,6 +79,13 @@ if ($object) {
     $object->save();
 }
 
+/* Switch manager_theme's xtype to modx-combo-manager-theme */
+$managerTheme = $modx->getObject('modSystemSetting', array('key' => 'manager_theme'));
+if ($managerTheme) {
+    $managerTheme->set('xtype', 'modx-combo-manager-theme');
+    $managerTheme->save();
+}
+
 /* Update modTransportPackage version_* and release_index fields (from 2.2.10-pl) */
 $class = 'transport.modTransportPackage';
 $table = $modx->getTableName($class);

@@ -875,3 +875,24 @@ MODx.combo.Authority = function(config) {
 };
 Ext.extend(MODx.combo.Authority,MODx.combo.ComboBox);
 Ext.reg('modx-combo-authority',MODx.combo.Authority);
+
+MODx.combo.ManagerTheme = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'theme'
+        ,hiddenName: 'theme'
+        ,displayField: 'theme'
+        ,valueField: 'theme'
+        ,fields: ['theme']
+        ,pageSize: 0
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'workspace/theme/getlist'
+        }
+        ,typeAhead: false
+        ,editable: false
+    });
+    MODx.combo.ManagerTheme.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.ManagerTheme,MODx.combo.ComboBox);
+Ext.reg('modx-combo-manager-theme',MODx.combo.ManagerTheme);
