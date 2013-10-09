@@ -25,6 +25,20 @@ class modTemplateUpdateProcessor extends modElementUpdateProcessor {
     public $beforeSaveEvent = 'OnBeforeTempFormSave';
     public $afterSaveEvent = 'OnTempFormSave';
 
+    public function beforeSave() {
+        $isStatic = intval($this->getProperty('static', 0));
+
+        if ($isStatic == 1) {
+            $staticFile = $this->getProperty('static_file');
+
+            if (empty($staticFile)) {
+                $this->addFieldError('static_file', $this->modx->lexicon('static_file_ns'));
+            }
+        }
+
+        return parent::beforeSave();
+    }
+
     public function afterSave() {
         $this->setTemplateVariables();
         return parent::afterSave();
