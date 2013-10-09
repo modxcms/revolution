@@ -177,7 +177,7 @@ MODx.panel.Template = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
