@@ -23,6 +23,20 @@ class modChunkUpdateProcessor extends modElementUpdateProcessor {
     public $beforeSaveEvent = 'OnBeforeChunkFormSave';
     public $afterSaveEvent = 'OnChunkFormSave';
 
+    public function beforeSave() {
+        $isStatic = intval($this->getProperty('static', 0));
+
+        if ($isStatic == 1) {
+            $staticFile = $this->getProperty('static_file');
+
+            if (empty($staticFile)) {
+                $this->addFieldError('static_file', $this->modx->lexicon('static_file_ns'));
+            }
+        }
+
+        return parent::beforeSave();
+    }
+
     public function cleanup() {
         return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')), array('previous_category' => $this->previousCategory)));
     }

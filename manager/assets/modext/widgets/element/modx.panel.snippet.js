@@ -104,6 +104,17 @@ MODx.panel.Snippet = function(config) {
                         ,value: config.record.static_file || ''
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
+                        ,validator: function(value){
+                            if (Ext.getCmp('modx-snippet-static').getValue() === true) {
+                                if (Ext.util.Format.trim(value) != '') {
+                                    return true;
+                                } else {
+                                    return _('static_file_ns');
+                                }
+                            }
+
+                            return true;
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-static-file'
