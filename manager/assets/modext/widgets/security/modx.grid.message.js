@@ -33,9 +33,7 @@ MODx.panel.Messages = function(config) {
                 ,user: config.user
                 ,preventRender: true
             }]
-        }],{
-            border: true
-        })]
+        }])]
     });
     MODx.panel.Messages.superclass.constructor.call(this,config);
 };

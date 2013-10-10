@@ -19,7 +19,6 @@ MODx.panel.Dashboard = function(config) {
                 autoHeight: true
                 ,border: false
             }
-            ,border: true
             ,id: 'modx-dashboard-tabs'
             ,forceLayout: true
             ,deferredRender: false
@@ -327,7 +326,7 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
         var fldStore = fld.getStore();
         var fldRi = fldStore.find('id',fld.getValue());
         var rec = fldStore.getAt(fldRi);
-        
+
         if (id != '' && this.fp.getForm().isValid()) {
 
             if (this.fireEvent('success',{

@@ -126,7 +126,7 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
         var m = [];
         m.push({
             text: _('content_type_remove')
-            ,handler: this.confirm.createDelegate(this,["remove",_('content_type_remove_confirm')])
+            ,handler: this.confirm.createDelegate(this,['system/contenttype/remove',_('content_type_remove_confirm')])
         });
         this.menu.record.menu = m;
     }
