@@ -151,7 +151,7 @@ MODx.window.UpdateSourceAccess = function(config) {
             ,id: 'modx-'+this.ident+'-principal'
             ,value: r.principal || ''
             ,baseParams: {
-                action: 'getList'
+                action: 'security/group/getList'
                 ,combo: '1'
             }
             ,anchor: '100%'
@@ -171,7 +171,7 @@ MODx.window.UpdateSourceAccess = function(config) {
             ,id: 'modx-'+this.ident+'-policy'
             ,value: r.policy || ''
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,combo: '1'
             }
             ,anchor: '100%'
@@ -249,7 +249,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,hiddenName: 'principal'
             ,id: 'modx-'+this.ident+'-usergroup'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/group/getList'
                 ,combo: '1'
             }
             ,anchor: '100%'
@@ -268,7 +268,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,hiddenName: 'policy'
             ,id: 'modx-'+this.ident+'-policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'MediaSource'
             }
             ,anchor: '100%'
