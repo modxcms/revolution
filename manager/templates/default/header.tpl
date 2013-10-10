@@ -70,7 +70,7 @@
                 {$navb}
             </ul>
         </div>
-
+    </div>
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
         <div id="modx-content">
