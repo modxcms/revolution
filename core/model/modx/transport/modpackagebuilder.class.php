@@ -43,12 +43,12 @@ class modPackageBuilder {
     */
     public $filename;
     /**
-    * @var string The xPDOTransport package object.
+    * @var xPDOTransport The xPDOTransport package object.
     * @access public
     */
     public $package;
     /**
-     * @var string The modNamespace that the package is associated with.
+     * @var modNamespace The modNamespace that the package is associated with.
      * @access public
      */
     public $namespace;
