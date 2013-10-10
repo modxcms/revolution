@@ -64,11 +64,7 @@ MODx.panel.Profile = function(config) {
                 ,user: config.user
                 ,preventRender: true
             }]
-        }],{
-            border: true
-            ,defaults: { bodyStyle: 'padding: 15px; '}
-            ,id: 'modx-panel-profile-tabs'
-        })]
+        }])]
     });
     MODx.panel.Profile.superclass.constructor.call(this,config);
 };
