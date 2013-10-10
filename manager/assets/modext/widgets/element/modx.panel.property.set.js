@@ -111,9 +111,7 @@ MODx.tree.PropertySets = function(config) {
         ,enableDD: false
         ,title: ''
         ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'element/propertyset/getNodes'
-        }
+        ,action: 'element/propertyset/getNodes'
         ,tbar: [{
             text: _('propertyset_new')
             ,handler: this.createSet
@@ -188,6 +186,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
                 }
             });
         }
+        this.winCreateSet.reset();
         this.winCreateSet.show(e.target);
     }
 
