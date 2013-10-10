@@ -218,10 +218,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
     ,clearFilter: function() {
         var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
-    	this.getStore().baseParams = {
-            action: 'system/settings/getList'
-            ,'namespace': ns
-    	};
+        this.getStore().baseParams = this.initialConfig.baseParams;
         Ext.getCmp('modx-filter-namespace').reset();
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
