@@ -1,6 +1,6 @@
 /**
  * Loads a grid of TVs assigned to the Template.
- * 
+ *
  * @class MODx.grid.TemplateTV
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -109,7 +109,8 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'element/template/tv/getList'
+            ,template: this.config.template
     	};
         Ext.getCmp('modx-temptv-filter-category').reset();
         Ext.getCmp('modx-temptv-search').setValue('');

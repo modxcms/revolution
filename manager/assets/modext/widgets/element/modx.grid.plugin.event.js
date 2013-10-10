@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Plugin Events
- * 
+ *
  * @class MODx.grid.PluginEvent
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -57,11 +57,11 @@ MODx.grid.PluginEvent = function(config) {
             ,dataIndex: 'propertyset'
             ,id: 'modx-'+this.ident+'-col-propertyset'
             ,width: 180
-            ,editor: { 
+            ,editor: {
                 xtype: 'modx-combo-property-set'
                 ,renderer: true
                 ,baseParams: {
-                    action: 'getList'
+                    action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -225,10 +225,10 @@ MODx.grid.PluginEventAssoc = function(config) {
             header: _('propertyset')
             ,dataIndex: 'propertyset'
             ,width: 150
-            ,editor: MODx.load({ 
+            ,editor: MODx.load({
                 xtype: 'modx-combo-property-set'
                 ,baseParams: {
-                    action: 'getList'
+                    action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -263,12 +263,12 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
                         ,priority: r.priority
                         ,propertyset: r.propertyset
                     });
-                    this.getStore().add(rec);                  
+                    this.getStore().add(rec);
                 },scope:this}
             }
         });
-    }    
-    
+    }
+
     ,_showMenu: function(g,ri,e) {
         var sm = this.getSelectionModel();
         e.stopEvent();
@@ -322,7 +322,7 @@ Ext.extend(MODx.window.AddPluginToEvent,MODx.Window,{
         var cb = f.findField('plugin');
         vs.id = cb.getValue();
         vs.name = cb.getRawValue();
-        
+
         if (this.fp.getForm().isValid()) {
             if (this.fireEvent('success',vs)) {
                 this.fp.getForm().reset();

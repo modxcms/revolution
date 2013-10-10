@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @class MODx.panel.Plugin
  * @extends MODx.FormPanel
  * @param {Object} config An object of config properties
@@ -186,7 +186,7 @@ MODx.panel.Plugin = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -293,7 +293,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         Ext.getCmp('modx-grid-plugin-event').getStore().commitChanges();
         this.getForm().setValues(o.result.object);
-        
+
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-plugin-category').getValue();
@@ -302,7 +302,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
             if (node) node.destroy();
             t.refreshNode(u,true);
         }
-    }    
+    }
     ,changeEditor: function() {
         this.cleanupEditor();
         this.on('success',function(o) {
@@ -312,7 +312,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
-    }    
+    }
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-plugin-plugincode');
