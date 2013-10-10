@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Context Settings
- * 
+ *
  * @class MODx.grid.ContextSettings
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -24,7 +24,7 @@ MODx.grid.ContextSettings = function(config) {
         ,tbar: [{
             text: _('create_new')
             ,scope: this
-            ,handler: { 
+            ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
                 ,baseParams: {
@@ -36,14 +36,34 @@ MODx.grid.ContextSettings = function(config) {
     });
     MODx.grid.ContextSettings.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid);
+Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid, {
+    // Override to prevent listing the whole settings
+    clearFilter: function() {
+        var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
+        this.getStore().baseParams = {
+            action: 'context/setting/getList'
+            ,'namespace': ns
+            ,context_key: this.config.context_key
+        };
+        Ext.getCmp('modx-filter-namespace').reset();
+        var acb = Ext.getCmp('modx-filter-area');
+        if (acb) {
+            acb.store.baseParams['namespace'] = ns;
+            acb.store.load();
+            acb.reset();
+        }
+        Ext.getCmp('modx-filter-key').reset();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+});
 Ext.reg('modx-grid-context-settings',MODx.grid.ContextSettings);
 
 
 
 /**
  * Update a Context Setting
- * 
+ *
  * @class MODx.window.UpdateContextSetting
  * @extends MODx.Window
  * @param {Object} config An object of config properties

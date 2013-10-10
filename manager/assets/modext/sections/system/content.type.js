@@ -11,7 +11,7 @@ MODx.page.ContentType = function(config) {
 	Ext.applyIf(config,{
         formpanel: 'modx-panel-content-type'
         ,buttons: [{
-            process: 'updateFromGrid'
+            process: 'system/contenttype/updateFromGrid'
             ,text: _('save')
             ,method: 'remote'
             ,id: 'save-type-btn'
