@@ -90,7 +90,7 @@ ul.x-tab-strip-top {
 }
 
 li.x-tab-strip-active {
-  background-color: #fff;
+  background-color: $panelBody;
   box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
   cursor: default;
   margin: 3px 0 0 2px;
@@ -133,8 +133,8 @@ ul.x-tab-strip-bottom {
 }
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
-.x-tab-panel-footer-plain .x-tab-strip-spacer {
-  background-color: #fff;
+.x-tab-panel-footer-plain .x-tab-strip-spacer { 
+  background-color: $spacer;
   border-width: 1px 0 0 !important;
   border: 1px solid #E2E3DE;
   height: 3px;
@@ -168,7 +168,7 @@ ul.x-tab-strip-bottom {
 .x-tab-panel-body {
   -moz-border-radius: 0 0 4px 4px;
   -webkit-border-radius: 0 0 4px 4px;
-  background-color: #ffffff;
+  background-color:$almostWhite;
   border-radius: 0 0 4px 4px;
   border: 1px solid #999;
 }

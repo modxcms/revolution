@@ -21,8 +21,7 @@
 }
 
 #modx-manager-search .x-form-field-wrap {
-  background-color: $almostWhite;
-  background: $dropdownBg;
+  background: $white;
   border-radius: 0;
   color: #565353;
   font-size: 12px;
@@ -37,9 +36,7 @@
 
 #modx-manager-search .x-form-field-wrap:hover,
 #modx-manager-search .x-trigger-wrap-focus {
-  @include transition(background-color, 360ms, ease-in);
-  @include transition-delay(0);
-  background: $almostWhite;
+	
 }
 
 #modx-uberbar {
