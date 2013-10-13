@@ -1,6 +1,6 @@
 /* MODX MANAGER SEARCH */
 #modx-navbar #modx-manager-search {
-  padding: 5px 8px 5px 10px;
+  padding: 5px 8px 5px 0;
 }
 
 #modx-navbar #modx-manager-search:hover {
@@ -9,7 +9,7 @@
 }
 
 #modx-manager-search .x-form-trigger {
-  background: lighten($colorSplash,20%);
+  background: $primaryAction;
   color: #fff;
   cursor: default;
   height: 16px;
