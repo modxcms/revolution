@@ -15,6 +15,10 @@
   width: 150px !important;
 }
 
+#modx-tv-tabs {
+	@include clearfix();
+}
+
 .vertical-tabs-header ul {
   border-top: 1px solid #E0E0E0;
   width: auto;
@@ -92,9 +96,23 @@ ul.x-tab-strip-top {
 li.x-tab-strip-active {
   background-color: $white;
   border:none;
-  border-top:3px solid $primaryAction;
+  /*border-top:3px solid $primaryAction;*/
+  padding-top:3px;
+  position:relative;
+  border-left:1px solid $borderColor;
+  border-right:1px solid $borderColor;
   cursor: default;
   margin: 0 0 0 2px;
+  height:40px;
+  &:before {
+	left:-1px;
+	right:-1px;
+	top:0;
+	height:3px;
+	position:absolute;
+	background:$primaryAction;
+	content:" ";
+  }
 }
 
 .x-tab-strip-wrap,
