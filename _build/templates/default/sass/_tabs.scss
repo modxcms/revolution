@@ -90,10 +90,11 @@ ul.x-tab-strip-top {
 }
 
 li.x-tab-strip-active {
-  background-color: #fff;
-  box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
+  background-color: $white;
+  border:none;
+  border-top:3px solid $primaryAction;
   cursor: default;
-  margin: 3px 0 0 2px;
+  margin: 0 0 0 2px;
 }
 
 .x-tab-strip-wrap,
