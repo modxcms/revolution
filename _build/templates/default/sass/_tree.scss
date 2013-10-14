@@ -2,14 +2,14 @@
 @import "font-awesome/mixins";
 
 .x-tab-panel-noborder {
-  background-color: rgb(240, 240, 240);
+  background-color: $almostWhite;
   border: 1px solid #E2E3DE;
   margin: 20px 0 10px;
   overflow: visible;
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-  background-color: #fff;
+  background-color: $panelBody;
 }
 
 ul.x-tab-strip-top {

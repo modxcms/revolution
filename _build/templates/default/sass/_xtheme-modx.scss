@@ -107,7 +107,7 @@ textarea.x-form-field, .x-form-textarea {
 }
 
 .x-form-text, textarea.x-form-field, .x-form-textarea {
-  background-color: #fbfbfb;
+  background-color:$white;
   background-image: none;
   border-radius: 2px;
   border: 1px solid $borderColor;
@@ -207,7 +207,7 @@ textarea.x-form-field, .x-form-textarea {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   -webkit-border-radius: 2px;
-  background: rgb(240, 240, 240);
+  background:$white;
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -248,7 +248,7 @@ textarea.x-form-field, .x-form-textarea {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   -webkit-border-radius: 2px;
-  background: rgb(240, 240, 240);
+  background: $white;
   /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
   background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
@@ -1244,7 +1244,7 @@ a.x-menu-item {
   overflow: visible;
 }
 .x-panel-body {
-  background-color: #fff;
+  background-color:$panelBody;
   border: 0;
   overflow: visible;
 }

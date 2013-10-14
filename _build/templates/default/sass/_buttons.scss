@@ -22,7 +22,7 @@
 /* btn style */
 .x-btn {
   *display: inline;
-  background: $lightBg;
+  background: $white;
   line-height: 1;
   border-radius: 3px;
   cursor: pointer;
@@ -325,13 +325,13 @@
 /* basic tree toolbar styles */
 #modx-leftbar .x-toolbar-ct .x-btn {
   border-radius: 15px;
-  background: $almostWhite;
+  background: $white;
   margin: 0 3px;
   padding: 7px;
   width: 16px;
   height: 16px;
   border: 1px solid $softGrey;
-  opacity: .7;
+  opacity: 1;
   display: inline-block;
   position: relative;
 

@@ -66,6 +66,7 @@
 }
 
 #modx-navbar ul.modx-subnav {
+  @extend %subnav;
   border-radius: 0 0 $navbarRadius $navbarRadius;
   border-top: none;
   border: 1px solid $borderColor;
@@ -75,11 +76,14 @@
   left: 0;
   line-height: 1.1;
   list-style: none;
-  margin: 0 0 0 -1px;
   padding: 0;
   position: absolute;
   top: 43px;
   z-index: 10000;
+}
+
+#modx-navbar ul.modx-subsubnav {
+	@extend %subnav;
 }
 
 #modx-navbar #modx-home-dashboard {
@@ -118,10 +122,13 @@
 
 #modx-navbar ul.modx-subnav li {
   background: $navbarDrop;
-  border-bottom: 1px solid $navbarHover;
+  border-bottom: 1px solid $borderColor;
   clear: both;
   margin: 0;
   padding: 0;
+  &:last-of-type {
+	border-bottom:none;
+  }
 }
 
 #modx-navbar ul.modx-subnav li:first-child a {
@@ -157,7 +164,7 @@
 
 #modx-navbar ul.modx-subnav ul {
   display: none;
-  left: 255px;
+  left: 271px;
   list-style: none;
   padding-left: 0;
   position: absolute;

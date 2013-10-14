@@ -1,5 +1,6 @@
 $softGrey: rgb(220, 220, 220);
 $almostWhite: rgb(240, 240, 240);
+$panelBody: rgb(250,250,250);
 $dropdownBg: $almostWhite;
 $white:white;
 $black:#020608;
@@ -30,8 +31,8 @@ $unpubText: italic;
 $hidden: $unpublished;
 
 /* Top navigation colors */
-$navbarBg: rgb(255, 255, 255);
-$navbarHover: rgb(240, 240, 240);
+$navbarBg: $almostWhite;
+$navbarHover: $white;
 $navbarDrop: $navbarBg;
 $navbarText: #222222;
 $navbarRadius: 2px;
@@ -40,7 +41,7 @@ $borderColor: rgb(203, 203, 203);
 $borderShadow: rgba(0, 0, 0, 0.025);
 $primaryBorder:rgb(192,192,192);
 
-$mainBg: rgb(234, 234, 234);
+$mainBg:$white;
 $tabBg: white;
 $tabInactiveBg: $navbarHover;
 $tabHoverBg: $navbarHover;
@@ -56,3 +57,4 @@ $fontH3: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
 $fontH2: normal 25px helvetica,arial,freesans,clean,sans-serif;
 
 $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
+$spacer:$panelBody;
