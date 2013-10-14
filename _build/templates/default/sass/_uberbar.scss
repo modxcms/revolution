@@ -53,7 +53,7 @@
 }
 
 .modx-manager-search-results {
-  @include box-sizing;
+  @include box-sizing(border-box);
   background: rgba(240, 240, 240, 0.95);
   border-radius: 0 0 2px 2px;
   border: $borderColor;
