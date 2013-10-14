@@ -13,7 +13,7 @@ $success:#81B548;
 /* Hightlight Color:
    use this for tab top borders, etc. … anywhere some personality is needed */
 $colorSplash: $primaryAction;
-$desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
+$desaturatedSplash:lighten(desaturate($primaryAction,100%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
 $lightSplash:lighten($colorSplash, 42.5%);
 
