@@ -1,58 +1,74 @@
-$softGrey: rgb(220, 220, 220);
+/* main colors */
+$white: white;
 $almostWhite: rgb(240, 240, 240);
-$dropdownBg: $almostWhite;
-$white:white;
-$black:#020608;
-$lightBg:$almostWhite;
-$darkNeutral:#53595F;
-$labelText:$darkNeutral;
-$mediumBg:$softGrey;
-$primaryAction:#0f90c3;
-$success:#81B548;
+$mainBg: rgb(234, 234, 234);
+$softGrey: rgb(220, 220, 220);
+$darkNeutral: #53595F;
+$black: #020608;
 
-/* Hightlight Color:
+$dropdownBg: $almostWhite;
+$lightBg: $almostWhite;
+$darkBg: $darkNeutral;
+$mediumBg: $softGrey;
+
+/* hightlights:
    use this for tab top borders, etc. … anywhere some personality is needed */
+$primaryAction: #0f90c3;
+$success: #81B548;
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,100%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
 $lightSplash:lighten($colorSplash, 42.5%);
 
-$lightSplash:lighten($colorSplash, 42.5%);
-$mainText: #444444;
-$headerText: #555555;
-
-/* Tree menus */
-$treeText: #444444;
+/* tree menus */
+$treeText: #444;
 $tipText: $almostWhite;
 $iconColor: $treeText;
 $unpublished: lighten($treeText, 30%) !important;
-$unpubText: italic;
+$disabled: $unpublished;
 $hidden: $unpublished;
+$unpubText: italic;
+$lockedText: italic;
 
-/* Top navigation colors */
+$deleted: red !important;
+$delTextStyle: normal;
+$delTextDeco: line-through;
+
+$treeDivider: rgb(64,64,64);
+
+
+/* top nav */
 $navbarBg: rgb(255, 255, 255);
 $navbarHover: rgb(240, 240, 240);
 $navbarDrop: $navbarBg;
-$navbarText: #222222;
+$navbarText: #222;
 $navbarRadius: 2px;
 
+/* borders */
 $borderColor: rgb(203, 203, 203);
 $borderShadow: rgba(0, 0, 0, 0.025);
 $primaryBorder:rgb(192,192,192);
 
-$mainBg: rgb(234, 234, 234);
-$tabBg: white;
+$shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
+
+/* tabs */
+$tabBg: $white;
 $tabInactiveBg: $navbarHover;
 $tabHoverBg: $navbarHover;
 $tabText: #333333;
 $tabInactiveText: $tabText;
 $tabHoverText: darken($colorSplash, 20%);
 
-$baseText: normal 13px / 1.4 Arial, Helvetica, sans-serif;
-$fontSmall: normal 11px arial, helvetica, tahoma, sans-serif;
-$fontMedium: normal 12px arial, helvetica, tahoma, sans-serif;
-$fontNormal: normal 13px arial, helvetica, tahoma, sans-serif;
-$fontH3: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
-$fontH2: normal 25px helvetica,arial,freesans,clean,sans-serif;
+/* text colors and font stacks */
+$labelText: $darkNeutral;
+$mainText: #444;
+$headerText: #555;
 
-$shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
+$bodyfonts: arial, helvetica, tahoma sans-serif;
+$headfonts: $bodyfonts;
+$baseText:   normal 13px/1.4 $bodyfonts;
+$fontSmall:  normal 11px $bodyfonts;
+$fontMedium: normal 12px $bodyfonts;
+$fontNormal: normal 13px $bodyfonts;
+$fontH2:     normal 25px $headfonts;
+$fontH3:       bold 15px $headfonts;
