@@ -16,7 +16,7 @@ MODx.page.UpdateFCSet = function(config) {
             ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'security/forms/set/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: false
@@ -36,7 +36,7 @@ MODx.page.UpdateFCSet = function(config) {
             xtype: 'modx-panel-fc-set'
             ,renderTo: 'modx-panel-fc-set-div'
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
+            //,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateFCSet.superclass.constructor.call(this,config);

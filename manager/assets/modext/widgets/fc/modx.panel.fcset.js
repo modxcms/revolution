@@ -156,7 +156,6 @@ MODx.panel.FCSet = function(config) {
             }]
         }],{
             id: 'modx-fc-set-tabs'
-            ,border: true
         })]
         ,useLoadingMask: true
         ,listeners: {
