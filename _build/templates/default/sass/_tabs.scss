@@ -17,6 +17,8 @@
 
 #modx-tv-tabs {
 	@include clearfix();
+	border-top:none;
+	margin-top:0;
 }
 
 .vertical-tabs-header ul {
@@ -153,10 +155,9 @@ ul.x-tab-strip-bottom {
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
-  background-color: #fff;
-  border-width: 1px 0 0 !important;
-  border: 1px solid #E2E3DE;
-  height: 3px;
+  background-color: $borderColor;
+  border: none;
+  height: 1px;
   margin: -2px 0 0 -1px;
 }
 
