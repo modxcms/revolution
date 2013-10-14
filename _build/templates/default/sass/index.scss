@@ -10,8 +10,7 @@
 */
 
 @import "bourbon/bourbon";
-@import "user-select";
-@import "box-sizing";
+@import "image-set";
 @import "colors-and-vars";
 @import "type";
 @import "tabs";
@@ -1336,7 +1335,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* for selectability in ext grids */
 .x-selectable, .x-selectable * {
   -khtml-user-select: all !important;
-  @include user-select(text !important);
+  user-select:text !important;
 }
 
 /* Breadcrumbs */
