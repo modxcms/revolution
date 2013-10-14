@@ -8,20 +8,20 @@ MODx.TreeDrop = function(config) {
     this.config = config;
     this.setup();
 };
-Ext.extend(MODx.TreeDrop,Ext.Component,{    
+Ext.extend(MODx.TreeDrop,Ext.Component,{
     setup: function() {
         var ddTarget = this.config.target;
         var ddTargetEl = this.config.targetEl;
         var cfg = this.config;
-        
+
         this.targetEl = new Ext.dd.DropTarget(this.config.targetEl, {
             ddGroup: this.config.ddGroup
-            
+
             ,notifyEnter: function(ddSource, e, data) {
                 if (ddTarget.getEl) {
                     var el = ddTarget.getEl();
-                    if (el) { 
-                        el.frame(); 
+                    if (el) {
+                        el.frame();
                         el.focus();
                     }
                 }
@@ -96,7 +96,7 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                 return true;
             }
         });
-    }    
+    }
 });
 Ext.reg('modx-treedrop',MODx.TreeDrop);
 
@@ -109,7 +109,7 @@ MODx.loadInsertElement = function(r) {
         xtype: 'modx-window-insert-element'
         ,record: r
         ,listeners: {
-            'success':{fn: function() {            
+            'success':{fn: function() {
             },scope:this}
             ,'hide': {fn:function() { this.destroy(); }}
         }
@@ -132,7 +132,7 @@ MODx.insertAtCursor = function(myField, myValue,h) {
     } else if (myField.selectionStart || myField.selectionStart == '0') {
         var startPos = myField.selectionStart;
         var endPos = myField.selectionEnd;
-        myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length); 
+        myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length);
         myField.selectionStart = startPos + myValue.length;
         myField.selectionEnd = myField.selectionStart;
     } else {
@@ -147,7 +147,7 @@ MODx.insertForRTE = function(v,cfg) {
         fn(v,cfg);
     } else {
         if (typeof cfg.iframeEl == 'object') {
-            var doc = cfg.iframeEl; 
+            var doc = cfg.iframeEl;
         } else {
             var doc = window.frames[0].document.getElementById(cfg.iframeEl);
         }
@@ -171,7 +171,7 @@ MODx.window.InsertElement = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('select_el_opts')
-        ,id: 'modx-window-insert-element' 
+        ,id: 'modx-window-insert-element'
         ,width: 600
         ,labelAlign: 'left'
         ,labelWidth: 160
@@ -198,7 +198,7 @@ MODx.window.InsertElement = function(config) {
             ,name: 'propertyset'
             ,id: 'modx-dise-propset'
             ,baseParams: {
-                action: 'getList'
+                action: 'element/propertyset/getList'
                 ,showAssociated: true
                 ,elementId: config.record.pk
                 ,elementType: config.record.classKey
@@ -294,7 +294,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         var v = '[[';
         var n = this.config.record.name;
         var f = this.fp.getForm();
-        
+
         if (f.findField('cached').getValue() != true) {
             v = v+'!';
         }
@@ -308,7 +308,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             v = v+'@'+f.findField('propertyset').getRawValue();
         }
         v = v+'?';
-        
+
         for (var i=0;i<this.modps.length;i++) {
             var fld = this.modps[i];
             var val = Ext.getCmp('modx-iprop-'+fld).getValue();
@@ -317,7 +317,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             v = v+' &'+fld+'=`'+val+'`';
         }
         v = v+']]';
-        
+
         if (this.config.record.iframe) {
             MODx.insertForRTE(v,this.config.record.cfg);
         } else {

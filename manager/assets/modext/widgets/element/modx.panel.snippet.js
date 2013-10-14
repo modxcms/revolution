@@ -72,7 +72,7 @@ MODx.panel.Snippet = function(config) {
                             }}
                         }
                     },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-name'
                         ,html: _('snippet_desc_name')
                         ,cls: 'desc-under'
@@ -138,7 +138,7 @@ MODx.panel.Snippet = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                     },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-category'
                         ,id: 'modx-snippet-category-help'
                         ,html: _('snippet_desc_category')
@@ -187,7 +187,7 @@ MODx.panel.Snippet = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -272,7 +272,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     ,success: function(r) {
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
-        
+
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-snippet-category').getValue();
@@ -281,7 +281,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
             if (node) node.destroy();
             t.refreshNode(u,true);
         }
-    }    
+    }
     ,changeEditor: function() {
         this.cleanupEditor();
         this.on('success',function(o) {
@@ -291,7 +291,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
-    }    
+    }
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-snippet-snippet');

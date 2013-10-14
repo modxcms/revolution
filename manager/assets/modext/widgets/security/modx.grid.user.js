@@ -116,7 +116,7 @@ MODx.grid.User = function(config) {
             ,itemId: 'usergroup'
             ,emptyText: _('user_group')+'...'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/group/getList'
                 ,addAll: true
             }
             ,value: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
