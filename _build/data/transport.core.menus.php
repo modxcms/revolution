@@ -372,7 +372,7 @@ $children[1]->fromArray(array (
   'description' => 'messages_desc',
   'parent' => 'user',
   'permissions' => 'messages',
-  'action' => 'security/messages',
+  'action' => 'security/message',
 ), '', true, true);
 
 /* logout */
