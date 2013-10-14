@@ -10,20 +10,19 @@
 */
 
 @import "bourbon/bourbon";
+@import "font-awesome/font-awesome";
 @import "image-set";
 @import "user-select";
 @import "box-sizing";
 @import "colors-and-vars";
-@import "type";
-@import "tabs";
+@import "xtheme-modx";
+@import "forms";
 @import "buttons";
+@import "tabs";
 @import "navbar";
 @import "uberbar";
-@import "tree";
 @import "utility";
-@import "xtheme-modx";
-@import "font-awesome/font-awesome";
-@import "leftbar";
+@import "tree";
 @import "help";
 
 body, body.x-border-layout-ct {
@@ -60,17 +59,6 @@ hr {
   height: 1px;
   margin: 20px;
 }
-
-textarea {
-  overflow: auto;
-}
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
 .aleft {
   text-align: left;
 }
@@ -133,7 +121,9 @@ input::-moz-focus-inner {
 }
 
 /* panel setups */
-#modx-leftbar, #modx-content, #modx-footer {
+#modx-leftbar, 
+#modx-content, 
+#modx-footer {
   position: absolute;
 }
 
@@ -161,32 +151,6 @@ input::-moz-focus-inner {
   font-size: 16px;
   margin: 0 0 0 15px;
   padding: 0 0 8px;
-}
-
-/* form fields */
-
-.modx-form .x-form-text,
-.modx-form .x-form-textarea {
-  font-size: 14px;
-}
-
-.modx-form .x-form-text {
-  height: 20px !important;
-  padding: 5px;
-}
-
-.modx-form .x-form-item label {
-  color: #505050;
-  font-size: 14px;
-}
-
-.x-form-check-wrap {
-  height: auto !important;
-}
-
-.x-form-check-wrap .x-form-cb-label {
-  color: #777;
-  font-weight: normal;
 }
 
 /* grids */
@@ -531,15 +495,12 @@ input::-moz-focus-inner {
 .x-tree-checkbox-over .x-tree-checkbox {
   background-position: -13px 0;
 }
-
 .x-tree-checkbox-down .x-tree-checkbox {
   background-position: -26px 0;
 }
-
 .x-tree-node-disabled .x-tree-checkbox {
   background-position: -39px 0;
 }
-
 .x-tree-node-checked {
   background-position: 0 -13px;
 }
@@ -547,11 +508,9 @@ input::-moz-focus-inner {
 .x-tree-checkbox-over .x-tree-node-checked {
   background-position: -13px -13px;
 }
-
 .x-tree-checkbox-down .x-tree-node-checked {
   background-position: -26px -13px;
 }
-
 .x-tree-node-disabled .x-tree-node-checked {
   background-position: -39px -13px;
 }
@@ -559,15 +518,12 @@ input::-moz-focus-inner {
 .x-tree-node-grayed {
   background-position: 0 -26px;
 }
-
 .x-tree-checkbox-over .x-tree-node-grayed {
   background-position: -13px -26px;
 }
-
 .x-tree-checkbox-down .x-tree-node-grayed {
   background-position: -26px -26px;
 }
-
 .x-tree-node-disabled .x-tree-node-grayed {
   background-position: -39px -26px;
 }
@@ -575,15 +531,12 @@ input::-moz-focus-inner {
 .x-tree-branch-unchecked .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-node-grayed {
   background-position: 0 0;
 }
-
 .x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-node-grayed {
   background-position: -13px 0;
 }
-
 .x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-node-grayed {
   background-position: -26px 0;
 }
-
 .x-tree-branch-unchecked .x-tree-node-disabled .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-node-grayed {
   background-position: -39px 0;
 }
@@ -591,15 +544,12 @@ input::-moz-focus-inner {
 .x-tree-branch-checked .x-tree-checkbox,.x-tree-branch-checked .x-tree-node-checked,.x-tree-branch-checked .x-tree-node-grayed {
   background-position: 0 -13px;
 }
-
 .x-tree-branch-checked .x-tree-checkbox-over .x-tree-checkbox,.x-tree-branch-checked .x-tree-checkbox-over .x-tree-node-checked,.x-tree-branch-checked .x-tree-checkbox-over .x-tree-node-grayed {
   background-position: -13px -13px;
 }
-
 .x-tree-branch-checked .x-tree-checkbox-down .x-tree-checkbox,.x-tree-branch-checked .x-tree-checkbox-down .x-tree-node-checked,.x-tree-branch-checked .x-tree-checkbox-down .x-tree-node-grayed {
   background-position: -26px -13px;
 }
-
 .x-tree-branch-checked .x-tree-node-disabled .x-tree-checkbox,.x-tree-branch-checked .x-tree-node-disabled .x-tree-node-checked,.x-tree-branch-checked .x-tree-node-disabled .x-tree-node-grayed {
   background-position: -39px -13px;
 }
@@ -753,8 +703,6 @@ input::-moz-focus-inner {
 
 /* status messages */
 .modx-status-msg {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   background: #f4f4f4;
   border-radius: 4px;
   left: 70%;
@@ -794,10 +742,8 @@ ul.modx-tag-list li {
 }
 
 ul.modx-tag-list li.modx-tag-checked {
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
   background-color: #779937;
-  border-radius: 10px 10px;
+  border-radius: 10px;
   color: white;
   text-decoration: none;
 }
@@ -1298,7 +1244,8 @@ body.ext-ie7 .x-superboxselect-item {
   padding-top: 4px;
 }
 
-#modx-resource-settings .modx-tv-label, #modx-page-settings .modx-tv-label {
+#modx-resource-settings .modx-tv-label, 
+#modx-page-settings .modx-tv-label {
   width: 216px;
 }
 
@@ -1843,7 +1790,6 @@ body.ext-ie7 .x-superboxselect-item {
   padding: 0;
 }
 .thumb-wrapper {
-  -khtml-border-radius: 2px;
   background-color: #F5F5F5;
   border-radius: 2px;
   border: 1px solid #cccccc;
@@ -1955,27 +1901,4 @@ body.ext-ie7 .x-superboxselect-item {
   overflow: auto;
   padding: 15px;
   white-space: pre;
-}
-.inline-form {
-  border: 0 none;
-  padding: 15px 15px 0;
-}
-.inline-form label {
-  color: #777777;
-  display: block;
-  font-weight: bold;
-  margin-bottom: 2px;
-}
-.inline-form input[type=text], .inline-form textarea {
-  background-color: #fbfbfb;
-  background-image: none;
-  border-radius: 2px;
-  border: 1px solid #CCCCCC;
-  position: relative;
-  width: 97%;
-}
-.inline-form input[type=text] {
-  font-size: 13px;
-  height: 20px !important;
-  padding: 5px;
 }
