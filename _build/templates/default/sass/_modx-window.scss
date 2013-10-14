@@ -1,0 +1,18 @@
+.modx-window {
+	@extend %modx-window;
+}
+
+%modx-window {
+		.x-panel-mc .x-tab-panel-bwrap {
+			background:$panelBody;
+			.x-panel-body {
+				background:transparent;
+			}
+		}
+		.x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer {
+			display:none; /* #shame */
+		}
+		ul.x-tab-strip-top {
+			margin-left:0px;
+		}
+}
