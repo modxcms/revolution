@@ -1,13 +1,13 @@
 /*!
-*           ____   ____     __   __    
-*  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \
-* /\      \ \ \/\ \ \ \/\ \\ `\`\/ /
-* \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > < 
-*  \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\ 
-*   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\ 
-*    \/_/ \/_/\/_____/\/___/  \/_/ \/_/ 
+*             ____   ____     __   __    
+*    /'\_/`\/\  __`\/\  _`\  /\ \ /\ \
+*   /\      \ \ \/\ \ \ \/\ \\ `\`\/ /
+*   \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > < 
+*    \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\ 
+*     \ \_\\ \_\ \_____\ \____/ /\_\\ \_\ 
+*      \/_/ \/_/\/_____/\/___/  \/_/ \/_/ 
 *
-*     C R E A T I V E    F R E E D O M
+*     - C R E A T I V E    F R E E D O M -
 *
 *     This is the MODX Manager default theme for MODX 2.3+.
 *     It uses Sass—the SCSS variant, specifically. It makes coping 
@@ -261,7 +261,7 @@ hr {
 
 .modx-console-text {
   background-color: white;
-  font: 11px Courier !important;
+  font: 11px $codefonts !important;
   padding: 8px;
 }
 
@@ -1020,7 +1020,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* other */
 .modx-tree-load-msg {
-  color: #444;
+  color: $mainText;
   font-size: .9em;
   line-height: 1;
   padding: 3px;
@@ -1037,7 +1037,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block {
-  background-color: white;
+  background-color: $white;
   border-radius: 2px;
   border: 1px solid #ddd;
   float: left;
@@ -1072,14 +1072,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block .title {
-  background: rgb(230, 230, 230);
-  /*background:-moz-linear-gradient(center bottom,#ececec 0%,#ffffff 100%) repeat scroll 0 0 transparent;
-  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ffffff),color-stop(100%,#ececec));
-  background:-webkit-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  background:-o-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  background:-ms-linear-gradient(center bottom,#ececec 0%,#ffffff 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ececec,GradientType=0);
-  background:linear-gradient(center bottom,#ececec 0%,#ffffff 100%);*/
+  background: $mainBg;
   border-bottom: 1px solid #ccc;
   border-radius: 2px 2px 0 0;
   color: #5E5E5E;
@@ -1087,7 +1080,7 @@ body.ext-ie7 .x-superboxselect-item {
   font-weight: bold;
   margin: 0;
   padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #ffffff;
+  text-shadow: 0 1px 1px #fff;
   zoom: 1;
 }
 
@@ -1160,17 +1153,17 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .win-desc p {
-  color: #555555;
+  color: #555;
   font-size: 13px;
   font-style: italic;
   line-height: 1.4;
   padding: 0 10px 10px;
-  text-shadow: 0 1px 0 #FFFFFF;
+  text-shadow: 0 1px 0 #fff;
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  padding: 15px 15px 15px 15px;
+  padding: 15px;
 }
 
 .with-title .main-wrapper {
@@ -1217,7 +1210,6 @@ body.ext-ie7 .x-superboxselect-item {
 
 .modx-tv-label:hover .modx-tv-reset {
   opacity: 100;
-  /*filter: alpha(opacity=100);*/
 }
 
 .modx-tv-label-title {
@@ -1235,7 +1227,6 @@ body.ext-ie7 .x-superboxselect-item {
 .modx-tv-reset {
   background: url(../images/restyle/icons/arrow_rotate_anticlockwise.png) top right no-repeat;
   cursor: pointer;
-  /*filter: alpha(opacity=0);*/
   float: left;
   height: 16px;
   opacity: 0;
@@ -1392,7 +1383,7 @@ body.ext-ie7 .x-superboxselect-item {
   border: medium none;
 }
 #ux-lightbox-outerImageContainer {
-  background-color: #ffffff;
+  background-color: $white;
   height: 250px;
   margin: 0 auto;
   position: relative;
@@ -1437,7 +1428,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 #ux-lightbox-navPrev:hover,
 #ux-lightbox-navPrev:visited:hover {
-  background: url("images/lb-prev.png") no-repeat scroll left 33% transparent;
+  background: transparent url('images/lb-prev.png') no-repeat scroll left 33%;
 }
 #ux-lightbox-navNext {
   float: right;
@@ -1445,7 +1436,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 #ux-lightbox-navNext:hover,
 #ux-lightbox-navNext:visited:hover {
-  background: url("images/lb-next.png") no-repeat scroll right 33% transparent;
+  background: transparent url('images/lb-next.png') no-repeat scroll right 33%;
 }
 #ux-lightbox-outerDataContainer {
   margin: 0 auto;
@@ -1453,11 +1444,12 @@ body.ext-ie7 .x-superboxselect-item {
 }
 #ux-lightbox-dataContainer {
   background-color: #ffffff;
-  font: 10px/1.4em Verdana, Helvetica, sans-serif;
+  font: $fontSmall;
+  font-size: 10px;
   overflow: auto;
 }
 #ux-lightbox-data {
-  color: #666666;
+  color: #666;
   padding: 0 10px;
 }
 #ux-lightbox-data #ux-lightbox-details {
@@ -1474,7 +1466,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding-bottom: 1em;
 }
 #ux-lightbox-data #ux-lightbox-navClose {
-  background: url("../images/style/close.png") no-repeat scroll 0 0 transparent;
+  background: transparent url('../images/style/close.png') no-repeat scroll 0 0;
   float: right;
   height: 16px;
   outline: medium none;
@@ -1483,7 +1475,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 #ux-lightbox-overlay,
 #ux-lightbox-shim {
-  background-color: #000000;
+  background-color: #000;
   border: 0 none;
   height: 500px;
   left: 0;
@@ -1516,7 +1508,6 @@ body.ext-ie7 .x-superboxselect-item {
   color: #999999;
 }
 .package-installed {
-  /*filter: alpha(opacity=50);*/
   color: gray;
   opacity: .5;
 }
@@ -1560,7 +1551,7 @@ body.ext-ie7 .x-superboxselect-item {
   text-decoration: none;
 }
 .home-panel ol li:hover button {
-  background: url("../images/style/search.png") no-repeat scroll right center transparent;
+  background: transparent url('../images/style/search.png') no-repeat scroll right center;
   color: #3D4349;
 }
 .home-panel ol li .highlighted {
@@ -1698,7 +1689,7 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: left;
 }
 .modx-pb-details-info b {
-  color: #555555;
+  color: #555;
   display: block;
   margin-bottom: 4px;
 }
@@ -1719,7 +1710,7 @@ body.ext-ie7 .x-superboxselect-item {
   min-height: 560px;
 }
 .empty-text-wrapper {
-  color: #888888;
+  color: #888;
   font-weight: bold;
   line-height: 1.4;
 }
@@ -1738,7 +1729,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .modx-template-detail .selected img {
   border-radius: 3px;
-  border: 1px solid #aaaaaa;
+  border: 1px solid #aaa;
   height: 80px;
   width: 90px;
 }
@@ -1757,7 +1748,7 @@ body.ext-ie7 .x-superboxselect-item {
   color: $darkNeutral;
   font-size: 14px;
   margin: 10px 0;
-  text-shadow: 0 1px 0 #FFFFFF;
+  text-shadow: 0 1px 0 $white;
   text-transform: uppercase;
 }
 .modx-template-detail .aside-details h4 {
@@ -1806,7 +1797,7 @@ body.ext-ie7 .x-superboxselect-item {
 .thumb-wrapper {
   background-color: #F5F5F5;
   border-radius: 2px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   cursor: pointer;
   float: left;
   margin: 0 15px 15px 0;
@@ -1817,8 +1808,8 @@ body.ext-ie7 .x-superboxselect-item {
   width: 132px;
 }
 .thumb-wrapper .thumb {
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #cccccc;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
   height: 95px;
   margin: 0 auto;
   width: 132px;
@@ -1828,7 +1819,7 @@ body.ext-ie7 .x-superboxselect-item {
   width: 135px;
 }
 .thumb-wrapper .thumb .no-preview {
-  color: #888888;
+  color: #888;
   display: inline-block;
   font-size: 9px;
   font-weight: bold;
@@ -1840,11 +1831,11 @@ body.ext-ie7 .x-superboxselect-item {
   display: block;
   overflow: hidden;
   text-align: center;
-  text-shadow: 0 1px 0 #ffffff;
+  text-shadow: 0 1px 0 #fff;
 }
 .thumb-wrapper span.downloaded {
   background-color: #658F1A;
-  color: #FFFFFF;
+  color: #fff;
   font-weight: bold;
   padding: 5px 0;
   position: absolute;
@@ -1860,19 +1851,19 @@ body.ext-ie7 .x-superboxselect-item {
   margin-top: 10px;
 }
 .thumb-wrapper .downloads {
-  color: #999999;
+  color: #999;
   font-size: 9px;
   text-transform: uppercase;
 }
 .thumb-wrapper.selected {
-  background-color: #FFFFFF;
+  background-color: #fff;
   padding: 0 0 12px;
 }
 .thumb-wrapper.selected img {
   border: 0 none;
 }
 .pbr-thumb {
-  background: #dddddd;
+  background: #ddd;
   height: 80px;
   padding: 3px;
   width: 100px;
