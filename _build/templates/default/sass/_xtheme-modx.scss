@@ -1255,7 +1255,9 @@ a.x-menu-item {
 
 .x-panel-body-noheader .x-grid3 {}
 
-
+.x-form-label-left {
+	@extend %shaded-box;
+}
 
 
 
