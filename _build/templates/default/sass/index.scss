@@ -14,6 +14,8 @@
 @import "user-select";
 @import "box-sizing";
 @import "colors-and-vars";
+@import "shaded-box";
+@import "dashboard";
 @import "modx-window";
 @import "subnav";
 @import "type";
@@ -151,18 +153,26 @@ input::-moz-focus-inner {
   background: $mainBg;
 }
 
+#modx-resource-content {
+	@extend %shaded-box;
+}
+
 #modx-container {
   height: 100%;
   width: 100%;
 }
 
 .x-panel-header {
-  background: none;
-  border-bottom: 1px solid #ddd;
-  border: none;
+  @include box-sizing(border-box);
+  background: $softGrey;
+  border:none;
+  border-bottom:1px solid $borderColor;
   font-size: 16px;
-  margin: 0 0 0 15px;
-  padding: 0 0 8px;
+  margin:0;
+  padding:6px 15px 4px 15px;
+}
+
+.x-panel-header {
 }
 
 /* form fields */
@@ -1080,7 +1090,7 @@ body.ext-ie7 .x-superboxselect-item {
 .dashboard-block {
   background-color: white;
   border-radius: 2px;
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   float: left;
   margin: 6px 1% 6px 0;
 }
