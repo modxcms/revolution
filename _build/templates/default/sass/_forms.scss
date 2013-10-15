@@ -304,7 +304,8 @@ textarea.x-form-field,
 
 .x-fieldset legend {
   color: #434343;
-  font: bold 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
+  font-weight: bold;
 }
 
 .ext-gecko .x-window-body .x-form-item {

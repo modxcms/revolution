@@ -1,12 +1,34 @@
 /*!
-*           ____   ____     __   __     
-*  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \    // welcome to the home of the MODX Manager default theme
-* /\      \ \ \/\ \ \ \/\ \\ `\`\/'/'   // if you are a contributor please sign the guestbook below:
-* \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <        - Ryan Trash @rthrash
-*  \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\      - JP DeVries @jpdevries
-*   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\    - Alan Pich @_alanpich
-*    \/_/ \/_/\/_____/\/___/  \/_/ \/_/    - Danya Postfactum
-*                                          - Christian Seele @christianseel
+*           ____   ____     __   __    
+*  /'\_/`\/\  __`\/\  _`\  /\ \ /\ \
+* /\      \ \ \/\ \ \ \/\ \\ `\`\/ /
+* \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > < 
+*  \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\ 
+*   \ \_\\ \_\ \_____\ \____/ /\_\\ \_\ 
+*    \/_/ \/_/\/_____/\/___/  \/_/ \/_/ 
+*
+*     C R E A T I V E    F R E E D O M
+*
+*     This is the MODX Manager default theme for MODX 2.3+.
+*     It uses Sass—the SCSS variant, specifically. It makes coping 
+*     with ExtJS hurt less, but there is much to improve and purge.
+*     With your help, we will do something about that, so join us!
+*
+*     Some helpful references:
+*       + Contributing & Grunt: https://github.com/modxcms/revolution/tree/develop/_build/templates/default
+*       + The MODX Forums: http://forums.modx.com/ 
+*       + Bourbon mixin library for Sass: http://bourbon.io 
+*       + FontAwesome icons used in the Manager: http://fontawesome.io/icons/
+*       + Autoprefixer keeps our Sass clean: http://css-tricks.com/autoprefixer/
+*
+*     If you contribute, please sign the guestbook below.
+*
+*     Ryan Trash @rthrash http://thrash.me
+*     JP DeVries @jpdevries http://devries.jp
+*     Alan Pich @_alanpich
+*     Danya Postfactum
+*     Christian Seele @christianseel
+*     
 */
 
 @import "bourbon/bourbon";
@@ -24,14 +46,14 @@
 @import "help";
 
 body, body.x-border-layout-ct {
-  color: #444;
-  font: $baseText;
+  color: $mainText;
+  font:  $baseText;
 }
 
 /* TODO: conver font heirarchy into a vertical rhythm formula */
 h2, h3 {
-  color: $headerText;
-  font: $fontH2;
+  color:  $headerText;
+  font:   $fontH2;
   margin: 0 0 8px 5px;
 }
 h3 {
@@ -98,7 +120,7 @@ hr {
 }
 
 .wait {
-  background: url("../images/style/wait.gif") no-repeat scroll center 55px transparent;
+  background: transparent url('../images/style/wait.gif') no-repeat scroll center 55px;
   color: $darkNeutral;
   font-size: 15px;
   font-weight: bold;
@@ -330,9 +352,8 @@ hr {
 }
 
 .x-tree-col-text,.x-tree-hd-text {
-  -o-text-overflow: ellipsis;
   color: #000;
-  font: normal 11px arial,tahoma,helvetica,sans-serif;
+  font: $fontSmall;
   overflow: hidden;
   padding: 3px 3px 3px 5px;
   text-overflow: ellipsis;
@@ -1617,7 +1638,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .modx-pb-view-ct {
   background: white;
-  font: 11px Arial, Helvetica, sans-serif;
+  font: $fontSmall;
 }
 .modx-pb-thumb {
   border: 1px solid #dddddd;
@@ -1670,8 +1691,8 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: center;
 }
 .modx-pb-details-info {
-  border-top: 1px solid #cccccc;
-  font: 11px Arial, Helvetica, sans-serif;
+  border-top: 1px solid #ccc;
+  font: $fontSmall;
   margin-top: 5px;
   padding: 5px;
   text-align: left;
