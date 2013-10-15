@@ -1228,7 +1228,7 @@ a.x-menu-item {
   padding: 3px;
 }
 .x-combo-list .x-combo-selected {
-  background-color: $lightSplash;
+  background-color: lighten(desaturate($colorSplash,45%),50%);
   border: 0 none !important;
 }
 .x-combo-list .x-toolbar {
