@@ -172,9 +172,6 @@ input::-moz-focus-inner {
   padding:6px 15px 4px 15px;
 }
 
-.x-panel-header {
-}
-
 /* form fields */
 
 .modx-form .x-form-text,
@@ -1226,6 +1223,12 @@ body.ext-ie7 .x-superboxselect-item {
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
   padding: 15px 15px 15px 15px;
+}
+
+#modx-resource-content {
+	.main-wrapper {
+	  background:$almostWhite;
+	}
 }
 
 .with-title .main-wrapper {

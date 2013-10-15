@@ -17,15 +17,12 @@
     width: auto !important;
     zoom: 1;
   }
-  .x-btn {
-	background:$almostWhite;
-  }
 }
 
 /* btn style */
 .x-btn {
   *display: inline;
-  background: $white;
+  background: $lightBg;
   line-height: 1;
   border-radius: 3px;
   cursor: pointer;
@@ -47,7 +44,7 @@
 }
 
 .x-btn-over {
-  border-color:darken($almostWhite,40%) !important; /* #shame */
+  border-color:darken($gainsboro,40%) !important; /* #shame */
 }
 
 #modx-abtn-save {
@@ -333,7 +330,7 @@
   padding: 7px;
   width: 16px;
   height: 16px;
-  border: 1px solid $softGrey;
+  border: 1px solid $borderColor;
   opacity: 1;
   display: inline-block;
   position: relative;

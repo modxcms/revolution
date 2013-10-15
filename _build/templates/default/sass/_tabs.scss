@@ -136,7 +136,7 @@ ul.x-tab-strip-bottom {
 .x-tab-panel-footer-plain .x-tab-strip-spacer { 
   background-color: $spacer;
   border-width: 1px 0 0 !important;
-  border: 1px solid #E2E3DE;
+  border: 1px solid $borderColor;
   height: 3px;
   margin: -2px 0 0 -1px;
 }

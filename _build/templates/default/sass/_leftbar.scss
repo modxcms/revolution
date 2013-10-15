@@ -1,5 +1,9 @@
 #modx-leftbar {
-  background-color:$panelBody;
+  background-color:$almostWhite;
+  .x-toolbar {
+	background:$panelBody;
+	border-bottom:1px solid $borderColor;
+  }
 }
 
 #modx-leftbar-tabpanel {
