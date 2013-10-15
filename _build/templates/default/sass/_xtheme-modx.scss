@@ -38,7 +38,7 @@
   background-color: transparent;
   border: 0 none;
   color: #444;
-  font: bold 11px arial,tahoma,helvetica,sans-serif;
+  font: $fontSmall;
 }
 
 .x-mask-loading div {
@@ -124,7 +124,7 @@
 
 .x-toolbar td,.x-toolbar span,.x-toolbar input,
 .x-toolbar div,.x-toolbar select,.x-toolbar label {
-  font: normal 11px arial,tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 
 .x-toolbar .x-item-disabled {
@@ -282,7 +282,7 @@
 }
 
 .x-grid3-hd-row td, .x-grid3-row td, .x-grid3-summary-row td {
-  font: normal 12px arial, tahoma, helvetica, sans-serif;
+  font: $fontMedium;
 }
 
 .x-grid3-row td, .x-grid3-summary-row td {
@@ -459,7 +459,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   background-image: url(../images/modx-theme/grid/dirty.gif);
 }
 .x-grid3-topbar, .x-grid3-bottombar {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 .x-grid3-bottombar .x-toolbar {
   border-top-color: #bcbcbc;
@@ -559,7 +559,8 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid-group-hd div.x-grid-group-title {
   background: transparent url(../images/modx-theme/grid/group-collapse.png) no-repeat scroll 3px 10px;
   color: #82A73D;
-  font: bold 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
+  font-weight: bold;
   padding: 10px 4px 6px 24px;
 }
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title {
@@ -576,7 +577,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 .x-grid-empty {
   color: gray;
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
   text-align: center;
 }
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {
@@ -593,7 +594,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   background-color: #fff;
   border-color: #ddd #bbb #bbb #ddd;
   color: #000;
-  font: normal 11px arial, helvetica, sans-serif;
+  font: $fontSmall;
 }
 .x-dd-drop-nodrop .x-dd-drop-icon {
   background-image: url(../images/modx-theme/dd/drop-no.gif);
@@ -616,7 +617,8 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-date-middle,.x-date-left,.x-date-right {
   background-image: none;
   color: #fff;
-  font: bold 11px arial, "sans serif", tahoma, verdana, helvetica;
+  font: $fontSmall;
+  font-weight: bold;
 }
 .x-date-middle .x-btn {
   -moz-box-shadow: none;
@@ -645,7 +647,8 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   background-image: none;
   border-bottom-color: #DFDFDF;
   color: #676767;
-  font: bold 11px arial, helvetica,tahoma,sans-serif;
+  font: $fontSmall;
+  font-weight: bold;
 }
 .x-date-inner td {
   background-color: #FAFAFA;
@@ -654,7 +657,8 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 .x-date-inner a {
   color: #878787;
-  font: bold 11px arial, helvetica,tahoma,sans-serif;
+  font: $fontSmall;
+  font-weight: bold;
 }
 .x-date-inner .x-date-active {
   color: #000;
@@ -929,7 +933,7 @@ a.x-menu-item {
   border-top-color: #bcbcbc;
 }
 .x-combo-list-small {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 /*.x-panel {
     border:0 none;
@@ -990,7 +994,8 @@ a.x-menu-item {
 }
 .x-panel-tl .x-panel-header {
   color: #6A6A6A;
-  font: bold 12px arial,tahoma,verdana,sans-serif;
+  font: $fontMedium;
+  font-weight: bold;
   text-shadow: 0 1px 0 #FAFAFA;
 }
 .x-panel-tl .x-panel-icon, .x-window-tl .x-panel-icon {
@@ -1175,7 +1180,7 @@ a.x-menu-item {
   border-color: #DFDFDF;
 }
 .x-panel-fbar td,.x-panel-fbar span,.x-panel-fbar input,.x-panel-fbar div,.x-panel-fbar select,.x-panel-fbar label {
-  font: normal 11px arial,tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 .x-window-proxy {
   background-color: #dcdcdc;
@@ -1183,7 +1188,8 @@ a.x-menu-item {
 }
 .x-window-tl .x-window-header, .x-panel-header {
   color: #5E5E5E;
-  font: bold 1.2em arial,tahoma,verdana,sans-serif;
+  font: $fontMedium;
+  font-weight: bold;
 }
 .x-panel-header {
   border-radius: 2px 2px 0 0;
@@ -1326,10 +1332,10 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 .x-list-header-inner div em {
   border-left-color: #ddd;
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 .x-list-body dt em {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 .x-list-over {
   background-color: #eee;
@@ -1398,7 +1404,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window h2 {
   border-bottom: 1px solid #D6DFC3;
   color: #5e5e5e;
-  font: bold 18px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+  font: $fontH3;
+  font-size: 18px;
   margin: 0 0 11px;
   padding: 8px 15px;
   text-shadow: 0 1px 1px #FFFFFF;
