@@ -30,18 +30,14 @@ body, body.x-border-layout-ct {
   font: $baseText;
 }
 
-h2 {
+/* TODO: conver font heirarchy into a vertical rhythm formula */
+h2, h3 {
   color: $headerText;
-  font: $fontNormal;
-  font-size: 25px;
+  font: $fontH2;
   margin: 0 0 8px 5px;
 }
-
-/* TODO: conver font heirarchy into a vertical rhythm formula */
-
 h3 {
   font: $fontH3;
-  margin: 0 0 8px 15px;
 }
 
 strong {
@@ -1324,8 +1320,7 @@ body.ext-ie7 .x-superboxselect-item {
   border: 0 none;
   color: $darkNeutral;
   cursor: pointer;
-  font-family: Arial,Helvetica,sans-serif;
-  font-size: 12px;
+  font: $baseText;
   font-weight: bold;
   padding: 0;
   text-decoration: none;
@@ -1493,7 +1488,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .x-grid3-cell-inner.x-grid3-col-main h3 {
   color: #555555;
-  font-family: arial,Helvetica,sans-serif;
+  font: $baseText;
   font-size: 20px;
   line-height: 1;
   margin: 0 0 2px;
