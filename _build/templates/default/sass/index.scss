@@ -95,19 +95,19 @@ input::-moz-focus-inner {
 }
 
 .not-installed {
-  color: red;
+  color: $red;
 }
 
 .red {
-  color: red !important;
+  color: $red !important;
 }
 
 .green {
-  color: green !important;
+  color: $green !important;
 }
 
 .error {
-  color: red !important;
+  color: $red !important;
 }
 
 .centered {
@@ -267,7 +267,7 @@ input::-moz-focus-inner {
 }
 
 .modx-console .success {
-  color: green;
+  color: $green;
 }
 
 .modx-console .warn {
@@ -275,7 +275,7 @@ input::-moz-focus-inner {
 }
 
 .modx-console .error {
-  color: red;
+  color: $red;
 }
 
 .modx-console-text {
@@ -1562,10 +1562,10 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: center;
 }
 #modx-grid-package .green a {
-  color: red !important;
+  color: $red !important;
 }
 #modx-grid-package .red {
-  color: green !important;
+  color: $green !important;
   text-align: center;
 }
 .grid-with-buttons .x-grid3-row-expanded .x-grid3-row-body {

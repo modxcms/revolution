@@ -9,6 +9,8 @@ $labelText:$darkNeutral;
 $mediumBg:$softGrey;
 $primaryAction:#0f90c3;
 $success:#81B548;
+$green:$success;
+$red:red;
 
 /* Hightlight Color:
    use this for tab top borders, etc. … anywhere some personality is needed */
@@ -56,3 +58,4 @@ $fontH3: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
 $fontH2: normal 25px helvetica,arial,freesans,clean,sans-serif;
 
 $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
+$selected:lighten(desaturate($colorSplash,45%),50%);
