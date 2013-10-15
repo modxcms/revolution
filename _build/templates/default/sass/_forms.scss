@@ -58,17 +58,13 @@ input::-moz-focus-inner {
   padding: 5px;
 }
 
-
-
-
-/* from xtheme */
 .x-form-field {
-  font: normal 13px arial, tahoma, helvetica, sans-serif;
+  font: $baseText;
 }
 
 textarea.x-form-field, 
 .x-form-textarea {
-  font-family: "Courier New", Courier, monospace;
+  font-family: $codefonts;
 }
 
 .x-form-text, 
@@ -244,8 +240,7 @@ textarea.x-form-field,
 }
 
 .x-form-invalid, textarea.x-form-invalid {
-  background-color: #fff;
-  background-image: url(../images/modx-theme/grid/invalid_line.gif);
+  background: #fff url(../images/modx-theme/grid/invalid_line.gif);
   border-color: #c30;
 }
 
@@ -269,13 +264,13 @@ textarea.x-form-field,
 }
 
 .x-form-grow-sizer {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 
 .x-form-invalid-msg {
   background-image: url(../images/modx-theme/shared/warning.gif);
   color: #c0272b;
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
 }
 
 .x-form-empty-field {
@@ -283,7 +278,7 @@ textarea.x-form-field,
 }
 
 .x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
   margin-top: 5px;
 }
 
@@ -296,7 +291,7 @@ textarea.x-form-field,
 }
 
 .ext-safari .x-small-editor .x-form-field {
-  font: normal 12px arial, tahoma, helvetica, sans-serif;
+  font: $baseText;
 }
 
 .x-form-invalid-icon {
@@ -325,7 +320,8 @@ textarea.x-form-field,
 }
 .x-form fieldset legend {
   color: #606060;
-  font: bold 11px arial, verdana, tahoma, helvetica, sans-serif;
+  font: $fontSmall;
+  font-weight: bold;
 }
 .x-fieldset-body {
   font-size: 12px;

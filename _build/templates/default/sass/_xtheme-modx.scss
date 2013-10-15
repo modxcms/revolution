@@ -840,8 +840,7 @@ a.x-menu-item {
   background-color: #fafafa;
   background-image: none;
   color: #393939;
-  font-family: "Arial", "Myriad Pro","Myriad Web","Tahoma","Helvetica",sans-serif;
-  font-size: 11px;
+  font: $baseText;
   font-weight: bold;
 }
 .x-box-mc p {
@@ -890,7 +889,7 @@ a.x-menu-item {
 }
 #x-debug-browser .x-tree .x-tree-node a span {
   color: #333333;
-  font-family: "monotype","courier new",sans-serif;
+  font-family: $codefonts;
   font-size: 11px;
 }
 #x-debug-browser .x-tree a i {
