@@ -44,7 +44,8 @@
   color: $darkNeutral;
   display: table-cell;
   /* MODX 2.x.x Manager Button Styles */
-  font: bold 11px tahoma, verdana, helvetica, sans-serif;
+  font: $fontSmall;
+  font-weight: bold;
   padding: 12px;
   position: relative;
   text-align: center;

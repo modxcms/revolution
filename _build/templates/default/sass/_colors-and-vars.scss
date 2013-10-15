@@ -55,7 +55,7 @@ $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 $tabBg: $white;
 $tabInactiveBg: $navbarHover;
 $tabHoverBg: $navbarHover;
-$tabText: #333333;
+$tabText: #333;
 $tabInactiveText: $tabText;
 $tabHoverText: darken($colorSplash, 20%);
 
@@ -67,6 +67,7 @@ $headerText: #555;
 $bodyfonts: arial, helvetica, tahoma sans-serif;
 $headfonts: $bodyfonts;
 $codefonts: "Courier New", Courier, monospace;
+$buttonfonts: $bodyfonts;
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;
