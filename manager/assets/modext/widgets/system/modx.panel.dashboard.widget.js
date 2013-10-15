@@ -4,7 +4,7 @@ MODx.panel.DashboardWidget = function(config) {
     var itms = [];
     itms.push({
         title: _('general_information')
-        ,cls: 'container form-with-labels'
+        ,cls: 'form-with-labels'
         ,border: false
         ,defaults: { border: false ,msgTarget: 'side' }
         ,layout: 'form'
@@ -179,7 +179,6 @@ MODx.panel.DashboardWidget = function(config) {
                 ,preventRender: true
                 ,widget: config.record.id
                 ,autoHeight: true
-                ,width: '97%'
                 ,listeners: {
                     'afterRemoveRow': {fn:this.markDirty,scope:this}
                     ,'updateRole': {fn:this.markDirty,scope:this}
