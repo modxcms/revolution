@@ -16,7 +16,7 @@ $mediumBg: $softGrey;
 $primaryAction: #0f90c3;
 $success: #81B548;
 $colorSplash: $primaryAction;
-$desaturatedSplash:lighten(desaturate($primaryAction,60%),20%);
+$desaturatedSplash:lighten(desaturate($primaryAction,100%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
 $lightSplash:lighten($colorSplash, 42.5%);
 

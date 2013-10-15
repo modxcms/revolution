@@ -1,6 +1,6 @@
 /* MODX MANAGER SEARCH */
 #modx-navbar #modx-manager-search {
-  padding: 5px 8px 5px 10px;
+  padding: 5px 8px 5px 0;
 }
 
 #modx-navbar #modx-manager-search:hover {
@@ -9,7 +9,7 @@
 }
 
 #modx-manager-search .x-form-trigger {
-  background: lighten($colorSplash,20%);
+  background: $primaryAction;
   color: #fff;
   cursor: default;
   height: 16px;
@@ -53,7 +53,7 @@
 }
 
 .modx-manager-search-results {
-  @include box-sizing;
+  @include box-sizing(border-box);
   background: rgba(240, 240, 240, 0.95);
   border-radius: 0 0 2px 2px;
   border: $borderColor;

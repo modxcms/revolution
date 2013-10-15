@@ -208,7 +208,7 @@ MODx.panel.DashboardWidget = function(config) {
                 autoHeight: true
                 ,border: false
             }
-            ,border: true
+            //,border: true
             ,id: 'modx-dashboard-widget-tabs'
             ,forceLayout: true
             ,deferredRender: false

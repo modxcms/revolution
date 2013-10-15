@@ -218,7 +218,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'source/getList'
     	};
         Ext.getCmp('modx-source-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -392,7 +392,7 @@ Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'source/type/getList'
     	};
         Ext.getCmp('modx-source-types-search').reset();
     	this.getBottomToolbar().changePage(1);

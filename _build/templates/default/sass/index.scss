@@ -34,8 +34,6 @@
 @import "bourbon/bourbon";
 @import "font-awesome/font-awesome";
 @import "image-set";
-@import "user-select";
-@import "box-sizing";
 @import "colors-and-vars";
 @import "xtheme-modx";
 @import "forms";
@@ -1292,7 +1290,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* for selectability in ext grids */
 .x-selectable, .x-selectable * {
   -khtml-user-select: all !important;
-  @include user-select(text !important);
+  user-select:text !important;
 }
 
 /* Breadcrumbs */

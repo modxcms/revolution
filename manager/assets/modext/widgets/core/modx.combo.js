@@ -31,6 +31,12 @@ MODx.combo.ComboBox = function(config,getStore) {
             ,baseParams: config.baseParams || {}
             ,remoteSort: config.remoteSort || false
             ,autoDestroy: true
+            ,listeners: {
+                'loadexception': {fn: function(o,trans,resp) {
+                    var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
+                    MODx.msg.alert(_('error'), status + resp.responseText);
+                }}
+            }
         })
     });
     if (getStore === true) {

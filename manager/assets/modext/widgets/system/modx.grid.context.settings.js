@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Context Settings
- * 
+ *
  * @class MODx.grid.ContextSettings
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -24,7 +24,7 @@ MODx.grid.ContextSettings = function(config) {
         ,tbar: [{
             text: _('create_new')
             ,scope: this
-            ,handler: { 
+            ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
                 ,baseParams: {
@@ -43,7 +43,7 @@ Ext.reg('modx-grid-context-settings',MODx.grid.ContextSettings);
 
 /**
  * Update a Context Setting
- * 
+ *
  * @class MODx.window.UpdateContextSetting
  * @extends MODx.Window
  * @param {Object} config An object of config properties
