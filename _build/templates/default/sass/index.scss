@@ -211,6 +211,10 @@ input::-moz-focus-inner {
 }
 
 /* collapse for resource panel */
+#modx-resource-tabs, .x-tab-panel-noborder {
+	@extend %shaded-box;
+}
+
 #modx-resource-tabs .x-tool-toggle {
   margin-top: 0;
   position: absolute;
