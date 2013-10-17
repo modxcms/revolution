@@ -425,10 +425,10 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   background-image: url(../images/modx-theme/grid/col-move-bottom.gif);
 }
 .x-grid3-row-selected {
-  background-color: #FEF8DC;
+  background-color: $selected;
   background-image: none;
-  border-bottom: 1px solid #E8DEC2 !important;
-  border-top: 1px solid #E8DEC2 !important;
+  border-bottom: 1px solid $borderColor !important;
+  border-top: 1px solid $borderColor !important;
   color: #565550;
 }
 .x-grid3-row-expanded {}
@@ -554,11 +554,11 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   zoom: 1;
 }
 .x-grid-group-hd {
-  border-bottom-color: #82A73D;
+  border-bottom-color: $darkNeutral;
 }
 .x-grid-group-hd div.x-grid-group-title {
   background: transparent url(../images/modx-theme/grid/group-collapse.png) no-repeat scroll 3px 10px;
-  color: #82A73D;
+  color: $darkNeutral;
   font: $fontSmall;
   font-weight: bold;
   padding: 10px 4px 6px 24px;
@@ -588,7 +588,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   border-top: 0 none;
 }
 .x-grid-with-col-lines .x-grid3-row-selected {
-  border-top-color: #b9b9b9;
+  border-top-color: $borderColor;
 }
 .x-dd-drag-ghost {
   background-color: #fff;
@@ -926,7 +926,7 @@ a.x-menu-item {
   padding: 3px;
 }
 .x-combo-list .x-combo-selected {
-  background-color: $lightSplash;
+  background-color: $selected;
   border: 0 none !important;
 }
 .x-combo-list .x-toolbar {

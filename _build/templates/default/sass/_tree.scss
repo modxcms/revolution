@@ -331,3 +331,148 @@
 #modx-static-page-settings .x-accordion-hd {
   background-position: 0 -96px;
 }
+
+/*
+.x-tree .x-panel-body {
+  background-color:#fff;
+  border:1px solid #E4E4E4;
+}*/
+.x-tree-node-el .x-tree-node-icon {
+  display: inline-block;
+}
+.x-tree-node-loading .x-tree-node-icon {
+  background-image: url(../images/modx-theme/tree/loading.gif) !important;
+}
+.x-tree-node-loading a span {
+  color: #444444;
+  font-style: italic;
+}
+.ext-ie .x-tree-node-el input {
+  height: 15px;
+  width: 15px;
+}
+.x-tree-root-ct {
+  border-radius: 0;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.x-tree-root-node {
+  margin: 0;
+}
+
+.x-tree-root-node > .x-tree-node > .x-tree-node-ct {
+  margin-left: -7px !important;
+  margin: 0 !important;
+  padding: 0;
+}
+.tree-pseudoroot-node {
+  background-color: darken($navbarHover, 2%);
+  border-bottom: 1px solid $borderColor;
+  font-weight: bold;
+  line-height: 2;
+  padding: 0 .4em 0 16px;
+  
+  > .icon-large {
+    font-weight: normal;
+  }
+
+  .modx-tree-node-tool-ct .x-btn {
+      margin-left: 2px;
+  }
+}
+
+.x-tree-arrows .x-tree-elbow-plus,
+.x-tree-arrows .x-tree-elbow-minus,
+.x-tree-arrows .x-tree-elbow-end-plus,
+.x-tree-arrows .x-tree-elbow-end-minus {
+  background: none;
+}
+.x-tree-arrows .x-tree-elbow-plus:before,
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-plus:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before {
+  @include icon($caret-right);
+  background: transparent 0 0;
+  display: inline-block;
+  width: 10px;
+  padding-left: 6px;
+  margin: 0 0 0 -16px;
+}
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before {
+  @include icon($caret-down);
+  padding-left: 4px;
+  width: 12px;
+}
+
+/* icons for the various tree elements */
+.tree-context:before {
+  @include icon($globe);
+}
+.x-tree-node-expanded .tree-folder:before {
+  @include icon($folder-open);
+}
+.x-tree-node-collapsed .tree-folder:before {
+  @include icon($folder-close);
+}
+.tree-resource:before {
+  @include icon($file-alt);
+}
+.tree-static-resource:before {
+  @include icon($file-text-alt);
+}
+.tree-weblink:before {
+  @include icon($link);
+}
+.tree-symlink:before {
+  @include icon($copy);
+}
+
+.x-tree-node {
+  color: $treeText;
+  font: normal 12px arial, tahoma, helvetica, sans-serif;
+}
+.x-tree-node a, .x-dd-drag-ghost a {
+  color: $treeText;
+}
+.x-tree-node a span, .x-dd-drag-ghost a span {
+  color: $treeText;
+}
+.x-tree-node .x-tree-node-disabled a span {
+  color: lighten($treeText, 50%);
+}
+.x-tree-node div.x-tree-drag-insert-below {
+  border-bottom-color: #686868;
+}
+.x-tree-node div.x-tree-drag-insert-above {
+  border-top-color: #686868;
+}
+.x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-below a {
+  border-bottom-color: #686868;
+}
+.x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-above a {
+  border-top-color: #686868;
+}
+.x-tree-node .x-tree-drag-append a span {
+  background-color: #ddd;
+  border-color: $borderColor;
+}
+.x-tree-node .x-tree-node-over {
+  background-color: $almostWhite;
+}
+.x-tree-node .x-tree-selected {
+  background-color: $selected;
+}
+.x-tree-drop-ok-append .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-add.gif);
+}
+.x-tree-drop-ok-above .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-over.gif);
+}
+.x-tree-drop-ok-below .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-under.gif);
+}
+.x-tree-drop-ok-between .x-dd-drop-icon {
+  background-image: url(../images/modx-theme/tree/drop-between.gif);
+}

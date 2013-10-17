@@ -10,11 +10,17 @@ $dropdownBg: $almostWhite;
 $lightBg: $almostWhite;
 $darkBg: $darkNeutral;
 $mediumBg: $softGrey;
+$white:white;
+$black:#020608;
+$lightBg:$almostWhite;
+$darkNeutral:#53595F;
+$labelText:$darkNeutral;
+$mediumBg:$softGrey;
+$primaryAction:#0f90c3;
+$success:#81B548;
+$green:$success;
+$red:red;
 
-/* hightlights:
-   use this for tab top borders, etc. … anywhere some personality is needed */
-$primaryAction: #0f90c3;
-$success: #81B548;
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,100%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
@@ -63,6 +69,8 @@ $tabHoverText: darken($colorSplash, 20%);
 $labelText: $darkNeutral;
 $mainText: #444;
 $headerText: #555;
+$shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
+$selected:lighten(desaturate($colorSplash,45%),50%);
 
 $bodyfonts: arial, helvetica, tahoma sans-serif;
 $headfonts: $bodyfonts;
