@@ -92,10 +92,12 @@ MODx.SearchBar = function(config) {
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     // Initialize the keyboard shortcuts to focus the bar
     setKeyMap: function() {
-        new Ext.KeyMap(Ext.get(document)).addBinding({
-            key: 191
-            ,ctrl: false
-            ,shift: true
+        new Ext.KeyMap(document, {
+            //key: 191
+            //key: 111
+            key: [191,0]
+            ,ctrl: true
+//            ,shift: false
             ,alt: true
             ,handler: function(code, vent) {
                 this.focus();
@@ -103,6 +105,10 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             ,scope: this
             ,stopEvent: true
         });
+
+//        Ext.get(document).on('keydown', function(vent) {
+//            console.log(vent.keyCode);
+//        });
     }
 
     ,focusBar: function() {
