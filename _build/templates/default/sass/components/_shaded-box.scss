@@ -1,0 +1,31 @@
+%shaded-tab-box {
+	/*color:grey;*/
+	border:3px solid $gainsboro;
+	border-radius:3px;
+	padding:0;
+	.x-tab-panel-header { 
+		border:1px solid $borderColor !important; /* #shame */
+		border-bottom:none !important;  /* #shame */
+	}
+	.x-tab-panel-bwrap {
+		border:1px solid $borderColor; 
+		border-top:none;
+	}
+}
+
+%shaded-box {
+	/*color:grey;*/
+	border:3px solid $gainsboro;
+	border-radius:3px;
+	padding:0;
+	background:$aside;
+	.x-panel-header { 
+		border:1px solid $borderColor !important; /* #shame */
+		margin:0;
+		padding:6px 15px 6px 15px;
+	}
+	.x-panel-bwrap {
+		border:1px solid $borderColor; 
+		border-top:none;
+	}
+}

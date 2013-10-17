@@ -44,7 +44,7 @@
 }
 
 .x-btn-over {
-  border-color:darken($almostWhite,40%) !important; /* #shame */
+  border-color:darken($gainsboro,40%) !important; /* #shame */
 }
 
 #modx-abtn-save {
@@ -325,12 +325,12 @@
 /* basic tree toolbar styles */
 #modx-leftbar .x-toolbar-ct .x-btn {
   border-radius: 15px;
-  background: $almostWhite;
+  background: $gainsboro;
   margin: 0 3px;
   padding: 7px;
   width: 16px;
   height: 16px;
-  border: 1px solid $softGrey;
+  border: 1px solid $aside;
   opacity: .7;
   display: inline-block;
   position: relative;

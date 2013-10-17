@@ -1,12 +1,12 @@
-$softGrey: rgb(220, 220, 220);
-$almostWhite: rgb(240, 240, 240);
-$dropdownBg: $almostWhite;
+$aside: rgb(248,248,248);
+$gainsboro: rgb(240, 240, 240);
+$dropdownBg: $gainsboro;
 $white:white;
 $black:#020608;
-$lightBg:$almostWhite;
+$lightBg:$gainsboro;
 $darkNeutral:#53595F;
 $labelText:$darkNeutral;
-$mediumBg:$softGrey;
+$mediumBg:$aside;
 $primaryAction:#0f90c3;
 $success:#81B548;
 $actionable:rgb(251,251,251);
@@ -24,25 +24,25 @@ $headerText: #555555;
 
 /* Tree menus */
 $treeText: #444444;
-$tipText: $almostWhite;
+$tipText: $gainsboro;
 $iconColor: $treeText;
 $unpublished: lighten($treeText, 30%) !important;
 $unpubText: italic;
 $hidden: $unpublished;
 
 /* Top navigation colors */
-$navbarBg: rgb(255, 255, 255);
+$navbarBg: $aside;
 $navbarHover: rgb(240, 240, 240);
 $navbarDrop: $navbarBg;
 $navbarText: #222222;
 $navbarRadius: 2px;
 
-$borderColor: rgb(203, 203, 203);
+$borderColor: rgb(216,216,216);
 $borderShadow: rgba(0, 0, 0, 0.025);
 $primaryBorder:rgb(192,192,192);
 
-$mainBg: rgb(234, 234, 234);
-$tabBg: white;
+$mainBg: $white;
+$tabBg: $white;
 $tabInactiveBg: $navbarHover;
 $tabHoverBg: $navbarHover;
 $tabText: #333333;

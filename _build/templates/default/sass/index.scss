@@ -12,6 +12,7 @@
 @import "bourbon/bourbon";
 @import "image-set";
 @import "colors-and-vars";
+@import "components/components";
 @import "type";
 @import "tabs";
 @import "buttons";
@@ -145,6 +146,25 @@ input::-moz-focus-inner {
 
 #modx-content {
   background: $mainBg;
+}
+
+#modx-resource-tabs {
+	@extend %shaded-tab-box;
+}
+
+#modx-resource-content {
+	@extend %shaded-box;
+}
+
+#modx-content-above, #modx-content-below {
+	.x-panel-bwrap {
+		border:none;
+	}
+}
+
+.x-tab-panel-header {
+	width:100% !important;  /* #shame */
+	@include box-sizing(border-box);
 }
 
 #modx-container {

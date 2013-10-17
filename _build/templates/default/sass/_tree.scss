@@ -417,7 +417,7 @@ ul.x-tab-strip-top {
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $almostWhite;
+  background-color: $gainsboro;
 }
 .x-tree-node .x-tree-selected {
   background-color: lighten(desaturate($colorSplash,45%),50%);

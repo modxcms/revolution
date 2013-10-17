@@ -81,7 +81,8 @@ ul.x-tab-strip-top {
 
 .x-tab-panel-header,
 .x-tab-strip {
-  padding-left: 1px;
+  /*padding-left: 1px;*/
+  padding-left:0;
 }
 
 .x-tab-strip li {
@@ -133,7 +134,8 @@ li.x-tab-strip-active {
 }
 
 ul.x-tab-strip-top li:first-child {
-  margin-left: -1px;
+  /*margin-left: -1px*/;
+  margin-left:0;
 }
 
 ul.x-tab-strip li:hover {
