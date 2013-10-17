@@ -1,345 +1,46 @@
 @import "font-awesome/variables";
 @import "font-awesome/mixins";
 
-.x-tab-panel-noborder {
-  background-color: rgb(240, 240, 240);
-  border: 1px solid #E2E3DE;
-  margin: 20px 0 10px;
-  overflow: visible;
+#modx-leftbar {
+  background-color: $mainBg;
+
+  /* the main container + bg behind the tabs */
+  & .x-tab-panel-noborder {
+    margin: 15px 10px 10px;
+    background: $almostWhite;
+  }
+  /* the toolbars just below the tabs */
+  & .x-toolbar {
+    padding: 4px 5px 5px;
+  }
+  /* root box contaiing a context or category */ 
+  & .x-tree-root-ct { 
+    padding: 6px;
+  }
+  /* just the actual nodes */
+  & .x-tree .x-panel-body {
+    backgroud: $white;
+  }
 }
 
-#modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-  background-color: #fff;
-}
+/* tree menu splitter */
+.x-layout-split {
+  background: $mainBg;
+  border-width: 0 0 0 1px;
+  border: 1px solid $borderColor;
+  width: 8px;
+  z-index: 0;
 
-ul.x-tab-strip-top {
-  margin: -1px;
-  width: auto;
-}
-
-#modx-leftbar .x-tab-panel-noborder {
-  margin: 15px 10px 10px;
-}
-
-#modx-leftbar .x-tree-root-ct {
-  padding: 6px;
-}
-
-/* leftbar tabs */
-#modx-leftbar .x-tree .x-panel-body {
-  background: #fff;
-}
-
-#modx-leftbar .x-tab-panel-body {
-  background-color: transparent;
-}
-
-#modx-leftbar .x-toolbar {
-  border-bottom: 0;
-  padding: 4px 5px 5px;
-}
-
-.modx-leftbar .x-tree-root-ct {
-  background-color: #eee;
-  border-radius: inherit inherit 3px 3px;
+  &:hover {
+    background: $navbarHover;
+    box-shadow: 2px 0 2px $borderShadow;
+  }
+  .x-layout-mini {
+    left: -6px;
+  }
 }
 
 /* icons */
-/*.icon-resource {
-  background-image: url(../images/restyle/icons/page_white.png) !important;
-}
-
-.icon-folder {
-  background-image: url(../images/restyle/icons/folder_page_white.png) !important;
-}
-
-.icon-haschildren {
-  background-image: url(../images/restyle/icons/folder.png) !important;
-}
-
-.icon-chunk {
-  background-image: url(../images/restyle/icons/chunk.png) !important;
-}
-
-.icon-plugin {
-  background-image: url(../images/restyle/icons/plugin.png) !important;
-}
-
-.icon-snippet {
-  background-image: url(../images/restyle/icons/snippet.png) !important;
-}
-
-.icon-template {
-  background-image: url(../images/restyle/icons/template.png) !important;
-}
-
-.icon-tv, .icon-templatevar {
-  background-image: url(../images/restyle/icons/tv.png) !important;
-}
-
-.icon-context {
-  background-image: url(../images/restyle/icons/context.png) !important;
-}
-
-.icon-symlink {
-  background-image: url(../images/restyle/icons/page_white_copy.png) !important;
-}
-
-.icon-weblink {
-  background-image: url(../images/restyle/icons/page_white_link.png) !important;
-}
-
-.icon-staticresource {
-  background-image: url(../images/restyle/icons/page_white_gear.png) !important;
-}
-
-.icon-menu {
-  background-image: url(../images/restyle/icons/resources.png) !important;
-}*/
-
-.icon-action {
-  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
-}
-
-.icon-namespace {
-  background-image: url(../images/restyle/icons/computer.png) !important;
-}
-
-.icon-propertyset {
-  background-image: url(../images/restyle/icons/property-set.png) !important;
-}
-
-/*.icon-file { 
-  background-image:url(../images/restyle/icons/disk.png) !important; 
-}*/
-.icon-rss {
-  background-image: url(../images/restyle/icons/feed.png) !important;
-}
-
-.icon-cal {
-  background-image: url(../images/restyle/icons/calendar.png) !important;
-}
-
-.icon-sql {
-  background-image: url(../images/restyle/icons/database_table.png) !important;
-}
-
-.icon-db {
-  background-image: url(../images/restyle/icons/database.png) !important;
-}
-
-.icon-java, .icon-jar {
-  background-image: url(../images/restyle/icons/cup.png) !important;
-}
-
-.icon-css {
-  background-image: url(../images/restyle/icons/css.png) !important;
-}
-
-.icon-zip, .icon-tar, .icon-tgz, .icon-gz {
-  background-image: url(../images/restyle/icons/compress.png) !important;
-}
-
-.icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
-  background-image: url(../images/restyle/icons/picture.png) !important;
-}
-
-.icon-bat, .icon-scr {
-  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
-}
-
-.icon-log {
-  background-image: url(../images/restyle/icons/computer.png) !important;
-}
-
-.icon-html, .icon-htm {
-  background-image: url(../images/restyle/icons/html_valid.png) !important;
-}
-
-.icon-avi, .icon-mpg, .icon-mov {
-  background-image: url(../images/restyle/icons/film.png) !important;
-}
-
-.icon-rb {
-  background-image: url(../images/restyle/icons/ruby.png) !important;
-}
-
-.icon-doc {
-  background-image: url(../images/restyle/icons/page_white_word.png) !important;
-}
-
-.icon-ppt {
-  background-image: url(../images/restyle/icons/page_white_powerpoint.png) !important;
-}
-
-.icon-access, .icon-htaccess {
-  background-image: url(../images/restyle/icons/lock.png) !important;
-}
-
-.icon-php {
-  background-image: url(../images/restyle/icons/page_white_php.png) !important;
-}
-
-.icon-flv, .icon-swf {
-  background-image: url(../images/restyle/icons/page_white_flash.png) !important;
-}
-
-.icon-xls {
-  background-image: url(../images/restyle/icons/page_white_excel.png) !important;
-}
-
-.icon-cfm {
-  background-image: url(../images/restyle/icons/page_white_coldfusion.png) !important;
-}
-
-.icon-pdf {
-  background-image: url(../images/restyle/icons/page_white_acrobat.png) !important;
-}
-
-.icon-js {
-  background-image: url(../images/restyle/icons/javascript.png) !important;
-}
-/*
-.icon-group {
-  background-image: url(../images/restyle/icons/group.png) !important;
-}
-
-.icon-user {
-  background-image: url(../images/restyle/icons/user.png) !important;
-}*/
-
-.icon-resourcegroup {
-  background-image: url(../images/restyle/icons/application_cascade.png) !important;
-}
-
-.icon-list-new {
-  background-image: url(../images/restyle/icons/layout_add.png) !important;
-}
-
-.icon-mark-active {
-  background-image: url(../images/restyle/icons/layout_edit.png) !important;
-}
-
-.icon-mark-complete {
-  background-image: url(../images/restyle/icons/layout_header.png) !important;
-}
-
-.icon-package {
-  background-image: url(../images/restyle/icons/package.png) !important;
-  padding-right: 5px !important;
-}
-
-.icon-locked {
-  background-image: url(../images/restyle/icons/lock_edit.png) !important;
-}
-
-.icon-lock {
-  background-image: url(../images/restyle/icons/lock.png) !important;
-}
-
-/* main styles for the various tree states */
-.x-tree-node-el a span {
-  line-height: 2;
-  padding-left: 7px;
-}
-
-.x-tree-node-el a span span {
-  padding-left: 0;
-}
-
-.unpublished,
-.unpublished a span {
-  color: $unpublished;
-  font-style: $unpubText;
-}
-
-.hidemenu a span {
-  color: $hidden;
-}
-
-.deleted {
-  color: red !important;
-}
-
-.deleted a span {
-  color: #CC3333 !important;
-  text-decoration: line-through !important;
-}
-
-.element-node-disabled a span {
-  color: gray !important;
-}
-
-.element-node-locked a span {
-  font-style: italic;
-}
-
-#modx-resource-tree-panel .x-accordion-hd {
-  background-position: 0 0;
-}
-
-#modx-element-tree-panel .x-accordion-hd {
-  background-position: 0 -32px;
-}
-
-#modx-file-tree-panel .x-accordion-hd {
-  background-position: 0 -64px;
-}
-
-#modx-static-page-settings .x-accordion-hd {
-  background-position: 0 -96px;
-}
-
-/*
-.x-tree .x-panel-body {
-  background-color:#fff;
-  border:1px solid #E4E4E4;
-}*/
-.x-tree-node-el .x-tree-node-icon {
-  display: inline-block;
-}
-.x-tree-node-loading .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/loading.gif) !important;
-}
-.x-tree-node-loading a span {
-  color: #444444;
-  font-style: italic;
-}
-.ext-ie .x-tree-node-el input {
-  height: 15px;
-  width: 15px;
-}
-.x-tree-root-ct {
-  border-radius: 0;
-  overflow: hidden;
-  padding: 0 !important;
-}
-
-.x-tree-root-node {
-  margin: 0;
-}
-
-.x-tree-root-node > .x-tree-node > .x-tree-node-ct {
-  margin-left: -7px !important;
-  margin: 0 !important;
-  padding: 0;
-}
-.tree-pseudoroot-node {
-  background-color: darken($navbarHover, 2%);
-  border-bottom: 1px solid $borderColor;
-  font-weight: bold;
-  line-height: 2;
-  padding: 0 .4em 0 16px;
-  
-  > .icon-large {
-    font-weight: normal;
-  }
-
-  .modx-tree-node-tool-ct .x-btn {
-      margin-left: 2px;
-  }
-}
-
 .x-tree-arrows .x-tree-elbow-plus,
 .x-tree-arrows .x-tree-elbow-minus,
 .x-tree-arrows .x-tree-elbow-end-plus,
@@ -387,18 +88,99 @@ ul.x-tab-strip-top {
   @include icon($copy);
 }
 
+/* tree states */
 .x-tree-node {
   color: $treeText;
-  font: normal 12px arial, tahoma, helvetica, sans-serif;
+  font: $fontMedium;
 }
-.x-tree-node a, .x-dd-drag-ghost a {
-  color: $treeText;
+
+.x-tree-node-el a span {
+  line-height: 2;
+  padding-left: 7px;
+
+  & span {
+    padding-left: 0;
+  }
 }
-.x-tree-node a span, .x-dd-drag-ghost a span {
-  color: $treeText;
+
+.unpublished,
+.unpublished a span {
+  color: $unpublished;
+  font-style: $unpubText;
+}
+.hidemenu a span {
+  color: $hidden;
+}
+.deleted {
+  color: $deleted;
+}
+.deleted a span {
+  color: $deleted;
+  text-decoration: $delTextDeco;
+  font-style: $delTextStyle;
+}
+.element-node-disabled a span {
+  color: $disabled;
 }
 .x-tree-node .x-tree-node-disabled a span {
   color: lighten($treeText, 50%);
+}
+
+.element-node-locked a span {
+  font-style: $lockedText;
+}
+
+
+.x-tree-root-ct {
+  border-radius: 0;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.x-tree-root-node {
+  margin: 0;
+}
+
+.tree-pseudoroot-node {
+  background-color: darken($navbarHover, 2%);
+  border-bottom: 1px solid $borderColor;
+  font-weight: bold;
+  line-height: 2;
+  padding: 0 .4em 0 16px;
+  
+  > .icon-large {
+    font-weight: normal;
+  }
+
+  .modx-tree-node-tool-ct .x-btn {
+      margin-left: 2px;
+  }
+}
+
+/* miscellaneous tree styles */
+.x-tree-node-el .x-tree-node-icon {
+  display: inline-block;
+}
+.x-tree-node-loading .x-tree-node-icon {
+  background-image: url(../images/modx-theme/tree/loading.gif) !important;
+}
+.x-tree-node-loading a span {
+  color: #444444;
+  font-style: italic;
+}
+.ext-ie .x-tree-node-el input {
+  height: 15px;
+  width: 15px;
+}
+
+
+
+/* drag and drop styles */
+.x-tree-node a, 
+.x-dd-drag-ghost a,
+.x-tree-node a span, 
+.x-dd-drag-ghost a span {
+  color: $treeText;
 }
 .x-tree-node div.x-tree-drag-insert-below {
   border-bottom-color: #686868;
@@ -433,4 +215,119 @@ ul.x-tab-strip-top {
 }
 .x-tree-drop-ok-between .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-between.gif);
+}
+
+
+
+/* legacy icons */
+.icon-rss {
+  background-image: url(../images/restyle/icons/feed.png) !important;
+}
+.icon-cal {
+  background-image: url(../images/restyle/icons/calendar.png) !important;
+}
+.icon-sql {
+  background-image: url(../images/restyle/icons/database_table.png) !important;
+}
+.icon-db {
+  background-image: url(../images/restyle/icons/database.png) !important;
+}
+.icon-java, .icon-jar {
+  background-image: url(../images/restyle/icons/cup.png) !important;
+}
+.icon-css {
+  background-image: url(../images/restyle/icons/css.png) !important;
+}
+.icon-zip, .icon-tar, .icon-tgz, .icon-gz {
+  background-image: url(../images/restyle/icons/compress.png) !important;
+}
+.icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
+  background-image: url(../images/restyle/icons/picture.png) !important;
+}
+.icon-bat, .icon-scr {
+  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+}
+.icon-log {
+  background-image: url(../images/restyle/icons/computer.png) !important;
+}
+.icon-html, .icon-htm {
+  background-image: url(../images/restyle/icons/html_valid.png) !important;
+}
+.icon-avi, .icon-mpg, .icon-mov {
+  background-image: url(../images/restyle/icons/film.png) !important;
+}
+.icon-rb {
+  background-image: url(../images/restyle/icons/ruby.png) !important;
+}
+.icon-doc {
+  background-image: url(../images/restyle/icons/page_white_word.png) !important;
+}
+.icon-ppt {
+  background-image: url(../images/restyle/icons/page_white_powerpoint.png) !important;
+}
+.icon-access, .icon-htaccess {
+  background-image: url(../images/restyle/icons/lock.png) !important;
+}
+.icon-php {
+  background-image: url(../images/restyle/icons/page_white_php.png) !important;
+}
+.icon-flv, .icon-swf {
+  background-image: url(../images/restyle/icons/page_white_flash.png) !important;
+}
+.icon-xls {
+  background-image: url(../images/restyle/icons/page_white_excel.png) !important;
+}
+.icon-cfm {
+  background-image: url(../images/restyle/icons/page_white_coldfusion.png) !important;
+}
+.icon-pdf {
+  background-image: url(../images/restyle/icons/page_white_acrobat.png) !important;
+}
+.icon-js {
+  background-image: url(../images/restyle/icons/javascript.png) !important;
+}
+
+
+.icon-action {
+  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+}
+.icon-namespace {
+  background-image: url(../images/restyle/icons/computer.png) !important;
+}
+.icon-propertyset {
+  background-image: url(../images/restyle/icons/property-set.png) !important;
+}
+.icon-resourcegroup {
+  background-image: url(../images/restyle/icons/application_cascade.png) !important;
+}
+.icon-list-new {
+  background-image: url(../images/restyle/icons/layout_add.png) !important;
+}
+.icon-mark-active {
+  background-image: url(../images/restyle/icons/layout_edit.png) !important;
+}
+.icon-mark-complete {
+  background-image: url(../images/restyle/icons/layout_header.png) !important;
+}
+.icon-package {
+  background-image: url(../images/restyle/icons/package.png) !important;
+  padding-right: 5px !important;
+}
+.icon-locked {
+  background-image: url(../images/restyle/icons/lock_edit.png) !important;
+}
+.icon-lock {
+  background-image: url(../images/restyle/icons/lock.png) !important;
+}
+#modx-resource-tree-panel .x-accordion-hd {
+  background-position: 0 0;
+}
+#modx-element-tree-panel .x-accordion-hd {
+  background-position: 0 -32px;
+}
+#modx-file-tree-panel .x-accordion-hd {
+  background-position: 0 -64px;
+}
+#modx-static-page-settings .x-accordion-hd {
+  background-position: 0 -96px;
 }

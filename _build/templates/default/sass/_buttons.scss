@@ -11,7 +11,7 @@
   background: none;
   padding: 0;
   border: 0;
-  font-family:$verdana;
+  font-family: $buttonfonts;
 
   .x-toolbar-left {
     width: auto !important;
@@ -244,8 +244,7 @@
   cursor: pointer;
   display: block;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-  font-family: helvetica, arial, freesans, clean, sans-serif;
-  font-size: 11px;
+  font: $baseText;
   font-weight: bold;
   padding: 3px 5px;
   text-decoration: none;
