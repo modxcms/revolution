@@ -289,15 +289,14 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                     ,source: 1
                     ,path: 'core/packages/'
                 }
-                ,permitted_extensions: ['zip']
+                ,permitted_extensions: ['application/zip']
                 ,allow_close_on_upload: true
                 ,upload_autostart: true
                 ,reset_on_hide: true
                 ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
-            this.uploader.permitted_extensions = ['zip'];
-//            this.uploader.on('show',this.beforeUpload,this);
+            this.uploader.permitted_extensions = ['application/zip'];
             this.uploader.on('uploadsuccess',function(){
                 this.uploader.hide();
                 this.searchLocalWithoutPrompt();
