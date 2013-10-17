@@ -20,6 +20,7 @@ $primaryAction:#0f90c3;
 $success:#81B548;
 $green:$success;
 $red:red;
+$actionable:rgb(251,251,251);
 
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,100%),20%);
