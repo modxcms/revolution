@@ -5,7 +5,7 @@ MODx.SearchBar = function(config) {
     Ext.applyIf(config, {
         renderTo: 'modx-manager-search'
         ,listClass: 'modx-manager-search-results'
-        ,emptyText: 'Search or actions…'
+        ,emptyText: _('search_desc')
         ,id: 'modx-uberbar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
@@ -20,49 +20,38 @@ MODx.SearchBar = function(config) {
         ,itemSelector: '.item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
-                '<tpl if="this.type != values.type">',
-                '<tpl exec="this.type = values.type"></tpl>',
-                    '<div class="section">',
-                        '<h3>{type}</h3>',
-                '</tpl>',
-                '<p class="item"><a><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
-                '<tpl if="this.isLastOfType(values)"></div></tpl>',
+            '<div class="section">',
+            '<tpl if="this.type != values.type">',
+            '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
+                '<h3>{label}</h3>',
+            '</tpl>',
+                '<p><a><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+            '</div >',
             '</tpl>', {
-                getClass: function(record) {
-                    switch (record.type) {
-                        case 'Resources':
+                getClass: function(values) {
+                    //console.log('in test!', values);
+                    switch (values.type) {
+                        case 'resources':
                             return 'file-alt';
-                        case 'Chunks':
+                        case 'chunks':
                             return 'th';
-                        case 'Templates':
+                        case 'templates':
                             return 'columns';
-                        case 'Snippets':
+                        case 'snippets':
                             return 'code';
-                        case 'TVs':
+                        case 'tvs':
                             return 'asterisk';
-                        case 'Plugins':
+                        case 'plugins':
                             return 'puzzle-piece';
-                        case 'Users':
+                        case 'users':
                             return 'user';
-                        case 'Actions':
+                        case 'actions':
                             return 'mail-forward';
                     }
                 }
 
-                ,isLastOfType: function(rec) {
-                    var ub = Ext.getCmp('modx-uberbar')
-                        ,store = ub.getStore()
-                        ,total = store.getCount() - 1
-                        ,currentType = rec.type
-                        ,idx = store.find('action', rec.action);
-
-                    if (total === idx) {
-                        // Last record, last of its type
-                        return true;
-                    }
-                    var nextResult = store.getAt(idx + 1);
-
-                    return currentType != nextResult.get('type');
+                ,getLabel: function(type) {
+                    return _('search_resulttype_' + type);
                 }
             }
         )
