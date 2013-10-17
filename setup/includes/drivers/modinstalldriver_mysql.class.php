@@ -139,8 +139,7 @@ class modInstallDriver_mysql extends modInstallDriver {
      * {@inheritDoc}
      */
     public function verifyServerVersion() {
-        $handler = @mysql_connect($this->install->settings->get('database_server'),$this->install->settings->get('database_user'),$this->install->settings->get('database_password'));
-        $mysqlVersion = @mysql_get_server_info($handler);
+        $mysqlVersion = $this->xpdo->pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
         $mysqlVersion = $this->_sanitizeVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
             return array('result' => 'warning', 'message' => $this->install->lexicon('mysql_version_server_nf'),'version' => $mysqlVersion);
@@ -164,7 +163,7 @@ class modInstallDriver_mysql extends modInstallDriver {
      * {@inheritDoc}
      */
     public function verifyClientVersion() {
-        $mysqlVersion = @mysql_get_client_info();
+        $mysqlVersion = $this->xpdo->pdo->getAttribute(PDO::ATTR_CLIENT_VERSION);
         $mysqlVersion = $this->_sanitizeVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
             return array('result' => 'warning','message' => $this->install->lexicon('mysql_version_client_nf'),'version' => $mysqlVersion);
