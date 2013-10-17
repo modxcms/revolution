@@ -1,8 +1,11 @@
-%shaded-tab-box {
-	/*color:grey;*/
-	border:3px solid $gainsboro;
-	border-radius:3px;
+@mixin shaded-box($borderW:3px,$borderC:$gainsboro) {
+	border:$borderW solid $borderC;
+	border-radius:$borderW;
 	padding:0;
+}
+
+%shaded-tab-box {
+	@include shaded-box();
 	.x-tab-panel-header { 
 		border:1px solid $borderColor !important; /* #shame */
 		border-bottom:none !important;  /* #shame */
@@ -14,11 +17,8 @@
 }
 
 %shaded-box {
-	/*color:grey;*/
-	border:3px solid $gainsboro;
-	border-radius:3px;
-	padding:0;
-	background:$aside;
+	@include shaded-box();
+	background:$gainsboro;
 	.x-panel-header { 
 		border:1px solid $borderColor !important; /* #shame */
 		margin:0;
