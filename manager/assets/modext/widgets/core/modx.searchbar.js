@@ -17,20 +17,19 @@ MODx.SearchBar = function(config) {
         ,valueField: 'action'
         ,width: 174
         ,maxWidth: 300
-        ,itemSelector: '.section'
+        ,itemSelector: '.item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
-            '<div class="section">',
-            '<tpl if="this.type != values.type">',
-            '<tpl exec="this.type = values.type"></tpl>',
-                '<h3>{type}</h3>',
-            '</tpl>',
-                '<p><a><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
-            '</div >',
+                '<tpl if="this.type != values.type">',
+                '<tpl exec="this.type = values.type"></tpl>',
+                    '<div class="section">',
+                        '<h3>{type}</h3>',
+                '</tpl>',
+                '<p class="item"><a><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<tpl if="this.isLastOfType(values)"></div></tpl>',
             '</tpl>', {
-                getClass: function(values) {
-                    //console.log('in test!', values);
-                    switch (values.type) {
+                getClass: function(record) {
+                    switch (record.type) {
                         case 'Resources':
                             return 'file-alt';
                         case 'Chunks':
@@ -48,6 +47,22 @@ MODx.SearchBar = function(config) {
                         case 'Actions':
                             return 'mail-forward';
                     }
+                }
+
+                ,isLastOfType: function(rec) {
+                    var ub = Ext.getCmp('modx-uberbar')
+                        ,store = ub.getStore()
+                        ,total = store.getCount() - 1
+                        ,currentType = rec.type
+                        ,idx = store.find('action', rec.action);
+
+                    if (total === idx) {
+                        // Last record, last of its type
+                        return true;
+                    }
+                    var nextResult = store.getAt(idx + 1);
+
+                    return currentType != nextResult.get('type');
                 }
             }
         )
