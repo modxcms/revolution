@@ -558,17 +558,25 @@ class modOutputFilter {
                             break;
 
                         case 'userinfo':
-                            /* Returns the requested user data (input: userid) */
+                            /* Returns the requested modUser or modUserProfile data (input: user id) */
                             if (!empty($output)) {
                                 $key = (!empty($m_val)) ? $m_val : 'username';
-                                $userInfo= false;
+                                $userInfo= null;
+                                /** @var modUser $user */
                                 if ($user= $this->modx->getObjectGraph('modUser', '{"Profile":{}}', $output)) {
-                                    $userInfo= $user->get(array ('username', 'password'));
-                                    if ($user->getOne('Profile')) {
-                                        $userInfo= array_merge($userInfo, $user->Profile->toArray());
+                                    $userData = array_merge($user->toArray(), $user->Profile->toArray());
+                                    unset($userData['cachepwd'], $userData['salt'], $userData['sessionid'], $userData['password'], $userData['session_stale']);
+                                    if (strpos($key, 'extended.') === 0 && isset($userData['extended'][substr($key, 9)])) {
+                                        $userInfo = $userData['extended'][substr($key, 9)];
+                                    } elseif (strpos($key, 'remote_data.') === 0 && isset($userData['remote_data'][substr($key, 12)])) {
+                                        $userInfo = $userData['remote_data'][substr($key, 12)];
+                                    } elseif (isset($userData[$key])) {
+                                        $userInfo = $userData[$key];
                                     }
                                 }
-                                $output = $userInfo && isset($userInfo[$key]) ? $userInfo[$key] : null;
+                                $output = $userInfo;
+                            } else {
+                                $output = null;
                             }
                             break;
 
