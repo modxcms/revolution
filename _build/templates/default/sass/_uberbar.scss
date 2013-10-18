@@ -38,7 +38,7 @@
 #modx-manager-search .x-trigger-wrap-focus {
   @include transition(background-color, 360ms, ease-in);
   @include transition-delay(0);
-  background: $almostWhite;
+  background: $gainsboro;
 }
 
 #modx-uberbar {

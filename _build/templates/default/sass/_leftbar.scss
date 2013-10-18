@@ -1,0 +1,24 @@
+#modx-leftbar {
+  background-color: $aside;
+}
+
+#modx-leftbar-tabpanel {
+  margin: inherit 6px !important;
+}
+
+/* tree menu splitter */
+.x-layout-split {
+  background: $mainBg;
+  border-width: 0 0 0 1px;
+  border: 1px solid $borderColor;
+  width: 8px;
+  z-index: 0;
+  .x-layout-mini {
+    left: -6px;
+  }
+}
+
+.x-layout-split:hover {
+  background: $navbarHover;
+  box-shadow: 2px 0 2px $borderShadow;
+}

@@ -142,7 +142,7 @@ module.exports = function(grunt) {
 				livereload: true
 			},
 			scss: {
-				files: '<%= dirs.scss %>*',
+				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
 				tasks: ['sass:dist', 'autoprefixer', 'cssmin:compress', 'growl:sass']
 			}
 		},
