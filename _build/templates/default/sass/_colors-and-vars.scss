@@ -1,6 +1,7 @@
 /* main colors */
 $aside: rgb(248,248,248);
 $gainsboro: rgb(240, 240, 240);
+$actionable:rgb(251,251,251);
 $dropdownBg: $gainsboro;
 $white: white;
 $mainBg: rgb(234, 234, 234);
@@ -22,7 +23,6 @@ $primaryAction:#0f90c3;
 $success:#81B548;
 $green:$success;
 $red:red;
-$actionable:rgb(251,251,251);
 
 $colorSplash: $primaryAction;
 $desaturatedSplash:lighten(desaturate($primaryAction,100%),20%);

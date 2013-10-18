@@ -2,8 +2,6 @@
 @import "font-awesome/mixins";
 
 #modx-leftbar {
-  background-color: $mainBg;
-
   /* the main container + bg behind the tabs */
   & .x-tab-panel-noborder {
     margin: 15px 10px 10px;
@@ -21,6 +19,10 @@
   & .x-tree .x-panel-body {
     backgroud: $white;
   }
+}
+
+#modx-leftbar-tabpanel {
+  border-bottom:1px solid $borderColor;	
 }
 
 /* tree menu splitter */

@@ -28,7 +28,7 @@
 
 ul.x-tab-strip-top {
   border-bottom-color: transparent;
-  margin: -1px;
+  margin:0; /* was -1px */
   width: auto;
 }
 
@@ -43,7 +43,7 @@ ul.x-tab-strip-top {
   border-width: 1px 0 0 !important;
   border: 1px solid #E2E3DE;
   height: 3px;
-  margin: -2px 0 0 -1px;
+  margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
 
 .x-tab-panel-header,
