@@ -1,13 +1,13 @@
 /* top area around the tab strip */
 .x-tab-panel-noborder {
-  background-color: $almostWhite;
+  background-color: $gainsboro;
   border: 1px solid #E2E3DE;
   border-bottom: 0;
   margin: 20px 0 10px;
   overflow: visible;
 
   #modx-leftbar & {
-    background-color: $almostWhite;
+    background-color: $gainsboro;
   }
 
   /* background behind a button bar */
@@ -28,7 +28,7 @@
 
 ul.x-tab-strip-top {
   border-bottom-color: transparent;
-  margin: -1px;
+  margin:0; /* was -1px */
   width: auto;
 }
 
@@ -43,12 +43,13 @@ ul.x-tab-strip-top {
   border-width: 1px 0 0 !important;
   border: 1px solid #E2E3DE;
   height: 3px;
-  margin: -2px 0 0 -1px;
+  margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
 
 .x-tab-panel-header,
 .x-tab-strip {
-  padding-left: 1px;
+  /*padding-left: 1px;*/
+  padding-left:0;
 }
 
 .x-tab-strip li {
@@ -91,7 +92,8 @@ ul.x-tab-strip-top {
 }
 
 ul.x-tab-strip-top li:first-child {
-  margin-left: -1px;
+  /*margin-left: -1px*/;
+  margin-left:0;
 }
 
 ul.x-tab-strip-bottom {

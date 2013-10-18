@@ -1,21 +1,24 @@
 /* main colors */
+$aside: rgb(248,248,248);
+$gainsboro: rgb(240, 240, 240);
+$actionable:rgb(251,251,251);
+$dropdownBg: $gainsboro;
 $white: white;
-$almostWhite: rgb(240, 240, 240);
 $mainBg: rgb(234, 234, 234);
 $softGrey: rgb(220, 220, 220);
 $darkNeutral: #53595F;
 $black: #020608;
 
-$dropdownBg: $almostWhite;
-$lightBg: $almostWhite;
+$lightBg: $gainsboro;
 $darkBg: $darkNeutral;
 $mediumBg: $softGrey;
-$white:white;
+
+
 $black:#020608;
-$lightBg:$almostWhite;
+$lightBg:$gainsboro;
 $darkNeutral:#53595F;
 $labelText:$darkNeutral;
-$mediumBg:$softGrey;
+$mediumBg:$aside;
 $primaryAction:#0f90c3;
 $success:#81B548;
 $green:$success;
@@ -28,13 +31,21 @@ $lightSplash:lighten($colorSplash, 42.5%);
 
 /* tree menus */
 $treeText: #444;
-$tipText: $almostWhite;
+$tipText: $gainsboro;
+$lightSplash:lighten($colorSplash, 42.5%);
+$mainText: #444444;
+$headerText: #555555;
+
+/* Tree menus */
+$treeText: #444444;
+$tipText: $gainsboro;
 $iconColor: $treeText;
 $unpublished: lighten($treeText, 30%) !important;
 $disabled: $unpublished;
 $hidden: $unpublished;
 $unpubText: italic;
 $lockedText: italic;
+
 
 $deleted: red !important;
 $delTextStyle: normal;
@@ -44,8 +55,10 @@ $treeDivider: rgb(64,64,64);
 
 
 /* top nav */
-$navbarBg: rgb(255, 255, 255);
-$navbarHover: rgb(240, 240, 240);
+
+/* Top navigation colors */
+$navbarBg: $aside;
+$navbarHover: $gainsboro;
 $navbarDrop: $navbarBg;
 $navbarText: #222;
 $navbarRadius: 2px;
@@ -58,6 +71,12 @@ $primaryBorder:rgb(192,192,192);
 $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 
 /* tabs */
+$borderColor: rgb(216,216,216);
+$borderShadow: rgba(0, 0, 0, 0.025);
+$primaryBorder:rgb(192,192,192);
+
+$mainBg: $white;
+
 $tabBg: $white;
 $tabInactiveBg: $navbarHover;
 $tabHoverBg: $navbarHover;

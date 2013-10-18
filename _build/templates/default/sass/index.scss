@@ -37,6 +37,7 @@
 @import "colors-and-vars";
 @import "xtheme-modx";
 @import "forms";
+@import "components/components";
 @import "buttons";
 @import "tabs";
 @import "navbar";
@@ -153,6 +154,25 @@ hr {
 
 #modx-content {
   background: $mainBg;
+}
+
+#modx-resource-tabs {
+	@extend %shaded-tab-box;
+}
+
+#modx-resource-content {
+	@extend %shaded-box;
+}
+
+#modx-content-above, #modx-content-below {
+	.x-panel-bwrap {
+		border:none;
+	}
+}
+
+.x-tab-panel-header {
+	width:100% !important;  /* #shame */
+	@include box-sizing(border-box);
 }
 
 #modx-container {
@@ -1072,7 +1092,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block .title {
-  background: $mainBg;
+  background: $aside;
   border-bottom: 1px solid #ccc;
   border-radius: 2px 2px 0 0;
   color: #5E5E5E;

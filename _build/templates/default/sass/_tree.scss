@@ -2,12 +2,10 @@
 @import "font-awesome/mixins";
 
 #modx-leftbar {
-  background-color: $mainBg;
-
   /* the main container + bg behind the tabs */
   & .x-tab-panel-noborder {
     margin: 15px 10px 10px;
-    background: $almostWhite;
+    background: $gainsboro;
   }
   /* the toolbars just below the tabs */
   & .x-toolbar {
@@ -21,6 +19,10 @@
   & .x-tree .x-panel-body {
     backgroud: $white;
   }
+}
+
+#modx-leftbar-tabpanel {
+  border-bottom:1px solid $borderColor;	
 }
 
 /* tree menu splitter */
@@ -199,7 +201,7 @@
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $almostWhite;
+  background-color: $gainsboro;
 }
 .x-tree-node .x-tree-selected {
   background-color: lighten(desaturate($colorSplash,45%),50%);
@@ -459,7 +461,7 @@
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $almostWhite;
+  background-color: $gainsboro;
 }
 .x-tree-node .x-tree-selected {
   background-color: $selected;
