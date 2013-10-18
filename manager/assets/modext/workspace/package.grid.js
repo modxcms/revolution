@@ -284,19 +284,18 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             this.uploader = new Ext.ux.UploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
-                    action: 'browser/file/upload'
+                    action: 'workspace/packages/upload'
                     ,wctx: MODx.ctx || ''
-                    ,source: 1
-                    ,path: 'core/packages/'
+                    ,source: MODx.config.default_media_source
+                    ,path: MODx.config.core_path+'packages/'
                 }
-                ,permitted_extensions: ['application/zip']
+                ,permitted_extensions: ['zip']
                 ,allow_close_on_upload: true
                 ,upload_autostart: true
                 ,reset_on_hide: true
                 ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
-            this.uploader.permitted_extensions = ['application/zip'];
             this.uploader.on('uploadsuccess',function(){
                 this.uploader.hide();
                 this.searchLocalWithoutPrompt();
