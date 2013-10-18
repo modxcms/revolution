@@ -94,7 +94,7 @@
 /* tree states */
 .x-tree-node {
   color: $treeText;
-  font: $fontMedium;
+  font: $fontSmall;
 }
 
 .x-tree-node-el a span {
@@ -444,7 +444,6 @@
 
 .x-tree-node {
   color: $treeText;
-  font: normal 12px arial, tahoma, helvetica, sans-serif;
 }
 .x-tree-node a, .x-dd-drag-ghost a {
   color: $treeText;
