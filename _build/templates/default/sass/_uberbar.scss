@@ -1,9 +1,9 @@
 /* MODX MANAGER SEARCH */
-#modx-navbar #modx-manager-search {
+#modx-navbar #modx-manager-search { /* #shame */
   padding: 5px 8px 5px 0;
 }
 
-#modx-navbar #modx-manager-search:hover {
+#modx-navbar #modx-manager-search:hover { /* #shame */
   background: none;
   border-color: transparent;
 }
@@ -21,9 +21,10 @@
 }
 
 #modx-manager-search .x-form-field-wrap {
-  background-color: $almostWhite;
-  background: $dropdownBg;
-  border-radius: 0;
+  background: $white;
+  border:1px solid $borderColor !important; /* #shame */
+  border-radius:4px;
+  overflow:hidden;
   color: #565353;
   font-size: 12px;
   outline: none !important;
@@ -39,7 +40,7 @@
 #modx-manager-search .x-trigger-wrap-focus {
   @include transition(background-color, 360ms, ease-in);
   @include transition-delay(0);
-  background: $almostWhite;
+  background: $gainsboro;
 }
 
 #modx-uberbar {
