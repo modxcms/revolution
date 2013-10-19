@@ -758,17 +758,22 @@ class modX extends xPDO {
      * @param int $depth The maximum depth to build the tree (default 10).
      * @return array An array containing the tree structure.
      */
-    public function getTree($id= null, $depth= 10) {
+    public function getTree($id= null, $depth= 10, array $options = array()) {
         $tree= array ();
+        $context = '';
+        if (!empty($options['context'])) {
+            $this->getContext($options['context']);
+            $context = $options['context'];
+        }
         if ($id !== null) {
             if (is_array ($id)) {
                 foreach ($id as $k => $v) {
-                    $tree[$v]= $this->getTree($v, $depth);
+                    $tree[$v]= $this->getTree($v, $depth, $options);
                 }
             }
-            elseif ($branch= $this->getChildIds($id, 1)) {
+            elseif ($branch= $this->getChildIds($id, 1, $options)) {
                 foreach ($branch as $key => $child) {
-                    if ($depth > 0 && $leaf= $this->getTree($child, $depth--)) {
+                    if ($depth > 0 && $leaf= $this->getTree($child, $depth--, $options)) {
                         $tree[$child]= $leaf;
                     } else {
                         $tree[$child]= $child;

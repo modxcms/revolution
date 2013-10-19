@@ -487,6 +487,21 @@ class modFile extends modFileSystemResource {
         if (!$this->exists()) return false;
         return @unlink($this->path);
     }
+
+    /**
+     * Sends download headers
+     * 
+     * Can also be used by just setting the content of the fileobject with setContent()
+     * 
+     * @return file
+     */
+    public function makeDownload() {
+        $output = $this->getContents();
+        header('Content-type: application/octetstream');
+        header('Content-Disposition: attachment; filename=' . $this->getBasename());
+        header('Content-Length: ' . $this->getSize());
+        return $output;
+    }
 }
 
 /**
