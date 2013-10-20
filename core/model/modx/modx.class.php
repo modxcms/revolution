@@ -1625,7 +1625,7 @@ class modX extends xPDO {
                 }
             }
             if (empty($processor)) {
-                $processor = new modDeprecatedProcessor($this);
+                $processor = new modDeprecatedProcessor($this, $scriptProperties);
             }
             $processor->setPath($processorFile);
             $response = $processor->run();
