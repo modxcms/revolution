@@ -126,7 +126,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * The cache filename for the resource in the context.
      * @var string
      */
-    public $_cacheKey= null;
+    protected $_cacheKey= null;
     /**
      * Indicates if the site cache should be refreshed when saving changes.
      * @var boolean
@@ -362,18 +362,25 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Returns the cache key for this instance in the current context.
+     * Returns the cache key for this instance in the specified or current context.
+     *
+     * @param string $context A specific Context to get the cache key from.
      *
      * @return string The cache key.
      */
-    public function getCacheKey() {
+    public function getCacheKey($context = '') {
         $id = $this->get('id') ? (string) $this->get('id') : '0';
-        $context = $this->_contextKey ? $this->_contextKey : 'web';
-        if (strpos($this->_cacheKey, '[') !== false) {
-            $this->_cacheKey= str_replace('[contextKey]', $context, $this->_cacheKey);
-            $this->_cacheKey= str_replace('[id]', $id, $this->_cacheKey);
+        if (!is_string($context) || $context === '') {
+            $context = empty($this->_contextKey)
+                ? $this->_contextKey
+                : $this->get('context_key');
         }
-        return $this->_cacheKey;
+        $cacheKey = $this->_cacheKey;
+        if (strpos($cacheKey, '[') !== false) {
+            $cacheKey= str_replace('[contextKey]', $context, $cacheKey);
+            $cacheKey= str_replace('[id]', $id, $cacheKey);
+        }
+        return $cacheKey;
     }
 
     /**
@@ -1222,5 +1229,28 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         if (!array_key_exists($namespace,$properties)) $properties[$namespace] = array();
         $properties[$namespace] = $merge ? array_merge($properties[$namespace],$newProperties) : $newProperties;
         return $this->set('properties',$properties);
+    }
+
+    /**
+     * Clear the cache of this resource in the current or specified Context.
+     *
+     * @param string $context Key of context for clearing
+     *
+     * @return void
+     */
+    public function clearCache($context = '') {
+        /** @var xPDOFileCache $cache */
+        $cache = $this->xpdo->cacheManager->getCacheProvider(
+            $this->xpdo->getOption('cache_resource_key', null, 'resource'),
+            array(
+                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+                xPDO::OPT_CACHE_EXPIRES => (integer) $this->xpdo->getOption('cache_resource_expires', null, $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
+                xPDO::OPT_CACHE_FORMAT => $this->xpdo->getOption('cache_resource_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                xPDO::OPT_CACHE_ATTEMPTS => $this->xpdo->getOption('cache_resource_attempts', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 1)),
+            )
+        );
+        $key = $this->getCacheKey($context);
+        $cache->delete($key, array('deleteTop' => true));
+        $cache->delete($key);
     }
 }
