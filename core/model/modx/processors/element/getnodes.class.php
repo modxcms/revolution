@@ -322,10 +322,10 @@ class modElementGetNodesProcessor extends modProcessor {
         /** @var modCategory $category */
         foreach ($categories as $category) {
             if (!$category->checkPolicy('list')) continue;
-            if ($category->get('elementCount') <= 0) continue;
-        
+
+            $cc = ($category->get('elementCount') > 0) ? ' (' . $category->get('elementCount') . ')' : '';
             $nodes[] = array(
-                'text' => strip_tags($category->get('category')) . ' (' . $category->get('elementCount') . ')',
+                'text' => strip_tags($category->get('category')) . $cc,
                 'id' => 'n_'.$map[0].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
                 'pk' => $category->get('id'),
                 'category' => $category->get('id'),
