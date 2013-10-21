@@ -28,6 +28,14 @@ require_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/modinstalldriver
  */
 class modInstallDriver_mysql extends modInstallDriver {
     /**
+     * MySQL only needs PDO extension
+     * {@inheritDoc}
+     */
+    public function verifyExtension() {
+        return true;
+    }
+
+    /**
      * MySQL check for mysql_pdo extension
      * {@inheritDoc}
      */
