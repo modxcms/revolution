@@ -1244,9 +1244,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $this->xpdo->getOption('cache_resource_key', null, 'resource'),
             array(
                 xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
-                xPDO::OPT_CACHE_EXPIRES => (integer) $this->xpdo->getOption('cache_resource_expires', null, $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
-                xPDO::OPT_CACHE_FORMAT => $this->xpdo->getOption('cache_resource_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-                xPDO::OPT_CACHE_ATTEMPTS => $this->xpdo->getOption('cache_resource_attempts', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 1)),
+                xPDO::OPT_CACHE_EXPIRES => (integer)$this->xpdo->getOption('cache_resource_expires', null, $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
+                xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_resource_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                xPDO::OPT_CACHE_ATTEMPTS => (integer)$this->xpdo->getOption('cache_resource_attempts', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 10)),
+                xPDO::OPT_CACHE_ATTEMPT_DELAY => (integer)$this->xpdo->getOption('cache_resource_attempt_delay', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, null, 1000)),
             )
         );
         $key = $this->getCacheKey($context);
