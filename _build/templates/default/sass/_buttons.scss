@@ -5,7 +5,7 @@
 #modx-action-buttons {
   position: fixed;
   top: 57px;
-  right: 12px;
+  right: 28px;
   z-index: 9;
   left: auto;
   background: none;
@@ -22,7 +22,7 @@
 /* btn style */
 .x-btn {
   *display: inline;
-  background: $lightBg;
+  @include linear-gradient($white, $gainsboro);
   line-height: 1;
   border-radius: 3px;
   cursor: pointer;
@@ -48,10 +48,12 @@
 }
 
 #modx-abtn-save {
-  background: $primaryAction;
+  @include linear-gradient(lighten($primaryAction,10%), $primaryAction);
+  border-color:darken($primaryAction,6%);
   &.x-item-disabled {
     opacity:1;
     background:$desaturatedSplash;
+    border-color:darken($gainsboro,40%);
   }
   & button,
   &.x-item-disabled * {
