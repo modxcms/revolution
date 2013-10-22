@@ -10,4 +10,8 @@
   &.x-item-disabled * {
     color: white !important;
   }
+  &.x-btn-over {
+    @include linear-gradient(lighten($primaryAction,10%), darken($primaryAction,6%));
+    border-color:darken($primaryAction,12%);
+}
 }

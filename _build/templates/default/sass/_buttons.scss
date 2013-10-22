@@ -1,6 +1,10 @@
 @import "font-awesome/variables";
 @import "font-awesome/mixins";
 
+.primary-button {
+  @extend %primary-button;
+}
+
 /* action buttons bar */
 #modx-action-buttons {
   position: fixed;
@@ -45,20 +49,6 @@
 
 .x-btn-over {
   border-color:darken($gainsboro,40%);
-}
-
-%primary-button {
-  @include linear-gradient(lighten($primaryAction,10%), $primaryAction);
-  border-color:darken($primaryAction,6%);
-  &.x-item-disabled {
-    opacity:1;
-    @include linear-gradient($desaturatedSplash, darken($desaturatedSplash,10%));
-    border-color:darken($gainsboro,40%);
-  }
-  & button,
-  &.x-item-disabled * {
-    color: white !important;
-  }
 }
 
 #modx-abtn-save {
