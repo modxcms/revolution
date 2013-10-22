@@ -108,13 +108,13 @@
 }
 
 .x-btn-group .x-btn {
-  -moz-box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
-  -o-box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
+  -moz-box-shadow: transparent 0 0 1px;
+  -o-box-shadow: transparent 0 0 1px;
+  -webkit-box-shadow: transparent 0 0 1px;
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
-  box-shadow: rgba(0, 0, 0, 0) 0 0 1px;
+  box-shadow: transparent 0 0 1px;
 }
 
 .x-btn-group .x-btn button {
@@ -179,15 +179,13 @@
 }
 
 .x-btn em.x-btn-split {
-  background-image: url(../images/modx-theme/button/s-arrow.gif);
-  background: rgba(0, 0, 0, 0) no-repeat right center;
+  background: transparent url(../images/modx-theme/button/s-arrow.gif) no-repeat right center;
   display: block;
   padding-right: 14px;
 }
 
 .x-btn em.x-btn-arrow {
-  background-image: url(../images/modx-theme/button/arrow.gif);
-  background: rgba(0, 0, 0, 0) no-repeat right center;
+  background: transparent url(../images/modx-theme/button/arrow.gif) no-repeat right center;
   display: block;
   padding-right: 10px;
 }
