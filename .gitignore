@@ -46,4 +46,4 @@ node_modules
 _build/templates/default/sass/bourbon
 
 #ignore sourcemaps
-*.map
+_build/templates/default/*.map
