@@ -126,6 +126,12 @@ class modOutputFilter {
                         case 'islowerthan':
                             $condition[]= intval(($output < $m_val));
                             break;
+                        case 'contains':
+                            $condition[]= intval(stripos($output, $m_val) !== false);
+                            break;
+                        case 'containsnot':
+                            $condition[]= intval(stripos($output, $m_val) === false);;
+                            break;
                         case 'ismember':
                         case 'memberof':
                         case 'mo': /* Is Member Of  (same as inrole but this one can be stringed as a conditional) */

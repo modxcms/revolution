@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add case-insensitive contains/containsnot conditional output filters
 - Add modResource::clearCache() to clear cache for single Resource
 - Remove all dependency on mysql extension (deprecated in PHP >= 5.5)
 - Add extended field support and more to userinfo filter
