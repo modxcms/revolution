@@ -45,7 +45,7 @@
   display: block;
   line-height: 43px;
   padding: 0 15px;
-  text-decoration: none;
+  text-decoration: none; 
 }
 
 #modx-topnav > li.top > a {
@@ -66,10 +66,6 @@
 }
 
 #modx-navbar ul.modx-subnav {
-  border-radius: 0 0 $navbarRadius $navbarRadius;
-  border-top: none;
-  border: 1px solid $borderColor;
-  box-shadow: $shadower;
   display: none;
   float: left;
   left: 0;
@@ -80,6 +76,13 @@
   position: absolute;
   top: 43px;
   z-index: 10000;
+}
+
+#modx-navbar ul.modx-subnav, #modx-navbar ul.modx-subsubnav {
+  border-radius: 0 0 $navbarRadius $navbarRadius;
+  border-top: none;
+  border: 1px solid $borderColor;
+  box-shadow: $shadower;
 }
 
 #modx-navbar #modx-home-dashboard {
@@ -140,10 +143,23 @@
   width: 240px;
 }
 
-#modx-navbar ul.modx-subnav li:first-child a:hover,
-#modx-navbar ul.modx-subnav:hover li a:hover,
-#modx-navbar ul.modx-subnav li a:hover {
-  background: $navbarHover !important;
+#modx-navbar ul.modx-subnav li a {
+  border-top:1px solid $navbarDrop;
+  border-bottom:1px solid $navbarDrop;	
+}
+
+#modx-navbar ul.modx-subnav li {
+  a:hover {
+    background: $navbarHover;
+    border-top-color:$borderColor;
+    border-bottom-color:$borderColor;
+  }
+  &:first-child a {
+    border-top-width:0;
+  }
+  &:last-child a {
+    border-bottom-width:0;
+  }
 }
 
 #modx-navbar ul.modx-subnav li a span {
@@ -158,7 +174,7 @@
 
 #modx-navbar ul.modx-subnav ul {
   display: none;
-  left: 255px;
+  left: 270px;
   list-style: none;
   padding-left: 0;
   position: absolute;
