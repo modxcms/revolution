@@ -95,7 +95,7 @@ _Note: do not check in uncompressed CSS._
 
 Using Sourcemaps
 ----------------------------
-Sourcemaps are a new bleeding edge feature in Chrome that allow the Developer Tools to map back to the pre-processor files that created CSS and JavaScript files. This way you can see the line number of the Sass file where your styles are coming from. Additionally, you can edit source files directly in developer tools. Read more on Developing with Sass and Chrome DevTools [here](http://net.tutsplus.com/tutorials/html-css-techniques/developing-with-sass-and-chrome-devtools/).
+Sourcemaps allow Developer Tools to map back to pre-processor files. This way you can see the line number of the Sass file where your styles are coming from. Additionally, you can edit source files directly in developer tools. Read more on [Developing with Sass and Chrome DevTools](http://net.tutsplus.com/tutorials/html-css-techniques/developing-with-sass-and-chrome-devtools/).
 
 To use sourcemaps you need to be running Sass 3.3, which as of this writing is still a prerelease. To install the latest version of Sass:
 ```bash
