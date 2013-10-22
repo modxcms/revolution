@@ -48,16 +48,22 @@
   text-decoration: none; 
 }
 
-#modx-topnav > li.top > a {
+#modx-topnav li.top > a {
   cursor: default;
+}
+
+#modx-topnav > li.top > a, #modx-user-menu > li.top > a {
   border-left:1px solid transparent; 
-  border-right:1px solid transparent; 
+  border-right:1px solid transparent;
+}
+
+#modx-topnav > li.top:hover > a, #modx-user-menu > li.top:hover > a {
+  border-left-color:$borderColor;
+  border-right-color:$borderColor;
 }
 
 #modx-navbar li:hover a {
   background-color: $navbarHover;
-  border-left-color:$borderColor;
-  border-right-color:$borderColor;
   &:hover.modx-help {
     color: $colorSplash;
   }

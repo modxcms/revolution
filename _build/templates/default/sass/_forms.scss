@@ -67,7 +67,7 @@ textarea.x-form-field,
   font-family: $codefonts;
 }
 
-/*.x-form-text, */
+.x-form-text, /* this screws up clear cache modal #shame */
 textarea.x-form-field, 
 .x-form-textarea {
   background-color: #fbfbfb;
