@@ -145,7 +145,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
-				tasks: ['sass:dist', 'autoprefixer', 'cssmin:compress', 'growl:sass']
+				tasks: ['sass:dist', 'growl:sass']
 			}
 		},
 		clean: { /* take out the trash */
