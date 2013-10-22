@@ -1,5 +1,5 @@
 {
-  "name": "modx-revolution-theme",
+  "name": "modx-revolution",
   "version": "0.0.1",
   "author": {
     "name": "JP DeVries",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "bourbon": "*",
-    "font-awesome": "~3.2.1"
+    "font-awesome": "*"
   },
   "exportsOverride": {
     "bourbon": {
