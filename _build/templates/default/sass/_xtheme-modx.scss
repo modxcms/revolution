@@ -1417,7 +1417,25 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-panel-tr,
 .x-window .x-panel-mr,
 .x-window .x-panel-br {
-  background-color: white;
+  background-color: $aside;
+}
+.x-window .x-panel-bwrap {
+	background: $white !important;
+}
+.x-window {
+	.x-tab-panel-body-top {
+		background:$white !important;
+	}
+	.modx-tabs {
+		background:$gainsboro;
+		.x-tab-strip-wrap {
+			border:1px solid $borderColor;
+			border-bottom-width:0;
+		}
+	}
+}
+.x-window .x-tab-strip {
+	margin-left:0;
 }
 .x-window .x-form-item label.x-form-item-label {
   padding: 0;

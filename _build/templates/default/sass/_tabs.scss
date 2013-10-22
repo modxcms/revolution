@@ -26,7 +26,7 @@
 }
 
 ul.x-tab-strip-top {
-  border-bottom-color: transparent;
+  border-bottom-color: $white;
   margin:0; /* was -1px */
   width: auto;
   overflow:hidden;
@@ -40,7 +40,7 @@ ul.x-tab-strip-top {
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
   background-color: #fff;
-  border-width: 1px 0 0 !important;
+  border-width: 1px 1px 0 1px !important;
   border: 1px solid #E2E3DE;
   height: 3px;
   margin: -2px 0 0 0; /* was -2px 0 0 -1px */
@@ -72,6 +72,11 @@ ul.x-tab-strip-top {
     box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
     cursor: default;
     margin: 3px 0 0 2px;
+  }
+  &:first-of-type {
+    &.x-tab-strip-active {
+      box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 transparent, 1px 0 0 $borderColor;
+    }
   }
 }
 
@@ -119,7 +124,7 @@ ul.x-tab-strip-bottom {
 
 .x-tab-panel-body {
   background-color: $white;
-  border: 1px solid #999;
+  border: 1px solid $borderColor;
   border-radius: 0 0 4px 4px;
 }
 
