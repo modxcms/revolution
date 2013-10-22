@@ -2,7 +2,6 @@
 .x-tab-panel-noborder {
   background-color: $gainsboro;
   border: 1px solid #E2E3DE;
-  border-bottom: 0;
   margin: 20px 0 10px;
   overflow: visible;
 
@@ -30,6 +29,7 @@ ul.x-tab-strip-top {
   border-bottom-color: transparent;
   margin:0; /* was -1px */
   width: auto;
+  overflow:hidden;
 }
 
 
@@ -189,7 +189,7 @@ ul.x-tab-strip-bottom {
   margin-left: 0;
   padding: 13px 0 !important;
   width: 150px !important;
-
+  margin-left:0;
   & ul {
     border-top: 1px solid #E0E0E0;
     width: auto;

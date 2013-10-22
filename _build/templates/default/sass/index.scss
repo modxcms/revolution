@@ -158,6 +158,37 @@ hr {
 
 #modx-resource-tabs {
 	@extend %shaded-tab-box;
+	.x-tab-panel-header {
+		border:1px solid $gainsboro;
+		width:auto !important; /* #shame */
+		&.vertical-tabs-header {
+			width:150px !important; /* #shame */
+		}
+		.x-tab-strip {
+			li {
+				float:left;
+				width:auto;
+				margin-left:0;
+			}
+		}
+	}
+	.x-tab-panel-bwrap {
+		.x-tab-panel-header {
+			
+		}
+	}
+	#modx-tv-tabs {	
+		border-left:0;
+		border-right:0;
+	}
+}
+
+#modx-tv-tabs {	
+	.x-tab-strip {
+		li {
+			width:100% !important; /* #shame */
+		}
+	}
 }
 
 #modx-resource-content {
@@ -171,8 +202,12 @@ hr {
 }
 
 .x-tab-panel-header {
-	width:100% !important;  /* #shame */
 	@include box-sizing(border-box);
+	.x-tab-strip {
+		li {
+			@include box-sizing(border-box);
+		}
+	}
 }
 
 #modx-container {
@@ -1205,6 +1240,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* tv table */
 #modx-tv-tabs {
   width: 100%;
+  @extend %clearfix;
 }
 
 .modx-tv {
