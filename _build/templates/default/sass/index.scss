@@ -175,6 +175,26 @@ hr {
 	@include box-sizing(border-box);
 }
 
+.x-window-footer {
+	.x-toolbar-right-row {
+		td {
+			&:last-of-type {
+				.x-btn {
+					@include linear-gradient(lighten($primaryAction,10%), $primaryAction); 
+					border-color:darken($primaryAction,6%);
+					button {
+						color:$white;
+					}
+				}
+				.x-btn-over {
+					border-color:darken($primaryAction,10%);
+					@include linear-gradient(lighten($primaryAction,16%), $primaryAction); 
+				}
+			}
+		}
+	}
+}
+
 #modx-container {
   height: 100%;
   width: 100%;
