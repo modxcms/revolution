@@ -50,10 +50,14 @@
 
 #modx-topnav > li.top > a {
   cursor: default;
+  border-left:1px solid transparent; 
+  border-right:1px solid transparent; 
 }
 
 #modx-navbar li:hover a {
   background-color: $navbarHover;
+  border-left-color:$borderColor;
+  border-right-color:$borderColor;
   &:hover.modx-help {
     color: $colorSplash;
   }
@@ -71,7 +75,7 @@
   left: 0;
   line-height: 1.1;
   list-style: none;
-  margin: 0 0 0 -1px;
+  margin: 0;
   padding: 0;
   position: absolute;
   top: 43px;
