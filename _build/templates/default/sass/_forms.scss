@@ -67,7 +67,7 @@ textarea.x-form-field,
   font-family: $codefonts;
 }
 
-.x-form-text, 
+.x-form-text, /* this screws up clear cache modal #shame */
 textarea.x-form-field, 
 .x-form-textarea {
   background-color: #fbfbfb;
@@ -122,7 +122,7 @@ textarea.x-form-field,
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger {
-  background-: transparent url(../images/modx-theme/form/trigger.png);
+  background: transparent url(../images/modx-theme/form/trigger.png);
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   border: 1px solid #C5C5C5 !important;
