@@ -38,9 +38,9 @@
 
 #modx-manager-search .x-form-field-wrap:hover,
 #modx-manager-search .x-trigger-wrap-focus {
-  @include transition(background-color, 360ms, ease-in);
+  /*@include transition(background-color, 360ms, ease-in);
   @include transition-delay(0);
-  background: $gainsboro;
+  background: $gainsboro;*/
 }
 
 #modx-uberbar {

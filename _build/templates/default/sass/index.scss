@@ -112,6 +112,10 @@ hr {
   color: $green !important;
 }
 
+.primary {
+	color:$primaryAction !important;
+}
+
 .error {
   color: $red !important;
 }
@@ -137,6 +141,10 @@ hr {
   border-bottom: 1px #90b1b9 dashed;
 }
 
+.x-form-text, textarea.x-form-field {
+	border-color:$borderColor;
+}
+
 /* panel setups */
 #modx-leftbar, 
 #modx-content, 
@@ -158,6 +166,38 @@ hr {
 
 #modx-resource-tabs {
 	@extend %shaded-tab-box;
+	.x-tab-panel-header {
+		border:1px solid $gainsboro;
+		width:auto !important; /* #shame */
+		&.vertical-tabs-header {
+			width:150px !important; /* #shame */
+		}
+		.x-tab-strip {
+			li {
+				float:left;
+				width:auto;
+				margin-left:0;
+			}
+		}
+	}
+	.x-tab-panel-bwrap {
+		.x-tab-panel-header {
+			
+		}
+	}
+	#modx-tv-tabs {	
+		border-left:0;
+		border-right:0;
+	}
+}
+
+#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {	
+	.x-tab-strip {
+		li {
+			width:100% !important; /* #shame */
+			margin-left:0;
+		}
+	}
 }
 
 #modx-resource-content {
@@ -171,8 +211,12 @@ hr {
 }
 
 .x-tab-panel-header {
-	width:100% !important;  /* #shame */
 	@include box-sizing(border-box);
+	.x-tab-strip {
+		li {
+			@include box-sizing(border-box);
+		}
+	}
 }
 
 #modx-container {
@@ -1205,6 +1249,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* tv table */
 #modx-tv-tabs {
   width: 100%;
+  @extend %clearfix;
 }
 
 .modx-tv {
@@ -1328,7 +1373,6 @@ body.ext-ie7 .x-superboxselect-item {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-bottom: 1px solid #EFEFEF;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
   height: 34px;
