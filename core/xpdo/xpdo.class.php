@@ -2016,8 +2016,8 @@ class xPDO {
             if (isset($target['options'])) $targetOptions =& $target['options'];
             $target = isset($target['target']) ? $target['target'] : 'ECHO';
         }
-        if (!XPDO_CLI_MODE && empty ($file)) {
-            $file= (isset ($_SERVER['PHP_SELF']) || $target == 'ECHO') ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_FILENAME'];
+        if (empty($file) && isset($_SERVER['SCRIPT_NAME'])) {
+            $file= $_SERVER['SCRIPT_NAME'];
         }
         if ($level === xPDO::LOG_LEVEL_FATAL) {
             while (ob_get_level() && @ob_end_flush()) {}
@@ -2645,6 +2645,7 @@ class xPDO {
         if (!empty($sql) && !empty($bindings)) {
             reset($bindings);
             $bound = array();
+            $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
             while (list ($k, $param)= each($bindings)) {
                 if (!is_array($param)) {
                     $v= $param;
@@ -2678,8 +2679,8 @@ class xPDO {
                     }
                     $bound[$pattern] = str_replace(array('\\', '$'), array('\\\\', '\$'), $v);
                 } else {
-                    $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
-                    $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);
+                    preg_match("/(\?)/", $sql, $matches, PREG_OFFSET_CAPTURE);
+                    $sql = substr_replace($sql, $parse($this,$bindings[$k]['value'],$type), $matches[0][1], strlen($bindings[$k]['value']));
                 }
             }
             if (!empty($bound)) {
