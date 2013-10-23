@@ -125,7 +125,7 @@ class modInstallRequest {
      * @return array
      */
     public function setDefaultPaths(array $config = array()) {
-        $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
+        $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
         $webUrl= rtrim($webUrl,'/').'/';
         $defaults = array();
         $defaults['context_web_path'] = rtrim(MODX_INSTALL_PATH,'/').'/';

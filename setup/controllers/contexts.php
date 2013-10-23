@@ -9,7 +9,7 @@
 $install->settings->check();
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
-    $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
+    $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
 
     $_POST['context_web_path'] = !empty($_POST['context_web_path']) ? rtrim($_POST['context_web_path'],'/').'/' : MODX_INSTALL_PATH;
     $_POST['context_web_url'] = !empty($_POST['context_web_url']) ? rtrim($_POST['context_web_url'],'/').'/' : $webUrl;
@@ -42,7 +42,7 @@ if (!empty($_POST['proceed'])) {
 }
 $mode = $install->settings->get('installmode');
 
-$webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
+$webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
 if ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
     include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 
