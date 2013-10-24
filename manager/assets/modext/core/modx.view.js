@@ -89,7 +89,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
         this.store = new Ext.data.JsonStore({
             url: config.url
             ,baseParams: config.baseParams || { 
-                action: 'getList'
+                action: 'browser/directory/getList'
                 ,wctx: config.wctx || MODx.ctx
                 ,dir: config.openTo || ''
                 ,source: config.source || 0
@@ -424,7 +424,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         p = p || {};
         if (p.dir) { this.dir = p.dir; }
         Ext.applyIf(p,{
-            action: 'getFiles'
+            action: 'browser/directory/getFiles'
             ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
