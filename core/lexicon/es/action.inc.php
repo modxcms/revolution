@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Action Spanish lexicon topic
  *

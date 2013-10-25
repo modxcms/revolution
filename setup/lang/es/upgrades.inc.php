@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Spanish Upgrades Lexicon Topic for Revolution setup.
  *

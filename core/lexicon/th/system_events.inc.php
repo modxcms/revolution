@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * System Events Thai lexicon topic
  *

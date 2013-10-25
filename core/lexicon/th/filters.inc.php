@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Custom Filters Thai lexicon topic
  *

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Access Thai lexicon topic
  *
@@ -125,8 +125,7 @@ $_lang['user_group_source_access'] = 'การเข้าถึงแหล่
 $_lang['user_group_source_access_msg'] = 'ตรงนี้คุณสามารถกำหนดได้ว่าแหล่งข้อมูลมีเดียใดที่จะให้กลุ่มผู้ใช้สามารถเข้าถึงได้';
 $_lang['user_group_source_authority_desc'] = 'บทบาทขั้นต่ำสุดที่จะสามารถเข้าถึงสิทธิ์ในนโยบายที่เลือกสำหรับบริบทนี้ บทบาทที่มีอำนาจสูง (ค่าอำนาจต่ำๆ) จะสืบทอดการเข้าถึงนี้ด้วย ส่วนมากก็สามารถเว้นค่าไว้เป็น "สมาชิก" ได้';
 $_lang['user_group_source_err_ae'] = 'กลุ่มผู้ใช้มีการเข้าถึงแหล่งข้อมูลมีเดียนั้นเรียบร้อยแล้ว';
-$_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Source for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
-'นโยบายที่ปรับใช้แหล่งข้อมูลนี้สำหรับกลุ่มผู้ใช้นี้ นี่จะเป็นการอนุญาตให้ผู้ใช้ทั้งหมดในกลุ่มผู้ใช้นี้ที่มีบทบาทต่ำสุดมีสิทธิ์ในนโยบาย';
+$_lang['user_group_source_policy_desc'] = 'นโยบายที่ปรับใช้แหล่งข้อมูลนี้สำหรับกลุ่มผู้ใช้นี้ นี่จะเป็นการอนุญาตให้ผู้ใช้ทั้งหมดในกลุ่มผู้ใช้นี้ที่มีบทบาทต่ำสุดมีสิทธิ์ในนโยบาย';
 $_lang['user_group_source_remove_confirm'] = 'คุณแน่ใจที่จะลบแหล่งข้อมูลมีเดียนี้ออกจากกลุ่มผู้ใช้นี้หรือไม่?';
 $_lang['user_group_source_source_desc'] = 'แหล่งข้อมูลมีเดียที่อนุญาตให้เข้าถึงได้';
 $_lang['user_group_user_access_msg'] = 'เลือกผู้ใช้ที่คุณต้องการในกลุ่มผู้ใช้นี้';

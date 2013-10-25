@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Default Spanish lexicon topic
  *

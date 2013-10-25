@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Import Spanish lexicon entries
  *

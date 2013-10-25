@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Export Spanish lexicon topic
  *
