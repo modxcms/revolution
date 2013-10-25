@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Chunk Thai lexicon topic
  *

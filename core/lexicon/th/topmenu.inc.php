@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Top Menu Thai lexicon topic
  *

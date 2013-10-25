@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Spanish language strings for Elements
  *

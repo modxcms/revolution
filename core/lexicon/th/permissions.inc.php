@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Permissions Thai lexicon topic
  *

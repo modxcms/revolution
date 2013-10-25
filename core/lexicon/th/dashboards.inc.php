@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Thai language strings for Dashboards
  *

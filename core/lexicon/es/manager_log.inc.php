@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Manager Log Spanish lexicon topic
  *
