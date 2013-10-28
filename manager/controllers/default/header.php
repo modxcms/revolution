@@ -169,8 +169,8 @@ if ($userProfile->photo) {
     $userImage = '<img src="' . $src . '" />';
 } else {
     $gravemail = md5( strtolower( trim( $userProfile->email ) ) );
-    $gravsrc = 'http://www.gravatar.com/avatar/' . $gravemail . '?s=32';
-    $gravcheck = 'http://www.gravatar.com/avatar/' . $gravemail . '?d=404';
+    $gravsrc = 'https://www.gravatar.com/avatar/' . $gravemail . '?s=32';
+    $gravcheck = 'https://www.gravatar.com/avatar/' . $gravemail . '?d=404';
     $response = get_headers($gravcheck);
 
     if ($response != false){
