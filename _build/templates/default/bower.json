@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "bourbon": "*",
-    "font-awesome": "*"
+    "font-awesome": "~3.2.1"
   },
   "exportsOverride": {
     "bourbon": {

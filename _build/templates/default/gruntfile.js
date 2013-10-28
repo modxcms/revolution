@@ -105,6 +105,16 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
+					compass: false
+				},
+				files: {
+					'<%= dirs.css %>index.css': 'sass/index.scss',
+					'<%= dirs.css %>login.css': 'sass/login.scss'
+				}
+			},
+			map: {
+				options: {
+					style: 'expanded',
 					compass: false,
 					sourcemap: true
 				},
@@ -189,6 +199,7 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'growl:sass', 'growl:watch', 'watch']);
+	grunt.registerTask('map', ['sass:map', 'growl:sass', 'growl:watch', 'watch']);
 	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
 	grunt.registerTask('ship', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:ship','clean:postbuild']);
