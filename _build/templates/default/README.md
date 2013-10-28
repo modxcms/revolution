@@ -120,6 +120,6 @@ npm install
 __Build Sass__  
 You can now use the Grunt process normally and you should see .map files being generated in the manager/themes/default/css directory.
 ```bash
-grunt
+grunt map
 ````
-_Note: .map files are excluded from versioning and should not be checked in._
+_Note: Sourcemaps require Sass 3.3 which as of this writing is a prerelease. Use the `grunt map` task rather than `grunt` if running Sass 3.3 or newer._
