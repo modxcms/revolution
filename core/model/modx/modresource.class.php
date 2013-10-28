@@ -5,7 +5,7 @@
 /**
  * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
  * class to properly implement a Custom Resource Type in MODX.
- * 
+ *
  * @see modResource
  * @interface
  * @package modx
@@ -13,7 +13,7 @@
 interface modResourceInterface {
     /**
      * Determine the controller path for this Resource class. Return an absolute path.
-     * 
+     *
      * @static
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
@@ -168,13 +168,133 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @var boolean
      */
     public $allowChildrenResources = true;
-    
+
     /** @var modX $xpdo */
     public $xpdo;
 
     /**
+     * Filter a string for use as a URL path segment.
+     *
+     * @param modX|xPDO &$xpdo A reference to a modX or xPDO instance.
+     * @param string $segment The string to filter into a path segment.
+     * @param array $options Local options to override global filter settings.
+     *
+     * @return string The filtered string ready to use as a path segment.
+     */
+    public static function filterPathSegment(&$xpdo, $segment, array $options = array()) {
+        /* setup the various options */
+        $iconv = function_exists('iconv');
+        $mbext = function_exists('mb_strlen') && (boolean) $xpdo->getOption('use_multibyte', false);
+        $charset = strtoupper((string) $xpdo->getOption('modx_charset', $options, 'UTF-8'));
+        $delimiter = $xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
+        $delimiters = $xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
+        $maxlength = (integer) $xpdo->getOption('friendly_alias_max_length', $options, 0);
+        $stripElementTags = (boolean) $xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
+        $trimchars = $xpdo->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
+        $restrictchars = $xpdo->getOption('friendly_alias_restrict_chars', $options, 'pattern');
+        $restrictcharspattern = $xpdo->getOption('friendly_alias_restrict_chars_pattern', $options, '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
+        $lowercase = (boolean) $xpdo->getOption('friendly_alias_lowercase_only', $options, true);
+        $translit = $xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
+        $translitClass = $xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
+
+        /* strip html and optionally MODX element tags (stripped by default) */
+        if ($xpdo instanceof modX) {
+            $segment = $xpdo->stripTags($segment, '', $stripElementTags ? array() : null);
+        }
+
+        /* replace &nbsp; with the specified word delimiter */
+        $segment = str_replace('&nbsp;', $delimiter, $segment);
+
+        /* decode named entities to the appropriate character for the character set */
+        $segment = html_entity_decode($segment, ENT_QUOTES, $charset);
+
+        /* replace any remaining & with a lexicon value if available */
+        if ($xpdo instanceof modX && $xpdo->getService('lexicon','modLexicon')) {
+            $segment = str_replace('&', $xpdo->lexicon('and') ? ' ' . $xpdo->lexicon('and') . ' ' : ' and ', $segment);
+        }
+
+        /* apply transliteration as configured */
+        switch ($translit) {
+            case '':
+            case 'none':
+                /* no transliteration */
+                break;
+            case 'iconv':
+                /* if iconv is available, use the built-in transliteration it provides */
+                $segment = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $segment);
+                break;
+            default:
+                /* otherwise look for a transliteration service class that will accept named transliteration tables */
+                if ($xpdo instanceof modX) {
+                    $translitClassPath = $xpdo->getOption('friendly_alias_translit_class_path', $options, $xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
+                    if ($xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
+                        $segment = $xpdo->translit->translate($segment, $translit);
+                    }
+                }
+                break;
+        }
+
+        /* restrict characters as configured */
+        switch ($restrictchars) {
+            case 'alphanumeric':
+                /* restrict segment to alphanumeric characters only */
+                $segment = preg_replace('/[^\.%A-Za-z0-9 _-]/', '', $segment);
+                break;
+            case 'alpha':
+                /* restrict segment to alpha characters only */
+                $segment = preg_replace('/[^\.%A-Za-z _-]/', '', $segment);
+                break;
+            case 'legal':
+                /* restrict segment to legal URL characters only */
+                $segment = preg_replace('/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/', '', $segment);
+                break;
+            case 'pattern':
+            default:
+                /* restrict segment using regular expression pattern configured (same as legal by default) */
+                if (!empty($restrictcharspattern)) {
+                    $segment = preg_replace($restrictcharspattern, '', $segment);
+                }
+        }
+
+        /* replace one or more space characters with word delimiter */
+        $segment = preg_replace('/\s+/u', $delimiter, $segment);
+
+        /* replace one or more instances of word delimiters with word delimiter */
+        $delimiterTokens = array();
+        for ($d = 0; $d < strlen($delimiters); $d++) {
+            $delimiterTokens[] = $delimiters{$d};
+        }
+        $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
+        $segment = preg_replace($delimiterPattern, $delimiter, $segment);
+
+        /* unless lowercase_only preference is explicitly off, change case to lowercase */
+        if ($lowercase) {
+            if ($mbext) {
+                /* if the mb extension is available use it to protect multi-byte chars */
+                $segment = mb_convert_case($segment, MB_CASE_LOWER, $charset);
+            } else {
+                /* otherwise, just use strtolower */
+                $segment = strtolower($segment);
+            }
+        }
+        /* trim specified chars from both ends of the segment */
+        $segment = trim($segment, $trimchars);
+
+        /* get the strlen of the segment (use mb extension if available) */
+        $length = $mbext ? mb_strlen($segment, $charset) : strlen($segment);
+
+        /* if maxlength is specified and exceeded, return substr with additional trim applied */
+        if ($maxlength > 0 && $length > $maxlength) {
+            $segment = substr($segment, 0, $maxlength);
+            $segment = trim($segment, $trimchars);
+        }
+
+        return $segment;
+    }
+
+    /**
      * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
-     * 
+     *
      * @static
      * @param modResource &$resource A reference to the modResource to get the groups from.
      * @param array $sort An array of sort columns in column => direction format.
@@ -482,115 +602,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return string The transformed string.
      */
     public function cleanAlias($alias, array $options = array()) {
-        /* setup the various options */
-        $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->getOption('use_multibyte', false);
-        $charset = strtoupper((string) $this->xpdo->getOption('modx_charset', $options, 'UTF-8'));
-        $delimiter = $this->xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
-        $delimiters = $this->xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
-        $maxlength = (integer) $this->xpdo->getOption('friendly_alias_max_length', $options, 0);
-        $stripElementTags = (boolean) $this->xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
-        $trimchars = $this->xpdo->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
-        $restrictchars = $this->xpdo->getOption('friendly_alias_restrict_chars', $options, 'pattern');
-        $restrictcharspattern = $this->xpdo->getOption('friendly_alias_restrict_chars_pattern', $options, '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
-        $lowercase = (boolean) $this->xpdo->getOption('friendly_alias_lowercase_only', $options, true);
-        $translit = $this->xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
-        $translitClass = $this->xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
-
-        /* strip html and optionally MODX element tags (stripped by default) */
-        if ($this->xpdo instanceof modX) {
-            $alias = $this->xpdo->stripTags($alias, '', $stripElementTags ? array() : null);
-        }
-
-        /* replace &nbsp; with the specified word delimiter */
-        $alias = str_replace('&nbsp;', $delimiter, $alias);
-
-        /* decode named entities to the appropriate character for the character set */
-        $alias = html_entity_decode($alias, ENT_QUOTES, $charset);
-
-        /* replace any remaining & with a lexicon value if available */
-        if ($this->xpdo instanceof modX && $this->xpdo->getService('lexicon','modLexicon')) {
-            $alias = str_replace('&', $this->xpdo->lexicon('and') ? ' ' . $this->xpdo->lexicon('and') . ' ' : ' and ', $alias);
-        }
-
-        /* apply transliteration as configured */
-        switch ($translit) {
-            case '':
-            case 'none':
-                /* no transliteration */
-                break;
-            case 'iconv':
-                /* if iconv is available, use the built-in transliteration it provides */
-                $alias = iconv($mbext ? mb_detect_encoding($alias) : $charset, $charset . '//TRANSLIT//IGNORE', $alias);
-                break;
-            default:
-                /* otherwise look for a transliteration service class that will accept named transliteration tables */
-                if ($this->xpdo instanceof modX) {
-                    $translitClassPath = $this->xpdo->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
-                    if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
-                        $alias = $this->xpdo->translit->translate($alias, $translit);
-                    }
-                }
-                break;
-        }
-
-        /* restrict characters as configured */
-        switch ($restrictchars) {
-            case 'alphanumeric':
-                /* restrict alias to alphanumeric characters only */
-                $alias = preg_replace('/[^\.%A-Za-z0-9 _-]/', '', $alias);
-                break;
-            case 'alpha':
-                /* restrict alias to alpha characters only */
-                $alias = preg_replace('/[^\.%A-Za-z _-]/', '', $alias);
-                break;
-            case 'legal':
-                /* restrict alias to legal URL characters only */
-                $alias = preg_replace('/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/', '', $alias);
-                break;
-            case 'pattern':
-            default:
-                /* restrict alias using regular expression pattern configured (same as legal by default) */
-                if (!empty($restrictcharspattern)) {
-                    $alias = preg_replace($restrictcharspattern, '', $alias);
-                }
-        }
-
-        /* replace one or more space characters with word delimiter */
-        $alias = preg_replace('/\s+/u', $delimiter, $alias);
-
-        /* replace one or more instances of word delimiters with word delimiter */
-        $delimiterTokens = array();
-        for ($d = 0; $d < strlen($delimiters); $d++) {
-            $delimiterTokens[] = $delimiters{$d};
-        }
-        $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
-        $alias = preg_replace($delimiterPattern, $delimiter, $alias);
-
-        /* unless lowercase_only preference is explicitly off, change case to lowercase */
-        if ($lowercase) {
-            if ($mbext) {
-                /* if the mb extension is available use it to protect multi-byte chars */
-                $alias = mb_convert_case($alias, MB_CASE_LOWER, $charset);
-            } else {
-                /* otherwise, just use strtolower */
-                $alias = strtolower($alias);
-            }
-        }
-        /* trim specified chars from both ends of the alias */
-        $alias = trim($alias, $trimchars);
-
-        /* get the strlen of the alias (use mb extension if available) */
-        $length = $mbext ? mb_strlen($alias, $charset) : strlen($alias);
-
-        /* if maxlength is specified and exceeded, return substr with additional trim applied */
-        if ($maxlength > 0 && $length > $maxlength) {
-            $alias = substr($alias, 0, $maxlength);
-            $alias = trim($alias, $trimchars);
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "alias after maxlength applied = {$alias}");
-        }
-
-        return $alias;
+        return $this->xpdo->call($this->_class, 'filterPathSegment', array(&$this->xpdo, $alias, $options));
     }
 
     /**
@@ -813,7 +825,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
     /**
      * Sets a value for a TV for this Resource
-     * 
+     *
      * @param mixed $pk The TV name or ID to set
      * @param string $value The value to set for the TV
      * @return bool Whether or not the TV saved successfully
