@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Category Spanish lexicon topic
  *

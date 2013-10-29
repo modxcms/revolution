@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Chunk Spanish lexicon topic
  *

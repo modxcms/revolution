@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * TV Widget Thai lexicon topic
  *

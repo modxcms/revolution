@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Mail Thai lexicon topic
  *

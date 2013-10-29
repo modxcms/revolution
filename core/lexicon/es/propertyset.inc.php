@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Property Set Spanish lexicon topic
  *

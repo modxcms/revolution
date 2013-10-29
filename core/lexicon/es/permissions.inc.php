@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Permissions Spanish lexicon topic
  *
