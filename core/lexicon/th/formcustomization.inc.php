@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Form Customization Thai lexicon topic
  *

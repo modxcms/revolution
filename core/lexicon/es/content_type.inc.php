@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Content Type Spanish lexicon topic
  *

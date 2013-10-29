@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Config Check Thai lexicon topic
  *

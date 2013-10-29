@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Mail Spanish lexicon topic
  *

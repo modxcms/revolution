@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Custom Filters Spanish lexicon topic
  *

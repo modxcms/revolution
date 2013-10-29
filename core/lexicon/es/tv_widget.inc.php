@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * TV Widget Spanish lexicon topic
  *

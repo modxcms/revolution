@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Context Thai lexicon topic
  *
