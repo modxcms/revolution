@@ -525,6 +525,11 @@ $_lang['xtype'] = 'Feldtyp';
 $_lang['xtype_desc'] = 'Der Feldtyp dieser Einstellung: textfield, textarea oder boolean.';
 $_lang['yes'] = 'Ja';
 $_lang['yesno'] = 'Ja/Nein';
+$_lang['tree_order'] = 'Baum-Sortierung';
+$_lang['recently_updated'] = 'Zuletzt bearbeitet';  // Kürzlich?
+$_lang['newest'] = 'Neueste';
+$_lang['oldest'] = 'Älteste';
+$_lang['title'] = 'Titel';
 
 $_lang['january'] = 'Januar';
 $_lang['february'] = 'Februar';
