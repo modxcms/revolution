@@ -4,9 +4,6 @@
     <h2>{$_lang.help_page_title}</h2>
 
     <div id="helpBanner">
-        <div id="helpLogo">
-            <img src="{$_config.manager_url}templates/default/images/modx-help-logo.png">
-        </div>
         <h3>{$_lang.help_main_head}</h3>
 
         <p>{$_lang.help_main_subhead}</p>
@@ -61,7 +58,7 @@
 
             <input type="email" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value=""
                    class="textbox"/>
-            <input type="submit" name="Submit" value="{$_lang.email_sub_button}"/>
+            <input type="submit" class="primary-button" name="Submit" value="{$_lang.email_sub_button}"/>
         </form>
 
         <p>{$_lang.social_follows}</p>
