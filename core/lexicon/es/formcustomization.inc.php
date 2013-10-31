@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Form Customization Spanish lexicon topic
  *

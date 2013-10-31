@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Context Spanish lexicon topic
  *

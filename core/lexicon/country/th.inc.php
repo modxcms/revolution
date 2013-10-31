@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Country List Language File(Thai)
  *

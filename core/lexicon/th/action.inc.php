@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Action Thai lexicon topic
  *

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
 * Country List Language File - French Version
 * Version: 1.0

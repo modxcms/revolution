@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Spanish language files for Revolution 2.0.7 setup
  *
