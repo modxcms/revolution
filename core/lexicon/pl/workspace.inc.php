@@ -79,8 +79,8 @@ $_lang['downloaded'] = 'Downloaded';
 #$_lang['downloading'] = 'Downloading...';
 $_lang['downloading'] = 'Downloading...';
 
-#$_lang['download_extras'] = 'Download Extras';
-$_lang['download_extras'] = 'Download Extras';
+#$_lang['download_extras'] = 'Download Apps';
+$_lang['download_extras'] = 'Download Apps';
 
 #$_lang['downloads'] = 'Downloads';
 $_lang['downloads'] = 'Downloads';
@@ -502,8 +502,8 @@ $_lang['provider_err_save'] = 'An error occurred while trying to save the Provid
 #$_lang['provider_home_msg'] = 'Choose a Category from the left to begin browsing this Provider.';
 $_lang['provider_home_msg'] = 'Choose a Category from the left to begin browsing this Provider.';
 
-#$_lang['provider_home_title'] = 'Download Extras';
-$_lang['provider_home_title'] = 'Download Extras';
+#$_lang['provider_home_title'] = 'Download Apps';
+$_lang['provider_home_title'] = 'Download Apps';
 
 #$_lang['provider_remove'] = 'Delete Provider';
 $_lang['provider_remove'] = 'Delete Provider';

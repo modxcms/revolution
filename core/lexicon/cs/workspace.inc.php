@@ -81,7 +81,7 @@ $_lang['downloaded'] = 'Staženo';
 // $_lang['downloading'] = 'Downloading...';
 $_lang['downloading'] = 'Stahuji...';
 
-// $_lang['download_extras'] = 'Download Extras';
+// $_lang['download_extras'] = 'Download Apps';
 $_lang['download_extras'] = 'Stáhnout Extras';
 
 // $_lang['downloads'] = 'Downloads';
@@ -504,7 +504,7 @@ $_lang['provider_err_save'] = 'Nastala chyba při ukládání poskytovatele.';
 // $_lang['provider_home_msg'] = 'Choose a repository from the left to begin browsing this Provider.';
 $_lang['provider_home_msg'] = 'Vyberte dokument vlevo pro začátek prohledávání tohoto poskytovatele.';
 
-// $_lang['provider_home_title'] = 'Download Extras';
+// $_lang['provider_home_title'] = 'Download Apps';
 $_lang['provider_home_title'] = 'Stáhnout Extras';
 
 // $_lang['provider_remove'] = 'Delete Provider';
