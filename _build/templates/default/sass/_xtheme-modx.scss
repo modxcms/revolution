@@ -143,7 +143,7 @@
 .x-toolbar .x-btn-click em.x-btn-split,
 .x-toolbar .x-btn-menu-active em.x-btn-split, 
 .x-toolbar .x-btn-pressed em.x-btn-split {
-  background-image: url(../images/modx-theme/button/s-arrow-o.gif);
+ /* background-image: url(../images/modx-theme/button/s-arrow-o.gif);*/
 }
 
 .x-toolbar em.x-btn-split-bottom {
@@ -359,7 +359,7 @@
   padding: 0;
 }
 .x-panel-body-noheader .x-grid3-header {
-  background: rgb(100, 100, 100);
+  background: $darkNeutral;
   border-bottom: 1px solid #333;
   border: 0 none;
 }
@@ -425,7 +425,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
   background-image: url(../images/modx-theme/grid/col-move-bottom.gif);
 }
 .x-grid3-row-selected {
-  background-color: $selected;
+  background-color: $gainsboro;
   background-image: none;
   border-bottom: 1px solid $borderColor !important;
   border-top: 1px solid $borderColor !important;

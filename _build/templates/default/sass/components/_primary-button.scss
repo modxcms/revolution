@@ -1,6 +1,7 @@
 %primary-button {
   @include linear-gradient(lighten($primaryAction,10%), $primaryAction);
   border-color:darken($primaryAction,6%);
+  color:white;
   &.x-item-disabled {
     opacity:1;
     @include linear-gradient($desaturatedSplash, darken($desaturatedSplash,10%));

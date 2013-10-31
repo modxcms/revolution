@@ -228,7 +228,7 @@ textarea.x-form-field,
 .x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus {
   border-radius: 0;
   outline-offset: 0;
-  outline: 2px solid #ddd !important;
+  outline: 2px solid #ddd !important; /* #shame */
 }
 
 .x-viewport .x-trigger-wrap-focus .x-form-focus {
@@ -240,8 +240,7 @@ textarea.x-form-field,
 }
 
 .x-form-invalid, textarea.x-form-invalid {
-  background: #fff url(../images/modx-theme/grid/invalid_line.gif);
-  border-color: #c30;
+  border-color: $red !important;
 }
 
 .ext-strict .x-small-editor .x-form-text {
@@ -268,9 +267,19 @@ textarea.x-form-field,
 }
 
 .x-form-invalid-msg {
-  background-image: url(../images/modx-theme/shared/warning.gif);
+  /*background-image: url(../images/modx-theme/shared/warning.gif);*/
   color: #c0272b;
   font: $fontSmall;
+  margin-top:2px;
+  position:relative;
+	&:before {
+		@extend %pseudo-font;
+		content:$warning-sign; /* : "\f071" */
+		position: absolute;
+		top:3px;
+		left:3px;
+		color:inherit;
+	}
 }
 
 .x-form-empty-field {
