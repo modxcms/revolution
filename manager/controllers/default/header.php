@@ -168,9 +168,15 @@ if ($userProfile->photo) {
     $src = $modx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?zc=1&h=32&w=32&src=' . $userProfile->photo;
     $userImage = '<img src="' . $src . '" />';
 } else {
+
+    if (!empty($modx->getOption('server_protocol'))) {
+        $gravproto = $modx->getOption('server_protocol');
+    } else {
+        $gravproto = 'https';
+    }
     $gravemail = md5( strtolower( trim( $userProfile->email ) ) );
-    $gravsrc = $modx->getOption('server_protocol') . '://www.gravatar.com/avatar/' . $gravemail . '?s=32';
-    $gravcheck = $modx->getOption('server_protocol') . '://www.gravatar.com/avatar/' . $gravemail . '?d=404';
+    $gravsrc = $gravproto . '://www.gravatar.com/avatar/' . $gravemail . '?s=32';
+    $gravcheck = $gravproto . '://www.gravatar.com/avatar/' . $gravemail . '?d=404';
     $response = get_headers($gravcheck);
 
     if ($response != false){
