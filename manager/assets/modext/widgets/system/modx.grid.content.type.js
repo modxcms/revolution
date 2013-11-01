@@ -106,6 +106,28 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
             text: _('content_type_remove')
             ,handler: this.confirm.createDelegate(this,['system/contenttype/remove',_('content_type_remove_confirm')])
         });
+
+        m.push({
+            text: 'Edit'
+            ,handler: function(btn, e) {
+               //console.log(this.menu.record);
+
+                var window = new MODx.window.CreateContentType({
+                    record: this.menu.record
+                    ,action: 'system/contenttype/update'
+                    ,listeners: {
+                        success: {
+                            fn: this.refresh
+                            ,scope: this
+                        }
+                    }
+                });
+                console.log(window);
+                window.setRecord(this.menu.record);
+                window.show(e.target);
+            }
+            ,scope: this
+        });
         this.menu.record.menu = m;
     }
 });
@@ -118,7 +140,7 @@ Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
  * @class MODx.window.ContentType
  * @extends MODx.Window
  * @param {Object} config An object of options.
- * @xtype modx-window-contenttype-create
+ * @xtype modx-window-content-type-create
  */
 MODx.window.CreateContentType = function(config) {
     config = config || {};
@@ -221,15 +243,50 @@ MODx.window.CreateContentType = function(config) {
                 title: 'Custom headers'
                 ,items: [{
                     xtype: 'modx-grid-local'
+                    ,fields: ['value']
+                    ,id: 'headers'
+                    ,columns: [{
+                        dataIndex: 'value'
+                        ,header: 'header'
+                    }]
                 }]
             }]
         }]
         ,keys: []
+
+        ,funky: function() {
+            console.log('just testing');
+        }
+
+        ,setRecord: function(record) {
+            console.log('set record', record);
+            this.setValues(record);
+
+            var grid = Ext.getCmp('headers')
+                ,store = grid.getStore();
+
+            store.add([{value: 'demo'}]);
+        }
     });
     MODx.window.CreateContentType.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateContentType,MODx.Window);
-Ext.reg('modx-window-content-type-create',MODx.window.CreateContentType);
+Ext.reg('modx-window-content-type-create',MODx.window.CreateContentType, {
+
+    setRecord: function(record) {
+        console.log('set record', record);
+        this.setValues(record);
+
+        var grid = Ext.getCmp('headers')
+            ,store = grid.getStore();
+
+        store.add([{value: 'demo'}]);
+    }
+
+    ,funky: function() {
+        console.log('funky');
+    }
+});
 
 MODx.ContentTypeHeaderGrid = function(config) {
     config = config || {};
