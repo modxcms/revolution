@@ -18,6 +18,20 @@
   }
 }
 
+%pseudo-font {
+	position:relative;
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
+
+%nav-item {
+	&:hover {
+		background:$gainsboro;
+	}
+}
+
 // Hide from both screenreaders and browsers: h5bp.com/u
 
 %hidden {

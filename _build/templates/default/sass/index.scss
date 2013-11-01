@@ -35,6 +35,7 @@
 @import "font-awesome/font-awesome";
 @import "image-set";
 @import "colors-and-vars";
+@import "utility";
 @import "xtheme-modx";
 @import "forms";
 @import "components/components";
@@ -42,7 +43,6 @@
 @import "tabs";
 @import "navbar";
 @import "uberbar";
-@import "utility";
 @import "tree";
 @import "help";
 
@@ -1205,8 +1205,7 @@ body.ext-ie7 .x-superboxselect-item {
 /* Panel description text */
 .panel-desc {
   background-color: #F7F7F7;
-  border-bottom: 1px solid #E7E7E7 !important;
-  border-top: 1px solid #E7E7E7 !important;
+  border: 1px solid #E7E7E7 !important;
   color: #5A5A5A;
   line-height: 1.5;
   margin-top: 5px;
@@ -1975,7 +1974,7 @@ body.ext-ie7 .x-superboxselect-item {
   color: #92AF4C;
 }
 .not-installed .x-grid3-col-info-col {
-  color: #C34550;
+  color: $red;
 }
 .inline-button {
   -webkit-box-align: center;
