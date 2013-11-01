@@ -220,7 +220,7 @@ MODx.window.CreateContentType = function(config) {
             }, {
                 title: 'Custom headers'
                 ,items: [{
-                    xtype: 'modx-content-type-headers-grid'
+                    xtype: 'modx-grid-local'
                 }]
             }]
         }]
@@ -241,7 +241,7 @@ MODx.ContentTypeHeaderGrid = function(config) {
     });
     MODx.ContentTypeHeaderGrid.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.ContentTypeHeaderGrid, Ext.grid.LocalGrid, {
+Ext.extend(MODx.ContentTypeHeaderGrid, MODx.grid.LocalGrid, {
 
 });
-Ext.reg('modx-content-type-headers-grid', MODx.ContentTypeHeaderGrid);
+Ext.reg('modx-content-type-headers-grid', MODx.grid.LocalGrid);
