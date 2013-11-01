@@ -265,7 +265,12 @@ MODx.window.CreateContentType = function(config) {
             var grid = Ext.getCmp('headers')
                 ,store = grid.getStore();
 
-            store.add([{value: 'demo'}]);
+            store.add(new Ext.data.Record({
+                idx: 0
+                ,value: 'Fake: data'
+            }));
+
+            grid.doLayout();
         }
     });
     MODx.window.CreateContentType.superclass.constructor.call(this,config);
