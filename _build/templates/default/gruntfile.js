@@ -156,6 +156,10 @@ module.exports = function(grunt) {
 			scss: {
 				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
 				tasks: ['sass:dist', 'growl:sass']
+			},
+			map: {
+				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
+				tasks: ['sass:map', 'growl:map']
 			}
 		},
 		clean: { /* take out the trash */
@@ -165,6 +169,10 @@ module.exports = function(grunt) {
 		growl: {
 			sass: {
 				message: "Sass files created.",
+				title: "grunt"
+			},
+			map: {
+				message: "Sass files created with sourcemaps.",
 				title: "grunt"
 			},
 			build: {
@@ -199,7 +207,7 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'growl:sass', 'growl:watch', 'watch']);
-	grunt.registerTask('map', ['sass:map', 'growl:sass', 'growl:watch', 'watch']);
+	grunt.registerTask('map', ['sass:map', 'growl:map', 'growl:watch', 'watch:map']);
 	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
 	grunt.registerTask('ship', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:ship','clean:postbuild']);
