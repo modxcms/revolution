@@ -103,15 +103,8 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
     getMenu: function() {
         var m = [];
         m.push({
-            text: _('content_type_remove')
-            ,handler: this.confirm.createDelegate(this,['system/contenttype/remove',_('content_type_remove_confirm')])
-        });
-
-        m.push({
-            text: 'Edit'
+            text: _('edit')
             ,handler: function(btn, e) {
-               //console.log(this.menu.record);
-
                 var window = new MODx.window.CreateContentType({
                     record: this.menu.record
                     ,action: 'system/contenttype/update'
@@ -122,13 +115,17 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
                         }
                     }
                 });
-                console.log(window);
                 window.setRecord(this.menu.record);
                 window.show(e.target);
             }
             ,scope: this
         });
-        this.menu.record.menu = m;
+        m.push({
+            text: _('content_type_remove')
+            ,handler: this.confirm.createDelegate(this,['system/contenttype/remove',_('content_type_remove_confirm')])
+        });
+
+        return m;
     }
 });
 Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
@@ -246,7 +243,7 @@ MODx.window.CreateContentType = function(config) {
                     ,name: 'headers'
                 }]
             },{
-                title: 'Custom headers'
+                title: _('content_type_header_tab')
                 ,layout: 'anchor'
                 ,anchor: '100%'
                 ,items: [{
@@ -279,8 +276,6 @@ Ext.extend(MODx.window.CreateContentType,MODx.Window, {
     }
 
     ,beforeSubmit: function(o) {
-        //console.log('before submit', o);
-
         var grid = Ext.getCmp('headers'),
             store = grid.getStore()
             ,records = store.getRange()
@@ -312,13 +307,13 @@ MODx.ContentTypeHeaderGrid = function(config) {
     Ext.apply(config, {
         fields: ['id', 'header']
         ,columns: [{
-            header: 'header'
+            header: _('content_type_header')
             ,dataIndex: 'header'
         }]
         ,deferredRender: true
         ,autoHeight: true
         ,tbar: [{
-            text: 'New'
+            text: _('new')
             ,handler: this.add
             ,scope: this
         }]
@@ -334,8 +329,6 @@ Ext.extend(MODx.ContentTypeHeaderGrid, MODx.grid.LocalGrid, {
     ,edit: function(btn, e) {
         var record = this.menu.record
             ,window = this.loadWindow(record);
-
-        console.log(record);
 
         window.setValues(record);
         window.show(e.target);
@@ -360,13 +353,13 @@ Ext.extend(MODx.ContentTypeHeaderGrid, MODx.grid.LocalGrid, {
     ,getMenu: function() {
         var m = [];
         m.push({
-            text: 'Edit'
+            text: _('edit')
             ,handler: this.edit
             ,scope: this
         });
 
         m.push({
-            text: 'Remove'
+            text: _('remove')
             ,handler: this.remove
             ,scope: this
         });
@@ -385,11 +378,11 @@ MODx.window.ContentHeader = function(config) {
     config = config || {};
 
     Ext.apply(config, {
-        title: 'Hellow!'
+        title: _('content_type_header_title')
         ,fields: [{
             xtype: 'textfield'
             ,name: 'header'
-            ,fieldLabel: 'Header'
+            ,fieldLabel: _('content_type_header')
             ,anchor: '100%'
         }]
         ,closeAction: 'close'
@@ -402,18 +395,15 @@ Ext.extend(MODx.window.ContentHeader, MODx.Window, {
         var values = this.fp.getForm().getValues()
             ,store = this.grid.getStore();
 
-        console.log('initial record', this.config.record);
-
-
         if (this.config.record && this.config.record.header) {
+            // Existing record, let's update it
             var idx = store.find('header', this.config.record.header);
-            console.log('inset at', idx);
             store.removeAt(idx);
             store.insert(idx, new Ext.data.Record({
                 header: values['header']
             }));
         } else {
-            console.log('add');
+            // New record let's add it to the store
             store.add(new Ext.data.Record({
                 header: values['header']
             }));

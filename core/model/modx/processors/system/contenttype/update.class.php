@@ -28,6 +28,7 @@ class modContentTypeUpdateProcessor extends modObjectUpdateProcessor {
         $this->object->set('headers', $headers);
 
         $binary = $this->getProperty('binary',null);
+        $this->modx->log(modX::LOG_LEVEL_INFO, print_r($this->getProperties(), true));
         if ($binary !== null) {
             $this->object->set('binary',(boolean)$binary);
         }
