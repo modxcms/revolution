@@ -170,6 +170,9 @@ MODx.window.CreateContentType = function(config) {
                             msgTarget: 'under'
                         }
                         ,items: [{
+                            xtype: 'hidden'
+                            ,name: 'id'
+                        },{
                             fieldLabel: _('name')
                             ,name: 'name'
                             ,id: this.ident+'-name'
@@ -238,72 +241,185 @@ MODx.window.CreateContentType = function(config) {
                     ,xtype: 'textarea'
                     ,anchor: '100%'
                     ,grow: true
+                },{
+                    xtype: 'hidden'
+                    ,name: 'headers'
                 }]
-            }, {
+            },{
                 title: 'Custom headers'
+                ,layout: 'anchor'
+                ,anchor: '100%'
                 ,items: [{
-                    xtype: 'modx-grid-local'
-                    ,fields: ['value']
+                    xtype: 'modx-content-type-headers-grid'
                     ,id: 'headers'
-                    ,columns: [{
-                        dataIndex: 'value'
-                        ,header: 'header'
-                    }]
                 }]
             }]
         }]
         ,keys: []
-
-        ,funky: function() {
-            console.log('just testing');
-        }
-
-        ,setRecord: function(record) {
-            console.log('set record', record);
-            this.setValues(record);
-
-            var grid = Ext.getCmp('headers')
-                ,store = grid.getStore();
-
-            store.add(new Ext.data.Record({
-                idx: 0
-                ,value: 'Fake: data'
-            }));
-
-            grid.doLayout();
-        }
     });
     MODx.window.CreateContentType.superclass.constructor.call(this,config);
+    this.on('beforeSubmit', this.beforeSubmit, this);
 };
-Ext.extend(MODx.window.CreateContentType,MODx.Window);
-Ext.reg('modx-window-content-type-create',MODx.window.CreateContentType, {
+Ext.extend(MODx.window.CreateContentType,MODx.Window, {
 
     setRecord: function(record) {
-        console.log('set record', record);
         this.setValues(record);
 
         var grid = Ext.getCmp('headers')
             ,store = grid.getStore();
 
-        store.add([{value: 'demo'}]);
+        store.removeAll();
+        if (record.headers && record.headers.length > 0) {
+            Ext.each(record.headers, function(header, idx, list) {
+                store.add(new Ext.data.Record({
+                    header: header
+                }));
+            }, this);
+        }
     }
 
-    ,funky: function() {
-        console.log('funky');
+    ,beforeSubmit: function(o) {
+        //console.log('before submit', o);
+
+        var grid = Ext.getCmp('headers'),
+            store = grid.getStore()
+            ,records = store.getRange()
+            ,form = this.fp.getForm();
+
+        var results = [];
+        Ext.each(records, function(rec, idx, list) {
+            results.push(rec.get('header'));
+        }, this);
+        results = Ext.encode(results);
+        Ext.apply(o, {
+            headers: results
+        });
+        form.setValues(o);
+
+        return true;
     }
 });
+Ext.reg('modx-window-content-type-create',MODx.window.CreateContentType);
 
+/**
+ *
+ * @param config
+ * @constructor
+ */
 MODx.ContentTypeHeaderGrid = function(config) {
     config = config || {};
 
     Ext.apply(config, {
-        fields: ['id', 'name']
-        ,store: new Ext.ArrayStore
-        ,data: []
+        fields: ['id', 'header']
+        ,columns: [{
+            header: 'header'
+            ,dataIndex: 'header'
+        }]
+        ,deferredRender: true
+        ,autoHeight: true
+        ,tbar: [{
+            text: 'New'
+            ,handler: this.add
+            ,scope: this
+        }]
     });
     MODx.ContentTypeHeaderGrid.superclass.constructor.call(this, config);
 };
 Ext.extend(MODx.ContentTypeHeaderGrid, MODx.grid.LocalGrid, {
+    add: function(btn,e) {
+        var window = this.loadWindow();
+        window.show(e.target);
+    }
 
+    ,edit: function(btn, e) {
+        var record = this.menu.record
+            ,window = this.loadWindow(record);
+
+        console.log(record);
+
+        window.setValues(record);
+        window.show(e.target);
+    }
+
+    ,remove: function() {
+        var record = this.menu.record
+            ,store =  this.getStore()
+            ,idx = store.find('header', record['header']);
+
+        store.removeAt(idx);
+    }
+
+    ,loadWindow: function(record) {
+        return MODx.load({
+            xtype: 'modx-window-content-header'
+            ,grid: this
+            ,record: record
+        });
+    }
+
+    ,getMenu: function() {
+        var m = [];
+        m.push({
+            text: 'Edit'
+            ,handler: this.edit
+            ,scope: this
+        });
+
+        m.push({
+            text: 'Remove'
+            ,handler: this.remove
+            ,scope: this
+        });
+
+        return m;
+    }
 });
-Ext.reg('modx-content-type-headers-grid', MODx.grid.LocalGrid);
+Ext.reg('modx-content-type-headers-grid', MODx.ContentTypeHeaderGrid);
+
+/**
+ *
+ * @param config
+ * @constructor
+ */
+MODx.window.ContentHeader = function(config) {
+    config = config || {};
+
+    Ext.apply(config, {
+        title: 'Hellow!'
+        ,fields: [{
+            xtype: 'textfield'
+            ,name: 'header'
+            ,fieldLabel: 'Header'
+            ,anchor: '100%'
+        }]
+        ,closeAction: 'close'
+    });
+    MODx.window.ContentHeader.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.window.ContentHeader, MODx.Window, {
+
+    submit: function(close) {
+        var values = this.fp.getForm().getValues()
+            ,store = this.grid.getStore();
+
+        console.log('initial record', this.config.record);
+
+
+        if (this.config.record && this.config.record.header) {
+            var idx = store.find('header', this.config.record.header);
+            console.log('inset at', idx);
+            store.removeAt(idx);
+            store.insert(idx, new Ext.data.Record({
+                header: values['header']
+            }));
+        } else {
+            console.log('add');
+            store.add(new Ext.data.Record({
+                header: values['header']
+            }));
+        }
+
+        this.close();
+    }
+});
+Ext.reg('modx-window-content-header', MODx.window.ContentHeader);

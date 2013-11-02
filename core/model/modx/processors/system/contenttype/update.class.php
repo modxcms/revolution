@@ -24,6 +24,9 @@ class modContentTypeUpdateProcessor extends modObjectUpdateProcessor {
     public $refreshURIs = false;
 
     public function beforeSave() {
+        $headers = $this->modx->fromJSON($this->getProperty('headers', '[]'));
+        $this->object->set('headers', $headers);
+
         $binary = $this->getProperty('binary',null);
         if ($binary !== null) {
             $this->object->set('binary',(boolean)$binary);
