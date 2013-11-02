@@ -60,7 +60,7 @@
   border: $borderColor;
   box-shadow: $shadower;
   height: auto !important;
-  margin: 2px 0 0 0;
+  margin: 1px 0 0 -2px;
   left: 20px;
   position: relative;
   width: 450px !important;
@@ -68,6 +68,10 @@
 
 .modx-manager-search-results .x-combo-list-inner {
   width: 100% !important;
+  border:1px solid $borderColor;
+  border-top:none;
+  @include box-sizing(border-box);
+  overflow:hidden;
 }
 
 .modx-manager-search-results .section {
@@ -87,6 +91,10 @@
   line-height: 17px;
   margin: 0;
   padding: 4px 8px;
+}
+
+.modx-manager-search-results p {
+	@extend %nav-item;
 }
 
 .modx-manager-search-results h3 {

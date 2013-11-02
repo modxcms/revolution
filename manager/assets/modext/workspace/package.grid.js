@@ -41,6 +41,7 @@ MODx.grid.Package = function(config) {
         dlbtn = {
             text: _('download_extras')
 			,xtype: 'splitbutton'
+			,cls:'primary-button'
             ,handler: this.onDownloadMoreExtra
 			,menu: {
 				items:[{
@@ -155,7 +156,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 			h.push({ className:'uninstall', text: rec.textaction });
 			h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
 		} else {
-            h.push({ className:'install green', text: rec.textaction });
+            h.push({ className:'install primary', text: rec.textaction });
         }
         if (rec.updateable) {
             h.push({ className:'update orange', text: _('package_update_action_button') });

@@ -94,6 +94,9 @@
 #helpBanner {
   margin-top: 1.5em;
   min-height: 112px;
+  background-repeat:no-repeat;
+  background-position:right top;
+  @include image-set('../images/modx-help-logo.png','../images/modx-help-logo@2x.png');
   #helpLogo {
     float: right;
     height: 76px;
@@ -117,7 +120,7 @@
     width: 70%;
   }
   input[type=submit] {
-    background: none;
+    /*background: none;*/
     border: 0;
     cursor: pointer;
     font-size: 1.1em;

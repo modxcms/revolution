@@ -45,13 +45,16 @@
     min-width: 100%;
     vertical-align: middle;
   }
+  &.primary-button {
+	@extend %primary-button;
+  }
 }
 
 .x-btn-over {
   border-color:darken($gainsboro,40%);
 }
 
-#modx-abtn-save {
+.primary-button, #modx-abtn-save {
   @extend %primary-button;
 }
 
@@ -175,9 +178,18 @@
 }
 
 .x-btn em.x-btn-split {
-  background: transparent url(../images/modx-theme/button/s-arrow.gif) no-repeat right center;
+  /*background: transparent url(../images/modx-theme/button/s-arrow.gif) no-repeat right center;*/
   display: block;
   padding-right: 14px;
+  position:relative;
+  &:before {
+    @extend %pseudo-font;
+    content:$caret-down;
+    position:absolute;
+    top:4px;
+    right:0;
+    color:inherit;
+  }
 }
 
 .x-btn em.x-btn-arrow {
@@ -189,7 +201,7 @@
 /* //end button style */
 
 .x-btn-over em.x-btn-split, .x-btn-click em.x-btn-split, .x-btn-menu-active em.x-btn-split, .x-btn-pressed em.x-btn-split {
-  background-image: url(../images/modx-theme/button/s-arrow-o.gif);
+  /*background-image: url(../images/modx-theme/button/s-arrow-o.gif);*/
 }
 
 .x-btn em.x-btn-arrow-bottom {
