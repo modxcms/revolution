@@ -384,6 +384,7 @@ MODx.window.ContentHeader = function(config) {
             ,name: 'header'
             ,fieldLabel: _('content_type_header')
             ,anchor: '100%'
+            ,allowBlank: false
         }]
         ,closeAction: 'close'
     });
