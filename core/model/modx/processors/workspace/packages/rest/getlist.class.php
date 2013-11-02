@@ -41,7 +41,7 @@ class modPackageRemoteGetListProcessor extends modProcessor {
     public function process() {
         $data = $this->getData();
         if (!is_array($data)) {
-            return $this->failure($data);
+            $this->failure($data);
         }
 
         $list = array();
