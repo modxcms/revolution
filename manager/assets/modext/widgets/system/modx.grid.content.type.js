@@ -94,7 +94,8 @@ MODx.grid.ContentType = function(config) {
         },binaryColumn]
         ,tbar: [{
             text: _('content_type_new')
-            ,handler: { xtype: 'modx-window-content-type-create' ,blankValues: true }
+            ,handler: this.newContentType
+            ,scope: this
         }]
     });
     MODx.grid.ContentType.superclass.constructor.call(this,config);
@@ -126,6 +127,18 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
         });
 
         return m;
+    }
+
+    ,newContentType: function(btn, e) {
+        var window = new MODx.window.CreateContentType({
+            listeners: {
+                success: {
+                    fn: this.refresh
+                    ,scope: this
+                }
+            }
+        });
+        window.show(e.target);
     }
 });
 Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
