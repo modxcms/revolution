@@ -33,9 +33,9 @@ $_lang['area_system'] = 'System und Server';
 $_lang['areas'] = 'Bereiche';
 $_lang['charset'] = 'Zeichensatz';
 $_lang['country'] = 'Land';
-$_lang['description_desc'] = 'Eine kurze Beschreibung der Einstellung. Dies kann auch ein Lexikon-Eintrag basierend auf dem Schlüssel sein.';
+$_lang['description_desc'] = 'Eine kurze Beschreibung der Einstellung. Dies kann auch ein Lexikon-Eintrag basierend auf dem Schlüssel sein, der dem Format "setting_" + Schlüssel + "_desc" entspricht.';
 $_lang['key_desc'] = 'Der Schlüssel der Einstellung. Er ist in Ihren Inhalten über den [[++key]]-Platzhalter verfügbar.';
-$_lang['name_desc'] = 'Ein Name für die Einstellung. Dies kann auch ein Lexikon-Eintrag basierend auf dem Schlüssel sein, der dem Format "setting_" + Schlüssel + "_desc" entspricht.';
+$_lang['name_desc'] = 'Ein Name für die Einstellung. Dies kann auch ein Lexikon-Eintrag basierend auf dem Schlüssel sein, der dem Format "setting_" + Schlüssel entspricht.';
 $_lang['namespace'] = 'Namensraum';
 $_lang['namespace_desc'] = 'Der Namensraum, mit dem diese Einstellung verbunden ist. Das Standard-Lexikon-Thema wird für diesen Namensraum geladen, wenn die Einstellungen eingelesen werden.';
 $_lang['namespace_filter'] = 'Nach Namensraum filtern...';
@@ -256,11 +256,11 @@ $_lang['setting_error_page'] = 'Fehlerseite';
 $_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
 $_lang['setting_error_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Fehlerseite an.';
 
-$_lang['setting_extension_packages'] = 'Erweiterungs-Packages';
-$_lang['setting_extension_packages_desc'] = 'Ein JSON-Array von Packages, die bei der MODX-Initialisierung geladen werden sollen. Im Format [{"packagename":{pfad":"pfad/zum/package"},{"weiterespackage":{"pfad":"pfad/zum/anderenpackage"}}]';
-
 $_lang['setting_ext_debug'] = 'ExtJS-Debug';
 $_lang['setting_ext_debug_desc'] = 'Gibt an, ob ext-all-debug.js geladen werden soll, um beim Debuggen Ihres ExtJS-Codes zu helfen.';
+
+$_lang['setting_extension_packages'] = 'Erweiterungs-Packages';
+$_lang['setting_extension_packages_desc'] = 'Ein JSON-Array von Packages, die bei der MODX-Initialisierung geladen werden sollen. Im Format [{"packagename":{pfad":"pfad/zum/package"},{"weiterespackage":{"pfad":"pfad/zum/anderenpackage"}}]';
 
 $_lang['setting_failed_login_attempts'] = 'Fehlgeschlagene Login-Versuche';
 $_lang['setting_failed_login_attempts_desc'] = 'Geben Sie an, wie viele fehlgeschlagene Login-Versuche erlaubt sein sollen, bevor der Benutzer geblockt wird.';
