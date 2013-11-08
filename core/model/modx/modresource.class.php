@@ -262,10 +262,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         /* replace one or more instances of word delimiters with word delimiter */
         $delimiterTokens = array();
         for ($d = 0; $d < strlen($delimiters); $d++) {
-            $delimiterTokens[] = $delimiters{$d};
+            $delimiterTokens[] = preg_quote($delimiters{$d}, '/');
         }
-        $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
-        $segment = preg_replace($delimiterPattern, $delimiter, $segment);
+        if (!empty($delimiterTokens)) {
+            $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
+            $segment = preg_replace($delimiterPattern, $delimiter, $segment);
+        }
 
         /* unless lowercase_only preference is explicitly off, change case to lowercase */
         if ($lowercase) {
