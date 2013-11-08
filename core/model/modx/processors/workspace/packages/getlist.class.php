@@ -177,17 +177,7 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
                     }
                 }
                 if ($provider) {
-                    $loaded = $provider->getClient();
-                    if ($loaded) {
-                        /** @var modRestResponse $response */
-                        $response = $provider->request('package/update','GET',array(
-                            'signature' => $package->get('signature'),
-                            'supports' => $this->productVersion,
-                        ));
-                        if ($response && !$response->isError()) {
-                            $updates = $response->toXml();
-                        }
-                    }
+                    $updates = $provider->latest($package->get('signature'));
                     $updates = array('count' => count($updates));
                     $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire, $updateCacheOptions);
                 }
