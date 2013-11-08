@@ -250,9 +250,12 @@ class modTransportPackage extends xPDOObject {
             $attributes[xPDOTransport::PACKAGE_ACTION] = $this->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
             @ini_set('max_execution_time', 0);
             $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
-            $unsatisfied = $this->checkDependencies($attributes);
+            $requires = isset($attributes['requires']) && is_array($attributes['requires'])
+                ? $attributes['requires']
+                : array();
+            $unsatisfied = $this->checkDependencies($requires);
             if (!empty($unsatisfied)) {
-                $unsatisfied = $this->resolveDependencies($unsatisfied, $attributes);
+                $unsatisfied = $this->resolveDependencies($unsatisfied);
                 if (!empty($unsatisfied)) {
                     foreach ($unsatisfied as $dependency => $constraint) {
                         $this->xpdo->log(
