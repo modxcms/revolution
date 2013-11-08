@@ -32,6 +32,64 @@ class modTransportProvider extends xPDOSimpleObject {
     }
 
     /**
+     * Return a list repositories from this Provider.
+     *
+     * @return array A list of repositories in this Provider.
+     */
+    public function repositories() {
+        /** @var modRestResponse $response */
+        $response = $this->request('repository');
+        if ($response->isError()) {
+            return $this->xpdo->lexicon('provider_err_connect', array('error' => $response->getError()));
+        }
+        $repositories = $response->toXml();
+
+        $list = array();
+        foreach ($repositories as $repository) {
+            $repositoryArray = array();
+            foreach ($repository->children() as $k => $v) {
+                $repositoryArray[$k] = (string)$v;
+            }
+            $list[] = array(
+                'id' => 'n_repository_'.(string)$repository->id,
+                'text' => (string)$repository->name,
+                'leaf' => $repository->packages > 0 ? false : true,
+                'data' => $repositoryArray,
+                'type' => 'repository',
+            );
+        }
+        return $list;
+    }
+
+    public function categories($node) {
+        $this->xpdo->getVersionData();
+        $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+
+        /** @var modRestResponse $response */
+        $response = $this->request('repository/' . $node, 'GET', array(
+            'supports' => $productVersion,
+        ));
+        if ($response->isError()) {
+            return $this->xpdo->lexicon('provider_err_connect',array('error' => $response->getError()));
+        }
+        $tags = $response->toXml();
+
+        $list = array();
+        foreach ($tags as $tag) {
+            if ((string)$tag->name == '') continue;
+            $list[] = array(
+                'id' => 'n_tag_' . (string)$tag->id . '_' . $node,
+                'text' => (string)$tag->name,
+                'leaf' => true,
+                'data' => $tag,
+                'type' => 'tag',
+            );
+        }
+
+        return $list;
+    }
+
+    /**
      * Return statistical data about this Provider
      *
      * @param array $args Additional arguments to pass to the provider service
@@ -168,9 +226,12 @@ class modTransportProvider extends xPDOSimpleObject {
 
             $package->parseSignature();
 
-            $url = $this->downloadUrl($signature, $this->arg('location', array_merge($metadata['file'], $args)));
+            $url = $this->downloadUrl($signature, $this->arg('location', array_merge($metadata['file'], $args)), $args);
             if (!empty($url)) {
-                if ($package->transferPackage($url, $target || $this->xpdo->getOption('core_path', $args, MODX_CORE_PATH).'packages/')) {
+                if (empty($target)) {
+                    $target = $this->xpdo->getOption('core_path', $args, MODX_CORE_PATH) . 'packages/';
+                }
+                if ($package->transferPackage($url, $target)) {
                     if ($package->save()) {
                         $package->getTransport();
                         $result = $package;
@@ -267,7 +328,6 @@ class modTransportProvider extends xPDOSimpleObject {
                     'getUrl' => true,
                 )
             );
-            $rest->setResponseType('xml');
             if (empty($response) || empty($response->response)) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get download url for package {$signature} using location {$location}");
             } elseif ($response->isError()) {
