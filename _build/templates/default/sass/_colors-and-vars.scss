@@ -4,20 +4,17 @@ $gainsboro: rgb(240, 240, 240);
 $actionable:rgb(251,251,251);
 $dropdownBg: $gainsboro;
 $white: white;
-$mainBg: rgb(234, 234, 234);
+$mainBg: $white;
 $softGrey: rgb(220, 220, 220);
 $darkNeutral:#53595F;
 $black: #020608;
 
 $lightBg: $gainsboro;
 $darkBg: $darkNeutral;
-$mediumBg: $softGrey;
-
-
-$black:#020608;
-$lightBg:$gainsboro;
-$labelText:$darkNeutral;
 $mediumBg:$aside;
+
+
+$labelText:$darkNeutral;
 $primaryAction:#0f90c3;
 $success:#81B548;
 $green:$success;
@@ -36,8 +33,6 @@ $mainText: #444444;
 $headerText: #555555;
 
 /* Tree menus */
-$treeText: #444444;
-$tipText: $gainsboro;
 $iconColor: $treeText;
 $unpublished: lighten($treeText, 30%) !important;
 $disabled: $unpublished;
@@ -69,12 +64,9 @@ $primaryBorder:rgb(192,192,192);
 
 $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 
-/* tabs */
-$borderColor: rgb(216,216,216);
-$borderShadow: rgba(0, 0, 0, 0.025);
-$primaryBorder:rgb(192,192,192);
 
-$mainBg: $white;
+
+
 
 $tabBg: $white;
 $tabInactiveBg: $navbarHover;
@@ -84,10 +76,6 @@ $tabInactiveText: $tabText;
 $tabHoverText: darken($colorSplash, 20%);
 
 /* text colors and font stacks */
-$labelText: $darkNeutral;
-$mainText: #444;
-$headerText: #555;
-$shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 $selected:lighten(desaturate($colorSplash,45%),50%);
 
 $bodyfonts: arial, helvetica, tahoma sans-serif;
