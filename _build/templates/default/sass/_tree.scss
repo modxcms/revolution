@@ -132,7 +132,11 @@
   font-style: $lockedText;
 }
 
-#extdd-1_tools {
+.x-tree-node {
+	position:relative;
+}
+
+.modx-tree-node-tool-ct {
 	position:absolute;
 	top:0;
 	right:0;
