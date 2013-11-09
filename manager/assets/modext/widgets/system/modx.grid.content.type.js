@@ -10,9 +10,6 @@ MODx.panel.ContentType = function(config) {
         id: 'modx-panel-content-type'
 		,cls: 'container'
         ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'system/contenttype/updateFromGrid'
-        }
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('content_types')+'</h2>'
@@ -34,28 +31,10 @@ MODx.panel.ContentType = function(config) {
                 ,preventRender: true
             }]
         }]
-        ,listeners: {
-            'setup': {fn:this.setup,scope:this}
-            ,'success': {fn:this.success,scope:this}
-            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
-        }
     });
     MODx.panel.ContentType.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.panel.ContentType,MODx.FormPanel,{
-    initialized: false
-    ,setup: function() {}
-    ,beforeSubmit: function(o) {
-        var g = this.getComponent('form').getComponent('grid');
-        Ext.apply(o.form.baseParams,{
-            data: g.encodeModified()
-        });
-    }
-    ,success: function(o) {
-        this.getComponent('form').getComponent('grid').getStore().commitChanges();
-        Ext.getCmp('save-type-btn').disable();
-    }
-});
+Ext.extend(MODx.panel.ContentType,MODx.FormPanel,{});
 Ext.reg('modx-panel-content-type',MODx.panel.ContentType);
 
 /**
@@ -80,6 +59,8 @@ MODx.grid.ContentType = function(config) {
         ,baseParams: {
             action: 'system/contenttype/getlist'
         }
+        ,autosave: true
+        ,save_action: 'system/contenttype/updatefromgrid'
         ,fields: ['id','name','mime_type','file_extensions','headers','binary','description']
         ,paging: true
         ,remoteSort: true
@@ -117,9 +98,6 @@ MODx.grid.ContentType = function(config) {
         }]
     });
     MODx.grid.ContentType.superclass.constructor.call(this,config);
-    this.on('afteredit', function() {
-        Ext.getCmp('save-type-btn').enable();
-    });
 };
 Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
     getMenu: function() {
