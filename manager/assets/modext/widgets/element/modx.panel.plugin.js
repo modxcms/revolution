@@ -240,7 +240,7 @@ MODx.panel.Plugin = function(config) {
                 xtype: 'modx-grid-plugin-event'
 				,cls:'main-wrapper'
                 ,preventRender: true
-                ,plugin: config.plugin
+                ,plugin: config.record.id || 0
                 ,listeners: {
                     'updateEvent': {fn:this.markDirty,scope:this}
                     ,'rowclick': {fn:this.markDirty,scope:this}
