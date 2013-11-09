@@ -625,6 +625,14 @@ class modOutputFilter {
                             if (empty($m_val)) $m_val = false;
                             $this->modx->regClientScript($output,$m_val);
                             break;
+                        case 'in':
+                        case 'IN':
+                        case 'inarray':
+                        case 'inArray':
+                            if (empty($m_val)) $m_val = false;
+                            $haystack = explode(',', $m_val);
+                            $condition[]= intval(in_array($output, $haystack));
+                            break;
 
 
                         /* Default, custom modifier (run snippet with modifier name) */
