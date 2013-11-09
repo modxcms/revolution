@@ -477,10 +477,13 @@ MODx.BreadcrumbsPanel = function(config) {
 }
 
 Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
-	init: function(){
+    data: {trail: []}
+
+	,init: function(){
 		this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
 		this.reset(this.desc);
-		this.body.on('click', this.onClick, this);
+
+        this.body.on('click', this.onClick, this);
 	}
 
 	,getResetText: function(srcInstance){
@@ -499,6 +502,7 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 	}
 
 	,updateDetail: function(data){
+        this.data = data;
 		// Automagically the trail root
 		if(data.hasOwnProperty('trail')){
 			var trail = data.trail;
@@ -507,16 +511,33 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 		this._updatePanel(data);
 	}
 
+    ,getData: function() {
+        return this.data;
+    }
+    
 	,reset: function(msg){
 		if(typeof(this.resetText) == "undefined"){
 			this.resetText = this.getResetText(this.root);
-		}
-		var data = { text : msg ,trail : [this.resetText] };
-		this._updatePanel(data);
-	}
-
+		}	
+		this.data = { text : msg ,trail : [this.resetText] };
+		this._updatePanel(this.data);
+	}	
+	
 	,onClick: function(e){
 		var target = e.getTarget();
+
+        var index = 1;
+        var parent = target.parentElement;
+        while ((parent = parent.previousSibling) != null) {
+            index += 1;
+        }
+
+        var remove = this.data.trail.length - index;
+        while (remove > 0) {
+            this.data.trail.pop();
+            remove -= 1;
+        }
+
 		elm = target.className.split(' ')[0];
 		if(elm != "" && elm == 'controlBtn'){
 			// Don't use "pnl" shorthand, it make the breadcrumb fail

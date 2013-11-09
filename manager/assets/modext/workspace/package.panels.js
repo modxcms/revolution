@@ -34,10 +34,13 @@ MODx.panel.PackageMetaPanel = function(config) {
 	MODx.panel.PackageMetaPanel.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
-	updatePanel: function(meta){
+	updatePanel: function(meta, record){
 		if(meta.changelog != undefined){
 			this.addTab(_('changelog'), 'changelog', meta);
 		}
+        if(meta.requires != undefined){
+            this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
+        }
 		if(meta.readme != undefined){
 			this.addTab(_('readme'), 'readme', meta);
 		}
@@ -67,6 +70,21 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
             tab.updateDetail(data);
         }
     }
+    ,addDependenciesTab: function(title, id, data, pkgInfo){
+        var tab = this.getItem(id);
+        if (!tab) {
+            this.add({
+                title: title
+                ,xtype:'modx-panel-package-dependencies'
+                ,metaPanel: this
+                ,pkgInfo: pkgInfo
+                ,id: id +'-tab'
+                ,height: '1000px'
+            });
+        } else {
+            Ext.getCmp('modx-grid-package-dependencies').refresh();
+        }
+    }
 });
 Ext.reg('modx-package-meta-panel',MODx.panel.PackageMetaPanel);
 
@@ -81,7 +99,6 @@ Ext.reg('modx-package-meta-panel',MODx.panel.PackageMetaPanel);
  */
 MODx.panel.PackageBeforeInstall = function(config) {
     config = config || {};
-	this.currentCrumbText = _('install');
 	this.setupOptions = null;
 
 	Ext.applyIf(config,{});
@@ -93,22 +110,32 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 		this.removeAll();
 	}
 	
-	,updateBreadcrumbs: function(msg){
-		var bd = { text: msg };
-		bd.trail = [{
-			text : this.currentCrumbText
-		}];
-		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
+	,updateBreadcrumbs: function(msg, title){
+        var bc = Ext.getCmp('packages-breadcrumbs');
+        var bd = bc.getData();
+
+        bd.text = msg;
+
+        bd.trail.shift();
+
+		bd.trail.push({
+			text : title
+		});
+
+		bc.updateDetail(bd);
 	}
 
-	,updatePanel: function(meta){
-		this.updateBreadcrumbs(_('license_agreement_desc'));
-		Ext.getCmp('package-list-reset').show();
+	,updatePanel: function(meta, record){
+		this.updateBreadcrumbs(_('license_agreement_desc'), _('install') + ' ' + record.data.name);
+        Ext.getCmp('package-list-reset').show();
 		Ext.getCmp('package-install-btn').hide();
 		Ext.getCmp('package-show-setupoptions-btn').hide();
 		if(meta.changelog != undefined){
 			this.addTab(_('changelog'), 'changelog', meta);
 		}
+        if(meta.requires != undefined){
+            this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
+        }
 		if(meta.readme != undefined){
 			this.addTab(_('readme'), 'readme', meta);
 		}
@@ -233,3 +260,76 @@ Ext.extend(MODx.panel.PackageDetails,MODx.Panel,{
 	}
 });
 Ext.reg('modx-package-details',MODx.panel.PackageDetails);
+
+MODx.panel.PackageDependencies = function(config) {
+    config = config || {};
+    Ext.apply(config,{
+        border: false
+        ,baseCls: 'modx-formpanel'
+//        ,cls: 'container'
+        ,items: [{
+            html: '<h2>'+ 'Dependencies' +'</h2>'
+            ,border: false
+            ,cls: 'modx-page-header'
+        },{
+            xtype: 'modx-grid-package-dependencies'
+            ,preventRender: true
+            ,metaPanel: config.metaPanel
+            ,pkgInfo: config.pkgInfo
+            ,dependenciesPanel: this
+            ,cls: 'main-wrapper'
+        }]
+    });
+    MODx.panel.PackageDependencies.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.panel.PackageDependencies,MODx.Panel);
+Ext.reg('modx-panel-package-dependencies',MODx.panel.PackageDependencies);
+
+MODx.grid.PackageDependencies = function(config) {
+    config = config || {};
+
+    var cols = [];
+    cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
+    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:90 });
+    cols.push({ header: _('release') ,dataIndex: 'release', id: 'meta-col', fixed:true, width:90 });
+    cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
+    cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
+
+
+    Ext.applyIf(config,{
+        id: 'modx-grid-package-dependencies'
+        ,baseParams: {
+            action: 'workspace/packages/getdependencies'
+            ,signature: config.pkgInfo.data.signature
+        }
+        ,paging: false
+        ,loadMask: true
+        ,tbar: []
+        ,width: config.metaPanel.bwrap.getWidth() - 50
+        ,columns: cols
+    });
+    MODx.grid.PackageDependencies.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
+    mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
+        var rec = record.data;
+        var state = (rec.installed !== null) ? ' installed' : ' not-installed';
+        var values = { name: value, state: state, actions: null };
+
+        var h = [];
+        if(rec.installed == null) {
+            h.push({ className:'install primary', text: rec.textaction });
+        }
+        if (rec.updateable) {
+            h.push({ className:'update orange', text: _('package_update_action_button') });
+        } else {
+            if( rec.provider != 0 ){
+                h.push({ className:'checkupdate', text: _('package_check_for_updates') });
+            }
+        }
+        values.actions = h;
+        return this.mainColumnTpl.apply(values);
+    }
+});
+Ext.reg('modx-grid-package-dependencies',MODx.grid.PackageDependencies);
+
