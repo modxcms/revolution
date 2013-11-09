@@ -503,12 +503,35 @@ class modCacheManager extends xPDOCacheManager {
             $scriptContent= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
             $scriptName= $objElement->getScriptName();
 
-            $content = "function {$scriptName}(\$scriptProperties= array()) {\n";
+            $tokens = token_get_all('<?php ' . $scriptContent);
+            // Get rid of the opening '<?php ' we've just added
+            array_shift($tokens);
+
+            $useContent = '';
+            $newScriptContent = '';
+            $in_use = false;
+            // Extract everything between T_USE and ';' (string value)
+            foreach ($tokens as $t) {
+                if ((is_array($t) && $t[0] == T_USE) || $in_use) {
+                    $in_use = true;
+                    $useContent .= is_array($t) ? $t[1] : $t;
+                    if (is_string($t) && $t == ';') {
+                        $in_use = false;
+                        $useContent .= "\n";
+                    }
+                    continue;
+                }
+
+                $newScriptContent .= is_array($t) ? $t[1] : $t;
+            }
+
+            $content = $useContent ."\n\n";
+            $content .= "function {$scriptName}(\$scriptProperties= array()) {\n";
             $content .= "global \$modx;\n";
             $content .= "if (is_array(\$scriptProperties)) {\n";
             $content .= "extract(\$scriptProperties, EXTR_SKIP);\n";
             $content .= "}\n";
-            $content .= $scriptContent . "\n";
+            $content .= $newScriptContent . "\n";
             $content .= "}\n";
             if ($this->getOption('returnFunction', $options, false)) {
                 return $content;
