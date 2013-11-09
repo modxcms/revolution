@@ -663,7 +663,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 var el = document.createElement('div');
                     el.id = elId;
                     el.className = 'modx-tree-node-tool-ct'
-                    el.style.float = 'right';
                 node.ui.elNode.appendChild(el);
 
                 var inlineButtonsLang = tree.getInlineButtonsLang(node);
