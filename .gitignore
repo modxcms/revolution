@@ -44,3 +44,7 @@ bower_components
 node_modules
 .sass-cache
 _build/templates/default/sass/bourbon
+
+#ignore composer files
+composer.json
+composer.lock

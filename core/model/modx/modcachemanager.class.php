@@ -500,20 +500,11 @@ class modCacheManager extends xPDOCacheManager {
     public function generateScript(modScript &$objElement, $objContent= null, array $options= array()) {
         $results= false;
         if (is_object($objElement) && $objElement instanceof modScript) {
-            $scriptContent= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
-            $scriptName= $objElement->getScriptName();
-
-            $content = "function {$scriptName}(\$scriptProperties= array()) {\n";
-            $content .= "global \$modx;\n";
-            $content .= "if (is_array(\$scriptProperties)) {\n";
-            $content .= "extract(\$scriptProperties, EXTR_SKIP);\n";
-            $content .= "}\n";
-            $content .= $scriptContent . "\n";
-            $content .= "}\n";
+            $results= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
+            $results = rtrim($results, "\n") . "\n";
             if ($this->getOption('returnFunction', $options, false)) {
-                return $content;
+                return $results;
             }
-            $results = $content;
             if ($this->getOption('cache_scripts', $options, true)) {
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'scripts');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
