@@ -60,6 +60,7 @@ MODx.grid.Sources = function(config) {
         ,fields: ['id','name','description','class_key','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'source/updatefromgrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
@@ -279,7 +280,6 @@ MODx.grid.SourceTypes = function(config) {
         }
         ,fields: ['class','name','description']
         ,paging: true
-        ,autosave: true
         ,remoteSort: true
         ,columns: [{
             header: _('name')
