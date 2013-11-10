@@ -15,6 +15,8 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             action: 'security/user/getRecentlyEditedResources'
             ,user: config.user
         }
+        ,autosave: true
+        ,save_action: 'resource/updatefromgrid'
         ,pageSize: 10
         ,fields: ['id','pagetitle','description','editedon','deleted','published','menu']
         ,columns: [{
@@ -33,13 +35,22 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
         }]
         ,paging: true
-        ,autosave: true
+        ,listeners: {
+            'afteredit': {fn: this.refresh, scope: this}
+        }
     });
     MODx.grid.RecentlyEditedResourcesByUser.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.RecentlyEditedResourcesByUser,MODx.grid.Grid,{    
     preview: function() {
         window.open(MODx.config.base_url+'index.php?id='+this.menu.record.id);
+    }
+    ,refresh: function() {
+        var tree = Ext.getCmp('modx-resource-tree');
+        if (tree) {
+            Ext.getCmp('modx-leftbar-tabpanel').setActiveTab(tree);
+            tree.refresh();
+        }
     }
 });
 Ext.reg('modx-grid-user-recent-resource',MODx.grid.RecentlyEditedResourcesByUser);
