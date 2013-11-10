@@ -98,7 +98,7 @@ MODx.grid.Dashboards = function(config) {
             ,itemId: 'usergroup'
             ,emptyText: _('user_group_filter')+'...'
             ,baseParams: {
-                action: 'security/user/group/getList'
+                action: 'security/group/getlist'
                 ,addAll: true
             }
             ,value: ''
