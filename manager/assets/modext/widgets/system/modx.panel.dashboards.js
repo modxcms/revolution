@@ -59,6 +59,7 @@ MODx.grid.Dashboards = function(config) {
         ,fields: ['id','name','description','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'system/dashboard/updatefromgrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
