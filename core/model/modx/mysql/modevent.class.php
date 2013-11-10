@@ -19,9 +19,9 @@ class modEvent_mysql extends modEvent {
             'modPluginEvent.propertyset AS propertyset',
         ));
         $c->leftJoin('modPluginEvent','modPluginEvent','
-            modPluginEvent.event = modEvent.name'.
-            ($plugin ? ' AND modPluginEvent.pluginid = '.$plugin : '')
-        );
+            modPluginEvent.event = modEvent.name
+            AND modPluginEvent.pluginid = '.$plugin.'
+        ');
         $c->where($criteria);
         foreach($sort as $field=> $dir) {
             $c->sortby($xpdo->getSelectColumns('modEvent','modEvent','',array($field)),$dir);
