@@ -83,6 +83,7 @@ MODx.grid.Dashboards = function(config) {
             text: _('dashboard_create')
             ,handler: this.createDashboard
             ,scope: this
+            ,cls:'primary-button'
         },'-',{
             text: _('bulk_actions')
             ,menu: [{

@@ -79,6 +79,7 @@ MODx.grid.Lexicon = function(config) {
         ,{
             xtype: 'button'
             ,text: _('entry_create')
+            ,cls:'primary-button'
             ,handler: this.createEntry
             ,scope: this
         },'-',{

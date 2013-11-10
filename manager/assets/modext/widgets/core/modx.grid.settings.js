@@ -10,6 +10,7 @@ MODx.grid.SettingsGrid = function(config) {
         config.tbar = [{
             text: _('setting_create')
             ,scope: this
+            ,cls:'primary-button'
             ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: config.url || MODx.config.connector_url
@@ -320,6 +321,7 @@ MODx.window.CreateSetting = function(config) {
         ,width: 600
         ,url: config.url
         ,action: 'system/settings/create'
+        ,cls:'primary-button'
         ,fields: [{
             layout: 'column'
             ,border: false
