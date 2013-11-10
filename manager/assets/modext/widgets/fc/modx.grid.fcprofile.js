@@ -44,6 +44,7 @@ MODx.grid.FCProfile = function(config) {
         ,fields: ['id','name','description','usergroups','active','rank','sets','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/forms/profile/updatefromgrid'
         ,sm: this.sm
         ,remoteSort: true
         ,columns: [this.sm,{
