@@ -186,7 +186,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'system/dashboard/removeMultiple'
-                ,users: cs
+                ,dashboards: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
