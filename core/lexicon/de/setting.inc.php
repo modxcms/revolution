@@ -477,7 +477,7 @@ $_lang['setting_proxy_auth_type'] = 'Proxy-Authentifizierungs-Typ';
 $_lang['setting_proxy_auth_type_desc'] = 'Unterstützt entweder BASIC oder NTLM.';
 
 $_lang['setting_proxy_host'] = 'Proxy-Host';
-$_lang['setting_proxy_host_desc'] = 'Wenn Ihr Server einen Proxy verwendet, geben Sie hier den Hostnamen ein, um MODX-Features zu aktivieren, die den Proxy evtl. verwenden müssen, wie z. B. die Package-Verwaltung.';
+$_lang['setting_proxy_host_desc'] = 'Wenn Ihr Server einen Proxy verwendet, geben Sie hier den Hostnamen ein, um MODX-Features zu aktivieren, die den Proxy evtl. verwenden müssen, wie z.B. die Package-Verwaltung.';
 
 $_lang['setting_proxy_password'] = 'Proxy-Passwort';
 $_lang['setting_proxy_password_desc'] = 'Das Passwort, das benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
@@ -586,7 +586,7 @@ $_lang['setting_resource_tree_node_name'] = 'Feld zur Benennung der Knoten im Re
 $_lang['setting_resource_tree_node_name_desc'] = 'Geben Sie das Ressourcen-Feld an, das zur Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Standardmäßig wird das Feld pagetitle verwendet, es kann aber jedes Ressourcen-Feld verwendet werden, z.B. menutitle, alias, longtitle etc.';
 
 $_lang['setting_resource_tree_node_tooltip'] = 'Ressourcen-Baum-Tooltip-Feld';
-$_lang['setting_resource_tree_node_tooltip_desc'] = 'Geben Sie das Ressourcen-Feld an, das bei der Darstellung der Tooltips für die Einträge im Ressourcen-Baum verwendet wird. Jedes Ressourcen-Feld kann verwendet werden, z. B. menutitle, alias, longtitle etc. Wird dieses Feld leer gelassen, so wird der longtitle mit einer Beschreibung darunter angezeigt.';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Geben Sie das Ressourcen-Feld an, das bei der Darstellung der Tooltips für die Einträge im Ressourcen-Baum verwendet wird. Jedes Ressourcen-Feld kann verwendet werden, z.B. menutitle, alias, longtitle etc. Wird dieses Feld leer gelassen, so wird der longtitle mit einer Beschreibung darunter angezeigt.';
 
 $_lang['setting_richtext_default'] = 'Rich-Text-Editor standardmäßig verwenden';
 $_lang['setting_richtext_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig den Rich-Text-Editor verwenden sollen.';
@@ -664,7 +664,7 @@ $_lang['setting_site_unavailable_page_desc'] = 'Geben Sie die ID der Ressource e
 $_lang['setting_site_unavailable_page_err'] = 'Bitte geben Sie die Ressourcen-ID für die Website-Offline-Seite an.';
 
 $_lang['setting_strip_image_paths'] = 'Relative Dateibrowser-Pfade?';
-$_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Dateibrowser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z. B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
+$_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Dateibrowser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z.B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
 
 $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
 $_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
