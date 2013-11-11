@@ -18,6 +18,7 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
         ,buttons: [{
             process: 'update'
             ,text: _('save')
+            ,cls:'primary-button'
             ,method: 'remote'
             ,checkDirty: false
             ,keys: [{

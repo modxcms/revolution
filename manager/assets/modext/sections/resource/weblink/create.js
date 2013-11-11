@@ -41,6 +41,7 @@ Ext.extend(MODx.page.CreateWebLink,MODx.Component,{
                 process: 'resource/create'
                 ,reload: true
                 ,id: 'modx-abtn-save'
+                ,cls:'primary-button'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: true
