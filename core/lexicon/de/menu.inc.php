@@ -35,7 +35,7 @@ $_lang['menus'] = 'Menüs';
 $_lang['namespace'] = 'Namensraum';
 $_lang['namespace_desc'] = 'Der Namensraum, auf dem dieser Menüpunkt basiert. Hierdurch wird der Pfad für den Controller festgelegt, der geladen wird.';
 $_lang['parameters'] = 'Parameter';
-$_lang['parameters_desc'] = 'Beliebige Request-Parameter, die an die Ergebnis-URL angehängt werden sollen, wenn dieser Menüpunkt angeklickt wird (z. B.: &expire=1).';
+$_lang['parameters_desc'] = 'Beliebige Request-Parameter, die an die Ergebnis-URL angehängt werden sollen, wenn dieser Menüpunkt angeklickt wird (z.B.: &expire=1).';
 $_lang['permissions'] = 'Zugriffsberechtigung';
 $_lang['permissions_desc'] = 'Ein Zugangsschlüssel, der abgefragt werden soll, wenn dieser Menüpunkt aufgerufen wird.';
 $_lang['topmenu'] = 'Hauptmenü';
