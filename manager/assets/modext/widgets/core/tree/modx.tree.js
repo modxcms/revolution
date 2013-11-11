@@ -612,19 +612,19 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var iu = MODx.config.manager_url+'templates/default/images/restyle/icons/';
         return [{
             icon: iu+'arrow_down.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon arrow_down'
             ,tooltip: {text: _('tree_expand')}
             ,handler: this.expandNodes
             ,scope: this
         },{
             icon: iu+'arrow_up.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon arrow_up'
             ,tooltip: {text: _('tree_collapse')}
             ,handler: this.collapseNodes
             ,scope: this
         },'-',{
             icon: iu+'refresh.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon refresh'
             ,tooltip: {text: _('tree_refresh')}
             ,handler: this.refresh
             ,scope: this

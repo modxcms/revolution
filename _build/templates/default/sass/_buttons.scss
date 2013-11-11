@@ -63,6 +63,45 @@
   width: 16px;
 }
 
+.x-btn-icon {
+    &.arrow_up {
+      button {
+        background:none !important; /* #shame */
+        position:relative;
+        &:before {
+          @extend %pseudo-font-x-btn;
+          content:$level-up;
+          top:1px;
+          bottom:auto;
+        }
+      }
+    }
+    &.arrow_down {
+      button {
+        background:none !important; /* #shame */
+        position:relative;
+        &:before {
+          @extend %pseudo-font-x-btn;
+          content:$level-down;
+          top:1px;
+          bottom:auto;
+        }
+      }
+    }
+    &.refresh {
+      button {
+        background:none !important; /* #shame */
+        position:relative;
+        &:before {
+          @extend %pseudo-font-x-btn;
+          content:$refresh;
+          top:1px;
+          bottom:auto;
+        }
+      }
+    }
+}
+
 .x-btn-text-icon button {
   padding-left: 20px !important;
 }
@@ -94,9 +133,9 @@
 }
 
 .x-btn-focus {
-  background: rgb(240, 240, 240);
+  background: $gainsboro;
   background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
-  border: 1px solid #658F1A;
+  border: 1px solid $darkNeutral;
 }
 
 .x-btn-group {
@@ -124,7 +163,7 @@
 
 .x-btn-group .x-btn-over {
   background: #dfdfdf;
-  background: rgb(240, 240, 240);
+  background: $gainsboro;
   border: 1px solid #dbe0e4;
 }
 
