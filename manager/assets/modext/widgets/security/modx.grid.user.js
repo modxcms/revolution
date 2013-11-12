@@ -41,6 +41,7 @@ MODx.grid.User = function(config) {
         ,fields: ['id','username','fullname','email','gender','blocked','role','active','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/user/updatefromgrid'
         ,remoteSort: true
         ,viewConfig: {
             forceFit:true
