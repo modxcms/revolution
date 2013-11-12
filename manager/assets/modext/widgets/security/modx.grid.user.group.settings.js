@@ -19,6 +19,7 @@ MODx.grid.GroupSettings = function(config) {
         ,saveParams: {
             group: config.group
         }
+        ,save_action: 'security/group/setting/updatefromgrid'
         ,fk: config.group
         ,tbar: [{
             text: _('create_new')

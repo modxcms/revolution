@@ -110,7 +110,7 @@
             '-',
             array(
                 'text' => $this->modx->lexicon('access_rgroup_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["remove"])',
+                'handler' => 'this.confirm.createDelegate(this,["security/access/usergroup/resourcegroup/remove"])',
             ),
         );
         return $objectArray;

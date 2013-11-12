@@ -59,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'Resource Group ACL not specified.';
 $_lang['access_rgroup_err_remove'] = 'An error occurred while trying to remove the Resource Group ACL.';
 $_lang['access_rgroup_remove'] = 'Remove Resource Group Access';
 $_lang['access_rgroup_update'] = 'Update Resource Group Access';
+$_lang['access_source_err_ae'] = 'An ACL for that Media Source already exists.';
 $_lang['access_source_remove'] = 'Remove Media Source Access';
 $_lang['access_source_update'] = 'Update Media Source Access';
 $_lang['access_to_contexts'] = 'Access to Contexts';

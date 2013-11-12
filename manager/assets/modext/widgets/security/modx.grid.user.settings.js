@@ -19,6 +19,7 @@ MODx.grid.UserSettings = function(config) {
         ,saveParams: {
             user: config.user
         }
+        ,save_action: 'security/user/setting/updatefromgrid'
         ,fk: config.user
         ,tbar: [{
             text: _('create_new')
