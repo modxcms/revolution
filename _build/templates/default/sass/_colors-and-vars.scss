@@ -4,7 +4,7 @@ $gainsboro: rgb(240,240,240);
 $actionable:rgb(251,251,251);
 $dropdownBg: $gainsboro;
 $white: white;
-$mainBg: $white;
+$mainBg: #fafafa;
 $softGrey: rgb(220, 220, 220);
 $darkNeutral:#53595F;
 $black: #020608;
@@ -51,8 +51,8 @@ $treeDivider: rgb(64,64,64);
 /* top nav */
 
 /* Top navigation colors */
-$navbarBg: $aside;
-$navbarHover: $gainsboro;
+$navbarBg: $gainsboro;
+$navbarHover: $softGrey;
 $navbarDrop: $navbarBg;
 $navbarText: #222;
 $navbarRadius: 2px;
@@ -69,7 +69,7 @@ $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 
 
 $tabBg: $white;
-$tabInactiveBg: $navbarHover;
+$tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: #333;
 $tabInactiveText: $tabText;
