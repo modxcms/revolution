@@ -132,7 +132,11 @@
   font-style: $lockedText;
 }
 
-#extdd-1_tools {
+.x-tree-node {
+	position:relative;
+}
+
+.modx-tree-node-tool-ct {
 	position:absolute;
 	top:0;
 	right:0;
@@ -306,7 +310,7 @@
   background-image: url(../images/restyle/icons/property-set.png) !important;
 }
 .icon-resourcegroup {
-  background-image: url(../images/restyle/icons/application_cascade.png) !important;
+  /*background: url(../images/restyle/icons/application_cascade.png) no-repeat left top !important;*/
 }
 .icon-list-new {
   background-image: url(../images/restyle/icons/layout_add.png) !important;
