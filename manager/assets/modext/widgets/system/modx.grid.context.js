@@ -17,6 +17,7 @@ MODx.grid.Context = function(config) {
         ,fields: ['key','name','description','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'context/updatefromgrid'
         ,remoteSort: true
         ,primaryKey: 'key'
         ,columns: [{
