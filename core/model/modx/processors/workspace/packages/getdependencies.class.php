@@ -46,14 +46,6 @@ class modPackageGetDependenciesProcessor extends modObjectGetListProcessor {
             return $this->modx->lexicon('package_err_nf');
         }
 
-        $this->modx->addPackage('modx.transport',$this->modx->getOption('core_path').'model/');
-        $this->setDefaultProperties(array(
-            'start' => 0,
-            'limit' => 10,
-            'workspace' => 1,
-            'dateFormat' => '%b %d, %Y %I:%M %p',
-            'search' => '',
-        ));
         return true;
     }
 
@@ -62,77 +54,29 @@ class modPackageGetDependenciesProcessor extends modObjectGetListProcessor {
 
         $dep = $this->package->checkDependencies($requires);
 
-        $dependencies = array();
+        $returnArray = array();
 
-        $this->updatesCacheExpire = $this->modx->getOption('auto_check_pkg_updates_cache_expire',null,5) * 60;
-        $this->modx->getVersionData();
-        $this->productVersion = $this->modx->version['code_name'].'-'.$this->modx->version['full_version'];
-
-        foreach ($dep as $pkg => $cons) {
-            $packageArray = array_pop($this->package->findResolution($pkg, $cons));
-            $packageArray = $this->formatDates($packageArray);
-            $packageArray['iconaction'] = empty($packageArray['installed']) ? 'icon-install' : 'icon-uninstall';
-            $packageArray['textaction'] = empty($packageArray['installed']) ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
-            $dependencies[] = $packageArray;
-        }
-
-        return $this->outputArray($dependencies, count($dep));
-    }
-
-    /**
-     * Format installed, created and updated dates
-     * @param array $packageArray
-     * @return array
-     */
-    public function formatDates(array $packageArray) {
-        if ($packageArray['updated'] != '0000-00-00 00:00:00' && $packageArray['updated'] != null) {
-            $packageArray['updated'] = utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['updated'])));
-        } else {
-            $packageArray['updated'] = '';
-        }
-        $packageArray['created']= utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['created'])));
-        if ($packageArray['installed'] == null || $packageArray['installed'] == '0000-00-00 00:00:00') {
-            $packageArray['installed'] = null;
-        } else {
-            $packageArray['installed'] = utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['installed'])));
-        }
-        return $packageArray;
-    }
-
-    /**
-     * @param modTransportPackage $package
-     * @param array $packageArray
-     * @return array
-     */
-    public function checkForUpdates(modTransportPackage $package,array $packageArray) {
-        $updates = array('count' => 0);
-        if ($package->get('provider') > 0 && $this->modx->getOption('auto_check_pkg_updates',null,false)) {
-            $updateCacheKey = 'mgr/providers/updates/'.$package->get('provider').'/'.$package->get('signature');
-            $updateCacheOptions = array(
-                xPDO::OPT_CACHE_KEY => $this->modx->cacheManager->getOption('cache_packages_key', null, 'packages'),
-                xPDO::OPT_CACHE_HANDLER => $this->modx->cacheManager->getOption('cache_packages_handler', null, $this->modx->cacheManager->getOption(xPDO::OPT_CACHE_HANDLER)),
-            );
-            $updates = $this->modx->cacheManager->get($updateCacheKey, $updateCacheOptions);
-            if (empty($updates)) {
-                /* cache providers to speed up load time */
-                /** @var modTransportProvider $provider */
-                if (!empty($this->providerCache[$package->get('provider')])) {
-                    $provider =& $this->providerCache[$package->get('provider')];
-                } else {
-                    $provider = $package->getOne('Provider');
-                    if ($provider) {
-                        $this->providerCache[$provider->get('id')] = $provider;
-                    }
-                }
-                if ($provider) {
-                    $updates = $provider->latest($package->get('signature'));
-                    $updates = array('count' => count($updates));
-                    $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire, $updateCacheOptions);
-                }
+        foreach ($requires as $pkg => $constraints) {
+            if (isset($dep[$pkg])) {
+                $installed = false;
+            } else {
+                $installed = true;
             }
+
+            //@TODO: Get downlaoded property properly from somewhere and add signature property that will be needed for running installation
+            $returnArray[] = array(
+                'name' => $pkg,
+                'parentSignature' => $this->getProperty('signature'),
+                'constraints' => $constraints,
+                'installed' => $installed,
+                'downloaded' => false
+            );
+
         }
-        $packageArray['updateable'] = (int)$updates['count'] >= 1 ? true : false;
-        return $packageArray;
+
+        return $this->outputArray($returnArray, count($returnArray));
     }
+
+
 }
 return 'modPackageGetDependenciesProcessor';

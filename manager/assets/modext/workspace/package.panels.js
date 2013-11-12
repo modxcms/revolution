@@ -290,11 +290,8 @@ MODx.grid.PackageDependencies = function(config) {
 
     var cols = [];
     cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
-    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:90 });
-    cols.push({ header: _('release') ,dataIndex: 'release', id: 'meta-col', fixed:true, width:90 });
-    cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
-    cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
-
+    cols.push({ header: _('constraints') ,dataIndex: 'constraints', id: 'meta-col', fixed:true, width:160 });
+    cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.installColumnRenderer });
 
     Ext.applyIf(config,{
         id: 'modx-grid-package-dependencies'
@@ -302,6 +299,7 @@ MODx.grid.PackageDependencies = function(config) {
             action: 'workspace/packages/getdependencies'
             ,signature: config.pkgInfo.data.signature
         }
+        ,fields: ['name', 'constraints', 'installed', 'parentSignature', 'signature', 'downloaded', 'actions']
         ,paging: false
         ,loadMask: true
         ,tbar: []
@@ -317,18 +315,71 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
         var values = { name: value, state: state, actions: null };
 
         var h = [];
-        if(rec.installed == null) {
-            h.push({ className:'install primary', text: rec.textaction });
-        }
-        if (rec.updateable) {
-            h.push({ className:'update orange', text: _('package_update_action_button') });
+        if(rec.downloaded == false) {
+            h.push({ className:'download primary', text: _('download') });
         } else {
-            if( rec.provider != 0 ){
-                h.push({ className:'checkupdate', text: _('package_check_for_updates') });
+            if(rec.installed == false) {
+                h.push({ className:'install primary', text: _('install') });
             }
         }
+
         values.actions = h;
         return this.mainColumnTpl.apply(values);
+    }
+
+    ,installColumnRenderer: function(d,c) {
+        switch(d) {
+            case '':
+            case false:
+                c.css = 'not-installed';
+                return _('not_installed');
+            default:
+                c.css = '';
+                return _('installed');
+        }
+    }
+
+    ,downloadPackage: function(rec) {
+        this.loadMask.show();
+        Ext.Ajax.request({
+            url : MODx.config.connector_url
+            ,params : {
+                action : 'workspace/packages/dependency/download'
+                ,signature: rec.data.parentSignature
+                ,name: rec.data.name
+                ,constraints: rec.data.constraints
+            }
+            ,method: 'GET'
+            ,scope: this
+            ,success: function ( result, request ) {
+                this.store.reload();
+            }
+            ,failure: function ( result, request) {
+                this.loadMask.hide();
+                Ext.MessageBox.alert(_('failed'), result.responseText);
+            }
+        });
+    }
+
+    ,onClick: function(e){
+        var t = e.getTarget();
+        var elm = t.className.split(' ')[0];
+        if(elm == 'controlBtn'){
+            var act = t.className.split(' ')[1];
+            var record = this.getSelectionModel().getSelected();
+            this.menu.record = record.data;
+            switch (act) {
+                case 'install':
+                case 'reinstall':
+                    this.install(record);
+                    break;
+                case 'download':
+                    this.downloadPackage(record);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 });
 Ext.reg('modx-grid-package-dependencies',MODx.grid.PackageDependencies);
