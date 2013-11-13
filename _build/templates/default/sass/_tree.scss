@@ -22,7 +22,8 @@
 }
 
 #modx-leftbar-tabpanel {
-  border-bottom:1px solid $borderColor;	
+  border:1px solid $borderColor;
+  box-shadow: 0 0 0 3px $gainsboro;
 }
 
 /* tree menu splitter */
