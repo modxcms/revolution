@@ -372,14 +372,13 @@
 
 /* basic tree toolbar styles */
 #modx-leftbar .x-toolbar-ct .x-btn {
-  border-radius: 15px;
   background: $gainsboro;
   margin: 0 3px;
-  padding: 7px;
+  padding: 5px;
   width: 16px;
   height: 16px;
   border: 1px solid $borderColor;
-  opacity: .7;
+  opacity: .6;
   display: inline-block;
   position: relative;
 
@@ -390,8 +389,9 @@
     position: absolute;
     width: 16px;
     height: 18px;
-    top: 6px;
-    left: 3px;
+    top: 4px;
+    left: 2px;
+    color: #000;
   }
 
   &:hover {
@@ -425,7 +425,7 @@
 }
   /* alignment overrides */
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
-    top: 5px;
+    top: 4px;
     left: 2px;
   }
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink > em > button {
