@@ -9,7 +9,7 @@
 }
 
 #modx-manager-search .x-form-trigger {
-  @include linear-gradient(lighten($primaryAction,10%), $primaryAction);
+  background: lighten($primaryAction,5%);
   color: #fff;
   cursor: default;
   height: 16px;
