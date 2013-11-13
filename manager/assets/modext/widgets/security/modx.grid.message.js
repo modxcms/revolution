@@ -108,6 +108,7 @@ MODx.grid.Message = function(config) {
             text: _('message_new')
             ,scope: this
             ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
+            ,cls:'primary-button'
         },'->',{
             xtype: 'textfield'
             ,name: 'search'

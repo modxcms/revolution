@@ -19,6 +19,7 @@ MODx.page.UpdateUser = function(config) {
             process: 'security/user/update'
             ,text: _('save')
             ,method: 'remote'
+            ,cls:'primary-button'
             ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'

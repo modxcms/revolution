@@ -73,6 +73,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,enableToggle: true
             ,tooltip: _('click_to_change')
             ,id: 'btn-toggle'
+            ,cls:'primary-button'
         }]
     });
     MODx.grid.ResourceSchedule.superclass.constructor.call(this,config);

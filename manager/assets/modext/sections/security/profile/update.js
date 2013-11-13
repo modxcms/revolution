@@ -146,6 +146,7 @@ MODx.panel.UpdateProfile = function(config) {
             text: _('save')
             ,scope: this
             ,handler: this.submit
+            ,cls:'primary-button'
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -230,6 +231,7 @@ MODx.panel.ChangeProfilePassword = function(config) {
             text: _('save')
             ,scope: this
             ,handler: this.submit
+            ,cls:'primary-button'
         }]
         ,listeners: {
             'success': {fn:this.success,scope:this}

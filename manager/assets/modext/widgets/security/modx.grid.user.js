@@ -95,6 +95,7 @@ MODx.grid.User = function(config) {
             text: _('user_new')
             ,handler: this.createUser
             ,scope: this
+            ,cls:'primary-button'
         },'-',{
             text: _('bulk_actions')
             ,menu: [{

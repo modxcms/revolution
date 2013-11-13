@@ -98,6 +98,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             btns.push({
                 process: 'resource/update'
                 ,id: 'modx-abtn-save'
+                ,cls:'primary-button'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: cfg.richtext || MODx.request.reload ? false : true
