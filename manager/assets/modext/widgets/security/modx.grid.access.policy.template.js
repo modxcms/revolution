@@ -82,6 +82,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         }]
         ,tbar: [{
             text: _('policy_template_create')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: this.createPolicyTemplate
         },'-',{

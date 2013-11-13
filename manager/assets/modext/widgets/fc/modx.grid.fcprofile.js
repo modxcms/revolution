@@ -83,6 +83,7 @@ MODx.grid.FCProfile = function(config) {
             text: _('profile_create')
             ,scope: this
             ,handler: this.createProfile
+            ,cls:'primary-button'
         },'-',{
             text: _('bulk_actions')
             ,menu: [{

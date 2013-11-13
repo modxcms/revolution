@@ -44,6 +44,7 @@ MODx.grid.Role = function(config) {
         }]
         ,tbar: [{
             text: _('create_new')
+            ,cls:'primary-button'
             ,handler: this.createRole
             ,scope: this
         }]

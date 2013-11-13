@@ -15,6 +15,7 @@ MODx.page.CreateUser = function(config) {
             ,reload: true
             ,text: _('save')
             ,method: 'remote'
+            ,cls:'primary-button'
             ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'

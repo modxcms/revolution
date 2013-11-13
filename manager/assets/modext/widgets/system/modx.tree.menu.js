@@ -22,6 +22,7 @@ MODx.tree.Menu = function(config) {
         ,ddGroup: 'modx-menu'
         ,tbar: [{
             text: _('menu_create')
+            ,cls:'primary-button'
             ,handler: this.createMenu
             ,scope: this
         }]

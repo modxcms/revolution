@@ -24,6 +24,7 @@ MODx.tree.UserGroup = function(config) {
             text: _('user_group_new')
             ,scope: this
             ,handler: this.createUserGroup.createDelegate(this,[true],true)
+            ,cls:'primary-button'
         }]
     });
     MODx.tree.UserGroup.superclass.constructor.call(this,config);

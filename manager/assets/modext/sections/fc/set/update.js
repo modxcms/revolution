@@ -18,6 +18,7 @@ MODx.page.UpdateFCSet = function(config) {
         ,buttons: [{
             process: 'security/forms/set/update'
             ,text: _('save')
+            ,cls:'primary-button'
             ,method: 'remote'
             ,checkDirty: false
             ,keys: [{
