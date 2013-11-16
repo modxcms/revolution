@@ -53,6 +53,12 @@ MODx.Window = function(config) {
         this.syncSize();
         this.focusFirstField();
     },this);
+    this.on('afterrender', function() {
+        this.originalHeight = this.el.getHeight();
+        this.toolsHeight = this.originalHeight - this.body.getHeight() + 50;
+        this.resizeWindow();
+    });
+    Ext.EventManager.onWindowResize(this.resizeWindow, this);
 };
 Ext.extend(MODx.Window,Ext.Window,{
     _loadForm: function() {
@@ -200,6 +206,18 @@ Ext.extend(MODx.Window,Ext.Window,{
             }
         });
         this._dzLoaded = true;
+    }
+
+    ,resizeWindow: function(){
+        var viewHeight = Ext.getBody().getViewSize().height;
+        var el = this.fp.getForm().el;
+        if(viewHeight < this.originalHeight){
+            el.setStyle('overflow-y', 'scroll');
+            el.setHeight(viewHeight - this.toolsHeight);
+        }else{
+            el.setStyle('overflow-y', 'auto');
+            el.setHeight('auto');
+        }
     }
 });
 Ext.reg('modx-window',MODx.Window);
