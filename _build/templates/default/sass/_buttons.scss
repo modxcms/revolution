@@ -8,8 +8,8 @@
 /* action buttons bar */
 #modx-action-buttons {
   position: fixed;
-  top: 57px;
-  right: 28px;
+  top: 65px;
+  right: 33px;
   z-index: 9;
   left: auto;
   background: none;
@@ -26,7 +26,8 @@
 /* btn style */
 .x-btn {
   *display: inline;
-  @include linear-gradient($white, $gainsboro);
+  background-color: $white;
+  /*@include linear-gradient($white, $gainsboro);*/
   line-height: 1;
   border-radius: 3px;
   cursor: pointer;
@@ -37,6 +38,7 @@
   text-decoration: none;
   zoom: 1;
   border:1px solid $primaryBorder;
+  transition: background-color .2s;
   button {
     font-size: 12px;
     color: $labelText;
@@ -52,10 +54,12 @@
 
 .x-btn-over {
   border-color:darken($gainsboro,40%);
+  background-color:$gainsboro;
 }
 
 .primary-button, #modx-abtn-save {
   @extend %primary-button;
+  background: lighten($primaryAction,5%);
 }
 
 .x-btn-icon button {
@@ -368,14 +372,13 @@
 
 /* basic tree toolbar styles */
 #modx-leftbar .x-toolbar-ct .x-btn {
-  border-radius: 15px;
   background: $gainsboro;
   margin: 0 3px;
-  padding: 7px;
+  padding: 5px;
   width: 16px;
   height: 16px;
   border: 1px solid $borderColor;
-  opacity: .7;
+  opacity: .6;
   display: inline-block;
   position: relative;
 
@@ -386,8 +389,9 @@
     position: absolute;
     width: 16px;
     height: 18px;
-    top: 6px;
-    left: 3px;
+    top: 4px;
+    left: 2px;
+    color: #000;
   }
 
   &:hover {
@@ -421,7 +425,7 @@
 }
   /* alignment overrides */
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
-    top: 5px;
+    top: 4px;
     left: 2px;
   }
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink > em > button {

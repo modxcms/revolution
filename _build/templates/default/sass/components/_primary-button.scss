@@ -1,10 +1,10 @@
 %primary-button {
-  @include linear-gradient(lighten($primaryAction,10%), $primaryAction);
+  background: lighten($primaryAction,10%);
   border-color:darken($primaryAction,6%);
   color:white;
   &.x-item-disabled {
     opacity:1;
-    @include linear-gradient($desaturatedSplash, darken($desaturatedSplash,10%));
+    background: $desaturatedSplash;
     border-color:darken($gainsboro,40%);
   }
   & button,
@@ -12,7 +12,7 @@
     color: white !important;
   }
   &.x-btn-over {
-    @include linear-gradient(lighten($primaryAction,10%), darken($primaryAction,6%));
+    background: lighten($primaryAction,12%);
     border-color:darken($primaryAction,12%);
 }
 }

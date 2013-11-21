@@ -29,7 +29,6 @@ ul.x-tab-strip-top {
   border-bottom-color: $white;
   margin:0; /* was -1px */
   width: auto;
-  overflow:hidden;
 }
 
 
@@ -71,7 +70,8 @@ ul.x-tab-strip-top {
     background-color: #fff;
     box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
     cursor: default;
-    margin: 3px 0 0 2px;
+    margin: 0 0 0 2px;
+    padding-bottom: 2px;
   }
   &:first-of-type {
     &.x-tab-strip-active {

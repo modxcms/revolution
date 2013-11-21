@@ -2,8 +2,8 @@
 #modx-navbar {
   background: $navbarBg;
   border-width: 0 0 1px;
-  border: 1px solid $borderColor;
-  box-shadow: 0 1px 0 $borderShadow;
+  border-bottom: 1px solid $borderColor;
+  box-shadow: 0 2px 0 $borderShadow;
   height: 100%;
   position: relative;
   z-index: 10;
@@ -60,10 +60,13 @@
 #modx-topnav > li.top:hover > a, #modx-user-menu > li.top:hover > a {
   border-left-color:$borderColor;
   border-right-color:$borderColor;
+  background: $white;
+  padding-bottom: 1px;
+  z-index: 10001;
 }
 
 #modx-navbar li:hover a {
-  background-color: $navbarHover;
+  background-color: $white;
   &:hover.modx-help {
     color: $colorSplash;
   }
@@ -102,8 +105,8 @@
   width: 50px;
 }
 #user-avatar img {
-  border-radius: 16px;
-  margin: 6px 4px 0 0;
+  border-radius: 3px;
+  margin: 6px 7px 0 0;
   line-height: 18px; 
   display: block;
   float: left;
@@ -131,19 +134,21 @@
 }
 
 #modx-navbar ul.modx-subnav li {
-  background: $navbarDrop;
+  background: $white;
   border-bottom: 1px solid $navbarHover;
   clear: both;
   margin: 0;
   padding: 0;
 }
 
+/*
 #modx-navbar ul.modx-subnav li:first-child a {
   @include background(linear-gradient($navbarHover, $navbarDrop) top repeat);
 }
+*/
 
 #modx-navbar ul.modx-subnav li a {
-  background-color: $navbarDrop;
+  background-color: $white;
   float: left;
   font-weight: bold;
   line-height: 1.5;
@@ -153,14 +158,16 @@
   width: 240px;
 }
 
+/*
 #modx-navbar ul.modx-subnav li a {
   border-top:1px solid $navbarDrop;
   border-bottom:1px solid $navbarDrop;	
 }
+*/
 
 #modx-navbar ul.modx-subnav li {
   a:hover {
-    background: $navbarHover;
+    background: $gainsboro;
     border-top-color:$borderColor;
     border-bottom-color:$borderColor;
   }
