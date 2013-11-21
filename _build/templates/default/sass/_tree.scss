@@ -208,14 +208,14 @@
   border-top-color: #686868;
 }
 .x-tree-node .x-tree-drag-append a span {
-  background-color: #ddd;
+  background-color: $selected;
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $gainsboro;
+  background-color: $selected;
 }
 .x-tree-node .x-tree-selected {
-  background-color: lighten(desaturate($colorSplash,45%),50%);
+  background-color: $selected;
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-add.gif);
@@ -380,7 +380,7 @@
   padding: 0;
 }
 .tree-pseudoroot-node {
-  background-color: darken($navbarHover, 2%);
+  background-color: $gainsboro;
   border-bottom: 1px solid $borderColor;
   font-weight: bold;
   line-height: 2;
@@ -472,7 +472,7 @@
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $gainsboro;
+  background-color: $selected;
 }
 .x-tree-node .x-tree-selected {
   background-color: $selected;
