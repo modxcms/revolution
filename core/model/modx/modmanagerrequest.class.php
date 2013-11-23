@@ -53,6 +53,8 @@ class modManagerRequest extends modRequest {
      * @return boolean True if successful.
      */
     public function initialize() {
+        $this->sanitizeRequest();
+        
         if (!defined('MODX_INCLUDES_PATH')) {
             define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
         }
@@ -117,7 +119,7 @@ class modManagerRequest extends modRequest {
         $this->modx->invokeEvent('OnHandleRequest');
 
         /* save page to manager object. allow custom actionVar choice for extending classes. */
-        $this->action = isset($_REQUEST[$this->actionVar]) ? $_REQUEST[$this->actionVar] : $this->defaultAction;
+        $this->action = isset($_REQUEST[$this->actionVar]) ? (integer)$_REQUEST[$this->actionVar] : $this->defaultAction;
 
         /* invoke OnManagerPageInit event */
         $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));
