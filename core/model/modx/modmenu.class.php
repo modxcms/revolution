@@ -53,7 +53,7 @@ class modMenu extends modAccessibleObject {
      */
     public function rebuildCache($start = '') {
         $menus = $this->getSubMenus($start);
-        $cached = $this->xpdo->cacheManager->set('menus/'.$this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en')), $menus, 0, array(
+        $cached = $this->xpdo->cacheManager->set('mgr/menus/'.$this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en')), $menus, 0, array(
             xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_menu_key', null, 'menu'),
             xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption('cache_menu_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER))
         ));
