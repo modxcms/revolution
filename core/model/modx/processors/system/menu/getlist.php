@@ -23,7 +23,7 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* get menus */
 $c = $modx->newQuery('modMenu');
-$c->sortby($scriptProperties['sort'],$scriptProperties['dir']);
+$c->sortby($sort, $dir);
 if ($isLimit) $c->limit($scriptProperties['limit'],$scriptProperties['start']);
 
 $menus = $modx->getCollection('modMenu',$c);
