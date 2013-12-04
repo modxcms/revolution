@@ -34,6 +34,10 @@ foreach ($nodes as $node) {
     $menu->set('menuindex',$node['order']);
     $menu->save();
 }
+
+$path = $modx->getOption('cache_path') . $modx->getOption('cache_menu_key', null, 'menu') .'/menus/';
+$modx->cacheManager->deleteTree($path);
+
 return $modx->error->success();
 
 function getNodesFormatted(&$ar_nodes,$cur_level,$parent = '') {
