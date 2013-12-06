@@ -18,17 +18,17 @@
 class modSystemSetting extends xPDOObject {
 
 
-    public function save($cacheFlag= null) {
+    public function save($cacheFlag= null, $skipCacheClear=false) {
         $saved = parent::save($cacheFlag);
-        if ($saved) {
+        if ($saved && !$skipCacheClear) {
             $this->clearCache();
         }
         return $saved;
     }
 
-    public function remove(array $ancestors = array()) {
+    public function remove(array $ancestors = array(), $skipCacheClear=false) {
         $removed = parent::remove();
-        if ($removed) {
+        if ($removed && !$skipCacheClear) {
             $this->clearCache();
         }
         return $removed;
@@ -56,7 +56,7 @@ class modSystemSetting extends xPDOObject {
      */
     public function updateTranslation($key,$value = '',array $options = array()) {
         if (!is_array($options) || empty($options)) return false;
-        
+
         $options['namespace'] = $this->xpdo->getOption('namespace',$options,'core');
         $options['cultureKey'] = $this->xpdo->getOption('cultureKey',$options,'en');
         $options['topic'] = $options['namespace'] == 'core' ? 'setting' : 'default';
