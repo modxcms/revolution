@@ -18,7 +18,7 @@ $_lang['login_cannot_locate_account'] = 'Учётная запись не най
 $_lang['login_copyright'] = '&copy; 2005-2013 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. <strong>MODX</strong> &trade; распространяется под лицензией GPLv2 или по более поздней версии этой лицензии.';
 $_lang['login_email_label'] = 'Электронная почта аккаунта:';
 $_lang['login_err_unknown'] = 'При попытке авторизации произошла неизвестная ошибка.';
-$_lang['login_forget_your_login'] = 'Забыли своё имя пользователя?';
+$_lang['login_forget_your_login'] = 'Забыли пароль';
 $_lang['login_hostname_error'] = 'Ваше имя хоста не указывает на ваш IP-адрес.';
 $_lang['login_message'] = 'Для входа в панель управления введите имя пользователя и пароль. Будьте внимательны, они чувствительны к регистру! ';
 $_lang['login_password'] = 'Пароль: ';
