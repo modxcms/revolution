@@ -149,6 +149,7 @@ class modResourceGetNodesProcessor extends modProcessor {
     public function getResourceQuery() {
         $resourceColumns = array(
             'id'
+            ,'template'
             ,'pagetitle'
             ,'longtitle'
             ,'alias'
@@ -212,6 +213,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $c = $this->modx->newQuery('modResource');
         $c->select($this->modx->getSelectColumns('modResource','modResource','',array(
             'id'
+            ,'template'
             ,'pagetitle'
             ,'longtitle'
             ,'alias'
@@ -376,6 +378,8 @@ class modResourceGetNodesProcessor extends modProcessor {
         if ($this->getProperty('currentResource') == $resource->id && $this->getProperty('currentAction') == $this->actions['resource/update']) {
             $class[] = 'active-node';
         }
+        
+        $class = $resource->get('template');
 
         $qtip = '';
         if (!empty($qtipField)) {
