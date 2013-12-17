@@ -147,6 +147,7 @@ class modResourceGetNodesProcessor extends modProcessor {
     public function getResourceQuery() {
         $resourceColumns = array(
             'id'
+            ,'template'
             ,'pagetitle'
             ,'longtitle'
             ,'alias'
@@ -210,6 +211,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $c = $this->modx->newQuery('modResource');
         $c->select($this->modx->getSelectColumns('modResource','modResource','',array(
             'id'
+            ,'template'
             ,'pagetitle'
             ,'longtitle'
             ,'alias'
@@ -426,6 +428,8 @@ class modResourceGetNodesProcessor extends modProcessor {
                 $qtip .= ' - '.$this->modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
             }
         }
+        
+        $iconCls = 'template_'.$resource->template;
 
         $idNote = $this->modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$resource->id.')</span>' : '';
         $itemArray = array(
