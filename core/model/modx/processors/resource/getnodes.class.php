@@ -379,7 +379,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             $class[] = 'active-node';
         }
         
-        $class = $resource->get('template');
+        $class[] = $resource->get('template');
 
         $qtip = '';
         if (!empty($qtipField)) {
