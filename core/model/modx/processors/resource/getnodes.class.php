@@ -399,7 +399,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.$rsrcType, null,'tree-resource');
 
         if (strlen($tplIcon)) {
-            $class[] = $defaultIcon;
+            $iconCls[] = $defaultIcon;
         }
         elseif ($rsrcType === 'weblink') {
             $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink',null,'tree-weblink');
