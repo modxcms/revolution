@@ -49,4 +49,5 @@ $_lang['template_untitled'] = 'Untitled Template';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'Template Variable does not have access to the specified Template.';
 $_lang['tvt_err_remove'] = 'An error occurred while trying to remove the template variable from the template.';
-$_lang['tvt_err_save'] = 'An error occurred while trying to attach the template variable to the template.';
+$_lang['template_icon'] = 'Icon';
+$_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
