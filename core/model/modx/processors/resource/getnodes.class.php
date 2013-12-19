@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.layout.tree.resource
  */
+
 class modResourceGetNodesProcessor extends modProcessor {
     /** @var int $defaultRootId */
     public $defaultRootId;

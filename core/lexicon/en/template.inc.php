@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Access';
 $_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
