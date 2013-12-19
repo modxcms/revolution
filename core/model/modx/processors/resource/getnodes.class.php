@@ -436,7 +436,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $tpl_icon = $tpl->get('icon');       
         
         if(!empty($tpl_icon)){
-            $class[] = $tpl_icon;
+            $iconCls[] = $tpl_icon;
         }        
 
         $idNote = $this->modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$resource->id.')</span>' : '';
