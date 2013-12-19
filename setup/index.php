@@ -71,7 +71,7 @@ if (!$isCommandLine) {
     $installBaseUrl .= $_SERVER['HTTP_HOST'];
     if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
     $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
-    $installBaseUrl .= $_SERVER['PHP_SELF'];
+    $installBaseUrl .= $_SERVER['SCRIPT_NAME'];
     define('MODX_SETUP_URL', $installBaseUrl);
 } else {
     define('MODX_SETUP_URL','/');

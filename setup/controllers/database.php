@@ -88,7 +88,7 @@ if (!empty($_POST['proceed'])) {
     } else { /* proceed to contexts page, or summary if @traditional */
         switch (MODX_SETUP_KEY) {
             case '@traditional@':
-                $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
+                $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
                 $settings = array();
 
                 if ($mode == modInstall::MODE_NEW) {
