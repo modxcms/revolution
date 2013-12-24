@@ -13,5 +13,9 @@ class modNamespaceRemoveProcessor extends modObjectRemoveProcessor {
     public $permission = 'namespaces';
     public $objectType = 'namespace';
     public $primaryKeyField = 'name';
+
+    public function beforeRemove() {
+        return 'core' != $this->getProperty('name');
+    }
 }
 return 'modNamespaceRemoveProcessor';
