@@ -52,6 +52,7 @@ MODx.FormPanel = function(config) {
         success: true
         ,failure: true
     });
+    this.dropTargets = [];
     this.on('ready',this.onReady);
     if (this.config.useLoadingMask) {
         this.mask = new Ext.LoadMask(this.getEl());
@@ -210,6 +211,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,loadDropZones: function() {
+        var dropTargets = this.dropTargets;
         var flds = this.getForm().items;
         flds.each(function(fld) {
             if (fld.isFormField && (
@@ -217,11 +219,12 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             ) && !fld.isXType('combo')) {
                 var el = fld.getEl();
                 if (el) {
-                    new MODx.load({
+                    var target = new MODx.load({
                         xtype: 'modx-treedrop'
                         ,target: fld
                         ,targetEl: el.dom
                     });
+                    dropTargets.push(target);
                 }
             }
         });
@@ -276,6 +279,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 f.label.update(v);
             }
         }
+    }
+
+    ,destroy: function() {
+        for (var i = 0; i < this.dropTargets.length; i++) {
+            this.dropTargets[i].destroy();
+        }
+        MODx.FormPanel.superclass.destroy.call(this);
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
