@@ -63,6 +63,20 @@ class xPDOQueryHavingTest extends xPDOTestCase {
     }
 
     /**
+     * Test getCount with a groupby set.
+     */
+    public function testGetCountWithGroupBy() {
+        $criteria = $this->xpdo->newQuery('Item');
+        $criteria->select(array(
+            'color' => $this->xpdo->escape('color'),
+            'color_count' => "COUNT({$this->xpdo->escape('id')})"
+        ));
+        $criteria->groupby('color');
+        $actual = $this->xpdo->getCount('Item', $criteria);
+        $this->assertEquals(4, $actual);
+    }
+
+    /**
      * Test having
      * @dataProvider providerHaving
      */

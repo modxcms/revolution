@@ -190,6 +190,24 @@ class xPDOObjectTest extends xPDOTestCase {
     }
 
     /**
+     * Test the getCount method.
+     *
+     * @dataProvider providerGetCount
+     * @param string $class
+     * @param integer $expected
+     */
+    public function testGetCount($class, $expected) {
+        $this->assertEquals($expected, $this->xpdo->getCount($class));
+    }
+    public function providerGetCount() {
+        return array(
+            array('Person', 2),
+            array('Phone', 3),
+            array('BloodType', 8),
+        );
+    }
+
+    /**
      * Test saving an object.
      */
     public function testSaveObject() {
