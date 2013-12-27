@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Fix xPDO::getCount() to work with queries containing group by
 - Replace reflection of PHP_SELF with SCRIPT_NAME in xPDO::log()
 - Replace use of deprecated /e preg_replace modifier
 - Add dependency metadata/API to xPDOTransport
