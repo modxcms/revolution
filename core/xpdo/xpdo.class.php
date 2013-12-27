@@ -997,32 +997,32 @@ class xPDO {
      * @param mixed $criteria Any valid xPDOCriteria object or expression.
      * @return integer The number of instances found by the criteria.
      */
-    public function getCount($className, $criteria= null) {
-        $count= 0;
-        if ($query= $this->newQuery($className, $criteria)) {
-            $expr= '*';
-            if ($pk= $this->getPK($className)) {
+    public function getCount($className, $criteria = null) {
+        $count = 0;
+        if ($query = $this->newQuery($className, $criteria)) {
+            $stmt = null;
+            $expr = '*';
+            if ($pk = $this->getPK($className)) {
                 if (!is_array($pk)) {
-                    $pk= array ($pk);
+                    $pk = array($pk);
                 }
-                $expr= $this->getSelectColumns($className, $query->getAlias(), '', $pk);
+                $expr = $this->getSelectColumns($className, $query->getAlias(), '', $pk);
             }
-            if (isset($query->query['columns'])) $query->query['columns'] = array();
-            $query->select(array ("COUNT(DISTINCT {$expr})"));
-            if ($stmt= $query->prepare()) {
-                $tstart = microtime(true);
-                if ($stmt->execute()) {
-                    $this->queryTime += microtime(true) - $tstart;
-                    $this->executedQueries++;
-                    if ($results= $stmt->fetchAll(PDO::FETCH_COLUMN)) {
-                        $count= reset($results);
-                        $count= intval($count);
-                    }
-                } else {
-                    $this->queryTime += microtime(true) - $tstart;
-                    $this->executedQueries++;
-                    $this->log(xPDO::LOG_LEVEL_ERROR, "Error " . $stmt->errorCode() . " executing statement: \n" . print_r($stmt->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+            if (isset($query->query['columns'])) {
+                $query->query['columns'] = array();
+            }
+            if (!empty($query->query['groupby']) || !empty($query->query['having'])) {
+                $query->select($expr);
+                if ($query->prepare()) {
+                    $countQuery = new xPDOCriteria($this, "SELECT COUNT(*) FROM ({$query->toSQL(false)}) cq", $query->bindings, $query->cacheFlag);
+                    $stmt = $countQuery->prepare();
                 }
+            } else {
+                $query->select(array("COUNT(DISTINCT {$expr})"));
+                $stmt = $query->prepare();
+            }
+            if ($stmt && $stmt->execute()) {
+                $count = intval($stmt->fetchColumn());
             }
         }
         return $count;
@@ -2849,12 +2849,13 @@ class xPDOCriteria {
     /**
      * Converts the current xPDOQuery to parsed SQL.
      *
-     * @access public
+     * @param bool $parseBindings If true, bindings are parsed locally; otherwise
+     * they are left in place.
      * @return string The parsed SQL query.
      */
-    public function toSQL() {
+    public function toSQL($parseBindings = true) {
         $sql = $this->sql;
-        if (!empty($this->bindings)) {
+        if ($parseBindings && !empty($this->bindings)) {
             $sql = $this->xpdo->parseBindings($sql, $this->bindings);
         }
         return $sql;
