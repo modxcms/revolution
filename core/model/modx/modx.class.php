@@ -2567,7 +2567,12 @@ class modSystemEvent {
      * @param string $output The output to render.
      */
     public function output($output) {
-        $this->_output .= $output;
+        if ($this->_output === '') {
+            $this->_output = $output;
+        }
+        else {
+            $this->_output .= $output;
+        }
     }
 
     /**
