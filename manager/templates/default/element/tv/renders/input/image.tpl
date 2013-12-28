@@ -37,7 +37,7 @@ Ext.onReady(function() {
         ,width: '97%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
-        {if $params.openTo},openTo: '{$params.openTo}'{/if}
+        {if $params.openTo},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
         ,source: '{$source}'
     {literal}
         ,msgTarget: 'under'
