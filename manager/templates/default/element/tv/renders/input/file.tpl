@@ -36,10 +36,10 @@ Ext.onReady(function() {
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,source: '{$source}'
-        
+
         {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
-        {if $params.openTo},openTo: '{$params.openTo}'{/if}
+        {if $params.openTo},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
 
     {literal}
         ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
