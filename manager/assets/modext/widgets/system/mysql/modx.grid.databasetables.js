@@ -1,6 +1,6 @@
 /**
  * Loads a grid of all the database tables in the modx database.
- * 
+ *
  * @class MODx.grid.DatabaseTables
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -49,7 +49,7 @@ MODx.grid.DatabaseTables = function(config) {
         ,tbar: [{
             text: _('database_optimize')
             ,cls:'primary-button'
-//            ,handler: this.optimizeDatabase
+            ,handler: this.optimizeDatabase
             ,scope: this
         }]
     });
