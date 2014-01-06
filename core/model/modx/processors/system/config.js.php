@@ -28,6 +28,7 @@ if (!empty($wctx)) {
 /* calculate custom resource classes */
 $modx->lexicon->load('resource');
 $resourceClasses = array();
+$resourceClassesDrop = array();
 $resourceClassNames = $modx->getDescendants('modResource');
 $resourceClassNames = array_diff($resourceClassNames,array('modResource'));
 foreach ($resourceClassNames as $resourceClassName) {
@@ -36,6 +37,10 @@ foreach ($resourceClassNames as $resourceClassName) {
     if ($obj->showInContextMenu) {
         $lex = $obj->getContextMenuText();
         $resourceClasses[$resourceClassName] = $lex;
+    }
+
+    if ($obj->allowDrop != -1) {
+        $resourceClassesDrop[$resourceClassName] = $obj->allowDrop;
     }
 }
 
@@ -52,6 +57,7 @@ $c = array(
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],
     'resource_classes' => $resourceClasses,
+    'resource_classes_drop' => $resourceClassesDrop,
 );
 
 /* if custom context, load into MODx.config */

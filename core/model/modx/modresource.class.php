@@ -158,6 +158,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public $showInContextMenu = false;
     /**
+     * Use if extending modResource to state whether or not to allow drop on extended class in the resource tree
+     * Set 1 for allow drop, 0 for disable drop or -1 for default behavior
+     * @var int
+     */
+    public $allowDrop = -1;
+    /**
      * Use if extending modResource to state whether or not the derivative class can be listed in the class_key
      * dropdown users can change when editing a resource.
      * @var boolean
