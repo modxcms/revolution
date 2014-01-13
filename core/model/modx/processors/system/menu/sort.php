@@ -36,7 +36,7 @@ foreach ($nodes as $node) {
 }
 
 $path = $modx->getOption('cache_path') . $modx->getOption('cache_menu_key', null, 'menu') .'/menus/';
-$modx->cacheManager->deleteTree($path);
+$modx->cacheManager->delete($path);
 
 return $modx->error->success();
 

@@ -24,6 +24,6 @@ if ($menu->remove() == false) {
 $modx->logManagerAction('menu_delete','modMenu',$menu->get('text'));
 
 $path = $modx->getOption('cache_path') . $modx->getOption('cache_menu_key', null, 'menu') .'/menus/';
-$modx->cacheManager->deleteTree($path);
+$modx->cacheManager->delete($path);
 
 return $modx->error->success('',$menu);
