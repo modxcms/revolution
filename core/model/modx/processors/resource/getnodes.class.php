@@ -39,7 +39,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return mixed
      */
     public function process() {
@@ -103,7 +103,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Determine the context and root and start nodes for the tree
-     * 
+     *
      * @return void
      */
     public function getRootNode() {
@@ -191,7 +191,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Add search results to tree nodes
-     * 
+     *
      * @param string $query
      * @return void
      */
@@ -265,7 +265,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Iterate across the collection of items from the query
-     * 
+     *
      * @param array $collection
      * @return void
      */
@@ -297,7 +297,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Prepare a Context for being shown in the tree
-     * 
+     *
      * @param modContext $context
      * @return array
      */
@@ -338,7 +338,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
     /**
      * Prepare a Resource for being shown in the tree
-     * 
+     *
      * @param modResource $resource
      * @return array
      */
@@ -410,7 +410,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'ctx' => $resource->context_key,
             'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
-            'preview_url' => $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full'),
+            'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full') : '',
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? $this->actions['resource/update'] : $this->actions['resource/data']).'&id='.$resource->id : '',
             'allowDrop' => true,
         );
