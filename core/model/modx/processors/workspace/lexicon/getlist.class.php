@@ -83,13 +83,13 @@ class modLexiconGetListProcessor extends modProcessor {
 
             $entries = parseArray($search,$entries);
         }
-        $count = count($entries);
 
         /* add in unique entries */
         $es = array_diff(array_keys($dbEntries),array_keys($entries));
         foreach ($es as $n) {
             $entries[$n] = $dbEntries[$n]['value'];
         }
+        $count = count($entries);
         ksort($entries);
         $entries = array_slice($entries,$this->getProperty('start'),$this->getProperty('limit'),true);
 
