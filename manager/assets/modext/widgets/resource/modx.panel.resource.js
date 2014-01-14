@@ -61,6 +61,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
                 this.markDirty();
             }
+            if (this.config.record.deleted) {
+                this.handlePreview('hide');
+            }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
@@ -82,8 +85,30 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
-
     }
+
+    /**
+     * Handle the preview button visibility according to the resource "deleted" status
+     *
+     * @param {String} action The action to perform on the preview button (hide/show)
+     */
+    ,handlePreview: function(action) {
+        var previewBtn = Ext.getCmp('modx-abtn-preview');
+        if (previewBtn == undefined) {
+            // Button not found, let's try again in a few ms
+            Ext.defer(function() {
+                this.handlePreview(action);
+            }, 200, this);
+        } else {
+            var toolBar = Ext.getCmp('modx-page-update-resource').ab
+                ,btnIndex = toolBar.items.indexOf(previewBtn);
+
+            // Do the desired action on the button and its sibling (a spacer)
+            previewBtn[action]();
+            toolBar.items.get(btnIndex + 1)[action]();
+        }
+    }
+
     ,beforeDestroy: function(e){
         if (this.rteLoaded && MODx.unloadRTE){
             MODx.unloadRTE(this.rteElements);
@@ -142,6 +167,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
             MODx.loadPage(location.href);
         } else {
+            if (object.deleted) {
+                var action = 'hide';
+            } else {
+                action = 'show';
+            }
+            this.handlePreview(action);
             this.getForm().setValues(object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
