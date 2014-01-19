@@ -84,6 +84,11 @@ unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);
 $o .= '; MODx.perm = {};';
+
+// Load actions for backwards compatibility (DEPRECATED)
+$actions = $modx->request->getAllActionIDs();
+$o .= 'MODx.action = ' . $modx->toJSON($actions) . ';';
+
 if ($modx->user) {
     if ($modx->hasPermission('directory_create')) { $o .= 'MODx.perm.directory_create = true;'; }
     if ($modx->hasPermission('resource_tree')) { $o .= 'MODx.perm.resource_tree = true;'; }
