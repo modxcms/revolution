@@ -61,6 +61,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
                 this.markDirty();
             }
+
+            // Prevent accidental navigation when stuff has not been saved
+            var panel = this;
+            window.onbeforeunload = function() {
+                if (panel.isDirty()) return _('unsaved_changes');
+            };
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
