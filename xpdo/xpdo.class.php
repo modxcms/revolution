@@ -2645,7 +2645,6 @@ class xPDO {
         if (!empty($sql) && !empty($bindings)) {
             reset($bindings);
             $bound = array();
-            $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
             while (list ($k, $param)= each($bindings)) {
                 if (!is_array($param)) {
                     $v= $param;
@@ -2670,19 +2669,21 @@ class xPDO {
                             break;
                     }
                 }
+                if ($type > 0) {
+                    $v= $this->quote($v, $type);
+                } else {
+                    $v= 'NULL';
+                }
                 if (!is_int($k) || substr($k, 0, 1) === ':') {
                     $pattern= '/' . $k . '\b/';
-                    if ($type > 0) {
-                        $v= $this->quote($v, $type);
-                    } else {
-                        $v= 'NULL';
-                    }
                     $bound[$pattern] = str_replace(array('\\', '$'), array('\\\\', '\$'), $v);
                 } else {
-                    preg_match("/(\?)/", $sql, $matches, PREG_OFFSET_CAPTURE);
-                    $sql = substr_replace($sql, $parse($this,$bindings[$k]['value'],$type), $matches[0][1], strlen($bindings[$k]['value']));
+                    $pattern = '/(\?)(\b)?/';
+                    $sql = preg_replace($pattern, ':' . $k . '$2', $sql, 1);
+                    $bound['/:' . $k . '\b/'] = str_replace(array('\\', '$'), array('\\\\', '\$'), $v);
                 }
             }
+            $this->log(xPDO::LOG_LEVEL_INFO, "{$sql}\n" . print_r($bound, true));
             if (!empty($bound)) {
                 $sql= preg_replace(array_keys($bound), array_values($bound), $sql);
             }

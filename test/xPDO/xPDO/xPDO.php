@@ -549,7 +549,9 @@ class xPDOTest extends xPDOTestCase {
     public function providerParseBindings() {
         return array(
             array('SELECT * FROM a WHERE a.a=?', array("$1.00"), "SELECT * FROM a WHERE a.a='$1.00'"),
-            array('SELECT * FROM a WHERE a.a=:a', array(':a' => "$1.00"), "SELECT * FROM a WHERE a.a='$1.00'"),
+            array('SELECT * FROM a WHERE a.a=? AND a.b=? AND a.c = ?', array('$1.00', '$2.50', '$5.00'), "SELECT * FROM a WHERE a.a='$1.00' AND a.b='$2.50' AND a.c = '$5.00'"),
+            array('SELECT * FROM a WHERE a.a=:a', array(':a' => '$1.00'), "SELECT * FROM a WHERE a.a='$1.00'"),
+            array('SELECT * FROM a WHERE a.a=:a AND a.b=:b AND a.c = :c', array(':a' => '$1.00', ':b' => '$2.50', ':c' => '$5.00'), "SELECT * FROM a WHERE a.a='$1.00' AND a.b='$2.50' AND a.c = '$5.00'"),
         );
     }
 
