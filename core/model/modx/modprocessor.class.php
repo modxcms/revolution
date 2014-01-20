@@ -36,7 +36,7 @@ abstract class modProcessor {
      */
     function __construct(modX & $modx,array $properties = array()) {
         $this->modx =& $modx;
-        $this->properties = $properties;
+        $this->setProperties($properties);
     }
 
     /**
