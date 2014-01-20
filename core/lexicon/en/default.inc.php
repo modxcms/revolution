@@ -498,6 +498,7 @@ $_lang['untitled_template'] = 'Untitled template';
 $_lang['untitled_tv'] = 'Untitled tv';
 $_lang['untitled_weblink'] = 'Untitled weblink';
 $_lang['untitled_symlink'] = 'Untitled symlink';
+$_lang['unsaved_changes'] = 'There are unsaved changes. Are you sure you want to leave this page?';
 $_lang['update'] = 'Update';
 $_lang['updated'] = 'Updated';
 $_lang['upload'] = 'Upload';
