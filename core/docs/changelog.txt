@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix lexicon getList processor
 - Destroy drop targets on panel destroying
 - Add separation between a minute (singular) and minutes (plural)
 - Confirm navigation when unsaved changes exist in resource panel
