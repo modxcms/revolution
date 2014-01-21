@@ -164,13 +164,15 @@ class ResourceUpdateManagerController extends ResourceManagerController {
      * @return string
      */
     public function getPreviewUrl() {
-        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),$this->resource->get('context_key'),'','full');
+        if (!$this->resource->get('deleted')) {
+            $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),$this->resource->get('context_key'),'','full');
+        }
         return $this->previewUrl;
     }
 
     /**
      * Check for locks on the Resource
-     * 
+     *
      * @return bool
      */
     public function checkForLocks() {
@@ -189,7 +191,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         }
         return $this->locked;
     }
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
