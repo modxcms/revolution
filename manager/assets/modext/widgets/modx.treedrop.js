@@ -96,7 +96,12 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                 return true;
             }
         });
-    }    
+    }
+
+    ,destroy: function() {
+        this.targetEl.destroy();
+        MODx.TreeDrop.superclass.destroy.call(this);
+    }
 });
 Ext.reg('modx-treedrop',MODx.TreeDrop);
 
