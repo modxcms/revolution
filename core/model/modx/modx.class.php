@@ -1625,10 +1625,9 @@ class modX extends xPDO {
                 }
             }
             if (empty($processor)) {
-                $processor = new modDeprecatedProcessor($this);
+                $processor = new modDeprecatedProcessor($this, $scriptProperties);
             }
             $processor->setPath($processorFile);
-            $processor->setProperties($scriptProperties);
             $response = $processor->run();
         } else {
             $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processorFile} does not exist; " . print_r($options, true));
@@ -2567,7 +2566,11 @@ class modSystemEvent {
      * @param string $output The output to render.
      */
     public function output($output) {
-        $this->_output .= $output;
+        if ($this->_output === '') {
+            $this->_output = $output;
+        } else {
+            $this->_output .= $output;
+        }
     }
 
     /**

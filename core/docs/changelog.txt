@@ -2,6 +2,31 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.11-pl (January 21, 2014)
+====================================
+- Increase message_limit for ExtJS HttpStateProvider
+- Fix lexicon getList processor
+- Remove warnings/preview button for deleted Resources
+- Ensure context_key is passed when reloading Resource
+- Destroy drop targets on panel destroying
+- Add separation between a minute (singular) and minutes (plural)
+- Confirm navigation when unsaved changes exist in resource panel
+- Fix deprecated returnValue to prevent confirm navigation alert
+- Fix xPDO->parseBindings bug triggering modDbRegisterMessage errors
+- Prevent processor property overwriting in modX::runProcessor()
+- Add open in new window action to middle mouse button click in trees
+- Preserve value types in modSystemEvent::output()
+- Prevent removal of user groups after validation fails
+- Remove extra dot in filename for Content Disposition attachment
+- Fix unescaped backslash in file and image TV
+- Update xPDO to 2.3.0-alpha
+- Remove all dependency on mysql extension (deprecated in PHP >= 5.5)
+- Prevent "core" namespace removal
+- Remove cache clearing logic from system setting model
+- Update phpthumb to 1.7.11-beta to close security vulnerability
+- Prevent XSS on actionVar in header.tpl
+- Fix caching of manager menus
+
 MODX Revolution 2.2.10-pl (October 7, 2013)
 ====================================
 - Increase modTransportPackage version columns range to smallint

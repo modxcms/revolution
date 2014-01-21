@@ -77,7 +77,7 @@ if ($posted) {
             <p>In order to install MODX Revolution, you must first locate your core directory that contains the files required to run MODX,
             including this setup application. The current value specified is not valid and setup cannot continue until this is resolved.</p>
             <div>
-                <form id="corefinder" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                <form id="corefinder" action="<?php echo htmlspecialchars($_SERVER['SCRIPT_NAME'], ENT_QUOTES, 'utf-8') ?>" method="post">
                     <div>
                         <label>MODX_CORE_PATH</label>
                         <input type="text" name="core_path" id="core_path" value="<?php echo $core_path ?>" size="80" maxlength="255" />

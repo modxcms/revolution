@@ -43,7 +43,7 @@ class modPackageBuilder {
     */
     public $filename;
     /**
-    * @var string The xPDOTransport package object.
+    * @var xPDOTransport The xPDOTransport package object.
     * @access public
     */
     public $package;
