@@ -180,7 +180,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     f.config.action = 'reload';
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            MODx.loadPage(MODx.action[r.result.object.action], 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
+                            var query = [
+                                'reload=' + r.result.object.reload
+                                ,'class_key=' + r.result.object.class_key
+                                ,'context_key=' + r.result.object.context_key
+                            ];
+                            if (r.result.object.id) {
+                                query.push('id=' + r.result.object.id);
+                            }
+                            MODx.loadPage(MODx.action[r.result.object.action], query.join('&'));
                         },scope:this}
                     },{
                         bypassValidCheck: true
