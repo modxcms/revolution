@@ -184,7 +184,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'iconCls' => 'icon-file' . ' icon-'.$ext . ($file->isWritable() ? '' : ' icon-lock'),
                     'type' => 'file',
                     'leaf' => true,
-                    'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
+                    'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" style="max-width:500px;" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
                     'path' => $bases['pathAbsoluteWithPath'].$fileName,
