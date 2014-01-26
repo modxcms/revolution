@@ -25,7 +25,7 @@ class modResourceSortProcessor extends modProcessor {
         $data = $this->modx->fromJSON($data);
         if (empty($data)) $this->failure($this->modx->lexicon('invalid_data'));
 
-        $this->getNodesFormatted($data,0);
+        $this->getNodesFormatted($data,$this->getProperty('parent', 0));
 
         $this->fireBeforeSort();
 
