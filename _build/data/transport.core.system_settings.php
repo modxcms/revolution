@@ -348,6 +348,15 @@ $settings['compress_js_groups']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['confirm_navigation']= $xpdo->newObject('modSystemSetting');
+$settings['confirm_navigation']->fromArray(array (
+  'key' => 'confirm_navigation',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['container_suffix']= $xpdo->newObject('modSystemSetting');
 $settings['container_suffix']->fromArray(array (
   'key' => 'container_suffix',
