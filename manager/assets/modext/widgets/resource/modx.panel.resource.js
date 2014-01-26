@@ -240,7 +240,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },this);
         }
     }
-    ,onFieldChange: function() {
+    ,onFieldChange: function(o) {
+        if (o && o.field && o.field.name == 'syncsite') return;
+
         if (this.isReady || MODx.request.reload) {
             this.warnUnsavedChanges = true;
         }
