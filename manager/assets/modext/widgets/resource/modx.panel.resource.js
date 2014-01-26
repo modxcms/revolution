@@ -19,6 +19,7 @@ MODx.panel.Resource = function(config) {
             ,'success': {fn:this.success,scope:this}
             ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'fieldChange': {fn:this.onFieldChange,scope:this}
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
@@ -36,6 +37,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,classLexiconKey: 'document'
     ,rteElements: 'ta'
     ,rteLoaded: false
+    ,warnUnsavedChanges: false
     ,setup: function() {
         if (!this.initialized) {
             this.getForm().setValues(this.config.record);
@@ -63,10 +65,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
 
             // Prevent accidental navigation when stuff has not been saved
-            var panel = this;
-            window.onbeforeunload = function() {
-                if (panel.isDirty()) return _('unsaved_changes');
-            };
+            if (MODx.config.confirm_navigation == 1) {
+                var panel = this;
+                window.onbeforeunload = function() {
+                    if (panel.warnUnsavedChanges) return _('unsaved_changes');
+                };
+            }
 
             if (this.config.record.deleted) {
                 this.handlePreview('hide');
@@ -149,6 +153,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         });
     }
     ,success: function(o) {
+        this.warnUnsavedChanges = false;
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
@@ -185,6 +190,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,failure: function(o) {
+        this.warnUnsavedChanges = true;
         if(this.getForm().baseParams.action == 'create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
@@ -210,6 +216,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
                     f.config.action = 'reload';
+                    this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
                             var query = [
@@ -233,6 +240,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },this);
         }
     }
+    ,onFieldChange: function(o) {
+        if (o && o.field && o.field.name == 'syncsite') return;
+
+        if (this.isReady || MODx.request.reload) {
+            this.warnUnsavedChanges = true;
+        }
+    }
+
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('ta');
