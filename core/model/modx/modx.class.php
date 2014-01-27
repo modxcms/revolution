@@ -1674,8 +1674,7 @@ class modX extends xPDO {
                     $className = $this->processors[$processorFile];
                 }
                 if (!empty($className)) {
-                    $c = new $className($this,$scriptProperties);
-                    $processor = call_user_func_array(array($c,'getInstance'),array($this,$className,$scriptProperties));
+                    $processor = call_user_func_array(array($className,'getInstance'),array(&$this,$className,$scriptProperties));
                 }
             }
             if (empty($processor)) {
