@@ -53,6 +53,8 @@ Make sure you have `grunt`installed by testing:
 grunt --version
 ```
 
+If grunt comes back as command not found on OS X, you may need to update your PATH. [See this page for more details](http://www.hongkiat.com/blog/grunt-command-not-found/)
+
 Enter the default template directory and install the Node dependencies, this time *without* specifying a global(-g) install:
 
 ```bash
