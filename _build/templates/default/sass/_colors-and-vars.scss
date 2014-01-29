@@ -54,8 +54,13 @@ $treeDivider: rgb(64,64,64);
 $navbarBg: $gainsboro;
 $navbarHover: $softGrey;
 $navbarDrop: $navbarBg;
-$navbarText: #222;
+$navbarText: $white;
 $navbarRadius: 2px;
+$navbarBorder: #2F4150;
+$subnavBg: #485158;
+$subnavBorder: #3F4850;
+$subnavTitleColor: $white;
+$subnavDescriptionColor: #A7DDF0;
 
 /* borders */
 $borderColor: rgb(203, 203, 203);
@@ -78,7 +83,7 @@ $tabHoverText: darken($colorSplash, 20%);
 /* text colors and font stacks */
 $selected:lighten(desaturate($colorSplash,45%),50%);
 
-$bodyfonts: arial, helvetica, tahoma sans-serif;
+$bodyfonts: 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
 $headfonts: $bodyfonts;
 $codefonts: "Courier New", Courier, monospace;
 $buttonfonts: $bodyfonts;

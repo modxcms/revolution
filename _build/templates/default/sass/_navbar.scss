@@ -1,8 +1,6 @@
 /* Main MODX Manager navbar */
 #modx-navbar {
-  background: $navbarBg;
-  border-width: 0 0 1px;
-  border-bottom: 1px solid $borderColor;
+  background: url('../images/toolbar.jpg') repeat-x top center;
   box-shadow: 0 2px 0 $borderShadow;
   height: 100%;
   position: relative;
@@ -24,6 +22,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  li {
+    border-right: 1px solid $navbarBorder;
+  }
 }
 
 #modx-navbar li,
@@ -58,15 +60,13 @@
 }
 
 #modx-topnav > li.top:hover > a, #modx-user-menu > li.top:hover > a {
-  border-left-color:$borderColor;
-  border-right-color:$borderColor;
-  background: $white;
+  border-left-color:$navbarBorder;
+  border-right-color:$navbarBorder;
   padding-bottom: 1px;
   z-index: 10001;
 }
 
 #modx-navbar li:hover a {
-  background-color: $white;
   &:hover.modx-help {
     color: $colorSplash;
   }
@@ -94,7 +94,7 @@
 #modx-navbar ul.modx-subnav, #modx-navbar ul.modx-subsubnav {
   border-radius: 0 0 $navbarRadius $navbarRadius;
   border-top: none;
-  border: 1px solid $borderColor;
+  border: 1px solid $navbarBorder;
   box-shadow: $shadower;
 }
 
@@ -103,6 +103,7 @@
   background-position:center center;
   background-repeat:no-repeat;
   width: 50px;
+  border-right: none;
 }
 #user-avatar img {
   border-radius: 3px;
@@ -134,8 +135,8 @@
 }
 
 #modx-navbar ul.modx-subnav li {
-  background: $white;
-  border-bottom: 1px solid $navbarHover;
+  background: $subnavBg;
+  border-bottom: 1px solid $subnavBorder;
   clear: both;
   margin: 0;
   padding: 0;
@@ -148,7 +149,8 @@
 */
 
 #modx-navbar ul.modx-subnav li a {
-  background-color: $white;
+  background-color: $subnavBg;
+  color: $subnavTitleColor;
   float: left;
   font-weight: bold;
   line-height: 1.5;
@@ -167,9 +169,9 @@
 
 #modx-navbar ul.modx-subnav li {
   a:hover {
-    background: $gainsboro;
-    border-top-color:$borderColor;
-    border-bottom-color:$borderColor;
+    background: darken($subnavBg, 10%);
+    border-top-color:$subnavBorder;
+    border-bottom-color:$subnavBorder;
   }
   &:first-child a {
     border-top-width:0;
@@ -180,6 +182,7 @@
 }
 
 #modx-navbar ul.modx-subnav li a span {
+  color: $subnavDescriptionColor;
   display: block;
   float: none;
   font-size: 12px;
