@@ -101,7 +101,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     /**
      * Handle the preview button visibility according to the resource "deleted" status
      *
-     * @param {String} action The action to perform on the preview button (hide/show)
+     * @param {string} action The action to perform on the preview button (hide/show)
      */
     ,handlePreview: function(action) {
         var previewBtn = Ext.getCmp('modx-abtn-preview');
@@ -179,12 +179,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
             MODx.loadPage(location.href);
         } else {
-            if (object.deleted) {
-                var action = 'hide';
-            } else {
-                action = 'show';
+            if (object.deleted !== this.record.deleted) {
+                if (object.deleted) {
+                    var action = 'hide';
+                } else {
+                    action = 'show';
+                }
+                this.handlePreview(action);
             }
-            this.handlePreview(action);
+            this.record = object;
             this.getForm().setValues(object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
