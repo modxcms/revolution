@@ -364,6 +364,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     ,_handleDrop:  function(e){
+        if(this.config.sortBy != 'menuindex'){
+            Ext.Msg.alert(_('tree_dd_disabled'), _('tree_dd_disabled_msg'));
+        }
+
         var dropNode = e.dropNode;
         var targetParent = e.target;
 
@@ -524,7 +528,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             m.push('-');
             m.push(this._getSortMenu());
         }
-        
+
         return m;
     }
 
