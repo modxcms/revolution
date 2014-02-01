@@ -16,7 +16,7 @@ $_lang['login_blocked_time'] = 'คุณไม่ได้รับอนุญ
 $_lang['login_blocked_too_many_attempts'] = 'คุณถูกบล็อกเนื่องมาจากคุณล้มเหลวในการพยายามทำการเข้าสู่ระบบหลายครั้งเกินไป';
 $_lang['login_button'] = 'เข้าสู่ระบบ';
 $_lang['login_cannot_locate_account'] = 'ไม่มีบัญชีผู้ใช้นี้ กรุณาตรวจสอบชื่อผู้ใช้และพิมพ์รหัสผ่านใหม่อีกครั้ง';
-$_lang['login_copyright'] = '&copy; 2005-2013 จาก<a href="http://modx.com/about/" target="_blank">MODX, LLC</a> MODX Revolution&trade; ได้อนุญาตให้ใช้งานซอร์ฟแวร์ภายใต้ GPLv2 หรือถัดมา';
+$_lang['login_copyright'] = '&copy; 2005-2014 จาก<a href="http://modx.com/about/" target="_blank">MODX, LLC</a> MODX Revolution&trade; ได้อนุญาตให้ใช้งานซอร์ฟแวร์ภายใต้ GPLv2 หรือถัดมา';
 $_lang['login_email_label'] = 'บัญชีอีมล์:';
 $_lang['login_err_unknown'] = 'เกิดข้อผิดพลาดขณะกำลังลงชื่อเข้าสู่ระบบ';
 $_lang['login_forget_your_login'] = 'คุณลืมข้อมูลการลงชื่อเข้าสู่ระบบใช่หรือไม่?';
