@@ -610,20 +610,25 @@ class modOutputFilter {
                             break;
                         case 'cssToHead':
                             $this->modx->regClientCSS($output);
+                            $output = '';
                             break;
                         case 'htmlToHead':
                             $this->modx->regClientStartupHTMLBlock($output);
+                            $output = '';
                             break;
                         case 'htmlToBottom':
                             $this->modx->regClientHTMLBlock($output);
+                            $output = '';
                             break;
                         case 'jsToHead':
                             if (empty($m_val)) $m_val = false;
                             $this->modx->regClientStartupScript($output,$m_val);
+                            $output = '';
                             break;
                         case 'jsToBottom':
                             if (empty($m_val)) $m_val = false;
                             $this->modx->regClientScript($output,$m_val);
+                            $output = '';
                             break;
                         case 'in':
                         case 'IN':
