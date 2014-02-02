@@ -63,10 +63,16 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
 
             // Prevent accidental navigation when stuff has not been saved
-            var panel = this;
-            window.onbeforeunload = function() {
-                if (panel.isDirty()) return _('unsaved_changes');
-            };
+            if (MODx.config.confirm_navigation == 1) {
+                var panel = this;
+                window.onbeforeunload = function() {
+                    if (panel.isDirty()) return _('unsaved_changes');
+                };
+            }
+
+            if (this.config.record.deleted) {
+                this.handlePreview('hide');
+            }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');

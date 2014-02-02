@@ -198,6 +198,9 @@ $_lang['setting_compress_js_max_files_desc'] = 'Het maximum aantal JavaScript be
 $_lang['setting_concat_js'] = 'Gebruik Samengevoegde Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'Indien ingeschakeld, MODX zal een samengevoegde versie gebruiken van zijn Javascript libraries in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
 
+$_lang['setting_confirm_navigation'] = 'Bevestig navigatie bij niet opgeslagen wijzigingen';
+$_lang['setting_confirm_navigation_desc'] = 'When this is enabled, the user will be prompted to confirm their intention if there are unsaved changes.';
+
 $_lang['setting_container_suffix'] = 'Container Achtervoegsel';
 $_lang['setting_container_suffix_desc'] = 'Het achtervoegsel voor documenten indien het containers zijn en als er gebruikt gemaakt wordt van FURLs.';
 
