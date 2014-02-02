@@ -17,6 +17,7 @@ MODx.tree.Menu = function(config) {
         ,enableDrop: true
         ,url: MODx.config.connector_url
         ,action: 'system/menu/getNodes'
+        ,sortAction: 'system/menu/sort'
         ,primaryKey: 'text'
         ,useDefaultToolbar: true
         ,ddGroup: 'modx-menu'
@@ -31,7 +32,7 @@ MODx.tree.Menu = function(config) {
 };
 Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     windows: {}
-	
+
     ,createMenu: function(n,e) {
         var r = {};
         if (this.cm && this.cm.activeNode && this.cm.activeNode.attributes && this.cm.activeNode.attributes.data) {
@@ -49,7 +50,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         this.windows.create_menu.setValues(r);
         this.windows.create_menu.show(e.target);
     }
-	
+
     ,updateMenu: function(n,e) {
         var r = this.cm.activeNode.attributes.data;
         Ext.apply(r,{
@@ -68,7 +69,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         this.windows.update_menu.setValues(r);
         this.windows.update_menu.show(e.target);
     }
-	
+
     ,removeMenu: function(n,e) {
         MODx.msg.confirm({
             title: _('warning')
@@ -110,9 +111,9 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
 });
 Ext.reg('modx-tree-menu',MODx.tree.Menu);
 
-/** 
+/**
  * Generates the Create Menu window
- * 
+ *
  * @class MODx.window.CreateMenu
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -128,8 +129,11 @@ MODx.window.CreateMenu = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'system/menu/create'
         ,fields: [{
-            xtype: 'hidden'
+            xtype: 'modx-combo-menu'
             ,name: 'parent'
+            ,hiddenName: 'parent'
+            ,anchor: '100%'
+            ,fieldLabel: _('parent')
         },{
             layout: 'column'
             ,border: false
@@ -149,6 +153,7 @@ MODx.window.CreateMenu = function(config) {
                     ,allowBlank: false
                     ,anchor: '100%'
                     ,id: this.ident+'-text'
+                    ,readOnly: config.update ? true : false
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: this.ident+'-text'
@@ -203,7 +208,7 @@ MODx.window.CreateMenu = function(config) {
                     ,xtype: 'textfield'
                     ,anchor: '100%'
                     ,id: this.ident+'-action-id'
-                    ,allowBlank: false
+                    //,allowBlank: false
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: this.ident+'-action-id'
@@ -243,11 +248,11 @@ MODx.window.CreateMenu = function(config) {
 Ext.extend(MODx.window.CreateMenu,MODx.Window);
 Ext.reg('modx-window-menu-create',MODx.window.CreateMenu);
 
-/** 
+/**
  * Generates the Update Menu window
- * 
+ *
  * @class MODx.window.UpdateMenu
- * @extends MODx.Window
+ * @extends MODx.window.CreateMenu
  * @constructor
  * @param {Object} config An object of options.
  * @xtype window-menu-update
@@ -256,129 +261,16 @@ MODx.window.UpdateMenu = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('menu_update')
-        ,width: 650
-        ,height: 400
-        ,url: MODx.config.connector_url
         ,action: 'system/menu/update'
-        ,fields: [{
-            name: 'parent'
-            ,xtype: 'hidden'
-        },{
-            layout: 'column'
-            ,border: false
-            ,defaults: {
-                layout: 'form'
-                ,labelAlign: 'top'
-                ,anchor: '100%'
-                ,border: false
-            }
-            ,items: [{
-                columnWidth: .5
-                ,items: [{
-                    fieldLabel: _('lexicon_key')
-                    ,description: MODx.expandHelp ? '' : _('lexicon_key_desc')
-                    ,name: 'text'
-                    ,xtype: 'statictextfield'
-                    ,submitValue: true
-                    ,allowBlank: false
-                    ,anchor: '100%'
-                    ,id: this.ident+'-text'
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: this.ident+'-text'
-                    ,html: _('lexicon_key_desc')
-                    ,cls: 'desc-under'
-                },{
-                    fieldLabel: _('description')
-                    ,description: MODx.expandHelp ? '' : _('description_desc')
-                    ,name: 'description'
-                    ,xtype: 'textfield'
-                    ,allowBlank: true
-                    ,anchor: '100%'
-                    ,id: this.ident+'-description'
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: this.ident+'-description'
-                    ,html: _('description_desc')
-                    ,cls: 'desc-under'
-                },{
-                    fieldLabel: _('handler')
-                    ,description: MODx.expandHelp ? '' : _('handler_desc')
-                    ,name: 'handler'
-                    ,xtype: 'textarea'
-                    ,anchor: '100%'
-                    ,grow: false
-                    ,id: this.ident+'-handler'
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: this.ident+'-handler'
-                    ,html: _('handler_desc')
-                    ,cls: 'desc-under'
-                },{
-                    fieldLabel: _('permissions')
-                    ,description: MODx.expandHelp ? '' : _('permissions_desc')
-                    ,name: 'permissions'
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,id: this.ident+'-permissions'
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: this.ident+'-permissions'
-                    ,html: _('permissions_desc')
-                    ,cls: 'desc-under'
-                }]
-            },{
-                columnWidth: .5
-                ,items: [{
-                    fieldLabel: _('action')
-                    ,description: MODx.expandHelp ? '' : _('action_desc')
-                    ,name: 'action_id'
-                    ,hiddenName: 'action_id'
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,id: this.ident+'-action-id'
-                    ,allowBlank: false
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: this.ident+'-action-id'
-                    ,html: _('action_desc')
-                    ,cls: 'desc-under'
-                },{
-                    fieldLabel: _('parameters')
-                    ,description: MODx.expandHelp ? '' : _('parameters_desc')
-                    ,name: 'params'
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,id: this.ident+'-params'
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: this.ident+'-params'
-                    ,html: _('parameters_desc')
-                    ,cls: 'desc-under'
-                },{
-                    fieldLabel: _('namespace')
-                    ,description: MODx.expandHelp ? '' : _('namespace_desc')
-                    ,name: 'namespace'
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,id: this.ident+'-namespace'
-                },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: this.ident+'-namespace'
-                    ,html: _('namespace_desc')
-                    ,cls: 'desc-under'
-                }]
-            }]
-        }]
     });
     MODx.window.UpdateMenu.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.UpdateMenu,MODx.Window);
+Ext.extend(MODx.window.UpdateMenu,MODx.window.CreateMenu);
 Ext.reg('modx-window-menu-update',MODx.window.UpdateMenu);
 
-/** 
+/**
  * Displays a dropdown of modMenus
- * 
+ *
  * @class MODx.combo.Menu
  * @extends MODx.combo.ComboBox
  * @param {Object} config An object of options.
