@@ -196,7 +196,7 @@ ul.x-tab-strip-bottom {
   width: 150px !important;
   margin-left:0;
   & ul {
-    border-top: 1px solid #E0E0E0;
+    border-top: 1px solid transparent;
     width: auto;
     border-bottom-color:transparent;
   }
@@ -227,10 +227,10 @@ ul.x-tab-strip-bottom {
 }
 
 .vertical-tabs-header ul.x-tab-strip-top li.x-tab-strip-active {
-  background: #fff !important;
-  border-width: 0 0 1px;
+  background: $white !important;
+  /*border-width: 0 0 1px;*/
   color: #555;
-  padding-bottom: 5px !important;
+  /*padding-bottom: 5px !important;*/
   text-shadow: none;
 }
 
