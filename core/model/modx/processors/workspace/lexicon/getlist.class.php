@@ -45,6 +45,14 @@ class modLexiconGetListProcessor extends modProcessor {
             'language' => $this->getProperty('language'),
         );
 
+        $search = $this->getProperty('search');
+        if (!empty($search)) {
+            $where[] = array(
+                'name:LIKE' => '%'.$search.'%',
+                'OR:value:LIKE' => '%'.$search.'%',
+            );
+        }
+
         /* setup query for db based lexicons */
         $c = $this->modx->newQuery('modLexiconEntry');
         $c->where($where);
@@ -61,7 +69,6 @@ class modLexiconGetListProcessor extends modProcessor {
         $entries = is_array($entries) ? $entries : array();
 
         /* if searching */
-        $search = $this->getProperty('search');
         if (!empty($search)) {
             function parseArray($needle,array $haystack = array()) {
                 if (!is_array($haystack)) return false;
@@ -75,18 +82,14 @@ class modLexiconGetListProcessor extends modProcessor {
             }
 
             $entries = parseArray($search,$entries);
-            $where[] = array(
-                'name:LIKE' => '%'.$search.'%',
-                'OR:value:LIKE' => '%'.$search.'%',
-            );
         }
-        $count = count($entries);
 
         /* add in unique entries */
         $es = array_diff(array_keys($dbEntries),array_keys($entries));
         foreach ($es as $n) {
             $entries[$n] = $dbEntries[$n]['value'];
         }
+        $count = count($entries);
         ksort($entries);
         $entries = array_slice($entries,$this->getProperty('start'),$this->getProperty('limit'),true);
 
