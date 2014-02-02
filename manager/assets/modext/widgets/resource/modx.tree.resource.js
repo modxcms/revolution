@@ -613,7 +613,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             m.push(this._getSortMenu());
         }
 
-        if (ui.hasClass('pview')) {
+        if (ui.hasClass('pview') && a.preview_url != '') {
             m.push('-');
             m.push({
                 text: _('resource_view')
