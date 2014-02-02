@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Access';
 $_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
@@ -31,6 +32,8 @@ $_lang['template_err_ns'] = 'Template not specified.';
 $_lang['template_err_ns_name'] = 'Please specify a name for the template.';
 $_lang['template_err_remove'] = 'An error occurred while removing the template.';
 $_lang['template_err_save'] = 'An error occurred while saving the template.';
+$_lang['template_icon'] = 'Icon';
+$_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
 $_lang['template_lock'] = 'Lock template for editing';
 $_lang['template_lock_msg'] = 'Users must have the edit_locked attribute to edit this template.';
 $_lang['template_locked_message'] = 'This template is locked.';
@@ -49,4 +52,3 @@ $_lang['template_untitled'] = 'Untitled Template';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'Template Variable does not have access to the specified Template.';
 $_lang['tvt_err_remove'] = 'An error occurred while trying to remove the template variable from the template.';
-$_lang['tvt_err_save'] = 'An error occurred while trying to attach the template variable to the template.';
