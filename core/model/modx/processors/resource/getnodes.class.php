@@ -440,7 +440,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'ctx' => $resource->context_key,
             'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
-            'preview_url' => $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full'),
+            'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full') : '',
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? 'resource/update' : 'resource/data').'&id='.$resource->id : '',
             'allowDrop' => true,
         );
