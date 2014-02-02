@@ -977,7 +977,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     var store = this.grid_panel.getStore();
     store.add(new Ext.ux.UploadDialog.FileRecord({
           state: Ext.ux.UploadDialog.FileRecord.STATE_QUEUE
-          ,filename: input_file.dom.value
+          ,filename: document.getElementById(input_file.id).files[0].name
           ,note: this.i18n.note_queued_to_upload
           ,input_element: input_file
     }));
