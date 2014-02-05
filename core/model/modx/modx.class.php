@@ -1441,9 +1441,10 @@ class modX extends xPDO {
      *
      * @param string $src The CSS to be injected before the closing HEAD tag in
      * an HTML response.
+     * @param string $media all, aural, braille, embossed, handheld, print, projection, screen, tty, tv
      * @return void
      */
-    public function regClientCSS($src) {
+    public function regClientCSS($src, $media = null) {
         if (isset ($this->loadedjscripts[$src]) && $this->loadedjscripts[$src]) {
             return;
         }
@@ -1451,7 +1452,10 @@ class modX extends xPDO {
         if (strpos(strtolower($src), "<style") !== false || strpos(strtolower($src), "<link") !== false) {
             $this->sjscripts[count($this->sjscripts)]= $src;
         } else {
-            $this->sjscripts[count($this->sjscripts)]= '<link rel="stylesheet" href="' . $src . '" type="text/css" />';
+            if (!empty($media)) {
+                $media = ' media="' . $media .'"';
+            }
+            $this->sjscripts[count($this->sjscripts)]= '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
         }
     }
 
