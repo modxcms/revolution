@@ -1,6 +1,6 @@
 /**
  * @class MODx.panel.Welcome
- * @extends MODx.FormPanel
+ * @extends MODx.Panel
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-welcome
  */
