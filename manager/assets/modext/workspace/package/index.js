@@ -6,6 +6,7 @@ MODx.page.Package = function(config) {
             xtype: 'modx-panel-package'
             ,renderTo: 'modx-panel-package-div'
             ,signature: MODx.request.signature
+            ,package_name: MODx.request.package_name
         }]
         ,buttons: [{
             process: 'workspace/packages/update'
