@@ -34,7 +34,7 @@ $_lang['login_button'] = 'Zaloguj'; #
 #$_lang['login_cannot_locate_account'] = 'That account could not be located.  Check the username and re-type the password to try again.';
 $_lang['login_cannot_locate_account'] = 'Nie znaleziono takiego konta użytkownika. Sprawdź login, wprowadź hasło i spróbuj ponownie.'; # ?
 
-#$_lang['login_copyright'] = '&copy; 2005-2013 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+#$_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_copyright'] = '&copy; 2005-2013 <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; jest udostępniany na licencji GPLv2 lub nowszej.'; #
 
 #$_lang['login_email_label'] = 'Account Email:';
