@@ -503,6 +503,7 @@ $_lang['untitled_template'] = 'Unbenanntes Template';
 $_lang['untitled_tv'] = 'Unbenannte TV';
 $_lang['untitled_weblink'] = 'Unbenannter Weblink';
 $_lang['untitled_symlink'] = 'Unbenannter Symlink';
+$_lang['unsaved_changes'] = 'Es gibt Änderungen, die noch nicht gespeichert wurden. Sind Sie sicher, dass Sie diese Seite verlassen möchten?';
 $_lang['update'] = 'Update';
 $_lang['updated'] = 'Upgedatet';
 $_lang['upload'] = 'Upload';
