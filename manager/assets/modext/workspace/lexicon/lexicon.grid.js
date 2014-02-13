@@ -21,6 +21,7 @@ MODx.grid.Lexicon = function(config) {
         ,width: '98%'
         ,paging: true
         ,autosave: true
+        ,save_action: 'workspace/lexicon/updatefromgrid'
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -40,7 +41,8 @@ MODx.grid.Lexicon = function(config) {
             ,width: 125
         }]
         ,tbar: [{
-            text: _('namespace')+':'
+            xtype: 'tbtext'
+            ,text: _('namespace')+':'
         },{
             xtype: 'modx-combo-namespace'
             ,id: 'modx-lexicon-filter-namespace'
@@ -50,8 +52,9 @@ MODx.grid.Lexicon = function(config) {
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
             }
-        },{
-            text: _('topic')+':'
+        },'-',{
+            xtype: 'tbtext'
+            ,text: _('topic')+':'
         },{
             xtype: 'modx-combo-lexicon-topic'
             ,id: 'modx-lexicon-filter-topic'
@@ -62,8 +65,9 @@ MODx.grid.Lexicon = function(config) {
             ,listeners: {
                 'select': {fn:this.changeTopic,scope:this}
             }
-        },{
-            text: _('language')+':'
+        },'-',{
+            xtype: 'tbtext'
+            ,text: _('language')+':'
         },{
             xtype: 'modx-combo-language'
             ,name: 'language'
@@ -79,6 +83,7 @@ MODx.grid.Lexicon = function(config) {
         ,{
             xtype: 'button'
             ,text: _('entry_create')
+            ,cls:'primary-button'
             ,handler: this.createEntry
             ,scope: this
         },'-',{

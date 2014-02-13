@@ -10,7 +10,7 @@
 
 class phpthumb_filters {
 
-	public $phpThumbObject = null;
+	var $phpThumbObject = null;
 
 	function phpthumb_filters() {
 		return true;
@@ -296,15 +296,24 @@ class phpthumb_filters {
 	}
 
 
-	function DropShadow(&$gdimg, $distance, $width, $hexcolor, $angle, $fade) {
+	function DropShadow(&$gdimg, $distance, $width, $hexcolor, $angle, $alpha) {
 		if (phpthumb_functions::gd_version() < 2) {
 			return false;
 		}
-		$distance = ($distance ? $distance : 10);
-		$width    = ($width    ? $width    : 10);
-		$hexcolor = ($hexcolor ? $hexcolor : '000000');
-		$angle    = ($angle    ? $angle    : 225);
-		$fade     = ($fade     ? $fade     : 1);
+		$distance =                 ($distance ? $distance : 10);
+		$width    =                 ($width    ? $width    : 10);
+		$hexcolor =                 ($hexcolor ? $hexcolor : '000000');
+		$angle    =                 ($angle    ? $angle    : 225) % 360;
+		$alpha    = max(0, min(100, ($alpha    ? $alpha    : 100)));
+
+		if ($alpha <= 0) {
+			// invisible shadow, nothing to do
+			return true;
+		}
+		if ($distance <= 0) {
+			// shadow completely obscured by source image, nothing to do
+			return true;
+		}
 
 		$width_shadow  = cos(deg2rad($angle)) * ($distance + $width);
 		$height_shadow = sin(deg2rad($angle)) * ($distance + $width);
@@ -312,7 +321,7 @@ class phpthumb_filters {
 		$scaling = min(ImageSX($gdimg) / (ImageSX($gdimg) + abs($width_shadow)), ImageSY($gdimg) / (ImageSY($gdimg) + abs($height_shadow)));
 
 		for ($i = 0; $i < $width; $i++) {
-			$WidthAlpha[$i] = (abs(($width / 2) - $i) / $width) * $fade;
+			$WidthAlpha[$i] = (abs(($width / 2) - $i) / $width);
 			$Offset['x'] = cos(deg2rad($angle)) * ($distance + $i);
 			$Offset['y'] = sin(deg2rad($angle)) * ($distance + $i);
 		}
@@ -629,7 +638,7 @@ class phpthumb_filters {
 
 				$DefaultColors = array('r'=>'FF0000', 'g'=>'00FF00', 'b'=>'0000FF', 'a'=>'999999', '*'=>'FFFFFF');
 				$Colors = explode(';', $colors);
-				$BandsToGraph = array_unique(preg_split('//', $bands));
+				$BandsToGraph = array_unique(preg_split('##', $bands));
 				$keys = array('r'=>'red', 'g'=>'green', 'b'=>'blue', 'a'=>'alpha', '*'=>'gray');
 				foreach ($BandsToGraph as $key => $band) {
 					if (!isset($keys[$band])) {
@@ -1095,7 +1104,7 @@ class phpthumb_filters {
 		}
 		ImageAlphaBlending($gdimg, true);
 
-		if (preg_match('/^([0-9\\.\\-]*)x([0-9\\.\\-]*)(@[LCR])?$/i', $alignment, $matches)) {
+		if (preg_match('#^([0-9\\.\\-]*)x([0-9\\.\\-]*)(@[LCR])?$#i', $alignment, $matches)) {
 			$originOffsetX = intval($matches[1]);
 			$originOffsetY = intval($matches[2]);
 			$alignment = (@$matches[4] ? $matches[4] : 'L');
@@ -1225,10 +1234,10 @@ class phpthumb_filters {
 				$y1 = $text_origin_y + $TTFbox[1];
 				$x2 = $text_origin_x + $min_x + $text_width;
 				$y2 = $text_origin_y + $TTFbox[1] - $text_height;
-				$x_TL = preg_match('/x/i', $fillextend) ?               0 : min($x1, $x2);
-				$y_TL = preg_match('/y/i', $fillextend) ?               0 : min($y1, $y2);
-				$x_BR = preg_match('/x/i', $fillextend) ? ImageSX($gdimg) : max($x1, $x2);
-				$y_BR = preg_match('/y/i', $fillextend) ? ImageSY($gdimg) : max($y1, $y2);
+				$x_TL = preg_match('#x#i', $fillextend) ?               0 : min($x1, $x2);
+				$y_TL = preg_match('#y#i', $fillextend) ?               0 : min($y1, $y2);
+				$x_BR = preg_match('#x#i', $fillextend) ? ImageSX($gdimg) : max($x1, $x2);
+				$y_BR = preg_match('#y#i', $fillextend) ? ImageSY($gdimg) : max($y1, $y2);
 				//while ($y_BR > ImageSY($gdimg)) {
 				//	$y_TL--;
 				//	$y_BR--;
@@ -1413,7 +1422,7 @@ class phpthumb_filters {
 			$margin_y = (is_null($margin_y) ? $margin_x : $margin_y);
 			$watermark_margin_x = ((($margin_x > 0) && ($margin_x < 1)) ? round((1 - $margin_x) * $img_source_width)  : $margin_x);
 			$watermark_margin_y = ((($margin_y > 0) && ($margin_y < 1)) ? round((1 - $margin_y) * $img_source_height) : $margin_y);
-			if (preg_match('/^([0-9\\.\\-]*)x([0-9\\.\\-]*)$/i', $alignment, $matches)) {
+			if (preg_match('#^([0-9\\.\\-]*)x([0-9\\.\\-]*)$#i', $alignment, $matches)) {
 				$watermark_destination_x = intval($matches[1]);
 				$watermark_destination_y = intval($matches[2]);
 			} else {

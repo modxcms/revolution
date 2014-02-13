@@ -42,6 +42,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                 process: 'resource/create'
                 ,reload: true
                 ,id: 'modx-abtn-save'
+                ,cls:'primary-button'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: true

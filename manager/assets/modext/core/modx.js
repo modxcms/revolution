@@ -639,7 +639,7 @@ MODx.HttpProvider = function(config) {
     );
     MODx.HttpProvider.superclass.constructor.call(this,config);
     Ext.apply(this, config, {
-        delay: 1000
+        delay: 500
         ,dirty: false
         ,started: false
         ,autoStart: true
@@ -667,7 +667,7 @@ MODx.HttpProvider = function(config) {
             ,poll_limit: 1
             ,poll_interval: 1
             ,time_limit: 10
-            ,message_limit: 200
+            ,message_limit: 1000
             ,remove_read: 0
             ,show_filename: 0
             ,include_keys: 1

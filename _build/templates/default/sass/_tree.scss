@@ -22,12 +22,13 @@
 }
 
 #modx-leftbar-tabpanel {
-  border-bottom:1px solid $borderColor;	
+  border:1px solid $borderColor;
+  box-shadow: 0 0 0 3px $gainsboro;
 }
 
 /* tree menu splitter */
 .x-layout-split {
-  background: $mainBg;
+  background: $white;
   border-width: 0 0 0 1px;
   border: 1px solid $borderColor;
   width: 8px;
@@ -132,6 +133,16 @@
   font-style: $lockedText;
 }
 
+.x-tree-node {
+	position:relative;
+}
+
+.modx-tree-node-tool-ct {
+	position:absolute;
+	top:0;
+	right:0;
+}
+
 
 .x-tree-root-ct {
   border-radius: 0;
@@ -197,14 +208,14 @@
   border-top-color: #686868;
 }
 .x-tree-node .x-tree-drag-append a span {
-  background-color: #ddd;
+  background-color: $selected;
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $gainsboro;
+  background-color: $selected;
 }
 .x-tree-node .x-tree-selected {
-  background-color: lighten(desaturate($colorSplash,45%),50%);
+  background-color: $selected;
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-add.gif);
@@ -296,12 +307,12 @@
 .icon-namespace {
   background-image: url(../images/restyle/icons/computer.png) !important;
 }
-.icon-propertyset {
+/*.icon-propertyset {
   background-image: url(../images/restyle/icons/property-set.png) !important;
-}
-.icon-resourcegroup {
-  background-image: url(../images/restyle/icons/application_cascade.png) !important;
-}
+}*/
+/*.icon-resourcegroup {
+  background: url(../images/restyle/icons/application_cascade.png) no-repeat left top !important;
+}*/
 .icon-list-new {
   background-image: url(../images/restyle/icons/layout_add.png) !important;
 }
@@ -369,7 +380,7 @@
   padding: 0;
 }
 .tree-pseudoroot-node {
-  background-color: darken($navbarHover, 2%);
+  background-color: $gainsboro;
   border-bottom: 1px solid $borderColor;
   font-weight: bold;
   line-height: 2;
@@ -461,7 +472,7 @@
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $gainsboro;
+  background-color: $selected;
 }
 .x-tree-node .x-tree-selected {
   background-color: $selected;

@@ -376,7 +376,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
         	return false;
         }
-        if (targetParent.attributes.hide_children_in_tree) { return false; }
+
+        if (MODx.config.resource_classes_drop[targetParent.attributes.classKey] == undefined) {
+            if (targetParent.attributes.hide_children_in_tree) { return false; }
+        } else if (MODx.config.resource_classes_drop[targetParent.attributes.classKey] == 0) {
+            return false;
+        }
 
         return dropNode.attributes.text != 'root' && dropNode.attributes.text !== ''
             && targetParent.attributes.text != 'root' && targetParent.attributes.text !== '';
@@ -613,7 +618,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             m.push(this._getSortMenu());
         }
 
-        if (ui.hasClass('pview')) {
+        if (ui.hasClass('pview') && a.preview_url != '') {
             m.push('-');
             m.push({
                 text: _('resource_view')

@@ -538,7 +538,7 @@ class modOutputFilter {
                               $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),array('time' => $agoTS['hours']));
                             }
                             if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-                              $ago[] = $this->modx->lexicon('ago_minutes',array('time' => $agoTS['minutes']));
+                                $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,array('time' => $agoTS['minutes']));
                             }
                             if (empty($ago)) { /* handle <1 min */
                               $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
@@ -624,6 +624,14 @@ class modOutputFilter {
                         case 'jsToBottom':
                             if (empty($m_val)) $m_val = false;
                             $this->modx->regClientScript($output,$m_val);
+                            break;
+                        case 'in':
+                        case 'IN':
+                        case 'inarray':
+                        case 'inArray':
+                            if (empty($m_val)) $m_val = false;
+                            $haystack = explode(',', $m_val);
+                            $condition[]= intval(in_array($output, $haystack));
                             break;
 
 

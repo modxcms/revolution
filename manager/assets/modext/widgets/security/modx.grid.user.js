@@ -41,6 +41,7 @@ MODx.grid.User = function(config) {
         ,fields: ['id','username','fullname','email','gender','blocked','role','active','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/user/updatefromgrid'
         ,remoteSort: true
         ,viewConfig: {
             forceFit:true
@@ -94,6 +95,7 @@ MODx.grid.User = function(config) {
             text: _('user_new')
             ,handler: this.createUser
             ,scope: this
+            ,cls:'primary-button'
         },'-',{
             text: _('bulk_actions')
             ,menu: [{

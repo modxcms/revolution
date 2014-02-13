@@ -225,12 +225,17 @@ $children[2]->fromArray(array (
 MODx.msg.confirm({
     title: _(\'remove_locks\')
     ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url+\'system/remove_locks.php\'
+    ,url: MODx.config.connectors_url
     ,params: {
-        action: \'remove\'
+        action: \'system/remove_locks\'
     }
     ,listeners: {
-        \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
+        \'success\': {fn:function() {
+            var tree = Ext.getCmp("modx-resource-tree");
+            if (tree && tree.rendered) {
+                tree.refresh();
+            }
+         },scope:this}
     }
 });',
 ), '', true, true);
@@ -287,7 +292,7 @@ $children[5]->fromArray(array (
   'description' => 'reports_desc',
   'parent' => 'manage',
   'permissions' => 'menu_reports',
-  'action' => 'reports',
+  'action' => '',
 ), '', true, true);
 
 /* site schedule */

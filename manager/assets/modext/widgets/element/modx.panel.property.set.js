@@ -83,9 +83,15 @@ MODx.grid.PropertySetProperties = function(config) {
                 'select': {fn:function(cb) { Ext.getCmp('modx-grid-element-properties').changePropertySet(cb); },scope:this}
             }
             ,value: ''
-        },{
+        },'-',{
             text: _('property_create')
-            ,handler: function(btn,e) { Ext.getCmp('modx-grid-element-properties').create(btn,e); }
+            ,handler: function(btn,e) {
+                if (Ext.getCmp('modx-combo-property-set').value != '') {
+                    Ext.getCmp('modx-grid-element-properties').create(btn,e);
+                } else {
+                    MODx.msg.alert('', _('propertyset_err_ns'));
+                }
+            }
             ,scope: this
         },'->',{
             text: _('propertyset_save')

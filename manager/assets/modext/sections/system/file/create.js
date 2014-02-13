@@ -1,6 +1,6 @@
 /**
  * Loads the create file page
- * 
+ *
  * @class MODx.page.CreateFile
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -10,7 +10,7 @@ MODx.page.CreateFile = function(config) {
     config = config || {};
     var btns = [];
     btns.push({
-        process: 'create'
+        process: 'browser/file/create'
         ,text: _('save')
         ,method: 'remote'
         ,keys: [{
@@ -41,7 +41,7 @@ Ext.extend(MODx.page.CreateFile,MODx.Component);
 Ext.reg('modx-page-file-create',MODx.page.CreateFile);
 /**
  * Loads the CreateFile panel
- * 
+ *
  * @class MODx.panel.CreateFile
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties

@@ -95,6 +95,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
             btns.push({
                 process: 'resource/update'
                 ,text: _('save')
+                ,cls:'primary-button'
                 ,method: 'remote'
                 ,checkDirty: cfg.richtext || MODx.request.reload ? false : true
                 ,keys: [{

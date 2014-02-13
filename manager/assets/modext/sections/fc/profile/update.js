@@ -18,6 +18,7 @@ MODx.page.UpdateFCProfile = function(config) {
         ,buttons: [{
             process: 'security/forms/profile/update'
             ,text: _('save')
+            ,cls:'primary-button'
             ,method: 'remote'
             ,checkDirty: false
             ,keys: [{

@@ -15,7 +15,7 @@ MODx.page.UpdateContext = function(config) {
             ,cancel: 'context/view'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'context/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true

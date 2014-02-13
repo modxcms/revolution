@@ -27,7 +27,7 @@
 *     JP DeVries @jpdevries http://devries.jp
 *     Alan Pich @_alanpich
 *     Danya Postfactum
-*     Christian Seele @christianseel
+*     Christian Seel @christianseel http://christianseel.com
 *     
 */
 
@@ -193,9 +193,13 @@ hr {
 
 #modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {	
 	.x-tab-strip {
+		margin-top:12px;
 		li {
 			width:100% !important; /* #shame */
 			margin-left:0;
+			border-bottom:1px solid $borderColor;
+			&:nth-last-child(3) { border-color:transparent }
+			&.x-tab-strip-active { border-bottom:1px solid $borderColor; }
 		}
 	}
 }
@@ -347,6 +351,10 @@ hr {
   background-color: white;
   font: 11px $codefonts !important;
   padding: 8px;
+}
+
+.x-form-text.modx-console-text {
+  height: auto;
 }
 
 /* portlets */

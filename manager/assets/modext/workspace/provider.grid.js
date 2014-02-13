@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Provisioners.
- * 
+ *
  * @class MODx.grid.Provisioner
  * @extends MODx.grid.Grid
  * @constructor
@@ -12,6 +12,7 @@ MODx.grid.Provider = function(config) {
     Ext.applyIf(config,{
         title: _('providers')
         ,url: MODx.config.connector_url
+        ,save_action: 'workspace/providers/updatefromgrid'
         ,baseParams: {
             action: 'workspace/providers/getlist'
         }
@@ -43,9 +44,9 @@ MODx.grid.Provider = function(config) {
 Ext.extend(MODx.grid.Provider,MODx.grid.Grid);
 Ext.reg('modx-grid-provider',MODx.grid.Provider);
 
-/** 
+/**
  * Generates the Create Provider window.
- *  
+ *
  * @class MODx.window.CreateProvider
  * @extends MODx.Window
  * @constructor
@@ -100,9 +101,9 @@ MODx.window.CreateProvider = function(config) {
 Ext.extend(MODx.window.CreateProvider,MODx.Window);
 Ext.reg('modx-window-provider-create',MODx.window.CreateProvider);
 
-/** 
+/**
  * Generates the Update Provider window.
- *  
+ *
  * @class MODx.window.UpdateProvider
  * @extends MODx.Window
  * @constructor

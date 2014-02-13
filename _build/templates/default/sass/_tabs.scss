@@ -29,7 +29,6 @@ ul.x-tab-strip-top {
   border-bottom-color: $white;
   margin:0; /* was -1px */
   width: auto;
-  overflow:hidden;
 }
 
 
@@ -71,7 +70,8 @@ ul.x-tab-strip-top {
     background-color: #fff;
     box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
     cursor: default;
-    margin: 3px 0 0 2px;
+    margin: 0 0 0 2px;
+    padding-bottom: 2px;
   }
   &:first-of-type {
     &.x-tab-strip-active {
@@ -196,7 +196,7 @@ ul.x-tab-strip-bottom {
   width: 150px !important;
   margin-left:0;
   & ul {
-    border-top: 1px solid #E0E0E0;
+    border-top: 1px solid transparent;
     width: auto;
     border-bottom-color:transparent;
   }
@@ -227,10 +227,10 @@ ul.x-tab-strip-bottom {
 }
 
 .vertical-tabs-header ul.x-tab-strip-top li.x-tab-strip-active {
-  background: #fff !important;
-  border-width: 0 0 1px;
+  background: $white !important;
+  /*border-width: 0 0 1px;*/
   color: #555;
-  padding-bottom: 5px !important;
+  /*padding-bottom: 5px !important;*/
   text-shadow: none;
 }
 

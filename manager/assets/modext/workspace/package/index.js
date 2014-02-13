@@ -8,7 +8,7 @@ MODx.page.Package = function(config) {
             ,signature: MODx.request.signature
         }]
         ,buttons: [{
-            process: 'update'
+            process: 'workspace/packages/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true

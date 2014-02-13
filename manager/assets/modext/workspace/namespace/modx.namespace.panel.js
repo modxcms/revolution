@@ -56,6 +56,7 @@ MODx.grid.Namespace = function(config) {
         ,anchor: '100%'
         ,paging: true
         ,autosave: true
+        ,save_action: 'workspace/namespace/updatefromgrid'
         ,primaryKey: 'name'
         ,remoteSort: true
         ,sm: this.sm
@@ -80,6 +81,7 @@ MODx.grid.Namespace = function(config) {
         ,tbar: [{
             text: _('create_new')
             ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
+            ,cls:'primary-button'
             ,scope: this
         },'->',{
             xtype: 'textfield'

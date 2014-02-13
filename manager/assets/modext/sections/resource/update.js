@@ -1,6 +1,6 @@
 /**
  * Loads the resource update page
- * 
+ *
  * @class MODx.page.UpdateResource
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -42,7 +42,6 @@ MODx.page.UpdateResource = function(config) {
         Ext.EventManager.on(window, 'beforeunload',function(e) {
             MODx.releaseLock(this.config.resource);
             MODx.sleep(400);
-            e.browserEvent.returnValue = '';
             return false;
         }, this);
     }
@@ -59,7 +58,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         window.open(this.config.preview_url);
         return false;
     }
-    
+
     ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
@@ -107,7 +106,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             MODx.loadPage('welcome');
         }
     }
-    
+
     ,getButtons: function(cfg) {
         var btns = [];
         if (cfg.canSave == 1) {

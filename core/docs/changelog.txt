@@ -2,6 +2,29 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Prevent redirect of base_url when query string exists
+- Enable Template-based icons in Resource tree
+- Increase message_limit for ExtJS HttpStateProvider
+- Fix lexicon getList processor
+- Improve Confirm Navigation feature and make configurable
+- Confirm navigation when unsaved changes exist in resource panel
+- Fix deprecated returnValue to prevent confirm navigation alert
+- Fix xPDO->parseBindings bug triggering modDbRegisterMessage errors
+- Prevent processor property overwriting in modX::runProcessor()
+- Add open in new window action to middle mouse button click in trees
+- Preserve value types in modSystemEvent::output()
+- Prevent removal of user groups after validation fails
+- Remove extra dot in filename for Content Disposition attachment
+- Fix unescaped backslash in file and image TV
+- Remove cache clearing logic from system setting model
+- Update phpthumb to 1.7.11-beta to close security vulnerability
+- Add options and context filtering to modX::getTree()
+- Auto-resize modal window height to fit browser height
+- Add modSoftRemoveProcessor for marking records deleted
+- Ensure property not set when creating new property in Property Set
+- Implement auto-save on Content Types grid
+- Support PHP use statements in Snippets and Plugins
+- Add in/inarray conditional output filter
 - Add preg_quote to friendly_alias_word_delimiters characters
 - Do not prepend base_url when baseUrlRelative in modFileMediaSource
 - Add filterPathSegment() methods to modX and modResource

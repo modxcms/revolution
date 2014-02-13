@@ -444,6 +444,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (this.disableHref) {return true;}
         if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
+            if (e.button == 1) return window.open(n.attributes.page,'_blank');
             MODx.loadPage(n.attributes.page);
         } else {
             n.toggle();
@@ -612,19 +613,19 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var iu = MODx.config.manager_url+'templates/default/images/restyle/icons/';
         return [{
             icon: iu+'arrow_down.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon arrow_down'
             ,tooltip: {text: _('tree_expand')}
             ,handler: this.expandNodes
             ,scope: this
         },{
             icon: iu+'arrow_up.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon arrow_up'
             ,tooltip: {text: _('tree_collapse')}
             ,handler: this.collapseNodes
             ,scope: this
         },'-',{
             icon: iu+'refresh.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon refresh'
             ,tooltip: {text: _('tree_refresh')}
             ,handler: this.refresh
             ,scope: this
@@ -663,7 +664,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 var el = document.createElement('div');
                     el.id = elId;
                     el.className = 'modx-tree-node-tool-ct'
-                    el.style.float = 'right';
                 node.ui.elNode.appendChild(el);
 
                 var inlineButtonsLang = tree.getInlineButtonsLang(node);

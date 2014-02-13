@@ -93,7 +93,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         /** @var modResource $object */
         $object = $modx->getObject('modResource',$properties['id']);
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : ($object ? $object->get('class_key') : 'modDocument');
-        
+
         if (!in_array($classKey,array('modDocument','modResource',''))) {
             $className = $classKey.'UpdateProcessor';
             if (!class_exists($className)) {
@@ -141,7 +141,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->checkDeletedStatus();
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
-        
+
         return parent::beforeSet();
     }
 
@@ -280,7 +280,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->isSiteStart = ($this->object->get('id') == $this->workingContext->getOption('site_start') || $this->object->get('id') == $this->modx->getOption('site_start'));
         $pageTitle = $this->getProperty('pagetitle',null);
         $alias = $this->getProperty('alias');
-        
+
         if ($this->workingContext->getOption('friendly_urls', false) && (!$this->getProperty('reloadOnly',false) || (!empty($pageTitle) || $this->isSiteStart))) {
 
             /* auto assign alias */
@@ -479,7 +479,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      * Set the parents isfolder status based upon remaining children
      *
      * @TODO Debate whether or not this should be default functionality
-     * 
+     *
      * @return void
      */
     public function fixParents() {
@@ -698,7 +698,11 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         }
         $returnArray['class_key'] = $this->object->get('class_key');
         $this->workingContext->prepare(true);
-        $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), $this->object->get('context_key'), '', 'full');
+        $returnArray['preview_url'] = '';
+        if (!$this->object->get('deleted')) {
+            $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), $this->object->get('context_key'), '', 'full');
+        }
+
         return $this->success('',$returnArray);
     }
 

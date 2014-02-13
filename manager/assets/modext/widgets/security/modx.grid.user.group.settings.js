@@ -19,10 +19,12 @@ MODx.grid.GroupSettings = function(config) {
         ,saveParams: {
             group: config.group
         }
+        ,save_action: 'security/group/setting/updatefromgrid'
         ,fk: config.group
         ,tbar: [{
             text: _('create_new')
             ,scope: this
+            ,cls:'primary-button'
             ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
