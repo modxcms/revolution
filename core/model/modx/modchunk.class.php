@@ -10,7 +10,7 @@
  * @property int $editor_type Deprecated
  * @property int $category The ID of the Category this chunk resides in. Defaults to 0.
  * @property boolean $cache_type Deprecated
- * @property string $snippet The contents of the Chunk
+ * @property string $content The contents of the Chunk
  * @property boolean $locked Whether or not this chunk can only be edited by Administrators
  * @property array $properties An array of default properties for this Chunk
  *
