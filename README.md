@@ -28,7 +28,7 @@ Thank you for using MODX!
 
 ### Copyright
 
-MODX Revolution is copyright 2006-2013 by MODX, LLC.
+MODX Revolution is copyright 2006-2014 by MODX, LLC.
 
 All rights reserved.
 
