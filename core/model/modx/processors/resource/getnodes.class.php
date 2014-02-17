@@ -429,16 +429,17 @@ class modResourceGetNodesProcessor extends modProcessor {
                 $qtip .= ' - '.$this->modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
             }
         }
-        
-        
+
         $tpl_id   = $resource->template;
         $tpl      = $this->modx->getObject('modTemplate',$tpl_id);
-        /* grab icon field from template table */
-        $tpl_icon = $tpl->get('icon');       
-        
-        if(!empty($tpl_icon)){
-            $iconCls[] = $tpl_icon;
-        }        
+        if ($tpl instanceof modTemplate) {
+            /* grab icon field from template table */
+            $tpl_icon = $tpl->get('icon');
+
+            if (!empty($tpl_icon)) {
+                $iconCls[] = $tpl_icon;
+            }
+        }
 
         $idNote = $this->modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$resource->id.')</span>' : '';
         $itemArray = array(
