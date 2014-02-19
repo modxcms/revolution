@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -311,7 +311,7 @@ class modRequest {
      */
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
-            if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== $_SERVER['REQUEST_URI']) {
+            if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== strtok($_SERVER["REQUEST_URI"],'?')) {
                 $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             }
             $identifier = $this->modx->getOption('site_start', null, 1);
