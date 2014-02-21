@@ -975,8 +975,8 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     input_file.dom.disabled = true;
     
     var store = this.grid_panel.getStore();
-    var filesApi = document.getElementById(input_file.id).files;
-    var filename = (typeof filesApi != 'undefined') ? filesApi[0].name : input_file.dom.value.replace("C:\\fakepath\\", "");
+    var fileApi = input_file.dom.files;
+    var filename = (typeof fileApi != 'undefined') ? fileApi[0].name : input_file.dom.value.replace("C:\\fakepath\\", "");
     store.add(new Ext.ux.UploadDialog.FileRecord({
           state: Ext.ux.UploadDialog.FileRecord.STATE_QUEUE
           ,filename: filename
