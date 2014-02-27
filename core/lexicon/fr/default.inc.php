@@ -498,6 +498,7 @@ $_lang['untitled_template'] = 'Modèle sans nom';
 $_lang['untitled_tv'] = 'TV sans nom';
 $_lang['untitled_weblink'] = 'Lien sans nom';
 $_lang['untitled_symlink'] = 'Lien symbolique sans nom';
+$_lang['unsaved_changes'] = 'Il y a des modifications non enregistrées. Êtes-vous sûr de vouloir quitter cette page ?';
 $_lang['update'] = 'Mettre à jour';
 $_lang['updated'] = 'Mis à jour';
 $_lang['upload'] = 'Téléverser';
