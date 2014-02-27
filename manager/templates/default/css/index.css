@@ -109,7 +109,7 @@ input::-moz-focus-inner {
     border-bottom-right-radius: 0;
 }
 
-#modx-leftbar .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer  { 
+#modx-leftbar .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer  {
 	background-color: #fbfbfb;
     border: 1px solid #999;
     border-top: 0;
@@ -328,12 +328,12 @@ input::-moz-focus-inner {
 
 /* form fields */
 .modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 14px; }
-.modx-form .x-form-text { 
-	height: 20px !important; 
+.modx-form .x-form-text {
+	height: 20px !important;
 	padding: 5px;
 }
-.modx-form .x-form-item label { 
-	font-size: 14px; 
+.modx-form .x-form-item label {
+	font-size: 14px;
 	color: #505050;
 }
 
@@ -342,7 +342,7 @@ input::-moz-focus-inner {
 
 /* grids */
 .x-small-editor .x-form-field {
-    font-size: 12px !important;    
+    font-size: 12px !important;
 }
 
 .grid-row-inactive {
@@ -888,7 +888,7 @@ input.x-static-text-field {
     box-shadow:0 0 3px #aaaaaa inset;
     background-color:#ffffff;
     background-image:none;
-    margin:2px 1px 0;	
+    margin:2px 1px 0;
 	border-color: #CFCFCF #C0C0C0 #AAAAAA;
 }
 .ux-row-action-item:active span {text-shadow:none;}
@@ -910,16 +910,16 @@ input.x-static-text-field {
     background:-o-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
     background:-ms-linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-    background:linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);	
+    background:linear-gradient(center bottom,#dcdcdc 0%,#fcfcfc 100%);
 	border-color:#CACACA #C0C0C0 #AAA;
     border-style:solid;
     border-width:1px;
-	border-collapse:separate;	
-	padding: 3px;	
-	margin:2px 1px 0;	
-	color:#444;	
+	border-collapse:separate;
+	padding: 3px;
+	margin:2px 1px 0;
+	color:#444;
 	font-weight:bold;
-	text-shadow:0 1px 0 #FAFAFA;	
+	text-shadow:0 1px 0 #FAFAFA;
 	position:relative;
 	cursor:pointer;
 	overflow:hidden;
@@ -1059,11 +1059,11 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 
 /* dashboard stuff */
 .dashboard {
-    overflow: auto;
+    overflow: visible;
 }
 .dashboard-block {
     float: left;
-    margin: 6px 1% 6px 0;
+    margin: 6px 0;
     background-color: white;
     border: 1px solid #ddd;
     -webkit-border-radius: 2px;
@@ -1114,15 +1114,23 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
     zoom: 1;
 }
 .dashboard-block-half {
-    width: 48%;
+    width: 49%;
+    margin-left: 0;
+    float: left;
+    clear: left;
+}
+.dashboard-block-half:nth-of-type(2n+0) {
+    margin-left: 1%;
+    float: right;
+    clear: none;
 }
 .dashboard-block-full {
-    width: 97%;
+    width: 100%;
     clear: both;
     height: auto;
 }
 .dashboard-block-double {
-    width: 97%;
+    width: 100%;
     clear: both;
     height: auto;
     min-height: 400px;
@@ -1144,7 +1152,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 .structure-tabs{ margin-top: -1px; } /* Realign modx-tabs for getPageStructure */
 
 /* Panel description text */
-.panel-desc { 
+.panel-desc {
 	background-color: #F7F7F7;
     border-bottom: 1px solid #E7E7E7 !important;
     border-top: 1px solid #E7E7E7 !important;
@@ -1152,7 +1160,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
     line-height: 1.5;
     padding: 15px !important;
     margin-top: 5px;
-} 
+}
 .with-title .panel-desc{
 	margin: 0;
 }
@@ -1183,7 +1191,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
-.main-wrapper { padding: 15px; } 
+.main-wrapper { padding: 15px; }
 .with-title .main-wrapper{
 	padding: 0 15px 10px 15px;
 }
@@ -1203,7 +1211,7 @@ body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em
 	line-height:0.7;
 	margin-right:2px;
 }
-.actions button, 
+.actions button,
 .inline-button {
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
@@ -1527,14 +1535,14 @@ span.required {
     width: 16px;
 	text-indent: -999em;
 }
-.crumbs li button:hover {	
+.crumbs li button:hover {
 }
 .crumbs li button.root {
 	background-position: center -16px;
 	text-indent: -999em;
 	width: 16px;
 }
-.crumbs li button.root:hover {	
+.crumbs li button.root:hover {
 }
 .breadcrumbs .panel-desc{
 	border-top: 1px solid #E7E7E7 !important;
@@ -1590,7 +1598,7 @@ span.required {
 }
 #ux-lightbox-hoverNav a { outline:medium none; }
 #ux-lightbox-imageContainer > #ux-lightbox-hoverNav { left:0; }
-#ux-lightbox-navPrev, 
+#ux-lightbox-navPrev,
 #ux-lightbox-navNext {
 	display:block;
 	height:100%;
@@ -1600,13 +1608,13 @@ span.required {
 	float:left;
 	left:0;
 }
-#ux-lightbox-navPrev:hover, 
+#ux-lightbox-navPrev:hover,
 #ux-lightbox-navPrev:visited:hover { background:url("images/lb-prev.png") no-repeat scroll left 33% transparent; }
 #ux-lightbox-navNext {
 	float:right;
 	right:0;
 }
-#ux-lightbox-navNext:hover, 
+#ux-lightbox-navNext:hover,
 #ux-lightbox-navNext:visited:hover { background:url("images/lb-next.png") no-repeat scroll right 33% transparent; }
 #ux-lightbox-outerDataContainer {
 	margin:0 auto;
@@ -1640,7 +1648,7 @@ span.required {
     padding-bottom: 0.7em;
     width: 16px;
 }
-#ux-lightbox-overlay, 
+#ux-lightbox-overlay,
 #ux-lightbox-shim {
 	background-color:#000000;
 	border:0 none;
@@ -1671,7 +1679,7 @@ span.required {
 	letter-spacing: -1px;
 	color: #555555;
 	line-height: 1;
-    margin: 0 0 2px;	
+    margin: 0 0 2px;
 }
 .x-grid3-cell-inner.x-grid3-col-main  .not-installed{
 	color: #999999;
@@ -1873,7 +1881,7 @@ span.required {
 }
 
 .modx-template-detail {
-  background-color:transparent;  
+  background-color:transparent;
 }
 .modx-template-detail .aside-details {
 	border: 1px solid #E0E0E0;
@@ -1910,7 +1918,7 @@ span.required {
     font-size: 14px;
     margin: 10px 0;
     text-shadow: 0 1px 0 #FFFFFF;
-    
+
 }
 .modx-template-detail .aside-details h4 {
 	font-size: 11px;
@@ -2052,7 +2060,7 @@ span.required {
 	font-size: 11px;
 	text-align: center;
 }
-.x-grid3-col-info-col, .x-grid3-col-meta-col  {    
+.x-grid3-col-info-col, .x-grid3-col-meta-col  {
     font-size: 11px;
     font-weight: bold;
     text-align: center;
