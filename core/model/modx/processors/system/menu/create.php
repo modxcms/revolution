@@ -49,7 +49,9 @@ if ($menu->save() == false) {
 /* log manager action */
 $modx->logManagerAction('menu_create','modMenu',$menu->get('text'));
 
-$path = $modx->getOption('cache_path') . $modx->getOption('cache_menu_key', null, 'menu') .'/menus/';
-$modx->cacheManager->delete($path);
+$modx->getCacheManager();
+$modx->cacheManager->refresh(array(
+    'menu' => array(),
+));
 
 return $modx->error->success('',$menu);
