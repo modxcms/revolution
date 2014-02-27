@@ -1,3 +1,36 @@
+/*!
+*             ____   ____     __   __
+*    /'\_/`\/\  __`\/\  _`\  /\ \ /\ \
+*   /\      \ \ \/\ \ \ \/\ \\ `\`\/ /
+*   \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > <
+*    \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\
+*     \ \_\\ \_\ \_____\ \____/ /\_\\ \_\
+*      \/_/ \/_/\/_____/\/___/  \/_/ \/_/
+*
+*     - C R E A T I V E    F R E E D O M -
+*
+*     This is the MODX Manager default theme for MODX 2.3+.
+*     It uses Sass—the SCSS variant, specifically. It makes coping
+*     with ExtJS hurt less, but there is much to improve and purge.
+*     With your help, we will do something about that, so join us!
+*
+*     Some helpful references:
+*       + Contributing & Grunt: https://github.com/modxcms/revolution/tree/develop/_build/templates/default
+*       + The MODX Forums: http://forums.modx.com/
+*       + Bourbon mixin library for Sass: http://bourbon.io
+*       + FontAwesome icons used in the Manager: http://fontawesome.io/icons/
+*       + Autoprefixer keeps our Sass clean: http://css-tricks.com/autoprefixer/
+*
+*     If you contribute, please sign the guestbook below.
+*
+*     Ryan Trash @rthrash http://thrash.me
+*     JP DeVries @jpdevries http://devries.jp
+*     Alan Pich @_alanpich
+*     Danya Postfactum
+*     Christian Seel @christianseel http://christianseel.com
+*
+*/
+
 @import "bourbon/bourbon";
 @import "font-awesome/font-awesome";
 @import "image-set";
@@ -113,8 +146,8 @@ hr {
 }
 
 /* panel setups */
-#modx-leftbar, 
-#modx-content, 
+#modx-leftbar,
+#modx-content,
 #modx-footer {
   position: absolute;
 }
@@ -149,16 +182,16 @@ hr {
 	}
 	.x-tab-panel-bwrap {
 		.x-tab-panel-header {
-			
+
 		}
 	}
-	#modx-tv-tabs {	
+	#modx-tv-tabs {
 		border-left:0;
 		border-right:0;
 	}
 }
 
-#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {	
+#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {
 	.x-tab-strip {
 		margin-top:12px;
 		li {
@@ -195,7 +228,7 @@ hr {
 		td {
 			&:last-of-type {
 				.x-btn {
-					@include linear-gradient(lighten($primaryAction,10%), $primaryAction); 
+					@include linear-gradient(lighten($primaryAction,10%), $primaryAction);
 					border-color:darken($primaryAction,6%);
 					button {
 						color:$white;
@@ -203,7 +236,7 @@ hr {
 				}
 				.x-btn-over {
 					border-color:darken($primaryAction,10%);
-					@include linear-gradient(lighten($primaryAction,16%), $primaryAction); 
+					@include linear-gradient(lighten($primaryAction,16%), $primaryAction);
 				}
 			}
 		}
@@ -541,7 +574,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
+  background: url("../images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
   border-color: #CACACA #C0C0C0 #AAA;
   border-radius: 3px;
@@ -1095,7 +1128,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* dashboard stuff */
 .dashboard {
-  overflow: auto;
+  overflow: visible;
 }
 
 .dashboard-block {
@@ -1103,7 +1136,7 @@ body.ext-ie7 .x-superboxselect-item {
   border-radius: 2px;
   border: 1px solid #ddd;
   float: left;
-  margin: 6px 1% 6px 0;
+  margin: 6px 0;
 }
 
 .dashboard-block h4 {
@@ -1147,20 +1180,28 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block-half {
-  width: 48%;
+  width: 49%;
+    margin-left: 0;
+    float: left;
+    clear: left;
+}
+.dashboard-block-half:nth-of-type(2n+0) {
+    margin-left: 1%;
+    float: right;
+    clear: none;
 }
 
 .dashboard-block-full {
   clear: both;
   height: auto;
-  width: 97%;
+  width: 100%;
 }
 
 .dashboard-block-double {
   clear: both;
   height: auto;
   min-height: 400px;
-  width: 97%;
+  width: 100%;
 }
 
 .dashboard-block-variable .body {
@@ -1312,7 +1353,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding-top: 4px;
 }
 
-#modx-resource-settings .modx-tv-label, 
+#modx-resource-settings .modx-tv-label,
 #modx-page-settings .modx-tv-label {
   width: 216px;
 }
