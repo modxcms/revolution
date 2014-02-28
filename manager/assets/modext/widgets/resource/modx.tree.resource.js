@@ -356,10 +356,19 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
     ,_handleAfterDrop: function(o,r) {
         var targetNode = o.event.target;
+        var dropNode = o.event.dropNode;
         if (o.event.point == 'append' && targetNode) {
             var ui = targetNode.getUI();
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
+        }
+        if((MODx.request.a == MODx.action['resource/update']) && dropNode.attributes.pk == MODx.request.id){
+            var parentFieldCmb = Ext.getCmp('modx-resource-parent');
+            var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
+            if(parentFieldCmb && parentFieldHidden){
+                parentFieldHidden.setValue(dropNode.parentNode.attributes.pk);
+                parentFieldCmb.setValue(dropNode.parentNode.attributes.text.replace(/(<([^>]+)>)/ig,""));
+            }
         }
     }
 
