@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2012-04-01
+ * @updated 2014-02-27
  */
 
 // $_lang['login_language'] = 'Language';
@@ -34,11 +34,11 @@ $_lang['login_blocked_too_many_attempts'] = 'Váš účet byl zablokován z dův
 // $_lang['login_button'] = 'Login';
 $_lang['login_button'] = 'Přihlásit';
 
-// $_lang['login_cannot_locate_account'] = 'That account could not be located.  Check the username and re-type the password to try again.';
-$_lang['login_cannot_locate_account'] = 'Účet nenalezen. Zkontrolujte uživatelské jméno nebo heslo a zkuste to znovu.';
+// $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
+$_lang['login_cannot_locate_account'] = 'Uživatelské jméno nebo heslo je nesprávné. Zkontrolujte uživatelské jméno nebo heslo a zkuste to znovu.';
 
-// $_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
-$_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
+// $_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 
 // $_lang['login_email_label'] = 'Account Email:';
 $_lang['login_email_label'] = 'E-mail účtu:';
