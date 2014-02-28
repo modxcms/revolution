@@ -96,6 +96,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         if (fp && fp.isDirty()) {
             Ext.Msg.confirm(_('warning'),_('resource_cancel_dirty_confirm'),function(e) {
                 if (e == 'yes') {
+                    fp.warnUnsavedChanges = false;
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
                     MODx.loadPage('welcome');
