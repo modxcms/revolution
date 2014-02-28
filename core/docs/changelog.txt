@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#11149] Make sure hitting the close button does not trigger double prevent navigation warnings
 - Update parent field in Resource panel after drag and drop current resource
 - Removed C:\fakepath\ from filename during uploads
 
