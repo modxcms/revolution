@@ -796,7 +796,12 @@ $events['OnHandleRequest']->fromArray(array (
   'service' => 5,
   'groupname' => 'System',
 ), '', true, true);
-
+$events['OnElementNotFound']= $xpdo->newObject('modEvent');
+$events['OnElementNotFound']->fromArray(array (
+  'name' => 'OnElementNotFound',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
 
 /* Settings */
 $events['OnSiteSettingsRender']= $xpdo->newObject('modEvent');
