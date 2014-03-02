@@ -984,7 +984,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
             }
         }
-        $newResource->set('alias',$alias);
+        // Set new alias only if same context or alias is reset
+        if($this->get('context_key') == $newResource->get('context_key') OR !$alias){
+            $newResource->set('alias',$alias);
+        }
 
         /* set new menuindex */
         $childrenCount = $this->xpdo->getCount('modResource',array('parent' => $this->get('parent')));
