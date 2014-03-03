@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 25/01/2012
+ * updated 27/02/2014
  */
 $_lang['login_activation_key_err'] = 'คีย์เปิดการใช้งานไม่สัมพันธ์กัน! กรุณาตรวจสอบอีเมล์ยืนยันการใช้งานที่ได้รับ แล้วตรวจดูให้แน่ใจว่าคุณโหลด URL ถูกต้อง';
 $_lang['login_blocked_admin'] = 'คุณถูกระงับการใช้งานโดยผู้ดูแลระบบเว็บไซต์';
