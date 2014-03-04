@@ -76,8 +76,8 @@ class modManagerRequest extends modRequest {
         $this->modx->smarty->assignByRef('modx',$this->modx);
 
         if (!array_key_exists('a', $_REQUEST)) {
-            $this->action = $this->modx->getOption('welcome_action', null, $this->defaultAction);
-            $_REQUEST['namespace'] = $this->modx->getOption('welcome_namespace', null, 'core');
+            $_REQUEST[$this->actionVar] = $this->modx->getOption('welcome_action', null, $this->defaultAction);
+            $_REQUEST[$this->namespaceVar] = $this->modx->getOption('welcome_namespace', null, 'core');
         }
 
         /* send anti caching headers */
