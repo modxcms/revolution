@@ -63,9 +63,8 @@
                 </li>
             </ul>
             <ul id="modx-topnav">
-                {assign var='action' value=$_config.welcome_action|default:'welcome'}
                 <li id="modx-home-dashboard">
-                    <a href="?a={$action}{if $_config.welcome_namespace}&namespace={$_config.welcome_namespace}{/if}" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
+                    <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
                 <li id="modx-manager-search"></li>
                 {$navb}
