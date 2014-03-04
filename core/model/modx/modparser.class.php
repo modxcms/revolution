@@ -564,9 +564,7 @@ class modParser {
                 $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => $realname));
                 $element = false;
                 if ($evtOutput != false) {
-                    if (!is_array($evtOutput)) $evtOutput = array($evtOutput);
-
-                    foreach ($evtOutput as $elm) {
+                    foreach ((array) $evtOutput as $elm) {
                         if (!empty($elm) && is_string($elm)) {
                             $element = $this->modx->newObject($class, array(
                                 'name' => $realname,
