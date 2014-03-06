@@ -281,22 +281,24 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     ,uploadTransportPackage: function(btn,e){
         if (!this.uploader) {
             this.uploader = new Ext.ux.UploadDialog.Dialog({
-                url: MODx.config.connector_url
+                url: MODx.config.connectors_url+'workspace/packages.php'
                 ,base_params: {
-                    action: 'workspace/packages/upload'
+                    action: 'upload'
                     ,wctx: MODx.ctx || ''
                     ,source: MODx.config.default_media_source
                     ,path: MODx.config.core_path+'packages/'
                 }
                 ,permitted_extensions: ['zip']
                 ,allow_close_on_upload: true
-                ,upload_autostart: true
+                ,upload_autostart: false
                 ,reset_on_hide: true
                 ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
-            this.uploader.on('uploadsuccess',function(){
-                this.uploader.hide();
+            this.uploader.on('hide',function(){
+                this.searchLocalWithoutPrompt();
+            },this);
+            this.uploader.on('close',function(){
                 this.searchLocalWithoutPrompt();
             },this);
         }
@@ -325,9 +327,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
      */
     ,searchLocalWithoutPrompt: function(){
         MODx.Ajax.request({
-            url: MODx.config.connector_url
+            url: MODx.config.connectors_url+'workspace/packages.php'
             ,params: {
-                action: 'workspace/packages/scanLocal'
+                action: 'scanLocal'
             }
             ,listeners: {
                 'success':{fn:function(r) {
