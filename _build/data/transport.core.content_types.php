@@ -69,3 +69,13 @@ $collection['7']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
+$collection['8']= $xpdo->newObject('modContentType');
+$collection['8']->fromArray(array (
+  'id' => 8,
+  'name' => 'PDF',
+  'description' => 'PDF Files',
+  'mime_type' => 'application/pdf',
+  'file_extensions' => '.pdf',
+  'headers' => 'NULL',
+  'binary' => 1,
+), '', true, true);
