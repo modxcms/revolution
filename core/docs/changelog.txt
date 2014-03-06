@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.13-pl (March 6, 2014)
+====================================
+- Validate context key provided to modX::initialize()
+
 MODX Revolution 2.2.12-pl (February 19, 2014)
 ====================================
 - Fix issues with phpthumb introduced in 2.2.11
