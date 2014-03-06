@@ -2,14 +2,14 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- Add upload functionality directly to package manager grid
-- Added OnElementNotFound system event
+- [#675] Add upload functionality directly to package manager grid
+- [#703] Added OnElementNotFound system event
 - [#11149] Make sure hitting the close button does not trigger double prevent navigation warnings
 - Add refreshURIs call as part of clearing the site cache
 - Update parent field in Resource panel after drag and drop current resource
 - Check if template exissts before using it's icon in getNodes processor
 - Prevent content duplication when using [css|js|html]To[Head|Bottom]
-- Removed C:\fakepath\ from filename during uploads
+- [#11099] Removed C:\fakepath\ from filename during uploads
 - Fix path issue with phpthumb after 1.7.11-beta update
 - Prevent redirect of base_url when query string exists
 - Enable Template-based icons in Resource tree

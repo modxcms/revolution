@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.browser.file
  */
-class modBrowserFileUploadProcessor extends modProcessor {
+class modBrowserPackageUploadProcessor extends modProcessor {
     /** @var modMediaSource $source */
     public $source;
     public function checkPermissions() {
@@ -20,7 +20,7 @@ class modBrowserFileUploadProcessor extends modProcessor {
 
     public function initialize() {
         if(empty($_FILES)){
-            return 'No file uploaded!'; //@TODO Lexiconize
+            return $this->modx->lexicon('no_file_err');
         }
         $this->getSource();
         $this->setProperty('files',$_FILES);
@@ -74,4 +74,4 @@ class modBrowserFileUploadProcessor extends modProcessor {
         return $this->source;
     }
 }
-return 'modBrowserFileUploadProcessor';
+return 'modBrowserPackageUploadProcessor';
