@@ -1,6 +1,6 @@
 /**
  * Loads a grid of modAccessContexts.
- * 
+ *
  * @class MODx.grid.AccessContext
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -17,8 +17,8 @@ MODx.grid.AccessContext = function(config) {
             ,target: config.context_key
         }
         ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','policy','policy_name','cls']
-		,type: 'modAccessContext'
-		,paging: true
+        ,type: 'modAccessContext'
+        ,paging: true
         ,columns: [
             { header: _('context') ,dataIndex: 'target_name' ,width: 100 }
             ,{ header: _('user_group') ,dataIndex: 'principal_name' ,width: 120 }
@@ -85,14 +85,14 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
         this.windows.create_acl.setValues(r);
         this.windows.create_acl.show(e.target);
     }
-    
+
     ,editAcl: function(itm,e) {
         var r = this.menu.record;
         Ext.applyIf(r,{
             context: r.target
             ,user_group: r.principal
         });
-        
+
         if (!this.windows.update_acl) {
             this.windows.update_acl = MODx.load({
                 xtype: 'modx-window-access-context-update'
@@ -106,7 +106,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
         this.windows.update_acl.setValues(r);
         this.windows.update_acl.show(e.target);
     }
-	
+
     ,removeAcl: function(itm,e) {
         MODx.msg.confirm({
             title: _('ugc_remove')
@@ -122,79 +122,15 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
             }
         });
     }
-	
+
 });
 Ext.reg('modx-grid-access-context',MODx.grid.AccessContext);
-
-MODx.window.UpdateAccessContext = function(config) {
-    config = config || {};
-    var r = config.record;
-    this.ident = config.ident || 'uactx'+Ext.id();
-    Ext.applyIf(config,{
-        title: _('ugc_mutate')
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/access/updateAcl'
-            ,type: config.type || 'modAccessContext'
-        }
-        ,height: 250
-        ,width: 350
-        ,type: 'modAccessContext'
-        ,acl: 0
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'target'
-            ,id: 'modx-'+this.ident+'-target'
-            ,value: r.context
-        },{
-            xtype: 'modx-combo-usergroup'
-            ,fieldLabel: _('user_group')
-            ,name: 'principal'
-            ,hiddenName: 'principal'
-            ,id: 'modx-'+this.ident+'-principal'
-            ,value: r.principal || ''
-            ,baseParams: {
-                action: 'security/group/getList'
-                ,combo: true
-            }
-            ,anchor: '90%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('authority')
-            ,name: 'authority'
-            ,id: 'modx-'+this.ident+'-authority'
-            ,width: 40
-            ,value: r.authority
-        },{
-            xtype: 'modx-combo-policy'
-            ,fieldLabel: _('policy')
-            ,name: 'policy'
-            ,hiddenName: 'policy'
-            ,id: 'modx-'+this.ident+'-policy'
-            ,value: r.policy || ''
-            ,anchor: '90%'
-        },{
-            xtype: 'hidden'
-            ,name: 'principal_class'
-            ,id: 'modx-'+this.ident+'-principal-class'
-            ,value: 'modUserGroup'
-        },{
-            xtype: 'hidden'
-            ,name: 'id'
-            ,id: 'modx-'+this.ident+'-id'
-            ,value: r.id
-        }]
-    });
-    MODx.window.UpdateAccessContext.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.window.UpdateAccessContext,MODx.Window);
-Ext.reg('modx-window-access-context-update',MODx.window.UpdateAccessContext);
 
 
 MODx.window.CreateAccessContext = function(config) {
     config = config || {};
     var r = config.record;
-    this.ident = config.ident || 'cactx'+Ext.id();
+
     Ext.applyIf(config,{
         title: _('ugc_mutate')
         ,url: MODx.config.connector_url
@@ -208,32 +144,39 @@ MODx.window.CreateAccessContext = function(config) {
         ,acl: 0
         ,fields: [{
             xtype: 'hidden'
+            ,name: 'id'
+            ,value: r.id || ''
+        },{
+            xtype: 'hidden'
             ,name: 'target'
-            ,id: 'modx-'+this.ident+'-target'
+            ,value: r.context || ''
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,id: 'modx-'+this.ident+'-principal-class'
             ,value: 'modUserGroup'
         },{
             xtype: 'modx-combo-usergroup'
             ,fieldLabel: _('user_group')
             ,name: 'principal'
             ,hiddenName: 'principal'
-            ,id: 'modx-'+this.ident+'-usergroup'
             ,anchor: '90%'
+            ,value: r.principal || ''
+            ,baseParams: {
+                action: 'security/group/getList'
+                ,combo: true
+            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('authority')
             ,name: 'authority'
-            ,id: 'modx-'+this.ident+'-authority'
             ,width: 40
+            ,value: r.authority || ''
         },{
             xtype: 'modx-combo-policy'
             ,fieldLabel: _('policy')
             ,name: 'policy'
             ,hiddenName: 'policy'
-            ,id: 'modx-'+this.ident+'-policy'
+            ,value: r.policy || ''
             ,anchor: '90%'
         }]
     });
@@ -241,3 +184,19 @@ MODx.window.CreateAccessContext = function(config) {
 };
 Ext.extend(MODx.window.CreateAccessContext,MODx.Window);
 Ext.reg('modx-window-access-context-create',MODx.window.CreateAccessContext);
+
+MODx.window.UpdateAccessContext = function(config) {
+    config = config || {};
+    var r = config.record;
+    this.ident = config.ident || 'uactx'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('ugc_mutate')
+        ,baseParams: {
+            action: 'security/access/updateAcl'
+            ,type: config.type || 'modAccessContext'
+        }
+    });
+    MODx.window.UpdateAccessContext.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.UpdateAccessContext,MODx.window.CreateAccessContext);
+Ext.reg('modx-window-access-context-update',MODx.window.UpdateAccessContext);
