@@ -58,7 +58,11 @@ class modMenu extends modAccessibleObject {
         }
         $cacheKey .= $this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en'));
         $menus = $this->getSubMenus($start);
+<<<<<<< HEAD
         $cached = $this->xpdo->cacheManager->set($cacheKey, $menus, 0, array(
+=======
+        $cached = $this->xpdo->cacheManager->set('mgr/menus/'.$this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en')), $menus, 0, array(
+>>>>>>> original/master
             xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_menu_key', null, 'menu'),
             xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption('cache_menu_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
             xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_menu_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+<<<<<<< HEAD
 - [#11170] Added pdf to content type
 - [#675] Add upload functionality directly to package manager grid
 - [#703] Added OnElementNotFound system event
@@ -17,6 +18,26 @@ development release, and is only shown to give an idea of what's currently in th
 - Increase message_limit for ExtJS HttpStateProvider
 - Fix lexicon getList processor
 - Improve Confirm Navigation feature and make configurable
+=======
+MODX Revolution 2.2.13-pl (March 6, 2014)
+====================================
+- Validate context key provided to modX::initialize()
+
+MODX Revolution 2.2.12-pl (February 19, 2014)
+====================================
+- Fix issues with phpthumb introduced in 2.2.11
+- Prevent redirect of base_url when query string exists
+- Improve Confirm Navigation feature and make configurable
+
+MODX Revolution 2.2.11-pl (January 21, 2014)
+====================================
+- Increase message_limit for ExtJS HttpStateProvider
+- Fix lexicon getList processor
+- Remove warnings/preview button for deleted Resources
+- Ensure context_key is passed when reloading Resource
+- Destroy drop targets on panel destroying
+- Add separation between a minute (singular) and minutes (plural)
+>>>>>>> original/master
 - Confirm navigation when unsaved changes exist in resource panel
 - Fix deprecated returnValue to prevent confirm navigation alert
 - Fix xPDO->parseBindings bug triggering modDbRegisterMessage errors
@@ -26,6 +47,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Prevent removal of user groups after validation fails
 - Remove extra dot in filename for Content Disposition attachment
 - Fix unescaped backslash in file and image TV
+<<<<<<< HEAD
 - Remove cache clearing logic from system setting model
 - Update phpthumb to 1.7.11-beta to close security vulnerability
 - Add options and context filtering to modX::getTree()
@@ -66,6 +88,15 @@ development release, and is only shown to give an idea of what's currently in th
 - Add preserve menuindex/alias options to Duplicate Context
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
+=======
+- Update xPDO to 2.3.0-alpha
+- Remove all dependency on mysql extension (deprecated in PHP >= 5.5)
+- Prevent "core" namespace removal
+- Remove cache clearing logic from system setting model
+- Update phpthumb to 1.7.11-beta to close security vulnerability
+- Prevent XSS on actionVar in header.tpl
+- Fix caching of manager menus
+>>>>>>> original/master
 
 MODX Revolution 2.2.10-pl (October 7, 2013)
 ====================================

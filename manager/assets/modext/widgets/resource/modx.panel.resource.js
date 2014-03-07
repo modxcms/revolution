@@ -191,7 +191,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
     ,failure: function(o) {
         this.warnUnsavedChanges = true;
+<<<<<<< HEAD
         if(this.getForm().baseParams.action == 'resource/create') {
+=======
+        if(this.getForm().baseParams.action == 'create') {
+>>>>>>> original/master
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
@@ -215,11 +219,27 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 if (e == 'yes') {
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
+<<<<<<< HEAD
                     f.config.action = 'resource/reload';
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
                             MODx.loadPage(r.result.object.action, 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
+=======
+                    f.config.action = 'reload';
+                    this.warnUnsavedChanges = false;
+                    MODx.activePage.submitForm({
+                        success: {fn:function(r) {
+                            var query = [
+                                'reload=' + r.result.object.reload
+                                ,'class_key=' + r.result.object.class_key
+                                ,'context_key=' + r.result.object.context_key
+                            ];
+                            if (r.result.object.id) {
+                                query.push('id=' + r.result.object.id);
+                            }
+                            MODx.loadPage(MODx.action[r.result.object.action], query.join('&'));
+>>>>>>> original/master
                         },scope:this}
                     },{
                         bypassValidCheck: true

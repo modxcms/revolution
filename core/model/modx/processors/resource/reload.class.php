@@ -29,7 +29,7 @@ class modResourceReloadProcessor extends modProcessor {
     }
 
     public function process() {
-        $return = '';
+        $result = '';
         $scriptProperties = $this->getProperties();
         $modx = $this->modx;
 
@@ -76,30 +76,28 @@ class modResourceReloadProcessor extends modProcessor {
             }
         }
 
-        if(array_key_exists('create-resource-token', $scriptProperties) && !empty($scriptProperties['create-resource-token'])) {
+        if (array_key_exists('create-resource-token', $scriptProperties) && !empty($scriptProperties['create-resource-token'])) {
             $topic = '/resourcereload/';
             $this->reg->subscribe($topic);
 
-            if(array_key_exists('id', $scriptProperties) && is_numeric($scriptProperties['id']) && intval($scriptProperties['id']) > 0) {
-                $return = $modx->error->success('', array(
-                    'id'=> $scriptProperties['id']
-                    ,'reload'=> $scriptProperties['create-resource-token']
-                    ,'action'=> 'resource/update'
-                    ,'class_key' => $scriptProperties['class_key']
-                ));
-            } else {
-                $return = $modx->error->success('', array(
-                    'reload'=> $scriptProperties['create-resource-token']
-                    ,'action'=> 'resource/create'
-                    ,'class_key' => $scriptProperties['class_key']
-                ));
+            $result = array(
+                'reload'=> $scriptProperties['create-resource-token'],
+                'action'=> 'resource/create',
+                'class_key' => $scriptProperties['class_key'],
+                'context_key' => $scriptProperties['context_key'],
+            );
+
+            if (array_key_exists('id', $scriptProperties) && is_numeric($scriptProperties['id']) && intval($scriptProperties['id']) > 0) {
+                $result['id'] = $scriptProperties['id'];
+                $result['action'] = 'resource/update';
             }
             $this->reg->send($topic, array($scriptProperties['create-resource-token'] => $scriptProperties), array('ttl' => 300,'delay' => -time()));
             $this->reg->unsubscribe($topic);
         } else {
             return $modx->error->failure($modx->lexicon('resource_err_save'));
         }
-        return $return;
+
+        return $modx->error->success('', $result);
     }
 }
 return 'modResourceReloadProcessor';
