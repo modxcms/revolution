@@ -1,6 +1,6 @@
 /**
  * Loads the create resource page
- * 
+ *
  * @class MODx.page.CreateResource
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -45,7 +45,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                 ,cls:'primary-button'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: true
+                //,checkDirty: true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
