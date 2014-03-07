@@ -98,11 +98,14 @@ MODx.grid.Grid = function(config) {
         this.getBottomToolbar().bind(this.store);
     }
 
+    var storeParams = {
+        start: config.pageStart || 0
+    };
+    if (config.paging) {
+        storeParams.limit = config.hasOwnProperty('pageSize') ? config.pageSize : (parseInt(MODx.config.default_per_page) || 20);
+    }
     this.getStore().load({
-        params: {
-            start: config.pageStart || 0
-            ,limit: !config.paging ? 0 : config.hasOwnProperty('pageSize') ? config.pageSize : (parseInt(MODx.config.default_per_page) || 20)
-        }
+        params: storeParams
     });
     this.getStore().on('exception',this.onStoreException,this);
     this.config = config;
