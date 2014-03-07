@@ -587,14 +587,16 @@ class modOutputFilter {
                             break;
 
                         case 'isloggedin':
-                            /* returns true if user is logged in */
-                            $output= $this->modx->user->isAuthenticated($this->modx->context->get('key'));
+                            /* returns true if user is logged in to the specified context or by default the current context */
+                            $ctxkey = (!empty($m_val)) ? $m_val : $this->modx->context->get('key');
+                            $output= $this->modx->user->isAuthenticated($ctxkey);
                             $output= $output ? true : false;
                             break;
 
                         case 'isnotloggedin':
-                            /* returns true if user is not logged in */
-                            $output= $this->modx->user->isAuthenticated($this->modx->context->get('key'));
+                            /* returns true if user is not logged in to the specified context or by default the current context */
+                            $ctxkey = (!empty($m_val)) ? $m_val : $this->modx->context->get('key');
+                            $output= $this->modx->user->isAuthenticated($ctxkey);
                             $output= $output ? false : true;
                             break;
 
