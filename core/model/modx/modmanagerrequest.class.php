@@ -56,6 +56,8 @@ class modManagerRequest extends modRequest {
      * @return boolean True if successful.
      */
     public function initialize() {
+        $this->sanitizeRequest();
+        
         if (!defined('MODX_INCLUDES_PATH')) {
             define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
         }
@@ -115,12 +117,16 @@ class modManagerRequest extends modRequest {
         $this->modx->invokeEvent('OnHandleRequest');
 
         /* save page to manager object. allow custom actionVar choice for extending classes. */
+<<<<<<< HEAD
         $this->action = !empty($_REQUEST[$this->actionVar]) ? trim($_REQUEST[$this->actionVar]) : $this->defaultAction;
         $this->action = preg_replace("/[^A-Za-z0-9_\-\/]/",'',$this->action);
         $this->action = trim(trim(str_replace('//','',$this->action),'/'));
         $this->namespace = !empty($_REQUEST[$this->namespaceVar]) ? trim($_REQUEST[$this->namespaceVar]) : 'core';
         $this->namespace = preg_replace("/[^A-Za-z0-9_\-\/]/",'',$this->namespace);
         $this->namespace = trim(trim(str_replace('//','',$this->namespace),'/'));
+=======
+        $this->action = isset($_REQUEST[$this->actionVar]) ? (integer)$_REQUEST[$this->actionVar] : $this->defaultAction;
+>>>>>>> original/master
 
         /* invoke OnManagerPageInit event */
         $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));

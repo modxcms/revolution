@@ -621,12 +621,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 });
             }
         }
+<<<<<<< HEAD
 
         if(!ui.hasClass('x-tree-node-leaf')) {
             m.push('-');
             m.push(this._getSortMenu());
         }
 
+=======
+>>>>>>> original/master
         if (ui.hasClass('pview') && a.preview_url != '') {
             m.push('-');
             m.push({

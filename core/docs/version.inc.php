@@ -1,9 +1,15 @@
 <?php
 $v= array ();
 $v['version']= '2'; // Current version.
+<<<<<<< HEAD
 $v['major_version']= '3'; // Current major version.
 $v['minor_version']= '0'; // Current minor version.
 $v['patch_level']= 'dev'; // Current patch level.
+=======
+$v['major_version']= '2'; // Current major version.
+$v['minor_version']= '13'; // Current minor version.
+$v['patch_level']= 'pl'; // Current patch level.
+>>>>>>> original/master
 $v['code_name']= 'Revolution'; // Current codename.
 $v['distro']= '@git@';
 $v['full_version']= $v['version'] . ($v['major_version'] ? ".{$v['major_version']}" : ".0") . ($v['minor_version'] ? ".{$v['minor_version']}" : ".0") . ($v['patch_level'] ? "-{$v['patch_level']}" : "");
