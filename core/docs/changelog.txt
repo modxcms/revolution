@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.6-pl2 (March 7, 2014)
+====================================
+- Validate context key provided to modX::initialize()
+
 MODX Revolution 2.2.6-pl (December 3, 2012)
 ====================================
 - [#9178] Use PHP time for valid check in modDbRegisterMessage::getValidMessages()

@@ -2181,6 +2181,10 @@ class modX extends xPDO {
         } else {
             $this->context= $this->newObject('modContext');
             $this->context->_fields['key']= $contextKey;
+            if (!$this->context->validate()) {
+                $this->log(modX::LOG_LEVEL_ERROR, 'No valid context specified: ' . $contextKey);
+                $this->context = null;
+            }
         }
         if ($this->context) {
             if (!$this->context->prepare((boolean) $regenerate, is_array($options) ? $options : array())) {
