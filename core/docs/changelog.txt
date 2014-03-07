@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#11186][#11176][#9880][#2896][#5850] Disabled dirty check on save button in Resource's panel
 - [#11170] Added pdf to content type
 - [#675] Add upload functionality directly to package manager grid
 - [#703] Added OnElementNotFound system event

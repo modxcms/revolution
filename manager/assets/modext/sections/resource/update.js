@@ -116,7 +116,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 process: 'update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: MODx.request.reload ? false : true
+                //,checkDirty: MODx.request.reload ? false : true
                 ,id: 'modx-abtn-save'
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
