@@ -40,9 +40,7 @@ class SystemDashboardsManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/list.js');
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            MODx.load({
-                xtype: "modx-page-dashboards"
-            });
+            MODx.add("modx-page-dashboards");
         });
         </script>');
     }
@@ -61,7 +59,7 @@ class SystemDashboardsManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/dashboards/index.tpl';
+        return '';
     }
 
     /**

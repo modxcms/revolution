@@ -1,6 +1,6 @@
 /**
  * Loads the dashboards page
- * 
+ *
  * @class MODx.page.Dashboards
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -11,7 +11,6 @@ MODx.page.Dashboards = function(config) {
 	Ext.applyIf(config,{
 		components: [{
             xtype: 'modx-panel-dashboards'
-            ,renderTo: 'modx-panel-dashboards-div'
         }]
         ,buttons: [/*{
             text: _('help_ex')
