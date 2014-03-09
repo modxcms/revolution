@@ -86,6 +86,7 @@ MODx.panel.FCProfile = function(config) {
             }]
         },{
             title: _('usergroups')
+            ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('profile_usergroups_msg')+'</p>'
 				,bodyCssClass: 'panel-desc'
@@ -99,7 +100,6 @@ MODx.panel.FCProfile = function(config) {
         }],{
             id: 'modx-fc-profile-tabs'
         })]
-        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
@@ -113,7 +113,9 @@ Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.getCmp('modx-fcp-header').getEl().update('<h2>'+_('profile')+': '+this.config.record.name+'</h2>');
+            Ext.defer(function() {
+                Ext.getCmp('modx-fcp-header').update('<h2>'+_('profile')+': '+this.config.record.name+'</h2>');
+            }, 250, this);
         }
         this.fireEvent('ready',this.config.record);
         this.clearDirty();
