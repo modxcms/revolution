@@ -12,6 +12,7 @@
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
+$scriptProperties['context_key'] = isset($scriptProperties['fk']) ? $scriptProperties['fk'] : $scriptProperties['context_key'];
 $context = $modx->getContext($scriptProperties['context_key']);
 if ($context == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 
