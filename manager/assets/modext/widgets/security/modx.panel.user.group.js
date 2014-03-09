@@ -284,7 +284,9 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
         }
         var r = this.config.record;
         this.getForm().setValues(r);
-        Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.name+'</h2>');
+        Ext.defer(function() {
+            Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.name+'</h2>');
+        }, 250, this);
 
         this.fireEvent('ready',r);
         MODx.fireEvent('ready');
