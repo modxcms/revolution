@@ -25,7 +25,7 @@ class SourceManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/source/modx.panel.sources.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/source/index.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load({xtype: "modx-page-sources"});});</script>');
+        $this->addHtml('<script type="text/javascript">Ext.onReady(function() { MODx.add("modx-page-sources"); });</script>');
     }
 
     /**
@@ -49,7 +49,7 @@ class SourceManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'source/index.tpl';
+        return '';
     }
 
     /**
