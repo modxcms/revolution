@@ -31,7 +31,6 @@ MODx.page.EditFile = function(config) {
         formpanel: 'modx-panel-file-edit'
         ,components: [{
             xtype: 'modx-panel-file-edit'
-            ,renderTo: 'modx-panel-file-edit-div'
             ,file: config.file
             ,record: config.record || {}
         }]
