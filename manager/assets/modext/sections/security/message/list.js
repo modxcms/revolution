@@ -9,7 +9,6 @@ MODx.page.Messages = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-messages'
-            ,renderTo: 'modx-panel-messages-div'
         }]
     });
     MODx.page.Messages.superclass.constructor.call(this,config);
