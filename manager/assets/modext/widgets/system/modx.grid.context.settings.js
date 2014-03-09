@@ -46,7 +46,7 @@ Ext.reg('modx-grid-context-settings',MODx.grid.ContextSettings);
  * Update a Context Setting
  *
  * @class MODx.window.UpdateContextSetting
- * @extends MODx.Window
+ * @extends MODx.window.UpdateSetting
  * @param {Object} config An object of config properties
  * @xtype modx-window-context-setting-update
  */
