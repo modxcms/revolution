@@ -357,12 +357,12 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
                                 var act = Ext.urlEncode(o.params || {action: o.action});
-                                location.href = 'index.php?id='+id+'&'+act;
+                                location.href = '?id='+id+'&'+act;
                             }
                         },this);
                     } else {
                         var act = Ext.urlEncode(o.params || {action: o.action});
-                        location.href = 'index.php?id='+id+'&'+act;
+                        location.href = '?id='+id+'&'+act;
                     }
                 };
             }
@@ -650,7 +650,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
                                 var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = 'index.php?id='+id+'&'+a;
+                                var s = '?id='+id+'&'+a;
                                 if (w === null) {
                                     location.href = s;
                                 } else { w.dom.src = s; }
@@ -658,7 +658,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                         },this);
                     } else {
                         var a = Ext.urlEncode(o.params || {action: o.action});
-                        var s = 'index.php?id='+id+'&'+a;
+                        var s = '?id='+id+'&'+a;
                         if (w === null) {
                             location.href = s;
                         } else { w.dom.src = s; }
