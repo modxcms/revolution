@@ -1,6 +1,6 @@
 /**
  * Loads the create static resource page
- * 
+ *
  * @class MODx.page.CreateStatic
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -14,11 +14,6 @@ MODx.page.CreateStatic = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,action: 'resource/create'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: this.getButtons(config)
         ,components: [{
             xtype: 'modx-panel-static'
@@ -53,9 +48,7 @@ Ext.extend(MODx.page.CreateStatic,MODx.Component,{
             btns.push('-');
         }
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: { a: 'welcome' }
+            text: _('cancel')
             ,id: 'modx-abtn-cancel'
         });
         /*btns.push('-');

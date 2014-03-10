@@ -11,7 +11,7 @@ MODx.page.ContentType = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-content-type'
         ,buttons: [{
-            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
+            text: _('cancel')
         }/*,'-',{
          text: _('help_ex')
          ,handler: MODx.loadHelpPane

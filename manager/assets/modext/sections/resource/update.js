@@ -18,12 +18,6 @@ MODx.page.UpdateResource = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,action: 'edit'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,preview: 'resource/preview'
-            ,cancel: 'welcome'
-        }
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -99,12 +93,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                     fp.warnUnsavedChanges = false;
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage('welcome');
+                    MODx.loadPage('?');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage('welcome');
+            MODx.loadPage('?');
         }
     }
 

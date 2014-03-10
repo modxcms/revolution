@@ -14,12 +14,6 @@ MODx.page.UpdateWebLink = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,action: 'resource/update'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,preview: 'resource/preview'
-            ,cancel: 'welcome'
-        }
         ,components: [{
             xtype: 'modx-panel-weblink'
             ,renderTo: 'modx-panel-weblink-div'
@@ -79,12 +73,12 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage('welcome');
+                    MODx.loadPage('?');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage('welcome');
+            MODx.loadPage('?');
         }
     }
 

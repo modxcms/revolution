@@ -288,9 +288,11 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             } else {
                 Ext.Msg.alert(_('error'),_('correct_errors'));
             }
-        } else { /* if just doing a URL redirect */
-            Ext.applyIf(itm.params || {},o.baseParams || {});
-            MODx.loadPage('?'+Ext.urlEncode(itm.params));
+        } else {
+            // if just doing a URL redirect
+            var params = itm.params || {};
+            Ext.applyIf(params, o.baseParams || {});
+            MODx.loadPage('?' + Ext.urlEncode(params));
         }
         return false;
     }
