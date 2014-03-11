@@ -44,6 +44,7 @@ Ext.extend(MODx.panel.FileTree,MODx.FormPanel,{
             if(!this.sourceTrees[source.name]){
                 this.sourceTrees[source.name] = MODx.load({
                     xtype: 'modx-tree-directory'
+                    ,id: 'source-tree-' + source.id
                     ,rootName: source.name
                     ,hideSourceCombo: true
                     ,source: source.id

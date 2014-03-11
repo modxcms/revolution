@@ -1,7 +1,7 @@
 Ext.namespace('MODx.tree');
 /**
  * Generates the Tree in Ext. All modTree classes extend this base class.
- * 
+ *
  * @class MODx.tree.Tree
  * @extends Ext.tree.TreePanel
  * @constructor
@@ -24,7 +24,7 @@ MODx.tree.Tree = function(config) {
         preloadChildren: true
         ,clearOnLoad: true
     });
-        
+
     this.config = config;
     var tl,root;
     if (this.config.url) {
@@ -170,7 +170,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,setup: function(config) {
         config.listeners = config.listeners || {};
         config.listeners.render = {fn:function() {
-            this.root.expand();
+            //this.root.expand();
             var tl = this.getLoader();
             Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl())});
             tl.fullMask.removeMask=false;
@@ -191,18 +191,18 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('click',this._saveState,this);
         this.on('contextmenu',this._saveState,this);
         this.on('click',this._handleClick,this);
-	    
+
         this.treestate_id = this.config.id || Ext.id();
         this.on('load',this._initExpand,this,{single: true});
         this.on('expandnode',this._saveState,this);
         this.on('collapsenode',this._saveState,this);
 
 
-		
+
         /* Absolute positionning fix  */
         this.on('expandnode',function(){ var cnt = Ext.getCmp('modx-content'); if (cnt) { cnt.doLayout(); } },this);
     }
-	
+
     /**
      * Expand the tree upon initialization.
      */
@@ -220,7 +220,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             }
         }
     }
-	
+
     /**
      * Add context menu items to the tree.
      * @param {Object, Array} items Either an Object config or array of Object configs.
@@ -235,10 +235,10 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             this.cm.add(a[i]);
         }
     }
-	
+
     /**
      * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} node The 
+     * @param {Ext.tree.TreeNode} node The
      * @param {Ext.EventObject} e The event object run.
      */
     ,_showContextMenu: function(node,e) {
@@ -269,7 +269,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         e.preventDefault();
         e.stopEvent();
     }
-    
+
     /**
      * Checks to see if a node exists in a tree node's children.
      * @param {Object} t The parent node.
@@ -279,7 +279,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,hasNode: function(t, n) {
         return (t.findChild('id', n.id)) || (t.leaf === true && t.parentNode.findChild('id', n.id));
     }
-	
+
     /**
      * Refreshes the tree and runs an optional func.
      * @param {Function} func The function to run.
@@ -302,7 +302,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         }
         return true;
     }
-    
+
     ,removeChildren: function(node) {
         while(node.firstChild){
              var c = node.firstChild;
@@ -319,12 +319,12 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             }
         }
     }
-	
+
     ,reloadNode: function(n) {
         this.getLoader().load(n);
         n.expand();
     }
-    
+
     /**
      * Abstracted remove function
      */
@@ -345,9 +345,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
             }
-        }); 
+        });
     }
-    
+
     ,_extractId: function(id,substr,split) {
         substr = substr || false;
         split = split || false;
@@ -360,7 +360,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         }
         return id;
     }
-	
+
     /**
      * Expand the tree and all children.
      */
@@ -370,7 +370,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             this.root.expandChildNodes(true);
         }
     }
-	
+
     /**
      * Completely collapse the tree.
      */
@@ -380,7 +380,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             this.root.collapse();
         }
     }
-	
+
     /**
      * Save the state of the tree's open children.
      * @param {Ext.tree.TreeNode} n The most recent expanded or collapsed node.
@@ -431,7 +431,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         }
         Ext.state.Manager.set(this.treestate_id,s);
     }
-    
+
     /**
      * Handles tree clicks
      * @param {Object} n The node clicked
@@ -440,7 +440,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,_handleClick: function (n,e) {
         e.stopEvent();
         e.preventDefault();
-        
+
         if (this.disableHref) {return true;}
         if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
@@ -472,7 +472,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var nodes = _encode(node);
         return Ext.encode(nodes);
     }
-        
+
     /**
      * Handles all drag events into the tree.
      * @param {Object} dropEvent The node dropped on the parent node.
@@ -510,7 +510,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             }
         });
     }
-    
+
     /**
      * Abstract definition to handle drop events.
      */
@@ -534,7 +534,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,_guid: function(prefix){
         return prefix+(new Date().getTime());
     }
-	
+
     /**
      * Redirects the page or the content frame to the correct location.
      * @param {String} loc The URL to direct to.
@@ -542,7 +542,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,redirect: function(loc) {
         MODx.loadPage(loc);
     }
-	
+
     ,loadAction: function(p) {
         var id = '';
         if (this.cm.activeNode && this.cm.activeNode.id) {
@@ -557,7 +557,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @see Ext.Toolbar
      */
     ,_loadToolbar: function() {}
-	
+
     /**
      * Refreshes a given tree node.
      * @access public
@@ -579,7 +579,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refreshActiveNode: function() {
         this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
     }
-    
+
     /**
      * Refreshes selected active node's parent
      * @access public
@@ -587,7 +587,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refreshParentNode: function() {
         this.getLoader().load(this.cm.activeNode.parentNode,this.cm.activeNode.expand);
     }
-    
+
     /**
      * Removes specified node
      * @param {String} id The node's ID
@@ -595,17 +595,17 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,removeNode: function(id) {
         var node = this.getNodeById(id);
         if (node) {
-            node.remove(); 
+            node.remove();
         }
     }
-    
+
     /**
      * Dynamically removes active node
      */
     ,removeActiveNode: function() {
         this.cm.activeNode.remove();
     }
-	
+
     /**
      * Gets a default toolbar setup
      */

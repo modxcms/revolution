@@ -84,12 +84,13 @@ MODx.tree.Directory = function(config) {
 //        console.log(this.getRootNode())
 
     },this);
-    this.addSourceToolbar();
+    //this.addSourceToolbar();
     this.on('show',function() {
         if (!this.config.hideSourceCombo) {
             try { this.sourceCombo.show(); } catch (e) {}
         }
     },this);
+    this._init();
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
@@ -124,20 +125,33 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.refresh();
     }
 
+    /**
+     * Expand the root node if appropriate
+     */
+    ,_init: function() {
+        var treeState = Ext.state.Manager.get(this.treestate_id)
+            ,rootPath = this.root.getPath('text');
+
+        if (rootPath === treeState) {
+            // Nothing to do
+            return;
+        }
+
+        this.root.expand();
+    }
+
     ,_initExpand: function() {
-        var treeState;
+        var treeState = Ext.state.Manager.get(this.treestate_id);
         if (!Ext.isEmpty(this.config.openTo)) {
-            treeState = Ext.state.Manager.get(this.treestate_id);
             this.selectPath('/'+_('files')+'/'+this.config.openTo,'text');
         } else {
-            treeState = Ext.state.Manager.get(this.treestate_id);
-            this.selectPath(treeState,'text');
+            this.expandPath(treeState, 'text');
         }
     }
 
     ,_saveState: function(n) {
         var p = n.getPath('text');
-        Ext.state.Manager.set(this.treestate_id,p);
+        Ext.state.Manager.set(this.treestate_id, p);
     }
 
     ,_handleDrag: function(dropEvent) {
