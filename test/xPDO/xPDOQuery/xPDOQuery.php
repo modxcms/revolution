@@ -547,4 +547,25 @@ class xPDOQueryTest extends xPDOTestCase {
             array(5,false),
         );
     }
+
+    /**
+     * @param $clause
+     * @dataProvider providerInvalidClauses
+     */
+    public function testInvalidClauses($clause) {
+        $criteria = $this->xpdo->newQuery('Person');
+        $criteria->where($clause);
+        $result = $this->xpdo->getObject('Person');
+
+        $this->assertTrue($result === null, 'xPDOQuery allowed invalid clause');
+    }
+    public function providerInvalidClauses() {
+        return array(
+            array("1=1;DROP TABLE `person`"),
+            array("1=1 UNION SELECT * FROM `person` WHERE id = 2"),
+            array("1=1 UNION SELECT * FROM `person` WHERE id = 2;"),
+            array(array("1=1; DROP TABLE `person`;" => '')),
+            array(array("1=1 UNION SELECT * FROM `person` WHERE id = 2" => '')),
+        );
+    }
 }
