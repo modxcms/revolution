@@ -150,6 +150,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,_saveState: function(n) {
+        if (!n.expanded && !n.isRoot) {
+            // Node has been collapsed, grab its parent
+            n = n.parentNode;
+        }
         var p = n.getPath('text');
         Ext.state.Manager.set(this.treestate_id, p);
     }
