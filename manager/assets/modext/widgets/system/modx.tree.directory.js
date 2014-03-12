@@ -30,6 +30,7 @@ MODx.tree.Directory = function(config) {
         ,action: 'browser/directory/getList'
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
+        ,autoExpandRoot: false
         ,tbar: [{
             icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
             ,cls: 'x-btn-icon'
