@@ -530,7 +530,6 @@ $_lang['tree_order'] = 'Baum-Sortierung';
 $_lang['recently_updated'] = 'Zuletzt bearbeitet';  // Kürzlich?
 $_lang['newest'] = 'Neueste';
 $_lang['oldest'] = 'Älteste';
-$_lang['title'] = 'Titel';
 
 $_lang['january'] = 'Januar';
 $_lang['february'] = 'Februar';
