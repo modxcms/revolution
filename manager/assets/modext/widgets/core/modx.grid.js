@@ -98,6 +98,10 @@ MODx.grid.Grid = function(config) {
         this.getBottomToolbar().bind(this.store);
     }
 
+    if (!config.paging && !config.hasOwnProperty('pageSize')) {
+        config.pageSize = 0;
+    }
+
     this.getStore().load({
         params: {
             start: config.pageStart || 0
