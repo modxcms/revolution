@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#11182] Fix issue where grid stores loaded only 20 records by default when pagination were disabled
 - [#828] handlePreview is called only if the deleted value changed
 - Ensure opcache.revalidate_freq is set to 0 during setup
 - Update xPDO for additional SQL injection protection
