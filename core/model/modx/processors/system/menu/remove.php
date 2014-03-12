@@ -23,4 +23,9 @@ if ($menu->remove() == false) {
 /* log manager action */
 $modx->logManagerAction('menu_delete','modMenu',$menu->get('text'));
 
+$modx->getCacheManager();
+$modx->cacheManager->refresh(array(
+    'menu' => array(),
+));
+
 return $modx->error->success('',$menu);
