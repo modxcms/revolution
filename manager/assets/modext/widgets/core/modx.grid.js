@@ -98,6 +98,9 @@ MODx.grid.Grid = function(config) {
         this.getBottomToolbar().bind(this.store);
     }
 
+    if (!config.paging && !config.hasOwnProperty('pageSize')) {
+        config.pageSize = 0;
+    }
     this.getStore().load({
         params: {
             start: config.pageStart || 0
@@ -153,10 +156,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             ,limit: nv
         }});
     }
-    
+
     ,loadWindow: function(btn,e,win,or) {
         var r = this.menu.record;
-        if (!this.windows[win.xtype] || win.force) {  
+        if (!this.windows[win.xtype] || win.force) {
             Ext.applyIf(win,{
                 record: win.blankValues ? {} : r
                 ,grid: this
@@ -174,12 +177,12 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
         this.windows[win.xtype].show(e.target);
     }
-    
+
     ,confirm: function(type,text) {
         var p = { action: type };
         var k = this.config.primaryKey || 'id';
         p[k] = this.menu.record[k];
-        
+
         MODx.msg.confirm({
             title: _(type)
             ,text: _(text) || _('confirm_remove')
@@ -190,7 +193,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             }
         });
     }
-    
+
     ,remove: function(text) {
         if (this.destroying) {
             return MODx.grid.Grid.superclass.remove.apply(this, arguments);
@@ -201,7 +204,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         Ext.apply(p,{ action: 'remove' });
         var k = this.config.primaryKey || 'id';
         p[k] = r[k];
-        
+
         if (this.fireEvent('beforeRemoveRow',r)) {
             MODx.msg.confirm({
                 title: _('warning')
@@ -216,14 +219,14 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             });
         }
     }
-    
+
     ,removeActiveRow: function(r) {
         if (this.fireEvent('afterRemoveRow',r)) {
             var rx = this.getSelectionModel().getSelected();
             this.getStore().remove(rx);
         }
     }
-    
+
     ,_loadMenu: function() {
         this.menu = new Ext.menu.Menu(this.config.menuConfig);
     }
@@ -249,7 +252,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             this.menu.showAt(e.xy);
         }
     }
-    
+
     ,_loadStore: function() {
         if (this.config.grouping) {
             this.store = new Ext.data.GroupingStore({
@@ -292,7 +295,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             });
         }
     }
-    
+
     ,_loadColumnModel: function() {
         if (this.config.columns) {
             var c = this.config.columns;
@@ -328,12 +331,12 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             this.cm = new Ext.grid.ColumnModel(c);
         }
     }
-    
+
     ,addContextMenuItem: function(items) {
         var l = items.length;
         for(var i = 0; i < l; i++) {
             var options = items[i];
-            
+
             if (options == '-') {
                 this.menu.add('-');
                 continue;
@@ -370,7 +373,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             });
         }
     }
-    
+
     ,refresh: function() {
         this.getStore().reload();
     }
@@ -382,7 +385,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
         return z;
     }
-    
+
     ,rendYesNo: function(v,md) {
         if (v === 1 || v == '1') { v = true; }
         if (v === 0 || v == '0') { v = false; }
@@ -415,7 +418,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
         return cs;
     }
-    
+
     ,editorYesNo: function(r) {
     	r = r || {};
     	Ext.applyIf(r,{
@@ -432,7 +435,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
         return new Ext.form.ComboBox(r);
     }
-    
+
     ,encodeModified: function() {
         var p = this.getStore().getModifiedRecords();
         var rs = {};
@@ -449,19 +452,19 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
         return Ext.encode(rs);
     }
-    
+
     ,expandAll: function() {
         if (!this.exp) return false;
-        
-        this.exp.expandAll(); 
+
+        this.exp.expandAll();
         this.tools['plus'].hide();
         this.tools['minus'].show();
         return true;
     }
-    
+
     ,collapseAll: function() {
         if (!this.exp) return false;
-        
+
         this.exp.collapseAll();
         this.tools['minus'].hide();
         this.tools['plus'].show();
@@ -472,11 +475,11 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 /* local grid */
 MODx.grid.LocalGrid = function(config) {
     config = config || {};
-    
+
     if (config.grouping) {
         Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView({ 
-            forceFit: true 
+          view: new Ext.grid.GroupingView({
+            forceFit: true
             ,scrollOffset: 0
             ,hideGroupedColumn: config.hideGroupedColumn ? true : false
             ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
@@ -514,7 +517,7 @@ MODx.grid.LocalGrid = function(config) {
         }
         ,menuConfig: { defaultAlign: 'tl-b?' ,enableScrolling: false }
     });
-    
+
     this.menu = new Ext.menu.Menu(config.menuConfig);
     this.config = config;
     this._loadColumnModel();
@@ -527,7 +530,7 @@ MODx.grid.LocalGrid = function(config) {
 };
 Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
     windows: {}
-    
+
     ,_loadStore: function(config) {
         if (config.grouping) {
             this.store = new Ext.data.GroupingStore({
@@ -547,10 +550,10 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         }
         return this.store;
     }
-    
+
     ,loadWindow: function(btn,e,win,or) {
         var r = this.menu.record;
-        if (!this.windows[win.xtype]) {  
+        if (!this.windows[win.xtype]) {
             Ext.applyIf(win,{
                 scope: this
                 ,success: this.refresh
@@ -566,7 +569,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         }
         this.windows[win.xtype].show(e.target);
     }
-    
+
     ,_loadColumnModel: function() {
         if (this.config.columns) {
             var c = this.config.columns;
@@ -600,7 +603,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             this.cm = new Ext.grid.ColumnModel(c);
         }
     }
-    
+
     ,_showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
@@ -616,16 +619,16 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             this.menu.showAt(e.xy);
         }
     }
-    
+
     ,getMenu: function() {
         return this.menu.record.menu;
     }
-    
+
     ,addContextMenuItem: function(items) {
         var l = items.length;
         for(var i = 0; i < l; i++) {
             var options = items[i];
-            
+
             if (options == '-') {
                 this.menu.add('-');
                 continue;
@@ -669,8 +672,8 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             });
         }
     }
-    
-    
+
+
     ,remove: function(config) {
         if (this.destroying) {
             return MODx.grid.LocalGrid.superclass.remove.apply(this, arguments);
@@ -685,7 +688,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             },this);
         }
     }
-    
+
     ,encode: function() {
         var s = this.getStore();
         var ct = s.getCount();
@@ -700,23 +703,23 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                rs.push(r);
             }
         }
-        
+
         return Ext.encode(rs);
     }
-    
-    
+
+
     ,expandAll: function() {
         if (!this.exp) return false;
-        
-        this.exp.expandAll(); 
+
+        this.exp.expandAll();
         this.tools['plus'].hide();
         this.tools['minus'].show();
         return true;
     }
-    
+
     ,collapseAll: function() {
         if (!this.exp) return false;
-        
+
         this.exp.collapseAll();
         this.tools['minus'].hide();
         this.tools['plus'].show();
