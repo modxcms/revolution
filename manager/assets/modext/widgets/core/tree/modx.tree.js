@@ -169,23 +169,23 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
     ,setup: function(config) {
         config.listeners = config.listeners || {};
-        if (config.autoExpandRoot !== false || !config.hasOwnProperty('autoExpandRoot')) {
-            config.listeners.render = {
-                fn: function() {
+        config.listeners.render = {
+            fn: function() {
+                if (config.autoExpandRoot !== false || !config.hasOwnProperty('autoExpandRoot')) {
                     this.root.expand();
-                    var tl = this.getLoader();
-                    Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl())});
-                    tl.fullMask.removeMask=false;
-                    tl.on({
-                        'load' : function(){this.fullMask.hide();}
-                        ,'loadexception' : function(){this.fullMask.hide();}
-                        ,'beforeload' : function(){this.fullMask.show();}
-                        ,scope : tl
-                    });
                 }
-                ,scope: this
-            };
-        }
+                var tl = this.getLoader();
+                Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl())});
+                tl.fullMask.removeMask=false;
+                tl.on({
+                    'load' : function(){this.fullMask.hide();}
+                    ,'loadexception' : function(){this.fullMask.hide();}
+                    ,'beforeload' : function(){this.fullMask.show();}
+                    ,scope : tl
+                });
+            }
+            ,scope: this
+        };
         MODx.tree.Tree.superclass.constructor.call(this,config);
         this.addEvents('afterSort','beforeSort');
         this.cm = new Ext.menu.Menu(config.menuConfig);
