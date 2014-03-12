@@ -699,8 +699,8 @@ abstract class xPDOQuery extends xPDOCriteria {
                         if (!array_key_exists($key, $fieldMeta)) {
                             if (array_key_exists($key, $fieldAliases)) {
                                 $key= $fieldAliases[$key];
-                            } else {
-                                $key= '';
+                            } elseif ($this->isConditionalClause($key)) {
+                                continue;
                             }
                         }
                         if (!empty($key)) {
