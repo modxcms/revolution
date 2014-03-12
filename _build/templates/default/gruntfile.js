@@ -110,7 +110,14 @@ module.exports = function(grunt) {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
 					'<%= dirs.css %>login.css': 'sass/login.scss'
 				}
-			}
+			},
+            map: {
+                options: {
+                    style: 'expanded',
+                    compass: false,
+                    sourcemap: true
+                }
+            }
 		},
 		autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
 			options: {
@@ -144,6 +151,10 @@ module.exports = function(grunt) {
 			scss: {
 				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
 				tasks: ['sass:dist', 'autoprefixer', 'cssmin:compress', 'growl:sass']
+			},
+			map: {
+				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
+				tasks: ['sass:map', 'growl:map']
 			}
 		},
 		clean: { /* take out the trash */
@@ -153,6 +164,10 @@ module.exports = function(grunt) {
 		growl: {
 			sass: {
 				message: "Sass files created.",
+				title: "grunt"
+			},
+			map: {
+				message: "Sass files created with source maps.",
 				title: "grunt"
 			},
 			build: {
@@ -187,6 +202,7 @@ module.exports = function(grunt) {
 
 	// Tasks
 	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'growl:watch', 'watch']);
+    grunt.registerTask('map', ['sass:map', 'growl:sass', 'growl:watch', 'watch:map']);
 	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
 	grunt.registerTask('ship', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:ship','clean:postbuild']);
