@@ -34,6 +34,12 @@ foreach ($nodes as $node) {
     $menu->set('menuindex',$node['order']);
     $menu->save();
 }
+
+$modx->getCacheManager();
+$modx->cacheManager->refresh(array(
+    'menu' => array(),
+));
+
 return $modx->error->success();
 
 function getNodesFormatted(&$ar_nodes,$cur_level,$parent = '') {
