@@ -2683,7 +2683,7 @@ class xPDO {
                     $bound['/:' . $k . '\b/'] = str_replace(array('\\', '$'), array('\\\\', '\$'), $v);
                 }
             }
-            $this->log(xPDO::LOG_LEVEL_INFO, "{$sql}\n" . print_r($bound, true));
+            $this->log(xPDO::LOG_LEVEL_DEBUG, "{$sql}\n" . print_r($bound, true));
             if (!empty($bound)) {
                 $sql= preg_replace(array_keys($bound), array_values($bound), $sql);
             }
