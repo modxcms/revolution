@@ -201,8 +201,7 @@ module.exports = function(grunt) {
 
 
 	// Tasks
-	grunt.registerTask('default', ['sass:dev','growl:sass', 'growl:watch', 'watch']);
-    grunt.registerTask('map', ['sass:map', 'growl:sass', 'growl:watch', 'watch:map']);
+	grunt.registerTask('default', ['sass:map','growl:sass', 'growl:watch', 'watch:map']);
 	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 	grunt.registerTask('ship', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:ship','clean:postbuild']);
 };
