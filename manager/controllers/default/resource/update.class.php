@@ -64,8 +64,10 @@ class ResourceUpdateManagerController extends ResourceManagerController {
     }
 
     public function getResource() {
-        if (empty($this->scriptProperties['id'])) return $this->failure($this->modx->lexicon('resource_err_nf'));
-        $this->resource = $this->modx->getObject($this->resourceClass,$this->scriptProperties['id']);
+        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('resource_err_nf'));
+        }
+        $this->resource = $this->modx->getObject($this->resourceClass, array('id' => $this->scriptProperties['id']));
         if (empty($this->resource)) return $this->failure($this->modx->lexicon('resource_err_nfs',array('id' => $this->scriptProperties['id'])));
 
         if (!$this->resource->checkPolicy('save')) {

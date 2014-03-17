@@ -47,8 +47,10 @@ class SecurityFormsProfileUpdateManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
         
-        if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('profile_err_ns'));
-        $profile = $this->modx->getObject('modFormCustomizationProfile',$scriptProperties['id']);
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('profile_err_ns'));
+        }
+        $profile = $this->modx->getObject('modFormCustomizationProfile', array('id' => $scriptProperties['id']));
         if (empty($profile)) return $this->failure($this->modx->lexicon('profile_err_nfs',array('id' => $scriptProperties['id'])));
 
         $this->profileArray = $profile->toArray();
