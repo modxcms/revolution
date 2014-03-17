@@ -46,8 +46,10 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
         
-        if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('access_policy_err_ns'));
-        $policy = $this->modx->getObject('modAccessPolicy',$scriptProperties['id']);
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('access_policy_err_ns'));
+        }
+        $policy = $this->modx->getObject('modAccessPolicy', array('id' => $scriptProperties['id']));
         if (empty($policy)) return $this->failure($this->modx->lexicon('access_policy_err_nf'));
         $placeholders['policy'] = $policy;
 

@@ -35,7 +35,7 @@ class ContextUpdateManagerController extends modManagerController {
      * @return void
      */
     public function initialize() {
-        $this->context= $this->modx->getObjectGraph('modContext', '{"ContextSettings":{}}', $this->scriptProperties['key']);
+        $this->context= $this->modx->getObjectGraph('modContext', '{"ContextSettings":{}}', array('key' => $this->scriptProperties['key']));
         if ($this->context) {
             $this->contextKey = $this->context->get('key');
         }
