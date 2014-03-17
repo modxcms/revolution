@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add proper validation for modSession id
 - Updated phpmailer class to 5.2.7
 - Fallback http_host to prevent cache issues under HTTP/1.0
 - [#11182] Fix issue where grid stores loaded only 20 records by default when pagination were disabled
