@@ -2111,9 +2111,9 @@ if (false) {
 		$this->thumbnail_width  = $this->w;
 		$this->thumbnail_height = $this->h;
 		$this->is_alpha = true;
-        $aspectratio = $this->thumbnail_image_height / $this->thumbnail_image_width;
-        if ($this->thumbnail_image_width >= $this->thumbnail_width) {
-            if ($this->w) {
+		if ($this->thumbnail_image_width >= $this->thumbnail_width) {
+			$aspectratio = $this->thumbnail_image_height / $this->thumbnail_image_width;
+			if ($this->w) {
 				$this->thumbnail_image_height = round($this->thumbnail_image_width * $aspectratio);
 				$this->thumbnail_height = ($this->h ? $this->h : $this->thumbnail_image_height);
 			} elseif ($this->thumbnail_image_height < $this->thumbnail_height) {
@@ -2122,6 +2122,7 @@ if (false) {
 			}
 
 		} else {
+			$aspectratio = $this->thumbnail_image_width / $this->thumbnail_image_height;
 			if ($this->h) {
 				$this->thumbnail_image_width = round($this->thumbnail_image_height * $aspectratio);
 			} elseif ($this->thumbnail_image_width < $this->thumbnail_width) {
