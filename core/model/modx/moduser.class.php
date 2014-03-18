@@ -678,9 +678,11 @@ class modUser extends modPrincipal {
             'user_group' => $userGroup->get('id'),
         ));
         if (empty($member)) {
+            $rank = count($this->getMany('UserGroupMembers'));
             $member = $this->xpdo->newObject('modUserGroupMember');
             $member->set('member',$this->get('id'));
             $member->set('user_group',$userGroup->get('id'));
+            $member->set('rank', $rank);
             if (!empty($role)) {
                 $member->set('role',$role->get('id'));
             }
