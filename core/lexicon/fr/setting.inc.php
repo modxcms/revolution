@@ -196,6 +196,9 @@ $_lang['setting_compress_js_max_files_desc'] = 'Nombre maximal de fichiers JavaS
 $_lang['setting_concat_js'] = 'Utiliser les librairies Javascript concaténées';
 $_lang['setting_concat_js_desc'] = 'Quand ceci est activé, MODX utilisera une version concaténée de ses librairies Javascript dans l\'interface du manager. Ceci réduit grandement le chargement et le temps d\'exécution au sein du manager. Désactivez seulement si vous modifiez des éléments du coeur/noyau/base.';
 
+$_lang['setting_confirm_navigation'] = 'Confirmation de modifications non enregistrées';
+$_lang['setting_confirm_navigation_desc'] = 'Lorsque cette option est activée, l\'utilisateur sera averti avant de quitter une page qui contient des modifications non enregistrées.';
+
 $_lang['setting_container_suffix'] = 'Suffixe de conteneur';
 $_lang['setting_container_suffix_desc'] = 'Le suffixe à ajouter aux ressources conteneurs avec l\'utilisation des URLs simples.';
 
