@@ -1501,7 +1501,7 @@ class modX extends xPDO {
      * @access public
      * @param string $eventName Name of an event to invoke.
      * @param array $params Optional params provided to the elements registered with an event.
-     * @return boolean
+     * @return bool|array
      */
     public function invokeEvent($eventName, array $params= array ()) {
         if (!$eventName)
