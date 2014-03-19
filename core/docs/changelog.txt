@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Load setting topic to allow 3PC components to use it for system setting translations
 - Allow filtering of namespace by request on lexicon page
 - Add proper validation for modSession id
 - Updated phpmailer class to 5.2.7

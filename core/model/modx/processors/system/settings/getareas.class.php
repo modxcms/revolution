@@ -38,7 +38,7 @@ class modSystemSettingsGetAreasProcessor extends modProcessor {
                 $namespace = $r[1];
                 $count = $r[2];
                 if ($namespace != 'core') {
-                    $this->modx->lexicon->load($namespace.':default');
+                    $this->modx->lexicon->load($namespace.':default',$namespace.':setting');
                 }
                 $lex = 'area_'.$name;
                 if ($this->modx->lexicon->exists($lex)) {
