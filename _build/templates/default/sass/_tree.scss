@@ -94,11 +94,11 @@
 /* tree states */
 .x-tree-node {
   color: $treeText;
-  font: $fontMedium;
+  font: $fontSmall;
 }
 
 .x-tree-node-el a span {
-  line-height: 2;
+  line-height: 1.7; /* back to 18px */
   padding-left: 7px;
 
   & span {
@@ -181,6 +181,12 @@
   color: #444444;
   font-style: italic;
 }
+
+.x-tree-node-el  {
+	height:18px;
+	max-height:18px;
+}
+
 .ext-ie .x-tree-node-el input {
   height: 15px;
   width: 15px;
@@ -444,7 +450,6 @@
 
 .x-tree-node {
   color: $treeText;
-  font: normal 12px arial, tahoma, helvetica, sans-serif;
 }
 .x-tree-node a, .x-dd-drag-ghost a {
   color: $treeText;
