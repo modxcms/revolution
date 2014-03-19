@@ -6,7 +6,8 @@ module.exports = function(grunt) {
 			lib: './lib/',
 			scss: './sass/',
 			css: '../../../manager/templates/default/css/',
-			template: '../../../manager/templates/default/'
+			template: '../../../manager/templates/default/',
+            root:'../../../'
 		},
 		bower: {
 			install: {
@@ -130,6 +131,47 @@ module.exports = function(grunt) {
 			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
 			postbuild: ['<%= dirs.lib %>']
 		},
+        imageoptim: {
+          png: {
+            options: {
+              jpegMini: false,
+              imageAlpha: true,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.png',
+              '<%= dirs.root %>_build/docs/**/*.png',
+              '<%= dirs.root %>manager/assets/ext3/**/*.png',
+              '<%= dirs.root %>manager/templates/default/**/*.png'
+            ]
+          },
+          jpg: {
+            options: {
+              jpegMini: false,
+              imageAlpha: false,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.jpg',
+              '<%= dirs.root %>_build/docs/**/*.jpg',
+              '<%= dirs.root %>manager/assets/ext3/**/*.jpg',
+              '<%= dirs.root %>manager/templates/default/**/*.jpg'
+            ]
+          },
+          gif: {
+            options: {
+              jpegMini: false,
+              imageAlpha: false,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.gif',
+              '<%= dirs.root %>_build/docs/**/*.gif',
+              '<%= dirs.root %>manager/assets/ext3/**/*.gif',
+              '<%= dirs.root %>manager/templates/default/**/*.gif'
+            ]
+          }
+        },
 		growl: {
 			sass: {
 				message: "Sass files created.",
@@ -167,6 +209,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-imageoptim');
 
 
 	// Tasks

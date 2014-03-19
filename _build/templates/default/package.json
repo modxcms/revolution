@@ -2,7 +2,7 @@
   "name": "revolution-theme-default",
   "title": "MODX Revolution",
   "version": "2.3.0",
-  "repository":"https://github.com/modxcms/revolution",
+  "repository": "https://github.com/modxcms/revolution",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-bower-task": "~0.3.1",
@@ -15,6 +15,7 @@
     "grunt-autoprefixer": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-csslint": "~0.1.2",
-    "grunt-contrib-cssmin": "~0.6.1"
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-imageoptim": "^1.4.1"
   }
 }
