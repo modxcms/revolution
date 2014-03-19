@@ -9,7 +9,7 @@ MODx.panel.FCSet = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/forms/set/get'
+            action: 'security/forms/set/update'
         }
         ,id: 'modx-panel-fc-set'
         ,class_key: 'modFormCustomizationSet'
