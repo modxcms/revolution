@@ -14,7 +14,7 @@ MODx.grid.Lexicon = function(config) {
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
             action: 'workspace/lexicon/getList'
-            ,'namespace': 'core'
+            ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,topic: ''
             ,language: MODx.config.manager_language || 'en'
         }
@@ -47,7 +47,7 @@ MODx.grid.Lexicon = function(config) {
             xtype: 'modx-combo-namespace'
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
-            ,value: 'core'
+            ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,width: 120
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
