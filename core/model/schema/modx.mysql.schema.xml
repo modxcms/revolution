@@ -1022,7 +1022,7 @@
         </index>
 
         <validation>
-            <rule field="id" name="invalid" type="preg_match" rule="/^[0-9a-zA-Z,-]{22,40}$/" message="session_err_invalid_id" />
+            <rule field="id" name="invalid" type="preg_match" rule="/^[0-9a-zA-Z,-]{22,255}$/" message="session_err_invalid_id" />
         </validation>
     </object>
 
