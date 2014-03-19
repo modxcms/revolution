@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Allow filtering of namespace by request on lexicon page
 - Add proper validation for modSession id
 - Updated phpmailer class to 5.2.7
 - Fallback http_host to prevent cache issues under HTTP/1.0

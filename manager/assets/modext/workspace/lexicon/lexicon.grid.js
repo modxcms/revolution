@@ -14,7 +14,7 @@ MODx.grid.Lexicon = function(config) {
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
             action: 'workspace/lexicon/getList'
-            ,'namespace': 'core'
+            ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,topic: ''
             ,language: MODx.config.manager_language || 'en'
         }
@@ -47,7 +47,7 @@ MODx.grid.Lexicon = function(config) {
             xtype: 'modx-combo-namespace'
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
-            ,value: 'core'
+            ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,width: 120
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
@@ -62,6 +62,11 @@ MODx.grid.Lexicon = function(config) {
             ,value: 'default'
             ,pageSize: 20
             ,width: 120
+            ,baseParams: {
+                action: 'workspace/lexicon/topic/getList'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+                ,'language': 'en'
+            }
             ,listeners: {
                 'select': {fn:this.changeTopic,scope:this}
             }
@@ -75,6 +80,10 @@ MODx.grid.Lexicon = function(config) {
             ,itemId: 'language'
             ,value: MODx.config.manager_language || 'en'
             ,width: 100
+            ,baseParams: {
+                action: 'system/language/getlist'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            }
             ,listeners: {
                 'select': {fn:this.changeLanguage,scope:this}
             }
