@@ -12,11 +12,13 @@
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
+$scriptProperties['context_key'] = isset($scriptProperties['fk']) ? $scriptProperties['fk'] : $scriptProperties['context_key'];
 $context = $modx->getContext($scriptProperties['context_key']);
 if ($context == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 
 if (!$context->checkPolicy('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+/** @var modContextSetting $setting */
 $setting = $modx->getObject('modContextSetting',array(
     'key' => $scriptProperties['key'],
     'context_key' => $scriptProperties['context_key'],
@@ -30,9 +32,49 @@ if ($scriptProperties['xtype'] == 'combo-boolean' && !is_numeric($scriptProperti
     } else $scriptProperties['value'] = 0;
 }
 
-$setting->set('key',$scriptProperties['key']);
-$setting->set('context_key',$scriptProperties['context_key']);
-$setting->set('value',$scriptProperties['value']);
+$setting->fromArray($scriptProperties);
+
+if (!empty($scriptProperties['name'])) {
+    $entry = $modx->getObject('modLexiconEntry',array(
+        'namespace' => $setting->get('namespace'),
+        'topic' => 'default',
+        'name' => 'setting_'.$scriptProperties['key'],
+    ));
+    if ($entry == null) {
+        $entry = $modx->newObject('modLexiconEntry');
+        $entry->set('namespace',$setting->get('namespace'));
+        $entry->set('name','setting_'.$scriptProperties['key']);
+        $entry->set('topic','default');
+        $entry->set('value',$scriptProperties['name']);
+        $entry->save();
+        $entry->clearCache();
+    } else {
+        $entry->set('value',$scriptProperties['name']);
+        $entry->save();
+        $entry->clearCache();
+    }
+}
+
+if (!empty($scriptProperties['description'])) {
+    $description = $modx->getObject('modLexiconEntry',array(
+        'namespace' => $setting->get('namespace'),
+        'topic' => 'default',
+        'name' => 'setting_'.$scriptProperties['key'].'_desc',
+    ));
+    if ($description == null) {
+        $description = $modx->newObject('modLexiconEntry');
+        $description->set('namespace',$setting->get('namespace'));
+        $description->set('name','setting_'.$scriptProperties['key'].'_desc');
+        $description->set('topic','default');
+        $description->set('value',$scriptProperties['description']);
+        $description->save();
+        $description->clearCache();
+    } else {
+        $description->set('value',$scriptProperties['description']);
+        $description->save();
+        $description->clearCache();
+    }
+}
 
 $refreshURIs = false;
 if ($setting->get('key') === 'friendly_urls' && $setting->isDirty('value') && $setting->get('value') == '1') {
