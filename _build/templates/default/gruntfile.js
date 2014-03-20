@@ -215,8 +215,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-imageoptim');
 
-
-	// Tasks
-	grunt.registerTask('default', ['sass:map','growl:sass', 'growl:watch', 'watch:map']);
-	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
+    // Tasks
+    grunt.registerTask('default', ['growl:watch', 'watch:map']);
+    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 };
