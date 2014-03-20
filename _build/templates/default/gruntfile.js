@@ -86,7 +86,11 @@ module.exports = function(grunt) {
                     style: 'expanded',
                     compass: false,
                     sourcemap: true
-                }
+                },
+				files: {
+					'<%= dirs.css %>index.css': 'sass/index.scss',
+					'<%= dirs.css %>login.css': 'sass/login.scss'
+				}
             }
 		},
 		autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
