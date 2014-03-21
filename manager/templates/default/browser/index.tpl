@@ -7,11 +7,11 @@
 
 {if $_config.compress_css}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css,{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
 {else}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
+<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css" /-->
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
 {/if}
 
 {if $_config.ext_debug}
