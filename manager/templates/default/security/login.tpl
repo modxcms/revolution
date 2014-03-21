@@ -6,9 +6,9 @@
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
 
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-	<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login.css" />
+	<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css" /-->
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/login.css" />
 
     {if $_config.ext_debug}
     <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
@@ -40,7 +40,7 @@
 
 <div id="container">
     <div id="modx-login-logo">
-        <img src="{$_config.manager_url}templates/default/images/style/modx-logo-color.png" alt="" />
+        <img src="{$_config.manager_url}templates/{$_config.manager_theme}/images/style/modx-logo-color.png" alt="" />
     </div>
 
 <div id="modx-panel-login-div" class="x-panel modx-form x-form-label-right">
