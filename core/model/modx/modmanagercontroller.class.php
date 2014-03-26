@@ -785,7 +785,8 @@ abstract class modManagerController {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
                 $constraintField = $rule->get('constraint_field');
                 $constraint = $rule->get('constraint');
-                if ($obj->get($constraintField) != $constraint) {
+                $constraintList = explode(',', str_replace(' ', '', $constraint));
+                if (($obj->get($constraintField) != $constraint) && (!in_array($obj->get($constraintField), $constraintList))) {
                     continue;
                 }
             }
