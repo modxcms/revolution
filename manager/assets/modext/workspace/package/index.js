@@ -4,7 +4,6 @@ MODx.page.Package = function(config) {
         formpanel: 'modx-panel-package'
         ,components: [{
             xtype: 'modx-panel-package'
-            ,renderTo: 'modx-panel-package-div'
             ,signature: MODx.request.signature
         }]
         ,buttons: [{

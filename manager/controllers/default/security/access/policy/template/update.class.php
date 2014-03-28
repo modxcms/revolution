@@ -58,7 +58,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      */
     public function process(array $scriptProperties = array()) {
         if (empty($this->template)) return $this->failure($this->modx->lexicon('policy_template_err_nf'));
-        
+
         $placeholders = array();
 
         /* get permissions */
@@ -104,7 +104,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/access/policy/template/update.tpl';
+        return '';
     }
 
     /**

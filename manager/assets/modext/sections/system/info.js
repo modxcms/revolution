@@ -11,7 +11,6 @@ MODx.page.SystemInfo = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-system-info'
-            ,renderTo: 'modx-panel-system-info-div'
             ,data: config.data
         }]
     });

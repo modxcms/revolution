@@ -1,4 +1,4 @@
-/** 
+/**
  * @class MODx.page.UpdateContext
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -35,8 +35,7 @@ MODx.page.UpdateContext = function(config) {
         }*/]
         ,components: [{
             xtype: 'modx-panel-context'
-            ,renderTo: 'modx-panel-context-div'
-            ,context: config.context
+            ,context: MODx.request.key
         }]
     });
     MODx.page.UpdateContext.superclass.constructor.call(this,config);

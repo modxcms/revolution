@@ -28,7 +28,6 @@ MODx.page.UpdateDashboardWidget = function(config) {
         }*/]
 		,components: [{
             xtype: 'modx-panel-dashboard-widget'
-            ,renderTo: 'modx-panel-dashboard-widget-div'
             ,record: config.record
         }]
 	});

@@ -122,7 +122,7 @@ class SystemFileEditManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/file/edit.tpl';
+        return '';
     }
 
     /**

@@ -79,7 +79,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/usergroup/update.tpl';
+        return '';
     }
 
     /**

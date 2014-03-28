@@ -140,7 +140,9 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.get('modx-dashboard-header').update('<h2>'+_('dashboard')+': '+this.config.record.name+'</h2>');
+        Ext.defer(function() {
+            Ext.getCmp('modx-dashboard-header').update('<h2>'+_('dashboard')+': '+this.config.record.name+'</h2>');
+        }, 250, this);
 
         /*
         var d = this.config.record.usergroups;

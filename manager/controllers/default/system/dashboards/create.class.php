@@ -38,9 +38,7 @@ class SystemDashboardsCreateManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboard.js");
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/create.js');
         $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
-    MODx.load({
-        xtype: "modx-page-dashboard-create"
-    });
+    MODx.add("modx-page-dashboard-create");
 });</script>');
     }
 
@@ -58,7 +56,7 @@ class SystemDashboardsCreateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/dashboards/create.tpl';
+        return '';
     }
 
     /**

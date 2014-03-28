@@ -35,7 +35,6 @@ MODx.page.UpdateFCSet = function(config) {
         }*/]
         ,components: [{
             xtype: 'modx-panel-fc-set'
-            ,renderTo: 'modx-panel-fc-set-div'
             ,record: config.record || {}
             //,baseParams: { action: 'update' ,id: config.id }
         }]

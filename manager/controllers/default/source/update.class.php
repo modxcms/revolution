@@ -154,7 +154,7 @@ class SourceUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'source/update.tpl';
+        return '';
     }
 
     /**

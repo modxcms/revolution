@@ -35,7 +35,6 @@ MODx.page.UpdateFCProfile = function(config) {
         }*/]
         ,components: [{
             xtype: 'modx-panel-fc-profile'
-            ,renderTo: 'modx-panel-fc-profile-div'
             ,record: config.record || {}
             //,baseParams: { action: 'update' ,id: config.id }
         }]

@@ -1,6 +1,6 @@
 /**
  * Loads the resource data page
- * 
+ *
  * @class MODx.page.ResourceData
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -42,7 +42,6 @@ MODx.page.ResourceData = function(config) {
         ,buttons: btns
         ,components: [{
             xtype: 'modx-panel-resource-data'
-            ,renderTo: 'modx-panel-resource-data-div'
             ,resource: config.record.id
             ,context: config.record.context_key
             ,class_key: config.record.class_key

@@ -4,10 +4,6 @@ MODx.page.FormCustomization = function(config) {
         components: [{
             xtype: 'modx-panel-fc-profiles'
         }]
-        ,buttons: [/*{
-            text: _('help_ex')
-            ,handler: MODx.loadHelpPane
-        }*/]
 	});
 	MODx.page.FormCustomization.superclass.constructor.call(this,config);
 };

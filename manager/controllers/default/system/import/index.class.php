@@ -25,7 +25,7 @@ class SystemImportManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/system/import/resource.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-import-resource' });
+                MODx.add('modx-page-import-resource');
             });</script>");
     }
 
@@ -50,7 +50,7 @@ class SystemImportManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/import/index.tpl';
+        return '';
     }
 
     /**
