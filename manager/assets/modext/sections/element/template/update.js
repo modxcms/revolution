@@ -25,9 +25,7 @@ MODx.page.UpdateTemplate = function(config) {
             ,handler: this.duplicate
             ,scope: this
         },'-',{
-            process: 'welcome'
-            ,text: _('cancel')
-            ,params: {a:'welcome'}
+            text: _('cancel')
         }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

@@ -1,6 +1,6 @@
 /**
  * Loads the error log page
- * 
+ *
  * @class MODx.page.ErrorLog
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -21,9 +21,7 @@ MODx.page.ErrorLog = function(config) {
             ,scope: this
             ,hidden: config.record.tooLarge
         },'-',{
-            process: 'welcome'
-            ,text: _('cancel')
-            ,params: {a:'welcome'}
+            text: _('cancel')
         }]
         ,components: [{
             xtype: 'modx-panel-error-log'
