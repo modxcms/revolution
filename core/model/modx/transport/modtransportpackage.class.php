@@ -290,6 +290,9 @@ class modTransportPackage extends xPDOObject {
 
             // Get the file URL from the provider
             $source = $this->getFileDownloadUrl();
+            if (!$source || empty($source) || !is_string($source)) {
+                return $transferred;
+            }
 
             /* see if user has allow_url_fopen on and is not behind a proxy */
             $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
