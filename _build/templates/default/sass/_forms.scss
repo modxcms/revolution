@@ -225,7 +225,7 @@ textarea.x-form-field,
   background-image: url(../images/modx-theme/form/search-trigger.gif);
 }
 
-.x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus {
+.x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus, .x-viewport .x-form-textarea.x-form-focus {
   border-radius: 0;
   outline-offset: 0;
   outline: 2px solid #ddd !important; /* #shame */

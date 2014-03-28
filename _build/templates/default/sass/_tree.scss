@@ -29,8 +29,8 @@
 /* tree menu splitter */
 .x-layout-split {
   background: $white;
-  border-width: 0 0 0 1px;
-  border: 1px solid $borderColor;
+  border: solid $borderColor;
+  border-width: 0 1px;
   width: 8px;
   z-index: 0;
 
