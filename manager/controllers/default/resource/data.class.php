@@ -107,7 +107,9 @@ class ResourceDataManagerController extends ResourceManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->resource->get('pagetitle');
+        if ($this->resource) {
+            return $this->resource->get('pagetitle');
+        }
     }
 
     /**
@@ -115,7 +117,7 @@ class ResourceDataManagerController extends ResourceManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'resource/data.tpl';
+        return '';
     }
 
     /**

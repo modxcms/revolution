@@ -35,7 +35,6 @@ MODx.page.UpdateAccessPolicy = function(config) {
         }*/]
         ,components: [{
             xtype: 'modx-panel-access-policy'
-            ,renderTo: 'modx-panel-access-policy-div'
             ,policy: config.policy
             ,record: config.record || {}
         }]

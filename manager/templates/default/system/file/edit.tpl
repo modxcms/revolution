@@ -1,1 +1,0 @@
-<div id="modx-panel-file-edit-div"></div>

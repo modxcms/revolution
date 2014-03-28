@@ -29,7 +29,6 @@ MODx.page.CreateDashboardWidget = function(config) {
         }*/]
 		,components: [{
             xtype: 'modx-panel-dashboard-widget'
-            ,renderTo: 'modx-panel-dashboard-widget-div'
             ,record: config.record || {}
         }]
 	});

@@ -29,7 +29,6 @@ MODx.page.CreateFile = function(config) {
         formpanel: 'modx-panel-file-create'
         ,components: [{
             xtype: 'modx-panel-file-create'
-            ,renderTo: 'modx-panel-file-create-div'
             ,directory: config.directory
             ,record: config.record || {}
         }]

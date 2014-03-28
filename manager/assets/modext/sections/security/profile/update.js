@@ -11,7 +11,6 @@ MODx.page.Profile = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-profile'
-            ,renderTo: 'modx-panel-profile-div'
             ,user: config.user
         }]
     });

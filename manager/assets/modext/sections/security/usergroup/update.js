@@ -1,7 +1,7 @@
 
 /**
  * Loads the usergroup update page
- * 
+ *
  * @class MODx.page.UpdateUserGroup
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -23,7 +23,7 @@ MODx.page.UpdateUserGroup = function(config) {
         },'-',{
             text: _('cancel')
             ,handler: function() {
-                MODx.loadPage('security/user')
+                MODx.loadPage('security/permission')
             }
         }/*,'-',{
             text: _('help_ex')
@@ -32,7 +32,6 @@ MODx.page.UpdateUserGroup = function(config) {
         ,components: [{
             xtype: 'modx-panel-user-group'
             ,record: config.record || {}
-            ,renderTo: 'modx-panel-user-group-div'
             ,usergroup: MODx.request.id
         }]
     });
