@@ -10,11 +10,6 @@ MODx.page.UpdatePlugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
-        ,actions: {
-            'new': 'element/plugin/create'
-            ,'edit': 'element/plugin/update'
-            ,'cancel': 'welcome'
-        }
         ,buttons: [{
             process: 'element/plugin/update'
             ,text: _('save')
@@ -29,9 +24,7 @@ MODx.page.UpdatePlugin = function(config) {
             ,handler: this.duplicate
             ,scope: this
         },'-',{
-            process: 'welcome'
-            ,text: _('cancel')
-            ,params: {a:'welcome'}
+            text: _('cancel')
         }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

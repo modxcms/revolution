@@ -3,9 +3,11 @@ MODx.page.ImportResource = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-import-resources'
         ,buttons: [{
-            process: 'system/import/index', text: _('import_resources'), method: 'remote'
+            process: 'system/import/index'
+            ,text: _('import_resources')
+            ,method: 'remote'
         },{
-            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
+            text: _('cancel')
         }]
         ,components: [{
             xtype: 'modx-panel-import-resources'

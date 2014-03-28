@@ -1,20 +1,15 @@
 /**
  * Loads the chunk create page
- * 
+ *
  * @class MODx.page.CreateChunk
  * @extends MODx.Component
  * @param {Object} config An object of config properties
  * @xtype modx-page-chunk-create
  */
 MODx.page.CreateChunk = function(config) {
-	config = config || {};	
+	config = config || {};
 	Ext.applyIf(config,{
 		formpanel: 'modx-panel-chunk'
-        ,actions: {
-            'new': 'element/chunk/create'
-            ,'edit': 'element/chunk/update'
-            ,'cancel': 'welcome'
-        }
         ,buttons: [{
             process: 'element/chunk/create'
             ,text: _('save')
@@ -26,9 +21,7 @@ MODx.page.CreateChunk = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'welcome'
-            ,text: _('cancel')
-            ,params: {a:'welcome'}
+            text: _('cancel')
         }/*,'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

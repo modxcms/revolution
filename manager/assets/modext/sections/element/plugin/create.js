@@ -1,6 +1,6 @@
 /**
  * Loads the create plugin page
- * 
+ *
  * @class MODx.page.CreatePlugin
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -10,11 +10,6 @@ MODx.page.CreatePlugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
-        ,actions: {
-            'new': 'element/plugin/create'
-            ,'edit': 'element/plugin/update'
-            ,'cancel': 'welcome'
-        }
         ,buttons: [{
             process: 'element/plugin/create'
             ,text: _('save')
@@ -26,9 +21,7 @@ MODx.page.CreatePlugin = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'welcome'
-            ,text: _('cancel')
-            ,params: {a:'welcome'}
+            text: _('cancel')
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
