@@ -1109,6 +1109,17 @@ abstract class modTemplateVarRender {
      * @return mixed|void
      */
     public function render($value,array $params = array()) {
+        if (!empty($params)) {
+            foreach ($params as $k => $v) {
+                if ($v === 'true') {
+                    $params[$k] = TRUE;
+                } elseif ($v === 'false') {
+                    $params[$k] = FALSE;
+                } elseif (is_numeric($v)) {
+                    $params[$k] = intval($v);
+                }
+            }
+        }
         $this->_loadLexiconTopics();
         return $this->process($value,$params);
     }
