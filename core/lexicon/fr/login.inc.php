@@ -14,8 +14,8 @@ $_lang['login_blocked_ip'] = 'Vous n\'êtes pas autorisé à vous connecter à p
 $_lang['login_blocked_time'] = 'Vous n\'êtes pas autorisé à vous identifier actuellement. Veuillez réessayer ultérieurement.';
 $_lang['login_blocked_too_many_attempts'] = 'Vous avez été bloqué en raison de trop nombreuses tentatives de connexion échouées.';
 $_lang['login_button'] = 'Connexion';
-$_lang['login_cannot_locate_account'] = 'Ce compte n\'a pas pu être identifié. Vérifiez l\'identifiant et le mot de passe puis réessayez.';
-$_lang['login_copyright'] = '&copy; 2005-2013 par <a href="http://modx.com/" target="_blank">l\'équipe MODX</a>. <strong>MODX</strong>&trade; est sous licence GPLv2 et ultérieur.';
+$_lang['login_cannot_locate_account'] = 'L\'identifiant ou le mot de passe saisi est incorrect. Veuillez vérifier l\'identifiant, entrer à nouveau le mot de passe, puis réessayer.';
+$_lang['login_copyright'] = '&copy; 2005-2014 par <a href="http://modx.com/" target="_blank">l\'équipe MODX</a>. <strong>MODX</strong>&trade; est sous licence GPLv2 et ultérieur.';
 $_lang['login_email_label'] = 'Compte email:';
 $_lang['login_err_unknown'] = 'Une erreur inconnue s\'est produite pendant la tentative de connexion.';
 $_lang['login_forget_your_login'] = 'Vous avez oublié votre identifiant?';

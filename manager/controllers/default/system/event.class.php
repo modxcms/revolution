@@ -68,7 +68,7 @@ class SystemEventManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/event/list.tpl';
+        return '';
     }
 
     /**

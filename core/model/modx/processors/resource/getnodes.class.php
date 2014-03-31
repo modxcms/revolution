@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.layout.tree.resource
  */
+
 class modResourceGetNodesProcessor extends modProcessor {
     /** @var int $defaultRootId */
     public $defaultRootId;
@@ -147,6 +148,7 @@ class modResourceGetNodesProcessor extends modProcessor {
     public function getResourceQuery() {
         $resourceColumns = array(
             'id'
+            ,'template'
             ,'pagetitle'
             ,'longtitle'
             ,'alias'
@@ -210,6 +212,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $c = $this->modx->newQuery('modResource');
         $c->select($this->modx->getSelectColumns('modResource','modResource','',array(
             'id'
+            ,'template'
             ,'pagetitle'
             ,'longtitle'
             ,'alias'
@@ -427,6 +430,17 @@ class modResourceGetNodesProcessor extends modProcessor {
             }
         }
 
+        $tpl_id   = $resource->template;
+        $tpl      = $this->modx->getObject('modTemplate',$tpl_id);
+        if ($tpl instanceof modTemplate) {
+            /* grab icon field from template table */
+            $tpl_icon = $tpl->get('icon');
+
+            if (!empty($tpl_icon)) {
+                $iconCls[] = $tpl_icon;
+            }
+        }
+
         $idNote = $this->modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$resource->id.')</span>' : '';
         $itemArray = array(
             'text' => strip_tags($resource->$nodeField).$idNote,
@@ -440,7 +454,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'ctx' => $resource->context_key,
             'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
-            'preview_url' => $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full'),
+            'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full') : '',
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? 'resource/update' : 'resource/data').'&id='.$resource->id : '',
             'allowDrop' => true,
         );

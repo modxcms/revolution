@@ -505,6 +505,7 @@ $_lang['untitled_template'] = 'Unbenanntes Template';
 $_lang['untitled_tv'] = 'Unbenannte TV';
 $_lang['untitled_weblink'] = 'Unbenannter Weblink';
 $_lang['untitled_symlink'] = 'Unbenannter Symlink';
+$_lang['unsaved_changes'] = 'Es gibt Änderungen, die noch nicht gespeichert wurden. Sind Sie sicher, dass Sie diese Seite verlassen möchten?';
 $_lang['update'] = 'Update';
 $_lang['updated'] = 'Upgedatet';
 $_lang['upload'] = 'Upload';
@@ -529,7 +530,6 @@ $_lang['tree_order'] = 'Baum-Sortierung';
 $_lang['recently_updated'] = 'Zuletzt bearbeitet';  // Kürzlich?
 $_lang['newest'] = 'Neueste';
 $_lang['oldest'] = 'Älteste';
-$_lang['title'] = 'Titel';
 
 $_lang['january'] = 'Januar';
 $_lang['february'] = 'Februar';

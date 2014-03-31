@@ -9,6 +9,8 @@
 $_lang['attributes'] = 'Атрибуты';
 $_lang['capitalize'] = 'Прописные';
 $_lang['checkbox'] = 'Флажки (checkbox)';
+$_lang['checkbox_columns'] = 'Колонки';
+$_lang['checkbox_columns_desc'] = 'Количество колонок, в которых будут отображаться флажки (checkbox).';
 $_lang['class'] = 'Класс';
 $_lang['combo_allowaddnewdata'] = 'Allow Add New Items';
 $_lang['combo_allowaddnewdata_desc'] = 'When Yes, allows items to be added that do not already exist in the list. Defaults to No.';

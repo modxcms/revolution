@@ -1,36 +1,3 @@
-/*!
-*             ____   ____     __   __    
-*    /'\_/`\/\  __`\/\  _`\  /\ \ /\ \
-*   /\      \ \ \/\ \ \ \/\ \\ `\`\/ /
-*   \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > < 
-*    \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\ 
-*     \ \_\\ \_\ \_____\ \____/ /\_\\ \_\ 
-*      \/_/ \/_/\/_____/\/___/  \/_/ \/_/ 
-*
-*     - C R E A T I V E    F R E E D O M -
-*
-*     This is the MODX Manager default theme for MODX 2.3+.
-*     It uses Sass—the SCSS variant, specifically. It makes coping 
-*     with ExtJS hurt less, but there is much to improve and purge.
-*     With your help, we will do something about that, so join us!
-*
-*     Some helpful references:
-*       + Contributing & Grunt: https://github.com/modxcms/revolution/tree/develop/_build/templates/default
-*       + The MODX Forums: http://forums.modx.com/ 
-*       + Bourbon mixin library for Sass: http://bourbon.io 
-*       + FontAwesome icons used in the Manager: http://fontawesome.io/icons/
-*       + Autoprefixer keeps our Sass clean: http://css-tricks.com/autoprefixer/
-*
-*     If you contribute, please sign the guestbook below.
-*
-*     Ryan Trash @rthrash http://thrash.me
-*     JP DeVries @jpdevries http://devries.jp
-*     Alan Pich @_alanpich
-*     Danya Postfactum
-*     Christian Seel @christianseel http://christianseel.com
-*     
-*/
-
 @import "bourbon/bourbon";
 @import "font-awesome/font-awesome";
 @import "image-set";
@@ -193,9 +160,13 @@ hr {
 
 #modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {	
 	.x-tab-strip {
+		margin-top:12px;
 		li {
 			width:100% !important; /* #shame */
 			margin-left:0;
+			border-bottom:1px solid $borderColor;
+			&:nth-last-child(3) { border-color:transparent }
+			&.x-tab-strip-active { border-bottom:1px solid $borderColor; }
 		}
 	}
 }
@@ -347,6 +318,10 @@ hr {
   background-color: white;
   font: 11px $codefonts !important;
   padding: 8px;
+}
+
+.x-form-text.modx-console-text {
+  height: auto;
 }
 
 /* portlets */

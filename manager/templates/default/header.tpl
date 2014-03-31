@@ -64,7 +64,7 @@
             </ul>
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
-                    <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
+                    <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
                 <li id="modx-manager-search"></li>
                 {$navb}

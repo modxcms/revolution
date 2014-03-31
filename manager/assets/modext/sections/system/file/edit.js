@@ -1,6 +1,6 @@
 /**
  * Loads the edit file page
- * 
+ *
  * @class MODx.page.EditFile
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -11,7 +11,7 @@ MODx.page.EditFile = function(config) {
     var btns = [];
     if (config.canSave) {
         btns.push({
-            process: 'update'
+            process: 'browser/file/update'
             ,text: _('save')
             ,method: 'remote'
             ,keys: [{
@@ -22,16 +22,13 @@ MODx.page.EditFile = function(config) {
         btns.push('-');
     }
     btns.push({
-        process: 'cancel'
-        ,text: _('cancel')
-        ,params: {a:'welcome'}
+        text: _('cancel')
     });
 
     Ext.applyIf(config,{
         formpanel: 'modx-panel-file-edit'
         ,components: [{
             xtype: 'modx-panel-file-edit'
-            ,renderTo: 'modx-panel-file-edit-div'
             ,file: config.file
             ,record: config.record || {}
         }]

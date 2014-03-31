@@ -24,7 +24,7 @@ class SecurityMessageManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/message/list.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-messages' });
+                MODx.add('modx-page-messages');
             });</script>");
     }
 
@@ -49,7 +49,7 @@ class SecurityMessageManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/message/list.tpl';
+        return '';
     }
 
     /**

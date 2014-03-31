@@ -29,8 +29,8 @@
 /* tree menu splitter */
 .x-layout-split {
   background: $white;
-  border-width: 0 0 0 1px;
-  border: 1px solid $borderColor;
+  border: solid $borderColor;
+  border-width: 0 1px;
   width: 8px;
   z-index: 0;
 
@@ -94,11 +94,11 @@
 /* tree states */
 .x-tree-node {
   color: $treeText;
-  font: $fontMedium;
+  font: $fontSmall;
 }
 
 .x-tree-node-el a span {
-  line-height: 2;
+  line-height: 1.7; /* back to 18px */
   padding-left: 7px;
 
   & span {
@@ -141,6 +141,8 @@
 	position:absolute;
 	top:0;
 	right:0;
+    bottom:0;
+    line-height:1.8;
 }
 
 
@@ -158,9 +160,9 @@
   background-color: darken($navbarHover, 2%);
   border-bottom: 1px solid $borderColor;
   font-weight: bold;
-  line-height: 2;
+  line-height: 1;
   padding: 0 .4em 0 16px;
-  
+  position:relative;
   > .icon-large {
     font-weight: normal;
   }
@@ -168,6 +170,11 @@
   .modx-tree-node-tool-ct .x-btn {
       margin-left: 2px;
   }
+}
+
+.x-tree-node-el  {
+  height:18px;
+  max-height:18px;
 }
 
 /* miscellaneous tree styles */
@@ -307,12 +314,12 @@
 .icon-namespace {
   background-image: url(../images/restyle/icons/computer.png) !important;
 }
-.icon-propertyset {
+/*.icon-propertyset {
   background-image: url(../images/restyle/icons/property-set.png) !important;
-}
-.icon-resourcegroup {
-  /*background: url(../images/restyle/icons/application_cascade.png) no-repeat left top !important;*/
-}
+}*/
+/*.icon-resourcegroup {
+  background: url(../images/restyle/icons/application_cascade.png) no-repeat left top !important;
+}*/
 .icon-list-new {
   background-image: url(../images/restyle/icons/layout_add.png) !important;
 }
@@ -379,21 +386,6 @@
   margin: 0 !important;
   padding: 0;
 }
-.tree-pseudoroot-node {
-  background-color: $gainsboro;
-  border-bottom: 1px solid $borderColor;
-  font-weight: bold;
-  line-height: 2;
-  padding: 0 .4em 0 16px;
-  
-  > .icon-large {
-    font-weight: normal;
-  }
-
-  .modx-tree-node-tool-ct .x-btn {
-      margin-left: 2px;
-  }
-}
 
 .x-tree-arrows .x-tree-elbow-plus,
 .x-tree-arrows .x-tree-elbow-minus,
@@ -444,7 +436,6 @@
 
 .x-tree-node {
   color: $treeText;
-  font: normal 12px arial, tahoma, helvetica, sans-serif;
 }
 .x-tree-node a, .x-dd-drag-ghost a {
   color: $treeText;

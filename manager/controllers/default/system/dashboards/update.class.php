@@ -30,10 +30,12 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return array
      */
     public function process(array $scriptProperties = array()) {
-        if (empty($this->scriptProperties['id'])) return $this->failure($this->modx->lexicon('dashboard_err_ns'));
-        $this->dashboard = $this->modx->getObject('modDashboard',$this->scriptProperties['id']);
+        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('dashboard_err_ns'));
+        }
+        $this->dashboard = $this->modx->getObject('modDashboard', array('id' => $this->scriptProperties['id']));
         if (empty($this->dashboard)) return $this->failure($this->modx->lexicon('dashboard_err_nf'));
-        
+
         $this->dashboardArray = $this->dashboard->toArray();
         $this->dashboardArray['widgets'] = $this->getWidgets();
 
@@ -121,7 +123,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/dashboards/update.tpl';
+        return '';
     }
 
     /**

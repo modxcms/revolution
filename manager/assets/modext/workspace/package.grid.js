@@ -52,14 +52,26 @@ MODx.grid.Package = function(config) {
 					text: _('package_search_local_title')
 					,handler: this.searchLocal
 					,scope: this
-				}]
+				},{
+                    text: _('transport_package_upload')
+                    ,handler: this.uploadTransportPackage
+                    ,scope: this
+                }]
 			}
         };
     } else {
         dlbtn = {
             text: _('package_search_local_title')
+            ,xtype: 'splitbutton'
             ,handler: this.searchLocal
             ,scope: this
+            ,menu: {
+                items: [{
+                    text: _('transport_package_upload')
+                    ,handler: this.uploadTransportPackage
+                    ,scope: this
+                }]
+            }
         };
     }
 
@@ -265,6 +277,37 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
 	}
 
+    /**
+     * Open a window allowing user to upload a transport package directly
+     */
+    ,uploadTransportPackage: function(btn,e){
+        if (!this.uploader) {
+            this.uploader = new Ext.ux.UploadDialog.Dialog({
+                url: MODx.config.connector_url
+                ,base_params: {
+                    action: 'workspace/packages/upload'
+                    ,wctx: MODx.ctx || ''
+                    ,source: MODx.config.default_media_source
+                    ,path: MODx.config.core_path+'packages/'
+                }
+                ,permitted_extensions: ['zip']
+                ,allow_close_on_upload: true
+                ,upload_autostart: false
+                ,reset_on_hide: true
+                ,width: 550
+                ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
+            });
+            this.uploader.on('hide',function(){
+                this.searchLocalWithoutPrompt();
+            },this);
+            this.uploader.on('close',function(){
+                this.searchLocalWithoutPrompt();
+            },this);
+        }
+        this.uploader.base_params.source = 1;
+        this.uploader.show(btn);
+    }
+
 	,searchLocal: function() {
         MODx.msg.confirm({
            title: _('package_search_local_title')
@@ -279,6 +322,23 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 },scope:this}
            }
         });
+    }
+
+    /**
+     * Scan for new packages, without the pointless & annoying confirmation box
+     */
+    ,searchLocalWithoutPrompt: function(){
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'workspace/packages/scanLocal'
+            }
+            ,listeners: {
+                'success':{fn:function(r) {
+                    this.getStore().reload();
+                },scope:this}
+            }
+        })
     }
 
 	/* Go to package details @TODO : Stay on the same page */

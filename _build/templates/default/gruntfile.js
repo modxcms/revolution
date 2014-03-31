@@ -6,7 +6,8 @@ module.exports = function(grunt) {
 			lib: './lib/',
 			scss: './sass/',
 			css: '../../../manager/templates/default/css/',
-			template: '../../../manager/templates/default/'
+			template: '../../../manager/templates/default/',
+            root:'../../../'
 		},
 		bower: {
 			install: {
@@ -51,37 +52,6 @@ module.exports = function(grunt) {
 +  '\n* See the GNU General Public License for more details. You should have received a copy of the GNU'
 +  '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.'
 +  '\n* '
-//+  '\n* Authors: TODO'
-+  '\n*/'
-				},
-				files: {
-					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
-					'<%= dirs.css %>login.css': '<%= dirs.css %>login.css'
-				}
-			},
-			ship: {
-				options: {
-					report: 'min',
-					keepSpecialComments:1,
-					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
-					banner : '/*!'
-+  '\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>'
-+  '\n* '
-+  '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC'
-+  '\n* '
-+  '\n* This file is part of <%= pkg.title %> and was compiled using Grunt.'
-+  '\n* '
-+  '\n* <%= pkg.title %> is free software: you can redistribute it and/or modify it under the terms of the'
-+  '\n* GNU General Public License as published by the Free Software Foundation, either version 2 of the'
-+  '\n* License, or (at your option) any later version.'
-+  '\n* '
-+  '\n* <%= pkg.title %> is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;'
-+  '\n* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
-+  '\n* '
-+  '\n* See the GNU General Public License for more details. You should have received a copy of the GNU'
-+  '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.'
-+  '\n* '
-//+  '\n* Authors: TODO'
 +  '\n*/'
 				},
 				files: {
@@ -110,7 +80,18 @@ module.exports = function(grunt) {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
 					'<%= dirs.css %>login.css': 'sass/login.scss'
 				}
-			}
+			},
+            map: {
+                options: {
+                    style: 'expanded',
+                    compass: false,
+                    sourcemap: true
+                },
+				files: {
+					'<%= dirs.css %>index.css': 'sass/index.scss',
+					'<%= dirs.css %>login.css': 'sass/login.scss'
+				}
+            }
 		},
 		autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
 			options: {
@@ -144,15 +125,64 @@ module.exports = function(grunt) {
 			scss: {
 				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
 				tasks: ['sass:dist', 'autoprefixer', 'cssmin:compress', 'growl:sass']
+			},
+			map: {
+				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
+				tasks: ['sass:map', 'growl:map']
 			}
 		},
 		clean: { /* take out the trash */
 			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
 			postbuild: ['<%= dirs.lib %>']
 		},
+        imageoptim: {
+          png: {
+            options: {
+              jpegMini: false,
+              imageAlpha: true,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.png',
+              '<%= dirs.root %>_build/docs/**/*.png',
+              '<%= dirs.root %>manager/assets/ext3/**/*.png',
+              '<%= dirs.root %>manager/templates/default/**/*.png'
+            ]
+          },
+          jpg: {
+            options: {
+              jpegMini: false,
+              imageAlpha: false,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.jpg',
+              '<%= dirs.root %>_build/docs/**/*.jpg',
+              '<%= dirs.root %>manager/assets/ext3/**/*.jpg',
+              '<%= dirs.root %>manager/templates/default/**/*.jpg'
+            ]
+          },
+          gif: {
+            options: {
+              jpegMini: false,
+              imageAlpha: false,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.gif',
+              '<%= dirs.root %>_build/docs/**/*.gif',
+              '<%= dirs.root %>manager/assets/ext3/**/*.gif',
+              '<%= dirs.root %>manager/templates/default/**/*.gif'
+            ]
+          }
+        },
 		growl: {
 			sass: {
 				message: "Sass files created.",
+				title: "grunt"
+			},
+			map: {
+				message: "Sass files created with source maps.",
 				title: "grunt"
 			},
 			build: {
@@ -183,11 +213,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-imageoptim');
 
-
-	// Tasks
-	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
-	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
-	grunt.registerTask('ship', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:ship','clean:postbuild']);
+    // Tasks
+    grunt.registerTask('default', ['growl:watch', 'watch:map']);
+    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 };

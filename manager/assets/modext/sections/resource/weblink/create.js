@@ -1,6 +1,6 @@
 /**
  * Loads the create resource page
- * 
+ *
  * @class MODx.page.CreateWebLink
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -14,11 +14,6 @@ MODx.page.CreateWebLink = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,action: 'resource/create'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: this.getButtons(config)
         ,components: [{
             xtype: 'modx-panel-weblink'
@@ -28,7 +23,7 @@ MODx.page.CreateWebLink = function(config) {
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
             ,show_tvs: config.show_tvs
-            ,url: config.url       
+            ,url: config.url
         }]
     });
     MODx.page.CreateWebLink.superclass.constructor.call(this,config);
@@ -53,10 +48,8 @@ Ext.extend(MODx.page.CreateWebLink,MODx.Component,{
             btns.push('-');
         }
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
+            text: _('cancel')
             ,id: 'modx-abtn-cancel'
-            ,params: { a: 'welcome' }
         });
         /*btns.push('-');
         btns.push({

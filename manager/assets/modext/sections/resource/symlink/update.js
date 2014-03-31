@@ -15,12 +15,6 @@ MODx.page.UpdateSymLink = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,action: 'resource/update'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,preview: 'resource/preview'
-            ,cancel: 'welcome'
-        }
         ,components: [{
             xtype: 'modx-panel-symlink'
             ,renderTo: 'modx-panel-symlink-div'
@@ -80,12 +74,12 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage('welcome');
+                    MODx.loadPage('?');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage('welcome');
+            MODx.loadPage('?');
         }
     }
 

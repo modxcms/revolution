@@ -1,6 +1,6 @@
 /**
  * Loads the access policy template update page
- * 
+ *
  * @class MODx.page.UpdateAccessPolicyTemplate
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -16,7 +16,7 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
             ,cancel: 'security/permission'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'security/access/policy/template/update'
             ,text: _('save')
             ,cls:'primary-button'
             ,method: 'remote'
@@ -33,9 +33,8 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }*/]
-        ,components: [{ 
+        ,components: [{
             xtype: 'modx-panel-access-policy-template'
-            ,renderTo: 'modx-panel-access-policy-template-div'
             ,template: config.template
             ,record: config.record || {}
         }]

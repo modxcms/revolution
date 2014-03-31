@@ -14,8 +14,8 @@ $_lang['login_blocked_ip'] = 'Вам запрещено входить в сис
 $_lang['login_blocked_time'] = 'В это время вам запрещено входить в систему управления сайтом. Пожалуйста попытайтесь позже.';
 $_lang['login_blocked_too_many_attempts'] = 'Вы были заблокированы из-за слишком большого количества неудачных попыток входа.';
 $_lang['login_button'] = 'Войти';
-$_lang['login_cannot_locate_account'] = 'Учётная запись не найдена. Проверьте имя пользователя и введите пароль заново для новой попытки.';
-$_lang['login_copyright'] = '&copy; 2005-2013 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. <strong>MODX</strong> &trade; распространяется под лицензией GPLv2 или по более поздней версии этой лицензии.';
+$_lang['login_cannot_locate_account'] = 'Неправильное имя пользователя или пароль. Проверьте введённые данные и попытайтесь снова.';
+$_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. <strong>MODX</strong> &trade; распространяется под лицензией GPLv2 или по более поздней версии этой лицензии.';
 $_lang['login_email_label'] = 'Электронная почта аккаунта:';
 $_lang['login_err_unknown'] = 'При попытке авторизации произошла неизвестная ошибка.';
 $_lang['login_forget_your_login'] = 'Забыли своё имя пользователя?';

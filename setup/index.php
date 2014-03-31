@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC. All rights reserved.
+ * Copyright 2006-2014 by MODX, LLC. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -27,6 +27,7 @@
 /* do a little bit of environment cleanup if possible */
 @ ini_set('magic_quotes_runtime', 0);
 @ ini_set('magic_quotes_sybase', 0);
+@ ini_set('opcache.revalidate_freq', 0);
 
 /* start session */
 session_start();

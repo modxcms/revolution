@@ -2,6 +2,42 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixed regex for element names
+- Added system settings to change default action
+- Check for "theme_path/js/layout.js" before trying to load it
+- Clean modx->user on context init
+- Added shift modifier to tree click, that will open resource in a new window
+- Removing duplicate windows
+- Updated context setting's update window to appear as a create window
+- Load setting topic to allow 3PC components to use it for system setting translations
+- Allow filtering of namespace by request on lexicon page
+- Add proper validation for modSession id
+- Updated phpmailer class to 5.2.7
+- Fallback http_host to prevent cache issues under HTTP/1.0
+- Added ctx option to isloggedin/isnotloggedin output filters
+- Ensure opcache.revalidate_freq is set to 0 during setup
+- Clear menus cache on actions with menu
+- [#11123] Added "success":true to modProcessor response
+- [#11182] Fix issue where grid stores loaded only 20 records by default when pagination were disabled
+- [#828] handlePreview is called only if the deleted value changed
+- Update xPDO for additional SQL injection protection
+- [#11186][#11176][#9880][#2896][#5850] Disabled dirty check on save button in Resource's panel
+- Validate context key provided to modX::initialize()
+- [#11170] Added pdf to content type
+- [#675] Add upload functionality directly to package manager grid
+- [#703] Added OnElementNotFound system event
+- [#11149] Make sure hitting the close button does not trigger double prevent navigation warnings
+- Add refreshURIs call as part of clearing the site cache
+- Update parent field in Resource panel after drag and drop current resource
+- Check if template exissts before using it's icon in getNodes processor
+- Prevent content duplication when using [css|js|html]To[Head|Bottom]
+- [#11099] Removed C:\fakepath\ from filename during uploads
+- Fix path issue with phpthumb after 1.7.11-beta update
+- Prevent redirect of base_url when query string exists
+- Enable Template-based icons in Resource tree
+- Increase message_limit for ExtJS HttpStateProvider
+- Fix lexicon getList processor
+- Improve Confirm Navigation feature and make configurable
 - Confirm navigation when unsaved changes exist in resource panel
 - Fix deprecated returnValue to prevent confirm navigation alert
 - Fix xPDO->parseBindings bug triggering modDbRegisterMessage errors

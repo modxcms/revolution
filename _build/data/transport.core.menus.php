@@ -292,7 +292,7 @@ $children[5]->fromArray(array (
   'description' => 'reports_desc',
   'parent' => 'manage',
   'permissions' => 'menu_reports',
-  'action' => 'reports',
+  'action' => '',
 ), '', true, true);
 
 /* site schedule */

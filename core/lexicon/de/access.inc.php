@@ -64,6 +64,7 @@ $_lang['access_rgroup_err_ns'] = 'Ressourcen-Gruppen-ACL nicht angegeben.';
 $_lang['access_rgroup_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Ressourcen-Gruppen-ACL zu löschen.';
 $_lang['access_rgroup_remove'] = 'Zugriff auf diese Ressourcen-Gruppe löschen';
 $_lang['access_rgroup_update'] = 'Zugriff auf diese Ressourcen-Gruppe bearbeiten';
+$_lang['access_source_err_ae'] = 'Eine ACL für diese Medienquelle existiert bereits.';
 $_lang['access_source_remove'] = 'Entziehe Medienquellen-Zugriff';
 $_lang['access_source_update'] = 'Bearbeite Medienquellen-Zugriff';
 $_lang['access_to_contexts'] = 'Zugriff auf Kontexte';

@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -559,6 +559,27 @@ class modParser {
                     'policies' => $element->getPolicies(),
                     'source' => $element->Source ? $element->Source->toArray() : array(),
                 );
+            }
+            elseif(!$element) {
+                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => $realname));
+                $element = false;
+                if ($evtOutput != false) {
+                    foreach ((array) $evtOutput as $elm) {
+                        if (!empty($elm) && is_string($elm)) {
+                            $element = $this->modx->newObject($class, array(
+                                'name' => $realname,
+                                'snippet' => $elm
+                            ));
+                        }
+                        elseif ($elm instanceof modElement ) {
+                            $element = $elm;
+                        }
+
+                        if ($element) {
+                            break;
+                        }
+                    }
+                }
             }
         }
         if ($element instanceof modElement) {

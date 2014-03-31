@@ -56,7 +56,7 @@ class SecurityProfileManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/profile/index.tpl';
+        return '';
     }
 
     /**

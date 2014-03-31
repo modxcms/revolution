@@ -18,12 +18,6 @@ MODx.page.UpdateResource = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,action: 'edit'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,preview: 'resource/preview'
-            ,cancel: 'welcome'
-        }
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -96,14 +90,15 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         if (fp && fp.isDirty()) {
             Ext.Msg.confirm(_('warning'),_('resource_cancel_dirty_confirm'),function(e) {
                 if (e == 'yes') {
+                    fp.warnUnsavedChanges = false;
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage('welcome');
+                    MODx.loadPage('?');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage('welcome');
+            MODx.loadPage('?');
         }
     }
 
@@ -114,7 +109,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 process: 'resource/update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: MODx.request.reload ? false : true
+                //,checkDirty: MODx.request.reload ? false : true
                 ,id: 'modx-abtn-save'
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'

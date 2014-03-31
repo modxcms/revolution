@@ -236,7 +236,9 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.get('modx-dashboard-widget-header').update('<h2>'+_('widget')+': '+this.config.record.name_trans+'</h2>');
+        Ext.defer(function() {
+            Ext.get('modx-dashboard-widget-header').update('<h2>'+_('widget')+': '+this.config.record.name_trans+'</h2>');
+        }, 250, this);
 
         var d = this.config.record.dashboards;
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');

@@ -13,29 +13,50 @@ MODx.panel.Workspace = function(config) {
         ,cls: 'container'
         ,bodyStyle: ''
 		,unstyled:true
-        ,items: [{
+        ,items: this.getItems(config)
+    });
+    MODx.panel.Workspace.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.panel.Workspace,MODx.Panel ,{
+    getItems: function(config) {
+        var i = [{
             html: '<h2>'+_('package_management')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-workspace-header'
-        },MODx.getPageStructure([{
-            title: _('packages')		
+        }];
+
+        if (MODx.errors.length > 0) {
+            var errors = [];
+            Ext.each(MODx.errors, function(error) {
+                errors.push('<p>'+error+'</p>')
+            });
+            errors.join('<hr>');
+
+            i.push([{
+                html: '<h3>'+_('warning')+'</h3>' + errors,
+                cls: 'modx-page-header'
+            }]);
+        }
+
+        i.push([MODx.getPageStructure([{
+            title: _('packages')
 			,items:[{
 				xtype: 'modx-breadcrumbs-panel'
 				,id: 'packages-breadcrumbs'
 				,desc: _('packages_desc')
-				,root : { 
+				,root : {
 					text : 'Packages List'
 					,className: 'first'
 					,root: true
-					,pnl: 'modx-panel-packages' 
+					,pnl: 'modx-panel-packages'
 				}
 			},{
 				layout:'card'
 				,id:'card-container'
 				,activeItem:0
-				,border: false	
-				,autoHeight: true			
+				,border: false
+				,autoHeight: true
 				,defaults:{
 					cls: 'main-wrapper'
 					,preventRender: true
@@ -43,12 +64,12 @@ MODx.panel.Workspace = function(config) {
 				}
 				,items: [{
 					xtype: 'modx-panel-packages'
-					,id: 'modx-panel-packages'									
+					,id: 'modx-panel-packages'
 				},{
 					xtype: 'modx-panel-packages-browser'
 					,id: 'modx-panel-packages-browser'
-				}]  
-			}]		         
+				}]
+			}]
         },{
             title: _('providers')
             ,autoHeight: true
@@ -64,9 +85,9 @@ MODx.panel.Workspace = function(config) {
                 ,title: ''
                 ,preventRender: true
             }]
-        }])]
-    });
-    MODx.panel.Workspace.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.panel.Workspace,MODx.Panel);
+        }])]);
+
+        return i;
+    }
+});
 Ext.reg('modx-panel-workspace',MODx.panel.Workspace);

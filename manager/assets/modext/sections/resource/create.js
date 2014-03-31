@@ -1,6 +1,6 @@
 /**
  * Loads the create resource page
- * 
+ *
  * @class MODx.page.CreateResource
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -14,11 +14,6 @@ MODx.page.CreateResource = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,action: 'resource/create'
-    	,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,cancel: 'welcome'
-        }
     	,buttons: this.getButtons(config)
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
@@ -45,7 +40,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                 ,cls:'primary-button'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: true
+                //,checkDirty: true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
@@ -54,10 +49,8 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
             btns.push('-');
         }
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
+            text: _('cancel')
             ,id: 'modx-abtn-cancel'
-            ,params: { a: 'welcome' }
         });
         /*btns.push('-');
         btns.push({

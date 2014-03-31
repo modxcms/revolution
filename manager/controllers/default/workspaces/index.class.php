@@ -10,6 +10,7 @@
  * @subpackage manager.controllers
  */
 class WorkspacesManagerController extends modManagerController {
+    public $errors = array();
     /**
      * The template file for this controller
      * @var string $templateFile
@@ -57,6 +58,7 @@ class WorkspacesManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/util/lightbox.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
+                MODx.errors = ".$this->modx->toJSON($this->errors).";
                 MODx.defaultProvider = '".$this->providerId."';MODx.provider = '".$this->providerId."';MODx.providerName = '".$this->providerName."';MODx.curlEnabled = ".(integer)$this->curlEnabled."; Ext.ux.Lightbox.register('a.lightbox');
                 MODx.add('modx-page-workspace');
             });</script>");
@@ -83,7 +85,7 @@ class WorkspacesManagerController extends modManagerController {
             $cacheManager->writeTree($assetsPath,$directoryOptions);
         }
         if (!is_dir($assetsPath) || !is_writable($assetsPath)) {
-            $errors['assets_not_created'] = $this->modx->lexicon('dir_err_assets',array('path' => $assetsPath));
+            $errors[] = $this->modx->lexicon('dir_err_assets',array('path' => $assetsPath));
         }
         unset($assetsPath);
 
@@ -93,7 +95,7 @@ class WorkspacesManagerController extends modManagerController {
             $cacheManager->writeTree($assetsCompPath,$directoryOptions);
         }
         if (!is_dir($assetsCompPath) || !is_writable($assetsCompPath)) {
-            $errors['assets_comp_not_created'] = $this->modx->lexicon('dir_err_assets_comp',array('path' => $assetsCompPath));
+            $errors[] = $this->modx->lexicon('dir_err_assets_comp',array('path' => $assetsCompPath));
         }
         unset($assetsCompPath);
 
@@ -103,23 +105,16 @@ class WorkspacesManagerController extends modManagerController {
             $cacheManager->writeTree($coreCompPath,$directoryOptions);
         }
         if (!is_dir($coreCompPath) || !is_writable($coreCompPath)) {
-            $errors['core_comp_not_created'] = $this->modx->lexicon('dir_err_core_comp',array('path' => $coreCompPath));
+            $errors[] = $this->modx->lexicon('dir_err_core_comp',array('path' => $coreCompPath));
         }
 
         if (!function_exists('curl_init') || !in_array('curl',get_loaded_extensions())) {
-            $errors['curl_not_installed'] = $this->modx->lexicon('curl_not_installed');
+            $errors[] = $this->modx->lexicon('curl_not_installed');
             $this->curlEnabled = false;
         }
 
         if (!empty($errors)) {
-            $placeholders['errors'] = $errors;
-            $this->setPlaceholder('errors',$errors);
-            $this->templateFile = 'workspaces/error.tpl';
-            $this->prepareLanguage();
-            $error = $this->fetchTemplate($this->templateFile);
-            $this->setPlaceholder('error',$error);
-            $this->templateFile = 'workspaces/index.tpl';
-            return $placeholders;
+            $this->errors = $errors;
         }
 
         $this->getDefaultProvider();

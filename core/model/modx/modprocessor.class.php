@@ -27,7 +27,7 @@ abstract class modProcessor {
      * @var array $properties
      */
     public $properties = array();
-    
+
     /**
      * Creates a modProcessor object.
      *
@@ -59,7 +59,7 @@ abstract class modProcessor {
     }
 
     /**
-     * Completely unset a property from the properties array 
+     * Completely unset a property from the properties array
      * @param string $key
      * @return void
      */
@@ -69,7 +69,7 @@ abstract class modProcessor {
 
     /**
      * Return true here to allow access to this processor.
-     * 
+     *
      * @return boolean
      */
     public function checkPermissions() { return true; }
@@ -77,7 +77,7 @@ abstract class modProcessor {
     /**
      * Can be used to provide custom methods prior to processing. Return true to tell MODX that the Processor
      * initialized successfully. If you return anything else, MODX will output that return value as an error message.
-     * 
+     *
      * @return boolean
      */
     public function initialize() { return true; }
@@ -90,7 +90,7 @@ abstract class modProcessor {
     public function getLanguageTopics() {
         return array();
     }
-    
+
     /**
      * Return a success message from the processor.
      * @param string $msg
@@ -148,7 +148,7 @@ abstract class modProcessor {
     /**
      * Run the processor and return the result. Override this in your derivative class to provide custom functionality.
      * Used here for pre-2.2-style processors.
-     * 
+     *
      * @return mixed
      */
     abstract public function process();
@@ -189,7 +189,7 @@ abstract class modProcessor {
 
     /**
      * Set a property value
-     * 
+     *
      * @param string $k
      * @param mixed $v
      * @return void
@@ -201,7 +201,7 @@ abstract class modProcessor {
     /**
      * Special helper method for handling checkboxes. Only set value if passed or $force is true, and check for a
      * not empty value or string 'false'.
-     * 
+     *
      * @param string $k
      * @param boolean $force
      * @return int|null
@@ -247,7 +247,7 @@ abstract class modProcessor {
      */
     public function outputArray(array $array,$count = false) {
         if ($count === false) { $count = count($array); }
-        return '{"total":"'.$count.'","results":'.$this->modx->toJSON($array).'}';
+        return '{"success":true,"total":"'.$count.'","results":'.$this->modx->toJSON($array).'}';
     }
 
     /**
@@ -333,7 +333,7 @@ abstract class modProcessor {
 class modDeprecatedProcessor extends modProcessor {
     /**
      * Rather than load a class for processing, include the processor file directly.
-     * 
+     *
      * {@inheritDoc}
      * @return mixed
      */
@@ -347,7 +347,7 @@ class modDeprecatedProcessor extends modProcessor {
 
 /**
  * A utility class used for defining driver-specific processors
- * 
+ *
  * @package modx
  */
 abstract class modDriverSpecificProcessor extends modProcessor {
@@ -392,7 +392,7 @@ abstract class modObjectProcessor extends modProcessor {
 abstract class modObjectGetProcessor extends modObjectProcessor {
     /** @var boolean $checkViewPermission If set to true, will check the view permission on modAccessibleObjects */
     public $checkViewPermission = true;
-    
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -574,7 +574,7 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
 
     /**
      * Can be used to prepare the query after the COUNT statement
-     * 
+     *
      * @param xPDOQuery $c
      * @return xPDOQuery
      */
@@ -902,7 +902,7 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
     public function logManagerAction() {
         $this->modx->logManagerAction($this->objectType.'_update',$this->classKey,$this->object->get($this->primaryKeyField));
     }
-    
+
     /**
      * @param array $criteria
      * @return int
@@ -952,7 +952,7 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
         if ($canSave !== true) {
             return $this->failure($canSave);
         }
-        
+
         $this->newObject->fromArray($this->object->toArray());
         $name = $this->getNewName();
         $this->setNewName($name);
@@ -960,12 +960,12 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
         if ($this->alreadyExists($name)) {
             $this->addFieldError($this->nameField,$this->modx->lexicon($this->objectType.'_err_ae',array('name' => $name)));
         }
-        
+
         $canSave = $this->beforeSave();
         if ($canSave !== true) {
             return $this->failure($canSave);
         }
-        
+
         /* save new chunk */
         if ($this->newObject->save() === false) {
             $this->modx->error->checkValidation($this->newObject);
@@ -1077,7 +1077,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
         if (!empty($preventRemoval)) {
             return $this->failure($preventRemoval);
         }
-        
+
         if ($this->object->remove() == false) {
             return $this->failure($this->modx->lexicon($this->objectType.'_err_remove'));
         }

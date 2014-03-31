@@ -61,8 +61,10 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $placeholders = array();
 
         /* load template */
-        if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('template_err_ns'));
-        $this->template = $this->modx->getObject('modTemplate',$scriptProperties['id']);
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('template_err_ns'));
+        }
+        $this->template = $this->modx->getObject('modTemplate', array('id' => $scriptProperties['id']));
         if ($this->template == null) return $this->failure($this->modx->lexicon('template_err_nf'));
         if (!$this->template->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
