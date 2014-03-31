@@ -498,6 +498,7 @@ $_lang['untitled_template'] = 'Шаблон без названия';
 $_lang['untitled_tv'] = 'Дополнительное поле без названия';
 $_lang['untitled_weblink'] = 'Ссылка без названия';
 $_lang['untitled_symlink'] = 'Симлинк без названия';
+$_lang['unsaved_changes'] = 'Имеются несохраненные изменения. Вы действительно хотите покинуть эту страницу?';
 $_lang['update'] = 'Обновить';
 $_lang['updated'] = 'Обновлён';
 $_lang['upload'] = 'Загрузить';
