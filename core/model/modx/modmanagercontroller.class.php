@@ -5,7 +5,7 @@
 /**
  * Abstract class for manager controllers. Not to be initialized directly; must be extended by the implementing
  * controller.
- * 
+ *
  * @package modx
  */
 abstract class modManagerController {
@@ -67,7 +67,7 @@ abstract class modManagerController {
     /**
      * Return the proper instance of the derived class. This can be used to override how the manager loads a controller
      * class; for example, when handling derivative classes with class_key settings.
-     * 
+     *
      * @static
      * @param modX $modx A reference to the modX object.
      * @param string $className The name of the class that is being requested.
@@ -112,7 +112,7 @@ abstract class modManagerController {
 
     /**
      * Render the controller.
-     * 
+     *
      * @return string
      */
     public function render() {
@@ -290,7 +290,7 @@ abstract class modManagerController {
 
     /**
      * Set a failure on this controller. This will return the error message.
-     * 
+     *
      * @param string $message
      * @return void
      */
@@ -302,7 +302,7 @@ abstract class modManagerController {
     /**
      * Load the path to this controller's template's directory. Only override this if you want to override default
      * behavior; otherwise, overriding getTemplatesPath is preferred.
-     * 
+     *
      * @return string
      */
     public function loadTemplatesPath() {
@@ -318,7 +318,7 @@ abstract class modManagerController {
 
     /**
      * Set the possible template paths for this controller
-     * 
+     *
      * @param array $paths
      * @return void
      */
@@ -329,7 +329,7 @@ abstract class modManagerController {
     /**
      * Load an array of possible paths to this controller's directory. Only override this if you want to override
      * default behavior; otherwise, overriding getControllersPath is preferred.
-     * 
+     *
      * @return array
      */
     public function loadControllersPath() {
@@ -365,11 +365,11 @@ abstract class modManagerController {
         }
         return $paths;
     }
-    
+
     /**
      * Get an array of possible paths to this controller's template's directory.
      * Override this to point to a custom directory.
-     * 
+     *
      * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
      * @return array|string
      */
@@ -409,7 +409,7 @@ abstract class modManagerController {
 
     /**
      * Do permission checking in this method. Returning false will present a "permission denied" message.
-     * 
+     *
      * @abstract
      * @return boolean
      */
@@ -426,7 +426,7 @@ abstract class modManagerController {
 
     /**
      * Return a string to set as the controller's page title.
-     * 
+     *
      * @abstract
      * @return string
      */
@@ -448,7 +448,7 @@ abstract class modManagerController {
 
     /**
      * Specify an array of language topics to load for this controller
-     * 
+     *
      * @return array
      */
     public function getLanguageTopics() {
@@ -460,7 +460,7 @@ abstract class modManagerController {
      * @return void
      */
     public function firePostRenderEvents() {}
-    
+
     /**
      * Fire any pre-render events for the controller
      * @return void
@@ -469,7 +469,7 @@ abstract class modManagerController {
 
     /**
      * Get the page header for the controller.
-     * 
+     *
      * @return string
      */
     public function getHeader() {
@@ -499,10 +499,8 @@ abstract class modManagerController {
         if ($this->loadBaseJavascript) {
             $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
             $externals[] = $managerUrl.'assets/modext/util/utilities.js';
-            $externals[] = $managerUrl.'assets/modext/util/uploaddialog.js';
+            // $externals[] = $managerUrl.'assets/modext/util/uploaddialog.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
-
-
 
             $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
@@ -514,6 +512,8 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
             $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
 
+            $externals[] = $managerUrl.'assets/fileapi/FileAPI.js';
+            $externals[] = $managerUrl.'assets/modext/util/multiuploaddialog.js';
 
             $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.treeloader.js';
@@ -525,7 +525,7 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
             $externals[] = $managerUrl.'assets/modext/widgets/system/modx.panel.filetree.js';
             $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
-            
+
             $siteId = $this->modx->user->getUserToken('mgr');
 
             $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
@@ -541,7 +541,7 @@ abstract class modManagerController {
             $compressJsInGroups = (boolean)$this->modx->getOption('compress_js_groups',null,false);
             $this->modx->setOption('compress_js',$compressJs);
             $this->modx->setOption('compress_js_groups',$compressJsInGroups);
-            
+
             if (!empty($compressJs) && empty($compressJsInGroups)) {
                 if (!empty($externals)) {
                     $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
@@ -606,7 +606,7 @@ abstract class modManagerController {
         }
         return $obj;
     }
-    
+
     /**
      * Grabs a stripped version of modx to prevent caching of JS after upgrades
      *
@@ -713,7 +713,7 @@ abstract class modManagerController {
             }
         }
 
-        
+
         $this->modx->smarty->assign('cssjs',$cssjs);
     }
 
@@ -853,7 +853,7 @@ abstract class modManagerController {
 
     /**
      * Load the working context for this controller.
-     * 
+     *
      * @return modContext|string
      */
     public function loadWorkingContext() {
@@ -950,7 +950,7 @@ abstract class modExtraManagerController extends modManagerController {
      * @return string The string title of the page
      */
     public function getPageTitle() { return ''; }
-    
+
     /**
      * Loads any page-specific CSS/JS for the controller
      * @return void

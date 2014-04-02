@@ -113,8 +113,8 @@ hr {
 }
 
 /* panel setups */
-#modx-leftbar, 
-#modx-content, 
+#modx-leftbar,
+#modx-content,
 #modx-footer {
   position: absolute;
 }
@@ -149,16 +149,16 @@ hr {
 	}
 	.x-tab-panel-bwrap {
 		.x-tab-panel-header {
-			
+
 		}
 	}
-	#modx-tv-tabs {	
+	#modx-tv-tabs {
 		border-left:0;
 		border-right:0;
 	}
 }
 
-#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {	
+#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {
 	.x-tab-strip {
 		margin-top:12px;
 		li {
@@ -195,7 +195,7 @@ hr {
 		td {
 			&:last-of-type {
 				.x-btn {
-					@include linear-gradient(lighten($primaryAction,10%), $primaryAction); 
+					@include linear-gradient(lighten($primaryAction,10%), $primaryAction);
 					border-color:darken($primaryAction,6%);
 					button {
 						color:$white;
@@ -203,7 +203,7 @@ hr {
 				}
 				.x-btn-over {
 					border-color:darken($primaryAction,10%);
-					@include linear-gradient(lighten($primaryAction,16%), $primaryAction); 
+					@include linear-gradient(lighten($primaryAction,16%), $primaryAction);
 				}
 			}
 		}
@@ -1309,7 +1309,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding-top: 4px;
 }
 
-#modx-resource-settings .modx-tv-label, 
+#modx-resource-settings .modx-tv-label,
 #modx-page-settings .modx-tv-label {
   width: 216px;
 }
@@ -1964,4 +1964,20 @@ body.ext-ie7 .x-superboxselect-item {
   overflow: auto;
   padding: 15px;
   white-space: pre;
+}
+
+.upload-error{
+  color: #f00;
+}
+
+.upload-success{
+  color: #090;
+}
+
+.upload-status-text{
+  white-space: normal;
+}
+
+.upload-thumb{
+  float: right;
 }
