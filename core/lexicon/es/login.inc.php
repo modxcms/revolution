@@ -13,8 +13,8 @@ $_lang['login_blocked_ip'] = 'No estás permitido de entrar de tu dirección de 
 $_lang['login_blocked_time'] = 'No estás permitido de entrar en este momento.  Por favor inténtalo nuevamente más tarde.';
 $_lang['login_blocked_too_many_attempts'] = 'Has sido bloqueado debido a demasiados intentos fallidos de entrar.';
 $_lang['login_button'] = 'Entrar';
-$_lang['login_cannot_locate_account'] = 'Esa cuenta no pudo ser localizada.  Revisa el nombre de usuario y vuelve a escribir la contraseña para intentarlo nuevamente.';
-$_lang['login_copyright'] = '&copy; 2005-2011 por el <a href="http://modxcms.com/" target="_blank">equipo de MODX</a>. <strong>MODX</strong>&trade; está licensiado bajo GPLv2 o más reciente.';
+$_lang['login_cannot_locate_account'] = 'El nombre de usuario o la contraseña que ingresaste es incorrecto.  Por favaor revisa el nombre de usuario, ingresa la contraseña e inténtalo nuevamente.';
+$_lang['login_copyright'] = '&copy; 2005-2014 por el <a href="http://modxcms.com/" target="_blank">equipo de MODX</a>. <strong>MODX</strong>&trade; está licensiado bajo GPLv2 o más reciente.';
 $_lang['login_email_label'] = 'Email de la Cuenta:';
 $_lang['login_err_unknown'] = 'Ocurrió un error desconocido mientras se trataba de ingresar.';
 $_lang['login_forget_your_login'] = 'Se te olvidaron tus credenciales?';

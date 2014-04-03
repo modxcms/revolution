@@ -560,6 +560,27 @@ class modParser {
                     'source' => $element->Source ? $element->Source->toArray() : array(),
                 );
             }
+            elseif(!$element) {
+                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => $realname));
+                $element = false;
+                if ($evtOutput != false) {
+                    foreach ((array) $evtOutput as $elm) {
+                        if (!empty($elm) && is_string($elm)) {
+                            $element = $this->modx->newObject($class, array(
+                                'name' => $realname,
+                                'snippet' => $elm
+                            ));
+                        }
+                        elseif ($elm instanceof modElement ) {
+                            $element = $elm;
+                        }
+
+                        if ($element) {
+                            break;
+                        }
+                    }
+                }
+            }
         }
         if ($element instanceof modElement) {
             $element->set('name', $name);

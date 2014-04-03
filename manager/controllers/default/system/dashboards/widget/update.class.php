@@ -30,8 +30,8 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return void
      */
     public function initialize() {
-        if (!empty($this->scriptProperties['id'])) {
-            $this->widget = $this->modx->getObject('modDashboardWidget',$this->scriptProperties['id']);
+        if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
+            $this->widget = $this->modx->getObject('modDashboardWidget', array('id' => $this->scriptProperties['id']));
         }
     }
 
