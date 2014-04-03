@@ -14,6 +14,7 @@ $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'DropDown List Menu';
 $_lang['listbox'] = 'Listbox (Single-Select)';
 $_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
+$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['option'] = 'Radio Options';
 $_lang['checkbox'] = 'Check Box';
 $_lang['image'] = 'Image';
