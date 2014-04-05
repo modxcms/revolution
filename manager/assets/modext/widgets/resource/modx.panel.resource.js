@@ -26,7 +26,6 @@ MODx.panel.Resource = function(config) {
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
-    this.on('beforedestroy',this.beforeDestroy,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
     if (urio) { urio.on('check',this.freezeUri); }
     this.addEvents('tv-reset');
@@ -120,11 +119,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
 
-    ,beforeDestroy: function(e){
+    ,beforeDestroy: function(){
         if (this.rteLoaded && MODx.unloadRTE){
             MODx.unloadRTE(this.rteElements);
             this.rteLoaded = false;
         }
+        MODx.panel.Resource.superclass.beforeDestroy.call(this);
     }
 
     ,beforeSubmit: function(o) {
