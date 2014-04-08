@@ -2,7 +2,6 @@
 /**
  * About Brazilian Portuguese lexicon topic
  *
- * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
@@ -13,6 +12,6 @@ $_lang['credits_mysql'] = 'MODx &eacute; fortalecido por <a href="http://www.mys
 $_lang['credits_php'] = 'MODx &eacute; fortalecido por <a href="http://www.php.net" target="_blank">PHP</a>.';
 $_lang['credits_sencha'] = 'MODx utiliza <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> na sua interface padrão do gerenciador.';
 $_lang['credits_smarty'] = 'MODx utiliza <a href="http://www.smarty.net/" target="_blank">Smarty</a> na sua interface padrão do gerenciador.';
-$_lang['credits_xpdo'] = 'MODx utiliza database ORM <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
-$_lang['help_msg'] = '<p>Voc&ecirc; pode conseguir suporte gratuito ao <a href="http://modxcms.com/forums/" target="_blank">visitar os fóruns MODx</a>. Ou no fórum <a href="http://modxcms.com.br/">MODx Brasil</a>. Al&eacute;m disso tem uma <a href="http://docs.modxcms.com/display/revolution" target="_blank">Documenta&ccedil;&atilde;o crescente do MODx Revolution</a>.</p><p>Para reportar bugs, vá ao <a href="http://bugs.modxcms.com/" target="_blank">MODx\'s JIRA Issue Tracker</a>.</p>';
+$_lang['credits_xpdo'] = 'MODx utiliza database ORM <a href="http://www.xpdo.org/" target="_blank">xPDO</a>. <br> Tradução realizada pelo Embaixador MODX no Brasil Daniel Melo.';
+$_lang['help_msg'] = '<p>Voc&ecirc; pode conseguir suporte gratuito ao <a href="http://modxcms.com/forums/" target="_blank">visitar os fóruns MODx</a>. Al&eacute;m disso tem uma <a href="http://rtfm.modx.com" target="_blank">Documenta&ccedil;&atilde;o crescente do MODx Revolution</a>.</p><p>Para reportar bugs, vá ao <a href="http://bugs.modxcms.com/" target="_blank">MODx\'s JIRA Issue Tracker</a>.</p>';
 $_lang['help_title'] = 'Ajuda';
