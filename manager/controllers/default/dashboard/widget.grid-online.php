@@ -23,8 +23,7 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
         $c->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
         $c->select($this->modx->getSelectColumns('modUser','User','',array('username')));
         $c->sortby('occurred','DESC');
-        $c->groupby($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
-        $c->groupby($this->modx->getSelectColumns('modUser','User','',array('username')));
+        $c->groupby('user');
         $ausers = $this->modx->getIterator('modManagerLog',$c);
 
         $users = array();
