@@ -499,6 +499,7 @@ abstract class modManagerController {
         if ($this->loadBaseJavascript) {
             $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
             $externals[] = $managerUrl.'assets/modext/util/utilities.js';
+            // $externals[] = $managerUrl.'assets/modext/util/uploaddialog.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
 
             $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
@@ -512,7 +513,7 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
 
             $externals[] = $managerUrl.'assets/fileapi/FileAPI.js';
-            $externals[] = $managerUrl.'assets/modext/util/uploaddialog.js';
+            $externals[] = $managerUrl.'assets/modext/util/multiuploaddialog.js';
 
             $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.treeloader.js';
