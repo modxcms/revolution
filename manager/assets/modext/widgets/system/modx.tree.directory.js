@@ -449,15 +449,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,uploadFiles: function(btn,e) {
         if (!this.uploader) {
-            this.uploader = new Ext.ux.UploadDialog.Dialog({
+            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
                     action: 'browser/file/upload'
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
                 }
-                ,reset_on_hide: true
-                ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
             this.uploader.on('show',this.beforeUpload,this);
