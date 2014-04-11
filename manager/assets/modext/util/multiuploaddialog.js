@@ -32,25 +32,20 @@
             return (size <= maxFileSize);
         },
 
-        isFileTypePermitted: function(filename){
-            var ext = api.getFileExtension(filename);
-            return (permittedFileTypes.indexOf(ext.toLowerCase()) > -1);
-        },
-
         formatBytes: function(size, unit){
             unit = unit || FileAPI.MB;
             return Math.round(((size / unit) + 0.00001) * 100) / 100;
         }
     };
 
-    Ext.namespace('Ext.ux.UploadDialog');
+    Ext.namespace('MODx.util.MultiUploadDialog');
 
     /**
      * File upload browse button.
      *
-     * @class Ext.ux.UploadDialog.BrowseButton
+     * @class MODx.util.MultiUploadDialog.BrowseButton
      */
-    Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
+    MODx.util.MultiUploadDialog.BrowseButton = Ext.extend(Ext.Button,{
         input_name : 'file',
         input_file : null,
         original_handler : null,
@@ -61,7 +56,7 @@
         */
         initComponent : function()
         {
-            Ext.ux.UploadDialog.BrowseButton.superclass.initComponent.call(this);
+            MODx.util.MultiUploadDialog.BrowseButton.superclass.initComponent.call(this);
             this.original_handler = this.handler || null;
             this.original_scope = this.scope || window;
             this.handler = null;
@@ -73,7 +68,7 @@
         */
         onRender : function(ct, position)
         {
-            Ext.ux.UploadDialog.BrowseButton.superclass.onRender.call(this, ct, position);
+            MODx.util.MultiUploadDialog.BrowseButton.superclass.onRender.call(this, ct, position);
             this.createInputFile();
         },
 
@@ -155,7 +150,7 @@
         */
         disable : function()
         {
-            Ext.ux.UploadDialog.BrowseButton.superclass.disable.call(this);
+            MODx.util.MultiUploadDialog.BrowseButton.superclass.disable.call(this);
             this.input_file.dom.disabled = true;
         },
 
@@ -164,7 +159,7 @@
         */
         enable : function()
         {
-            Ext.ux.UploadDialog.BrowseButton.superclass.enable.call(this);
+            MODx.util.MultiUploadDialog.BrowseButton.superclass.enable.call(this);
             this.input_file.dom.disabled = false;
         },
 
@@ -178,7 +173,7 @@
             input_file.remove();
             input_file = null;
 
-            Ext.ux.UploadDialog.BrowseButton.superclass.destroy.call(this);
+            MODx.util.MultiUploadDialog.BrowseButton.superclass.destroy.call(this);
         },
 
         /**
@@ -192,10 +187,10 @@
             this.fireEvent('click', this, ev);
         }
     });
-    Ext.reg('upload-browse-btn', Ext.ux.UploadDialog.BrowseButton);
+    Ext.reg('multiupload-browse-btn', MODx.util.MultiUploadDialog.BrowseButton);
 
 
-    Ext.ux.UploadDialog.FilesGrid = function(config) {
+    MODx.util.MultiUploadDialog.FilesGrid = function(config) {
         config = config || {};
         Ext.applyIf(config,{
             height: 300
@@ -270,26 +265,28 @@
                 }];
             }
         });
-        Ext.ux.UploadDialog.FilesGrid.superclass.constructor.call(this,config);
+        MODx.util.MultiUploadDialog.FilesGrid.superclass.constructor.call(this,config);
     };
 
 
-    Ext.extend(Ext.ux.UploadDialog.FilesGrid,MODx.grid.LocalGrid,{
+    Ext.extend(MODx.util.MultiUploadDialog.FilesGrid,MODx.grid.LocalGrid,{
         removeFile: function() {
             var selected = this.getSelectionModel().getSelections();
             this.getStore().remove(selected);
         }
     });
-    Ext.reg('upload-grid-files',Ext.ux.UploadDialog.FilesGrid);
+    Ext.reg('multiupload-grid-files',MODx.util.MultiUploadDialog.FilesGrid);
 
 
 
-    Ext.ux.UploadDialog.Dialog = function(config) {
+    MODx.util.MultiUploadDialog.Dialog = function(config) {
         this.filesGridId = Ext.id();
 
         config = config || {};
         Ext.applyIf(config,{
-            autoHeight: true
+            permitted_extensions: permittedFileTypes
+            ,autoHeight: true
+            ,width: 550
             ,closeAction: 'hide'
             ,layout: 'anchor'
             ,listeners: {
@@ -297,14 +294,14 @@
                 ,'hide': {fn: this.onHide}
             }
             ,items: [{
-                    xtype: 'upload-grid-files'
+                    xtype: 'multiupload-grid-files'
                     ,id: this.filesGridId
                     ,anchor: '100%'
                 }
             ]
             ,buttons: [
                 {
-                    xtype: 'upload-browse-btn'
+                    xtype: 'multiupload-browse-btn'
                     ,text: _('upload.buttons.choose')
                     ,listeners: {
                         'click': {
@@ -371,11 +368,12 @@
 
             ]
         });
-        Ext.ux.UploadDialog.Dialog.superclass.constructor.call(this,config);
+        MODx.util.MultiUploadDialog.Dialog.superclass.constructor.call(this,config);
     };
-    Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window, {
+    Ext.extend(MODx.util.MultiUploadDialog.Dialog, Ext.Window, {
         addFiles: function(files){
             var store = Ext.getCmp(this.filesGridId).getStore();
+            var dialog = this;
             FileAPI.each(files, function(file){
                 var permitted = true;
                 var message = '';
@@ -388,7 +386,7 @@
                     permitted = false;
                 }
 
-                if(!api.isFileTypePermitted(file.name)){
+                if(!dialog.isFileTypePermitted(file.name)){
                     message = _('upload.notpermitted.extension', {
                         'ext': api.getFileExtension(file.name)
                     });
@@ -498,7 +496,6 @@
         },
 
         onShow: function(){
-            console && console.log(this.base_params);
             var store = Ext.getCmp(this.filesGridId).getStore();
             store.removeAll();
 
@@ -523,8 +520,13 @@
         setBaseParams: function(params){
             this.base_params = params;
             this.setTitle(_('upload.title.destination_path', {'path': this.base_params['path']}));
+        },
+
+        isFileTypePermitted: function(filename){
+            var ext = api.getFileExtension(filename);
+            return (this.permitted_extensions.indexOf(ext.toLowerCase()) > -1);
         }
     });
-    Ext.reg('upload-window-dialog', Ext.ux.UploadDialog.Dialog);
+    Ext.reg('multiupload-window-dialog', MODx.util.MultiUploadDialog.Dialog);
 
 })();
