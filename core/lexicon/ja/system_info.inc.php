@@ -44,7 +44,7 @@ $_lang['onlineusers_user'] = 'ユーザー';
 $_lang['onlineusers_userid'] = 'ユーザーID';
 $_lang['optimize_table'] = 'このテーブルを最適化するにはここをクリック';
 $_lang['optimize_table_err'] = 'テーブルの最適化失敗';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> のバージョン';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> のバージョン';
 $_lang['server'] = 'サーバー';
 $_lang['servertime'] = 'サーバー時刻';
 $_lang['serveroffset'] = 'サーバーオフセット';

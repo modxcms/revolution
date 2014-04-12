@@ -42,7 +42,7 @@ $_lang['onlineusers_user'] = 'Gebruiker';
 $_lang['onlineusers_userid'] = 'Gebruikers-ID';
 $_lang['optimize_table'] = 'Klik hier om de tabellen te optimaliseren';
 $_lang['optimize_table_err'] = 'Fout bij optimaliseren tabellen';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> Versie';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> Versie';
 $_lang['server'] = 'Server';
 $_lang['servertime'] = 'Servertijd';
 $_lang['serveroffset'] = 'Server Offset';

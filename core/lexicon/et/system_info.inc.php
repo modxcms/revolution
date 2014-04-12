@@ -38,7 +38,7 @@ $_lang['onlineusers_user'] = 'Kasutaja';
 $_lang['onlineusers_userid'] = 'Kasutaja ID';
 $_lang['optimize_table'] = 'Klikkige siin, et optimeerida seda tabelit';
 $_lang['optimize_table_err'] = 'Viga tabeli optimeerimisel';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> Versioon';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> Versioon';
 $_lang['server'] = 'Server';
 $_lang['servertime'] = 'Serveri Aeg';
 $_lang['serveroffset'] = 'Serveri Nihe';
