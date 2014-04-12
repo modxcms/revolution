@@ -111,8 +111,8 @@ $_lang['optimize_table'] = 'Klikněte pro optimalizování tabulky';
 // $_lang['optimize_table_err'] = 'Error optimizing table';
 $_lang['optimize_table_err'] = 'Chyba při optimalizaci tabulky';
 
-// $_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> Version';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> verze';
+// $_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> Version';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> verze';
 
 // $_lang['server'] = 'Server';
 $_lang['server'] = 'Server';
