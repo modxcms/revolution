@@ -1965,3 +1965,21 @@ body.ext-ie7 .x-superboxselect-item {
   padding: 15px;
   white-space: pre;
 }
+.window-no-padding {
+  .x-panel-mc {
+    padding: 0 !important;
+  }
+
+  .x-panel-ml {
+    padding: 0 !important;
+  }
+
+  .x-panel-mr {
+    padding: 0 !important;
+  }
+
+  .x-tab-panel-noborder {
+    margin: 0 !important;
+  }
+}
+
