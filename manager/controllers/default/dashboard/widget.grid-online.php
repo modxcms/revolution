@@ -12,18 +12,16 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
         $timetocheck = (time()-(60*20));
 
         $c = $this->modx->newQuery('modManagerLog');
-        $c->innerJoin('modUser','User');
-        $c->where(array(
-            'occurred:>' => strftime('%Y-%m-%d, %H:%M:%S',$timetocheck),
-        ));
-        $c->where(
-            "occurred = (SELECT MAX(`occurred`)
-                    FROM {$this->modx->getTableName('modManagerLog')} AS log2
-                    WHERE `log2`.`user` = `modManagerLog`.`user`
-                    GROUP BY `user`)"
-        );
-        $data['total'] = $this->modx->getCount('modManagerLog',$c);
-
+        $c->setClassAlias('lastlog');
+        $c->innerJoin('modManagerLog','modManagerLog', array('`lastlog`.`id` = `modManagerLog`.`id`'));
+        $c->leftJoin('modUser','User');
+            $tmp = $this->modx->newQuery('modManagerLog');
+            $tmp->setClassAlias('tmp');
+            $tmp->select(array('MAX(`id`) AS `id`', '`user`'));
+            $tmp->where(array('tmp.occurred:>' => strftime('%Y-%m-%d, %H:%M:%S',$timetocheck)));
+            $tmp->groupby('user');
+            $tmp->prepare();
+            $c->query['from']['tables'][0]['table'] = '('.$tmp->toSQL().')';
         $c->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
         $c->select($this->modx->getSelectColumns('modUser','User','',array('username')));
         $c->sortby('occurred','DESC');
@@ -38,6 +36,7 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
             $userArray['currentAction'] = $user->get('action');
             $userArray['occurred'] = strftime('%b %d, %Y - %I:%M %p',strtotime($user->get('occurred'))+floatval($this->modx->getOption('server_offset_time',null,0)) * 3600);
             $userArray['class'] = $alt ? 'alt' : '';
+            if (!$userArray['username']) {$userArray['username'] = 'anonymous';}
             $users[] = $this->getFileChunk('dashboard/onlineusers.row.tpl',$userArray);
         }
         
