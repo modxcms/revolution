@@ -49,7 +49,7 @@ class modBrowserPackageUploadProcessor extends modProcessor {
             return $this->failure("1 This file does not appear to be a transport package"); //@TODO Lexiconize
 
         // Check valid name of file
-        if(preg_match("/.+\\.transport\\.zip$/",$file['name'])===false)
+        if(!preg_match("/.+\\.transport\\.zip$/i",$file['name']))
             return $this->failure("2 This file [{$file['name']}] does not appear to be a transport package"); //@TODO Lexiconize
 
         // Return response
