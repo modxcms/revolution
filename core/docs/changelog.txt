@@ -2361,7 +2361,7 @@ MODX Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-0
 - [#MODX-1029] Fixed incorrect URL references in browser controller template
 - Updated version info for beta2 release
 - [#MODX-942] Made sure all get-based processors use REQUEST, not POST
-- [#MODX-937] Added 'Download Extras' button to package grid which loads modxcms.com provider
+- [#MODX-937] Added 'Download Apps' button to package grid which loads modxcms.com provider
 - login processor does not return site_url in response by default.
 - modResponse->outputContent() allows programmatic options to configure max_parser_iterations.
 - Updated xPDO to revision 341: package uninstall preserves and restores file resolver data
