@@ -54,6 +54,7 @@ MODx.grid.AccessPolicy = function(config) {
         ,fields: ['id','name','description','class','data','parent','template','template_name','active_permissions','total_permissions','active_of','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/access/policy/updatefromgrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{

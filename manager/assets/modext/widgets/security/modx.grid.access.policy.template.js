@@ -54,6 +54,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         ,fields: ['id','name','description','template_group','template_group_name','total_permissions','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/access/policy/template/updatefromgrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{

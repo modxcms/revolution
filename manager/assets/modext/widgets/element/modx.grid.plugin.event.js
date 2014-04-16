@@ -185,7 +185,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     }
     ,beforeSubmit: function(vs) {
         this.fp.getForm().baseParams = {
-            action: 'associate'
+            action: 'element/plugin/event/associate'
             ,plugins: Ext.getCmp('modx-grid-'+this.ident+'-assoc').encode()
         };
     }

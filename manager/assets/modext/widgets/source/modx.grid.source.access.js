@@ -92,7 +92,7 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
             ,text: _('source_access_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeAcl'
+                action: 'security/access/removeAcl'
                 ,id: this.menu.record.id
                 ,type: this.config.type || 'modAccessMediaSource'
             }
