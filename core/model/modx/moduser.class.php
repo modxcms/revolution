@@ -76,7 +76,7 @@ class modUser extends modPrincipal {
 
     /**
      * Overrides xPDOObject::save to fire modX-specific events
-     * 
+     *
      * {@inheritDoc}
      */
     public function save($cacheFlag = false) {
@@ -91,7 +91,7 @@ class modUser extends modPrincipal {
         }
 
         $saved = parent :: save($cacheFlag);
-        
+
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserSave',array(
                 'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
@@ -650,9 +650,11 @@ class modUser extends modPrincipal {
             'user_group' => $userGroup->get('id'),
         ));
         if (empty($member)) {
+            $rank = count($this->getMany('UserGroupMembers'));
             $member = $this->xpdo->newObject('modUserGroupMember');
             $member->set('member',$this->get('id'));
             $member->set('user_group',$userGroup->get('id'));
+            $member->set('rank', $rank);
             if (!empty($role)) {
                 $member->set('role',$role->get('id'));
             }
@@ -768,7 +770,7 @@ class modUser extends modPrincipal {
 
         $this->xpdo->getService('mail', 'mail.modPHPMailer');
         if (!$this->xpdo->mail) return false;
-        
+
         $this->xpdo->mail->set(modMail::MAIL_BODY, $message);
         $this->xpdo->mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from',$options,$this->xpdo->getOption('emailsender')));
         $this->xpdo->mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName',$options,$this->xpdo->getOption('site_name')));
