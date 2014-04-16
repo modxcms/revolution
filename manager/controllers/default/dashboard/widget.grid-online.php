@@ -12,18 +12,19 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
         $timetocheck = (time()-(60*20));
 
         $c = $this->modx->newQuery('modManagerLog');
+        $c->setClassAlias('lastlog');
+        $c->innerJoin('modManagerLog','modManagerLog', array('`lastlog`.`id` = `modManagerLog`.`id`'));
         $c->leftJoin('modUser','User');
             $tmp = $this->modx->newQuery('modManagerLog');
             $tmp->setClassAlias('tmp');
-            $tmp->select($this->modx->getSelectColumns('modManagerLog','tmp'));
+            $tmp->select(array('MAX(`id`) AS `id`', '`user`'));
             $tmp->where(array('tmp.occurred:>' => strftime('%Y-%m-%d, %H:%M:%S',$timetocheck)));
-            $tmp->sortby('occurred','DESC');
+            $tmp->groupby('user');
             $tmp->prepare();
             $c->query['from']['tables'][0]['table'] = '('.$tmp->toSQL().')';
         $c->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
         $c->select($this->modx->getSelectColumns('modUser','User','',array('username')));
         $c->sortby('occurred','DESC');
-        $c->groupby('user');
         $ausers = $this->modx->getIterator('modManagerLog',$c);
 
         $users = array();
