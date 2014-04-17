@@ -120,3 +120,4 @@ $_lang['upf_upload_err'] = 'Upload-Fehler.';
 $_lang['upf_uploading'] = 'Lade hoch...';
 $_lang['upf_uploading_desc'] = 'Lade hoch: {0} von {1} Dateien übertragen.';
 $_lang['upload_files'] = 'Dateien hochladen';
+$_lang['no_file_err'] = 'Es wurde keine Datei hochgeladen.';
