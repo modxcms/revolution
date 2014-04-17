@@ -274,7 +274,7 @@ class modTemplateVar extends modElement {
         }
 
         /* run prepareOutput to allow for custom overriding */
-        $value = $this->prepareOutput($value);
+        $value = $this->prepareOutput($value, $resourceId);
 
         /* find the render */
         $outputRenderPaths = $this->getRenderDirectories('OnTVOutputRenderList','output');
@@ -284,14 +284,17 @@ class modTemplateVar extends modElement {
     /**
      * Prepare the output in this method to allow processing of this without depending on the actual render of the output
      * @param string $value
+     * @param integer $resourceId The id of the resource; 0 defaults to the
+     * current resource.
      * @return string
      */
-    public function prepareOutput($value) {
+    public function prepareOutput($value, $resourceId= 0) {
         /* Allow custom source types to manipulate the output URL for image/file tvs */
         $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types',null,'image,file');
         $mTypes = explode(',',$mTypes);
         if (!empty($value) && in_array($this->get('type'),$mTypes)) {
-            $sourceCache = $this->getSourceCache($this->xpdo->context->get('key'));
+            $context = !empty($resourceId) ? $this->xpdo->getObject('modResource', $resourceId)->get('context_key') : $this->xpdo->context->get('key');
+            $sourceCache = $this->getSourceCache($context);
             if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
                 $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
                 $coreSourceClasses = explode(',',$coreSourceClasses);
