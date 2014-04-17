@@ -442,6 +442,10 @@ class modResourceGetNodesProcessor extends modProcessor {
         }
 
         $idNote = $this->modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$resource->id.')</span>' : '';
+        $sessionEnabled = '';
+        if ($ctxSetting = $this->modx->getObject('modContextSetting', array('context_key' => $resource->get('context_key'), 'key' => 'session_enabled'))) {
+            $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
+        }
         $itemArray = array(
             'text' => strip_tags($resource->$nodeField).$idNote,
             'id' => $resource->context_key . '_'.$resource->id,
@@ -454,7 +458,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'ctx' => $resource->context_key,
             'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
-            'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), '', 'full') : '',
+            'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), $sessionEnabled, 'full', array('xhtml_urls' => false)) : '',
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? 'resource/update' : 'resource/data').'&id='.$resource->id : '',
             'allowDrop' => true,
         );
