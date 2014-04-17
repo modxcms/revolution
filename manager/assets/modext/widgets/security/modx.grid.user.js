@@ -2,7 +2,7 @@ MODx.panel.Users = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-users'
-		,cls: 'container'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -14,11 +14,11 @@ MODx.panel.Users = function(config) {
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('user_management_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
+                ,bodyCssClass: 'panel-desc'
                 ,border: false
             },{
                 xtype: 'modx-grid-user'
-				,cls:'main-wrapper'
+                ,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]
@@ -64,7 +64,9 @@ MODx.grid.User = function(config) {
             ,dataIndex: 'username'
             ,width: 150
             ,sortable: true
-            ,renderer: Ext.util.Format.htmlEncode
+            ,renderer: function(value, p, record){
+                return String.format('<a href="?a=security/user/update&id={0}" title="{1}" class="x-grid-link">{2}</a>', record.id, _('user_update'), Ext.util.Format.htmlEncode( value ) );
+            }
         },{
             header: _('user_full_name')
             ,dataIndex: 'fullname'
@@ -276,7 +278,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
                 ,id: this.menu.record.id
             }
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
@@ -289,7 +291,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
                 ,id: this.menu.record.id
             }
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
@@ -322,12 +324,12 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         return true;
     }
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'security/user/getList'
-    	};
+        };
         Ext.getCmp('modx-user-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         this.refresh();
     }
 });
