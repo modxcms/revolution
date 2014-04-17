@@ -187,7 +187,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'pathRelative' => $bases['pathRelative'].$fileName,
                     'directory' => $bases['path'],
                     'url' => $bases['url'].$url,
-                    'urlAbsolute' => $bases['urlAbsolute'].ltrim($url,'/'),
+                    'urlAbsolute' => $bases['urlAbsoluteWithPath'].ltrim($url,'/'),
                     'file' => $encFile,
                     'menu' => array(),
                 );
