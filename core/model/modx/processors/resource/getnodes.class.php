@@ -415,6 +415,8 @@ class modResourceGetNodesProcessor extends modProcessor {
         }
         else $iconCls[] = $defaultIcon;
 
+        $iconCls[] = 'icon-' . $resource->get('context_key') . '-' . $resource->get('id');
+        $iconCls[] = 'icon-parent-' . $resource->get('context_key') . '-'  . $resource->get('parent');
 
         // Modifiers to indicate resource _state_
         if ($hasChildren){
