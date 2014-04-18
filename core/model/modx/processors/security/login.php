@@ -100,13 +100,13 @@ if ($user->Profile->get('blockeduntil') != 0 && $user->Profile->get('blockedunti
     $user->Profile->save();
 }
 if ($user->Profile->get('blocked')) {
-    return $modx->error->failure($modx->lexicon('login_blocked_admin'));
+	return $modx->error->failure($modx->lexicon('login_blocked_admin'));
 }
-if ($user->Profile->get('blockeduntil') > time()) {
-    return $modx->error->failure($modx->lexicon('login_blocked_error'));
+if ($user->Profile->get('blocked') && $user->Profile->get('blockeduntil') > time()) {
+	return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
-if ($user->Profile->get('blockedafter') > 0 && $user->Profile->get('blockedafter') < time()) {
-    return $modx->error->failure($modx->lexicon('login_blocked_error'));
+if ($user->Profile->get('blocked') && $user->Profile->get('blockedafter') > 0 && $user->Profile->get('blockedafter') < time()) {
+	return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
 
 if (isset ($allowed_ip) && $allowed_ip) {
