@@ -352,6 +352,8 @@ class modResourceGetNodesProcessor extends modProcessor {
         $class = array();
         $class[] = 'icon-'.strtolower(str_replace('mod','',$resource->get('class_key')));
         $class[] = $resource->isfolder ? 'icon-folder' : 'x-tree-node-leaf icon-resource';
+        $class[] = 'icon-' . $resource->get('context_key') . '-' . $resource->get('id');
+        $class[] = 'icon-parent-' . $resource->get('context_key') . '-'  . $resource->get('parent');
         if (!$resource->get('published')) $class[] = 'unpublished';
         if ($resource->get('deleted')) $class[] = 'deleted';
         if ($resource->get('hidemenu')) $class[] = 'hidemenu';
