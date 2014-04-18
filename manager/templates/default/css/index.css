@@ -148,7 +148,6 @@ input::-moz-focus-inner {
 
 #modx-content {
     padding: 0 0 0 15px;
-    height: 100%;
     overflow: auto;
 }
 
@@ -574,7 +573,6 @@ table.classy tr.odd td {
 #modx-topnav-div {
     background: transparent;
     margin-left: 8px;
-    width: 100%;
 }
 #modx-topnav {
     width: 100%;
