@@ -613,7 +613,7 @@ class modDirectory extends modFileSystemResource {
      * @param array $options Options for iterating the directory.
      *      boolean recursive If also subfolders should be scanned for files
      *      boolean ignorehidden If folders and files starting with a dot . (hidden files/folders in unix envirionments) should be ignored, defaults to true
-     *      boolean sort If the resulting filelist array should be alphabeticall sorted (could also be removed and let the user do this with the result himself)
+     *      boolean sort If the resulting filelist array should be sorted with the specified flag like SORT_ASC, SORT_DESC, SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC
      *      string extensions Comma separated list of file extensions to filter files by
      *      
      * @return array of filepaths
@@ -627,16 +627,17 @@ class modDirectory extends modFileSystemResource {
         ), $options);
 
         $files = array();
+        $extensions = explode(',', $options['extensions']);
         
         if ($options['recursive']) {
-            $iterator = new RecursiveDirectoryIterator($this->path, FilesystemIterator::SKIP_DOTS);
+            $iterator = new RecursiveDirectoryIterator($this->path);
 
             foreach (new RecursiveIteratorIterator($iterator) as $file) {
                 $dirname = explode(DIRECTORY_SEPARATOR, $file->getPath()); // PHP Strict warning if we put end() around here
                 
-                if (($options['ignorehidden'] ? (substr($file->getFilename(), 0, 1) !== '.' && substr(end($dirname), 0, 1) !== '.') : true)) {
+                if (($options['ignorehidden'] ? (substr($file->getFilename(), 0, 1) !== '.' && substr(end($dirname), 0, 1) !== '.') : true) && $file->isFile()) {
                     if (!empty($options['extensions'])) {
-                        if (in_array($file->getExtension(), explode(',', $options['extensions']))) {
+                        if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
                             $files[] = $file->getPathname();
                         }
                     } else {
@@ -645,13 +646,12 @@ class modDirectory extends modFileSystemResource {
                 }
             }
         } else {
-            $iterator = new FilesystemIterator($this->path, FilesystemIterator::SKIP_DOTS);
+            $iterator = new DirectoryIterator($this->path);
 
             foreach ($iterator as $file) {
-
-                if (($options['ignorehidden'] ? substr($file->getFilename(), 0, 1) !== '.' : true)) {
+                if (($options['ignorehidden'] ? substr($file->getFilename(), 0, 1) !== '.' : true) && $file->isFile()) {
                     if (!empty($options['extensions'])) {
-                        if (in_array($file->getExtension(), explode(',', $options['extensions'])) && $file->isFile()) {
+                        if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
                             $files[] = $file->getPathname();
                         }
                     } else {
@@ -663,8 +663,8 @@ class modDirectory extends modFileSystemResource {
             }
         }
 
-        if ($options['sort']) {
-            array_multisort($files, SORT_ASC, $files);
+        if (!empty($options['sort'])) {
+            array_multisort($files, $options['sort'], $files);
         }
 
         return $files;
