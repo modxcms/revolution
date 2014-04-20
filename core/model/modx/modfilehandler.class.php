@@ -597,8 +597,8 @@ class modDirectory extends modFileSystemResource {
     }
 
     /**
-     * Iterates (optionally recursively) over a modDirectory object and returns an array of all containing files,
-     * optionally filtered by file extensions and alphabetically sorted
+     * Iterates over a modDirectory object and returns an array of all containing files,
+     * optionally runs recursive, filters by file extension(s) and sorts the resulting list according to a specified sort flag
      *
      * @param array $options Options for iterating the directory.
      *      boolean recursive If also subfolders should be scanned for files
