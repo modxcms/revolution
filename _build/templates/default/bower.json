@@ -13,9 +13,9 @@
   "bugs": {
     "url": "http://bugs.modx.com/projects/revo"
   },
-  "dependencies": {
+  "devDependencies": {
     "bourbon": "*",
-    "font-awesome": "~3.2.1"
+    "font-awesome": "~4.0.3"
   },
   "exportsOverride": {
     "bourbon": {
@@ -23,7 +23,7 @@
     },
     "font-awesome": {
       "scss": ["scss"],
-      "font": ["font"]
+      "fonts": ["fonts"]
     }
   }
 }
