@@ -74,7 +74,7 @@
         position:relative;
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$level-up;
+          content:$fa-var-level-up;
           top:1px;
           bottom:auto;
         }
@@ -86,7 +86,7 @@
         position:relative;
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$level-down;
+          content:$fa-var-level-down;
           top:1px;
           bottom:auto;
         }
@@ -98,7 +98,7 @@
         position:relative;
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$refresh;
+          content:$fa-var-refresh;
           top:1px;
           bottom:auto;
         }
@@ -227,7 +227,7 @@
   position:relative;
   &:before {
     @extend %pseudo-font;
-    content:$caret-down;
+    content:$fa-var-caret-down;
     position:absolute;
     top:4px;
     right:0;
@@ -409,19 +409,29 @@
 
 /* resource tree toolbar icons */
 .tree-new-resource > em > button:before {
-  @include icon($file-alt);
+  //@include icon($file-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file-o;
 }
 .tree-new-weblink > em > button:before {
-  @include icon($link);
+  //@include icon($link);
+  @extend %pseudo-font;
+  content:$fa-var-link;
 }
 .tree-new-symlink > em > button:before {
-  @include icon($copy);
+  //@include icon($copy);
+  @extend %pseudo-font;
+  content:$fa-var-files-o;
 }
 .tree-new-static-resource > em > button:before {
-  @include icon($file-text-alt);
+  //@include icon($file-text-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file-text-o;
 }
 .tree-trash > em > button:before {
-  @include icon($trash);
+  //@include icon($trash);
+  @extend %pseudo-font;
+  content:$fa-var-trash-o;
 }
   /* alignment overrides */
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
@@ -435,22 +445,34 @@
 
 /* element tree toolbar */
 .tree-new-template > em > button:before {
-  @include icon($columns);
+  //@include icon($columns);
+  @extend %pseudo-font;
+  content:$fa-var-columns;
 }
 .tree-new-tv > em > button:before {
-  @include icon($list-alt);
+  //@include icon($list-alt);
+  @extend %pseudo-font;
+  content:$fa-var-list-alt;
 }
 .tree-new-chunk > em > button:before {
-  @include icon($th-large);
+  //@include icon($th-large);
+  @extend %pseudo-font;
+  content:$fa-var-th-large;
 }
 .tree-new-snippet > em > button:before {
-  @include icon($code);
+  //@include icon($code);
+  @extend %pseudo-font;
+  content:$fa-var-code;
 }
 .tree-new-plugin > em > button:before {
-  @include icon($cogs);
+  //@include icon($cogs);
+  @extend %pseudo-font;
+  content:$fa-var-cogs;
 }
 .tree-new-category > em > button:before {
-  @include icon($folder-close);
+  //@include icon($folder-close);
+  @extend %pseudo-font;
+  content:$fa-var-folder;
 }
 
 
