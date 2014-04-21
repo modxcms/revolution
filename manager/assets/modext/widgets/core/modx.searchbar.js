@@ -11,7 +11,7 @@ MODx.SearchBar = function(config) {
         ,typeAhead: true
         //,autoSelect: false
         ,listAlign: [ 'tl-bl?', [0,0] ]
-        ,triggerConfig: {tag: 'span', cls: 'x-form-trigger icon-large icon-search'}
+        ,triggerConfig: {tag: 'span', cls: 'x-form-trigger icon icon-large icon-search'}
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: 'action'
