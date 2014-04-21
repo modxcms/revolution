@@ -119,7 +119,7 @@ abstract class ResourceManagerController extends modManagerController {
     public function setParent() {
         /* handle default parent */
         $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
-        $parentId = !empty($scriptProperties['parent']) ? $scriptProperties['parent'] : $this->resource->get('parent');
+        $parentId = !empty($this->scriptProperties['parent']) ? $this->scriptProperties['parent'] : $this->resource->get('parent');
         if ($parentId == 0) {
             $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
         } else {
@@ -463,7 +463,7 @@ abstract class ResourceManagerController extends modManagerController {
         foreach ($resourceGroups['collection'] as $resourceGroup) {
             $access = (boolean) $resourceGroup->get('access');
             if (!empty($parent) && $this->resource->get('id') == 0) {
-                $resourceGroupArray['access'] = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
+                $access = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
             }
             $resourceGroupArray = array(
                 $resourceGroup->get('id'),
