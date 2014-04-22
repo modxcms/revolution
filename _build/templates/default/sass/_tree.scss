@@ -54,7 +54,6 @@
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  @include icon($caret-right);
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
@@ -63,32 +62,40 @@
 }
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  @include icon($caret-down);
+  @extend %pseudo-font;
+  content:$fa-var-caret-down;
   padding-left: 4px;
   width: 12px;
 }
 
 /* icons for the various tree elements */
 .tree-context:before {
-  @include icon($globe);
+  @extend %pseudo-font;
+  content:$fa-var-globe;
 }
 .x-tree-node-expanded .tree-folder:before {
-  @include icon($folder-open);
+  @extend %pseudo-font;
+  content:$fa-var-folder-open;
 }
 .x-tree-node-collapsed .tree-folder:before {
-  @include icon($folder-close);
+  @extend %pseudo-font;
+  content:$fa-var-folder;
 }
 .tree-resource:before {
-  @include icon($file-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file-o;
 }
 .tree-static-resource:before {
-  @include icon($file-text-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file-text-o;
 }
 .tree-weblink:before {
-  @include icon($link);
+  @extend %pseudo-font;
+  content:$fa-var-link;
 }
 .tree-symlink:before {
-  @include icon($copy);
+  @extend %pseudo-font;
+  content:$fa-var-files-o;
 }
 
 /* tree states */
@@ -397,7 +404,8 @@
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  @include icon($caret-right);
+  @extend %pseudo-font;
+  content:$fa-var-caret-right;
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
@@ -406,32 +414,40 @@
 }
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  @include icon($caret-down);
+  @extend %pseudo-font;
+  content:$fa-var-caret-down;
   padding-left: 4px;
   width: 12px;
 }
 
 /* icons for the various tree elements */
 .tree-context:before {
-  @include icon($globe);
+  @extend %pseudo-font;
+  content:$fa-var-globe;
 }
 .x-tree-node-expanded .tree-folder:before {
-  @include icon($folder-open);
+  @extend %pseudo-font;
+  content:$fa-var-folder-open;
 }
 .x-tree-node-collapsed .tree-folder:before {
-  @include icon($folder-close);
+  @extend %pseudo-font;
+  content:$fa-var-folder;
 }
 .tree-resource:before {
-  @include icon($file-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file-o;
 }
 .tree-static-resource:before {
-  @include icon($file-text-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file-text-o;
 }
 .tree-weblink:before {
-  @include icon($link);
+  @extend %pseudo-font;
+  content:$fa-var-link;
 }
 .tree-symlink:before {
-  @include icon($copy);
+  @extend %pseudo-font;
+  content:$fa-var-files-o;
 }
 
 .x-tree-node {
