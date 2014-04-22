@@ -281,12 +281,14 @@ class modUser extends modPrincipal {
      * @access public
      * @param string $newPassword Password to set.
      * @param string $oldPassword Current password for validation.
+     * @param boolean $validateOldPassword Current password validation required flag.
      * @return boolean Indicates if password was successfully changed.
      * @todo Add support for configurable password encoding.
      */
-    public function changePassword($newPassword, $oldPassword) {
+    public function changePassword($newPassword, $oldPassword, $validateOldPassword = true) {
         $changed= false;
-        if ($this->passwordMatches($oldPassword)) {
+        $changePassword = $validateOldPassword ? $this->passwordMatches($oldPassword) : true;
+        if ($changePassword) {
             if (!empty ($newPassword)) {
                 $this->set('password', $newPassword);
                 $changed= $this->save();
