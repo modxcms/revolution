@@ -19,7 +19,7 @@
   },
   "exportsOverride": {
     "bourbon": {
-      "": "app/assets/stylesheets/"
+      "": "dist/"
     },
     "font-awesome": {
       "scss": ["scss"],
