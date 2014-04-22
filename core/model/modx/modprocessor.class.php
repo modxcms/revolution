@@ -675,13 +675,13 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
     public function beforeSet() { return !$this->hasErrors(); }
 
     /**
-     * Override in your derivative class to do functionality after save() is run
+     * Override in your derivative class to do functionality before save() is run
      * @return boolean
      */
     public function beforeSave() { return !$this->hasErrors(); }
 
     /**
-     * Override in your derivative class to do functionality before save() is run
+     * Override in your derivative class to do functionality after save() is run
      * @return boolean
      */
     public function afterSave() { return true; }
