@@ -86,7 +86,7 @@ class modRestCurlClient extends modRestClient {
                         break;
                     case 'string':
                         curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-                        $string = implode('&', array_map(function ($v, $k) { return $k . '=' . $v; }, $params, array_keys($params)));
+                        $string = implode('&', array_map(create_function('$v, $k', 'return $k . "=" . $v;'), $params, array_keys($params)));
                         curl_setopt($ch,CURLOPT_POSTFIELDS,$string);
                         break;
                     default:
