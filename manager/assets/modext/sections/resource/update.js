@@ -126,7 +126,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             });
             btns.push('-');
         }
-        console.log(cfg);
         if (cfg.canDuplicate == 1 && (cfg.record.parent !== 0 || cfg.canCreateRoot == 1)) {
             btns.push({
                 text: _('duplicate')
