@@ -201,6 +201,12 @@ MODx.panel.Plugin = function(config) {
                             ,showNone: true
                             ,streamsOnly: true
                         }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-plugin-static-source'
@@ -288,6 +294,17 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-plugin-static-file')
+            ,source = Ext.getCmp('modx-plugin-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-plugin-event');
         Ext.apply(o.form.baseParams,{
