@@ -321,7 +321,7 @@ MODx.combo.Category = function(config) {
     MODx.combo.Category.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.Category,MODx.combo.ComboBox,{
-    _onblur: function(t,e) { 
+    _onblur: function(t,e) {
         var v = this.getRawValue();
         this.setRawValue(v);
         this.setValue(v,true);
@@ -516,7 +516,7 @@ MODx.combo.Object = function(config) {
         name: 'object'
         ,hiddenName: 'object'
         ,url: MODx.config.connector_url
-        ,baseParams: { 
+        ,baseParams: {
             action: 'workspace/builder/getAssocObject'
             ,class_key: 'modResource'
         }
@@ -567,15 +567,16 @@ MODx.combo.Browser = function(config) {
 };
 Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
     browser: null
-    
+
     ,onTriggerClick : function(btn){
         if (this.disabled){
             return false;
         }
-        
-        if (this.browser === null) {
+
+        //if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
+                ,closeAction: 'close'
                 ,id: Ext.id()
                 ,multiple: true
                 ,source: this.config.source || 1
@@ -593,11 +594,11 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                     },scope:this}
                 }
             });
-        }
+        //}
         this.browser.show(btn);
         return true;
     }
-    
+
     ,onDestroy: function(){
         MODx.combo.Browser.superclass.onDestroy.call(this);
     }
@@ -654,7 +655,7 @@ MODx.ChangeParentField = function(config) {
         ,editable: false
         ,readOnly: false
         ,formpanel: 'modx-panel-resource'
-    });    
+    });
     MODx.ChangeParentField.superclass.constructor.call(this,config);
     this.config = config;
     this.on('click',this.onTriggerClick,this);
@@ -668,18 +669,18 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         var t = Ext.getCmp('modx-resource-tree');
         if (!t) return;
         p.d = p.d || p.v;
-        
+
         t.removeListener('click',this.handleChangeParent,this);
         t.on('click',t._handleClick,t);
         t.disableHref = false;
 
         MODx.debug('Setting parent to: '+p.v);
-        
+
         Ext.getCmp('modx-resource-parent-hidden').setValue(p.v);
-        
+
         this.setValue(p.d);
         this.oldValue = false;
-        
+
         Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
     }
     ,onTriggerClick: function() {
@@ -731,7 +732,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.disableHref = true;
 
         return true;}
-        
+
     ,handleChangeParent: function(node,e) {
         var t = Ext.getCmp('modx-resource-tree');
         if (!t) { return false; }
@@ -739,7 +740,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
 
         var id = node.id.split('_'); id = id[1];
         if (id == MODx.request.id) {
-            MODx.msg.alert('',_('resource_err_own_parent'));            
+            MODx.msg.alert('',_('resource_err_own_parent'));
             return false;
         }
 
