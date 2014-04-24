@@ -92,12 +92,55 @@ MODx.tree.Directory = function(config) {
         }
     },this);
     this._init();
+    this.on('afterrender', this.showRefresh, this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     windows: {}
 
+    /**
+     * Create a refresh button on the root node
+     *
+     * @see MODx.Tree.Tree#_onAppend
+     */
+    ,showRefresh: function() {
+        var node = this.getRootNode()
+            ,inlineButtonsLang = this.getInlineButtonsLang(node)
+            ,elId = node.ui.elNode.id+ '_tools'
+            ,el = document.createElement('div');
+
+        el.id = elId;
+        el.className = 'modx-tree-node-tool-ct';
+        node.ui.elNode.appendChild(el);
+
+        MODx.load({
+            xtype: 'modx-button'
+            ,text: ''
+            ,scope: this
+            ,tooltip: new Ext.ToolTip({
+                title: inlineButtonsLang.refresh
+                ,target: this
+            })
+            ,node: node
+            ,handler: function(btn,evt){
+                evt.stopPropagation(evt);
+                node.reload();
+            }
+            ,iconCls: 'icon-refresh'
+            ,renderTo: elId
+            ,listeners: {
+                mouseover: function(button, e){
+                    button.tooltip.onTargetOver(e);
+                }
+                ,mouseout: function(button, e){
+                    button.tooltip.onTargetOut(e);
+                }
+            }
+        });
+    }
+
     ,addSourceToolbar: function() {
+        // @todo make sure it's not used & is removable
         this.sourceCombo = new MODx.combo.MediaSource({
             value: this.config.source || MODx.config.default_media_source
             ,listeners: {
