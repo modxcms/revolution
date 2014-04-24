@@ -69,6 +69,10 @@ class SystemFileEditManagerController extends modManagerController {
         $placeholders['fa'] = $this->fileRecord;
         $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();
 
+        $this->fileRecord['basename'] = htmlspecialchars($this->fileRecord['basename']);
+        $this->fileRecord['name'] = htmlspecialchars($this->fileRecord['name']);
+        $this->fileRecord['path'] = htmlspecialchars($this->fileRecord['path']);
+
         return $placeholders;
     }
 
