@@ -382,7 +382,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'leaf' => 1,
                 'name' => $name,
                 'cls' => implode(' ', $class),
-                'iconCls' => $element->get('static') ? 'icon-file-text-o' : 'icon-file-o',
+                'iconCls' => 'icon ' . ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o'),
                 'page' => '?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
                 'type' => $elementIdentifier,
                 'elementType' => $elementType,
