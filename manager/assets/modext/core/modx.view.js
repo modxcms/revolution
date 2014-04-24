@@ -60,7 +60,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e === 'yes') {
                                 var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = 'index.php?id='+id+'&'+a;
+                                var s = '?id='+id+'&'+a;
                                 if (w === null) {
                                     location.href = s;
                                 } else { w.dom.src = s; }
@@ -68,7 +68,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                         },this);
                     } else {
                         var a = Ext.urlEncode(o.params);
-                        var s = 'index.php?id='+id+'&'+a;
+                        var s = '?id='+id+'&'+a;
                         if (w === null) {
                             location.href = s;
                         } else { w.dom.src = s; }

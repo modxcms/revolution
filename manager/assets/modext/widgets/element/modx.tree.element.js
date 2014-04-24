@@ -25,7 +25,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-template'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
-                this.redirect('index.php?a=element/template/create');
+                this.redirect('?a=element/template/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
@@ -33,7 +33,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-tv'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
-                this.redirect('index.php?a=element/tv/create');
+                this.redirect('?a=element/tv/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
@@ -41,7 +41,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-chunk'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
-                this.redirect('index.php?a=element/chunk/create');
+                this.redirect('?a=element/chunk/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
@@ -49,7 +49,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-snippet'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
-                this.redirect('index.php?a=element/snippet/create');
+                this.redirect('?a=element/snippet/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
@@ -57,7 +57,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-plugin'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
-                this.redirect('index.php?a=element/plugin/create');
+                this.redirect('?a=element/plugin/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
@@ -262,7 +262,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var type = oar[0] == 'type' ? oar[1] : oar[0];
         var cat_id = oar[0] == 'type' ? 0 : (oar[1] == 'category' ? oar[2] : oar[3]);
         var a = 'element/'+type+'/create';
-        this.redirect('index.php?a='+a+'&category='+cat_id);
+        this.redirect('?a='+a+'&category='+cat_id);
         this.cm.hide();
         return false;
     }

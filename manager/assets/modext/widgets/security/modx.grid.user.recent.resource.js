@@ -43,7 +43,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
 };
 Ext.extend(MODx.grid.RecentlyEditedResourcesByUser,MODx.grid.Grid,{
     preview: function() {
-        window.open(MODx.config.base_url+'index.php?id='+this.menu.record.id);
+        window.open(MODx.config.base_url+'?id='+this.menu.record.id);
     }
     ,refresh: function() {
         var tree = Ext.getCmp('modx-resource-tree');
