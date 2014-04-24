@@ -37,7 +37,7 @@ class modResourceDuplicateProcessor extends modProcessor {
         if (!$this->oldResource->checkPolicy('copy')) {
             return $this->modx->lexicon('permission_denied');
         }
-        if ($this->oldResource->parent === 0 && !$this->modx->hasPermission('new_document_in_root')) {
+        if ($this->oldResource->parent < 1 && !$this->modx->hasPermission('new_document_in_root')) {
             return $this->modx->lexicon('permission_denied');
         }
         return true;
