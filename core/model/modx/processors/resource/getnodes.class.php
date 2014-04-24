@@ -304,14 +304,27 @@ class modResourceGetNodesProcessor extends modProcessor {
      */
     public function prepareContextNode(modContext $context) {
         $class = array('tree-pseudoroot-node');
+
+        $createRoot =  $this->modx->hasPermission('new_document_in_root');
+
         $class[] = !empty($this->permissions['edit_context']) ? $this->permissions['edit_context'] : '';
         $class[] = !empty($this->permissions['new_context']) ? $this->permissions['new_context'] : '';
         $class[] = !empty($this->permissions['delete_context']) ? $this->permissions['delete_context'] : '';
-        $class[] = !empty($this->permissions['new_context_document']) ? $this->permissions['new_context_document'] : '';
-        $class[] = !empty($this->permissions['new_context_symlink']) ? $this->permissions['new_context_symlink'] : '';
-        $class[] = !empty($this->permissions['new_context_weblink']) ? $this->permissions['new_context_weblink'] : '';
-        $class[] = !empty($this->permissions['new_context_static_resource']) ? $this->permissions['new_context_static_resource'] : '';
-        $class[] = !empty($this->permissions['resource_quick_create']) ? $this->permissions['resource_quick_create'] : '';
+        $class[] = !empty($this->permissions['new_context_document']) && $createRoot
+            ? $this->permissions['new_context_document']
+            : '';
+        $class[] = !empty($this->permissions['new_context_symlink']) && $createRoot
+            ? $this->permissions['new_context_symlink']
+            : '';
+        $class[] = !empty($this->permissions['new_context_weblink']) && $createRoot
+            ? $this->permissions['new_context_weblink']
+            : '';
+        $class[] = !empty($this->permissions['new_context_static_resource']) && $createRoot
+            ? $this->permissions['new_context_static_resource']
+            : '';
+        $class[] = !empty($this->permissions['resource_quick_create']) && $createRoot
+            ? $this->permissions['resource_quick_create']
+            : '';
 
         $context->prepare();
         return array(
@@ -329,8 +342,8 @@ class modResourceGetNodesProcessor extends modProcessor {
                 'default_content_type' => $context->getOption('default_content_type'),
             ),
             'leaf' => false,
-            'cls' => implode(' ',$class),
-            'iconCls' => $this->modx->getOption('mgr_tree_icon_context',null,'tree-context'),
+            'cls' => implode(' ', $class),
+            'iconCls' => $this->modx->getOption('mgr_tree_icon_context', null, 'tree-context'),
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => 'modContext',
             'pseudoroot' => true,
