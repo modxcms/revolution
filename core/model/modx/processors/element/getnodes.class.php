@@ -120,26 +120,6 @@ class modElementGetNodesProcessor extends modProcessor {
             );
         }
 
-        /* Chunks */
-        if ($this->modx->hasPermission('view_chunk')) {
-            $class = $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
-            $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
-            $class .= ' tree-pseudoroot-node';
-
-            $nodes[] = array(
-                'text' => $this->modx->lexicon('chunks'),
-                'id' => 'n_type_chunk',
-                'leaf' => false,
-                'cls' => $class,
-                'iconCls' => $this->getNodeIcon('chunk'),
-                'page' => '',
-                'classKey' => 'root',
-                'type' => 'chunk',
-                'draggable' => false,
-                'pseudoroot' => true,
-            );
-        }
-
         /* TVs */
         if ($this->modx->hasPermission('view_tv')) {
             $class = $this->modx->hasPermission('new_tv') ? ' pnew' : '';
@@ -155,6 +135,26 @@ class modElementGetNodesProcessor extends modProcessor {
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'tv',
+                'draggable' => false,
+                'pseudoroot' => true,
+            );
+        }
+
+        /* Chunks */
+        if ($this->modx->hasPermission('view_chunk')) {
+            $class = $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
+            $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
+
+            $nodes[] = array(
+                'text' => $this->modx->lexicon('chunks'),
+                'id' => 'n_type_chunk',
+                'leaf' => false,
+                'cls' => $class,
+                'iconCls' => $this->getNodeIcon('chunk'),
+                'page' => '',
+                'classKey' => 'root',
+                'type' => 'chunk',
                 'draggable' => false,
                 'pseudoroot' => true,
             );
