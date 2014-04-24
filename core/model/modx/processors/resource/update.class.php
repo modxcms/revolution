@@ -127,7 +127,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
 
         $this->trimPageTitle();
         $this->handleParent();
-        if ($this->getProperty('parent') === 0 && !$this->modx->hasPermission('new_document_in_root')) {
+        if ($this->object->parent != 0 && $this->getProperty('parent') === 0 && !$this->modx->hasPermission('new_document_in_root')) {
             return $this->modx->lexicon('permission_denied');
         }
         $this->checkParentContext();
