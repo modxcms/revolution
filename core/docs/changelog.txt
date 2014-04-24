@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Prevent duplication in context root if new_document_in_root != true
 - Sanitize filename when editing a file
 - Adds validateOldPassword flag to optionally skip passwordMatches() call
 - Make preview possible if session_enabled = 0
