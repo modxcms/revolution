@@ -11,8 +11,8 @@
   & .x-toolbar {
     padding: 4px 5px 5px;
   }
-  /* root box contaiing a context or category */ 
-  & .x-tree-root-ct { 
+  /* root box contaiing a context or category */
+  & .x-tree-root-ct {
     padding: 6px;
   }
   /* just the actual nodes */
@@ -168,7 +168,8 @@
   border-bottom: 1px solid $borderColor;
   font-weight: bold;
   line-height: 1;
-  padding: 0 .4em 0 16px;
+  //padding: 0 .4em 0 16px;
+  padding: 0 .4em 0 6px;
   position:relative;
   > .icon-large {
     font-weight: normal;
@@ -203,9 +204,9 @@
 
 
 /* drag and drop styles */
-.x-tree-node a, 
+.x-tree-node a,
 .x-dd-drag-ghost a,
-.x-tree-node a span, 
+.x-tree-node a span,
 .x-dd-drag-ghost a span {
   color: $treeText;
 }
