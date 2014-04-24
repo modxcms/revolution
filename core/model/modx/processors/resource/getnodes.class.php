@@ -436,7 +436,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $iconCls[] = 'icon-parent-' . $resource->get('context_key') . '-'  . $resource->get('parent');
 
         // Modifiers to indicate resource _state_
-        if ($hasChildren){
+        if ($hasChildren || $resource->isfolder) {
             $iconCls[] = 'parent-resource';
         }
         $locked = $resource->getLock();
