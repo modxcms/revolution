@@ -686,7 +686,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                         evt.stopPropagation(evt);
                         node.getOwnerTree().handleCreateClick(node);
                     },
-                    iconCls: 'icon-plus-sign',
+                    iconCls: 'icon-plus-circle',
                     renderTo: elId,
                     listeners: {
                         mouseover: function(button, e){
