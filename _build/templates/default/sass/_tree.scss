@@ -11,8 +11,8 @@
   & .x-toolbar {
     padding: 4px 5px 5px;
   }
-  /* root box contaiing a context or category */ 
-  & .x-tree-root-ct { 
+  /* root box contaiing a context or category */
+  & .x-tree-root-ct {
     padding: 6px;
   }
   /* just the actual nodes */
@@ -117,6 +117,13 @@
 .unpublished a span {
   color: $unpublished;
   font-style: $unpubText;
+
+  // Keep the icon "regular'"
+  i.icon,
+  i.icon-large {
+      color: $treeText !important;
+      font-style: normal;
+  }
 }
 .hidemenu a span {
   color: $hidden;
@@ -203,9 +210,9 @@
 
 
 /* drag and drop styles */
-.x-tree-node a, 
+.x-tree-node a,
 .x-dd-drag-ghost a,
-.x-tree-node a span, 
+.x-tree-node a span,
 .x-dd-drag-ghost a span {
   color: $treeText;
 }
@@ -429,7 +436,7 @@
   @extend %pseudo-font;
   content:$fa-var-folder-open;
 }
-.x-tree-node-collapsed .tree-folder:before {
+.tree-folder:before {
   @extend %pseudo-font;
   content:$fa-var-folder;
 }
