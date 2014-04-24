@@ -114,6 +114,16 @@ class modResourceSortProcessor extends modProcessor {
         /* empty cache */
         $this->clearCache();
 
+        $action = 'resource_sort';
+        if ($this->getProperty('source_type') == 'modContext') {
+            $action = 'context_sort';
+        }
+        $this->modx->logManagerAction(
+            $action,
+            $this->getProperty('source_type'),
+            $this->getProperty('source_pk')
+        );
+
         return $this->success();
     }
 

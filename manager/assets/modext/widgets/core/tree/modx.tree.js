@@ -493,13 +493,18 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             return resultNode;
         }
 
-        var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root));
+        var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root))
+            ,source = dropEvent.dropNode;
+        //var target = dropEvent.target;
+
         this.fireEvent('beforeSort',encNodes);
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
                 data: encodeURIComponent(encNodes)
                 ,action: this.config.sortAction || 'sort'
+                ,source_pk: source.attributes.pk
+                ,source_type: source.attributes.type
             }
             ,listeners: {
                 'success': {fn:function(r) {
