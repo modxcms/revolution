@@ -30,14 +30,6 @@ MODx.tree.Element = function(config) {
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
         },{
-            cls: 'tree-new-chunk'
-            ,tooltip: {text: _('new')+' '+_('chunk')}
-            ,handler: function() {
-                this.redirect('index.php?a=element/chunk/create');
-            }
-            ,scope: this
-            ,hidden: MODx.perm.new_chunk ? false : true
-        },{
             cls: 'tree-new-tv'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
@@ -45,6 +37,14 @@ MODx.tree.Element = function(config) {
             }
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
+        },{
+            cls: 'tree-new-chunk'
+            ,tooltip: {text: _('new')+' '+_('chunk')}
+            ,handler: function() {
+                this.redirect('index.php?a=element/chunk/create');
+            }
+            ,scope: this
+            ,hidden: MODx.perm.new_chunk ? false : true
         },{
             cls: 'tree-new-snippet'
             ,tooltip: {text: _('new')+' '+_('snippet')}
