@@ -316,7 +316,15 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
             if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
             url = Ext.urlEncode(itm.params);
-            MODx.loadPage(o.actions.edit, url);
+            var action;
+            if (o.actions && o.actions.edit) {
+                // If an edit action is given, use it (BC)
+                action = o.actions.edit;
+            } else {
+                // Else assume we want the 'update' controller
+                action = itm.process.replace('create', 'update');
+            }
+            MODx.loadPage(action, url);
 
         } else if (process === 'delete') {
             itm.params.a = o.actions.cancel;
