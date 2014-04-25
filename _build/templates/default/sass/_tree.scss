@@ -535,6 +535,7 @@
             //color: #000;
             opacity: 1 !important;
             width: 20px;
+            float: right;
         }
 
         .title {}
@@ -561,12 +562,13 @@
             border-top: 1px solid $borderColor;
         }
 
-//        .x-panel-header-text {
-//            &> i.icon {
-//                //color: $gainsboro;
-//                color: $borderColor;
-//            }
-//        }
+        .x-panel-header-text {
+            &> i.icon {
+                float: left;
+                //color: $gainsboro;
+                //color: $borderColor;
+            }
+        }
     }
 
     .x-panel-body {
