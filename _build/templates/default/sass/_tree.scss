@@ -546,6 +546,11 @@
             background: $navbarBg;
             color: $navbarText;
             border-left: 2px solid transparent;
+
+            &:hover {
+                background: $primaryAction;
+                color: #fff;
+            }
         }
 
         & + .menu-section {
