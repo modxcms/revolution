@@ -383,7 +383,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'name' => $name,
                 'cls' => implode(' ', $class),
                 'iconCls' => 'icon ' . ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o'),
-                'page' => 'index.php?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
+                'page' => '?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
                 'type' => $elementIdentifier,
                 'elementType' => $elementType,
                 'classKey' => $elementClassKey,
