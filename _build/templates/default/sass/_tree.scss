@@ -524,6 +524,7 @@
         text-shadow: none;
 
         font: normal 13px arial, helvetica, tahoma sans-serif;
+        text-align: right;
     }
 
     // Real header container
@@ -546,10 +547,12 @@
             background: $navbarBg;
             color: $navbarText;
             border-left: 2px solid transparent;
+            text-align: left;
 
             &:hover {
                 background: $primaryAction;
                 color: #fff;
+                border-left: 15px solid transparent;
             }
         }
 
