@@ -531,7 +531,7 @@
         // FA icon
         &> i.icon {
             display: inline-block !important;
-            color: #000;
+            //color: #000;
             opacity: 1 !important;
             width: 20px;
         }
@@ -542,20 +542,23 @@
     // Collapsed
     &.x-panel-collapsed {
         .x-panel-header {
-            background: $primaryAction;
+            //background: $primaryAction;
+            background: $navbarBg;
             color: $navbarText;
             border-left: 2px solid transparent;
         }
 
         & + .menu-section {
-            border-top: 1px solid $gainsboro;
+            //border-top: 1px solid $gainsboro;
+            border-top: 1px solid $borderColor;
         }
 
-        .x-panel-header-text {
-            &> i.icon {
-                color: $gainsboro;
-            }
-        }
+//        .x-panel-header-text {
+//            &> i.icon {
+//                //color: $gainsboro;
+//                color: $borderColor;
+//            }
+//        }
     }
 
     .x-panel-body {
