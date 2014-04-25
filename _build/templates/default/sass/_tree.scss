@@ -175,7 +175,8 @@
   border-bottom: 1px solid $borderColor;
   font-weight: bold;
   line-height: 1;
-  padding: 0 .4em 0 16px;
+  //padding: 0 .4em 0 16px;
+    padding: 0 .4em 0 6px;
   position:relative;
   > .icon-large {
     font-weight: normal;
@@ -502,4 +503,41 @@
 }
 .x-tree-drop-ok-between .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-between.gif);
+}
+
+
+// Vertical "trees"
+.menu-section {
+    border-radius: 0;
+    border: 0 none;
+
+    &.x-panel-collapsed + .menu-section {
+        border-top: 1px solid $gainsboro;
+    }
+
+    .x-panel-header {
+        margin: 0;
+        padding: 5px 3px 4px 0;
+        border: 0 none;
+        border-radius: 0;
+        background: $primaryAction;
+        color: $navbarText;
+        text-shadow: none;
+
+        font: normal 13px arial, helvetica, tahoma sans-serif;
+    }
+
+    .x-panel-header-text {
+        &> i.icon {
+            //padding-right: 7px !important;
+            display: inline-block !important;
+            color: $gainsboro;
+            opacity: 1 !important;
+            width: 20px;
+        }
+
+        .title {
+
+        }
+    }
 }
