@@ -447,7 +447,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         e.preventDefault();
 
         if (this.disableHref) {return true;}
-        if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
             if (e.button == 1 || e.shiftKey == 1) return window.open(n.attributes.page,'_blank');
             MODx.loadPage(n.attributes.page);
