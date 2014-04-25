@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Make sure connector responses return application/json content type
 - Removed hard coded "index.php" in manager assets
 - Preselect media source in static elements browser
 - Added ability to refresh a media source (tree)
