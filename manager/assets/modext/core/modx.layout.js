@@ -10,6 +10,41 @@ Ext.apply(Ext, {
     isFirebug: (window.console && window.console.firebug)
 });
 
+/**
+ * Menu entry for the "vertical trees"
+ *
+ * @param {Object} config
+ * @extends Ext.Panel
+ * @xtype modx-menu-entry
+ */
+MODx.menuEntry = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        collapsible: true
+        ,collapsed: true
+        ,cls: 'menu-section'
+        ,titleCollapse: true
+        ,hideCollapseTool: true
+        ,layout: {
+            type: 'card'
+            ,deferredRender: true
+        }
+    });
+    MODx.menuEntry.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.menuEntry, Ext.Panel, {
+    onCollapse : function(doAnim, animArg) {
+        MODx.menuEntry.superclass.onCollapse.call(this, doAnim, animArg);
+        this.getLayout().setActiveItem(null);
+    }
+    ,onExpand : function(doAnim, animArg) {
+        MODx.menuEntry.superclass.onExpand.call(this, doAnim, animArg);
+        this.getLayout().setActiveItem(0);
+    }
+});
+Ext.reg('modx-menu-entry', MODx.menuEntry);
+
 MODx.Layout = function(config){
     config = config || {};
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
@@ -67,11 +102,6 @@ MODx.Layout = function(config){
         var wrap = {
             title: '<i class="icon icon-'+ (icons[tab.id] || 'asterisk') +'"></i><span class="title">' + tab.title +'</span>'
             ,stateId: 'modx-leftbar-tab-'+idx
-//            ,collapsible: true
-//            ,cls: 'menu-section'
-//            ,titleCollapse: true
-//            // Remove any "tool" markup
-//            ,toolTemplate: new Ext.Template('')
         };
         tab.title = '';
         // Nullify toolbars
@@ -129,23 +159,11 @@ MODx.Layout = function(config){
             ,collapseMode: 'mini'
             ,useSplitTips: true
             ,monitorResize: true
-            // Some tests with card layout to prevent rendering of all elements
-//            ,layout: {
-//                type: 'card'
-//                ,deferredRender: true
-//            }
-//            ,activeItem: 0
             ,layout: 'anchor'
             // No wrapper (less DOM)
             ,items: items
             ,defaults: {
-                collapsible: true
-                ,collapsed: true
-                ,cls: 'menu-section'
-                ,titleCollapse: true
-                // Remove any "tool" markup
-                //,toolTemplate: new Ext.Template('')
-                ,hideCollapseTool: true
+                xtype: 'modx-menu-entry'
             }
             // Wrapper (mostly to mimic the styles so far, and keep the ID)
 //            ,items: [{
