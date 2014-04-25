@@ -129,6 +129,12 @@ MODx.Layout = function(config){
             ,collapseMode: 'mini'
             ,useSplitTips: true
             ,monitorResize: true
+            // Some tests with card layout to prevent rendering of all elements
+//            ,layout: {
+//                type: 'card'
+//                ,deferredRender: true
+//            }
+//            ,activeItem: 0
             ,layout: 'anchor'
             // No wrapper (less DOM)
             ,items: items

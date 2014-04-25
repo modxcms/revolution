@@ -540,4 +540,12 @@
 
         }
     }
+
+    .x-panel-body {
+        background: transparent;
+
+        & > * {
+            background: #fff;
+        }
+    }
 }
