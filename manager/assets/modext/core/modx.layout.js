@@ -115,27 +115,64 @@ MODx.Layout = function(config){
     });
     console.log('transformed items/tabs', items);
 
+    items.push({
+        title: '<i class="icon icon-barcode"></i><span class="title">miniShop 2</span>'
+        ,items: [{
+            border: false
+            ,defaults: {xtype: 'button'}
+            ,items: [/*'->',*/{
+                text: 'Orders'
+                ,handler: function() {
+                    MODx.loadPage('orders', 'namespace=minishop2')
+                }
+            },{
+                text: 'Settings'
+                ,handler: function() {
+                    MODx.loadPage('settings', 'namespace=minishop2')
+                }
+            }]
+        }]
+    });
+
+    items.push({
+        title: '<i class="icon icon-users"></i><span class="title">Users</span>'
+        ,items: [{
+            html: 'Some user list here'
+            ,border: false
+        }]
+    });
+
+    if (MODx.request['a'] && MODx.request['a'] == 'resource/update') {
+        items.push({
+            title: '<i class="icon icon-archive"></i><span class="title">Editing resource '+ MODx.request['id'] +'</span>'
+            ,items: [{
+                html: 'Whatever you want here just available when editing resource'
+                ,border: false
+            }]
+        });
+    }
+
     // Mimic an extra "menu"
-    Ext.defer(function() {
-        console.log('Extra menus should be added');
-        var menu = Ext.getCmp('modx-leftbar-tabs')
-            ,i = 0;
-
-        while (i < 1) {
-            menu.add({
-                title: '<i class="icon icon-asterisk"></i><span class="title">Some extra row ['+ i +']</span>'
-                ,collapsed: true
-                ,items: [{
-                    html: '<p>Just some random stuff</p>'
-                    ,border: false
-                }]
-            });
-            i += 1;
-        }
-
-        // Force rendering
-        menu.doLayout();
-    }, 5000, this);
+//    Ext.defer(function() {
+//        console.log('Extra menus should be added');
+//        var menu = Ext.getCmp('modx-leftbar-tabs')
+//            ,i = 0;
+//
+//        while (i < 1) {
+//            menu.add({
+//                title: '<i class="icon icon-asterisk"></i><span class="title">Some extra row ['+ i +']</span>'
+//                ,collapsed: true
+//                ,items: [{
+//                    html: '<p>Just some random stuff</p>'
+//                    ,border: false
+//                }]
+//            });
+//            i += 1;
+//        }
+//
+//        // Force rendering
+//        menu.doLayout();
+//    }, 5000, this);
 
     Ext.applyIf(config,{
          layout: 'border'
