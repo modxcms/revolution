@@ -115,7 +115,12 @@ class modRestCurlClient extends modRestClient {
         /* disable verifypeer since it's not helpful on most environments */
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !empty($options['curlopt_ssl_verifypeer']) ? $options['curlopt_ssl_verifypeer'] : 0);
         /* send a useragent to allow proper responses */
-        curl_setopt($ch, CURLOPT_USERAGENT, !empty($options['curlopt_useragent']) ? $options['curlopt_useragent'] : $this->config[modRestCurlClient::OPT_USERAGENT]);
+        curl_setopt($ch, CURLOPT_USERAGENT, !empty($options['curlopt_useragent']) ? $options['curlopt_useragent'] : $this->config[modRestClient::OPT_USERAGENT]);
+        /* handle upload options */
+        if ( !empty($options['curlopt_usrpwd']) ) { curl_setopt($ch, CURLOPT_USERPWD, $options['curlopt_usrpwd']); }
+        if ( !empty($options['curlopt_upload']) ) { curl_setopt($ch, CURLOPT_UPLOAD, $options['curlopt_upload']); }
+        if ( !empty($options['curlopt_infile']) ) { curl_setopt($ch, CURLOPT_INFILE, $options['curlopt_infile']); }
+        if ( !empty($options['curlopt_infilesize']) ) { curl_setopt($ch, CURLOPT_INFILESIZE, $options['curlopt_infilesize']); }
         /* close connection, connection is not pooled to reuse */
         curl_setopt($ch, CURLOPT_FORBID_REUSE, !empty($options['curlopt_forbid_reuse']) ? $options['curlopt_forbid_reuse'] : 0);
         /* force the use of a new connection instead of a cached one */
