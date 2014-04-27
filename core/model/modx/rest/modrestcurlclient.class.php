@@ -122,7 +122,7 @@ class modRestCurlClient extends modRestClient {
         if (!empty($options['curlopt_usrpwd'])) { curl_setopt($ch, CURLOPT_USERPWD, $options['curlopt_usrpwd']); }
         if (!empty($options['curlopt_upload'])) { curl_setopt($ch, CURLOPT_UPLOAD, $options['curlopt_upload']); }
         if (!empty($options['curlopt_infile'])) { curl_setopt($ch, CURLOPT_INFILE, $options['curlopt_infile']); }
-        if (!empty($options['curlopt_infilesize']) ) { curl_setopt($ch, CURLOPT_INFILESIZE, $options['curlopt_infilesize']); }
+        if (!empty($options['curlopt_infilesize'])) { curl_setopt($ch, CURLOPT_INFILESIZE, $options['curlopt_infilesize']); }
         /* close connection, connection is not pooled to reuse */
         curl_setopt($ch, CURLOPT_FORBID_REUSE, !empty($options['curlopt_forbid_reuse']) ? $options['curlopt_forbid_reuse'] : 0);
         /* force the use of a new connection instead of a cached one */
