@@ -2104,7 +2104,6 @@
   background-color: transparent;
   background-image: none;
   border-radius: 3px;
-  border: 1px solid #666;
   overflow: hidden;
   padding: 0;
 }
@@ -2122,8 +2121,8 @@
 }
 
 .x-grid3-hd-row td {
-  border-left: 1px solid #969696;
-  border-right: 1px solid #464646;
+  border-left: 1px solid #e5e9ee;
+  border-right: 1px solid #e5e9ee;
 }
 
 .x-grid3-hd-row td.x-grid3-cell-first {
@@ -2193,9 +2192,8 @@
 }
 
 .x-panel-body-noheader .x-grid3-header {
-  background: #53595f;
-  border-bottom: 1px solid #333;
-  border: 0 none;
+  background: #cad4df;
+  border: none;
 }
 
 .x-grid3-header-offset {
@@ -2203,8 +2201,9 @@
 }
 
 .x-grid3-header .x-grid3-hd-row td {
-  color: #F0F0F0;
-  text-shadow: 0 -1px 0 #363636;
+  color: dimgray;
+  font-weight: bold;
+  font-family: titillium_bdbold, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
 }
 
 .x-grid3-header-pop {
@@ -6350,6 +6349,7 @@ a.x-grid-link:hover, a.x-grid-link:focus {
   background-color: white;
   font: 11px "Courier New", Courier, monospace !important;
   padding: 8px;
+  border: none;
 }
 
 .x-form-text.modx-console-text {

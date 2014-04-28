@@ -297,7 +297,6 @@
   background-color: transparent;
   background-image: none;
   border-radius: 3px;
-  border: 1px solid #666;
   overflow: hidden;
   padding: 0;
 }
@@ -315,8 +314,8 @@
 }
 
 .x-grid3-hd-row td {
-  border-left: 1px solid #969696;
-  border-right: 1px solid #464646;
+  border-left: 1px solid rgb(229,233,238);
+  border-right: 1px solid rgb(229,233,238);
 }
 
 .x-grid3-hd-row td.x-grid3-cell-first {
@@ -384,16 +383,16 @@
   padding: 0;
 }
 .x-panel-body-noheader .x-grid3-header {
-  background: $darkNeutral;
-  border-bottom: 1px solid #333;
-  border: 0 none;
+  background: rgb(202,212,223);
+  border: none;
 }
 .x-grid3-header-offset {
   padding-left: 0;
 }
 .x-grid3-header .x-grid3-hd-row td {
-  color: #F0F0F0;
-  text-shadow: 0 -1px 0 #363636;
+  color: rgb(105,105,105);
+  font-weight: bold;
+  font-family: titillium_bdbold, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;;
 }
 .x-grid3-header-pop {
   border-left-color: #DFDFDF;
