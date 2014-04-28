@@ -129,14 +129,9 @@ hr {
   left: 2px;
 }
 
-#modx-content {
-  background: $mainBg;
-}
-
 #modx-resource-tabs {
 	@extend %shaded-tab-box;
 	.x-tab-panel-header {
-		border:1px solid $gainsboro;
 		width:auto !important; /* #shame */
 		&.vertical-tabs-header {
 			width:150px !important; /* #shame */
@@ -147,11 +142,6 @@ hr {
 				//width:auto;
 				margin-left:0;
 			}
-		}
-	}
-	.x-tab-panel-bwrap {
-		.x-tab-panel-header {
-
 		}
 	}
 	#modx-tv-tabs {
@@ -215,6 +205,7 @@ hr {
 #modx-container {
   height: 100%;
   width: 100%;
+  background: $mainBg;
 }
 
 .x-panel-header {

@@ -26,22 +26,24 @@
 /* btn style */
 .x-btn {
   *display: inline;
-  background-color: $white;
+  background-color: $buttonBackground;
   /*@include linear-gradient($white, $gainsboro);*/
   line-height: 1;
   border-radius: 3px;
   cursor: pointer;
   display: inline-block;
   margin: 0 1px;
-  padding: 5px 6px;
+  padding: 13px 20px;
   position: relative;
   text-decoration: none;
   zoom: 1;
-  border:1px solid $primaryBorder;
+  border: none;
   transition: background-color .2s;
+  -webkit-box-shadow: 0 1px 0 0 #CCC;
+  box-shadow: 0 1px 0 0 #CCC;
   button {
-    font-size: 12px;
-    color: $labelText;
+    font-size: 13px;
+    color: $buttonColor;
     cursor: pointer;
     height: 16px;
     min-width: 100%;
@@ -57,9 +59,8 @@
   background-color:$gainsboro;
 }
 
-.primary-button, #modx-abtn-save {
+#modx-abtn-save {
   @extend %primary-button;
-  background: lighten($primaryAction,5%);
 }
 
 .x-btn-icon button {
@@ -371,35 +372,46 @@
 }
 
 /* basic tree toolbar styles */
-#modx-leftbar .x-toolbar-ct .x-btn {
-  background: $gainsboro;
-  margin: 0 3px;
-  padding: 5px;
-  width: 16px;
-  height: 16px;
-  border: 1px solid $borderColor;
-  opacity: .6;
-  display: inline-block;
-  position: relative;
+#modx-leftbar{
+  .x-toolbar-ct {
+    .x-btn {
+      margin: 0 3px;
+      padding: 5px;
+      width: 20px;
+      height: 20px;
+      border: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      opacity: .6;
+      display: inline-block;
+      position: relative;
 
-  & > em > button {
-    font-size: 15px;
-    text-shadow: 0 !important;
-    overflow: visible;
-    position: absolute;
-    width: 16px;
-    height: 18px;
-    top: 4px;
-    left: 2px;
-    color: #000;
-  }
+      & > em > button {
+        font-size: 20px;
+        text-shadow: 0 !important;
+        overflow: visible;
+        position: absolute;
+        width: 20px;
+        height: 25px;
+        top: 4px;
+        left: 2px;
+        color: $colorSplash;
+      }
 
-  &:hover {
-    opacity: 1;
-  }
 
-  span {
-    vertical-align: middle;
+      &:hover {
+        opacity: 1;
+      }
+
+      span {
+        vertical-align: middle;
+      }
+    }
+    .x-toolbar-right .x-btn {
+      & > em > button {
+        color: #96A9BB;
+      }
+    }
   }
 }
 #modx-leftbar #emptifier.x-item-disabled  {

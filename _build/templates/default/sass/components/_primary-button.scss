@@ -1,18 +1,15 @@
 %primary-button {
-  background: lighten($primaryAction,10%);
-  border-color:darken($primaryAction,6%);
-  color:white;
+  @include background-image(linear-gradient(left top, $buttonPrimaryBg1,$buttonPrimaryBg2));
+  color: $buttonColorPrimary;
   &.x-item-disabled {
     opacity:1;
     background: $desaturatedSplash;
-    border-color:darken($gainsboro,40%);
   }
   & button,
   &.x-item-disabled * {
-    color: white !important;
+    color: $buttonColorDisabled !important;
   }
   &.x-btn-over {
     background: lighten($primaryAction,12%);
-    border-color:darken($primaryAction,12%);
-}
+  }
 }

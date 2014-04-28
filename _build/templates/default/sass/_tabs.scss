@@ -1,12 +1,10 @@
 /* top area around the tab strip */
 .x-tab-panel-noborder {
-  background-color: $gainsboro;
   border: 1px solid #E2E3DE;
   margin: 20px 0 10px;
   overflow: visible;
 
   #modx-leftbar & {
-    background-color: $gainsboro;
   }
 
   /* background behind a button bar */
@@ -33,7 +31,7 @@ ul.x-tab-strip-top {
 
 
 .x-tab-panel-header-plain {
-  background-color: #f7f8f3;
+
 }
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
@@ -52,8 +50,6 @@ ul.x-tab-strip-top {
 }
 
 .x-tab-strip li {
-  border-width: 1px 1px 0;
-  border: 1px solid transparent;
   color: $tabInactiveText;
   cursor: pointer;
   font-size: 13px;
@@ -68,7 +64,6 @@ ul.x-tab-strip-top {
   &.x-tab-strip-active {
     color: $tabText;
     background-color: #fff;
-    //box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
     box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 transparent;
     cursor: default;
     margin: 0 0 0 2px;
@@ -85,6 +80,8 @@ ul.x-tab-strip-top {
 .x-tab-panel-header,
 .x-tab-panel {
   overflow: visible;
+  background: $mainBg;
+  border: none;
 }
 
 .x-tab-strip-closable {
@@ -125,7 +122,6 @@ ul.x-tab-strip-bottom {
 
 .x-tab-panel-body {
   background-color: $white;
-  border: 1px solid $borderColor;
   border-radius: 0 0 4px 4px;
 }
 
@@ -182,7 +178,7 @@ ul.x-tab-strip-bottom {
 
 /* vertical tabs */
 .vertical-tabs-panel {
-  background: url("../images/style/vtabs-bg.png") repeat-y scroll left 0 transparent !important;
+  background: #fff;
 
   &.wrapped {
     border: 1px solid #e0e0e0;
@@ -190,7 +186,7 @@ ul.x-tab-strip-bottom {
 }
 
 .vertical-tabs-header {
-  background-color: transparent !important;
+  background-color: #fff !important;
   float: left;
   margin-left: 0;
   padding: 13px 0 !important;
@@ -224,6 +220,9 @@ ul.x-tab-strip-bottom {
   }
   h4 {
     margin-left:15px;
+  }
+  .x-tab-strip-wrap {
+    background: #fff;
   }
 }
 

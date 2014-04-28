@@ -4,8 +4,7 @@
 #modx-leftbar {
   /* the main container + bg behind the tabs */
   & .x-tab-panel-noborder {
-    margin: 15px 10px 10px;
-    background: $gainsboro;
+    margin: 25px 10px 25px 25px;
   }
   /* the toolbars just below the tabs */
   & .x-toolbar {
@@ -22,8 +21,6 @@
 }
 
 #modx-leftbar-tabpanel {
-  border:1px solid $borderColor;
-  box-shadow: 0 0 0 3px $gainsboro;
 }
 
 /* tree menu splitter */
@@ -36,11 +33,11 @@
 
   &:hover {
     background: $navbarHover;
-    box-shadow: 2px 0 2px $borderShadow;
   }
-  .x-layout-mini {
-    left: -6px;
-  }
+}
+
+.modx-tree {
+  padding: 5px;
 }
 
 /* icons */
@@ -102,6 +99,11 @@
 .x-tree-node {
   color: $treeText;
   font: $fontSmall;
+
+  .x-btn {
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
 .x-tree-node-el a span {
@@ -159,7 +161,6 @@
     line-height:1.8;
 }
 
-
 .x-tree-root-ct {
   border-radius: 0;
   overflow: hidden;
@@ -171,18 +172,22 @@
 }
 
 .tree-pseudoroot-node {
-  background-color: darken($navbarHover, 2%);
-  border-bottom: 1px solid $borderColor;
+  background-color: $mainBg;
+  border-radius: 2px;
   font-weight: bold;
   line-height: 1;
-  padding: 0 .4em 0 16px;
   position:relative;
+  padding: .4em .4em .4em 16px;
+
   > .icon-large {
     font-weight: normal;
   }
 
   .modx-tree-node-tool-ct .x-btn {
       margin-left: 2px;
+  }
+  &.x-tree-node-expanded, &.x-tree-node-expanded span {
+    color: $colorSplash;
   }
 }
 

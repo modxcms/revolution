@@ -347,14 +347,11 @@ textarea.x-form-field,
 }
 .form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
   color: #707070;
-  font-size: 12px;
-  font-weight: bold;
-}
-.form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
-  color: #707070;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   margin-bottom: 0;
+  display: block;
+  padding: 7px 5px 4px 3px;
 }
 .form-with-labels .desc-under,
 .x-window .desc-under {

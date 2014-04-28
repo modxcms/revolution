@@ -4,7 +4,7 @@ $gainsboro: rgb(240,240,240);
 $actionable:rgb(251,251,251);
 $dropdownBg: $gainsboro;
 $white: white;
-$mainBg: #fafafa;
+$mainBg: #F2F2F2;
 $softGrey: rgb(220, 220, 220);
 $darkNeutral:#53595F;
 $black: #020608;
@@ -26,7 +26,7 @@ $desturatedSuccess:lighten(desaturate($success,100%),10%);
 $lightSplash:lighten($colorSplash, 42.5%);
 
 /* tree menus */
-$treeText: #444;
+$treeText: #718DA7;
 $tipText: $gainsboro;
 $lightSplash:lighten($colorSplash, 42.5%);
 $mainText: #444444;
@@ -41,7 +41,7 @@ $unpubText: italic;
 $lockedText: italic;
 
 
-$deleted: red !important;
+$deleted: #B42260 !important;
 $delTextStyle: normal;
 $delTextDeco: line-through;
 
@@ -71,8 +71,8 @@ $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 $tabBg: $white;
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
-$tabText: #333;
-$tabInactiveText: $tabText;
+$tabText: $colorSplash;
+$tabInactiveText: #757575;
 $tabHoverText: darken($colorSplash, 20%);
 
 /* text colors and font stacks */
@@ -82,6 +82,13 @@ $bodyfonts: arial, helvetica, tahoma sans-serif;
 $headfonts: $bodyfonts;
 $codefonts: "Courier New", Courier, monospace;
 $buttonfonts: $bodyfonts;
+$buttonColor: $colorSplash;
+$buttonBackground: $white;
+$buttonColorActive: $white;
+$buttonColorDisabled: darken($buttonColor, 20%);
+$buttonColorPrimary: $white;
+$buttonPrimaryBg1: #94C445;
+$buttonPrimaryBg2: #5CA53F;
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;
