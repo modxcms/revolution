@@ -25,19 +25,46 @@
 
 /* tree menu splitter */
 .x-layout-split {
-  background: $white;
-  border: solid $borderColor;
-  border-width: 0 1px;
   width: 8px;
   z-index: 0;
 
   &:hover {
     background: $navbarHover;
   }
+
+  .x-layout-mini {
+    left: -11px;
+    background-color: #fff;
+    width: 10px;
+    height: 50px;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center left;
+    border-radius: 0 4px 4px 0;
+    opacity: 1;
+
+    &:after {
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-right: 5px solid $colorSplash;
+      position: absolute;
+      content: ' ';
+      right: 4px;
+      top: 21px;
+    }
+  }
 }
 
 .modx-tree {
-  padding: 5px;
+  padding: 0 5px 5px 5px;
+  #modx-file-tree & {
+    &:first-child {
+      padding-top: 5px;
+    }
+    .tree-pseudoroot-node {
+      margin-top: 0;
+    }
+  }
 }
 
 /* icons */
@@ -96,13 +123,19 @@
 }
 
 /* tree states */
-.x-tree-node {
+.x-tree-node-el {
   color: $treeText;
-  font: $fontSmall;
+  font: $treeNodeFont;
+  padding-left: 6px;
 
   .x-btn {
     -moz-box-shadow: none;
     box-shadow: none;
+  }
+
+  .icon-large {
+    display: inline-block;
+    width: 1em;
   }
 }
 
@@ -173,27 +206,33 @@
 
 .tree-pseudoroot-node {
   background-color: $mainBg;
-  border-radius: 2px;
-  font-weight: bold;
-  line-height: 1;
+  border-radius: 4px;
+  font: $treePseudoRootFont;
   position:relative;
-  padding: .4em .4em .4em 16px;
+  padding: 0 0 0 20px;
+  margin-top: 5px;
 
   > .icon-large {
     font-weight: normal;
   }
 
-  .modx-tree-node-tool-ct .x-btn {
+  .modx-tree-node-tool-ct {
+    line-height: 35px;
+    .x-btn {
       margin-left: 2px;
+    }
   }
   &.x-tree-node-expanded, &.x-tree-node-expanded span {
     color: $colorSplash;
   }
+  &.x-tree-node-over, &.x-tree-selected {
+    background-color: $softGrey !important;
+  }
 }
 
 .x-tree-node-el  {
-  height:18px;
-  max-height:18px;
+  //height:18px;
+  //max-height:18px;
 }
 
 /* miscellaneous tree styles */
@@ -491,7 +530,7 @@
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $selected;
+  background-color: $over;
 }
 .x-tree-node .x-tree-selected {
   background-color: $selected;

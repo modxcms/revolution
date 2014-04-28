@@ -38,8 +38,7 @@
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
   background-color: #fff;
-  border-width: 1px 1px 0 1px !important;
-  border: 1px solid #E2E3DE;
+  border: none;
   height: 3px;
   margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
@@ -53,7 +52,7 @@
 .x-tab-strip li {
   color: $tabInactiveText;
   cursor: pointer;
-  font-size: 13px;
+  font: $tabFont;
   line-height: 2.2;
   margin: 1px 0 1px 2px;
   padding: 0 15px;

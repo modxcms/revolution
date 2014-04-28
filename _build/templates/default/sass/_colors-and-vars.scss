@@ -78,11 +78,13 @@ $tabStripBg: rgb(245,245,245);
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: $colorSplash;
+$tabFont: 14px titilliumregular, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
 $tabInactiveText: #757575;
 $tabHoverText: darken($colorSplash, 20%);
 
 /* text colors and font stacks */
 $selected:lighten(desaturate($colorSplash,45%),50%);
+$over: rgb(250, 250, 250);
 
 $bodyfonts: 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
 $headfonts: titilliumregular, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
@@ -102,3 +104,6 @@ $fontNormal: normal 13px $bodyfonts;
 $fontNavbar: normal 13px $headfonts;
 $fontH2:     normal 25px $headfonts;
 $fontH3:       bold 15px $headfonts;
+
+$treePseudoRootFont: normal 14px/35px $headfonts;
+$treeNodeFont: normal 13px/25px titilliumlight, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;

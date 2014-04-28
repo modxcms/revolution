@@ -4201,7 +4201,7 @@ having to do some real janky stuff to work with ExtJS markup
   border: none;
   transition: background-color .2s;
   -webkit-box-shadow: 0 1px 0 0 #CCC;
-  box-shadow: 0 1px 0 0 #CCC;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
 }
 .x-btn button {
   font-size: 13px;
@@ -4663,8 +4663,7 @@ having to do some real janky stuff to work with ExtJS markup
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
   background-color: #fff;
-  border-width: 1px 1px 0 1px !important;
-  border: 1px solid #E2E3DE;
+  border: none;
   height: 3px;
   margin: -2px 0 0 0;
   /* was -2px 0 0 -1px */
@@ -4679,7 +4678,7 @@ having to do some real janky stuff to work with ExtJS markup
 .x-tab-strip li {
   color: #757575;
   cursor: pointer;
-  font-size: 13px;
+  font: 14px titilliumregular, "Helvetica Neu", Helvetica, arial, tahoma sans-serif;
   line-height: 2.2;
   margin: 1px 0 1px 2px;
   padding: 0 15px;
@@ -5290,18 +5289,41 @@ ul.x-tab-strip-bottom .x-tab-left {
 
 /* tree menu splitter */
 .x-layout-split {
-  background: white;
-  border: solid #cbcbcb;
-  border-width: 0 1px;
   width: 8px;
   z-index: 0;
 }
 .x-layout-split:hover {
   background: gainsboro;
 }
+.x-layout-split .x-layout-mini {
+  left: -11px;
+  background-color: #fff;
+  width: 10px;
+  height: 50px;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center left;
+  border-radius: 0 4px 4px 0;
+  opacity: 1;
+}
+.x-layout-split .x-layout-mini:after {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #3697cd;
+  position: absolute;
+  content: ' ';
+  right: 4px;
+  top: 21px;
+}
 
 .modx-tree {
-  padding: 5px;
+  padding: 0 5px 5px 5px;
+}
+#modx-file-tree .modx-tree:first-child {
+  padding-top: 5px;
+}
+#modx-file-tree .modx-tree .tree-pseudoroot-node {
+  margin-top: 0;
 }
 
 /* icons */
@@ -5360,13 +5382,18 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 /* tree states */
-.x-tree-node {
+.x-tree-node-el {
   color: #718da7;
-  font: normal 11px "Helvetica Neu", Helvetica, arial, tahoma sans-serif;
+  font: normal 13px/25px titilliumlight, "Helvetica Neu", Helvetica, arial, tahoma sans-serif;
+  padding-left: 6px;
 }
-.x-tree-node .x-btn {
+.x-tree-node-el .x-btn {
   -moz-box-shadow: none;
   box-shadow: none;
+}
+.x-tree-node-el .icon-large {
+  display: inline-block;
+  width: 1em;
 }
 
 .x-tree-node-el a span {
@@ -5441,14 +5468,17 @@ ul.x-tab-strip-bottom .x-tab-left {
 
 .tree-pseudoroot-node {
   background-color: #f2f2f2;
-  border-radius: 2px;
-  font-weight: bold;
-  line-height: 1;
+  border-radius: 4px;
+  font: normal 14px/35px titilliumregular, "Helvetica Neu", Helvetica, arial, tahoma sans-serif;
   position: relative;
-  padding: .4em .4em .4em 16px;
+  padding: 0 0 0 20px;
+  margin-top: 5px;
 }
 .tree-pseudoroot-node > .icon-large {
   font-weight: normal;
+}
+.tree-pseudoroot-node .modx-tree-node-tool-ct {
+  line-height: 35px;
 }
 .tree-pseudoroot-node .modx-tree-node-tool-ct .x-btn {
   margin-left: 2px;
@@ -5456,10 +5486,8 @@ ul.x-tab-strip-bottom .x-tab-left {
 .tree-pseudoroot-node.x-tree-node-expanded, .tree-pseudoroot-node.x-tree-node-expanded span {
   color: #3697cd;
 }
-
-.x-tree-node-el {
-  height: 18px;
-  max-height: 18px;
+.tree-pseudoroot-node.x-tree-node-over, .tree-pseudoroot-node.x-tree-selected {
+  background-color: gainsboro !important;
 }
 
 /* miscellaneous tree styles */
@@ -5810,7 +5838,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 .x-tree-node .x-tree-node-over {
-  background-color: white;
+  background-color: #fafafa;
 }
 
 .x-tree-node .x-tree-selected {
