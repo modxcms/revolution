@@ -15,13 +15,13 @@ $mediumBg:$aside;
 
 
 $labelText:$darkNeutral;
-$primaryAction:#0f90c3;
+$primaryAction: rgb(88, 165, 152);
 $success:#81B548;
 $green:$success;
 $red:red;
 
-$colorSplash: $primaryAction;
-$desaturatedSplash:lighten(desaturate($primaryAction,100%),20%);
+$colorSplash: rgb(54, 151, 205);
+$desaturatedSplash:lighten(desaturate($colorSplash,100%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
 $lightSplash:lighten($colorSplash, 42.5%);
 
@@ -74,6 +74,7 @@ $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 
 
 $tabBg: $white;
+$tabStripBg: rgb(245,245,245);
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: $colorSplash;
@@ -84,7 +85,7 @@ $tabHoverText: darken($colorSplash, 20%);
 $selected:lighten(desaturate($colorSplash,45%),50%);
 
 $bodyfonts: 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
-$headfonts: $bodyfonts;
+$headfonts: titilliumregular, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
 $codefonts: "Courier New", Courier, monospace;
 $buttonfonts: $bodyfonts;
 $buttonColor: $colorSplash;
@@ -92,11 +93,12 @@ $buttonBackground: $white;
 $buttonColorActive: $white;
 $buttonColorDisabled: darken($buttonColor, 20%);
 $buttonColorPrimary: $white;
-$buttonPrimaryBg1: #94C445;
-$buttonPrimaryBg2: #5CA53F;
+$buttonPrimaryBg1: rgb(88, 165, 152);
+$buttonPrimaryBg2: rgb(60, 142, 139);
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;
 $fontNormal: normal 13px $bodyfonts;
+$fontNavbar: normal 13px $headfonts;
 $fontH2:     normal 25px $headfonts;
 $fontH3:       bold 15px $headfonts;

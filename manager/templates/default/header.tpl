@@ -58,7 +58,7 @@
                         {$navbAdmin}
                     </ul>
                 </li>
-                <li id="limenu-about" class="top">
+                <li id="limenu-about">
                     <a href="?a=help" title="{$_lang.about_desc}"><i class="icon-question-circle icon icon-large"></i></a>
                 </li>
             </ul>

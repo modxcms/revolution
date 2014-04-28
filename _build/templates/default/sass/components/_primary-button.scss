@@ -5,7 +5,9 @@
     opacity:1;
     background: $desaturatedSplash;
   }
-  & button,
+  & button {
+    color: $buttonColorPrimary;
+  }
   &.x-item-disabled * {
     color: $buttonColorDisabled !important;
   }

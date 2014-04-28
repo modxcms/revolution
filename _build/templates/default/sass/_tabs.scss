@@ -23,10 +23,11 @@
   border: 0;
 }
 
-ul.x-tab-strip-top {
+.x-tab-panel-header ul.x-tab-strip-top {
   border-bottom-color: $white;
   margin:0; /* was -1px */
   width: auto;
+  background-color: $tabStripBg !important;
 }
 
 
@@ -68,6 +69,7 @@ ul.x-tab-strip-top {
     cursor: default;
     margin: 0 0 0 2px;
     padding-bottom: 2px;
+    border-radius: 2px 2px 0 0;
   }
 //  &:first-of-type {
 //    &.x-tab-strip-active {

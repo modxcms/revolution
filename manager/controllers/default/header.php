@@ -68,7 +68,8 @@ function _buildMenu(modX &$modx, $menus, &$output, &$order, $showDescriptions = 
 
         $description = !empty($menu['description']) ? '<span class="description">'.$menu['description'].'</span>'."\n" : '';
 
-        $menuTpl = '<li id="limenu-'.$menu['id'].'" class="top'.'">'."\n";
+        $top = (!empty($menu['children'])) ? 'class="top"' : '';
+        $menuTpl = '<li id="limenu-'.$menu['id'].'" ' . $top . '>'."\n";
         if (!empty($menu['handler'])) {
             $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].'</a>'."\n";
         } else if (!empty($menu['action'])) {

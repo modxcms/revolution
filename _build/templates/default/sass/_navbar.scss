@@ -1,6 +1,6 @@
 /* Main MODX Manager navbar */
 #modx-navbar {
-  background: url('../images/toolbar.jpg') repeat-x top center;
+  background: url('../images/toolbar.png') repeat-x top center;
   box-shadow: 0 2px 0 $borderShadow;
   height: 100%;
   position: relative;
@@ -14,7 +14,7 @@
 
 #modx-navbar {
   font-weight: bold;
-  font: $fontNormal;
+  font: $fontNavbar;
 }
 
 #modx-topnav {
@@ -45,9 +45,23 @@
   color: $navbarText;
   cursor: pointer;
   display: block;
-  line-height: 43px;
+  line-height: 55px;
   padding: 0 15px;
   text-decoration: none; 
+}
+
+#modx-navbar .top {
+  padding-right: 15px;
+
+  &:after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgb(96,114,124);
+    position: absolute;
+    content: ' ';
+    right: 12px;
+    top: 26px;
+  }
 }
 
 #modx-topnav li.top > a {
@@ -60,8 +74,6 @@
 }
 
 #modx-topnav > li.top:hover > a, #modx-user-menu > li.top:hover > a {
-  border-left-color:$navbarBorder;
-  border-right-color:$navbarBorder;
   padding-bottom: 1px;
   z-index: 10001;
 }
@@ -87,7 +99,7 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 43px;
+  top: 54px;
   z-index: 10000;
 }
 
@@ -99,16 +111,18 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include retina-image("../images/modx-logo", 32px 33px);
+  @include retina-image("../images/header-modx-logo", 50px 50px);
   background-position:center center;
   background-repeat:no-repeat;
   width: 50px;
   border-right: none;
+  margin-left: 21px;
 }
 #user-avatar img {
-  border-radius: 3px;
-  margin: 6px 7px 0 0;
-  line-height: 18px; 
+  border-radius: 20px;
+  margin: 8px 10px 0 0;
+  height: 40px;
+  width: 40px;
   display: block;
   float: left;
 }

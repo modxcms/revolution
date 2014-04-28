@@ -2,6 +2,7 @@
 $fa-css-prefix:       icon;
 @import "font-awesome/font-awesome";
 .#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
+@import "titillium";
 @import "image-set";
 @import "colors-and-vars";
 @import "utility";
@@ -234,7 +235,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   margin-top: 0;
   position: absolute;
   right: 20px;
-  top: 60px;
+  top: 65px;
   z-index: 10;
 }
 
