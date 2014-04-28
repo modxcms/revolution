@@ -386,6 +386,7 @@ MODx.browser.View = function(config) {
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
             ,source: config.source || 1
+            // @todo: this overrides the media source configuration
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,dir: config.openTo || ''
@@ -446,15 +447,20 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,showDetails : function(){
         var selNode = this.getSelectedNodes();
         var detailEl = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
-        if(selNode && selNode.length > 0){
+        var okBtn = Ext.getCmp(this.ident+'-ok-btn');
+        if (selNode && selNode.length > 0) {
             selNode = selNode[0];
-            Ext.getCmp(this.ident+'-ok-btn').enable();
+            if (okBtn) {
+                okBtn.enable();
+            }
             var data = this.lookup[selNode.id];
             detailEl.hide();
             this.templates.details.overwrite(detailEl, data);
             detailEl.slideIn('l', {stopFx:true,duration:'.2'});
-        }else{
-            Ext.getCmp(this.config.ident+'-ok-btn').disable();
+        } else {
+            if (okBtn) {
+                okBtn.disable();
+            }
             detailEl.update('');
         }
     }
