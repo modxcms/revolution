@@ -935,6 +935,17 @@ class modX extends xPDO {
     }
 
     /**
+     * Returns the full table name (with dynamic prefix) based on database settings.
+     * Legacy - Useful when dealing with migrations or prefixed database tables without an xPDO model (which xPDO.getTableName requires.)
+     *
+     * @param string $table Name of MODX table, less table prefix.
+     * @return string Full table name containing database and table prefix.
+     */
+    public function getFullTableName( $table = '' ) {
+        return $this->getOption('dbname') .".". $this->getOption( xPDO::OPT_TABLE_PREFIX ) . $table;
+    }
+
+    /**
      * Generates a URL representing a specified resource.
      *
      * @param integer $id The id of a resource.
