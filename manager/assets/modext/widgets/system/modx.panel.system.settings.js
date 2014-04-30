@@ -50,13 +50,6 @@ Ext.reg('modx-panel-system-settings',MODx.panel.SystemSettings);
  */
 MODx.grid.SystemSettings = function(config) {
     config = config || {};
-    // @todo : what is the reason of the override here ?
-//    Ext.applyIf(config, {
-//        url: MODx.config.connector_url
-//        ,baseParams: {
-//            action: 'system/settings/getlist'
-//        }
-//    });
     MODx.grid.SystemSettings.superclass.constructor.call(this, config);
 };
 Ext.extend(MODx.grid.SystemSettings, MODx.grid.SettingsGrid);
