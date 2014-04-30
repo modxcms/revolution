@@ -23,7 +23,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
-        ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+        ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         ,allowBlank: true
         ,width: 150
         ,listeners: {
@@ -34,9 +34,10 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'area'
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
+        ,value: MODx.request['area']
         ,baseParams: {
             action: 'system/settings/getAreas'
-            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         }
         ,width: 250
         ,allowBlank: true
@@ -121,12 +122,14 @@ MODx.grid.SettingsGrid = function(config) {
         }
     });
 
-    Ext.applyIf(config,{
+    Ext.applyIf(config, {
          cm: this.cm
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
+        ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/settings/getList'
-            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            ,area: MODx.request['area']
         }
         ,clicksToEdit: 2
         ,grouping: true
