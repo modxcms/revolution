@@ -25,6 +25,10 @@ MODx.grid.SettingsGrid = function(config) {
         ,emptyText: _('namespace_filter')
         ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         ,allowBlank: true
+        ,editable: true
+        ,typeAhead: true
+        ,forceSelection: true
+        ,queryParam: 'search'
         ,width: 150
         ,listeners: {
             'select': {fn: this.filterByNamespace, scope:this}
@@ -41,6 +45,9 @@ MODx.grid.SettingsGrid = function(config) {
         }
         ,width: 250
         ,allowBlank: true
+        ,editable: true
+        ,typeAhead: true
+        ,forceSelection: true
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
         }
