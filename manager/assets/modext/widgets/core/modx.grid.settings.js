@@ -233,8 +233,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         this.refresh();
     }
     ,filterByKey: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.key = nv;
+        this.getStore().baseParams.key = newValue;
         this.getStore().baseParams.namespace = '';
         this.getBottomToolbar().changePage(1);
         this.refresh();
@@ -424,7 +423,13 @@ MODx.window.CreateSetting = function(config) {
         ,keys: []
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
-    this.on('show',function() {this.reset();},this);
+    this.on('show',function() {
+        this.reset();
+        this.setValues({
+            namespace: Ext.getCmp('modx-filter-namespace').value
+            ,area: Ext.getCmp('modx-filter-area').value
+        });
+    },this);
 };
 Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
