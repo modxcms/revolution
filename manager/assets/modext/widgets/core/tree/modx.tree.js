@@ -448,8 +448,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 
         if (this.disableHref) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
-            if (e.button == 1 || e.shiftKey == 1) return window.open(n.attributes.page,'_blank');
-            else if (e.ctrlKey == 1 || e.metaKey == 1) return window.open(n.attributes.page);
+            if (e.button == 1) return window.open(n.attributes.page,'_blank');
+            else if (e.ctrlKey == 1 || e.metaKey == 1 || e.shiftKey == 1) return window.open(n.attributes.page);
             MODx.loadPage(n.attributes.page);
         } else {
             n.toggle();
