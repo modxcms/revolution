@@ -239,6 +239,18 @@ MODx.window.CreateMenu = function(config) {
                     ,forId: this.ident+'-namespace'
                     ,html: _('namespace_desc')
                     ,cls: 'desc-under'
+                },{
+                    fieldLabel: _('icon')
+                    ,description: MODx.expandHelp ? '' : _('icon_desc')
+                    ,name: 'icon'
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,id: this.ident+'-icon'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-icon'
+                    ,html: _('icon_desc')
+                    ,cls: 'desc-under'
                 }]
             }]
         }]
