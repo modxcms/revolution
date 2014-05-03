@@ -107,6 +107,15 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $skipFiles[] = '.';
         $skipFiles[] = '..';
 
+        $allowedExtensions = $this->getOption('allowedFileTypes', $properties, '');
+        if (is_string($allowedExtensions)) {
+            if (empty($allowedExtensions)) {
+                $allowedExtensions = array();
+            } else {
+                $allowedExtensions = explode(',', $allowedExtensions);
+            }
+        }
+
         $canSave = $this->checkPolicy('save');
         $canRemove = $this->checkPolicy('remove');
         $canCreate = $this->checkPolicy('create');
@@ -154,8 +163,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             /* get files in current dir */
             if ($file->isFile() && !$hideFiles && $this->hasPermission('file_list')) {
-                $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
-                $ext = $useMultibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
+                $ext = pathinfo($filePathName, PATHINFO_EXTENSION);
+                $ext = $useMultibyte ? mb_strtolower($ext, $encoding) : strtolower($ext);
+                if (!empty($allowedExtensions) && !in_array($ext, $allowedExtensions)) {
+                    continue;
+                }
 
                 $cls = array();
 
@@ -832,8 +844,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $imageExtensions = explode(',',$imageExtensions);
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
-        $allowedFileTypes = $this->getOption('allowedFileTypes',$properties,'');
-        $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
+        $allowedFileTypes = $this->getOption('allowedFileTypes', $properties, '');
+        if (is_string($allowedFileTypes)) {
+            if (empty($allowedFileTypes)) {
+                $allowedFileTypes = array();
+            } else {
+                $allowedFileTypes = explode(',', $allowedFileTypes);
+            }
+        }
         $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store');
@@ -860,7 +878,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
                 $fileExtension = $use_multibyte ? mb_strtolower($fileExtension,$encoding) : strtolower($fileExtension);
 
-                if (!empty($allowedFileTypes) && !in_array($fileExtension,$allowedFileTypes)) continue;
+                if (!empty($allowedFileTypes) && !in_array($fileExtension, $allowedFileTypes)) {
+                    continue;
+                }
 
                 $filesize = @filesize($filePathName);
                 $url = urlencode(ltrim($dir.$fileName,'/'));
