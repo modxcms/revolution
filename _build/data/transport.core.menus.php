@@ -126,7 +126,7 @@ $topNavMenus[1]->fromArray(array (
 ), '', true, true);
 
 /* Media Browser */
-/*$children[0]= $xpdo->newObject('modMenu');
+$children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'file_browser',
@@ -134,11 +134,11 @@ $children[0]->fromArray(array (
   'parent' => 'media',
   'permissions' => 'file_manager',
   'action' => 'media/browser',
-), '', true, true);*/
+), '', true, true);
 
 /* Media Drivers */
-$children[0]= $xpdo->newObject('modMenu');
-$children[0]->fromArray(array(
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array(
   'menuindex'   => 1,
   'text'        => 'sources',
   'description' => 'sources_desc',

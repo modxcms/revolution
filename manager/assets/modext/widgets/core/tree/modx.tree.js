@@ -295,7 +295,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refresh: function(func,scope,args) {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
-        if (treeState === undefined) {this.root.expand(null,null);} else {
+        if (treeState === undefined) {
+            this.root.expand(null,null);
+        } else {
             for (var i=0;i<treeState.length;i++) {
                 this.expandPath(treeState[i]);
             }
@@ -587,7 +589,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @access public
      */
     ,refreshActiveNode: function() {
-        this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
+        if (this.cm.activeNode) {
+            this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
+        } else {
+            this.refresh();
+        }
     }
 
     /**
@@ -661,7 +667,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 
     /**
      * Allow pseudoroot actions
-     * @param tree {this}
+     * @param tree {self}
      * @param parent {Ext.tree.TreeNode} Parent node
      * @param node {Ext.tree.TreeNode} Node to be inserted
      */
