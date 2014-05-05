@@ -31,7 +31,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
         /* get packages */
         $criteria = array(
             'workspace' => $this->getProperty('workspace',1),
-            'package_name' => $signatureArray[0],
+            'signature:LIKE' => $signatureArray[0] .'-%',
         );
         $limit = $this->getProperty('limit');
         $pkgList = $this->modx->call('transport.modTransportPackage', 'listPackageVersions', array(&$this->modx, $criteria, $limit > 0 ? $limit : 0, $this->getProperty('start')));
@@ -111,7 +111,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
         $notInstalled = $package->get('installed') == null || $package->get('installed') == '0000-00-00 00:00:00';
         $packageArray['iconaction'] = $notInstalled ? 'icon-install' : 'icon-uninstall';
         $packageArray['textaction'] = $notInstalled ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
-        
+
         if ($this->currentIndex > 0 || !$package->get('installed')) {
             $packageArray['menu'] = array();
             $packageArray['menu'][] = array(
