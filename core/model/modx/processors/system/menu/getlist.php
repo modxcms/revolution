@@ -31,9 +31,15 @@ $count = $modx->getCount('modMenu');
 
 $list = array();
 
+/** @type modMenu $menu */
 foreach ($menus as $menu) {
     $menuArray = $menu->toArray();
+    $namespace = $menu->get('namespace');
+    if (!in_array($namespace, array('core', '', null))) {
+        $modx->lexicon->load($namespace . ':default');
+    }
     $menuArray['text_lex'] = $modx->lexicon($menuArray['text']);
     $list[] = $menuArray;
 }
+
 return $this->outputArray($list,$count);
