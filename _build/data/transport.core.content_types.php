@@ -79,3 +79,13 @@ $collection['8']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 1,
 ), '', true, true);
+$collection['9']= $xpdo->newObject('modContentType');
+$collection['9']->fromArray(array (
+  'id' => 9,
+  'name' => 'iCalendar',
+  'description' => 'Calendar Event content',
+  'mime_type' => 'text/calendar',
+  'file_extensions' => '.ics',
+  'headers' => 'NULL',
+  'binary' => 0,
+), '', true, true);
