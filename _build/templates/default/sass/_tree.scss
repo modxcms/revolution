@@ -175,7 +175,8 @@
   border-bottom: 1px solid $borderColor;
   font-weight: bold;
   line-height: 1;
-  padding: 0 .4em 0 16px;
+  //padding: 0 .4em 0 16px;
+    padding: 0 .4em 0 6px;
   position:relative;
   > .icon-large {
     font-weight: normal;
@@ -502,4 +503,79 @@
 }
 .x-tree-drop-ok-between .x-dd-drop-icon {
   background-image: url(../images/modx-theme/tree/drop-between.gif);
+}
+
+
+// Vertical "trees"
+.menu-section {
+    border-radius: 0;
+    border: 0 none;
+
+    // Expanded "active"
+    // Click-able header
+    .x-panel-header {
+        margin: 0;
+        padding: 5px 3px 4px 0;
+        border: 0 none;
+        border-left: 2px solid $primaryAction;
+        border-radius: 0;
+        background: #fff;
+        color: $navbarText;
+        text-shadow: none;
+
+        font: normal 13px arial, helvetica, tahoma sans-serif;
+        text-align: right;
+    }
+
+    // Real header container
+    .x-panel-header-text {
+        // FA icon
+        &> i.icon {
+            display: inline-block !important;
+            //color: #000;
+            opacity: 1 !important;
+            width: 20px;
+            float: right;
+        }
+
+        .title {}
+    }
+
+    // Collapsed
+    &.x-panel-collapsed {
+        .x-panel-header {
+            //background: $primaryAction;
+            background: $navbarBg;
+            color: $navbarText;
+            border-left: 2px solid transparent;
+            text-align: left;
+
+            &:hover {
+                background: $primaryAction;
+                color: #fff;
+                border-left: 15px solid transparent;
+            }
+        }
+
+        & + .menu-section {
+            //border-top: 1px solid $gainsboro;
+            border-top: 1px solid $borderColor;
+        }
+
+        .x-panel-header-text {
+            &> i.icon {
+                float: left;
+                //color: $gainsboro;
+                //color: $borderColor;
+            }
+        }
+    }
+
+    .x-panel-body {
+        background: transparent;
+
+        & > * {
+            background: #fff;
+        }
+    }
 }

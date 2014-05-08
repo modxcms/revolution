@@ -10,6 +10,41 @@ Ext.apply(Ext, {
     isFirebug: (window.console && window.console.firebug)
 });
 
+/**
+ * Menu entry for the "vertical trees"
+ *
+ * @param {Object} config
+ * @extends Ext.Panel
+ * @xtype modx-menu-entry
+ */
+MODx.menuEntry = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        collapsible: true
+        ,collapsed: true
+        ,cls: 'menu-section'
+        ,titleCollapse: true
+        ,hideCollapseTool: true
+        ,layout: {
+            type: 'card'
+            ,deferredRender: true
+        }
+    });
+    MODx.menuEntry.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.menuEntry, Ext.Panel, {
+    onCollapse : function(doAnim, animArg) {
+        MODx.menuEntry.superclass.onCollapse.call(this, doAnim, animArg);
+        this.getLayout().setActiveItem(null);
+    }
+    ,onExpand : function(doAnim, animArg) {
+        MODx.menuEntry.superclass.onExpand.call(this, doAnim, animArg);
+        this.getLayout().setActiveItem(0);
+    }
+});
+Ext.reg('modx-menu-entry', MODx.menuEntry);
+
 MODx.Layout = function(config){
     config = config || {};
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
@@ -54,6 +89,91 @@ MODx.Layout = function(config){
     }
     var activeTab = 0;
 
+    console.log('original tabs', tabs);
+
+    var items = []
+        ,icons = {
+            'modx-resource-tree': 'sitemap'
+            ,'modx-tree-element': 'bars'
+            ,'modx-file-tree': 'folder-open'
+        };
+
+    Ext.each(tabs, function(tab, idx) {
+        var wrap = {
+            title: '<i class="icon icon-'+ (icons[tab.id] || 'asterisk') +'"></i><span class="title">' + tab.title +'</span>'
+            ,stateId: 'modx-leftbar-tab-'+idx
+        };
+        tab.title = '';
+        // Nullify toolbars
+        tab.remoteToolbar = false;
+        tab.tbar = {
+            hidden: true
+        };
+        tab.useDefaultToolbar = false;
+        wrap.items = tab;
+        items.push(wrap);
+    });
+    console.log('transformed items/tabs', items);
+
+    items.push({
+        title: '<i class="icon icon-barcode"></i><span class="title">miniShop 2</span>'
+        ,items: [{
+            border: false
+            ,defaults: {xtype: 'button'}
+            ,items: [/*'->',*/{
+                text: 'Orders'
+                ,handler: function() {
+                    MODx.loadPage('orders', 'namespace=minishop2')
+                }
+            },{
+                text: 'Settings'
+                ,handler: function() {
+                    MODx.loadPage('settings', 'namespace=minishop2')
+                }
+            }]
+        }]
+    });
+
+    items.push({
+        title: '<i class="icon icon-users"></i><span class="title">Users</span>'
+        ,items: [{
+            html: 'Some user list here'
+            ,border: false
+        }]
+    });
+
+    if (MODx.request['a'] && MODx.request['a'] == 'resource/update') {
+        items.push({
+            title: '<i class="icon icon-archive"></i><span class="title">Editing resource '+ MODx.request['id'] +'</span>'
+            ,items: [{
+                html: 'Whatever you want here just available when editing resource'
+                ,border: false
+            }]
+        });
+    }
+
+    // Mimic an extra "menu"
+//    Ext.defer(function() {
+//        console.log('Extra menus should be added');
+//        var menu = Ext.getCmp('modx-leftbar-tabs')
+//            ,i = 0;
+//
+//        while (i < 1) {
+//            menu.add({
+//                title: '<i class="icon icon-asterisk"></i><span class="title">Some extra row ['+ i +']</span>'
+//                ,collapsed: true
+//                ,items: [{
+//                    html: '<p>Just some random stuff</p>'
+//                    ,border: false
+//                }]
+//            });
+//            i += 1;
+//        }
+//
+//        // Force rendering
+//        menu.doLayout();
+//    }, 5000, this);
+
     Ext.applyIf(config,{
          layout: 'border'
         ,id: 'modx-layout'
@@ -77,27 +197,43 @@ MODx.Layout = function(config){
             ,useSplitTips: true
             ,monitorResize: true
             ,layout: 'anchor'
-            ,items: [{
-                 xtype: 'modx-tabs'
-                ,plain: true
-                ,defaults: {
-                     autoScroll: true
-                    ,fitToFrame: true
-                }
-                ,id: 'modx-leftbar-tabpanel'
-                ,border: false
-                ,anchor: '100%'
-                ,activeTab: activeTab
-                ,stateful: true
-                ,stateId: 'modx-leftbar-tabs'
-                ,stateEvents: ['tabchange']
-                ,getState:function() {
-                    return {
-                        activeTab:this.items.indexOf(this.getActiveTab())
-                    };
-                }
-                ,items: tabs
-            }]
+            // No wrapper (less DOM)
+            ,items: items
+            ,defaults: {
+                xtype: 'modx-menu-entry'
+            }
+            // Wrapper (mostly to mimic the styles so far, and keep the ID)
+//            ,items: [{
+//                xtype: 'panel'
+//                ,id: 'modx-leftbar-tabpanel'
+//                ,cls: 'x-tab-panel-noborder'
+//                ,items: items
+//                ,defaults: {
+//                    stateful: true
+//                }
+//            }]
+            // Original tabs
+//            ,items: [{
+//                 xtype: 'modx-tabs'
+//                ,plain: true
+//                ,defaults: {
+//                     autoScroll: true
+//                    ,fitToFrame: true
+//                }
+//                ,id: 'modx-leftbar-tabpanel'
+//                ,border: false
+//                ,anchor: '100%'
+//                ,activeTab: activeTab
+//                ,stateful: true
+//                ,stateId: 'modx-leftbar-tabs'
+//                ,stateEvents: ['tabchange']
+//                ,getState:function() {
+//                    return {
+//                        activeTab:this.items.indexOf(this.getActiveTab())
+//                    };
+//                }
+//                ,items: tabs
+//            }]
             ,listeners:{
                 statesave: this.onStatesave
                 ,scope: this
@@ -111,7 +247,7 @@ MODx.Layout = function(config){
             ,border: false
             ,autoScroll: true
         }/*,{
-            region: 'south' // ya, you're going south alright 
+            region: 'south' // ya, you're going south alright
             ,applyTo: 'modx-footer'
             ,border: false
             ,id: 'modx-footer'
