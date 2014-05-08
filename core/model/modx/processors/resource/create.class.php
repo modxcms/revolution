@@ -112,7 +112,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
     public function beforeSet() {
         /* default settings */
         $this->prepareParent();
-        if ($this->getProperty('parent') === 0 && !$this->modx->hasPermission('new_document_in_root')) {
+        if ($this->getProperty('parent') === (int) $this->modx->getOption('tree_root_id') && !$this->modx->hasPermission('new_document_in_root')) {
             return $this->modx->lexicon('permission_denied');
         }
         $set = $this->checkParentPermissions();
