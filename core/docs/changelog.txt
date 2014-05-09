@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixed events called in modResourceGroupCreateProcessor
 - Added dedicated page with media manager
 - Add icon/markup to modMenu items, allow new entries for topmenu and usermenu
 - An instance of modError added to modMail
