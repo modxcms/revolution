@@ -258,17 +258,17 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'handler' => 'this.downloadFile',
                 );
             }
+            if (pathinfo($file->getFilename(), PATHINFO_EXTENSION) === 'zip' && $this->hasPermission('file_unzip') && $canView) {
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_download_unzip'),
+                    'handler' => 'this.unzipFile',
+                );
+            }
             if ($this->hasPermission('file_remove') && $canRemove) {
                 if (!empty($menu)) $menu[] = '-';
                 $menu[] = array(
                     'text' => $this->xpdo->lexicon('file_remove'),
                     'handler' => 'this.removeFile',
-                );
-            }
-            if (pathinfo($file->getFilename(), PATHINFO_EXTENSION) === 'zip' && $this->hasPermission('file_unzip') && $canView) {
-                $menu[] = array(
-                    'text' => $this->xpdo->lexicon('file_download_unzip'),
-                    'handler' => 'this.unzipFile',
                 );
             }
         } else { /* directories */
