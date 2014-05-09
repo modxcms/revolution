@@ -42,7 +42,7 @@ class modExtensionPackage extends xPDOSimpleObject {
         if (!$modx->getCacheManager()) {
             return array();
         }
-        $cacheKey= 'namespaces/extension-packages';
+        $cacheKey= 'extension-packages';
         $cache = $modx->cacheManager->get($cacheKey, array(
             xPDO::OPT_CACHE_KEY => $modx->getOption('cache_extension_packages_key', null, 'namespaces'),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_extension_packages_handler', null,$modx->getOption(xPDO::OPT_CACHE_HANDLER)),
@@ -55,7 +55,7 @@ class modExtensionPackage extends xPDOSimpleObject {
     }
 
     public static function clearCache(modX $modx) {
-        $cacheKey= 'namespaces/extension-packages';
+        $cacheKey= 'extension-packages';
         $cleared = $modx->cacheManager->delete($cacheKey, array(
             xPDO::OPT_CACHE_KEY => $modx->getOption('cache_extension_packages_key', null, 'namespaces'),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_extension_packages_handler', null,$modx->getOption(xPDO::OPT_CACHE_HANDLER)),
