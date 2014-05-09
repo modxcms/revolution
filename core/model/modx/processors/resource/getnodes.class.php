@@ -376,7 +376,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         if (!empty($this->permissions['view_document'])) $class[] = $this->permissions['view_document'];
         if (!empty($this->permissions['edit_document'])) $class[] = $this->permissions['edit_document'];
         if (!empty($this->permissions['resource_duplicate'])) {
-            if ($resource->parent != 0 || $this->modx->hasPermission('new_document_in_root')) {
+            if ($resource->parent != $this->defaultRootId || $this->modx->hasPermission('new_document_in_root')) {
                 $class[] = $this->permissions['resource_duplicate'];
             }
         }
