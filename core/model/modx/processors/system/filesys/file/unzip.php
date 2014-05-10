@@ -1,26 +1,67 @@
 <?php
 /**
+ * Unpacks a zip archive
+ *
  * @package modx
  * @subpackage processors.system.filesys.file
  */
+class modUnzipProcessor extends modProcessor {
 
-if (!$modx->hasPermission('file_manager')) { return $modx->error->failure($modx->lexicon('permission_denied')); }
+    public function checkPermissions() {
+        return $this->modx->hasPermission('file_unzip');
+    }
 
-$modx->getService('fileHandler', 'modFileHandler');
+    public function getLanguageTopics() {
+        return array('file');
+    }
 
-$fileobj = $modx->fileHandler->make($scriptProperties['path'].$scriptProperties['file']);
+    public function initialize() {
+        return true;
+    }
 
-if (!$fileobj->getParentDirectory()->isWritable()) {
-	return $modx->error->failure($modx->lexicon('file_err_unzip_invalid_path'));
+    /**
+     * {@inheritDoc}
+     *
+     * @return array|string
+     */
+    public function process() {
+
+        $this->modx->getService('fileHandler', 'modFileHandler');
+
+        $fileobj = $this->modx->fileHandler->make($this->getProperty('path') . $this->getProperty('file'));
+
+        if (!$this->validate($fileobj)) {
+            return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $fileobj->getPath());
+        }
+        
+        if (!$fileobj->unpack()) {
+            return $this->failure($this->modx->lexicon('file_err_unzip'));
+        }
+
+        return $this->success($this->modx->lexicon('file_unzip'));
+     }
+
+    /**
+     * Validate the incoming fileHandler object
+     * @param modFileSystemResource $fileobj
+     * @return boolean
+     */
+    public function validate(modFileSystemResource $fileobj) {
+
+        if (empty($this->getProperty('path'))) {
+            $this->addFieldError('path', $this->modx->lexicon('file_folder_err_invalid_path'));
+        }
+
+        if (!$fileobj->getParentDirectory()->isWritable()) {
+            $this->addFieldError('path', $this->modx->lexicon('files_dirwritable'));
+        }
+
+        if (!$fileobj->exists()) {
+             $this->addFieldError('path', $this->modx->lexicon('file_err_nf'));
+        }
+        
+        return !$this->hasErrors();
+    }
 }
 
-if (!$fileobj->exists()) {
-	return $modx->error->failure($modx->lexicon('file_err_nf'));
-}
-
-if (!$fileobj->unpack()) {
-	return $modx->error->failure($modx->lexicon('file_err_unzip'));
-}
-
-
-return $modx->error->success();
+return 'modUnzipProcessor';
