@@ -746,7 +746,7 @@ class xPDOTransport {
     public static function _unpack(& $xpdo, $from, $to) {
         $resources = false;
 
-        if ($xpdo->getService('fileHandler', 'modFilehandler', MODX_CORE_PATH . 'model/modx/')) {
+        if ($xpdo->getService('fileHandler', 'modFileHandler', MODX_CORE_PATH . 'model/modx/')) {
             $fileobj = $xpdo->fileHandler->make($from);
             $resources = $fileobj->unpack($to);
         } else {
