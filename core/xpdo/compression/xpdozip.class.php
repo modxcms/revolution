@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -53,12 +53,8 @@ class xPDOZip {
      */
     public function __construct(xPDO &$xpdo, $file, array $options = array()) {
         $this->xpdo =& $xpdo;
-        // $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'xPDOZip: $options' . print_r($options, 1));
-        // $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'xPDOZip: $file' . print_r($file, 1));
         $this->_options = !empty($options) ? $options : (is_array($file) ? $file : array());
-        // $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'xPDOZip: $this->_options' . print_r($this->_options, 1));
         $this->_file = is_string($file) ? $file : (isset($this->_options['file']) ? $this->_options['file'] : '');
-        // $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'xPDOZip: $this->_file' . print_r($this->_file, 1));
         $this->_archive = new ZipArchive();
         if (!empty($this->_file) && file_exists(dirname($this->_file))) {
             if (file_exists($this->_file)) {
