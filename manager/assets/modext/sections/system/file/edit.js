@@ -102,7 +102,7 @@ MODx.panel.EditFile = function(config) {
                     ,name: 'size'
                     ,id: 'modx-file-size'
                     ,anchor: '98%'
-                    ,value: config.record.size || 0
+                    ,value: (config.record.size || 0) + 'B'
                 },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('file_last_accessed')
