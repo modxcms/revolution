@@ -291,8 +291,13 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'file_unzip',
-    'description' => 'perm.file_unzip_desc',
+    'name' => 'file_pack',
+    'description' => 'perm.file_pack_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'file_unpack',
+    'description' => 'perm.file_unpack_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(

@@ -486,13 +486,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.cm.activeNode = null;
     }
 
-    ,unzipFile: function(item,e) {
+    ,unpackFile: function(item,e) {
         var node = this.cm.activeNode;
         MODx.msg.confirm({
-            text: _('file_download_unzip')+ ' ' + node.attributes.id
+            text: _('file_download_unzip') + ' ' + node.attributes.id
             ,url: MODx.config.connectors_url + 'system/filesys.php'
             ,params: {
-                action: 'unzipFile'
+                action: 'unpackFile'
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()

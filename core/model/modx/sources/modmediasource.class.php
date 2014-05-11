@@ -292,7 +292,8 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
             'file_remove' => $this->xpdo->hasPermission('file_remove'),
             'file_update' => $this->xpdo->hasPermission('file_update'),
             'file_upload' => $this->xpdo->hasPermission('file_upload'),
-            'file_unzip' => $this->xpdo->hasPermission('file_unzip'),
+            'file_pack' => $this->xpdo->hasPermission('file_pack'),
+            'file_unpack' => $this->xpdo->hasPermission('file_unpack'),
             'file_view' => $this->xpdo->hasPermission('file_view'),
             'file_create' => $this->xpdo->hasPermission('file_create'),
         );

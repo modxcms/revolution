@@ -1,14 +1,14 @@
 <?php
 /**
- * Unpacks a zip archive
+ * Unpacks an archive file
  *
  * @package modx
  * @subpackage processors.system.filesys.file
  */
-class modUnzipProcessor extends modProcessor {
+class modUnpackProcessor extends modProcessor {
 
     public function checkPermissions() {
-        return $this->modx->hasPermission('file_unzip');
+        return $this->modx->hasPermission('file_unpack');
     }
 
     public function getLanguageTopics() {
@@ -65,4 +65,4 @@ class modUnzipProcessor extends modProcessor {
     }
 }
 
-return 'modUnzipProcessor';
+return 'modUnpackProcessor';
