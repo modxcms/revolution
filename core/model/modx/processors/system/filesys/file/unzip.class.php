@@ -16,6 +16,7 @@ class modUnzipProcessor extends modProcessor {
     }
 
     public function initialize() {
+        $this->properties = $this->getProperties();
         return true;
     }
 
@@ -28,7 +29,7 @@ class modUnzipProcessor extends modProcessor {
 
         $this->modx->getService('fileHandler', 'modFileHandler');
 
-        $fileobj = $this->modx->fileHandler->make($this->getProperty('path') . $this->getProperty('file'));
+        $fileobj = $this->modx->fileHandler->make($this->properties['path'] . $this->properties['file']);
 
         if (!$this->validate($fileobj)) {
             return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $fileobj->getPath());
@@ -48,7 +49,7 @@ class modUnzipProcessor extends modProcessor {
      */
     public function validate(modFileSystemResource $fileobj) {
 
-        if (empty($this->getProperty('path'))) {
+        if (empty($this->properties['path'])) {
             $this->addFieldError('path', $this->modx->lexicon('file_folder_err_invalid_path'));
         }
 
