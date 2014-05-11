@@ -486,6 +486,24 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.cm.activeNode = null;
     }
 
+    ,unzipFile: function(item,e) {
+        var node = this.cm.activeNode;
+        MODx.msg.confirm({
+            text: _('file_download_unzip')+ ' ' + node.attributes.id
+            ,url: MODx.config.connectors_url + 'system/filesys.php'
+            ,params: {
+                action: 'unzipFile'
+                ,file: node.attributes.id
+                ,wctx: MODx.ctx || ''
+                ,source: this.getSource()
+                ,path: MODx.config.base_path + node.attributes.directory
+            }
+            ,listeners: {
+                'success':{fn:this.refreshParentNode,scope:this}
+            }
+        });
+    }
+
     ,downloadFile: function(item,e) {
         var node = this.cm.activeNode;
         MODx.Ajax.request({
