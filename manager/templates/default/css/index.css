@@ -2105,3 +2105,9 @@ span.required {
 	padding: 5px;
 	font-size: 13px;
 }
+
+.x-tip img {
+    min-width:240px;
+    max-width:100%;
+    max-width:66vw;
+}
