@@ -1156,6 +1156,52 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
+     * States whether a resource is a member of a resource group or groups. You may specify
+     * either a string name of the resource group, or an array of names.
+     *
+     * @access public
+     * @param string|array $groups Either a string of a resource group name or an array
+     * of names.
+     * @param boolean $matchAll If true, requires the resource to be a member of all
+     * the resource groups specified. If false, the resource can be a member of only one to
+     * pass. Defaults to false.
+     * @return boolean True if the resource is a member of any of the resource groups
+     * specified.
+     */
+    public function isMember($groups, $matchAll = false) {
+        $isMember = false;
+        $resourceGroupNames = array();
+        $resourceGroupList = $this->getGroupsList();
+
+        foreach ($resourceGroupList['collection'] as $resourceGroup) {
+            /** @var modResourceGroupResource $resourceGroupResource */
+            $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource', array(
+                'document' => $this->get('id'),
+                'document_group' => $resourceGroup->get('id'),
+            ));
+
+            if ($resourceGroupResource) {
+                $resourceGroupNames[] = $resourceGroup->get('name');
+            }
+        }
+        
+        if ($resourceGroupNames) {
+            if (is_array($groups)) {
+                if ($matchAll) {
+                    $matches = array_diff($groups, $resourceGroupNames);
+                    $isMember = empty($matches);
+                } else {
+                    $matches = array_intersect($groups, $resourceGroupNames);
+                    $isMember = !empty($matches);
+                }
+            } else {
+                $isMember = (array_search($groups, $resourceGroupNames) !== false);
+            }
+        }
+        return $isMember;
+    }
+
+    /**
      * Determine the controller path for this Resource class
      * @static
      * @param xPDO $modx A reference to the modX object
