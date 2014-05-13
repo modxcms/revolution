@@ -788,6 +788,11 @@ td.x-date-mp-sep {
   color: complement($tipText);
   font: $fontMedium;
 }
+.x-tip img {
+  min-width:240px;
+  max-width:100%;
+  max-width:66vw;
+}
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
 .x-form-invalid-tip .x-tip-bl, .x-form-invalid-tip .x-tip-br, .x-form-invalid-tip .x-tip-ml, .x-form-invalid-tip .x-tip-mr {
   background-image: url(../images/modx-theme/form/error-tip-corners.gif);
