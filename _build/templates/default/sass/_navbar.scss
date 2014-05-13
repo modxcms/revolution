@@ -99,7 +99,7 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include retina-image("../images/modx-logo", 32px 33px);
+  @include retina-image("../images/modx-logo", 32px 33px, "png", null, "@2x");
   background-position:center center;
   background-repeat:no-repeat;
   width: 50px;
