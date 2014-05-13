@@ -571,7 +571,7 @@ MODx.combo.Gender = function(config) {
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
-            ,data: [['',0],[_('user_male'),1],[_('user_female'),2]]
+            ,data: [['',0],[_('user_male'),1],[_('user_female'),2],[_('user_other'),3]]
         })
         ,displayField: 'd'
         ,valueField: 'v'
