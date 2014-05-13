@@ -235,9 +235,6 @@ hr {
   color: #999 !important;
 }
 
-a.x-grid-link{ color:$mainText; text-decoration: none; }
-a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
-
 /* collapse for resource panel */
 #modx-resource-tabs .x-tool-toggle {
   margin-top: 0;
@@ -543,7 +540,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url("../images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
+  background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
   border-color: #CACACA #C0C0C0 #AAA;
   border-radius: 3px;
@@ -1322,7 +1319,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding-top: 4px;
 }
 
-#modx-resource-settings .modx-tv-label,
+#modx-resource-settings .modx-tv-label, 
 #modx-page-settings .modx-tv-label {
   width: 216px;
 }
@@ -1996,3 +1993,19 @@ body.ext-ie7 .x-superboxselect-item {
   }
 }
 
+
+.upload-error{
+  color: #f00;
+}
+
+.upload-success{
+  color: #090;
+}
+
+.upload-status-text{
+  white-space: normal;
+}
+
+.upload-thumb{
+  float: right;
+}
