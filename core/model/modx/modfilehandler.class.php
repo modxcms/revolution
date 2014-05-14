@@ -497,15 +497,20 @@ class modFile extends modFileSystemResource {
     /**
      * Sends the file as a download
      * 
-     * @param string $mimetype The mimetype of the file to download
+     * @param array $options Optional configuration options like mimetype and filename
      * 
      * @return downloadable file
      */
-    public function download($mimetype = 'application/octet-stream') {
+    public function download($options = array()) {
+        $options = array_merge(array(
+            'mimetype' => 'application/octet-stream',
+            'filename' => $this->getBasename(),
+        ), $options);
+
         $output = $this->getContents();
 
-        header('Content-type: ' . $mimetype);
-        header('Content-Disposition: attachment; filename=' . $this->getBasename());
+        header('Content-type: ' . $options['mimetype']);
+        header('Content-Disposition: attachment; filename=' . $options['filename']);
         header('Content-Length: ' . $this->getSize());
         
         echo $output;

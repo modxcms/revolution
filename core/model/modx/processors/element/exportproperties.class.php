@@ -39,7 +39,7 @@ class modElementExportPropertiesProcessor extends modProcessor {
 
         $fileName = strtolower(str_replace(' ', '-', $this->getProperty('id'))) . '.export.js';
 
-        $fileobj = $this->modx->fileHandler->make(MODX_CORE_PATH . 'export/properties/' . $fileName);
+        $fileobj = $this->modx->fileHandler->make($this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/properties/' . $fileName);
 
         $fileobj->setContent($data);
         $fileobj->download();
