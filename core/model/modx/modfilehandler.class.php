@@ -390,6 +390,14 @@ class modFile extends modFileSystemResource {
     }
 
     /**
+     * Gets the temporarly set content of the file before its saved
+     * @return string The content
+     */
+    public function getContent() {
+        return $this->content;
+    }
+
+    /**
      * Get the contents of the file
      *
      * @return string The contents of the file
@@ -437,7 +445,10 @@ class modFile extends modFileSystemResource {
      * @return int The size of the file, in bytes
      */
     public function getSize() {
-        return filesize($this->path);
+        if (!$size = filesize($this->path)) {
+            $size = mb_strlen($this->content);
+        }
+        return $size;
     }
 
     /**
@@ -486,6 +497,32 @@ class modFile extends modFileSystemResource {
     public function remove() {
         if (!$this->exists()) return false;
         return @unlink($this->path);
+    }
+
+    /**
+     * Sends download headers to the user
+     * 
+     * As we don't want to always save a file to the filesystem
+     * a new method getContent() was introduced to support makeDownload()
+     * it allows to get the content of a file object when it's not saved yet
+     * and thus allows to send a download without having a real file
+     * to work completely correct also the method getSize() was modified
+     * to read the size of the content when the file isn't in the filesystem
+     * 
+     * @return downloadable file
+     */
+    public function makeDownload() {
+        if ($this->getContents()) {
+            $output = $this->getContents();
+        } else {
+            $output = $this->getContent();
+        }
+
+        header('Content-type: application/octetstream');
+        header('Content-Disposition: attachment; filename=' . $this->getBasename());
+        header('Content-Length: ' . $this->getSize());
+        // echo is needed here, the downloaded file will be empty with return!
+        echo $output;
     }
 }
 
