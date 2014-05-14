@@ -431,19 +431,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
 
     ,exportProperties: function (btn,e) {
         var id = Ext.getCmp('modx-combo-property-set').getValue();
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'element/exportProperties'
-                ,data: this.encode()
-                ,id: id
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    location.href = MODx.config.connector_url+'?action=element/exportProperties&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
-                },scope:this}
-            }
-        });
+        location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download=1&id='+id+'&data='+this.encode()+'&HTTP_MODAUTH='+MODx.siteId;
     }
 
     ,importProperties: function (btn,e) {

@@ -501,7 +501,7 @@ class modFile extends modFileSystemResource {
      * 
      * @return downloadable file
      */
-    public function download($mimetype = 'application/octetstream') {
+    public function download($mimetype = 'application/octet-stream') {
         $output = $this->getContents();
 
         header('Content-type: ' . $mimetype);
