@@ -56,6 +56,20 @@ class modElementTvTemplateGetList extends modProcessor {
 
         /* query for templates */
         $c = $this->modx->newQuery('modTemplate');
+        $query = $this->getProperty('query');
+        if (!empty($query)) {
+            $c->where(array(
+                'templatename:LIKE' => "%$query%"
+            ));
+        }
+        $c->leftJoin('modCategory','Category');
+        $category = $this->getProperty('category');
+        if (!empty($category)) {
+            $c->where(array(
+                'Category.id' => $category
+            ));
+        }
+        
         $data['total'] = $this->modx->getCount('modTemplate',$c);
         
         $c->leftJoin('modTemplateVarTemplate','TemplateVarTemplates',array(
@@ -64,6 +78,9 @@ class modElementTvTemplateGetList extends modProcessor {
         ));
         
         $c->select($this->modx->getSelectColumns('modTemplate','modTemplate'));
+        $c->select(array(
+            'category_name' => 'Category.category',
+        ));
         $c->select($this->modx->getSelectColumns('modTemplateVarTemplate','TemplateVarTemplates','',array('tmplvarid')));
         $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
         if ($isLimit) $c->limit($limit,$this->getProperty('start'));
@@ -82,6 +99,7 @@ class modElementTvTemplateGetList extends modProcessor {
         $templateArray = $template->toArray();
         $templateArray['access'] = $template->get('tmplvarid');
         $templateArray['access'] = empty($templateArray['access']) ? false : true;
+        $templateArray['category_name']= $template->get('category_name');
         unset($templateArray['content']);
         return $templateArray;
     }
