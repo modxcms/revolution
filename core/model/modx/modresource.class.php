@@ -1089,18 +1089,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - No resource group: '.$resourceGroupPk);
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - No resource group: ' . $resourceGroupPk);
                 return false;
             }
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
-        $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
-            'document' => $this->get('id'),
-            'document_group' => $resourceGroup->get('id'),
-        ));
-        if ($resourceGroupResource) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - Resource '.$this->get('id').' already in resource group: '.$resourceGroupPk);
+
+        if ($this->isMember($resourceGroup->get('name'))) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource '.$this->get('id') . ' already in resource group: ' . $resourceGroupPk);
             return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
@@ -1125,21 +1122,23 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - No resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - No resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
                 return false;
             }
         } else {
             $resourceGroup =& $resourceGroupPk;
+        }
+        
+        if (!$this->isMember($resourceGroup->get('name'))) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+            return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
         $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
             'document' => $this->get('id'),
             'document_group' => $resourceGroup->get('id'),
         ));
-        if (!$resourceGroupResource) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - Resource '.$this->get('id').' is not in resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
-            return false;
-        }
+
         return $resourceGroupResource->remove();
     }
 
