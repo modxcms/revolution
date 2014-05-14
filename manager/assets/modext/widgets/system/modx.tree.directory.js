@@ -555,13 +555,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,beforeUpload: function() {
-        var path;
+        var path = this.config.rootId || '/';
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
                 path = this.getPath(this.cm.activeNode.parentNode);
             }
-        } else { path = '/'; }
+        }
 
         this.uploader.setBaseParams({
             action: 'browser/file/upload'
