@@ -329,6 +329,25 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
+     * Get a collection of assigned Resource Groups for a given Resource.
+     * 
+     * @static
+     * @param modResource &$resource A reference to the modResource to get the groups from.
+     * @return array An array containing the collection and total.
+     */
+    public static function listAssignedGroups(modResource &$resource) {
+        $result = array('collection' => array());
+        $c = $resource->xpdo->newQuery('modResourceGroup');
+        $c->innerJoin('modResourceGroupResource','ResourceGroupResources');
+        $c->where(array(
+            'ResourceGroupResources.document' => $resource->get('id')
+        ));
+
+        $result['collection'] = $resource->xpdo->getCollection('modResourceGroup', $c);
+        return $result;
+    }
+
+    /**
      * Retrieve a collection of Template Variables for a Resource.
      *
      * @static
@@ -1156,6 +1175,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
+     * Gets a collection of assigned Resource Groups for the Resource.
+     *
+     * @return array An array containing the collection and total.
+     */
+    public function getAssignedGroupsList() {
+        return $this->xpdo->call('modResource', 'listAssignedGroups', array(&$this));
+    }
+
+    /**
      * States whether a resource is a member of a resource group or groups. You may specify
      * either a string name of the resource group, or an array of names.
      *
@@ -1171,18 +1199,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function isMember($groups, $matchAll = false) {
         $isMember = false;
         $resourceGroupNames = array();
-        $resourceGroupList = $this->getGroupsList();
+        $resourceGroupList = $this->getAssignedGroupsList();
 
         foreach ($resourceGroupList['collection'] as $resourceGroup) {
-            /** @var modResourceGroupResource $resourceGroupResource */
-            $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource', array(
-                'document' => $this->get('id'),
-                'document_group' => $resourceGroup->get('id'),
-            ));
-
-            if ($resourceGroupResource) {
-                $resourceGroupNames[] = $resourceGroup->get('name');
-            }
+            $resourceGroupNames[] = $resourceGroup->get('name');
         }
         
         if ($resourceGroupNames) {
