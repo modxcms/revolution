@@ -329,25 +329,6 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Get a collection of assigned Resource Groups for a given Resource.
-     * 
-     * @static
-     * @param modResource &$resource A reference to the modResource to get the groups from.
-     * @return array An array containing the collection and total.
-     */
-    public static function listAssignedGroups(modResource &$resource) {
-        $result = array('collection' => array());
-        $c = $resource->xpdo->newQuery('modResourceGroup');
-        $c->innerJoin('modResourceGroupResource','ResourceGroupResources');
-        $c->where(array(
-            'ResourceGroupResources.document' => $resource->get('id')
-        ));
-
-        $result['collection'] = $resource->xpdo->getCollection('modResourceGroup', $c);
-        return $result;
-    }
-
-    /**
      * Retrieve a collection of Template Variables for a Resource.
      *
      * @static
@@ -1175,12 +1156,24 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Gets a collection of assigned Resource Groups for the Resource.
+     * Gets all the Resource Group names of the resource groups this resource is assigned to.
      *
-     * @return array An array containing the collection and total.
+     * @access public
+     * @return array An array of Resource Group names.
      */
-    public function getAssignedGroupsList() {
-        return $this->xpdo->call('modResource', 'listAssignedGroups', array(&$this));
+    public function getResourceGroupNames() {
+        $resourceGroupNames= array();
+        
+        $resourceGroups = $this->xpdo->getCollectionGraph('modResourceGroup', '{"ResourceGroupResources":{}}', array('ResourceGroupResources.document' => $this->get('id')));
+        
+        if ($resourceGroups) {
+            /** @var modResourceGroup $resourceGroup */
+            foreach ($resourceGroups as $resourceGroup) {
+                $resourceGroupNames[] = $resourceGroup->get('name');
+            }
+        }
+
+        return $resourceGroupNames;
     }
 
     /**
@@ -1198,12 +1191,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function isMember($groups, $matchAll = false) {
         $isMember = false;
-        $resourceGroupNames = array();
-        $resourceGroupList = $this->getAssignedGroupsList();
-
-        foreach ($resourceGroupList['collection'] as $resourceGroup) {
-            $resourceGroupNames[] = $resourceGroup->get('name');
-        }
+        $resourceGroupNames = $this->getResourceGroupNames();
         
         if ($resourceGroupNames) {
             if (is_array($groups)) {
