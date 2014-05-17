@@ -228,16 +228,25 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearFilter: function() {
-        var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
+        var ns = MODx.request['ns'] ? MODx.request['ns'] : 'core';
+        var area = MODx.request['area'] ? MODx.request['area'] : '';
+
         this.getStore().baseParams = this.initialConfig.baseParams;
-        Ext.getCmp('modx-filter-namespace').reset();
+
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
+
+        Ext.getCmp('modx-filter-namespace').reset();
         Ext.getCmp('modx-filter-key').reset();
+
+        this.getStore().baseParams.namespace = ns;
+        this.getStore().baseParams.area = area;
+        this.getStore().baseParams.key = '';
+
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
