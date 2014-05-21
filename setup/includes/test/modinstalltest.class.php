@@ -42,6 +42,7 @@ abstract class modInstallTest {
         $this->_checkDatabase();
         $this->_checkSafeMode();
         $this->_checkSuhosin();
+        $this->_checkNoCompress();
         $this->_checkDocumentRoot();
 
         return $this->results;
@@ -326,6 +327,23 @@ abstract class modInstallTest {
         } else {
             $this->pass('test_suhosin_max_length');
             $this->install->settings->set('compress_js',1);
+        }
+        $this->install->settings->store();
+    }
+
+    /**
+     * Check if the user requested css/js compression to be off, regardless of Suhosin check result.
+     * Force css/js compression to be off if the option was checked during install (adv options).
+     */
+    public function _checkNoCompress() {
+        $this->title('test_nocompress',$this->install->lexicon('test_nocompress'));
+        if ($this->install->settings->get('nocompress') == 1) {
+            $this->pass('test_nocompress', $this->install->lexicon('test_nocompress_disabled'));
+            $this->install->settings->set('compress_js',0);
+            $this->install->settings->set('compress_css',0);
+        }
+        else {
+            $this->pass('test_nocompress', $this->install->lexicon('test_nocompress_skip'));
         }
         $this->install->settings->store();
     }
