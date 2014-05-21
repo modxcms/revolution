@@ -335,7 +335,7 @@ abstract class modInstallTest {
      * Check if the user requested css/js compression to be off, regardless of Suhosin check result.
      * Force css/js compression to be off if the option was checked during install (adv options).
      */
-    public function _checkNocompress() {
+    public function _checkNoCompress() {
         $this->title('test_nocompress',$this->install->lexicon('test_nocompress'));
         if ($this->install->settings->get('nocompress') == 1) {
             $this->pass('test_nocompress', $this->install->lexicon('test_nocompress_disabled'));
