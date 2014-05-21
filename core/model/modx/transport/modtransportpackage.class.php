@@ -281,10 +281,18 @@ class modTransportPackage extends xPDOObject {
         $transferred= false;
         $content= '';
         if (is_dir($targetDir) && is_writable($targetDir)) {
-            if (!is_array($this->xpdo->version)) { $this->xpdo->getVersionData(); }
-            $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+            /** @var modTransportProvider $provider */
+            $provider = $this->getOne('Provider');
+            if (!$provider) {
+                // This package was not installed from a provider, let's break
+                return $transferred;
+            }
 
-            $source= $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
+            // Get the file URL from the provider
+            $source = $this->getFileDownloadUrl();
+            if (!$source || empty($source) || !is_string($source)) {
+                return $transferred;
+            }
 
             /* see if user has allow_url_fopen on and is not behind a proxy */
             $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
@@ -359,6 +367,48 @@ class modTransportPackage extends xPDOObject {
             )));
         }
         return $transferred;
+    }
+
+
+    /**
+     * Get the actual file location from the provider
+     *
+     * @return bool|string
+     */
+    public function getFileDownloadUrl() {
+        /** @var modTransportProvider $provider */
+        $provider = $this->getOne('Provider');
+        if (!$provider) {
+            return false;
+        }
+
+        $provider->getClient();
+
+        // First, try to grab package info from the provider
+        /** @var modRestResponse $response */
+        $response = $provider->request('package', 'GET', array(
+            'signature' => $this->get('signature'),
+        ));
+        if ($response->isError()) {
+            return false;
+        }
+        $metaXML = $response->toXml();
+        $location = (string) $metaXML->location;
+        if (!$location || empty($location)) {
+            return false;
+        }
+
+        $this->xpdo->rest->setResponseType('text');
+        // Try to get real package URL from the provider
+        $response = $this->xpdo->rest->request($location, '', 'GET', array(
+            'getUrl' => true,
+        ));
+        $this->xpdo->rest->setResponseType('xml');
+        if (empty($response) || empty($response->response)) {
+            return;
+        }
+
+        return (string)$response->response;
     }
 
 
