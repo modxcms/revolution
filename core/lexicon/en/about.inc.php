@@ -25,6 +25,7 @@ $_lang['support'] = 'Commercial Support';
 $_lang['support_title'] = 'Buy an Emergency Support Ticket Now';
 $_lang['support_description'] = 'Priority support from the source';
 $_lang['support_link'] = 'http://modx.com/support/';
+$_lang['email_placeholder'] = 'you@example.com';
 $_lang['email_sub'] = 'Stay Up to Date with MODX';
 $_lang['email_sub_description'] = 'Subscribe to the <b>MODX Newsletter</b> to receive all the important news about MODX. Just enter your email below—we promise to never send spam.';
 $_lang['email_sub_button'] = 'Sign up';

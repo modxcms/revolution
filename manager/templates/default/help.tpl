@@ -56,7 +56,7 @@
 
             <input type="hidden" name="MERGE7" value="[[++site_url]] Manager" id="MERGE7">
 
-            <input type="email" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value=""
+            <input type="email" placeholder="{$_lang.email_placeholder}" required id="MERGE0" name="MERGE0" value=""
                    class="textbox"/>
             <input type="submit" class="primary-button" name="Submit" value="{$_lang.email_sub_button}"/>
         </form>
@@ -65,7 +65,7 @@
 
         <p><a href=""><i class="icon icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a></p>
 
-        <p><a href=""><i class="icon icon-2x icon-facebook-sign"></i>Facebook: www.facebook.com/modxcms </a></p>
+        <p><a href=""><i class="icon icon-2x icon-facebook"></i>Facebook: www.facebook.com/modxcms </a></p>
 
         <p><a href=""><i class="icon icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
     </div>
