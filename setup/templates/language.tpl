@@ -8,7 +8,7 @@
 
 <div class="setup_navbar" style="border-top: 0;">
     <p class="title">{$_lang.choose_language}:
-        <select name="language">
+        <select name="language" autofocus="autofocus">
             {$languages}
     	</select>
     </p>

@@ -18,7 +18,7 @@
 {if $failed}
     <button type="button" id="modx-next" onclick="MODx.go('summary');">{$_lang.retry}</button>
 {else}
-    <input type="submit" id="modx-next" name="proceed" value="{$_lang.install}" />
+    <input type="submit" id="modx-next" name="proceed" value="{$_lang.install}" autofocus="autofocus" />
 {/if}
     <button type="button" id="modx-back" onclick="MODx.go('{$back}');">{$_lang.back}</button>
 </div>
