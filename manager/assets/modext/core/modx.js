@@ -56,11 +56,21 @@ Ext.extend(MODx,Ext.Component,{
         });
     }
 
+    /**
+     * Add the given component to the modx-content container
+     *
+     * @param {String|Object} cmp Either a component xtype (string) or an object/configuration
+     *
+     * @return void
+     */
     ,add: function(cmp) {
+        if (typeof cmp === 'string') {
+            cmp = { xtype: cmp }
+        }
         var ctr = Ext.getCmp('modx-content');
         if (ctr) {
             ctr.removeAll();
-            ctr.add({ xtype: cmp });
+            ctr.add(cmp);
             ctr.doLayout();
         }
     }
