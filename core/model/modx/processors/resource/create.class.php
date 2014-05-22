@@ -324,7 +324,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
         /* default pagetitle if not reloading template */
         if (!$this->getProperty('reloadOnly',false)) {
-            if (empty($pageTitle)) {
+            if ($pageTitle === '') {
                 $pageTitle = $this->modx->lexicon('resource_untitled');
             }
         }
