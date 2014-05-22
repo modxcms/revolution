@@ -199,7 +199,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
     public function trimPageTitle() {
         $pageTitle = $this->getProperty('pagetitle',null);
         if ($pageTitle != null && !$this->getProperty('reloadOnly',false)) {
-            if (empty($pageTitle)) {
+            if ($pageTitle === '') {
                 $pageTitle = $this->modx->lexicon('resource_untitled');
             }
             $pageTitle = trim($pageTitle);
