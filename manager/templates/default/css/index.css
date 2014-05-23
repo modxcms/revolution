@@ -4671,6 +4671,9 @@ having to do some real janky stuff to work with ExtJS markup
   padding-bottom: 2px;
   border-radius: 2px 2px 0 0;
 }
+.vertical-tabs-header .x-tab-strip li.x-tab-strip-active {
+  border-radius: 0;
+}
 
 .x-tab-strip-wrap,
 .x-tab-panel-header,
