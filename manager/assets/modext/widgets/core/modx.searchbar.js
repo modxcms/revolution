@@ -14,7 +14,7 @@ MODx.SearchBar = function(config) {
             tag: 'span'
             ,cls: 'x-form-trigger icon icon-large icon-search'
         }
-        ,triggerAction: 'query'
+        //,triggerAction: 'query'
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
@@ -77,6 +77,14 @@ MODx.SearchBar = function(config) {
             ,root: 'results'
             ,totalProperty: 'total'
             ,fields: ['name', '_action', 'description', 'type']
+            ,listeners: {
+                beforeload: function(store, options) {
+                    if (options.params._action) {
+                        // Prevent weird query on first combo box blur
+                        return false;
+                    }
+                }
+            }
         })
 
         ,listeners: {
@@ -149,7 +157,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         this.el.setWidth(to - this.getTriggerWidth(), true);
     }
     /**
-     * Compute the available max height to results could be scrollable if required
+     * Compute the available max height so results could be scrollable if required
      *
      * @returns {number}
      */

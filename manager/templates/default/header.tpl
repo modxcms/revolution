@@ -54,8 +54,10 @@
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
                     <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
-                </li>{if $_search}
-                <li id="modx-manager-search"></li>{/if}
+                </li>
+                {if $_search}
+                <li id="modx-manager-search"></li>
+                {/if}
                 {$navb}
             </ul>
         </div>
