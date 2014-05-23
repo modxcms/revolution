@@ -313,7 +313,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,animCollapse: false
                 ,hideMode: 'offsets'
                 ,items: ct
-                ,style: 'margin-top: 10px'
             });
         }
         if (MODx.config.tvs_below_content == 1) {

@@ -23,7 +23,7 @@ having to do some real janky stuff to work with ExtJS markup
 
 %shaded-box {
 	@include shaded-box();
-	background:$gainsboro;
+	background: $gainsboro;
 	.x-panel-header { 
 		border:1px solid $borderColor !important; /* #shame */
 		margin:0;

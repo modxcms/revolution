@@ -131,24 +131,25 @@ hr {
 }
 
 #modx-resource-tabs {
-	@extend %shaded-tab-box;
-	.x-tab-panel-header {
-		width:auto !important; /* #shame */
-		&.vertical-tabs-header {
-			width:150px !important; /* #shame */
-		}
-		.x-tab-strip {
-			li {
-				float:left;
-				//width:auto;
-				margin-left:0;
-			}
-		}
-	}
-	#modx-tv-tabs {
-		border-left:0;
-		border-right:0;
-	}
+  margin: 20px 0 0;
+  @extend %shaded-tab-box;
+  .x-tab-panel-header {
+    width:auto !important; /* #shame */
+    &.vertical-tabs-header {
+      width:150px !important; /* #shame */
+    }
+    .x-tab-strip {
+      li {
+        float:left;
+        //width:auto;
+        margin-left:0;
+      }
+    }
+  }
+  #modx-tv-tabs {
+      border-left:0;
+      border-right:0;
+  }
 }
 
 #modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {
@@ -165,7 +166,14 @@ hr {
 }
 
 #modx-resource-content {
-	@extend %shaded-box;
+  background-color: $tabStripBg;
+  .x-panel-header {
+      margin:0;
+      padding: 15px;
+  }
+  .x-panel-bwrap {
+      border:none;
+  }
 }
 
 #modx-content-above, #modx-content-below {
@@ -1191,6 +1199,10 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.5;
   margin-top: 5px;
   padding: 15px !important;
+
+  .x-panel-bwrap {
+    background-color: transparent !important;
+  }
 }
 
 .with-title .panel-desc {
