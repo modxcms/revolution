@@ -347,5 +347,8 @@ class TopMenu
     }
 }
 
+// Set Smarty placeholder to display search bar, if appropriate
+$this->setPlaceholder('_search', $modx->hasPermission('search'));
+
 $menu = new TopMenu($this);
 $menu->render();
