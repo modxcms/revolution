@@ -119,9 +119,6 @@ module.exports = function(grunt) {
 		  }
 		},
 		watch: { /* trigger tasks on save */
-			options: {
-				livereload: true
-			},
 			scss: {
 				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
 				tasks: ['sass:dist', 'autoprefixer', 'cssmin:compress', 'growl:sass']
@@ -129,7 +126,14 @@ module.exports = function(grunt) {
 			map: {
 				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
 				tasks: ['sass:map', 'growl:map']
-			}
+			},
+            css: {
+                options: {
+                    livereload: true
+                },
+                files: ['<%= dirs.css %>*.css'],
+                tasks: []
+            }
 		},
 		clean: { /* take out the trash */
 			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
