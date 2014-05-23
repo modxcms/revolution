@@ -8,6 +8,10 @@ $mainBg: #F2F2F2;
 $softGrey: rgb(220, 220, 220);
 $darkNeutral:#53595F;
 $black: #020608;
+$gridsorted: #9FB4C8;
+$griddivider: #E4E9EE;
+$gridrowalt: #F5F6F9;
+
 
 $lightBg: $gainsboro;
 $darkBg: $darkNeutral;
@@ -78,7 +82,6 @@ $tabStripBg: rgb(245,245,245);
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: $colorSplash;
-$tabFont: 14px titilliumregular, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
 $tabInactiveText: #757575;
 $tabHoverText: darken($colorSplash, 20%);
 
@@ -86,10 +89,17 @@ $tabHoverText: darken($colorSplash, 20%);
 $selected:lighten(desaturate($colorSplash,45%),50%);
 $over: rgb(250, 250, 250);
 
-$bodyfonts: 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
-$headfonts: titilliumregular, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;
+$bodyfonts: 'Helvetica Neue', Helvetica, arial, tahoma, sans-serif;
+$altfonts: titilliumregular, $bodyfonts;
+$altfontslight: titilliumlight, $bodyfonts;
+$headfonts: $bodyfonts;
 $codefonts: "Courier New", Courier, monospace;
+$tabFont: 14px $bodyfonts;
 $buttonfonts: $bodyfonts;
+$treePseudoRootFont: normal 14px/35px $headfonts;
+$treeNodeFont: normal 13px/25px $bodyfonts;
+
+
 $buttonColor: $colorSplash;
 $buttonBackground: $white;
 $buttonColorActive: $white;
@@ -105,5 +115,3 @@ $fontNavbar: normal 13px $headfonts;
 $fontH2:     normal 25px $headfonts;
 $fontH3:       bold 15px $headfonts;
 
-$treePseudoRootFont: normal 14px/35px $headfonts;
-$treeNodeFont: normal 13px/25px titilliumlight, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;

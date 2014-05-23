@@ -314,8 +314,8 @@
 }
 
 .x-grid3-hd-row td {
-  border-left: 1px solid rgb(229,233,238);
-  border-right: 1px solid rgb(229,233,238);
+  border-left: 1px solid $griddivider;
+  border-right: none;
 }
 
 .x-grid3-hd-row td.x-grid3-cell-first {
@@ -347,7 +347,7 @@
 }
 
 .x-grid3-row-alt {
-  background-color: #fafafa;
+  background-color: $gridrowalt;
 }
 
 .x-panel-body-noheader .x-grid3-row {
@@ -392,7 +392,6 @@
 .x-grid3-header .x-grid3-hd-row td {
   color: rgb(105,105,105);
   font-weight: bold;
-  font-family: titillium_bdbold, 'Helvetica Neu', Helvetica, arial, tahoma sans-serif;;
 }
 .x-grid3-header-pop {
   border-left-color: #DFDFDF;
@@ -401,19 +400,18 @@
   background-image: url(../images/modx-theme/grid/hd-pop.gif);
   border-left-color: #eee;
 }
-td.x-grid3-hd-over, td.sort-desc, td.sort-asc, td.x-grid3-hd-menu-open {
-  border-left-color: #9a9a9a;
-  border-right-color: #363636;
+td.x-grid3-hd-over, 
+td.sort-desc, 
+td.sort-asc, 
+td.x-grid3-hd-menu-open {
+  border-left-color: $griddivider;
 }
-td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-asc .x-grid3-hd-inner, td.x-grid3-hd-menu-open .x-grid3-hd-inner {
-  background: #777;
-  background: -moz-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  background: -o-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8e8e8e), color-stop(100%, #777777));
-  background: -webkit-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  background: linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8E8E8E,endColorstr=#777777,GradientType=0);
+td.x-grid3-hd-over .x-grid3-hd-inner, 
+td.sort-desc .x-grid3-hd-inner, 
+td.sort-asc .x-grid3-hd-inner, 
+td.x-grid3-hd-menu-open .x-grid3-hd-inner {
+  background: $gridsorted;
+  color: $white;
 }
 .sort-asc .x-grid3-sort-icon {
   background-image: url(../images/modx-theme/grid/sort_asc.gif);
