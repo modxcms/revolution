@@ -27,12 +27,13 @@
 <script src="{$_config.manager_url}min/index.php?g=coreJs3" type="text/javascript"></script>
 {/if}
 
+{if $_search}
 <script type="text/javascript">
     Ext.onReady(function() {
         new MODx.SearchBar;
     });
 </script>
-
+{/if}
 
 {$maincssjs}
 {foreach from=$cssjs item=scr}
@@ -53,8 +54,8 @@
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
                     <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
-                </li>
-                <li id="modx-manager-search"></li>
+                </li>{if $_search}
+                <li id="modx-manager-search"></li>{/if}
                 {$navb}
             </ul>
         </div>

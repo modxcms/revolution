@@ -9,12 +9,15 @@ MODx.SearchBar = function(config) {
         ,id: 'modx-uberbar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
-        //,autoSelect: false
         ,listAlign: [ 'tl-bl?', [0,0] ]
-        ,triggerConfig: {tag: 'span', cls: 'x-form-trigger icon icon-large icon-search'}
+        ,triggerConfig: {
+            tag: 'span'
+            ,cls: 'x-form-trigger icon icon-large icon-search'
+        }
+        ,triggerAction: 'query'
         ,minChars: 1
         ,displayField: 'name'
-        ,valueField: 'action'
+        ,valueField: '_action'
         ,width: 174
         ,maxWidth: 300
         ,itemSelector: '.item'
@@ -27,9 +30,15 @@ MODx.SearchBar = function(config) {
             '</tpl>',
                 '<p class="item"><a><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
             '</div >',
-            '</tpl>', {
+            '</tpl>'
+            ,{
+                /**
+                 * Get the appropriate CSS class based on the result type
+                 *
+                 * @param {Array} values
+                 * @returns {string}
+                 */
                 getClass: function(values) {
-                    //console.log('in test!', values);
                     switch (values.type) {
                         case 'resources':
                             return 'file-o';
@@ -49,7 +58,12 @@ MODx.SearchBar = function(config) {
                             return 'mail-forward';
                     }
                 }
-
+                /**
+                 * Get the result type lexicon
+                 *
+                 * @param {string} type
+                 * @returns {string}
+                 */
                 ,getLabel: function(type) {
                     return _('search_resulttype_' + type);
                 }
@@ -62,13 +76,8 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', 'action', 'description', 'type']
+            ,fields: ['name', '_action', 'description', 'type']
         })
-
-        ,onTypeAhead : function() {}
-        ,onSelect: function(record) {
-            MODx.loadPage('?a=' + record.data.action);
-        }
 
         ,listeners: {
             beforequery: {
@@ -111,6 +120,17 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 //        });
     }
 
+    // Nullify the "parent" function
+    ,onTypeAhead : function() {}
+    /**
+     * Go to the selected record "action" page
+     *
+     * @param {Object} record
+     */
+    ,onSelect: function(record) {
+        MODx.loadPage('?a=' + record.data._action);
+    }
+
     ,focusBar: function() {
         this.selectText();
         this.animate();
@@ -118,11 +138,21 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     ,blurBar: function() {
         this.animate(true);
     }
+    /**
+     * Animate the input "grow"
+     *
+     * @param {Boolean} blur Whether or not the input loses focus (to "minimize" the input width)
+     */
     ,animate: function(blur) {
         var to = blur ? this.width : this.maxWidth;
         this.wrap.setWidth(to, true);
         this.el.setWidth(to - this.getTriggerWidth(), true);
     }
+    /**
+     * Compute the available max height to results could be scrollable if required
+     *
+     * @returns {number}
+     */
     ,getViewPortSize: function() {
         var height = 300;
         if (window.innerHeight !== undefined) {
