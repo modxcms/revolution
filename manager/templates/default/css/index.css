@@ -4127,6 +4127,7 @@ having to do some real janky stuff to work with ExtJS markup
 .primary-button, .x-btn.primary-button, #modx-abtn-save {
   background-image: -webkit-linear-gradient(left top, #58a598, #3c8e8b);
   background-image: linear-gradient(to right bottom , #58a598, #3c8e8b);
+  background-color: #58a598;
   color: white;
 }
 .x-item-disabled.primary-button, .x-item-disabled#modx-abtn-save {
@@ -4150,10 +4151,11 @@ having to do some real janky stuff to work with ExtJS markup
   right: 33px;
   z-index: 9;
   left: auto;
-  background: none;
-  padding: 0;
+  background: #f2f2f2;
+  padding: 5px;
   border: 0;
   font-family: "Helvetica Neue", Helvetica, arial, tahoma, sans-serif;
+  border-radius: 6px;
 }
 #modx-action-buttons .x-toolbar-left {
   width: auto !important;

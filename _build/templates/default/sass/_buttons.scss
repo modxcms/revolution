@@ -12,10 +12,11 @@
   right: 33px;
   z-index: 9;
   left: auto;
-  background: none;
-  padding: 0;
+  background: $mainBg;
+  padding: 5px;
   border: 0;
   font-family: $buttonfonts;
+  border-radius: 6px;
 
   .x-toolbar-left {
     width: auto !important;
