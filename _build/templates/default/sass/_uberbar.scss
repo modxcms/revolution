@@ -65,28 +65,35 @@
 
 .modx-manager-search-results {
   @include box-sizing(border-box);
-  background: rgba(240, 240, 240, 0.95);
+  background: transparent;
   border-radius: 0 0 2px 2px;
   border: $borderColor;
   box-shadow: $shadower;
   height: auto !important;
-  margin: 1px 0 0 -2px;
-  left: 20px;
   position: relative;
   width: 450px !important;
 }
-
+.modx-manager-search-results:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -7px;
+  left: 12px;
+  border: 8px solid transparent;
+  border-bottom: 8px solid $searchresults;
+}
 .modx-manager-search-results .x-combo-list-inner {
+  background: $searchresults;
   width: 100% !important;
-  border:1px solid $borderColor;
   border-top:none;
   @include box-sizing(border-box);
   overflow:hidden;
+  margin-top: 9px;
 }
 
 .modx-manager-search-results .section {
-  background-color: #f9f9f9;
-  border-left: 1px solid #e5e5e5;
+  //background-color: #f9f9f9;
+  border-left: 1px solid darken($searchresults,7%);
   font-size: 13px;
   margin-left: 116px;
   position: relative;
@@ -105,10 +112,11 @@
 
 .modx-manager-search-results p {
 	@extend %nav-item;
+  color: $white;
 }
 
 .modx-manager-search-results h3 {
-  color: #aaa;
+  color: $searchresultshead;
   font-size: .85em;
   font-weight: normal;
   left: -116px;
@@ -161,7 +169,7 @@
 
 .modx-manager-search-results .x-combo-selected {
   background-color: $colorSplash !important;
-  box-shadow: inset 0 -1px 1px darken($colorSplash, 10%), inset 0 1px 1px lighten($colorSplash, 10%);
+  //box-shadow: inset 0 -1px 1px darken($colorSplash, 10%), inset 0 1px 1px lighten($colorSplash, 10%);
   color: #fff !important;
   z-index: 10;
 }
