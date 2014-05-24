@@ -105,7 +105,12 @@
 .x-panel-bbar .x-toolbar, .x-panel-tbar .x-toolbar {
   border-width: 0;
   overflow: hidden;
-  padding: 2px;
+}
+.x-panel-bbar {
+  padding-top: 10px;
+}
+.x-panel-tbar {
+  padding-bottom: 2px;
 }
 
 .ext-ie7 .x-plain-body {
@@ -1204,7 +1209,7 @@ a.x-menu-item {
 }
 .x-window-tl .x-window-header, .x-panel-header {
   color: #5E5E5E;
-  font: $fontMedium;
+  font: $fontNavbar;
   font-weight: bold;
 }
 .x-panel-header {

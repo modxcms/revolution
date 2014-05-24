@@ -183,7 +183,7 @@ ul.x-tab-strip-bottom {
 
 /* vertical tabs */
 .vertical-tabs-panel {
-  background: #fff;
+  background: #f8f8f8;
 
   &.wrapped {
     border: 1px solid #e0e0e0;
@@ -191,12 +191,11 @@ ul.x-tab-strip-bottom {
 }
 
 .vertical-tabs-header {
-  background-color: #fff !important;
+  background-color: #f8f8f8 !important;
   float: left;
   margin-left: 0;
   padding: 13px 0 !important;
   width: 150px !important;
-  margin-left:0;
   & ul {
     border-top: 1px solid transparent;
     width: auto;
@@ -217,7 +216,6 @@ ul.x-tab-strip-bottom {
     color: #555;
     line-height: 1.3;
     text-shadow: 0 1px 0 #fff;
-    white-space: normal;
 
     &:first-child {
       border-top: 0 none !important;
@@ -227,7 +225,20 @@ ul.x-tab-strip-bottom {
     margin-left:15px;
   }
   .x-tab-strip-wrap {
-    background: #fff;
+    background: #f8f8f8;
+  }
+  ul.x-tab-strip-top {
+    border-bottom: none;
+    background: #f8f8f8 !important;
+  }
+}
+.window-vtabs {
+  .x-panel-mr {
+    padding-right: 0px;
+  }
+  .vertical-tabs-panel {
+    width: 100% !important;
+    margin: 0px;
   }
 }
 
