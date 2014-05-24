@@ -139,9 +139,6 @@ abstract class modManagerController {
         $this->setPlaceholder('_config',$this->modx->config);
         /* help url */
         $helpUrl = $this->getHelpUrl();
-        if (substr($helpUrl,0,4) != 'http') {
-            $helpUrl = $this->modx->getOption('base_help_url',null,'http://rtfm.modx.com/display/revolution20/').$helpUrl;
-        }
         $this->addHtml('<script type="text/javascript">MODx.helpUrl = "'.($helpUrl).'"</script>');
 
         $this->modx->invokeEvent('OnManagerPageBeforeRender',array('controller' => &$this));

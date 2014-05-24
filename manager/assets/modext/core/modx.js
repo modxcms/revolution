@@ -230,8 +230,13 @@ Ext.extend(MODx,Ext.Component,{
 
     ,helpUrl: false
     ,loadHelpPane: function(b) {
-        var url = MODx.helpUrl;
-        if (!url) { return false; }
+        var url = MODx.helpUrl || MODx.config.help_url || '';
+        if (!url || !url.length) { return false; }
+
+        if (url.substring(0, 4) !== 'http') {
+            url = MODx.config.base_help_url + url;
+        }
+
         MODx.helpWindow = new Ext.Window({
             title: _('help')
             ,width: 850
