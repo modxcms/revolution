@@ -339,6 +339,16 @@ abstract class ResourceManagerController extends modManagerController {
                     } else {
                         $hidden[] = $tv;
                     }
+
+                    if ($namespace = strstr($tv->get('caption'), '.', true)) {
+                        $this->modx->lexicon->load($namespace . ':default');
+                        if ($this->modx->lexicon->exists(ltrim(strstr($tv->get('caption'), '.'), '.'))) {
+                            $tv->set('caption', $this->modx->lexicon(ltrim(strstr($tv->get('caption'), '.'), '.')));
+                        }
+                        if ($this->modx->lexicon->exists(ltrim(strstr($tv->get('description'), '.'), '.'))) {
+                            $tv->set('description', $this->modx->lexicon(ltrim(strstr($tv->get('description'), '.'), '.')));
+                        }
+                    }
                 }
             }
         }
@@ -375,16 +385,6 @@ abstract class ResourceManagerController extends modManagerController {
 
         if (!empty($this->scriptProperties['showCheckbox'])) {
             $this->setPlaceholder('showCheckbox',1);
-        }
-
-        if ($namespace = stristr($tv->get('caption'), '.', true)) {
-            $this->modx->lexicon->load($namespace . ':default');
-            if ($this->modx->lexicon(ltrim(stristr($tv->get('caption'), '.'), '.'))) {
-                $tv->set('caption', $this->modx->lexicon(ltrim(stristr($tv->get('caption'), '.'), '.')));
-            }
-            if ($this->modx->lexicon(ltrim(stristr($tv->get('description'), '.'), '.'))) {
-                $tv->set('description', $this->modx->lexicon(ltrim(stristr($tv->get('description'), '.'), '.')));
-            }
         }
 
         $tvOutput = $this->fetchTemplate('resource/sections/tvs.tpl');
