@@ -1,6 +1,24 @@
 Ext.namespace('MODx.combo');
 /* fixes combobox value loading issue */
-Ext.override(Ext.form.ComboBox,{loaded:false,setValue:Ext.form.ComboBox.prototype.setValue.createSequence(function(v){var a=this.store.find(this.valueField,v);if(v&&v!==0&&this.mode=='remote'&&a==-1&&!this.loaded){var p={};p[this.valueField]=v;this.loaded=true;this.store.load({scope:this,params:p,callback:function(){this.setValue(v);this.collapse()}})}})});
+Ext.override(Ext.form.ComboBox, {
+    loaded: false
+    ,setValue: Ext.form.ComboBox.prototype.setValue.createSequence(function(v) {
+        var a = this.store.find(this.valueField, v);
+        if (v && v !== 0 && this.mode == 'remote' && a == -1 && !this.loaded) {
+            var p = {};
+            p[this.valueField] = v;
+            this.loaded = true;
+            this.store.load({
+                scope: this
+                ,params: p
+                ,callback: function() {
+                    this.setValue(v);
+                    this.collapse()
+                }
+            })
+        }
+    })
+});
 
 MODx.combo.ComboBox = function(config,getStore) {
     config = config || {};
@@ -45,6 +63,10 @@ MODx.combo.ComboBox = function(config,getStore) {
     }
     MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
+    this.store.on('load', function() {
+        // Workaround to let the combobox know the store is loaded (to help hide/display the pagination if required)
+        this.loaded = true;
+    }, this);
     return this;
 };
 Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
@@ -52,6 +74,15 @@ Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
         if(this.isExpanded() || !this.hasFocus){
             return;
         }
+
+        if (this.mode == 'remote' && !this.loaded) {
+            console.log('Store %o not yet loaded', this.store);
+            // Store not yet loaded, let's wait a little bit
+            // @todo : handle too many tries ?
+            Ext.defer(this.expand, 250, this);
+            return false;
+        }
+        console.log(this.store.lastOptions.params, this.store.getTotalCount());
 
         if(this.title || this.pageSize){
             this.assetHeight = 0;
