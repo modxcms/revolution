@@ -74,13 +74,13 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         }
     }
 
-    public function prepareQueryBeforeCount(xPDOQuery $c) {
-        $c->where(array(
-            'modCategory.parent' => 0,
-        ));
-
-        return $c;
-    }
+//    public function prepareQueryBeforeCount(xPDOQuery $c) {
+//        $c->where(array(
+//            'modCategory.parent' => 0,
+//        ));
+//
+//        return $c;
+//    }
 
     public function prepareQueryAfterCount(xPDOQuery $c) {
         if ($this->getProperty('sort') == 'category') {
@@ -88,6 +88,17 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         }
 
         return $c;
+    }
+
+    public function process() {
+        $beforeQuery = $this->beforeQuery();
+        if ($beforeQuery !== true) {
+            return $this->failure($beforeQuery);
+        }
+        $data = $this->getData();
+        $list = $this->iterate($data);
+
+        return $this->outputArray($list);
     }
 }
 return 'modElementCategoryGetListProcessor';
