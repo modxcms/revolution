@@ -295,7 +295,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refresh: function(func,scope,args) {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
-        if (treeState === undefined) {this.root.expand(null,null);} else {
+        if (treeState === undefined) {
+            this.root.expand(null,null);
+        } else {
             for (var i=0;i<treeState.length;i++) {
                 this.expandPath(treeState[i]);
             }
@@ -448,7 +450,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 
         if (this.disableHref) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
-            if (e.button == 1 || e.shiftKey == 1) return window.open(n.attributes.page,'_blank');
+            if (e.button == 1) return window.open(n.attributes.page,'_blank');
+            else if (e.ctrlKey == 1 || e.metaKey == 1 || e.shiftKey == 1) return window.open(n.attributes.page);
             MODx.loadPage(n.attributes.page);
         } else {
             n.toggle();
@@ -586,7 +589,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @access public
      */
     ,refreshActiveNode: function() {
-        this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
+        if (this.cm.activeNode) {
+            this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
+        } else {
+            this.refresh();
+        }
     }
 
     /**
@@ -660,7 +667,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 
     /**
      * Allow pseudoroot actions
-     * @param tree {this}
+     * @param tree {self}
      * @param parent {Ext.tree.TreeNode} Parent node
      * @param node {Ext.tree.TreeNode} Node to be inserted
      */

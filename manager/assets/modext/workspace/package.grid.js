@@ -229,7 +229,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	,install: function( record ){
 		Ext.Ajax.request({
 			url : MODx.config.connector_url
-			,params : { 
+			,params : {
 				action : 'workspace/packages/getAttribute'
 				,attributes: 'license,readme,changelog,setup-options'
 				,signature: record.data.signature
@@ -281,7 +281,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
      */
     ,uploadTransportPackage: function(btn,e){
         if (!this.uploader) {
-            this.uploader = new Ext.ux.UploadDialog.Dialog({
+            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
                     action: 'workspace/packages/upload'
@@ -290,10 +290,6 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                     ,path: MODx.config.core_path+'packages/'
                 }
                 ,permitted_extensions: ['zip']
-                ,allow_close_on_upload: true
-                ,upload_autostart: false
-                ,reset_on_hide: true
-                ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
             this.uploader.on('hide',function(){

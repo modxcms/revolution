@@ -126,7 +126,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             });
             btns.push('-');
         }
-        if (cfg.canDuplicate == 1 && (cfg.record.parent !== 0 || cfg.canCreateRoot == 1)) {
+        if (cfg.canDuplicate == 1 && (cfg.record.parent !== parseInt(MODx.config.tree_root_id) || cfg.canCreateRoot == 1)) {
             btns.push({
                 text: _('duplicate')
                 ,handler: this.duplicateResource

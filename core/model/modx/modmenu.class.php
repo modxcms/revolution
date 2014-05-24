@@ -105,17 +105,20 @@ class modMenu extends modAccessibleObject {
             $ma = $menu->toArray();
             $ma['id'] = $menu->get('text');
             $action = $menu->get('action');
+            $namespace = $menu->get('namespace');
+
+            // allow 2.2 and earlier actions
+            $deprecatedNamespace = $menu->get('action_namespace');
+            if (!empty($deprecatedNamespace)) {
+                $namespace = $deprecatedNamespace;
+            }
+            if ($namespace != 'core') {
+                $this->xpdo->lexicon->load($namespace.':default');
+            }
 
             /* if 3rd party menu item, load proper text */
             if (!empty($action)) {
-                $namespace = $menu->get('namespace');
-
-                /* allow 2.2 and earlier actions */
-                $deprecatedNamespace = $menu->get('action_namespace');
-                if (!empty($deprecatedNamespace)) $namespace = $deprecatedNamespace;
-
                 if (!empty($namespace) && $namespace != 'core') {
-                    $this->xpdo->lexicon->load($namespace.':default');
                     $ma['text'] = $menu->get('text') === 'user'
                         ? $this->xpdo->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
                         : $this->xpdo->lexicon($menu->get('text'));

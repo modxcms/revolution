@@ -140,11 +140,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,addSourceToolbar: function() {
-        // @todo make sure it's not used & is removable
         this.sourceCombo = new MODx.combo.MediaSource({
             value: this.config.source || MODx.config.default_media_source
             ,listeners: {
-                'select':{fn:this.changeSource,scope:this}
+                select:{
+                    fn: this.changeSource
+                    ,scope: this
+                }
             }
         });
         this.searchBar = new Ext.Toolbar({
@@ -292,8 +294,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,createFile: function(itm,e) {
-        var d = this.cm.activeNode && this.cm.activeNode.attributes ? this.cm.activeNode.attributes.id : '';
-        MODx.loadPage('system/file/create', '&directory='+d+'&source='+this.getSource());
+        var active = this.cm.activeNode
+            ,dir = active && active.attributes && (active.isRoot || active.attributes.type == 'dir')
+                ? active.attributes.id
+                : '';
+
+        MODx.loadPage('system/file/create', 'directory='+dir+'&source='+this.getSource());
     }
 
     ,quickCreateFile: function(itm,e) {
@@ -444,7 +450,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                success: {
+                    fn: this._afterRemove
+                    ,scope: this
+                }
             }
         });
     }
@@ -461,9 +470,20 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                success: {
+                    fn: this._afterRemove
+                    ,scope: this
+                }
             }
         });
+    }
+
+    /**
+     * Operation executed after a node has been removed
+     */
+    ,_afterRemove: function() {
+        this.refreshParentNode();
+        this.cm.activeNode = null;
     }
 
     ,downloadFile: function(item,e) {
@@ -492,15 +512,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,uploadFiles: function(btn,e) {
         if (!this.uploader) {
-            this.uploader = new Ext.ux.UploadDialog.Dialog({
+            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
                     action: 'browser/file/upload'
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
                 }
-                ,reset_on_hide: true
-                ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
             this.uploader.on('show',this.beforeUpload,this);
@@ -537,13 +555,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,beforeUpload: function() {
-        var path;
+        var path = this.config.rootId || '/';
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
                 path = this.getPath(this.cm.activeNode.parentNode);
             }
-        } else { path = '/'; }
+        }
 
         this.uploader.setBaseParams({
             action: 'browser/file/upload'

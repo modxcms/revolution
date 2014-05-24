@@ -127,7 +127,8 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
 
         $this->trimPageTitle();
         $this->handleParent();
-        if ($this->object->parent != 0 && $this->getProperty('parent') === 0 && !$this->modx->hasPermission('new_document_in_root')) {
+        $root = (int) $this->modx->getOption('tree_root_id');
+        if ($this->object->parent != $root && $this->getProperty('parent') === $root && !$this->modx->hasPermission('new_document_in_root')) {
             return $this->modx->lexicon('permission_denied');
         }
         $this->checkParentContext();
@@ -198,7 +199,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
     public function trimPageTitle() {
         $pageTitle = $this->getProperty('pagetitle',null);
         if ($pageTitle != null && !$this->getProperty('reloadOnly',false)) {
-            if (empty($pageTitle)) {
+            if ($pageTitle === '') {
                 $pageTitle = $this->modx->lexicon('resource_untitled');
             }
             $pageTitle = trim($pageTitle);

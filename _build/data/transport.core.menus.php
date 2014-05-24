@@ -126,7 +126,7 @@ $topNavMenus[1]->fromArray(array (
 ), '', true, true);
 
 /* Media Browser */
-/*$children[0]= $xpdo->newObject('modMenu');
+$children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'file_browser',
@@ -134,11 +134,11 @@ $children[0]->fromArray(array (
   'parent' => 'media',
   'permissions' => 'file_manager',
   'action' => 'media/browser',
-), '', true, true);*/
+), '', true, true);
 
 /* Media Drivers */
-$children[0]= $xpdo->newObject('modMenu');
-$children[0]->fromArray(array(
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array(
   'menuindex'   => 1,
   'text'        => 'sources',
   'description' => 'sources_desc',
@@ -353,8 +353,9 @@ $userNavMenus[0]->fromArray(array(
   'text' => 'user',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => 'menu_reports,canChangeProfile',
+  'permissions' => 'menu_user',
   'action' => 'security/profile',
+  'icon' => '<span id="user-avatar">{$userImage}</span> <span id="user-username">{$username}</span>',
 ), '', true, true);
 $children = array();
 
@@ -365,7 +366,7 @@ $children[0]->fromArray(array (
   'text' => 'profile',
   'description' => 'profile_desc',
   'parent' => 'user',
-  'permissions' => 'canChangeProfile',
+  'permissions' => 'change_profile',
   'action' => 'security/profile',
 ), '', true, true);
 
@@ -403,6 +404,7 @@ $userNavMenus[1]->fromArray(array(
   'parent' => 'usernav',
   'permissions' => 'settings',
   'action' => 'system/settings',
+  'icon' => '<i class="icon-gear icon icon-large"></i>',
 ), '', true, true);
 $children = array();
 
@@ -517,6 +519,7 @@ $userNavMenus[2]->fromArray(array(
   'parent' => 'usernav',
   'permissions' => '',
   'action' => 'help',
+  'icon' => '<i class="icon-question-circle icon icon-large"></i>',
 ), '', true, true);
 $children = array();
 

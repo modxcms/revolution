@@ -23,8 +23,12 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
-        ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+        ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         ,allowBlank: true
+        ,editable: true
+        ,typeAhead: true
+        ,forceSelection: true
+        ,queryParam: 'search'
         ,width: 150
         ,listeners: {
             'select': {fn: this.filterByNamespace, scope:this}
@@ -34,12 +38,16 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'area'
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
+        ,value: MODx.request['area']
         ,baseParams: {
             action: 'system/settings/getAreas'
-            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         }
         ,width: 250
         ,allowBlank: true
+        ,editable: true
+        ,typeAhead: true
+        ,forceSelection: true
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
         }
@@ -121,12 +129,14 @@ MODx.grid.SettingsGrid = function(config) {
         }
     });
 
-    Ext.applyIf(config,{
+    Ext.applyIf(config, {
          cm: this.cm
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
+        ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/settings/getList'
-            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            ,area: MODx.request['area']
         }
         ,clicksToEdit: 2
         ,grouping: true
@@ -218,16 +228,25 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearFilter: function() {
-        var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
+        var ns = MODx.request['ns'] ? MODx.request['ns'] : 'core';
+        var area = MODx.request['area'] ? MODx.request['area'] : '';
+
         this.getStore().baseParams = this.initialConfig.baseParams;
-        Ext.getCmp('modx-filter-namespace').reset();
+
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
+
+        Ext.getCmp('modx-filter-namespace').reset();
         Ext.getCmp('modx-filter-key').reset();
+
+        this.getStore().baseParams.namespace = ns;
+        this.getStore().baseParams.area = area;
+        this.getStore().baseParams.key = '';
+
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }

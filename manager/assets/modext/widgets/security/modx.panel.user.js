@@ -309,6 +309,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,width: 200
                     ,maxLength: 255
                 },{
+                    id: 'modx-user-fax'
+                    ,name: 'fax'
+                    ,fieldLabel: _('user_fax')
+                    ,xtype: 'textfield'
+                    ,width: 200
+                    ,maxLength: 255
+                },{
                     id: 'modx-user-address'
                     ,name: 'address'
                     ,fieldLabel: _('address')
@@ -321,13 +328,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,fieldLabel: _('city')
                     ,xtype: 'textfield'
                     ,anchor: '100%'
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-fax'
-                    ,name: 'fax'
-                    ,fieldLabel: _('user_fax')
-                    ,xtype: 'textfield'
-                    ,width: 200
                     ,maxLength: 255
                 },{
                     id: 'modx-user-state'
@@ -571,7 +571,7 @@ MODx.combo.Gender = function(config) {
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
-            ,data: [['',0],[_('user_male'),1],[_('user_female'),2]]
+            ,data: [['',0],[_('user_male'),1],[_('user_female'),2],[_('user_other'),3]]
         })
         ,displayField: 'd'
         ,valueField: 'v'

@@ -90,8 +90,8 @@ class modRestCurlClient extends modRestClient {
                 }
                 break;
         }
-        /* prevent invalid xhtml ampersands in request path */
-        $url = str_replace('&amp;', '&', $host.$path);
+        /* prevent invalid xhtml ampersands in request path and strip unnecessary ampersands from the end of the url */
+        $url = rtrim(str_replace('&amp;', '&', $host.$path), '&');
         return curl_setopt($ch, CURLOPT_URL,$url);
     }
 
