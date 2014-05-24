@@ -1104,7 +1104,6 @@ body.ext-ie7 .x-superboxselect-item {
 .dashboard-block {
   background-color: $white;
   border-radius: 2px;
-  border: 1px solid #ddd;
   float: left;
   margin: 6px 0;
 }
@@ -1137,15 +1136,13 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block .title {
-  background: $aside;
-  border-bottom: 1px solid #ccc;
+  background: #d2dbe2;
   border-radius: 2px 2px 0 0;
   color: #5E5E5E;
   font-size: 12px;
   font-weight: bold;
   margin: 0;
-  padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #fff;
+  padding: 15px;
   zoom: 1;
 }
 

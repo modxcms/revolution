@@ -25,7 +25,7 @@ MODx.SearchBar = function(config) {
             '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
                 '<h3>{label}</h3>',
             '</tpl>',
-                '<p class="item"><a><tpl exec="values.icon = this.getClass(values)"><i class="icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<p class="item"><a href="?a={action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
             '</div >',
             '</tpl>', {
                 getClass: function(values) {

@@ -87,7 +87,7 @@
   width: 100% !important;
   border-top:none;
   @include box-sizing(border-box);
-  overflow:hidden;
+  overflow: scroll;
   margin-top: 9px;
 }
 
@@ -111,13 +111,12 @@
 }
 
 .modx-manager-search-results p {
-	@extend %nav-item;
-  color: $white;
+  color: #C9D3E0;
 }
 
 .modx-manager-search-results h3 {
   color: $searchresultshead;
-  font-size: .85em;
+  font-size: 13px;
   font-weight: normal;
   left: -116px;
   position: absolute;
@@ -131,6 +130,8 @@
   display: inline-block;
   padding-left: 18px;
   position: relative;
+  color: inherit;
+  text-decoration: none;
 }
 
 .modx-manager-search-results i {
@@ -156,20 +157,13 @@
 }
 
 .modx-manager-search-results .x-combo-selected {
-  background-color: $colorSplash !important;
   border: none;
   color: #fff !important;
   margin-left: 0;
   //padding-left: 117px;
+  z-index: 10;
 }
 
 .modx-manager-search-results .icon-user {
   background-image: none !important;
-}
-
-.modx-manager-search-results .x-combo-selected {
-  background-color: $colorSplash !important;
-  //box-shadow: inset 0 -1px 1px darken($colorSplash, 10%), inset 0 1px 1px lighten($colorSplash, 10%);
-  color: #fff !important;
-  z-index: 10;
 }

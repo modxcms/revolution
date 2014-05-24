@@ -1791,10 +1791,6 @@
   text-align: center;
 }
 
-.modx-manager-search-results p:hover {
-  background: #f0f0f0;
-}
-
 #modx-tv-tabs .lt-ie8 {
   *zoom: 1;
 }
@@ -5248,7 +5244,7 @@ ul.x-tab-strip-bottom .x-tab-left {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: scroll;
   margin-top: 9px;
 }
 
@@ -5271,12 +5267,12 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 .modx-manager-search-results p {
-  color: white;
+  color: #C9D3E0;
 }
 
 .modx-manager-search-results h3 {
   color: #55bbe7;
-  font-size: .85em;
+  font-size: 13px;
   font-weight: normal;
   left: -116px;
   position: absolute;
@@ -5290,6 +5286,8 @@ ul.x-tab-strip-bottom .x-tab-left {
   display: inline-block;
   padding-left: 18px;
   position: relative;
+  color: inherit;
+  text-decoration: none;
 }
 
 .modx-manager-search-results i {
@@ -5315,20 +5313,14 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 .modx-manager-search-results .x-combo-selected {
-  background-color: #3697cd !important;
   border: none;
   color: #fff !important;
   margin-left: 0;
+  z-index: 10;
 }
 
 .modx-manager-search-results .icon-user {
   background-image: none !important;
-}
-
-.modx-manager-search-results .x-combo-selected {
-  background-color: #3697cd !important;
-  color: #fff !important;
-  z-index: 10;
 }
 
 #modx-leftbar {
@@ -7218,7 +7210,6 @@ body.ext-ie7 .x-superboxselect-item {
 .dashboard-block {
   background-color: white;
   border-radius: 2px;
-  border: 1px solid #ddd;
   float: left;
   margin: 6px 0;
 }
@@ -7251,15 +7242,13 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block .title {
-  background: #f8f8f8;
-  border-bottom: 1px solid #ccc;
+  background: #d2dbe2;
   border-radius: 2px 2px 0 0;
   color: #5E5E5E;
   font-size: 12px;
   font-weight: bold;
   margin: 0;
-  padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #fff;
+  padding: 15px;
   zoom: 1;
 }
 
