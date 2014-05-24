@@ -247,7 +247,7 @@
 }
 
 .x-resizable-handle {
-  background-color: #fff;
+
 }
 
 .x-resizable-handle-southeast {
@@ -378,12 +378,11 @@
   background-color: #777;
 }
 .x-grid3-header {
-  background: url("../images/modx-theme/grid/grid3-hd-bg.png") repeat-x scroll left bottom #666666;
+  background: #c9d4e0;
   border-bottom: 1px solid #444444;
   padding: 0;
 }
 .x-panel-body-noheader .x-grid3-header {
-  background: rgb(202,212,223);
   border: none;
 }
 .x-grid3-header-offset {
@@ -405,12 +404,12 @@ td.sort-desc,
 td.sort-asc, 
 td.x-grid3-hd-menu-open {
   border-left-color: $griddivider;
+  background: $gridsorted;
 }
 td.x-grid3-hd-over .x-grid3-hd-inner, 
 td.sort-desc .x-grid3-hd-inner, 
 td.sort-asc .x-grid3-hd-inner, 
 td.x-grid3-hd-menu-open .x-grid3-hd-inner {
-  background: $gridsorted;
   color: $white;
 }
 .sort-asc .x-grid3-sort-icon {
@@ -492,13 +491,13 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-grid3-hd-inner {
   font-weight: bold;
-  padding: 7px 18px 7px 5px !important;
+  padding: 13px 18px 13px 5px;
 }
 .ext-ie .x-grid3-hd-inner {
   width: auto;
 }
 .x-grid3-cell-inner, .x-grid3-hd-inner {
-  padding: 14px 18px 12px 5px;
+  padding: 13px 18px 13px 5px;
 }
 .x-props-grid .x-grid3-body .x-grid3-td-name {
   background-color: #fff !important;
@@ -795,10 +794,6 @@ td.x-date-mp-sep {
 .x-tip-anchor {
   background-image: url(../images/modx-theme/qtip/tip-anchor-sprite.gif);
 }
-.x-menu {
-  background-color: #FAFAFA;
-  background-image: none;
-}
 .x-menu-list {
   padding: 0;
 }
@@ -816,15 +811,14 @@ td.x-date-mp-sep {
 }
 .x-menu-sep {
   background-color: #e0e0e0;
-  border-bottom-color: #fff;
 }
 a.x-menu-item {
-  color: #555;
+  color: $dropdownTextColor;
   font-size: 13px;
   padding: 4px 25px 4px 30px;
 }
 .x-menu-item-active {
-  background-color: #e6e6e6;
+  background-color: $dropdownSelectedBg;
   background-image: none;
   border: 0 none;
   margin: 0;
@@ -928,12 +922,13 @@ a.x-menu-item {
 #x-debug-browser .x-tree .x-tree-node .x-tree-selected a span {
   background-color: #d8d8d8;
 }
-.x-combo-list {
-  background-color: #DFDFDF;
-  border-color: #bcbcbc;
+.x-combo-list, .x-menu {
+  background-color: $dropdownBg;
+  border-color: transparent;
+  border-radius: 0 0 5px 5px;
 }
-.x-combo-list-inner {
-  background-color: #fff;
+.x-combo-list-inner, .x-menu-list {
+  background-color: $dropdownBg;
 }
 .x-combo-list-hd {
   background-image: url(../images/modx-theme/layout/panel-title-light-bg.gif);
@@ -941,14 +936,15 @@ a.x-menu-item {
   color: #464646;
 }
 .x-resizable-pinned .x-combo-list-inner {
-  border-bottom-color: #bcbcbc;
+  border-bottom-color: transparent;
 }
 .x-combo-list-item {
   border: none;
-  padding: 3px;
+  padding: 5px;
+  color: $dropdownTextColor;
 }
 .x-combo-list .x-combo-selected {
-  background-color: $selected;
+  background-color: $dropdownSelectedBg;
   border: 0 none !important;
 }
 .x-combo-list .x-toolbar {

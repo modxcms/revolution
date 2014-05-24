@@ -27,24 +27,20 @@
 /* btn style */
 .x-btn {
   *display: inline;
-  background-color: $buttonBackground;
-  /*@include linear-gradient($white, $gainsboro);*/
+  background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%);
+  border-radius: 4px;
   line-height: 1;
-  border-radius: 3px;
   cursor: pointer;
   display: inline-block;
   margin: 0 1px;
-  padding: 13px 20px;
+  padding: 10px 15px;
   position: relative;
   text-decoration: none;
   zoom: 1;
-  border: none;
-  transition: background-color .2s;
-  -webkit-box-shadow: 0 1px 0 0 #CCC;
-  box-shadow: $shadower;
+  border: 1px solid rgb(200, 210, 220);
   button {
     font-size: 13px;
-    color: $buttonColor;
+    color: $regularButtonColor;
     cursor: pointer;
     height: 16px;
     min-width: 100%;
@@ -52,6 +48,70 @@
   }
   &.primary-button {
 	@extend %primary-button;
+  }
+
+  #modx-action-buttons, #modx-leftbar & {
+    *display: inline;
+    background: $buttonBackground;
+    /*@include linear-gradient($white, $gainsboro);*/
+    line-height: 1;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 1px;
+    padding: 13px 20px;
+    position: relative;
+    text-decoration: none;
+    zoom: 1;
+    border: none;
+    -webkit-box-shadow: 0 1px 0 0 #CCC;
+    box-shadow: $shadower;
+    button {
+      font-size: 13px;
+      color: $buttonColor;
+      cursor: pointer;
+      height: 16px;
+      min-width: 100%;
+      vertical-align: middle;
+    }
+    &.primary-button {
+      @extend %primary-button;
+    }
+  }
+}
+// Toolbar combo/text styled just like the buttons
+.x-toolbar {
+  .x-form-field-trigger-wrap {
+    background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%);
+    border-radius: 4px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 1px;
+    position: relative;
+    text-decoration: none;
+    zoom: 1;
+    border: 1px solid rgb(200, 210, 220);
+    transition: background-color .2s;
+    padding: 3px 23px 3px 0;
+
+    input.x-form-text {
+      font-weight: normal !important;
+      padding-left: 13px !important;
+    }
+    .x-form-trigger {
+      padding-top: 2px;
+    }
+
+    &.x-trigger-wrap-focus {
+      outline: none !important;
+      border-color: darken($gainsboro,40%);
+    }
+  }
+  .x-toolbar-cell input.x-form-text {
+    padding: 8px 13px;
+    border-radius: 4px;
+    font-size: 13px !important;
   }
 }
 
@@ -131,16 +191,11 @@
   -moz-box-shadow: 0 0 3px #aaaaaa inset;
   -o-box-shadow: 0 0 3px #aaaaaa inset;
   -webkit-box-shadow: 0 0 3px #aaaaaa inset;
-  background-color: #ffffff;
-  background-image: none;
-  /*border-color: #CFCFCF #C0C0C0 #AAAAAA;*/
   box-shadow: 0 0 3px #aaaaaa inset;
   margin: 0 1px;
 }
 
 .x-btn-focus {
-  background: $gainsboro;
-  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
   border: 1px solid $darkNeutral;
 }
 
@@ -240,7 +295,19 @@
 .x-btn em.x-btn-arrow {
   background: transparent url(../images/modx-theme/button/arrow.gif) no-repeat right center;
   display: block;
-  padding-right: 10px;
+  padding-right: 20px;
+
+  button {
+    padding-right: 10px !important;
+    border-right: 1px solid #fff;
+  }
+}
+.x-btn-menu-active {
+  background: $dropdownBg;
+
+  button {
+    color: $dropdownTextColor;
+  }
 }
 
 /* //end button style */

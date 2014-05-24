@@ -2,7 +2,9 @@
 $aside: rgb(248,248,248);
 $gainsboro: rgb(240,240,240);
 $actionable:rgb(251,251,251);
-$dropdownBg: $gainsboro;
+$dropdownBg: #2b3948;
+$dropdownSelectedBg: lighten(#2b3948, 10%);
+$dropdownTextColor: #f2f2f2;
 $white: white;
 $mainBg: #F2F2F2;
 $softGrey: rgb(220, 220, 220);
@@ -103,6 +105,7 @@ $treeNodeFont: normal 13px/25px $bodyfonts;
 
 
 $buttonColor: $colorSplash;
+$regularButtonColor: #707070;
 $buttonBackground: $white;
 $buttonColorActive: $white;
 $buttonColorDisabled: darken($buttonColor, 20%);
