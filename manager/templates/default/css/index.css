@@ -4120,38 +4120,38 @@ having to do some real janky stuff to work with ExtJS markup
   border-width: 0 !important;
 }
 
-.primary-button, .x-btn.primary-button, .x-btn #modx-action-buttons.primary-button, #modx-leftbar .x-btn.primary-button, #modx-abtn-save {
+.primary-button, .x-btn.primary-button, #modx-action-buttons .x-btn#modx-abtn-save {
   background-image: -webkit-linear-gradient(left top, #58a598, #3c8e8b);
   background-image: linear-gradient(to right bottom , #58a598, #3c8e8b);
   background-color: #58a598;
   color: white;
 }
-.x-item-disabled.primary-button, .x-btn .x-item-disabled#modx-action-buttons.primary-button, #modx-leftbar .x-item-disabled.x-btn.primary-button, .x-item-disabled#modx-abtn-save {
+.x-item-disabled.primary-button, #modx-action-buttons .x-item-disabled.x-btn#modx-abtn-save {
   opacity: 1;
   background: #b4b4b4;
 }
-.primary-button button, .x-btn.primary-button button, .x-btn #modx-action-buttons.primary-button button, #modx-leftbar .x-btn.primary-button button, #modx-abtn-save button {
+.primary-button button, .x-btn.primary-button button, #modx-action-buttons .x-btn#modx-abtn-save button {
   color: white;
 }
-.x-item-disabled.primary-button *, .x-btn .x-item-disabled#modx-action-buttons.primary-button *, #modx-leftbar .x-item-disabled.x-btn.primary-button *, .x-item-disabled#modx-abtn-save * {
+.x-item-disabled.primary-button *, #modx-action-buttons .x-item-disabled.x-btn#modx-abtn-save * {
   color: #1f5c7e !important;
 }
-.x-btn-over.primary-button, .x-btn .x-btn-over#modx-action-buttons.primary-button, #modx-leftbar .x-btn-over.x-btn.primary-button, .x-btn-over#modx-abtn-save {
+.x-btn-over.primary-button, #modx-action-buttons .x-btn-over.x-btn#modx-abtn-save {
   background: #7fbbb1;
 }
 
 /* action buttons bar */
 #modx-action-buttons {
   position: fixed;
-  top: 65px;
+  top: 55px;
   right: 10px;
   z-index: 9;
   left: auto;
   background: #f2f2f2;
-  padding: 5px;
+  padding: 10px 2px 7px 7px;
   border: 0;
   font-family: "Helvetica Neue", Helvetica, arial, tahoma, sans-serif;
-  border-radius: 6px;
+  border-radius: 0 0 0 5px;
 }
 #modx-action-buttons .x-toolbar-left {
   width: auto !important;
@@ -4161,7 +4161,7 @@ having to do some real janky stuff to work with ExtJS markup
 /* btn style */
 .x-btn {
   *display: inline;
-  background: linear-gradient(180deg, #e4e9ee 0%, #d2dbe2 100%);
+  background: linear-gradient(180deg, #e4e9ee 0%, #d2dbe2 100%) no-repeat;
   border-radius: 4px;
   line-height: 1;
   cursor: pointer;
@@ -4181,30 +4181,31 @@ having to do some real janky stuff to work with ExtJS markup
   min-width: 100%;
   vertical-align: middle;
 }
-.x-btn #modx-action-buttons, #modx-leftbar .x-btn {
-  *display: inline;
+#modx-leftbar .x-btn {
   background: white;
-  /*@include linear-gradient($white, $gainsboro);*/
-  line-height: 1;
   border-radius: 3px;
-  cursor: pointer;
-  display: inline-block;
-  margin: 0 1px;
   padding: 13px 20px;
-  position: relative;
-  text-decoration: none;
-  zoom: 1;
   border: none;
   -webkit-box-shadow: 0 1px 0 0 #CCC;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
 }
-.x-btn #modx-action-buttons button, #modx-leftbar .x-btn button {
-  font-size: 13px;
+#modx-leftbar .x-btn button {
   color: #3697cd;
-  cursor: pointer;
-  height: 16px;
-  min-width: 100%;
-  vertical-align: middle;
+}
+#modx-action-buttons .x-btn {
+  background: white;
+  border-radius: 3px;
+  padding: 13px 20px;
+  border: none;
+  -webkit-box-shadow: 0 1px 0 0 #CCC;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
+}
+#modx-action-buttons .x-btn button {
+  color: #3697cd;
+}
+#modx-action-buttons .x-btn.x-btn-over {
+  border-color: #fbfbfb;
+  background-color: #fbfbfb;
 }
 
 .x-toolbar .x-form-field-trigger-wrap {

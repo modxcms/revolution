@@ -8,15 +8,15 @@
 /* action buttons bar */
 #modx-action-buttons {
   position: fixed;
-  top: 65px;
+  top: 55px;
   right: 10px;
   z-index: 9;
   left: auto;
   background: $mainBg;
-  padding: 5px;
+  padding: 10px 2px 7px 7px;
   border: 0;
   font-family: $buttonfonts;
-  border-radius: 6px;
+  border-radius: 0 0 0 5px;
 
   .x-toolbar-left {
     width: auto !important;
@@ -27,7 +27,7 @@
 /* btn style */
 .x-btn {
   *display: inline;
-  background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%);
+  background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%) no-repeat;
   border-radius: 4px;
   line-height: 1;
   cursor: pointer;
@@ -50,32 +50,36 @@
 	@extend %primary-button;
   }
 
-  #modx-action-buttons, #modx-leftbar & {
-    *display: inline;
+  #modx-leftbar & {
     background: $buttonBackground;
-    /*@include linear-gradient($white, $gainsboro);*/
-    line-height: 1;
     border-radius: 3px;
-    cursor: pointer;
-    display: inline-block;
-    margin: 0 1px;
     padding: 13px 20px;
-    position: relative;
-    text-decoration: none;
-    zoom: 1;
     border: none;
     -webkit-box-shadow: 0 1px 0 0 #CCC;
     box-shadow: $shadower;
     button {
-      font-size: 13px;
       color: $buttonColor;
-      cursor: pointer;
-      height: 16px;
-      min-width: 100%;
-      vertical-align: middle;
     }
-    &.primary-button {
+  }
+
+  #modx-action-buttons & {
+    background: $buttonBackground;
+    border-radius: 3px;
+    padding: 13px 20px;
+    border: none;
+    -webkit-box-shadow: 0 1px 0 0 #CCC;
+    box-shadow: $shadower;
+    button {
+      color: $buttonColor;
+    }
+
+    &#modx-abtn-save {
       @extend %primary-button;
+    }
+
+    &.x-btn-over {
+      border-color: $actionable;
+      background-color:$actionable;
     }
   }
 }
@@ -118,10 +122,6 @@
 .x-btn-over {
   border-color:darken($gainsboro,40%);
   background-color:$gainsboro;
-}
-
-#modx-abtn-save {
-  @extend %primary-button;
 }
 
 .x-btn-icon button {
