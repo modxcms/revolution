@@ -4646,7 +4646,7 @@ having to do some real janky stuff to work with ExtJS markup
 .x-tree-node .icon {
   background: none;
   border: 0;
-  display: inline;
+  display: inline-block;
   opacity: 0.6;
   margin: 0;
   padding: 3px;
@@ -5526,16 +5526,12 @@ ul.x-tab-strip-bottom .x-tab-left {
   padding: 0 !important;
 }
 
-.x-tree-root-node {
-  margin: 0;
-}
-
 .tree-pseudoroot-node {
   background-color: #f2f2f2;
   border-radius: 4px;
   font: normal 14px/35px "Helvetica Neue", Helvetica, arial, tahoma, sans-serif;
   position: relative;
-  padding: 0 0 0 20px;
+  padding: 0 0 0 4px;
   margin-top: 5px;
 }
 .tree-pseudoroot-node > .icon-large {
@@ -5552,6 +5548,13 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 .tree-pseudoroot-node.x-tree-node-over, .tree-pseudoroot-node.x-tree-selected {
   background-color: gainsboro !important;
+}
+.tree-pseudoroot-node + .x-tree-node-ct {
+  margin-left: -16px;
+}
+
+.x-tree-elbow, .x-tree-elbow-end {
+  display: inline-block;
 }
 
 /* miscellaneous tree styles */
@@ -5629,129 +5632,461 @@ ul.x-tab-strip-bottom .x-tab-left {
 /* legacy icons */
 .icon-rss {
   background-image: url(../images/restyle/icons/feed.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-rss.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-rss::before {
+  content: ' ';
 }
 
 .icon-cal {
   background-image: url(../images/restyle/icons/calendar.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-cal.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-cal::before {
+  content: ' ';
 }
 
 .icon-sql {
   background-image: url(../images/restyle/icons/database_table.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-sql.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-sql::before {
+  content: ' ';
 }
 
 .icon-db {
   background-image: url(../images/restyle/icons/database.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-db.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-db::before {
+  content: ' ';
 }
 
 .icon-java, .icon-jar {
   background-image: url(../images/restyle/icons/cup.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-java.x-tree-node-el, .icon-jar.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-java::before, .icon-jar::before {
+  content: ' ';
 }
 
 .icon-css {
   background-image: url(../images/restyle/icons/css.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-css.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-css::before {
+  content: ' ';
 }
 
 .icon-zip, .icon-tar, .icon-tgz, .icon-gz {
   background-image: url(../images/restyle/icons/compress.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-zip.x-tree-node-el, .icon-tar.x-tree-node-el, .icon-tgz.x-tree-node-el, .icon-gz.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-zip::before, .icon-tar::before, .icon-tgz::before, .icon-gz::before {
+  content: ' ';
 }
 
 .icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
   background-image: url(../images/restyle/icons/picture.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-jpg.x-tree-node-el, .icon-jpeg.x-tree-node-el, .icon-gif.x-tree-node-el, .icon-png.x-tree-node-el, .icon-bmp.x-tree-node-el, .icon-tiff.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-jpg::before, .icon-jpeg::before, .icon-gif::before, .icon-png::before, .icon-bmp::before, .icon-tiff::before {
+  content: ' ';
 }
 
 .icon-bat, .icon-scr {
   background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-bat.x-tree-node-el, .icon-scr.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-bat::before, .icon-scr::before {
+  content: ' ';
 }
 
 .icon-log {
   background-image: url(../images/restyle/icons/computer.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-log.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-log::before {
+  content: ' ';
 }
 
 .icon-html, .icon-htm {
   background-image: url(../images/restyle/icons/html_valid.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-html.x-tree-node-el, .icon-htm.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-html::before, .icon-htm::before {
+  content: ' ';
 }
 
 .icon-avi, .icon-mpg, .icon-mov {
   background-image: url(../images/restyle/icons/film.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-avi.x-tree-node-el, .icon-mpg.x-tree-node-el, .icon-mov.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-avi::before, .icon-mpg::before, .icon-mov::before {
+  content: ' ';
 }
 
 .icon-rb {
   background-image: url(../images/restyle/icons/ruby.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-rb.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-rb::before {
+  content: ' ';
 }
 
 .icon-doc {
   background-image: url(../images/restyle/icons/page_white_word.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-doc.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-doc::before {
+  content: ' ';
 }
 
 .icon-ppt {
   background-image: url(../images/restyle/icons/page_white_powerpoint.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-ppt.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-ppt::before {
+  content: ' ';
 }
 
 .icon-access, .icon-htaccess {
   background-image: url(../images/restyle/icons/lock.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-access.x-tree-node-el, .icon-htaccess.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-access::before, .icon-htaccess::before {
+  content: ' ';
 }
 
 .icon-php {
   background-image: url(../images/restyle/icons/page_white_php.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-php.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-php::before {
+  content: ' ';
 }
 
 .icon-flv, .icon-swf {
   background-image: url(../images/restyle/icons/page_white_flash.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-flv.x-tree-node-el, .icon-swf.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-flv::before, .icon-swf::before {
+  content: ' ';
 }
 
 .icon-xls {
   background-image: url(../images/restyle/icons/page_white_excel.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-xls.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-xls::before {
+  content: ' ';
 }
 
 .icon-cfm {
   background-image: url(../images/restyle/icons/page_white_coldfusion.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-cfm.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-cfm::before {
+  content: ' ';
 }
 
 .icon-pdf {
   background-image: url(../images/restyle/icons/page_white_acrobat.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-pdf.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-pdf::before {
+  content: ' ';
 }
 
 .icon-js {
   background-image: url(../images/restyle/icons/javascript.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-js.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-js::before {
+  content: ' ';
 }
 
 .icon-action {
   background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-action.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-action::before {
+  content: ' ';
 }
 
 .icon-namespace {
   background-image: url(../images/restyle/icons/computer.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-namespace.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-namespace::before {
+  content: ' ';
 }
 
 /*.icon-propertyset {
   background-image: url(../images/restyle/icons/property-set.png) !important;
+  @extend %hide-font-icon;
 }*/
 /*.icon-resourcegroup {
   background: url(../images/restyle/icons/application_cascade.png) no-repeat left top !important;
+  @extend %hide-font-icon;
 }*/
 .icon-list-new {
   background-image: url(../images/restyle/icons/layout_add.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-list-new.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-list-new::before {
+  content: ' ';
 }
 
 .icon-mark-active {
   background-image: url(../images/restyle/icons/layout_edit.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-mark-active.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-mark-active::before {
+  content: ' ';
 }
 
 .icon-mark-complete {
   background-image: url(../images/restyle/icons/layout_header.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-mark-complete.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-mark-complete::before {
+  content: ' ';
 }
 
 .icon-package {
   background-image: url(../images/restyle/icons/package.png) !important;
   padding-right: 5px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-package.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-package::before {
+  content: ' ';
 }
 
 .icon-locked {
   background-image: url(../images/restyle/icons/lock_edit.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-locked.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-locked::before {
+  content: ' ';
 }
 
 .icon-lock {
   background-image: url(../images/restyle/icons/lock.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  min-width: 16px;
+  min-height: 16px;
+  vertical-align: middle;
+}
+.icon-lock.x-tree-node-el {
+  background-position: 5px 5px !important;
+}
+.icon-lock::before {
+  content: ' ';
 }
 
 #modx-resource-tree-panel .x-accordion-hd {
@@ -5803,12 +6138,6 @@ ul.x-tab-strip-bottom .x-tab-left {
   margin: 0;
 }
 
-.x-tree-root-node > .x-tree-node > .x-tree-node-ct {
-  margin-left: -7px !important;
-  margin: 0 !important;
-  padding: 0;
-}
-
 .x-tree-arrows .x-tree-elbow-plus,
 .x-tree-arrows .x-tree-elbow-minus,
 .x-tree-arrows .x-tree-elbow-end-plus,
@@ -5825,7 +6154,7 @@ ul.x-tab-strip-bottom .x-tab-left {
   display: inline-block;
   width: 10px;
   padding-left: 6px;
-  margin: 0 0 0 -16px;
+  margin: 0;
 }
 
 .x-tree-arrows .x-tree-elbow-minus:before,
