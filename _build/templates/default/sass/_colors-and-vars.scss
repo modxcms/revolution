@@ -65,13 +65,14 @@ $navbarDrop: $navbarBg;
 $navbarText: $white;
 $navbarRadius: 2px;
 $navbarBorder: #2F4150;
-$subnavBg: #485158;
+$subnavBg: #2B3948;
 $subnavBorder: #3F4850;
-$subnavTitleColor: $white;
-$subnavDescriptionColor: #A7DDF0;
+$subnavSepBorder: #192B3E;
+$subnavTitleColor: #C9D4E1;
+$subnavDescriptionColor: #5ABCE5;
 
 /* borders */
-$borderColor: rgb(203, 203, 203);
+$borderColor: #E4E4E4;
 $borderShadow: rgba(0, 0, 0, 0.025);
 $primaryBorder:rgb(192,192,192);
 
@@ -101,7 +102,7 @@ $codefonts: "Courier New", Courier, monospace;
 $tabFont: 14px $bodyfonts;
 $buttonfonts: $bodyfonts;
 $treePseudoRootFont: normal 14px/35px $headfonts;
-$treeNodeFont: normal 13px/25px $bodyfonts;
+$treeNodeFont: normal 13px/22px $bodyfonts;
 
 
 $buttonColor: $colorSplash;
