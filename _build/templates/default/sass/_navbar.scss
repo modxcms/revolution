@@ -1,4 +1,8 @@
 /* Main MODX Manager navbar */
+#modx-header {
+    background:rgb(63,72,80);
+    min-height:55px; // #janky #extjs
+}
 #modx-navbar {
   @include background-image(linear-gradient(to right, rgb(63,72,80) 0%, rgb(54,84,98) 46%, rgb(62,85,84) 60%, rgb(66,85,77) 68%, rgb(87,61,78) 100%));
   box-shadow: 0 2px 0 $borderShadow;
