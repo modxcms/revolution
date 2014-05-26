@@ -14,12 +14,16 @@
     "url": "http://bugs.modx.com/projects/revo"
   },
   "devDependencies": {
-    "bourbon": "*",
-    "font-awesome": "~4.0.3"
+    "bourbon": "^4.0.2",
+    "neat":"~1.6.0",
+    "font-awesome": "~4.1.0"
   },
   "exportsOverride": {
     "bourbon": {
       "": "dist/"
+    },
+    "neat": {
+      "": "app/assets/stylesheets/"
     },
     "font-awesome": {
       "scss": ["scss"],

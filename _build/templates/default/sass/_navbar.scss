@@ -54,6 +54,37 @@
   text-decoration: none; 
 }
 
+#modx-topnav {
+    > li:not(#modx-home-dashboard) {
+        > a {
+            @include media($desktop) {
+                text-indent:-99999em;
+                display:block;
+                height:100%;
+                position:relative;
+                width:1em;
+                &:after {
+            		@include awesome-font;
+                    text-indent:0;
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    right:0;
+                    bottom:0;
+                    display:block;
+                    text-align:center;
+                    line-height:55px;
+                    font-size:16px;
+                }
+            }    
+        }
+    }
+    #limenu-site > a:after { content:$fa-var-cube; /* "\f1b2" */ } 
+    #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
+    #limenu-components > a:after { content:$fa-var-cogs; /* "\f085" */  } // content:$fa-var-puzzle-piece:; /* "\f12e" */
+    #limenu-manage > a:after { content:$fa-var-gavel; /* "\f0e3" */ } 
+}
+
 #modx-navbar .top {
   padding-right: 15px;
 
