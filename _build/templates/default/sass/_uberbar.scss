@@ -39,9 +39,12 @@
 
   .x-form-text {
     text-shadow: none;
-    color: rgba(255,255,255,.5);
     font-weight: normal;
+    color: #C9D3E0;
     letter-spacing: 0;
+  }
+  .x-form-empty-field {
+    color: rgba(90, 106, 121, 1);
   }
 }
 
@@ -55,12 +58,6 @@
 
 #modx-uberbar {
   margin-right: 20px;
-}
-
-#modx-manager-search .x-form-empty-field {
-  color: #bbb;
-  font-weight: normal;
-  text-shadow: none;
 }
 
 .modx-manager-search-results {
@@ -159,8 +156,8 @@
 .modx-manager-search-results .x-combo-selected {
   border: none;
   color: #fff !important;
+  background-color: #3e5268;
   margin-left: 0;
-  //padding-left: 117px;
   z-index: 10;
 }
 

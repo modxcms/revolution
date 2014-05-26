@@ -5,7 +5,7 @@ MODx.SearchBar = function(config) {
     Ext.applyIf(config, {
         renderTo: 'modx-manager-search'
         ,listClass: 'modx-manager-search-results'
-        ,emptyText: _('search_desc')
+        ,emptyText: _('search')
         ,id: 'modx-uberbar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true

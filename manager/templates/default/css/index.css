@@ -5208,9 +5208,12 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 #modx-manager-search .x-form-field-trigger-wrap .x-form-text {
   text-shadow: none;
-  color: rgba(255, 255, 255, 0.5);
   font-weight: normal;
+  color: #C9D3E0;
   letter-spacing: 0;
+}
+#modx-manager-search .x-form-field-trigger-wrap .x-form-empty-field {
+  color: #5a6a79;
 }
 
 #modx-manager-search .x-form-field-wrap:hover,
@@ -5223,12 +5226,6 @@ ul.x-tab-strip-bottom .x-tab-left {
 
 #modx-uberbar {
   margin-right: 20px;
-}
-
-#modx-manager-search .x-form-empty-field {
-  color: #bbb;
-  font-weight: normal;
-  text-shadow: none;
 }
 
 .modx-manager-search-results {
@@ -5332,6 +5329,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 .modx-manager-search-results .x-combo-selected {
   border: none;
   color: #fff !important;
+  background-color: #3e5268;
   margin-left: 0;
   z-index: 10;
 }
