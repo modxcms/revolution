@@ -2,9 +2,13 @@
 $aside: rgb(248,248,248);
 $gainsboro: rgb(240,240,240);
 $actionable:rgb(251,251,251);
-$dropdownBg: #2b3948;
-$dropdownSelectedBg: lighten(#2b3948, 10%);
-$dropdownTextColor: #f2f2f2;
+$dropdownBg: #fff;
+$dropdownSelectedBg: rgb(225,236,241);
+$dropdownTextColor: #444;
+$dropdownBorder: #e4e4e4;
+$menuBg: #2b3948;
+$menuSelectedBg: lighten(#2b3948, 10%);
+$menuTextColor: #f2f2f2;
 $white: white;
 $mainBg: #F2F2F2;
 $softGrey: rgb(220, 220, 220);

@@ -2654,7 +2654,6 @@ td.x-date-mp-sep {
 .x-tip {
   background: #575757;
   border-radius: 3px;
-  border: 1px solid #e4e4e4;
   padding: 5px;
 }
 
@@ -2724,7 +2723,8 @@ td.x-date-mp-sep {
 }
 
 .x-menu-sep {
-  background-color: #e0e0e0;
+  background-color: #192b3e;
+  border-bottom: none;
 }
 
 a.x-menu-item {
@@ -2865,14 +2865,24 @@ a.x-menu-item {
   background-color: #d8d8d8;
 }
 
-.x-combo-list, .x-menu {
+.x-menu {
   background-color: #2b3948;
   border-color: transparent;
   border-radius: 0 0 5px 5px;
 }
 
-.x-combo-list-inner, .x-menu-list {
+.x-menu-list {
   background-color: #2b3948;
+}
+
+.x-combo-list {
+  background-color: white;
+  border-color: #e4e4e4;
+  border-radius: 0 0 5px 5px;
+}
+
+.x-combo-list-inner {
+  background-color: white;
 }
 
 .x-combo-list-hd {
@@ -2888,11 +2898,11 @@ a.x-menu-item {
 .x-combo-list-item {
   border: none;
   padding: 5px;
-  color: #f2f2f2;
+  color: #444444;
 }
 
 .x-combo-list .x-combo-selected {
-  background-color: #3e5268;
+  background-color: #e1ecf1;
   border: 0 none !important;
 }
 
@@ -4414,10 +4424,10 @@ having to do some real janky stuff to work with ExtJS markup
 }
 
 .x-btn-menu-active {
-  background: #2b3948;
+  background: white;
 }
 .x-btn-menu-active button {
-  color: #f2f2f2;
+  color: #444444;
 }
 
 /* //end button style */

@@ -766,7 +766,6 @@ td.x-date-mp-sep {
 .x-tip {
   background: darken($tipText, 60%);
   border-radius: 3px;
-  border: 1px solid $borderColor;
   padding: 5px;
 }
 .x-tip .x-tip-close {
@@ -820,15 +819,16 @@ td.x-date-mp-sep {
   background-image: url(../images/modx-theme/menu/menu-parent.gif);
 }
 .x-menu-sep {
-  background-color: #e0e0e0;
+  background-color: $subnavSepBorder;
+  border-bottom: none;
 }
 a.x-menu-item {
-  color: $dropdownTextColor;
+  color: $menuTextColor;
   font-size: 13px;
   padding: 4px 25px 4px 30px;
 }
 .x-menu-item-active {
-  background-color: $dropdownSelectedBg;
+  background-color: $menuSelectedBg;
   background-image: none;
   border: 0 none;
   margin: 0;
@@ -932,12 +932,21 @@ a.x-menu-item {
 #x-debug-browser .x-tree .x-tree-node .x-tree-selected a span {
   background-color: #d8d8d8;
 }
-.x-combo-list, .x-menu {
-  background-color: $dropdownBg;
+.x-menu {
+  background-color: $menuBg;
   border-color: transparent;
   border-radius: 0 0 5px 5px;
 }
-.x-combo-list-inner, .x-menu-list {
+.x-menu-list {
+  background-color: $menuBg;
+}
+
+.x-combo-list {
+  background-color: $dropdownBg;
+  border-color: $dropdownBorder;
+  border-radius: 0 0 5px 5px;
+}
+.x-combo-list-inner{
   background-color: $dropdownBg;
 }
 .x-combo-list-hd {
