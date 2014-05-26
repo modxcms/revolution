@@ -164,7 +164,8 @@ class TopMenu
                 $description = '';
             }
 
-            $menuTpl = '<li id="limenu-'.$menu['id'].'" class="top'.'">'."\n";
+            $top = (!empty($menu['children'])) ? ' class="top"' : '';
+            $menuTpl = '<li id="limenu-'.$menu['id'].'"'.$top.'">'."\n";
             if (!empty($menu['handler'])) {
                 $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$label.'</a>'."\n";
             } elseif (!empty($menu['action'])) {

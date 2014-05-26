@@ -1,8 +1,6 @@
 /* Main MODX Manager navbar */
 #modx-navbar {
-  background: $navbarBg;
-  border-width: 0 0 1px;
-  border-bottom: 1px solid $borderColor;
+  @include background-image(linear-gradient(to right, rgb(63,72,80) 0%, rgb(54,84,98) 46%, rgb(62,85,84) 60%, rgb(66,85,77) 68%, rgb(87,61,78) 100%));
   box-shadow: 0 2px 0 $borderShadow;
   height: 100%;
   position: relative;
@@ -16,7 +14,7 @@
 
 #modx-navbar {
   font-weight: bold;
-  font: $fontNormal;
+  font: $fontNavbar;
 }
 
 #modx-topnav {
@@ -24,6 +22,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  li {
+    border-right: 1px solid $navbarBorder;
+  }
 }
 
 #modx-navbar li,
@@ -43,9 +45,23 @@
   color: $navbarText;
   cursor: pointer;
   display: block;
-  line-height: 43px;
+  line-height: 55px;
   padding: 0 15px;
   text-decoration: none; 
+}
+
+#modx-navbar .top {
+  padding-right: 15px;
+
+  &:after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgb(96,114,124);
+    position: absolute;
+    content: ' ';
+    right: 12px;
+    top: 26px;
+  }
 }
 
 #modx-topnav li.top > a {
@@ -58,15 +74,11 @@
 }
 
 #modx-topnav > li.top:hover > a, #modx-user-menu > li.top:hover > a {
-  border-left-color:$borderColor;
-  border-right-color:$borderColor;
-  background: $white;
   padding-bottom: 1px;
   z-index: 10001;
 }
 
 #modx-navbar li:hover a {
-  background-color: $white;
   &:hover.modx-help {
     color: $colorSplash;
   }
@@ -87,27 +99,31 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 43px;
+  top: 54px;
   z-index: 10000;
 }
 
 #modx-navbar ul.modx-subnav, #modx-navbar ul.modx-subsubnav {
   border-radius: 0 0 $navbarRadius $navbarRadius;
   border-top: none;
-  border: 1px solid $borderColor;
+  border: 1px solid $navbarBorder;
   box-shadow: $shadower;
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include retina-image("../images/modx-logo", 32px 33px, "png", null, "@2x");
+  background-image: url("../images/modx-logo@2x.png");
   background-position:center center;
   background-repeat:no-repeat;
+  background-size: 45px 45px;
   width: 50px;
+  border-right: none;
+  margin-left: 21px;
 }
 #user-avatar img {
-  border-radius: 3px;
-  margin: 6px 7px 0 0;
-  line-height: 18px; 
+  border-radius: 20px;
+  margin: 8px 10px 0 0;
+  height: 40px;
+  width: 40px;
   display: block;
   float: left;
 }
@@ -134,8 +150,8 @@
 }
 
 #modx-navbar ul.modx-subnav li {
-  background: $white;
-  border-bottom: 1px solid $navbarHover;
+  background: $subnavBg;
+  border-bottom: 1px solid $subnavSepBorder;
   clear: both;
   margin: 0;
   padding: 0;
@@ -148,7 +164,8 @@
 */
 
 #modx-navbar ul.modx-subnav li a {
-  background-color: $white;
+  background-color: $subnavBg;
+  color: $subnavTitleColor;
   float: left;
   font-weight: bold;
   line-height: 1.5;
@@ -167,9 +184,9 @@
 
 #modx-navbar ul.modx-subnav li {
   a:hover {
-    background: $gainsboro;
-    border-top-color:$borderColor;
-    border-bottom-color:$borderColor;
+    background: darken($subnavBg, 10%);
+    border-top-color:$subnavBorder;
+    border-bottom-color:$subnavBorder;
   }
   &:first-child a {
     border-top-width:0;
@@ -180,6 +197,7 @@
 }
 
 #modx-navbar ul.modx-subnav li a span {
+  color: $subnavDescriptionColor;
   display: block;
   float: none;
   font-size: 12px;

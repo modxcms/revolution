@@ -18,6 +18,15 @@ $fa-css-prefix:       icon;
 body, body.x-border-layout-ct {
   color: $mainText;
   font:  $baseText;
+  -webkit-font-smoothing: antialiased;
+
+  a {
+    color: $colorSplash;
+
+    &:hover {
+      color: darken($colorSplash, 10%);
+    }
+  }
 }
 
 /* TODO: conver font heirarchy into a vertical rhythm formula */
@@ -129,35 +138,26 @@ hr {
   left: 2px;
 }
 
-#modx-content {
-  background: $mainBg;
-}
-
 #modx-resource-tabs {
-	@extend %shaded-tab-box;
-	.x-tab-panel-header {
-		border:1px solid $gainsboro;
-		width:auto !important; /* #shame */
-		&.vertical-tabs-header {
-			width:150px !important; /* #shame */
-		}
-		.x-tab-strip {
-			li {
-				float:left;
-				//width:auto;
-				margin-left:0;
-			}
-		}
-	}
-	.x-tab-panel-bwrap {
-		.x-tab-panel-header {
-
-		}
-	}
-	#modx-tv-tabs {
-		border-left:0;
-		border-right:0;
-	}
+  margin: 20px 0 0;
+  @extend %shaded-tab-box;
+  .x-tab-panel-header {
+    width:auto !important; /* #shame */
+    &.vertical-tabs-header {
+      width:150px !important; /* #shame */
+    }
+    .x-tab-strip {
+      li {
+        float:left;
+        //width:auto;
+        margin-left:0;
+      }
+    }
+  }
+  #modx-tv-tabs {
+      border-left:0;
+      border-right:0;
+  }
 }
 
 #modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {
@@ -174,7 +174,14 @@ hr {
 }
 
 #modx-resource-content {
-	@extend %shaded-box;
+  background-color: $tabStripBg;
+  .x-panel-header {
+      margin:0;
+      padding: 15px;
+  }
+  .x-panel-bwrap {
+      border:none;
+  }
 }
 
 #modx-content-above, #modx-content-below {
@@ -215,6 +222,7 @@ hr {
 #modx-container {
   height: 100%;
   width: 100%;
+  background: $mainBg;
 }
 
 .x-panel-header {
@@ -243,7 +251,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   margin-top: 0;
   position: absolute;
   right: 20px;
-  top: 60px;
+  top: 65px;
   z-index: 10;
 }
 
@@ -323,6 +331,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background-color: white;
   font: 11px $codefonts !important;
   padding: 8px;
+  border: none;
 }
 
 .x-form-text.modx-console-text {
@@ -1103,7 +1112,6 @@ body.ext-ie7 .x-superboxselect-item {
 .dashboard-block {
   background-color: $white;
   border-radius: 2px;
-  border: 1px solid #ddd;
   float: left;
   margin: 6px 0;
 }
@@ -1136,15 +1144,13 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block .title {
-  background: $aside;
-  border-bottom: 1px solid #ccc;
+  background: #d2dbe2;
   border-radius: 2px 2px 0 0;
   color: #5E5E5E;
   font-size: 12px;
   font-weight: bold;
   margin: 0;
-  padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #fff;
+  padding: 15px;
   zoom: 1;
 }
 
@@ -1198,6 +1204,10 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.5;
   margin-top: 5px;
   padding: 15px !important;
+
+  .x-panel-bwrap {
+    background-color: transparent !important;
+  }
 }
 
 .with-title .panel-desc {

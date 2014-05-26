@@ -31,8 +31,7 @@ MODx.grid.Package = function(config) {
     var cols = [];
     cols.push(this.exp);
     cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
-    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:90 });
-    cols.push({ header: _('release') ,dataIndex: 'release', id: 'meta-col', fixed:true, width:90 });
+    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:120, renderer: function (v, md, record) { return v + '-' + record.data.release;} });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
     cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
 

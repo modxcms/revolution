@@ -105,7 +105,12 @@
 .x-panel-bbar .x-toolbar, .x-panel-tbar .x-toolbar {
   border-width: 0;
   overflow: hidden;
-  padding: 2px;
+}
+.x-panel-bbar {
+  padding-top: 10px;
+}
+.x-panel-tbar {
+  padding-bottom: 2px;
 }
 
 .ext-ie7 .x-plain-body {
@@ -247,7 +252,7 @@
 }
 
 .x-resizable-handle {
-  background-color: #fff;
+
 }
 
 .x-resizable-handle-southeast {
@@ -297,7 +302,6 @@
   background-color: transparent;
   background-image: none;
   border-radius: 3px;
-  border: 1px solid #666;
   overflow: hidden;
   padding: 0;
 }
@@ -315,8 +319,8 @@
 }
 
 .x-grid3-hd-row td {
-  border-left: 1px solid #969696;
-  border-right: 1px solid #464646;
+  border-left: 1px solid $griddivider;
+  border-right: none;
 }
 
 .x-grid3-hd-row td.x-grid3-cell-first {
@@ -348,7 +352,7 @@
 }
 
 .x-grid3-row-alt {
-  background-color: #fafafa;
+  background-color: $gridrowalt;
 }
 
 .x-panel-body-noheader .x-grid3-row {
@@ -379,21 +383,19 @@
   background-color: #777;
 }
 .x-grid3-header {
-  background: url("../images/modx-theme/grid/grid3-hd-bg.png") repeat-x scroll left bottom #666666;
+  background: #c9d4e0;
   border-bottom: 1px solid #444444;
   padding: 0;
 }
 .x-panel-body-noheader .x-grid3-header {
-  background: $darkNeutral;
-  border-bottom: 1px solid #333;
-  border: 0 none;
+  border: none;
 }
 .x-grid3-header-offset {
   padding-left: 0;
 }
 .x-grid3-header .x-grid3-hd-row td {
-  color: #F0F0F0;
-  text-shadow: 0 -1px 0 #363636;
+  color: rgb(105,105,105);
+  font-weight: bold;
 }
 .x-grid3-header-pop {
   border-left-color: #DFDFDF;
@@ -402,19 +404,18 @@
   background-image: url(../images/modx-theme/grid/hd-pop.gif);
   border-left-color: #eee;
 }
-td.x-grid3-hd-over, td.sort-desc, td.sort-asc, td.x-grid3-hd-menu-open {
-  border-left-color: #9a9a9a;
-  border-right-color: #363636;
+td.x-grid3-hd-over, 
+td.sort-desc, 
+td.sort-asc, 
+td.x-grid3-hd-menu-open {
+  border-left-color: $griddivider;
+  background: $gridsorted;
 }
-td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-asc .x-grid3-hd-inner, td.x-grid3-hd-menu-open .x-grid3-hd-inner {
-  background: #777;
-  background: -moz-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  background: -o-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8e8e8e), color-stop(100%, #777777));
-  background: -webkit-linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  background: linear-gradient(center bottom, #777777 0%, #8e8e8e 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8E8E8E,endColorstr=#777777,GradientType=0);
+td.x-grid3-hd-over .x-grid3-hd-inner, 
+td.sort-desc .x-grid3-hd-inner, 
+td.sort-asc .x-grid3-hd-inner, 
+td.x-grid3-hd-menu-open .x-grid3-hd-inner {
+  color: $white;
 }
 .sort-asc .x-grid3-sort-icon {
   background-image: url(../images/modx-theme/grid/sort_asc.gif);
@@ -495,13 +496,13 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 .x-grid3-hd-inner {
   font-weight: bold;
-  padding: 7px 18px 7px 5px !important;
+  padding: 13px 18px 13px 5px;
 }
 .ext-ie .x-grid3-hd-inner {
   width: auto;
 }
 .x-grid3-cell-inner, .x-grid3-hd-inner {
-  padding: 14px 18px 12px 5px;
+  padding: 13px 18px 13px 5px;
 }
 .x-props-grid .x-grid3-body .x-grid3-td-name {
   background-color: #fff !important;
@@ -765,7 +766,6 @@ td.x-date-mp-sep {
 .x-tip {
   background: darken($tipText, 60%);
   border-radius: 3px;
-  border: 1px solid $borderColor;
   padding: 5px;
 }
 .x-tip .x-tip-close {
@@ -803,10 +803,6 @@ td.x-date-mp-sep {
 .x-tip-anchor {
   background-image: url(../images/modx-theme/qtip/tip-anchor-sprite.gif);
 }
-.x-menu {
-  background-color: #FAFAFA;
-  background-image: none;
-}
 .x-menu-list {
   padding: 0;
 }
@@ -823,16 +819,16 @@ td.x-date-mp-sep {
   background-image: url(../images/modx-theme/menu/menu-parent.gif);
 }
 .x-menu-sep {
-  background-color: #e0e0e0;
-  border-bottom-color: #fff;
+  background-color: $subnavSepBorder;
+  border-bottom: none;
 }
 a.x-menu-item {
-  color: #555;
+  color: $menuTextColor;
   font-size: 13px;
   padding: 4px 25px 4px 30px;
 }
 .x-menu-item-active {
-  background-color: #e6e6e6;
+  background-color: $menuSelectedBg;
   background-image: none;
   border: 0 none;
   margin: 0;
@@ -936,12 +932,22 @@ a.x-menu-item {
 #x-debug-browser .x-tree .x-tree-node .x-tree-selected a span {
   background-color: #d8d8d8;
 }
-.x-combo-list {
-  background-color: #DFDFDF;
-  border-color: #bcbcbc;
+.x-menu {
+  background-color: $menuBg;
+  border-color: transparent;
+  border-radius: 0 0 5px 5px;
 }
-.x-combo-list-inner {
-  background-color: #fff;
+.x-menu-list {
+  background-color: $menuBg;
+}
+
+.x-combo-list {
+  background-color: $dropdownBg;
+  border-color: $dropdownBorder;
+  border-radius: 0 0 5px 5px;
+}
+.x-combo-list-inner{
+  background-color: $dropdownBg;
 }
 .x-combo-list-hd {
   background-image: url(../images/modx-theme/layout/panel-title-light-bg.gif);
@@ -949,14 +955,15 @@ a.x-menu-item {
   color: #464646;
 }
 .x-resizable-pinned .x-combo-list-inner {
-  border-bottom-color: #bcbcbc;
+  border-bottom-color: transparent;
 }
 .x-combo-list-item {
   border: none;
-  padding: 3px;
+  padding: 5px;
+  color: $dropdownTextColor;
 }
 .x-combo-list .x-combo-selected {
-  background-color: $selected;
+  background-color: $dropdownSelectedBg;
   border: 0 none !important;
 }
 .x-combo-list .x-toolbar {
@@ -1203,8 +1210,6 @@ a.x-menu-item {
   background-position: right -208px;
 }
 .x-panel-collapsed {
-  border-bottom: 1px solid #999;
-  border-radius: 2px;
 }
 .x-panel-dd-spacer {
   border-color: #DFDFDF;
@@ -1218,7 +1223,7 @@ a.x-menu-item {
 }
 .x-window-tl .x-window-header, .x-panel-header {
   color: #5E5E5E;
-  font: $fontMedium;
+  font: $fontNavbar;
   font-weight: bold;
 }
 .x-panel-header {
@@ -1448,9 +1453,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-panel-mr,
 .x-window .x-panel-br {
   background-color: $aside;
-}
-.x-window .x-panel-bwrap {
-	background: $white !important;
 }
 .x-window {
 	.x-tab-panel-body-top {

@@ -1,12 +1,10 @@
 /* top area around the tab strip */
 .x-tab-panel-noborder {
-  background-color: $gainsboro;
   border: 1px solid #E2E3DE;
   margin: 20px 0 10px;
   overflow: visible;
 
   #modx-leftbar & {
-    background-color: $gainsboro;
   }
 
   /* background behind a button bar */
@@ -25,22 +23,22 @@
   border: 0;
 }
 
-ul.x-tab-strip-top {
+.x-tab-panel-header ul.x-tab-strip-top {
   border-bottom-color: $white;
   margin:0; /* was -1px */
   width: auto;
+  background-color: $tabStripBg !important;
 }
 
 
 .x-tab-panel-header-plain {
-  background-color: #f7f8f3;
+
 }
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
   background-color: #fff;
-  border-width: 1px 1px 0 1px !important;
-  border: 1px solid #E2E3DE;
+  border: none;
   height: 3px;
   margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
@@ -52,11 +50,9 @@ ul.x-tab-strip-top {
 }
 
 .x-tab-strip li {
-  border-width: 1px 1px 0;
-  border: 1px solid transparent;
   color: $tabInactiveText;
   cursor: pointer;
-  font-size: 13px;
+  font: $tabFont;
   line-height: 2.2;
   margin: 1px 0 1px 2px;
   padding: 0 15px;
@@ -68,11 +64,15 @@ ul.x-tab-strip-top {
   &.x-tab-strip-active {
     color: $tabText;
     background-color: #fff;
-    //box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
     box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 transparent;
     cursor: default;
     margin: 0 0 0 2px;
     padding-bottom: 2px;
+    border-radius: 2px 2px 0 0;
+
+    .vertical-tabs-header & {
+      border-radius: 0;
+    }
   }
 //  &:first-of-type {
 //    &.x-tab-strip-active {
@@ -85,6 +85,8 @@ ul.x-tab-strip-top {
 .x-tab-panel-header,
 .x-tab-panel {
   overflow: visible;
+  background: $mainBg;
+  border: none;
 }
 
 .x-tab-strip-closable {
@@ -125,8 +127,7 @@ ul.x-tab-strip-bottom {
 
 .x-tab-panel-body {
   background-color: $white;
-  border: 1px solid $borderColor;
-  border-radius: 0 0 4px 4px;
+  border: none;
 }
 
 .x-tab-panel-body-top {
@@ -182,7 +183,7 @@ ul.x-tab-strip-bottom {
 
 /* vertical tabs */
 .vertical-tabs-panel {
-  background: url("../images/style/vtabs-bg.png") repeat-y scroll left 0 transparent !important;
+  background: #f8f8f8;
 
   &.wrapped {
     border: 1px solid #e0e0e0;
@@ -190,12 +191,11 @@ ul.x-tab-strip-bottom {
 }
 
 .vertical-tabs-header {
-  background-color: transparent !important;
+  background-color: #f8f8f8 !important;
   float: left;
   margin-left: 0;
   padding: 13px 0 !important;
   width: 150px !important;
-  margin-left:0;
   & ul {
     border-top: 1px solid transparent;
     width: auto;
@@ -216,7 +216,6 @@ ul.x-tab-strip-bottom {
     color: #555;
     line-height: 1.3;
     text-shadow: 0 1px 0 #fff;
-    white-space: normal;
 
     &:first-child {
       border-top: 0 none !important;
@@ -224,6 +223,22 @@ ul.x-tab-strip-bottom {
   }
   h4 {
     margin-left:15px;
+  }
+  .x-tab-strip-wrap {
+    background: #f8f8f8;
+  }
+  ul.x-tab-strip-top {
+    border-bottom: none;
+    background: #f8f8f8 !important;
+  }
+}
+.window-vtabs {
+  .x-panel-mr {
+    padding-right: 0px;
+  }
+  .vertical-tabs-panel {
+    width: 100% !important;
+    margin: 0px;
   }
 }
 
