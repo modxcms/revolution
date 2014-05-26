@@ -74,24 +74,14 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
-					compass: false
+					compass: false,
+                    sourcemap: true
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
 					'<%= dirs.css %>login.css': 'sass/login.scss'
 				}
-			},
-            map: {
-                options: {
-                    style: 'expanded',
-                    compass: false,
-                    sourcemap: true
-                },
-				files: {
-					'<%= dirs.css %>index.css': 'sass/index.scss',
-					'<%= dirs.css %>login.css': 'sass/login.scss'
-				}
-            }
+			}
 		},
 		autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
 			options: {
@@ -120,12 +110,8 @@ module.exports = function(grunt) {
 		},
 		watch: { /* trigger tasks on save */
 			scss: {
-				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
-				tasks: ['sass:dist', 'autoprefixer', 'cssmin:compress', 'growl:sass']
-			},
-			map: {
-				files: ['<%= dirs.scss %>*','<%= dirs.scss %>components/**/*'],
-				tasks: ['sass:map', 'growl:map']
+				files: ['<%= dirs.scss %>/**/*'],
+				tasks: ['sass:dev', 'growl:sass']
 			},
             css: {
                 options: {
@@ -220,6 +206,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-imageoptim');
 
     // Tasks
-    grunt.registerTask('default', ['growl:watch', 'watch:map']);
+    grunt.registerTask('default', ['growl:watch', 'watch']);
     grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 };
