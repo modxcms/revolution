@@ -2,7 +2,6 @@
 $fa-css-prefix:       icon;
 @import "font-awesome/font-awesome";
 .#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
-@import "titillium";
 @import "image-set";
 @import "colors-and-vars";
 @import "utility";
