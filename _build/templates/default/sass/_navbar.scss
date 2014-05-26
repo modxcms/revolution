@@ -79,10 +79,12 @@
             }    
         }
     }
-    #limenu-site > a:after { content:$fa-var-cube; /* "\f1b2" */ } 
-    #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
-    #limenu-components > a:after { content:$fa-var-cogs; /* "\f085" */  } // content:$fa-var-puzzle-piece:; /* "\f12e" */
-    #limenu-manage > a:after { content:$fa-var-gavel; /* "\f0e3" */ } 
+    @include media($desktop) {
+        #limenu-site > a:after { content:$fa-var-cube; /* "\f1b2" */ } 
+        #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
+        #limenu-components > a:after { content:$fa-var-cogs; /* "\f085" */  } 
+        #limenu-manage > a:after { content:$fa-var-gavel; /* "\f0e3" */ } 
+    }
 }
 
 #modx-navbar .top {
