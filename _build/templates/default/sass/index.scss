@@ -19,6 +19,7 @@ $fa-css-prefix:       icon;
 body, body.x-border-layout-ct {
   color: $mainText;
   font:  $baseText;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* TODO: conver font heirarchy into a vertical rhythm formula */

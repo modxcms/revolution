@@ -137,6 +137,10 @@
     display: inline-block;
     width: 1em;
   }
+
+  // For legacy icons
+  background-repeat: no-repeat;
+  background-position: 5px;
 }
 
 .x-tree-node-el a span {
