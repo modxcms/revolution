@@ -20,6 +20,14 @@ body, body.x-border-layout-ct {
   color: $mainText;
   font:  $baseText;
   -webkit-font-smoothing: antialiased;
+
+  a {
+    color: $colorSplash;
+
+    &:hover {
+      color: darken($colorSplash, 10%);
+    }
+  }
 }
 
 /* TODO: conver font heirarchy into a vertical rhythm formula */

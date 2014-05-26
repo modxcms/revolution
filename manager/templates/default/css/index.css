@@ -6459,6 +6459,12 @@ body, body.x-border-layout-ct {
   font: normal 13px/1.4 "Helvetica Neue", Helvetica, arial, tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+body a, body.x-border-layout-ct a {
+  color: #3697cd;
+}
+body a:hover, body.x-border-layout-ct a:hover {
+  color: #297aa7;
+}
 
 /* TODO: conver font heirarchy into a vertical rhythm formula */
 h2, h3 {
