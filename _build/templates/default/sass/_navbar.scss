@@ -111,9 +111,10 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include retina-image("../images/header-modx-logo", 50px 50px);
+  background-image: url("../images/modx-logo@2x.png");
   background-position:center center;
   background-repeat:no-repeat;
+  background-size: 45px 45px;
   width: 50px;
   border-right: none;
   margin-left: 21px;
