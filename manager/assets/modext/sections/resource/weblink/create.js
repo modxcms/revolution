@@ -51,12 +51,12 @@ Ext.extend(MODx.page.CreateWebLink,MODx.Component,{
             text: _('cancel')
             ,id: 'modx-abtn-cancel'
         });
-        /*btns.push('-');
+        btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });*/
+        });
         return btns;
     }
 });

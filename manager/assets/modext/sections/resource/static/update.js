@@ -142,12 +142,12 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             ,scope: this
             ,id: 'modx-abtn-cancel'
         });
-        /*btns.push('-');
+        btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });*/
+        });
         return btns;
     }
 });

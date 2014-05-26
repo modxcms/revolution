@@ -34,10 +34,10 @@ MODx.page.UpdateUser = function(config) {
             text: _('delete')
             ,handler: this.removeUser
             ,scope: this
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-user'
             ,renderTo: 'modx-panel-user-div'

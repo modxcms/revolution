@@ -25,10 +25,10 @@ MODx.page.UpdatePlugin = function(config) {
             ,scope: this
         },'-',{
             text: _('cancel')
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'

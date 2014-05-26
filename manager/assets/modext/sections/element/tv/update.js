@@ -25,10 +25,10 @@ MODx.page.UpdateTV = function(config) {
             ,scope: this
         },'-',{
             text: _('cancel')
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'

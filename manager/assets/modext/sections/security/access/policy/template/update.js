@@ -29,11 +29,11 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:'security/permission'}
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
-        ,components: [{
+        }]
+        ,components: [{ 
             xtype: 'modx-panel-access-policy-template'
             ,template: config.template
             ,record: config.record || {}

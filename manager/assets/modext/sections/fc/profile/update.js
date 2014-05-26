@@ -29,10 +29,10 @@ MODx.page.UpdateFCProfile = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:'security/forms'}
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-fc-profile'
             ,record: config.record || {}

@@ -22,10 +22,10 @@ MODx.page.CreateTemplate = function(config) {
             }]
         },'-',{
             text: _('cancel')
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-template'
             ,renderTo: 'modx-panel-template-div'

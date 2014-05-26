@@ -23,10 +23,10 @@ MODx.page.CreateDashboard = function(config) {
             ,handler: function() {
                 MODx.loadPage('system/dashboards');
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
 		,components: [{
             xtype: 'modx-panel-dashboard'
             ,record: config.record || {}

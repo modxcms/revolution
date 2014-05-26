@@ -133,11 +133,11 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
             ,handler: this.cancel
             ,scope: this
         });
-        /*btns.push('-');
+        btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        });*/
+        });
         return btns;
     }
 });

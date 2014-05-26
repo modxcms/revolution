@@ -22,10 +22,10 @@ MODx.page.Package = function(config) {
             ,handler: function() {
                 MODx.loadPage('workspaces');
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
     });
     MODx.page.Package.superclass.constructor.call(this,config);
 };

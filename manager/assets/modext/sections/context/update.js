@@ -29,10 +29,10 @@ MODx.page.UpdateContext = function(config) {
             ,params: {
                 a: 'context'
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-context'
             ,context: MODx.request.key

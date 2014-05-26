@@ -21,10 +21,10 @@ MODx.page.ListRoles = function(config) {
             }
         },'-',{
             text: _('cancel')
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'grid-role'
             ,renderTo: 'role_grid'

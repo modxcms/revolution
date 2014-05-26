@@ -138,12 +138,12 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             ,handler: this.cancel
             ,scope: this
         });
-        /*btns.push('-');
+        btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });*/
+        });
         return btns;
     }
 });

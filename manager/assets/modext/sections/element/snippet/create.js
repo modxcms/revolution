@@ -1,6 +1,6 @@
 /**
  * Loads the create snippet page
- *
+ * 
  * @class MODx.page.CreateSnippet
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -22,10 +22,10 @@ MODx.page.CreateSnippet = function(config) {
             }]
         },'-',{
             text: _('cancel')
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-snippet'
             ,renderTo: 'modx-panel-snippet-div'
