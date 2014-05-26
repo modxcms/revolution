@@ -40,7 +40,7 @@
 {$scr}
 {/foreach}
 </head>
-<body id="modx-body-tag">
+<body id="modx-body-tag" class="modx-2-3">
 
 <div id="modx-browser"></div>
 <div id="modx-container">
