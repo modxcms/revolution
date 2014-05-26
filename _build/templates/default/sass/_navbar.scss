@@ -187,6 +187,10 @@
     background: darken($subnavBg, 10%);
     border-top-color:$subnavBorder;
     border-bottom-color:$subnavBorder;
+    color:$white;
+    .description {
+        color:lighten($subnavDescriptionColor,16%);
+    }
   }
   &:first-child a {
     border-top-width:0;
