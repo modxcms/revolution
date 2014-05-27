@@ -23,6 +23,11 @@ module.exports = function(grunt) {
 					{src:'bourbon/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
 				]
 			},
+			neat: {
+				files:[
+					{src:'neat/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
+				]
+			},
 			fontawesome: {
 				files:[
 					{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true},

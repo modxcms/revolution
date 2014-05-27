@@ -3,19 +3,23 @@
 // example:
 // @extend %ir;
 
+@mixin ir {
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      height: 150%;
+      width: 0;
+    }
+}
+
 // Image Replacement
 %ir {
-  /* IE 6/7 fallback */
-  *text-indent: -9999px;
-  background-color: transparent;
-  border: 0;
-  overflow: hidden;
-  &:before {
-    content: "";
-    display: block;
-    height: 150%;
-    width: 0;
-  }
+    @include ir;
 }
 
 @mixin awesome-font() {

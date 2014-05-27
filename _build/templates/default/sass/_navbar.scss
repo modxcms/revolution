@@ -1,4 +1,8 @@
 /* Main MODX Manager navbar */
+#modx-header {
+    background:rgb(63,72,80);
+    min-height:55px; // #janky #extjs
+}
 #modx-navbar {
   @include background-image(linear-gradient(to right, rgb(63,72,80) 0%, rgb(54,84,98) 46%, rgb(62,85,84) 60%, rgb(66,85,77) 68%, rgb(87,61,78) 100%));
   box-shadow: 0 2px 0 $borderShadow;
@@ -48,6 +52,39 @@
   line-height: 55px;
   padding: 0 15px;
   text-decoration: none; 
+}
+
+#modx-topnav {
+    > li:not(#modx-home-dashboard) {
+        > a {
+            @include media($desktop) {
+                text-indent:-99999em;
+                display:block;
+                height:100%;
+                position:relative;
+                width:1em;
+                &:after {
+            		@include awesome-font;
+                    text-indent:0;
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    right:0;
+                    bottom:0;
+                    display:block;
+                    text-align:center;
+                    line-height:55px;
+                    font-size:16px;
+                }
+            }    
+        }
+    }
+    @include media($desktop) {
+        #limenu-site > a:after { content:$fa-var-cube; /* "\f1b2" */ } 
+        #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
+        #limenu-components > a:after { content:$fa-var-cogs; /* "\f085" */  } 
+        #limenu-manage > a:after { content:$fa-var-gavel; /* "\f0e3" */ } 
+    }
 }
 
 #modx-navbar .top {
@@ -187,6 +224,10 @@
     background: darken($subnavBg, 10%);
     border-top-color:$subnavBorder;
     border-bottom-color:$subnavBorder;
+    color:$white;
+    .description {
+        color:lighten($subnavDescriptionColor,16%);
+    }
   }
   &:first-child a {
     border-top-width:0;
