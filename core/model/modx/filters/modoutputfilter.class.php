@@ -609,6 +609,7 @@ class modOutputFilter {
 
                         case 'toPlaceholder':
                             $this->modx->toPlaceholder($m_val,$output);
+                            $output = '';
                             break;
                         case 'cssToHead':
                             $this->modx->regClientCSS($output);
