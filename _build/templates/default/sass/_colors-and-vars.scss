@@ -95,7 +95,7 @@ $tabInactiveText: #757575;
 $tabHoverText: darken($colorSplash, 20%);
 
 /* text colors and font stacks */
-$selected:lighten(desaturate($colorSplash,45%),50%);
+$selected:lighten(desaturate($colorSplash,40%),40%);
 $over: rgb(250, 250, 250);
 
 $bodyfonts: 'Helvetica Neue', Helvetica, arial, tahoma, sans-serif;
