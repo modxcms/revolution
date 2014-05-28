@@ -36,6 +36,18 @@
     @include awesome-font;
 }
 
+@mixin absolute-corners {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;    
+}
+
+%absolute-corners {
+    @include absolute-corners;
+}
+
 %pseudo-font-x-btn {
     @extend %pseudo-font;
     position:absolute;
