@@ -62,7 +62,7 @@ MODx.Layout = function(config){
             xtype: 'box'
             ,region: 'north'
             ,applyTo: 'modx-header'
-            ,height: 55
+            //,height: 55
         },{
              region: 'west'
             ,applyTo: 'modx-leftbar'
@@ -111,7 +111,7 @@ MODx.Layout = function(config){
             ,border: false
             ,autoScroll: true
         }/*,{
-            region: 'south' // ya, you're going south alright 
+            region: 'south' // ya, you're going south alright
             ,applyTo: 'modx-footer'
             ,border: false
             ,id: 'modx-footer'
