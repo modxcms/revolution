@@ -23,20 +23,24 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,width: 75
+            ,fixed: true
         },{
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
-            ,width: 150
+            //,width: 150
             ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
             header: _('published')
             ,dataIndex: 'published'
             ,width: 120
+            ,fixed: true
             ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
         }]
         ,paging: true
         ,listeners: {
-            'afteredit': {fn: this.refresh, scope: this}
+            afteredit: this.refresh
+            ,afterrender: this.onAfterRender
+            ,scope: this
         }
     });
     MODx.grid.RecentlyEditedResourcesByUser.superclass.constructor.call(this,config);
@@ -49,6 +53,22 @@ Ext.extend(MODx.grid.RecentlyEditedResourcesByUser,MODx.grid.Grid,{
         var tree = Ext.getCmp('modx-resource-tree');
         if (tree && tree.rendered) {
             tree.refresh();
+        }
+    }
+    // Workaround to resize the grid when in a dashboard widget
+    ,onAfterRender: function() {
+        var cnt = Ext.getCmp('modx-content')
+            // Dashboard widget "parent" (renderTo)
+            ,parent = Ext.get('modx-grid-user-recent-resource');
+
+        if (cnt && parent) {
+            cnt.on('afterlayout', function(elem, layout) {
+                var width = parent.getWidth();
+                // Only resize when more than 500px (else let's use/enable the horizontal scrolling)
+                if (width > 500) {
+                    this.setWidth(width);
+                }
+            }, this);
         }
     }
 });
