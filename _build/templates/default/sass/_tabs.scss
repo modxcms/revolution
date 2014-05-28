@@ -96,7 +96,7 @@
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
   right: 8px;
   top: 11px;
-  background-image: url(../images/modx-theme/tabs/tab-close.gif);
+  background-image: url($imgPath + 'modx-theme/tabs/tab-close.gif');
 }
 
 ul.x-tab-strip-top li:first-child {
@@ -109,18 +109,18 @@ ul.x-tab-strip-bottom {
   border-top-color: #dfdfdf;
 
   & .x-tab-right {
-    background-image: url(../images/modx-theme/tabs/tab-btm-inactive-right-bg.gif);
+    background-image: url($imgPath + 'modx-theme/tabs/tab-btm-inactive-right-bg.gif');
 
     & .x-tab-right {
-      background-image: url(../images/modx-theme/tabs/tab-btm-right-bg.gif);
+      background-image: url($imgPath + 'modx-theme/tabs/tab-btm-right-bg.gif');
     }
     & .x-tab-left {
-      background-image: url(../images/modx-theme/tabs/tab-btm-left-bg.gif);
+      background-image: url($imgPath + 'modx-theme/tabs/tab-btm-left-bg.gif');
     }
   }
 
   & .x-tab-left {
-    background-image: url(../images/modx-theme/tabs/tab-btm-inactive-left-bg.gif);
+    background-image: url($imgPath + 'modx-theme/tabs/tab-btm-inactive-left-bg.gif');
   }
 
 }
@@ -139,7 +139,7 @@ ul.x-tab-strip-bottom {
 }
 
 .x-tab-scroller-left {
-  background-image: url(../images/modx-theme/tabs/scroll-left.gif);
+  background-image: url($imgPath + 'modx-theme/tabs/scroll-left.gif');
   border-bottom-color: #dfdfdf;
 }
 
@@ -158,7 +158,7 @@ ul.x-tab-strip-bottom {
 }
 
 .x-tab-scroller-right {
-  background-image: url(../images/modx-theme/tabs/scroll-right.gif);
+  background-image: url($imgPath + 'modx-theme/tabs/scroll-right.gif');
   border-bottom-color: #dfdfdf;
 }
 

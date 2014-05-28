@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  background: #eeeeee url(../images/restyle/manager-loginscreen-bg.png) center -90px repeat-x;
+  background: #eeeeee url($imgPath + 'restyle/manager-loginscreen-bg.png') center -90px repeat-x;
   font-size: 75%;
   /* 12px 62.5% for 10px*/
   height: 100%;
@@ -86,7 +86,7 @@ img.loginCaptcha {
 .login-form-bwrap-padding {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background: black url(../images/restyle/manager-loginscreen-form-bg.png) bottom left no-repeat;
+  background: black url($imgPath + 'restyle/manager-loginscreen-form-bg.png') bottom left no-repeat;
   border-radius: 5px;
   padding-bottom: 10px;
 }
@@ -229,7 +229,7 @@ label {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 bottom gainsboro;
+  background: url($imgPath + 'modx-theme/form/button-bg.png') repeat-x scroll 0 bottom gainsboro;
   border-radius: 3px;
   border: 2px solid #ddd;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
@@ -240,7 +240,7 @@ label {
 }
 #modx-login-btn {
   float: right;
-  
+
   &:hover {
     background: #ddd;
   }

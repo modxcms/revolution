@@ -105,7 +105,7 @@ hr {
 }
 
 .wait {
-  background: transparent url('../images/style/wait.gif') no-repeat scroll center 55px;
+  background: transparent url($imgPath + 'style/wait.gif') no-repeat scroll center 55px;
   color: $darkNeutral;
   font-size: 15px;
   font-weight: bold;
@@ -462,7 +462,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .ux-row-action-item span {
-  background: transparent url(../images/style/go-next.png) no-repeat scroll 1px 4px;
+  background: transparent url($imgPath + 'style/go-next.png') no-repeat scroll 1px 4px;
   display: inline !important;
   line-height: 24px;
   margin: 0 5px;
@@ -471,19 +471,19 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .icon-uninstall span {
-  background: url("../images/style/delete.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/delete.png') no-repeat scroll 1px 4px transparent;
 }
 
 .package-details span {
-  background: url("../images/style/info.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/info.png') no-repeat scroll 1px 4px transparent;
 }
 
 .package-download span {
-  background: url("../images/style/download.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/download.png') no-repeat scroll 1px 4px transparent;
 }
 
 .package-installed span {
-  background: url("../images/style/accept.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/accept.png') no-repeat scroll 1px 4px transparent;
 }
 
 .ext-ie .ux-row-action-item span {
@@ -666,7 +666,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .x-rbtn td {
-  background-image: url(../images/restyle/icons/rbtn.gif);
+  background-image: url($imgPath + 'restyle/icons/rbtn.gif');
   background-repeat: no-repeat;
   border: 0 none;
   height: 21px;
@@ -864,33 +864,33 @@ ul.modx-tag-list li.modx-tag-checked {
 
 /* file upload */
 .ext-ux-uploaddialog-addbtn {
-  background: url("../images/restyle/fileup/file-add.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/file-add.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-removebtn {
-  background: url("../images/restyle/fileup/file-remove.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/file-remove.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-resetbtn {
-  background: url("../images/restyle/fileup/reset.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/reset.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-uploadstartbtn {
-  background: url("../images/restyle/fileup/upload-start.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/upload-start.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-uploadstopbtn {
-  background: url("../images/restyle/fileup/upload-stop.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/upload-stop.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-indicator-stoped {
-  background: url("../images/restyle/fileup/done.gif") no-repeat center center;
+  background: url($imgPath + 'restyle/fileup/done.gif') no-repeat center center;
   height: 16px;
   width: 16px;
 }
 
 .ext-ux-uploaddialog-indicator-processing {
-  background: url("../images/restyle/fileup/loading.gif") no-repeat center center;
+  background: url($imgPath + 'restyle/fileup/loading.gif') no-repeat center center;
   height: 16px;
   width: 16px;
 }
@@ -902,19 +902,19 @@ ul.modx-tag-list li.modx-tag-checked {
 }
 
 .ext-ux-uploaddialog-state-0 {
-  background-image: url("../images/restyle/fileup/uncheck.gif");
+  background-image: url($imgPath + 'restyle/fileup/uncheck.gif');
 }
 
 .ext-ux-uploaddialog-state-1 {
-  background-image: url("../images/restyle/fileup/check.gif");
+  background-image: url($imgPath + 'restyle/fileup/check.gif');
 }
 
 .ext-ux-uploaddialog-state-2 {
-  background-image: url("../images/restyle/fileup/failed.gif");
+  background-image: url($imgPath + 'restyle/fileup/failed.gif');
 }
 
 .ext-ux-uploaddialog-state-3 {
-  background-image: url("../images/restyle/fileup/file-uploading.gif");
+  background-image: url($imgPath + 'restyle/fileup/file-uploading.gif');
 }
 
 .ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div {
@@ -995,11 +995,11 @@ ul.modx-tag-list li.modx-tag-checked {
 }
 
 .x-superboxselect-btn-clear {
-  background: url(../images/restyle/icons/sb_clear.png) no-repeat scroll left 0;
+  background: url($imgPath + 'restyle/icons/sb_clear.png') no-repeat scroll left 0;
 }
 
 .x-superboxselect-btn-expand {
-  background: url(../images/restyle/icons/sb_expand.png) no-repeat scroll left 0;
+  background: url($imgPath + 'restyle/icons/sb_expand.png') no-repeat scroll left 0;
 }
 
 .x-superboxselect-btn-over {
@@ -1060,7 +1060,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .x-superboxselect-item-close {
-  background: url(../images/restyle/icons/sb_close.png) no-repeat scroll left 0;
+  background: url($imgPath + 'restyle/icons/sb_close.png') no-repeat scroll left 0;
   border: none;
   cursor: pointer;
   display: block;
@@ -1309,7 +1309,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-tv-reset {
-  background: url(../images/restyle/icons/arrow_rotate_anticlockwise.png) top right no-repeat;
+  background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') top right no-repeat;
   cursor: pointer;
   float: left;
   height: 16px;
@@ -1334,7 +1334,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding-top: 4px;
 }
 
-#modx-resource-settings .modx-tv-label, 
+#modx-resource-settings .modx-tv-label,
 #modx-page-settings .modx-tv-label {
   width: 216px;
 }
@@ -1398,7 +1398,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .crumbs li {
-  background: url("../images/style/crumbs-bg.png") no-repeat scroll right center transparent;
+  background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;
   color: $darkNeutral;
   float: left;
   font-size: 12px;
@@ -1420,7 +1420,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .crumbs li .root {
-  background: url("../images/style/home.png") no-repeat scroll center top transparent;
+  background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;
   display: block;
   height: 16px;
   margin: 10px 0 9px;
@@ -1476,7 +1476,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding: 10px;
 }
 #ux-lightbox-loading {
-  background: url("../images/style/loading.gif") no-repeat scroll center 15% transparent;
+  background: url($imgPath + 'style/loading.gif') no-repeat scroll center 15% transparent;
   height: 25%;
   left: 0;
   line-height: 0;
@@ -1549,7 +1549,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding-bottom: 1em;
 }
 #ux-lightbox-data #ux-lightbox-navClose {
-  background: transparent url('../images/style/close.png') no-repeat scroll 0 0;
+  background: transparent url($imgPath + 'style/close.png') no-repeat scroll 0 0;
   float: right;
   height: 16px;
   outline: medium none;
@@ -1634,7 +1634,7 @@ body.ext-ie7 .x-superboxselect-item {
   text-decoration: none;
 }
 .home-panel ol li:hover button {
-  background: transparent url('../images/style/search.png') no-repeat scroll right center;
+  background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;
   color: #3D4349;
 }
 .home-panel ol li .highlighted {

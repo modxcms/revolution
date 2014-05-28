@@ -62,13 +62,13 @@ input::-moz-focus-inner {
   font: $baseText;
 }
 
-textarea.x-form-field, 
+textarea.x-form-field,
 .x-form-textarea {
   font-family: $codefonts;
 }
 
 .x-form-text, /* this screws up clear cache modal #shame */
-textarea.x-form-field, 
+textarea.x-form-field,
 .x-form-textarea {
   background-color: #fbfbfb;
   background-image: none;
@@ -82,8 +82,8 @@ textarea.x-form-field,
   border-color: #c5c5c5;
 }
 
-.x-form-check-wrap, 
-.x-form-check-wrap label, 
+.x-form-check-wrap,
+.x-form-check-wrap label,
 .x-form-checkbox {
   cursor: pointer;
 }
@@ -110,7 +110,7 @@ textarea.x-form-field,
   background-color: #fff;
 }
 
-.ext-strict .x-form-field-trigger-wrap .x-form-text, 
+.ext-strict .x-form-field-trigger-wrap .x-form-text,
 .ext-strict .x-small-editor .x-form-field-trigger-wrap .x-form-text {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
@@ -123,7 +123,7 @@ textarea.x-form-field,
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger {
-  background-image: url(../images/modx-theme/form/trigger.png);
+  background-image: url($imgPath + 'modx-theme/form/trigger.png');
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   border: 1px solid #C5C5C5 !important;
@@ -132,7 +132,7 @@ textarea.x-form-field,
 
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
-  background: #f6f2f7 url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0px 100%;
+  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0px 100%;
 }
 
 .x-grid-editor .x-form-field-wrap input {
@@ -141,7 +141,7 @@ textarea.x-form-field,
 
 .x-grid-editor .x-form-field-wrap img {
   background-color: white;
-  background-image: url(../images/modx-theme/form/trigger.png);
+  background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
 
 .x-form-field-trigger-wrap {
@@ -175,7 +175,7 @@ textarea.x-form-field,
 }
 
 .x-form-field-wrap .x-form-arrow-trigger {
-  background: url("../images/modx-theme/form/trigger.png") no-repeat scroll left center transparent;
+  background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat scroll left center transparent;
 }
 
 .x-form-field-wrap .x-form-trigger.x-form-trigger-over {
@@ -203,7 +203,7 @@ textarea.x-form-field,
 }
 
 .x-small-editor .x-form-field-wrap .x-form-arrow-trigger {
-  background: url("../images/modx-theme/form/trigger.png") no-repeat scroll left center transparent;
+  background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat scroll left center transparent;
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-over {
@@ -215,15 +215,15 @@ textarea.x-form-field,
 }
 
 .x-form-field-wrap .x-form-date-trigger, .x-small-editor .x-form-field-wrap .x-form-date-trigger {
-  background-image: url(../images/modx-theme/form/calendar.png);
+  background-image: url($imgPath + 'modx-theme/form/calendar.png');
 }
 
 .x-form-field-wrap .x-form-clear-trigger {
-  background-image: url(../images/modx-theme/form/clear-trigger.gif);
+  background-image: url($imgPath + 'modx-theme/form/clear-trigger.gif');
 }
 
 .x-form-field-wrap .x-form-search-trigger {
-  background-image: url(../images/modx-theme/form/search-trigger.gif);
+  background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
 }
 
 .x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus, .x-viewport .x-form-textarea.x-form-focus {
@@ -260,7 +260,7 @@ textarea.x-form-field,
 
 .x-form-inner-invalid, textarea.x-form-inner-invalid {
   background-color: #fff;
-  background-image: url(../images/modx-theme/grid/invalid_line.gif);
+  background-image: url($imgPath + 'modx-theme/grid/invalid_line.gif');
 }
 
 .x-form-grow-sizer {
@@ -268,7 +268,7 @@ textarea.x-form-field,
 }
 
 .x-form-invalid-msg {
-  /*background-image: url(../images/modx-theme/shared/warning.gif);*/
+  /*background-image: url($imgPath + 'modx-theme/shared/warning.gif');*/
   color: #c0272b;
   font: $fontSmall;
   margin-top:2px;
@@ -305,7 +305,7 @@ textarea.x-form-field,
 }
 
 .x-form-invalid-icon {
-  background-image: url(../images/modx-theme/form/exclamation.gif);
+  background-image: url($imgPath + 'modx-theme/form/exclamation.gif');
 }
 
 .x-fieldset {

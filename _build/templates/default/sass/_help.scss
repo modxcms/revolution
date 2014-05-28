@@ -96,7 +96,7 @@
   min-height: 112px;
   background-repeat:no-repeat;
   background-position:right top;
-  @include image-set('../images/modx-help-logo.png','../images/modx-help-logo@2x.png');
+  @include image-set($imgPath + 'modx-help-logo.png', $imgPath + 'modx-help-logo@2x.png');
   #helpLogo {
     float: right;
     height: 76px;

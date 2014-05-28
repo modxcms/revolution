@@ -51,7 +51,7 @@
   display: block;
   line-height: 55px;
   padding: 0 15px;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 #modx-topnav {
@@ -72,14 +72,14 @@
                     line-height:55px;
                     font-size:16px;
                 }
-            }    
+            }
         }
     }
     @include media($desktop) {
-        #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ } 
+        #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ }
         #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
-        #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  } 
-        #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ } 
+        #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  }
+        #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ }
     }
 }
 
@@ -108,7 +108,7 @@
 }
 
 #modx-topnav > li.top > a, #modx-user-menu > li.top > a {
-  border-left:1px solid transparent; 
+  border-left:1px solid transparent;
   border-right:1px solid transparent;
 }
 
@@ -150,7 +150,7 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  background-image: url("../images/modx-logo@2x.png");
+  background-image: url($imgPath + 'modx-logo@2x.png');
   background-position:center center;
   background-repeat:no-repeat;
   background-size: 45px 45px;
@@ -217,7 +217,7 @@
 /*
 #modx-navbar ul.modx-subnav li a {
   border-top:1px solid $navbarDrop;
-  border-bottom:1px solid $navbarDrop;	
+  border-bottom:1px solid $navbarDrop;
 }
 */
 
