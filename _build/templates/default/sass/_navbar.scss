@@ -80,10 +80,10 @@
         }
     }
     @include media($desktop) {
-        #limenu-site > a:after { content:$fa-var-cube; /* "\f1b2" */ } 
+        #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ } 
         #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
-        #limenu-components > a:after { content:$fa-var-cogs; /* "\f085" */  } 
-        #limenu-manage > a:after { content:$fa-var-gavel; /* "\f0e3" */ } 
+        #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  } 
+        #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ } 
     }
 }
 
