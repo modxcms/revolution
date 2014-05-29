@@ -64,13 +64,9 @@
                 position:relative;
                 width:1em;
                 &:after {
+                    @include absolute-corners;
             		@include awesome-font;
                     text-indent:0;
-                    position:absolute;
-                    top:0;
-                    left:0;
-                    right:0;
-                    bottom:0;
                     display:block;
                     text-align:center;
                     line-height:55px;
@@ -80,10 +76,16 @@
         }
     }
     @include media($desktop) {
-        #limenu-site > a:after { content:$fa-var-cube; /* "\f1b2" */ } 
+        #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ } 
         #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
-        #limenu-components > a:after { content:$fa-var-cogs; /* "\f085" */  } 
-        #limenu-manage > a:after { content:$fa-var-gavel; /* "\f0e3" */ } 
+        #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  } 
+        #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ } 
+    }
+}
+
+#user-username {
+    @include media($desktop) {
+        display:none;
     }
 }
 
