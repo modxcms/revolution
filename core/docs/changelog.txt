@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Added replace closing php tag for inline php dashboard widget
 - Fix to tv,chunk,snippet name validator per scottboryses observation
 - New manager theme
 - Move fax field near other telephone related fields
