@@ -248,7 +248,7 @@
   display: inline-block;
 }
 .x-tree-node-loading .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/loading.gif) !important;
+  background-image: url($imgPath + 'modx-theme/tree/loading.gif') !important;
 }
 .x-tree-node-loading a span {
   color: #444444;
@@ -291,16 +291,16 @@
   background-color: $selected;
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-add.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');
 }
 .x-tree-drop-ok-above .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-over.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-over.gif');
 }
 .x-tree-drop-ok-below .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-under.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-under.gif');
 }
 .x-tree-drop-ok-between .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-between.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
 
 
@@ -326,134 +326,134 @@
   }
 }
 .icon-rss {
-  background-image: url(../images/restyle/icons/feed.png) !important;
+  background-image: url($imgPath + 'restyle/icons/feed.png') !important;
   @include legacy-tree-icon;
 }
 .icon-cal {
-  background-image: url(../images/restyle/icons/calendar.png) !important;
+  background-image: url($imgPath + 'restyle/icons/calendar.png') !important;
   @include legacy-tree-icon;
 }
 .icon-sql {
-  background-image: url(../images/restyle/icons/database_table.png) !important;
+  background-image: url($imgPath + 'restyle/icons/database_table.png') !important;
   @include legacy-tree-icon;
 }
 .icon-db {
-  background-image: url(../images/restyle/icons/database.png) !important;
+  background-image: url($imgPath + 'restyle/icons/database.png') !important;
   @include legacy-tree-icon;
 }
 .icon-java, .icon-jar {
-  background-image: url(../images/restyle/icons/cup.png) !important;
+  background-image: url($imgPath + 'restyle/icons/cup.png') !important;
   @include legacy-tree-icon;
 }
 .icon-css {
-  background-image: url(../images/restyle/icons/css.png) !important;
+  background-image: url($imgPath + 'restyle/icons/css.png') !important;
   @include legacy-tree-icon;
 }
 .icon-zip, .icon-tar, .icon-tgz, .icon-gz {
-  background-image: url(../images/restyle/icons/compress.png) !important;
+  background-image: url($imgPath + 'restyle/icons/compress.png') !important;
   @include legacy-tree-icon;
 }
 .icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
-  background-image: url(../images/restyle/icons/picture.png) !important;
+  background-image: url($imgPath + 'restyle/icons/picture.png') !important;
   @include legacy-tree-icon;
 }
 .icon-bat, .icon-scr {
-  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+  background-image: url($imgPath + 'restyle/icons/application_osx_terminal.png') !important;
   @include legacy-tree-icon;
 }
 .icon-log {
-  background-image: url(../images/restyle/icons/computer.png) !important;
+  background-image: url($imgPath + 'restyle/icons/computer.png') !important;
   @include legacy-tree-icon;
 }
 .icon-html, .icon-htm {
-  background-image: url(../images/restyle/icons/html_valid.png) !important;
+  background-image: url($imgPath + 'restyle/icons/html_valid.png') !important;
   @include legacy-tree-icon;
 }
 .icon-avi, .icon-mpg, .icon-mov {
-  background-image: url(../images/restyle/icons/film.png) !important;
+  background-image: url($imgPath + 'restyle/icons/film.png') !important;
   @include legacy-tree-icon;
 }
 .icon-rb {
-  background-image: url(../images/restyle/icons/ruby.png) !important;
+  background-image: url($imgPath + 'restyle/icons/ruby.png') !important;
   @include legacy-tree-icon;
 }
 .icon-doc {
-  background-image: url(../images/restyle/icons/page_white_word.png) !important;
+  background-image: url($imgPath + 'restyle/icons/page_white_word.png') !important;
   @include legacy-tree-icon;
 }
 .icon-ppt {
-  background-image: url(../images/restyle/icons/page_white_powerpoint.png) !important;
+  background-image: url($imgPath + 'restyle/icons/page_white_powerpoint.png') !important;
   @include legacy-tree-icon;
 }
 .icon-access, .icon-htaccess {
-  background-image: url(../images/restyle/icons/lock.png) !important;
+  background-image: url($imgPath + 'restyle/icons/lock.png') !important;
   @include legacy-tree-icon;
 }
 .icon-php {
-  background-image: url(../images/restyle/icons/page_white_php.png) !important;
+  background-image: url($imgPath + 'restyle/icons/page_white_php.png') !important;
   @include legacy-tree-icon;
 }
 .icon-flv, .icon-swf {
-  background-image: url(../images/restyle/icons/page_white_flash.png) !important;
+  background-image: url($imgPath + 'restyle/icons/page_white_flash.png') !important;
   @include legacy-tree-icon;
 }
 .icon-xls {
-  background-image: url(../images/restyle/icons/page_white_excel.png) !important;
+  background-image: url($imgPath + 'restyle/icons/page_white_excel.png') !important;
   @include legacy-tree-icon;
 }
 .icon-cfm {
-  background-image: url(../images/restyle/icons/page_white_coldfusion.png) !important;
+  background-image: url($imgPath + 'restyle/icons/page_white_coldfusion.png') !important;
   @include legacy-tree-icon;
 }
 .icon-pdf {
-  background-image: url(../images/restyle/icons/page_white_acrobat.png) !important;
+  background-image: url($imgPath + 'restyle/icons/page_white_acrobat.png') !important;
   @include legacy-tree-icon;
 }
 .icon-js {
-  background-image: url(../images/restyle/icons/javascript.png) !important;
+  background-image: url($imgPath + 'restyle/icons/javascript.png') !important;
   @include legacy-tree-icon;
 }
 
 
 .icon-action {
-  background-image: url(../images/restyle/icons/application_osx_terminal.png) !important;
+  background-image: url($imgPath + 'restyle/icons/application_osx_terminal.png') !important;
   @include legacy-tree-icon;
 }
 .icon-namespace {
-  background-image: url(../images/restyle/icons/computer.png) !important;
+  background-image: url($imgPath + 'restyle/icons/computer.png') !important;
   @include legacy-tree-icon;
 }
 /*.icon-propertyset {
-  background-image: url(../images/restyle/icons/property-set.png) !important;
+  background-image: url($imgPath + 'restyle/icons/property-set.png') !important;
   @extend %hide-font-icon;
 }*/
 /*.icon-resourcegroup {
-  background: url(../images/restyle/icons/application_cascade.png) no-repeat left top !important;
+  background: url($imgPath + 'restyle/icons/application_cascade.png') no-repeat left top !important;
   @extend %hide-font-icon;
 }*/
 .icon-list-new {
-  background-image: url(../images/restyle/icons/layout_add.png) !important;
+  background-image: url($imgPath + 'restyle/icons/layout_add.png') !important;
   @include legacy-tree-icon;
 }
 .icon-mark-active {
-  background-image: url(../images/restyle/icons/layout_edit.png) !important;
+  background-image: url($imgPath + 'restyle/icons/layout_edit.png') !important;
   @include legacy-tree-icon;
 }
 .icon-mark-complete {
-  background-image: url(../images/restyle/icons/layout_header.png) !important;
+  background-image: url($imgPath + 'restyle/icons/layout_header.png') !important;
   @include legacy-tree-icon;
 }
 .icon-package {
-  background-image: url(../images/restyle/icons/package.png) !important;
+  background-image: url($imgPath + 'restyle/icons/package.png') !important;
   padding-right: 5px !important;
   @include legacy-tree-icon;
 }
 .icon-locked {
-  background-image: url(../images/restyle/icons/lock_edit.png) !important;
+  background-image: url($imgPath + 'restyle/icons/lock_edit.png') !important;
   @include legacy-tree-icon;
 }
 .icon-lock {
-  background-image: url(../images/restyle/icons/lock.png) !important;
+  background-image: url($imgPath + 'restyle/icons/lock.png') !important;
   @include legacy-tree-icon;
 }
 #modx-resource-tree-panel .x-accordion-hd {
@@ -478,7 +478,7 @@
   display: inline-block;
 }
 .x-tree-node-loading .x-tree-node-icon {
-  background-image: url(../images/modx-theme/tree/loading.gif) !important;
+  background-image: url($imgPath + 'modx-theme/tree/loading.gif') !important;
 }
 .x-tree-node-loading a span {
   color: #444444;
@@ -590,14 +590,14 @@
   background-color: $selected;
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-add.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');
 }
 .x-tree-drop-ok-above .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-over.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-over.gif');
 }
 .x-tree-drop-ok-below .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-under.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-under.gif');
 }
 .x-tree-drop-ok-between .x-dd-drop-icon {
-  background-image: url(../images/modx-theme/tree/drop-between.gif);
+  background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }

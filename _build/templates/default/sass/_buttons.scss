@@ -278,7 +278,7 @@
 }
 
 .x-btn em.x-btn-split {
-  /*background: transparent url(../images/modx-theme/button/s-arrow.gif) no-repeat right center;*/
+  /*background: transparent url($imgPath + 'modx-theme/button/s-arrow.gif') no-repeat right center;*/
   display: block;
   padding-right: 14px;
   position:relative;
@@ -293,7 +293,7 @@
 }
 
 .x-btn em.x-btn-arrow {
-  background: transparent url(../images/modx-theme/button/arrow.gif) no-repeat right center;
+  background: transparent url($imgPath + 'modx-theme/button/arrow.gif') no-repeat right center;
   display: block;
   padding-right: 20px;
 
@@ -313,23 +313,23 @@
 /* //end button style */
 
 .x-btn-over em.x-btn-split, .x-btn-click em.x-btn-split, .x-btn-menu-active em.x-btn-split, .x-btn-pressed em.x-btn-split {
-  /*background-image: url(../images/modx-theme/button/s-arrow-o.gif);*/
+  /*background-image: url($imgPath + 'modx-theme/button/s-arrow-o.gif');*/
 }
 
 .x-btn em.x-btn-arrow-bottom {
-  background-image: url(../images/modx-theme/button/s-arrow-b-noline.gif);
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-b-noline.gif');
 }
 
 .x-btn em.x-btn-split-bottom {
-  background-image: url(../images/modx-theme/button/s-arrow-b.gif);
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-b.gif');
 }
 
 .x-btn-over em.x-btn-split-bottom, .x-btn-click em.x-btn-split-bottom, .x-btn-menu-active em.x-btn-split-bottom, .x-btn-pressed em.x-btn-split-bottom {
-  background-image: url(../images/modx-theme/button/s-arrow-bo.gif);
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-bo.gif');
 }
 
 .x-btn-group-notitle .x-btn-group-tc {
-  background-image: url(../images/modx-theme/button/group-tb.gif);
+  background-image: url($imgPath + 'modx-theme/button/group-tb.gif');
 }
 
 
