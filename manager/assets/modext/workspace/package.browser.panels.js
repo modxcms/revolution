@@ -611,7 +611,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
             ,params: {
                 action: 'workspace/packages/rest/download'
                 ,info: data.location+'::'+data.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {
@@ -779,7 +779,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
             ,params: {
                 action: 'workspace/packages/rest/download'
                 ,info: record.location+'::'+record.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {

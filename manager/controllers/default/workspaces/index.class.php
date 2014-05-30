@@ -124,15 +124,22 @@ class WorkspacesManagerController extends modManagerController {
 
     /**
      * Get the default Provider for Package Management
-     * 
+     *
      * @return modTransportProvider|void
      */
     public function getDefaultProvider() {
+        $default = $this->modx->getOption('default_provider');
         $c = $this->modx->newQuery('transport.modTransportProvider');
-        $c->where(array(
-            'name:=' => 'modxcms.com',
-            'OR:name:=' => 'modx.com',
-        ));
+        if ($default) {
+            $c->where(array(
+                'id' => $default,
+            ));
+        } else {
+            $c->where(array(
+                'name:=' => 'modxcms.com',
+                'OR:name:=' => 'modx.com',
+            ));
+        }
         /** @var modTransportProvider $provider */
         $provider = $this->modx->getObject('transport.modTransportProvider',$c);
         if ($provider) {
