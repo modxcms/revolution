@@ -57,15 +57,13 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
             action_id: r.action
             ,new_text: r.text
         });
-        if (!this.windows.update_menu) {
-            this.windows.update_menu = MODx.load({
-                xtype: 'modx-window-menu-update'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:function(r) { this.refresh(); },scope:this}
-                }
-            });
-        }
+        this.windows.update_menu = MODx.load({
+            xtype: 'modx-window-menu-update'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function(r) { this.refresh(); },scope:this}
+            }
+        });
         this.windows.update_menu.setValues(r);
         this.windows.update_menu.show(e.target);
     }
@@ -146,6 +144,10 @@ MODx.window.CreateMenu = function(config) {
             ,items: [{
                 columnWidth: .5
                 ,items: [{
+                    xtype: 'hidden'
+                    ,name: 'previous_text'
+                    ,value: config.record && config.record.text ? config.record.text : ''
+                },{
                     fieldLabel: _('lexicon_key')
                     ,description: MODx.expandHelp ? '' : _('lexicon_key_desc')
                     ,name: 'text'
@@ -153,7 +155,7 @@ MODx.window.CreateMenu = function(config) {
                     ,allowBlank: false
                     ,anchor: '100%'
                     ,id: this.ident+'-text'
-                    ,readOnly: config.update ? true : false
+                    //,readOnly: config.update ? true : false
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: this.ident+'-text'
