@@ -54,6 +54,7 @@ foreach ($menus as $menu) {
         'text' => $text.($controller != '' ? ' <i>('.$namespace.':'.$controller.')</i>' : ''),
         'id' => 'n_'.$menu->get('text'),
         'cls' => 'icon-menu',
+        'iconCls' => 'icon icon-' . ( $menu->get('childrenCount') > 0 ? ( $menu->get('parent') === '' ? 'navicon' : 'folder' ) : 'terminal' ),
         'type' => 'menu',
         'pk' => $menu->get('text'),
         'leaf' => $menu->get('childrenCount') > 0 ? false : true,
