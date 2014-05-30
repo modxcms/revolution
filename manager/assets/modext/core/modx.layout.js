@@ -65,16 +65,16 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,center = this.getCenter(config)
             ,south = this.getSouth(config);
 
-        if (north && isObject(north)) {
+        if (north && Ext.isObject(north)) {
             items.push(north);
         }
-        if (west && isObject(west)) {
+        if (west && Ext.isObject(west)) {
             items.push(west);
         }
-        if (center && isObject(center)) {
+        if (center && Ext.isObject(center)) {
             items.push(center);
         }
-        if (south && isObject(south)) {
+        if (south && Ext.isObject(south)) {
             items.push(south);
         }
 
