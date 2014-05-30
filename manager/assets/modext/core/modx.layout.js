@@ -26,45 +26,114 @@ MODx.Layout = function(config){
     Ext.state.Manager.setProvider(sp);
     sp.initState(MODx.defaultState);
 
-    var tabs = [];
-    var showTree = false;
-    if (MODx.perm.resource_tree) {
-       tabs.push({
-            title: _('resources')
-            ,xtype: 'modx-tree-resource'
-            ,id: 'modx-resource-tree'
-        });
-        showTree = true;
-    }
-    if (MODx.perm.element_tree) {
-        tabs.push({
-            title: _('elements')
-            ,xtype: 'modx-tree-element'
-            ,id: 'modx-tree-element'
-        });
-        showTree = true;
-    }
-    if (MODx.perm.file_tree) {
-        tabs.push({
-            title: _('files')
-            ,xtype: 'modx-panel-filetree'
-            ,id: 'modx-file-tree'
-        });
-        showTree = true;
-    }
-    var activeTab = 0;
+    config.showTree = false;
 
-    Ext.applyIf(config,{
+    Ext.applyIf(config, {
          layout: 'border'
         ,id: 'modx-layout'
         ,saveState: true
-        ,items: [{
+        ,items: this.buildLayout(config)
+    });
+    MODx.Layout.superclass.constructor.call(this,config);
+    this.config = config;
+
+    this.addEvents({
+        'afterLayout': true
+        ,'loadKeyMap': true
+        ,'loadTabs': true
+    });
+    this.loadKeys();
+    if (!config.showTree) {
+        Ext.getCmp('modx-leftbar-tabs').collapse(false);
+        Ext.get('modx-leftbar').hide();
+        Ext.get('modx-leftbar-tabs-xcollapsed').setStyle('display','none');
+    }
+    this.fireEvent('afterLayout');
+};
+Ext.extend(MODx.Layout, Ext.Viewport, {
+    /**
+     * Wrapper method to build the layout regions
+     *
+     * @param {Object} config
+     *
+     * @returns {Array}
+     */
+    buildLayout: function(config) {
+        var items = []
+            ,north = this.getNorth(config)
+            ,west = this.getWest(config)
+            ,center = this.getCenter(config)
+            ,south = this.getSouth(config);
+
+        if (north && Ext.isObject(north)) {
+            items.push(north);
+        }
+        if (west && Ext.isObject(west)) {
+            items.push(west);
+        }
+        if (center && Ext.isObject(center)) {
+            items.push(center);
+        }
+        if (south && Ext.isObject(south)) {
+            items.push(south);
+        }
+
+        return items;
+    }
+
+    /**
+     * Build the north region (header)
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getNorth: function(config) {
+        return {
             xtype: 'box'
             ,region: 'north'
             ,applyTo: 'modx-header'
             //,height: 55
-        },{
-             region: 'west'
+        };
+    }
+
+    /**
+     * Build the west region (trees)
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getWest: function(config) {
+        var tabs = [];
+        if (MODx.perm.resource_tree) {
+            tabs.push({
+                title: _('resources')
+                ,xtype: 'modx-tree-resource'
+                ,id: 'modx-resource-tree'
+            });
+            config.showTree = true;
+        }
+        if (MODx.perm.element_tree) {
+            tabs.push({
+                title: _('elements')
+                ,xtype: 'modx-tree-element'
+                ,id: 'modx-tree-element'
+            });
+            config.showTree = true;
+        }
+        if (MODx.perm.file_tree) {
+            tabs.push({
+                title: _('files')
+                ,xtype: 'modx-panel-filetree'
+                ,id: 'modx-file-tree'
+            });
+            config.showTree = true;
+        }
+        var activeTab = 0;
+
+        return {
+            region: 'west'
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
             ,split: true
@@ -78,10 +147,10 @@ MODx.Layout = function(config){
             ,monitorResize: true
             ,layout: 'anchor'
             ,items: [{
-                 xtype: 'modx-tabs'
+                xtype: 'modx-tabs'
                 ,plain: true
                 ,defaults: {
-                     autoScroll: true
+                    autoScroll: true
                     ,fitToFrame: true
                 }
                 ,id: 'modx-leftbar-tabpanel'
@@ -93,7 +162,7 @@ MODx.Layout = function(config){
                 ,stateEvents: ['tabchange']
                 ,getState:function() {
                     return {
-                        activeTab:this.items.indexOf(this.getActiveTab())
+                        activeTab: this.items.indexOf(this.getActiveTab())
                     };
                 }
                 ,items: tabs
@@ -102,7 +171,18 @@ MODx.Layout = function(config){
                 statesave: this.onStatesave
                 ,scope: this
             }
-        },{
+        };
+    }
+
+    /**
+     * Build the center region (main content)
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getCenter: function(config) {
+        return {
             region: 'center'
             ,applyTo: 'modx-content'
             ,padding: '0 1px 0 0'
@@ -110,33 +190,22 @@ MODx.Layout = function(config){
             ,id: 'modx-content'
             ,border: false
             ,autoScroll: true
-        }/*,{
-            region: 'south' // ya, you're going south alright
-            ,applyTo: 'modx-footer'
-            ,border: false
-            ,id: 'modx-footer'
-            ,html: '<p><b>' + MODx.config.site_name + '</b> ' + _('powered_by') + ' <a href="http://modx.com/?utm_source=revo&utm_medium=manager&utm_campaign=Revolution+Footer+Link" onclick="window.open(this.href); return false;" title="Visit the MODX website">MODX®</a></p>'
-            ,bodyStyle: 'background-color:transparent;'
-        }*/]
-    });
-    MODx.Layout.superclass.constructor.call(this,config);
-    this.config = config;
-
-    this.addEvents({
-        'afterLayout': true
-        ,'loadKeyMap': true
-        ,'loadTabs': true
-    });
-    this.loadKeys();
-    if (!showTree) {
-        Ext.getCmp('modx-leftbar-tabs').collapse(false);
-        Ext.get('modx-leftbar').hide();
-        Ext.get('modx-leftbar-tabs-xcollapsed').setStyle('display','none');
+        };
     }
-    this.fireEvent('afterLayout');
-};
-Ext.extend(MODx.Layout,Ext.Viewport,{
-    loadKeys: function() {
+
+    /**
+     * Build the south region (footer)
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getSouth: function(config) {
+
+    }
+
+
+    ,loadKeys: function() {
         Ext.KeyMap.prototype.stopEvent = true;
         var k = new Ext.KeyMap(Ext.get(document));
         k.addBinding({
