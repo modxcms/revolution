@@ -760,6 +760,12 @@ $events['OnFileManagerFileCreate']->fromArray(array (
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
+$events['OnFileManagerBeforeUpload']= $xpdo->newObject('modEvent');
+$events['OnFileManagerBeforeUpload']->fromArray(array (
+  'name' => 'OnFileManagerBeforeUpload',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
 $events['OnFileManagerUpload']= $xpdo->newObject('modEvent');
 $events['OnFileManagerUpload']->fromArray(array (
   'name' => 'OnFileManagerUpload',
