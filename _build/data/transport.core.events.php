@@ -396,6 +396,12 @@ $events['OnResourceTVFormRender']->fromArray(array (
   'service' => 1,
   'groupname' => 'Resources',
 ), '', true, true);
+$events['OnResourceAutoPublish']= $xpdo->newObject('modEvent');
+$events['OnResourceAutoPublish']->fromArray(array (
+  'name' => 'OnResourceAutoPublish',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
 $events['OnResourceDelete']= $xpdo->newObject('modEvent');
 $events['OnResourceDelete']->fromArray(array (
   'name' => 'OnResourceDelete',
