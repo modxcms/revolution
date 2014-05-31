@@ -63,7 +63,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,north = this.getNorth(config)
             ,west = this.getWest(config)
             ,center = this.getCenter(config)
-            ,south = this.getSouth(config);
+            ,south = this.getSouth(config)
+            ,east = this.getEast(config);
 
         if (north && Ext.isObject(north)) {
             items.push(north);
@@ -76,6 +77,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         }
         if (south && Ext.isObject(south)) {
             items.push(south);
+        }
+        if (east && Ext.isObject(east)) {
+            items.push(east);
         }
 
         return items;
@@ -201,6 +205,17 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @returns {Object|void}
      */
     ,getSouth: function(config) {
+
+    }
+
+    /**
+     * Build the east region
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getEast: function(config) {
 
     }
 
