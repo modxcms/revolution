@@ -9,11 +9,12 @@ MODx.SearchBar = function(config) {
         ,id: 'modx-uberbar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
-        ,listAlign: [ 'tl-bl?', [0,0] ]
+        ,listAlign: [ 'tl-bl?', [0, 0] ]
         ,triggerConfig: {
             tag: 'span'
             ,cls: 'x-form-trigger icon icon-large icon-search'
         }
+        ,shadow: null
         //,triggerAction: 'query'
         ,minChars: 1
         ,displayField: 'name'
