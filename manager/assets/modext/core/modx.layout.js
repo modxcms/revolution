@@ -215,11 +215,11 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     }
 
     /**
-     * Convenient method to target the "navigation" container
+     * Convenient method to target the west region
      *
      * @returns {Ext.Component|void}
      */
-    ,getNavigation: function() {
+    ,getLeftBar: function() {
         var nav = Ext.getCmp('modx-leftbar-tabpanel');
         if (nav) {
             return nav;
@@ -227,24 +227,24 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     }
 
     /**
-     * Add the given item(s) to the navigation container
+     * Add the given item(s) to the west container
      *
      * @param {Object|Array} items
      */
-    ,addToNavigation: function(items) {
-        var nav = this.getNavigation();
+    ,addToLeftBar: function(items) {
+        var nav = this.getLeftBar();
         if (nav && items) {
             nav.add(items);
-            this.onAfterNavigationAdded(nav, items);
+            this.onAfterLeftBarAdded(nav, items);
         }
     }
     /**
-     * Method executed after some item(s) has been added to the navigation container
+     * Method executed after some item(s) has been added to the west container
      *
-     * @param {Ext.Component} nav The navigation container
+     * @param {Ext.Component} nav The container
      * @param {Object|Array} items Added item(s)
      */
-    ,onAfterNavigationAdded: function(nav, items) {
+    ,onAfterLeftBarAdded: function(nav, items) {
 
     }
 
