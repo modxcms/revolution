@@ -837,4 +837,24 @@ class modUser extends modPrincipal {
         }
         return $dashboard;
     }
+
+    /**
+     * Refresh the current "active" session
+     */
+    public function refreshSession()
+    {
+        $sessionID = $this->Profile->get('sessionid');
+        if (!$sessionID || empty($sessionID)) {
+            return;
+        }
+        /** @var modSession $session */
+        $session = $this->xpdo->getObject('modSession', array(
+            'id' => $sessionID,
+        ));
+        if (!$session) {
+            return;
+        }
+
+        $session->refresh();
+    }
 }

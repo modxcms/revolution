@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- * 
+ *
  * @package modx
  */
 /**
@@ -30,4 +30,80 @@
  * @package modx
  * @extends xPDOObject
  */
-class modSession extends xPDOObject {}
+class modSession extends xPDOObject
+{
+    /**
+     * Wipe the whole session without logging out the related user
+     */
+    public function refresh()
+    {
+        // Retrieve stored session data
+        $old = $this->readData();
+
+        $data = array();
+        // Keep only context sessions
+        $data['modx.user.contextTokens'] = $old['modx.user.contextTokens'];
+
+        $this->setData($data);
+        $this->save();
+        //$this->xpdo->log(modX::LOG_LEVEL_INFO, 'modSession refreshed : '. print_r($data, true));
+    }
+
+    /**
+     * Read this session data
+     *
+     * @return mixed|Array
+     */
+    public function readData()
+    {
+        // Copy my session data
+        $mySession = $_SESSION;
+        // Decode this session
+        session_decode($this->data);
+        // Store its data
+        $sessionData = $_SESSION;
+        // Restore my session data
+        $_SESSION = $mySession;
+
+        return $sessionData;
+    }
+
+    /**
+     * Encode the given session data array
+     *
+     * @param array $data
+     */
+    public function setData(array $data = array())
+    {
+        // Copy my session data
+        $mySession = $_SESSION;
+        $_SESSION = $data;
+        // Encode this session
+        $encoded = session_encode();
+        // Restore my session data
+        $_SESSION = $mySession;
+
+        $this->set('data', $encoded);
+    }
+
+    /**
+     * @return null|modUser
+     */
+    public function getUser()
+    {
+        /** @var modUserProfile $profile */
+        $profile = $this->xpdo->getObjectGraph(
+            'modUserProfile',
+            array(
+                'User' => array()
+            ),
+            array(
+                'sessionid' => $this->id,
+            )
+        );
+
+        if ($profile && $profile->User) {
+            return $profile->User;
+        }
+    }
+}
