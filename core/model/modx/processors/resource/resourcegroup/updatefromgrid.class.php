@@ -94,10 +94,11 @@ class modResourceGroupUpdateFromGridProcessor extends modProcessor {
      * @return modResource|string
      */
     public function getResource() {
-        if (empty($this->getProperty('resource'))) {
+        $resource_id = $this->getProperty('resource');
+        if (empty($resource_id)) {
             return $this->modx->lexicon('resource_err_ns');
         }
-        $this->resource = $this->modx->getObject('modResource',$this->getProperty('resource'));
+        $this->resource = $this->modx->getObject('modResource',$resource_id);
         if (empty($resourcegroup)) {
             return $this->modx->lexicon('resource_err_nf');
         }
