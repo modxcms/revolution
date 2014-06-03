@@ -10,44 +10,102 @@
  * @package modx
  * @subpackage processors.resource.resourcegroup
  */
-if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
-$modx->lexicon->load('resource');
 
-$_DATA = $modx->fromJSON($scriptProperties['data']);
+class modResourceGroupUpdateFromGridProcessor extends modProcessor {
+    /** @var modResource $resource */
+    public $resource;
+    
+    public function checkPermissions() {
+        return $this->modx->hasPermission('save_document');
+    }
 
-/* get resource */
-if (empty($_DATA['resource'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
-$resource = $modx->getObject('modResource',$_DATA['resource']);
-if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nf'));
+    public function getLanguageTopics() {
+        return array('resource');
+    }
 
-if (!$resource->checkPolicy('save')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
+    /**
+     * {@inheritDoc}
+     * 
+     * @return mixed
+     */
+    public function initialize() {
+        $data = $this->getProperty('data');
+        if (empty($data)) {
+            return $this->modx->lexicon('invalid_data');
+        }
+        $data = $this->modx->fromJSON($data);
+        if (empty($data)) {
+            return $this->modx->lexicon('invalid_data');
+        }
+        if (empty($data['id'])) {
+            return $this->failure($this->modx->lexicon('resource_group_err_ns'));
+        }
+        $this->setProperties($data);
+        $this->unsetProperty('data');
+        return parent::initialize();
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @return mixed
+     */
+    public function process() {
+
+        /* get resource */
+        $this->resource = $this->getResource();
+        if (!is_object($this->resource) || !($this->resource instanceof modResource)) {
+            return $this->failure($this->resource);
+        }
+
+        /* get resource group */
+        $resourceGroup = $this->modx->getObject('modResourceGroup',$this->getProperty('id'));
+        if (empty($resourceGroup)) {
+            return $this->failure($this->modx->lexicon('resource_group_err_nf'));
+        }
+
+        /* get access */
+        $resourceGroupResource = $this->modx->getObject('modResourceGroupResource',array(
+            'document' => $this->resource->get('id'),
+            'document_group' => $resourceGroup->get('id'),
+        ));
+
+        if ($this->getProperty('access') == true && $resourceGroupResource != null) {
+            return $this->failure($this->modx->lexicon('resource_group_resource_err_ae'));
+        }
+        if ($this->getProperty('access') == false && $resourceGroupResource == null) {
+            return $this->failure($this->modx->lexicon('resource_group_resource_err_nf'));
+        }
+        if ($this->getProperty('access') == true) {
+            $resourceGroupResource = $this->modx->newObject('modResourceGroupResource');
+            $resourceGroupResource->set('document',$this->resource->get('id'));
+            $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
+            $resourceGroupResource->save();
+        } else if ($resourceGroupResource instanceof modResourceGroupResource) {
+            $resourceGroupResource->remove();
+        }
+
+        return $this->success();
+    }
+
+    /**
+     * Get the Resource associated
+     * 
+     * @return modResource|string
+     */
+    public function getResource() {
+        if (empty($this->getProperty('resource'))) {
+            return $this->modx->lexicon('resource_err_ns');
+        }
+        $this->resource = $this->modx->getObject('modResource',$this->getProperty('resource'));
+        if (empty($resourcegroup)) {
+            return $this->modx->lexicon('resource_err_nf');
+        }
+        /* check access */
+        if (!$this->resource->checkPolicy('save')) {
+            return $this->modx->lexicon('permission_denied');
+        }
+        return $this->resource;
+    }
 }
-
-/* get resource group */
-if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
-$resourceGroup = $modx->getObject('modResourceGroup',$_DATA['id']);
-if (empty($resourceGroup)) return $modx->error->failure($modx->lexicon('resource_group_err_nf'));
-
-/* get access */
-$resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
-    'document' => $resource->get('id'),
-    'document_group' => $resourceGroup->get('id'),
-));
-
-if ($_DATA['access'] == true && $resourceGroupResource != null) {
-    return $modx->error->failure($modx->lexicon('resource_group_resource_err_ae'));
-}
-if ($_DATA['access'] == false && $resourceGroupResource == null) {
-    return $modx->error->failure($modx->lexicon('resource_group_resource_err_nf'));
-}
-if ($_DATA['access'] == true) {
-    $resourceGroupResource = $modx->newObject('modResourceGroupResource');
-    $resourceGroupResource->set('document',$resource->get('id'));
-    $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
-    $resourceGroupResource->save();
-} else if ($resourceGroupResource instanceof modResourceGroupResource) {
-    $resourceGroupResource->remove();
-}
-
-return $modx->error->success();
+return 'modResourceGroupUpdateFromGridProcessor';
