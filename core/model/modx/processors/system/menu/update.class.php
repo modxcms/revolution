@@ -21,7 +21,7 @@
 
 class modMenuUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modMenu';
-    public $objectType = 'object';
+    public $objectType = 'menu';
     public $primaryKeyField = 'text';
     public $languageTopics = array('action','menu');
     public $permission = 'menus';

@@ -13,7 +13,7 @@
 
 class modMenuGetNodesProcessor extends modObjectGetListProcessor {
     public $classKey = 'modMenu';
-    public $objectType = 'object';
+    public $objectType = 'menu';
     public $primaryKeyField = 'text';
     public $languageTopics = array('action','menu','topmenu');
     public $permission = 'menus';
@@ -45,11 +45,12 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
     }
 
     public function prepareQueryAfterCount(xPDOQuery $c) {
-        $modMenuCols = $this->modx->getSelectColumns('modMenu','modMenu');
-        $c->select($modMenuCols);
+        $c->select($this->modx->getSelectColumns('modMenu','modMenu'));
         $c->select(array(
             'COUNT(Children.text) AS childrenCount'
         ));
+
+        return $c;
     }
 
     public function prepareRow(xPDOObject $object) {

@@ -14,7 +14,7 @@
 
 class modMenuGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modMenu';
-    public $objectType = 'object';
+    public $objectType = 'menu';
     public $primaryKeyField = 'text';
     public $languageTopics = array('action','menu','topmenu');
     public $permission = 'menus';
