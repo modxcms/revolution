@@ -31,7 +31,7 @@ MODx.Layout = function(config){
     Ext.applyIf(config, {
          layout: 'border'
         ,id: 'modx-layout'
-        ,saveState: true
+        ,stateSave: true
         ,items: this.buildLayout(config)
     });
     MODx.Layout.superclass.constructor.call(this,config);
@@ -160,7 +160,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 ,anchor: '100%'
                 ,activeTab: activeTab
                 ,stateful: true
-                ,stateId: 'modx-leftbar-tabs'
+                //,stateId: 'modx-leftbar-tabs'
                 ,stateEvents: ['tabchange']
                 ,getState:function() {
                     return {
@@ -169,8 +169,15 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 }
                 ,items: tabs
             }]
+            ,getState: function() {
+                // The region's attributes we want to save/restore
+                return {
+                    collapsed: this.collapsed
+                    ,width: this.width
+                };
+            }
             ,listeners:{
-                statesave: this.onStatesave
+                beforestatesave: this.onBeforeSaveState
                 ,scope: this
             }
         };
@@ -307,49 +314,50 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * Toggle left bar
      */
     ,toggleLeftbar: function() {
-        this.leftbarVisible ? this.hideLeftbar(.3) : this.showLeftbar(.3);
+        this.leftbarVisible ? this.hideLeftbar(true) : this.showLeftbar(true);
+        // Toggle the left bar visibility
         this.leftbarVisible = !this.leftbarVisible;
     }
     /**
      * Hide the left bar
      *
-     * @param {Number} [anim] Seconds of the animation duration
-     * @param {Object} [state]
+     * @param {Boolean} [anim] Whether or not to animate the transition
+     * @param {Boolean} [state] Whether or not to save the component's state
      */
     ,hideLeftbar: function(anim, state) {
         Ext.getCmp('modx-leftbar-tabs').collapse(anim);
-        if (state != undefined) {
-            this.saveState = state;
+        if (Ext.isBoolean(state)) {
+            this.stateSave = state;
         }
     }
     /**
      * Show the left bar
      *
-     * @param {Number} [anim] Seconds of the animation duration
+     * @param {Boolean} [anim] Whether or not to animate the transition
      */
     ,showLeftbar: function(anim) {
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
     /**
-     * Actions performed when the panel state changes
+     * Actions performed before we save the component state
      *
-     * @param {Object} p
+     * @param {Ext.Component} component
      * @param {Object} state
      */
-    ,onStatesave: function(p, state) {
-        var panelState = state.collapsed;
-        if (!panelState) {
-            // Panel is not collapsed
+    ,onBeforeSaveState: function(component, state) {
+        var collapsed = state.collapsed;
+        if (collapsed && !this.stateSave) {
+            // Stateful status changed to prevent saving the state
+            this.stateSave = true;
+            return false;
+        }
+        if (!collapsed) {
             var wrap = Ext.get('modx-leftbar').down('div');
             if (!wrap.isVisible()) {
                 // Set the "masking div" to visible
                 wrap.setVisible(true);
                 Ext.getCmp('modx-leftbar-tabpanel').expand(true);
             }
-        }
-        if (panelState && !this.saveState) {
-            Ext.state.Manager.set('modx-leftbar-tabs', {collapsed: false});
-            this.saveState = true;
         }
     }
 });

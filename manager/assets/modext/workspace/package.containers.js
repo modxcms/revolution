@@ -56,9 +56,6 @@ MODx.panel.Packages = function(config) {
 };
 Ext.extend(MODx.panel.Packages,MODx.Panel,{
     activate: function() {
-        if (MODx.defaultState['modx-leftbar-tabs'] && (MODx.defaultState['modx-leftbar-tabs'].collapsed != true)) {
-            Ext.getCmp('modx-layout').showLeftbar();
-        }
         Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
         Ext.getCmp('modx-package-grid').activate();
         Ext.each(this.buttons, function(btn){ Ext.getCmp(btn.id).hide(); });

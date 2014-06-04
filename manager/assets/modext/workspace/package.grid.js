@@ -121,8 +121,15 @@ MODx.grid.Package = function(config) {
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	console: null
 
-    ,activate: function(){
-        if (MODx.defaultState['modx-leftbar-tabs'] && (MODx.defaultState['modx-leftbar-tabs'].collapsed != true)) {
+    ,activate: function() {
+        var west = Ext.getCmp('modx-leftbar-tabs')
+            ,stateId = 'modx-leftbar-tabs';
+        if (west && west.stateId) {
+            stateId = west.stateId;
+        }
+        var state = Ext.state.Manager.get(stateId);
+        if (state && state.collapsed === false) {
+            // Panel was not collapsed before, lets restore it
             Ext.getCmp('modx-layout').showLeftbar();
         }
         Ext.getCmp('modx-panel-packages').getLayout().setActiveItem(this.id);
