@@ -1879,6 +1879,24 @@ $settings['welcome_screen_url']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['welcome_action']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_action']->fromArray(array (
+  'key' => 'welcome_action',
+  'value' => 'welcome',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['welcome_namespace']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_namespace']->fromArray(array (
+  'key' => 'welcome_namespace',
+  'value' => 'core',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['which_editor']= $xpdo->newObject('modSystemSetting');
 $settings['which_editor']->fromArray(array (
   'key' => 'which_editor',
