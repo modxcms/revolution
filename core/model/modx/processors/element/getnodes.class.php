@@ -88,9 +88,9 @@ class modElementGetNodesProcessor extends modProcessor {
         $defaults = array(
             'template' => 'icon icon-columns',
             'chunk' => 'icon icon-th-large',
-            'tv' => 'icon icon-asterisk',
+            'tv' => 'icon icon-list-alt',
             'snippet' => 'icon icon-code',
-            'plugin' => 'icon icon-cog',
+            'plugin' => 'icon icon-cogs',
             'category' => 'icon icon-folder'
         );
         return $this->modx->getOption('mgr_tree_icon_'.$elementIdentifier,null, $defaults[$elementIdentifier]);
