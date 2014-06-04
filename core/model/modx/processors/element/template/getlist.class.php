@@ -17,6 +17,17 @@ class modTemplateGetListProcessor extends modElementGetListProcessor {
     public $languageTopics = array('template','category');
     public $defaultSortField = 'templatename';
 
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
+        $c = parent::prepareQueryBeforeCount($c);
+        $query = $this->getProperty('query');
+        if (!empty($query)) {
+            $c->where(array(
+                'templatename:LIKE' => "%$query%"
+            ));
+        }
+        return $c;
+    }
+    
     public function beforeIteration(array $list) {
         if ($this->getProperty('combo',false)) {
             $empty = array(

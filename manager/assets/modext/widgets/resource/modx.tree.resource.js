@@ -856,7 +856,8 @@ MODx.window.QuickCreateResource = function(config) {
                             ,name: 'template'
                             ,id: 'modx-'+this.ident+'-template'
                             ,fieldLabel: _('template')
-                            ,editable: false
+                            ,editable: true
+                            ,typeAhead: true
                             ,anchor: '100%'
                             ,baseParams: {
                                 action: 'element/template/getList'

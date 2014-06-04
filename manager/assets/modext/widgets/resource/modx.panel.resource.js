@@ -485,7 +485,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'template'
             ,id: 'modx-resource-template'
             ,anchor: '100%'
-            ,editable: false
+            ,editable: true
+            ,typeAhead: true
             ,baseParams: {
                 action: 'element/template/getList'
                 ,combo: '1'
