@@ -737,6 +737,13 @@ $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het wel
 $_lang['setting_welcome_screen_url'] = 'Welkomstscherm URL';
 $_lang['setting_welcome_screen_url_desc'] = 'De URL voor het welkomstscherm dat geladen wordt bij de eerste keer laden van MODX Revolution.';
 
+
+$_lang['setting_welcome_action'] = 'Welkom Actie';
+$_lang['setting_welcome_action_desc'] = 'De standaard controller om te laden wanneer de manager bezocht wordt zonder dat een actie in de URL is gespecificeerd.';
+
+$_lang['setting_welcome_namespace'] = 'Welkom Namespace';
+$_lang['setting_welcome_namespace_desc'] = 'De namespace voor de Welkom Actie.';
+
 $_lang['setting_which_editor'] = 'Te gebruiken editor';
 $_lang['setting_which_editor_desc'] = 'Hier kun je selecteren welke rich tekst editor je wenst te gebruiken. Je kunt alternatieve rich tekst editors downloaden en installeren vai de Pakket Manager.';
 
