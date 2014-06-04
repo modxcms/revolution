@@ -84,7 +84,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
 
         return items;
     }
-
     /**
      * Build the north region (header)
      *
@@ -100,7 +99,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             //,height: 55
         };
     }
-
     /**
      * Build the west region (trees)
      *
@@ -177,7 +175,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             }
         };
     }
-
     /**
      * Build the center region (main content)
      *
@@ -196,7 +193,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,autoScroll: true
         };
     }
-
     /**
      * Build the south region (footer)
      *
@@ -207,7 +203,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     ,getSouth: function(config) {
 
     }
-
     /**
      * Build the east region
      *
@@ -219,10 +214,50 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
 
     }
 
+    /**
+     * Convenient method to target the west region
+     *
+     * @returns {Ext.Component|void}
+     */
+    ,getLeftBar: function() {
+        var nav = Ext.getCmp('modx-leftbar-tabpanel');
+        if (nav) {
+            return nav;
+        }
 
+        return null;
+    }
+
+    /**
+     * Add the given item(s) to the west container
+     *
+     * @param {Object|Array} items
+     */
+    ,addToLeftBar: function(items) {
+        var nav = this.getLeftBar();
+        if (nav && items) {
+            nav.add(items);
+            this.onAfterLeftBarAdded(nav, items);
+        }
+    }
+    /**
+     * Method executed after some item(s) has been added to the west container
+     *
+     * @param {Ext.Component} nav The container
+     * @param {Object|Array} items Added item(s)
+     */
+    ,onAfterLeftBarAdded: function(nav, items) {
+
+    }
+
+
+    /**
+     * Set keyboard shortcuts
+     */
     ,loadKeys: function() {
         Ext.KeyMap.prototype.stopEvent = true;
         var k = new Ext.KeyMap(Ext.get(document));
+        // ctrl + shift + h : toggle left bar
         k.addBinding({
             key: Ext.EventObject.H
             ,ctrl: true
@@ -231,6 +266,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,scope: this
             ,stopEvent: true
         });
+        // ctrl + shift + n : new document
         k.addBinding({
             key: Ext.EventObject.N
             ,ctrl: true
@@ -241,6 +277,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             }
             ,stopEvent: true
         });
+        // ctrl + shift + u : clear cache
         k.addBinding({
             key: Ext.EventObject.U
             ,ctrl: true
@@ -255,25 +292,54 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             keymap: k
         });
     }
-
+    /**
+     * Wrapper method to refresh all available trees
+     */
     ,refreshTrees: function() {
         var t;
         t = Ext.getCmp('modx-resource-tree'); if (t) { t.refresh(); }
         t = Ext.getCmp('modx-element-tree'); if (t) { t.refresh(); }
         t = Ext.getCmp('modx-file-tree'); if (t) { t.refresh(); }
     }
+    // Why here & why assuming visible ??
     ,leftbarVisible: true
+    /**
+     * Toggle left bar
+     */
     ,toggleLeftbar: function() {
         this.leftbarVisible ? this.hideLeftbar(.3) : this.showLeftbar(.3);
         this.leftbarVisible = !this.leftbarVisible;
     }
+    /**
+     * Hide the left bar
+     *
+     * @param {Number} [anim] Seconds of the animation duration
+     * @param {Object} [state]
+     */
     ,hideLeftbar: function(anim, state) {
         Ext.getCmp('modx-leftbar-tabs').collapse(anim);
-        if(state != undefined){	this.saveState = state;	}
+        if (state != undefined) {
+            this.saveState = state;
+        }
     }
-    ,onStatesave: function(p, state){
+    /**
+     * Show the left bar
+     *
+     * @param {Number} [anim] Seconds of the animation duration
+     */
+    ,showLeftbar: function(anim) {
+        Ext.getCmp('modx-leftbar-tabs').expand(anim);
+    }
+    /**
+     * Actions performed when the panel state changes
+     *
+     * @param {Object} p
+     * @param {Object} state
+     */
+    ,onStatesave: function(p, state) {
         var panelState = state.collapsed;
         if (!panelState) {
+            // Panel is not collapsed
             var wrap = Ext.get('modx-leftbar').down('div');
             if (!wrap.isVisible()) {
                 // Set the "masking div" to visible
@@ -281,13 +347,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 Ext.getCmp('modx-leftbar-tabpanel').expand(true);
             }
         }
-        if(panelState && !this.saveState){
+        if (panelState && !this.saveState) {
             Ext.state.Manager.set('modx-leftbar-tabs', {collapsed: false});
             this.saveState = true;
         }
-    }
-    ,showLeftbar: function(anim) {
-        Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
 });
 
