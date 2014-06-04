@@ -28,6 +28,9 @@ class modMenuCreateProcessor extends modObjectCreateProcessor {
         $action_id = $this->getProperty('action_id');
         if (!isset($action_id)) return $this->modx->lexicon('action_err_ns');
 
+        $text = $this->getProperty('text');
+        if (empty($text)) return $this->modx->lexicon($this->objectType.'_err_ns');
+
         /* verify parent */
         $parent = $this->getProperty('parent',null);
         if ($parent == null) {
@@ -39,7 +42,7 @@ class modMenuCreateProcessor extends modObjectCreateProcessor {
             }
         }
 
-        if ($this->doesAlreadyExist($this->getProperty('text'))) {
+        if ($this->doesAlreadyExist(array('text' => $text))) {
             return $this->modx->lexicon($this->objectType.'_err_ae');
         }
 
@@ -50,6 +53,7 @@ class modMenuCreateProcessor extends modObjectCreateProcessor {
         $menuIndex = $this->modx->getCount($this->classKey,array('parent' => $this->getProperty('parent')));
         $this->object->set('menuindex',$menuIndex);
         $this->object->set('action',$this->getProperty('action_id'));
+        $this->object->set('text',$this->getProperty('text'));
 
         return parent::beforeSave();
     }

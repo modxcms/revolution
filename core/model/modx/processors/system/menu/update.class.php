@@ -22,7 +22,7 @@
 class modMenuUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modMenu';
     public $objectType = 'menu';
-    public $primaryKeyField = 'text';
+    public $primaryKeyField = 'previous_text';
     public $languageTopics = array('action','menu');
     public $permission = 'menus';
     public $isRename = false;
@@ -31,6 +31,7 @@ class modMenuUpdateProcessor extends modObjectUpdateProcessor {
         // Setup to allow PK change
         $oldName = $this->getProperty('previous_text');
         $newName = $this->getProperty('text');
+        if (empty($newName)) return $this->modx->lexicon($this->objectType.'_err_ns');
         $this->setProperty('newName', $newName);
 
         if ($oldName && $oldName != $newName) {
@@ -53,16 +54,21 @@ class modMenuUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
 
-        $this->setProperty('action', $this->getProperty('action_id'));
-
         return parent::beforeSet();
+    }
+
+    public function beforeSave() {
+        $this->object->set('action',$this->getProperty('action_id'));
+        $this->object->set('text',$this->getProperty('text'));
+
+        return parent::beforeSave();
     }
 
     public function afterSave() {
         /* if changing key */
         if ($this->isRename) {
             $newName = $this->getProperty('newName');
-            if ($this->doesAlreadyExist($newName)) {
+            if ($this->doesAlreadyExist(array('text' => $newName))) {
                 return $this->modx->lexicon($this->objectType.'_err_ae');
             }
 
