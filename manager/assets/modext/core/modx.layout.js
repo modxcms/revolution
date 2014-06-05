@@ -133,7 +133,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             config.showTree = true;
         }
         var activeTab = 0;
-        console.log(tabs);
 
         return {
             region: 'west'
