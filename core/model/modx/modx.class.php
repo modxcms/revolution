@@ -2207,6 +2207,9 @@ class modX extends xPDO {
         $setting = $this->getObject('modSystemSetting',array(
             'key' => 'extension_packages',
         ));
+        if (!$setting) {
+            return false;
+        }
         $value = $setting->get('value');
         $value = is_array($value) ? $value : $this->fromJSON($value);
         $found = false;
