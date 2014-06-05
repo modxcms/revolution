@@ -11,18 +11,14 @@
  * @subpackage processors.resource.resourcegroup
  */
 
-class modResourceGroupUpdateFromGridProcessor extends modProcessor {
+class modResourceGroupUpdateFromGridProcessor extends modObjectProcessor {
+    /** @var array $languageTopics */
+    public $languageTopics = array('save_document');
+    /** @var string $permission */
+    public $permission = 'resource';
     /** @var modResource $resource */
     public $resource;
     
-    public function checkPermissions() {
-        return $this->modx->hasPermission('save_document');
-    }
-
-    public function getLanguageTopics() {
-        return array('resource');
-    }
-
     /**
      * {@inheritDoc}
      * 
