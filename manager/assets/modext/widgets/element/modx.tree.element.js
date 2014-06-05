@@ -11,7 +11,7 @@ MODx.tree.Element = function(config) {
     Ext.applyIf(config,{
         rootVisible: false
         ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
-        ,ddGroup: 'modx-treedrop-dd'
+        ,ddGroup: 'modx-treedrop-elements-dd'
         ,title: ''
         ,url: MODx.config.connector_url
         ,action: 'element/getnodes'

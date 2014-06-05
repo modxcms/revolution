@@ -23,7 +23,6 @@ MODx.FormPanel = function(config) {
         ,header: false
         ,method: 'POST'
         ,cls: 'modx-form'
-        ,ddGroup: 'modx-treedrop-dd'
         ,allowDrop: true
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true

@@ -17,7 +17,7 @@ MODx.tree.Directory = function(config) {
         ,ddAppendOnly: false
         ,enableDrag: true
         ,enableDrop: true
-        ,ddGroup: 'modx-treedrop-dd'
+        ,ddGroup: 'modx-treedrop-sources-dd'
         ,url: MODx.config.connector_url
         ,hideSourceCombo: false
         ,baseParams: {
