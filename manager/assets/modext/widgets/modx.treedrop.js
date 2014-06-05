@@ -3,7 +3,7 @@ MODx.TreeDrop = function(config) {
     Ext.applyIf(config,{
         id: 'modx-treedrop'
         ,ddGroup: 'modx-treedrop-dd'
-    })
+    });
     MODx.TreeDrop.superclass.constructor.call(this,config);
     this.config = config;
     this.setup();
@@ -96,6 +96,9 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                 return true;
             }
         });
+        // Allow elements & files nodes to be dropped
+        this.targetEl.addToGroup('modx-treedrop-elements-dd');
+        this.targetEl.addToGroup('modx-treedrop-sources-dd');
     }
 });
 Ext.reg('modx-treedrop',MODx.TreeDrop);
