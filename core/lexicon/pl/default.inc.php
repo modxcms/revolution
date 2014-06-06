@@ -151,8 +151,8 @@ $_lang['category_confirm_delete'] = 'Are you sure you want to remove this catego
 #$_lang['category_rename'] = 'Rename Category';
 $_lang['category_rename'] = 'Rename Category';
 
-#$_lang['category_remove'] = 'Delete Category';
-$_lang['category_remove'] = 'Delete Category';
+#$_lang['category_remove'] = 'Remove Category';
+$_lang['category_remove'] = 'Remove Category';
 
 #$_lang['chunk'] = 'Chunk';
 $_lang['chunk'] = 'Chunk';
@@ -1120,8 +1120,8 @@ $_lang['remember_username'] = 'Remember me';
 #$_lang['remove'] = 'Delete';
 $_lang['remove'] = 'Delete';
 
-#$_lang['remove_category'] = 'Delete Category';
-$_lang['remove_category'] = 'Delete Category';
+#$_lang['remove_category'] = 'Remove Category';
+$_lang['remove_category'] = 'Remove Category';
 
 #$_lang['remove_chunk'] = 'Remove Chunk';
 $_lang['remove_chunk'] = 'Remove Chunk';
