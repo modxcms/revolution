@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access_category_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des régles d\'accès.';
+$_lang['access_category_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des règles d\'accès.';
 $_lang['access_category_err_ae'] = 'Une ACL existe déjà pour cette catégorie!';
 $_lang['access_category_err_nf'] = 'L\'ACL du contexte est introuvable.';
 $_lang['access_category_err_ns'] = 'L\'ACL de catégorie n\'est pas spécifiée.';
@@ -14,7 +14,7 @@ $_lang['access_category_err_remove'] = 'Une erreur s\'est produite en essayant d
 $_lang['access_category_remove'] = 'Supprimer l\'accès à la catégorie';
 $_lang['access_category_update'] = 'Mise à jour de l\'accès à la catégorie';
 $_lang['access_confirm_remove'] = 'Êtes-vous sûr de vouloir supprimer ce rapport de sécurité des contrôles d\'accès (ACL)?';
-$_lang['access_context_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des régles d\'accès.';
+$_lang['access_context_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des règles d\'accès.';
 $_lang['access_context_err_ae'] = 'Une ACL existe déjà pour ce contexte!';
 $_lang['access_context_err_nf'] = 'L\'ACL du contexte est introuvable.';
 $_lang['access_context_err_ns'] = 'L\'ACL du contexte n\'est pas spécifiée.';
