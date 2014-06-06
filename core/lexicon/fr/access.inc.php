@@ -59,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'L\'ACL du groupe de ressources n\'est pas spé
 $_lang['access_rgroup_err_remove'] = 'Une erreur s\'est produite en essayant de supprimer l\'ACL du groupe de ressources.';
 $_lang['access_rgroup_remove'] = 'Supprimer l\'accès à ce groupe de ressources';
 $_lang['access_rgroup_update'] = 'Mis à jour des accès à ce groupe de ressources';
+$_lang['access_source_err_ae'] = 'Une ACL pour ce Media Source existe déjà.';
 $_lang['access_source_remove'] = 'Supprimer l\'accès au Media Source';
 $_lang['access_source_update'] = 'Mettre à jour l\'accès au Media Source';
 $_lang['access_to_contexts'] = 'Accès aux contextes';
