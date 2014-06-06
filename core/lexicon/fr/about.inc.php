@@ -32,5 +32,5 @@ $_lang['follow'] = 'Follow MODX';
 $_lang['like'] = 'Like MODX';
 $_lang['circle'] = 'Circle MODX';
 $_lang['support_ticket_title'] = 'Support Commercial MODX';
-$_lang['support_ticket_subtitle'] = 'Un support d\'incident pour 300 $ USD';
+$_lang['support_ticket_subtitle'] = 'Un support d\'incident pour 300 USD';
 $_lang['support_ticket_button'] = 'Payer par Carte de Crédit';
