@@ -308,7 +308,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         if (t && t.rendered) {
             t.refresh();
         }
-        t = Ext.getCmp('modx-element-tree');
+        t = Ext.getCmp('modx-tree-element');
         if (t && t.rendered) {
             t.refresh();
         }
