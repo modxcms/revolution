@@ -9,6 +9,8 @@
 $_lang['attributes'] = 'Attributs';
 $_lang['capitalize'] = 'Majuscules';
 $_lang['checkbox'] = 'Case à cocher';
+$_lang['checkbox_columns'] = 'Colonnes';
+$_lang['checkbox_columns_desc'] = 'Le nombre de colonnes des cases à cocher';
 $_lang['class'] = 'Classe';
 $_lang['combo_allowaddnewdata'] = 'Autorise l\'ajout de nouveaux éléments';
 $_lang['combo_allowaddnewdata_desc'] = 'Autorise l\'ajout de nouveaux éléments n\'existant pas déjà dans la liste. Non par défaut.';
@@ -16,6 +18,8 @@ $_lang['combo_forceselection'] = 'Forcer la sélection depuis la liste';
 $_lang['combo_forceselection_desc'] = 'Si vous utilisez l\'auto-complétion et activez cette option, cela n\'autorisera l\'entrée d\'éléments existant déjà dans la liste.';
 $_lang['combo_listempty_text'] = '« Texte de liste vide »';
 $_lang['combo_listempty_text_desc'] = 'Si vous utilisez l\'auto-complétion et que l\'utilisateur saisi une valeur n\'existant pas dans la liste, cela affichera ce texte.';
+$_lang['combo_listheight'] = 'Largeur de liste';
+$_lang['combo_listheight_desc'] = 'Hauteur, en pixels, de la liste déroulante. Par défaut, hauteur de la combobox.';
 $_lang['combo_listwidth'] = 'Largeur de liste';
 $_lang['combo_listwidth_desc'] = 'Largeur, en pixels, de la liste déroulante. Par défaut, taille de la combobox.';
 $_lang['combo_maxheight'] = 'Hauteur maximale';
@@ -25,7 +29,7 @@ $_lang['combo_stackitems_desc'] = 'Les éléments sont empilés (1 par ligne). N
 $_lang['combo_title'] = 'Entête de liste';
 $_lang['combo_title_desc'] = 'Un élément d\'entête contenant ce texte est créé et ajouté en haut de la liste.';
 $_lang['combo_typeahead'] = 'Activer l\'auto-complétion';
-$_lang['combo_typeahead_desc'] = 'Complète et sélectionne automatiquement le texte saisi, suivant le délais indiqué (délais d\'auto-complétion) et si une valeur existante correspond (désactivé par défaut).';
+$_lang['combo_typeahead_desc'] = 'Complète et sélectionne automatiquement le texte saisi, suivant le délai indiqué (délais d\'auto-complétion) et si une valeur existante correspond (désactivé par défaut).';
 $_lang['combo_typeahead_delay'] = 'Délais d\'auto-complétion';
 $_lang['combo_typeahead_delay_desc'] = 'Temps d\'attente, en millisecondes, avant que l\'auto-complétion ne soit affichée (si activée). 250 par défaut.';
 $_lang['date'] = 'Date';
@@ -41,7 +45,7 @@ $_lang['disabled_dates_desc'] = 'Liste de chaînes de dates, séparées par des 
 - commence par (utilise si vous utilisez des années courtes): ^03-08<br />
 - désactiver tous les jours de mars 2006: 03-..-2006<br />
 - désactiver tous les jours de mars: ^03<br />
-Notez que le format des dates inclues dans la liste doit exactement correspondre au format configuré. Pour supporter les expressions régulières, si vous utilisez un format de date contenant un ".", vous devrez echapper le point lorsque vous restreindrez les dates.';
+Notez que le format des dates dans la liste doit exactement correspondre au format configuré. Pour supporter les expressions régulières, si vous utilisez un format de date contenant un ".", vous devrez "échapper" le point lorsque vous restreindrez les dates.';
 $_lang['disabled_days'] = 'Jours désactivés';
 $_lang['disabled_days_desc'] = 'Liste de jours, séparés par des virgules, à désactiver, basé sur 0 (nul par défaut). Quelques exemples : <br />
 - désactiver dimanche et samedi: 0,6<br />
@@ -90,7 +94,7 @@ $_lang['radio_columns_desc'] = 'Nombre de colonnes dans lesquelles les boutons r
 $_lang['rawtext'] = 'Texte brut (déprécié)';
 $_lang['rawtextarea'] = 'Zone de texte brut (déprécié)';
 $_lang['required'] = 'Optionnel';
-$_lang['required_desc'] = 'Si non est sélectionné, MODX n\'autorisera pas l\'utilisateur à enregistrer la ressource jusqu\'à ce qu\'une valeur valide et non nulle soit entrée.';
+$_lang['required_desc'] = 'Si la valeur non est sélectionnée, MODX n\'autorisera pas l\'utilisateur à enregistrer la ressource jusqu\'à ce qu\'une valeur valide et non nulle soit entrée.';
 $_lang['resourcelist'] = 'Liste de ressources';
 $_lang['resourcelist_depth'] = 'Profondeur';
 $_lang['resourcelist_depth_desc'] = 'Niveaux de profondeur jusqu\'à laquelle chercher pour obtenir la liste de ressources. 10 niveaux par défaut.';
