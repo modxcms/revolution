@@ -304,9 +304,21 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      */
     ,refreshTrees: function() {
         var t;
-        t = Ext.getCmp('modx-resource-tree'); if (t) { t.refresh(); }
-        t = Ext.getCmp('modx-element-tree'); if (t) { t.refresh(); }
-        t = Ext.getCmp('modx-file-tree'); if (t) { t.refresh(); }
+        t = Ext.getCmp('modx-resource-tree');
+        if (t && t.rendered) {
+            t.refresh();
+        }
+        t = Ext.getCmp('modx-element-tree');
+        if (t && t.rendered) {
+            t.refresh();
+        }
+        t = Ext.getCmp('modx-file-tree');
+        if (t && t.rendered) {
+            // Iterate over panel's items (trees) to refresh them
+            t.items.each(function(tree, idx) {
+                tree.refresh();
+            });
+        }
     }
     // Why here & why assuming visible ??
     ,leftbarVisible: true
