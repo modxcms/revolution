@@ -296,10 +296,13 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
         if (treeState === undefined) {
-            this.root.expand(null,null);
+            this.root.expand();
         } else {
-            for (var i=0;i<treeState.length;i++) {
-                this.expandPath(treeState[i]);
+            // Make sure we have a valid state array
+            if (Ext.isArray(treeState)) {
+                Ext.each(treeState, function(path, idx) {
+                    this.expandPath(path);
+                }, this);
             }
         }
         if (func) {
