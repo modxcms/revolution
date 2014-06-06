@@ -36,3 +36,4 @@ $_lang['tv_default'] = 'Valeur par défaut';
 $_lang['tv_type'] = 'Type d\'entrée';
 $_lang['tv_output_type'] = 'Type de sortie';
 $_lang['tv_output_type_properties'] = 'Propriétés du type de sortie';
+$_lang['static_file_ns'] = 'Vous devez spécifier un fichier statique.';
