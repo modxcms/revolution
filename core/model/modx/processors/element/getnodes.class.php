@@ -297,7 +297,7 @@ class modElementGetNodesProcessor extends modProcessor {
             if ($category->get('elementCount') <= 0 && $category->get('childrenCount') <= 0) continue;
 
             /* check subcategories recursively */
-            if ($category->get('childrenCount') > 0) {
+            if ($category->get('childrenCount') > 0 && $category->get('elementCount') < 1) {
                 if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) == false) {
                     continue;
                 }
