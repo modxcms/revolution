@@ -296,8 +296,10 @@ class modElementGetNodesProcessor extends modProcessor {
         /* first handle subcategories */
         $c = $this->modx->newQuery('modCategory');
         $c->select($this->modx->getSelectColumns('modCategory','modCategory'));
-        $c->select('COUNT('.$elementClassKey.'.id) AS elementCount');
+        $c->select('COUNT(DISTINCT '.$elementClassKey.'.id) AS elementCount');
+        $c->select('COUNT(DISTINCT '.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount');
         $c->leftJoin($elementClassKey,$elementClassKey,$elementClassKey.'.category = modCategory.id');
+        $c->leftJoin('modCategory','Children');
         $c->where(array(
             'parent' => $categoryId,
         ));
@@ -322,6 +324,14 @@ class modElementGetNodesProcessor extends modProcessor {
         /** @var modCategory $category */
         foreach ($categories as $category) {
             if (!$category->checkPolicy('list')) continue;
+            if ($category->get('elementCount') <= 0 && $category->get('childrenCount') <= 0) continue;
+
+            /* check subcategories recursively */
+            if ($category->get('childrenCount') > 0 && $category->get('elementCount') < 1) {
+                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) == false) {
+                    continue;
+                }
+            }
 
             $cc = ($category->get('elementCount') > 0) ? ' (' . $category->get('elementCount') . ')' : '';
             $nodes[] = array(
@@ -404,8 +414,8 @@ class modElementGetNodesProcessor extends modProcessor {
         $c = $this->modx->newQuery('modCategory');
         $c->select($this->modx->getSelectColumns('modCategory','modCategory'));
         $c->select('
-            COUNT('.$this->modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('id')).') AS elementCount,
-            COUNT('.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount
+            COUNT(DISTINCT '.$this->modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('id')).') AS elementCount,
+            COUNT(DISTINCT '.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount
         ');
         $c->leftJoin($elementClassKey,$elementClassKey,$this->modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('category')).' = '.$this->modx->getSelectColumns('modCategory','modCategory','',array('id')));
         $c->leftJoin('modCategory','Children');
@@ -437,6 +447,13 @@ class modElementGetNodesProcessor extends modProcessor {
             if ($elCount < 1 && $catCount < 1 && $category->get('id') != 0) {
                 continue;
             }
+
+            if ($catCount > 0 && $elCount < 1) {
+                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) == false) {
+                    continue;
+                }
+            }
+
             $cc = $elCount > 0 ? ' ('.$elCount.')' : '';
 
             $nodes[] = array(
@@ -510,6 +527,37 @@ class modElementGetNodesProcessor extends modProcessor {
             );
         }
         return $nodes;
+    }
+
+    protected function subCategoriesHaveElements($categoryId, $elementClassKey) {
+        $return = false;
+
+        $categories = $this->modx->getCollection('modCategory', array(
+            'parent' => $categoryId
+        ));
+
+        foreach ($categories as $category) {
+            $c = $this->modx->newQuery('modCategory');
+            $c->select($this->modx->getSelectColumns('modCategory','modCategory'));
+            $c->select('COUNT(DISTINCT '.$elementClassKey.'.id) AS elementCount');
+            $c->select('COUNT(DISTINCT '.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount');
+            $c->leftJoin($elementClassKey,$elementClassKey,$elementClassKey.'.category = modCategory.id');
+            $c->leftJoin('modCategory', 'Children');
+            $c->where(array(
+                'id' => $category->get('id'),
+            ));
+            $c->groupby($this->modx->getSelectColumns('modCategory','modCategory'));
+            $subCategory = $this->modx->getObject('modCategory',$c);
+
+            if ($subCategory->get('elementCount') > 0) {
+                $return = true;
+            }
+            if ($return == false && $subCategory->get('childrenCount') > 0) {
+                $return = $this->subCategoriesHaveElements($subCategory->get('id'), $elementClassKey);
+            }
+
+        }
+        return $return;
     }
 }
 return 'modElementGetNodesProcessor';
