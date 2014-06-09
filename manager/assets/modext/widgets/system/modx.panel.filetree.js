@@ -82,6 +82,7 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
             xtype: 'modx-tree-directory'
             ,itemId: this._treePrefix + source.id
             ,stateId: this._treePrefix + source.id
+            ,id: this._treePrefix + source.id
             ,rootName: source.name
             ,hideSourceCombo: true
             ,source: source.id
