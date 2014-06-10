@@ -46,7 +46,7 @@ $headerText: #555555;
 
 /* Tree menus */
 $iconColor: $treeText;
-$unpublished: lighten($treeText, 30%) !important;
+$unpublished: lighten($treeText, 20%) !important;
 $disabled: $unpublished;
 $hidden: $unpublished;
 $unpubText: italic;

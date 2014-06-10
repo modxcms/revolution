@@ -157,15 +157,21 @@
   color: $unpublished;
   font-style: $unpubText;
 
-  // Keep the icon "regular'"
   i.icon,
   i.icon-large {
-      color: $treeText !important;
+      color: $unpublished;
       font-style: normal;
   }
 }
+.hidemenu,
 .hidemenu a span {
   color: $hidden;
+
+  i.icon,
+  i.icon-large {
+      color: $hidden;
+      font-style: normal;
+  }
 }
 .deleted {
   color: $deleted;
