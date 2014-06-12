@@ -661,6 +661,12 @@ class modCacheManager extends xPDOCacheManager {
         if (!$this->set('auto_publish', $nextevent, 0, $options)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching time of next auto publishing event");
             $publishingResults['errors'][]= $this->modx->lexicon('cache_sitepublishing_file_error');
+        } else {
+            if ($publishingResults['published'] !== 0 || $publishingResults['unpublished'] !== 0) {
+                $this->modx->invokeEvent('OnResourceAutoPublish', array(
+                    'results' => $publishingResults
+                ));
+            }
         }
 
         return $publishingResults;
