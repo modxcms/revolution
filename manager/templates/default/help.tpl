@@ -37,7 +37,7 @@
             </li>
 
             <li>
-                <a href="{$_lang.support_link}" class="supportTicket" title="{$_lang.support_title}">
+                <a href="{$_lang.support_link}" target="_blank" class="supportTicket" title="{$_lang.support_title}">
                     <span class="icon"><i class="icon icon-credit-card icon-3x"></i></span>
                     <span class="headline">{$_lang.support}</span>
                     <span class="subline">{$_lang.support_description}</span>
@@ -63,11 +63,11 @@
 
         <p>{$_lang.social_follows}</p>
 
-        <p><a href=""><i class="icon icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a></p>
+        <p><a href="https://twitter.com/modx" target="_blank"><i class="icon icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a></p>
 
-        <p><a href=""><i class="icon icon-2x icon-facebook"></i>Facebook: www.facebook.com/modxcms </a></p>
+        <p><a href="https://www.facebook.com/modxcms" target="_blank"><i class="icon icon-2x icon-facebook"></i>Facebook: www.facebook.com/modxcms </a></p>
 
-        <p><a href=""><i class="icon icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
+        <p><a href="https://plus.google.com/+modx/" target="_blank"><i class="icon icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
     </div>
 
     <div id="adblock">
