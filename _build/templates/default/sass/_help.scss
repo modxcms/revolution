@@ -23,8 +23,8 @@
 #managerbuttons ul {
   /* clearfix */
   *zoom: 1;
-  margin: 0 -1%;
-  width: 102%;
+  margin: 0;
+  width: 100%;
 }
 
 #managerbuttons ul li {
@@ -33,7 +33,16 @@
   margin: 0;
   padding: 0 1%;
   position: relative;
-  width: 23%;
+  width: 25%;
+  box-sizing: border-box;
+
+  &:first-child {
+    padding-left: 0%;
+  }
+
+  &:last-child {
+    padding-right: 0%;
+  }
 }
 
 #managerbuttons ul li a {
@@ -149,7 +158,7 @@
   }
 }
 
-#adblock {
+#aboutMODX {
   @include box-sizing(border-box);
   background: $aside;
   float: left;
@@ -157,11 +166,7 @@
   min-height: 300px;
   padding: 1em;
   width: 38%;
-}
 
-#aboutMODX {
-  clear: both;
-  padding: 1em 3em;
   p {
     line-height: 1.6;
     margin: 0 0 1em;

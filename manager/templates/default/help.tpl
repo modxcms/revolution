@@ -70,18 +70,9 @@
         <p><a href="https://plus.google.com/+modx/" target="_blank"><i class="icon icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
     </div>
 
-    <div id="adblock">
-        <p>This will be fed with amazing informations via the Ajaxes with a local fallback. Included will be important
-            notices, MODX Professionals Ads, Site Sponsor Ads, etc. Likely using the Orbit Ad Server:
-            http://orbitopenadserver.com</p>
-    </div>
-
     <div id="aboutMODX">
         <p>{$_lang.help_about}</p>
 
         <p>{$_lang.help_credit}</p>
     </div>
 </div>
-
-<script src="https://checkout.stripe.com/v2/checkout.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
