@@ -80,7 +80,7 @@ abstract class modProcessor {
      *
      * @return boolean
      */
-    public function initialize() { return true; }
+    public function initialize() { return !$this->hasErrors(); }
 
     /**
      * Load a collection of Language Topics for this processor.
