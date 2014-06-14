@@ -108,7 +108,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.cm.removeAll();
         if (n.attributes.menu && n.attributes.menu.items) {
             this.addContextMenuItem(n.attributes.menu.items);
-            this.cm.show(n.getUI().getEl(),'t?');
         } else {
             var m = [];
             switch (n.attributes.type) {
@@ -122,8 +121,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
 
             this.addContextMenuItem(m);
-            this.cm.showAt(e.xy);
         }
+        this.cm.showAt(e.xy);
         e.stopEvent();
     }
 
