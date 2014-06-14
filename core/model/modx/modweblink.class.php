@@ -46,10 +46,11 @@ class modWebLink extends modResource implements modResourceInterface {
      * Get the full controller path for managing WebLinks in MODX
      * @static
      * @param xPDO $modx A reference to the modX instance
+     * @param string $theme The manager theme to use for the controller
      * @return string The absolute path to the controller for managing WebLinks
      */
-    public static function getControllerPath(xPDO &$modx) {
-        $path = modResource::getControllerPath($modx);
+    public static function getControllerPath(xPDO &$modx, $theme = 'default') {
+        $path = modResource::getControllerPath($modx, $theme);
         return $path.'weblink/';
     }
     /**
