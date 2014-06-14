@@ -32,4 +32,4 @@ $_lang['category_no_snippets'] = 'Keine Snippets in dieser Kategorie.';
 $_lang['category_no_templates'] = 'Keine Templates in dieser Kategorie.';
 $_lang['category_no_template_variables'] = 'Keine Template-Variablen in dieser Kategorie.';
 $_lang['category_rename'] = 'Kategorie umbenennen';
-$_lang['category_remove'] = 'Kategorie löschen';
+$_lang['category_remove'] = 'Kategorie löschen';  // entfernen?

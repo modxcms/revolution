@@ -256,7 +256,7 @@ $_lang['setting_enable_dragdrop'] = 'Drag & Drop in Ressourcen-/Element-Bäumen 
 $_lang['setting_enable_dragdrop_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, ist Drag & Drop in Ressourcen- und Element-Bäumen nicht möglich.';
 
 $_lang['setting_error_page'] = 'Fehlerseite';
-$_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
+$_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert (404 Page Not Found). <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
 $_lang['setting_error_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Fehlerseite an.';
 
 $_lang['setting_ext_debug'] = 'ExtJS-Debug';
@@ -739,6 +739,12 @@ $_lang['setting_welcome_screen_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt
 
 $_lang['setting_welcome_screen_url'] = 'URL für den Willkommens-Bildschirm';
 $_lang['setting_welcome_screen_url_desc'] = 'Die URL für den Willkommens-Bildschirm, der beim ersten Laden der Manager-Startseite von MODX Revolution angezeigt wird.';
+
+$_lang['setting_welcome_action'] = 'Willkommens-Aktion';
+$_lang['setting_welcome_action_desc'] = 'Der Standard-Controller, der geladen werden soll, wenn auf den Manager zugegriffen wird und kein Controller mittels der URL festgelegt wurde.';
+
+$_lang['setting_welcome_namespace'] = 'Willkommens-Namensraum';
+$_lang['setting_welcome_namespace_desc'] = 'Der Namensraum, zu dem die Willkommens-Aktion gehört.';
 
 $_lang['setting_which_editor'] = 'Zu verwendender Editor';
 $_lang['setting_which_editor_desc'] = 'Hier können Sie auswählen, welchen Rich-Text-Editor Sie verwenden möchten. Sie können zusätzliche Rich-Text-Editoren über die Package-Verwaltung herunterladen und installieren.';
