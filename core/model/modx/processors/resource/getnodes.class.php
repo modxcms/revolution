@@ -30,6 +30,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             'noMenu' => false,
             'debug' => false,
             'nodeField' => $this->modx->getOption('resource_tree_node_name',null,'pagetitle'),
+            'nodeFieldFallback' => $this->modx->getOption('resource_tree_node_name_fallback',null,'pagetitle'),
             'qtipField' => $this->modx->getOption('resource_tree_node_tooltip',null,''),
             'currentResource' => false,
             'currentAction' => false,
@@ -360,6 +361,7 @@ class modResourceGetNodesProcessor extends modProcessor {
     public function prepareResourceNode(modResource $resource) {
         $qtipField = $this->getProperty('qtipField');
         $nodeField = $this->getProperty('nodeField');
+        $nodeFieldFallback = $this->getProperty('nodeFieldFallback');
         $noHref = $this->getProperty('noHref',false);
 
         $hasChildren = $resource->get('childrenCount') > 0 && !$resource->get('hide_children_in_tree');
@@ -465,8 +467,14 @@ class modResourceGetNodesProcessor extends modProcessor {
         if ($ctxSetting = $this->modx->getObject('modContextSetting', array('context_key' => $resource->get('context_key'), 'key' => 'session_enabled'))) {
             $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
         }
+
+        $text = strip_tags($resource->get($nodeField));
+        if (empty($text)) {
+            $text = $resource->get($nodeFieldFallback);
+            $text = strip_tags($text);
+        }
         $itemArray = array(
-            'text' => strip_tags($resource->$nodeField).$idNote,
+            'text' => $text.$idNote,
             'id' => $resource->context_key . '_'.$resource->id,
             'pk' => $resource->id,
             'cls' => implode(' ',$class),
