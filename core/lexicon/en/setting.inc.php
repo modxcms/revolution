@@ -612,7 +612,7 @@ $_lang['setting_session_cookie_path'] = 'Session Cookie Path';
 $_lang['setting_session_cookie_path_desc'] = 'Use this setting to customize the cookie path for identifying site specific session cookies. Leave blank to use MODX_BASE_URL.';
 
 $_lang['setting_session_cookie_secure'] = 'Session Cookie Secure';
-$_lang['setting_session_cookie_secure_desc'] = 'Enable this setting to use secure session cookies.';
+$_lang['setting_session_cookie_secure_desc'] = 'Enable this setting to use secure session cookies. This requires your site to be accessible over https, otherwise your site and/or manager will become inaccessible.';
 
 $_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Use this setting to set the HttpOnly flag on session cookies.';
