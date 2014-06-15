@@ -1459,6 +1459,15 @@ $settings['resource_tree_node_name']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['resource_tree_node_name_fallback']= $xpdo->newObject('modSystemSetting');
+$settings['resource_tree_node_name_fallback']->fromArray(array (
+  'key' => 'resource_tree_node_name_fallback',
+  'value' => 'pagetitle',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['resource_tree_node_tooltip']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_tooltip']->fromArray(array (
   'key' => 'resource_tree_node_tooltip',
