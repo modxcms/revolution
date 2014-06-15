@@ -30,9 +30,6 @@ MODx.page.Help = function(config) {
             ,renderTo: 'help-content-here-people'
             ,html: contentHTML
             ,cls: 'nobg'
-            ,listeners: {
-                afterrender: {fn: this.onReady,scope:this}
-            }
         }]
     });
     MODx.page.Help.superclass.constructor.call(this,config);
