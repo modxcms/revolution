@@ -130,7 +130,6 @@
 }
 
 #modx-navbar ul.modx-subnav {
-  display: none;
   float: left;
   left: 0;
   line-height: 1.1;
@@ -140,6 +139,8 @@
   position: absolute;
   top: 54px;
   z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
 }
 
 #modx-navbar ul.modx-subnav, #modx-navbar ul.modx-subsubnav {
@@ -185,7 +186,10 @@
 }
 
 #modx-navbar li:hover ul.modx-subnav {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: all .15s ease;
+  transition-delay: .2s;
 }
 
 #modx-navbar ul.modx-subnav li {
