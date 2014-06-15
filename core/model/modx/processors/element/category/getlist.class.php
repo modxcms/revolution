@@ -65,7 +65,7 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
                 if (!$child->checkPolicy('list')) continue;
 
                 $categoryArray = $child->toArray();
-                $categoryArray['name'] = $nestedName . ' - ' . $child->get('category');
+                $categoryArray['name'] = $nestedName . ' — ' . $child->get('category');
 
                 $list[] = $categoryArray;
 
