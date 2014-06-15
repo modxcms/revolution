@@ -41,7 +41,7 @@ $lightSplash:lighten($colorSplash, 42.5%);
 $treeText: #718DA7;
 $tipText: $gainsboro;
 $lightSplash:lighten($colorSplash, 42.5%);
-$mainText: #444444;
+$mainText: $black;
 $headerText: #555555;
 
 /* Tree menus */
@@ -99,6 +99,7 @@ $selected:lighten(desaturate($colorSplash,40%),40%);
 $over: rgb(250, 250, 250);
 
 $bodyfonts: 'Helvetica Neue', Helvetica, arial, tahoma, sans-serif;
+$bodyFontSize: 13px;
 $altfonts: titilliumregular, $bodyfonts;
 $altfontslight: titilliumlight, $bodyfonts;
 $headfonts: $bodyfonts;
@@ -120,8 +121,8 @@ $buttonPrimaryBg2: rgb(60, 142, 139);
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;
-$fontNormal: normal 13px $bodyfonts;
-$fontNavbar: normal 13px $headfonts;
+$fontNormal: normal $bodyFontSize $bodyfonts;
+$fontNavbar: normal $bodyFontSize $headfonts;
 $fontH2:     normal 25px $headfonts;
 $fontH3:       bold 15px $headfonts;
 

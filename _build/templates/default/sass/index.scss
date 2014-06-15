@@ -331,7 +331,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 .modx-console-text {
   background-color: white;
-  font: 11px $codefonts !important;
+  font: $bodyFontSize $codefonts !important;
   padding: 8px;
   border: none;
 }
