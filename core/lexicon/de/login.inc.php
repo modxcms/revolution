@@ -33,5 +33,6 @@ $_lang['login_send_activation_email'] = 'Aktivierungs-E-Mail versenden';
 $_lang['login_title'] = 'MODX CMF Manager-Login';
 $_lang['login_user_err_nf_email'] = 'Ein Benutzer mit dieser E-Mail-Adresse oder diesem Benutzernamen wurde nicht gefunden. Bitte versuchen Sie es erneut.';
 $_lang['login_username'] = 'Benutzername';
+$_lang['login_username_or_email'] = 'Benutzername oder E-Mail-Adresse';
 $_lang['login_username_password_incorrect'] = 'Der von Ihnen eingegebene Benutzername oder das Passwort ist falsch. Bitte überprüfen Sie den Benutzernamen, geben Sie das Passwort noch einmal ein und versuchen Sie es erneut.';
 $_lang['login_user_inactive'] = 'Ihr Benutzeraccount wurde deaktiviert. Please contact your system administrator to enable the account.';

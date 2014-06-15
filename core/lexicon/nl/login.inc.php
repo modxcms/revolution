@@ -30,5 +30,6 @@ $_lang['login_send_activation_email'] = 'Stuur activatie e-mail';
 $_lang['login_title'] = 'MODX CMF Manager Login';
 $_lang['login_user_err_nf_email'] = 'Gebruiker niet gevonden met deze e-mail. Probeer het nog eens.';
 $_lang['login_username'] = 'Gebruiker: ';
+$_lang['login_username_or_email'] = 'Gebruiker of Email';
 $_lang['login_username_password_incorrect'] = 'De gebruikersnaam of het wachtwoord zijn niet correct. Controleer de gebruikersnaam, type het wachtwoord en probeer het nog eens.';
 $_lang['login_user_inactive'] = 'Je gebruikersaccount is uitgeschakeld. Neem contact op met je systeembeheerder om je account in te schakelen.';

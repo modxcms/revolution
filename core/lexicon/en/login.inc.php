@@ -28,5 +28,6 @@ $_lang['login_send_activation_email'] = 'Send Activation Email';
 $_lang['login_title'] = 'MODX CMF Manager Login';
 $_lang['login_user_err_nf_email'] = 'User not found with that email or username. Please try again.';
 $_lang['login_username'] = 'Username';
+$_lang['login_username_or_email'] = 'Username or Email';
 $_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
 $_lang['login_user_inactive'] = 'Your user account has been disabled. Please contact your system administrator to enable the account.';
