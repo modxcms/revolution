@@ -5,7 +5,6 @@ development release, and is only shown to give an idea of what's currently in th
 - [#11297] Allow passing options to modRestCurlClient
 - Ease reuse of media sources panel 
 - [#9245] Fix context menu position on custom resources that define a certain menu
-- Decommercialise the Help page
 - Added OnResourceAutoPublish system event
 - Fix incorrect sorting by rank in TV grid on template create/update screen
 - Fixed Categories with a sub-category would always be shown in an Element's tree even if it didn't contain any elements of that type
