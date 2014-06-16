@@ -8,10 +8,6 @@ web.config
 # ignore all config.core.php
 config.core.php
 
-# ignore all compressed js and css
-*-min.css
-*-min.js
-
 # ignore concatenated js
 modext.js
 
@@ -46,6 +42,7 @@ node_modules
 _build/templates/default/sass/bourbon
 _build/templates/default/sass/neat
 *.css.map
+*.js.map
 
 #ignore composer files
 composer.json
