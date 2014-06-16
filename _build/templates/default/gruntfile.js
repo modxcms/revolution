@@ -7,6 +7,7 @@ module.exports = function(grunt) {
 			scss: './sass/',
 			css: '../../../manager/templates/default/css/',
 			template: '../../../manager/templates/default/',
+            manager: '../../../manager/',
             root:'../../../'
 		},
 		bower: {
@@ -170,6 +171,68 @@ module.exports = function(grunt) {
             ]
           }
         },
+        concat: {
+            options: {
+            },
+            coreJs1: {
+                src: [
+                '<%= dirs.manager %>assets/modext/core/modx.localization.js',
+                '<%= dirs.manager %>assets/modext/util/utilities.js',
+                '<%= dirs.manager %>assets/modext/util/uploaddialog.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.button.js',
+                '<%= dirs.manager %>assets/modext/core/modx.component.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.panel.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.tabs.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.window.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
+                ],
+                dest: '<%= dirs.manager %>assets/modext/jsgrp-1.js'
+            },
+            coreJs2: {
+                src: [
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.grid.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.console.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.portal.js',
+                '<%= dirs.manager %>assets/modext/widgets/windows.js',
+                '<%= dirs.manager %>assets/fileapi/FileAPI.js',
+                '<%= dirs.manager %>assets/modext/util/multiuploaddialog.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.treeloader.js',
+                '<%= dirs.manager %>assets/modext/widgets/modx.treedrop.js'
+                ],
+                dest: '<%= dirs.manager %>assets/modext/jsgrp-2.js'
+            },
+            coreJs3: {
+                src: [
+                '<%= dirs.manager %>assets/modext/widgets/windows.js',
+                '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.asynctreenode.js',
+                '<%= dirs.manager %>assets/modext/widgets/resource/modx.tree.resource.js',
+                '<%= dirs.manager %>assets/modext/widgets/element/modx.tree.element.js',
+                '<%= dirs.manager %>assets/modext/widgets/system/modx.tree.directory.js',
+                '<%= dirs.manager %>assets/modext/widgets/system/modx.panel.filetree.js',
+                '<%= dirs.manager %>assets/modext/core/modx.view.js',
+                '<%= dirs.manager %>assets/modext/core/modx.layout.js',
+                '<%= dirs.manager %>templates/default/js/layout.js'
+                ],
+                dest: '<%= dirs.manager %>assets/modext/jsgrp-3.js'
+            }
+        },
+		uglify: {
+			jsgrp: {
+				options: {
+					report: 'min',
+                    mangle: false,
+                    sourceMap:false
+				},
+				files: {
+					'<%= dirs.manager %>assets/modext/jsgrp-1-min.js': ['<%= dirs.manager %>assets/modext/jsgrp-1.js'],
+                    '<%= dirs.manager %>assets/modext/jsgrp-2-min.js': ['<%= dirs.manager %>assets/modext/jsgrp-2.js'],
+                    '<%= dirs.manager %>assets/modext/jsgrp-3-min.js': ['<%= dirs.manager %>assets/modext/jsgrp-3.js']
+				}
+			}
+		},
 		growl: {
 			sass: {
 				message: "Sass files created.",
@@ -194,6 +257,10 @@ module.exports = function(grunt) {
 			expand: {
 				title: "grunt",
 				message: "CSS Expanded. Don't check it in."
+			},
+			uglify: {
+				title: "grunt",
+				message: "JavaScript uglified."
 			}
 		}
 	});
@@ -208,8 +275,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-imageoptim');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // Tasks
     grunt.registerTask('default', ['growl:watch', 'watch']);
-    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
+    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','concat','uglify','growl:uglify','clean:postbuild']);
 };
