@@ -20,11 +20,9 @@
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|htmlspecialchars}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
-{if $_config.compress_js && $_config.compress_js_groups}
-<script src="{$_config.manager_url}assets/modext/jsgrp-1-min.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/jsgrp-2-min.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/jsgrp-3-min.js" type="text/javascript"></script>
-{/if}
+<script src="{$_config.manager_url}assets/modext/jsgrp-1{if $_config.compress_js}-min{/if}.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/jsgrp-2{if $_config.compress_js}-min{/if}.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/jsgrp-3{if $_config.compress_js}-min{/if}.js" type="text/javascript"></script>
 
 {$maincssjs}
 {foreach from=$cssjs item=scr}

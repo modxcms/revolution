@@ -562,11 +562,7 @@ abstract class modManagerController {
                         $o .= '<script type="text/javascript" src="'.$minDir.'index.php?f='.implode(',',$scripts).'"></script>';
                     }
                 }
-            } else if (empty($compressJs)) {
-                foreach ($externals as $js) {
-                    $o .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
-                }
-            }
+            } 
             if ($this->modx->getOption('compress_css',null,true)) {
                 $this->modx->setOption('compress_css',true);
             }
