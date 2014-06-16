@@ -179,7 +179,7 @@ class TopMenu
                 }
                 $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'"'.$title.'>'.$label.$description.'</a>'."\n";
             } else {
-                $menuTpl .= '<a href="">'.$menu['text'].'</a>'."\n";
+                $menuTpl .= '<a href="javascript:;">'.$menu['text'].'</a>'."\n";
             }
 
             if (!empty($menu['children'])) {
