@@ -200,6 +200,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             case 'combo-boolean': return _('yesno'); break;
             case 'datefield': return _('date'); break;
             case 'numberfield': return _('integer'); break;
+            case 'file': return _('file'); break;
         }
         return _(v);
     }
@@ -1007,6 +1008,7 @@ MODx.combo.xType = function(config) {
                 ,[_('date'),'datefield']
                 ,[_('list'),'list']
                 ,[_('integer'),'numberfield']
+                ,[_('file'),'file']
             ]
         })
         ,displayField: 'd'
