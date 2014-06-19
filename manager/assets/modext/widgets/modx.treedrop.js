@@ -213,7 +213,8 @@ MODx.window.InsertElement = function(config) {
                 ,elementType: config.record.classKey
             }
             ,listeners: {
-                'select': {fn:this.changePropertySet,scope:this}
+                'render': {fn:function() {Ext.getCmp('modx-dise-propset').getStore().load(); Ext.getCmp('modx-dise-propset').value = '0';},scope:this} 
+                ,'select': {fn:this.changePropertySet,scope:this}
             }
         },{
             id: 'modx-dise-proplist'
