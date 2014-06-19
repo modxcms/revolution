@@ -327,9 +327,9 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             var val = Ext.getCmp('modx-iprop-'+fld).getValue();
             if (val == true) val = 1;
             if (val == false) val = 0;
-            v = v+' &'+fld+'=`'+val+'`';
+            v = v+'\n\t&'+fld+'=`'+val+'`';
         }
-        v = v+']]';
+        v = v+'\n]]';
 
         if (this.config.record.iframe) {
             MODx.insertForRTE(v,this.config.record.cfg);
