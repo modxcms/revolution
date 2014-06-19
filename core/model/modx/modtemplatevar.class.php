@@ -185,16 +185,19 @@ class modTemplateVar extends modElement {
             if (is_object($this->xpdo->resource) && $resourceId === (integer) $this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
                 $valueArray= $this->xpdo->resource->get($this->get('name'));
                 $value= $valueArray[1];
-            } elseif ($resourceId === (integer) $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
+           /* } elseif ($resourceId === (integer) $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
                 $value= $this->get('value');
-            } else {
-                $resource = $this->xpdo->getObject('modTemplateVarResource',array(
+            }*/} else {
+                $resources = $this->xpdo->getCollection('modTemplateVarResource',array(
                     'tmplvarid' => $this->get('id'),
                     'contentid' => $resourceId,
                 ),true);
-                if ($resource && $resource instanceof modTemplateVarResource) {
-                    $value= $resource->get('value');
+                foreach($resources as $resource) {
+                    if ($resource && $resource instanceof modTemplateVarResource) {
+                        $valuesArr[] = $resource->get('value');
+                    }
                 }
+                $value = implode('||', $valuesArr);
             }
         }
         if ($value === null) {

@@ -450,7 +450,8 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
                             while (list($featureValue, $featureItem) = each($value)) {
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
-                            $value = implode('||',$featureInsert);
+                            $value = $featureInsert;
+                            //$value = implode('||',$featureInsert);
                         }
                         break;
                 }
@@ -458,12 +459,23 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
                 /* save value if it was modified */
                 $default = $tv->processBindings($tv->get('default_text'),0);
 
-                if (strcmp($value,$default) != 0) {
-                    /** @var modTemplateVarResource $templateVarResource */
-                    $templateVarResource = $this->modx->newObject('modTemplateVarResource');
-                    $templateVarResource->set('tmplvarid',$tv->get('id'));
-                    $templateVarResource->set('value',$value);
-                    $addedTemplateVariables[] = $templateVarResource;
+                /* perform standard TV save if it doesnt have multiple values */
+                if(!is_array($value)) {
+                    if (strcmp($value,$default) != 0) {
+                        /** @var modTemplateVarResource $templateVarResource */
+                        $templateVarResource = $this->modx->newObject('modTemplateVarResource');
+                        $templateVarResource->set('tmplvarid',$tv->get('id'));
+                        $templateVarResource->set('value',$value);
+                        $addedTemplateVariables[] = $templateVarResource;
+                    }
+                } else {
+                    /* save each of multiple values as single row in database */
+                    foreach ($value as $key => $singleValue) {
+                        $templateVarResource = $this->modx->newObject('modTemplateVarResource');
+                        $templateVarResource->set('tmplvarid', $tv->get('id'));
+                        $templateVarResource->set('value', $singleValue);
+                        $addedTemplateVariables[] = $templateVarResource;
+                    }
                 }
             }
         }
