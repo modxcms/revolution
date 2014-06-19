@@ -151,6 +151,43 @@ class modElementGetInsertProperties extends modProcessor {
                     'listeners' => array('change' => $listener),
                 );
                 break;
+            case 'file':
+                $resid = $this->getProperty('resourceId');
+                if (!empty($resid)) {
+                    $resobj = $this->modx->getObject('modResource', array('id' => $this->getProperty('resourceId')));
+                    $ctx = $resobj->get('context_key');
+                    $this->modx->switchContext($ctx);
+                    $sourceid = $this->modx->getOption('default_media_source', null, 1);
+                    /** @var modMediaSource $source */
+                    $this->modx->loadClass('sources.modMediaSource');
+                    $source = modMediaSource::getDefaultSource($this->modx,$sourceid);
+                    $source->initialize();
+                }
+
+                $listenerfile = array(
+                    'fn' => 'function() { 
+                                console.log(Ext.getCmp(\'tvbrowser'.$key.'\').getValue());
+                                Ext.getCmp(\'tvbrowser'.$key.'\').setValue(this.config.relativePath + Ext.getCmp(\'tvbrowser'.$key.'\').getValue());
+                                Ext.getCmp(\'modx-window-insert-element\').changeProp(\''.$key.'\');
+                            }',
+                );
+
+                $propertyArray = array(
+                    'xtype' => 'modx-panel-tv-file',
+                    'source' => !empty($sourceid) ? $sourceid : 1,
+                    'relativePath' => !empty($source) ? stristr($source->getBaseUrl(), '/') : null,
+                    'wctx' => !empty($ctx) ? $ctx : 'web',
+                    'tv' => $key,
+                    'fieldLabel' => $key,
+                    'description' => $desc,
+                    'name' => $key,
+                    'value' => $v,
+                    'width' => 300,
+                    'id' => 'modx-iprop-'.$key,
+                    'listeners' => array('change' => $listenerfile, 'select' => $listenerfile),
+                );
+                $this->modx->switchContext('mgr');
+                break;
             default:
                 $propertyArray = array(
                     'xtype' => 'textfield',
