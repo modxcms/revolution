@@ -223,6 +223,7 @@ MODx.window.InsertElement = function(config) {
                    'action': 'element/getinsertproperties'
                    ,classKey: config.record.classKey
                    ,pk: config.record.pk
+                   ,resourceId: Ext.get('modx-resource-id').getValue()
                    ,propertySet: 0
                 }
                 ,scripts: true
@@ -264,6 +265,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
                 'action': 'element/getinsertproperties'
                 ,classKey: this.config.record.classKey
                 ,pk: this.config.record.pk
+                ,resourceId: Ext.get('modx-resource-id').getValue()
                 ,propertySet: cb.getValue()
             }
             ,scripts: true
