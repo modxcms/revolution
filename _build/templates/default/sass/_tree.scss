@@ -175,6 +175,12 @@
 }
 .deleted {
   color: $deleted;
+
+  i.icon,
+  i.icon-large {
+      color: $deleted;
+      font-style: normal;
+  }
 }
 .deleted a span {
   color: $deleted;
