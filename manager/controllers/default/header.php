@@ -98,7 +98,7 @@ class TopMenu
         if ($userProfile->photo) {
             // First, handle user defined image
             $src = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL)
-                .'system/phpthumb.php?zc=1&h=32&w=32&src='
+                .'system/phpthumb.php?zc=1&h=128&w=128&src='
                 .$userProfile->photo;
             $userImage = '<img src="' . $src . '" />';
         } else {
@@ -109,7 +109,7 @@ class TopMenu
                 )
             );
             $gravsrc = $this->modx->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
-                .$gravemail . '?s=32';
+                .$gravemail . '?s=128';
             $gravcheck = $this->modx->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
                 .$gravemail . '?d=404';
             $response = get_headers($gravcheck);
