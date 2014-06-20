@@ -1303,10 +1303,18 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 	margin-left:0;
 }
 .x-window .x-form-item label.x-form-item-label {
-  padding: 5px 0 0 0;
+  line-height: 32px;
+  padding: 0;
 }
 .x-window .x-form-label-top .x-form-element {
   padding-top: 0;
+}
+.x-window .x-form-check-wrap {
+  line-height: 32px;
+}
+.x-window .x-form-check-wrap input {
+  margin-left: 1px;
+  vertical-align: baseline;
 }
 .x-window .x-form-cb-label {
   color: #707070;
