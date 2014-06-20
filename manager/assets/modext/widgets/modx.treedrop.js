@@ -317,7 +317,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             case 'modTemplateVar': v = v+'*'+n; break;
         }
         var ps = f.findField('propertyset').getValue();
-        if (ps !== 0 && ps !== '') {
+        if (ps != 0 && ps !== '') {
             v = v+'@'+f.findField('propertyset').getRawValue();
         }
         v = v+'?';
