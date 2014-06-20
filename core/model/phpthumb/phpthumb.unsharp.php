@@ -8,13 +8,14 @@
 ////               Please leave this notice.
 ////
 //////////////////////////////////////////////////////////////
-/// From: http://vikjavev.no/computing/ump.php              //
+//  From: http://vikjavev.no/computing/ump.php              //
 //                                                          //
 //  Reformatted by James Heinrich <info@silisoftware.com>   //
 //    for use in phpThumb() on 3 February 2003.             //
 //    updated to v2.1.1 on 24 April 2011                    //
 //                                                          //
-//  phpThumb() is found at http://phpthumb.sourceforge.net ///
+//  phpThumb() is found at http://phpthumb.sourceforge.net  //
+//         and/or https://github.com/JamesHeinrich/phpThumb //
 //////////////////////////////////////////////////////////////
 
 /*
@@ -42,7 +43,7 @@ and the roundoff errors in the Gaussian blur process, are welcome.
 
 class phpUnsharpMask {
 
-	function applyUnsharpMask(&$img, $amount, $radius, $threshold) {
+	static function applyUnsharpMask(&$img, $amount, $radius, $threshold) {
 
 		// $img is an image that is already created within php using
 		// imgcreatetruecolor. No url! $img must be a truecolor image.

@@ -1,7 +1,8 @@
 <?php
 //////////////////////////////////////////////////////////////
-///  phpThumb() by James Heinrich <info@silisoftware.com>   //
-//        available at http://phpthumb.sourceforge.net     ///
+//   phpThumb() by James Heinrich <info@silisoftware.com>   //
+//        available at http://phpthumb.sourceforge.net      //
+//         and/or https://github.com/JamesHeinrich/phpThumb //
 //////////////////////////////////////////////////////////////
 ///                                                         //
 // phpthumb.functions.php - general support functions       //

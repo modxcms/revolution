@@ -588,6 +588,9 @@ $_lang['setting_resolve_hostnames_desc'] = 'Möchten Sie, dass MODX versucht, di
 $_lang['setting_resource_tree_node_name'] = 'Feld zur Benennung der Knoten im Ressourcen-Baum';
 $_lang['setting_resource_tree_node_name_desc'] = 'Geben Sie das Ressourcen-Feld an, das zur Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Standardmäßig wird das Feld pagetitle verwendet, es kann aber jedes Ressourcen-Feld verwendet werden, z.B. menutitle, alias, longtitle etc.';
 
+$_lang['setting_resource_tree_node_name_fallback'] = 'Fallback-Feld zur Benennung der Knoten im Ressourcen-Baum';
+$_lang['setting_resource_tree_node_name_fallback_desc'] = 'Geben Sie das Ressourcen-Feld an, das als Fallback bei der Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Dieses Feld wird verwendet, wenn das "Feld zur Benennung der Knoten im Ressourcen-Baum" der Ressource leer ist.';
+
 $_lang['setting_resource_tree_node_tooltip'] = 'Ressourcen-Baum-Tooltip-Feld';
 $_lang['setting_resource_tree_node_tooltip_desc'] = 'Geben Sie das Ressourcen-Feld an, das bei der Darstellung der Tooltips für die Einträge im Ressourcen-Baum verwendet wird. Jedes Ressourcen-Feld kann verwendet werden, z.B. menutitle, alias, longtitle etc. Wird dieses Feld leer gelassen, so wird der longtitle mit einer Beschreibung darunter angezeigt.';
 
@@ -617,7 +620,7 @@ $_lang['setting_session_cookie_path'] = 'Session-Cookie-Pfad';
 $_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, um den Cookie-Pfad anzupassen. Damit kann genau festgelegt werden, wo innerhalb einer Site ein Cookie gültig ist und wo nicht. Lassen Sie das Feld leer, wenn die MODX_BASE_URL verwendet werden soll.';
 
 $_lang['setting_session_cookie_secure'] = 'Sichere Session-Cookies';
-$_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen.';
+$_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen. Dies setzt voraus, dass Ihre Site über HTTPS erreichbar ist, anderenfalls werden Ihre Site und/oder der Manager nicht erreichbar sein.';
 
 $_lang['setting_session_cookie_httponly'] = 'Session-Cookie: HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Verwenden Sie diese Einstellung, um das HttpOnly-Flag für Session-Cookies zu setzen.';
