@@ -140,6 +140,18 @@ class modElementGetInsertProperties extends modProcessor {
                     'listeners' => array('change' => $listener),
                 );
                 break;
+            case 'numberfield':
+                $propertyArray = array(
+                    'xtype' => 'numberfield',
+                    'fieldLabel' => $key,
+                    'description' => $desc,
+                    'name' => $key,
+                    'value' => $v,
+                    'width' => 300,
+                    'id' => 'modx-iprop-'.$key,
+                    'listeners' => array('change' => $listener),
+                );
+                break;
             case 'textarea':
                 $propertyArray = array(
                     'xtype' => 'textarea',
