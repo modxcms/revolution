@@ -128,12 +128,12 @@ class modElementGetInsertProperties extends modProcessor {
             case 'date':
             case 'datefield':
                 $propertyArray = array(
-                    'xtype' => 'datefield',
+                    'xtype' => 'xdatetime',
                     'fieldLabel' => $key,
                     'description' => $desc,
                     'name' => $key,
                     'value' => $v,
-                    'width' => 175,
+                    'width' => 300,
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('change' => $listener),
                 );
