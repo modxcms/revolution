@@ -1,8 +1,8 @@
 <?php
 /**
- * Default English lexicon topic
+ * Default German lexicon topic
  *
- * @language en
+ * @language de
  * @package modx
  * @subpackage lexicon
  */
@@ -423,7 +423,7 @@ $_lang['search_ellipsis'] = 'Suche...';
 $_lang['search_results'] = 'Suchergebnisse';
 $_lang['security'] = 'Sicherheit';
 $_lang['select_date'] = 'Wählen Sie ein Datum';
-$_lang['select_el_opts'] = 'Element-Optionen auswählen';
+$_lang['select_el_opts'] = 'Element-Eigenschaften auswählen';
 $_lang['selected_activate'] = 'Ausgewählte aktivieren';
 $_lang['selected_deactivate'] = 'Ausgewählte deaktivieren';
 $_lang['selected_remove'] = 'Ausgewählte löschen';
