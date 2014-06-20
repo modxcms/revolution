@@ -124,7 +124,7 @@
 
 /* tree states */
 .x-tree-node-el {
-  color: $treeText;
+  color: $brandText;
   font: $treeNodeFont;
   padding-left: 6px;
 
@@ -185,7 +185,7 @@
   color: $disabled;
 }
 .x-tree-node .x-tree-node-disabled a span {
-  color: lighten($treeText, 50%);
+  color: lighten($brandText, 50%);
 }
 
 .element-node-locked a span {
@@ -211,7 +211,7 @@
 }
 
 .tree-pseudoroot-node {
-  background-color: $mainBg;
+  background-color: $brandbg;
   border-radius: 4px;
   font: $treePseudoRootFont;
   position:relative;
@@ -231,10 +231,9 @@
   &.x-tree-node-expanded, &.x-tree-node-expanded span {
     color: $colorSplash;
   }
-  &.x-tree-node-over, &.x-tree-selected {
-    background-color: $softGrey !important;
+  &.x-tree-node-over {
+    background-color: $brandHover;
   }
-
   + .x-tree-node-ct {
     margin-left: -16px;
   }
@@ -272,7 +271,7 @@
 .x-dd-drag-ghost a,
 .x-tree-node a span,
 .x-dd-drag-ghost a span {
-  color: $treeText;
+  color: $brandText;
 }
 .x-tree-node div.x-tree-drag-insert-below {
   border-bottom-color: #686868;
@@ -287,14 +286,21 @@
   border-top-color: #686868;
 }
 .x-tree-node .x-tree-drag-append a span {
-  background-color: $selected;
+  background-color: $brandHover;
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $selected;
+  background-color: $brandHover;
 }
-.x-tree-node .x-tree-selected {
-  background-color: $selected;
+.x-tree-node .x-tree-expanded {
+  color: $brandSelectedColor;
+  background-color: $brandHover;
+  a {
+    color: $brandSelectedColor;
+    span {
+      color: $brandSelectedColor;
+    }
+  }
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');
@@ -308,7 +314,6 @@
 .x-tree-drop-ok-between .x-dd-drop-icon {
   background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
-
 
 
 /* legacy icons */
@@ -562,16 +567,16 @@
 }
 
 .x-tree-node {
-  color: $treeText;
+  color: $brandText;
 }
 .x-tree-node a, .x-dd-drag-ghost a {
-  color: $treeText;
+  color: $brandText;
 }
 .x-tree-node a span, .x-dd-drag-ghost a span {
-  color: $treeText;
+  color: $brandText;
 }
 .x-tree-node .x-tree-node-disabled a span {
-  color: lighten($treeText, 50%);
+  color: lighten($brandText, 50%);
 }
 .x-tree-node div.x-tree-drag-insert-below {
   border-bottom-color: #686868;
@@ -590,10 +595,10 @@
   border-color: $borderColor;
 }
 .x-tree-node .x-tree-node-over {
-  background-color: $over;
+  background-color: $brandHover;
 }
-.x-tree-node .x-tree-selected {
-  background-color: $selected;
+.x-tree-node .x-tree-node-expanded {
+  background-color: $brandHover;
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');

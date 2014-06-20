@@ -450,7 +450,7 @@
       border: none;
       -moz-box-shadow: none;
       box-shadow: none;
-      opacity: .6;
+      opacity: 1;
       display: inline-block;
       position: relative;
 
@@ -463,12 +463,12 @@
         height: 25px;
         top: 4px;
         left: 2px;
-        color: $colorSplash;
+        color: $brandText;
       }
 
 
-      &:hover {
-        opacity: 1;
+      &:hover, button:hover {
+        color: $buttonColor;
       }
 
       span {
