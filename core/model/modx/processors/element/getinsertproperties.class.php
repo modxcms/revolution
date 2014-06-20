@@ -99,6 +99,7 @@ class modElementGetInsertProperties extends modProcessor {
                     'description' => $desc,
                     'name' => $key,
                     'value' => $v,
+                    'width' => 300,
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('select' => $listener),
                     'hiddenName' => $key,
@@ -121,6 +122,7 @@ class modElementGetInsertProperties extends modProcessor {
                     'description' => $desc,
                     'name' => $key,
                     'value' => $v,
+                    'width' => 300,
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('select' => $listener),
                 );
