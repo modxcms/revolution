@@ -89,9 +89,20 @@ class modElementGetInsertProperties extends modProcessor {
             case 'combo':
                 $data = array();
                 foreach ($property['options'] as $option) {
-                    if (empty($property['text']) && !empty($property['name'])) $property['text'] = $property['name'];
-                    $text = !empty($property['lexicon']) ? $this->modx->lexicon($option['text']) : $option['text'];
-                    $data[] = array($option['value'],$text);
+                    if (strtoupper(substr(trim($option['value']), 0, 5)) === '@EVAL') {
+                        $modx = $this->modx; // create a reference to the MODX instance for snippets using $modx
+                        $evaloptions = eval(trim(substr($option['value'], 5)));
+                        $evaloptions = !is_array($evaloptions) ? explode('||', $evaloptions) : $evaloptions;
+                        
+                        foreach ($evaloptions as $evaloption) {
+                            $evaloption = explode('==', $evaloption);
+                            $data[] = array($evaloption[1], $evaloption[0]);
+                        }
+                    } else {
+                        if (empty($property['text']) && !empty($property['name'])) $property['text'] = $property['name'];
+                        $text = !empty($property['lexicon']) ? $this->modx->lexicon($option['text']) : $option['text'];
+                        $data[] = array($option['value'],$text);
+                    }
                 }
                 $propertyArray = array(
                     'xtype' => 'combo',
