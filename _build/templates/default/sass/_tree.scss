@@ -124,7 +124,7 @@
 
 /* tree states */
 .x-tree-node-el {
-  color: $brandText;
+  color: $treeColor;
   font: $treeNodeFont;
   padding-left: 6px;
 
@@ -133,9 +133,13 @@
     box-shadow: none;
   }
 
-  .icon-large {
+  .icon {
     display: inline-block;
     width: 1em;
+
+    font-size: 1.15em;
+    line-height: (3em / 4);
+    vertical-align: -15%;
   }
 
   // For legacy icons
@@ -191,7 +195,7 @@
   color: $disabled;
 }
 .x-tree-node .x-tree-node-disabled a span {
-  color: lighten($brandText, 50%);
+  color: lighten($treeColor, 50%);
 }
 
 .element-node-locked a span {
@@ -205,7 +209,7 @@
 .modx-tree-node-tool-ct {
 	position:absolute;
 	top:0;
-	right:0;
+	right:6px;
     bottom:0;
     line-height:1.8;
 }
@@ -216,16 +220,24 @@
   padding: 0 !important;
 }
 
-.tree-pseudoroot-node {
-  background-color: $brandbg;
+.tree-pseudoroot-node.x-tree-node-el {
+  background-color: $treePseudoRootBg;
   border-radius: 4px;
   font: $treePseudoRootFont;
   position:relative;
   padding: 0 0 0 4px;
   margin-top: 5px;
 
-  > .icon-large {
+  a span {
+    color: $treePseudoRootColor;
+  }
+
+  > .icon {
     font-weight: normal;
+    color: $treePseudoRootColor;
+    font-size: (4em / 3);
+    line-height: (3em / 4);
+    vertical-align: -15%;
   }
 
   .modx-tree-node-tool-ct {
@@ -235,7 +247,7 @@
     }
   }
   &.x-tree-node-expanded, &.x-tree-node-expanded span {
-    color: $colorSplash;
+    color: $treePseudoRootColor;
   }
   &.x-tree-node-over {
     background-color: $brandHover;
@@ -277,7 +289,7 @@
 .x-dd-drag-ghost a,
 .x-tree-node a span,
 .x-dd-drag-ghost a span {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node div.x-tree-drag-insert-below {
   border-bottom-color: #686868;
@@ -557,7 +569,7 @@
 }
 .tree-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-o;
+  content:$fa-var-file;
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
@@ -573,16 +585,16 @@
 }
 
 .x-tree-node {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node a, .x-dd-drag-ghost a {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node a span, .x-dd-drag-ghost a span {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node .x-tree-node-disabled a span {
-  color: lighten($brandText, 50%);
+  color: lighten($treeColor, 50%);
 }
 .x-tree-node div.x-tree-drag-insert-below {
   border-bottom-color: #686868;

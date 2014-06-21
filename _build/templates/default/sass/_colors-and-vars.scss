@@ -52,6 +52,10 @@ $tipText: $gainsboro;
 $lightSplash: lighten($colorSplash, 42.5%);
 $mainText: $black;
 $headerText: #555555;
+$treeColor: #556C88;
+$treeColor_2: #728DA7;
+$treePseudoRootBg: $lightBg;
+$treePseudoRootColor: #4D82A5;
 
 /* Tree menus */
 $iconColor: $treeText;
@@ -96,12 +100,13 @@ $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 
 
 $tabBg: $white;
-$tabStripBg: #f5f5f5;
+$tabStripBg: transparent;
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: $colorSplash;
 $tabInactiveText: #757575;
 $tabHoverText: darken($colorSplash, 20%);
+$tabActiveText: #297EAD;
 
 /* text colors and font stacks */
 $selected: lighten(desaturate($colorSplash,40%),40%);
@@ -119,7 +124,8 @@ $treePseudoRootFont: normal 14px/35px $headfonts;
 $treeNodeFont: normal 13px/22px $bodyfonts;
 
 
-$buttonColor: $brandSelectedColor;
+$buttonColor: #728DA7;
+$buttonHoverColor: $brandSelectedColor;
 $regularButtonColor: #707070;
 $buttonBackground: $white;
 $buttonColorActive: $white;
