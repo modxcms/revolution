@@ -439,7 +439,9 @@ class modOutputFilter {
                             $output= nl2br($output);
                             break;
 
+                        case 'strftime':
                         case 'date':
+
                             /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
                             if (empty($m_val))
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
