@@ -89,13 +89,13 @@ class modElementGetInsertProperties extends modProcessor {
             case 'combo':
                 $data = array();
                 foreach ($property['options'] as $option) {
-                    if (strtoupper(substr(trim($option['value']), 0, 5)) === '@EVAL') {
-                        $modx = $this->modx; // create a reference to the MODX instance for snippets using $modx
-                        $evaloptions = explode('||', eval(trim(substr($option['value'], 5))));
+                    if (substr(trim($option['value']), 0, 1) === '@') {
+                        $tv = $this->modx->newObject('modTemplateVar');
+                        $bindingoptions = explode('||', $tv->processBindings($option['value']));
                         
-                        foreach ($evaloptions as $evaloption) {
-                            $evaloption = explode('==', $evaloption);
-                            $data[] = array($evaloption[1], $evaloption[0]);
+                        foreach ($bindingoptions as $bindingoption) {
+                            $bindingoption = explode('==', $bindingoption);
+                            $data[] = array($bindingoption[1], $bindingoption[0]);
                         }
                     } else {
                         if (empty($property['text']) && !empty($property['name'])) $property['text'] = $property['name'];
