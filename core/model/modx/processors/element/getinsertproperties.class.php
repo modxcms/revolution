@@ -91,8 +91,7 @@ class modElementGetInsertProperties extends modProcessor {
                 foreach ($property['options'] as $option) {
                     if (strtoupper(substr(trim($option['value']), 0, 5)) === '@EVAL') {
                         $modx = $this->modx; // create a reference to the MODX instance for snippets using $modx
-                        $evaloptions = eval(trim(substr($option['value'], 5)));
-                        $evaloptions = !is_array($evaloptions) ? explode('||', $evaloptions) : $evaloptions;
+                        $evaloptions = explode('||', eval(trim(substr($option['value'], 5))));
                         
                         foreach ($evaloptions as $evaloption) {
                             $evaloption = explode('==', $evaloption);
