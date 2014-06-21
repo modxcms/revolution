@@ -176,22 +176,18 @@ class modElementGetInsertProperties extends modProcessor {
                 );
                 break;
             case 'file':
-                $resid = $this->getProperty('resourceId');
+               $resid = $this->getProperty('resourceId');
                 if (!empty($resid)) {
                     $resobj = $this->modx->getObject('modResource', array('id' => $this->getProperty('resourceId')));
                     $ctx = $resobj->get('context_key');
+                    $orgctx = $this->modx->context->get('key');
                     $this->modx->switchContext($ctx);
                     $sourceid = $this->modx->getOption('default_media_source', null, 1);
-                    /** @var modMediaSource $source */
-                    $this->modx->loadClass('sources.modMediaSource');
-                    $source = modMediaSource::getDefaultSource($this->modx,$sourceid);
-                    $source->initialize();
                 }
 
                 $listenerfile = array(
-                    'fn' => 'function() { 
-                                console.log(Ext.getCmp(\'tvbrowser'.$key.'\').getValue());
-                                Ext.getCmp(\'tvbrowser'.$key.'\').setValue(this.config.relativePath + Ext.getCmp(\'tvbrowser'.$key.'\').getValue());
+                    'fn' => 'function(data) { 
+                                Ext.getCmp(\'tvbrowser'.$key.'\').setValue(data.fullRelativeUrl);
                                 Ext.getCmp(\'modx-window-insert-element\').changeProp(\''.$key.'\');
                             }',
                 );
@@ -199,7 +195,6 @@ class modElementGetInsertProperties extends modProcessor {
                 $propertyArray = array(
                     'xtype' => 'modx-panel-tv-file',
                     'source' => !empty($sourceid) ? $sourceid : 1,
-                    'relativePath' => !empty($source) ? stristr($source->getBaseUrl(), '/') : null,
                     'wctx' => !empty($ctx) ? $ctx : 'web',
                     'tv' => $key,
                     'fieldLabel' => $key,
@@ -210,7 +205,7 @@ class modElementGetInsertProperties extends modProcessor {
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('change' => $listenerfile, 'select' => $listenerfile),
                 );
-                $this->modx->switchContext('mgr');
+                $this->modx->switchContext($orgctx);
                 break;
             default:
                 $propertyArray = array(
