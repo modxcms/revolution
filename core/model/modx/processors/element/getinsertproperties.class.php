@@ -185,9 +185,13 @@ class modElementGetInsertProperties extends modProcessor {
                     $sourceid = $this->modx->getOption('default_media_source', null, 1);
                 }
 
-                $listenerfile = array(
+                $listener = array(
                     'fn' => 'function(data) { 
-                                Ext.getCmp(\'tvbrowser'.$key.'\').setValue(data.fullRelativeUrl);
+                                if (data.fullRelativeUrl) {
+                                    Ext.getCmp(\'tvbrowser'.$key.'\').setValue(data.fullRelativeUrl);
+                                } else {
+                                    Ext.getCmp(\'tvbrowser'.$key.'\').setValue(Ext.getCmp(\'tvbrowser'.$key.'\').getValue());
+                                }
                                 Ext.getCmp(\'modx-window-insert-element\').changeProp(\''.$key.'\');
                             }',
                 );
@@ -203,7 +207,7 @@ class modElementGetInsertProperties extends modProcessor {
                     'value' => $v,
                     'width' => 300,
                     'id' => 'modx-iprop-'.$key,
-                    'listeners' => array('change' => $listenerfile, 'select' => $listenerfile),
+                    'listeners' => array('change' => $listener, 'select' => $listener),
                 );
                 $this->modx->switchContext($orgctx);
                 break;
