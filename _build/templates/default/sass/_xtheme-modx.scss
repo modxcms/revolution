@@ -1316,6 +1316,15 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   margin-left: 1px;
   vertical-align: baseline;
 }
+.x-window .x-color-palette {
+  width: 301px;
+  height: auto;
+}
+.x-window .x-color-palette a span {
+  line-height: 18px;
+  width: 18px;
+  height: 18px;
+}
 .x-window .x-form-cb-label {
   color: #707070;
   font-weight: bold;
