@@ -215,6 +215,43 @@ class modElementGetInsertProperties extends modProcessor {
                 );
                 $this->modx->switchContext($orgctx);
                 break;
+            case 'color':
+                $data = array();
+                foreach ($property['options'] as $option) { 
+                    if (substr(trim($option['value']), 0, 1) === '@') {
+                        $tv = $this->modx->newObject('modTemplateVar');
+                        $bindingoptions = explode('||', $tv->processBindings($option['value']));
+                        
+                        foreach ($bindingoptions as $bindingoption) {
+                            $bindingoption = explode('==', $bindingoption);
+                            $data[] = array($bindingoption[1]);
+                        }
+                    } else {
+                        $data[] = array($option['value']);
+                    }
+                }
+
+                $listener = array(
+                    'fn' => 'function(palette, color) {
+                                Ext.getCmp(\'modx-iprop-'.$key.'\').value = \'#\' + color;
+                                Ext.getCmp(\'modx-window-insert-element\').changeProp(\''.$key.'\');
+                            }',
+                );
+
+                $propertyArray = array(
+                    'xtype' => 'colorpalette',
+                    'fieldLabel' => $key,
+                    'description' => $desc,
+                    'name' => $key,
+                    'value' => $v,
+                    'width' => 300, // unfortunately controlled by css class .x-color-palette
+                    'id' => 'modx-iprop-'.$key,
+                    'listeners' => array('select' => $listener),
+                );
+                if (!empty($data)) {
+                    $propertyArray['colors'] = $data;
+                }
+                break;
             default:
                 $propertyArray = array(
                     'xtype' => 'textfield',
