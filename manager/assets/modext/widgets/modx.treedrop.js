@@ -324,7 +324,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
 
         for (var i=0;i<this.modps.length;i++) {
             var fld = this.modps[i];
-            var val = Ext.getCmp('modx-iprop-'+fld).getValue();
+            var val = typeof(Ext.getCmp('modx-iprop-'+fld).getValue) === 'function' ? Ext.getCmp('modx-iprop-'+fld).getValue() : Ext.getCmp('modx-iprop-'+fld).value;
             if (val == true) val = 1;
             if (val == false) val = 0;
             v = v+'\n\t&'+fld+'=`'+val+'`';

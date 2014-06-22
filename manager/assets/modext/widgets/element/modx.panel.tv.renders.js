@@ -54,11 +54,7 @@ MODx.panel.ImageTV = function(config) {
     MODx.panel.ImageTV.superclass.constructor.call(this,config);
     this.addEvents({select: true});
 };
-Ext.extend(MODx.panel.ImageTV,MODx.Panel,{
-    getValue: function() {
-        return Ext.getCmp('tvbrowser'+this.config.tv).getValue();
-    }
-});
+Ext.extend(MODx.panel.ImageTV,MODx.Panel);
 Ext.reg('modx-panel-tv-image',MODx.panel.ImageTV);
 
 MODx.panel.FileTV = function(config) {
@@ -109,11 +105,7 @@ MODx.panel.FileTV = function(config) {
     MODx.panel.FileTV.superclass.constructor.call(this,config);
     this.addEvents({select: true});
 };
-Ext.extend(MODx.panel.FileTV,MODx.Panel, {
-    getValue: function() {
-        return Ext.getCmp('tvbrowser'+this.config.tv).getValue();
-    }
-});
+Ext.extend(MODx.panel.FileTV,MODx.Panel);
 Ext.reg('modx-panel-tv-file',MODx.panel.FileTV);
 
 MODx.checkTV = function(id) {

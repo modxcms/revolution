@@ -188,9 +188,13 @@ class modElementGetInsertProperties extends modProcessor {
                 $listener = array(
                     'fn' => 'function(data) { 
                                 if (data.fullRelativeUrl) {
+                                    // sets the correct path in the select field
                                     Ext.getCmp(\'tvbrowser'.$key.'\').setValue(data.fullRelativeUrl);
+                                    Ext.getCmp(\'modx-iprop-'.$key.'\').value = data.fullRelativeUrl;
                                 } else {
+                                    // sets the correct path in the select field
                                     Ext.getCmp(\'tvbrowser'.$key.'\').setValue(Ext.getCmp(\'tvbrowser'.$key.'\').getValue());
+                                    Ext.getCmp(\'modx-iprop-'.$key.'\').value = Ext.getCmp(\'tvbrowser'.$key.'\').getValue();
                                 }
                                 Ext.getCmp(\'modx-window-insert-element\').changeProp(\''.$key.'\');
                             }',
