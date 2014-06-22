@@ -17,7 +17,7 @@ $fa-css-prefix:       icon;
 @import "tree";
 @import "help";
 
-body, body.x-border-layout-ct {
+body {
   color: $mainText;
   font:  $baseText;
   -webkit-font-smoothing: antialiased;

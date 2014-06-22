@@ -20,6 +20,11 @@
   }
 }
 
+#modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
+#modx-tree-element .x-toolbar-left .x-btn.tree-new-template {
+  margin-left: 16px;
+}
+
 #modx-leftbar-tabpanel {
 }
 
@@ -63,6 +68,7 @@
     }
     .tree-pseudoroot-node {
       margin-top: 0;
+      margin-bottom: 0;
     }
   }
 }
@@ -227,6 +233,7 @@
   position:relative;
   padding: 0 0 0 4px;
   margin-top: 5px;
+  margin-bottom: 5px;
 
   a span {
     color: $treePseudoRootColor;
@@ -247,10 +254,12 @@
     }
   }
   &.x-tree-node-expanded, &.x-tree-node-expanded span {
-    color: $treePseudoRootColor;
+    color: $treePseudoRootOverColor;
+    background-color: $treePseudoRootOverBg;
   }
   &.x-tree-node-over {
-    background-color: $brandHover;
+    background-color: $treePseudoRootOverBg;
+    color: $treePseudoRootOverColor;
   }
   + .x-tree-node-ct {
     margin-left: -16px;
