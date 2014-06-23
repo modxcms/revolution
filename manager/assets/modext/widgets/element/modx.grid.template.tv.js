@@ -22,6 +22,7 @@ MODx.grid.TemplateTV = function(config) {
         ,baseParams: {
             action: 'element/template/tv/getlist'
             ,template: config.template
+            ,sort: 'tv_rank'
         }
         ,saveParams: {
             template: config.template
@@ -30,6 +31,9 @@ MODx.grid.TemplateTV = function(config) {
         ,paging: true
         ,plugins: tt
         ,remoteSort: true
+        ,enableDragDrop: true
+        ,ddGroup : 'template-tvs-dd'
+        ,sm: new Ext.grid.RowSelectionModel({singleSelect:false})
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -91,6 +95,30 @@ MODx.grid.TemplateTV = function(config) {
         }]
     });
     MODx.grid.TemplateTV.superclass.constructor.call(this,config);
+
+    this.on('render',function() {
+        var grid = this;
+        var store = this.getStore();
+        var ddrow = new Ext.dd.DropTarget(grid.getView().mainBody, {
+            ddGroup : 'template-tvs-dd'
+            notifyDrop : function(dd, e, data) {
+                var sm = grid.getSelectionModel();
+                var rows = sm.getSelections();
+                var cindex = dd.getDragData(e).rowIndex;
+                if (sm.hasSelection()) {
+                    for (i = 0; i < rows.length; i++) {
+                        store.remove(store.getById(rows[i].id));
+                        store.insert(cindex,rows[i]);
+                    }
+                    sm.selectRecords(rows);
+                }
+                
+                Ext.each(store.data.items, function(item, index, allItems) {
+                    item.set('tv_rank', index);
+                }, this);
+            }
+        });
+    },this);
 };
 Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
 
