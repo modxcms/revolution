@@ -101,20 +101,25 @@ MODx.grid.TemplateTV = function(config) {
         var store = this.getStore();
         var ddrow = new Ext.dd.DropTarget(grid.getView().mainBody, {
             ddGroup : 'template-tvs-dd'
-            notifyDrop : function(dd, e, data) {
+            ,notifyDrop : function(dd, e, data) {
                 var sm = grid.getSelectionModel();
-                var rows = sm.getSelections();
+                var row = sm.getSelections();
                 var cindex = dd.getDragData(e).rowIndex;
                 if (sm.hasSelection()) {
-                    for (i = 0; i < rows.length; i++) {
-                        store.remove(store.getById(rows[i].id));
-                        store.insert(cindex,rows[i]);
+                    for (i = 0; i < row.length; i++) {
+                        store.remove(store.getById(row[i].id));
+                        store.insert(cindex,row[i]);
                     }
-                    sm.selectRecords(rows);
+                    sm.selectRecords(row);
                 }
                 
                 Ext.each(store.data.items, function(item, index, allItems) {
-                    item.set('tv_rank', index);
+                    // take pagination into account by recalculating the index based on the currently viewed page
+                    index = grid.config.bbar.cursor !== 0 ? ((grid.config.bbar.cursor - 1) * grid.config.bbar.pageSize) + index : index;
+
+                    if (row[0].data.category_name === item.data.category_name) {
+                        item.set('tv_rank', index);
+                    }
                 }, this);
             }
         });
