@@ -1640,3 +1640,23 @@ body.x-body-masked .x-window-plain .x-window-mc {
   padding-left: 0;
   padding-right: 0;
 }
+.x-superboxselect,
+.x-superboxselect-btns {
+  overflow: visible;
+}
+.x-superboxselect-input input {
+  background: transparent;
+}
+.x-superboxselect-btn-expand {
+  margin-top: 9px !important; margin-right: 6px;
+}
+.x-superboxselect-btn-clear {
+  background-color: #fbfbfb;
+  height: 17px !important;
+  top: -4px;
+  outline: 1px solid #e4e4e4;
+  border: 12px solid #fbfbfb;
+  position: absolute;
+  right: -42px;
+  display: block;
+}
