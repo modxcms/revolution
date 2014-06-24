@@ -30,8 +30,10 @@ Ext.onReady(function() {
         ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
     });
 
-	console.log(fld);
-	fld.wrap.setStyle('display', 'inline-block');
+	fld.wrap.applyStyles({
+		display: "inline-block"
+		,top: "1px"
+	});
 });
 // ]]>
 </script>
