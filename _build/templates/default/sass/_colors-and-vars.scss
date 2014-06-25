@@ -63,13 +63,13 @@ $headerText: #555555;
 $treeColor: #556C88;
 $treeColor_2: #728DA7;
 $treePseudoRootBg: $lightBg;
-$treePseudoRootColor: #4D82A5;
+$treePseudoRootColor: #447996;
 $treePseudoRootOverBg: $brandHover;
-$treePseudoRootOverColor: $colorSplash;
+$treePseudoRootOverColor: #1A7FB8;
 
 /* Tree menus */
 $iconColor: $treeText;
-$unpublished: lighten($treeText, 20%) !important;
+$unpublished: lighten($treeText, 10%) !important;
 $disabled: $unpublished;
 $hidden: $unpublished;
 $unpubText: italic;
@@ -114,9 +114,9 @@ $tabStripBg: transparent;
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: $colorSplash;
-$tabInactiveText: #757575;
+$tabInactiveText: $colorSplash;
 $tabHoverText: darken($colorSplash, 20%);
-$tabActiveText: #297EAD;
+$tabActiveText: #1A7FB8;
 
 /* text colors and font stacks */
 $selected: lighten(desaturate($colorSplash,40%),40%);
