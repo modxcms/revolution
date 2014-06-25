@@ -69,6 +69,7 @@ $_lang['file_remove'] = 'Supprimer le fichier';
 $_lang['file_remove_confirm'] = 'Voulez-vous vraiment supprimer entièrement le fichier?';
 $_lang['file_saved'] = 'Fichier correctement mis à jour!';
 $_lang['file_size'] = 'Taille du fichier';
+$_lang['image_size'] = 'Taille d\'image';
 $_lang['file_unzip'] = 'La décompression a été correctement effectuée!';
 $_lang['file_upload'] = 'Envoyer des fichiers';
 $_lang['file_upload_here'] = 'Envoyer ici des fichiers';

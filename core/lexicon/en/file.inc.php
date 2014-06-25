@@ -71,6 +71,7 @@ $_lang['file_remove'] = 'Delete File';
 $_lang['file_remove_confirm'] = 'Are you sure you want to remove this file entirely?';
 $_lang['file_saved'] = 'File updated successfully!';
 $_lang['file_size'] = 'File Size';
+$_lang['image_size'] = 'Image Size';
 $_lang['file_unzip'] = 'Unzip was successful!';
 $_lang['file_upload'] = 'Upload Files';
 $_lang['file_upload_here'] = 'Upload Files Here';

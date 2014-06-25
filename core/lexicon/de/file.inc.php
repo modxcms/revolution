@@ -77,6 +77,7 @@ $_lang['file_remove'] = 'Datei löschen';
 $_lang['file_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Datei endgültig löschen möchten?';
 $_lang['file_saved'] = 'Datei erfolgreich aktualisiert!';
 $_lang['file_size'] = 'Dateigröße';
+$_lang['image_size'] = 'Bildgrösse';
 $_lang['file_unzip'] = 'Das Entpacken war erfolgreich!';
 $_lang['file_upload'] = 'Dateien hochladen';
 $_lang['file_upload_here'] = 'Dateien hierher hochladen';
