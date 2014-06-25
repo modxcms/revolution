@@ -1,0 +1,74 @@
+.modx-pb-view-ct {
+  background: white;
+  font: $fontSmall;
+}
+.modx-pb-thumb {
+  border: 1px solid #dddddd;
+  height: 80px;
+  line-height: 80px;
+  padding: 5px;
+  text-align: center;
+  width: 100px;
+}
+.modx-pb-thumb img {
+  vertical-align: middle;
+}
+.modx-pb-thumb-wrap {
+  border: 1px solid transparent;
+  float: left;
+  margin: 4px 0 4px 4px;
+  overflow: hidden;
+  padding: 4px;
+}
+.modx-pb-thumb-wrap span {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+}
+.modx-pb-view-ct .x-view-over {
+  border: 1px solid #dddddd;
+  padding: 4px;
+}
+.modx-pb-view-ct .x-view-selected {
+  background: #DFEDFF;
+  border: 1px solid #6593cf;
+  padding: 4px;
+}
+.modx-pb-view-ct .x-view-selected .thumb {
+  background: transparent;
+}
+.modx-pb-view-ct .x-view-selected span {
+  color: #1A4D8F;
+}
+.modx-pb-view-ct .loading-indicator {
+  background-position: left;
+  background-repeat: no-repeat;
+  font-size: 11px;
+  margin: 10px;
+  padding-left: 20px;
+}
+.modx-pb-detail-thumb {
+  cursor: pointer;
+  margin-top: 5px;
+  text-align: center;
+}
+.modx-pb-details-info {
+  border-top: 1px solid #ccc;
+  font: $fontSmall;
+  margin-top: 5px;
+  padding: 5px;
+  text-align: left;
+}
+.modx-pb-details-info b {
+  color: #555;
+  display: block;
+  margin-bottom: 4px;
+}
+.modx-pb-details-info span {
+  display: block;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+.modx-pb-fullview {
+  text-align: center;
+}
