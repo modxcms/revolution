@@ -160,6 +160,14 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
+     * Change the DataView layout template
+     */
+    ,changeView: function() {
+        var v = Ext.getCmp(this.ident+'viewSelect').getValue();
+        this.view.setTemplate(v);
+    }
+
+    /**
      * Remove any filter applied to the DataView
      */
     ,reset: function() {
@@ -184,7 +192,7 @@ Ext.extend(MODx.Media, Ext.Container, {
             xtype: 'textfield'
             ,id: this.ident+'filter'
             ,selectOnFocus: true
-            ,width: 100
+            ,width: 200
             ,listeners: {
                 render: {
                     fn: function(){
@@ -223,6 +231,28 @@ Ext.extend(MODx.Media, Ext.Container, {
                     fn: this.sortImages
                     ,scope: this
                 }
+            }
+        }, '-', {
+            text: _('view_mode')+':'
+            ,xtype: 'label'
+        }, '-', {
+            id: this.ident+'viewSelect'
+            ,xtype: 'combo'
+            ,typeAhead: false
+            ,triggerAction: 'all'
+            ,width: 100
+            ,editable: false
+            ,mode: 'local'
+            ,displayField: 'desc'
+            ,valueField: 'type'
+            ,lazyInit: false
+            ,value: this.config.viewmode || 'grid'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type', 'desc'],
+                data : [['grid', _('view_mode_grid')],['list', _('view_mode_list')]]
+            })
+            ,listeners: {
+                'select': {fn:this.changeView, scope:this}
             }
         }];
     }

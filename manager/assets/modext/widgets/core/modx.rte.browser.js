@@ -124,6 +124,11 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
         this.view.select(0);
     }
+
+    ,changeView: function() {
+        var v = Ext.getCmp(this.ident+'viewSelect').getValue();
+        this.view.setTemplate(v);
+    }
     
     ,reset: function(){
         if(this.rendered){
@@ -141,7 +146,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             xtype: 'textfield'
             ,id: 'filter'
             ,selectOnFocus: true
-            ,width: 100
+            ,width: 200
             ,listeners: {
                 'render': {fn:function(){
                     Ext.getCmp('filter').getEl().on('keyup', function(){
@@ -176,6 +181,28 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             ,tooltip: {text: _('tree_refresh')}
             ,handler: function() { this.load(); }
             ,scope: this
+        }, '-', {
+            text: _('view_mode')+':'
+            ,xtype: 'label'
+        }, '-', {
+            id: this.ident+'viewSelect'
+            ,xtype: 'combo'
+            ,typeAhead: false
+            ,triggerAction: 'all'
+            ,width: 100
+            ,editable: false
+            ,mode: 'local'
+            ,displayField: 'desc'
+            ,valueField: 'type'
+            ,lazyInit: false
+            ,value: this.config.viewmode || 'grid'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type', 'desc'],
+                data : [['grid', _('view_mode_grid')],['list', _('view_mode_list')]]
+            })
+            ,listeners: {
+                'select': {fn:this.changeView, scope:this}
+            }
         }];
     }
     

@@ -20,7 +20,6 @@ MODx.DataView = function(config) {
         store: this.store
         ,singleSelect: true
         ,overClass: 'x-view-over'
-        ,itemSelector: 'div.modx-browser-thumb-wrap'
         ,emptyText: '<div style="padding:10px;">'+_('file_err_filter')+'</div>'
         ,closeAction: 'hide'
     });
@@ -297,6 +296,11 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         this.view.select(0);
     }
 
+    ,changeView: function() {
+        var v = Ext.getCmp(this.ident+'viewSelect').getValue();
+        this.view.setTemplate(v);
+    }
+
     ,reset: function(){
         if(this.rendered){
             Ext.getCmp(this.ident+'filter').reset();
@@ -314,7 +318,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             xtype: 'textfield'
             ,id: this.ident+'filter'
             ,selectOnFocus: true
-            ,width: 100
+            ,width: 200
             ,listeners: {
                 'render': {fn:function(){
                     Ext.getCmp(this.ident+'filter').getEl().on('keyup', function(){
@@ -343,6 +347,28 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             })
             ,listeners: {
                 'select': {fn:this.sortImages, scope:this}
+            }
+        }, '-', {
+            text: _('view_mode')+':'
+            ,xtype: 'label'
+        }, '-', {
+            id: this.ident+'viewSelect'
+            ,xtype: 'combo'
+            ,typeAhead: false
+            ,triggerAction: 'all'
+            ,width: 100
+            ,editable: false
+            ,mode: 'local'
+            ,displayField: 'desc'
+            ,valueField: 'type'
+            ,lazyInit: false
+            ,value: this.config.viewmode || 'grid'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type', 'desc'],
+                data : [['grid', _('view_mode_grid')],['list', _('view_mode_list')]]
+            })
+            ,listeners: {
+                'select': {fn:this.changeView, scope:this}
             }
         }];
     }
@@ -395,7 +421,8 @@ MODx.browser.View = function(config) {
             field: MODx.config.modx_browser_default_sort || 'name'
             ,direction: 'ASC'
         }
-        ,tpl: this.templates.thumb
+        ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
+        ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
         ,listeners: {
             'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
             ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
@@ -444,6 +471,17 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
     }
 
+    ,setTemplate: function(tpl) {
+        if (tpl === 'list') {
+            this.tpl = this.templates.list;
+            this.itemSelector = 'div.modx-browser-list-item';
+        } else {
+            this.tpl = this.templates.thumb;
+            this.itemSelector = 'div.modx-browser-thumb-wrap';
+        }
+        this.refresh();
+    }
+
     ,showDetails : function(){
         var selNode = this.getSelectedNodes();
         var detailEl = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
@@ -483,11 +521,31 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
                 ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
-                ,'<div class="modx-browser-thumb"><img src="{thumb}" title="{name}" /></div>'
-                ,'<span>{shortName}</span></div>'
+                ,'  <div class="modx-browser-thumb">'
+                ,'      <img src="{thumb}" title="{name}" />'
+                ,'  </div>'
+                ,'  <span>{shortName}</span>'
+                ,'</div>'
             ,'</tpl>'
         );
         this.templates.thumb.compile();
+
+        this.templates.list = new Ext.XTemplate(
+            '<tpl for=".">'
+                ,'<div class="modx-browser-list-item" id="{name}">'
+                ,'  <span class="icon icon-file {cls}">'
+                ,'      <span class="file-name">{name}</span>'
+                ,'      <tpl if="sizeString != 0">'
+                ,'      <span class="file-size">{sizeString}</span>'
+                ,'      </tpl>'
+                ,'      <tpl if="imageSizeString != 0">'
+                ,'      <span class="image-size">{imageSizeString}</span>'
+                ,'      </tpl>'
+                ,'  </span>'
+                ,'</div>'
+            ,'</tpl>'
+        );
+        this.templates.list.compile();
 
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
