@@ -492,7 +492,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             '<div class="details">'
             ,'<tpl for=".">'
                 ,'<div class="modx-browser-detail-thumb">'
-                    ,'<img src="{thumb}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
+                    ,'<img src="{image}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
                 ,'</div>'
                 ,'<div class="modx-browser-details-info">'
                 ,'<b>'+_('file_name')+':</b>'

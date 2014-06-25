@@ -49,7 +49,7 @@
 }
 .modx-browser-detail-thumb {
   cursor: pointer;
-  padding: 5px;
+  padding: 15px;
   text-align: center;
 }
   .modx-browser-detail-thumb img {
@@ -58,19 +58,17 @@
 .modx-browser-details-info {
   border-top: 1px solid #ccc;
   font: $fontSmall;
-  margin-top: 5px;
-  padding: 5px;
+  padding: 15px;
   text-align: left;
 }
 .modx-browser-details-info b {
   color: #555;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .modx-browser-details-info span {
   display: block;
-  margin-bottom: 5px;
-  margin-left: 5px;
+  margin-bottom: 10px;
 }
 .modx-browser-fullview {
   text-align: center;
