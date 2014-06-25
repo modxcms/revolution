@@ -49,9 +49,12 @@
 }
 .modx-browser-detail-thumb {
   cursor: pointer;
-  margin-top: 5px;
+  padding: 5px;
   text-align: center;
 }
+  .modx-browser-detail-thumb img {
+    max-width: 100%;
+  }
 .modx-browser-details-info {
   border-top: 1px solid #ccc;
   font: $fontSmall;
