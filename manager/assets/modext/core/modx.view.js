@@ -376,7 +376,7 @@ MODx.browser.View = function(config) {
         url: MODx.config.connector_url
         ,id: this.ident
         ,fields: [
-            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled'
+            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
             ,{name:'size', type: 'float'}
             ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
             ,'menu'
@@ -474,6 +474,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
         data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
+        data.imageSizeString = data.preview != 0 ? data.image_width + "x" + data.image_height : 0;
         data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
         this.lookup[data.name] = data;
         return data;
@@ -500,6 +501,10 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,'<tpl if="this.isEmpty(sizeString) == false">'
                     ,'<b>'+_('file_size')+':</b>'
                     ,'<span>{sizeString}</span>'
+                ,'</tpl>'
+                ,'<tpl if="this.isEmpty(imageSizeString) == false">'
+                    ,'<b>Image Size:</b>'
+                    ,'<span>{imageSizeString}</span>'
                 ,'</tpl>'
                 ,'<tpl if="this.isEmpty(dateString) == false">'
                     ,'<b>'+_('last_modified')+':</b>'
