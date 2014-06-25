@@ -25,6 +25,7 @@ MODx.browser.RTE = function(config) {
         ,onUpload: function() { this.view.run(); }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
+        ,useDefaultToolbar: false
         ,hideFiles: true
         ,openTo: config.openTo || ''
         ,ident: this.ident
