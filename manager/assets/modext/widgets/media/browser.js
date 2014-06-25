@@ -83,7 +83,7 @@ MODx.Media = function(config) {
     }, this);
 
     Ext.applyIf(config, {
-        cls: 'container'
+        cls: 'modx-browser container'
         ,layout: 'border'
         ,width: '98%'
         ,height: '95%'
