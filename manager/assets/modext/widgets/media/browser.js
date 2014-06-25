@@ -166,6 +166,7 @@ Ext.extend(MODx.Media, Ext.Container, {
     ,changeView: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
         this.view.setTemplate(v);
+        this.view.select(0);
     }
 
     /**

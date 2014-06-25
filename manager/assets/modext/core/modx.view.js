@@ -300,6 +300,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     ,changeView: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
         this.view.setTemplate(v);
+        this.view.select(0);
     }
 
     ,reset: function(){
