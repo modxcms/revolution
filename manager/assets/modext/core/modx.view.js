@@ -538,8 +538,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             });
         }
         this.fvWin.show();
-        var w = data.image_width < 250 ? 250 : data.image_width;
-        var h = data.image_height < 200 ? 200 : data.image_height;
+        var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
+        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
