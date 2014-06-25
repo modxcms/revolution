@@ -5773,7 +5773,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 .modx-tree {
-  padding: 0 0 5px;
+  padding: 0;
 }
 #modx-file-tree .modx-tree:first-child {
   padding-top: 5px;
@@ -5972,6 +5972,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 .tree-pseudoroot-node.x-tree-node-el + .x-tree-node-ct {
   margin-left: -16px;
+  padding: 5px 0;
 }
 .tree-pseudoroot-node.x-tree-node-el:hover .modx-tree-node-tool-ct {
   opacity: 1;
