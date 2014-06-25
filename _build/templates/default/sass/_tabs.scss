@@ -28,19 +28,16 @@
   margin:0; /* was -1px */
   width: auto;
   background-color: $tabStripBg !important;
-}
-
-
-.x-tab-panel-header-plain {
-
+  position: relative;
+  top: 1px;
 }
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
   background-color: #fff;
   border: none;
-  height: 3px;
-  margin: -2px 0 0 0; /* was -2px 0 0 -1px */
+  height: 0;
+  //margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
 
 .x-tab-panel-header,
@@ -49,20 +46,27 @@
   padding-left:0;
 }
 
+.x-tab-panel-bwrap {
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+
 .x-tab-strip li {
   color: $tabInactiveText;
   cursor: pointer;
   font: $tabFont;
   line-height: 2.2;
   margin: 1px 0 1px 2px;
-  padding: 0 15px;
+  padding: 0 13px;
+  position: relative;
+  z-index: 5;
 
   &:hover {
     color: $tabHoverText;
   }
 
   &.x-tab-strip-active {
-    color: $tabText;
+    color: $tabActiveText;
     background-color: #fff;
     box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 transparent;
     cursor: default;
@@ -73,6 +77,31 @@
     .vertical-tabs-header & {
       border-radius: 0;
     }
+
+    // For the box shadow around the tab
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -3px;
+      right: 0;
+      bottom: 1px;
+      left: 0;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      z-index: -1;
+      border-radius: 3px;
+	}
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 90%;
+      right: 0;
+      bottom: -4px;
+      left: 0;
+      background: #fff
+	}
   }
 //  &:first-of-type {
 //    &.x-tab-strip-active {
@@ -85,7 +114,6 @@
 .x-tab-panel-header,
 .x-tab-panel {
   overflow: visible;
-  background: $mainBg;
   border: none;
 }
 
@@ -223,9 +251,6 @@ ul.x-tab-strip-bottom {
   }
   h4 {
     margin-left:15px;
-  }
-  .x-tab-strip-wrap {
-    background: #f8f8f8;
   }
   ul.x-tab-strip-top {
     border-bottom: none;

@@ -55,8 +55,6 @@
     border-radius: 3px;
     padding: 13px 20px;
     border: none;
-    -webkit-box-shadow: 0 1px 0 0 #CCC;
-    box-shadow: $shadower;
     button {
       color: $buttonColor;
     }
@@ -444,9 +442,9 @@
   .x-toolbar-ct {
     .x-btn {
       margin: 0 3px;
-      padding: 5px;
-      width: 20px;
-      height: 20px;
+      padding: 0;
+      width: 25px;
+      height: 30px;
       border: none;
       -moz-box-shadow: none;
       box-shadow: none;
@@ -455,20 +453,19 @@
       position: relative;
 
       & > em > button {
-        font-size: 20px;
+        font-size: 18px;
         text-shadow: 0 !important;
         overflow: visible;
         position: absolute;
-        width: 20px;
-        height: 25px;
+        height: 24px;
         top: 4px;
         left: 2px;
-        color: $brandText;
+        color: $buttonColor;
       }
 
 
       &:hover, button:hover {
-        color: $buttonColor;
+        color: $buttonHoverColor;
       }
 
       span {
@@ -491,7 +488,7 @@
 .tree-new-resource > em > button:before {
   //@include icon($file-alt);
   @extend %pseudo-font;
-  content:$fa-var-file-o;
+  content:$fa-var-file;
 }
 .tree-new-weblink > em > button:before {
   //@include icon($link);
