@@ -64,8 +64,8 @@ $treeColor: #556C88;
 $treeColor_2: #728DA7;
 $treePseudoRootBg: $lightBg;
 $treePseudoRootColor: #447996;
-$treePseudoRootOverBg: $brandHover;
-$treePseudoRootOverColor: #1A7FB8;
+$treePseudoRootOverBg: $lightBg; /* $brandHover; */
+$treePseudoRootOverColor: #447996; /* #1A7FB8; */
 
 /* Tree menus */
 $iconColor: $treeText;

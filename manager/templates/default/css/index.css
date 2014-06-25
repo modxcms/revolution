@@ -2035,6 +2035,8 @@
 /* main colors */
 /* Context menu */
 /* tree menus */
+/* $brandHover; */
+/* #1A7FB8; */
 /* Tree menus */
 /* top nav */
 /* Top navigation colors */
@@ -5961,12 +5963,12 @@ ul.x-tab-strip-bottom .x-tab-left {
   margin-left: 2px;
 }
 .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded, .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded span, .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded > .icon {
-  color: #1a7fb8;
-  background-color: #e8f0f8;
+  color: #447996;
+  background-color: #f0f0f0;
 }
 .tree-pseudoroot-node.x-tree-node-el.x-tree-node-over {
-  background-color: #e8f0f8;
-  color: #1a7fb8;
+  background-color: #f0f0f0;
+  color: #447996;
 }
 .tree-pseudoroot-node.x-tree-node-el + .x-tree-node-ct {
   margin-left: -16px;
