@@ -47,13 +47,16 @@
   margin: 10px;
   padding-left: 20px;
 }
+.x-window .modx-browser-details-ct {
+  border-left: 1px solid #ccc;
+}
 .modx-browser-detail-thumb {
   cursor: pointer;
-  line-height: 1;
   padding: 5px;
   text-align: center;
 }
   .modx-browser-detail-thumb img {
+    display: block;
     max-width: 100%;
   }
 .modx-browser-details-info {
