@@ -474,7 +474,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
         data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
-        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format("m/d/Y g:i a") : 0;
+        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
         this.lookup[data.name] = data;
         return data;
     }
