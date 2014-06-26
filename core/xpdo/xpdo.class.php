@@ -2545,17 +2545,6 @@ class xPDO {
         return $this->pdo->setAttribute($attribute, $value);
     }
 
-
-    /**
-     * Convert current microtime() result into seconds.
-     *
-     * @deprecated Use microtime(true) directly; this was to emulate PHP 5 behavior in PHP 4.
-     * @return float
-     */
-    public function getMicroTime() {
-       return microtime(true);
-    }
-
     /**
      * Creates an new xPDOQuery for a specified xPDOObject class.
      *
