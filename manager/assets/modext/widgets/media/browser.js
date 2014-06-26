@@ -83,7 +83,7 @@ MODx.Media = function(config) {
     }, this);
 
     Ext.applyIf(config, {
-        cls: 'container'
+        cls: 'modx-browser container'
         ,layout: 'border'
         ,width: '98%'
         ,height: '95%'
@@ -92,7 +92,7 @@ MODx.Media = function(config) {
             ,width: 250
             ,items: this.tree
             ,id: this.ident+'-browser-tree'
-            ,cls: 'modx-pb-browser-tree'
+            ,cls: 'modx-browser-tree'
             ,autoScroll: true
             ,split: true
         },{
@@ -100,7 +100,7 @@ MODx.Media = function(config) {
             ,layout: 'fit'
             ,items: this.view
             ,id: this.ident+'-browser-view'
-            ,cls: 'modx-pb-view-ct'
+            ,cls: 'modx-browser-view-ct'
             ,autoScroll: true
             ,border: false
             ,tbar: this.getToolbar()
@@ -108,7 +108,7 @@ MODx.Media = function(config) {
             region: 'east'
             ,width: 250
             ,id: this.ident+'-img-detail-panel'
-            ,cls: 'modx-pb-details-ct'
+            ,cls: 'modx-browser-details-ct'
             ,split: true
             //,collapsed: true
         }]

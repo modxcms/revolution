@@ -49,7 +49,7 @@ MODx.browser.RTE = function(config) {
         ,onSelect: MODx.onBrowserReturn || function(data) {}
         ,items: [{
             id: this.ident+'-browser-tree'
-            ,cls: 'modx-pb-browser-tree'
+            ,cls: 'modx-browser-tree'
             ,region: 'west'
             ,width: 250
             ,height: '100%'
@@ -58,7 +58,7 @@ MODx.browser.RTE = function(config) {
             ,autoScroll: true
         },{
             id: this.ident+'-browser-view'
-            ,cls: 'modx-pb-view-ct'
+            ,cls: 'modx-browser-view-ct'
             ,region: 'center'
             ,autoScroll: true
             ,width: 450
@@ -66,7 +66,7 @@ MODx.browser.RTE = function(config) {
             ,tbar: this.getToolbar()
         },{
             id: this.ident+'-img-detail-panel'
-            ,cls: 'modx-pb-details-ct'
+            ,cls: 'modx-browser-details-ct'
             ,region: 'east'
             ,split: true
             ,width: 200
@@ -74,7 +74,7 @@ MODx.browser.RTE = function(config) {
             ,maxWidth: 300
         },{
             id: this.ident+'-south'
-            ,cls: 'modx-pb-buttons'
+            ,cls: 'modx-browser-buttons'
             ,region: 'south'
             ,split: false
             ,bbar: ['->',{
