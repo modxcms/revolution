@@ -1115,7 +1115,8 @@ body.ext-ie7 .x-superboxselect-item {
 
 .dashboard-block {
   background-color: $white;
-  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: 3px;
   float: left;
   margin: 6px 0;
 }
