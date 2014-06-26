@@ -293,7 +293,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
 
     ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
-        this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
+        this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
         this.view.select(0);
     }
 

@@ -25,6 +25,7 @@ MODx.browser.RTE = function(config) {
         ,onUpload: function() { this.view.run(); }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
+        ,useDefaultToolbar: false
         ,hideFiles: true
         ,openTo: config.openTo || ''
         ,ident: this.ident
@@ -119,9 +120,15 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         });
     }
     
-    ,sortImages : function(){
-        var v = Ext.getCmp('sortSelect').getValue();
-        this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
+    ,sortStore: function(){
+        var v = Ext.getCmp(this.ident+'sortSelect').getValue();
+        this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
+        this.view.select(0);
+    }
+
+    ,changeViewmode: function() {
+        var v = Ext.getCmp(this.ident+'viewSelect').getValue();
+        this.view.setTemplate(v);
         this.view.select(0);
     }
     
@@ -141,7 +148,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             xtype: 'textfield'
             ,id: 'filter'
             ,selectOnFocus: true
-            ,width: 100
+            ,width: 200
             ,listeners: {
                 'render': {fn:function(){
                     Ext.getCmp('filter').getEl().on('keyup', function(){
@@ -168,7 +175,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
                 data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
             })
             ,listeners: {
-                'select': {fn:this.sortImages, scope:this}
+                'select': {fn:this.sortStore, scope:this}
             }
         },'-',{
             icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
@@ -176,6 +183,28 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             ,tooltip: {text: _('tree_refresh')}
             ,handler: function() { this.load(); }
             ,scope: this
+        }, '-', {
+            text: _('files_viewmode')+':'
+            ,xtype: 'label'
+        }, '-', {
+            id: this.ident+'viewSelect'
+            ,xtype: 'combo'
+            ,typeAhead: false
+            ,triggerAction: 'all'
+            ,width: 100
+            ,editable: false
+            ,mode: 'local'
+            ,displayField: 'desc'
+            ,valueField: 'type'
+            ,lazyInit: false
+            ,value: MODx.config.modx_browser_default_viewmode || 'grid'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type', 'desc'],
+                data : [['grid', _('files_viewmode_grid')],['list', _('files_viewmode_list')]]
+            })
+            ,listeners: {
+                'select': {fn:this.changeViewmode, scope:this}
+            }
         }];
     }
     
