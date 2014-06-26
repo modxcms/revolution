@@ -455,9 +455,11 @@ $_lang['setting_manager_week_start_desc'] = 'Legen Sie den Wochentag fest, mit d
 $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_default_sort'] = 'Datei-Browser-Standard-Sortierung';
+$_lang['setting_modx_browser_default_sort'] = 'Datei-Browser Standard-Sortierung';
 $_lang['setting_modx_browser_default_sort_desc'] = 'Das standardmäßige Sortierkriterium bei Benutzung des Popup-Datei-Browsers im Manager. Mögliche Werte sind: name, size, lastmod (Abkürzung für "last modified").';
-
+$_lang['setting_modx_browser_default_viewmode'] = 'Datei-Browser Standard-Ansicht';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'Der standardmäßige Ansichtsmodus bei Benutzung des Popup-Datei-Browsers im Manager. Mögliche Werte sind: grid, list.';
+  
 $_lang['setting_modx_charset'] = 'Zeichencodierung';
 $_lang['setting_modx_charset_desc'] = 'Bitte wählen Sie die Zeichencodierung, die Sie verwenden möchten. Bitte beachten Sie, dass MODX zwar mit einigen dieser Codierungen getestet wurde, aber nicht mit allen. Für die meisten Sprachen ist die Standardeinstellung "UTF-8" vorzuziehen.';
 
