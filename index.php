@@ -20,10 +20,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
  */
-$mtime= microtime();
-$mtime= explode(" ", $mtime);
-$mtime= $mtime[1] + $mtime[0];
-$tstart= $mtime;
+$tstart= microtime(true);
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
