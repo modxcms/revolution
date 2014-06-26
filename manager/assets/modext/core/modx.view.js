@@ -20,7 +20,6 @@ MODx.DataView = function(config) {
         store: this.store
         ,singleSelect: true
         ,overClass: 'x-view-over'
-        ,itemSelector: 'div.modx-browser-thumb-wrap'
         ,emptyText: '<div style="padding:10px;">'+_('file_err_filter')+'</div>'
         ,closeAction: 'hide'
     });
@@ -179,6 +178,7 @@ MODx.browser.Window = function(config) {
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
         ,id: this.ident+'-tree'
         ,hideSourceCombo: config.hideSourceCombo || false
+        ,useDefaultToolbar: false
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
             ,'changeSource': {fn:function(s) {
@@ -288,12 +288,18 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,allowedFileTypes: this.config.allowedFileTypes || ''
             ,wctx: this.config.wctx || 'web'
         });
-        this.sortImages();
+        this.sortStore();
     }
 
-    ,sortImages : function(){
+    ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
+        this.view.select(0);
+    }
+
+    ,changeViewmode: function() {
+        var v = Ext.getCmp(this.ident+'viewSelect').getValue();
+        this.view.setTemplate(v);
         this.view.select(0);
     }
 
@@ -314,7 +320,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             xtype: 'textfield'
             ,id: this.ident+'filter'
             ,selectOnFocus: true
-            ,width: 100
+            ,width: 200
             ,listeners: {
                 'render': {fn:function(){
                     Ext.getCmp(this.ident+'filter').getEl().on('keyup', function(){
@@ -342,7 +348,29 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
                 data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
             })
             ,listeners: {
-                'select': {fn:this.sortImages, scope:this}
+                'select': {fn:this.sortStore, scope:this}
+            }
+        }, '-', {
+            text: _('files_viewmode')+':'
+            ,xtype: 'label'
+        }, '-', {
+            id: this.ident+'viewSelect'
+            ,xtype: 'combo'
+            ,typeAhead: false
+            ,triggerAction: 'all'
+            ,width: 100
+            ,editable: false
+            ,mode: 'local'
+            ,displayField: 'desc'
+            ,valueField: 'type'
+            ,lazyInit: false
+            ,value: MODx.config.modx_browser_default_viewmode || 'grid'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type', 'desc'],
+                data : [['grid', _('files_viewmode_grid')],['list', _('files_viewmode_list')]]
+            })
+            ,listeners: {
+                'select': {fn:this.changeViewmode, scope:this}
             }
         }];
     }
@@ -376,7 +404,7 @@ MODx.browser.View = function(config) {
         url: MODx.config.connector_url
         ,id: this.ident
         ,fields: [
-            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled'
+            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
             ,{name:'size', type: 'float'}
             ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
             ,'menu'
@@ -391,14 +419,12 @@ MODx.browser.View = function(config) {
             ,wctx: config.wctx || 'web'
             ,dir: config.openTo || ''
         }
-        ,sortInfo: {
-            field: MODx.config.modx_browser_default_sort || 'name'
-            ,direction: 'ASC'
-        }
-        ,tpl: this.templates.thumb
+        ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
+        ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
         ,listeners: {
             'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
             ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
+            ,'render': {fn:this.sortStore, scope:this}
         }
         ,prepareData: this.formatData.createDelegate(this)
     });
@@ -439,9 +465,27 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
         this.store.load({
             params: p
-            ,callback: function() { this.refresh(); }
+            ,callback: function() { this.refresh(); this.select(0); }
             ,scope: this
         });
+    }
+
+    ,setTemplate: function(tpl) {
+        if (tpl === 'list') {
+            this.tpl = this.templates.list;
+            this.itemSelector = 'div.modx-browser-list-item';
+        } else {
+            this.tpl = this.templates.thumb;
+            this.itemSelector = 'div.modx-browser-thumb-wrap';
+        }
+        this.refresh();
+        this.select(0);
+    }
+
+    ,sortStore : function() {
+        var v = MODx.config.modx_browser_default_sort || 'name'
+        this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
+        this.select(0);
     }
 
     ,showDetails : function(){
@@ -474,7 +518,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
         data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
-        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format("m/d/Y g:i a") : 0;
+        data.imageSizeString = data.preview != 0 ? data.image_width + "x" + data.image_height + "px": 0;
+        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
         this.lookup[data.name] = data;
         return data;
     }
@@ -491,6 +536,23 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         );
         this.templates.thumb.compile();
 
+        this.templates.list = new Ext.XTemplate(
+            '<tpl for=".">'
+                ,'<div class="modx-browser-list-item" id="{name}">'
+                ,'  <span class="icon icon-file {cls}">'
+                ,'      <span class="file-name">{name}</span>'
+                ,'      <tpl if="sizeString !== 0">'
+                ,'      <span class="file-size">{sizeString}</span>'
+                ,'      </tpl>'
+                ,'      <tpl if="imageSizeString !== 0">'
+                ,'      <span class="image-size">{imageSizeString}</span>'
+                ,'      </tpl>'
+                ,'  </span>'
+                ,'</div>'
+            ,'</tpl>'
+        );
+        this.templates.list.compile();
+
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
             ,'  <tpl for=".">'
@@ -500,22 +562,22 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  <div class="modx-browser-details-info">'
             ,'      <b>'+_('file_name')+':</b>'
             ,'      <span>{name}</span>'
-            ,'  <tpl if="this.isEmpty(sizeString) == false">'
+            ,'  <tpl if="sizeString !== 0">'
             ,'      <b>'+_('file_size')+':</b>'
             ,'      <span>{sizeString}</span>'
             ,'  </tpl>'
-            ,'  <tpl if="this.isEmpty(dateString) == false">'
+            ,'  <tpl if="imageSizeString !== 0">'
+            ,'      <b>'+_('image_size')+':</b>'
+            ,'      <span>{imageSizeString}</span>'
+            ,'  </tpl>'
+            ,'  <tpl if="dateString !== 0">'
             ,'      <b>'+_('last_modified')+':</b>'
             ,'      <span>{dateString}</span>'
             ,'  </tpl>'
             ,'  </div>'
             ,'  </tpl>'
             ,'</div>'
-        ,{
-            isEmpty: function (v) {
-                return (v == '' || v == null || v == undefined || v === 0);
-            }
-        });
+        );
         this.templates.details.compile();
     }
     ,showFullView: function(name,ident) {
@@ -542,8 +604,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             });
         }
         this.fvWin.show();
-        var w = data.image_width < 250 ? 250 : data.image_width;
-        var h = data.image_height < 200 ? 200 : data.image_height;
+        var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
+        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
