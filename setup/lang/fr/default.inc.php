@@ -199,7 +199,6 @@ $_lang['retry'] = 'Rééssayer';
 $_lang['security_notice'] = 'Notice de sécurité';
 $_lang['select'] = 'Sélectionner';
 $_lang['settings_handler_err_nf'] = 'MODX ne trouve pas la classe "modInstallSettings" à l\'adresse: [[+path]]. Merci de vérifier que vous avez bien téléversé tous les fichiers.';
-$_lang['settings_handler_err_nf'] = 'MODX could not find the modInstallSettings class at: [[+path]]. Please ensure you have uploaded all the files.';
 $_lang['setup_err_remove'] = 'Une erreur est survenue lors de la suppression du répertoire d\'installation.';
 $_lang['setup_err_assets'] = 'Votre répertoire assets/ n\'a pas été créé dans: [[+path]] <br />Vous allez devoir créer ce répertoire et le rendre accessible en écriture si vous souahitez utiliser le Gestionnaire de Paquets ou des Composants tierces.';
 $_lang['setup_err_assets_comp'] = 'Votre répertoire assets/components/ n\'a pas été créé dans: [[+path]] <br />Vous allez devoir créer ce répertoire et le rendre accessible en écriture si vous souahitez utiliser le Gestionnaire de Paquets ou des Composants tierces.';
