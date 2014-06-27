@@ -17,7 +17,7 @@ $fa-css-prefix:       icon;
 @import "tree";
 @import "help";
 
-body, body.x-border-layout-ct {
+body {
   color: $mainText;
   font:  $baseText;
   -webkit-font-smoothing: antialiased;
@@ -142,6 +142,7 @@ hr {
 
 #modx-resource-tabs {
   margin: 20px 0 0;
+
   @extend %shaded-tab-box;
   .x-tab-panel-header {
     width:auto !important; /* #shame */
@@ -177,6 +178,7 @@ hr {
 
 #modx-resource-content {
   background-color: $tabStripBg;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
   .x-panel-header {
       margin:0;
       padding: 15px;
@@ -1200,8 +1202,8 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* Panel description text */
 .panel-desc {
-  background-color: #F7F7F7;
-  border: 1px solid #E7E7E7 !important;
+  background-color: #f5f5f5;
+  border: none;
   color: #5A5A5A;
   line-height: 1.5;
   margin-top: 5px;

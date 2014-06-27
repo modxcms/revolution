@@ -8,7 +8,7 @@
   }
   /* the toolbars just below the tabs */
   & .x-toolbar {
-    padding: 4px 5px 5px;
+    padding: 6px 5px 0px;
   }
   /* root box contaiing a context or category */
   & .x-tree-root-ct {
@@ -18,6 +18,16 @@
   & .x-tree .x-panel-body {
     backgroud: $white;
   }
+  
+  .x-tab-panel-bwrap {
+	  position: relative;
+	  z-index: 1;
+  }
+}
+
+#modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
+#modx-tree-element .x-toolbar-left .x-btn.tree-new-template {
+  margin-left: 16px;
 }
 
 #modx-leftbar-tabpanel {
@@ -56,13 +66,14 @@
 }
 
 .modx-tree {
-  padding: 0 5px 5px 5px;
+  padding: 0;
   #modx-file-tree & {
     &:first-child {
       padding-top: 5px;
     }
     .tree-pseudoroot-node {
       margin-top: 0;
+      margin-bottom: 0;
     }
   }
 }
@@ -124,7 +135,7 @@
 
 /* tree states */
 .x-tree-node-el {
-  color: $brandText;
+  color: $treeColor;
   font: $treeNodeFont;
   padding-left: 6px;
 
@@ -133,9 +144,13 @@
     box-shadow: none;
   }
 
-  .icon-large {
+  .icon {
     display: inline-block;
     width: 1em;
+
+    font-size: 1.15em;
+    line-height: (3em / 4);
+    vertical-align: -15%;
   }
 
   // For legacy icons
@@ -191,7 +206,7 @@
   color: $disabled;
 }
 .x-tree-node .x-tree-node-disabled a span {
-  color: lighten($brandText, 50%);
+  color: lighten($treeColor, 50%);
 }
 
 .element-node-locked a span {
@@ -205,7 +220,7 @@
 .modx-tree-node-tool-ct {
 	position:absolute;
 	top:0;
-	right:0;
+	right:6px;
     bottom:0;
     line-height:1.8;
 }
@@ -216,32 +231,47 @@
   padding: 0 !important;
 }
 
-.tree-pseudoroot-node {
-  background-color: $brandbg;
-  border-radius: 4px;
+.tree-pseudoroot-node.x-tree-node-el {
+  background-color: $treePseudoRootBg;
   font: $treePseudoRootFont;
   position:relative;
   padding: 0 0 0 4px;
-  margin-top: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 
-  > .icon-large {
+  a span {
+    color: $treePseudoRootColor;
+  }
+
+  > .icon {
     font-weight: normal;
+    color: $treePseudoRootColor;
+    font-size: (4em / 3);
+    line-height: (3em / 4);
+    vertical-align: -15%;
   }
 
   .modx-tree-node-tool-ct {
     line-height: 35px;
+    opacity: .5;
     .x-btn {
       margin-left: 2px;
     }
   }
-  &.x-tree-node-expanded, &.x-tree-node-expanded span {
-    color: $colorSplash;
+  &.x-tree-node-expanded, &.x-tree-node-expanded span, &.x-tree-node-expanded > .icon {
+    color: $treePseudoRootOverColor;
+    background-color: $treePseudoRootOverBg;
   }
   &.x-tree-node-over {
-    background-color: $brandHover;
+    background-color: $treePseudoRootOverBg;
+    color: $treePseudoRootOverColor;
   }
   + .x-tree-node-ct {
     margin-left: -16px;
+    padding: 5px 0;
+  }
+  &:hover .modx-tree-node-tool-ct {
+    opacity: 1;
   }
 }
 
@@ -270,6 +300,30 @@
   width: 15px;
 }
 
+/* accordion header row icons */
+#modx-leftbar .icon,
+.x-tree-node /*.modx-tree-node-tool-ct*/ .icon {
+  background: none;
+  border: 0;
+  display: inline-block;
+  margin: 0;
+  padding: 3px;
+  text-align: center;
+  opacity: 0.8;
+  i {
+    font-style: normal;
+  }
+  button {
+    display: none;
+  }
+}
+
+.x-tree-node-ct .x-tree-node .icon {
+	position: relative;
+	top: -1px;
+	left: 1px;
+}
+
 
 
 /* drag and drop styles */
@@ -277,7 +331,7 @@
 .x-dd-drag-ghost a,
 .x-tree-node a span,
 .x-dd-drag-ghost a span {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node div.x-tree-drag-insert-below {
   border-bottom-color: #686868;
@@ -557,7 +611,7 @@
 }
 .tree-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-o;
+  content:$fa-var-file;
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
@@ -573,16 +627,16 @@
 }
 
 .x-tree-node {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node a, .x-dd-drag-ghost a {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node a span, .x-dd-drag-ghost a span {
-  color: $brandText;
+  color: $treeColor;
 }
 .x-tree-node .x-tree-node-disabled a span {
-  color: lighten($brandText, 50%);
+  color: lighten($treeColor, 50%);
 }
 .x-tree-node div.x-tree-drag-insert-below {
   border-bottom-color: #686868;

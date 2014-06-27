@@ -524,7 +524,7 @@ class modX extends xPDO {
     public function initialize($contextKey= 'web', $options = null) {
         if (!$this->_initialized) {
             if (!$this->startTime) {
-                $this->startTime= $this->getMicroTime();
+                $this->startTime= microtime(true);
             }
 
             $this->getCacheManager();

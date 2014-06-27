@@ -803,8 +803,39 @@ td.x-date-mp-sep {
 .x-tip-anchor {
   background-image: url($imgPath + 'modx-theme/qtip/tip-anchor-sprite.gif');
 }
+.x-menu {
+  background-color: $menuBg;
+  border: $menuBorder;
+  border-radius: $menuBorderRadius;
+  box-shadow: $menuBoxShadow;
+}
 .x-menu-list {
   padding: 0;
+  li {
+    border: 0;
+    margin: 0;
+    padding: 0;
+
+    &:first-child {
+      margin-top: 3px;
+    }
+    &:last-child {
+      margin-bottom: 3px;
+    }
+
+    a.x-menu-item {
+      color: $menuTextColor;
+      font-size: 13px;
+      padding: 5px 20px 5px 15px;
+    }
+
+    &.x-menu-item-active {
+      background-color: $menuSelectedBg;
+      a {
+        color: $menuSelectedColor;
+      }
+    }
+  }
 }
 .x-menu-floating {
   border-color: #C7C7C7;
@@ -819,20 +850,9 @@ td.x-date-mp-sep {
   background-image: url($imgPath + 'modx-theme/menu/menu-parent.gif');
 }
 .x-menu-sep {
-  background-color: $subnavSepBorder;
+  background-color: $menuSeparatorColor;
   border-bottom: none;
-}
-a.x-menu-item {
-  color: $menuTextColor;
-  font-size: 13px;
-  padding: 4px 25px 4px 30px;
-}
-.x-menu-item-active {
-  background-color: $menuSelectedBg;
-  background-image: none;
-  border: 0 none;
-  margin: 0;
-  padding: 1px;
+  margin: 2px 0;
 }
 .x-menu-item-active a.x-menu-item {
   border: 0 none;
@@ -931,14 +951,6 @@ a.x-menu-item {
 }
 #x-debug-browser .x-tree .x-tree-node .x-tree-selected a span {
   background-color: #d8d8d8;
-}
-.x-menu {
-  background-color: $menuBg;
-  border-color: transparent;
-  border-radius: 0 0 5px 5px;
-}
-.x-menu-list {
-  background-color: $menuBg;
 }
 
 .x-combo-list {
@@ -1639,4 +1651,24 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window-maximized .x-window-tc {
   padding-left: 0;
   padding-right: 0;
+}
+.x-superboxselect,
+.x-superboxselect-btns {
+  overflow: visible;
+}
+.x-superboxselect-input input {
+  background: transparent;
+}
+.x-superboxselect-btn-expand {
+  margin-top: 9px !important; margin-right: 6px;
+}
+.x-superboxselect-btn-clear {
+  background-color: #fbfbfb;
+  height: 17px !important;
+  top: -4px;
+  outline: 1px solid #e4e4e4;
+  border: 12px solid #fbfbfb;
+  position: absolute;
+  right: -42px;
+  display: block;
 }

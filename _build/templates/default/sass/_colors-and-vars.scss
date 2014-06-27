@@ -1,5 +1,5 @@
 /* Brand colors */
-$brandbg: #ffffff;
+$brandBg: #ffffff;
 $brandHover: #e8f0f8;
 $brandSelectedBg: darken($brandHover, 3%);
 $brandSelectedColor: #3697cd;
@@ -16,9 +16,17 @@ $dropdownBg: #ffffff;
 $dropdownSelectedBg: #e1ecf1;
 $dropdownTextColor: #444444;
 $dropdownBorder: #e4e4e4;
-$menuBg: $brandSelectedBg;
-$menuSelectedBg: darken($brandSelectedBg, 3%);
-$menuTextColor: #f2f2f2;
+
+/* Context menu */
+$menuBg: $brandBg;
+$menuBorder: 1px solid #bbb;
+$menuBorderRadius: 3px;
+$menuBoxShadow: 0 0 5px rgba(0, 0, 0, 0.25);
+$menuSelectedBg: #30759c;
+$menuSelectedColor: $brandBg;
+$menuTextColor: #555555;
+$menuSeparatorColor: #cccccc;
+
 $white: #ffffff;
 $mainBg: #F2F2F2;
 $softGrey: #dcdcdc;
@@ -52,10 +60,16 @@ $tipText: $gainsboro;
 $lightSplash: lighten($colorSplash, 42.5%);
 $mainText: $black;
 $headerText: #555555;
+$treeColor: #556C88;
+$treeColor_2: #728DA7;
+$treePseudoRootBg: $lightBg;
+$treePseudoRootColor: #447996;
+$treePseudoRootOverBg: $lightBg; /* $brandHover; */
+$treePseudoRootOverColor: #447996; /* #1A7FB8; */
 
 /* Tree menus */
 $iconColor: $treeText;
-$unpublished: lighten($treeText, 20%) !important;
+$unpublished: lighten($treeText, 10%) !important;
 $disabled: $unpublished;
 $hidden: $unpublished;
 $unpubText: italic;
@@ -96,12 +110,13 @@ $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 
 
 $tabBg: $white;
-$tabStripBg: #f5f5f5;
+$tabStripBg: transparent;
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: $colorSplash;
-$tabInactiveText: #757575;
+$tabInactiveText: $colorSplash;
 $tabHoverText: darken($colorSplash, 20%);
+$tabActiveText: #1A7FB8;
 
 /* text colors and font stacks */
 $selected: lighten(desaturate($colorSplash,40%),40%);
@@ -119,7 +134,8 @@ $treePseudoRootFont: normal 14px/35px $headfonts;
 $treeNodeFont: normal 13px/22px $bodyfonts;
 
 
-$buttonColor: $brandSelectedColor;
+$buttonColor: #728DA7;
+$buttonHoverColor: $brandSelectedColor;
 $regularButtonColor: #707070;
 $buttonBackground: $white;
 $buttonColorActive: $white;
