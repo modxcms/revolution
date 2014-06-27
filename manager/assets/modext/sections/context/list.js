@@ -12,10 +12,10 @@ MODx.page.Contexts = function(config) {
 		components: [{
             xtype: 'modx-panel-contexts'
         }]
-        /*,buttons: [{
+        ,buttons: [{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }]*/
+        }]
 	});
 	MODx.page.Contexts.superclass.constructor.call(this,config);
 };

@@ -50,18 +50,6 @@ MODx.panel.ErrorLog = function(config) {
                     ,scope: this
                 }]
             }]
-            ,buttonAlign: 'center'
-            ,buttons: [{
-                text: _('clear')
-                ,handler: this.clear
-                ,scope: this
-                ,hidden: MODx.hasEraseErrorLog ? false : true
-            },{
-                text: _('ext_refresh')
-                ,handler: this.refreshLog
-                ,scope: this
-                ,hidden: config.record.tooLarge
-            }]
         }]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
@@ -76,44 +64,6 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
         return true;
-    }
-    ,clear: function() {
-        this.el.mask(_('working'));
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'system/errorlog/clear'
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.el.unmask();
-                    if (!r.object.tooLarge && this.config.record.tooLarge) {
-                        location.href = location.href;
-                    } else {
-                        this.getForm().setValues(r.object);
-                    }
-                },scope:this}
-            }
-        });
-    }
-    ,refreshLog: function() {
-        this.el.mask(_('working'));
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'system/errorlog/get'
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.el.unmask();
-                    if (r.object.tooLarge) {
-                        location.href = location.href;
-                    } else {
-                        this.getForm().setValues(r.object);
-                    }
-                },scope:this}
-            }
-        });
     }
     ,download: function() {
         location.href = this.config.url+'?action=system/errorlog/download&HTTP_MODAUTH='+MODx.siteId;

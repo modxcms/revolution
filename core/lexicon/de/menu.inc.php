@@ -16,6 +16,8 @@ $_lang['action_desc'] = 'Der Controller-Pfad, der für diesen Menüpunkt genutzt
 $_lang['description_desc'] = 'Der Text oder Lexikon-Schlüssel, der für die Darstellung der Beschreibung dieser Seite im Menü verwendet wird.';
 $_lang['handler'] = 'Handler';
 $_lang['handler_desc'] = '(Optional) Wenn hier etwas eingetragen ist, wird nicht das Aktions-Feld genutzt, sondern stattdessen dieser JavaScript-Code ausgeführt, wenn der Menüpunkt angeklickt wird.';
+$_lang['icon'] = 'Icon';
+$_lang['icon_desc'] = 'Ein optionales Icon / optionaler Code.';  // markup
 $_lang['lexicon_key'] = 'Lexikon-Schlüssel';
 $_lang['lexicon_key_desc'] = 'Der Text oder Lexikon-Schlüssel, der für die Darstellung des Titels dieser Seite im Menü verwendet wird.';
 $_lang['menu_create'] = 'Menüpunkt erstellen';
@@ -35,7 +37,7 @@ $_lang['menus'] = 'Menüs';
 $_lang['namespace'] = 'Namensraum';
 $_lang['namespace_desc'] = 'Der Namensraum, auf dem dieser Menüpunkt basiert. Hierdurch wird der Pfad für den Controller festgelegt, der geladen wird.';
 $_lang['parameters'] = 'Parameter';
-$_lang['parameters_desc'] = 'Beliebige Request-Parameter, die an die Ergebnis-URL angehängt werden sollen, wenn dieser Menüpunkt angeklickt wird (z. B.: &expire=1).';
+$_lang['parameters_desc'] = 'Beliebige Request-Parameter, die an die Ergebnis-URL angehängt werden sollen, wenn dieser Menüpunkt angeklickt wird (z.B.: &expire=1).';
 $_lang['permissions'] = 'Zugriffsberechtigung';
 $_lang['permissions_desc'] = 'Ein Zugangsschlüssel, der abgefragt werden soll, wenn dieser Menüpunkt aufgerufen wird.';
 $_lang['topmenu'] = 'Hauptmenü';

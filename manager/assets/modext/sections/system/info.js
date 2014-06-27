@@ -11,7 +11,6 @@ MODx.page.SystemInfo = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-system-info'
-            ,renderTo: 'modx-panel-system-info-div'
             ,data: config.data
         }]
     });
@@ -68,7 +67,7 @@ MODx.panel.SystemInfo = function(config) {
 		xtype: 'statictextfield'
 		,fieldLabel: _('phpmailer_version')
 		,name: 'phpmailer_version'
-		,value: '2.0.4'
+		,value: '5.2.8'
 	},{
 		xtype: 'statictextfield'
 		,fieldLabel: _('magpie_version')

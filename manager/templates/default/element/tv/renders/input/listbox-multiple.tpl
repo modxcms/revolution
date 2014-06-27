@@ -24,7 +24,7 @@ Ext.onReady(function() {
         ,triggerAction: 'all'
         ,mode: 'local'
         ,extraItemCls: 'x-tag'
-        ,width: 400
+        ,width: 359
         ,displayField: "text"
         ,valueField: "value"
         ,resizable: true

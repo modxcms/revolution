@@ -17,6 +17,7 @@ MODx.grid.Context = function(config) {
         ,fields: ['key','name','description','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'context/updatefromgrid'
         ,remoteSort: true
         ,primaryKey: 'key'
         ,columns: [{
@@ -40,6 +41,7 @@ MODx.grid.Context = function(config) {
         ,tbar: [{
             text: _('create_new')
             ,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
+            ,cls:'primary-button'
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
@@ -123,6 +125,7 @@ MODx.window.CreateContext = function(config) {
         title: _('context_create')
         ,url: MODx.config.connector_url
         ,action: 'context/create'
+        ,cls:'primary-button'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('context_key')

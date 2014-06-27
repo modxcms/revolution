@@ -4,7 +4,7 @@ MODx.panel.DashboardWidget = function(config) {
     var itms = [];
     itms.push({
         title: _('general_information')
-        ,cls: 'container form-with-labels'
+        ,cls: 'form-with-labels'
         ,border: false
         ,defaults: { border: false ,msgTarget: 'side' }
         ,layout: 'form'
@@ -179,7 +179,6 @@ MODx.panel.DashboardWidget = function(config) {
                 ,preventRender: true
                 ,widget: config.record.id
                 ,autoHeight: true
-                ,width: '97%'
                 ,listeners: {
                     'afterRemoveRow': {fn:this.markDirty,scope:this}
                     ,'updateRole': {fn:this.markDirty,scope:this}
@@ -208,7 +207,7 @@ MODx.panel.DashboardWidget = function(config) {
                 autoHeight: true
                 ,border: false
             }
-            ,border: true
+            //,border: true
             ,id: 'modx-dashboard-widget-tabs'
             ,forceLayout: true
             ,deferredRender: false
@@ -237,7 +236,9 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.get('modx-dashboard-widget-header').update('<h2>'+_('widget')+': '+this.config.record.name_trans+'</h2>');
+        Ext.defer(function() {
+            Ext.get('modx-dashboard-widget-header').update('<h2>'+_('widget')+': '+this.config.record.name_trans+'</h2>');
+        }, 250, this);
 
         var d = this.config.record.dashboards;
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');

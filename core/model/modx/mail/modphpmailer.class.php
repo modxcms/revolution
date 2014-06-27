@@ -179,6 +179,11 @@ class modPHPMailer extends modMail {
     public function send(array $attributes= array()) {
         $sent = parent :: send($attributes);
         $sent = $this->mailer->Send();
+        if ($send !== true) {
+            $this->modx->loadClass('error.modError');
+            $this->error = new modError($this->modx);
+            $this->error->addError($this->mailer->ErrorInfo);
+        }
         return $sent;
     }
 

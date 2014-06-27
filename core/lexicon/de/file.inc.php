@@ -12,7 +12,7 @@
  * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['directory'] = 'Verzeichnis';
-$_lang['file_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Datei löschen möchten? Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
+$_lang['file_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Datei löschen möchten? Das Löschen einer Datei kann möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert. Stellen Sie sicher, dass Sie wissen, welchen Zweck diese Datei erfüllt, bevor Sie sie löschen.';
 $_lang['file_create'] = 'Datei erstellen';
 $_lang['file_deleted'] = 'Erfolgreich!';
 $_lang['file_delete_file'] = 'Datei löschen';
@@ -120,3 +120,20 @@ $_lang['upf_upload_err'] = 'Upload-Fehler.';
 $_lang['upf_uploading'] = 'Lade hoch...';
 $_lang['upf_uploading_desc'] = 'Lade hoch: {0} von {1} Dateien übertragen.';
 $_lang['upload_files'] = 'Dateien hochladen';
+$_lang['no_file_err'] = 'Es wurde keine Datei hochgeladen.';
+
+$_lang['upload.buttons.choose']           = 'Datei(en) auswählen';
+$_lang['upload.buttons.clear']            = 'Liste leeren';
+$_lang['upload.buttons.upload']           = 'Hochladen';
+$_lang['upload.buttons.close']            = 'Schließen';
+$_lang['upload.title.destination_path']   = 'Speicherziel: [[+path]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Hochladen des Dateityps (.[[+ext]]) ist nicht erlaubt!';
+$_lang['upload.notpermitted.filesize']    = 'Datei größer ([[+size]]) als erlaubt! (max. [[+max]])';
+$_lang['upload.columns.file']             = 'Datei';
+$_lang['upload.columns.state']            = 'Status';
+$_lang['upload.contextmenu.remove_entry'] = 'Eintrag entfernen';
+$_lang['upload.clear_list.all']           = 'Gesamte Liste leeren';
+$_lang['upload.clear_list.notpermitted']  = 'Nur ungültige Einträge entfernen';
+$_lang['upload.msg.title.error']          = 'Fehler';
+$_lang['upload.upload.success']           = 'Upload erfolgreich';

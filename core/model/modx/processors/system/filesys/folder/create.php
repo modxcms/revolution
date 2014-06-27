@@ -16,7 +16,8 @@ if (!is_dir($scriptProperties['path']))
 	return $modx->error->failure($modx->lexicon('file_folder_err_invalid_path'));
 
 // setup vars
-$amode = !empty($modx->getOption('new_folder_permissions')) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
+$nfp = $modx->getOption('new_folder_permissions');
+$amode = !empty($nfp) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
 $new_folder = $scriptProperties['path'].'/'.$scriptProperties['name'];
 
 if (file_exists($new_folder))
@@ -31,7 +32,6 @@ if (!mkdirs($new_folder,$amode)) {
 		return $modx->error->failure($modx->lexicon('file_folder_err_chmod'));
 	}
 }
-
 
 // recursive mkdir function
 function mkdirs($strPath, $mode){

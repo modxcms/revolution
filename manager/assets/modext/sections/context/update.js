@@ -1,4 +1,4 @@
-/** 
+/**
  * @class MODx.page.UpdateContext
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -15,7 +15,7 @@ MODx.page.UpdateContext = function(config) {
             ,cancel: 'context/view'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'context/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -29,14 +29,13 @@ MODx.page.UpdateContext = function(config) {
             ,params: {
                 a: 'context'
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-context'
-            ,renderTo: 'modx-panel-context-div'
-            ,context: config.context
+            ,context: MODx.request.key
         }]
     });
     MODx.page.UpdateContext.superclass.constructor.call(this,config);

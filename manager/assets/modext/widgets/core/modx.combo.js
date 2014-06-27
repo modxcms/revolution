@@ -1,6 +1,24 @@
 Ext.namespace('MODx.combo');
 /* fixes combobox value loading issue */
-Ext.override(Ext.form.ComboBox,{loaded:false,setValue:Ext.form.ComboBox.prototype.setValue.createSequence(function(v){var a=this.store.find(this.valueField,v);if(v&&v!==0&&this.mode=='remote'&&a==-1&&!this.loaded){var p={};p[this.valueField]=v;this.loaded=true;this.store.load({scope:this,params:p,callback:function(){this.setValue(v);this.collapse()}})}})});
+Ext.override(Ext.form.ComboBox, {
+    loaded: false
+    ,setValue: Ext.form.ComboBox.prototype.setValue.createSequence(function(v) {
+        var a = this.store.find(this.valueField, v);
+        if (v && v !== 0 && this.mode == 'remote' && a == -1 && !this.loaded) {
+            var p = {};
+            p[this.valueField] = v;
+            this.loaded = true;
+            this.store.load({
+                scope: this
+                ,params: p
+                ,callback: function() {
+                    this.setValue(v);
+                    this.collapse()
+                }
+            })
+        }
+    })
+});
 
 MODx.combo.ComboBox = function(config,getStore) {
     config = config || {};
@@ -20,6 +38,7 @@ MODx.combo.ComboBox = function(config,getStore) {
         ,forceSelection: true
         ,minChars: 3
         ,cls: 'modx-combo'
+        ,tries: 0
     });
     Ext.applyIf(config,{
         store: new Ext.data.JsonStore({
@@ -31,6 +50,12 @@ MODx.combo.ComboBox = function(config,getStore) {
             ,baseParams: config.baseParams || {}
             ,remoteSort: config.remoteSort || false
             ,autoDestroy: true
+            ,listeners: {
+                'loadexception': {fn: function(o,trans,resp) {
+                    var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
+                    MODx.msg.alert(_('error'), status + resp.responseText);
+                }}
+            }
         })
     });
     if (getStore === true) {
@@ -39,9 +64,61 @@ MODx.combo.ComboBox = function(config,getStore) {
     }
     MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
+    this.store.on('load', function() {
+        // Workaround to let the combobox know the store is loaded (to help hide/display the pagination if required)
+        this.loaded = true;
+    }, this, {
+        single: true
+    });
     return this;
 };
-Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox);
+Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
+    expand : function(){
+        if(this.isExpanded() || !this.hasFocus){
+            return;
+        }
+
+        if (this.mode == 'remote' && !this.loaded && this.tries < 4) {
+            // Store not yet loaded, let's wait a little bit
+            this.tries += 1;
+            Ext.defer(this.expand, 250, this);
+            return false;
+        }
+        this.tries = 0;
+
+        if(this.title || this.pageSize){
+            this.assetHeight = 0;
+            if(this.title){
+                this.assetHeight += this.header.getHeight();
+            }
+            if(this.pageSize < this.store.getTotalCount()){
+                this.assetHeight += this.footer.getHeight();
+            } else {
+                this.list.setHeight(this.list.getHeight() - this.footer.getHeight());
+                this.pageTb.hide();
+            }
+        }
+
+        if(this.bufferSize){
+            this.doResize(this.bufferSize);
+            delete this.bufferSize;
+        }
+        this.list.alignTo.apply(this.list, [this.el].concat(this.listAlign));
+
+        // zindex can change, re-check it and set it if necessary
+        this.list.setZIndex(this.getZIndex());
+        this.list.show();
+        if(Ext.isGecko2){
+            this.innerList.setOverflow('auto'); // necessary for FF 2.0/Mac
+        }
+        this.mon(Ext.getDoc(), {
+            scope: this,
+            mousewheel: this.collapseIf,
+            mousedown: this.collapseIf
+        });
+        this.fireEvent('expand', this);
+    }
+});
 Ext.reg('modx-combo',MODx.combo.ComboBox);
 
 Ext.util.Format.comboRenderer = function (combo,val) {
@@ -277,7 +354,7 @@ MODx.combo.Category = function(config) {
     MODx.combo.Category.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.combo.Category,MODx.combo.ComboBox,{
-    _onblur: function(t,e) { 
+    _onblur: function(t,e) {
         var v = this.getRawValue();
         this.setRawValue(v);
         this.setValue(v,true);
@@ -417,7 +494,7 @@ MODx.combo.ContentDisposition = function(config) {
     });
     MODx.combo.ContentDisposition.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.combo.ContentDisposition,Ext.form.ComboBox);
+Ext.extend(MODx.combo.ContentDisposition,MODx.combo.ComboBox);
 Ext.reg('modx-combo-content-disposition',MODx.combo.ContentDisposition);
 
 MODx.combo.ClassMap = function(config) {
@@ -472,7 +549,7 @@ MODx.combo.Object = function(config) {
         name: 'object'
         ,hiddenName: 'object'
         ,url: MODx.config.connector_url
-        ,baseParams: { 
+        ,baseParams: {
             action: 'workspace/builder/getAssocObject'
             ,class_key: 'modResource'
         }
@@ -523,15 +600,16 @@ MODx.combo.Browser = function(config) {
 };
 Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
     browser: null
-    
+
     ,onTriggerClick : function(btn){
         if (this.disabled){
             return false;
         }
-        
-        if (this.browser === null) {
+
+        //if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
+                ,closeAction: 'close'
                 ,id: Ext.id()
                 ,multiple: true
                 ,source: this.config.source || 1
@@ -549,11 +627,11 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                     },scope:this}
                 }
             });
-        }
+        //}
         this.browser.show(btn);
         return true;
     }
-    
+
     ,onDestroy: function(){
         MODx.combo.Browser.superclass.onDestroy.call(this);
     }
@@ -610,7 +688,7 @@ MODx.ChangeParentField = function(config) {
         ,editable: false
         ,readOnly: false
         ,formpanel: 'modx-panel-resource'
-    });    
+    });
     MODx.ChangeParentField.superclass.constructor.call(this,config);
     this.config = config;
     this.on('click',this.onTriggerClick,this);
@@ -624,18 +702,18 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         var t = Ext.getCmp('modx-resource-tree');
         if (!t) return;
         p.d = p.d || p.v;
-        
+
         t.removeListener('click',this.handleChangeParent,this);
         t.on('click',t._handleClick,t);
         t.disableHref = false;
 
         MODx.debug('Setting parent to: '+p.v);
-        
+
         Ext.getCmp('modx-resource-parent-hidden').setValue(p.v);
-        
+
         this.setValue(p.d);
         this.oldValue = false;
-        
+
         Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
     }
     ,onTriggerClick: function() {
@@ -687,7 +765,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.disableHref = true;
 
         return true;}
-        
+
     ,handleChangeParent: function(node,e) {
         var t = Ext.getCmp('modx-resource-tree');
         if (!t) { return false; }
@@ -695,7 +773,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
 
         var id = node.id.split('_'); id = id[1];
         if (id == MODx.request.id) {
-            MODx.msg.alert('',_('resource_err_own_parent'));            
+            MODx.msg.alert('',_('resource_err_own_parent'));
             return false;
         }
 
@@ -875,3 +953,24 @@ MODx.combo.Authority = function(config) {
 };
 Ext.extend(MODx.combo.Authority,MODx.combo.ComboBox);
 Ext.reg('modx-combo-authority',MODx.combo.Authority);
+
+MODx.combo.ManagerTheme = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'theme'
+        ,hiddenName: 'theme'
+        ,displayField: 'theme'
+        ,valueField: 'theme'
+        ,fields: ['theme']
+        ,pageSize: 0
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'workspace/theme/getlist'
+        }
+        ,typeAhead: false
+        ,editable: false
+    });
+    MODx.combo.ManagerTheme.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.ManagerTheme,MODx.combo.ComboBox);
+Ext.reg('modx-combo-manager-theme',MODx.combo.ManagerTheme);

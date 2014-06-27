@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -780,7 +780,12 @@ class xPDOObject {
     public function set($k, $v= null, $vType= '') {
         $set= false;
         $callback= '';
-        $callable= !empty($vType) && is_callable($vType, false, $callback) ? true : false;
+        if ($this->_fieldMeta[$k]['generated'] === 'callback' && isset($this->_fieldMeta[$k]['callback']) && empty($vType)) {
+            $callable = is_callable($this->_fieldMeta[$k]['callback'], false, $callback);
+        } else {
+            $callable= !empty($vType) && is_callable($vType, false, $callback) ? true : false;
+        }
+
         $oldValue= null;
         $k = $this->getField($k);
         if (is_string($k) && !empty($k)) {
@@ -792,7 +797,7 @@ class xPDOObject {
                     }
                 }
                 if ($callable && $callback) {
-                    $set = $callback($k, $v, $this);
+                    $set = call_user_func_array($callback, array($k, $v, $this));
                 } else {
                     if (is_string($v) && $this->getOption(xPDO::OPT_ON_SET_STRIPSLASHES)) {
                         $v= stripslashes($v);
@@ -912,7 +917,7 @@ class xPDOObject {
             } elseif ($this->getOption(xPDO::OPT_HYDRATE_ADHOC_FIELDS)) {
                 $oldValue= isset($this->_fields[$k]) ? $this->_fields[$k] : null;
                 if ($callable) {
-                    $set = $callback($k, $v, $this);
+                    $set = call_user_func_array($callback, array($k, $v, $this));
                 } else {
                     $this->_fields[$k]= $v;
                     $set= true;

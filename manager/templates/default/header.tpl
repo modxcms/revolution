@@ -7,7 +7,7 @@
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
 
 {if $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
@@ -27,12 +27,13 @@
 <script src="{$_config.manager_url}min/index.php?g=coreJs3" type="text/javascript"></script>
 {/if}
 
+{if $_search}
 <script type="text/javascript">
     Ext.onReady(function() {
         new MODx.SearchBar;
     });
 </script>
-
+{/if}
 
 {$maincssjs}
 {foreach from=$cssjs item=scr}
@@ -46,17 +47,21 @@
     <div id="modx-header">
         <div id="modx-navbar">
             <ul id="modx-user-menu">
-                {$navbUser}
+                {* eval is used here to support nested variables *}
+                {eval var=$userNav}
             </ul>
+
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
-                    <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
+                    <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
+                {if $_search}
                 <li id="modx-manager-search"></li>
+                {/if}
                 {$navb}
             </ul>
         </div>
-
+    </div>
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
         <div id="modx-content">

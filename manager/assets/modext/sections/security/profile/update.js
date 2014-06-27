@@ -11,7 +11,6 @@ MODx.page.Profile = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-profile'
-            ,renderTo: 'modx-panel-profile-div'
             ,user: config.user
         }]
     });
@@ -64,11 +63,7 @@ MODx.panel.Profile = function(config) {
                 ,user: config.user
                 ,preventRender: true
             }]
-        }],{
-            border: true
-            ,defaults: { bodyStyle: 'padding: 15px; '}
-            ,id: 'modx-panel-profile-tabs'
-        })]
+        }])]
     });
     MODx.panel.Profile.superclass.constructor.call(this,config);
 };
@@ -150,6 +145,7 @@ MODx.panel.UpdateProfile = function(config) {
             text: _('save')
             ,scope: this
             ,handler: this.submit
+            ,cls:'primary-button'
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -234,6 +230,7 @@ MODx.panel.ChangeProfilePassword = function(config) {
             text: _('save')
             ,scope: this
             ,handler: this.submit
+            ,cls:'primary-button'
         }]
         ,listeners: {
             'success': {fn:this.success,scope:this}

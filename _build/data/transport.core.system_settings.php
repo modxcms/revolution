@@ -348,6 +348,15 @@ $settings['compress_js_groups']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['confirm_navigation']= $xpdo->newObject('modSystemSetting');
+$settings['confirm_navigation']->fromArray(array (
+  'key' => 'confirm_navigation',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['container_suffix']= $xpdo->newObject('modSystemSetting');
 $settings['container_suffix']->fromArray(array (
   'key' => 'container_suffix',
@@ -1065,7 +1074,7 @@ $settings['manager_theme']= $xpdo->newObject('modSystemSetting');
 $settings['manager_theme']->fromArray(array (
   'key' => 'manager_theme',
   'value' => 'default',
-  'xtype' => 'textfield',
+  'xtype' => 'modx-combo-manager-theme',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -1444,6 +1453,15 @@ $settings['resolve_hostnames']->fromArray(array (
 $settings['resource_tree_node_name']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_name']->fromArray(array (
   'key' => 'resource_tree_node_name',
+  'value' => 'pagetitle',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['resource_tree_node_name_fallback']= $xpdo->newObject('modSystemSetting');
+$settings['resource_tree_node_name_fallback']->fromArray(array (
+  'key' => 'resource_tree_node_name_fallback',
   'value' => 'pagetitle',
   'xtype' => 'textfield',
   'namespace' => 'core',
@@ -1865,6 +1883,24 @@ $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
   'value' => 'http://misc.modx.com/revolution/welcome.22.html',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['welcome_action']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_action']->fromArray(array (
+  'key' => 'welcome_action',
+  'value' => 'welcome',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['welcome_namespace']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_namespace']->fromArray(array (
+  'key' => 'welcome_namespace',
+  'value' => 'core',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',

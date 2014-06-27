@@ -59,6 +59,7 @@ MODx.grid.Dashboards = function(config) {
         ,fields: ['id','name','description','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'system/dashboard/updatefromgrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
@@ -83,6 +84,7 @@ MODx.grid.Dashboards = function(config) {
             text: _('dashboard_create')
             ,handler: this.createDashboard
             ,scope: this
+            ,cls:'primary-button'
         },'-',{
             text: _('bulk_actions')
             ,menu: [{
@@ -97,7 +99,7 @@ MODx.grid.Dashboards = function(config) {
             ,itemId: 'usergroup'
             ,emptyText: _('user_group_filter')+'...'
             ,baseParams: {
-                action: 'security/user/group/getList'
+                action: 'security/group/getlist'
                 ,addAll: true
             }
             ,value: ''
@@ -185,7 +187,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'system/dashboard/removeMultiple'
-                ,users: cs
+                ,dashboards: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {

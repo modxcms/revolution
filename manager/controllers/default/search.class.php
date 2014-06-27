@@ -10,7 +10,7 @@
  */
 class SearchManagerController extends modManagerController {
     public $searchQuery = '';
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -63,7 +63,7 @@ class SearchManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'search/search.tpl';
+        return '';
     }
 
     /**

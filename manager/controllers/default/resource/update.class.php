@@ -51,6 +51,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 ,canSave: '.($this->canSave ? 1 : 0).'
                 ,canEdit: '.($this->canEdit ? 1 : 0).'
                 ,canCreate: '.($this->canCreate ? 1 : 0).'
+                ,canCreateRoot: '.($this->canCreateRoot ? 1 : 0).'
                 ,canDuplicate: '.($this->canDuplicate ? 1 : 0).'
                 ,canDelete: '.($this->canDelete ? 1 : 0).'
                 ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
@@ -64,8 +65,10 @@ class ResourceUpdateManagerController extends ResourceManagerController {
     }
 
     public function getResource() {
-        if (empty($this->scriptProperties['id'])) return $this->failure($this->modx->lexicon('resource_err_nf'));
-        $this->resource = $this->modx->getObject($this->resourceClass,$this->scriptProperties['id']);
+        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('resource_err_nf'));
+        }
+        $this->resource = $this->modx->getObject($this->resourceClass, array('id' => $this->scriptProperties['id']));
         if (empty($this->resource)) return $this->failure($this->modx->lexicon('resource_err_nfs',array('id' => $this->scriptProperties['id'])));
 
         if (!$this->resource->checkPolicy('save')) {
@@ -164,13 +167,22 @@ class ResourceUpdateManagerController extends ResourceManagerController {
      * @return string
      */
     public function getPreviewUrl() {
-        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'),$this->resource->get('context_key'),'','full');
+        if (!$this->resource->get('deleted')) {
+            $sessionEnabled = '';
+            $ctxSetting = $this->modx->getObject('modContextSetting', array('context_key' => $this->resource->get('context_key'), 'key' => 'session_enabled'));
+
+            if ($ctxSetting) {
+                $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
+            }
+
+            $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'), $this->resource->get('context_key'), $sessionEnabled, 'full', array('xhtml_urls' => false));
+        }
         return $this->previewUrl;
     }
 
     /**
      * Check for locks on the Resource
-     * 
+     *
      * @return bool
      */
     public function checkForLocks() {
@@ -189,7 +201,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         }
         return $this->locked;
     }
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool

@@ -148,7 +148,7 @@ $_lang['modx_class_err_nf'] = 'Could not include the MODX class file.';
 $_lang['modx_configuration_file'] = 'MODX configuration file';
 $_lang['modx_err_instantiate'] = 'Could not instantiate the MODX class.';
 $_lang['modx_err_instantiate_mgr'] = 'Could not initialize the MODX manager context.';
-$_lang['modx_footer1'] = '&copy; 2005-2013 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2014 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Installation';
 $_lang['modx_install_complete'] = 'MODX Installation Complete';
@@ -169,6 +169,8 @@ $_lang['options_new_file_permissions_note'] = 'You can override the permissions 
 $_lang['options_new_folder_permissions'] = 'New folder permissions';
 $_lang['options_new_folder_permissions_note'] = 'You can override the permissions new folders created via MODX will use, e.g. 0775 or 0777.';
 $_lang['options_new_installation'] = 'New Installation';
+$_lang['options_nocompress'] = 'Disable CSS/JS compression';
+$_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
 $_lang['options_title'] = 'Install Options';
 $_lang['options_upgrade_advanced'] = 'Advanced Upgrade Install<br /><small>(edit database config)</small>';
 $_lang['options_upgrade_advanced_note'] = 'For advanced database admins or moving to servers with a different database connection character set. <strong>You will need to know your full database name, user, password and connection/collation details.</strong>';

@@ -69,6 +69,10 @@ class SystemFileEditManagerController extends modManagerController {
         $placeholders['fa'] = $this->fileRecord;
         $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();
 
+        $this->fileRecord['basename'] = htmlspecialchars($this->fileRecord['basename']);
+        $this->fileRecord['name'] = htmlspecialchars($this->fileRecord['name']);
+        $this->fileRecord['path'] = htmlspecialchars($this->fileRecord['path']);
+
         return $placeholders;
     }
 
@@ -122,7 +126,7 @@ class SystemFileEditManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/file/edit.tpl';
+        return '';
     }
 
     /**

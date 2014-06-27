@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * System Info Spanish lexicon topic
  *
@@ -40,7 +40,7 @@ $_lang['onlineusers_user'] = 'Usuario';
 $_lang['onlineusers_userid'] = 'ID de usuario';
 $_lang['optimize_table'] = 'Haz click aquí para optimizar esta tabla';
 $_lang['optimize_table_err'] = 'Error al optimizar tabla';
-$_lang['phpmailer_version'] = 'Versión de <a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a>';
+$_lang['phpmailer_version'] = 'Versión de <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a>';
 $_lang['server'] = 'Servidor';
 $_lang['servertime'] = 'Hora del Servidor';
 $_lang['serveroffset'] = 'Offset del Servidor';

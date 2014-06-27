@@ -1,1 +1,0 @@
-<div id="modx-panel-fc-set-div"></div>

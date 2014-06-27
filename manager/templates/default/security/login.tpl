@@ -104,7 +104,7 @@
 
            <div class="x-form-item login-form-item">
               <div class="x-form-element login-form-element">
-                <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset}" placeholder="{$_lang.login_username}" />
+                <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset}" placeholder="{$_lang.login_username_or_email}" />
               </div>
               <div class="x-form-clear-left"></div>
            </div>

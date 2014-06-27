@@ -60,7 +60,8 @@ $xpdo_meta_map = array (
     12 => 'modSession',
     13 => 'modSystemSetting',
     14 => 'modTemplateVarTemplate',
-    15 => 'modUserSetting',
+    15 => 'modUserGroupSetting',
+    16 => 'modUserSetting',
   ),
   'modAccessibleObject' => 
   array (

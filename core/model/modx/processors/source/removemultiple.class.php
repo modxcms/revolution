@@ -24,15 +24,15 @@ class modSourceRemoveMultipleProcessor extends modProcessor {
         $sourceIds = explode(',',$sources);
         foreach ($sourceIds as $sourceId) {
             /** @var modMediaSource $source */
-            $source = $this->modx->getObject('sources.modMediaSource',$sourceId);
-            if (empty($source)) { continue; }
+            $this->source = $this->modx->getObject('sources.modMediaSource',$sourceId);
+            if (empty($this->source)) { continue; }
 
-            if ($source->get('id') == 1) continue;
-            if (!$source->checkPolicy('remove')) {
+            if ($this->source->get('id') == 1) continue;
+            if (!$this->source->checkPolicy('remove')) {
                 continue;
             }
 
-            if ($source->remove() == false) {
+            if ($this->source->remove() == false) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR,$this->modx->lexicon('source_err_remove'));
                 continue;
             }

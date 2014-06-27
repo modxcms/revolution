@@ -10,7 +10,7 @@
  *
  * @var modX $this->modx
  * @var array $scriptProperties
- * 
+ *
  * @package modx
  * @subpackage processors.resource
  */
@@ -21,7 +21,7 @@ class modResourceDuplicateProcessor extends modProcessor {
     public $newResource;
     /** @var modResource $parentResource */
     public $parentResource;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('resource_duplicate');
     }
@@ -33,8 +33,11 @@ class modResourceDuplicateProcessor extends modProcessor {
         if (empty($id)) return $this->modx->lexicon('resource_err_ns');
         $this->oldResource = $this->modx->getObject('modResource',$id);
         if (empty($this->oldResource)) return $this->modx->lexicon('resource_err_nfs',array('id' => $id));
-        
+
         if (!$this->oldResource->checkPolicy('copy')) {
+            return $this->modx->lexicon('permission_denied');
+        }
+        if ($this->oldResource->parent === (int) $this->modx->getOption('tree_root_id') && !$this->modx->hasPermission('new_document_in_root')) {
             return $this->modx->lexicon('permission_denied');
         }
         return true;
@@ -95,7 +98,7 @@ class modResourceDuplicateProcessor extends modProcessor {
 
     /**
      * Log the manager action
-     * 
+     *
      * @return void
      */
     public function logManagerAction() {

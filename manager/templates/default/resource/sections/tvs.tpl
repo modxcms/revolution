@@ -20,7 +20,7 @@
             {/if}
         </label>
         {if $tv->inherited}<span class="modx-tv-inherited">{$_lang.tv_value_inherited}</span>{/if}
-        <div class="x-form-clear-left"></div>
+        <div class="x-form-clear"></div>
         <div class="x-form-element modx-tv-form-element">
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
             {$tv->get('formElement')}

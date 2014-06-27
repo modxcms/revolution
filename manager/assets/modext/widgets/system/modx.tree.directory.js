@@ -17,7 +17,7 @@ MODx.tree.Directory = function(config) {
         ,ddAppendOnly: false
         ,enableDrag: true
         ,enableDrop: true
-        ,ddGroup: 'modx-treedrop-dd'
+        ,ddGroup: 'modx-treedrop-sources-dd'
         ,url: MODx.config.connector_url
         ,hideSourceCombo: false
         ,baseParams: {
@@ -30,6 +30,7 @@ MODx.tree.Directory = function(config) {
         ,action: 'browser/directory/getList'
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
+        ,autoExpandRoot: false
         ,tbar: [{
             icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
             ,cls: 'x-btn-icon'
@@ -84,22 +85,68 @@ MODx.tree.Directory = function(config) {
 //        console.log(this.getRootNode())
 
     },this);
-    this.addSourceToolbar();
+    //this.addSourceToolbar();
     this.on('show',function() {
         if (!this.config.hideSourceCombo) {
             try { this.sourceCombo.show(); } catch (e) {}
         }
     },this);
+    this._init();
+    this.on('afterrender', this.showRefresh, this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     windows: {}
 
+    /**
+     * Create a refresh button on the root node
+     *
+     * @see MODx.Tree.Tree#_onAppend
+     */
+    ,showRefresh: function() {
+        var node = this.getRootNode()
+            ,inlineButtonsLang = this.getInlineButtonsLang(node)
+            ,elId = node.ui.elNode.id+ '_tools'
+            ,el = document.createElement('div');
+
+        el.id = elId;
+        el.className = 'modx-tree-node-tool-ct';
+        node.ui.elNode.appendChild(el);
+
+        MODx.load({
+            xtype: 'modx-button'
+            ,text: ''
+            ,scope: this
+            ,tooltip: new Ext.ToolTip({
+                title: inlineButtonsLang.refresh
+                ,target: this
+            })
+            ,node: node
+            ,handler: function(btn,evt){
+                evt.stopPropagation(evt);
+                node.reload();
+            }
+            ,iconCls: 'icon-refresh'
+            ,renderTo: elId
+            ,listeners: {
+                mouseover: function(button, e){
+                    button.tooltip.onTargetOver(e);
+                }
+                ,mouseout: function(button, e){
+                    button.tooltip.onTargetOut(e);
+                }
+            }
+        });
+    }
+
     ,addSourceToolbar: function() {
         this.sourceCombo = new MODx.combo.MediaSource({
             value: this.config.source || MODx.config.default_media_source
             ,listeners: {
-                'select':{fn:this.changeSource,scope:this}
+                select:{
+                    fn: this.changeSource
+                    ,scope: this
+                }
             }
         });
         this.searchBar = new Ext.Toolbar({
@@ -124,20 +171,37 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.refresh();
     }
 
+    /**
+     * Expand the root node if appropriate
+     */
+    ,_init: function() {
+        var treeState = Ext.state.Manager.get(this.treestate_id)
+            ,rootPath = this.root.getPath('text');
+
+        if (rootPath === treeState) {
+            // Nothing to do
+            return;
+        }
+
+        this.root.expand();
+    }
+
     ,_initExpand: function() {
-        var treeState;
+        var treeState = Ext.state.Manager.get(this.treestate_id);
         if (!Ext.isEmpty(this.config.openTo)) {
-            treeState = Ext.state.Manager.get(this.treestate_id);
             this.selectPath('/'+_('files')+'/'+this.config.openTo,'text');
         } else {
-            treeState = Ext.state.Manager.get(this.treestate_id);
-            this.selectPath(treeState,'text');
+            this.expandPath(treeState, 'text');
         }
     }
 
     ,_saveState: function(n) {
+        if (!n.expanded && !n.isRoot) {
+            // Node has been collapsed, grab its parent
+            n = n.parentNode;
+        }
         var p = n.getPath('text');
-        Ext.state.Manager.set(this.treestate_id,p);
+        Ext.state.Manager.set(this.treestate_id, p);
     }
 
     ,_handleDrag: function(dropEvent) {
@@ -194,7 +258,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,editFile: function(itm,e) {
-        this.loadAction('a=system/file/edit&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+        MODx.loadPage('system/file/edit', 'file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
     }
 
     ,quickUpdateFile: function(itm,e) {
@@ -230,8 +294,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,createFile: function(itm,e) {
-        var d = this.cm.activeNode && this.cm.activeNode.attributes ? this.cm.activeNode.attributes.id : '';
-        this.loadAction('a=system/file/create&directory='+d+'&source='+this.getSource());
+        var active = this.cm.activeNode
+            ,dir = active && active.attributes && (active.isRoot || active.attributes.type == 'dir')
+                ? active.attributes.id
+                : '';
+
+        MODx.loadPage('system/file/create', 'directory='+dir+'&source='+this.getSource());
     }
 
     ,quickCreateFile: function(itm,e) {
@@ -382,7 +450,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                success: {
+                    fn: this._afterRemove
+                    ,scope: this
+                }
             }
         });
     }
@@ -399,9 +470,20 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                success: {
+                    fn: this._afterRemove
+                    ,scope: this
+                }
             }
         });
+    }
+
+    /**
+     * Operation executed after a node has been removed
+     */
+    ,_afterRemove: function() {
+        this.refreshParentNode();
+        this.cm.activeNode = null;
     }
 
     ,downloadFile: function(item,e) {
@@ -430,15 +512,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,uploadFiles: function(btn,e) {
         if (!this.uploader) {
-            this.uploader = new Ext.ux.UploadDialog.Dialog({
+            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
                     action: 'browser/file/upload'
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
                 }
-                ,reset_on_hide: true
-                ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
             this.uploader.on('show',this.beforeUpload,this);
@@ -475,13 +555,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,beforeUpload: function() {
-        var path;
+        var path = this.config.rootId || '/';
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
                 path = this.getPath(this.cm.activeNode.parentNode);
             }
-        } else { path = '/'; }
+        }
 
         this.uploader.setBaseParams({
             action: 'browser/file/upload'

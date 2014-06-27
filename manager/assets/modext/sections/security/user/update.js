@@ -19,6 +19,7 @@ MODx.page.UpdateUser = function(config) {
             process: 'security/user/update'
             ,text: _('save')
             ,method: 'remote'
+            ,cls:'primary-button'
             ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
@@ -33,10 +34,10 @@ MODx.page.UpdateUser = function(config) {
             text: _('delete')
             ,handler: this.removeUser
             ,scope: this
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-user'
             ,renderTo: 'modx-panel-user-div'

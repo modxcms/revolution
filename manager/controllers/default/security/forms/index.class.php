@@ -49,7 +49,7 @@ class SecurityFormsManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/forms/index.tpl';
+        return '';
     }
 
     /**

@@ -9,74 +9,81 @@ class modSearchProcessor extends modProcessor
     public $actionToken = ':';
     private $actions = array();
 
+    protected $query;
+    public $results = array();
+
     /**
      * @return string JSON formatted results
      */
     public function process()
     {
-        $output = array();
-        $query = $this->getProperty('query');
-        if (!empty($query)) {
-            if (strpos($query, ':') === 0) {
+        $this->query = $this->getProperty('query');
+        if (!empty($this->query)) {
+            if (strpos($this->query, ':') === 0) {
                 // upcoming "launch actions"
-                $output = $this->searchActions($query, $output);
+                //$this->searchActions();
             } else {
                 // Search elements & resources
-                $output = $this->searchResources($query, $output);
+                $this->searchResources();
                 if ($this->modx->hasPermission('view_chunk')) {
-                    $output = $this->searchChunks($query, $output);
+                    $this->searchChunks();
                 }
                 if ($this->modx->hasPermission('view_template')) {
-                    $output = $this->searchTemplates($query, $output);
+                    $this->searchTemplates();
                 }
                 if ($this->modx->hasPermission('view_tv')) {
-                    $output = $this->searchTVs($query, $output);
+                    $this->searchTVs();
                 }
                 if ($this->modx->hasPermission('view_snippet')) {
-                    $output = $this->searchSnippets($query, $output);
+                    $this->searchSnippets();
                 }
                 if ($this->modx->hasPermission('view_plugin')) {
-                    $output = $this->searchPlugins($query, $output);
+                    $this->searchPlugins();
                 }
                 if ($this->modx->hasPermission('view_user')) {
-                    $output = $this->searchUsers($query, $output);
+                    $this->searchUsers();
                 }
             }
         }
 
-        return $this->outputArray($output);
+        return $this->outputArray($this->results);
     }
 
-    public function searchActions($query)
+    /**
+     * Dummy method to micmic actions search
+     */
+    public function searchActions()
     {
-        $query = ltrim($query, $this->actionToken);
+        $type = 'actions';
+
+        $query = ltrim($this->query, $this->actionToken);
         $this->actions = array(
             array(
                 'name' => 'Welcome',
-                'action' => 'welcome',
+                '_action' => 'welcome',
                 'description' => 'Go back home',
-                'type' => 'Actions',
+                'type' => $type,
                 'perms' => array(),
             ),
             array(
                 'name' => 'Error log',
-                'action' => 'system/event',
+                '_action' => 'system/event',
                 'description' => 'View error log',
-                'type' => 'Actions',
+                'type' => $type,
                 'perms' => array(),
             ),
             array(
                 'name' => 'Clear cache',
-                'action' => 'system/refresh_site',
+                '_action' => 'system/refresh_site',
                 'description' => 'Refresh the cache',
-                'type' => 'Actions',
+                'type' => $type,
                 'perms' => array(),
             ),
             array(
                 'name' => 'Edit chunk',
-                'action' => 'element/chunk/update',
+                '_action' => 'element/chunk/update',
                 'description' => 'Edit the given chunk',
-                'type' => 'Actions',
+                'type' => $type,
                 'perms' => array(),
             ),
         );
@@ -85,7 +92,7 @@ class modSearchProcessor extends modProcessor
 //        $class = 'modMenu';
 //        $c = $this->modx->newQuery($class);
 //        $c->where(array(
-//            'action:LIKE' => '%' . $query . '%',
+//            'action:LIKE' => '%' . $this->query . '%',
 //        ));
 //        $c->limit($this->maxResults);
 //
@@ -114,39 +121,38 @@ class modSearchProcessor extends modProcessor
 //            $descriptions[$idx] = $action['description'];
         }
         $results = preg_grep('~' . $query . '~', $names);
-//        $results = array_merge($results, preg_grep('~' . $query . '~', $actions));
-//        $results = array_merge($results, preg_grep('~' . $query . '~', $descriptions));
+//        $results = array_merge($results, preg_grep('~' . $this->query . '~', $actions));
+//        $results = array_merge($results, preg_grep('~' . $this->query . '~', $descriptions));
 
-        $output = array();
+        //$output = array();
         if ($results) {
             foreach ($results as $idx => $field) {
-                $output[] = $this->actions[$idx];
+                $this->results[] = $this->actions[$idx];
             }
         }
 
         //$output = array_unique($output);
 
-        return $output;
+        //return $output;
     }
 
     /**
      * Perform search in resources
      *
-     * @param string $query The string being searched
-     * @param array $output The existing results
-     *
-     * @return array The results
+     * @return void
      */
-    public function searchResources($query, array &$output)
+    public function searchResources()
     {
-        //$output = array();
+        $type = 'resources';
+        $typeLabel = $this->modx->lexicon('search_resulttype_' . $type);
+
         $c = $this->modx->newQuery('modResource');
         $c->where(array(
-            'pagetitle:LIKE' => '%' . $query .'%',
-            'OR:longtitle:LIKE' => '%' . $query .'%',
-            'OR:alias:LIKE' => '%' . $query .'%',
-            'OR:description:LIKE' => '%' . $query .'%',
-            'OR:introtext:LIKE' => '%' . $query .'%',
+            'pagetitle:LIKE' => '%' . $this->query .'%',
+            'OR:longtitle:LIKE' => '%' . $this->query .'%',
+            'OR:alias:LIKE' => '%' . $this->query .'%',
+            'OR:description:LIKE' => '%' . $this->query .'%',
+            'OR:introtext:LIKE' => '%' . $this->query .'%',
         ));
         $c->sortby('createdon', 'DESC');
 
@@ -155,23 +161,24 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection('modResource', $c);
         /** @var modResource $record */
         foreach ($collection as $record) {
-            $output[] = array(
+            $this->results[] = array(
                 'name' => $record->get('pagetitle'),
-                'action' => 'resource/update&id=' . $record->get('id'),
+                '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
-                'type' => 'Resources',
+                'type' => $type,
+                'type_label' => $typeLabel,
             );
         }
-
-        return $output;
     }
 
-    public function searchSnippets($query, array $output)
+    public function searchSnippets()
     {
+        $type = 'snippets';
+
         $c = $this->modx->newQuery('modSnippet');
         $c->where(array(
-            'name:LIKE' => '%' . $query . '%',
-            'OR:description:LIKE' => '%' . $query .'%',
+            'name:LIKE' => '%' . $this->query . '%',
+            'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -179,24 +186,24 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection('modSnippet', $c);
         /** @var modSnippet $record */
         foreach ($collection as $record) {
-            $output[] = array(
+            $this->results[] = array(
                 'name' => $record->get('name'),
-                'action' => 'element/snippet/update&id=' . $record->get('id'),
+                '_action' => 'element/snippet/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
-                'type' => 'Snippets',
+                'type' => $type,
             );
         }
-
-        return $output;
     }
 
-    public function searchChunks($query, array $output)
+    public function searchChunks()
     {
+        $type = 'chunks';
+
         $class = 'modChunk';
         $c = $this->modx->newQuery($class);
         $c->where(array(
-            'name:LIKE' => '%' . $query . '%',
-            'OR:description:LIKE' => '%' . $query .'%',
+            'name:LIKE' => '%' . $this->query . '%',
+            'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -204,24 +211,24 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection($class, $c);
         /** @var modChunk $record */
         foreach ($collection as $record) {
-            $output[] = array(
+            $this->results[] = array(
                 'name' => $record->get('name'),
-                'action' => 'element/chunk/update&id=' . $record->get('id'),
+                '_action' => 'element/chunk/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
-                'type' => 'Chunks',
+                'type' => $type,
             );
         }
-
-        return $output;
     }
 
-    public function searchTemplates($query, array $output)
+    public function searchTemplates()
     {
+        $type = 'templates';
+
         $class = 'modTemplate';
         $c = $this->modx->newQuery($class);
         $c->where(array(
-            'templatename:LIKE' => '%' . $query . '%',
-            'OR:description:LIKE' => '%' . $query .'%',
+            'templatename:LIKE' => '%' . $this->query . '%',
+            'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -229,24 +236,24 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection($class, $c);
         /** @var modTemplate $record */
         foreach ($collection as $record) {
-            $output[] = array(
+            $this->results[] = array(
                 'name' => $record->get('templatename'),
-                'action' => 'element/template/update&id=' . $record->get('id'),
+                '_action' => 'element/template/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
-                'type' => 'Templates',
+                'type' => $type,
             );
         }
-
-        return $output;
     }
 
-    public function searchPlugins($query, array $output)
+    public function searchPlugins()
     {
+        $type = 'plugins';
+
         $class = 'modPlugin';
         $c = $this->modx->newQuery($class);
         $c->where(array(
-            'name:LIKE' => '%' . $query . '%',
-            'OR:description:LIKE' => '%' . $query .'%',
+            'name:LIKE' => '%' . $this->query . '%',
+            'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -254,24 +261,24 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection($class, $c);
         /** @var modPlugin $record */
         foreach ($collection as $record) {
-            $output[] = array(
+            $this->results[] = array(
                 'name' => $record->get('name'),
-                'action' => 'element/plugin/update&id=' . $record->get('id'),
+                '_action' => 'element/plugin/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
-                'type' => 'Plugins',
+                'type' => $type,
             );
         }
-
-        return $output;
     }
 
-    public function searchTVs($query, array $output)
+    public function searchTVs()
     {
+        $type = 'tvs';
+
         $class = 'modTemplateVar';
         $c = $this->modx->newQuery($class);
         $c->where(array(
-            'name:LIKE' => '%' . $query . '%',
-            'OR:caption:LIKE' => '%' . $query .'%',
+            'name:LIKE' => '%' . $this->query . '%',
+            'OR:caption:LIKE' => '%' . $this->query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -279,19 +286,19 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection($class, $c);
         /** @var modTemplate $record */
         foreach ($collection as $record) {
-            $output[] = array(
+            $this->results[] = array(
                 'name' => $record->get('name'),
-                'action' => 'element/tv/update&id=' . $record->get('id'),
+                '_action' => 'element/tv/update&id=' . $record->get('id'),
                 'description' => $record->get('caption'),
-                'type' => 'TVs',
+                'type' => $type,
             );
         }
-
-        return $output;
     }
 
-    public function searchUsers($query, array $output)
+    public function searchUsers()
     {
+        $type = 'users';
+
         $class = 'modUser';
         $c = $this->modx->newQuery($class);
         $c->select(array(
@@ -300,9 +307,9 @@ class modSearchProcessor extends modProcessor
         ));
         $c->leftJoin('modUserProfile', 'Profile');
         $c->where(array(
-            'username:LIKE' => '%' . $query . '%',
-            'OR:Profile.fullname:LIKE' => '%' . $query .'%',
-            'OR:Profile.email:LIKE' => '%' . $query .'%',
+            'username:LIKE' => '%' . $this->query . '%',
+            'OR:Profile.fullname:LIKE' => '%' . $this->query .'%',
+            'OR:Profile.email:LIKE' => '%' . $this->query .'%',
         ));
 
         $c->limit($this->maxResults);
@@ -310,15 +317,13 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection($class, $c);
         /** @var modUserProfile $record */
         foreach ($collection as $record) {
-            $output[] = array(
+            $this->results[] = array(
                 'name' => $record->get('username'),
-                'action' => 'security/user/update&id=' . $record->get('id'),
+                '_action' => 'security/user/update&id=' . $record->get('id'),
                 'description' => $record->get('fullname') .' / '. $record->get('email'),
-                'type' => 'Users',
+                'type' => $type,
             );
         }
-
-        return $output;
     }
 }
 

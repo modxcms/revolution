@@ -6,7 +6,8 @@ module.exports = function(grunt) {
 			lib: './lib/',
 			scss: './sass/',
 			css: '../../../manager/templates/default/css/',
-			template: '../../../manager/templates/default/'
+			template: '../../../manager/templates/default/',
+            root:'../../../'
 		},
 		bower: {
 			install: {
@@ -22,10 +23,15 @@ module.exports = function(grunt) {
 					{src:'bourbon/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
 				]
 			},
+			neat: {
+				files:[
+					{src:'neat/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
+				]
+			},
 			fontawesome: {
 				files:[
 					{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true},
-					{src: 'font/**/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
+					{src: 'fonts/**/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
 				]
 			}
 		},
@@ -36,7 +42,6 @@ module.exports = function(grunt) {
 					keepSpecialComments:1,
 					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
 					banner : '/*!'
-+  '\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>'
 +  '\n* '
 +  '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC'
 +  '\n* '
@@ -52,7 +57,6 @@ module.exports = function(grunt) {
 +  '\n* See the GNU General Public License for more details. You should have received a copy of the GNU'
 +  '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.'
 +  '\n* '
-//+  '\n* Authors: TODO'
 +  '\n*/'
 				},
 				files: {
@@ -75,7 +79,8 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
-					compass: false
+					compass: false,
+                    sourcemap: true
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -109,21 +114,70 @@ module.exports = function(grunt) {
 		  }
 		},
 		watch: { /* trigger tasks on save */
-			options: {
-				livereload: true
-			},
 			scss: {
-				files: '<%= dirs.scss %>*',
-				tasks: ['sass:dist', 'autoprefixer', 'cssmin', 'growl:sass']
-			}
+				files: ['<%= dirs.scss %>/**/*'],
+				tasks: ['sass:dev', 'growl:sass']
+			},
+            css: {
+                options: {
+                    livereload: true
+                },
+                files: ['<%= dirs.css %>*.css'],
+                tasks: []
+            }
 		},
 		clean: { /* take out the trash */
 			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
 			postbuild: ['<%= dirs.lib %>']
 		},
+        imageoptim: {
+          png: {
+            options: {
+              jpegMini: false,
+              imageAlpha: true,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.png',
+              '<%= dirs.root %>_build/docs/**/*.png',
+              '<%= dirs.root %>manager/assets/ext3/**/*.png',
+              '<%= dirs.root %>manager/templates/default/**/*.png'
+            ]
+          },
+          jpg: {
+            options: {
+              jpegMini: false,
+              imageAlpha: false,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.jpg',
+              '<%= dirs.root %>_build/docs/**/*.jpg',
+              '<%= dirs.root %>manager/assets/ext3/**/*.jpg',
+              '<%= dirs.root %>manager/templates/default/**/*.jpg'
+            ]
+          },
+          gif: {
+            options: {
+              jpegMini: false,
+              imageAlpha: false,
+              quitAfter: true
+            },
+            src: [
+              '<%= dirs.root %>setup/assets/**/*.gif',
+              '<%= dirs.root %>_build/docs/**/*.gif',
+              '<%= dirs.root %>manager/assets/ext3/**/*.gif',
+              '<%= dirs.root %>manager/templates/default/**/*.gif'
+            ]
+          }
+        },
 		growl: {
 			sass: {
 				message: "Sass files created.",
+				title: "grunt"
+			},
+			map: {
+				message: "Sass files created with source maps.",
 				title: "grunt"
 			},
 			build: {
@@ -154,10 +208,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-imageoptim');
 
-
-	// Tasks
-	grunt.registerTask('default', ['sass:dist', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin', 'growl:watch', 'watch']);
-	grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dist','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin','clean:postbuild']);
-	grunt.registerTask('expand', ['sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'growl:expand']);
+    // Tasks
+    grunt.registerTask('default', ['growl:watch', 'watch']);
+    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
 };

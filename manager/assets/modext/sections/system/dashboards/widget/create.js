@@ -23,13 +23,12 @@ MODx.page.CreateDashboardWidget = function(config) {
             ,handler: function() {
                 MODx.loadPage('system/dashboards');
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
 		,components: [{
             xtype: 'modx-panel-dashboard-widget'
-            ,renderTo: 'modx-panel-dashboard-widget-div'
             ,record: config.record || {}
         }]
 	});

@@ -10,12 +10,10 @@ MODx.grid.SettingsGrid = function(config) {
         config.tbar = [{
             text: _('setting_create')
             ,scope: this
+            ,cls:'primary-button'
             ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: config.url || MODx.config.connector_url
-                ,baseParams: {
-                    action: 'system/settings/getlist'
-                }
                 ,blankValues: true
             }
         }];
@@ -25,8 +23,12 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
-        ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+        ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         ,allowBlank: true
+        ,editable: true
+        ,typeAhead: true
+        ,forceSelection: true
+        ,queryParam: 'search'
         ,width: 150
         ,listeners: {
             'select': {fn: this.filterByNamespace, scope:this}
@@ -36,12 +38,16 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'area'
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
+        ,value: MODx.request['area']
         ,baseParams: {
             action: 'system/settings/getAreas'
-            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         }
         ,width: 250
         ,allowBlank: true
+        ,editable: true
+        ,typeAhead: true
+        ,forceSelection: true
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
         }
@@ -123,12 +129,14 @@ MODx.grid.SettingsGrid = function(config) {
         }
     });
 
-    Ext.applyIf(config,{
+    Ext.applyIf(config, {
          cm: this.cm
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
+        ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/settings/getList'
-            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            ,area: MODx.request['area']
         }
         ,clicksToEdit: 2
         ,grouping: true
@@ -139,6 +147,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,plugins: this.exp
         ,primaryKey: 'key'
         ,autosave: true
+        ,save_action: 'system/settings/updatefromgrid'
         ,pageSize: MODx.config.default_per_page > 30 ? MODx.config.default_per_page : 30
         ,paging: true
         ,collapseFirst: false
@@ -219,25 +228,30 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearFilter: function() {
-        var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
-    	this.getStore().baseParams = {
-            action: 'system/settings/getList'
-            ,'namespace': ns
-    	};
-        Ext.getCmp('modx-filter-namespace').reset();
+        var ns = MODx.request['ns'] ? MODx.request['ns'] : 'core';
+        var area = MODx.request['area'] ? MODx.request['area'] : '';
+
+        this.getStore().baseParams = this.initialConfig.baseParams;
+
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
+
+        Ext.getCmp('modx-filter-namespace').reset();
         Ext.getCmp('modx-filter-key').reset();
+
+        this.getStore().baseParams.namespace = ns;
+        this.getStore().baseParams.area = area;
+        this.getStore().baseParams.key = '';
+
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
     ,filterByKey: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.key = nv;
+        this.getStore().baseParams.key = newValue;
         this.getStore().baseParams.namespace = '';
         this.getBottomToolbar().changePage(1);
         this.refresh();
@@ -325,7 +339,8 @@ MODx.window.CreateSetting = function(config) {
         title: _('setting_create')
         ,width: 600
         ,url: config.url
-        ,action: 'create'
+        ,action: 'system/settings/create'
+        ,cls:'primary-button'
         ,fields: [{
             layout: 'column'
             ,border: false
@@ -427,7 +442,13 @@ MODx.window.CreateSetting = function(config) {
         ,keys: []
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
-    this.on('show',function() {this.reset();},this);
+    this.on('show',function() {
+        this.reset();
+        this.setValues({
+            namespace: Ext.getCmp('modx-filter-namespace').value
+            ,area: Ext.getCmp('modx-filter-area').value
+        });
+    },this);
 };
 Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
@@ -452,6 +473,7 @@ MODx.combo.xType = function(config) {
                 ,[_('usergroup'),'modx-combo-usergroup']
                 ,[_('language'),'modx-combo-language']
                 ,[_('source'),'modx-combo-source']
+                ,[_('setting_manager_theme'),'modx-combo-manager-theme']
             ]
         })
         ,displayField: 'd'

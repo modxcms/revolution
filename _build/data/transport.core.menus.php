@@ -225,12 +225,17 @@ $children[2]->fromArray(array (
 MODx.msg.confirm({
     title: _(\'remove_locks\')
     ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url+\'system/remove_locks.php\'
+    ,url: MODx.config.connectors_url
     ,params: {
-        action: \'remove\'
+        action: \'system/remove_locks\'
     }
     ,listeners: {
-        \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
+        \'success\': {fn:function() {
+            var tree = Ext.getCmp("modx-resource-tree");
+            if (tree && tree.rendered) {
+                tree.refresh();
+            }
+         },scope:this}
     }
 });',
 ), '', true, true);
@@ -287,7 +292,7 @@ $children[5]->fromArray(array (
   'description' => 'reports_desc',
   'parent' => 'manage',
   'permissions' => 'menu_reports',
-  'action' => 'reports',
+  'action' => '',
 ), '', true, true);
 
 /* site schedule */
@@ -348,8 +353,9 @@ $userNavMenus[0]->fromArray(array(
   'text' => 'user',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => 'menu_reports',
-  'action' => '',
+  'permissions' => 'menu_user',
+  'action' => 'security/profile',
+  'icon' => '<span id="user-avatar">{$userImage}</span> <span id="user-username">{$username}</span>',
 ), '', true, true);
 $children = array();
 
@@ -360,7 +366,7 @@ $children[0]->fromArray(array (
   'text' => 'profile',
   'description' => 'profile_desc',
   'parent' => 'user',
-  'permissions' => 'canChangeProfile',
+  'permissions' => 'change_profile',
   'action' => 'security/profile',
 ), '', true, true);
 
@@ -372,7 +378,7 @@ $children[1]->fromArray(array (
   'description' => 'messages_desc',
   'parent' => 'user',
   'permissions' => 'messages',
-  'action' => 'security/messages',
+  'action' => 'security/message',
 ), '', true, true);
 
 /* logout */
@@ -383,7 +389,7 @@ $children[2]->fromArray(array (
   'description' => 'logout_desc',
   'parent' => 'user',
   'permissions' => 'logout',
-  'action' => 'system/event',
+  'action' => 'security/logout',
 ), '', true, true);
 
 $userNavMenus[0]->addMany($children,'Children');
@@ -396,8 +402,9 @@ $userNavMenus[1]->fromArray(array(
   'text' => 'admin',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => '',
-  'action' => '',
+  'permissions' => 'settings',
+  'action' => 'system/settings',
+  'icon' => '<i class="icon-gear icon icon-large"></i>',
 ), '', true, true);
 $children = array();
 
@@ -405,8 +412,8 @@ $children = array();
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'menuindex' => 0,
-  'text' => 'settings',
-  'description' => 'settings_desc',
+  'text' => 'system_settings',
+  'description' => 'system_settings_desc',
   'parent' => 'admin',
   'permissions' => 'settings',
   'action' => 'system/settings',
@@ -503,7 +510,7 @@ $children[8]->fromArray(array (
 $userNavMenus[1]->addMany($children,'Children');
 unset($children);
 
-/* ***************** ADMIN/SETTINGS MENU ***************** */
+/* ***************** ADMIN/ABOUT MENU ***************** */
 $userNavMenus[2]= $xpdo->newObject('modMenu');
 $userNavMenus[2]->fromArray(array(
   'menuindex' => 7,
@@ -512,6 +519,7 @@ $userNavMenus[2]->fromArray(array(
   'parent' => 'usernav',
   'permissions' => '',
   'action' => 'help',
+  'icon' => '<i class="icon-question-circle icon icon-large"></i>',
 ), '', true, true);
 $children = array();
 

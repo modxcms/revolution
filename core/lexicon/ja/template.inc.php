@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
+ * @author honda http://kogus.org 2012-12-04
  * @author enogu http://www.kuroienogu.net/
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
@@ -16,7 +16,7 @@ $_lang['filter_by_category'] = 'カテゴリーで絞り込む';
 $_lang['rank'] = 'ランク';
 $_lang['template'] = 'テンプレート';
 $_lang['template_assignedtv_tab'] = '指定されているテンプレート変数';
-$_lang['template_code'] = 'テンプレート コード (html)';
+$_lang['template_code'] = 'テンプレート コード （html）';
 $_lang['template_desc'] = '説明';
 $_lang['template_desc_category'] = 'このテンプレートを所属させるカテゴリーを選択します。';
 $_lang['template_desc_description'] = 'テンプレートの説明文を設定します。';
@@ -24,7 +24,7 @@ $_lang['template_desc_name'] = 'テンプレートの名前を設定します。
 $_lang['template_delete_confirm'] = 'このテンプレートを削除しますか？';
 $_lang['template_duplicate_confirm'] = 'このテンプレートを複製しますか？';
 $_lang['template_edit_tab'] = 'テンプレートの編集';
-$_lang['template_empty'] = '(なし)';
+$_lang['template_empty'] = '（なし）';
 $_lang['template_err_default_template'] = 'このテンプレートは既定のテンプレートとして設定されています。削除する前に、別なテンプレートを既定のテンプレートとして設定してください。<br />';
 $_lang['template_err_delete'] = 'テンプレートの削除中にエラーが発生しました。';
 $_lang['template_err_duplicate'] = 'テンプレートの複製中にエラーが発生しました。';

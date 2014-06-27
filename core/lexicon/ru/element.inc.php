@@ -37,3 +37,4 @@ $_lang['tv_default'] = 'Значение по умолчанию';
 $_lang['tv_type'] = 'Тип ввода';
 $_lang['tv_output_type'] = 'Тип вывода';
 $_lang['tv_output_type_properties'] = 'Свойства типа вывода';
+$_lang['static_file_ns'] = 'Вы должны указать статический файл.';

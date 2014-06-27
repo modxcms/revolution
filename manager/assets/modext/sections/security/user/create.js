@@ -15,6 +15,7 @@ MODx.page.CreateUser = function(config) {
             ,reload: true
             ,text: _('save')
             ,method: 'remote'
+            ,cls:'primary-button'
             ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
@@ -25,10 +26,10 @@ MODx.page.CreateUser = function(config) {
             ,handler: function() {
                 MODx.loadPage('security/user')
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-user'
             ,renderTo: 'modx-panel-user-div'

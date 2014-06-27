@@ -19,12 +19,6 @@ MODx.page.UpdateStatic = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,action: 'resource/update'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,preview: 'resource/preview'
-            ,cancel: 'welcome'
-        }
         ,components: [{
             xtype: 'modx-panel-static'
             ,renderTo: 'modx-panel-static-div'
@@ -84,12 +78,12 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 if (e == 'yes') {
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage('welcome');
+                    MODx.loadPage('?');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage('welcome');
+            MODx.loadPage('?');
         }
     }
     ,getButtons: function(cfg) {
@@ -98,6 +92,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             btns.push({
                 process: 'resource/update'
                 ,id: 'modx-abtn-save'
+                ,cls:'primary-button'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: cfg.richtext || MODx.request.reload ? false : true
@@ -147,12 +142,12 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             ,scope: this
             ,id: 'modx-abtn-cancel'
         });
-        /*btns.push('-');
+        btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });*/
+        });
         return btns;
     }
 });

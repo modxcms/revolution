@@ -65,6 +65,7 @@ MODx.grid.LexiconTopic = function(config) {
         },{
             text: _('create_new')
             ,xtype: 'button'
+            ,cls:'primary-button'
             ,menu: [{
                 text: _('topic')
                 ,handler: this.loadWindow2.createDelegate(this,[{

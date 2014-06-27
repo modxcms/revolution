@@ -11,8 +11,6 @@ class modInstallRunnerWeb extends modInstallRunner {
          * TODO: fix this by allowing resume when it takes a long time
          */
         @ set_time_limit(0);
-        @ ini_set('max_execution_time', 240);
-        @ ini_set('memory_limit','128M');
     }
     /**
      * Execute the installation process.

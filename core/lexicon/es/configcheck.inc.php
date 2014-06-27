@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Config Check Spanish lexicon topic
  *

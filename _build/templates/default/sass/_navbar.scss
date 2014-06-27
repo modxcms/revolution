@@ -1,9 +1,11 @@
 /* Main MODX Manager navbar */
+#modx-header {
+    background:rgb(63,72,80);
+    min-height:55px; // #janky #extjs
+}
 #modx-navbar {
-  background: $navbarBg;
-  border-width: 0 0 1px;
-  border: 1px solid $borderColor;
-  box-shadow: 0 1px 0 $borderShadow;
+  @include background-image(linear-gradient(to right, rgb(63,72,80) 0%, rgb(54,84,98) 46%, rgb(62,85,84) 60%, rgb(66,85,77) 68%, rgb(87,61,78) 100%));
+  box-shadow: 0 2px 0 $borderShadow;
   height: 100%;
   position: relative;
   z-index: 10;
@@ -16,7 +18,7 @@
 
 #modx-navbar {
   font-weight: bold;
-  font: $fontNormal;
+  font: $fontNavbar;
 }
 
 #modx-topnav {
@@ -24,6 +26,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  li {
+    border-right: 1px solid $navbarBorder;
+  }
 }
 
 #modx-navbar li,
@@ -43,50 +49,125 @@
   color: $navbarText;
   cursor: pointer;
   display: block;
-  line-height: 43px;
+  line-height: 55px;
   padding: 0 15px;
   text-decoration: none;
 }
 
-#modx-topnav > li.top > a {
+#modx-topnav {
+    > li:not(#modx-home-dashboard) {
+        > a {
+            @include media($desktop) {
+                text-indent:-99999em;
+                display:block;
+                height:100%;
+                position:relative;
+                width:1em;
+                &:after {
+                    @include absolute-corners;
+            		@include awesome-font;
+                    text-indent:0;
+                    display:block;
+                    text-align:center;
+                    line-height:55px;
+                    font-size:16px;
+                }
+            }
+        }
+    }
+    @include media($desktop) {
+        #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ }
+        #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
+        #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  }
+        #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ }
+    }
+}
+
+#user-username {
+    @include media($desktop) {
+        display:none;
+    }
+}
+
+#modx-navbar .top {
+  padding-right: 15px;
+
+  &:after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgb(96,114,124);
+    position: absolute;
+    content: ' ';
+    right: 12px;
+    top: 26px;
+  }
+}
+
+#modx-topnav li.top > a {
   cursor: default;
 }
 
+#modx-topnav > li.top > a, #modx-user-menu > li.top > a {
+  border-left:1px solid transparent;
+  border-right:1px solid transparent;
+}
+
+#modx-topnav > li.top:hover > a, #modx-user-menu > li.top:hover > a {
+  padding-bottom: 1px;
+  z-index: 10001;
+}
+
 #modx-navbar li:hover a {
-  background-color: $navbarHover;
   &:hover.modx-help {
     color: $colorSplash;
   }
 }
 
-#modx-navbar ul#modx-settings-menu,
-#modx-navbar ul#modx-user-submenu {
+#modx-navbar #limenu-admin ul.modx-subnav,
+#modx-navbar #limenu-user ul.modx-subnav {
   left: auto;
   right: 0;
 }
 
 #modx-navbar ul.modx-subnav {
-  border-radius: 0 0 $navbarRadius $navbarRadius;
-  border-top: none;
-  border: 1px solid $borderColor;
-  box-shadow: $shadower;
-  display: none;
   float: left;
   left: 0;
   line-height: 1.1;
   list-style: none;
-  margin: 0 0 0 -1px;
+  margin: 0;
   padding: 0;
   position: absolute;
-  top: 43px;
+  top: 54px;
   z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#modx-navbar ul.modx-subnav, #modx-navbar ul.modx-subsubnav {
+  border-radius: 0 0 $navbarRadius $navbarRadius;
+  border-top: none;
+  border: 1px solid $navbarBorder;
+  box-shadow: $shadower;
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include image-set("../images/modx-logo.png", "../images/modx-logo@2X.png");
-  background: $navbarBg url(../images/modx-logo.png) 18px 9px no-repeat;
-  width: 110px;
-  /* don't tell mark */
+  background-image: url($imgPath + 'modx-logo@2x.png');
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size: 45px 45px;
+  width: 50px;
+  border-right: none;
+  margin-left: 21px;
+}
+#user-avatar img {
+  border-radius: 20px;
+  margin: 8px 10px 0 0;
+  height: 40px;
+  width: 40px;
+  display: block;
+  float: left;
+}
+#user-username {
 }
 
 #modx-navbar #modx-home-dashboard a {
@@ -101,28 +182,35 @@
 }
 
 #modx-navbar #modx-home-dashboard:hover {
-  background-color: $navbarHover;
+  /*background-color: $navbarHover;*/
 }
 
 #modx-navbar li:hover ul.modx-subnav {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: all .15s ease;
+  transition-delay: .2s;
 }
 
 #modx-navbar ul.modx-subnav li {
-  background: $navbarDrop;
-  border-bottom: 1px solid $navbarHover;
+  background: $subnavBg;
+  border-bottom: 1px solid $subnavSepBorder;
   clear: both;
   margin: 0;
   padding: 0;
 }
 
+/*
 #modx-navbar ul.modx-subnav li:first-child a {
   @include background(linear-gradient($navbarHover, $navbarDrop) top repeat);
 }
+*/
 
 #modx-navbar ul.modx-subnav li a {
-  background-color: $navbarDrop;
+  background-color: $subnavBg;
+  color: $subnavTitleColor;
   float: left;
+  font-weight: bold;
   line-height: 1.5;
   margin: 0;
   padding: 8px 15px;
@@ -130,13 +218,33 @@
   width: 240px;
 }
 
-#modx-navbar ul.modx-subnav li:first-child a:hover,
-#modx-navbar ul.modx-subnav:hover li a:hover,
-#modx-navbar ul.modx-subnav li a:hover {
-  background: $navbarHover !important;
+/*
+#modx-navbar ul.modx-subnav li a {
+  border-top:1px solid $navbarDrop;
+  border-bottom:1px solid $navbarDrop;
+}
+*/
+
+#modx-navbar ul.modx-subnav li {
+  a:hover {
+    background: darken($subnavBg, 10%);
+    border-top-color:$subnavBorder;
+    border-bottom-color:$subnavBorder;
+    color:$white;
+    .description {
+        color:lighten($subnavDescriptionColor,16%);
+    }
+  }
+  &:first-child a {
+    border-top-width:0;
+  }
+  &:last-child a {
+    border-bottom-width:0;
+  }
 }
 
 #modx-navbar ul.modx-subnav li a span {
+  color: $subnavDescriptionColor;
   display: block;
   float: none;
   font-size: 12px;
@@ -148,7 +256,7 @@
 
 #modx-navbar ul.modx-subnav ul {
   display: none;
-  left: 255px;
+  left: 270px;
   list-style: none;
   padding-left: 0;
   position: absolute;

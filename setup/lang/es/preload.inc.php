@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Spanish Preload Lexicon Topic for Revolution setup
  *

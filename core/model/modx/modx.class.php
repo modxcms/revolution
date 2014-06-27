@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -524,7 +524,7 @@ class modX extends xPDO {
     public function initialize($contextKey= 'web', $options = null) {
         if (!$this->_initialized) {
             if (!$this->startTime) {
-                $this->startTime= $this->getMicroTime();
+                $this->startTime= microtime(true);
             }
 
             $this->getCacheManager();
@@ -756,19 +756,25 @@ class modX extends xPDO {
      * @param int|array $id A single or multiple modResource ids to build the
      * tree from.
      * @param int $depth The maximum depth to build the tree (default 10).
+     * @param array $options An array of filtering options, such as 'context' to specify the context to grab from
      * @return array An array containing the tree structure.
      */
-    public function getTree($id= null, $depth= 10) {
+    public function getTree($id= null, $depth= 10, array $options = array()) {
         $tree= array ();
+        $context = '';
+        if (!empty($options['context'])) {
+            $this->getContext($options['context']);
+            $context = $options['context'];
+        }
         if ($id !== null) {
             if (is_array ($id)) {
                 foreach ($id as $k => $v) {
-                    $tree[$v]= $this->getTree($v, $depth);
+                    $tree[$v]= $this->getTree($v, $depth, $options);
                 }
             }
-            elseif ($branch= $this->getChildIds($id, 1)) {
+            elseif ($branch= $this->getChildIds($id, 1, $options)) {
                 foreach ($branch as $key => $child) {
-                    if ($depth > 0 && $leaf= $this->getTree($child, $depth--)) {
+                    if ($depth > 0 && $leaf= $this->getTree($child, $depth--, $options)) {
                         $tree[$child]= $leaf;
                     } else {
                         $tree[$child]= $child;
@@ -929,6 +935,17 @@ class modX extends xPDO {
     }
 
     /**
+     * Returns the full table name (with dynamic prefix) based on database settings.
+     * Legacy - Useful when dealing with migrations or prefixed database tables without an xPDO model (which xPDO.getTableName requires.)
+     *
+     * @param string $table Name of MODX table, less table prefix.
+     * @return string Full table name containing database and table prefix.
+     */
+    public function getFullTableName( $table = '' ) {
+        return $this->getOption('dbname') .".". $this->getOption( xPDO::OPT_TABLE_PREFIX ) . $table;
+    }
+
+    /**
      * Generates a URL representing a specified resource.
      *
      * @param integer $id The id of a resource.
@@ -979,6 +996,18 @@ class modX extends xPDO {
             $this->log(modX::LOG_LEVEL_ERROR, '`' . $id . '` is not a valid integer and may not be passed to makeUrl()');
         }
         return $url;
+    }
+
+    /**
+     * Filter a string for use as a URL path segment.
+     *
+     * @param string $string The string to filter into a valid path segment.
+     * @param array $options Optional filter setting overrides.
+     *
+     * @return string|null A valid path segment string or null if an error occurs.
+     */
+    public function filterPathSegment($string, array $options = array()) {
+        return $this->call('modResource', 'filterPathSegment', array(&$this, $string, $options));
     }
 
     public function findResource($uri, $context = '') {
@@ -1184,7 +1213,7 @@ class modX extends xPDO {
     }
 
     /**
-     * Get the current authenticated User and assigns it to the modX instance.
+     * Get the current authenticated User and assign it to the modX instance.
      *
      * @param string $contextKey An optional context to get the user from.
      * @param boolean $forceLoadSettings If set to true, will load settings
@@ -1208,15 +1237,16 @@ class modX extends xPDO {
                 if (isset ($_SESSION["modx.{$contextKey}.user.config"])) {
                     $this->_userConfig= $_SESSION["modx.{$contextKey}.user.config"];
                 } else {
-                    $settings= $this->user->getMany('UserSettings');
+                    $this->_userConfig= array();
+                    $settings= $this->user->getSettings();
                     if (is_array($settings) && !empty ($settings)) {
-                        foreach ($settings as $setting) {
-                            $v= $setting->get('value');
+                        foreach ($settings as $k => $v) {
                             $matches= array();
                             if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
-                                $matchValue= '';
                                 foreach ($matches as $match) {
-                                    if (isset ($this->config["{$match[1]}"])) {
+                                    if (isset($this->_userConfig["{$match[1]}"])) {
+                                        $matchValue= $this->_userConfig["{$match[1]}"];
+                                    } elseif (isset($this->config["{$match[1]}"])) {
                                         $matchValue= $this->config["{$match[1]}"];
                                     } else {
                                         $matchValue= '';
@@ -1224,12 +1254,12 @@ class modX extends xPDO {
                                     $v= str_replace($match[0], $matchValue, $v);
                                 }
                             }
-                            $this->_userConfig[$setting->get('key')]= $v;
+                            $this->_userConfig[$k]= $v;
                         }
                     }
-                }
-                if (is_array ($this->_userConfig) && !empty ($this->_userConfig)) {
                     $_SESSION["modx.{$contextKey}.user.config"]= $this->_userConfig;
+                }
+                if (is_array($this->_userConfig) && !empty($this->_userConfig)) {
                     $this->config= array_merge($this->config, $this->_userConfig);
                 }
             }
@@ -1422,9 +1452,10 @@ class modX extends xPDO {
      *
      * @param string $src The CSS to be injected before the closing HEAD tag in
      * an HTML response.
+     * @param string $media all, aural, braille, embossed, handheld, print, projection, screen, tty, tv
      * @return void
      */
-    public function regClientCSS($src) {
+    public function regClientCSS($src, $media = null) {
         if (isset ($this->loadedjscripts[$src]) && $this->loadedjscripts[$src]) {
             return;
         }
@@ -1432,7 +1463,10 @@ class modX extends xPDO {
         if (strpos(strtolower($src), "<style") !== false || strpos(strtolower($src), "<link") !== false) {
             $this->sjscripts[count($this->sjscripts)]= $src;
         } else {
-            $this->sjscripts[count($this->sjscripts)]= '<link rel="stylesheet" href="' . $src . '" type="text/css" />';
+            if (!empty($media)) {
+                $media = ' media="' . $media .'"';
+            }
+            $this->sjscripts[count($this->sjscripts)]= '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
         }
     }
 
@@ -1655,15 +1689,13 @@ class modX extends xPDO {
                     $className = $this->processors[$processorFile];
                 }
                 if (!empty($className)) {
-                    $c = new $className($this,$scriptProperties);
-                    $processor = call_user_func_array(array($c,'getInstance'),array($this,$className,$scriptProperties));
+                    $processor = call_user_func_array(array($className,'getInstance'),array(&$this,$className,$scriptProperties));
                 }
             }
             if (empty($processor)) {
-                $processor = new modDeprecatedProcessor($this);
+                $processor = new modDeprecatedProcessor($this, $scriptProperties);
             }
             $processor->setPath($processorFile);
-            $processor->setProperties($scriptProperties);
             $response = $processor->run();
         } else {
             $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processorFile} does not exist; " . print_r($options, true));
@@ -2175,6 +2207,9 @@ class modX extends xPDO {
         $setting = $this->getObject('modSystemSetting',array(
             'key' => 'extension_packages',
         ));
+        if (!$setting) {
+            return false;
+        }
         $value = $setting->get('value');
         $value = is_array($value) ? $value : $this->fromJSON($value);
         $found = false;
@@ -2250,6 +2285,10 @@ class modX extends xPDO {
         } else {
             $this->context= $this->newObject('modContext');
             $this->context->_fields['key']= $contextKey;
+            if (!$this->context->validate()) {
+                $this->log(modX::LOG_LEVEL_ERROR, 'No valid context specified: ' . $contextKey);
+                $this->context = null;
+            }
         }
         if ($this->context) {
             if (!$this->context->prepare((boolean) $regenerate, is_array($options) ? $options : array())) {
@@ -2275,6 +2314,7 @@ class modX extends xPDO {
                         date_default_timezone_set('UTC');
                     }
                     if ($this->_initialized) {
+                        $this->user = null;
                         $this->getUser();
                     }
                     $initialized = true;
@@ -2354,7 +2394,7 @@ class modX extends xPDO {
      */
     protected function _initSession($options = null) {
         $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
-        if ($this->getOption('session_enabled', $options, true)) {
+        if ($this->getOption('session_enabled', $options, true) || isset($_GET['preview'])) {
             if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
                 $sh= false;
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
@@ -2599,7 +2639,11 @@ class modSystemEvent {
      * @param string $output The output to render.
      */
     public function output($output) {
-        $this->_output .= $output;
+        if ($this->_output === '') {
+            $this->_output = $output;
+        } else {
+            $this->_output .= $output;
+        }
     }
 
     /**

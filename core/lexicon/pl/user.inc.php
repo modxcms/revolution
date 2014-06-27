@@ -20,7 +20,7 @@ $_lang['administrator'] = 'Administrator';
 $_lang['authority'] = 'Authority';
 
 #$_lang['change_password'] = 'Change Password';
-$_lang['change_password'] = 'Change Password';
+$_lang['change_password'] = 'Zmień hasło';
 
 #$_lang['change_password_confirm'] = 'Confirm password';
 $_lang['change_password_confirm'] = 'Potwierdzenie hasła'; #
@@ -32,7 +32,7 @@ $_lang['change_password_new'] = 'Nowe hasło'; #
 $_lang['city'] = 'Miasto'; #
 
 #$_lang['extended_fields'] = 'Extended Fields';
-$_lang['extended_fields'] = 'Extended Fields';
+$_lang['extended_fields'] = 'Dodatkowe pola';
 
 #$_lang['extended_fields_msg'] = 'Edit any extended fields that are implemented here.';
 $_lang['extended_fields_msg'] = 'Edit any extended fields that are implemented here.';
@@ -212,7 +212,7 @@ $_lang['user_dob'] = 'Data urodzenia'; #
 $_lang['user_doesnt_exist'] = 'User does not exist';
 
 #$_lang['user_duplicate'] = 'Duplicate User';
-$_lang['user_duplicate'] = 'Duplicate User';
+$_lang['user_duplicate'] = 'Duplikuj użytkownika';
 
 #$_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through e-mail.';
@@ -236,13 +236,13 @@ $_lang['user_err_already_exists_email'] = 'Email already in use!';
 $_lang['user_err_cannot_delete_last_admin'] = 'You cannot remove the last User in the Administrator group, as this will prevent administration of your site.';
 
 #$_lang['user_err_cannot_delete_self'] = 'You cannot delete yourself!';
-$_lang['user_err_cannot_delete_self'] = 'You cannot delete yourself!';
+$_lang['user_err_cannot_delete_self'] = 'Nie możesz usunąć sam siebie!';
 
 #$_lang['user_err_nf'] = 'User not found.';
-$_lang['user_err_nf'] = 'User not found.';
+$_lang['user_err_nf'] = 'Użytkownik nie znaleziony.';
 
 #$_lang['user_err_not_specified'] = 'No user specified!';
-$_lang['user_err_not_specified'] = 'No user specified!';
+$_lang['user_err_not_specified'] = 'Nie określono użytkownika!';
 
 #$_lang['user_err_not_specified_blockedafter'] = 'Please state the blocked after date in mm/dd/yyyy format. ';
 $_lang['user_err_not_specified_blockedafter'] = 'Please state the blocked after date in mm/dd/yyyy format. ';
@@ -293,19 +293,19 @@ $_lang['user_err_not_specified_uploadsize'] = 'Please specify a valid max upload
 $_lang['user_err_not_specified_username'] = 'Please specify a user name.';
 
 #$_lang['user_err_ns'] = 'User not specified.';
-$_lang['user_err_ns'] = 'User not specified.';
+$_lang['user_err_ns'] = 'Nie określono użytkownika.';
 
 #$_lang['user_err_password'] = 'Incorrect password.';
-$_lang['user_err_password'] = 'Incorrect password.';
+$_lang['user_err_password'] = 'Niepoprawne hasło.';
 
 #$_lang['user_err_password_invalid'] = 'Invalid password specified.';
 $_lang['user_err_password_invalid'] = 'Invalid password specified.';
 
 #$_lang['user_err_password_invalid_old'] = 'Invalid old password.';
-$_lang['user_err_password_invalid_old'] = 'Invalid old password.';
+$_lang['user_err_password_invalid_old'] = 'Stare hasło jest nieprawidłowe.';
 
 #$_lang['user_err_password_too_short'] = 'Password is too short!';
-$_lang['user_err_password_too_short'] = 'Password is too short!';
+$_lang['user_err_password_too_short'] = 'Hasło jest za krótkie!';
 
 #$_lang['user_err_password_no_match'] = 'Passwords do not match.';
 $_lang['user_err_password_no_match'] = 'Passwords do not match.';
@@ -338,10 +338,10 @@ $_lang['user_female'] = 'Kobieta'; #
 $_lang['user_full_name'] = 'Pełna nazwa'; #
 
 #$_lang['user_group'] = 'User Group';
-$_lang['user_group'] = 'User Group';
+$_lang['user_group'] = 'Grupa użytkowników';
 
 #$_lang['user_group_create'] = 'Create User Group';
-$_lang['user_group_create'] = 'Create User Group';
+$_lang['user_group_create'] = 'Utwórz grupę użytkowników';
 
 #$_lang['user_group_id'] = 'UG ID';
 $_lang['user_group_id'] = 'UG ID';
@@ -485,7 +485,7 @@ $_lang['user_management_msg'] = 'Here you can choose which user you wish to edit
 $_lang['user_mobile'] = '<abbr title="Nr telefonu komórkowego">Komórka</abbr>'; #
 
 #$_lang['user_new'] = 'New User';
-$_lang['user_new'] = 'New User';
+$_lang['user_new'] = 'Dodaj użytkownika';
 
 #$_lang['user_password_changed'] = 'Password successfully changed to: [[+password]]';
 $_lang['user_password_changed'] = 'Hasło zostało zmienione na: [[+password]]'; #
@@ -494,7 +494,7 @@ $_lang['user_password_changed'] = 'Hasło zostało zmienione na: [[+password]]';
 $_lang['user_phone'] = '<abbr title="Nr telefonu stacjonarnego">Telefon</abbr>'; #
 
 #$_lang['user_photo'] = 'User Photo';
-$_lang['user_photo'] = 'User Photo';
+$_lang['user_photo'] = 'Zdjęcie użytkownika';
 
 #$_lang['user_photo_message'] = 'Enter the image url for the this user or use the insert button to selected or upload an image file on the server.';
 $_lang['user_photo_message'] = 'Enter the image url for the this user or use the insert button to selected or upload an image file on the server.';
@@ -512,13 +512,13 @@ $_lang['user_profile_err_nf'] = 'FATAL ERROR: User profile not found.';
 $_lang['user_profile_err_save'] = 'An error occurred while attempting to save the user attributes.';
 
 #$_lang['user_remove'] = 'Delete User';
-$_lang['user_remove'] = 'Delete User';
+$_lang['user_remove'] = 'Usuń użytkownika';
 
 #$_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
 $_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
 
 #$_lang['user_remove_multiple'] = 'Delete Multiple Users';
-$_lang['user_remove_multiple'] = 'Delete Multiple Users';
+$_lang['user_remove_multiple'] = 'Usuń wielu użytkowników';
 
 #$_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
 $_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
@@ -536,10 +536,10 @@ $_lang['user_setting_err_remove'] = 'An error occurred while removing user setti
 $_lang['user_setting_err_save'] = 'An error occurred while saving user settings.';
 
 #$_lang['user_settings'] = 'User Settings';
-$_lang['user_settings'] = 'User Settings';
+$_lang['user_settings'] = 'Ustawienia użytkownika';
 
 #$_lang['user_settings_desc'] = 'Here you can change specific settings for the user.';
-$_lang['user_settings_desc'] = 'Here you can change specific settings for the user.';
+$_lang['user_settings_desc'] = 'Tutaj możesz zmienić ustawienia dla danego użytkownika.';
 
 #$_lang['user_state'] = 'State';
 $_lang['user_state'] = 'Województwo'; #
@@ -551,10 +551,10 @@ $_lang['user_sudo'] = 'Sudo User';
 $_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
 
 #$_lang['user_title'] = 'Create/Edit user';
-$_lang['user_title'] = 'Create/Edit user';
+$_lang['user_title'] = 'Utwórz/Edytuj użytkownika';
 
 #$_lang['user_update'] = 'Update User';
-$_lang['user_update'] = 'Update User';
+$_lang['user_update'] = 'Edytuj użytkownika';
 
 #$_lang['user_updated_password_message'] = 'The User has been updated. The password is: [[+password]]';
 $_lang['user_updated_password_message'] = 'The User has been updated. The password is: [[+password]]';
@@ -578,4 +578,4 @@ $_lang['user_zip'] = 'Kod pocztowy'; #
 $_lang['username'] = 'Login'; #
 
 #$_lang['users'] = 'Users';
-$_lang['users'] = 'Users';
+$_lang['users'] = 'Użytkownicy';

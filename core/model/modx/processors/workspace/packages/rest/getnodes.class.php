@@ -17,7 +17,7 @@ class modPackageGetNodesProcessor extends modProcessor {
     public function getLanguageTopics() {
         return array('workspace');
     }
-    
+
     public function initialize() {
         $provider = $this->getProperty('provider',false);
         if (empty($provider)) return $this->modx->lexicon('provider_err_ns');
@@ -54,7 +54,7 @@ class modPackageGetNodesProcessor extends modProcessor {
         }
         return $this->toJSON($list);
     }
-    
+
     public function getRepositories() {
         /** @var modRestResponse $response */
         $response = $this->provider->request('repository');
@@ -62,7 +62,7 @@ class modPackageGetNodesProcessor extends modProcessor {
             return $this->modx->lexicon('provider_err_connect',array('error' => $response->getError()));
         }
         $repositories = $response->toXml();
-        
+
         $list = array();
         foreach ($repositories as $repository) {
             $repositoryArray = array();
@@ -75,6 +75,7 @@ class modPackageGetNodesProcessor extends modProcessor {
                 'leaf' => $repository->packages > 0 ? false : true,
                 'data' => $repositoryArray,
                 'type' => 'repository',
+                'iconCls' => 'icon icon-folder',
             );
         }
         return $list;
@@ -102,6 +103,7 @@ class modPackageGetNodesProcessor extends modProcessor {
                 'leaf' => true,
                 'data' => $tag,
                 'type' => 'tag',
+                'iconCls' => 'icon icon-tag',
             );
         }
 

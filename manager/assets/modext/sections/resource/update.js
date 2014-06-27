@@ -1,6 +1,6 @@
 /**
  * Loads the resource update page
- * 
+ *
  * @class MODx.page.UpdateResource
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -17,13 +17,7 @@ MODx.page.UpdateResource = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'edit'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,preview: 'resource/preview'
-            ,cancel: 'welcome'
-        }
+        ,action: 'resource/update'
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -42,7 +36,6 @@ MODx.page.UpdateResource = function(config) {
         Ext.EventManager.on(window, 'beforeunload',function(e) {
             MODx.releaseLock(this.config.resource);
             MODx.sleep(400);
-            e.browserEvent.returnValue = '';
             return false;
         }, this);
     }
@@ -59,7 +52,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         window.open(this.config.preview_url);
         return false;
     }
-    
+
     ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
@@ -97,17 +90,18 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         if (fp && fp.isDirty()) {
             Ext.Msg.confirm(_('warning'),_('resource_cancel_dirty_confirm'),function(e) {
                 if (e == 'yes') {
+                    fp.warnUnsavedChanges = false;
                     MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
-                    MODx.loadPage('welcome');
+                    MODx.loadPage('?');
                 }
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-            MODx.loadPage('welcome');
+            MODx.loadPage('?');
         }
     }
-    
+
     ,getButtons: function(cfg) {
         var btns = [];
         if (cfg.canSave == 1) {
@@ -115,7 +109,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 process: 'resource/update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: MODx.request.reload ? false : true
+                //,checkDirty: MODx.request.reload ? false : true
                 ,id: 'modx-abtn-save'
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
@@ -132,7 +126,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             });
             btns.push('-');
         }
-        if (cfg.canDuplicate == 1) {
+        if (cfg.canDuplicate == 1 && (cfg.record.parent !== parseInt(MODx.config.tree_root_id) || cfg.canCreateRoot == 1)) {
             btns.push({
                 text: _('duplicate')
                 ,handler: this.duplicateResource
@@ -163,12 +157,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,scope: this
             ,id: 'modx-abtn-cancel'
         });
-        /*btns.push('-');
+        btns.push('-');
         btns.push({
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });*/
+        });
         return btns;
     }
 });

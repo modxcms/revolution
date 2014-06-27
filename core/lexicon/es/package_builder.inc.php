@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Package Builder Spanish lexicon topic
  *

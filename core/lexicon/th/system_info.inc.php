@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * System Info Thai lexicon topic
  *
@@ -42,7 +42,7 @@ $_lang['onlineusers_user'] = 'ผู้ใช้';
 $_lang['onlineusers_userid'] = 'ไอดีผู้ใช้';
 $_lang['optimize_table'] = 'คลิ๊กที่นี่เพื่อเพิ่มประสิทธิภาพตารางนี้';
 $_lang['optimize_table_err'] = 'การเพิ่มประสิทธิภาพตารางผิดพลาด';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> เวอร์ชัน';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> เวอร์ชัน';
 $_lang['server'] = 'เซิร์ฟเวอร์';
 $_lang['servertime'] = 'เวลาเซิร์ฟเวอร์';
 $_lang['serveroffset'] = 'ระยะต่าง';

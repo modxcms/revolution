@@ -22,13 +22,12 @@ MODx.page.UpdateDashboard = function(config) {
             ,handler: function() {
                 MODx.loadPage('system/dashboards');
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
 		,components: [{
             xtype: 'modx-panel-dashboard'
-            ,renderTo: 'modx-panel-dashboard-div'
             ,record: config.record
         }]
 	});

@@ -3,7 +3,7 @@
   padding-right: 1.5em;
 }
 
-/* Thanks to Christian Seele for these! http://chsmedien.com/blog/2013/02/customize-your-modx-dashboard */
+/* Thanks to Christian Seel for these! http://chsmedien.com/blog/2013/02/customize-your-modx-dashboard */
 #managerbuttons {
   margin-bottom: 1em;
   overflow: hidden;
@@ -23,8 +23,8 @@
 #managerbuttons ul {
   /* clearfix */
   *zoom: 1;
-  margin: 0 -1%;
-  width: 102%;
+  margin: 0;
+  width: 100%;
 }
 
 #managerbuttons ul li {
@@ -34,6 +34,15 @@
   padding: 0 1%;
   position: relative;
   width: 25%;
+  box-sizing: border-box;
+
+  &:first-child {
+    padding-left: 0%;
+  }
+
+  &:last-child {
+    padding-right: 0%;
+  }
 }
 
 #managerbuttons ul li a {
@@ -41,10 +50,11 @@
   border-radius: 3px;
   border: 1px solid $borderColor;
   box-shadow: 0 1px 0 $borderShadow;
-  color: #53595f;
+  color: $darkNeutral;
   display: table-cell;
   /* MODX 2.x.x Manager Button Styles */
-  font: bold 11px tahoma, verdana, helvetica, sans-serif;
+  font: $fontSmall;
+  font-weight: bold;
   padding: 12px;
   position: relative;
   text-align: center;
@@ -78,7 +88,7 @@
 
 #helpBanner,
 #contactus {
-  @include box-sizing;
+  @include box-sizing(border-box);
   background: #fff;
   border: 1px solid $borderColor;
   box-shadow: 0 1px 0 $borderShadow;
@@ -93,6 +103,9 @@
 #helpBanner {
   margin-top: 1.5em;
   min-height: 112px;
+  background-repeat:no-repeat;
+  background-position:right top;
+  @include image-set($imgPath + 'modx-help-logo.png', $imgPath + 'modx-help-logo@2x.png');
   #helpLogo {
     float: right;
     height: 76px;
@@ -102,21 +115,21 @@
 }
 
 #contactus {
-  @include box-sizing;
+  @include box-sizing(border-box);
   float: left;
   width: 60%;
   form {
     display: inline;
   }
   input[type=email] {
-    @include box-sizing;
+    @include box-sizing(border-box);
     font-size: 1.1em;
     margin-right: 4px;
     padding: 0.4em;
     width: 70%;
   }
   input[type=submit] {
-    background: none;
+    /*background: none;*/
     border: 0;
     cursor: pointer;
     font-size: 1.1em;
@@ -145,19 +158,15 @@
   }
 }
 
-#adblock {
-  @include box-sizing;
-  background: $softGrey;
+#aboutMODX {
+  @include box-sizing(border-box);
+  background: $aside;
   float: left;
   margin: 1em 0 0 2%;
   min-height: 300px;
   padding: 1em;
   width: 38%;
-}
 
-#aboutMODX {
-  clear: both;
-  padding: 1em 3em;
   p {
     line-height: 1.6;
     margin: 0 0 1em;

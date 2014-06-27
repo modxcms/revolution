@@ -1,7 +1,7 @@
 <?php
 /**
  * Base controller class for Resources
- * 
+ *
  * @package modx
  * @subpackage manager.controllers
  */
@@ -31,10 +31,11 @@ abstract class ResourceManagerController extends modManagerController {
     public $canDelete = true;
     public $canEdit = true;
     public $canCreate = true;
+    public $canCreateRoot = true;
 
     /**
      * Return the appropriate Resource controller class based on the class_key request parameter
-     * 
+     *
      * @static
      * @param modX $modx A reference to the modX instance
      * @param string $className The controller class name that is attempting to be loaded
@@ -48,9 +49,9 @@ abstract class ResourceManagerController extends modManagerController {
             $isDerivative = true;
             $resourceClass = in_array($_REQUEST['class_key'],array('modDocument','modResource')) ? 'modDocument' : $_REQUEST['class_key'];
             if ($resourceClass == 'modResource') $resourceClass = 'modDocument';
-        } else if (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined') {
+        } else if (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined' && strlen($_REQUEST['id']) === strlen((integer)$_REQUEST['id'])) {
             /** @var modResource $resource */
-            $resource = $modx->getObject('modResource',$_REQUEST['id']);
+            $resource = $modx->getObject('modResource', array('id' => $_REQUEST['id']));
             if ($resource && !in_array($resource->get('class_key'),array('modDocument','modResource'))) {
                 $isDerivative = true;
                 $resourceClass = $resource->get('class_key');
@@ -84,7 +85,7 @@ abstract class ResourceManagerController extends modManagerController {
 
     /**
      * Used to set values on the resource record sent to the template for derivative classes
-     * 
+     *
      * @return void
      */
     public function prepareResource() {}
@@ -110,8 +111,9 @@ abstract class ResourceManagerController extends modManagerController {
         $this->canPublish = $this->modx->hasPermission('publish_document');
         $this->canDelete = ($this->modx->hasPermission('delete_document') && $this->resource->checkPolicy(array('save' => true, 'delete' => true)));
         $this->canDuplicate = $this->resource->checkPolicy('save');
+        $this->canCreateRoot = $this->modx->hasPermission('new_document_in_root');
     }
-    
+
     /**
      * Get and set the parent for this resource
      * @return string The pagetitle of the parent
@@ -119,7 +121,7 @@ abstract class ResourceManagerController extends modManagerController {
     public function setParent() {
         /* handle default parent */
         $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
-        $parentId = !empty($scriptProperties['parent']) ? $scriptProperties['parent'] : $this->resource->get('parent');
+        $parentId = !empty($this->scriptProperties['parent']) ? $this->scriptProperties['parent'] : $this->resource->get('parent');
         if ($parentId == 0) {
             $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
         } else {
@@ -353,7 +355,7 @@ abstract class ResourceManagerController extends modManagerController {
                 }
             }
         }
-        
+
         $onResourceTVFormRender = $this->modx->invokeEvent('OnResourceTVFormRender',array(
             'categories' => &$finalCategories,
             'template' => $templateId,
@@ -463,7 +465,7 @@ abstract class ResourceManagerController extends modManagerController {
         foreach ($resourceGroups['collection'] as $resourceGroup) {
             $access = (boolean) $resourceGroup->get('access');
             if (!empty($parent) && $this->resource->get('id') == 0) {
-                $resourceGroupArray['access'] = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
+                $access = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
             }
             $resourceGroupArray = array(
                 $resourceGroup->get('id'),

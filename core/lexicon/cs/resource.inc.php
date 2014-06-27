@@ -349,7 +349,7 @@ $_lang['resource_syncsite'] = 'Vyprázdnit cache';
 $_lang['resource_syncsite_help'] = 'Pokud je aktivní, MODX vyprázdní cache dokumentu po jeho uložení. Tímto zaručíte, že návštěvík webu uvidí vždy aktuální verzi dokumentu.';
 
 // $_lang['resource_template'] = 'Uses Template';
-$_lang['resource_template'] = 'Použítá šablona';
+$_lang['resource_template'] = 'Použitá šablona';
 
 // $_lang['resource_template_help'] = 'The template in use by the resource.';
 $_lang['resource_template_help'] = 'Šablona používaná dokumentem.';

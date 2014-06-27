@@ -1,7 +1,7 @@
 <?php
 /**
  * MODX Revolution
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -168,12 +168,12 @@ class modSessionHandler {
      * could not be retrieved and/or created.
      */
     protected function _getSession($id, $autoCreate= false) {
-        $this->session= $this->modx->getObject('modSession', $id, $this->cacheLifetime);
+        $this->session= $this->modx->getObject('modSession', array('id' => $id), $this->cacheLifetime);
         if ($autoCreate && !is_object($this->session)) {
             $this->session= $this->modx->newObject('modSession');
             $this->session->set('id', $id);
         }
-        if (!($this->session instanceof modSession) || $id != $this->session->get('id')) {
+        if (!($this->session instanceof modSession) || $id != $this->session->get('id') || !$this->session->validate()) {
             $this->modx->log(modX::LOG_LEVEL_INFO, 'There was an error retrieving or creating session id: ' . $id);
         }
         return $this->session;

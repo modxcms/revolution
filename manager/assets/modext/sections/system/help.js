@@ -30,53 +30,10 @@ MODx.page.Help = function(config) {
             ,renderTo: 'help-content-here-people'
             ,html: contentHTML
             ,cls: 'nobg'
-            ,listeners: {
-                afterrender: {fn: this.onReady,scope:this}
-            }
         }]
     });
     MODx.page.Help.superclass.constructor.call(this,config);
 
 };
-Ext.extend(MODx.page.Help,MODx.Component,{
-
-    /**
-     * Fires once the page is rendered, and ready to accept jQuery shiznit
-     */
-    onReady: function(){
-
-        /**
-         * StripeCheckout support popups
-         */
-        (function($){
-            $('.supportTicket').click(function (e) {
-
-                e.preventDefault();
-
-                var token = function (res) {
-                    var $input = $('<input type=hidden name=stripeToken />').val(res.id);
-                    $('form').append($input).submit();
-                };
-
-                StripeCheckout.open({
-                    key: 'pk_test_hT0zzA6jxhqLhyxltfU61Ld3',
-                    address: false,
-                    amount: 30000,
-                    currency: 'usd',
-                    name: _('support_ticket_title') || 'Support Ticket title missing',
-                    description: _('support_ticket_subtitle') || 'Support ticket subtitle missing',
-                    panelLabel: _('support_ticket_button') || 'Click me!',
-                    token: token
-                });
-
-                return false;
-            });
-        })(jQuery);
-
-    }
-
-
-
-
-});
+Ext.extend(MODx.page.Help,MODx.Component);
 Ext.reg('modx-page-help',MODx.page.Help);

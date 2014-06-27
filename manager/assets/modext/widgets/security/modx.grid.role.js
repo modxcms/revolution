@@ -1,6 +1,6 @@
 /**
  * Loads a grid of roles.
- * 
+ *
  * @class MODx.grid.Role
  * @extends MODx.grid.Grid
  * @constructor
@@ -19,6 +19,7 @@ MODx.grid.Role = function(config) {
         ,fields: ['id','name','description','authority','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/role/updatefromgrid'
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -44,6 +45,7 @@ MODx.grid.Role = function(config) {
         }]
         ,tbar: [{
             text: _('create_new')
+            ,cls:'primary-button'
             ,handler: this.createRole
             ,scope: this
         }]

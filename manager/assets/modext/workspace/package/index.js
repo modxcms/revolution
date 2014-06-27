@@ -4,11 +4,10 @@ MODx.page.Package = function(config) {
         formpanel: 'modx-panel-package'
         ,components: [{
             xtype: 'modx-panel-package'
-            ,renderTo: 'modx-panel-package-div'
             ,signature: MODx.request.signature
         }]
         ,buttons: [{
-            process: 'update'
+            process: 'workspace/packages/update'
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
@@ -23,10 +22,10 @@ MODx.page.Package = function(config) {
             ,handler: function() {
                 MODx.loadPage('workspaces');
             }
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
     });
     MODx.page.Package.superclass.constructor.call(this,config);
 };

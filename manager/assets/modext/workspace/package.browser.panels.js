@@ -251,7 +251,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		var h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
-			h.push({ className:'download green', text: _('download') });
+			h.push({ className:'download primary', text: _('download') });
 		}
 		values.actions = h;
 		return this.mainColumnTpl.apply(values);
@@ -611,7 +611,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
             ,params: {
                 action: 'workspace/packages/rest/download'
                 ,info: data.location+'::'+data.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {
@@ -779,7 +779,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
             ,params: {
                 action: 'workspace/packages/rest/download'
                 ,info: record.location+'::'+record.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {

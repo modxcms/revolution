@@ -2,6 +2,116 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Remove references to deprecated modX::getMicroTime()
+- Fix parent ResourceGroup inheritance on create
+- Preserve order of selected values in multiselect
+- Updated PHPMailer to v5.2.8
+- Updated phpThumb to 1.7.12-pre (current GitHub status)
+- Added resource_tree_node_name_fallback system setting
+- [#11297] Allow passing options to modRestCurlClient
+- Ease reuse of media sources panel
+- [#9245] Fix context menu position on custom resources that define a certain menu
+- Added OnResourceAutoPublish system event
+- Fix incorrect sorting by rank in TV grid on template create/update screen
+- Fixed Categories with a sub-category would always be shown in an Element's tree even if it didn't contain any elements of that type
+- Fix media source directive in TV when accessed from another context
+- List only user related resources in recently edited resources widget
+- Fixed colors/states not changing on subsequent database connection attempts in installer
+- Make ddGroups unique for resource, element and file tree
+- Fixed collapsing tree after quick creating an element
+- Add back Legacy modX.getFullTableName() method
+- Make OnFileManagerBeforeUpload event selectable
+- Added ability to define a default package provider via default_provider setting
+- Return nothing when toPlaceholder output filter is used
+- Added replace closing php tag for inline php dashboard widget
+- Fix to tv,chunk,snippet name validator per scottboryses observation
+- New manager theme
+- Move fax field near other telephone related fields
+- Option to disable CSS/JS compression during setup
+- Changed extension of JSON content type from .js to .json
+- Added modResource.isMember and modResource.getResourceGroupNames methods
+- Replaced uploaddialog with more modern multiuploaddialog
+- Added Other gender
+- Fixed events called in modResourceGroupCreateProcessor
+- Added dedicated page with media manager
+- Add icon/markup to modMenu items, allow new entries for topmenu and usermenu
+- An instance of modError added to modMail
+- Make sure connector responses return application/json content type
+- Removed hard coded "index.php" in manager assets
+- Preselect media source in static elements browser
+- Added ability to refresh a media source (tree)
+- Prevent duplication in context root if new_document_in_root != true
+- Sanitize filename when editing a file
+- Adds validateOldPassword flag to optionally skip passwordMatches() call
+- Make preview possible if session_enabled = 0
+- Improved widget of active users
+- Calling modUser->joinGroup sets rank to count(UserGroupMembers) instead of to 0
+- Call getNodesFormatted with parent property in modResourceSortProcessor
+- Hide back button during installation
+- Fixed regex for element names
+- Added system settings to change default action
+- Check for "theme_path/js/layout.js" before trying to load it
+- Clean modx->user on context init
+- Added shift modifier to tree click, that will open resource in a new window
+- Removing duplicate windows
+- Updated context setting's update window to appear as a create window
+- Load setting topic to allow 3PC components to use it for system setting translations
+- Allow filtering of namespace by request on lexicon page
+- Add proper validation for modSession id
+- Updated phpmailer class to 5.2.7
+- Fallback http_host to prevent cache issues under HTTP/1.0
+- Added ctx option to isloggedin/isnotloggedin output filters
+- Ensure opcache.revalidate_freq is set to 0 during setup
+- Clear menus cache on actions with menu
+- [#11123] Added "success":true to modProcessor response
+- [#11182] Fix issue where grid stores loaded only 20 records by default when pagination were disabled
+- [#828] handlePreview is called only if the deleted value changed
+- Update xPDO for additional SQL injection protection
+- [#11186][#11176][#9880][#2896][#5850] Disabled dirty check on save button in Resource's panel
+- Validate context key provided to modX::initialize()
+- [#11170] Added pdf to content type
+- [#675] Add upload functionality directly to package manager grid
+- [#703] Added OnElementNotFound system event
+- [#11149] Make sure hitting the close button does not trigger double prevent navigation warnings
+- Add refreshURIs call as part of clearing the site cache
+- Update parent field in Resource panel after drag and drop current resource
+- Check if template exissts before using it's icon in getNodes processor
+- Prevent content duplication when using [css|js|html]To[Head|Bottom]
+- [#11099] Removed C:\fakepath\ from filename during uploads
+- Fix path issue with phpthumb after 1.7.11-beta update
+- Prevent redirect of base_url when query string exists
+- Enable Template-based icons in Resource tree
+- Increase message_limit for ExtJS HttpStateProvider
+- Fix lexicon getList processor
+- Improve Confirm Navigation feature and make configurable
+- Confirm navigation when unsaved changes exist in resource panel
+- Fix deprecated returnValue to prevent confirm navigation alert
+- Fix xPDO->parseBindings bug triggering modDbRegisterMessage errors
+- Prevent processor property overwriting in modX::runProcessor()
+- Add open in new window action to middle mouse button click in trees
+- Preserve value types in modSystemEvent::output()
+- Prevent removal of user groups after validation fails
+- Remove extra dot in filename for Content Disposition attachment
+- Fix unescaped backslash in file and image TV
+- Remove cache clearing logic from system setting model
+- Update phpthumb to 1.7.11-beta to close security vulnerability
+- Add options and context filtering to modX::getTree()
+- Auto-resize modal window height to fit browser height
+- Add modSoftRemoveProcessor for marking records deleted
+- Ensure property not set when creating new property in Property Set
+- Implement auto-save on Content Types grid
+- Support PHP use statements in Snippets and Plugins
+- Add in/inarray conditional output filter
+- Add preg_quote to friendly_alias_word_delimiters characters
+- Do not prepend base_url when baseUrlRelative in modFileMediaSource
+- Add filterPathSegment() methods to modX and modResource
+- Remove check for children on Categories in Elements Tree
+- Allow Categories to have same name with different parents
+- Add case-insensitive contains/containsnot conditional output filters
+- Add modResource::clearCache() to clear cache for single Resource
+- Remove all dependency on mysql extension (deprecated in PHP >= 5.5)
+- Add extended field support and more to userinfo filter
+- [#9484] Add UserGroup Settings
 - [#10135] Fix output from multiple plugins OnSiteSettingsRender
 - Make path param optional in modFileMediaSource::getBases()
 - Clear register before calling clear cache
@@ -24,6 +134,12 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.10-pl (October 7, 2013)
+====================================
+- Increase modTransportPackage version columns range to smallint
+- [#10211] Fix parser state bug triggered by media sources
+- Fix loading modResource derivatives in class_key dropdown
+- [#9973] Prevent extended user classes being set to modUser
 - Upgrade xPDO to 2.2.9-pl
 - [#10182] Improve sanitization of processor_err_nf response
 

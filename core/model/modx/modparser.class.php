@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -212,6 +212,9 @@ class modParser {
      * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        $_processingTag = $this->_processingTag;
+        $_processingUncacheable = $this->_processingUncacheable;
+        $_removingUnprocessed = $this->_removingUnprocessed;
         $this->_processingTag = true;
         $this->_processingUncacheable = (boolean) $processUncacheable;
         $this->_removingUnprocessed = (boolean) $removeUnprocessed;
@@ -256,7 +259,10 @@ class modParser {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
         }
-        $this->_processingTag = false;
+
+        $this->_removingUnprocessed = $_removingUnprocessed;
+        $this->_processingUncacheable = $_processingUncacheable;
+        $this->_processingTag = $_processingTag;
         return $processed;
     }
 
@@ -553,6 +559,27 @@ class modParser {
                     'policies' => $element->getPolicies(),
                     'source' => $element->Source ? $element->Source->toArray() : array(),
                 );
+            }
+            elseif(!$element) {
+                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => $realname));
+                $element = false;
+                if ($evtOutput != false) {
+                    foreach ((array) $evtOutput as $elm) {
+                        if (!empty($elm) && is_string($elm)) {
+                            $element = $this->modx->newObject($class, array(
+                                'name' => $realname,
+                                'snippet' => $elm
+                            ));
+                        }
+                        elseif ($elm instanceof modElement ) {
+                            $element = $elm;
+                        }
+
+                        if ($element) {
+                            break;
+                        }
+                    }
+                }
             }
         }
         if ($element instanceof modElement) {

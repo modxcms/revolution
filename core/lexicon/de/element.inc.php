@@ -42,3 +42,4 @@ $_lang['tv_default'] = 'Standardwert';
 $_lang['tv_type'] = 'Eingabetyp';
 $_lang['tv_output_type'] = 'Ausgabetyp';
 $_lang['tv_output_type_properties'] = 'Ausgabetyp-Eigenschaften';
+$_lang['static_file_ns'] = 'Sie müssen eine statische Datei angeben.';

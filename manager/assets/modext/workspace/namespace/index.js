@@ -10,10 +10,10 @@ MODx.page.Namespaces = function(config) {
         components: [{
             xtype: 'modx-panel-namespaces'
         }]
-        ,buttons: [/*{
+        ,buttons: [{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
     });
     MODx.page.Namespaces.superclass.constructor.call(this,config);
 };

@@ -3,9 +3,12 @@ MODx.page.ImportHTML = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-import-html'
         ,buttons: [{
-            process: 'import', text: _('import_site'), method: 'remote'
+            process: 'system/import/html'
+            ,text: _('import_site')
+            ,method: 'remote'
+            ,cls:'primary-button'
         },{
-            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
+            text: _('cancel')
         }]
         ,components: [{
             xtype: 'modx-panel-import-html'

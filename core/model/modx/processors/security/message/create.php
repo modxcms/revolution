@@ -25,7 +25,12 @@ if (empty($scriptProperties['subject'])) {
 /* process message */
 switch ($type) {
     case 'user':
-        $user = $modx->getObject('modUser',$scriptProperties['user']);
+        $userId = (integer)$scriptProperties['user'];
+        if (strlen($userId) !== strlen($scriptProperties['user'])) {
+            return $modx->error->failure($modx->lexicon('user_err_nf'));
+        }
+
+        $user = $modx->getObject('modUser', array('id' => $userId));
         if ($user == null) {
             return $modx->error->failure($modx->lexicon('user_err_nf'));
         }
@@ -45,7 +50,12 @@ switch ($type) {
     break;
 
     case 'role':
-        $role = $modx->getObject('modUserGroupRole',$scriptProperties['role']);
+        $roleId = (integer)$scriptProperties['role'];
+        if (strlen($roleId) !== strlen($scriptProperties['role'])) {
+            return $modx->error->failure($modx->lexicon('role_err_not_found'));
+        }
+
+        $role = $modx->getObject('modUserGroupRole', array('id' => $roleId));
         if ($role == null) {
             return $modx->error->failure($modx->lexicon('role_err_not_found'));
         }
@@ -70,7 +80,12 @@ switch ($type) {
         }
     break;
     case 'usergroup':
-        $group = $modx->getObject('modUserGroup',$scriptProperties['group']);
+        $groupId = (integer)$scriptProperties['group'];
+        if (strlen($groupId) !== strlen($scriptProperties['group'])) {
+            return $modx->error->failure($modx->lexicon('group_err_not_found'));
+        }
+
+        $group = $modx->getObject('modUserGroup', array('id' => $groupId));
         if ($group == null) {
             return $modx->error->failure($modx->lexicon('group_err_not_found'));
         }

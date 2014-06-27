@@ -33,9 +33,7 @@ MODx.panel.Messages = function(config) {
                 ,user: config.user
                 ,preventRender: true
             }]
-        }],{
-            border: true
-        })]
+        }])]
     });
     MODx.panel.Messages.superclass.constructor.call(this,config);
 };
@@ -110,6 +108,7 @@ MODx.grid.Message = function(config) {
             text: _('message_new')
             ,scope: this
             ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
+            ,cls:'primary-button'
         },'->',{
             xtype: 'textfield'
             ,name: 'search'

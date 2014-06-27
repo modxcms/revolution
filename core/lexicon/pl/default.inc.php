@@ -8,19 +8,19 @@
  */
 
 #$_lang['access'] = 'Access';
-$_lang['access'] = 'Access';
+$_lang['access'] = 'Dostęp';
 
 #$_lang['access_denied'] = 'Access denied.';
 $_lang['access_denied'] = 'Dostęp zabroniony.'; #
 
 #$_lang['action'] = 'Action';
-$_lang['action'] = 'Action';
+$_lang['action'] = 'Akcja';
 
 #$_lang['action_err_nfs'] = 'No action with [[+id]] found.';
-$_lang['action_err_nfs'] = 'No action with [[+id]] found.';
+$_lang['action_err_nfs'] = 'Nie znaleziono akcji z [[+id]]';
 
 #$_lang['actions'] = 'Actions';
-$_lang['actions'] = 'Actions';
+$_lang['actions'] = 'Akcje';
 
 #$_lang['active_users_none'] = 'No active users found.';
 $_lang['active_users_none'] = 'Nie znaleziono aktywnych użytkowników'; #
@@ -32,46 +32,46 @@ $_lang['activity_message'] = 'To jest lista zasobów, które zostały przez Cieb
 $_lang['activity_title'] = 'Ostatnio edytowane'; # ? Seems 'recent_docs' is used instead?
 
 #$_lang['add'] = 'Add';
-$_lang['add'] = 'Add';
+$_lang['add'] = 'Dodaj';
 
 #$_lang['add_chunk'] = 'Add Chunk';
-$_lang['add_chunk'] = 'Add Chunk';
+$_lang['add_chunk'] = 'Dodaj Fragment';
 
 #$_lang['add_folder'] = 'New Folder';
-$_lang['add_folder'] = 'New Folder';
+$_lang['add_folder'] = 'Nowy folder';
 
 #$_lang['add_plugin'] = 'Add Plugin';
-$_lang['add_plugin'] = 'Add Plugin';
+$_lang['add_plugin'] = 'Dodaj Plugin';
 
 #$_lang['add_snippet'] = 'Add Snippet';
-$_lang['add_snippet'] = 'Add Snippet';
+$_lang['add_snippet'] = 'Dodaj Snippet';
 
 #$_lang['add_tag'] = 'Add tag';
-$_lang['add_tag'] = 'Add tag';
+$_lang['add_tag'] = 'Dodaj tag';
 
 #$_lang['add_template'] = 'Add Template';
-$_lang['add_template'] = 'Add Template';
+$_lang['add_template'] = 'Dodaj Szablon';
 
 #$_lang['add_to_category_chunk'] = 'Create a New Chunk Here';
-$_lang['add_to_category_chunk'] = 'Create a New Chunk Here';
+$_lang['add_to_category_chunk'] = 'Utwórz tu nowy Fragment';
 
 #$_lang['add_to_category_plugin'] = 'Create a New Plugin Here';
-$_lang['add_to_category_plugin'] = 'Create a New Plugin Here';
+$_lang['add_to_category_plugin'] = 'Utwórz tu nowy Plugin';
 
 #$_lang['add_to_category_snippet'] = 'Create a New Snippet Here';
-$_lang['add_to_category_snippet'] = 'Create a New Snippet Here';
+$_lang['add_to_category_snippet'] = 'Utwórz tu nowy Snippet';
 
 #$_lang['add_to_category_template'] = 'Create a New Template Here';
-$_lang['add_to_category_template'] = 'Create a New Template Here';
+$_lang['add_to_category_template'] = 'Utwórz tu nowy Szablon';
 
 #$_lang['add_to_category_this'] = 'Create a New [[+type]] Here';
-$_lang['add_to_category_this'] = 'Create a New [[+type]] Here';
+$_lang['add_to_category_this'] = 'Utwórz tu nowy  [[+type]]';
 
 #$_lang['add_to_category_tv'] = 'Create a New TV Here';
-$_lang['add_to_category_tv'] = 'Create a New TV Here';
+$_lang['add_to_category_tv'] = 'Utwórz tu nowy TV';
 
 #$_lang['add_tv'] = 'Add TV';
-$_lang['add_tv'] = 'Add TV';
+$_lang['add_tv'] = 'Dodaj TV';
 
 #$_lang['add_weblink'] = 'New Weblink';
 $_lang['add_weblink'] = 'Utwórz nowy Odnośnik'; #
@@ -83,10 +83,10 @@ $_lang['add_symlink'] = 'Utwórz nowe Dowiązanie'; #
 $_lang['alias'] = 'Alias';
 
 #$_lang['and'] = 'and';
-$_lang['and'] = 'and';
+$_lang['and'] = 'i';
 
 #$_lang['anonymous'] = 'anonymous';
-$_lang['anonymous'] = 'anonymous';
+$_lang['anonymous'] = 'anonimowy';
 
 #$_lang['assets'] = 'Assets';
 $_lang['assets'] = 'Assets';
@@ -98,10 +98,10 @@ $_lang['at'] = 'At';
 $_lang['attachment'] = 'Pobieranie'; #
 
 #$_lang['attributes'] = 'Attributes';
-$_lang['attributes'] = 'Attributes';
+$_lang['attributes'] = 'Atrybuty';
 
 #$_lang['back'] = '&lt;- Back';
-$_lang['back'] = '&lt;- Back';
+$_lang['back'] = '&lt;- Wróć';
 
 #$_lang['backup'] = 'Backup';
 $_lang['backup'] = 'Backup';
@@ -110,10 +110,10 @@ $_lang['backup'] = 'Backup';
 $_lang['bk_manager'] = 'Backup';
 
 #$_lang['bulk_actions'] = 'Bulk Actions';
-$_lang['bulk_actions'] = 'Bulk Actions';
+$_lang['bulk_actions'] = 'Operacje na zaznaczonych';
 
 #$_lang['cache_files_deleted'] = 'The following files were deleted:';
-$_lang['cache_files_deleted'] = 'The following files were deleted:';
+$_lang['cache_files_deleted'] = 'Następujące pliki zostaną usunięte:';
 
 #$_lang['cache_publish_event_error'] = '<p>ERROR: Could not determine next publish event!</p><pre>[[+info]]</pre>';
 $_lang['cache_publish_event_error'] = '<p>ERROR: Could not determine next publish event!</p><pre>[[+info]]</pre>';
@@ -140,25 +140,25 @@ $_lang['caption_desc'] = 'The name to show beside the input when editing a TV on
 $_lang['categories'] = 'Kategorie'; #
 
 #$_lang['category'] = 'Category';
-$_lang['category'] = 'Category';
+$_lang['category'] = 'Kategoria';
 
 #$_lang['category_create'] = 'Create New Category';
-$_lang['category_create'] = 'Create New Category';
+$_lang['category_create'] = 'Utwórz nową kategorię';
 
 #$_lang['category_confirm_delete'] = 'Are you sure you want to remove this category? All Elements within it will revert to having no category.';
 $_lang['category_confirm_delete'] = 'Are you sure you want to remove this category? All Elements within it will revert to having no category.';
 
 #$_lang['category_rename'] = 'Rename Category';
-$_lang['category_rename'] = 'Rename Category';
+$_lang['category_rename'] = 'Zmień kategorię';
 
-#$_lang['category_remove'] = 'Delete Category';
-$_lang['category_remove'] = 'Delete Category';
+#$_lang['category_remove'] = 'Remove Category';
+$_lang['category_remove'] = 'Usuń kategorię';
 
 #$_lang['chunk'] = 'Chunk';
-$_lang['chunk'] = 'Chunk';
+$_lang['chunk'] = 'Fragment';
 
 #$_lang['chunks'] = 'Chunks';
-$_lang['chunks'] = 'Chunks';
+$_lang['chunks'] = 'Fragmenty';
 
 #$_lang['class_key'] = 'Class Key';
 $_lang['class_key'] = 'Class Key';
@@ -185,10 +185,10 @@ $_lang['click_to_change'] = 'Click to Change';
 $_lang['close'] = 'Zamknij'; # ? Powinno być "Po zapisaniu zamknij", ale nie mam pewności, czy nie jest używane gdzieś jeszcze.
 
 #$_lang['code'] = 'Code';
-$_lang['code'] = 'Code';
+$_lang['code'] = 'Kod';
 
 #$_lang['collapse_all'] = 'Collapse All';
-$_lang['collapse_all'] = 'Collapse All';
+$_lang['collapse_all'] = 'Zwiń wszystkie';
 
 #$_lang['collapse_tree'] = 'Collapse tree';
 $_lang['collapse_tree'] = 'Zwiń wszystkie'; #
@@ -200,16 +200,16 @@ $_lang['combo'] = 'ComboBox';
 $_lang['comment'] = 'Komentarz'; #
 
 #$_lang['configuration'] = 'Configuration';
-$_lang['configuration'] = 'Configuration';
+$_lang['configuration'] = 'Konfiguracja';
 
 #$_lang['confirm'] = 'Confirm';
-$_lang['confirm'] = 'Confirm';
+$_lang['confirm'] = 'Potwierdź';
 
 #$_lang['confirm_delete_message'] = 'Are you sure you want to delete this message?';
-$_lang['confirm_delete_message'] = 'Are you sure you want to delete this message?';
+$_lang['confirm_delete_message'] = 'Na pewno chcesz usunąć tę wiadomość?';
 
 #$_lang['confirm_remove'] = 'Are you sure you want to remove this item?';
-$_lang['confirm_remove'] = 'Are you sure you want to remove this item?';
+$_lang['confirm_remove'] = 'Na pewno chcesz usunąć ten element?';
 
 #$_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can remove ALL locks currently in place.<br /><br />Proceed?';
 $_lang['confirm_remove_locks'] = 'Zdarza się, że użytkownicy zamykają okno przeglądarki w trackie edytowania zasobów lub innych elmentów, co może pozostawić je w stanie zablokowanym do edycji. Możesz usunąć <strong>wszystkie</strong> istniejące blokady.<br /><br />Czy chcesz kontynuować?'; #
@@ -221,13 +221,13 @@ $_lang['confirm_undelete'] = 'Any children documents deleted at the same time as
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 
 #$_lang['console'] = 'Console';
-$_lang['console'] = 'Console';
+$_lang['console'] = 'Konsola';
 
 #$_lang['console_download_output'] = 'Download Output to File';
-$_lang['console_download_output'] = 'Download Output to File';
+$_lang['console_download_output'] = 'Zapisz do pliku';
 
 #$_lang['console_running'] = 'Console running...';
-$_lang['console_running'] = 'Console running...';
+$_lang['console_running'] = 'Konsola pracuje...';
 
 #$_lang['content'] = 'Content';
 $_lang['content'] = 'Zawartość'; #
@@ -236,22 +236,22 @@ $_lang['content'] = 'Zawartość'; #
 $_lang['content_elements'] = 'Content Elements';
 
 #$_lang['context_duplicate'] = 'Duplicate Context';
-$_lang['context_duplicate'] = 'Duplicate Context';
+$_lang['context_duplicate'] = 'Powiel Kontekst';
 
 #$_lang['context_refresh'] = 'Refresh Context';
-$_lang['context_refresh'] = 'Refresh Context';
+$_lang['context_refresh'] = 'Odśwież Kontekst';
 
 #$_lang['context_remove'] = 'Delete Context';
-$_lang['context_remove'] = 'Delete Context';
+$_lang['context_remove'] = 'Usuń kontekst';
 
 #$_lang['context_remove_confirm'] = 'Are you sure you want to remove this Context? It will also permanently remove any Resources within the Context. This is irreversible.';
-$_lang['context_remove_confirm'] = 'Are you sure you want to remove this Context? It will also permanently remove any Resources within the Context. This is irreversible.';
+$_lang['context_remove_confirm'] = 'Czy na pewno chcesz usunąć tek Kontekst? Ta operacja całkowicie usunie również wszystkie Zasoby znajdujące się w tym kontekście. Zmiany będą nieodwrcalne.';
 
 #$_lang['copy_to_clipboard'] = 'Copy to Clipboard';
-$_lang['copy_to_clipboard'] = 'Copy to Clipboard';
+$_lang['copy_to_clipboard'] = 'Kopiuj do schowka';
 
 #$_lang['core_rte'] = 'MODX Editor';
-$_lang['core_rte'] = 'MODX Editor';
+$_lang['core_rte'] = 'Edytor MODX';
 
 #$_lang['correct_errors'] = 'Please correct the errors in your form before submitting.';
 $_lang['correct_errors'] = 'Sprawdź i usuń błędy, aby móc kontynuować.'; #
@@ -260,40 +260,40 @@ $_lang['correct_errors'] = 'Sprawdź i usuń błędy, aby móc kontynuować.'; #
 $_lang['create'] = 'Utwórz tutaj'; #
 
 #$_lang['create_document_here'] = 'Create document here';
-$_lang['create_document_here'] = 'Create document here';
+$_lang['create_document_here'] = 'Utwórz tu dokument';
 
 #$_lang['create_folder_here'] = 'Create folder here';
-$_lang['create_folder_here'] = 'Create folder here';
+$_lang['create_folder_here'] = 'Utwórz tu folder';
 
 #$_lang['create_new'] = 'Create New';
-$_lang['create_new'] = 'Create New';
+$_lang['create_new'] = 'Utwórz nowy';
 
 #$_lang['create_user_group'] = 'Create User Group';
-$_lang['create_user_group'] = 'Create User Group';
+$_lang['create_user_group'] = 'Utwórz grupę użytkowników';
 
 #$_lang['created'] = 'Created';
-$_lang['created'] = 'Created';
+$_lang['created'] = 'Utworzony';
 
 #$_lang['createdon'] = 'Creation date';
-$_lang['createdon'] = 'Creation date';
+$_lang['createdon'] = 'Data utworzenia';
 
 #$_lang['current'] = 'Current';
-$_lang['current'] = 'Current';
+$_lang['current'] = 'Bieżący';
 
 #$_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard'] = 'Pulpit'; #
 
 #$_lang['data_err_load'] = 'Error loading data.';
-$_lang['data_err_load'] = 'Error loading data.';
+$_lang['data_err_load'] = 'Błąd ładowania danych.';
 
 #$_lang['date'] = 'Date';
-$_lang['date'] = 'Date';
+$_lang['date'] = 'Data';
 
 #$_lang['datechanged'] = 'Date changed';
-$_lang['datechanged'] = 'Date changed';
+$_lang['datechanged'] = 'Data zmieniona';
 
 #$_lang['db_header'] = 'Database tables';
-$_lang['db_header'] = 'Database tables';
+$_lang['db_header'] = 'Tabele bazy danych';
 
 #$_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by clicking on the link in the Overhead column.';
 $_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by clicking on the link in the Overhead column.';
@@ -314,19 +314,19 @@ $_lang['description'] = 'Opis'; #
 $_lang['directory_refresh'] = 'Odśwież folder'; #
 
 #$_lang['disabled'] = 'Disabled';
-$_lang['disabled'] = 'Disabled';
+$_lang['disabled'] = 'Wyłączony';
 
 #$_lang['document'] = 'Document';
 $_lang['document'] = 'Dokument'; #
 
 #$_lang['documents'] = 'Resources';
-$_lang['documents'] = 'Resources';
+$_lang['documents'] = 'Zasoby';
 
 #$_lang['done'] = 'Done';
-$_lang['done'] = 'Done';
+$_lang['done'] = 'Gotowe';
 
 #$_lang['downloading'] = 'Downloading...';
-$_lang['downloading'] = 'Downloading...';
+$_lang['downloading'] = 'Pobieranie...';
 
 #$_lang['duplicate'] = 'Duplicate';
 $_lang['duplicate'] = 'Utwórz duplikat'; #
@@ -335,22 +335,22 @@ $_lang['duplicate'] = 'Utwórz duplikat'; #
 $_lang['duplicate_children'] = 'Powielenie podrzędnych'; #
 
 #$_lang['duplicate_chunk'] = 'Duplicate Chunk';
-$_lang['duplicate_chunk'] = 'Duplicate Chunk';
+$_lang['duplicate_chunk'] = 'Duplikuj Fragment';
 
 #$_lang['duplicate_of'] = 'Duplicate of [[+name]]';
 $_lang['duplicate_of'] = 'Duplikat [[+name]]'; # ?
 
 #$_lang['duplicate_plugin'] = 'Duplicate Plugin';
-$_lang['duplicate_plugin'] = 'Duplicate Plugin';
+$_lang['duplicate_plugin'] = 'Duplikuj Plugin';
 
 #$_lang['duplicate_snippet'] = 'Duplicate Snippet';
-$_lang['duplicate_snippet'] = 'Duplicate Snippet';
+$_lang['duplicate_snippet'] = 'Duplikuj Snippet';
 
 #$_lang['duplicate_template'] = 'Duplicate Template';
-$_lang['duplicate_template'] = 'Duplicate Template';
+$_lang['duplicate_template'] = 'Duplikuj Szablon';
 
 #$_lang['duplicate_tv'] = 'Duplicate TV';
-$_lang['duplicate_tv'] = 'Duplicate TV';
+$_lang['duplicate_tv'] = 'Duplikuj TV';
 
 #$_lang['duplication_options'] = 'Duplication Options';
 $_lang['duplication_options'] = 'Opcje duplikowania'; #
@@ -359,40 +359,40 @@ $_lang['duplication_options'] = 'Opcje duplikowania'; #
 $_lang['edit'] = 'Edytuj'; #
 
 #$_lang['edit_chunk'] = 'Edit Chunk';
-$_lang['edit_chunk'] = 'Edit Chunk';
+$_lang['edit_chunk'] = 'Edytuj Fragment';
 
 #$_lang['edit_context'] = 'Edit context';
-$_lang['edit_context'] = 'Edit context';
+$_lang['edit_context'] = 'Edytuj kontekst';
 
 #$_lang['edit_plugin'] = 'Edit Plugin';
-$_lang['edit_plugin'] = 'Edit Plugin';
+$_lang['edit_plugin'] = 'Edytuj Plugin';
 
 #$_lang['edit_snippet'] = 'Edit Snippet';
-$_lang['edit_snippet'] = 'Edit Snippet';
+$_lang['edit_snippet'] = 'Edytuj Snippet';
 
 #$_lang['edit_template'] = 'Edit Template';
-$_lang['edit_template'] = 'Edit Template';
+$_lang['edit_template'] = 'Edytuj Szablon';
 
 #$_lang['edit_tv'] = 'Edit TV';
-$_lang['edit_tv'] = 'Edit TV';
+$_lang['edit_tv'] = 'Edytuj TV';
 
 #$_lang['editing'] = 'Editing: [[+name]]';
-$_lang['editing'] = 'Editing: [[+name]]';
+$_lang['editing'] = 'Edytowanie: [[+name]]';
 
 #$_lang['editedon'] = 'Edit Date';
-$_lang['editedon'] = 'Edit Date';
+$_lang['editedon'] = 'Edytuj datę';
 
 #$_lang['editing_form'] = 'Editing Form';
-$_lang['editing_form'] = 'Editing Form';
+$_lang['editing_form'] = 'Edytuj Formę';
 
 #$_lang['element_duplicate'] = 'Duplicate Element';
-$_lang['element_duplicate'] = 'Duplicate Element';
+$_lang['element_duplicate'] = 'Duplikuj Element';
 
 #$_lang['element_duplicate_values'] = 'Duplicate Resource Values?';
-$_lang['element_duplicate_values'] = 'Duplicate Resource Values?';
+$_lang['element_duplicate_values'] = 'Zduplikować pola zasobów?';
 
 #$_lang['element_name_new'] = 'Name of New Element';
-$_lang['element_name_new'] = 'Name of New Element';
+$_lang['element_name_new'] = 'Nazwa nowego elementu';
 
 #$_lang['elements'] = 'Elements';
 $_lang['elements'] = 'Elementy'; #
@@ -413,7 +413,7 @@ $_lang['empty_recycle_bin_empty'] = 'Nie ma żadnych skasowanych zasobów do usu
 $_lang['empty_recycle_bin_emptied'] = 'Wszystkie skasowane zasoby zostały trwale usuniięte.'; #
 
 #$_lang['enabled'] = 'Enabled';
-$_lang['enabled'] = 'Enabled';
+$_lang['enabled'] = 'Włączone';
 
 #$_lang['err_self_parent'] = 'Cannot make something its own parent!';
 $_lang['err_self_parent'] = 'Cannot make something its own parent!';
@@ -422,25 +422,25 @@ $_lang['err_self_parent'] = 'Cannot make something its own parent!';
 $_lang['error'] = 'Błąd'; #
 
 #$_lang['error_sending_email'] = 'Error sending email';
-$_lang['error_sending_email'] = 'Error sending email';
+$_lang['error_sending_email'] = 'Błąd wysyłania wiadomości email';
 
 #$_lang['error_sending_email_to'] = 'Error while sending mail to ';
-$_lang['error_sending_email_to'] = 'Error while sending mail to ';
+$_lang['error_sending_email_to'] = 'Błąd podczas wysyłania do ';
 
 #$_lang['event_id'] = 'Event Id';
-$_lang['event_id'] = 'Event Id';
+$_lang['event_id'] = 'Id wydarzenia';
 
 #$_lang['existing_category'] = 'Existing Category';
 $_lang['existing_category'] = 'Existing Category';
 
 #$_lang['expand_all'] = 'Expand All';
-$_lang['expand_all'] = 'Expand All';
+$_lang['expand_all'] = 'Rozwiń wszystkie';
 
 #$_lang['expand_tree'] = 'Expand tree';
 $_lang['expand_tree'] = 'Rozwiń wszystkie'; #
 
 #$_lang['export'] = 'Export';
-$_lang['export'] = 'Export';
+$_lang['export'] = 'Eksport';
 
 #$_lang['ext_afterpage'] = 'of {0}';
 $_lang['ext_afterpage'] = 'spośród {0}'; #
@@ -449,16 +449,16 @@ $_lang['ext_afterpage'] = 'spośród {0}'; #
 $_lang['ext_beforepage'] = 'Strona'; #
 
 #$_lang['ext_checkboxinv'] = 'You must select at least one item in this group';
-$_lang['ext_checkboxinv'] = 'You must select at least one item in this group';
+$_lang['ext_checkboxinv'] = 'Musisz zaznaczyć przynajmniej jeden element w tej grupie';
 
 #$_lang['ext_choosemonth'] = 'Choose a month (Control+Up/Down to move years)';
-$_lang['ext_choosemonth'] = 'Choose a month (Control+Up/Down to move years)';
+$_lang['ext_choosemonth'] = 'Wybierz miesiąc (Control+Góra/Dół aby zmienić rok)';
 
 #$_lang['ext_column_lock'] = 'Lock Column';
-$_lang['ext_column_lock'] = 'Lock Column';
+$_lang['ext_column_lock'] = 'Zablokuj kolumnę';
 
 #$_lang['ext_column_unlock'] = 'Unlock Column';
-$_lang['ext_column_unlock'] = 'Unlock Column';
+$_lang['ext_column_unlock'] = 'Odblokuj Kolumnę';
 
 #$_lang['ext_columns'] = 'Columns';
 $_lang['ext_columns'] = 'Kolumny'; #
@@ -569,7 +569,7 @@ $_lang['ext_today_tip'] = '{0} (Spacebar)';
 $_lang['failure'] = 'Failure';
 
 #$_lang['female'] = 'Female';
-$_lang['female'] = 'Female';
+$_lang['female'] = 'Kobieta';
 
 #$_lang['field_required'] = 'This field is required.';
 $_lang['field_required'] = 'Wypełnienie tego pola jest wymagane'; #
@@ -581,7 +581,7 @@ $_lang['files'] = 'Pliki'; #
 $_lang['filter'] = 'Filtruj'; #
 
 #$_lang['filter_clear'] = 'Clear Filter';
-$_lang['filter_clear'] = 'Clear Filter';
+$_lang['filter_clear'] = 'Wyczyść filtr';
 
 #$_lang['filter_by_key'] = 'Filter by Key...';
 $_lang['filter_by_key'] = 'Filter by Key...';
@@ -611,7 +611,7 @@ $_lang['general_settings'] = 'General Settings';
 $_lang['go'] = 'Go';
 
 #$_lang['group'] = 'Group';
-$_lang['group'] = 'Group';
+$_lang['group'] = 'Grupa';
 
 #$_lang['guid'] = 'GUID';
 $_lang['guid'] = 'GUID';
@@ -635,7 +635,7 @@ $_lang['hide_tree'] = 'Hide tree';
 $_lang['home'] = 'Pulpit'; # topmenu
 
 #$_lang['icon'] = 'Icon';
-$_lang['icon'] = 'Icon';
+$_lang['icon'] = 'Ikona';
 
 #$_lang['id'] = 'ID';
 $_lang['id'] = 'ID'; #
@@ -653,7 +653,7 @@ $_lang['import_err_xml'] = 'An error occurred importing the XML file. Please ens
 $_lang['info'] = 'Twoje konto użytkownika'; # Is used for what 'yourinfo_title' should be.
 
 #$_lang['information'] = 'Information';
-$_lang['information'] = 'Information';
+$_lang['information'] = 'Informacje';
 
 #$_lang['inline'] = 'Inline';
 $_lang['inline'] = 'Wyświetlanie'; #
@@ -695,7 +695,7 @@ $_lang['language'] = 'Language';
 $_lang['lexicon'] = 'Lexicon';
 
 #$_lang['list'] = 'List';
-$_lang['list'] = 'List';
+$_lang['list'] = 'Lista';
 
 #$_lang['load_headers'] = 'Load Headers';
 $_lang['load_headers'] = 'Load Headers';
@@ -704,7 +704,7 @@ $_lang['load_headers'] = 'Load Headers';
 $_lang['loading'] = 'Ładowanie&hellip;'; #
 
 #$_lang['locked'] = 'Locked';
-$_lang['locked'] = 'Locked';
+$_lang['locked'] = 'Zablokowane';
 
 #$_lang['locked_by'] = 'locked by [[+username]]';
 $_lang['locked_by'] = 'Edytuje [[+username]]'; #
@@ -713,7 +713,7 @@ $_lang['locked_by'] = 'Edytuje [[+username]]'; #
 $_lang['lock_msg'] = '[[+name]] zablokował ten [[+object]] i nad nim pracuje. Poczekaj, aż zakończy swoją pracę i wtedy spróbuj ponownie.'; # ?
 
 #$_lang['logged_in_as'] = 'logged in as [[+username]]';
-$_lang['logged_in_as'] = 'logged in as [[+username]]';
+$_lang['logged_in_as'] = 'zalogowano jako [[+username]]';
 
 #$_lang['login'] = 'Login';
 $_lang['login'] = 'Login';
@@ -728,13 +728,13 @@ $_lang['logout_confirm'] = 'Czy na pewno chcesz się wylogować?'; # topmenu
 $_lang['long_title'] = 'Pełny tytuł'; #
 
 #$_lang['male'] = 'Male';
-$_lang['male'] = 'Male';
+$_lang['male'] = 'Mężczyzna';
 
 #$_lang['manage_files'] = 'Manage Files';
-$_lang['manage_files'] = 'Manage Files';
+$_lang['manage_files'] = 'Zarządzaj plikami';
 
 #$_lang['manager'] = 'Manager';
-$_lang['manager'] = 'Manager';
+$_lang['manager'] = 'Menedżer';
 
 #$_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
 $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
@@ -746,7 +746,7 @@ $_lang['media'] = 'Pliki'; #
 $_lang['menu_order'] = 'Kolejność w menu'; #
 
 #$_lang['mime_type'] = 'MIME Type';
-$_lang['mime_type'] = 'MIME Type';
+$_lang['mime_type'] = 'Typ MIME';
 
 #$_lang['mime_type_desc'] = 'The mime type for all files with the content type.';
 $_lang['mime_type_desc'] = 'The mime type for all files with the content type.';
@@ -770,58 +770,58 @@ $_lang['move'] = 'Move';
 $_lang['name'] = 'Nazwa'; #
 
 #$_lang['new'] = 'New';
-$_lang['new'] = 'New';
+$_lang['new'] = 'Nowy';
 
 #$_lang['new_category'] = 'New Category';
-$_lang['new_category'] = 'New Category';
+$_lang['new_category'] = 'Nowa Kategoria';
 
 #$_lang['new_chunk'] = 'New Chunk';
-$_lang['new_chunk'] = 'New Chunk';
+$_lang['new_chunk'] = 'Nowy Fragment';
 
 #$_lang['new_folder'] = 'New Folder';
-$_lang['new_folder'] = 'New Folder';
+$_lang['new_folder'] = 'Nowy Folder';
 
 #$_lang['new_key'] = 'New Key';
-$_lang['new_key'] = 'New Key';
+$_lang['new_key'] = 'Nowy klucz';
 
 #$_lang['new_message'] = 'New Message';
-$_lang['new_message'] = 'New Message';
+$_lang['new_message'] = 'Nowa wiadomość';
 
 #$_lang['new_name'] = 'New Name';
 $_lang['new_name'] = 'Nowa nazwa'; #
 
 #$_lang['new_parent'] = 'New parent';
-$_lang['new_parent'] = 'New parent';
+$_lang['new_parent'] = 'Nowy rodzic';
 
 #$_lang['new_plugin'] = 'New Plugin';
-$_lang['new_plugin'] = 'New Plugin';
+$_lang['new_plugin'] = 'Nowy Plugin';
 
 #$_lang['new_role'] = 'Create a new role';
 $_lang['new_role'] = 'Create a new role';
 
 #$_lang['new_snippet'] = 'New Snippet';
-$_lang['new_snippet'] = 'New Snippet';
+$_lang['new_snippet'] = 'Nowy Snippet';
 
 #$_lang['new_template'] = 'New Template';
-$_lang['new_template'] = 'New Template';
+$_lang['new_template'] = 'Nowy Szablon';
 
 #$_lang['new_tv'] = 'New Template Variable';
-$_lang['new_tv'] = 'New Template Variable';
+$_lang['new_tv'] = 'Nowa Zmienna Szablonu (TV)';
 
 #$_lang['new_user'] = 'New user';
-$_lang['new_user'] = 'New user';
+$_lang['new_user'] = 'Nowy użytkownik';
 
 #$_lang['next'] = 'Next -&gt;';
-$_lang['next'] = 'Next -&gt;';
+$_lang['next'] = 'Następny -&gt;';
 
 #$_lang['no'] = 'No';
 $_lang['no'] = 'Nie'; #
 
 #$_lang['none'] = 'None';
-$_lang['none'] = 'None';
+$_lang['none'] = 'Żaden';
 
 #$_lang['notset'] = 'Not set';
-$_lang['notset'] = 'Not set';
+$_lang['notset'] = 'Nie ustawiono';
 
 #$_lang['not_deleted'] = 'has not been deleted.';
 $_lang['not_deleted'] = 'has not been deleted.';
@@ -830,7 +830,7 @@ $_lang['not_deleted'] = 'has not been deleted.';
 $_lang['not_logged_in'] = 'Not logged in!';
 
 #$_lang['not_set'] = 'Not set';
-$_lang['not_set'] = 'Not set';
+$_lang['not_set'] = 'Nie ustawiono';
 
 #$_lang['no_activity_message'] = 'You have not yet created or edited any documents.';
 $_lang['no_activity_message'] = 'You have not yet created or edited any documents.';
@@ -839,7 +839,7 @@ $_lang['no_activity_message'] = 'You have not yet created or edited any document
 $_lang['no_action'] = 'No Action';
 
 #$_lang['no_category'] = 'uncategorized';
-$_lang['no_category'] = 'uncategorized';
+$_lang['no_category'] = 'bez kategorii';
 
 #$_lang['no_records_found'] = 'No records found.';
 $_lang['no_records_found'] = 'No records found.';
@@ -905,19 +905,19 @@ $_lang['orm_container_remove_confirm'] = 'Are you sure you want to remove this c
 $_lang['pagetitle'] = 'Tytuł'; #
 
 #$_lang['page_title'] = 'Resource Title';
-$_lang['page_title'] = 'Resource Title';
+$_lang['page_title'] = 'Tytuł zasobu';
 
 #$_lang['parameter'] = 'Parameter';
-$_lang['parameter'] = 'Parameter';
+$_lang['parameter'] = 'Parametr';
 
 #$_lang['parameters'] = 'Parameters';
-$_lang['parameters'] = 'Parameters';
+$_lang['parameters'] = 'Parametry';
 
 #$_lang['parent'] = 'Parent';
 $_lang['parent'] = 'Podrzędny do'; #
 
 #$_lang['password'] = 'Password';
-$_lang['password'] = 'Password';
+$_lang['password'] = 'Hasło';
 
 #$_lang['path'] = 'Path';
 $_lang['path'] = 'Ścieżka'; #
@@ -947,7 +947,7 @@ $_lang['plugin_activate'] = 'Activate Plugin';
 $_lang['plugin_deactivate'] = 'Deactivate Plugin';
 
 #$_lang['plugins'] = 'Plugins';
-$_lang['plugins'] = 'Plugins';
+$_lang['plugins'] = 'Pluginy';
 
 #$_lang['po_make_all_unpub'] = 'Make All Unpublished';
 $_lang['po_make_all_unpub'] = 'Wszystkie nieopublikowane'; #
@@ -959,19 +959,19 @@ $_lang['po_make_all_pub'] = 'Wszystkie opublikowane'; #
 $_lang['po_preserve'] = 'Tak jak obecnie'; #
 
 #$_lang['preview'] = 'Preview';
-$_lang['preview'] = 'Preview';
+$_lang['preview'] = 'Podgląd';
 
 #$_lang['private'] = 'Private';
-$_lang['private'] = 'Private';
+$_lang['private'] = 'Prywatny';
 
 #$_lang['processor_err_nf'] = 'Processor not found: [[+target]]';
 $_lang['processor_err_nf'] = 'Processor not found: [[+target]]';
 
 #$_lang['progress'] = 'Progress';
-$_lang['progress'] = 'Progress';
+$_lang['progress'] = 'Postęp';
 
 #$_lang['properties'] = 'Properties';
-$_lang['properties'] = 'Properties';
+$_lang['properties'] = 'Właściwości';
 
 #$_lang['property_set'] = 'Property Set';
 $_lang['property_set'] = 'Property Set';
@@ -1055,7 +1055,7 @@ $_lang['rank'] = 'Rank';
 $_lang['recent_docs'] = 'Ostatnio edytowane'; # Seems to be used what 'activity_title' is meant for?
 
 #$_lang['redirecting'] = 'Redirecting...';
-$_lang['redirecting'] = 'Redirecting...';
+$_lang['redirecting'] = 'Przekierowywanie...';
 
 #$_lang['refresh_action_map'] = 'Clearing the Action map cache';
 $_lang['refresh_action_map'] = 'Clearing the Action map cache';
@@ -1097,7 +1097,7 @@ $_lang['refresh_success'] = 'Refresh successful!';
 $_lang['refresh_system_settings'] = 'Regenerating system settings cache';
 
 #$_lang['refresh_title'] = 'Refresh site';
-$_lang['refresh_title'] = 'Refresh site';
+$_lang['refresh_title'] = 'Odśwież stronę';
 
 #$_lang['refresh_tree'] = 'Refresh tree';
 $_lang['refresh_tree'] = 'Odśwież'; #
@@ -1106,49 +1106,49 @@ $_lang['refresh_tree'] = 'Odśwież'; #
 $_lang['refresh_unpublished'] = '<strong>[[+num]]</strong> documents were unpublished.';
 
 #$_lang['refreshing_tree'] = 'Refreshing tree...';
-$_lang['refreshing_tree'] = 'Refreshing tree...';
+$_lang['refreshing_tree'] = 'Odświeżanie drzewa...';
 
 #$_lang['release'] = 'Release';
 $_lang['release'] = 'Release';
 
 #$_lang['reload'] = 'Reload';
-$_lang['reload'] = 'Reload';
+$_lang['reload'] = 'Przeładuj';
 
 #$_lang['remember_username'] = 'Remember me';
-$_lang['remember_username'] = 'Remember me';
+$_lang['remember_username'] = 'Zapamiętaj mnie';
 
 #$_lang['remove'] = 'Delete';
-$_lang['remove'] = 'Delete';
+$_lang['remove'] = 'Usuń';
 
-#$_lang['remove_category'] = 'Delete Category';
-$_lang['remove_category'] = 'Delete Category';
+#$_lang['remove_category'] = 'Remove Category';
+$_lang['remove_category'] = 'Usuń Kategorię';
 
 #$_lang['remove_chunk'] = 'Remove Chunk';
-$_lang['remove_chunk'] = 'Remove Chunk';
+$_lang['remove_chunk'] = 'Usuń Fragment';
 
 #$_lang['remove_date'] = 'Remove date';
-$_lang['remove_date'] = 'Remove date';
+$_lang['remove_date'] = 'Usuń datę';
 
 #$_lang['remove_plugin'] = 'Remove Plugin';
-$_lang['remove_plugin'] = 'Remove Plugin';
+$_lang['remove_plugin'] = 'Usuń Plugin';
 
 #$_lang['remove_selected'] = 'Delete Selected';
-$_lang['remove_selected'] = 'Delete Selected';
+$_lang['remove_selected'] = 'Delete Zaznaczone';
 
 #$_lang['remove_snippet'] = 'Remove Snippet';
-$_lang['remove_snippet'] = 'Remove Snippet';
+$_lang['remove_snippet'] = 'Usuń Snippet';
 
 #$_lang['remove_template'] = 'Remove Template';
-$_lang['remove_template'] = 'Remove Template';
+$_lang['remove_template'] = 'Usuń Szablon';
 
 #$_lang['remove_tv'] = 'Remove TV';
-$_lang['remove_tv'] = 'Remove TV';
+$_lang['remove_tv'] = 'Usuń TV';
 
 #$_lang['remove_this_confirm'] = 'Are you sure you want to remove the [[+type]]: "[[+name]]"?';
-$_lang['remove_this_confirm'] = 'Are you sure you want to remove the [[+type]]: "[[+name]]"?';
+$_lang['remove_this_confirm'] = 'Na pewno chcesz usunąć [[+type]]: "[[+name]]"?';
 
 #$_lang['remove_user_from_group'] = 'Remove User From Group';
-$_lang['remove_user_from_group'] = 'Remove User From Group';
+$_lang['remove_user_from_group'] = 'Usuń użytkownika z grupy';
 
 #$_lang['rename'] = 'Rename';
 $_lang['rename'] = 'Zmień nazwę'; #
@@ -1163,7 +1163,7 @@ $_lang['reset_failedlogins'] = 'reset';
 $_lang['reset_password'] = 'Hasło'; #
 
 #$_lang['resource'] = 'Resource';
-$_lang['resource'] = 'Resource';
+$_lang['resource'] = 'Zasób';
 
 #$_lang['resources'] = 'Resources';
 $_lang['resources'] = 'Zasoby'; #
@@ -1214,13 +1214,13 @@ $_lang['save'] = 'Zapisz'; #
 $_lang['save_and_close'] = 'Zapisz i zamknij'; #
 
 #$_lang['save_changes'] = 'Save Changes';
-$_lang['save_changes'] = 'Save Changes';
+$_lang['save_changes'] = 'Zapisz zmiany';
 
 #$_lang['save_successful'] = 'Save successful.';
 $_lang['save_successful'] = 'Zapisano poprawnie'; #
 
 #$_lang['save_tag'] = 'Save tag';
-$_lang['save_tag'] = 'Save tag';
+$_lang['save_tag'] = 'Zapisz tag';
 
 #$_lang['saving'] = 'Saving...';
 $_lang['saving'] = 'Zapisywanie&hellip;'; #
@@ -1232,7 +1232,7 @@ $_lang['scroll_dn'] = 'Scroll down';
 $_lang['scroll_up'] = 'Scroll up';
 
 #$_lang['search'] = 'Search';
-$_lang['search'] = 'Search';
+$_lang['search'] = 'Szukaj';
 
 #$_lang['search_criteria'] = 'Search criteria';
 $_lang['search_criteria'] = 'Kryteria wyszukiwania'; #
@@ -1253,16 +1253,16 @@ $_lang['select_date'] = 'Select a date';
 $_lang['select_el_opts'] = 'Select Element Options';
 
 #$_lang['selected_activate'] = 'Activate Selected';
-$_lang['selected_activate'] = 'Activate Selected';
+$_lang['selected_activate'] = 'Aktywuj zaznaczone';
 
 #$_lang['selected_deactivate'] = 'Deactivate Selected';
-$_lang['selected_deactivate'] = 'Deactivate Selected';
+$_lang['selected_deactivate'] = 'Deaktywuj zaznaczone';
 
 #$_lang['selected_remove'] = 'Delete Selected';
-$_lang['selected_remove'] = 'Delete Selected';
+$_lang['selected_remove'] = 'Usuń zaznaczone';
 
 #$_lang['send'] = 'Send';
-$_lang['send'] = 'Send';
+$_lang['send'] = 'Wyślij';
 
 #$_lang['service_url'] = 'Service URL';
 $_lang['service_url'] = 'Service URL';
@@ -1274,13 +1274,13 @@ $_lang['session_extended'] = 'Sesja została przedłużona!'; # ?
 $_lang['session_logging_out'] = 'Your session has expired. Please proceed to login again.';
 
 #$_lang['set'] = 'Set';
-$_lang['set'] = 'Set';
+$_lang['set'] = 'Ustaw';
 
 #$_lang['set_to_default'] = 'Set to Default';
 $_lang['set_to_default'] = 'Ustaw wartość domyślną'; #
 
 #$_lang['setting'] = 'Setting';
-$_lang['setting'] = 'Setting';
+$_lang['setting'] = 'Ustawienie';
 
 #$_lang['settings'] = 'Settings';
 $_lang['settings'] = 'Ustawienia'; #
@@ -1319,13 +1319,13 @@ $_lang['sort_asc'] = 'Ascending';
 $_lang['sort_by'] = 'Sortuj wg pola'; #
 
 #$_lang['sort_desc'] = 'Descending';
-$_lang['sort_desc'] = 'Descending';
+$_lang['sort_desc'] = 'Malejąco';
 
 #$_lang['sort_tree'] = 'Sort the tree';
 $_lang['sort_tree'] = 'Sort the tree';
 
 #$_lang['source'] = 'Source';
-$_lang['source'] = 'Source';
+$_lang['source'] = 'Źródło';
 
 #$_lang['specify_name_error'] = 'Please specify a name.';
 $_lang['specify_name_error'] = 'Please specify a name.';
@@ -1334,7 +1334,7 @@ $_lang['specify_name_error'] = 'Please specify a name.';
 $_lang['static_resource'] = 'Załącznik'; #
 
 #$_lang['statistics'] = 'Statistics';
-$_lang['statistics'] = 'Statistics';
+$_lang['statistics'] = 'Statystyki';
 
 #$_lang['stay'] = 'Continue editing';
 $_lang['stay'] = 'Po zapisaniu kontynuuj edycję'; #
@@ -1343,7 +1343,7 @@ $_lang['stay'] = 'Po zapisaniu kontynuuj edycję'; #
 $_lang['stay_new'] = 'Po zapisaniu dodaj następny'; #
 
 #$_lang['submit'] = 'Submit';
-$_lang['submit'] = 'Submit';
+$_lang['submit'] = 'Wyślij';
 
 #$_lang['success'] = 'Success!';
 $_lang['success'] = 'Sukces!'; # ? Zakończono powodzeniem? Potwierdzenie? Udało się?
@@ -1352,7 +1352,7 @@ $_lang['success'] = 'Sukces!'; # ? Zakończono powodzeniem? Potwierdzenie? Udał
 $_lang['sysinfo_activity_message'] = 'This list show which resources have been recently edited by your users.';
 
 #$_lang['sysinfo_userid'] = 'User';
-$_lang['sysinfo_userid'] = 'User';
+$_lang['sysinfo_userid'] = 'Użytkownik';
 
 #$_lang['sys_alert'] = 'System Alert';
 $_lang['sys_alert'] = 'System Alert';
@@ -1370,31 +1370,31 @@ $_lang['tag'] = 'Tag';
 $_lang['target'] = 'Target';
 
 #$_lang['template'] = 'Template';
-$_lang['template'] = 'Template';
+$_lang['template'] = 'Szablon';
 
 #$_lang['templates'] = 'Templates';
-$_lang['templates'] = 'Templates';
+$_lang['templates'] = 'Szablony';
 
 #$_lang['text'] = 'Text';
-$_lang['text'] = 'Text';
+$_lang['text'] = 'Tekst';
 
 #$_lang['textarea'] = 'Textarea';
-$_lang['textarea'] = 'Textarea';
+$_lang['textarea'] = 'Obszar tekstu';
 
 #$_lang['textfield'] = 'Textfield';
-$_lang['textfield'] = 'Textfield';
+$_lang['textfield'] = 'Pole tekstwe';
 
 #$_lang['title'] = 'Title';
-$_lang['title'] = 'Title';
+$_lang['title'] = 'Tytuł';
 
 #$_lang['tmplvar'] = 'Template Variable';
-$_lang['tmplvar'] = 'Template Variable';
+$_lang['tmplvar'] = 'Zmienna Szablonu (TV)';
 
 #$_lang['tmplvars'] = 'Template Variables';
-$_lang['tmplvars'] = 'Template Variables';
+$_lang['tmplvars'] = 'Zmienne Szablonu (TV)';
 
 #$_lang['to'] = 'to';
-$_lang['to'] = 'to';
+$_lang['to'] = 'do';
 
 #$_lang['today'] = 'Today';
 $_lang['today'] = 'Dzisiaj'; #
@@ -1403,7 +1403,7 @@ $_lang['today'] = 'Dzisiaj'; #
 $_lang['toggle_richtext'] = 'Toggle Richtext';
 
 #$_lang['total'] = 'total';
-$_lang['total'] = 'total';
+$_lang['total'] = 'łącznie';
 
 #$_lang['track_visitors_title'] = 'Track Visitors';
 $_lang['track_visitors_title'] = 'Track Visitors';
@@ -1424,7 +1424,7 @@ $_lang['tree_sort'] = 'Sort tree';
 $_lang['tv'] = 'TV';
 
 #$_lang['tv_default'] = 'Default Value';
-$_lang['tv_default'] = 'Default Value';
+$_lang['tv_default'] = 'Wartość domyślna';
 
 #$_lang['tv_default_desc'] = 'The default value this TV will have if none is specified.';
 $_lang['tv_default_desc'] = 'The default value this TV will have if none is specified.';
@@ -1442,19 +1442,19 @@ $_lang['tv_type'] = 'Input Type';
 $_lang['tv_value_inherited'] = 'Wartość odziedziczona'; #
 
 #$_lang['type'] = 'Type';
-$_lang['type'] = 'Type';
+$_lang['type'] = 'Typ';
 
 #$_lang['uncategorized'] = 'uncategorized';
-$_lang['uncategorized'] = 'uncategorized';
+$_lang['uncategorized'] = 'bez kategorii';
 
 #$_lang['undelete'] = 'Undelete';
-$_lang['undelete'] = 'Undelete';
+$_lang['undelete'] = 'Przywróć';
 
 #$_lang['undeleted'] = 'Not Deleted';
 $_lang['undeleted'] = 'Nieskasowany'; #
 
 #$_lang['unpublish'] = 'Unpublish';
-$_lang['unpublish'] = 'Unpublish';
+$_lang['unpublish'] = 'Cofnij publikację';
 
 #$_lang['unpublish_date'] = 'Unpublish Date';
 $_lang['unpublish_date'] = 'Data zakończenia publikacji'; #
@@ -1493,10 +1493,10 @@ $_lang['upload'] = 'Upload';
 $_lang['username'] = 'Nazwa użytkownika'; # ?
 
 #$_lang['value'] = 'Value';
-$_lang['value'] = 'Value';
+$_lang['value'] = 'Wartość';
 
 #$_lang['version'] = 'Version';
-$_lang['version'] = 'Version';
+$_lang['version'] = 'Wersja';
 
 #$_lang['view'] = 'View';
 $_lang['view'] = 'Wyświetl'; #

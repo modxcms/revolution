@@ -13,6 +13,7 @@ MODx.tree.UserGroup = function(config) {
         ,id: 'modx-tree-usergroup'
         ,url: MODx.config.connector_url
         ,action: 'security/group/getnodes'
+        ,sortAction: 'security/group/sort'
         ,root_id: 'n_ug_0'
         ,root_name: _('user_groups')
         ,enableDrag: true
@@ -24,13 +25,14 @@ MODx.tree.UserGroup = function(config) {
             text: _('user_group_new')
             ,scope: this
             ,handler: this.createUserGroup.createDelegate(this,[true],true)
+            ,cls:'primary-button'
         }]
     });
     MODx.tree.UserGroup.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{	
+Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     windows: {}
-	
+
     ,addUser: function(item,e) {
         var n = this.cm.activeNode;
         var ug = n.id.substr(2).split('_');ug = ug[1];
@@ -49,7 +51,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         this.windows.adduser.setValues(r);
         this.windows.adduser.show(e.target);
     }
-	
+
     ,createUserGroup: function(item,e,tbar) {
         tbar = tbar || false;
         var p;
@@ -74,11 +76,11 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         }
         this.windows.createUsergroup.show(e.target);
     }
-    
+
     ,updateUserGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
-        
+
         MODx.loadPage('security/usergroup/update', 'id=' + id);
     }
 
@@ -126,7 +128,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         return m;
     }
-	
+
     ,removeUserGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];

@@ -59,7 +59,7 @@ class SystemSettingsManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/settings/index.tpl';
+        return '';
     }
 
     /**

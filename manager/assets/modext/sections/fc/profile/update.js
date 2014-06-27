@@ -16,8 +16,9 @@ MODx.page.UpdateFCProfile = function(config) {
             ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'security/forms/profile/update'
             ,text: _('save')
+            ,cls:'primary-button'
             ,method: 'remote'
             ,checkDirty: false
             ,keys: [{
@@ -28,15 +29,14 @@ MODx.page.UpdateFCProfile = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:'security/forms'}
-        }/*,'-',{
+        },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-fc-profile'
-            ,renderTo: 'modx-panel-fc-profile-div'
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
+            //,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateFCProfile.superclass.constructor.call(this,config);

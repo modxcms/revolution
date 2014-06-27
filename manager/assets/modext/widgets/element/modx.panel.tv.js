@@ -202,9 +202,15 @@ MODx.panel.TV = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
+                        }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -360,6 +366,16 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         this.initialized = true;
         MODx.fireEvent('ready');
         return true;
+    }
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-tv-static-file')
+            ,source = Ext.getCmp('modx-tv-static-source').getValue();
+
+        browser.config.source = source;
     }
 
     ,beforeSubmit: function(o) {

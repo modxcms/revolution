@@ -56,11 +56,21 @@ Ext.extend(MODx,Ext.Component,{
         });
     }
 
+    /**
+     * Add the given component to the modx-content container
+     *
+     * @param {String|Object} cmp Either a component xtype (string) or an object/configuration
+     *
+     * @return void
+     */
     ,add: function(cmp) {
+        if (typeof cmp === 'string') {
+            cmp = { xtype: cmp }
+        }
         var ctr = Ext.getCmp('modx-content');
         if (ctr) {
             ctr.removeAll();
-            ctr.add({ xtype: cmp });
+            ctr.add(cmp);
             ctr.doLayout();
         }
     }
@@ -230,8 +240,13 @@ Ext.extend(MODx,Ext.Component,{
 
     ,helpUrl: false
     ,loadHelpPane: function(b) {
-        var url = MODx.helpUrl;
-        if (!url) { return false; }
+        var url = MODx.helpUrl || MODx.config.help_url || '';
+        if (!url || !url.length) { return false; }
+
+        if (url.substring(0, 4) !== 'http') {
+            url = MODx.config.base_help_url + url;
+        }
+
         MODx.helpWindow = new Ext.Window({
             title: _('help')
             ,width: 850
@@ -639,7 +654,7 @@ MODx.HttpProvider = function(config) {
     );
     MODx.HttpProvider.superclass.constructor.call(this,config);
     Ext.apply(this, config, {
-        delay: 1000
+        delay: 500
         ,dirty: false
         ,started: false
         ,autoStart: true
@@ -667,7 +682,7 @@ MODx.HttpProvider = function(config) {
             ,poll_limit: 1
             ,poll_interval: 1
             ,time_limit: 10
-            ,message_limit: 200
+            ,message_limit: 1000
             ,remove_read: 0
             ,show_filename: 0
             ,include_keys: 1

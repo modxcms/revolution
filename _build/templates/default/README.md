@@ -41,20 +41,21 @@ First, clone a copy of this git repo by running:
 git clone -b develop git://github.com/modxcms/revolution.git
 ```
 
-Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) and [bower](http://bower.io/) packages if you haven't before. These should be done as global installs:
+Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) package if you haven't before. This should be done as global install:
 
 ```bash
-npm install -g grunt-cli bower
+npm install -g grunt-cli
 ```
 
-Make sure you have `grunt` and `bower` installed by testing:
+Make sure you have `grunt`installed by testing:
 
 ```bash
 grunt --version
-bower --version
 ```
 
-Enter the default template directory and install the Node and Bower dependencies, this time *without* specifying a global(-g) install:
+If grunt comes back as command not found on OS X, you may need to update your PATH. [See this page for more details](http://www.hongkiat.com/blog/grunt-command-not-found/)
+
+Enter the default template directory and install the Node dependencies, this time *without* specifying a global(-g) install:
 
 ```bash
 cd revolution/_build/templates/default
@@ -93,3 +94,34 @@ Compile Sass using expanded output style for development by running:
 grunt expand
 ```
 _Note: do not check in uncompressed CSS._
+
+Using Sourcemaps
+----------------------------
+Sourcemaps are a new bleeding edge feature in Chrome that allow the Developer Tools to map back to the pre-processor files that created CSS and JavaScript files. This way you can see the line number of the Sass file where your styles are coming from. Additionally, you can edit source files directly in developer tools. Read more on Developing with Sass and Chrome DevTools [here](http://net.tutsplus.com/tutorials/html-css-techniques/developing-with-sass-and-chrome-devtools/).
+
+To use sourcemaps you need to be running Sass 3.3. To install the latest version of Sass:
+```bash
+gem install sass
+````
+_Note: Depending on your ruby setup you may need to install gems using `sudo gem install sass`._  
+
+__Enable Experimental Developer Tools__  
+Visit chrome://flags/ and enabled Developer Tools experiments.
+
+__Configure Developer Tools__  
+Open Developer Tools and click the cog in the lower right hand corner to open settings. Make sure that Enable JS source maps, Enable CSS source maps, and Auto-reload generated CSS are checked.
+
+__Reinstall node dependencies__  
+This may not be neccessary, but since we updated Sass let's reinstall node dependencies.
+
+```bash
+cd revolution/_build/templates/default
+npm install
+````
+
+__Build Sass__  
+You can now use the Grunt process normally and you should see .map files being generated in the manager/themes/default/css directory.
+```bash
+grunt
+````
+_Note: .map files are excluded from versioning and should not be checked in._

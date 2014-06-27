@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -313,7 +313,7 @@ class modRequest {
      */
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
-            if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== $_SERVER['REQUEST_URI']) {
+            if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== strtok($_SERVER["REQUEST_URI"],'?')) {
                 $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             }
             $identifier = $this->modx->getOption('site_start', null, 1);
@@ -510,6 +510,37 @@ class modRequest {
             $key = ($action->get('namespace') == 'core' ? '' : $action->get('namespace').':').$action->get('controller');
             $actionList[$key] = $action->get('id');
         }
+
+        // Also add old core actions for backwards compatibility
+        $oldActions = array('browser', 'context',
+            'context/create', 'context/update', 'context/view',
+            'element', 'element/chunk', 'element/chunk/create', 'element/chunk/update',
+            'element/plugin', 'element/plugin/create', 'element/plugin/update:',
+            'element/propertyset/index', 'element/snippet', 'element/snippet/create',
+            'element/snippet/update', 'element/template', 'element/template/create',
+            'element/template/tvsort', 'element/template/update', 'element/tv',
+            'element/tv/create', 'element/tv/update', 'element/view', 'help',
+            'resource', 'resource/create', 'resource/data', 'resource/empty_recycle_bin',
+            'resource/site_schedule', 'resource/tvs', 'resource/update', 'search', 'security',
+            'security/access/policy/template/update', 'security/access/policy/update',
+            'security/forms', 'security/forms/profile/update', 'security/forms/set/update',
+            'security/login', 'security/message', 'security/permission', 'security/profile',
+            'security/resourcegroup/index', 'security/role', 'security/user', 'security/user/create',
+            'security/user/update', 'security/usergroup/create', 'security/usergroup/update',
+            'source/create', 'source/index', 'source/update', 'system', 'system/action',
+            'system/contenttype', 'system/dashboards', 'system/dashboards/create',
+            'system/dashboards/update', 'system/dashboards/widget/create',
+            'system/dashboards/widget/update', 'system/event', 'system/file', 'system/file/create',
+            'system/file/edit', 'system/import', 'system/import/html', 'system/info',
+            'system/logs/index', 'system/phpinfo', 'system/refresh_site', 'system/settings',
+            'welcome', 'workspaces', 'workspaces/lexicon',
+            'workspaces/namespace', 'workspaces/package/view');
+        if (empty($namespace) || $namespace ==  'core') {
+            foreach ($oldActions as $a) {
+                $actionList[$a] = $a;
+            }
+        }
+
         return $actionList;
     }
 

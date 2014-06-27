@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick http://kogus.org 2012-06-22
+ * @author Nick http://kogus.org 2012-12-04
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
@@ -38,13 +38,13 @@ $_lang['onlineusers_action'] = 'アクション';
 $_lang['onlineusers_actionid'] = 'アクションID';
 $_lang['onlineusers_ipaddress'] = 'IPアドレス';
 $_lang['onlineusers_lasthit'] = '最終アクセス';
-$_lang['onlineusers_message'] = '直近20分以内のアクティブなユーザー一覧を表示しています。(現在時刻 ';
+$_lang['onlineusers_message'] = '直近20分以内のアクティブなユーザー一覧を表示しています。（現在時刻 ';
 $_lang['onlineusers_title'] = 'オンラインユーザー';
 $_lang['onlineusers_user'] = 'ユーザー';
 $_lang['onlineusers_userid'] = 'ユーザーID';
 $_lang['optimize_table'] = 'このテーブルを最適化するにはここをクリック';
 $_lang['optimize_table_err'] = 'テーブルの最適化失敗';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> のバージョン';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> のバージョン';
 $_lang['server'] = 'サーバー';
 $_lang['servertime'] = 'サーバー時刻';
 $_lang['serveroffset'] = 'サーバーオフセット';

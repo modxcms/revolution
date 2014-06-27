@@ -77,7 +77,7 @@ if ($posted) {
             <p>In order to install MODX Revolution, you must first locate your core directory that contains the files required to run MODX,
             including this setup application. The current value specified is not valid and setup cannot continue until this is resolved.</p>
             <div>
-                <form id="corefinder" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                <form id="corefinder" action="<?php echo htmlspecialchars($_SERVER['SCRIPT_NAME'], ENT_QUOTES, 'utf-8') ?>" method="post">
                     <div>
                         <label>MODX_CORE_PATH</label>
                         <input type="text" name="core_path" id="core_path" value="<?php echo $core_path ?>" size="80" maxlength="255" />
@@ -114,7 +114,7 @@ if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 <div id="footer">
     <div id="footer-inner">
     <div class="container_12">
-        <p>&copy; 2005-2013 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+        <p>&copy; 2005-2014 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
         <p>MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!</p>
     </div>
     </div>

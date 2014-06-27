@@ -1,6 +1,6 @@
 /**
  * Loads the resource data page
- * 
+ *
  * @class MODx.page.ResourceData
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -28,21 +28,13 @@ MODx.page.ResourceData = function(config) {
     btns.push('-');
     btns.push({
         text: _('cancel')
-        ,handler: this.cancel
-        ,scope: this
         ,id: 'modx-abtn-cancel'
     });
     Ext.applyIf(config,{
         form: 'modx-resource-data'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: btns
         ,components: [{
             xtype: 'modx-panel-resource-data'
-            ,renderTo: 'modx-panel-resource-data-div'
             ,resource: config.record.id
             ,context: config.record.context_key
             ,class_key: config.record.class_key
@@ -60,9 +52,6 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
     }
     ,editResource: function() {
         MODx.loadPage('resource/update', 'id='+this.config.record.id);
-    }
-    ,cancel: function() {
-        MODx.loadPage('welcome');
     }
 });
 Ext.reg('modx-page-resource-data',MODx.page.ResourceData);

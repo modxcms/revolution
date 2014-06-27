@@ -1,73 +1,107 @@
 /* MODX MANAGER SEARCH */
-#modx-navbar #modx-manager-search {
-  padding: 5px 8px 5px 10px;
+#modx-navbar #modx-manager-search { /* #shame */
+  padding: 11px 8px 5px 10px;
+  height: 38px;
+  min-width:120px;
+  @include media($gtDesktop) {
+  min-width:194px; 
+  }
+  > {
+      .x-form-field-trigger-wrap {
+          @include media($desktop) {
+              max-width:120px !important;
+          }
+      }
+  }
 }
 
-#modx-navbar #modx-manager-search:hover {
+#modx-navbar #modx-manager-search:hover { /* #shame */
   background: none;
-  border-color: transparent;
 }
 
 #modx-manager-search .x-form-trigger {
-  background: none;
-  color: #555;
+  color: rgba(255,255,255,.25);
   cursor: default;
   height: 16px;
-  left: 0;
-  padding: 7px 4px 7px 6px;
-  width: 16px;
+  right: 0;
+  border-radius: 0;
+  border: none;
+  padding: 9px 5px;
+  width: 17px;
+  background-image: none;
 }
 
 #modx-manager-search .x-form-field-wrap {
-  background-color: $almostWhite;
-  background: $dropdownBg;
-  border-radius: 0;
+  background: rgba(0,0,0,0.25);
+  border:0;
+  border-radius:4px;
+  overflow:hidden;
   color: #565353;
   font-size: 12px;
   outline: none !important;
+  text-shadow: none;
+  box-shadow: rgba(0,0,0,0.05) 0 0 3px 0 inset;
 }
 
 #modx-manager-search .x-form-field-trigger-wrap {
   border-width: 0;
   height: auto;
+  background-image: none;
+
+  .x-form-text {
+    text-shadow: none;
+    font-weight: normal;
+    color: #C9D3E0;
+    letter-spacing: 0;
+  }
+  .x-form-empty-field {
+    color: rgba(90, 106, 121, 1);
+  }
 }
 
 #modx-manager-search .x-form-field-wrap:hover,
 #modx-manager-search .x-trigger-wrap-focus {
-  @include transition(background-color, 360ms, ease-in);
+  /*@include transition(background-color, 360ms, ease-in);
   @include transition-delay(0);
-  background: $almostWhite;
+  background: $gainsboro;*/
+  background-color: rgba(0,0,0,.5);
 }
 
 #modx-uberbar {
-  margin-left: 20px;
-}
-
-#modx-manager-search .x-form-empty-field {
-  color: #bbb;
-  font-weight: normal;
-  text-shadow: none;
+  margin-right: 20px;
 }
 
 .modx-manager-search-results {
-  @include box-sizing;
-  background: rgba(240, 240, 240, 0.95);
+  @include box-sizing(border-box);
+  background: transparent;
   border-radius: 0 0 2px 2px;
   border: $borderColor;
   box-shadow: $shadower;
   height: auto !important;
-  margin: 2px 0 0 0;
   position: relative;
   width: 450px !important;
 }
-
+.modx-manager-search-results:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -7px;
+  left: 12px;
+  border: 8px solid transparent;
+  border-bottom: 8px solid $searchresults;
+}
 .modx-manager-search-results .x-combo-list-inner {
+  background: $searchresults;
   width: 100% !important;
+  border-top:none;
+  @include box-sizing(border-box);
+  overflow: scroll;
+  margin-top: 9px;
 }
 
 .modx-manager-search-results .section {
-  background-color: #f9f9f9;
-  border-left: 1px solid #e5e5e5;
+  //background-color: #f9f9f9;
+  border-left: 1px solid darken($searchresults,7%);
   font-size: 13px;
   margin-left: 116px;
   position: relative;
@@ -84,9 +118,13 @@
   padding: 4px 8px;
 }
 
+.modx-manager-search-results p {
+  color: #C9D3E0;
+}
+
 .modx-manager-search-results h3 {
-  color: #aaa;
-  font-size: .85em;
+  color: $searchresultshead;
+  font-size: 13px;
   font-weight: normal;
   left: -116px;
   position: absolute;
@@ -100,6 +138,8 @@
   display: inline-block;
   padding-left: 18px;
   position: relative;
+  color: inherit;
+  text-decoration: none;
 }
 
 .modx-manager-search-results i {
@@ -125,20 +165,13 @@
 }
 
 .modx-manager-search-results .x-combo-selected {
-  background-color: $colorSplash !important;
   border: none;
   color: #fff !important;
+  background-color: #3e5268;
   margin-left: 0;
-  padding-left: 117px;
+  z-index: 10;
 }
 
 .modx-manager-search-results .icon-user {
   background-image: none !important;
-}
-
-.modx-manager-search-results .x-combo-selected {
-  background-color: $colorSplash !important;
-  box-shadow: inset 0 -1px 1px darken($colorSplash, 10%), inset 0 1px 1px lighten($colorSplash, 10%);
-  color: #fff !important;
-  z-index: 10;
 }

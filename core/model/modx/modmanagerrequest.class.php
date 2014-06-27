@@ -75,6 +75,11 @@ class modManagerRequest extends modRequest {
         $this->modx->smarty->assign('_config',$this->modx->config);
         $this->modx->smarty->assignByRef('modx',$this->modx);
 
+        if (!array_key_exists('a', $_REQUEST)) {
+            $_REQUEST[$this->actionVar] = $this->modx->getOption('welcome_action', null, $this->defaultAction);
+            $_REQUEST[$this->namespaceVar] = $this->modx->getOption('welcome_namespace', null, 'core');
+        }
+
         /* send anti caching headers */
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
         header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
