@@ -173,7 +173,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
                     text: _('remove')
-                    ,handler: this.confirm.createDelegate(this,['remove','profile_remove_confirm'])
+                    ,handler: this.confirm.createDelegate(this,['security/forms/profile/remove','profile_remove_confirm'])
                 });
             }
         }
