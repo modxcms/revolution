@@ -18,7 +18,7 @@ MODx.grid.TemplateTV = function(config) {
         title: _('template_assignedtv_tab')
         ,id: 'modx-grid-template-tv'
         ,url: MODx.config.connector_url
-        ,fields: ['id','name','description','tv_rank','access','category_name','category']
+        ,fields: ['id','name','description','tv_rank','access','perm','category_name','category']
         ,baseParams: {
             action: 'element/template/tv/getlist'
             ,template: config.template
@@ -110,8 +110,23 @@ MODx.grid.TemplateTV = function(config) {
     this.on('render', this.prepareDDSort, this);
 };
 Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
+    getMenu: function() {
+        var r = this.getSelectionModel().getSelected();
+        var p = r.data.perm;
+        var m = [];
 
-    filterByCategory: function(cb,rec,ri) {
+        if (p.indexOf('pedit') != -1) {
+            m.push({
+                text: _('edit_tv')
+                ,handler: this.updateTV
+            });
+        }
+        return m;
+    }
+    ,updateTV: function(itm,e) {
+        MODx.loadPage('element/tv/update', 'id='+this.menu.record.id);
+    }
+    ,filterByCategory: function(cb,rec,ri) {
         this.getStore().baseParams['category'] = cb.getValue();
         this.getBottomToolbar().changePage(1);
         this.refresh();
