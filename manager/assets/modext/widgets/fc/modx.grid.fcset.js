@@ -150,7 +150,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
                     text: _('remove')
-                    ,handler: this.confirm.createDelegate(this,['remove','set_remove_confirm'])
+                    ,handler: this.confirm.createDelegate(this,['security/forms/set/remove','set_remove_confirm'])
                 });
             }
         }
@@ -213,7 +213,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         this.windows.impset.setValues(r);
         this.windows.impset.show(e.target);
     }
-    
+
     ,createSet: function(btn,e) {
         var r = {
             profile: MODx.request.id
