@@ -207,7 +207,10 @@ hr {
 	.x-toolbar-right-row {
 		td {
 			&:last-of-type {
-				.x-btn {
+        .x-btn {
+          @extend %primary-button;
+        }
+				/*.x-btn {
 					@include linear-gradient(lighten($primaryAction,10%), $primaryAction);
 					border-color:darken($primaryAction,6%);
 					button {
@@ -217,7 +220,8 @@ hr {
 				.x-btn-over {
 					border-color:darken($primaryAction,10%);
 					@include linear-gradient(lighten($primaryAction,16%), $primaryAction);
-				}
+				}*/
+
 			}
 		}
 	}

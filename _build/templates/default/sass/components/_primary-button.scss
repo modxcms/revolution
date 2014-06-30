@@ -1,6 +1,7 @@
 %primary-button {
-  background: $buttonPrimaryBg1;
-  @include background-image(linear-gradient($buttonPrimaryBg1,$buttonPrimaryBg2));
+  @include background-image(linear-gradient(left top, $buttonPrimaryBg1,$buttonPrimaryBg2));
+  background-color: $buttonPrimaryBg1;
+  box-shadow: none;
   color: $buttonColorPrimary;
   &.x-item-disabled {
     opacity:1;
@@ -13,6 +14,6 @@
     color: $buttonColorDisabled !important;
   }
   &.x-btn-over {
-    @include background-image(linear-gradient(darken($buttonPrimaryBg1,2%),darken($buttonPrimaryBg2,2%)));
+    @include background-image(linear-gradient(left top, lighten($buttonPrimaryBg1,12%),ligthen($buttonPrimaryBg2,12%)));
   }
 }

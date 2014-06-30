@@ -100,10 +100,11 @@ $subnavDescriptionColor: #5ABCE5;
 
 /* borders */
 $borderColor: #E4E4E4;
-$borderShadow: rgba(0, 0, 0, 0.025);
+$borderShadow: #E4E4E4;
 $primaryBorder: #c0c0c0;
 
 $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
+$shadowBorder: 0 0 0 1px $borderShadow;
 
 
 
@@ -133,8 +134,7 @@ $buttonfonts: $bodyfonts;
 $treePseudoRootFont: normal 14px/35px $headfonts;
 $treeNodeFont: normal 13px/22px $bodyfonts;
 
-
-$buttonColor: #6B8BAC;
+$buttonColor: $treeColor;
 $buttonHoverColor: $brandSelectedColor;
 $regularButtonColor: #707070;
 $buttonBackground: $white;
