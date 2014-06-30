@@ -31,9 +31,21 @@ MODx.grid.TemplateTV = function(config) {
         ,paging: true
         ,plugins: tt
         ,remoteSort: true
+        ,sortBy: 'category_name, tv_rank'
+        ,grouping: true
+        ,groupBy: 'category_name'
+        ,singleText: _('tv')
+        ,pluralText: _('tvs')
         ,enableDragDrop: true
-        ,ddGroup : 'template-tvs-dd'
-        ,sm: new Ext.grid.RowSelectionModel({singleSelect:false})
+        ,ddGroup : 'template-tvs-ddsort'
+        ,sm: new Ext.grid.RowSelectionModel({
+            singleSelect: true
+            ,listeners: {
+                beforerowselect: function(sm, idx, keep, record) {
+                    sm.grid.ddText = '<div>'+ record.data.name +'</div>';
+                }
+            }
+        })
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -95,35 +107,7 @@ MODx.grid.TemplateTV = function(config) {
         }]
     });
     MODx.grid.TemplateTV.superclass.constructor.call(this,config);
-
-    this.on('render',function() {
-        var grid = this;
-        var store = this.getStore();
-        var ddrow = new Ext.dd.DropTarget(grid.getView().mainBody, {
-            ddGroup : 'template-tvs-dd'
-            ,notifyDrop : function(dd, e, data) {
-                var sm = grid.getSelectionModel();
-                var row = sm.getSelections();
-                var cindex = dd.getDragData(e).rowIndex;
-                if (sm.hasSelection()) {
-                    for (i = 0; i < row.length; i++) {
-                        store.remove(store.getById(row[i].id));
-                        store.insert(cindex,row[i]);
-                    }
-                    sm.selectRecords(row);
-                }
-                
-                Ext.each(store.data.items, function(item, index, allItems) {
-                    // take pagination into account by recalculating the index based on the currently viewed page
-                    index = grid.config.bbar.cursor !== 0 ? ((grid.config.bbar.cursor - 1) * grid.config.bbar.pageSize) + index : index;
-
-                    if (row[0].data.category_name === item.data.category_name) {
-                        item.set('tv_rank', index);
-                    }
-                }, this);
-            }
-        });
-    },this);
+    this.on('render', this.prepareDDSort, this);
 };
 Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
 
@@ -150,6 +134,66 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
+    ,prepareDDSort: function(grid) {
+        this.dropTarget = new Ext.dd.DropTarget(grid.getView().mainBody, {
+            ddGroup: 'template-tvs-ddsort'
+            ,copy: false
+            ,notifyOver: function(dragSource, e, data) {
+                if (dragSource.getDragData(e)) {
+                    var targetNode = dragSource.getDragData(e).selections[0];
+                    var sourceNode = data.selections[0];
 
+                    if ((sourceNode.data['category_name'] != targetNode.data['category_name']) ||
+                        !sourceNode.data['access'] ||
+                        !targetNode.data['access'] ||
+                        (sourceNode.data['id'] == targetNode.data['id'])
+                        ) {
+                        return this.dropNotAllowed;
+                    }
+
+                    return this.dropAllowed;
+                }
+
+                return this.dropNotAllowed;
+            }
+            ,notifyDrop : function(dragSource, e, data) {
+                if (dragSource.getDragData(e)) {
+                    var targetNode = dragSource.getDragData(e).selections[0];
+                    var sourceNode = data.selections[0];
+                    if ((targetNode.id != sourceNode.id) &&
+                        (targetNode.get('category_name') === sourceNode.get('category_name')) &&
+                        sourceNode.get('access')
+                    ) {
+                        grid.sortTVs(sourceNode, targetNode);
+                    }
+                }
+            }
+        });
+    }
+    ,sortTVs: function(sourceNode, targetNode) {
+        var store = this.getStore();
+        var sourceIdx = store.indexOf(sourceNode);
+        var targetIdx = store.indexOf(targetNode);
+
+        // Insert the selection to the target (and remove original selection)
+        store.removeAt(sourceIdx);
+        store.insert(targetIdx, sourceNode);
+
+        // Extract the store items with the same category_name as the sourceNode to start the index at 0 for each category
+        var filteredStore = store.queryBy(function(rec, id) {
+            if (rec.get('category_name') === sourceNode.get('category_name')) {
+                return true;
+            }
+            return false;
+        }, this);
+
+        // Loop trough the filtered store and re-apply the re-calculated ranks to the store records
+        Ext.each(filteredStore.items, function(item, index, allItems) {
+            if (sourceNode.get('category_name') === item.get('category_name')) {
+                var record = store.getById(item.id);
+                record.set('tv_rank', index);
+            }
+        }, this);
+    }
 });
 Ext.reg('modx-grid-template-tv',MODx.grid.TemplateTV);

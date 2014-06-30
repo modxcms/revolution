@@ -169,7 +169,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('template','category','system_events','propertyset','element');
+        return array('template','category','system_events','propertyset','element','tv');
     }
 
     /**
