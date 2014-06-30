@@ -9,7 +9,7 @@
 $_lang['binary'] = 'Binary';
 $_lang['binary_desc'] = 'Is the file a binary file or text/ascii?';
 $_lang['content_type'] = 'Content Type';
-$_lang['content_type_desc'] = 'Content Types are specific filesystem types for your resources. Here you can manage them; as well as associate them with a file extension.';
+$_lang['content_type_desc'] = 'Content Types are specific filesystem types for your resources. Here you can manage them, as well as associate them with a file extension.';
 $_lang['content_type_err_nf'] = 'Content Type not found.';
 $_lang['content_type_err_nfs'] = 'Content type with ID [[+id]] not found.';
 $_lang['content_type_err_ns'] = 'Content Type not specified.';
