@@ -343,7 +343,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,template: config.record.template
             ,anchor: '100%'
             ,border: true
-            ,bodyStyle: 'display: none'
+            ,style: 'visibility: visible'
         };
     }
 
