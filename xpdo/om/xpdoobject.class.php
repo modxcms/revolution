@@ -780,21 +780,17 @@ class xPDOObject {
     public function set($k, $v= null, $vType= '') {
         $set= false;
         $callback= '';
-        if ($this->_fieldMeta[$k]['generated'] === 'callback' && isset($this->_fieldMeta[$k]['callback']) && empty($vType)) {
+        $callable= !empty($vType) && is_callable($vType, false, $callback) ? true : false;
+        if (!$callable && isset($this->_fieldMeta[$k]['callback'])) {
             $callable = is_callable($this->_fieldMeta[$k]['callback'], false, $callback);
-        } else {
-            $callable= !empty($vType) && is_callable($vType, false, $callback) ? true : false;
         }
-
         $oldValue= null;
         $k = $this->getField($k);
         if (is_string($k) && !empty($k)) {
             if (array_key_exists($k, $this->_fieldMeta)) {
                 $oldValue= $this->_fields[$k];
-                if (isset ($this->_fieldMeta[$k]['index']) && $this->_fieldMeta[$k]['index'] === 'pk' && isset ($this->_fieldMeta[$k]['generated'])) {
-                    if (!$this->_fieldMeta[$k]['generated'] === 'callback') {
-                        return false;
-                    }
+                if (isset($this->_fieldMeta[$k]['generated']) && !$this->_fieldMeta[$k]['generated'] === 'callback') {
+                    return false;
                 }
                 if ($callable && $callback) {
                     $set = call_user_func_array($callback, array($k, $v, $this));
