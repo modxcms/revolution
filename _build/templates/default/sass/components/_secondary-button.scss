@@ -1,0 +1,47 @@
+%secondary-button {
+  /*background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%) no-repeat;*/
+  background: white;
+  border-radius: $borderRadius;
+  box-shadow: $shadowBorder;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-block;
+  *display: inline;
+  /*margin: 0 1px;*/
+  padding: 10px 15px;
+  position: relative;
+  text-decoration: none;
+  zoom: 1;
+  /*border: 1px solid rgb(200, 210, 220);*/
+  & button {
+    font-size: 13px;
+    color: $regularButtonColor;
+    cursor: pointer;
+    height: 16px;
+    min-width: 100%;
+    vertical-align: middle;
+  }
+  &.x-btn-over {
+    /*border-color:darken($gainsboro,40%);*/
+    /*background-color:$gainsboro;*/
+    background-color:$actionable;
+  }
+  &.x-btn-focus {
+
+  }
+  &.x-btn-click {
+    background: $colorSplash;
+    box-shadow: $shadowBorderActive;
+    color: $white;
+
+    button {
+      color: $white;
+    }
+  }
+  &.x-item-disabled * {
+    opacity: 0.8;
+  }
+  &.primary-button {
+  @extend %primary-button;
+  }
+}
