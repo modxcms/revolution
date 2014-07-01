@@ -108,6 +108,7 @@ $primaryBorder:  #C0C0C0;
 
 $shadower: 0 1px 0 $borderColor, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
 $shadowBorder: 0 0 0 1px $borderColor;
+$shadowBorderDark: 0 0 0 1px $primaryBorder;
 $shadowBorderFocus: 0 0 0 1px $borderColorFocus;
 $shadowBorderActive: 0 0 0 1px $borderColorActive;
 

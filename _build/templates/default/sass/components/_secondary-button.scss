@@ -1,6 +1,7 @@
 %secondary-button {
   /*background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%) no-repeat;*/
   background: white;
+  border: 0;
   border-radius: $borderRadius;
   box-shadow: $shadowBorder;
   line-height: 1;
@@ -21,10 +22,28 @@
     min-width: 100%;
     vertical-align: middle;
   }
+  .x-btn-split {
+    display: block;
+    padding-right: 20px;
+    position:relative;
+    &:before {
+      @extend %pseudo-font;
+      color: inherit;
+      content: $fa-var-caret-down;
+      font-size: 14px;
+      position: absolute;
+      top: 1px;
+      right: 0;
+    }
+    & button {
+      border-right: 1px solid rgba(255,255,255,0.4);
+      padding-right: 10px;
+    }
+  }
   &.x-btn-over {
     /*border-color:darken($gainsboro,40%);*/
     /*background-color:$gainsboro;*/
-    background-color:$actionable;
+    background-color: $actionable;
   }
   &.x-btn-focus {
 
@@ -35,7 +54,7 @@
     color: $white;
 
     button {
-      color: $white;
+      color: inherit;
     }
   }
   &.x-item-disabled * {
