@@ -657,6 +657,7 @@ class modOutputFilter {
                             $this->log('This modifier is custom running as snippet.');
                             $tmp = $this->modx->runSnippet($m_cmd, $params);
                             if ($tmp!='') $output = $tmp;
+                            if ($tmp == '1' || $tmp == '0') $condition[] = intval($tmp);
                             break;
                     }
                 } catch (Exception $e) {
