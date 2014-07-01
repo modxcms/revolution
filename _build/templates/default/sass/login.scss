@@ -78,8 +78,6 @@ img.loginCaptcha {
 }
 
 .login-form-bwrap {
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
   background-color: white;
   border-radius: 10px;
   color: #eee;
@@ -87,8 +85,6 @@ img.loginCaptcha {
 }
 
 .login-form-bwrap-padding {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
   background: black url($imgPath + 'restyle/manager-loginscreen-form-bg.png') bottom left no-repeat;
   border-radius: 5px;
   padding-bottom: 10px;
@@ -159,10 +155,8 @@ a {
 }
 
 #modx-panel-login-div {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
   background-color: white;
-  border-radius: 3px;
+  border-radius: $borderRadius;
 }
 
 label {
@@ -220,11 +214,6 @@ label {
 
 
 .login-form-btn {
-  -moz-border-radius: 3px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
-  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
-  -webkit-border-radius: 3px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   background: #eee;
   background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
   background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
@@ -233,7 +222,7 @@ label {
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: url($imgPath + 'modx-theme/form/button-bg.png') repeat-x scroll 0 bottom gainsboro;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 2px solid #ddd;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   color: #555;

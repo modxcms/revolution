@@ -47,7 +47,7 @@ input::-moz-focus-inner {
 .inline-form input[type=text], .inline-form textarea {
   background-color: #fbfbfb;
   background-image: none;
-  border-radius: 2px;
+  border-radius: $borderRadius;
   border: 1px solid #CCCCCC;
   position: relative;
   width: 97%;
@@ -226,15 +226,20 @@ textarea.x-form-field,
   background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
 }
 
-.x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus, .x-viewport .x-form-textarea.x-form-focus {
-  border-radius: 0;
-  outline-offset: 0;
-  outline: 1px solid #ddd !important; /* #shame */
+.x-viewport .x-trigger-wrap-focus,
+.x-viewport input.x-form-focus,
+.x-viewport textarea.x-form-focus,
+.x-viewport .x-form-textarea.x-form-focus {
+  /*border-radius: 0;*/
+  /*outline-offset: 0;*/
+  /*outline: 1px solid #ddd !important; /* #shame */
+  /*box-shadow: $shadowBorderFocus;*/
+  border-color: $borderColorFocus;
 }
 
-.x-viewport .x-trigger-wrap-focus .x-form-focus {
+/*.x-viewport .x-trigger-wrap-focus .x-form-focus {
   outline: none !important;
-}
+}*/
 
 .x-datetime-wrap {
   background: none;
@@ -371,7 +376,7 @@ textarea.x-form-field,
   -moz-box-shadow: 0 0 5px #A0A0A0;
   -o-box-shadow: 0 0 5px #A0A0A0;
   -webkit-box-shadow: 0 0 5px #A0A0A0;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid #C0C0C0;
   box-shadow: 0 0 5px #A0A0A0;
   overflow: hidden;

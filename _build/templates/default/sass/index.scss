@@ -14,6 +14,7 @@ $fa-css-prefix:       icon;
 @import "tabs";
 @import "navbar";
 @import "uberbar";
+@import "toolbars";
 @import "tree";
 @import "help";
 
@@ -199,30 +200,6 @@ hr {
 	.x-tab-strip {
 		li {
 			@include box-sizing(border-box);
-		}
-	}
-}
-
-.x-window-footer {
-	.x-toolbar-right-row {
-		td {
-			&:last-of-type {
-        .x-btn {
-          @extend %primary-button;
-        }
-				/*.x-btn {
-					@include linear-gradient(lighten($primaryAction,10%), $primaryAction);
-					border-color:darken($primaryAction,6%);
-					button {
-						color:$white;
-					}
-				}
-				.x-btn-over {
-					border-color:darken($primaryAction,10%);
-					@include linear-gradient(lighten($primaryAction,16%), $primaryAction);
-				}*/
-
-			}
 		}
 	}
 }
@@ -563,7 +540,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
   border-color: #CACACA #C0C0C0 #AAA;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border-style: solid;
   border-width: 1px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
@@ -800,7 +777,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 /* status messages */
 .modx-status-msg {
   background: #f4f4f4;
-  border-radius: 4px;
+  border-radius: 5px;
   left: 70%;
   /*filter: alpha(opacity=80);*/
   margin: 0;
@@ -1119,7 +1096,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 .dashboard-block {
   background-color: $white;
-  border-radius: 2px;
+  border-radius: $borderRadius;
   float: left;
   margin: 6px 0;
 }
@@ -1153,7 +1130,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 .dashboard-block .title {
   background: #d2dbe2;
-  border-radius: 2px 2px 0 0;
+  border-radius: $borderRadius $borderRadius 0 0;
   color: #5E5E5E;
   font-size: 12px;
   font-weight: bold;
@@ -1817,7 +1794,7 @@ body.ext-ie7 .x-superboxselect-item {
   margin: 10px 0;
 }
 .modx-template-detail .selected img {
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid #aaa;
   height: 80px;
   width: 90px;
@@ -1885,7 +1862,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .thumb-wrapper {
   background-color: #F5F5F5;
-  border-radius: 2px;
+  border-radius: $borderRadius;
   border: 1px solid #ccc;
   cursor: pointer;
   float: left;

@@ -27,34 +27,11 @@
 
 /* btn style */
 .x-btn {
-  *display: inline;
-  background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%) no-repeat;
-  border-radius: 4px;
-  box-shadow: $shadowBorder;
-  line-height: 1;
-  cursor: pointer;
-  display: inline-block;
-  margin: 0 1px;
-  padding: 10px 15px;
-  position: relative;
-  text-decoration: none;
-  zoom: 1;
-  /*border: 1px solid rgb(200, 210, 220);*/
-  button {
-    font-size: 13px;
-    color: $regularButtonColor;
-    cursor: pointer;
-    height: 16px;
-    min-width: 100%;
-    vertical-align: middle;
-  }
-  &.primary-button {
-	@extend %primary-button;
-  }
+  @extend %secondary-button;
 
   #modx-leftbar & {
     background: $buttonBackground;
-    border-radius: 3px;
+    border-radius: $borderRadius;
     padding: 13px 20px;
     border: none;
     button {
@@ -64,7 +41,7 @@
 
   #modx-action-buttons & {
     background: $buttonBackground;
-    border-radius: 3px;
+    border-radius: $borderRadius;
     padding: 10px 20px;
     border: none;
     box-shadow: $shadowBorder;
@@ -75,18 +52,13 @@
     &#modx-abtn-save {
       @extend %primary-button;
     }
-
-    &.x-btn-over {
-      /*border-color: $actionable;*/
-      background-color:$actionable;
-    }
   }
 }
 // Toolbar combo/text styled just like the buttons
 .x-toolbar {
   .x-form-field-trigger-wrap {
     background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%);
-    border-radius: 4px;
+    border-radius: $borderRadius;
     line-height: 1;
     cursor: pointer;
     display: inline-block;
@@ -112,19 +84,52 @@
       border-color: darken($gainsboro,40%);
     }
   }
-  .x-toolbar-cell input.x-form-text {
+  .x-toolbar-right-row {
+    td {
+      .x-btn,
+      .x-form-text {
+        border-radius: 0;
+      }
+      &:first-of-type {
+        .x-btn,
+        .x-form-text {
+          border-radius: $borderRadius 0 0 $borderRadius;
+          z-index: 1;
+        }
+      }
+      &:last-of-type {
+        .x-btn,
+        .x-form-text {
+          border-radius: 0 $borderRadius $borderRadius 0;
+        }
+      }
+    }
+  }
+  .x-form-text {
     padding: 8px 13px;
-    border-radius: 4px;
+    border-radius: $borderRadius;
     font-size: 13px !important;
   }
+  &.x-small-editor .x-form-text {
+    padding-top: 8px; /* overrides ext standard theme rule which isn't overridden by padding rule above */
+  }
   .xtb-sep {
+      /* use margin on the elements itself as the separators are not inserted consistently by extjs */
       margin: 0;
+      width: 0;
   }
 }
 
-.x-btn-over {
-  border-color:darken($gainsboro,40%);
-  background-color:$gainsboro;
+.x-window-footer {
+  .x-toolbar-right-row {
+    td {
+      &:last-of-type {
+        .x-btn {
+          @extend %primary-button;
+        }
+      }
+    }
+  }
 }
 
 .x-btn-icon button {
@@ -190,20 +195,20 @@
   border: 0 none;
 }
 
-.x-btn-click {
+/*.x-btn-click {
   -moz-box-shadow: 0 0 3px #aaaaaa inset;
   -o-box-shadow: 0 0 3px #aaaaaa inset;
   -webkit-box-shadow: 0 0 3px #aaaaaa inset;
   box-shadow: 0 0 3px #aaaaaa inset;
   margin: 0 1px;
-}
+}*/
 
-.x-btn-focus {
+/*.x-btn-focus {
   border: 1px solid $darkNeutral;
-}
+}*/
 
 .x-btn-group {
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid #dbe0e4;
   margin-right: 2px;
   padding: 0;
@@ -359,7 +364,7 @@
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
   background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid #cccccc;
   color: #888888;
   cursor: pointer;
