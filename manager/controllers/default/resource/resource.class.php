@@ -1,7 +1,7 @@
 <?php
 /**
  * Base controller class for Resources
- * 
+ *
  * @package modx
  * @subpackage manager.controllers
  */
@@ -34,7 +34,7 @@ abstract class ResourceManagerController extends modManagerController {
 
     /**
      * Return the appropriate Resource controller class based on the class_key request parameter
-     * 
+     *
      * @static
      * @param modX $modx A reference to the modX instance
      * @param string $className The controller class name that is attempting to be loaded
@@ -84,7 +84,7 @@ abstract class ResourceManagerController extends modManagerController {
 
     /**
      * Used to set values on the resource record sent to the template for derivative classes
-     * 
+     *
      * @return void
      */
     public function prepareResource() {}
@@ -111,7 +111,7 @@ abstract class ResourceManagerController extends modManagerController {
         $this->canDelete = ($this->modx->hasPermission('delete_document') && $this->resource->checkPolicy(array('save' => true, 'delete' => true)));
         $this->canDuplicate = $this->resource->checkPolicy('save');
     }
-    
+
     /**
      * Get and set the parent for this resource
      * @return string The pagetitle of the parent
@@ -217,13 +217,16 @@ abstract class ResourceManagerController extends modManagerController {
      */
     public function setContext() {
         if(!empty($this->scriptProperties['context_key'])) {
-                $this->ctx = $this->scriptProperties['context_key'];
+            $this->ctx = $this->modx->stripTags($this->scriptProperties['context_key']);
         } else {
-                $this->ctx = !empty($this->resource) ? $this->resource->get('context_key') : $this->modx->getOption('default_context');
+            $this->ctx = !empty($this->resource) ? $this->resource->get('context_key') : $this->modx->getOption('default_context');
         }
 
-        $this->setPlaceholder('_ctx',$this->ctx);
         $this->context = $this->modx->getContext($this->ctx);
+        if (!$this->context) {
+            $this->ctx = '';
+        }
+        $this->setPlaceholder('_ctx',$this->ctx);
         return $this->context;
     }
 
@@ -353,7 +356,7 @@ abstract class ResourceManagerController extends modManagerController {
                 }
             }
         }
-        
+
         $onResourceTVFormRender = $this->modx->invokeEvent('OnResourceTVFormRender',array(
             'categories' => &$finalCategories,
             'template' => $templateId,
