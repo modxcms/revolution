@@ -14,19 +14,23 @@ MODx.page.UpdateUserGroup = function(config) {
         ,buttons: [{
             process: 'security/group/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,handler: function() {
                 MODx.loadPage('security/permission')
             }
-        },'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{

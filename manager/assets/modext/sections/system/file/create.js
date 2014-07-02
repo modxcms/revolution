@@ -12,15 +12,18 @@ MODx.page.CreateFile = function(config) {
     btns.push({
         process: 'browser/file/create'
         ,text: _('save')
+        ,id: 'modx-abtn-save'
+        ,cls: 'primary-button'
         ,method: 'remote'
         ,keys: [{
             key: MODx.config.keymap_save || 's'
             ,ctrl: true
         }]
     });
-    btns.push('-');
+    // btns.push('-');
     btns.push({
         text: _('cancel')
+        ,id: 'modx-abtn-cancel'
     });
 
     Ext.applyIf(config,{

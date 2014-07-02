@@ -18,24 +18,28 @@ MODx.page.UpdateUser = function(config) {
         ,buttons: [{
             process: 'security/user/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,cls:'primary-button'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,handler: function() {
                 MODx.loadPage('security/user')
             }
-        },'-',{
+        },{
             text: _('delete')
+            ,id: 'modx-abtn-delete'
             ,handler: this.removeUser
             ,scope: this
-        },'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{

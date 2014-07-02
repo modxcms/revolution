@@ -17,20 +17,24 @@ MODx.page.UpdateContext = function(config) {
         ,buttons: [{
             process: 'context/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls:'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || "s"
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,params: {
                 a: 'context'
             }
-        },'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{

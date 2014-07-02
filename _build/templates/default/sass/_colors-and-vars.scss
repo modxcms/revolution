@@ -1,5 +1,5 @@
 /* Brand colors */
-$brandBg: #ffffff;
+$brandBg: #FFF;
 $brandHover: #e8f0f8;
 $brandSelectedBg: darken($brandHover, 3%);
 $brandSelectedColor: #3697cd;
@@ -7,28 +7,10 @@ $brandText: #757575;
 
 /* Core colors */
 $coreFieldBg: #fbfbfb;
+$coreFieldLabelColor: #555;
 
 /* main colors */
-$aside: #f8f8f8;
-$gainsboro: #f0f0f0;
-$actionable: #fbfbfb;
-$dropdownBg: #ffffff;
-$dropdownSelectedBg: #e1ecf1;
-$dropdownTextColor: #444444;
-$dropdownBorder: #e4e4e4;
-
-/* Context menu */
-$menuBg: $brandBg;
-$menuBorder: 1px solid #bbb;
-$menuBorderRadius: 3px;
-$menuBoxShadow: 0 0 5px rgba(0, 0, 0, 0.25);
-$menuSelectedBg: #30759c;
-$menuSelectedColor: $brandBg;
-$menuTextColor: #555555;
-$menuSeparatorColor: #cccccc;
-
 $white: #ffffff;
-$mainBg: #F2F2F2;
 $softGrey: #dcdcdc;
 $darkNeutral:#53595F;
 $black: #020608;
@@ -37,11 +19,6 @@ $griddivider: #E4E9EE;
 $gridrowalt: #F5F6F9;
 $searchresults: #2a3949;
 $searchresultshead: #55bbe7;
-
-$lightBg: $gainsboro;
-$darkBg: $darkNeutral;
-$mediumBg: $aside;
-
 
 $labelText: $darkNeutral;
 $primaryAction: #58a598;
@@ -54,10 +31,32 @@ $desaturatedSplash: lighten(desaturate($colorSplash,100%), 20%);
 $desturatedSuccess: lighten(desaturate($success,100%), 10%);
 $lightSplash: lighten($colorSplash, 42.5%);
 
+$aside: #f8f8f8;
+$gainsboro: #f0f0f0;
+$actionable: #fbfbfb;
+$dropdownBg: #FFF;
+$dropdownSelectedBg: #e1ecf1;
+$dropdownTextColor: #444;
+$dropdownBorder: #e4e4e4;
+
+$mainBg: #F2F2F2;
+$lightBg: $gainsboro;
+$darkBg: $darkNeutral;
+$mediumBg: $aside;
+
+/* Context menu */
+$menuBg: $brandBg;
+$menuBorder: 1px solid #BBB;
+$menuBorderRadius: 3px;
+$menuBoxShadow: 0 0 5px rgba(0, 0, 0, 0.25);
+$menuSelectedBg: #30759c;
+$menuSelectedColor: $brandBg;
+$menuTextColor: #555;
+$menuSeparatorColor: #CCC;
+
 /* tree menus */
 $treeText: #718DA7;
 $tipText: $gainsboro;
-$lightSplash: lighten($colorSplash, 42.5%);
 $mainText: $black;
 $headerText: #555555;
 $treeColor: #556C88;
@@ -100,8 +99,9 @@ $subnavDescriptionColor: #5ABCE5;
 
 /* borders */
 $borderColor: #E4E4E4;
-$borderColorFocus: $colorSplash;
-$borderColorActive: $colorSplash;
+$borderColorHover: $colorSplash;
+$borderColorFocus: darken($colorSplash, 6%);
+$borderColorActive: darken($colorSplash, 6%);
 $borderRadius: 3px;
 $borderShadow: #E4E4E4;
 $primaryBorder:  #C0C0C0;
@@ -109,6 +109,7 @@ $primaryBorder:  #C0C0C0;
 $shadower: 0 1px 0 $borderColor, -1px 0 0 $borderColor, 1px 0 0 $borderColor;
 $shadowBorder: 0 0 0 1px $borderColor;
 $shadowBorderDark: 0 0 0 1px $primaryBorder;
+$shadowBorderHover: 0 0 0 1px $borderColorHover;
 $shadowBorderFocus: 0 0 0 1px $borderColorFocus;
 $shadowBorderActive: 0 0 0 1px $borderColorActive;
 
@@ -149,6 +150,10 @@ $buttonColorDisabled: darken($buttonColor, 20%);
 $buttonColorPrimary: $white;
 $buttonPrimaryBg1: #32AB9A;
 $buttonPrimaryBg2: #00948E;
+$buttonPrimaryBg1Hover: darken($buttonPrimaryBg1, 6%);
+$buttonPrimaryBg2Hover: darken($buttonPrimaryBg2, 6%);
+$buttonPrimaryBg1Active: darken($buttonPrimaryBg1, 12%);
+$buttonPrimaryBg2Active: darken($buttonPrimaryBg2, 12%);
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;

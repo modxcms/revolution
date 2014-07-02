@@ -45,7 +45,7 @@ input::-moz-focus-inner {
   margin-bottom: 2px;
 }
 .inline-form input[type=text], .inline-form textarea {
-  background-color: #fbfbfb;
+  background-color: $coreFieldBg;
   background-image: none;
   border-radius: $borderRadius;
   border: 1px solid #CCCCCC;
@@ -64,15 +64,17 @@ input::-moz-focus-inner {
 
 textarea.x-form-field,
 .x-form-textarea {
-  font-family: $codefonts;
+  display: block; /* make the field description (below) stick to the bottom correctly */
+  /*font-family: $codefonts;*/
+  padding: 5px; /* override standard extjs theme */
 }
 
 .x-form-text, /* this screws up clear cache modal #shame */
 textarea.x-form-field,
 .x-form-textarea {
-  background-color: #fbfbfb;
+  background-color: $coreFieldBg;
   background-image: none;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
 }
@@ -327,7 +329,7 @@ textarea.x-form-field,
   overflow: hidden;
 }
 .x-form-item-label {
-  color: #777;
+  color: $coreFieldLabelColor;
   font-weight: bold;
 }
 
@@ -352,16 +354,16 @@ textarea.x-form-field,
   padding: 0;
 }
 .form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
-  color: #555;
+  color: $coreFieldLabelColor;
   font-size: 13px;
   font-weight: bold;
   margin-bottom: 0;
   display: block;
-  padding: 7px 5px 4px 3px;
+  padding: 7px 5px 4px 0;
 }
 .form-with-labels .desc-under,
 .x-window .desc-under {
-  color: #aaaaaa;
+  color: $coreFieldLabelColor;
   display: block;
   font-size: 11px;
   font-style: italic;

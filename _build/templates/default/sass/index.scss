@@ -1556,7 +1556,7 @@ body.ext-ie7 .x-superboxselect-item {
   background-color: transparent;
   z-index: 89;
 }
-/* Package Manager */
+/* Card Layout (ex. Package Manager) */
 .x-panel-body-noheader .x-grid3-row {
   position: relative;
 }
@@ -1568,7 +1568,7 @@ body.ext-ie7 .x-superboxselect-item {
   font: $baseText;
   font-size: 20px;
   line-height: 1;
-  margin: 0 0 2px;
+  margin: 0 0 5px 0;
 }
 .x-grid3-cell-inner.x-grid3-col-main  .not-installed {
   color: #999999;

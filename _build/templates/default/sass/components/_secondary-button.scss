@@ -6,8 +6,7 @@
   box-shadow: $shadowBorder;
   line-height: 1;
   cursor: pointer;
-  display: inline-block;
-  *display: inline;
+  display: block; /* make margins be exact */
   /*margin: 0 1px;*/
   padding: 10px 15px;
   position: relative;
@@ -43,18 +42,27 @@
   &.x-btn-over {
     /*border-color:darken($gainsboro,40%);*/
     /*background-color:$gainsboro;*/
-    background-color: $actionable;
-  }
-  &.x-btn-focus {
+    background-color: $colorSplash;
+    box-shadow: $shadowBorderHover;
+    color: $white;
 
+    button {
+      color: inherit;
+    }
   }
+  &.x-btn-focus,
   &.x-btn-click {
-    background: $colorSplash;
+    background: darken($colorSplash, 6%);
     box-shadow: $shadowBorderActive;
     color: $white;
 
     button {
       color: inherit;
+    }
+  }
+  &.x-btn-menu-active {
+    .x-btn-split:before {
+      content: $fa-var-caret-up;
     }
   }
   &.x-item-disabled * {
