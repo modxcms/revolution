@@ -1988,7 +1988,7 @@ class modX extends xPDO {
      */
     public function getContext($contextKey) {
         if (!isset($this->contexts[$contextKey])) {
-            $this->contexts[$contextKey]= $this->getObject('modContext', $contextKey);
+            $this->contexts[$contextKey]= $this->getObject('modContext', array('key' => $contextKey));
             if ($this->contexts[$contextKey]) {
                 $this->contexts[$contextKey]->prepare();
             }
