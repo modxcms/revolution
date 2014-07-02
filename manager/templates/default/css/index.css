@@ -4439,9 +4439,9 @@ having to do some real janky stuff to work with ExtJS markup
 }
 
 .primary-button, .x-btn.primary-button, #modx-action-buttons .x-btn#modx-abtn-save {
-  background-image: -webkit-linear-gradient(left top, #58a598, #3c8e8b);
-  background-image: linear-gradient(to right bottom , #58a598, #3c8e8b);
-  background-color: #58a598;
+  background: #32ab9a;
+  background-image: -webkit-linear-gradient(#32ab9a, #00948e);
+  background-image: linear-gradient(#32ab9a, #00948e);
   color: white;
 }
 .x-item-disabled.primary-button, #modx-action-buttons .x-item-disabled.x-btn#modx-abtn-save {
@@ -4452,17 +4452,18 @@ having to do some real janky stuff to work with ExtJS markup
   color: white;
 }
 .x-item-disabled.primary-button *, #modx-action-buttons .x-item-disabled.x-btn#modx-abtn-save * {
-  color: #455a6e !important;
+  color: #405871 !important;
 }
 .x-btn-over.primary-button, #modx-action-buttons .x-btn-over.x-btn#modx-abtn-save {
-  background: #7fbbb1;
+  background-image: -webkit-linear-gradient(#30a393, #008a84);
+  background-image: linear-gradient(#30a393, #008a84);
 }
 
 /* action buttons bar */
 #modx-action-buttons {
   position: fixed;
   top: 55px;
-  right: 10px;
+  right: 25px;
   z-index: 9;
   left: auto;
   background: #f2f2f2;
@@ -4474,6 +4475,9 @@ having to do some real janky stuff to work with ExtJS markup
 #modx-action-buttons .x-toolbar-left {
   width: auto !important;
   zoom: 1;
+}
+#modx-action-buttons .xtb-sep {
+  width: 0;
 }
 
 /* btn style */
@@ -4506,21 +4510,20 @@ having to do some real janky stuff to work with ExtJS markup
   border: none;
 }
 #modx-leftbar .x-btn button {
-  color: #728da7;
+  color: #6b8bac;
 }
 #modx-action-buttons .x-btn {
   background: white;
   border-radius: 3px;
-  padding: 13px 20px;
-  border: none;
+  padding: 10px 16px;
+  border: 1px solid #E0E5E9;
   -webkit-box-shadow: 0 1px 0 0 #CCC;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
 }
 #modx-action-buttons .x-btn button {
-  color: #728da7;
+  color: #6b8bac;
 }
 #modx-action-buttons .x-btn.x-btn-over {
-  border-color: #fbfbfb;
   background-color: #fbfbfb;
 }
 
@@ -4884,7 +4887,7 @@ having to do some real janky stuff to work with ExtJS markup
   height: 24px;
   top: 4px;
   left: 2px;
-  color: #728da7;
+  color: #6b8bac;
 }
 #modx-leftbar .x-toolbar-ct .x-btn:hover, #modx-leftbar .x-toolbar-ct .x-btn button:hover {
   color: #3697cd;
