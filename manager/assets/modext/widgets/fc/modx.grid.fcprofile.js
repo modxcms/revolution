@@ -84,7 +84,7 @@ MODx.grid.FCProfile = function(config) {
             ,scope: this
             ,handler: this.createProfile
             ,cls:'primary-button'
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_activate')
@@ -94,7 +94,7 @@ MODx.grid.FCProfile = function(config) {
                 text: _('selected_deactivate')
                 ,handler: this.deactivateSelected
                 ,scope: this
-            },'-',{
+            },{
                 text: _('selected_remove')
                 ,handler: this.removeSelected
                 ,scope: this
@@ -103,6 +103,7 @@ MODx.grid.FCProfile = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-fcp-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('filter_by_search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -120,6 +121,7 @@ MODx.grid.FCProfile = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}

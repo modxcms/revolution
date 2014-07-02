@@ -53,9 +53,10 @@ MODx.grid.FCSet = function(config) {
         }
         ,tbar: [{
             text: _('set_new')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createSet
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_activate')
@@ -65,12 +66,12 @@ MODx.grid.FCSet = function(config) {
                 text: _('selected_deactivate')
                 ,handler: this.deactivateSelected
                 ,scope: this
-            },'-',{
+            },{
                 text: _('selected_remove')
                 ,handler: this.removeSelected
                 ,scope: this
             }]
-        },'-',{
+        },{
             text: _('import_from_xml')
             ,handler: this.importSet
             ,scope: this
@@ -78,6 +79,7 @@ MODx.grid.FCSet = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-fcs-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('filter_by_search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -92,6 +94,7 @@ MODx.grid.FCSet = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}

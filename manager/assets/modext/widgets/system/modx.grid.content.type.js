@@ -94,6 +94,7 @@ MODx.grid.ContentType = function(config) {
         },binaryColumn]
         ,tbar: [{
             text: _('content_type_new')
+            ,cls: 'primary-button'
             ,handler: this.newContentType
             ,scope: this
         }]

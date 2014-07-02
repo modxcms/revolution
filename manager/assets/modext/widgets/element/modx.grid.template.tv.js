@@ -66,10 +66,11 @@ MODx.grid.TemplateTV = function(config) {
             ,listeners: {
                 'select': {fn: this.filterByCategory, scope:this}
             }
-        },'-',{
+        },{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-temptv-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -84,6 +85,7 @@ MODx.grid.TemplateTV = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}

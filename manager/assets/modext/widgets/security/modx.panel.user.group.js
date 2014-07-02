@@ -334,6 +334,7 @@ MODx.grid.UserGroupUsers = function(config) {
         },'->',{
             xtype: 'textfield'
             ,id: 'modx-ugu-filter-username'
+            ,cls: 'x-form-filter'
             ,listeners: {
                 'change': {fn:this.searchUser,scope:this}
                 ,'render': {fn: function(cmp) {
@@ -352,6 +353,7 @@ MODx.grid.UserGroupUsers = function(config) {
         },{
             text: _('clear_filter')
             ,id: 'modx-ugu-clear-filter'
+            ,cls: 'x-form-filter-clear'
             ,handler: this.clearFilter
             ,scope: this
         }]

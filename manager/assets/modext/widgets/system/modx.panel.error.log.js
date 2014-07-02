@@ -32,6 +32,7 @@ MODx.panel.ErrorLog = function(config) {
                 ,items: [{
                     xtype: 'textarea'
                     ,name: 'log'
+                    ,id: 'modx-error-log-content'
                     ,grow: true
                     ,growMax: 400
                     ,anchor: '100%'

@@ -46,13 +46,12 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                     ,ctrl: true
                 }]
             });
-            // btns.push('-');
+
         }
         btns.push({
             text: _('cancel')
             ,id: 'modx-abtn-cancel'
         });
-        // btns.push('-');
         btns.push({
             text: _('help_ex')
             ,id: 'modx-abtn-help'

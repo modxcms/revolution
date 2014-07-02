@@ -44,7 +44,7 @@ MODx.grid.DashboardWidgets = function(config) {
             text: _('widget_create')
             ,handler: this.createDashboard
             ,scope: this
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_remove')
@@ -55,6 +55,7 @@ MODx.grid.DashboardWidgets = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-dashboard-widget-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -69,6 +70,7 @@ MODx.grid.DashboardWidgets = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-dashboard-widgets-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}

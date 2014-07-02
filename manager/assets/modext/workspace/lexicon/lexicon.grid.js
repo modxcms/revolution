@@ -52,7 +52,7 @@ MODx.grid.Lexicon = function(config) {
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
             }
-        },'-',{
+        },{
             xtype: 'tbtext'
             ,text: _('topic')+':'
         },{
@@ -70,7 +70,7 @@ MODx.grid.Lexicon = function(config) {
             ,listeners: {
                 'select': {fn:this.changeTopic,scope:this}
             }
-        },'-',{
+        },{
             xtype: 'tbtext'
             ,text: _('language')+':'
         },{
@@ -95,10 +95,11 @@ MODx.grid.Lexicon = function(config) {
             ,cls:'primary-button'
             ,handler: this.createEntry
             ,scope: this
-        },'-',{
+        },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-lexicon-filter-search'
+            ,cls: 'x-form-filter'
             ,itemId: 'search'
             ,width: 120
             ,emptyText: _('search')+'...'
@@ -115,6 +116,7 @@ MODx.grid.Lexicon = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-lexicon-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,itemId: 'clear'
             ,text: _('filter_clear')
             ,listeners: {
@@ -127,7 +129,6 @@ MODx.grid.Lexicon = function(config) {
             ,scope: this
         }
         /*
-        ,'-'
         ,{
             xtype: 'button'
             ,id: 'modx-lexicon-import-btn'

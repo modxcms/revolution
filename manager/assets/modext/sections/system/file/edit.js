@@ -21,7 +21,6 @@ MODx.page.EditFile = function(config) {
                 ,ctrl: true
             }]
         });
-        // btns.push('-');
     }
     btns.push({
         text: _('cancel')

@@ -1,18 +1,16 @@
 %secondary-button {
-  /*background: linear-gradient(180deg, rgba(228, 233, 238, 1) 0%, rgba(210, 219, 226, 1) 100%) no-repeat;*/
-  background: white;
+  background: $white;
   border: 0;
   border-radius: $borderRadius;
   box-shadow: $shadowBorder;
-  line-height: 1;
   cursor: pointer;
-  display: block; /* make margins be exact */
-  /*margin: 0 1px;*/
+  display: inline-block;
+  *display: inline;
+  line-height: 1;
   padding: 10px 15px;
   position: relative;
   text-decoration: none;
   zoom: 1;
-  /*border: 1px solid rgb(200, 210, 220);*/
   & button {
     font-size: 13px;
     color: $regularButtonColor;
@@ -21,7 +19,8 @@
     min-width: 100%;
     vertical-align: middle;
   }
-  .x-btn-split {
+  .x-btn-split,
+  .x-btn-arrow {
     display: block;
     padding-right: 20px;
     position:relative;
@@ -35,13 +34,14 @@
       right: 0;
     }
     & button {
-      border-right: 1px solid rgba(255,255,255,0.4);
+      border-right-color: inherit;
+      border-right-style: solid;
+      border-right-width: 1px;
       padding-right: 10px;
     }
   }
-  &.x-btn-over {
-    /*border-color:darken($gainsboro,40%);*/
-    /*background-color:$gainsboro;*/
+  &.x-btn-over,
+  &:hover {
     background-color: $colorSplash;
     box-shadow: $shadowBorderHover;
     color: $white;
@@ -51,7 +51,8 @@
     }
   }
   &.x-btn-focus,
-  &.x-btn-click {
+  &.x-btn-click,
+  &:active {
     background: darken($colorSplash, 6%);
     box-shadow: $shadowBorderActive;
     color: $white;
@@ -65,7 +66,9 @@
       content: $fa-var-caret-up;
     }
   }
-  &.x-item-disabled * {
+  &.x-item-disabled {
+    background: $white !important; /* prevent :hover and :active from overriding */
+    box-shadow: $shadowBorder !important; /* prevent :hover and :active from overriding */
     opacity: 0.8;
   }
   &.primary-button {

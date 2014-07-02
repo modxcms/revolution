@@ -20,7 +20,6 @@ MODx.page.CreateFile = function(config) {
             ,ctrl: true
         }]
     });
-    // btns.push('-');
     btns.push({
         text: _('cancel')
         ,id: 'modx-abtn-cancel'

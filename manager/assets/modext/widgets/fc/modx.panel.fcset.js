@@ -315,6 +315,7 @@ MODx.grid.FCSetTabs = function(config) {
         }
         ,tbar: [{
             text: _('tab_create')
+            ,cls: 'primary-button'
             ,handler: this.createTab
             ,scope: this
         }]

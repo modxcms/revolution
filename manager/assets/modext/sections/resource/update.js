@@ -117,7 +117,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                     ,ctrl: true
                 }]
             });
-            // btns.push('-');
         } else if (cfg.locked) {
             btns.push({
                 text: cfg.lockedText || _('locked')
@@ -125,7 +124,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,handler: Ext.emptyFn
                 ,disabled: true
             });
-            // btns.push('-');
         }
         if (cfg.canDuplicate == 1 && (cfg.record.parent !== parseInt(MODx.config.tree_root_id) || cfg.canCreateRoot == 1)) {
             btns.push({
@@ -134,7 +132,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,handler: this.duplicateResource
                 ,scope:this
             });
-            // btns.push('-');
         }
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
@@ -143,7 +140,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,handler: this.deleteResource
                 ,scope:this
             });
-            // btns.push('-');
         }
         btns.push({
             text: _('view')
@@ -151,14 +147,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,handler: this.preview
             ,scope: this
         });
-        // btns.push('-');
         btns.push({
             text: _('cancel')
             ,id: 'modx-abtn-cancel'
             ,handler: this.cancel
             ,scope: this
         });
-        // btns.push('-');
         btns.push({
             text: _('help_ex')
             ,id: 'modx-abtn-help'

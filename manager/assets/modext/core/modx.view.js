@@ -307,10 +307,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     ,getToolbar: function() {
-        return ['-', {
+        return [{
             text: _('filter')+':'
             ,xtype: 'label'
-        }, '-', {
+        },{
             xtype: 'textfield'
             ,id: this.ident+'filter'
             ,selectOnFocus: true
@@ -322,10 +322,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
                     }, this, {buffer:500});
                 }, scope:this}
             }
-        }, '-', {
+        },{
             text: _('sort_by')+':'
             ,xtype: 'label'
-        }, '-', {
+        },{
             id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true

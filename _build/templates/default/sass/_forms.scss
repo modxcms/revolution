@@ -69,6 +69,16 @@ textarea.x-form-field,
   padding: 5px; /* override standard extjs theme */
 }
 
+textarea[id="ta"], /* main resource content without RTE */
+textarea[id="modx-chunk-snippet"], /* chunk code */
+textarea[id="modx-snippet-snippet"], /* snippet code */
+textarea[id="modx-plugin-plugincode"], /* plugin code */
+textarea[id="modx-template-content"],
+textarea[id="modx-file-content"], /* file code / content */
+textarea[id="modx-error-log-content"] { /* error log content */
+  font-family: $codefonts;
+}
+
 .x-form-text, /* this screws up clear cache modal #shame */
 textarea.x-form-field,
 .x-form-textarea {
@@ -112,26 +122,6 @@ textarea.x-form-field,
   background-color: #fff;
 }
 
-.ext-strict .x-form-field-trigger-wrap .x-form-text,
-.ext-strict .x-small-editor .x-form-field-trigger-wrap .x-form-text {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  border-right: 0 none;
-  color: #606060;
-  font-weight: bold;
-  height: 20px;
-  padding: 6px;
-  text-shadow: 1px -1px 0 #fff;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger {
-  background-image: url($imgPath + 'modx-theme/form/trigger.png');
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
-  border: 1px solid #C5C5C5 !important;
-  border-left: 0 none;
-}
-
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
   background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0px 100%;
@@ -146,49 +136,33 @@ textarea.x-form-field,
   background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
 
-.x-form-field-trigger-wrap {
-  border-color: #D0D0D0 #CCCCCC #BEBEBE;
-  border-style: solid;
-  border-width: 1px;
-  height: 30px;
-  margin-right: 1px;
-}
-
-.x-form-field-trigger-wrap .x-form-text {
-  background-color: transparent;
-  border: 0 none;
-}
-
 .x-form-field-wrap {
   background: $coreFieldBg;
-  border-radius: 2px;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+
+  .x-form-text {
+    border: 0;
+  }
+  .x-form-trigger {
+    background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat left center;
+    border: 0;
+    height: 30px !important; /* override default extjs theme */
+    width: 32px;
+
+    &.x-form-trigger-over {
+
+    }
+    &.x-form-trigger-click {
+
+    }
+  }
+  &.x-datetime-wrap {
+    border: 0;
+  }
 }
 
-.x-form-field-wrap .x-form-trigger {
-  background-position: left center;
-  background-repeat: no-repeat;
-  border: 0 none !important;
-  height: 30px;
-  width: 32px;
-}
-
-.x-form-field-wrap .x-form-trigger-over {
-  background-position: right;
-}
-
-.x-form-field-wrap .x-form-arrow-trigger {
-  background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat scroll left center transparent;
-}
-
-.x-form-field-wrap .x-form-trigger.x-form-trigger-over {
-  background-position: center center;
-}
-
-.x-form-field-wrap .x-form-trigger.x-form-trigger-click {
-  background-position: right center;
-}
-
-.x-small-editor .x-form-field-wrap {
+/*.x-small-editor .x-form-field-wrap {
   background: $gainsboro;
   border-radius: 2px;
 }
@@ -226,7 +200,7 @@ textarea.x-form-field,
 
 .x-form-field-wrap .x-form-search-trigger {
   background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
-}
+}*/
 
 .x-viewport .x-trigger-wrap-focus,
 .x-viewport input.x-form-focus,
@@ -373,6 +347,9 @@ textarea.x-form-field,
 .x-window .desc-under.desc-checkbox {
   margin: -2px 0 4px;
 }
+.form-with-labels label[for="modx-element-property-preprocess"].desc-under {
+  margin: -2px 0 0 0;
+}
 .form-with-labels .desc-under .warning,
 .x-window {
   -moz-box-shadow: 0 0 5px #A0A0A0;
@@ -383,5 +360,41 @@ textarea.x-form-field,
   box-shadow: 0 0 5px #A0A0A0;
   overflow: hidden;
   padding: 0;
+}
+.x-window .desc-under .warning {
+  color: #df8d00;
+}
+
+
+.x-combo-list {
+  background-color: $dropdownBg;
+  border-color: $dropdownBorder;
+  border-radius: 0 0 $borderRadius $borderRadius;
+}
+.x-combo-list-inner {
+  background-color: $dropdownBg;
+}
+.x-combo-list-hd {
+  background-image: url($imgPath + 'modx-theme/layout/panel-title-light-bg.gif');
+  border-bottom-color: #bcbcbc;
+  color: #464646;
+}
+.x-resizable-pinned .x-combo-list-inner {
+  border-bottom-color: transparent;
+}
+.x-combo-list-item {
+  border: none;
+  padding: 5px;
+  color: $dropdownTextColor;
+}
+.x-combo-list .x-combo-selected {
+  background-color: $dropdownSelectedBg;
+  border: 0 none !important;
+}
+.x-combo-list .x-toolbar {
+  border-top-color: #bcbcbc;
+}
+.x-combo-list-small {
+  font: $fontSmall;
 }
 

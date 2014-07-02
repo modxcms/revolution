@@ -35,7 +35,7 @@ MODx.grid.Grid = function(config) {
         }
     });
     if (config.paging) {
-        var pgItms = config.showPerPage ? ['-',_('per_page')+':',{
+        var pgItms = config.showPerPage ? [_('per_page')+':',{
             xtype: 'textfield'
             ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
             ,width: 40

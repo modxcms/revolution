@@ -17,7 +17,6 @@ MODx.page.ResourceData = function(config) {
             ,handler: this.editResource
             ,scope: this
         });
-        // btns.push('-');
     }
     btns.push({
         text: _('view')
@@ -25,7 +24,6 @@ MODx.page.ResourceData = function(config) {
         ,handler: this.preview
         ,scope: this
     });
-    // btns.push('-');
     btns.push({
         text: _('cancel')
         ,id: 'modx-abtn-cancel'

@@ -177,10 +177,10 @@ Ext.extend(MODx.Media, Ext.Container, {
      * @returns {Array}
      */
     ,getToolbar: function() {
-        return ['-', {
+        return [{
             text: _('filter')+':'
             ,xtype: 'label'
-        }, '-', {
+        },{
             xtype: 'textfield'
             ,id: this.ident+'filter'
             ,selectOnFocus: true
@@ -195,10 +195,10 @@ Ext.extend(MODx.Media, Ext.Container, {
                     ,scope: this
                 }
             }
-        }, '-', {
+        },{
             text: _('sort_by')+':'
             ,xtype: 'label'
-        }, '-', {
+        },{
             id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true

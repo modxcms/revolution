@@ -46,6 +46,7 @@ MODx.grid.Context = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-ctx-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -60,6 +61,7 @@ MODx.grid.Context = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}

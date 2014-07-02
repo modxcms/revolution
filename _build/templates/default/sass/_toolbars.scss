@@ -2,24 +2,29 @@
   background-color: #F7F7F7;
   background-image: none;
   border-color: #DFDFDF;
+
+  .xtb-text {
+    margin: 0 5px 0 7px;
+    padding: 0;
+  }
+
+  .x-item-disabled {
+    opacity: 0.8;
+  }
+
+  td.x-toolbar-cell {
+    &:first-of-type {
+      .xtb-text {
+        margin-left: 0;
+      }
+    }
+  }
 }
 
 .x-toolbar td,.x-toolbar span,.x-toolbar input,
 .x-toolbar div,.x-toolbar select,.x-toolbar label {
   font: $fontSmall;
 }
-
-.x-toolbar .x-item-disabled {
-  color: gray;
-}
-
-.x-toolbar .x-item-disabled * {
-  color: gray;
-}
-
-/*.x-toolbar em.x-btn-split {
-  background-image: url($imgPath + 'modx-theme/button/s-arrow-noline.gif');
-}*/
 
 .x-toolbar .x-btn-over em.x-btn-split,
 .x-toolbar .x-btn-click em.x-btn-split,
@@ -127,15 +132,24 @@
     background-color: transparent;
     border: 0 none;
     overflow: hidden;
+    padding: 2px 0; /* override extjs default style of 2px 2px */
 
     .x-form-text {
       padding: 5px 10px;
       width: 32px !important; /* overrides the 12px inline width I have no idea where it's coming from */
+
+      &.x-tbar-page-number {
+        margin-right: 3px;
+      }
     }
 
     .x-btn {
       margin-right: 10px;
       padding: 8px 13px;
+    }
+
+    .xtb-text {
+      margin: 0 3px 0 0;
     }
   }
 }

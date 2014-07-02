@@ -106,7 +106,7 @@ MODx.grid.ElementProperties = function(config) {
             ,handler: this.create
             ,scope: this
             ,disabled: true
-        },'-',{
+        },{
             text: _('properties_default_locked')
             ,id: 'modx-btn-propset-lock'
             ,handler: this.togglePropertiesLock
@@ -131,8 +131,9 @@ MODx.grid.ElementProperties = function(config) {
             text: _('propertyset_add')
             ,handler: this.addPropertySet
             ,scope: this
-        },'-',{
+        },{
             text: _('propertyset_save')
+            ,cls: 'primary-button'
             ,handler: this.save
             ,scope: this
             ,hidden: MODx.request.id ? false : true
@@ -143,11 +144,11 @@ MODx.grid.ElementProperties = function(config) {
             ,handler: this.revertAll
             ,scope:this
             ,disabled: true
-        },'-',{
+        },{
             text: _('properties_import')
             ,handler: this.importProperties
             ,scope: this
-        },'-',{
+        },{
             text: _('properties_export')
             ,handler: this.exportProperties
             ,scope: this

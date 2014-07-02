@@ -1271,8 +1271,10 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-tv-label {
-  float: left;
-  width: auto !important;
+  display: inline-block;
+  /*float: left;*/
+  position: relative !important;
+  width: auto;
 }
 
 .modx-tv-label:hover .modx-tv-reset {
@@ -1280,23 +1282,27 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-tv-label-title {
-  float: left;
+  /*float: left;*/
+  display: inline-block;
 }
 
 .modx-tv-label-description {
-  display: block;
-  float: left;
+  display: inline-block;
+  /*float: left;*/
   font-style: italic;
   font-weight: normal;
   padding-left: 5px;
 }
 
 .modx-tv-reset {
-  background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') top right no-repeat;
+  background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') bottom left no-repeat;
   cursor: pointer;
-  float: left;
+  display: inline-block;
+  /*float: left;*/
   height: 16px;
   opacity: 0;
+  padding: 38px 5px 0 0;
+  position: absolute; top: 0; left: -21px;
   width: 16px;
 }
 

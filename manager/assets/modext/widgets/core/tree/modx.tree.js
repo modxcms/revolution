@@ -124,7 +124,6 @@ MODx.tree.Tree = function(config) {
     } else {
         var tb = this.getToolbar();
         if (config.tbar && config.useDefaultToolbar) {
-            tb.push('-');
             for (var i=0;i<config.tbar.length;i++) {
                 tb.push(config.tbar[i]);
             }
@@ -642,7 +641,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             ,tooltip: {text: _('tree_collapse')}
             ,handler: this.collapseNodes
             ,scope: this
-        },'-',{
+        },{
             icon: iu+'refresh.png'
             ,cls: 'x-btn-icon refresh'
             ,tooltip: {text: _('tree_refresh')}

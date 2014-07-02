@@ -36,6 +36,7 @@ MODx.grid.Provider = function(config) {
         }]
         ,tbar: [{
             text: _('provider_add')
+            ,cls: 'primary-button'
             ,handler: { xtype: 'modx-window-provider-create' ,blankValues: true }
         }]
     });

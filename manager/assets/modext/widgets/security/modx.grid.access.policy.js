@@ -83,11 +83,11 @@ MODx.grid.AccessPolicy = function(config) {
             ,cls:'primary-button'
             ,scope: this
             ,handler: this.createPolicy
-        },'-',{
+        },{
             text: _('import')
             ,scope: this
             ,handler: this.importPolicy
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('policy_remove_multiple')
@@ -98,6 +98,7 @@ MODx.grid.AccessPolicy = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-policy-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -115,6 +116,7 @@ MODx.grid.AccessPolicy = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-sacpol-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}

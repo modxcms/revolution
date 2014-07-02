@@ -151,6 +151,7 @@ MODx.grid.FCProfileUserGroups = function(config) {
         }]
         ,tbar: [{
             text: _('usergroup_create')
+            ,cls: 'primary-button'
             ,handler: this.addUserGroup
             ,scope: this
         }]
