@@ -134,15 +134,17 @@
     background-color: transparent;
     border: 0 none;
     overflow: hidden;
-    padding: 2px 0; /* override extjs default style of 2px 2px */
+    padding: 2px 0; /* override extjs default theme style of 2px 2px */
 
     .x-form-text {
       padding: 5px 10px;
-      /* width set in widgets/core/modx.grid.js line 41 */
 
+      &.x-tbar-page-number,
+      &.x-tbar-page-size {
+        width: 32px;
+      }
       &.x-tbar-page-number {
         margin-right: 3px;
-        width: 32px;
       }
     }
 
