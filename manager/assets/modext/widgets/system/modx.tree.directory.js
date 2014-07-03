@@ -140,6 +140,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         return menu;
     }
 
+    /**
+     * Override to handle root nodes contextual menus
+     *
+     * @param node
+     * @param e
+     */
     ,_showContextMenu: function(node,e) {
         this.cm.activeNode = node;
         this.cm.removeAll();
