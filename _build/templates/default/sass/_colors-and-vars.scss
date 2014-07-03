@@ -28,7 +28,6 @@ $red: #FF0000;
 
 $colorSplash: #3697cd;
 $desaturatedSplash: lighten(desaturate($colorSplash,100%), 20%);
-$desturatedSuccess: lighten(desaturate($success,100%), 10%);
 $lightSplash: lighten($colorSplash, 42.5%);
 
 $aside: #f8f8f8;
@@ -60,6 +59,7 @@ $tipText: $gainsboro;
 $mainText: $black;
 $headerText: #555555;
 $treeColor: #556C88;
+$treeColorDesaturated: lighten(desaturate($treeColor,100%), 25%);
 $treeColor_2: #728DA7;
 $treePseudoRootBg: $lightBg;
 $treePseudoRootColor: #447996;

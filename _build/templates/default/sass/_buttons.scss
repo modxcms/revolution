@@ -244,14 +244,6 @@
   margin: 0 2px 0 0;
 }
 
-.x-btn-click .x-btn-text, .x-btn-menu-active .x-btn-text, .x-btn-pressed .x-btn-text {
-  color: #73797f;
-}
-
-.x-btn-disabled * {
-  color: gray !important;
-}
-
 .x-btn-group-bwrap {
   padding: 1px 0 0;
 }
@@ -387,8 +379,17 @@
       }
 
 
-      &:hover, button:hover {
+      &.x-btn-over,
+      &:hover,
+      &.x-btn-click,
+      &:active {
+        background: none;
+        box-shadow: none;
         color: $buttonHoverColor;
+
+        button {
+          color: inherit;
+        }
       }
 
       span {
@@ -396,16 +397,22 @@
       }
     }
     .x-toolbar-right .x-btn {
+      /* the resource trash button in the tree */
       & > em > button {
-        color: #96A9BB;
+        /*color: #96A9BB;*/ /* not sure why the trash needs a different color when active? */
+        font-size: 20px; /* trash icon is a bit smaller than the others at 18px */
+      }
+      &#emptifier.x-item-disabled {
+        color: $treeColorDesaturated !important; /* !important prevents hover / active styles */
+        opacity: 0.6;
+
+        button {
+          color: inherit;
+        }
       }
     }
   }
 }
-#modx-leftbar #emptifier.x-item-disabled  {
-  opacity: .4 !important;
-}
-
 
 /* resource tree toolbar icons */
 .tree-new-resource > em > button:before {

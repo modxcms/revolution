@@ -66,12 +66,15 @@
       content: $fa-var-caret-up;
     }
   }
-  &.x-item-disabled {
-    background: $white !important; /* prevent :hover and :active from overriding */
-    box-shadow: $shadowBorder !important; /* prevent :hover and :active from overriding */
-    opacity: 0.8;
+  &.x-item-disabled,
+  &.x-item-disabled:hover,
+  &.x-item-disabled:active {
+    background: $white;
+    box-shadow: $shadowBorder;
+    color: $regularButtonColor;
+    opacity: 0.6; /* extjs default theme is also 0.6 */
   }
   &.primary-button {
-  @extend %primary-button;
+    @extend %primary-button;
   }
 }

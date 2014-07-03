@@ -13,6 +13,9 @@
           }
       }
   }
+  .x-form-text {
+    background: none; /* prevent white searchfield background */
+  }
 }
 
 #modx-navbar #modx-manager-search:hover { /* #shame */
