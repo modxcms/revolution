@@ -9,7 +9,7 @@
 #modx-action-buttons {
   position: fixed;
   top: 55px;
-  right: 10px;
+  right: 25px;
   z-index: 9;
   left: auto;
   background: $mainBg;
@@ -22,6 +22,7 @@
     width: auto !important;
     zoom: 1;
   }
+  .xtb-sep { width: 0; }
 }
 
 /* btn style */
@@ -63,8 +64,8 @@
   #modx-action-buttons & {
     background: $buttonBackground;
     border-radius: 3px;
-    padding: 13px 20px;
-    border: none;
+    padding: 10px 16px;
+    border: 1px solid #E0E5E9;
     -webkit-box-shadow: 0 1px 0 0 #CCC;
     box-shadow: $shadower;
     button {
@@ -76,7 +77,6 @@
     }
 
     &.x-btn-over {
-      border-color: $actionable;
       background-color:$actionable;
     }
   }
