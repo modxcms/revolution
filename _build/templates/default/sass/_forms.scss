@@ -69,13 +69,14 @@ textarea.x-form-field,
   padding: 5px; /* override standard extjs theme */
 }
 
-textarea[id="ta"], /* main resource content without RTE */
-textarea[id="modx-chunk-snippet"], /* chunk code */
-textarea[id="modx-snippet-snippet"], /* snippet code */
-textarea[id="modx-plugin-plugincode"], /* plugin code */
-textarea[id="modx-template-content"],
-textarea[id="modx-file-content"], /* file code / content */
-textarea[id="modx-error-log-content"] { /* error log content */
+#ta, /* main resource content without RTE */
+#modx-chunk-snippet, /* chunk code */
+#modx-snippet-snippet, /* snippet code */
+#modx-plugin-plugincode, /* plugin code */
+#modx-template-content, /* template code */
+#modx-file-content, /* file code / content */
+#modx-error-log-content, /* error log content */
+.modx-code-content { /* general class that could be applied to any form field that should display code font */
   font-family: $codefonts;
 }
 

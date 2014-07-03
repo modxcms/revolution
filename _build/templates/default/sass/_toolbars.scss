@@ -126,6 +126,7 @@
   background-image: url($imgPath + 'modx-theme/toolbar/more.gif') !important;
 }
 
+/* bottom toolbars like pagination */
 .x-panel-bbar {
   padding-top: 10px;
 
@@ -137,10 +138,11 @@
 
     .x-form-text {
       padding: 5px 10px;
-      width: 32px !important; /* overrides the 12px inline width I have no idea where it's coming from */
+      /* width set in widgets/core/modx.grid.js line 41 */
 
       &.x-tbar-page-number {
         margin-right: 3px;
+        width: 32px;
       }
     }
 
@@ -155,6 +157,7 @@
   }
 }
 
+/* top toolbars */
 .x-panel-tbar {
   padding-bottom: 2px;
 

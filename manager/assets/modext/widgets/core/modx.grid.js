@@ -38,7 +38,7 @@ MODx.grid.Grid = function(config) {
         var pgItms = config.showPerPage ? [_('per_page')+':',{
             xtype: 'textfield'
             ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
-            ,width: 40
+            ,width: 54 /* 32px field width + 20px padding + 2px border = 54px */
             ,listeners: {
                 'change': {fn:this.onChangePerPage,scope:this}
                 ,'render': {fn: function(cmp) {

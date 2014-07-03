@@ -105,7 +105,7 @@
     .x-toolbar-right-row {
       .x-form-field-wrap {
         margin-right: 6px;
-        margin-left: 6px !important; /* we need the selector to override the rules above */
+        margin-left: 6px !important; /* we need !important to override the rules above */
       }
     }
   }
