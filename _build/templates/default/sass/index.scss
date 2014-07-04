@@ -1308,6 +1308,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 #modx-resource-tvs-div {
   border-top-width: 0;
+  visibility: hidden; /* prevent flash of unstyled tv from elements on page load */
 }
 
 .modx-permissions-list {
