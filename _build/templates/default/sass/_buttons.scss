@@ -123,6 +123,7 @@
   border: 0;
   font-family: $buttonfonts;
   border-radius: 0 0 5px 5px;
+  z-index: 11; /* prevent panel collaps arrows from overlapping */
 
   .x-toolbar-left {
     width: auto !important;
