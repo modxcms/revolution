@@ -1220,15 +1220,16 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-tv {
-  border-bottom: 1px solid #f4f4f4;
-  margin: 0;
-  padding: 15px 0 !important;
+  /*border-bottom: 1px solid #f4f4f4;*/
+  margin: 0 0 4px 0;
+  padding-bottom: 4px;
+  /*padding: 15px 0 !important;*/
   width: 100%;
 }
 
-#modx-tv-tabs .tv-first {
+/*#modx-tv-tabs .tv-first {
   padding-top: 0 !important;
-}
+}*/
 
 #modx-tv-tabs .tv-last {
   border-bottom: 0 !important;
