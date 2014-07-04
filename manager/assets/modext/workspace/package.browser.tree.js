@@ -34,7 +34,7 @@ MODx.tree.PackageBrowserTree = function(config) {
 			,id: 'package-browser-search-fld'
 			,cls: 'icon-search'
 			,hideMode: 'offsets'
-			,width: 250
+			,width: 249
 			,listeners: {
 				change: this.search
 				,specialkey: function( form, e ) {
