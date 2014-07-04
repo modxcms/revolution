@@ -317,18 +317,12 @@
 
   box-shadow: $shadowBorderDark;
   padding: 5px;
-  /*&:hover {
-    background: $actionable;
-  }
-  &:active {
-    background: $colorSplash;
-    box-shadow: $shadowBorderActive;
-    color: $white;
-  }*/
+
   &.orange {
     background: #F4B848;
     box-shadow: 0 0 0 1px #F4B848;
     color: $white;
+
     &:hover {
       background: #F4A448;
       box-shadow: 0 0 0 1px #F4A448;
@@ -342,6 +336,7 @@
     background: #99c44f;
     box-shadow: 0 0 0 1px #99c44f;
     color: $white !important; /* override !important of .green class */
+
     &:hover {
       background: #6cb24a;
       box-shadow: 0 0 0 1px #6cb24a;
