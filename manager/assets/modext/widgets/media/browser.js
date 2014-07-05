@@ -92,14 +92,14 @@ MODx.Media = function(config) {
             ,width: 250
             ,items: this.tree
             ,id: this.ident+'-browser-tree'
-            ,cls: 'modx-pb-browser-tree'
+            ,cls: 'modx-pb-browser-tree shadowbox'
             ,autoScroll: true
             ,split: true
         },{
             region: 'center'
             ,layout: 'fit'
             ,items: this.view
-            ,id: this.ident+'-browser-view'
+            ,id: this.ident+'-browser-view shadowbox'
             ,cls: 'modx-pb-view-ct'
             ,autoScroll: true
             ,border: false
@@ -107,7 +107,7 @@ MODx.Media = function(config) {
         },{
             region: 'east'
             ,width: 250
-            ,id: this.ident+'-img-detail-panel'
+            ,id: this.ident+'-img-detail-panel shadowbox'
             ,cls: 'modx-pb-details-ct'
             ,split: true
             //,collapsed: true

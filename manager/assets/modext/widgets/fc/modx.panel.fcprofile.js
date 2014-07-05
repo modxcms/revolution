@@ -75,7 +75,7 @@ MODx.panel.FCProfile = function(config) {
 					,anchor: '90%'
 					,allowBlank: true
 				}]
-            },{ html: '<hr />' },{
+            },{
                 xtype: 'modx-grid-fc-set'
 				,cls:'main-wrapper'
                 ,baseParams: {

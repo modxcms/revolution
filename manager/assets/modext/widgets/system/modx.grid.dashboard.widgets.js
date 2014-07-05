@@ -42,6 +42,7 @@ MODx.grid.DashboardWidgets = function(config) {
         }]
         ,tbar: [{
             text: _('widget_create')
+            ,cls:'primary-button'
             ,handler: this.createDashboard
             ,scope: this
         },{
@@ -69,9 +70,9 @@ MODx.grid.DashboardWidgets = function(config) {
             }
         },{
             xtype: 'button'
+            ,text: _('filter_clear')
             ,id: 'modx-dashboard-widgets-filter-clear'
             ,cls: 'x-form-filter-clear'
-            ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }

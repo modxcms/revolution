@@ -22,9 +22,9 @@ $searchresultshead: #55bbe7;
 
 $labelText: $darkNeutral;
 $primaryAction: #58a598;
-$success: #81B548;
-$green: $success;
-$red: #FF0000;
+$green: #6cb24a;
+$red: #BE0000;
+$success: $green;
 
 $colorSplash: #3697cd;
 $desaturatedSplash: lighten(desaturate($colorSplash,100%), 20%);
@@ -77,7 +77,7 @@ $unpubText: italic;
 $lockedText: italic;
 
 
-$deleted: #B42260 !important;
+$deleted: lighten(desaturate($red,25%), 25%) !important;
 $delTextStyle: normal;
 $delTextDeco: line-through;
 

@@ -516,10 +516,6 @@ MODx.panel.TVInputProperties = function(config) {
                 ,html: _('tv_default_desc')
                 ,cls: 'desc-under'
             },{
-				html: '<hr />'
-				,anchor: '100%'
-				,border: false
-			},{
 				id: 'modx-input-props'
 				,autoHeight: true
 			}]

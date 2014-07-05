@@ -82,9 +82,9 @@ MODx.grid.Dashboards = function(config) {
         }]
         ,tbar: [{
             text: _('dashboard_create')
+            ,cls:'primary-button'
             ,handler: this.createDashboard
             ,scope: this
-            ,cls:'primary-button'
         },{
             text: _('bulk_actions')
             ,menu: [{
@@ -128,9 +128,9 @@ MODx.grid.Dashboards = function(config) {
             }
         },{
             xtype: 'button'
+            ,text: _('filter_clear')
             ,id: 'modx-filter-clear'
             ,cls: 'x-form-filter-clear'
-            ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }

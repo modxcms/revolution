@@ -15,6 +15,7 @@ MODx.panel.Packages = function(config) {
 		,layoutConfig:{ deferredRender:true }
 		,defaults:{
 			autoHeight: true
+			autoWidth: true
 			,border: false
 		}
 		,activeItem: 0

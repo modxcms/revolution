@@ -4,16 +4,10 @@
   margin: 20px 0 20px;
   overflow: visible;
 
-  #modx-leftbar & {
-  }
-
   /* background behind a button bar */
   .x-tab-panel-body-noborder {
     background-color: $white;
-
-    #modx-leftbar & {
-      background-color: $white;
-    }
+    border-radius: $borderRadius;
   }
 }
 
@@ -24,8 +18,9 @@
 }
 
 .x-tab-panel-header ul.x-tab-strip-top {
-  border-bottom-color: $white;
-  margin:0; /* was -1px */
+  /*border-bottom-color: $white;*/
+  border: 0; /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
+  margin: 0; /* was -1px */
   width: auto;
   background-color: $tabStripBg !important;
   position: relative;
@@ -49,6 +44,7 @@
 .x-tab-panel-bwrap {
   box-shadow: $boxShadow;
   border-radius: $borderRadius;
+  overflow: visible; /* prevent cutoff box-shadow */
 }
 
 .x-tab-strip li {
@@ -128,7 +124,7 @@
 
 ul.x-tab-strip-top li:first-child {
   /*margin-left: -1px*/;
-  margin-left:0;
+  margin-left: 0;
 }
 
 ul.x-tab-strip-bottom {

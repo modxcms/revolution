@@ -821,6 +821,9 @@ td.x-date-mp-sep {
   border-radius: $borderRadius;
   overflow: visible;
 }
+#modx-panel-packages-browser .x-panel-body {
+  border-radius: 0; /* prevent rounded border on most pouplar / last updated panels */
+}
 .x-panel-noborder {
   border: none;
 }

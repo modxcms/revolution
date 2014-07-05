@@ -36,7 +36,7 @@ body {
 h2, h3 {
   color:  $headerText;
   font:   $fontH2;
-  margin: 0 0 8px 5px;
+  margin: -3px 0 8px -1px; /* align main titles with treetabs and left panel edge */
 }
 h3 {
   font: $fontH3;
@@ -51,11 +51,11 @@ em {
 }
 
 hr {
-  background-color: #a1b7c4;
+  background-color: $borderColor;
   border: 0;
-  color: #a1b7c4;
+  color: $borderColor;
   height: 1px;
-  margin: 20px;
+  margin: 20px 0;
 }
 .aleft {
   text-align: left;
@@ -94,7 +94,7 @@ hr {
 }
 
 .primary {
-	color:$primaryAction !important;
+	color: $primaryAction !important;
 }
 
 .error {
@@ -1138,21 +1138,33 @@ body.ext-ie7 .x-superboxselect-item {
 .container {
   margin: 20px 15px 20px;
 }
-
-/* Wrap the main content */
-.structure-tabs {
-  /* margin-top: -1px; */
+/* prevent cut off box shadows */
+.container,
+.x-plain-bwrap,
+.x-plain-body {
+  overflow: visible;
 }
 
-/* Realign modx-tabs for getPageStructure */
+/* box-shadow for most panels + custom class to set explicitly */
+.shadowbox,
+.x-form-label-left {
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+
+  /* prevent box-shadow in nested panels */
+  .x-form-label-left {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
 
 /* Panel description text */
 .panel-desc {
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   border: none;
-  color: #5A5A5A;
+  color: $darkNeutral;
   line-height: 1.5;
-  margin-top: 5px;
+  margin-top: 15px;
   padding: 15px !important;
 
   .x-panel-bwrap {
@@ -1323,78 +1335,127 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 /* Breadcrumbs */
-
-.crumb_wrapper {
-  border-bottom: 1px solid #CACACA;
-  border-top: 1px solid #D0D0D0;
-  margin-top: 5px;
-}
-
-.crumbs {
-  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
-  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  border-bottom: 1px solid #EFEFEF;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-  height: 34px;
-}
-
-.crumbs li {
-  background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;
-  color: $darkNeutral;
-  float: left;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 35px;
-  padding: 0 20px 0 15px;
-  text-shadow: 0 1px 0 #FFF;
-}
-
-.crumbs li button {
-  background-color: transparent;
-  border: 0 none;
-  color: $darkNeutral;
-  cursor: pointer;
-  font: $baseText;
-  font-weight: bold;
-  padding: 0;
-  text-decoration: none;
-}
-
-.crumbs li .root {
-  background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;
-  display: block;
-  height: 16px;
-  margin: 10px 0 9px;
-  text-indent: -999em;
-  width: 16px;
-}
-
-.crumbs li button:hover {}
-
-
-.crumbs li button.root {
-  background-position: center -16px;
-  text-indent: -999em;
-  width: 16px;
-}
-.crumbs li button.root:hover {}
-
-/*.breadcrumbs .highlight {
-	background-color: #FFF9DF;
-    border-color: #ECE3CB !important;
-    color: #5F5947;
-    font-weight: bold;
-}
-*/
-/* LIGHTBOX */
-
 .breadcrumbs .panel-desc {
-  margin-top: 1px;
+  margin-top: 0;
 }
+.crumb_wrapper {
+  background: #f9f9f9;
+  border-bottom: 1px solid $borderColor;
+  border-top: 1px solid $borderColor;
+  margin-top: 15px;
+
+  .crumbs {
+    /*border-bottom: 1px solid $borderColor;*/
+    height: 34px;
+    overflow: hidden; /* hide the overflow from the oversized arrows */
+
+    li {
+      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
+      color: $darkNeutral;
+      float: left;
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 35px;
+      padding: 0 0 0 20px;
+      position: relative;
+
+      &.first {
+        padding: 0;
+
+        button {
+          padding: 8px 16px 8px 20px;
+        }
+      }
+
+      &:after {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+        border-bottom: 50px solid transparent;
+        border-left: 30px solid #f9f9f9;
+        position: absolute;
+        top: 50%;
+        margin-top: -50px;
+        left: 100%;
+        z-index: 2;
+      }
+      &:before {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent;      
+        border-bottom: 50px solid transparent;
+        border-left: 30px solid $darkNeutral;
+        position: absolute;
+        top: 50%;
+        margin-top: -50px;
+        /*margin-left: 1px;*/ /* uncomment to make the line thicker */
+        left: 100%;
+        z-index: 1;
+      }
+
+      &:hover {
+        background-color: $colorSplash;
+
+        button,
+        span {
+          color: $white;
+        }
+      }
+
+      &:hover:after {
+        border-left-color: $colorSplash;
+      }
+      &:hover:before {
+        border-left-color: $white;
+      }
+
+      button {
+        background-color: transparent;
+        border: 0 none;
+        color: $darkNeutral;
+        cursor: pointer;
+        font: $baseText;
+        font-weight: bold;
+        margin: 0;
+        padding: 8px 0 8px 20px;
+        text-decoration: none;
+      }
+
+      span {
+        padding-left: 20px;
+      }
+
+      .root {
+        /*background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;*/
+        display: block;
+        height: 16px;
+        margin: 10px 0 10px 0;
+        text-indent: -999em;
+        width: 16px;
+      }
+      .root:before {
+        @extend %pseudo-font-x-btn;
+
+        content: $fa-var-home;
+        display: block;
+        font-size: 20px;
+        line-height: 35px;
+        padding-left: 10px;
+        text-align: center;
+        text-indent: 0;
+      }
+      button.root {
+        /*background-position: center -16px;*/
+      }
+    }
+  }
+}
+
+/* Lightbox */
 #ux-lightbox {
   left: 0;
   line-height: 0;
@@ -1916,7 +1977,7 @@ body.ext-ie7 .x-superboxselect-item {
   color: $darkNeutral;
 }
 .x-grid3-col-info-col {
-  color: #92AF4C;
+  color: $green;
 }
 .not-installed .x-grid3-col-info-col {
   color: $red;
@@ -1934,6 +1995,7 @@ body.ext-ie7 .x-superboxselect-item {
   overflow: auto;
   padding: 15px;
   white-space: pre;
+  word-wrap: break-word;
 }
 .window-no-padding {
   .x-panel-mc {

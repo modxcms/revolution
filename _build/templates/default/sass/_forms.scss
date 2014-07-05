@@ -163,14 +163,15 @@ textarea.x-form-field,
   }
 }
 
-/*.x-small-editor .x-form-field-wrap {
+.x-small-editor .x-form-field-wrap {
   background: $gainsboro;
-  border-radius: 2px;
+  border-radius: $borderRadius;
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger {
   border: 0 none !important;
-  height: 32px;
+  right: -3px;
+  height: 24px !important; /* override the overriding rule ^^*/
   width: 32px;
 }
 
@@ -201,7 +202,7 @@ textarea.x-form-field,
 
 .x-form-field-wrap .x-form-search-trigger {
   background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
-}*/
+}
 
 .x-viewport .x-trigger-wrap-focus,
 .x-viewport input.x-form-focus,
@@ -227,7 +228,7 @@ textarea.x-form-field,
 }
 
 .ext-strict .x-small-editor .x-form-text {
-  border-radius: 2px;
+  border-radius: $borderRadius;
   height: 20px !important;
 }
 
@@ -253,15 +254,15 @@ textarea.x-form-field,
   /*background-image: url($imgPath + 'modx-theme/shared/warning.gif');*/
   color: #c0272b;
   font: $fontSmall;
-  margin-top:2px;
-  position:relative;
+  margin-top: 2px;
+  position: relative;
 	&:before {
 		@extend %pseudo-font;
-		content:$fa-var-exclamation-triangle; /* : "\f071" */
+		content: $fa-var-exclamation-triangle; /* : "\f071" */
 		position: absolute;
-		top:3px;
-		left:3px;
-		color:inherit;
+		top: 3px;
+		left: 3px;
+		color: inherit;
 	}
 }
 
@@ -269,22 +270,46 @@ textarea.x-form-field,
   color: gray;
 }
 
-.x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
+.x-grid3 {
+  .x-small-editor {
+    .x-form-text,
+    .x-form-field-wrap {
+      font: $fontSmall;
+      margin-top: 7px;
+      padding: 2px 5px 2px 5px;
+
+      .x-form-text {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .x-form-text {
+      /*margin-top: 7px;*/
+    }
+
+    .x-form-field-wrap {
+      overflow: hidden;
+    }
+  }
+}
+/*.x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
   font: $fontSmall;
   margin-top: 5px;
+  padding: 2px 5px 2px 5px;
 }
 
 .x-grid3 .x-small-editor .x-form-field-wrap {
   overflow: hidden;
-}
+}*/
 
-.x-grid3 .x-small-editor .x-form-field-wrap .x-form-text {
-  margin-top: 0;
-}
+/*.x-grid3 .x-small-editor .x-form-field-wrap .x-form-text {
+  margin-top: 7px;
+}*/
 
-.ext-safari .x-small-editor .x-form-field {
+/*.ext-safari .x-small-editor .x-form-field {
   font: $baseText;
-}
+}*/
 
 .x-form-invalid-icon {
   background-image: url($imgPath + 'modx-theme/form/exclamation.gif');

@@ -329,6 +329,7 @@ MODx.grid.UserGroupUsers = function(config) {
         }]
         ,tbar: [{
             text: _('user_group_user_add')
+            ,cls:'primary-button'
             ,handler: this.addMember
             ,hidden: MODx.perm.usergroup_user_edit == 0
         },'->',{

@@ -13,10 +13,12 @@ MODx.panel.PackageMetaPanel = function(config) {
 		cls: 'vertical-tabs-panel wrapped'
 		,headerCfg: { tag: 'div', cls: 'x-tab-panel-header vertical-tabs-header' }
 		,bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' }
-        ,defaults: {
+		,defaults: {
 			bodyCssClass: 'vertical-tabs-body'
-            ,autoScroll: true
-        }
+			,autoScroll: true
+			,autoHeight: true
+			,autoWidth: true
+		}
 		,layoutOnTabChange: true
 		,listeners:{
 			tabchange: function(tb, pnl){
@@ -30,7 +32,7 @@ MODx.panel.PackageMetaPanel = function(config) {
 	});
 	MODx.panel.PackageMetaPanel.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.panel.PackageMetaPanel,MODx.Tabs,{
+Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
 	updatePanel: function(meta){
 		if(meta.changelog != undefined){
 			this.addTab(_('changelog'), 'changelog', meta);

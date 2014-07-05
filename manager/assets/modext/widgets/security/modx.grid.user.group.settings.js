@@ -23,8 +23,8 @@ MODx.grid.GroupSettings = function(config) {
         ,fk: config.group
         ,tbar: [{
             text: _('create_new')
-            ,scope: this
             ,cls:'primary-button'
+            ,scope: this
             ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
