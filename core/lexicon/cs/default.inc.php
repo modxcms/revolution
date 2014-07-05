@@ -510,8 +510,8 @@ $_lang['ext_last'] = 'Poslední stránka';
 // $_lang['ext_mindate'] = 'This date is before the minimum date.';
 $_lang['ext_mindate'] = 'Toto datum je dřívější než minimální datum.';
 
-// $_lang['ext_minlenfield'] = 'The minimum length for this field is {minLength}';
-$_lang['ext_minlenfield'] = 'Minimální délka tohoto políčka je {minLength}';
+// $_lang['ext_minlenfield'] = 'The minimum length for this field is {0}';
+$_lang['ext_minlenfield'] = 'Minimální délka tohoto políčka je {0}';
 
 // $_lang['ext_minvalfield'] = 'The minimum value for this field is {0}';
 $_lang['ext_minvalfield'] = 'Minimální hodnota tohoto políčka je {0}';
@@ -519,8 +519,8 @@ $_lang['ext_minvalfield'] = 'Minimální hodnota tohoto políčka je {0}';
 // $_lang['ext_maxdate'] = 'This date is before the maximum date.';
 $_lang['ext_maxdate'] = 'Toto datum je pozdější než maximální datum.';
 
-// $_lang['ext_maxlenfield'] = 'The maximum length for this field is {maxLength}';
-$_lang['ext_maxlenfield'] = 'Maximální délka tohoto pole je {maxLength}';
+// $_lang['ext_maxlenfield'] = 'The maximum length for this field is {0}';
+$_lang['ext_maxlenfield'] = 'Maximální délka tohoto pole je {0}';
 
 // $_lang['ext_maxvalfield'] = 'The maximum value for this field is {0}';
 $_lang['ext_maxvalfield'] = 'Maximální hodnota tohoto políčka je {0}';

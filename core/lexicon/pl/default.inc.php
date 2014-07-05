@@ -508,8 +508,8 @@ $_lang['ext_last'] = 'Ostatnia strona'; #
 #$_lang['ext_mindate'] = 'This date is before the minimum date.';
 $_lang['ext_mindate'] = 'This date is before the minimum date.';
 
-#$_lang['ext_minlenfield'] = 'The minimum length for this field is {minLength}';
-$_lang['ext_minlenfield'] = 'The minimum length for this field is {minLength}';
+#$_lang['ext_minlenfield'] = 'The minimum length for this field is {0}';
+$_lang['ext_minlenfield'] = 'The minimum length for this field is {0}';
 
 #$_lang['ext_minvalfield'] = 'The minimum value for this field is {0}';
 $_lang['ext_minvalfield'] = 'The minimum value for this field is {0}';
@@ -517,8 +517,8 @@ $_lang['ext_minvalfield'] = 'The minimum value for this field is {0}';
 #$_lang['ext_maxdate'] = 'This date is before the maximum date.';
 $_lang['ext_maxdate'] = 'This date is before the maximum date.';
 
-#$_lang['ext_maxlenfield'] = 'The maximum length for this field is {maxLength}';
-$_lang['ext_maxlenfield'] = 'The maximum length for this field is {maxLength}';
+#$_lang['ext_maxlenfield'] = 'The maximum length for this field is {0}';
+$_lang['ext_maxlenfield'] = 'The maximum length for this field is {0}';
 
 #$_lang['ext_maxvalfield'] = 'The maximum value for this field is {0}';
 $_lang['ext_maxvalfield'] = 'The maximum value for this field is {0}';
