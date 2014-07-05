@@ -42,12 +42,14 @@ MODx.panel.Packages = function(config) {
 		},{
 			text: _('continue')
 			,id:'package-install-btn'
+			,cls:'primary-button'
 			,hidden: true
 			,handler: this.install
 			,scope: this
 		},{
 			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
+			,cls:'primary-button'
 			,hidden: true
 			,handler: this.onSetupOptions
 			,scope: this
