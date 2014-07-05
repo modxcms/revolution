@@ -325,9 +325,6 @@ textarea.x-form-field,
   font-weight: bold;
 }
 
-.ext-gecko .x-window-body .x-form-item {
-  overflow: hidden;
-}
 .x-form-item-label {
   color: $coreFieldLabelColor;
   font-weight: bold;
@@ -361,23 +358,21 @@ textarea.x-form-field,
   display: block;
   padding: 7px 5px 4px 0;
 }
-.form-with-labels .desc-under,
-.x-window .desc-under {
+.form-with-labels .desc-under {
   color: $coreFieldLabelColor;
   display: block;
   font-size: 11px;
   font-style: italic;
   margin: -8px 0 16px;
 }
-.form-with-labels .desc-under.desc-checkbox,
-.x-window .desc-under.desc-checkbox {
+.form-with-labels .desc-under.desc-checkbox {
   margin: -2px 0 4px;
 }
+.form-with-labels .desc-under .warning,
 .form-with-labels label[for="modx-element-property-preprocess"].desc-under {
   margin: -2px 0 0 0;
 }
-.form-with-labels .desc-under .warning,
-.x-window {
+.form-with-labels .desc-under .warning {
   -moz-box-shadow: 0 0 5px #A0A0A0;
   -o-box-shadow: 0 0 5px #A0A0A0;
   -webkit-box-shadow: 0 0 5px #A0A0A0;
