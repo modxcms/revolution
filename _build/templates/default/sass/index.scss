@@ -279,13 +279,10 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 .modx-console-text {
   background-color: white;
-  font: $bodyFontSize $codefonts !important;
-  padding: 8px;
   border: none;
-}
-
-.x-form-text.modx-console-text {
-  height: auto;
+  font: 12px $codefonts !important;
+  height: auto !important; /* override extjs default theme */
+  padding: 8px;
 }
 
 /* portlets */
