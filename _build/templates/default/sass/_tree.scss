@@ -102,10 +102,10 @@
   padding: 0;
   #modx-file-tree & {
     &:first-child {
-      padding-top: 39px; /* ya, it's empty there, but looks also crappy with 5px */
+      padding-top: 3px;
     }
     .tree-pseudoroot-node {
-      /* why, this prevents the spacing between the nodes */
+      /* why was this here? this prevents the spacing between the nodes/sources in the filetree */
       /*margin-top: 0;
       margin-bottom: 0;*/
     }
@@ -215,6 +215,7 @@
 .hidemenu,
 .hidemenu a span {
   color: $hidden;
+  font-style: normal;
 
   i.icon,
   i.icon-large {
@@ -346,9 +347,11 @@
   padding: 3px;
   text-align: center;
   opacity: 0.8;
+
   i {
     font-style: normal;
   }
+
   button {
     display: none;
   }

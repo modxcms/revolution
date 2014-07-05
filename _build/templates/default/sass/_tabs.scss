@@ -21,7 +21,7 @@
   /*border-bottom-color: $white;*/
   border: 0; /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
   margin: 0; /* was -1px */
-  width: auto;
+  width: auto; /* commented out bc it prevents tabs from triggering the scroll functionality */
   background-color: $tabStripBg !important;
   position: relative;
   top: 1px;

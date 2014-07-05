@@ -77,7 +77,7 @@ $unpubText: italic;
 $lockedText: italic;
 
 
-$deleted: darken(lighten(desaturate($red,50%), 33%), 25%) !important;
+$deleted: fade-out(darken(lighten(desaturate($red,50%), 33%), 25%), 0.5) !important;
 $delTextStyle: normal;
 $delTextDeco: line-through;
 
