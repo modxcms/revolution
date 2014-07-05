@@ -785,6 +785,7 @@ MODx.window.QuickCreateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_resource')
         ,id: this.ident
+        ,bwrapCssClass: 'x-window-with-tabs'
         ,width: 700
         ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
         ,autoHeight: false
