@@ -102,7 +102,7 @@
   padding: 0;
   #modx-file-tree & {
     &:first-child {
-      padding-top: 3px;
+      padding-top: 4px;
     }
     .tree-pseudoroot-node {
       /* why was this here? this prevents the spacing between the nodes/sources in the filetree */
