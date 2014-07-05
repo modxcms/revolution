@@ -342,7 +342,6 @@ MODx.window.CreateSetting = function(config) {
         ,width: 600
         ,url: config.url
         ,action: 'system/settings/create'
-        ,cls:'primary-button'
         ,fields: [{
             layout: 'column'
             ,border: false
