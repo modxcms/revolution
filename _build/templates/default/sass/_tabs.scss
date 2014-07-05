@@ -38,7 +38,7 @@
 .x-tab-panel-header,
 .x-tab-strip {
   /*padding-left: 1px;*/
-  padding-left:0;
+  padding-left: 0;
 }
 
 .x-tab-panel-bwrap {
@@ -73,7 +73,7 @@
       border-radius: 0;
     }
 
-    // For the box shadow around the tab
+    /* For the box shadow around the tab */
     &:after {
       content: "";
       display: block;
@@ -85,7 +85,7 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
       z-index: -1;
       border-radius: $borderRadius;
-	}
+    }
 
     &:before {
       content: "";
@@ -96,13 +96,12 @@
       bottom: -4px;
       left: 0;
       background: #fff
-	}
-  }
-  /*&:first-of-type {
-    &.x-tab-strip-active {
-      box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 transparent, 1px 0 0 $borderColor;
     }
-  }*/
+  }
+  &.x-tab-edge {
+    height: 0;
+    visibility: hidden; /* display none makes the tab scroll buttons appear somehow */
+  }
 }
 
 .x-tab-strip-wrap,
@@ -202,8 +201,6 @@ ul.x-tab-strip-bottom {
   border-bottom-color: transparent;
 }
 
-
-
 /* vertical tabs */
 .vertical-tabs-panel {
   background: $white;
@@ -218,18 +215,13 @@ ul.x-tab-strip-bottom {
     background: $coreFieldBg !important; /* ovverride extjs default theme */
     border-right: 1px solid $borderColor !important; /* ovverride extjs default theme */
     float: left;
-    /*margin-top: -20px; /* pull the tab strip to the top  of the panel */
     margin-bottom: -10000px; /* dirty hack to make vertical tabs container stretch to bottom */
     padding-bottom: 10000px !important; /* dirty hack to make vertical tabs container stretch to bottom */
     width: 169px; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
 
     .x-tab-strip-wrap {
-      margin-bottom: -10px;
-      /*border-right: 1px solid $borderColor;*/
       display: inline-block;
       line-height: 0;
-      margin: 0 0 -10px 0; /* pull in the bottom */
-      /*padding-bottom: 100%;*/
       width: 100%;
 
       ul.x-tab-strip {
@@ -262,6 +254,11 @@ ul.x-tab-strip-bottom {
           }
           &.x-tab-edge {
             height: 0;
+            visibility: hidden; /* display none makes the tab scroll buttons appear somehow */
+
+            .x-tab-strip-text {
+              display: none; /* prevent 4px high space at the end of the tab strip */
+            }
           }
         }
       }
@@ -299,10 +296,6 @@ ul.x-tab-strip-bottom {
       border-radius: $borderRadius;
       box-shadow: $boxShadow;
     }
-
-    .vertical-tabs-header {
-      /*margin-top: 0;*/
-    }
   }
 }
 
@@ -316,61 +309,3 @@ ul.x-tab-strip-bottom {
     margin: 0px;
   }
 }
-
-/*.vertical-tabs-header ul.x-tab-strip-top li {*/
-    /*width: 100%;*/
-
-    /*& .x-tab-strip-active {
-        background: $white !important;
-        /*border-width: 0 0 1px;/
-        color: #555;
-        /*padding-bottom: 5px !important;/
-        text-shadow: none;
-    }*/
-/*}*/
-
-/*.vertical-tabs-header .x-tab-edge {
-  height: 0;
-}*/
-
-/*.vertical-tabs-header .x-tab-strip-spacer {
-  display: none;
-}*/
-
-/* refactor and delete, too much ids... use classes above */
-/*#modx-resource-tabs {
-  margin: 20px 0 0;
-
-  @extend %shaded-tab-box;
-  .x-tab-panel-header {
-    width:auto !important;
-    &.vertical-tabs-header {
-      width:150px !important;
-    }
-    .x-tab-strip {
-      li {
-        float:left;
-        /* width:auto; /
-        margin-left:0;
-      }
-    }
-  }
-  #modx-tv-tabs {
-      border-left:0;
-      border-right:0;
-  }
-}*/
-
-/*#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {
-  .x-tab-strip {
-    margin-top:12px;
-    
-    li {
-      width:100% !important;
-      margin-left:0;
-      border-bottom:1px solid $borderColor;
-      &:nth-last-child(3) { border-color:transparent }
-      &.x-tab-strip-active { border-bottom:1px solid $borderColor; }
-    }
-  }
-}*/
