@@ -21,12 +21,12 @@ MODx.panel.PackageMetaPanel = function(config) {
 		}
 		,layoutOnTabChange: true
 		,listeners:{
-			tabchange: function(tb, pnl){
-				w = this.bwrap.getWidth();
-				this.body.setWidth(w);
-				this.doLayout();
-			}
-			,scope: this
+			// tabchange: function(tb, pnl){
+			// 	w = this.bwrap.getWidth();
+			// 	this.body.setWidth(w);
+			// 	this.doLayout();
+			// }
+			// ,scope: this
 		}
 		,items: []
 	});
