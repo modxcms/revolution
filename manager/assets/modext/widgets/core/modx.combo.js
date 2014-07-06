@@ -688,6 +688,9 @@ MODx.ChangeParentField = function(config) {
         ,editable: false
         ,readOnly: false
         ,formpanel: 'modx-panel-resource'
+        ,parentcmp: 'modx-resource-parent-hidden'
+        ,contextcmp: 'modx-resource-context-key'
+        ,currentid: MODx.request.id
     });
     MODx.ChangeParentField.superclass.constructor.call(this,config);
     this.config = config;
@@ -709,7 +712,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
 
         MODx.debug('Setting parent to: '+p.v);
 
-        Ext.getCmp('modx-resource-parent-hidden').setValue(p.v);
+        Ext.getCmp(this.config.parentcmp).setValue(p.v);
 
         this.setValue(p.d);
         this.oldValue = false;
@@ -755,7 +758,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
             return false;
         }
         this.oldDisplayValue = this.getValue();
-        this.oldValue = Ext.getCmp('modx-resource-parent-hidden').getValue();
+        this.oldValue = Ext.getCmp(this.config.parentcmp).getValue();
 
         this.setValue(_('resource_parent_select_node'));
 
@@ -772,12 +775,12 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.disableHref = true;
 
         var id = node.id.split('_'); id = id[1];
-        if (id == MODx.request.id) {
+        if (id == this.config.currentid) {
             MODx.msg.alert('',_('resource_err_own_parent'));
             return false;
         }
 
-        var ctxf = Ext.getCmp('modx-resource-context-key');
+        var ctxf = Ext.getCmp(this.config.contextcmp);
         if (ctxf) {
             var ctxv = ctxf.getValue();
             if (node.attributes && node.attributes.ctx != ctxv) {

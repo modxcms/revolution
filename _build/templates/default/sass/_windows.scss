@@ -3,8 +3,12 @@
   /*border-radius: $borderRadius;*/
   /*box-shadow: $boxShadow;*/
   box-shadow: 0 0 15px 0 rgba(0,0,0,0.2); /* TODO: replace with $boxShadowBig when merged */
+  border-radius: 3px; /* TODO: replace with $borderRadius when merged */
   overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
 
+  /*div {
+    border-radius: 3px;
+  }*/
   /* the window header bar */
   .x-window-tl,
   .x-window-tr {
@@ -16,6 +20,7 @@
 
     .x-window-header {
       background-color: $coreFieldBg;
+      border-bottom: 1px solid $softGrey;
       border-radius: 3px 3px 0 0; /* TODO: replace with $borderRadius when merged */
       color: $darkNeutral;
       font: $fontNavbar;
@@ -63,13 +68,23 @@
       background: $white;
       box-shadow: 0 0 5px 0 rgba(0,0,0,0.1); /* TODO: replace with $boxShadow when merged */
       border-radius: 3px; /* TODO: replace with $borderRadius when merged */
+      overflow-y: scroll; /* make the content area of normal windows scrollable */
       padding: 10px;
 
       .x-panel-bwrap {
         background: transparent;
         box-shadow: none;
         border-radius: 0;
+        overflow: visible;
         padding: 0;
+      }
+
+      .desc-under {
+        color: #aaaaaa;
+        display: block;
+        font-size: 11px;
+        font-style: italic;
+        margin: -8px 0 16px;
       }
     }
 
@@ -78,6 +93,7 @@
         background: transparent;
         box-shadow: none;
         border-radius: 0;
+        overflow: visible;
         padding: 0;
       } 
     }
@@ -103,6 +119,10 @@
           /*border: 1px solid $borderColor;*/
           /*border-bottom-width: 0;*/
           padding-top: 3px; /* account for the 3px boxshadow for active tabs */
+
+          .x-tab-strip {
+            border: 0; /* override extjs default theme of 1px solid white */
+          }
         }
       }
     }
@@ -113,9 +133,10 @@
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.1); /* TODO: replace with $boxShadow when merged */
 
       .x-tab-panel-body {
+        overflow-y: scroll; /* tabs stay, content scrolls */
 
         .modx-panel {
-          overflow-y: scroll; /* tabs stay, content scrolls */
+          /*overflow-y: scroll; /* tabs stay, content scrolls */
 
           .tab-panel-wrapper {
 
@@ -154,6 +175,8 @@
 
       .x-window-footer {
         background-color: $coreFieldBg;
+        border-top: 1px solid $softGrey;
+        border-radius: 0 0 3px 3px; /* TODO: replace with $borderRadius when merged */
         box-sizing: border-box; /* don't count padding in width: 100%; */
         width: 100% !important; /* override fixed width set by extjs */
 

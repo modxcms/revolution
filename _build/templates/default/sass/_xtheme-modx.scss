@@ -676,9 +676,9 @@ td.x-date-mp-sep {
 }
 .x-menu {
   background-color: $menuBg;
-  border: $menuBorder;
-  border-radius: $menuBorderRadius;
-  box-shadow: $menuBoxShadow;
+  border: 1px solid $borderColor;
+  border-radius: $menuBorderRadius; /* TODO: replace with $borderRadius when merged */
+  box-shadow: $menuBoxShadow; /* TODO: replace with $boxShadow when merged */;
 }
 .x-menu-list {
   padding: 0;
