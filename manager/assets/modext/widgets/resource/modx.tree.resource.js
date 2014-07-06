@@ -1137,7 +1137,7 @@ MODx.getQRSettings = function(id,va) {
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['publishedon']
             },{
-                xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
+                xtype: va['canpublish'] ? 'xdatetime' : 'hidden'
                 ,fieldLabel: _('resource_publishdate')
                 ,description: '<b>[[*pub_date]]</b><br />'+_('resource_publishdate_help')
                 ,name: 'pub_date'
@@ -1151,7 +1151,7 @@ MODx.getQRSettings = function(id,va) {
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['pub_date']
             },{
-                xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
+                xtype: va['canpublish'] ? 'xdatetime' : 'hidden'
                 ,fieldLabel: _('resource_unpublishdate')
                 ,description: '<b>[[*unpub_date]]</b><br />'+_('resource_unpublishdate_help')
                 ,name: 'unpub_date'
