@@ -368,6 +368,7 @@ MODx.window.ImportPolicyTemplate = function(config) {
         },{
             xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
+            ,buttonText: _('upload.buttons.upload')
             ,name: 'file'
             ,id: this.ident+'-file'
             ,anchor: '100%'

@@ -1165,6 +1165,7 @@ MODx.window.ImportProperties = function(config) {
         },{
             xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
+            ,buttonText: _('upload.buttons.upload')
             ,name: 'file'
             ,id: 'modx-impp-file'
             ,anchor: '100%'
