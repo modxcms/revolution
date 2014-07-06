@@ -373,12 +373,12 @@ MODx.window.ImportPolicy = function(config) {
             ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
         },{
-            xtype: 'textfield'
+            xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
             ,name: 'file'
             ,id: this.ident+'-file'
             ,anchor: '100%'
-            ,inputType: 'file'
+            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportPolicy.superclass.constructor.call(this,config);

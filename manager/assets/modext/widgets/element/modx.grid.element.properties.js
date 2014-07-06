@@ -1163,12 +1163,12 @@ MODx.window.ImportProperties = function(config) {
             ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
         },{
-            xtype: 'textfield'
+            xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
             ,name: 'file'
             ,id: 'modx-impp-file'
             ,anchor: '100%'
-            ,inputType: 'file'
+            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportProperties.superclass.constructor.call(this,config);

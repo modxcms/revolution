@@ -161,6 +161,33 @@ textarea.x-form-field,
   &.x-datetime-wrap {
     border: 0;
   }
+
+  /* xtype: fileuploadfield styles */
+  &.x-form-file-wrap {
+    overflow: hidden;
+    position: relative;
+    height: 36px;
+
+    .x-form-file {
+      position: absolute; top: 1px; right: 0;
+      opacity: 0;
+      z-index: 2;
+      height: 34px;
+    }
+    .x-form-file-btn {
+      border-radius: 0 $borderRadius $borderRadius 0;
+      position: absolute;
+      right: 0;
+      z-index: 1; /* needs to stay below the transparent file input field */
+    }
+    .x-form-file-text {
+      height: 26px;
+      position: absolute;
+      left: 0;
+      z-index: 3; /* needs to stay above the transparent file input field */
+      color: #777;
+    }
+  }
 }
 
 .x-small-editor .x-form-field-wrap {
