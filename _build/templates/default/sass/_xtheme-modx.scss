@@ -928,7 +928,178 @@ td.x-date-mp-sep {
 .x-panel-tr, .x-panel-mr , .x-panel-br {
   background-color: #f7f7f7;
 }
+
 .x-tool {
+  background: none;
+  border-radius: 50%;
+  color: $darkGrey;
+  font-size: 14px;
+  margin: 0 3px 0 0;
+  position: relative;
+  transition: all 0.3s;
+  width: 18px; height: 18px;
+
+  &:after {
+    @extend %pseudo-font;
+
+    box-sizing: border-box;
+    padding-top: 2px;
+    position: absolute; top: 0; left: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 18px; height: 18px;
+  }
+
+  &:hover {
+    color: $white;
+    background: $colorSplash;
+  }
+
+  &.x-tool-toggle {
+
+    &:after {
+      content: $fa-var-chevron-down;
+      padding-top: 1px;
+    }
+
+    &-over,
+    &:hover {
+
+
+      &:after {
+        content: $fa-var-chevron-up;
+      }
+    }
+
+    .x-panel-collapsed & {
+      &-over,
+      &:hover {
+
+        &:after {
+          content: $fa-var-chevron-down;
+        }
+      }
+    }
+
+    /* collapse for resource panel */
+    #modx-resource-tabs & {
+      position: absolute; top: 11px; right: 12px;
+      z-index: 10;
+    }
+  }
+
+  &.x-tool-close {
+
+    &:after {
+      content: $fa-var-times;
+    }
+  }
+
+  &.x-tool-minimize {
+
+    &:after {
+      content: $fa-var-compress;
+    }
+  }
+
+  &.x-tool-maximize {
+
+    &:after {
+      content: $fa-var-expand;
+    }
+  }
+
+  &.x-tool-restore {
+
+    &:after {
+      content: $fa-var-compress;
+    }
+  }
+
+  &.x-tool-gear {
+
+    &:after {
+      content: $fa-var-gear;
+    }
+  }
+
+  &.x-tool-pin {
+    
+    &:after {
+      content: $fa-var-circle-o;
+    }
+
+    &-over,
+    &:hover {
+
+      &:after {
+        content: $fa-var-dot-circle-o;
+      }
+    }
+  }
+
+  &.x-tool-unpin {
+    
+    &:after {
+      content: $fa-var-dot-circle-o;
+    }
+
+    &-over,
+    &:hover {
+
+      &:after {
+        content: $fa-var-circle-o;
+      }
+    }
+  }
+
+  &.x-tool-right {
+    
+    &:after {
+      content: $fa-var-chevron-right;
+      padding-left: 1px;
+    }
+  }
+
+  &.x-tool-left {
+    
+    &:after {
+      content: $fa-var-chevron-left;
+      padding-right: 2px;
+    }
+  }
+
+  &.x-tool-up {
+    
+    &:after {
+      content: $fa-var-chevron-up;
+      padding-top: 1px;
+    }
+  }
+
+  &.x-tool-down {
+    
+    &:after {
+      content: $fa-var-chevron-down;
+      padding-top: 1px;
+    }
+  }
+
+  &.x-tool-minus {
+    
+    &:after {
+      content: $fa-var-minus;
+    }
+  }
+
+  &.x-tool-plus {
+    
+    &:after {
+      content: $fa-var-plus;
+    }
+  }
+}
+/*.x-tool {
   background-image: url($imgPath + 'modx-theme/panel/tool-sprites.png');
   height: 16px;
   margin: 1px 2px 0 0;
@@ -1025,7 +1196,7 @@ td.x-date-mp-sep {
   background-position: right -208px;
 }
 .x-panel-collapsed {
-}
+}*/
 .x-panel-dd-spacer {
   border-color: #DFDFDF;
 }
