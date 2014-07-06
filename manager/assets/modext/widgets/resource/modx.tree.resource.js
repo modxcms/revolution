@@ -860,7 +860,7 @@ MODx.window.QuickCreateResource = function(config) {
                             xtype: 'modx-combo-template'
                             ,name: 'template'
                             ,id: 'modx-'+this.ident+'-template'
-                            ,fieldLabel: _('template')
+                            ,fieldLabel: _('resource_template')
                             ,description: '<b>[[*template]]</b><br />'+_('resource_template_help')
                             ,editable: false
                             ,anchor: '100%'
@@ -874,7 +874,7 @@ MODx.window.QuickCreateResource = function(config) {
                             xtype: 'textfield'
                             ,name: 'alias'
                             ,id: 'modx-'+this.ident+'-alias'
-                            ,fieldLabel: _('alias')
+                            ,fieldLabel: _('resource_alias')
                             ,description: '<b>[[*alias]]</b><br />'+_('resource_alias_help')
                             ,anchor: '100%'
                         },{
@@ -1029,7 +1029,9 @@ MODx.getQRContentField = function(id,cls) {
                 // ,hideLabel: true
                 ,fieldLabel: _('content')
                 ,labelSeparator: ''
-                ,anchor: '100% -274'
+                ,anchor: '100%'
+                ,style: 'min-height: 200px'
+                ,grow: true
             };
             break;
     }
