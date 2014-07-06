@@ -36,9 +36,10 @@
     }
 
     .x-window-mc {
-      background-color: $mainBg;
+      /*background-color: $mainBg;*/
       border: 0;
-      padding: 15px;
+      /*padding: 15px;*/
+      padding: 0;
       z-index: 2;
 
       .x-panel-ml,
@@ -52,7 +53,9 @@
       }
 
       .x-window-body {
+        background-color: $mainBg;
         overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
+        padding: 15px;
       }
     }
 
@@ -186,6 +189,7 @@
         border-top: 1px solid $softGrey;
         border-radius: 0 0 3px 3px; /* TODO: replace with $borderRadius when merged */
         box-sizing: border-box; /* don't count padding in width: 100%; */
+        padding: 5px; /* make sure the padding also stays when maximized */
         width: 100% !important; /* override fixed width set by extjs */
 
         .x-toolbar-right-row {
@@ -200,6 +204,18 @@
       }
     } /* .x-window-bc */
   } /* .x-window-bwrap */
+
+  &.x-window-maximized {
+    margin: 15px 0 15px 0;
+
+    .x-window-tc {
+      padding: 0;
+    }
+
+    .x-window-mc {
+      padding: 0;
+    }
+  }
 } /* .x-window */
 
 /*.ext-gecko .x-window-body .x-form-item {
