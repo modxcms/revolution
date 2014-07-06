@@ -1,27 +1,20 @@
 .x-window {
-  /*border: 1px solid $borderColor;*/
-  /*border-radius: $borderRadius;*/
-  /*box-shadow: $boxShadow;*/
-  box-shadow: 0 0 15px 0 rgba(0,0,0,0.2); /* TODO: replace with $boxShadowBig when merged */
-  border-radius: 3px; /* TODO: replace with $borderRadius when merged */
+  box-shadow: $boxShadowWindow;
+  border-radius: $borderRadius;
   overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
 
-  /*div {
-    border-radius: 3px;
-  }*/
   /* the window header bar */
   .x-window-tl,
   .x-window-tr {
     padding: 0;
   }
   .x-window-tc {
-    /*box-shadow: 0 0 15px 0 rgba(0,0,0,0.2); /* TODO: replace with $boxShadowBig when merged */
     z-index: 1;
 
     .x-window-header {
       background-color: $coreFieldBg;
       border-bottom: 1px solid $softGrey;
-      border-radius: 3px 3px 0 0; /* TODO: replace with $borderRadius when merged */
+      border-radius: $borderRadius $borderRadius 0 0;
       color: $darkNeutral;
       font: $fontNavbar;
       font-weight: bold;
@@ -45,7 +38,6 @@
     .x-window-mc {
       background-color: $mainBg;
       border: 0;
-      /*box-shadow: 0 0 15px 0 rgba(0,0,0,0.2); /* TODO: replace with $boxShadowBig when merged */
       padding: 15px;
       z-index: 2;
 
@@ -66,8 +58,8 @@
 
     .x-panel-bwrap {
       background: $white;
-      box-shadow: 0 0 5px 0 rgba(0,0,0,0.1); /* TODO: replace with $boxShadow when merged */
-      border-radius: 3px; /* TODO: replace with $borderRadius when merged */
+      box-shadow: $boxShadow;
+      border-radius: $borderRadius;
       overflow-y: scroll; /* make the content area of normal windows scrollable */
       padding: 10px;
 
@@ -85,6 +77,14 @@
         font-size: 11px;
         font-style: italic;
         margin: -8px 0 16px;
+
+        &.desc-checkbox {
+          margin: -2px 0 4px;
+        }
+
+        .warning {
+          color: #df8d00;
+        }
       }
     }
 
@@ -98,10 +98,6 @@
       } 
     }
 
-/*      .x-panel-body > .x-form-item {
-      margin-right: 15px;
-    }*/
-
 
     form.x-panel-body:first-of-type {
       overflow: visible !important; /* prevent box-shadow from tabs and panel being cut off */
@@ -109,15 +105,12 @@
 
     /* the window tab strip if available */
     .modx-tabs {
-      /*background: $gainsboro;*/
       /*overflow-y: scroll;*/
 
       .x-tab-panel-header {
 
 
         .x-tab-strip-wrap {
-          /*border: 1px solid $borderColor;*/
-          /*border-bottom-width: 0;*/
           padding-top: 3px; /* account for the 3px boxshadow for active tabs */
 
           .x-tab-strip {
@@ -130,7 +123,7 @@
     /* the window form / content container */
     .x-tab-panel-bwrap {
     background: $white;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.1); /* TODO: replace with $boxShadow when merged */
+    box-shadow: $boxShadow;
 
       .x-tab-panel-body {
         overflow-y: scroll; /* tabs stay, content scrolls */
@@ -146,11 +139,9 @@
     }
 
     .x-column-inner {
-      /*background: skyblue;*/
       /* prevent second col with fields to have excessive margin on the right */
       > .x-column {
         margin: 0;
-        /*background: lime;*/
 
         &:first-of-type {
           margin-right: 10px;
@@ -161,8 +152,6 @@
         }
       }
     }
-    /*} /* .x-panel-mc */
-    /*} /* .x-window-mc */
 
     /* The window bottom container */
     .x-window-bl,
@@ -170,7 +159,6 @@
       padding: 0;
     }
     .x-window-bc {
-      /*box-shadow: 0 0 15px 0 rgba(0,0,0,0.2); /* TODO: replace with $boxShadowBig when merged */
       z-index: 1;
 
       .x-window-footer {
@@ -182,18 +170,9 @@
 
         .x-toolbar-right-row {
           td {
-            /* TODO: replace with @extend %primary-button when merged */
             &:last-of-type {
               .x-btn {
-                @include linear-gradient(lighten($primaryAction,10%), $primaryAction);
-                border-color:darken($primaryAction,6%);
-                button {
-                  color:$white;
-                }
-              }
-              .x-btn-over {
-                border-color:darken($primaryAction,10%);
-                @include linear-gradient(lighten($primaryAction,16%), $primaryAction);
+                @extend %primary-button
               }
             }
           }
@@ -205,18 +184,6 @@
 
 /*.ext-gecko .x-window-body .x-form-item {
   overflow: hidden;
-}
-
-.x-window .desc-under {
-  color: #aaaaaa;
-  display: block;
-  font-size: 11px;
-  font-style: italic;
-  margin: -8px 0 16px;
-}
-
-.x-window .desc-under.desc-checkbox {
-  margin: -2px 0 4px;
 }
 
 .x-window-tl .x-panel-icon {
@@ -250,10 +217,6 @@
 
 body.x-body-masked .x-window-plain .x-window-mc {
   background-color: #e2e2e2;
-}
-
-.x-window .desc-under .warning {
-  color: #df8d00;
 }
 .x-window h2 {
   border-bottom: 1px solid #D6DFC3;
@@ -447,24 +410,4 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window-maximized .x-window-tc {
   padding-left: 0;
   padding-right: 0;
-}
-
-.x-window-footer {
-	.x-toolbar-right-row {
-		td {
-			&:last-of-type {
-				.x-btn {
-					@include linear-gradient(lighten($primaryAction,10%), $primaryAction);
-					border-color:darken($primaryAction,6%);
-					button {
-						color:$white;
-					}
-				}
-				.x-btn-over {
-					border-color:darken($primaryAction,10%);
-					@include linear-gradient(lighten($primaryAction,16%), $primaryAction);
-				}
-			}
-		}
-	}
 }*/
