@@ -14,6 +14,7 @@ MODx.page.Actions = function(config) {
         }]
         ,buttons: [{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
 	});

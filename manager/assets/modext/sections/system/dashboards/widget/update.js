@@ -10,20 +10,23 @@ MODx.page.UpdateDashboardWidget = function(config) {
         ,buttons: [{
             process: 'system/dashboard/widget/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: false
-            ,id: 'modx-btn-save'
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,handler: function() {
                 MODx.loadPage('system/dashboards');
             }
-        },'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
 		,components: [{

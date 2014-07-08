@@ -236,6 +236,7 @@ MODx.panel.Template = function(config) {
 					,fieldLabel: _('template_code')
 					,name: 'content'
 					,id: 'modx-template-content'
+                    ,cls: 'modx-code-content'
 					,anchor: '100%'
 					,height: 400
 					,value: config.record.content || ''

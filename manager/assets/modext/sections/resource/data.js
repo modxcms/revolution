@@ -11,21 +11,19 @@ MODx.page.ResourceData = function(config) {
     var btns = [];
     if (config.canEdit == 1) {
         btns.push({
-            id: 'modx-abtn-edit'
-            ,text: _('edit')
+            text: _('edit')
+            ,id: 'modx-abtn-edit'
             ,hidden: config.canEdit == 1 ? false : true
             ,handler: this.editResource
             ,scope: this
         });
-        btns.push('-');
     }
     btns.push({
         text: _('view')
+        ,id: 'modx-abtn-preview'
         ,handler: this.preview
         ,scope: this
-        ,id: 'modx-abtn-preview'
     });
-    btns.push('-');
     btns.push({
         text: _('cancel')
         ,id: 'modx-abtn-cancel'

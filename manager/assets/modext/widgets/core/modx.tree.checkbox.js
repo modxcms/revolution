@@ -16,7 +16,6 @@ MODx.tree.CheckboxTree = function(config) {
     });
     var tb = this.getToolbar();
     if (config.tbar && config.useDefaultToolbar) {
-        tb.push('-');
         for (var i=0;i<config.tbar.length;i=i+1) {
             tb.push(config.tbar[i]);
         }
@@ -188,7 +187,7 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
             ,scope: this
             ,tooltip: {text: _('tree_collapse')}
             ,handler: this.collapse
-        },'-',{
+        },{
             icon: iu+'refresh.png'
             ,cls: 'x-btn-icon refresh'
             ,scope: this

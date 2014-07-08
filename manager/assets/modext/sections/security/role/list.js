@@ -16,13 +16,17 @@ MODx.page.ListRoles = function(config) {
 		buttons: [{
             process: 'new'
             ,text: _('new')
+            ,id: 'modx-abtn-new'
+            ,cls: 'primary-button'
             ,params: {
                 a:'security/role/create'
             }
-        },'-',{
+        },{
             text: _('cancel')
-        },'-',{
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{

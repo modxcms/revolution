@@ -44,7 +44,7 @@ MODx.grid.SourceProperties = function(config) {
             ,id: 'modx-btn-property-create'
             ,handler: this.create
             ,scope: this
-        },'-',{
+        },{
             text: _('property_revert_all')
             ,id: 'modx-btn-property-revert-all'
             ,handler: this.revertAll

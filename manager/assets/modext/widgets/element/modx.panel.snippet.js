@@ -218,6 +218,7 @@ MODx.panel.Snippet = function(config) {
 					,fieldLabel: _('snippet_code')
 					,name: 'snippet'
 					,id: 'modx-snippet-snippet'
+                    ,cls: 'modx-code-content'
 					,anchor: '100%'
 					,height: 400
 					,value: config.record.snippet || "<?php\n"

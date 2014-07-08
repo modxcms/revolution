@@ -20,15 +20,23 @@ MODx.page.CreateRole = function(config) {
             ,cancel: 'security/role'
         }
         ,buttons: [{
-            process: 'create', text: _('save'), method: 'remote'
+            process: 'create'
+            ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
+            ,method: 'remote'
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
-            process: 'cancel', text: _('cancel'), params:{a:'security/role'}
-        },'-',{
+        },{
+            process: 'cancel'
+            ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+            ,params: {a:'security/role'}
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,tabs: [

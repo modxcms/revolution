@@ -1,19 +1,13 @@
 /* top area around the tab strip */
 .x-tab-panel-noborder {
   border: 1px solid #E2E3DE;
-  margin: 20px 0 10px;
+  margin: 20px 0 20px;
   overflow: visible;
-
-  #modx-leftbar & {
-  }
 
   /* background behind a button bar */
   .x-tab-panel-body-noborder {
     background-color: $white;
-
-    #modx-leftbar & {
-      background-color: $white;
-    }
+    border-radius: $borderRadius;
   }
 }
 
@@ -24,9 +18,10 @@
 }
 
 .x-tab-panel-header ul.x-tab-strip-top {
-  border-bottom-color: $white;
-  margin:0; /* was -1px */
-  width: auto;
+  /*border-bottom-color: $white;*/
+  border: 0; /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
+  margin: 0; /* was -1px */
+  width: auto; /* commented out bc it prevents tabs from triggering the scroll functionality */
   background-color: $tabStripBg !important;
   position: relative;
   top: 1px;
@@ -37,18 +32,19 @@
   background-color: #fff;
   border: none;
   height: 0;
-  //margin: -2px 0 0 0; /* was -2px 0 0 -1px */
+  /*margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
 
 .x-tab-panel-header,
 .x-tab-strip {
   /*padding-left: 1px;*/
-  padding-left:0;
+  padding-left: 0;
 }
 
 .x-tab-panel-bwrap {
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  border-radius: 3px;
+  box-shadow: $boxShadow;
+  border-radius: $borderRadius;
+  overflow: visible; /* prevent cutoff box-shadow */
 }
 
 .x-tab-strip li {
@@ -77,7 +73,7 @@
       border-radius: 0;
     }
 
-    // For the box shadow around the tab
+    /* For the box shadow around the tab */
     &:after {
       content: "";
       display: block;
@@ -88,8 +84,8 @@
       left: 0;
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
       z-index: -1;
-      border-radius: 3px;
-	}
+      border-radius: $borderRadius;
+    }
 
     &:before {
       content: "";
@@ -100,13 +96,12 @@
       bottom: -4px;
       left: 0;
       background: #fff
-	}
+    }
   }
-//  &:first-of-type {
-//    &.x-tab-strip-active {
-//      box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 transparent, 1px 0 0 $borderColor;
-//    }
-//  }
+  &.x-tab-edge {
+    height: 0;
+    visibility: hidden; /* display none makes the tab scroll buttons appear somehow */
+  }
 }
 
 .x-tab-strip-wrap,
@@ -128,7 +123,7 @@
 
 ul.x-tab-strip-top li:first-child {
   /*margin-left: -1px*/;
-  margin-left:0;
+  margin-left: 0;
 }
 
 ul.x-tab-strip-bottom {
@@ -206,56 +201,105 @@ ul.x-tab-strip-bottom {
   border-bottom-color: transparent;
 }
 
-
-
 /* vertical tabs */
 .vertical-tabs-panel {
-  background: #f8f8f8;
+  background: $white;
+  margin: 0; /* remove top and bottom margin */
+  overflow: hidden; /* dirty hack to make vertical tabs container stretch to bottom */
 
   &.wrapped {
-    border: 1px solid #e0e0e0;
-  }
-}
-
-.vertical-tabs-header {
-  background-color: #f8f8f8 !important;
-  float: left;
-  margin-left: 0;
-  padding: 13px 0 !important;
-  width: 150px !important;
-  & ul {
-    border-top: 1px solid transparent;
-    width: auto;
-    border-bottom-color:transparent;
+    border: 1px solid $borderColor;
   }
 
-  & .vertical-tabs-header li {
-    background: none repeat scroll 0 0 transparent !important;
-    border-color: transparent transparent #E0E0E0 transparent !important;
-    border-radius: 0 !important;
-    border-style: none none solid none !important;
-    border-width: 1px 1px 1px 0 !important;
-    float: none !important;
-    margin: 0 !important;
-    overflow: hidden;
-    padding: 5px !important;
-    white-space: nowrap;
-    color: #555;
-    line-height: 1.3;
-    text-shadow: 0 1px 0 #fff;
+  .vertical-tabs-header {
+    background: $coreFieldBg !important; /* ovverride extjs default theme */
+    border-right: 1px solid $borderColor !important; /* ovverride extjs default theme */
+    float: left;
+    margin-bottom: -10000px; /* dirty hack to make vertical tabs container stretch to bottom */
+    padding-bottom: 10000px !important; /* dirty hack to make vertical tabs container stretch to bottom */
+    width: 169px; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
 
-    &:first-child {
-      border-top: 0 none !important;
+    .x-tab-strip-wrap {
+      display: inline-block;
+      line-height: 0;
+      width: 100%;
+
+      ul.x-tab-strip {
+        border: 0; /* overrides extjs default theme */
+        display: inline-block;
+        top: 0; /* overrides extjs default theme style of 1px */
+        width: 100%;
+
+        > li {
+          border-bottom: 1px solid $borderColor;
+          color: $coreFieldLabelColor;
+          float: none;
+          line-height: 1;
+          margin: 0; /* override default extjs theme value of 2px */
+          overflow: hidden;
+          padding: 10px 15px 10px 15px;
+          transition: all 0.3s;
+          white-space: nowrap;
+          width: 100%;
+
+          &:hover {
+            background: $white;
+          }
+          &.x-tab-strip-active {
+            background: $white;
+            border-color: $borderColorHover;
+            box-shadow: none; /* removes the active tab strip on top */
+            color: $tabActiveText;
+            width: 169px; /* make the active li 1px more wide to cover the containers right border */
+          }
+          &.x-tab-edge {
+            height: 0;
+            visibility: hidden; /* display none makes the tab scroll buttons appear somehow */
+
+            .x-tab-strip-text {
+              display: none; /* prevent 4px high space at the end of the tab strip */
+            }
+          }
+        }
+      }
+    }
+    /* the "categories" text */
+    h4 {
+      background: $white;
+      /*border-right: 1px solid $borderColor;*/
+      border-bottom: 1px solid $borderColor;
+      color: $darkNeutral;
+      font-size: 16px;
+      padding: 15px 0 15px 15px;
+    }
+    .x-tab-strip-spacer {
+      display: none; /* added by extjs */
     }
   }
-  h4 {
-    margin-left:15px;
-  }
-  ul.x-tab-strip-top {
-    border-bottom: none;
-    background: #f8f8f8 !important;
+
+  /* this is the area where the TV form fields are displayed */
+  .x-tab-panel-bwrap {
+    box-shadow: none;
+
+    .vertical-tabs-body {
+      padding: 20px 30px 20px 25px;
+    }
   }
 }
+
+.tvs-wrapper {
+  &.below-content {
+    border-radius: $borderRadius;
+    margin-top: 20px;
+
+    .vertical-tabs-panel {
+      border-radius: $borderRadius;
+      box-shadow: $boxShadow;
+    }
+  }
+}
+
+
 .window-vtabs {
   .x-panel-mr {
     padding-right: 0px;
@@ -264,28 +308,4 @@ ul.x-tab-strip-bottom {
     width: 100% !important;
     margin: 0px;
   }
-}
-
-.vertical-tabs-header ul.x-tab-strip-top li {
-    width: 100%;
-
-    & .x-tab-strip-active {
-        background: $white !important;
-        /*border-width: 0 0 1px;*/
-        color: #555;
-        /*padding-bottom: 5px !important;*/
-        text-shadow: none;
-    }
-}
-
-.vertical-tabs-header .x-tab-edge {
-  height: 0;
-}
-
-.vertical-tabs-header .x-tab-strip-spacer {
-  display: none;
-}
-
-.vertical-tabs-body {
-  padding: 20px 30px 20px 25px;
 }

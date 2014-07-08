@@ -28,6 +28,7 @@ MODx.panel.Dashboard = function(config) {
             ,getState:function() {
                 return {activeTab:this.items.indexOf(this.getActiveTab())};
             }
+            // todo: the layout is inconsistent with other panels, refactor the structure
             ,items: [{
                 title: _('general_information')
                 ,cls: 'main-wrapper form-with-labels'
@@ -104,10 +105,8 @@ MODx.panel.Dashboard = function(config) {
 
                     }]
                 },{
-                    html: '<hr />'
-                    ,border: false
-                },{
                     html: '<p>'+_('dashboard_widgets.intro_msg')+'</p>'
+                    ,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
                     xtype: 'modx-grid-dashboard-widget-placements'
@@ -217,6 +216,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
         }]
         ,tbar: [{
             text: _('widget_place')
+            ,cls:'primary-button'
             ,handler: this.placeWidget
             ,scope: this
         }]

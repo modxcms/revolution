@@ -46,13 +46,13 @@
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
 }
 
-.x-item-disabled {
+/*.x-item-disabled {
   color: gray;
 }
 
 .x-item-disabled * {
   color: gray !important;
-}
+}*/
 
 .x-splitbar-proxy {
   background-color: #aaa;
@@ -96,151 +96,8 @@
   background-color: #ccc;
 }
 
-
-.x-panel-tbar-noheader .x-toolbar, .x-panel-mc .x-panel-tbar .x-toolbar {
-  border-bottom: 0 none;
-  border-top: none;
-}
-
-.x-panel-bbar .x-toolbar, .x-panel-tbar .x-toolbar {
-  border-width: 0;
-  overflow: hidden;
-}
-.x-panel-bbar {
-  padding-top: 10px;
-}
-.x-panel-tbar {
-  padding-bottom: 2px; 
-}
-
 .ext-ie7 .x-plain-body {
   position: relative;
-}
-
-.ext-ie7 .x-toolbar-ct {
-  width: auto;
-}
-
-.x-toolbar {
-  background-color: #F7F7F7;
-  background-image: none;
-  border-color: #DFDFDF;
-}
-
-.x-toolbar td,.x-toolbar span,.x-toolbar input,
-.x-toolbar div,.x-toolbar select,.x-toolbar label {
-  font: $fontSmall;
-}
-
-.x-toolbar .x-item-disabled {
-  color: gray;
-}
-
-.x-toolbar .x-item-disabled * {
-  color: gray;
-}
-
-.x-toolbar em.x-btn-split {
-  background-image: url($imgPath + 'modx-theme/button/s-arrow-noline.gif');
-}
-
-.x-toolbar .x-btn-over em.x-btn-split,
-.x-toolbar .x-btn-click em.x-btn-split,
-.x-toolbar .x-btn-menu-active em.x-btn-split,
-.x-toolbar .x-btn-pressed em.x-btn-split {
- /* background-image: url($imgPath + 'modx-theme/button/s-arrow-o.gif');*/
-}
-
-.x-toolbar em.x-btn-split-bottom {
-  background-image: url($imgPath + 'modx-theme/button/s-arrow-b-noline.gif');
-}
-
-.x-toolbar .x-btn-over em.x-btn-split-bottom,
-.x-toolbar .x-btn-click em.x-btn-split-bottom,
-.x-toolbar .x-btn-menu-active em.x-btn-split-bottom,
-.x-toolbar .x-btn-pressed em.x-btn-split-bottom {
-  background-image: url($imgPath + 'modx-theme/button/s-arrow-bo.gif');
-}
-
-.ext-ie .x-toolbar-cell .x-form-field-wrap {
-  height: 30px;
-}
-
-.x-tbar-page-first {
-  background-image: url($imgPath + 'modx-theme/grid/page-first.png') !important;
-}
-
-.x-tbar-loading {
-  background-image: url($imgPath + 'modx-theme/grid/refresh.png') !important;
-}
-
-.x-tbar-page-last {
-  background: none !important;
-  position:relative;
-  &:before {
-    @extend %pseudo-font-x-btn;
-    content:$fa-var-forward;
-    top:1px;
-    left:1px;
-    right:auto;
-  }
-}
-
-.x-tbar-page-next {
-  background: none !important;
-  position:relative;
-  &:before {
-    @extend %pseudo-font-x-btn;
-    content:$fa-var-caret-right;
-    font-size:18px;
-    line-height:110%;
-    left:1px;
-    right:auto;
-  }
-}
-
-.x-tbar-page-prev {
-  background: none !important;
-  position:relative;
-  &:before {
-    @extend %pseudo-font-x-btn;
-    content:$fa-var-caret-left;
-    font-size:18px;
-    line-height:110%;
-    left:auto;
-    right:1px;
-  }
-}
-
-.x-tbar-loading {
-  background: none !important;
-  position:relative;
-  &:before {
-    @extend %pseudo-font-x-btn;
-    content:$fa-var-repeat;
-    top:1px;
-    bottom:auto;
-  }
-}
-
-.x-tbar-page-first {
-  background: none !important;
-  position:relative;
-  &:before {
-    @extend %pseudo-font-x-btn;
-    content:$fa-var-backward;
-    top:1px;
-    left:auto;
-    right:1px;
-  }
-}
-
-.x-paging-info {
-  color: #444;
-}
-
-.x-toolbar-more-icon {
-  background-image: url($imgPath + 'modx-theme/toolbar/more.gif') !important;
 }
 
 .x-statusbar .x-status-busy {
@@ -301,7 +158,7 @@
 .x-grid3 {
   background-color: transparent;
   background-image: none;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   overflow: hidden;
   padding: 0;
 }
@@ -765,7 +622,7 @@ td.x-date-mp-sep {
 }
 .x-tip {
   background: darken($tipText, 60%);
-  border-radius: 3px;
+  border-radius: $borderRadius;
   padding: 5px;
 }
 .x-tip .x-tip-close {
@@ -952,38 +809,6 @@ td.x-date-mp-sep {
 #x-debug-browser .x-tree .x-tree-node .x-tree-selected a span {
   background-color: #d8d8d8;
 }
-
-.x-combo-list {
-  background-color: $dropdownBg;
-  border-color: $dropdownBorder;
-  border-radius: 0 0 5px 5px;
-}
-.x-combo-list-inner{
-  background-color: $dropdownBg;
-}
-.x-combo-list-hd {
-  background-image: url($imgPath + 'modx-theme/layout/panel-title-light-bg.gif');
-  border-bottom-color: #bcbcbc;
-  color: #464646;
-}
-.x-resizable-pinned .x-combo-list-inner {
-  border-bottom-color: transparent;
-}
-.x-combo-list-item {
-  border: none;
-  padding: 5px;
-  color: $dropdownTextColor;
-}
-.x-combo-list .x-combo-selected {
-  background-color: $dropdownSelectedBg;
-  border: 0 none !important;
-}
-.x-combo-list .x-toolbar {
-  border-top-color: #bcbcbc;
-}
-.x-combo-list-small {
-  font: $fontSmall;
-}
 /*.x-panel {
     border:0 none;
 }*/
@@ -993,7 +818,11 @@ td.x-date-mp-sep {
 .x-panel-body {
   background-color: #fff;
   border: 0;
+  border-radius: $borderRadius;
   overflow: visible;
+}
+#modx-panel-packages-browser .x-panel-body {
+  border-radius: 0; /* prevent rounded border on most pouplar / last updated panels */
 }
 .x-panel-noborder {
   border: none;
@@ -1004,32 +833,7 @@ td.x-date-mp-sep {
 
 
 
-.x-panel-bbar .x-toolbar {
-  background-color: transparent;
-  border: 0 none;
-}
-.x-panel-tbar-noheader .x-toolbar, .x-panel-mc .x-panel-tbar .x-toolbar {
-  border: 0 none;
-}
-.x-panel-tbar .x-toolbar {
-  background-color: transparent;
-  border: 0 none;
-  padding: 5px 4px;
-}
-.x-panel-mc .x-panel-tbar .x-toolbar {
-  background-image: none;
-}
-.x-panel-tbar-noheader .x-toolbar {
-  background-color: transparent;
-  background-image: none;
-  border: 0 none;
-  padding: 5px 0;
-}
-.x-panel-mc .x-panel-tbar .x-toolbar {
-  background-color: #F5F5F5;
-  border-bottom: 0 none;
-  padding: 5px 0;
-}
+
 .x-grid-panel .x-panel-body {
   background-color: #F5F5F5;
   border-bottom: 1px solid #E4E4E4;
@@ -1079,7 +883,7 @@ td.x-date-mp-sep {
 }
 .x-panel-btns {
   background-color: transparent;
-  border-top: 1px solid #FAFAFA;
+  /*border-top: 1px solid #FAFAFA;*/
 }
 .x-panel-mc {
   background-color: #F5F5F5;
@@ -1239,7 +1043,7 @@ td.x-date-mp-sep {
   font-weight: bold;
 }
 .x-panel-header {
-  border-radius: 2px 2px 0 0;
+  border-radius: $borderRadius $borderRadius 0 0;
   background: #dddddd;
   background: -moz-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%) repeat scroll 0 0 transparent;
   background: -ms-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
@@ -1295,21 +1099,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
   background-color: #fff;
   border-color: #bcbcbc;
 }
-.x-toolbar td, .x-toolbar span, .x-toolbar input, .x-toolbar div, .x-toolbar select, .x-toolbar label {
-  border-radius: 3px;
-}
-.x-html-editor-tb .x-btn-text {
-  background-image: url($imgPath + 'modx-theme/editor/tb-sprite.gif');
-}
 .x-panel-noborder .x-panel-header-noborder {
   border-bottom-color: transparent;
-}
-.x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
-  background-color: transparent;
-  border-bottom-color: transparent;
-}
-.x-panel-noborder .x-panel-bbar-noborder .x-toolbar {
-  border-top-color: transparent;
 }
 .x-border-layout-ct {
   background-color: #FAFAFA;
@@ -1445,9 +1236,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .modx-grid-draggable .x-grid3-row {
   cursor: move;
 }
-.x-window .desc-under .warning {
-  color: #df8d00;
-}
 .x-window h2 {
   border-bottom: 1px solid #D6DFC3;
   color: #5e5e5e;
@@ -1550,7 +1338,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-window-tl {
   background-color: #ffffff;
   background-image: none;
-  border-radius: 3px 3px 0 0;
+  border-radius: $borderRadius $borderRadius 0 0;
   overflow: hidden;
   padding-left: 0;
 }
@@ -1563,7 +1351,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   background: -webkit-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
   background: linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
   border-bottom: 1px solid #ababab;
-  border-radius: 3px 3px 0 0;
+  border-radius: $borderRadius $borderRadius 0 0;
   color: #5e5e5e;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#d0d0d0,GradientType=0);
   margin-top: 0;
@@ -1574,7 +1362,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-window-bl {
   background-color: #ffffff;
   background-image: none;
-  border-radius: 0 0 3px 3px;
+  border-radius: 0 0 $borderRadius $borderRadius;
   overflow: hidden;
   padding-left: 0;
 }
@@ -1623,27 +1411,11 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 .x-window .x-window-mc {
   background-color: #ffffff;
-  border-radius: 0 0  3px 3px;
+  border-radius: 0 0 $borderRadius $borderRadius;
   border: 0 none;
 }
 .x-window .x-window-maximized .x-window-tc {
   background-color: #ffffff;
-}
-.x-window .x-window-bbar .x-toolbar,
-.x-window .x-window-bbar-noborder .x-toolbar {
-  background-color: #f7f8fa;
-  background: #d5dade;
-  background: -moz-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: -o-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eff0f4), color-stop(100%, #d5dade));
-  background: -webkit-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff0f4,endColorstr=#d5dade,GradientType=0);
-  border-radius: 0 0 3px 3px;
-  border-bottom: 0 none;
-  border-top: 1px solid #d4d9df;
-  padding: 8px;
 }
 .x-window .x-dlg-mask {
   background-color: #cccccc;

@@ -21,8 +21,9 @@ MODx.tree.ResourceGroup = function(config) {
         ,baseParams: {
             limit: 0
         }
-        ,tbar: [{
+        ,tbar: ['->', {
             text: _('resource_group_create')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createResourceGroup
         }]

@@ -51,10 +51,11 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
         }
-    },'-',{
+    },{
         xtype: 'textfield'
         ,name: 'filter_key'
         ,id: 'modx-filter-key'
+        ,cls: 'x-form-filter'
         ,emptyText: _('search_by_key')+'...'
         ,listeners: {
             'change': {fn: this.filterByKey, scope: this}
@@ -69,6 +70,7 @@ MODx.grid.SettingsGrid = function(config) {
     },{
         xtype: 'button'
         ,id: 'modx-filter-clear'
+        ,cls: 'x-form-filter-clear'
         ,text: _('filter_clear')
         ,listeners: {
             'click': {fn: this.clearFilter, scope: this}
@@ -340,7 +342,6 @@ MODx.window.CreateSetting = function(config) {
         ,width: 600
         ,url: config.url
         ,action: 'system/settings/create'
-        ,cls:'primary-button'
         ,fields: [{
             layout: 'column'
             ,border: false

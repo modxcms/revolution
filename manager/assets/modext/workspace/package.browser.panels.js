@@ -251,7 +251,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		var h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
-			h.push({ className:'download primary', text: _('download') });
+			h.push({ className:'download primary-button', text: _('download') });
 		}
 		values.actions = h;
 		return this.mainColumnTpl.apply(values);

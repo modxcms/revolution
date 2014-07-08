@@ -24,39 +24,45 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	    b.push({
 	        process: 'create'
 	        ,text: _('new')
+	        ,id: 'modx-abtn-new'
 	        ,params: {
 	            a: 'context/create'
 	        }
 	    },{
 	        process: 'edit'
 	        ,text: _('edit')
+	        ,id: 'modx-abtn-edit'
 	        ,params: {
 	            a: 'context/update'
 	            ,key: config.key
 	        }
-	    },'-',{
+	    },{
 	        process: 'duplicate'
 	        ,text: _('duplicate')
+	        ,id: 'modx-abtn-duplicate'
 	        ,method: 'remote'
 	        ,confirm: _('context_duplicate_confirm')
 	    });
 		if (config.key != 'web' && config.key != 'mgr') {
 			b.push({
-				process: 'delete',
-				text: _('delete'),
-				method: 'remote',
-				confirm: _('confirm_delete_context')
+				process: 'delete'
+				,text: _('delete')
+				,id: 'modx-abtn-delete'
+				,method: 'remote'
+				,confirm: _('confirm_delete_context')
 			});
 		}
-		b.push('-',{
+		b.push({
 	        process: 'cancel'
 	        ,text: _('cancel')
+	        ,id: 'modx-abtn-cancel'
 	        ,params: {
 	            a: 'context'
 	        }
 	    });
-        b.push('-',{
+        b.push({
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         });
 	    return b;
