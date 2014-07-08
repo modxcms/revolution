@@ -31,8 +31,8 @@ MODx.panel.Dashboard = function(config) {
             // todo: the layout is inconsistent with other panels, refactor the structure
             ,items: [{
                 title: _('general_information')
-                ,cls: 'main-wrapper form-with-labels'
-                ,defaults: { border: false }
+                ,cls: 'form-with-labels'
+                ,defaults: { border: false, cls: 'main-wrapper' }
                 ,layout: 'form'
                 ,id: 'modx-dashboard-form'
                 ,labelAlign: 'top'
@@ -108,6 +108,7 @@ MODx.panel.Dashboard = function(config) {
                     html: '<p>'+_('dashboard_widgets.intro_msg')+'</p>'
                     ,bodyCssClass: 'panel-desc'
                     ,border: false
+                    ,cls: ''
                 },{
                     xtype: 'modx-grid-dashboard-widget-placements'
                     ,preventRender: true
