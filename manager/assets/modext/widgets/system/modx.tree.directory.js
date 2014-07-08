@@ -99,6 +99,73 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
 
     /**
+     * Build the contextual menu for the root node
+     *
+     * @returns {Array}
+     */
+    ,getRootMenu: function() {
+        var menu = [];
+        if (MODx.perm.directory_create) {
+            menu.push({
+                text: _('file_folder_create')
+                ,handler: this.createDirectory
+                ,scope: this
+            });
+        }
+
+        if (MODx.perm.file_create) {
+            menu.push({
+                text: _('file_create')
+                ,handler: this.createFile
+                ,scope: this
+            });
+        }
+
+        if (MODx.perm.file_upload) {
+            menu.push({
+                text: _('upload_files')
+                ,handler: this.uploadFiles
+                ,scope: this
+            });
+        }
+
+//        if (MODx.perm.file_manager) {
+//            menu.push({
+//                text: _('modx_browser')
+//                ,handler: this.loadFileManager
+//                ,scope: this
+//            });
+//        }
+
+        return menu;
+    }
+
+    /**
+     * Override to handle root nodes contextual menus
+     *
+     * @param node
+     * @param e
+     */
+    ,_showContextMenu: function(node,e) {
+        this.cm.activeNode = node;
+        this.cm.removeAll();
+        var m;
+
+        if (node.isRoot) {
+            m = this.getRootMenu();
+        } else if (node.attributes.menu && node.attributes.menu.items) {
+            m = node.attributes.menu.items;
+        }
+
+        if (m && m.length > 0) {
+            this.addContextMenuItem(m);
+            this.cm.showAt(e.xy);
+        }
+        e.preventDefault();
+        e.stopEvent();
+    }
+
+    /**
      * Create a refresh button on the root node
      *
      * @see MODx.Tree.Tree#_onAppend
