@@ -177,7 +177,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         var object = o.result.object;
         // object.parent is undefined on template changing.
         if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
-            MODx.loadPage(location.href);
+            location.href = location.href;
         } else {
             if (object.deleted !== this.record.deleted) {
                 if (object.deleted) {
