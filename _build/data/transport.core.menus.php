@@ -389,7 +389,7 @@ $children[2]->fromArray(array (
   'description' => 'logout_desc',
   'parent' => 'user',
   'permissions' => 'logout',
-  'action' => 'security/logout',
+  'handler' => 'MODx.logout(); return false;',
 ), '', true, true);
 
 $userNavMenus[0]->addMany($children,'Children');
