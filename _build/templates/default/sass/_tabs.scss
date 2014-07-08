@@ -217,18 +217,17 @@ ul.x-tab-strip-bottom {
     float: left;
     margin-bottom: -10000px; /* dirty hack to make vertical tabs container stretch to bottom */
     padding-bottom: 10000px !important; /* dirty hack to make vertical tabs container stretch to bottom */
-    width: 169px; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
+    width: 169px !important; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
 
     .x-tab-strip-wrap {
       display: inline-block;
       line-height: 0;
-      width: 100%;
+      width: auto !important; // Overrides extjs inline width
 
       ul.x-tab-strip {
         border: 0; /* overrides extjs default theme */
         display: inline-block;
         top: 0; /* overrides extjs default theme style of 1px */
-        width: 100%;
 
         > li {
           border-bottom: 1px solid $borderColor;
@@ -240,7 +239,6 @@ ul.x-tab-strip-bottom {
           padding: 10px 15px 10px 15px;
           transition: all 0.3s;
           white-space: nowrap;
-          width: 100%;
 
           &:hover {
             background: $white;
@@ -280,6 +278,10 @@ ul.x-tab-strip-bottom {
   /* this is the area where the TV form fields are displayed */
   .x-tab-panel-bwrap {
     box-shadow: none;
+
+    .x-tab-panel-body {
+      width: auto !important; // Overrides extjs inline width
+    }
 
     .vertical-tabs-body {
       padding: 20px 30px 20px 25px;
