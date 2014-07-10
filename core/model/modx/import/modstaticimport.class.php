@@ -28,15 +28,7 @@ class modStaticImport extends modImport {
     public function importFiles($allowedfiles, $parent, $filepath, $files, $context= 'web', $class= 'modStaticResource', $basefilepath= '') {
         if (!is_array($files))
             return;
-        if ($parent > 0) {
-            if ($parentResource= $this->modx->getObject('modResource', $parent)) {
-                $parentResource->set('isfolder', true);
-                $parentResource->save();
-            } else {
-                $this->log("Could not get parent ({$parent}) resource to set isfolder attribute after import.");
-                return;
-            }
-        }
+
         $menuindex= 0;
         $maxIdxQuery= $this->modx->newQuery('modResource', array ('parent' => $parent));
         $maxIdxQuery->select('MAX(menuindex)');
@@ -64,7 +56,6 @@ class modStaticImport extends modImport {
                 $resource->set('content_type', 1);
                 $resource->set('pagetitle', $id);
                 $resource->set('parent', $parent);
-                $resource->set('isfolder', true);
 
                 $alias= $this->getResourceAlias($resource, $id, $parent, $context);
 
@@ -122,7 +113,6 @@ class modStaticImport extends modImport {
                     $resource->set('content_type', $filetype->get('id'));
                     $resource->set('pagetitle', $pagetitle);
                     $resource->set('parent', $parent);
-                    $resource->set('isfolder', false);
 
                     $alias= $this->getResourceAlias($resource, $value, $parent, $context);
 

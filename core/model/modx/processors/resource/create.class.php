@@ -173,7 +173,6 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public function afterSave() {
         $this->object->addLock();
-        $this->setParentToContainer();
         $this->saveResourceGroups();
         $this->checkIfSiteStart();
         return parent::afterSave();
@@ -579,20 +578,6 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             'resource' => &$this->object,
             'reloadOnly' => $this->getProperty('reloadOnly',false),
         ));
-    }
-
-    /**
-     * Update parent to be a container if user has save permission
-     *
-     * @return boolean
-     */
-    public function setParentToContainer() {
-        $saved = false;
-        if ($this->parentResource && $this->parentResource instanceof modResource && $this->parentResource->checkPolicy('save')) {
-            $this->parentResource->set('isfolder', true);
-            $saved = $this->parentResource->save();
-        }
-        return $saved;
     }
 
     /**

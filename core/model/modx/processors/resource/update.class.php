@@ -470,32 +470,12 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      * @return boolean
      */
     public function afterSave() {
-        $this->fixParents();
         $this->saveTemplateVariables();
         $this->setResourceGroups();
         $this->checkContextOfChildren();
         $this->fireUnDeleteEvent();
         $this->fireDeleteEvent();
         return parent::afterSave();
-    }
-
-    /**
-     * Set the parents isfolder status based upon remaining children
-     *
-     * @TODO Debate whether or not this should be default functionality
-     *
-     * @return void
-     */
-    public function fixParents() {
-        if (!empty($this->oldParent) && !empty($this->newParent)) {
-            $oldParentChildrenCount = $this->modx->getCount('modResource', array('parent' => $this->oldParent->get('id')));
-            if ($oldParentChildrenCount <= 0 || $oldParentChildrenCount == null) {
-                $this->oldParent->set('isfolder', false);
-                $this->oldParent->save();
-            }
-
-            $this->newParent->set('isfolder', true);
-        }
     }
 
     /**

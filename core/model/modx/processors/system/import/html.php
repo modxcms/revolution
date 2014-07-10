@@ -35,16 +35,7 @@ if (!function_exists('importFiles')) {
     function importFiles(& $modx, & $results, $allowedfiles, $parent, $filepath, $files, $context= 'web') {
         if (!is_array($files))
             return;
-        if ($parent > 0) {
-            if ($parentResource= $modx->getObject('modResource', $parent)) {
-                $context = $parentResource->get('context_key');
-                $parentResource->set('isfolder', true);
-                $parentResource->save();
-            } else {
-                $results .= "Could not get parent ({$parent}) resource to set isfolder attribute after import.";
-                return;
-            }
-        }
+
         foreach ($files as $id => $value) {
             if (is_array($value)) {
                 /* create folder */
@@ -53,7 +44,6 @@ if (!function_exists('importFiles')) {
                 $resource->set('content_type', 1);
                 $resource->set('pagetitle', $id);
                 $resource->set('parent', $parent);
-                $resource->set('isfolder', true);
 
                 $alias= getResourceAlias($modx, $resource, $results, $id, $parent, $context);
 
@@ -102,7 +92,6 @@ if (!function_exists('importFiles')) {
                     $resource->set('content_type', 1);
                     $resource->set('pagetitle', $pagetitle);
                     $resource->set('parent', $parent);
-                    $resource->set('isfolder', false);
 
                     $alias= getResourceAlias($modx, $resource, $results, $value, $parent, $context);
 
