@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Prevent use of GET vars in login controller/processor
+- Restrict returnUrl in login processor to url of login context
 - Added drag/drop reordering of template variables on the templates TV grid [#11560]
 - Added ability to use conditional custom output modifiers [#11610]
 - Updated MagpieRSS Snoopy to 2.0.0

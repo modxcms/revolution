@@ -10,6 +10,10 @@ if (!isset($modx->lexicon) || !is_object($modx->lexicon)) {
 }
 $modx->lexicon->load('login');
 
+if (!isset($scriptProperties['username']) || !isset($scriptProperties['password'])) {
+    return $modx->error->failure($modx->lexicon('login_cannot_locate_account'));
+}
+
 $username = $scriptProperties['username'];
 $givenPassword = $scriptProperties['password'];
 
@@ -196,9 +200,10 @@ $response = array(
 );
 switch ($loginContext) {
     case 'mgr':
-        $manager_login_startup_url = !empty($returnUrl)
+        $managerUrl = $modx->getOption('url_scheme') . $modx->getOption('http_host') . $modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $manager_login_startup_url = !empty($returnUrl) && (strpos($returnUrl, '://') === false || strpos($returnUrl, $managerUrl) === 0)
             ? $returnUrl
-            : $modx->getOption('url_scheme') . $modx->getOption('http_host') . $modx->getOption('manager_url', null, MODX_MANAGER_URL);
+            : $managerUrl;
         if (!empty($manager_login_startup)) {
             $manager_login_startup= intval($manager_login_startup);
             if ($manager_login_startup) $manager_login_startup_url .= '?id=' . $manager_login_startup;
@@ -210,7 +215,10 @@ switch ($loginContext) {
         break;
     case 'web':
     default:
-        $login_startup_url = $returnUrl;
+        $siteUrl = $modx->getOption('site_url', null, MODX_SITE_URL);
+        $login_startup_url = !empty($returnUrl) && (strpos($returnUrl, '://') === false || strpos($returnUrl, $siteUrl) === 0)
+            ? $returnUrl
+            : '';
         if (!empty($login_startup)) {
             $login_startup = intval($login_startup);
             if ($login_startup) $login_startup_url = $modx->makeUrl($login_startup, $loginContext, '', 'full');
