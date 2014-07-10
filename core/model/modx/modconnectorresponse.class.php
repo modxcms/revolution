@@ -121,7 +121,7 @@ class modConnectorResponse extends modResponse {
         } else {
             /* create scriptProperties array from HTTP GPC vars */
             if (!isset($_POST)) $_POST = array();
-            if (!isset($_GET)) $_GET = array();
+            if (!isset($_GET) || $isLogin) $_GET = array();
             $scriptProperties = array_merge($_GET,$_POST);
             if (isset($_FILES) && !empty($_FILES)) {
                 $scriptProperties = array_merge($scriptProperties,$_FILES);
