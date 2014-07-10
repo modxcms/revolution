@@ -1097,6 +1097,15 @@ $settings['modx_browser_default_sort']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['modx_browser_default_viewmode']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_default_viewmode']->fromArray(array (
+  'key' => 'modx_browser_default_viewmode',
+  'value' => 'grid',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['modx_charset']= $xpdo->newObject('modSystemSetting');
 $settings['modx_charset']->fromArray(array (
   'key' => 'modx_charset',

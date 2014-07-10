@@ -45,9 +45,9 @@ input::-moz-focus-inner {
   margin-bottom: 2px;
 }
 .inline-form input[type=text], .inline-form textarea {
-  background-color: #fbfbfb;
+  background-color: $coreFieldBg;
   background-image: none;
-  border-radius: 2px;
+  border-radius: $borderRadius;
   border: 1px solid #CCCCCC;
   position: relative;
   width: 97%;
@@ -64,15 +64,28 @@ input::-moz-focus-inner {
 
 textarea.x-form-field,
 .x-form-textarea {
+  display: block; /* make the field description (below) stick to the bottom correctly */
+  /*font-family: $codefonts;*/
+  padding: 5px; /* override standard extjs theme */
+}
+
+/* #ta, /* main resource content without RTE */
+/* #modx-chunk-snippet, /* chunk code */
+/* #modx-snippet-snippet, /* snippet code */
+/* #modx-plugin-plugincode, /* plugin code */
+/* #modx-template-content, /* template code */
+/* #modx-file-content, /* file code / content */
+/* #modx-error-log-content, /* error log content */
+.modx-code-content { /* general class that could be applied to any form field that should display code font */
   font-family: $codefonts;
 }
 
 .x-form-text, /* this screws up clear cache modal #shame */
 textarea.x-form-field,
 .x-form-textarea {
-  background-color: #fbfbfb;
+  background-color: $coreFieldBg;
   background-image: none;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
 }
@@ -110,26 +123,6 @@ textarea.x-form-field,
   background-color: #fff;
 }
 
-.ext-strict .x-form-field-trigger-wrap .x-form-text,
-.ext-strict .x-small-editor .x-form-field-trigger-wrap .x-form-text {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  border-right: 0 none;
-  color: #606060;
-  font-weight: bold;
-  height: 20px;
-  padding: 6px;
-  text-shadow: 1px -1px 0 #fff;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger {
-  background-image: url($imgPath + 'modx-theme/form/trigger.png');
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
-  border: 1px solid #C5C5C5 !important;
-  border-left: 0 none;
-}
-
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
   background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0px 100%;
@@ -144,56 +137,41 @@ textarea.x-form-field,
   background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
 
-.x-form-field-trigger-wrap {
-  border-color: #D0D0D0 #CCCCCC #BEBEBE;
-  border-style: solid;
-  border-width: 1px;
-  height: 30px;
-  margin-right: 1px;
-}
-
-.x-form-field-trigger-wrap .x-form-text {
-  background-color: transparent;
-  border: 0 none;
-}
-
 .x-form-field-wrap {
   background: $coreFieldBg;
-  border-radius: 2px;
-}
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
 
-.x-form-field-wrap .x-form-trigger {
-  background-position: left center;
-  background-repeat: no-repeat;
-  border: 0 none !important;
-  height: 30px;
-  width: 32px;
-}
+  .x-form-text {
+    border: 0;
+  }
+  .x-form-trigger {
+    background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat left center;
+    border: 0;
+    height: 30px !important; /* override default extjs theme */
+    width: 32px;
 
-.x-form-field-wrap .x-form-trigger-over {
-  background-position: right;
-}
+    &.x-form-trigger-over {
 
-.x-form-field-wrap .x-form-arrow-trigger {
-  background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat scroll left center transparent;
-}
+    }
+    &.x-form-trigger-click {
 
-.x-form-field-wrap .x-form-trigger.x-form-trigger-over {
-  background-position: center center;
-}
-
-.x-form-field-wrap .x-form-trigger.x-form-trigger-click {
-  background-position: right center;
+    }
+  }
+  &.x-datetime-wrap {
+    border: 0;
+  }
 }
 
 .x-small-editor .x-form-field-wrap {
   background: $gainsboro;
-  border-radius: 2px;
+  border-radius: $borderRadius;
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger {
   border: 0 none !important;
-  height: 32px;
+  right: -3px;
+  height: 24px !important; /* override the overriding rule ^^*/
   width: 32px;
 }
 
@@ -226,15 +204,20 @@ textarea.x-form-field,
   background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
 }
 
-.x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus, .x-viewport .x-form-textarea.x-form-focus {
-  border-radius: 0;
-  outline-offset: 0;
-  outline: 1px solid #ddd !important; /* #shame */
+.x-viewport .x-trigger-wrap-focus,
+.x-viewport input.x-form-focus,
+.x-viewport textarea.x-form-focus,
+.x-viewport .x-form-textarea.x-form-focus {
+  /*border-radius: 0;*/
+  /*outline-offset: 0;*/
+  /*outline: 1px solid #ddd !important; /* #shame */
+  /*box-shadow: $shadowBorderFocus;*/
+  border-color: $borderColorFocus;
 }
 
-.x-viewport .x-trigger-wrap-focus .x-form-focus {
+/*.x-viewport .x-trigger-wrap-focus .x-form-focus {
   outline: none !important;
-}
+}*/
 
 .x-datetime-wrap {
   background: none;
@@ -245,7 +228,7 @@ textarea.x-form-field,
 }
 
 .ext-strict .x-small-editor .x-form-text {
-  border-radius: 2px;
+  border-radius: $borderRadius;
   height: 20px !important;
 }
 
@@ -271,15 +254,15 @@ textarea.x-form-field,
   /*background-image: url($imgPath + 'modx-theme/shared/warning.gif');*/
   color: #c0272b;
   font: $fontSmall;
-  margin-top:2px;
-  position:relative;
+  margin-top: 2px;
+  position: relative;
 	&:before {
 		@extend %pseudo-font;
-		content:$fa-var-exclamation-triangle; /* : "\f071" */
+		content: $fa-var-exclamation-triangle; /* : "\f071" */
 		position: absolute;
-		top:3px;
-		left:3px;
-		color:inherit;
+		top: 3px;
+		left: 3px;
+		color: inherit;
 	}
 }
 
@@ -287,22 +270,46 @@ textarea.x-form-field,
   color: gray;
 }
 
-.x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
+.x-grid3 {
+  .x-small-editor {
+    .x-form-text,
+    .x-form-field-wrap {
+      font: $fontSmall;
+      margin-top: 7px;
+      padding: 2px 5px 2px 5px;
+
+      .x-form-text {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .x-form-text {
+      /*margin-top: 7px;*/
+    }
+
+    .x-form-field-wrap {
+      overflow: hidden;
+    }
+  }
+}
+/*.x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
   font: $fontSmall;
   margin-top: 5px;
+  padding: 2px 5px 2px 5px;
 }
 
 .x-grid3 .x-small-editor .x-form-field-wrap {
   overflow: hidden;
-}
+}*/
 
-.x-grid3 .x-small-editor .x-form-field-wrap .x-form-text {
-  margin-top: 0;
-}
+/*.x-grid3 .x-small-editor .x-form-field-wrap .x-form-text {
+  margin-top: 7px;
+}*/
 
-.ext-safari .x-small-editor .x-form-field {
+/*.ext-safari .x-small-editor .x-form-field {
   font: $baseText;
-}
+}*/
 
 .x-form-invalid-icon {
   background-image: url($imgPath + 'modx-theme/form/exclamation.gif');
@@ -322,7 +329,7 @@ textarea.x-form-field,
   overflow: hidden;
 }
 .x-form-item-label {
-  color: #777;
+  color: $coreFieldLabelColor;
   font-weight: bold;
 }
 
@@ -347,16 +354,16 @@ textarea.x-form-field,
   padding: 0;
 }
 .form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
-  color: #555;
+  color: $coreFieldLabelColor;
   font-size: 13px;
   font-weight: bold;
   margin-bottom: 0;
   display: block;
-  padding: 7px 5px 4px 3px;
+  padding: 7px 5px 4px 0;
 }
 .form-with-labels .desc-under,
 .x-window .desc-under {
-  color: #aaaaaa;
+  color: $coreFieldLabelColor;
   display: block;
   font-size: 11px;
   font-style: italic;
@@ -366,15 +373,54 @@ textarea.x-form-field,
 .x-window .desc-under.desc-checkbox {
   margin: -2px 0 4px;
 }
+.form-with-labels label[for="modx-element-property-preprocess"].desc-under {
+  margin: -2px 0 0 0;
+}
 .form-with-labels .desc-under .warning,
 .x-window {
   -moz-box-shadow: 0 0 5px #A0A0A0;
   -o-box-shadow: 0 0 5px #A0A0A0;
   -webkit-box-shadow: 0 0 5px #A0A0A0;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid #C0C0C0;
   box-shadow: 0 0 5px #A0A0A0;
   overflow: hidden;
   padding: 0;
+}
+.x-window .desc-under .warning {
+  color: #df8d00;
+}
+
+
+.x-combo-list {
+  background-color: $dropdownBg;
+  border-color: $dropdownBorder;
+  border-radius: 0 0 $borderRadius $borderRadius;
+}
+.x-combo-list-inner {
+  background-color: $dropdownBg;
+}
+.x-combo-list-hd {
+  background-image: url($imgPath + 'modx-theme/layout/panel-title-light-bg.gif');
+  border-bottom-color: #bcbcbc;
+  color: #464646;
+}
+.x-resizable-pinned .x-combo-list-inner {
+  border-bottom-color: transparent;
+}
+.x-combo-list-item {
+  border: none;
+  padding: 5px;
+  color: $dropdownTextColor;
+}
+.x-combo-list .x-combo-selected {
+  background-color: $dropdownSelectedBg;
+  border: 0 none !important;
+}
+.x-combo-list .x-toolbar {
+  border-top-color: #bcbcbc;
+}
+.x-combo-list-small {
+  font: $fontSmall;
 }
 

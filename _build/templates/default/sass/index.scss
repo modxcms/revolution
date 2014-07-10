@@ -14,7 +14,9 @@ $fa-css-prefix:       icon;
 @import "tabs";
 @import "navbar";
 @import "uberbar";
+@import "toolbars";
 @import "tree";
+@import "browser";
 @import "help";
 
 body {
@@ -35,7 +37,7 @@ body {
 h2, h3 {
   color:  $headerText;
   font:   $fontH2;
-  margin: 0 0 8px 5px;
+  margin: -3px 0 8px -1px; /* align main titles with treetabs and left panel edge */
 }
 h3 {
   font: $fontH3;
@@ -50,11 +52,11 @@ em {
 }
 
 hr {
-  background-color: #a1b7c4;
+  background-color: $borderColor;
   border: 0;
-  color: #a1b7c4;
+  color: $borderColor;
   height: 1px;
-  margin: 20px;
+  margin: 20px 0;
 }
 .aleft {
   text-align: left;
@@ -93,7 +95,7 @@ hr {
 }
 
 .primary {
-	color:$primaryAction !important;
+	color: $primaryAction !important;
 }
 
 .error {
@@ -140,45 +142,10 @@ hr {
   left: 2px;
 }
 
-#modx-resource-tabs {
-  margin: 20px 0 0;
-
-  @extend %shaded-tab-box;
-  .x-tab-panel-header {
-    width:auto !important; /* #shame */
-    &.vertical-tabs-header {
-      width:150px !important; /* #shame */
-    }
-    .x-tab-strip {
-      li {
-        float:left;
-        //width:auto;
-        margin-left:0;
-      }
-    }
-  }
-  #modx-tv-tabs {
-      border-left:0;
-      border-right:0;
-  }
-}
-
-#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {
-	.x-tab-strip {
-		margin-top:12px;
-		li {
-			width:100% !important; /* #shame */
-			margin-left:0;
-			border-bottom:1px solid $borderColor;
-			&:nth-last-child(3) { border-color:transparent }
-			&.x-tab-strip-active { border-bottom:1px solid $borderColor; }
-		}
-	}
-}
-
 #modx-resource-content {
   background-color: $tabStripBg;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
   .x-panel-header {
       margin:0;
       padding: 15px;
@@ -199,26 +166,6 @@ hr {
 	.x-tab-strip {
 		li {
 			@include box-sizing(border-box);
-		}
-	}
-}
-
-.x-window-footer {
-	.x-toolbar-right-row {
-		td {
-			&:last-of-type {
-				.x-btn {
-					@include linear-gradient(lighten($primaryAction,10%), $primaryAction);
-					border-color:darken($primaryAction,6%);
-					button {
-						color:$white;
-					}
-				}
-				.x-btn-over {
-					border-color:darken($primaryAction,10%);
-					@include linear-gradient(lighten($primaryAction,16%), $primaryAction);
-				}
-			}
 		}
 	}
 }
@@ -333,13 +280,10 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 .modx-console-text {
   background-color: white;
-  font: $bodyFontSize $codefonts !important;
-  padding: 8px;
   border: none;
-}
-
-.x-form-text.modx-console-text {
-  height: auto;
+  font: 12px $codefonts !important;
+  height: auto !important; /* override extjs default theme */
+  padding: 8px;
 }
 
 /* portlets */
@@ -559,7 +503,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
   border-color: #CACACA #C0C0C0 #AAA;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border-style: solid;
   border-width: 1px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
@@ -796,7 +740,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 /* status messages */
 .modx-status-msg {
   background: #f4f4f4;
-  border-radius: 4px;
+  border-radius: 5px;
   left: 70%;
   /*filter: alpha(opacity=80);*/
   margin: 0;
@@ -1115,7 +1059,8 @@ body.ext-ie7 .x-superboxselect-item {
 
 .dashboard-block {
   background-color: $white;
-  border-radius: 2px;
+  border-radius: $borderRadius;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
   float: left;
   margin: 6px 0;
 }
@@ -1149,7 +1094,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 .dashboard-block .title {
   background: #d2dbe2;
-  border-radius: 2px 2px 0 0;
+  border-radius: $borderRadius $borderRadius 0 0;
   color: #5E5E5E;
   font-size: 12px;
   font-weight: bold;
@@ -1192,21 +1137,33 @@ body.ext-ie7 .x-superboxselect-item {
 .container {
   margin: 20px 15px 20px;
 }
-
-/* Wrap the main content */
-.structure-tabs {
-  /* margin-top: -1px; */
+/* prevent cut off box shadows */
+.container,
+.x-plain-bwrap,
+.x-plain-body {
+  overflow: visible;
 }
 
-/* Realign modx-tabs for getPageStructure */
+/* box-shadow for most panels + custom class to set explicitly */
+.shadowbox,
+.x-form-label-left {
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+
+  /* prevent box-shadow in nested panels */
+  .x-form-label-left {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
 
 /* Panel description text */
 .panel-desc {
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   border: none;
-  color: #5A5A5A;
+  color: $darkNeutral;
   line-height: 1.5;
-  margin-top: 5px;
+  margin-top: 15px;
   padding: 15px !important;
 
   .x-panel-bwrap {
@@ -1274,14 +1231,9 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-tv {
-  border-bottom: 1px solid #f4f4f4;
-  margin: 0;
-  padding: 15px 0 !important;
+  margin: 0 0 4px 0;
+  padding-bottom: 4px;
   width: 100%;
-}
-
-#modx-tv-tabs .tv-first {
-  padding-top: 0 !important;
 }
 
 #modx-tv-tabs .tv-last {
@@ -1290,8 +1242,10 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-tv-label {
-  float: left;
-  width: auto !important;
+  display: inline-block;
+  /*float: left;*/
+  position: relative !important;
+  width: auto;
 }
 
 .modx-tv-label:hover .modx-tv-reset {
@@ -1299,23 +1253,27 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .modx-tv-label-title {
-  float: left;
+  /*float: left;*/
+  display: inline-block;
 }
 
 .modx-tv-label-description {
-  display: block;
-  float: left;
+  display: inline-block;
+  /*float: left;*/
   font-style: italic;
   font-weight: normal;
   padding-left: 5px;
 }
 
 .modx-tv-reset {
-  background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') top right no-repeat;
+  background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') bottom left no-repeat;
   cursor: pointer;
-  float: left;
+  display: inline-block;
+  /*float: left;*/
   height: 16px;
   opacity: 0;
+  padding: 38px 5px 0 0;
+  position: absolute; top: 0; left: -21px;
   width: 16px;
 }
 
@@ -1356,11 +1314,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 #modx-resource-tvs-div {
   border-top-width: 0;
-}
-
-#modx-resource-tvs-div.below-content {
-  border-top-width: 1px;
-  margin-top: 10px;
+  visibility: hidden; /* prevent flash of unstyled tv from elements on page load */
 }
 
 .modx-permissions-list {
@@ -1380,78 +1334,127 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 /* Breadcrumbs */
-
-.crumb_wrapper {
-  border-bottom: 1px solid #CACACA;
-  border-top: 1px solid #D0D0D0;
-  margin-top: 5px;
-}
-
-.crumbs {
-  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
-  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  border-bottom: 1px solid #EFEFEF;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-  height: 34px;
-}
-
-.crumbs li {
-  background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;
-  color: $darkNeutral;
-  float: left;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 35px;
-  padding: 0 20px 0 15px;
-  text-shadow: 0 1px 0 #FFF;
-}
-
-.crumbs li button {
-  background-color: transparent;
-  border: 0 none;
-  color: $darkNeutral;
-  cursor: pointer;
-  font: $baseText;
-  font-weight: bold;
-  padding: 0;
-  text-decoration: none;
-}
-
-.crumbs li .root {
-  background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;
-  display: block;
-  height: 16px;
-  margin: 10px 0 9px;
-  text-indent: -999em;
-  width: 16px;
-}
-
-.crumbs li button:hover {}
-
-
-.crumbs li button.root {
-  background-position: center -16px;
-  text-indent: -999em;
-  width: 16px;
-}
-.crumbs li button.root:hover {}
-
-/*.breadcrumbs .highlight {
-	background-color: #FFF9DF;
-    border-color: #ECE3CB !important;
-    color: #5F5947;
-    font-weight: bold;
-}
-*/
-/* LIGHTBOX */
-
 .breadcrumbs .panel-desc {
-  margin-top: 1px;
+  margin-top: 0;
 }
+.crumb_wrapper {
+  background: #f9f9f9;
+  border-bottom: 1px solid $borderColor;
+  border-top: 1px solid $borderColor;
+  margin-top: 15px;
+
+  .crumbs {
+    /*border-bottom: 1px solid $borderColor;*/
+    height: 34px;
+    overflow: hidden; /* hide the overflow from the oversized arrows */
+
+    li {
+      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
+      color: $darkNeutral;
+      float: left;
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 35px;
+      padding: 0 0 0 20px;
+      position: relative;
+
+      &.first {
+        padding: 0;
+
+        button {
+          padding: 8px 16px 8px 20px;
+        }
+      }
+
+      &:after {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+        border-bottom: 50px solid transparent;
+        border-left: 30px solid #f9f9f9;
+        position: absolute;
+        top: 50%;
+        margin-top: -50px;
+        left: 100%;
+        z-index: 2;
+      }
+      &:before {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent;      
+        border-bottom: 50px solid transparent;
+        border-left: 30px solid $darkNeutral;
+        position: absolute;
+        top: 50%;
+        margin-top: -50px;
+        /*margin-left: 1px;*/ /* uncomment to make the line thicker */
+        left: 100%;
+        z-index: 1;
+      }
+
+      &:hover {
+        background-color: $colorSplash;
+
+        button,
+        span {
+          color: $white;
+        }
+      }
+
+      &:hover:after {
+        border-left-color: $colorSplash;
+      }
+      &:hover:before {
+        border-left-color: $white;
+      }
+
+      button {
+        background-color: transparent;
+        border: 0 none;
+        color: $darkNeutral;
+        cursor: pointer;
+        font: $baseText;
+        font-weight: bold;
+        margin: 0;
+        padding: 8px 0 8px 20px;
+        text-decoration: none;
+      }
+
+      span {
+        padding-left: 20px;
+      }
+
+      .root {
+        /*background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;*/
+        display: block;
+        height: 16px;
+        margin: 10px 0 10px 0;
+        text-indent: -999em;
+        width: 16px;
+      }
+      .root:before {
+        @extend %pseudo-font-x-btn;
+
+        content: $fa-var-home;
+        display: block;
+        font-size: 20px;
+        line-height: 35px;
+        padding-left: 10px;
+        text-align: center;
+        text-indent: 0;
+      }
+      button.root {
+        /*background-position: center -16px;*/
+      }
+    }
+  }
+}
+
+/* Lightbox */
 #ux-lightbox {
   left: 0;
   line-height: 0;
@@ -1575,7 +1578,7 @@ body.ext-ie7 .x-superboxselect-item {
   background-color: transparent;
   z-index: 89;
 }
-/* Package Manager */
+/* Card Layout (ex. Package Manager) */
 .x-panel-body-noheader .x-grid3-row {
   position: relative;
 }
@@ -1587,7 +1590,7 @@ body.ext-ie7 .x-superboxselect-item {
   font: $baseText;
   font-size: 20px;
   line-height: 1;
-  margin: 0 0 2px;
+  margin: 0 0 5px 0;
 }
 .x-grid3-cell-inner.x-grid3-col-main  .not-installed {
   color: #999999;
@@ -1712,80 +1715,6 @@ body.ext-ie7 .x-superboxselect-item {
   clear: right;
   margin-right: 0 !important;
 }
-.modx-pb-view-ct {
-  background: white;
-  font: $fontSmall;
-}
-.modx-pb-thumb {
-  border: 1px solid #dddddd;
-  height: 80px;
-  line-height: 80px;
-  padding: 5px;
-  text-align: center;
-  width: 100px;
-}
-.modx-pb-thumb img {
-  vertical-align: middle;
-}
-.modx-pb-thumb-wrap {
-  border: 1px solid transparent;
-  float: left;
-  margin: 4px 0 4px 4px;
-  overflow: hidden;
-  padding: 4px;
-}
-.modx-pb-thumb-wrap span {
-  display: block;
-  overflow: hidden;
-  text-align: center;
-}
-.modx-pb-view-ct .x-view-over {
-  border: 1px solid #dddddd;
-  padding: 4px;
-}
-.modx-pb-view-ct .x-view-selected {
-  background: #DFEDFF;
-  border: 1px solid #6593cf;
-  padding: 4px;
-}
-.modx-pb-view-ct .x-view-selected .thumb {
-  background: transparent;
-}
-.modx-pb-view-ct .x-view-selected span {
-  color: #1A4D8F;
-}
-.modx-pb-view-ct .loading-indicator {
-  background-position: left;
-  background-repeat: no-repeat;
-  font-size: 11px;
-  margin: 10px;
-  padding-left: 20px;
-}
-.modx-pb-detail-thumb {
-  cursor: pointer;
-  margin-top: 5px;
-  text-align: center;
-}
-.modx-pb-details-info {
-  border-top: 1px solid #ccc;
-  font: $fontSmall;
-  margin-top: 5px;
-  padding: 5px;
-  text-align: left;
-}
-.modx-pb-details-info b {
-  color: #555;
-  display: block;
-  margin-bottom: 4px;
-}
-.modx-pb-details-info span {
-  display: block;
-  margin-bottom: 5px;
-  margin-left: 5px;
-}
-.modx-pb-fullview {
-  text-align: center;
-}
 .package-readme {
   padding: 8px 11px 0px;
 }
@@ -1813,7 +1742,7 @@ body.ext-ie7 .x-superboxselect-item {
   margin: 10px 0;
 }
 .modx-template-detail .selected img {
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid #aaa;
   height: 80px;
   width: 90px;
@@ -1881,7 +1810,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .thumb-wrapper {
   background-color: #F5F5F5;
-  border-radius: 2px;
+  border-radius: $borderRadius;
   border: 1px solid #ccc;
   cursor: pointer;
   float: left;
@@ -1973,7 +1902,7 @@ body.ext-ie7 .x-superboxselect-item {
   color: $darkNeutral;
 }
 .x-grid3-col-info-col {
-  color: #92AF4C;
+  color: $green;
 }
 .not-installed .x-grid3-col-info-col {
   color: $red;
@@ -1991,6 +1920,7 @@ body.ext-ie7 .x-superboxselect-item {
   overflow: auto;
   padding: 15px;
   white-space: pre;
+  word-wrap: break-word;
 }
 .window-no-padding {
   .x-panel-mc {

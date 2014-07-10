@@ -7,10 +7,13 @@
     margin: 25px 10px 25px 25px;
   }
   /* the toolbars just below the tabs */
+  & .x-panel-tbar {
+    padding: 0;
+  }
   & .x-toolbar {
     padding: 6px 5px 0px;
   }
-  /* root box contaiing a context or category */
+  /* root box containing a context or category */
   & .x-tree-root-ct {
     padding: 6px;
   }
@@ -20,8 +23,14 @@
   }
   
   .x-tab-panel-bwrap {
+    border-radius: $borderRadius 0 $borderRadius $borderRadius;
 	  position: relative;
 	  z-index: 1;
+
+    .x-tab-panel-body-noborder {
+      border-radius: $borderRadius 0 $borderRadius $borderRadius;
+      background-color: $white;
+    }
   }
 }
 
@@ -33,34 +42,58 @@
 #modx-leftbar-tabpanel {
 }
 
-/* tree menu splitter */
-.x-layout-split {
+/* tree menu splitter / tree expander */
+.x-layout-split,
+#modx-leftbar-tabs-xcollapsed {
+  overflow: visible;
   width: 8px;
-  z-index: 0;
+  z-index: 2; /* make it stay higher than the tree itself to cover the box shadow */
 
   &:hover {
     background: $navbarHover;
   }
 
   .x-layout-mini {
-    left: -11px;
     background-color: #fff;
-    width: 10px;
-    height: 50px;
+    box-shadow: $boxShadow;
     background-image: none;
     background-repeat: no-repeat;
     background-position: center left;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 $borderRadius $borderRadius 0;
+    left: -9px;
+    top: 65px;
+    width: 11px; /* to have left and right 3px equal space from the arrow which is 5px */
+    height: 41px;
     opacity: 1;
 
     &:after {
       border-top: 5px solid transparent;
       border-bottom: 5px solid transparent;
-      border-right: 5px solid $colorSplash;
+      border-right: 5px solid $treeColor;
       position: absolute;
       content: ' ';
       right: 4px;
-      top: 21px;
+      top: 16px;
+    }
+
+    &:hover:after {
+      border-right-color: $colorSplash;
+    }
+  }
+}
+
+/* style for the collapsed tree expander */
+#modx-leftbar-tabs-xcollapsed {
+  .x-layout-mini {
+    left: 0;
+
+    &:after {
+      border-right: 0;
+      border-left: 5px solid $treeColor;
+    }
+
+    &:hover:after {
+      border-left-color: $colorSplash;
     }
   }
 }
@@ -69,11 +102,12 @@
   padding: 0;
   #modx-file-tree & {
     &:first-child {
-      padding-top: 5px;
+      padding-top: 4px;
     }
     .tree-pseudoroot-node {
-      margin-top: 0;
-      margin-bottom: 0;
+      /* why was this here? this prevents the spacing between the nodes/sources in the filetree */
+      /*margin-top: 0;
+      margin-bottom: 0;*/
     }
   }
 }
@@ -153,7 +187,7 @@
     vertical-align: -15%;
   }
 
-  // For legacy icons
+  /* For legacy icons */
   background-repeat: no-repeat;
   background-position: 5px;
 }
@@ -181,6 +215,12 @@
 .hidemenu,
 .hidemenu a span {
   color: $hidden;
+  font-style: normal;
+
+  &.unpublished,
+  &.unpublished a span {
+    font-style: $unpubText;
+  }
 
   i.icon,
   i.icon-large {
@@ -196,12 +236,14 @@
       color: $deleted;
       font-style: normal;
   }
+
+  a span {
+    color: $deleted;
+    text-decoration: $delTextDeco;
+    font-style: $delTextStyle;
+  }
 }
-.deleted a span {
-  color: $deleted;
-  text-decoration: $delTextDeco;
-  font-style: $delTextStyle;
-}
+
 .element-node-disabled a span {
   color: $disabled;
 }
@@ -280,7 +322,7 @@
   display: inline-block;
 
   #modx-leftbar-tabpanel & {
-    //display: inline;
+    /*display: inline;*/
   }
 }
 
@@ -310,9 +352,11 @@
   padding: 3px;
   text-align: center;
   opacity: 0.8;
+
   i {
     font-style: normal;
   }
+
   button {
     display: none;
   }

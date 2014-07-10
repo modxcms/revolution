@@ -7,7 +7,7 @@ MODx.panel.ErrorLog = function(config) {
         ,baseParams: {
             action: 'system/errorlog/clear'
         }
-        ,layout: 'form'
+        // ,layout: 'form' // unnecessary and creates a wrong box shadow
         ,items: [{
             html: '<h2>'+_('error_log')+'</h2>'
             ,id: 'modx-error-log-header'
@@ -32,6 +32,8 @@ MODx.panel.ErrorLog = function(config) {
                 ,items: [{
                     xtype: 'textarea'
                     ,name: 'log'
+                    ,id: 'modx-error-log-content'
+                    ,cls: 'modx-code-content'
                     ,grow: true
                     ,growMax: 400
                     ,anchor: '100%'

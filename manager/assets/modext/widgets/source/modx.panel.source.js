@@ -38,7 +38,7 @@ MODx.panel.Source = function(config) {
                 ,items: [{
 					xtype: 'panel'
 					,border: false
-					,cls:'main-wrapper'
+					,cls: 'main-wrapper'
 					,layout: 'form'
 					,labelAlign: 'top'
 					,items: [{
@@ -111,9 +111,6 @@ MODx.panel.Source = function(config) {
 
                         }]
                     }]
-                },{
-                    html: '<hr />'					
-                    ,border: false
                 },{
                     html: '<p>'+_('source_properties.intro_msg')+'</p>'
 					,bodyCssClass: 'panel-desc'

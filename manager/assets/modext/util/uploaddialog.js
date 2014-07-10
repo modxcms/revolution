@@ -849,15 +849,13 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       handler: this.onAddButtonFileSelected,
       scope: this
     }));
-//    
     tb.x_buttons.remove = tb.addButton({
       text: this.i18n.remove_btn_text,
       tooltip: this.i18n.remove_btn_tip,
       iconCls: 'ext-ux-uploaddialog-removebtn',
       handler: this.onRemoveButtonClick,
       scope: this
-    });
-//    
+    }); 
     tb.x_buttons.reset = tb.addButton({
       text: this.i18n.reset_btn_text,
       tooltip: this.i18n.reset_btn_tip,
@@ -865,7 +863,6 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       handler: this.onResetButtonClick,
       scope: this
     });
-    tb.add('-');
     tb.x_buttons.upload = tb.addButton({
       text: this.i18n.upload_btn_start_text,
       tooltip: this.i18n.upload_btn_start_tip,
@@ -873,7 +870,6 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       handler: this.onUploadButtonClick,
       scope: this
     });
-    tb.add('-');
     tb.x_buttons.close = tb.addButton({
       text: this.i18n.close_btn_text,
       tooltip: this.i18n.close_btn_tip,

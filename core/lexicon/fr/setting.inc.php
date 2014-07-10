@@ -449,6 +449,8 @@ $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_default_sort'] = 'Listing des fichiers';
 $_lang['setting_modx_browser_default_sort_desc'] = 'L\'ordre d\'affichage des fichiers par défaut lors de l\'utilisation de la popup du navigateur de fichier dans le manager. Les valeurs acceptées sont : name, size, lastmod (date de modification).';
+$_lang['setting_modx_browser_default_viewmode'] = 'Vue des fichiers';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'La vue d\'affichage des fichiers par défaut lors de l\'utilisation de la popup du navigateur de fichier dans le manager. Les valeurs acceptées sont : grid, list.';
 
 $_lang['setting_modx_charset'] = 'Encodage de caractère';
 $_lang['setting_modx_charset_desc'] = 'Veuillez indiquer quel encodage de caractère vous souhaitez utiliser. Veuillez noter que MODX a été testé certains encodages, mais pas tous. Pour la plupart des langues, l\'option par défaut UTF-8 est préférable.';

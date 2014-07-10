@@ -228,9 +228,10 @@ MODx.panel.ChangeProfilePassword = function(config) {
         }]
         ,buttons: [{
             text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
-            ,cls:'primary-button'
         }]
         ,listeners: {
             'success': {fn:this.success,scope:this}

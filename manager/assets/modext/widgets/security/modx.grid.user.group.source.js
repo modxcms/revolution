@@ -40,6 +40,7 @@ MODx.grid.UserGroupSource = function(config) {
         }]
         ,tbar: [{
             text: _('source_add')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: this.createAcl
         },'->',{

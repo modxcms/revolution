@@ -42,6 +42,7 @@ MODx.grid.UserGroups = function(config) {
         })]
         ,tbar: [{
             text: _('user_group_user_add')
+            ,cls:'primary-button'
             ,handler: this.addGroup
         }]
     });

@@ -11,17 +11,21 @@ MODx.page.ErrorLog = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-error-log'
         ,buttons: [{
-            text: _('clear')
-            ,handler: this.clear
-            ,scope: this
-            ,hidden: MODx.hasEraseErrorLog ? false : true
-        },'-',{
             text: _('ext_refresh')
+            ,id: 'modx-abtn-refresh'
+            ,cls: 'primary-button'
             ,handler: this.refreshLog
             ,scope: this
             ,hidden: config.record.tooLarge
-        },'-',{
+        },{
+            text: _('clear')
+            ,id: 'modx-abtn-clear'
+            ,handler: this.clear
+            ,scope: this
+            ,hidden: MODx.hasEraseErrorLog ? false : true
+        },{
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
         }]
         ,components: [{
             xtype: 'modx-panel-error-log'

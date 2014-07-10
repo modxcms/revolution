@@ -85,7 +85,7 @@ MODx.grid.Sources = function(config) {
             text: _('source_create')
             ,handler: { xtype: 'modx-window-source-create' ,blankValues: true }
             ,cls:'primary-button'
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_remove')
@@ -96,6 +96,7 @@ MODx.grid.Sources = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-source-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -109,8 +110,9 @@ MODx.grid.Sources = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear'
             ,text: _('filter_clear')
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }

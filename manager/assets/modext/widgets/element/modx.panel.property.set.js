@@ -83,7 +83,7 @@ MODx.grid.PropertySetProperties = function(config) {
                 'select': {fn:function(cb) { Ext.getCmp('modx-grid-element-properties').changePropertySet(cb); },scope:this}
             }
             ,value: ''
-        },'-',{
+        },{
             text: _('property_create')
             ,handler: function(btn,e) {
                 if (Ext.getCmp('modx-combo-property-set').value != '') {
@@ -118,7 +118,7 @@ MODx.tree.PropertySets = function(config) {
         ,title: ''
         ,url: MODx.config.connector_url
         ,action: 'element/propertyset/getNodes'
-        ,tbar: [{
+        ,tbar: ['->', {
             text: _('propertyset_new')
             ,handler: this.createSet
             ,scope: this

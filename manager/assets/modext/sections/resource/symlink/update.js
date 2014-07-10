@@ -89,53 +89,54 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
             btns.push({
                 process: 'resource/update'
                 ,text: _('save')
+                ,id: 'modx-abtn-save'
                 ,cls:'primary-button'
                 ,method: 'remote'
-                ,checkDirty: cfg.richtext || MODx.request.reload ? false : true
+                // ,checkDirty: cfg.richtext || MODx.request.reload ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
                 }]
             });
-            btns.push('-');
         } else {
             btns.push({
                 text: cfg.lockedText || _('locked')
+                ,id: 'modx-abtn-locked'
                 ,handler: Ext.emptyFn
                 ,disabled: true
             });
-            btns.push('-');
         }
         if (cfg.canCreate == 1) {
             btns.push({
                 text: _('duplicate')
+                ,id: 'modx-abtn-duplicate'
                 ,handler: this.duplicateResource
                 ,scope:this
             });
-            btns.push('-');
         }
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
                 text: _('delete')
+                ,id: 'modx-abtn-delete'
                 ,handler: this.deleteResource
                 ,scope:this
             });
-            btns.push('-');
         }
         btns.push({
             text: _('view')
+            ,id: 'modx-abtn-preview'
             ,handler: this.preview
             ,scope: this
         });
-        btns.push('-');
         btns.push({
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,handler: this.cancel
             ,scope: this
         });
-        btns.push('-');
         btns.push({
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         });
         return btns;

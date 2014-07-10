@@ -12,10 +12,12 @@ MODx.page.ContentType = function(config) {
         formpanel: 'modx-panel-content-type'
         ,buttons: [{
             text: _('cancel')
-        },'-',{
-         text: _('help_ex')
-         ,handler: MODx.loadHelpPane
-         }]
+            ,id: 'modx-abtn-cancel'
+        },{
+            text: _('help_ex')
+            ,id: 'modx-abtn-help'
+            ,handler: MODx.loadHelpPane
+        }]
         ,components: [{
             xtype: 'modx-panel-content-type'
             ,title: ''

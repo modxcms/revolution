@@ -1,18 +1,34 @@
 %primary-button {
-  background: $buttonPrimaryBg1;
-  @include background-image(linear-gradient($buttonPrimaryBg1,$buttonPrimaryBg2));
+  @include background-image(linear-gradient(left top, $buttonPrimaryBg1,$buttonPrimaryBg2));
+  background-color: $buttonPrimaryBg1;
+  box-shadow: none;
   color: $buttonColorPrimary;
-  &.x-item-disabled {
-    opacity:1;
-    background: $desaturatedSplash;
-  }
+
   & button {
     color: $buttonColorPrimary;
   }
-  &.x-item-disabled * {
-    color: $buttonColorDisabled !important;
+
+  &.x-btn-over,
+  &:hover {
+    @include background-image(linear-gradient(left top, $buttonPrimaryBg1Hover, $buttonPrimaryBg2Hover));
+    box-shadow: none;
   }
-  &.x-btn-over {
-    @include background-image(linear-gradient(darken($buttonPrimaryBg1,2%),darken($buttonPrimaryBg2,2%)));
+
+  &.x-btn-focus,
+  &.x-btn-click,
+  &:active {
+    @include background-image(linear-gradient(left top, $buttonPrimaryBg1Active, $buttonPrimaryBg2Active));
+    box-shadow: none;
+  }
+
+  &.x-item-disabled,
+  &.x-item-disabled:hover,
+  &.x-item-disabled:active {
+    /*background: $desaturatedSplash;*/
+    @include background-image(linear-gradient(left top, $buttonPrimaryBg1,$buttonPrimaryBg2));
+    background-color: $buttonPrimaryBg1;
+    box-shadow: none;
+    color: $buttonColorPrimary;
+    opacity: 0.6
   }
 }
