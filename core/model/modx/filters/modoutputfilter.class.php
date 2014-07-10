@@ -653,11 +653,13 @@ class modOutputFilter {
                                 'options' => $m_val,
                                 'token' => $element->_token, /* type of parent element */
                                 'name' => $element->get('name'), /* name of the parent element */
-                                'tag' => $element->getTag() /* complete parent tag */
+                                'tag' => $element->getTag(), /* complete parent tag */
+                                'condition' => $condition
                             );
                             $this->log('This modifier is custom running as snippet.');
                             $tmp = $this->modx->runSnippet($m_cmd, $params);
                             if ($tmp!='') $output = $tmp;
+                            if ($tmp == '1' || $tmp == '0') $condition[] = intval($tmp);
                             break;
                     }
                 } catch (Exception $e) {
