@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Updated MagpieRSS Snoopy to 2.0.0
 - Add strftime as alias for date output filter [#11550]
 - Validate and sanitize _ctx placeholder used by ResourceManagerController
 - Fixed incorrect sorting by rank in TV grid on template create/update screen
