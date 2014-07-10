@@ -59,16 +59,16 @@ $_lang['usergroup'] = 'User Group';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
+$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Category Access Permissions will be ignored!</strong>';
 
 $_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 
 $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Resource Group Access Permissions will be ignored!</strong>';
 
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
-$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no then the user will be redirected the the Manager Login Startup or Site Start web page.</strong>';
+$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
 
 $_lang['setting_failed_login'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
@@ -77,10 +77,10 @@ $_lang['setting_login_allowed_days'] = 'Allowed Days';
 $_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
 
 $_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
-$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to login from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
+$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to log in from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
 
 $_lang['setting_login_homepage'] = 'Login Home Page';
-$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send user to after he/she has logged in. <strong>NOTE: make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged in. <strong>NOTE: Make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
 // system settings
 $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
@@ -107,8 +107,8 @@ $_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatic
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
 
-$_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
-$_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
+$_lang['setting_allow_multiple_emails'] = 'Allow Duplicate E-mails for Users';
+$_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same e-mail address.';
 
 $_lang['setting_automatic_alias'] = 'Automatically generate alias';
 $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
@@ -182,7 +182,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its css stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
 $_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
@@ -241,7 +241,7 @@ $_lang['setting_editor_css_selectors_desc'] = 'A comma-separated list of CSS sel
 
 $_lang['setting_emailsender'] = 'Registration E-mail From Address';
 $_lang['setting_emailsender_desc'] = 'Here you can specify the e-mail address used when sending Users their usernames and passwords.';
-$_lang['setting_emailsender_err'] = 'Please state the administration email address.';
+$_lang['setting_emailsender_err'] = 'Please state the administration e-mail address.';
 
 $_lang['setting_emailsubject'] = 'Registration E-mail Subject';
 $_lang['setting_emailsubject_desc'] = 'The subject line for the default signup email when a User is registered.';
