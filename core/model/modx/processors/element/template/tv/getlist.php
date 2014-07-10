@@ -52,6 +52,11 @@ $list = array();
 foreach ($tvs as $tv) {
     $tvArray = $tv->get(array('id','name','description','tv_rank','category_name'));
     $tvArray['access'] = (boolean)$tv->get('access');
+
+    $tvArray['perm'] = array();
+    if ($modx->hasPermission('edit_tv')) {
+        $tvArray['perm'][] = 'pedit';
+    }
     
     $list[] = $tvArray;
 }
