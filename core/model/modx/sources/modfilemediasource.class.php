@@ -888,10 +888,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 /* get thumbnail */
                 if (in_array($fileExtension,$imageExtensions)) {
+                    $preview = 1;
                     $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                     $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
-                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
                     $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
+                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
 
                     $size = @getimagesize($filePathName);
                     if (is_array($size)) {
@@ -928,6 +929,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                     $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                 } else {
+                    $preview = 0;
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
                     $thumbHeight = $imageHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
@@ -939,8 +941,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'name' => $fileName,
                     'cls' => 'icon-'.$fileExtension,
                     'image' => $image,
-                    'image_width' => $imageWidth,
-                    'image_height' => $imageHeight,
+                    'image_width' => is_array($size) ? $size[0] : $imageWidth,
+                    'image_height' => is_array($size) ? $size[1] : $imageHeight,
                     'thumb' => $thumb,
                     'thumb_width' => $thumbWidth,
                     'thumb_height' => $thumbHeight,
@@ -950,6 +952,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'ext' => $fileExtension,
                     'pathname' => str_replace('//','/',$filePathName),
                     'lastmod' => $file->getMTime(),
+                    'preview' => $preview,
                     'disabled' => false,
                     'perms' => $octalPerms,
                     'leaf' => true,

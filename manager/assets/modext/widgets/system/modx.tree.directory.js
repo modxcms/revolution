@@ -209,6 +209,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,addSourceToolbar: function() {
         this.sourceCombo = new MODx.combo.MediaSource({
             value: this.config.source || MODx.config.default_media_source
+            ,listWidth: 236
             ,listeners: {
                 select:{
                     fn: this.changeSource
