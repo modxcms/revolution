@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Have xPDOVehicle validators fail silently unless verbose enabled
 - Allow recursive xPDOObject::remove() beyond one level
 - Allow schema to define callbacks for field
 - Remove deprecated xPDO::getMicroTime() method
