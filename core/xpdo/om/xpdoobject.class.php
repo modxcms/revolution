@@ -1613,8 +1613,8 @@ class xPDOObject {
      * objects when remove is called, perhaps by passing another object
      * instance as an optional parameter, or creating a separate method.
      *
-     * @param array $ancestors Keeps track of classes which have already been
-     * removed to prevent loop with circular references.
+     * @param array $ancestors Keeps track of instances which have already been
+     * removed to prevent loops with circular references.
      * @return boolean Returns true on success, false on failure.
      */
     public function remove(array $ancestors= array ()) {
@@ -1622,18 +1622,26 @@ class xPDOObject {
         $pk= $this->getPrimaryKey();
         if ($pk && $this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
             if (!empty ($this->_composites)) {
-                $current= array ($this->_class, $this->_alias);
+                if (!isset($ancestors[$this->_class])) {
+                    $ancestors[$this->_class] = array();
+                }
+                if (in_array($pk, $ancestors[$this->_class])) {
+                    return false;
+                }
+                $ancestors[$this->_class][] = $pk;
                 foreach ($this->_composites as $compositeAlias => $composite) {
-                    if (in_array($compositeAlias, $ancestors) || in_array($composite['class'], $ancestors)) {
-                        continue;
+                    if (!isset($ancestors[$composite['class']])) {
+                        $ancestors[$composite['class']] = array();
                     }
                     if ($composite['cardinality'] === 'many') {
                         if ($many= $this->getMany($compositeAlias)) {
                             /** @var xPDOObject $one */
                             foreach ($many as $one) {
-                                $ancestors[]= $compositeAlias;
-                                $newAncestors= $ancestors + $current;
-                                if (!$one->remove($newAncestors)) {
+                                if (in_array($one->getPrimaryKey(), $ancestors[$composite['class']])) {
+                                    continue;
+                                }
+                                $ancestors[$composite['class']][]= $one->getPrimaryKey();
+                                if (!$one->remove($ancestors)) {
                                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing dependent object: " . print_r($one->toArray('', true), true));
                                 }
                             }
@@ -1641,9 +1649,13 @@ class xPDOObject {
                         }
                     }
                     elseif ($one= $this->getOne($compositeAlias)) {
-                        $ancestors[]= $compositeAlias;
-                        $newAncestors= $ancestors + $current;
-                        if (!$one->remove($newAncestors)) {
+                        if (in_array($one->getPrimaryKey(), $ancestors[$composite['class']])) {
+                            continue;
+                        }
+                        if (!isset($ancestors[$composite['class']])) {
+                            $ancestors[$composite['class']][] = $one->getPrimaryKey();
+                        }
+                        if (!$one->remove($ancestors)) {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing dependent object: " . print_r($one->toArray('', true), true));
                         }
                         unset($one);
