@@ -318,18 +318,6 @@
   box-shadow: $shadowBorderDark;
   padding: 5px;
 
-  &.primary {
-    background: $primaryAction;
-    color: $white !important;
-    box-shadow: 0 0 0 1px $primaryAction;
-
-  &:hover {
-    background: $white;
-    color: $primaryAction !important;
-    box-shadow: 0 0 0 1px $primaryAction;
-    }
-  }
-
   &.orange {
     background: #F4B848;
     box-shadow: 0 0 0 1px #F4B848;
