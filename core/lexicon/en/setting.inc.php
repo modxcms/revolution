@@ -364,7 +364,7 @@ $_lang['setting_log_target'] = 'Logging Target';
 $_lang['setting_log_target_desc'] = 'The default logging target where log messages are written. Available options: \'FILE\', \'HTML\', or \'ECHO\'. Default is \'FILE\' if not specified.';
 
 $_lang['setting_mail_charset'] = 'Mail Charset';
-$_lang['setting_mail_charset_desc'] = 'The default charset for emails, e.g. \'iso-8859-1\' or \'utf-8\'';
+$_lang['setting_mail_charset_desc'] = 'The default charset for emails, e.g., \'iso-8859-1\' or \'utf-8\'';
 
 $_lang['setting_mail_encoding'] = 'Mail Encoding';
 $_lang['setting_mail_encoding_desc'] = 'Sets the Encoding of the message. Options for this are "8bit", "7bit", "binary", "base64", and "quoted-printable".';
@@ -379,7 +379,7 @@ $_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
 $_lang['setting_mail_smtp_helo_desc'] = 'Sets the SMTP HELO of the message (Defaults to the hostname).';
 
 $_lang['setting_mail_smtp_hosts'] = 'SMTP Hosts';
-$_lang['setting_mail_smtp_hosts_desc'] = 'Sets the SMTP hosts.  All hosts must be separated by a semicolon.  You can also specify a different port for each host by using this format: [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com"). Hosts will be tried in order.';
+$_lang['setting_mail_smtp_hosts_desc'] = 'Sets the SMTP hosts.  All hosts must be separated by a semicolon.  You can also specify a different port for each host by using this format: [hostname:port] (e.g., "smtp1.example.com:25;smtp2.example.com"). Hosts will be tried in order.';
 
 $_lang['setting_mail_smtp_keepalive'] = 'SMTP Keep-Alive';
 $_lang['setting_mail_smtp_keepalive_desc'] = 'Prevents the SMTP connection from being closed after each mail sending. Not recommended.';
@@ -667,7 +667,7 @@ $_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the Resource you
 $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID for the site unavailable page.';
 
 $_lang['setting_strip_image_paths'] = 'Rewrite browser paths?';
-$_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODX install, e.g. from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
+$_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODX install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
 
 $_lang['setting_symlink_merge_fields'] = 'Merge Resource Fields in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'If set to Yes, will automatically merge non-empty fields with target resource when forwarding using Symlinks.';
@@ -710,7 +710,7 @@ $_lang['setting_upload_media'] = 'Uploadable Media Types';
 $_lang['setting_upload_media_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/media/\' using the Resource Manager. Please enter the extensions for the media types, separated by commas.';
 
 $_lang['setting_use_alias_path'] = 'Use Friendly Alias Path';
-$_lang['setting_use_alias_path_desc'] = 'Setting this option to \'yes\' will display the full path to the Resource if the Resource has an alias. For example, if a Resource with an alias called \'child\' is located inside a container Resource with an alias called \'parent\', then the full alias path to the Resource will be displayed as \'/parent/child.html\'.<br /><strong>NOTE: When setting this option to \'Yes\' (turning on alias paths), reference items (such as images, CSS, JavaScripts, etc.) use the absolute path: e.g., \'/assets/images\' as opposed to \'assets/images\'. By doing so you will prevent the browser (or web server) from appending the relative path to the alias path.</strong>';
+$_lang['setting_use_alias_path_desc'] = 'Setting this option to \'yes\' will display the full path to the Resource if the Resource has an alias. For example, if a Resource with an alias called \'child\' is located inside a container Resource with an alias called \'parent\', then the full alias path to the Resource will be displayed as \'/parent/child.html\'.<br /><strong>NOTE: When setting this option to \'Yes\' (turning on alias paths), reference items (such as images, CSS, JavaScripts, etc.) use the absolute path, e.g., \'/assets/images\' as opposed to \'assets/images\'. By doing so you will prevent the browser (or web server) from appending the relative path to the alias path.</strong>';
 
 $_lang['setting_use_browser'] = 'Enable Resource Browser';
 $_lang['setting_use_browser_desc'] = 'Select yes to enable the resource browser. This will allow your users to browse and upload resources such as images, flash and media files on the server.';
