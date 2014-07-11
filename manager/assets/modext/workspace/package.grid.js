@@ -176,7 +176,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 			h.push({ className:'uninstall', text: rec.textaction });
 			h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
 		} else {
-            h.push({ className:'install primary', text: rec.textaction });
+            h.push({ className:'install primary-button', text: rec.textaction });
         }
         if (rec.updateable) {
             h.push({ className:'update orange', text: _('package_update_action_button') });
