@@ -837,4 +837,67 @@ class modUser extends modPrincipal {
         }
         return $dashboard;
     }
+
+    /**
+     * Wrapper method to retrieve this user image
+     *
+     * @param int    $width The desired photo width
+     * @param int    $height The desired photo height (if applicable)
+     * @param string $default An optional default photo URL
+     *
+     * @return string The photo URL
+     */
+    public function getPhoto($width = 128, $height = 128, $default = '') {
+        $img = $default;
+
+        if ($this->Profile->photo) {
+            $img = $this->getProfilePhoto($width, $height);
+        } elseif ($this->xpdo->getOption('enable_gravatar')) {
+            $img = $this->getGravatar($width);
+        }
+
+        return $img;
+    }
+
+    /**
+     * Retrieve the profile photo, if any
+     *
+     * @param int $width The desired photo width
+     * @param int $height The desired photo height
+     *
+     * @return string The photo URL
+     */
+    public function getProfilePhoto($width = 128, $height = 128) {
+        if (empty($this->Profile->photo)) {
+            return '';
+        }
+        $this->xpdo->loadClass('sources.modMediaSource');
+        /** @var modMediaSource $source */
+        $source = modMediaSource::getDefaultSource($this->xpdo, $this->xpdo->getOption('photo_profile_source'));
+        $source->initialize();
+
+        $path = $source->getBasePath($this->Profile->photo) . $this->Profile->photo;
+
+        return $this->xpdo->getOption('connectors_url', MODX_CONNECTORS_URL)
+            . "system/phpthumb.php?zc=1&h={$height}&w={$width}&src={$path}";
+    }
+
+    /**
+     * Compute the Gravatar photo URL
+     *
+     * @param int    $size The desired image size
+     * @param string $default The default Gravatar photo
+     *
+     * @return string The Gravatar photo URL
+     */
+    public function getGravatar($size = 128, $default = 'mm') {
+        $gravemail = md5(
+            strtolower(
+                trim($this->Profile->email)
+            )
+        );
+
+        return $this->xpdo->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
+            . $gravemail . "?s={$size}&d={$default}";
+    }
 }
