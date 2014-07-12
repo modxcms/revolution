@@ -778,7 +778,7 @@ ul.modx-tag-list li {
 }
 
 ul.modx-tag-list li.modx-tag-checked {
-  background-color: #779937;
+  background-color: $brandSelectedColor;
   border-radius: 10px;
   color: white;
   text-decoration: none;
